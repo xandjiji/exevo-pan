@@ -1,10 +1,11 @@
 import React from 'react';
 import MasterLayout from '../layouts/MasterLayout';
+import CharGrid from '../components/CharGrid';
 
 const IndexPage = () => {
     return (
         <MasterLayout>
-            <h1>teste</h1>
+            <CharGrid />
         </MasterLayout>
     )
 }
