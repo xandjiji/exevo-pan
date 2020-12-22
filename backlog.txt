@@ -1,2 +1,2 @@
 useContext + useReducer
-download all character sprites
+use hotlinking

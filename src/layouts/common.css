@@ -1,4 +1,4 @@
-body{margin:0;}a{text-decoration: none;}ul,ol{list-style-type:none}ul,ol,p,h1,h2,h3,h4,h5,h6{padding: 0;margin: 0;}fieldset{border: none;margin-inline-start: unset;margin-inline-end: unset;padding-block-start: unset;padding-inline-start: unset;padding-inline-end: unset;padding-block-end: unset;min-inline-size: unset;}figure{margin:0;}
+body{margin:0;}a{text-decoration: none;}ul,ol{list-style-type:none}ul,ol,p,h1,h2,h3,h4,h5,h6{padding: 0;margin: 0;}fieldset{border: none;margin-inline-start: unset;margin-inline-end: unset;padding-block-start: unset;padding-inline-start: unset;padding-inline-end: unset;padding-block-end: unset;min-inline-size: unset;}figure{margin:0;}*{box-sizing: border-box;}
 
 html * {
     font-size: 12px;
@@ -16,6 +16,8 @@ html, body {
     --primaryVariant: #C5CAE9;
     --green: #377712;
     --red: #C51313;
+    --battleGreen: #43B600;
+    --battleYellow: #FFDD00;
 }
 
 @font-face {
@@ -56,6 +58,25 @@ html, body {
         url('../assets/fonts/Roboto-Bold.woff') format('woff'),
         url('../assets/fonts/Roboto-Bold.ttf') format('truetype');
     font-display: swap;
+}
+
+.shadow {
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.14);
+}
+
+.clickable {
+    padding: 2px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease-out;
+}
+
+.clickable:hover {
+    box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.14);
+}
+
+.clickable:active {
+    box-shadow: inset 2px 2px rgba(0,0,0,.14);
 }
 
 .container {
