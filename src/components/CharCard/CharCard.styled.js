@@ -10,6 +10,11 @@ export default styled.div`
         display: flex;
         align-items: center;
 
+        > *:first-child {
+            width: 56px;
+            height: 56px;
+        }
+
         .head-info {
             margin-left: 16px;
             flex-grow: 1;
@@ -24,6 +29,11 @@ export default styled.div`
 
                 a {
                     margin-left: 4px;
+                    
+                    svg {
+                        height: 28px;
+                        width: 28px;
+                    }
                 }
             }
 
@@ -79,6 +89,20 @@ export default styled.div`
         .bid {
             font-size: 16px;
             letter-spacing: 0.6px;
+        }
+    }
+
+    .card-footer {
+
+        .skills-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+
+            > * {
+                width: calc(50% - 8px);
+                margin-bottom: 8px;
+            }
         }
     }
 `;

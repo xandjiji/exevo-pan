@@ -3,6 +3,7 @@ import CharCard from './CharCard.styled';
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
+import SkillBar from '../SkillBar';
 
 import ExternalIcon from '../../assets/svgs/external.svg';
 import BrFlag from '../../assets/br-flag.png';
@@ -20,7 +21,8 @@ export default ({ charData }) => {
         auctionEnd,
         level,
         vocation,
-        server
+        server,
+        skills
     } = charData;
     const endDate = new Date(auctionEnd * 1000);
 
@@ -46,6 +48,7 @@ export default ({ charData }) => {
             </div>
 
             <div className="overview">
+
                 <LabeledText label="Server" warning={server.experimental} warningText="This is an experimental server!">
                     <div className="overview-content row">
                         <img
@@ -85,6 +88,16 @@ export default ({ charData }) => {
                         {numberWithCommas(currentBid)}
                     </div>
                 </LabeledText>
+            </div>
+
+            <div className="card-footer">
+                <div className="skills-wrapper">
+                    {Object.keys(skills).map(skillItem => <SkillBar key={skillItem} skillName={skillItem} skill={skills[skillItem]} />)}
+                </div>
+
+                <div className="charms-wrapper">
+
+                </div>
             </div>
         </CharCard>
     )
