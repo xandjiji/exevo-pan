@@ -2,6 +2,7 @@ import React from 'react';
 import CharCard from './CharCard.styled';
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
+import AuctionTimer from '../AuctionTimer';
 
 import ExternalIcon from '../../assets/svgs/external.svg';
 import BrFlag from '../../assets/br-flag.png';
@@ -9,11 +10,10 @@ import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
 import TibiaCoinIcon from '../../assets/tibiacoin.png';
 
-const monthStr = ['Jan', 'Fev', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'];
-
 export default ({ charData }) => {
     const {
         nickname,
+        outfitId,
         href,
         currentBid,
         hasBeenBidded,
@@ -28,7 +28,7 @@ export default ({ charData }) => {
         <CharCard className="shadow">
             <div className="card-head">
                 <ImagePortrait
-                    src="https://static.tibia.com/images/charactertrade/outfits/1146_3.gif"
+                    src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}`}
                     alt={nickname}
                     title={nickname}
                 />
@@ -71,7 +71,7 @@ export default ({ charData }) => {
 
                 <LabeledText label="Auction End">
                     <div className="overview-content">
-                        {endDate.getDate()} {monthStr[endDate.getMonth()]}, {endDate.getHours()}:{endDate.getMinutes() > 10 ? endDate.getMinutes() : `0${endDate.getMinutes()}`}
+                        <AuctionTimer endDate={endDate} />
                     </div>
                 </LabeledText>
 

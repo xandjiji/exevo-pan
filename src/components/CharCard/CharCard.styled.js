@@ -77,9 +77,8 @@ export default styled.div`
         }
 
         .bid {
-            font-size: 14px;
+            font-size: 16px;
             letter-spacing: 0.6px;
-            font-weight: 600;
         }
     }
 `;

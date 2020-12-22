@@ -9,6 +9,7 @@ const ITEMS_PER_PAGE = 30;
 export default () => {
     const data = useContext(AllCharacterData);
     const [charList, setCharList] = useState(data.slice(0, 30));
+
     const [index, setIndex] = useState(0);
 
     const sliceList = (index) => {
