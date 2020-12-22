@@ -6,6 +6,16 @@ html * {
 
 html, body {
     font-family: 'Roboto', sans-serif;
+    background-color: var(--background);
+    --background: #EEEEEE;
+    --surface: #FFFFFF;
+    --onSurface: #000000;
+    --separator: #B4B4B4;
+    --primary: #3F51B5;
+    --onPrimary: #FFFFFF;
+    --primaryVariant: #C5CAE9;
+    --green: #377712;
+    --red: #C51313;
 }
 
 @font-face {

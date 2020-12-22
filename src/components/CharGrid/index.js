@@ -1,11 +1,12 @@
 import React, { useContext, useState, useEffect } from 'react';
+import CharGrid from './CharGrid.styled';
 import AllCharacterData from '../../contexts/AllCharacterData';
 
 import CharCard from '../CharCard';
 
 const ITEMS_PER_PAGE = 30;
 
-const CharGrid = () => {
+export default () => {
     const data = useContext(AllCharacterData);
     const [charList, setCharList] = useState(data.slice(0, 30));
     const [index, setIndex] = useState(0);
@@ -32,13 +33,13 @@ const CharGrid = () => {
     }
 
     return (
-        <>
+        <CharGrid>
             <h1>Current index: {index}</h1>
             <button onClick={() => handleClick(index - 1)}>{'<'}</button>
             <button onClick={() => handleClick(index + 1)}>{'>'}</button>
-            {charList.map(item => <CharCard key={item.id} charData={item} />)}
-        </>
+            <div className="items-wrapper">
+                {charList.map(item => <CharCard key={item.id} charData={item} />)}
+            </div>
+        </CharGrid>
     )
 }
-
-export default CharGrid;
