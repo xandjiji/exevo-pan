@@ -5,13 +5,13 @@ export default styled.div`
 
     .items-wrapper {
         margin-top: 16px;
-        > * {
-            margin: 0 auto;
-            width: 320px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
 
-            &:not(:last-child) {
-                margin-bottom: 32px;
-            }
+        > * {
+            margin-bottom: 32px;
+            width: 320px;
         }
     }
 `;

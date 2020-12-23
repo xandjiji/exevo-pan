@@ -93,7 +93,6 @@ export default styled.div`
     }
 
     .card-footer {
-
         .skills-wrapper {
             display: flex;
             flex-wrap: wrap;
@@ -102,6 +101,21 @@ export default styled.div`
             > * {
                 width: calc(50% - 8px);
                 margin-bottom: 8px;
+            }
+        }
+
+        .charms-wrapper {
+            margin-top: 12px;
+            margin-bottom: -8px;
+            display: flex;
+            flex-wrap: wrap;
+
+            > * {
+                margin-bottom: 8px;
+
+                &:not(:last-child) {
+                    margin-right: 8px;
+                }
             }
         }
     }

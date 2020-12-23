@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    padding: 10px 14px 8px 14px;
+    padding: 10px 12px 8px 12px;
     position: relative;
     border-radius: 5px;
     border: solid 1px ${props => props.warning ? 'var(--red)' : 'var(--separator)'};
@@ -10,7 +10,7 @@ export default styled.div`
         padding: 0 4px;
         position: absolute;
         top: 0;
-        left: 10px;
+        left: 9px;
         transform: translateY(-50%);
 
         font-size: 9px;

@@ -4,7 +4,7 @@ import AllCharacterData from '../../contexts/AllCharacterData';
 
 import CharCard from '../CharCard';
 
-const ITEMS_PER_PAGE = 30;
+const ITEMS_PER_PAGE = 10;
 
 export default () => {
     const data = useContext(AllCharacterData);

@@ -4,6 +4,7 @@ import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
+import Tag from '../Tag';
 
 import ExternalIcon from '../../assets/svgs/external.svg';
 import BrFlag from '../../assets/br-flag.png';
@@ -22,10 +23,17 @@ export default ({ charData }) => {
         level,
         vocation,
         server,
-        skills
+        skills,
+        charms
     } = charData;
     const endDate = new Date(auctionEnd * 1000);
 
+    let biggest = 'magic';
+    for (const key in skills) {
+        if (skills[key].level > skills[biggest].level) {
+            biggest = key;
+        }
+    }
     return (
         <CharCard className="shadow">
             <div className="card-head">
@@ -92,12 +100,22 @@ export default ({ charData }) => {
 
             <div className="card-footer">
                 <div className="skills-wrapper">
-                    {Object.keys(skills).map(skillItem => <SkillBar key={skillItem} skillName={skillItem} skill={skills[skillItem]} />)}
+                    {Object.keys(skills).map(skillItem =>
+                        <SkillBar
+                            key={skillItem}
+                            skillName={skillItem}
+                            skill={skills[skillItem]}
+                            highlight={skillItem === biggest}
+                        />)
+                    }
                 </div>
 
-                <div className="charms-wrapper">
-
-                </div>
+                {charms.length > 0
+                    ? <div className="charms-wrapper">
+                        {charms.map(charm => <Tag key={charm}>{charm}</Tag>)}
+                    </div>
+                    : null
+                }
             </div>
         </CharCard>
     )

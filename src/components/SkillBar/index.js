@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import SkillBar from './SkillBar.styled';
 
-export default ({ skillName, skill }) => {
+export default ({ skillName, skill, highlight }) => {
 
     const [width, setWidth] = useState(0);
     useEffect(() => {
@@ -9,7 +9,7 @@ export default ({ skillName, skill }) => {
     }, [skill.percentage])
 
     return (
-        <SkillBar>
+        <SkillBar highlight={highlight}>
             <span className="skill-level shadow">
                 {skill.level}
             </span>
