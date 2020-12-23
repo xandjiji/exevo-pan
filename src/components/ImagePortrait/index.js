@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ImagePortrait from './ImagePortrait.styled';
 
 export default ({ src, alt, title }) => {
 
     const [loaded, setLoaded] = useState(false);
+    const [error, setError] = useState(false);
+
+    useEffect(() => {
+        const timeout = setTimeout(() => {
+            if(!error) {
+                setLoaded(true);
+            }
+        }, 500);
+
+        return () => clearTimeout(timeout);
+    },[error])
+
 
     return (
         <ImagePortrait className="shadow">
@@ -13,10 +25,9 @@ export default ({ src, alt, title }) => {
                 alt={alt}
                 title={title}
                 onLoad={() => setLoaded(true)}
-                onError={() => setLoaded(false)}
+                onError={() => setError(true)}
             />
             <div className={loaded ? 'loader hidden' : 'loader'}></div>
-            
         </ImagePortrait>
     )
 }
