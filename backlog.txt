@@ -2,4 +2,3 @@ useContext + useReducer
 
 codesplitting (json)
 font css preload
-skill highlight useEffect
