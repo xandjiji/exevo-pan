@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import AuctionTimer from './AuctionTimer.styled';
 
 const monthStr = ['Jan', 'Fev', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'];
-const constantTime = 1000 * 60;
-const constantTime2 = constantTime * 60;
+const constantTime = 60000;
+const constantTime2 = 3600000;
+const constantTime3 = 86400000;
 
 export default ({ endDate }) => {
     const [countdown, setCountdown] = useState(getInitialDate(endDate));
@@ -74,8 +75,8 @@ const getInitialDate = (endDate) => {
     const currentDate = new Date();
     let distance = endDate - currentDate;
 
-    const days = Math.floor(distance / (constantTime2 * 24));
-    const hours = Math.floor((distance % (constantTime2 * 24)) / constantTime2);
+    const days = Math.floor(distance / constantTime3);
+    const hours = Math.floor((distance % constantTime3) / constantTime2);
     const minutes = Math.floor((distance % constantTime2) / constantTime);
     const seconds = Math.floor((distance % constantTime) / 1000);
 

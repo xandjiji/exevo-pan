@@ -1,18 +1,20 @@
 useContext + useReducer
 useMemo
+throttle paginator
+fav function
 
 codesplitting (json)
 font css preload
 padronizar SVGS (https://material.io/resources/icons/?style=baseline)
 
 filters:
-    minimum level
-    minimum skill
-    vocation
+    minimum level           slider
+    minimum skill           slider
+    vocation                [4]
 
-    specific server
-    specific server pvp
-    specific battleye
+    specific server         [dropdown]
+    specific server pvp     [5]
+    specific battleye       [2]
 
 sorters:
     level
