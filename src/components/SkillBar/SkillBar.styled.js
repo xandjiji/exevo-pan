@@ -16,6 +16,8 @@ export default styled.div`
         color: var(--onPrimary);
         text-align: right;
         font-weight: 600;
+        transition: background-color 0.2s ease-out;
+        transition: color 0.2s ease-out;
     }
 
     .info-wrapper {
@@ -34,7 +36,7 @@ export default styled.div`
             .progress {
                 height: 100%;
                 background-color: ${props => props.highlight ? 'var(--green)' : 'var(--primary)'};
-                transition: 0.4s ease-out;
+                transition: width 0.4s ease-out;
             }
         }
     }

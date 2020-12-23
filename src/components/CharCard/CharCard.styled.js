@@ -13,6 +13,11 @@ export default styled.div`
         > *:first-child {
             width: 56px;
             height: 56px;
+
+            img {
+                width: 64px;
+                height: 64px;
+            }
         }
 
         .head-info {
@@ -84,6 +89,10 @@ export default styled.div`
 
         .coin {
             border-radius: 50%;
+        }
+
+        .auction * {
+            font-size: 16px;
         }
 
         .bid {

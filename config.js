@@ -1,0 +1,4 @@
+const MAX_CONCURRENT_REQUESTS = 30;
+const MAX_RETRIES = 5;
+
+module.exports = { MAX_CONCURRENT_REQUESTS, MAX_RETRIES }

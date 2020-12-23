@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import CharCard from './CharCard.styled';
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
@@ -28,12 +28,20 @@ export default ({ charData }) => {
     } = charData;
     const endDate = new Date(auctionEnd * 1000);
 
-    let biggest = 'magic';
-    for (const key in skills) {
-        if (skills[key].level > skills[biggest].level) {
-            biggest = key;
+    const [highlightedSkill, setHighlightedSkill] = useState(null);
+
+    useEffect(() => {
+        let biggest = 'magic';
+        for (const key in skills) {
+            if (skills[key].level > skills[biggest].level) {
+                biggest = key;
+            }
         }
-    }
+
+        setHighlightedSkill(biggest);
+    }, [skills]);
+
+
     return (
         <CharCard className="shadow">
             <div className="card-head">
@@ -81,7 +89,7 @@ export default ({ charData }) => {
                 </LabeledText>
 
                 <LabeledText label="Auction End">
-                    <div className="overview-content">
+                    <div className="overview-content auction">
                         <AuctionTimer endDate={endDate} />
                     </div>
                 </LabeledText>
@@ -105,7 +113,7 @@ export default ({ charData }) => {
                             key={skillItem}
                             skillName={skillItem}
                             skill={skills[skillItem]}
-                            highlight={skillItem === biggest}
+                            highlight={skillItem === highlightedSkill}
                         />)
                     }
                 </div>
