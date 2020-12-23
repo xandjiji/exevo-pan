@@ -38,6 +38,7 @@ export default styled.div`
                     svg {
                         height: 28px;
                         width: 28px;
+                        fill: var(--onSurface);
                     }
                 }
             }

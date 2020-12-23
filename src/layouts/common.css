@@ -4,6 +4,17 @@ html * {
     font-size: 12px;
 }
 
+html, body, #___gatsby, #gatsby-focus-wrapper {
+    height: 100%;
+    overflow: hidden;
+    overscroll-behavior: contain;
+}
+
+/* GAMBIARRA */
+.body-container {
+    height: calc(100% - 160px);
+}
+
 html, body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background);
@@ -18,6 +29,10 @@ html, body {
     --red: #C51313;
     --battleGreen: #43B600;
     --battleYellow: #FFDD00;
+}
+
+svg {
+    transition: fill 0.2s ease-out;
 }
 
 @font-face {
@@ -60,13 +75,29 @@ html, body {
     font-display: swap;
 }
 
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    background-color: transparent;
+    border-radius: 2px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--primaryVariant);
+    border-radius: 2px;
+}
+
+.custom-scrollbar {
+    scrollbar-color: var(--primaryVariant) transparent;
+    scrollbar-width: thin;
+}
+
 .shadow {
     box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.14);
 }
 
 .clickable {
     padding: 2px;
-    border-radius: 3px;
+    border-radius: 4px;
     cursor: pointer;
     transition: box-shadow 0.2s ease-out;
 }
@@ -97,54 +128,5 @@ html, body {
 @media(min-width: 768px) {
     html * {
         font-size: 16px;
-    }
-
-    .container {
-        margin-left: 80px;
-        margin-right: 80px;
-    }
-    
-    .negative-container {
-        margin-left: -80px;
-        margin-right: -80px;
-    }
-
-    .inner-container {
-        padding-left: 80px;
-        padding-right: 80px;
-    }
-}
-
-@media(min-width: 1024px) {
-    .container {
-        margin-left: 140px;
-        margin-right: 140px;
-    }
-
-    .negative-container {
-        margin-left: -140px;
-        margin-right: -140px;
-    }
-
-    .inner-container {
-        padding-left: 140px;
-        padding-right: 140px;
-    }
-}
-
-@media(min-width: 1440px) {
-    .container {
-        margin-right: calc((100vw - 1200px) / 2);
-        margin-left: calc((100vw - 1200px) / 2);
-    }
-
-    .negative-container {
-        margin-right: calc(((100vw - 1200px) / 2) * -1);
-        margin-left: calc(((100vw - 1200px) / 2) * -1);
-    }
-
-    .inner-container {
-        padding-right: calc((100vw - 1200px) / 2);
-        padding-left: calc((100vw - 1200px) / 2);
     }
 }

@@ -1,19 +1,18 @@
 import React, { useContext, useState, useEffect } from 'react';
 import CharGrid from './CharGrid.styled';
-import AllCharacterData from '../../contexts/AllCharacterData';
-
+import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 
-const ITEMS_PER_PAGE = 10;
+import AllCharacterData from '../../contexts/AllCharacterData';
 
-export default () => {
+export default ({ itemsPerPage }) => {
     const data = useContext(AllCharacterData);
     const [charList, setCharList] = useState(data.slice(0, 30));
 
     const [index, setIndex] = useState(0);
 
     const sliceList = (index) => {
-        return data.slice(index * ITEMS_PER_PAGE, (index * ITEMS_PER_PAGE) + ITEMS_PER_PAGE);
+        return data.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
     }
 
     useEffect(() => {
@@ -27,18 +26,14 @@ export default () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [data])
 
-    const handleClick = (newValue) => {
-        if (newValue >= 0 && newValue < (data.length / ITEMS_PER_PAGE)) {
-            setIndex(newValue);
-        }
-    }
-
     return (
         <CharGrid>
-            <h1>Current index: {index}</h1>
-            <button onClick={() => handleClick(index - 1)}>{'<'}</button>
-            <button onClick={() => handleClick(index + 1)}>{'>'}</button>
-            <div className="items-wrapper">
+            <Paginator
+                itemsPerPage={itemsPerPage}
+                dataSize={data.length}
+                handleAction={setIndex}
+            />
+            <div className="items-wrapper custom-scrollbar">
                 {charList.map(item => <CharCard key={item.id} charData={item} />)}
             </div>
         </CharGrid>

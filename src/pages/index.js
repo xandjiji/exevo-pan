@@ -5,7 +5,7 @@ import CharGrid from '../components/CharGrid';
 const IndexPage = () => {
     return (
         <MasterLayout>
-            <CharGrid />
+            <CharGrid itemsPerPage={10} />
         </MasterLayout>
     )
 }

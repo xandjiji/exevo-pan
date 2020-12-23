@@ -1,12 +1,15 @@
 import React from 'react';
+import Header from '../components/Header';
+
 import '../layouts/common.css';
 
 const MasterLayout = ({ children }) => {
     return (
         <>
-            <main>
+            <Header />
+            <div className="container body-container">
                 {children}
-            </main>
+            </div>
         </>
     );
 }

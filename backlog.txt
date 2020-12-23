@@ -1,4 +1,21 @@
 useContext + useReducer
+useMemo
 
 codesplitting (json)
 font css preload
+padronizar SVGS (https://material.io/resources/icons/?style=baseline)
+
+filters:
+    minimum level
+    minimum skill
+    vocation
+
+    specific server
+    specific server pvp
+    specific battleye
+
+sorters:
+    level
+    skill
+    endDate
+    bidAmount
