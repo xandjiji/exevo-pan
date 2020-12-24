@@ -33,7 +33,7 @@ export default ({ itemsPerPage }) => {
                 dataSize={data.length}
                 handleAction={setIndex}
             />
-            <div className="items-wrapper custom-scrollbar">
+            <div className="items-wrapper custom-scrollbar inner-container">
                 {charList.map(item => <CharCard key={item.id} charData={item} />)}
             </div>
         </CharGrid>

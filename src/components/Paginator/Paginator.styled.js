@@ -1,19 +1,18 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    padding: 8px 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-
-    border-radius: 4px;
-    background-color: var(--surface);
+    align-items: flex-end;
+    background-color: var(--primary);
     user-select: none;
 
     .sort-icon {
         width: 37px;
         height: 37px;
-        opacity: 0.55;
+        fill: var(--onPrimary);
     }
 
     .paginating-wrapper {
@@ -35,8 +34,7 @@ export default styled.div`
 
                 svg {
                     width: 32px;
-                    fill: var(--onSurface);
-                    opacity: 0.55;
+                    fill: var(--onPrimary);
                 }
 
                 &.disabled {
@@ -58,8 +56,8 @@ export default styled.div`
         .tracker {
             display: block;
             font-size: 12px;
-            font-weight: 300;
             letter-spacing: 0.5px;
+            color: var(--onPrimary);
         }
     }
 `;

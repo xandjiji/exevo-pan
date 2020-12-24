@@ -12,7 +12,7 @@ html, body, #___gatsby, #gatsby-focus-wrapper {
 
 /* GAMBIARRA */
 .body-container {
-    height: calc(100% - 160px);
+    height: calc(100% - 90px);
 }
 
 html, body {

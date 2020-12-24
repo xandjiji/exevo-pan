@@ -26,7 +26,7 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
     }
 
     return (
-        <Paginator className="shadow">
+        <Paginator className="shadow inner-container">
             <SortIcon className="sort-icon clickable" />
 
             <div className="paginating-wrapper">
