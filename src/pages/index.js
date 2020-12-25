@@ -1,27 +1,31 @@
-import React, { useState } from 'react';
+import React from 'react';
 import MasterLayout from '../layouts/MasterLayout';
 import CharGrid from '../components/CharGrid';
 import Pushable from '../components/Pushable';
 import SideDrawer from '../components/SideDrawer';
 
+import SideDrawerProvider from '../contexts/SideDrawerContext/'
+import SideDrawerContext from '../contexts/SideDrawerContext/context';
+
 const IndexPage = () => {
-    const [drawerActive, setDrawerActive] = useState(false);
-
-    const toggleDrawer = () => {
-        setDrawerActive(!drawerActive);
-    }
-
     return (
         <MasterLayout>
-            <CharGrid itemsPerPage={10} toggleDrawer={toggleDrawer} />
-            <Pushable
-                active={drawerActive}
-                trigger={toggleDrawer}
-                blockRight
-                backdrop
-            >
-                <SideDrawer />
-            </Pushable>
+            <SideDrawerProvider>
+                <CharGrid itemsPerPage={10} />
+
+                <SideDrawerContext.Consumer>
+                    {context => (
+                        <Pushable
+                            active={context.active}
+                            trigger={context.toggleSideDrawer}
+                            blockRight
+                            backdrop
+                        >
+                            <SideDrawer />
+                        </Pushable>
+                    )}
+                </SideDrawerContext.Consumer>
+            </SideDrawerProvider>
         </MasterLayout>
     )
 }

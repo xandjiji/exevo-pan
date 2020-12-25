@@ -22,6 +22,7 @@ export default styled.div`
 
     .items-wrapper {
         padding-top: 16px;
+        position: relative;
         height: 100%;
         overflow: auto;
         
@@ -34,6 +35,18 @@ export default styled.div`
             content: '';
             grid-column: 1 / -1;
             height: 1px;
+        }
+
+        &::before {
+            content: '';
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            z-index: 2;
+            width: 100%;
+            height: 72px;
+            background-image: linear-gradient(to top, var(--background), rgba(0,0,0,0));
+            pointer-events: none;
         }
     }
 `;

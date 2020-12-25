@@ -112,6 +112,10 @@ export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) 
         }
     }
 
+    const handleClick = () => {
+        if(drawerPosition.positionX === 0) handleTrigger();
+    }
+
     return (
         <Pushable
             role="button"
@@ -137,7 +141,7 @@ export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) 
                 // eslint-disable-next-line jsx-a11y/click-events-have-key-events
                 ? <div
                     id="drawer-backdrop"
-                    onClick={handleTrigger}
+                    onClick={handleClick}
                     role="button"
                     tabIndex="0"
                 >

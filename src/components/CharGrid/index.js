@@ -3,10 +3,13 @@ import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 
+import SideDrawerContext from '../../contexts/SideDrawerContext/context';
 import AllCharacterData from '../../contexts/AllCharacterData';
 import SortIcon from '../../assets/svgs/sort.svg';
 
-export default ({ itemsPerPage, toggleDrawer }) => {
+export default ({ itemsPerPage }) => {
+    const { toggleSideDrawer } = useContext(SideDrawerContext);
+
     const data = useContext(AllCharacterData);
     const [charList, setCharList] = useState(data.slice(0, 30));
 
@@ -30,7 +33,7 @@ export default ({ itemsPerPage, toggleDrawer }) => {
     return (
         <CharGrid>
             <div className="grid-header shadow inner-container">
-                <SortIcon className="sort-icon clickable" onClick={toggleDrawer} />
+                <SortIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
 
                 <Paginator
                     itemsPerPage={itemsPerPage}
