@@ -27,11 +27,6 @@ html, body, #___gatsby, #gatsby-focus-wrapper {
     transform: translateX(-100%) !important;
 }
 
-.pushable-item:not(.active) #drawer-backdrop {
-    opacity: 0;
-    pointer-events: none;
-}
-
 html, body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background);

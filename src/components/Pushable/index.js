@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
+import Pushable from './Pushable.styled';
 
-export default ({ children, trigger, blockLeft, blockRight, active }) => {
+export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) => {
     const refElement = useRef(null);
 
     const [isMousePressed, setMousePressed] = useState(false);
@@ -11,9 +12,7 @@ export default ({ children, trigger, blockLeft, blockRight, active }) => {
     });
 
     const handleTrigger = () => {
-        if (trigger) {
-            trigger();
-        }
+        if (trigger) trigger();
     }
 
     const dragStart = (event) => {
@@ -72,7 +71,6 @@ export default ({ children, trigger, blockLeft, blockRight, active }) => {
 
         /* pushy enough */
         if (Math.abs(distance) > 80) {
-            console.log('asdas');
             refElement.current.style.transition = 'transform 0.2s ease-out';
             handleTrigger();
             setTimeout(() => {
@@ -115,12 +113,12 @@ export default ({ children, trigger, blockLeft, blockRight, active }) => {
     }
 
     return (
-        <div
+        <Pushable
             role="button"
             tabIndex="0"
             ref={refElement}
             className={`pushable-item ${active ? 'active' : ''}`}
-            style={{ transform: `translateX(${drawerPosition.positionX}px)`, userSelect: 'none', outline: 'none' }}
+            style={{ transform: `translateX(${drawerPosition.positionX}px)` }}
 
             onMouseDown={dragStart}
             onMouseMove={dragging}
@@ -134,6 +132,17 @@ export default ({ children, trigger, blockLeft, blockRight, active }) => {
             onTouchEnd={dragStop}
         >
             {children}
-        </div>
+
+            {backdrop
+                // eslint-disable-next-line jsx-a11y/click-events-have-key-events
+                ? <div
+                    id="drawer-backdrop"
+                    onClick={handleTrigger}
+                    role="button"
+                    tabIndex="0"
+                >
+                </div>
+                : null}
+        </Pushable>
     )
 }

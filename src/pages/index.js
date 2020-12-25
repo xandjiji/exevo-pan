@@ -8,7 +8,7 @@ const IndexPage = () => {
     const [drawerActive, setDrawerActive] = useState(false);
 
     const toggleDrawer = () => {
-        setDrawerActive(!drawerActive);
+        setTimeout(() => setDrawerActive(!drawerActive), 0);
     }
 
     return (
@@ -18,8 +18,9 @@ const IndexPage = () => {
                 active={drawerActive}
                 trigger={toggleDrawer}
                 blockRight
+                backdrop
             >
-                <SideDrawer toggleDrawer={toggleDrawer} />
+                <SideDrawer />
             </Pushable>
         </MasterLayout>
     )
