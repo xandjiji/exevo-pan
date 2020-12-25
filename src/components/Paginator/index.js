@@ -5,7 +5,7 @@ import SortIcon from '../../assets/svgs/sort.svg';
 import NextIcon from '../../assets/svgs/next.svg';
 import LastIcon from '../../assets/svgs/last.svg';
 
-export default ({ itemsPerPage, dataSize, handleAction }) => {
+export default ({ itemsPerPage, dataSize, handleAction, toggleDrawer }) => {
 
     const [index, setIndex] = useState(0);
     const pageCount = useMemo(() => Math.ceil(dataSize / itemsPerPage), [dataSize, itemsPerPage]);
@@ -27,7 +27,7 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
 
     return (
         <Paginator className="shadow inner-container">
-            <SortIcon className="sort-icon clickable" />
+            <SortIcon className="sort-icon clickable" onClick={toggleDrawer} />
 
             <div className="paginating-wrapper">
                 <div className="tracker">

@@ -13,6 +13,7 @@ export default styled.div`
         width: 37px;
         height: 37px;
         fill: var(--onPrimary);
+        outline: none;
     }
 
     .paginating-wrapper {

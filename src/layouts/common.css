@@ -12,7 +12,24 @@ html, body, #___gatsby, #gatsby-focus-wrapper {
 
 /* GAMBIARRA */
 .body-container {
+    position: relative;
     height: calc(100% - 90px);
+}
+
+.pushable-item {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 25;
+}
+
+.pushable-item:not(.active) {
+    transform: translateX(-100%) !important;
+}
+
+.pushable-item:not(.active) #drawer-backdrop {
+    opacity: 0;
+    pointer-events: none;
 }
 
 html, body {
@@ -111,22 +128,37 @@ svg {
 }
 
 .container {
-    margin-left: 40px;
-    margin-right: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .negative-container {
-    margin-left: -40px;
-    margin-right: -40px;
+    margin-left: -20px;
+    margin-right: -20px;
 }
 
 .inner-container {
-    padding-left: 40px;
-    padding-right: 40px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 @media(min-width: 768px) {
     html * {
         font-size: 16px;
+    }
+
+    .container {
+        margin-left: 40px;
+        margin-right: 40px;
+    }
+    
+    .negative-container {
+        margin-left: -40px;
+        margin-right: -40px;
+    }
+    
+    .inner-container {
+        padding-left: 40px;
+        padding-right: 40px;
     }
 }

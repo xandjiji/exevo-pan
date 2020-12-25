@@ -5,7 +5,7 @@ import CharCard from '../CharCard';
 
 import AllCharacterData from '../../contexts/AllCharacterData';
 
-export default ({ itemsPerPage }) => {
+export default ({ itemsPerPage, toggleDrawer }) => {
     const data = useContext(AllCharacterData);
     const [charList, setCharList] = useState(data.slice(0, 30));
 
@@ -32,6 +32,7 @@ export default ({ itemsPerPage }) => {
                 itemsPerPage={itemsPerPage}
                 dataSize={data.length}
                 handleAction={setIndex}
+                toggleDrawer={toggleDrawer}
             />
             <div className="items-wrapper custom-scrollbar inner-container">
                 {charList.map(item => <CharCard key={item.id} charData={item} />)}
