@@ -12,7 +12,7 @@ export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) 
     });
 
     const handleTrigger = () => {
-        if (trigger) trigger();
+        if (trigger) setTimeout(() => trigger(), 0);
     }
 
     const dragStart = (event) => {

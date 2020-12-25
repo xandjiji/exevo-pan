@@ -8,7 +8,7 @@ const IndexPage = () => {
     const [drawerActive, setDrawerActive] = useState(false);
 
     const toggleDrawer = () => {
-        setTimeout(() => setDrawerActive(!drawerActive), 0);
+        setDrawerActive(!drawerActive);
     }
 
     return (
