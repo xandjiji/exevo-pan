@@ -2,6 +2,24 @@ import styled from 'styled-components';
 
 export default styled.div`
     height: 100%;
+
+    .grid-header {
+        padding-top: 8px;
+        padding-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        background-color: var(--primary);
+        user-select: none;
+
+        .sort-icon {
+            width: 37px;
+            height: 37px;
+            fill: var(--onPrimary);
+            outline: none;
+        }
+    }
+
     .items-wrapper {
         padding-top: 16px;
         height: 100%;
