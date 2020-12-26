@@ -10,11 +10,11 @@ padronizar SVGS (https://material.io/resources/icons/?style=baseline)
 filters:
     minimum level           slider
     minimum skill           slider
-    vocation                [4]
+        vocation                [4]
 
     specific server         [dropdown]
-    specific server pvp     [5]
-    specific battleye       [2]
+        specific server pvp     [5]
+        specific battleye       [2]
 
 sorters:
     level

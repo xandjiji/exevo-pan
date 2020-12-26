@@ -21,7 +21,7 @@ const IndexPage = () => {
                             blockRight
                             backdrop
                         >
-                            <SideDrawer />
+                            <SideDrawer backAction={context.toggleSideDrawer} />
                         </Pushable>
                     )}
                 </SideDrawerContext.Consumer>

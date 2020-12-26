@@ -24,7 +24,7 @@ html, body, #___gatsby, #gatsby-focus-wrapper {
 }
 
 .pushable-item:not(.active) {
-    transform: translateX(-100%) !important;
+    transform: translateX(-110%) !important;
 }
 
 html, body {
