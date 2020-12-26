@@ -16,24 +16,25 @@ export default ({ backAction }) => {
             <div className="items-wrapper inner-container">
 
                 <FilterGroup title="Vocation">
-                    <Tag>Knight</Tag>
-                    <Tag>Paladin</Tag>
-                    <Tag>Sorcerer</Tag>
-                    <Tag>Druid</Tag>
+                    <Tag clickable>Knight</Tag>
+                    <Tag clickable>Paladin</Tag>
+                    <Tag clickable>Sorcerer</Tag>
+                    <Tag clickable>Druid</Tag>
                 </FilterGroup>
 
                 <FilterGroup title="PvP">
-                    <Tag>Optional</Tag>
-                    <Tag>Open</Tag>
-                    <Tag>Hardcore</Tag>
-                    <Tag>Retro</Tag>
-                    <Tag>Retro Hardcore</Tag>
+                    <Tag clickable>Optional</Tag>
+                    <Tag clickable>Open</Tag>
+                    <Tag clickable>Hardcore</Tag>
+                    <Tag clickable>Retro</Tag>
+                    <Tag clickable>Retro Hardcore</Tag>
                 </FilterGroup>
 
                 <FilterGroup title="BattlEye">
-                    <Tag>Green</Tag>
-                    <Tag>Yellow</Tag>
+                    <Tag clickable>Green</Tag>
+                    <Tag clickable>Yellow</Tag>
                 </FilterGroup>
+
             </div>
         </SideDrawer>
     )

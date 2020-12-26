@@ -7,4 +7,11 @@ export default styled.div`
     border-radius: 12px;
     font-size: 12px;
     font-weight: 400;
+
+    transition: 0.2s ease-out !important;
+
+    &.active {
+        background-color: var(--primary);
+        color: var(--onPrimary);
+    }
 `;

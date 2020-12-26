@@ -4,7 +4,7 @@ import FilterGroup from './FilterGroup.styled';
 export default ({ title, children }) => {
     return (
         <FilterGroup>
-            <span>{title}</span>
+            {title ? <span>{title}</span> : null}
             {children}
         </FilterGroup>
     )
