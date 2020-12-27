@@ -75,8 +75,9 @@ export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) 
             handleTrigger();
             setTimeout(() => {
                 setDrawerPosition({
-                    ...drawerPosition,
-                    positionX: 0
+                    initialX: 0,
+                    positionX: 0,
+                    currentX: 0
                 });
             }, 400);
             return
@@ -85,6 +86,7 @@ export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) 
         refElement.current.style.transition = 'transform 0.2s ease-out';
         setDrawerPosition({
             ...drawerPosition,
+            initialX: 0,
             positionX: 0
         });
     }
@@ -113,7 +115,14 @@ export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) 
     }
 
     const handleClick = () => {
-        if(drawerPosition.positionX === 0) handleTrigger();
+        if(drawerPosition.positionX === 0) {
+            setDrawerPosition({
+                initialX: 0,
+                positionX: 0,
+                currentX: 0
+            });
+            handleTrigger();
+        }
     }
 
     return (
