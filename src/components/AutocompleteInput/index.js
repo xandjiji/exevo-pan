@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
 export default ({ items, placeholder }) => {
-    const [active, setActive] = useState(false);
+    const uniqueID = useRef(Math.random())
     const [term, setTerm] = useState('');
 
     const handleChange = (event) => {
@@ -15,33 +15,28 @@ export default ({ items, placeholder }) => {
 
     return (
         <AutocompleteInput
-            className={`${active ? 'active' : ''}`}
+            onMouseDown={stopBubbling}
             onMouseUp={stopBubbling}
             onMouseMove={stopBubbling}
         >
             <input
+                list={uniqueID.current}
                 placeholder={placeholder}
-                onFocus={() => setActive(true)}
-                onBlur={() => setActive(false)}
                 value={term}
                 onChange={handleChange}
             />
 
-            <div className="item-list custom-scrollbar shadow">
-                {items.map((server, index) => {
+            <datalist id={uniqueID.current}>
+                {items.map((item, index) => {
                     return (
-                        <div
+                        <option
                             key={index}
-                            role="button"
-                            tabIndex="0"
-                            className={term === server ? 'active' : ''}
-                            onMouseDown={() => setTerm(server)}
-                        >
-                            {server}
-                        </div>
+                            value={item}
+                            aria-label="Input option"
+                        />
                     )
                 })}
-            </div>
+            </datalist>
         </AutocompleteInput>
     )
 }
