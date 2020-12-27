@@ -1,4 +1,3 @@
-useContext + useReducer
 useMemo
 throttle paginator
 fav function

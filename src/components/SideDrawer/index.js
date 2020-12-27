@@ -2,8 +2,11 @@ import React from 'react';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Tag from '../Tag';
+import AutocompleteInput from '../AutocompleteInput';
 
 import ArrowIcon from '../../assets/svgs/arrowBack.svg';
+
+import ServerNames from '../../../serverNames.json';
 
 export default ({ backAction }) => {
     return (
@@ -33,6 +36,10 @@ export default ({ backAction }) => {
                 <FilterGroup title="BattlEye">
                     <Tag clickable>Green</Tag>
                     <Tag clickable>Yellow</Tag>
+                </FilterGroup>
+
+                <FilterGroup title="Server">
+                    <AutocompleteInput items={ServerNames} placeholder="Choose a server" />
                 </FilterGroup>
 
             </div>
