@@ -14,4 +14,8 @@ export default styled.div`
         background-color: var(--primary);
         color: var(--onPrimary);
     }
+
+    &.interact:active {
+        box-shadow: inset 2px 2px rgba(0,0,0,.14);
+    }
 `;

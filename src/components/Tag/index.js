@@ -9,7 +9,7 @@ export default ({ children, clickable }) => {
     }
 
     return (
-        <Tag className={`tag-item shadow ${active ? 'active' : ''}`} onClick={handleClick}>
+        <Tag className={`tag-item shadow ${active ? 'active' : ''} ${clickable ? 'interact' : null}`} onClick={handleClick}>
             {children}
         </Tag>
     )

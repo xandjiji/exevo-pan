@@ -4,14 +4,15 @@ fav function
 next scroll to top
 x clear autocomplete input
 reset filters
+consertar height vh mobile
 
 codesplitting (json)
 font css preload
 padronizar SVGS (https://material.io/resources/icons/?style=baseline)
 
 filters:
-    minimum level           slider
-    minimum skill           slider
+        minimum level           slider
+        minimum skill           slider
         vocation                [4]
 
         specific server         [dropdown]

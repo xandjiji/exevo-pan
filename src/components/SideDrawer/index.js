@@ -18,7 +18,6 @@ export default ({ backAction }) => {
             </div>
 
             <div className="items-wrapper inner-container">
-
                 <FilterGroup title="Vocation" display="flex">
                     <Tag clickable>Knight</Tag>
                     <Tag clickable>Paladin</Tag>
