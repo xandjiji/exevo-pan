@@ -1,9 +1,9 @@
 import React from 'react';
 import FilterGroup from './FilterGroup.styled';
 
-export default ({ title, children }) => {
+export default ({ title, display, children }) => {
     return (
-        <FilterGroup>
+        <FilterGroup display={display}>
             {title ? <span>{title}</span> : null}
             {children}
         </FilterGroup>

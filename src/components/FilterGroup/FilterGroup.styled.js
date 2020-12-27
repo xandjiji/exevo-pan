@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
     margin-bottom: 16px;
     padding-bottom: 8px;
-    display: flex;
+    display: ${props => props.display || 'unset'};
     flex-wrap: wrap;
     border-bottom: solid 1px var(--separator);
 

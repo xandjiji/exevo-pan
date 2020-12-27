@@ -3,24 +3,14 @@ import RangeSlider from './RangeSlider.styled';
 
 export default ({ initialValue, min, max }) => {
     const [value, setValue] = useState(initialValue);
-    const [percentage, setPercentage] = useState(initialValue / max);
+    const [percentage, setPercentage] = useState(normalizePercentage(initialValue, max));
 
     const handleChange = (event) => {
         const value = event.target.value;
 
         if (value >= min && value <= max) {
             setValue(value);
-
-            let calculedPercentage = value / max * 100
-            if (calculedPercentage > 90) {
-                calculedPercentage -= 2;
-            } else if (calculedPercentage < 1) {
-                calculedPercentage = 0;
-            } else if (calculedPercentage < 5) {
-                calculedPercentage = 4;
-            }
-
-            setPercentage(calculedPercentage);
+            setPercentage(normalizePercentage(value, max));
         }
     }
 
@@ -50,4 +40,18 @@ export default ({ initialValue, min, max }) => {
             <input className="counter" type="number" min={min} max={max} value={value} onChange={handleChange} />
         </RangeSlider>
     )
+}
+
+const normalizePercentage = (value, max) => {
+    let calculedPercentage = value / max * 100;
+
+    if (calculedPercentage > 90) {
+        return calculedPercentage - 2;
+    } else if (calculedPercentage < 1) {
+        return 0;
+    } else if (calculedPercentage < 5) {
+        return 4;
+    } else {
+        return calculedPercentage;
+    }
 }

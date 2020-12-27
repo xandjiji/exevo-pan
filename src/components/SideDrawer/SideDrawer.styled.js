@@ -1,15 +1,17 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    height: 80vh;
-    width: 75vw;
+    height: 100vh;
+    max-height: 740px;
+    overflow-y: auto;
+    width: 90vw;
     max-width: 560px;
     border-radius: 0 0 4px 0;
     background-color: var(--surface);
 
     .drawer-header {
-        padding-top: 8px;
-        padding-bottom: 8px;
+        padding-top: 22px;
+        padding-bottom: 18px;
         margin-bottom: 24px;
         display: flex;
         align-items: center;
@@ -25,5 +27,11 @@ export default styled.div`
             height: 30px;
             fill: var(--onPrimary);
         }
+    }
+
+    .skills-wrapper {
+        margin-top: 16px;
+        display: flex;
+        flex-wrap: wrap;
     }
 `;
