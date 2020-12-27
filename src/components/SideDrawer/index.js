@@ -3,6 +3,7 @@ import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Tag from '../Tag';
 import AutocompleteInput from '../AutocompleteInput';
+import RangeSlider from '../RangeSlider';
 
 import ArrowIcon from '../../assets/svgs/arrowBack.svg';
 
@@ -42,6 +43,9 @@ export default ({ backAction }) => {
                     <AutocompleteInput items={ServerNames} placeholder="Choose a server" />
                 </FilterGroup>
 
+                <FilterGroup title="Level">
+                    <RangeSlider initialValue={0} min={0} max={1000} />
+                </FilterGroup>
             </div>
         </SideDrawer>
     )

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
     height: 80vh;
     width: 75vw;
+    max-width: 560px;
     border-radius: 0 0 4px 0;
     background-color: var(--surface);
 
@@ -24,9 +25,5 @@ export default styled.div`
             height: 30px;
             fill: var(--onPrimary);
         }
-    }
-
-    .items-wrapper {
-        
     }
 `;

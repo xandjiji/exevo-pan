@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.form`
+export default styled.div`
     position: relative;
 
     input {

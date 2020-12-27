@@ -5,7 +5,7 @@ import CharCard from '../CharCard';
 
 import SideDrawerContext from '../../contexts/SideDrawerContext/context';
 import AllCharacterData from '../../contexts/AllCharacterData';
-import SortIcon from '../../assets/svgs/sort.svg';
+import FilterIcon from '../../assets/svgs/filter.svg';
 
 export default ({ itemsPerPage }) => {
     const { toggleSideDrawer } = useContext(SideDrawerContext);
@@ -33,7 +33,7 @@ export default ({ itemsPerPage }) => {
     return (
         <CharGrid>
             <div className="grid-header shadow inner-container">
-                <SortIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
+                <FilterIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
 
                 <Paginator
                     itemsPerPage={itemsPerPage}

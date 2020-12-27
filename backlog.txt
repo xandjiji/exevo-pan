@@ -1,6 +1,9 @@
 useMemo
 throttle paginator
 fav function
+next scroll to top
+x clear autocomplete input
+reset filters
 
 codesplitting (json)
 font css preload
@@ -11,7 +14,7 @@ filters:
     minimum skill           slider
         vocation                [4]
 
-    specific server         [dropdown]
+        specific server         [dropdown]
         specific server pvp     [5]
         specific battleye       [2]
 
