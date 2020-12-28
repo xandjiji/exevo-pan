@@ -17,7 +17,8 @@ export default ({ backAction }) => {
         location: new Set([]),
         server: '',
         minLevel: 2,
-        minSkill: 10
+        minSkill: 10,
+        skillKey: new Set([])
     });
 
     const updateFilterValue = (key, value) => {
@@ -103,12 +104,11 @@ export default ({ backAction }) => {
                     <RangeSlider initialValue={10} min={10} max={130} onChange={(value) => updateFilterValue('minSkill', value)} />
 
                     <div className="skills-wrapper">
-                        <Tag clickable>Magic</Tag>
-                        <Tag clickable>Distance</Tag>
-                        <Tag clickable>Club</Tag>
-                        <Tag clickable>Sword</Tag>
-                        <Tag clickable>Axe</Tag>
-                        <Tag clickable>All meelee</Tag>
+                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'magic')}>Magic</Tag>
+                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'distance')}>Distance</Tag>
+                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'club')}>Club</Tag>
+                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'sword')}>Sword</Tag>
+                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'axe')}>Axe</Tag>
                     </div>
                 </FilterGroup>
             </div>
