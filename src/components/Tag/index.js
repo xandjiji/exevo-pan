@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import Tag from './Tag.styled';
 
-export default ({ children, clickable }) => {
+export default ({ children, clickable, onClick }) => {
     const [active, setActive] = useState(false);
 
     const handleClick = () => {
-        if(clickable) setActive(!active);
+        if(clickable) {
+            setActive(!active);
+            if(onClick) onClick();
+        }
     }
 
     return (

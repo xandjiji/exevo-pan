@@ -1,12 +1,14 @@
 import React, { useState, useRef } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
-export default ({ items, placeholder }) => {
+export default ({ items, placeholder, onChange }) => {
     const uniqueID = useRef(Math.random())
     const [term, setTerm] = useState('');
 
     const handleChange = (event) => {
-        setTerm(event.target.value);
+        const { value } = event.target;
+        setTerm(value);
+        onChange(value);
     }
 
     const stopBubbling = (event) => {

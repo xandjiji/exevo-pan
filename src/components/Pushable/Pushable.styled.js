@@ -12,7 +12,7 @@ export default styled.div`
         z-index: -1;
         width: 300vw;
         height: 100vh;
-        background-color: #0000004A;
+        background-color: #0000008A;
         outline: none;
         transition: opacity 0.2s ease-out;
     }

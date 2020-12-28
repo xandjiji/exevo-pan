@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import RangeSlider from './RangeSlider.styled';
 
-export default ({ initialValue, min, max }) => {
+export default ({ initialValue, min, max, onChange }) => {
     const [value, setValue] = useState(initialValue);
     const [percentage, setPercentage] = useState(normalizePercentage(initialValue, max));
 
     const handleChange = (event) => {
-        const value = event.target.value;
+        const value = Number(event.target.value);
 
         if (value >= min && value <= max) {
             setValue(value);
+            onChange(value);
             setPercentage(normalizePercentage(value, max));
         }
     }

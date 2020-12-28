@@ -5,6 +5,7 @@ next scroll to top
 x clear autocomplete input
 reset filters
 consertar height vh mobile
+min lvl min skill
 
 codesplitting (json)
 font css preload
@@ -18,6 +19,7 @@ filters:
         specific server         [dropdown]
         specific server pvp     [5]
         specific battleye       [2]
+        server location
 
 sorters:
     level

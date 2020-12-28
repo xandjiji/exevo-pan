@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export default styled.div`
     height: 100vh;
-    max-height: 740px;
+    max-height: 800px;
     overflow-y: auto;
     width: 90vw;
     max-width: 560px;
