@@ -65,8 +65,24 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="BattlEye" display="flex">
-                    <Tag clickable onClick={() => updateFilterSet('battleye', true)}>Green</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('battleye', false)}>Yellow</Tag>
+                    <div className="battleye-wrapper">
+                        <Tag clickable onClick={() => updateFilterSet('battleye', true)}>
+                            <span
+                                className="battleye-icon"
+                                style={{ backgroundColor: `var(--battleGreen)` }}
+                            >
+                            </span>
+                        Green
+                    </Tag>
+                        <Tag clickable onClick={() => updateFilterSet('battleye', false)}>
+                            <span
+                                className="battleye-icon"
+                                style={{ backgroundColor: `var(--battleYellow)` }}
+                            >
+                            </span>
+                        Yellow
+                    </Tag>
+                    </div>
                 </FilterGroup>
 
                 <FilterGroup title="Server location" display="flex">

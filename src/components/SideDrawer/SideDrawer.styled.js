@@ -34,4 +34,23 @@ export default styled.div`
         display: flex;
         flex-wrap: wrap;
     }
+
+    .battleye-wrapper {
+        display: flex;
+        
+        > * {
+            display: flex;
+            align-items: center;
+        }
+
+        .battleye-icon {
+            margin: 0 6px 0 0;
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: solid 1px #00000020;
+            box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
+        }
+    }
 `;

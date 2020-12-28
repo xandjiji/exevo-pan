@@ -5,7 +5,7 @@ next scroll to top
 x clear autocomplete input
 reset filters
 consertar height vh mobile
-min lvl min skill
+min lvl min skill type
 
 codesplitting (json)
 font css preload
