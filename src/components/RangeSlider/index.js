@@ -8,7 +8,7 @@ export default ({ initialValue, min, max, onChange }) => {
     const handleChange = (event) => {
         const value = Number(event.target.value);
 
-        if (value >= min && value <= max) {
+        if (value <= max) {
             setValue(value);
             onChange(value);
             setPercentage(normalizePercentage(value, max));

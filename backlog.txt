@@ -5,24 +5,7 @@ next scroll to top
 x clear autocomplete input
 reset filters
 consertar height vh mobile
-min lvl min skill type
 
 codesplitting (json)
 font css preload
 padronizar SVGS (https://material.io/resources/icons/?style=baseline)
-
-filters:
-        minimum level           slider
-        minimum skill           slider
-        vocation                [4]
-
-        specific server         [dropdown]
-        specific server pvp     [5]
-        specific battleye       [2]
-        server location
-
-sorters:
-    level
-    skill
-    endDate
-    bidAmount
