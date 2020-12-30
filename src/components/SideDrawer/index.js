@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Tag from '../Tag';
@@ -9,13 +9,18 @@ import ArrowIcon from '../../assets/svgs/arrowBack.svg';
 
 import ServerNames from '../../../serverNames.json';
 
+import CharacterDataContext from '../../contexts/CharacterData/context';
+
 export default ({ backAction }) => {
+
+    const context = useContext(CharacterDataContext);
+
     const [filters, setFilters] = useState({
         vocation: new Set(),
         pvp: new Set([]),
         battleye: new Set([]),
         location: new Set([]),
-        server: '',
+        serverName: '',
         minLevel: 2,
         minSkill: 10,
         skillKey: new Set([])
@@ -40,6 +45,11 @@ export default ({ backAction }) => {
             [key]: filters[key]
         });
     }
+
+    useEffect(() => {
+        context.dispatch({ type: 'APPLY_FILTERS', filterState: filters });
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [filters]);
 
     return (
         <SideDrawer className="shadow">
@@ -93,7 +103,7 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Server" display="flex">
-                    <AutocompleteInput items={ServerNames} placeholder="Choose a server" onChange={(value) => updateFilterValue('server', value)} />
+                    <AutocompleteInput items={ServerNames} placeholder="Choose a server" onChange={(value) => updateFilterValue('serverName', value)} />
                 </FilterGroup>
 
                 <FilterGroup title="Level" display="flex">

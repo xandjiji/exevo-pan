@@ -3,14 +3,17 @@ import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 
-import SideDrawerContext from '../../contexts/SideDrawerContext/context';
-import AllCharacterData from '../../contexts/AllCharacterData';
+import SideDrawerContext from '../../contexts/SideDrawer/context';
+import CharacterDataContext from '../../contexts/CharacterData/context';
+
 import FilterIcon from '../../assets/svgs/filter.svg';
 
 export default ({ itemsPerPage }) => {
     const { toggleSideDrawer } = useContext(SideDrawerContext);
 
-    const data = useContext(AllCharacterData);
+    const context = useContext(CharacterDataContext);
+    let data = context.characterData;
+
     const [charList, setCharList] = useState(data.slice(0, 30));
 
     const [index, setIndex] = useState(0);
