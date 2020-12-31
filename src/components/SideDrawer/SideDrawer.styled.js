@@ -29,8 +29,21 @@ export default styled.div`
     }
 
     .items-wrapper {
+        position: relative;
         height: calc(100% - 130px);
         overflow-y: auto;
+
+        &::before {
+            content: '';
+            position: fixed;
+            bottom: 36px;
+            left: 0;
+            z-index: 2;
+            width: calc(100% - 6px);
+            height: 36px;
+            background-image: linear-gradient(to top, var(--surface), rgba(0,0,0,0));
+            pointer-events: none;
+        }
     }
 
     .skills-wrapper {
