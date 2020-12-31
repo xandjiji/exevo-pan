@@ -3,11 +3,16 @@ import AutocompleteInput from './AutocompleteInput.styled';
 
 export default ({ items, placeholder, onChange }) => {
     const uniqueID = useRef(Math.random())
+    const inputRef = useRef(null);
     const [term, setTerm] = useState('');
 
     const handleChange = (event) => {
         const { value } = event.target;
         setTerm(value);
+    }
+
+    const handleKey = (event) => {
+        if(event.key === 'Enter') inputRef.current.blur();
     }
 
     useEffect(() => {
@@ -32,6 +37,8 @@ export default ({ items, placeholder, onChange }) => {
                 placeholder={placeholder}
                 value={term}
                 onChange={handleChange}
+                onKeyDown={handleKey}
+                ref={inputRef}
             />
 
             <datalist id={uniqueID.current}>

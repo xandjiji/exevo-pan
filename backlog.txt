@@ -1,10 +1,8 @@
 Itens
-Remover imbuiments
 Sorts
 Github link
 Seo
 Analytics
-Input on enter onblur
 
 codesplitting (json)
 font css preload
