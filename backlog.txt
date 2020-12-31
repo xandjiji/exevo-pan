@@ -1,11 +1,5 @@
-useMemo
-throttle paginator
 fav function
-next scroll to top
-x clear autocomplete input
-reset filters
 consertar height vh mobile
 
 codesplitting (json)
 font css preload
-padronizar SVGS (https://material.io/resources/icons/?style=baseline)

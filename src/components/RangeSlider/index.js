@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import RangeSlider from './RangeSlider.styled';
 
 export default ({ initialValue, min, max, onChange }) => {
@@ -10,10 +10,15 @@ export default ({ initialValue, min, max, onChange }) => {
 
         if (value <= max) {
             setValue(value);
-            onChange(value);
             setPercentage(normalizePercentage(value, max));
         }
     }
+
+    useEffect(() => {
+        const timeOutObj = setTimeout(() => onChange(value), 500);
+        return () => clearTimeout(timeOutObj);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    },[value]);
 
     const stopBubbling = (event) => {
         event.stopPropagation();

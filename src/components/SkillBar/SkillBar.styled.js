@@ -25,6 +25,7 @@ export default styled.div`
         text-transform: capitalize;
         font-size: 12px;
         font-weight: 300;
+        color: var(--onSurface);
 
         .progress-bar {
             margin-top: 1px;

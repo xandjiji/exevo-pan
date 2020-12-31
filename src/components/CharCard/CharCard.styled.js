@@ -64,6 +64,7 @@ export default styled.div`
 
         .overview-content {
             font-size: 14px;
+            color: var(--onSurface);
         }
 
         .row {

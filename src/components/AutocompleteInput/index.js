@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
 export default ({ items, placeholder, onChange }) => {
@@ -8,8 +8,13 @@ export default ({ items, placeholder, onChange }) => {
     const handleChange = (event) => {
         const { value } = event.target;
         setTerm(value);
-        onChange(value);
     }
+
+    useEffect(() => {
+        const timeOutObj = setTimeout(() => onChange(term), 500);
+        return () => clearTimeout(timeOutObj);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [term]);
 
     const stopBubbling = (event) => {
         event.stopPropagation();
@@ -20,6 +25,7 @@ export default ({ items, placeholder, onChange }) => {
             onMouseDown={stopBubbling}
             onMouseUp={stopBubbling}
             onMouseMove={stopBubbling}
+            className={term === '' ? null : 'active'}
         >
             <input
                 list={uniqueID.current}
@@ -39,6 +45,16 @@ export default ({ items, placeholder, onChange }) => {
                     )
                 })}
             </datalist>
+
+            {/* eslint-disable */}
+            <div
+                className="reset-button"
+                onClick={() => setTerm('')}
+                role="button"
+                tabIndex="0"
+            >
+            </div>
+            {/* eslint-enable */}
         </AutocompleteInput>
     )
 }
