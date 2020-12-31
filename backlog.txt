@@ -1,6 +1,3 @@
-consertar height vh mobile
-Overflow auto filters
-
 Itens
 Remover imbuiments
 Sorts

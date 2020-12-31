@@ -58,7 +58,7 @@ export default ({ backAction }) => {
                 Filters
             </div>
 
-            <div className="items-wrapper inner-container">
+            <div className="items-wrapper inner-container custom-scrollbar">
                 <FilterGroup title="Vocation" display="flex">
                     <Tag clickable onClick={() => updateFilterSet('vocation', 0)}>None</Tag>
                     <Tag clickable onClick={() => updateFilterSet('vocation', 1)}>Knight</Tag>

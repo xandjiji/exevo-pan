@@ -4,23 +4,15 @@ html * {
     font-size: 12px;
 }
 
-html, body, #___gatsby, #gatsby-focus-wrapper {
-    height: 100%;
-    overflow: hidden;
-    overscroll-behavior: contain;
-}
-
-/* GAMBIARRA */
-.body-container {
-    position: relative;
-    height: calc(100% - 90px);
+html, body, #root {
+    overflow-x: hidden;
 }
 
 .pushable-item {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    z-index: 25;
+    z-index: 100;
 }
 
 .pushable-item:not(.active) {
@@ -87,18 +79,21 @@ svg {
     font-display: swap;
 }
 
-.custom-scrollbar::-webkit-scrollbar {
+.custom-scrollbar::-webkit-scrollbar,
+html::-webkit-scrollbar {
     width: 6px;
     background-color: transparent;
     border-radius: 2px;
 }
 
-.custom-scrollbar::-webkit-scrollbar-thumb {
+.custom-scrollbar::-webkit-scrollbar-thumb,
+html::-webkit-scrollbar-thumb {
     background-color: var(--primaryVariant);
     border-radius: 2px;
 }
 
-.custom-scrollbar {
+.custom-scrollbar,
+html {
     scrollbar-color: var(--primaryVariant) transparent;
     scrollbar-width: thin;
 }

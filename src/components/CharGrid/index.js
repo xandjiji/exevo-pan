@@ -9,6 +9,7 @@ import CharacterDataContext from '../../contexts/CharacterData/context';
 import { ReactComponent as FilterIcon } from '../../assets/svgs/filter.svg';
 
 export default ({ itemsPerPage }) => {
+    const gridRef = useRef(null);
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
@@ -23,6 +24,7 @@ export default ({ itemsPerPage }) => {
 
     const handleAction = (value) => {
         setIndex(value);
+        gridRef.current.scrollTo({ top: 0, behavior: 'smooth' });
         listRef.current.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -32,7 +34,7 @@ export default ({ itemsPerPage }) => {
     }, [index, characterData]);
 
     return (
-        <CharGrid>
+        <CharGrid className="custom-scrollbar" ref={gridRef}>
             <div className="grid-header shadow inner-container">
                 <FilterIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
 

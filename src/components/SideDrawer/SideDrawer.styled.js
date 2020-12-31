@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export default styled.div`
     height: 100vh;
     max-height: 800px;
-    overflow-y: auto;
     width: 90vw;
     max-width: 560px;
     border-radius: 0 0 4px 0;
@@ -27,6 +26,11 @@ export default styled.div`
             height: 30px;
             fill: var(--onPrimary);
         }
+    }
+
+    .items-wrapper {
+        height: calc(100% - 130px);
+        overflow-y: auto;
     }
 
     .skills-wrapper {

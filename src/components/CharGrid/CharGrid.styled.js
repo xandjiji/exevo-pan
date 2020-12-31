@@ -1,9 +1,14 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    height: 100%;
+    height: 100vh;
+    overflow: auto;
 
     .grid-header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 50;
         padding-top: 8px;
         padding-bottom: 8px;
         display: flex;
@@ -21,10 +26,9 @@ export default styled.div`
     }
 
     .items-wrapper {
+        margin-top: 70px;
         padding-top: 16px;
         position: relative;
-        height: 100%;
-        overflow: auto;
         
         display: grid;
         grid-gap: 16px;
@@ -34,7 +38,7 @@ export default styled.div`
         &::after {
             content: '';
             grid-column: 1 / -1;
-            height: 1px;
+            height: 48px;
         }
 
         &::before {
