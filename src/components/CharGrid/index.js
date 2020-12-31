@@ -6,7 +6,7 @@ import CharCard from '../CharCard';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
 import CharacterDataContext from '../../contexts/CharacterData/context';
 
-import FilterIcon from '../../assets/svgs/filter.svg';
+import { ReactComponent as FilterIcon } from '../../assets/svgs/filter.svg';
 
 export default ({ itemsPerPage }) => {
     const listRef = useRef(null);

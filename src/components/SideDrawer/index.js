@@ -5,9 +5,9 @@ import Tag from '../Tag';
 import AutocompleteInput from '../AutocompleteInput';
 import RangeSlider from '../RangeSlider';
 
-import ArrowIcon from '../../assets/svgs/arrowBack.svg';
+import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
 
-import ServerNames from '../../../serverNames.json';
+import ServerNames from '../../serverNames.json';
 
 import CharacterDataContext from '../../contexts/CharacterData/context';
 

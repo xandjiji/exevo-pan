@@ -1,4 +1,4 @@
-import data from '../../../AllCharacterData.json';
+import data from '../../AllCharacterData.json';
 const currentDate = new Date();
 let initialData = [...data];
 

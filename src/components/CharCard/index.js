@@ -6,7 +6,7 @@ import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
 import Tag from '../Tag';
 
-import ExternalIcon from '../../assets/svgs/external.svg';
+import { ReactComponent as ExternalIcon } from '../../assets/svgs/external.svg';
 import BrFlag from '../../assets/br-flag.png';
 import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';

@@ -1,8 +1,8 @@
 import React, { useState, useMemo } from 'react';
 import Paginator from './Paginator.styled';
 
-import NextIcon from '../../assets/svgs/next.svg';
-import LastIcon from '../../assets/svgs/last.svg';
+import { ReactComponent as NextIcon} from '../../assets/svgs/next.svg';
+import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
 export default ({ itemsPerPage, dataSize, handleAction }) => {
 

@@ -1,15 +1,15 @@
 import React from 'react';
-import MasterLayout from '../layouts/MasterLayout';
-import CharGrid from '../components/CharGrid';
-import Pushable from '../components/Pushable';
-import SideDrawer from '../components/SideDrawer';
+import MasterLayout from './layouts/MasterLayout';
+import CharGrid from './components/CharGrid';
+import Pushable from './components/Pushable';
+import SideDrawer from './components/SideDrawer';
 
-import SideDrawerProvider from '../contexts/SideDrawer/'
-import SideDrawerContext from '../contexts/SideDrawer/context';
+import SideDrawerProvider from './contexts/SideDrawer/'
+import SideDrawerContext from './contexts/SideDrawer/context';
 
-import CharacterDataProvider from '../contexts/CharacterData';
+import CharacterDataProvider from './contexts/CharacterData';
 
-const IndexPage = () => {
+const App = () => {
     return (
         <MasterLayout>
             <SideDrawerProvider>
@@ -34,4 +34,4 @@ const IndexPage = () => {
     )
 }
 
-export default IndexPage;
+export default App;
