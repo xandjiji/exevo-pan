@@ -4,6 +4,7 @@ import FilterGroup from '../FilterGroup';
 import Tag from '../Tag';
 import AutocompleteInput from '../AutocompleteInput';
 import RangeSlider from '../RangeSlider';
+import DrawerFooter from '../DrawerFooter';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
 
@@ -122,6 +123,8 @@ export default ({ backAction }) => {
                     </div>
                 </FilterGroup>
             </div>
+
+            <DrawerFooter />
         </SideDrawer>
     )
 }

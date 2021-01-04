@@ -30,13 +30,13 @@ export default styled.div`
 
     .items-wrapper {
         position: relative;
-        height: calc(100% - 130px);
+        height: calc(100% - 142px);
         overflow-y: auto;
 
         &::before {
             content: '';
             position: fixed;
-            bottom: 36px;
+            bottom: 48px;
             left: 0;
             z-index: 2;
             width: calc(100% - 6px);
