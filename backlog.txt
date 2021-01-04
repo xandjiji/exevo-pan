@@ -1,8 +1,8 @@
-Seo
 Analytics
 Docs
 Scripting deploy
 script scrap update price
+change SEO link (canonical etc)
 
 Itens
 Sorts
