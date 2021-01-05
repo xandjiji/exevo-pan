@@ -57,6 +57,25 @@ export default styled.div`
         justify-content: space-between;
         flex-wrap: wrap;
 
+        .item-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+
+            > * {
+                width: 48px;
+                height: 48px;
+
+                img {
+                    margin: 0;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+            }
+        }
+
         > * {
             width: calc(50% - 4px);
             margin-bottom: 12px;

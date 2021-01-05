@@ -24,6 +24,7 @@ export default ({ charData }) => {
         vocation,
         server,
         skills,
+        items,
         charms
     } = charData;
     const endDate = new Date(auctionEnd * 1000);
@@ -40,6 +41,8 @@ export default ({ charData }) => {
 
         setHighlightedSkill(biggest);
     }, [skills]);
+
+    console.log(items);
 
 
     return (
@@ -64,7 +67,6 @@ export default ({ charData }) => {
             </div>
 
             <div className="overview">
-
                 <LabeledText label="Server" warning={server.experimental} warningText="This is an experimental server!">
                     <div className="overview-content row">
                         <img
@@ -104,6 +106,10 @@ export default ({ charData }) => {
                         {numberWithCommas(currentBid)}
                     </div>
                 </LabeledText>
+
+                <div className="item-wrapper">
+                    {items.map(makeItemImg)}
+                </div>
             </div>
 
             <div className="card-footer">
@@ -127,6 +133,18 @@ export default ({ charData }) => {
             </div>
         </CharCard>
     )
+}
+
+const makeItemImg = (item) => {
+    if (item !== null) {
+        return (
+            <ImagePortrait
+                src={`https://static.tibia.com/images/charactertrade/objects/${item.src}`}
+                alt={item.name}
+                title={item.name}
+            />
+        )
+    }
 }
 
 const getFlag = (type) => {
