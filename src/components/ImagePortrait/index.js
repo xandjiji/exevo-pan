@@ -9,20 +9,21 @@ export default ({ src, alt, title }) => {
 
     useEffect(() => {
         setImgSrc(src);
-    },[src])
+    }, [src])
 
 
     return (
         <ImagePortrait className="shadow">
-            <img
-                className={loaded ? 'loaded' : 'loading'}
-                src={imgSrc}
-                alt={alt}
-                title={title}
-                onLoad={() => setLoaded(true)}
-                onError={() => setLoaded(false)}
-            />
-            <div className={loaded ? 'loader hidden' : 'loader'}></div>
+            {src ?
+                <img
+                    className={loaded ? 'loaded' : 'loading'}
+                    src={imgSrc}
+                    alt={alt}
+                    title={title}
+                    onLoad={() => setLoaded(true)}
+                    onError={() => setLoaded(false)}
+                /> : null}
+            { src ? <div className={loaded ? 'loader hidden' : 'loader'}></div> : null }
         </ImagePortrait>
     )
 }

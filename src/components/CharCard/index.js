@@ -144,6 +144,10 @@ const makeItemImg = (item) => {
                 title={item.name}
             />
         )
+    } else {
+        return (
+            <ImagePortrait />
+        )
     }
 }
 
