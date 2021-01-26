@@ -30,7 +30,9 @@ You can find the application [here](https://exevopan.netlify.app/).
 Since there is no official API from Cipsoft, all the data used in this app is scraped from the official [Tibia](https://www.tibia.com/) website. You can check the scraping scripts [here](https://github.com/xandjiji/tibia-bazaar-scraper).
 
 The data file needs to be located at:
+
 `exevo-pan/src/LatestCharacterData.json`
+
 `exevo-pan/src/serverNames.json`
 
 Here is a sample of how the `LatestCharacterData.json` should be structured:
