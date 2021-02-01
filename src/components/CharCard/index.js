@@ -14,9 +14,9 @@ import TibiaCoinIcon from '../../assets/tibiacoin.png';
 
 export default ({ charData }) => {
     const {
+        id,
         nickname,
         outfitId,
-        href,
         currentBid,
         hasBeenBidded,
         auctionEnd,
@@ -42,21 +42,18 @@ export default ({ charData }) => {
         setHighlightedSkill(biggest);
     }, [skills]);
 
-    console.log(items);
-
-
     return (
         <CharCard className="shadow">
             <div className="card-head">
                 <ImagePortrait
-                    src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}`}
+                    src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
                     alt={nickname}
                     title={nickname}
                 />
                 <div className="head-info">
                     <p className="nickname">
                         {nickname}
-                        <a href={href} target="_blank" rel="noreferrer">
+                        <a href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}&source=overview`} target="_blank" rel="noreferrer">
                             <ExternalIcon className="clickable" />
                         </a>
                     </p>
@@ -139,7 +136,7 @@ const makeItemImg = (item) => {
     if (item !== null) {
         return (
             <ImagePortrait
-                src={`https://static.tibia.com/images/charactertrade/objects/${item.src}`}
+                src={`https://static.tibia.com/images/charactertrade/objects/${item.src}.gif`}
                 alt={item.name}
                 title={item.name}
             />
