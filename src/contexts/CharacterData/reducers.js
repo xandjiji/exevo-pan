@@ -1,4 +1,8 @@
 import data from '../../LatestCharacterData.json';
+import serverData from '../../serverData.json';
+
+console.log(serverData[0]);
+
 const currentDate = new Date();
 let initialData = [...data];
 
@@ -41,20 +45,19 @@ const applyFilters = (filterState) => {
         }
 
         if (pvp.size) {
-            if (!pvp.has(server.pvpType.type)) continue;
+            if (!pvp.has(serverData[server].pvpType.type)) continue;
         }
 
         if (battleye.size) {
-            if (!battleye.has(server.battleye)) continue;
+            if (!battleye.has(serverData[server].battleye)) continue;
         }
 
         if (location.size) {
-            if (!location.has(server.serverLocation.type)) continue;
+            if (!location.has(serverData[server].serverLocation.type)) continue;
         }
 
         if (serverName) {
-            const reg = new RegExp(serverName, 'gi');
-            if (!reg.test(server.serverName)) continue;
+            if (serverName !== server) continue;
         }
 
         if(skillKey.size) {

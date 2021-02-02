@@ -6,6 +6,8 @@ export default ({ items, placeholder, onChange }) => {
     const inputRef = useRef(null);
     const [term, setTerm] = useState('');
 
+    const dataList = Object.keys(items);
+
     const handleChange = (event) => {
         const { value } = event.target;
         setTerm(value);
@@ -16,7 +18,7 @@ export default ({ items, placeholder, onChange }) => {
     }
 
     useEffect(() => {
-        const timeOutObj = setTimeout(() => onChange(term), 500);
+        const timeOutObj = setTimeout(() => onChange(items[term]), 500);
         return () => clearTimeout(timeOutObj);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [term]);
@@ -42,12 +44,12 @@ export default ({ items, placeholder, onChange }) => {
             />
 
             <datalist id={uniqueID.current}>
-                {items.map((item, index) => {
+                {dataList.map((item, index) => {
                     return (
                         <option
                             key={index}
-                            value={item}
                             aria-label="Input option"
+                            value={item}
                         />
                     )
                 })}

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import CharCard from './CharCard.styled';
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
 import Tag from '../Tag';
+
+import serverDataContext from '../../contexts/ServerData/context';
 
 import { ReactComponent as ExternalIcon } from '../../assets/svgs/external.svg';
 import BrFlag from '../../assets/br-flag.png';
@@ -13,6 +15,7 @@ import NaFlag from '../../assets/na-flag.png';
 import TibiaCoinIcon from '../../assets/tibiacoin.png';
 
 export default ({ charData }) => {
+    const serverData = useContext(serverDataContext);
     const {
         id,
         nickname,
@@ -27,6 +30,9 @@ export default ({ charData }) => {
         items,
         charms
     } = charData;
+
+    const currentServer = serverData[server];
+
     const endDate = new Date(auctionEnd * 1000);
 
     const [highlightedSkill, setHighlightedSkill] = useState(null);
@@ -64,15 +70,15 @@ export default ({ charData }) => {
             </div>
 
             <div className="overview">
-                <LabeledText label="Server" warning={server.experimental} warningText="This is an experimental server!">
+                <LabeledText label="Server" warning={currentServer.experimental} warningText="This is an experimental server!">
                     <div className="overview-content row">
                         <img
                             className="flag"
-                            alt={server.serverLocation.string}
-                            title={server.serverLocation.string}
-                            src={getFlag(server.serverLocation.type)}
+                            alt={currentServer.serverLocation.string}
+                            title={currentServer.serverLocation.string}
+                            src={getFlag(currentServer.serverLocation.type)}
                         />
-                        {server.serverName}
+                        {currentServer.serverName}
                     </div>
                 </LabeledText>
 
@@ -80,10 +86,10 @@ export default ({ charData }) => {
                     <div className="overview-content row">
                         <span
                             className="battleye"
-                            style={{ backgroundColor: `${server.battleye ? 'var(--battleGreen)' : 'var(--battleYellow)'}` }}
+                            style={{ backgroundColor: `${currentServer.battleye ? 'var(--battleGreen)' : 'var(--battleYellow)'}` }}
                         >
                         </span>
-                        {server.pvpType.string}
+                        {currentServer.pvpType.string}
                     </div>
                 </LabeledText>
 

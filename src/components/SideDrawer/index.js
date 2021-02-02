@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Tag from '../Tag';
@@ -8,13 +8,20 @@ import DrawerFooter from '../DrawerFooter';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
 
-import ServerNames from '../../serverNames.json';
-
+import ServerDataContext from '../../contexts/ServerData/context';
 import CharacterDataContext from '../../contexts/CharacterData/context';
 
 export default ({ backAction }) => {
 
-    const context = useContext(CharacterDataContext);
+    const charContext = useContext(CharacterDataContext);
+    const serverContext = useContext(ServerDataContext);
+
+    const serverKeyValues = useRef({});
+    useEffect(() => {
+        for(let i = 0; i < serverContext.length; i++) {
+            serverKeyValues.current[serverContext[i].serverName] = i;
+        }
+    }, [serverContext]);
 
     const [filters, setFilters] = useState({
         vocation: new Set(),
@@ -48,7 +55,7 @@ export default ({ backAction }) => {
     }
 
     useEffect(() => {
-        context.dispatch({ type: 'APPLY_FILTERS', filterState: filters });
+        charContext.dispatch({ type: 'APPLY_FILTERS', filterState: filters });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
@@ -104,7 +111,7 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Server" display="flex">
-                    <AutocompleteInput items={ServerNames} placeholder="Choose a server" onChange={(value) => updateFilterValue('serverName', value)} />
+                    <AutocompleteInput items={serverKeyValues.current} placeholder="Choose a server" onChange={(value) => updateFilterValue('serverName', value)} />
                 </FilterGroup>
 
                 <FilterGroup title="Level" display="flex">
