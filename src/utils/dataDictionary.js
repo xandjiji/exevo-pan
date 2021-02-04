@@ -10,7 +10,39 @@ const dictionaryFactory = (keyArray) => {
     return dictionaryObject;
 }
 
-const charmDictionary = dictionaryFactory([
+const translateObjectOrArray = (variable) => {
+    if (Array.isArray(variable)) {
+        const newArray = [];
+        for (const key of variable) {
+            newArray.push(dictionary[key]);
+        }
+        return newArray;
+
+    } else {
+        const newObject = {};
+
+        for (const key in variable) {
+            newObject[dictionary[key]] = variable[key];
+        }
+        return newObject;
+    }
+}
+
+const translateCharObject = (charObject) => {
+    const newCharObject = translateObjectOrArray(charObject);
+
+    newCharObject.charms = translateObjectOrArray(newCharObject.charms);
+    newCharObject.skills = translateObjectOrArray(newCharObject.skills);
+    for(const key of Object.keys(newCharObject.skills)) {
+        newCharObject.skills[key] = translateObjectOrArray(newCharObject.skills[key]);
+    }
+
+    return newCharObject;
+}
+
+const dictionary = dictionaryFactory([
+    'level',
+    'percentage',
     'Dodge',
     'Wound',
     'Curse',
@@ -29,12 +61,7 @@ const charmDictionary = dictionaryFactory([
     "Void's Call",
     'Scavenge',
     'Gut',
-    'Bless'
-]);
-
-const characterDictionary = dictionaryFactory([
-    'level',
-    'percentage',
+    'Bless',
     'src',
     'id',
     'nickname',
@@ -57,4 +84,4 @@ const characterDictionary = dictionaryFactory([
     'charms'
 ]);
 
-module.exports = { charmDictionary, characterDictionary };
+module.exports = { translateCharObject, dictionary };

@@ -1,12 +1,10 @@
-import React, { useReducer, useContext } from 'react';
+import React, { useReducer } from 'react';
 import CharacterDataContext from './context';
-import initialDataContext from './initialData';
+import initialData from './initialData';
 import { characterDataReducer } from './reducers';
 
 
 export default ({ children }) => {
-
-    const initialData = useContext(initialDataContext);
 
     const [characterData, dispatch] = useReducer(characterDataReducer, initialData);
     

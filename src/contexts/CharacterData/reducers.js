@@ -1,19 +1,5 @@
-import data from '../../LatestCharacterData.json';
+import initialData from './initialData';
 import serverData from '../../serverData.json';
-
-const currentDate = new Date();
-let initialData = [...data];
-
-for (let i = 0; i < data.length; i++) {
-    let itemDate = new Date(initialData[i].auctionEnd * 1000);
-
-    if (currentDate > itemDate) {
-        initialData.shift();
-        i -= 1;
-    } else {
-        break;
-    }
-}
 
 const applyFilters = (filterState) => {
 
@@ -33,7 +19,7 @@ const applyFilters = (filterState) => {
 
         const {
             vocationId,
-            server,
+            serverId,
             level,
             skills
         } = character;
@@ -43,19 +29,19 @@ const applyFilters = (filterState) => {
         }
 
         if (pvp.size) {
-            if (!pvp.has(serverData[server].pvpType.type)) continue;
+            if (!pvp.has(serverData[serverId].pvpType.type)) continue;
         }
 
         if (battleye.size) {
-            if (!battleye.has(serverData[server].battleye)) continue;
+            if (!battleye.has(serverData[serverId].battleye)) continue;
         }
 
         if (location.size) {
-            if (!location.has(serverData[server].serverLocation.type)) continue;
+            if (!location.has(serverData[serverId].serverLocation.type)) continue;
         }
 
         if (serverName) {
-            if (serverName !== server) continue;
+            if (serverName !== serverId) continue;
         }
 
         if(skillKey.size) {

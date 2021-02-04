@@ -1,21 +1,7 @@
 import { createContext } from 'react';
-import data from '../../LatestCharacterData.json';
-
-const currentDate = new Date();
-let initialData = [...data];
-
-for (let i = 0; i < data.length; i++) {
-    let itemDate = new Date(initialData[i].auctionEnd * 1000);
-
-    if (currentDate > itemDate) {
-        initialData.shift();
-        i -= 1;
-    } else {
-        break;
-    }
-}
+import initialData from './initialData';
 
 export default createContext({
     characterData: initialData,
-    applyFilter: () => {}
+    applyFilter: () => { }
 });

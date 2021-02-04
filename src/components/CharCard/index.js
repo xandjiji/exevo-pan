@@ -1,8 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import CharCard from './CharCard.styled';
 
-import { charmDictionary, characterDictionary } from '../../utils/dataDictionary';
-
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
@@ -33,18 +31,20 @@ const vocationEnum = {
 export default ({ charData }) => {
     const serverData = useContext(serverDataContext);
 
-    const id = charData[characterDictionary['id']];
-    const nickname = charData[characterDictionary['nickname']];
-    const outfitId = charData[characterDictionary['outfitId']];
-    const currentBid = charData[characterDictionary['currentBid']];
-    const hasBeenBidded = charData[characterDictionary['hasBeenBidded']];
-    const auctionEnd = charData[characterDictionary['auctionEnd']];
-    const level = charData[characterDictionary['level']];
-    const vocationId = charData[characterDictionary['vocationId']];
-    const serverId = charData[characterDictionary['serverId']];
-    const skills = charData[characterDictionary['skills']];
-    const items = charData[characterDictionary['items']];
-    const charms = charData[characterDictionary['charms']];
+    const {
+        id,
+        nickname,
+        outfitId,
+        currentBid,
+        hasBeenBidded,
+        auctionEnd,
+        level,
+        vocationId,
+        serverId,
+        skills,
+        items,
+        charms
+    } = charData;
 
     const currentServer = serverData[serverId];
 
@@ -53,13 +53,13 @@ export default ({ charData }) => {
     const [highlightedSkill, setHighlightedSkill] = useState(null);
 
     useEffect(() => {
-        let biggest = characterDictionary['magic'];
-        biggest = biggest.toString();
+        let biggest = 'magic';
         for (const key in skills) {
-            if (skills[key][characterDictionary['level']] > skills[biggest][characterDictionary['level']]) {
+            if (skills[key].level > skills[biggest].level) {
                 biggest = key;
             }
         }
+
         setHighlightedSkill(biggest);
     }, [skills]);
 
@@ -135,8 +135,8 @@ export default ({ charData }) => {
                     {Object.keys(skills).map(skillItem => {
                         return (
                             <SkillBar
-                                key={characterDictionary[skillItem]}
-                                skillName={characterDictionary[skillItem]}
+                                key={skillItem}
+                                skillName={skillItem}
                                 skill={skills[skillItem]}
                                 highlight={skillItem === highlightedSkill}
                             />
@@ -146,7 +146,7 @@ export default ({ charData }) => {
 
                 {charms.length > 0
                     ? <div className="charms-wrapper">
-                        {charms.map(charmItem => <Tag key={charmDictionary[charmItem]}>{charmDictionary[charmItem]}</Tag>)}
+                        {charms.map(charmItem => <Tag key={charmItem}>{charmItem}</Tag>)}
                     </div>
                     : null
                 }
@@ -157,11 +157,11 @@ export default ({ charData }) => {
 
 const makeItemImg = (itemArray) => {
     const elementArray = [];
-    for(const item of itemArray) {
+    for (const item of itemArray) {
         elementArray.push(<ImagePortrait src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
     }
 
-    while(elementArray.length < 4) {
+    while (elementArray.length < 4) {
         elementArray.push(<ImagePortrait />);
     }
 
