@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import CharCard from './CharCard.styled';
+
+import { charmDictionary, characterDictionary } from '../../utils/dataDictionary';
+
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
@@ -14,37 +17,49 @@ import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
 import TibiaCoinIcon from '../../assets/tibiacoin.png';
 
+const vocationEnum = {
+    '0': 'None',
+    '1': 'Elite Knight',
+    '2': 'Royal Paladin',
+    '3': 'Master Sorcerer',
+    '4': 'Elder Druid',
+    '10': 'None',
+    '11': 'Knight',
+    '12': 'Paladin',
+    '13': 'Sorcerer',
+    '14': 'Druid'
+}
+
 export default ({ charData }) => {
     const serverData = useContext(serverDataContext);
-    const {
-        id,
-        nickname,
-        outfitId,
-        currentBid,
-        hasBeenBidded,
-        auctionEnd,
-        level,
-        vocation,
-        server,
-        skills,
-        items,
-        charms
-    } = charData;
 
-    const currentServer = serverData[server];
+    const id = charData[characterDictionary['id']];
+    const nickname = charData[characterDictionary['nickname']];
+    const outfitId = charData[characterDictionary['outfitId']];
+    const currentBid = charData[characterDictionary['currentBid']];
+    const hasBeenBidded = charData[characterDictionary['hasBeenBidded']];
+    const auctionEnd = charData[characterDictionary['auctionEnd']];
+    const level = charData[characterDictionary['level']];
+    const vocationId = charData[characterDictionary['vocationId']];
+    const serverId = charData[characterDictionary['serverId']];
+    const skills = charData[characterDictionary['skills']];
+    const items = charData[characterDictionary['items']];
+    const charms = charData[characterDictionary['charms']];
+
+    const currentServer = serverData[serverId];
 
     const endDate = new Date(auctionEnd * 1000);
 
     const [highlightedSkill, setHighlightedSkill] = useState(null);
 
     useEffect(() => {
-        let biggest = 'magic';
+        let biggest = characterDictionary['magic'];
+        biggest = biggest.toString();
         for (const key in skills) {
-            if (skills[key].level > skills[biggest].level) {
+            if (skills[key][characterDictionary['level']] > skills[biggest][characterDictionary['level']]) {
                 biggest = key;
             }
         }
-
         setHighlightedSkill(biggest);
     }, [skills]);
 
@@ -64,7 +79,7 @@ export default ({ charData }) => {
                         </a>
                     </p>
                     <div className="level-vocation">
-                        Level {level} - {vocation}
+                        Level {level} - {level >= 20 ? vocationEnum[vocationId] : vocationEnum['1' + vocationId]}
                     </div>
                 </div>
             </div>
@@ -111,25 +126,27 @@ export default ({ charData }) => {
                 </LabeledText>
 
                 <div className="item-wrapper">
-                    {items.map(makeItemImg)}
+                    {makeItemImg(items)}
                 </div>
             </div>
 
             <div className="card-footer">
                 <div className="skills-wrapper">
-                    {Object.keys(skills).map(skillItem =>
-                        <SkillBar
-                            key={skillItem}
-                            skillName={skillItem}
-                            skill={skills[skillItem]}
-                            highlight={skillItem === highlightedSkill}
-                        />)
-                    }
+                    {Object.keys(skills).map(skillItem => {
+                        return (
+                            <SkillBar
+                                key={characterDictionary[skillItem]}
+                                skillName={characterDictionary[skillItem]}
+                                skill={skills[skillItem]}
+                                highlight={skillItem === highlightedSkill}
+                            />
+                        )
+                    })}
                 </div>
 
                 {charms.length > 0
                     ? <div className="charms-wrapper">
-                        {charms.map(charm => <Tag key={charm}>{charm}</Tag>)}
+                        {charms.map(charmItem => <Tag key={charmDictionary[charmItem]}>{charmDictionary[charmItem]}</Tag>)}
                     </div>
                     : null
                 }
@@ -138,20 +155,17 @@ export default ({ charData }) => {
     )
 }
 
-const makeItemImg = (item) => {
-    if (item !== null) {
-        return (
-            <ImagePortrait
-                src={`https://static.tibia.com/images/charactertrade/objects/${item.src}.gif`}
-                alt={item.name}
-                title={item.name}
-            />
-        )
-    } else {
-        return (
-            <ImagePortrait />
-        )
+const makeItemImg = (itemArray) => {
+    const elementArray = [];
+    for(const item of itemArray) {
+        elementArray.push(<ImagePortrait src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
     }
+
+    while(elementArray.length < 4) {
+        elementArray.push(<ImagePortrait />);
+    }
+
+    return elementArray;
 }
 
 const getFlag = (type) => {

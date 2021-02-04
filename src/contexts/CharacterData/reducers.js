@@ -1,8 +1,6 @@
 import data from '../../LatestCharacterData.json';
 import serverData from '../../serverData.json';
 
-console.log(serverData[0]);
-
 const currentDate = new Date();
 let initialData = [...data];
 

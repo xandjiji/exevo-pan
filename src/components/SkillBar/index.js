@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import SkillBar from './SkillBar.styled';
 
+import { characterDictionary } from '../../utils/dataDictionary';
+
 export default ({ skillName, skill, highlight }) => {
 
     const [width, setWidth] = useState(0);
     useEffect(() => {
-        setWidth(skill.percentage);
-    }, [skill.percentage])
+        setWidth(skill[characterDictionary['percentage']]);
+    }, [skill])
 
     return (
         <SkillBar highlight={highlight}>
             <span className="skill-level shadow">
-                {skill.level}
+                {skill[characterDictionary['level']]}
             </span>
 
             <div className="info-wrapper">
