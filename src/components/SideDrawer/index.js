@@ -18,8 +18,9 @@ export default ({ backAction }) => {
 
     const serverKeyValues = useRef({});
     useEffect(() => {
-        for(let i = 0; i < serverContext.length; i++) {
-            serverKeyValues.current[serverContext[i].serverName] = i;
+        for (let i = 0; i < serverContext.length; i++) {
+            serverContext[i].serverId = i;
+            serverKeyValues.current[serverContext[i].serverName] = serverContext[i];
         }
     }, [serverContext]);
 
@@ -39,6 +40,12 @@ export default ({ backAction }) => {
             ...filters,
             [key]: value
         });
+    }
+
+    const updateServerValue = (key, value) => {
+        const currentServerValue = serverKeyValues.current[value];
+        const newValue = (currentServerValue ? currentServerValue.serverId : '');
+        updateFilterValue(key, newValue);
     }
 
     const updateFilterSet = (key, value) => {
@@ -111,7 +118,7 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Server" display="flex">
-                    <AutocompleteInput items={serverKeyValues.current} placeholder="Choose a server" onChange={(value) => updateFilterValue('serverName', value)} />
+                    <AutocompleteInput items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={(value) => updateServerValue('serverName', value)} />
                 </FilterGroup>
 
                 <FilterGroup title="Level" display="flex">
