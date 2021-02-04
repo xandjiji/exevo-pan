@@ -60,10 +60,62 @@
 
         gtag('config', 'G-SWK0XRQT0J');
     </script>
+
+    <style>
+        .loader {
+            position: absolute;
+            top: calc(50% - 12px);
+            left: calc(50% - 12px);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(to right, #3F51B5 10%, rgba(255, 255, 255, 0) 42%);
+            animation: load3 1.4s infinite ease-out;
+            transform: translateZ(0);
+            transition: opacity 0.2s ease-out;
+            z-index: -1;
+        }
+
+        .loader:before {
+            content: '';
+            width: 50%;
+            height: 50%;
+            background: #3F51B5;
+            border-radius: 100% 0 0 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .loader:after {
+            content: '';
+            background: #EEEEEE;
+            width: 75%;
+            height: 75%;
+            border-radius: 50%;
+            margin: auto;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+        }
+
+        @keyframes load3 {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
 
-<body>
+<body style="background-color: #EEEEEE;">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div class="loader index-loader"></div>
     <div id="root"></div>
 </body>
 
