@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import RangeSlider from './RangeSlider.styled';
 
-export default ({ initialValue, min, max, onChange }) => {
+export default memo(({ initialValue, min, max, onChange }) => {
     const [value, setValue] = useState(initialValue);
     const [percentage, setPercentage] = useState(normalizePercentage(initialValue, max));
 
@@ -46,7 +46,7 @@ export default ({ initialValue, min, max, onChange }) => {
             <input className="counter" type="number" min={min} max={max} value={value} onChange={handleChange} />
         </RangeSlider>
     )
-}
+})
 
 const normalizePercentage = (value, max) => {
     let calculedPercentage = value / max * 100;

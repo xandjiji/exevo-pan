@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Tag from '../Tag';
@@ -35,20 +35,23 @@ export default ({ backAction }) => {
         skillKey: new Set([])
     });
 
-    const updateFilterValue = (key, value) => {
-        setFilters({
-            ...filters,
-            [key]: value
+    const updateFilterValue = useCallback((key, value) => {
+        setFilters(prevFilters => {
+            return { ...prevFilters, [key]: value };
         });
-    }
+    }, []);
 
-    const updateServerValue = (key, value) => {
+    const updateServerValue = useCallback((key, value) => {
         const currentServerValue = serverKeyValues.current[value];
         const newValue = (currentServerValue ? currentServerValue.serverId : '');
         updateFilterValue(key, newValue);
-    }
+    }, [updateFilterValue])
 
-    const updateFilterSet = (key, value) => {
+    const onAutocompleteChange = useCallback((value) => {
+        updateServerValue('serverName', value);
+    }, [updateServerValue]);
+
+    const updateFilterSet = useCallback((key, value) => {
         if (filters[key].has(value)) {
             filters[key].delete(value);
         } else {
@@ -59,7 +62,7 @@ export default ({ backAction }) => {
             ...filters,
             [key]: filters[key]
         });
-    }
+    }, [filters]);
 
     useEffect(() => {
         charContext.dispatch({ type: 'APPLY_FILTERS', filterState: filters });
@@ -75,65 +78,65 @@ export default ({ backAction }) => {
 
             <div className="items-wrapper inner-container custom-scrollbar">
                 <FilterGroup title="Vocation" display="flex">
-                    <Tag clickable onClick={() => updateFilterSet('vocation', 0)}>None</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('vocation', 1)}>Knight</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('vocation', 2)}>Paladin</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('vocation', 3)}>Sorcerer</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('vocation', 4)}>Druid</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('vocation', 0), [updateFilterSet])}>None</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('vocation', 1), [updateFilterSet])}>Knight</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('vocation', 2), [updateFilterSet])}>Paladin</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('vocation', 3), [updateFilterSet])}>Sorcerer</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('vocation', 4), [updateFilterSet])}>Druid</Tag>
                 </FilterGroup>
 
                 <FilterGroup title="PvP" display="flex">
-                    <Tag clickable onClick={() => updateFilterSet('pvp', 0)}>Optional</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('pvp', 1)}>Open</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('pvp', 2)}>Retro Open</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('pvp', 3)}>Hardcore</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('pvp', 4)}>Retro Hardcore</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('pvp', 0), [updateFilterSet])}>Optional</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('pvp', 1), [updateFilterSet])}>Open</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('pvp', 2), [updateFilterSet])}>Retro Open</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('pvp', 3), [updateFilterSet])}>Hardcore</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('pvp', 4), [updateFilterSet])}>Retro Hardcore</Tag>
                 </FilterGroup>
 
                 <FilterGroup title="BattlEye" display="flex">
                     <div className="battleye-wrapper">
-                        <Tag clickable onClick={() => updateFilterSet('battleye', true)}>
+                        <Tag clickable onClick={useCallback(() => updateFilterSet('battleye', true), [updateFilterSet])}>
                             <span
                                 className="battleye-icon"
                                 style={{ backgroundColor: `var(--battleGreen)` }}
                             >
                             </span>
-                        Green
-                    </Tag>
-                        <Tag clickable onClick={() => updateFilterSet('battleye', false)}>
+                            Green
+                        </Tag>
+                        <Tag clickable onClick={useCallback(() => updateFilterSet('battleye', false), [updateFilterSet])}>
                             <span
                                 className="battleye-icon"
                                 style={{ backgroundColor: `var(--battleYellow)` }}
                             >
                             </span>
-                        Yellow
-                    </Tag>
+                            Yellow
+                        </Tag>
                     </div>
                 </FilterGroup>
 
                 <FilterGroup title="Server location" display="flex">
-                    <Tag clickable onClick={() => updateFilterSet('location', 0)}>EU</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('location', 1)}>NA</Tag>
-                    <Tag clickable onClick={() => updateFilterSet('location', 2)}>BR</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('location', 0), [updateFilterSet])}>EU</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('location', 1), [updateFilterSet])}>NA</Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('location', 2), [updateFilterSet])}>BR</Tag>
                 </FilterGroup>
 
                 <FilterGroup title="Server" display="flex">
-                    <AutocompleteInput items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={(value) => updateServerValue('serverName', value)} />
+                    <AutocompleteInput items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={onAutocompleteChange} />
                 </FilterGroup>
 
                 <FilterGroup title="Level" display="flex">
-                    <RangeSlider initialValue={2} min={2} max={1000} onChange={(value) => updateFilterValue('minLevel', value)} />
+                    <RangeSlider initialValue={2} min={2} max={1000} onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])} />
                 </FilterGroup>
 
                 <FilterGroup title="Skill" display="block">
-                    <RangeSlider initialValue={10} min={10} max={130} onChange={(value) => updateFilterValue('minSkill', value)} />
+                    <RangeSlider initialValue={10} min={10} max={130} onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])} />
 
                     <div className="skills-wrapper">
-                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'magic')}>Magic</Tag>
-                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'distance')}>Distance</Tag>
-                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'club')}>Club</Tag>
-                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'sword')}>Sword</Tag>
-                        <Tag clickable onClick={() => updateFilterSet('skillKey', 'axe')}>Axe</Tag>
+                        <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'magic'), [updateFilterSet])}>Magic</Tag>
+                        <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'distance'), [updateFilterSet])}>Distance</Tag>
+                        <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'club'), [updateFilterSet])}>Club</Tag>
+                        <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'sword'), [updateFilterSet])}>Sword</Tag>
+                        <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'axe'), [updateFilterSet])}>Axe</Tag>
                     </div>
                 </FilterGroup>
             </div>

@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, memo } from 'react';
 import Tag from './Tag.styled';
 
-export default ({ children, clickable, onClick }) => {
+export default memo(({ children, clickable, onClick }) => {
     const [active, setActive] = useState(false);
 
     const handleClick = () => {
@@ -16,4 +16,4 @@ export default ({ children, clickable, onClick }) => {
             {children}
         </Tag>
     )
-}
+});

@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, memo } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
-export default ({ items, placeholder, onChange }) => {
+export default memo(({ items, placeholder, onChange }) => {
     const uniqueID = useRef(Math.random())
     const inputRef = useRef(null);
     const [term, setTerm] = useState('');
@@ -18,8 +18,7 @@ export default ({ items, placeholder, onChange }) => {
     useEffect(() => {
         const timeOutObj = setTimeout(() => onChange(term), 500);
         return () => clearTimeout(timeOutObj);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [term]);
+    }, [term, onChange]);
 
     const stopBubbling = (event) => {
         event.stopPropagation();
@@ -64,4 +63,4 @@ export default ({ items, placeholder, onChange }) => {
             {/* eslint-enable */}
         </AutocompleteInput>
     )
-}
+})

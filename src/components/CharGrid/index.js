@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef } from 'react';
+import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
@@ -18,9 +18,9 @@ export default ({ itemsPerPage }) => {
     const [charList, setCharList] = useState(characterData.slice(0, 30));
     const [index, setIndex] = useState(0);
 
-    const sliceList = (index) => {
+    const sliceList = useCallback((index) => {
         return characterData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
-    }
+    }, [characterData, itemsPerPage]);
 
     const handleAction = (value) => {
         setIndex(value);
@@ -30,8 +30,7 @@ export default ({ itemsPerPage }) => {
 
     useEffect(() => {
         setCharList(sliceList(index));
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [index, characterData]);
+    }, [index, characterData, sliceList]);
 
     useEffect(() => {
         handleAction(0);
