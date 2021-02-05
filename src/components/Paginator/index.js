@@ -1,10 +1,14 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useContext, useMemo } from 'react';
 import Paginator from './Paginator.styled';
+
+import CharacterDataContext from '../../contexts/CharacterData/context';
 
 import { ReactComponent as NextIcon} from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
 export default ({ itemsPerPage, dataSize, handleAction }) => {
+
+    const { characterData } = useContext(CharacterDataContext);
 
     const [index, setIndex] = useState(0);
     const pageCount = useMemo(() => Math.ceil(dataSize / itemsPerPage), [dataSize, itemsPerPage]);
@@ -23,6 +27,10 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
             handleClick(index + 1);
         }
     }
+
+    useEffect(() => {
+        setIndex(0);
+    }, [characterData])
 
     return (
         <Paginator>

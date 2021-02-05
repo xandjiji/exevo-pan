@@ -13,7 +13,7 @@ export default ({ itemsPerPage }) => {
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
-    let { characterData } = useContext(CharacterDataContext);
+    const { characterData } = useContext(CharacterDataContext);
 
     const [charList, setCharList] = useState(characterData.slice(0, 30));
     const [index, setIndex] = useState(0);
@@ -32,6 +32,10 @@ export default ({ itemsPerPage }) => {
         setCharList(sliceList(index));
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [index, characterData]);
+
+    useEffect(() => {
+        handleAction(0);
+    }, [characterData])
 
     return (
         <CharGrid className="custom-scrollbar" ref={gridRef}>
