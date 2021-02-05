@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo } from 'react';
+import React, { useState, useEffect, memo, useCallback } from 'react';
 import RangeSlider from './RangeSlider.styled';
 
 export default memo(({ initialValue, min, max, onChange }) => {
@@ -14,11 +14,13 @@ export default memo(({ initialValue, min, max, onChange }) => {
         }
     }
 
+    const callbackChange = useCallback(() => onChange(value), [onChange, value]);
+
     useEffect(() => {
-        const timeOutObj = setTimeout(() => onChange(value), 500);
+        const timeOutObj = setTimeout(() => callbackChange(value), 500);
         return () => clearTimeout(timeOutObj);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    },[value]);
+        
+    },[value, callbackChange]);
 
     const stopBubbling = (event) => {
         event.stopPropagation();

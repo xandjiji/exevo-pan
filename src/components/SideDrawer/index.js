@@ -129,7 +129,7 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Skill" display="block">
-                    <RangeSlider initialValue={10} min={10} max={130} onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])} />
+                    <RangeSlider initialValue={10} min={10} max={130} onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])} />
 
                     <div className="skills-wrapper">
                         <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'magic'), [updateFilterSet])}>Magic</Tag>

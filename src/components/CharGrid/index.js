@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
+import React, { useContext, useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
@@ -36,20 +36,23 @@ export default ({ itemsPerPage }) => {
         handleAction(0);
     }, [characterData])
 
-    return (
-        <CharGrid className="custom-scrollbar" ref={gridRef}>
-            <div className="grid-header shadow inner-container">
-                <FilterIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
+    return useMemo(() => {
+        return (
+            <CharGrid className="custom-scrollbar" ref={gridRef}>
+                <div className="grid-header shadow inner-container">
+                    <FilterIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
 
-                <Paginator
-                    itemsPerPage={itemsPerPage}
-                    dataSize={characterData.length}
-                    handleAction={handleAction}
-                />
-            </div>
-            <div className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
-                {charList.map(item => <CharCard key={item.id} charData={item} />)}
-            </div>
-        </CharGrid>
-    )
+                    <Paginator
+                        itemsPerPage={itemsPerPage}
+                        dataSize={characterData.length}
+                        handleAction={handleAction}
+                    />
+                </div>
+                <div className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
+                    {charList.map(item => <CharCard key={item.id} charData={item} />)}
+                </div>
+            </CharGrid>
+        )
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [charList, characterData, itemsPerPage]);
 }
