@@ -14,7 +14,7 @@ export default styled.div`
             width: 56px;
             height: 56px;
 
-            img {
+            img, img.loaded {
                 width: 64px;
                 height: 64px;
             }
@@ -108,7 +108,14 @@ export default styled.div`
             box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
         }
 
+        .flag {
+            width: 16px;
+            height: 10px;
+        }
+
         .coin {
+            width: 12px;
+            height: 12px;
             border-radius: 50%;
         }
 
