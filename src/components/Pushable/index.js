@@ -153,6 +153,7 @@ export default ({ children, trigger, blockLeft, blockRight, backdrop, active }) 
                     onClick={handleClick}
                     role="button"
                     tabIndex="0"
+                    aria-label="Back"
                 >
                 </div>
                 : null}

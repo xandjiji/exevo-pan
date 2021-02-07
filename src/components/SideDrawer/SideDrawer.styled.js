@@ -44,6 +44,10 @@ export default styled.div`
             background-image: linear-gradient(to top, var(--surface), rgba(0,0,0,0));
             pointer-events: none;
         }
+
+        .invisible-label {
+            font-size: 0;
+        }
     }
 
     .skills-wrapper {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 import RangeSlider from './RangeSlider.styled';
 
-export default memo(({ initialValue, min, max, onChange }) => {
+export default memo(({ labelFor, counterLabel, initialValue, min, max, onChange }) => {
     const [value, setValue] = useState(initialValue);
     const [percentage, setPercentage] = useState(normalizePercentage(initialValue, max));
 
@@ -35,6 +35,7 @@ export default memo(({ initialValue, min, max, onChange }) => {
         >
             <div className="input-wrapper">
                 <input
+                    id={labelFor}
                     type="range"
                     value={value}
                     min={min}
@@ -45,7 +46,7 @@ export default memo(({ initialValue, min, max, onChange }) => {
                 <div className="track-fill" style={{ width: `${percentage}%` }}></div>
             </div>
 
-            <input className="counter" type="number" min={min} max={max} value={value} onChange={handleChange} />
+            <input id={counterLabel} className="counter" type="number" min={min} max={max} value={value} onChange={handleChange} />
         </RangeSlider>
     )
 })

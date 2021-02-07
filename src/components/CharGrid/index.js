@@ -39,7 +39,7 @@ export default ({ itemsPerPage }) => {
     return useMemo(() => {
         return (
             <CharGrid className="custom-scrollbar" ref={gridRef}>
-                <div className="grid-header shadow inner-container">
+                <header className="grid-header shadow inner-container">
                     <FilterIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
 
                     <Paginator
@@ -47,10 +47,10 @@ export default ({ itemsPerPage }) => {
                         dataSize={characterData.length}
                         handleAction={handleAction}
                     />
-                </div>
-                <div className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
+                </header>
+                <main className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
                     {charList.map(item => <CharCard key={item.id} charData={item} />)}
-                </div>
+                </main>
             </CharGrid>
         )
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export default styled.div`
+export default styled.footer`
     padding-top: 12px;
     padding-bottom: 12px;
     display: flex;
@@ -13,6 +13,10 @@ export default styled.div`
 
     a {
         font-size: unset;
+    }
+
+    .gitrepo {
+        font-size: 0;
     }
 
     .gituser {

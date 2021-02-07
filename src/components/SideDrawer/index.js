@@ -121,15 +121,20 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Server" display="flex">
-                    <AutocompleteInput items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={onAutocompleteChange} />
+                    <label for="Server-input" class="invisible-label">Server</label>
+                    <AutocompleteInput labelFor="Server-input" items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={onAutocompleteChange} />
                 </FilterGroup>
 
                 <FilterGroup title="Level" display="flex">
-                    <RangeSlider initialValue={2} min={2} max={1000} onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])} />
+                    <label for="Level-input" class="invisible-label">Level</label>
+                    <label for="Level-counter" class="invisible-label">Level value</label>
+                    <RangeSlider labelFor="Level-input" counterLabel="Level-counter" initialValue={2} min={2} max={1000} onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])} />
                 </FilterGroup>
 
                 <FilterGroup title="Skill" display="block">
-                    <RangeSlider initialValue={10} min={10} max={130} onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])} />
+                    <label for="Skill-input" class="invisible-label">Skill</label>
+                    <label for="Skill-counter" class="invisible-label">Skill value</label>
+                    <RangeSlider labelFor="Skill-input" counterLabel="Skill-counter" initialValue={10} min={10} max={130} onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])} />
 
                     <div className="skills-wrapper">
                         <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'magic'), [updateFilterSet])}>Magic</Tag>

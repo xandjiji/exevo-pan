@@ -34,6 +34,7 @@ export default styled.div`
 
                 a {
                     margin-left: 4px;
+                    font-size: 0;
                     
                     svg {
                         height: 28px;

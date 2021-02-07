@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef, memo } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
-export default memo(({ items, placeholder, onChange }) => {
+export default memo(({ labelFor, items, placeholder, onChange }) => {
     const uniqueID = useRef(Math.random())
     const inputRef = useRef(null);
     const [term, setTerm] = useState('');
@@ -32,6 +32,7 @@ export default memo(({ items, placeholder, onChange }) => {
             className={term === '' ? null : 'active'}
         >
             <input
+                id={labelFor}
                 list={uniqueID.current}
                 placeholder={placeholder}
                 value={term}
@@ -58,6 +59,7 @@ export default memo(({ items, placeholder, onChange }) => {
                 onClick={() => setTerm('')}
                 role="button"
                 tabIndex="0"
+                aria-label="Reset field"
             >
             </div>
             {/* eslint-enable */}

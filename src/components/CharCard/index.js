@@ -76,6 +76,7 @@ export default ({ charData }) => {
                         {nickname}
                         <a href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}&source=overview`} target="_blank" rel="noreferrer">
                             <ExternalIcon className="clickable" />
+                            Go to character page
                         </a>
                     </p>
                     <div className="level-vocation">
@@ -158,11 +159,11 @@ export default ({ charData }) => {
 const makeItemImg = (itemArray) => {
     const elementArray = [];
     for (const item of itemArray) {
-        elementArray.push(<ImagePortrait key={item} src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
+        elementArray.push(<ImagePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
     }
 
     while (elementArray.length < 4) {
-        elementArray.push(<ImagePortrait key={elementArray.length} />);
+        elementArray.push(<ImagePortrait key={elementArray.length} alt="No item" />);
     }
 
     return elementArray;

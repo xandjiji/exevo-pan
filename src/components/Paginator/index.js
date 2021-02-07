@@ -43,6 +43,7 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
                     onClick={() => handleClick(0)}
                     role="button"
                     tabIndex="0"
+                    aria-label="First page"
                     onKeyDown={(event) => handleKey(event)}
                 >
                     <LastIcon />
@@ -52,6 +53,7 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
                     onClick={() => handleClick(index - 1)}
                     role="button"
                     tabIndex="0"
+                    aria-label="Previous page"
                     onKeyDown={(event) => handleKey(event)}
                 >
                     <NextIcon />
@@ -62,6 +64,7 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
                     onClick={() => handleClick(index + 1)}
                     role="button"
                     tabIndex="0"
+                    aria-label="Next page"
                     onKeyDown={(event) => handleKey(event)}
                 >
                     <NextIcon />
@@ -71,6 +74,7 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
                     onClick={() => handleClick(pageCount - 1)}
                     role="button"
                     tabIndex="0"
+                    aria-label="Last page"
                     onKeyDown={(event) => handleKey(event)}
                 >
                     <LastIcon />
