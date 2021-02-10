@@ -26,29 +26,15 @@ const applyFilters = (filterState) => {
             skills
         } = character;
 
-        if (itemSet.size) {
-            if (!itemSet.has(id)) continue;
-        }
+        if(setDoesntHasValue(vocation, vocationId)) continue;
 
-        if (vocation.size) {
-            if (!vocation.has(vocationId)) continue;
-        }
+        if(setDoesntHasValue(pvp, serverData[serverId].pvpType.type)) continue;
 
-        if (pvp.size) {
-            if (!pvp.has(serverData[serverId].pvpType.type)) continue;
-        }
+        if(setDoesntHasValue(battleye, serverData[serverId].battleye)) continue;
 
-        if (battleye.size) {
-            if (!battleye.has(serverData[serverId].battleye)) continue;
-        }
+        if(setDoesntHasValue(location, serverData[serverId].serverLocation.type)) continue;
 
-        if (location.size) {
-            if (!location.has(serverData[serverId].serverLocation.type)) continue;
-        }
-
-        if (serverName) {
-            if (serverName !== serverId) continue;
-        }
+        if (serverName & serverName !== serverId) continue;
 
         if(skillKey.size) {
             let hasMinimumSkill = false;
@@ -65,10 +51,20 @@ const applyFilters = (filterState) => {
         
         if(level < minLevel) continue;
 
+        if(setDoesntHasValue(itemSet, id)) continue;
+
         filteredData.push(character);
     }
 
     return filteredData;
+}
+
+const setDoesntHasValue = (set, value) => {
+    if (set.size && !set.has(value)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 export const characterDataReducer = (state, action) => {
