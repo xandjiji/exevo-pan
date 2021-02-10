@@ -1,7 +1,2 @@
-Analytics
-Docs
-Scripting deploy
-change SEO link (canonical etc)
-
 Itens
 Sorts

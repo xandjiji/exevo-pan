@@ -11,18 +11,24 @@ const applyFilters = (filterState) => {
         serverName,
         minLevel,
         minSkill,
-        skillKey
+        skillKey,
+        itemSet
     } = filterState;
 
     let filteredData = [];
     for (const character of initialData) {
 
         const {
+            id,
             vocationId,
             serverId,
             level,
             skills
         } = character;
+
+        if (itemSet.size) {
+            if (!itemSet.has(id)) continue;
+        }
 
         if (vocation.size) {
             if (!vocation.has(vocationId)) continue;

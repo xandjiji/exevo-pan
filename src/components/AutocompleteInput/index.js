@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef, memo } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
-export default memo(({ labelFor, items, placeholder, onChange }) => {
+export default ({ labelFor, items, placeholder, onChange }) => {
     const uniqueID = useRef(Math.random())
     const inputRef = useRef(null);
     const [term, setTerm] = useState('');
@@ -65,4 +65,4 @@ export default memo(({ labelFor, items, placeholder, onChange }) => {
             {/* eslint-enable */}
         </AutocompleteInput>
     )
-})
+}

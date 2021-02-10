@@ -8,13 +8,15 @@ import DrawerFooter from '../DrawerFooter';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
 
-import ServerDataContext from '../../contexts/ServerData/context';
 import CharacterDataContext from '../../contexts/CharacterData/context';
+import ServerDataContext from '../../contexts/ServerData/context';
+import ItemsDataContext from '../../contexts/ItemsData/context';
 
 export default ({ backAction }) => {
 
     const charContext = useContext(CharacterDataContext);
     const serverContext = useContext(ServerDataContext);
+    const itemsContext = useContext(ItemsDataContext);
 
     const serverKeyValues = useRef({});
     useEffect(() => {
@@ -24,6 +26,15 @@ export default ({ backAction }) => {
         }
     }, [serverContext]);
 
+    const itemsKeyValues = useRef([]);
+    useEffect(() => {
+        for(const itemKey in itemsContext) {
+            if(itemsContext[itemKey].length > 0) {
+                itemsKeyValues.current.push(itemKey);
+            }
+        }
+    }, [itemsContext]);
+
     const [filters, setFilters] = useState({
         vocation: new Set(),
         pvp: new Set([]),
@@ -32,7 +43,8 @@ export default ({ backAction }) => {
         serverName: '',
         minLevel: 2,
         minSkill: 10,
-        skillKey: new Set([])
+        skillKey: new Set([]),
+        itemSet: new Set([]),
     });
 
     const updateFilterValue = useCallback((key, value) => {
@@ -45,11 +57,21 @@ export default ({ backAction }) => {
         const currentServerValue = serverKeyValues.current[value];
         const newValue = (currentServerValue ? currentServerValue.serverId : '');
         updateFilterValue(key, newValue);
-    }, [updateFilterValue])
+    }, [updateFilterValue]);
 
-    const onAutocompleteChange = useCallback((value) => {
+    const onServerAutocompleteChange = useCallback((value) => {
         updateServerValue('serverName', value);
     }, [updateServerValue]);
+
+    const updateItemValue = useCallback((key, value) => {
+        const currentItemValue = itemsContext[value];
+        const newValue = (currentItemValue ? new Set(itemsContext[value]) : new Set([]));
+        updateFilterValue(key, newValue);
+    }, [updateFilterValue, itemsContext]);
+
+    const onItemAutocompleteChange = useCallback((value) => {
+        updateItemValue('itemSet', value);
+    }, [updateItemValue]);
 
     const updateFilterSet = useCallback((key, value) => {
         if (filters[key].has(value)) {
@@ -121,19 +143,19 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Server" display="flex">
-                    <label for="Server-input" class="invisible-label">Server</label>
-                    <AutocompleteInput labelFor="Server-input" items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={onAutocompleteChange} />
+                    <label htmlFor="Server-input" className="invisible-label">Server</label>
+                    <AutocompleteInput labelFor="Server-input" items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={onServerAutocompleteChange} />
                 </FilterGroup>
 
                 <FilterGroup title="Level" display="flex">
-                    <label for="Level-input" class="invisible-label">Level</label>
-                    <label for="Level-counter" class="invisible-label">Level value</label>
+                    <label htmlFor="Level-input" className="invisible-label">Level</label>
+                    <label htmlFor="Level-counter" className="invisible-label">Level value</label>
                     <RangeSlider labelFor="Level-input" counterLabel="Level-counter" initialValue={2} min={2} max={1000} onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])} />
                 </FilterGroup>
 
                 <FilterGroup title="Skill" display="block">
-                    <label for="Skill-input" class="invisible-label">Skill</label>
-                    <label for="Skill-counter" class="invisible-label">Skill value</label>
+                    <label htmlFor="Skill-input" className="invisible-label">Skill</label>
+                    <label htmlFor="Skill-counter" className="invisible-label">Skill value</label>
                     <RangeSlider labelFor="Skill-input" counterLabel="Skill-counter" initialValue={10} min={10} max={130} onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])} />
 
                     <div className="skills-wrapper">
@@ -143,6 +165,11 @@ export default ({ backAction }) => {
                         <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'sword'), [updateFilterSet])}>Sword</Tag>
                         <Tag clickable onClick={useCallback(() => updateFilterSet('skillKey', 'axe'), [updateFilterSet])}>Axe</Tag>
                     </div>
+                </FilterGroup>
+
+                <FilterGroup title="Items" display="flex">
+                    <label htmlFor="Items-input" className="invisible-label">Items</label>
+                    <AutocompleteInput labelFor="Items-input" items={itemsKeyValues.current} placeholder="Choose an item" onChange={onItemAutocompleteChange} />
                 </FilterGroup>
             </div>
 
