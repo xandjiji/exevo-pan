@@ -18,12 +18,12 @@ export default styled.div`
 
     .tag-item {
         margin-bottom: 8px;
-        cursor: pointer;
         pointer-events: all;
         letter-spacing: 0.3px;
         transition: box-shadow 0.2s ease-out;
 
-        &:not(:hover) {
+        &.interact:not(:hover),
+        &:not(.interact) {
             box-shadow: none;
         }
 
