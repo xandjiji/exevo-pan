@@ -16,7 +16,7 @@ export default styled.div`
         color: var(--onSurface);
     }
 
-    .tag-item {
+    .chip-item {
         margin-bottom: 8px;
         pointer-events: all;
         letter-spacing: 0.3px;

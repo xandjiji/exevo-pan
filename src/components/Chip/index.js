@@ -1,5 +1,5 @@
 import React, { useState, memo } from 'react';
-import Tag from './Tag.styled';
+import Chip from './Chip.styled';
 
 export default memo(({ children, clickable, onClick, closeable, onClose }) => {
     const [active, setActive] = useState(false);
@@ -12,7 +12,7 @@ export default memo(({ children, clickable, onClick, closeable, onClose }) => {
     }
 
     return (
-        <Tag className={`tag-item shadow ${active ? 'active' : ''} ${clickable ? 'interact' : ''}`} onClick={handleClick}>
+        <Chip className={`chip-item shadow ${active ? 'active' : ''} ${clickable ? 'interact' : ''}`} onClick={handleClick}>
             {children}
             {closeable ?
                 <div
@@ -25,6 +25,6 @@ export default memo(({ children, clickable, onClick, closeable, onClose }) => {
                 </div>
                 : null
             }
-        </Tag>
+        </Chip>
     )
 });

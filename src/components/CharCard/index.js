@@ -5,7 +5,7 @@ import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
-import Tag from '../Tag';
+import Chip from '../Chip';
 
 import serverDataContext from '../../contexts/ServerData/context';
 
@@ -147,7 +147,7 @@ export default ({ charData }) => {
 
                 {charms.length > 0
                     ? <div className="charms-wrapper">
-                        {charms.map(charmItem => <Tag key={charmItem}>{charmItem}</Tag>)}
+                        {charms.map(charmItem => <Chip key={charmItem}>{charmItem}</Chip>)}
                     </div>
                     : null
                 }
