@@ -167,7 +167,7 @@ export default ({ backAction }) => {
                     </div>
                 </FilterGroup>
 
-                <FilterGroup title="Items" display="flex">
+                <FilterGroup title="Rare items" display="flex">
                     <label htmlFor="Items-input" className="invisible-label">Items</label>
                     <AutocompleteInput labelFor="Items-input" items={itemsKeyValues.current} placeholder="Choose an item" onChange={onItemAutocompleteChange} />
                 </FilterGroup>

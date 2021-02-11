@@ -11,9 +11,20 @@ export default styled.div`
         border: solid 1px var(--separator);
         font-size: 12px;
         transition: border-color 0.2s ease-out;
+        transition: box-shadow 0.2s ease-out;
 
         &:focus {
             border-color: var(--primary);
+        }
+
+        &.valid {
+            border-color: var(--green);
+            color: var(--green);
+        }
+
+        &.invalid {
+            border-color: var(--red);
+            color: var(--red);
         }
 
         &::-webkit-calendar-picker-indicator {

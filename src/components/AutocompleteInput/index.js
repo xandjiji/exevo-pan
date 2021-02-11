@@ -5,14 +5,30 @@ export default ({ labelFor, items, placeholder, onChange }) => {
     const uniqueID = useRef(Math.random())
     const inputRef = useRef(null);
     const [term, setTerm] = useState('');
+    const [valid, setValid] = useState('neutral');
 
     const handleChange = (event) => {
         const { value } = event.target;
-        setTerm(value);
+
+        const { valid, string } = isValueValid(value, items);
+
+        if (valid) {
+            setValid('valid');
+        } else {
+            setValid('neutral');
+        }
+
+        setTerm(string);
     }
 
     const handleKey = (event) => {
-        if(event.key === 'Enter') inputRef.current.blur();
+        if (event.key === 'Enter') inputRef.current.blur();
+    }
+
+    const handleBlur = () => {
+        if(term !== '' && valid === 'neutral') {
+            setValid('invalid');
+        }
     }
 
     useEffect(() => {
@@ -33,11 +49,13 @@ export default ({ labelFor, items, placeholder, onChange }) => {
         >
             <input
                 id={labelFor}
+                className={valid}
                 list={uniqueID.current}
                 placeholder={placeholder}
                 value={term}
                 onChange={handleChange}
                 onKeyDown={handleKey}
+                onBlur={handleBlur}
                 ref={inputRef}
             />
 
@@ -56,7 +74,7 @@ export default ({ labelFor, items, placeholder, onChange }) => {
             {/* eslint-disable */}
             <div
                 className="reset-button"
-                onClick={() => setTerm('')}
+                onClick={() => { setTerm(''); setValid('neutral'); }}
                 role="button"
                 tabIndex="0"
                 aria-label="Reset field"
@@ -65,4 +83,14 @@ export default ({ labelFor, items, placeholder, onChange }) => {
             {/* eslint-enable */}
         </AutocompleteInput>
     )
+}
+
+const isValueValid = (string, dataList) => {
+    const sanitizedString = string.toLowerCase();
+
+    for (const dataItem of dataList) {
+        const sanitizeddataItem = dataItem.toLowerCase();
+        if (sanitizedString === sanitizeddataItem) return { valid: true, string: dataItem };
+    }
+    return { valid: false, string: string };
 }
