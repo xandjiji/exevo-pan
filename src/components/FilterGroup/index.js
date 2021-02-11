@@ -1,10 +1,13 @@
-import React, { memo }  from 'react';
+import React, { memo } from 'react';
 import FilterGroup from './FilterGroup.styled';
 
-export default memo(({ title, display, children }) => {
+export default memo(({ className, title, display, badge, children }) => {
     return (
-        <FilterGroup display={display}>
-            {title ? <span>{title}</span> : null}
+        <FilterGroup className={className} display={display}>
+            {title ?
+                <span>{title} {badge ? badge : null}</span>
+                :
+                null}
             {children}
         </FilterGroup>
     )

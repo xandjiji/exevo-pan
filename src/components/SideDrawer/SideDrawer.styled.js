@@ -73,4 +73,8 @@ export default styled.div`
             box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
         }
     }
+
+    .rare-items-wrapper span div {
+        margin-left: 2px;
+    }
 `;

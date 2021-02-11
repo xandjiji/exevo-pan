@@ -5,6 +5,7 @@ import Tag from '../Tag';
 import AutocompleteInput from '../AutocompleteInput';
 import RangeSlider from '../RangeSlider';
 import DrawerFooter from '../DrawerFooter';
+import InformationBadge from '../InformationBadge';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
 
@@ -28,8 +29,8 @@ export default ({ backAction }) => {
 
     const itemsKeyValues = useRef([]);
     useEffect(() => {
-        for(const itemKey in itemsContext) {
-            if(itemsContext[itemKey].length > 0) {
+        for (const itemKey in itemsContext) {
+            if (itemsContext[itemKey].length > 0) {
                 itemsKeyValues.current.push(itemKey);
             }
         }
@@ -115,25 +116,23 @@ export default ({ backAction }) => {
                     <Tag clickable onClick={useCallback(() => updateFilterSet('pvp', 4), [updateFilterSet])}>Retro Hardcore</Tag>
                 </FilterGroup>
 
-                <FilterGroup title="BattlEye" display="flex">
-                    <div className="battleye-wrapper">
-                        <Tag clickable onClick={useCallback(() => updateFilterSet('battleye', true), [updateFilterSet])}>
-                            <span
-                                className="battleye-icon"
-                                style={{ backgroundColor: `var(--battleGreen)` }}
-                            >
-                            </span>
+                <FilterGroup className="battleye-wrapper" title="BattlEye" display="flex">
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('battleye', true), [updateFilterSet])}>
+                        <span
+                            className="battleye-icon"
+                            style={{ backgroundColor: `var(--battleGreen)` }}
+                        >
+                        </span>
                             Green
-                        </Tag>
-                        <Tag clickable onClick={useCallback(() => updateFilterSet('battleye', false), [updateFilterSet])}>
-                            <span
-                                className="battleye-icon"
-                                style={{ backgroundColor: `var(--battleYellow)` }}
-                            >
-                            </span>
+                    </Tag>
+                    <Tag clickable onClick={useCallback(() => updateFilterSet('battleye', false), [updateFilterSet])}>
+                        <span
+                            className="battleye-icon"
+                            style={{ backgroundColor: `var(--battleYellow)` }}
+                        >
+                        </span>
                             Yellow
-                        </Tag>
-                    </div>
+                    </Tag>
                 </FilterGroup>
 
                 <FilterGroup title="Server location" display="flex">
@@ -167,7 +166,12 @@ export default ({ backAction }) => {
                     </div>
                 </FilterGroup>
 
-                <FilterGroup title="Rare items" display="flex">
+                <FilterGroup
+                    className="rare-items-wrapper"
+                    title="Rare items"
+                    display="flex"
+                    badge={<InformationBadge icon="!" text="If a rare item is not on this list it means that there are no auctions available with it." />}
+                >
                     <label htmlFor="Items-input" className="invisible-label">Items</label>
                     <AutocompleteInput labelFor="Items-input" items={itemsKeyValues.current} placeholder="Choose an item" onChange={onItemAutocompleteChange} />
                 </FilterGroup>
