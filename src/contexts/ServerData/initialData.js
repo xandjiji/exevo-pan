@@ -8,7 +8,4 @@ for (const key of Object.keys(serverData)) {
     i++;
 }
 
-console.log(serverData);
-console.log(indexedServerData);
-
 export { serverData, indexedServerData};

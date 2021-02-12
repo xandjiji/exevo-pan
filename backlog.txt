@@ -5,7 +5,6 @@ Soul war filter
 Favourites
 
 All rares filter
-Review Rare Item list
 
 Decouple .json from build files (fetch from external URL)
 exevopan.com
