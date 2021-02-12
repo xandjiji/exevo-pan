@@ -1,5 +1,6 @@
 import initialData from './initialData';
 import serverData from '../../serverData.json';
+import itemData from '../../ItemsData.json';
 
 const applyFilters = (filterState) => {
 
@@ -14,6 +15,8 @@ const applyFilters = (filterState) => {
         skillKey,
         itemSet
     } = filterState;
+
+    const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet);
 
     let filteredData = [];
     for (const character of initialData) {
@@ -36,6 +39,8 @@ const applyFilters = (filterState) => {
 
         if(setDoesntHasValue(serverSet, serverId)) continue;
 
+        if(setDoesntHasValue(auctionsItemsSet, id)) continue;
+
         if(skillKey.size) {
             let hasMinimumSkill = false;
             const skillArray = Array.from(skillKey);
@@ -51,8 +56,6 @@ const applyFilters = (filterState) => {
         
         if(level < minLevel) continue;
 
-        if(setDoesntHasValue(itemSet, id)) continue;
-
         filteredData.push(character);
     }
 
@@ -65,6 +68,18 @@ const setDoesntHasValue = (set, value) => {
     } else {
         return false;
     }
+}
+
+const getAuctionIdSetFromItemNameSet = (nameSet) => {
+
+    const auctionIdSet = new Set([])
+    for(const itemName of [...nameSet]) {
+        for(const setItem of [...itemData[itemName]]) {
+            auctionIdSet.add(setItem);
+        }
+    }
+
+    return auctionIdSet;
 }
 
 export const characterDataReducer = (state, action) => {

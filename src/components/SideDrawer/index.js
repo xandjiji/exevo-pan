@@ -54,16 +54,6 @@ export default ({ backAction }) => {
         });
     }, []);
 
-    const updateItemValue = useCallback((key, value) => {
-        const currentItemValue = itemsContext[value];
-        const newValue = (currentItemValue ? new Set(itemsContext[value]) : new Set([]));
-        updateFilterValue(key, newValue);
-    }, [updateFilterValue, itemsContext]);
-
-    const onItemAutocompleteChange = useCallback((value) => {
-        updateItemValue('itemSet', value);
-    }, [updateItemValue]);
-
     const toggleInFilterSet = useCallback((key, value) => {
         if (filters[key].has(value)) {
             filters[key].delete(value);
@@ -107,6 +97,19 @@ export default ({ backAction }) => {
     const onServerAutocompleteChange = useCallback((value) => {
         updateServerValue('serverSet', value);
     }, [updateServerValue]);
+
+    const updateItemValue = useCallback((key, value) => {
+        const currentItemValue = itemsContext[value];
+
+        if (currentItemValue) {
+            addToFilterSet(key, value);
+        }
+    }, [addToFilterSet, itemsContext]);
+
+    const onItemAutocompleteChange = useCallback((value) => {
+        updateItemValue('itemSet', value);
+    }, [updateItemValue]);
+
 
     useEffect(() => {
         charContext.dispatch({ type: 'APPLY_FILTERS', filterState: filters });
@@ -211,7 +214,24 @@ export default ({ backAction }) => {
                     badge={<InformationBadge icon="!" text="If a rare item is not on this list it means that there are no auctions available with it." />}
                 >
                     <label htmlFor="Items-input" className="invisible-label">Items</label>
-                    <AutocompleteInput labelFor="Items-input" items={itemsKeyValues.current} placeholder="Choose an item" onChange={onItemAutocompleteChange} />
+                    <AutocompleteInput
+                        labelFor="Items-input"
+                        placeholder="Choose an item"
+                        clearAfterSucessful
+                        items={itemsKeyValues.current}
+                        onChange={onItemAutocompleteChange}
+                    />
+
+                    <div className="chips-wrapper">
+                        {[...filters.itemSet].map((itemName, index) =>
+                            <Chip
+                                key={index}
+                                closeable
+                                onClose={() => deleteFromFilterSet('itemSet', itemName)}>
+                                {itemName}
+                            </Chip>
+                        )}
+                    </div>
                 </FilterGroup>
             </div>
 
