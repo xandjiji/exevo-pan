@@ -1,4 +1,4 @@
 import { createContext } from 'react';
-import serverData from '../../serverData.json';
+import { serverData, indexedServerData } from './initialData';
 
-export default createContext(serverData);
+export default createContext({ serverData, indexedServerData });

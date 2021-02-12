@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Chip from '../Chip';
@@ -16,25 +16,11 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 export default ({ backAction }) => {
 
     const charContext = useContext(CharacterDataContext);
-    const serverContext = useContext(ServerDataContext);
-    const itemsContext = useContext(ItemsDataContext);
+    const { serverData } = useContext(ServerDataContext);
+    const itemData = useContext(ItemsDataContext);
 
-    const serverKeyValues = useRef({});
-    useEffect(() => {
-        for (let i = 0; i < serverContext.length; i++) {
-            serverContext[i].serverId = i;
-            serverKeyValues.current[serverContext[i].serverName] = serverContext[i];
-        }
-    }, [serverContext]);
-
-    const itemsKeyValues = useRef([]);
-    useEffect(() => {
-        for (const itemKey in itemsContext) {
-            if (itemsContext[itemKey].length > 0) {
-                itemsKeyValues.current.push(itemKey);
-            }
-        }
-    }, [itemsContext]);
+    const serverNamesArray = useMemo(() => Object.keys(serverData), [serverData]);
+    const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const [filters, setFilters] = useState({
         vocation: new Set(),
@@ -87,28 +73,11 @@ export default ({ backAction }) => {
         })
     }, []);
 
-    const updateServerValue = useCallback((key, value) => {
-        const currentServerValue = serverKeyValues.current[value];
-        if (currentServerValue) {
-            addToFilterSet(key, currentServerValue.serverId);
-        }
-    }, [addToFilterSet]);
-
-    const onServerAutocompleteChange = useCallback((value) => {
-        updateServerValue('serverSet', value);
-    }, [updateServerValue]);
-
-    const updateItemValue = useCallback((key, value) => {
-        const currentItemValue = itemsContext[value];
-
-        if (currentItemValue) {
+    const onAutocompleteChange = useCallback((key, value, object) => {
+        if (objectHasKeys(object, value)) {
             addToFilterSet(key, value);
         }
-    }, [addToFilterSet, itemsContext]);
-
-    const onItemAutocompleteChange = useCallback((value) => {
-        updateItemValue('itemSet', value);
-    }, [updateItemValue]);
+    }, [addToFilterSet]);
 
 
     useEffect(() => {
@@ -171,17 +140,17 @@ export default ({ backAction }) => {
                         labelFor="Server-input"
                         placeholder="Choose a server"
                         clearAfterSucessful
-                        items={allServersNotInSet(Object.keys(serverKeyValues.current), filters.serverSet, serverKeyValues.current)}
-                        onChange={onServerAutocompleteChange}
+                        items={allItemsNotInSet(serverNamesArray, filters.serverSet)}
+                        onChange={useCallback((value) => onAutocompleteChange('serverSet', value, serverData), [onAutocompleteChange, serverData])}
                     />
 
                     <div className="chips-wrapper">
-                        {[...filters.serverSet].map((serverIndex, index) =>
+                        {[...filters.serverSet].map((serverName, index) =>
                             <Chip
                                 key={index}
                                 closeable
-                                onClose={() => deleteFromFilterSet('serverSet', serverIndex)}>
-                                {serverContext[serverIndex].serverName}
+                                onClose={() => deleteFromFilterSet('serverSet', serverName)}>
+                                {serverName}
                             </Chip>
                         )}
                     </div>
@@ -190,13 +159,27 @@ export default ({ backAction }) => {
                 <FilterGroup title="Level" display="flex">
                     <label htmlFor="Level-input" className="invisible-label">Level</label>
                     <label htmlFor="Level-counter" className="invisible-label">Level value</label>
-                    <RangeSlider labelFor="Level-input" counterLabel="Level-counter" initialValue={2} min={2} max={1000} onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])} />
+                    <RangeSlider
+                        labelFor="Level-input"
+                        counterLabel="Level-counter"
+                        initialValue={2}
+                        min={2}
+                        max={1000}
+                        onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])}
+                    />
                 </FilterGroup>
 
                 <FilterGroup title="Skill" display="block">
                     <label htmlFor="Skill-input" className="invisible-label">Skill</label>
                     <label htmlFor="Skill-counter" className="invisible-label">Skill value</label>
-                    <RangeSlider labelFor="Skill-input" counterLabel="Skill-counter" initialValue={10} min={10} max={130} onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])} />
+                    <RangeSlider
+                        labelFor="Skill-input"
+                        counterLabel="Skill-counter"
+                        initialValue={10}
+                        min={10}
+                        max={130}
+                        onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])}
+                    />
 
                     <div className="skills-wrapper">
                         <Chip clickable onClick={useCallback(() => toggleInFilterSet('skillKey', 'magic'), [toggleInFilterSet])}>Magic</Chip>
@@ -218,8 +201,8 @@ export default ({ backAction }) => {
                         labelFor="Items-input"
                         placeholder="Choose an item"
                         clearAfterSucessful
-                        items={allItemsNotInSet(itemsKeyValues.current, filters.itemSet)}
-                        onChange={onItemAutocompleteChange}
+                        items={allItemsNotInSet(itemNamesArray, filters.itemSet)}
+                        onChange={useCallback((value) => onAutocompleteChange('itemSet', value, itemData), [onAutocompleteChange, itemData])}
                     />
 
                     <div className="chips-wrapper">
@@ -250,12 +233,10 @@ const allItemsNotInSet = (array, set) => {
     return newArray;
 }
 
-const allServersNotInSet = (array, set, serverDictionary) => {
-
-    const newArray = [];
-    for (const item of array) {
-        if (!set.has(serverDictionary[item].serverId)) newArray.push(item);
+const objectHasKeys = (object, key) => {
+    if (object[key]) {
+        return true;
+    } else {
+        return false;
     }
-
-    return newArray;
 }

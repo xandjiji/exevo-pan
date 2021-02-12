@@ -1,5 +1,5 @@
 import initialData from './initialData';
-import serverData from '../../serverData.json';
+import { indexedServerData } from '../ServerData/initialData';
 import itemData from '../../ItemsData.json';
 
 const applyFilters = (filterState) => {
@@ -31,13 +31,13 @@ const applyFilters = (filterState) => {
 
         if(setDoesntHasValue(vocation, vocationId)) continue;
 
-        if(setDoesntHasValue(pvp, serverData[serverId].pvpType.type)) continue;
+        if(setDoesntHasValue(pvp, indexedServerData[serverId].pvpType.type)) continue;
 
-        if(setDoesntHasValue(battleye, serverData[serverId].battleye)) continue;
+        if(setDoesntHasValue(battleye, indexedServerData[serverId].battleye)) continue;
 
-        if(setDoesntHasValue(location, serverData[serverId].serverLocation.type)) continue;
+        if(setDoesntHasValue(location, indexedServerData[serverId].serverLocation.type)) continue;
 
-        if(setDoesntHasValue(serverSet, serverId)) continue;
+        if(setDoesntHasValue(serverSet, indexedServerData[serverId].serverName)) continue;
 
         if(setDoesntHasValue(auctionsItemsSet, id)) continue;
 

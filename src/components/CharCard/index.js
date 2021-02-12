@@ -29,7 +29,7 @@ const vocationEnum = {
 }
 
 export default ({ charData }) => {
-    const serverData = useContext(serverDataContext);
+    const { indexedServerData } = useContext(serverDataContext);
 
     const {
         id,
@@ -46,7 +46,7 @@ export default ({ charData }) => {
         charms
     } = charData;
 
-    const currentServer = serverData[serverId];
+    const currentServer = indexedServerData[serverId];
 
     const endDate = new Date(auctionEnd * 1000);
 

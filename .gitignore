@@ -18,5 +18,5 @@ yarn-error.log*
 .eslintcache
 
 LatestCharacterData.json
-serverData.json
+ServerData.json
 ItemsData.json
