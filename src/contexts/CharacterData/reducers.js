@@ -8,12 +8,14 @@ const applyFilters = (filterState) => {
         pvp,
         battleye,
         location,
-        serverName,
+        serverSet,
         minLevel,
         minSkill,
         skillKey,
         itemSet
     } = filterState;
+
+    console.log(serverSet);
 
     let filteredData = [];
     for (const character of initialData) {
@@ -34,7 +36,7 @@ const applyFilters = (filterState) => {
 
         if(setDoesntHasValue(location, serverData[serverId].serverLocation.type)) continue;
 
-        if (serverName & serverName !== serverId) continue;
+        if(setDoesntHasValue(serverSet, serverId)) continue;
 
         if(skillKey.size) {
             let hasMinimumSkill = false;
