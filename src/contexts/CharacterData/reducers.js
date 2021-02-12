@@ -15,8 +15,6 @@ const applyFilters = (filterState) => {
         itemSet
     } = filterState;
 
-    console.log(serverSet);
-
     let filteredData = [];
     for (const character of initialData) {
 

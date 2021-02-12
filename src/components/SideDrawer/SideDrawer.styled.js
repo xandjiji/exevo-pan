@@ -77,4 +77,15 @@ export default styled.div`
     .rare-items-wrapper span div {
         margin-left: 2px;
     }
+
+    .chips-wrapper {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+
+        > * {
+            margin-bottom: 0;
+            margin-top: 8px;
+        }
+    }
 `;

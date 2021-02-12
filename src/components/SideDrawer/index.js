@@ -87,6 +87,16 @@ export default ({ backAction }) => {
         })
     }, []);
 
+    const deleteFromFilterSet = useCallback((key, value) => {
+        setFilters(prevFilters => {
+            prevFilters[key].delete(value);
+            return {
+                ...prevFilters,
+                [key]: prevFilters[key]
+            }
+        })
+    }, []);
+
     const updateServerValue = useCallback((key, value) => {
         const currentServerValue = serverKeyValues.current[value];
         if (currentServerValue) {
@@ -155,6 +165,17 @@ export default ({ backAction }) => {
                 <FilterGroup title="Server" display="flex">
                     <label htmlFor="Server-input" className="invisible-label">Server</label>
                     <AutocompleteInput labelFor="Server-input" items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={onServerAutocompleteChange} />
+
+                    <div className="chips-wrapper">
+                        {[...filters.serverSet].map((serverIndex, index) =>
+                            <Chip
+                                key={index}
+                                closeable
+                                onClose={() => deleteFromFilterSet('serverSet', serverIndex)}>
+                                {serverContext[serverIndex].serverName}
+                            </Chip>
+                        )}
+                    </div>
                 </FilterGroup>
 
                 <FilterGroup title="Level" display="flex">
