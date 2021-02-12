@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
-export default ({ labelFor, items, placeholder, onChange }) => {
+export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful }) => {
     const uniqueID = useRef(Math.random())
     const inputRef = useRef(null);
     const [term, setTerm] = useState('');
@@ -32,9 +32,19 @@ export default ({ labelFor, items, placeholder, onChange }) => {
     }
 
     useEffect(() => {
-        const timeOutObj = setTimeout(() => onChange(term), 500);
+        const timeOutObj = setTimeout(() => {
+            onChange(term)
+            if(clearAfterSucessful) {
+                if(valid === 'valid') {
+                    setTerm('');
+                    setValid('neutral');
+                    inputRef.current.blur();
+                    inputRef.current.focus();
+                }
+            }
+        }, 200);
         return () => clearTimeout(timeOutObj);
-    }, [term, onChange]);
+    }, [term, valid, inputRef, clearAfterSucessful, onChange]);
 
     const stopBubbling = (event) => {
         event.stopPropagation();

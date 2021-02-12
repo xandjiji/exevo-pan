@@ -34,6 +34,7 @@ export default styled.div`
         outline: none;
         border-radius: 50%;
         background-color: var(--primary);
+        opacity: 0.75;
         transition: box-shadow 0.1s ease-out;
 
         &::after,
