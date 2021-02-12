@@ -44,7 +44,7 @@ export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful })
             }
         }, 200);
         return () => clearTimeout(timeOutObj);
-    }, [term, valid, inputRef, onChange]);
+    }, [term, valid, inputRef, clearAfterSucessful, onChange]);
 
     const stopBubbling = (event) => {
         event.stopPropagation();
