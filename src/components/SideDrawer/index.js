@@ -171,7 +171,7 @@ export default ({ backAction }) => {
                         labelFor="Server-input"
                         placeholder="Choose a server"
                         clearAfterSucessful
-                        items={Object.keys(serverKeyValues.current)}
+                        items={allServersNotInSet(Object.keys(serverKeyValues.current), filters.serverSet, serverKeyValues.current)}
                         onChange={onServerAutocompleteChange}
                     />
 
@@ -218,7 +218,7 @@ export default ({ backAction }) => {
                         labelFor="Items-input"
                         placeholder="Choose an item"
                         clearAfterSucessful
-                        items={itemsKeyValues.current}
+                        items={allItemsNotInSet(itemsKeyValues.current, filters.itemSet)}
                         onChange={onItemAutocompleteChange}
                     />
 
@@ -238,4 +238,24 @@ export default ({ backAction }) => {
             <DrawerFooter />
         </SideDrawer>
     )
+}
+
+const allItemsNotInSet = (array, set) => {
+
+    const newArray = [];
+    for (const item of array) {
+        if (!set.has(item)) newArray.push(item);
+    }
+
+    return newArray;
+}
+
+const allServersNotInSet = (array, set, serverDictionary) => {
+
+    const newArray = [];
+    for (const item of array) {
+        if (!set.has(serverDictionary[item].serverId)) newArray.push(item);
+    }
+
+    return newArray;
 }

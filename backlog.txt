@@ -5,8 +5,6 @@ Soul war filter
 Favourites
 
 All rares filter
-Tags for items/servers
-Clear all filters
 Review Rare Item list
 
 Decouple .json from build files (fetch from external URL)
