@@ -84,7 +84,7 @@ export default styled.div`
         flex-wrap: wrap;
 
         > * {
-            margin-bottom: 0;
+            margin-bottom: 0 !important;
             margin-top: 8px;
         }
     }

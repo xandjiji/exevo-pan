@@ -164,7 +164,13 @@ export default ({ backAction }) => {
 
                 <FilterGroup title="Server" display="flex">
                     <label htmlFor="Server-input" className="invisible-label">Server</label>
-                    <AutocompleteInput labelFor="Server-input" items={Object.keys(serverKeyValues.current)} placeholder="Choose a server" onChange={onServerAutocompleteChange} />
+                    <AutocompleteInput
+                        labelFor="Server-input"
+                        placeholder="Choose a server"
+                        clearAfterSucessful
+                        items={Object.keys(serverKeyValues.current)}
+                        onChange={onServerAutocompleteChange}
+                    />
 
                     <div className="chips-wrapper">
                         {[...filters.serverSet].map((serverIndex, index) =>
