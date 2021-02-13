@@ -74,8 +74,18 @@ export default styled.div`
         }
     }
 
-    .rare-items-wrapper span div {
-        margin-left: 2px;
+    .rare-items-wrapper {
+        span div {
+            margin-left: 2px;
+        }
+
+        #Items-input {
+            margin-right: 12px;
+        }
+
+        > .chip-item {
+            margin: 5px 0;
+        }
     }
 
     .chips-wrapper {

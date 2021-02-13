@@ -85,6 +85,22 @@ export default ({ backAction }) => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
+    const isAllItemsSelected = useCallback(() => {
+        if(filters.itemSet.size === itemNamesArray.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }, [filters, itemNamesArray]);
+
+    const handleAllItemsToggle = useCallback(() => {
+        if(isAllItemsSelected()) {
+            updateFilterValue('itemSet', new Set([]));
+        } else {
+            updateFilterValue('itemSet', new Set(itemNamesArray));
+        }
+    }, [isAllItemsSelected, updateFilterValue, itemNamesArray]);
+
     return (
         <SideDrawer className="shadow">
             <div className="drawer-header inner-container shadow">
@@ -204,6 +220,13 @@ export default ({ backAction }) => {
                         items={allItemsNotInSet(itemNamesArray, filters.itemSet)}
                         onChange={useCallback((value) => onAutocompleteChange('itemSet', value, itemData), [onAutocompleteChange, itemData])}
                     />
+
+                    <Chip
+                        clickable
+                        overrideStatus={isAllItemsSelected() ? true : false}
+                        onClick={handleAllItemsToggle}>
+                        All items
+                    </Chip>
 
                     <div className="chips-wrapper">
                         {[...filters.itemSet].map((itemName, index) =>
