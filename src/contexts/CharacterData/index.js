@@ -9,11 +9,19 @@ export default ({ children }) => {
 
     const [initialData, setInitialData] = useState([]);
 
-    useEffect(async () => {
-        const setupedData = await fetchSetupedData();
-        setInitialData(setupedData);
+    useEffect(() => {
+        const fetchSetupedData = async () => {
+            const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
+            const data = await response.json();
+
+            const setupedData = setupCharacterData(data);
+
+            setInitialData(setupedData);
+        }
+
+        fetchSetupedData();
     }, [])
-    
+
     return (
         <CharacterDataContext.Provider
             value={{
@@ -25,13 +33,4 @@ export default ({ children }) => {
             {children}
         </CharacterDataContext.Provider>
     )
-}
-
-const fetchSetupedData = async () => {
-    const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
-    const data = await response.json();
-
-    const setupedData = setupCharacterData(data);
-
-    return setupedData;
 }
