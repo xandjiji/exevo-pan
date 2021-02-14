@@ -1,8 +1,7 @@
-import initialData from './initialData';
 import { indexedServerData } from '../ServerData/initialData';
 import itemData from '../ItemsData/initialData';
 
-const applyFilters = (filterState) => {
+const applyFilters = (filterState, initialData) => {
 
     const {
         vocation,
@@ -85,7 +84,7 @@ const getAuctionIdSetFromItemNameSet = (nameSet) => {
 export const characterDataReducer = (state, action) => {
     switch (action.type) {
         case 'APPLY_FILTERS':
-            return applyFilters(action.filterState);
+            return applyFilters(action.filterState, action.initialData);
 
         default:
             return state;

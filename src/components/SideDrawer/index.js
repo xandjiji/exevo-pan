@@ -15,7 +15,7 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 
 export default ({ backAction }) => {
 
-    const charContext = useContext(CharacterDataContext);
+    const { initialData, dispatch } = useContext(CharacterDataContext);
     const { serverData } = useContext(ServerDataContext);
     const itemData = useContext(ItemsDataContext);
 
@@ -81,7 +81,7 @@ export default ({ backAction }) => {
 
 
     useEffect(() => {
-        charContext.dispatch({ type: 'APPLY_FILTERS', filterState: filters });
+        dispatch({ type: 'APPLY_FILTERS', filterState: filters, initialData });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 

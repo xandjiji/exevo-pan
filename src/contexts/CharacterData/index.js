@@ -1,16 +1,23 @@
-import React, { useReducer } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import CharacterDataContext from './context';
-import initialData from './initialData';
 import { characterDataReducer } from './reducers';
-
+import setupCharacterData from '../../utils/setupCharacterData';
 
 export default ({ children }) => {
 
-    const [characterData, dispatch] = useReducer(characterDataReducer, initialData);
+    const [characterData, dispatch] = useReducer(characterDataReducer, []);
+
+    const [initialData, setInitialData] = useState([]);
+
+    useEffect(async () => {
+        const setupedData = await fetchSetupedData();
+        setInitialData(setupedData);
+    }, [])
     
     return (
         <CharacterDataContext.Provider
             value={{
+                initialData,
                 characterData,
                 dispatch
             }}
@@ -18,4 +25,13 @@ export default ({ children }) => {
             {children}
         </CharacterDataContext.Provider>
     )
+}
+
+const fetchSetupedData = async () => {
+    const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
+    const data = await response.json();
+
+    const setupedData = setupCharacterData(data);
+
+    return setupedData;
 }
