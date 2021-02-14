@@ -1,13 +1,16 @@
-import data from '../../LatestCharacterData.json';
 import { translateCharObject } from '../../utils/dataDictionary';
 
-let initialData = [];
-for (let i = 0; i < data.length; i++) {
-    initialData.push(translateCharObject(data[i]));
+let characterData = localStorage.getItem('characterData');
+console.log(characterData);
+characterData = JSON.parse(characterData);
+
+const initialData = [];
+for (let i = 0; i < characterData.length; i++) {
+    initialData.push(translateCharObject(characterData[i]));
 }
 
 const currentDate = new Date();
-for (let i = 0; i < data.length; i++) {
+for (let i = 0; i < characterData.length; i++) {
     let itemDate = new Date(initialData[i].auctionEnd * 1000);
 
     if (currentDate > itemDate) {
