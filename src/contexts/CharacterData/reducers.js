@@ -1,6 +1,6 @@
 import initialData from './initialData';
 import { indexedServerData } from '../ServerData/initialData';
-import itemData from '../../ItemsData.json';
+import itemData from '../ItemsData/initialData';
 
 const applyFilters = (filterState) => {
 
