@@ -8,7 +8,12 @@ export default ({ children }) => {
 
     const [characterData, dispatch] = useReducer(characterDataReducer, []);
 
-    const [initialCharacterData, setinitialCharacterData] = useState([]);
+    const [initialCharacterData, setInitialCharacterData] = useState([]);
+    const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
+
+    useEffect(() => {
+        setUpdatedCharacterData(characterData);
+    }, [characterData])
 
     useEffect(() => {
         const fetchSetupedData = async () => {
@@ -24,7 +29,8 @@ export default ({ children }) => {
                 setupedData = getFromLocalStorage('initialCharacterData');
 
             } finally {
-                setinitialCharacterData(setupedData);
+                setInitialCharacterData(setupedData);
+                setUpdatedCharacterData(setupedData);
             }
         }
 
@@ -35,7 +41,7 @@ export default ({ children }) => {
         <CharacterDataContext.Provider
             value={{
                 initialCharacterData,
-                characterData,
+                characterData: updatedCharacterData,
                 dispatch
             }}
         >

@@ -38,6 +38,8 @@ export default ({ itemsPerPage }) => {
         handleAction(0);
     }, [characterData])
 
+    console.log(initialCharacterData);
+
     return useMemo(() => {
 
         if (initialCharacterData.length === 0) return null;
@@ -59,5 +61,5 @@ export default ({ itemsPerPage }) => {
             </CharGrid>
         )
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [charList, characterData, itemsPerPage]);
+    }, [charList, characterData, itemsPerPage, initialCharacterData]);
 }

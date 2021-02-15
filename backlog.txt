@@ -4,5 +4,4 @@ Soul war filter
 
 Favourites
 
-Decouple .json from build files (fetch from external URL)
 exevopan.com
