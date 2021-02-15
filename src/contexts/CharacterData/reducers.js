@@ -1,7 +1,8 @@
 import { indexedServerData } from '../ServerData/initialData';
-import itemData from '../ItemsData/initialData';
 
 const applyFilters = (filterState, initialData) => {
+
+    const { initialCharacterData, itemData } = initialData;
 
     const {
         vocation,
@@ -15,10 +16,10 @@ const applyFilters = (filterState, initialData) => {
         itemSet
     } = filterState;
 
-    const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet);
+    const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet, itemData);
 
     let filteredData = [];
-    for (const character of initialData) {
+    for (const character of initialCharacterData) {
 
         const {
             id,
@@ -28,32 +29,32 @@ const applyFilters = (filterState, initialData) => {
             skills
         } = character;
 
-        if(setDoesntHasValue(vocation, vocationId)) continue;
+        if (setDoesntHasValue(vocation, vocationId)) continue;
 
-        if(setDoesntHasValue(pvp, indexedServerData[serverId].pvpType.type)) continue;
+        if (setDoesntHasValue(pvp, indexedServerData[serverId].pvpType.type)) continue;
 
-        if(setDoesntHasValue(battleye, indexedServerData[serverId].battleye)) continue;
+        if (setDoesntHasValue(battleye, indexedServerData[serverId].battleye)) continue;
 
-        if(setDoesntHasValue(location, indexedServerData[serverId].serverLocation.type)) continue;
+        if (setDoesntHasValue(location, indexedServerData[serverId].serverLocation.type)) continue;
 
-        if(setDoesntHasValue(serverSet, indexedServerData[serverId].serverName)) continue;
+        if (setDoesntHasValue(serverSet, indexedServerData[serverId].serverName)) continue;
 
-        if(setDoesntHasValue(auctionsItemsSet, id)) continue;
+        if (setDoesntHasValue(auctionsItemsSet, id)) continue;
 
-        if(skillKey.size) {
+        if (skillKey.size) {
             let hasMinimumSkill = false;
             const skillArray = Array.from(skillKey);
-            
-            for(const skillItem of skillArray) {
-                if(skills[skillItem].level >= minSkill) {
+
+            for (const skillItem of skillArray) {
+                if (skills[skillItem].level >= minSkill) {
                     hasMinimumSkill = true;
                     break;
                 }
             }
-            if(!hasMinimumSkill) continue;
+            if (!hasMinimumSkill) continue;
         }
-        
-        if(level < minLevel) continue;
+
+        if (level < minLevel) continue;
 
         filteredData.push(character);
     }
@@ -69,11 +70,11 @@ const setDoesntHasValue = (set, value) => {
     }
 }
 
-const getAuctionIdSetFromItemNameSet = (nameSet) => {
+const getAuctionIdSetFromItemNameSet = (nameSet, itemData) => {
 
     const auctionIdSet = new Set([])
-    for(const itemName of [...nameSet]) {
-        for(const setItem of [...itemData[itemName]]) {
+    for (const itemName of [...nameSet]) {
+        for (const setItem of [...itemData[itemName]]) {
             auctionIdSet.add(setItem);
         }
     }

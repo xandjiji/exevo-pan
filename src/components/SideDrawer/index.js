@@ -15,9 +15,9 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 
 export default ({ backAction }) => {
 
-    const { initialData, dispatch } = useContext(CharacterDataContext);
+    const { initialCharacterData, dispatch } = useContext(CharacterDataContext);
     const { serverData } = useContext(ServerDataContext);
-    const itemData = useContext(ItemsDataContext);
+    const { itemData } = useContext(ItemsDataContext);
 
     const serverNamesArray = useMemo(() => Object.keys(serverData), [serverData]);
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
@@ -81,12 +81,19 @@ export default ({ backAction }) => {
 
 
     useEffect(() => {
-        dispatch({ type: 'APPLY_FILTERS', filterState: filters, initialData });
+        dispatch({
+            type: 'APPLY_FILTERS',
+            filterState: filters,
+            initialData: {
+                initialCharacterData,
+                itemData
+            }
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
     const isAllItemsSelected = useCallback(() => {
-        if(filters.itemSet.size === itemNamesArray.length) {
+        if (filters.itemSet.size === itemNamesArray.length) {
             return true;
         } else {
             return false;
@@ -94,7 +101,7 @@ export default ({ backAction }) => {
     }, [filters, itemNamesArray]);
 
     const handleAllItemsToggle = useCallback(() => {
-        if(isAllItemsSelected()) {
+        if (isAllItemsSelected()) {
             updateFilterValue('itemSet', new Set([]));
         } else {
             updateFilterValue('itemSet', new Set(itemNamesArray));

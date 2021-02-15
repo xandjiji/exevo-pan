@@ -13,7 +13,7 @@ export default ({ itemsPerPage }) => {
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
-    const { initialData, characterData } = useContext(CharacterDataContext);
+    const { initialCharacterData, characterData } = useContext(CharacterDataContext);
 
     const [charList, setCharList] = useState(characterData.slice(0, 30));
     const [index, setIndex] = useState(0);
@@ -40,7 +40,7 @@ export default ({ itemsPerPage }) => {
 
     return useMemo(() => {
 
-        if (initialData.length === 0) return null;
+        if (initialCharacterData.length === 0) return null;
 
         return (
             <CharGrid className="custom-scrollbar" ref={gridRef}>

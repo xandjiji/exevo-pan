@@ -7,7 +7,7 @@ export default ({ children }) => {
 
     const [characterData, dispatch] = useReducer(characterDataReducer, []);
 
-    const [initialData, setInitialData] = useState([]);
+    const [initialCharacterData, setinitialCharacterData] = useState([]);
 
     useEffect(() => {
         const fetchSetupedData = async () => {
@@ -16,7 +16,7 @@ export default ({ children }) => {
 
             const setupedData = setupCharacterData(data);
 
-            setInitialData(setupedData);
+            setinitialCharacterData(setupedData);
         }
 
         fetchSetupedData();
@@ -25,7 +25,7 @@ export default ({ children }) => {
     return (
         <CharacterDataContext.Provider
             value={{
-                initialData,
+                initialCharacterData,
                 characterData,
                 dispatch
             }}
