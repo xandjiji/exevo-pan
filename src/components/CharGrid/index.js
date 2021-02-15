@@ -38,8 +38,6 @@ export default ({ itemsPerPage }) => {
         handleAction(0);
     }, [characterData])
 
-    console.log(initialCharacterData);
-
     return useMemo(() => {
 
         if (initialCharacterData.length === 0) return null;
