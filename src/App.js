@@ -9,6 +9,7 @@ import SideDrawerContext from './contexts/SideDrawer/context';
 
 import CharacterDataProvider from './contexts/CharacterData';
 import ItemsDataProvider from './contexts/ItemsData';
+import ServerDataProvider from './contexts/ServerData';
 
 const App = () => {
     return (
@@ -16,23 +17,26 @@ const App = () => {
 
             <SideDrawerProvider>
                 <CharacterDataProvider>
+                    <ServerDataProvider>
 
-                    <CharGrid itemsPerPage={10} />
+                        <CharGrid itemsPerPage={10} />
 
-                    <ItemsDataProvider>
-                        <SideDrawerContext.Consumer>
-                            {context => (
-                                <Pushable
-                                    active={context.active}
-                                    trigger={context.toggleSideDrawer}
-                                    blockRight
-                                    backdrop
-                                >
-                                    <SideDrawer backAction={context.toggleSideDrawer} />
-                                </Pushable>
-                            )}
-                        </SideDrawerContext.Consumer>
-                    </ItemsDataProvider>
+                        <ItemsDataProvider>
+                            <SideDrawerContext.Consumer>
+                                {context => (
+                                    <Pushable
+                                        active={context.active}
+                                        trigger={context.toggleSideDrawer}
+                                        blockRight
+                                        backdrop
+                                    >
+                                        <SideDrawer backAction={context.toggleSideDrawer} />
+                                    </Pushable>
+                                )}
+                            </SideDrawerContext.Consumer>
+                        </ItemsDataProvider>
+
+                    </ServerDataProvider>
                 </CharacterDataProvider>
             </SideDrawerProvider>
 

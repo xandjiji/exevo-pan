@@ -16,7 +16,7 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 export default ({ backAction }) => {
 
     const { initialCharacterData, dispatch } = useContext(CharacterDataContext);
-    const { serverData } = useContext(ServerDataContext);
+    const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
     const serverNamesArray = useMemo(() => Object.keys(serverData), [serverData]);
@@ -86,7 +86,8 @@ export default ({ backAction }) => {
             filterState: filters,
             initialData: {
                 initialCharacterData,
-                itemData
+                itemData,
+                indexedServerData
             }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps

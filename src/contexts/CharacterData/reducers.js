@@ -1,8 +1,6 @@
-import { indexedServerData } from '../ServerData/initialData';
-
 const applyFilters = (filterState, initialData) => {
 
-    const { initialCharacterData, itemData } = initialData;
+    const { initialCharacterData, itemData, indexedServerData } = initialData;
 
     const {
         vocation,
