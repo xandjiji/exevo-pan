@@ -2,6 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import CharacterDataContext from './context';
 import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
+import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
 export default ({ children }) => {
 
@@ -11,12 +12,20 @@ export default ({ children }) => {
 
     useEffect(() => {
         const fetchSetupedData = async () => {
-            const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
-            const data = await response.json();
+            let setupedData;
+            try {
+                const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
+                const data = await response.json();
 
-            const setupedData = setupCharacterData(data);
+                setupedData = setupCharacterData(data);
+                saveToLocalStorage('initialCharacterData', setupedData);
 
-            setinitialCharacterData(setupedData);
+            } catch (error) {
+                setupedData = getFromLocalStorage('initialCharacterData');
+
+            } finally {
+                setinitialCharacterData(setupedData);
+            }
         }
 
         fetchSetupedData();

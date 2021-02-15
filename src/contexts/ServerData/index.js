@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ServerDataContext from './context';
 import setupServerData from '../../utils/setupServerData';
+import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
 export default ({ children }) => {
 
@@ -9,13 +10,24 @@ export default ({ children }) => {
 
     useEffect(() => {
         const fetchSetupedData = async () => {
-            const response = await fetch('https://exevopan-data.netlify.app/ServerData.json');
-            const data = await response.json();
+            let setupedData;
+            let data;
+            try {
+                const response = await fetch('https://exevopan-data.netlify.app/ServerData.json');
+                data = await response.json();
 
-            const setupedData = setupServerData(data);
+                setupedData = setupServerData(data);
+                saveToLocalStorage('serverData', data);
+                saveToLocalStorage('indexedServerData', setupedData);
 
-            setServerData(data);
-            setIndexedServerData(setupedData);
+            } catch (error) {
+                data = getFromLocalStorage('serverData');
+                setupedData = getFromLocalStorage('indexedServerData');
+
+            } finally {
+                setServerData(data);
+                setIndexedServerData(setupedData);
+            }
         }
 
         fetchSetupedData();

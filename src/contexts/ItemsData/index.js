@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ItemDataContext from './context';
 import setupItemData from '../../utils/setupItemData';
+import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
 export default ({ children }) => {
 
@@ -8,12 +9,20 @@ export default ({ children }) => {
 
     useEffect(() => {
         const fetchSetupedData = async () => {
-            const response = await fetch('https://exevopan-data.netlify.app/ItemsData.json');
-            const data = await response.json();
+            let setupedData;
+            try {
+                const response = await fetch('https://exevopan-data.netlify.app/ItemsData.json');
+                const data = await response.json();
 
-            const setupedData = setupItemData(data);
+                setupedData = setupItemData(data);
+                setItemData(setupedData);
+                saveToLocalStorage('itemData', setupedData);
 
-            setItemData(setupedData);
+            } catch (error) {
+                setupedData = getFromLocalStorage('itemData');
+            } finally {
+                setItemData(setupedData);
+            }
         }
 
         fetchSetupedData();
