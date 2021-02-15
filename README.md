@@ -3,7 +3,7 @@
 
 This application is 100% free and open-source. Run it in any device through a web-browser! Designed for both Mobile and Desktop.
 
-You can find the application [here](https://exevopan.netlify.app/).
+You can find the application [here](https://exevopan.com/).
 
 <p align="center">
 	<img src="https://exevopan.netlify.app/icons/favicon-96x96.png">
