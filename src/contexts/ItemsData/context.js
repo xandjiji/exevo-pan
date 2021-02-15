@@ -1,12 +1,3 @@
 import { createContext } from 'react';
-import ItemsData from '../../ItemsData.json';
 
-const relevantItemsData = {}
-
-for(const item in ItemsData) {
-    if(ItemsData[item].length > 0) {
-        relevantItemsData[item] = ItemsData[item];
-    }
-}
-
-export default createContext(relevantItemsData);
+export default createContext({});

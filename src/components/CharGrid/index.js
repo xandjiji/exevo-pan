@@ -13,7 +13,7 @@ export default ({ itemsPerPage }) => {
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
-    const { characterData } = useContext(CharacterDataContext);
+    const { initialCharacterData, characterData } = useContext(CharacterDataContext);
 
     const [charList, setCharList] = useState(characterData.slice(0, 30));
     const [index, setIndex] = useState(0);
@@ -24,8 +24,10 @@ export default ({ itemsPerPage }) => {
 
     const handleAction = (value) => {
         setIndex(value);
-        gridRef.current.scrollTo({ top: 0, behavior: 'smooth' });
-        listRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+        if (gridRef.current && listRef.current) {
+            gridRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+            listRef.current.scrollTo({ top: 0, behavior: 'smooth' });
+        }
     }
 
     useEffect(() => {
@@ -37,6 +39,9 @@ export default ({ itemsPerPage }) => {
     }, [characterData])
 
     return useMemo(() => {
+
+        if (initialCharacterData.length === 0) return null;
+
         return (
             <CharGrid className="custom-scrollbar" ref={gridRef}>
                 <header className="grid-header shadow inner-container">
