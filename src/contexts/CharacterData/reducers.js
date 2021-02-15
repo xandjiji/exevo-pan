@@ -2,6 +2,10 @@ const applyFilters = (filterState, initialData) => {
 
     const { initialCharacterData, itemData, indexedServerData } = initialData;
 
+    if(!isDataLoaded(initialCharacterData)) return [];
+    if(!isDataLoaded(itemData)) return [];
+    if(!isDataLoaded(indexedServerData)) return [];
+
     const {
         vocation,
         pvp,
@@ -78,6 +82,14 @@ const getAuctionIdSetFromItemNameSet = (nameSet, itemData) => {
     }
 
     return auctionIdSet;
+}
+
+const isDataLoaded = (dataObject) => {
+    if(Object.keys(dataObject).length === 0) {
+        return false;
+    } else {
+        return true;
+    }
 }
 
 export const characterDataReducer = (state, action) => {

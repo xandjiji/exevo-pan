@@ -7,7 +7,7 @@ import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
 import Chip from '../Chip';
 
-import serverDataContext from '../../contexts/ServerData/context';
+import ServerDataContext from '../../contexts/ServerData/context';
 
 import { ReactComponent as ExternalIcon } from '../../assets/svgs/external.svg';
 import BrFlag from '../../assets/br-flag.png';
@@ -29,7 +29,7 @@ const vocationEnum = {
 }
 
 export default ({ charData }) => {
-    const { indexedServerData } = useContext(serverDataContext);
+    const { indexedServerData } = useContext(ServerDataContext);
 
     const {
         id,
@@ -62,6 +62,8 @@ export default ({ charData }) => {
 
         setHighlightedSkill(biggest);
     }, [skills]);
+
+    if(Object.keys(indexedServerData).length === 0) return null;
 
     return (
         <CharCard className="shadow">
