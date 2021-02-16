@@ -6,7 +6,7 @@ import CharacterDataContext from '../../contexts/CharacterData/context';
 import { ReactComponent as NextIcon} from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
-export default ({ itemsPerPage, dataSize, handleAction }) => {
+export default ({ itemsPerPage, dataSize, handleAction, className }) => {
 
     const { characterData } = useContext(CharacterDataContext);
 
@@ -33,7 +33,7 @@ export default ({ itemsPerPage, dataSize, handleAction }) => {
     }, [characterData])
 
     return (
-        <Paginator>
+        <Paginator className={className}>
             <div className="tracker">
                 {`${(index * itemsPerPage) + 1} - ${index + 1 !== pageCount ? (index + 1) * itemsPerPage : dataSize} of ${dataSize}`}
             </div>

@@ -7,6 +7,7 @@ import SideDrawerContext from '../../contexts/SideDrawer/context';
 import CharacterDataContext from '../../contexts/CharacterData/context';
 
 import { ReactComponent as FilterIcon } from '../../assets/svgs/filter.svg';
+import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 export default ({ itemsPerPage }) => {
     const gridRef = useRef(null);
@@ -45,7 +46,10 @@ export default ({ itemsPerPage }) => {
         return (
             <CharGrid className="custom-scrollbar" ref={gridRef}>
                 <header className="grid-header shadow inner-container">
-                    <FilterIcon className="sort-icon clickable" onClick={toggleSideDrawer} />
+                    <div className="left-header-menu">
+                        <FilterIcon className="icon clickable" onClick={toggleSideDrawer} />
+                        <SortIcon className="icon clickable" />
+                    </div>
 
                     <Paginator
                         itemsPerPage={itemsPerPage}

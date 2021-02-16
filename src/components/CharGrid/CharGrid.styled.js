@@ -11,17 +11,25 @@ export default styled.div`
         z-index: 50;
         padding-top: 8px;
         padding-bottom: 8px;
+
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
         background-color: var(--primary);
         user-select: none;
 
-        .sort-icon {
-            width: 37px;
-            height: 37px;
-            fill: var(--onPrimary);
-            outline: none;
+
+        .left-header-menu {
+            .icon {
+                width: 37px;
+                height: 37px;
+                fill: var(--onPrimary);
+                outline: none;
+
+                &:not(:last-child) {
+                    margin-right: 8px;
+                }
+            }
         }
     }
 
