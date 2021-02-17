@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect, useRef, useCallback, useMemo } 
 import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
+import DialogBox from '../DialogBox';
 
 import SideDrawerContext from '../../contexts/SideDrawer/context';
 import CharacterDataContext from '../../contexts/CharacterData/context';
@@ -18,6 +19,7 @@ export default ({ itemsPerPage }) => {
 
     const [charList, setCharList] = useState(characterData.slice(0, 30));
     const [index, setIndex] = useState(0);
+    const [isSortingOpen, setSortingOpen] = useState(false);
 
     const sliceList = useCallback((index) => {
         return characterData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
@@ -48,7 +50,10 @@ export default ({ itemsPerPage }) => {
                 <header className="grid-header shadow inner-container">
                     <div className="left-header-menu">
                         <FilterIcon className="icon clickable" onClick={toggleSideDrawer} />
-                        <SortIcon className="icon clickable" />
+                        <SortIcon className="icon clickable" onClick={() => setSortingOpen(true)} />
+                        <DialogBox isOpen={isSortingOpen} onBackgroundClick={() => setSortingOpen(false)}>
+                            teste
+                        </DialogBox>
                     </div>
 
                     <Paginator
@@ -63,5 +68,5 @@ export default ({ itemsPerPage }) => {
             </CharGrid>
         )
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [charList, characterData, itemsPerPage, initialCharacterData]);
+    }, [charList, characterData, itemsPerPage, initialCharacterData, isSortingOpen]);
 }
