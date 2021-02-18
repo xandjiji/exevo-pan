@@ -9,15 +9,11 @@ export const Wrapper = styled.div`
     }
 `
 
-export const DialogBox = styled.div`
-    position: relative;
-    z-index: 1;
-`
-
 export const Background = styled.div`
     position: fixed;
     top: 0;
     left: 0;
+    z-index: -1;
     width: 100vw;
     height: 100vh;
 `

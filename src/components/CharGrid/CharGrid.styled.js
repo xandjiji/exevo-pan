@@ -20,14 +20,28 @@ export default styled.div`
 
 
         .left-header-menu {
+            display: flex;
+
+            > *:not(:last-child) {
+                margin-right: 8px;
+            }
+
             .icon {
                 width: 37px;
                 height: 37px;
                 fill: var(--onPrimary);
                 outline: none;
+            }
 
-                &:not(:last-child) {
-                    margin-right: 8px;
+            .sorting-wrapper {
+                position: relative;
+
+                .sorting-dialog {
+                    position: absolute;
+                    bottom: -8px;
+                    left: 50%;
+
+                    background-color: red;
                 }
             }
         }

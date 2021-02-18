@@ -39,7 +39,7 @@ export default ({ itemsPerPage }) => {
 
     useEffect(() => {
         handleAction(0);
-    }, [characterData])
+    }, [characterData]);
 
     return useMemo(() => {
 
@@ -50,10 +50,12 @@ export default ({ itemsPerPage }) => {
                 <header className="grid-header shadow inner-container">
                     <div className="left-header-menu">
                         <FilterIcon className="icon clickable" onClick={toggleSideDrawer} />
-                        <SortIcon className="icon clickable" onClick={() => setSortingOpen(true)} />
-                        <DialogBox isOpen={isSortingOpen} onBackgroundClick={() => setSortingOpen(false)}>
-                            teste
-                        </DialogBox>
+                        <div className="sorting-wrapper">
+                            <SortIcon className="icon clickable" onClick={() => setSortingOpen(true)} />
+                            <DialogBox className="sorting-dialog" isOpen={isSortingOpen} setState={setSortingOpen}>
+                                teste
+                            </DialogBox>
+                        </div>
                     </div>
 
                     <Paginator
