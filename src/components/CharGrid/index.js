@@ -53,8 +53,8 @@ export default ({ itemsPerPage }) => {
                 <div className="left-header-menu">
                     <FilterIcon className="icon clickable" onClick={toggleSideDrawer} />
                     <div className="sorting-wrapper">
-                        <SortIcon className="icon clickable" onClick={() => setSortingOpen(true)} />
-                        <DialogBox isOpen={isSortingOpen || true} setState={setSortingOpen}>
+                        <SortIcon className="icon clickable" onClick={() => setSortingOpen(prev => !prev)} />
+                        <DialogBox isOpen={isSortingOpen} setState={setSortingOpen}>
                             <div className="options-wrapper shadow">
                                 {sortingModes.map((mode, index) => (
                                     <Chip
