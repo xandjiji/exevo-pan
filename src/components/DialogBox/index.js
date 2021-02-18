@@ -1,14 +1,14 @@
 import React from 'react';
 import { Wrapper, Background } from './DialogBox.styled';
 
-export default ({ children, className, isOpen, onClose, setState }) => {
+export default ({ children, isOpen, onClose, setState }) => {
 
     const handleBackgroundClick = () => {
         onClose?.();
         setState(false);
     }
     return (
-        <Wrapper className={`${isOpen ? 'visible' : ''} ${className}`}>
+        <Wrapper className={`${isOpen ? 'visible' : ''}`}>
             {children}
             <Background onClick={handleBackgroundClick} />
         </Wrapper>

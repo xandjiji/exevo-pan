@@ -36,12 +36,23 @@ export default styled.div`
             .sorting-wrapper {
                 position: relative;
 
-                .sorting-dialog {
+                .options-wrapper {
                     position: absolute;
-                    bottom: -8px;
+                    top: calc(100% + 0px);
                     left: 50%;
+                    transform: translateX(-50%);
 
-                    background-color: red;
+                    padding: 12px;
+                    border-radius: 5px;
+                    background-color: var(--surface);
+
+                    > * {
+                        width: max-content;
+
+                        &:not(:last-child) {
+                            margin-bottom: 8px;
+                        }
+                    }
                 }
             }
         }

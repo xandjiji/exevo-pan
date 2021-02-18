@@ -1,8 +1,8 @@
 Sorts
-    Price
-    Price (bidded only)
     Auction End
     Level
+    Price
+    Price (bidded only)
 
 Soul war filter
 
