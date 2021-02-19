@@ -1,5 +1,5 @@
 import React, { memo } from 'react';
-import { RadioInput } from './RadioInput.styled';
+import RadioInput from './RadioInput.styled';
 
 export default memo(({ children, active, onClick }) => {
     return(
