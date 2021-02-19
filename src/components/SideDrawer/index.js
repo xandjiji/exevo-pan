@@ -15,7 +15,7 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 
 export default ({ backAction }) => {
 
-    const { initialCharacterData, dispatch } = useContext(CharacterDataContext);
+    const { initialCharacterData, dispatchCharacterData } = useContext(CharacterDataContext);
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
@@ -81,7 +81,7 @@ export default ({ backAction }) => {
 
 
     useEffect(() => {
-        dispatch({
+        dispatchCharacterData({
             type: 'APPLY_FILTERS',
             filterState: filters,
             initialData: {
@@ -91,7 +91,7 @@ export default ({ backAction }) => {
             }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters]);
+    }, [filters, initialCharacterData]);
 
     const isAllItemsSelected = useCallback(() => {
         if (filters.itemSet.size === itemNamesArray.length) {

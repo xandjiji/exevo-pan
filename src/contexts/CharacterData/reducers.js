@@ -1,3 +1,5 @@
+import { getFromLocalStorage } from '../../utils/localStorage';
+
 const applyFilters = (filterState, initialData) => {
 
     const { initialCharacterData, itemData, indexedServerData } = initialData;
@@ -92,10 +94,39 @@ const isDataLoaded = (dataObject) => {
     }
 }
 
+const applySort = (sortingMode) => {
+    
+    const initialCharacterData = getFromLocalStorage('initialCharacterData');
+    const newData = [...initialCharacterData];
+
+    const byAuctionEnd = (a, b) => {
+        return a.auctionEnd - b.auctionEnd;
+    }
+
+    const byLevel = (a, b) => {
+        return a.level - b.level;
+    }
+
+    const byPrice = (a, b) => {
+        return a.currentBid - b.currentBid;
+    }
+
+    const sortingModes = {
+        'Auction End': byAuctionEnd,
+        'Level': byLevel,
+        'Price': byPrice
+    }
+
+    return newData.sort(sortingModes[sortingMode]);
+}
+
 export const characterDataReducer = (state, action) => {
     switch (action.type) {
         case 'APPLY_FILTERS':
             return applyFilters(action.filterState, action.initialData);
+
+        case 'APPLY_SORT':
+            return applySort(action.sortingMode);
 
         default:
             return state;

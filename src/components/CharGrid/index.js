@@ -18,7 +18,7 @@ export default ({ itemsPerPage }) => {
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
-    const { initialCharacterData, characterData } = useContext(CharacterDataContext);
+    const { initialCharacterData, characterData, dispatchInitialData } = useContext(CharacterDataContext);
 
     const [charList, setCharList] = useState(characterData.slice(0, 30));
     const [index, setIndex] = useState(0);
@@ -44,6 +44,13 @@ export default ({ itemsPerPage }) => {
     useEffect(() => {
         handleAction(0);
     }, [characterData]);
+
+    useEffect(() => {
+        dispatchInitialData({
+            type: 'APPLY_SORT',
+            sortingMode: sortingModes[selectedSort]
+        })
+    }, [selectedSort, dispatchInitialData])
 
     if (initialCharacterData.length === 0) return null;
 
