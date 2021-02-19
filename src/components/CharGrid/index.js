@@ -3,7 +3,7 @@ import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 import DialogBox from '../DialogBox';
-import Chip from '../Chip';
+import RadioInput from '../RadioInput';
 
 import SideDrawerContext from '../../contexts/SideDrawer/context';
 import CharacterDataContext from '../../contexts/CharacterData/context';
@@ -64,14 +64,13 @@ export default ({ itemsPerPage }) => {
                         <DialogBox isOpen={isSortingOpen} setState={setSortingOpen}>
                             <div className="options-wrapper shadow">
                                 {sortingModes.map((mode, index) => (
-                                    <Chip
+                                    <RadioInput
                                         key={index}
-                                        clickable
-                                        overrideStatus={selectedSort === index}
+                                        active={selectedSort === index}
                                         onClick={() => setSelectedSort(index)}
                                     >
                                         {mode}
-                                    </Chip>
+                                    </RadioInput>
                                 ))}
                             </div>
                         </DialogBox>

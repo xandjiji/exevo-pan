@@ -42,7 +42,7 @@ export default styled.div`
                     left: 50%;
                     transform: translateX(-50%);
 
-                    padding: 12px;
+                    padding: 16px;
                     border-radius: 5px;
                     background-color: var(--surface);
 
@@ -50,7 +50,7 @@ export default styled.div`
                         width: max-content;
 
                         &:not(:last-child) {
-                            margin-bottom: 8px;
+                            margin-bottom: 12px;
                         }
                     }
                 }
