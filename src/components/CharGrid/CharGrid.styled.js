@@ -52,6 +52,10 @@ export default styled.div`
                         &:not(:last-child) {
                             margin-bottom: 12px;
                         }
+
+                        &:first-child {
+                            margin-bottom: 22px;
+                        }
                     }
                 }
             }

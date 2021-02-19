@@ -4,6 +4,7 @@ import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 import DialogBox from '../DialogBox';
 import RadioInput from '../RadioInput';
+import Switch from '../Switch';
 
 import SideDrawerContext from '../../contexts/SideDrawer/context';
 import CharacterDataContext from '../../contexts/CharacterData/context';
@@ -24,6 +25,7 @@ export default ({ itemsPerPage }) => {
     const [index, setIndex] = useState(0);
     const [isSortingOpen, setSortingOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState(0);
+    const [descendingOrder, setDescendingOrder] = useState(false);
 
     const sliceList = useCallback((index) => {
         return characterData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
@@ -50,7 +52,7 @@ export default ({ itemsPerPage }) => {
             type: 'APPLY_SORT',
             sortingMode: sortingModes[selectedSort]
         })
-    }, [selectedSort, dispatchInitialData])
+    }, [selectedSort, dispatchInitialData]);
 
     if (initialCharacterData.length === 0) return null;
 
@@ -63,6 +65,7 @@ export default ({ itemsPerPage }) => {
                         <SortIcon className="icon clickable" onClick={() => setSortingOpen(prev => !prev)} />
                         <DialogBox isOpen={isSortingOpen} setState={setSortingOpen}>
                             <div className="options-wrapper shadow">
+                                <Switch active={descendingOrder} onClick={() => setDescendingOrder(prev => !prev)}>Descending</Switch>
                                 {sortingModes.map((mode, index) => (
                                     <RadioInput
                                         key={index}
