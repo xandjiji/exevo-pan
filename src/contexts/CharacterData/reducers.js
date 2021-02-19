@@ -4,9 +4,9 @@ const applyFilters = (filterState, initialData) => {
 
     const { initialCharacterData, itemData, indexedServerData } = initialData;
 
-    if(!isDataLoaded(initialCharacterData)) return [];
-    if(!isDataLoaded(itemData)) return [];
-    if(!isDataLoaded(indexedServerData)) return [];
+    if (!isDataLoaded(initialCharacterData)) return [];
+    if (!isDataLoaded(itemData)) return [];
+    if (!isDataLoaded(indexedServerData)) return [];
 
     const {
         vocation,
@@ -87,7 +87,7 @@ const getAuctionIdSetFromItemNameSet = (nameSet, itemData) => {
 }
 
 const isDataLoaded = (dataObject) => {
-    if(Object.keys(dataObject).length === 0) {
+    if (Object.keys(dataObject).length === 0) {
         return false;
     } else {
         return true;
@@ -95,8 +95,10 @@ const isDataLoaded = (dataObject) => {
 }
 
 const applySort = (sortingMode) => {
-    
+
     const initialCharacterData = getFromLocalStorage('initialCharacterData');
+    if (!initialCharacterData) return [];
+
     const newData = [...initialCharacterData];
 
     const byAuctionEnd = (a, b) => {
@@ -111,13 +113,22 @@ const applySort = (sortingMode) => {
         return a.currentBid - b.currentBid;
     }
 
-    const sortingModes = {
-        'Auction End': byAuctionEnd,
-        'Level': byLevel,
-        'Price': byPrice
-    }
+    switch (sortingMode) {
+        case 'Auction End':
+            return newData.sort(byAuctionEnd);
 
-    return newData.sort(sortingModes[sortingMode]);
+        case 'Level':
+            return newData.sort(byLevel);
+
+        case 'Price':
+            return newData.sort(byPrice);
+
+        case 'Price (bidded only)':
+            return newData.filter(item => item.hasBeenBidded).sort(byPrice);
+
+        default:
+            return newData;
+    }
 }
 
 export const characterDataReducer = (state, action) => {
