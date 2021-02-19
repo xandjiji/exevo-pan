@@ -97,7 +97,7 @@ const isDataLoaded = (dataObject) => {
 const applySort = (sortingMode, descendingOrder) => {
 
     const initialCharacterData = getFromLocalStorage('initialCharacterData');
-    if (!initialCharacterData) return [];
+    if (!Array.isArray(initialCharacterData)) return [];
 
     const newData = [...initialCharacterData];
 
