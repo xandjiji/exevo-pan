@@ -50,9 +50,10 @@ export default ({ itemsPerPage }) => {
     useEffect(() => {
         dispatchInitialData({
             type: 'APPLY_SORT',
-            sortingMode: sortingModes[selectedSort]
-        })
-    }, [selectedSort, dispatchInitialData]);
+            sortingMode: sortingModes[selectedSort],
+            descendingOrder
+        });
+    }, [selectedSort, dispatchInitialData, descendingOrder]);
 
     if (initialCharacterData.length === 0) return null;
 

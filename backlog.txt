@@ -1,9 +1,3 @@
-Sorts
-    Auction End
-    Level
-    Price
-    Price (bidded only)
-
 Soul war filter
 
 Favourites

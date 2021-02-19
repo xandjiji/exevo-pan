@@ -94,7 +94,7 @@ const isDataLoaded = (dataObject) => {
     }
 }
 
-const applySort = (sortingMode) => {
+const applySort = (sortingMode, descendingOrder) => {
 
     const initialCharacterData = getFromLocalStorage('initialCharacterData');
     if (!initialCharacterData) return [];
@@ -102,15 +102,18 @@ const applySort = (sortingMode) => {
     const newData = [...initialCharacterData];
 
     const byAuctionEnd = (a, b) => {
-        return a.auctionEnd - b.auctionEnd;
+        if(!descendingOrder) return a.auctionEnd - b.auctionEnd;
+        return b.auctionEnd - a.auctionEnd;
     }
 
     const byLevel = (a, b) => {
-        return a.level - b.level;
+        if(!descendingOrder) return a.level - b.level;
+        return b.level - a.level;
     }
 
     const byPrice = (a, b) => {
-        return a.currentBid - b.currentBid;
+        if(!descendingOrder) return a.currentBid - b.currentBid;
+        return b.currentBid - a.currentBid;
     }
 
     switch (sortingMode) {
@@ -137,7 +140,7 @@ export const characterDataReducer = (state, action) => {
             return applyFilters(action.filterState, action.initialData);
 
         case 'APPLY_SORT':
-            return applySort(action.sortingMode);
+            return applySort(action.sortingMode, action.descendingOrder);
 
         default:
             return state;
