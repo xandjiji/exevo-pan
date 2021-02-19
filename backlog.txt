@@ -1,7 +1,6 @@
-Sorts
-
 Soul war filter
 
 Favourites
 
-exevopan.com
+memoize CharGrid again
+avoid repetitions for Chips in SideDrawer

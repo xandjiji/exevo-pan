@@ -6,14 +6,19 @@ import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorag
 
 export default ({ children }) => {
 
-    const [characterData, dispatch] = useReducer(characterDataReducer, []);
+    const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, []);
+    const [initialData, dispatchInitialData] = useReducer(characterDataReducer, []);
 
-    const [initialCharacterData, setInitialCharacterData] = useState([]);
+    const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
 
     useEffect(() => {
         setUpdatedCharacterData(characterData);
-    }, [characterData])
+    }, [characterData]);
+
+    useEffect(() => {
+        setInitialCharacterData(initialData);
+    }, [initialData]);
 
     useEffect(() => {
         const fetchSetupedData = async () => {
@@ -35,14 +40,16 @@ export default ({ children }) => {
         }
 
         fetchSetupedData();
-    }, [])
+    }, []);
 
     return (
         <CharacterDataContext.Provider
             value={{
                 initialCharacterData,
+                dispatchInitialData,
+
                 characterData: updatedCharacterData,
-                dispatch
+                dispatchCharacterData
             }}
         >
             {children}
