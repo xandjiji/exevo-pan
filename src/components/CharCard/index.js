@@ -6,6 +6,7 @@ import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
 import Chip from '../Chip';
+import FavButton from '../FavButton';
 
 import ServerDataContext from '../../contexts/ServerData/context';
 
@@ -85,6 +86,7 @@ export default ({ charData }) => {
                         Level {level} - {level >= 20 ? vocationEnum[vocationId] : vocationEnum['1' + vocationId]}
                     </div>
                 </div>
+                <FavButton className="fav-button" charData={charData} />
             </div>
 
             <div className="overview">

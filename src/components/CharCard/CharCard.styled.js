@@ -6,6 +6,7 @@ export default styled.div`
     background-color: var(--surface);
 
     .card-head {
+        position: relative;
         margin-bottom: 16px;
         display: flex;
         align-items: center;
@@ -50,6 +51,12 @@ export default styled.div`
                 letter-spacing: 0.5px;
                 color: var(--onSurface);
             }
+        }
+
+        .fav-button {
+            position: absolute;
+            top: 0;
+            right: 0;
         }
     }
 

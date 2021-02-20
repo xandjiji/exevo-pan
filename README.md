@@ -20,8 +20,7 @@ You can find the application [here](https://exevopan.com/).
 
 ## Future Features
 
-- Sorting filters
-- More miscellaneous filters (rare names, quests/achievements, maximum level/skill, etc)
+- More miscellaneous filters (rare names, quests/achievements, etc)
 - More detailed information (items, imbuiments, achievements, quests, transfer availability)
 - Search by nickname
 - Dark Theme
@@ -39,7 +38,7 @@ All live data is fetched from these endpoints:
 
 `https://exevopan-data.netlify.app/ServerData.json`
 
-They are being updated around every 12 minutes
+They are being updated around every 5 minutes
 
 ## More informations
 
