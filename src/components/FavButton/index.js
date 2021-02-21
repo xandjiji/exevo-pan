@@ -21,9 +21,9 @@ export default ({ className, charData }) => {
 
     return (
         <FavButton
-            className={`${className || ''} ${active ? 'active' : ''}`}
+            className={`${className || ''} ${active ? 'active' : ''} shadow clickable`}
             onClick={handleClick}>
-            <HeartIcon className="clickable" />
+            <HeartIcon />
         </FavButton>
     )
 }

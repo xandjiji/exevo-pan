@@ -27,7 +27,7 @@ export default styled.div`
 
             .nickname {
                 margin-bottom: 2px;
-                width: calc(100% - 32px);
+                width: calc(100% - 42px);
                 display: flex;
                 align-items: center;
                 font-size: 16px;
@@ -56,7 +56,7 @@ export default styled.div`
 
         .fav-button {
             position: absolute;
-            top: 4px;
+            top: 2px;
             right: 0;
         }
     }
