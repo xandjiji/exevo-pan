@@ -11,12 +11,11 @@ export default ({ children }) => {
 
     useEffect(() => {
         const fetchSetupedData = async () => {
-            let setupedData;
             try {
                 const response = await fetch('https://exevopan-data.netlify.app/ItemsData.json');
                 const data = await response.json();
 
-                setupedData = setupItemData(data);
+                const setupedData = setupItemData(data);
                 saveToLocalStorage('itemData', setupedData);
                 setItemData(setupedData);
 

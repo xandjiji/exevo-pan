@@ -24,12 +24,11 @@ export default ({ children }) => {
 
     useEffect(() => {
         const fetchSetupedData = async () => {
-            let setupedData;
             try {
                 const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
                 const data = await response.json();
 
-                setupedData = setupCharacterData(data);
+                const setupedData = setupCharacterData(data);
                 saveToLocalStorage('initialCharacterData', setupedData);
                 setInitialCharacterData(setupedData);
                 setUpdatedCharacterData(setupedData);
