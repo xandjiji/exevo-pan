@@ -3,9 +3,11 @@ import ItemDataContext from './context';
 import setupItemData from '../../utils/setupItemData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
+const initialItemObject = getFromLocalStorage('itemData', {});
+
 export default ({ children }) => {
 
-    const [itemData, setItemData] = useState({});
+    const [itemData, setItemData] = useState(initialItemObject);
 
     useEffect(() => {
         const fetchSetupedData = async () => {
@@ -15,13 +17,11 @@ export default ({ children }) => {
                 const data = await response.json();
 
                 setupedData = setupItemData(data);
-                setItemData(setupedData);
                 saveToLocalStorage('itemData', setupedData);
+                setItemData(setupedData);
 
             } catch (error) {
-                setupedData = getFromLocalStorage('itemData', {});
-            } finally {
-                setItemData(setupedData);
+                console.log(error);
             }
         }
 

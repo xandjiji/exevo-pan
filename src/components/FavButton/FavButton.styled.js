@@ -8,17 +8,23 @@ export default styled.div`
         width: 32px;
         height: 32px;
 
+        path {
+            transition: opacity 0.12s ease-out;
+        }
+
         .filled {
             fill: var(--red);
             opacity: 0;
-            transition: opacity 0.12s ease-out;
         }
     }
 
     &.active {
         svg {
+            .hollow {
+                opacity: 0;
+            }
             .filled {
-                opacity: 0.5;
+                opacity: 0.6;
             }
         }
     }

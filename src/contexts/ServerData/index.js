@@ -3,10 +3,13 @@ import ServerDataContext from './context';
 import setupServerData from '../../utils/setupServerData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
+const initialServerObject = getFromLocalStorage('serverData', {});
+const initialIndexedServerObject = getFromLocalStorage('indexedServerData', {});
+
 export default ({ children }) => {
 
-    const [serverData, setServerData] = useState({});
-    const [indexedServerData, setIndexedServerData] = useState({});
+    const [serverData, setServerData] = useState(initialServerObject);
+    const [indexedServerData, setIndexedServerData] = useState(initialIndexedServerObject);
 
     useEffect(() => {
         const fetchSetupedData = async () => {
@@ -19,14 +22,12 @@ export default ({ children }) => {
                 setupedData = setupServerData(data);
                 saveToLocalStorage('serverData', data);
                 saveToLocalStorage('indexedServerData', setupedData);
-
-            } catch (error) {
-                data = getFromLocalStorage('serverData', {});
-                setupedData = getFromLocalStorage('indexedServerData', {});
-
-            } finally {
                 setServerData(data);
                 setIndexedServerData(setupedData);
+
+            } catch (error) {
+                console.log(error);
+
             }
         }
 
