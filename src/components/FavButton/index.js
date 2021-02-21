@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useCallback } from 'react';
+import React, { useState, useContext } from 'react';
 import FavButton from './FavButton.styled';
 
 import CharacterDataContext from '../../contexts/CharacterData/context';
@@ -8,10 +8,7 @@ import { ReactComponent as HeartIcon } from '../../assets/svgs/heart.svg';
 export default ({ className, charData }) => {
     const { favCharacters, dispatchFavCharacters } = useContext(CharacterDataContext);
 
-    const isFav = useCallback(() =>
-        favCharacters.some(char => char.id === charData.id),
-        [favCharacters, charData]
-    );
+    const isFav = () => favCharacters.some(char => char.id === charData.id);
     const [active, setActive] = useState(isFav());
 
     const handleClick = () => {
@@ -21,14 +18,6 @@ export default ({ className, charData }) => {
             charData
         })
     }
-
-    useEffect(() => {
-        if (isFav()) {
-            setActive(true);
-        } else {
-            setActive(false);
-        }
-    }, [favCharacters, isFav]);
 
     return (
         <FavButton
