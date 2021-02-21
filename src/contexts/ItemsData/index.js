@@ -19,7 +19,7 @@ export default ({ children }) => {
                 saveToLocalStorage('itemData', setupedData);
 
             } catch (error) {
-                setupedData = getFromLocalStorage('itemData');
+                setupedData = getFromLocalStorage('itemData', {});
             } finally {
                 setItemData(setupedData);
             }

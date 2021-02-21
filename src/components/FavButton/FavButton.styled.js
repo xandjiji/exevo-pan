@@ -4,13 +4,14 @@ export default styled.div`
     user-select: none;
 
     svg {
+        padding: 4px;
         width: 32px;
         height: 32px;
-        padding: 4px;
+
         .filled {
             fill: var(--red);
             opacity: 0;
-            transition: opacity 0.2s ease-out;
+            transition: opacity 0.12s ease-out;
         }
     }
 

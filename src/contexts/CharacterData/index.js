@@ -31,7 +31,7 @@ export default ({ children }) => {
                 saveToLocalStorage('initialCharacterData', setupedData);
 
             } catch (error) {
-                setupedData = getFromLocalStorage('initialCharacterData');
+                setupedData = getFromLocalStorage('initialCharacterData', []);
 
             } finally {
                 setInitialCharacterData(setupedData);

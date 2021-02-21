@@ -21,8 +21,8 @@ export default ({ children }) => {
                 saveToLocalStorage('indexedServerData', setupedData);
 
             } catch (error) {
-                data = getFromLocalStorage('serverData');
-                setupedData = getFromLocalStorage('indexedServerData');
+                data = getFromLocalStorage('serverData', {});
+                setupedData = getFromLocalStorage('indexedServerData', {});
 
             } finally {
                 setServerData(data);
