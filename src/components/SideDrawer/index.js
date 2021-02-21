@@ -168,21 +168,21 @@ export default ({ backAction }) => {
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 0), [toggleInFilterSet])}
                     >
-                        <img className="flag" src={EuFlag}/>
+                        <img className="flag" alt="Europe" title="Europe" src={EuFlag}/>
                         EU
                     </Chip>
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 1), [toggleInFilterSet])}
                     >
-                        <img className="flag" src={NaFlag}/>
+                        <img className="flag" alt="North America" title="North America" src={NaFlag}/>
                         NA
                     </Chip>
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 2), [toggleInFilterSet])}
                     >
-                        <img className="flag" src={BrFlag}/>
+                        <img className="flag" alt="Brazil" title="Brazil" src={BrFlag}/>
                         BR
                     </Chip>
                 </FilterGroup>
