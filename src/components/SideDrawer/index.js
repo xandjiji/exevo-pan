@@ -8,6 +8,21 @@ import DrawerFooter from '../DrawerFooter';
 import InformationBadge from '../InformationBadge';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
+import Rook from '../../assets/rook.png'
+import Knight from '../../assets/knight.png'
+import Paladin from '../../assets/paladin.png'
+import Sorcerer from '../../assets/sorcerer.png'
+import Druid from '../../assets/druid.png'
+import Magic from '../../assets/magic.png';
+import Distance from '../../assets/distance.png';
+import Club from '../../assets/club.png';
+import Sword from '../../assets/sword.png';
+import Axe from '../../assets/axe.png';
+import Dove from '../../assets/dove.png';
+import OrangeSkull from '../../assets/orangeSkull.png';
+import WhiteSkull from '../../assets/whiteSkull.png';
+import RedSkull from '../../assets/redSkull.png';
+import BlackSkull from '../../assets/blackSkull.png';
 import BrFlag from '../../assets/br-flag.png';
 import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
@@ -129,19 +144,79 @@ export default ({ backAction }) => {
 
             <div className="items-wrapper inner-container custom-scrollbar">
                 <FilterGroup title="Vocation" display="flex">
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('vocation', 0), [toggleInFilterSet])}>None</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('vocation', 1), [toggleInFilterSet])}>Knight</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('vocation', 2), [toggleInFilterSet])}>Paladin</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('vocation', 3), [toggleInFilterSet])}>Sorcerer</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('vocation', 4), [toggleInFilterSet])}>Druid</Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('vocation', 0), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={Rook} alt="None" title="None" />
+                        None
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('vocation', 1), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={Knight} alt="Knight" title="Knight" />
+                        Knight
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('vocation', 2), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={Paladin} alt="Paladin" title="Paladin" />
+                        Paladin
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('vocation', 3), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={Sorcerer} alt="Sorcerer" title="Sorcerer" />
+                        Sorcerer
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('vocation', 4), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={Druid} alt="Druid" title="Druid" />
+                        Druid
+                    </Chip>
                 </FilterGroup>
 
                 <FilterGroup title="PvP" display="flex">
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('pvp', 0), [toggleInFilterSet])}>Optional</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('pvp', 1), [toggleInFilterSet])}>Open</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('pvp', 2), [toggleInFilterSet])}>Retro Open</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('pvp', 3), [toggleInFilterSet])}>Hardcore</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('pvp', 4), [toggleInFilterSet])}>Retro Hardcore</Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('pvp', 0), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={Dove} alt="Optional PvP" title="Optional PvP" />
+                        Optional
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('pvp', 1), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={WhiteSkull} alt="Open PvP" title="Open PvP" />
+                        Open
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('pvp', 2), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={OrangeSkull} alt="Retro Open PvP" title="Retro Open PvP" />
+                        Retro Open
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('pvp', 3), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={RedSkull} alt="Hardcore PvP" title="Hardcore PvP" />
+                        Hardcore
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('pvp', 4), [toggleInFilterSet])}
+                    >
+                        <img className="chip-icon" src={BlackSkull} alt="Retro Hardcore PvP" title="Retro Hardcore PvP" />
+                        Retro Hardcore
+                    </Chip>
                 </FilterGroup>
 
                 <FilterGroup className="battleye-wrapper" title="BattlEye" display="flex">
@@ -168,21 +243,21 @@ export default ({ backAction }) => {
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 0), [toggleInFilterSet])}
                     >
-                        <img className="flag" alt="Europe" title="Europe" src={EuFlag}/>
+                        <img className="flag chip-icon" alt="Europe" title="Europe" src={EuFlag} />
                         EU
                     </Chip>
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 1), [toggleInFilterSet])}
                     >
-                        <img className="flag" alt="North America" title="North America" src={NaFlag}/>
+                        <img className="flag chip-icon" alt="North America" title="North America" src={NaFlag} />
                         NA
                     </Chip>
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 2), [toggleInFilterSet])}
                     >
-                        <img className="flag" alt="Brazil" title="Brazil" src={BrFlag}/>
+                        <img className="flag chip-icon" alt="Brazil" title="Brazil" src={BrFlag} />
                         BR
                     </Chip>
                 </FilterGroup>
@@ -235,11 +310,41 @@ export default ({ backAction }) => {
                     />
 
                     <div className="skills-wrapper">
-                        <Chip clickable onClick={useCallback(() => toggleInFilterSet('skillKey', 'magic'), [toggleInFilterSet])}>Magic</Chip>
-                        <Chip clickable onClick={useCallback(() => toggleInFilterSet('skillKey', 'distance'), [toggleInFilterSet])}>Distance</Chip>
-                        <Chip clickable onClick={useCallback(() => toggleInFilterSet('skillKey', 'club'), [toggleInFilterSet])}>Club</Chip>
-                        <Chip clickable onClick={useCallback(() => toggleInFilterSet('skillKey', 'sword'), [toggleInFilterSet])}>Sword</Chip>
-                        <Chip clickable onClick={useCallback(() => toggleInFilterSet('skillKey', 'axe'), [toggleInFilterSet])}>Axe</Chip>
+                        <Chip
+                            clickable
+                            onClick={useCallback(() => toggleInFilterSet('skillKey', 'magic'), [toggleInFilterSet])}
+                        >
+                            <img className="chip-icon" src={Magic} alt="Magic Level" title="Magic Level" />
+                            Magic
+                        </Chip>
+                        <Chip
+                            clickable
+                            onClick={useCallback(() => toggleInFilterSet('skillKey', 'distance'), [toggleInFilterSet])}
+                        >
+                            <img className="chip-icon" src={Distance} alt="Distance fighting" title="Distance fighting" />
+                            Distance
+                        </Chip>
+                        <Chip
+                            clickable
+                            onClick={useCallback(() => toggleInFilterSet('skillKey', 'club'), [toggleInFilterSet])}
+                        >
+                            <img className="chip-icon" src={Club} alt="Club fighting" title="Club fighting" />
+                            Club
+                        </Chip>
+                        <Chip
+                            clickable
+                            onClick={useCallback(() => toggleInFilterSet('skillKey', 'sword'), [toggleInFilterSet])}
+                        >
+                            <img className="chip-icon" src={Sword} alt="Sword fighting" title="Sword fighting" />
+                            Sword
+                        </Chip>
+                        <Chip
+                            clickable
+                            onClick={useCallback(() => toggleInFilterSet('skillKey', 'axe'), [toggleInFilterSet])}
+                        >
+                            <img className="chip-icon" src={Axe} alt="Axe fighting" title="Axe fighting" />
+                            Axe
+                        </Chip>
                     </div>
                 </FilterGroup>
 

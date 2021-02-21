@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
     height: 100vh;
     width: 90vw;
-    max-width: 560px;
+    max-width: 600px;
     border-radius: 0 0 4px 0;
     background-color: var(--surface);
 
@@ -48,8 +48,11 @@ export default styled.div`
             font-size: 0;
         }
 
-        .flag {
+        .chip-icon {
             margin-right: 6px;
+        }
+
+        .flag {
             width: 16px;
             height: 10px;
             box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
