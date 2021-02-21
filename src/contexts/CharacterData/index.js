@@ -5,11 +5,13 @@ import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
 const initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
+const initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
 
 export default ({ children }) => {
 
     const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, initialCharacterArray);
     const [initialData, dispatchInitialData] = useReducer(characterDataReducer, initialCharacterArray);
+    const [favCharacters, dispatchFavCharacters] = useReducer(characterDataReducer, initialFavCharacterArray);
 
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
@@ -48,7 +50,10 @@ export default ({ children }) => {
                 dispatchInitialData,
 
                 characterData: updatedCharacterData,
-                dispatchCharacterData
+                dispatchCharacterData,
+
+                favCharacters,
+                dispatchFavCharacters
             }}
         >
             {children}
