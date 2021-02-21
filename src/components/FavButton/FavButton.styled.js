@@ -24,7 +24,7 @@ export default styled.div`
                 opacity: 0;
             }
             .filled {
-                opacity: 0.6;
+                opacity: 0.65;
             }
         }
     }

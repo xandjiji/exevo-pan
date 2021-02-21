@@ -15,7 +15,7 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 
 export default ({ backAction }) => {
 
-    const { initialCharacterData, dispatchCharacterData } = useContext(CharacterDataContext);
+    const { initialCharacterData, favCharacters, dispatchCharacterData } = useContext(CharacterDataContext);
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
@@ -32,11 +32,18 @@ export default ({ backAction }) => {
         minSkill: 10,
         skillKey: new Set([]),
         itemSet: new Set([]),
+        fav: false
     });
 
     const updateFilterValue = useCallback((key, value) => {
         setFilters(prevFilters => {
             return { ...prevFilters, [key]: value };
+        });
+    }, []);
+
+    const toggleFilterValue = useCallback((key) => {
+        setFilters(prevFilters => {
+            return { ...prevFilters, [key]: !prevFilters[key] }
         });
     }, []);
 
@@ -87,7 +94,8 @@ export default ({ backAction }) => {
             initialData: {
                 initialCharacterData,
                 itemData,
-                indexedServerData
+                indexedServerData,
+                favCharacters
             }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -246,6 +254,10 @@ export default ({ backAction }) => {
                             </Chip>
                         )}
                     </div>
+                </FilterGroup>
+
+                <FilterGroup title="Misc" display="flex">
+                    <Chip clickable onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}>Favorited ❤️</Chip>
                 </FilterGroup>
             </div>
 

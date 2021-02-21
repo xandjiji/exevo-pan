@@ -2,7 +2,7 @@ import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorag
 
 const applyFilters = (filterState, initialData) => {
 
-    const { initialCharacterData, itemData, indexedServerData } = initialData;
+    const { initialCharacterData, itemData, indexedServerData, favCharacters } = initialData;
 
     if (!isDataLoaded(initialCharacterData)) return [];
     if (!isDataLoaded(itemData)) return [];
@@ -17,13 +17,17 @@ const applyFilters = (filterState, initialData) => {
         minLevel,
         minSkill,
         skillKey,
-        itemSet
+        itemSet,
+        fav
     } = filterState;
+
+    let charPool = initialCharacterData;
+    if(fav) charPool = favCharacters;
 
     const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet, itemData);
 
     let filteredData = [];
-    for (const character of initialCharacterData) {
+    for (const character of charPool) {
 
         const {
             id,
