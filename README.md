@@ -14,18 +14,17 @@ You can find the application [here](https://exevopan.com/).
 - List all available character auctions
 - Filter by server types and character stats
 - Rare items finder
+- Bookmark auctions
 <p align="center">
 	<img src="https://i.imgur.com/aT5xhiU.png">
 </p>
 
 ## Future Features
 
-- Sorting filters
-- More miscellaneous filters (rare names, quests/achievements, maximum level/skill, etc)
+- More miscellaneous filters (rare names, quests/achievements, etc)
 - More detailed information (items, imbuiments, achievements, quests, transfer availability)
 - Search by nickname
 - Dark Theme
-- Bookmark characters
 
 ## Char Bazaar Data
 
@@ -39,7 +38,7 @@ All live data is fetched from these endpoints:
 
 `https://exevopan-data.netlify.app/ServerData.json`
 
-They are being updated around every 12 minutes
+They are being updated around every 5 minutes
 
 ## More informations
 

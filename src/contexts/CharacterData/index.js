@@ -4,10 +4,14 @@ import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
+const initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
+const initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
+
 export default ({ children }) => {
 
-    const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, []);
-    const [initialData, dispatchInitialData] = useReducer(characterDataReducer, []);
+    const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, initialCharacterArray);
+    const [initialData, dispatchInitialData] = useReducer(characterDataReducer, initialCharacterArray);
+    const [favCharacters, dispatchFavCharacters] = useReducer(characterDataReducer, initialFavCharacterArray);
 
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
@@ -22,20 +26,17 @@ export default ({ children }) => {
 
     useEffect(() => {
         const fetchSetupedData = async () => {
-            let setupedData;
             try {
                 const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
                 const data = await response.json();
 
-                setupedData = setupCharacterData(data);
+                const setupedData = setupCharacterData(data);
                 saveToLocalStorage('initialCharacterData', setupedData);
-
-            } catch (error) {
-                setupedData = getFromLocalStorage('initialCharacterData');
-
-            } finally {
                 setInitialCharacterData(setupedData);
                 setUpdatedCharacterData(setupedData);
+
+            } catch (error) {
+                console.log(error);
             }
         }
 
@@ -49,7 +50,10 @@ export default ({ children }) => {
                 dispatchInitialData,
 
                 characterData: updatedCharacterData,
-                dispatchCharacterData
+                dispatchCharacterData,
+
+                favCharacters,
+                dispatchFavCharacters
             }}
         >
             {children}

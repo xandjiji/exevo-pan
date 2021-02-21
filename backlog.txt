@@ -1,6 +1,0 @@
-Soul war filter
-
-Favourites
-
-memoize CharGrid again
-avoid repetitions for Chips in SideDrawer

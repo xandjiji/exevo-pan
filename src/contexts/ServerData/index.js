@@ -3,30 +3,29 @@ import ServerDataContext from './context';
 import setupServerData from '../../utils/setupServerData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
+const initialServerObject = getFromLocalStorage('serverData', {});
+const initialIndexedServerObject = getFromLocalStorage('indexedServerData', {});
+
 export default ({ children }) => {
 
-    const [serverData, setServerData] = useState({});
-    const [indexedServerData, setIndexedServerData] = useState({});
+    const [serverData, setServerData] = useState(initialServerObject);
+    const [indexedServerData, setIndexedServerData] = useState(initialIndexedServerObject);
 
     useEffect(() => {
         const fetchSetupedData = async () => {
-            let setupedData;
-            let data;
             try {
                 const response = await fetch('https://exevopan-data.netlify.app/ServerData.json');
-                data = await response.json();
+                const data = await response.json();
 
-                setupedData = setupServerData(data);
+                const setupedData = setupServerData(data);
                 saveToLocalStorage('serverData', data);
                 saveToLocalStorage('indexedServerData', setupedData);
-
-            } catch (error) {
-                data = getFromLocalStorage('serverData');
-                setupedData = getFromLocalStorage('indexedServerData');
-
-            } finally {
                 setServerData(data);
                 setIndexedServerData(setupedData);
+
+            } catch (error) {
+                console.log(error);
+
             }
         }
 

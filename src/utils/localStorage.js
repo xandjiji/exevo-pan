@@ -3,10 +3,10 @@ export const saveToLocalStorage = (key, data) => {
     localStorage.setItem(key, serializedData);
 }
 
-export const getFromLocalStorage = (key) => {
+export const getFromLocalStorage = (key, empty) => {
     const serializedData = localStorage.getItem(key);
 
-    if (!serializedData) return {};
+    if (!serializedData) return empty;
 
     return JSON.parse(serializedData);
 }

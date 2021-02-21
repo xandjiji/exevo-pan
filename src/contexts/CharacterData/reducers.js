@@ -1,8 +1,8 @@
-import { getFromLocalStorage } from '../../utils/localStorage';
+import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
 const applyFilters = (filterState, initialData) => {
 
-    const { initialCharacterData, itemData, indexedServerData } = initialData;
+    const { initialCharacterData, itemData, indexedServerData, favCharacters } = initialData;
 
     if (!isDataLoaded(initialCharacterData)) return [];
     if (!isDataLoaded(itemData)) return [];
@@ -17,13 +17,17 @@ const applyFilters = (filterState, initialData) => {
         minLevel,
         minSkill,
         skillKey,
-        itemSet
+        itemSet,
+        fav
     } = filterState;
+
+    let charPool = initialCharacterData;
+    if(fav) charPool = favCharacters;
 
     const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet, itemData);
 
     let filteredData = [];
-    for (const character of initialCharacterData) {
+    for (const character of charPool) {
 
         const {
             id,
@@ -96,23 +100,22 @@ const isDataLoaded = (dataObject) => {
 
 const applySort = (sortingMode, descendingOrder) => {
 
-    const initialCharacterData = getFromLocalStorage('initialCharacterData');
-    if (!Array.isArray(initialCharacterData)) return [];
+    const initialCharacterData = getFromLocalStorage('initialCharacterData', []);
 
     const newData = [...initialCharacterData];
 
     const byAuctionEnd = (a, b) => {
-        if(!descendingOrder) return a.auctionEnd - b.auctionEnd;
+        if (!descendingOrder) return a.auctionEnd - b.auctionEnd;
         return b.auctionEnd - a.auctionEnd;
     }
 
     const byLevel = (a, b) => {
-        if(!descendingOrder) return a.level - b.level;
+        if (!descendingOrder) return a.level - b.level;
         return b.level - a.level;
     }
 
     const byPrice = (a, b) => {
-        if(!descendingOrder) return a.currentBid - b.currentBid;
+        if (!descendingOrder) return a.currentBid - b.currentBid;
         return b.currentBid - a.currentBid;
     }
 
@@ -134,6 +137,29 @@ const applySort = (sortingMode, descendingOrder) => {
     }
 }
 
+const toggleFav = (charData, favArray) => {
+
+    const findCharIndexById = (id) => {
+        for (let i = 0; i < favArray.length; i++) {
+            if (favArray[i].id === id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    const charIndex = findCharIndexById(charData.id);
+    if (charIndex >= 0) {
+        favArray.splice(charIndex, 1);
+    } else {
+        favArray.push(charData);
+    }
+
+    saveToLocalStorage('initialFavCharacterData', favArray);
+
+    return favArray;
+}
+
 export const characterDataReducer = (state, action) => {
     switch (action.type) {
         case 'APPLY_FILTERS':
@@ -141,6 +167,9 @@ export const characterDataReducer = (state, action) => {
 
         case 'APPLY_SORT':
             return applySort(action.sortingMode, action.descendingOrder);
+
+        case 'TOGGLE_FAV':
+            return toggleFav(action.charData, state);
 
         default:
             return state;

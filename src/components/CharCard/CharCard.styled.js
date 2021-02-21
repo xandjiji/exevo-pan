@@ -6,6 +6,7 @@ export default styled.div`
     background-color: var(--surface);
 
     .card-head {
+        position: relative;
         margin-bottom: 16px;
         display: flex;
         align-items: center;
@@ -26,6 +27,7 @@ export default styled.div`
 
             .nickname {
                 margin-bottom: 2px;
+                width: calc(100% - 32px);
                 display: flex;
                 align-items: center;
                 font-size: 16px;
@@ -50,6 +52,12 @@ export default styled.div`
                 letter-spacing: 0.5px;
                 color: var(--onSurface);
             }
+        }
+
+        .fav-button {
+            position: absolute;
+            top: 4px;
+            right: 0;
         }
     }
 

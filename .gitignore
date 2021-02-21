@@ -20,3 +20,5 @@ yarn-error.log*
 LatestCharacterData.json
 ServerData.json
 ItemsData.json
+
+backlog.txt
