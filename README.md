@@ -14,6 +14,7 @@ You can find the application [here](https://exevopan.com/).
 - List all available character auctions
 - Filter by server types and character stats
 - Rare items finder
+- Bookmark auctions
 <p align="center">
 	<img src="https://i.imgur.com/aT5xhiU.png">
 </p>
@@ -24,7 +25,6 @@ You can find the application [here](https://exevopan.com/).
 - More detailed information (items, imbuiments, achievements, quests, transfer availability)
 - Search by nickname
 - Dark Theme
-- Bookmark characters
 
 ## Char Bazaar Data
 
