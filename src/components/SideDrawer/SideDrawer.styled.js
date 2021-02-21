@@ -47,6 +47,13 @@ export default styled.div`
         .invisible-label {
             font-size: 0;
         }
+
+        .flag {
+            margin-right: 6px;
+            width: 16px;
+            height: 10px;
+            box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
+        }
     }
 
     .skills-wrapper {

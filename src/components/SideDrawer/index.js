@@ -8,6 +8,9 @@ import DrawerFooter from '../DrawerFooter';
 import InformationBadge from '../InformationBadge';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
+import BrFlag from '../../assets/br-flag.png';
+import EuFlag from '../../assets/eu-flag.png';
+import NaFlag from '../../assets/na-flag.png';
 
 import CharacterDataContext from '../../contexts/CharacterData/context';
 import ServerDataContext from '../../contexts/ServerData/context';
@@ -161,9 +164,27 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Server location" display="flex">
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('location', 0), [toggleInFilterSet])}>EU</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('location', 1), [toggleInFilterSet])}>NA</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('location', 2), [toggleInFilterSet])}>BR</Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('location', 0), [toggleInFilterSet])}
+                    >
+                        <img className="flag" src={EuFlag}/>
+                        EU
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('location', 1), [toggleInFilterSet])}
+                    >
+                        <img className="flag" src={NaFlag}/>
+                        NA
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('location', 2), [toggleInFilterSet])}
+                    >
+                        <img className="flag" src={BrFlag}/>
+                        BR
+                    </Chip>
                 </FilterGroup>
 
                 <FilterGroup title="Server" display="flex">
