@@ -94,7 +94,7 @@ const getAuctionIdSetFromItemNameSet = (nameSet, itemData) => {
     return auctionIdSet;
 }
 
-const specialCharacters = /[äëïöüÿ'-.]/i;
+const specialCharacters = /[äëïöüÿ'-.,]/i;
 const twoConsecutiveUppercase = /[A-Z][A-Z]/;
 const isRareNickname = (nickname) => {
     if (nickname.length <= 3) return true;
