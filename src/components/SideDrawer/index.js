@@ -319,6 +319,7 @@ export default ({ backAction }) => {
                         min={2}
                         max={1000}
                         onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])}
+                        overrideValue={filters.minLevel}
                     />
                 </FilterGroup>
 
@@ -332,6 +333,7 @@ export default ({ backAction }) => {
                         min={10}
                         max={130}
                         onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])}
+                        overrideValue={filters.minSkill}
                     />
 
                     <div className="skills-wrapper">

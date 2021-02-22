@@ -1,7 +1,7 @@
 import React, { useState, useEffect, memo, useCallback } from 'react';
 import RangeSlider from './RangeSlider.styled';
 
-export default memo(({ labelFor, counterLabel, initialValue, min, max, onChange }) => {
+export default memo(({ labelFor, counterLabel, initialValue, min, max, onChange, overrideValue }) => {
     const [value, setValue] = useState(initialValue);
     const [percentage, setPercentage] = useState(normalizePercentage(initialValue, max));
 
@@ -14,13 +14,22 @@ export default memo(({ labelFor, counterLabel, initialValue, min, max, onChange 
         }
     }
 
+    console.log(percentage);
+
     const callbackChange = useCallback(() => onChange(value), [onChange, value]);
 
     useEffect(() => {
         const timeOutObj = setTimeout(() => callbackChange(value), 500);
         return () => clearTimeout(timeOutObj);
-        
-    },[value, callbackChange]);
+
+    }, [value, callbackChange]);
+
+    useEffect(() => {
+        if (overrideValue) {
+            setValue(overrideValue);
+            setPercentage(normalizePercentage(overrideValue, max));
+        }
+    }, [overrideValue, setPercentage, max]);
 
     const stopBubbling = (event) => {
         event.stopPropagation();
