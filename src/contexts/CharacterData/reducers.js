@@ -18,11 +18,12 @@ const applyFilters = (filterState, initialData) => {
         minSkill,
         skillKey,
         itemSet,
-        fav
+        fav,
+        rareNick
     } = filterState;
 
     let charPool = initialCharacterData;
-    if(fav) charPool = favCharacters;
+    if (fav) charPool = favCharacters;
 
     const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet, itemData);
 
@@ -34,7 +35,8 @@ const applyFilters = (filterState, initialData) => {
             vocationId,
             serverId,
             level,
-            skills
+            skills,
+            nickname
         } = character;
 
         if (setDoesntHasValue(vocation, vocationId)) continue;
@@ -48,6 +50,8 @@ const applyFilters = (filterState, initialData) => {
         if (setDoesntHasValue(serverSet, indexedServerData[serverId].serverName)) continue;
 
         if (setDoesntHasValue(auctionsItemsSet, id)) continue;
+
+        if(rareNick && !isRareNickname(nickname)) continue;
 
         if (skillKey.size) {
             let hasMinimumSkill = false;
@@ -88,6 +92,16 @@ const getAuctionIdSetFromItemNameSet = (nameSet, itemData) => {
     }
 
     return auctionIdSet;
+}
+
+const specialCharacters = /[äëïöüÿ'-.]/i;
+const twoConsecutiveUppercase = /[A-Z][A-Z]/;
+const isRareNickname = (nickname) => {
+    if (nickname.length <= 3) return true;
+    if (specialCharacters.test(nickname)) return true;
+    if(twoConsecutiveUppercase.test(nickname)) return true;
+
+    return false;
 }
 
 const isDataLoaded = (dataObject) => {

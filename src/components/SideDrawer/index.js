@@ -50,7 +50,8 @@ export default ({ backAction }) => {
         minSkill: 10,
         skillKey: new Set([]),
         itemSet: new Set([]),
-        fav: false
+        fav: false,
+        rareNick: false
     });
 
     const updateFilterValue = useCallback((key, value) => {
@@ -384,6 +385,7 @@ export default ({ backAction }) => {
 
                 <FilterGroup title="Misc" display="flex">
                     <Chip clickable onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}>Favorited ❤️</Chip>
+                    <Chip clickable onClick={useCallback(() => toggleFilterValue('rareNick'), [toggleFilterValue])}>Rare nicknames</Chip>
                 </FilterGroup>
             </div>
 
