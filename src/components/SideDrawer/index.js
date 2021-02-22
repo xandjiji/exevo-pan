@@ -8,6 +8,8 @@ import DrawerFooter from '../DrawerFooter';
 import InformationBadge from '../InformationBadge';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
+import { ReactComponent as ResetIcon } from '../../assets/svgs/reset.svg';
+
 import Rook from '../../assets/rook.png'
 import Knight from '../../assets/knight.png'
 import Paladin from '../../assets/paladin.png'
@@ -55,6 +57,7 @@ export default ({ backAction }) => {
     }
 
     const [filters, setFilters] = useState(initialFilterState);
+    const [interacted, setInteracted] = useState(false);
 
     const updateFilterValue = useCallback((key, value) => {
         setFilters(prevFilters => {
@@ -138,15 +141,65 @@ export default ({ backAction }) => {
         }
     }, [isAllItemsSelected, updateFilterValue, itemNamesArray]);
 
+    const filterIsReset = useCallback(() => {
+       const {
+           vocation,
+           pvp,
+           battleye,
+           location,
+           serverSet,
+           itemSet,
+           minLevel,
+           minSkill,
+           skillKey,
+           fav,
+           rareNick
+       } = filters;
+
+       
+       if(vocation.size) return false;
+       if(pvp.size) return false;
+       if(battleye.size) return false;
+       if(location.size) return false;
+       if(serverSet.size) return false;
+       if(skillKey.size) return false;
+       if(itemSet.size) return false;
+       if(minLevel !== 2) return false;
+       if(minSkill !== 10) return false;
+       if(fav) return false;
+       if(rareNick) return false;
+
+       return true;
+    }, [filters]);
+
+    useEffect(() => {
+        if(filterIsReset()) {
+            setInteracted(false);
+        } else {
+            setInteracted(true);
+        }
+    }, [filters, filterIsReset]);
+
     return (
         <SideDrawer className="shadow">
             <div className="drawer-header inner-container shadow">
-                <ArrowIcon className="clickable" onClick={backAction} />
-                Filters
+                <div className="icon-group">
+                    <ArrowIcon className="clickable" onClick={backAction} />
+                    Filters
+                </div>
+                <div
+                    className={`icon-group reset-group clickable ${interacted ? 'active' : ''}`}
+                    onClick={() => {
+                        setFilters(initialFilterState);
+                        setInteracted(false);
+                    }}
+                >
+                    <span>reset filters</span>
+                    <ResetIcon />
+                </div>
             </div>
 
             <div className="items-wrapper inner-container custom-scrollbar">
-                <button onClick={() => setFilters(initialFilterState)}> teste </button>
                 <FilterGroup title="Vocation" display="flex">
                     <Chip
                         clickable

@@ -13,17 +13,47 @@ export default styled.div`
         margin-bottom: 24px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         background-color: var(--primary);
 
         font-size: 16px;
         letter-spacing: 0.5px;
         color: var(--onPrimary);
+
+        .icon-group {
+            display: flex;
+            align-items: center;
+        }
         
         svg {
             margin-right: 24px;
             width: 30px;
             height: 30px;
             fill: var(--onPrimary);
+        }
+
+        .reset-group {
+            margin: -2px 0;
+            transition: opacity 0.2s ease-out;
+
+            &:not(.active) {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            span {
+                margin-top: 2px;
+                margin-left: 6px;
+                font-size: 9px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-weight: 700;
+            }
+
+            svg {
+                margin-right: 0;
+                margin-left: 3px;
+            }
         }
     }
 

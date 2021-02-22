@@ -14,8 +14,6 @@ export default memo(({ labelFor, counterLabel, initialValue, min, max, onChange,
         }
     }
 
-    console.log(percentage);
-
     const callbackChange = useCallback(() => onChange(value), [onChange, value]);
 
     useEffect(() => {
