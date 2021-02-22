@@ -40,7 +40,7 @@ export default ({ backAction }) => {
     const serverNamesArray = useMemo(() => Object.keys(serverData), [serverData]);
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
-    const [filters, setFilters] = useState({
+    const initialFilterState = {
         vocation: new Set(),
         pvp: new Set([]),
         battleye: new Set([]),
@@ -52,7 +52,9 @@ export default ({ backAction }) => {
         itemSet: new Set([]),
         fav: false,
         rareNick: false
-    });
+    }
+
+    const [filters, setFilters] = useState(initialFilterState);
 
     const updateFilterValue = useCallback((key, value) => {
         setFilters(prevFilters => {
@@ -144,10 +146,12 @@ export default ({ backAction }) => {
             </div>
 
             <div className="items-wrapper inner-container custom-scrollbar">
+                <button onClick={() => setFilters(initialFilterState)}> teste </button>
                 <FilterGroup title="Vocation" display="flex">
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 0), [toggleInFilterSet])}
+                        overrideStatus={filters.vocation.has(0)}
                     >
                         <img className="chip-icon" src={Rook} alt="None" title="None" />
                         None
@@ -155,6 +159,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 1), [toggleInFilterSet])}
+                        overrideStatus={filters.vocation.has(1)}
                     >
                         <img className="chip-icon" src={Knight} alt="Knight" title="Knight" />
                         Knight
@@ -162,6 +167,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 2), [toggleInFilterSet])}
+                        overrideStatus={filters.vocation.has(2)}
                     >
                         <img className="chip-icon" src={Paladin} alt="Paladin" title="Paladin" />
                         Paladin
@@ -169,6 +175,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 3), [toggleInFilterSet])}
+                        overrideStatus={filters.vocation.has(3)}
                     >
                         <img className="chip-icon" src={Sorcerer} alt="Sorcerer" title="Sorcerer" />
                         Sorcerer
@@ -176,6 +183,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 4), [toggleInFilterSet])}
+                        overrideStatus={filters.vocation.has(4)}
                     >
                         <img className="chip-icon" src={Druid} alt="Druid" title="Druid" />
                         Druid
@@ -186,6 +194,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 0), [toggleInFilterSet])}
+                        overrideStatus={filters.pvp.has(0)}
                     >
                         <img className="chip-icon" src={Dove} alt="Optional PvP" title="Optional PvP" />
                         Optional
@@ -193,6 +202,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 1), [toggleInFilterSet])}
+                        overrideStatus={filters.pvp.has(1)}
                     >
                         <img className="chip-icon" src={WhiteSkull} alt="Open PvP" title="Open PvP" />
                         Open
@@ -200,6 +210,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 2), [toggleInFilterSet])}
+                        overrideStatus={filters.pvp.has(2)}
                     >
                         <img className="chip-icon" src={OrangeSkull} alt="Retro Open PvP" title="Retro Open PvP" />
                         Retro Open
@@ -207,6 +218,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 3), [toggleInFilterSet])}
+                        overrideStatus={filters.pvp.has(3)}
                     >
                         <img className="chip-icon" src={RedSkull} alt="Hardcore PvP" title="Hardcore PvP" />
                         Hardcore
@@ -214,6 +226,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 4), [toggleInFilterSet])}
+                        overrideStatus={filters.pvp.has(4)}
                     >
                         <img className="chip-icon" src={BlackSkull} alt="Retro Hardcore PvP" title="Retro Hardcore PvP" />
                         Retro Hardcore
@@ -221,7 +234,11 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup className="battleye-wrapper" title="BattlEye" display="flex">
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('battleye', true), [toggleInFilterSet])}>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('battleye', true), [toggleInFilterSet])}
+                        overrideStatus={filters.battleye.has(true)}
+                    >
                         <span
                             className="battleye-icon"
                             style={{ backgroundColor: `var(--battleGreen)` }}
@@ -229,7 +246,11 @@ export default ({ backAction }) => {
                         </span>
                             Green
                     </Chip>
-                    <Chip clickable onClick={useCallback(() => toggleInFilterSet('battleye', false), [toggleInFilterSet])}>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleInFilterSet('battleye', false), [toggleInFilterSet])}
+                        overrideStatus={filters.battleye.has(false)}
+                    >
                         <span
                             className="battleye-icon"
                             style={{ backgroundColor: `var(--battleYellow)` }}
@@ -243,6 +264,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 0), [toggleInFilterSet])}
+                        overrideStatus={filters.location.has(0)}
                     >
                         <img className="flag chip-icon" alt="Europe" title="Europe" src={EuFlag} />
                         EU
@@ -250,6 +272,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 1), [toggleInFilterSet])}
+                        overrideStatus={filters.location.has(1)}
                     >
                         <img className="flag chip-icon" alt="North America" title="North America" src={NaFlag} />
                         NA
@@ -257,6 +280,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 2), [toggleInFilterSet])}
+                        overrideStatus={filters.location.has(2)}
                     >
                         <img className="flag chip-icon" alt="Brazil" title="Brazil" src={BrFlag} />
                         BR
@@ -314,6 +338,7 @@ export default ({ backAction }) => {
                         <Chip
                             clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'magic'), [toggleInFilterSet])}
+                            overrideStatus={filters.skillKey.has('magic')}
                         >
                             <img className="chip-icon" src={Magic} alt="Magic Level" title="Magic Level" />
                             Magic
@@ -321,6 +346,7 @@ export default ({ backAction }) => {
                         <Chip
                             clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'distance'), [toggleInFilterSet])}
+                            overrideStatus={filters.skillKey.has('distance')}
                         >
                             <img className="chip-icon" src={Distance} alt="Distance fighting" title="Distance fighting" />
                             Distance
@@ -328,6 +354,7 @@ export default ({ backAction }) => {
                         <Chip
                             clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'club'), [toggleInFilterSet])}
+                            overrideStatus={filters.skillKey.has('club')}
                         >
                             <img className="chip-icon" src={Club} alt="Club fighting" title="Club fighting" />
                             Club
@@ -335,6 +362,7 @@ export default ({ backAction }) => {
                         <Chip
                             clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'sword'), [toggleInFilterSet])}
+                            overrideStatus={filters.skillKey.has('sword')}
                         >
                             <img className="chip-icon" src={Sword} alt="Sword fighting" title="Sword fighting" />
                             Sword
@@ -342,6 +370,7 @@ export default ({ backAction }) => {
                         <Chip
                             clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'axe'), [toggleInFilterSet])}
+                            overrideStatus={filters.skillKey.has('axe')}
                         >
                             <img className="chip-icon" src={Axe} alt="Axe fighting" title="Axe fighting" />
                             Axe
@@ -384,8 +413,20 @@ export default ({ backAction }) => {
                 </FilterGroup>
 
                 <FilterGroup title="Misc" display="flex">
-                    <Chip clickable onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}>Favorited ❤️</Chip>
-                    <Chip clickable onClick={useCallback(() => toggleFilterValue('rareNick'), [toggleFilterValue])}>Rare nicknames</Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}
+                        overrideStatus={filters.fav}
+                    >
+                        Favorited ❤️
+                    </Chip>
+                    <Chip
+                        clickable
+                        onClick={useCallback(() => toggleFilterValue('rareNick'), [toggleFilterValue])}
+                        overrideStatus={filters.rareNick}
+                    >
+                        Rare nicknames
+                    </Chip>
                 </FilterGroup>
             </div>
 
