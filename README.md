@@ -16,7 +16,7 @@ You can find the application [here](https://exevopan.com/).
 - Rare items finder
 - Bookmark auctions
 <p align="center">
-	<img src="https://i.imgur.com/aT5xhiU.png">
+	<img src="https://i.imgur.com/M5MWUyw.png">
 </p>
 
 ## Future Features
