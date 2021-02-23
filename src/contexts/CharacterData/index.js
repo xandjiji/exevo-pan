@@ -4,6 +4,8 @@ import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
+import LoadingIndicator from '../../components/LoadingIndicator';
+
 const initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
 const initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
 
@@ -15,6 +17,8 @@ export default ({ children }) => {
 
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
+
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
         setUpdatedCharacterData(characterData);
@@ -34,6 +38,7 @@ export default ({ children }) => {
                 saveToLocalStorage('initialCharacterData', setupedData);
                 setInitialCharacterData(setupedData);
                 setUpdatedCharacterData(setupedData);
+                setLoaded(true);
 
             } catch (error) {
                 console.log(error);
@@ -56,6 +61,7 @@ export default ({ children }) => {
                 dispatchFavCharacters
             }}
         >
+            {loaded ? null : <LoadingIndicator />}
             {children}
         </CharacterDataContext.Provider>
     )
