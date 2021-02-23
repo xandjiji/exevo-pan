@@ -73,6 +73,8 @@ export default ({ charData }) => {
                     src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
                     alt={nickname}
                     title={nickname}
+                    width={64}
+                    height={64}
                 />
                 <div className="head-info">
                     <p className="nickname">
@@ -97,6 +99,8 @@ export default ({ charData }) => {
                             alt={currentServer.serverLocation.string}
                             title={currentServer.serverLocation.string}
                             src={getFlag(currentServer.serverLocation.type)}
+                            width={16}
+                            height={10}
                         />
                         {currentServer.serverName}
                     </div>
@@ -125,6 +129,8 @@ export default ({ charData }) => {
                             className="coin"
                             alt="Tibia Coin"
                             src={TibiaCoinIcon}
+                            width={12}
+                            height={12}
                         />
                         {numberWithCommas(currentBid)}
                     </div>

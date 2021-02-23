@@ -14,11 +14,6 @@ export default styled.div`
         > *:first-child {
             width: 56px;
             height: 56px;
-
-            img, img.loaded {
-                width: 64px;
-                height: 64px;
-            }
         }
 
         .head-info {
@@ -117,14 +112,7 @@ export default styled.div`
             box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
         }
 
-        .flag {
-            width: 16px;
-            height: 10px;
-        }
-
         .coin {
-            width: 12px;
-            height: 12px;
             border-radius: 50%;
         }
 
