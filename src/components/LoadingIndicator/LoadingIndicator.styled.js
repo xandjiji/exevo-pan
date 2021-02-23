@@ -2,12 +2,14 @@ import styled from 'styled-components';
 
 export default styled.div`
     position: absolute;
-    top: 50%;
+    top: 26px;
     left: 50%;
-    z-index: 1;
+    z-index: 60;
+    transform: translate(-50%);
 
     padding: 6px 16px;
     display: flex;
+    align-items: center;
 
     border-radius: 5px;
     background-color: var(--alert);
