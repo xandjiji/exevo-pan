@@ -18,6 +18,8 @@ export default ({ children }) => {
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
 
+    const [loaded, setLoaded] = useState(false);
+
     useEffect(() => {
         setUpdatedCharacterData(characterData);
     }, [characterData]);
@@ -36,6 +38,7 @@ export default ({ children }) => {
                 saveToLocalStorage('initialCharacterData', setupedData);
                 setInitialCharacterData(setupedData);
                 setUpdatedCharacterData(setupedData);
+                setLoaded(true);
 
             } catch (error) {
                 console.log(error);
@@ -58,7 +61,7 @@ export default ({ children }) => {
                 dispatchFavCharacters
             }}
         >
-            <LoadingIndicator />
+            {loaded ? null : <LoadingIndicator />}
             {children}
         </CharacterDataContext.Provider>
     )
