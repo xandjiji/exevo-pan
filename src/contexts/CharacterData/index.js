@@ -4,6 +4,8 @@ import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 
+import LoadingIndicator from '../../components/LoadingIndicator';
+
 const initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
 const initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
 
@@ -56,6 +58,7 @@ export default ({ children }) => {
                 dispatchFavCharacters
             }}
         >
+            <LoadingIndicator />
             {children}
         </CharacterDataContext.Provider>
     )

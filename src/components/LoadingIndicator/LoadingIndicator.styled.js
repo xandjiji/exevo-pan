@@ -1,0 +1,64 @@
+import styled from 'styled-components';
+
+export default styled.div`
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1;
+
+    padding: 6px 16px;
+    display: flex;
+
+    border-radius: 5px;
+    background-color: var(--alert);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    .data-loader {
+        margin-right: 8px;
+        position: relative;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: linear-gradient(to right, #3F51B5 10%, rgba(255, 255, 255, 0) 42%);
+        animation: load3 1.4s infinite ease-out;
+        transform: translateZ(0);
+        transition: opacity 0.2s ease-out;
+    }
+
+    .data-loader:before {
+        content: '';
+        width: 50%;
+        height: 50%;
+        background: #3F51B5;
+        border-radius: 100% 0 0 0;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    .data-loader:after {
+        content: '';
+        background: var(--alert);
+        width: 75%;
+        height: 75%;
+        border-radius: 50%;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+    }
+
+    @keyframes load3 {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+`;
