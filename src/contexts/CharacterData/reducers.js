@@ -39,6 +39,8 @@ const applyFilters = (filterState, initialData) => {
             nickname
         } = character;
 
+        if(!indexedServerData[serverId]) continue;
+
         if (setDoesntHasValue(vocation, vocationId)) continue;
 
         if (setDoesntHasValue(pvp, indexedServerData[serverId].pvpType.type)) continue;
