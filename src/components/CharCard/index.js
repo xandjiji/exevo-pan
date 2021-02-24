@@ -48,6 +48,7 @@ export default ({ charData }) => {
     } = charData;
 
     const currentServer = indexedServerData[serverId];
+    if(!currentServer) return null;
 
     const endDate = new Date(auctionEnd * 1000);
 
@@ -64,7 +65,7 @@ export default ({ charData }) => {
         setHighlightedSkill(biggest);
     }, [skills]);
 
-    if(Object.keys(indexedServerData).length === 0) return null;
+    if (Object.keys(indexedServerData).length === 0) return null;
 
     return (
         <CharCard className="shadow">

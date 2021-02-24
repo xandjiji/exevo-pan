@@ -3,11 +3,22 @@ import CharacterDataContext from './context';
 import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
+import { checkCharObjectStructure } from '../../utils/checkObjectStructures';
 
 import LoadingIndicator from '../../components/LoadingIndicator';
 
-const initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
-const initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
+let initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
+let initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
+
+if (!checkCharObjectStructure(initialCharacterArray[0])) {
+    initialCharacterArray = [];
+    saveToLocalStorage('initialCharacterData', [])
+}
+
+if (!checkCharObjectStructure(initialFavCharacterArray[0])) {
+    initialFavCharacterArray = [];
+    saveToLocalStorage('initialFavCharacterData', []);
+}
 
 export default ({ children }) => {
 
@@ -35,6 +46,7 @@ export default ({ children }) => {
                 const data = await response.json();
 
                 const setupedData = setupCharacterData(data);
+
                 saveToLocalStorage('initialCharacterData', setupedData);
                 setInitialCharacterData(setupedData);
                 setUpdatedCharacterData(setupedData);
