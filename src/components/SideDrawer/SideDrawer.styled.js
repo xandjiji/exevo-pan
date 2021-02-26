@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export default styled.div`
     height: 100vh;
     width: 90vw;
-    max-width: 560px;
+    max-width: 600px;
     border-radius: 0 0 4px 0;
     background-color: var(--surface);
 
@@ -13,17 +13,47 @@ export default styled.div`
         margin-bottom: 24px;
         display: flex;
         align-items: center;
+        justify-content: space-between;
         background-color: var(--primary);
 
         font-size: 16px;
         letter-spacing: 0.5px;
         color: var(--onPrimary);
+
+        .icon-group {
+            display: flex;
+            align-items: center;
+        }
         
         svg {
             margin-right: 24px;
             width: 30px;
             height: 30px;
             fill: var(--onPrimary);
+        }
+
+        .reset-group {
+            margin: -2px 0;
+            transition: opacity 0.2s ease-out;
+
+            &:not(.active) {
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            span {
+                margin-top: 2px;
+                margin-left: 6px;
+                font-size: 9px;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                font-weight: 700;
+            }
+
+            svg {
+                margin-right: 0;
+                margin-left: 3px;
+            }
         }
     }
 
@@ -46,6 +76,16 @@ export default styled.div`
 
         .invisible-label {
             font-size: 0;
+        }
+
+        .chip-icon {
+            margin-right: 6px;
+        }
+
+        .flag {
+            width: 16px;
+            height: 10px;
+            box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
         }
     }
 

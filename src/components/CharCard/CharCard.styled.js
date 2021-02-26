@@ -14,11 +14,6 @@ export default styled.div`
         > *:first-child {
             width: 56px;
             height: 56px;
-
-            img, img.loaded {
-                width: 64px;
-                height: 64px;
-            }
         }
 
         .head-info {
@@ -27,7 +22,7 @@ export default styled.div`
 
             .nickname {
                 margin-bottom: 2px;
-                width: calc(100% - 32px);
+                width: calc(100% - 42px);
                 display: flex;
                 align-items: center;
                 font-size: 16px;
@@ -56,7 +51,7 @@ export default styled.div`
 
         .fav-button {
             position: absolute;
-            top: 4px;
+            top: 2px;
             right: 0;
         }
     }
@@ -117,14 +112,7 @@ export default styled.div`
             box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
         }
 
-        .flag {
-            width: 16px;
-            height: 10px;
-        }
-
         .coin {
-            width: 12px;
-            height: 12px;
             border-radius: 50%;
         }
 

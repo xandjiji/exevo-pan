@@ -1,7 +1,17 @@
 import styled from 'styled-components';
 
 export default styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: var(--surface);
     user-select: none;
+    transition: box-shadow 0.2s ease-out;
+
+    &:hover:not(:active) {
+        box-shadow: 3px 3px 5px 3px rgba(0,0,0,0.14);
+    }
 
     svg {
         padding: 4px;
