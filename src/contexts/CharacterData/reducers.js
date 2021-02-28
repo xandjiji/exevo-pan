@@ -19,7 +19,8 @@ const applyFilters = (filterState, initialData) => {
         skillKey,
         itemSet,
         fav,
-        rareNick
+        rareNick,
+        soulwarFilter
     } = filterState;
 
     let charPool = initialCharacterData;
@@ -36,7 +37,8 @@ const applyFilters = (filterState, initialData) => {
             serverId,
             level,
             skills,
-            nickname
+            nickname,
+            hasSoulwar
         } = character;
 
         if(!indexedServerData[serverId]) continue;
@@ -54,6 +56,8 @@ const applyFilters = (filterState, initialData) => {
         if (setDoesntHasValue(auctionsItemsSet, id)) continue;
 
         if(rareNick && !isRareNickname(nickname)) continue;
+
+        if(soulwarFilter && hasSoulwar) continue;
 
         if (skillKey.size) {
             let hasMinimumSkill = false;
