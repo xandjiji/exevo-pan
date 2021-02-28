@@ -124,6 +124,37 @@ export default styled.div`
             font-size: 16px;
             letter-spacing: 0.6px;
         }
+
+        .server-info {
+            justify-content: space-between;
+
+            .server-text {
+                font-size: 14px;
+                color: var(--onSurface);
+
+                img {
+                    margin-right: 4px;
+                }
+            }
+
+            > div {
+                height: 16px;
+                width: 16px;
+                min-width: unset;
+                min-height: unset;
+                border: none;
+
+                svg {
+                    fill: var(--onSurface);
+                }
+
+                > div {
+                    width: 236px;
+                    text-align: center;
+                    z-index: 1;
+                }
+            }
+        }
     }
 
     .card-footer {
