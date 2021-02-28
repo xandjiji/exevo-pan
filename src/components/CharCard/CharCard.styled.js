@@ -124,6 +124,37 @@ export default styled.div`
             font-size: 16px;
             letter-spacing: 0.6px;
         }
+
+        .server-info {
+            justify-content: space-between;
+
+            .server-text {
+                font-size: 14px;
+                color: var(--onSurface);
+
+                img {
+                    margin-right: 4px;
+                }
+            }
+
+            > div {
+                height: 16px;
+                width: 16px;
+                min-width: unset;
+                min-height: unset;
+                border: none;
+
+                svg {
+                    fill: var(--onSurface);
+                }
+
+                > div {
+                    width: 236px;
+                    text-align: center;
+                    z-index: 1;
+                }
+            }
+        }
     }
 
     .card-footer {
@@ -139,7 +170,7 @@ export default styled.div`
         }
 
         .charms-wrapper {
-            margin-top: 12px;
+            margin-top: 8px;
             margin-bottom: -8px;
             display: flex;
             flex-wrap: wrap;
@@ -149,6 +180,59 @@ export default styled.div`
 
                 &:not(:last-child) {
                     margin-right: 8px;
+                }
+            }
+        }
+
+        .imbuement-wrapper {
+            margin-top: 8px;
+            padding-top: 6px;
+            width: 100%;
+            border: none;
+            border-radius: unset;
+            border-top: solid 1px var(--separator);
+
+            align-items: flex-end;
+
+            font-size: 12px;
+            color: var(--onSurface);
+            font-weight: 400;
+            justify-content: unset;
+
+            z-index: 1;
+            user-select: none;
+
+            svg {
+                margin-right: 4px;
+                width: 18px;
+                height: 18px;
+            }
+
+            > div {
+                bottom: 100%;
+                left: 0;
+                transform: none;
+
+                span {
+                    display: block;
+                    font-size: 12px;
+                    color: var(--onSurface);
+                    font-weight: 400;
+
+                    &.highlight {
+                        color: var(--primary);
+                        font-weight: 600;
+                    }
+
+                    &::before {
+                        content: '·';
+                        margin-right: 4px;
+                        font-weight: 800;
+                    }
+
+                    &:not(:last-child) {
+                        margin-bottom: 2px;
+                    }
                 }
             }
         }

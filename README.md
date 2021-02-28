@@ -12,7 +12,7 @@ You can find the application [here](https://exevopan.com/).
 ## Current Features
 
 - List all available character auctions
-- Filter by server types and character stats
+- Filter by server types, character stats and more!
 - Rare items finder
 - Bookmark auctions
 <p align="center">
@@ -21,8 +21,6 @@ You can find the application [here](https://exevopan.com/).
 
 ## Future Features
 
-- More miscellaneous filters (rare names, quests/achievements, etc)
-- More detailed information (items, imbuiments, achievements, quests, transfer availability)
 - Search by nickname
 - Dark Theme
 

@@ -7,10 +7,14 @@ import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
 import Chip from '../Chip';
 import FavButton from '../FavButton';
+import InformationBadge from '../InformationBadge';
 
 import ServerDataContext from '../../contexts/ServerData/context';
 
 import { ReactComponent as ExternalIcon } from '../../assets/svgs/external.svg';
+import { ReactComponent as Server } from '../../assets/svgs/server.svg';
+import { ReactComponent as NoServer } from '../../assets/svgs/noserver.svg';
+import { ReactComponent as Magic } from '../../assets/svgs/magic.svg';
 import BrFlag from '../../assets/br-flag.png';
 import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
@@ -44,11 +48,13 @@ export default ({ charData }) => {
         serverId,
         skills,
         items,
-        charms
+        charms,
+        transfer,
+        imbuements
     } = charData;
 
     const currentServer = indexedServerData[serverId];
-    if(!currentServer) return null;
+    if (!currentServer) return null;
 
     const endDate = new Date(auctionEnd * 1000);
 
@@ -94,16 +100,23 @@ export default ({ charData }) => {
 
             <div className="overview">
                 <LabeledText label="Server" warning={currentServer.experimental} warningText="This is an experimental server!">
-                    <div className="overview-content row">
-                        <img
-                            className="flag"
-                            alt={currentServer.serverLocation.string}
-                            title={currentServer.serverLocation.string}
-                            src={getFlag(currentServer.serverLocation.type)}
-                            width={16}
-                            height={10}
-                        />
-                        {currentServer.serverName}
+                    <div className="server-info overview-content row">
+                        <span className="server-text">
+                            <img
+                                className="flag"
+                                alt={currentServer.serverLocation.string}
+                                title={currentServer.serverLocation.string}
+                                src={getFlag(currentServer.serverLocation.type)}
+                                width={16}
+                                height={10}
+                            />
+                            {currentServer.serverName}
+                        </span>
+                        {transfer ?
+                            <InformationBadge icon={<Server />} text="Regular World transfer available" />
+                            :
+                            <InformationBadge icon={<NoServer />} text="Regular World transfer NOT available" />
+                        }
                     </div>
                 </LabeledText>
 
@@ -156,8 +169,25 @@ export default ({ charData }) => {
                     })}
                 </div>
 
-                {charms.length > 0
-                    ? <div className="charms-wrapper">
+                <InformationBadge
+                    className="imbuement-wrapper"
+                    icon={
+                        <>
+                            <Magic />
+                            {`Imbuements: ${imbuements.length}/23`}
+                        </>
+                    }
+                    text={imbuements.length > 0 ?
+                        imbuements.map(imbuementItem =>
+                            <span className={highlightImbuentClass(imbuementItem)}>
+                                {imbuementItem}
+                            </span>)
+                        : null
+                    }
+                />
+
+                {charms.length > 0 ?
+                    <div className="charms-wrapper">
                         {charms.map(charmItem => <Chip key={charmItem}>{charmItem}</Chip>)}
                     </div>
                     : null
@@ -178,6 +208,22 @@ const makeItemImg = (itemArray) => {
     }
 
     return elementArray;
+}
+
+const highlightImbuentClass = (imbuementString) => {
+    const highlightArray = [
+        'Critical Hit',
+        'Life Leech',
+        'Mana Leech',
+        'Magic Level',
+        'Sword Skill',
+        'Axe Skill',
+        'Club Skill',
+        'Distance Skill'
+    ]
+
+    if (highlightArray.includes(imbuementString)) return 'highlight'
+    return '';
 }
 
 const getFlag = (type) => {
