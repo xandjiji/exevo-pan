@@ -15,14 +15,15 @@ You can find the application [here](https://exevopan.com/).
 - Filter by server types, character stats and more!
 - Rare items finder
 - Bookmark auctions
+- Dark Theme
 <p align="center">
-	<img src="https://i.imgur.com/M5MWUyw.png">
+	<img src="https://i.imgur.com/NirFT5A.png">
 </p>
 
 ## Future Features
 
 - Search by nickname
-- Dark Theme
+- Notifications for auctions close to ending
 
 ## Char Bazaar Data
 
