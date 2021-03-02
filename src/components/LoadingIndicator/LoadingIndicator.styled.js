@@ -23,7 +23,7 @@ export default styled.div`
         width: 12px;
         height: 12px;
         border-radius: 50%;
-        background: linear-gradient(to right, #3F51B5 10%, rgba(255, 255, 255, 0) 42%);
+        background: linear-gradient(to right, var(--primary) 10%, rgba(255, 255, 255, 0) 42%);
         animation: load3 1.4s infinite ease-out;
         transform: translateZ(0);
         transition: opacity 0.2s ease-out;
@@ -33,7 +33,7 @@ export default styled.div`
         content: '';
         width: 50%;
         height: 50%;
-        background: #3F51B5;
+        background: var(--primary);
         border-radius: 100% 0 0 0;
         position: absolute;
         top: 0;

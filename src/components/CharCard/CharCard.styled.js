@@ -206,6 +206,7 @@ export default styled.div`
                 margin-right: 4px;
                 width: 18px;
                 height: 18px;
+                fill: var(--onSurface);
             }
 
             > div {

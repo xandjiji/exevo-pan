@@ -22,6 +22,9 @@ html, body, #root {
 html, body {
     font-family: 'Roboto', sans-serif;
     background-color: var(--background);
+}
+
+.light-theme {
     --background: #EEEEEE;
     --surface: #FFFFFF;
     --onSurface: #000000;
@@ -31,6 +34,21 @@ html, body {
     --primaryVariant: #C5CAE9;
     --green: #377712;
     --red: #C51313;
+    --alert: #F9EEC1;
+    --battleGreen: #43B600;
+    --battleYellow: #FFDD00;
+}
+
+.dark-theme {
+    --background: #202225;
+    --surface: #36393F;
+    --onSurface: #FFFFFF;
+    --separator: #72767D;
+    --primary: #9857E7;
+    --onPrimary: #FFFFFF;
+    --primaryVariant: #5E4480;
+    --green: #5A9935;
+    --red: #FF5B5B;
     --alert: #F9EEC1;
     --battleGreen: #43B600;
     --battleYellow: #FFDD00;

@@ -27,13 +27,14 @@ export default styled.div`
             svg {
                 width: 32px;
                 fill: var(--onPrimary);
+                transition: opacity 0.2s ease-out
             }
 
             &.disabled {
                 pointer-events: none;
 
                 svg {
-                    fill: var(--separator);
+                    opacity: 0.4;
                 }
             }
 
