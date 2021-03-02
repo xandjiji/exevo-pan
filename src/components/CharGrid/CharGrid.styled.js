@@ -54,6 +54,7 @@ export default styled.div`
                         }
 
                         &:first-child {
+                            color: var(--onSurface);
                             margin-bottom: 22px;
                         }
                     }
