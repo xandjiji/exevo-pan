@@ -77,6 +77,7 @@ export default styled.div`
         font-size: 12px;
         font-weight: 400;
         text-align: center;
+        color: var(--onSurface);
 
         -moz-appearance: textfield;
         &::-webkit-outer-spin-button,
