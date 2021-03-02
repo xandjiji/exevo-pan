@@ -28,6 +28,7 @@ export default styled.div`
                 font-size: 16px;
                 font-weight: 600;
                 color: var(--primary);
+                filter: brightness(130%);
 
                 a {
                     margin-left: 4px;
