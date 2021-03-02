@@ -178,8 +178,8 @@ export default ({ charData }) => {
                         </>
                     }
                     text={imbuements.length > 0 ?
-                        imbuements.map(imbuementItem =>
-                            <span className={highlightImbuentClass(imbuementItem)}>
+                        imbuements.map((imbuementItem, index) =>
+                            <span key ={index} className={highlightImbuentClass(imbuementItem)}>
                                 {imbuementItem}
                             </span>)
                         : null
