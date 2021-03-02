@@ -72,6 +72,8 @@ export default styled.div`
         grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
         grid-auto-rows: auto;
 
+        background-color: var(--background);
+
         &::after {
             content: '';
             grid-column: 1 / -1;

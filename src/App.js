@@ -10,37 +10,40 @@ import SideDrawerContext from './contexts/SideDrawer/context';
 import CharacterDataProvider from './contexts/CharacterData';
 import ItemsDataProvider from './contexts/ItemsData';
 import ServerDataProvider from './contexts/ServerData';
+import ThemeProvider from './contexts/Theme';
 
 const App = () => {
     return (
-        <MasterLayout>
+        <ThemeProvider>
+            <MasterLayout>
 
-            <SideDrawerProvider>
-                <CharacterDataProvider>
-                    <ServerDataProvider>
+                <SideDrawerProvider>
+                    <CharacterDataProvider>
+                        <ServerDataProvider>
 
-                        <CharGrid itemsPerPage={10} />
+                            <CharGrid itemsPerPage={10} />
 
-                        <ItemsDataProvider>
-                            <SideDrawerContext.Consumer>
-                                {context => (
-                                    <Pushable
-                                        active={context.active}
-                                        trigger={context.toggleSideDrawer}
-                                        blockRight
-                                        backdrop
-                                    >
-                                        <SideDrawer backAction={context.toggleSideDrawer} />
-                                    </Pushable>
-                                )}
-                            </SideDrawerContext.Consumer>
-                        </ItemsDataProvider>
+                            <ItemsDataProvider>
+                                <SideDrawerContext.Consumer>
+                                    {context => (
+                                        <Pushable
+                                            active={context.active}
+                                            trigger={context.toggleSideDrawer}
+                                            blockRight
+                                            backdrop
+                                        >
+                                            <SideDrawer backAction={context.toggleSideDrawer} />
+                                        </Pushable>
+                                    )}
+                                </SideDrawerContext.Consumer>
+                            </ItemsDataProvider>
 
-                    </ServerDataProvider>
-                </CharacterDataProvider>
-            </SideDrawerProvider>
+                        </ServerDataProvider>
+                    </CharacterDataProvider>
+                </SideDrawerProvider>
 
-        </MasterLayout>
+            </MasterLayout>
+        </ThemeProvider>
     )
 }
 
