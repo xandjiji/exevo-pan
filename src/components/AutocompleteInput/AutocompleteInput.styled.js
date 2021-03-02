@@ -9,7 +9,9 @@ export default styled.div`
         width: 190px;
         border-radius: 5px;
         border: solid 1px var(--separator);
+        background-color: var(--surface);
         font-size: 12px;
+        color: var(--onSurface);
         transition: border-color 0.2s ease-out;
         transition: box-shadow 0.2s ease-out;
 

@@ -126,6 +126,10 @@ export default styled.div`
         > .chip-item {
             margin: 5px 0;
         }
+
+        .reset-button {
+            right: 24px;
+        }
     }
 
     .chips-wrapper {

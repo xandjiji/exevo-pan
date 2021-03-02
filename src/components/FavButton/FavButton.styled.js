@@ -17,6 +17,7 @@ export default styled.div`
         padding: 4px;
         width: 32px;
         height: 32px;
+        fill: var(--onSurface);
 
         path {
             transition: opacity 0.12s ease-out;
