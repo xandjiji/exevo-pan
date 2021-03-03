@@ -48,11 +48,13 @@ export default ({ itemsPerPage }) => {
     }, [characterData]);
 
     useEffect(() => {
-        dispatchInitialData({
-            type: 'APPLY_SORT',
-            sortingMode: sortingModes[selectedSort],
-            descendingOrder
-        });
+        setTimeout(() => {
+            dispatchInitialData({
+                type: 'APPLY_SORT',
+                sortingMode: sortingModes[selectedSort],
+                descendingOrder
+            });
+        }, 200);
     }, [selectedSort, dispatchInitialData, descendingOrder]);
 
     if (initialCharacterData.length === 0) return null;

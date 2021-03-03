@@ -113,16 +113,18 @@ export default ({ backAction }) => {
 
 
     useEffect(() => {
-        dispatchCharacterData({
-            type: 'APPLY_FILTERS',
-            filterState: filters,
-            initialData: {
-                initialCharacterData,
-                itemData,
-                indexedServerData,
-                favCharacters
-            }
-        });
+        setTimeout(() => {
+            dispatchCharacterData({
+                type: 'APPLY_FILTERS',
+                filterState: filters,
+                initialData: {
+                    initialCharacterData,
+                    itemData,
+                    indexedServerData,
+                    favCharacters
+                }
+            });
+        }, 150);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters, initialCharacterData]);
 
