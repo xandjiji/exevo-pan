@@ -34,11 +34,11 @@ export const translateCharObject = (charObject) => {
     newCharObject.charms = translateObjectOrArray(newCharObject.charms);
     newCharObject.skills = translateObjectOrArray(newCharObject.skills);
     newCharObject.imbuements = translateObjectOrArray(newCharObject.imbuements);
-    for(const key of Object.keys(newCharObject.skills)) {
+    for (const key of Object.keys(newCharObject.skills)) {
         newCharObject.skills[key] = translateObjectOrArray(newCharObject.skills[key]);
     }
 
-    return newCharObject;
+    return {...newCharObject};
 }
 
 export const dictionary = dictionaryFactory([
