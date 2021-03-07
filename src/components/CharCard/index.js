@@ -186,7 +186,7 @@ export default ({ charData }) => {
                     }
                 />
 
-                {charms.length > 0 ?
+                {charms && charms.length > 0 ?
                     <div className="charms-wrapper">
                         {charms.map(charmItem => <Chip key={charmItem}>{charmItem}</Chip>)}
                     </div>

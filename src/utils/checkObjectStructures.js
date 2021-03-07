@@ -1,4 +1,5 @@
 export const checkCharObjectStructure = (charObject) => {
+    console.log(charObject);
     if(!charObject) return false;
 
     let status = true;
@@ -10,7 +11,6 @@ export const checkCharObjectStructure = (charObject) => {
     }
 
     checkProperty('auctionEnd')
-    checkProperty('charms')
     checkProperty('currentBid')
     checkProperty('hasBeenBidded')
     checkProperty('hasSoulwar')

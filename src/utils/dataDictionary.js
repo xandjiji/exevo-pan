@@ -31,9 +31,9 @@ const translateObjectOrArray = (variable) => {
 export const translateCharObject = (charObject) => {
     const newCharObject = translateObjectOrArray(charObject);
 
-    newCharObject.charms = translateObjectOrArray(newCharObject.charms);
     newCharObject.skills = translateObjectOrArray(newCharObject.skills);
 
+    if (newCharObject.charms) newCharObject.charms = translateObjectOrArray(newCharObject.charms);
     if (newCharObject.imbuements) newCharObject.imbuements = translateObjectOrArray(newCharObject.imbuements);
 
     for (const key of Object.keys(newCharObject.skills)) {
