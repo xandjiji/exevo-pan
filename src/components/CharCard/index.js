@@ -199,8 +199,11 @@ export default ({ charData }) => {
 
 const makeItemImg = (itemArray) => {
     const elementArray = [];
-    for (const item of itemArray) {
-        elementArray.push(<ImagePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
+
+    if(itemArray) {
+        for (const item of itemArray) {
+            elementArray.push(<ImagePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
+        }
     }
 
     while (elementArray.length < 4) {
