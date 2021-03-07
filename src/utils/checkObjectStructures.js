@@ -12,15 +12,12 @@ export const checkCharObjectStructure = (charObject) => {
 
     checkProperty('auctionEnd')
     checkProperty('currentBid')
-    checkProperty('hasBeenBidded')
-    checkProperty('hasSoulwar')
     checkProperty('id')
     checkProperty('level')
     checkProperty('nickname')
     checkProperty('outfitId')
     checkProperty('serverId')
     checkProperty('skills')
-    checkProperty('transfer')
     checkProperty('vocationId')
 
     return status;
