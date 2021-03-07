@@ -174,10 +174,10 @@ export default ({ charData }) => {
                     icon={
                         <>
                             <Magic />
-                            {`Imbuements: ${imbuements.length}/23`}
+                            {`Imbuements: ${imbuements ? imbuements.length : 0}/23`}
                         </>
                     }
-                    text={imbuements.length > 0 ?
+                    text={imbuements && imbuements.length > 0 ?
                         imbuements.map((imbuementItem, index) =>
                             <span key ={index} className={highlightImbuentClass(imbuementItem)}>
                                 {imbuementItem}

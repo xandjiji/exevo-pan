@@ -15,7 +15,6 @@ export const checkCharObjectStructure = (charObject) => {
     checkProperty('hasBeenBidded')
     checkProperty('hasSoulwar')
     checkProperty('id')
-    checkProperty('imbuements')
     checkProperty('level')
     checkProperty('nickname')
     checkProperty('outfitId')
