@@ -1,5 +1,4 @@
 export const checkCharObjectStructure = (charObject) => {
-    console.log(charObject);
     if(!charObject) return false;
 
     let status = true;
