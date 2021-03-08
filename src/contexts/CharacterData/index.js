@@ -4,6 +4,7 @@ import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 import { checkCharObjectStructure } from '../../utils/checkObjectStructures';
+import dataEndpoint from '../../dataEnpoint';
 
 import LoadingIndicator from '../../components/LoadingIndicator';
 
@@ -42,7 +43,7 @@ export default ({ children }) => {
     useEffect(() => {
         const fetchSetupedData = async () => {
             try {
-                const response = await fetch('https://exevopan-data.netlify.app/LatestCharacterData.json');
+                const response = await fetch(`${dataEndpoint}/MinifiedCharacterData.json`);
                 const data = await response.json();
 
                 const setupedData = setupCharacterData(data);

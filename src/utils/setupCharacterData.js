@@ -1,9 +1,9 @@
-import { translateCharObject } from './dataDictionary';
+import { minifiedToObject } from './dataDictionary';
 
 const setupCharacterData = (initialCharacterData) => {
     const setupedData = [];
     for (let i = 0; i < initialCharacterData.length; i++) {
-        setupedData.push(translateCharObject(initialCharacterData[i]));
+        setupedData.push(minifiedToObject(initialCharacterData[i]));
     }
 
     const currentDate = new Date();

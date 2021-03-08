@@ -1,0 +1,1 @@
+export default 'https://exevopan-data.netlify.app';

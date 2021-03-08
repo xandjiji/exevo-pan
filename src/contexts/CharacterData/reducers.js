@@ -64,7 +64,7 @@ const applyFilters = (filterState, initialData) => {
             const skillArray = Array.from(skillKey);
 
             for (const skillItem of skillArray) {
-                if (skills[skillItem].level >= minSkill) {
+                if (skills[skillItem] >= minSkill) {
                     hasMinimumSkill = true;
                     break;
                 }

@@ -10,20 +10,20 @@ export const checkCharObjectStructure = (charObject) => {
     }
 
     checkProperty('auctionEnd')
-    checkProperty('charms')
     checkProperty('currentBid')
     checkProperty('hasBeenBidded')
-    checkProperty('hasSoulwar')
     checkProperty('id')
-    checkProperty('imbuements')
-    checkProperty('items')
     checkProperty('level')
     checkProperty('nickname')
     checkProperty('outfitId')
     checkProperty('serverId')
     checkProperty('skills')
-    checkProperty('transfer')
+    checkProperty('items')
     checkProperty('vocationId')
+    checkProperty('charms')
+    checkProperty('transfer')
+    checkProperty('imbuements')
+    checkProperty('hasSoulwar')
 
     return status;
 }

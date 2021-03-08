@@ -62,9 +62,9 @@ export default ({ charData }) => {
 
     useEffect(() => {
         let biggest = 'magic';
-        for (const key in skills) {
-            if (skills[key].level > skills[biggest].level) {
-                biggest = key;
+        for (const skillItem in skills) {
+            if (skills[skillItem] > skills[biggest]) {
+                biggest = skillItem;
             }
         }
 
@@ -174,10 +174,10 @@ export default ({ charData }) => {
                     icon={
                         <>
                             <Magic />
-                            {`Imbuements: ${imbuements.length}/23`}
+                            {`Imbuements: ${imbuements ? imbuements.length : 0}/23`}
                         </>
                     }
-                    text={imbuements.length > 0 ?
+                    text={imbuements && imbuements.length > 0 ?
                         imbuements.map((imbuementItem, index) =>
                             <span key ={index} className={highlightImbuentClass(imbuementItem)}>
                                 {imbuementItem}
@@ -186,7 +186,7 @@ export default ({ charData }) => {
                     }
                 />
 
-                {charms.length > 0 ?
+                {charms && charms.length > 0 ?
                     <div className="charms-wrapper">
                         {charms.map(charmItem => <Chip key={charmItem}>{charmItem}</Chip>)}
                     </div>
@@ -199,8 +199,11 @@ export default ({ charData }) => {
 
 const makeItemImg = (itemArray) => {
     const elementArray = [];
-    for (const item of itemArray) {
-        elementArray.push(<ImagePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
+
+    if(itemArray) {
+        for (const item of itemArray) {
+            elementArray.push(<ImagePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
+        }
     }
 
     while (elementArray.length < 4) {

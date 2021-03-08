@@ -5,13 +5,15 @@ export default ({ skillName, skill, highlight }) => {
 
     const [width, setWidth] = useState(0);
     useEffect(() => {
-        setWidth(skill.percentage);
+        const percentage = (Math.abs(skill) - Math.floor(skill)) * 100;
+
+        setWidth(Math.round(percentage));
     }, [skill])
 
     return (
         <SkillBar highlight={highlight}>
             <span className="skill-level shadow">
-                {skill.level}
+                {Math.floor(skill)}
             </span>
 
             <div className="info-wrapper">

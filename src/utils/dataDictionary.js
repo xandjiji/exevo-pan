@@ -10,40 +10,92 @@ const dictionaryFactory = (keyArray) => {
     return dictionaryObject;
 }
 
-const translateObjectOrArray = (variable) => {
-    if (Array.isArray(variable)) {
-        const newArray = [];
-        for (const key of variable) {
-            newArray.push(dictionary[key]);
-        }
-        return newArray;
+export const objectToMinified = (charObject) => {
 
-    } else {
-        const newObject = {};
-
-        for (const key in variable) {
-            newObject[dictionary[key]] = variable[key];
-        }
-        return newObject;
-    }
-}
-
-export const translateCharObject = (charObject) => {
-    const newCharObject = translateObjectOrArray(charObject);
-
-    newCharObject.charms = translateObjectOrArray(newCharObject.charms);
-    newCharObject.skills = translateObjectOrArray(newCharObject.skills);
-    newCharObject.imbuements = translateObjectOrArray(newCharObject.imbuements);
-    for(const key of Object.keys(newCharObject.skills)) {
-        newCharObject.skills[key] = translateObjectOrArray(newCharObject.skills[key]);
+    const minifiedData = [];
+    for (const attribute in charObject) {
+        minifiedData[charObjectDictionary[attribute]] = charObject[attribute];
     }
 
-    return newCharObject;
+    const skillsArray = [];
+    for (const skill in charObject.skills) {
+        skillsArray[skillsDictionary[skill]] = charObject.skills[skill];
+    }
+    minifiedData[charObjectDictionary['skills']] = skillsArray;
+
+    const charmsArray = [];
+    for (const charm of charObject.charms) {
+        charmsArray.push(charmDictionary[charm]);
+    }
+    minifiedData[charObjectDictionary['charms']] = charmsArray;
+
+    const imbuementsArray = [];
+    for (const imbuement of charObject.imbuements) {
+        imbuementsArray.push(imbuementDictionary[imbuement]);
+    }
+    minifiedData[charObjectDictionary['imbuements']] = imbuementsArray;
+
+    return [...minifiedData];
 }
 
-export const dictionary = dictionaryFactory([
+export const minifiedToObject = (minifiedArray) => {
+
+    const charObject = {};
+    for (const [index, item] of minifiedArray.entries()) {
+        charObject[charObjectDictionary[index]] = item;
+    }
+
+    const skillObject = {};
+    for (const [index, item] of charObject.skills.entries()) {
+        skillObject[skillsDictionary[index]] = item;
+    }
+    charObject.skills = skillObject;
+
+    const charmsArray = [];
+    for (const charm of charObject.charms) {
+        charmsArray.push(charmDictionary[charm]);
+    }
+    charObject.charms = charmsArray;
+
+    const imbuementsArray = [];
+    for (const imbuement of charObject.imbuements) {
+        imbuementsArray.push(imbuementDictionary[imbuement]);
+    }
+    charObject.imbuements = imbuementsArray;
+
+    return { ...charObject };
+}
+
+export const charObjectDictionary = dictionaryFactory([
+    'id',
+    'nickname',
+    'auctionEnd',
+    'currentBid',
+    'hasBeenBidded',
+    'outfitId',
+    'serverId',
+    'vocationId',
     'level',
-    'percentage',
+    'skills',
+    'items',
+    'charms',
+    'transfer',
+    'imbuements',
+    'hasSoulwar'
+]);
+
+export const skillsDictionary = dictionaryFactory([
+    'magic',
+    'club',
+    'fist',
+    'sword',
+    'fishing',
+    'axe',
+    'distance',
+    'shielding'
+]);
+
+export const charmDictionary = dictionaryFactory([
     'Dodge',
     'Wound',
     'Curse',
@@ -62,29 +114,10 @@ export const dictionary = dictionaryFactory([
     "Void's Call",
     'Scavenge',
     'Gut',
-    'Bless',
-    'src',
-    'id',
-    'nickname',
-    'auctionEnd',
-    'currentBid',
-    'hasBeenBidded',
-    'outfitId',
-    'serverId',
-    'vocationId',
-    'skills',
-    'magic',
-    'club',
-    'fist',
-    'sword',
-    'fishing',
-    'axe',
-    'distance',
-    'shielding',
-    'items',
-    'charms',
-    'transfer',
-    'imbuements',
+    'Bless'
+]);
+
+export const imbuementDictionary = dictionaryFactory([
     'Critical Hit',
     'Life Leech',
     'Mana Leech',
@@ -107,6 +140,31 @@ export const dictionary = dictionaryFactory([
     'Fire Protection',
     'Death Protection',
     'Ice Protection',
-    'Earth Protection',
-    'hasSoulwar'
+    'Earth Protection'
 ]);
+
+export const powerfulToReadable = {
+    'Powerful Strike': 'Critical Hit',
+    'Powerful Vampirism': 'Life Leech',
+    'Powerful Void': 'Mana Leech',
+    'Powerful Bash': 'Club Skill',
+    'Powerful Blockade': 'Shield Skill',
+    'Powerful Chop': 'Axe Skill',
+    'Powerful Epiphany': 'Magic Level',
+    'Powerful Precision': 'Distance Skill',
+    'Powerful Slash': 'Sword Skill',
+    'Powerful Featherweight': 'Capacity',
+    'Powerful Swiftness': 'Speed',
+    'Powerful Vibrancy': 'Paralize Removal',
+    'Powerful Electrify': 'Energy Damage',
+    'Powerful Frost': 'Ice Damage',
+    'Powerful Reap': 'Death Damage',
+    'Powerful Scorch': 'Fire Damage',
+    'Powerful Venom': 'Earth Damage',
+    'Powerful Cloud Fabric': 'Energy Protection',
+    'Powerful Demon Presence': 'Holy Protection',
+    'Powerful Dragon Hide': 'Fire Protection',
+    'Powerful Lich Shroud': 'Death Protection',
+    'Powerful Quara Scale': 'Ice Protection',
+    'Powerful Snake Skin': 'Earth Protection'
+}
