@@ -43,7 +43,7 @@ export default ({ children }) => {
     useEffect(() => {
         const fetchSetupedData = async () => {
             try {
-                const response = await fetch(`${dataEndpoint}/LatestCharacterData.json`);
+                const response = await fetch(`${dataEndpoint}/MinifiedCharacterData.json`);
                 const data = await response.json();
 
                 const setupedData = setupCharacterData(data);
