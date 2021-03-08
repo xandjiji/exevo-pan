@@ -36,16 +36,11 @@ export const translateCharObject = (charObject) => {
     if (newCharObject.charms) newCharObject.charms = translateObjectOrArray(newCharObject.charms);
     if (newCharObject.imbuements) newCharObject.imbuements = translateObjectOrArray(newCharObject.imbuements);
 
-    for (const key of Object.keys(newCharObject.skills)) {
-        newCharObject.skills[key] = translateObjectOrArray(newCharObject.skills[key]);
-    }
-
     return { ...newCharObject };
 }
 
 export const dictionary = dictionaryFactory([
     'level',
-    'percentage',
     'Dodge',
     'Wound',
     'Curse',

@@ -62,9 +62,9 @@ export default ({ charData }) => {
 
     useEffect(() => {
         let biggest = 'magic';
-        for (const key in skills) {
-            if (skills[key].level > skills[biggest].level) {
-                biggest = key;
+        for (const skillItem in skills) {
+            if (skills[skillItem] > skills[biggest]) {
+                biggest = skillItem;
             }
         }
 
