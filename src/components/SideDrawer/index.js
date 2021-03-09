@@ -43,6 +43,7 @@ export default ({ backAction }) => {
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
+        nickname: '',
         vocation: new Set(),
         pvp: new Set([]),
         battleye: new Set([]),
@@ -145,38 +146,40 @@ export default ({ backAction }) => {
     }, [isAllItemsSelected, updateFilterValue, itemNamesArray]);
 
     const filterIsReset = useCallback(() => {
-       const {
-           vocation,
-           pvp,
-           battleye,
-           location,
-           serverSet,
-           itemSet,
-           minLevel,
-           minSkill,
-           skillKey,
-           fav,
-           rareNick
-       } = filters;
+        const {
+            nickname,
+            vocation,
+            pvp,
+            battleye,
+            location,
+            serverSet,
+            itemSet,
+            minLevel,
+            minSkill,
+            skillKey,
+            fav,
+            rareNick
+        } = filters;
 
-       
-       if(vocation.size) return false;
-       if(pvp.size) return false;
-       if(battleye.size) return false;
-       if(location.size) return false;
-       if(serverSet.size) return false;
-       if(skillKey.size) return false;
-       if(itemSet.size) return false;
-       if(minLevel !== 2) return false;
-       if(minSkill !== 10) return false;
-       if(fav) return false;
-       if(rareNick) return false;
 
-       return true;
+        if (nickname !== '') return false;
+        if (vocation.size) return false;
+        if (pvp.size) return false;
+        if (battleye.size) return false;
+        if (location.size) return false;
+        if (serverSet.size) return false;
+        if (skillKey.size) return false;
+        if (itemSet.size) return false;
+        if (minLevel !== 2) return false;
+        if (minSkill !== 10) return false;
+        if (fav) return false;
+        if (rareNick) return false;
+
+        return true;
     }, [filters]);
 
     useEffect(() => {
-        if(filterIsReset()) {
+        if (filterIsReset()) {
             setInteracted(false);
         } else {
             setInteracted(true);
@@ -203,6 +206,15 @@ export default ({ backAction }) => {
             </div>
 
             <div className="items-wrapper inner-container custom-scrollbar">
+                <FilterGroup title="Search nickname" display="flex">
+                    <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
+                    <AutocompleteInput
+                        labelFor="Nickname-input"
+                        placeholder="Nickname"
+                        onChange={useCallback((value) => updateFilterValue('nickname', value), [updateFilterValue])}
+                        clearInput={filters.nickname === ''}
+                    />
+                </FilterGroup>
                 <FilterGroup title="Vocation" display="flex">
                     <Chip
                         clickable
@@ -489,7 +501,7 @@ export default ({ backAction }) => {
                     <Chip
                         clickable
                         onClick={useCallback(() => {
-                            if(filters.soulwarFilter && (filters.minLevel >= 400)) {
+                            if (filters.soulwarFilter && (filters.minLevel >= 400)) {
                                 updateFilterValue('minLevel', 2)
                                 updateFilterValue('soulwarFilter', false);
                             } else {
