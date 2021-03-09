@@ -186,6 +186,8 @@ export default ({ backAction }) => {
         }
     }, [filters, filterIsReset]);
 
+    console.log(filters);
+
     return (
         <SideDrawer className="shadow">
             <div className="drawer-header inner-container shadow">
@@ -212,7 +214,7 @@ export default ({ backAction }) => {
                         labelFor="Nickname-input"
                         placeholder="Nickname"
                         onChange={useCallback((value) => updateFilterValue('nicknameFilter', value), [updateFilterValue])}
-                        clearInput={filters.nickname === ''}
+                        clearInput={filters.nicknameFilter === ''}
                     />
                 </FilterGroup>
                 <FilterGroup title="Vocation" display="flex">
