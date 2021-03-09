@@ -43,7 +43,7 @@ export default ({ backAction }) => {
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
-        nickname: '',
+        nicknameFilter: '',
         vocation: new Set(),
         pvp: new Set([]),
         battleye: new Set([]),
@@ -147,7 +147,7 @@ export default ({ backAction }) => {
 
     const filterIsReset = useCallback(() => {
         const {
-            nickname,
+            nicknameFilter,
             vocation,
             pvp,
             battleye,
@@ -162,7 +162,7 @@ export default ({ backAction }) => {
         } = filters;
 
 
-        if (nickname !== '') return false;
+        if (nicknameFilter !== '') return false;
         if (vocation.size) return false;
         if (pvp.size) return false;
         if (battleye.size) return false;
@@ -211,7 +211,7 @@ export default ({ backAction }) => {
                     <AutocompleteInput
                         labelFor="Nickname-input"
                         placeholder="Nickname"
-                        onChange={useCallback((value) => updateFilterValue('nickname', value), [updateFilterValue])}
+                        onChange={useCallback((value) => updateFilterValue('nicknameFilter', value), [updateFilterValue])}
                         clearInput={filters.nickname === ''}
                     />
                 </FilterGroup>
