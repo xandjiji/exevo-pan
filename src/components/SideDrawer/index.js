@@ -186,8 +186,6 @@ export default ({ backAction }) => {
         }
     }, [filters, filterIsReset]);
 
-    console.log(filters);
-
     return (
         <SideDrawer className="shadow">
             <div className="drawer-header inner-container shadow">

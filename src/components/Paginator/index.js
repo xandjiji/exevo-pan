@@ -3,7 +3,7 @@ import Paginator from './Paginator.styled';
 
 import CharacterDataContext from '../../contexts/CharacterData/context';
 
-import { ReactComponent as NextIcon} from '../../assets/svgs/next.svg';
+import { ReactComponent as NextIcon } from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
 export default ({ itemsPerPage, dataSize, handleAction, className }) => {
@@ -35,7 +35,10 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
     return (
         <Paginator className={className}>
             <div className="tracker">
-                {`${(index * itemsPerPage) + 1} - ${index + 1 !== pageCount ? (index + 1) * itemsPerPage : dataSize} of ${dataSize}`}
+                {dataSize ?
+                    `${(index * itemsPerPage) + 1} - ${index + 1 !== pageCount ? (index + 1) * itemsPerPage : dataSize} of ${dataSize}`
+                    : 'No characters found'
+                }
             </div>
             <div className="cursor-wrapper">
                 <div
