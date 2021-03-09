@@ -1,13 +1,13 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
-export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful }) => {
+export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful, clearInput }) => {
     const uniqueID = useRef(Math.random())
     const inputRef = useRef(null);
     const [term, setTerm] = useState('');
     const [valid, setValid] = useState('neutral');
 
-    const handleChange = (event) => {
+    const handleChange = useCallback((event) => {
         const { value } = event.target;
 
         const { valid, string } = isValueValid(value, items);
@@ -19,14 +19,15 @@ export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful })
         }
 
         setTerm(string);
-    }
+    }, [items])
 
     const handleKey = (event) => {
         if (event.key === 'Enter') inputRef.current.blur();
     }
 
     const handleBlur = () => {
-        if(term !== '' && valid === 'neutral') {
+        if (!items) return;
+        if (term !== '' && valid === 'neutral') {
             setValid('invalid');
         }
     }
@@ -34,8 +35,8 @@ export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful })
     useEffect(() => {
         const timeOutObj = setTimeout(() => {
             onChange(term)
-            if(clearAfterSucessful) {
-                if(valid === 'valid') {
+            if (clearAfterSucessful) {
+                if (valid === 'valid') {
                     setTerm('');
                     setValid('neutral');
                     inputRef.current.blur();
@@ -45,6 +46,12 @@ export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful })
         }, 200);
         return () => clearTimeout(timeOutObj);
     }, [term, valid, inputRef, clearAfterSucessful, onChange]);
+
+    useEffect(() => {
+        if(clearInput) {
+            handleChange({ target: { value: '' }});
+        }
+    }, [clearInput, handleChange])
 
     const stopBubbling = (event) => {
         event.stopPropagation();
@@ -69,17 +76,20 @@ export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful })
                 ref={inputRef}
             />
 
-            <datalist id={uniqueID.current}>
-                {items.map((item, index) => {
-                    return (
-                        <option
-                            key={index}
-                            value={item}
-                            aria-label="Input option"
-                        />
-                    )
-                })}
-            </datalist>
+            {items ?
+                <datalist id={uniqueID.current}>
+                    {items.map((item, index) => {
+                        return (
+                            <option
+                                key={index}
+                                value={item}
+                                aria-label="Input option"
+                            />
+                        )
+                    })}
+                </datalist>
+                : null
+            }
 
             {/* eslint-disable */}
             <div
@@ -97,6 +107,8 @@ export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful })
 
 const isValueValid = (string, dataList) => {
     const sanitizedString = string.toLowerCase();
+
+    if (!dataList) return { valid: false, string: string };
 
     for (const dataItem of dataList) {
         const sanitizeddataItem = dataItem.toLowerCase();

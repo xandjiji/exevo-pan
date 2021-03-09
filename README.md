@@ -12,6 +12,7 @@ You can find the application [here](https://exevopan.com/).
 ## Current Features
 
 - List all available character auctions
+- Search by nickname
 - Filter by server types, character stats and more!
 - Rare items finder
 - Bookmark auctions
@@ -22,7 +23,6 @@ You can find the application [here](https://exevopan.com/).
 
 ## Future Features
 
-- Search by nickname
 - Notifications for auctions close to ending
 
 ## Char Bazaar Data
@@ -31,7 +31,7 @@ Since there is no official API from Cipsoft, all the data used in this app is sc
 
 All live data is fetched from these endpoints:
 
-`https://exevopan-data.netlify.app/LatestCharacterData.json`
+`https://exevopan-data.netlify.app/MinifiedCharacterData.json`
 
 `https://exevopan-data.netlify.app/ItemsData.json`
 

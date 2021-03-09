@@ -9,6 +9,7 @@ const applyFilters = (filterState, initialData) => {
     if (!isDataLoaded(indexedServerData)) return [];
 
     const {
+        nicknameFilter,
         vocation,
         pvp,
         battleye,
@@ -22,6 +23,8 @@ const applyFilters = (filterState, initialData) => {
         rareNick,
         soulwarFilter
     } = filterState;
+
+    const nicknameRegex = new RegExp(nicknameFilter, 'i');
 
     let charPool = initialCharacterData;
     if (fav) charPool = favCharacters;
@@ -40,6 +43,8 @@ const applyFilters = (filterState, initialData) => {
             nickname,
             hasSoulwar
         } = character;
+
+        if(nicknameFilter && !nicknameRegex.test(nickname)) continue;
 
         if(!indexedServerData[serverId]) continue;
 
