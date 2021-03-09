@@ -31,7 +31,7 @@ Since there is no official API from Cipsoft, all the data used in this app is sc
 
 All live data is fetched from these endpoints:
 
-`https://exevopan-data.netlify.app/LatestCharacterData.json`
+`https://exevopan-data.netlify.app/MinifiedCharacterData.json`
 
 `https://exevopan-data.netlify.app/ItemsData.json`
 
