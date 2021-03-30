@@ -11,6 +11,8 @@ import SideDrawerProvider from './contexts/SideDrawer/'
 import SideDrawerContext from './contexts/SideDrawer/context';
 
 import CharacterDataProvider from './contexts/CharacterData';
+import CharacterDataContext from './contexts/CharacterData/context';
+
 import ItemsDataProvider from './contexts/ItemsData';
 import ServerDataProvider from './contexts/ServerData';
 import ThemeProvider from './contexts/Theme';
@@ -32,11 +34,27 @@ const App = () => {
 
                                     <Switch>
                                         <Route exact path="/">
-                                            <CharGrid itemsPerPage={10} />
+                                            <CharacterDataContext.Consumer>
+                                                {({ characterData, dispatchInitialData }) => (
+                                                    <CharGrid
+                                                        itemsPerPage={10}
+                                                        data={characterData}
+                                                        dispatchInitialData={dispatchInitialData}
+                                                    />
+                                                )}
+                                            </CharacterDataContext.Consumer>
                                         </Route>
 
                                         <Route exact path="/bazaar-history">
-                                            <h1>history</h1>
+                                            <CharacterDataContext.Consumer>
+                                                {({ characterData, dispatchInitialData }) => (
+                                                    <CharGrid
+                                                        itemsPerPage={10}
+                                                        data={characterData}
+                                                        dispatchInitialData={dispatchInitialData}
+                                                    />
+                                                )}
+                                            </CharacterDataContext.Consumer>
                                         </Route>
                                     </Switch>
 

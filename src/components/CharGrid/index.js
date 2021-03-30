@@ -7,29 +7,27 @@ import RadioInput from '../RadioInput';
 import Switch from '../Switch';
 
 import SideDrawerContext from '../../contexts/SideDrawer/context';
-import CharacterDataContext from '../../contexts/CharacterData/context';
 
 import { ReactComponent as FilterIcon } from '../../assets/svgs/filter.svg';
 import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 const sortingModes = ['Auction End', 'Level', 'Price', 'Price (bidded only)'];
 
-export default ({ itemsPerPage }) => {
+export default ({ itemsPerPage, data, dispatchInitialData }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
-    const { initialCharacterData, characterData, dispatchInitialData } = useContext(CharacterDataContext);
 
-    const [charList, setCharList] = useState(characterData.slice(0, 30));
+    const [charList, setCharList] = useState(data.slice(0, 30));
     const [index, setIndex] = useState(0);
     const [isSortingOpen, setSortingOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState(0);
     const [descendingOrder, setDescendingOrder] = useState(false);
 
     const sliceList = useCallback((index) => {
-        return characterData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
-    }, [characterData, itemsPerPage]);
+        return data.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
+    }, [data, itemsPerPage]);
 
     const handleAction = (value) => {
         setIndex(value);
@@ -41,11 +39,11 @@ export default ({ itemsPerPage }) => {
 
     useEffect(() => {
         setCharList(sliceList(index));
-    }, [index, characterData, sliceList]);
+    }, [index, data, sliceList]);
 
     useEffect(() => {
         handleAction(0);
-    }, [characterData]);
+    }, [data]);
 
     useEffect(() => {
         setTimeout(() => {
@@ -56,8 +54,6 @@ export default ({ itemsPerPage }) => {
             });
         }, 200);
     }, [selectedSort, dispatchInitialData, descendingOrder]);
-
-    if (initialCharacterData.length === 0) return null;
 
     return (
         <CharGrid className="custom-scrollbar" ref={gridRef}>
@@ -85,7 +81,7 @@ export default ({ itemsPerPage }) => {
 
                 <Paginator
                     itemsPerPage={itemsPerPage}
-                    dataSize={characterData.length}
+                    dataSize={data.length}
                     handleAction={handleAction}
                 />
             </header>
