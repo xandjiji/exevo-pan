@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import MasterLayout from './layouts/MasterLayout';
 import Header from './components/Header';
 
@@ -24,30 +24,21 @@ const App = () => {
                 <Router>
                     <MasterLayout>
 
-                        <Header>
-                            <NavLink
-                                to="/"
-                                exact
-                                className="clickable"
-                                activeClassName="active"
-                            >
-                                Current Auctions
-                            </NavLink>
-                            <NavLink
-                                to="/bazaar-history"
-                                exact
-                                className="clickable"
-                                activeClassName="active"
-                            >
-                                Bazaar History
-                            </NavLink>
-                        </Header>
+                        <Header />
 
                         <SideDrawerProvider>
                             <ServerDataProvider>
                                 <CharacterDataProvider>
 
-                                    <CharGrid itemsPerPage={10} />
+                                    <Switch>
+                                        <Route exact path="/">
+                                            <CharGrid itemsPerPage={10} />
+                                        </Route>
+
+                                        <Route exact path="/bazaar-history">
+                                            <h1>history</h1>
+                                        </Route>
+                                    </Switch>
 
                                     <ItemsDataProvider>
                                         <SideDrawerContext.Consumer>
