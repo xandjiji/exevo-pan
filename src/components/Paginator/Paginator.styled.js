@@ -7,7 +7,7 @@ export default styled.div`
         display: block;
         font-size: 12px;
         letter-spacing: 0.5px;
-        color: var(--onPrimary);
+        color: var(--onSurface);
     }
 
     .cursor-wrapper {
@@ -26,7 +26,7 @@ export default styled.div`
 
             svg {
                 width: 32px;
-                fill: var(--onPrimary);
+                fill: var(--onSurface);
                 transition: opacity 0.2s ease-out
             }
 

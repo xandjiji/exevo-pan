@@ -1,5 +1,8 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, NavLink } from 'react-router-dom';
 import MasterLayout from './layouts/MasterLayout';
+import Header from './components/Header';
+
 import CharGrid from './components/CharGrid';
 import Pushable from './components/Pushable';
 import SideDrawer from './components/SideDrawer';
@@ -18,34 +21,55 @@ const App = () => {
     return (
         <ErrorBoundary>
             <ThemeProvider>
-                <MasterLayout>
+                <Router>
+                    <MasterLayout>
 
-                    <SideDrawerProvider>
-                        <CharacterDataProvider>
+                        <Header>
+                            <NavLink
+                                to="/"
+                                exact
+                                className="clickable"
+                                activeClassName="active"
+                            >
+                                Current Auctions
+                            </NavLink>
+                            <NavLink
+                                to="/bazaar-history"
+                                exact
+                                className="clickable"
+                                activeClassName="active"
+                            >
+                                Bazaar History
+                            </NavLink>
+                        </Header>
+
+                        <SideDrawerProvider>
                             <ServerDataProvider>
+                                <CharacterDataProvider>
 
-                                <CharGrid itemsPerPage={10} />
+                                    <CharGrid itemsPerPage={10} />
 
-                                <ItemsDataProvider>
-                                    <SideDrawerContext.Consumer>
-                                        {context => (
-                                            <Pushable
-                                                active={context.active}
-                                                trigger={context.toggleSideDrawer}
-                                                blockRight
-                                                backdrop
-                                            >
-                                                <SideDrawer backAction={context.toggleSideDrawer} />
-                                            </Pushable>
-                                        )}
-                                    </SideDrawerContext.Consumer>
-                                </ItemsDataProvider>
+                                    <ItemsDataProvider>
+                                        <SideDrawerContext.Consumer>
+                                            {context => (
+                                                <Pushable
+                                                    active={context.active}
+                                                    trigger={context.toggleSideDrawer}
+                                                    blockRight
+                                                    backdrop
+                                                >
+                                                    <SideDrawer backAction={context.toggleSideDrawer} />
+                                                </Pushable>
+                                            )}
+                                        </SideDrawerContext.Consumer>
+                                    </ItemsDataProvider>
 
+                                </CharacterDataProvider>
                             </ServerDataProvider>
-                        </CharacterDataProvider>
-                    </SideDrawerProvider>
+                        </SideDrawerProvider>
 
-                </MasterLayout>
+                    </MasterLayout>
+                </Router>
             </ThemeProvider>
         </ErrorBoundary>
     )
