@@ -13,6 +13,9 @@ import SideDrawerContext from './contexts/SideDrawer/context';
 import CharacterDataProvider from './contexts/CharacterData';
 import CharacterDataContext from './contexts/CharacterData/context';
 
+import HistoryDataProvider from './contexts/HistoryData';
+import HistoryDataContext from './contexts/HistoryData/context';
+
 import ItemsDataProvider from './contexts/ItemsData';
 import ServerDataProvider from './contexts/ServerData';
 import ThemeProvider from './contexts/Theme';
@@ -31,10 +34,23 @@ const App = () => {
                         <SideDrawerProvider>
                             <ServerDataProvider>
                                 <CharacterDataProvider>
+                                    <HistoryDataProvider>
 
-                                    <Switch>
-                                        <Route exact path="/">
-                                            <CharacterDataContext.Consumer>
+                                        <Switch>
+                                            <Route exact path="/">
+                                                <CharacterDataContext.Consumer>
+                                                    {({ characterData, dispatchInitialData }) => (
+                                                        <CharGrid
+                                                            itemsPerPage={10}
+                                                            data={characterData}
+                                                            dispatchInitialData={dispatchInitialData}
+                                                        />
+                                                    )}
+                                                </CharacterDataContext.Consumer>
+                                            </Route>
+
+                                            <Route exact path="/bazaar-history">
+                                                {/* <CharacterDataContext.Consumer>
                                                 {({ characterData, dispatchInitialData }) => (
                                                     <CharGrid
                                                         itemsPerPage={10}
@@ -42,37 +58,26 @@ const App = () => {
                                                         dispatchInitialData={dispatchInitialData}
                                                     />
                                                 )}
-                                            </CharacterDataContext.Consumer>
-                                        </Route>
+                                            </CharacterDataContext.Consumer> */}
+                                            </Route>
+                                        </Switch>
 
-                                        <Route exact path="/bazaar-history">
-                                            <CharacterDataContext.Consumer>
-                                                {({ characterData, dispatchInitialData }) => (
-                                                    <CharGrid
-                                                        itemsPerPage={10}
-                                                        data={characterData}
-                                                        dispatchInitialData={dispatchInitialData}
-                                                    />
+                                        <ItemsDataProvider>
+                                            <SideDrawerContext.Consumer>
+                                                {context => (
+                                                    <Pushable
+                                                        active={context.active}
+                                                        trigger={context.toggleSideDrawer}
+                                                        blockRight
+                                                        backdrop
+                                                    >
+                                                        <SideDrawer backAction={context.toggleSideDrawer} />
+                                                    </Pushable>
                                                 )}
-                                            </CharacterDataContext.Consumer>
-                                        </Route>
-                                    </Switch>
+                                            </SideDrawerContext.Consumer>
+                                        </ItemsDataProvider>
 
-                                    <ItemsDataProvider>
-                                        <SideDrawerContext.Consumer>
-                                            {context => (
-                                                <Pushable
-                                                    active={context.active}
-                                                    trigger={context.toggleSideDrawer}
-                                                    blockRight
-                                                    backdrop
-                                                >
-                                                    <SideDrawer backAction={context.toggleSideDrawer} />
-                                                </Pushable>
-                                            )}
-                                        </SideDrawerContext.Consumer>
-                                    </ItemsDataProvider>
-
+                                    </HistoryDataProvider>
                                 </CharacterDataProvider>
                             </ServerDataProvider>
                         </SideDrawerProvider>
