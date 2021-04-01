@@ -13,21 +13,24 @@ import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 const sortingModes = ['Auction End', 'Level', 'Price', 'Price (bidded only)'];
 
-export default ({ itemsPerPage, data, dispatchInitialData }) => {
+export default ({ itemsPerPage, data }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
 
-    const [charList, setCharList] = useState(data.slice(0, 30));
+    const [sortedData, setSortedData] = useState(data);
+
+    const [charList, setCharList] = useState(sortedData.slice(0, 30));
     const [index, setIndex] = useState(0);
     const [isSortingOpen, setSortingOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState(0);
     const [descendingOrder, setDescendingOrder] = useState(false);
 
+
     const sliceList = useCallback((index) => {
-        return data.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
-    }, [data, itemsPerPage]);
+        return sortedData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
+    }, [sortedData, itemsPerPage]);
 
     const handleAction = (value) => {
         setIndex(value);
@@ -39,21 +42,19 @@ export default ({ itemsPerPage, data, dispatchInitialData }) => {
 
     useEffect(() => {
         setCharList(sliceList(index));
-    }, [index, data, sliceList]);
+    }, [index, sortedData, sliceList]);
 
     useEffect(() => {
         handleAction(0);
-    }, [data]);
+    }, [sortedData]);
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatchInitialData({
-                type: 'APPLY_SORT',
-                sortingMode: sortingModes[selectedSort],
-                descendingOrder
-            });
-        }, 200);
-    }, [selectedSort, dispatchInitialData, descendingOrder]);
+        setSortedData(applySort(
+            data,
+            sortingModes[selectedSort],
+            descendingOrder
+        ));
+    }, [data, selectedSort, descendingOrder]);
 
     return (
         <CharGrid className="custom-scrollbar" ref={gridRef}>
@@ -81,7 +82,7 @@ export default ({ itemsPerPage, data, dispatchInitialData }) => {
 
                 <Paginator
                     itemsPerPage={itemsPerPage}
-                    dataSize={data.length}
+                    dataSize={sortedData.length}
                     handleAction={handleAction}
                 />
             </header>
@@ -90,4 +91,41 @@ export default ({ itemsPerPage, data, dispatchInitialData }) => {
             </main>
         </CharGrid>
     )
+}
+
+const applySort = (oldData, sortingMode, descendingOrder) => {
+
+    const data = [...oldData];
+
+    const byAuctionEnd = (a, b) => {
+        if (!descendingOrder) return a.auctionEnd - b.auctionEnd;
+        return b.auctionEnd - a.auctionEnd;
+    }
+
+    const byLevel = (a, b) => {
+        if (!descendingOrder) return a.level - b.level;
+        return b.level - a.level;
+    }
+
+    const byPrice = (a, b) => {
+        if (!descendingOrder) return a.currentBid - b.currentBid;
+        return b.currentBid - a.currentBid;
+    }
+
+    switch (sortingMode) {
+        case 'Auction End':
+            return data.sort(byAuctionEnd);
+
+        case 'Level':
+            return data.sort(byLevel);
+
+        case 'Price':
+            return data.sort(byPrice);
+
+        case 'Price (bidded only)':
+            return data.filter(item => item.hasBeenBidded).sort(byPrice);
+
+        default:
+            return data;
+    }
 }
