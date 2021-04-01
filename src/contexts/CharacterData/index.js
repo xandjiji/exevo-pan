@@ -64,7 +64,7 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {loaded ? null : <LoadingIndicator />}
+            {loaded ? null : <LoadingIndicator>Updating data...</LoadingIndicator>}
             {children}
         </CharacterDataContext.Provider>
     )

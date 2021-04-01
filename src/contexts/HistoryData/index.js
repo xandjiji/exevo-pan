@@ -21,6 +21,8 @@ export default ({ children }) => {
 
     const [loaded, setLoaded] = useState(false);
 
+    const [percentage, setPercentage] = useState('0%');
+
     useEffect(() => {
         const fetchSetupedData = async () => {
             try {
@@ -31,6 +33,7 @@ export default ({ children }) => {
                 for (const [index, hash] of data.entries()) {
                     const dataPage = await checkAndHash(hash, index);
                     parsedHistoryData.push(dataPage);
+                    setPercentage(getPercentage(index, data.length));
                 }
 
                 const setupedArray = [].concat.apply([], parsedHistoryData);
@@ -66,10 +69,15 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {loaded ? null : <LoadingIndicator />}
+            {loaded ? null : <LoadingIndicator>{`Updating data...  ${percentage}`}</LoadingIndicator>}
             {children}
         </HistoryDataContext.Provider>
     )
+}
+
+const getPercentage = (part, whole) => {
+    const percentage = Math.round((part / whole) * 100);
+    return `${percentage}%`
 }
 
 const checkAndHash = async (hash, index) => {
