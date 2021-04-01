@@ -1,7 +1,8 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import HistoryDataContext from './context';
 
-import { getFromLocalStorage } from '../../utils/localStorage';
+import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
+import { minifiedToObject } from '../../utils/dataDictionary';
 import Dexie from 'dexie';
 import { historyEndpoint } from '../../dataEnpoint';
 
@@ -17,7 +18,8 @@ export default ({ children }) => {
                 const response = await fetch(`${historyEndpoint}/hash.json`);
                 const data = await response.json();
 
-                await Promise.all(data.map(checkAndHash));
+                const parsedHistoryData = await Promise.all(data.map(checkAndHash));
+                console.log(parsedHistoryData);
 
                 /* const setupedData = setupCharacterData(data);
 
@@ -43,12 +45,45 @@ export default ({ children }) => {
 }
 
 const checkAndHash = async (hash, index) => {
-    const dataPage = getFromLocalStorage('historyHash', []);
+    const pageName = `historyHash${index}`;
+    const pageHash = getFromLocalStorage(pageName, null);
 
-    if(!dataPage[index] || dataPage[index] !== hash) {
+    if (pageHash !== hash) {
+        console.log(`fetching: ${index}`);
+        saveToLocalStorage(pageName, hash);
+
         const response = await fetch(`${historyEndpoint}/historyData${index}.json`);
         const data = await response.json();
+        const parsedDataArray = await buildDb(index, data);
 
-        /* create database with index name and set items */
+        return parsedDataArray;
+    } else {
+
+    }
+}
+
+const buildDb = async (index, data) => {
+    const parsedDataArray = [];
+    for (const character of data) {
+        parsedDataArray.push(minifiedToObject(character));
+    }
+
+    try {
+        let db = new Dexie(`historyData${index}`);
+        await db.delete();
+        db = new Dexie(`historyData${index}`);
+
+        db.version(1).stores({
+            characters: 'id, nickname, auctionEnd, currentBid, hasBeenBidded, outfitId, serverId, vocationId, level, skills, items, charms, transfer, imbuements, hasSoulWar'
+        });
+
+        await db.characters.bulkAdd(parsedDataArray);
+
+        return parsedDataArray;
+    } catch (error) {
+        console.log(error);
+        console.log('retrying....');
+        saveToLocalStorage(`historyHash${index}`, '');
+        return await buildDb(index, parsedDataArray);
     }
 }
