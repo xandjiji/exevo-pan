@@ -29,13 +29,11 @@ import BrFlag from '../../assets/br-flag.png';
 import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
 
-import CharacterDataContext from '../../contexts/CharacterData/context';
 import ServerDataContext from '../../contexts/ServerData/context';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
-export default ({ backAction }) => {
+export default ({ backAction, initialCharacterData, favCharacters, dispatchCharacterData }) => {
 
-    const { initialCharacterData, favCharacters, dispatchCharacterData } = useContext(CharacterDataContext);
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
