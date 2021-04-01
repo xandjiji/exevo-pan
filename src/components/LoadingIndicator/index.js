@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import LoadingIndicator from './LoadingIndicator.styled';
+import ThemeContext from '../..//contexts/Theme/context';
 
 export default () => {
+    const { theme } = useContext(ThemeContext);
+
     return (
-        <LoadingIndicator className="shadow">
+        <LoadingIndicator className={`shadow ${theme}`}>
             <div className="data-loader"></div>
             Updating data...
         </LoadingIndicator>
