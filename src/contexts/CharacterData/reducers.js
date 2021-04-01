@@ -1,4 +1,4 @@
-import { getFromLocalStorage } from '../../utils/localStorage';
+import { getFavArray } from '../../utils/localStorage';
 
 const applyFilters = (filterState, initialData) => {
 
@@ -27,7 +27,7 @@ const applyFilters = (filterState, initialData) => {
     const nicknameRegex = new RegExp(nicknameFilter, 'i');
 
     let charPool = initialCharacterData;
-    if (fav) charPool = getFromLocalStorage('initialFavCharacterData', []);
+    if (fav) charPool = getFavArray();
 
     const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet, itemData);
 
