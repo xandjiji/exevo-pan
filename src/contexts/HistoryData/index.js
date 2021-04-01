@@ -18,16 +18,21 @@ export default ({ children }) => {
                 const response = await fetch(`${historyEndpoint}/hash.json`);
                 const data = await response.json();
 
-                const parsedHistoryData = await Promise.all(data.map(checkAndHash));
-                console.log(parsedHistoryData);
+                const parsedHistoryData = [];
+                for (const [index, hash] of data.entries()) {
+                    const dataPage = await checkAndHash(hash, index);
+                    parsedHistoryData.push(dataPage);
+                }
 
-                /* const setupedData = setupCharacterData(data);
+                const setupedArray = [].concat.apply([], parsedHistoryData);
+                setupedArray.reverse();
 
-                saveToLocalStorage('initialCharacterData', setupedData);
-                setInitialCharacterData(setupedData);
-                setUpdatedCharacterData(setupedData);
-                setLoaded(true); */
 
+                /* set initialCharacterData */
+
+                setLoaded(true);
+
+                console.log(setupedArray);
             } catch (error) {
                 console.log(error);
             }
@@ -49,16 +54,15 @@ const checkAndHash = async (hash, index) => {
     const pageHash = getFromLocalStorage(pageName, null);
 
     if (pageHash !== hash) {
-        console.log(`fetching: ${index}`);
-        saveToLocalStorage(pageName, hash);
-
         const response = await fetch(`${historyEndpoint}/historyData${index}.json`);
         const data = await response.json();
         const parsedDataArray = await buildDb(index, data);
 
+        saveToLocalStorage(pageName, hash);
+
         return parsedDataArray;
     } else {
-
+        return await getFromDb(index);
     }
 }
 
@@ -86,4 +90,12 @@ const buildDb = async (index, data) => {
         saveToLocalStorage(`historyHash${index}`, '');
         return await buildDb(index, parsedDataArray);
     }
+}
+
+const getFromDb = async (index) => {
+    const db = new Dexie(`historyData${index}`);
+    db.version(1).stores({
+        characters: 'id, nickname, auctionEnd, currentBid, hasBeenBidded, outfitId, serverId, vocationId, level, skills, items, charms, transfer, imbuements, hasSoulWar'
+    });
+    return await db.characters.toArray();
 }
