@@ -1,8 +1,8 @@
-import { saveToLocalStorage } from '../../utils/localStorage';
+import { getFromLocalStorage } from '../../utils/localStorage';
 
 const applyFilters = (filterState, initialData) => {
 
-    const { initialCharacterData, itemData, indexedServerData, favCharacters } = initialData;
+    const { initialCharacterData, itemData, indexedServerData } = initialData;
 
     if (!isDataLoaded(initialCharacterData)) return [];
     if (!isDataLoaded(itemData)) return [];
@@ -27,7 +27,7 @@ const applyFilters = (filterState, initialData) => {
     const nicknameRegex = new RegExp(nicknameFilter, 'i');
 
     let charPool = initialCharacterData;
-    if (fav) charPool = favCharacters;
+    if (fav) charPool = getFromLocalStorage('initialFavCharacterData', []);
 
     const auctionsItemsSet = getAuctionIdSetFromItemNameSet(itemSet, itemData);
 
@@ -123,36 +123,10 @@ const isDataLoaded = (dataObject) => {
     }
 }
 
-const toggleFav = (charData, favArray) => {
-
-    const findCharIndexById = (id) => {
-        for (let i = 0; i < favArray.length; i++) {
-            if (favArray[i].id === id) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    const charIndex = findCharIndexById(charData.id);
-    if (charIndex >= 0) {
-        favArray.splice(charIndex, 1);
-    } else {
-        favArray.push(charData);
-    }
-
-    saveToLocalStorage('initialFavCharacterData', favArray);
-
-    return favArray;
-}
-
 export const characterDataReducer = (state, action) => {
     switch (action.type) {
         case 'APPLY_FILTERS':
             return applyFilters(action.filterState, action.initialData);
-
-        case 'TOGGLE_FAV':
-            return toggleFav(action.charData, state);
 
         default:
             return state;

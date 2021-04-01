@@ -4,25 +4,17 @@ import HistoryDataContext from './context';
 import { characterDataReducer } from '../CharacterData/reducers';
 
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
-import { checkCharObjectStructure } from '../../utils/checkObjectStructures';
 import { minifiedToObject } from '../../utils/dataDictionary';
 import { historyEndpoint } from '../../dataEnpoint';
+
 import Dexie from 'dexie';
 
 import LoadingIndicator from '../../components/LoadingIndicator';
-
-let initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
-
-if (!checkCharObjectStructure(initialFavCharacterArray[0])) {
-    initialFavCharacterArray = [];
-    saveToLocalStorage('initialFavCharacterData', []);
-}
 
 export default ({ children }) => {
 
     const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, []);
     const [initialData, dispatchInitialData] = useReducer(characterDataReducer, []);
-    const [favCharacters, dispatchFavCharacters] = useReducer(characterDataReducer, initialFavCharacterArray);
 
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
@@ -71,10 +63,7 @@ export default ({ children }) => {
                 dispatchInitialData,
 
                 characterData: updatedCharacterData,
-                dispatchCharacterData,
-
-                favCharacters,
-                dispatchFavCharacters
+                dispatchCharacterData
             }}
         >
             {loaded ? null : <LoadingIndicator />}

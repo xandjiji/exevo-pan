@@ -9,23 +9,16 @@ import dataEndpoint from '../../dataEnpoint';
 import LoadingIndicator from '../../components/LoadingIndicator';
 
 let initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
-let initialFavCharacterArray = getFromLocalStorage('initialFavCharacterData', []);
 
 if (!checkCharObjectStructure(initialCharacterArray[0])) {
     initialCharacterArray = [];
     saveToLocalStorage('initialCharacterData', [])
 }
 
-if (!checkCharObjectStructure(initialFavCharacterArray[0])) {
-    initialFavCharacterArray = [];
-    saveToLocalStorage('initialFavCharacterData', []);
-}
-
 export default ({ children }) => {
 
     const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, initialCharacterArray);
     const [initialData, dispatchInitialData] = useReducer(characterDataReducer, initialCharacterArray);
-    const [favCharacters, dispatchFavCharacters] = useReducer(characterDataReducer, initialFavCharacterArray);
 
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
@@ -68,10 +61,7 @@ export default ({ children }) => {
                 dispatchInitialData,
 
                 characterData: updatedCharacterData,
-                dispatchCharacterData,
-
-                favCharacters,
-                dispatchFavCharacters
+                dispatchCharacterData
             }}
         >
             {loaded ? null : <LoadingIndicator />}

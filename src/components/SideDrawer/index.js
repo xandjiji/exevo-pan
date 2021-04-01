@@ -32,7 +32,7 @@ import NaFlag from '../../assets/na-flag.png';
 import ServerDataContext from '../../contexts/ServerData/context';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
-export default ({ backAction, initialCharacterData, favCharacters, dispatchCharacterData }) => {
+export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
 
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
@@ -119,8 +119,7 @@ export default ({ backAction, initialCharacterData, favCharacters, dispatchChara
                 initialData: {
                     initialCharacterData,
                     itemData,
-                    indexedServerData,
-                    favCharacters
+                    indexedServerData
                 }
             });
         }, 150);

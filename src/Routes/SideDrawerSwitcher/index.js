@@ -23,11 +23,10 @@ export default () => {
                     <Switch>
                         <Route exact path="/">
                             <CharacterDataContext.Consumer>
-                                {({ initialCharacterData, favCharacters, dispatchCharacterData }) => (
+                                {({ initialCharacterData, dispatchCharacterData }) => (
                                     <SideDrawer
                                         backAction={sideDrawercontext.toggleSideDrawer}
                                         initialCharacterData={initialCharacterData}
-                                        favCharacters={favCharacters}
                                         dispatchCharacterData={dispatchCharacterData}
                                     />
                                 )}
@@ -36,11 +35,10 @@ export default () => {
 
                         <Route exact path="/bazaar-history">
                             <HistoryDataContext.Consumer>
-                                {({ initialCharacterData, favCharacters, dispatchCharacterData }) => (
+                                {({ initialCharacterData, dispatchCharacterData }) => (
                                     <SideDrawer
                                         backAction={sideDrawercontext.toggleSideDrawer}
                                         initialCharacterData={initialCharacterData}
-                                        favCharacters={favCharacters}
                                         dispatchCharacterData={dispatchCharacterData}
                                     />
                                 )}
