@@ -1,6 +1,9 @@
 import React, { useEffect, useReducer, useState } from 'react';
 import HistoryDataContext from './context';
 
+/* FAZER PROPRIO? */
+import { characterDataReducer } from '../CharacterData/reducers';
+
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
 import { minifiedToObject } from '../../utils/dataDictionary';
 import Dexie from 'dexie';
@@ -10,6 +13,13 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 
 
 export default ({ children }) => {
+
+    const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, []);
+    const [initialData, dispatchInitialData] = useReducer(characterDataReducer, []);
+
+    const [initialCharacterData, setInitialCharacterData] = useState(initialData);
+    const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
+
     const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
@@ -27,10 +37,10 @@ export default ({ children }) => {
                 const setupedArray = [].concat.apply([], parsedHistoryData);
                 setupedArray.reverse();
 
-
-                /* set initialCharacterData */
-
+                setInitialCharacterData(setupedArray);
+                setUpdatedCharacterData(setupedArray);
                 setLoaded(true);
+
             } catch (error) {
                 console.log(error);
             }
@@ -39,8 +49,24 @@ export default ({ children }) => {
         fetchSetupedData();
     }, []);
 
+    useEffect(() => {
+        setUpdatedCharacterData(characterData);
+    }, [characterData]);
+
+    useEffect(() => {
+        setInitialCharacterData(initialData);
+    }, [initialData]);
+
     return (
-        <HistoryDataContext.Provider>
+        <HistoryDataContext.Provider
+            value={{
+                initialCharacterData,
+                dispatchInitialData,
+
+                characterData: updatedCharacterData,
+                dispatchCharacterData,
+            }}
+        >
             {loaded ? null : <LoadingIndicator />}
             {children}
         </HistoryDataContext.Provider>

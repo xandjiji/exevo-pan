@@ -50,7 +50,7 @@ const App = () => {
                                             </Route>
 
                                             <Route exact path="/bazaar-history">
-                                                {/* <CharacterDataContext.Consumer>
+                                                <HistoryDataContext.Consumer>
                                                 {({ characterData, dispatchInitialData }) => (
                                                     <CharGrid
                                                         itemsPerPage={10}
@@ -58,7 +58,7 @@ const App = () => {
                                                         dispatchInitialData={dispatchInitialData}
                                                     />
                                                 )}
-                                            </CharacterDataContext.Consumer> */}
+                                            </HistoryDataContext.Consumer>
                                             </Route>
                                         </Switch>
 
