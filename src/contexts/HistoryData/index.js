@@ -42,10 +42,10 @@ export default ({ children }) => {
                 }
 
                 const setupedArray = [].concat.apply([], parsedHistoryData);
-                setupedArray.reverse();
+                const setupedData = setupedArray.sort((a, b) => b.auctionEnd - a.auctionEnd);
 
-                setInitialCharacterData(setupedArray);
-                setUpdatedCharacterData(setupedArray);
+                setInitialCharacterData(setupedData);
+                setUpdatedCharacterData(setupedData);
                 setLoaded(true);
 
             } catch (error) {

@@ -17,6 +17,8 @@ export default () => {
                             itemsPerPage={10}
                             data={characterData}
                             dispatchInitialData={dispatchInitialData}
+                            initialSort={0}
+                            initialOrder={false}
                         />
                     )}
                 </CharacterDataContext.Consumer>
@@ -29,6 +31,8 @@ export default () => {
                             itemsPerPage={10}
                             data={characterData}
                             dispatchInitialData={dispatchInitialData}
+                            initialSort={0}
+                            initialOrder={true}
                         />
                     )}
                 </HistoryDataContext.Consumer>

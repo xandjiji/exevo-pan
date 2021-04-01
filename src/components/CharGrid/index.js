@@ -13,7 +13,7 @@ import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 const sortingModes = ['Auction End', 'Level', 'Price', 'Price (bidded only)'];
 
-export default ({ itemsPerPage, data }) => {
+export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
 
@@ -24,8 +24,8 @@ export default ({ itemsPerPage, data }) => {
     const [charList, setCharList] = useState(sortedData.slice(0, 30));
     const [index, setIndex] = useState(0);
     const [isSortingOpen, setSortingOpen] = useState(false);
-    const [selectedSort, setSelectedSort] = useState(0);
-    const [descendingOrder, setDescendingOrder] = useState(false);
+    const [selectedSort, setSelectedSort] = useState(initialSort);
+    const [descendingOrder, setDescendingOrder] = useState(initialOrder);
 
 
     const sliceList = useCallback((index) => {
