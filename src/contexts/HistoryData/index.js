@@ -31,8 +31,6 @@ export default ({ children }) => {
                 /* set initialCharacterData */
 
                 setLoaded(true);
-
-                console.log(setupedArray);
             } catch (error) {
                 console.log(error);
             }
@@ -67,29 +65,19 @@ const checkAndHash = async (hash, index) => {
 }
 
 const buildDb = async (index, data) => {
-    const parsedDataArray = [];
-    for (const character of data) {
-        parsedDataArray.push(minifiedToObject(character));
-    }
+    const parsedDataArray = data.map(minifiedToObject);
 
-    try {
-        let db = new Dexie(`historyData${index}`);
-        await db.delete();
-        db = new Dexie(`historyData${index}`);
+    let db = new Dexie(`historyData${index}`);
+    await db.delete();
+    db = new Dexie(`historyData${index}`);
 
-        db.version(1).stores({
-            characters: 'id, nickname, auctionEnd, currentBid, hasBeenBidded, outfitId, serverId, vocationId, level, skills, items, charms, transfer, imbuements, hasSoulWar'
-        });
+    db.version(1).stores({
+        characters: 'id, nickname, auctionEnd, currentBid, hasBeenBidded, outfitId, serverId, vocationId, level, skills, items, charms, transfer, imbuements, hasSoulWar'
+    });
 
-        await db.characters.bulkAdd(parsedDataArray);
+    await db.characters.bulkAdd(parsedDataArray);
 
-        return parsedDataArray;
-    } catch (error) {
-        console.log(error);
-        console.log('retrying....');
-        saveToLocalStorage(`historyHash${index}`, '');
-        return await buildDb(index, parsedDataArray);
-    }
+    return parsedDataArray;
 }
 
 const getFromDb = async (index) => {
