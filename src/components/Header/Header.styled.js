@@ -16,7 +16,7 @@ export default styled.header`
         top: 0;
         z-index: 1;
         height: 60px;
-        width: 72px;
+        width: 32px;
         background-image: linear-gradient(to left, var(--primary), rgba(0,0,0,0));
         pointer-events: none;
     }
@@ -39,3 +39,7 @@ export const HeaderItem = styled.li`
         white-space: nowrap;
     }
 `
+
+export const Logo = styled.img`
+    margin-right: 18px;
+`;
