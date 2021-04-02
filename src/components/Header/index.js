@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 export default () => {
 
     return (
-        <Header className="inner-container">
+        <Header className="inner-container custom-scrollbar">
             <nav>
                 <ul>
                     <HeaderItem>

@@ -101,6 +101,7 @@ svg {
 .custom-scrollbar::-webkit-scrollbar,
 html::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
     background-color: transparent;
     border-radius: 2px;
 }

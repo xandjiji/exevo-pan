@@ -5,6 +5,7 @@ export default styled.header`
     height: 60px;
     display: flex;
     align-items: center;
+    overflow-x: auto;
 
     nav ul {
         display: flex;
@@ -23,5 +24,6 @@ export const HeaderItem = styled.li`
         font-size: 14px;
         letter-spacing: 0.5px;
         color: var(--onPrimary);
+        white-space: nowrap;
     }
 `
