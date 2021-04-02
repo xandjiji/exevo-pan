@@ -11,7 +11,11 @@ import { get, set } from 'idb-keyval';
 
 import LoadingIndicator from '../../components/LoadingIndicator';
 
+import { useLocation } from 'react-router-dom';
+
 export default ({ children }) => {
+
+    const location = useLocation();
 
     const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, []);
     const [initialData, dispatchInitialData] = useReducer(characterDataReducer, []);
@@ -48,8 +52,8 @@ export default ({ children }) => {
             }
         }
 
-        fetchSetupedData();
-    }, []);
+        if(location.pathname === '/bazaar-history' && !loaded) fetchSetupedData();
+    }, [location, loaded]);
 
     useEffect(() => {
         setUpdatedCharacterData(characterData);
@@ -69,7 +73,7 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {loaded ? null : <LoadingIndicator>{`Updating data...  ${percentage}`}</LoadingIndicator>}
+            {loaded || location.pathname !== '/bazaar-history' ? null : <LoadingIndicator>{`Updating data...  ${percentage}`}</LoadingIndicator>}
             {children}
         </HistoryDataContext.Provider>
     )
