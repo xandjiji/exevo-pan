@@ -1,17 +1,29 @@
 import styled from 'styled-components';
 
 export default styled.header`
+    position: relative;
     width: 100%;
     height: 60px;
     display: flex;
     align-items: center;
     overflow-x: auto;
+    background-color: var(--primary);
+
+    &::after {
+        content: '';
+        position: fixed;
+        right: 0;
+        top: 0;
+        z-index: 1;
+        height: 60px;
+        width: 72px;
+        background-image: linear-gradient(to left, var(--primary), rgba(0,0,0,0));
+        pointer-events: none;
+    }
 
     nav ul {
         display: flex;
     }
-    
-    background-color: var(--primary);
 `;
 
 export const HeaderItem = styled.li`
