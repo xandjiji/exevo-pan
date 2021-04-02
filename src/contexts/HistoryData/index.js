@@ -15,7 +15,7 @@ import { useLocation } from 'react-router-dom';
 
 export default ({ children }) => {
 
-    const location = useLocation();
+    const { pathname } = useLocation();
 
     const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, []);
     const [initialData, dispatchInitialData] = useReducer(characterDataReducer, []);
@@ -23,9 +23,16 @@ export default ({ children }) => {
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
 
+    const [interacted, setInteracted] = useState(pathname === '/bazaar-history');
     const [loaded, setLoaded] = useState(false);
 
     const [percentage, setPercentage] = useState('0%');
+
+    useEffect(() => {
+        if(pathname === '/bazaar-history') {
+            setInteracted(prev => !prev ? true : prev);
+        }
+    }, [pathname]);
 
     useEffect(() => {
         const fetchSetupedData = async () => {
@@ -52,8 +59,8 @@ export default ({ children }) => {
             }
         }
 
-        if(location.pathname === '/bazaar-history' && !loaded) fetchSetupedData();
-    }, [location, loaded]);
+        if(interacted && !loaded) fetchSetupedData();
+    }, [interacted, loaded]);
 
     useEffect(() => {
         setUpdatedCharacterData(characterData);
@@ -73,7 +80,7 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {loaded || location.pathname !== '/bazaar-history' ? null : <LoadingIndicator>{`Updating data...  ${percentage}`}</LoadingIndicator>}
+            {!loaded && interacted ? <LoadingIndicator>{`Updating data...  ${percentage}`}</LoadingIndicator> : null}
             {children}
         </HistoryDataContext.Provider>
     )
