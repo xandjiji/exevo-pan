@@ -7,7 +7,7 @@ import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorag
 import { minifiedToObject } from '../../utils/dataDictionary';
 import { historyEndpoint } from '../../dataEnpoint';
 
-import Dexie from 'dexie';
+import { get, set } from 'idb-keyval';
 
 import LoadingIndicator from '../../components/LoadingIndicator';
 
@@ -99,24 +99,16 @@ const checkAndHash = async (hash, index) => {
 
 const buildDb = async (index, data) => {
     const parsedDataArray = data.map(minifiedToObject);
+    const stringfiedData = JSON.stringify(data);
 
-    let db = new Dexie(`historyData${index}`);
-    await db.delete();
-    db = new Dexie(`historyData${index}`);
-
-    db.version(1).stores({
-        characters: 'id, nickname, auctionEnd, currentBid, hasBeenBidded, outfitId, serverId, vocationId, level, skills, items, charms, transfer, imbuements, hasSoulWar'
-    });
-
-    await db.characters.bulkAdd(parsedDataArray);
+    await set(`historyData${index}`, stringfiedData);
 
     return parsedDataArray;
 }
 
 const getFromDb = async (index) => {
-    const db = new Dexie(`historyData${index}`);
-    db.version(1).stores({
-        characters: 'id, nickname, auctionEnd, currentBid, hasBeenBidded, outfitId, serverId, vocationId, level, skills, items, charms, transfer, imbuements, hasSoulWar'
-    });
-    return await db.characters.toArray();
+    const stringfiedData = await get(`historyData${index}`);
+
+    const parsedData = JSON.parse(stringfiedData);
+    return parsedData.map(minifiedToObject);;
 }
