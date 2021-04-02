@@ -7,29 +7,30 @@ import RadioInput from '../RadioInput';
 import Switch from '../Switch';
 
 import SideDrawerContext from '../../contexts/SideDrawer/context';
-import CharacterDataContext from '../../contexts/CharacterData/context';
 
 import { ReactComponent as FilterIcon } from '../../assets/svgs/filter.svg';
 import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 const sortingModes = ['Auction End', 'Level', 'Price', 'Price (bidded only)'];
 
-export default ({ itemsPerPage }) => {
+export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
 
     const { toggleSideDrawer } = useContext(SideDrawerContext);
-    const { initialCharacterData, characterData, dispatchInitialData } = useContext(CharacterDataContext);
 
-    const [charList, setCharList] = useState(characterData.slice(0, 30));
+    const [sortedData, setSortedData] = useState(data);
+
+    const [charList, setCharList] = useState(sortedData.slice(0, 30));
     const [index, setIndex] = useState(0);
     const [isSortingOpen, setSortingOpen] = useState(false);
-    const [selectedSort, setSelectedSort] = useState(0);
-    const [descendingOrder, setDescendingOrder] = useState(false);
+    const [selectedSort, setSelectedSort] = useState(initialSort);
+    const [descendingOrder, setDescendingOrder] = useState(initialOrder);
+
 
     const sliceList = useCallback((index) => {
-        return characterData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
-    }, [characterData, itemsPerPage]);
+        return sortedData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
+    }, [sortedData, itemsPerPage]);
 
     const handleAction = (value) => {
         setIndex(value);
@@ -41,23 +42,19 @@ export default ({ itemsPerPage }) => {
 
     useEffect(() => {
         setCharList(sliceList(index));
-    }, [index, characterData, sliceList]);
+    }, [index, sortedData, sliceList]);
 
     useEffect(() => {
         handleAction(0);
-    }, [characterData]);
+    }, [sortedData]);
 
     useEffect(() => {
-        setTimeout(() => {
-            dispatchInitialData({
-                type: 'APPLY_SORT',
-                sortingMode: sortingModes[selectedSort],
-                descendingOrder
-            });
-        }, 200);
-    }, [selectedSort, dispatchInitialData, descendingOrder]);
-
-    if (initialCharacterData.length === 0) return null;
+        setSortedData(applySort(
+            data,
+            sortingModes[selectedSort],
+            descendingOrder
+        ));
+    }, [data, selectedSort, descendingOrder]);
 
     return (
         <CharGrid className="custom-scrollbar" ref={gridRef}>
@@ -85,7 +82,7 @@ export default ({ itemsPerPage }) => {
 
                 <Paginator
                     itemsPerPage={itemsPerPage}
-                    dataSize={characterData.length}
+                    dataSize={sortedData.length}
                     handleAction={handleAction}
                 />
             </header>
@@ -94,4 +91,41 @@ export default ({ itemsPerPage }) => {
             </main>
         </CharGrid>
     )
+}
+
+const applySort = (oldData, sortingMode, descendingOrder) => {
+
+    const data = [...oldData];
+
+    const byAuctionEnd = (a, b) => {
+        if (!descendingOrder) return a.auctionEnd - b.auctionEnd;
+        return b.auctionEnd - a.auctionEnd;
+    }
+
+    const byLevel = (a, b) => {
+        if (!descendingOrder) return a.level - b.level;
+        return b.level - a.level;
+    }
+
+    const byPrice = (a, b) => {
+        if (!descendingOrder) return a.currentBid - b.currentBid;
+        return b.currentBid - a.currentBid;
+    }
+
+    switch (sortingMode) {
+        case 'Auction End':
+            return data.sort(byAuctionEnd);
+
+        case 'Level':
+            return data.sort(byLevel);
+
+        case 'Price':
+            return data.sort(byPrice);
+
+        case 'Price (bidded only)':
+            return data.filter(item => item.hasBeenBidded).sort(byPrice);
+
+        default:
+            return data;
+    }
 }

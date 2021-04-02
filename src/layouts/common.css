@@ -101,6 +101,7 @@ svg {
 .custom-scrollbar::-webkit-scrollbar,
 html::-webkit-scrollbar {
     width: 6px;
+    height: 6px;
     background-color: transparent;
     border-radius: 2px;
 }
@@ -132,7 +133,7 @@ html {
     box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.14);
 }
 
-.clickable:active {
+.clickable:active, .clickable.active {
     box-shadow: inset 2px 2px rgba(0,0,0,.14);
 }
 

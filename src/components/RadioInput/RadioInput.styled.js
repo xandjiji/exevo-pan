@@ -22,8 +22,8 @@ export default styled.div`
             transform: translate(-50%, -50%);
 
             border-radius: 50%;
-            width: 7px;
-            height: 7px;
+            width: 8px;
+            height: 8px;
             background-color: var(--primary);
             opacity: 0;
             transition: opacity 0.2s ease-out;

@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 
 export default styled.div`
-    height: 100vh;
+    height: calc(100vh - 60px);
     overflow: auto;
     background-color: var(--background);
 
     .grid-header {
         position: fixed;
-        top: 0;
+        top: 60px;
         width: 100%;
         z-index: 50;
         padding-top: 8px;
@@ -16,7 +16,7 @@ export default styled.div`
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
-        background-color: var(--primary);
+        background-color: var(--surface);
         user-select: none;
 
 
@@ -30,7 +30,7 @@ export default styled.div`
             .icon {
                 width: 37px;
                 height: 37px;
-                fill: var(--onPrimary);
+                fill: var(--onSurface);
                 outline: none;
             }
 

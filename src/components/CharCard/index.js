@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 import CharCard from './CharCard.styled';
 
 import ImagePortrait from '../ImagePortrait';
@@ -34,6 +35,8 @@ const vocationEnum = {
 }
 
 export default ({ charData }) => {
+    const { pathname } = useLocation();
+
     const { indexedServerData } = useContext(ServerDataContext);
 
     const {
@@ -70,6 +73,14 @@ export default ({ charData }) => {
 
         setHighlightedSkill(biggest);
     }, [skills]);
+
+    const getBidLabelText = () => {
+        if(pathname === '/bazaar-history') {
+            return hasBeenBidded ? 'Auction Successful' : 'Auction Failed';
+        } else {
+            return hasBeenBidded ? 'Current Bid' : 'Minimum Bid';
+        }
+    }
 
     if (Object.keys(indexedServerData).length === 0) return null;
 
@@ -137,7 +148,7 @@ export default ({ charData }) => {
                     </div>
                 </LabeledText>
 
-                <LabeledText label={hasBeenBidded ? 'Current Bid' : 'Minimum Bid'}>
+                <LabeledText label={getBidLabelText()}>
                     <div className="overview-content row bid">
                         <img
                             className="coin"

@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import AuctionTimer from './AuctionTimer.styled';
 
+import { useLocation } from 'react-router-dom';
+
 const monthStr = ['Jan', 'Fev', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Set', 'Oct', 'Nov', 'Dec'];
 const constantTime = 60000;
 const constantTime2 = 3600000;
 const constantTime3 = 86400000;
 
 export default ({ endDate }) => {
+    const { pathname } = useLocation();
+
     const [countdown, setCountdown] = useState(getInitialDate(endDate));
 
     useEffect(() => {
@@ -36,7 +40,7 @@ export default ({ endDate }) => {
     const endTime = `, ${endDate.getHours()}:${endDate.getMinutes() > 10 ? endDate.getMinutes() : `0${endDate.getMinutes()}`}`;
 
     let auctionEndMessage;
-    if (days > 0) {
+    if (days > 0 || pathname === '/bazaar-history') {
         auctionEndMessage =
             <>
                 <span>
