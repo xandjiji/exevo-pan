@@ -34,7 +34,7 @@ export default styled.div`
             height: ${props => props.hasIcon ? '32px' : '16px'};
             border-radius: 50%;
             background-color: var(--surface);
-            transform: translateY(-50%);
+            transform: translate(0, -50%);
             box-shadow: 0px 2px 4px 2px rgba(0,0,0,0.3);
         }
     }
@@ -44,16 +44,14 @@ export default styled.div`
             background-color: var(--primaryVariant);
 
             svg, &::after {
-                left: 100%;
+                left: calc(100% - ${props => props.hasIcon ? '32px' : '16px'})
             }
 
             svg {
                 fill: var(--onPrimary);
-                transform: translate(calc(-100% - 4px), -50%);
             }
 
             &::after {
-                transform: translate(-100%, -50%);
                 background-color: var(--primary);
                 box-shadow: 0px 2px 4px 1px rgba(0,0,0,0.3);
             }
