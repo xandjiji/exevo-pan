@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
+import { Route } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Chip from '../Chip';
@@ -445,39 +446,42 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     </div>
                 </FilterGroup>
 
-                <FilterGroup
-                    className="rare-items-wrapper"
-                    title="Rare items"
-                    display="flex"
-                    badge={<InformationBadge icon="!" text="If a rare item is not on this list it means that there are no auctions available with it." />}
-                >
-                    <label htmlFor="Items-input" className="invisible-label">Items</label>
-                    <AutocompleteInput
-                        labelFor="Items-input"
-                        placeholder="Choose an item"
-                        clearAfterSucessful
-                        items={allItemsNotInSet(itemNamesArray, filters.itemSet)}
-                        onChange={useCallback((value) => onAutocompleteChange('itemSet', value, itemData), [onAutocompleteChange, itemData])}
-                    />
 
-                    <Chip
-                        clickable
-                        overrideStatus={isAllItemsSelected() ? true : false}
-                        onClick={handleAllItemsToggle}>
-                        All items
-                    </Chip>
+                <Route exact path="/">
+                    <FilterGroup
+                        className="rare-items-wrapper"
+                        title="Rare items"
+                        display="flex"
+                        badge={<InformationBadge icon="!" text="If a rare item is not on this list it means that there are no auctions available with it." />}
+                    >
+                        <label htmlFor="Items-input" className="invisible-label">Items</label>
+                        <AutocompleteInput
+                            labelFor="Items-input"
+                            placeholder="Choose an item"
+                            clearAfterSucessful
+                            items={allItemsNotInSet(itemNamesArray, filters.itemSet)}
+                            onChange={useCallback((value) => onAutocompleteChange('itemSet', value, itemData), [onAutocompleteChange, itemData])}
+                        />
 
-                    <div className="chips-wrapper">
-                        {[...filters.itemSet].map((itemName, index) =>
-                            <Chip
-                                key={index}
-                                closeable
-                                onClose={() => deleteFromFilterSet('itemSet', itemName)}>
-                                {itemName}
-                            </Chip>
-                        )}
-                    </div>
-                </FilterGroup>
+                        <Chip
+                            clickable
+                            overrideStatus={isAllItemsSelected() ? true : false}
+                            onClick={handleAllItemsToggle}>
+                            All items
+                        </Chip>
+
+                        <div className="chips-wrapper">
+                            {[...filters.itemSet].map((itemName, index) =>
+                                <Chip
+                                    key={index}
+                                    closeable
+                                    onClose={() => deleteFromFilterSet('itemSet', itemName)}>
+                                    {itemName}
+                                </Chip>
+                            )}
+                        </div>
+                    </FilterGroup>
+                </Route>
 
                 <FilterGroup title="Misc" display="flex">
                     <Chip
