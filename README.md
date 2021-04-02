@@ -12,17 +12,19 @@ You can find the application [here](https://exevopan.com/).
 ## Current Features
 
 - List all available character auctions
+- List all past character auctions
 - Search by nickname
 - Filter by server types, character stats and more!
 - Rare items finder
 - Bookmark auctions
 - Dark Theme
 <p align="center">
-	<img src="https://i.imgur.com/NirFT5A.png">
+	<img src="https://i.imgur.com/yzKNmGE.png">
 </p>
 
 ## Future Features
 
+- Analytics and summary data about the Bazaar
 - Notifications for auctions close to ending
 
 ## Char Bazaar Data
@@ -37,7 +39,11 @@ All live data is fetched from these endpoints:
 
 `https://exevopan-data.netlify.app/ServerData.json`
 
-They are being updated around every 5 minutes
+`https://exevopan-history-data.netlify.app/hash.json`
+
+`https://exevopan-history-data.netlify.app/historyData{index}.json`
+
+They are being updated around every 10 minutes
 
 ## More informations
 
