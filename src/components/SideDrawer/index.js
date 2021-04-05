@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Chip from '../Chip';
@@ -35,8 +35,10 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
 
-    const { search } = window.location;
+    const { search, pathname } = window.location;
     const params = new URLSearchParams(search);
+
+    const history = useHistory();
 
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
@@ -45,7 +47,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
-        nicknameFilter: params.get('name') || '',
+        nicknameFilter: params.get('nicknameFilter') || '',
         vocation: new Set(),
         pvp: new Set([]),
         battleye: new Set([]),
@@ -62,6 +64,33 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const [filters, setFilters] = useState(initialFilterState);
     const [interacted, setInteracted] = useState(false);
+
+    useEffect(() => {
+
+        const paramArray = [];
+        for (const key in filters) {
+            const value = filters[key];
+
+            if (typeof value === 'string' && value !== '') {
+                paramArray.push({ [key]: value });
+            }
+
+            if (typeof value === 'object' && value.size !== 0) {
+                const setArray = Array.from(value);
+                paramArray.push({ [key]: setArray.join(',') });
+            }
+        }
+
+        console.log(paramArray);
+        let params = '';
+        const { nicknameFilter } = filters;
+
+        if (nicknameFilter !== '') {
+            params += `nickname=${nicknameFilter}`;
+        }
+
+        history.replace(`${pathname}?${params}`);
+    }, [filters]);
 
     const updateFilterValue = useCallback((key, value) => {
         setFilters(prevFilters => {
