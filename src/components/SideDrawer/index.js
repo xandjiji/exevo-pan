@@ -35,6 +35,9 @@ import ItemsDataContext from '../../contexts/ItemsData/context';
 
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
 
+    const { search } = window.location;
+    const params = new URLSearchParams(search);
+
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
@@ -42,7 +45,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
-        nicknameFilter: '',
+        nicknameFilter: params.get('name') || '',
         vocation: new Set(),
         pvp: new Set([]),
         battleye: new Set([]),
@@ -207,6 +210,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <FilterGroup title="Search nickname" display="flex">
                     <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
                     <AutocompleteInput
+                        initialValue={initialFilterState.nicknameFilter}
                         labelFor="Nickname-input"
                         placeholder="Nickname"
                         onChange={useCallback((value) => updateFilterValue('nicknameFilter', value), [updateFilterValue])}
