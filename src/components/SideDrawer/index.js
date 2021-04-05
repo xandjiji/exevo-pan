@@ -66,30 +66,33 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const [interacted, setInteracted] = useState(false);
 
     useEffect(() => {
-
         const paramArray = [];
         for (const key in filters) {
             const value = filters[key];
 
             if (typeof value === 'string' && value !== '') {
-                paramArray.push({ [key]: value });
+                paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
             }
 
             if (typeof value === 'object' && value.size !== 0) {
                 const setArray = Array.from(value);
-                paramArray.push({ [key]: setArray.join(',') });
+                paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(setArray.join(','))}`);
+            }
+
+            if (typeof value === 'number') {
+                if ((key === 'minLevel' && value !== 2) || (key === 'minSkill' && value !== 10)) {
+                    paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+                }
+            }
+
+            if (typeof value === 'boolean' && value === true) {
+                paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
             }
         }
 
-        console.log(paramArray);
-        let params = '';
-        const { nicknameFilter } = filters;
+        if (paramArray.length === 0) return;
 
-        if (nicknameFilter !== '') {
-            params += `nickname=${nicknameFilter}`;
-        }
-
-        history.replace(`${pathname}?${params}`);
+        history.replace(`${pathname}?${paramArray.join('&')}`);
     }, [filters]);
 
     const updateFilterValue = useCallback((key, value) => {
