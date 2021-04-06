@@ -49,36 +49,35 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const getParamArray = (key) => {
         const value = params.get(key);
 
-        if (!value) return new Set([]);
+        if (!value) return [];
 
         const string = decodeURIComponent(value);
         const array = string.split(',');
         return array;
     }
 
-    const convertToNumbers = (array) => {
-        return array.map(item => Number(item));
-    }
+    const convertToNumbers = (array) => array.map(item => Number(item));
+
+    const convertToBooleans = (array) => array.map(item => Boolean(item));
 
     const initialFilterState = {
         nicknameFilter: params.get('nicknameFilter') || '',
         vocation: new Set(convertToNumbers(getParamArray('vocation'))),
         pvp: new Set(convertToNumbers(getParamArray('pvp'))),
-        battleye: new Set([]),
-        location: new Set([]),
-        serverSet: new Set([]),
-        minLevel: 2,
-        minSkill: 10,
-        skillKey: new Set([]),
-        itemSet: new Set([]),
-        fav: false,
-        rareNick: false,
-        soulwarFilter: false
+        battleye: new Set(convertToBooleans(getParamArray('battleye'))),
+        location: new Set(convertToNumbers(getParamArray('location'))),
+        serverSet: new Set(getParamArray('serverSet')),
+        minLevel: Number(params.get('minLevel')) || 2,
+        minSkill: Number(params.get('minSkill')) || 10,
+        skillKey: new Set(getParamArray('skillKey')),
+        itemSet: new Set(getParamArray('itemSet')),
+        fav: Boolean(params.get('fav')) || false,
+        rareNick: Boolean(params.get('rareNick')) || false,
+        soulwarFilter: Boolean(params.get('soulwarFilter')) || false
     }
 
     const [filters, setFilters] = useState(initialFilterState);
     const [interacted, setInteracted] = useState(false);
-    console.log(filters);
 
     useEffect(() => {
         const paramArray = [];
