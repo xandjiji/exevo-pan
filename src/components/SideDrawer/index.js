@@ -57,11 +57,13 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const convertToNumbers = (array) => array.map(item => Number(item));
 
+    const convertToBooleans = (array) => array.map(item => item === 'true' ? true : false);
+
     const initialFilterState = {
         nicknameFilter: params.get('nicknameFilter') || '',
         vocation: new Set(convertToNumbers(getParamArray('vocation'))),
         pvp: new Set(convertToNumbers(getParamArray('pvp'))),
-        battleye: new Set([]),
+        battleye: new Set(convertToBooleans(getParamArray('battleye'))),
         location: new Set(convertToNumbers(getParamArray('location'))),
         serverSet: new Set(getParamArray('serverSet')),
         minLevel: Number(params.get('minLevel')) || 2,
