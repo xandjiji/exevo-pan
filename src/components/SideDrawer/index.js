@@ -33,6 +33,22 @@ import NaFlag from '../../assets/na-flag.png';
 import ServerDataContext from '../../contexts/ServerData/context';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
+const resetedFilterState = {
+    nicknameFilter: '',
+    vocation: new Set([]),
+    pvp: new Set([]),
+    battleye: new Set([]),
+    location: new Set([]),
+    serverSet: new Set([]),
+    minLevel: 2,
+    minSkill: 10,
+    skillKey: new Set([]),
+    itemSet: new Set([]),
+    fav: false,
+    rareNick: false,
+    soulwarFilter: false
+};
+
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
 
     const { search, pathname } = window.location;
@@ -82,29 +98,17 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         const paramArray = [];
         for (const key in filters) {
             const value = filters[key];
-
-            if (typeof value === 'string' && value !== '') {
-                paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+            const defaultValue = resetedFilterState[key];
+            if (defaultValue === value || (defaultValue.size === value.size && typeof defaultValue === 'object')) {
+                continue;
             }
 
-            if (typeof value === 'object' && value.size !== 0) {
+            if (typeof value === 'object') {
                 const setArray = Array.from(value);
                 paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(setArray.join(','))}`);
-            }
-
-            if (typeof value === 'number') {
-                if ((key === 'minLevel' && value !== 2) || (key === 'minSkill' && value !== 10)) {
-                    paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
-                }
-            }
-
-            if (typeof value === 'boolean' && value === true) {
+            } else {
                 paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
             }
-        }
-
-        if (paramArray.length === 0) {
-            return history.replace(`${pathname}`);
         }
 
         history.replace(`${pathname}?${paramArray.join('&')}`);
@@ -244,21 +248,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <div
                     className={`icon-group reset-group clickable ${interacted ? 'active' : ''}`}
                     onClick={() => {
-                        setFilters({
-                            nicknameFilter: '',
-                            vocation: new Set([]),
-                            pvp: new Set([]),
-                            battleye: new Set([]),
-                            location: new Set([]),
-                            serverSet: new Set([]),
-                            minLevel: 2,
-                            minSkill: 10,
-                            skillKey: new Set([]),
-                            itemSet: new Set([]),
-                            fav: false,
-                            rareNick: false,
-                            soulwarFilter: false
-                        });
+                        setFilters({ ...resetedFilterState });
                     }}
                 >
                     <span>reset filters</span>
