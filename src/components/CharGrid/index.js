@@ -13,6 +13,11 @@ import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 const sortingModes = ['Auction End', 'Level', 'Price', 'Price (bidded only)'];
 
+const { search } = window.location;
+const params = new URLSearchParams(search);
+
+const initialIndex = (Number(params.get('pageIndex')) || 0);
+
 export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
@@ -22,7 +27,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const [sortedData, setSortedData] = useState(data);
 
     const [charList, setCharList] = useState(sortedData.slice(0, 30));
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(initialIndex);
     const [isSortingOpen, setSortingOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState(initialSort);
     const [descendingOrder, setDescendingOrder] = useState(initialOrder);
@@ -32,21 +37,21 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
         return sortedData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
     }, [sortedData, itemsPerPage]);
 
-    const handleAction = (value) => {
+    const handleAction = useCallback((value) => {
         setIndex(value);
         if (gridRef.current && listRef.current) {
             gridRef.current.scrollTo({ top: 0, behavior: 'smooth' });
             listRef.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    }
+    }, [gridRef, listRef]);
 
     useEffect(() => {
         setCharList(sliceList(index));
     }, [index, sortedData, sliceList]);
 
     useEffect(() => {
-        handleAction(0);
-    }, [sortedData]);
+        handleAction(initialIndex);
+    }, [sortedData, handleAction]);
 
     useEffect(() => {
         setSortedData(applySort(

@@ -1,19 +1,24 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import Paginator from './Paginator.styled';
 
 import { ReactComponent as NextIcon } from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
+const { search, pathname } = window.location;
+const params = new URLSearchParams(search);
+
 export default ({ itemsPerPage, dataSize, handleAction, className }) => {
 
+    const history = useHistory();
 
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(Number(params.get('pageIndex')) || 0);
     const pageCount = useMemo(() => Math.ceil(dataSize / itemsPerPage), [dataSize, itemsPerPage]);
 
     const handleClick = (newValue) => {
         if (newValue >= 0 && newValue < pageCount) {
             setIndex(newValue);
-            handleAction(newValue);
         }
     }
 
@@ -26,8 +31,22 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
     }
 
     useEffect(() => {
-        setIndex(0);
-    }, [dataSize])
+        /* setIndex(0); */
+    }, [dataSize]);
+
+    useEffect(() => {
+        if (index === 0) {
+            params.delete('pageIndex');
+        } else {
+            params.set('pageIndex', index);
+        }
+
+        history.replace(`${pathname}?${params.toString()}`);
+    }, [index, history]);
+
+    useEffect(() => {
+        handleAction(index);
+    }, [index, handleAction]);
 
     return (
         <Paginator className={className}>
@@ -40,7 +59,7 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
             <div className="cursor-wrapper">
                 <div
                     className={`cursor clickable mirror ${index === 0 ? 'disabled' : ''}`}
-                    onClick={() => handleClick(0)}
+                    onClick={() => setIndex(0)}
                     role="button"
                     tabIndex="0"
                     aria-label="First page"
@@ -50,7 +69,7 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                 </div>
                 <div
                     className={`cursor clickable mirror ${index === 0 ? 'disabled' : ''}`}
-                    onClick={() => handleClick(index - 1)}
+                    onClick={() => setIndex(prev => prev - 1)}
                     role="button"
                     tabIndex="0"
                     aria-label="Previous page"
@@ -61,7 +80,7 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
 
                 <div
                     className={`cursor clickable ${index + 1 >= pageCount ? 'disabled' : ''}`}
-                    onClick={() => handleClick(index + 1)}
+                    onClick={() => setIndex(prev => prev + 1)}
                     role="button"
                     tabIndex="0"
                     aria-label="Next page"
@@ -71,7 +90,7 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                 </div>
                 <div
                     className={`cursor clickable ${index + 1 >= pageCount ? 'disabled' : ''}`}
-                    onClick={() => handleClick(pageCount - 1)}
+                    onClick={() => setIndex(pageCount - 1)}
                     role="button"
                     tabIndex="0"
                     aria-label="Last page"
