@@ -49,10 +49,10 @@ const resetedFilterState = {
     soulwarFilter: false
 };
 
-export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
+const { search, pathname } = window.location;
+const params = new URLSearchParams(search);
 
-    const { search, pathname } = window.location;
-    const params = new URLSearchParams(search);
+export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
     const history = useHistory();
 
     const { serverData, indexedServerData } = useContext(ServerDataContext);
@@ -98,7 +98,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         }
 
         history.replace(`${pathname}?${params.toString()}`);
-    }, [filters, history, pathname]);
+    }, [filters, history]);
 
     const updateFilterValue = useCallback((key, value) => {
         setFilters(prevFilters => {
