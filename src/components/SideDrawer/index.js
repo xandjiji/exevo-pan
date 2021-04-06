@@ -103,7 +103,9 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             }
         }
 
-        if (paramArray.length === 0) return;
+        if (paramArray.length === 0) {
+            return history.replace(`${pathname}`);
+        }
 
         history.replace(`${pathname}?${paramArray.join('&')}`);
     }, [filters, history, pathname]);
@@ -242,8 +244,21 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <div
                     className={`icon-group reset-group clickable ${interacted ? 'active' : ''}`}
                     onClick={() => {
-                        setFilters(initialFilterState);
-                        setInteracted(false);
+                        setFilters({
+                            nicknameFilter: '',
+                            vocation: new Set([]),
+                            pvp: new Set([]),
+                            battleye: new Set([]),
+                            location: new Set([]),
+                            serverSet: new Set([]),
+                            minLevel: 2,
+                            minSkill: 10,
+                            skillKey: new Set([]),
+                            itemSet: new Set([]),
+                            fav: false,
+                            rareNick: false,
+                            soulwarFilter: false
+                        });
                     }}
                 >
                     <span>reset filters</span>
