@@ -81,23 +81,23 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const [interacted, setInteracted] = useState(false);
 
     useEffect(() => {
-        const paramArray = [];
         for (const key in filters) {
             const value = filters[key];
             const defaultValue = resetedFilterState[key];
             if (defaultValue === value || (defaultValue.size === value.size && typeof defaultValue === 'object')) {
+                params.delete(key);
                 continue;
             }
 
             if (typeof value === 'object') {
                 const setArray = Array.from(value);
-                paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(setArray.join(','))}`);
+                params.set(key, setArray.join(','));
             } else {
-                paramArray.push(`${encodeURIComponent(key)}=${encodeURIComponent(value)}`);
+                params.set(key, value);
             }
         }
 
-        history.replace(`${pathname}?${paramArray.join('&')}`);
+        history.replace(`${pathname}?${params.toString()}`);
     }, [filters, history, pathname]);
 
     const updateFilterValue = useCallback((key, value) => {
@@ -234,7 +234,21 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <div
                     className={`icon-group reset-group clickable ${interacted ? 'active' : ''}`}
                     onClick={() => {
-                        setFilters({ ...resetedFilterState });
+                        setFilters({
+                            nicknameFilter: '',
+                            vocation: new Set([]),
+                            pvp: new Set([]),
+                            battleye: new Set([]),
+                            location: new Set([]),
+                            serverSet: new Set([]),
+                            minLevel: 2,
+                            minSkill: 10,
+                            skillKey: new Set([]),
+                            itemSet: new Set([]),
+                            fav: false,
+                            rareNick: false,
+                            soulwarFilter: false
+                        });
                     }}
                 >
                     <span>reset filters</span>
