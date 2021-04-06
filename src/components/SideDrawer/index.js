@@ -61,20 +61,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const serverNamesArray = useMemo(() => Object.keys(serverData), [serverData]);
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
-    const getParamArray = (key) => {
-        const value = params.get(key);
-
-        if (!value) return [];
-
-        const string = decodeURIComponent(value);
-        const array = string.split(',');
-        return array;
-    }
-
-    const convertToNumbers = (array) => array.map(item => Number(item));
-
-    const convertToBooleans = (array) => array.map(item => item === 'true' ? true : false);
-
     const initialFilterState = {
         nicknameFilter: params.get('nicknameFilter') || '',
         vocation: new Set(convertToNumbers(getParamArray('vocation'))),
@@ -593,3 +579,18 @@ const objectHasKeys = (object, key) => {
         return false;
     }
 }
+
+const getParamArray = (key) => {
+    const params = new URLSearchParams(window.location.search);
+    const value = params.get(key);
+
+    if (!value) return [];
+
+    const string = decodeURIComponent(value);
+    const array = string.split(',');
+    return array;
+}
+
+const convertToNumbers = (array) => array.map(item => Number(item));
+
+const convertToBooleans = (array) => array.map(item => item === 'true' ? true : false);
