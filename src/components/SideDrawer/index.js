@@ -49,7 +49,7 @@ const resetedFilterState = {
     soulwarFilter: false
 };
 
-const { search, pathname } = window.location;
+const { search } = window.location;
 const params = new URLSearchParams(search);
 
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
@@ -81,6 +81,9 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const [interacted, setInteracted] = useState(false);
 
     useEffect(() => {
+        const { search, pathname } = window.location;
+        const params = new URLSearchParams(search);
+
         for (const key in filters) {
             const value = filters[key];
             const defaultValue = resetedFilterState[key];

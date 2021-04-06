@@ -6,11 +6,10 @@ import Paginator from './Paginator.styled';
 import { ReactComponent as NextIcon } from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
-const { search, pathname } = window.location;
+const { search } = window.location;
 const params = new URLSearchParams(search);
 
 export default ({ itemsPerPage, dataSize, handleAction, className }) => {
-
     const history = useHistory();
 
     const [index, setIndex] = useState(Number(params.get('pageIndex')) || 0);
@@ -31,10 +30,9 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
     }
 
     useEffect(() => {
-        /* setIndex(0); */
-    }, [dataSize]);
+        const { search, pathname } = window.location;
+        const params = new URLSearchParams(search);
 
-    useEffect(() => {
         if (index === 0) {
             params.delete('pageIndex');
         } else {
