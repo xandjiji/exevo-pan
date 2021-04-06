@@ -37,7 +37,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const { search, pathname } = window.location;
     const params = new URLSearchParams(search);
-
     const history = useHistory();
 
     const { serverData, indexedServerData } = useContext(ServerDataContext);
@@ -58,13 +57,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const convertToNumbers = (array) => array.map(item => Number(item));
 
-    const convertToBooleans = (array) => array.map(item => Boolean(item));
-
     const initialFilterState = {
         nicknameFilter: params.get('nicknameFilter') || '',
         vocation: new Set(convertToNumbers(getParamArray('vocation'))),
         pvp: new Set(convertToNumbers(getParamArray('pvp'))),
-        battleye: new Set(convertToBooleans(getParamArray('battleye'))),
+        battleye: new Set([]),
         location: new Set(convertToNumbers(getParamArray('location'))),
         serverSet: new Set(getParamArray('serverSet')),
         minLevel: Number(params.get('minLevel')) || 2,
