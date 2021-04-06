@@ -46,10 +46,24 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const serverNamesArray = useMemo(() => Object.keys(serverData), [serverData]);
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
+    const getParamArray = (key) => {
+        const value = params.get(key);
+
+        if (!value) return new Set([]);
+
+        const string = decodeURIComponent(value);
+        const array = string.split(',');
+        return array;
+    }
+
+    const convertToNumbers = (array) => {
+        return array.map(item => Number(item));
+    }
+
     const initialFilterState = {
         nicknameFilter: params.get('nicknameFilter') || '',
-        vocation: new Set(),
-        pvp: new Set([]),
+        vocation: new Set(convertToNumbers(getParamArray('vocation'))),
+        pvp: new Set(convertToNumbers(getParamArray('pvp'))),
         battleye: new Set([]),
         location: new Set([]),
         serverSet: new Set([]),
@@ -64,6 +78,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const [filters, setFilters] = useState(initialFilterState);
     const [interacted, setInteracted] = useState(false);
+    console.log(filters);
 
     useEffect(() => {
         const paramArray = [];
@@ -93,7 +108,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         if (paramArray.length === 0) return;
 
         history.replace(`${pathname}?${paramArray.join('&')}`);
-    }, [filters]);
+    }, [filters, history, pathname]);
 
     const updateFilterValue = useCallback((key, value) => {
         setFilters(prevFilters => {
