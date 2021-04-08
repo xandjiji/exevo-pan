@@ -26,11 +26,20 @@ export default ({ children }) => {
         pageIndex: getNumberParam('pageIndex')
     });
 
+    const setParamByKey = (key, value) => {
+        setParams(prevKeys => {
+            return {
+                ...prevKeys,
+                [key]: value
+            }
+        })
+    }
+
     return (
         <UrlContext.Provider
             value={{
                 params,
-                setParams
+                setParamByKey
             }}
         >
             {children}
