@@ -1,34 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React from 'react';
+import useUrlParams from './useUrlParams';
 
 import UrlContext from './context';
 
 const { search } = window.location;
 const initialParams = new URLSearchParams(search);
 
-const defaultParams = {
-    nickname: '',
-    vocation: new Set([]),
-    pvp: new Set([]),
-    battleye: new Set([]),
-    location: new Set([]),
-    server: new Set([]),
-    minLevel: 2,
-    minSkill: 10,
-    skill: new Set([]),
-    item: new Set([]),
-    fav: false,
-    rareNick: false,
-    soulwar: false,
-
-    pageIndex: 0
-}
-
 export default ({ children }) => {
 
-    const history = useHistory();
-
-    const [params, setParams] = useState({
+    const [params, setParams] = useUrlParams({
         nickname: getStringParam('nickname'),
         vocation: getNumberSetParam('vocation'),
         pvp: getNumberSetParam('pvp'),
@@ -45,32 +25,6 @@ export default ({ children }) => {
 
         pageIndex: getNumberParam('pageIndex')
     });
-
-    console.log(params);
-
-    useEffect(() => {
-        /* const { search, pathname } = window.location;
-        const currentParams = new URLSearchParams(search);
-
-        for (const key in params) {
-            const value = params[key];
-            const defaultValue = defaultParams[key];
-
-            if (defaultValue === value || (defaultValue.size === value.size && typeof defaultValue === 'object')) {
-                currentParams.delete(key);
-                continue;
-            }
-
-            if (typeof value === 'object') {
-                const setArray = Array.from(value);
-                currentParams.set(key, setArray.join(','));
-            } else {
-                currentParams.set(key, value);
-            }
-        }
-
-        history.replace(`${pathname}?${currentParams.toString()}`); */
-    }, [params, history])
 
     return (
         <UrlContext.Provider
