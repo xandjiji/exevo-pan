@@ -30,6 +30,7 @@ import BrFlag from '../../assets/br-flag.png';
 import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
 
+import UrlParametersContext from '../../contexts/UrlParameters/context';
 import ServerDataContext from '../../contexts/ServerData/context';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
@@ -55,6 +56,7 @@ const params = new URLSearchParams(search);
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
     const history = useHistory();
 
+    const { params, setParams } = useContext(UrlParametersContext);
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
@@ -62,19 +64,19 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
-        nicknameFilter: params.get('nicknameFilter') || '',
-        vocation: new Set(convertToNumbers(getParamArray('vocation'))),
-        pvp: new Set(convertToNumbers(getParamArray('pvp'))),
-        battleye: new Set(convertToBooleans(getParamArray('battleye'))),
-        location: new Set(convertToNumbers(getParamArray('location'))),
-        serverSet: new Set(getParamArray('serverSet')),
-        minLevel: Number(params.get('minLevel')) || 2,
-        minSkill: Number(params.get('minSkill')) || 10,
-        skillKey: new Set(getParamArray('skillKey')),
-        itemSet: new Set(getParamArray('itemSet')),
-        fav: Boolean(params.get('fav')) || false,
-        rareNick: Boolean(params.get('rareNick')) || false,
-        soulwarFilter: Boolean(params.get('soulwarFilter')) || false
+        nicknameFilter: params.nickname || '',
+        vocation: params.vocation || new Set([]),
+        pvp: params.pvp || new Set([]),
+        battleye: params.battleye || new Set([]),
+        location: params.location || new Set([]),
+        serverSet: params.server || new Set([]),
+        minLevel: params.minLevel || 2,
+        minSkill: params.minSkill || 10,
+        skillKey: params.skillKey || new Set([]),
+        itemSet: params.item || new Set([]),
+        fav: params.fav || false,
+        rareNick: params.rareNick || false,
+        soulwarFilter: params.soulwar || false
     }
 
     const [filters, setFilters] = useState(initialFilterState);
