@@ -9,7 +9,7 @@ const initialParams = new URLSearchParams(search);
 export default ({ children }) => {
 
     const [params, setParams] = useUrlParams({
-        nicknameFilter: getStringParam('nickname'),
+        nicknameFilter: getStringParam('nicknameFilter'),
         vocation: getNumberSetParam('vocation'),
         pvp: getNumberSetParam('pvp'),
         battleye: getBooleanSetParam('battleye'),
@@ -17,7 +17,7 @@ export default ({ children }) => {
         serverSet: getSetParam('serverSet'),
         minLevel: getNumberParam('minLevel'),
         minSkill: getNumberParam('minSkill'),
-        skill: getSetParam('skillKey'),
+        skillKey: getSetParam('skillKey'),
         itemSet: getSetParam('itemSet'),
         fav: getBooleanParam('fav'),
         rareNick: getBooleanParam('rareNick'),
@@ -29,12 +29,12 @@ export default ({ children }) => {
     const setParamByKey = useCallback((key, value) => {
         setParams(prevKeys => {
             let validatedValue = value;
-            if(typeof value === 'object' && value.size === 0) validatedValue = null;
-            if(typeof value === 'string' && value.length === 0) validatedValue = null;
-            if(typeof value === 'boolean' && value === false) validatedValue = null;
-            if(typeof value === 'number') {
-                if(key === 'minLevel' && value === 2) validatedValue = null;
-                if(key === 'minSkill' && value === 10) validatedValue = null;
+            if (typeof value === 'object' && value.size === 0) validatedValue = null;
+            if (typeof value === 'string' && value.length === 0) validatedValue = null;
+            if (typeof value === 'boolean' && value === false) validatedValue = null;
+            if (typeof value === 'number') {
+                if (key === 'minLevel' && value === 2) validatedValue = null;
+                if (key === 'minSkill' && value === 10) validatedValue = null;
             }
 
             return {
@@ -44,11 +44,32 @@ export default ({ children }) => {
         })
     }, [setParams]);
 
+    const resetParams = useCallback(() => {
+        setParams({
+            nicknameFilter: null,
+            vocation: null,
+            pvp: null,
+            battleye: null,
+            location: null,
+            serverSet: null,
+            minLevel: null,
+            minSkill: null,
+            skillKey: null,
+            itemSet: null,
+            fav: null,
+            rareNick: null,
+            soulwarFilter: null,
+
+            pageIndex: null
+        })
+    }, [setParams])
+
     return (
         <UrlContext.Provider
             value={{
                 params,
-                setParamByKey
+                setParamByKey,
+                resetParams
             }}
         >
             {children}

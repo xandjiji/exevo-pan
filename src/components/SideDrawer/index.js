@@ -50,13 +50,10 @@ const resetedFilterState = {
     soulwarFilter: false
 };
 
-const { search } = window.location;
-const params = new URLSearchParams(search);
-
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
     const history = useHistory();
 
-    const { params, setParams } = useContext(UrlParametersContext);
+    const { params, setParamByKey, resetParams } = useContext(UrlParametersContext);
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
@@ -64,19 +61,19 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
-        nicknameFilter: params.nickname || '',
+        nicknameFilter: params.nicknameFilter || '',
         vocation: params.vocation || new Set([]),
         pvp: params.pvp || new Set([]),
         battleye: params.battleye || new Set([]),
         location: params.location || new Set([]),
-        serverSet: params.server || new Set([]),
+        serverSet: params.serverSet || new Set([]),
         minLevel: params.minLevel || 2,
         minSkill: params.minSkill || 10,
         skillKey: params.skillKey || new Set([]),
-        itemSet: params.item || new Set([]),
+        itemSet: params.itemSet || new Set([]),
         fav: params.fav || false,
         rareNick: params.rareNick || false,
-        soulwarFilter: params.soulwar || false
+        soulwarFilter: params.soulwarFilter || false
     }
 
     const [filters, setFilters] = useState(initialFilterState);
@@ -109,13 +106,15 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         setFilters(prevFilters => {
             return { ...prevFilters, [key]: value };
         });
-    }, []);
+        setParamByKey(key, value);
+    }, [setParamByKey]);
 
     const toggleFilterValue = useCallback((key) => {
         setFilters(prevFilters => {
+            setParamByKey(key, !prevFilters[key]);
             return { ...prevFilters, [key]: !prevFilters[key] }
         });
-    }, []);
+    }, [setParamByKey]);
 
     const toggleInFilterSet = useCallback((key, value) => {
         if (filters[key].has(value)) {
@@ -128,7 +127,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             ...filters,
             [key]: filters[key]
         });
-    }, [filters]);
+        setParamByKey(key, filters[key]);
+    }, [filters, setParamByKey]);
 
     const addToFilterSet = useCallback((key, value) => {
         setFilters(prevFilters => {
@@ -138,7 +138,10 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 [key]: prevFilters[key]
             }
         })
-    }, []);
+
+        const addedValue = filters[key].add(value);
+        setParamByKey(key, addedValue);
+    }, [setParamByKey, filters]);
 
     const deleteFromFilterSet = useCallback((key, value) => {
         setFilters(prevFilters => {
@@ -148,7 +151,10 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 [key]: prevFilters[key]
             }
         })
-    }, []);
+
+        const deletedValue = filters[key].delete(value);
+        setParamByKey(key, deletedValue);
+    }, [setParamByKey, filters]);
 
     const onAutocompleteChange = useCallback((key, value, object) => {
         if (objectHasKeys(object, value)) {
@@ -254,6 +260,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             rareNick: false,
                             soulwarFilter: false
                         });
+
+                        resetParams();
                     }}
                 >
                     <span>reset filters</span>
@@ -265,7 +273,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <FilterGroup title="Search nickname" display="flex">
                     <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
                     <AutocompleteInput
-                        initialValue={initialFilterState.nicknameFilter}
+                        initialValue={params.nicknameFilter}
                         labelFor="Nickname-input"
                         placeholder="Nickname"
                         onChange={useCallback((value) => updateFilterValue('nicknameFilter', value), [updateFilterValue])}
@@ -598,18 +606,3 @@ const objectHasKeys = (object, key) => {
         return false;
     }
 }
-
-const getParamArray = (key) => {
-    const params = new URLSearchParams(window.location.search);
-    const value = params.get(key);
-
-    if (!value) return [];
-
-    const string = decodeURIComponent(value);
-    const array = string.split(',');
-    return array;
-}
-
-const convertToNumbers = (array) => array.map(item => Number(item));
-
-const convertToBooleans = (array) => array.map(item => item === 'true' ? true : false);
