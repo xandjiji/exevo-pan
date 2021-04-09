@@ -26,7 +26,7 @@ export default function useUrlParams(initialValue) {
         }
 
         history.replace(`${pathname}?${params.toString()}`);
-    }, [paramState]);
+    }, [paramState, history]);
 
     return [paramState, setParamState];
 }

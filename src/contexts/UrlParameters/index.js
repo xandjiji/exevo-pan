@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import useUrlParams from './useUrlParams';
 
 import UrlContext from './context';
@@ -9,31 +9,40 @@ const initialParams = new URLSearchParams(search);
 export default ({ children }) => {
 
     const [params, setParams] = useUrlParams({
-        nickname: getStringParam('nickname'),
+        nicknameFilter: getStringParam('nickname'),
         vocation: getNumberSetParam('vocation'),
         pvp: getNumberSetParam('pvp'),
         battleye: getBooleanSetParam('battleye'),
         location: getNumberSetParam('location'),
-        server: getSetParam('serverSet'),
+        serverSet: getSetParam('serverSet'),
         minLevel: getNumberParam('minLevel'),
         minSkill: getNumberParam('minSkill'),
         skill: getSetParam('skillKey'),
-        item: getSetParam('itemSet'),
+        itemSet: getSetParam('itemSet'),
         fav: getBooleanParam('fav'),
         rareNick: getBooleanParam('rareNick'),
-        soulwar: getBooleanParam('soulwarFilter'),
+        soulwarFilter: getBooleanParam('soulwarFilter'),
 
         pageIndex: getNumberParam('pageIndex')
     });
 
-    const setParamByKey = (key, value) => {
+    const setParamByKey = useCallback((key, value) => {
         setParams(prevKeys => {
+            let validatedValue = value;
+            if(typeof value === 'object' && value.size === 0) validatedValue = null;
+            if(typeof value === 'string' && value.length === 0) validatedValue = null;
+            if(typeof value === 'boolean' && value === false) validatedValue = null;
+            if(typeof value === 'number') {
+                if(key === 'minLevel' && value === 2) validatedValue = null;
+                if(key === 'minSkill' && value === 10) validatedValue = null;
+            }
+
             return {
                 ...prevKeys,
-                [key]: value
+                [key]: validatedValue
             }
         })
-    }
+    }, [setParams]);
 
     return (
         <UrlContext.Provider
