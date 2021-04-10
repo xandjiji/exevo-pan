@@ -35,6 +35,7 @@ export default ({ children }) => {
             if (typeof value === 'number') {
                 if (key === 'minLevel' && value === 2) validatedValue = null;
                 if (key === 'minSkill' && value === 10) validatedValue = null;
+                if (key === 'pageIndex' && value === 0) validatedValue = null;
             }
 
             return {

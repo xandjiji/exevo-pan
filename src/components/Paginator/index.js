@@ -1,19 +1,20 @@
-import React, { useState, useEffect, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
 
 import Paginator from './Paginator.styled';
+
+import UrlParametersContext from '../../contexts/UrlParameters/context';
 
 import { ReactComponent as NextIcon } from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
-const { search } = window.location;
-const params = new URLSearchParams(search);
-
 export default ({ itemsPerPage, dataSize, handleAction, className }) => {
-    const history = useHistory();
+    const { params, setParamByKey } = useContext(UrlParametersContext);
 
-    const [index, setIndex] = useState(Number(params.get('pageIndex')) || 0);
+    const indexFromUrl = params.pageIndex || 0;
+
+    const [index, setIndex] = useState(indexFromUrl);
     const pageCount = useMemo(() => Math.ceil(dataSize / itemsPerPage), [dataSize, itemsPerPage]);
+
 
     const handleClick = (newValue) => {
         if (newValue >= 0 && newValue < pageCount) {
@@ -30,17 +31,8 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
     }
 
     useEffect(() => {
-        const { search, pathname } = window.location;
-        const params = new URLSearchParams(search);
-
-        if (index === 0) {
-            params.delete('pageIndex');
-        } else {
-            params.set('pageIndex', index);
-        }
-
-        history.replace(`${pathname}?${params.toString()}`);
-    }, [index, history]);
+        setParamByKey('pageIndex', index);
+    }, [setParamByKey, index]);
 
     useEffect(() => {
         handleAction(index);
@@ -50,13 +42,13 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
         <Paginator className={className}>
             <div className="tracker">
                 {dataSize ?
-                    `${(index * itemsPerPage) + 1} - ${index + 1 !== pageCount ? (index + 1) * itemsPerPage : dataSize} of ${dataSize}`
+                    `${(indexFromUrl * itemsPerPage) + 1} - ${indexFromUrl + 1 !== pageCount ? (indexFromUrl + 1) * itemsPerPage : dataSize} of ${dataSize}`
                     : 'No characters found'
                 }
             </div>
             <div className="cursor-wrapper">
                 <div
-                    className={`cursor clickable mirror ${index === 0 ? 'disabled' : ''}`}
+                    className={`cursor clickable mirror ${indexFromUrl === 0 ? 'disabled' : ''}`}
                     onClick={() => setIndex(0)}
                     role="button"
                     tabIndex="0"
@@ -66,7 +58,7 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                     <LastIcon />
                 </div>
                 <div
-                    className={`cursor clickable mirror ${index === 0 ? 'disabled' : ''}`}
+                    className={`cursor clickable mirror ${indexFromUrl === 0 ? 'disabled' : ''}`}
                     onClick={() => setIndex(prev => prev - 1)}
                     role="button"
                     tabIndex="0"
@@ -77,7 +69,7 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                 </div>
 
                 <div
-                    className={`cursor clickable ${index + 1 >= pageCount ? 'disabled' : ''}`}
+                    className={`cursor clickable ${indexFromUrl + 1 >= pageCount ? 'disabled' : ''}`}
                     onClick={() => setIndex(prev => prev + 1)}
                     role="button"
                     tabIndex="0"
@@ -87,7 +79,7 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                     <NextIcon />
                 </div>
                 <div
-                    className={`cursor clickable ${index + 1 >= pageCount ? 'disabled' : ''}`}
+                    className={`cursor clickable ${indexFromUrl + 1 >= pageCount ? 'disabled' : ''}`}
                     onClick={() => setIndex(pageCount - 1)}
                     role="button"
                     tabIndex="0"
