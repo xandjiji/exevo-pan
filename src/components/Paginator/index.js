@@ -7,14 +7,13 @@ import UrlParametersContext from '../../contexts/UrlParameters/context';
 import { ReactComponent as NextIcon } from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
-export default ({ itemsPerPage, dataSize, handleAction, className }) => {
+export default ({ itemsPerPage, dataSize, className }) => {
     const { params, setParamByKey } = useContext(UrlParametersContext);
 
     const indexFromUrl = params.pageIndex || 0;
 
     const [index, setIndex] = useState(indexFromUrl);
     const pageCount = useMemo(() => Math.ceil(dataSize / itemsPerPage), [dataSize, itemsPerPage]);
-
 
     const handleClick = (newValue) => {
         if (newValue >= 0 && newValue < pageCount) {
@@ -35,8 +34,8 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
     }, [setParamByKey, index]);
 
     useEffect(() => {
-        handleAction(index);
-    }, [index, handleAction]);
+        setIndex(indexFromUrl);
+    }, [indexFromUrl])
 
     return (
         <Paginator className={className}>

@@ -31,6 +31,7 @@ import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
+import SideDrawerContext from '../../contexts/SideDrawer/context';
 import ServerDataContext from '../../contexts/ServerData/context';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
@@ -54,6 +55,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const history = useHistory();
 
     const { params, setParamByKey, resetParams } = useContext(UrlParametersContext);
+    const { active } = useContext(SideDrawerContext);
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
@@ -165,6 +167,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     useEffect(() => {
         setTimeout(() => {
+            if(active) setParamByKey('pageIndex', 0);
             dispatchCharacterData({
                 type: 'APPLY_FILTERS',
                 filterState: filters,
@@ -176,7 +179,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             });
         }, 150);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters, initialCharacterData]);
+    }, [filters, initialCharacterData, setParamByKey]);
 
     const isAllItemsSelected = useCallback(() => {
         if (filters.itemSet.size === itemNamesArray.length) {

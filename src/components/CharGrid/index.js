@@ -6,6 +6,7 @@ import DialogBox from '../DialogBox';
 import RadioInput from '../RadioInput';
 import Switch from '../Switch';
 
+import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
 
 import { ReactComponent as FilterIcon } from '../../assets/svgs/filter.svg';
@@ -13,45 +14,37 @@ import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 const sortingModes = ['Auction End', 'Level', 'Price', 'Price (bidded only)'];
 
-const { search } = window.location;
-const params = new URLSearchParams(search);
-
-const initialIndex = (Number(params.get('pageIndex')) || 0);
-
 export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
 
+    const { params } = useContext(UrlParametersContext);
     const { toggleSideDrawer } = useContext(SideDrawerContext);
 
-    const [sortedData, setSortedData] = useState(data);
+    const indexFromUrl = params.pageIndex || 0;
 
+    const [sortedData, setSortedData] = useState(data);
     const [charList, setCharList] = useState(sortedData.slice(0, 30));
-    const [index, setIndex] = useState(initialIndex);
+    const [index, setIndex] = useState(indexFromUrl);
     const [isSortingOpen, setSortingOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState(initialSort);
     const [descendingOrder, setDescendingOrder] = useState(initialOrder);
-
 
     const sliceList = useCallback((index) => {
         return sortedData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
     }, [sortedData, itemsPerPage]);
 
-    const handleAction = useCallback((value) => {
-        setIndex(value);
+    useEffect(() => {
+        setIndex(indexFromUrl);
         if (gridRef.current && listRef.current) {
             gridRef.current.scrollTo({ top: 0, behavior: 'smooth' });
             listRef.current.scrollTo({ top: 0, behavior: 'smooth' });
         }
-    }, [gridRef, listRef]);
+    }, [indexFromUrl]);
 
     useEffect(() => {
         setCharList(sliceList(index));
     }, [index, sortedData, sliceList]);
-
-    useEffect(() => {
-        handleAction(initialIndex);
-    }, [sortedData, handleAction]);
 
     useEffect(() => {
         setSortedData(applySort(
@@ -88,7 +81,6 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                 <Paginator
                     itemsPerPage={itemsPerPage}
                     dataSize={sortedData.length}
-                    handleAction={handleAction}
                 />
             </header>
             <main className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
