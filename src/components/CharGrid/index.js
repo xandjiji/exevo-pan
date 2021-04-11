@@ -22,14 +22,13 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const { toggleSideDrawer } = useContext(SideDrawerContext);
 
     const indexFromUrl = params.pageIndex || 0;
-    const convertedInitialOrder = params.initialOrder === 'true';
 
     const [sortedData, setSortedData] = useState(data);
     const [charList, setCharList] = useState(sortedData.slice(0, 30));
     const [index, setIndex] = useState(indexFromUrl);
     const [isSortingOpen, setSortingOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState(params.initialSort || initialSort);
-    const [descendingOrder, setDescendingOrder] = useState(convertedInitialOrder || initialOrder);
+    const [descendingOrder, setDescendingOrder] = useState(params.initialOrder === null ? initialOrder : params.initialOrder);
 
     const sliceList = useCallback((index) => {
         return sortedData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));

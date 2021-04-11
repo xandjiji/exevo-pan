@@ -26,7 +26,7 @@ export default ({ children }) => {
         pageIndex: getNumberParam('pageIndex'),
 
         initialSort: getNumberParam('initialSort'),
-        initialOrder: getBooleanParam('initialOrder')
+        initialOrder: getStringParam('initialOrder') === 'true'
     });
 
     const setParamByKey = useCallback((key, value) => {

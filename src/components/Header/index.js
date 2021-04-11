@@ -13,6 +13,8 @@ export default () => {
     const setParams = () => {
         setParamByKey('pageIndex', 0);
         setParamByKey('itemSet', null);
+        setParamByKey('initialOrder', null);
+        setParamByKey('initialSort', null);
     }
 
     return (
