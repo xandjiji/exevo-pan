@@ -35,8 +35,14 @@ export const HeaderItem = styled.li`
         padding: 8px 16px;
         font-size: 14px;
         letter-spacing: 0.5px;
+        border-radius: 12px;
         color: var(--onPrimary);
         white-space: nowrap;
+
+        &.active {
+            background-color: var(--surface);
+            color: var(--onSurface);
+        }
     }
 `
 
