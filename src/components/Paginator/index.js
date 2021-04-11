@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useContext } from 'react';
+
 import Paginator from './Paginator.styled';
+
+import UrlParametersContext from '../../contexts/UrlParameters/context';
 
 import { ReactComponent as NextIcon } from '../../assets/svgs/next.svg';
 import { ReactComponent as LastIcon } from '../../assets/svgs/last.svg';
 
-export default ({ itemsPerPage, dataSize, handleAction, className }) => {
+export default ({ itemsPerPage, dataSize, className }) => {
+    const { params, setParamByKey } = useContext(UrlParametersContext);
 
+    const indexFromUrl = params.pageIndex || 0;
 
-    const [index, setIndex] = useState(0);
+    const [index, setIndex] = useState(indexFromUrl);
     const pageCount = useMemo(() => Math.ceil(dataSize / itemsPerPage), [dataSize, itemsPerPage]);
 
     const handleClick = (newValue) => {
         if (newValue >= 0 && newValue < pageCount) {
             setIndex(newValue);
-            handleAction(newValue);
         }
     }
 
@@ -26,21 +30,25 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
     }
 
     useEffect(() => {
-        setIndex(0);
-    }, [dataSize])
+        setParamByKey('pageIndex', index);
+    }, [setParamByKey, index]);
+
+    useEffect(() => {
+        setIndex(indexFromUrl);
+    }, [indexFromUrl])
 
     return (
         <Paginator className={className}>
             <div className="tracker">
                 {dataSize ?
-                    `${(index * itemsPerPage) + 1} - ${index + 1 !== pageCount ? (index + 1) * itemsPerPage : dataSize} of ${dataSize}`
+                    `${(indexFromUrl * itemsPerPage) + 1} - ${indexFromUrl + 1 !== pageCount ? (indexFromUrl + 1) * itemsPerPage : dataSize} of ${dataSize}`
                     : 'No characters found'
                 }
             </div>
             <div className="cursor-wrapper">
                 <div
-                    className={`cursor clickable mirror ${index === 0 ? 'disabled' : ''}`}
-                    onClick={() => handleClick(0)}
+                    className={`cursor clickable mirror ${indexFromUrl === 0 ? 'disabled' : ''}`}
+                    onClick={() => setIndex(0)}
                     role="button"
                     tabIndex="0"
                     aria-label="First page"
@@ -49,8 +57,8 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                     <LastIcon />
                 </div>
                 <div
-                    className={`cursor clickable mirror ${index === 0 ? 'disabled' : ''}`}
-                    onClick={() => handleClick(index - 1)}
+                    className={`cursor clickable mirror ${indexFromUrl === 0 ? 'disabled' : ''}`}
+                    onClick={() => setIndex(prev => prev - 1)}
                     role="button"
                     tabIndex="0"
                     aria-label="Previous page"
@@ -60,8 +68,8 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                 </div>
 
                 <div
-                    className={`cursor clickable ${index + 1 >= pageCount ? 'disabled' : ''}`}
-                    onClick={() => handleClick(index + 1)}
+                    className={`cursor clickable ${indexFromUrl + 1 >= pageCount ? 'disabled' : ''}`}
+                    onClick={() => setIndex(prev => prev + 1)}
                     role="button"
                     tabIndex="0"
                     aria-label="Next page"
@@ -70,8 +78,8 @@ export default ({ itemsPerPage, dataSize, handleAction, className }) => {
                     <NextIcon />
                 </div>
                 <div
-                    className={`cursor clickable ${index + 1 >= pageCount ? 'disabled' : ''}`}
-                    onClick={() => handleClick(pageCount - 1)}
+                    className={`cursor clickable ${indexFromUrl + 1 >= pageCount ? 'disabled' : ''}`}
+                    onClick={() => setIndex(pageCount - 1)}
                     role="button"
                     tabIndex="0"
                     aria-label="Last page"

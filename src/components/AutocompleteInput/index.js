@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import AutocompleteInput from './AutocompleteInput.styled';
 
-export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful, clearInput }) => {
+export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful, clearInput, initialValue }) => {
     const uniqueID = useRef(Math.random())
     const inputRef = useRef(null);
-    const [term, setTerm] = useState('');
+    const [term, setTerm] = useState(initialValue || '');
     const [valid, setValid] = useState('neutral');
 
     const handleChange = useCallback((event) => {

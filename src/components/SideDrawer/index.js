@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, useCallback, useMemo } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import Chip from '../Chip';
@@ -30,11 +30,32 @@ import BrFlag from '../../assets/br-flag.png';
 import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
 
+import UrlParametersContext from '../../contexts/UrlParameters/context';
+import SideDrawerContext from '../../contexts/SideDrawer/context';
 import ServerDataContext from '../../contexts/ServerData/context';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
-export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
+const resetedFilterState = {
+    nicknameFilter: '',
+    vocation: new Set([]),
+    pvp: new Set([]),
+    battleye: new Set([]),
+    location: new Set([]),
+    serverSet: new Set([]),
+    minLevel: 2,
+    minSkill: 10,
+    skillKey: new Set([]),
+    itemSet: new Set([]),
+    fav: false,
+    rareNick: false,
+    soulwarFilter: false
+};
 
+export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
+    const history = useHistory();
+
+    const { params, setParamByKey, resetParams } = useContext(UrlParametersContext);
+    const { active } = useContext(SideDrawerContext);
     const { serverData, indexedServerData } = useContext(ServerDataContext);
     const { itemData } = useContext(ItemsDataContext);
 
@@ -42,35 +63,60 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
-        nicknameFilter: '',
-        vocation: new Set(),
-        pvp: new Set([]),
-        battleye: new Set([]),
-        location: new Set([]),
-        serverSet: new Set([]),
-        minLevel: 2,
-        minSkill: 10,
-        skillKey: new Set([]),
-        itemSet: new Set([]),
-        fav: false,
-        rareNick: false,
-        soulwarFilter: false
+        nicknameFilter: params.nicknameFilter || '',
+        vocation: params.vocation || new Set([]),
+        pvp: params.pvp || new Set([]),
+        battleye: params.battleye || new Set([]),
+        location: params.location || new Set([]),
+        serverSet: params.serverSet || new Set([]),
+        minLevel: params.minLevel || 2,
+        minSkill: params.minSkill || 10,
+        skillKey: params.skillKey || new Set([]),
+        itemSet: params.itemSet || new Set([]),
+        fav: params.fav || false,
+        rareNick: params.rareNick || false,
+        soulwarFilter: params.soulwarFilter || false
     }
 
     const [filters, setFilters] = useState(initialFilterState);
     const [interacted, setInteracted] = useState(false);
 
+    useEffect(() => {
+        const { search, pathname } = window.location;
+        const params = new URLSearchParams(search);
+
+        for (const key in filters) {
+            const value = filters[key];
+            const defaultValue = resetedFilterState[key];
+            if (defaultValue === value || (defaultValue.size === value.size && typeof defaultValue === 'object')) {
+                params.delete(key);
+                continue;
+            }
+
+            if (typeof value === 'object') {
+                const setArray = Array.from(value);
+                params.set(key, setArray.join(','));
+            } else {
+                params.set(key, value);
+            }
+        }
+
+        history.replace(`${pathname}?${params.toString()}`);
+    }, [filters, history]);
+
     const updateFilterValue = useCallback((key, value) => {
         setFilters(prevFilters => {
             return { ...prevFilters, [key]: value };
         });
-    }, []);
+        setParamByKey(key, value);
+    }, [setParamByKey]);
 
     const toggleFilterValue = useCallback((key) => {
         setFilters(prevFilters => {
+            setParamByKey(key, !prevFilters[key]);
             return { ...prevFilters, [key]: !prevFilters[key] }
         });
-    }, []);
+    }, [setParamByKey]);
 
     const toggleInFilterSet = useCallback((key, value) => {
         if (filters[key].has(value)) {
@@ -83,7 +129,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             ...filters,
             [key]: filters[key]
         });
-    }, [filters]);
+        setParamByKey(key, filters[key]);
+    }, [filters, setParamByKey]);
 
     const addToFilterSet = useCallback((key, value) => {
         setFilters(prevFilters => {
@@ -93,7 +140,10 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 [key]: prevFilters[key]
             }
         })
-    }, []);
+
+        const addedValue = filters[key].add(value);
+        setParamByKey(key, addedValue);
+    }, [setParamByKey, filters]);
 
     const deleteFromFilterSet = useCallback((key, value) => {
         setFilters(prevFilters => {
@@ -103,7 +153,10 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 [key]: prevFilters[key]
             }
         })
-    }, []);
+
+        const deletedValue = filters[key].delete(value);
+        setParamByKey(key, deletedValue);
+    }, [setParamByKey, filters]);
 
     const onAutocompleteChange = useCallback((key, value, object) => {
         if (objectHasKeys(object, value)) {
@@ -114,6 +167,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     useEffect(() => {
         setTimeout(() => {
+            if(active) setParamByKey('pageIndex', 0);
             dispatchCharacterData({
                 type: 'APPLY_FILTERS',
                 filterState: filters,
@@ -125,7 +179,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             });
         }, 150);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters, initialCharacterData]);
+    }, [filters, initialCharacterData, setParamByKey]);
 
     const isAllItemsSelected = useCallback(() => {
         if (filters.itemSet.size === itemNamesArray.length) {
@@ -194,8 +248,23 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <div
                     className={`icon-group reset-group clickable ${interacted ? 'active' : ''}`}
                     onClick={() => {
-                        setFilters(initialFilterState);
-                        setInteracted(false);
+                        setFilters({
+                            nicknameFilter: '',
+                            vocation: new Set([]),
+                            pvp: new Set([]),
+                            battleye: new Set([]),
+                            location: new Set([]),
+                            serverSet: new Set([]),
+                            minLevel: 2,
+                            minSkill: 10,
+                            skillKey: new Set([]),
+                            itemSet: new Set([]),
+                            fav: false,
+                            rareNick: false,
+                            soulwarFilter: false
+                        });
+
+                        resetParams();
                     }}
                 >
                     <span>reset filters</span>
@@ -207,6 +276,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <FilterGroup title="Search nickname" display="flex">
                     <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
                     <AutocompleteInput
+                        initialValue={params.nicknameFilter}
                         labelFor="Nickname-input"
                         placeholder="Nickname"
                         onChange={useCallback((value) => updateFilterValue('nicknameFilter', value), [updateFilterValue])}
