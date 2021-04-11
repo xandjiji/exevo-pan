@@ -12,7 +12,7 @@ export default function useUrlParams(initialValue) {
         for (const key in paramState) {
             const currentParamValue = paramState[key];
 
-            if (currentParamValue) {
+            if (currentParamValue !== null) {
                 if (typeof currentParamValue === 'object') {
                     const setArray = Array.from(currentParamValue);
                     params.set(key, setArray.join(','));

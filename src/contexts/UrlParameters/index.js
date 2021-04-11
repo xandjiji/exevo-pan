@@ -26,7 +26,7 @@ export default ({ children }) => {
         pageIndex: getNumberParam('pageIndex'),
 
         initialSort: getNumberParam('initialSort'),
-        initialOrder: getStringParam('initialOrder') === 'true'
+        initialOrder: getStringParam('initialOrder') === null ? null : getStringParam('initialOrder') === 'true'
     });
 
     const setParamByKey = useCallback((key, value) => {
@@ -39,6 +39,10 @@ export default ({ children }) => {
                 if (key === 'minLevel' && value === 2) validatedValue = null;
                 if (key === 'minSkill' && value === 10) validatedValue = null;
                 if (key === 'pageIndex' && value === 0) validatedValue = null;
+            }
+
+            if(key === 'initialOrder' && value !== null) {
+                validatedValue = value === 'true';
             }
 
             return {
