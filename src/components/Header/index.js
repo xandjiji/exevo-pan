@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header, { HeaderItem, Logo } from './Header.styled';
 import { NavLink } from 'react-router-dom';
 
 import logo from '../../assets/logo.png';
 
+import UrlParametersContext from '../../contexts/UrlParameters/context';
+
 export default () => {
+
+    const { setParamByKey } = useContext(UrlParametersContext);
+
+    const setParams = () => {
+        setParamByKey('pageIndex', 0);
+        setParamByKey('itemSet', null);
+    }
 
     return (
         <Header className="inner-container custom-scrollbar">
@@ -22,6 +31,7 @@ export default () => {
                             exact
                             className="clickable"
                             activeClassName="active"
+                            onClick={() => setParams()}
                         >
                             Current Auctions
                         </NavLink>
@@ -33,6 +43,7 @@ export default () => {
                             exact
                             className="clickable"
                             activeClassName="active"
+                            onClick={() => setParams()}
                         >
                             Bazaar History
                         </NavLink>
