@@ -60,7 +60,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
         }
 
         if(descendingOrder !== initialOrder) {
-            setParamByKey('initialOrder', descendingOrder.toString());
+            setParamByKey('initialOrder', descendingOrder);
         } else {
             setParamByKey('initialOrder', null);
         }
