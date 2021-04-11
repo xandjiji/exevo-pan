@@ -18,7 +18,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
 
-    const { params } = useContext(UrlParametersContext);
+    const { params, setParamByKey } = useContext(UrlParametersContext);
     const { toggleSideDrawer } = useContext(SideDrawerContext);
 
     const indexFromUrl = params.pageIndex || 0;
@@ -27,8 +27,8 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const [charList, setCharList] = useState(sortedData.slice(0, 30));
     const [index, setIndex] = useState(indexFromUrl);
     const [isSortingOpen, setSortingOpen] = useState(false);
-    const [selectedSort, setSelectedSort] = useState(initialSort);
-    const [descendingOrder, setDescendingOrder] = useState(initialOrder);
+    const [selectedSort, setSelectedSort] = useState(params.initialSort || initialSort);
+    const [descendingOrder, setDescendingOrder] = useState(params.initialOrder || initialOrder);
 
     const sliceList = useCallback((index) => {
         return sortedData.slice(index * itemsPerPage, ((index + 1) * itemsPerPage));
@@ -52,7 +52,19 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
             sortingModes[selectedSort],
             descendingOrder
         ));
-    }, [data, selectedSort, descendingOrder]);
+        
+        if(selectedSort !== initialSort) {
+            setParamByKey('initialSort', selectedSort);
+        } else {
+            setParamByKey('initialSort', null);
+        }
+
+        if(descendingOrder !== initialOrder) {
+            setParamByKey('initialOrder', descendingOrder);
+        } else {
+            setParamByKey('initialOrder', null);
+        }
+    }, [data, selectedSort, initialSort, descendingOrder, initialOrder, setParamByKey]);
 
     return (
         <CharGrid className="custom-scrollbar" ref={gridRef}>

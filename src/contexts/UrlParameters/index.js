@@ -23,13 +23,16 @@ export default ({ children }) => {
         rareNick: getBooleanParam('rareNick'),
         soulwarFilter: getBooleanParam('soulwarFilter'),
 
-        pageIndex: getNumberParam('pageIndex')
+        pageIndex: getNumberParam('pageIndex'),
+
+        initialSort: getNumberParam('initialSort'),
+        initialOrder: getBooleanParam('initialOrder')
     });
 
     const setParamByKey = useCallback((key, value) => {
         setParams(prevKeys => {
             let validatedValue = value;
-            if (typeof value === 'object' && value.size === 0) validatedValue = null;
+            if (typeof value === 'object' && value?.size === 0) validatedValue = null;
             if (typeof value === 'string' && value.length === 0) validatedValue = null;
             if (typeof value === 'boolean' && value === false) validatedValue = null;
             if (typeof value === 'number') {
@@ -61,7 +64,10 @@ export default ({ children }) => {
             rareNick: null,
             soulwarFilter: null,
 
-            pageIndex: null
+            pageIndex: null,
+
+            initialSort: null,
+            initialOrder: null
         })
     }, [setParams])
 
