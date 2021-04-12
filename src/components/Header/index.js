@@ -8,12 +8,7 @@ import UrlParametersContext from '../../contexts/UrlParameters/context';
 
 export default () => {
 
-    const { setParamByKey } = useContext(UrlParametersContext);
-
-    const setParams = () => {
-        setParamByKey('pageIndex', 0);
-        setParamByKey('itemSet', null);
-    }
+    const { resetParams } = useContext(UrlParametersContext);
 
     return (
         <Header className="inner-container custom-scrollbar">
@@ -31,7 +26,7 @@ export default () => {
                             exact
                             className="clickable"
                             activeClassName="active"
-                            onClick={() => setParams()}
+                            onClick={() => resetParams()}
                         >
                             Current Auctions
                         </NavLink>
@@ -43,7 +38,7 @@ export default () => {
                             exact
                             className="clickable"
                             activeClassName="active"
-                            onClick={() => setParams()}
+                            onClick={() => resetParams()}
                         >
                             Bazaar History
                         </NavLink>
