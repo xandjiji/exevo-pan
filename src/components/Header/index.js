@@ -43,6 +43,18 @@ export default () => {
                             Bazaar History
                         </NavLink>
                     </HeaderItem>
+
+                    <HeaderItem>
+                        <NavLink
+                            to="/statistics"
+                            exact
+                            className="clickable"
+                            activeClassName="active"
+                            onClick={() => resetParams()}
+                        >
+                            Statistics
+                        </NavLink>
+                    </HeaderItem>
                 </ul>
             </nav>
         </Header>
