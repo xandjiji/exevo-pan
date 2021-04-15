@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import StatisticsGrid from './StatisticsGrid.styled';
 
+import List from '../List';
+
 import { historyEndpoint } from '../../dataEnpoint';
 
 export default () => {
@@ -24,10 +26,23 @@ export default () => {
         fetchData();
     }, []);
 
+    console.log(data);
+
     if (!loaded) return null;
     return (
         <StatisticsGrid>
-
+            <List
+                label="Top 10 Bid"
+                data={data.top10Bid}
+                keyName="currentBid"
+                rowLabel="Bid"
+            />
+            <List
+                label="Top 10 Level"
+                data={data.top10Level}
+                keyName="level"
+                rowLabel="Level"
+            />
         </StatisticsGrid>
     )
 }
