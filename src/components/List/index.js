@@ -1,36 +1,39 @@
 import React from 'react';
-import { Wrapper } from './List.styled';
+import * as S from './List.styled';
 
-export default ({ label, data, keyName, rowLabel }) => {
+export default ({ label, data, keyName, rowLabel, format }) => {
     if (!data || data.length === 0) return null
     return (
-        <Wrapper>
-            <h2>{label}</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Nickname</th>
-                        <th>{rowLabel}</th>
-                    </tr>
-                </thead>
+        <S.Wrapper>
+            <S.Title>{label}</S.Title>
 
-                <tbody>
+            <S.Table>
+                <S.TableHead>
+                    <S.TableRow>
+                        <S.FadeColumn>#</S.FadeColumn>
+                        <S.MainColumn>Nickname</S.MainColumn>
+                        <S.Column>{rowLabel}</S.Column>
+                    </S.TableRow>
+                </S.TableHead>
+
+                <S.TableBody>
                     {data.map((char, index) => {
                         return (
-                            <tr key={char.id}>
-                                <td>{index}</td>
-                                <td>
-                                    <a href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${char.id}&source=overview`}>
+                            <S.TableRow className="highlight" key={char.id}>
+                                <S.FadeColumn>{index + 1}</S.FadeColumn>
+                                <S.MainColumn>
+                                    <S.TableLink href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${char.id}&source=overview`}>
                                         {char.nickname}
-                                    </a>
-                                </td>
-                                <td>{char[keyName]}</td>
-                            </tr>
+                                    </S.TableLink>
+                                </S.MainColumn>
+                                <S.Column>
+                                    {format ? format(char[keyName]) : char[keyName]}
+                                </S.Column>
+                            </S.TableRow>
                         )
                     })}
-                </tbody>
-            </table>
-        </Wrapper>
+                </S.TableBody>
+            </S.Table>
+        </S.Wrapper>
     )
 }

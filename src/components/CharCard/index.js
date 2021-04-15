@@ -21,6 +21,8 @@ import EuFlag from '../../assets/eu-flag.png';
 import NaFlag from '../../assets/na-flag.png';
 import TibiaCoinIcon from '../../assets/tibiacoin.png';
 
+import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
+
 const vocationEnum = {
     '0': 'None',
     '1': 'Elite Knight',
@@ -157,7 +159,7 @@ export default ({ charData }) => {
                             width={12}
                             height={12}
                         />
-                        {numberWithCommas(currentBid)}
+                        {formatNumberWithCommas(currentBid)}
                     </div>
                 </LabeledText>
 
@@ -254,8 +256,4 @@ const getFlag = (type) => {
         default:
             return BrFlag;
     }
-}
-
-const numberWithCommas = (x) => {
-    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
