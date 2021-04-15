@@ -45,6 +45,54 @@ export default () => {
                     rowLabel="Level"
                     format={formatNumberWithCommas}
                 />
+                <List
+                    label="Top 10 Magic Level"
+                    data={data.top10Magic}
+                    keyName="magic"
+                    rowLabel="Magic"
+                />
+                <List
+                    label="Top 10 Distance Fighting"
+                    data={data.top10Distance}
+                    keyName="distance"
+                    rowLabel="Distance"
+                />
+                <List
+                    label="Top 10 Sword Fighting"
+                    data={data.top10Sword}
+                    keyName="sword"
+                    rowLabel="Sword"
+                />
+                <List
+                    label="Top 10 Axe Fighting"
+                    data={data.top10Axe}
+                    keyName="axe"
+                    rowLabel="Axe"
+                />
+                <List
+                    label="Top 10 Club Fighting"
+                    data={data.top10Club}
+                    keyName="club"
+                    rowLabel="Club"
+                />
+                <List
+                    label="Top 10 Fist Fighting"
+                    data={data.top10Fist}
+                    keyName="fist"
+                    rowLabel="Fist"
+                />
+                <List
+                    label="Top 10 Shielding"
+                    data={data.top10Shielding}
+                    keyName="shielding"
+                    rowLabel="Shielding"
+                />
+                <List
+                    label="Top 10 Fishing"
+                    data={data.top10Fishing}
+                    keyName="fishing"
+                    rowLabel="Fishing"
+                />
             </ItemsWrapper>
         </StatisticsGrid>
     )
