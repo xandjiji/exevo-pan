@@ -6,6 +6,8 @@ import ThemeContext from '../contexts/Theme/context';
 import CharGridSwitcher from '../Routes/CharGridSwitcher';
 import SideDrawerSwitcher from '../Routes/SideDrawerSwitcher';
 
+import StatisticsGrid from '../components/StatisticsGrid';
+
 import '../layouts/common.css';
 
 const MasterLayout = () => {
@@ -21,7 +23,7 @@ const MasterLayout = () => {
                 </Route>
 
                 <Route exact path="/statistics">
-                    
+                    <StatisticsGrid />
                 </Route>
             </Switch>
         </div>
