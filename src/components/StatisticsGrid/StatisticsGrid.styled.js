@@ -6,7 +6,25 @@ export default styled.div`
     background-color: var(--background);
 `;
 
+export const GridHeader = styled.div`
+    position: fixed;
+    top: 60px;
+    width: 100%;
+    z-index: 50;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    display: flex;
+    background-color: var(--surface);
+    user-select: none;
+
+    > *:not(:last-child) {
+        margin-right: 12px;
+    }
+`;
+
 export const ItemsWrapper = styled.div`
+    margin-top: 46px;
     padding-top: 16px;
     position: relative;
     
