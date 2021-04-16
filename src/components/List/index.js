@@ -22,7 +22,7 @@ export default ({ label, data, keyName, rowLabel, format }) => {
                             <S.TableRow className="highlight" key={char.id}>
                                 <S.FadeColumn>{index + 1}</S.FadeColumn>
                                 <S.MainColumn>
-                                    <S.TableLink href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${char.id}&source=overview`}>
+                                    <S.TableLink href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${char.id}&source=overview`} target="_blank" rel="noreferrer">
                                         {char.nickname}
                                     </S.TableLink>
                                 </S.MainColumn>
