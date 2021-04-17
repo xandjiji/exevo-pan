@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
 import Chip from '../Chip';
 import Chart from '../Chart';
+import PercentageCard from '../PercentageCard';
 import PieChart from '../PieChart';
 import List from '../List';
 
@@ -32,8 +33,6 @@ export default () => {
 
         fetchData();
     }, []);
-
-    /* console.log(data); */
 
     if (!loaded) return null;
     return (
@@ -70,6 +69,7 @@ export default () => {
                         yesterdayLabel="Yesterday's revenue"
                         chartLabel="Daily Cipsoft revenue"
                     />
+                    <PercentageCard label="Auction success rate" value={data.successRate}/>
                     <PieChart
                         data={data.vocationPercentage}
                         chartLabel="Vocation percentage"
