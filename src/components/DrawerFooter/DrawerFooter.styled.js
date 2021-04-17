@@ -3,9 +3,6 @@ import styled from 'styled-components';
 export default styled.footer`
     padding-top: 12px;
     padding-bottom: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
     background-color: var(--primary);
 
     font-size: 14px;
