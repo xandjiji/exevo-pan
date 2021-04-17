@@ -17,6 +17,9 @@ export default () => {
                 const response = await fetch(`${historyEndpoint}/overallStatistics.json`);
                 const data = await response.json();
 
+                data.totalTibiaCoins.lastMonth = fillArrayUntil(data.totalTibiaCoins.lastMonth, 28);
+                data.totalRevenue.lastMonth = fillArrayUntil(data.totalRevenue.lastMonth, 28);
+
                 setData(data);
                 setLoaded(true);
 
@@ -138,4 +141,13 @@ export default () => {
             }
         </StatisticsGrid>
     )
+}
+
+const fillArrayUntil = (array, size) => {
+    const newArray = [...array];
+    while(newArray.length < size) {
+        newArray.unshift(newArray[0]);
+    }
+
+    return newArray;
 }

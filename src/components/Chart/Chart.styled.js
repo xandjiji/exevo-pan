@@ -64,3 +64,12 @@ export const PercentageValue = styled.span`
         transform: ${props => props.positive ? 'none' : 'scaleY(-1)'};
     }
 `;
+
+export const ChipWrapper = styled.div`
+    margin-top: 22px;
+    display: flex;
+
+    > *:not(:last-child) {
+        margin-right: 8px;
+    }
+`;

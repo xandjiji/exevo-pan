@@ -1,12 +1,15 @@
-import React from 'react';
-import { Wrapper, DataItemWrapper, DataItem, Title, TCValue, PercentageValue } from './Chart.styled';
+import React, { useState } from 'react';
+import { Wrapper, DataItemWrapper, DataItem, Title, TCValue, PercentageValue, ChipWrapper } from './Chart.styled';
 import { Line } from 'react-chartjs-2';
+import Chip from '../Chip';
 
 import { ReactComponent as TrendingIcon } from '../../assets/svgs/trending.svg';
 
 import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
 
 export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
+
+    const [dataSize, setDataSize] = useState(7);
 
     const { current, lastMonth } = data;
     const todayValue = lastMonth[lastMonth.length - 1];
@@ -60,14 +63,14 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
     }
 
     const dataObj = {
-        labels: lastMonth.map((_, index) => {
+        labels: lastMonth.slice(lastMonth.length - dataSize).map((_, index) => {
             const date = new Date();
             date.setDate(date.getDate() - index);
             return `${date.getDate()}/${date.getMonth() + 1}`;
         }).reverse(),
         datasets: [{
             label: chartLabel,
-            data: lastMonth,
+            data: lastMonth.slice(lastMonth.length - dataSize),
             fill: false,
             backgroundColor: primaryColor,
             borderColor: primaryColor,
@@ -98,7 +101,25 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
                     </PercentageValue>
                 </DataItem>
             </DataItemWrapper>
+
             <Line data={dataObj} options={options} />
+
+            <ChipWrapper>
+                <Chip
+                    clickable
+                    overrideStatus={dataSize === 28}
+                    onClick={() => setDataSize(28)}
+                >
+                    28 days
+                </Chip>
+                <Chip
+                    clickable
+                    overrideStatus={dataSize === 7}
+                    onClick={() => setDataSize(7)}
+                >
+                    7 days
+                </Chip>
+            </ChipWrapper>
         </Wrapper>
     )
 }
