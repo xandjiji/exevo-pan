@@ -5,7 +5,7 @@ export default styled.header`
     width: 100%;
     height: 60px;
     display: flex;
-    align-items: center;
+    justify-content: space-between;
     overflow-x: auto;
     background-color: var(--primary);
 
@@ -23,6 +23,15 @@ export default styled.header`
 
     nav ul {
         display: flex;
+    }
+`;
+
+export const HeaderWrapper = styled.div`
+    display: flex;
+    align-items: center;
+
+    &:not(:last-child) {
+        margin-right: 24px;
     }
 `;
 

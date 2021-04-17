@@ -1,50 +1,77 @@
 import React, { useContext } from 'react';
-import Header, { HeaderItem, Logo } from './Header.styled';
+import Header, { HeaderWrapper, HeaderItem, Logo } from './Header.styled';
 import { NavLink } from 'react-router-dom';
 
+import Switch from '../Switch';
+
 import logo from '../../assets/logo.png';
+import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
+import ThemeContext from '../../contexts/Theme/context';
 
 export default () => {
 
+    const { theme, toggleTheme } = useContext(ThemeContext);
     const { resetParams } = useContext(UrlParametersContext);
 
     return (
         <Header className="inner-container custom-scrollbar">
-            <Logo
-                src={logo}
-                width={36}
-                height={36}
-                alt="Exevo Pan"
-            />
-            <nav>
-                <ul>
-                    <HeaderItem>
-                        <NavLink
-                            to="/"
-                            exact
-                            className="clickable"
-                            activeClassName="active"
-                            onClick={() => resetParams()}
-                        >
-                            Current Auctions
+            <HeaderWrapper>
+                <Logo
+                    src={logo}
+                    width={36}
+                    height={36}
+                    alt="Exevo Pan"
+                />
+                <nav>
+                    <ul>
+                        <HeaderItem>
+                            <NavLink
+                                to="/"
+                                exact
+                                className="clickable"
+                                activeClassName="active"
+                                onClick={() => resetParams()}
+                            >
+                                Current Auctions
                         </NavLink>
-                    </HeaderItem>
+                        </HeaderItem>
 
-                    <HeaderItem>
-                        <NavLink
-                            to="/bazaar-history"
-                            exact
-                            className="clickable"
-                            activeClassName="active"
-                            onClick={() => resetParams()}
-                        >
-                            Bazaar History
+                        <HeaderItem>
+                            <NavLink
+                                to="/bazaar-history"
+                                exact
+                                className="clickable"
+                                activeClassName="active"
+                                onClick={() => resetParams()}
+                            >
+                                Bazaar History
                         </NavLink>
-                    </HeaderItem>
-                </ul>
-            </nav>
+                        </HeaderItem>
+
+                        <HeaderItem>
+                            <NavLink
+                                to="/statistics"
+                                exact
+                                className="clickable"
+                                activeClassName="active"
+                                onClick={() => resetParams()}
+                            >
+                                Statistics
+                        </NavLink>
+                        </HeaderItem>
+                    </ul>
+                </nav>
+            </HeaderWrapper>
+
+            <HeaderWrapper>
+                <Switch
+                    active={theme === 'dark-theme'}
+                    onClick={toggleTheme}
+                    icon={<MoonIcon />}
+                />
+            </HeaderWrapper>
         </Header>
     )
 }

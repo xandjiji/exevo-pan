@@ -12,7 +12,9 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "styled-components": "^5.2.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "react-chartjs-2": "^2.9.0",
+    "chart.js": "^2.9.3"
   },
   "scripts": {
     "start": "react-scripts start",

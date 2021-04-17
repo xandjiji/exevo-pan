@@ -13,18 +13,18 @@ You can find the application [here](https://exevopan.com/).
 
 - List all available character auctions
 - List all past character auctions
+- Analytics and summary data about the Bazaar
 - Search by nickname
 - Filter by server types, character stats and more!
 - Rare items finder
 - Bookmark auctions
 - Dark Theme
 <p align="center">
-	<img src="https://i.imgur.com/yzKNmGE.png">
+	<img src="https://i.imgur.com/A5Pk3jL.png">
 </p>
 
 ## Future Features
 
-- Analytics and summary data about the Bazaar
 - Notifications for auctions close to ending
 
 ## Char Bazaar Data
