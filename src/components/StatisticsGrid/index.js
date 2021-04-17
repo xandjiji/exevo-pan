@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
 import Chip from '../Chip';
+import Chart from '../Chart';
 import List from '../List';
 import { historyEndpoint } from '../../dataEnpoint';
 import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
@@ -49,6 +50,13 @@ export default () => {
                     Highscores
                 </Chip>
             </GridHeader>
+
+            {loaded && option === 'overall' ?
+                <ItemsWrapper className="inner-container">
+                    <Chart />
+                </ItemsWrapper>
+                : null
+            }
 
             {loaded && option === 'highscores' ?
                 <ItemsWrapper className="inner-container">
@@ -115,7 +123,8 @@ export default () => {
                         rowLabel="Fishing"
                     />
                 </ItemsWrapper>
-                : null}
+                : null
+            }
         </StatisticsGrid>
     )
 }
