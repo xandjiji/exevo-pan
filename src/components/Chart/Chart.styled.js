@@ -32,6 +32,7 @@ export const DataItem = styled.div`
 export const Title = styled.h2`
     font-size: 14px;
     font-weight: 300;
+    color: var(--onSurface);
 `;
 
 export const TCValue = styled.span`
@@ -40,6 +41,7 @@ export const TCValue = styled.span`
     align-items: center;
     font-size: 20px;
     font-weight: 600;
+    color: var(--onSurface);
 
     img {
         margin-right: 6px;
