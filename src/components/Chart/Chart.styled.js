@@ -8,14 +8,8 @@ export const Wrapper = styled.div`
     background-color: var(--surface);
     box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.14);
 
-    @media(max-width: 712px) {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     @media(min-width: 768px) {
         width: calc(50% - 8px);
-        max-width: 600px;
     }
 
     canvas {
@@ -80,4 +74,9 @@ export const ChipWrapper = styled.div`
     > *:not(:last-child) {
         margin-right: 8px;
     }
+`;
+
+export const ChartWrapper = styled.div`
+    width: 100%;
+    height: 260px;
 `;

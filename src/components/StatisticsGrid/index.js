@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
 import Chip from '../Chip';
 import Chart from '../Chart';
+import PieChart from '../PieChart';
 import List from '../List';
+
 import { historyEndpoint } from '../../dataEnpoint';
 import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
 
@@ -67,6 +69,10 @@ export default () => {
                         totalLabel="Total revenue"
                         yesterdayLabel="Yesterday's revenue"
                         chartLabel="Daily Cipsoft revenue"
+                    />
+                    <PieChart
+                        data={data.vocationPercentage}
+                        chartLabel="Vocation percentage"
                     />
                 </ItemsWrapper>
                 : null
@@ -145,7 +151,7 @@ export default () => {
 
 const fillArrayUntil = (array, size) => {
     const newArray = [...array];
-    while(newArray.length < size) {
+    while (newArray.length < size) {
         newArray.unshift(newArray[0]);
     }
 

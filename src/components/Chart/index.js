@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Wrapper, DataItemWrapper, DataItem, Title, TCValue, PercentageValue, ChipWrapper } from './Chart.styled';
+import { Wrapper, DataItemWrapper, DataItem, Title, TCValue, PercentageValue, ChipWrapper, ChartWrapper } from './Chart.styled';
 import { Line } from 'react-chartjs-2';
 import Chip from '../Chip';
 
@@ -22,6 +22,8 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
     const separator = isLightTheme ? '#B4B4B440' : '#72767D40';
 
     const options = {
+        responsive: true,
+        maintainAspectRatio: false,
         animation: {
             duration: 400,
             easing: 'easeOutCubic'
@@ -106,7 +108,9 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
                 </DataItem>
             </DataItemWrapper>
 
-            <Line data={dataObj} options={options} />
+            <ChartWrapper>
+                <Line data={dataObj} options={options} />
+            </ChartWrapper>
 
             <ChipWrapper>
                 <Chip
