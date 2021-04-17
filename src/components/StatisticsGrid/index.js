@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
 import Chip from '../Chip';
 import Chart from '../Chart';
@@ -6,11 +6,16 @@ import PercentageCard from '../PercentageCard';
 import PieChart from '../PieChart';
 import List from '../List';
 
+import UrlParametersContext from '../../contexts/UrlParameters/context';
+
 import { historyEndpoint } from '../../dataEnpoint';
+
 import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
 
 export default () => {
-    const [option, setOption] = useState('overall');
+    const { params, setParamByKey } = useContext(UrlParametersContext);
+
+    const [option, setOption] = useState(params.statsPage ?? 'overall');
     const [loaded, setLoaded] = useState(false);
     const [data, setData] = useState(null);
 
@@ -33,6 +38,11 @@ export default () => {
 
         fetchData();
     }, []);
+
+    useEffect(() => {
+        const urlParam = (option === 'highscores' ? option : null);
+        setParamByKey('statsPage', urlParam);
+    }, [option, setParamByKey]);
 
     if (!loaded) return null;
     return (
@@ -69,7 +79,7 @@ export default () => {
                         yesterdayLabel="Yesterday's revenue"
                         chartLabel="Daily Cipsoft revenue"
                     />
-                    <PercentageCard label="Auction success rate" value={data.successRate}/>
+                    <PercentageCard label="Auction success rate" value={data.successRate} />
                     <PieChart
                         data={data.vocationPercentage}
                         chartLabel="Vocation percentage"
