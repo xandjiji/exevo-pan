@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     padding: 20px 16px 20px 26px;
+    margin-bottom: 16px;
+    width: 100%;
     border-radius: 5px;
     background-color: var(--surface);
     box-shadow: 2px 2px 4px 2px rgba(0,0,0,0.14);
@@ -9,6 +11,11 @@ export const Wrapper = styled.div`
     @media(max-width: 712px) {
         margin-left: auto;
         margin-right: auto;
+    }
+
+    @media(min-width: 768px) {
+        width: calc(50% - 8px);
+        max-width: 600px;
     }
 
     canvas {
@@ -19,6 +26,7 @@ export const Wrapper = styled.div`
 export const DataItemWrapper = styled.div`
     margin-bottom: 20px;
     display: flex;
+    align-items: center;
 
     > *:not(:last-child) {
         margin-right: 48px;

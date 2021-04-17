@@ -28,18 +28,11 @@ export const ItemsWrapper = styled.div`
     padding-top: 16px;
     position: relative;
     
-    display: grid;
-    grid-gap: 16px;
-    grid-template-columns: repeat( auto-fit, minmax(320px, 1fr) );
-    grid-auto-rows: auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
 
     background-color: var(--background);
-
-    &::after {
-        content: '';
-        grid-column: 1 / -1;
-        height: 48px;
-    }
 
     &::before {
         content: '';
