@@ -4,7 +4,8 @@ import { Doughnut } from 'react-chartjs-2';
 
 export default ({ data, chartLabel }) => {
 
-    const isLightTheme = localStorage.getItem('theme') === 'light-theme';
+    const currentTheme = localStorage.getItem('theme') || 'light-theme';
+    const isLightTheme = currentTheme === 'light-theme';
     const onSurface = isLightTheme ? '#000000' : '#FFFFFF';
 
     const options = {

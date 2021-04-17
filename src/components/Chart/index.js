@@ -16,7 +16,8 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
     const yesterdayValue = lastMonth[lastMonth.length - 2];
     const dailyDifference = todayValue - yesterdayValue;
 
-    const isLightTheme = localStorage.getItem('theme') === 'light-theme';
+    const currentTheme = localStorage.getItem('theme') || 'light-theme';
+    const isLightTheme = currentTheme === 'light-theme';
     const primaryColor = isLightTheme ? '#3F51B5' : '#9857E7';
     const onSurface = isLightTheme ? '#000000' : '#FFFFFF';
     const separator = isLightTheme ? '#B4B4B440' : '#72767D40';
