@@ -75,9 +75,9 @@ export default () => {
                     />
                     <Chart
                         data={data.totalRevenue}
-                        totalLabel="Total revenue"
+                        totalLabel="Cipsoft's total revenue"
                         yesterdayLabel="Yesterday's revenue"
-                        chartLabel="Daily Cipsoft revenue"
+                        chartLabel="Cipsoft revenue"
                     />
                     <PercentageCard label="Auction success rate" value={data.successRate} />
                     <PieChart
