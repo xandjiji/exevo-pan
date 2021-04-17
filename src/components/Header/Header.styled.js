@@ -29,6 +29,10 @@ export default styled.header`
 export const HeaderWrapper = styled.div`
     display: flex;
     align-items: center;
+
+    &:not(:last-child) {
+        margin-right: 24px;
+    }
 `;
 
 export const HeaderItem = styled.li`
