@@ -28,7 +28,7 @@ export default () => {
         fetchData();
     }, []);
 
-    console.log(data);
+    /* console.log(data); */
 
     if (!loaded) return null;
     return (
@@ -55,7 +55,15 @@ export default () => {
                 <ItemsWrapper className="inner-container">
                     <Chart
                         data={data.totalTibiaCoins}
+                        totalLabel="Total volume"
+                        yesterdayLabel="Yesterday's volume"
                         chartLabel="Tibia Coins volume"
+                    />
+                    <Chart
+                        data={data.totalRevenue}
+                        totalLabel="Total revenue"
+                        yesterdayLabel="Yesterday's revenue"
+                        chartLabel="Daily Cipsoft revenue"
                     />
                 </ItemsWrapper>
                 : null
