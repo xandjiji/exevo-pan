@@ -53,7 +53,10 @@ export default () => {
 
             {loaded && option === 'overall' ?
                 <ItemsWrapper className="inner-container">
-                    <Chart />
+                    <Chart
+                        data={data.totalTibiaCoins}
+                        chartLabel="Tibia Coins volume"
+                    />
                 </ItemsWrapper>
                 : null
             }
