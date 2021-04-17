@@ -22,6 +22,10 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
     const separator = isLightTheme ? '#B4B4B440' : '#72767D40';
 
     const options = {
+        animation: {
+            duration: 400,
+            easing: 'easeOutCubic'
+        },
         elements: {
             line: {
                 tension: 0
