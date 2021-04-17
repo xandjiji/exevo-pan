@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
     padding: 16px;
+    margin-bottom: 16px;
+    margin-right: 16px;
     width: 320px;
     border-radius: 5px;
     background-color: var(--surface);
