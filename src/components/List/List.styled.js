@@ -20,6 +20,7 @@ export const Title = styled.h2`
     text-align: center;
     color: var(--primary);
     font-weight: 400;
+    filter: brightness(130%);
 `;
 
 export const Table = styled.div`
@@ -64,4 +65,5 @@ export const TableBody = styled.div`
 export const TableLink = styled.a`
     font-size: 12px;
     color: var(--primary);
+    filter: brightness(130%);
 `;
