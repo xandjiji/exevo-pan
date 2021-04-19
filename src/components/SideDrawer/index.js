@@ -48,7 +48,8 @@ const resetedFilterState = {
     itemSet: new Set([]),
     fav: false,
     rareNick: false,
-    soulwarFilter: false
+    soulwarFilter: false,
+    imbuementsSet: new Set([])
 };
 
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
@@ -75,11 +76,13 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         itemSet: params.itemSet || new Set([]),
         fav: params.fav || false,
         rareNick: params.rareNick || false,
-        soulwarFilter: params.soulwarFilter || false
+        soulwarFilter: params.soulwarFilter || false,
+        imbuementsSet: params.imbuementsSet || new Set([])
     }
 
     const [filters, setFilters] = useState(initialFilterState);
     const [interacted, setInteracted] = useState(false);
+    console.log(filters);
 
     useEffect(() => {
         const { search, pathname } = window.location;
@@ -167,7 +170,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     useEffect(() => {
         setTimeout(() => {
-            if(active) setParamByKey('pageIndex', 0);
+            if (active) setParamByKey('pageIndex', 0);
             dispatchCharacterData({
                 type: 'APPLY_FILTERS',
                 filterState: filters,
@@ -516,6 +519,28 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     </div>
                 </FilterGroup>
 
+                <FilterGroup title="Imbuement" display="flex">
+                    <label htmlFor="Imbuement-input" className="invisible-label">Imbuement</label>
+                    <AutocompleteInput
+                        labelFor="Imbuement-input"
+                        placeholder="Choose an imbuement"
+                        clearAfterSucessful
+                        items={allItemsNotInSet(imbuementsArray, filters.imbuementsSet)}
+                        onChange={useCallback((value) => onAutocompleteChange('imbuementsSet', value, imbuementObject), [onAutocompleteChange])}
+                    />
+
+                    <div className="chips-wrapper">
+                        {[...filters.imbuementsSet].map((imbuement, index) =>
+                            <Chip
+                                key={index}
+                                closeable
+                                onClose={() => deleteFromFilterSet('imbuementsSet', imbuement)}>
+                                {imbuement}
+                            </Chip>
+                        )}
+                    </div>
+                </FilterGroup>
+
 
                 <Route exact path="/">
                     <FilterGroup
@@ -609,3 +634,32 @@ const objectHasKeys = (object, key) => {
         return false;
     }
 }
+
+const imbuementsArray = [
+    'Critical Hit',
+    'Life Leech',
+    'Mana Leech',
+    'Club Skill',
+    'Shield Skill',
+    'Axe Skill',
+    'Magic Level',
+    'Distance Skill',
+    'Sword Skill',
+    'Capacity',
+    'Speed',
+    'Paralize Removal',
+    'Energy Damage',
+    'Ice Damage',
+    'Death Damage',
+    'Fire Damage',
+    'Earth Damage',
+    'Energy Protection',
+    'Holy Protection',
+    'Fire Protection',
+    'Death Protection',
+    'Ice Protection',
+    'Earth Protection'
+]
+
+const imbuementObject = {};
+imbuementsArray.forEach(item => imbuementObject[item] = true);
