@@ -82,7 +82,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const [filters, setFilters] = useState(initialFilterState);
     const [interacted, setInteracted] = useState(false);
-    console.log(filters);
 
     useEffect(() => {
         const { search, pathname } = window.location;
@@ -199,6 +198,22 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             updateFilterValue('itemSet', new Set(itemNamesArray));
         }
     }, [isAllItemsSelected, updateFilterValue, itemNamesArray]);
+
+    const isAllImbuementsSelected = useCallback(() => {
+        if (filters.imbuementsSet.size === imbuementsArray.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }, [filters]);
+
+    const handleAllImbuementsToggle = useCallback(() => {
+        if (isAllImbuementsSelected()) {
+            updateFilterValue('imbuementsSet', new Set([]));
+        } else {
+            updateFilterValue('imbuementsSet', new Set(imbuementsArray));
+        }
+    }, [isAllImbuementsSelected, updateFilterValue]);
 
     const filterIsReset = useCallback(() => {
         const {
@@ -519,15 +534,26 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     </div>
                 </FilterGroup>
 
-                <FilterGroup title="Imbuement" display="flex">
-                    <label htmlFor="Imbuement-input" className="invisible-label">Imbuement</label>
+                <FilterGroup
+                    className="imbuements-wrapper"
+                    title="Imbuements"
+                    display="flex"
+                >
+                    <label htmlFor="Imbuements-input" className="invisible-label">Imbuements</label>
                     <AutocompleteInput
-                        labelFor="Imbuement-input"
-                        placeholder="Choose an imbuement"
+                        labelFor="Imbuements-input"
+                        placeholder="Select imbuements"
                         clearAfterSucessful
                         items={allItemsNotInSet(imbuementsArray, filters.imbuementsSet)}
                         onChange={useCallback((value) => onAutocompleteChange('imbuementsSet', value, imbuementObject), [onAutocompleteChange])}
                     />
+
+                    <Chip
+                        clickable
+                        overrideStatus={isAllImbuementsSelected() ? true : false}
+                        onClick={handleAllImbuementsToggle}>
+                            All imbuements
+                        </Chip>
 
                     <div className="chips-wrapper">
                         {[...filters.imbuementsSet].map((imbuement, index) =>

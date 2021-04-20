@@ -114,7 +114,8 @@ export default styled.div`
         }
     }
 
-    .rare-items-wrapper {
+    .rare-items-wrapper,
+    .imbuements-wrapper {
         span div {
             margin-left: 2px;
         }
@@ -131,6 +132,10 @@ export default styled.div`
             right: 24px;
         }
     }
+
+    .imbuements-wrapper > .chip-item {
+            margin: 5px 0 5px 12px;
+        }
 
     .chips-wrapper {
         width: 100%;
