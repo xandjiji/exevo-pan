@@ -34,7 +34,7 @@ export default ({ labelFor, items, placeholder, onChange, clearAfterSucessful, c
 
     useEffect(() => {
         const timeOutObj = setTimeout(() => {
-            onChange(term)
+            onChange?.(term)
             if (clearAfterSucessful) {
                 if (valid === 'valid') {
                     setTerm('');

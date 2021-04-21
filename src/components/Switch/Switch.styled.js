@@ -5,6 +5,7 @@ export default styled.div`
     align-items: center;
     font-size: 14px;
     cursor: pointer;
+    user-select: none;
 
     .toggle {
         position: relative;

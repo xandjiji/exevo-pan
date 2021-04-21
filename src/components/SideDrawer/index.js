@@ -48,7 +48,8 @@ const resetedFilterState = {
     itemSet: new Set([]),
     fav: false,
     rareNick: false,
-    soulwarFilter: false
+    soulwarFilter: false,
+    imbuementsSet: new Set([])
 };
 
 export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
@@ -75,7 +76,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         itemSet: params.itemSet || new Set([]),
         fav: params.fav || false,
         rareNick: params.rareNick || false,
-        soulwarFilter: params.soulwarFilter || false
+        soulwarFilter: params.soulwarFilter || false,
+        imbuementsSet: params.imbuementsSet || new Set([])
     }
 
     const [filters, setFilters] = useState(initialFilterState);
@@ -167,7 +169,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     useEffect(() => {
         setTimeout(() => {
-            if(active) setParamByKey('pageIndex', 0);
+            if (active) setParamByKey('pageIndex', 0);
             dispatchCharacterData({
                 type: 'APPLY_FILTERS',
                 filterState: filters,
@@ -196,6 +198,22 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             updateFilterValue('itemSet', new Set(itemNamesArray));
         }
     }, [isAllItemsSelected, updateFilterValue, itemNamesArray]);
+
+    const isAllImbuementsSelected = useCallback(() => {
+        if (filters.imbuementsSet.size === imbuementsArray.length) {
+            return true;
+        } else {
+            return false;
+        }
+    }, [filters]);
+
+    const handleAllImbuementsToggle = useCallback(() => {
+        if (isAllImbuementsSelected()) {
+            updateFilterValue('imbuementsSet', new Set([]));
+        } else {
+            updateFilterValue('imbuementsSet', new Set(imbuementsArray));
+        }
+    }, [isAllImbuementsSelected, updateFilterValue]);
 
     const filterIsReset = useCallback(() => {
         const {
@@ -516,6 +534,39 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     </div>
                 </FilterGroup>
 
+                <FilterGroup
+                    className="imbuements-wrapper"
+                    title="Imbuements"
+                    display="flex"
+                >
+                    <label htmlFor="Imbuements-input" className="invisible-label">Imbuements</label>
+                    <AutocompleteInput
+                        labelFor="Imbuements-input"
+                        placeholder="Select imbuements"
+                        clearAfterSucessful
+                        items={allItemsNotInSet(imbuementsArray, filters.imbuementsSet)}
+                        onChange={useCallback((value) => onAutocompleteChange('imbuementsSet', value, imbuementObject), [onAutocompleteChange])}
+                    />
+
+                    <Chip
+                        clickable
+                        overrideStatus={isAllImbuementsSelected() ? true : false}
+                        onClick={handleAllImbuementsToggle}>
+                            All imbuements
+                        </Chip>
+
+                    <div className="chips-wrapper">
+                        {[...filters.imbuementsSet].map((imbuement, index) =>
+                            <Chip
+                                key={index}
+                                closeable
+                                onClose={() => deleteFromFilterSet('imbuementsSet', imbuement)}>
+                                {imbuement}
+                            </Chip>
+                        )}
+                    </div>
+                </FilterGroup>
+
 
                 <Route exact path="/">
                     <FilterGroup
@@ -609,3 +660,32 @@ const objectHasKeys = (object, key) => {
         return false;
     }
 }
+
+const imbuementsArray = [
+    'Critical Hit',
+    'Life Leech',
+    'Mana Leech',
+    'Club Skill',
+    'Shield Skill',
+    'Axe Skill',
+    'Magic Level',
+    'Distance Skill',
+    'Sword Skill',
+    'Capacity',
+    'Speed',
+    'Paralize Removal',
+    'Energy Damage',
+    'Ice Damage',
+    'Death Damage',
+    'Fire Damage',
+    'Earth Damage',
+    'Energy Protection',
+    'Holy Protection',
+    'Fire Protection',
+    'Death Protection',
+    'Ice Protection',
+    'Earth Protection'
+]
+
+const imbuementObject = {};
+imbuementsArray.forEach(item => imbuementObject[item] = true);

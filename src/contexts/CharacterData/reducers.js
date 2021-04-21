@@ -21,7 +21,8 @@ const applyFilters = (filterState, initialData) => {
         itemSet,
         fav,
         rareNick,
-        soulwarFilter
+        soulwarFilter,
+        imbuementsSet
     } = filterState;
 
     const nicknameRegex = new RegExp(nicknameFilter, 'i');
@@ -41,12 +42,13 @@ const applyFilters = (filterState, initialData) => {
             level,
             skills,
             nickname,
-            hasSoulwar
+            hasSoulwar,
+            imbuements
         } = character;
 
-        if(nicknameFilter && !nicknameRegex.test(nickname)) continue;
+        if (nicknameFilter && !nicknameRegex.test(nickname)) continue;
 
-        if(!indexedServerData[serverId]) continue;
+        if (!indexedServerData[serverId]) continue;
 
         if (setDoesntHasValue(vocation, vocationId)) continue;
 
@@ -58,11 +60,13 @@ const applyFilters = (filterState, initialData) => {
 
         if (setDoesntHasValue(serverSet, indexedServerData[serverId].serverName)) continue;
 
+        if (setDoesntHasAnyValue(imbuementsSet, imbuements)) continue;
+
         if (setDoesntHasValue(auctionsItemsSet, id)) continue;
 
-        if(rareNick && !isRareNickname(nickname)) continue;
+        if (rareNick && !isRareNickname(nickname)) continue;
 
-        if(soulwarFilter && hasSoulwar) continue;
+        if (soulwarFilter && hasSoulwar) continue;
 
         if (skillKey.size) {
             let hasMinimumSkill = false;
@@ -93,6 +97,18 @@ const setDoesntHasValue = (set, value) => {
     }
 }
 
+const setDoesntHasAnyValue = (set, valueArray) => {
+    if (set.size === 0) return false;
+
+    const charImbuementSet = new Set(valueArray);
+    const arrayFromFilterSet = Array.from(set);
+
+    for (const value of arrayFromFilterSet) {
+        if (!charImbuementSet.has(value)) return true;
+    }
+    return false;
+}
+
 const getAuctionIdSetFromItemNameSet = (nameSet, itemData) => {
 
     const auctionIdSet = new Set([])
@@ -110,7 +126,7 @@ const twoConsecutiveUppercase = /[A-Z][A-Z]/;
 const isRareNickname = (nickname) => {
     if (nickname.length <= 3) return true;
     if (specialCharacters.test(nickname)) return true;
-    if(twoConsecutiveUppercase.test(nickname)) return true;
+    if (twoConsecutiveUppercase.test(nickname)) return true;
 
     return false;
 }

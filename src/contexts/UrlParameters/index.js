@@ -22,6 +22,7 @@ export default ({ children }) => {
         fav: getBooleanParam('fav'),
         rareNick: getBooleanParam('rareNick'),
         soulwarFilter: getBooleanParam('soulwarFilter'),
+        imbuementsSet: getSetParam('imbuementsSet'),
 
         pageIndex: getNumberParam('pageIndex'),
 
