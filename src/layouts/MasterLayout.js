@@ -8,6 +8,8 @@ import SideDrawerSwitcher from '../Routes/SideDrawerSwitcher';
 
 import StatisticsGrid from '../components/StatisticsGrid';
 
+import ErrorPage from '../components/ErrorPage';
+
 import '../layouts/common.css';
 
 const MasterLayout = () => {
@@ -15,15 +17,20 @@ const MasterLayout = () => {
 
     return (
         <div className={`body-container ${theme}`}>
-            <Header />
             <Switch>
                 <Route exact path={["/", "/bazaar-history"]}>
+                    <Header />
                     <CharGridSwitcher />
                     <SideDrawerSwitcher />
                 </Route>
 
                 <Route exact path="/statistics">
+                    <Header />
                     <StatisticsGrid />
+                </Route>
+
+                <Route>
+                    <ErrorPage mainMessage="404" paragraphs={['oops!', 'page not found']}/>
                 </Route>
             </Switch>
         </div>
