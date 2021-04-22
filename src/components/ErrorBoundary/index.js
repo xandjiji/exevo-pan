@@ -1,7 +1,5 @@
 import React from 'react';
-import ErrorBoundaryStyled from './ErrorBoundary.styled';
-
-import { ReactComponent as ErrorIcon } from '../../assets/svgs/error.svg';
+import ErrorPage from '../ErrorPage';
 
 export default class ErrorBoundary extends React.Component {
     constructor(props) {
@@ -17,18 +15,10 @@ export default class ErrorBoundary extends React.Component {
 
     render() {
         if (this.state.error) {
-            return (
-                <ErrorBoundaryStyled>
-                    <div className="top">
-                        <span>ERROR</span>
-                    </div>
-                    <div className="bottom">
-                        <ErrorIcon />
-                        <p>oops! something unexpected happened</p>
-                        <p>lets try again...</p>
-                    </div>
-                </ErrorBoundaryStyled>
-            );
+            return <ErrorPage
+                mainMessage="ERROR"
+                paragraphs={['oops! something unexpected happened', 'lets try again...']}
+            />;
         } else {
             return this.props.children;
         }
