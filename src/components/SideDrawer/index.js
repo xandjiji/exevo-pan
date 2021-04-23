@@ -228,7 +228,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             minSkill,
             skillKey,
             fav,
-            rareNick
+            rareNick,
+            imbuementsSet
         } = filters;
 
 
@@ -244,6 +245,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         if (minSkill !== 10) return false;
         if (fav) return false;
         if (rareNick) return false;
+        if (imbuementsSet.size) return false;
 
         return true;
     }, [filters]);
@@ -279,7 +281,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             itemSet: new Set([]),
                             fav: false,
                             rareNick: false,
-                            soulwarFilter: false
+                            soulwarFilter: false,
+                            imbuementsSet: new Set([])
                         });
 
                         resetParams();
@@ -552,7 +555,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         clickable
                         overrideStatus={isAllImbuementsSelected() ? true : false}
                         onClick={handleAllImbuementsToggle}>
-                            All imbuements
+                        All imbuements
                         </Chip>
 
                     <div className="chips-wrapper">
