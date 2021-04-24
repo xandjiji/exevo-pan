@@ -57,11 +57,17 @@ export default styled.div`
         }
     }
 
-    .rare-items-wrapper,
-    .imbuements-wrapper,
-    .nickname-wrapper {
-        span div {
-            margin-left: 2px;
+    .information-badge {
+        margin-left: 2px;
+
+        &.onSurface-badge {
+            margin-left: 4px;
+            color: var(--onSurface);
+            border-color: var(--onSurface);
+            
+            .shadow {
+                width: 175px;
+            }
         }
     }
 
