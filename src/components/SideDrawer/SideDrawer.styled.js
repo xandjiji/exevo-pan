@@ -57,6 +57,14 @@ export default styled.div`
         }
     }
 
+    .rare-items-wrapper,
+    .imbuements-wrapper,
+    .nickname-wrapper {
+        span div {
+            margin-left: 2px;
+        }
+    }
+
     .items-wrapper {
         position: relative;
         height: calc(100% - 142px);
@@ -116,10 +124,6 @@ export default styled.div`
 
     .rare-items-wrapper,
     .imbuements-wrapper {
-        span div {
-            margin-left: 2px;
-        }
-
         #Items-input {
             margin-right: 12px;
         }

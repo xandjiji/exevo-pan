@@ -294,7 +294,12 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             </div>
 
             <div className="items-wrapper inner-container custom-scrollbar">
-                <FilterGroup title="Search nickname" display="flex">
+                <FilterGroup
+                    className="nickname-wrapper"
+                    title="Search nickname"
+                    display="flex"
+                    badge={<InformationBadge position="bottom" icon="!" text="Regex is enabled! Example: ['-.,]" />}
+                >
                     <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
                     <AutocompleteInput
                         initialValue={params.nicknameFilter}
