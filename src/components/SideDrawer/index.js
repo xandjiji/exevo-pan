@@ -627,7 +627,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         overrideStatus={filters.rareNick}
                     >
                         Rare nicknames
-                        <InformationBadge className="onSurface-badge" position="top" icon="?" text="Nicknames with special characters (äëïöüÿ'-.,), less than 3 characters length and consecutive uppercase letters (e.g XVI)" />
+                        <InformationBadge className="onSurface-badge" position="top" icon="?" text="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)" />
                     </Chip>
 
                     <Chip
