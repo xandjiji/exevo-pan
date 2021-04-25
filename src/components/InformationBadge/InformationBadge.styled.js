@@ -17,9 +17,10 @@ export default styled.div`
 
     div {
         position: absolute;
-        bottom: calc(100% + 8px);
+        ${props => props.position}: calc(100% + 8px);
         left: 50%;
         transform: translateX(-50%);
+        z-index: 1;
 
         padding: 12px;
         width: 160px;

@@ -294,7 +294,12 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             </div>
 
             <div className="items-wrapper inner-container custom-scrollbar">
-                <FilterGroup title="Search nickname" display="flex">
+                <FilterGroup
+                    className="nickname-wrapper"
+                    title="Search nickname"
+                    display="flex"
+                    badge={<InformationBadge position="bottom" icon="!" text="Regex is enabled! Example: ['-.,]" />}
+                >
                     <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
                     <AutocompleteInput
                         initialValue={params.nicknameFilter}
@@ -607,13 +612,14 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     </FilterGroup>
                 </Route>
 
-                <FilterGroup title="Misc" display="flex">
+                <FilterGroup className="misc-wrapper" title="Misc" display="flex">
                     <Chip
                         clickable
                         onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}
                         overrideStatus={filters.fav}
                     >
-                        Favorited ❤️
+                        Favorited
+                        <InformationBadge className="onSurface-badge borderless" position="top" icon="❤️" text="Save your favorite auctions pressing the ❤️ button!" />
                     </Chip>
                     <Chip
                         clickable
@@ -621,6 +627,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         overrideStatus={filters.rareNick}
                     >
                         Rare nicknames
+                        <InformationBadge className="onSurface-badge" position="top" icon="?" text="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)" />
                     </Chip>
 
                     <Chip
@@ -636,7 +643,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         }, [filters, updateFilterValue])}
                         overrideStatus={filters.soulwarFilter && (filters.minLevel >= 400)}
                     >
-                        Soulwar available 💀
+                        Soulwar available
+                        <InformationBadge className="onSurface-badge borderless" position="top" icon="💀" text="Characters level 400+ with Soul War not completed" />
                     </Chip>
                 </FilterGroup>
             </div>
