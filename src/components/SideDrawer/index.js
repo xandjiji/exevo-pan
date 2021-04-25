@@ -618,7 +618,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}
                         overrideStatus={filters.fav}
                     >
-                        Favorited ❤️
+                        Favorited
+                        <InformationBadge className="onSurface-badge borderless" position="top" icon="❤️" text="Save your favorite auctions pressing the ❤️ button!" />
                     </Chip>
                     <Chip
                         clickable
@@ -642,7 +643,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         }, [filters, updateFilterValue])}
                         overrideStatus={filters.soulwarFilter && (filters.minLevel >= 400)}
                     >
-                        Soulwar available 💀
+                        Soulwar available
+                        <InformationBadge className="onSurface-badge borderless" position="top" icon="💀" text="Characters level 400+ with Soul War not completed" />
                     </Chip>
                 </FilterGroup>
             </div>

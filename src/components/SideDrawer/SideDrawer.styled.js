@@ -69,6 +69,10 @@ export default styled.div`
                 width: 175px;
             }
         }
+
+        &.borderless {
+            border: none;
+        }
     }
 
     .items-wrapper {
