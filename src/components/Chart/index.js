@@ -7,6 +7,8 @@ import { ReactComponent as TrendingIcon } from '../../assets/svgs/trending.svg';
 
 import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
 
+const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
 export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
 
     const [dataSize, setDataSize] = useState(7);
@@ -73,7 +75,7 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
         labels: lastMonth.slice(lastMonth.length - dataSize).map((_, index) => {
             const date = new Date();
             date.setDate(date.getDate() - index);
-            return `${date.getDate()}/${date.getMonth() + 1}`;
+            return `${date.getDate()}/${date.getMonth() + 1}, ${weekday[date.getDay()]}`;
         }).reverse(),
         datasets: [{
             label: chartLabel,
