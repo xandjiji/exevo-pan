@@ -123,3 +123,13 @@ const getFromDb = async (index) => {
     const parsedData = JSON.parse(stringfiedData);
     return parsedData.map(minifiedToObject);;
 }
+
+
+const getFullDb = async () => {
+    const stringfiedData = await get(`historyDataFull`);
+    return JSON.parse(stringfiedData);
+}
+
+const buildFullDb = async (data) => {
+    await set(`historyDataFull`, JSON.stringify(data));
+}
