@@ -23,7 +23,7 @@ const MasterLayout = () => {
 
     const { pathname } = useLocation()
     useEffect(() => {
-        document.title = pageTitle[pathname];
+        document.title = pageTitle[pathname] || 'Exevo Pan';
     }, [pathname]);
 
     return (
