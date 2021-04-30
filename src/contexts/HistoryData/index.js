@@ -49,8 +49,7 @@ export default ({ children }) => {
 
                 await buildFullDb(historyDataArray);
 
-                const flattenedData = historyDataArray.flat();
-                const setupedArray = flattenedData.map(minifiedToObject);
+                const setupedArray = historyDataArray.flatMap(array => array.map(minifiedToObject));
                 const setupedData = setupedArray.sort((a, b) => b.auctionEnd - a.auctionEnd);
 
                 setInitialCharacterData(setupedData);
