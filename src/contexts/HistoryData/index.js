@@ -40,16 +40,14 @@ export default ({ children }) => {
                 const response = await fetch(`${historyEndpoint}/hash.json`);
                 const data = await response.json();
 
-                const historyDataArray = await getFullDb();
-
+                const parsedHistoryData = [];
                 for (const [index, hash] of data.entries()) {
-                    await checkAndHash(hash, index, historyDataArray);
+                    const dataPage = await checkAndHash(hash, index);
+                    parsedHistoryData.push(dataPage);
                     setPercentage(getPercentage(index, data.length));
                 }
 
-                await buildFullDb(historyDataArray);
-
-                const setupedArray = historyDataArray.flatMap(array => array.map(minifiedToObject));
+                const setupedArray = [].concat.apply([], parsedHistoryData);
                 const setupedData = setupedArray.sort((a, b) => b.auctionEnd - a.auctionEnd);
 
                 setInitialCharacterData(setupedData);
@@ -61,7 +59,7 @@ export default ({ children }) => {
             }
         }
 
-        if (interacted && !loaded) fetchSetupedData();
+        if(interacted && !loaded) fetchSetupedData();
     }, [interacted, loaded]);
 
     useEffect(() => {
@@ -93,24 +91,35 @@ const getPercentage = (part, whole) => {
     return `${percentage}%`
 }
 
-const checkAndHash = async (hash, index, historyDataArray) => {
+const checkAndHash = async (hash, index) => {
     const pageName = `historyHash${index}`;
     const pageHash = getFromLocalStorage(pageName, null);
 
-    if (!historyDataArray[index] || pageHash !== hash) {
+    if (pageHash !== hash) {
         const response = await fetch(`${historyEndpoint}/historyData${index}.json`);
         const data = await response.json();
+        const parsedDataArray = await buildDb(index, data);
 
-        historyDataArray[index] = data;
         saveToLocalStorage(pageName, hash);
+
+        return parsedDataArray;
+    } else {
+        return await getFromDb(index);
     }
 }
 
-const getFullDb = async () => {
-    const stringfiedData = await get(`historyDataFull`);
-    return stringfiedData ? JSON.parse(stringfiedData) : [];
+const buildDb = async (index, data) => {
+    const parsedDataArray = data.map(minifiedToObject);
+    const stringfiedData = JSON.stringify(data);
+
+    await set(`historyData${index}`, stringfiedData);
+
+    return parsedDataArray;
 }
 
-const buildFullDb = async (data) => {
-    await set(`historyDataFull`, JSON.stringify(data));
+const getFromDb = async (index) => {
+    const stringfiedData = await get(`historyData${index}`);
+
+    const parsedData = JSON.parse(stringfiedData);
+    return parsedData.map(minifiedToObject);;
 }
