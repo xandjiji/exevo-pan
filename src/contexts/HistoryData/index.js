@@ -29,10 +29,10 @@ export default ({ children }) => {
     const [percentage, setPercentage] = useState('0%');
 
     useEffect(() => {
-        if(pathname === '/bazaar-history') {
-            setInteracted(prev => !prev ? true : prev);
+        if (pathname === '/bazaar-history' && !interacted) {
+            setInteracted(true);
         }
-    }, [pathname]);
+    }, [pathname, interacted]);
 
     useEffect(() => {
         const fetchSetupedData = async () => {
