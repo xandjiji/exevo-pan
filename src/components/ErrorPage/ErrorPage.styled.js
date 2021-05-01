@@ -30,7 +30,7 @@ export default styled.div`
         text-align: center;
 
         svg {
-            margin-bottom: 64px;
+            margin-bottom: 32px;
             width: 128px;
             height: 128px;
             fill: #FFFFFF;
@@ -44,3 +44,35 @@ export default styled.div`
         }
     }
 `;
+
+export const Nav = styled.nav`
+    margin-top: 8px;
+
+    ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+
+        li {
+            margin-top: 12px;
+
+            &:not(:last-child) {
+                margin-right: 12px;
+
+                &::after {
+                    content: '|';
+                    margin-left: 12px;
+                    font-size: 14px;
+                    color: var(--separator);
+                }
+            }
+
+            a {
+                font-size: 14px;
+                letter-spacing: 0.5px;
+                color: var(--onPrimary);
+            }
+        }
+    }
+`
