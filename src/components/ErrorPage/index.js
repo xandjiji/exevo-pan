@@ -13,11 +13,15 @@ export default ({ mainMessage, paragraphs }) => (
             <ErrorIcon />
             {paragraphs && paragraphs.map(text => <p>{text}</p>)}
 
-            <Nav>
+            <Nav className="inner-container">
                 <ul>
                     <li>
                         <NavLink to="/">Current Auctions</NavLink>
+                    </li>
+                    <li>
                         <NavLink to="/bazaar-history">Bazaar History</NavLink>
+                    </li>
+                    <li>
                         <NavLink to="/statistics">Statistics</NavLink>
                     </li>
                 </ul>
