@@ -12,6 +12,16 @@ module.exports = {
             1,
             { extensions: ['.js', '.jsx', '.tsx'] },
         ],
+        'react/react-in-jsx-scope': 'off',
+
+        'testing-library/no-container': 'off',
+        'testing-library/no-node-access': 'off',
+        'testing-library/no-promise-in-fire-event': 'off',
+        'testing-library/no-unnecessary-act': 'off',
+        'testing-library/no-wait-for-multiple-assertions': 'off',
+        'testing-library/no-wait-for-side-effects': 'off',
+        'testing-library/prefer-user-event': 'off',
+        'testing-library/render-result-naming-convention': 'off'
     },
     settings: {
         'import/resolver': {
