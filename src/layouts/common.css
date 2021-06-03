@@ -37,6 +37,7 @@ html, body {
     --alert: #F9EEC1;
     --battleGreen: #43B600;
     --battleYellow: #FFDD00;
+    --primaryVariantHighlight: #e7e8ee;
 }
 
 .dark-theme {
@@ -52,6 +53,7 @@ html, body {
     --alert: #F9EEC1;
     --battleGreen: #43B600;
     --battleYellow: #FFDD00;
+    --primaryVariantHighlight: #714ca1;
 }
 
 svg {
