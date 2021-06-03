@@ -3,7 +3,7 @@ import Header, { HeaderWrapper, HeaderItem, Logo } from './Header.styled';
 import { NavLink } from 'react-router-dom';
 
 import Switch from '../Switch';
-import CtaButton from '../CtaButton';
+import { CtaButton } from '../Atoms/';
 
 import logo from '../../assets/logo.png';
 import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';

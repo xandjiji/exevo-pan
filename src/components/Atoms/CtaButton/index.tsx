@@ -1,4 +1,4 @@
-import coinsGif from '../../assets/tibiaCoins.gif'
+import coinsGif from '../../../assets/tibiaCoins.gif'
 import * as S from './styles'
 
 const CtaButton = ({
