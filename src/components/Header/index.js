@@ -3,7 +3,7 @@ import Header, { HeaderWrapper, HeaderItem, Logo } from './Header.styled';
 import { NavLink } from 'react-router-dom';
 
 import Switch from '../Switch';
-import CTA from '../CTA';
+import CtaButton from '../CtaButton';
 
 import logo from '../../assets/logo.png';
 import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';
@@ -72,7 +72,7 @@ export default () => {
                     onClick={toggleTheme}
                     icon={<MoonIcon />}
                 />
-                <CTA />
+                <CtaButton />
             </HeaderWrapper>
         </Header>
     )

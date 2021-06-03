@@ -1,7 +1,7 @@
 import coinsGif from '../../assets/tibiaCoins.gif'
 import * as S from './styles'
 
-const CTA = ({
+const CtaButton = ({
   ...props
 }: React.HTMLAttributes<HTMLAnchorElement>): JSX.Element => {
   return (
@@ -18,4 +18,4 @@ const CTA = ({
   )
 }
 
-export default CTA
+export default CtaButton
