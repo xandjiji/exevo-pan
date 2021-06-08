@@ -9,7 +9,7 @@ const CtaButton = ({
       className="clickable shadow"
       href="https://www.reidoscoins.com.br/?tracking=60b8120a1ab43"
       target="_blank"
-      rel="external"
+      rel="noopener external"
       {...props}
     >
       <S.Img src={coinsGif as string} alt="Tibia Coins" />
