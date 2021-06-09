@@ -1,6 +1,10 @@
 import styled from 'styled-components'
+import { Clickable, Shadow } from '../../../styles'
 
 export const Button = styled.a`
+  ${Clickable}
+  ${Shadow}
+  
   position: relative;
   padding: 8px 16px 8px 40px;
   margin-left: 8px;

@@ -6,7 +6,6 @@ const CtaButton = ({
 }: React.HTMLAttributes<HTMLAnchorElement>): JSX.Element => {
   return (
     <S.Button
-      className="clickable shadow"
       href="https://www.reidoscoins.com.br/?tracking=60b8120a1ab43"
       target="_blank"
       rel="noopener external"
