@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Wrapper, DataItemWrapper, DataItem, Title, TCValue, PercentageValue, ChipWrapper, ChartWrapper } from './Chart.styled';
 import { Line } from 'react-chartjs-2';
-import Chip from '../Chip';
+import Chip from '../Atoms/Chip';
 
 import { ReactComponent as TrendingIcon } from '../../assets/svgs/trending.svg';
 
@@ -117,14 +117,12 @@ export default ({ data, totalLabel, yesterdayLabel, chartLabel }) => {
 
             <ChipWrapper>
                 <Chip
-                    clickable
                     overrideStatus={dataSize === 28}
                     onClick={() => setDataSize(28)}
                 >
                     28 days
                 </Chip>
                 <Chip
-                    clickable
                     overrideStatus={dataSize === 7}
                     onClick={() => setDataSize(7)}
                 >

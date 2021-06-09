@@ -6,7 +6,7 @@ import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
 import AuctionTimer from '../AuctionTimer';
 import SkillBar from '../SkillBar';
-import Chip from '../Chip';
+import Chip from '../Atoms/Chip';
 import FavButton from '../FavButton';
 import InformationBadge from '../InformationBadge';
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useCallback, useMemo } from 're
 import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
-import Chip from '../Chip';
+import Chip from '../Atoms/Chip';
 import AutocompleteInput from '../AutocompleteInput';
 import RangeSlider from '../RangeSlider';
 import DrawerFooter from '../DrawerFooter';
@@ -311,7 +311,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 </FilterGroup>
                 <FilterGroup title="Vocation" display="flex">
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 0), [toggleInFilterSet])}
                         overrideStatus={filters.vocation.has(0)}
                     >
@@ -319,7 +318,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         None
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 1), [toggleInFilterSet])}
                         overrideStatus={filters.vocation.has(1)}
                     >
@@ -327,7 +325,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         Knight
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 2), [toggleInFilterSet])}
                         overrideStatus={filters.vocation.has(2)}
                     >
@@ -335,7 +332,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         Paladin
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 3), [toggleInFilterSet])}
                         overrideStatus={filters.vocation.has(3)}
                     >
@@ -343,7 +339,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         Sorcerer
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('vocation', 4), [toggleInFilterSet])}
                         overrideStatus={filters.vocation.has(4)}
                     >
@@ -354,7 +349,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
                 <FilterGroup title="PvP" display="flex">
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 0), [toggleInFilterSet])}
                         overrideStatus={filters.pvp.has(0)}
                     >
@@ -362,7 +356,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         Optional
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 1), [toggleInFilterSet])}
                         overrideStatus={filters.pvp.has(1)}
                     >
@@ -370,7 +363,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         Open
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 2), [toggleInFilterSet])}
                         overrideStatus={filters.pvp.has(2)}
                     >
@@ -378,7 +370,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         Retro Open
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 3), [toggleInFilterSet])}
                         overrideStatus={filters.pvp.has(3)}
                     >
@@ -386,7 +377,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         Hardcore
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('pvp', 4), [toggleInFilterSet])}
                         overrideStatus={filters.pvp.has(4)}
                     >
@@ -397,7 +387,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
                 <FilterGroup className="battleye-wrapper" title="BattlEye" display="flex">
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('battleye', true), [toggleInFilterSet])}
                         overrideStatus={filters.battleye.has(true)}
                     >
@@ -409,7 +398,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             Green
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('battleye', false), [toggleInFilterSet])}
                         overrideStatus={filters.battleye.has(false)}
                     >
@@ -424,7 +412,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
                 <FilterGroup title="Server location" display="flex">
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 0), [toggleInFilterSet])}
                         overrideStatus={filters.location.has(0)}
                     >
@@ -432,7 +419,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         EU
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 1), [toggleInFilterSet])}
                         overrideStatus={filters.location.has(1)}
                     >
@@ -440,7 +426,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         NA
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleInFilterSet('location', 2), [toggleInFilterSet])}
                         overrideStatus={filters.location.has(2)}
                     >
@@ -463,7 +448,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         {[...filters.serverSet].map((serverName, index) =>
                             <Chip
                                 key={index}
-                                closeable
                                 onClose={() => deleteFromFilterSet('serverSet', serverName)}>
                                 {serverName}
                             </Chip>
@@ -500,7 +484,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
                     <div className="skills-wrapper">
                         <Chip
-                            clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'magic'), [toggleInFilterSet])}
                             overrideStatus={filters.skillKey.has('magic')}
                         >
@@ -508,7 +491,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             Magic
                         </Chip>
                         <Chip
-                            clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'distance'), [toggleInFilterSet])}
                             overrideStatus={filters.skillKey.has('distance')}
                         >
@@ -516,7 +498,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             Distance
                         </Chip>
                         <Chip
-                            clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'club'), [toggleInFilterSet])}
                             overrideStatus={filters.skillKey.has('club')}
                         >
@@ -524,7 +505,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             Club
                         </Chip>
                         <Chip
-                            clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'sword'), [toggleInFilterSet])}
                             overrideStatus={filters.skillKey.has('sword')}
                         >
@@ -532,7 +512,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             Sword
                         </Chip>
                         <Chip
-                            clickable
                             onClick={useCallback(() => toggleInFilterSet('skillKey', 'axe'), [toggleInFilterSet])}
                             overrideStatus={filters.skillKey.has('axe')}
                         >
@@ -557,7 +536,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     />
 
                     <Chip
-                        clickable
                         overrideStatus={isAllImbuementsSelected() ? true : false}
                         onClick={handleAllImbuementsToggle}>
                         All imbuements
@@ -567,7 +545,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         {[...filters.imbuementsSet].map((imbuement, index) =>
                             <Chip
                                 key={index}
-                                closeable
                                 onClose={() => deleteFromFilterSet('imbuementsSet', imbuement)}>
                                 {imbuement}
                             </Chip>
@@ -593,7 +570,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         />
 
                         <Chip
-                            clickable
                             overrideStatus={isAllItemsSelected() ? true : false}
                             onClick={handleAllItemsToggle}>
                             All items
@@ -603,7 +579,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             {[...filters.itemSet].map((itemName, index) =>
                                 <Chip
                                     key={index}
-                                    closeable
                                     onClose={() => deleteFromFilterSet('itemSet', itemName)}>
                                     {itemName}
                                 </Chip>
@@ -614,7 +589,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
                 <FilterGroup className="misc-wrapper" title="Misc" display="flex">
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}
                         overrideStatus={filters.fav}
                     >
@@ -622,7 +596,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         <InformationBadge className="onSurface-badge borderless" position="top" icon="❤️" text="Save your favorite auctions pressing the ❤️ button!" />
                     </Chip>
                     <Chip
-                        clickable
                         onClick={useCallback(() => toggleFilterValue('rareNick'), [toggleFilterValue])}
                         overrideStatus={filters.rareNick}
                     >
@@ -631,7 +604,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     </Chip>
 
                     <Chip
-                        clickable
                         onClick={useCallback(() => {
                             if (filters.soulwarFilter && (filters.minLevel >= 400)) {
                                 updateFilterValue('minLevel', 2)

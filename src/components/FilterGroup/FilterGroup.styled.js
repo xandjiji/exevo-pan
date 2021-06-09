@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Chip } from '../Atoms/Chip/styles'
 
 export default styled.div`
     margin-bottom: 16px;
@@ -16,14 +17,13 @@ export default styled.div`
         color: var(--onSurface);
     }
 
-    .chip-item {
+    ${Chip} {
         margin-bottom: 8px;
         pointer-events: all;
         letter-spacing: 0.3px;
         transition: box-shadow 0.2s ease-out;
 
-        &.interact:not(:hover),
-        &:not(.interact) {
+        &:not(:hover) {
             box-shadow: none;
         }
 

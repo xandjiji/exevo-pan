@@ -4,40 +4,30 @@ import * as S from './styles'
 
 const ChipComponent = ({
   children,
-  clickable = false,
-  closeable = false,
   onClick,
   onClose,
   overrideStatus,
+  ...props
 }: ChipProps) => {
   const [active, setActive] = useState<boolean>(false)
   const derivedActive = overrideStatus ?? active
 
   const handleClick = () => {
-    if (clickable) {
+    if (onClick) {
       setActive(!active)
-      onClick?.()
+      onClick()
     }
   }
 
   return (
     <S.Chip
-      className={`chip-item shadow ${derivedActive ? 'active' : ''} ${
-        clickable ? 'interact' : ''
-      }`}
+      active={derivedActive}
+      clickable={!!onClick}
       onClick={handleClick}
+      {...props}
     >
       {children}
-      {closeable && (
-        <div
-          className="close-button clickable"
-          onClick={onClose}
-          onKeyPress={onClose}
-          role="button"
-          tabIndex={0}
-          aria-label="Remove item"
-        />
-      )}
+      {onClose && <S.CloseButton onClick={onClose} aria-label="Remove item" />}
     </S.Chip>
   )
 }

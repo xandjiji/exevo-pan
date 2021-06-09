@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Chip } from '../Atoms/Chip/styles'
 
 export default styled.div`
     height: 100vh;
@@ -138,7 +139,7 @@ export default styled.div`
             margin-right: 12px;
         }
 
-        > .chip-item {
+        > ${Chip} {
             margin: 5px 0;
         }
 
@@ -147,9 +148,9 @@ export default styled.div`
         }
     }
 
-    .imbuements-wrapper > .chip-item {
-            margin: 5px 0 5px 12px;
-        }
+    .imbuements-wrapper > ${Chip} {
+        margin: 5px 0 5px 12px;
+    }
 
     .chips-wrapper {
         width: 100%;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
-import Chip from '../Chip';
+import Chip from '../Atoms/Chip';
 import Chart from '../Chart';
 import PercentageCard from '../PercentageCard';
 import PieChart from '../PieChart';
@@ -49,7 +49,6 @@ export default () => {
         <StatisticsGrid className="custom-scrollbar">
             <GridHeader className="inner-container shadow">
                 <Chip
-                    clickable
                     onClick={() => setOption('overall')}
                     overrideStatus={option === 'overall'}
                 >
@@ -57,7 +56,6 @@ export default () => {
                 </Chip>
 
                 <Chip
-                    clickable
                     onClick={() => setOption('highscores')}
                     overrideStatus={option === 'highscores'}
                 >
