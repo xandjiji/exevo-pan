@@ -1,15 +1,19 @@
 import styled, { css } from 'styled-components'
 import { Shadow, Clickable } from '../../../styles'
-import { ChipStyleProps } from './types'
+import { ChipStyleProps, styleObject } from './types'
 
-const activeStyle = css`
-  background-color: var(--primary);
-  color: var(--onPrimary);
-`
+export const backgroundStyle = {
+  inactive: 'background-color: var(--primaryVariant);',
+  active: 'background-color: var(--primary);',
+} as styleObject
+
+export const colorStyle = {
+  inactive: 'color: var(--onSurface);',
+  active: 'color: var(--onPrimary);',
+} as styleObject
 
 const clickableStyle = css`
   cursor: pointer;
-
   &:active {
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
@@ -21,15 +25,16 @@ export const Chip = styled.div<ChipStyleProps>`
   padding: 6px 12px;
   display: flex;
   align-items: center;
-  background-color: var(--primaryVariant);
-  color: var(--onSurface);
   border-radius: 12px;
   font-size: 12px;
   font-weight: 400;
   border: none;
   transition: 0.2s ease-out !important;
 
-  ${({ active }) => active && activeStyle}
+  ${({ active }) =>
+    active ? backgroundStyle.active : backgroundStyle.inactive}
+  ${({ active }) => (active ? colorStyle.active : colorStyle.inactive)}
+
   ${({ clickable }) => clickable && clickableStyle}
 `
 

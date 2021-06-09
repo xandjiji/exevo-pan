@@ -1,9 +1,16 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Chip from '..'
+import { backgroundStyle, colorStyle } from '../styles'
+import { styleObject } from '../types'
 
 const mockedOnClick = jest.fn()
 const mockedOnClose = jest.fn()
+
+const checkElementStyle = (element: HTMLElement, status: string) => {
+  expect(element).toHaveStyle(backgroundStyle[status] as styleObject)
+  expect(element).toHaveStyle(colorStyle[status] as styleObject)
+}
 
 describe('<Chip />', () => {
   test('it renders correctly', () => {
@@ -19,13 +26,11 @@ describe('<Chip />', () => {
 
     const chipElement = screen.getByTestId('testid')
 
-    expect(chipElement).toHaveStyle('background-color: var(--primaryVariant)')
-    expect(chipElement).toHaveStyle('color: var(--onSurface)')
+    checkElementStyle(chipElement, 'inactive')
 
     userEvent.click(chipElement)
     expect(mockedOnClick).toBeCalledTimes(1)
-    expect(chipElement).toHaveStyle('background-color: var(--primary)')
-    expect(chipElement).toHaveStyle('color: var(--onPrimary)')
+    checkElementStyle(chipElement, 'active')
   })
 
   test('it doesnt trigger click handler', () => {
@@ -49,8 +54,7 @@ describe('<Chip />', () => {
       render(<Chip data-testid="testid" overrideStatus={true} />)
 
       const chipElement = screen.getByTestId('testid')
-      expect(chipElement).toHaveStyle('background-color: var(--primary)')
-      expect(chipElement).toHaveStyle('color: var(--onPrimary)')
+      checkElementStyle(chipElement, 'active')
     })
 
     test('False with onClick', () => {
@@ -64,12 +68,10 @@ describe('<Chip />', () => {
 
       const chipElement = screen.getByTestId('testid')
 
-      expect(chipElement).toHaveStyle('background-color: var(--primaryVariant)')
-      expect(chipElement).toHaveStyle('color: var(--onSurface)')
+      checkElementStyle(chipElement, 'inactive')
 
       userEvent.click(chipElement)
-      expect(chipElement).toHaveStyle('background-color: var(--primaryVariant)')
-      expect(chipElement).toHaveStyle('color: var(--onSurface)')
+      checkElementStyle(chipElement, 'inactive')
     })
 
     test('True with onClick', () => {
@@ -79,12 +81,10 @@ describe('<Chip />', () => {
 
       const chipElement = screen.getByTestId('testid')
 
-      expect(chipElement).toHaveStyle('background-color: var(--primaryVariant)')
-      expect(chipElement).toHaveStyle('color: var(--onSurface)')
+      checkElementStyle(chipElement, 'inactive')
 
       userEvent.click(chipElement)
-      expect(chipElement).toHaveStyle('background-color: var(--primaryVariant)')
-      expect(chipElement).toHaveStyle('color: var(--onSurface)')
+      checkElementStyle(chipElement, 'inactive')
     })
   })
 })
