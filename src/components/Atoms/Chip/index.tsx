@@ -13,7 +13,7 @@ const ChipComponent = ({
   const derivedActive = overrideStatus ?? active
 
   const handleClick = () => {
-    if (onClick) {
+    if (!!onClick) {
       setActive(!active)
       onClick()
     }
@@ -27,7 +27,9 @@ const ChipComponent = ({
       {...props}
     >
       {children}
-      {onClose && <S.CloseButton onClick={onClose} aria-label="Remove item" />}
+      {!!onClose && (
+        <S.CloseButton onClick={onClose} aria-label="Remove item" />
+      )}
     </S.Chip>
   )
 }
