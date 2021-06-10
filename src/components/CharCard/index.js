@@ -4,7 +4,7 @@ import CharCard from './CharCard.styled';
 
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
-import AuctionTimer from '../AuctionTimer';
+import { AuctionTimer } from '../Atoms';
 import SkillBar from '../SkillBar';
 import Chip from '../Atoms/Chip';
 import FavButton from '../FavButton';
