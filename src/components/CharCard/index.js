@@ -61,8 +61,6 @@ export default ({ charData }) => {
     const currentServer = indexedServerData[serverId];
     if (!currentServer) return null;
 
-    const endDate = new Date(auctionEnd * 1000);
-
     const [highlightedSkill, setHighlightedSkill] = useState(null);
 
     useEffect(() => {
@@ -77,7 +75,7 @@ export default ({ charData }) => {
     }, [skills]);
 
     const getBidLabelText = () => {
-        if(pathname === '/bazaar-history') {
+        if (pathname === '/bazaar-history') {
             return hasBeenBidded ? 'Auction Successful' : 'Auction Failed';
         } else {
             return hasBeenBidded ? 'Current Bid' : 'Minimum Bid';
@@ -146,7 +144,7 @@ export default ({ charData }) => {
 
                 <LabeledText label="Auction End">
                     <div className="overview-content auction">
-                        <AuctionTimer endDate={endDate} />
+                        <AuctionTimer endDate={new Date(auctionEnd * 1000)} />
                     </div>
                 </LabeledText>
 
@@ -192,7 +190,7 @@ export default ({ charData }) => {
                     }
                     text={imbuements && imbuements.length > 0 ?
                         imbuements.map((imbuementItem, index) =>
-                            <span key ={index} className={highlightImbuentClass(imbuementItem)}>
+                            <span key={index} className={highlightImbuentClass(imbuementItem)}>
                                 {imbuementItem}
                             </span>)
                         : null
@@ -213,7 +211,7 @@ export default ({ charData }) => {
 const makeItemImg = (itemArray) => {
     const elementArray = [];
 
-    if(itemArray) {
+    if (itemArray) {
         for (const item of itemArray) {
             elementArray.push(<ImagePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
         }
