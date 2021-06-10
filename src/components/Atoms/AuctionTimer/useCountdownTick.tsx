@@ -1,21 +1,21 @@
 import { useState, useCallback, useEffect } from 'react'
-import { calcTimeDiff } from './utils'
-import { TimeDiffObject } from './types'
+import { calcCountdown } from './utils'
+import { CountdownObject } from './types'
 
-const useCountdownTick = (initialValue: number): TimeDiffObject => {
-  const getTimeDiff = useCallback(
-    () => calcTimeDiff(+new Date(), initialValue),
+const useCountdownTick = (initialValue: number): CountdownObject => {
+  const getCurrentTick = useCallback(
+    () => calcCountdown(+new Date(), initialValue),
     [initialValue],
   )
 
-  const [timeDiff, setTimeDiff] = useState<TimeDiffObject>(getTimeDiff)
+  const [countdown, setCountdown] = useState<CountdownObject>(getCurrentTick)
 
   useEffect(() => {
-    const timeout = setInterval(() => setTimeDiff(getTimeDiff()), 1000)
+    const timeout = setInterval(() => setCountdown(getCurrentTick), 1000)
     return () => clearInterval(timeout)
-  }, [getTimeDiff])
+  }, [getCurrentTick])
 
-  return timeDiff
+  return countdown
 }
 
 export default useCountdownTick

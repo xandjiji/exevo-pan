@@ -2,7 +2,7 @@ export interface AuctionTimerProps {
   endDate: Date
 }
 
-export interface TimeDiffObject {
+export interface CountdownObject {
   timeDiff: number
   days: number
   hours: number
