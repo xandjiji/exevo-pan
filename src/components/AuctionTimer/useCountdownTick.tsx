@@ -20,7 +20,7 @@ const calcTimeDiff = (startTime: number, endTime: number): TimeDiffObject => {
   return { timeDiff, days, hours, minutes, seconds }
 }
 
-const useTimeDiff = (initialValue: number): TimeDiffObject => {
+const useCountdownTick = (initialValue: number): TimeDiffObject => {
   const getTimeDiff = useCallback(
     () => calcTimeDiff(+new Date(), initialValue),
     [initialValue],
@@ -36,4 +36,4 @@ const useTimeDiff = (initialValue: number): TimeDiffObject => {
   return timeDiff
 }
 
-export default useTimeDiff
+export default useCountdownTick

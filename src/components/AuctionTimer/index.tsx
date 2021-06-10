@@ -1,5 +1,5 @@
 import { useLocation } from 'react-router-dom'
-import useTimeDiff from './useTimeDiff'
+import useCountdownTick from './useCountdownTick'
 import { AuctionTimerProps } from './types'
 import * as S from './styles'
 
@@ -21,7 +21,7 @@ const monthStr = [
 const AuctionTimer = ({ endDate }: AuctionTimerProps): JSX.Element => {
   // eslint-disable-next-line
   const { pathname } = useLocation()
-  const { days, hours, minutes, seconds } = useTimeDiff(+endDate)
+  const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
 
   const endTime = `, ${endDate.getHours()}:${endDate
     .getMinutes()
