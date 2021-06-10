@@ -19,6 +19,7 @@ const monthStr = [
 ]
 
 const AuctionTimer = ({ endDate }: AuctionTimerProps): JSX.Element => {
+  // eslint-disable-next-line
   const { pathname } = useLocation()
   const { days, hours, minutes, seconds } = useTimeDiff(+endDate)
 
