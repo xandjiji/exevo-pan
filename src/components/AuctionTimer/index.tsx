@@ -1,22 +1,8 @@
 import { useLocation } from 'react-router-dom'
 import useCountdownTick from './useCountdownTick'
+import { monthStr } from './utils'
 import { AuctionTimerProps } from './types'
 import * as S from './styles'
-
-const monthStr = [
-  'Jan',
-  'Fev',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Set',
-  'Oct',
-  'Nov',
-  'Dec',
-]
 
 const AuctionTimer = ({ endDate }: AuctionTimerProps): JSX.Element => {
   // eslint-disable-next-line
