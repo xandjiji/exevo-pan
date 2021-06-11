@@ -4,7 +4,10 @@ import { monthStr } from './utils'
 import { AuctionTimerProps } from './types'
 import * as S from './styles'
 
-const AuctionTimer = ({ endDate }: AuctionTimerProps): JSX.Element => {
+const AuctionTimer = ({
+  endDate,
+  ...props
+}: AuctionTimerProps): JSX.Element => {
   // eslint-disable-next-line
   const { pathname } = useLocation()
   const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
@@ -23,7 +26,7 @@ const AuctionTimer = ({ endDate }: AuctionTimerProps): JSX.Element => {
   if (days > 0 || pathname === '/bazaar-history') {
     return (
       <>
-        <S.Countdown>{endDateString}</S.Countdown>
+        <S.Countdown {...props}>{endDateString}</S.Countdown>
         {endTime}
       </>
     )
@@ -32,13 +35,19 @@ const AuctionTimer = ({ endDate }: AuctionTimerProps): JSX.Element => {
   if (hours + minutes + seconds > 0) {
     return (
       <>
-        <S.Countdown endingSoon>{countdownTime}</S.Countdown>
+        <S.Countdown endingSoon {...props}>
+          {countdownTime}
+        </S.Countdown>
         {endTime}
       </>
     )
   }
 
-  return <S.Countdown endingSoon>Auction Ended!</S.Countdown>
+  return (
+    <S.Countdown endingSoon {...props}>
+      Auction Ended!
+    </S.Countdown>
+  )
 }
 
 export default AuctionTimer
