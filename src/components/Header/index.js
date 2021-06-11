@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
 import Header, { HeaderWrapper, HeaderItem, Logo } from './Header.styled';
 import { NavLink } from 'react-router-dom';
-
-import Switch from '../Switch';
-import { CtaButton } from '../Atoms/';
+import { CtaButton, Switch } from '../Atoms/';
 
 import logo from '../../assets/logo.png';
 import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';
@@ -36,7 +34,7 @@ export default () => {
                                 onClick={() => resetParams()}
                             >
                                 Current Auctions
-                        </NavLink>
+                            </NavLink>
                         </HeaderItem>
 
                         <HeaderItem>
@@ -48,7 +46,7 @@ export default () => {
                                 onClick={() => resetParams()}
                             >
                                 Bazaar History
-                        </NavLink>
+                            </NavLink>
                         </HeaderItem>
 
                         <HeaderItem>
@@ -60,7 +58,7 @@ export default () => {
                                 onClick={() => resetParams()}
                             >
                                 Statistics
-                        </NavLink>
+                            </NavLink>
                         </HeaderItem>
                     </ul>
                 </nav>

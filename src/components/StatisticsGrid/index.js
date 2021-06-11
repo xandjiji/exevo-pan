@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
-import Chip from '../Atoms/Chip';
+import { Chip } from '../Atoms';
 import Chart from '../Chart';
 import PercentageCard from '../PercentageCard';
 import PieChart from '../PieChart';

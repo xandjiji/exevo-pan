@@ -4,7 +4,7 @@ import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 import DialogBox from '../DialogBox';
 import RadioInput from '../RadioInput';
-import Switch from '../Switch';
+import { Switch } from '../Atoms';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';

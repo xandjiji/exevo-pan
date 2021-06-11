@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Wrapper, DataItemWrapper, DataItem, Title, TCValue, PercentageValue, ChipWrapper, ChartWrapper } from './Chart.styled';
 import { Line } from 'react-chartjs-2';
-import Chip from '../Atoms/Chip';
+import { Chip } from '../Atoms';
 
 import { ReactComponent as TrendingIcon } from '../../assets/svgs/trending.svg';
 

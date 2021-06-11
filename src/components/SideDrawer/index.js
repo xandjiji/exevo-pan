@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext, useCallback, useMemo } from 're
 import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
-import Chip from '../Atoms/Chip';
+import { Chip } from '../Atoms';
 import AutocompleteInput from '../AutocompleteInput';
 import RangeSlider from '../RangeSlider';
 import DrawerFooter from '../DrawerFooter';
