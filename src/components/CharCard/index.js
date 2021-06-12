@@ -4,8 +4,7 @@ import CharCard from './CharCard.styled';
 
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
-import { AuctionTimer, Chip } from '../Atoms';
-import SkillBar from '../SkillBar';
+import { AuctionTimer, Chip, SkillBar } from '../Atoms';
 import FavButton from '../FavButton';
 import InformationBadge from '../InformationBadge';
 
@@ -172,7 +171,7 @@ export default ({ charData }) => {
                             <SkillBar
                                 key={skillItem}
                                 skillName={skillItem}
-                                skill={skills[skillItem]}
+                                skillValue={skills[skillItem]}
                                 highlight={skillItem === highlightedSkill}
                             />
                         )
