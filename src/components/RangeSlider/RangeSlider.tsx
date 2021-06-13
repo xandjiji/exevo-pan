@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import useDrag from './useDrag'
 import { RangeSliderProps } from './types'
 import * as S from './styles'
 
@@ -10,8 +11,6 @@ const RangeSlider = ({
   ...props
 }: RangeSliderProps): JSX.Element => {
   const [value, setValue] = useState(initialValue ?? min)
-  console.log(value)
-
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     /* @ToDo: prevent the user from typing NaN with regex*/
 
@@ -21,10 +20,12 @@ const RangeSlider = ({
     setValue(parseInt(event.target.value, 10))
   }
 
+  const { binders, isMousePressed, positionX } = useDrag()
+
   return (
     <S.Wrapper>
-      <S.Track>
-        <S.Cursor />
+      <S.Track {...binders} className={isMousePressed ? `active` : ``}>
+        <S.Cursor style={{ left: `${positionX}px` }} />
       </S.Track>
       <S.Input
         type="number"

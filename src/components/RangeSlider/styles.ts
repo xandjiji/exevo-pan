@@ -2,11 +2,22 @@ import styled from 'styled-components'
 
 export const Track = styled.div`
   position: relative;
+  margin: 0 8px;
   width: 160px;
   height: 4px;
   background: var(--primaryVariant);
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
   cursor: pointer;
+
+  &.active::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: 99;
+  }
 `
 
 export const Cursor = styled.div`
@@ -20,6 +31,7 @@ export const Cursor = styled.div`
   border-radius: 50%;
   background: var(--primary);
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
+  pointer-events: none;
 `
 
 export const Input = styled.input`
