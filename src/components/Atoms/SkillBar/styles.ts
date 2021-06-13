@@ -4,7 +4,6 @@ import { WrapperProps, InfoProps } from './types'
 
 export const Value = styled.div`
   padding: 3px;
-  margin-right: 6px;
   flex: none;
   width: 32px;
   border-radius: 5px;
@@ -34,7 +33,6 @@ export const Info = styled.div<InfoProps>`
 
 export const ProgressBar = styled.div`
   position: relative;
-  margin-top: 1px;
   height: 4px;
   background-color: var(--primaryVariant);
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
@@ -52,7 +50,12 @@ export const Wrapper = styled.div<WrapperProps>`
   align-items: center;
 
   ${Value} {
+    margin-right: 6px;
     ${({ highlight }) => highlight && 'background-color: var(--green);'}
+  }
+
+  ${ProgressBar} {
+    margin-top: 1px;
   }
 
   ${BarFill} {
