@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import useDrag from './useDrag'
 import { RangeSliderProps } from './types'
 import * as S from './styles'
@@ -11,21 +11,29 @@ const RangeSlider = ({
   ...props
 }: RangeSliderProps): JSX.Element => {
   const [value, setValue] = useState(initialValue ?? min)
+
+  const { binders, isMousePressed, percentagePosition, setPercentagePosition } =
+    useDrag(value / max)
+
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     /* @ToDo: prevent the user from typing NaN with regex*/
 
     onChange?.(event)
     /* @ToDo: granularity of increments */
     /* @ToDo: if NaN -> set to Min */
-    setValue(parseInt(event.target.value, 10))
+    const newValue: number = parseInt(event.target.value, 10)
+    setValue(newValue)
+    setPercentagePosition(newValue / max)
   }
 
-  const { binders, isMousePressed, percentagePosition } = useDrag()
+  useEffect(() => {
+    setValue(Math.round(max * percentagePosition))
+  }, [max, percentagePosition])
 
   return (
     <S.Wrapper>
-      <S.Track {...binders} className={isMousePressed ? `active` : ``}>
-        <S.Cursor style={{ left: `${percentagePosition}%` }} />
+      <S.Track {...binders} active={isMousePressed}>
+        <S.Cursor style={{ left: `${percentagePosition * 100}%` }} />
       </S.Track>
       <S.Input
         type="number"

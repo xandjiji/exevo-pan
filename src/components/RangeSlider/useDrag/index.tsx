@@ -2,10 +2,12 @@ import { useState } from 'react'
 import { stopBubbling, getPercentagePosition } from './utils'
 import { MouseTouchEvent, DragObject } from './types'
 
-const useDrag = (): DragObject => {
+const useDrag = (currentPercentageValue: number): DragObject => {
   const [isMousePressed, setMousePressed] = useState<boolean>(false)
   /* @ToDo: initial position */
-  const [percentagePosition, setpercentagePosition] = useState<number>(0)
+  const [percentagePosition, setPercentagePosition] = useState<number>(
+    currentPercentageValue,
+  )
 
   const dragStart = (event: MouseTouchEvent) => {
     /* @ToDo: prevent from firing event */
@@ -13,13 +15,13 @@ const useDrag = (): DragObject => {
 
     stopBubbling(event)
     setMousePressed(true)
-    setpercentagePosition(getPercentagePosition(event))
+    setPercentagePosition(getPercentagePosition(event))
   }
 
   const dragging = (event: MouseTouchEvent) => {
     stopBubbling(event)
     if (isMousePressed) {
-      setpercentagePosition(getPercentagePosition(event))
+      setPercentagePosition(getPercentagePosition(event))
     }
   }
 
@@ -42,6 +44,7 @@ const useDrag = (): DragObject => {
     },
     isMousePressed,
     percentagePosition,
+    setPercentagePosition,
   }
 }
 

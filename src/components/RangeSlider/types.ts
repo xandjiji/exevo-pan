@@ -7,3 +7,7 @@ export interface RangeSliderProps {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   props?: HTMLAttributes<HTMLInputElement>
 }
+
+export interface TrackStyleProps {
+  active?: boolean
+}

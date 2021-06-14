@@ -1,6 +1,7 @@
 import styled from 'styled-components'
+import { TrackStyleProps } from './types'
 
-export const Track = styled.div`
+export const Track = styled.div<TrackStyleProps>`
   position: relative;
   margin: 0 8px;
   width: 160px;
@@ -9,7 +10,7 @@ export const Track = styled.div`
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
   cursor: pointer;
 
-  &.active::after {
+  &::after {
     content: '';
     position: fixed;
     top: 0;
@@ -17,6 +18,7 @@ export const Track = styled.div`
     width: 100vw;
     height: 100vh;
     z-index: 99;
+    pointer-events: ${({ active }) => (active ? 'unset' : 'none')};
   }
 
   &::before {

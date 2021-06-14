@@ -19,6 +19,6 @@ export const getPercentagePosition = (event: MouseTouchEvent): number => {
 
   /* @ToDo: better logic here */
   if (newPositionX < 0) return 0
-  if (newPositionX > width) return 100
-  return (newPositionX / width) * 100
+  if (newPositionX > width) return 1
+  return newPositionX / width
 }
