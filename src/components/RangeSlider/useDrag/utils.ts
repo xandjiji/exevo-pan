@@ -9,7 +9,7 @@ const getNativeEvent = (event: MouseTouchEvent) =>
     ? event.nativeEvent
     : event.nativeEvent.changedTouches[0]
 
-export const getPositionX = (event: MouseTouchEvent): number => {
+export const getPercentagePosition = (event: MouseTouchEvent): number => {
   const nativeEvent = getNativeEvent(event)
 
   const target = nativeEvent.target as HTMLDivElement
@@ -19,6 +19,6 @@ export const getPositionX = (event: MouseTouchEvent): number => {
 
   /* @ToDo: better logic here */
   if (newPositionX < 0) return 0
-  if (newPositionX > width) return width
-  return newPositionX
+  if (newPositionX > width) return 100
+  return (newPositionX / width) * 100
 }

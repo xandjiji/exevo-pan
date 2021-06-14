@@ -20,12 +20,12 @@ const RangeSlider = ({
     setValue(parseInt(event.target.value, 10))
   }
 
-  const { binders, isMousePressed, positionX } = useDrag()
+  const { binders, isMousePressed, percentagePosition } = useDrag()
 
   return (
     <S.Wrapper>
       <S.Track {...binders} className={isMousePressed ? `active` : ``}>
-        <S.Cursor style={{ left: `${positionX}px` }} />
+        <S.Cursor style={{ left: `${percentagePosition}%` }} />
       </S.Track>
       <S.Input
         type="number"

@@ -14,5 +14,5 @@ export interface DragObject {
     onTouchEnd: MouseOrTouchHandler
   }
   isMousePressed: boolean
-  positionX: number
+  percentagePosition: number
 }
