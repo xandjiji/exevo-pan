@@ -18,6 +18,17 @@ export const Track = styled.div`
     height: 100vh;
     z-index: 99;
   }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% + 32px);
+    height: calc(100% + 32px);
+    transform: translate(-50%, -50%);
+    z-index: 99;
+  }
 `
 
 export const Cursor = styled.div`
