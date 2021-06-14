@@ -15,5 +15,5 @@ export interface DragObject {
   }
   isMousePressed: boolean
   percentagePosition: number
-  setPercentagePosition: (value: React.SetStateAction<number>) => void
+  setPercentagePosition: (value: number) => void
 }

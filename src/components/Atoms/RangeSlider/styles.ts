@@ -47,7 +47,7 @@ export const Cursor = styled.div`
   pointer-events: none;
 `
 
-export const Input = styled.input`
+export const SliderInput = styled.input`
   padding: 7px 0;
   width: 40px;
   border-radius: 8px;
@@ -72,7 +72,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
 
-  ${Input} {
+  ${SliderInput} {
     margin: 0 0 0 6px;
   }
 `

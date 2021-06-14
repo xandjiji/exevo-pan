@@ -11,8 +11,13 @@ const RangeSlider = ({
   onChange,
   ...props
 }: RangeSliderProps): JSX.Element => {
+  const normalizePercentage = (value: number) => {
+    return (value - min) / (max - min)
+  }
+
   const inputRef = useRef<HTMLInputElement | null>(null)
   const [value, setValue] = useState(initialValue ?? min)
+  const [sliderInputValue, setSliderInputValue] = useState(initialValue ?? min)
 
   const dispatchSyntheticEvent = useMemo(
     () =>
@@ -24,21 +29,36 @@ const RangeSlider = ({
   )
 
   const { binders, isMousePressed, percentagePosition, setPercentagePosition } =
-    useDrag(value / max)
+    useDrag(normalizePercentage(initialValue ?? min))
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.replace(/\D/g, '')
 
     /* @ToDo: granularity of increments */
-    /* @ToDo: if NaN -> set to Min */
-    const newValue: number = parseInt(inputValue, 10)
-    setValue(newValue)
-    setPercentagePosition(newValue / max)
+    const newValue = parseInt(inputValue, 10)
+    if (Number.isNaN(newValue)) {
+      setValue(min)
+      setSliderInputValue(min)
+      setPercentagePosition(0)
+    } else if (newValue < min) {
+      setSliderInputValue(newValue)
+    } else if (newValue > max) {
+      setValue(max)
+      setSliderInputValue(max)
+      setPercentagePosition(1)
+    } else {
+      setValue(newValue)
+      setSliderInputValue(newValue)
+      setPercentagePosition(normalizePercentage(newValue))
+    }
   }
 
   useEffect(() => {
-    setValue(Math.round(max * percentagePosition))
-  }, [max, percentagePosition])
+    const range = max - min
+    const newValue = Math.round(range * percentagePosition + min)
+    setValue(newValue)
+    setSliderInputValue(newValue)
+  }, [max, min, percentagePosition])
 
   useEffect(() => {
     dispatchSyntheticEvent()
@@ -49,11 +69,11 @@ const RangeSlider = ({
       <S.Track {...binders} active={isMousePressed}>
         <S.Cursor style={{ left: `${percentagePosition * 100}%` }} />
       </S.Track>
-      <S.Input
+      <S.SliderInput
         type="number"
         min={min}
         max={max}
-        value={value}
+        value={sliderInputValue}
         onChange={handleInputChange}
       />
       <input

@@ -21,3 +21,9 @@ export const getPercentagePosition = (event: MouseTouchEvent): number => {
   if (newPositionX > width) return 1
   return newPositionX / width
 }
+
+export const boundPercentage = (value: number): number => {
+  if (value < 0 || Number.isNaN(value)) return 0
+  if (value > 100) return 1
+  return value
+}
