@@ -68,6 +68,7 @@ const RangeSlider = ({
     <S.Wrapper>
       <S.Track {...binders} active={isMousePressed}>
         <S.Cursor style={{ left: `${percentagePosition * 100}%` }} />
+        <S.TrackFill style={{ width: `${percentagePosition * 100}%` }} />
       </S.Track>
       <S.SliderInput
         type="number"

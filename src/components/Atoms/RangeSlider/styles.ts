@@ -33,6 +33,15 @@ export const Track = styled.div<TrackStyleProps>`
   }
 `
 
+export const TrackFill = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background-color: var(--primary);
+  pointer-events: none;
+`
+
 export const Cursor = styled.div`
   position: absolute;
   top: 50%;
