@@ -27,10 +27,11 @@ const RangeSlider = ({
     useDrag(value / max)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    /* @ToDo: prevent the user from typing NaN with regex*/
+    const inputValue = event.target.value.replace(/\D/g, '')
+
     /* @ToDo: granularity of increments */
     /* @ToDo: if NaN -> set to Min */
-    const newValue: number = parseInt(event.target.value, 10)
+    const newValue: number = parseInt(inputValue, 10)
     setValue(newValue)
     setPercentagePosition(newValue / max)
   }

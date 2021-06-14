@@ -17,7 +17,6 @@ export const getPercentagePosition = (event: MouseTouchEvent): number => {
   const { left, width } = target.getBoundingClientRect()
   const newPositionX = nativeEvent.clientX - left
 
-  /* @ToDo: better logic here */
   if (newPositionX < 0) return 0
   if (newPositionX > width) return 1
   return newPositionX / width
