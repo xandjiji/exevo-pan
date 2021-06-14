@@ -4,7 +4,6 @@ import { MouseTouchEvent, DragObject } from './types'
 
 const useDrag = (currentPercentageValue: number): DragObject => {
   const [isMousePressed, setMousePressed] = useState<boolean>(false)
-  /* @ToDo: initial position */
   const [percentagePosition, setPercentagePosition] = useState<number>(
     currentPercentageValue,
   )
