@@ -17,6 +17,7 @@ export const Cursor = styled.div<CursorStyleProps>`
   position: absolute;
   top: 50%;
   left: 0;
+  z-index: 1;
 
   width: 16px;
   height: 16px;
@@ -34,6 +35,14 @@ export const Cursor = styled.div<CursorStyleProps>`
     z-index: 99;
     pointer-events: ${({ active }) => (active ? 'unset' : 'none')};
   }
+`
+
+export const TrackFill = styled.div`
+  position: absolute;
+  top: 0;
+  height: 100%;
+  background-color: var(--primary);
+  opacity: 0.7;
 `
 
 export const ValueDisplay = styled.span`
