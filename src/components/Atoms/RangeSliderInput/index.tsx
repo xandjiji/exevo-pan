@@ -1,17 +1,17 @@
 /* eslint-disable max-lines-per-function */
 import { useState, useEffect } from 'react'
 import useDrag from './useDrag'
-import { RangeSliderProps } from './types'
+import { RangeSliderInputProps } from './types'
 import * as S from './styles'
 
-const RangeSlider = ({
+const RangeSliderInput = ({
   min,
   max,
   initialMin = min,
   initialMax = max,
   onChange,
   ...props
-}: RangeSliderProps): JSX.Element => {
+}: RangeSliderInputProps): JSX.Element => {
   const normalizePercentage = (value: number): number =>
     (value - min) / (max - min)
 
@@ -56,4 +56,4 @@ const RangeSlider = ({
   )
 }
 
-export default RangeSlider
+export default RangeSliderInput

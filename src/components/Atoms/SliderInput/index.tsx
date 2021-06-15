@@ -1,16 +1,16 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react'
 import { debounce } from 'lodash'
 import useDrag from './useDrag'
-import { RangeSliderProps } from './types'
+import { SliderInputProps } from './types'
 import * as S from './styles'
 
-const RangeSlider = ({
+const SliderInput = ({
   min,
   max,
   initialValue,
   onChange,
   ...props
-}: RangeSliderProps): JSX.Element => {
+}: SliderInputProps): JSX.Element => {
   const normalizePercentage = (value: number) => {
     return (value - min) / (max - min)
   }
@@ -90,4 +90,4 @@ const RangeSlider = ({
   )
 }
 
-export default RangeSlider
+export default SliderInput

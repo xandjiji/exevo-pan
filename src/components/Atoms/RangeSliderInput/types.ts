@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react'
 
-export interface RangeSliderProps {
+export interface RangeSliderInputProps {
   min: number
   max: number
   initialMin?: number
