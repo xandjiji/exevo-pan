@@ -14,7 +14,7 @@ const RangeSliderInput = ({
   ...props
 }: RangeSliderInputProps): JSX.Element => {
   const normalize = useCallback(
-    (value: number): number => (value - min) / (max - min),
+    (value: number): number => Math.max(0, value - min) / (max - min),
     [min, max],
   )
 
