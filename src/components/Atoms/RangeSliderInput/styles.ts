@@ -45,10 +45,9 @@ export const TrackFill = styled.div`
   opacity: 0.7;
 `
 
-export const ValueDisplay = styled.span`
+export const SliderInput = styled.input`
   padding: 7px 0;
-  /* @ToDo: remove !important after SideDrawer refactor */
-  width: 40px !important;
+  width: 40px;
   border-radius: 8px;
   border: none;
   outline: none;
@@ -71,7 +70,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
 
-  ${ValueDisplay} {
+  ${SliderInput} {
     margin: 0 0 0 6px;
   }
 `
