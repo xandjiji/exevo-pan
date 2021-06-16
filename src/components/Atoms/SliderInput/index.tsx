@@ -36,11 +36,10 @@ const SliderInput = ({
 
     /* @ToDo: granularity of increments */
     const newValue = parseInt(inputValue, 10)
-    if (Number.isNaN(newValue)) {
-      setValue(min)
-      setSliderInputValue(min)
-      setPercentagePosition(0)
-    } else if (newValue < min) {
+    if (Number.isNaN(newValue)) return
+
+    if (newValue < min) {
+      /* @ToDo: invalidate */
       setSliderInputValue(newValue)
     } else if (newValue > max) {
       setValue(max)
