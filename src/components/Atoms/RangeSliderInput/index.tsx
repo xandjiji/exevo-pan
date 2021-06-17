@@ -36,11 +36,6 @@ const RangeSliderInput = ({
   const cursorA = useDrag()
   const cursorB = useDrag()
 
-  useEffect(() => {
-    cursorB.setPosition(prev => ({ ...prev, x: trackWidth }))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cursorB.setPosition, trackWidth])
-
   const cursorAPosition = boundValue(cursorA.position.x)
   const cursorBPosition = boundValue(cursorB.position.x)
 
@@ -58,6 +53,11 @@ const RangeSliderInput = ({
   useEffect(() => {
     onChange?.([currentMin, currentMax])
   }, [currentMin, currentMax, onChange])
+
+  useEffect(() => {
+    cursorB.setPosition(prev => ({ ...prev, x: trackWidth }))
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [cursorB.setPosition, trackWidth])
 
   return (
     <S.Wrapper {...props}>
