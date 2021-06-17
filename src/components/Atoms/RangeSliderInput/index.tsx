@@ -1,7 +1,6 @@
 /* eslint-disable max-lines-per-function */
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import useDrag from './useDrag'
-import { toPercentString } from './utils'
 import { RangeSliderInputProps } from './types'
 import * as S from './styles'
 
@@ -13,40 +12,43 @@ const RangeSliderInput = ({
   onChange,
   ...props
 }: RangeSliderInputProps): JSX.Element => {
-  const normalize = useCallback(
-    (value: number): number => Math.max(0, value - min) / (max - min),
-    [min, max],
+  const trackRef = useRef<HTMLDivElement>(null)
+  const trackWidth: number = trackRef.current?.offsetWidth ?? 1
+
+  const positionToValue = useCallback(
+    (position: number): number => {
+      return Math.round((max - min) * (position / trackWidth) + min)
+    },
+    [min, max, trackWidth],
   )
 
-  const percentageToValue = useCallback(
-    (percentage: number): number => Math.round((max - min) * percentage + min),
-    [min, max],
-  )
+  const boundValue = (value: number): number => {
+    if (value > trackWidth) return trackWidth
+    if (value < 0) return 0
+    return value
+  }
+
+  const cursorA = useDrag()
+  const cursorB = useDrag()
+
+  const cursorAPosition = boundValue(cursorA.position.x)
+  const cursorBPosition = boundValue(cursorB.position.x)
+
+  const valueToTrackPercentage = (value: number): string =>
+    `${(value / trackWidth) * 100}%`
 
   const [[currentMin, currentMax], setValues] = useState<number[]>([
     initialMin,
     initialMax,
   ])
 
-  const cursorA = useDrag(normalize(initialMin))
-  const cursorB = useDrag(normalize(initialMax))
-
   useEffect(() => {
-    const cursorsValues = [
-      cursorA.percentagePosition,
-      cursorB.percentagePosition,
-    ]
-      .map(percentageToValue)
+    const cursorsValues = [cursorAPosition, cursorBPosition]
+      .map(positionToValue)
       .sort((a, b) => a - b)
 
     setValues(cursorsValues)
-  }, [
-    max,
-    min,
-    percentageToValue,
-    cursorA.percentagePosition,
-    cursorB.percentagePosition,
-  ])
+  }, [max, min, positionToValue, cursorAPosition, cursorBPosition])
 
   useEffect(() => {
     onChange?.([currentMin, currentMax])
@@ -55,21 +57,21 @@ const RangeSliderInput = ({
   return (
     <S.Wrapper {...props}>
       <S.ValueDisplay>{currentMin}</S.ValueDisplay>
-      <S.Track>
+      <S.Track ref={trackRef}>
         <S.Cursor
-          style={{ left: toPercentString(cursorA.percentagePosition) }}
+          style={{ left: valueToTrackPercentage(cursorAPosition) }}
           active={cursorA.isMousePressed}
           {...cursorA.binders}
         />
         <S.Cursor
-          style={{ left: toPercentString(cursorB.percentagePosition) }}
+          style={{ left: valueToTrackPercentage(cursorBPosition) }}
           active={cursorB.isMousePressed}
           {...cursorB.binders}
         />
         <S.TrackFill
           style={{
-            left: toPercentString(normalize(currentMin)),
-            width: toPercentString(normalize(currentMax - currentMin)),
+            left: `${Math.min(cursorAPosition, cursorBPosition)}px`,
+            width: `${Math.abs(cursorAPosition - cursorBPosition)}px`,
           }}
         />
       </S.Track>

@@ -4,6 +4,11 @@ export type MouseTouchEvent =
 
 type MouseOrTouchHandler = (event: MouseTouchEvent) => void
 
+export interface positionObject {
+  x: number
+  y: number
+}
+
 export interface DragObject {
   binders: {
     onMouseDown: MouseOrTouchHandler
@@ -14,6 +19,6 @@ export interface DragObject {
     onTouchEnd: MouseOrTouchHandler
   }
   isMousePressed: boolean
-  percentagePosition: number
-  setPercentagePosition: (value: number) => void
+  position: positionObject
+  setPosition: React.Dispatch<React.SetStateAction<positionObject>>
 }

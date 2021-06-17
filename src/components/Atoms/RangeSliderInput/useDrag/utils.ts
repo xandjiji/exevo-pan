@@ -1,4 +1,4 @@
-import { MouseTouchEvent } from './types'
+import { MouseTouchEvent, positionObject } from './types'
 
 export const stopBubbling = (event: MouseTouchEvent): void => {
   event.stopPropagation()
@@ -9,22 +9,16 @@ const getNativeEvent = (event: MouseTouchEvent) =>
     ? event.nativeEvent
     : event.nativeEvent.changedTouches[0]
 
-export const getPercentagePosition = (event: MouseTouchEvent): number => {
+export const getPosition = (event: MouseTouchEvent): positionObject => {
   const nativeEvent = getNativeEvent(event)
 
   const target = nativeEvent.target as HTMLDivElement
   const parentNode = target.parentNode as HTMLDivElement
 
-  const { left, width } = parentNode.getBoundingClientRect()
-  const newPositionX = nativeEvent.clientX - left
-
-  if (newPositionX < 0) return 0
-  if (newPositionX > width) return 1
-  return newPositionX / width
-}
-
-export const boundPercentage = (value: number): number => {
-  if (value < 0 || Number.isNaN(value)) return 0
-  if (value > 100) return 1
-  return value
+  const { left, top } = parentNode.getBoundingClientRect()
+  const { clientX, clientY } = nativeEvent
+  return {
+    x: clientX - left,
+    y: clientY - top,
+  }
 }
