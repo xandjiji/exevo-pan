@@ -12,6 +12,11 @@ const RangeSliderInput = ({
   onChange,
   ...props
 }: RangeSliderInputProps): JSX.Element => {
+  const [[currentMin, currentMax], setValues] = useState<number[]>([
+    initialMin,
+    initialMax,
+  ])
+
   const trackRef = useRef<HTMLDivElement>(null)
   const trackWidth: number = trackRef.current?.offsetWidth ?? 1
 
@@ -36,11 +41,6 @@ const RangeSliderInput = ({
 
   const valueToTrackPercentage = (value: number): string =>
     `${(value / trackWidth) * 100}%`
-
-  const [[currentMin, currentMax], setValues] = useState<number[]>([
-    initialMin,
-    initialMax,
-  ])
 
   useEffect(() => {
     const cursorsValues = [cursorAPosition, cursorBPosition]
