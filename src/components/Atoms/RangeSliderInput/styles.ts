@@ -1,30 +1,19 @@
-import styled from 'styled-components'
-import { CursorStyleProps } from './types'
+import styled, { css } from 'styled-components'
+import { ActiveStyleProps } from './types'
 
-export const Track = styled.div`
-  position: relative;
-  margin: 0 8px;
-  width: 160px;
-  height: 4px;
-  background: var(--primaryVariant);
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
-  cursor: pointer;
+const increaseClickableArea = css`
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+  }
 `
 
-export const Cursor = styled.div<CursorStyleProps>`
-  margin-top: -8px;
-  margin-left: -8px;
-  position: absolute;
-  top: 50%;
-  left: 0;
-  z-index: 1;
-
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--primary);
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
-
+const fullWindowClickableArea = css`
   &::after {
     content: '';
     position: fixed;
@@ -33,8 +22,36 @@ export const Cursor = styled.div<CursorStyleProps>`
     width: 100vw;
     height: 100vh;
     z-index: 99;
-    pointer-events: ${({ active }) => (active ? 'unset' : 'none')};
   }
+`
+
+export const Track = styled.div<ActiveStyleProps>`
+  position: relative;
+  width: 160px;
+  height: 4px;
+  background: var(--primaryVariant);
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
+  cursor: pointer;
+
+  ${increaseClickableArea}
+  ${({ active }) => active && fullWindowClickableArea};
+`
+
+export const Cursor = styled.div<ActiveStyleProps>`
+  margin-top: -8px;
+  margin-left: -8px;
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: ${({ active }) => (active ? '2' : '1')};
+
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--primary);
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
+
+  ${({ active }) => active && fullWindowClickableArea};
 `
 
 export const TrackFill = styled.div`
@@ -72,6 +89,11 @@ export const Wrapper = styled.div`
   align-items: center;
 
   ${ValueDisplay} {
-    margin: 0 0 0 6px;
+    &:first-child {
+      margin: 0 12px 0 0;
+    }
+    &:last-child {
+      margin: 0 0 0 12px;
+    }
   }
 `

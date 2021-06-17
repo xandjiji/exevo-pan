@@ -9,6 +9,6 @@ export interface RangeSliderInputProps {
   props?: HTMLAttributes<HTMLInputElement>
 }
 
-export interface CursorStyleProps {
+export interface ActiveStyleProps {
   active?: boolean
 }

@@ -16,6 +16,8 @@ const RangeSliderInput = ({
     initialMax,
   ])
 
+  const [currentCursor, setCurrentCursor] = useState<string | null>(null)
+
   const trackRef = useRef<HTMLDivElement>(null)
   const trackWidth: number = trackRef.current?.offsetWidth ?? 1
 
@@ -34,6 +36,7 @@ const RangeSliderInput = ({
 
   const cursorA = useDrag()
   const cursorB = useDrag()
+  const track = useDrag()
 
   const cursorAPosition = boundValue(cursorA.position.x)
   const cursorBPosition = boundValue(cursorB.position.x)
@@ -50,6 +53,34 @@ const RangeSliderInput = ({
   }, [max, min, positionToValue, cursorAPosition, cursorBPosition])
 
   useEffect(() => {
+    if (track.isMousePressed) {
+      const x = track.position.x
+      if (currentCursor) {
+        if (currentCursor === 'A') {
+          cursorA.setPosition(prev => ({ ...prev, x }))
+        } else {
+          cursorB.setPosition(prev => ({ ...prev, x }))
+        }
+      } else if (
+        Math.abs(x - cursorA.position.x) <= Math.abs(x - cursorB.position.x)
+      ) {
+        setCurrentCursor('A')
+      } else {
+        setCurrentCursor('B')
+      }
+    } else {
+      setCurrentCursor(null)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    track.position.x,
+    track.isMousePressed,
+    cursorA.position.x,
+    cursorB.position.x,
+    currentCursor,
+  ])
+
+  useEffect(() => {
     onChange?.([currentMin, currentMax])
   }, [currentMin, currentMax, onChange])
 
@@ -61,24 +92,30 @@ const RangeSliderInput = ({
   return (
     <S.Wrapper {...props}>
       <S.ValueDisplay>{currentMin}</S.ValueDisplay>
-      <S.Track ref={trackRef}>
-        <S.Cursor
-          style={{ left: valueToTrackPercentage(cursorAPosition) }}
-          active={cursorA.isMousePressed}
-          {...cursorA.binders}
-        />
-        <S.Cursor
-          style={{ left: valueToTrackPercentage(cursorBPosition) }}
-          active={cursorB.isMousePressed}
-          {...cursorB.binders}
-        />
-        <S.TrackFill
-          style={{
-            left: `${Math.min(cursorAPosition, cursorBPosition)}px`,
-            width: `${Math.abs(cursorAPosition - cursorBPosition)}px`,
-          }}
-        />
-      </S.Track>
+      <div>
+        <S.Track
+          ref={trackRef}
+          active={track.isMousePressed}
+          {...track.binders}
+        >
+          <S.Cursor
+            active={cursorA.isMousePressed}
+            style={{ left: valueToTrackPercentage(cursorAPosition) }}
+            {...cursorA.binders}
+          />
+          <S.Cursor
+            active={cursorB.isMousePressed}
+            style={{ left: valueToTrackPercentage(cursorBPosition) }}
+            {...cursorB.binders}
+          />
+          <S.TrackFill
+            style={{
+              left: `${Math.min(cursorAPosition, cursorBPosition)}px`,
+              width: `${Math.abs(cursorAPosition - cursorBPosition)}px`,
+            }}
+          />
+        </S.Track>
+      </div>
       <S.ValueDisplay>{currentMax}</S.ValueDisplay>
     </S.Wrapper>
   )
