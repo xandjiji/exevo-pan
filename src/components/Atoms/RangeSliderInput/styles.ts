@@ -27,7 +27,7 @@ const fullWindowClickableArea = css`
 
 export const Track = styled.div<ActiveStyleProps>`
   position: relative;
-  width: 160px;
+  width: 100%;
   height: 4px;
   background: var(--primaryVariant);
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
@@ -66,6 +66,7 @@ export const ValueDisplay = styled.span`
   padding: 7px 0;
   /* @ToDo: remove !important after SideDrawer refactor */
   width: 40px !important;
+  flex-shrink: 0;
   border-radius: 8px;
   border: none;
   outline: none;
@@ -87,6 +88,7 @@ export const ValueDisplay = styled.span`
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 270px;
 
   ${ValueDisplay} {
     &:first-child {

@@ -117,7 +117,7 @@ const RangeSliderInput = ({
   return (
     <S.Wrapper {...props}>
       <S.ValueDisplay>{currentMin}</S.ValueDisplay>
-      <div>
+      <div style={{ width: '100%' }}>
         <S.Track
           ref={trackRef}
           active={track.isMousePressed}
