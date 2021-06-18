@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 import React, { useState, useEffect, useCallback, useRef } from 'react'
 import useDrag, { DragObject } from '../../../hooks/useDrag'
 import { RangeSliderInputProps } from './types'

@@ -1,74 +1,75 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react'
-import { debounce } from 'lodash'
-import useDrag from './useDrag'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
+import useDrag from '../../../hooks/useDrag'
 import { SliderInputProps } from './types'
 import * as S from './styles'
 
 const SliderInput = ({
   min,
   max,
-  initialValue,
+  initialValue = min,
   onChange,
   ...props
 }: SliderInputProps): JSX.Element => {
-  const normalizePercentage = (value: number) => {
-    return (value - min) / (max - min)
-  }
+  const [value, setValue] = useState<number>(initialValue)
+  const [sliderInputValue, setSliderInputValue] = useState<number>(initialValue)
+  const [isValid, setIsValid] = useState<boolean>(true)
+  console.log(isValid)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
-  const [value, setValue] = useState(initialValue ?? min)
-  const [sliderInputValue, setSliderInputValue] = useState(initialValue ?? min)
+  const trackRef = useRef<HTMLDivElement>(null)
+  const trackWidth: number = trackRef.current?.offsetWidth ?? 1
 
-  const dispatchSyntheticEvent = useMemo(
-    () =>
-      debounce(() => {
-        const event = new Event('input', { bubbles: true })
-        inputRef.current?.dispatchEvent(event)
-      }, 250),
-    [],
+  const positionToValue = useCallback(
+    (position: number): number => {
+      return Math.round((max - min) * (position / trackWidth) + min)
+    },
+    [min, max, trackWidth],
   )
 
-  const { binders, isMousePressed, percentagePosition, setPercentagePosition } =
-    useDrag(normalizePercentage(initialValue ?? min))
+  const boundValue = (bounded: number): number =>
+    bounded < 0 ? 0 : bounded > trackWidth ? trackWidth : bounded
+
+  const valueToTrackPercentage = (currentValue: number): string =>
+    `${(currentValue / max) * 100}%`
+
+  const { binders, isMousePressed, position } = useDrag()
+
+  const cursorPosition = boundValue(position.x)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.replace(/\D/g, '')
-
-    /* @ToDo: granularity of increments */
     const newValue = parseInt(inputValue, 10)
     if (Number.isNaN(newValue)) return
 
     if (newValue < min) {
-      /* @ToDo: invalidate */
+      setIsValid(false)
       setSliderInputValue(newValue)
-    } else if (newValue > max) {
-      setValue(max)
-      setSliderInputValue(max)
-      setPercentagePosition(1)
     } else {
-      setValue(newValue)
-      setSliderInputValue(newValue)
-      setPercentagePosition(normalizePercentage(newValue))
+      const boundedValue = newValue > max ? max : newValue
+      setValue(boundedValue)
+      setIsValid(true)
     }
   }
 
   useEffect(() => {
-    const range = max - min
-    const newValue = Math.round(range * percentagePosition + min)
+    const newValue = positionToValue(cursorPosition)
     setValue(newValue)
-    setSliderInputValue(newValue)
-  }, [max, min, percentagePosition])
+  }, [positionToValue, cursorPosition])
 
   useEffect(() => {
-    dispatchSyntheticEvent()
-  }, [value, dispatchSyntheticEvent])
+    setSliderInputValue(value)
+    const event = new Event('input', { bubbles: true })
+    inputRef.current?.dispatchEvent(event)
+  }, [value])
 
   return (
     <S.Wrapper>
-      <S.Track {...binders} active={isMousePressed}>
-        <S.Cursor style={{ left: `${percentagePosition * 100}%` }} />
-        <S.TrackFill style={{ width: `${percentagePosition * 100}%` }} />
-      </S.Track>
+      <div style={{ width: '100%' }}>
+        <S.Track ref={trackRef} active={isMousePressed} {...binders}>
+          <S.Cursor style={{ left: valueToTrackPercentage(value) }} />
+          <S.TrackFill style={{ width: valueToTrackPercentage(value) }} />
+        </S.Track>
+      </div>
       <S.SliderInput
         type="number"
         min={min}

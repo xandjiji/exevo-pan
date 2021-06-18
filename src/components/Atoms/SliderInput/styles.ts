@@ -1,15 +1,19 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { TrackStyleProps } from './types'
 
-export const Track = styled.div<TrackStyleProps>`
-  position: relative;
-  margin: 0 8px;
-  width: 160px;
-  height: 4px;
-  background: var(--primaryVariant);
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
-  cursor: pointer;
+const increaseClickableArea = css`
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: calc(100% + 30px);
+    height: calc(100% + 30px);
+  }
+`
 
+const fullWindowClickableArea = css`
   &::after {
     content: '';
     position: fixed;
@@ -18,19 +22,19 @@ export const Track = styled.div<TrackStyleProps>`
     width: 100vw;
     height: 100vh;
     z-index: 99;
-    pointer-events: ${({ active }) => (active ? 'unset' : 'none')};
   }
+`
 
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: calc(100% + 32px);
-    height: calc(100% + 32px);
-    transform: translate(-50%, -50%);
-    z-index: 99;
-  }
+export const Track = styled.div<TrackStyleProps>`
+  position: relative;
+  width: 100%;
+  height: 4px;
+  background: var(--primaryVariant);
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
+  cursor: pointer;
+
+  ${increaseClickableArea}
+  ${({ active }) => active && fullWindowClickableArea};
 `
 
 export const TrackFill = styled.div`
@@ -43,10 +47,11 @@ export const TrackFill = styled.div`
 `
 
 export const Cursor = styled.div`
+  margin-top: -8px;
+  margin-left: -8px;
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(-50%, -50%);
 
   width: 16px;
   height: 16px;
@@ -59,6 +64,7 @@ export const Cursor = styled.div`
 export const SliderInput = styled.input`
   padding: 7px 0;
   width: 40px;
+  flex-shrink: 0;
   border-radius: 8px;
   border: none;
   outline: none;
@@ -80,8 +86,9 @@ export const SliderInput = styled.input`
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
+  width: 220px;
 
   ${SliderInput} {
-    margin: 0 0 0 6px;
+    margin: 0 0 0 12px;
   }
 `
