@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Shadow } from '../../../styles'
+import { Shadow } from 'styles'
 import { WrapperProps, InfoProps } from './types'
 
 export const Value = styled.div`

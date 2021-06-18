@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Clickable, Shadow } from '../../../styles'
+import { Clickable, Shadow } from 'styles'
 
 export const Button = styled.a`
   ${Clickable}

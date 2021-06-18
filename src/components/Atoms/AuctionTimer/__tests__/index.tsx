@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithRouter } from '../../../../utils/test'
+import { renderWithRouter } from 'utils/test'
 import AuctionTimer from '..'
 import {
   MILLISECONDS_IN_A_DAY,

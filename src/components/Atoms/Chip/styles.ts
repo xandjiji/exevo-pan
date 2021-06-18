@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Shadow, Clickable } from '../../../styles'
+import { Shadow, Clickable } from 'styles'
 import { ChipStyleProps, styleObject } from './types'
 
 export const backgroundStyle = {

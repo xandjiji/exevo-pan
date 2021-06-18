@@ -1,4 +1,4 @@
-import coinsGif from '../../../assets/tibiaCoins.gif'
+import coinsGif from 'assets/tibiaCoins.gif'
 import { CtaProps } from './types'
 import * as S from './styles'
 
