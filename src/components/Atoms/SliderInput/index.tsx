@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
-import useDrag from '../../../hooks/useDrag'
+import useDrag from 'hooks/useDrag'
+import { clampValue } from 'utils'
 import { SliderInputProps } from './types'
 import * as S from './styles'
 
@@ -26,15 +27,12 @@ const SliderInput = ({
     [min, max, trackWidth],
   )
 
-  const boundValue = (bounded: number): number =>
-    bounded < 0 ? 0 : bounded > trackWidth ? trackWidth : bounded
-
   const valueToTrackPercentage = (currentValue: number): string =>
     `${(currentValue / max) * 100}%`
 
   const { binders, isMousePressed, position } = useDrag()
 
-  const cursorPosition = boundValue(position.x)
+  const cursorPosition = clampValue(position.x, [0, trackWidth])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.replace(/\D/g, '')

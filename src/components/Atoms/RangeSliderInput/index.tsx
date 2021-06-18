@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import useDrag, { DragObject } from '../../../hooks/useDrag'
+import { clampValue } from 'utils'
+import useDrag, { DragObject } from 'hooks/useDrag'
 import { RangeSliderInputProps } from './types'
 import * as S from './styles'
 
@@ -26,9 +27,6 @@ const RangeSliderInput = ({
     [min, max, trackWidth],
   )
 
-  const boundValue = (bounded: number): number =>
-    bounded < 0 ? 0 : bounded > trackWidth ? trackWidth : bounded
-
   const valueToTrackPercentage = (value: number): string =>
     `${(value / trackWidth) * 100}%`
 
@@ -40,8 +38,8 @@ const RangeSliderInput = ({
   const [currentTrackCursor, setCurrentTrackCursor] =
     useState<DragObject | null>(null)
 
-  const cursorAPosition = boundValue(cursorA.position.x)
-  const cursorBPosition = boundValue(cursorB.position.x)
+  const cursorAPosition = clampValue(cursorA.position.x, [0, trackWidth])
+  const cursorBPosition = clampValue(cursorB.position.x, [0, trackWidth])
 
   const cursorMin = cursorAPosition < cursorBPosition ? cursorA : cursorB
 
