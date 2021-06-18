@@ -101,8 +101,8 @@ const RangeSliderInput = ({
 
     const newValues =
       currentCursor.position.x === cursorMin.position.x
-        ? [action(currentMin), currentMax]
-        : [currentMin, action(currentMax)]
+        ? [clampValue(action(currentMin), [min, max]), currentMax]
+        : [currentMin, clampValue(action(currentMax), [min, max])]
 
     setValues(newValues.sort((a, b) => a - b))
   }

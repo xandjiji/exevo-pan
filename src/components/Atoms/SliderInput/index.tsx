@@ -60,7 +60,7 @@ const SliderInput = ({
     if (!action) return
 
     event.nativeEvent.preventDefault()
-    setValue(prev => action(prev))
+    setValue(prev => clampValue(action(prev), [min, max]))
   }
 
   useEffect(() => {
