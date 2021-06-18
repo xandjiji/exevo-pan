@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import { Smooth } from 'styles'
 import { ToggleStyleProps } from './types'
 
 export const Switch = styled.div`
@@ -45,7 +46,7 @@ export const ToggleButton = styled.div<ToggleStyleProps>`
     position: absolute;
     top: 50%;
     left: 0;
-    transition: 0.2s ease-out;
+    ${Smooth}
   }
   > * {
     fill: var(--onSurface);
