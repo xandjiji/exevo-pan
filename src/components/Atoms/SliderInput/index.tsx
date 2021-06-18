@@ -51,6 +51,20 @@ const SliderInput = ({
     }
   }
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    const action = {
+      ArrowUp: (prev: number) => prev + 1,
+      ArrowRight: (prev: number) => prev + 1,
+      ArrowDown: (prev: number) => prev - 1,
+      ArrowLeft: (prev: number) => prev - 1,
+    }[event.code]
+
+    if (!action) return
+
+    event.nativeEvent.preventDefault()
+    setValue(prev => action(prev))
+  }
+
   useEffect(() => {
     const newValue = positionToValue(cursorPosition)
     setValue(newValue)
@@ -65,7 +79,13 @@ const SliderInput = ({
   return (
     <S.Wrapper>
       <div style={{ width: '100%' }}>
-        <S.Track ref={trackRef} active={isMousePressed} {...binders}>
+        <S.Track
+          ref={trackRef}
+          active={isMousePressed}
+          tabIndex={0}
+          onKeyDown={handleKeyPress}
+          {...binders}
+        >
           <S.Cursor style={{ left: valueToTrackPercentage(value) }} />
           <S.TrackFill style={{ width: valueToTrackPercentage(value) }} />
         </S.Track>
