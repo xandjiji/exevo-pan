@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import { debounce } from 'lodash'
 import { clampValue } from 'utils'
 import useDrag, { DragObject } from 'hooks/useDrag'
 import { RangeSliderInputProps } from './types'
@@ -76,9 +77,17 @@ const RangeSliderInput = ({
     cursorB.position.x,
   ])
 
+  const dispatchOnChange = useMemo(
+    () =>
+      debounce(() => {
+        onChange?.([currentMin, currentMax])
+      }, 250),
+    [currentMin, currentMax, onChange],
+  )
+
   useEffect(() => {
-    onChange?.([currentMin, currentMax])
-  }, [currentMin, currentMax, onChange])
+    dispatchOnChange()
+  }, [dispatchOnChange])
 
   useEffect(() => {
     cursorB.setPosition(prev => ({ ...prev, x: trackWidth }))
