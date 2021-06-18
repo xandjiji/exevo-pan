@@ -1,9 +1,8 @@
 /* eslint-disable max-lines-per-function */
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-import useDrag from './useDrag'
+import useDrag, { DragObject } from '../../../hooks/useDrag'
 import { RangeSliderInputProps } from './types'
 import * as S from './styles'
-import { DragObject } from './useDrag/types'
 
 const RangeSliderInput = ({
   min,
@@ -28,11 +27,11 @@ const RangeSliderInput = ({
     [min, max, trackWidth],
   )
 
-  const boundValue = (value: number): number => {
-    if (value > trackWidth) return trackWidth
-    if (value < 0) return 0
-    return value
-  }
+  const boundValue = (bounded: number): number =>
+    bounded < 0 ? 0 : bounded > trackWidth ? trackWidth : bounded
+
+  const valueToTrackPercentage = (value: number): string =>
+    `${(value / trackWidth) * 100}%`
 
   const cursorA = useDrag()
   const cursorB = useDrag()
@@ -46,9 +45,6 @@ const RangeSliderInput = ({
   const cursorBPosition = boundValue(cursorB.position.x)
 
   const cursorMin = cursorAPosition < cursorBPosition ? cursorA : cursorB
-
-  const valueToTrackPercentage = (value: number): string =>
-    `${(value / trackWidth) * 100}%`
 
   useEffect(() => {
     const cursorsValues = [cursorAPosition, cursorBPosition]
