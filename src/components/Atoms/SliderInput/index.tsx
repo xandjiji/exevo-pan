@@ -1,4 +1,5 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react'
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import { debounce } from 'lodash'
 import useDrag from 'hooks/useDrag'
 import { clampValue } from 'utils'
 import { SliderInputProps } from './types'
@@ -14,7 +15,6 @@ const SliderInput = ({
   const [value, setValue] = useState<number>(initialValue)
   const [sliderInputValue, setSliderInputValue] = useState<number>(initialValue)
   const [isValid, setIsValid] = useState<boolean>(true)
-  console.log(isValid)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -68,11 +68,19 @@ const SliderInput = ({
     setValue(newValue)
   }, [positionToValue, cursorPosition])
 
+  const dispatchSyntheticEvent = useMemo(
+    () =>
+      debounce(() => {
+        const event = new Event('input', { bubbles: true })
+        inputRef.current?.dispatchEvent(event)
+      }, 250),
+    [],
+  )
+
   useEffect(() => {
     setSliderInputValue(value)
-    const event = new Event('input', { bubbles: true })
-    inputRef.current?.dispatchEvent(event)
-  }, [value])
+    dispatchSyntheticEvent()
+  }, [value, dispatchSyntheticEvent])
 
   return (
     <S.Wrapper>
@@ -89,6 +97,7 @@ const SliderInput = ({
         </S.Track>
       </div>
       <S.SliderInput
+        valid={isValid}
         type="number"
         min={min}
         max={max}

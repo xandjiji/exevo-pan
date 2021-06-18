@@ -11,3 +11,7 @@ export interface SliderInputProps {
 export interface TrackStyleProps {
   active?: boolean
 }
+
+export interface SliderInputStyleProps {
+  valid: boolean
+}
