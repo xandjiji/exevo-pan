@@ -3,8 +3,8 @@ import { HTMLAttributes } from 'react'
 export interface SliderInputProps {
   min: number
   max: number
-  initialValue?: number
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  value?: number
   props?: HTMLAttributes<HTMLInputElement>
 }
 

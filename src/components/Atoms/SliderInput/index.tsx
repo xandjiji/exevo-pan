@@ -1,4 +1,11 @@
-import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  useLayoutEffect,
+} from 'react'
 import { debounce } from 'lodash'
 import useDrag from 'hooks/useDrag'
 import { clampValue } from 'utils'
@@ -8,13 +15,12 @@ import * as S from './styles'
 const SliderInput = ({
   min,
   max,
-  initialValue = min,
   onChange,
+  value: propValue = min,
   ...props
 }: SliderInputProps): JSX.Element => {
-  const [value, setValue] = useState<number>(initialValue)
-  const [sliderInputValue, setSliderInputValue] = useState<number>(initialValue)
-  const [isValid, setIsValid] = useState<boolean>(true)
+  const [value, setValue] = useState<number>(propValue)
+  const [sliderInputValue, setSliderInputValue] = useState<number>(propValue)
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -33,6 +39,7 @@ const SliderInput = ({
   const { binders, isMousePressed, position } = useDrag()
 
   const cursorPosition = clampValue(position.x, [0, trackWidth])
+  const isValid = sliderInputValue === clampValue(sliderInputValue, [min, max])
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = event.target.value.replace(/\D/g, '')
@@ -40,12 +47,11 @@ const SliderInput = ({
     if (Number.isNaN(newValue)) return
 
     if (newValue < min) {
-      setIsValid(false)
       setSliderInputValue(newValue)
     } else {
       const boundedValue = newValue > max ? max : newValue
       setValue(boundedValue)
-      setIsValid(true)
+      setSliderInputValue(boundedValue)
     }
   }
 
@@ -64,9 +70,11 @@ const SliderInput = ({
   }
 
   useEffect(() => {
-    const newValue = positionToValue(cursorPosition)
-    setValue(newValue)
-  }, [positionToValue, cursorPosition])
+    if (isMousePressed) {
+      const newValue = positionToValue(cursorPosition)
+      setValue(newValue)
+    }
+  }, [isMousePressed, positionToValue, cursorPosition])
 
   const dispatchSyntheticEvent = useMemo(
     () =>
@@ -81,6 +89,12 @@ const SliderInput = ({
     setSliderInputValue(value)
     dispatchSyntheticEvent()
   }, [value, dispatchSyntheticEvent])
+
+  console.log('a')
+
+  useLayoutEffect(() => {
+    setValue(propValue)
+  }, [propValue])
 
   return (
     <S.Wrapper>
