@@ -8,7 +8,7 @@ import React, {
 } from 'react'
 import { debounce } from 'lodash'
 import useDrag from 'hooks/useDrag'
-import { clampValue } from 'utils'
+import { clampValue, normalize } from 'utils'
 import { SliderInputProps } from './types'
 import * as S from './styles'
 
@@ -20,7 +20,9 @@ const SliderInput = ({
   ...props
 }: SliderInputProps): JSX.Element => {
   const [value, setValue] = useState<number>(propValue)
-  const [sliderInputValue, setSliderInputValue] = useState<number>(propValue)
+  const [sliderInputValue, setSliderInputValue] = useState<string>(
+    propValue.toString(),
+  )
 
   const inputRef = useRef<HTMLInputElement | null>(null)
   const trackRef = useRef<HTMLDivElement>(null)
@@ -34,24 +36,33 @@ const SliderInput = ({
   )
 
   const valueToTrackPercentage = (currentValue: number): string =>
-    `${(currentValue / max) * 100}%`
+    `${normalize(currentValue, [min, max]) * 100}%`
 
   const { binders, isMousePressed, position } = useDrag()
 
   const cursorPosition = clampValue(position.x, [0, trackWidth])
-  const isValid = sliderInputValue === clampValue(sliderInputValue, [min, max])
+  const intSliderInputValue = parseInt(sliderInputValue, 10)
+  const isValid =
+    sliderInputValue === '-' ||
+    sliderInputValue === clampValue(intSliderInputValue, [min, max]).toString()
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value.replace(/\D/g, '')
-    const newValue = parseInt(inputValue, 10)
-    if (Number.isNaN(newValue)) return
+    const matches = event.target.value.match(/^-?[0-9]*/) ?? ['']
+    const sanitized = matches[0]
+    const newValue = parseInt(sanitized, 10)
 
-    if (newValue < min) {
-      setSliderInputValue(newValue)
+    if (Number.isNaN(newValue) || newValue < min) {
+      setSliderInputValue(sanitized)
     } else {
-      const boundedValue = newValue > max ? max : newValue
+      const boundedValue = clampValue(newValue, [min, max])
       setValue(boundedValue)
-      setSliderInputValue(boundedValue)
+      setSliderInputValue(boundedValue.toString())
+    }
+  }
+
+  const handleInputBlur = (event: React.FocusEvent) => {
+    if (!isValid || (event.target as HTMLInputElement).value === '-') {
+      setSliderInputValue(min.toString())
     }
   }
 
@@ -86,11 +97,9 @@ const SliderInput = ({
   )
 
   useEffect(() => {
-    setSliderInputValue(value)
+    setSliderInputValue(value.toString())
     dispatchSyntheticEvent()
   }, [value, dispatchSyntheticEvent])
-
-  console.log('a')
 
   useLayoutEffect(() => {
     setValue(propValue)
@@ -112,11 +121,9 @@ const SliderInput = ({
       </div>
       <S.SliderInput
         valid={isValid}
-        type="number"
-        min={min}
-        max={max}
         value={sliderInputValue}
         onChange={handleInputChange}
+        onBlur={handleInputBlur}
       />
       <input
         hidden
