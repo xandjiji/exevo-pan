@@ -67,9 +67,11 @@ const SliderInput = ({
   }
 
   const handleInputKeyPress = (event: React.KeyboardEvent) => {
+    const { ctrlKey, shiftKey } = event
+    const increment = 1 * (+!ctrlKey || 10) * (+!shiftKey || 100)
     const action = {
-      ArrowUp: (prev: number) => prev + 1,
-      ArrowDown: (prev: number) => prev - 1,
+      ArrowUp: (prev: number) => prev + increment,
+      ArrowDown: (prev: number) => prev - increment,
     }[event.code]
 
     if (!action) return
@@ -79,11 +81,13 @@ const SliderInput = ({
   }
 
   const handleTrackKeyPress = (event: React.KeyboardEvent) => {
+    const { ctrlKey, shiftKey } = event
+    const increment = 1 * (+!ctrlKey || 10) * (+!shiftKey || 100)
     const action = {
-      ArrowUp: (prev: number) => prev + 1,
-      ArrowRight: (prev: number) => prev + 1,
-      ArrowDown: (prev: number) => prev - 1,
-      ArrowLeft: (prev: number) => prev - 1,
+      ArrowUp: (prev: number) => prev + increment,
+      ArrowRight: (prev: number) => prev + increment,
+      ArrowDown: (prev: number) => prev - increment,
+      ArrowLeft: (prev: number) => prev - increment,
     }[event.code]
 
     if (!action) return
