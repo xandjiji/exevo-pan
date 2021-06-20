@@ -97,11 +97,13 @@ const RangeSliderInput = ({
   const handleKeyPress = (event: React.KeyboardEvent) => {
     if (!currentCursor) return
 
+    const { ctrlKey, shiftKey } = event
+    const increment = 1 * (+!ctrlKey || 10) * (+!shiftKey || 100)
     const action = {
-      ArrowUp: (value: number) => value + 1,
-      ArrowRight: (value: number) => value + 1,
-      ArrowDown: (value: number) => value - 1,
-      ArrowLeft: (value: number) => value - 1,
+      ArrowUp: (value: number) => value + increment,
+      ArrowRight: (value: number) => value + increment,
+      ArrowDown: (value: number) => value - increment,
+      ArrowLeft: (value: number) => value - increment,
     }[event.code]
 
     if (!action) return
