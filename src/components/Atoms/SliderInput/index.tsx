@@ -137,6 +137,7 @@ const SliderInput = ({
       </div>
       <S.SliderInput
         valid={isValid}
+        aria-invalid={!isValid}
         value={sliderInputValue}
         onChange={handleInputChange}
         onBlur={handleInputBlur}
@@ -144,6 +145,7 @@ const SliderInput = ({
       />
       <input
         hidden
+        aria-invalid={!isValid}
         value={value}
         onInput={event =>
           onChange?.(event as React.ChangeEvent<HTMLInputElement>)
