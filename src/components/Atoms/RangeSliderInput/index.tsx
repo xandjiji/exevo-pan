@@ -1,22 +1,32 @@
-import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import {
+  useState,
+  useEffect,
+  useCallback,
+  /* useLayoutEffect, */
+  useRef,
+  useMemo,
+} from 'react'
 import { debounce } from 'lodash'
-import { clampValue } from 'utils'
-import useDrag, { DragObject } from 'hooks/useDrag'
+import { normalize, clampValue } from 'utils'
+import useDrag from 'hooks/useDrag'
 import { RangeSliderInputProps } from './types'
 import * as S from './styles'
 
 const RangeSliderInput = ({
   min,
   max,
-  initialMin = min,
-  initialMax = max,
   onChange,
+  value: propValue = [min, max],
   ...props
 }: RangeSliderInputProps): JSX.Element => {
-  const [[currentMin, currentMax], setValues] = useState<number[]>([
-    initialMin,
-    initialMax,
-  ])
+  const [cursorAValue, setCursorAValue] = useState(propValue[0])
+  const [cursorBValue, setCursorBValue] = useState(propValue[1])
+
+  const [currentCursor, setCurrentCursor] = useState<'A' | 'B'>('A')
+  const [currentTrackCursor, setCurrentTrackCursor] =
+    useState<'A' | 'B' | null>(null)
+
+  const track = useDrag()
 
   const trackRef = useRef<HTMLDivElement>(null)
   const trackWidth: number = trackRef.current?.offsetWidth ?? 1
@@ -28,75 +38,48 @@ const RangeSliderInput = ({
     [min, max, trackWidth],
   )
 
-  const valueToTrackPercentage = (value: number): string =>
-    `${(value / trackWidth) * 100}%`
-
-  const cursorA = useDrag()
-  const cursorB = useDrag()
-  const track = useDrag()
-
-  const [currentCursor, setCurrentCursor] = useState<DragObject | null>(null)
-  const [currentTrackCursor, setCurrentTrackCursor] =
-    useState<DragObject | null>(null)
-
-  const cursorAPosition = clampValue(cursorA.position.x, [0, trackWidth])
-  const cursorBPosition = clampValue(cursorB.position.x, [0, trackWidth])
-
-  const cursorMin = cursorAPosition < cursorBPosition ? cursorA : cursorB
-
-  useEffect(() => {
-    const cursorsValues = [cursorAPosition, cursorBPosition]
-      .map(positionToValue)
-      .sort((a, b) => a - b)
-
-    setValues(cursorsValues)
-  }, [max, min, positionToValue, cursorAPosition, cursorBPosition])
-
   useEffect(() => {
     if (track.isMousePressed) {
       const x = track.position.x
+      const trackValue = clampValue(positionToValue(x), [min, max])
+
       const newCurrentCursor =
-        Math.abs(x - cursorA.position.x) <= Math.abs(x - cursorB.position.x)
-          ? cursorA
-          : cursorB
+        Math.abs(trackValue - cursorAValue) <=
+        Math.abs(trackValue - cursorBValue)
+          ? 'A'
+          : 'B'
+
       setCurrentCursor(newCurrentCursor)
+
       if (currentTrackCursor) {
-        currentTrackCursor.setPosition(prev => ({ ...prev, x }))
+        const updateCurrentCursorValue = {
+          A: setCursorAValue,
+          B: setCursorBValue,
+        }[currentTrackCursor]
+        updateCurrentCursorValue(trackValue)
       } else {
+        const updateCurrentCursorValue = {
+          A: setCursorAValue,
+          B: setCursorBValue,
+        }[newCurrentCursor]
         setCurrentTrackCursor(newCurrentCursor)
-        newCurrentCursor.setPosition(prev => ({ ...prev, x }))
+        updateCurrentCursorValue(trackValue)
       }
     } else {
       setCurrentTrackCursor(null)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     track.position.x,
     track.isMousePressed,
-    cursorA.position.x,
-    cursorB.position.x,
+    cursorAValue,
+    cursorBValue,
+    max,
+    min,
+    positionToValue,
+    currentTrackCursor,
   ])
 
-  const dispatchOnChange = useMemo(
-    () =>
-      debounce(() => {
-        onChange?.([currentMin, currentMax])
-      }, 250),
-    [currentMin, currentMax, onChange],
-  )
-
-  useEffect(() => {
-    dispatchOnChange()
-  }, [dispatchOnChange])
-
-  useEffect(() => {
-    cursorB.setPosition(prev => ({ ...prev, x: trackWidth }))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cursorB.setPosition, trackWidth])
-
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (!currentCursor) return
-
     const { ctrlKey, shiftKey } = event
     const increment = 1 * (+!ctrlKey || 10) * (+!shiftKey || 100)
     const action = {
@@ -110,17 +93,39 @@ const RangeSliderInput = ({
 
     event.nativeEvent.preventDefault()
 
-    const newValues =
-      currentCursor.position.x === cursorMin.position.x
-        ? [clampValue(action(currentMin), [min, max]), currentMax]
-        : [currentMin, clampValue(action(currentMax), [min, max])]
-
-    setValues(newValues.sort((a, b) => a - b))
+    if (currentCursor === 'A') {
+      setCursorAValue(prev => clampValue(action(prev), [min, max]))
+    } else {
+      setCursorBValue(prev => clampValue(action(prev), [min, max]))
+    }
   }
+
+  const dispatchOnChange = useMemo(
+    () =>
+      debounce(() => {
+        onChange?.(
+          [cursorAValue, cursorBValue].sort((a, b) => a - b) as [
+            number,
+            number,
+          ],
+        )
+      }, 250),
+    [cursorAValue, cursorBValue, onChange],
+  )
+
+  useEffect(() => {
+    dispatchOnChange()
+  }, [dispatchOnChange])
+
+  /* useEffect(() => {
+    const [newMin, newMax] = propValue
+    setCursorAValue(newMin)
+    setCursorBValue(newMax)
+  }, [propValue]) */
 
   return (
     <S.Wrapper {...props}>
-      <S.ValueDisplay>{currentMin}</S.ValueDisplay>
+      <S.ValueDisplay>{Math.min(cursorAValue, cursorBValue)}</S.ValueDisplay>
       <div style={{ width: '100%' }}>
         <S.Track
           ref={trackRef}
@@ -130,26 +135,28 @@ const RangeSliderInput = ({
           {...track.binders}
         >
           <S.Cursor
-            onClick={() => setCurrentCursor(cursorA)}
-            active={cursorA.isMousePressed}
-            style={{ left: valueToTrackPercentage(cursorAPosition) }}
-            {...cursorA.binders}
+            style={{ left: `${normalize(cursorAValue, [min, max]) * 100}%` }}
           />
           <S.Cursor
-            onClick={() => setCurrentCursor(cursorB)}
-            active={cursorB.isMousePressed}
-            style={{ left: valueToTrackPercentage(cursorBPosition) }}
-            {...cursorB.binders}
+            style={{ left: `${normalize(cursorBValue, [min, max]) * 100}%` }}
           />
           <S.TrackFill
             style={{
-              left: `${Math.min(cursorAPosition, cursorBPosition)}px`,
-              width: `${Math.abs(cursorAPosition - cursorBPosition)}px`,
+              left: `${
+                normalize(Math.min(cursorAValue, cursorBValue), [min, max]) *
+                100
+              }%`,
+              width: `${
+                normalize(
+                  Math.abs(Math.abs(cursorAValue) - Math.abs(cursorBValue)),
+                  [min, max],
+                ) * 100
+              }%`,
             }}
           />
         </S.Track>
       </div>
-      <S.ValueDisplay>{currentMax}</S.ValueDisplay>
+      <S.ValueDisplay>{Math.max(cursorAValue, cursorBValue)}</S.ValueDisplay>
     </S.Wrapper>
   )
 }

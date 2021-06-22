@@ -37,21 +37,19 @@ export const Track = styled.div<ActiveStyleProps>`
   ${({ active }) => active && fullWindowClickableArea};
 `
 
-export const Cursor = styled.div<ActiveStyleProps>`
+export const Cursor = styled.div`
   margin-top: -8px;
   margin-left: -8px;
   position: absolute;
   top: 50%;
   left: 0;
-  z-index: ${({ active }) => (active ? '2' : '1')};
 
   width: 16px;
   height: 16px;
   border-radius: 50%;
   background: var(--primary);
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
-
-  ${({ active }) => active && fullWindowClickableArea};
+  pointer-events: none;
 `
 
 export const TrackFill = styled.div`

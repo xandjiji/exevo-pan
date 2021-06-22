@@ -3,9 +3,8 @@ import { HTMLAttributes } from 'react'
 export interface RangeSliderInputProps {
   min: number
   max: number
-  initialMin?: number
-  initialMax?: number
-  onChange?: (values: number[]) => void
+  onChange?: (values: [number, number]) => void
+  value?: [number, number]
   props?: HTMLAttributes<HTMLInputElement>
 }
 
