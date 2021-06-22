@@ -131,7 +131,12 @@ const SliderInput = ({
           onKeyDown={handleTrackKeyPress}
           {...binders}
         >
-          <S.Cursor style={{ left: valueToTrackPercentage(value) }} />
+          <S.Cursor
+            role="slider"
+            aria-labelledby="range-slider"
+            aria-valuenow={value}
+            style={{ left: valueToTrackPercentage(value) }}
+          />
           <S.TrackFill style={{ width: valueToTrackPercentage(value) }} />
         </S.Track>
       </div>
