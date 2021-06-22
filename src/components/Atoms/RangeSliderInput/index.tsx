@@ -1,11 +1,4 @@
-import {
-  useState,
-  useEffect,
-  useCallback,
-  /* useLayoutEffect, */
-  useRef,
-  useMemo,
-} from 'react'
+import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { debounce } from 'lodash'
 import { normalize, clampValue } from 'utils'
 import useDrag from 'hooks/useDrag'
@@ -117,11 +110,11 @@ const RangeSliderInput = ({
     dispatchOnChange()
   }, [dispatchOnChange])
 
-  /* useEffect(() => {
+  useEffect(() => {
     const [newMin, newMax] = propValue
     setCursorAValue(newMin)
     setCursorBValue(newMax)
-  }, [propValue]) */
+  }, [propValue])
 
   return (
     <S.Wrapper {...props}>
