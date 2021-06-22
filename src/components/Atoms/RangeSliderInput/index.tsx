@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { debounce } from 'lodash'
 import { normalize, clampValue } from 'utils'
@@ -135,8 +136,18 @@ const RangeSliderInput = ({
           onKeyDown={event => handleKeyPress(event)}
           {...track.binders}
         >
-          <S.Cursor style={{ left: `${cursorAPosition}%` }} />
-          <S.Cursor style={{ left: `${cursorBPosition}%` }} />
+          <S.Cursor
+            role="slider"
+            aria-labelledby="range-slider"
+            aria-valuenow={cursorAValue}
+            style={{ left: `${cursorAPosition}%` }}
+          />
+          <S.Cursor
+            role="slider"
+            aria-labelledby="range-slider"
+            aria-valuenow={cursorBValue}
+            style={{ left: `${cursorBPosition}%` }}
+          />
           <S.TrackFill
             style={{
               left: `${trackFillLeft}%`,
