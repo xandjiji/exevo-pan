@@ -116,6 +116,14 @@ const RangeSliderInput = ({
     setCursorBValue(newMax)
   }, [propValue])
 
+  const trackFillLeft =
+    normalize(Math.min(cursorAValue, cursorBValue), [min, max]) * 100
+  const trackFillRight =
+    normalize(Math.max(cursorAValue, cursorBValue), [min, max]) * 100
+
+  const cursorAPosition = normalize(cursorAValue, [min, max]) * 100
+  const cursorBPosition = normalize(cursorBValue, [min, max]) * 100
+
   return (
     <S.Wrapper {...props}>
       <S.ValueDisplay>{Math.min(cursorAValue, cursorBValue)}</S.ValueDisplay>
@@ -127,24 +135,12 @@ const RangeSliderInput = ({
           onKeyDown={event => handleKeyPress(event)}
           {...track.binders}
         >
-          <S.Cursor
-            style={{ left: `${normalize(cursorAValue, [min, max]) * 100}%` }}
-          />
-          <S.Cursor
-            style={{ left: `${normalize(cursorBValue, [min, max]) * 100}%` }}
-          />
+          <S.Cursor style={{ left: `${cursorAPosition}%` }} />
+          <S.Cursor style={{ left: `${cursorBPosition}%` }} />
           <S.TrackFill
             style={{
-              left: `${
-                normalize(Math.min(cursorAValue, cursorBValue), [min, max]) *
-                100
-              }%`,
-              width: `${
-                normalize(
-                  Math.abs(Math.abs(cursorAValue) - Math.abs(cursorBValue)),
-                  [min, max],
-                ) * 100
-              }%`,
+              left: `${trackFillLeft}%`,
+              width: `${trackFillRight - trackFillLeft}%`,
             }}
           />
         </S.Track>
