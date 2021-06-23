@@ -95,7 +95,7 @@ export const SliderInput = styled.input<SliderInputStyleProps>`
 export const Wrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 220px;
+  width: 270px;
 
   ${SliderInput} {
     margin: 0 0 0 12px;
