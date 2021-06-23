@@ -45,6 +45,17 @@ export const TrackFill = styled.div`
   height: 100%;
   background-color: var(--primary);
   pointer-events: none;
+
+  &::after {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 0;
+    height: 100%;
+    width: 7px;
+    background-color: var(--primary);
+    pointer-events: none;
+  }
 `
 
 export const Cursor = styled.div`
@@ -93,6 +104,7 @@ export const SliderInput = styled.input<SliderInputStyleProps>`
 `
 
 export const Wrapper = styled.div`
+  padding-left: 8px;
   display: flex;
   align-items: center;
   width: 270px;
