@@ -16,6 +16,7 @@ export default ({ children }) => {
         location: getNumberSetParam('location'),
         serverSet: getSetParam('serverSet'),
         minLevel: getNumberParam('minLevel'),
+        maxLevel: getNumberParam('maxLevel'),
         minSkill: getNumberParam('minSkill'),
         skillKey: getSetParam('skillKey'),
         itemSet: getSetParam('itemSet'),
@@ -39,7 +40,8 @@ export default ({ children }) => {
             if (typeof value === 'string' && value.length === 0) validatedValue = null;
             if (typeof value === 'boolean' && value === false) validatedValue = null;
             if (typeof value === 'number') {
-                if (key === 'minLevel' && value === 2) validatedValue = null;
+                if (key === 'minLevel' && value === 8) validatedValue = null;
+                if (key === 'maxLevel' && value === 2000) validatedValue = null;
                 if (key === 'minSkill' && value === 10) validatedValue = null;
                 if (key === 'pageIndex' && value === 0) validatedValue = null;
             }
@@ -64,6 +66,7 @@ export default ({ children }) => {
             location: null,
             serverSet: null,
             minLevel: null,
+            maxLevel: null,
             minSkill: null,
             skillKey: null,
             itemSet: null,

@@ -4,7 +4,7 @@ import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import { Chip } from '../Atoms';
 import AutocompleteInput from '../AutocompleteInput';
-import RangeSlider from '../RangeSlider';
+import { SliderInput, RangeSliderInput } from '../Atoms'
 import DrawerFooter from '../DrawerFooter';
 import InformationBadge from '../InformationBadge';
 
@@ -42,7 +42,8 @@ const resetedFilterState = {
     battleye: new Set([]),
     location: new Set([]),
     serverSet: new Set([]),
-    minLevel: 2,
+    minLevel: 8,
+    maxLevel: 2000,
     minSkill: 10,
     skillKey: new Set([]),
     itemSet: new Set([]),
@@ -70,7 +71,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         battleye: params.battleye || new Set([]),
         location: params.location || new Set([]),
         serverSet: params.serverSet || new Set([]),
-        minLevel: params.minLevel || 2,
+        minLevel: params.minLevel || 8,
+        maxLevel: params.maxLevel || 2000,
         minSkill: params.minSkill || 10,
         skillKey: params.skillKey || new Set([]),
         itemSet: params.itemSet || new Set([]),
@@ -168,18 +170,16 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
 
     useEffect(() => {
-        setTimeout(() => {
-            if (active) setParamByKey('pageIndex', 0);
-            dispatchCharacterData({
-                type: 'APPLY_FILTERS',
-                filterState: filters,
-                initialData: {
-                    initialCharacterData,
-                    itemData,
-                    indexedServerData
-                }
-            });
-        }, 150);
+        if (active) setParamByKey('pageIndex', 0);
+        dispatchCharacterData({
+            type: 'APPLY_FILTERS',
+            filterState: filters,
+            initialData: {
+                initialCharacterData,
+                itemData,
+                indexedServerData
+            }
+        });
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters, initialCharacterData, setParamByKey]);
 
@@ -225,6 +225,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             serverSet,
             itemSet,
             minLevel,
+            maxLevel,
             minSkill,
             skillKey,
             fav,
@@ -241,7 +242,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         if (serverSet.size) return false;
         if (skillKey.size) return false;
         if (itemSet.size) return false;
-        if (minLevel !== 2) return false;
+        if (minLevel !== 8) return false;
+        if (maxLevel !== 2000) return false;
         if (minSkill !== 10) return false;
         if (fav) return false;
         if (rareNick) return false;
@@ -275,7 +277,8 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             battleye: new Set([]),
                             location: new Set([]),
                             serverSet: new Set([]),
-                            minLevel: 2,
+                            minLevel: 8,
+                            maxLevel: 2000,
                             minSkill: 10,
                             skillKey: new Set([]),
                             itemSet: new Set([]),
@@ -395,7 +398,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             style={{ backgroundColor: `var(--battleGreen)` }}
                         >
                         </span>
-                            Green
+                        Green
                     </Chip>
                     <Chip
                         onClick={useCallback(() => toggleInFilterSet('battleye', false), [toggleInFilterSet])}
@@ -406,7 +409,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             style={{ backgroundColor: `var(--battleYellow)` }}
                         >
                         </span>
-                            Yellow
+                        Yellow
                     </Chip>
                 </FilterGroup>
 
@@ -458,28 +461,26 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <FilterGroup title="Level" display="flex">
                     <label htmlFor="Level-input" className="invisible-label">Level</label>
                     <label htmlFor="Level-counter" className="invisible-label">Level value</label>
-                    <RangeSlider
-                        labelFor="Level-input"
-                        counterLabel="Level-counter"
-                        initialValue={2}
-                        min={2}
-                        max={1000}
-                        onChange={useCallback((value) => updateFilterValue('minLevel', value), [updateFilterValue])}
-                        overrideValue={filters.minLevel}
+                    <RangeSliderInput
+                        min={8}
+                        max={2000}
+                        value={[filters.minLevel,filters.maxLevel]}
+                        onChange={useCallback((values) => {
+                            const [newMin, newMax] = values;
+                            updateFilterValue('minLevel', parseInt(newMin, 10))
+                            updateFilterValue('maxLevel', parseInt(newMax, 10))
+                        }, [updateFilterValue])}
                     />
                 </FilterGroup>
 
                 <FilterGroup title="Skill" display="block">
                     <label htmlFor="Skill-input" className="invisible-label">Skill</label>
                     <label htmlFor="Skill-counter" className="invisible-label">Skill value</label>
-                    <RangeSlider
-                        labelFor="Skill-input"
-                        counterLabel="Skill-counter"
-                        initialValue={10}
+                    <SliderInput
                         min={10}
                         max={130}
-                        onChange={useCallback((value) => updateFilterValue('minSkill', value), [updateFilterValue])}
-                        overrideValue={filters.minSkill}
+                        value={filters.minSkill}
+                        onChange={useCallback((event) => updateFilterValue('minSkill', parseInt(event.target.value, 10)), [updateFilterValue])}
                     />
 
                     <div className="skills-wrapper">
@@ -539,7 +540,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         overrideStatus={isAllImbuementsSelected() ? true : false}
                         onClick={handleAllImbuementsToggle}>
                         All imbuements
-                        </Chip>
+                    </Chip>
 
                     <div className="chips-wrapper">
                         {[...filters.imbuementsSet].map((imbuement, index) =>

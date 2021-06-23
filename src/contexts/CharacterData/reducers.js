@@ -16,6 +16,7 @@ const applyFilters = (filterState, initialData) => {
         location,
         serverSet,
         minLevel,
+        maxLevel,
         minSkill,
         skillKey,
         itemSet,
@@ -82,6 +83,7 @@ const applyFilters = (filterState, initialData) => {
         }
 
         if (level < minLevel) continue;
+        if (level > maxLevel) continue;
 
         filteredData.push(character);
     }
