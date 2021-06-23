@@ -1,5 +1,12 @@
 /* eslint-disable max-lines-per-function */
-import { useState, useEffect, useCallback, useRef, useMemo } from 'react'
+import {
+  useState,
+  useEffect,
+  useCallback,
+  useRef,
+  useMemo,
+  useLayoutEffect,
+} from 'react'
 import { debounce } from 'lodash'
 import { normalize, clampValue } from 'utils'
 import useDrag from 'hooks/useDrag'
@@ -96,22 +103,17 @@ const RangeSliderInput = ({
 
   const dispatchOnChange = useMemo(
     () =>
-      debounce(() => {
-        onChange?.(
-          [cursorAValue, cursorBValue].sort((a, b) => a - b) as [
-            number,
-            number,
-          ],
-        )
-      }, 250),
-    [cursorAValue, cursorBValue, onChange],
+      debounce((aValue, bValue) => {
+        onChange?.([aValue, bValue].sort((a, b) => a - b) as [number, number])
+      }, 500),
+    [onChange],
   )
 
   useEffect(() => {
-    dispatchOnChange()
-  }, [dispatchOnChange])
+    dispatchOnChange(cursorAValue, cursorBValue)
+  }, [dispatchOnChange, cursorAValue, cursorBValue])
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const [newMin, newMax] = propValue
     setCursorAValue(newMin)
     setCursorBValue(newMax)
