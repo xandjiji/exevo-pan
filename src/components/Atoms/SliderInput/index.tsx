@@ -36,7 +36,7 @@ const SliderInput = ({
   )
 
   const valueToTrackPercentage = (currentValue: number): string =>
-    `${normalize(currentValue, [min, max]) * 100}%`
+    `${clampValue(normalize(currentValue, [min, max]), [0, 1]) * 100}%`
 
   const { binders, isMousePressed, position } = useDrag()
 
@@ -63,6 +63,7 @@ const SliderInput = ({
   const handleInputBlur = (event: React.FocusEvent) => {
     if (!isValid || (event.target as HTMLInputElement).value === '-') {
       setSliderInputValue(min.toString())
+      setValue(min)
     }
   }
 
