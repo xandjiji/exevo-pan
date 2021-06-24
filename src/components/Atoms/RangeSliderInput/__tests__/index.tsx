@@ -28,4 +28,15 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByText('0')).toBeInTheDocument()
     expect(screen.getByText('100')).toBeInTheDocument()
   })
+
+  test('should work well for negative values', async () => {
+    render(<RangeSliderInput min={-200} max={-100} value={[-190, -110]} />)
+
+    const [cursorA, cursorB] = screen.getAllByRole('slider')
+
+    expect(cursorA).toHaveStyle('left: 10%')
+    expect(cursorB).toHaveStyle('left: 90%')
+    expect(screen.getByText('-190')).toBeInTheDocument()
+    expect(screen.getByText('-110')).toBeInTheDocument()
+  })
 })
