@@ -63,4 +63,14 @@ describe('<SliderInput />', () => {
     expect(hiddenInput).toHaveValue('0')
     expect(cursor).toHaveStyle('left: 0%')
   })
+
+  test('should work well with negative values', () => {
+    render(<SliderInput min={-200} max={200} />)
+
+    const displayInput = screen.getAllByDisplayValue(-200)[0]
+    userEvent.clear(displayInput)
+    userEvent.type(displayInput, '0')
+
+    expect(screen.getByRole('slider')).toHaveStyle('left: 50%')
+  })
 })
