@@ -17,4 +17,15 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByText('10')).toBeInTheDocument()
     expect(screen.getByText('90')).toBeInTheDocument()
   })
+
+  test('should clamp values', async () => {
+    render(<RangeSliderInput min={0} max={100} value={[-99, 200]} />)
+
+    const [cursorA, cursorB] = screen.getAllByRole('slider')
+
+    expect(cursorA).toHaveStyle('left: 0%')
+    expect(cursorB).toHaveStyle('left: 100%')
+    expect(screen.getByText('0')).toBeInTheDocument()
+    expect(screen.getByText('100')).toBeInTheDocument()
+  })
 })
