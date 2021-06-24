@@ -3,8 +3,7 @@ import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 import DialogBox from '../DialogBox';
-import RadioInput from '../RadioInput';
-import { Switch } from '../Atoms';
+import { Switch, RadioButton } from '../Atoms';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
@@ -77,13 +76,13 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                             <div className="options-wrapper shadow">
                                 <Switch active={descendingOrder} onClick={() => setDescendingOrder(prev => !prev)}>Descending</Switch>
                                 {sortingModes.map((mode, index) => (
-                                    <RadioInput
+                                    <RadioButton
                                         key={index}
                                         active={selectedSort === index}
                                         onClick={() => setSelectedSort(index)}
                                     >
                                         {mode}
-                                    </RadioInput>
+                                    </RadioButton>
                                 ))}
                             </div>
                         </DialogBox>
