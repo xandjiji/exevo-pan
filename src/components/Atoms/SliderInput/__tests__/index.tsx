@@ -10,7 +10,7 @@ describe('<SliderInput />', () => {
     expect(screen.getByTestId('test')).toBeInTheDocument()
   })
 
-  test('onChange should be called', async () => {
+  test('onChange should be called', () => {
     render(
       <SliderInput
         data-testid="test"
@@ -25,7 +25,7 @@ describe('<SliderInput />', () => {
     expect(mockedOnChange).toBeCalledTimes(3)
   })
 
-  test('should be invalid', async () => {
+  test('should be invalid', () => {
     render(<SliderInput data-testid="test" min={0} max={100} />)
 
     const displayInput = screen.getAllByDisplayValue(0)[0]

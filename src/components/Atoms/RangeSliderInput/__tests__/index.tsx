@@ -7,7 +7,7 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByTestId('test')).toBeInTheDocument()
   })
 
-  test('should render cursors correctly', async () => {
+  test('should render cursors correctly', () => {
     render(<RangeSliderInput min={0} max={100} value={[10, 90]} />)
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
@@ -18,7 +18,7 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByText('90')).toBeInTheDocument()
   })
 
-  test('should clamp values', async () => {
+  test('should clamp values', () => {
     render(<RangeSliderInput min={0} max={100} value={[-99, 200]} />)
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
@@ -29,7 +29,7 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByText('100')).toBeInTheDocument()
   })
 
-  test('should work well for negative values', async () => {
+  test('should work well for negative values', () => {
     render(<RangeSliderInput min={-200} max={-100} value={[-190, -110]} />)
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
