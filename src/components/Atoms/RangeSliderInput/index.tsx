@@ -124,12 +124,16 @@ const RangeSliderInput = ({
   const trackFillRight =
     normalize(Math.max(cursorAValue, cursorBValue), [min, max]) * 100
 
-  const cursorAPosition = normalize(cursorAValue, [min, max]) * 100
-  const cursorBPosition = normalize(cursorBValue, [min, max]) * 100
+  const cursorAPosition =
+    normalize(clampValue(cursorAValue, [min, max]), [min, max]) * 100
+  const cursorBPosition =
+    normalize(clampValue(cursorBValue, [min, max]), [min, max]) * 100
 
   return (
     <S.Wrapper {...props}>
-      <S.ValueDisplay>{Math.min(cursorAValue, cursorBValue)}</S.ValueDisplay>
+      <S.ValueDisplay>
+        {clampValue(Math.min(cursorAValue, cursorBValue), [min, max])}
+      </S.ValueDisplay>
       <div style={{ width: '100%' }}>
         <S.Track
           ref={trackRef}
@@ -158,7 +162,9 @@ const RangeSliderInput = ({
           />
         </S.Track>
       </div>
-      <S.ValueDisplay>{Math.max(cursorAValue, cursorBValue)}</S.ValueDisplay>
+      <S.ValueDisplay>
+        {clampValue(Math.max(cursorAValue, cursorBValue), [min, max])}
+      </S.ValueDisplay>
     </S.Wrapper>
   )
 }
