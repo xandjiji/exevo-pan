@@ -39,4 +39,28 @@ describe('<SliderInput />', () => {
     expect(hiddenInput).not.toHaveValue('-50')
     expect(hiddenInput).toBeInvalid()
   })
+
+  test('should clamp values between 0 and 100', () => {
+    render(<SliderInput data-testid="test" min={0} max={100} />)
+
+    const displayInput = screen.getAllByDisplayValue(0)[0]
+    const hiddenInput = screen.getByTestId('test')
+    const cursor = screen.getByRole('slider')
+
+    userEvent.clear(displayInput)
+    userEvent.type(displayInput, '999')
+    expect(displayInput).toHaveValue('100')
+    expect(displayInput).toBeValid()
+    expect(hiddenInput).toBeValid()
+    expect(cursor).toHaveStyle('left: 100%')
+
+    userEvent.clear(displayInput)
+    userEvent.type(displayInput, '-999')
+    userEvent.tab()
+    expect(displayInput).toHaveValue('0')
+    expect(displayInput).toBeValid()
+    expect(hiddenInput).toBeValid()
+    expect(hiddenInput).toHaveValue('0')
+    expect(cursor).toHaveStyle('left: 0%')
+  })
 })
