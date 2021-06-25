@@ -3,7 +3,7 @@ import { HTMLAttributes, ReactNode } from 'react'
 export interface SwitchProps {
   children?: ReactNode
   active?: boolean
-  onClick?: () => void
+  onClick?: (event?: React.MouseEvent) => void
   icon?: ReactNode
   props?: HTMLAttributes<HTMLButtonElement>
 }

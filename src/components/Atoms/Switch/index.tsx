@@ -1,3 +1,4 @@
+import React, { useState } from 'react'
 import * as S from './styles'
 import { SwitchProps } from './types'
 
@@ -7,18 +8,29 @@ const Switch = ({
   onClick,
   icon,
   ...props
-}: SwitchProps): JSX.Element => (
-  <S.Switch
-    onClick={onClick}
-    role={onClick ? 'button' : undefined}
-    tabIndex={onClick ? 0 : undefined}
-    {...props}
-  >
-    <S.ToggleButton active={active} hasIcon={!!icon}>
-      {icon}
-    </S.ToggleButton>
-    {children}
-  </S.Switch>
-)
+}: SwitchProps): JSX.Element => {
+  const [activeState, setActive] = useState<boolean>(active ?? false)
+  const derivedActive = active ?? activeState
+
+  const handleClick = (event: React.MouseEvent) => {
+    setActive(prev => !prev)
+    onClick?.(event)
+  }
+
+  return (
+    <S.Switch
+      onClick={handleClick}
+      role="switch"
+      tabIndex={0}
+      aria-checked={derivedActive}
+      {...props}
+    >
+      <S.ToggleButton active={derivedActive} hasIcon={!!icon}>
+        {icon}
+      </S.ToggleButton>
+      {children}
+    </S.Switch>
+  )
+}
 
 export default Switch

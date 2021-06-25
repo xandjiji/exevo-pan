@@ -5,14 +5,12 @@ import Switch from '..'
 const mockedOnClick = jest.fn()
 
 describe('<Switch />', () => {
-  test('should render correctly', () => {
-    render(<Switch data-testid="test" />)
-    expect(screen.getByTestId('test')).toBeInTheDocument()
-  })
-
   test('should trigger onClick', () => {
     render(<Switch onClick={mockedOnClick} />)
-    userEvent.click(screen.getByRole('button'))
+    const switchElement = screen.getByRole('button')
+    expect(switchElement).toHaveAttribute('aria-selected', 'false')
+    userEvent.click(switchElement)
+    expect(switchElement).toHaveAttribute('aria-selected', 'true')
     expect(mockedOnClick).toBeCalledTimes(1)
   })
 
