@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { checkKeyboardTrigger } from 'utils'
 import { RadioButtonProps } from './types'
 import * as S from './styles'
 
@@ -16,8 +17,19 @@ const RadioButton = ({
     onClick?.()
   }
 
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    if (checkKeyboardTrigger(event.code)) handleClick()
+  }
+
   return (
-    <S.Wrapper active={derivedActive} onClick={handleClick} {...props}>
+    <S.Wrapper
+      active={derivedActive}
+      onClick={handleClick}
+      onKeyDown={handleKeyPress}
+      role="radio"
+      tabIndex={0}
+      {...props}
+    >
       <S.Radio active={derivedActive} />
       {children}
     </S.Wrapper>
