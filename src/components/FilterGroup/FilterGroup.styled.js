@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Chip } from '../Atoms/Chip/styles'
+import { Chip } from 'components/Atoms/Chip/styles'
 
 export default styled.div`
     margin-bottom: 16px;

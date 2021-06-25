@@ -2,9 +2,8 @@ import React, { useState, useEffect, useContext, useCallback, useMemo } from 're
 import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
-import { Chip } from '../Atoms';
+import { Chip, SliderInput, RangeSliderInput } from 'components/Atoms';
 import AutocompleteInput from '../AutocompleteInput';
-import { SliderInput, RangeSliderInput } from '../Atoms'
 import DrawerFooter from '../DrawerFooter';
 import InformationBadge from '../InformationBadge';
 

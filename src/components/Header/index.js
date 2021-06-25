@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import Header, { HeaderWrapper, HeaderItem, Logo } from './Header.styled';
 import { NavLink } from 'react-router-dom';
-import { CtaButton, Switch } from '../Atoms/';
+import { CtaButton, Switch } from 'components/Atoms/';
 
 import logo from '../../assets/logo.png';
 import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';
