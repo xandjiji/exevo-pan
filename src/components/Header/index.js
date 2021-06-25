@@ -69,6 +69,7 @@ export default () => {
                     active={theme === 'dark-theme'}
                     onClick={toggleTheme}
                     icon={<MoonIcon />}
+                    aria-label="Toggle dark theme"
                 />
                 <CtaButton />
             </HeaderWrapper>
