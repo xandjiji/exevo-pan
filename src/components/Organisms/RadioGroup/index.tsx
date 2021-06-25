@@ -21,7 +21,7 @@ const RadioGroup = ({
   }, [activeIndex, onChange])
 
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper role="radiogroup" {...props}>
       {Children.map(children, (child, index) => {
         if (!isValidElement(child)) return child
 
