@@ -50,10 +50,6 @@ export default styled.div`
                     > * {
                         width: max-content;
 
-                        &:not(:last-child) {
-                            margin-bottom: 12px;
-                        }
-
                         &:first-child {
                             color: var(--onSurface);
                             margin-bottom: 22px;

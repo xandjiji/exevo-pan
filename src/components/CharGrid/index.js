@@ -3,7 +3,8 @@ import CharGrid from './CharGrid.styled';
 import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 import DialogBox from '../DialogBox';
-import { Switch, RadioButton } from '../Atoms';
+import { Switch, RadioButton } from 'components/Atoms';
+import { RadioGroup } from 'components/Organisms';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
@@ -51,14 +52,14 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
             sortingModes[selectedSort],
             descendingOrder
         ));
-        
-        if(selectedSort !== initialSort) {
+
+        if (selectedSort !== initialSort) {
             setParamByKey('initialSort', selectedSort);
         } else {
             setParamByKey('initialSort', null);
         }
 
-        if(descendingOrder !== initialOrder) {
+        if (descendingOrder !== initialOrder) {
             setParamByKey('initialOrder', descendingOrder.toString());
         } else {
             setParamByKey('initialOrder', null);
@@ -75,15 +76,12 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                         <DialogBox isOpen={isSortingOpen} setState={setSortingOpen}>
                             <div className="options-wrapper shadow">
                                 <Switch active={descendingOrder} onClick={() => setDescendingOrder(prev => !prev)}>Descending</Switch>
-                                {sortingModes.map((mode, index) => (
-                                    <RadioButton
-                                        key={index}
-                                        active={selectedSort === index}
-                                        onClick={() => setSelectedSort(index)}
-                                    >
-                                        {mode}
-                                    </RadioButton>
-                                ))}
+                                <RadioGroup indexValue={selectedSort} onChange={(index) => setSelectedSort(index)}>
+                                    <RadioButton>Auction End</RadioButton>
+                                    <RadioButton>Level</RadioButton>
+                                    <RadioButton>Price</RadioButton>
+                                    <RadioButton>Price (bidded only)</RadioButton>
+                                </RadioGroup>
                             </div>
                         </DialogBox>
                     </div>
