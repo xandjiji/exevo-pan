@@ -4,8 +4,9 @@ import { RadioStyleProps, WrapperStyleProps } from './types'
 export const Radio = styled.div<RadioStyleProps>`
   position: relative;
   margin-right: 6px;
-  width: 14px;
-  height: 14px;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   border: solid 2px var(--separator);
   transition: box-shadow 0.2s ease-out;
