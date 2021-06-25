@@ -7,10 +7,11 @@ const mockedOnClick = jest.fn()
 describe('<Switch />', () => {
   test('should trigger onClick', () => {
     render(<Switch onClick={mockedOnClick} />)
-    const switchElement = screen.getByRole('button')
-    expect(switchElement).toHaveAttribute('aria-selected', 'false')
+    const switchElement = screen.getByRole('switch')
+
+    expect(switchElement).not.toBeChecked()
     userEvent.click(switchElement)
-    expect(switchElement).toHaveAttribute('aria-selected', 'true')
+    expect(switchElement).toBeChecked()
     expect(mockedOnClick).toBeCalledTimes(1)
   })
 
@@ -22,5 +23,14 @@ describe('<Switch />', () => {
   test('should have children', () => {
     render(<Switch>children</Switch>)
     expect(screen.getByText('children')).toBeInTheDocument()
+  })
+
+  test('should be forced to be active', () => {
+    render(<Switch active />)
+    const switchElement = screen.getByRole('switch')
+
+    expect(switchElement).toBeChecked()
+    userEvent.click(switchElement)
+    expect(switchElement).toBeChecked()
   })
 })
