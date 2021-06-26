@@ -8,6 +8,7 @@ import React, {
   useLayoutEffect,
 } from 'react'
 import { debounce } from 'lodash'
+import useIsMounted from 'hooks/useIsMounted'
 import useDrag from 'hooks/useDrag'
 import { clampValue, normalize, strToInt } from 'utils'
 import { SliderInputProps } from './types'
@@ -39,6 +40,7 @@ const SliderInput = ({
   const valueToTrackPercentage = (currentValue: number): string =>
     `${clampValue(normalize(currentValue, [min, max]), [0, 1]) * 100}%`
 
+  const isMounted = useIsMounted()
   const { binders, isMousePressed, position } = useDrag()
 
   const cursorPosition = clampValue(position.x, [0, trackWidth])
@@ -116,7 +118,8 @@ const SliderInput = ({
 
   useEffect(() => {
     setSliderInputValue(value.toString())
-    dispatchSyntheticEvent()
+    if (isMounted) dispatchSyntheticEvent()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, dispatchSyntheticEvent])
 
   useLayoutEffect(() => {
