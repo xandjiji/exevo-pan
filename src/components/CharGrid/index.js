@@ -75,16 +75,22 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                         <SortIcon className="icon clickable" onClick={() => setSortingOpen(prev => !prev)} />
                         <DialogBox isOpen={isSortingOpen} setState={setSortingOpen}>
                             <div className="options-wrapper shadow">
-                                <Switch active={descendingOrder} onClick={() => setDescendingOrder(prev => !prev)}>Descending</Switch>
+                                <Switch
+                                    active={descendingOrder}
+                                    onClick={() => setDescendingOrder(prev => !prev)}
+                                    aria-label="Sort by descending order"
+                                >
+                                    Descending
+                                </Switch>
                                 <RadioGroup
                                     indexValue={selectedSort}
                                     onChange={(index) => setSelectedSort(index)}
                                     aria-label="Sort characters by"
                                 >
-                                    <RadioButton aria-labelledby="Auction End">Auction End</RadioButton>
-                                    <RadioButton aria-labelledby="Level">Level</RadioButton>
-                                    <RadioButton aria-labelledby="Price">Price</RadioButton>
-                                    <RadioButton aria-labelledby="Price (bidded only)">Price (bidded only)</RadioButton>
+                                    <RadioButton>Auction End</RadioButton>
+                                    <RadioButton>Level</RadioButton>
+                                    <RadioButton>Price</RadioButton>
+                                    <RadioButton>Price (bidded only)</RadioButton>
                                 </RadioGroup>
                             </div>
                         </DialogBox>
