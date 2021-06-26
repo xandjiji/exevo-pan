@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { checkKeyboardTrigger } from 'utils'
 import * as S from './styles'
 import { SwitchProps } from './types'
 
@@ -17,11 +18,19 @@ const Switch = ({
     onClick?.(event)
   }
 
+  const handleKeypress = (event: React.KeyboardEvent) => {
+    if (checkKeyboardTrigger(event.code)) {
+      setActive(prev => !prev)
+      onClick?.()
+    }
+  }
+
   return (
     <S.Switch
-      onClick={handleClick}
       role="switch"
       tabIndex={0}
+      onClick={handleClick}
+      onKeyPress={handleKeypress}
       aria-checked={derivedActive}
       {...props}
     >
