@@ -10,15 +10,16 @@ import { RadioGroupProps } from './types'
 
 const RadioGroup = ({
   children,
-  indexValue,
+  indexValue: indexProp,
   onChange,
   ...props
 }: RadioGroupProps): JSX.Element => {
-  const [activeIndex, setActiveIndex] = useState<number>(indexValue ?? 0)
+  const [innerIndex, setInnerIndex] = useState<number>(indexProp ?? 0)
+  const derivedActiveIndex = indexProp ?? innerIndex
 
   useEffect(() => {
-    onChange?.(activeIndex)
-  }, [activeIndex, onChange])
+    onChange?.(innerIndex)
+  }, [innerIndex, onChange])
 
   return (
     <S.Wrapper role="radiogroup" {...props}>
@@ -27,8 +28,8 @@ const RadioGroup = ({
         if (typeof child.type === 'string') return child
 
         return cloneElement(child, {
-          active: activeIndex === index,
-          onClick: () => setActiveIndex(index),
+          active: derivedActiveIndex === index,
+          onClick: () => setInnerIndex(index),
         })
       })}
     </S.Wrapper>
