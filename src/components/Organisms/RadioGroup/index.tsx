@@ -24,6 +24,7 @@ const RadioGroup = ({
     <S.Wrapper role="radiogroup" {...props}>
       {Children.map(children, (child, index) => {
         if (!isValidElement(child)) return child
+        if (typeof child.type === 'string') return child
 
         return cloneElement(child, {
           active: activeIndex === index,
