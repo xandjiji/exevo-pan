@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import React, {
   useState,
   useEffect,
@@ -134,8 +135,10 @@ const SliderInput = ({
         >
           <S.Cursor
             role="slider"
-            aria-labelledby="range-slider"
+            aria-label="change value"
             aria-valuenow={value}
+            aria-valuemax={max}
+            aria-valuemin={min}
             style={{ left: valueToTrackPercentage(value) }}
           />
           <S.TrackFill style={{ width: valueToTrackPercentage(value) }} />

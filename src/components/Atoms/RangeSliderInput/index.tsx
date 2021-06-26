@@ -144,14 +144,18 @@ const RangeSliderInput = ({
         >
           <S.Cursor
             role="slider"
-            aria-labelledby="range-slider"
+            aria-label="change value"
             aria-valuenow={cursorAValue}
+            aria-valuemax={max}
+            aria-valuemin={min}
             style={{ left: `${cursorAPosition}%` }}
           />
           <S.Cursor
             role="slider"
-            aria-labelledby="range-slider"
+            aria-label="change value"
             aria-valuenow={cursorBValue}
+            aria-valuemax={max}
+            aria-valuemin={min}
             style={{ left: `${cursorBPosition}%` }}
           />
           <S.TrackFill
