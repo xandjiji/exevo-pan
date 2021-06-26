@@ -1,4 +1,5 @@
 import React, { useState, memo } from 'react'
+import { checkKeyboardTrigger } from 'utils'
 import { ChipProps } from './types'
 import * as S from './styles'
 
@@ -14,24 +15,42 @@ const ChipComponent = ({
 
   const handleClick = (event: React.MouseEvent) => {
     if (!!onClick) {
-      setActive(!active)
+      setActive(prev => !prev)
       onClick(event)
     }
+  }
+
+  const handleChipKeypress = (event: React.KeyboardEvent) => {
+    if (!!onClick && checkKeyboardTrigger(event.code)) {
+      event.preventDefault()
+      setActive(prev => !prev)
+      onClick()
+    }
+  }
+
+  const handleCloseKeypress = (event: React.KeyboardEvent) => {
+    if (checkKeyboardTrigger(event.code)) onClose?.()
   }
 
   return (
     <S.Chip
       active={derivedActive}
       clickable={!!onClick}
-      onClick={handleClick}
       role={onClick ? 'switch' : undefined}
       aria-checked={onClick ? derivedActive : undefined}
       tabIndex={onClick ? 0 : undefined}
+      onClick={handleClick}
+      onKeyPress={handleChipKeypress}
       {...props}
     >
       {children}
       {!!onClose && (
-        <S.CloseButton onClick={onClose} aria-label="Remove item" />
+        <S.CloseButton
+          tabIndex={0}
+          aria-label="Remove item"
+          onClick={onClose}
+          onKeyPress={handleCloseKeypress}
+        />
       )}
     </S.Chip>
   )

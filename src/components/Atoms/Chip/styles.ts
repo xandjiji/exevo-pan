@@ -46,7 +46,6 @@ export const CloseButton = styled.button`
   display: inline-block;
   width: 16px;
   height: 16px;
-  outline: none;
   border-radius: 50%;
   background-color: var(--primary);
   opacity: 0.75;
