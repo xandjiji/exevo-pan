@@ -24,7 +24,8 @@ const ChipComponent = ({
       active={derivedActive}
       clickable={!!onClick}
       onClick={handleClick}
-      role={onClick ? 'button' : undefined}
+      role={onClick ? 'switch' : undefined}
+      aria-checked={onClick ? derivedActive : undefined}
       tabIndex={onClick ? 0 : undefined}
       {...props}
     >
