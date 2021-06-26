@@ -13,7 +13,7 @@ const ChipComponent = ({
   const [active, setActive] = useState<boolean>(false)
   const derivedActive = overrideStatus ?? active
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClick = (event?: React.MouseEvent) => {
     if (!!onClick) {
       setActive(prev => !prev)
       onClick(event)
@@ -23,8 +23,7 @@ const ChipComponent = ({
   const handleChipKeypress = (event: React.KeyboardEvent) => {
     if (!!onClick && checkKeyboardTrigger(event.code)) {
       event.preventDefault()
-      setActive(prev => !prev)
-      onClick()
+      handleClick()
     }
   }
 

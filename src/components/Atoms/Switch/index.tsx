@@ -13,15 +13,15 @@ const Switch = ({
   const [activeState, setActive] = useState<boolean>(active ?? false)
   const derivedActive = active ?? activeState
 
-  const handleClick = (event: React.MouseEvent) => {
+  const handleClick = (event?: React.MouseEvent) => {
     setActive(prev => !prev)
     onClick?.(event)
   }
 
   const handleKeypress = (event: React.KeyboardEvent) => {
     if (checkKeyboardTrigger(event.code)) {
-      setActive(prev => !prev)
-      onClick?.()
+      event.preventDefault()
+      handleClick()
     }
   }
 
