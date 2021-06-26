@@ -18,7 +18,10 @@ const RadioButton = ({
   }
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
-    if (checkKeyboardTrigger(event.code)) handleClick()
+    if (checkKeyboardTrigger(event.code)) {
+      event.preventDefault()
+      handleClick()
+    }
   }
 
   return (

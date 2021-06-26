@@ -29,7 +29,10 @@ const ChipComponent = ({
   }
 
   const handleCloseKeypress = (event: React.KeyboardEvent) => {
-    if (checkKeyboardTrigger(event.code)) onClose?.()
+    if (checkKeyboardTrigger(event.code)) {
+      event.preventDefault()
+      onClose?.()
+    }
   }
 
   return (
