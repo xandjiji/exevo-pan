@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { checkKeyboardTrigger } from 'utils'
 import { RadioButtonProps } from './types'
 import * as S from './styles'
@@ -12,9 +12,9 @@ const RadioButton = ({
   const [active, setActive] = useState<boolean>(propActive ?? false)
   const derivedActive = propActive ?? active
 
-  const handleClick = () => {
+  const handleClick = (event?: React.MouseEvent) => {
     setActive(true)
-    onClick?.()
+    onClick?.(event)
   }
 
   const handleKeyPress = (event: React.KeyboardEvent) => {

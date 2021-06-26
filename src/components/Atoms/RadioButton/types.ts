@@ -1,9 +1,9 @@
-import { HTMLAttributes } from 'react'
+import React, { HTMLAttributes } from 'react'
 
 export interface RadioButtonProps {
   children: React.ReactNode
   active?: boolean
-  onClick?: () => void
+  onClick?: (event?: React.MouseEvent) => void
   props?: HTMLAttributes<HTMLDivElement>
 }
 
