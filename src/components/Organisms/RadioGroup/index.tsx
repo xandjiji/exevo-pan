@@ -1,10 +1,4 @@
-import {
-  useState,
-  useEffect,
-  Children,
-  isValidElement,
-  cloneElement,
-} from 'react'
+import { useState, Children, isValidElement, cloneElement } from 'react'
 import * as S from './styles'
 import { RadioGroupProps } from './types'
 
@@ -17,10 +11,6 @@ const RadioGroup = ({
   const [innerIndex, setInnerIndex] = useState<number>(indexProp ?? 0)
   const derivedActiveIndex = indexProp ?? innerIndex
 
-  useEffect(() => {
-    onChange?.(innerIndex)
-  }, [innerIndex, onChange])
-
   return (
     <S.Wrapper role="radiogroup" {...props}>
       {Children.map(children, (child, index) => {
@@ -29,7 +19,12 @@ const RadioGroup = ({
 
         return cloneElement(child, {
           active: derivedActiveIndex === index,
-          onClick: () => setInnerIndex(index),
+          onClick: () => {
+            setInnerIndex(prevInnerIndex => {
+              if (prevInnerIndex !== index) onChange?.(index)
+              return index
+            })
+          },
         })
       })}
     </S.Wrapper>
