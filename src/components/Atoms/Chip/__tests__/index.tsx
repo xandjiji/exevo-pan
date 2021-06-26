@@ -72,4 +72,36 @@ describe('<Chip />', () => {
       expect(chipElement).not.toBeChecked()
     })
   })
+
+  describe('for keypress events', () => {
+    test('should trigger on chip keypress', () => {
+      render(<Chip onClick={mockedOnClick} />)
+      const chipElement = screen.getByRole('switch')
+
+      userEvent.tab()
+      expect(chipElement).toHaveFocus()
+
+      userEvent.keyboard('{enter}')
+      expect(mockedOnClick).toBeCalledTimes(1)
+      expect(chipElement).toBeChecked()
+
+      userEvent.type(chipElement, '{space}')
+      expect(mockedOnClick).toBeCalledTimes(2)
+      expect(chipElement).not.toBeChecked()
+    })
+
+    test('should trigger on close button keypress', () => {
+      render(<Chip onClose={mockedOnClose} />)
+      const closeButton = screen.getByLabelText(/remove item/i)
+
+      userEvent.tab()
+      expect(closeButton).toHaveFocus()
+
+      userEvent.keyboard('{enter}')
+      expect(mockedOnClose).toBeCalledTimes(1)
+
+      userEvent.type(closeButton, '{space}')
+      expect(mockedOnClose).toBeCalledTimes(3)
+    })
+  })
 })
