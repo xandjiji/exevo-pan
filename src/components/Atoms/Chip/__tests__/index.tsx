@@ -1,43 +1,45 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import Chip from '..'
-import { backgroundStyle, colorStyle } from '../styles'
-import { styleObject } from '../types'
 
 const mockedOnClick = jest.fn()
 const mockedOnClose = jest.fn()
 
-const checkElementStyle = (element: HTMLElement, status: string) => {
-  expect(element).toHaveStyle(backgroundStyle[status] as styleObject)
-  expect(element).toHaveStyle(colorStyle[status] as styleObject)
-}
-
 describe('<Chip />', () => {
+  beforeEach(() => {
+    mockedOnClick.mockReset()
+    mockedOnClose.mockReset()
+  })
+
   test('it renders correctly', () => {
     render(<Chip data-testid="testid">test</Chip>)
 
     expect(screen.getByTestId('testid')).toBeInTheDocument()
     expect(screen.getByText(/test/i)).toBeInTheDocument()
     expect(screen.queryByLabelText(/remove item/i)).not.toBeInTheDocument()
+    expect(screen.queryByRole('switch')).not.toBeInTheDocument()
   })
 
   test('it triggers click handler', () => {
-    render(<Chip data-testid="testid" onClick={mockedOnClick} />)
+    render(<Chip onClick={mockedOnClick} />)
 
-    const chipElement = screen.getByTestId('testid')
+    const chipElement = screen.getByRole('switch')
 
-    checkElementStyle(chipElement, 'inactive')
-
+    expect(chipElement).not.toBeChecked()
     userEvent.click(chipElement)
+    expect(chipElement).toBeChecked()
     expect(mockedOnClick).toBeCalledTimes(1)
-    checkElementStyle(chipElement, 'active')
   })
 
   test('it doesnt trigger click handler', () => {
     render(<Chip data-testid="testid" />)
 
-    userEvent.click(screen.getByTestId('testid'))
+    const chipElement = screen.getByTestId('testid')
+
+    expect(chipElement).not.toBeChecked()
+    userEvent.click(chipElement)
     expect(mockedOnClick).toBeCalledTimes(0)
+    expect(chipElement).not.toBeChecked()
   })
 
   test('it triggers close handler', () => {
@@ -50,41 +52,24 @@ describe('<Chip />', () => {
   })
 
   describe('it overrides status correctly', () => {
-    test('without onClick', () => {
-      render(<Chip data-testid="testid" overrideStatus={true} />)
+    test('for true', () => {
+      render(<Chip onClick={mockedOnClick} overrideStatus={true} />)
 
-      const chipElement = screen.getByTestId('testid')
-      checkElementStyle(chipElement, 'active')
+      const chipElement = screen.getByRole('switch')
+
+      expect(chipElement).toBeChecked()
+      userEvent.click(chipElement)
+      expect(chipElement).toBeChecked()
     })
 
-    test('False with onClick', () => {
-      render(
-        <Chip
-          data-testid="testid"
-          overrideStatus={false}
-          onClick={jest.fn()}
-        />,
-      )
+    test('for false', () => {
+      render(<Chip onClick={mockedOnClick} overrideStatus={false} />)
 
-      const chipElement = screen.getByTestId('testid')
+      const chipElement = screen.getByRole('switch')
 
-      checkElementStyle(chipElement, 'inactive')
-
+      expect(chipElement).not.toBeChecked()
       userEvent.click(chipElement)
-      checkElementStyle(chipElement, 'inactive')
-    })
-
-    test('True with onClick', () => {
-      render(
-        <Chip data-testid="testid" overrideStatus={true} onClick={jest.fn()} />,
-      )
-
-      const chipElement = screen.getByTestId('testid')
-
-      checkElementStyle(chipElement, 'inactive')
-
-      userEvent.click(chipElement)
-      checkElementStyle(chipElement, 'inactive')
+      expect(chipElement).not.toBeChecked()
     })
   })
 })
