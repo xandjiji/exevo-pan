@@ -25,7 +25,7 @@ const RadioButton = ({
     <S.Wrapper
       active={derivedActive}
       onClick={handleClick}
-      onKeyDown={handleKeyPress}
+      onKeyPress={handleKeyPress}
       role="radio"
       aria-checked={derivedActive}
       tabIndex={0}
