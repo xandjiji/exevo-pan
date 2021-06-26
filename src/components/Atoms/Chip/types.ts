@@ -1,9 +1,9 @@
-import { HTMLAttributes, ReactNode } from 'react'
+import { HTMLAttributes } from 'react'
 
 export interface ChipProps {
-  children?: ReactNode
-  onClick?: () => void
-  onClose?: () => void
+  children?: React.ReactNode
+  onClick?: (event?: React.MouseEvent) => void
+  onClose?: (event?: React.MouseEvent) => void
   overrideStatus?: boolean
   props?: HTMLAttributes<HTMLDivElement>
 }

@@ -1,4 +1,4 @@
-import { useState, memo } from 'react'
+import React, { useState, memo } from 'react'
 import { ChipProps } from './types'
 import * as S from './styles'
 
@@ -12,10 +12,10 @@ const ChipComponent = ({
   const [active, setActive] = useState<boolean>(false)
   const derivedActive = overrideStatus ?? active
 
-  const handleClick = () => {
+  const handleClick = (event: React.MouseEvent) => {
     if (!!onClick) {
       setActive(!active)
-      onClick()
+      onClick(event)
     }
   }
 
