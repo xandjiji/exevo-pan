@@ -5,6 +5,10 @@ import Switch from '..'
 const mockedOnClick = jest.fn()
 
 describe('<Switch />', () => {
+  beforeEach(() => {
+    mockedOnClick.mockReset()
+  })
+
   test('should trigger onClick', () => {
     render(<Switch onClick={mockedOnClick} />)
     const switchElement = screen.getByRole('switch')
@@ -13,6 +17,22 @@ describe('<Switch />', () => {
     userEvent.click(switchElement)
     expect(switchElement).toBeChecked()
     expect(mockedOnClick).toBeCalledTimes(1)
+  })
+
+  test('should trigger on keypress', () => {
+    render(<Switch onClick={mockedOnClick} />)
+    const switchElement = screen.getByRole('switch')
+
+    userEvent.tab()
+    expect(switchElement).toHaveFocus()
+
+    userEvent.keyboard('{enter}')
+    expect(mockedOnClick).toBeCalledTimes(1)
+    expect(switchElement).toBeChecked()
+
+    userEvent.type(switchElement, '{space}')
+    expect(mockedOnClick).toBeCalledTimes(2)
+    expect(switchElement).not.toBeChecked()
   })
 
   test('should have icon element', () => {
