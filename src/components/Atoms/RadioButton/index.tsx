@@ -27,6 +27,7 @@ const RadioButton = ({
       onClick={handleClick}
       onKeyDown={handleKeyPress}
       role="radio"
+      aria-checked={derivedActive}
       tabIndex={0}
       {...props}
     >
