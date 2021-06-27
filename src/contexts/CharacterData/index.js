@@ -9,7 +9,7 @@ import LoadingIndicator from '../../components/LoadingIndicator';
 
 let initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
 
-if (!verifyCharacterObjectShape(initialCharacterArray[0])) {
+if (!initialCharacterArray[0] || !verifyCharacterObjectShape(initialCharacterArray[0])) {
     initialCharacterArray = [];
     saveToLocalStorage('initialCharacterData', [])
 }
