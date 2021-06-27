@@ -4,8 +4,7 @@ import CharCard from './CharCard.styled';
 
 import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
-import { AuctionTimer, Chip, SkillBar } from 'components/Atoms';
-import FavButton from '../FavButton';
+import { AuctionTimer, Chip, SkillBar, FavButton } from 'components/Atoms';
 import InformationBadge from '../InformationBadge';
 
 import ServerDataContext from '../../contexts/ServerData/context';
@@ -104,7 +103,7 @@ export default ({ charData }) => {
                         Level {level} - {level >= 20 ? vocationEnum[vocationId] : vocationEnum['1' + vocationId]}
                     </div>
                 </div>
-                <FavButton className="fav-button" charData={charData} />
+                <FavButton className="fav-button" characterObject={charData} />
             </div>
 
             <div className="overview">
