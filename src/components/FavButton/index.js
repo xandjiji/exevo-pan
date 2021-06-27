@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import FavButton from './FavButton.styled';
 
-import { getFavArray, saveToLocalStorage } from '../../utils/localStorage';
+import { getFavArray, saveToLocalStorage } from 'utils';
 
 import { ReactComponent as HeartIcon } from '../../assets/svgs/heart.svg';
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ItemDataContext from './context';
 import setupItemData from '../../utils/setupItemData';
-import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
+import { saveToLocalStorage, getFromLocalStorage } from 'utils';
 import dataEndpoint from '../../dataEnpoint';
 
 const initialItemObject = getFromLocalStorage('itemData', {});

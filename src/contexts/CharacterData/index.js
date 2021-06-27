@@ -2,8 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import CharacterDataContext from './context';
 import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
-import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
-import { verifyCharacterObjectShape } from 'utils'
+import { saveToLocalStorage, getFromLocalStorage, verifyCharacterObjectShape } from 'utils'
 import dataEndpoint from '../../dataEnpoint';
 
 import LoadingIndicator from '../../components/LoadingIndicator';

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ServerDataContext from './context';
 import setupServerData from '../../utils/setupServerData';
-import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
+import { saveToLocalStorage, getFromLocalStorage } from 'utils';
 import dataEndpoint from '../../dataEnpoint';
 
 const initialServerObject = getFromLocalStorage('serverData', {});

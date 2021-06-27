@@ -1,4 +1,4 @@
-import { getFavArray } from '../../utils/localStorage';
+import { getFavArray } from 'utils';
 
 const applyFilters = (filterState, initialData) => {
 

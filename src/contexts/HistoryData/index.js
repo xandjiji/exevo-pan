@@ -3,7 +3,7 @@ import HistoryDataContext from './context';
 
 import { characterDataReducer } from '../CharacterData/reducers';
 
-import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
+import { saveToLocalStorage, getFromLocalStorage } from 'utils';
 import { minifiedToObject } from '../../utils/dataDictionary';
 import { historyEndpoint } from '../../dataEnpoint';
 
@@ -59,7 +59,7 @@ export default ({ children }) => {
             }
         }
 
-        if(interacted && !loaded) fetchSetupedData();
+        if (interacted && !loaded) fetchSetupedData();
     }, [interacted, loaded]);
 
     useEffect(() => {
