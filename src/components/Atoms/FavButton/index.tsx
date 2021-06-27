@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { getFavArray, saveToLocalStorage, checkKeyboardTrigger } from 'utils'
+import { getFavArray, saveToLocalStorage } from 'utils'
 import { isIdFavorited } from './utils'
 import * as S from './styles'
 import { FavButtonProps } from './types'
@@ -33,14 +33,6 @@ const FavButton = ({
     }
   }
 
-  const handleKeypress = (event: React.KeyboardEvent) => {
-    if (checkKeyboardTrigger(event.code)) {
-      console.log('a')
-      event.preventDefault()
-      handleClick()
-    }
-  }
-
   const isFavLabel = `Remove ${characterObject.nickname} from favorites`
   const isntFavLabel = `Add ${characterObject.nickname} to favorites`
 
@@ -49,7 +41,6 @@ const FavButton = ({
       aria-label={active ? isFavLabel : isntFavLabel}
       active={active}
       onClick={handleClick}
-      onKeyDown={handleKeypress}
       {...props}
     >
       <S.HeartIcon />
