@@ -14,8 +14,11 @@ export const getFromLocalStorage = (key: string, fallbackObject: any): any => {
   return JSON.parse(serializedData)
 }
 
-export const getFavArray = (): string[] => {
-  const favArray: string[] = getFromLocalStorage('initialFavCharacterData', [])
+export const getFavArray = (): CharacterObject[] => {
+  const favArray: CharacterObject[] = getFromLocalStorage(
+    'initialFavCharacterData',
+    [],
+  )
 
   return favArray
 }
