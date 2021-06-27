@@ -39,6 +39,7 @@ const FavButton = ({
   return (
     <S.FavButton
       aria-label={active ? isFavLabel : isntFavLabel}
+      aria-pressed={active}
       active={active}
       onClick={handleClick}
       {...props}
