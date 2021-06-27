@@ -3,14 +3,14 @@ import CharacterDataContext from './context';
 import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage } from '../../utils/localStorage';
-import { checkCharObjectStructure } from '../../utils/checkObjectStructures';
+import { verifyCharacterObjectShape } from 'utils'
 import dataEndpoint from '../../dataEnpoint';
 
 import LoadingIndicator from '../../components/LoadingIndicator';
 
 let initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
 
-if (!checkCharObjectStructure(initialCharacterArray[0])) {
+if (!verifyCharacterObjectShape(initialCharacterArray[0])) {
     initialCharacterArray = [];
     saveToLocalStorage('initialCharacterData', [])
 }

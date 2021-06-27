@@ -1,4 +1,4 @@
-import { checkCharObjectStructure } from './checkObjectStructures';
+import { verifyCharacterObjectShape } from './verifyCharacterObjectShape';
 
 export const saveToLocalStorage = (key, data) => {
     const serializedData = JSON.stringify(data);
@@ -18,7 +18,7 @@ export const getFavArray = () => {
 
     if (favArray.length === 0) return [];
 
-    if (!checkCharObjectStructure(favArray[0])) {
+    if (!verifyCharacterObjectShape(favArray[0])) {
         saveToLocalStorage('initialFavCharacterData', []);
         return [];
     } else {
