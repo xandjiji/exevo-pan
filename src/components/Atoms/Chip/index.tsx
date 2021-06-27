@@ -20,17 +20,10 @@ const ChipComponent = ({
     }
   }
 
-  const handleChipKeypress = (event: React.KeyboardEvent) => {
+  const handleKeypress = (event: React.KeyboardEvent) => {
     if (!!onClick && checkKeyboardTrigger(event.code)) {
       event.preventDefault()
       handleClick()
-    }
-  }
-
-  const handleCloseKeypress = (event: React.KeyboardEvent) => {
-    if (checkKeyboardTrigger(event.code)) {
-      event.preventDefault()
-      onClose?.()
     }
   }
 
@@ -42,17 +35,12 @@ const ChipComponent = ({
       aria-checked={onClick ? derivedActive : undefined}
       tabIndex={onClick ? 0 : undefined}
       onClick={handleClick}
-      onKeyPress={handleChipKeypress}
+      onKeyPress={handleKeypress}
       {...props}
     >
       {children}
       {!!onClose && (
-        <S.CloseButton
-          tabIndex={0}
-          aria-label="Remove item"
-          onClick={onClose}
-          onKeyPress={handleCloseKeypress}
-        />
+        <S.CloseButton aria-label="Remove item" onClick={onClose} />
       )}
     </S.Chip>
   )
