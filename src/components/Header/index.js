@@ -7,11 +7,11 @@ import logo from '../../assets/logo.png';
 import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
-import ThemeContext from '../../contexts/Theme/context';
+import { useTheme } from 'contexts/useTheme';
 
 export default () => {
 
-    const { theme, toggleTheme } = useContext(ThemeContext);
+    const { currentTheme, toggleTheme } = useTheme();
     const { resetParams } = useContext(UrlParametersContext);
 
     return (
@@ -66,7 +66,7 @@ export default () => {
 
             <HeaderWrapper>
                 <Switch
-                    active={theme === 'dark-theme'}
+                    active={currentTheme === 'dark-theme'}
                     onClick={toggleTheme}
                     icon={<MoonIcon />}
                     aria-label="Toggle dark theme"
