@@ -1,6 +1,6 @@
-import styled, { css } from 'styled-components'
+import styled, { css, DefaultTheme } from 'styled-components'
 import { ReactComponent as HeartIconComponent } from 'assets/svgs/heart.svg'
-import { Shadow, Clickable } from 'styles'
+import { Shadow, Clickable, Smooth } from 'styles'
 import { FavButtonStyleProps } from './types'
 
 const activeIconStyle = css`
@@ -16,14 +16,15 @@ export const HeartIcon = styled(HeartIconComponent)`
   padding: 6px;
   width: 36px;
   height: 36px;
-  fill: var(--onSurface);
+  fill: ${({ theme }) => (theme as DefaultTheme).colors.onSurface};
+  ${Smooth}
 
   path {
     transition: opacity 0.12s ease-out;
   }
 
   .filled {
-    fill: var(--red);
+    fill: ${({ theme }) => (theme as DefaultTheme).colors.red};
     opacity: 0;
   }
 `
@@ -37,10 +38,10 @@ export const FavButton = styled.button<FavButtonStyleProps>`
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background-color: var(--surface);
+  background-color: ${({ theme }) => theme.colors.surface};
   user-select: none;
-  transition: box-shadow 0.2s ease-out;
 
+  ${Smooth}
   ${Shadow}
   ${Clickable}
 
