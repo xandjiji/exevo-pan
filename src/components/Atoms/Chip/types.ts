@@ -12,8 +12,3 @@ export interface ChipStyleProps {
   active?: boolean
   clickable?: boolean
 }
-
-export type styleObject = {
-  inactive: string
-  active: string
-}

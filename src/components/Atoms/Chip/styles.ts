@@ -1,16 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Shadow, Clickable } from 'styles'
-import { ChipStyleProps, styleObject } from './types'
-
-export const backgroundStyle = {
-  inactive: 'background-color: var(--primaryVariant);',
-  active: 'background-color: var(--primary);',
-} as styleObject
-
-export const colorStyle = {
-  inactive: 'color: var(--onSurface);',
-  active: 'color: var(--onPrimary);',
-} as styleObject
+import { ChipStyleProps } from './types'
 
 const clickableStyle = css`
   cursor: pointer;
@@ -32,8 +22,22 @@ export const Chip = styled.div<ChipStyleProps>`
   transition: 0.2s ease-out !important;
 
   ${({ active }) =>
-    active ? backgroundStyle.active : backgroundStyle.inactive}
-  ${({ active }) => (active ? colorStyle.active : colorStyle.inactive)}
+    active
+      ? css`
+          background-color: ${({ theme }) => theme.colors.primary};
+        `
+      : css`
+          background-color: ${({ theme }) => theme.colors.primaryVariant};
+        `}
+
+  ${({ active }) =>
+    active
+      ? css`
+          color: ${({ theme }) => theme.colors.onPrimary};
+        `
+      : css`
+          color: ${({ theme }) => theme.colors.onSurface};
+        `}
 
   ${({ clickable }) => clickable && clickableStyle}
 `
@@ -47,7 +51,7 @@ export const CloseButton = styled.button`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: var(--primary);
+  background-color: ${({ theme }) => theme.colors.primary};
   opacity: 0.75;
   transition: box-shadow 0.1s ease-out;
   border: none;
@@ -63,7 +67,7 @@ export const CloseButton = styled.button`
     height: 8px;
     width: 1px;
     border-radius: 2px;
-    background-color: var(--onPrimary);
+    background-color: ${({ theme }) => theme.colors.onPrimary};
   }
 
   &::before {
