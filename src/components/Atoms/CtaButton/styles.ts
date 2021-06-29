@@ -15,13 +15,13 @@ export const Button = styled.a`
 
   background: linear-gradient(
     270deg,
-    var(--primaryVariantHighlight),
-    var(--primaryVariant)
+    ${({ theme }) => theme.colors.primaryVariantHighlight},
+    ${({ theme }) => theme.colors.primaryVariant}
   );
   background-size: 800% 800%;
   animation: bgAnimate 3s ease-out infinite;
 
-  color: var(--onSurface);
+  color: ${({ theme }) => theme.colors.onSurface};
   font-size: 12px;
   letter-spacing: 0.5px;
 
@@ -48,8 +48,8 @@ export const Button = styled.a`
     bottom: 42px;
     right: 14px;
     z-index: 99;
-    background: var(--primary);
-    color: var(--onPrimary);
+    background: ${({ theme }) => theme.colors.primary};
+    color: ${({ theme }) => theme.colors.onPrimary};
     box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
   }
 `
