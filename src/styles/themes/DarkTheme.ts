@@ -1,0 +1,18 @@
+export default {
+  title: 'dark-theme',
+  colors: {
+    background: '#202225',
+    surface: '#36393F',
+    onSurface: '#FFFFFF',
+    separator: '#72767D',
+    primary: '#9857E7',
+    onPrimary: '#FFFFFF',
+    primaryVariant: '#5E4480',
+    green: '#5A9935',
+    red: '#FF5B5B',
+    alert: '#F9EEC1',
+    battleGreen: '#43B600',
+    battleYellow: '#FFDD00',
+    primaryVariantHighlight: '#714CA1',
+  },
+}
