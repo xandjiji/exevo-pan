@@ -53,8 +53,7 @@ export const CloseButton = styled.button`
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.primary};
   opacity: 0.75;
-  transition: box-shadow 0.1s ease-out;
-  transition: background-color 0.1s ease-out;
+  transition: 0.1s ease-out;
   border: none;
 
   &::after,
