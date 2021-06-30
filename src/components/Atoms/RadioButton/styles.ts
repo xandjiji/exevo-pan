@@ -8,7 +8,7 @@ export const Radio = styled.div<RadioStyleProps>`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: solid 2px var(--separator);
+  border: solid 2px ${({ theme }) => theme.colors.separator};
   transition: box-shadow 0.2s ease-out;
 
   &::after {
@@ -21,7 +21,7 @@ export const Radio = styled.div<RadioStyleProps>`
     border-radius: 50%;
     width: 8px;
     height: 8px;
-    background-color: var(--primary);
+    background-color: ${({ theme }) => theme.colors.primary};
     opacity: ${({ active }) => (active ? '1' : '0')};
     transition: opacity 0.2s ease-out;
   }
@@ -32,7 +32,7 @@ export const Wrapper = styled.div<WrapperStyleProps>`
   cursor: pointer;
 
   font-size: 14px;
-  color: var(--onSurface);
+  color: ${({ theme }) => theme.colors.onSurface};
 
   &:hover {
     ${Radio} {
