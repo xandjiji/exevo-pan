@@ -14,7 +14,10 @@ export const ThemeProvider = ({
   children,
 }: ThemeProviderProps): JSX.Element => {
   const [currentThemeTitle, setCurrentThemeTitle] = useState<string>(
-    () => localStorage.getItem('theme') ?? Themes.default.title,
+    () =>
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+      Themes[localStorage.getItem('theme') ?? Themes.default.title]?.title ??
+      Themes.default.title,
   )
   const currentTheme = Themes[currentThemeTitle]
 
