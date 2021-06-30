@@ -17,7 +17,12 @@ const SpritePortrait = ({
         onError={() => setLoaded(false)}
         {...props}
       />
-      <S.Spinner visible={!loaded} />
+      <S.Spinner
+        role="alert"
+        aria-label="Loading indicator"
+        aria-busy="true"
+        visible={!loaded}
+      />
     </S.Wrapper>
   )
 }
