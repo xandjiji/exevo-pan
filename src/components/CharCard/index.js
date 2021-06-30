@@ -215,7 +215,7 @@ const makeItemImg = (itemArray) => {
     }
 
     while (elementArray.length < 4) {
-        elementArray.push(<SpritePortrait key={elementArray.length} hidden alt="No item" />);
+        elementArray.push(<SpritePortrait key={elementArray.length} alt="No item" />);
     }
 
     return elementArray;

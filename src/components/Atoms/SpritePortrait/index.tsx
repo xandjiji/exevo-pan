@@ -11,8 +11,9 @@ const SpritePortrait = ({
   return (
     <S.Wrapper>
       <S.Img
-        visible={loaded}
         src={src}
+        visible={loaded}
+        hidden={!!!src}
         onLoad={() => setLoaded(true)}
         onError={() => setLoaded(false)}
         {...props}
