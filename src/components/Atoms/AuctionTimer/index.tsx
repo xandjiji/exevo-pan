@@ -8,7 +8,6 @@ const AuctionTimer = ({
   endDate,
   ...props
 }: AuctionTimerProps): JSX.Element => {
-  // eslint-disable-next-line
   const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
   const { pathname } = useLocation()
   const isBazaarHistory = pathname === '/bazaar-history'
