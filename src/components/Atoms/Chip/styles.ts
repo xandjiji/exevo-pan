@@ -21,23 +21,15 @@ export const Chip = styled.div<ChipStyleProps>`
   border: none;
   transition: 0.2s ease-out !important;
 
-  ${({ active }) =>
+  ${({ active, theme }) =>
     active
-      ? css`
-          background-color: ${({ theme }) => theme.colors.primary};
-        `
-      : css`
-          background-color: ${({ theme }) => theme.colors.primaryVariant};
-        `}
+      ? `background-color: ${theme.colors.primary};`
+      : `background-color: ${theme.colors.primaryVariant};`}
 
-  ${({ active }) =>
+  ${({ active, theme }) =>
     active
-      ? css`
-          color: ${({ theme }) => theme.colors.onPrimary};
-        `
-      : css`
-          color: ${({ theme }) => theme.colors.onSurface};
-        `}
+      ? `color: ${theme.colors.onPrimary};`
+      : `color: ${theme.colors.onSurface};`}
 
   ${({ clickable }) => clickable && clickableStyle}
 `
