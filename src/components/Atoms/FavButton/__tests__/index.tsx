@@ -1,6 +1,7 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { getFavArray, saveToLocalStorage } from 'utils'
+import { renderWithProviders } from 'utils/test'
 import FavButton from '..'
 
 jest.mock('utils', () => ({
@@ -59,9 +60,9 @@ describe('<FavButton />', () => {
   })
 
   describe('lazy state initialization should work correctly', () => {
-    test('if the character IS favorited, it should render with an ACTIVE button', () => {
+    test('if the character IS favorited, it should renderWithProviders with an ACTIVE button', () => {
       getFavArrayMock.mockReturnValueOnce([mockedCharacterObject])
-      render(<FavButton characterObject={mockedCharacterObject} />)
+      renderWithProviders(<FavButton characterObject={mockedCharacterObject} />)
 
       expect(
         screen.getByLabelText(
@@ -71,11 +72,11 @@ describe('<FavButton />', () => {
       expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true')
     })
 
-    test('if the character ISNT favorited, it should render with an INACTIVE button', () => {
+    test('if the character ISNT favorited, it should renderWithProviders with an INACTIVE button', () => {
       getFavArrayMock.mockReturnValueOnce([
         { ...mockedCharacterObject, id: 987654 },
       ])
-      render(<FavButton characterObject={mockedCharacterObject} />)
+      renderWithProviders(<FavButton characterObject={mockedCharacterObject} />)
 
       expect(
         screen.getByLabelText(
@@ -88,9 +89,9 @@ describe('<FavButton />', () => {
       )
     })
 
-    test('if there are no favorited characters, it should render with an INACTIVE button', () => {
+    test('if there are no favorited characters, it should renderWithProviders with an INACTIVE button', () => {
       getFavArrayMock.mockReturnValueOnce([])
-      render(<FavButton characterObject={mockedCharacterObject} />)
+      renderWithProviders(<FavButton characterObject={mockedCharacterObject} />)
 
       expect(
         screen.getByLabelText(
@@ -106,7 +107,7 @@ describe('<FavButton />', () => {
 
   test('should toggle correctly', () => {
     getFavArrayMock.mockReturnValue([])
-    render(<FavButton characterObject={mockedCharacterObject} />)
+    renderWithProviders(<FavButton characterObject={mockedCharacterObject} />)
 
     const buttonElement = screen.getByRole('button')
 
@@ -132,7 +133,7 @@ describe('<FavButton />', () => {
 
   test('keyboard navigation should toggle the button', () => {
     getFavArrayMock.mockReturnValue([])
-    render(<FavButton characterObject={mockedCharacterObject} />)
+    renderWithProviders(<FavButton characterObject={mockedCharacterObject} />)
 
     const buttonElement = screen.getByRole('button')
 
