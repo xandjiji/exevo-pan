@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled from 'styled-components'
 import { Shadow } from 'styles'
 import { WrapperProps, InfoProps } from './types'
 
@@ -51,10 +51,8 @@ export const Wrapper = styled.div<WrapperProps>`
 
   ${Value} {
     margin-right: 6px;
-    ${({ highlight }) =>
-      highlight &&
-      `background-color: ${({ theme }) =>
-        (theme as DefaultTheme).colors.green};`}
+    ${({ highlight, theme }) =>
+      highlight && `background-color: ${theme.colors.green};`}
   }
 
   ${ProgressBar} {
@@ -62,9 +60,7 @@ export const Wrapper = styled.div<WrapperProps>`
   }
 
   ${BarFill} {
-    ${({ highlight }) =>
-      highlight &&
-      `background-color: ${({ theme }) =>
-        (theme as DefaultTheme).colors.green};`}
+    ${({ highlight, theme }) =>
+      highlight && `background-color: ${theme.colors.green};`}
   }
 `
