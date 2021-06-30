@@ -10,8 +10,6 @@ import StatisticsGrid from '../components/StatisticsGrid';
 
 import ErrorPage from '../components/ErrorPage';
 
-import '../layouts/common.css';
-
 const pageTitle = {
     '/': 'Exevo Pan - Current Auctions',
     '/bazaar-history': 'Exevo Pan - Bazaar History',
