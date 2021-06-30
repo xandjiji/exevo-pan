@@ -17,25 +17,33 @@ describe('<AuctionTimer />', () => {
   describe('it renders Auction Ended message', () => {
     test('for right now', () => {
       renderWithRouter(<AuctionTimer endDate={new Date()} />)
-      expect(screen.getByText('Auction Ended!')).toBeInTheDocument()
+
+      expect(screen.getByRole('timer')).toHaveTextContent('Auction Ended!')
+      expect(screen.getByLabelText('Auction is over')).toBeInTheDocument()
     })
 
     test('for a past date', () => {
       renderWithRouter(<AuctionTimer endDate={past} />)
-      expect(screen.getByText('Auction Ended!')).toBeInTheDocument()
+
+      expect(screen.getByRole('timer')).toHaveTextContent('Auction Ended!')
+      expect(screen.getByLabelText('Auction is over')).toBeInTheDocument()
     })
   })
 
   describe('renders endDateString', () => {
     test('for a future date', () => {
       renderWithRouter(<AuctionTimer endDate={future} />)
-      expect(screen.getByText(/1 Jan/)).toBeInTheDocument()
+
+      expect(screen.getByRole('timer')).toHaveTextContent(/1 Jan/)
+      expect(screen.getByLabelText('Auction ends at')).toBeInTheDocument()
       expect(screen.getByText(/0:00/)).toBeInTheDocument()
     })
 
     test('for a past date at /bazaar-history route', () => {
       renderWithRouter(<AuctionTimer endDate={past} />, '/bazaar-history')
-      expect(screen.getByText(/1 Jan/)).toBeInTheDocument()
+
+      expect(screen.getByRole('timer')).toHaveTextContent(/1 Jan/)
+      expect(screen.getByLabelText('Auction finished at')).toBeInTheDocument()
       expect(screen.getByText(/0:00/)).toBeInTheDocument()
     })
   })
@@ -43,17 +51,23 @@ describe('<AuctionTimer />', () => {
   describe('renders countdownTime', () => {
     test('for a hours remaining', () => {
       renderWithRouter(<AuctionTimer endDate={tomorrow} />)
-      expect(screen.getByText(/23h 59m/)).toBeInTheDocument()
+
+      expect(screen.getByRole('timer')).toHaveTextContent(/23h 59m/)
+      expect(screen.getByLabelText('Auction ends in')).toBeInTheDocument()
     })
 
     test('for minutes remaining', () => {
       renderWithRouter(<AuctionTimer endDate={nextHour} />)
-      expect(screen.getByText(/59m 59s/)).toBeInTheDocument()
+
+      expect(screen.getByRole('timer')).toHaveTextContent(/59m 59s/)
+      expect(screen.getByLabelText('Auction ends in')).toBeInTheDocument()
     })
 
     test('for seconds remaining', () => {
       renderWithRouter(<AuctionTimer endDate={soon} />)
-      expect(screen.getByText(/0m 59s/)).toBeInTheDocument()
+
+      expect(screen.getByRole('timer')).toHaveTextContent(/0m 59s/)
+      expect(screen.getByLabelText('Auction ends in')).toBeInTheDocument()
     })
   })
 })
