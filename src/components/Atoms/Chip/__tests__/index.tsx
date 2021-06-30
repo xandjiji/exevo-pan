@@ -1,4 +1,5 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
+import { renderWithProviders } from 'utils/test'
 import userEvent from '@testing-library/user-event'
 import Chip from '..'
 
@@ -12,7 +13,7 @@ describe('<Chip />', () => {
   })
 
   test('it renders correctly', () => {
-    render(<Chip data-testid="testid">test</Chip>)
+    renderWithProviders(<Chip data-testid="testid">test</Chip>)
 
     expect(screen.getByTestId('testid')).toBeInTheDocument()
     expect(screen.getByText(/test/i)).toBeInTheDocument()
@@ -21,7 +22,7 @@ describe('<Chip />', () => {
   })
 
   test('it triggers click handler', () => {
-    render(<Chip onClick={mockedOnClick} />)
+    renderWithProviders(<Chip onClick={mockedOnClick} />)
 
     const chipElement = screen.getByRole('switch')
 
@@ -32,7 +33,7 @@ describe('<Chip />', () => {
   })
 
   test('it doesnt trigger click handler', () => {
-    render(<Chip data-testid="testid" />)
+    renderWithProviders(<Chip data-testid="testid" />)
 
     const chipElement = screen.getByTestId('testid')
 
@@ -43,7 +44,7 @@ describe('<Chip />', () => {
   })
 
   test('it triggers close handler', () => {
-    render(<Chip onClose={mockedOnClose} />)
+    renderWithProviders(<Chip onClose={mockedOnClose} />)
 
     const closeButton = screen.getByLabelText(/remove item/i)
     userEvent.click(closeButton)
@@ -53,7 +54,9 @@ describe('<Chip />', () => {
 
   describe('it overrides status correctly', () => {
     test('for true', () => {
-      render(<Chip onClick={mockedOnClick} overrideStatus={true} />)
+      renderWithProviders(
+        <Chip onClick={mockedOnClick} overrideStatus={true} />,
+      )
 
       const chipElement = screen.getByRole('switch')
 
@@ -63,7 +66,9 @@ describe('<Chip />', () => {
     })
 
     test('for false', () => {
-      render(<Chip onClick={mockedOnClick} overrideStatus={false} />)
+      renderWithProviders(
+        <Chip onClick={mockedOnClick} overrideStatus={false} />,
+      )
 
       const chipElement = screen.getByRole('switch')
 
@@ -75,7 +80,7 @@ describe('<Chip />', () => {
 
   describe('for keypress events', () => {
     test('should trigger on chip keypress', () => {
-      render(<Chip onClick={mockedOnClick} />)
+      renderWithProviders(<Chip onClick={mockedOnClick} />)
       const chipElement = screen.getByRole('switch')
 
       userEvent.tab()
@@ -91,7 +96,7 @@ describe('<Chip />', () => {
     })
 
     test('should trigger on close button keypress', () => {
-      render(<Chip onClose={mockedOnClose} />)
+      renderWithProviders(<Chip onClose={mockedOnClose} />)
       const closeButton = screen.getByLabelText(/remove item/i)
 
       userEvent.tab()
