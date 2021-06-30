@@ -29,7 +29,7 @@ export const Track = styled.div<ActiveStyleProps>`
   position: relative;
   width: 100%;
   height: 4px;
-  background: var(--primaryVariant);
+  background: ${({ theme }) => theme.colors.primaryVariant};
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
   cursor: pointer;
 
@@ -47,7 +47,7 @@ export const Cursor = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--primary);
+  background: ${({ theme }) => theme.colors.primary};
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
   pointer-events: none;
 `
@@ -56,7 +56,7 @@ export const TrackFill = styled.div`
   position: absolute;
   top: 0;
   height: 100%;
-  background-color: var(--primary);
+  background-color: ${({ theme }) => theme.colors.primary};
   opacity: 0.7;
 `
 
@@ -68,12 +68,12 @@ export const ValueDisplay = styled.span`
   border-radius: 8px;
   border: none;
   outline: none;
-  background-color: var(--primaryVariant);
+  background-color: ${({ theme }) => theme.colors.primaryVariant};
 
   font-size: 12px;
   font-weight: 400;
   text-align: center;
-  color: var(--onSurface);
+  color: ${({ theme }) => theme.colors.onSurface};
 
   -moz-appearance: textfield;
   &::-webkit-outer-spin-button,
