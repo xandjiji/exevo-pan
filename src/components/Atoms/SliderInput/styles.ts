@@ -30,7 +30,7 @@ export const Track = styled.div<TrackStyleProps>`
   position: relative;
   width: 100%;
   height: 4px;
-  background: var(--primaryVariant);
+  background: ${({ theme }) => theme.colors.primaryVariant};
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.09);
   cursor: pointer;
 
@@ -43,7 +43,7 @@ export const TrackFill = styled.div`
   top: 0;
   left: 0;
   height: 100%;
-  background-color: var(--primary);
+  background-color: ${({ theme }) => theme.colors.primary};
   pointer-events: none;
 
   &::after {
@@ -53,7 +53,7 @@ export const TrackFill = styled.div`
     top: 0;
     height: 100%;
     width: 7px;
-    background-color: var(--primary);
+    background-color: ${({ theme }) => theme.colors.primary};
     pointer-events: none;
   }
 `
@@ -68,14 +68,14 @@ export const Cursor = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background: var(--primary);
+  background: ${({ theme }) => theme.colors.primary};
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
   pointer-events: none;
 `
 
 const invalidStyle = css`
-  background-color: var(--red);
-  color: var(--onPrimary);
+  background-color: ${({ theme }) => theme.colors.red};
+  color: ${({ theme }) => theme.colors.onPrimary};
 `
 
 export const SliderInput = styled.input<SliderInputStyleProps>`
@@ -85,12 +85,12 @@ export const SliderInput = styled.input<SliderInputStyleProps>`
   border-radius: 8px;
   border: none;
   outline: none;
-  background-color: var(--primaryVariant);
+  background-color: ${({ theme }) => theme.colors.primaryVariant};
 
   font-size: 12px;
   font-weight: 400;
   text-align: center;
-  color: var(--onSurface);
+  color: ${({ theme }) => theme.colors.onSurface};
 
   ${Smooth}
   ${({ valid }) => !valid && invalidStyle}
