@@ -1,7 +1,7 @@
 {
   "name": "exevo-pan",
   "version": "0.1.0",
-  "private": true,
+  "author": "Alexandre Regali Seleghim <xandjiji@gmail.com> (https://github.com/xandjiji)",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
