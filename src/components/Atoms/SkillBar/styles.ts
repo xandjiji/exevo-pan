@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import { Shadow } from 'styles'
 import { WrapperProps, InfoProps } from './types'
 
@@ -9,12 +9,12 @@ export const Value = styled.div`
   border-radius: 5px;
   font-size: 14px;
   letter-spacing: 0.6px;
-  background-color: var(--primary);
-  color: var(--onPrimary);
+  background-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.colors.onPrimary};
   text-align: right;
   font-weight: 600;
-  transition: background-color 0.2s ease-out;
-  transition: color 0.2s ease-out;
+  transition: all 0.2s ease-out;
+  transition-property: background-color, color;
 
   ${Shadow}
 `
@@ -27,21 +27,21 @@ export const Info = styled.div<InfoProps>`
     text-transform: capitalize;
     font-size: 12px;
     font-weight: 300;
-    color: var(--onSurface);
+    color: ${({ theme }) => theme.colors.onSurface};
   }
 `
 
 export const ProgressBar = styled.div`
   position: relative;
   height: 4px;
-  background-color: var(--primaryVariant);
+  background-color: ${({ theme }) => theme.colors.primaryVariant};
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
 `
 
 export const BarFill = styled.div`
   display: block;
   height: 100%;
-  background-color: var(--primary);
+  background-color: ${({ theme }) => theme.colors.primary};
   transition: width 0.4s ease-out;
 `
 
@@ -51,7 +51,10 @@ export const Wrapper = styled.div<WrapperProps>`
 
   ${Value} {
     margin-right: 6px;
-    ${({ highlight }) => highlight && 'background-color: var(--green);'}
+    ${({ highlight }) =>
+      highlight &&
+      `background-color: ${({ theme }) =>
+        (theme as DefaultTheme).colors.green};`}
   }
 
   ${ProgressBar} {
@@ -59,6 +62,9 @@ export const Wrapper = styled.div<WrapperProps>`
   }
 
   ${BarFill} {
-    ${({ highlight }) => highlight && 'background-color: var(--green);'}
+    ${({ highlight }) =>
+      highlight &&
+      `background-color: ${({ theme }) =>
+        (theme as DefaultTheme).colors.green};`}
   }
 `
