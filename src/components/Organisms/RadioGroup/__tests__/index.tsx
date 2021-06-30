@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { renderWithProviders } from 'utils/test'
 import { RadioButton } from 'components/Atoms'
 import RadioGroup from '..'
 
@@ -12,7 +13,7 @@ describe('<RadioGroup />', () => {
 
   describe('renders children correctly', () => {
     test('RadioButtons as children', () => {
-      render(
+      renderWithProviders(
         <RadioGroup>
           <RadioButton />
           <RadioButton />
@@ -23,7 +24,7 @@ describe('<RadioGroup />', () => {
     })
 
     test('html elements as children', () => {
-      render(
+      renderWithProviders(
         <RadioGroup>
           <div role="none" />
           <div role="none" />
@@ -34,7 +35,7 @@ describe('<RadioGroup />', () => {
     })
 
     test('html elements AND RadioButtons as children', () => {
-      render(
+      renderWithProviders(
         <RadioGroup>
           <RadioButton data-testid="child" />
           <div data-testid="child" />
@@ -46,7 +47,7 @@ describe('<RadioGroup />', () => {
   })
 
   test('should implicitly control its children', () => {
-    render(
+    renderWithProviders(
       <RadioGroup>
         <RadioButton />
         <RadioButton />
@@ -66,7 +67,7 @@ describe('<RadioGroup />', () => {
   })
 
   test('should be controlled', () => {
-    render(
+    renderWithProviders(
       <RadioGroup indexValue={0}>
         <RadioButton />
         <RadioButton />
@@ -86,7 +87,7 @@ describe('<RadioGroup />', () => {
   })
 
   test('should call onChange', () => {
-    render(
+    renderWithProviders(
       <RadioGroup onChange={mockedOnChange}>
         <RadioButton />
         <RadioButton />
