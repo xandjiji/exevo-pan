@@ -1,11 +1,10 @@
 import { HTMLAttributes } from 'react'
 
-export interface ChipProps {
+export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode
   onClick?: (event?: React.MouseEvent) => void
   onClose?: (event?: React.MouseEvent) => void
   overrideStatus?: boolean
-  props?: HTMLAttributes<HTMLDivElement>
 }
 
 export interface ChipStyleProps {

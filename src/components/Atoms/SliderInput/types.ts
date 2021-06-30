@@ -1,11 +1,10 @@
 import { HTMLAttributes } from 'react'
 
-export interface SliderInputProps {
+export interface SliderInputProps extends HTMLAttributes<HTMLInputElement> {
   min: number
   max: number
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
   value?: number
-  props?: HTMLAttributes<HTMLInputElement>
 }
 
 export interface TrackStyleProps {

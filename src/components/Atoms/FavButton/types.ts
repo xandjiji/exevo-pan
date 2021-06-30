@@ -1,8 +1,7 @@
 import { HTMLAttributes } from 'react'
 
-export interface FavButtonProps {
+export interface FavButtonProps extends HTMLAttributes<HTMLDivElement> {
   characterObject: CharacterObject
-  props?: HTMLAttributes<HTMLDivElement>
 }
 
 export interface FavButtonStyleProps {

@@ -1,6 +1,5 @@
 import { HTMLAttributes } from 'react'
 
-export interface LoadingAlertProps {
+export interface LoadingAlertProps extends HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode
-  props?: HTMLAttributes<HTMLDivElement>
 }

@@ -1,8 +1,7 @@
 import { HTMLAttributes } from 'react'
 
-export interface AuctionTimerProps {
+export interface AuctionTimerProps extends HTMLAttributes<HTMLSpanElement> {
   endDate: Date
-  props?: HTMLAttributes<HTMLSpanElement>
 }
 
 export interface CountdownObject {

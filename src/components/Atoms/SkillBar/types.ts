@@ -1,10 +1,9 @@
 import { HTMLAttributes } from 'react'
 
-export interface SkillBarProps {
+export interface SkillBarProps extends HTMLAttributes<HTMLDivElement> {
   skillName: string
   skillValue: number
   highlight?: boolean
-  props?: HTMLAttributes<HTMLDivElement>
 }
 
 export interface WrapperProps {
