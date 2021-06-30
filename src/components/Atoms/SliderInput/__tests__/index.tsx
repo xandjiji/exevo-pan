@@ -1,17 +1,18 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { renderWithProviders } from 'utils/test'
 import SliderInput from '..'
 
 const mockedOnChange = jest.fn()
 
 describe('<SliderInput />', () => {
   test('should render correctly', () => {
-    render(<SliderInput data-testid="test" min={0} max={100} />)
+    renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
     expect(screen.getByTestId('test')).toBeInTheDocument()
   })
 
   test('onChange should be called', () => {
-    render(
+    renderWithProviders(
       <SliderInput
         data-testid="test"
         min={0}
@@ -26,7 +27,7 @@ describe('<SliderInput />', () => {
   })
 
   test('should be invalid', () => {
-    render(<SliderInput data-testid="test" min={0} max={100} />)
+    renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
 
     const displayInput = screen.getAllByDisplayValue(0)[0]
     const hiddenInput = screen.getByTestId('test')
@@ -41,7 +42,7 @@ describe('<SliderInput />', () => {
   })
 
   test('should clamp values between 0 and 100', () => {
-    render(<SliderInput data-testid="test" min={0} max={100} />)
+    renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
 
     const displayInput = screen.getAllByDisplayValue(0)[0]
     const hiddenInput = screen.getByTestId('test')
@@ -65,7 +66,7 @@ describe('<SliderInput />', () => {
   })
 
   test('should work well with negative values', () => {
-    render(<SliderInput min={-200} max={200} />)
+    renderWithProviders(<SliderInput min={-200} max={200} />)
 
     const displayInput = screen.getAllByDisplayValue(-200)[0]
     userEvent.clear(displayInput)
