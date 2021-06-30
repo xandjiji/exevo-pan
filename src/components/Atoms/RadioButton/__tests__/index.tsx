@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { renderWithProviders } from 'utils/test'
 import RadioButton from '..'
 
 const mockedOnClick = jest.fn()
@@ -9,8 +10,8 @@ describe('<RadioButton />', () => {
     mockedOnClick.mockReset()
   })
 
-  test('renders children', () => {
-    render(
+  test('renderWithProviderss children', () => {
+    renderWithProviders(
       <RadioButton>
         <div role="none" />
       </RadioButton>,
@@ -20,7 +21,7 @@ describe('<RadioButton />', () => {
   })
 
   test('controls inner state correctly', () => {
-    render(<RadioButton />)
+    renderWithProviders(<RadioButton />)
     const radioElement = screen.getByRole('radio')
 
     expect(radioElement).not.toBeChecked()
@@ -32,7 +33,7 @@ describe('<RadioButton />', () => {
 
   describe('is controlled correctly', () => {
     test('for True', () => {
-      render(<RadioButton active />)
+      renderWithProviders(<RadioButton active />)
       const radioElement = screen.getByRole('radio')
 
       expect(radioElement).toBeChecked()
@@ -41,7 +42,7 @@ describe('<RadioButton />', () => {
     })
 
     test('for False', () => {
-      render(<RadioButton active={false} />)
+      renderWithProviders(<RadioButton active={false} />)
       const radioElement = screen.getByRole('radio')
 
       expect(radioElement).not.toBeChecked()
@@ -51,7 +52,7 @@ describe('<RadioButton />', () => {
   })
 
   test('calls onClick function', () => {
-    render(<RadioButton onClick={mockedOnClick} />)
+    renderWithProviders(<RadioButton onClick={mockedOnClick} />)
     const radioElement = screen.getByRole('radio')
 
     userEvent.click(radioElement)
@@ -61,7 +62,7 @@ describe('<RadioButton />', () => {
   })
 
   test('calls onClick function on keyboard events', () => {
-    render(<RadioButton onClick={mockedOnClick} />)
+    renderWithProviders(<RadioButton onClick={mockedOnClick} />)
 
     userEvent.tab()
     userEvent.keyboard('{enter}')
@@ -72,7 +73,7 @@ describe('<RadioButton />', () => {
   })
 
   test('keyboard events check radio button correctyle', () => {
-    render(<RadioButton />)
+    renderWithProviders(<RadioButton />)
     const radioElement = screen.getByRole('radio')
 
     userEvent.tab()
