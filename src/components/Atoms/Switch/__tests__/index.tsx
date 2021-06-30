@@ -1,5 +1,6 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { renderWithProviders } from 'utils/test'
 import Switch from '..'
 
 const mockedOnClick = jest.fn()
@@ -10,7 +11,7 @@ describe('<Switch />', () => {
   })
 
   test('should trigger onClick', () => {
-    render(<Switch onClick={mockedOnClick} />)
+    renderWithProviders(<Switch onClick={mockedOnClick} />)
     const switchElement = screen.getByRole('switch')
 
     expect(switchElement).not.toBeChecked()
@@ -20,7 +21,7 @@ describe('<Switch />', () => {
   })
 
   test('should trigger on keypress', () => {
-    render(<Switch onClick={mockedOnClick} />)
+    renderWithProviders(<Switch onClick={mockedOnClick} />)
     const switchElement = screen.getByRole('switch')
 
     userEvent.tab()
@@ -36,17 +37,17 @@ describe('<Switch />', () => {
   })
 
   test('should have icon element', () => {
-    render(<Switch icon={<div role="none" />} />)
+    renderWithProviders(<Switch icon={<div role="none" />} />)
     expect(screen.getByRole('none')).toBeInTheDocument()
   })
 
   test('should have children', () => {
-    render(<Switch>children</Switch>)
+    renderWithProviders(<Switch>children</Switch>)
     expect(screen.getByText('children')).toBeInTheDocument()
   })
 
   test('should be forced to be active', () => {
-    render(<Switch active />)
+    renderWithProviders(<Switch active />)
     const switchElement = screen.getByRole('switch')
 
     expect(switchElement).toBeChecked()
