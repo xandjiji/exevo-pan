@@ -73,7 +73,8 @@ export const ValueDisplay = styled.span`
   font-size: 12px;
   font-weight: 400;
   text-align: center;
-  color: ${({ theme }) => theme.colors.onSurface};
+  /* @ToDo: remove !important after SideDrawer refactor */
+  color: ${({ theme }) => theme.colors.onSurface} !important;
 
   -moz-appearance: textfield;
   &::-webkit-outer-spin-button,
