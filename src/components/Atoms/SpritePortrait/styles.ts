@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   border-radius: 5px;
   background-color: ${({ theme }) => theme.colors.primaryVariant};
   user-select: none;
+  transition: background-color 0.2s ease-out;
 
   ${Shadow}
 `
