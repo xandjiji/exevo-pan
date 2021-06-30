@@ -9,8 +9,9 @@ const AuctionTimer = ({
   ...props
 }: AuctionTimerProps): JSX.Element => {
   // eslint-disable-next-line
-  const { pathname } = useLocation()
   const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
+  const { pathname } = useLocation()
+  const isBazaarHistory = pathname === '/bazaar-history'
 
   const endTime = `, ${endDate.getHours()}:${endDate
     .getMinutes()
@@ -23,10 +24,18 @@ const AuctionTimer = ({
     ? `${hours}h ${minutes}m`
     : `${minutes}m ${seconds}s`
 
-  if (days > 0 || pathname === '/bazaar-history') {
+  if (days > 0 || isBazaarHistory) {
     return (
       <>
-        <S.Countdown {...props}>{endDateString}</S.Countdown>
+        <S.Countdown
+          role="timer"
+          aria-label={
+            isBazaarHistory ? 'Auction finished at' : 'Auction ends at'
+          }
+          {...props}
+        >
+          {endDateString}
+        </S.Countdown>
         {endTime}
       </>
     )
@@ -35,7 +44,12 @@ const AuctionTimer = ({
   if (hours + minutes + seconds > 0) {
     return (
       <>
-        <S.Countdown endingSoon {...props}>
+        <S.Countdown
+          role="timer"
+          aria-label="Auction ends in"
+          endingSoon
+          {...props}
+        >
           {countdownTime}
         </S.Countdown>
         {endTime}
@@ -44,7 +58,12 @@ const AuctionTimer = ({
   }
 
   return (
-    <S.Countdown endingSoon {...props}>
+    <S.Countdown
+      role="timer"
+      aria-label="Auction is over"
+      endingSoon
+      {...props}
+    >
       Auction Ended!
     </S.Countdown>
   )
