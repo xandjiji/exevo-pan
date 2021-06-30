@@ -1,11 +1,10 @@
 import { useState } from 'react'
 import * as S from './styles'
-import { SpritePortraitProps } from './types'
 
 const SpritePortrait = ({
   src,
   ...props
-}: SpritePortraitProps): JSX.Element => {
+}: React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element => {
   const [loaded, setLoaded] = useState<boolean>(!!!src)
 
   return (
