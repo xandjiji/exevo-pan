@@ -2,9 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import CharCard from './CharCard.styled';
 
-import ImagePortrait from '../ImagePortrait';
 import LabeledText from '../LabeledText';
-import { AuctionTimer, Chip, SkillBar, FavButton } from 'components/Atoms';
+import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait } from 'components/Atoms';
 import InformationBadge from '../InformationBadge';
 
 import ServerDataContext from '../../contexts/ServerData/context';
@@ -84,12 +83,13 @@ export default ({ charData }) => {
     return (
         <CharCard className="shadow">
             <div className="card-head">
-                <ImagePortrait
+                <SpritePortrait
                     src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
                     alt={nickname}
                     title={nickname}
                     width={64}
                     height={64}
+                    style={{ marginLeft: '-24px', marginTop: '-24px' }}
                 />
                 <div className="head-info">
                     <p className="nickname">
@@ -210,12 +210,12 @@ const makeItemImg = (itemArray) => {
 
     if (itemArray) {
         for (const item of itemArray) {
-            elementArray.push(<ImagePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
+            elementArray.push(<SpritePortrait key={item} alt="Featured item" src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`} />);
         }
     }
 
     while (elementArray.length < 4) {
-        elementArray.push(<ImagePortrait key={elementArray.length} alt="No item" />);
+        elementArray.push(<SpritePortrait key={elementArray.length} hidden alt="No item" />);
     }
 
     return elementArray;
