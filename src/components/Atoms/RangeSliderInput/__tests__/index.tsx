@@ -1,14 +1,17 @@
-import { render, screen } from '@testing-library/react'
+import { screen } from '@testing-library/react'
+import { renderWithProviders } from 'utils/test'
 import RangeSliderInput from '..'
 
 describe('<RangeSliderInput />', () => {
-  test('should render correctly', () => {
-    render(<RangeSliderInput data-testid="test" min={0} max={100} />)
+  test('should renderWithProviders correctly', () => {
+    renderWithProviders(
+      <RangeSliderInput data-testid="test" min={0} max={100} />,
+    )
     expect(screen.getByTestId('test')).toBeInTheDocument()
   })
 
-  test('should render cursors correctly', () => {
-    render(<RangeSliderInput min={0} max={100} value={[10, 90]} />)
+  test('should renderWithProviders cursors correctly', () => {
+    renderWithProviders(<RangeSliderInput min={0} max={100} value={[10, 90]} />)
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
 
@@ -19,7 +22,9 @@ describe('<RangeSliderInput />', () => {
   })
 
   test('should clamp values', () => {
-    render(<RangeSliderInput min={0} max={100} value={[-99, 200]} />)
+    renderWithProviders(
+      <RangeSliderInput min={0} max={100} value={[-99, 200]} />,
+    )
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
 
@@ -30,7 +35,9 @@ describe('<RangeSliderInput />', () => {
   })
 
   test('should work well for negative values', () => {
-    render(<RangeSliderInput min={-200} max={-100} value={[-190, -110]} />)
+    renderWithProviders(
+      <RangeSliderInput min={-200} max={-100} value={[-190, -110]} />,
+    )
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
 
