@@ -79,7 +79,7 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {!loaded && interacted ? <LoadingAlert>{`Updating data...  ${percentage}`}</LoadingAlert> : null}
+            {!loaded && interacted ? <LoadingAlert aria-label="Updating auction history data" >{`Updating data...  ${percentage}`}</LoadingAlert> : null}
             {children}
         </HistoryDataContext.Provider>
     )

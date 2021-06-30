@@ -62,7 +62,7 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {loaded ? null : <LoadingAlert>Updating data...</LoadingAlert>}
+            {loaded ? null : <LoadingAlert aria-label="Updating auction data" >Updating data...</LoadingAlert>}
             {children}
         </CharacterDataContext.Provider>
     )
