@@ -3,7 +3,7 @@ import { renderWithProviders } from 'utils/test'
 import SkillBar from '..'
 
 describe('<SkillBar />', () => {
-  test('should renderWithProviders correctly', () => {
+  test('should render correctly', () => {
     renderWithProviders(
       <SkillBar
         skillName="test"

@@ -10,7 +10,7 @@ describe('<RadioButton />', () => {
     mockedOnClick.mockReset()
   })
 
-  test('renderWithProviderss children', () => {
+  test('renders children', () => {
     renderWithProviders(
       <RadioButton>
         <div role="none" />

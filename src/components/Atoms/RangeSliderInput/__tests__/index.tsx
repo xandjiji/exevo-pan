@@ -3,14 +3,14 @@ import { renderWithProviders } from 'utils/test'
 import RangeSliderInput from '..'
 
 describe('<RangeSliderInput />', () => {
-  test('should renderWithProviders correctly', () => {
+  test('should render correctly', () => {
     renderWithProviders(
       <RangeSliderInput data-testid="test" min={0} max={100} />,
     )
     expect(screen.getByTestId('test')).toBeInTheDocument()
   })
 
-  test('should renderWithProviders cursors correctly', () => {
+  test('should render cursors correctly', () => {
     renderWithProviders(<RangeSliderInput min={0} max={100} value={[10, 90]} />)
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')

@@ -60,7 +60,7 @@ describe('<FavButton />', () => {
   })
 
   describe('lazy state initialization should work correctly', () => {
-    test('if the character IS favorited, it should renderWithProviders with an ACTIVE button', () => {
+    test('if the character IS favorited, it should render with an ACTIVE button', () => {
       getFavArrayMock.mockReturnValueOnce([mockedCharacterObject])
       renderWithProviders(<FavButton characterObject={mockedCharacterObject} />)
 
@@ -72,7 +72,7 @@ describe('<FavButton />', () => {
       expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true')
     })
 
-    test('if the character ISNT favorited, it should renderWithProviders with an INACTIVE button', () => {
+    test('if the character ISNT favorited, it should render with an INACTIVE button', () => {
       getFavArrayMock.mockReturnValueOnce([
         { ...mockedCharacterObject, id: 987654 },
       ])
@@ -89,7 +89,7 @@ describe('<FavButton />', () => {
       )
     })
 
-    test('if there are no favorited characters, it should renderWithProviders with an INACTIVE button', () => {
+    test('if there are no favorited characters, it should render with an INACTIVE button', () => {
       getFavArrayMock.mockReturnValueOnce([])
       renderWithProviders(<FavButton characterObject={mockedCharacterObject} />)
 
