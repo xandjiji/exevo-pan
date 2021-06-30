@@ -36,7 +36,7 @@ const AuctionTimer = ({
         >
           {endDateString}
         </S.Countdown>
-        {endTime}
+        <S.EndTime>{endTime}</S.EndTime>
       </>
     )
   }
@@ -52,7 +52,7 @@ const AuctionTimer = ({
         >
           {countdownTime}
         </S.Countdown>
-        {endTime}
+        <S.EndTime>{endTime}</S.EndTime>
       </>
     )
   }
