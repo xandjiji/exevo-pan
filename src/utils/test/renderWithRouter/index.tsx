@@ -1,8 +1,17 @@
-import { render } from '@testing-library/react'
+import { render, RenderResult } from '@testing-library/react'
 import { BrowserRouter } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
+import Themes from 'styles/themes'
 
-export const renderWithRouter = (ui: JSX.Element, route = '/') => {
+export const renderWithRouter = (
+  ui: JSX.Element,
+  route = '/',
+): RenderResult => {
   window.history.pushState({}, 'Test page', route)
 
-  return render(<BrowserRouter>{ui}</BrowserRouter>)
+  return render(
+    <ThemeProvider theme={Themes.default}>
+      <BrowserRouter>{ui}</BrowserRouter>
+    </ThemeProvider>,
+  )
 }
