@@ -1,4 +1,5 @@
 import React, { useEffect, useReducer, useState } from 'react';
+import { LoadingAlert } from 'components/Atoms';
 import HistoryDataContext from './context';
 
 import { characterDataReducer } from '../CharacterData/reducers';
@@ -8,8 +9,6 @@ import { minifiedToObject } from '../../utils/dataDictionary';
 import { historyEndpoint } from '../../dataEnpoint';
 
 import { get, set } from 'idb-keyval';
-
-import LoadingIndicator from '../../components/LoadingIndicator';
 
 import { useLocation } from 'react-router-dom';
 
@@ -80,7 +79,7 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {!loaded && interacted ? <LoadingIndicator>{`Updating data...  ${percentage}`}</LoadingIndicator> : null}
+            {!loaded && interacted ? <LoadingAlert>{`Updating data...  ${percentage}`}</LoadingAlert> : null}
             {children}
         </HistoryDataContext.Provider>
     )

@@ -1,11 +1,10 @@
 import React, { useEffect, useReducer, useState } from 'react';
+import { LoadingAlert } from 'components/Atoms';
 import CharacterDataContext from './context';
 import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage, verifyCharacterObjectShape } from 'utils'
 import dataEndpoint from '../../dataEnpoint';
-
-import LoadingIndicator from '../../components/LoadingIndicator';
 
 let initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
 
@@ -63,7 +62,7 @@ export default ({ children }) => {
                 dispatchCharacterData
             }}
         >
-            {loaded ? null : <LoadingIndicator>Updating data...</LoadingIndicator>}
+            {loaded ? null : <LoadingAlert>Updating data...</LoadingAlert>}
             {children}
         </CharacterDataContext.Provider>
     )
