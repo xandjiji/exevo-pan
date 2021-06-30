@@ -3,7 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import MasterLayout from './layouts/MasterLayout';
 
 import UrlParametersProvider from './contexts/UrlParameters';
-import ThemeProvider from './contexts/Theme';
+import { ThemeProvider } from 'contexts/useTheme';
 import CharacterDataProvider from './contexts/CharacterData';
 import HistoryDataProvider from './contexts/HistoryData';
 import ServerDataProvider from './contexts/ServerData';

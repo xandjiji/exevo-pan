@@ -1,8 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import Header from '../components/Header';
-import ThemeContext from '../contexts/Theme/context';
-
+import { useTheme } from 'contexts/useTheme';
 import CharGridSwitcher from '../Routes/CharGridSwitcher';
 import SideDrawerSwitcher from '../Routes/SideDrawerSwitcher';
 
@@ -17,15 +16,14 @@ const pageTitle = {
 }
 
 const MasterLayout = () => {
-    const { theme } = useContext(ThemeContext);
-
+    const { currentTheme } = useTheme()
     const { pathname } = useLocation()
     useEffect(() => {
         document.title = pageTitle[pathname] || 'Exevo Pan';
     }, [pathname]);
 
     return (
-        <div className={`body-container ${theme}`}>
+        <div className={`body-container ${currentTheme}`}>
             <Switch>
                 <Route exact path={["/", "/bazaar-history"]}>
                     <Header />
