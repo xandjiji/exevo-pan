@@ -13,7 +13,7 @@ export const FloatingLabel = styled.div`
   align-items: center;
 
   border-radius: 5px;
-  background-color: var(--alert);
+  background-color: ${({ theme }) => theme.colors.alert};
 
   font-size: 12px;
   font-weight: 600;
@@ -28,7 +28,7 @@ export const Spinner = styled.div`
   border-radius: 50%;
   background: linear-gradient(
     to right,
-    var(--primary) 10%,
+    ${({ theme }) => theme.colors.primary} 10%,
     rgba(255, 255, 255, 0) 42%
   );
   animation: spinAnimation 1.4s infinite ease-out;
@@ -39,7 +39,7 @@ export const Spinner = styled.div`
     content: '';
     width: 50%;
     height: 50%;
-    background: var(--primary);
+    background: ${({ theme }) => theme.colors.primary};
     border-radius: 100% 0 0 0;
     position: absolute;
     top: 0;
@@ -48,7 +48,7 @@ export const Spinner = styled.div`
 
   &:after {
     content: '';
-    background: var(--alert);
+    background: ${({ theme }) => theme.colors.alert};
     width: 75%;
     height: 75%;
     border-radius: 50%;
