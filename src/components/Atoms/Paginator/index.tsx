@@ -22,11 +22,9 @@ const Paginator = ({
   const derivedCurrentPage = currentPageProp ?? currentPage
 
   const { hasPrev, hasNext, startOffset, endOffset, pageCount } = usePagination(
-    {
-      currentPage: derivedCurrentPage,
-      pageSize,
-      totalItems,
-    },
+    derivedCurrentPage,
+    pageSize,
+    totalItems,
   )
 
   return (

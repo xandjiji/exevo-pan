@@ -1,9 +1,3 @@
-interface usePaginationProps {
-  currentPage: number
-  pageSize: number
-  totalItems: number
-}
-
 interface PaginationObject {
   hasPrev: boolean
   hasNext: boolean
@@ -12,11 +6,11 @@ interface PaginationObject {
   pageCount: number
 }
 
-const usePagination = ({
-  currentPage,
-  pageSize,
-  totalItems,
-}: usePaginationProps): PaginationObject => {
+const usePagination = (
+  currentPage: number,
+  pageSize: number,
+  totalItems: number,
+): PaginationObject => {
   const pageCount = Math.ceil(totalItems / pageSize)
 
   const hasPrev = currentPage > 1
