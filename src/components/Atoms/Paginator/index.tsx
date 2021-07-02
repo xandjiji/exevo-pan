@@ -8,6 +8,7 @@ const Paginator = ({
   currentPage: currentPageProp,
   pageSize = 1,
   totalItems,
+  onChange,
 }: PaginatorProps): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(currentPageProp ?? 1)
   const derivedCurrentPage = currentPageProp ?? currentPage
@@ -25,6 +26,7 @@ const Paginator = ({
 
   const changePage = (newPage: number) => {
     setCurrentPage(newPage)
+    onChange?.(newPage)
   }
 
   const handleKeyPress = (event: React.KeyboardEvent) => {

@@ -1,13 +1,8 @@
-export interface PaginationChangeData {
-  currentPage: number
-  pageSize: number
-}
-
 export interface PaginatorProps {
   currentPage?: number
   pageSize?: number
   totalItems: number
-  onChange?: (data: PaginationChangeData) => void
+  onChange?: (newPage: number) => void
 }
 
 export interface PaginationObject {
