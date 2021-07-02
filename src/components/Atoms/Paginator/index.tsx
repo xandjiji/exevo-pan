@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { debounce } from 'lodash'
 import { clampValue } from 'utils'
 import usePagination from './usePagination'
 import * as S from './styles'
@@ -25,10 +26,10 @@ const Paginator = ({
       ? `${startOffset} - ${endOffset} of ${totalItems}`
       : noItemsMessage
 
-  const changePage = (newPage: number) => {
+  const changePage = debounce((newPage: number) => {
     setCurrentPage(newPage)
     onChange?.(newPage)
-  }
+  }, 0)
 
   const handleKeyPress = (event: React.KeyboardEvent) => {
     const { ctrlKey, shiftKey } = event
