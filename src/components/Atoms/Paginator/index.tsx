@@ -9,6 +9,7 @@ const Paginator = ({
   pageSize = 1,
   totalItems,
   onChange,
+  noItemsMessage = 'No items',
 }: PaginatorProps): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(currentPageProp ?? 1)
   const derivedCurrentPage = currentPageProp ?? currentPage
@@ -22,7 +23,7 @@ const Paginator = ({
   const trackerDisplay =
     totalItems > 0
       ? `${startOffset} - ${endOffset} of ${totalItems}`
-      : 'No characters found'
+      : noItemsMessage
 
   const changePage = (newPage: number) => {
     setCurrentPage(newPage)

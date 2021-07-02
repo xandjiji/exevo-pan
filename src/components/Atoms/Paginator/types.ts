@@ -3,6 +3,7 @@ export interface PaginatorProps {
   pageSize?: number
   totalItems: number
   onChange?: (newPage: number) => void
+  noItemsMessage?: string
 }
 
 export interface PaginationObject {

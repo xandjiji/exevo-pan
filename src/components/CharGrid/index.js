@@ -101,6 +101,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                     totalItems={sortedData.length}
                     currentPage={params.pageIndex + 1}
                     onChange={(newPage) => setParamByKey('pageIndex', newPage - 1)}
+                    noItemsMessage="No characters found"
                 />
             </header>
             <main className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
