@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import CharGrid from './CharGrid.styled';
-import Paginator from '../Paginator';
 import CharCard from '../CharCard';
 import DialogBox from '../DialogBox';
-import { Switch, RadioButton } from 'components/Atoms';
+import { Switch, RadioButton, Paginator } from 'components/Atoms';
 import { RadioGroup } from 'components/Organisms';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
@@ -98,8 +97,10 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                 </div>
 
                 <Paginator
-                    itemsPerPage={itemsPerPage}
-                    dataSize={sortedData.length}
+                    pageSize={itemsPerPage}
+                    totalItems={sortedData.length}
+                    currentPage={params.pageIndex + 1}
+                    onChange={(newPage) => setParamByKey('pageIndex', newPage - 1)}
                 />
             </header>
             <main className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
