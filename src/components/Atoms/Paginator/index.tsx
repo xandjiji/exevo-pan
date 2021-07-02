@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
+import { clampValue } from 'utils'
 import usePagination from './usePagination'
 import * as S from './styles'
 import { PaginatorProps } from './types'
@@ -22,8 +23,25 @@ const Paginator = ({
       ? `${startOffset} - ${endOffset} of ${totalItems}`
       : 'No characters found'
 
+  const changePage = (newPage: number) => {
+    setCurrentPage(newPage)
+  }
+
+  const handleKeyPress = (event: React.KeyboardEvent) => {
+    const { ctrlKey, shiftKey } = event
+    const increment = 1 * (+!ctrlKey || 10) * (+!shiftKey || 100)
+    const newPage = {
+      ArrowUp: derivedCurrentPage + increment,
+      ArrowRight: derivedCurrentPage + increment,
+      ArrowDown: derivedCurrentPage - increment,
+      ArrowLeft: derivedCurrentPage - increment,
+    }[event.code]
+
+    if (newPage) changePage(clampValue(newPage, [1, pageCount]))
+  }
+
   return (
-    <S.Wrapper>
+    <S.Wrapper tabIndex={0} onKeyDown={handleKeyPress}>
       <S.Tracker>{trackerDisplay}</S.Tracker>
 
       <S.CursorWrapper>
@@ -32,7 +50,7 @@ const Paginator = ({
           aria-disabled={!hasPrev}
           disabled={!hasPrev}
           invert
-          onClick={() => setCurrentPage(1)}
+          onClick={() => changePage(1)}
         >
           <S.LastIcon />
         </S.Cursor>
@@ -41,9 +59,7 @@ const Paginator = ({
           aria-disabled={!hasPrev}
           disabled={!hasPrev}
           invert
-          onClick={() => {
-            if (hasPrev) setCurrentPage(prev => prev - 1)
-          }}
+          onClick={() => changePage(derivedCurrentPage - 1)}
         >
           <S.NextIcon />
         </S.Cursor>
@@ -52,9 +68,7 @@ const Paginator = ({
           aria-label="Go to next page"
           aria-disabled={!hasNext}
           disabled={!hasNext}
-          onClick={() => {
-            if (hasNext) setCurrentPage(prev => prev + 1)
-          }}
+          onClick={() => changePage(derivedCurrentPage + 1)}
         >
           <S.NextIcon />
         </S.Cursor>
@@ -62,7 +76,7 @@ const Paginator = ({
           aria-label="Go to last page"
           aria-disabled={!hasNext}
           disabled={!hasNext}
-          onClick={() => setCurrentPage(pageCount)}
+          onClick={() => changePage(pageCount)}
         >
           <S.LastIcon />
         </S.Cursor>
