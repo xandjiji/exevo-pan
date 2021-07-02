@@ -41,7 +41,10 @@ const Paginator = ({
       ArrowLeft: derivedCurrentPage - increment,
     }[event.code]
 
-    if (newPage) changePage(clampValue(newPage, [1, pageCount]))
+    if (newPage) {
+      event.preventDefault()
+      changePage(clampValue(newPage, [1, pageCount]))
+    }
   }
 
   return (
