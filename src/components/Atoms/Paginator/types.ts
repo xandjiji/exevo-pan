@@ -1,9 +1,12 @@
+import { HTMLAttributes } from 'react'
+
 export interface PaginatorProps {
   currentPage?: number
   pageSize?: number
   totalItems: number
   onChange?: (newPage: number) => void
   noItemsMessage?: string
+  props?: HTMLAttributes<HTMLDivElement>
 }
 
 export interface PaginationObject {

@@ -11,6 +11,7 @@ const Paginator = ({
   totalItems,
   onChange,
   noItemsMessage = 'No items',
+  ...props
 }: PaginatorProps): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(currentPageProp ?? 1)
   const derivedCurrentPage = currentPageProp ?? currentPage
@@ -48,7 +49,7 @@ const Paginator = ({
   }
 
   return (
-    <S.Wrapper tabIndex={0} onKeyDown={handleKeyPress}>
+    <S.Wrapper tabIndex={0} onKeyDown={handleKeyPress} {...props}>
       <S.Tracker>{trackerDisplay}</S.Tracker>
 
       <S.CursorWrapper>
