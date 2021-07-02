@@ -1,10 +1,4 @@
-interface PaginationObject {
-  hasPrev: boolean
-  hasNext: boolean
-  startOffset: number
-  endOffset: number
-  pageCount: number
-}
+import { PaginationObject } from './types'
 
 const usePagination = (
   currentPage: number,

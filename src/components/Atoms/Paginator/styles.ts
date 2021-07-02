@@ -2,11 +2,7 @@ import styled, { css } from 'styled-components'
 import { ReactComponent as NextSvg } from 'assets/svgs/next.svg'
 import { ReactComponent as LastSvg } from 'assets/svgs/last.svg'
 import { Clickable } from 'styles'
-
-interface CursorProps {
-  invert?: boolean
-  disabled?: boolean
-}
+import { CursorProps } from './types'
 
 export const Wrapper = styled.div`
   text-align: right;
