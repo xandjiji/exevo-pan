@@ -5,6 +5,7 @@ import { Clickable } from 'styles'
 
 interface CursorProps {
   invert?: boolean
+  disabled?: boolean
 }
 
 export const Wrapper = styled.div`
@@ -39,14 +40,17 @@ export const LastIcon = styled(LastSvg)`
   ${iconStyle}
 `
 
-export const Cursor = styled.div<CursorProps>`
-  padding: 0;
+export const Cursor = styled.button<CursorProps>`
   height: 32px;
+  border-radius: 4px;
   cursor: pointer;
 
   ${Clickable}
 
+  pointer-events: ${({ disabled }) => (disabled ? 'none' : 'unset')};
+
   ${NextIcon}, ${LastIcon} {
     ${({ invert }) => invert && 'transform: rotate(180deg);'}
+    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   }
 `

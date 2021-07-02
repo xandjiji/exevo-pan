@@ -38,10 +38,19 @@ const Paginator = ({
       <S.Tracker>{trackerDisplay}</S.Tracker>
 
       <S.CursorWrapper>
-        <S.Cursor invert onClick={() => setCurrentPage(1)}>
+        <S.Cursor
+          aria-label="Go to first page"
+          aria-disabled={!hasPrev}
+          disabled={!hasPrev}
+          invert
+          onClick={() => setCurrentPage(1)}
+        >
           <S.LastIcon />
         </S.Cursor>
         <S.Cursor
+          aria-label="Go to previous page"
+          aria-disabled={!hasPrev}
+          disabled={!hasPrev}
           invert
           onClick={() => {
             if (hasPrev) setCurrentPage(prev => prev - 1)
@@ -51,13 +60,21 @@ const Paginator = ({
         </S.Cursor>
 
         <S.Cursor
+          aria-label="Go to next page"
+          aria-disabled={!hasNext}
+          disabled={!hasNext}
           onClick={() => {
             if (hasNext) setCurrentPage(prev => prev + 1)
           }}
         >
           <S.NextIcon />
         </S.Cursor>
-        <S.Cursor onClick={() => setCurrentPage(pageCount)}>
+        <S.Cursor
+          aria-label="Go to last page"
+          aria-disabled={!hasNext}
+          disabled={!hasNext}
+          onClick={() => setCurrentPage(pageCount)}
+        >
           <S.LastIcon />
         </S.Cursor>
       </S.CursorWrapper>
