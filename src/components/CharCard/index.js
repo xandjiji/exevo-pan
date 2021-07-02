@@ -2,8 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import CharCard from './CharCard.styled';
 
-import LabeledText from '../LabeledText';
-import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait } from 'components/Atoms';
+import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait, LabeledTextBox } from 'components/Atoms';
 import InformationBadge from '../InformationBadge';
 
 import ServerDataContext from '../../contexts/ServerData/context';
@@ -107,7 +106,7 @@ export default ({ charData }) => {
             </div>
 
             <div className="overview">
-                <LabeledText label="Server" warning={currentServer.experimental} warningText="This is an experimental server!">
+                <LabeledTextBox labelText="Server" warning={currentServer.experimental} title="This is an experimental server!">
                     <div className="server-info overview-content row">
                         <span className="server-text">
                             <img
@@ -126,9 +125,9 @@ export default ({ charData }) => {
                             <InformationBadge icon={<NoServer />} text="Regular World transfer NOT available" />
                         }
                     </div>
-                </LabeledText>
+                </LabeledTextBox>
 
-                <LabeledText label="PvP">
+                <LabeledTextBox labelText="PvP">
                     <div className="overview-content row">
                         <span
                             className="battleye"
@@ -137,15 +136,15 @@ export default ({ charData }) => {
                         </span>
                         {currentServer.pvpType.string}
                     </div>
-                </LabeledText>
+                </LabeledTextBox>
 
-                <LabeledText label="Auction End">
+                <LabeledTextBox labelText="Auction End">
                     <div className="overview-content auction">
                         <AuctionTimer endDate={new Date(auctionEnd * 1000)} />
                     </div>
-                </LabeledText>
+                </LabeledTextBox>
 
-                <LabeledText label={getBidLabelText()}>
+                <LabeledTextBox labelText={getBidLabelText()}>
                     <div className="overview-content row bid">
                         <img
                             className="coin"
@@ -156,7 +155,7 @@ export default ({ charData }) => {
                         />
                         {formatNumberWithCommas(currentBid)}
                     </div>
-                </LabeledText>
+                </LabeledTextBox>
 
                 <div className="item-wrapper">
                     {makeItemImg(items)}
