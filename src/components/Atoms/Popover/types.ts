@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react'
 import { Placement } from '@popperjs/core'
 
-export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
+export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   content: React.ReactNode
   placement?: Placement
@@ -12,6 +12,6 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
 
 export type PopperReferenceElement = HTMLDivElement | null
 
-export interface TooltipContentProps extends HTMLAttributes<HTMLDivElement> {
+export interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
   visible: boolean
 }

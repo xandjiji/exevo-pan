@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import CharCard from './CharCard.styled';
 
-import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait, LabeledTextBox } from 'components/Atoms';
+import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait, LabeledTextBox, Popover } from 'components/Atoms';
 import InformationBadge from '../InformationBadge';
 
 import ServerDataContext from '../../contexts/ServerData/context';
@@ -140,7 +140,18 @@ export default ({ charData }) => {
 
                 <LabeledTextBox labelText="Auction End">
                     <div className="overview-content auction">
+                    <Popover
+                        content={
+                            <div>
+                                <p>CONTENT TESTE</p>
+                                <p>CONTENT TESTE</p>
+                            </div>
+                        }
+                        
+                        trigger="hover"
+                    >
                         <AuctionTimer endDate={new Date(auctionEnd * 1000)} />
+                    </Popover>
                     </div>
                 </LabeledTextBox>
 

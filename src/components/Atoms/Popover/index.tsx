@@ -2,9 +2,9 @@ import { useState, useMemo } from 'react'
 import { usePopper } from 'react-popper'
 import { Modifier } from '@popperjs/core'
 import * as S from './styles'
-import { TooltipProps, PopperReferenceElement } from './types'
+import { PopoverProps, PopperReferenceElement } from './types'
 
-const Tooltip = ({
+const Popover = ({
   children,
   content,
   placement = 'top',
@@ -12,7 +12,7 @@ const Tooltip = ({
   visible = false,
   offset = [-18, 21],
   ...props
-}: TooltipProps): JSX.Element => {
+}: PopoverProps): JSX.Element => {
   const [isVisible, setVisible] = useState<boolean>(visible)
 
   const [referenceElement, setReferenceElement] =
@@ -65,10 +65,10 @@ const Tooltip = ({
 
   return (
     <>
-      <S.TooltipReference ref={setReferenceElement} {...triggers}>
+      <S.PopoverReference ref={setReferenceElement} {...triggers}>
         {children}
-      </S.TooltipReference>
-      <S.TooltipContent
+      </S.PopoverReference>
+      <S.PopoverContent
         ref={setPopperElement}
         visible={isVisible}
         style={styles.popper}
@@ -76,9 +76,9 @@ const Tooltip = ({
         {...props}
       >
         {content}
-      </S.TooltipContent>
+      </S.PopoverContent>
     </>
   )
 }
 
-export default Tooltip
+export default Popover

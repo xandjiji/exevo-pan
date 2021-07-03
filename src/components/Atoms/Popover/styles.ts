@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { Shadow } from 'styles'
-import { TooltipContentProps } from './types'
+import { PopoverContentProps } from './types'
 
-export const TooltipReference = styled.div`
+export const PopoverReference = styled.div`
   cursor: pointer;
 `
 
-export const TooltipContent = styled.div<TooltipContentProps>`
+export const PopoverContent = styled.div<PopoverContentProps>`
   padding: 12px;
   background-color: ${({ theme }) => theme.colors.surface};
   border-radius: 5px;
