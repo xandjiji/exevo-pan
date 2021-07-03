@@ -57,6 +57,7 @@ const Tooltip = ({
           onMouseEnter: () => setVisible(true),
           onMouseLeave: () => setVisible(false),
         }
+      case 'none':
       default:
         return {}
     }

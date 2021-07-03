@@ -5,7 +5,7 @@ export interface TooltipProps extends HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode
   content: React.ReactNode
   placement?: Placement
-  trigger?: 'click' | 'hover'
+  trigger?: 'click' | 'hover' | 'none'
   visible?: boolean
   offset?: [number, number]
 }
