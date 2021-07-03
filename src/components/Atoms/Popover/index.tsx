@@ -77,6 +77,9 @@ const Popover = ({
       >
         {content}
       </S.PopoverContent>
+      {trigger === 'click' && isVisible && (
+        <S.Backdrop onClick={() => setVisible(false)} />
+      )}
     </>
   )
 }
