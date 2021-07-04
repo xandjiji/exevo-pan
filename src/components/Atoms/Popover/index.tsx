@@ -1,6 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import { usePopper } from 'react-popper'
 import { Modifier } from '@popperjs/core'
+import { checkKeyboardTrigger } from 'utils'
 import * as S from './styles'
 import { PopoverProps, PopperReferenceElement } from './types'
 
@@ -50,12 +51,22 @@ const Popover = ({
     switch (trigger) {
       case 'click':
         return {
+          tabIndex: 0,
           onClick: () => setVisible(prev => !prev),
+          onKeyPress: (event: React.KeyboardEvent) => {
+            if (checkKeyboardTrigger(event.code)) {
+              event.preventDefault()
+              setVisible(prev => !prev)
+            }
+          },
         }
       case 'hover':
         return {
+          tabIndex: 0,
           onMouseEnter: () => setVisible(true),
           onMouseLeave: () => setVisible(false),
+          onFocus: () => setVisible(true),
+          onBlur: () => setVisible(false),
         }
       case 'none':
       default:
