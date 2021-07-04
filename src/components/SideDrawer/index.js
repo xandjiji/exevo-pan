@@ -301,7 +301,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     title="Search nickname"
                     display="flex"
                     badge={
-                        <Tooltip content="Regex is enabled! Example: ['-.,]" placement="top">
+                        <Tooltip
+                            placement="top"
+                            aria-labelledby="Regex is enabled! Example: ['-.,]"
+                            content="Regex is enabled! Example: ['-.,]"
+                        >
                             <span className="exclamation-icon">!</span>
                         </Tooltip>
                     }
@@ -563,7 +567,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         title="Rare items"
                         display="flex"
                         badge={
-                            <Tooltip content="If a rare item is not on this list it means that there are no auctions available with it." placement="top">
+                            <Tooltip
+                                placement="top"
+                                aria-labelledby="If a rare item is not on this list it means that there are no auctions available with it."
+                                content="If a rare item is not on this list it means that there are no auctions available with it."
+                            >
                                 <span className="exclamation-icon">!</span>
                             </Tooltip>
                         }
@@ -596,7 +604,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 </Route>
 
                 <FilterGroup className="misc-wrapper" title="Misc" display="flex">
-                    <Tooltip offset={[0, 8]} content="Save your favorite auctions pressing the ❤️ button!">
+                    <Tooltip
+                        offset={[0, 8]}
+                        aria-labelledby="Save your favorite auctions pressing the ❤️ button!"
+                        content="Save your favorite auctions pressing the ❤️ button!"
+                    >
                         <Chip
                             style={{ marginRight: 8 }}
                             onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}
@@ -606,7 +618,12 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         </Chip>
                     </Tooltip>
 
-                    <Tooltip style={{ width: 280 }} offset={[0, 8]} content="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)">
+                    <Tooltip
+                        offset={[0, 8]}
+                        style={{ width: 280 }}
+                        aria-labelledby="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)"
+                        content="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)"
+                    >
                         <Chip
                             style={{ marginRight: 8 }}
                             onClick={useCallback(() => toggleFilterValue('rareNick'), [toggleFilterValue])}
@@ -616,7 +633,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         </Chip>
                     </Tooltip>
 
-                    <Tooltip offset={[0, 8]} content="Characters level 400+ with Soul War not completed">
+                    <Tooltip
+                        offset={[0, 8]}
+                        aria-labelledby="Characters level 400+ with Soul War not completed"
+                        content="Characters level 400+ with Soul War not completed"
+                    >
                         <Chip
                             onClick={useCallback(() => {
                                 if (filters.soulwarFilter && (filters.minLevel >= 400)) {

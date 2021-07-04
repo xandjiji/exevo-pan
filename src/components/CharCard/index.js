@@ -120,11 +120,17 @@ export default ({ charData }) => {
                             {currentServer.serverName}
                         </span>
                         {transfer ?
-                            <Tooltip content={<span className="popover-server-text">Regular World transfer available</span>} >
+                            <Tooltip
+                                aria-labelledby="Regular World transfer available"
+                                content={<span className="popover-server-text">Regular World transfer available</span>}
+                            >
                                 <Server className="server-icon" />
                             </Tooltip>
                             :
-                            <Tooltip content={<span className="popover-server-text">Regular World transfer NOT available</span>}>
+                            <Tooltip
+                                aria-labelledby="Regular World transfer NOT available"
+                                content={<span className="popover-server-text">Regular World transfer NOT available</span>}
+                            >
                                 <NoServer className="server-icon" />
                             </Tooltip>
                         }
@@ -184,12 +190,14 @@ export default ({ charData }) => {
                 <div className="imbuement-wrapper">
                     <div className="imbuement-text">
                         {imbuements && imbuements.length > 0 ?
-                            <Tooltip content={
-                                imbuements.map((imbuementItem, index) =>
-                                    <span key={index} className={highlightImbuentClass(imbuementItem)}>
-                                        {imbuementItem}
-                                    </span>)
-                            }
+                            <Tooltip
+                                aria-label="Imbuements list"
+                                content={
+                                    imbuements.map((imbuementItem, index) =>
+                                        <span key={index} className={highlightImbuentClass(imbuementItem)}>
+                                            {imbuementItem}
+                                        </span>)
+                                }
                             >
                                 <Magic />
                                 {`Imbuements: ${imbuements ? imbuements.length : 0}/23`}
