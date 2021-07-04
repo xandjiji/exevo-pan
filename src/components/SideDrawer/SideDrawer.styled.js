@@ -106,6 +106,21 @@ export default styled.div`
             height: 10px;
             box-shadow: 1px 1px 2px 1px rgba(0,0,0,0.14);
         }
+
+        .exclamation-icon {
+            display: inline-flex;
+            min-width: 20px;
+            min-height: 20px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: solid 2px;
+            border-color: ${props => props.color ? props.color : 'var(--separator)'};
+
+            font-size: 12px;
+            font-weight: 700;
+            color: ${props => props.color ? props.color : 'var(--separator)'};
+        }
     }
 
     .skills-wrapper {

@@ -3,6 +3,7 @@ import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
 import { Chip, SliderInput, RangeSliderInput } from 'components/Atoms';
+import { Tooltip } from 'components/Organisms';
 import AutocompleteInput from '../AutocompleteInput';
 import DrawerFooter from '../DrawerFooter';
 import InformationBadge from '../InformationBadge';
@@ -300,7 +301,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     className="nickname-wrapper"
                     title="Search nickname"
                     display="flex"
-                    badge={<InformationBadge position="bottom" icon="!" text="Regex is enabled! Example: ['-.,]" />}
+                    badge={
+                        <Tooltip content="Regex is enabled! Example: ['-.,]" placement="top">
+                            <span className="exclamation-icon">!</span>
+                        </Tooltip>
+                    }
                 >
                     <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
                     <AutocompleteInput
@@ -463,7 +468,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     <RangeSliderInput
                         min={8}
                         max={2000}
-                        value={[filters.minLevel,filters.maxLevel]}
+                        value={[filters.minLevel, filters.maxLevel]}
                         onChange={useCallback((values) => {
                             const [newMin, newMax] = values;
                             updateFilterValue('minLevel', parseInt(newMin, 10))
@@ -558,7 +563,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         className="rare-items-wrapper"
                         title="Rare items"
                         display="flex"
-                        badge={<InformationBadge icon="!" text="If a rare item is not on this list it means that there are no auctions available with it." />}
+                        badge={
+                            <Tooltip content="If a rare item is not on this list it means that there are no auctions available with it." placement="top">
+                                <span className="exclamation-icon">!</span>
+                            </Tooltip>
+                        }
                     >
                         <label htmlFor="Items-input" className="invisible-label">Items</label>
                         <AutocompleteInput
@@ -588,36 +597,42 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 </Route>
 
                 <FilterGroup className="misc-wrapper" title="Misc" display="flex">
-                    <Chip
-                        onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}
-                        overrideStatus={filters.fav}
-                    >
-                        Favorited
-                        <InformationBadge className="onSurface-badge borderless" position="top" icon="❤️" text="Save your favorite auctions pressing the ❤️ button!" />
-                    </Chip>
-                    <Chip
-                        onClick={useCallback(() => toggleFilterValue('rareNick'), [toggleFilterValue])}
-                        overrideStatus={filters.rareNick}
-                    >
-                        Rare nicknames
-                        <InformationBadge className="onSurface-badge" position="top" icon="?" text="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)" />
-                    </Chip>
+                    <Tooltip offset={[0, 8]} content="Save your favorite auctions pressing the ❤️ button!">
+                        <Chip
+                            style={{ marginRight: 8 }}
+                            onClick={useCallback(() => toggleFilterValue('fav'), [toggleFilterValue])}
+                            overrideStatus={filters.fav}
+                        >
+                            Favorited ❤️
+                        </Chip>
+                    </Tooltip>
 
-                    <Chip
-                        onClick={useCallback(() => {
-                            if (filters.soulwarFilter && (filters.minLevel >= 400)) {
-                                updateFilterValue('minLevel', 2)
-                                updateFilterValue('soulwarFilter', false);
-                            } else {
-                                updateFilterValue('minLevel', 400)
-                                updateFilterValue('soulwarFilter', true);
-                            }
-                        }, [filters, updateFilterValue])}
-                        overrideStatus={filters.soulwarFilter && (filters.minLevel >= 400)}
-                    >
-                        Soulwar available
-                        <InformationBadge className="onSurface-badge borderless" position="top" icon="💀" text="Characters level 400+ with Soul War not completed" />
-                    </Chip>
+                    <Tooltip style={{ width: 280 }} offset={[0, 8]} content="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)">
+                        <Chip
+                            style={{ marginRight: 8 }}
+                            onClick={useCallback(() => toggleFilterValue('rareNick'), [toggleFilterValue])}
+                            overrideStatus={filters.rareNick}
+                        >
+                            Rare nicknames
+                        </Chip>
+                    </Tooltip>
+
+                    <Tooltip offset={[0, 8]} content="Characters level 400+ with Soul War not completed">
+                        <Chip
+                            onClick={useCallback(() => {
+                                if (filters.soulwarFilter && (filters.minLevel >= 400)) {
+                                    updateFilterValue('minLevel', 2)
+                                    updateFilterValue('soulwarFilter', false);
+                                } else {
+                                    updateFilterValue('minLevel', 400)
+                                    updateFilterValue('soulwarFilter', true);
+                                }
+                            }, [filters, updateFilterValue])}
+                            overrideStatus={filters.soulwarFilter && (filters.minLevel >= 400)}
+                        >
+                            Soulwar available 💀
+                        </Chip>
+                    </Tooltip>
                 </FilterGroup>
             </div>
 
