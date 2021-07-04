@@ -2,10 +2,9 @@ import React, { useState, useEffect, useContext, useCallback, useMemo } from 're
 import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
-import { Chip, SliderInput, RangeSliderInput } from 'components/Atoms';
+import { Chip, SliderInput, RangeSliderInput, DrawerFooter } from 'components/Atoms';
 import { Tooltip } from 'components/Organisms';
 import AutocompleteInput from '../AutocompleteInput';
-import DrawerFooter from '../DrawerFooter';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
 import { ReactComponent as ResetIcon } from '../../assets/svgs/reset.svg';
