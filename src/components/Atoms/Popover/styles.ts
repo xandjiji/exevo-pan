@@ -1,9 +1,23 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Shadow } from 'styles'
-import { PopoverContentProps } from './types'
+import { PopoverReferenceProps, PopoverContentProps } from './types'
 
-export const PopoverReference = styled.div`
+const increaseHoverAreaStyle = css<PopoverReferenceProps>`
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    width: calc(100% + ${({ padX }) => padX}px);
+    height: calc(100% + ${({ padY }) => padY}px);
+  }
+`
+
+export const PopoverReference = styled.div<PopoverReferenceProps>`
   cursor: pointer;
+  ${({ increaseHoverArea }) => increaseHoverArea && increaseHoverAreaStyle}
 `
 
 export const PopoverContent = styled.div<PopoverContentProps>`

@@ -65,7 +65,13 @@ const Popover = ({
 
   return (
     <>
-      <S.PopoverReference ref={setReferenceElement} {...triggers}>
+      <S.PopoverReference
+        ref={setReferenceElement}
+        padX={offset[0]}
+        padY={offset[1]}
+        increaseHoverArea={trigger === 'hover' && isVisible}
+        {...triggers}
+      >
         {children}
       </S.PopoverReference>
       <S.PopoverContent
@@ -74,6 +80,7 @@ const Popover = ({
         style={styles.popper}
         {...attributes.popper}
         {...props}
+        {...(trigger === 'hover' && isVisible ? triggers : {})}
       >
         {content}
       </S.PopoverContent>
