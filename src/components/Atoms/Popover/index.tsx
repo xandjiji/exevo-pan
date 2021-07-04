@@ -112,6 +112,8 @@ const Popover = ({
 
           return cloneElement(contentChild, {
             'aria-hidden': !isVisible,
+            disabled: !isVisible,
+            hidden: !isVisible,
           })
         })}
       </S.PopoverContent>
