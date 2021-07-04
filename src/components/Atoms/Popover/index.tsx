@@ -116,7 +116,10 @@ const Popover = ({
         })}
       </S.PopoverContent>
       {trigger === 'click' && isVisible && (
-        <S.Backdrop onClick={() => setVisible(false)} />
+        <S.Backdrop
+          aria-label="Click here to close"
+          onClick={() => setVisible(false)}
+        />
       )}
     </>
   )
