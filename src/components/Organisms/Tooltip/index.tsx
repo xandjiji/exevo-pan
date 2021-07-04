@@ -12,7 +12,11 @@ const Tooltip = ({
   ...props
 }: PopoverProps): JSX.Element => (
   <Popover
-    content={<S.TooltipWrapper {...props}>{content}</S.TooltipWrapper>}
+    content={
+      <S.TooltipWrapper role="tooltip" {...props}>
+        {content}
+      </S.TooltipWrapper>
+    }
     placement={placement}
     trigger={trigger}
     visible={visible}
