@@ -16,6 +16,7 @@ const increaseHoverAreaStyle = css<PopoverReferenceProps>`
 
 export const PopoverReference = styled.div<PopoverReferenceProps>`
   position: relative;
+  display: inline-block;
   cursor: pointer;
   ${({ increaseHoverArea }) => increaseHoverArea && increaseHoverAreaStyle}
 `
