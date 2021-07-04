@@ -106,7 +106,7 @@ export default ({ charData }) => {
             </div>
 
             <div className="overview">
-                <LabeledTextBox labelText="Server" warning={currentServer.experimental} title={currentServer.experimental && 'This is an experimental server!'}>
+                <LabeledTextBox labelText="Server" warning={currentServer.experimental} title={currentServer.experimental ? 'This is an experimental server!' : null}>
                     <div className="server-info overview-content row">
                         <span className="server-text">
                             <img
