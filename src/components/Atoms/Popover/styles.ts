@@ -29,6 +29,7 @@ export const PopoverReference = styled.div<PopoverReferenceProps>`
 export const PopoverContent = styled.div<PopoverContentProps>`
   z-index: 51;
   opacity: ${({ visible }) => (visible ? 1 : 0)};
+  pointer-events: ${({ visible }) => (visible ? 'unsed' : 'none')};
   transition: opacity 0.2s ease-out;
 `
 

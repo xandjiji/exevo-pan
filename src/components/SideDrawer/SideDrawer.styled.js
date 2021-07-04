@@ -108,6 +108,7 @@ export default styled.div`
         }
 
         .exclamation-icon {
+            margin: 0;
             display: inline-flex;
             min-width: 20px;
             min-height: 20px;
