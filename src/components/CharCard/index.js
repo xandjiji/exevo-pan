@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import CharCard from './CharCard.styled';
 
-import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait, LabeledTextBox, Popover } from 'components/Atoms';
-import InformationBadge from '../InformationBadge';
+import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait, LabeledTextBox } from 'components/Atoms';
+import { Tooltip } from 'components/Organisms';
 
 import ServerDataContext from '../../contexts/ServerData/context';
 
@@ -106,7 +106,7 @@ export default ({ charData }) => {
             </div>
 
             <div className="overview">
-                <LabeledTextBox labelText="Server" warning={currentServer.experimental} title="This is an experimental server!">
+                <LabeledTextBox labelText="Server" warning={currentServer.experimental} title={currentServer.experimental && 'This is an experimental server!'}>
                     <div className="server-info overview-content row">
                         <span className="server-text">
                             <img
@@ -120,9 +120,13 @@ export default ({ charData }) => {
                             {currentServer.serverName}
                         </span>
                         {transfer ?
-                            <InformationBadge icon={<Server />} text="Regular World transfer available" />
+                            <Tooltip content={<span className="popover-server-text">Regular World transfer available</span>} >
+                                <Server className="server-icon" />
+                            </Tooltip>
                             :
-                            <InformationBadge icon={<NoServer />} text="Regular World transfer NOT available" />
+                            <Tooltip content={<span className="popover-server-text">Regular World transfer NOT available</span>}>
+                                <NoServer className="server-icon" />
+                            </Tooltip>
                         }
                     </div>
                 </LabeledTextBox>
@@ -140,18 +144,7 @@ export default ({ charData }) => {
 
                 <LabeledTextBox labelText="Auction End">
                     <div className="overview-content auction">
-                    <Popover
-                        content={
-                            <div>
-                                <p>CONTENT TESTE</p>
-                                <p>CONTENT TESTE</p>
-                            </div>
-                        }
-                        
-                        trigger="hover"
-                    >
                         <AuctionTimer endDate={new Date(auctionEnd * 1000)} />
-                    </Popover>
                     </div>
                 </LabeledTextBox>
 
@@ -187,22 +180,28 @@ export default ({ charData }) => {
                     })}
                 </div>
 
-                <InformationBadge
-                    className="imbuement-wrapper"
-                    icon={
-                        <>
-                            <Magic />
-                            {`Imbuements: ${imbuements ? imbuements.length : 0}/23`}
-                        </>
-                    }
-                    text={imbuements && imbuements.length > 0 ?
-                        imbuements.map((imbuementItem, index) =>
-                            <span key={index} className={highlightImbuentClass(imbuementItem)}>
-                                {imbuementItem}
-                            </span>)
-                        : null
-                    }
-                />
+
+                <div className="imbuement-wrapper">
+                    <div className="imbuement-text">
+                        {imbuements && imbuements.length > 0 ?
+                            <Tooltip content={
+                                imbuements.map((imbuementItem, index) =>
+                                    <span key={index} className={highlightImbuentClass(imbuementItem)}>
+                                        {imbuementItem}
+                                    </span>)
+                            }
+                            >
+                                <Magic />
+                                {`Imbuements: ${imbuements ? imbuements.length : 0}/23`}
+                            </Tooltip>
+                            :
+                            <>
+                                <Magic />
+                                {`Imbuements: ${imbuements ? imbuements.length : 0}/23`}
+                            </>
+                        }
+                    </div>
+                </div>
 
                 {charms && charms.length > 0 ?
                     <div className="charms-wrapper">

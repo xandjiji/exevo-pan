@@ -127,6 +127,7 @@ export default styled.div`
         }
 
         .server-info {
+            height: 16px;
             justify-content: space-between;
 
             .server-text {
@@ -138,22 +139,18 @@ export default styled.div`
                 }
             }
 
-            > div {
-                height: 16px;
+            .server-icon {
+                margin-top: 3px;
                 width: 16px;
-                min-width: unset;
-                min-height: unset;
-                border: none;
+                height: 16px;
+                fill: var(--onSurface);
+            }
 
-                svg {
-                    fill: var(--onSurface);
-                }
-
-                > div {
-                    width: 236px;
-                    text-align: center;
-                    z-index: 1;
-                }
+            .popover-server-text {
+                font-size: 12px;
+                font-weight: 400;
+                color: var(--onSurface);
+                white-space: nowrap;
             }
         }
     }
@@ -188,17 +185,25 @@ export default styled.div`
         .imbuement-wrapper {
             margin-top: 8px;
             padding-top: 6px;
-            width: 100%;
+            
             border: none;
             border-radius: unset;
             border-top: solid 1px var(--separator);
+            
+            span {
+                text-align: left;
+            }
 
-            align-items: flex-end;
+            .imbuement-text, .imbuement-text > * {
+                display: flex;
+                align-items: center;
+                width: fit-content;
 
-            font-size: 12px;
-            color: var(--onSurface);
-            font-weight: 400;
-            justify-content: unset;
+                font-size: 12px;
+                color: var(--onSurface);
+                font-weight: 400;
+                justify-content: unset;
+            }
 
             z-index: 1;
             user-select: none;
