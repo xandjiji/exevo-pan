@@ -35,18 +35,7 @@ export default styled.div`
             }
 
             .sorting-wrapper {
-                position: relative;
-
                 .options-wrapper {
-                    position: absolute;
-                    top: calc(100% + 0px);
-                    left: 50%;
-                    transform: translateX(-50%);
-
-                    padding: 16px;
-                    border-radius: 5px;
-                    background-color: var(--surface);
-
                     > * {
                         width: max-content;
 

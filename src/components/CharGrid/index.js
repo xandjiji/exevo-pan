@@ -1,9 +1,8 @@
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import CharGrid from './CharGrid.styled';
 import CharCard from '../CharCard';
-import DialogBox from '../DialogBox';
 import { Switch, RadioButton, Paginator } from 'components/Atoms';
-import { RadioGroup } from 'components/Organisms';
+import { RadioGroup, Tooltip } from 'components/Organisms';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
@@ -25,7 +24,6 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
     const [sortedData, setSortedData] = useState(data);
     const [charList, setCharList] = useState(sortedData.slice(0, 30));
     const [index, setIndex] = useState(indexFromUrl);
-    const [isSortingOpen, setSortingOpen] = useState(false);
     const [selectedSort, setSelectedSort] = useState(params.initialSort || initialSort);
     const [descendingOrder, setDescendingOrder] = useState(params.initialOrder === null ? initialOrder : params.initialOrder);
 
@@ -71,28 +69,34 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                 <div className="left-header-menu">
                     <FilterIcon className="icon clickable" onClick={toggleSideDrawer} />
                     <div className="sorting-wrapper">
-                        <SortIcon className="icon clickable" onClick={() => setSortingOpen(prev => !prev)} />
-                        <DialogBox isOpen={isSortingOpen} setState={setSortingOpen}>
-                            <div className="options-wrapper shadow">
-                                <Switch
-                                    active={descendingOrder}
-                                    onClick={() => setDescendingOrder(prev => !prev)}
-                                    aria-label="Sort by descending order"
-                                >
-                                    Descending
-                                </Switch>
-                                <RadioGroup
-                                    indexValue={selectedSort}
-                                    onChange={(index) => setSelectedSort(index)}
-                                    aria-label="Sort characters by"
-                                >
-                                    <RadioButton>Auction End</RadioButton>
-                                    <RadioButton>Level</RadioButton>
-                                    <RadioButton>Price</RadioButton>
-                                    <RadioButton>Price (bidded only)</RadioButton>
-                                </RadioGroup>
-                            </div>
-                        </DialogBox>
+                        <Tooltip
+                            role="dialog"
+                            aria-label="Set the sorting order and criteria"
+                            trigger="click"
+                            content={
+                                <div className="options-wrapper">
+                                    <Switch
+                                        active={descendingOrder}
+                                        onClick={() => setDescendingOrder(prev => !prev)}
+                                        aria-label="Sort by descending order"
+                                    >
+                                        Descending
+                                    </Switch>
+                                    <RadioGroup
+                                        indexValue={selectedSort}
+                                        onChange={(index) => setSelectedSort(index)}
+                                        aria-label="Sort characters by"
+                                    >
+                                        <RadioButton>Auction End</RadioButton>
+                                        <RadioButton>Level</RadioButton>
+                                        <RadioButton>Price</RadioButton>
+                                        <RadioButton>Price (bidded only)</RadioButton>
+                                    </RadioGroup>
+                                </div>
+                            }
+                        >
+                            <SortIcon className="icon clickable" />
+                        </Tooltip>
                     </div>
                 </div>
 
