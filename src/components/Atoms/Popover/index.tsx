@@ -10,7 +10,7 @@ const Popover = ({
   placement = 'top',
   trigger = 'hover',
   visible = false,
-  offset = [-18, 21],
+  offset = [0, 0],
   ...props
 }: PopoverProps): JSX.Element => {
   const [isVisible, setVisible] = useState<boolean>(visible)
