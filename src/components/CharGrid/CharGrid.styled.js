@@ -9,7 +9,7 @@ export default styled.div`
         position: fixed;
         top: 60px;
         width: 100%;
-        z-index: 50;
+        z-index: 55;
         padding-top: 8px;
         padding-bottom: 8px;
 
