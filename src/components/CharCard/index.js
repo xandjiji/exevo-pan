@@ -121,15 +121,15 @@ export default ({ charData }) => {
                         </span>
                         {transfer ?
                             <Tooltip
-                                aria-labelledby="Regular World transfer available"
-                                content={<span className="popover-server-text">Regular World transfer available</span>}
+                                aria-labelledby={`transfer-availability-${nickname}`}
+                                content={<span id={`transfer-availability-${nickname}`} className="popover-server-text">Regular World transfer available</span>}
                             >
                                 <Server className="server-icon" />
                             </Tooltip>
                             :
                             <Tooltip
-                                aria-labelledby="Regular World transfer NOT available"
-                                content={<span className="popover-server-text">Regular World transfer NOT available</span>}
+                                aria-labelledby={`transfer-availability-${nickname}`}
+                                content={<span id={`transfer-availability-${nickname}`} className="popover-server-text">Regular World transfer NOT available</span>}
                             >
                                 <NoServer className="server-icon" />
                             </Tooltip>

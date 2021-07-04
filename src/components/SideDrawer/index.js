@@ -303,7 +303,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     badge={
                         <Tooltip
                             placement="top"
-                            aria-labelledby="Regex is enabled! Example: ['-.,]"
                             content="Regex is enabled! Example: ['-.,]"
                         >
                             <span className="exclamation-icon">!</span>
@@ -569,7 +568,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         badge={
                             <Tooltip
                                 placement="top"
-                                aria-labelledby="If a rare item is not on this list it means that there are no auctions available with it."
                                 content="If a rare item is not on this list it means that there are no auctions available with it."
                             >
                                 <span className="exclamation-icon">!</span>
@@ -606,7 +604,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <FilterGroup className="misc-wrapper" title="Misc" display="flex">
                     <Tooltip
                         offset={[0, 8]}
-                        aria-labelledby="Save your favorite auctions pressing the ❤️ button!"
                         content="Save your favorite auctions pressing the ❤️ button!"
                     >
                         <Chip
@@ -621,7 +618,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     <Tooltip
                         offset={[0, 8]}
                         style={{ width: 280 }}
-                        aria-labelledby="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)"
                         content="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)"
                     >
                         <Chip
@@ -635,7 +631,6 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
                     <Tooltip
                         offset={[0, 8]}
-                        aria-labelledby="Characters level 400+ with Soul War not completed"
                         content="Characters level 400+ with Soul War not completed"
                     >
                         <Chip
