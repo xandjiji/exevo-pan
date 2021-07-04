@@ -1,5 +1,4 @@
 import styled, { css } from 'styled-components'
-import { Shadow } from 'styles'
 import { PopoverReferenceProps, PopoverContentProps } from './types'
 
 const increaseHoverAreaStyle = css<PopoverReferenceProps>`
@@ -21,19 +20,9 @@ export const PopoverReference = styled.div<PopoverReferenceProps>`
 `
 
 export const PopoverContent = styled.div<PopoverContentProps>`
-  padding: 12px;
-  background-color: ${({ theme }) => theme.colors.surface};
-  border-radius: 5px;
-
-  font-size: 12px;
-  font-weight: 400;
-  color: ${({ theme }) => theme.colors.onSurface};
-
   z-index: 51;
   opacity: ${({ visible }) => (visible ? 1 : 0)};
   transition: opacity 0.2s ease-out;
-
-  ${Shadow}
 `
 
 export const Backdrop = styled.div`
