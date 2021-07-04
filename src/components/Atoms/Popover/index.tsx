@@ -1,4 +1,11 @@
-import { useState, useMemo, useEffect } from 'react'
+import {
+  useState,
+  useMemo,
+  useEffect,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react'
 import { usePopper } from 'react-popper'
 import { Modifier } from '@popperjs/core'
 import { checkKeyboardTrigger } from 'utils'
@@ -95,9 +102,18 @@ const Popover = ({
         style={styles.popper}
         {...attributes.popper}
         {...props}
-        {...(trigger === 'hover' && isVisible ? triggers : {})}
+        {...(trigger === 'hover' && isVisible
+          ? { ...triggers, tabIndex: undefined }
+          : {})}
       >
-        {content}
+        {Children.map(content, contentChild => {
+          if (!isValidElement(contentChild)) return contentChild
+          if (typeof contentChild.type === 'string') return contentChild
+
+          return cloneElement(contentChild, {
+            'aria-hidden': !isVisible,
+          })
+        })}
       </S.PopoverContent>
       {trigger === 'click' && isVisible && (
         <S.Backdrop onClick={() => setVisible(false)} />
