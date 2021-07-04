@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { usePopper } from 'react-popper'
 import { Modifier } from '@popperjs/core'
 import * as S from './styles'
@@ -62,6 +62,10 @@ const Popover = ({
         return {}
     }
   }, [trigger])
+
+  useEffect(() => {
+    if (isVisible) window.dispatchEvent(new Event('resize'))
+  }, [isVisible])
 
   return (
     <>
