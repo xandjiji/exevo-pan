@@ -9,8 +9,8 @@ const increaseHoverAreaStyle = css<PopoverReferenceProps>`
     left: 50%;
     transform: translate(-50%, -50%);
 
-    width: calc(100% + ${({ padX }) => padX}px);
-    height: calc(100% + ${({ padY }) => padY}px);
+    width: calc(100% + ${({ padX }) => padX + 8}px);
+    height: calc(100% + ${({ padY }) => padY + 8}px);
   }
 `
 
