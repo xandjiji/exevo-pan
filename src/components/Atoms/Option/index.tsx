@@ -4,6 +4,7 @@ import { OptionProps } from './types'
 const Option = ({
   children,
   value = children,
+  isSelected,
   highlighted = false,
   onClick,
   ...props
@@ -11,6 +12,7 @@ const Option = ({
   <S.Option
     role="option"
     value={value}
+    aria-selected={isSelected}
     highlighted={highlighted}
     onClick={() => onClick?.({ name: children, value })}
     {...props}
