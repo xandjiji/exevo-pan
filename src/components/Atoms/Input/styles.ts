@@ -8,6 +8,7 @@ export const Input = styled.input`
 
   border: none;
   outline: none;
+  background-color: transparent;
 
   font-size: 12px;
   color: ${({ theme }) => theme.colors.onSurface};
@@ -18,9 +19,8 @@ export const Input = styled.input`
 export const ClearButton = styled.button`
   position: relative;
   width: 42px;
-  cursor: pointer;
+  cursor: text;
   opacity: 0;
-  pointer-events: none;
   transition: opacity 0.2s ease-out;
 
   &::after,
@@ -47,12 +47,19 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   border: solid 1px ${({ theme }) => theme.colors.separator};
   background-color: ${({ theme }) => theme.colors.surface};
 
+  ${Smooth}
+  transition-property: border-color;
+
+  &:focus-within {
+    border-color: ${({ theme }) => theme.colors.primary};
+  }
+
   ${({ isClearButtonActive }) =>
     isClearButtonActive &&
     css`
       ${ClearButton} {
         opacity: 1;
-        pointer-events: unset;
+        cursor: pointer;
       }
 
       ${Input} {

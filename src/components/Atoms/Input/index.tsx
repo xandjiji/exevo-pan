@@ -10,6 +10,7 @@ const Input = ({
 }: InputProps): JSX.Element => {
   const [value, setValue] = useState<string>(valueProp ?? '')
   const derivedValue = valueProp ?? value
+  const isClearButtonActive = allowClear && !!value
 
   const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -17,12 +18,16 @@ const Input = ({
     setValue(event.target.value)
   }
 
-  const handleClear = () => {
+  const handleClearClick = () => {
     if (inputRef.current) {
-      const event = new Event('input', { bubbles: true })
-      setValue('')
-      inputRef.current.value = ''
-      inputRef.current.dispatchEvent(event)
+      if (isClearButtonActive) {
+        const event = new Event('input', { bubbles: true })
+        setValue('')
+        inputRef.current.value = ''
+        inputRef.current.dispatchEvent(event)
+      } else {
+        inputRef.current.focus()
+      }
     }
   }
 
@@ -31,14 +36,14 @@ const Input = ({
   }
 
   return (
-    <S.InputWrapper isClearButtonActive={allowClear && !!value} {...props}>
+    <S.InputWrapper isClearButtonActive={isClearButtonActive} {...props}>
       <S.Input
         ref={inputRef}
         value={derivedValue}
         onChange={handleChange}
         onInput={handleInput}
       />
-      {allowClear && <S.ClearButton onClick={handleClear} />}
+      {allowClear && <S.ClearButton onClick={handleClearClick} />}
     </S.InputWrapper>
   )
 }
