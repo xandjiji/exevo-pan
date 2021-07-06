@@ -1,8 +1,13 @@
 import { useState, useRef } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import * as S from './styles'
 import { InputProps } from './types'
 
+const errorId = uuidv4()
+
 const Input = ({
+  className,
+  style,
   allowClear = false,
   errorMessage,
   value: valueProp,
@@ -37,7 +42,7 @@ const Input = ({
   }
 
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper className={className} style={style}>
       <S.InputWrapper
         isClearButtonActive={isClearButtonActive}
         isInvalid={isInvalid}
@@ -47,10 +52,15 @@ const Input = ({
           value={derivedValue}
           onChange={handleChange}
           onInput={handleInput}
+          aria-invalid={isInvalid}
+          aria-errormessage={isInvalid ? errorId : undefined}
+          {...props}
         />
         {allowClear && <S.ClearButton onClick={handleClearClick} />}
       </S.InputWrapper>
-      <S.ErrorMessage active={isInvalid}>{errorMessage}</S.ErrorMessage>
+      <S.ErrorMessage id={errorId} active={isInvalid} role="alert">
+        {errorMessage}
+      </S.ErrorMessage>
     </S.Wrapper>
   )
 }
