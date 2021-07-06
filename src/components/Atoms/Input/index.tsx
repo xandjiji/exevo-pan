@@ -1,18 +1,44 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import * as S from './styles'
 import { InputProps } from './types'
 
-const Input = ({ allowClear = false, ...props }: InputProps): JSX.Element => {
-  const [value, setValue] = useState<string>('')
+const Input = ({
+  allowClear = false,
+  value: valueProp,
+  onChange,
+  ...props
+}: InputProps): JSX.Element => {
+  const [value, setValue] = useState<string>(valueProp ?? '')
+  const derivedValue = valueProp ?? value
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
   }
 
+  const handleClear = () => {
+    if (inputRef.current) {
+      const event = new Event('input', { bubbles: true })
+      setValue('')
+      inputRef.current.value = ''
+      inputRef.current.dispatchEvent(event)
+    }
+  }
+
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(event)
+  }
+
   return (
     <S.InputWrapper isClearButtonActive={allowClear && !!value} {...props}>
-      <S.Input value={value} onChange={handleChange} />
-      {allowClear && <S.ClearButton />}
+      <S.Input
+        ref={inputRef}
+        value={derivedValue}
+        onChange={handleChange}
+        onInput={handleInput}
+      />
+      {allowClear && <S.ClearButton onClick={handleClear} />}
     </S.InputWrapper>
   )
 }
