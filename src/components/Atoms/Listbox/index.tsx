@@ -4,7 +4,8 @@ import { ListboxProps } from './types'
 
 const Listbox = ({
   children,
-  highlightedIndex = [],
+  highlightedIndex = new Set<number>([]),
+  selectedIndex = new Set<number>([]),
   onSelectOption,
   ...props
 }: ListboxProps): JSX.Element => {
@@ -15,7 +16,8 @@ const Listbox = ({
         if (typeof child.type === 'string') return child
 
         return cloneElement(child, {
-          highlighted: highlightedIndex.includes(index),
+          highlighted: highlightedIndex.has(index),
+          'aria-selected': selectedIndex.has(index),
           onClick: onSelectOption,
         })
       })}
