@@ -1,6 +1,8 @@
 import styled, { css } from 'styled-components'
 import { Smooth } from 'styles'
-import { InputWrapperProps } from './types'
+import { ErrorMessageProps, InputWrapperProps } from './types'
+
+export const Wrapper = styled.div``
 
 export const Input = styled.input`
   padding: 10px 16px;
@@ -16,6 +18,23 @@ export const Input = styled.input`
   ${Smooth}
   transition-property: border-color;
 `
+
+export const ErrorMessage = styled.span<ErrorMessageProps>`
+  padding: 0px 10px;
+
+  font-size: 10px;
+  color: ${({ theme }) => theme.colors.red};
+
+  opacity: 0;
+  transition: opacity 0.2s ease-out;
+
+  ${({ active }) =>
+    active &&
+    css`
+      opacity: 1;
+    `}
+`
+
 export const ClearButton = styled.button`
   position: relative;
   width: 42px;
@@ -53,6 +72,15 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   &:focus-within {
     border-color: ${({ theme }) => theme.colors.primary};
   }
+
+  ${({ isInvalid }) =>
+    isInvalid &&
+    css`
+      border-color: ${({ theme }) => theme.colors.red};
+      &:focus-within {
+        border-color: ${({ theme }) => theme.colors.red};
+      }
+    `}
 
   ${({ isClearButtonActive }) =>
     isClearButtonActive &&

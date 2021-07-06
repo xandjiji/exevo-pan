@@ -4,6 +4,7 @@ import { InputProps } from './types'
 
 const Input = ({
   allowClear = false,
+  errorMessage,
   value: valueProp,
   onChange,
   ...props
@@ -11,6 +12,7 @@ const Input = ({
   const [value, setValue] = useState<string>(valueProp ?? '')
   const derivedValue = valueProp ?? value
   const isClearButtonActive = allowClear && !!value
+  const isInvalid = !!errorMessage
 
   const inputRef = useRef<HTMLInputElement | null>(null)
 
@@ -35,15 +37,21 @@ const Input = ({
   }
 
   return (
-    <S.InputWrapper isClearButtonActive={isClearButtonActive} {...props}>
-      <S.Input
-        ref={inputRef}
-        value={derivedValue}
-        onChange={handleChange}
-        onInput={handleInput}
-      />
-      {allowClear && <S.ClearButton onClick={handleClearClick} />}
-    </S.InputWrapper>
+    <S.Wrapper {...props}>
+      <S.InputWrapper
+        isClearButtonActive={isClearButtonActive}
+        isInvalid={isInvalid}
+      >
+        <S.Input
+          ref={inputRef}
+          value={derivedValue}
+          onChange={handleChange}
+          onInput={handleInput}
+        />
+        {allowClear && <S.ClearButton onClick={handleClearClick} />}
+      </S.InputWrapper>
+      <S.ErrorMessage active={isInvalid}>{errorMessage}</S.ErrorMessage>
+    </S.Wrapper>
   )
 }
 
