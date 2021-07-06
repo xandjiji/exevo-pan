@@ -25,9 +25,8 @@ const Input = ({
         setValue('')
         inputRef.current.value = ''
         inputRef.current.dispatchEvent(event)
-      } else {
-        inputRef.current.focus()
       }
+      inputRef.current.focus()
     }
   }
 
