@@ -1,20 +1,13 @@
-import { useMemo, Children, isValidElement, cloneElement } from 'react'
+import { Children, isValidElement, cloneElement } from 'react'
 import * as S from './styles'
 import { ListboxProps } from './types'
 
 const Listbox = ({
   children,
-  highlightedIndex: highlightedIndexProp,
+  highlightedIndex = [],
   onSelectOption,
   ...props
 }: ListboxProps): JSX.Element => {
-  const highlightedIndex = useMemo(
-    () =>
-      Array.isArray(highlightedIndexProp)
-        ? highlightedIndexProp
-        : [highlightedIndexProp],
-    [highlightedIndexProp],
-  )
   return (
     <S.Wrapper role="listbox" {...props}>
       {Children.map(children, (child, index) => {
