@@ -5,7 +5,7 @@ import { indexToId } from './utils'
 
 const Listbox = ({
   children,
-  highlightedIndex = new Set<number>([]),
+  highlightedIndex,
   selectedIndex = new Set<number>([]),
   onSelectOption,
   ...props
@@ -26,7 +26,7 @@ const Listbox = ({
 
         return cloneElement(child, {
           id: indexToId(index),
-          highlighted: highlightedIndex.has(index),
+          highlighted: highlightedIndex === index,
           'aria-selected': selectedIndex.has(index),
           onClick: onSelectOption,
         })
