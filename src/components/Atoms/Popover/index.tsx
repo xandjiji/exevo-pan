@@ -17,11 +17,13 @@ const Popover = ({
   content,
   placement = 'top',
   trigger = 'hover',
-  visible = false,
+  visible,
   offset = [0, 0],
   ...props
 }: PopoverProps): JSX.Element => {
-  const [isVisible, setVisible] = useState<boolean>(visible)
+  const [isVisible, setVisible] = useState<boolean>(visible ?? false)
+  const derivedVisibility =
+    trigger === 'none' ? visible ?? isVisible : isVisible
 
   const [referenceElement, setReferenceElement] =
     useState<PopperReferenceElement>(null)
@@ -82,8 +84,8 @@ const Popover = ({
   }, [trigger])
 
   useEffect(() => {
-    if (isVisible) window.dispatchEvent(new Event('resize'))
-  }, [isVisible])
+    if (derivedVisibility) window.dispatchEvent(new Event('resize'))
+  }, [derivedVisibility])
 
   return (
     <>
@@ -91,18 +93,18 @@ const Popover = ({
         ref={setReferenceElement}
         padX={offset[0]}
         padY={offset[1]}
-        increaseHoverArea={trigger === 'hover' && isVisible}
+        increaseHoverArea={trigger === 'hover' && derivedVisibility}
         {...triggers}
       >
         {children}
       </S.PopoverReference>
       <S.PopoverContent
         ref={setPopperElement}
-        visible={isVisible}
+        visible={derivedVisibility}
         style={styles.popper}
         {...attributes.popper}
         {...props}
-        {...(trigger === 'hover' && isVisible
+        {...(trigger === 'hover' && derivedVisibility
           ? { ...triggers, tabIndex: undefined }
           : {})}
       >
@@ -111,13 +113,13 @@ const Popover = ({
           if (typeof contentChild.type === 'string') return contentChild
 
           return cloneElement(contentChild, {
-            'aria-hidden': !isVisible,
-            disabled: !isVisible,
-            hidden: !isVisible,
+            'aria-hidden': !derivedVisibility,
+            disabled: !derivedVisibility,
+            hidden: !derivedVisibility,
           })
         })}
       </S.PopoverContent>
-      {trigger === 'click' && isVisible && (
+      {trigger === 'click' && derivedVisibility && (
         <S.Backdrop
           aria-label="Click here to close"
           onClick={() => setVisible(false)}
