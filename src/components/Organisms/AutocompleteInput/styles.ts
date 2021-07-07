@@ -7,7 +7,6 @@ import {
 
 export const Wrapper = styled.div`
   position: relative;
-  width: 500px;
 
   > * {
     width: 100%;
