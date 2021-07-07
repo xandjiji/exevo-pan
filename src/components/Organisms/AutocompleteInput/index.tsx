@@ -1,8 +1,9 @@
-import { useEffect, useReducer } from 'react'
+import { useState, useEffect, useReducer } from 'react'
 import { Option } from 'components/Atoms'
 import { v4 as uuidv4 } from 'uuid'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import * as S from './styles'
+import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import autocompleteInputReducer from './reducer'
 
@@ -14,27 +15,35 @@ const AutocompleteInput = ({
   onItemSelect,
   ...props
 }: AutocompleteInputProps): JSX.Element => {
-  const [
-    { listboxStatus, highlightedIndex, inputValue, currentList },
-    dispatch,
-  ] = useReducer(autocompleteInputReducer, {
-    listboxStatus: false,
-    highlightedIndex: undefined,
-    inputValue: '',
-    currentList: itemList,
-    onItemSelect,
-  })
+  const [currentList, setCurrentList] = useState<Option[]>(itemList)
+  const [{ listboxStatus, highlightedIndex, inputValue }, dispatch] =
+    useReducer(autocompleteInputReducer, {
+      listboxStatus: false,
+      highlightedIndex: undefined,
+      inputValue: '',
+    })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'userTyping', value: event.target.value, list: itemList })
+    dispatch({ type: 'userTyping', value: event.target.value })
+    setCurrentList(filterByTerm(event.target.value, itemList))
   }
 
   const handleKeyboard = (event: React.KeyboardEvent) => {
     const action = {
-      ArrowUp: () => dispatch({ type: 'arrowNavigation', value: -1 }),
-      ArrowDown: () => dispatch({ type: 'arrowNavigation', value: 1 }),
-      Enter: () => dispatch({ type: 'optionSelected', list: itemList }),
-      NumpadEnter: () => dispatch({ type: 'optionSelected', list: itemList }),
+      ArrowUp: () =>
+        dispatch({ type: 'arrowNavigation', value: -1, list: currentList }),
+      ArrowDown: () =>
+        dispatch({ type: 'arrowNavigation', value: 1, list: currentList }),
+      Enter: () => {
+        if (highlightedIndex === undefined) return
+        onItemSelect?.(currentList[highlightedIndex])
+        dispatch({ type: 'optionSelected' })
+      },
+      NumpadEnter: () => {
+        if (highlightedIndex === undefined) return
+        onItemSelect?.(currentList[highlightedIndex])
+        dispatch({ type: 'optionSelected' })
+      },
     }[event.code]
 
     if (action) {
@@ -54,6 +63,10 @@ const AutocompleteInput = ({
       })
     }
   }, [highlightedIndex])
+
+  useEffect(() => {
+    setCurrentList(itemList)
+  }, [itemList])
 
   return (
     <S.Wrapper {...props}>

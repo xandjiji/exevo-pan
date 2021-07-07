@@ -1,18 +1,17 @@
-import { filterByTerm, circularArrayIndex } from './utils'
+import { circularArrayIndex } from './utils'
 import { AutocompleteInputState, Action } from './types'
 
 export default (
   state: AutocompleteInputState,
   action: Action,
 ): AutocompleteInputState => {
-  const { highlightedIndex, currentList, onItemSelect } = state
+  const { highlightedIndex } = state
 
   switch (action.type) {
     case 'userTyping':
       return {
         ...state,
         inputValue: action.value,
-        currentList: filterByTerm(action.value, action.list),
         highlightedIndex: undefined,
         listboxStatus: true,
       }
@@ -21,11 +20,9 @@ export default (
       if (highlightedIndex === undefined) {
         return { ...state }
       } else {
-        onItemSelect?.(currentList[highlightedIndex])
         return {
           ...state,
           inputValue: '',
-          currentList: action.list,
           highlightedIndex: undefined,
           listboxStatus: false,
         }
@@ -37,18 +34,18 @@ export default (
           ...state,
           listboxStatus: true,
           highlightedIndex: 0,
-          inputValue: currentList[0].name,
+          inputValue: action.list[0].name,
         }
       } else {
         const newIndex = circularArrayIndex(
           highlightedIndex + action.value,
-          currentList,
+          action.list,
         )
         return {
           ...state,
           listboxStatus: true,
           highlightedIndex: newIndex,
-          inputValue: currentList[newIndex].name,
+          inputValue: action.list[newIndex].name,
         }
       }
 
