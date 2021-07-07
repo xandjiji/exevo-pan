@@ -21,8 +21,8 @@ const Listbox = (
   refProp: Ref<HTMLDivElement>,
 ): JSX.Element => {
   const currentActiveDescendantId = useMemo(
-    () => indexToId(Array.from(selectedIndex)[selectedIndex.size - 1]),
-    [selectedIndex],
+    () => indexToId(highlightedIndex),
+    [highlightedIndex],
   )
   return (
     <S.Wrapper
