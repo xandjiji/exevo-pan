@@ -1,8 +1,11 @@
 import { useState } from 'react'
 import { Option } from 'components/Atoms'
+import { v4 as uuidv4 } from 'uuid'
 import * as S from './styles'
 import { AutocompleteInputProps } from './types'
 import { filterByTerm, circularArrayIndex } from './utils'
+
+const listboxId = uuidv4()
 
 const AutocompleteInput = ({
   itemList = [],
@@ -64,7 +67,7 @@ const AutocompleteInput = ({
         trigger="none"
         visible={listboxStatus}
         content={
-          <S.Listbox highlightedIndex={highlighted}>
+          <S.Listbox id={listboxId} highlightedIndex={highlighted}>
             {currentList.map(item => (
               <Option key={item.value} value={item.value}>
                 {item.name}
@@ -74,6 +77,11 @@ const AutocompleteInput = ({
         }
       >
         <S.Input
+          aria-haspopup
+          role="combobox"
+          aria-autocomplete="list"
+          aria-expanded={listboxStatus}
+          aria-owns={listboxId}
           allowClear
           placeholder={placeholder}
           value={value}
