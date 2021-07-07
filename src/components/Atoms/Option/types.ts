@@ -5,6 +5,7 @@ export interface OptionProps {
   value?: string
   highlighted?: boolean
   onClick?: (option: Option) => void
+  onMouseDown?: (event: React.MouseEvent) => void
   props?: HTMLAttributes<HTMLOptionElement>
 }
 
