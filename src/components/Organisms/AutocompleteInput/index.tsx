@@ -47,9 +47,12 @@ const AutocompleteInput = ({
     setListboxStatus(true)
     setHighlighted(currentIndex => {
       if (currentIndex === undefined) {
+        setValue(currentList[0].name)
         return 0
       } else {
-        return circularArrayIndex(action(currentIndex), currentList)
+        const newIndex = circularArrayIndex(action(currentIndex), currentList)
+        setValue(currentList[newIndex].name)
+        return newIndex
       }
     })
   }
