@@ -1,21 +1,32 @@
-import { useMemo, Children, isValidElement, cloneElement } from 'react'
+import {
+  forwardRef,
+  Ref,
+  useMemo,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react'
 import * as S from './styles'
 import { ListboxProps } from './types'
 import { indexToId } from './utils'
 
-const Listbox = ({
-  children,
-  highlightedIndex,
-  selectedIndex = new Set<number>([]),
-  onSelectOption,
-  ...props
-}: ListboxProps): JSX.Element => {
+const Listbox = (
+  {
+    children,
+    highlightedIndex,
+    selectedIndex = new Set<number>([]),
+    onSelectOption,
+    ...props
+  }: ListboxProps,
+  refProp: Ref<HTMLDivElement>,
+): JSX.Element => {
   const currentActiveDescendantId = useMemo(
     () => indexToId(Array.from(selectedIndex)[selectedIndex.size - 1]),
     [selectedIndex],
   )
   return (
     <S.Wrapper
+      ref={refProp}
       role="listbox"
       aria-activedescendant={currentActiveDescendantId}
       {...props}
@@ -35,4 +46,4 @@ const Listbox = ({
   )
 }
 
-export default Listbox
+export default forwardRef(Listbox)
