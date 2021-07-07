@@ -1,5 +1,6 @@
 export { default as Clickable } from './Clickable'
 export { default as Container } from './Container'
+export { default as CustomScrollbar } from './CustomScrollbar'
 export { default as GlobalStyles } from './GlobalStyles'
 export { default as InnerContainer } from './InnerContainer'
 export { default as MaterialCard } from './MaterialCard'
