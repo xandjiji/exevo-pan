@@ -1,4 +1,4 @@
-import { useState, useEffect, useReducer } from 'react'
+import { useState, useReducer, useCallback, useEffect } from 'react'
 import { Option } from 'components/Atoms'
 import { v4 as uuidv4 } from 'uuid'
 import { indexToId } from 'components/Atoms/Listbox/utils'
@@ -23,10 +23,13 @@ const AutocompleteInput = ({
       inputValue: '',
     })
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'userTyping', value: event.target.value })
-    setCurrentList(filterByTerm(event.target.value, itemList))
-  }
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      dispatch({ type: 'userTyping', value: event.target.value })
+      setCurrentList(filterByTerm(event.target.value, itemList))
+    },
+    [itemList],
+  )
 
   const handleKeyboard = (event: React.KeyboardEvent) => {
     switch (event.code) {
@@ -56,27 +59,6 @@ const AutocompleteInput = ({
       default:
         break
     }
-    /* const action = {
-      ArrowUp: () =>
-        dispatch({ type: 'arrowNavigation', value: -1, list: currentList }),
-      ArrowDown: () =>
-        dispatch({ type: 'arrowNavigation', value: 1, list: currentList }),
-      Enter: () => {
-        if (highlightedIndex === undefined) return
-        onItemSelect?.(currentList[highlightedIndex])
-        dispatch({ type: 'optionSelected' })
-      },
-      NumpadEnter: () => {
-        if (highlightedIndex === undefined) return
-        onItemSelect?.(currentList[highlightedIndex])
-        dispatch({ type: 'optionSelected' })
-      },
-    }[event.code]
-
-    if (action) {
-      event.preventDefault()
-      action()
-    } */
   }
 
   useEffect(() => {
