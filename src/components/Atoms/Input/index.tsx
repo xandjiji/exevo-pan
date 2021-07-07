@@ -16,7 +16,7 @@ const Input = ({
 }: InputProps): JSX.Element => {
   const [value, setValue] = useState<string>(valueProp ?? '')
   const derivedValue = valueProp ?? value
-  const isClearButtonActive = allowClear && !!value
+  const isClearButtonActive = allowClear && !!derivedValue
   const isInvalid = !!errorMessage
 
   const inputRef = useRef<HTMLInputElement | null>(null)

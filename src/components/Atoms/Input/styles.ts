@@ -16,7 +16,7 @@ export const Input = styled.input`
   color: ${({ theme }) => theme.colors.onSurface};
 
   ${Smooth}
-  transition-property: border-color;
+  transition-property: border-color, padding;
 `
 
 export const ErrorMessage = styled.span<ErrorMessageProps>`
