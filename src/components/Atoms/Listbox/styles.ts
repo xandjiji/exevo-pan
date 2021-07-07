@@ -6,4 +6,12 @@ export const Wrapper = styled.div`
   overflow: auto;
   ${Shadow}
   ${CustomScrollbar}
+
+  scrollbar-color: ${({ theme }) => theme.colors.primaryVariant} ${({
+    theme,
+  }) => theme.colors.surface};
+
+  ::-webkit-scrollbar {
+    background-color: ${({ theme }) => theme.colors.surface};
+  }
 `
