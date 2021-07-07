@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Option } from 'components/Atoms'
 import { v4 as uuidv4 } from 'uuid'
+import { indexToId } from 'components/Atoms/Listbox/utils'
 import * as S from './styles'
 import { AutocompleteInputProps } from './types'
 import { filterByTerm, circularArrayIndex } from './utils'
@@ -59,6 +60,16 @@ const AutocompleteInput = ({
       }
     })
   }
+
+  useEffect(() => {
+    if (highlighted !== undefined) {
+      const item = document.getElementById(indexToId(highlighted) as string)
+      item?.scrollIntoView({
+        block: 'nearest',
+        behavior: 'smooth',
+      })
+    }
+  }, [highlighted])
 
   return (
     <S.Wrapper {...props}>
