@@ -29,7 +29,34 @@ const AutocompleteInput = ({
   }
 
   const handleKeyboard = (event: React.KeyboardEvent) => {
-    const action = {
+    switch (event.code) {
+      case 'ArrowUp':
+        dispatch({
+          type: 'arrowNavigation',
+          value: -1,
+          list: currentList,
+        })
+        event.preventDefault()
+        break
+      case 'ArrowDown':
+        dispatch({
+          type: 'arrowNavigation',
+          value: 1,
+          list: currentList,
+        })
+        event.preventDefault()
+        break
+      case 'Enter':
+      case 'NumpadEnter':
+        if (highlightedIndex !== undefined) {
+          onItemSelect?.(currentList[highlightedIndex])
+          dispatch({ type: 'optionSelected' })
+        }
+        break
+      default:
+        break
+    }
+    /* const action = {
       ArrowUp: () =>
         dispatch({ type: 'arrowNavigation', value: -1, list: currentList }),
       ArrowDown: () =>
@@ -49,7 +76,7 @@ const AutocompleteInput = ({
     if (action) {
       event.preventDefault()
       action()
-    }
+    } */
   }
 
   useEffect(() => {
