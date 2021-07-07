@@ -21,21 +21,20 @@ const AutocompleteInput = ({
     listboxStatus: false,
     highlightedIndex: undefined,
     inputValue: '',
-    originalList: itemList,
     currentList: itemList,
     onItemSelect,
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch({ type: 'userTyping', value: event.target.value })
+    dispatch({ type: 'userTyping', value: event.target.value, list: itemList })
   }
 
   const handleKeyboard = (event: React.KeyboardEvent) => {
     const action = {
       ArrowUp: () => dispatch({ type: 'arrowNavigation', value: -1 }),
       ArrowDown: () => dispatch({ type: 'arrowNavigation', value: 1 }),
-      Enter: () => dispatch({ type: 'optionSelected' }),
-      NumpadEnter: () => dispatch({ type: 'optionSelected' }),
+      Enter: () => dispatch({ type: 'optionSelected', list: itemList }),
+      NumpadEnter: () => dispatch({ type: 'optionSelected', list: itemList }),
     }[event.code]
 
     if (action) {

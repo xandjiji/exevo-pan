@@ -10,13 +10,12 @@ export interface AutocompleteInputState {
   listboxStatus: boolean
   highlightedIndex: number | undefined
   inputValue: string
-  originalList: Option[]
   currentList: Option[]
   onItemSelect?: (selectedItem: Option) => void
 }
 
 export type Action =
   | { type: 'arrowNavigation'; value: number }
-  | { type: 'optionSelected' }
+  | { type: 'optionSelected'; list: Option[] }
   | { type: 'setListboxStatus'; value: boolean }
-  | { type: 'userTyping'; value: string }
+  | { type: 'userTyping'; value: string; list: Option[] }

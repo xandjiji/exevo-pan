@@ -5,14 +5,14 @@ export default (
   state: AutocompleteInputState,
   action: Action,
 ): AutocompleteInputState => {
-  const { highlightedIndex, originalList, currentList, onItemSelect } = state
+  const { highlightedIndex, currentList, onItemSelect } = state
 
   switch (action.type) {
     case 'userTyping':
       return {
         ...state,
         inputValue: action.value,
-        currentList: filterByTerm(action.value, originalList),
+        currentList: filterByTerm(action.value, action.list),
         highlightedIndex: undefined,
         listboxStatus: true,
       }
@@ -25,7 +25,7 @@ export default (
         return {
           ...state,
           inputValue: '',
-          currentList: originalList,
+          currentList: action.list,
           highlightedIndex: undefined,
           listboxStatus: false,
         }
