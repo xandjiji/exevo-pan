@@ -46,6 +46,7 @@ const Input = ({
       <S.InputWrapper
         isClearButtonActive={isClearButtonActive}
         isInvalid={isInvalid}
+        onClick={() => inputRef.current?.focus()}
       >
         <S.Input
           ref={inputRef}
@@ -60,6 +61,7 @@ const Input = ({
           <S.ClearButton
             aria-label="Clear input"
             disabled={!isClearButtonActive}
+            aria-hidden={!isClearButtonActive}
             onClick={handleClearClick}
           />
         )}

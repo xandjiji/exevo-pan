@@ -38,7 +38,7 @@ export const ErrorMessage = styled.span<ErrorMessageProps>`
 export const ClearButton = styled.button`
   position: relative;
   width: 42px;
-  cursor: text;
+  pointer-events: none;
   opacity: 0;
   transition: opacity 0.2s ease-out;
 
@@ -65,6 +65,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   border-radius: 5px;
   border: solid 1px ${({ theme }) => theme.colors.separator};
   background-color: ${({ theme }) => theme.colors.surface};
+  cursor: text;
 
   ${Smooth}
   transition-property: border-color;
@@ -88,6 +89,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
       ${ClearButton} {
         opacity: 1;
         cursor: pointer;
+        pointer-events: unset;
       }
 
       ${Input} {
