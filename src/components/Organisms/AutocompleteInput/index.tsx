@@ -11,6 +11,7 @@ const listboxId = uuidv4()
 const AutocompleteInput = ({
   itemList = [],
   placeholder,
+  onItemSelect,
   ...props
 }: AutocompleteInputProps): JSX.Element => {
   const [
@@ -22,6 +23,7 @@ const AutocompleteInput = ({
     inputValue: '',
     originalList: itemList,
     currentList: itemList,
+    onItemSelect,
   })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +65,11 @@ const AutocompleteInput = ({
         content={
           <S.Listbox id={listboxId} highlightedIndex={highlightedIndex}>
             {currentList.map(item => (
-              <Option key={item.value} value={item.value}>
+              <Option
+                key={item.value}
+                value={item.value}
+                onMouseDown={() => onItemSelect?.(item)}
+              >
                 {item.name}
               </Option>
             ))}

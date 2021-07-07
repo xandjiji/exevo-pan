@@ -5,7 +5,7 @@ export default (
   state: AutocompleteInputState,
   action: Action,
 ): AutocompleteInputState => {
-  const { highlightedIndex, originalList, currentList } = state
+  const { highlightedIndex, originalList, currentList, onItemSelect } = state
 
   switch (action.type) {
     case 'userTyping':
@@ -21,6 +21,7 @@ export default (
       if (highlightedIndex === undefined) {
         return { ...state }
       } else {
+        onItemSelect?.(currentList[highlightedIndex])
         return {
           ...state,
           inputValue: '',

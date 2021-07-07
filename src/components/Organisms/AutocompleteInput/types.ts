@@ -3,6 +3,7 @@ import { HTMLAttributes } from 'react'
 export interface AutocompleteInputProps extends HTMLAttributes<HTMLDivElement> {
   itemList?: Option[]
   placeholder?: string
+  onItemSelect?: (selectedItem: Option) => void
 }
 
 export interface AutocompleteInputState {
@@ -11,6 +12,7 @@ export interface AutocompleteInputState {
   inputValue: string
   originalList: Option[]
   currentList: Option[]
+  onItemSelect?: (selectedItem: Option) => void
 }
 
 export type Action =
