@@ -56,7 +56,13 @@ const Input = ({
           aria-errormessage={isInvalid ? errorId : undefined}
           {...props}
         />
-        {allowClear && <S.ClearButton onClick={handleClearClick} />}
+        {allowClear && (
+          <S.ClearButton
+            aria-label="Clear input"
+            disabled={!isClearButtonActive}
+            onClick={handleClearClick}
+          />
+        )}
       </S.InputWrapper>
       <S.ErrorMessage id={errorId} active={isInvalid} role="alert">
         {errorMessage}
