@@ -1,10 +1,10 @@
-import { useState, useEffect } from 'react'
+import { useEffect, useReducer } from 'react'
 import { Option } from 'components/Atoms'
 import { v4 as uuidv4 } from 'uuid'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import * as S from './styles'
 import { AutocompleteInputProps } from './types'
-import { filterByTerm, circularArrayIndex } from './utils'
+import autocompleteInputReducer from './reducer'
 
 const listboxId = uuidv4()
 
@@ -13,63 +13,46 @@ const AutocompleteInput = ({
   placeholder,
   ...props
 }: AutocompleteInputProps): JSX.Element => {
-  const [listboxStatus, setListboxStatus] = useState<boolean>(false)
-  const [highlighted, setHighlighted] = useState<number | undefined>(undefined)
-  const [value, setValue] = useState('')
-  const [currentList, setCurrentList] = useState<Option[]>(itemList)
+  const [
+    { listboxStatus, highlightedIndex, inputValue, currentList },
+    dispatch,
+  ] = useReducer(autocompleteInputReducer, {
+    listboxStatus: false,
+    highlightedIndex: undefined,
+    inputValue: '',
+    originalList: itemList,
+    currentList: itemList,
+  })
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const inputValue = event.target.value
-
-    const newList = filterByTerm(inputValue, itemList)
-
-    setValue(inputValue)
-    setCurrentList(newList)
-    setHighlighted(undefined)
+    dispatch({ type: 'userTyping', value: event.target.value })
   }
 
   const handleKeyboard = (event: React.KeyboardEvent) => {
-    if (
-      (event.code === 'Enter' || event.code === 'NumpadEnter') &&
-      highlighted !== undefined
-    ) {
-      setValue('')
-      setCurrentList(itemList)
-      setHighlighted(undefined)
-      setListboxStatus(false)
-      return
-    }
-
     const action = {
-      ArrowUp: (index: number) => index - 1,
-      ArrowDown: (index: number) => index + 1,
+      ArrowUp: () => dispatch({ type: 'arrowNavigation', value: -1 }),
+      ArrowDown: () => dispatch({ type: 'arrowNavigation', value: 1 }),
+      Enter: () => dispatch({ type: 'optionSelected' }),
+      NumpadEnter: () => dispatch({ type: 'optionSelected' }),
     }[event.code]
 
-    if (!action) return
-
-    event.preventDefault()
-    setListboxStatus(true)
-    setHighlighted(currentIndex => {
-      if (currentIndex === undefined) {
-        setValue(currentList[0].name)
-        return 0
-      } else {
-        const newIndex = circularArrayIndex(action(currentIndex), currentList)
-        setValue(currentList[newIndex].name)
-        return newIndex
-      }
-    })
+    if (action) {
+      event.preventDefault()
+      action()
+    }
   }
 
   useEffect(() => {
-    if (highlighted !== undefined) {
-      const item = document.getElementById(indexToId(highlighted) as string)
+    if (highlightedIndex !== undefined) {
+      const item = document.getElementById(
+        indexToId(highlightedIndex) as string,
+      )
       item?.scrollIntoView({
         block: 'nearest',
         behavior: 'smooth',
       })
     }
-  }, [highlighted])
+  }, [highlightedIndex])
 
   return (
     <S.Wrapper {...props}>
@@ -78,7 +61,7 @@ const AutocompleteInput = ({
         trigger="none"
         visible={listboxStatus}
         content={
-          <S.Listbox id={listboxId} highlightedIndex={highlighted}>
+          <S.Listbox id={listboxId} highlightedIndex={highlightedIndex}>
             {currentList.map(item => (
               <Option key={item.value} value={item.value}>
                 {item.name}
@@ -95,10 +78,10 @@ const AutocompleteInput = ({
           aria-owns={listboxId}
           allowClear
           placeholder={placeholder}
-          value={value}
+          value={inputValue}
           onChange={handleChange}
-          onFocus={() => setListboxStatus(true)}
-          onBlur={() => setListboxStatus(false)}
+          onFocus={() => dispatch({ type: 'setListboxStatus', value: true })}
+          onBlur={() => dispatch({ type: 'setListboxStatus', value: false })}
           onKeyDown={handleKeyboard}
         />
       </S.Popover>
