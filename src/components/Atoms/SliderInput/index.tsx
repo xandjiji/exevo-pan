@@ -148,6 +148,8 @@ const SliderInput = ({
         </S.Track>
       </div>
       <S.SliderInput
+        aria-label={props['aria-label']}
+        aria-labelledby={props['aria-labelledby']}
         valid={isValid}
         aria-invalid={!isValid}
         value={sliderInputValue}

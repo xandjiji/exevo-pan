@@ -480,6 +480,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     <label htmlFor="Skill-input" className="invisible-label">Skill</label>
                     <label htmlFor="Skill-counter" className="invisible-label">Skill value</label>
                     <SliderInput
+                        aria-label="Minimum skill level"
                         min={10}
                         max={130}
                         value={filters.minSkill}
