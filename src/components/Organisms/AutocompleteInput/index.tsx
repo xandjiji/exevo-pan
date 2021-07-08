@@ -1,4 +1,4 @@
-import { useState, useReducer, useCallback, useEffect } from 'react'
+import { useState, useReducer, useCallback, useEffect, useRef } from 'react'
 import { Option } from 'components/Atoms'
 import { v4 as uuidv4 } from 'uuid'
 import { indexToId } from 'components/Atoms/Listbox/utils'
@@ -7,14 +7,16 @@ import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import autocompleteInputReducer from './reducer'
 
-const listboxId = uuidv4()
-
 const AutocompleteInput = ({
+  className,
+  style,
   itemList = [],
   placeholder,
   onItemSelect,
   ...props
 }: AutocompleteInputProps): JSX.Element => {
+  const { current: listboxId } = useRef(uuidv4())
+
   const [currentList, setCurrentList] = useState<Option[]>(itemList)
   const [{ listboxStatus, highlightedIndex, inputValue }, dispatch] =
     useReducer(autocompleteInputReducer, {
@@ -80,7 +82,7 @@ const AutocompleteInput = ({
   }, [itemList])
 
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper className={className} style={style}>
       <S.Popover
         placement="bottom"
         trigger="none"
@@ -112,6 +114,7 @@ const AutocompleteInput = ({
           onFocus={() => dispatch({ type: 'setListboxStatus', value: true })}
           onBlur={() => dispatch({ type: 'setListboxStatus', value: false })}
           onKeyDown={handleKeyboard}
+          {...props}
         />
       </S.Popover>
     </S.Wrapper>
