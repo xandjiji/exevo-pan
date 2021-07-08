@@ -95,7 +95,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                                 </div>
                             }
                         >
-                            <SortIcon className="icon clickable" />
+                            <SortIcon aria-haspopup="dialog" className="icon clickable" />
                         </Tooltip>
                     </div>
                 </div>
