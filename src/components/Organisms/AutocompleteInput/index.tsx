@@ -68,7 +68,6 @@ const AutocompleteInput = ({
       )
       item?.scrollIntoView({
         block: 'nearest',
-        behavior: 'smooth',
       })
     }
   }, [highlightedIndex])
