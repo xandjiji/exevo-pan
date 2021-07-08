@@ -2,9 +2,8 @@ import React, { useState, useEffect, useContext, useCallback, useMemo } from 're
 import { Route, useHistory } from 'react-router-dom';
 import SideDrawer from './SideDrawer.styled';
 import FilterGroup from '../FilterGroup';
-import { Chip, SliderInput, RangeSliderInput, DrawerFooter } from 'components/Atoms';
-import { Tooltip } from 'components/Organisms';
-import AutocompleteInput from '../AutocompleteInput';
+import { Input, Chip, SliderInput, RangeSliderInput, DrawerFooter } from 'components/Atoms';
+import { Tooltip, AutocompleteInput } from 'components/Organisms';
 
 import { ReactComponent as ArrowIcon } from '../../assets/svgs/arrowBack.svg';
 import { ReactComponent as ResetIcon } from '../../assets/svgs/reset.svg';
@@ -309,12 +308,12 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     }
                 >
                     <label htmlFor="Nickname-input" className="invisible-label">Nickname</label>
-                    <AutocompleteInput
-                        initialValue={params.nicknameFilter}
-                        labelFor="Nickname-input"
+                    <Input
+                        allowClear
+                        value={params.nicknameFilter}
                         placeholder="Nickname"
-                        onChange={useCallback((value) => updateFilterValue('nicknameFilter', value), [updateFilterValue])}
-                        clearInput={filters.nicknameFilter === ''}
+                        labelFor="Nickname-input"
+                        onChange={useCallback((event) => updateFilterValue('nicknameFilter', event.target.value), [updateFilterValue])}
                     />
                 </FilterGroup>
                 <FilterGroup title="Vocation" display="flex">
@@ -445,11 +444,9 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <FilterGroup title="Server" display="flex">
                     <label htmlFor="Server-input" className="invisible-label">Server</label>
                     <AutocompleteInput
-                        labelFor="Server-input"
                         placeholder="Choose a server"
-                        clearAfterSucessful
-                        items={allItemsNotInSet(serverNamesArray, filters.serverSet)}
-                        onChange={useCallback((value) => onAutocompleteChange('serverSet', value, serverData), [onAutocompleteChange, serverData])}
+                        itemList={allItemsNotInSet(serverNamesArray, filters.serverSet)}
+                        onItemSelect={useCallback((option) => onAutocompleteChange('serverSet', option.value, serverData), [onAutocompleteChange, serverData])}
                     />
 
                     <div className="chips-wrapper">
@@ -534,11 +531,9 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 >
                     <label htmlFor="Imbuements-input" className="invisible-label">Imbuements</label>
                     <AutocompleteInput
-                        labelFor="Imbuements-input"
                         placeholder="Select imbuements"
-                        clearAfterSucessful
-                        items={allItemsNotInSet(imbuementsArray, filters.imbuementsSet)}
-                        onChange={useCallback((value) => onAutocompleteChange('imbuementsSet', value, imbuementObject), [onAutocompleteChange])}
+                        itemList={allItemsNotInSet(imbuementsArray, filters.imbuementsSet)}
+                        onItemSelect={useCallback((option) => onAutocompleteChange('imbuementsSet', option.value, imbuementObject), [onAutocompleteChange, imbuementObject])}
                     />
 
                     <Chip
@@ -575,11 +570,9 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     >
                         <label htmlFor="Items-input" className="invisible-label">Items</label>
                         <AutocompleteInput
-                            labelFor="Items-input"
                             placeholder="Choose an item"
-                            clearAfterSucessful
-                            items={allItemsNotInSet(itemNamesArray, filters.itemSet)}
-                            onChange={useCallback((value) => onAutocompleteChange('itemSet', value, itemData), [onAutocompleteChange, itemData])}
+                            itemList={allItemsNotInSet(itemNamesArray, filters.itemSet)}
+                            onItemSelect={useCallback((option) => onAutocompleteChange('itemSet', option.value, itemData), [onAutocompleteChange, itemData])}
                         />
 
                         <Chip
@@ -659,7 +652,7 @@ const allItemsNotInSet = (array, set) => {
 
     const newArray = [];
     for (const item of array) {
-        if (!set.has(item)) newArray.push(item);
+        if (!set.has(item)) newArray.push({ name: item, value: item });
     }
 
     return newArray;
