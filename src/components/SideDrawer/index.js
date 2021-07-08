@@ -444,12 +444,13 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 <FilterGroup title="Server" display="flex">
                     <label htmlFor="Server-input" className="invisible-label">Server</label>
                     <AutocompleteInput
+                        aria-controls="server-list"
                         placeholder="Choose a server"
                         itemList={allItemsNotInSet(serverNamesArray, filters.serverSet)}
                         onItemSelect={useCallback((option) => onAutocompleteChange('serverSet', option.value, serverData), [onAutocompleteChange, serverData])}
                     />
 
-                    <div className="chips-wrapper">
+                    <div id="server-list" className="chips-wrapper">
                         {[...filters.serverSet].map((serverName, index) =>
                             <Chip
                                 key={index}
@@ -531,18 +532,20 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                 >
                     <label htmlFor="Imbuements-input" className="invisible-label">Imbuements</label>
                     <AutocompleteInput
+                        aria-controls="imbuements-list"
                         placeholder="Select imbuements"
                         itemList={allItemsNotInSet(imbuementsArray, filters.imbuementsSet)}
                         onItemSelect={useCallback((option) => onAutocompleteChange('imbuementsSet', option.value, imbuementObject), [onAutocompleteChange, imbuementObject])}
                     />
 
                     <Chip
+                        aria-controls="imbuements-list"
                         overrideStatus={isAllImbuementsSelected() ? true : false}
                         onClick={handleAllImbuementsToggle}>
                         All imbuements
                     </Chip>
 
-                    <div className="chips-wrapper">
+                    <div id="imbuements-list" className="chips-wrapper">
                         {[...filters.imbuementsSet].map((imbuement, index) =>
                             <Chip
                                 key={index}
@@ -570,18 +573,20 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                     >
                         <label htmlFor="Items-input" className="invisible-label">Items</label>
                         <AutocompleteInput
+                            aria-controls="rare-items-list"
                             placeholder="Choose an item"
                             itemList={allItemsNotInSet(itemNamesArray, filters.itemSet)}
                             onItemSelect={useCallback((option) => onAutocompleteChange('itemSet', option.value, itemData), [onAutocompleteChange, itemData])}
                         />
 
                         <Chip
+                            aria-controls="rare-items-list"
                             overrideStatus={isAllItemsSelected() ? true : false}
                             onClick={handleAllItemsToggle}>
                             All items
                         </Chip>
 
-                        <div className="chips-wrapper">
+                        <div id="rare-items-list" className="chips-wrapper">
                             {[...filters.itemSet].map((itemName, index) =>
                                 <Chip
                                     key={index}
