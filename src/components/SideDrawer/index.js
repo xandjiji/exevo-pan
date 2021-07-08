@@ -258,7 +258,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
     }, [filters, filterIsReset]);
 
     return (
-        <SideDrawer className="shadow">
+        <SideDrawer id="filter-drawer" className="shadow">
             <div className="drawer-header inner-container shadow">
                 <div className="icon-group">
                     <ArrowIcon className="clickable" onClick={backAction} />

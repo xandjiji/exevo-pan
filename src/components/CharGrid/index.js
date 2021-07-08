@@ -67,7 +67,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
         <CharGrid className="custom-scrollbar" ref={gridRef}>
             <header className="grid-header shadow inner-container">
                 <div className="left-header-menu">
-                    <FilterIcon className="icon clickable" onClick={toggleSideDrawer} />
+                    <FilterIcon aria-controls="filter-drawer" className="icon clickable" onClick={toggleSideDrawer} />
                     <div className="sorting-wrapper">
                         <Tooltip
                             role="dialog"
