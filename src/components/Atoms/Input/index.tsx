@@ -3,8 +3,6 @@ import { v4 as uuidv4 } from 'uuid'
 import * as S from './styles'
 import { InputProps } from './types'
 
-const errorId = uuidv4()
-
 const Input = ({
   className,
   style,
@@ -14,6 +12,8 @@ const Input = ({
   onChange,
   ...props
 }: InputProps): JSX.Element => {
+  const { current: errorId } = useRef(uuidv4())
+
   const [value, setValue] = useState<string>(valueProp ?? '')
   const derivedValue = valueProp ?? value
   const isClearButtonActive = allowClear && !!derivedValue
