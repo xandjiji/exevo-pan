@@ -51,7 +51,10 @@ const AutocompleteInput = ({
         break
       case 'Enter':
       case 'NumpadEnter':
-        if (highlightedIndex !== undefined) {
+        if (currentList.length === 1) {
+          onItemSelect?.(currentList[0])
+          dispatch({ type: 'optionSelected' })
+        } else if (highlightedIndex !== undefined) {
           onItemSelect?.(currentList[highlightedIndex])
           dispatch({ type: 'optionSelected' })
         }

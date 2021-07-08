@@ -17,15 +17,11 @@ export default (
       }
 
     case 'optionSelected':
-      if (highlightedIndex === undefined) {
-        return { ...state }
-      } else {
-        return {
-          ...state,
-          inputValue: '',
-          highlightedIndex: undefined,
-          listboxStatus: false,
-        }
+      return {
+        ...state,
+        inputValue: '',
+        highlightedIndex: undefined,
+        listboxStatus: false,
       }
 
     case 'arrowNavigation':
