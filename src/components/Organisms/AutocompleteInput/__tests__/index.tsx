@@ -102,7 +102,7 @@ describe('<AutocompleteInput />', () => {
     expect(inputElement).toHaveValue('pace')
     userEvent.keyboard('{arrowdown}')
     expect(mockedScrollIntoView).toBeCalledTimes(1)
-    expect(inputElement).toHaveValue('Pacera')
+    expect(inputElement).toHaveValue('Pacembra')
     userEvent.keyboard('{enter}')
     expect(mockedOnItemSelect).toBeCalledTimes(3)
     expect(mockedOnItemSelect).toBeCalledWith({
@@ -206,10 +206,42 @@ describe('<AutocompleteInput />', () => {
     expect(secondOption).toHaveStyle('background-color: #FFFFFF')
     expect(lastOption).toHaveStyle('background-color: #FFFFFF')
 
+    userEvent.clear(screen.getByRole('combobox'))
+    userEvent.keyboard('{arrowdown}')
+    expect(mockedScrollIntoView).toBeCalledTimes(5)
+    expect(firstOption).toHaveStyle('background-color: #C5CAE9')
+    expect(secondOption).toHaveStyle('background-color: #FFFFFF')
+    expect(lastOption).toHaveStyle('background-color: #FFFFFF')
+
     await waitFor(() => {})
   })
 
-  test.todo('keyboard navigation should set input value')
+  test('keyboard navigation should set input value', async () => {
+    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+
+    const inputElement = screen.getByRole('combobox')
+    expect(inputElement).toHaveValue('')
+
+    userEvent.type(inputElement, 'an')
+    expect(inputElement).toHaveValue('an')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(inputElement).toHaveValue('Antica')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(inputElement).toHaveValue('Relania')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(inputElement).toHaveValue('Xandebra')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(inputElement).toHaveValue('Antica')
+
+    userEvent.keyboard('{arrowup}')
+    expect(inputElement).toHaveValue('Xandebra')
+
+    await waitFor(() => {})
+  })
 
   test.todo('<Listbox /> visibility should be controlled correctly')
 
