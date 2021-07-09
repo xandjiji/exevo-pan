@@ -92,7 +92,10 @@ const AutocompleteInput = ({
               <Option
                 key={item.value}
                 value={item.value}
-                onMouseDown={() => onItemSelect?.(item)}
+                onMouseDown={() => {
+                  onItemSelect?.(item)
+                  dispatch({ type: 'optionSelected' })
+                }}
               >
                 {item.name}
               </Option>
