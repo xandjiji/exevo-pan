@@ -15,7 +15,16 @@ import { mockedItemList } from './mock'
     https://github.com/popperjs/react-popper/issues/368
 */
 
+const mockedOnItemSelect = jest.fn()
+const mockedScrollIntoView = jest.fn()
+window.HTMLElement.prototype.scrollIntoView = mockedScrollIntoView
+
 describe('<AutocompleteInput />', () => {
+  beforeEach(() => {
+    mockedOnItemSelect.mockReset()
+    mockedScrollIntoView.mockReset()
+  })
+
   test('classname, style, props, aria attributes and children should be managed correctly', async () => {
     const { container } = renderWithProviders(
       <AutocompleteInput
@@ -61,9 +70,81 @@ describe('<AutocompleteInput />', () => {
     await waitFor(() => {})
   })
 
-  test.todo(
-    'onItemSelect should be called with an <Option /> object (click and enter)',
-  )
+  test('with a KEYBOARD, onItemSelect should be called with an <Option /> object', async () => {
+    renderWithProviders(
+      <AutocompleteInput
+        itemList={mockedItemList}
+        onItemSelect={mockedOnItemSelect}
+      />,
+    )
+
+    const inputElement = screen.getByRole('combobox')
+    userEvent.type(inputElement, 'pacera{enter}')
+    expect(mockedOnItemSelect).toBeCalledTimes(1)
+    expect(mockedOnItemSelect).toBeCalledWith({
+      name: 'Pacera',
+      value: 'Pacera',
+    })
+    expect(inputElement).toHaveValue('')
+
+    userEvent.type(inputElement, 'pace{enter}')
+    expect(mockedOnItemSelect).toBeCalledTimes(1)
+    expect(inputElement).toHaveValue('pace')
+    userEvent.type(inputElement, 'mbra{enter}')
+    expect(mockedOnItemSelect).toBeCalledTimes(2)
+    expect(mockedOnItemSelect).toBeCalledWith({
+      name: 'Pacembra',
+      value: 'Pacembra',
+    })
+    expect(inputElement).toHaveValue('')
+
+    userEvent.type(inputElement, 'pace')
+    expect(inputElement).toHaveValue('pace')
+    userEvent.keyboard('{arrowdown}')
+    expect(mockedScrollIntoView).toBeCalledTimes(1)
+    expect(inputElement).toHaveValue('Pacera')
+    userEvent.keyboard('{enter}')
+    expect(mockedOnItemSelect).toBeCalledTimes(3)
+    expect(mockedOnItemSelect).toBeCalledWith({
+      name: 'Pacembra',
+      value: 'Pacembra',
+    })
+    expect(inputElement).toHaveValue('')
+
+    await waitFor(() => {})
+  })
+
+  test('with a MOUSE, onItemSelect should be called with an <Option /> object', async () => {
+    renderWithProviders(
+      <AutocompleteInput
+        itemList={mockedItemList}
+        onItemSelect={mockedOnItemSelect}
+      />,
+    )
+
+    const inputElement = screen.getByRole('combobox')
+    userEvent.click(inputElement)
+    const [adraOption] = screen.getAllByRole('option')
+    userEvent.click(adraOption)
+    expect(mockedOnItemSelect).toBeCalledTimes(1)
+    expect(mockedOnItemSelect).toBeCalledWith({
+      name: 'Adra',
+      value: 'Adra',
+    })
+
+    userEvent.type(inputElement, 'pace')
+    expect(inputElement).toHaveValue('pace')
+    const [pacembraOption] = screen.getAllByRole('option')
+    userEvent.click(pacembraOption)
+    expect(mockedOnItemSelect).toBeCalledTimes(2)
+    expect(mockedOnItemSelect).toBeCalledWith({
+      name: 'Pacembra',
+      value: 'Pacembra',
+    })
+    expect(inputElement).toHaveValue('')
+
+    await waitFor(() => {})
+  })
 
   test.todo('itemList should be updated on re-render')
 
