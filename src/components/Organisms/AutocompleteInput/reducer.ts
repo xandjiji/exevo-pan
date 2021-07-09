@@ -25,10 +25,15 @@ export default (
       }
 
     case 'arrowNavigation': {
-      const newIndex = circularArrayIndex(
-        (highlightedIndex ?? 0) + action.value,
-        action.list,
-      )
+      let newIndex: number
+      if (highlightedIndex === undefined) {
+        newIndex = action.value === 1 ? 0 : action.list.length - 1
+      } else {
+        newIndex = circularArrayIndex(
+          highlightedIndex + action.value,
+          action.list,
+        )
+      }
       return {
         ...state,
         listboxStatus: true,
