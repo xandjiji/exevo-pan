@@ -173,9 +173,41 @@ describe('<AutocompleteInput />', () => {
     await waitFor(() => {})
   })
 
-  test.todo(
-    'keyboard navigation should highlight <Option />, circular, scroll <Listbox />',
-  )
+  test('keyboard arrows should navigate items in circular fashion and highlight items correctly', async () => {
+    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+
+    userEvent.tab()
+    const optionsElement = screen.getAllByRole('option')
+    const firstOption = optionsElement[0]
+    const secondOption = optionsElement[1]
+    const lastOption = optionsElement[optionsElement.length - 1]
+
+    userEvent.keyboard('{arrowup}')
+    expect(mockedScrollIntoView).toBeCalledTimes(1)
+    expect(firstOption).toHaveStyle('background-color: #FFFFFF')
+    expect(secondOption).toHaveStyle('background-color: #FFFFFF')
+    expect(lastOption).toHaveStyle('background-color: #C5CAE9')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(mockedScrollIntoView).toBeCalledTimes(2)
+    expect(firstOption).toHaveStyle('background-color: #C5CAE9')
+    expect(secondOption).toHaveStyle('background-color: #FFFFFF')
+    expect(lastOption).toHaveStyle('background-color: #FFFFFF')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(mockedScrollIntoView).toBeCalledTimes(3)
+    expect(firstOption).toHaveStyle('background-color: #FFFFFF')
+    expect(secondOption).toHaveStyle('background-color: #C5CAE9')
+    expect(lastOption).toHaveStyle('background-color: #FFFFFF')
+
+    userEvent.keyboard('{arrowup}')
+    expect(mockedScrollIntoView).toBeCalledTimes(4)
+    expect(firstOption).toHaveStyle('background-color: #C5CAE9')
+    expect(secondOption).toHaveStyle('background-color: #FFFFFF')
+    expect(lastOption).toHaveStyle('background-color: #FFFFFF')
+
+    await waitFor(() => {})
+  })
 
   test.todo('keyboard navigation should set input value')
 
