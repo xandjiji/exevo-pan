@@ -8,6 +8,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "jest": {
+    "watchPathIgnorePatterns": [
+      "mock.ts"
+    ]
+  },
   "eslintConfig": {
     "extends": [
       "react-app",
