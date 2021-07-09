@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable testing-library/no-wait-for-empty-callback */
 
-import { screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import AutocompleteInput from '..'
@@ -146,7 +146,32 @@ describe('<AutocompleteInput />', () => {
     await waitFor(() => {})
   })
 
-  test.todo('itemList should be updated on re-render')
+  test('itemList should be updated on re-render', async () => {
+    const { rerender } = renderWithProviders(
+      <AutocompleteInput
+        itemList={[...mockedItemList, { name: 'Julera', value: 'Julera' }]}
+      />,
+    )
+
+    const inputElement = screen.getByRole('combobox')
+    userEvent.click(inputElement)
+    expect(screen.getAllByRole('option')).toHaveLength(104)
+
+    rerender(<AutocompleteInput itemList={mockedItemList} />)
+    expect(screen.getAllByRole('option')).toHaveLength(103)
+
+    rerender(
+      <AutocompleteInput
+        itemList={[
+          { name: 'Julera', value: 'Julera' },
+          { name: 'Nova', value: 'Nova' },
+        ]}
+      />,
+    )
+    expect(screen.getAllByRole('option')).toHaveLength(2)
+
+    await waitFor(() => {})
+  })
 
   test.todo(
     'keyboard navigation should highlight <Option />, circular, scroll <Listbox />',
