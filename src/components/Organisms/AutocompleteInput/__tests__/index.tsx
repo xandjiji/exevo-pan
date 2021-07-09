@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable testing-library/no-wait-for-empty-callback */
 
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import AutocompleteInput from '..'
@@ -328,5 +328,64 @@ describe('<AutocompleteInput />', () => {
     await waitFor(() => {})
   })
 
-  test.todo('typing should filter elements in <Listbox />')
+  test('typing should filter elements in <Listbox />', async () => {
+    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+
+    const inputElement = screen.getByRole('combobox')
+
+    userEvent.click(inputElement)
+
+    screen.getAllByRole('option').forEach((option, index) => {
+      expect(option).toHaveTextContent(mockedItemList[index].name)
+      expect(option).toHaveValue(mockedItemList[index].value)
+    })
+
+    userEvent.type(inputElement, 'bel')
+    const currentBELOptions = screen.getAllByRole('option')
+    expect(currentBELOptions).toHaveLength(2)
+    expect(currentBELOptions[0]).toHaveValue('Belluma')
+    expect(currentBELOptions[0]).toHaveTextContent('Belluma')
+    expect(currentBELOptions[1]).toHaveValue('Belobra')
+    expect(currentBELOptions[1]).toHaveTextContent('Belobra')
+
+    userEvent.type(inputElement, 'l')
+    const bellumaOption = screen.getByRole('option')
+    expect(bellumaOption).toHaveValue('Belluma')
+    expect(bellumaOption).toHaveTextContent('Belluma')
+
+    userEvent.type(inputElement, 'o')
+    expect(screen.queryByRole('option')).not.toBeInTheDocument()
+
+    userEvent.click(screen.getByLabelText('Clear input'))
+    screen.getAllByRole('option').forEach((option, index) => {
+      expect(option).toHaveTextContent(mockedItemList[index].name)
+      expect(option).toHaveValue(mockedItemList[index].value)
+    })
+
+    userEvent.type(inputElement, 'e')
+    expect(screen.getAllByRole('option')).toHaveLength(66)
+
+    userEvent.type(inputElement, 'l')
+    expect(screen.getAllByRole('option')).toHaveLength(13)
+
+    userEvent.type(inputElement, 'e')
+    expect(screen.getAllByRole('option')).toHaveLength(4)
+
+    userEvent.type(inputElement, 'e')
+    expect(screen.queryByRole('option')).not.toBeInTheDocument()
+
+    userEvent.keyboard('{backspace}')
+    expect(screen.getAllByRole('option')).toHaveLength(4)
+
+    userEvent.keyboard('{backspace}')
+    expect(screen.getAllByRole('option')).toHaveLength(13)
+
+    userEvent.clear(inputElement)
+    expect(screen.getAllByRole('option')).toHaveLength(103)
+
+    userEvent.type(inputElement, 'asdasd')
+    expect(screen.queryByRole('option')).not.toBeInTheDocument()
+
+    await waitFor(() => {})
+  })
 })
