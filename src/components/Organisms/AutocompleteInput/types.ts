@@ -1,6 +1,7 @@
 import { HTMLAttributes } from 'react'
 
-export interface AutocompleteInputProps extends HTMLAttributes<HTMLDivElement> {
+export interface AutocompleteInputProps
+  extends HTMLAttributes<HTMLInputElement> {
   itemList?: Option[]
   placeholder?: string
   onItemSelect?: (selectedItem: Option) => void

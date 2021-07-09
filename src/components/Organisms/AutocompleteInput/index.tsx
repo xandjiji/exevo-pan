@@ -11,7 +11,6 @@ const AutocompleteInput = ({
   className,
   style,
   itemList = [],
-  placeholder,
   onItemSelect,
   ...props
 }: AutocompleteInputProps): JSX.Element => {
@@ -108,7 +107,6 @@ const AutocompleteInput = ({
           aria-expanded={listboxStatus}
           aria-owns={listboxId}
           allowClear
-          placeholder={placeholder}
           value={inputValue}
           onChange={handleChange}
           onFocus={() => dispatch({ type: 'setListboxStatus', value: true })}
