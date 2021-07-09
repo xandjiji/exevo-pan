@@ -243,9 +243,90 @@ describe('<AutocompleteInput />', () => {
     await waitFor(() => {})
   })
 
-  test.todo('<Listbox /> visibility should be controlled correctly')
+  test('<Listbox /> visibility should be controlled correctly by KEYBOARD', async () => {
+    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+
+    const inputElement = screen.getByRole('combobox')
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+
+    userEvent.tab()
+    const listboxElement = screen.getByRole('listbox')
+    expect(listboxElement).toBeVisible()
+
+    userEvent.tab()
+    expect(listboxElement).not.toBeVisible()
+
+    userEvent.click(inputElement)
+    expect(listboxElement).toBeVisible()
+
+    userEvent.tab()
+    expect(listboxElement).not.toBeVisible()
+
+    userEvent.click(inputElement)
+    expect(listboxElement).toBeVisible()
+
+    userEvent.type(inputElement, 'a')
+    expect(listboxElement).toBeVisible()
+
+    userEvent.tab()
+    expect(listboxElement).not.toBeVisible()
+
+    userEvent.keyboard('{enter}')
+    expect(listboxElement).toBeVisible()
+
+    userEvent.type(inputElement, 'a')
+    expect(listboxElement).toBeVisible()
+
+    userEvent.click(screen.getByLabelText('Clear input'))
+    expect(listboxElement).toBeVisible()
+
+    userEvent.type(inputElement, 'a')
+    userEvent.keyboard('{enter}')
+    expect(listboxElement).toBeVisible()
+
+    userEvent.type(inputElement, 'dra{enter}')
+    expect(listboxElement).not.toBeVisible()
+
+    userEvent.type(inputElement, 'a')
+    expect(listboxElement).toBeVisible()
+    userEvent.keyboard('{arrowdown}')
+    expect(listboxElement).toBeVisible()
+    userEvent.keyboard('{enter}')
+    expect(listboxElement).not.toBeVisible()
+
+    await waitFor(() => {})
+  })
+
+  test('<Listbox /> visibility should be controlled correctly by MOUSE', async () => {
+    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+
+    const inputElement = screen.getByRole('combobox')
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
+
+    userEvent.click(inputElement)
+    const listboxElement = screen.getByRole('listbox')
+    expect(listboxElement).toBeVisible()
+
+    fireEvent.blur(inputElement)
+    expect(listboxElement).not.toBeVisible()
+
+    fireEvent.focus(inputElement)
+    expect(listboxElement).toBeVisible()
+
+    userEvent.type(inputElement, 'a')
+    expect(listboxElement).toBeVisible()
+    userEvent.click(screen.getByLabelText('Clear input'))
+    expect(listboxElement).toBeVisible()
+
+    const [firstOption] = screen.getAllByRole('option')
+    userEvent.click(firstOption)
+    expect(listboxElement).not.toBeVisible()
+
+    userEvent.click(inputElement)
+    expect(listboxElement).toBeVisible()
+
+    await waitFor(() => {})
+  })
 
   test.todo('typing should filter elements in <Listbox />')
-
-  test.todo('full journey')
 })
