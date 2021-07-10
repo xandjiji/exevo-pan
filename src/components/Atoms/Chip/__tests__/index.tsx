@@ -52,30 +52,21 @@ describe('<Chip />', () => {
     expect(mockedOnClose).toBeCalledTimes(1)
   })
 
-  describe('it overrides status correctly', () => {
-    test('for true', () => {
-      renderWithProviders(
-        <Chip onClick={mockedOnClick} overrideStatus={true} />,
-      )
+  test('should be controlled correctly', () => {
+    const { rerender } = renderWithProviders(
+      <Chip onClick={mockedOnClick} overrideStatus={true} />,
+    )
 
-      const chipElement = screen.getByRole('switch')
+    const chipElement = screen.getByRole('switch')
 
-      expect(chipElement).toBeChecked()
-      userEvent.click(chipElement)
-      expect(chipElement).toBeChecked()
-    })
+    expect(chipElement).toBeChecked()
+    userEvent.click(chipElement)
+    expect(chipElement).toBeChecked()
 
-    test('for false', () => {
-      renderWithProviders(
-        <Chip onClick={mockedOnClick} overrideStatus={false} />,
-      )
-
-      const chipElement = screen.getByRole('switch')
-
-      expect(chipElement).not.toBeChecked()
-      userEvent.click(chipElement)
-      expect(chipElement).not.toBeChecked()
-    })
+    rerender(<Chip onClick={mockedOnClick} overrideStatus={false} />)
+    expect(chipElement).not.toBeChecked()
+    userEvent.click(chipElement)
+    expect(chipElement).not.toBeChecked()
   })
 
   describe('for keypress events', () => {
