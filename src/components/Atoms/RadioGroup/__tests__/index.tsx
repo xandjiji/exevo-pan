@@ -3,6 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import { RadioButton } from 'components/Atoms'
 import RadioGroup from '..'
+import { indexToId } from '../utils'
 
 const mockedOnChange = jest.fn()
 
@@ -20,7 +21,12 @@ describe('<RadioGroup />', () => {
         </RadioGroup>,
       )
 
-      expect(screen.queryAllByRole('radio')).toHaveLength(2)
+      const radioButtons = screen.queryAllByRole('radio')
+
+      expect(radioButtons).toHaveLength(2)
+      radioButtons.forEach((radio, index) => {
+        expect(radio).toHaveAttribute('id', indexToId(index))
+      })
     })
 
     test('html elements as children', () => {
