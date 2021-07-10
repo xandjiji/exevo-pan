@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
@@ -13,6 +14,70 @@ describe('<SliderInput />', () => {
   test('should render correctly', () => {
     renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
     expect(screen.getByTestId('test')).toBeInTheDocument()
+  })
+
+  test('cursor should be controlled by arrow keys', () => {
+    renderWithProviders(
+      <SliderInput
+        data-testid="test"
+        aria-label="choose a skill level"
+        min={0}
+        max={2000}
+        onChange={mockedOnChange}
+      />,
+    )
+    const [displayInput] = screen.getAllByLabelText('choose a skill level')
+
+    expect(displayInput).toHaveValue('0')
+
+    userEvent.tab()
+    userEvent.keyboard('{arrowup}')
+    expect(displayInput).toHaveValue('1')
+
+    userEvent.keyboard('{ctrl}{arrowup}')
+    expect(displayInput).toHaveValue('11')
+
+    userEvent.keyboard('{shift}{arrowup}')
+    expect(displayInput).toHaveValue('111')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowup}')
+    expect(displayInput).toHaveValue('1111')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(displayInput).toHaveValue('1110')
+
+    userEvent.keyboard('{ctrl}{arrowdown}')
+    expect(displayInput).toHaveValue('1100')
+
+    userEvent.keyboard('{shift}{arrowdown}')
+    expect(displayInput).toHaveValue('1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowdown}')
+    expect(displayInput).toHaveValue('0')
+
+    userEvent.keyboard('{arrowright}')
+    expect(displayInput).toHaveValue('1')
+
+    userEvent.keyboard('{ctrl}{arrowright}')
+    expect(displayInput).toHaveValue('11')
+
+    userEvent.keyboard('{shift}{arrowright}')
+    expect(displayInput).toHaveValue('111')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowright}')
+    expect(displayInput).toHaveValue('1111')
+
+    userEvent.keyboard('{arrowleft}')
+    expect(displayInput).toHaveValue('1110')
+
+    userEvent.keyboard('{ctrl}{arrowleft}')
+    expect(displayInput).toHaveValue('1100')
+
+    userEvent.keyboard('{shift}{arrowleft}')
+    expect(displayInput).toHaveValue('1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowleft}')
+    expect(displayInput).toHaveValue('0')
   })
 
   test('onChange should be called', () => {
