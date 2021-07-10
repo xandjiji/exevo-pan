@@ -9,7 +9,7 @@ const RadioGroup = ({
   onChange,
   ...props
 }: RadioGroupProps): JSX.Element => {
-  const [innerIndex, setInnerIndex] = useState<number>(indexProp ?? 0)
+  const [innerIndex, setInnerIndex] = useState<number | undefined>(indexProp)
   const derivedActiveIndex = indexProp ?? innerIndex
 
   return (

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
@@ -63,9 +64,12 @@ describe('<RadioGroup />', () => {
     const groupElement = screen.getByRole('radiogroup')
     const [radioA, radioB] = screen.getAllByRole('radio')
 
-    expect(radioA).toBeChecked()
+    expect(radioA).not.toBeChecked()
     expect(radioB).not.toBeChecked()
-    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(0))
+    expect(groupElement).not.toHaveAttribute(
+      'aria-activedescendant',
+      indexToId(0),
+    )
     userEvent.click(radioB)
     expect(radioA).not.toBeChecked()
     expect(radioB).toBeChecked()
@@ -78,7 +82,7 @@ describe('<RadioGroup />', () => {
 
   test('should be controlled', () => {
     const { rerender } = renderWithProviders(
-      <RadioGroup indexValue={0}>
+      <RadioGroup>
         <RadioButton />
         <RadioButton />
       </RadioGroup>,
@@ -86,6 +90,20 @@ describe('<RadioGroup />', () => {
 
     const groupElement = screen.getByRole('radiogroup')
     const [radioA, radioB] = screen.getAllByRole('radio')
+
+    expect(radioA).not.toBeChecked()
+    expect(radioB).not.toBeChecked()
+    expect(groupElement).not.toHaveAttribute(
+      'aria-activedescendant',
+      indexToId(0),
+    )
+
+    rerender(
+      <RadioGroup indexValue={0}>
+        <RadioButton />
+        <RadioButton />
+      </RadioGroup>,
+    )
 
     expect(radioA).toBeChecked()
     expect(radioB).not.toBeChecked()
