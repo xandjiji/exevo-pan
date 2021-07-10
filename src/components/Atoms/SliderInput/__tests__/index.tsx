@@ -14,6 +14,11 @@ describe('<SliderInput />', () => {
   test('should render correctly', () => {
     renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
     expect(screen.getByTestId('test')).toBeInTheDocument()
+
+    const cursorElement = screen.getByLabelText('change value')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
+    expect(cursorElement).toHaveAttribute('aria-valuemin', '0')
+    expect(cursorElement).toHaveAttribute('aria-valuemax', '100')
   })
 
   test('cursor should be controlled by arrow keys', () => {
@@ -27,57 +32,75 @@ describe('<SliderInput />', () => {
       />,
     )
     const [displayInput] = screen.getAllByLabelText('choose a skill level')
+    const cursorElement = screen.getByLabelText('change value')
 
     expect(displayInput).toHaveValue('0')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
 
     userEvent.tab()
     userEvent.keyboard('{arrowup}')
     expect(displayInput).toHaveValue('1')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1')
 
     userEvent.keyboard('{ctrl}{arrowup}')
     expect(displayInput).toHaveValue('11')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '11')
 
     userEvent.keyboard('{shift}{arrowup}')
     expect(displayInput).toHaveValue('111')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '111')
 
     userEvent.keyboard('{ctrl}{shift}{arrowup}')
     expect(displayInput).toHaveValue('1111')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1111')
 
     userEvent.keyboard('{arrowdown}')
     expect(displayInput).toHaveValue('1110')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1110')
 
     userEvent.keyboard('{ctrl}{arrowdown}')
     expect(displayInput).toHaveValue('1100')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1100')
 
     userEvent.keyboard('{shift}{arrowdown}')
     expect(displayInput).toHaveValue('1000')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1000')
 
     userEvent.keyboard('{ctrl}{shift}{arrowdown}')
     expect(displayInput).toHaveValue('0')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
 
     userEvent.keyboard('{arrowright}')
     expect(displayInput).toHaveValue('1')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1')
 
     userEvent.keyboard('{ctrl}{arrowright}')
     expect(displayInput).toHaveValue('11')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '11')
 
     userEvent.keyboard('{shift}{arrowright}')
     expect(displayInput).toHaveValue('111')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '111')
 
     userEvent.keyboard('{ctrl}{shift}{arrowright}')
     expect(displayInput).toHaveValue('1111')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1111')
 
     userEvent.keyboard('{arrowleft}')
     expect(displayInput).toHaveValue('1110')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1110')
 
     userEvent.keyboard('{ctrl}{arrowleft}')
     expect(displayInput).toHaveValue('1100')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1100')
 
     userEvent.keyboard('{shift}{arrowleft}')
     expect(displayInput).toHaveValue('1000')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1000')
 
     userEvent.keyboard('{ctrl}{shift}{arrowleft}')
     expect(displayInput).toHaveValue('0')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
   })
 
   test('display input should be controlled by arrow keys', () => {
@@ -91,32 +114,42 @@ describe('<SliderInput />', () => {
       />,
     )
     const [displayInput] = screen.getAllByLabelText('choose a skill level')
+    const cursorElement = screen.getByLabelText('change value')
 
     expect(displayInput).toHaveValue('0')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
 
     userEvent.type(displayInput, '{arrowup}')
     expect(displayInput).toHaveValue('1')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1')
 
     userEvent.type(displayInput, '{ctrl}{arrowup}')
     expect(displayInput).toHaveValue('11')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '11')
 
     userEvent.type(displayInput, '{shift}{arrowup}')
     expect(displayInput).toHaveValue('111')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '111')
 
     userEvent.type(displayInput, '{ctrl}{shift}{arrowup}')
     expect(displayInput).toHaveValue('1111')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1111')
 
     userEvent.type(displayInput, '{arrowdown}')
     expect(displayInput).toHaveValue('1110')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1110')
 
     userEvent.type(displayInput, '{ctrl}{arrowdown}')
     expect(displayInput).toHaveValue('1100')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1100')
 
     userEvent.type(displayInput, '{shift}{arrowdown}')
     expect(displayInput).toHaveValue('1000')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '1000')
 
     userEvent.type(displayInput, '{ctrl}{shift}{arrowdown}')
     expect(displayInput).toHaveValue('0')
+    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
   })
 
   test('onChange should be called', () => {
