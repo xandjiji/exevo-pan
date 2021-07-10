@@ -1,6 +1,7 @@
 import { useState, Children, isValidElement, cloneElement } from 'react'
 import * as S from './styles'
 import { RadioGroupProps } from './types'
+import { indexToId } from './utils'
 
 const RadioGroup = ({
   children,
@@ -12,12 +13,17 @@ const RadioGroup = ({
   const derivedActiveIndex = indexProp ?? innerIndex
 
   return (
-    <S.Wrapper role="radiogroup" {...props}>
+    <S.Wrapper
+      role="radiogroup"
+      aria-activedescendant={indexToId(derivedActiveIndex)}
+      {...props}
+    >
       {Children.map(children, (child, index) => {
         if (!isValidElement(child)) return child
         if (typeof child.type === 'string') return child
 
         return cloneElement(child, {
+          id: indexToId(index),
           active: derivedActiveIndex === index,
           onClick: () => {
             setInnerIndex(prevInnerIndex => {
