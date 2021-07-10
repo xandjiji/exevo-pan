@@ -14,6 +14,7 @@ const fakeArgs = {
 
 const mockedOnChange = jest.fn()
 
+// eslint-disable-next-line max-lines-per-function
 describe('<Paginator />', () => {
   test('should navigate correctly between pages', () => {
     renderWithProviders(<Paginator {...fakeArgs} />)
@@ -136,7 +137,7 @@ describe('<Paginator />', () => {
   })
 
   test('can be controlled', () => {
-    renderWithProviders(
+    const { rerender } = renderWithProviders(
       <Paginator {...fakeArgs} currentPage={99} onChange={mockedOnChange} />,
     )
 
@@ -162,5 +163,15 @@ describe('<Paginator />', () => {
     expect(screen.getByText('981 - 990 of 3664')).toBeInTheDocument()
     expect(mockedOnChange).toBeCalledTimes(4)
     expect(mockedOnChange).toHaveBeenLastCalledWith(367)
+
+    rerender(
+      <Paginator {...fakeArgs} currentPage={100} onChange={mockedOnChange} />,
+    )
+    expect(screen.getByText('991 - 1000 of 3664')).toBeInTheDocument()
+
+    rerender(
+      <Paginator {...fakeArgs} currentPage={101} onChange={mockedOnChange} />,
+    )
+    expect(screen.getByText('1001 - 1010 of 3664')).toBeInTheDocument()
   })
 })
