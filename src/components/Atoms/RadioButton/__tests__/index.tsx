@@ -31,24 +31,19 @@ describe('<RadioButton />', () => {
     expect(radioElement).toBeChecked()
   })
 
-  describe('is controlled correctly', () => {
-    test('for True', () => {
-      renderWithProviders(<RadioButton active />)
-      const radioElement = screen.getByRole('radio')
+  test('is controlled correctly', () => {
+    const { rerender } = renderWithProviders(<RadioButton active />)
+    const radioElement = screen.getByRole('radio')
 
-      expect(radioElement).toBeChecked()
-      userEvent.click(radioElement)
-      expect(radioElement).toBeChecked()
-    })
+    expect(radioElement).toBeChecked()
+    userEvent.click(radioElement)
+    expect(radioElement).toBeChecked()
 
-    test('for False', () => {
-      renderWithProviders(<RadioButton active={false} />)
-      const radioElement = screen.getByRole('radio')
+    rerender(<RadioButton active={false} />)
 
-      expect(radioElement).not.toBeChecked()
-      userEvent.click(radioElement)
-      expect(radioElement).not.toBeChecked()
-    })
+    expect(radioElement).not.toBeChecked()
+    userEvent.click(radioElement)
+    expect(radioElement).not.toBeChecked()
   })
 
   test('calls onClick function', () => {
