@@ -46,4 +46,24 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByText('-190')).toBeInTheDocument()
     expect(screen.getByText('-110')).toBeInTheDocument()
   })
+
+  test('should be controlled correctly', () => {
+    const { rerender } = renderWithProviders(
+      <RangeSliderInput min={0} max={100} value={[10, 90]} />,
+    )
+
+    const [cursorA, cursorB] = screen.getAllByRole('slider')
+
+    expect(cursorA).toHaveStyle('left: 10%')
+    expect(cursorB).toHaveStyle('left: 90%')
+    expect(screen.getByText('10')).toBeInTheDocument()
+    expect(screen.getByText('90')).toBeInTheDocument()
+
+    rerender(<RangeSliderInput min={20} max={200} value={[20, 200]} />)
+
+    expect(cursorA).toHaveStyle('left: 0%')
+    expect(cursorB).toHaveStyle('left: 100%')
+    expect(screen.getByText('20')).toBeInTheDocument()
+    expect(screen.getByText('200')).toBeInTheDocument()
+  })
 })
