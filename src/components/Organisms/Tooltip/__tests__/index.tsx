@@ -126,77 +126,68 @@ describe('<Tooltip />', () => {
     await waitFor(() => {})
   })
 
-  describe('visibility is correctly controlled', () => {
-    test('with TRUE', async () => {
-      renderWithProviders(
-        <Tooltip trigger="none" visible content={<div>tooltip content</div>}>
-          <h1>wrapped</h1>
-        </Tooltip>,
-      )
+  test('should be controlled correctly', async () => {
+    const { rerender } = renderWithProviders(
+      <Tooltip trigger="none" visible content={<div>tooltip content</div>}>
+        <h1>wrapped</h1>
+      </Tooltip>,
+    )
 
-      const contentElement = screen.getByText('tooltip content')
-      const wrappedElement = screen.getByRole('heading')
+    const contentElement = screen.getByText('tooltip content')
+    const wrappedElement = screen.getByRole('heading')
 
-      expect(contentElement).toBeInTheDocument()
-      expect(wrappedElement).toBeInTheDocument()
-      expect(
-        screen.queryByLabelText('Click here to close'),
-      ).not.toBeInTheDocument()
+    expect(contentElement).toBeInTheDocument()
+    expect(wrappedElement).toBeInTheDocument()
+    expect(
+      screen.queryByLabelText('Click here to close'),
+    ).not.toBeInTheDocument()
 
-      expect(contentElement).toBeVisible()
+    expect(contentElement).toBeVisible()
 
-      userEvent.tab()
-      expect(contentElement).toBeVisible()
-      userEvent.keyboard('{enter}')
-      expect(contentElement).toBeVisible()
-      userEvent.type(wrappedElement, '{space}')
-      expect(contentElement).toBeVisible()
+    userEvent.tab()
+    expect(contentElement).toBeVisible()
+    userEvent.keyboard('{enter}')
+    expect(contentElement).toBeVisible()
+    userEvent.type(wrappedElement, '{space}')
+    expect(contentElement).toBeVisible()
 
-      userEvent.click(wrappedElement)
-      expect(contentElement).toBeVisible()
-      userEvent.click(wrappedElement)
-      expect(contentElement).toBeVisible()
-      userEvent.click(contentElement)
-      expect(contentElement).toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).toBeVisible()
+    userEvent.click(contentElement)
+    expect(contentElement).toBeVisible()
 
-      await waitFor(() => {})
-    })
+    rerender(
+      <Tooltip
+        trigger="none"
+        visible={false}
+        content={<div>tooltip content</div>}
+      >
+        <h1>wrapped</h1>
+      </Tooltip>,
+    )
 
-    test('with FALSE', async () => {
-      renderWithProviders(
-        <Tooltip
-          trigger="none"
-          visible={false}
-          content={<div>tooltip content</div>}
-        >
-          <h1>wrapped</h1>
-        </Tooltip>,
-      )
+    expect(contentElement).toBeInTheDocument()
+    expect(wrappedElement).toBeInTheDocument()
+    expect(
+      screen.queryByLabelText('Click here to close'),
+    ).not.toBeInTheDocument()
 
-      const contentElement = screen.getByText('tooltip content')
-      const wrappedElement = screen.getByRole('heading')
+    expect(contentElement).not.toBeVisible()
 
-      expect(contentElement).toBeInTheDocument()
-      expect(wrappedElement).toBeInTheDocument()
-      expect(
-        screen.queryByLabelText('Click here to close'),
-      ).not.toBeInTheDocument()
+    userEvent.tab()
+    expect(contentElement).not.toBeVisible()
+    userEvent.keyboard('{enter}')
+    expect(contentElement).not.toBeVisible()
+    userEvent.type(wrappedElement, '{space}')
+    expect(contentElement).not.toBeVisible()
 
-      expect(contentElement).not.toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).not.toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).not.toBeVisible()
 
-      userEvent.tab()
-      expect(contentElement).not.toBeVisible()
-      userEvent.keyboard('{enter}')
-      expect(contentElement).not.toBeVisible()
-      userEvent.type(wrappedElement, '{space}')
-      expect(contentElement).not.toBeVisible()
-
-      userEvent.click(wrappedElement)
-      expect(contentElement).not.toBeVisible()
-      userEvent.click(wrappedElement)
-      expect(contentElement).not.toBeVisible()
-
-      await waitFor(() => {})
-    })
+    await waitFor(() => {})
   })
 })
