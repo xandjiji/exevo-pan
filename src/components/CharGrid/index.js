@@ -1,8 +1,8 @@
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import CharGrid from './CharGrid.styled';
 import CharCard from '../CharCard';
-import { Switch, RadioButton, Paginator } from 'components/Atoms';
-import { RadioGroup, Tooltip } from 'components/Organisms';
+import { Switch, RadioGroup, RadioButton, Paginator } from 'components/Atoms';
+import { Tooltip } from 'components/Organisms';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
