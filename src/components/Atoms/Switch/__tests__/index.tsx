@@ -46,12 +46,17 @@ describe('<Switch />', () => {
     expect(screen.getByText('children')).toBeInTheDocument()
   })
 
-  test('should be forced to be active', () => {
-    renderWithProviders(<Switch active />)
+  test('should be controlled correctly', () => {
+    const { rerender } = renderWithProviders(<Switch active />)
     const switchElement = screen.getByRole('switch')
 
     expect(switchElement).toBeChecked()
     userEvent.click(switchElement)
     expect(switchElement).toBeChecked()
+
+    rerender(<Switch active={false} />)
+    expect(switchElement).not.toBeChecked()
+    userEvent.click(switchElement)
+    expect(switchElement).not.toBeChecked()
   })
 })
