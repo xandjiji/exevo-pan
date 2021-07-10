@@ -74,4 +74,24 @@ describe('<SliderInput />', () => {
 
     expect(screen.getByRole('slider')).toHaveStyle('left: 50%')
   })
+
+  test('should be controlled', () => {
+    const { rerender } = renderWithProviders(
+      <SliderInput data-testid="test" min={0} max={100} />,
+    )
+
+    const displayInput = screen.getAllByDisplayValue(0)[0]
+    const hiddenInput = screen.getByTestId('test')
+    const cursor = screen.getByRole('slider')
+
+    expect(displayInput).toHaveValue('0')
+    expect(hiddenInput).toHaveValue('0')
+    expect(cursor).toHaveStyle('left: 0%')
+
+    rerender(<SliderInput data-testid="test" min={0} max={100} value={50} />)
+
+    expect(displayInput).toHaveValue('50')
+    expect(hiddenInput).toHaveValue('50')
+    expect(cursor).toHaveStyle('left: 50%')
+  })
 })
