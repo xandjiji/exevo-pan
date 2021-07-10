@@ -126,73 +126,62 @@ describe('<Popover />', () => {
     await waitFor(() => {})
   })
 
-  describe('visibility is correctly controlled', () => {
-    test('with TRUE', async () => {
-      renderWithProviders(
-        <Popover trigger="none" visible content={<div role="none" />}>
-          <h1>wrapped</h1>
-        </Popover>,
-      )
+  test('visibility is correctly controlled', async () => {
+    const { rerender } = renderWithProviders(
+      <Popover trigger="none" visible content={<div role="none" />}>
+        <h1>wrapped</h1>
+      </Popover>,
+    )
 
-      const contentElement = screen.getByRole('none')
-      const wrappedElement = screen.getByRole('heading')
+    const contentElement = screen.getByRole('none')
+    const wrappedElement = screen.getByRole('heading')
 
-      expect(contentElement).toBeInTheDocument()
-      expect(wrappedElement).toBeInTheDocument()
-      expect(
-        screen.queryByLabelText('Click here to close'),
-      ).not.toBeInTheDocument()
+    expect(contentElement).toBeInTheDocument()
+    expect(wrappedElement).toBeInTheDocument()
+    expect(
+      screen.queryByLabelText('Click here to close'),
+    ).not.toBeInTheDocument()
 
-      expect(contentElement).toBeVisible()
+    expect(contentElement).toBeVisible()
 
-      userEvent.tab()
-      expect(contentElement).toBeVisible()
-      userEvent.keyboard('{enter}')
-      expect(contentElement).toBeVisible()
-      userEvent.type(wrappedElement, '{space}')
-      expect(contentElement).toBeVisible()
+    userEvent.tab()
+    expect(contentElement).toBeVisible()
+    userEvent.keyboard('{enter}')
+    expect(contentElement).toBeVisible()
+    userEvent.type(wrappedElement, '{space}')
+    expect(contentElement).toBeVisible()
 
-      userEvent.click(wrappedElement)
-      expect(contentElement).toBeVisible()
-      userEvent.click(wrappedElement)
-      expect(contentElement).toBeVisible()
-      userEvent.click(contentElement)
-      expect(contentElement).toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).toBeVisible()
+    userEvent.click(contentElement)
+    expect(contentElement).toBeVisible()
 
-      await waitFor(() => {})
-    })
+    rerender(
+      <Popover trigger="none" visible={false} content={<div role="none" />}>
+        <h1>wrapped</h1>
+      </Popover>,
+    )
 
-    test('with FALSE', async () => {
-      renderWithProviders(
-        <Popover trigger="none" visible={false} content={<div role="none" />}>
-          <h1>wrapped</h1>
-        </Popover>,
-      )
+    expect(
+      screen.queryByLabelText('Click here to close'),
+    ).not.toBeInTheDocument()
 
-      const contentElement = screen.getByRole('none')
-      const wrappedElement = screen.getByRole('heading')
+    expect(contentElement).not.toBeVisible()
 
-      expect(contentElement).toBeInTheDocument()
-      expect(wrappedElement).toBeInTheDocument()
-      expect(
-        screen.queryByLabelText('Click here to close'),
-      ).not.toBeInTheDocument()
+    userEvent.tab()
+    expect(contentElement).not.toBeVisible()
+    userEvent.keyboard('{enter}')
+    expect(contentElement).not.toBeVisible()
+    userEvent.type(wrappedElement, '{space}')
+    expect(contentElement).not.toBeVisible()
 
-      expect(contentElement).not.toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).not.toBeVisible()
+    userEvent.click(wrappedElement)
+    expect(contentElement).not.toBeVisible()
 
-      userEvent.tab()
-      expect(contentElement).not.toBeVisible()
-      userEvent.keyboard('{enter}')
-      expect(contentElement).not.toBeVisible()
-      userEvent.type(wrappedElement, '{space}')
-      expect(contentElement).not.toBeVisible()
-
-      userEvent.click(wrappedElement)
-      expect(contentElement).not.toBeVisible()
-      userEvent.click(wrappedElement)
-      expect(contentElement).not.toBeVisible()
-
-      await waitFor(() => {})
-    })
+    await waitFor(() => {})
   })
 })
