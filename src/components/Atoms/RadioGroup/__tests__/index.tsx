@@ -60,16 +60,20 @@ describe('<RadioGroup />', () => {
       </RadioGroup>,
     )
 
+    const groupElement = screen.getByRole('radiogroup')
     const [radioA, radioB] = screen.getAllByRole('radio')
 
     expect(radioA).toBeChecked()
     expect(radioB).not.toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(0))
     userEvent.click(radioB)
     expect(radioA).not.toBeChecked()
     expect(radioB).toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(1))
     userEvent.click(radioA)
     expect(radioA).toBeChecked()
     expect(radioB).not.toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(0))
   })
 
   test('should be controlled', () => {
@@ -80,16 +84,20 @@ describe('<RadioGroup />', () => {
       </RadioGroup>,
     )
 
+    const groupElement = screen.getByRole('radiogroup')
     const [radioA, radioB] = screen.getAllByRole('radio')
 
     expect(radioA).toBeChecked()
     expect(radioB).not.toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(0))
     userEvent.click(radioB)
     expect(radioA).toBeChecked()
     expect(radioB).not.toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(0))
     userEvent.click(radioA)
     expect(radioA).toBeChecked()
     expect(radioB).not.toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(0))
 
     rerender(
       <RadioGroup indexValue={1}>
@@ -100,12 +108,15 @@ describe('<RadioGroup />', () => {
 
     expect(radioA).not.toBeChecked()
     expect(radioB).toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(1))
     userEvent.click(radioB)
     expect(radioA).not.toBeChecked()
     expect(radioB).toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(1))
     userEvent.click(radioA)
     expect(radioA).not.toBeChecked()
     expect(radioB).toBeChecked()
+    expect(groupElement).toHaveAttribute('aria-activedescendant', indexToId(1))
   })
 
   test('should call onChange', () => {
