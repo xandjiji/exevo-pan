@@ -30,7 +30,7 @@ describe('<Listbox />', () => {
   })
 
   test('should render with a highlighted <Option />', () => {
-    renderWithProviders(
+    const { rerender } = renderWithProviders(
       <Listbox highlightedIndex={1}>
         <Option>option A</Option>
         <Option>option B</Option>
@@ -47,10 +47,22 @@ describe('<Listbox />', () => {
     expect(optionA).toHaveStyle('background-color: #FFFFFF')
     expect(optionB).toHaveStyle('background-color: #C5CAE9')
     expect(optionC).toHaveStyle('background-color: #FFFFFF')
+
+    rerender(
+      <Listbox highlightedIndex={2}>
+        <Option>option A</Option>
+        <Option>option B</Option>
+        <Option>option C</Option>
+      </Listbox>,
+    )
+
+    expect(optionA).toHaveStyle('background-color: #FFFFFF')
+    expect(optionB).toHaveStyle('background-color: #FFFFFF')
+    expect(optionC).toHaveStyle('background-color: #C5CAE9')
   })
 
   test('should render with a few selected', () => {
-    renderWithProviders(
+    const { rerender } = renderWithProviders(
       <Listbox selectedIndex={new Set([0, 2])}>
         <Option>option A</Option>
         <Option>option B</Option>
@@ -62,6 +74,18 @@ describe('<Listbox />', () => {
     expect(optionA).toHaveAttribute('aria-selected', 'true')
     expect(optionB).toHaveAttribute('aria-selected', 'false')
     expect(optionC).toHaveAttribute('aria-selected', 'true')
+
+    rerender(
+      <Listbox selectedIndex={new Set([1])}>
+        <Option>option A</Option>
+        <Option>option B</Option>
+        <Option>option C</Option>
+      </Listbox>,
+    )
+
+    expect(optionA).toHaveAttribute('aria-selected', 'false')
+    expect(optionB).toHaveAttribute('aria-selected', 'true')
+    expect(optionC).toHaveAttribute('aria-selected', 'false')
   })
 
   test('clicking an <Option /> should trigger the implicitly passed onClick prop', () => {
