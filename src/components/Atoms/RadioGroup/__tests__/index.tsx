@@ -73,7 +73,7 @@ describe('<RadioGroup />', () => {
   })
 
   test('should be controlled', () => {
-    renderWithProviders(
+    const { rerender } = renderWithProviders(
       <RadioGroup indexValue={0}>
         <RadioButton />
         <RadioButton />
@@ -90,6 +90,22 @@ describe('<RadioGroup />', () => {
     userEvent.click(radioA)
     expect(radioA).toBeChecked()
     expect(radioB).not.toBeChecked()
+
+    rerender(
+      <RadioGroup indexValue={1}>
+        <RadioButton />
+        <RadioButton />
+      </RadioGroup>,
+    )
+
+    expect(radioA).not.toBeChecked()
+    expect(radioB).toBeChecked()
+    userEvent.click(radioB)
+    expect(radioA).not.toBeChecked()
+    expect(radioB).toBeChecked()
+    userEvent.click(radioA)
+    expect(radioA).not.toBeChecked()
+    expect(radioB).toBeChecked()
   })
 
   test('should call onChange', () => {
