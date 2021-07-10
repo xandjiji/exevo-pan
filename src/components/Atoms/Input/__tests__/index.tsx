@@ -99,7 +99,7 @@ describe('<Input />', () => {
   })
 
   test('should be controllable', () => {
-    renderWithProviders(
+    const { rerender } = renderWithProviders(
       <Input
         allowClear
         placeholder="Search a nickname"
@@ -123,5 +123,16 @@ describe('<Input />', () => {
     userEvent.click(clearButton)
     expect(inputElement).toHaveValue('Eternal Oblivion')
     expect(mockedOnChange).toHaveBeenCalledTimes(7)
+
+    rerender(
+      <Input
+        allowClear
+        placeholder="Search a nickname"
+        value="Cachero"
+        onChange={mockedOnChange}
+      />,
+    )
+
+    expect(inputElement).toHaveValue('Cachero')
   })
 })
