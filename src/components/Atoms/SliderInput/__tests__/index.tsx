@@ -1,7 +1,11 @@
-import { screen } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import SliderInput from '..'
+
+jest.mock('lodash', () => ({
+  debounce: fn => fn,
+}))
 
 const mockedOnChange = jest.fn()
 
@@ -15,15 +19,24 @@ describe('<SliderInput />', () => {
     renderWithProviders(
       <SliderInput
         data-testid="test"
+        aria-label="choose a skill level"
         min={0}
-        max={100}
+        max={2000}
         onChange={mockedOnChange}
       />,
     )
 
-    const hiddenInput = screen.getByTestId('test')
-    userEvent.type(hiddenInput, '-50')
-    expect(mockedOnChange).toBeCalledTimes(3)
+    userEvent.tab()
+    userEvent.keyboard('{arrowup}')
+    expect(mockedOnChange).toBeCalledTimes(1)
+
+    const [displayInput] = screen.getAllByLabelText('choose a skill level')
+    userEvent.type(displayInput, '101')
+    expect(mockedOnChange).toBeCalledTimes(4)
+
+    userEvent.keyboard('{arrowup}')
+    expect(mockedOnChange).toBeCalledTimes(5)
+    userEvent.type(displayInput, '102')
   })
 
   test('should be invalid', () => {
@@ -42,11 +55,32 @@ describe('<SliderInput />', () => {
   })
 
   test('should clamp values between 0 and 100', () => {
-    renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
+    renderWithProviders(
+      <SliderInput
+        data-testid="test"
+        aria-label="choose a skill level"
+        min={0}
+        max={100}
+      />,
+    )
 
-    const displayInput = screen.getAllByDisplayValue(0)[0]
+    const [displayInput] = screen.getAllByLabelText('choose a skill level')
     const hiddenInput = screen.getByTestId('test')
     const cursor = screen.getByRole('slider')
+
+    userEvent.tab()
+    userEvent.keyboard('{shift}{arrowup}{arrowup}')
+    expect(displayInput).toHaveValue('100')
+    expect(displayInput).toBeValid()
+    expect(hiddenInput).toBeValid()
+    expect(cursor).toHaveStyle('left: 100%')
+
+    userEvent.keyboard('{shift}{arrowdown}{arrowdown}')
+    expect(displayInput).toHaveValue('0')
+    expect(displayInput).toBeValid()
+    expect(hiddenInput).toBeValid()
+    expect(hiddenInput).toHaveValue('0')
+    expect(cursor).toHaveStyle('left: 0%')
 
     userEvent.clear(displayInput)
     userEvent.type(displayInput, '999')
@@ -58,6 +92,19 @@ describe('<SliderInput />', () => {
     userEvent.clear(displayInput)
     userEvent.type(displayInput, '-999')
     userEvent.tab()
+    expect(displayInput).toHaveValue('0')
+    expect(displayInput).toBeValid()
+    expect(hiddenInput).toBeValid()
+    expect(hiddenInput).toHaveValue('0')
+    expect(cursor).toHaveStyle('left: 0%')
+
+    userEvent.type(displayInput, '{shift}{arrowup}{arrowup}')
+    expect(displayInput).toHaveValue('100')
+    expect(displayInput).toBeValid()
+    expect(hiddenInput).toBeValid()
+    expect(cursor).toHaveStyle('left: 100%')
+
+    userEvent.type(displayInput, '{shift}{arrowdown}{arrowdown}')
     expect(displayInput).toHaveValue('0')
     expect(displayInput).toBeValid()
     expect(hiddenInput).toBeValid()
