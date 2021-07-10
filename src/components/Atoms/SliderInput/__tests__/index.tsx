@@ -80,6 +80,45 @@ describe('<SliderInput />', () => {
     expect(displayInput).toHaveValue('0')
   })
 
+  test('display input should be controlled by arrow keys', () => {
+    renderWithProviders(
+      <SliderInput
+        data-testid="test"
+        aria-label="choose a skill level"
+        min={0}
+        max={2000}
+        onChange={mockedOnChange}
+      />,
+    )
+    const [displayInput] = screen.getAllByLabelText('choose a skill level')
+
+    expect(displayInput).toHaveValue('0')
+
+    userEvent.type(displayInput, '{arrowup}')
+    expect(displayInput).toHaveValue('1')
+
+    userEvent.type(displayInput, '{ctrl}{arrowup}')
+    expect(displayInput).toHaveValue('11')
+
+    userEvent.type(displayInput, '{shift}{arrowup}')
+    expect(displayInput).toHaveValue('111')
+
+    userEvent.type(displayInput, '{ctrl}{shift}{arrowup}')
+    expect(displayInput).toHaveValue('1111')
+
+    userEvent.type(displayInput, '{arrowdown}')
+    expect(displayInput).toHaveValue('1110')
+
+    userEvent.type(displayInput, '{ctrl}{arrowdown}')
+    expect(displayInput).toHaveValue('1100')
+
+    userEvent.type(displayInput, '{shift}{arrowdown}')
+    expect(displayInput).toHaveValue('1000')
+
+    userEvent.type(displayInput, '{ctrl}{shift}{arrowdown}')
+    expect(displayInput).toHaveValue('0')
+  })
+
   test('onChange should be called', () => {
     renderWithProviders(
       <SliderInput
