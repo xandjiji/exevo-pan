@@ -1,5 +1,5 @@
 /* eslint-disable max-lines-per-function */
-import { screen, fireEvent } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import SliderInput from '..'
