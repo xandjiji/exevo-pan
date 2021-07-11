@@ -12,13 +12,28 @@ const mockedOnChange = jest.fn()
 
 describe('<SliderInput />', () => {
   test('should render correctly', () => {
-    renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
+    renderWithProviders(
+      <SliderInput
+        data-testid="test"
+        aria-label="test-aria-label"
+        aria-labelledby="test-aria-labelledby"
+        min={0}
+        max={100}
+      />,
+    )
     expect(screen.getByTestId('test')).toBeInTheDocument()
 
-    const cursorElement = screen.getByLabelText('change value')
+    const cursorElement = screen.getByRole('slider')
     expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
     expect(cursorElement).toHaveAttribute('aria-valuemin', '0')
     expect(cursorElement).toHaveAttribute('aria-valuemax', '100')
+    expect(cursorElement).toHaveAttribute('aria-label', 'change value')
+
+    const [displayInput] = screen.getAllByLabelText('test-aria-label')
+    expect(displayInput).toHaveAttribute(
+      'aria-labelledby',
+      'test-aria-labelledby',
+    )
   })
 
   test('cursor should be controlled by arrow keys', () => {
