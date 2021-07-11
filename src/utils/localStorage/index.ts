@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-export const saveToLocalStorage = (key: string, data: any): void => {
+export function saveToLocalStorage<T>(key: string, data: T): void {
   const serializedData = JSON.stringify(data)
   localStorage.setItem(key, serializedData)
 }
 
-export const getFromLocalStorage = (key: string, fallbackObject: any): any => {
+export function getFromLocalStorage<T>(key: string, fallbackObject: T): T {
   const serializedData = localStorage.getItem(key)
 
   if (!serializedData) return fallbackObject
