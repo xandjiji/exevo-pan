@@ -8,6 +8,7 @@ import {
   useLayoutEffect,
 } from 'react'
 import { debounce } from 'lodash'
+import useIsMounted from 'hooks/useIsMounted'
 import { normalize, clampValue } from 'utils'
 import useDrag from 'hooks/useDrag'
 import { RangeSliderInputProps } from './types'
@@ -27,6 +28,7 @@ const RangeSliderInput = ({
   const [currentTrackCursor, setCurrentTrackCursor] =
     useState<'A' | 'B' | null>(null)
 
+  const isMounted = useIsMounted()
   const track = useDrag()
 
   const trackRef = useRef<HTMLDivElement>(null)
@@ -110,7 +112,8 @@ const RangeSliderInput = ({
   )
 
   useEffect(() => {
-    dispatchOnChange(cursorAValue, cursorBValue)
+    if (isMounted) dispatchOnChange(cursorAValue, cursorBValue)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatchOnChange, cursorAValue, cursorBValue])
 
   useLayoutEffect(() => {

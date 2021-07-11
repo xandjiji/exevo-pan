@@ -7,6 +7,8 @@ jest.mock('lodash', () => ({
   debounce: fn => fn,
 }))
 
+const mockedOnChange = jest.fn()
+
 // eslint-disable-next-line max-lines-per-function
 describe('<RangeSliderInput />', () => {
   test('should render correctly', () => {
@@ -82,6 +84,50 @@ describe('<RangeSliderInput />', () => {
     expect(cursorB).toHaveStyle('left: 100%')
     expect(screen.getByText('20')).toBeInTheDocument()
     expect(screen.getByText('200')).toBeInTheDocument()
+  })
+
+  test('onChanged should be called', () => {
+    renderWithProviders(
+      <RangeSliderInput
+        min={0}
+        max={2000}
+        value={[0, 1000]}
+        onChange={mockedOnChange}
+      />,
+    )
+
+    userEvent.tab()
+    userEvent.keyboard('{arrowup}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(1)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([1, 1000])
+
+    userEvent.keyboard('{ctrl}{arrowup}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(2)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([11, 1000])
+
+    userEvent.keyboard('{shift}{arrowup}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(3)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([111, 1000])
+
+    userEvent.keyboard('{ctrl}{shift}{arrowup}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(4)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([1000, 1111])
+
+    userEvent.keyboard('{ctrl}{shift}{arrowup}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(5)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([1000, 2000])
+
+    userEvent.keyboard('{ctrl}{shift}{arrowdown}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(6)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([1000, 1000])
+
+    userEvent.keyboard('{shift}{arrowdown}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(7)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([900, 1000])
+
+    userEvent.keyboard('{ctrl}{shift}{arrowdown}')
+    expect(mockedOnChange).toHaveBeenCalledTimes(8)
+    expect(mockedOnChange).toHaveBeenLastCalledWith([0, 1000])
   })
 
   test('arrow keys should control cursors correctly', () => {
