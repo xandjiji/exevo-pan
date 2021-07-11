@@ -8,7 +8,7 @@ import List from '../List';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 
-import { historyEndpoint } from '../../dataEnpoint';
+import { BASE_HISTORY_DATA_ENDPOINT, OVERALL_STATISTICS_PATH } from '../../constants'
 
 import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
 
@@ -22,7 +22,7 @@ export default () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${historyEndpoint}/overallStatistics.json`);
+                const response = await fetch(`${BASE_HISTORY_DATA_ENDPOINT}${OVERALL_STATISTICS_PATH}`);
                 const data = await response.json();
 
                 data.totalTibiaCoins.lastMonth = fillArrayUntil(data.totalTibiaCoins.lastMonth, 28);

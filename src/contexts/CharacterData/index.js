@@ -4,7 +4,7 @@ import CharacterDataContext from './context';
 import { characterDataReducer } from './reducers';
 import setupCharacterData from '../../utils/setupCharacterData';
 import { saveToLocalStorage, getFromLocalStorage, verifyCharacterObjectShape } from 'utils'
-import dataEndpoint from '../../dataEnpoint';
+import { BASE_DATA_ENDPOINT, CHARACTER_DATA_PATH } from '../../constants';
 
 let initialCharacterArray = getFromLocalStorage('initialCharacterData', []);
 
@@ -34,7 +34,7 @@ export default ({ children }) => {
     useEffect(() => {
         const fetchSetupedData = async () => {
             try {
-                const response = await fetch(`${dataEndpoint}/MinifiedCharacterData.json`);
+                const response = await fetch(`${BASE_DATA_ENDPOINT}${CHARACTER_DATA_PATH}`);
                 const data = await response.json();
 
                 const setupedData = setupCharacterData(data);

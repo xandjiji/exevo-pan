@@ -17,8 +17,6 @@ export const ServerDataProvider: React.FC = ({ children }) => {
     defaultServerDataState.serverData,
   )
 
-  console.log(serverData)
-
   useEffect(() => {
     const fetchSetupedData = async () => {
       setLoading(true)

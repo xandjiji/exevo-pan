@@ -6,7 +6,7 @@ import { characterDataReducer } from '../CharacterData/reducers';
 
 import { saveToLocalStorage, getFromLocalStorage } from 'utils';
 import { minifiedToObject } from '../../utils/dataDictionary';
-import { historyEndpoint } from '../../dataEnpoint';
+import { BASE_HISTORY_DATA_ENDPOINT, HISTORY_HASH_PATH } from '../../constants';
 
 import { get, set } from 'idb-keyval';
 
@@ -36,7 +36,7 @@ export default ({ children }) => {
     useEffect(() => {
         const fetchSetupedData = async () => {
             try {
-                const response = await fetch(`${historyEndpoint}/hash.json`);
+                const response = await fetch(`${BASE_HISTORY_DATA_ENDPOINT}${HISTORY_HASH_PATH}`);
                 const data = await response.json();
 
                 const parsedHistoryData = [];
@@ -87,7 +87,7 @@ export default ({ children }) => {
                     aria-valuemax="100%"
                     aria-valuenow={percentage}
                 >
-                        {`Updating data...  ${percentage}`}
+                    {`Updating data...  ${percentage}`}
                 </LoadingAlert> : null}
             {children}
         </HistoryDataContext.Provider>
@@ -104,7 +104,7 @@ const checkAndHash = async (hash, index) => {
     const pageHash = getFromLocalStorage(pageName, null);
 
     if (pageHash !== hash) {
-        const response = await fetch(`${historyEndpoint}/historyData${index}.json`);
+        const response = await fetch(`${BASE_HISTORY_DATA_ENDPOINT}/historyData${index}.json`);
         const data = await response.json();
         const parsedDataArray = await buildDb(index, data);
 
