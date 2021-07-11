@@ -29,7 +29,7 @@ import NaFlag from '../../assets/na-flag.png';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
-import ServerDataContext from '../../contexts/ServerData/context';
+import { useServerData } from 'contexts/useServerData';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
 const resetedFilterState = {
@@ -55,10 +55,17 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const { params, setParamByKey, resetParams } = useContext(UrlParametersContext);
     const { active } = useContext(SideDrawerContext);
-    const { serverData, indexedServerData } = useContext(ServerDataContext);
+    const { serverData } = useServerData()
     const { itemData } = useContext(ItemsDataContext);
 
-    const serverNamesArray = useMemo(() => Object.keys(serverData), [serverData]);
+    const serverNamesArray = useMemo(() => serverData.map(serverItem => serverItem.serverName), [serverData]);
+    const serverDataObject = useMemo(() => {
+        let serverObject = {}
+        for (const serverItem of serverData) {
+            serverObject[serverItem.serverName] = serverItem
+        }
+        return serverObject
+    }, [serverData]);
     const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
 
     const initialFilterState = {
@@ -174,7 +181,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             initialData: {
                 initialCharacterData,
                 itemData,
-                indexedServerData
+                indexedServerData: serverData
             }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -447,7 +454,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                         aria-controls="server-list"
                         placeholder="Choose a server"
                         itemList={allItemsNotInSet(serverNamesArray, filters.serverSet)}
-                        onItemSelect={useCallback((option) => onAutocompleteChange('serverSet', option.value, serverData), [onAutocompleteChange, serverData])}
+                        onItemSelect={useCallback((option) => onAutocompleteChange('serverSet', option.value, serverDataObject), [onAutocompleteChange, serverDataObject])}
                     />
 
                     <div id="server-list" className="chips-wrapper">

@@ -6,7 +6,7 @@ import UrlParametersProvider from './contexts/UrlParameters';
 import { ThemeProvider } from 'contexts/useTheme';
 import CharacterDataProvider from './contexts/CharacterData';
 import HistoryDataProvider from './contexts/HistoryData';
-import ServerDataProvider from './contexts/ServerData';
+import { ServerDataProvider } from 'contexts/useServerData';
 import ItemsDataProvider from './contexts/ItemsData';
 import SideDrawerProvider from './contexts/SideDrawer/'
 

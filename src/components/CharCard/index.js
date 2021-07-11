@@ -4,8 +4,7 @@ import CharCard from './CharCard.styled';
 
 import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait, LabeledTextBox } from 'components/Atoms';
 import { Tooltip } from 'components/Organisms';
-
-import ServerDataContext from '../../contexts/ServerData/context';
+import { useServerData } from 'contexts/useServerData';
 
 import { ReactComponent as ExternalIcon } from '../../assets/svgs/external.svg';
 import { ReactComponent as Server } from '../../assets/svgs/server.svg';
@@ -34,7 +33,7 @@ const vocationEnum = {
 export default ({ charData }) => {
     const { pathname } = useLocation();
 
-    const { indexedServerData } = useContext(ServerDataContext);
+    const { serverData } = useServerData()
 
     const {
         id,
@@ -53,7 +52,7 @@ export default ({ charData }) => {
         imbuements
     } = charData;
 
-    const currentServer = indexedServerData[serverId];
+    const currentServer = serverData[serverId];
     if (!currentServer) return null;
 
     const [highlightedSkill, setHighlightedSkill] = useState(null);
@@ -77,7 +76,7 @@ export default ({ charData }) => {
         }
     }
 
-    if (Object.keys(indexedServerData).length === 0) return null;
+    if (Object.keys(serverData).length === 0) return null;
 
     return (
         <CharCard className="shadow">
