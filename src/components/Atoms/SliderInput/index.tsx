@@ -15,6 +15,8 @@ import { SliderInputProps } from './types'
 import * as S from './styles'
 
 const SliderInput = ({
+  className,
+  style,
   min,
   max,
   onChange,
@@ -127,7 +129,7 @@ const SliderInput = ({
   }, [propValue])
 
   return (
-    <S.Wrapper>
+    <S.Wrapper className={className} style={style}>
       <div style={{ width: '100%' }}>
         <S.Track
           ref={trackRef}
