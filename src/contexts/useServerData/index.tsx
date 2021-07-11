@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { saveToLocalStorage, getFromLocalStorage } from 'utils'
-import { DATA_ENDPOINT } from '../../constants'
+import { BASE_DATA_ENDPOINT, SERVER_DATA_PATH } from '../../constants'
 import { ServerDataContextState } from './types'
 
 const defaultServerDataState: ServerDataContextState = {
@@ -23,7 +23,7 @@ export const ServerDataProvider: React.FC = ({ children }) => {
     const fetchSetupedData = async () => {
       setLoading(true)
       try {
-        const response = await fetch(`${DATA_ENDPOINT}/ServerData.json`)
+        const response = await fetch(`${BASE_DATA_ENDPOINT}${SERVER_DATA_PATH}`)
         const data = (await response.json()) as Record<string, ServerObject>
         const serverArray = Object.values(data)
 
