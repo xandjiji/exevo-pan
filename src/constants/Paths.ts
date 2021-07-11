@@ -1,0 +1,5 @@
+export const SERVER_DATA_PATH = '/ServerData.json'
+export const ITEMS_DATA_PATH = '/ItemsData.json'
+export const OVERALL_STATISTICS_PATH = '/overallStatistics.json'
+export const CHARACTER_DATA_PATH = '/MinifiedCharacterData.json'
+export const HISTORY_HASH_PATH = '/hash.json'
