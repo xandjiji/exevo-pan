@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import RangeSliderInput from '..'
 
@@ -6,6 +7,7 @@ jest.mock('lodash', () => ({
   debounce: fn => fn,
 }))
 
+// eslint-disable-next-line max-lines-per-function
 describe('<RangeSliderInput />', () => {
   test('should render correctly', () => {
     renderWithProviders(
@@ -25,7 +27,7 @@ describe('<RangeSliderInput />', () => {
     expect(cursorB).toHaveAttribute('aria-valuemin', '0')
   })
 
-  test('should render cursors correctly', () => {
+  test('should initially render cursors correctly', () => {
     renderWithProviders(<RangeSliderInput min={0} max={100} value={[10, 90]} />)
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
@@ -36,7 +38,7 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByText('90')).toBeInTheDocument()
   })
 
-  test('should clamp values', () => {
+  test('should initially clamp values', () => {
     renderWithProviders(
       <RangeSliderInput min={0} max={100} value={[-99, 200]} />,
     )
@@ -80,5 +82,107 @@ describe('<RangeSliderInput />', () => {
     expect(cursorB).toHaveStyle('left: 100%')
     expect(screen.getByText('20')).toBeInTheDocument()
     expect(screen.getByText('200')).toBeInTheDocument()
+  })
+
+  test('arrow keys should control cursors correctly', () => {
+    renderWithProviders(
+      <RangeSliderInput min={0} max={2000} value={[0, 1000]} />,
+    )
+
+    const [cursorA, cursorB] = screen.getAllByRole('slider')
+
+    userEvent.tab()
+    userEvent.keyboard('{arrowup}')
+    expect(screen.getByText('1')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{arrowup}')
+    expect(screen.getByText('11')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '11')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{shift}{arrowup}')
+    expect(screen.getByText('111')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '111')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowup}')
+    expect(screen.getByText('1111')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1111')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{arrowdown}')
+    expect(screen.getByText('1110')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1110')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{arrowdown}')
+    expect(screen.getByText('1100')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1100')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{shift}{arrowdown}')
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowdown}')
+    expect(screen.getByText('0')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '0')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{arrowright}')
+    expect(screen.getByText('1')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{arrowright}')
+    expect(screen.getByText('11')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '11')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{shift}{arrowright}')
+    expect(screen.getByText('111')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '111')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowright}')
+    expect(screen.getByText('1111')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1111')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowright}')
+    expect(screen.getByText('2000')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '2000')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{arrowleft}')
+    expect(screen.getByText('1990')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '1990')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowleft}')
+    expect(screen.getByText('990')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '990')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+
+    userEvent.keyboard('{ctrl}{shift}{arrowleft}')
+    expect(screen.getByText('0')).toBeInTheDocument()
+    expect(cursorA).toHaveAttribute('aria-valuenow', '0')
+    expect(screen.getByText('1000')).toBeInTheDocument()
+    expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
   })
 })
