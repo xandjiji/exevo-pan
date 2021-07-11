@@ -181,7 +181,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
             initialData: {
                 initialCharacterData,
                 itemData,
-                indexedServerData: serverData
+                serverData
             }
         });
         // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -2,11 +2,11 @@ import { getFavArray } from 'utils';
 
 const applyFilters = (filterState, initialData) => {
 
-    const { initialCharacterData, itemData, indexedServerData } = initialData;
+    const { initialCharacterData, itemData, serverData } = initialData;
 
     if (!isDataLoaded(initialCharacterData)) return [];
     if (!isDataLoaded(itemData)) return [];
-    if (!isDataLoaded(indexedServerData)) return [];
+    if (!isDataLoaded(serverData)) return [];
 
     const {
         nicknameFilter,
@@ -49,17 +49,17 @@ const applyFilters = (filterState, initialData) => {
 
         if (nicknameFilter && !nicknameRegex.test(nickname)) continue;
 
-        if (!indexedServerData[serverId]) continue;
+        if (!serverData[serverId]) continue;
 
         if (setDoesntHasValue(vocation, vocationId)) continue;
 
-        if (setDoesntHasValue(pvp, indexedServerData[serverId].pvpType.type)) continue;
+        if (setDoesntHasValue(pvp, serverData[serverId].pvpType.type)) continue;
 
-        if (setDoesntHasValue(battleye, indexedServerData[serverId].battleye)) continue;
+        if (setDoesntHasValue(battleye, serverData[serverId].battleye)) continue;
 
-        if (setDoesntHasValue(location, indexedServerData[serverId].serverLocation.type)) continue;
+        if (setDoesntHasValue(location, serverData[serverId].serverLocation.type)) continue;
 
-        if (setDoesntHasValue(serverSet, indexedServerData[serverId].serverName)) continue;
+        if (setDoesntHasValue(serverSet, serverData[serverId].serverName)) continue;
 
         if (setDoesntHasAnyValue(imbuementsSet, imbuements)) continue;
 
