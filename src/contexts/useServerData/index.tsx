@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { getFromLocalStorage } from 'utils'
-import { ServerDataClient } from 'services'
+import { ManageDataClient } from 'services'
 import { ServerDataContextState } from './types'
 
 const defaultServerDataState: ServerDataContextState = {
@@ -22,7 +22,7 @@ export const ServerDataProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const serverArray = await ServerDataClient.fetch()
+        const serverArray = await ManageDataClient.fetchServerData()
         setServerData(serverArray)
       } finally {
         setLoading(false)
