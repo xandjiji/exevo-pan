@@ -1,11 +1,10 @@
 import { createContext, useContext, useState, useEffect } from 'react'
-import { getFromLocalStorage } from 'utils'
 import { ManageDataClient } from 'services'
 import { ServerDataContextState } from './types'
 
 const defaultServerDataState: ServerDataContextState = {
   loading: true,
-  serverData: getFromLocalStorage<ServerObject[]>('serverData', []),
+  serverData: [],
 }
 const ServerDataContext = createContext<ServerDataContextState>(
   defaultServerDataState,
