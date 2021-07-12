@@ -1,6 +1,6 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import ServerDataClient from '..'
-import { BASE_DATA_ENDPOINT, SERVER_DATA_PATH } from '../../../constants'
+import ManageDataClient from '../..'
+import { BASE_DATA_ENDPOINT, SERVER_DATA_PATH } from '../../../../constants'
 import { mockedFetchData, mockedSuccessReturnedValue } from './mock'
 
 global.fetch = jest.fn()
@@ -28,7 +28,7 @@ describe('services/ServerData', () => {
       json: async () => mockedFetchData,
     } as Response)
 
-    await ServerDataClient.fetch()
+    await ManageDataClient.fetchServerData()
   })
 
   test('should call fetch with the right parameters', () => {
@@ -50,7 +50,7 @@ describe('services/ServerData', () => {
     mockedFetch.mockResolvedValueOnce({
       json: async () => mockedFetchData,
     } as Response)
-    const result = await ServerDataClient.fetch()
+    const result = await ManageDataClient.fetchServerData()
     expect(result).toEqual(mockedSuccessReturnedValue)
   })
 
@@ -61,7 +61,7 @@ describe('services/ServerData', () => {
       ...mockedSuccessReturnedValue,
     ])
 
-    const result = await ServerDataClient.fetch()
+    const result = await ManageDataClient.fetchServerData()
     expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
     expect(mockedGetFromLocalStorage).toHaveBeenCalledWith('serverData', [])
     expect(result).toEqual([

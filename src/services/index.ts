@@ -1,1 +1,1 @@
-export { default as ServerDataClient } from './ServerData'
+export { default as ManageDataClient } from './ManageData'
