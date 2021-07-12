@@ -12,11 +12,10 @@ export default () => {
         <Switch>
             <Route exact path="/">
                 <CharacterDataContext.Consumer>
-                    {({ characterData, dispatchInitialData }) => (
+                    {({ characterData }) => (
                         <CharGrid
                             itemsPerPage={10}
                             data={characterData}
-                            dispatchInitialData={dispatchInitialData}
                             initialSort={0}
                             initialOrder={false}
                         />
@@ -26,11 +25,10 @@ export default () => {
 
             <Route exact path="/bazaar-history">
                 <HistoryDataContext.Consumer>
-                    {({ characterData, dispatchInitialData }) => (
+                    {({ characterData }) => (
                         <CharGrid
                             itemsPerPage={10}
                             data={characterData}
-                            dispatchInitialData={dispatchInitialData}
                             initialSort={0}
                             initialOrder={true}
                         />

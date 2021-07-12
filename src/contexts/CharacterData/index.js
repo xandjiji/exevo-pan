@@ -16,7 +16,7 @@ if (!initialCharacterArray[0] || !verifyCharacterObjectShape(initialCharacterArr
 export default ({ children }) => {
 
     const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, initialCharacterArray);
-    const [initialData, dispatchInitialData] = useReducer(characterDataReducer, initialCharacterArray);
+    const [initialData] = useReducer(characterDataReducer, initialCharacterArray);
 
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
@@ -56,7 +56,6 @@ export default ({ children }) => {
         <CharacterDataContext.Provider
             value={{
                 initialCharacterData,
-                dispatchInitialData,
 
                 characterData: updatedCharacterData,
                 dispatchCharacterData

@@ -17,7 +17,7 @@ export default ({ children }) => {
     const { pathname } = useLocation();
 
     const [characterData, dispatchCharacterData] = useReducer(characterDataReducer, []);
-    const [initialData, dispatchInitialData] = useReducer(characterDataReducer, []);
+    const [initialData] = useReducer(characterDataReducer, []);
 
     const [initialCharacterData, setInitialCharacterData] = useState(initialData);
     const [updatedCharacterData, setUpdatedCharacterData] = useState(characterData);
@@ -73,7 +73,6 @@ export default ({ children }) => {
         <HistoryDataContext.Provider
             value={{
                 initialCharacterData,
-                dispatchInitialData,
 
                 characterData: updatedCharacterData,
                 dispatchCharacterData
