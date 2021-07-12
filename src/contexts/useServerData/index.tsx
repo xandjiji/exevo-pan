@@ -20,19 +20,16 @@ export const ServerDataProvider: React.FC = ({ children }) => {
   )
 
   useEffect(() => {
-    const fetchSetupedData = async () => {
-      setLoading(true)
+    const fetchData = async () => {
       try {
         const serverArray = await ServerDataClient.fetch()
         setServerData(serverArray)
-      } catch (error: unknown) {
-        console.log(error)
       } finally {
         setLoading(false)
       }
     }
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    fetchSetupedData()
+    fetchData()
   }, [])
 
   return (
