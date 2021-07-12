@@ -4,7 +4,7 @@ import { ServerDataClient } from 'services'
 import { ServerDataContextState } from './types'
 
 const defaultServerDataState: ServerDataContextState = {
-  loading: false,
+  loading: true,
   serverData: getFromLocalStorage<ServerObject[]>('serverData', []),
 }
 const ServerDataContext = createContext<ServerDataContextState>(
@@ -12,7 +12,9 @@ const ServerDataContext = createContext<ServerDataContextState>(
 )
 
 export const ServerDataProvider: React.FC = ({ children }) => {
-  const [loading, setLoading] = useState<boolean>(false)
+  const [loading, setLoading] = useState<boolean>(
+    defaultServerDataState.loading,
+  )
   const [serverData, setServerData] = useState(
     defaultServerDataState.serverData,
   )
