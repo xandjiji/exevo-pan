@@ -13,6 +13,9 @@ module.exports = {
             { extensions: ['.js', '.jsx', '.tsx'] },
         ],
         'react/react-in-jsx-scope': 'off',
+        'max-lines-per-function': 'off',
+        '@typescript-eslint/no-empty-function': 'off',
+        '@typescript-eslint/no-floating-promises':'off',
 
         'testing-library/no-container': 'off',
         'testing-library/no-node-access': 'off',
@@ -21,7 +24,8 @@ module.exports = {
         'testing-library/no-wait-for-multiple-assertions': 'off',
         'testing-library/no-wait-for-side-effects': 'off',
         'testing-library/prefer-user-event': 'off',
-        'testing-library/render-result-naming-convention': 'off'
+        'testing-library/render-result-naming-convention': 'off',
+        'testing-library/no-wait-for-empty-callback': 'off'
     },
     settings: {
         'import/resolver': {

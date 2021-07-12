@@ -14,7 +14,6 @@ const fakeArgs = {
 
 const mockedOnChange = jest.fn()
 
-// eslint-disable-next-line max-lines-per-function
 describe('<Paginator />', () => {
   test('should navigate correctly between pages', () => {
     renderWithProviders(<Paginator {...fakeArgs} />)

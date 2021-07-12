@@ -27,7 +27,6 @@ export const ServerDataProvider: React.FC = ({ children }) => {
         setLoading(false)
       }
     }
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     fetchData()
   }, [])
 

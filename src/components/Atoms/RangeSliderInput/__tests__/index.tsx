@@ -9,7 +9,6 @@ jest.mock('lodash', () => ({
 
 const mockedOnChange = jest.fn()
 
-// eslint-disable-next-line max-lines-per-function
 describe('<RangeSliderInput />', () => {
   test('should render correctly', () => {
     renderWithProviders(
