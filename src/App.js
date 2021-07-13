@@ -4,9 +4,8 @@ import MasterLayout from './layouts/MasterLayout';
 
 import UrlParametersProvider from './contexts/UrlParameters';
 import { ThemeProvider } from 'contexts/useTheme';
-import CharacterDataProvider from './contexts/CharacterData';
 import HistoryDataProvider from './contexts/HistoryData';
-import { ServerDataProvider } from 'contexts/useServerData';
+import { DatabaseProvider } from 'contexts/useDatabase';
 import ItemsDataProvider from './contexts/ItemsData';
 import SideDrawerProvider from './contexts/SideDrawer/'
 
@@ -18,19 +17,17 @@ const App = () => {
             <Router>
                 <UrlParametersProvider>
                     <ThemeProvider>
-                        <CharacterDataProvider>
+                        <DatabaseProvider>
                             <HistoryDataProvider>
-                                <ServerDataProvider>
-                                    <ItemsDataProvider>
-                                        <SideDrawerProvider>
+                                <ItemsDataProvider>
+                                    <SideDrawerProvider>
 
-                                            <MasterLayout />
+                                        <MasterLayout />
 
-                                        </SideDrawerProvider>
-                                    </ItemsDataProvider>
-                                </ServerDataProvider>
+                                    </SideDrawerProvider>
+                                </ItemsDataProvider>
                             </HistoryDataProvider>
-                        </CharacterDataProvider>
+                        </DatabaseProvider>
                     </ThemeProvider>
                 </UrlParametersProvider>
             </Router>
