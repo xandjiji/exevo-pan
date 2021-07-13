@@ -63,5 +63,5 @@ export const DatabaseProvider: React.FC = ({ children }) => {
   )
 }
 
-export const useCharacterData = (): DatabaseContextValues =>
+export const useDatabase = (): DatabaseContextValues =>
   useContext(DatabaseContext)
