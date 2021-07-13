@@ -8,29 +8,31 @@ const defaultDatabaseState: DatabaseContextValues = {
   loading: true,
   characterData: [],
   serverData: [],
+  rareItemData: {},
   dispatch: () => {},
 }
 const DatabaseContext =
   createContext<DatabaseContextValues>(defaultDatabaseState)
 
 export const DatabaseProvider: React.FC = ({ children }) => {
-  const [{ loading, characterData, serverData }, dispatch] = useReducer(
-    DatabaseDataReducer,
-    {
+  const [{ loading, characterData, serverData, rareItemData }, dispatch] =
+    useReducer(DatabaseDataReducer, {
       loading: defaultDatabaseState.loading,
       baseCharacterData: defaultDatabaseState.characterData,
       characterData: defaultDatabaseState.characterData,
       serverData: defaultDatabaseState.serverData,
-    },
-  )
+      rareItemData: defaultDatabaseState.rareItemData,
+    })
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [freshCharacterData, freshServerArray] = await Promise.all([
-          ManageDataClient.fetchCharacterData(),
-          ManageDataClient.fetchServerData(),
-        ])
+        const [freshCharacterData, freshServerArray, freshItemData] =
+          await Promise.all([
+            ManageDataClient.fetchCharacterData(),
+            ManageDataClient.fetchServerData(),
+            ManageDataClient.fetchItemData(),
+          ])
 
         const buildedCharacterData = buildCharacterData(
           freshCharacterData,
@@ -41,6 +43,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
           type: 'INITIAL_DATA_LOAD',
           characterData: buildedCharacterData,
           serverData: freshServerArray,
+          rareItemData: freshItemData,
         })
       } finally {
         dispatch({ type: 'SET_LOADED' })
@@ -55,6 +58,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         loading,
         characterData,
         serverData,
+        rareItemData,
         dispatch,
       }}
     >

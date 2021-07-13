@@ -11,6 +11,26 @@ export const buildCharacterData = (
   baseCharacterData: CharacterObject[],
   filters: any,
 ): CharacterObject[] => {
+  const {
+    nicknameFilter,
+    vocation,
+    pvp,
+    battleye,
+    location,
+    serverSet,
+    minLevel,
+    maxLevel,
+    minSkill,
+    skillKey,
+    itemSet,
+    fav,
+    rareNick,
+    soulwarFilter,
+    imbuementsSet,
+  } = filters
+
+  const nicknameRegex = new RegExp(nicknameFilter, 'i')
+
   return []
 }
  */

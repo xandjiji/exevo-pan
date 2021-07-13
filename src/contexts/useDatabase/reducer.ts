@@ -11,6 +11,7 @@ export default (
         baseCharacterData: action.characterData,
         characterData: action.characterData,
         serverData: action.serverData,
+        rareItemData: action.rareItemData,
       }
 
     case 'SET_LOADED':
@@ -19,7 +20,11 @@ export default (
         loading: false,
       }
 
-    /* @ ToDo: filter */
+    case 'APPLY_FILTERS':
+      console.log(action.filters)
+      return {
+        ...state,
+      }
 
     default:
       return { ...state }
