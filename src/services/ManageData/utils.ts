@@ -1,5 +1,4 @@
 import { minifiedToObject } from 'utils/dataDictionary'
-import { MinifiedCharacterObject, RareItemData } from './types'
 
 export const buildCharacterData = (
   initialCharacterData: MinifiedCharacterObject[],
