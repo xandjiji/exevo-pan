@@ -27,7 +27,7 @@ export default class ManageDataClient {
     }
   }
 
-  static async fetchCharacterData(): Promise<IncompleteCharacterObject[]> {
+  static async fetchCharacterData(): Promise<PartialCharacterObject[]> {
     try {
       const response = await fetch(this.characterDataUrl)
       const data = (await response.json()) as MinifiedCharacterObject[]
@@ -38,7 +38,7 @@ export default class ManageDataClient {
       return builtCharacterData
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<IncompleteCharacterObject[]>(
+      return getFromLocalStorage<PartialCharacterObject[]>(
         'auctionCharacterData',
         [],
       )

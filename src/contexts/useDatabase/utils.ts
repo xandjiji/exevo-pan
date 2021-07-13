@@ -1,5 +1,5 @@
 export const buildCharacterData = (
-  characterData: IncompleteCharacterObject[],
+  characterData: PartialCharacterObject[],
   serverData: ServerObject[],
 ): CharacterObject[] =>
   characterData.map(character => ({

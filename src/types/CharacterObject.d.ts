@@ -9,7 +9,7 @@ declare interface CharacterSkillsObject {
   shielding: number
 }
 
-declare interface CharacterObject extends IncompleteCharacterObject {
+declare interface CharacterObject extends PartialCharacterObject {
   serverData: ServerObject
 }
 

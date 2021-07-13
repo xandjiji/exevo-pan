@@ -1,4 +1,4 @@
-declare interface IncompleteCharacterObject {
+declare interface PartialCharacterObject {
   id: number
   nickname: string
   auctionEnd: number
