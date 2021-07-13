@@ -6,7 +6,6 @@ import SideDrawer from '../../components/SideDrawer';
 
 
 import SideDrawerContext from '../../contexts/SideDrawer/context';
-import CharacterDataContext from '../../contexts/CharacterData/context';
 import HistoryDataContext from '../../contexts/HistoryData/context';
 
 export default () => {
@@ -22,15 +21,9 @@ export default () => {
                 >
                     <Switch>
                         <Route exact path="/">
-                            <CharacterDataContext.Consumer>
-                                {({ initialCharacterData, dispatchCharacterData }) => (
-                                    <SideDrawer
-                                        backAction={sideDrawercontext.toggleSideDrawer}
-                                        initialCharacterData={initialCharacterData}
-                                        dispatchCharacterData={dispatchCharacterData}
-                                    />
-                                )}
-                            </CharacterDataContext.Consumer>
+                            <SideDrawer
+                                backAction={sideDrawercontext.toggleSideDrawer}
+                            />
                         </Route>
 
                         <Route exact path="/bazaar-history">

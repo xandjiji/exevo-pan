@@ -4,7 +4,6 @@ import CharCard from './CharCard.styled';
 
 import { AuctionTimer, Chip, SkillBar, FavButton, SpritePortrait, LabeledTextBox } from 'components/Atoms';
 import { Tooltip } from 'components/Organisms';
-import { useServerData } from 'contexts/useServerData';
 
 import { ReactComponent as ExternalIcon } from '../../assets/svgs/external.svg';
 import { ReactComponent as Server } from '../../assets/svgs/server.svg';
@@ -33,8 +32,6 @@ const vocationEnum = {
 export default ({ charData }) => {
     const { pathname } = useLocation();
 
-    const { serverData } = useServerData()
-
     const {
         id,
         nickname,
@@ -45,15 +42,13 @@ export default ({ charData }) => {
         level,
         vocationId,
         serverId,
+        serverData,
         skills,
         items,
         charms,
         transfer,
         imbuements
     } = charData;
-
-    const currentServer = serverData[serverId];
-    if (!currentServer) return null;
 
     const [highlightedSkill, setHighlightedSkill] = useState(null);
 
@@ -105,18 +100,18 @@ export default ({ charData }) => {
             </div>
 
             <div className="overview">
-                <LabeledTextBox labelText="Server" warning={currentServer.experimental} title={currentServer.experimental ? 'This is an experimental server!' : null}>
+                <LabeledTextBox labelText="Server" warning={serverData.experimental} title={serverData.experimental ? 'This is an experimental server!' : null}>
                     <div className="server-info overview-content row">
                         <span className="server-text">
                             <img
                                 className="flag"
-                                alt={currentServer.serverLocation.string}
-                                title={currentServer.serverLocation.string}
-                                src={getFlag(currentServer.serverLocation.type)}
+                                alt={serverData.serverLocation.string}
+                                title={serverData.serverLocation.string}
+                                src={getFlag(serverData.serverLocation.type)}
                                 width={16}
                                 height={10}
                             />
-                            {currentServer.serverName}
+                            {serverData.serverName}
                         </span>
                         {transfer ?
                             <Tooltip
@@ -140,10 +135,10 @@ export default ({ charData }) => {
                     <div className="overview-content row">
                         <span
                             className="battleye"
-                            style={{ backgroundColor: `${currentServer.battleye ? 'var(--battleGreen)' : 'var(--battleYellow)'}` }}
+                            style={{ backgroundColor: `${serverData.battleye ? 'var(--battleGreen)' : 'var(--battleYellow)'}` }}
                         >
                         </span>
-                        {currentServer.pvpType.string}
+                        {serverData.pvpType.string}
                     </div>
                 </LabeledTextBox>
 

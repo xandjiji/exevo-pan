@@ -29,7 +29,7 @@ import NaFlag from '../../assets/na-flag.png';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
-import { useServerData } from 'contexts/useServerData';
+import { useDatabase } from 'contexts/useDatabase';
 import ItemsDataContext from '../../contexts/ItemsData/context';
 
 const resetedFilterState = {
@@ -55,7 +55,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     const { params, setParamByKey, resetParams } = useContext(UrlParametersContext);
     const { active } = useContext(SideDrawerContext);
-    const { serverData } = useServerData()
+    const { serverData } = useDatabase()
     const { itemData } = useContext(ItemsDataContext);
 
     const serverNamesArray = useMemo(() => serverData.map(serverItem => serverItem.serverName), [serverData]);
