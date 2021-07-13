@@ -13,6 +13,18 @@ declare interface CharacterObject extends PartialCharacterObject {
   serverData: ServerObject
 }
 
+declare type MinifiedCharacterObject = [
+  number,
+  string,
+  number,
+  number,
+  boolean,
+  string,
+  number,
+  number,
+  number,
+]
+
 /*
 {
     "id": 123456,
