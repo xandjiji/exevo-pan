@@ -27,7 +27,7 @@ export default class ManageDataClient {
     }
   }
 
-  static async fetchCharacterData(): Promise<CharacterObject[]> {
+  static async fetchCharacterData(): Promise<IncompleteCharacterObject[]> {
     try {
       const response = await fetch(this.characterDataUrl)
       const data = (await response.json()) as MinifiedCharacterObject[]
@@ -38,7 +38,10 @@ export default class ManageDataClient {
       return builtCharacterData
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<CharacterObject[]>('auctionCharacterData', [])
+      return getFromLocalStorage<IncompleteCharacterObject[]>(
+        'auctionCharacterData',
+        [],
+      )
     }
   }
 }
