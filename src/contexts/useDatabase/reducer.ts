@@ -1,4 +1,5 @@
 import { DatabaseContextState, Action } from './types'
+import { filterCharacters } from './utils'
 
 export default (
   state: DatabaseContextState,
@@ -24,6 +25,7 @@ export default (
       console.log(action.filters)
       return {
         ...state,
+        characterData: filterCharacters(state, action.filters),
       }
 
     default:
