@@ -6,7 +6,6 @@ import UrlParametersProvider from './contexts/UrlParameters';
 import { ThemeProvider } from 'contexts/useTheme';
 import HistoryDataProvider from './contexts/HistoryData';
 import { DatabaseProvider } from 'contexts/useDatabase';
-import ItemsDataProvider from './contexts/ItemsData';
 import SideDrawerProvider from './contexts/SideDrawer/'
 
 import ErrorBoundary from './components/ErrorBoundary';
@@ -19,13 +18,11 @@ const App = () => {
                     <ThemeProvider>
                         <DatabaseProvider>
                             <HistoryDataProvider>
-                                <ItemsDataProvider>
-                                    <SideDrawerProvider>
+                                <SideDrawerProvider>
 
-                                        <MasterLayout />
+                                    <MasterLayout />
 
-                                    </SideDrawerProvider>
-                                </ItemsDataProvider>
+                                </SideDrawerProvider>
                             </HistoryDataProvider>
                         </DatabaseProvider>
                     </ThemeProvider>

@@ -30,7 +30,6 @@ import NaFlag from '../../assets/na-flag.png';
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
 import { useDatabase } from 'contexts/useDatabase';
-import ItemsDataContext from '../../contexts/ItemsData/context';
 
 const resetedFilterState = {
     nicknameFilter: '',
@@ -50,13 +49,12 @@ const resetedFilterState = {
     imbuementsSet: new Set([])
 };
 
-export default ({ backAction, initialCharacterData, dispatchCharacterData }) => {
+export default ({ backAction }) => {
     const history = useHistory();
 
     const { params, setParamByKey, resetParams } = useContext(UrlParametersContext);
     const { active } = useContext(SideDrawerContext);
-    const { serverData } = useDatabase()
-    const { itemData } = useContext(ItemsDataContext);
+    const { serverData, rareItemData, dispatch } = useDatabase()
 
     const serverNamesArray = useMemo(() => serverData.map(serverItem => serverItem.serverName), [serverData]);
     const serverDataObject = useMemo(() => {
@@ -66,7 +64,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
         }
         return serverObject
     }, [serverData]);
-    const itemNamesArray = useMemo(() => Object.keys(itemData), [itemData]);
+    const itemNamesArray = useMemo(() => Object.keys(rareItemData), [rareItemData]);
 
     const initialFilterState = {
         nicknameFilter: params.nicknameFilter || '',
@@ -175,17 +173,11 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
 
     useEffect(() => {
         if (active) setParamByKey('pageIndex', 0);
-        dispatchCharacterData({
+        dispatch({
             type: 'APPLY_FILTERS',
-            filterState: filters,
-            initialData: {
-                initialCharacterData,
-                itemData,
-                serverData
-            }
-        });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters, initialCharacterData, setParamByKey]);
+            filters
+        })
+    }, [filters]);
 
     const isAllItemsSelected = useCallback(() => {
         if (filters.itemSet.size === itemNamesArray.length) {
@@ -584,7 +576,7 @@ export default ({ backAction, initialCharacterData, dispatchCharacterData }) => 
                             aria-controls="rare-items-list"
                             placeholder="Choose an item"
                             itemList={allItemsNotInSet(itemNamesArray, filters.itemSet)}
-                            onItemSelect={useCallback((option) => onAutocompleteChange('itemSet', option.value, itemData), [onAutocompleteChange, itemData])}
+                            onItemSelect={useCallback((option) => onAutocompleteChange('itemSet', option.value, rareItemData), [onAutocompleteChange, rareItemData])}
                         />
 
                         <Chip
