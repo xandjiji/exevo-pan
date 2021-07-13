@@ -3,14 +3,20 @@ import {
   BASE_DATA_ENDPOINT,
   SERVER_DATA_PATH,
   CHARACTER_DATA_PATH,
+  ITEMS_DATA_PATH,
 } from '../../constants'
-import { setupCharacterData } from './utils'
-import { ServerDataResponse, MinifiedCharacterObject } from './types'
+import { buildCharacterData, filterItemData } from './utils'
+import {
+  ServerDataResponse,
+  MinifiedCharacterObject,
+  RareItemData,
+} from './types'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class ManageDataClient {
   static serverDataUrl = `${BASE_DATA_ENDPOINT}${SERVER_DATA_PATH}`
   static characterDataUrl = `${BASE_DATA_ENDPOINT}${CHARACTER_DATA_PATH}`
+  static itemsDataUrl = `${BASE_DATA_ENDPOINT}${ITEMS_DATA_PATH}`
 
   static async fetchServerData(): Promise<ServerObject[]> {
     try {
@@ -32,7 +38,7 @@ export default class ManageDataClient {
       const response = await fetch(this.characterDataUrl)
       const data = (await response.json()) as MinifiedCharacterObject[]
 
-      const builtCharacterData = setupCharacterData(data)
+      const builtCharacterData = buildCharacterData(data)
       saveToLocalStorage('auctionCharacterData', builtCharacterData)
 
       return builtCharacterData
@@ -42,6 +48,21 @@ export default class ManageDataClient {
         'auctionCharacterData',
         [],
       )
+    }
+  }
+
+  static async fetchItemData(): Promise<RareItemData> {
+    try {
+      const response = await fetch(this.serverDataUrl)
+      const data = (await response.json()) as RareItemData
+      const rareItemData = filterItemData(data)
+
+      saveToLocalStorage('rareItemData', rareItemData)
+
+      return rareItemData
+    } catch (error: unknown) {
+      console.log(error)
+      return getFromLocalStorage<RareItemData>('rareItemData', {})
     }
   }
 }

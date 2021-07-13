@@ -11,3 +11,5 @@ export type MinifiedCharacterObject = [
   number,
   number,
 ]
+
+export type RareItemData = Record<string, RareItemObject>

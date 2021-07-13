@@ -1,7 +1,7 @@
 import { minifiedToObject } from 'utils/dataDictionary'
-import { MinifiedCharacterObject } from './types'
+import { MinifiedCharacterObject, RareItemData } from './types'
 
-export const setupCharacterData = (
+export const buildCharacterData = (
   initialCharacterData: MinifiedCharacterObject[],
 ): CharacterObject[] => {
   /* @ ToDo: fix unknown typing after creating minifiedToObject */
@@ -21,4 +21,16 @@ export const setupCharacterData = (
   }
 
   return setupedCharacterData
+}
+
+export const filterItemData = (initialItemData: RareItemData): RareItemData => {
+  const filteredItemData = {}
+
+  for (const item in initialItemData) {
+    if (initialItemData[item].length > 0) {
+      filteredItemData[item] = initialItemData[item]
+    }
+  }
+
+  return filteredItemData
 }
