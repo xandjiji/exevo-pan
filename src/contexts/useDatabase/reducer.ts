@@ -1,16 +1,16 @@
-import { CharacterDataContextState, Action } from './types'
+import { DatabaseContextState, Action } from './types'
 
 export default (
-  state: CharacterDataContextState,
+  state: DatabaseContextState,
   action: Action,
-): CharacterDataContextState => {
+): DatabaseContextState => {
   switch (action.type) {
     case 'INITIAL_DATA_LOAD':
       return {
         ...state,
-        baseCharacterData: action.data,
-        sortedCharacterData: action.data,
-        characterData: action.data,
+        baseCharacterData: action.characterData,
+        characterData: action.characterData,
+        serverData: action.serverData,
       }
 
     case 'SET_LOADED':
@@ -19,7 +19,6 @@ export default (
         loading: false,
       }
 
-    /* @ ToDo: sort */
     /* @ ToDo: filter */
 
     default:
