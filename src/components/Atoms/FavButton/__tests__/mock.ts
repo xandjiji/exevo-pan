@@ -35,4 +35,12 @@ export const mockedCharacterObject = {
     'Speed',
   ],
   hasSoulwar: true,
+  serverData: {
+    battleye: true,
+    experimental: true,
+    pvpType: { name: 'Hardcore', type: 3 },
+    serverId: 30,
+    serverName: 'Pacera',
+    serverLocation: { name: 'BR', type: 2 },
+  },
 } as CharacterObject

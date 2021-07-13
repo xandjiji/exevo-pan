@@ -9,17 +9,8 @@ declare interface CharacterSkillsObject {
   shielding: number
 }
 
-declare interface CharacterObject {
-  id: number
-  nickname: string
-  auctionEnd: number
-  currentBid: number
-  hasBeenBidded: boolean
-  outfitId: string
-  serverId: number
-  vocationId: number
-  level: number
-  skills: CharacterSkillsObject
+declare interface CharacterObject extends IncompleteCharacterObject {
+  serverData: ServerObject
 }
 
 /*
