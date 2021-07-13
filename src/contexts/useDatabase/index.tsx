@@ -13,7 +13,7 @@ const defaultDatabaseState: DatabaseContextValues = {
 const DatabaseContext =
   createContext<DatabaseContextValues>(defaultDatabaseState)
 
-export const CharacterDataProvider: React.FC = ({ children }) => {
+export const DatabaseProvider: React.FC = ({ children }) => {
   const [{ loading, characterData, serverData }, dispatch] = useReducer(
     DatabaseDataReducer,
     {
