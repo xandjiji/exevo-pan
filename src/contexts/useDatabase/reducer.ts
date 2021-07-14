@@ -6,7 +6,7 @@ export default (
   action: Action,
 ): DatabaseContextState => {
   switch (action.type) {
-    case 'INITIAL_DATA_LOAD':
+    case 'INITIAL_CHARACTER_DATA_LOAD':
       return {
         ...state,
         baseCharacterData: action.characterData,
@@ -15,10 +15,10 @@ export default (
         rareItemData: action.rareItemData,
       }
 
-    case 'SET_LOADED':
+    case 'SET_LOADING':
       return {
         ...state,
-        loading: false,
+        loading: action.value,
       }
 
     case 'APPLY_FILTERS':

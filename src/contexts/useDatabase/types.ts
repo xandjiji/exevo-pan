@@ -3,6 +3,7 @@ export interface DatabaseContextValues {
   characterData: CharacterObject[]
   serverData: ServerObject[]
   rareItemData: RareItemData
+  historyData: CharacterObject[]
   dispatch: (action: Action) => void
 }
 
@@ -12,6 +13,8 @@ export interface DatabaseContextState {
   characterData: CharacterObject[]
   serverData: ServerObject[]
   rareItemData: RareItemData
+  baseHistoryData: CharacterObject[]
+  historyData: CharacterObject[]
 }
 
 export type Action =
@@ -20,11 +23,15 @@ export type Action =
       filters: FilterState
     }
   | {
-      type: 'INITIAL_DATA_LOAD'
+      type: 'INITIAL_CHARACTER_DATA_LOAD'
       characterData: CharacterObject[]
       serverData: ServerObject[]
       rareItemData: RareItemData
     }
-  | { type: 'SET_LOADED' }
-
-/* @ ToDo: filter */
+  | {
+      type: 'INITIAL_HISTORY_DATA_LOAD'
+      historyData: CharacterObject[]
+      serverData: ServerObject[]
+      rareItemData: RareItemData
+    }
+  | { type: 'SET_LOADING'; value: boolean }
