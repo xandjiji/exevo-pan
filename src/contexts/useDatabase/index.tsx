@@ -1,4 +1,12 @@
-import { createContext, useContext, useReducer, useEffect } from 'react'
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useCallback,
+  useState,
+} from 'react'
+import { useLocation } from 'react-router-dom'
 import { ManageDataClient } from 'services'
 import DatabaseDataReducer from './reducer'
 import { buildCharacterData } from './utils'
@@ -24,33 +32,39 @@ export const DatabaseProvider: React.FC = ({ children }) => {
       rareItemData: defaultDatabaseState.rareItemData,
     })
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [freshCharacterData, freshServerArray, freshItemData] =
-          await Promise.all([
-            ManageDataClient.fetchCharacterData(),
-            ManageDataClient.fetchServerData(),
-            ManageDataClient.fetchItemData(),
-          ])
+  const fetchCharacterData = useCallback(async () => {
+    try {
+      const [freshCharacterData, freshServerArray, freshItemData] =
+        await Promise.all([
+          ManageDataClient.fetchCharacterData(),
+          ManageDataClient.fetchServerData(),
+          ManageDataClient.fetchItemData(),
+        ])
 
-        const buildedCharacterData = buildCharacterData(
-          freshCharacterData,
-          freshServerArray,
-        )
+      const buildedCharacterData = buildCharacterData(
+        freshCharacterData,
+        freshServerArray,
+      )
 
-        dispatch({
-          type: 'INITIAL_DATA_LOAD',
-          characterData: buildedCharacterData,
-          serverData: freshServerArray,
-          rareItemData: freshItemData,
-        })
-      } finally {
-        dispatch({ type: 'SET_LOADED' })
-      }
+      dispatch({
+        type: 'INITIAL_DATA_LOAD',
+        characterData: buildedCharacterData,
+        serverData: freshServerArray,
+        rareItemData: freshItemData,
+      })
+    } finally {
+      dispatch({ type: 'SET_LOADED' })
     }
-    fetchData()
   }, [])
+
+  const { pathname } = useLocation()
+  const [homeLoaded, setHomeLoaded] = useState<boolean>(false)
+  useEffect(() => {
+    if (pathname === '/' && !homeLoaded) {
+      setHomeLoaded(true)
+      fetchCharacterData()
+    }
+  }, [pathname, fetchCharacterData, homeLoaded])
 
   return (
     <DatabaseContext.Provider
