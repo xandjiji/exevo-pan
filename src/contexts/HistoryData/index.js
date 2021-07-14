@@ -2,7 +2,7 @@ import React, { useEffect, useReducer, useState } from 'react';
 import { LoadingAlert } from 'components/Atoms';
 import HistoryDataContext from './context';
 
-import { characterDataReducer } from '../CharacterData/reducers';
+import { characterDataReducer } from './reducers';
 
 import { saveToLocalStorage, getFromLocalStorage } from 'utils';
 import { minifiedToObject } from '../../utils/dataDictionary';
