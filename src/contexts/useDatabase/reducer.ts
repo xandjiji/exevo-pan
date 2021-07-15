@@ -30,27 +30,17 @@ export default (
         loading: action.value,
       }
 
-    case 'APPLY_CHARACTER_FILTERS':
-      console.log(action.filters)
+    case 'APPLY_FILTERS': {
+      const isHistory = window.location.pathname === '/bazaar-history'
       return {
         ...state,
         characterData: filterCharacters(
-          state.baseCharacterData,
+          isHistory ? state.baseHistoryData : state.baseCharacterData,
           state.rareItemData,
           action.filters,
         ),
       }
-
-    case 'APPLY_HISTORY_FILTERS':
-      console.log(action.filters)
-      return {
-        ...state,
-        characterData: filterCharacters(
-          state.baseHistoryData,
-          state.rareItemData,
-          action.filters,
-        ),
-      }
+    }
 
     default:
       return { ...state }

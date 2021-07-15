@@ -19,11 +19,7 @@ export interface DatabaseContextState {
 
 export type Action =
   | {
-      type: 'APPLY_CHARACTER_FILTERS'
-      filters: FilterState
-    }
-  | {
-      type: 'APPLY_HISTORY_FILTERS'
+      type: 'APPLY_FILTERS'
       filters: FilterState
     }
   | {
