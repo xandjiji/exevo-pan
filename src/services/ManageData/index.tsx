@@ -1,6 +1,7 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import {
   BASE_DATA_ENDPOINT,
+  BASE_HISTORY_DATA_ENDPOINT,
   SERVER_DATA_PATH,
   CHARACTER_DATA_PATH,
   ITEMS_DATA_PATH,
@@ -13,7 +14,7 @@ export default class ManageDataClient {
   static serverDataUrl = `${BASE_DATA_ENDPOINT}${SERVER_DATA_PATH}`
   static characterDataUrl = `${BASE_DATA_ENDPOINT}${CHARACTER_DATA_PATH}`
   static rareItemDataUrl = `${BASE_DATA_ENDPOINT}${ITEMS_DATA_PATH}`
-  static historyHashDataUrl = `${BASE_DATA_ENDPOINT}${HISTORY_HASH_PATH}`
+  static historyHashDataUrl = `${BASE_HISTORY_DATA_ENDPOINT}${HISTORY_HASH_PATH}`
 
   static async fetchServerData(): Promise<ServerObject[]> {
     try {
@@ -81,6 +82,18 @@ export default class ManageDataClient {
     } catch (error: unknown) {
       console.log(error)
       return []
+    }
+  }
+
+  static async fetchBaseCharacterData(
+    fetchFor: 'INITIAL_CHARACTER_DATA_LOAD' | 'INITIAL_HISTORY_DATA_LOAD',
+  ): Promise<PartialCharacterObject[]> {
+    if (fetchFor === 'INITIAL_CHARACTER_DATA_LOAD') {
+      const data = await this.fetchCharacterData()
+      return data
+    } else {
+      const data = await this.fetchHistoryData()
+      return data
     }
   }
 }
