@@ -51,7 +51,7 @@ export default class ManageDataClient {
 
   static async fetchItemData(): Promise<RareItemData> {
     try {
-      const response = await fetch(this.historyHashDataUrl)
+      const response = await fetch(this.rareItemDataUrl)
       const data = (await response.json()) as RareItemData
       const rareItemData = filterItemData(data)
 
