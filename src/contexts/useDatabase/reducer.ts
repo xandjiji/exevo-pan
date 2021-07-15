@@ -30,11 +30,26 @@ export default (
         loading: action.value,
       }
 
-    case 'APPLY_FILTERS':
+    case 'APPLY_CHARACTER_FILTERS':
       console.log(action.filters)
       return {
         ...state,
-        characterData: filterCharacters(state, action.filters),
+        characterData: filterCharacters(
+          state.baseCharacterData,
+          state.rareItemData,
+          action.filters,
+        ),
+      }
+
+    case 'APPLY_HISTORY_FILTERS':
+      console.log(action.filters)
+      return {
+        ...state,
+        characterData: filterCharacters(
+          state.baseHistoryData,
+          state.rareItemData,
+          action.filters,
+        ),
       }
 
     default:

@@ -1,5 +1,4 @@
 /* eslint-disable complexity */
-import { DatabaseContextState } from '../../types'
 import {
   setupRareItemsAuctions,
   setDoesntHasValue,
@@ -8,11 +7,10 @@ import {
 } from './utils'
 
 export const filterCharacters = (
-  state: DatabaseContextState,
+  baseCharacterData: CharacterObject[],
+  rareItemData: RareItemData,
   filters: FilterState,
 ): CharacterObject[] => {
-  const { baseCharacterData, rareItemData } = state
-
   const {
     nicknameFilter,
     vocation: vocationFilter,
