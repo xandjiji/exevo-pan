@@ -4,7 +4,6 @@ import MasterLayout from './layouts/MasterLayout';
 
 import UrlParametersProvider from './contexts/UrlParameters';
 import { ThemeProvider } from 'contexts/useTheme';
-import HistoryDataProvider from './contexts/HistoryData';
 import { DatabaseProvider } from 'contexts/useDatabase';
 import SideDrawerProvider from './contexts/SideDrawer/'
 
@@ -17,13 +16,11 @@ const App = () => {
                 <UrlParametersProvider>
                     <ThemeProvider>
                         <DatabaseProvider>
-                            <HistoryDataProvider>
-                                <SideDrawerProvider>
+                            <SideDrawerProvider>
 
-                                    <MasterLayout />
+                                <MasterLayout />
 
-                                </SideDrawerProvider>
-                            </HistoryDataProvider>
+                            </SideDrawerProvider>
                         </DatabaseProvider>
                     </ThemeProvider>
                 </UrlParametersProvider>
