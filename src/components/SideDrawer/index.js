@@ -31,6 +31,8 @@ import UrlParametersContext from '../../contexts/UrlParameters/context';
 import SideDrawerContext from '../../contexts/SideDrawer/context';
 import { useDatabase } from 'contexts/useDatabase';
 
+import { useLocation } from 'react-router';
+
 const resetedFilterState = {
     nicknameFilter: '',
     vocation: new Set([]),
@@ -171,12 +173,23 @@ export default ({ backAction }) => {
     }, [addToFilterSet]);
 
 
+    const { pathname: pathnameHook } = useLocation()
     useEffect(() => {
-        if (active) setParamByKey('pageIndex', 0);
-        dispatch({
-            type: 'APPLY_FILTERS',
-            filters
-        })
+        if (active) {
+            setParamByKey('pageIndex', 0);
+            if (pathnameHook === '/') {
+                dispatch({
+                    type: 'APPLY_CHARACTER_FILTERS',
+                    filters
+                })
+            } else {
+                dispatch({
+                    type: 'APPLY_HISTORY_FILTERS',
+                    filters
+                })
+            }
+        }
+
     }, [filters]);
 
     const isAllItemsSelected = useCallback(() => {
