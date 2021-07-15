@@ -15,6 +15,15 @@ export default (
         rareItemData: action.rareItemData,
       }
 
+    case 'INITIAL_HISTORY_DATA_LOAD':
+      return {
+        ...state,
+        baseHistoryData: action.characterData,
+        historyData: action.characterData,
+        serverData: action.serverData,
+        rareItemData: action.rareItemData,
+      }
+
     case 'SET_LOADING':
       return {
         ...state,

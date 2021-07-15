@@ -30,7 +30,7 @@ export type Action =
     }
   | {
       type: 'INITIAL_HISTORY_DATA_LOAD'
-      historyData: CharacterObject[]
+      characterData: CharacterObject[]
       serverData: ServerObject[]
       rareItemData: RareItemData
     }

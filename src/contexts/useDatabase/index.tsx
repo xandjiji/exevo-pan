@@ -37,40 +37,50 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     historyData: defaultDatabaseState.historyData,
   })
 
-  const fetchCharacterData = useCallback(async () => {
-    dispatch({ type: 'SET_LOADING', value: true })
-    try {
-      const [freshCharacterData, freshServerArray, freshItemData] =
-        await Promise.all([
-          ManageDataClient.fetchCharacterData(),
-          ManageDataClient.fetchServerData(),
-          ManageDataClient.fetchItemData(),
-        ])
+  const fetchCharacterData = useCallback(
+    async (
+      actionType: 'INITIAL_CHARACTER_DATA_LOAD' | 'INITIAL_HISTORY_DATA_LOAD',
+    ) => {
+      dispatch({ type: 'SET_LOADING', value: true })
+      try {
+        const [freshCharacterData, freshServerArray, freshItemData] =
+          await Promise.all([
+            ManageDataClient.fetchBaseCharacterData(actionType),
+            ManageDataClient.fetchServerData(),
+            ManageDataClient.fetchItemData(),
+          ])
 
-      const buildedCharacterData = buildCharacterData(
-        freshCharacterData,
-        freshServerArray,
-      )
+        const buildedCharacterData = buildCharacterData(
+          freshCharacterData,
+          freshServerArray,
+        )
 
-      dispatch({
-        type: 'INITIAL_CHARACTER_DATA_LOAD',
-        characterData: buildedCharacterData,
-        serverData: freshServerArray,
-        rareItemData: freshItemData,
-      })
-    } finally {
-      dispatch({ type: 'SET_LOADING', value: false })
-    }
-  }, [])
+        dispatch({
+          type: actionType,
+          characterData: buildedCharacterData,
+          serverData: freshServerArray,
+          rareItemData: freshItemData,
+        })
+      } finally {
+        dispatch({ type: 'SET_LOADING', value: false })
+      }
+    },
+    [],
+  )
 
   const { pathname } = useLocation()
   const [homeLoaded, setHomeLoaded] = useState<boolean>(false)
+  const [historyLoaded, setHistoryLoaded] = useState<boolean>(false)
   useEffect(() => {
     if (pathname === '/' && !homeLoaded) {
       setHomeLoaded(true)
-      fetchCharacterData()
+      fetchCharacterData('INITIAL_CHARACTER_DATA_LOAD')
     }
-  }, [pathname, fetchCharacterData, homeLoaded])
+    if (pathname === '/bazaar-history' && !historyLoaded) {
+      setHistoryLoaded(true)
+      fetchCharacterData('INITIAL_HISTORY_DATA_LOAD')
+    }
+  }, [pathname, fetchCharacterData, homeLoaded, historyLoaded])
 
   return (
     <DatabaseContext.Provider
