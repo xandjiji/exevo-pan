@@ -80,3 +80,8 @@ export const checkAndHash = async (
     return parsedDataArray
   }
 }
+
+export const getPercentage = (part: number, whole: number): string => {
+  const percentage = Math.round((part / whole) * 100)
+  return `${percentage}%`
+}

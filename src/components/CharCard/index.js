@@ -72,6 +72,7 @@ export default ({ charData }) => {
     }
 
     /* @ ToDo: remove this once skeleton logic is complete */
+    /* be careful with SET_LOADING dispatches */
     if (!serverData) return null;
 
     return (

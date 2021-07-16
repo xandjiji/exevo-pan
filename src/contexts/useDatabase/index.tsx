@@ -38,13 +38,16 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     historyData: defaultDatabaseState.historyData,
   })
 
+  const [loadedPercentage, setLoadedPercentage] = useState<string | null>()
+
   const fetchCharacterData = useCallback(async (isHistory: boolean) => {
+    setLoadedPercentage(null)
     dispatch({ type: 'SET_LOADING', value: true })
     try {
       const [freshCharacterData, freshServerArray, freshItemData] =
         await Promise.all([
           isHistory
-            ? ManageDataClient.fetchHistoryData()
+            ? ManageDataClient.fetchHistoryData(setLoadedPercentage)
             : ManageDataClient.fetchCharacterData(),
           ManageDataClient.fetchServerData(),
           ManageDataClient.fetchItemData(),
@@ -63,6 +66,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         isHistory,
       })
     } finally {
+      setLoadedPercentage(null)
       dispatch({ type: 'SET_LOADING', value: false })
     }
   }, [])
@@ -93,7 +97,9 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         dispatch,
       }}
     >
-      {loading && <LoadingAlert>Updating data...</LoadingAlert>}
+      {loading && (
+        <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
+      )}
       {children}
     </DatabaseContext.Provider>
   )

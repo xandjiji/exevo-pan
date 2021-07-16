@@ -7,7 +7,12 @@ import {
   ITEMS_DATA_PATH,
   HISTORY_HASH_PATH,
 } from '../../constants'
-import { buildCharacterData, filterItemData, checkAndHash } from './utils'
+import {
+  buildCharacterData,
+  filterItemData,
+  checkAndHash,
+  getPercentage,
+} from './utils'
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class ManageDataClient {
@@ -64,7 +69,9 @@ export default class ManageDataClient {
     }
   }
 
-  static async fetchHistoryData(): Promise<PartialCharacterObject[]> {
+  static async fetchHistoryData(
+    setCurrentLoadProgress: (percentage: string) => void,
+  ): Promise<PartialCharacterObject[]> {
     try {
       const response = await fetch(this.historyHashDataUrl)
       const data = (await response.json()) as number[]
@@ -74,8 +81,7 @@ export default class ManageDataClient {
         // eslint-disable-next-line no-await-in-loop
         const dataPage = await checkAndHash(hash, index)
         historyData = [...historyData, ...dataPage]
-        /* @ ToDo: add percentage alert to provider */
-        /* setPercentage(getPercentage(index, data.length)) */
+        setCurrentLoadProgress(getPercentage(index, data.length))
       }
 
       return historyData.sort((a, b) => b.auctionEnd - a.auctionEnd)
