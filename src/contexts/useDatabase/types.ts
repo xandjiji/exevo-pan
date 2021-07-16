@@ -23,13 +23,7 @@ export type Action =
       filters: FilterState
     }
   | {
-      type: 'INITIAL_CHARACTER_DATA_LOAD'
-      characterData: CharacterObject[]
-      serverData: ServerObject[]
-      rareItemData: RareItemData
-    }
-  | {
-      type: 'INITIAL_HISTORY_DATA_LOAD'
+      type: 'INITIAL_DATA_LOAD'
       characterData: CharacterObject[]
       serverData: ServerObject[]
       rareItemData: RareItemData

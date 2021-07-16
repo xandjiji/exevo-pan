@@ -5,23 +5,26 @@ export default (
   state: DatabaseContextState,
   action: Action,
 ): DatabaseContextState => {
-  switch (action.type) {
-    case 'INITIAL_CHARACTER_DATA_LOAD':
-      return {
-        ...state,
-        baseCharacterData: action.characterData,
-        characterData: action.characterData,
-        serverData: action.serverData,
-        rareItemData: action.rareItemData,
-      }
+  const isHistory = window.location.pathname === '/bazaar-history'
 
-    case 'INITIAL_HISTORY_DATA_LOAD':
-      return {
-        ...state,
-        baseHistoryData: action.characterData,
-        historyData: action.characterData,
-        serverData: action.serverData,
-        rareItemData: action.rareItemData,
+  switch (action.type) {
+    case 'INITIAL_DATA_LOAD':
+      if (isHistory) {
+        return {
+          ...state,
+          baseHistoryData: action.characterData,
+          historyData: action.characterData,
+          serverData: action.serverData,
+          rareItemData: action.rareItemData,
+        }
+      } else {
+        return {
+          ...state,
+          baseCharacterData: action.characterData,
+          characterData: action.characterData,
+          serverData: action.serverData,
+          rareItemData: action.rareItemData,
+        }
       }
 
     case 'SET_LOADING':
@@ -30,17 +33,26 @@ export default (
         loading: action.value,
       }
 
-    case 'APPLY_FILTERS': {
-      const isHistory = window.location.pathname === '/bazaar-history'
-      return {
-        ...state,
-        characterData: filterCharacters(
-          isHistory ? state.baseHistoryData : state.baseCharacterData,
-          state.rareItemData,
-          action.filters,
-        ),
+    case 'APPLY_FILTERS':
+      if (isHistory) {
+        return {
+          ...state,
+          historyData: filterCharacters(
+            state.baseHistoryData,
+            state.rareItemData,
+            action.filters,
+          ),
+        }
+      } else {
+        return {
+          ...state,
+          characterData: filterCharacters(
+            state.baseCharacterData,
+            state.rareItemData,
+            action.filters,
+          ),
+        }
       }
-    }
 
     default:
       return { ...state }
