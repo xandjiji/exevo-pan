@@ -174,9 +174,11 @@ export default ({ backAction }) => {
     useEffect(() => {
         if (active) {
             setParamByKey('pageIndex', 0);
+            const isHistory = window.location.pathname === '/bazaar-history'
             dispatch({
                 type: 'APPLY_FILTERS',
-                filters
+                filters,
+                isHistory
             })
         }
 

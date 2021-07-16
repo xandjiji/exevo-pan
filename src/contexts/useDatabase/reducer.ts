@@ -5,11 +5,9 @@ export default (
   state: DatabaseContextState,
   action: Action,
 ): DatabaseContextState => {
-  const isHistory = window.location.pathname === '/bazaar-history'
-
   switch (action.type) {
     case 'INITIAL_DATA_LOAD':
-      if (isHistory) {
+      if (action.isHistory) {
         return {
           ...state,
           baseHistoryData: action.characterData,
@@ -34,7 +32,7 @@ export default (
       }
 
     case 'APPLY_FILTERS':
-      if (isHistory) {
+      if (action.isHistory) {
         return {
           ...state,
           historyData: filterCharacters(

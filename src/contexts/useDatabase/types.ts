@@ -21,11 +21,13 @@ export type Action =
   | {
       type: 'APPLY_FILTERS'
       filters: FilterState
+      isHistory: boolean
     }
   | {
       type: 'INITIAL_DATA_LOAD'
       characterData: CharacterObject[]
       serverData: ServerObject[]
       rareItemData: RareItemData
+      isHistory: boolean
     }
   | { type: 'SET_LOADING'; value: boolean }

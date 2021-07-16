@@ -37,10 +37,9 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     historyData: defaultDatabaseState.historyData,
   })
 
-  const fetchCharacterData = useCallback(async () => {
+  const fetchCharacterData = useCallback(async (isHistory: boolean) => {
     dispatch({ type: 'SET_LOADING', value: true })
     try {
-      const isHistory = window.location.pathname === '/bazaar-history'
       const [freshCharacterData, freshServerArray, freshItemData] =
         await Promise.all([
           isHistory
@@ -60,6 +59,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         characterData: buildedCharacterData,
         serverData: freshServerArray,
         rareItemData: freshItemData,
+        isHistory,
       })
     } finally {
       dispatch({ type: 'SET_LOADING', value: false })
@@ -70,13 +70,14 @@ export const DatabaseProvider: React.FC = ({ children }) => {
   const [homeLoaded, setHomeLoaded] = useState<boolean>(false)
   const [historyLoaded, setHistoryLoaded] = useState<boolean>(false)
   useEffect(() => {
+    const isHistory = window.location.pathname === '/bazaar-history'
     if (pathname === '/' && !homeLoaded) {
       setHomeLoaded(true)
-      fetchCharacterData()
+      fetchCharacterData(isHistory)
     }
     if (pathname === '/bazaar-history' && !historyLoaded) {
       setHistoryLoaded(true)
-      fetchCharacterData()
+      fetchCharacterData(isHistory)
     }
   }, [pathname, fetchCharacterData, homeLoaded, historyLoaded])
 
