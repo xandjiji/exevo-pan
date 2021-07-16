@@ -49,10 +49,11 @@ export const filterCharacters = (
       nickname: currentNickname,
       hasSoulwar: currentSoulwar,
       imbuements: currentImbuements,
+      serverId: currentServerId,
     } = currentCharacter
 
-    /* @ ToDo: is this necessary?? */
-    /* if (!serverData[serverId]) continue; */
+    /* @ ToDo: remove this once the database is fixed */
+    if (currentServerId === -1) continue
 
     if (!!nicknameFilter && !nicknameRegex.test(currentNickname)) continue
 
