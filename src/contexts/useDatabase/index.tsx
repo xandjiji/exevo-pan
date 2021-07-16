@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ManageDataClient } from 'services'
+import { LoadingAlert } from 'components/Atoms'
 import DatabaseDataReducer from './reducer'
 import { buildCharacterData } from './utils'
 import { DatabaseContextValues } from './types'
@@ -92,6 +93,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         dispatch,
       }}
     >
+      {loading && <LoadingAlert>Updating data...</LoadingAlert>}
       {children}
     </DatabaseContext.Provider>
   )
