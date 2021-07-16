@@ -84,16 +84,4 @@ export default class ManageDataClient {
       return []
     }
   }
-
-  static async fetchBaseCharacterData(
-    fetchFor: 'INITIAL_CHARACTER_DATA_LOAD' | 'INITIAL_HISTORY_DATA_LOAD',
-  ): Promise<PartialCharacterObject[]> {
-    if (fetchFor === 'INITIAL_CHARACTER_DATA_LOAD') {
-      const data = await this.fetchCharacterData()
-      return data
-    } else {
-      const data = await this.fetchHistoryData()
-      return data
-    }
-  }
 }
