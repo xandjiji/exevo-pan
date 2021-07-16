@@ -6,6 +6,9 @@ import {
   CHARACTER_DATA_PATH,
   ITEMS_DATA_PATH,
   HISTORY_HASH_PATH,
+  SERVER_DATA_KEY,
+  AUCTION_CHARACTER_DATA_KEY,
+  RARE_ITEM_DATA_KEY,
 } from '../../constants'
 import {
   buildCharacterData,
@@ -27,12 +30,12 @@ export default class ManageDataClient {
       const data = (await response.json()) as Record<string, ServerObject>
       const serverArray = Object.values(data)
 
-      saveToLocalStorage('serverData', serverArray)
+      saveToLocalStorage(SERVER_DATA_KEY, serverArray)
 
       return serverArray
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<ServerObject[]>('serverData', [])
+      return getFromLocalStorage<ServerObject[]>(SERVER_DATA_KEY, [])
     }
   }
 
@@ -42,13 +45,13 @@ export default class ManageDataClient {
       const data = (await response.json()) as MinifiedCharacterObject[]
 
       const builtCharacterData = buildCharacterData(data)
-      saveToLocalStorage('auctionCharacterData', builtCharacterData)
+      saveToLocalStorage(AUCTION_CHARACTER_DATA_KEY, builtCharacterData)
 
       return builtCharacterData
     } catch (error: unknown) {
       console.log(error)
       return getFromLocalStorage<PartialCharacterObject[]>(
-        'auctionCharacterData',
+        AUCTION_CHARACTER_DATA_KEY,
         [],
       )
     }
@@ -60,12 +63,12 @@ export default class ManageDataClient {
       const data = (await response.json()) as RareItemData
       const rareItemData = filterItemData(data)
 
-      saveToLocalStorage('rareItemData', rareItemData)
+      saveToLocalStorage(RARE_ITEM_DATA_KEY, rareItemData)
 
       return rareItemData
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<RareItemData>('rareItemData', {})
+      return getFromLocalStorage<RareItemData>(RARE_ITEM_DATA_KEY, {})
     }
   }
 

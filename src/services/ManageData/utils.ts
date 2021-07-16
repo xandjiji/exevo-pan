@@ -1,7 +1,11 @@
 import { get, set } from 'idb-keyval'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import { minifiedToObject } from 'utils/dataDictionary'
-import { BASE_HISTORY_DATA_ENDPOINT } from '../../constants'
+import {
+  BASE_HISTORY_DATA_ENDPOINT,
+  HISTORY_HASH_KEY_PREFIX,
+  HISTORY_DATA_KEY_PREFIX,
+} from '../../constants'
 
 /* @ ToDo: fix unknown typing after creating minifiedToObject */
 
@@ -46,13 +50,16 @@ const buildDB = async (
   ) as unknown as CharacterObject[]
   const stringfiedData = JSON.stringify(data)
 
-  await set(`historyData${index}`, stringfiedData)
+  await set(`${HISTORY_DATA_KEY_PREFIX}${index}`, stringfiedData)
 
   return parsedDataArray
 }
 
 const getFromDB = async (index: number): Promise<CharacterObject[]> => {
-  const stringfiedData = (await get<string>(`historyData${index}`)) as string
+  /* @ ToDo: add this to constants */
+  const stringfiedData = (await get<string>(
+    `${HISTORY_DATA_KEY_PREFIX}${index}`,
+  )) as string
 
   const parsedData = JSON.parse(stringfiedData) as MinifiedCharacterObject[]
   return parsedData.map(minifiedToObject) as unknown as CharacterObject[]
@@ -62,7 +69,7 @@ export const checkAndHash = async (
   hash: number,
   index: number,
 ): Promise<CharacterObject[]> => {
-  const pageName = `historyHash${index}`
+  const pageName = `${HISTORY_HASH_KEY_PREFIX}${index}`
   const pageHash = getFromLocalStorage(pageName, 0)
 
   if (pageHash === hash) {
@@ -70,7 +77,7 @@ export const checkAndHash = async (
     return characterData
   } else {
     const response = await fetch(
-      `${BASE_HISTORY_DATA_ENDPOINT}/historyData${index}.json`,
+      `${BASE_HISTORY_DATA_ENDPOINT}/${HISTORY_DATA_KEY_PREFIX}${index}.json`,
     )
     const data = (await response.json()) as MinifiedCharacterObject[]
     const parsedDataArray = await buildDB(index, data)

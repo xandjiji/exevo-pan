@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { getFavArray, saveToLocalStorage } from 'utils'
+import { FAV_CHARACTER_DATA_KEY } from '../../../constants'
 import { isIdFavorited } from './utils'
 import * as S from './styles'
 import { FavButtonProps } from './types'
@@ -23,7 +24,7 @@ const FavButton = ({
       setActive(true)
     }
 
-    saveToLocalStorage('initialFavCharacterData', favArray)
+    saveToLocalStorage(FAV_CHARACTER_DATA_KEY, favArray)
 
     function findCharacterIndexById(id: number) {
       for (let i = 0; i < favArray.length; i++) {
