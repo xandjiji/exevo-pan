@@ -71,7 +71,8 @@ export default ({ charData }) => {
         }
     }
 
-    if (Object.keys(serverData).length === 0) return null;
+    /* @ ToDo: remove this once skeleton logic is complete */
+    if (!serverData) return null;
 
     return (
         <CharCard className="shadow">
