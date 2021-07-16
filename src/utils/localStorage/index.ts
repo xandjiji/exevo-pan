@@ -1,4 +1,4 @@
-import { FAV_CHARACTER_DATA_KEY } from '../../constants'
+import { FAV_CHARACTER_DATA_KEY } from 'Constants'
 
 export function saveToLocalStorage<T>(key: string, data: T): void {
   const serializedData = JSON.stringify(data)

@@ -5,7 +5,7 @@ import {
   BASE_HISTORY_DATA_ENDPOINT,
   HISTORY_HASH_KEY_PREFIX,
   HISTORY_DATA_KEY_PREFIX,
-} from '../../constants'
+} from 'Constants'
 
 /* @ ToDo: fix unknown typing after creating minifiedToObject */
 

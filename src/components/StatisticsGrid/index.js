@@ -8,7 +8,7 @@ import List from '../List';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 
-import { BASE_HISTORY_DATA_ENDPOINT, OVERALL_STATISTICS_PATH } from '../../constants'
+import { BASE_HISTORY_DATA_ENDPOINT, OVERALL_STATISTICS_PATH } from 'Constants'
 
 import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
 

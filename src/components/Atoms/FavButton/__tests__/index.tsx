@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { getFavArray, saveToLocalStorage } from 'utils'
 import { renderWithProviders } from 'utils/test'
-import { FAV_CHARACTER_DATA_KEY } from '../../../../constants'
+import { FAV_CHARACTER_DATA_KEY } from 'Constants'
 import FavButton from '..'
 import { mockedCharacterObject } from './mock'
 

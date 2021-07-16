@@ -9,7 +9,7 @@ import {
   SERVER_DATA_KEY,
   AUCTION_CHARACTER_DATA_KEY,
   RARE_ITEM_DATA_KEY,
-} from '../../constants'
+} from 'Constants'
 import {
   buildCharacterData,
   filterItemData,

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { getFavArray, saveToLocalStorage } from 'utils'
-import { FAV_CHARACTER_DATA_KEY } from '../../../constants'
+import { FAV_CHARACTER_DATA_KEY } from 'Constants'
 import { isIdFavorited } from './utils'
 import * as S from './styles'
 import { FavButtonProps } from './types'

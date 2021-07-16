@@ -1,10 +1,10 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import ManageDataClient from '../..'
 import {
   BASE_DATA_ENDPOINT,
   SERVER_DATA_PATH,
   SERVER_DATA_KEY,
-} from '../../../../constants'
+} from 'Constants'
+import ManageDataClient from '../..'
 import { mockedFetchData, mockedSuccessReturnedValue } from './mock'
 
 global.fetch = jest.fn()
