@@ -8,7 +8,6 @@ export interface DatabaseContextValues {
 }
 
 export interface DatabaseContextState {
-  loading: boolean
   baseCharacterData: CharacterObject[]
   characterData: CharacterObject[]
   serverData: ServerObject[]
@@ -30,4 +29,3 @@ export type Action =
       rareItemData: RareItemData
       isHistory: boolean
     }
-  | { type: 'SET_LOADING'; value: boolean }

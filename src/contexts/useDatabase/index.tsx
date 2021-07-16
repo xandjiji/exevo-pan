@@ -10,6 +10,7 @@ import { useLocation } from 'react-router-dom'
 import { ManageDataClient } from 'services'
 import { LoadingAlert } from 'components/Atoms'
 import DatabaseDataReducer from './reducer'
+import LoadingReducer from './LoadingReducer'
 import { buildCharacterData } from './utils'
 import { DatabaseContextValues } from './types'
 
@@ -25,24 +26,32 @@ const DatabaseContext =
   createContext<DatabaseContextValues>(defaultDatabaseState)
 
 export const DatabaseProvider: React.FC = ({ children }) => {
-  const [
-    { loading, characterData, serverData, rareItemData, historyData },
-    dispatch,
-  ] = useReducer(DatabaseDataReducer, {
-    loading: defaultDatabaseState.loading,
-    baseCharacterData: defaultDatabaseState.characterData,
-    characterData: defaultDatabaseState.characterData,
-    serverData: defaultDatabaseState.serverData,
-    rareItemData: defaultDatabaseState.rareItemData,
-    baseHistoryData: defaultDatabaseState.historyData,
-    historyData: defaultDatabaseState.historyData,
-  })
+  const [{ characterData, serverData, rareItemData, historyData }, dispatch] =
+    useReducer(DatabaseDataReducer, {
+      baseCharacterData: defaultDatabaseState.characterData,
+      characterData: defaultDatabaseState.characterData,
+      serverData: defaultDatabaseState.serverData,
+      rareItemData: defaultDatabaseState.rareItemData,
+      baseHistoryData: defaultDatabaseState.historyData,
+      historyData: defaultDatabaseState.historyData,
+    })
+
+  const [{ loadingPaths, navigated }, dispatchLoad] = useReducer(
+    LoadingReducer,
+    {
+      loadingPaths: [],
+      navigated: [],
+    },
+  )
+
+  const { pathname } = useLocation()
+  const loading = loadingPaths.includes(pathname)
 
   const [loadedPercentage, setLoadedPercentage] = useState<string | null>()
-
-  const fetchCharacterData = useCallback(async (isHistory: boolean) => {
+  const fetchCharacterData = useCallback(async (currentPath: string) => {
+    const isHistory = currentPath === '/bazaar-history'
     setLoadedPercentage(null)
-    dispatch({ type: 'SET_LOADING', value: true })
+
     try {
       const [freshCharacterData, freshServerArray, freshItemData] =
         await Promise.all([
@@ -67,24 +76,17 @@ export const DatabaseProvider: React.FC = ({ children }) => {
       })
     } finally {
       setLoadedPercentage(null)
-      dispatch({ type: 'SET_LOADING', value: false })
+      dispatchLoad({ type: 'FINISH_LOADING', path: currentPath })
     }
   }, [])
 
-  const { pathname } = useLocation()
-  const [homeLoaded, setHomeLoaded] = useState<boolean>(false)
-  const [historyLoaded, setHistoryLoaded] = useState<boolean>(false)
   useEffect(() => {
-    const isHistory = window.location.pathname === '/bazaar-history'
-    if (pathname === '/' && !homeLoaded) {
-      setHomeLoaded(true)
-      fetchCharacterData(isHistory)
+    /* @ ToDo: this will trigger in other paths */
+    if (!navigated.includes(pathname)) {
+      dispatchLoad({ type: 'START_LOADING', path: pathname })
+      fetchCharacterData(pathname)
     }
-    if (pathname === '/bazaar-history' && !historyLoaded) {
-      setHistoryLoaded(true)
-      fetchCharacterData(isHistory)
-    }
-  }, [pathname, fetchCharacterData, homeLoaded, historyLoaded])
+  }, [pathname, navigated, fetchCharacterData])
 
   return (
     <DatabaseContext.Provider

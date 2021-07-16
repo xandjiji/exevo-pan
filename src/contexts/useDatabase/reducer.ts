@@ -25,12 +25,6 @@ export default (
         }
       }
 
-    case 'SET_LOADING':
-      return {
-        ...state,
-        loading: action.value,
-      }
-
     case 'APPLY_FILTERS':
       if (action.isHistory) {
         return {
