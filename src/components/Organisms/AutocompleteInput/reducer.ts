@@ -8,7 +8,7 @@ export default (
   const { highlightedIndex } = state
 
   switch (action.type) {
-    case 'userTyping':
+    case 'USER_TYPING':
       return {
         ...state,
         inputValue: action.value,
@@ -16,7 +16,7 @@ export default (
         listboxStatus: true,
       }
 
-    case 'optionSelected':
+    case 'OPTION_SELECTED':
       return {
         ...state,
         inputValue: '',
@@ -24,7 +24,7 @@ export default (
         listboxStatus: false,
       }
 
-    case 'arrowNavigation': {
+    case 'ARROW_NAVIGATION': {
       let newIndex: number
       if (highlightedIndex === undefined) {
         newIndex = action.value === 1 ? 0 : action.list.length - 1
@@ -42,7 +42,7 @@ export default (
       }
     }
 
-    case 'setListboxStatus':
+    case 'SET_LISTBOX_STATUS':
       return { ...state, listboxStatus: action.value }
 
     default:

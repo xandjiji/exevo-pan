@@ -5,7 +5,7 @@ import { indexToId } from 'components/Atoms/Listbox/utils'
 import * as S from './styles'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
-import autocompleteInputReducer from './reducer'
+import AutocompleteInputReducer from './reducer'
 
 const AutocompleteInput = ({
   className,
@@ -18,7 +18,7 @@ const AutocompleteInput = ({
 
   const [currentList, setCurrentList] = useState<Option[]>(itemList)
   const [{ listboxStatus, highlightedIndex, inputValue }, dispatch] =
-    useReducer(autocompleteInputReducer, {
+    useReducer(AutocompleteInputReducer, {
       listboxStatus: false,
       highlightedIndex: undefined,
       inputValue: '',
@@ -26,7 +26,7 @@ const AutocompleteInput = ({
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({ type: 'userTyping', value: event.target.value })
+      dispatch({ type: 'USER_TYPING', value: event.target.value })
       setCurrentList(filterByTerm(event.target.value, itemList))
     },
     [itemList],
@@ -36,7 +36,7 @@ const AutocompleteInput = ({
     switch (event.code) {
       case 'ArrowUp':
         dispatch({
-          type: 'arrowNavigation',
+          type: 'ARROW_NAVIGATION',
           value: -1,
           list: currentList,
         })
@@ -44,7 +44,7 @@ const AutocompleteInput = ({
         break
       case 'ArrowDown':
         dispatch({
-          type: 'arrowNavigation',
+          type: 'ARROW_NAVIGATION',
           value: 1,
           list: currentList,
         })
@@ -54,10 +54,10 @@ const AutocompleteInput = ({
       case 'NumpadEnter':
         if (currentList.length === 1) {
           onItemSelect?.(currentList[0])
-          dispatch({ type: 'optionSelected' })
+          dispatch({ type: 'OPTION_SELECTED' })
         } else if (highlightedIndex !== undefined) {
           onItemSelect?.(currentList[highlightedIndex])
-          dispatch({ type: 'optionSelected' })
+          dispatch({ type: 'OPTION_SELECTED' })
         }
         break
       default:
@@ -94,7 +94,7 @@ const AutocompleteInput = ({
                 value={item.value}
                 onMouseDown={() => {
                   onItemSelect?.(item)
-                  dispatch({ type: 'optionSelected' })
+                  dispatch({ type: 'OPTION_SELECTED' })
                 }}
               >
                 {item.name}
@@ -112,8 +112,8 @@ const AutocompleteInput = ({
           allowClear
           value={inputValue}
           onChange={handleChange}
-          onFocus={() => dispatch({ type: 'setListboxStatus', value: true })}
-          onBlur={() => dispatch({ type: 'setListboxStatus', value: false })}
+          onFocus={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
+          onBlur={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
           onKeyDown={handleKeyboard}
           {...props}
         />

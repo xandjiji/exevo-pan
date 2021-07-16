@@ -14,7 +14,7 @@ export interface AutocompleteInputState {
 }
 
 export type Action =
-  | { type: 'arrowNavigation'; value: number; list: Option[] }
-  | { type: 'optionSelected' }
-  | { type: 'setListboxStatus'; value: boolean }
-  | { type: 'userTyping'; value: string }
+  | { type: 'ARROW_NAVIGATION'; value: number; list: Option[] }
+  | { type: 'OPTION_SELECTED' }
+  | { type: 'SET_LISTBOX_STATUS'; value: boolean }
+  | { type: 'USER_TYPING'; value: string }
