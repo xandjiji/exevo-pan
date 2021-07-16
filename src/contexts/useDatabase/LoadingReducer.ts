@@ -25,14 +25,13 @@ export default (
         loadingPaths: [...state.loadingPaths, action.path],
       }
 
-    case 'FINISH_LOADING': {
+    case 'FINISH_LOADING':
       return {
         ...state,
         loadingPaths: [...state.loadingPaths].filter(
           path => action.path !== path,
         ),
       }
-    }
 
     default:
       return { ...state }
