@@ -76,10 +76,11 @@ export const DatabaseProvider: React.FC = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    /* @ ToDo: this will trigger in other paths */
-    if (!navigated.includes(pathname)) {
-      dispatchLoad({ type: 'START_LOADING', path: pathname })
-      fetchCharacterData(pathname)
+    if (pathname === '/' || pathname === '/bazaar-history') {
+      if (!navigated.includes(pathname)) {
+        dispatchLoad({ type: 'START_LOADING', path: pathname })
+        fetchCharacterData(pathname)
+      }
     }
   }, [pathname, navigated, fetchCharacterData])
 
