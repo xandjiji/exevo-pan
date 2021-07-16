@@ -9,7 +9,7 @@ import {
 import { useLocation } from 'react-router-dom'
 import { ManageDataClient } from 'services'
 import { LoadingAlert } from 'components/Atoms'
-import DatabaseDataReducer from './reducer'
+import DatabaseReducer from './DatabaseReducer'
 import LoadingReducer from './LoadingReducer'
 import { buildCharacterData } from './utils'
 import { DatabaseContextValues } from './types'
@@ -27,7 +27,7 @@ const DatabaseContext =
 
 export const DatabaseProvider: React.FC = ({ children }) => {
   const [{ characterData, serverData, rareItemData, historyData }, dispatch] =
-    useReducer(DatabaseDataReducer, {
+    useReducer(DatabaseReducer, {
       baseCharacterData: defaultDatabaseState.characterData,
       characterData: defaultDatabaseState.characterData,
       serverData: defaultDatabaseState.serverData,
@@ -62,14 +62,9 @@ export const DatabaseProvider: React.FC = ({ children }) => {
           ManageDataClient.fetchItemData(),
         ])
 
-      const buildedCharacterData = buildCharacterData(
-        freshCharacterData,
-        freshServerArray,
-      )
-
       dispatch({
         type: 'INITIAL_DATA_LOAD',
-        characterData: buildedCharacterData,
+        characterData: buildCharacterData(freshCharacterData, freshServerArray),
         serverData: freshServerArray,
         rareItemData: freshItemData,
         isHistory,

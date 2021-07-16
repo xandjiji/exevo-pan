@@ -1,10 +1,10 @@
-import { DatabaseContextState, Action } from './types'
+import { DatabaseReducerState, Action } from './types'
 import { filterCharacters } from './utils'
 
 export default (
-  state: DatabaseContextState,
+  state: DatabaseReducerState,
   action: Action,
-): DatabaseContextState => {
+): DatabaseReducerState => {
   switch (action.type) {
     case 'INITIAL_DATA_LOAD':
       if (action.isHistory) {

@@ -7,7 +7,7 @@ export interface DatabaseContextValues {
   dispatch: (action: Action) => void
 }
 
-export interface DatabaseContextState {
+export interface DatabaseReducerState {
   baseCharacterData: CharacterObject[]
   characterData: CharacterObject[]
   serverData: ServerObject[]

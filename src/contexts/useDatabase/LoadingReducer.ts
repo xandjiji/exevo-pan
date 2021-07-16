@@ -3,7 +3,7 @@ interface LoadingReducerState {
   navigated: string[]
 }
 
-type LoadingAction =
+type Action =
   | {
       type: 'FINISH_LOADING'
       path: string
@@ -15,7 +15,7 @@ type LoadingAction =
 
 export default (
   state: LoadingReducerState,
-  action: LoadingAction,
+  action: Action,
 ): LoadingReducerState => {
   switch (action.type) {
     case 'START_LOADING':
