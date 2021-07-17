@@ -79,7 +79,7 @@ export default class ManageDataClient {
       const response = await fetch(this.historyHashDataUrl)
       const data = (await response.json()) as number[]
 
-      let historyData: CharacterObject[] = []
+      let historyData: PartialCharacterObject[] = []
       for (const [index, hash] of data.entries()) {
         // eslint-disable-next-line no-await-in-loop
         const dataPage = await checkAndHash(hash, index)

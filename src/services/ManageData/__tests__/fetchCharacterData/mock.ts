@@ -1521,4 +1521,4 @@ export const mockedBuildedData = [
     ],
     hasSoulwar: false,
   },
-] as CharacterObject[]
+] as PartialCharacterObject[]

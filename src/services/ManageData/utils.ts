@@ -11,10 +11,11 @@ import {
 
 export const buildCharacterData = (
   initialCharacterData: MinifiedCharacterObject[],
-): CharacterObject[] => {
-  const setupedCharacterData: CharacterObject[] = initialCharacterData.map(
-    minifiedToObject,
-  ) as unknown as CharacterObject[]
+): PartialCharacterObject[] => {
+  const setupedCharacterData: PartialCharacterObject[] =
+    initialCharacterData.map(
+      minifiedToObject,
+    ) as unknown as PartialCharacterObject[]
 
   const mutatedSetupedCharacterData = [...setupedCharacterData]
 
@@ -46,7 +47,7 @@ export const filterItemData = (initialItemData: RareItemData): RareItemData => {
 const buildDB = async (
   index: number,
   data: MinifiedCharacterObject[],
-): Promise<CharacterObject[]> => {
+): Promise<PartialCharacterObject[]> => {
   const parsedDataArray = data.map(
     minifiedToObject,
   ) as unknown as CharacterObject[]
@@ -57,20 +58,20 @@ const buildDB = async (
   return parsedDataArray
 }
 
-const getFromDB = async (index: number): Promise<CharacterObject[]> => {
+const getFromDB = async (index: number): Promise<PartialCharacterObject[]> => {
   /* @ ToDo: add this to constants */
   const stringfiedData = (await get<string>(
     `${HISTORY_DATA_KEY_PREFIX}${index}`,
   )) as string
 
   const parsedData = JSON.parse(stringfiedData) as MinifiedCharacterObject[]
-  return parsedData.map(minifiedToObject) as unknown as CharacterObject[]
+  return parsedData.map(minifiedToObject) as unknown as PartialCharacterObject[]
 }
 
 export const checkAndHash = async (
   hash: number,
   index: number,
-): Promise<CharacterObject[]> => {
+): Promise<PartialCharacterObject[]> => {
   const pageName = `${HISTORY_HASH_KEY_PREFIX}${index}`
   const pageHash = getFromLocalStorage(pageName, 0)
 
