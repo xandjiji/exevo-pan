@@ -28,37 +28,30 @@ describe('services/ServerData', () => {
     mockedGetFromLocalStorage.mockClear()
     mockedSaveToLocalStorage.mockClear()
 
-    mockedFetch.mockResolvedValueOnce({
+    mockedFetch.mockResolvedValue({
       json: async () => mockedFetchData,
     } as Response)
 
     await ManageDataClient.fetchServerData()
   })
 
-  test('should call fetch with the right parameters', () => {
+  test('on SUCCESS, should fetch data', async () => {
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(fetch).toHaveBeenCalledWith(
       `${BASE_DATA_ENDPOINT}${SERVER_DATA_PATH}`,
     )
-  })
 
-  test('should call saveToLocalStorage with the right parameters', () => {
     expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)
     expect(mockedSaveToLocalStorage).toHaveBeenCalledWith(
       SERVER_DATA_KEY,
       mockedSuccessReturnedValue,
     )
-  })
 
-  test('on success, should return with the correct value', async () => {
-    mockedFetch.mockResolvedValueOnce({
-      json: async () => mockedFetchData,
-    } as Response)
     const result = await ManageDataClient.fetchServerData()
     expect(result).toEqual(mockedSuccessReturnedValue)
   })
 
-  test('on error, should get data from localStorage', async () => {
+  test('on ERROR, should get data from localStorage', async () => {
     mockedFetch.mockRejectedValueOnce(undefined)
     mockedGetFromLocalStorage.mockReturnValueOnce([
       ...mockedSuccessReturnedValue,
