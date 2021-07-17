@@ -1,9 +1,40 @@
-import { buildCharacterData, filterItemData } from '../../utils'
+import { get, set } from 'idb-keyval'
+import { getFromLocalStorage, saveToLocalStorage } from 'utils'
+import { buildCharacterData, filterItemData, checkAndHash } from '../../utils'
 import {
   pastMiniAuction,
   futureMiniAuction,
+  pastPartialAuction,
   futurePartialAuction,
 } from './mock'
+import {
+  HISTORY_HASH_KEY_PREFIX,
+  BASE_HISTORY_DATA_ENDPOINT,
+  HISTORY_DATA_KEY_PREFIX,
+} from 'Constants'
+
+global.fetch = jest.fn()
+const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+
+jest.mock('utils', () => ({
+  getFromLocalStorage: jest.fn(),
+  saveToLocalStorage: jest.fn(),
+}))
+
+jest.mock('idb-keyval', () => ({
+  get: jest.fn(),
+  set: jest.fn(),
+}))
+
+const mockedGetFromLocalStorage = getFromLocalStorage as jest.MockedFunction<
+  typeof getFromLocalStorage
+>
+const mockedSaveToLocalStorage = saveToLocalStorage as jest.MockedFunction<
+  typeof saveToLocalStorage
+>
+
+const mockedGet = get as jest.MockedFunction<typeof get>
+const mockedSet = set as jest.MockedFunction<typeof set>
 
 describe('utils/', () => {
   test('buildCharacterData()', () => {
@@ -63,5 +94,56 @@ describe('utils/', () => {
         BallGown: [],
       }),
     ).toEqual({})
+  })
+
+  describe('checkAndHash()', () => {
+    test('on equal hash, should fetch and return data from DB', async () => {
+      mockedGetFromLocalStorage.mockReturnValueOnce(111111)
+      mockedGet.mockResolvedValue(
+        JSON.stringify([pastMiniAuction, futureMiniAuction]),
+      )
+      const result = await checkAndHash(111111, 5)
+
+      expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
+      expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(
+        `${HISTORY_HASH_KEY_PREFIX}${5}`,
+        0,
+      )
+      expect(result).toEqual([pastPartialAuction, futurePartialAuction])
+    })
+
+    test('on different hash, should fetch data from endpoint, build DB, save new hash in localStorage and return the data', async () => {
+      mockedGetFromLocalStorage.mockReturnValueOnce(22222)
+      mockedFetch.mockResolvedValue({
+        json: async () => [pastMiniAuction, futureMiniAuction],
+      } as Response)
+
+      const result = await checkAndHash(111111, 5)
+
+      expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
+      expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(
+        `${HISTORY_HASH_KEY_PREFIX}${5}`,
+        0,
+      )
+
+      expect(mockedFetch).toHaveBeenCalledTimes(1)
+      expect(mockedFetch).toHaveBeenCalledWith(
+        `${BASE_HISTORY_DATA_ENDPOINT}/${HISTORY_DATA_KEY_PREFIX}${5}.json`,
+      )
+
+      expect(mockedSet).toHaveBeenCalledTimes(1)
+      expect(mockedSet).toHaveBeenCalledWith(
+        `${HISTORY_DATA_KEY_PREFIX}${5}`,
+        JSON.stringify([pastMiniAuction, futureMiniAuction]),
+      )
+
+      expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)
+      expect(mockedSaveToLocalStorage).toHaveBeenCalledWith(
+        `${HISTORY_HASH_KEY_PREFIX}${5}`,
+        111111,
+      )
+
+      expect(result).toEqual([pastPartialAuction, futurePartialAuction])
+    })
   })
 })

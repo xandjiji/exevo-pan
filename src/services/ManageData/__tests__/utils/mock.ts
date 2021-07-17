@@ -40,6 +40,56 @@ export const futureMiniAuction = [
   false,
 ] as MinifiedCharacterObject
 
+export const pastPartialAuction = {
+  id: 546494,
+  nickname: 'Past auction',
+  auctionEnd: past,
+  currentBid: 10000,
+  hasBeenBidded: true,
+  outfitId: '1243_3',
+  serverId: 66,
+  vocationId: 1,
+  level: 618,
+  skills: {
+    magic: 11.79,
+    club: 38.84,
+    fist: 21.62,
+    sword: 42.97,
+    fishing: 43.63,
+    axe: 119.13,
+    distance: 23.35,
+    shielding: 112.49,
+  },
+  items: [9079, 31577, 31633, 32616],
+  charms: ['Dodge', 'Freeze', 'Parry', 'Poison', 'Wound', 'Zap'],
+  transfer: false,
+  imbuements: [
+    'Axe Skill',
+    'Capacity',
+    'Club Skill',
+    'Critical Hit',
+    'Death Damage',
+    'Death Protection',
+    'Distance Skill',
+    'Earth Damage',
+    'Earth Protection',
+    'Energy Damage',
+    'Energy Protection',
+    'Fire Damage',
+    'Fire Protection',
+    'Holy Protection',
+    'Ice Damage',
+    'Ice Protection',
+    'Life Leech',
+    'Magic Level',
+    'Mana Leech',
+    'Shield Skill',
+    'Speed',
+    'Sword Skill',
+  ],
+  hasSoulwar: true,
+} as CharacterObject
+
 export const futurePartialAuction = {
   id: 548069,
   nickname: 'Future auction',
@@ -82,4 +132,4 @@ export const futurePartialAuction = {
     'Sword Skill',
   ],
   hasSoulwar: false,
-}
+} as CharacterObject
