@@ -39,6 +39,12 @@ declare type MinifiedCharacterObject = [
   number,
   number,
   number,
+  number[],
+  number[],
+  number[],
+  boolean,
+  number[],
+  boolean,
 ]
 
 /*
