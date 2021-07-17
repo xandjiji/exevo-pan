@@ -31,11 +31,11 @@ describe('services/ServerData', () => {
     mockedFetch.mockResolvedValue({
       json: async () => mockedFetchData,
     } as Response)
-
-    await ManageDataClient.fetchServerData()
   })
 
   test('on SUCCESS, should fetch data', async () => {
+    const result = await ManageDataClient.fetchServerData()
+
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(fetch).toHaveBeenCalledWith(
       `${BASE_DATA_ENDPOINT}${SERVER_DATA_PATH}`,
@@ -47,7 +47,6 @@ describe('services/ServerData', () => {
       mockedSuccessReturnedValue,
     )
 
-    const result = await ManageDataClient.fetchServerData()
     expect(result).toEqual(mockedSuccessReturnedValue)
   })
 
@@ -59,6 +58,7 @@ describe('services/ServerData', () => {
     ])
 
     const result = await ManageDataClient.fetchServerData()
+    expect(global.console.log).toHaveBeenCalledTimes(1)
     expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
     expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(SERVER_DATA_KEY, [])
     expect(result).toEqual([

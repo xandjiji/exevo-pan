@@ -2268,4 +2268,4 @@ export const mockedSuccessReturnedValue = [
     battleye: true,
     experimental: false,
   },
-]
+] as ServerObject[]
