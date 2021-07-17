@@ -16,17 +16,19 @@ export const buildCharacterData = (
     minifiedToObject,
   ) as unknown as CharacterObject[]
 
+  const mutatedSetupedCharacterData = [...setupedCharacterData]
+
   const currentDate = new Date()
   for (const characterObject of setupedCharacterData) {
     const characterAuctionEndDate = new Date(characterObject.auctionEnd * 1000)
     if (currentDate > characterAuctionEndDate) {
-      setupedCharacterData.shift()
+      mutatedSetupedCharacterData.shift()
     } else {
       break
     }
   }
 
-  return setupedCharacterData
+  return mutatedSetupedCharacterData
 }
 
 export const filterItemData = (initialItemData: RareItemData): RareItemData => {
