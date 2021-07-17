@@ -21,6 +21,8 @@ declare interface PartialCharacterObject {
   level: number
   imbuements: string[]
   items: number[]
+  charms: string[]
+  transfer: boolean
   hasSoulwar: boolean
   skills: CharacterSkillsObject
 }
