@@ -38,9 +38,9 @@ export const mockedCharacterObject = {
   serverData: {
     battleye: true,
     experimental: true,
-    pvpType: { name: 'Hardcore', type: 3 },
+    pvpType: { string: 'Hardcore', type: 3 },
     serverId: 30,
     serverName: 'Pacera',
-    serverLocation: { name: 'BR', type: 2 },
+    serverLocation: { string: 'BR', type: 2 },
   },
 } as CharacterObject
