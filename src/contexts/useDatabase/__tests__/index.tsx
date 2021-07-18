@@ -184,4 +184,129 @@ describe('useDatabase()', () => {
 
     expect(result.current.characterData).toHaveLength(1)
   })
+
+  test('checking "/bazaar-history" path and filters dispatch', async () => {
+    currentHistory.push('/bazaar-history')
+    const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
+      wrapper: ComponentWrapper,
+    })
+
+    expect(result.current).toEqual({
+      loading: true,
+      characterData: [],
+      serverData: [],
+      rareItemData: {},
+      historyData: [],
+      dispatch: expect.any(Function),
+    })
+
+    await waitForNextUpdate()
+
+    expect(result.current).toEqual({
+      loading: false,
+      characterData: [],
+      serverData,
+      rareItemData: itemData,
+      historyData: completeCharData,
+      dispatch: expect.any(Function),
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: filterTestA,
+      })
+    })
+
+    expect(result.current).toEqual({
+      loading: false,
+      characterData: [],
+      serverData,
+      rareItemData: itemData,
+      historyData: filterResultA,
+      dispatch: expect.any(Function),
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: { ...initialFilter, pvp: new Set([1]) },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.serverData.pvpType.type).toBe(1)
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: { ...initialFilter, pvp: new Set([1]), minLevel: 103 },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.serverData.pvpType.type).toBe(1)
+      expect(character.level >= 103).toBeTruthy()
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: { ...initialFilter, nicknameFilter: 'Muscaria Cubensis' },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.nickname).toBe('Muscaria Cubensis')
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          skillKey: new Set(['club']),
+          minSkill: 110,
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.skills.club >= 110).toBeTruthy()
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          battleye: new Set([true]),
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.serverData.battleye).toBe(true)
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          rareNick: true,
+        },
+      })
+    })
+
+    expect(result.current.historyData).toHaveLength(1)
+  })
 })
