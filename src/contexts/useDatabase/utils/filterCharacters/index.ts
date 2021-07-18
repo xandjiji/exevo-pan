@@ -1,4 +1,5 @@
 /* eslint-disable complexity */
+import { getFavArray } from 'utils'
 import {
   setupRareItemsAuctions,
   setDoesntHasValue,
@@ -23,8 +24,7 @@ export const filterCharacters = (
     minSkill: minSkillFilter,
     skillKey: skillKeysFilter,
     itemSet: itemFilter,
-    /* @ ToDo: fav char filter */
-    /* fav, */
+    fav: favFilter,
     rareNick: rareNickFilter,
     soulwarFilter,
     imbuementsSet: imbuementsFilter,
@@ -36,10 +36,11 @@ export const filterCharacters = (
     rareItemData,
   )
 
-  /* @ ToDo: fav char filter */
+  let characterPool: CharacterObject[] = baseCharacterData
+  if (favFilter) characterPool = getFavArray()
 
   const filteredCharacters: CharacterObject[] = []
-  for (const currentCharacter of baseCharacterData) {
+  for (const currentCharacter of characterPool) {
     const {
       id: currentId,
       vocationId: currentVocation,
