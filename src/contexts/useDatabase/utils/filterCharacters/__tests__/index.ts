@@ -1,4 +1,4 @@
-import { isRareNickname } from '../utils'
+import { isRareNickname, setDoesntHasValue } from '../utils'
 
 describe('filterCharacters/utils', () => {
   test('isRareNickname()', () => {
@@ -14,5 +14,14 @@ describe('filterCharacters/utils', () => {
     expect(isRareNickname('Dark Magician IV')).toBeTruthy()
     expect(isRareNickname('Dark MAgician')).toBeTruthy()
     expect(isRareNickname('Därk Magician')).toBeTruthy()
+  })
+
+  test('setDoesntHasValue()', () => {
+    expect(setDoesntHasValue(new Set([1, 2, 4, 8]), 0)).toBeTruthy()
+    expect(setDoesntHasValue(new Set([1, 2, 4, 8]), 1)).toBeFalsy()
+    expect(setDoesntHasValue(new Set([1, 2, 4, 8]), 4)).toBeFalsy()
+    expect(setDoesntHasValue(new Set([]), 1)).toBeFalsy()
+    expect(setDoesntHasValue(new Set([8]), 8)).toBeFalsy()
+    expect(setDoesntHasValue(new Set([8]), 4)).toBeTruthy()
   })
 })
