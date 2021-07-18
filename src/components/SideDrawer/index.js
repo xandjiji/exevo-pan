@@ -56,7 +56,7 @@ export default ({ backAction }) => {
     const { active } = useContext(SideDrawerContext);
     const { serverData, rareItemData, dispatch } = useDatabase()
 
-    const serverNamesArray = useMemo(() => serverData.map(serverItem => serverItem.serverName), [serverData]);
+    const serverNamesArray = useMemo(() => serverData.map(serverItem => serverItem.serverName).sort(), [serverData]);
     const serverDataObject = useMemo(() => {
         let serverObject = {}
         for (const serverItem of serverData) {
