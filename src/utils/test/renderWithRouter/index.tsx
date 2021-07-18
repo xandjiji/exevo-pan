@@ -10,8 +10,8 @@ export const renderWithRouter = (
   window.history.pushState({}, 'Test page', route)
 
   return render(
-    <ThemeProvider theme={Themes.default}>
-      <BrowserRouter>{ui}</BrowserRouter>
-    </ThemeProvider>,
+    <BrowserRouter>
+      <ThemeProvider theme={Themes.default}>{ui}</ThemeProvider>
+    </BrowserRouter>,
   )
 }

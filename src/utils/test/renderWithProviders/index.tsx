@@ -1,21 +1,27 @@
 import { ReactElement } from 'react'
 import { render, RenderResult, RenderOptions } from '@testing-library/react'
+import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'
 
-export const renderWithThemeProvider = (ui: ReactElement): ReactElement => (
-  <ThemeProvider theme={Themes.default}>{ui}</ThemeProvider>
-)
+export const wrapWithProviders = (ui: ReactElement): ReactElement => {
+  window.history.pushState({}, 'Test page', '/')
+  return (
+    <BrowserRouter>
+      <ThemeProvider theme={Themes.default}>{ui}</ThemeProvider>
+    </BrowserRouter>
+  )
+}
 
 export const renderWithProviders = (
   ui: ReactElement,
   options?: RenderOptions,
 ): RenderResult => {
-  const renderResult = render(renderWithThemeProvider(ui), options)
+  const renderResult = render(wrapWithProviders(ui), options)
 
   return {
     ...renderResult,
     rerender: (rerenderedUi): void =>
-      renderResult.rerender(renderWithThemeProvider(rerenderedUi)),
+      renderResult.rerender(wrapWithProviders(rerenderedUi)),
   }
 }
