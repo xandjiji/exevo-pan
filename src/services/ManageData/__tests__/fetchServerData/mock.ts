@@ -823,7 +823,7 @@ export const mockedFetchData = {
     battleye: true,
     experimental: false,
   },
-}
+} as Record<string, ServerObject>
 
 export const mockedSuccessReturnedValue = [
   {
