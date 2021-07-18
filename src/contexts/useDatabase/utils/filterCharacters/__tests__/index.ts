@@ -1,4 +1,8 @@
-import { isRareNickname, setDoesntHasValue } from '../utils'
+import {
+  isRareNickname,
+  setDoesntHasValue,
+  setDoesntHasAnyValue,
+} from '../utils'
 
 describe('filterCharacters/utils', () => {
   test('isRareNickname()', () => {
@@ -23,5 +27,17 @@ describe('filterCharacters/utils', () => {
     expect(setDoesntHasValue(new Set([]), 1)).toBeFalsy()
     expect(setDoesntHasValue(new Set([8]), 8)).toBeFalsy()
     expect(setDoesntHasValue(new Set([8]), 4)).toBeTruthy()
+  })
+
+  test('setDoesntHasAnyValue()', () => {
+    expect(setDoesntHasAnyValue(new Set([1, 2, 4, 8]), [0])).toBeTruthy()
+    expect(setDoesntHasAnyValue(new Set([1]), [1, 2, 4, 8])).toBeFalsy()
+    expect(setDoesntHasAnyValue(new Set([4]), [1, 2, 4, 8])).toBeFalsy()
+    expect(setDoesntHasAnyValue(new Set([4, 8]), [1, 2, 4, 8])).toBeFalsy()
+    expect(setDoesntHasAnyValue(new Set([4, 8, 6]), [1, 2, 4, 8])).toBeTruthy()
+    expect(setDoesntHasAnyValue(new Set([]), [1, 2, 4, 8])).toBeFalsy()
+    expect(setDoesntHasAnyValue(new Set([]), [])).toBeFalsy()
+    expect(setDoesntHasAnyValue(new Set([8]), [8])).toBeFalsy()
+    expect(setDoesntHasAnyValue(new Set([8]), [4])).toBeTruthy()
   })
 })
