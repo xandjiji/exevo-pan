@@ -59,7 +59,6 @@ const buildDB = async (
 }
 
 const getFromDB = async (index: number): Promise<PartialCharacterObject[]> => {
-  /* @ ToDo: add this to constants */
   const stringfiedData = (await get<string>(
     `${HISTORY_DATA_KEY_PREFIX}${index}`,
   )) as string
