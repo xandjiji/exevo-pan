@@ -132,6 +132,24 @@ describe('useDatabase()', () => {
       result.current.dispatch({
         type: 'APPLY_FILTERS',
         isHistory: false,
+        filters: {
+          ...initialFilter,
+          pvp: new Set([1]),
+          minLevel: 103,
+          maxLevel: 618,
+        },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(character.serverData.pvpType.type).toBe(1)
+      expect(character.level >= 103 && character.level <= 618).toBeTruthy()
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
         filters: { ...initialFilter, nicknameFilter: 'Muscaria Cubensis' },
       })
     })
@@ -282,6 +300,24 @@ describe('useDatabase()', () => {
     result.current.historyData.forEach(character => {
       expect(character.serverData.pvpType.type).toBe(1)
       expect(character.level >= 103).toBeTruthy()
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          pvp: new Set([1]),
+          minLevel: 103,
+          maxLevel: 618,
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.serverData.pvpType.type).toBe(1)
+      expect(character.level >= 103 && character.level <= 618).toBeTruthy()
     })
 
     act(() => {
