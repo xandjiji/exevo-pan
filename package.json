@@ -69,6 +69,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest-dom": "^3.9.0",
     "eslint-plugin-prettier": "^3.4.0",
+    "history": "^5.0.0",
     "kcd-scripts": "^11.0.0",
     "prettier": "^2.3.0"
   }
