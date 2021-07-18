@@ -27,10 +27,10 @@ export function setDoesntHasAnyValue<T>(
 ): boolean {
   if (set.size === 0) return false
 
-  const charImbuementSet = new Set(valueArray)
+  const checkingSet = new Set(valueArray)
 
   for (const value of Array.from(set)) {
-    if (!charImbuementSet.has(value)) return true
+    if (!checkingSet.has(value)) return true
   }
 
   return false
