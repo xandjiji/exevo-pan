@@ -4,6 +4,7 @@ import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { ThemeProvider } from 'contexts/useTheme'
 import { ManageDataClient } from 'services'
+import { getFavArray } from 'utils'
 import { DatabaseProvider, useDatabase } from '../index'
 import {
   charBuildedData,
@@ -13,7 +14,15 @@ import {
   filterTestA,
   filterResultA,
   initialFilter,
+  mockFavArray,
+  filteredFavArray,
 } from './mock'
+
+jest.mock('utils', () => ({
+  getFavArray: jest.fn(),
+}))
+
+const getFavArrayMock = getFavArray as jest.MockedFunction<typeof getFavArray>
 
 const currentHistory = createBrowserHistory()
 
@@ -42,6 +51,8 @@ describe('useDatabase()', () => {
     jest
       .spyOn(ManageDataClient, 'fetchItemData')
       .mockResolvedValueOnce(itemData)
+
+    getFavArrayMock.mockReturnValue(mockFavArray)
   })
 
   test('checking initial state', () => {
@@ -232,6 +243,33 @@ describe('useDatabase()', () => {
       expect(character.imbuements).toContain('Critical Hit')
       expect(character.imbuements).toContain('Axe Skill')
     })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
+          fav: true,
+        },
+      })
+    })
+
+    expect(result.current.characterData).toEqual(mockFavArray)
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
+          fav: true,
+          vocation: new Set([1]),
+        },
+      })
+    })
+
+    expect(result.current.characterData).toEqual(filteredFavArray)
   })
 
   test('checking "/bazaar-history" path and filters dispatch', async () => {
@@ -406,5 +444,32 @@ describe('useDatabase()', () => {
       expect(character.imbuements).toContain('Critical Hit')
       expect(character.imbuements).toContain('Axe Skill')
     })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          fav: true,
+        },
+      })
+    })
+
+    expect(result.current.historyData).toEqual(mockFavArray)
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          fav: true,
+          vocation: new Set([1]),
+        },
+      })
+    })
+
+    expect(result.current.historyData).toEqual(filteredFavArray)
   })
 })
