@@ -36,7 +36,6 @@ export function setDoesntHasAnyValue<T>(
   return false
 }
 
-/* @ ToDo: test if this is working */
 const specialCharacters = /[äëïöüÿ'-.,]/i
 const twoConsecutiveUppercase = /[A-Z][A-Z]/
 export function isRareNickname(nickname: string): boolean {
