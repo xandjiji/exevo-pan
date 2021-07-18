@@ -183,6 +183,37 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current.characterData).toHaveLength(1)
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
+          imbuementsSet: new Set(['Critical Hit']),
+        },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(character.imbuements).toContain('Critical Hit')
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
+          imbuementsSet: new Set(['Critical Hit', 'Axe Skill']),
+        },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(character.imbuements).toContain('Critical Hit')
+      expect(character.imbuements).toContain('Axe Skill')
+    })
   })
 
   test('checking "/bazaar-history" path and filters dispatch', async () => {
@@ -308,5 +339,36 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current.historyData).toHaveLength(1)
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          imbuementsSet: new Set(['Critical Hit']),
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.imbuements).toContain('Critical Hit')
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          imbuementsSet: new Set(['Critical Hit', 'Axe Skill']),
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.imbuements).toContain('Critical Hit')
+      expect(character.imbuements).toContain('Axe Skill')
+    })
   })
 })
