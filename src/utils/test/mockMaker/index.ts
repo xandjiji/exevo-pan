@@ -4,9 +4,10 @@ import { randomCharacterData } from './characterMaker'
 import { randomItemData } from './rareItemMaker'
 import { Dataset } from './types'
 
-export const randomDataset = (): Dataset => {
+export const randomDataset = (charAmount = 10000): Dataset => {
   const { rawServerData, serverList } = randomServerData(100)
-  const { minifiedCharacterData, characterList } = randomCharacterData(100)
+  const { minifiedCharacterData, characterList } =
+    randomCharacterData(charAmount)
   const { rawItemData, itemData } = randomItemData()
 
   const buildedCharacterData = buildCharacterData(characterList, serverList)

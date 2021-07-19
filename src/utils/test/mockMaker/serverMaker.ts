@@ -27,7 +27,7 @@ export const randomServer = (): ServerObject => ({
   battleye: faker.datatype.boolean(),
   experimental: faker.datatype.boolean(),
   serverId: faker.datatype.number({ min: 0, max: 99 }),
-  serverName: faker.random.word().toLowerCase(),
+  serverName: faker.name.lastName(),
   serverLocation: randomServerLocation(),
   pvpType: randomPvpType(),
 })
