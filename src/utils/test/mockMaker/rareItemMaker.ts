@@ -1,4 +1,5 @@
 import * as faker from 'faker'
+import { filterItemData } from 'services/ManageData/utils'
 
 const randomItem = (): RareItemObject => {
   if (faker.datatype.boolean()) {
@@ -10,12 +11,17 @@ const randomItem = (): RareItemObject => {
   }
 }
 
-export const randomItemData = (): RareItemData => {
+export const randomItemData = (): {
+  rawItemData: RareItemData
+  itemData: RareItemData
+} => {
   const randomAmount = faker.datatype.number({ min: 0, max: 20 })
   const rawItemData: RareItemData = {}
   for (let i = 0; i < randomAmount; i++) {
     rawItemData[faker.name.lastName()] = randomItem()
   }
 
-  return rawItemData
+  const itemData = filterItemData(rawItemData)
+
+  return { rawItemData, itemData }
 }
