@@ -16,6 +16,7 @@ export const randomDataset = (charAmount = 10000): Dataset => {
     rawServerData,
     serverData: serverList,
     minifiedCharacterData,
+    partialCharacterData: characterList,
     characterData: buildedCharacterData,
     rawItemData,
     itemData,
