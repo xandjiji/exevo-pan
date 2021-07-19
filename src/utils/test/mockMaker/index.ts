@@ -1,8 +1,22 @@
-/* import * as faker from 'faker' */
+import { buildCharacterData } from 'contexts/useDatabase/utils'
+import { randomServerData } from './serverMaker'
+import { randomCharacterData } from './characterMaker'
+import { randomItemData } from './rareItemMaker'
+import { Dataset } from './types'
 
-/* @ ToDo: server maker */
+export const randomDataset = (): Dataset => {
+  const { rawServerData, serverList } = randomServerData(100)
+  const { minifiedCharacterData, characterList } = randomCharacterData(100)
+  const { rawItemData, itemData } = randomItemData()
 
-/* @ ToDo: character maker */
+  const buildedCharacterData = buildCharacterData(characterList, serverList)
 
-/* @ ToDo: rare item maker */
-export {}
+  return {
+    rawServerData,
+    serverData: serverList,
+    minifiedCharacterData,
+    characterData: buildedCharacterData,
+    rawItemData,
+    itemData,
+  }
+}
