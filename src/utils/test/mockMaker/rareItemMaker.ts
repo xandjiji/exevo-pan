@@ -1,5 +1,5 @@
 import * as faker from 'faker'
-import { filterItemData } from 'services/ManageData/utils'
+import { filterItemData } from './utils'
 
 const randomItem = (): RareItemObject => {
   if (faker.datatype.boolean()) {

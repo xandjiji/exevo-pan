@@ -1,5 +1,5 @@
 import * as faker from 'faker'
-import { buildCharacterData } from 'services/ManageData/utils'
+import { unminifyCharacterData } from './utils'
 
 const randomMinifiedCharacter = (): MinifiedCharacterObject => [
   faker.datatype.number({ min: 0, max: 999999 }),
@@ -40,6 +40,6 @@ export const randomCharacterData = (
   const sortedCharacterData = minifiedCharacterData.sort((a, b) => a[2] - b[2])
 
   const characterList: PartialCharacterObject[] =
-    buildCharacterData(sortedCharacterData)
+    unminifyCharacterData(sortedCharacterData)
   return { minifiedCharacterData, characterList }
 }
