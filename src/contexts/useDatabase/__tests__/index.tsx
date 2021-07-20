@@ -172,6 +172,24 @@ describe('useDatabase()', () => {
         isHistory: false,
         filters: {
           ...initialFilter,
+          skillKey: new Set(['club', 'magic']),
+          minSkill: 120,
+        },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(
+        character.skills.club >= 120 || character.skills.magic >= 120,
+      ).toBeTruthy()
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
           battleye: new Set([true]),
         },
       })
@@ -238,6 +256,24 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current.characterData).toEqual(filteredFavArray)
+
+    const serverA = mockedServerData[0].serverName
+    const serverB = mockedServerData[1].serverName
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
+          fav: true,
+          serverSet: new Set([serverA, serverB]),
+        },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(character.serverData.serverName).toBe(serverA || serverB)
+    })
   })
 
   test('checking "/bazaar-history" path and filters dispatch', async () => {
@@ -343,6 +379,24 @@ describe('useDatabase()', () => {
         isHistory: true,
         filters: {
           ...initialFilter,
+          skillKey: new Set(['club', 'magic']),
+          minSkill: 120,
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(
+        character.skills.club >= 120 || character.skills.magic >= 120,
+      ).toBeTruthy()
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
           battleye: new Set([true]),
         },
       })
@@ -409,5 +463,23 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current.historyData).toEqual(filteredFavArray)
+
+    const serverA = mockedServerData[0].serverName
+    const serverB = mockedServerData[1].serverName
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          fav: true,
+          serverSet: new Set([serverA, serverB]),
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(character.serverData.serverName).toBe(serverA || serverB)
+    })
   })
 })
