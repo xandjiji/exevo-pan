@@ -11,8 +11,6 @@ import {
   serverData,
   itemData,
   completeCharData,
-  filterTestA,
-  filterResultA,
   initialFilter,
   mockFavArray,
   filteredFavArray,
@@ -91,23 +89,6 @@ describe('useDatabase()', () => {
     expect(result.current).toEqual({
       loading: false,
       characterData: completeCharData,
-      serverData,
-      rareItemData: itemData,
-      historyData: [],
-      dispatch: expect.any(Function),
-    })
-
-    act(() => {
-      result.current.dispatch({
-        type: 'APPLY_FILTERS',
-        isHistory: false,
-        filters: filterTestA,
-      })
-    })
-
-    expect(result.current).toEqual({
-      loading: false,
-      characterData: filterResultA,
       serverData,
       rareItemData: itemData,
       historyData: [],
@@ -199,19 +180,6 @@ describe('useDatabase()', () => {
     result.current.characterData.forEach(character => {
       expect(character.serverData.battleye).toBe(true)
     })
-
-    act(() => {
-      result.current.dispatch({
-        type: 'APPLY_FILTERS',
-        isHistory: false,
-        filters: {
-          ...initialFilter,
-          rareNick: true,
-        },
-      })
-    })
-
-    expect(result.current.characterData).toHaveLength(1)
 
     act(() => {
       result.current.dispatch({
@@ -302,23 +270,6 @@ describe('useDatabase()', () => {
       result.current.dispatch({
         type: 'APPLY_FILTERS',
         isHistory: true,
-        filters: filterTestA,
-      })
-    })
-
-    expect(result.current).toEqual({
-      loading: false,
-      characterData: [],
-      serverData,
-      rareItemData: itemData,
-      historyData: filterResultA,
-      dispatch: expect.any(Function),
-    })
-
-    act(() => {
-      result.current.dispatch({
-        type: 'APPLY_FILTERS',
-        isHistory: true,
         filters: { ...initialFilter, pvp: new Set([1]) },
       })
     })
@@ -400,19 +351,6 @@ describe('useDatabase()', () => {
     result.current.historyData.forEach(character => {
       expect(character.serverData.battleye).toBe(true)
     })
-
-    act(() => {
-      result.current.dispatch({
-        type: 'APPLY_FILTERS',
-        isHistory: true,
-        filters: {
-          ...initialFilter,
-          rareNick: true,
-        },
-      })
-    })
-
-    expect(result.current.historyData).toHaveLength(1)
 
     act(() => {
       result.current.dispatch({
