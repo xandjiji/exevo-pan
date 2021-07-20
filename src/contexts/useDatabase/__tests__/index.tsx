@@ -257,7 +257,7 @@ describe('useDatabase()', () => {
 
     expect(result.current.characterData).toEqual(filteredFavArray)
 
-    const serverA = mockedServerData[0].serverName
+    /* const serverA = mockedServerData[0].serverName
     const serverB = mockedServerData[1].serverName
     act(() => {
       result.current.dispatch({
@@ -265,7 +265,6 @@ describe('useDatabase()', () => {
         isHistory: false,
         filters: {
           ...initialFilter,
-          fav: true,
           serverSet: new Set([serverA, serverB]),
         },
       })
@@ -273,6 +272,42 @@ describe('useDatabase()', () => {
 
     result.current.characterData.forEach(character => {
       expect(character.serverData.serverName).toBe(serverA || serverB)
+    }) */
+
+    const itemNameA = Object.keys(mockedItemData)[0]
+    const itemDataA = mockedItemData[itemNameA]
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
+          itemSet: new Set([itemNameA]),
+        },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(itemDataA.includes(character.id)).toBeTruthy()
+    })
+
+    const itemNameB = Object.keys(mockedItemData)[1]
+    const itemDataB = mockedItemData[itemNameB]
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: {
+          ...initialFilter,
+          itemSet: new Set([itemNameA, itemNameB]),
+        },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(
+        itemDataA.includes(character.id) || itemDataB.includes(character.id),
+      ).toBeTruthy()
     })
   })
 
@@ -464,7 +499,7 @@ describe('useDatabase()', () => {
 
     expect(result.current.historyData).toEqual(filteredFavArray)
 
-    const serverA = mockedServerData[0].serverName
+    /* const serverA = mockedServerData[0].serverName
     const serverB = mockedServerData[1].serverName
     act(() => {
       result.current.dispatch({
@@ -472,7 +507,6 @@ describe('useDatabase()', () => {
         isHistory: true,
         filters: {
           ...initialFilter,
-          fav: true,
           serverSet: new Set([serverA, serverB]),
         },
       })
@@ -480,6 +514,42 @@ describe('useDatabase()', () => {
 
     result.current.historyData.forEach(character => {
       expect(character.serverData.serverName).toBe(serverA || serverB)
+    }) */
+
+    const itemNameA = Object.keys(mockedItemData)[0]
+    const itemDataA = mockedItemData[itemNameA]
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          itemSet: new Set([itemNameA]),
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(itemDataA.includes(character.id)).toBeTruthy()
+    })
+
+    const itemNameB = Object.keys(mockedItemData)[1]
+    const itemDataB = mockedItemData[itemNameB]
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: true,
+        filters: {
+          ...initialFilter,
+          itemSet: new Set([itemNameA, itemNameB]),
+        },
+      })
+    })
+
+    result.current.historyData.forEach(character => {
+      expect(
+        itemDataA.includes(character.id) || itemDataB.includes(character.id),
+      ).toBeTruthy()
     })
   })
 })
