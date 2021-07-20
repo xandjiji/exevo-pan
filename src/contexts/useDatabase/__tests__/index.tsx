@@ -257,22 +257,23 @@ describe('useDatabase()', () => {
 
     expect(result.current.characterData).toEqual(filteredFavArray)
 
-    /* const serverA = mockedServerData[0].serverName
+    const serverA = mockedServerData[0].serverName
     const serverB = mockedServerData[1].serverName
+    const serverSet = new Set([serverA, serverB])
     act(() => {
       result.current.dispatch({
         type: 'APPLY_FILTERS',
         isHistory: false,
         filters: {
           ...initialFilter,
-          serverSet: new Set([serverA, serverB]),
+          serverSet,
         },
       })
     })
 
     result.current.characterData.forEach(character => {
-      expect(character.serverData.serverName).toBe(serverA || serverB)
-    }) */
+      expect(serverSet.has(character.serverData.serverName)).toBeTruthy()
+    })
 
     const itemNameA = Object.keys(mockedItemData)[0]
     const itemDataA = mockedItemData[itemNameA]
@@ -499,22 +500,23 @@ describe('useDatabase()', () => {
 
     expect(result.current.historyData).toEqual(filteredFavArray)
 
-    /* const serverA = mockedServerData[0].serverName
+    const serverA = mockedServerData[0].serverName
     const serverB = mockedServerData[1].serverName
+    const serverSet = new Set([serverA, serverB])
     act(() => {
       result.current.dispatch({
         type: 'APPLY_FILTERS',
         isHistory: true,
         filters: {
           ...initialFilter,
-          serverSet: new Set([serverA, serverB]),
+          serverSet,
         },
       })
     })
 
     result.current.historyData.forEach(character => {
-      expect(character.serverData.serverName).toBe(serverA || serverB)
-    }) */
+      expect(serverSet.has(character.serverData.serverName)).toBeTruthy()
+    })
 
     const itemNameA = Object.keys(mockedItemData)[0]
     const itemDataA = mockedItemData[itemNameA]
