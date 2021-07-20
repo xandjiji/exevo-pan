@@ -1,96 +1,26 @@
+import { randomDataset } from 'utils/test'
+
+const { minifiedCharacterData, partialCharacterData } = randomDataset()
+
 const past = +new Date() / 1000 - 100000
 const future = +new Date() / 1000 + 100000
 
-export const pastMiniAuction = [
-  546494,
-  'Past auction',
-  past,
-  10000,
-  true,
-  '1243_3',
-  66,
-  1,
-  618,
-  [11.79, 38.84, 21.62, 42.97, 43.63, 119.13, 23.35, 112.49],
-  [9079, 31577, 31633, 32616],
-  [0, 5, 7, 8, 1, 3],
-  false,
-  [
-    5, 9, 3, 0, 14, 20, 7, 16, 22, 12, 17, 15, 19, 18, 13, 21, 1, 6, 2, 4, 10,
-    8,
-  ],
-  true,
-] as MinifiedCharacterObject
+minifiedCharacterData[0][2] = past
+export const pastMiniAuction = minifiedCharacterData[0]
 
-export const futureMiniAuction = [
-  548069,
-  'Future auction',
-  future,
-  5011,
-  true,
-  '146_3',
-  31,
-  1,
-  502,
-  [11.09, 44.25, 14.15, 55.19, 10.15, 114.66, 26.95, 107.27],
-  [16110, 16161, 21892, 31633],
-  [0, 5, 3],
-  false,
-  [5, 3, 0, 14, 20, 16, 22, 12, 17, 15, 19, 1, 6, 2, 10, 8],
-  false,
-] as MinifiedCharacterObject
+minifiedCharacterData[1][2] = future
+export const futureMiniAuction = minifiedCharacterData[1]
 
 export const pastPartialAuction = {
-  id: 546494,
-  nickname: 'Past auction',
+  ...partialCharacterData[0],
   auctionEnd: past,
-  currentBid: 10000,
-  hasBeenBidded: true,
-  outfitId: '1243_3',
-  serverId: 66,
-  vocationId: 1,
-  level: 618,
-  skills: {
-    magic: 11.79,
-    club: 38.84,
-    fist: 21.62,
-    sword: 42.97,
-    fishing: 43.63,
-    axe: 119.13,
-    distance: 23.35,
-    shielding: 112.49,
-  },
-  items: [9079, 31577, 31633, 32616],
-  charms: ['Dodge', 'Freeze', 'Parry', 'Poison', 'Wound', 'Zap'],
-  transfer: false,
-  imbuements: [
-    'Axe Skill',
-    'Capacity',
-    'Club Skill',
-    'Critical Hit',
-    'Death Damage',
-    'Death Protection',
-    'Distance Skill',
-    'Earth Damage',
-    'Earth Protection',
-    'Energy Damage',
-    'Energy Protection',
-    'Fire Damage',
-    'Fire Protection',
-    'Holy Protection',
-    'Ice Damage',
-    'Ice Protection',
-    'Life Leech',
-    'Magic Level',
-    'Mana Leech',
-    'Shield Skill',
-    'Speed',
-    'Sword Skill',
-  ],
-  hasSoulwar: true,
-} as CharacterObject
+}
 
 export const futurePartialAuction = {
+  ...partialCharacterData[1],
+  auctionEnd: future,
+}
+/* export const futurePartialAuction = {
   id: 548069,
   nickname: 'Future auction',
   auctionEnd: future,
@@ -132,4 +62,4 @@ export const futurePartialAuction = {
     'Sword Skill',
   ],
   hasSoulwar: false,
-} as CharacterObject
+} as CharacterObject */

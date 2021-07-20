@@ -1,5 +1,10 @@
 import { get, set } from 'idb-keyval'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
+import {
+  HISTORY_HASH_KEY_PREFIX,
+  BASE_HISTORY_DATA_ENDPOINT,
+  HISTORY_DATA_KEY_PREFIX,
+} from 'Constants'
 import { buildCharacterData, filterItemData, checkAndHash } from '../../utils'
 import {
   pastMiniAuction,
@@ -7,11 +12,6 @@ import {
   pastPartialAuction,
   futurePartialAuction,
 } from './mock'
-import {
-  HISTORY_HASH_KEY_PREFIX,
-  BASE_HISTORY_DATA_ENDPOINT,
-  HISTORY_DATA_KEY_PREFIX,
-} from 'Constants'
 
 global.fetch = jest.fn()
 const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
