@@ -37,8 +37,9 @@ export const randomCharacterData = (
     () => randomMinifiedCharacter(),
   )
 
-  const characterList: PartialCharacterObject[] = buildCharacterData(
-    minifiedCharacterData,
-  )
+  const sortedCharacterData = minifiedCharacterData.sort((a, b) => a[2] - b[2])
+
+  const characterList: PartialCharacterObject[] =
+    buildCharacterData(sortedCharacterData)
   return { minifiedCharacterData, characterList }
 }
