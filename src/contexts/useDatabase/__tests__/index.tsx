@@ -7,10 +7,10 @@ import { ManageDataClient } from 'services'
 import { getFavArray } from 'utils'
 import { DatabaseProvider, useDatabase } from '../index'
 import {
-  charBuildedData,
-  serverData,
-  itemData,
-  completeCharData,
+  mockedPartialCharacterData,
+  mockedServerData,
+  mockedItemData,
+  mockedCharacterData,
   initialFilter,
   mockFavArray,
   filteredFavArray,
@@ -36,19 +36,19 @@ describe('useDatabase()', () => {
   beforeEach(() => {
     jest
       .spyOn(ManageDataClient, 'fetchServerData')
-      .mockResolvedValueOnce(serverData)
+      .mockResolvedValueOnce(mockedServerData)
 
     jest
       .spyOn(ManageDataClient, 'fetchCharacterData')
-      .mockResolvedValueOnce(charBuildedData)
+      .mockResolvedValueOnce(mockedPartialCharacterData)
 
     jest
       .spyOn(ManageDataClient, 'fetchHistoryData')
-      .mockResolvedValueOnce(charBuildedData)
+      .mockResolvedValueOnce(mockedPartialCharacterData)
 
     jest
       .spyOn(ManageDataClient, 'fetchItemData')
-      .mockResolvedValueOnce(itemData)
+      .mockResolvedValueOnce(mockedItemData)
 
     getFavArrayMock.mockReturnValue(mockFavArray)
   })
@@ -88,9 +88,9 @@ describe('useDatabase()', () => {
 
     expect(result.current).toEqual({
       loading: false,
-      characterData: completeCharData,
-      serverData,
-      rareItemData: itemData,
+      characterData: mockedCharacterData,
+      serverData: mockedServerData,
+      rareItemData: mockedItemData,
       historyData: [],
       dispatch: expect.any(Function),
     })
@@ -260,9 +260,9 @@ describe('useDatabase()', () => {
     expect(result.current).toEqual({
       loading: false,
       characterData: [],
-      serverData,
-      rareItemData: itemData,
-      historyData: completeCharData,
+      serverData: mockedServerData,
+      rareItemData: mockedItemData,
+      historyData: mockedCharacterData,
       dispatch: expect.any(Function),
     })
 

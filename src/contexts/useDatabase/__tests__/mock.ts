@@ -1,20 +1,15 @@
 import { randomDataset } from 'utils/test'
 
-const {
-  partialCharacterData,
-  serverData: generatedServerData,
-  itemData: generatedItemData,
-  characterData,
-} = randomDataset()
-/* import { buildCharacterData } from '../utils' */
+const { partialCharacterData, serverData, itemData, characterData } =
+  randomDataset()
 
-export const charBuildedData = partialCharacterData
+export const mockedPartialCharacterData = partialCharacterData
 
-export const serverData = generatedServerData
+export const mockedServerData = serverData
 
-export const itemData = generatedItemData
+export const mockedItemData = itemData
 
-export const completeCharData = characterData
+export const mockedCharacterData = characterData
 
 export const initialFilter = {
   nicknameFilter: '',
@@ -36,6 +31,6 @@ export const initialFilter = {
 
 const favEK: CharacterObject = { ...characterData[0], vocationId: 1 }
 const favED: CharacterObject = { ...characterData[1], vocationId: 4 }
-export const mockFavArray = [favEK, favED] as CharacterObject[]
 
+export const mockFavArray = [favEK, favED] as CharacterObject[]
 export const filteredFavArray = [favEK] as CharacterObject[]
