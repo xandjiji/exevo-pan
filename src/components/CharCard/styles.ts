@@ -4,6 +4,7 @@ import {
   FavButton as BaseFavButton,
   LabeledTextBox as BaseLabeledTextBox,
   AuctionTimer as BaseAuctionTimer,
+  Chip as BaseChip,
 } from 'components/Atoms'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
@@ -97,4 +98,18 @@ export const TibiaCoinIcon = styled.img.attrs({
 export const Footer = styled.div`
   padding-top: 6px;
   border-top: solid 1px ${({ theme }) => theme.colors.separator};
+`
+
+export const CharmWrapper = styled.div`
+  margin-bottom: -8px;
+  display: flex;
+  flex-wrap: wrap;
+`
+
+export const Charm = styled(BaseChip)`
+  margin-bottom: 8px;
+
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
 `

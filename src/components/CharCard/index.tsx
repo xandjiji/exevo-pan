@@ -1,6 +1,5 @@
 import { useLocation } from 'react-router-dom'
 import { formatNumberWithCommas } from 'utils'
-import * as S from './styles'
 import {
   Title,
   Subtitle,
@@ -9,6 +8,7 @@ import {
   CharacterSkills,
   CharacterImbuements,
 } from './Parts'
+import * as S from './styles'
 import { CharCardProps } from './types'
 
 const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
@@ -26,6 +26,7 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
     items,
     skills,
     imbuements,
+    charms,
   } = characterData
 
   const { pathname } = useLocation()
@@ -83,6 +84,14 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
 
       <S.Footer>
         <CharacterImbuements imbuements={imbuements} />
+
+        {!!charms.length && (
+          <S.CharmWrapper>
+            {charms.map(charm => (
+              <S.Charm key={charm}>{charm}</S.Charm>
+            ))}
+          </S.CharmWrapper>
+        )}
       </S.Footer>
     </S.Wrapper>
   )
