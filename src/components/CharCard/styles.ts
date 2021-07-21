@@ -49,7 +49,7 @@ export const FavButton = styled(BaseFavButton)`
 `
 export const InfoGrid = styled.div`
   display: grid;
-  grid-template-columns: 50% 50%;
+  grid-template-columns: 1fr 1fr;
   grid-column-gap: 8px;
   grid-row-gap: 12px;
 `
