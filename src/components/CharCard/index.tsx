@@ -29,7 +29,12 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
           nickname={nickname}
           transfer={transfer}
         />
-        <S.LabeledTextBox>asda</S.LabeledTextBox>
+
+        <S.LabeledTextBox labelText="PvP">
+          <S.BattleyeStatus active={serverData.battleye} />
+          {serverData.pvpType.string}
+        </S.LabeledTextBox>
+
         <S.LabeledTextBox>asda</S.LabeledTextBox>
         <S.LabeledTextBox>asda</S.LabeledTextBox>
       </S.InfoGrid>

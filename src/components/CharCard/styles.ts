@@ -5,6 +5,7 @@ import {
   LabeledTextBox as BaseLabeledTextBox,
 } from 'components/Atoms'
 import { MaterialCard } from 'styles'
+import { BattleyeStatusStyleProps } from './types'
 
 const AlignedFlex = styled.div`
   display: flex;
@@ -56,4 +57,16 @@ export const InfoGrid = styled.div`
 
 export const LabeledTextBox = styled(BaseLabeledTextBox)`
   font-size: 14px;
+`
+
+export const BattleyeStatus = styled.div<BattleyeStatusStyleProps>`
+  margin-right: 4px;
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: solid 1px #00000020;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
+  background-color: ${({ active, theme }) =>
+    active ? theme.colors.battleGreen : theme.colors.battleYellow};
 `
