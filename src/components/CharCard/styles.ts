@@ -93,3 +93,8 @@ export const TibiaCoinIcon = styled.img.attrs({
   border-radius: 50%;
   box-shadow: rgba(0, 0, 0, 0.14) 1px 1px 2px 1px;
 `
+
+export const Footer = styled.div`
+  padding-top: 6px;
+  border-top: solid 1px ${({ theme }) => theme.colors.separator};
+`

@@ -7,6 +7,7 @@ import {
   ServerInfo,
   CharacterItems,
   CharacterSkills,
+  CharacterImbuements,
 } from './Parts'
 import { CharCardProps } from './types'
 
@@ -24,6 +25,7 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
     currentBid,
     items,
     skills,
+    imbuements,
   } = characterData
 
   const { pathname } = useLocation()
@@ -78,6 +80,10 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
       <CharacterItems items={items} />
 
       <CharacterSkills skills={skills} />
+
+      <S.Footer>
+        <CharacterImbuements imbuements={imbuements} />
+      </S.Footer>
     </S.Wrapper>
   )
 }
