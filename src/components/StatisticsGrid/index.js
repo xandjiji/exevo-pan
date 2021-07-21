@@ -10,7 +10,7 @@ import UrlParametersContext from '../../contexts/UrlParameters/context';
 
 import { BASE_HISTORY_DATA_ENDPOINT, OVERALL_STATISTICS_PATH } from 'Constants'
 
-import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
+import { formatNumberWithCommas } from 'utils/formatNumberWithCommas';
 
 export default () => {
     const { params, setParamByKey } = useContext(UrlParametersContext);

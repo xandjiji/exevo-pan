@@ -5,7 +5,7 @@ import { Chip } from 'components/Atoms';
 
 import { ReactComponent as TrendingIcon } from '../../assets/svgs/trending.svg';
 
-import formatNumberWithCommas from '../../utils/formatNumberWithCommas';
+import { formatNumberWithCommas } from 'utils/formatNumberWithCommas';
 
 const weekday = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
