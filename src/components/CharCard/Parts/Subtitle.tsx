@@ -27,8 +27,9 @@ const Description = styled.span`
 
 const Subtitle = ({ level, vocation }: SubtitleProps): JSX.Element => (
   <Description>
-    Level {level} -{' '}
-    {level >= 20 ? vocationEnum[vocation] : vocationEnum[1 + vocation]}
+    Level {level}
+    {' - '}
+    {level >= 20 ? vocationEnum[vocation] : vocationEnum[`1${vocation}`]}
   </Description>
 )
 
