@@ -3,8 +3,16 @@ import { Title, Subtitle, ServerInfo } from './Parts'
 import { CharCardProps } from './types'
 
 const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
-  const { id, nickname, outfitId, level, vocationId, serverData, transfer } =
-    characterData
+  const {
+    id,
+    nickname,
+    outfitId,
+    level,
+    vocationId,
+    serverData,
+    transfer,
+    auctionEnd,
+  } = characterData
 
   return (
     <S.Wrapper {...props}>
@@ -35,7 +43,9 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
           {serverData.pvpType.string}
         </S.LabeledTextBox>
 
-        <S.LabeledTextBox>asda</S.LabeledTextBox>
+        <S.LabeledTextBox labelText="Auction End">
+          <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
+        </S.LabeledTextBox>
         <S.LabeledTextBox>asda</S.LabeledTextBox>
       </S.InfoGrid>
     </S.Wrapper>

@@ -3,6 +3,7 @@ import {
   SpritePortrait as BaseSpriteProtrait,
   FavButton as BaseFavButton,
   LabeledTextBox as BaseLabeledTextBox,
+  AuctionTimer as BaseAuctionTimer,
 } from 'components/Atoms'
 import { MaterialCard } from 'styles'
 import { BattleyeStatusStyleProps } from './types'
@@ -69,4 +70,12 @@ export const BattleyeStatus = styled.div<BattleyeStatusStyleProps>`
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
   background-color: ${({ active, theme }) =>
     active ? theme.colors.battleGreen : theme.colors.battleYellow};
+`
+
+export const AuctionTimer = styled(BaseAuctionTimer)`
+  font-size: 14px;
+  *,
+  + span {
+    font-size: 14px;
+  }
 `
