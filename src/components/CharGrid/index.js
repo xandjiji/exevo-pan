@@ -110,7 +110,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                 />
             </header>
             <main id="character-grid" className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
-                {charList.map(item => <CharCard key={item.id} charData={item} />)}
+                {charList.map(item => <CharCard key={item.id} characterData={item} />)}
             </main>
         </CharGrid>
     )
