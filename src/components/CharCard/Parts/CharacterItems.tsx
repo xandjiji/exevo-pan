@@ -3,6 +3,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { SpritePortrait } from 'components/Atoms'
 
 const ItemWrapper = styled.div`
+  margin-bottom: 12px;
   display: flex;
   justify-content: space-around;
   > * {
@@ -20,8 +21,11 @@ const fillItems = (amount: number) =>
     <SpritePortrait key={uuidv4()} alt="No item" />
   ))
 
-const CharacterItems = ({ items }: CharacterItemsProps): JSX.Element => (
-  <ItemWrapper>
+const CharacterItems = ({
+  items,
+  ...props
+}: CharacterItemsProps): JSX.Element => (
+  <ItemWrapper {...props}>
     {items.map(item => (
       <SpritePortrait
         key={uuidv4()}

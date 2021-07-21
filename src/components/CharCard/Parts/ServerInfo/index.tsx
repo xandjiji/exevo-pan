@@ -2,7 +2,7 @@ import { LabeledTextBox } from 'components/Atoms'
 import TransferIcon from './TransferIcon'
 import * as S from './styles'
 
-interface ServerInfoProps {
+interface ServerInfoProps extends React.HTMLAttributes<HTMLDivElement> {
   serverData: ServerObject
   transfer: boolean
   nickname: string
@@ -12,6 +12,7 @@ const ServerInfo = ({
   serverData,
   transfer,
   nickname,
+  ...props
 }: ServerInfoProps): JSX.Element => (
   <LabeledTextBox
     labelText="Server"
@@ -20,7 +21,7 @@ const ServerInfo = ({
       serverData.experimental ? 'This is an experimental server!' : undefined
     }
   >
-    <S.Wrapper>
+    <S.Wrapper {...props}>
       <S.Flag
         alt={serverData.serverLocation.string}
         title={serverData.serverLocation.string}
