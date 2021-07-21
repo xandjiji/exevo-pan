@@ -1,7 +1,7 @@
 import { useLocation } from 'react-router-dom'
 import { formatNumberWithCommas } from 'utils'
 import * as S from './styles'
-import { Title, Subtitle, ServerInfo } from './Parts'
+import { Title, Subtitle, ServerInfo, CharacterItems } from './Parts'
 import { CharCardProps } from './types'
 
 const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
@@ -16,6 +16,7 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
     auctionEnd,
     hasBeenBidded,
     currentBid,
+    items,
   } = characterData
 
   const { pathname } = useLocation()
@@ -60,11 +61,14 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
         <S.LabeledTextBox labelText="Auction End">
           <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
         </S.LabeledTextBox>
+
         <S.LabeledTextBox labelText={getBidLabelText()}>
           <S.TibiaCoinIcon />
           {formatNumberWithCommas(currentBid)}
         </S.LabeledTextBox>
       </S.InfoGrid>
+
+      <CharacterItems items={items} />
     </S.Wrapper>
   )
 }

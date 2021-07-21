@@ -51,6 +51,7 @@ export const FavButton = styled(BaseFavButton)`
   align-self: flex-start;
 `
 export const InfoGrid = styled.div`
+  margin-bottom: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 8px;
