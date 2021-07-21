@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import {
   SpritePortrait as BaseSpriteProtrait,
-  FavButton as BaseFavButton,
   LabeledTextBox as BaseLabeledTextBox,
   AuctionTimer as BaseAuctionTimer,
   Chip as BaseChip,
 } from 'components/Atoms'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
+import { FavButton as BaseFavButton } from './Parts'
 import { BattleyeStatusStyleProps } from './types'
 
 export const AlignedFlex = styled.div`
