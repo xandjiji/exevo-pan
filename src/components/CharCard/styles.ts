@@ -2,17 +2,22 @@ import styled from 'styled-components'
 import {
   SpritePortrait as BaseSpriteProtrait,
   FavButton as BaseFavButton,
+  LabeledTextBox as BaseLabeledTextBox,
 } from 'components/Atoms'
 import { MaterialCard } from 'styles'
+
+const AlignedFlex = styled.div`
+  display: flex;
+  align-items: center;
+`
 
 export const Wrapper = styled.div`
   ${MaterialCard}
   padding: 16px;
 `
 
-export const Head = styled.div`
-  display: flex;
-  align-items: center;
+export const Head = styled(AlignedFlex)`
+  margin-bottom: 16px;
 
   > *:first-child {
     width: 56px;
@@ -41,4 +46,14 @@ export const Subtitle = styled.span`
 
 export const FavButton = styled(BaseFavButton)`
   align-self: flex-start;
+`
+export const InfoGrid = styled.div`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 8px;
+  grid-row-gap: 12px;
+`
+
+export const LabeledTextBox = styled(BaseLabeledTextBox)`
+  font-size: 14px;
 `
