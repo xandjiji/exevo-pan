@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom'
+import { formatNumberWithCommas } from 'utils'
 import * as S from './styles'
 import { Title, Subtitle, ServerInfo } from './Parts'
 import { CharCardProps } from './types'
@@ -12,7 +14,19 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
     serverData,
     transfer,
     auctionEnd,
+    hasBeenBidded,
+    currentBid,
   } = characterData
+
+  const { pathname } = useLocation()
+
+  const getBidLabelText = () => {
+    if (pathname === '/bazaar-history') {
+      return hasBeenBidded ? 'Auction Successful' : 'Auction Failed'
+    } else {
+      return hasBeenBidded ? 'Current Bid' : 'Minimum Bid'
+    }
+  }
 
   return (
     <S.Wrapper {...props}>
@@ -46,7 +60,10 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
         <S.LabeledTextBox labelText="Auction End">
           <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
         </S.LabeledTextBox>
-        <S.LabeledTextBox>asda</S.LabeledTextBox>
+        <S.LabeledTextBox labelText={getBidLabelText()}>
+          <S.TibiaCoinIcon />
+          {formatNumberWithCommas(currentBid)}
+        </S.LabeledTextBox>
       </S.InfoGrid>
     </S.Wrapper>
   )

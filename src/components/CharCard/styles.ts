@@ -6,9 +6,10 @@ import {
   AuctionTimer as BaseAuctionTimer,
 } from 'components/Atoms'
 import { MaterialCard } from 'styles'
+import TibiaCoinImage from 'assets/tibiacoin.png'
 import { BattleyeStatusStyleProps } from './types'
 
-const AlignedFlex = styled.div`
+export const AlignedFlex = styled.div`
   display: flex;
   align-items: center;
 `
@@ -78,4 +79,16 @@ export const AuctionTimer = styled(BaseAuctionTimer)`
   + span {
     font-size: 14px;
   }
+`
+
+export const TibiaCoinIcon = styled.img.attrs({
+  src: TibiaCoinImage as string,
+  alt: 'Tibia Coin',
+})`
+  margin-right: 4px;
+  width: 12px;
+  height: 12px;
+  transform: translateY(1px);
+  border-radius: 50%;
+  box-shadow: rgba(0, 0, 0, 0.14) 1px 1px 2px 1px;
 `
