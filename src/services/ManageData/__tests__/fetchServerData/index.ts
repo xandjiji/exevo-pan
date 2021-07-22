@@ -1,9 +1,5 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import {
-  BASE_DATA_ENDPOINT,
-  SERVER_DATA_PATH,
-  SERVER_DATA_KEY,
-} from 'Constants'
+import { endpoints, SERVER_DATA_PATH, SERVER_DATA_KEY } from 'Constants'
 import ManageDataClient from '../..'
 import { mockedFetchData, mockedSuccessReturnedValue } from './mock'
 
@@ -38,7 +34,7 @@ describe('services/ServerData', () => {
 
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(fetch).toHaveBeenCalledWith(
-      `${BASE_DATA_ENDPOINT}${SERVER_DATA_PATH}`,
+      `${endpoints.BASE_DATA}${SERVER_DATA_PATH}`,
     )
 
     expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)

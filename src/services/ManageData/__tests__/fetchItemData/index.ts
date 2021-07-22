@@ -1,9 +1,5 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import {
-  BASE_DATA_ENDPOINT,
-  ITEMS_DATA_PATH,
-  RARE_ITEM_DATA_KEY,
-} from 'Constants'
+import { endpoints, ITEMS_DATA_PATH, RARE_ITEM_DATA_KEY } from 'Constants'
 import ManageDataClient from '../..'
 import { mockedRareItemData, filteredRareItemData } from './mock'
 
@@ -38,7 +34,7 @@ describe('services/fetchItemData', () => {
 
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(fetch).toHaveBeenCalledWith(
-      `${BASE_DATA_ENDPOINT}${ITEMS_DATA_PATH}`,
+      `${endpoints.BASE_DATA}${ITEMS_DATA_PATH}`,
     )
 
     expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)

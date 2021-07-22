@@ -1,8 +1,8 @@
 import { get, set } from 'idb-keyval'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import {
+  endpoints,
   HISTORY_HASH_KEY_PREFIX,
-  BASE_HISTORY_DATA_ENDPOINT,
   HISTORY_DATA_KEY_PREFIX,
 } from 'Constants'
 import { buildCharacterData, filterItemData, checkAndHash } from '../../utils'
@@ -128,7 +128,7 @@ describe('utils/', () => {
 
       expect(mockedFetch).toHaveBeenCalledTimes(1)
       expect(mockedFetch).toHaveBeenCalledWith(
-        `${BASE_HISTORY_DATA_ENDPOINT}/${HISTORY_DATA_KEY_PREFIX}${5}.json`,
+        `${endpoints.BASE_HISTORY_DATA}/${HISTORY_DATA_KEY_PREFIX}${5}.json`,
       )
 
       expect(mockedSet).toHaveBeenCalledTimes(1)

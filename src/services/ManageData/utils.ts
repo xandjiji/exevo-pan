@@ -2,7 +2,7 @@ import { get, set } from 'idb-keyval'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import { minifiedToObject } from 'utils/dataDictionary'
 import {
-  BASE_HISTORY_DATA_ENDPOINT,
+  endpoints,
   HISTORY_HASH_KEY_PREFIX,
   HISTORY_DATA_KEY_PREFIX,
 } from 'Constants'
@@ -79,7 +79,7 @@ export const checkAndHash = async (
     return characterData
   } else {
     const response = await fetch(
-      `${BASE_HISTORY_DATA_ENDPOINT}/${HISTORY_DATA_KEY_PREFIX}${index}.json`,
+      `${endpoints.BASE_HISTORY_DATA}/${HISTORY_DATA_KEY_PREFIX}${index}.json`,
     )
     const data = (await response.json()) as MinifiedCharacterObject[]
     const parsedDataArray = await buildDB(index, data)
