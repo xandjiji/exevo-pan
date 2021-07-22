@@ -1,4 +1,46 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+
+/* const waveAnimation = css`
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    ${({ theme }) => theme.colors.separator},
+    transparent
+  );
+  filter: brightness(85%);
+
+  animation: wave 1.6s linear 0.5s infinite;
+  @keyframes wave {
+    0% {
+      transform: translateX(-100%);
+    }
+    50% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(100%);
+    }
+  }
+` */
+
+const pulsateAnimation = css`
+  background: ${({ theme }) => theme.colors.separator};
+  filter: brightness(110%);
+
+  animation: pulsate 1.5s ease-in-out 0.5s infinite;
+  @keyframes pulsate {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+`
 
 export const Skeleton = styled.div`
   position: relative;
@@ -17,30 +59,10 @@ export const Skeleton = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    transform: translateX(-100%);
 
     width: 100%;
     height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      ${({ theme }) => theme.colors.separator},
-      transparent
-    );
-    filter: brightness(85%);
 
-    animation: wave 1.6s linear 0.5s infinite;
-
-    @keyframes wave {
-      0% {
-        transform: translateX(-100%);
-      }
-      50% {
-        transform: translateX(0);
-      }
-      100% {
-        transform: translateX(100%);
-      }
-    }
+    ${pulsateAnimation}
   }
 `
