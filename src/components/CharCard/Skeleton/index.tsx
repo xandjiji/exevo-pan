@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import * as S from '../styles'
 import * as Skeletons from './styles'
 
@@ -83,4 +84,4 @@ const CardSkeleton = ({
   </S.Wrapper>
 )
 
-export default CardSkeleton
+export default memo(CardSkeleton)

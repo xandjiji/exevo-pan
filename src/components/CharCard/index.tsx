@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { formatNumberWithCommas } from 'utils'
 import {
@@ -97,5 +98,5 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
   )
 }
 
-export default CharCard
+export default memo(CharCard)
 export { default as CardSkeleton } from './Skeleton'
