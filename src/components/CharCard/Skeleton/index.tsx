@@ -45,14 +45,14 @@ const CardSkeleton = ({
     </S.InfoGrid>
 
     <Skeletons.ItemWrapper>
-      {Array.from({ length: 4 }, () => (
-        <Skeletons.Square style={{ width: 48, height: 48 }} />
+      {[1, 2, 3, 4].map(index => (
+        <Skeletons.Square key={index} style={{ width: 48, height: 48 }} />
       ))}
     </Skeletons.ItemWrapper>
 
     <Skeletons.SkillWrapper>
-      {Array.from({ length: 8 }, () => (
-        <Skeletons.SkillItem>
+      {[1, 2, 3, 4, 5, 6, 7, 8].map(index => (
+        <Skeletons.SkillItem key={index}>
           <Skeletons.Skillbox />
           <div style={{ width: '100%' }}>
             <Skeletons.Text
