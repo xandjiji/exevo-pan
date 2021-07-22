@@ -10,7 +10,8 @@
   },
   "jest": {
     "watchPathIgnorePatterns": [
-      "mock.ts"
+      "mock.ts",
+      "utils.ts"
     ]
   },
   "eslintConfig": {
