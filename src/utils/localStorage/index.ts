@@ -1,4 +1,4 @@
-import { FAV_CHARACTER_DATA_KEY } from 'Constants'
+import { localStorageKeys } from 'Constants'
 
 export function saveToLocalStorage<T>(key: string, data: T): void {
   const serializedData = JSON.stringify(data)
@@ -15,7 +15,7 @@ export function getFromLocalStorage<T>(key: string, fallbackObject: T): T {
 
 export const getFavArray = (): CharacterObject[] => {
   const favArray: CharacterObject[] = getFromLocalStorage(
-    FAV_CHARACTER_DATA_KEY,
+    localStorageKeys.FAV_CHARACTER_DATA,
     [],
   )
 

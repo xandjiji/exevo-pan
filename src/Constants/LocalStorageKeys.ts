@@ -1,8 +1,8 @@
-export const SERVER_DATA_KEY = 'serverData'
-export const AUCTION_CHARACTER_DATA_KEY = 'auctionCharacterData'
-export const RARE_ITEM_DATA_KEY = 'rareItemData'
-
-export const FAV_CHARACTER_DATA_KEY = 'favCharacterData'
-
-export const HISTORY_HASH_KEY_PREFIX = 'historyHash'
-export const HISTORY_DATA_KEY_PREFIX = 'historyData'
+export const localStorageKeys = {
+  SERVER_DATA: 'serverData',
+  AUCTION_CHARACTER_DATA: 'auctionCharacterData',
+  RARE_ITEM_DATA: 'rareItemData',
+  FAV_CHARACTER_DATA: 'favCharacterData',
+  HISTORY_HASH_PREFIX: 'historyHash',
+  HISTORY_DATA_PREFIX: 'historyData',
+}

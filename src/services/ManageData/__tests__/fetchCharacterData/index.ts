@@ -1,5 +1,5 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import { endpoints, paths, AUCTION_CHARACTER_DATA_KEY } from 'Constants'
+import { endpoints, paths, localStorageKeys } from 'Constants'
 import ManageDataClient from '../..'
 import { mockedMinifiedData, mockedBuildedData } from './mock'
 
@@ -43,7 +43,7 @@ describe('services/CharacterData', () => {
 
     expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)
     expect(mockedSaveToLocalStorage).toHaveBeenCalledWith(
-      AUCTION_CHARACTER_DATA_KEY,
+      localStorageKeys.AUCTION_CHARACTER_DATA,
       mockedBuildedData,
     )
 
@@ -58,7 +58,7 @@ describe('services/CharacterData', () => {
     expect(global.console.log).toHaveBeenCalledTimes(1)
     expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
     expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(
-      AUCTION_CHARACTER_DATA_KEY,
+      localStorageKeys.AUCTION_CHARACTER_DATA,
       [],
     )
     expect(result).toEqual(mockedBuildedData)

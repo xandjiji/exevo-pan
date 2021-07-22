@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { getFavArray, saveToLocalStorage } from 'utils'
 import { renderWithProviders } from 'utils/test'
-import { FAV_CHARACTER_DATA_KEY } from 'Constants'
+import { localStorageKeys } from 'Constants'
 import FavButton from '..'
 import { mockedCharacterObject } from './mock'
 
@@ -80,7 +80,7 @@ describe('<FavButton />', () => {
     expect(buttonElement).toHaveAttribute('aria-pressed', 'true')
     expect(saveToLocalStorageMock).toBeCalledTimes(1)
     expect(saveToLocalStorageMock).toHaveBeenLastCalledWith(
-      FAV_CHARACTER_DATA_KEY,
+      localStorageKeys.FAV_CHARACTER_DATA,
       [mockedCharacterObject],
     )
 
@@ -89,7 +89,7 @@ describe('<FavButton />', () => {
     expect(buttonElement).toHaveAttribute('aria-pressed', 'false')
     expect(saveToLocalStorageMock).toBeCalledTimes(2)
     expect(saveToLocalStorageMock).toHaveBeenLastCalledWith(
-      FAV_CHARACTER_DATA_KEY,
+      localStorageKeys.FAV_CHARACTER_DATA,
       [],
     )
   })

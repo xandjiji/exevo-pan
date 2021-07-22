@@ -1,11 +1,5 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import {
-  endpoints,
-  paths,
-  SERVER_DATA_KEY,
-  AUCTION_CHARACTER_DATA_KEY,
-  RARE_ITEM_DATA_KEY,
-} from 'Constants'
+import { endpoints, paths, localStorageKeys } from 'Constants'
 import {
   buildCharacterData,
   filterItemData,
@@ -26,12 +20,15 @@ export default class ManageDataClient {
       const data = (await response.json()) as Record<string, ServerObject>
       const serverArray = Object.values(data)
 
-      saveToLocalStorage(SERVER_DATA_KEY, serverArray)
+      saveToLocalStorage(localStorageKeys.SERVER_DATA, serverArray)
 
       return serverArray
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<ServerObject[]>(SERVER_DATA_KEY, [])
+      return getFromLocalStorage<ServerObject[]>(
+        localStorageKeys.SERVER_DATA,
+        [],
+      )
     }
   }
 
@@ -41,13 +38,16 @@ export default class ManageDataClient {
       const data = (await response.json()) as MinifiedCharacterObject[]
 
       const builtCharacterData = buildCharacterData(data)
-      saveToLocalStorage(AUCTION_CHARACTER_DATA_KEY, builtCharacterData)
+      saveToLocalStorage(
+        localStorageKeys.AUCTION_CHARACTER_DATA,
+        builtCharacterData,
+      )
 
       return builtCharacterData
     } catch (error: unknown) {
       console.log(error)
       return getFromLocalStorage<PartialCharacterObject[]>(
-        AUCTION_CHARACTER_DATA_KEY,
+        localStorageKeys.AUCTION_CHARACTER_DATA,
         [],
       )
     }
@@ -59,12 +59,15 @@ export default class ManageDataClient {
       const data = (await response.json()) as RareItemData
       const rareItemData = filterItemData(data)
 
-      saveToLocalStorage(RARE_ITEM_DATA_KEY, rareItemData)
+      saveToLocalStorage(localStorageKeys.RARE_ITEM_DATA, rareItemData)
 
       return rareItemData
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<RareItemData>(RARE_ITEM_DATA_KEY, {})
+      return getFromLocalStorage<RareItemData>(
+        localStorageKeys.RARE_ITEM_DATA,
+        {},
+      )
     }
   }
 

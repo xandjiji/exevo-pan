@@ -1,5 +1,5 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import { endpoints, paths, SERVER_DATA_KEY } from 'Constants'
+import { endpoints, paths, localStorageKeys } from 'Constants'
 import ManageDataClient from '../..'
 import { mockedFetchData, mockedSuccessReturnedValue } from './mock'
 
@@ -39,7 +39,7 @@ describe('services/ServerData', () => {
 
     expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)
     expect(mockedSaveToLocalStorage).toHaveBeenCalledWith(
-      SERVER_DATA_KEY,
+      localStorageKeys.SERVER_DATA,
       mockedSuccessReturnedValue,
     )
 
@@ -56,7 +56,10 @@ describe('services/ServerData', () => {
     const result = await ManageDataClient.fetchServerData()
     expect(global.console.log).toHaveBeenCalledTimes(1)
     expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
-    expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(SERVER_DATA_KEY, [])
+    expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(
+      localStorageKeys.SERVER_DATA,
+      [],
+    )
     expect(result).toEqual([
       ...mockedSuccessReturnedValue,
       ...mockedSuccessReturnedValue,

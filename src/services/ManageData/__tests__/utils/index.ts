@@ -1,10 +1,6 @@
 import { get, set } from 'idb-keyval'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import {
-  endpoints,
-  HISTORY_HASH_KEY_PREFIX,
-  HISTORY_DATA_KEY_PREFIX,
-} from 'Constants'
+import { endpoints, localStorageKeys } from 'Constants'
 import { buildCharacterData, filterItemData, checkAndHash } from '../../utils'
 import {
   pastMiniAuction,
@@ -106,7 +102,7 @@ describe('utils/', () => {
 
       expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
       expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(
-        `${HISTORY_HASH_KEY_PREFIX}${5}`,
+        `${localStorageKeys.HISTORY_HASH_PREFIX}${5}`,
         0,
       )
       expect(result).toEqual([pastPartialAuction, futurePartialAuction])
@@ -122,24 +118,26 @@ describe('utils/', () => {
 
       expect(mockedGetFromLocalStorage).toHaveBeenCalledTimes(1)
       expect(mockedGetFromLocalStorage).toHaveBeenCalledWith(
-        `${HISTORY_HASH_KEY_PREFIX}${5}`,
+        `${localStorageKeys.HISTORY_HASH_PREFIX}${5}`,
         0,
       )
 
       expect(mockedFetch).toHaveBeenCalledTimes(1)
       expect(mockedFetch).toHaveBeenCalledWith(
-        `${endpoints.BASE_HISTORY_DATA}/${HISTORY_DATA_KEY_PREFIX}${5}.json`,
+        `${endpoints.BASE_HISTORY_DATA}/${
+          localStorageKeys.HISTORY_DATA_PREFIX
+        }${5}.json`,
       )
 
       expect(mockedSet).toHaveBeenCalledTimes(1)
       expect(mockedSet).toHaveBeenCalledWith(
-        `${HISTORY_DATA_KEY_PREFIX}${5}`,
+        `${localStorageKeys.HISTORY_DATA_PREFIX}${5}`,
         JSON.stringify([pastMiniAuction, futureMiniAuction]),
       )
 
       expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)
       expect(mockedSaveToLocalStorage).toHaveBeenCalledWith(
-        `${HISTORY_HASH_KEY_PREFIX}${5}`,
+        `${localStorageKeys.HISTORY_HASH_PREFIX}${5}`,
         111111,
       )
 
