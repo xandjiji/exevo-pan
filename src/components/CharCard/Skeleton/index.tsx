@@ -8,11 +8,8 @@ const CardSkeleton = ({
     <S.Head>
       <Skeletons.Square />
       <S.HeadInfo>
-        <Skeletons.Text
-          animation="wave"
-          style={{ width: '50%', marginBottom: 6 }}
-        />
-        <Skeletons.Text animation="wave" style={{ width: '75%' }} />
+        <Skeletons.Text animation="wave" style={{ width: '50%' }} />
+        <Skeletons.Text animation="wave" style={{ width: '75%', height: 8 }} />
       </S.HeadInfo>
 
       <S.FavButton
