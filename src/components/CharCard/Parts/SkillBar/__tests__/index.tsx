@@ -3,6 +3,11 @@ import { renderWithProviders } from 'utils/test'
 import SkillBar from '..'
 
 describe('<SkillBar />', () => {
+  beforeEach(() => {
+    jest
+      .spyOn(window, 'setTimeout')
+      .mockImplementationOnce(fn => fn() as unknown as NodeJS.Timeout)
+  })
   test('should render correctly', () => {
     renderWithProviders(
       <SkillBar

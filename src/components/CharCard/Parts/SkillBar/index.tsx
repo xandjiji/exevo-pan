@@ -11,7 +11,11 @@ const SkillBar = ({
 }: SkillBarProps): JSX.Element => {
   const [progressPercentage, setProgressPercentage] = useState<string>('0%')
   useEffect(() => {
-    setProgressPercentage(`${getDecimalPart(skillValue)}%`)
+    const dispatchedAnimation = setTimeout(
+      () => setProgressPercentage(`${getDecimalPart(skillValue)}%`),
+      0,
+    )
+    return () => clearTimeout(dispatchedAnimation)
   }, [skillValue])
 
   return (
