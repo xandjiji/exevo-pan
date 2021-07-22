@@ -1,9 +1,11 @@
 import * as S from './styles'
+import { SkeletonProps } from './types'
 
 const Skeleton = ({
+  animation = 'pulsate',
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => (
-  <S.Skeleton {...props} />
+}: SkeletonProps): JSX.Element => (
+  <S.Skeleton animation={animation} {...props} />
 )
 
 export default Skeleton

@@ -1,58 +1,56 @@
 import styled, { css } from 'styled-components'
+import { SkeletonStyleProps } from './types'
 
-/* const waveAnimation = css`
-  transform: translateX(-100%);
-  background: linear-gradient(
-    90deg,
-    transparent,
-    ${({ theme }) => theme.colors.separator},
-    transparent
-  );
-  filter: brightness(85%);
+const animations = {
+  wave: css`
+    transform: translateX(-100%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      ${({ theme }) => theme.colors.separator},
+      transparent
+    );
+    filter: brightness(85%);
 
-  animation: wave 1.6s linear 0.5s infinite;
-  @keyframes wave {
-    0% {
-      transform: translateX(-100%);
+    animation: wave 1.6s linear 0.5s infinite;
+    @keyframes wave {
+      0% {
+        transform: translateX(-100%);
+      }
+      50% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(100%);
+      }
     }
-    50% {
-      transform: translateX(0);
-    }
-    100% {
-      transform: translateX(100%);
-    }
-  }
-` */
+  `,
+  pulsate: css`
+    background: ${({ theme }) => theme.colors.separator};
+    filter: brightness(110%);
 
-const pulsateAnimation = css`
-  background: ${({ theme }) => theme.colors.separator};
-  filter: brightness(110%);
+    animation: pulsate 1.5s ease-in-out 0.5s infinite;
+    @keyframes pulsate {
+      0% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+      }
+    }
+  `,
+}
 
-  animation: pulsate 1.5s ease-in-out 0.5s infinite;
-  @keyframes pulsate {
-    0% {
-      opacity: 0;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 0;
-    }
-  }
-`
-
-export const Skeleton = styled.div`
+export const Skeleton = styled.div<SkeletonStyleProps>`
   position: relative;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 4px;
   background-color: ${({ theme }) => theme.colors.separator};
-  overflow: hidden;
   opacity: 0.6;
-
-  /* @ ToDo: REMOVE */
-  width: 40px;
-  height: 40px;
+  overflow: hidden;
 
   &::after {
     content: '';
@@ -63,6 +61,6 @@ export const Skeleton = styled.div`
     width: 100%;
     height: 100%;
 
-    ${pulsateAnimation}
+    ${({ animation }) => animations[animation]}
   }
 `
