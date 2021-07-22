@@ -45,6 +45,14 @@ describe('<CharCard />', () => {
       ),
     ).toBeInTheDocument()
     expect(
+      screen.getByLabelText(
+        character.transfer
+          ? 'Regular World Transfer available'
+          : 'Regular World Transfer NOT available',
+        { selector: 'svg' },
+      ),
+    ).toBeInTheDocument()
+    expect(
       screen.getByText(character.serverData.pvpType.string),
     ).toBeInTheDocument()
     expect(
@@ -88,6 +96,4 @@ describe('<CharCard />', () => {
 
     await waitFor(() => {})
   })
-
-  test.todo('transfer icon, add label')
 })

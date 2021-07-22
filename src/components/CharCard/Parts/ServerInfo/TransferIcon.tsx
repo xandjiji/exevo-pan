@@ -15,7 +15,7 @@ const TransferIcon = ({ transfer, nickname }: TransferIconProps): JSX.Element =>
         </S.TooltipText>
       }
     >
-      <S.Server />
+      <S.Server aria-label="Regular World Transfer available" />
     </S.Tooltip>
   ) : (
     <S.Tooltip
@@ -26,7 +26,7 @@ const TransferIcon = ({ transfer, nickname }: TransferIconProps): JSX.Element =>
         </S.TooltipText>
       }
     >
-      <S.NoServer />
+      <S.NoServer aria-label="Regular World Transfer NOT available" />
     </S.Tooltip>
   )
 
