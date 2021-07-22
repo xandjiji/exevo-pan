@@ -35,19 +35,21 @@ const AutocompleteInput = ({
   const handleKeyboard = (event: React.KeyboardEvent) => {
     switch (event.code) {
       case 'ArrowUp':
-        dispatch({
-          type: 'ARROW_NAVIGATION',
-          value: -1,
-          list: currentList,
-        })
+        if (currentList.length)
+          dispatch({
+            type: 'ARROW_NAVIGATION',
+            value: -1,
+            list: currentList,
+          })
         event.preventDefault()
         break
       case 'ArrowDown':
-        dispatch({
-          type: 'ARROW_NAVIGATION',
-          value: 1,
-          list: currentList,
-        })
+        if (currentList.length)
+          dispatch({
+            type: 'ARROW_NAVIGATION',
+            value: 1,
+            list: currentList,
+          })
         event.preventDefault()
         break
       case 'Enter':
