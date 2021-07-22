@@ -98,3 +98,4 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
 }
 
 export default CharCard
+export { default as CardSkeleton } from './Skeleton'
