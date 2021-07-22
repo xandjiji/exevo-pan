@@ -1,4 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
+import { Router } from 'react-router-dom'
+import { createBrowserHistory } from 'history'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
 import CharCard from '..'
@@ -12,6 +14,7 @@ import { vocationEnum } from './utils'
 */
 
 const { characterData } = randomDataset()
+const currentHistory = createBrowserHistory()
 
 describe('<CharCard />', () => {
   test('should write every info correctly', async () => {
@@ -42,6 +45,9 @@ describe('<CharCard />', () => {
       screen.getByText(character.serverData.pvpType.string),
     ).toBeInTheDocument()
     expect(
+      screen.getByText(character.hasBeenBidded ? 'Current Bid' : 'Minimum Bid'),
+    ).toBeInTheDocument()
+    expect(
       screen.getByText(formatNumberWithCommas(character.currentBid)),
     ).toBeInTheDocument()
     expect(screen.queryAllByAltText('Featured item')).toHaveLength(
@@ -63,7 +69,23 @@ describe('<CharCard />', () => {
     await waitFor(() => {})
   })
 
-  test.todo('pathname location change')
+  test('should render a different bid label for /bazaar-history route', async () => {
+    currentHistory.push('/bazaar-history')
+    const character = characterData[1]
+    renderWithProviders(
+      <Router history={currentHistory}>
+        <CharCard characterData={character} />
+      </Router>,
+    )
+    expect(
+      screen.getByText(
+        character.hasBeenBidded ? 'Auction Successful' : 'Auction Failed',
+      ),
+    ).toBeInTheDocument()
+
+    await waitFor(() => {})
+  })
+
   test.todo('server flag')
   test.todo('transfer icon, add label')
 })
