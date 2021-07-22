@@ -1,9 +1,5 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import {
-  endpoints,
-  CHARACTER_DATA_PATH,
-  AUCTION_CHARACTER_DATA_KEY,
-} from 'Constants'
+import { endpoints, paths, AUCTION_CHARACTER_DATA_KEY } from 'Constants'
 import ManageDataClient from '../..'
 import { mockedMinifiedData, mockedBuildedData } from './mock'
 
@@ -42,7 +38,7 @@ describe('services/CharacterData', () => {
 
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(fetch).toHaveBeenCalledWith(
-      `${endpoints.BASE_DATA}${CHARACTER_DATA_PATH}`,
+      `${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`,
     )
 
     expect(mockedSaveToLocalStorage).toHaveBeenCalledTimes(1)

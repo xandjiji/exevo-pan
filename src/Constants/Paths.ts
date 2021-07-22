@@ -1,5 +1,7 @@
-export const SERVER_DATA_PATH = '/ServerData.json'
-export const ITEMS_DATA_PATH = '/ItemsData.json'
-export const OVERALL_STATISTICS_PATH = '/overallStatistics.json'
-export const CHARACTER_DATA_PATH = '/MinifiedCharacterData.json'
-export const HISTORY_HASH_PATH = '/hash.json'
+export const paths = {
+  SERVER_DATA: '/ServerData.json',
+  ITEMS_DATA: '/ItemsData.json',
+  OVERALL_STATISTICS: '/overallStatistics.json',
+  CHARACTER_DATA: '/MinifiedCharacterData.json',
+  HISTORY_HASH: '/hash.json',
+}

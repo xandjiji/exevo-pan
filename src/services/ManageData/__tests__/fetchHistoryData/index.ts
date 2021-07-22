@@ -1,4 +1,4 @@
-import { endpoints, HISTORY_HASH_PATH } from 'Constants'
+import { endpoints, paths } from 'Constants'
 import ManageDataClient from '../..'
 import { checkAndHash, getPercentage } from '../../utils'
 import {
@@ -43,7 +43,7 @@ describe('services/HistoryData', () => {
 
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(fetch).toHaveBeenCalledWith(
-      `${endpoints.BASE_HISTORY_DATA}${HISTORY_HASH_PATH}`,
+      `${endpoints.BASE_HISTORY_DATA}${paths.HISTORY_HASH}`,
     )
 
     expect(mockedLoadProgress).toHaveBeenCalledTimes(3)

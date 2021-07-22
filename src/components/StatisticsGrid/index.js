@@ -8,7 +8,7 @@ import List from '../List';
 
 import UrlParametersContext from '../../contexts/UrlParameters/context';
 
-import { endpoints, OVERALL_STATISTICS_PATH } from 'Constants'
+import { endpoints, paths } from 'Constants'
 
 import { formatNumberWithCommas } from 'utils/formatNumberWithCommas';
 
@@ -22,7 +22,7 @@ export default () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const response = await fetch(`${endpoints.BASE_HISTORY_DATA}${OVERALL_STATISTICS_PATH}`);
+                const response = await fetch(`${endpoints.BASE_HISTORY_DATA}${paths.OVERALL_STATISTICS}`);
                 const data = await response.json();
 
                 data.totalTibiaCoins.lastMonth = fillArrayUntil(data.totalTibiaCoins.lastMonth, 28);

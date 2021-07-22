@@ -1,10 +1,7 @@
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import {
   endpoints,
-  SERVER_DATA_PATH,
-  CHARACTER_DATA_PATH,
-  ITEMS_DATA_PATH,
-  HISTORY_HASH_PATH,
+  paths,
   SERVER_DATA_KEY,
   AUCTION_CHARACTER_DATA_KEY,
   RARE_ITEM_DATA_KEY,
@@ -18,10 +15,10 @@ import {
 
 // eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class ManageDataClient {
-  static serverDataUrl = `${endpoints.BASE_DATA}${SERVER_DATA_PATH}`
-  static characterDataUrl = `${endpoints.BASE_DATA}${CHARACTER_DATA_PATH}`
-  static rareItemDataUrl = `${endpoints.BASE_DATA}${ITEMS_DATA_PATH}`
-  static historyHashDataUrl = `${endpoints.BASE_HISTORY_DATA}${HISTORY_HASH_PATH}`
+  static serverDataUrl = `${endpoints.BASE_DATA}${paths.SERVER_DATA}`
+  static characterDataUrl = `${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`
+  static rareItemDataUrl = `${endpoints.BASE_DATA}${paths.ITEMS_DATA}`
+  static historyHashDataUrl = `${endpoints.BASE_HISTORY_DATA}${paths.HISTORY_HASH}`
 
   static async fetchServerData(): Promise<ServerObject[]> {
     try {
