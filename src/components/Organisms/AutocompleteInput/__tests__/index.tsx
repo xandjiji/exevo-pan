@@ -391,4 +391,15 @@ describe('<AutocompleteInput />', () => {
 
     await waitFor(() => {})
   })
+
+  test('arrow navigation shouldnt happen if there is an empty <listbox />', async () => {
+    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+    const inputElement = screen.getByRole('combobox')
+    userEvent.type(inputElement, 'asdsa')
+    userEvent.keyboard('{arrowdown}')
+
+    expect(screen.queryByRole('option')).not.toBeInTheDocument()
+
+    await waitFor(() => {})
+  })
 })
