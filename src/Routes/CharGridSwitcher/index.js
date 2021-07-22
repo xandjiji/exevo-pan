@@ -6,7 +6,7 @@ import { useDatabase } from 'contexts/useDatabase'
 
 export default () => {
 
-    const { characterData, historyData } = useDatabase()
+    const { characterData, historyData, loading } = useDatabase()
 
     return (
         <Switch>
@@ -16,6 +16,7 @@ export default () => {
                     data={characterData}
                     initialSort={0}
                     initialOrder={false}
+                    isLoading={loading}
                 />
             </Route>
 
@@ -25,6 +26,7 @@ export default () => {
                     data={historyData}
                     initialSort={0}
                     initialOrder={true}
+                    isLoading={loading}
                 />
             </Route>
         </Switch>

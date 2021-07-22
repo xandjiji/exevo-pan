@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import CharGrid from './CharGrid.styled';
-import CharCard from '../CharCard';
+import CharCard, { CardSkeleton } from '../CharCard';
 import { Switch, RadioGroup, RadioButton, Paginator } from 'components/Atoms';
 import { Tooltip } from 'components/Organisms';
 
@@ -12,7 +12,7 @@ import { ReactComponent as SortIcon } from '../../assets/svgs/sort.svg';
 
 const sortingModes = ['Auction End', 'Level', 'Price', 'Price (bidded only)'];
 
-export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
+export default ({ itemsPerPage, data, initialSort, initialOrder, isLoading }) => {
     const gridRef = useRef(null);
     const listRef = useRef(null);
 
@@ -110,7 +110,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder }) => {
                 />
             </header>
             <main id="character-grid" className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
-                {charList.map(item => <CharCard key={item.id} characterData={item} />)}
+                {isLoading ? RenderCardSkeleton() : charList.map(item => <CharCard key={item.id} characterData={item} />)}
             </main>
         </CharGrid>
     )
@@ -152,3 +152,5 @@ const applySort = (oldData, sortingMode, descendingOrder) => {
             return data;
     }
 }
+
+const RenderCardSkeleton = () => [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(index => <CardSkeleton />)
