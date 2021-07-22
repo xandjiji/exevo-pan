@@ -32,6 +32,9 @@ describe('<CharCard />', () => {
       ),
     ).toBeInTheDocument()
     expect(
+      screen.getByAltText(character.serverData.serverLocation.string),
+    ).toBeInTheDocument()
+    expect(
       screen.getByText(character.serverData.serverName),
     ).toBeInTheDocument()
     expect(
@@ -86,6 +89,5 @@ describe('<CharCard />', () => {
     await waitFor(() => {})
   })
 
-  test.todo('server flag')
   test.todo('transfer icon, add label')
 })
