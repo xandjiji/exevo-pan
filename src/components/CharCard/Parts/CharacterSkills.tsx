@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { SkillBar } from 'components/Atoms'
+import SkillBar from './SkillBar'
 
 interface CharacterSkillsProps extends React.HTMLAttributes<HTMLDivElement> {
   skills: CharacterSkillsObject
