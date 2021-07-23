@@ -46,13 +46,13 @@ const CardSkeleton = ({
     </S.InfoGrid>
 
     <Skeletons.ItemWrapper>
-      {[1, 2, 3, 4].map(index => (
+      {Array.from({ length: 4 }, (_, index) => (
         <Skeletons.Square key={index} style={{ width: 48, height: 48 }} />
       ))}
     </Skeletons.ItemWrapper>
 
     <Skeletons.SkillWrapper>
-      {[1, 2, 3, 4, 5, 6, 7, 8].map(index => (
+      {Array.from({ length: 8 }, (_, index) => (
         <Skeletons.SkillItem key={index}>
           <Skeletons.Skillbox />
           <div style={{ width: '100%' }}>
