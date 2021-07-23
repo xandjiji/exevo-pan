@@ -5,6 +5,7 @@ import {
   Children,
   isValidElement,
   cloneElement,
+  memo,
 } from 'react'
 import * as S from './styles'
 import { ListboxProps } from './types'
@@ -46,4 +47,4 @@ const Listbox = (
   )
 }
 
-export default forwardRef(Listbox)
+export default memo(forwardRef(Listbox))

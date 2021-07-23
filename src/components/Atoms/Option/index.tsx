@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import * as S from './styles'
 import { OptionProps } from './types'
 
@@ -19,4 +20,4 @@ const Option = ({
   </S.Option>
 )
 
-export default Option
+export default memo(Option)
