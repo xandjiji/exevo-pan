@@ -5,6 +5,7 @@ import {
   useEffect,
   useCallback,
   useState,
+  useMemo,
 } from 'react'
 import { useLocation } from 'react-router-dom'
 import { ManageDataClient } from 'services'
@@ -12,7 +13,12 @@ import { LoadingAlert } from 'components/Atoms'
 import DatabaseReducer from './DatabaseReducer'
 import LoadingReducer from './LoadingReducer'
 import { buildCharacterData } from './utils'
-import { DatabaseContextValues } from './types'
+import {
+  DatabaseContextValues,
+  CharactersContextValues,
+  DrawerFieldsContextValues,
+  DatabaseDispatchContextValues,
+} from './types'
 
 const defaultDatabaseState: DatabaseContextValues = {
   loading: false,
@@ -24,6 +30,22 @@ const defaultDatabaseState: DatabaseContextValues = {
 }
 const DatabaseContext =
   createContext<DatabaseContextValues>(defaultDatabaseState)
+
+const CharactersContext = createContext<CharactersContextValues>({
+  loading: defaultDatabaseState.loading,
+  characterData: defaultDatabaseState.characterData,
+  historyData: defaultDatabaseState.historyData,
+})
+
+const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
+  loading: defaultDatabaseState.loading,
+  serverData: defaultDatabaseState.serverData,
+  rareItemData: defaultDatabaseState.rareItemData,
+})
+
+const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
+  dispatch: defaultDatabaseState.dispatch,
+})
 
 export const DatabaseProvider: React.FC = ({ children }) => {
   const [{ characterData, serverData, rareItemData, historyData }, dispatch] =
@@ -84,7 +106,16 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     }
   }, [pathname, navigated, fetchCharacterData])
 
+  const drawerFields = useMemo(
+    () => ({
+      serverData,
+      rareItemData,
+    }),
+    [serverData, rareItemData],
+  )
+
   return (
+    /* @ ToDo: remove DatabaseContext */
     <DatabaseContext.Provider
       value={{
         loading,
@@ -95,13 +126,30 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         dispatch,
       }}
     >
-      {loading && (
-        <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
-      )}
-      {children}
+      <CharactersContext.Provider
+        value={{ loading, characterData, historyData }}
+      >
+        <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
+          <DatabaseDispatchContext.Provider value={{ dispatch }}>
+            {loading && (
+              <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
+            )}
+            {children}
+          </DatabaseDispatchContext.Provider>
+        </DrawerFieldsContext.Provider>
+      </CharactersContext.Provider>
     </DatabaseContext.Provider>
   )
 }
 
 export const useDatabase = (): DatabaseContextValues =>
   useContext(DatabaseContext)
+
+export const useCharacters = (): CharactersContextValues =>
+  useContext(CharactersContext)
+
+export const useDrawerFields = (): DrawerFieldsContextValues =>
+  useContext(DrawerFieldsContext)
+
+export const useDatabaseDispatch = (): DatabaseDispatchContextValues =>
+  useContext(DatabaseDispatchContext)

@@ -7,6 +7,22 @@ export interface DatabaseContextValues {
   dispatch: (action: Action) => void
 }
 
+export interface CharactersContextValues {
+  loading: boolean
+  characterData: CharacterObject[]
+  historyData: CharacterObject[]
+}
+
+export interface DrawerFieldsContextValues {
+  loading: boolean
+  serverData: ServerObject[]
+  rareItemData: RareItemData
+}
+
+export interface DatabaseDispatchContextValues {
+  dispatch: (action: Action) => void
+}
+
 export interface DatabaseReducerState {
   baseCharacterData: CharacterObject[]
   characterData: CharacterObject[]

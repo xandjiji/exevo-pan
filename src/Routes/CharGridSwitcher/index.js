@@ -2,11 +2,11 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import CharGrid from '../../components/CharGrid';
-import { useDatabase } from 'contexts/useDatabase'
+import { useCharacters } from 'contexts/useDatabase'
 
 export default () => {
 
-    const { characterData, historyData, loading } = useDatabase()
+    const { characterData, historyData, loading } = useCharacters()
 
     return (
         <Switch>
