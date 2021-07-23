@@ -56,7 +56,7 @@ describe('<AutocompleteInput />', () => {
       expect(option).toHaveValue(mockedItemList[index].value)
     })
 
-    fireEvent.blur(inputElement)
+    userEvent.type(inputElement, '{esc}')
     expect(inputElement).toHaveAttribute('aria-expanded', 'false')
     expect(listboxElement).not.toBeVisible()
     optionsElement.forEach(option => {
@@ -256,13 +256,13 @@ describe('<AutocompleteInput />', () => {
     const listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
 
-    userEvent.tab()
+    userEvent.type(inputElement, '{esc}')
     expect(listboxElement).not.toBeVisible()
 
     userEvent.click(inputElement)
     expect(listboxElement).toBeVisible()
 
-    userEvent.tab()
+    userEvent.type(inputElement, '{esc}')
     expect(listboxElement).not.toBeVisible()
 
     userEvent.click(inputElement)
@@ -271,11 +271,8 @@ describe('<AutocompleteInput />', () => {
     userEvent.type(inputElement, 'a')
     expect(listboxElement).toBeVisible()
 
-    userEvent.tab()
+    userEvent.type(inputElement, '{esc}')
     expect(listboxElement).not.toBeVisible()
-
-    userEvent.keyboard('{enter}')
-    expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, 'a')
     expect(listboxElement).toBeVisible()
@@ -310,7 +307,7 @@ describe('<AutocompleteInput />', () => {
     const listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
 
-    fireEvent.blur(inputElement)
+    userEvent.type(inputElement, '{esc}')
     expect(listboxElement).not.toBeVisible()
 
     fireEvent.focus(inputElement)

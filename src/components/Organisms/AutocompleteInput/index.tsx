@@ -34,6 +34,10 @@ const AutocompleteInput = ({
 
   const handleKeyboard = (event: React.KeyboardEvent) => {
     switch (event.code) {
+      case 'Tab':
+      case 'Escape':
+        dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
+        break
       case 'ArrowUp':
         if (currentList.length)
           dispatch({
@@ -82,6 +86,14 @@ const AutocompleteInput = ({
     setCurrentList(itemList)
   }, [itemList])
 
+  const onSelectOption = useCallback(
+    (option: Option) => {
+      onItemSelect?.(option)
+      dispatch({ type: 'OPTION_SELECTED' })
+    },
+    [onItemSelect],
+  )
+
   return (
     <S.Wrapper className={className} style={style}>
       <S.Popover
@@ -89,16 +101,13 @@ const AutocompleteInput = ({
         trigger="none"
         visible={listboxStatus}
         content={
-          <S.Listbox id={listboxId} highlightedIndex={highlightedIndex}>
+          <S.Listbox
+            id={listboxId}
+            highlightedIndex={highlightedIndex}
+            onSelectOption={onSelectOption}
+          >
             {currentList.map(item => (
-              <Option
-                key={item.value}
-                value={item.value}
-                onMouseDown={() => {
-                  onItemSelect?.(item)
-                  dispatch({ type: 'OPTION_SELECTED' })
-                }}
-              >
+              <Option key={item.value} value={item.value}>
                 {item.name}
               </Option>
             ))}
@@ -115,11 +124,15 @@ const AutocompleteInput = ({
           value={inputValue}
           onChange={handleChange}
           onFocus={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
-          onBlur={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
+          onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
           onKeyDown={handleKeyboard}
           {...props}
         />
       </S.Popover>
+      <S.Backdrop
+        onMouseUp={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
+        hidden={!listboxStatus}
+      />
     </S.Wrapper>
   )
 }
