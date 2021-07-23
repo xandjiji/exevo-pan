@@ -1,10 +1,7 @@
 import * as S from './styles'
 import { SkeletonProps } from './types'
 
-const Skeleton = ({
-  animation = 'pulsate',
-  ...props
-}: SkeletonProps): JSX.Element => (
+const Skeleton = ({ animation, ...props }: SkeletonProps): JSX.Element => (
   <S.Skeleton animation={animation} {...props} />
 )
 

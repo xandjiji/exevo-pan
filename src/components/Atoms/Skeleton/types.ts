@@ -5,5 +5,5 @@ export interface SkeletonProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export interface SkeletonStyleProps {
-  animation: Animations
+  animation?: Animations
 }

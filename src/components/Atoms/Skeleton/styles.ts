@@ -61,6 +61,6 @@ export const Skeleton = styled.div<SkeletonStyleProps>`
     width: 100%;
     height: 100%;
 
-    ${({ animation }) => animations[animation]}
+    ${({ animation }) => (animation ? animations[animation] : '')}
   }
 `
