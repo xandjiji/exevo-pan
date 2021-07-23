@@ -21,6 +21,10 @@ export const Head = styled.div`
 
   ${InnerContainer}
   ${Shadow}
+
+  @media(min-width: 768px) {
+    align-items: center;
+  }
 `
 
 const IconStyling = css`
