@@ -1,4 +1,11 @@
-import { useState, useReducer, useCallback, useEffect, useRef } from 'react'
+import {
+  useState,
+  useReducer,
+  useCallback,
+  useEffect,
+  useRef,
+  memo,
+} from 'react'
 import { Option } from 'components/Atoms'
 import { v4 as uuidv4 } from 'uuid'
 import { indexToId } from 'components/Atoms/Listbox/utils'
@@ -137,4 +144,4 @@ const AutocompleteInput = ({
   )
 }
 
-export default AutocompleteInput
+export default memo(AutocompleteInput)
