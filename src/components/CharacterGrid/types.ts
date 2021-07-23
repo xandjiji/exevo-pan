@@ -4,3 +4,9 @@ export interface CharacterGridProps
   characterList: CharacterObject[]
   isLoading?: boolean
 }
+
+export type SortingMode =
+  | 'Auction End'
+  | 'Level'
+  | 'Price (bidded only)'
+  | 'Price'
