@@ -1,7 +1,9 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import CharGrid from '../../components/CharGrid';
+/* import CharGrid from '../../components/CharGrid'; */
+import CharacterGrid from 'components/CharacterGrid'
+
 import { useCharacters } from 'contexts/useDatabase'
 
 export default () => {
@@ -11,9 +13,9 @@ export default () => {
     return (
         <Switch>
             <Route exact path="/">
-                <CharGrid
+                <CharacterGrid
                     itemsPerPage={10}
-                    data={characterData}
+                    characterList={characterData}
                     initialSort={0}
                     initialOrder={false}
                     isLoading={loading}
@@ -21,9 +23,9 @@ export default () => {
             </Route>
 
             <Route exact path="/bazaar-history">
-                <CharGrid
+                <CharacterGrid
                     itemsPerPage={10}
-                    data={historyData}
+                    characterList={historyData}
                     initialSort={0}
                     initialOrder={true}
                     isLoading={loading}
