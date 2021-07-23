@@ -2,9 +2,15 @@ import styled, { css } from 'styled-components'
 import { Paginator as BasePaginator } from 'components/Atoms'
 import { ReactComponent as FilterIconSvg } from 'assets/svgs/filter.svg'
 import { ReactComponent as SortIconSvg } from 'assets/svgs/sort.svg'
-import { InnerContainer, Shadow, Clickable } from 'styles'
+import { InnerContainer, Shadow, Clickable, CustomScrollbar } from 'styles'
 
-export const Wrapper = styled.div``
+export const Wrapper = styled.div`
+  height: calc(100vh - 60px);
+  overflow: auto;
+  background-color: ${({ theme }) => theme.colors.background};
+
+  ${CustomScrollbar}
+`
 
 export const Head = styled.div`
   position: fixed;
@@ -47,4 +53,41 @@ export const SortIcon = styled(SortIconSvg)`
 
 export const Paginator = styled(BasePaginator)`
   margin-left: auto;
+`
+
+export const Grid = styled.main`
+  margin-top: 70px;
+  padding-top: 16px;
+  position: relative;
+
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  grid-auto-rows: auto;
+
+  background-color: ${({ theme }) => theme.colors.background};
+
+  &::after {
+    content: '';
+    grid-column: 1 / -1;
+    height: 48px;
+  }
+
+  &::before {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 2;
+    width: 100%;
+    height: 72px;
+    background-image: linear-gradient(
+      to top,
+      ${({ theme }) => theme.colors.background},
+      rgba(0, 0, 0, 0)
+    );
+    pointer-events: none;
+  }
+
+  ${InnerContainer}
 `
