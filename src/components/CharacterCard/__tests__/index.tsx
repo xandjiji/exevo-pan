@@ -3,7 +3,7 @@ import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
-import CharCard from '..'
+import CharacterCard from '..'
 import { vocationEnum } from './utils'
 
 /*
@@ -16,10 +16,10 @@ import { vocationEnum } from './utils'
 const { characterData } = randomDataset()
 const currentHistory = createBrowserHistory()
 
-describe('<CharCard />', () => {
+describe('<CharacterCard />', () => {
   test('should write every info correctly', async () => {
     const character = characterData[0]
-    renderWithProviders(<CharCard characterData={character} />)
+    renderWithProviders(<CharacterCard characterData={character} />)
 
     expect(screen.getByText(character.nickname)).toBeInTheDocument()
     expect(
@@ -85,7 +85,7 @@ describe('<CharCard />', () => {
     const character = characterData[1]
     renderWithProviders(
       <Router history={currentHistory}>
-        <CharCard characterData={character} />
+        <CharacterCard characterData={character} />
       </Router>,
     )
     expect(

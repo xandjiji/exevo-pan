@@ -1,6 +1,6 @@
 import { HTMLAttributes } from 'react'
 
-export interface CharCardProps extends HTMLAttributes<HTMLDivElement> {
+export interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
   characterData: CharacterObject
 }
 

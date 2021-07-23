@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import CharCard, { CardSkeleton } from '../CharCard'
+import CharacterCard, { CardSkeleton } from '../CharacterCard'
 import * as S from './styles'
 import { CharacterGridProps } from './types'
 
@@ -46,7 +46,7 @@ const CharacterGrid = ({
               <CardSkeleton key={index} />
             ))
           : characterPage.map(item => (
-              <CharCard key={item.id} characterData={item} />
+              <CharacterCard key={item.id} characterData={item} />
             ))}
       </S.Grid>
     </S.Wrapper>

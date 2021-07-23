@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect, useRef, useCallback } from 'react';
 import CharGrid from './CharGrid.styled';
-import CharCard, { CardSkeleton } from '../CharCard';
+import CharacterCard, { CardSkeleton } from '../CharacterCard';
 import { Switch, RadioGroup, RadioButton, Paginator } from 'components/Atoms';
 import { Tooltip } from 'components/Organisms';
 
@@ -110,7 +110,7 @@ export default ({ itemsPerPage, data, initialSort, initialOrder, isLoading }) =>
                 />
             </header>
             <main id="character-grid" className="items-wrapper custom-scrollbar inner-container" ref={listRef}>
-                {isLoading ? RenderCardSkeleton() : charList.map(item => <CharCard key={item.id} characterData={item} />)}
+                {isLoading ? RenderCardSkeleton() : charList.map(item => <CharacterCard key={item.id} characterData={item} />)}
             </main>
         </CharGrid>
     )

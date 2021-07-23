@@ -10,9 +10,12 @@ import {
   CharacterImbuements,
 } from './Parts'
 import * as S from './styles'
-import { CharCardProps } from './types'
+import { CharacterCardProps } from './types'
 
-const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
+const CharacterCard = ({
+  characterData,
+  ...props
+}: CharacterCardProps): JSX.Element => {
   const {
     id,
     nickname,
@@ -98,5 +101,5 @@ const CharCard = ({ characterData, ...props }: CharCardProps): JSX.Element => {
   )
 }
 
-export default memo(CharCard)
+export default memo(CharacterCard)
 export { default as CardSkeleton } from './Skeleton'
