@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useRef, useEffect } from 'react'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
 import SortingDialog from './SortingDialog'
 import { applySort } from './applySort'
@@ -15,6 +15,8 @@ const CharacterGrid = ({
   const [sortMode, setSortMode] = useState<number>(0)
   const [descendingOrder, setDescendingOrder] = useState<boolean>(false)
 
+  const gridRef = useRef<HTMLDivElement | null>(null)
+
   const sortedData = useMemo(
     () => applySort(characterList, sortMode, descendingOrder),
     [characterList, sortMode, descendingOrder],
@@ -29,8 +31,12 @@ const CharacterGrid = ({
     [itemsPerPage, sortedData, currentPage],
   )
 
+  useEffect(() => {
+    gridRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [characterPage])
+
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper ref={gridRef} {...props}>
       <S.Head>
         <S.FilterIcon />
         <SortingDialog
