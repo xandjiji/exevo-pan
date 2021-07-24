@@ -53,8 +53,10 @@ const CharacterGrid = ({
       <S.Head>
         <S.FilterIcon onClick={toggleSideDrawer} />
         <SortingDialog
-          sortModeControl={[sortMode, setSortMode]}
-          descendingOrderControl={[descendingOrder, setDescendingOrder]}
+          sortMode={sortMode}
+          setSortMode={setSortMode}
+          descendingOrder={descendingOrder}
+          setDescendingOrder={setDescendingOrder}
         />
 
         <S.Paginator

@@ -1,16 +1,16 @@
+import { memo } from 'react'
 import { Switch, RadioGroup, RadioButton } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import * as S from './styles'
 import { SortingDialogProps } from './types'
 
 const SortingDialog = ({
-  sortModeControl,
-  descendingOrderControl,
+  sortMode,
+  setSortMode,
+  descendingOrder,
+  setDescendingOrder,
   ...props
 }: SortingDialogProps): JSX.Element => {
-  const [sortMode, setSortMode] = sortModeControl
-  const [descendingOrder, setDescendingOrder] = descendingOrderControl
-
   return (
     <Tooltip
       role="dialog"
@@ -43,4 +43,4 @@ const SortingDialog = ({
   )
 }
 
-export default SortingDialog
+export default memo(SortingDialog)
