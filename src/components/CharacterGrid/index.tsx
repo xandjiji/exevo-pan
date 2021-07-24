@@ -7,7 +7,7 @@ import {
   useCallback,
 } from 'react'
 import SideDrawerContext from 'contexts/SideDrawer/context'
-import CharacterCard, { CardSkeleton } from '../CharacterCard'
+import CharacterCard, { CardSkeleton } from './CharacterCard'
 import SortingDialog from './SortingDialog'
 import { applySort } from './applySort'
 import * as S from './styles'
