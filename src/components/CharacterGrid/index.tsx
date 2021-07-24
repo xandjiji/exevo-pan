@@ -24,6 +24,7 @@ const CharacterGrid = ({
   /* @ ToDo: remove this after SideDrawer refactor*/
   const { toggleSideDrawer } = useContext(SideDrawerContext)
 
+  const gridState = useRef<'initial' | 'processing' | 'ready'>('initial')
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [sortMode, setSortMode] = useState<number>(defaultSortMode)
   const [descendingOrder, setDescendingOrder] = useState<boolean>(
@@ -32,10 +33,12 @@ const CharacterGrid = ({
 
   const gridRef = useRef<HTMLDivElement | null>(null)
 
-  const sortedData = useMemo(
-    () => applySort(characterList, sortMode, descendingOrder),
-    [characterList, sortMode, descendingOrder],
-  )
+  const sortedData = useMemo(() => {
+    if (gridState.current === 'initial' && characterList.length) {
+      gridState.current = 'processing'
+    }
+    return applySort(characterList, sortMode, descendingOrder)
+  }, [characterList, sortMode, descendingOrder])
 
   const characterPage = useMemo(
     () =>
@@ -47,8 +50,18 @@ const CharacterGrid = ({
   )
 
   useEffect(() => {
-    setSortMode(defaultSortMode)
-    setDescendingOrder(defaultDescendingOrder)
+    if (gridState.current === 'ready') {
+      setCurrentPage(1)
+    } else if (gridState.current === 'processing') {
+      gridState.current = 'ready'
+    }
+  }, [sortedData.length])
+
+  useEffect(() => {
+    if (gridState.current === 'ready') {
+      setSortMode(defaultSortMode)
+      setDescendingOrder(defaultDescendingOrder)
+    }
   }, [defaultSortMode, defaultDescendingOrder])
 
   useEffect(() => {
