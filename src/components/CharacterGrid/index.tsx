@@ -9,6 +9,8 @@ import { CharacterGridProps } from './types'
 const CharacterGrid = ({
   itemsPerPage = 10,
   characterList,
+  defaultSortMode = 0,
+  defaultDescendingOrder = false,
   isLoading,
   ...props
 }: CharacterGridProps): JSX.Element => {
@@ -16,8 +18,10 @@ const CharacterGrid = ({
   const { toggleSideDrawer } = useContext(SideDrawerContext)
 
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [sortMode, setSortMode] = useState<number>(0)
-  const [descendingOrder, setDescendingOrder] = useState<boolean>(false)
+  const [sortMode, setSortMode] = useState<number>(defaultSortMode)
+  const [descendingOrder, setDescendingOrder] = useState<boolean>(
+    defaultDescendingOrder,
+  )
 
   const gridRef = useRef<HTMLDivElement | null>(null)
 
@@ -34,6 +38,11 @@ const CharacterGrid = ({
       ),
     [itemsPerPage, sortedData, currentPage],
   )
+
+  useEffect(() => {
+    setSortMode(defaultSortMode)
+    setDescendingOrder(defaultDescendingOrder)
+  }, [defaultSortMode, defaultDescendingOrder])
 
   useEffect(() => {
     gridRef.current?.scrollTo({ top: 0, behavior: 'smooth' })

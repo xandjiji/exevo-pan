@@ -3,4 +3,6 @@ export interface CharacterGridProps
   itemsPerPage?: number
   characterList: CharacterObject[]
   isLoading?: boolean
+  defaultSortMode?: number
+  defaultDescendingOrder?: boolean
 }

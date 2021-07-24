@@ -14,20 +14,15 @@ export default () => {
         <Switch>
             <Route exact path="/">
                 <CharacterGrid
-                    itemsPerPage={10}
                     characterList={characterData}
-                    initialSort={0}
-                    initialOrder={false}
                     isLoading={loading}
                 />
             </Route>
 
             <Route exact path="/bazaar-history">
                 <CharacterGrid
-                    itemsPerPage={10}
                     characterList={historyData}
-                    initialSort={0}
-                    initialOrder={true}
+                    defaultDescendingOrder={true}
                     isLoading={loading}
                 />
             </Route>
