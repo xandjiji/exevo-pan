@@ -51,7 +51,7 @@ const CharacterGrid = ({
         <S.Paginator
           aria-controls="character-grid"
           pageSize={itemsPerPage}
-          totalItems={characterList.length}
+          totalItems={sortedData.length}
           currentPage={currentPage}
           onChange={newPage => setCurrentPage(newPage)}
           noItemsMessage="No characters found"
