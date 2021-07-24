@@ -65,7 +65,8 @@ const CharacterGrid = ({
   }, [defaultSortMode, defaultDescendingOrder])
 
   useEffect(() => {
-    gridRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    if (gridState.current === 'ready')
+      gridRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }, [characterPage])
 
   return (
