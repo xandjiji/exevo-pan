@@ -1,23 +1,21 @@
-import { SortingMode } from './types'
-
 export const applySort = (
   oldData: CharacterObject[],
-  sortingMode: SortingMode,
+  sortingMode: number,
   descendingOrder: boolean,
 ): CharacterObject[] => {
   const data = [...oldData]
 
   switch (sortingMode) {
-    case 'Auction End':
+    case 0:
       return data.sort(byAuctionEnd)
 
-    case 'Level':
+    case 1:
       return data.sort(byLevel)
 
-    case 'Price':
+    case 2:
       return data.sort(byPrice)
 
-    case 'Price (bidded only)':
+    case 3:
       return data.filter(item => item.hasBeenBidded).sort(byPrice)
 
     default:

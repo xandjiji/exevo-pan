@@ -1,8 +1,9 @@
 import { useState, useMemo } from 'react'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
+import SortingDialog from './SortingDialog'
 import { applySort } from './applySort'
 import * as S from './styles'
-import { CharacterGridProps, SortingMode } from './types'
+import { CharacterGridProps } from './types'
 
 const CharacterGrid = ({
   itemsPerPage = 10,
@@ -11,8 +12,8 @@ const CharacterGrid = ({
   ...props
 }: CharacterGridProps): JSX.Element => {
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [sortMode /* , setSortMode */] = useState<SortingMode>('Auction End')
-  const [descendingOrder /* , setDescendingOrder */] = useState<boolean>(false)
+  const [sortMode, setSortMode] = useState<number>(0)
+  const [descendingOrder, setDescendingOrder] = useState<boolean>(false)
 
   const sortedData = useMemo(
     () => applySort(characterList, sortMode, descendingOrder),
@@ -32,14 +33,16 @@ const CharacterGrid = ({
     <S.Wrapper {...props}>
       <S.Head>
         <S.FilterIcon />
-        <S.SortIcon />
+        <SortingDialog
+          sortModeControl={[sortMode, setSortMode]}
+          descendingOrderControl={[descendingOrder, setDescendingOrder]}
+        />
 
         <S.Paginator
           aria-controls="character-grid"
           pageSize={itemsPerPage}
           totalItems={characterList.length}
           currentPage={currentPage}
-          /* @ ToDo: onChange page */
           onChange={newPage => setCurrentPage(newPage)}
           noItemsMessage="No characters found"
         />

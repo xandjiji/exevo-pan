@@ -33,7 +33,7 @@ export const Head = styled.div`
   }
 `
 
-const IconStyling = css`
+export const IconStyling = css`
   padding: 2px;
   width: 37px;
   height: 37px;
