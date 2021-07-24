@@ -1,4 +1,11 @@
-import { useState, useMemo, useRef, useEffect, useContext } from 'react'
+import {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  useContext,
+  useCallback,
+} from 'react'
 import SideDrawerContext from 'contexts/SideDrawer/context'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
 import SortingDialog from './SortingDialog'
@@ -64,7 +71,10 @@ const CharacterGrid = ({
           pageSize={itemsPerPage}
           totalItems={sortedData.length}
           currentPage={currentPage}
-          onChange={newPage => setCurrentPage(newPage)}
+          onChange={useCallback(
+            (newPage: number) => setCurrentPage(newPage),
+            [],
+          )}
           noItemsMessage="No characters found"
         />
       </S.Head>
