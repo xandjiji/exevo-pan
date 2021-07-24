@@ -1,4 +1,5 @@
-import { useState, useMemo, useRef, useEffect } from 'react'
+import { useState, useMemo, useRef, useEffect, useContext } from 'react'
+import SideDrawerContext from 'contexts/SideDrawer/context'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
 import SortingDialog from './SortingDialog'
 import { applySort } from './applySort'
@@ -11,6 +12,9 @@ const CharacterGrid = ({
   isLoading,
   ...props
 }: CharacterGridProps): JSX.Element => {
+  /* @ ToDo: remove this after SideDrawer refactor*/
+  const { toggleSideDrawer } = useContext(SideDrawerContext)
+
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [sortMode, setSortMode] = useState<number>(0)
   const [descendingOrder, setDescendingOrder] = useState<boolean>(false)
@@ -38,7 +42,7 @@ const CharacterGrid = ({
   return (
     <S.Wrapper ref={gridRef} {...props}>
       <S.Head>
-        <S.FilterIcon />
+        <S.FilterIcon onClick={toggleSideDrawer} />
         <SortingDialog
           sortModeControl={[sortMode, setSortMode]}
           descendingOrderControl={[descendingOrder, setDescendingOrder]}
