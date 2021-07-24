@@ -72,7 +72,10 @@ const CharacterGrid = ({
   return (
     <S.Wrapper ref={gridRef} {...props}>
       <S.Head>
-        <S.FilterIcon onClick={toggleSideDrawer} />
+        <S.FilterIcon
+          aria-controls="filter-drawer"
+          onClick={toggleSideDrawer}
+        />
         <SortingDialog
           sortMode={sortMode}
           setSortMode={setSortMode}
