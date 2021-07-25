@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-/* import CharGrid from '../../components/CharGrid'; */
 import CharacterGrid from 'components/CharacterGrid'
 
 import { useCharacters } from 'contexts/useDatabase'

@@ -91,7 +91,37 @@ describe('<CharacterGrid />', () => {
     await waitFor(() => {})
   })
 
-  test.todo('test default sortMode/descendingOrder on router change + rerender')
+  test('should change default sort/order mode by props', async () => {
+    const { rerender } = renderWithProviders(
+      <CharacterGrid characterList={characterData} isLoading={false} />,
+    )
+
+    userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
+    const orderSwitch = screen.getByRole('switch')
+    const [auctionEnd, , , biddedOnly] = screen.getAllByRole('radio')
+    expect(orderSwitch).not.toBeChecked()
+    expect(auctionEnd).toBeChecked()
+    expect(biddedOnly).not.toBeChecked()
+    expect(screen.getByText('1 - 10 of 10000')).toBeInTheDocument()
+
+    rerender(
+      <CharacterGrid
+        characterList={characterData}
+        isLoading={false}
+        defaultDescendingOrder={true}
+        defaultSortMode={3}
+      />,
+    )
+
+    await waitFor(() => {
+      expect(orderSwitch).toBeChecked()
+      expect(auctionEnd).not.toBeChecked()
+      expect(biddedOnly).toBeChecked()
+      expect(screen.queryByText('1 - 10 of 10000')).not.toBeInTheDocument()
+    })
+
+    await waitFor(() => {})
+  })
 
   test.todo('skeleton rendering (rerender isLoading)')
 
