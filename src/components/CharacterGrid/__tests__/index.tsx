@@ -2,7 +2,6 @@ import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import CharacterGrid from '..'
-import { characterA, characterB, characterC } from './mock'
 
 /*
     We are using 'await waitFor(() => {})' at the end
