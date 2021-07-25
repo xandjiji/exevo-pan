@@ -13,6 +13,8 @@ import { applySort } from './applySort'
 import * as S from './styles'
 import { CharacterGridProps } from './types'
 
+const isDesktop = window.matchMedia('(min-width: 768px)').matches
+
 const CharacterGrid = ({
   itemsPerPage = 10,
   characterList,
@@ -98,7 +100,7 @@ const CharacterGrid = ({
 
       <S.Grid ref={gridRef} id="character-grid">
         {isLoading
-          ? Array.from({ length: 10 }, (_, index) => (
+          ? Array.from({ length: isDesktop ? 10 : 2 }, (_, index) => (
               <CardSkeleton key={index} />
             ))
           : characterPage.map(item => (
