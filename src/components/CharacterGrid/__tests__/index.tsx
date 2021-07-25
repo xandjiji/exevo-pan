@@ -123,7 +123,17 @@ describe('<CharacterGrid />', () => {
     await waitFor(() => {})
   })
 
-  test.todo('skeleton rendering (rerender isLoading)')
+  test('should display skeletons while loading', () => {
+    const { rerender } = renderWithProviders(
+      <CharacterGrid characterList={[]} isLoading={true} />,
+    )
+
+    expect(screen.queryAllByText('Bid status')).toHaveLength(2)
+
+    rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
+
+    expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
+  })
 
   test.todo('test sorting/ordering')
 })
