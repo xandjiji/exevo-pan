@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
 
 export const Head = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 10;
   width: 100%;
   padding-top: 8px;
   padding-bottom: 8px;
