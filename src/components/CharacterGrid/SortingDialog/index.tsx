@@ -14,7 +14,6 @@ const SortingDialog = ({
   return (
     <Tooltip
       role="dialog"
-      aria-label="Set the sorting order and criteria"
       trigger="click"
       content={
         <S.Dialog {...props}>
@@ -38,7 +37,10 @@ const SortingDialog = ({
         </S.Dialog>
       }
     >
-      <S.SortIcon aria-haspopup="dialog" />
+      <S.SortIcon
+        aria-label="Set the sorting order and criteria"
+        aria-haspopup="dialog"
+      />
     </Tooltip>
   )
 }
