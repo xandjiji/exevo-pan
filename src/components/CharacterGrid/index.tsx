@@ -13,8 +13,6 @@ import { applySort } from './applySort'
 import * as S from './styles'
 import { CharacterGridProps } from './types'
 
-const isDesktop = window.matchMedia('(min-width: 768px)').matches
-
 const CharacterGrid = ({
   itemsPerPage = 10,
   characterList,
@@ -23,6 +21,7 @@ const CharacterGrid = ({
   isLoading,
   ...props
 }: CharacterGridProps): JSX.Element => {
+  const isDesktop = window.matchMedia('(min-width: 768px)').matches
   /* @ ToDo: remove this after SideDrawer refactor*/
   const { toggleSideDrawer } = useContext(SideDrawerContext)
 
