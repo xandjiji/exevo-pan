@@ -55,8 +55,6 @@ describe('<CharacterGrid />', () => {
 
     userEvent.click(screen.getAllByRole('radio')[1])
     expect(mockScrollTo).toHaveBeenCalledTimes(5)
-
-    await waitFor(() => {})
   })
 
   test('should reset paging on character list length change)', async () => {
