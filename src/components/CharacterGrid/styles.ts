@@ -51,11 +51,11 @@ export const Paginator = styled(BasePaginator)`
 `
 
 export const Grid = styled.main`
+  padding-top: 16px;
+  position: relative;
   height: calc(100vh - 60px - 70px);
   overflow: auto;
   ${CustomScrollbar}
-  padding-top: 16px;
-  position: relative;
 
   display: grid;
   grid-gap: 16px;
