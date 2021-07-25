@@ -54,7 +54,7 @@ const Paginator = ({
 
       <S.CursorWrapper>
         <S.Cursor
-          aria-label="Go to memo(first page"
+          aria-label="Go to first page"
           aria-disabled={!hasPrev}
           disabled={!hasPrev}
           invert
