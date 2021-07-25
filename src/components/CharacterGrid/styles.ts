@@ -5,18 +5,13 @@ import { ReactComponent as SortIconSvg } from 'assets/svgs/sort.svg'
 import { InnerContainer, Shadow, Clickable, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.div`
-  height: calc(100vh - 60px);
-  overflow: auto;
   background-color: ${({ theme }) => theme.colors.background};
-
-  ${CustomScrollbar}
 `
 
 export const Head = styled.div`
-  position: fixed;
-  top: 60px;
+  position: relative;
+  z-index: 1;
   width: 100%;
-  z-index: 55;
   padding-top: 8px;
   padding-bottom: 8px;
 
@@ -56,7 +51,9 @@ export const Paginator = styled(BasePaginator)`
 `
 
 export const Grid = styled.main`
-  margin-top: 70px;
+  height: calc(100vh - 60px - 70px);
+  overflow: auto;
+  ${CustomScrollbar}
   padding-top: 16px;
   position: relative;
 

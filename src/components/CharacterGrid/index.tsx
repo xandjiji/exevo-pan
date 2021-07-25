@@ -70,7 +70,7 @@ const CharacterGrid = ({
   }, [characterPage])
 
   return (
-    <S.Wrapper ref={gridRef} {...props}>
+    <S.Wrapper {...props}>
       <S.Head>
         <S.FilterIcon
           aria-controls="filter-drawer"
@@ -96,7 +96,7 @@ const CharacterGrid = ({
         />
       </S.Head>
 
-      <S.Grid id="character-grid">
+      <S.Grid ref={gridRef} id="character-grid">
         {isLoading
           ? Array.from({ length: 10 }, (_, index) => (
               <CardSkeleton key={index} />
