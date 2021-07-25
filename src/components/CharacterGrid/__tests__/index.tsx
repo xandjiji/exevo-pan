@@ -10,6 +10,8 @@ import CharacterGrid from '..'
     https://github.com/popperjs/react-popper/issues/368
 */
 
+jest.setTimeout(15000)
+
 jest.mock('lodash', () => ({
   debounce: fn => fn,
 }))

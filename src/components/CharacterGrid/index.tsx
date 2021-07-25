@@ -21,7 +21,9 @@ const CharacterGrid = ({
   isLoading,
   ...props
 }: CharacterGridProps): JSX.Element => {
-  const isDesktop = window.matchMedia('(min-width: 768px)').matches
+  const { current: isDesktop } = useRef(
+    window.matchMedia('(min-width: 768px)').matches,
+  )
   /* @ ToDo: remove this after SideDrawer refactor*/
   const { toggleSideDrawer } = useContext(SideDrawerContext)
 
