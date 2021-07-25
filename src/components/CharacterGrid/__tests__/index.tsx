@@ -10,6 +10,10 @@ import CharacterGrid from '..'
     https://github.com/popperjs/react-popper/issues/368
 */
 
+jest.mock('lodash', () => ({
+  debounce: fn => fn,
+}))
+
 const { characterData } = randomDataset()
 const mockScrollTo = jest.fn()
 window.HTMLElement.prototype.scrollTo = mockScrollTo
@@ -23,6 +27,8 @@ describe('<CharacterGrid />', () => {
         matches: false,
       })),
     })
+
+    mockScrollTo.mockClear()
   })
 
   test('should scroll grid to top on interactions', async () => {
@@ -40,19 +46,50 @@ describe('<CharacterGrid />', () => {
     )
     expect(mockScrollTo).toHaveBeenCalledTimes(2)
 
-    userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
-    userEvent.click(screen.getByLabelText('Sort by descending order'))
+    userEvent.click(screen.getByLabelText('Go to last page'))
     expect(mockScrollTo).toHaveBeenCalledTimes(3)
 
-    userEvent.click(screen.getAllByRole('radio')[3])
+    userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
+    userEvent.click(screen.getByLabelText('Sort by descending order'))
     expect(mockScrollTo).toHaveBeenCalledTimes(4)
+
+    userEvent.click(screen.getAllByRole('radio')[1])
+    expect(mockScrollTo).toHaveBeenCalledTimes(5)
 
     await waitFor(() => {})
   })
 
-  test.todo(
-    'test page reset cases (characterData length/sort change bidded only)',
-  )
+  test('should reset paging on character list length change)', async () => {
+    const { rerender } = renderWithProviders(
+      <CharacterGrid characterList={characterData} isLoading={false} />,
+    )
+
+    userEvent.click(screen.getByLabelText('Go to last page'))
+    expect(screen.getByText('9991 - 10000 of 10000')).toBeInTheDocument()
+
+    rerender(
+      <CharacterGrid
+        characterList={characterData.slice(0, 100)}
+        isLoading={false}
+      />,
+    )
+    expect(screen.getByText('1 - 10 of 100')).toBeInTheDocument()
+
+    userEvent.click(screen.getByLabelText('Go to last page'))
+    expect(screen.getByText('91 - 100 of 100')).toBeInTheDocument()
+
+    userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
+    userEvent.click(screen.getByLabelText('Sort by descending order'))
+    expect(screen.getByText('91 - 100 of 100')).toBeInTheDocument()
+
+    userEvent.click(screen.getAllByRole('radio')[2])
+    expect(screen.getByText('91 - 100 of 100')).toBeInTheDocument()
+
+    userEvent.click(screen.getAllByRole('radio')[3])
+    expect(screen.queryByText('91 - 100 of 100')).not.toBeInTheDocument()
+
+    await waitFor(() => {})
+  })
 
   test.todo('test default sortMode/descendingOrder on router change + rerender')
 
