@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import useDrag from 'hooks/useDrag'
+import useEscToClose from 'hooks/useEscToClose'
 import DrawerHead from './DrawerHead'
 import DrawerFooter from './DrawerFooter'
 import * as S from './styles'
@@ -14,9 +15,12 @@ const Drawer = ({
   const initialDrag = useRef<number | null>(null)
   const [drawerOffset, setDrawerOffset] = useState<number>(0)
 
-  const { binders, isMousePressed, position } = useDrag()
+  const { elementToFocusRef, onKeyDown } = useEscToClose({
+    open: isOpen,
+    onClose,
+  })
 
-  const drawerRef = useRef<HTMLDivElement>(null)
+  const { binders, isMousePressed, position } = useDrag()
 
   useEffect(() => {
     if (!initialDrag.current && isMousePressed) {
@@ -39,14 +43,6 @@ const Drawer = ({
     }
   }, [position.x, initialDrag])
 
-  useEffect(() => {
-    drawerRef.current?.focus()
-  }, [isOpen])
-
-  const onKeyDown = (event: React.KeyboardEvent) => {
-    if (event.code === 'Escape') onClose()
-  }
-
   return (
     <>
       <S.Wrapper
@@ -54,7 +50,7 @@ const Drawer = ({
         aria-hidden={!isOpen}
         aria-modal="true"
         role="dialog"
-        ref={drawerRef}
+        ref={elementToFocusRef}
         isOpen={isOpen}
         onKeyDown={onKeyDown}
         style={{ marginLeft: `${drawerOffset}px` }}
