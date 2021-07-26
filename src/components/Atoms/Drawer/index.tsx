@@ -8,9 +8,12 @@ const Drawer = ({
   children,
   ...props
 }: DrawerProps): JSX.Element => (
-  <S.Wrapper isOpen={isOpen} {...props}>
-    {children}
-  </S.Wrapper>
+  <>
+    <S.Wrapper isOpen={isOpen} {...props}>
+      {children}
+    </S.Wrapper>
+    <S.Backdrop isOpen={isOpen} onClick={onClose} />
+  </>
 )
 
 Drawer.Head = DrawerHead

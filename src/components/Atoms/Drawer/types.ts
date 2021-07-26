@@ -7,3 +7,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
 export interface WrapperProps {
   isOpen: boolean
 }
+
+export interface BackdropProps {
+  isOpen: boolean
+}
