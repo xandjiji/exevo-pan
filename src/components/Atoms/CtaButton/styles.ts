@@ -47,7 +47,7 @@ export const Button = styled.a`
     position: fixed;
     bottom: 42px;
     right: 14px;
-    z-index: 99;
+    z-index: 10;
     background: ${({ theme }) => theme.colors.primary};
     color: ${({ theme }) => theme.colors.onPrimary};
     box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);

@@ -18,6 +18,7 @@ const Drawer = ({
 )
 
 Drawer.Head = DrawerHead
+Drawer.Body = S.DrawerBody
 Drawer.Footer = DrawerFooter
 
 export default Drawer

@@ -5,6 +5,7 @@ import { ReactComponent as ArrowIconSvg } from 'assets/svgs/arrowBack.svg'
 export const DrawerHead = styled.div`
   display: flex;
   align-items: center;
+  flex: none;
   height: 60px;
   background-color: ${({ theme }) => theme.colors.primary};
 

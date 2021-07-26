@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Smooth, Shadow } from 'styles'
+import { Smooth, Shadow, InnerContainer, CustomScrollbar } from 'styles'
 import { WrapperProps, BackdropProps } from './types'
 
 export const Wrapper = styled.div<WrapperProps>`
@@ -7,6 +7,9 @@ export const Wrapper = styled.div<WrapperProps>`
   top: 0;
   left: 0;
   z-index: 75;
+
+  display: flex;
+  flex-direction: column;
 
   width: 90vw;
   height: 100vh;
@@ -17,6 +20,34 @@ export const Wrapper = styled.div<WrapperProps>`
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   ${Smooth}
   ${Shadow}
+`
+
+export const DrawerBody = styled.div`
+  padding-bottom: 16px;
+  padding-top: 16px;
+  ${InnerContainer}
+
+  position: relative;
+  height: 100%;
+
+  overflow: auto;
+  ${CustomScrollbar}
+
+  &::after {
+    content: '';
+    position: fixed;
+    bottom: 60px;
+    left: 0;
+    z-index: 2;
+    width: calc(100% - 6px);
+    height: 24px;
+    pointer-events: none;
+    background-image: linear-gradient(
+      to top,
+      ${({ theme }) => theme.colors.surface},
+      rgba(0, 0, 0, 0)
+    );
+  }
 `
 
 export const Backdrop = styled.div<BackdropProps>`

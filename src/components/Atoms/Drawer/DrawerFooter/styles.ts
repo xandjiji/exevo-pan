@@ -4,6 +4,7 @@ import { InnerContainer, Shadow } from 'styles'
 export const DrawerFooter = styled.div`
   display: flex;
   align-items: center;
+  flex: none;
   height: 60px;
   background-color: ${({ theme }) => theme.colors.primary};
 
