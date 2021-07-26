@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom'
 import { useState, useEffect, useRef } from 'react'
 import useDrag from 'hooks/useDrag'
 import useEscToClose from 'hooks/useEscToClose'
@@ -43,7 +44,7 @@ const Drawer = ({
     }
   }, [position.x, initialDrag])
 
-  return (
+  return createPortal(
     <>
       <S.Wrapper
         tabIndex={0}
@@ -63,7 +64,8 @@ const Drawer = ({
         style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}
         {...binders}
       />
-    </>
+    </>,
+    document.getElementById('root') as Element,
   )
 }
 
