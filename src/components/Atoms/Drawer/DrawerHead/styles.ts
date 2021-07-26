@@ -18,6 +18,7 @@ export const DrawerHead = styled.div`
 export const ArrowIcon = styled(ArrowIconSvg)`
   ${Clickable}
 
+  padding: 2px;
   margin-right: 24px;
   width: 30px;
   height: 30px;
