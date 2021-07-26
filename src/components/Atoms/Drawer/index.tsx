@@ -65,7 +65,7 @@ const Drawer = ({
         {...binders}
       />
     </>,
-    document.getElementById('root') as Element,
+    document.body,
   )
 }
 
