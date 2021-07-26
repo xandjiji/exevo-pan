@@ -29,7 +29,11 @@ const Drawer = ({
   useEffect(() => {
     if (initialDrag.current) {
       const offset = position.x - initialDrag.current
-      if (offset < 0) setDrawerOffset(position.x - initialDrag.current)
+      if (offset < 0) {
+        setDrawerOffset(position.x - initialDrag.current)
+      } else {
+        setDrawerOffset(0)
+      }
     }
   }, [position.x, initialDrag])
 
