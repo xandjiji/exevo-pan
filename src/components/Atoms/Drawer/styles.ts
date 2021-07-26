@@ -48,6 +48,10 @@ export const DrawerBody = styled.div`
       rgba(0, 0, 0, 0)
     );
   }
+
+  > * {
+    color: ${({ theme }) => theme.colors.onSurface};
+  }
 `
 
 export const Backdrop = styled.div<BackdropProps>`
