@@ -3,9 +3,6 @@ import { InnerContainer, Shadow, Clickable } from 'styles'
 import { ReactComponent as ArrowIconSvg } from 'assets/svgs/arrowBack.svg'
 
 export const DrawerHead = styled.div`
-  padding-top: 22px;
-  padding-bottom: 18px;
-  margin-bottom: 24px;
   display: flex;
   align-items: center;
   height: 60px;
