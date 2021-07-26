@@ -14,12 +14,14 @@ export const Wrapper = styled.div<WrapperProps>`
   width: 90vw;
   height: 100vh;
   max-width: 600px;
+  outline: none;
   background-color: ${({ theme }) => theme.colors.surface};
 
   transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+  visibility: ${({ isOpen }) => (isOpen ? 'unset' : 'hidden')};
   ${Smooth}
-  transition-property: transform, opacity;
+  transition-property: opacity, transform, visibility;
   ${Shadow}
 `
 

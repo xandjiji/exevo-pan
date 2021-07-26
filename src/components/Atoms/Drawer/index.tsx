@@ -16,6 +16,8 @@ const Drawer = ({
 
   const { binders, isMousePressed, position } = useDrag()
 
+  const drawerRef = useRef<HTMLDivElement>(null)
+
   useEffect(() => {
     if (!initialDrag.current && isMousePressed) {
       initialDrag.current = position.x
@@ -37,10 +39,24 @@ const Drawer = ({
     }
   }, [position.x, initialDrag])
 
+  useEffect(() => {
+    drawerRef.current?.focus()
+  }, [isOpen])
+
+  const onKeyDown = (event: React.KeyboardEvent) => {
+    if (event.code === 'Escape') onClose()
+  }
+
   return (
     <>
       <S.Wrapper
+        tabIndex={0}
+        aria-hidden={!isOpen}
+        aria-modal="true"
+        role="dialog"
+        ref={drawerRef}
         isOpen={isOpen}
+        onKeyDown={onKeyDown}
         style={{ marginLeft: `${drawerOffset}px` }}
         {...props}
       >

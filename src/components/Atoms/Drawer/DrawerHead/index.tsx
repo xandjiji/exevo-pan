@@ -8,7 +8,9 @@ const DrawerHead = ({
 }: DrawerHeadProps): JSX.Element => (
   <S.DrawerHead {...props}>
     {onClose && (
-      <S.ArrowIcon role="button" onClick={onClose} aria-label="Close drawer" />
+      <S.BackButton tabIndex={0} aria-label="Close drawer" onClick={onClose}>
+        <S.ArrowIcon />
+      </S.BackButton>
     )}
     <S.ContentWrapper>{children}</S.ContentWrapper>
   </S.DrawerHead>

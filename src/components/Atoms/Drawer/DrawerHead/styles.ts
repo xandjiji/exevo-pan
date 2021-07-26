@@ -13,14 +13,17 @@ export const DrawerHead = styled.div`
   ${Shadow}
 `
 
-export const ArrowIcon = styled(ArrowIconSvg)`
-  ${Clickable}
-
+export const BackButton = styled.button`
   padding: 2px;
   margin-right: 24px;
   width: 30px;
   height: 30px;
   border-radius: 4px;
+  font-size: 0;
+  ${Clickable}
+`
+
+export const ArrowIcon = styled(ArrowIconSvg)`
   fill: ${({ theme }) => (theme as DefaultTheme).colors.onPrimary};
 `
 
