@@ -11,7 +11,6 @@ export const useEscapeToClose = ({
   useEffect(() => {
     if (open) {
       previousFocusedElement.current = document.activeElement as HTMLElement
-
       setTimeout(() => elementToFocusRef.current?.focus(), 200)
     } else {
       previousFocusedElement.current?.focus()
