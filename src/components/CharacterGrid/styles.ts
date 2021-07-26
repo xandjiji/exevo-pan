@@ -37,13 +37,17 @@ export const IconStyling = css`
 `
 
 export const FilterIcon = styled(FilterIconSvg)`
-  margin-right: 8px;
-  ${Clickable}
   ${IconStyling}
 `
 export const SortIcon = styled(SortIconSvg)`
   ${Clickable}
   ${IconStyling}
+`
+export const FilterButton = styled.button`
+  ${IconStyling}
+  ${Clickable}
+  margin-right: 8px;
+  padding: 0;
 `
 
 export const Paginator = styled(BasePaginator)`

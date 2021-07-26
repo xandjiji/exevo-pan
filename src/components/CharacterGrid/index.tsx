@@ -7,8 +7,9 @@ import {
   useCallback,
 } from 'react'
 import SideDrawerContext from 'contexts/SideDrawer/context'
-import CharacterCard, { CardSkeleton } from './CharacterCard'
+import FilterDrawer from './FilterDrawer'
 import SortingDialog from './SortingDialog'
+import CharacterCard, { CardSkeleton } from './CharacterCard'
 import { applySort } from './applySort'
 import * as S from './styles'
 import { CharacterGridProps } from './types'
@@ -72,6 +73,8 @@ const CharacterGrid = ({
       gridRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }, [characterPage])
 
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
+
   return (
     <S.Wrapper {...props}>
       <S.Head>
@@ -79,6 +82,21 @@ const CharacterGrid = ({
           aria-controls="filter-drawer"
           onClick={toggleSideDrawer}
         />
+        <S.FilterButton
+          tabIndex={0}
+          role="button"
+          aria-controls="filter-drawer"
+          onClick={() => setDrawerOpen(true)}
+        >
+          <S.FilterIcon />
+        </S.FilterButton>
+        <FilterDrawer
+          id="filter-drawer"
+          aria-label="Filter form"
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+        />
+
         <SortingDialog
           sortMode={sortMode}
           setSortMode={setSortMode}
