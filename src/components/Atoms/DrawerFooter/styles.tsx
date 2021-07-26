@@ -13,6 +13,7 @@ export const Wrapper = styled.footer`
   padding-bottom: 12px;
   display: flex;
   align-items: center;
+  height: 60px;
   background-color: ${({ theme }) => theme.colors.primary};
 
   ${typographyStyle}
