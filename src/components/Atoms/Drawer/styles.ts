@@ -19,6 +19,7 @@ export const Wrapper = styled.div<WrapperProps>`
   transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   ${Smooth}
+  transition-property: transform, opacity;
   ${Shadow}
 `
 
