@@ -1,4 +1,5 @@
 import DrawerHead from './DrawerHead'
+import DrawerFooter from './DrawerFooter'
 import * as S from './styles'
 import { DrawerProps } from './types'
 
@@ -17,5 +18,6 @@ const Drawer = ({
 )
 
 Drawer.Head = DrawerHead
+Drawer.Footer = DrawerFooter
 
 export default Drawer
