@@ -44,7 +44,7 @@ const Drawer = ({
       </S.Wrapper>
       <S.Backdrop
         isOpen={isOpen}
-        style={{ cursor: isMousePressed ? 'grabbing' : 'grab' }}
+        style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}
         {...binders}
       />
     </>
