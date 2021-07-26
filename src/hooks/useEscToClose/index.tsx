@@ -12,7 +12,7 @@ export const useEscapeToClose = ({
     if (open) {
       previousFocusedElement.current = document.activeElement as HTMLElement
 
-      elementToFocusRef.current?.focus()
+      setTimeout(() => elementToFocusRef.current?.focus(), 200)
     } else {
       previousFocusedElement.current?.focus()
     }
