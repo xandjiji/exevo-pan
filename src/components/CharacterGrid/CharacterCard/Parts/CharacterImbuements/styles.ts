@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import { ReactComponent as MagicSvg } from 'assets/svgs/magic.svg'
 import { ImbuementStyleProps } from './types'
 
@@ -12,6 +12,7 @@ export const Icon = styled(MagicSvg)`
   width: 18px;
   height: 18px;
   transform: translateY(3px);
+  fill: ${({ theme }) => (theme as DefaultTheme).colors.onSurface};
 `
 
 export const Imbuement = styled.span<ImbuementStyleProps>`

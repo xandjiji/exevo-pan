@@ -37,6 +37,7 @@ const IconStyling = css`
   margin-top: 4px;
   width: 16px;
   height: 16px;
+  fill: ${({ theme }) => theme.colors.onSurface};
 `
 export const Server = styled(ServerSvg)`
   ${IconStyling}
