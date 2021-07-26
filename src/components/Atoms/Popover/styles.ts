@@ -40,4 +40,15 @@ export const Backdrop = styled.div`
   z-index: 50;
   width: 100vw;
   height: 100vh;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  animation: fadeIn 0.2s ease-out;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
 `
