@@ -85,6 +85,7 @@ const CharacterGrid = ({
         <S.FilterButton
           tabIndex={0}
           role="button"
+          aria-label="Open filter drawer"
           aria-controls="filter-drawer"
           onClick={() => setDrawerOpen(true)}
         >
