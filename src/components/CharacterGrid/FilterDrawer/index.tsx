@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import { useMemo } from 'react'
+import { useMemo, useState, useCallback } from 'react'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { useDrawerFields } from 'contexts/useDatabase'
 import FilterGroup from './FilterGroup'
@@ -7,6 +7,7 @@ import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
+import { toggleSet } from './utils'
 import {
   buildServerOptions,
   buildRareItemsOptions,
@@ -28,6 +29,34 @@ const FilterDrawer = ({
     [rareItemData],
   )
 
+  const [filters, setFilters] = useState<FilterState>({
+    nicknameFilter: '',
+    vocation: new Set([]),
+    pvp: new Set([]),
+    battleye: new Set([]),
+    location: new Set([]),
+    serverSet: new Set([]),
+    minLevel: 8,
+    maxLevel: 2000,
+    minSkill: 10,
+    skillKey: new Set([]),
+    itemSet: new Set([]),
+    fav: false,
+    rareNick: false,
+    soulwarFilter: false,
+    imbuementsSet: new Set([]),
+  })
+
+  /* @ ToDo: fix this typing */
+  const updateFilters = useCallback(
+    (key: keyof FilterState, value: typeof filters[keyof FilterState]) =>
+      /* @ ToDo: check if is SET -> toggleSet */
+      setFilters(currentFilters => ({ ...currentFilters, [key]: value })),
+    [],
+  )
+
+  console.log(filters)
+
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>Filters</Drawer.Head>
@@ -37,28 +66,56 @@ const FilterDrawer = ({
             id="search-nickname-input"
             placeholder="Nickname"
             allowClear
+            onChange={event =>
+              updateFilters('nicknameFilter', event.target.value)
+            }
           />
         </FilterGroup>
 
         <FilterGroup label="Vocation">
           <S.ChipWrapper>
-            <Chip>
+            <Chip
+              overrideStatus={filters.vocation.has(0)}
+              onClick={() =>
+                updateFilters('vocation', toggleSet(filters.vocation, 0))
+              }
+            >
               <Icon.Rook />
               None
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.vocation.has(1)}
+              onClick={() =>
+                updateFilters('vocation', toggleSet(filters.vocation, 1))
+              }
+            >
               <Icon.Knight />
               Knight
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.vocation.has(2)}
+              onClick={() =>
+                updateFilters('vocation', toggleSet(filters.vocation, 2))
+              }
+            >
               <Icon.Paladin />
               Paladin
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.vocation.has(3)}
+              onClick={() =>
+                updateFilters('vocation', toggleSet(filters.vocation, 3))
+              }
+            >
               <Icon.Sorcerer />
               Sorcerer
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.vocation.has(4)}
+              onClick={() =>
+                updateFilters('vocation', toggleSet(filters.vocation, 4))
+              }
+            >
               <Icon.Druid />
               Druid
             </Chip>
