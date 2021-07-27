@@ -2,6 +2,7 @@
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
+import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
 const FilterDrawer = ({
@@ -23,36 +24,81 @@ const FilterDrawer = ({
 
         <FilterGroup label="Vocation">
           <S.ChipWrapper>
-            <Chip>None</Chip>
-            <Chip>Knight</Chip>
-            <Chip>Paladin</Chip>
-            <Chip>Sorcerer</Chip>
-            <Chip>Druid</Chip>
+            <Chip>
+              <Icon.Rook />
+              None
+            </Chip>
+            <Chip>
+              <Icon.Knight />
+              Knight
+            </Chip>
+            <Chip>
+              <Icon.Paladin />
+              Paladin
+            </Chip>
+            <Chip>
+              <Icon.Sorcerer />
+              Sorcerer
+            </Chip>
+            <Chip>
+              <Icon.Druid />
+              Druid
+            </Chip>
           </S.ChipWrapper>
         </FilterGroup>
 
         <FilterGroup label="PvP">
           <S.ChipWrapper>
-            <Chip>Optional</Chip>
-            <Chip>Open</Chip>
-            <Chip>Retro Open</Chip>
-            <Chip>Hardcore</Chip>
-            <Chip>Retro Hardcore</Chip>
+            <Chip>
+              <Icon.Dove />
+              Optional
+            </Chip>
+            <Chip>
+              <Icon.WhiteSkull />
+              Open
+            </Chip>
+            <Chip>
+              <Icon.OrangeSkull />
+              Retro Open
+            </Chip>
+            <Chip>
+              <Icon.RedSkull />
+              Hardcore
+            </Chip>
+            <Chip>
+              <Icon.BlackSkull />
+              Retro Hardcore
+            </Chip>
           </S.ChipWrapper>
         </FilterGroup>
 
         <FilterGroup label="BattlEye">
           <S.ChipWrapper>
-            <Chip>Green</Chip>
-            <Chip>Yellow</Chip>
+            <Chip>
+              <Icon.Status color="battleGreen" />
+              Green
+            </Chip>
+            <Chip>
+              <Icon.Status color="battleYellow" />
+              Yellow
+            </Chip>
           </S.ChipWrapper>
         </FilterGroup>
 
         <FilterGroup label="Server location">
           <S.ChipWrapper>
-            <Chip>EU</Chip>
-            <Chip>NA</Chip>
-            <Chip>BR</Chip>
+            <Chip>
+              <Icon.EuFlag />
+              EU
+            </Chip>
+            <Chip>
+              <Icon.NaFlag />
+              NA
+            </Chip>
+            <Chip>
+              <Icon.BrFlag />
+              BR
+            </Chip>
           </S.ChipWrapper>
         </FilterGroup>
 
@@ -83,11 +129,26 @@ const FilterDrawer = ({
             style={{ marginBottom: 16 }}
           />
           <S.ChipWrapper>
-            <Chip>Magic</Chip>
-            <Chip>Distance</Chip>
-            <Chip>Club</Chip>
-            <Chip>Sword</Chip>
-            <Chip>Axe</Chip>
+            <Chip>
+              <Icon.Magic />
+              Magic
+            </Chip>
+            <Chip>
+              <Icon.Distance />
+              Distance
+            </Chip>
+            <Chip>
+              <Icon.Club />
+              Club
+            </Chip>
+            <Chip>
+              <Icon.Sword />
+              Sword
+            </Chip>
+            <Chip>
+              <Icon.Axe />
+              Axe
+            </Chip>
           </S.ChipWrapper>
         </FilterGroup>
 
