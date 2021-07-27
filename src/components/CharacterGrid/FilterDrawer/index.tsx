@@ -1,15 +1,33 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
+import { useMemo } from 'react'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
+import { useDrawerFields } from 'contexts/useDatabase'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
+
+import {
+  buildServerOptions,
+  buildRareItemsOptions,
+  imbuementOptions,
+} from './options'
 
 const FilterDrawer = ({
   open,
   onClose,
   ...props
 }: FilterDrawerProps): JSX.Element => {
+  const { serverData, rareItemData } = useDrawerFields()
+  const serverOptions = useMemo(
+    () => buildServerOptions(serverData),
+    [serverData],
+  )
+  const rareItemOptions = useMemo(
+    () => buildRareItemsOptions(rareItemData),
+    [rareItemData],
+  )
+
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>Filters</Drawer.Head>
@@ -108,7 +126,7 @@ const FilterDrawer = ({
             aria-controls="server-list"
             placeholder="Choose a server"
             style={{ marginBottom: 12 }}
-            itemList={[{ name: 'Pacera', value: 'Pacera' }]}
+            itemList={serverOptions}
           />
           <S.ChipWrapper id="server-list">
             <Chip>Adra</Chip>
@@ -158,7 +176,7 @@ const FilterDrawer = ({
               id="imbuements-input"
               aria-controls="imbuements-list"
               placeholder="Select imbuements"
-              itemList={[{ name: 'Critical Hit', value: 'Critical Hit' }]}
+              itemList={imbuementOptions}
             />
             <Chip>All imbuements</Chip>
           </S.FlexWrapper>
@@ -175,7 +193,7 @@ const FilterDrawer = ({
               id="rare-items-input"
               aria-controls="rare-items-list"
               placeholder="Choose an item"
-              itemList={[{ name: 'Ferumbras Hat', value: 'Ferumbras Hat' }]}
+              itemList={rareItemOptions}
             />
             <Chip>All items</Chip>
           </S.FlexWrapper>
