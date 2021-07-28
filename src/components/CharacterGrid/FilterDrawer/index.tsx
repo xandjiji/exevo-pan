@@ -334,14 +334,35 @@ const FilterDrawer = ({
 
         <FilterGroup label="Misc">
           <S.ChipWrapper>
-            <Chip>
+            <Chip
+              overrideStatus={filters.fav}
+              onClick={() => updateFilters('fav', !filters.fav)}
+            >
               Favorited
               <S.Emoji role="img" aria-label="heart">
                 ❤️
               </S.Emoji>
             </Chip>
-            <Chip>Rare nicknames</Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.rareNick}
+              onClick={() => updateFilters('rareNick', !filters.rareNick)}
+            >
+              Rare nicknames
+            </Chip>
+            <Chip
+              overrideStatus={filters.soulwarFilter}
+              onClick={() => {
+                if (filters.soulwarFilter) {
+                  /* @ ToDo: add 8 to a constant or get from default values */
+                  updateFilters('minLevel', 8)
+                  updateFilters('soulwarFilter', false)
+                } else {
+                  updateFilters('minLevel', 400)
+                  updateFilters('maxLevel', 2000)
+                  updateFilters('soulwarFilter', true)
+                }
+              }}
+            >
               Soulwar available
               <S.Emoji role="img" aria-label="heart">
                 💀
