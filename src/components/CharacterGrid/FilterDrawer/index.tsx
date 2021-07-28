@@ -132,23 +132,38 @@ const FilterDrawer = ({
 
         <FilterGroup label="PvP">
           <S.ChipWrapper>
-            <Chip>
+            <Chip
+              overrideStatus={filters.pvp.has(0)}
+              onClick={() => updateFilters('pvp', 0)}
+            >
               <Icon.Dove />
               Optional
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.pvp.has(1)}
+              onClick={() => updateFilters('pvp', 1)}
+            >
               <Icon.WhiteSkull />
               Open
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.pvp.has(2)}
+              onClick={() => updateFilters('pvp', 2)}
+            >
               <Icon.OrangeSkull />
               Retro Open
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.pvp.has(3)}
+              onClick={() => updateFilters('pvp', 3)}
+            >
               <Icon.RedSkull />
               Hardcore
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.pvp.has(4)}
+              onClick={() => updateFilters('pvp', 4)}
+            >
               <Icon.BlackSkull />
               Retro Hardcore
             </Chip>
@@ -157,11 +172,17 @@ const FilterDrawer = ({
 
         <FilterGroup label="BattlEye">
           <S.ChipWrapper>
-            <Chip>
+            <Chip
+              overrideStatus={filters.battleye.has(true)}
+              onClick={() => updateFilters('battleye', true)}
+            >
               <Icon.Status color="battleGreen" />
               Green
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.battleye.has(false)}
+              onClick={() => updateFilters('battleye', false)}
+            >
               <Icon.Status color="battleYellow" />
               Yellow
             </Chip>
@@ -170,15 +191,24 @@ const FilterDrawer = ({
 
         <FilterGroup label="Server location">
           <S.ChipWrapper>
-            <Chip>
+            <Chip
+              overrideStatus={filters.location.has(0)}
+              onClick={() => updateFilters('location', 0)}
+            >
               <Icon.EuFlag />
               EU
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.location.has(1)}
+              onClick={() => updateFilters('location', 1)}
+            >
               <Icon.NaFlag />
               NA
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.location.has(2)}
+              onClick={() => updateFilters('location', 2)}
+            >
               <Icon.BrFlag />
               BR
             </Chip>
@@ -201,7 +231,19 @@ const FilterDrawer = ({
         </FilterGroup>
 
         <FilterGroup label="Level">
-          <RangeSliderInput min={8} max={2000} />
+          <RangeSliderInput
+            min={8}
+            max={2000}
+            value={[filters.minLevel, filters.maxLevel]}
+            onChange={useCallback(
+              (values: [number, number]) => {
+                const [newMin, newMax] = values
+                updateFilters('minLevel', newMin)
+                updateFilters('maxLevel', newMax)
+              },
+              [updateFilters],
+            )}
+          />
         </FilterGroup>
 
         <FilterGroup label="Skill">
@@ -209,26 +251,47 @@ const FilterDrawer = ({
             aria-label="Minimum skill level"
             min={10}
             max={130}
+            value={filters.minSkill}
+            onChange={useCallback(
+              (event: React.ChangeEvent<HTMLInputElement>) =>
+                updateFilters('minSkill', parseInt(event.target.value, 10)),
+              [updateFilters],
+            )}
             style={{ marginBottom: 16 }}
           />
           <S.ChipWrapper>
-            <Chip>
+            <Chip
+              overrideStatus={filters.skillKey.has('magic')}
+              onClick={() => updateFilters('skillKey', 'magic')}
+            >
               <Icon.Magic />
               Magic
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.skillKey.has('distance')}
+              onClick={() => updateFilters('skillKey', 'distance')}
+            >
               <Icon.Distance />
               Distance
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.skillKey.has('club')}
+              onClick={() => updateFilters('skillKey', 'club')}
+            >
               <Icon.Club />
               Club
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.skillKey.has('sword')}
+              onClick={() => updateFilters('skillKey', 'sword')}
+            >
               <Icon.Sword />
               Sword
             </Chip>
-            <Chip>
+            <Chip
+              overrideStatus={filters.skillKey.has('axe')}
+              onClick={() => updateFilters('skillKey', 'axe')}
+            >
               <Icon.Axe />
               Axe
             </Chip>
