@@ -82,6 +82,22 @@ const FilterDrawer = ({
     [],
   )
 
+  const toggleFilterSet = useCallback(
+    (key: keyof FilterState, allOptions: Option[]) => {
+      setFilters(currentFilters => {
+        if ((currentFilters[key] as Set<string>).size < allOptions.length) {
+          return {
+            ...currentFilters,
+            [key]: new Set([...allOptions.map(option => option.value)]),
+          }
+        } else {
+          return { ...currentFilters, [key]: new Set([]) }
+        }
+      })
+    },
+    [],
+  )
+
   const { dispatch } = useDatabaseDispatch()
 
   useEffect(() => {
@@ -338,7 +354,14 @@ const FilterDrawer = ({
                 [updateFilters],
               )}
             />
-            <Chip>All imbuements</Chip>
+            <Chip
+              overrideStatus={
+                filters.imbuementsSet.size === imbuementOptions.length
+              }
+              onClick={() => toggleFilterSet('imbuementsSet', imbuementOptions)}
+            >
+              All imbuements
+            </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="imbuements-list">
             {[...filters.imbuementsSet].map(imbuement => (
@@ -364,7 +387,12 @@ const FilterDrawer = ({
                 [updateFilters],
               )}
             />
-            <Chip>All items</Chip>
+            <Chip
+              overrideStatus={filters.itemSet.size === rareItemOptions.length}
+              onClick={() => toggleFilterSet('itemSet', rareItemOptions)}
+            >
+              All items
+            </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="rare-items-list">
             {[...filters.itemSet].map(item => (
