@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import { useMemo, useState, useCallback } from 'react'
+import { useMemo, useState, useCallback, useEffect } from 'react'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
-import { useDrawerFields } from 'contexts/useDatabase'
+import { useDrawerFields, useDatabaseDispatch } from 'contexts/useDatabase'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
 import * as Icon from './icons'
@@ -29,6 +29,7 @@ const FilterDrawer = ({
     [rareItemData],
   )
 
+  /* @ ToDo: default values come from url parameters */
   const [filters, setFilters] = useState<FilterState>({
     nicknameFilter: '',
     vocation: new Set([]),
@@ -62,6 +63,15 @@ const FilterDrawer = ({
       }),
     [],
   )
+
+  const { dispatch } = useDatabaseDispatch()
+
+  useEffect(() => {
+    /* @ ToDo: debounced effect */
+    const isHistory = window.location.pathname === '/bazaar-history'
+    dispatch({ type: 'APPLY_FILTERS', filters, isHistory })
+    /* @ ToDo: add url parameters */
+  }, [dispatch, filters])
 
   console.log(filters)
 
