@@ -71,3 +71,25 @@ export const Status = styled.div<StatusStyleProps>`
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
   background-color: ${({ color, theme }) => theme.colors[color]};
 `
+
+export const Exclamation = styled.div`
+  position: relative;
+  margin-left: 4px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: solid 2px;
+  border-color: ${({ theme }) => theme.colors.separator};
+
+  &::after {
+    content: '!';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    font-size: 12px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.colors.separator};
+  }
+`

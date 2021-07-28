@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useMemo, useState, useCallback, useEffect } from 'react'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
+import { Tooltip } from 'components/Organisms'
 import { useDrawerFields, useDatabaseDispatch } from 'contexts/useDatabase'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
@@ -113,7 +114,19 @@ const FilterDrawer = ({
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>Filters</Drawer.Head>
       <Drawer.Body>
-        <FilterGroup label="Search nickname" htmlFor="search-nickname-input">
+        <FilterGroup
+          label="Search nickname"
+          htmlFor="search-nickname-input"
+          labelSuffix={
+            <Tooltip
+              offset={[0, 8]}
+              placement="top"
+              content="Regex is enabled! Example: ['-.,]"
+            >
+              <Icon.Exclamation />
+            </Tooltip>
+          }
+        >
           <S.Input
             id="search-nickname-input"
             placeholder="Nickname"
@@ -375,7 +388,19 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Rare items">
+        <FilterGroup
+          label="Rare items"
+          htmlFor="rare-items-input"
+          labelSuffix={
+            <Tooltip
+              offset={[0, 8]}
+              placement="top"
+              content="If a rare item is not on this list it means that there are no auctions available with it."
+            >
+              <Icon.Exclamation />
+            </Tooltip>
+          }
+        >
           <S.FlexWrapper>
             <S.AutocompleteInput
               id="rare-items-input"
@@ -405,40 +430,49 @@ const FilterDrawer = ({
 
         <FilterGroup label="Misc">
           <S.ChipWrapper>
-            <Chip
-              overrideStatus={filters.fav}
-              onClick={() => updateFilters('fav', !filters.fav)}
+            <Tooltip content="Save your favorite auctions pressing the ❤️ button!">
+              <Chip
+                overrideStatus={filters.fav}
+                onClick={() => updateFilters('fav', !filters.fav)}
+              >
+                Favorited
+                <S.Emoji role="img" aria-label="heart">
+                  ❤️
+                </S.Emoji>
+              </Chip>
+            </Tooltip>
+            <Tooltip
+              style={{ width: 280 }}
+              content="Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)"
             >
-              Favorited
-              <S.Emoji role="img" aria-label="heart">
-                ❤️
-              </S.Emoji>
-            </Chip>
-            <Chip
-              overrideStatus={filters.rareNick}
-              onClick={() => updateFilters('rareNick', !filters.rareNick)}
-            >
-              Rare nicknames
-            </Chip>
-            <Chip
-              overrideStatus={filters.soulwarFilter}
-              onClick={() => {
-                if (filters.soulwarFilter) {
-                  /* @ ToDo: add 8 to a constant or get from default values */
-                  updateFilters('minLevel', 8)
-                  updateFilters('soulwarFilter', false)
-                } else {
-                  updateFilters('minLevel', 400)
-                  updateFilters('maxLevel', 2000)
-                  updateFilters('soulwarFilter', true)
-                }
-              }}
-            >
-              Soulwar available
-              <S.Emoji role="img" aria-label="heart">
-                💀
-              </S.Emoji>
-            </Chip>
+              <Chip
+                overrideStatus={filters.rareNick}
+                onClick={() => updateFilters('rareNick', !filters.rareNick)}
+              >
+                Rare nicknames
+              </Chip>
+            </Tooltip>
+            <Tooltip content="Characters level 400+ with Soul War not completed">
+              <Chip
+                overrideStatus={filters.soulwarFilter}
+                onClick={() => {
+                  if (filters.soulwarFilter) {
+                    /* @ ToDo: add 8 to a constant or get from default values */
+                    updateFilters('minLevel', 8)
+                    updateFilters('soulwarFilter', false)
+                  } else {
+                    updateFilters('minLevel', 400)
+                    updateFilters('maxLevel', 2000)
+                    updateFilters('soulwarFilter', true)
+                  }
+                }}
+              >
+                Soulwar available
+                <S.Emoji role="img" aria-label="heart">
+                  💀
+                </S.Emoji>
+              </Chip>
+            </Tooltip>
           </S.ChipWrapper>
         </FilterGroup>
       </Drawer.Body>
