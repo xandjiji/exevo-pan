@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import * as S from './styles'
 import { FilterGroupProps } from './types'
 
@@ -17,4 +18,4 @@ const FilterGroup = ({
   </S.Wrapper>
 )
 
-export default FilterGroup
+export default memo(FilterGroup)
