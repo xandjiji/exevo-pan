@@ -71,7 +71,7 @@ const FilterDrawer = ({
   const updateFilters = useCallback(
     (key: keyof FilterState, value: typeof filters[keyof FilterState]) =>
       setFilters(currentFilters => {
-        if (typeof currentFilters[key] === 'object') {
+        if (currentFilters[key] instanceof Set) {
           return {
             ...currentFilters,
             [key]: toggleSet(currentFilters[key] as Set<typeof value>, value),
