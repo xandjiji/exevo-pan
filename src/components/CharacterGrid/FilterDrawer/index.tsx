@@ -50,8 +50,16 @@ const FilterDrawer = ({
   /* @ ToDo: fix this typing */
   const updateFilters = useCallback(
     (key: keyof FilterState, value: typeof filters[keyof FilterState]) =>
-      /* @ ToDo: check if is SET -> toggleSet */
-      setFilters(currentFilters => ({ ...currentFilters, [key]: value })),
+      setFilters(currentFilters => {
+        if (typeof currentFilters[key] === 'object') {
+          return {
+            ...currentFilters,
+            [key]: toggleSet(currentFilters[key] as Set<typeof value>, value),
+          }
+        } else {
+          return { ...currentFilters, [key]: value }
+        }
+      }),
     [],
   )
 
@@ -76,45 +84,35 @@ const FilterDrawer = ({
           <S.ChipWrapper>
             <Chip
               overrideStatus={filters.vocation.has(0)}
-              onClick={() =>
-                updateFilters('vocation', toggleSet(filters.vocation, 0))
-              }
+              onClick={() => updateFilters('vocation', 0)}
             >
               <Icon.Rook />
               None
             </Chip>
             <Chip
               overrideStatus={filters.vocation.has(1)}
-              onClick={() =>
-                updateFilters('vocation', toggleSet(filters.vocation, 1))
-              }
+              onClick={() => updateFilters('vocation', 1)}
             >
               <Icon.Knight />
               Knight
             </Chip>
             <Chip
               overrideStatus={filters.vocation.has(2)}
-              onClick={() =>
-                updateFilters('vocation', toggleSet(filters.vocation, 2))
-              }
+              onClick={() => updateFilters('vocation', 2)}
             >
               <Icon.Paladin />
               Paladin
             </Chip>
             <Chip
               overrideStatus={filters.vocation.has(3)}
-              onClick={() =>
-                updateFilters('vocation', toggleSet(filters.vocation, 3))
-              }
+              onClick={() => updateFilters('vocation', 3)}
             >
               <Icon.Sorcerer />
               Sorcerer
             </Chip>
             <Chip
               overrideStatus={filters.vocation.has(4)}
-              onClick={() =>
-                updateFilters('vocation', toggleSet(filters.vocation, 4))
-              }
+              onClick={() => updateFilters('vocation', 4)}
             >
               <Icon.Druid />
               Druid

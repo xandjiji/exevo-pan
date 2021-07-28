@@ -8,4 +8,3 @@ export function toggleSet<T>(set: Set<T>, value: T): Set<T> {
 
   return newSet
 }
-/* @ ToDo: updateFilters aqui?  */
