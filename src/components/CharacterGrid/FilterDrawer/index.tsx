@@ -48,6 +48,24 @@ const FilterDrawer = ({
     imbuementsSet: new Set([]),
   })
 
+  const availableServerOptions = useMemo(
+    () => serverOptions.filter(option => !filters.serverSet.has(option.value)),
+    [serverOptions, filters.serverSet],
+  )
+
+  const availableImbuementOptions = useMemo(
+    () =>
+      imbuementOptions.filter(
+        option => !filters.imbuementsSet.has(option.value),
+      ),
+    [filters.imbuementsSet],
+  )
+
+  const availableRareItemOptions = useMemo(
+    () => rareItemOptions.filter(option => !filters.itemSet.has(option.value)),
+    [rareItemOptions, filters.itemSet],
+  )
+
   /* @ ToDo: fix this typing */
   const updateFilters = useCallback(
     (key: keyof FilterState, value: typeof filters[keyof FilterState]) =>
@@ -221,12 +239,21 @@ const FilterDrawer = ({
             aria-controls="server-list"
             placeholder="Choose a server"
             style={{ marginBottom: 12 }}
-            itemList={serverOptions}
+            itemList={availableServerOptions}
+            onItemSelect={useCallback(
+              (option: Option) => updateFilters('serverSet', option.value),
+              [updateFilters],
+            )}
           />
           <S.ChipWrapper id="server-list">
-            <Chip>Adra</Chip>
-            <Chip>Belobra</Chip>
-            <Chip>Pacera</Chip>
+            {[...filters.serverSet].map(server => (
+              <Chip
+                key={server}
+                onClose={() => updateFilters('serverSet', server)}
+              >
+                {server}
+              </Chip>
+            ))}
           </S.ChipWrapper>
         </FilterGroup>
 
@@ -304,14 +331,24 @@ const FilterDrawer = ({
               id="imbuements-input"
               aria-controls="imbuements-list"
               placeholder="Select imbuements"
-              itemList={imbuementOptions}
+              itemList={availableImbuementOptions}
+              onItemSelect={useCallback(
+                (option: Option) =>
+                  updateFilters('imbuementsSet', option.value),
+                [updateFilters],
+              )}
             />
             <Chip>All imbuements</Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="imbuements-list">
-            <Chip>Critical Hit</Chip>
-            <Chip>Speed</Chip>
-            <Chip>Club Skill</Chip>
+            {[...filters.imbuementsSet].map(imbuement => (
+              <Chip
+                key={imbuement}
+                onClose={() => updateFilters('imbuementsSet', imbuement)}
+              >
+                {imbuement}
+              </Chip>
+            ))}
           </S.ChipWrapper>
         </FilterGroup>
 
@@ -321,14 +358,20 @@ const FilterDrawer = ({
               id="rare-items-input"
               aria-controls="rare-items-list"
               placeholder="Choose an item"
-              itemList={rareItemOptions}
+              itemList={availableRareItemOptions}
+              onItemSelect={useCallback(
+                (option: Option) => updateFilters('itemSet', option.value),
+                [updateFilters],
+              )}
             />
             <Chip>All items</Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="rare-items-list">
-            <Chip>Soulshroud</Chip>
-            <Chip>Soulbastion</Chip>
-            <Chip>Soulstealer</Chip>
+            {[...filters.itemSet].map(item => (
+              <Chip key={item} onClose={() => updateFilters('itemSet', item)}>
+                {item}
+              </Chip>
+            ))}
           </S.ChipWrapper>
         </FilterGroup>
 
