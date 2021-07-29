@@ -126,8 +126,7 @@ const FilterDrawer = ({
 
   useEffect(() => {
     setFilters(defaultFilterState)
-    dispatch({ type: 'RESET_TO_BASE_DATA' })
-  }, [pathname, dispatch])
+  }, [pathname])
 
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
