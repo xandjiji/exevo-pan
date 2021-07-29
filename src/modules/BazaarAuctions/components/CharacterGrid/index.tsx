@@ -1,6 +1,6 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import FilterDrawer from '../FilterDrawer'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
-import FilterDrawer from './FilterDrawer'
 import SortingDialog from './SortingDialog'
 import { applySort } from './applySort'
 import * as S from './styles'
