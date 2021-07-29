@@ -2,6 +2,7 @@
 import { useMemo, useState, useCallback, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { dequal } from 'dequal'
+import { debounce } from 'lodash'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useDrawerFields, useDatabaseDispatch } from 'contexts/useDatabase'
@@ -17,6 +18,7 @@ import {
   imbuementOptions,
 } from './options'
 
+const DEBOUNCE_DELAY = 250
 const defaultFilterState = {
   nicknameFilter: '',
   vocation: new Set([]),
@@ -50,6 +52,18 @@ const FilterDrawer = ({
   const rareItemOptions = useMemo(
     () => buildRareItemsOptions(rareItemData),
     [rareItemData],
+  )
+
+  const debouncedDispatchFilters = useMemo(
+    () =>
+      debounce((updatedFilters: FilterState) => {
+        dispatch({
+          type: 'APPLY_FILTERS',
+          filters: updatedFilters,
+          isHistory: isHistory(),
+        })
+      }, DEBOUNCE_DELAY),
+    [dispatch],
   )
 
   /* @ ToDo: default values come from url parameters */
@@ -90,14 +104,10 @@ const FilterDrawer = ({
           updatedFilters = { ...currentFilters, [key]: value }
         }
 
-        dispatch({
-          type: 'APPLY_FILTERS',
-          filters: updatedFilters,
-          isHistory: isHistory(),
-        })
+        debouncedDispatchFilters(updatedFilters)
         return updatedFilters
       }),
-    [dispatch],
+    [debouncedDispatchFilters],
   )
 
   const toggleFilterSet = useCallback(
@@ -113,15 +123,11 @@ const FilterDrawer = ({
           updatedFilters = { ...currentFilters, [key]: new Set([]) }
         }
 
-        dispatch({
-          type: 'APPLY_FILTERS',
-          filters: updatedFilters,
-          isHistory: isHistory(),
-        })
+        debouncedDispatchFilters(updatedFilters)
         return updatedFilters
       })
     },
-    [dispatch],
+    [debouncedDispatchFilters],
   )
 
   useEffect(() => {
@@ -146,11 +152,10 @@ const FilterDrawer = ({
             aria-hidden={isFilterReset}
             onClick={() => {
               setFilters(defaultFilterState)
-              dispatch({
-                type: 'APPLY_FILTERS',
-                filters: defaultFilterState,
-                isHistory: isHistory(),
-              })
+              setTimeout(
+                () => dispatch({ type: 'RESET_TO_BASE_DATA' }),
+                DEBOUNCE_DELAY,
+              )
             }}
           >
             Reset filters
