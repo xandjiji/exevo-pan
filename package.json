@@ -38,6 +38,7 @@
   "dependencies": {
     "@popperjs/core": "^2.9.2",
     "chart.js": "^2.9.3",
+    "dequal": "^2.0.2",
     "idb-keyval": "^5.0.4",
     "lodash": "^4.17.21",
     "react": "^17.0.1",
