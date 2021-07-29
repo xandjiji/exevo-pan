@@ -126,6 +126,7 @@ const FilterDrawer = ({
           Filters
           <S.ResetButton
             disabled={isFilterReset}
+            aria-hidden={isFilterReset}
             onClick={() => setFilters(defaultFilterState)}
           >
             Reset filters
