@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import { useMemo, useState, useCallback, useEffect } from 'react'
+import { memo, useMemo, useState, useCallback, useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import { dequal } from 'dequal'
 import { debounce } from 'lodash'
@@ -531,4 +531,4 @@ const FilterDrawer = ({
   )
 }
 
-export default FilterDrawer
+export default memo(FilterDrawer)

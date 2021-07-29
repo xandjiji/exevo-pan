@@ -107,7 +107,7 @@ const CharacterGrid = ({
         id="filter-drawer"
         aria-label="Filter form"
         open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
+        onClose={useCallback(() => setDrawerOpen(false), [])}
         setIsFilterReset={setIsFilterReset}
       />
 
