@@ -508,12 +508,11 @@ const FilterDrawer = ({
                 overrideStatus={filters.soulwarFilter}
                 onClick={() => {
                   if (filters.soulwarFilter) {
-                    /* @ ToDo: add 8 to a constant or get from default values */
-                    updateFilters('minLevel', 8)
+                    updateFilters('minLevel', defaultFilterState.minLevel)
                     updateFilters('soulwarFilter', false)
                   } else {
                     updateFilters('minLevel', 400)
-                    updateFilters('maxLevel', 2000)
+                    updateFilters('maxLevel', defaultFilterState.maxLevel)
                     updateFilters('soulwarFilter', true)
                   }
                 }}
