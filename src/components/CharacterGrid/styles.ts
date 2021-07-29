@@ -2,7 +2,13 @@ import styled, { css } from 'styled-components'
 import { Paginator as BasePaginator } from 'components/Atoms'
 import { ReactComponent as FilterIconSvg } from 'assets/svgs/filter.svg'
 import { ReactComponent as SortIconSvg } from 'assets/svgs/sort.svg'
-import { InnerContainer, Shadow, Clickable, CustomScrollbar } from 'styles'
+import {
+  InnerContainer,
+  Shadow,
+  Clickable,
+  CustomScrollbar,
+  Smooth,
+} from 'styles'
 
 export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
@@ -28,6 +34,19 @@ export const Head = styled.div`
   }
 `
 
+export const ActiveIcon = styled.div`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: ${({ theme }) => theme.colors.battleYellow};
+  ${Shadow}
+  ${Smooth}
+
+  &[aria-hidden="true"] {
+    opacity: 0;
+  }
+`
+
 export const IconStyling = css`
   padding: 2px;
   width: 37px;
@@ -44,10 +63,17 @@ export const SortIcon = styled(SortIconSvg)`
   ${IconStyling}
 `
 export const FilterButton = styled.button`
+  position: relative;
   ${IconStyling}
   ${Clickable}
   margin-right: 8px;
   padding: 0;
+
+  ${ActiveIcon} {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+  }
 `
 
 export const Paginator = styled(BasePaginator)`

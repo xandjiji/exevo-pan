@@ -24,8 +24,8 @@ const CharacterGrid = ({
   const [descendingOrder, setDescendingOrder] = useState<boolean>(
     defaultDescendingOrder,
   )
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [isFilterReset, setIsFilterReset] = useState<boolean>(false)
-  console.log(isFilterReset)
 
   const gridRef = useRef<HTMLDivElement | null>(null)
 
@@ -65,8 +65,6 @@ const CharacterGrid = ({
       gridRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }, [characterPage])
 
-  const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
-
   return (
     <S.Wrapper {...props}>
       <S.Head>
@@ -78,14 +76,12 @@ const CharacterGrid = ({
           onClick={() => setDrawerOpen(true)}
         >
           <S.FilterIcon />
+          <S.ActiveIcon
+            role="status"
+            aria-label="Filter is active"
+            aria-hidden={isFilterReset}
+          />
         </S.FilterButton>
-        <FilterDrawer
-          id="filter-drawer"
-          aria-label="Filter form"
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          setIsFilterReset={setIsFilterReset}
-        />
 
         <SortingDialog
           sortMode={sortMode}
@@ -106,6 +102,14 @@ const CharacterGrid = ({
           noItemsMessage="No characters found"
         />
       </S.Head>
+
+      <FilterDrawer
+        id="filter-drawer"
+        aria-label="Filter form"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+        setIsFilterReset={setIsFilterReset}
+      />
 
       <S.Grid ref={gridRef} id="character-grid">
         {isLoading
