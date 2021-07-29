@@ -554,4 +554,56 @@ describe('useDatabase()', () => {
       ).toBeTruthy()
     })
   })
+
+  test('checking reset to base data dispatch', async () => {
+    currentHistory.push('/')
+    const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
+      wrapper: ComponentWrapper,
+    })
+
+    expect(result.current).toEqual({
+      loading: true,
+      characterData: [],
+      serverData: [],
+      rareItemData: {},
+      historyData: [],
+      dispatch: expect.any(Function),
+    })
+
+    await waitForNextUpdate()
+
+    expect(result.current).toEqual({
+      loading: false,
+      characterData: mockedCharacterData,
+      serverData: mockedServerData,
+      rareItemData: mockedItemData,
+      historyData: [],
+      dispatch: expect.any(Function),
+    })
+
+    act(() => {
+      result.current.dispatch({
+        type: 'APPLY_FILTERS',
+        isHistory: false,
+        filters: { ...initialFilter, pvp: new Set([1]) },
+      })
+    })
+
+    result.current.characterData.forEach(character => {
+      expect(character.serverData.pvpType.type).toBe(1)
+    })
+
+    act(() => {
+      result.current.dispatch({ type: 'RESET_TO_BASE_DATA' })
+    })
+
+    expect(result.current).toEqual({
+      loading: false,
+      characterData: mockedCharacterData,
+      serverData: mockedServerData,
+      rareItemData: mockedItemData,
+      historyData: [],
+      dispatch: expect.any(Function),
+    })
+  })
 })
