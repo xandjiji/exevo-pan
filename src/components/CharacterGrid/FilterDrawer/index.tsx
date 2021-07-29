@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useMemo, useState, useCallback, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import { dequal } from 'dequal'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
@@ -108,6 +109,7 @@ const FilterDrawer = ({
 
   const { dispatch } = useDatabaseDispatch()
 
+  /* @ ToDo: useReducer for these actions, updateFilters and toggleFilterSet */
   useEffect(() => {
     /* @ ToDo: debounced effect */
     const isHistory = window.location.pathname === '/bazaar-history'
@@ -118,6 +120,15 @@ const FilterDrawer = ({
     notifyIsFilterReset(isReset)
     /* @ ToDo: add url parameters */
   }, [dispatch, filters, notifyIsFilterReset])
+
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    setFilters(defaultFilterState)
+    const isHistory = window.location.pathname === '/bazaar-history'
+    /* @ ToDo: dispatch new action: reset data */
+    dispatch({ type: 'APPLY_FILTERS', filters: defaultFilterState, isHistory })
+  }, [pathname, dispatch])
 
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
