@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { DefaultTheme } from 'styled-components'
 import { ReactComponent as ResetIcon } from 'assets/svgs/reset.svg'
 import RookIcon from 'assets/rook.png'
 import KnightIcon from 'assets/knight.png'
@@ -21,7 +21,9 @@ import NaFlagIcon from 'assets/na-flag.png'
 
 import { StatusStyleProps } from './types'
 
-export const Reset = styled(ResetIcon)
+export const Reset = styled(ResetIcon)`
+  fill: ${({ theme }) => (theme as DefaultTheme).colors.onPrimary};
+`
 
 const ImgIcon = styled.img`
   margin-right: 6px;

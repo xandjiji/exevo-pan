@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useMemo, useState, useCallback, useEffect } from 'react'
+import { dequal } from 'dequal'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useDrawerFields, useDatabaseDispatch } from 'contexts/useDatabase'
@@ -14,6 +15,24 @@ import {
   buildRareItemsOptions,
   imbuementOptions,
 } from './options'
+
+const defaultFilterState = {
+  nicknameFilter: '',
+  vocation: new Set([]),
+  pvp: new Set([]),
+  battleye: new Set([]),
+  location: new Set([]),
+  serverSet: new Set([]),
+  minLevel: 8,
+  maxLevel: 2000,
+  minSkill: 10,
+  skillKey: new Set([]),
+  itemSet: new Set([]),
+  fav: false,
+  rareNick: false,
+  soulwarFilter: false,
+  imbuementsSet: new Set([]),
+}
 
 const FilterDrawer = ({
   open,
@@ -31,23 +50,10 @@ const FilterDrawer = ({
   )
 
   /* @ ToDo: default values come from url parameters */
-  const [filters, setFilters] = useState<FilterState>({
-    nicknameFilter: '',
-    vocation: new Set([]),
-    pvp: new Set([]),
-    battleye: new Set([]),
-    location: new Set([]),
-    serverSet: new Set([]),
-    minLevel: 8,
-    maxLevel: 2000,
-    minSkill: 10,
-    skillKey: new Set([]),
-    itemSet: new Set([]),
-    fav: false,
-    rareNick: false,
-    soulwarFilter: false,
-    imbuementsSet: new Set([]),
-  })
+  const [filters, setFilters] = useState<FilterState>(defaultFilterState)
+  const [isFilterReset, setIsFilterReset] = useState<boolean>(() =>
+    dequal(filters, defaultFilterState),
+  )
 
   const availableServerOptions = useMemo(
     () => serverOptions.filter(option => !filters.serverSet.has(option.value)),
@@ -105,14 +111,22 @@ const FilterDrawer = ({
     /* @ ToDo: debounced effect */
     const isHistory = window.location.pathname === '/bazaar-history'
     dispatch({ type: 'APPLY_FILTERS', filters, isHistory })
+
+    setIsFilterReset(dequal(filters, defaultFilterState))
     /* @ ToDo: add url parameters */
   }, [dispatch, filters])
 
-  console.log(filters)
-
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
-      <Drawer.Head onClose={onClose}>Filters</Drawer.Head>
+      <Drawer.Head onClose={onClose}>
+        <S.HeadWrapper>
+          Filters
+          <S.ResetButton disabled={isFilterReset}>
+            Reset filters{' '}
+            <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
+          </S.ResetButton>
+        </S.HeadWrapper>
+      </Drawer.Head>
       <Drawer.Body>
         <FilterGroup
           label="Search nickname"

@@ -4,6 +4,15 @@ import {
   Input as BaseInput,
 } from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
+import { Smooth } from 'styles'
+
+export const HeadWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  flex-grow: 1;
+`
 
 export const DrawerFooter = styled(BaseDrawerFooter)`
   flex: none;
@@ -49,4 +58,31 @@ export const FlexWrapper = styled.div`
 export const Emoji = styled.span`
   margin-left: 6px;
   font-size: 12px;
+`
+
+export const ResetButton = styled.button`
+  padding: 4px 12px;
+  display: flex;
+  align-items: center;
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.14);
+  ${Smooth}
+
+  &:disabled {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &:hover {
+    box-shadow: 4px 4px 4px 2px rgba(0, 0, 0, 0.14);
+  }
+
+  &:active {
+    box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
+  }
 `
