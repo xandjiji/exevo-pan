@@ -150,6 +150,7 @@ const FilterDrawer = ({
             id="search-nickname-input"
             placeholder="Nickname"
             allowClear
+            value={filters.nicknameFilter}
             onChange={event =>
               updateFilters('nicknameFilter', event.target.value)
             }
