@@ -47,5 +47,4 @@ export type Action =
     }
   | {
       type: 'RESET_TO_BASE_DATA'
-      isHistory: boolean
     }

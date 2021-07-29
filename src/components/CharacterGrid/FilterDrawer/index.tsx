@@ -126,10 +126,7 @@ const FilterDrawer = ({
 
   useEffect(() => {
     setFilters(defaultFilterState)
-    dispatch({
-      type: 'RESET_TO_BASE_DATA',
-      isHistory: pathname === '/bazaar-history',
-    })
+    dispatch({ type: 'RESET_TO_BASE_DATA' })
   }, [pathname, dispatch])
 
   return (
