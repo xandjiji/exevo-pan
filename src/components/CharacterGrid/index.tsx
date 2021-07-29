@@ -24,6 +24,8 @@ const CharacterGrid = ({
   const [descendingOrder, setDescendingOrder] = useState<boolean>(
     defaultDescendingOrder,
   )
+  const [isFilterReset, setIsFilterReset] = useState<boolean>(false)
+  console.log(isFilterReset)
 
   const gridRef = useRef<HTMLDivElement | null>(null)
 
@@ -82,6 +84,7 @@ const CharacterGrid = ({
           aria-label="Filter form"
           open={drawerOpen}
           onClose={() => setDrawerOpen(false)}
+          setIsFilterReset={setIsFilterReset}
         />
 
         <SortingDialog

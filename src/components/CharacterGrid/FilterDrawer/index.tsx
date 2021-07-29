@@ -37,6 +37,7 @@ const defaultFilterState = {
 const FilterDrawer = ({
   open,
   onClose,
+  setIsFilterReset: notifyIsFilterReset,
   ...props
 }: FilterDrawerProps): JSX.Element => {
   const { serverData, rareItemData } = useDrawerFields()
@@ -112,9 +113,11 @@ const FilterDrawer = ({
     const isHistory = window.location.pathname === '/bazaar-history'
     dispatch({ type: 'APPLY_FILTERS', filters, isHistory })
 
-    setIsFilterReset(dequal(filters, defaultFilterState))
+    const isReset = dequal(filters, defaultFilterState)
+    setIsFilterReset(isReset)
+    notifyIsFilterReset(isReset)
     /* @ ToDo: add url parameters */
-  }, [dispatch, filters])
+  }, [dispatch, filters, notifyIsFilterReset])
 
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
