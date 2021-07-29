@@ -8,3 +8,6 @@ export function toggleSet<T>(set: Set<T>, value: T): Set<T> {
 
   return newSet
 }
+
+export const isHistory = (): boolean =>
+  window.location.pathname === '/bazaar-history'

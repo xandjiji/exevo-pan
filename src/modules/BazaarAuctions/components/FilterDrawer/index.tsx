@@ -10,7 +10,7 @@ import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
-import { toggleSet } from './utils'
+import { toggleSet, isHistory } from './utils'
 import {
   buildServerOptions,
   buildRareItemsOptions,
@@ -42,6 +42,7 @@ const FilterDrawer = ({
   ...props
 }: FilterDrawerProps): JSX.Element => {
   const { serverData, rareItemData } = useDrawerFields()
+  const { dispatch } = useDatabaseDispatch()
   const serverOptions = useMemo(
     () => buildServerOptions(serverData),
     [serverData],
@@ -79,48 +80,55 @@ const FilterDrawer = ({
   const updateFilters = useCallback(
     (key: keyof FilterState, value: typeof filters[keyof FilterState]) =>
       setFilters(currentFilters => {
+        let updatedFilters = {} as FilterState
         if (currentFilters[key] instanceof Set) {
-          return {
+          updatedFilters = {
             ...currentFilters,
             [key]: toggleSet(currentFilters[key] as Set<typeof value>, value),
           }
         } else {
-          return { ...currentFilters, [key]: value }
+          updatedFilters = { ...currentFilters, [key]: value }
         }
+
+        dispatch({
+          type: 'APPLY_FILTERS',
+          filters: updatedFilters,
+          isHistory: isHistory(),
+        })
+        return updatedFilters
       }),
-    [],
+    [dispatch],
   )
 
   const toggleFilterSet = useCallback(
     (key: keyof FilterState, allOptions: Option[]) => {
       setFilters(currentFilters => {
+        let updatedFilters = {} as FilterState
         if ((currentFilters[key] as Set<string>).size < allOptions.length) {
-          return {
+          updatedFilters = {
             ...currentFilters,
             [key]: new Set([...allOptions.map(option => option.value)]),
           }
         } else {
-          return { ...currentFilters, [key]: new Set([]) }
+          updatedFilters = { ...currentFilters, [key]: new Set([]) }
         }
+
+        dispatch({
+          type: 'APPLY_FILTERS',
+          filters: updatedFilters,
+          isHistory: isHistory(),
+        })
+        return updatedFilters
       })
     },
-    [],
+    [dispatch],
   )
 
-  const { dispatch } = useDatabaseDispatch()
-
-  /* @ ToDo: useReducer for these actions, updateFilters and toggleFilterSet */
   useEffect(() => {
-    /* @ ToDo: prevent this from triggering on pathname change */
-    /* @ ToDo: debounced effect */
-    const isHistory = window.location.pathname === '/bazaar-history'
-    dispatch({ type: 'APPLY_FILTERS', filters, isHistory })
-
     const isReset = dequal(filters, defaultFilterState)
     setIsFilterReset(isReset)
     notifyIsFilterReset(isReset)
-    /* @ ToDo: add url parameters */
-  }, [dispatch, filters, notifyIsFilterReset])
+  }, [filters, notifyIsFilterReset])
 
   const { pathname } = useLocation()
 
@@ -136,7 +144,14 @@ const FilterDrawer = ({
           <S.ResetButton
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
-            onClick={() => setFilters(defaultFilterState)}
+            onClick={() => {
+              setFilters(defaultFilterState)
+              dispatch({
+                type: 'APPLY_FILTERS',
+                filters: defaultFilterState,
+                isHistory: isHistory(),
+              })
+            }}
           >
             Reset filters
             <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
