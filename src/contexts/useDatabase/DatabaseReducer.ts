@@ -46,6 +46,19 @@ export default (
         }
       }
 
+    case 'RESET_TO_BASE_DATA':
+      if (action.isHistory) {
+        return {
+          ...state,
+          historyData: state.baseHistoryData,
+        }
+      } else {
+        return {
+          ...state,
+          characterData: state.baseCharacterData,
+        }
+      }
+
     default:
       return { ...state }
   }

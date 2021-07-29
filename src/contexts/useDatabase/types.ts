@@ -45,3 +45,7 @@ export type Action =
       rareItemData: RareItemData
       isHistory: boolean
     }
+  | {
+      type: 'RESET_TO_BASE_DATA'
+      isHistory: boolean
+    }

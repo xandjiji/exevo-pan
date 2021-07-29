@@ -111,6 +111,7 @@ const FilterDrawer = ({
 
   /* @ ToDo: useReducer for these actions, updateFilters and toggleFilterSet */
   useEffect(() => {
+    /* @ ToDo: prevent this from triggering on pathname change */
     /* @ ToDo: debounced effect */
     const isHistory = window.location.pathname === '/bazaar-history'
     dispatch({ type: 'APPLY_FILTERS', filters, isHistory })
@@ -125,9 +126,10 @@ const FilterDrawer = ({
 
   useEffect(() => {
     setFilters(defaultFilterState)
-    const isHistory = window.location.pathname === '/bazaar-history'
-    /* @ ToDo: dispatch new action: reset data */
-    dispatch({ type: 'APPLY_FILTERS', filters: defaultFilterState, isHistory })
+    dispatch({
+      type: 'RESET_TO_BASE_DATA',
+      isHistory: pathname === '/bazaar-history',
+    })
   }, [pathname, dispatch])
 
   return (
