@@ -116,13 +116,18 @@ const FilterDrawer = ({
     /* @ ToDo: add url parameters */
   }, [dispatch, filters])
 
+  console.log(filters)
+
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>
         <S.HeadWrapper>
           Filters
-          <S.ResetButton disabled={isFilterReset}>
-            Reset filters{' '}
+          <S.ResetButton
+            disabled={isFilterReset}
+            onClick={() => setFilters(defaultFilterState)}
+          >
+            Reset filters
             <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
           </S.ResetButton>
         </S.HeadWrapper>
