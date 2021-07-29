@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import CharacterCard, { CardSkeleton } from '../CharacterCard'
 import FilterDrawer from './FilterDrawer'
 import SortingDialog from './SortingDialog'
-import CharacterCard, { CardSkeleton } from './CharacterCard'
 import { applySort } from './applySort'
 import * as S from './styles'
 import { CharacterGridProps } from './types'

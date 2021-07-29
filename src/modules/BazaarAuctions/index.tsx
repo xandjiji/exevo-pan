@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import CharacterGrid from 'components/CharacterGrid'
-import { useCharacters, useDatabaseDispatch } from 'contexts/useDatabase'
 import { useLocation } from 'react-router-dom'
+import { useCharacters, useDatabaseDispatch } from 'contexts/useDatabase'
+import CharacterGrid from './components/CharacterGrid'
 
 const BazaarAuctions = (): JSX.Element => {
   const { characterData, historyData, loading } = useCharacters()
