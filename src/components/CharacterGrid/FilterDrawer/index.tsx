@@ -116,8 +116,6 @@ const FilterDrawer = ({
     /* @ ToDo: add url parameters */
   }, [dispatch, filters])
 
-  console.log(filters)
-
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>

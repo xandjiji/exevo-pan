@@ -1,12 +1,4 @@
-import {
-  useState,
-  useMemo,
-  useRef,
-  useEffect,
-  useContext,
-  useCallback,
-} from 'react'
-import SideDrawerContext from 'contexts/SideDrawer/context'
+import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import FilterDrawer from './FilterDrawer'
 import SortingDialog from './SortingDialog'
 import CharacterCard, { CardSkeleton } from './CharacterCard'
@@ -25,8 +17,6 @@ const CharacterGrid = ({
   const { current: isDesktop } = useRef(
     window.matchMedia('(min-width: 768px)').matches,
   )
-  /* @ ToDo: remove this after SideDrawer refactor*/
-  const { toggleSideDrawer } = useContext(SideDrawerContext)
 
   const gridState = useRef<'initial' | 'processing' | 'ready'>('initial')
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -78,10 +68,6 @@ const CharacterGrid = ({
   return (
     <S.Wrapper {...props}>
       <S.Head>
-        <S.FilterIcon
-          aria-controls="filter-drawer"
-          onClick={toggleSideDrawer}
-        />
         <S.FilterButton
           tabIndex={0}
           role="button"
