@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Smooth } from 'styles'
-import { ErrorMessageProps, InputWrapperProps } from './types'
+import { InputWrapperProps } from './types'
 
 export const Wrapper = styled.div``
 
@@ -19,7 +19,7 @@ export const Input = styled.input`
   transition-property: border-color, padding;
 `
 
-export const ErrorMessage = styled.span<ErrorMessageProps>`
+export const ErrorMessage = styled.span`
   padding: 0px 10px;
 
   font-size: 10px;
@@ -28,11 +28,9 @@ export const ErrorMessage = styled.span<ErrorMessageProps>`
   opacity: 0;
   transition: opacity 0.2s ease-out;
 
-  ${({ active }) =>
-    active &&
-    css`
-      opacity: 1;
-    `}
+  &[aria-hidden='false'] {
+    opacity: 1;
+  }
 `
 
 export const ClearButton = styled.button`

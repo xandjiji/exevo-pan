@@ -70,10 +70,23 @@ describe('<Input />', () => {
   })
 
   test('errorMessage should NOT visible', () => {
-    renderWithProviders(<Input aria-label="input" />)
+    const { rerender } = renderWithProviders(
+      <Input aria-label="input" errorMessage="field is invalid" />,
+    )
 
     const inputElement = screen.getByLabelText('input')
     const errorElement = screen.getByRole('alert')
+
+    expect(inputElement).toBeInvalid()
+    expect(errorElement).toBeVisible()
+    expect(errorElement).toHaveTextContent('field is invalid')
+
+    expect(inputElement).toHaveAttribute(
+      'aria-errormessage',
+      errorElement.getAttribute('id'),
+    )
+
+    rerender(<Input aria-label="input" />)
 
     expect(inputElement).not.toBeInvalid()
     expect(errorElement).not.toBeVisible()

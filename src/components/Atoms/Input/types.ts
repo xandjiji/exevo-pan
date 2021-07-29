@@ -11,7 +11,3 @@ export interface InputWrapperProps {
   isClearButtonActive?: boolean
   isInvalid: boolean
 }
-
-export interface ErrorMessageProps {
-  active: boolean
-}

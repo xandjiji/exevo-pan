@@ -66,12 +66,7 @@ const Input = ({
           />
         )}
       </S.InputWrapper>
-      <S.ErrorMessage
-        id={errorId}
-        active={isInvalid}
-        aria-hidden={!isInvalid}
-        role="alert"
-      >
+      <S.ErrorMessage id={errorId} aria-hidden={!isInvalid} role="alert">
         {errorMessage}
       </S.ErrorMessage>
     </S.Wrapper>
