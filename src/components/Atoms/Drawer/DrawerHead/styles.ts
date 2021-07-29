@@ -31,6 +31,7 @@ export const ContentWrapper = styled.div`
   font-size: 16px;
   letter-spacing: 0.5px;
   color: ${({ theme }) => theme.colors.onPrimary};
+  width: 100%;
 
   * {
     font-size: 16px;
