@@ -19,6 +19,7 @@ import {
   buildRareItemsOptions,
   imbuementOptions,
 } from './options'
+import { filterSchema } from './schema'
 
 const DEBOUNCE_DELAY = 250
 
@@ -40,14 +41,7 @@ const defaultFilterState = {
   soulwarFilter: false,
   imbuementsSet: new Set([]),
 }
-const [getUrlValues, setUrlValues] = urlParametersState([
-  {
-    key: 'nicknameFilter',
-    defaultValue: '',
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
-  },
-])
+const [getUrlValues, setUrlValues] = urlParametersState(filterSchema)
 
 const FilterDrawer = ({
   open,
