@@ -1,4 +1,3 @@
-/* @ ToDo: move this to urlParametersState utils export */
 const encodeSet = (set: Set<boolean | number | string>): string =>
   [...set].join(',')
 const decodeSet = (
@@ -26,8 +25,6 @@ export const filterSchema = [
   {
     key: 'nicknameFilter',
     defaultValue: '',
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
   },
   {
     key: 'vocation',
@@ -62,20 +59,14 @@ export const filterSchema = [
   {
     key: 'minLevel',
     defaultValue: 8,
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
   },
   {
     key: 'maxLevel',
     defaultValue: 2000,
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
   },
   {
     key: 'minSkill',
     defaultValue: 10,
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
   },
 
   {
@@ -99,19 +90,13 @@ export const filterSchema = [
   {
     key: 'fav',
     defaultValue: false,
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
   },
   {
     key: 'rareNick',
     defaultValue: false,
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
   },
   {
     key: 'soulwarFilter',
     defaultValue: false,
-    encode: encodeURIComponent,
-    decode: decodeURIComponent,
   },
 ]
