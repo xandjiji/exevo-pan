@@ -62,8 +62,7 @@ export const TrackFill = styled.div`
 
 export const ValueDisplay = styled.span`
   padding: 7px 0;
-  /* @ ToDo: remove !important after SideDrawer refactor */
-  width: 40px !important;
+  width: 40px;
   flex-shrink: 0;
   border-radius: 8px;
   border: none;
@@ -73,8 +72,7 @@ export const ValueDisplay = styled.span`
   font-size: 12px;
   font-weight: 400;
   text-align: center;
-  /* @ ToDo: remove !important after SideDrawer refactor */
-  color: ${({ theme }) => theme.colors.onSurface} !important;
+  color: ${({ theme }) => theme.colors.onSurface};
 
   -moz-appearance: textfield;
   &::-webkit-outer-spin-button,

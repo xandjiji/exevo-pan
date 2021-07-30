@@ -5,7 +5,6 @@ import MasterLayout from './layouts/MasterLayout';
 import UrlParametersProvider from './contexts/UrlParameters';
 import { ThemeProvider } from 'contexts/useTheme';
 import { DatabaseProvider } from 'contexts/useDatabase';
-import SideDrawerProvider from './contexts/SideDrawer/'
 
 import ErrorBoundary from './components/ErrorBoundary';
 
@@ -16,11 +15,9 @@ const App = () => {
                 <UrlParametersProvider>
                     <ThemeProvider>
                         <DatabaseProvider>
-                            <SideDrawerProvider>
 
-                                <MasterLayout />
+                            <MasterLayout />
 
-                            </SideDrawerProvider>
                         </DatabaseProvider>
                     </ThemeProvider>
                 </UrlParametersProvider>
