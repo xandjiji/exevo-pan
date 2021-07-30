@@ -78,9 +78,13 @@ const CharacterGrid = ({
           <S.FilterIcon />
           <S.ActiveIcon
             role="status"
-            aria-label="Filter is active"
+            aria-label={`${activeFilterCount} ${
+              activeFilterCount === 1 ? 'filter' : 'filters'
+            } ${activeFilterCount === 1 ? 'is' : 'are'} active`}
             aria-hidden={activeFilterCount < 1}
-          />
+          >
+            {activeFilterCount}
+          </S.ActiveIcon>
         </S.FilterButton>
 
         <SortingDialog

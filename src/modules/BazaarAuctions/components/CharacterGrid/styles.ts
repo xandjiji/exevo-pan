@@ -35,14 +35,19 @@ export const Head = styled.div`
 `
 
 export const ActiveIcon = styled.div`
-  width: 12px;
-  height: 12px;
+  width: 17px;
+  height: 17px;
   border-radius: 50%;
   background-color: ${({ theme }) => theme.colors.battleYellow};
   ${Shadow}
   ${Smooth}
 
-  &[aria-hidden="true"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+
+  &[aria-hidden='true'] {
     opacity: 0;
   }
 `
@@ -71,8 +76,8 @@ export const FilterButton = styled.button`
 
   ${ActiveIcon} {
     position: absolute;
-    top: 1px;
-    right: 1px;
+    top: -2px;
+    right: -2px;
   }
 `
 
