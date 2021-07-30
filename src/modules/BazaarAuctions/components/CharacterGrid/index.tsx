@@ -25,7 +25,7 @@ const CharacterGrid = ({
     defaultDescendingOrder,
   )
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
-  const [isFilterReset, setIsFilterReset] = useState<boolean>(false)
+  const [activeFilterCount, setActiveFilterCount] = useState<number>(0)
 
   const gridRef = useRef<HTMLDivElement | null>(null)
 
@@ -79,7 +79,7 @@ const CharacterGrid = ({
           <S.ActiveIcon
             role="status"
             aria-label="Filter is active"
-            aria-hidden={isFilterReset}
+            aria-hidden={activeFilterCount < 1}
           />
         </S.FilterButton>
 
@@ -108,7 +108,7 @@ const CharacterGrid = ({
         aria-label="Filter form"
         open={drawerOpen}
         onClose={useCallback(() => setDrawerOpen(false), [])}
-        setIsFilterReset={setIsFilterReset}
+        setActiveFilterCount={setActiveFilterCount}
       />
 
       <S.Grid ref={gridRef} id="character-grid">

@@ -2,7 +2,7 @@ export interface FilterDrawerProps
   extends React.HTMLAttributes<HTMLDivElement> {
   open: boolean
   onClose: () => void
-  setIsFilterReset: React.Dispatch<React.SetStateAction<boolean>>
+  setActiveFilterCount: React.Dispatch<React.SetStateAction<number>>
 }
 
 export interface StatusStyleProps {

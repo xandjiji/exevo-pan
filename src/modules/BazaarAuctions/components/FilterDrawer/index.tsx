@@ -28,7 +28,7 @@ const { getUrlValues, setUrlValues, defaultValues } =
 const FilterDrawer = ({
   open,
   onClose,
-  setIsFilterReset: notifyIsFilterReset,
+  setActiveFilterCount,
   ...props
 }: FilterDrawerProps): JSX.Element => {
   const { serverData, rareItemData } = useDrawerFields()
@@ -122,10 +122,11 @@ const FilterDrawer = ({
   useEffect(() => {
     const isReset = dequal(filters, defaultValues)
     setIsFilterReset(isReset)
-    notifyIsFilterReset(isReset)
+    setActiveFilterCount(
+      countActiveFilters(defaultValues as FilterState, filters),
+    )
     setUrlValues(filters)
-    console.log(countActiveFilters(defaultValues as FilterState, filters))
-  }, [filters, notifyIsFilterReset])
+  }, [filters, setActiveFilterCount])
 
   const { pathname } = useLocation()
   const isMounted = useIsMounted()
