@@ -1,3 +1,4 @@
+import { dequal } from 'dequal'
 import { ParamRegister, ParameterObject } from './types'
 
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
@@ -24,7 +25,7 @@ export function urlParametersState<T>(
       const { key, encode, defaultValue } = param
       const value = newValues[key]
 
-      if (value === defaultValue) {
+      if (dequal(value, defaultValue)) {
         urlParams.delete(key)
       } else {
         urlParams.set(key, encode(value))
