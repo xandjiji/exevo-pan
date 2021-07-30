@@ -31,10 +31,13 @@ export function urlParametersState<T>(
       }
     }
 
+    const newParamString = urlParams.toString()
     history.replaceState(
       {},
       '',
-      `${window.location.pathname}?${urlParams.toString()}`,
+      `${window.location.pathname}${
+        newParamString ? `?${newParamString}` : ''
+      }`,
     )
   }
 
