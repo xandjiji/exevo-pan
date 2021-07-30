@@ -1,8 +1,8 @@
-export interface ParamRegister<T> {
+export interface ParamRegister {
   key: string
-  defaultValue: T
-  encode: (value: T) => string
-  decode: (value: string) => T
+  defaultValue: any
+  encode: (value: any) => string
+  decode: (value: string) => any
 }
 
-export type ParameterObject<T> = Record<string, T>
+export type ParameterObject = Record<string, any>

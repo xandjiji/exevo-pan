@@ -1,15 +1,16 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { dequal } from 'dequal'
 import { ParamRegister, ParameterObject } from './types'
 
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
 
-export function urlParametersState<T>(
-  registeredParams: ParamRegister<T>[],
-): [() => ParameterObject<T>, (newValues: ParameterObject<T>) => void] {
-  const getUrlValues = (): ParameterObject<T> => {
+export function urlParametersState(
+  registeredParams: ParamRegister[],
+): [() => ParameterObject, (newValues: ParameterObject) => void] {
+  const getUrlValues = (): ParameterObject => {
     const urlParams = getCurrentUrlParams()
 
-    const urlValues = {} as ParameterObject<T>
+    const urlValues = {} as ParameterObject
     for (const param of registeredParams) {
       const { key, decode, defaultValue } = param
       const urlEncodedValue = urlParams.get(param.key)
@@ -18,7 +19,7 @@ export function urlParametersState<T>(
     return urlValues
   }
 
-  const setUrlValues = (newValues: ParameterObject<T>): void => {
+  const setUrlValues = (newValues: ParameterObject): void => {
     const urlParams = getCurrentUrlParams()
 
     for (const param of registeredParams) {
