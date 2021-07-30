@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { dequal } from 'dequal'
-import { ParamRegister, ParameterObject } from './types'
+import {
+  ParamRegister,
+  ParameterObject,
+  urlParameterStateObject,
+} from './types'
 
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
 
 export function urlParametersState(
   registeredParams: ParamRegister[],
-): [() => ParameterObject, (newValues: ParameterObject) => void] {
+): urlParameterStateObject {
   const getUrlValues = (): ParameterObject => {
     const urlParams = getCurrentUrlParams()
 
@@ -43,5 +47,16 @@ export function urlParametersState(
     )
   }
 
-  return [getUrlValues, setUrlValues]
+  function getDefaultValues(): ParameterObject {
+    const defaultValues = {} as ParameterObject
+
+    for (const param of registeredParams) {
+      const { key, defaultValue } = param
+      defaultValues[key] = defaultValue
+    }
+
+    return defaultValues
+  }
+
+  return { getUrlValues, setUrlValues, defaultValues: getDefaultValues() }
 }

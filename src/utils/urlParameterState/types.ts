@@ -6,3 +6,9 @@ export interface ParamRegister {
 }
 
 export type ParameterObject = Record<string, any>
+
+export interface urlParameterStateObject {
+  getUrlValues: () => ParameterObject
+  setUrlValues: (newValues: ParameterObject) => void
+  defaultValues: ParameterObject
+}
