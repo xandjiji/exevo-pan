@@ -18,7 +18,13 @@ export function urlParametersState(
     for (const param of registeredParams) {
       const { key, decode, defaultValue } = param
       const urlEncodedValue = urlParams.get(param.key)
-      urlValues[key] = urlEncodedValue ? decode(urlEncodedValue) : defaultValue
+      if (urlEncodedValue) {
+        urlValues[key] = decode
+          ? decode(urlEncodedValue)
+          : decodeURIComponent(urlEncodedValue)
+      } else {
+        urlValues[key] = defaultValue
+      }
     }
     return urlValues
   }
@@ -33,7 +39,12 @@ export function urlParametersState(
       if (dequal(value, defaultValue)) {
         urlParams.delete(key)
       } else {
-        urlParams.set(key, encode(value))
+        urlParams.set(
+          key,
+          encode
+            ? encode(value)
+            : encodeURIComponent(value as 'boolean' | 'number' | 'string'),
+        )
       }
     }
 
