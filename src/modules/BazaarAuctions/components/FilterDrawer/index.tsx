@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { memo, useMemo, useState, useCallback, useEffect } from 'react'
-/* import { useLocation } from 'react-router-dom' */
+import { useLocation } from 'react-router-dom'
 import { dequal } from 'dequal'
 import { debounce } from 'lodash'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
+import useIsMounted from 'hooks/useIsMounted'
 import { urlParametersState } from 'utils'
 import { useDrawerFields, useDatabaseDispatch } from 'contexts/useDatabase'
 import FilterGroup from './FilterGroup'
@@ -151,13 +152,20 @@ const FilterDrawer = ({
     setUrlValues(filters as unknown as ReturnType<typeof getUrlValues>)
   }, [filters, notifyIsFilterReset])
 
-  /* @ ToDo: reset filter on navigation */
-  /* @ ToDo: dispatch filter if url params */
-  /* const { pathname } = useLocation()
+  const { pathname } = useLocation()
+  const isMounted = useIsMounted()
 
   useEffect(() => {
-    setFilters(defaultFilterState)
-  }, [pathname]) */
+    if (isMounted) {
+      setFilters(defaultFilterState)
+      setUrlValues(
+        defaultFilterState as unknown as ReturnType<typeof getUrlValues>,
+      )
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
+
+  /* @ToDo: dispatch filter if params */
 
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
