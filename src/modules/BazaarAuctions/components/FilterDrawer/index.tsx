@@ -22,26 +22,8 @@ import {
 import { filterSchema } from './schema'
 
 const DEBOUNCE_DELAY = 250
-
-/* @ ToDo: add these to a schema.ts */
-const defaultFilterState = {
-  nicknameFilter: '',
-  vocation: new Set([]),
-  pvp: new Set([]),
-  battleye: new Set([]),
-  location: new Set([]),
-  serverSet: new Set([]),
-  minLevel: 8,
-  maxLevel: 2000,
-  minSkill: 10,
-  skillKey: new Set([]),
-  itemSet: new Set([]),
-  fav: false,
-  rareNick: false,
-  soulwarFilter: false,
-  imbuementsSet: new Set([]),
-}
-const [getUrlValues, setUrlValues] = urlParametersState(filterSchema)
+const { getUrlValues, setUrlValues, defaultValues } =
+  urlParametersState(filterSchema)
 
 const FilterDrawer = ({
   open,
@@ -74,11 +56,11 @@ const FilterDrawer = ({
 
   /* @ ToDo: default values come from url parameters */
   const [filters, setFilters] = useState<FilterState>({
-    ...defaultFilterState,
+    ...(defaultValues as FilterState),
     ...getUrlValues(),
   })
   const [isFilterReset, setIsFilterReset] = useState<boolean>(() =>
-    dequal(filters, defaultFilterState),
+    dequal(filters, defaultValues),
   )
 
   const availableServerOptions = useMemo(
@@ -140,7 +122,7 @@ const FilterDrawer = ({
   )
 
   useEffect(() => {
-    const isReset = dequal(filters, defaultFilterState)
+    const isReset = dequal(filters, defaultValues)
     setIsFilterReset(isReset)
     notifyIsFilterReset(isReset)
     setUrlValues(filters as unknown as ReturnType<typeof getUrlValues>)
@@ -151,10 +133,8 @@ const FilterDrawer = ({
 
   useEffect(() => {
     if (isMounted) {
-      setFilters(defaultFilterState)
-      setUrlValues(
-        defaultFilterState as unknown as ReturnType<typeof getUrlValues>,
-      )
+      setFilters(defaultValues as FilterState)
+      setUrlValues(defaultValues as unknown as ReturnType<typeof getUrlValues>)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
@@ -170,7 +150,7 @@ const FilterDrawer = ({
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
             onClick={() => {
-              setFilters(defaultFilterState)
+              setFilters(defaultValues as FilterState)
               setTimeout(
                 () => dispatch({ type: 'RESET_TO_BASE_DATA' }),
                 DEBOUNCE_DELAY,
@@ -527,11 +507,11 @@ const FilterDrawer = ({
                 overrideStatus={filters.soulwarFilter}
                 onClick={() => {
                   if (filters.soulwarFilter) {
-                    updateFilters('minLevel', defaultFilterState.minLevel)
+                    updateFilters('minLevel', defaultValues.minLevel as number)
                     updateFilters('soulwarFilter', false)
                   } else {
                     updateFilters('minLevel', 400)
-                    updateFilters('maxLevel', defaultFilterState.maxLevel)
+                    updateFilters('maxLevel', defaultValues.maxLevel as number)
                     updateFilters('soulwarFilter', true)
                   }
                 }}
