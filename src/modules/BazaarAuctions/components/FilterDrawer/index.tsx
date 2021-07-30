@@ -139,8 +139,6 @@ const FilterDrawer = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
-  /* @ToDo: dispatch filter if params */
-
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>
