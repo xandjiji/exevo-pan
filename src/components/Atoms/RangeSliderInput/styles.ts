@@ -73,13 +73,6 @@ export const ValueDisplay = styled.span`
   font-weight: 400;
   text-align: center;
   color: ${({ theme }) => theme.colors.onSurface};
-
-  -moz-appearance: textfield;
-  &::-webkit-outer-spin-button,
-  &::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
 `
 
 export const Wrapper = styled.div`
