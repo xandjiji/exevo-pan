@@ -13,7 +13,7 @@ import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
-import { toggleSet, isHistory } from './utils'
+import { toggleSet, isHistory, countActiveFilters } from './utils'
 import {
   buildServerOptions,
   buildRareItemsOptions,
@@ -123,7 +123,8 @@ const FilterDrawer = ({
     const isReset = dequal(filters, defaultValues)
     setIsFilterReset(isReset)
     notifyIsFilterReset(isReset)
-    setUrlValues(filters as unknown as ReturnType<typeof getUrlValues>)
+    setUrlValues(filters)
+    console.log(countActiveFilters(defaultValues as FilterState, filters))
   }, [filters, notifyIsFilterReset])
 
   const { pathname } = useLocation()
@@ -132,7 +133,7 @@ const FilterDrawer = ({
   useEffect(() => {
     if (isMounted) {
       setFilters(defaultValues as FilterState)
-      setUrlValues(defaultValues as unknown as ReturnType<typeof getUrlValues>)
+      setUrlValues(defaultValues)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
