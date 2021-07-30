@@ -19,9 +19,9 @@ const decodeBooleanSet = (encodedValue: string): Set<boolean> =>
   decodeSet(encodedValue, 'boolean') as Set<boolean>
 const decodeNumberSet = (encodedValue: string): Set<number> =>
   decodeSet(encodedValue, 'number') as Set<number>
+const decodeStringSet = (encodedValue: string): Set<string> =>
+  decodeSet(encodedValue, 'string') as Set<string>
 
-/* @ ToDo: fix this typings */
-/* type PossibleTypes = FilterState[keyof FilterState] */
 export const filterSchema = [
   {
     key: 'nicknameFilter',
@@ -47,22 +47,71 @@ export const filterSchema = [
     encode: encodeSet,
     decode: decodeBooleanSet,
   },
-]
+  {
+    key: 'location',
+    defaultValue: new Set<0 | 1 | 2>([]),
+    encode: encodeSet,
+    decode: decodeNumberSet,
+  },
+  {
+    key: 'serverSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'minLevel',
+    defaultValue: 8,
+    encode: encodeURIComponent,
+    decode: decodeURIComponent,
+  },
+  {
+    key: 'maxLevel',
+    defaultValue: 2000,
+    encode: encodeURIComponent,
+    decode: decodeURIComponent,
+  },
+  {
+    key: 'minSkill',
+    defaultValue: 10,
+    encode: encodeURIComponent,
+    decode: decodeURIComponent,
+  },
 
-/* const defaultFilterState = {
-  nicknameFilter: '',
-  vocation: new Set([]),
-  pvp: new Set([]),
-  battleye: new Set([]),
-  location: new Set([]),
-  serverSet: new Set([]),
-  minLevel: 8,
-  maxLevel: 2000,
-  minSkill: 10,
-  skillKey: new Set([]),
-  itemSet: new Set([]),
-  fav: false,
-  rareNick: false,
-  soulwarFilter: false,
-  imbuementsSet: new Set([]),
-} */
+  {
+    key: 'skillKey',
+    defaultValue: new Set<'axe' | 'club' | 'distance' | 'magic' | 'sword'>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'imbuementsSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'itemSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'fav',
+    defaultValue: false,
+    encode: encodeURIComponent,
+    decode: decodeURIComponent,
+  },
+  {
+    key: 'rareNick',
+    defaultValue: false,
+    encode: encodeURIComponent,
+    decode: decodeURIComponent,
+  },
+  {
+    key: 'soulwarFilter',
+    defaultValue: false,
+    encode: encodeURIComponent,
+    decode: decodeURIComponent,
+  },
+]
