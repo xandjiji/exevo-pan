@@ -54,7 +54,6 @@ const FilterDrawer = ({
     [dispatch],
   )
 
-  /* @ ToDo: default values come from url parameters */
   const [filters, setFilters] = useState<FilterState>({
     ...(defaultValues as FilterState),
     ...getUrlValues(),
@@ -81,7 +80,6 @@ const FilterDrawer = ({
     [rareItemOptions, filters.itemSet],
   )
 
-  /* @ ToDo: fix this typing */
   const updateFilters = useCallback(
     (key: keyof FilterState, value: typeof filters[keyof FilterState]) =>
       setFilters(currentFilters => {
