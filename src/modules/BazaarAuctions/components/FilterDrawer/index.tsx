@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { memo, useMemo, useState, useCallback, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+/* import { useLocation } from 'react-router-dom' */
 import { dequal } from 'dequal'
 import { debounce } from 'lodash'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
+import { urlParametersState } from 'utils'
 import { useDrawerFields, useDatabaseDispatch } from 'contexts/useDatabase'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
@@ -19,6 +20,8 @@ import {
 } from './options'
 
 const DEBOUNCE_DELAY = 250
+
+/* @ ToDo: add these to a schema.ts */
 const defaultFilterState = {
   nicknameFilter: '',
   vocation: new Set([]),
@@ -36,6 +39,14 @@ const defaultFilterState = {
   soulwarFilter: false,
   imbuementsSet: new Set([]),
 }
+const [getUrlValues, setUrlValues] = urlParametersState([
+  {
+    key: 'nicknameFilter',
+    defaultValue: '',
+    encode: encodeURIComponent,
+    decode: decodeURIComponent,
+  },
+])
 
 const FilterDrawer = ({
   open,
@@ -67,7 +78,10 @@ const FilterDrawer = ({
   )
 
   /* @ ToDo: default values come from url parameters */
-  const [filters, setFilters] = useState<FilterState>(defaultFilterState)
+  const [filters, setFilters] = useState<FilterState>({
+    ...defaultFilterState,
+    ...getUrlValues(),
+  })
   const [isFilterReset, setIsFilterReset] = useState<boolean>(() =>
     dequal(filters, defaultFilterState),
   )
@@ -134,13 +148,16 @@ const FilterDrawer = ({
     const isReset = dequal(filters, defaultFilterState)
     setIsFilterReset(isReset)
     notifyIsFilterReset(isReset)
+    setUrlValues(filters as unknown as ReturnType<typeof getUrlValues>)
   }, [filters, notifyIsFilterReset])
 
-  const { pathname } = useLocation()
+  /* @ ToDo: reset filter on navigation */
+  /* @ ToDo: dispatch filter if url params */
+  /* const { pathname } = useLocation()
 
   useEffect(() => {
     setFilters(defaultFilterState)
-  }, [pathname])
+  }, [pathname]) */
 
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>

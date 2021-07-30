@@ -23,7 +23,6 @@ export function urlParametersState<T>(
     for (const param of registeredParams) {
       const { key, encode, defaultValue } = param
       const value = newValues[key]
-      console.log(encode(value))
 
       if (value === defaultValue) {
         urlParams.delete(key)
