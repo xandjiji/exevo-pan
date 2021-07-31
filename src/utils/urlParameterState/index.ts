@@ -36,15 +36,17 @@ export function urlParametersState(
       const { key, encode, defaultValue } = param
       const value = newValues[key]
 
-      if (dequal(value, defaultValue)) {
-        urlParams.delete(key)
-      } else {
-        urlParams.set(
-          key,
-          encode
-            ? encode(value)
-            : encodeURIComponent(value as 'boolean' | 'number' | 'string'),
-        )
+      if (value !== null) {
+        if (dequal(value, defaultValue)) {
+          urlParams.delete(key)
+        } else {
+          urlParams.set(
+            key,
+            encode
+              ? encode(value)
+              : encodeURIComponent(value as 'boolean' | 'number' | 'string'),
+          )
+        }
       }
     }
 
