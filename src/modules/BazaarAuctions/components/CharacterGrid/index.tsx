@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import { urlParametersState } from 'utils'
 import FilterDrawer from '../FilterDrawer'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
 import SortingDialog from './SortingDialog'
@@ -18,11 +19,31 @@ const CharacterGrid = ({
     window.matchMedia('(min-width: 768px)').matches,
   )
 
+  const { getUrlValues, defaultValues, setUrlValues } = useMemo(
+    () =>
+      urlParametersState([
+        { key: 'currentPage', defaultValue: 1 },
+        {
+          key: 'descending',
+          defaultValue: defaultDescendingOrder,
+          decode: (value: string) => decodeURIComponent(value) === 'true',
+        },
+        {
+          key: 'orderBy',
+          defaultValue: defaultSortMode,
+          decode: (value: string) => Number(decodeURIComponent(value)),
+        },
+      ]),
+    [defaultDescendingOrder, defaultSortMode],
+  )
+
   const gridState = useRef<'initial' | 'processing' | 'ready'>('initial')
   const [currentPage, setCurrentPage] = useState<number>(1)
-  const [sortMode, setSortMode] = useState<number>(defaultSortMode)
+  const [sortMode, setSortMode] = useState<number>(
+    getUrlValues().orderBy as number,
+  )
   const [descendingOrder, setDescendingOrder] = useState<boolean>(
-    defaultDescendingOrder,
+    getUrlValues().descending as boolean,
   )
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [activeFilterCount, setActiveFilterCount] = useState<number>(0)
@@ -55,10 +76,21 @@ const CharacterGrid = ({
 
   useEffect(() => {
     if (gridState.current === 'ready') {
-      setSortMode(defaultSortMode)
-      setDescendingOrder(defaultDescendingOrder)
+      setSortMode(defaultValues.orderBy as number)
+      setDescendingOrder(defaultValues.descending as boolean)
     }
-  }, [defaultSortMode, defaultDescendingOrder])
+  }, [defaultValues.orderBy, defaultValues.descending])
+
+  useEffect(() => {
+    if (gridState.current === 'ready') {
+      setUrlValues({
+        currentPage,
+        descending: descendingOrder,
+        orderBy: sortMode,
+      })
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentPage, sortMode, descendingOrder])
 
   useEffect(() => {
     if (gridState.current === 'ready')
