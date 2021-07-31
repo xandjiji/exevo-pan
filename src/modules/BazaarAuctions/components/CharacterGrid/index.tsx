@@ -22,7 +22,10 @@ const CharacterGrid = ({
   const { getUrlValues, defaultValues, setUrlValues } = useMemo(
     () =>
       urlParametersState([
-        { key: 'currentPage', defaultValue: 1 },
+        {
+          key: 'currentPage',
+          defaultValue: 1,
+        },
         {
           key: 'descending',
           defaultValue: defaultDescendingOrder,
@@ -38,7 +41,9 @@ const CharacterGrid = ({
   )
 
   const gridState = useRef<'initial' | 'processing' | 'ready'>('initial')
-  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [currentPage, setCurrentPage] = useState<number>(
+    getUrlValues().currentPage as number,
+  )
   const [sortMode, setSortMode] = useState<number>(
     getUrlValues().orderBy as number,
   )
