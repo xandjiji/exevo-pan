@@ -18,12 +18,12 @@ export function urlParametersState(
     for (const param of registeredParams) {
       const { key, decode, defaultValue } = param
       const urlEncodedValue = urlParams.get(param.key)
-      if (urlEncodedValue) {
+      if (urlEncodedValue === null) {
+        urlValues[key] = defaultValue
+      } else {
         urlValues[key] = decode
           ? decode(urlEncodedValue)
           : decodeURIComponent(urlEncodedValue)
-      } else {
-        urlValues[key] = defaultValue
       }
     }
     return urlValues
