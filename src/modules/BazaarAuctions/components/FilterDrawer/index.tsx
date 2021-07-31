@@ -54,10 +54,9 @@ const FilterDrawer = ({
     [dispatch],
   )
 
-  const [filters, setFilters] = useState<FilterState>({
-    ...(defaultValues as FilterState),
-    ...getUrlValues(),
-  })
+  const [filters, setFilters] = useState<FilterState>(
+    getUrlValues() as FilterState,
+  )
   const [isFilterReset, setIsFilterReset] = useState<boolean>(() =>
     dequal(filters, defaultValues),
   )
