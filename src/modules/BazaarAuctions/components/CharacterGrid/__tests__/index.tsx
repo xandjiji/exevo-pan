@@ -134,4 +134,13 @@ describe('<CharacterGrid />', () => {
 
     expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
   })
+
+  test('should display empty state if there are no characters', () => {
+    renderWithProviders(<CharacterGrid characterList={[]} isLoading={false} />)
+
+    expect(screen.getByText('Sorry, no auction was found')).toBeInTheDocument()
+
+    userEvent.click(screen.getByRole('button', { name: 'Change filters' }))
+    expect(screen.getByLabelText('Filter form')).toBeVisible()
+  })
 })
