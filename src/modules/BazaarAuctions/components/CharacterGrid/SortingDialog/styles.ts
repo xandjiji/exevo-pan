@@ -10,6 +10,9 @@ export const SortIcon = styled(SortIconSvg)`
 
 export const Dialog = styled.div`
   > *:not(:last-child) {
+    margin-bottom: 12px;
+  }
+  > *:first-child {
     margin-bottom: 16px;
   }
 `

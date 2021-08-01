@@ -1,8 +1,10 @@
 import { memo } from 'react'
-import { Switch, RadioGroup, RadioButton } from 'components/Atoms'
+import { Switch, RadioButton } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import * as S from './styles'
 import { SortingDialogProps } from './types'
+
+const sortModes = ['Auction end', 'Level', 'Price', 'Price (bidded only)']
 
 const SortingDialog = ({
   sortMode,
@@ -23,16 +25,15 @@ const SortingDialog = ({
         >
           Descending
         </Switch>
-        <RadioGroup
-          indexValue={sortMode}
-          onChange={index => setSortMode(index)}
-          aria-label="Sort characters by"
-        >
-          <RadioButton>Auction End</RadioButton>
-          <RadioButton>Level</RadioButton>
-          <RadioButton>Price</RadioButton>
-          <RadioButton>Price (bidded only)</RadioButton>
-        </RadioGroup>
+        {sortModes.map((mode, index) => (
+          <RadioButton
+            key={mode}
+            onClick={() => setSortMode(index)}
+            active={sortMode === index}
+          >
+            {mode}
+          </RadioButton>
+        ))}
       </S.Dialog>
     }
   >
