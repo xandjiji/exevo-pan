@@ -123,7 +123,7 @@ describe('<CharacterGrid />', () => {
     await waitFor(() => {})
   })
 
-  test('should display skeletons while loading', () => {
+  test('should display skeletons while loading', async () => {
     const { rerender } = renderWithProviders(
       <CharacterGrid characterList={[]} isLoading={true} />,
     )
@@ -133,14 +133,18 @@ describe('<CharacterGrid />', () => {
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
 
     expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
+
+    await waitFor(() => {})
   })
 
-  test('should display empty state if there are no characters', () => {
+  test('should display empty state if there are no characters', async () => {
     renderWithProviders(<CharacterGrid characterList={[]} isLoading={false} />)
 
     expect(screen.getByText('Sorry, no auction was found')).toBeInTheDocument()
 
     userEvent.click(screen.getByRole('button', { name: 'Change filters' }))
     expect(screen.getByLabelText('Filter form')).toBeVisible()
+
+    await waitFor(() => {})
   })
 })
