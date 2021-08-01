@@ -16,7 +16,7 @@ import {
   filteredFavArray,
 } from './mock'
 
-jest.mock('utils', () => ({
+jest.mock('utils/localStorage', () => ({
   getFavArray: jest.fn(),
 }))
 
