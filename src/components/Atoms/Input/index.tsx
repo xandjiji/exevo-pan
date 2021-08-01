@@ -55,6 +55,7 @@ const Input = ({
           onInput={handleInput}
           aria-invalid={isInvalid}
           aria-errormessage={isInvalid ? errorId : undefined}
+          autoComplete="off"
           {...props}
         />
         {allowClear && (
