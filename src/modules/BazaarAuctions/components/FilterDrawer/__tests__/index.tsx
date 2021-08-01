@@ -80,11 +80,39 @@ describe('<FilterDrawer />', () => {
     userEvent.click(screen.getByAltText('Druid'))
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(8)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+
+    userEvent.click(screen.getByPlaceholderText('Select imbuements'))
+    userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(9)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
   })
 
   test.todo('should call applyFilters with current filter')
 
-  test.todo('autocompleteInputs should control its chips/options correctly')
+  test('autocompleteInputs should control its chips/options correctly', () => {
+    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+
+    const inputElement = screen.getByPlaceholderText('Select imbuements')
+
+    userEvent.click(inputElement)
+    userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
+    expect(
+      screen.queryByRole('option', { name: 'Critical Hit' }),
+    ).not.toBeInTheDocument()
+    expect(screen.getByLabelText('Remove item')).toBeInTheDocument()
+
+    userEvent.click(inputElement)
+    expect(
+      screen.queryByRole('option', { name: 'Critical Hit' }),
+    ).not.toBeInTheDocument()
+
+    userEvent.click(screen.getByLabelText('Remove item'))
+    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
+    userEvent.click(inputElement)
+    expect(
+      screen.getByRole('option', { name: 'Critical Hit' }),
+    ).toBeInTheDocument()
+  })
 
   test.todo('toggle all items/imbuements should control filters correctly')
 
