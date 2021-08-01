@@ -61,7 +61,7 @@ describe('urlParameterState', () => {
   })
 
   test('should encode/decode value correctly', () => {
-    const { setUrlValues, getUrlValues } = urlParametersState([
+    const { setUrlValues, getUrlValues, defaultValues } = urlParametersState([
       {
         key: 'itemC',
         defaultValue: 10,
@@ -70,6 +70,7 @@ describe('urlParameterState', () => {
       },
     ])
 
+    expect(defaultValues).toEqual({ itemC: 10 })
     expect(getUrlValues()).toEqual({ itemC: 10 })
 
     setUrlValues({ itemC: 30 })
