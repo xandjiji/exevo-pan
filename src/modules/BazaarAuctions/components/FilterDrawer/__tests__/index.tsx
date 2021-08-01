@@ -39,7 +39,13 @@ describe('<FilterDrawer />', () => {
     expect(drawerElement).toBeVisible()
   })
 
-  test.todo('should call onClose')
+  test('should call onClose', () => {
+    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+
+    expect(mockOnClose).toHaveBeenCalledTimes(0)
+    userEvent.click(screen.getByLabelText('Close drawer'))
+    expect(mockOnClose).toHaveBeenCalledTimes(1)
+  })
 
   test.todo('should call setActiveFilterCount')
 
