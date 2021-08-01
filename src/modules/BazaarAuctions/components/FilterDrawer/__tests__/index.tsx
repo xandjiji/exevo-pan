@@ -9,6 +9,7 @@ jest.mock('lodash', () => ({
 
 const mockOnClose = jest.fn()
 const mockSetActiveFilterCount = jest.fn()
+const mockSetUrlValues = jest.fn()
 
 const defaultArgs = {
   open: true,
@@ -20,6 +21,7 @@ describe('<FilterDrawer />', () => {
   beforeEach(() => {
     mockOnClose.mockClear()
     mockSetActiveFilterCount.mockClear()
+    mockSetUrlValues.mockClear()
 
     jest
       .spyOn(window, 'setTimeout')
@@ -87,8 +89,6 @@ describe('<FilterDrawer />', () => {
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
   })
 
-  test.todo('should call applyFilters with current filter')
-
   test('autocompleteInputs should control its chips/options correctly', () => {
     renderWithProviders(<FilterDrawer {...defaultArgs} />)
 
@@ -144,9 +144,35 @@ describe('<FilterDrawer />', () => {
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
   })
 
-  test.todo('setUrlValues is called with current filters')
+  test('should reset filters correctly', () => {
+    renderWithProviders(<FilterDrawer {...defaultArgs} />)
 
-  test.todo('onReset, should call applyFilters with current filters')
+    const nickInput = screen.getByLabelText('Search nickname')
+    const knightChip = screen.getByText('Knight')
+    const toggleChip = screen.getByRole('switch', { name: 'All imbuements' })
+    const rareNickChip = screen.getByText('Rare nicknames')
 
-  test.todo('onMouseOver should display tooltips')
+    userEvent.type(nickInput, 'Ksu')
+    userEvent.click(knightChip)
+    userEvent.click(toggleChip)
+    userEvent.click(rareNickChip)
+
+    expect(nickInput).toHaveValue('Ksu')
+    expect(knightChip).toBeChecked()
+    expect(toggleChip).toBeChecked()
+    expect(rareNickChip).toBeChecked()
+    expect(screen.getAllByLabelText('Remove item')).toHaveLength(23)
+
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(4)
+
+    userEvent.click(screen.getByText('Reset filters'))
+
+    expect(nickInput).toHaveValue('')
+    expect(knightChip).not.toBeChecked()
+    expect(toggleChip).not.toBeChecked()
+    expect(rareNickChip).not.toBeChecked()
+    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
+
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
+  })
 })
