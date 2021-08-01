@@ -3,6 +3,7 @@ import { urlParametersState } from 'utils'
 import FilterDrawer from '../FilterDrawer'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
 import SortingDialog from './SortingDialog'
+import EmptyState from './EmptyState'
 import { applySort } from './applySort'
 import * as S from './styles'
 import { CharacterGridProps } from './types'
@@ -143,7 +144,6 @@ const CharacterGrid = ({
           noItemsMessage="No characters found"
         />
       </S.Head>
-
       <FilterDrawer
         id="filter-drawer"
         aria-label="Filter form"
@@ -151,15 +151,18 @@ const CharacterGrid = ({
         onClose={useCallback(() => setDrawerOpen(false), [])}
         setActiveFilterCount={setActiveFilterCount}
       />
-
       <S.Grid ref={gridRef} id="character-grid">
-        {isLoading
-          ? Array.from({ length: isDesktop ? 10 : 2 }, (_, index) => (
-              <CardSkeleton key={index} />
-            ))
-          : characterPage.map(item => (
-              <CharacterCard key={item.id} characterData={item} />
-            ))}
+        {isLoading ? (
+          Array.from({ length: isDesktop ? 10 : 2 }, (_, index) => (
+            <CardSkeleton key={index} />
+          ))
+        ) : characterPage.length ? (
+          characterPage.map(item => (
+            <CharacterCard key={item.id} characterData={item} />
+          ))
+        ) : (
+          <EmptyState buttonAction={() => setDrawerOpen(true)} />
+        )}
       </S.Grid>
     </S.Wrapper>
   )
