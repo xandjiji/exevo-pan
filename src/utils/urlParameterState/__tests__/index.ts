@@ -53,5 +53,25 @@ describe('urlParameterState', () => {
       itemA: 'new value for+A',
       itemB: 'default value for,B',
     })
+
+    setUrlValues({
+      itemA: 'yet another new value A',
+      itemB: 'yet another new value B',
+    })
+
+    expect(getUrlValues()).toEqual({
+      itemA: 'yet another new value A',
+      itemB: 'yet another new value B',
+    })
+
+    setUrlValues({
+      itemA: 'yet AGAIN another new value A',
+      notAKey: 'shouldnt have any effect',
+    })
+
+    expect(getUrlValues()).toEqual({
+      itemA: 'yet AGAIN another new value A',
+      itemB: 'yet another new value B',
+    })
   })
 })
