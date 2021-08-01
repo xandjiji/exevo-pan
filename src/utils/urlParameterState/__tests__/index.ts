@@ -11,21 +11,6 @@ const mockRegister = [
   },
 ]
 
-/*
-[
-  {
-    key: 'itemA',
-    defaultValue: 10,
-    encode: (value: number) => encodeURIComponent(value * 20),
-    decode: (value: string) => Number(decodeURIComponent(value)) / 20,
-  },
-  {
-    key: 'itemB',
-    defaultValue: 'default value for,B',
-  },
-]
-*/
-
 describe('urlParameterState', () => {
   test('should have correct default values', () => {
     const { defaultValues } = urlParametersState(mockRegister)
@@ -73,5 +58,21 @@ describe('urlParameterState', () => {
       itemA: 'yet AGAIN another new value A',
       itemB: 'yet another new value B',
     })
+  })
+
+  test('should encode/decode value correctly', () => {
+    const { setUrlValues, getUrlValues } = urlParametersState([
+      {
+        key: 'itemC',
+        defaultValue: 10,
+        encode: (value: number) => encodeURIComponent(value * 20),
+        decode: (value: string) => Number(decodeURIComponent(value)) / 20,
+      },
+    ])
+
+    expect(getUrlValues()).toEqual({ itemC: 10 })
+
+    setUrlValues({ itemC: 30 })
+    expect(getUrlValues()).toEqual({ itemC: 30 })
   })
 })
