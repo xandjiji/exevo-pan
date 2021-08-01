@@ -6,16 +6,20 @@ import PercentageCard from '../PercentageCard';
 import PieChart from '../PieChart';
 import List from '../List';
 
-import UrlParametersContext from '../../contexts/UrlParameters/context';
+import { urlParametersState } from 'utils';
 
 import { endpoints, paths } from 'Constants'
 
 import { formatNumberWithCommas } from 'utils/formatNumberWithCommas';
 
-export default () => {
-    const { params, setParamByKey } = useContext(UrlParametersContext);
+const { getUrlValues, setUrlValues } =
+    urlParametersState([{
+        key: 'statsPage',
+        defaultValue: 'overall'
+    }])
 
-    const [option, setOption] = useState(params.statsPage ?? 'overall');
+export default () => {
+    const [option, setOption] = useState(getUrlValues().statsPage);
     const [loaded, setLoaded] = useState(false);
     const [data, setData] = useState(null);
 
@@ -40,9 +44,8 @@ export default () => {
     }, []);
 
     useEffect(() => {
-        const urlParam = (option === 'highscores' ? option : null);
-        setParamByKey('statsPage', urlParam);
-    }, [option, setParamByKey]);
+        setUrlValues({ statsPage: option })
+    }, [option]);
 
     if (!loaded) return null;
     return (
