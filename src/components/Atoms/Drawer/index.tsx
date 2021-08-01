@@ -1,7 +1,6 @@
 import { createPortal } from 'react-dom'
 import { useState, useEffect, useRef } from 'react'
-import useDrag from 'hooks/useDrag'
-import useEscToClose from 'hooks/useEscToClose'
+import { useDrag, useEscToClose } from 'hooks'
 import DrawerHead from './DrawerHead'
 import DrawerFooter from './DrawerFooter'
 import * as S from './styles'

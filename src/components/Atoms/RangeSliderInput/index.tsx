@@ -7,9 +7,8 @@ import {
   useLayoutEffect,
 } from 'react'
 import { debounce } from 'lodash'
-import useIsMounted from 'hooks/useIsMounted'
+import { useIsMounted, useDrag } from 'hooks'
 import { normalize, clampValue } from 'utils'
-import useDrag from 'hooks/useDrag'
 import { RangeSliderInputProps } from './types'
 import * as S from './styles'
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import useIsMounted from 'hooks/useIsMounted'
+import { useIsMounted } from 'hooks'
 import { useCharacters, useDatabaseDispatch } from 'contexts/useDatabase'
 import { routes } from 'Constants'
 import CharacterGrid from './components/CharacterGrid'
