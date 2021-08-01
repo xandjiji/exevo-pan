@@ -37,7 +37,7 @@ export function urlParametersState(
       const { key, encode, defaultValue } = param
       const value = newValues[key]
 
-      if (value !== null) {
+      if (value !== null && value !== undefined) {
         if (dequal(value, defaultValue)) {
           urlParams.delete(key)
         } else {
