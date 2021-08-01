@@ -6,13 +6,11 @@ import { CtaButton, Switch } from 'components/Atoms/';
 import logo from '../../assets/logo.png';
 import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';
 
-import UrlParametersContext from '../../contexts/UrlParameters/context';
 import { useTheme } from 'contexts/useTheme';
 
 export default () => {
 
     const { currentTheme, toggleTheme } = useTheme();
-    const { resetParams } = useContext(UrlParametersContext);
 
     return (
         <Header className="inner-container custom-scrollbar">
@@ -31,7 +29,6 @@ export default () => {
                                 exact
                                 className="clickable"
                                 activeClassName="active"
-                                onClick={() => resetParams()}
                             >
                                 Current Auctions
                             </NavLink>
@@ -43,7 +40,6 @@ export default () => {
                                 exact
                                 className="clickable"
                                 activeClassName="active"
-                                onClick={() => resetParams()}
                             >
                                 Bazaar History
                             </NavLink>
@@ -55,7 +51,6 @@ export default () => {
                                 exact
                                 className="clickable"
                                 activeClassName="active"
-                                onClick={() => resetParams()}
                             >
                                 Statistics
                             </NavLink>

@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import MasterLayout from './layouts/MasterLayout';
 
-import UrlParametersProvider from './contexts/UrlParameters';
 import { ThemeProvider } from 'contexts/useTheme';
 import { DatabaseProvider } from 'contexts/useDatabase';
 
@@ -12,15 +11,13 @@ const App = () => {
     return (
         <ErrorBoundary>
             <Router>
-                <UrlParametersProvider>
-                    <ThemeProvider>
-                        <DatabaseProvider>
+                <ThemeProvider>
+                    <DatabaseProvider>
 
-                            <MasterLayout />
+                        <MasterLayout />
 
-                        </DatabaseProvider>
-                    </ThemeProvider>
-                </UrlParametersProvider>
+                    </DatabaseProvider>
+                </ThemeProvider>
             </Router>
         </ErrorBoundary>
     )
