@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { useLocation } from 'react-router-dom'
 import { formatNumberWithCommas } from 'utils'
+import { routes } from 'Constants'
 import {
   Title,
   Subtitle,
@@ -36,7 +37,7 @@ const CharacterCard = ({
   const { pathname } = useLocation()
 
   const getBidLabelText = () => {
-    if (pathname === '/bazaar-history') {
+    if (pathname === routes.BAZAAR_HISTORY) {
       return hasBeenBidded ? 'Auction Successful' : 'Auction Failed'
     } else {
       return hasBeenBidded ? 'Current Bid' : 'Minimum Bid'

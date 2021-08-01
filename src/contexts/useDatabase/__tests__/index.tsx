@@ -5,6 +5,7 @@ import { createBrowserHistory } from 'history'
 import { ThemeProvider } from 'contexts/useTheme'
 import { ManageDataClient } from 'services'
 import { getFavArray } from 'utils'
+import { routes } from 'Constants'
 import { DatabaseProvider, useDatabase } from '../index'
 import {
   mockedPartialCharacterData,
@@ -69,8 +70,8 @@ describe('useDatabase()', () => {
     })
   })
 
-  test('checking "/" path and filters dispatch', async () => {
-    currentHistory.push('/')
+  test(`checking ${routes.HOME} path and filters dispatch`, async () => {
+    currentHistory.push(routes.HOME)
     const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })
@@ -312,8 +313,8 @@ describe('useDatabase()', () => {
     })
   })
 
-  test('checking "/bazaar-history" path and filters dispatch', async () => {
-    currentHistory.push('/bazaar-history')
+  test(`checking ${routes.BAZAAR_HISTORY} path and filters dispatch`, async () => {
+    currentHistory.push(routes.BAZAAR_HISTORY)
     const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })
@@ -556,7 +557,7 @@ describe('useDatabase()', () => {
   })
 
   test('checking reset to base data dispatch', async () => {
-    currentHistory.push('/')
+    currentHistory.push(routes.HOME)
     const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })

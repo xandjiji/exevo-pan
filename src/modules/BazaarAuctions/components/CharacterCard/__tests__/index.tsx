@@ -3,6 +3,7 @@ import { Router } from 'react-router-dom'
 import { createBrowserHistory } from 'history'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
+import { routes } from 'Constants'
 import CharacterCard from '..'
 import { vocationEnum } from './utils'
 
@@ -80,8 +81,8 @@ describe('<CharacterCard />', () => {
     await waitFor(() => {})
   })
 
-  test('should render a different bid label for /bazaar-history route', async () => {
-    currentHistory.push('/bazaar-history')
+  test(`should render a different bid label for ${routes.BAZAAR_HISTORY} route`, async () => {
+    currentHistory.push(routes.BAZAAR_HISTORY)
     const character = characterData[1]
     renderWithProviders(
       <Router history={currentHistory}>

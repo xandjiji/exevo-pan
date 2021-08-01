@@ -1,6 +1,7 @@
 import React from 'react';
 import ErrorBoundaryStyled, { Nav } from './ErrorPage.styled';
 import { NavLink } from 'react-router-dom';
+import { routes } from 'Constants'
 
 import { ReactComponent as ErrorIcon } from '../../assets/svgs/error.svg';
 
@@ -16,13 +17,13 @@ export default ({ mainMessage, paragraphs }) => (
             <Nav className="inner-container">
                 <ul>
                     <li>
-                        <NavLink to="/">Current Auctions</NavLink>
+                        <NavLink to={routes.HOME}>Current Auctions</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/bazaar-history">Bazaar History</NavLink>
+                        <NavLink to={routes.BAZAAR_HISTORY}>Bazaar History</NavLink>
                     </li>
                     <li>
-                        <NavLink to="/statistics">Statistics</NavLink>
+                        <NavLink to={routes.STATISTICS}>Statistics</NavLink>
                     </li>
                 </ul>
             </Nav>

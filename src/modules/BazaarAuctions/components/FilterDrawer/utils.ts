@@ -1,4 +1,5 @@
 import { dequal } from 'dequal'
+import { routes } from 'Constants'
 
 export function toggleSet<T>(set: Set<T>, value: T): Set<T> {
   const newSet = new Set<T>([...set])
@@ -12,7 +13,7 @@ export function toggleSet<T>(set: Set<T>, value: T): Set<T> {
 }
 
 export const isHistory = (): boolean =>
-  window.location.pathname === '/bazaar-history'
+  window.location.pathname === routes.BAZAAR_HISTORY
 
 export const countActiveFilters = (
   defaultFilters: FilterState,

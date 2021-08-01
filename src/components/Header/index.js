@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Header, { HeaderWrapper, HeaderItem, Logo } from './Header.styled';
 import { NavLink } from 'react-router-dom';
 import { CtaButton, Switch } from 'components/Atoms/';
+import { routes } from 'Constants'
 
 import logo from '../../assets/logo.png';
 import { ReactComponent as MoonIcon } from '../../assets/svgs/moon.svg';
@@ -25,7 +26,7 @@ export default () => {
                     <ul>
                         <HeaderItem>
                             <NavLink
-                                to="/"
+                                to={routes.HOME}
                                 exact
                                 className="clickable"
                                 activeClassName="active"
@@ -36,7 +37,7 @@ export default () => {
 
                         <HeaderItem>
                             <NavLink
-                                to="/bazaar-history"
+                                to={routes.BAZAAR_HISTORY}
                                 exact
                                 className="clickable"
                                 activeClassName="active"
@@ -47,7 +48,7 @@ export default () => {
 
                         <HeaderItem>
                             <NavLink
-                                to="/statistics"
+                                to={routes.STATISTICS}
                                 exact
                                 className="clickable"
                                 activeClassName="active"

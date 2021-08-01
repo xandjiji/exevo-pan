@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import useIsMounted from 'hooks/useIsMounted'
 import { useCharacters, useDatabaseDispatch } from 'contexts/useDatabase'
+import { routes } from 'Constants'
 import CharacterGrid from './components/CharacterGrid'
 
 const BazaarAuctions = (): JSX.Element => {
@@ -10,7 +11,7 @@ const BazaarAuctions = (): JSX.Element => {
   const { pathname } = useLocation()
   const isMounted = useIsMounted()
 
-  const isHistory = pathname === '/bazaar-history'
+  const isHistory = pathname === routes.BAZAAR_HISTORY
 
   const characterList = isHistory ? historyData : characterData
   const defaultDescendingOrder = isHistory

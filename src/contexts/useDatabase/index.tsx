@@ -10,6 +10,7 @@ import {
 import { useLocation } from 'react-router-dom'
 import { ManageDataClient } from 'services'
 import { LoadingAlert } from 'components/Atoms'
+import { routes } from 'Constants'
 import DatabaseReducer from './DatabaseReducer'
 import LoadingReducer from './LoadingReducer'
 import { buildCharacterData } from './utils'
@@ -71,7 +72,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
 
   const [loadedPercentage, setLoadedPercentage] = useState<string | null>()
   const fetchCharacterData = useCallback(async (currentPath: string) => {
-    const isHistory = currentPath === '/bazaar-history'
+    const isHistory = currentPath === routes.BAZAAR_HISTORY
     setLoadedPercentage(null)
 
     try {
@@ -98,7 +99,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (pathname === '/' || pathname === '/bazaar-history') {
+    if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
         dispatchLoad({ type: 'START_LOADING', path: pathname })
         fetchCharacterData(pathname)

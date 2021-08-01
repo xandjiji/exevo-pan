@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import { renderWithRouter } from 'utils/test'
+import { routes } from 'Constants'
 import AuctionTimer from '..'
 import {
   MILLISECONDS_IN_A_DAY,
@@ -39,8 +40,8 @@ describe('<AuctionTimer />', () => {
       expect(screen.getByText(/0:00/)).toBeInTheDocument()
     })
 
-    test('for a past date at /bazaar-history route', () => {
-      renderWithRouter(<AuctionTimer endDate={past} />, '/bazaar-history')
+    test(`for a past date at ${routes.BAZAAR_HISTORY} route`, () => {
+      renderWithRouter(<AuctionTimer endDate={past} />, routes.BAZAAR_HISTORY)
 
       expect(screen.getByRole('timer')).toHaveTextContent(/1 Jan/)
       expect(screen.getByLabelText('Auction finished at')).toBeInTheDocument()

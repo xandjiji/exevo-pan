@@ -1,15 +1,16 @@
 import { BazaarAuctions, Statistics, ErrorPage } from 'modules'
+import { routes } from 'Constants'
 
 export default [
   {
     key: 'Bazaar Auctions',
-    path: ['/', '/bazaar-history'],
+    path: [routes.HOME, routes.BAZAAR_HISTORY],
     exact: true,
     component: BazaarAuctions,
   },
   {
     key: 'Statistics',
-    path: '/statistics',
+    path: routes.STATISTICS,
     exact: true,
     component: Statistics,
   },
