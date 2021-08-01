@@ -47,7 +47,40 @@ describe('<FilterDrawer />', () => {
     expect(mockOnClose).toHaveBeenCalledTimes(1)
   })
 
-  test.todo('should call setActiveFilterCount')
+  test('should call setActiveFilterCount', () => {
+    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
+
+    userEvent.click(screen.getByAltText('Knight'))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+
+    userEvent.click(screen.getByAltText('Druid'))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(3)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+
+    userEvent.type(screen.getByLabelText('Search nickname'), 'K')
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(4)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+
+    userEvent.click(screen.getByText('Rare nicknames'))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(5)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(3)
+
+    userEvent.click(screen.getByText('Rare nicknames'))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(6)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+
+    userEvent.click(screen.getByAltText('Knight'))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(7)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+
+    userEvent.click(screen.getByAltText('Druid'))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(8)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+  })
 
   test.todo('should call applyFilters with current filter')
 
