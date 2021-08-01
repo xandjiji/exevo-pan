@@ -46,9 +46,13 @@ export const AutocompleteInput = styled(BaseAutocompleteInput)`
 `
 
 export const FlexWrapper = styled.div`
-  margin-bottom: 12px;
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+
+  > * {
+    margin-bottom: 12px;
+  }
 
   > *:not(:last-child) {
     margin-right: 16px;
