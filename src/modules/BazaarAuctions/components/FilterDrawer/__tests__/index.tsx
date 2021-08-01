@@ -114,7 +114,35 @@ describe('<FilterDrawer />', () => {
     ).toBeInTheDocument()
   })
 
-  test.todo('toggle all items/imbuements should control filters correctly')
+  test('toggle all items/imbuements should control filters correctly', () => {
+    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+
+    const inputElement = screen.getByPlaceholderText('Select imbuements')
+    userEvent.click(inputElement)
+    expect(screen.queryAllByRole('option')).toHaveLength(23)
+    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
+
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
+
+    const toggleElement = screen.getByRole('switch', { name: 'All imbuements' })
+    userEvent.click(toggleElement)
+    userEvent.click(inputElement)
+    expect(screen.queryByRole('option')).not.toBeInTheDocument()
+    expect(screen.queryAllByLabelText('Remove item')).toHaveLength(23)
+
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+
+    screen.queryAllByLabelText('Remove item').forEach(element => {
+      userEvent.click(element)
+    })
+
+    userEvent.click(inputElement)
+    expect(screen.queryAllByRole('option')).toHaveLength(23)
+    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
+  })
 
   test.todo('setUrlValues is called with current filters')
 
