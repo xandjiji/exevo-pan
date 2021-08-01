@@ -8,6 +8,7 @@ import {
 
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
 
+/* @ ToDo: fix this typings */
 export function urlParametersState(
   registeredParams: ParamRegister[],
 ): urlParameterStateObject {

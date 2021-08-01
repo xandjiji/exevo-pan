@@ -3,6 +3,7 @@ import { urlParametersState } from 'utils'
 import { ParamRegister } from 'utils/urlParameterState/types'
 import { UseUrlParamsGetterSetter } from './types'
 
+/* @ ToDo: fix this typings */
 const useUrlParamsState = (
   registeredParams: ParamRegister[],
 ): UseUrlParamsGetterSetter => {

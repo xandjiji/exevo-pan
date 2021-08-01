@@ -1,3 +1,4 @@
+/* @ ToDo: fix this typings */
 export interface ParamRegister {
   key: string
   defaultValue: any
