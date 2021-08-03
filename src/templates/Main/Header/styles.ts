@@ -1,7 +1,10 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import ExevoPanLogoImage from 'assets/logo.png'
 import { ReactComponent as MoonIconSvg } from 'assets/svgs/moon.svg'
+import { ReactComponent as MarketIconSvg } from 'assets/svgs/market.svg'
+import { ReactComponent as HistoryIconSvg } from 'assets/svgs/history.svg'
+import { ReactComponent as StatisticsIconSvg } from 'assets/svgs/statistics.svg'
 import { InnerContainer, CustomScrollbar, Clickable } from 'styles'
 
 export const Wrapper = styled.header`
@@ -60,6 +63,8 @@ export const Li = styled.li`
 
 export const Navigation = styled(NavLink)`
   padding: 8px 16px;
+  display: flex;
+  align-items: center;
   font-size: 14px;
   letter-spacing: 0.5px;
   border-radius: 9px;
@@ -78,3 +83,21 @@ export const RightWrapper = styled.div`
 `
 
 export const MoonIcon = styled(MoonIconSvg)``
+
+const NavIconStyle = css`
+  margin-right: 6px;
+  width: 18px;
+  height: 18px;
+  fill: ${({ theme }) => theme.colors.onPrimary};
+`
+
+export const MarketIcon = styled(MarketIconSvg)`
+  ${NavIconStyle}
+`
+export const HistoryIcon = styled(HistoryIconSvg)`
+  ${NavIconStyle}
+`
+
+export const StatisticsIcon = styled(StatisticsIconSvg)`
+  ${NavIconStyle}
+`
