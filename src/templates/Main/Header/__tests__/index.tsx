@@ -44,6 +44,4 @@ describe('<Header />', () => {
     userEvent.click(logo)
     expect(window.location.pathname).toBe('/')
   })
-
-  test.todo('switch interaction should toggle theme')
 })
