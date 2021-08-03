@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import ExevoPanLogoImage from 'assets/logo.png'
-import { InnerContainer } from 'styles'
+import { ReactComponent as MoonIconSvg } from 'assets/svgs/moon.svg'
+import { InnerContainer, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.header`
   position: relative;
@@ -13,6 +14,7 @@ export const Wrapper = styled.header`
   overflow-x: auto;
   background-color: ${({ theme }) => theme.colors.primary};
   ${InnerContainer}
+  ${CustomScrollbar}
 
   &::after {
     content: '';
@@ -41,6 +43,7 @@ export const ExevoPanLogo = styled.img.attrs({
 `
 
 export const Nav = styled.nav`
+  margin-right: 24px;
   display: flex;
 `
 
@@ -49,7 +52,11 @@ export const Ul = styled.ul`
   align-items: center;
 `
 
-export const Li = styled.li``
+export const Li = styled.li`
+  &:not(:last-child) {
+    margin-right: 8px;
+  }
+`
 
 export const Navigation = styled(NavLink)`
   padding: 8px 16px;
@@ -59,3 +66,10 @@ export const Navigation = styled(NavLink)`
   color: ${({ theme }) => theme.colors.onPrimary};
   white-space: nowrap;
 `
+
+export const RightWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const MoonIcon = styled(MoonIconSvg)``

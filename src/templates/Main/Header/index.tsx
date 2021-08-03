@@ -1,7 +1,11 @@
 import { routes } from 'Constants'
+import { CtaButton, Switch } from 'components/Atoms/'
+import { useTheme } from 'contexts/useTheme'
 import * as S from './styles'
 
 const Header = (): JSX.Element => {
+  const { currentTheme, toggleTheme } = useTheme()
+
   return (
     <S.Wrapper>
       <S.Nav>
@@ -24,6 +28,16 @@ const Header = (): JSX.Element => {
           </S.Li>
         </S.Ul>
       </S.Nav>
+
+      <S.RightWrapper>
+        <Switch
+          active={currentTheme === 'dark-theme'}
+          onClick={toggleTheme}
+          icon={<S.MoonIcon />}
+          aria-label="Toggle dark theme"
+        />
+        <CtaButton />
+      </S.RightWrapper>
     </S.Wrapper>
   )
 }
