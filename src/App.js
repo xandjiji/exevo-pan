@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import MasterLayout from './layouts/MasterLayout';
-
-import { ThemeProvider } from 'contexts/useTheme';
-import { DatabaseProvider } from 'contexts/useDatabase';
 
 import ErrorBoundary from './components/ErrorBoundary';
+import { ThemeProvider } from 'contexts/useTheme';
+import { DatabaseProvider } from 'contexts/useDatabase';
+import { Main } from 'templates';
+
 
 const App = () => {
     return (
@@ -14,7 +14,7 @@ const App = () => {
                 <ThemeProvider>
                     <DatabaseProvider>
 
-                        <MasterLayout />
+                        <Main />
 
                     </DatabaseProvider>
                 </ThemeProvider>
