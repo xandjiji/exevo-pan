@@ -9,7 +9,11 @@ const Header = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.Nav>
-        <S.LogoNavigation to={routes.HOME} exact>
+        <S.LogoNavigation
+          to={routes.HOME}
+          aria-current="false"
+          aria-label="Go to homepage"
+        >
           <S.ExevoPanLogo />
         </S.LogoNavigation>
         <S.Ul>
