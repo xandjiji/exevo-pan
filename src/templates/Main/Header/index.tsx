@@ -9,7 +9,9 @@ const Header = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.Nav>
-        <S.ExevoPanLogo />
+        <S.LogoNavigation to={routes.HOME} exact>
+          <S.ExevoPanLogo />
+        </S.LogoNavigation>
         <S.Ul>
           <S.Li>
             <S.Navigation to={routes.HOME} exact>

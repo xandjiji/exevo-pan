@@ -36,6 +36,12 @@ export const Wrapper = styled.header`
   }
 `
 
+export const LogoNavigation = styled(NavLink)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+
 export const ExevoPanLogo = styled.img.attrs({
   src: ExevoPanLogoImage as string,
   alt: 'Exevo Pan',
