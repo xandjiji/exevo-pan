@@ -10,7 +10,7 @@ import {
   Smooth,
 } from 'styles'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
   background-color: ${({ theme }) => theme.colors.background};
 `
 
@@ -85,7 +85,7 @@ export const Paginator = styled(BasePaginator)`
   margin-left: auto;
 `
 
-export const Grid = styled.main`
+export const Grid = styled.div`
   padding-top: 16px;
   position: relative;
   height: calc(100vh - 60px - 70px);
