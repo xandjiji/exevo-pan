@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import ExevoPanLogoImage from 'assets/logo.png'
 import { ReactComponent as MoonIconSvg } from 'assets/svgs/moon.svg'
-import { InnerContainer, CustomScrollbar } from 'styles'
+import { InnerContainer, CustomScrollbar, Clickable } from 'styles'
 
 export const Wrapper = styled.header`
   position: relative;
@@ -62,9 +62,14 @@ export const Navigation = styled(NavLink)`
   padding: 8px 16px;
   font-size: 14px;
   letter-spacing: 0.5px;
-  border-radius: 12px;
+  border-radius: 9px;
   color: ${({ theme }) => theme.colors.onPrimary};
   white-space: nowrap;
+
+  ${Clickable}
+  &.active {
+    box-shadow: inset 3px 3px rgb(0 0 0 / 14%);
+  }
 `
 
 export const RightWrapper = styled.div`
