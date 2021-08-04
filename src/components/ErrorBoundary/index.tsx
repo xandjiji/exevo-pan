@@ -1,5 +1,6 @@
 import { Component } from 'react'
 import { ErrorPage } from 'modules'
+import * as S from './styles'
 import { ErrorBoundaryProps, State } from './types'
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
@@ -18,7 +19,12 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
 
   public render(): React.ReactNode {
     if (this.state.hasError) {
-      return <ErrorPage />
+      return (
+        <>
+          <ErrorPage />
+          <S.Background />
+        </>
+      )
     } else {
       return this.props.children
     }
