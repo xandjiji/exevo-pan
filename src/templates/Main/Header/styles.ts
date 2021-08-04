@@ -16,6 +16,7 @@ export const Wrapper = styled.header`
   justify-content: space-between;
   overflow-x: auto;
   background-color: ${({ theme }) => theme.colors.primary};
+  transition: 0.2s background ease-out;
   ${InnerContainer}
   ${CustomScrollbar}
 
