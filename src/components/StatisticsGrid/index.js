@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
 import { Chip } from 'components/Atoms';
 import Chart from '../Chart';
-import PercentageCard from '../PercentageCard';
+import PercentageCard from 'components/PercentageCard';
 import PieChart from '../PieChart';
 import List from '../List';
 
@@ -80,7 +80,7 @@ export default () => {
                         yesterdayLabel="Yesterday's revenue"
                         chartLabel="Cipsoft revenue"
                     />
-                    <PercentageCard label="Auction success rate" value={data.successRate} />
+                    <PercentageCard title="Auction success rate" percentage={data.successRate} />
                     <PieChart
                         data={data.vocationPercentage}
                         chartLabel="Vocation percentage"
