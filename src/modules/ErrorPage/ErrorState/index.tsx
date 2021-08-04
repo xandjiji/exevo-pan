@@ -8,7 +8,10 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => (
       <S.Title>{title}</S.Title>
     </S.Top>
     <S.Bottom>
-      <S.ErrorIcon />
+      <S.ErrorIcon
+        role="alert"
+        aria-label="Error, something unexpected happened"
+      />
       {paragraphs?.map(p => (
         <S.Paragraph key={p}>{p}</S.Paragraph>
       ))}
