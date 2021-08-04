@@ -84,7 +84,7 @@ export const AuctionTimer = styled(BaseAuctionTimer)`
 `
 
 export const TibiaCoinIcon = styled.img.attrs({
-  src: TibiaCoinImage as string,
+  src: TibiaCoinImage,
   alt: 'Tibia Coin',
 })`
   margin-right: 4px;

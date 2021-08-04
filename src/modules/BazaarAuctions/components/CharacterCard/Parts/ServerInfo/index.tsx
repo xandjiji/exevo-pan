@@ -25,7 +25,7 @@ const ServerInfo = ({
       <S.Flag
         alt={serverData.serverLocation.string}
         title={serverData.serverLocation.string}
-        src={(S.flags[serverData.serverLocation.type] ?? S.flags[0]) as string}
+        src={S.flags[serverData.serverLocation.type] ?? S.flags[0]}
       />
       <S.ServerName>{serverData.serverName}</S.ServerName>
       <TransferIcon transfer={transfer} nickname={nickname} />

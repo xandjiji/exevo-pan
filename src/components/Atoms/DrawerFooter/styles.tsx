@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 import { ReactComponent as GithubSvg } from 'assets/svgs/github.svg'
 import { InnerContainer, Clickable } from 'styles'
 
@@ -24,7 +24,7 @@ export const GithubIcon = styled(GithubSvg)`
   margin-right: 16px;
   padding: 0;
   border-radius: 50%;
-  fill: ${({ theme }) => (theme as DefaultTheme).colors.onPrimary};
+  fill: ${({ theme }) => theme.colors.onPrimary};
 
   ${Clickable}
 `

@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
 `
 
 export const NotFound = styled.img.attrs({
-  src: NotFoundImage as string,
+  src: NotFoundImage,
   alt: 'No character was found',
 })`
   position: absolute;

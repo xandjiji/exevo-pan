@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 import { Smooth, InnerContainer } from 'styles'
 import { ReactComponent as ErrorIconSvg } from 'assets/svgs/error.svg'
@@ -42,7 +42,7 @@ export const ErrorIcon = styled(ErrorIconSvg)`
   margin-bottom: 32px;
   width: 128px;
   height: 128px;
-  fill: ${({ theme }) => (theme as DefaultTheme).colors.surface};
+  fill: ${({ theme }) => theme.colors.surface};
 `
 
 export const Paragraph = styled.p`

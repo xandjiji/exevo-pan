@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled from 'styled-components'
 import { Clickable } from 'styles'
 import { ReactComponent as ExternalIconSvg } from 'assets/svgs/external.svg'
 
@@ -25,7 +25,7 @@ const ExternalIcon = styled(ExternalIconSvg)`
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  fill: ${({ theme }) => (theme as DefaultTheme).colors.onSurface};
+  fill: ${({ theme }) => theme.colors.onSurface};
   ${Clickable}
 `
 const Title = ({

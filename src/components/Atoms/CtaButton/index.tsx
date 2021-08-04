@@ -11,7 +11,7 @@ const CtaButton = ({
       rel="noopener external"
       {...props}
     >
-      <S.Img src={coinsGif as string} alt="Tibia Coins" />
+      <S.Img src={coinsGif} alt="Tibia Coins" />
       Buy Tibia Coins
     </S.Button>
   )

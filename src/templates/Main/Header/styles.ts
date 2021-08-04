@@ -44,7 +44,7 @@ export const LogoNavigation = styled(NavLink)`
 `
 
 export const ExevoPanLogo = styled.img.attrs({
-  src: ExevoPanLogoImage as string,
+  src: ExevoPanLogoImage,
   alt: 'Exevo Pan',
   width: 36,
   height: 36,

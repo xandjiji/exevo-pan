@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled from 'styled-components'
 import { InnerContainer, Shadow, Clickable } from 'styles'
 import { ReactComponent as ArrowIconSvg } from 'assets/svgs/arrowBack.svg'
 
@@ -24,7 +24,7 @@ export const BackButton = styled.button`
 `
 
 export const ArrowIcon = styled(ArrowIconSvg)`
-  fill: ${({ theme }) => (theme as DefaultTheme).colors.onPrimary};
+  fill: ${({ theme }) => theme.colors.onPrimary};
 `
 
 export const ContentWrapper = styled.div`

@@ -1,4 +1,4 @@
-import styled, { DefaultTheme } from 'styled-components'
+import styled from 'styled-components'
 import { ReactComponent as ResetIcon } from 'assets/svgs/reset.svg'
 import RookIcon from 'assets/rook.png'
 import KnightIcon from 'assets/knight.png'
@@ -22,7 +22,7 @@ import NaFlagIcon from 'assets/na-flag.png'
 import { StatusStyleProps } from './types'
 
 export const Reset = styled(ResetIcon)`
-  fill: ${({ theme }) => (theme as DefaultTheme).colors.onPrimary};
+  fill: ${({ theme }) => theme.colors.onPrimary};
 `
 
 const ImgIcon = styled.img`
@@ -30,78 +30,78 @@ const ImgIcon = styled.img`
 `
 
 export const Rook = styled(ImgIcon).attrs({
-  src: RookIcon as string,
+  src: RookIcon,
   alt: 'None',
 })``
 export const Knight = styled(ImgIcon).attrs({
-  src: KnightIcon as string,
+  src: KnightIcon,
   alt: 'Knight',
 })``
 export const Paladin = styled(ImgIcon).attrs({
-  src: PaladinIcon as string,
+  src: PaladinIcon,
   alt: 'Paladin',
 })``
 export const Sorcerer = styled(ImgIcon).attrs({
-  src: SorcererIcon as string,
+  src: SorcererIcon,
   alt: 'Sorcerer',
 })``
 export const Druid = styled(ImgIcon).attrs({
-  src: DruidIcon as string,
+  src: DruidIcon,
   alt: 'Druid',
 })``
 
 export const Magic = styled(ImgIcon).attrs({
-  src: MagicIcon as string,
+  src: MagicIcon,
   alt: 'Magic Level',
 })``
 export const Distance = styled(ImgIcon).attrs({
-  src: DistanceIcon as string,
+  src: DistanceIcon,
   alt: 'Distance Fighting',
 })``
 export const Club = styled(ImgIcon).attrs({
-  src: ClubIcon as string,
+  src: ClubIcon,
   alt: 'Club Fighting',
 })``
 export const Sword = styled(ImgIcon).attrs({
-  src: SwordIcon as string,
+  src: SwordIcon,
   alt: 'Sword Fighting',
 })``
 export const Axe = styled(ImgIcon).attrs({
-  src: AxeIcon as string,
+  src: AxeIcon,
   alt: 'Axe Fighting',
 })``
 
 export const Dove = styled(ImgIcon).attrs({
-  src: DoveIcon as string,
+  src: DoveIcon,
   alt: 'Optional Pvp',
 })``
 export const WhiteSkull = styled(ImgIcon).attrs({
-  src: WhiteSkullIcon as string,
+  src: WhiteSkullIcon,
   alt: 'Open Pvp',
 })``
 export const OrangeSkull = styled(ImgIcon).attrs({
-  src: OrangeSkullIcon as string,
+  src: OrangeSkullIcon,
   alt: 'Retro Open Pvp',
 })``
 export const RedSkull = styled(ImgIcon).attrs({
-  src: RedSkullIcon as string,
+  src: RedSkullIcon,
   alt: 'Hardcore Pvp',
 })``
 export const BlackSkull = styled(ImgIcon).attrs({
-  src: BlackSkullIcon as string,
+  src: BlackSkullIcon,
   alt: 'Retro Hardcore Pvp',
 })``
 
 export const EuFlag = styled(ImgIcon).attrs({
-  src: EuFlagIcon as string,
+  src: EuFlagIcon,
   alt: 'Europe',
 })``
 export const NaFlag = styled(ImgIcon).attrs({
-  src: NaFlagIcon as string,
+  src: NaFlagIcon,
   alt: 'North America',
 })``
 export const BrFlag = styled(ImgIcon).attrs({
-  src: BrFlagIcon as string,
+  src: BrFlagIcon,
   alt: 'South America',
 })``
 

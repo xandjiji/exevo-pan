@@ -34,7 +34,7 @@ export const Wrapper = styled.div<WrapperStyleProps>`
   }
 `
 
-export const WarningIcon = styled.img.attrs({ src: WarningImg as string })`
+export const WarningIcon = styled.img.attrs({ src: WarningImg })`
   margin-left: 1px;
   transform: translateY(-1px) scale(0.75);
 `
