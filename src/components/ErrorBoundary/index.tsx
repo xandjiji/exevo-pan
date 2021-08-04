@@ -1,5 +1,5 @@
 import { Component } from 'react'
-import ErrorPage from '../ErrorPage'
+import { ErrorPage } from 'modules'
 import { ErrorBoundaryProps, State } from './types'
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
@@ -18,15 +18,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
 
   public render(): React.ReactNode {
     if (this.state.hasError) {
-      return (
-        <ErrorPage
-          mainMessage="ERROR"
-          paragraphs={[
-            'oops! something unexpected happened',
-            'lets try again...',
-          ]}
-        />
-      )
+      return <ErrorPage />
     } else {
       return this.props.children
     }
