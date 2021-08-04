@@ -9,8 +9,8 @@ import { Main } from 'templates';
 
 const App = () => {
     return (
-        <ErrorBoundary>
-            <Router>
+        <Router>
+            <ErrorBoundary>
                 <ThemeProvider>
                     <DatabaseProvider>
 
@@ -18,8 +18,8 @@ const App = () => {
 
                     </DatabaseProvider>
                 </ThemeProvider>
-            </Router>
-        </ErrorBoundary>
+            </ErrorBoundary>
+        </Router>
     )
 }
 
