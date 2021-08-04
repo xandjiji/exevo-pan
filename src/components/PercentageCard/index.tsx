@@ -4,8 +4,9 @@ import { PercentageCardProps } from './types'
 const PercentageCard = ({
   title,
   percentage,
+  ...props
 }: PercentageCardProps): JSX.Element => (
-  <S.Wrapper>
+  <S.Wrapper {...props}>
     <S.Title>{title}</S.Title>
     <S.Percentage positive={percentage >= 50}>{percentage}%</S.Percentage>
   </S.Wrapper>
