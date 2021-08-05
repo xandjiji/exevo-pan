@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Smooth } from 'styles'
 import { PercentageStyleProps } from './types'
 
 export const Wrapper = styled.div`
@@ -8,6 +8,7 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  ${Smooth}
 
   @media (max-width: 440px) {
     width: 100%;
