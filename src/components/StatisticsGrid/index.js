@@ -3,7 +3,7 @@ import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.style
 import { Chip } from 'components/Atoms';
 import Chart from '../Chart';
 import PercentageCard from 'components/PercentageCard';
-import PieChart from '../PieChart';
+import PieChart from 'components/PieChart';
 import List from '../List';
 
 import { urlParametersState } from 'utils';
@@ -47,6 +47,8 @@ export default () => {
         setUrlValues({ statsPage: option })
     }, [option]);
 
+    console.log(data)
+
     if (!loaded) return null;
     return (
         <StatisticsGrid className="custom-scrollbar">
@@ -82,8 +84,8 @@ export default () => {
                     />
                     <PercentageCard title="Auction success rate" percentage={data.successRate} />
                     <PieChart
-                        data={data.vocationPercentage}
-                        chartLabel="Vocation percentage"
+                        title="Vocation distribution"
+                        pieDataSet={data.vocationPercentage}
                     />
                 </ItemsWrapper>
                 : null
