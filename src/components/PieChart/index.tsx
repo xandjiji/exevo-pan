@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, memo } from 'react'
 import { useTheme } from 'styled-components'
 import { Doughnut } from 'react-chartjs-2'
 import { v4 as uuidv4 } from 'uuid'
@@ -69,4 +69,4 @@ const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
     </S.Wrapper>
   )
 }
-export default PieChart
+export default memo(PieChart)

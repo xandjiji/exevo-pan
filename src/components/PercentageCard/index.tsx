@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import * as S from './styles'
 import { PercentageCardProps } from './types'
 
@@ -12,4 +13,4 @@ const PercentageCard = ({
   </S.Wrapper>
 )
 
-export default PercentageCard
+export default memo(PercentageCard)
