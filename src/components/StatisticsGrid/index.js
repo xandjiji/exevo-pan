@@ -71,16 +71,16 @@ export default () => {
             {loaded && option === 'overall' ?
                 <ItemsWrapper className="inner-container">
                     <Chart
-                        data={data.totalTibiaCoins}
                         totalLabel="Total volume"
                         yesterdayLabel="Yesterday's volume"
-                        chartLabel="Tibia Coins volume"
+                        tooltipLabel="Tibia Coins volume"
+                        chartData={data.totalTibiaCoins}
                     />
                     <Chart
-                        data={data.totalRevenue}
                         totalLabel="Cipsoft's total revenue"
                         yesterdayLabel="Yesterday's revenue"
-                        chartLabel="Cipsoft revenue"
+                        tooltipLabel="Cipsoft revenue"
+                        chartData={data.totalRevenue}
                     />
                     <PercentageCard title="Auction success rate" percentage={data.successRate} />
                     <PieChart
