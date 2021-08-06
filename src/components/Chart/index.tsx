@@ -61,7 +61,7 @@ const Chart = ({
               fontColor: colors.onSurface,
             },
             gridLines: {
-              color: colors.separator,
+              color: `${colors.separator}60`,
             },
           },
         ],
