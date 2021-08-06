@@ -13,7 +13,9 @@ const Summary = ({
     <S.Title>{title}</S.Title>
     <S.Value>{`${formatNumberWithCommas(value)} TC`}</S.Value>
     <S.Percentage positive={positive}>
-      <S.TrendIcon />
+      <S.TrendIcon
+        aria-label={positive ? 'Upwards trend' : 'Downwards trend'}
+      />
       {`${percentage.toFixed(2)}%`}
     </S.Percentage>
   </S.Wrapper>
