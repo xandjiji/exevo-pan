@@ -5,7 +5,7 @@ import Chart from '..'
 import { mockData } from './mock'
 
 describe('<Chart />', () => {
-  test('should render title correctly', () => {
+  test('should render correctly', () => {
     renderWithProviders(
       <Chart
         totalLabel="Total volume"
