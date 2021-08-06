@@ -8,8 +8,9 @@ const Summary = ({
   value,
   percentage,
   positive = true,
+  ...props
 }: SummaryProps): JSX.Element => (
-  <S.Wrapper>
+  <S.Wrapper {...props}>
     <S.Title>{title}</S.Title>
     <S.Value>{`${formatNumberWithCommas(value)} TC`}</S.Value>
     <S.Percentage positive={positive}>
