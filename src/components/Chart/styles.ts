@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Smooth } from 'styles'
 
 export const Wrapper = styled.div`
   ${MaterialCard}
   padding: 20px 16px 20px 26px;
   width: 100%;
+  ${Smooth}
 
   @media (min-width: 768px) {
     width: calc(50% - 8px);
