@@ -1,5 +1,5 @@
 import * as faker from 'faker'
-import { singleSampleFrom } from './utils'
+import { singleSampleFrom } from '../utils'
 
 const randomServerLocation = (): ServerLocation => {
   const possibleLocations: ServerLocation[] = [

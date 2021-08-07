@@ -1,5 +1,5 @@
 import * as faker from 'faker'
-import { unminifyCharacterData } from './utils'
+import { unminifyCharacterData } from '../utils'
 
 const randomMinifiedCharacter = (): MinifiedCharacterObject => [
   faker.datatype.number({ min: 0, max: 999999 }),
