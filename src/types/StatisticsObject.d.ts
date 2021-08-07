@@ -9,9 +9,10 @@ declare type CharacterInfo = {
   currentBid: number
 }
 
+/* @ ToDo: change this to Record<string, number> after backend fix */
 declare type DistributionData = Record<string, string>
 
-declare type StatisticsRawData = {
+declare type StatisticsData = {
   totalRevenue: MonthlySummary
   totalTibiaCoins: MonthlySummary
   successRate: string

@@ -1,4 +1,4 @@
-/* @ ToDo: change this after useDatabase refactor */
+/* @ ToDo: change this after backend refactor */
 export const mockPieDataset = {
   rooker: '0.21',
   knight: '26.36',

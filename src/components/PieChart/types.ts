@@ -1,4 +1,4 @@
-/* @ ToDo: change to Record<string, number> after useDatabase refactor */
+/* @ ToDo: change to Record<string, number> after backend refactor */
 type PieDataSet = Record<string, string>
 
 export interface PieChartProps {

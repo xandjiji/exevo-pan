@@ -48,7 +48,7 @@ const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
       datasets: [
         {
           label: title,
-          /* @ ToDo: remove Number casting after useDatabase refactor */
+          /* @ ToDo: remove Number casting after backend refactor */
           data: Object.keys(pieDataSet).map(item => Number(pieDataSet[item])),
           fill: false,
           backgroundColor: chartColors,
