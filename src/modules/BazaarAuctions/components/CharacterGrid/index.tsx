@@ -104,7 +104,7 @@ const CharacterGrid = ({
   }, [characterPage])
 
   return (
-    <S.Wrapper {...props}>
+    <S.Main {...props}>
       <S.Head>
         <S.FilterButton
           tabIndex={0}
@@ -164,7 +164,7 @@ const CharacterGrid = ({
           <EmptyState buttonAction={() => setDrawerOpen(true)} />
         )}
       </S.Grid>
-    </S.Wrapper>
+    </S.Main>
   )
 }
 

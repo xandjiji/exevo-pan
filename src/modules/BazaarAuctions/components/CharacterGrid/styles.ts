@@ -10,9 +10,7 @@ import {
   Smooth,
 } from 'styles'
 
-export const Wrapper = styled.main`
-  background-color: ${({ theme }) => theme.colors.background};
-`
+export const Main = styled.main``
 
 export const Head = styled.div`
   position: relative;
