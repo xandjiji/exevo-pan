@@ -4,6 +4,7 @@ import { useRef, useMemo, memo } from 'react'
 import { useTheme } from 'styled-components'
 import { Doughnut } from 'react-chartjs-2'
 import { v4 as uuidv4 } from 'uuid'
+import { capitalizeFirstLetter } from 'utils'
 import * as S from './styles'
 import { PieChartProps } from './types'
 
@@ -44,7 +45,7 @@ const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
 
   const chartData = useMemo(
     () => ({
-      labels: Object.keys(pieDataSet),
+      labels: Object.keys(pieDataSet).map(capitalizeFirstLetter),
       datasets: [
         {
           label: title,
