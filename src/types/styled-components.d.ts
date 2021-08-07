@@ -12,6 +12,7 @@ declare module 'styled-components' {
       separator: string
       primary: string
       onPrimary: string
+      darkerPrimary: string
       primaryVariant: string
       green: string
       red: string
