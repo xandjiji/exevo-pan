@@ -13,26 +13,30 @@ const StatisticsGrid = (): JSX.Element => {
     <S.Wrapper>
       {!loading && statisticsData ? (
         <>
-          <Chart
-            totalLabel="Total volume"
-            yesterdayLabel="Yesterday's volume"
-            tooltipLabel="Tibia Coins volume"
-            chartData={statisticsData.totalTibiaCoins}
-          />
-          <Chart
-            totalLabel="Cipsoft's total revenue"
-            yesterdayLabel="Yesterday's revenue"
-            tooltipLabel="Cipsoft revenue"
-            chartData={statisticsData.totalRevenue}
-          />
-          <PercentageCard
-            title="Auction success rate"
-            percentage={statisticsData.successRate as unknown as number}
-          />
-          <PieChart
-            title="Vocation distribution"
-            pieDataSet={statisticsData.vocationPercentage}
-          />
+          <S.ChartWrapper>
+            <Chart
+              totalLabel="Total volume"
+              yesterdayLabel="Yesterday's volume"
+              tooltipLabel="Tibia Coins volume"
+              chartData={statisticsData.totalTibiaCoins}
+            />
+            <Chart
+              totalLabel="Cipsoft's total revenue"
+              yesterdayLabel="Yesterday's revenue"
+              tooltipLabel="Cipsoft revenue"
+              chartData={statisticsData.totalRevenue}
+            />
+          </S.ChartWrapper>
+          <S.ItemWrapper>
+            <PercentageCard
+              title="Auction success rate"
+              percentage={statisticsData.successRate as unknown as number}
+            />
+            <PieChart
+              title="Vocation distribution"
+              pieDataSet={statisticsData.vocationPercentage}
+            />
+          </S.ItemWrapper>
         </>
       ) : (
         <div>...loading</div>

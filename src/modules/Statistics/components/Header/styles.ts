@@ -5,6 +5,8 @@ import { ReactComponent as OverallIconSvg } from 'assets/svgs/charts.svg'
 import { ReactComponent as HighscoresIconSvg } from 'assets/svgs/trophy.svg'
 
 export const Nav = styled.nav`
+  position: relative;
+  z-index: 1;
   ${InnerContainer}
   ${Shadow}
   ${Smooth}

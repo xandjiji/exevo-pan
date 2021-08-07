@@ -7,10 +7,6 @@ export const Wrapper = styled.div`
   width: 100%;
   ${Smooth}
 
-  @media (min-width: 768px) {
-    width: calc(50% - 8px);
-  }
-
   canvas {
     margin-left: -6px;
   }
