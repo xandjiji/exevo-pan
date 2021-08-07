@@ -1,4 +1,4 @@
-import { getFromLocalStorage, saveToLocalStorage } from 'utils'
+import { getFromLocalStorage, saveToLocalStorage, fillArrayUntil } from 'utils'
 import { endpoints, paths, localStorageKeys } from 'Constants'
 import {
   buildCharacterData,
@@ -98,6 +98,15 @@ export default class ManageDataClient {
     try {
       const response = await fetch(this.statisticsDataUrl)
       const data = (await response.json()) as StatisticsData
+
+      data.totalTibiaCoins.lastMonth = fillArrayUntil(
+        data.totalTibiaCoins.lastMonth,
+        28,
+      )
+      data.totalRevenue.lastMonth = fillArrayUntil(
+        data.totalRevenue.lastMonth,
+        28,
+      )
 
       saveToLocalStorage(localStorageKeys.STATISTICS_DATA, data)
 
