@@ -12,14 +12,7 @@ import { endpoints, paths } from 'Constants'
 
 import { formatNumberWithCommas } from 'utils/formatNumberWithCommas';
 
-const { getUrlValues, setUrlValues } =
-    urlParametersState([{
-        key: 'statsPage',
-        defaultValue: 'overall'
-    }])
-
 export default () => {
-    const [option, setOption] = useState(getUrlValues().statsPage);
     const [loaded, setLoaded] = useState(false);
     const [data, setData] = useState(null);
 
@@ -43,32 +36,10 @@ export default () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        setUrlValues({ statsPage: option })
-    }, [option]);
-
-    console.log(data)
-
     if (!loaded) return null;
     return (
         <StatisticsGrid className="custom-scrollbar">
-            <GridHeader className="inner-container shadow">
-                <Chip
-                    onClick={() => setOption('overall')}
-                    overrideStatus={option === 'overall'}
-                >
-                    Overall
-                </Chip>
-
-                <Chip
-                    onClick={() => setOption('highscores')}
-                    overrideStatus={option === 'highscores'}
-                >
-                    Highscores
-                </Chip>
-            </GridHeader>
-
-            {loaded && option === 'overall' ?
+            {loaded ?
                 <ItemsWrapper className="inner-container">
                     <Chart
                         totalLabel="Total volume"
@@ -91,7 +62,7 @@ export default () => {
                 : null
             }
 
-            {loaded && option === 'highscores' ?
+            {/* {loaded && option === 'highscores' ?
                 <ItemsWrapper className="inner-container">
                     <List
                         label="Top 10 Bid"
@@ -157,7 +128,7 @@ export default () => {
                     />
                 </ItemsWrapper>
                 : null
-            }
+            } */}
         </StatisticsGrid>
     )
 }
