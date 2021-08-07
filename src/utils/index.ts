@@ -1,5 +1,6 @@
 export * from './checkKeyboardTrigger'
 export * from './clampValue'
+export * from './fillArrayUntil'
 export * from './formatNumberWithCommas'
 export * from './localStorage'
 export * from './normalize'
