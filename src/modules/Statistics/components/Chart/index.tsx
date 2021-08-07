@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
-import { useState, useMemo } from 'react'
+import { memo, useState, useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 import { Chip } from 'components/Atoms'
 import { useTheme } from 'styled-components'
@@ -144,4 +144,4 @@ const Chart = ({
   )
 }
 
-export default Chart
+export default memo(Chart)

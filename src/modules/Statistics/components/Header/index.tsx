@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import routes from '../../routes'
 import * as S from './styles'
 
@@ -21,4 +22,4 @@ const Header = (): JSX.Element => (
   </S.Nav>
 )
 
-export default Header
+export default memo(Header)
