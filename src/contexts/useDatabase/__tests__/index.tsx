@@ -12,6 +12,7 @@ import {
   mockedServerData,
   mockedItemData,
   mockedCharacterData,
+  mockStatisticsData,
   initialFilter,
   mockFavArray,
   filteredFavArray,
@@ -51,6 +52,10 @@ describe('useDatabase()', () => {
       .spyOn(ManageDataClient, 'fetchItemData')
       .mockResolvedValueOnce(mockedItemData)
 
+    jest
+      .spyOn(ManageDataClient, 'fetchStatisticsData')
+      .mockResolvedValueOnce(mockStatisticsData)
+
     getFavArrayMock.mockReturnValue(mockFavArray)
   })
 
@@ -66,6 +71,7 @@ describe('useDatabase()', () => {
       serverData: [],
       rareItemData: {},
       historyData: [],
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
   })
@@ -82,6 +88,7 @@ describe('useDatabase()', () => {
       serverData: [],
       rareItemData: {},
       historyData: [],
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
 
@@ -93,6 +100,7 @@ describe('useDatabase()', () => {
       serverData: mockedServerData,
       rareItemData: mockedItemData,
       historyData: [],
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
 
@@ -325,6 +333,7 @@ describe('useDatabase()', () => {
       serverData: [],
       rareItemData: {},
       historyData: [],
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
 
@@ -336,6 +345,7 @@ describe('useDatabase()', () => {
       serverData: mockedServerData,
       rareItemData: mockedItemData,
       historyData: mockedCharacterData,
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
 
@@ -568,6 +578,7 @@ describe('useDatabase()', () => {
       serverData: [],
       rareItemData: {},
       historyData: [],
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
 
@@ -579,6 +590,7 @@ describe('useDatabase()', () => {
       serverData: mockedServerData,
       rareItemData: mockedItemData,
       historyData: [],
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
 
@@ -604,6 +616,7 @@ describe('useDatabase()', () => {
       serverData: mockedServerData,
       rareItemData: mockedItemData,
       historyData: [],
+      statisticsData: null,
       dispatch: expect.any(Function),
     })
   })

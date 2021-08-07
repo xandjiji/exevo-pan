@@ -1,14 +1,17 @@
 import { randomDataset } from 'utils/test'
 
-const { partialCharacterData, serverData, itemData, characterData } =
-  randomDataset()
+const {
+  partialCharacterData,
+  serverData,
+  itemData,
+  characterData,
+  statisticsData,
+} = randomDataset()
 
 export const mockedPartialCharacterData = partialCharacterData
-
 export const mockedServerData = serverData
-
 export const mockedItemData = itemData
-
+export const mockStatisticsData = statisticsData
 export const mockedCharacterData = characterData
 
 export const initialFilter = {
