@@ -5,4 +5,5 @@ export const localStorageKeys = {
   FAV_CHARACTER_DATA: 'favCharacterData',
   HISTORY_HASH_PREFIX: 'historyHash',
   HISTORY_DATA_PREFIX: 'historyData',
+  STATISTICS_DATA: 'statisticsData',
 }
