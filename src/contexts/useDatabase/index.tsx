@@ -67,6 +67,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     historyData: defaultDatabaseState.historyData,
     statisticsData: defaultDatabaseState.statisticsData,
   })
+  console.log(statisticsData)
 
   const [{ loadingPaths, navigated }, dispatchLoad] = useReducer(
     LoadingReducer,
@@ -127,7 +128,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         fetchCharacterData(pathname)
       }
     }
-    if (pathname === routes.STATISTICS && !navigated.includes[pathname]) {
+    if (pathname === routes.STATISTICS && !navigated.includes(pathname)) {
       dispatchLoad({ type: 'START_LOADING', path: pathname })
       fetchStatisticsData()
     }
