@@ -4,7 +4,7 @@ import { useState, useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 import { Chip } from 'components/Atoms'
 import { useTheme } from 'styled-components'
-import { formatNumberWithCommas } from 'utils/formatNumberWithCommas'
+import { formatNumberWithCommas, fillArrayUntil } from 'utils'
 import Summary from './Summary'
 import * as S from './styles'
 import { ChartProps } from './types'
@@ -22,7 +22,11 @@ const Chart = ({
 
   const [dataSize, setDataSize] = useState(7)
 
-  const { current, lastMonth } = chartData
+  const { current, lastMonth: originalLastMonth } = chartData
+  const lastMonth = useMemo(
+    () => fillArrayUntil(originalLastMonth, 28),
+    [originalLastMonth],
+  )
   const todayValue = lastMonth[lastMonth.length - 1]
   const yesterdayValue = lastMonth[lastMonth.length - 2]
   const dailyDifference = todayValue - yesterdayValue
