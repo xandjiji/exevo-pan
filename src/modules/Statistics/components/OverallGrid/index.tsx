@@ -5,7 +5,7 @@ import PieChart from '../PieChart'
 import PercentageCard from '../PercentageCard'
 import * as S from './styles'
 
-const StatisticsGrid = (): JSX.Element => {
+const OverallGrid = (): JSX.Element => {
   const { statisticsData, loading } = useStatisticsData()
 
   /* @ ToDo: skeleton state */
@@ -45,4 +45,4 @@ const StatisticsGrid = (): JSX.Element => {
   )
 }
 
-export default memo(StatisticsGrid)
+export default memo(OverallGrid)
