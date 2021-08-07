@@ -1,3 +1,4 @@
+export * from './capitalizeFirstLetter'
 export * from './checkKeyboardTrigger'
 export * from './clampValue'
 export * from './fillArrayUntil'
