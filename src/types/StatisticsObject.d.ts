@@ -3,10 +3,13 @@ declare type MonthlySummary = {
   lastMonth: number[]
 }
 
-declare type CharacterInfo = {
+declare type CharacterInfoKey = Partial<
+  Omit<PartialCharacterObject, 'id' | 'nickname'>
+>
+
+declare interface CharacterInfo extends CharacterInfoKey {
   id: number
   nickname: string
-  currentBid: number
 }
 
 /* @ ToDo: change this to Record<string, number> after backend fix */

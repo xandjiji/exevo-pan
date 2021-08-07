@@ -1,5 +1,6 @@
 import * as faker from 'faker'
 import { randomCharacterData } from './characterMaker'
+import { singleSampleFrom } from '../utils'
 
 const randomMonthlySummary = (): MonthlySummary => ({
   current: faker.datatype.number({ min: 50000000, max: 99999999 }),
@@ -8,18 +9,38 @@ const randomMonthlySummary = (): MonthlySummary => ({
   ),
 })
 
-const randomCharacterInfo = (): CharacterInfo => {
+const randomCharacterInfo = (key: keyof CharacterInfoKey): CharacterInfo => {
   const { characterList } = randomCharacterData(1)
   const randomCharacter = characterList[0]
   return {
     id: randomCharacter.id,
     nickname: randomCharacter.nickname,
-    currentBid: randomCharacter.currentBid,
+    [key]: randomCharacter[key],
   }
 }
 
+const possibleCharacterInfoKeys = [
+  'auctionEnd',
+  'currentBid',
+  'hasBeenBidded',
+  'outfitId',
+  'serverId',
+  'vocationId',
+  'level',
+  'imbuements',
+  'items',
+  'charms',
+  'transfer',
+  'hasSoulwar',
+  'skills',
+]
+
 const randomTop10 = (): CharacterInfo[] =>
-  Array.from({ length: 10 }, randomCharacterInfo)
+  Array.from({ length: 10 }, () =>
+    randomCharacterInfo(
+      singleSampleFrom(possibleCharacterInfoKeys) as keyof CharacterInfoKey,
+    ),
+  )
 
 const randomDistributionData = (): DistributionData => {
   const distributionItems = Array.from(
