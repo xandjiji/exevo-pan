@@ -2,6 +2,7 @@ import { buildCharacterData } from 'contexts/useDatabase/utils'
 import { randomServerData } from './serverMaker'
 import { randomCharacterData } from './characterMaker'
 import { randomItemData } from './rareItemMaker'
+import { randomStatisticsData } from './statisticsMaker'
 import { Dataset } from './types'
 
 export const randomDataset = (charAmount = 10000): Dataset => {
@@ -20,5 +21,6 @@ export const randomDataset = (charAmount = 10000): Dataset => {
     characterData: buildedCharacterData,
     rawItemData,
     itemData,
+    statisticsData: randomStatisticsData(),
   }
 }

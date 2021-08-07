@@ -6,4 +6,5 @@ export type Dataset = {
   characterData: CharacterObject[]
   rawItemData: RareItemData
   itemData: RareItemData
+  statisticsData: StatisticsData
 }
