@@ -8,7 +8,6 @@ import * as S from './styles'
 const OverallGrid = (): JSX.Element => {
   const { statisticsData, loading } = useStatisticsData()
 
-  /* @ ToDo: skeleton state */
   return (
     <S.Wrapper>
       {!loading && statisticsData ? (
@@ -30,6 +29,7 @@ const OverallGrid = (): JSX.Element => {
           <S.ItemWrapper>
             <PercentageCard
               title="Auction success rate"
+              /* @ ToDo: change this assertion after backend refactor */
               percentage={statisticsData.successRate as unknown as number}
             />
             <PieChart
@@ -39,7 +39,7 @@ const OverallGrid = (): JSX.Element => {
           </S.ItemWrapper>
         </>
       ) : (
-        <div>...loading</div>
+        <S.Loading />
       )}
     </S.Wrapper>
   )

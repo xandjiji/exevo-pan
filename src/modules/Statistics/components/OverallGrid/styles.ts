@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
+import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
 
 export const Wrapper = styled.div`
   ${InnerContainer}
@@ -9,6 +9,14 @@ export const Wrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.background};
   ${CustomScrollbar}
   ${Smooth}
+`
+
+export const Loading = styled(Spinner)`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 1;
+  transform: translate(-50%, -50%);
 `
 
 export const ItemWrapper = styled.div`

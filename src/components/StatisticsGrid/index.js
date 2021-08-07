@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
 import StatisticsGrid, { ItemsWrapper, GridHeader } from './StatisticsGrid.styled';
 import { Chip } from 'components/Atoms';
-import Chart from '../Chart';
-import PercentageCard from 'components/PercentageCard';
-import PieChart from 'components/PieChart';
+import Chart from '../../modules/Statistics/components/Chart';
+import PercentageCard from 'modules/Statistics/components/PercentageCard';
+import PieChart from 'modules/Statistics/components/PieChart';
 import List from '../List';
 
 import { urlParametersState } from 'utils';
