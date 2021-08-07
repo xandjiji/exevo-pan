@@ -1,13 +1,14 @@
 import styled from 'styled-components'
-import { CustomScrollbar, InnerContainer } from 'styles'
+import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
 
 export const Wrapper = styled.div`
   ${InnerContainer}
   padding-top: 16px;
   max-height: calc(100% - 44px);
   overflow: auto;
-  ${CustomScrollbar}
   background-color: ${({ theme }) => theme.colors.background};
+  ${CustomScrollbar}
+  ${Smooth}
 `
 
 export const ItemWrapper = styled.div`
