@@ -24,13 +24,13 @@ const Header = (): JSX.Element => {
             </S.Navigation>
           </S.Li>
           <S.Li>
-            <S.Navigation to={routes.BAZAAR_HISTORY} exact>
+            <S.Navigation to={routes.BAZAAR_HISTORY}>
               <S.HistoryIcon />
               Bazaar History
             </S.Navigation>
           </S.Li>
           <S.Li>
-            <S.Navigation to={routes.STATISTICS} exact>
+            <S.Navigation to={routes.STATISTICS}>
               <S.StatisticsIcon />
               Statistics
             </S.Navigation>
