@@ -8,6 +8,7 @@ export default {
     primary: '#9857E7',
     onPrimary: '#FFFFFF',
     primaryVariant: '#5E4480',
+    darkerPrimary: '#581F9B',
     green: '#5A9935',
     red: '#FF5B5B',
     alert: '#F9EEC1',
