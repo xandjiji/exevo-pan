@@ -1,6 +1,6 @@
 import * as faker from 'faker'
-import { randomCharacterData } from './characterMaker'
 import { singleSampleFrom } from '../utils'
+import { randomCharacterData } from './characterMaker'
 
 const randomMonthlySummary = (): MonthlySummary => ({
   current: faker.datatype.number({ min: 50000000, max: 99999999 }),
