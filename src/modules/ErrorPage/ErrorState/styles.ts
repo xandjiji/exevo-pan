@@ -4,11 +4,10 @@ import { NavLink } from 'react-router-dom'
 import { Smooth, InnerContainer } from 'styles'
 import { ReactComponent as ErrorIconSvg } from 'assets/svgs/error.svg'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.main`
   position: relative;
   z-index: 99;
   width: 100vw;
-  height: calc(100vh - 60px);
 
   * {
     ${Smooth}

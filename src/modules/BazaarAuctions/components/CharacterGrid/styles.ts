@@ -10,7 +10,7 @@ import {
   Smooth,
 } from 'styles'
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.main`
   background-color: ${({ theme }) => theme.colors.background};
 `
 
@@ -88,7 +88,7 @@ export const Paginator = styled(BasePaginator)`
 export const Grid = styled.div`
   padding-top: 16px;
   position: relative;
-  height: calc(100vh - 60px - 70px);
+  height: calc(100% - 70px);
   overflow: auto;
   ${CustomScrollbar}
 
