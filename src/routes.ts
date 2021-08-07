@@ -11,7 +11,6 @@ export default [
   {
     key: 'Statistics',
     path: routes.STATISTICS,
-    exact: true,
     component: Statistics,
   },
   {

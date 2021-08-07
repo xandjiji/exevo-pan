@@ -22,6 +22,7 @@ export interface DrawerFieldsContextValues {
 
 export interface StatisticsDataContextValues {
   statisticsData: StatisticsData | null
+  loading: boolean
 }
 
 export interface DatabaseDispatchContextValues {

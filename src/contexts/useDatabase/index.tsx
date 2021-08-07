@@ -47,6 +47,7 @@ const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
 })
 
 const StatisticsDataContext = createContext<StatisticsDataContextValues>({
+  loading: defaultDatabaseState.loading,
   statisticsData: defaultDatabaseState.statisticsData,
 })
 
@@ -158,7 +159,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         value={{ loading, characterData, historyData }}
       >
         <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
-          <StatisticsDataContext.Provider value={{ statisticsData }}>
+          <StatisticsDataContext.Provider value={{ statisticsData, loading }}>
             <DatabaseDispatchContext.Provider value={{ dispatch }}>
               {loading && (
                 <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
