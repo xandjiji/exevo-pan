@@ -5,11 +5,13 @@ import PieChart from '../PieChart'
 import PercentageCard from '../PercentageCard'
 import * as S from './styles'
 
-const OverallGrid = (): JSX.Element => {
+const OverallGrid = ({
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { statisticsData, loading } = useStatisticsData()
 
   return (
-    <S.Wrapper>
+    <S.Wrapper {...props}>
       {!loading && statisticsData ? (
         <>
           <S.ChartWrapper>
