@@ -94,19 +94,19 @@ export default class ManageDataClient {
     }
   }
 
-  static async fetchStatisticsData(): Promise<DistributionData> {
+  static async fetchStatisticsData(): Promise<StatisticsData> {
     try {
       const response = await fetch(this.statisticsDataUrl)
-      const data = (await response.json()) as DistributionData
+      const data = (await response.json()) as StatisticsData
 
       saveToLocalStorage(localStorageKeys.STATISTICS_DATA, data)
 
       return data
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<DistributionData>(
+      return getFromLocalStorage<StatisticsData>(
         localStorageKeys.STATISTICS_DATA,
-        {},
+        {} as StatisticsData,
       )
     }
   }

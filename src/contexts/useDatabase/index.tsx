@@ -18,6 +18,7 @@ import {
   DatabaseContextValues,
   CharactersContextValues,
   DrawerFieldsContextValues,
+  StatisticsDataContextValues,
   DatabaseDispatchContextValues,
 } from './types'
 
@@ -27,6 +28,7 @@ const defaultDatabaseState: DatabaseContextValues = {
   serverData: [],
   rareItemData: {},
   historyData: [],
+  statisticsData: null,
   dispatch: () => {},
 }
 const DatabaseContext =
@@ -44,20 +46,27 @@ const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
   rareItemData: defaultDatabaseState.rareItemData,
 })
 
+const StatisticsDataContext = createContext<StatisticsDataContextValues>({
+  statisticsData: defaultDatabaseState.statisticsData,
+})
+
 const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
   dispatch: defaultDatabaseState.dispatch,
 })
 
 export const DatabaseProvider: React.FC = ({ children }) => {
-  const [{ characterData, serverData, rareItemData, historyData }, dispatch] =
-    useReducer(DatabaseReducer, {
-      baseCharacterData: defaultDatabaseState.characterData,
-      characterData: defaultDatabaseState.characterData,
-      serverData: defaultDatabaseState.serverData,
-      rareItemData: defaultDatabaseState.rareItemData,
-      baseHistoryData: defaultDatabaseState.historyData,
-      historyData: defaultDatabaseState.historyData,
-    })
+  const [
+    { characterData, serverData, rareItemData, historyData, statisticsData },
+    dispatch,
+  ] = useReducer(DatabaseReducer, {
+    baseCharacterData: defaultDatabaseState.characterData,
+    characterData: defaultDatabaseState.characterData,
+    serverData: defaultDatabaseState.serverData,
+    rareItemData: defaultDatabaseState.rareItemData,
+    baseHistoryData: defaultDatabaseState.historyData,
+    historyData: defaultDatabaseState.historyData,
+    statisticsData: defaultDatabaseState.statisticsData,
+  })
 
   const [{ loadingPaths, navigated }, dispatchLoad] = useReducer(
     LoadingReducer,
@@ -98,6 +107,19 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     }
   }, [])
 
+  const fetchStatisticsData = useCallback(async () => {
+    try {
+      const newStatisticsData = await ManageDataClient.fetchStatisticsData()
+
+      dispatch({
+        type: 'STATISTICS_DATA_LOAD',
+        statisticsData: newStatisticsData,
+      })
+    } finally {
+      dispatchLoad({ type: 'FINISH_LOADING', path: routes.STATISTICS })
+    }
+  }, [])
+
   useEffect(() => {
     if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
@@ -105,7 +127,11 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         fetchCharacterData(pathname)
       }
     }
-  }, [pathname, navigated, fetchCharacterData])
+    if (pathname === routes.STATISTICS && !navigated.includes[pathname]) {
+      dispatchLoad({ type: 'START_LOADING', path: pathname })
+      fetchStatisticsData()
+    }
+  }, [pathname, navigated, fetchCharacterData, fetchStatisticsData])
 
   const drawerFields = useMemo(
     () => ({
@@ -125,18 +151,21 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         rareItemData,
         historyData,
         dispatch,
+        statisticsData,
       }}
     >
       <CharactersContext.Provider
         value={{ loading, characterData, historyData }}
       >
         <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
-          <DatabaseDispatchContext.Provider value={{ dispatch }}>
-            {loading && (
-              <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
-            )}
-            {children}
-          </DatabaseDispatchContext.Provider>
+          <StatisticsDataContext.Provider value={{ statisticsData }}>
+            <DatabaseDispatchContext.Provider value={{ dispatch }}>
+              {loading && (
+                <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
+              )}
+              {children}
+            </DatabaseDispatchContext.Provider>
+          </StatisticsDataContext.Provider>
         </DrawerFieldsContext.Provider>
       </CharactersContext.Provider>
     </DatabaseContext.Provider>
@@ -151,6 +180,9 @@ export const useCharacters = (): CharactersContextValues =>
 
 export const useDrawerFields = (): DrawerFieldsContextValues =>
   useContext(DrawerFieldsContext)
+
+export const useStatisticsData = (): StatisticsDataContextValues =>
+  useContext(StatisticsDataContext)
 
 export const useDatabaseDispatch = (): DatabaseDispatchContextValues =>
   useContext(DatabaseDispatchContext)

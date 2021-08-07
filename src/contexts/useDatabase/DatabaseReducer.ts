@@ -44,6 +44,12 @@ export default (
       }
     }
 
+    case 'STATISTICS_DATA_LOAD':
+      return {
+        ...state,
+        statisticsData: action.statisticsData,
+      }
+
     case 'APPLY_FILTERS':
       if (action.isHistory) {
         return {

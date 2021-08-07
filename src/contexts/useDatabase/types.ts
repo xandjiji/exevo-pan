@@ -4,6 +4,7 @@ export interface DatabaseContextValues {
   serverData: ServerObject[]
   rareItemData: RareItemData
   historyData: CharacterObject[]
+  statisticsData: StatisticsData | null
   dispatch: (action: Action) => void
 }
 
@@ -19,6 +20,10 @@ export interface DrawerFieldsContextValues {
   rareItemData: RareItemData
 }
 
+export interface StatisticsDataContextValues {
+  statisticsData: StatisticsData | null
+}
+
 export interface DatabaseDispatchContextValues {
   dispatch: (action: Action) => void
 }
@@ -30,6 +35,7 @@ export interface DatabaseReducerState {
   rareItemData: RareItemData
   baseHistoryData: CharacterObject[]
   historyData: CharacterObject[]
+  statisticsData: StatisticsData | null
 }
 
 export type Action =
@@ -47,4 +53,8 @@ export type Action =
     }
   | {
       type: 'RESET_TO_BASE_DATA'
+    }
+  | {
+      type: 'STATISTICS_DATA_LOAD'
+      statisticsData: StatisticsData
     }
