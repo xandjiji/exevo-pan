@@ -13,6 +13,7 @@ export default class ManageDataClient {
   static characterDataUrl = `${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`
   static rareItemDataUrl = `${endpoints.BASE_DATA}${paths.ITEMS_DATA}`
   static historyHashDataUrl = `${endpoints.BASE_HISTORY_DATA}${paths.HISTORY_HASH}`
+  static statisticsDataUrl = `${endpoints.BASE_HISTORY_DATA}${paths.OVERALL_STATISTICS}`
 
   static async fetchServerData(): Promise<ServerObject[]> {
     try {
@@ -90,6 +91,23 @@ export default class ManageDataClient {
     } catch (error: unknown) {
       console.log(error)
       return []
+    }
+  }
+
+  static async fetchStatisticsData(): Promise<DistributionData> {
+    try {
+      const response = await fetch(this.statisticsDataUrl)
+      const data = (await response.json()) as DistributionData
+
+      saveToLocalStorage(localStorageKeys.STATISTICS_DATA, data)
+
+      return data
+    } catch (error: unknown) {
+      console.log(error)
+      return getFromLocalStorage<DistributionData>(
+        localStorageKeys.STATISTICS_DATA,
+        {},
+      )
     }
   }
 }
