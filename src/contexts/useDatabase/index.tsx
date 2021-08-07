@@ -67,7 +67,6 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     historyData: defaultDatabaseState.historyData,
     statisticsData: defaultDatabaseState.statisticsData,
   })
-  console.log(statisticsData)
 
   const [{ loadingPaths, navigated }, dispatchLoad] = useReducer(
     LoadingReducer,
