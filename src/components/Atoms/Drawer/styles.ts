@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 import { Smooth, Shadow, InnerContainer, CustomScrollbar } from 'styles'
-import { WrapperProps, BackdropProps } from './types'
 
-export const Wrapper = styled.div<WrapperProps>`
+export const Wrapper = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -16,13 +15,17 @@ export const Wrapper = styled.div<WrapperProps>`
   max-width: 600px;
   outline: none;
   background-color: ${({ theme }) => theme.colors.surface};
+  transform: translateX(0);
 
-  transform: translateX(${({ isOpen }) => (isOpen ? '0' : '-100%')});
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  visibility: ${({ isOpen }) => (isOpen ? 'unset' : 'hidden')};
   ${Smooth}
-  transition-property: opacity, transform, visibility;
   ${Shadow}
+  transition-property: opacity, transform, visibility;
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(-100%);
+  }
 `
 
 export const DrawerBody = styled.div`
@@ -57,7 +60,7 @@ export const DrawerBody = styled.div`
   }
 `
 
-export const Backdrop = styled.div<BackdropProps>`
+export const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -67,7 +70,10 @@ export const Backdrop = styled.div<BackdropProps>`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
 
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  pointer-events: ${({ isOpen }) => (isOpen ? 'unset' : 'none')};
   ${Smooth}
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    pointer-events: none;
+  }
 `

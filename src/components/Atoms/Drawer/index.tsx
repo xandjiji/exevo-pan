@@ -51,7 +51,6 @@ const Drawer = ({
         aria-modal="true"
         role="dialog"
         ref={elementToFocusRef}
-        isOpen={isOpen}
         onKeyDown={onKeyDown}
         style={{ marginLeft: `${drawerOffset}px` }}
         {...props}
@@ -59,7 +58,7 @@ const Drawer = ({
         {children}
       </S.Wrapper>
       <S.Backdrop
-        isOpen={isOpen}
+        aria-hidden={!isOpen}
         style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}
         {...binders}
       />
