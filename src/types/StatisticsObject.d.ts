@@ -4,7 +4,7 @@ declare type MonthlySummary = {
 }
 
 declare type CharacterInfoKey = Partial<
-  Omit<PartialCharacterObject, 'id' | 'nickname'>
+  Omit<PartialCharacterObject, 'id' | 'nickname' | 'skills'>
 > &
   Partial<CharacterSkillsObject>
 

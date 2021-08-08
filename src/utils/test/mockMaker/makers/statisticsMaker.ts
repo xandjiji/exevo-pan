@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as faker from 'faker'
 import { singleSampleFrom } from '../utils'
 import { randomCharacterData } from './characterMaker'
@@ -9,13 +10,29 @@ const randomMonthlySummary = (): MonthlySummary => ({
   ),
 })
 
+const skillKeys = [
+  'magic',
+  'club',
+  'fist',
+  'sword',
+  'fishing',
+  'axe',
+  'distance',
+  'shielding',
+]
+
 const randomCharacterInfo = (key: keyof CharacterInfoKey): CharacterInfo => {
   const { characterList } = randomCharacterData(1)
   const randomCharacter = characterList[0]
+
+  const value = skillKeys.includes(key)
+    ? randomCharacter.skills[key]
+    : randomCharacter[key]
+
   return {
     id: randomCharacter.id,
     nickname: randomCharacter.nickname,
-    [key]: randomCharacter[key],
+    [key]: value,
   }
 }
 
@@ -32,7 +49,14 @@ const possibleCharacterInfoKeys = [
   'charms',
   'transfer',
   'hasSoulwar',
-  'skills',
+  'magic',
+  'club',
+  'fist',
+  'sword',
+  'fishing',
+  'axe',
+  'distance',
+  'shielding',
 ]
 
 const randomTop10 = (): CharacterInfo[] =>
