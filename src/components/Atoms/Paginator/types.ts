@@ -19,5 +19,4 @@ export interface PaginationObject {
 
 export interface CursorProps {
   invert?: boolean
-  disabled?: boolean
 }

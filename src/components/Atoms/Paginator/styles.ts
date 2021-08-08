@@ -45,8 +45,15 @@ export const Cursor = styled.button<CursorProps>`
 
   pointer-events: ${({ disabled }) => (disabled ? 'none' : 'unset')};
 
+  &[aria-disabled='true'] {
+    pointer-events: none;
+
+    ${NextIcon}, ${LastIcon} {
+      opacity: 0.4;
+    }
+  }
+
   ${NextIcon}, ${LastIcon} {
     ${({ invert }) => invert && 'transform: rotate(180deg);'}
-    opacity: ${({ disabled }) => (disabled ? 0.4 : 1)};
   }
 `
