@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { MaterialCard, Smooth } from 'styles'
 import { PercentageStyleProps } from './types'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
   ${MaterialCard}
   padding: 20px;
   display: flex;

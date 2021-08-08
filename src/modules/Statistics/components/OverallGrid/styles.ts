@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.article`
   ${InnerContainer}
   padding-top: 16px;
   max-height: calc(100% - 44px);

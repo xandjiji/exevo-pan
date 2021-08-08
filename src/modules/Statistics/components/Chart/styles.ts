@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { MaterialCard, Smooth } from 'styles'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
   ${MaterialCard}
   padding: 20px 16px 20px 26px;
   width: 100%;

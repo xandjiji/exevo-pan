@@ -1,10 +1,9 @@
 import styled from 'styled-components'
 import { MaterialCard, Smooth } from 'styles'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
   ${MaterialCard}
   padding: 20px;
-  /* @ ToDo: change width after StatisticsGrid refactor */
   width: calc(100% - 210px);
   ${Smooth}
 
