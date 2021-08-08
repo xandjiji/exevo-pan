@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import * as faker from 'faker'
-import { singleSampleFrom } from '../utils'
 import { randomCharacterData } from './characterMaker'
 
 const randomMonthlySummary = (): MonthlySummary => ({
@@ -35,36 +34,6 @@ const randomCharacterInfo = (key: keyof CharacterInfoKey): CharacterInfo => {
     [key]: value,
   }
 }
-
-const possibleCharacterInfoKeys = [
-  'auctionEnd',
-  'currentBid',
-  'hasBeenBidded',
-  'outfitId',
-  'serverId',
-  'vocationId',
-  'level',
-  'imbuements',
-  'items',
-  'charms',
-  'transfer',
-  'hasSoulwar',
-  'magic',
-  'club',
-  'fist',
-  'sword',
-  'fishing',
-  'axe',
-  'distance',
-  'shielding',
-]
-
-const randomTop10 = (): CharacterInfo[] =>
-  Array.from({ length: 10 }, () =>
-    randomCharacterInfo(
-      singleSampleFrom(possibleCharacterInfoKeys) as keyof CharacterInfoKey,
-    ),
-  )
 
 const randomDistributionData = (): DistributionData => {
   const distributionItems = Array.from(
@@ -101,15 +70,21 @@ export const randomStatisticsData = (): StatisticsData => ({
       precision: 0.01,
     })
     .toString(),
-  top10Bid: randomTop10(),
-  top10Level: randomTop10(),
-  top10Magic: randomTop10(),
-  top10Club: randomTop10(),
-  top10Fist: randomTop10(),
-  top10Sword: randomTop10(),
-  top10Fishing: randomTop10(),
-  top10Axe: randomTop10(),
-  top10Distance: randomTop10(),
-  top10Shielding: randomTop10(),
+  top10Bid: Array.from({ length: 10 }, () => randomCharacterInfo('currentBid')),
+  top10Level: Array.from({ length: 10 }, () => randomCharacterInfo('level')),
+  top10Magic: Array.from({ length: 10 }, () => randomCharacterInfo('magic')),
+  top10Club: Array.from({ length: 10 }, () => randomCharacterInfo('club')),
+  top10Fist: Array.from({ length: 10 }, () => randomCharacterInfo('fist')),
+  top10Sword: Array.from({ length: 10 }, () => randomCharacterInfo('sword')),
+  top10Fishing: Array.from({ length: 10 }, () =>
+    randomCharacterInfo('fishing'),
+  ),
+  top10Axe: Array.from({ length: 10 }, () => randomCharacterInfo('axe')),
+  top10Distance: Array.from({ length: 10 }, () =>
+    randomCharacterInfo('distance'),
+  ),
+  top10Shielding: Array.from({ length: 10 }, () =>
+    randomCharacterInfo('shielding'),
+  ),
   vocationPercentage: randomDistributionData(),
 })
