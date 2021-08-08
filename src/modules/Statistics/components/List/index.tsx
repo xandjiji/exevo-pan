@@ -40,7 +40,7 @@ const List = ({
             </S.RowItem>
             <S.RowItem>
               {format
-                ? format(character[displayedDataKey] as string)
+                ? format(character[displayedDataKey] as never)
                 : character[displayedDataKey]}
             </S.RowItem>
           </tr>
