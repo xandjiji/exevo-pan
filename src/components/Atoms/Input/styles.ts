@@ -25,11 +25,10 @@ export const ErrorMessage = styled.span`
   font-size: 10px;
   color: ${({ theme }) => theme.colors.red};
 
-  opacity: 0;
   transition: opacity 0.2s ease-out;
 
-  &[aria-hidden='false'] {
-    opacity: 1;
+  &[aria-hidden='true'] {
+    opacity: 0;
   }
 `
 
