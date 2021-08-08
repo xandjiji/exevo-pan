@@ -36,7 +36,7 @@ export const PageTitle = styled.h1`
 `
 
 export const Loading = styled(Spinner)`
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   z-index: 1;

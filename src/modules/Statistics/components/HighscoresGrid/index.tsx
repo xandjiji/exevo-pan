@@ -8,8 +8,6 @@ const HighscoresGrid = ({
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { statisticsData, loading } = useStatisticsData()
 
-  /* @ ToDo: add spinner */
-  if (loading && !statisticsData) return <div>loading...</div>
   return (
     <S.Wrapper {...props}>
       <S.PageTitle>
@@ -71,7 +69,7 @@ const HighscoresGrid = ({
           />
         </>
       ) : (
-        <div>loading...</div>
+        <S.Loading />
       )}
     </S.Wrapper>
   )
