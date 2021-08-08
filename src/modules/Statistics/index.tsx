@@ -4,7 +4,6 @@ import routes from './routes'
 import Header from './components/Header'
 
 const Statistics = (): JSX.Element => {
-  /* @ ToDo: change title based on subpage */
   useEffect(() => {
     document.title = `Exevo Pan - Statistics`
   }, [])
