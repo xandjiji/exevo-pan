@@ -81,13 +81,13 @@ const AutocompleteInput = ({
   useEffect(() => {
     if (highlightedIndex !== undefined) {
       const item = document.getElementById(
-        indexToId(highlightedIndex) as string,
+        indexToId(highlightedIndex, listboxId) as string,
       )
       item?.scrollIntoView({
         block: 'nearest',
       })
     }
-  }, [highlightedIndex])
+  }, [highlightedIndex, listboxId])
 
   useEffect(() => {
     setCurrentList(itemList)

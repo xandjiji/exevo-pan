@@ -22,8 +22,8 @@ const Listbox = (
   refProp: Ref<HTMLDivElement>,
 ): JSX.Element => {
   const currentActiveDescendantId = useMemo(
-    () => indexToId(highlightedIndex),
-    [highlightedIndex],
+    () => indexToId(highlightedIndex, props.id),
+    [highlightedIndex, props.id],
   )
   return (
     <S.Wrapper
@@ -37,7 +37,7 @@ const Listbox = (
         if (typeof child.type === 'string') return child
 
         return cloneElement(child, {
-          id: indexToId(index),
+          id: indexToId(index, props.id),
           highlighted: highlightedIndex === index,
           'aria-selected': selectedIndex.has(index),
           onClick: onSelectOption,
