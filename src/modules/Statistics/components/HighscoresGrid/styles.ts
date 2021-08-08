@@ -27,3 +27,7 @@ export const Wrapper = styled.article`
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   }
 `
+
+export const PageTitle = styled.h1`
+  display: none;
+`

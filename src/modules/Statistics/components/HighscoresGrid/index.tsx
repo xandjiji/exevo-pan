@@ -12,6 +12,9 @@ const HighscoresGrid = ({
   if (loading && !statisticsData) return <div>loading...</div>
   return (
     <S.Wrapper {...props}>
+      <S.PageTitle>
+        Tibia Bazaar top 10 characters, ranking and highscores
+      </S.PageTitle>
       {!loading && statisticsData ? (
         <>
           <List

@@ -12,6 +12,7 @@ const OverallGrid = ({
 
   return (
     <S.Wrapper {...props}>
+      <S.PageTitle>Tibia Bazaar statistics data and analytics</S.PageTitle>
       {!loading && statisticsData ? (
         <>
           <S.ChartWrapper>

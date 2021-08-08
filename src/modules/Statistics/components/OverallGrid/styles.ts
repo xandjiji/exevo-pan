@@ -11,6 +11,10 @@ export const Wrapper = styled.article`
   ${Smooth}
 `
 
+export const PageTitle = styled.h1`
+  display: none;
+`
+
 export const Loading = styled(Spinner)`
   position: absolute;
   top: 50%;
