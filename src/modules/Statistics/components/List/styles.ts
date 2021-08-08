@@ -1,10 +1,15 @@
 import styled, { css } from 'styled-components'
-import { MaterialCard, Shadow } from 'styles'
+import { MaterialCard, Shadow, Smooth } from 'styles'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
   padding: 0 24px 18px 24px;
   overflow: hidden;
+  ${Smooth}
+
+  * {
+    ${Smooth}
+  }
 `
 
 export const CardHead = styled.div`
