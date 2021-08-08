@@ -5,7 +5,8 @@ declare type MonthlySummary = {
 
 declare type CharacterInfoKey = Partial<
   Omit<PartialCharacterObject, 'id' | 'nickname'>
->
+> &
+  Partial<CharacterSkillsObject>
 
 declare interface CharacterInfo extends CharacterInfoKey {
   id: number
