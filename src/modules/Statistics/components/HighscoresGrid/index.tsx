@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { useStatisticsData } from 'contexts/useDatabase'
 import { formatNumberWithCommas } from 'utils'
 import List from '../List'
@@ -75,4 +76,4 @@ const HighscoresGrid = ({
   )
 }
 
-export default HighscoresGrid
+export default memo(HighscoresGrid)
