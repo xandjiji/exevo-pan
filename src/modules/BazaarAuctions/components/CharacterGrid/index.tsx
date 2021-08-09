@@ -103,6 +103,11 @@ const CharacterGrid = ({
       gridRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
   }, [characterPage])
 
+  const onPageChange = useCallback(
+    (newPage: number) => setCurrentPage(newPage),
+    [],
+  )
+
   return (
     <S.Main {...props}>
       <S.Head>
@@ -137,10 +142,7 @@ const CharacterGrid = ({
           pageSize={itemsPerPage}
           totalItems={sortedData.length}
           currentPage={currentPage}
-          onChange={useCallback(
-            (newPage: number) => setCurrentPage(newPage),
-            [],
-          )}
+          onChange={onPageChange}
           noItemsMessage="No characters found"
         />
       </S.Head>
