@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Smooth } from 'styles'
-import { TrackStyleProps, SliderInputStyleProps } from './types'
+import { TrackStyleProps } from './types'
 
 const increaseClickableArea = css`
   &::before {
@@ -78,7 +78,7 @@ const invalidStyle = css`
   color: ${({ theme }) => theme.colors.onPrimary};
 `
 
-export const SliderInput = styled.input<SliderInputStyleProps>`
+export const SliderInput = styled.input`
   padding: 7px 0;
   width: 40px;
   flex-shrink: 0;
@@ -93,7 +93,10 @@ export const SliderInput = styled.input<SliderInputStyleProps>`
   color: ${({ theme }) => theme.colors.onSurface};
 
   ${Smooth}
-  ${({ valid }) => !valid && invalidStyle}
+
+  &[aria-invalid='true'] {
+    ${invalidStyle}
+  }
 
   -moz-appearance: textfield;
   &::-webkit-outer-spin-button,
