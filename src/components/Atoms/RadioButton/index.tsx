@@ -26,7 +26,6 @@ const RadioButton = ({
 
   return (
     <S.Wrapper
-      active={derivedActive}
       onClick={handleClick}
       onKeyPress={handleKeyPress}
       role="radio"
@@ -34,7 +33,7 @@ const RadioButton = ({
       tabIndex={0}
       {...props}
     >
-      <S.Radio active={derivedActive} />
+      <S.Radio />
       {children}
     </S.Wrapper>
   )

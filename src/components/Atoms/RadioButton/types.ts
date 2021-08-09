@@ -5,11 +5,3 @@ export interface RadioButtonProps extends HTMLAttributes<HTMLDivElement> {
   active?: boolean
   onClick?: (event?: React.MouseEvent) => void
 }
-
-export interface WrapperStyleProps {
-  active?: boolean
-}
-
-export interface RadioStyleProps {
-  active?: boolean
-}

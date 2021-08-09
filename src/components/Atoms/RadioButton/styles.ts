@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { RadioStyleProps, WrapperStyleProps } from './types'
 
-export const Radio = styled.div<RadioStyleProps>`
+export const Radio = styled.div`
   position: relative;
   margin-right: 6px;
   flex-shrink: 0;
@@ -22,11 +21,10 @@ export const Radio = styled.div<RadioStyleProps>`
     width: 8px;
     height: 8px;
     background-color: ${({ theme }) => theme.colors.primary};
-    opacity: ${({ active }) => (active ? '1' : '0')};
     transition: opacity 0.2s ease-out;
   }
 `
-export const Wrapper = styled.div<WrapperStyleProps>`
+export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -43,6 +41,12 @@ export const Wrapper = styled.div<WrapperStyleProps>`
   &:active {
     ${Radio} {
       box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
+    }
+  }
+
+  &[aria-checked='false'] {
+    ${Radio}::after {
+      opacity: 0;
     }
   }
 `
