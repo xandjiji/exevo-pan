@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Shadow } from 'styles'
-import { WrapperProps, InfoProps } from './types'
+import { WrapperProps, ProgressBarProps } from './types'
 
 export const Value = styled.div`
   padding: 3px;
@@ -19,23 +19,24 @@ export const Value = styled.div`
   ${Shadow}
 `
 
-export const Info = styled.div<InfoProps>`
+export const ProgressBar = styled.div<ProgressBarProps>`
+  position: relative;
+  height: 4px;
   width: 100%;
+  background-color: ${({ theme }) => theme.colors.primaryVariant};
+  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
+
   ::before {
     content: ${({ skillName }) => skillName && `'${skillName}';`};
-    display: block;
+    position: absolute;
+    bottom: calc(100% + 1px);
+    left: 0;
+
     text-transform: capitalize;
     font-size: 12px;
     font-weight: 300;
     color: ${({ theme }) => theme.colors.onSurface};
   }
-`
-
-export const ProgressBar = styled.div`
-  position: relative;
-  height: 4px;
-  background-color: ${({ theme }) => theme.colors.primaryVariant};
-  box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
 `
 
 export const BarFill = styled.div`
@@ -47,7 +48,7 @@ export const BarFill = styled.div`
 
 export const Wrapper = styled.div<WrapperProps>`
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 
   ${Value} {
     margin-right: 6px;

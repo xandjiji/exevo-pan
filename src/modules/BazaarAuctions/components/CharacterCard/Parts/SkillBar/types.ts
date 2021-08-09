@@ -10,6 +10,6 @@ export interface WrapperProps {
   highlight: boolean
 }
 
-export interface InfoProps {
+export interface ProgressBarProps {
   skillName?: string
 }

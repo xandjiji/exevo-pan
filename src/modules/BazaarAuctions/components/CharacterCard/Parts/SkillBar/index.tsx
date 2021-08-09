@@ -21,11 +21,9 @@ const SkillBar = ({
   return (
     <S.Wrapper title={progressPercentage} highlight={highlight} {...props}>
       <S.Value>{Math.floor(skillValue)}</S.Value>
-      <S.Info skillName={skillName}>
-        <S.ProgressBar>
-          <S.BarFill style={{ width: progressPercentage }} />
-        </S.ProgressBar>
-      </S.Info>
+      <S.ProgressBar skillName={skillName}>
+        <S.BarFill style={{ width: progressPercentage }} />
+      </S.ProgressBar>
     </S.Wrapper>
   )
 }
