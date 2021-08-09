@@ -12,10 +12,6 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
 
 export type PopperReferenceElement = HTMLDivElement | null
 
-export interface PopoverContentProps extends HTMLAttributes<HTMLDivElement> {
-  visible: boolean
-}
-
 export interface PopoverReferenceProps {
   increaseHoverArea: boolean
   padX: number

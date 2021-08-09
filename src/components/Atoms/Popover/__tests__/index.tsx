@@ -18,18 +18,16 @@ describe('<Popover />', () => {
       </Popover>,
     )
 
-    const contentElement = screen.getByRole('none')
     const wrappedElement = screen.getByRole('heading')
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
     expect(
       screen.queryByLabelText('Click here to close'),
     ).not.toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.hover(wrappedElement)
+    const contentElement = screen.getByRole('none')
     expect(contentElement).toBeVisible()
 
     userEvent.unhover(wrappedElement)
@@ -45,15 +43,13 @@ describe('<Popover />', () => {
       </Popover>,
     )
 
-    const contentElement = screen.getByRole('none')
     const wrappedElement = screen.getByRole('heading')
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.click(wrappedElement)
+    const contentElement = screen.getByRole('none')
     expect(contentElement).toBeVisible()
     userEvent.click(contentElement)
     expect(contentElement).toBeVisible()
@@ -76,17 +72,14 @@ describe('<Popover />', () => {
       </Popover>,
     )
 
-    const contentElement = screen.getByRole('none')
-
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
     expect(screen.getByRole('heading')).toBeInTheDocument()
     expect(
       screen.queryByLabelText('Click here to close'),
     ).not.toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.tab()
+    const contentElement = screen.getByRole('none')
     expect(contentElement).toBeVisible()
 
     userEvent.tab()
@@ -105,17 +98,14 @@ describe('<Popover />', () => {
       </Popover>,
     )
 
-    const contentElement = screen.getByRole('none')
     const wrappedElement = screen.getByRole('heading')
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.tab()
-    expect(contentElement).not.toBeVisible()
     userEvent.keyboard('{enter}')
+    const contentElement = screen.getByRole('none')
     expect(contentElement).toBeVisible()
     userEvent.type(wrappedElement, '{space}')
     expect(contentElement).not.toBeVisible()

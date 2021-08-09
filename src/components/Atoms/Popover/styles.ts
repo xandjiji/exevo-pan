@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { PopoverReferenceProps, PopoverContentProps } from './types'
+import { PopoverReferenceProps } from './types'
 
 const increaseHoverAreaStyle = css<PopoverReferenceProps>`
   &::after {
@@ -26,11 +26,14 @@ export const PopoverReference = styled.div<PopoverReferenceProps>`
   }
 `
 
-export const PopoverContent = styled.div<PopoverContentProps>`
+export const PopoverContent = styled.div`
   z-index: 51;
-  opacity: ${({ visible }) => (visible ? 1 : 0)};
-  pointer-events: ${({ visible }) => (visible ? 'unset' : 'none')};
   transition: opacity 0.2s ease-out;
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    pointer-events: none;
+  }
 `
 
 export const Backdrop = styled.div`

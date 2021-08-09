@@ -100,7 +100,7 @@ const Popover = ({
       </S.PopoverReference>
       <S.PopoverContent
         ref={setPopperElement}
-        visible={derivedVisibility}
+        aria-hidden={!derivedVisibility}
         style={styles.popper}
         {...attributes.popper}
         {...props}
