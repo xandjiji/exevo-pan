@@ -5,9 +5,7 @@ import SpritePortrait from '..'
 
 describe('<SpritePortrait />', () => {
   test('should render correctly with src', () => {
-    renderWithProviders(
-      <SpritePortrait alt="Red skull" src={imageSrc as string} />,
-    )
+    renderWithProviders(<SpritePortrait alt="Red skull" src={imageSrc} />)
 
     const imgElement = screen.getByAltText('Red skull')
     const loadingElement = screen.getByRole('alert')
@@ -27,10 +25,7 @@ describe('<SpritePortrait />', () => {
   test('should render correctly without src', () => {
     renderWithProviders(<SpritePortrait alt="Red skull" />)
 
-    const imgElement = screen.getByAltText('Red skull')
-    const loadingElement = screen.getByRole('alert')
-
-    expect(imgElement).not.toBeVisible()
-    expect(loadingElement).not.toBeVisible()
+    expect(screen.queryByAltText('Red skull')).not.toBeVisible()
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
   })
 })

@@ -11,7 +11,7 @@ const SpritePortrait = ({
     <S.Wrapper>
       <S.Img
         src={src}
-        visible={loaded}
+        aria-hidden={!!!src || !loaded}
         hidden={!!!src}
         onLoad={() => setLoaded(true)}
         onError={() => setLoaded(false)}
@@ -21,7 +21,7 @@ const SpritePortrait = ({
         role="alert"
         aria-label="Loading indicator"
         aria-busy="true"
-        visible={!loaded}
+        aria-hidden={loaded}
       />
     </S.Wrapper>
   )
