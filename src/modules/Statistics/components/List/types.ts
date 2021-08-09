@@ -4,8 +4,3 @@ export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   displayedDataKey: keyof CharacterInfoKey
   format?: (value: number) => string | ((value: string) => string)
 }
-
-export interface PseudoElementProps {
-  beforeContent?: string
-  afterContent?: string
-}
