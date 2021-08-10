@@ -5,6 +5,7 @@ import {
   useRef,
   useMemo,
   useLayoutEffect,
+  memo,
 } from 'react'
 import { useIsMounted, useDrag } from 'hooks'
 import { normalize, clampValue, debounce } from 'utils'
@@ -173,4 +174,4 @@ const RangeSliderInput = ({
   )
 }
 
-export default RangeSliderInput
+export default memo(RangeSliderInput)

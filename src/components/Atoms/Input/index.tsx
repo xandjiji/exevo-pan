@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, memo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import * as S from './styles'
 import { InputProps } from './types'
@@ -74,4 +74,4 @@ const Input = ({
   )
 }
 
-export default Input
+export default memo(Input)

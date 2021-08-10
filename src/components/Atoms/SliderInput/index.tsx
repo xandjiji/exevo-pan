@@ -5,6 +5,7 @@ import React, {
   useCallback,
   useMemo,
   useLayoutEffect,
+  memo,
 } from 'react'
 import { useIsMounted, useDrag } from 'hooks'
 import { clampValue, normalize, strToInt, debounce } from 'utils'
@@ -169,4 +170,4 @@ const SliderInput = ({
   )
 }
 
-export default SliderInput
+export default memo(SliderInput)

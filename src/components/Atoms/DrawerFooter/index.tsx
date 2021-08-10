@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import * as S from './styles'
 
 const DrawerFooter = ({
@@ -23,4 +24,4 @@ const DrawerFooter = ({
   </S.Wrapper>
 )
 
-export default DrawerFooter
+export default memo(DrawerFooter)
