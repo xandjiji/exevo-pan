@@ -3,10 +3,6 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import FilterDrawer from '..'
 
-jest.mock('lodash', () => ({
-  debounce: fn => fn,
-}))
-
 const mockOnClose = jest.fn()
 const mockSetActiveFilterCount = jest.fn()
 const mockSetUrlValues = jest.fn()

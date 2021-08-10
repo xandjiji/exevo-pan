@@ -3,10 +3,6 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import Paginator from '..'
 
-jest.mock('lodash', () => ({
-  debounce: fn => fn,
-}))
-
 const fakeArgs = {
   totalItems: 3664,
   pageSize: 10,

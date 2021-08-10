@@ -12,10 +12,6 @@ import CharacterGrid from '..'
 
 jest.setTimeout(15000)
 
-jest.mock('lodash', () => ({
-  debounce: fn => fn,
-}))
-
 const { characterData } = randomDataset()
 const mockScrollTo = jest.fn()
 window.HTMLElement.prototype.scrollTo = mockScrollTo

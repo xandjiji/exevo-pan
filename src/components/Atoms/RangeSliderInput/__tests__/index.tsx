@@ -3,10 +3,6 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import RangeSliderInput from '..'
 
-jest.mock('lodash', () => ({
-  debounce: fn => fn,
-}))
-
 const mockedOnChange = jest.fn()
 
 describe('<RangeSliderInput />', () => {
