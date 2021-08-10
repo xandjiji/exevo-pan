@@ -24,7 +24,7 @@
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width">
     <meta name="theme-color" content="#3F51B5" />
     <meta name="msapplication-navbutton-color" content="#3F51B5">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -74,8 +74,7 @@
             height: 24px;
             border-radius: 50%;
             background: linear-gradient(to right, #3F51B5 10%, rgba(255, 255, 255, 0) 42%);
-            animation: load3 1.4s infinite ease-out;
-            transform: translateZ(0);
+            animation: spinAnimation 1.4s infinite ease-out;
             transition: opacity 0.2s ease-out;
         }
 
@@ -85,30 +84,30 @@
 
         .loader:before {
             content: '';
-            width: 50%;
-            height: 50%;
-            background: #3F51B5;
-            border-radius: 100% 0 0 0;
             position: absolute;
             top: 0;
             left: 0;
+            width: 50%;
+            height: 50%;
+            border-radius: 100% 0 0 0;
+            background: #3F51B5;
         }
 
         .loader:after {
             content: '';
-            background: #EEEEEE;
-            width: 75%;
-            height: 75%;
-            border-radius: 50%;
-            margin: auto;
             position: absolute;
             top: 0;
             left: 0;
             bottom: 0;
             right: 0;
+            background: #EEEEEE;
+            width: 75%;
+            height: 75%;
+            border-radius: 50%;
+            margin: auto;
         }
 
-        @keyframes load3 {
+        @keyframes spinAnimation {
             0% {
                 transform: rotate(0deg);
             }
