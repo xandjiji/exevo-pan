@@ -1,6 +1,5 @@
 import React, { useState, memo } from 'react'
-import { debounce } from 'lodash'
-import { clampValue } from 'utils'
+import { clampValue, debounce } from 'utils'
 import usePagination from './usePagination'
 import * as S from './styles'
 import { PaginatorProps } from './types'
