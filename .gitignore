@@ -17,6 +17,7 @@ yarn-error.log*
 
 .eslintcache
 /coverage
+/.next
 
 LatestCharacterData.json
 ServerData.json
