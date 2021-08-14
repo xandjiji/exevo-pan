@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'
 import { localStorageKeys } from 'Constants'
-import { getInitialTheme } from './utils'
+import { getInitialTheme, injectCssVariables } from './utils'
 import { ThemeContextState, ThemeProviderProps } from './types'
 
 const defaultThemeState: ThemeContextState = {
@@ -22,6 +22,7 @@ export const ThemeProvider = ({
   const toggleTheme = () => {
     const newThemeTitle = currentTheme.next
     setCurrentThemeTitle(newThemeTitle)
+    injectCssVariables(newThemeTitle)
     localStorage.setItem(localStorageKeys.THEME_DATA, newThemeTitle)
   }
 
