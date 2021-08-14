@@ -2,7 +2,7 @@ import { createContext, useContext, useState, useEffect } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'
 import { localStorageKeys } from 'Constants'
-import { getThemeFromStorage } from './utils'
+import { getInitialTheme } from './utils'
 import { ThemeContextState, ThemeProviderProps } from './types'
 
 const defaultThemeState: ThemeContextState = {
@@ -16,7 +16,7 @@ export const ThemeProvider = ({
   children,
 }: ThemeProviderProps): JSX.Element => {
   const [currentThemeTitle, setCurrentThemeTitle] =
-    useState<string>(getThemeFromStorage)
+    useState<string>(getInitialTheme)
   const currentTheme = Themes[currentThemeTitle]
 
   const toggleTheme = () => {
@@ -36,6 +36,10 @@ export const ThemeProvider = ({
       .querySelector('meta[name=msapplication-navbutton-color]')
       ?.setAttribute('content', primary)
   }, [currentTheme])
+
+  useEffect(() => {
+    setCurrentThemeTitle(getInitialTheme())
+  }, [])
 
   return (
     <StyledThemeProvider theme={currentTheme}>
