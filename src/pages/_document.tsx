@@ -49,6 +49,7 @@ export default class MyDocument extends Document {
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <body>
+          <script type="text/javascript" src="/loadTheme.js" />
           <Main />
           <NextScript />
         </body>
