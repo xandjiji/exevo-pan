@@ -1,6 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'
+import { localStorageKeys } from 'Constants'
+import { getThemeFromStorage } from './utils'
 import { ThemeContextState, ThemeProviderProps } from './types'
 
 const defaultThemeState: ThemeContextState = {
@@ -13,22 +15,14 @@ const ThemeContext = createContext<ThemeContextState>(defaultThemeState)
 export const ThemeProvider = ({
   children,
 }: ThemeProviderProps): JSX.Element => {
-  const [currentThemeTitle, setCurrentThemeTitle] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return (
-        Themes[localStorage.getItem('theme') ?? Themes.default.title]?.title ??
-        Themes.default.title
-      )
-    } else {
-      return Themes.default.title
-    }
-  })
+  const [currentThemeTitle, setCurrentThemeTitle] =
+    useState<string>(getThemeFromStorage)
   const currentTheme = Themes[currentThemeTitle]
 
   const toggleTheme = () => {
     const newThemeTitle = currentTheme.next
     setCurrentThemeTitle(newThemeTitle)
-    localStorage.setItem('theme', newThemeTitle)
+    localStorage.setItem(localStorageKeys.THEME_DATA, newThemeTitle)
   }
 
   useEffect(() => {
