@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export default css`
+export const InnerContainer = css`
   padding-left: 20px;
   padding-right: 20px;
 

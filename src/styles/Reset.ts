@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export default css`
+export const Reset = css`
   body {
     margin: 0;
   }

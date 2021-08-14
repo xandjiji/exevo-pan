@@ -1,6 +1,6 @@
 import { createPortal } from 'react-dom'
 import { useState, useEffect, useRef } from 'react'
-import { useDrag, useEscToClose } from 'hooks'
+import { useDrag, useEscToClose, useIsMounted } from 'hooks'
 import DrawerHead from './DrawerHead'
 import DrawerFooter from './DrawerFooter'
 import * as S from './styles'
@@ -11,7 +11,7 @@ const Drawer = ({
   onClose,
   children,
   ...props
-}: DrawerProps): JSX.Element => {
+}: DrawerProps): JSX.Element | null => {
   const initialDrag = useRef<number | null>(null)
   const [drawerOffset, setDrawerOffset] = useState<number>(0)
 
@@ -43,28 +43,32 @@ const Drawer = ({
     }
   }, [position.x, initialDrag])
 
-  return createPortal(
-    <>
-      <S.Wrapper
-        tabIndex={0}
-        aria-hidden={!isOpen}
-        aria-modal="true"
-        role="dialog"
-        ref={elementToFocusRef}
-        onKeyDown={onKeyDown}
-        style={{ marginLeft: `${drawerOffset}px` }}
-        {...props}
-      >
-        {children}
-      </S.Wrapper>
-      <S.Backdrop
-        aria-hidden={!isOpen}
-        style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}
-        {...binders}
-      />
-    </>,
-    document.body,
-  )
+  const isMounted = useIsMounted()
+
+  return isMounted
+    ? createPortal(
+        <>
+          <S.Wrapper
+            tabIndex={0}
+            aria-hidden={!isOpen}
+            aria-modal="true"
+            role="dialog"
+            ref={elementToFocusRef}
+            onKeyDown={onKeyDown}
+            style={{ marginLeft: `${drawerOffset}px` }}
+            {...props}
+          >
+            {children}
+          </S.Wrapper>
+          <S.Backdrop
+            aria-hidden={!isOpen}
+            style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}
+            {...binders}
+          />
+        </>,
+        document.body,
+      )
+    : null
 }
 
 Drawer.Head = DrawerHead

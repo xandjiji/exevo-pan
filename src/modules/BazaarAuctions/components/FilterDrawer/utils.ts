@@ -21,7 +21,13 @@ export const countActiveFilters = (
 ): number => {
   let count = 0
   for (const filter in defaultFilters) {
-    if (!dequal(defaultFilters[filter], currentFilters[filter])) count++
+    if (
+      !dequal(
+        defaultFilters[filter as keyof FilterState],
+        currentFilters[filter as keyof FilterState],
+      )
+    )
+      count++
   }
 
   return count

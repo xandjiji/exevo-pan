@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { InnerContainer, Shadow, Clickable } from 'styles'
-import { ReactComponent as ArrowIconSvg } from 'assets/svgs/arrowBack.svg'
+import ArrowIconSvg from 'assets/svgs/arrowBack.svg'
 
 export const DrawerHead = styled.div`
   display: flex;

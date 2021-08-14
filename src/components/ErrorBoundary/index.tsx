@@ -1,5 +1,6 @@
+/* eslint-disable */
 import { Component } from 'react'
-import { ErrorPage } from 'modules'
+import ErrorPage from 'modules/ErrorPage'
 import * as S from './styles'
 import { ErrorBoundaryProps, State } from './types'
 
@@ -20,10 +21,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
   public render(): React.ReactNode {
     if (this.state.hasError) {
       return (
-        <>
+        <S.Wrapper>
           <ErrorPage />
           <S.Background />
-        </>
+        </S.Wrapper>
       )
     } else {
       return this.props.children

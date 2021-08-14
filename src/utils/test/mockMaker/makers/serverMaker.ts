@@ -36,7 +36,9 @@ export const randomServerList = (amount: number): ServerObject[] => {
   const serverArray: ServerObject[] = []
   while (serverArray.length < amount) {
     const newServer = randomServer()
-    if (!serverArray.some(server => server.serverName === newServer.serverName))
+    if (
+      !serverArray.some((server) => server.serverName === newServer.serverName)
+    )
       serverArray.push(newServer)
   }
   return serverArray
@@ -52,7 +54,7 @@ export const randomServerData = (
 } => {
   const serverList = randomServerList(amount)
 
-  const rawServerData = {}
+  const rawServerData = {} as Record<string, ServerObject>
   for (const server of serverList) {
     rawServerData[server.serverName] = server
   }

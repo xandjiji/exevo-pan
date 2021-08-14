@@ -4,7 +4,7 @@ import { Clickable, Shadow } from 'styles'
 export const Button = styled.a`
   ${Clickable}
   ${Shadow}
-  
+
   position: relative;
   padding: 8px 16px 8px 40px;
   margin-left: 8px;
@@ -24,6 +24,7 @@ export const Button = styled.a`
   color: ${({ theme }) => theme.colors.onSurface};
   font-size: 12px;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 
   transition: 0.2s ease-out filter;
 
@@ -54,7 +55,7 @@ export const Button = styled.a`
   }
 `
 
-export const Img = styled.img`
+export const ImgWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 12px;

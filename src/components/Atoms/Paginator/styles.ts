@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { ReactComponent as NextSvg } from 'assets/svgs/next.svg'
-import { ReactComponent as LastSvg } from 'assets/svgs/last.svg'
+import NextSvg from 'assets/svgs/next.svg'
+import LastSvg from 'assets/svgs/last.svg'
 import { Clickable } from 'styles'
 import { CursorProps } from './types'
 

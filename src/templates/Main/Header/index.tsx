@@ -1,5 +1,6 @@
 import { routes } from 'Constants'
-import { CtaButton, Switch } from 'components/Atoms/'
+import NextLink from 'next/link'
+import { Link, CtaButton, Switch } from 'components/Atoms/'
 import { useTheme } from 'contexts/useTheme'
 import * as S from './styles'
 
@@ -9,31 +10,35 @@ const Header = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.Nav>
-        <S.LogoNavigation
-          to={routes.HOME}
-          aria-current="false"
-          aria-label="Go to homepage"
-        >
-          <S.ExevoPanLogo />
-        </S.LogoNavigation>
+        <S.LogoWrapper>
+          <NextLink href={routes.HOME}>
+            <S.ExevoPanLogo priority aria-label="Go to homepage" />
+          </NextLink>
+        </S.LogoWrapper>
         <S.Ul>
           <S.Li>
-            <S.Navigation to={routes.HOME} exact>
-              <S.MarketIcon />
-              Current Auctions
-            </S.Navigation>
+            <Link href={routes.HOME}>
+              <S.A>
+                <S.MarketIcon />
+                Current Auctions
+              </S.A>
+            </Link>
           </S.Li>
           <S.Li>
-            <S.Navigation to={routes.BAZAAR_HISTORY}>
-              <S.HistoryIcon />
-              Bazaar History
-            </S.Navigation>
+            <Link href={routes.BAZAAR_HISTORY}>
+              <S.A>
+                <S.HistoryIcon />
+                Bazaar History
+              </S.A>
+            </Link>
           </S.Li>
           <S.Li>
-            <S.Navigation to={routes.STATISTICS}>
-              <S.StatisticsIcon />
-              Statistics
-            </S.Navigation>
+            <Link href={routes.STATISTICS}>
+              <S.A>
+                <S.StatisticsIcon />
+                Statistics
+              </S.A>
+            </Link>
           </S.Li>
         </S.Ul>
       </S.Nav>

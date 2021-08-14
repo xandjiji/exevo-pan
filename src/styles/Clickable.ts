@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export default css`
+export const Clickable = css`
   cursor: pointer;
   transition: box-shadow 0.2s ease-out;
 

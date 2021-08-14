@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import { useIsMounted } from 'hooks'
 import { urlParametersState } from 'utils'
 import FilterDrawer from '../FilterDrawer'
 import CharacterCard, { CardSkeleton } from '../CharacterCard'
@@ -16,9 +17,9 @@ const CharacterGrid = ({
   isLoading,
   ...props
 }: CharacterGridProps): JSX.Element => {
-  const { current: isDesktop } = useRef(
-    window.matchMedia('(min-width: 768px)').matches,
-  )
+  const isDesktop = useRef(false)
+
+  const isMounted = useIsMounted()
 
   const { getUrlValues, defaultValues, setUrlValues } = useMemo(
     () =>
@@ -38,18 +39,14 @@ const CharacterGrid = ({
           decode: (value: string) => Number(decodeURIComponent(value)),
         },
       ]),
-    [defaultDescendingOrder, defaultSortMode],
+    [defaultDescendingOrder, defaultSortMode]
   )
 
   const gridState = useRef<'initial' | 'processing' | 'ready'>('initial')
-  const [currentPage, setCurrentPage] = useState<number>(
-    getUrlValues().currentPage as number,
-  )
-  const [sortMode, setSortMode] = useState<number>(
-    getUrlValues().orderBy as number,
-  )
+  const [currentPage, setCurrentPage] = useState<number>(1)
+  const [sortMode, setSortMode] = useState<number>(defaultSortMode)
   const [descendingOrder, setDescendingOrder] = useState<boolean>(
-    getUrlValues().descending as boolean,
+    defaultDescendingOrder
   )
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [activeFilterCount, setActiveFilterCount] = useState<number>(0)
@@ -67,9 +64,9 @@ const CharacterGrid = ({
     () =>
       sortedData.slice(
         (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage,
+        currentPage * itemsPerPage
       ),
-    [itemsPerPage, sortedData, currentPage],
+    [itemsPerPage, sortedData, currentPage]
   )
 
   useEffect(() => {
@@ -105,8 +102,17 @@ const CharacterGrid = ({
 
   const onPageChange = useCallback(
     (newPage: number) => setCurrentPage(newPage),
-    [],
+    []
   )
+
+  const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+
+  useEffect(() => {
+    isDesktop.current = window.matchMedia('(min-width: 768px)').matches
+    setCurrentPage(getUrlValues().currentPage as number)
+    setSortMode(getUrlValues().orderBy as number)
+    setDescendingOrder(getUrlValues().descending as boolean)
+  }, [])
 
   return (
     <S.Main {...props}>
@@ -146,20 +152,24 @@ const CharacterGrid = ({
           noItemsMessage="No characters found"
         />
       </S.Head>
-      <FilterDrawer
-        id="filter-drawer"
-        aria-label="Filter form"
-        open={drawerOpen}
-        onClose={useCallback(() => setDrawerOpen(false), [])}
-        setActiveFilterCount={setActiveFilterCount}
-      />
+
+      {isMounted && (
+        <FilterDrawer
+          id="filter-drawer"
+          aria-label="Filter form"
+          open={drawerOpen}
+          onClose={closeDrawer}
+          setActiveFilterCount={setActiveFilterCount}
+        />
+      )}
+
       <S.Grid ref={gridRef} id="character-grid">
         {isLoading ? (
-          Array.from({ length: isDesktop ? 10 : 2 }, (_, index) => (
+          Array.from({ length: isDesktop.current ? 10 : 2 }, (_, index) => (
             <CardSkeleton key={index} />
           ))
         ) : characterPage.length ? (
-          characterPage.map(item => (
+          characterPage.map((item) => (
             <CharacterCard key={item.id} characterData={item} />
           ))
         ) : (

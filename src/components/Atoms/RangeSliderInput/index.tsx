@@ -23,8 +23,9 @@ const RangeSliderInput = ({
   const [cursorBValue, setCursorBValue] = useState(propValue[1])
 
   const [currentCursor, setCurrentCursor] = useState<'A' | 'B'>('A')
-  const [currentTrackCursor, setCurrentTrackCursor] =
-    useState<'A' | 'B' | null>(null)
+  const [currentTrackCursor, setCurrentTrackCursor] = useState<
+    'A' | 'B' | null
+  >(null)
 
   const isMounted = useIsMounted()
   const track = useDrag()
@@ -33,15 +34,14 @@ const RangeSliderInput = ({
   const trackWidth: number = trackRef.current?.offsetWidth ?? 1
 
   const positionToValue = useCallback(
-    (position: number): number => {
-      return Math.round((max - min) * (position / trackWidth) + min)
-    },
+    (position: number): number =>
+      Math.round((max - min) * (position / trackWidth) + min),
     [min, max, trackWidth],
   )
 
   useEffect(() => {
     if (track.isMousePressed) {
-      const x = track.position.x
+      const { x } = track.position
       const trackValue = clampValue(positionToValue(x), [min, max])
 
       const newCurrentCursor =
@@ -95,9 +95,9 @@ const RangeSliderInput = ({
     event.nativeEvent.preventDefault()
 
     if (currentCursor === 'A') {
-      setCursorAValue(prev => clampValue(action(prev), [min, max]))
+      setCursorAValue((prev) => clampValue(action(prev), [min, max]))
     } else {
-      setCursorBValue(prev => clampValue(action(prev), [min, max]))
+      setCursorBValue((prev) => clampValue(action(prev), [min, max]))
     }
   }
 
@@ -111,7 +111,6 @@ const RangeSliderInput = ({
 
   useEffect(() => {
     if (isMounted) dispatchOnChange(cursorAValue, cursorBValue)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dispatchOnChange, cursorAValue, cursorBValue])
 
   useLayoutEffect(() => {
@@ -140,7 +139,7 @@ const RangeSliderInput = ({
           ref={trackRef}
           active={track.isMousePressed}
           tabIndex={0}
-          onKeyDown={event => handleKeyPress(event)}
+          onKeyDown={(event) => handleKeyPress(event)}
           {...track.binders}
         >
           <S.Cursor

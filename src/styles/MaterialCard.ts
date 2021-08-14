@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export default css`
+export const MaterialCard = css`
   padding: 12px;
   background-color: ${({ theme }) => theme.colors.surface};
   border-radius: 5px;

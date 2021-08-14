@@ -25,8 +25,8 @@ const randomCharacterInfo = (key: keyof CharacterInfoKey): CharacterInfo => {
   const randomCharacter = characterList[0]
 
   const value = skillKeys.includes(key)
-    ? randomCharacter.skills[key]
-    : randomCharacter[key]
+    ? randomCharacter.skills[key as keyof CharacterSkillsObject]
+    : randomCharacter[key as keyof PartialCharacterObject]
 
   return {
     id: randomCharacter.id,

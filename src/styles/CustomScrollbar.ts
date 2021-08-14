@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export default css`
+export const CustomScrollbar = css`
   scrollbar-color: ${({ theme }) => theme.colors.primaryVariant} transparent;
   scrollbar-width: thin;
 

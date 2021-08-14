@@ -1,8 +1,9 @@
+/* eslint-disable no-console */
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
 import ErrorBoundary from '..'
 
-function Bomb({ shouldThrow }) {
+function Bomb({ shouldThrow }: { shouldThrow: boolean }) {
   if (shouldThrow) {
     throw new Error('Bomb')
   } else {
@@ -22,13 +23,14 @@ describe('<ErrorBoundary />', () => {
       </ErrorBoundary>,
     )
 
+    jest.clearAllMocks()
     rerender(
       <ErrorBoundary>
-        <Bomb shouldThrow={true} />
+        <Bomb shouldThrow />
       </ErrorBoundary>,
     )
 
-    expect(console.error).toHaveBeenCalledTimes(2)
+    expect(console.error).toHaveBeenCalledTimes(3)
     expect(screen.getByRole('alert')).toHaveAttribute(
       'aria-label',
       'Error, something unexpected happened',

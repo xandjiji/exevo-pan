@@ -13,7 +13,7 @@ export const unminifyCharacterData = (
   ) as unknown as PartialCharacterObject[]
 
 export const filterItemData = (initialItemData: RareItemData): RareItemData => {
-  const filteredItemData = {}
+  const filteredItemData = {} as RareItemData
 
   for (const item in initialItemData) {
     if (initialItemData[item].length > 0) {

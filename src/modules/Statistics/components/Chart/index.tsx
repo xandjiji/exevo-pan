@@ -61,7 +61,7 @@ const Chart = ({
         yAxes: [
           {
             ticks: {
-              callback: value => formatNumberWithCommas(value),
+              callback: (value: number) => formatNumberWithCommas(value),
               fontColor: colors.onSurface,
             },
             gridLines: {
@@ -72,10 +72,10 @@ const Chart = ({
       },
       tooltips: {
         callbacks: {
-          title: tooltipItem => {
+          title: (tooltipItem: Record<string, string>[]) => {
             return `Day ${tooltipItem[0].xLabel}`
           },
-          label: tooltipItem => {
+          label: (tooltipItem: Record<string, number>) => {
             return `${tooltipLabel}: ${formatNumberWithCommas(
               tooltipItem.yLabel,
             )} TC`

@@ -173,6 +173,8 @@ describe('<SliderInput />', () => {
       />,
     )
 
+    mockedOnChange.mockClear()
+
     userEvent.tab()
     userEvent.keyboard('{arrowup}')
     expect(mockedOnChange).toBeCalledTimes(1)

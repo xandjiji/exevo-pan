@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ReactComponent as SortIconSvg } from 'assets/svgs/sort.svg'
+import SortIconSvg from 'assets/svgs/sort.svg'
 import { Clickable } from 'styles'
 import { IconStyling } from '../styles'
 

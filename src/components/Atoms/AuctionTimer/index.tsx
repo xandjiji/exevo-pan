@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { routes } from 'Constants'
 import useCountdownTick from './useCountdownTick'
 import { monthStr } from './utils'
@@ -10,7 +10,7 @@ const AuctionTimer = ({
   ...props
 }: AuctionTimerProps): JSX.Element => {
   const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
-  const { pathname } = useLocation()
+  const { pathname } = useRouter()
   const isBazaarHistory = pathname === routes.BAZAAR_HISTORY
 
   const endTime = `, ${endDate.getHours()}:${endDate

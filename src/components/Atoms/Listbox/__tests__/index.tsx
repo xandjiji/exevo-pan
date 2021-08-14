@@ -127,7 +127,7 @@ describe('<Listbox />', () => {
     )
 
     expect(screen.getByRole('listbox')).toBeInTheDocument()
-    screen.queryAllByRole('option').forEach(option => {
+    screen.queryAllByRole('option').forEach((option) => {
       expect(option).toBeInTheDocument()
     })
   })

@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { renderHook, act } from '@testing-library/react-hooks'
-import { Router } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { useRouter, NextRouter } from 'next/router'
 import { ThemeProvider } from 'contexts/useTheme'
 import { ManageDataClient } from 'services'
 import { getFavArray } from 'utils'
@@ -23,15 +22,16 @@ jest.mock('utils/localStorage', () => ({
 }))
 
 const getFavArrayMock = getFavArray as jest.MockedFunction<typeof getFavArray>
+const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
 
-const currentHistory = createBrowserHistory()
-
-const ComponentWrapper: React.FC = ({ children }): React.ReactElement => (
-  <Router history={currentHistory}>
-    <ThemeProvider>
-      <DatabaseProvider>{children}</DatabaseProvider>
-    </ThemeProvider>
-  </Router>
+const ComponentWrapper = ({
+  children,
+}: {
+  children: React.ReactNode
+}): React.ReactElement => (
+  <ThemeProvider>
+    <DatabaseProvider>{children}</DatabaseProvider>
+  </ThemeProvider>
 )
 
 describe('useDatabase()', () => {
@@ -60,7 +60,9 @@ describe('useDatabase()', () => {
   })
 
   test('checking initial state', () => {
-    currentHistory.push('/test-init')
+    mockedUseRouter.mockReturnValue({
+      pathname: '/test-init',
+    } as NextRouter)
     const { result } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })
@@ -77,7 +79,9 @@ describe('useDatabase()', () => {
   })
 
   test(`checking ${routes.HOME} path and filters dispatch`, async () => {
-    currentHistory.push(routes.HOME)
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.HOME,
+    } as NextRouter)
     const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })
@@ -112,7 +116,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.serverData.pvpType.type).toBe(1)
     })
 
@@ -124,7 +128,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.serverData.pvpType.type).toBe(1)
       expect(character.level >= 103).toBeTruthy()
     })
@@ -142,7 +146,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.serverData.pvpType.type).toBe(1)
       expect(character.level >= 103 && character.level <= 618).toBeTruthy()
     })
@@ -155,7 +159,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.nickname).toBe('Muscaria Cubensis')
     })
 
@@ -171,7 +175,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.skills.club >= 110).toBeTruthy()
     })
 
@@ -187,7 +191,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(
         character.skills.club >= 120 || character.skills.magic >= 120,
       ).toBeTruthy()
@@ -204,7 +208,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.serverData.battleye).toBe(true)
     })
 
@@ -219,7 +223,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.imbuements).toContain('Critical Hit')
     })
 
@@ -234,7 +238,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.imbuements).toContain('Critical Hit')
       expect(character.imbuements).toContain('Axe Skill')
     })
@@ -280,7 +284,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(serverSet.has(character.serverData.serverName)).toBeTruthy()
     })
 
@@ -297,7 +301,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(itemDataA.includes(character.id)).toBeTruthy()
     })
 
@@ -314,7 +318,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(
         itemDataA.includes(character.id) || itemDataB.includes(character.id),
       ).toBeTruthy()
@@ -322,7 +326,9 @@ describe('useDatabase()', () => {
   })
 
   test(`checking ${routes.BAZAAR_HISTORY} path and filters dispatch`, async () => {
-    currentHistory.push(routes.BAZAAR_HISTORY)
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.BAZAAR_HISTORY,
+    } as NextRouter)
     const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })
@@ -357,7 +363,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.serverData.pvpType.type).toBe(1)
     })
 
@@ -369,7 +375,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.serverData.pvpType.type).toBe(1)
       expect(character.level >= 103).toBeTruthy()
     })
@@ -387,7 +393,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.serverData.pvpType.type).toBe(1)
       expect(character.level >= 103 && character.level <= 618).toBeTruthy()
     })
@@ -400,7 +406,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.nickname).toBe('Muscaria Cubensis')
     })
 
@@ -416,7 +422,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.skills.club >= 110).toBeTruthy()
     })
 
@@ -432,7 +438,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(
         character.skills.club >= 120 || character.skills.magic >= 120,
       ).toBeTruthy()
@@ -449,7 +455,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.serverData.battleye).toBe(true)
     })
 
@@ -464,7 +470,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.imbuements).toContain('Critical Hit')
     })
 
@@ -479,7 +485,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(character.imbuements).toContain('Critical Hit')
       expect(character.imbuements).toContain('Axe Skill')
     })
@@ -525,7 +531,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(serverSet.has(character.serverData.serverName)).toBeTruthy()
     })
 
@@ -542,7 +548,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(itemDataA.includes(character.id)).toBeTruthy()
     })
 
@@ -559,7 +565,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.historyData.forEach(character => {
+    result.current.historyData.forEach((character) => {
       expect(
         itemDataA.includes(character.id) || itemDataB.includes(character.id),
       ).toBeTruthy()
@@ -567,7 +573,9 @@ describe('useDatabase()', () => {
   })
 
   test('checking reset to base data dispatch', async () => {
-    currentHistory.push(routes.HOME)
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.HOME,
+    } as NextRouter)
     const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })
@@ -602,7 +610,7 @@ describe('useDatabase()', () => {
       })
     })
 
-    result.current.characterData.forEach(character => {
+    result.current.characterData.forEach((character) => {
       expect(character.serverData.pvpType.type).toBe(1)
     })
 
@@ -622,7 +630,9 @@ describe('useDatabase()', () => {
   })
 
   test(`checking ${routes.STATISTICS} path initial data load`, async () => {
-    currentHistory.push(routes.STATISTICS)
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.STATISTICS,
+    } as NextRouter)
     const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
       wrapper: ComponentWrapper,
     })

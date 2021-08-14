@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 import WarningImg from 'assets/warning.png'
 import { WrapperStyleProps } from './types'
 
@@ -34,7 +35,6 @@ export const Wrapper = styled.div<WrapperStyleProps>`
   }
 `
 
-export const WarningIcon = styled.img.attrs({ src: WarningImg })`
-  margin-left: 1px;
-  transform: translateY(-1px) scale(0.75);
+export const WarningIcon = styled(Image).attrs({ src: WarningImg })`
+  transform: translate(1px, -1px) scale(0.75);
 `

@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 
+export const Wrapper = styled.div`
+  height: 100vh;
+`
+
 export const Background = styled.div`
   position: fixed;
   top: 0;

@@ -3,6 +3,8 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import FilterDrawer from '..'
 
+jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
+
 const mockOnClose = jest.fn()
 const mockSetActiveFilterCount = jest.fn()
 const mockSetUrlValues = jest.fn()
@@ -21,7 +23,7 @@ describe('<FilterDrawer />', () => {
 
     jest
       .spyOn(window, 'setTimeout')
-      .mockImplementationOnce(fn => fn() as unknown as NodeJS.Timeout)
+      .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   })
 
   test('should toggle between open/close', () => {
@@ -48,40 +50,40 @@ describe('<FilterDrawer />', () => {
   test('should call setActiveFilterCount', () => {
     renderWithProviders(<FilterDrawer {...defaultArgs} />)
 
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
 
     userEvent.click(screen.getByAltText('Knight'))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
-
-    userEvent.click(screen.getByAltText('Druid'))
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(3)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
 
-    userEvent.type(screen.getByLabelText('Search nickname'), 'K')
+    userEvent.click(screen.getByAltText('Druid'))
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(4)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
 
-    userEvent.click(screen.getByText('Rare nicknames'))
+    userEvent.type(screen.getByLabelText('Search nickname'), 'K')
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(5)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(3)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
 
     userEvent.click(screen.getByText('Rare nicknames'))
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(6)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(3)
 
-    userEvent.click(screen.getByAltText('Knight'))
+    userEvent.click(screen.getByText('Rare nicknames'))
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(7)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
 
-    userEvent.click(screen.getByAltText('Druid'))
+    userEvent.click(screen.getByAltText('Knight'))
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(8)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+
+    userEvent.click(screen.getByAltText('Druid'))
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(9)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
 
     userEvent.click(screen.getByPlaceholderText('Select imbuements'))
     userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(9)
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(10)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
   })
 
@@ -118,7 +120,7 @@ describe('<FilterDrawer />', () => {
     expect(screen.queryAllByRole('option')).toHaveLength(23)
     expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
 
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
 
     const toggleElement = screen.getByRole('switch', { name: 'All imbuements' })
@@ -127,10 +129,10 @@ describe('<FilterDrawer />', () => {
     expect(screen.queryByRole('option')).not.toBeInTheDocument()
     expect(screen.queryAllByLabelText('Remove item')).toHaveLength(23)
 
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(3)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
 
-    screen.queryAllByLabelText('Remove item').forEach(element => {
+    screen.queryAllByLabelText('Remove item').forEach((element) => {
       userEvent.click(element)
     })
 

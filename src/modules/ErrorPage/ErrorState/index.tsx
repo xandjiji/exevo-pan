@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { routes } from 'Constants'
 import * as S from './styles'
 import { ErrorStateProps } from './types'
@@ -12,22 +13,26 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => (
         role="alert"
         aria-label="Error, something unexpected happened"
       />
-      {paragraphs?.map(p => (
+      {paragraphs?.map((p) => (
         <S.Paragraph key={p}>{p}</S.Paragraph>
       ))}
 
       <S.Nav>
         <S.Ul>
           <S.Li>
-            <S.Navigation to={routes.HOME}>Current Auctions</S.Navigation>
+            <Link href={routes.HOME}>
+              <S.A>Current Auctions</S.A>
+            </Link>
           </S.Li>
           <S.Li>
-            <S.Navigation to={routes.BAZAAR_HISTORY}>
-              Bazaar History
-            </S.Navigation>
+            <Link href={routes.BAZAAR_HISTORY}>
+              <S.A>Bazaar History</S.A>
+            </Link>
           </S.Li>
           <S.Li>
-            <S.Navigation to={routes.STATISTICS}>Statistics</S.Navigation>
+            <Link href={routes.STATISTICS}>
+              <S.A>Statistics</S.A>
+            </Link>
           </S.Li>
         </S.Ul>
       </S.Nav>

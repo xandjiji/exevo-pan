@@ -20,7 +20,7 @@ const CharacterImbuements = ({
   imbuements.length ? (
     <Tooltip
       aria-label="Imbuements list"
-      content={imbuements.map(imbuement => (
+      content={imbuements.map((imbuement) => (
         <S.Imbuement
           key={imbuement}
           highlight={highlightedImbuements[imbuement]}

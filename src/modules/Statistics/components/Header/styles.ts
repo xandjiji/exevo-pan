@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
-import { NavLink } from 'react-router-dom'
 import { Shadow, InnerContainer, Smooth } from 'styles'
-import { ReactComponent as OverallIconSvg } from 'assets/svgs/charts.svg'
-import { ReactComponent as HighscoresIconSvg } from 'assets/svgs/trophy.svg'
+import OverallIconSvg from 'assets/svgs/charts.svg'
+import HighscoresIconSvg from 'assets/svgs/trophy.svg'
 
 export const Nav = styled.nav`
   position: relative;
@@ -20,7 +19,7 @@ export const Ul = styled.ul`
 
 export const Li = styled.li``
 
-export const Navigation = styled(NavLink)`
+export const A = styled.a`
   padding: 13px 20px 10px 20px;
   display: flex;
   align-items: center;
@@ -29,9 +28,10 @@ export const Navigation = styled(NavLink)`
   color: ${({ theme }) => theme.colors.onPrimary};
   white-space: nowrap;
   border-bottom: solid 3px transparent;
+  cursor: pointer;
   ${Smooth}
 
-  &.active, &:hover {
+  &[aria-current='page'], &:hover {
     border-color: ${({ theme }) => theme.colors.onPrimary};
   }
 `

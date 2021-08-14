@@ -7,8 +7,9 @@ import {
   useState,
   useMemo,
 } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { ManageDataClient } from 'services'
+import { useIsMounted } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
 import { routes } from 'Constants'
 import DatabaseReducer from './DatabaseReducer'
@@ -74,10 +75,10 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     {
       loadingPaths: [],
       navigated: [],
-    },
+    }
   )
 
-  const { pathname } = useLocation()
+  const { pathname } = useRouter()
   const loading = loadingPaths.includes(pathname)
 
   const [loadedPercentage, setLoadedPercentage] = useState<string | null>()
@@ -138,12 +139,19 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     }
   }, [pathname, navigated, fetchCharacterData, fetchStatisticsData])
 
+  const isMounted = useIsMounted()
+  useEffect(() => {
+    if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
+      if (isMounted) dispatch({ type: 'RESET_TO_BASE_DATA' })
+    }
+  }, [pathname, navigated, fetchCharacterData])
+
   const drawerFields = useMemo(
     () => ({
       serverData,
       rareItemData,
     }),
-    [serverData, rareItemData],
+    [serverData, rareItemData]
   )
 
   return (

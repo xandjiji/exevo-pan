@@ -3,9 +3,11 @@ import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import Drawer from '..'
 
+jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
+
 const mockOnClose = jest.fn()
 
-const DrawerComponent = ({ open = false }): JSX.Element => (
+const DrawerComponent = ({ open = false }: { open: boolean }): JSX.Element => (
   <Drawer data-testid="drawer-id" isOpen={open} onClose={mockOnClose}>
     <Drawer.Head onClose={mockOnClose}>head</Drawer.Head>
     <Drawer.Body>body</Drawer.Body>
@@ -19,11 +21,11 @@ describe('<Drawer />', () => {
 
     jest
       .spyOn(window, 'setTimeout')
-      .mockImplementation(fn => fn() as unknown as NodeJS.Timeout)
+      .mockImplementation((fn) => fn() as unknown as NodeJS.Timeout)
   })
 
   test('should render children content', () => {
-    renderWithProviders(<DrawerComponent open={true} />)
+    renderWithProviders(<DrawerComponent open />)
 
     expect(screen.getByText('head')).toBeInTheDocument()
     expect(screen.getByText('body')).toBeInTheDocument()
@@ -36,12 +38,12 @@ describe('<Drawer />', () => {
     const drawerElement = screen.getByTestId('drawer-id')
     expect(drawerElement).not.toBeVisible()
 
-    rerender(<DrawerComponent open={true} />)
+    rerender(<DrawerComponent open />)
     expect(drawerElement).toBeVisible()
   })
 
   test('should call onClose with ESC key', () => {
-    renderWithProviders(<DrawerComponent open={true} />)
+    renderWithProviders(<DrawerComponent open />)
 
     expect(mockOnClose).toBeCalledTimes(0)
     userEvent.keyboard('{esc}')
@@ -49,7 +51,7 @@ describe('<Drawer />', () => {
   })
 
   test('should call onClose on arrow click', () => {
-    renderWithProviders(<DrawerComponent open={true} />)
+    renderWithProviders(<DrawerComponent open />)
 
     expect(mockOnClose).toBeCalledTimes(0)
     userEvent.click(screen.getByRole('button'))

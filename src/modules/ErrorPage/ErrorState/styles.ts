@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import styled from 'styled-components'
-import { NavLink } from 'react-router-dom'
 import { Smooth, InnerContainer } from 'styles'
-import { ReactComponent as ErrorIconSvg } from 'assets/svgs/error.svg'
+import ErrorIconSvg from 'assets/svgs/error.svg'
 
 export const Wrapper = styled.main`
   position: relative;
   z-index: 99;
   width: 100vw;
+  height: 100%;
 
   * {
     ${Smooth}
@@ -79,8 +79,9 @@ export const Li = styled.li`
   }
 `
 
-export const Navigation = styled(NavLink)`
+export const A = styled.a`
   font-size: 14px;
   letter-spacing: 0.5px;
   color: ${({ theme }) => theme.colors?.onPrimary ?? '#FFFFFF'};
+  cursor: pointer;
 `

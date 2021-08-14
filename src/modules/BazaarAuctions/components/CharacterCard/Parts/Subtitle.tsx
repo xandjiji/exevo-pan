@@ -16,7 +16,7 @@ const vocationEnum = {
   '12': 'Paladin',
   '13': 'Sorcerer',
   '14': 'Druid',
-}
+} as Record<string, string>
 
 const Description = styled.span`
   font-size: 12px;

@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import { useRouter, NextRouter } from 'next/router'
 import { renderWithRouter } from 'utils/test'
 import { routes } from 'Constants'
 import AuctionTimer from '..'
@@ -14,7 +15,14 @@ const tomorrow = new Date(Date.now() + MILLISECONDS_IN_A_DAY + 1)
 const nextHour = new Date(Date.now() + MILLISECONDS_IN_AN_HOUR + 1)
 const soon = new Date(Date.now() + MILLISECONDS_IN_A_MINUTE + 1)
 
+const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
+
 describe('<AuctionTimer />', () => {
+  beforeEach(() => {
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.HOME,
+    } as NextRouter)
+  })
   describe('it renders Auction Ended message', () => {
     test('for right now', () => {
       renderWithRouter(<AuctionTimer endDate={new Date()} />)
@@ -41,6 +49,9 @@ describe('<AuctionTimer />', () => {
     })
 
     test(`for a past date at ${routes.BAZAAR_HISTORY} route`, () => {
+      mockedUseRouter.mockReturnValue({
+        pathname: routes.BAZAAR_HISTORY,
+      } as NextRouter)
       renderWithRouter(<AuctionTimer endDate={past} />, routes.BAZAAR_HISTORY)
 
       expect(screen.getByRole('timer')).toHaveTextContent(/1 Jan/)

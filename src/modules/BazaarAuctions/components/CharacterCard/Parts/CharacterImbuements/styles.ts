@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { ReactComponent as MagicSvg } from 'assets/svgs/magic.svg'
+import MagicSvg from 'assets/svgs/magic.svg'
 import { ImbuementStyleProps } from './types'
 
 export const Wrapper = styled.div`

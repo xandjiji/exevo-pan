@@ -59,7 +59,7 @@ describe('<AutocompleteInput />', () => {
     userEvent.type(inputElement, '{esc}')
     expect(inputElement).toHaveAttribute('aria-expanded', 'false')
     expect(listboxElement).not.toBeVisible()
-    optionsElement.forEach(option => {
+    optionsElement.forEach((option) => {
       expect(option).not.toBeVisible()
     })
 

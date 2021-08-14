@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { ReactComponent as HeartIconComponent } from 'assets/svgs/heart.svg'
+import HeartIconComponent from 'assets/svgs/heart.svg'
 import { Shadow, Clickable, Smooth } from 'styles'
 import { FavButtonStyleProps } from './types'
 

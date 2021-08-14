@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export default styled.div`
+export const Spinner = styled.div`
   position: relative;
   width: 24px;
   height: 24px;

@@ -7,12 +7,15 @@ import {
   getPercentage,
 } from './utils'
 
-// eslint-disable-next-line @typescript-eslint/no-extraneous-class
 export default class ManageDataClient {
   static serverDataUrl = `${endpoints.BASE_DATA}${paths.SERVER_DATA}`
+
   static characterDataUrl = `${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`
+
   static rareItemDataUrl = `${endpoints.BASE_DATA}${paths.ITEMS_DATA}`
+
   static historyHashDataUrl = `${endpoints.BASE_HISTORY_DATA}${paths.HISTORY_HASH}`
+
   static statisticsDataUrl = `${endpoints.BASE_HISTORY_DATA}${paths.OVERALL_STATISTICS}`
 
   static async fetchServerData(): Promise<ServerObject[]> {
@@ -80,6 +83,7 @@ export default class ManageDataClient {
       const data = (await response.json()) as number[]
 
       let historyData: PartialCharacterObject[] = []
+      // eslint-disable-next-line no-restricted-syntax
       for (const [index, hash] of data.entries()) {
         // eslint-disable-next-line no-await-in-loop
         const dataPage = await checkAndHash(hash, index)

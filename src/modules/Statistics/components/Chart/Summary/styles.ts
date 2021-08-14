@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Smooth } from 'styles'
-import { ReactComponent as TrendingIconSvg } from 'assets/svgs/trending.svg'
+import TrendingIconSvg from 'assets/svgs/trending.svg'
 import { PositiveStyleProps } from './types'
 
 export const Wrapper = styled.div`

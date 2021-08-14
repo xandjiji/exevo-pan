@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import {
   DrawerFooter as BaseDrawerFooter,
   Input as BaseInput,
+  Chip as BaseChip,
 } from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
 import { Smooth } from 'styles'
@@ -38,6 +39,12 @@ export const ChipWrapper = styled.div`
 
   > *:not(:last-child) {
     margin-right: 8px;
+  }
+`
+
+export const IconChip = styled(BaseChip)`
+  > div {
+    margin-right: 6px !important;
   }
 `
 

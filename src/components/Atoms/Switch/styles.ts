@@ -64,5 +64,5 @@ export const ToggleButton = styled.div<ToggleStyleProps>`
   }
 
   ${({ active }) => active && activeToggleStyle}
-  ${props => props.active && props.hasIcon && activeToggleWithIconStyle}
+  ${({ active, hasIcon }) => active && hasIcon && activeToggleWithIconStyle}
 `

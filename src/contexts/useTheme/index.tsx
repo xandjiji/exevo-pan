@@ -13,12 +13,16 @@ const ThemeContext = createContext<ThemeContextState>(defaultThemeState)
 export const ThemeProvider = ({
   children,
 }: ThemeProviderProps): JSX.Element => {
-  const [currentThemeTitle, setCurrentThemeTitle] = useState<string>(
-    () =>
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      Themes[localStorage.getItem('theme') ?? Themes.default.title]?.title ??
-      Themes.default.title,
-  )
+  const [currentThemeTitle, setCurrentThemeTitle] = useState<string>(() => {
+    if (typeof window !== 'undefined') {
+      return (
+        Themes[localStorage.getItem('theme') ?? Themes.default.title]?.title ??
+        Themes.default.title
+      )
+    } else {
+      return Themes.default.title
+    }
+  })
   const currentTheme = Themes[currentThemeTitle]
 
   const toggleTheme = () => {

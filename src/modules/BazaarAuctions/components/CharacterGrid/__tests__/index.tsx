@@ -16,6 +16,8 @@ const { characterData } = randomDataset()
 const mockScrollTo = jest.fn()
 window.HTMLElement.prototype.scrollTo = mockScrollTo
 
+jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
+
 describe('<CharacterGrid />', () => {
   beforeEach(() => {
     /* @ ToDo: add this to jest setup */
@@ -139,7 +141,9 @@ describe('<CharacterGrid />', () => {
     expect(screen.getByText('Sorry, no auction was found')).toBeInTheDocument()
 
     userEvent.click(screen.getByRole('button', { name: 'Change filters' }))
-    expect(screen.getByLabelText('Filter form')).toBeVisible()
+    await waitFor(() => {
+      expect(screen.getByLabelText('Filter form')).toBeVisible()
+    })
 
     await waitFor(() => {})
   })

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Clickable } from 'styles'
-import { ReactComponent as ExternalIconSvg } from 'assets/svgs/external.svg'
+import ExternalIconSvg from 'assets/svgs/external.svg'
 
 interface TitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
   characterId: number

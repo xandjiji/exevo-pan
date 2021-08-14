@@ -61,11 +61,11 @@ const Popover = ({
       case 'click':
         return {
           tabIndex: 0,
-          onClick: () => setVisible(prev => !prev),
+          onClick: () => setVisible((prev) => !prev),
           onKeyPress: (event: React.KeyboardEvent) => {
             if (checkKeyboardTrigger(event.code)) {
               event.preventDefault()
-              setVisible(prev => !prev)
+              setVisible((prev) => !prev)
             }
           },
         }
@@ -108,7 +108,7 @@ const Popover = ({
           ? { ...triggers, tabIndex: undefined }
           : {})}
       >
-        {Children.map(content, contentChild => {
+        {Children.map(content, (contentChild) => {
           if (!isValidElement(contentChild)) return contentChild
           if (typeof contentChild.type === 'string') return contentChild
 

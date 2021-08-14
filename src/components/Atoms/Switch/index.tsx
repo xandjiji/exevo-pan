@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { checkKeyboardTrigger } from 'utils'
 import * as S from './styles'
 import { SwitchProps } from './types'
@@ -14,7 +14,7 @@ const Switch = ({
   const derivedActive = active ?? activeState
 
   const handleClick = (event?: React.MouseEvent) => {
-    setActive(prev => !prev)
+    setActive((prev) => !prev)
     onClick?.(event)
   }
 

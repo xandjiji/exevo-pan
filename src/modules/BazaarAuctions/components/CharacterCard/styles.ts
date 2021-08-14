@@ -5,6 +5,7 @@ import {
   AuctionTimer as BaseAuctionTimer,
   Chip as BaseChip,
 } from 'components/Atoms'
+import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
 import { FavButton as BaseFavButton } from './Parts'
@@ -61,6 +62,10 @@ export const InfoGrid = styled.div`
 
 export const LabeledTextBox = styled(BaseLabeledTextBox)`
   font-size: 14px;
+
+  > div {
+    margin-right: 4px !important;
+  }
 `
 
 export const BattleyeStatus = styled.div<BattleyeStatusStyleProps>`
@@ -83,16 +88,13 @@ export const AuctionTimer = styled(BaseAuctionTimer)`
   }
 `
 
-export const TibiaCoinIcon = styled.img.attrs({
+export const TibiaCoinIcon = styled(Image).attrs({
   src: TibiaCoinImage,
   alt: 'Tibia Coin',
 })`
-  margin-right: 4px;
   width: 12px;
   height: 12px;
-  transform: translateY(1px);
   border-radius: 50%;
-  box-shadow: rgba(0, 0, 0, 0.14) 1px 1px 2px 1px;
 `
 
 export const Footer = styled.div`

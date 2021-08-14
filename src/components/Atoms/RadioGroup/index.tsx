@@ -26,7 +26,7 @@ const RadioGroup = ({
           id: indexToId(index),
           active: derivedActiveIndex === index,
           onClick: () => {
-            setInnerIndex(prevInnerIndex => {
+            setInnerIndex((prevInnerIndex) => {
               if (prevInnerIndex !== index) onChange?.(index)
               return index
             })

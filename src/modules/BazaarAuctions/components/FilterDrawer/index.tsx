@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { memo, useMemo, useState, useCallback, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { dequal } from 'dequal'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
@@ -61,26 +61,28 @@ const FilterDrawer = ({
   )
 
   const availableServerOptions = useMemo(
-    () => serverOptions.filter(option => !filters.serverSet.has(option.value)),
+    () =>
+      serverOptions.filter((option) => !filters.serverSet.has(option.value)),
     [serverOptions, filters.serverSet],
   )
 
   const availableImbuementOptions = useMemo(
     () =>
       imbuementOptions.filter(
-        option => !filters.imbuementsSet.has(option.value),
+        (option) => !filters.imbuementsSet.has(option.value),
       ),
     [filters.imbuementsSet],
   )
 
   const availableRareItemOptions = useMemo(
-    () => rareItemOptions.filter(option => !filters.itemSet.has(option.value)),
+    () =>
+      rareItemOptions.filter((option) => !filters.itemSet.has(option.value)),
     [rareItemOptions, filters.itemSet],
   )
 
   const updateFilters = useCallback(
     (key: keyof FilterState, value: typeof filters[keyof FilterState]) =>
-      setFilters(currentFilters => {
+      setFilters((currentFilters) => {
         let updatedFilters = {} as FilterState
         if (currentFilters[key] instanceof Set) {
           updatedFilters = {
@@ -99,12 +101,12 @@ const FilterDrawer = ({
 
   const toggleFilterSet = useCallback(
     (key: keyof FilterState, allOptions: Option[]) => {
-      setFilters(currentFilters => {
+      setFilters((currentFilters) => {
         let updatedFilters = {} as FilterState
         if ((currentFilters[key] as Set<string>).size < allOptions.length) {
           updatedFilters = {
             ...currentFilters,
-            [key]: new Set([...allOptions.map(option => option.value)]),
+            [key]: new Set([...allOptions.map((option) => option.value)]),
           }
         } else {
           updatedFilters = { ...currentFilters, [key]: new Set([]) }
@@ -126,7 +128,7 @@ const FilterDrawer = ({
     setUrlValues(filters)
   }, [filters, setActiveFilterCount])
 
-  const { pathname } = useLocation()
+  const { pathname } = useRouter()
   const isMounted = useIsMounted()
 
   useEffect(() => {
@@ -134,7 +136,6 @@ const FilterDrawer = ({
       setFilters(defaultValues as FilterState)
       setUrlValues(defaultValues)
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
   return (
@@ -177,7 +178,7 @@ const FilterDrawer = ({
             placeholder="Nickname"
             allowClear
             value={filters.nicknameFilter}
-            onChange={event =>
+            onChange={(event) =>
               updateFilters('nicknameFilter', event.target.value)
             }
           />
@@ -185,126 +186,126 @@ const FilterDrawer = ({
 
         <FilterGroup label="Vocation">
           <S.ChipWrapper>
-            <Chip
+            <S.IconChip
               overrideStatus={filters.vocation.has(0)}
               onClick={() => updateFilters('vocation', 0)}
             >
               <Icon.Rook />
               None
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.vocation.has(1)}
               onClick={() => updateFilters('vocation', 1)}
             >
               <Icon.Knight />
               Knight
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.vocation.has(2)}
               onClick={() => updateFilters('vocation', 2)}
             >
               <Icon.Paladin />
               Paladin
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.vocation.has(3)}
               onClick={() => updateFilters('vocation', 3)}
             >
               <Icon.Sorcerer />
               Sorcerer
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.vocation.has(4)}
               onClick={() => updateFilters('vocation', 4)}
             >
               <Icon.Druid />
               Druid
-            </Chip>
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
         <FilterGroup label="PvP">
           <S.ChipWrapper>
-            <Chip
+            <S.IconChip
               overrideStatus={filters.pvp.has(0)}
               onClick={() => updateFilters('pvp', 0)}
             >
               <Icon.Dove />
               Optional
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.pvp.has(1)}
               onClick={() => updateFilters('pvp', 1)}
             >
               <Icon.WhiteSkull />
               Open
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.pvp.has(2)}
               onClick={() => updateFilters('pvp', 2)}
             >
               <Icon.OrangeSkull />
               Retro Open
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.pvp.has(3)}
               onClick={() => updateFilters('pvp', 3)}
             >
               <Icon.RedSkull />
               Hardcore
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.pvp.has(4)}
               onClick={() => updateFilters('pvp', 4)}
             >
               <Icon.BlackSkull />
               Retro Hardcore
-            </Chip>
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
         <FilterGroup label="BattlEye">
           <S.ChipWrapper>
-            <Chip
+            <S.IconChip
               overrideStatus={filters.battleye.has(true)}
               onClick={() => updateFilters('battleye', true)}
             >
               <Icon.Status color="battleGreen" />
               Green
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.battleye.has(false)}
               onClick={() => updateFilters('battleye', false)}
             >
               <Icon.Status color="battleYellow" />
               Yellow
-            </Chip>
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
         <FilterGroup label="Server location">
           <S.ChipWrapper>
-            <Chip
+            <S.IconChip
               overrideStatus={filters.location.has(0)}
               onClick={() => updateFilters('location', 0)}
             >
               <Icon.EuFlag />
               EU
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.location.has(1)}
               onClick={() => updateFilters('location', 1)}
             >
               <Icon.NaFlag />
               NA
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.location.has(2)}
               onClick={() => updateFilters('location', 2)}
             >
               <Icon.BrFlag />
               BR
-            </Chip>
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
@@ -321,7 +322,7 @@ const FilterDrawer = ({
             )}
           />
           <S.ChipWrapper id="server-list">
-            {[...filters.serverSet].map(server => (
+            {[...filters.serverSet].map((server) => (
               <Chip
                 key={server}
                 onClose={() => updateFilters('serverSet', server)}
@@ -362,41 +363,41 @@ const FilterDrawer = ({
             style={{ marginBottom: 16 }}
           />
           <S.ChipWrapper>
-            <Chip
+            <S.IconChip
               overrideStatus={filters.skillKey.has('magic')}
               onClick={() => updateFilters('skillKey', 'magic')}
             >
               <Icon.Magic />
               Magic
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.skillKey.has('distance')}
               onClick={() => updateFilters('skillKey', 'distance')}
             >
               <Icon.Distance />
               Distance
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.skillKey.has('club')}
               onClick={() => updateFilters('skillKey', 'club')}
             >
               <Icon.Club />
               Club
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.skillKey.has('sword')}
               onClick={() => updateFilters('skillKey', 'sword')}
             >
               <Icon.Sword />
               Sword
-            </Chip>
-            <Chip
+            </S.IconChip>
+            <S.IconChip
               overrideStatus={filters.skillKey.has('axe')}
               onClick={() => updateFilters('skillKey', 'axe')}
             >
               <Icon.Axe />
               Axe
-            </Chip>
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
@@ -423,7 +424,7 @@ const FilterDrawer = ({
             </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="imbuements-list">
-            {[...filters.imbuementsSet].map(imbuement => (
+            {[...filters.imbuementsSet].map((imbuement) => (
               <Chip
                 key={imbuement}
                 onClose={() => updateFilters('imbuementsSet', imbuement)}
@@ -466,7 +467,7 @@ const FilterDrawer = ({
             </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="rare-items-list">
-            {[...filters.itemSet].map(item => (
+            {[...filters.itemSet].map((item) => (
               <Chip key={item} onClose={() => updateFilters('itemSet', item)}>
                 {item}
               </Chip>
