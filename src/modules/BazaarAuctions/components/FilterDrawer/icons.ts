@@ -23,7 +23,7 @@ import NaFlagIcon from 'assets/na-flag.png'
 import { StatusStyleProps } from './types'
 
 export const Reset = styled(ResetIcon)`
-  fill: ${({ theme }) => theme.colors.onPrimary};
+  fill: var(--onPrimary);
 `
 
 export const Rook = styled(Image).attrs({
@@ -110,7 +110,7 @@ export const Status = styled.div<StatusStyleProps>`
   border-radius: 50%;
   border: solid 1px #00000020;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
-  background-color: ${({ color, theme }) => theme.colors[color]};
+  background-color: ${({ color }) => `var(--${color})`};
 `
 
 export const Exclamation = styled.div`
@@ -120,7 +120,7 @@ export const Exclamation = styled.div`
   height: 17px;
   border-radius: 50%;
   border: solid 2px;
-  border-color: ${({ theme }) => theme.colors.separator};
+  border-color: var(--separator);
 
   &::after {
     content: '!';
@@ -131,6 +131,6 @@ export const Exclamation = styled.div`
 
     font-size: 12px;
     font-weight: 700;
-    color: ${({ theme }) => theme.colors.separator};
+    color: var(--separator);
   }
 `

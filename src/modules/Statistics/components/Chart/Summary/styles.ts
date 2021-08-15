@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
 export const Title = styled.h3`
   font-size: 14px;
   font-weight: 300;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const Value = styled.span`
@@ -21,7 +21,7 @@ export const Value = styled.span`
   align-items: center;
   font-size: 20px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const TrendIcon = styled(TrendingIconSvg)`
@@ -36,12 +36,10 @@ export const Percentage = styled.span<PositiveStyleProps>`
 
   font-size: 12px;
   font-weight: 600;
-  color: ${({ theme, positive }) =>
-    positive ? theme.colors.green : theme.colors.red};
+  color: ${({ positive }) => (positive ? 'var(--green)' : 'var(--red)')};
 
   ${TrendIcon} {
-    fill: ${({ theme, positive }) =>
-      positive ? theme.colors.green : theme.colors.red};
+    fill: ${({ positive }) => (positive ? 'var(--green)' : 'var(--red)')};
     transform: ${({ positive }) => (positive ? 'none' : 'scaleY(-1)')};
   }
 `

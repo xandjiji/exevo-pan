@@ -13,7 +13,7 @@ export const Input = styled.input`
   background-color: transparent;
 
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 
   ${Smooth}
   transition-property: border-color, padding;
@@ -23,7 +23,7 @@ export const ErrorMessage = styled.span`
   padding: 0px 10px;
 
   font-size: 10px;
-  color: ${({ theme }) => theme.colors.red};
+  color: var(--red);
 
   transition: opacity 0.2s ease-out;
 
@@ -49,7 +49,7 @@ export const ClearButton = styled.button`
     height: 12px;
     width: 2px;
     border-radius: 2px;
-    background-color: ${({ theme }) => theme.colors.onSurface};
+    background-color: var(--onSurface);
   }
 
   &::before {
@@ -60,23 +60,23 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   display: flex;
   width: 100%;
   border-radius: 5px;
-  border: solid 1px ${({ theme }) => theme.colors.separator};
-  background-color: ${({ theme }) => theme.colors.surface};
+  border: solid 1px var(--separator);
+  background-color: var(--surface);
   cursor: text;
 
   ${Smooth}
   transition-property: border-color;
 
   &:focus-within {
-    border-color: ${({ theme }) => theme.colors.primary};
+    border-color: var(--primary);
   }
 
   ${({ isInvalid }) =>
     isInvalid &&
     css`
-      border-color: ${({ theme }) => theme.colors.red};
+      border-color: var(--red);
       &:focus-within {
-        border-color: ${({ theme }) => theme.colors.red};
+        border-color: var(--red);
       }
     `}
 

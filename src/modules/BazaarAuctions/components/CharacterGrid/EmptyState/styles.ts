@@ -37,7 +37,7 @@ export const Text = styled.span`
   display: block;
   font-size: 32px;
   text-align: center;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const Chip = styled(BaseChip)`

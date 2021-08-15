@@ -15,7 +15,7 @@ export const Wrapper = styled.header`
   align-items: center;
   justify-content: space-between;
   overflow-x: auto;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: var(--primary);
   transition: 0.2s background ease-out;
   ${InnerContainer}
   ${CustomScrollbar}
@@ -30,7 +30,7 @@ export const Wrapper = styled.header`
     width: 32px;
     background-image: linear-gradient(
       to left,
-      ${({ theme }) => theme.colors.primary},
+      var(--primary),
       rgba(0, 0, 0, 0)
     );
     pointer-events: none;
@@ -79,7 +79,7 @@ export const A = styled.a`
   font-size: 14px;
   letter-spacing: 0.5px;
   border-radius: 9px;
-  color: ${({ theme }) => theme.colors.onPrimary};
+  color: var(--onPrimary);
   white-space: nowrap;
 
   ${Clickable}
@@ -99,7 +99,7 @@ const NavIconStyle = css`
   margin-right: 6px;
   width: 18px;
   height: 18px;
-  fill: ${({ theme }) => theme.colors.onPrimary};
+  fill: var(--onPrimary);
 `
 
 export const MarketIcon = styled(MarketIconSvg)`

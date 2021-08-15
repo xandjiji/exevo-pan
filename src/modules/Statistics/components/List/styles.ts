@@ -18,8 +18,8 @@ export const CardHead = styled.div`
   width: calc(100% + 48px);
   font-size: 12px;
   font-weight: 300;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
+  background-color: var(--primary);
+  color: var(--onPrimary);
   ${Shadow}
 `
 
@@ -28,7 +28,7 @@ export const Title = styled.h2`
   font-size: 24px;
   font-weight: 600;
   letter-spacing: 1px;
-  color: ${({ theme }) => theme.colors.onPrimary};
+  color: var(--onPrimary);
 `
 
 export const Table = styled.table`
@@ -42,17 +42,17 @@ export const Caption = styled.caption`
 `
 
 export const TableHead = styled.thead`
-  border-bottom: solid 1px ${({ theme }) => theme.colors.separator};
+  border-bottom: solid 1px var(--separator);
 `
 
 export const ListHead = styled.div`
   padding-bottom: 8px;
   display: flex;
-  border-bottom: solid 1px ${({ theme }) => theme.colors.separator};
+  border-bottom: solid 1px var(--separator);
 
   font-size: 14px;
   font-weight: 300;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 const CellLayout = css`
@@ -75,7 +75,7 @@ export const HeadItem = styled.th`
   padding-bottom: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 
   ${CellLayout}
 `
@@ -84,7 +84,7 @@ export const RowItem = styled.td`
   padding-top: 6px;
   font-size: 14px;
   font-weight: 300;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 
   ${CellLayout}
 `
@@ -92,6 +92,6 @@ export const RowItem = styled.td`
 export const Link = styled.a`
   font-size: 14px;
   font-weight: 400;
-  color: ${({ theme }) => theme.colors.primary};
+  color: var(--primary);
   filter: brightness(130%);
 `

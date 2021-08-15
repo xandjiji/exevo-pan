@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
   height: 100vh;
   max-width: 600px;
   outline: none;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: var(--surface);
   transform: translateX(0);
 
   ${Smooth}
@@ -48,15 +48,11 @@ export const DrawerBody = styled.div`
     width: calc(100% - 6px);
     height: 24px;
     pointer-events: none;
-    background-image: linear-gradient(
-      to top,
-      ${({ theme }) => theme.colors.surface},
-      rgba(0, 0, 0, 0)
-    );
+    background-image: linear-gradient(to top, var(--surface), rgba(0, 0, 0, 0));
   }
 
   > * {
-    color: ${({ theme }) => theme.colors.onSurface};
+    color: var(--onSurface);
   }
 `
 

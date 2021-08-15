@@ -12,7 +12,7 @@ const Nickname = styled.p`
   align-items: center;
   font-size: 16px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.primary};
+  color: var(--primary);
   filter: brightness(130%);
 
   a {
@@ -25,7 +25,7 @@ const ExternalIcon = styled(ExternalIconSvg)`
   width: 28px;
   height: 28px;
   border-radius: 4px;
-  fill: ${({ theme }) => theme.colors.onSurface};
+  fill: var(--onSurface);
   ${Clickable}
 `
 const Title = ({

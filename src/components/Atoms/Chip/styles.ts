@@ -21,17 +21,12 @@ export const Chip = styled.div<ChipStyleProps>`
   border: none;
   transition: 0.2s ease-out !important;
 
-  ${({ active, theme }) =>
-    active
-      ? `background-color: ${theme.colors.primary};`
-      : `background-color: ${theme.colors.primaryVariant};`}
+  background-color: ${({ active }) =>
+    active ? 'var(--primary)' : 'var(--primaryVariant)'};
 
-  ${({ active, theme }) =>
-    active
-      ? `color: ${theme.colors.onPrimary};`
-      : `color: ${theme.colors.onSurface};`}
+  color: ${({ active }) => (active ? 'var(--onPrimary)' : 'var(--onSurface)')};
 
-  ${({ clickable }) => clickable && clickableStyle}
+  ${({ clickable }) => clickable && clickableStyle};
 `
 
 export const CloseButton = styled.button`
@@ -43,7 +38,7 @@ export const CloseButton = styled.button`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: var(--primary);
   opacity: 0.75;
   transition: 0.1s ease-out;
   border: none;
@@ -59,7 +54,7 @@ export const CloseButton = styled.button`
     height: 8px;
     width: 1px;
     border-radius: 2px;
-    background-color: ${({ theme }) => theme.colors.onPrimary};
+    background-color: var(--onPrimary);
     transition: background-color 0.1s ease-out;
   }
 

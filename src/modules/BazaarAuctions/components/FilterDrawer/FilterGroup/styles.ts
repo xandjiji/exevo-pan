@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
     padding-bottom: 16px;
     margin-bottom: 16px;
     border-bottom: solid 1px;
-    border-color: ${({ theme }) => theme.colors.separator};
+    border-color: var(--separator);
   }
 `
 
@@ -19,5 +19,5 @@ export const Label = styled.label`
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.2px;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `

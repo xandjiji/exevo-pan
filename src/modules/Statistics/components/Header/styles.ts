@@ -9,7 +9,7 @@ export const Nav = styled.nav`
   ${InnerContainer}
   ${Shadow}
   ${Smooth}
-  background-color: ${({ theme }) => theme.colors.darkerPrimary};
+  background-color: var(--darkerPrimary);
 `
 
 export const Ul = styled.ul`
@@ -25,14 +25,14 @@ export const A = styled.a`
   align-items: center;
   font-size: 14px;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onPrimary};
+  color: var(--onPrimary);
   white-space: nowrap;
   border-bottom: solid 3px transparent;
   cursor: pointer;
   ${Smooth}
 
   &[aria-current='page'], &:hover {
-    border-color: ${({ theme }) => theme.colors.onPrimary};
+    border-color: var(--onPrimary);
   }
 `
 
@@ -40,7 +40,7 @@ const NavIconStyle = css`
   margin-right: 6px;
   width: 18px;
   height: 18px;
-  fill: ${({ theme }) => theme.colors.onPrimary};
+  fill: var(--onPrimary);
 `
 
 export const OverallIcon = styled(OverallIconSvg)`

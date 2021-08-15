@@ -11,7 +11,7 @@ export const Tracker = styled.span`
   display: block;
   font-size: 12px;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const CursorWrapper = styled.div`
@@ -24,7 +24,7 @@ export const CursorWrapper = styled.div`
 `
 const iconStyle = css`
   width: 32px;
-  fill: ${({ theme }) => theme.colors.onSurface};
+  fill: var(--onSurface);
   transition: opacity 0.2s ease-out;
 `
 

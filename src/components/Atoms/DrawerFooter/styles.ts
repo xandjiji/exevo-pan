@@ -4,7 +4,7 @@ import { InnerContainer, Clickable } from 'styles'
 
 const typographyStyle = css`
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.onPrimary};
+  color: var(--onPrimary);
 `
 
 export const Wrapper = styled.footer`
@@ -14,7 +14,7 @@ export const Wrapper = styled.footer`
   display: flex;
   align-items: center;
   height: 60px;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: var(--primary);
 
   ${typographyStyle}
   font-weight: 300;
@@ -24,7 +24,7 @@ export const GithubIcon = styled(GithubSvg)`
   margin-right: 16px;
   padding: 0;
   border-radius: 50%;
-  fill: ${({ theme }) => theme.colors.onPrimary};
+  fill: var(--onPrimary);
 
   ${Clickable}
 `

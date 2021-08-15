@@ -12,7 +12,7 @@ export const Icon = styled(MagicSvg)`
   width: 18px;
   height: 18px;
   transform: translateY(3px);
-  fill: ${({ theme }) => theme.colors.onSurface};
+  fill: var(--onSurface);
 `
 
 export const Imbuement = styled.span<ImbuementStyleProps>`
@@ -21,15 +21,15 @@ export const Imbuement = styled.span<ImbuementStyleProps>`
   text-align: left;
 
   font-weight: ${({ highlight }) => (highlight ? 600 : 400)};
-  color: ${({ highlight, theme }) =>
-    highlight ? theme.colors.primary : theme.colors.onSurface};
+  color: ${({ highlight }) =>
+    highlight ? 'var(--primary)' : 'var(--onSurface)'};
 
   &::before {
     content: '·';
     margin-right: 4px;
     font-weight: 800;
-    color: ${({ highlight, theme }) =>
-      highlight ? theme.colors.primary : theme.colors.onSurface};
+    color: ${({ highlight }) =>
+      highlight ? 'var(--primary)' : 'var(--onSurface)'};
   }
 
   &:not(:last-child) {

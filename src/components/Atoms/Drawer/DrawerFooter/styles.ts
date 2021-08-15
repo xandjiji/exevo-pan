@@ -6,16 +6,16 @@ export const DrawerFooter = styled.div`
   align-items: center;
   flex: none;
   height: 60px;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: var(--primary);
 
   font-size: 16px;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onPrimary};
+  color: var(--onPrimary);
 
   * {
     font-size: 16px;
     letter-spacing: 0.5px;
-    color: ${({ theme }) => theme.colors.onPrimary};
+    color: var(--onPrimary);
   }
 
   ${InnerContainer}

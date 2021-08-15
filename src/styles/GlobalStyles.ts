@@ -11,8 +11,8 @@ export const GlobalStyles = createGlobalStyle`
 
   body {
     font: 400 16px Roboto, sans-serif;
-    background-color: ${({ theme }) => theme.colors.background};
-    color: ${({ theme }) => theme.colors.onSurface};
+    background-color: var(--background);
+    color: var(--onSurface);
   }
 
   svg {

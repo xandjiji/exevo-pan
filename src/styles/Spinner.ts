@@ -7,7 +7,7 @@ export const Spinner = styled.div`
   border-radius: 50%;
   background: linear-gradient(
     to right,
-    ${({ theme }) => theme.colors.primary} 10%,
+    var(--primary) 10%,
     rgba(255, 255, 255, 0) 42%
   );
   animation: spinAnimation 1.4s infinite ease-out;
@@ -21,7 +21,7 @@ export const Spinner = styled.div`
     width: 50%;
     height: 50%;
     border-radius: 100% 0 0 0;
-    background: ${({ theme }) => theme.colors.primary};
+    background: var(--primary);
   }
 
   &:after {
@@ -35,7 +35,7 @@ export const Spinner = styled.div`
     width: 75%;
     height: 75%;
     border-radius: 50%;
-    background: ${({ theme }) => theme.colors.background};
+    background: var(--background);
   }
 
   @keyframes spinAnimation {

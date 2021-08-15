@@ -21,7 +21,7 @@ export const Head = styled.div`
 
   display: flex;
   align-items: flex-end;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: var(--surface);
   user-select: none;
 
   ${InnerContainer}
@@ -36,7 +36,7 @@ export const ActiveIcon = styled.div`
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.battleYellow};
+  background-color: var(--battleYellow);
   ${Shadow}
   ${Smooth}
 
@@ -55,7 +55,7 @@ export const IconStyling = css`
   width: 37px;
   height: 37px;
   border-radius: 4px;
-  fill: ${({ theme }) => theme.colors.onSurface};
+  fill: var(--onSurface);
 `
 
 export const FilterIcon = styled(FilterIconSvg)`
@@ -95,7 +95,7 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-auto-rows: auto;
 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: var(--background);
 
   &::after {
     content: '';
@@ -113,7 +113,7 @@ export const Grid = styled.div`
     height: 72px;
     background-image: linear-gradient(
       to top,
-      ${({ theme }) => theme.colors.background},
+      var(--background),
       rgba(0, 0, 0, 0)
     );
     pointer-events: none;

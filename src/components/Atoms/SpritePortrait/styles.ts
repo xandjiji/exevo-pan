@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   position: relative;
   padding: 8px;
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.colors.primaryVariant};
+  background-color: var(--primaryVariant);
   user-select: none;
   transition: background-color 0.2s ease-out;
 
@@ -33,6 +33,6 @@ export const Spinner = styled(BaseSpinner)`
   }
 
   &:after {
-    background-color: ${({ theme }) => theme.colors.primaryVariant};
+    background-color: var(--primaryVariant);
   }
 `

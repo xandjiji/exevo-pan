@@ -11,7 +11,7 @@ export const Wrapper = styled.article`
   overflow: auto;
   ${CustomScrollbar}
 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: var(--background);
   ${Smooth}
 
   &::before {
@@ -24,7 +24,7 @@ export const Wrapper = styled.article`
     height: 72px;
     background-image: linear-gradient(
       to top,
-      ${({ theme }) => theme.colors.background},
+      var(--background),
       rgba(0, 0, 0, 0)
     );
     pointer-events: none;

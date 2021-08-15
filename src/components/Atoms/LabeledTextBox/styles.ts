@@ -17,8 +17,8 @@ export const Label = styled.span`
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onSurface};
-  background-color: ${({ theme }) => theme.colors.surface};
+  color: var(--onSurface);
+  background-color: var(--surface);
   user-select: none;
 `
 
@@ -27,11 +27,11 @@ export const Wrapper = styled.div<WrapperStyleProps>`
   position: relative;
   border-radius: 5px;
   border: solid 1px;
-  border-color: ${({ warning, theme }) =>
-    warning ? theme.colors.red : theme.colors.separator};
+  border-color: ${({ warning }) =>
+    warning ? 'var(--red)' : 'var(--separator)'};
 
   ${Label} {
-    ${({ warning, theme }) => warning && `color: ${theme.colors.red};`};
+    color: ${({ warning }) => warning && 'var(--red)'};
   }
 `
 

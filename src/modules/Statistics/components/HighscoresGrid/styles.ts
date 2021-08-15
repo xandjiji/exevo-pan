@@ -16,7 +16,7 @@ export const Wrapper = styled.article`
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 24px;
 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: var(--background);
   ${Smooth}
 
   &::before {
@@ -29,7 +29,7 @@ export const Wrapper = styled.article`
     height: 72px;
     background-image: linear-gradient(
       to top,
-      ${({ theme }) => theme.colors.background},
+      var(--background),
       rgba(0, 0, 0, 0)
     );
     pointer-events: none;

@@ -16,7 +16,7 @@ export const Title = styled.h2`
   margin-bottom: 8px;
   font-weight: 300;
   text-align: center;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
   font-size: 16px;
 `
 

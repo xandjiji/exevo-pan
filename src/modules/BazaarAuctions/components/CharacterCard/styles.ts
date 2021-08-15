@@ -46,7 +46,7 @@ export const Subtitle = styled.span`
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const FavButton = styled(BaseFavButton)`
@@ -76,8 +76,8 @@ export const BattleyeStatus = styled.div<BattleyeStatusStyleProps>`
   border-radius: 50%;
   border: solid 1px #00000020;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
-  background-color: ${({ active, theme }) =>
-    active ? theme.colors.battleGreen : theme.colors.battleYellow};
+  background-color: ${({ active }) =>
+    active ? 'var(--battleGreen)' : 'var(--battleYellow)'};
 `
 
 export const AuctionTimer = styled(BaseAuctionTimer)`
@@ -99,7 +99,7 @@ export const TibiaCoinIcon = styled(Image).attrs({
 
 export const Footer = styled.div`
   padding-top: 6px;
-  border-top: solid 1px ${({ theme }) => theme.colors.separator};
+  border-top: solid 1px var(--separator);
 `
 
 export const CharmWrapper = styled.div`

@@ -7,7 +7,7 @@ export const DrawerHead = styled.div`
   align-items: center;
   flex: none;
   height: 60px;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: var(--primary);
 
   ${InnerContainer}
   ${Shadow}
@@ -24,18 +24,18 @@ export const BackButton = styled.button`
 `
 
 export const ArrowIcon = styled(ArrowIconSvg)`
-  fill: ${({ theme }) => theme.colors.onPrimary};
+  fill: var(--onPrimary);
 `
 
 export const ContentWrapper = styled.div`
   font-size: 16px;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onPrimary};
+  color: var(--onPrimary);
   width: 100%;
 
   * {
     font-size: 16px;
     letter-spacing: 0.5px;
-    color: ${({ theme }) => theme.colors.onPrimary};
+    color: var(--onPrimary);
   }
 `

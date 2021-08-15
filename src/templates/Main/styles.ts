@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
   main {
     height: calc(100vh - 60px);
     overflow: auto;
-    background-color: ${({ theme }) => theme.colors.background};
+    background-color: var(--background);
     ${CustomScrollbar}
     ${Smooth}
   }
