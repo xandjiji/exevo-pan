@@ -10,11 +10,11 @@ const Header = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.Nav>
-        <S.LogoWrapper>
-          <NextLink href={routes.HOME}>
+        <NextLink href={routes.HOME}>
+          <S.LogoWrapper>
             <S.ExevoPanLogo priority aria-label="Go to homepage" />
-          </NextLink>
-        </S.LogoWrapper>
+          </S.LogoWrapper>
+        </NextLink>
         <S.Ul>
           <S.Li>
             <Link href={routes.HOME}>
