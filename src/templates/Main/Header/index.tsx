@@ -43,13 +43,15 @@ const Header = (): JSX.Element => {
         </S.Ul>
       </S.Nav>
 
-      <S.RightWrapper>
-        <Switch
-          active={currentTheme === 'dark-theme'}
-          onClick={toggleTheme}
-          icon={<S.MoonIcon />}
-          aria-label="Toggle dark theme"
-        />
+      <S.RightWrapper suppressHydrationWarning={true}>
+        {process.browser && (
+          <Switch
+            active={currentTheme === 'dark-theme'}
+            onClick={toggleTheme}
+            icon={<S.MoonIcon />}
+            aria-label="Toggle dark theme"
+          />
+        )}
         <CtaButton />
       </S.RightWrapper>
     </S.Wrapper>

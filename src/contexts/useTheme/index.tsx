@@ -26,22 +26,6 @@ export const ThemeProvider = ({
     localStorage.setItem(localStorageKeys.THEME_DATA, newThemeTitle)
   }
 
-  useEffect(() => {
-    const { primary } = currentTheme.colors
-
-    document
-      .querySelector('meta[name=theme-color]')
-      ?.setAttribute('content', primary)
-
-    document
-      .querySelector('meta[name=msapplication-navbutton-color]')
-      ?.setAttribute('content', primary)
-  }, [currentTheme])
-
-  useEffect(() => {
-    setCurrentThemeTitle(getInitialTheme())
-  }, [])
-
   return (
     <StyledThemeProvider theme={currentTheme}>
       <ThemeContext.Provider
