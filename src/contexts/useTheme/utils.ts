@@ -6,7 +6,8 @@ export const getInitialTheme = (): string => {
     const persistedColorPreference = window.localStorage.getItem(
       localStorageKeys.THEME_DATA,
     )
-    if (persistedColorPreference) return persistedColorPreference
+    if (persistedColorPreference && Themes[persistedColorPreference]?.title)
+      return persistedColorPreference
 
     const browserDefault = window.matchMedia('(prefers-color-scheme: dark)')
     if (browserDefault?.matches) return 'dark-theme'
