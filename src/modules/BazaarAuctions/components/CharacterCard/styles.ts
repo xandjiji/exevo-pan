@@ -95,6 +95,7 @@ export const TibiaCoinIcon = styled(Image).attrs({
   width: 12px;
   height: 12px;
   border-radius: 50%;
+  transform: translateY(1px);
 `
 
 export const Footer = styled.div`
