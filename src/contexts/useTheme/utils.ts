@@ -9,7 +9,7 @@ export const getInitialTheme = (): string => {
     if (persistedColorPreference) return persistedColorPreference
 
     const browserDefault = window.matchMedia('(prefers-color-scheme: dark)')
-    if (browserDefault.matches) return 'dark-theme'
+    if (browserDefault?.matches) return 'dark-theme'
   }
 
   return Themes.default.title
