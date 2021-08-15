@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'
 import { localStorageKeys } from 'Constants'

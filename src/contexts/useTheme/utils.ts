@@ -1,29 +1,18 @@
 import Themes from 'styles/themes'
 import { localStorageKeys } from 'Constants'
 
-export const getThemeFromStorage = (): string => {
-  if (typeof window !== 'undefined') {
-    return (
-      Themes[
-        localStorage.getItem(localStorageKeys.THEME_DATA) ??
-          Themes.default.title
-      ]?.title ?? Themes.default.title
-    )
-  } else {
-    return Themes.default.title
-  }
-}
-
 export const getInitialTheme = (): string => {
   if (typeof window !== 'undefined') {
-    const persistedColorPreference = window.localStorage.getItem('themeData')
+    const persistedColorPreference = window.localStorage.getItem(
+      localStorageKeys.THEME_DATA,
+    )
     if (persistedColorPreference) return persistedColorPreference
 
     const browserDefault = window.matchMedia('(prefers-color-scheme: dark)')
     if (browserDefault.matches) return 'dark-theme'
   }
 
-  return 'light-theme'
+  return Themes.default.title
 }
 
 export const injectCssVariables = (themeName: keyof typeof Themes) => {
