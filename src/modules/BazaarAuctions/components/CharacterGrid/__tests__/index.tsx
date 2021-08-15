@@ -20,14 +20,6 @@ jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 
 describe('<CharacterGrid />', () => {
   beforeEach(() => {
-    /* @ ToDo: add this to jest setup */
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation(() => ({
-        matches: false,
-      })),
-    })
-
     mockScrollTo.mockClear()
   })
 
