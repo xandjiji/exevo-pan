@@ -1,10 +1,6 @@
 export default {
+  testEnvironment: 'jsdom',
   preset: 'ts-jest',
-  collectCoverageFrom: [
-    '**/*.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-  ],
   setupFilesAfterEnv: ['<rootDir>/setupTests.js'],
   moduleDirectories: ['node_modules', 'src'],
   testPathIgnorePatterns: [
@@ -20,5 +16,10 @@ export default {
     '\\.(jpg|jpeg|png|gif|svg)$': '<rootDir>/__mocks__/fileMock.js',
   },
   collectCoverage: true,
-  testEnvironment: 'jsdom',
+  collectCoverageFrom: [
+    '**/*.{ts,tsx}',
+    '!**/*.d.ts',
+    '!**/node_modules/**',
+    '!**/.next/**',
+  ],
 }

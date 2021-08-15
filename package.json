@@ -7,8 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "test": "jest --watch --silent",
-    "test:coverage": "jest --coverage"
+    "test": "jest --watch --silent --coverage",
+    "test:all": "jest --silent --coverage"
   },
   "dependencies": {
     "@popperjs/core": "^2.9.2",
