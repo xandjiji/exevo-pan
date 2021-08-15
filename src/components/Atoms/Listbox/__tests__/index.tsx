@@ -23,7 +23,8 @@ describe('<Listbox />', () => {
     const optionElements = screen.queryAllByRole('option')
 
     optionElements.forEach((option, index) => {
-      expect(option).toHaveStyle('background-color: #FFFFFF')
+      /* expect(option).toHaveStyle('background-color: #FFFFFF') */
+      expect(option).toMatchSnapshot()
       expect(option).not.toHaveAttribute('aria-selected', 'true')
       expect(option).toHaveAttribute('id', `listbox-item-${index}`)
     })
@@ -44,9 +45,42 @@ describe('<Listbox />', () => {
     )
 
     const [optionA, optionB, optionC] = screen.queryAllByRole('option')
-    expect(optionA).toHaveStyle('background-color: #FFFFFF')
+    /* expect(optionA).toHaveStyle('background-color: #FFFFFF')
     expect(optionB).toHaveStyle('background-color: #C5CAE9')
-    expect(optionC).toHaveStyle('background-color: #FFFFFF')
+    expect(optionC).toHaveStyle('background-color: #FFFFFF') */
+    expect(optionA).toMatchInlineSnapshot(`
+      <option
+        aria-selected="false"
+        class="styles__Option-sc-am72ib-0 fZyPDg"
+        id="listbox-item-0"
+        role="option"
+        value="option A"
+      >
+        option A
+      </option>
+    `)
+    expect(optionB).toMatchInlineSnapshot(`
+      <option
+        aria-selected="false"
+        class="styles__Option-sc-am72ib-0 eNIDEs"
+        id="listbox-item-1"
+        role="option"
+        value="option B"
+      >
+        option B
+      </option>
+    `)
+    expect(optionC).toMatchInlineSnapshot(`
+      <option
+        aria-selected="false"
+        class="styles__Option-sc-am72ib-0 fZyPDg"
+        id="listbox-item-2"
+        role="option"
+        value="option C"
+      >
+        option C
+      </option>
+    `)
 
     rerender(
       <Listbox highlightedIndex={2}>
@@ -56,9 +90,42 @@ describe('<Listbox />', () => {
       </Listbox>,
     )
 
-    expect(optionA).toHaveStyle('background-color: #FFFFFF')
+    /* expect(optionA).toHaveStyle('background-color: #FFFFFF')
     expect(optionB).toHaveStyle('background-color: #FFFFFF')
-    expect(optionC).toHaveStyle('background-color: #C5CAE9')
+    expect(optionC).toHaveStyle('background-color: #C5CAE9') */
+    expect(optionA).toMatchInlineSnapshot(`
+      <option
+        aria-selected="false"
+        class="styles__Option-sc-am72ib-0 fZyPDg"
+        id="listbox-item-0"
+        role="option"
+        value="option A"
+      >
+        option A
+      </option>
+    `)
+    expect(optionB).toMatchInlineSnapshot(`
+      <option
+        aria-selected="false"
+        class="styles__Option-sc-am72ib-0 fZyPDg"
+        id="listbox-item-1"
+        role="option"
+        value="option B"
+      >
+        option B
+      </option>
+    `)
+    expect(optionC).toMatchInlineSnapshot(`
+      <option
+        aria-selected="false"
+        class="styles__Option-sc-am72ib-0 eNIDEs"
+        id="listbox-item-2"
+        role="option"
+        value="option C"
+      >
+        option C
+      </option>
+    `)
   })
 
   test('should render with a few selected', () => {

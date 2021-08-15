@@ -43,23 +43,29 @@ describe('<PercentageCard />', () => {
     )
 
     const percentageElement = screen.getByText(/0/)
-    expect(percentageElement).toHaveStyle('color: #C51313;')
+    /* expect(percentageElement).toHaveStyle('color: #C51313;') */
+    expect(percentageElement).toMatchSnapshot()
 
     rerender(<PercentageCard title="Auction success rate" percentage={50} />)
-    expect(percentageElement).toHaveStyle('color: #377712;')
+    /* expect(percentageElement).toHaveStyle('color: #377712;') */
+    expect(percentageElement).toMatchSnapshot()
 
     rerender(<PercentageCard title="Auction success rate" percentage={100} />)
-    expect(percentageElement).toHaveStyle('color: #377712;')
+    /* expect(percentageElement).toHaveStyle('color: #377712;') */
+    expect(percentageElement).toMatchSnapshot()
 
     rerender(<PercentageCard title="Auction success rate" percentage={1000} />)
-    expect(percentageElement).toHaveStyle('color: #377712;')
+    /* expect(percentageElement).toHaveStyle('color: #377712;') */
+    expect(percentageElement).toMatchSnapshot()
 
     rerender(<PercentageCard title="Auction success rate" percentage={0.1} />)
-    expect(percentageElement).toHaveStyle('color: #C51313;')
+    /* expect(percentageElement).toHaveStyle('color: #C51313;') */
+    expect(percentageElement).toMatchSnapshot()
 
     rerender(
       <PercentageCard title="Auction success rate" percentage={49.9999} />,
     )
-    expect(percentageElement).toHaveStyle('color: #C51313;')
+    /* expect(percentageElement).toHaveStyle('color: #C51313;') */
+    expect(percentageElement).toMatchSnapshot()
   })
 })
