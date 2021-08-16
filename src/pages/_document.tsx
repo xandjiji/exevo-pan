@@ -12,7 +12,6 @@ import {
   Google,
   Title,
   Description,
-  Keywords,
   Preview,
   Url,
 } from 'components/Meta'
@@ -54,7 +53,6 @@ export default class MyDocument extends Document {
 
           <Title />
           <Url />
-          <Keywords />
           <Description />
           <Preview />
 
