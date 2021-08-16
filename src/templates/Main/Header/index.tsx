@@ -17,7 +17,7 @@ const Header = (): JSX.Element => {
         </NextLink>
         <S.Ul>
           <S.Li>
-            <Link href={routes.HOME}>
+            <Link href={routes.HOME} exact>
               <S.A>
                 <S.MarketIcon />
                 Current Auctions
