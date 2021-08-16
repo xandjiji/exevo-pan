@@ -7,6 +7,15 @@ import Document, {
   NextScript,
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
+import {
+  General,
+  Google,
+  Title,
+  Description,
+  Keywords,
+  Preview,
+  Url,
+} from 'components/Meta'
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -41,12 +50,15 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          <meta charSet="utf-8" />
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700"
-            rel="stylesheet"
-          />
-          <link rel="icon" href="/favicon.ico" />
+          <General />
+
+          <Title />
+          <Url />
+          <Keywords />
+          <Description />
+          <Preview />
+
+          <Google />
         </Head>
         <body>
           <script type="text/javascript" src="/loadTheme.js" />
