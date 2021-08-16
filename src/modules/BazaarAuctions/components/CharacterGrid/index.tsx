@@ -39,14 +39,14 @@ const CharacterGrid = ({
           decode: (value: string) => Number(decodeURIComponent(value)),
         },
       ]),
-    [defaultDescendingOrder, defaultSortMode]
+    [defaultDescendingOrder, defaultSortMode],
   )
 
   const gridState = useRef<'initial' | 'processing' | 'ready'>('initial')
   const [currentPage, setCurrentPage] = useState<number>(1)
   const [sortMode, setSortMode] = useState<number>(defaultSortMode)
   const [descendingOrder, setDescendingOrder] = useState<boolean>(
-    defaultDescendingOrder
+    defaultDescendingOrder,
   )
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [activeFilterCount, setActiveFilterCount] = useState<number>(0)
@@ -64,9 +64,9 @@ const CharacterGrid = ({
     () =>
       sortedData.slice(
         (currentPage - 1) * itemsPerPage,
-        currentPage * itemsPerPage
+        currentPage * itemsPerPage,
       ),
-    [itemsPerPage, sortedData, currentPage]
+    [itemsPerPage, sortedData, currentPage],
   )
 
   useEffect(() => {
@@ -102,7 +102,7 @@ const CharacterGrid = ({
 
   const onPageChange = useCallback(
     (newPage: number) => setCurrentPage(newPage),
-    []
+    [],
   )
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
@@ -164,7 +164,7 @@ const CharacterGrid = ({
       )}
 
       <S.Grid ref={gridRef} id="character-grid">
-        {isLoading ? (
+        {gridState.current !== 'ready' ? (
           Array.from({ length: isDesktop.current ? 10 : 2 }, (_, index) => (
             <CardSkeleton key={index} />
           ))
