@@ -50,10 +50,7 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <General />
-
-          <Title />
           <Url />
-          <Description />
           <Preview />
 
           <Google />
