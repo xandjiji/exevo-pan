@@ -4,6 +4,22 @@ import { Reset } from './Reset'
 export const GlobalStyles = createGlobalStyle`
   ${Reset}
 
+  :root {
+    --background: #EEEEEE;
+    --surface: #FFFFFF;
+    --onSurface: #000000;
+    --separator: #B4B4B4;
+    --primary: #3F51B5;
+    --onPrimary: #FFFFFF;
+    --primaryVariant: #C5CAE9;
+    --darkerPrimary: #323D8E;
+    --green: #377712;
+    --red: #C51313;
+    --alert: #F9EEC1;
+    --battleGreen: #43B600;
+    --battleYellow: #FFDD00;
+    --primaryVariantHighlight: #E7E8EE;
+  }
 
   html, body, #root {
     overflow-x: hidden;
