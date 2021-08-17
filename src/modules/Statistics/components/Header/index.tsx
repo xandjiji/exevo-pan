@@ -10,7 +10,7 @@ const Header = (): JSX.Element => (
         <Link href={routes.STATISTICS} exact>
           <S.A>
             <S.OverallIcon />
-            Overall
+            <S.H3>Overall</S.H3>
           </S.A>
         </Link>
       </S.Li>
@@ -18,7 +18,7 @@ const Header = (): JSX.Element => (
         <Link href={routes.HIGHSCORES} exact>
           <S.A>
             <S.HighscoresIcon />
-            Highscores
+            <S.H3>Highscores</S.H3>
           </S.A>
         </Link>
       </S.Li>

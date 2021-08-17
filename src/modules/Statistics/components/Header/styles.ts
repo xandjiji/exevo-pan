@@ -23,10 +23,6 @@ export const A = styled.a`
   padding: 13px 20px 10px 20px;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  color: var(--onPrimary);
-  white-space: nowrap;
   border-bottom: solid 3px transparent;
   cursor: pointer;
   ${Smooth}
@@ -48,4 +44,12 @@ export const OverallIcon = styled(OverallIconSvg)`
 `
 export const HighscoresIcon = styled(HighscoresIconSvg)`
   ${NavIconStyle}
+`
+
+export const H3 = styled.h3`
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--onPrimary);
+  white-space: nowrap;
 `
