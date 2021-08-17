@@ -7,14 +7,7 @@ import Document, {
   NextScript,
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import {
-  General,
-  Google,
-  Title,
-  Description,
-  Preview,
-  Url,
-} from 'components/Meta'
+import { General, Google, Preview, Url } from 'components/Meta'
 
 export default class MyDocument extends Document {
   static async getInitialProps(
