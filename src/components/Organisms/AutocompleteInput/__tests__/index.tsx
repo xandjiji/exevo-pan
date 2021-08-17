@@ -174,9 +174,9 @@ describe('<AutocompleteInput />', () => {
 
     userEvent.tab()
     const optionsElement = screen.getAllByRole('option')
-    const firstOption = optionsElement[0]
+    /* const firstOption = optionsElement[0]
     const secondOption = optionsElement[1]
-    const lastOption = optionsElement[optionsElement.length - 1]
+    const lastOption = optionsElement[optionsElement.length - 1] */
 
     expect(optionsElement).toHaveLength(103)
 
