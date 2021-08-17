@@ -113,20 +113,6 @@ export const DatabaseProvider = ({
     }
   }, [])
 
-  const fetchStatisticsData = useCallback(async () => {
-    try {
-      const newStatisticsData = await ManageDataClient.fetchStatisticsData()
-
-      dispatch({
-        type: 'STATISTICS_DATA_LOAD',
-        statisticsData: newStatisticsData,
-      })
-    } finally {
-      dispatchLoad({ type: 'FINISH_LOADING', path: routes.STATISTICS })
-      dispatchLoad({ type: 'FINISH_LOADING', path: routes.HIGHSCORES })
-    }
-  }, [])
-
   useEffect(() => {
     if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
@@ -134,14 +120,7 @@ export const DatabaseProvider = ({
         fetchCharacterData(pathname)
       }
     }
-    if (pathname === routes.STATISTICS || pathname === routes.HIGHSCORES) {
-      if (!navigated.includes(pathname)) {
-        dispatchLoad({ type: 'START_LOADING', path: routes.STATISTICS })
-        dispatchLoad({ type: 'START_LOADING', path: routes.HIGHSCORES })
-        fetchStatisticsData()
-      }
-    }
-  }, [pathname, navigated, fetchCharacterData, fetchStatisticsData])
+  }, [pathname, navigated, fetchCharacterData])
 
   const isMounted = useIsMounted()
   useEffect(() => {
