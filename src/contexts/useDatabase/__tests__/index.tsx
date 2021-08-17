@@ -628,35 +628,4 @@ describe('useDatabase()', () => {
       dispatch: expect.any(Function),
     })
   })
-
-  test(`checking ${routes.STATISTICS} path initial data load`, async () => {
-    mockedUseRouter.mockReturnValue({
-      pathname: routes.STATISTICS,
-    } as NextRouter)
-    const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
-      wrapper: ComponentWrapper,
-    })
-
-    expect(result.current).toEqual({
-      loading: true,
-      characterData: [],
-      serverData: [],
-      rareItemData: {},
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
-    })
-
-    await waitForNextUpdate()
-
-    expect(result.current).toEqual({
-      loading: false,
-      characterData: [],
-      serverData: [],
-      rareItemData: {},
-      historyData: [],
-      statisticsData: mockStatisticsData,
-      dispatch: expect.any(Function),
-    })
-  })
 })
