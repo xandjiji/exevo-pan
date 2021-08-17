@@ -23,7 +23,7 @@ export const CardHead = styled.div`
   ${Shadow}
 `
 
-export const Title = styled.h2`
+export const Title = styled.h4`
   margin-top: 4px;
   font-size: 24px;
   font-weight: 600;

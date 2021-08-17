@@ -31,7 +31,7 @@ export const Wrapper = styled.article`
   }
 `
 
-export const PageTitle = styled.h1`
+export const PageTitle = styled.h2`
   display: none;
 `
 
