@@ -98,7 +98,7 @@ describe('<CharacterGrid />', () => {
       <CharacterGrid
         characterList={characterData}
         isLoading={false}
-        defaultDescendingOrder={true}
+        defaultDescendingOrder
         defaultSortMode={3}
       />,
     )
@@ -115,11 +115,12 @@ describe('<CharacterGrid />', () => {
 
   test('should display skeletons while loading', async () => {
     const { rerender } = renderWithProviders(
-      <CharacterGrid characterList={[]} isLoading={true} />,
+      <CharacterGrid characterList={[]} isLoading />,
     )
 
-    expect(screen.queryAllByText('Bid status')).toHaveLength(2)
+    expect(screen.queryAllByText('Bid status')).toHaveLength(10)
 
+    rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
 
     expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
@@ -128,7 +129,11 @@ describe('<CharacterGrid />', () => {
   })
 
   test('should display empty state if there are no characters', async () => {
-    renderWithProviders(<CharacterGrid characterList={[]} isLoading={false} />)
+    const { rerender } = renderWithProviders(
+      <CharacterGrid characterList={characterData} isLoading={false} />,
+    )
+
+    rerender(<CharacterGrid characterList={[]} isLoading={false} />)
 
     expect(screen.getByText('Sorry, no auction was found')).toBeInTheDocument()
 
