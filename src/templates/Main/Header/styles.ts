@@ -51,9 +51,12 @@ export const LogoWrapper = styled.a`
   }
 `
 
+export const H1 = styled.h1`
+  display: none;
+`
+
 export const ExevoPanLogo = styled(Image).attrs({
   src: ExevoPanLogoImage,
-  alt: 'Exevo Pan',
 })``
 
 export const Nav = styled.nav`
@@ -76,16 +79,20 @@ export const A = styled.a`
   padding: 8px 16px;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  letter-spacing: 0.5px;
   border-radius: 9px;
-  color: var(--onPrimary);
-  white-space: nowrap;
 
   ${Clickable}
   &[aria-current='page'] {
     box-shadow: inset 3px 3px rgb(0 0 0 / 14%);
   }
+`
+
+export const H2 = styled.h2`
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  color: var(--onPrimary);
+  white-space: nowrap;
 `
 
 export const RightWrapper = styled.div`

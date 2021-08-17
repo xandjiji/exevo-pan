@@ -1,18 +1,33 @@
-import { routes } from 'Constants'
-import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import { Link, CtaButton, Switch } from 'components/Atoms/'
 import { useTheme } from 'contexts/useTheme'
+import NextLink from 'next/link'
+import { routes } from 'Constants'
 import * as S from './styles'
+
+const heading = {
+  [routes.HOME]: 'Buy and sell Tibia characters on the official Char Bazaar!',
+  [routes.BAZAAR_HISTORY]: 'Explore through Tibia Char Bazaar history data!',
+  [routes.STATISTICS]: 'Find statistics for Tibia Char Bazaar characters!',
+  [routes.HIGHSCORES]:
+    'Top levels, highest skills and biggests bids on Tibia Char Bazzar!',
+}
 
 const Header = (): JSX.Element => {
   const { currentTheme, toggleTheme } = useTheme()
+  const { pathname } = useRouter()
 
   return (
     <S.Wrapper>
       <S.Nav>
         <NextLink href={routes.HOME}>
           <S.LogoWrapper>
-            <S.ExevoPanLogo priority aria-label="Go to homepage" />
+            <S.H1>{heading[pathname] ?? 'Exevo Pan'}</S.H1>
+            <S.ExevoPanLogo
+              priority
+              aria-label="Go to homepage"
+              alt={heading[pathname] ?? 'Exevo Pan'}
+            />
           </S.LogoWrapper>
         </NextLink>
         <S.Ul>
@@ -20,7 +35,7 @@ const Header = (): JSX.Element => {
             <Link href={routes.HOME} exact>
               <S.A>
                 <S.MarketIcon />
-                Current Auctions
+                <S.H2>Current Auctions</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -28,7 +43,7 @@ const Header = (): JSX.Element => {
             <Link href={routes.BAZAAR_HISTORY}>
               <S.A>
                 <S.HistoryIcon />
-                Bazaar History
+                <S.H2>Bazaar History</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -36,7 +51,7 @@ const Header = (): JSX.Element => {
             <Link href={routes.STATISTICS}>
               <S.A>
                 <S.StatisticsIcon />
-                Statistics
+                <S.H2>Statistics</S.H2>
               </S.A>
             </Link>
           </S.Li>
