@@ -1,4 +1,6 @@
-const Url = ({ content = 'https://exevopan.com/' }) => (
+const Url = ({
+  content = 'https://exevopan.com/',
+}: Partial<MetaTagProps>): JSX.Element => (
   <>
     <link rel="canonical" href={content} />
     <meta property="og:url" content={content} />

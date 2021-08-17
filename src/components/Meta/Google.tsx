@@ -1,5 +1,6 @@
 import { google } from 'Constants'
-const Google = () => (
+
+const Google = (): JSX.Element => (
   <>
     <meta name="google-site-verification" content={google.SITE_VERIFICATION} />
 
@@ -8,6 +9,7 @@ const Google = () => (
       src={`https://www.googletagmanager.com/gtag/js?id=${google.GTM_ID}`}
     />
     <script
+      // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={{
         __html: `
               window.dataLayer = window.dataLayer || [];

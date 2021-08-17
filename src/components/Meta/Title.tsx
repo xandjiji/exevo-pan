@@ -1,4 +1,4 @@
-const Title = ({ content = 'Exevo Pan' }) => (
+const Title = ({ content = 'Exevo Pan' }: MetaTagProps): JSX.Element => (
   <>
     <title>{content}</title>
     <meta name="title" content={content} />

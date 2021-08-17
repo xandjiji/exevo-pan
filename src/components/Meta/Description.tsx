@@ -1,6 +1,4 @@
-const Description = ({
-  content = 'Filter, search and follow statistics for Tibia characters on the official Char Bazaar!',
-}) => (
+const Description = ({ content }: MetaTagProps): JSX.Element => (
   <>
     <meta name="description" content={content} />
     <meta property="twitter:description" content={content} />

@@ -1,4 +1,4 @@
-const General = () => (
+const General = (): JSX.Element => (
   <>
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width" />

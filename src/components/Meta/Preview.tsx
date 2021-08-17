@@ -1,4 +1,6 @@
-const Preview = ({ content = '/preview.png' }) => (
+const Preview = ({
+  content = '/preview.png',
+}: Partial<MetaTagProps>): JSX.Element => (
   <>
     <meta property="og:image" content={content} />
     <meta property="twitter:image" content={content} />
