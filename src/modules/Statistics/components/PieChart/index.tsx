@@ -37,7 +37,7 @@ const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
             tooltipItem: Record<string, number>,
             data: Record<string, Record<string, string>[]>,
           ) => {
-            const index = tooltipItem.index
+            const { index } = tooltipItem
             return `${data.labels[index]}: ${data.datasets[0].data[index]}%`
           },
         },

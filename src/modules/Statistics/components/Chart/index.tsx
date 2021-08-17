@@ -72,14 +72,10 @@ const Chart = ({
       },
       tooltips: {
         callbacks: {
-          title: (tooltipItem: Record<string, string>[]) => {
-            return `Day ${tooltipItem[0].xLabel}`
-          },
-          label: (tooltipItem: Record<string, number>) => {
-            return `${tooltipLabel}: ${formatNumberWithCommas(
-              tooltipItem.yLabel,
-            )} TC`
-          },
+          title: (tooltipItem: Record<string, string>[]) =>
+            `Day ${tooltipItem[0].xLabel}`,
+          label: (tooltipItem: Record<string, number>) =>
+            `${tooltipLabel}: ${formatNumberWithCommas(tooltipItem.yLabel)} TC`,
         },
         displayColors: false,
       },
