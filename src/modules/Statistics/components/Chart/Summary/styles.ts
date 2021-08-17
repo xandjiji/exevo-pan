@@ -9,7 +9,7 @@ export const Wrapper = styled.div`
   }
 `
 
-export const Title = styled.h3`
+export const Title = styled.h4`
   font-size: 14px;
   font-weight: 300;
   color: var(--onSurface);

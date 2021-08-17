@@ -16,7 +16,7 @@ export const Wrapper = styled.section`
   }
 `
 
-export const Title = styled.h2`
+export const Title = styled.h4`
   font-size: 16px;
   font-weight: 300;
   color: var(--onSurface);

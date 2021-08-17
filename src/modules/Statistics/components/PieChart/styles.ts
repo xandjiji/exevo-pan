@@ -12,7 +12,7 @@ export const Wrapper = styled.section`
   }
 `
 
-export const Title = styled.h2`
+export const Title = styled.h4`
   margin-bottom: 8px;
   font-weight: 300;
   text-align: center;
