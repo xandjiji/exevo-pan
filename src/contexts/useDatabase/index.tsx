@@ -56,7 +56,11 @@ const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
   dispatch: defaultDatabaseState.dispatch,
 })
 
-export const DatabaseProvider: React.FC = ({ children }) => {
+export const DatabaseProvider = ({
+  children,
+}: {
+  children: React.ReactNode
+}): JSX.Element => {
   const [
     { characterData, serverData, rareItemData, historyData, statisticsData },
     dispatch,
@@ -75,7 +79,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     {
       loadingPaths: [],
       navigated: [],
-    }
+    },
   )
 
   const { pathname } = useRouter()
@@ -151,7 +155,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
       serverData,
       rareItemData,
     }),
-    [serverData, rareItemData]
+    [serverData, rareItemData],
   )
 
   return (
