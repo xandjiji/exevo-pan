@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { Title, Description } from 'components/Meta'
 import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
 import { ManageDataClient } from 'services'
@@ -13,8 +12,25 @@ export default function Highscores({
   return (
     <div>
       <Head>
-        <Title content="Exevo Pan - Highscores" />
-        <Description content="See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!" />
+        <title>Exevo Pan - Highscores</title>
+        <meta name="title" content="Exevo Pan - Highscores" />
+        <meta property="og:site_name" content="Exevo Pan - Highscores" />
+        <meta property="og:title" content="Exevo Pan - Highscores" />
+        <meta property="twitter:title" content="Exevo Pan - Highscores" />
+
+        <meta
+          name="description"
+          content="See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!"
+        />
+        <meta
+          property="twitter:description"
+          content="See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!"
+        />
+        <meta
+          property="og:description"
+          content="See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!"
+        />
+        <meta property="og:type" content="website" />
       </Head>
 
       <Main>

@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { Title, Description } from 'components/Meta'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
 import { ManageDataClient } from 'services'
@@ -13,8 +12,31 @@ export default function Statistics({
   return (
     <div>
       <Head>
-        <Title content="Exevo Pan - Overall Statistics" />
-        <Description content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats" />
+        <title>Exevo Pan - Overall Statistics</title>
+        <meta name="title" content="Exevo Pan - Overall Statistics" />
+        <meta
+          property="og:site_name"
+          content="Exevo Pan - Overall Statistics"
+        />
+        <meta property="og:title" content="Exevo Pan - Overall Statistics" />
+        <meta
+          property="twitter:title"
+          content="Exevo Pan - Overall Statistics"
+        />
+
+        <meta
+          name="description"
+          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
+        />
+        <meta
+          property="twitter:description"
+          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
+        />
+        <meta
+          property="og:description"
+          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
+        />
+        <meta property="og:type" content="website" />
       </Head>
 
       <Main>
