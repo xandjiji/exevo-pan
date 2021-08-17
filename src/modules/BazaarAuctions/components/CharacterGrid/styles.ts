@@ -9,6 +9,7 @@ import {
   CustomScrollbar,
   Smooth,
 } from 'styles'
+import { CardSkeleton as BaseCardSkeleton } from '../CharacterCard'
 
 export const Main = styled.main``
 
@@ -83,6 +84,8 @@ export const Paginator = styled(BasePaginator)`
   margin-left: auto;
 `
 
+export const CardSkeleton = styled(BaseCardSkeleton)``
+
 export const Grid = styled.div`
   padding-top: 16px;
   position: relative;
@@ -120,4 +123,10 @@ export const Grid = styled.div`
   }
 
   ${InnerContainer}
+
+  @media(max-width: 767px) {
+    ${CardSkeleton}:nth-child(n + 3) {
+      display: none;
+    }
+  }
 `

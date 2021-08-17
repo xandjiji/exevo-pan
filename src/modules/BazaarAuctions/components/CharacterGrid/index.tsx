@@ -14,11 +14,8 @@ const CharacterGrid = ({
   characterList,
   defaultSortMode = 0,
   defaultDescendingOrder = false,
-  isLoading,
   ...props
 }: CharacterGridProps): JSX.Element => {
-  const isDesktop = useRef(false)
-
   const isMounted = useIsMounted()
 
   const { getUrlValues, defaultValues, setUrlValues } = useMemo(
@@ -92,7 +89,6 @@ const CharacterGrid = ({
         orderBy: sortMode,
       })
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, sortMode, descendingOrder])
 
   useEffect(() => {
@@ -108,7 +104,6 @@ const CharacterGrid = ({
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
 
   useEffect(() => {
-    isDesktop.current = window.matchMedia('(min-width: 768px)').matches
     setCurrentPage(getUrlValues().currentPage as number)
     setSortMode(getUrlValues().orderBy as number)
     setDescendingOrder(getUrlValues().descending as boolean)
@@ -165,8 +160,8 @@ const CharacterGrid = ({
 
       <S.Grid ref={gridRef} id="character-grid">
         {gridState.current !== 'ready' ? (
-          Array.from({ length: isDesktop.current ? 10 : 2 }, (_, index) => (
-            <CardSkeleton key={index} />
+          Array.from({ length: 10 }, (_, index) => (
+            <S.CardSkeleton key={index} />
           ))
         ) : characterPage.length ? (
           characterPage.map((item) => (
