@@ -1,3 +1,4 @@
+import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ErrorBoundary from 'components/ErrorBoundary'
@@ -24,14 +25,19 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   }, [router.events])
 
   return (
-    <ErrorBoundary>
-      <ThemeProvider>
-        <DatabaseProvider>
-          <Component {...pageProps} />
-          <GlobalStyles />
-        </DatabaseProvider>
-      </ThemeProvider>
-    </ErrorBoundary>
+    <>
+      <Head>
+        <meta name="viewport" content="width=device-width" />
+      </Head>
+      <ErrorBoundary>
+        <ThemeProvider>
+          <DatabaseProvider>
+            <Component {...pageProps} />
+            <GlobalStyles />
+          </DatabaseProvider>
+        </ThemeProvider>
+      </ErrorBoundary>
+    </>
   )
 }
 export default MyApp
