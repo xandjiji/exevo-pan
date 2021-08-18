@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const MaterialCard = css`
+const MaterialCard = css`
   padding: 12px;
   background-color: var(--surface);
   border-radius: 5px;
@@ -11,3 +11,5 @@ export const MaterialCard = css`
 
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.14);
 `
+
+export default MaterialCard

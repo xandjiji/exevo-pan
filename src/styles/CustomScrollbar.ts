@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const CustomScrollbar = css`
+const CustomScrollbar = css`
   scrollbar-color: var(--primaryVariant) transparent;
   scrollbar-width: thin;
 
@@ -16,3 +16,5 @@ export const CustomScrollbar = css`
     border-radius: 2px;
   }
 `
+
+export default CustomScrollbar

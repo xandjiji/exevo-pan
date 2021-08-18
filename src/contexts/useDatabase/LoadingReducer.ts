@@ -13,7 +13,7 @@ type Action =
       path: string
     }
 
-export default (
+const LoadingReducer = (
   state: LoadingReducerState,
   action: Action,
 ): LoadingReducerState => {
@@ -37,3 +37,5 @@ export default (
       return { ...state }
   }
 }
+
+export default LoadingReducer

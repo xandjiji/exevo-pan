@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const NegativeContainer = css`
+const NegativeContainer = css`
   margin-left: -20px;
   margin-right: -20px;
 
@@ -9,3 +9,5 @@ export const NegativeContainer = css`
     margin-right: -40px;
   }
 `
+
+export default NegativeContainer

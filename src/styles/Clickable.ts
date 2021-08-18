@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export const Clickable = css`
+const Clickable = css`
   cursor: pointer;
   transition: box-shadow 0.2s ease-out;
 
@@ -13,3 +13,5 @@ export const Clickable = css`
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
 `
+
+export default Clickable

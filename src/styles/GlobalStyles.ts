@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components'
-import { Reset } from './Reset'
+import Reset from './Reset'
 
-export const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   ${Reset}
 
   :root {
@@ -35,3 +35,5 @@ export const GlobalStyles = createGlobalStyle`
     transition: fill 0.2s ease-out;
   }
 `
+
+export default GlobalStyles

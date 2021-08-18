@@ -6,7 +6,7 @@ import { filterCharacters } from './utils'
 
 const { getUrlValues, defaultValues } = urlParametersState(filterSchema)
 
-export default (
+const DatabaseReducer = (
   state: DatabaseReducerState,
   action: Action,
 ): DatabaseReducerState => {
@@ -80,3 +80,5 @@ export default (
       return { ...state }
   }
 }
+
+export default DatabaseReducer
