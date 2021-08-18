@@ -16,15 +16,14 @@ export const buildCharacterData = (
   const mutatedSetupedCharacterData = [...setupedCharacterData]
 
   const currentDate = new Date()
-  // eslint-disable-next-line no-restricted-syntax
-  for (const characterObject of setupedCharacterData) {
+  setupedCharacterData.some((characterObject) => {
     const characterAuctionEndDate = new Date(characterObject.auctionEnd * 1000)
     if (currentDate > characterAuctionEndDate) {
       mutatedSetupedCharacterData.shift()
-    } else {
-      break
+      return false
     }
-  }
+    return true
+  })
 
   return mutatedSetupedCharacterData
 }
