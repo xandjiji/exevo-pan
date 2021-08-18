@@ -39,9 +39,8 @@ const CharacterCard = ({
   const getBidLabelText = () => {
     if (pathname === routes.BAZAAR_HISTORY) {
       return hasBeenBidded ? 'Auction Successful' : 'Auction Failed'
-    } else {
-      return hasBeenBidded ? 'Current Bid' : 'Minimum Bid'
     }
+    return hasBeenBidded ? 'Current Bid' : 'Minimum Bid'
   }
 
   return (

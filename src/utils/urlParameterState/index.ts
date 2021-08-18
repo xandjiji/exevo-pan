@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { dequal } from 'dequal'
 import {
@@ -16,7 +17,7 @@ export function urlParametersState(
     const urlParams = getCurrentUrlParams()
 
     const urlValues = {} as ParameterObject
-    for (const param of registeredParams) {
+    registeredParams.forEach((param) => {
       const { key, decode, defaultValue } = param
       const urlEncodedValue = urlParams.get(param.key)
       if (urlEncodedValue === null) {
@@ -26,14 +27,14 @@ export function urlParametersState(
           ? decode(urlEncodedValue)
           : decodeURIComponent(urlEncodedValue)
       }
-    }
+    })
     return urlValues
   }
 
   const setUrlValues = (newValues: ParameterObject): void => {
     const urlParams = getCurrentUrlParams()
 
-    for (const param of registeredParams) {
+    registeredParams.forEach((param) => {
       const { key, encode, defaultValue } = param
       const value = newValues[key]
 
@@ -49,7 +50,7 @@ export function urlParametersState(
           )
         }
       }
-    }
+    })
 
     const newParamString = urlParams.toString()
     history.replaceState(
@@ -64,10 +65,10 @@ export function urlParametersState(
   function getDefaultValues(): ParameterObject {
     const defaultValues = {} as ParameterObject
 
-    for (const param of registeredParams) {
+    registeredParams.forEach((param) => {
       const { key, defaultValue } = param
       defaultValues[key] = defaultValue
-    }
+    })
 
     return defaultValues
   }

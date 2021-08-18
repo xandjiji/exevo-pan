@@ -20,7 +20,7 @@ const SortingDialog = ({
       <S.Dialog {...props}>
         <Switch
           active={descendingOrder}
-          onClick={() => setDescendingOrder(prev => !prev)}
+          onClick={() => setDescendingOrder((prev) => !prev)}
           aria-label="Sort by descending order"
         >
           Descending

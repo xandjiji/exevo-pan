@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 export function setupRareItemsAuctions(
   itemNameSet: Set<string>,
   rareItemData: RareItemData,
@@ -16,9 +17,8 @@ export function setupRareItemsAuctions(
 export function setDoesntHasValue<T>(set: Set<T>, value: T): boolean {
   if (set.size && !set.has(value)) {
     return true
-  } else {
-    return false
   }
+  return false
 }
 
 export function setDoesntHasAnyValue<T>(

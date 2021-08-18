@@ -37,7 +37,7 @@ const CharacterImbuements = ({
   ) : (
     <S.Wrapper {...props}>
       <S.Icon />
-      {'Imbuements: 0/23'}
+      Imbuements: 0/23
     </S.Wrapper>
   )
 

@@ -21,7 +21,7 @@ const useUrlParamsState = (
         | ((previousState: typeof currentValues) => typeof currentValues),
     ) => {
       if (newState instanceof Function) {
-        setCurrentValues(previousState => {
+        setCurrentValues((previousState) => {
           const returnedNewState = newState(previousState)
           setUrlValues(returnedNewState)
           return returnedNewState

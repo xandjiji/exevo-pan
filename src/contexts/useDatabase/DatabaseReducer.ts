@@ -33,14 +33,13 @@ export default (
           serverData: action.serverData,
           rareItemData: action.rareItemData,
         }
-      } else {
-        return {
-          ...state,
-          baseCharacterData: action.characterData,
-          characterData: filteredInitialData,
-          serverData: action.serverData,
-          rareItemData: action.rareItemData,
-        }
+      }
+      return {
+        ...state,
+        baseCharacterData: action.characterData,
+        characterData: filteredInitialData,
+        serverData: action.serverData,
+        rareItemData: action.rareItemData,
       }
     }
 
@@ -60,15 +59,14 @@ export default (
             action.filters,
           ),
         }
-      } else {
-        return {
-          ...state,
-          characterData: filterCharacters(
-            state.baseCharacterData,
-            state.rareItemData,
-            action.filters,
-          ),
-        }
+      }
+      return {
+        ...state,
+        characterData: filterCharacters(
+          state.baseCharacterData,
+          state.rareItemData,
+          action.filters,
+        ),
       }
 
     case 'RESET_TO_BASE_DATA':

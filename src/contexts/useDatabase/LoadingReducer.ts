@@ -29,7 +29,7 @@ export default (
       return {
         ...state,
         loadingPaths: [...state.loadingPaths].filter(
-          path => action.path !== path,
+          (path) => action.path !== path,
         ),
       }
 

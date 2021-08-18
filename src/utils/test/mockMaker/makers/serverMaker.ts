@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker'
 import { singleSampleFrom } from '../utils'
 
@@ -55,9 +56,10 @@ export const randomServerData = (
   const serverList = randomServerList(amount)
 
   const rawServerData = {} as Record<string, ServerObject>
-  for (const server of serverList) {
+
+  serverList.forEach((server) => {
     rawServerData[server.serverName] = server
-  }
+  })
 
   return { rawServerData, serverList }
 }

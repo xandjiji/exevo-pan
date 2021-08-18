@@ -1,4 +1,5 @@
 import { ReactElement } from 'react'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { render, RenderResult, RenderOptions } from '@testing-library/react'
 import { ThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'

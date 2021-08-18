@@ -16,7 +16,7 @@ export const getInitialTheme = (): string => {
   return Themes.default.title
 }
 
-export const injectCssVariables = (themeName: keyof typeof Themes) => {
+export const injectCssVariables = (themeName: keyof typeof Themes): void => {
   const { colors } = Themes[themeName]
   const root = document.documentElement
 

@@ -20,15 +20,16 @@ export const countActiveFilters = (
   currentFilters: FilterState,
 ): number => {
   let count = 0
-  for (const filter in defaultFilters) {
+
+  Object.keys(defaultFilters).forEach((filter) => {
     if (
       !dequal(
         defaultFilters[filter as keyof FilterState],
         currentFilters[filter as keyof FilterState],
       )
     )
-      count++
-  }
+      count += 1
+  })
 
   return count
 }

@@ -16,6 +16,7 @@ export const buildCharacterData = (
   const mutatedSetupedCharacterData = [...setupedCharacterData]
 
   const currentDate = new Date()
+  // eslint-disable-next-line no-restricted-syntax
   for (const characterObject of setupedCharacterData) {
     const characterAuctionEndDate = new Date(characterObject.auctionEnd * 1000)
     if (currentDate > characterAuctionEndDate) {
@@ -31,11 +32,11 @@ export const buildCharacterData = (
 export const filterItemData = (initialItemData: RareItemData): RareItemData => {
   const filteredItemData = {} as RareItemData
 
-  for (const item in initialItemData) {
+  Object.keys(initialItemData).forEach((item) => {
     if (initialItemData[item].length > 0) {
       filteredItemData[item] = initialItemData[item]
     }
-  }
+  })
 
   return filteredItemData
 }
@@ -73,17 +74,16 @@ export const checkAndHash = async (
   if (pageHash === hash) {
     const characterData = await getFromDB(index)
     return characterData
-  } else {
-    const response = await fetch(
-      `${endpoints.BASE_HISTORY_DATA}/${localStorageKeys.HISTORY_DATA_PREFIX}${index}.json`,
-    )
-    const data = (await response.json()) as MinifiedCharacterObject[]
-    const parsedDataArray = await buildDB(index, data)
-
-    saveToLocalStorage(pageName, hash)
-
-    return parsedDataArray
   }
+  const response = await fetch(
+    `${endpoints.BASE_HISTORY_DATA}/${localStorageKeys.HISTORY_DATA_PREFIX}${index}.json`,
+  )
+  const data = (await response.json()) as MinifiedCharacterObject[]
+  const parsedDataArray = await buildDB(index, data)
+
+  saveToLocalStorage(pageName, hash)
+
+  return parsedDataArray
 }
 
 export const getPercentage = (part: number, whole: number): string => {

@@ -52,12 +52,7 @@ describe('<Summary />', () => {
     expect(screen.getByLabelText('Downwards trend')).toMatchSnapshot()
 
     rerender(
-      <Summary
-        title="Total volume"
-        value={1000}
-        percentage={50}
-        positive={true}
-      />,
+      <Summary title="Total volume" value={1000} percentage={50} positive />,
     )
 
     /* expect(textElement).toHaveStyle('color: #377712') */
