@@ -1,15 +1,14 @@
-/* eslint-disable no-restricted-syntax */
 export function setupRareItemsAuctions(
   itemNameSet: Set<string>,
   rareItemData: RareItemData,
 ): Set<number> {
   const auctionIdSet = new Set<number>([])
 
-  for (const itemName of [...itemNameSet]) {
-    for (const setItem of [...rareItemData[itemName]]) {
+  ;[...itemNameSet].forEach((itemName) => {
+    ;[...rareItemData[itemName]].forEach((setItem) => {
       auctionIdSet.add(setItem)
-    }
-  }
+    })
+  })
 
   return auctionIdSet
 }
@@ -29,11 +28,7 @@ export function setDoesntHasAnyValue<T>(
 
   const checkingSet = new Set(valueArray)
 
-  for (const value of Array.from(set)) {
-    if (!checkingSet.has(value)) return true
-  }
-
-  return false
+  return Array.from(set).some((value) => !checkingSet.has(value))
 }
 
 const specialCharacters = /[äëïöüÿ'-.,]/i
