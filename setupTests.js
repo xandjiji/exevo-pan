@@ -1,4 +1,5 @@
 import '@testing-library/jest-dom'
+import { toHaveNoViolations } from "jest-axe";
 
 jest.mock('utils/debounce', () => ({ debounce: (fn) => fn }))
 jest.mock('next/router', () => ({
@@ -15,3 +16,5 @@ Object.defineProperty(window, 'matchMedia', {
         matches: false,
     })),
 })
+
+expect.extend(toHaveNoViolations);
