@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import { useState, memo } from 'react'
 import { checkKeyboardTrigger } from 'utils'
 import { ChipProps } from './types'
 import * as S from './styles'
@@ -14,8 +14,8 @@ const ChipComponent = ({
   const derivedActive = overrideStatus ?? active
 
   const handleClick = (event?: React.MouseEvent) => {
-    if (!!onClick) {
-      setActive(prev => !prev)
+    if (onClick) {
+      setActive((prev) => !prev)
       onClick(event)
     }
   }

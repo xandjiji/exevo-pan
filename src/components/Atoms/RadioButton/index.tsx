@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { checkKeyboardTrigger } from 'utils'
 import { RadioButtonProps } from './types'
 import * as S from './styles'

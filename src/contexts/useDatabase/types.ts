@@ -1,3 +1,24 @@
+export type Action =
+  | {
+      type: 'APPLY_FILTERS'
+      filters: FilterState
+      isHistory: boolean
+    }
+  | {
+      type: 'INITIAL_DATA_LOAD'
+      characterData: CharacterObject[]
+      serverData: ServerObject[]
+      rareItemData: RareItemData
+      isHistory: boolean
+    }
+  | {
+      type: 'RESET_TO_BASE_DATA'
+    }
+  | {
+      type: 'STATISTICS_DATA_LOAD'
+      statisticsData: StatisticsData
+    }
+
 export interface DatabaseContextValues {
   loading: boolean
   characterData: CharacterObject[]
@@ -38,24 +59,3 @@ export interface DatabaseReducerState {
   historyData: CharacterObject[]
   statisticsData: StatisticsData | null
 }
-
-export type Action =
-  | {
-      type: 'APPLY_FILTERS'
-      filters: FilterState
-      isHistory: boolean
-    }
-  | {
-      type: 'INITIAL_DATA_LOAD'
-      characterData: CharacterObject[]
-      serverData: ServerObject[]
-      rareItemData: RareItemData
-      isHistory: boolean
-    }
-  | {
-      type: 'RESET_TO_BASE_DATA'
-    }
-  | {
-      type: 'STATISTICS_DATA_LOAD'
-      statisticsData: StatisticsData
-    }

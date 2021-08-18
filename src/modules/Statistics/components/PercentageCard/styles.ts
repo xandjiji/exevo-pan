@@ -16,15 +16,14 @@ export const Wrapper = styled.section`
   }
 `
 
-export const Title = styled.h2`
+export const Title = styled.h4`
   font-size: 16px;
   font-weight: 300;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const Percentage = styled.span<PercentageStyleProps>`
   font-size: 46px;
   font-weight: 700;
-  color: ${({ theme, positive }) =>
-    positive ? theme.colors.green : theme.colors.red};
+  color: ${({ positive }) => (positive ? 'var(--green)' : 'var(--red)')};
 `

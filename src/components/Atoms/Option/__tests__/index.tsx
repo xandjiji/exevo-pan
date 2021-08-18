@@ -16,7 +16,8 @@ describe('<Option />', () => {
     const optionElement = screen.getByRole('option')
     expect(optionElement).toHaveValue('actualValue')
     expect(screen.getByText('children')).toBeInTheDocument()
-    expect(optionElement).toHaveStyle('background-color: #FFFFFF')
+    /* expect(optionElement).toHaveStyle('background-color: #FFFFFF') */
+    expect(optionElement).toMatchSnapshot()
   })
 
   test('should render with fallback value', () => {
@@ -25,13 +26,15 @@ describe('<Option />', () => {
     const optionElement = screen.getByRole('option')
     expect(optionElement).toHaveValue('children')
     expect(screen.getByText('children')).toBeInTheDocument()
-    expect(optionElement).toHaveStyle('background-color: #FFFFFF')
+    /* expect(optionElement).toHaveStyle('background-color: #FFFFFF') */
+    expect(optionElement).toMatchSnapshot()
   })
 
   test('should render with highlighted style', () => {
     renderWithProviders(<Option highlighted>children</Option>)
 
-    expect(screen.getByRole('option')).toHaveStyle('background-color: #C5CAE9')
+    /* expect(screen.getByRole('option')).toHaveStyle('background-color: #C5CAE9') */
+    expect(screen.getByRole('option')).toMatchSnapshot()
   })
 
   test('should call onClick function with an Option object', () => {

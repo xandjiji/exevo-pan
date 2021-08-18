@@ -1,7 +1,7 @@
 import { css } from 'styled-components'
 
-export default css`
-  scrollbar-color: ${({ theme }) => theme.colors.primaryVariant} transparent;
+const CustomScrollbar = css`
+  scrollbar-color: var(--primaryVariant) transparent;
   scrollbar-width: thin;
 
   ::-webkit-scrollbar {
@@ -12,7 +12,9 @@ export default css`
   }
 
   ::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.colors.primaryVariant};
+    background-color: var(--primaryVariant);
     border-radius: 2px;
   }
 `
+
+export default CustomScrollbar

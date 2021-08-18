@@ -4,7 +4,7 @@ import { Clickable, Shadow } from 'styles'
 export const Button = styled.a`
   ${Clickable}
   ${Shadow}
-  
+
   position: relative;
   padding: 8px 16px 8px 40px;
   margin-left: 8px;
@@ -15,15 +15,16 @@ export const Button = styled.a`
 
   background: linear-gradient(
     270deg,
-    ${({ theme }) => theme.colors.primaryVariantHighlight},
-    ${({ theme }) => theme.colors.primaryVariant}
+    var(--primaryVariantHighlight),
+    var(--primaryVariant)
   );
   background-size: 800% 800%;
   animation: bgAnimate 3s ease-out infinite;
 
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
   font-size: 12px;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 
   transition: 0.2s ease-out filter;
 
@@ -48,13 +49,13 @@ export const Button = styled.a`
     bottom: 42px;
     right: 14px;
     z-index: 10;
-    background: ${({ theme }) => theme.colors.primary};
-    color: ${({ theme }) => theme.colors.onPrimary};
+    background: var(--primary);
+    color: var(--onPrimary);
     box-shadow: 2px 2px 5px 2px rgba(0, 0, 0, 0.3);
   }
 `
 
-export const Img = styled.img`
+export const ImgWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 12px;

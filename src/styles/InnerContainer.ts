@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export default css`
+const InnerContainer = css`
   padding-left: 20px;
   padding-right: 20px;
 
@@ -9,3 +9,5 @@ export default css`
     padding-right: 40px;
   }
 `
+
+export default InnerContainer

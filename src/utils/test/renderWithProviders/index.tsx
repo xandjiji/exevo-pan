@@ -1,18 +1,12 @@
 import { ReactElement } from 'react'
+// eslint-disable-next-line import/no-extraneous-dependencies
 import { render, RenderResult, RenderOptions } from '@testing-library/react'
-import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'
-import { routes } from 'Constants'
 
-export const wrapWithProviders = (ui: ReactElement): ReactElement => {
-  window.history.pushState({}, 'Test page', routes.HOME)
-  return (
-    <BrowserRouter>
-      <ThemeProvider theme={Themes.default}>{ui}</ThemeProvider>
-    </BrowserRouter>
-  )
-}
+export const wrapWithProviders = (ui: ReactElement): ReactElement => (
+  <ThemeProvider theme={Themes.default}>{ui}</ThemeProvider>
+)
 
 export const renderWithProviders = (
   ui: ReactElement,

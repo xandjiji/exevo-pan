@@ -1,16 +1,22 @@
 import { localStorageKeys } from 'Constants'
 
 export function saveToLocalStorage<T>(key: string, data: T): void {
-  const serializedData = JSON.stringify(data)
-  localStorage.setItem(key, serializedData)
+  if (typeof window !== 'undefined') {
+    const serializedData = JSON.stringify(data)
+    localStorage.setItem(key, serializedData)
+  }
 }
 
 export function getFromLocalStorage<T>(key: string, fallbackObject: T): T {
-  const serializedData = localStorage.getItem(key)
+  if (typeof window !== 'undefined') {
+    const serializedData = localStorage.getItem(key)
 
-  if (!serializedData) return fallbackObject
+    if (!serializedData) return fallbackObject
 
-  return JSON.parse(serializedData)
+    return JSON.parse(serializedData)
+  }
+
+  return fallbackObject
 }
 
 export const getFavArray = (): CharacterObject[] => {

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
@@ -33,7 +34,7 @@ describe('useEscToClose()', () => {
 
     jest
       .spyOn(window, 'setTimeout')
-      .mockImplementation(fn => fn() as unknown as NodeJS.Timeout)
+      .mockImplementation((fn) => fn() as unknown as NodeJS.Timeout)
   })
 
   test('should call onClose with keyboard event', () => {

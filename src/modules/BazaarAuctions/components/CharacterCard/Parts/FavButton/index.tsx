@@ -15,6 +15,14 @@ const FavButton = ({
 
   const handleClick = () => {
     const favArray: CharacterObject[] = getFavArray()
+
+    const findCharacterIndexById = (id: number) => {
+      for (let i = 0; i < favArray.length; i += 1) {
+        if (favArray[i].id === id) return i
+      }
+      return -1
+    }
+
     const charIndex = findCharacterIndexById(characterObject.id)
     if (charIndex >= 0) {
       favArray.splice(charIndex, 1)
@@ -25,13 +33,6 @@ const FavButton = ({
     }
 
     saveToLocalStorage(localStorageKeys.FAV_CHARACTER_DATA, favArray)
-
-    function findCharacterIndexById(id: number) {
-      for (let i = 0; i < favArray.length; i++) {
-        if (favArray[i].id === id) return i
-      }
-      return -1
-    }
   }
 
   const isFavLabel = `Remove ${characterObject.nickname} from favorites`

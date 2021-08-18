@@ -5,14 +5,14 @@ const SpritePortrait = ({
   src,
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element => {
-  const [loaded, setLoaded] = useState<boolean>(!!!src)
+  const [loaded, setLoaded] = useState<boolean>(!src)
 
   return (
     <S.Wrapper>
       <S.Img
         src={src}
-        aria-hidden={!!!src || !loaded}
-        hidden={!!!src}
+        aria-hidden={!src || !loaded}
+        hidden={!src}
         onLoad={() => setLoaded(true)}
         onError={() => setLoaded(false)}
         {...props}

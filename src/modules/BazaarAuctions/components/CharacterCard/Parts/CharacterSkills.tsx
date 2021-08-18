@@ -20,8 +20,8 @@ const CharacterSkills = ({
   const highlightedSkillValue = Math.max(...(Object.values(skills) as number[]))
   return (
     <Wrapper {...props}>
-      {Object.keys(skills).map(skillName => {
-        const skillValue = skills[skillName] as number
+      {Object.keys(skills).map((skillName) => {
+        const skillValue = skills[skillName as keyof CharacterSkillsObject]
         return (
           <SkillBar
             key={skillName}

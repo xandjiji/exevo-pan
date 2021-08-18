@@ -11,16 +11,16 @@ export const Switch = styled.div`
 `
 
 const activeToggleStyle = css`
-  background-color: ${({ theme }) => theme.colors.primaryVariant};
+  background-color: var(--primaryVariant);
   > *,
   &::after {
     left: calc(100% - 16px);
   }
   > * {
-    fill: ${({ theme }) => theme.colors.onPrimary};
+    fill: var(--onPrimary);
   }
   &::after {
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: var(--primary);
     box-shadow: 0px 2px 4px 1px rgba(0, 0, 0, 0.3);
   }
 `
@@ -38,7 +38,7 @@ export const ToggleButton = styled.div<ToggleStyleProps>`
   width: ${({ hasIcon }) => (hasIcon ? '52px' : '28px')};
   height: ${({ hasIcon }) => (hasIcon ? '16px' : '8px')};
   border-radius: 16px;
-  background-color: ${({ theme }) => theme.colors.separator};
+  background-color: var(--separator);
   transition: background 0.2s ease-out;
 
   > *,
@@ -49,7 +49,7 @@ export const ToggleButton = styled.div<ToggleStyleProps>`
     ${Smooth}
   }
   > * {
-    fill: ${({ theme }) => theme.colors.onSurface};
+    fill: var(--onSurface);
     z-index: 1;
     transform: translate(4px, -50%);
   }
@@ -58,11 +58,11 @@ export const ToggleButton = styled.div<ToggleStyleProps>`
     width: ${({ hasIcon }) => (hasIcon ? '32px' : '16px')};
     height: ${({ hasIcon }) => (hasIcon ? '32px' : '16px')};
     border-radius: 50%;
-    background-color: ${({ theme }) => theme.colors.surface};
+    background-color: var(--surface);
     transform: translate(0, -50%);
     box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.3);
   }
 
   ${({ active }) => active && activeToggleStyle}
-  ${props => props.active && props.hasIcon && activeToggleWithIconStyle}
+  ${({ active, hasIcon }) => active && hasIcon && activeToggleWithIconStyle}
 `

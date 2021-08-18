@@ -1,3 +1,4 @@
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker'
 import { unminifyCharacterData } from '../utils'
 

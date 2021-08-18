@@ -113,7 +113,7 @@ const AutocompleteInput = ({
             highlightedIndex={highlightedIndex}
             onSelectOption={onSelectOption}
           >
-            {currentList.map(item => (
+            {currentList.map((item) => (
               <Option key={item.value} value={item.value}>
                 {item.name}
               </Option>

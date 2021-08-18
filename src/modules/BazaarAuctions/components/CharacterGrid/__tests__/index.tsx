@@ -16,16 +16,10 @@ const { characterData } = randomDataset()
 const mockScrollTo = jest.fn()
 window.HTMLElement.prototype.scrollTo = mockScrollTo
 
+jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
+
 describe('<CharacterGrid />', () => {
   beforeEach(() => {
-    /* @ ToDo: add this to jest setup */
-    Object.defineProperty(window, 'matchMedia', {
-      writable: true,
-      value: jest.fn().mockImplementation(() => ({
-        matches: false,
-      })),
-    })
-
     mockScrollTo.mockClear()
   })
 
@@ -104,7 +98,7 @@ describe('<CharacterGrid />', () => {
       <CharacterGrid
         characterList={characterData}
         isLoading={false}
-        defaultDescendingOrder={true}
+        defaultDescendingOrder
         defaultSortMode={3}
       />,
     )
@@ -121,11 +115,12 @@ describe('<CharacterGrid />', () => {
 
   test('should display skeletons while loading', async () => {
     const { rerender } = renderWithProviders(
-      <CharacterGrid characterList={[]} isLoading={true} />,
+      <CharacterGrid characterList={[]} isLoading />,
     )
 
-    expect(screen.queryAllByText('Bid status')).toHaveLength(2)
+    expect(screen.queryAllByText('Bid status')).toHaveLength(10)
 
+    rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
 
     expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
@@ -134,12 +129,18 @@ describe('<CharacterGrid />', () => {
   })
 
   test('should display empty state if there are no characters', async () => {
-    renderWithProviders(<CharacterGrid characterList={[]} isLoading={false} />)
+    const { rerender } = renderWithProviders(
+      <CharacterGrid characterList={characterData} isLoading={false} />,
+    )
+
+    rerender(<CharacterGrid characterList={[]} isLoading={false} />)
 
     expect(screen.getByText('Sorry, no auction was found')).toBeInTheDocument()
 
     userEvent.click(screen.getByRole('button', { name: 'Change filters' }))
-    expect(screen.getByLabelText('Filter form')).toBeVisible()
+    await waitFor(() => {
+      expect(screen.getByLabelText('Filter form')).toBeVisible()
+    })
 
     await waitFor(() => {})
   })

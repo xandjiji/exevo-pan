@@ -7,7 +7,7 @@ const animations = {
     background: linear-gradient(
       90deg,
       transparent,
-      ${({ theme }) => theme.colors.separator},
+      var(--separator),
       transparent
     );
     filter: brightness(85%);
@@ -26,7 +26,7 @@ const animations = {
     }
   `,
   pulsate: css`
-    background: ${({ theme }) => theme.colors.separator};
+    background: var(--separator);
     filter: brightness(110%);
 
     animation: pulsate 1.5s ease-in-out 0.5s infinite;
@@ -48,7 +48,7 @@ export const Skeleton = styled.div<SkeletonStyleProps>`
   position: relative;
   display: inline-block;
   border-radius: 4px;
-  background-color: ${({ theme }) => theme.colors.separator};
+  background-color: var(--separator);
   opacity: 0.6;
   overflow: hidden;
 

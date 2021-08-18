@@ -1,4 +1,4 @@
-import React, { useState, memo } from 'react'
+import { useState, memo } from 'react'
 import { clampValue, debounce } from 'utils'
 import usePagination from './usePagination'
 import * as S from './styles'

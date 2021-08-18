@@ -16,26 +16,26 @@ export const buildCharacterData = (
   const mutatedSetupedCharacterData = [...setupedCharacterData]
 
   const currentDate = new Date()
-  for (const characterObject of setupedCharacterData) {
+  setupedCharacterData.some((characterObject) => {
     const characterAuctionEndDate = new Date(characterObject.auctionEnd * 1000)
     if (currentDate > characterAuctionEndDate) {
       mutatedSetupedCharacterData.shift()
-    } else {
-      break
+      return false
     }
-  }
+    return true
+  })
 
   return mutatedSetupedCharacterData
 }
 
 export const filterItemData = (initialItemData: RareItemData): RareItemData => {
-  const filteredItemData = {}
+  const filteredItemData = {} as RareItemData
 
-  for (const item in initialItemData) {
+  Object.keys(initialItemData).forEach((item) => {
     if (initialItemData[item].length > 0) {
       filteredItemData[item] = initialItemData[item]
     }
-  }
+  })
 
   return filteredItemData
 }
@@ -73,17 +73,16 @@ export const checkAndHash = async (
   if (pageHash === hash) {
     const characterData = await getFromDB(index)
     return characterData
-  } else {
-    const response = await fetch(
-      `${endpoints.BASE_HISTORY_DATA}/${localStorageKeys.HISTORY_DATA_PREFIX}${index}.json`,
-    )
-    const data = (await response.json()) as MinifiedCharacterObject[]
-    const parsedDataArray = await buildDB(index, data)
-
-    saveToLocalStorage(pageName, hash)
-
-    return parsedDataArray
   }
+  const response = await fetch(
+    `${endpoints.BASE_HISTORY_DATA}/${localStorageKeys.HISTORY_DATA_PREFIX}${index}.json`,
+  )
+  const data = (await response.json()) as MinifiedCharacterObject[]
+  const parsedDataArray = await buildDB(index, data)
+
+  saveToLocalStorage(pageName, hash)
+
+  return parsedDataArray
 }
 
 export const getPercentage = (part: number, whole: number): string => {

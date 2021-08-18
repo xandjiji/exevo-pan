@@ -1,4 +1,5 @@
 export const localStorageKeys = {
+  THEME_DATA: 'themeData',
   SERVER_DATA: 'serverData',
   AUCTION_CHARACTER_DATA: 'auctionCharacterData',
   RARE_ITEM_DATA: 'rareItemData',

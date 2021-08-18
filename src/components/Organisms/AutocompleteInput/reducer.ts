@@ -1,7 +1,7 @@
 import { circularArrayIndex } from './utils'
 import { AutocompleteInputState, Action } from './types'
 
-export default (
+const AutocompleteInputReducer = (
   state: AutocompleteInputState,
   action: Action,
 ): AutocompleteInputState => {
@@ -49,3 +49,5 @@ export default (
       return { ...state }
   }
 }
+
+export default AutocompleteInputReducer

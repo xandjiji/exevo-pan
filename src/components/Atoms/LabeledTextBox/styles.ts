@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import Image from 'next/image'
 import WarningImg from 'assets/warning.png'
 import { WrapperStyleProps } from './types'
 
@@ -16,8 +17,8 @@ export const Label = styled.span`
   font-weight: 300;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onSurface};
-  background-color: ${({ theme }) => theme.colors.surface};
+  color: var(--onSurface);
+  background-color: var(--surface);
   user-select: none;
 `
 
@@ -26,15 +27,14 @@ export const Wrapper = styled.div<WrapperStyleProps>`
   position: relative;
   border-radius: 5px;
   border: solid 1px;
-  border-color: ${({ warning, theme }) =>
-    warning ? theme.colors.red : theme.colors.separator};
+  border-color: ${({ warning }) =>
+    warning ? 'var(--red)' : 'var(--separator)'};
 
   ${Label} {
-    ${({ warning, theme }) => warning && `color: ${theme.colors.red};`};
+    color: ${({ warning }) => warning && 'var(--red)'};
   }
 `
 
-export const WarningIcon = styled.img.attrs({ src: WarningImg })`
-  margin-left: 1px;
-  transform: translateY(-1px) scale(0.75);
+export const WarningIcon = styled(Image).attrs({ src: WarningImg })`
+  transform: translate(1px, -1px) scale(0.75);
 `

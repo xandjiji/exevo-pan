@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Option /> should render with correct name and value 1`] = `
+<option
+  class="styles__Option-sc-am72ib-0 fZyPDg"
+  role="option"
+  value="actualValue"
+>
+  children
+</option>
+`;
+
+exports[`<Option /> should render with fallback value 1`] = `
+<option
+  class="styles__Option-sc-am72ib-0 fZyPDg"
+  role="option"
+  value="children"
+>
+  children
+</option>
+`;
+
+exports[`<Option /> should render with highlighted style 1`] = `
+<option
+  class="styles__Option-sc-am72ib-0 eNIDEs"
+  role="option"
+  value="children"
+>
+  children
+</option>
+`;

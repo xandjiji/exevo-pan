@@ -7,8 +7,9 @@ import {
   useState,
   useMemo,
 } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { ManageDataClient } from 'services'
+import { useIsMounted } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
 import { routes } from 'Constants'
 import DatabaseReducer from './DatabaseReducer'
@@ -55,7 +56,11 @@ const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
   dispatch: defaultDatabaseState.dispatch,
 })
 
-export const DatabaseProvider: React.FC = ({ children }) => {
+export const DatabaseProvider = ({
+  children,
+}: {
+  children: React.ReactNode
+}): JSX.Element => {
   const [
     { characterData, serverData, rareItemData, historyData, statisticsData },
     dispatch,
@@ -77,7 +82,7 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     },
   )
 
-  const { pathname } = useLocation()
+  const { pathname } = useRouter()
   const loading = loadingPaths.includes(pathname)
 
   const [loadedPercentage, setLoadedPercentage] = useState<string | null>()
@@ -108,20 +113,6 @@ export const DatabaseProvider: React.FC = ({ children }) => {
     }
   }, [])
 
-  const fetchStatisticsData = useCallback(async () => {
-    try {
-      const newStatisticsData = await ManageDataClient.fetchStatisticsData()
-
-      dispatch({
-        type: 'STATISTICS_DATA_LOAD',
-        statisticsData: newStatisticsData,
-      })
-    } finally {
-      dispatchLoad({ type: 'FINISH_LOADING', path: routes.STATISTICS })
-      dispatchLoad({ type: 'FINISH_LOADING', path: routes.HIGHSCORES })
-    }
-  }, [])
-
   useEffect(() => {
     if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
@@ -129,14 +120,14 @@ export const DatabaseProvider: React.FC = ({ children }) => {
         fetchCharacterData(pathname)
       }
     }
-    if (pathname === routes.STATISTICS || pathname === routes.HIGHSCORES) {
-      if (!navigated.includes(pathname)) {
-        dispatchLoad({ type: 'START_LOADING', path: routes.STATISTICS })
-        dispatchLoad({ type: 'START_LOADING', path: routes.HIGHSCORES })
-        fetchStatisticsData()
-      }
+  }, [pathname, navigated, fetchCharacterData])
+
+  const isMounted = useIsMounted()
+  useEffect(() => {
+    if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
+      if (isMounted) dispatch({ type: 'RESET_TO_BASE_DATA' })
     }
-  }, [pathname, navigated, fetchCharacterData, fetchStatisticsData])
+  }, [pathname, navigated, fetchCharacterData])
 
   const drawerFields = useMemo(
     () => ({

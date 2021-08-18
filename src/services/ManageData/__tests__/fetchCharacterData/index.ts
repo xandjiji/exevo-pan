@@ -18,10 +18,6 @@ const mockedSaveToLocalStorage = saveToLocalStorage as jest.MockedFunction<
   typeof saveToLocalStorage
 >
 
-jest
-  .spyOn(global, 'Date')
-  .mockImplementationOnce(() => new Date('1999-1-1').toDateString())
-
 describe('services/CharacterData', () => {
   beforeEach(async () => {
     mockedFetch.mockClear()

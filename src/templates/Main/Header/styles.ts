@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components'
-import { NavLink } from 'react-router-dom'
+import Image from 'next/image'
 import ExevoPanLogoImage from 'assets/logo.png'
-import { ReactComponent as MoonIconSvg } from 'assets/svgs/moon.svg'
-import { ReactComponent as MarketIconSvg } from 'assets/svgs/market.svg'
-import { ReactComponent as HistoryIconSvg } from 'assets/svgs/history.svg'
-import { ReactComponent as StatisticsIconSvg } from 'assets/svgs/statistics.svg'
+import MoonIconSvg from 'assets/svgs/moon.svg'
+import MarketIconSvg from 'assets/svgs/market.svg'
+import HistoryIconSvg from 'assets/svgs/history.svg'
+import StatisticsIconSvg from 'assets/svgs/statistics.svg'
 import { InnerContainer, CustomScrollbar, Clickable } from 'styles'
 
 export const Wrapper = styled.header`
@@ -15,7 +15,7 @@ export const Wrapper = styled.header`
   align-items: center;
   justify-content: space-between;
   overflow-x: auto;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: var(--primary);
   transition: 0.2s background ease-out;
   ${InnerContainer}
   ${CustomScrollbar}
@@ -30,27 +30,34 @@ export const Wrapper = styled.header`
     width: 32px;
     background-image: linear-gradient(
       to left,
-      ${({ theme }) => theme.colors.primary},
+      var(--primary),
       rgba(0, 0, 0, 0)
     );
     pointer-events: none;
   }
 `
 
-export const LogoNavigation = styled(NavLink)`
+export const LogoWrapper = styled.a`
+  margin-right: 18px;
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  flex-shrink: 0;
+
+  transition: 0.2s filter ease-out;
+  &:hover {
+    filter: brightness(110%);
+  }
 `
 
-export const ExevoPanLogo = styled.img.attrs({
-  src: ExevoPanLogoImage,
-  alt: 'Exevo Pan',
-  width: 36,
-  height: 36,
-})`
-  margin-right: 18px;
+export const H1 = styled.h1`
+  display: none;
 `
+
+export const ExevoPanLogo = styled(Image).attrs({
+  src: ExevoPanLogoImage,
+})``
 
 export const Nav = styled.nav`
   margin-right: 24px;
@@ -68,20 +75,24 @@ export const Li = styled.li`
   }
 `
 
-export const Navigation = styled(NavLink)`
+export const A = styled.a`
   padding: 8px 16px;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  letter-spacing: 0.5px;
   border-radius: 9px;
-  color: ${({ theme }) => theme.colors.onPrimary};
-  white-space: nowrap;
 
   ${Clickable}
-  &.active {
+  &[aria-current='page'] {
     box-shadow: inset 3px 3px rgb(0 0 0 / 14%);
   }
+`
+
+export const H2 = styled.h2`
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+  color: var(--onPrimary);
+  white-space: nowrap;
 `
 
 export const RightWrapper = styled.div`
@@ -95,7 +106,7 @@ const NavIconStyle = css`
   margin-right: 6px;
   width: 18px;
   height: 18px;
-  fill: ${({ theme }) => theme.colors.onPrimary};
+  fill: var(--onPrimary);
 `
 
 export const MarketIcon = styled(MarketIconSvg)`

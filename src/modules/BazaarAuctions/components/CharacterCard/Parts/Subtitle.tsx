@@ -16,13 +16,13 @@ const vocationEnum = {
   '12': 'Paladin',
   '13': 'Sorcerer',
   '14': 'Druid',
-}
+} as Record<string, string>
 
 const Description = styled.span`
   font-size: 12px;
   font-weight: 300;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 const Subtitle = ({ level, vocation }: SubtitleProps): JSX.Element => (

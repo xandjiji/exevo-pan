@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
+// eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker'
 import { randomCharacterData } from './characterMaker'
 
@@ -25,8 +26,8 @@ const randomCharacterInfo = (key: keyof CharacterInfoKey): CharacterInfo => {
   const randomCharacter = characterList[0]
 
   const value = skillKeys.includes(key)
-    ? randomCharacter.skills[key]
-    : randomCharacter[key]
+    ? randomCharacter.skills[key as keyof CharacterSkillsObject]
+    : randomCharacter[key as keyof PartialCharacterObject]
 
   return {
     id: randomCharacter.id,
@@ -53,9 +54,9 @@ const randomDistributionData = (): DistributionData => {
   )
 
   const newDistributionData = {} as DistributionData
-  for (const distributionItem of distributionItems) {
+  distributionItems.forEach((distributionItem) => {
     newDistributionData[distributionItem.key] = distributionItem.value
-  }
+  })
 
   return newDistributionData
 }

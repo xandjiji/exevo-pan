@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { ReactComponent as NextSvg } from 'assets/svgs/next.svg'
-import { ReactComponent as LastSvg } from 'assets/svgs/last.svg'
+import NextSvg from 'assets/svgs/next.svg'
+import LastSvg from 'assets/svgs/last.svg'
 import { Clickable } from 'styles'
 import { CursorProps } from './types'
 
@@ -11,7 +11,7 @@ export const Tracker = styled.span`
   display: block;
   font-size: 12px;
   letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const CursorWrapper = styled.div`
@@ -24,7 +24,7 @@ export const CursorWrapper = styled.div`
 `
 const iconStyle = css`
   width: 32px;
-  fill: ${({ theme }) => theme.colors.onSurface};
+  fill: var(--onSurface);
   transition: opacity 0.2s ease-out;
 `
 

@@ -7,7 +7,7 @@ const decodeSet = (
   new Set<boolean | number | string>(
     decodeURIComponent(encodedValue)
       .split(',')
-      .map(stringValue => {
+      .map((stringValue) => {
         if (valueType === 'number') return Number(stringValue)
         if (valueType === 'boolean') return stringValue === 'true'
         return stringValue

@@ -9,8 +9,8 @@ export const Value = styled.div`
   border-radius: 5px;
   font-size: 14px;
   letter-spacing: 0.6px;
-  background-color: ${({ theme }) => theme.colors.primary};
-  color: ${({ theme }) => theme.colors.onPrimary};
+  background-color: var(--primary);
+  color: var(--onPrimary);
   text-align: right;
   font-weight: 600;
   transition: all 0.2s ease-out;
@@ -23,7 +23,7 @@ export const ProgressBar = styled.div<ProgressBarProps>`
   position: relative;
   height: 4px;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.primaryVariant};
+  background-color: var(--primaryVariant);
   box-shadow: 1px 1px 2px 0px rgba(0, 0, 0, 0.1);
 
   ::before {
@@ -35,14 +35,14 @@ export const ProgressBar = styled.div<ProgressBarProps>`
     text-transform: capitalize;
     font-size: 12px;
     font-weight: 300;
-    color: ${({ theme }) => theme.colors.onSurface};
+    color: var(--onSurface);
   }
 `
 
 export const BarFill = styled.div`
   display: block;
   height: 100%;
-  background-color: ${({ theme }) => theme.colors.primary};
+  background-color: var(--primary);
   transition: width 0.4s ease-out;
 `
 
@@ -52,8 +52,7 @@ export const Wrapper = styled.div<WrapperProps>`
 
   ${Value} {
     margin-right: 6px;
-    ${({ highlight, theme }) =>
-      highlight && `background-color: ${theme.colors.green};`}
+    ${({ highlight }) => highlight && `background-color: var(--green);`}
   }
 
   ${ProgressBar} {
@@ -61,7 +60,6 @@ export const Wrapper = styled.div<WrapperProps>`
   }
 
   ${BarFill} {
-    ${({ highlight, theme }) =>
-      highlight && `background-color: ${theme.colors.green};`}
+    ${({ highlight }) => highlight && `background-color: var(--green);`}
   }
 `

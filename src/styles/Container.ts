@@ -1,6 +1,6 @@
 import { css } from 'styled-components'
 
-export default css`
+const Container = css`
   margin-left: 20px;
   margin-right: 20px;
 
@@ -9,3 +9,5 @@ export default css`
     margin-right: 40px;
   }
 `
+
+export default Container

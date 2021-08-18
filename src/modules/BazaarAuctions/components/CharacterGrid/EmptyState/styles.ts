@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Chip as BaseChip } from 'components/Atoms'
+import Image from 'next/image'
 import NotFoundImage from 'assets/notFound.png'
 
 export const Wrapper = styled.div`
@@ -16,10 +17,7 @@ export const Wrapper = styled.div`
   border-radius: 24px;
 `
 
-export const NotFound = styled.img.attrs({
-  src: NotFoundImage,
-  alt: 'No character was found',
-})`
+export const NotFoundWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
@@ -29,12 +27,17 @@ export const NotFound = styled.img.attrs({
   opacity: 0.15;
 `
 
+export const NotFound = styled(Image).attrs({
+  src: NotFoundImage,
+  alt: 'No character was found',
+})``
+
 export const Text = styled.span`
   margin-bottom: 32px;
   display: block;
   font-size: 32px;
   text-align: center;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 `
 
 export const Chip = styled(BaseChip)`

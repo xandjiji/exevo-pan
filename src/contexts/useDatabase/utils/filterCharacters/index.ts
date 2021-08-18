@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { getFavArray } from 'utils'
 import {
   setupRareItemsAuctions,
@@ -40,7 +39,7 @@ export const filterCharacters = (
   if (favFilter) characterPool = getFavArray()
 
   const filteredCharacters: CharacterObject[] = []
-  for (const currentCharacter of characterPool) {
+  characterPool.forEach((currentCharacter) => {
     const {
       id: currentId,
       vocationId: currentVocation,
@@ -54,41 +53,43 @@ export const filterCharacters = (
     } = currentCharacter
 
     /* @ ToDo: remove this once the database is fixed */
-    if (currentServerId === -1) continue
+    if (currentServerId === -1) return
 
-    if (!!nicknameFilter && !nicknameRegex.test(currentNickname)) continue
+    if (!!nicknameFilter && !nicknameRegex.test(currentNickname)) return
 
-    if (currentLevel < minLevelFilter || currentLevel > maxLevelFilter) continue
+    if (currentLevel < minLevelFilter || currentLevel > maxLevelFilter) return
 
-    if (setDoesntHasValue(vocationFilter, currentVocation)) continue
+    if (setDoesntHasValue(vocationFilter, currentVocation)) return
 
-    if (setDoesntHasValue(pvpFilter, currentServerData.pvpType.type)) continue
-    if (setDoesntHasValue(battleyeFilter, currentServerData.battleye)) continue
+    if (setDoesntHasValue(pvpFilter, currentServerData.pvpType.type)) return
+    if (setDoesntHasValue(battleyeFilter, currentServerData.battleye)) return
     if (
       setDoesntHasValue(locationFilter, currentServerData.serverLocation.type)
     )
-      continue
-    if (setDoesntHasValue(serverFilter, currentServerData.serverName)) continue
+      return
 
-    if (setDoesntHasAnyValue(imbuementsFilter, currentImbuements)) continue
-    if (setDoesntHasValue(auctionWithRareItemsSet, currentId)) continue
+    if (setDoesntHasValue(serverFilter, currentServerData.serverName)) return
 
-    if (rareNickFilter && !isRareNickname(currentNickname)) continue
-    if (soulwarFilter && currentSoulwar) continue
+    if (setDoesntHasAnyValue(imbuementsFilter, currentImbuements)) return
+    if (setDoesntHasValue(auctionWithRareItemsSet, currentId)) return
+
+    if (rareNickFilter && !isRareNickname(currentNickname)) return
+    if (soulwarFilter && currentSoulwar) return
 
     if (skillKeysFilter.size) {
       let hasMinimumSkill = false
-      for (const skillItem of Array.from(skillKeysFilter)) {
+      Array.from(skillKeysFilter).some((skillItem) => {
         if (currentSkills[skillItem] >= minSkillFilter) {
           hasMinimumSkill = true
-          break
+          return true
         }
-      }
-      if (!hasMinimumSkill) continue
+        return false
+      })
+      if (!hasMinimumSkill) return
     }
 
     filteredCharacters.push(currentCharacter)
-  }
+  })
 
   return filteredCharacters
 }

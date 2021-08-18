@@ -1,4 +1,3 @@
-/* eslint-disable jest/no-conditional-expect */
 /* eslint-disable @typescript-eslint/no-unnecessary-condition */
 import { randomDataset } from 'utils/test'
 import { applySort } from '../applySort'

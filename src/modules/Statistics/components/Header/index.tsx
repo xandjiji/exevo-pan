@@ -1,23 +1,27 @@
 import { memo } from 'react'
-import routes from '../../routes'
+import { Link } from 'components/Atoms'
+import { routes } from 'Constants'
 import * as S from './styles'
-
-const Icons = {
-  Overall: <S.OverallIcon />,
-  Highscores: <S.HighscoresIcon />,
-}
 
 const Header = (): JSX.Element => (
   <S.Nav>
     <S.Ul>
-      {routes.map(route => (
-        <S.Li key={route.key}>
-          <S.Navigation to={route.path} exact>
-            {Icons[route.key]}
-            {route.key}
-          </S.Navigation>
-        </S.Li>
-      ))}
+      <S.Li>
+        <Link href={routes.STATISTICS} exact>
+          <S.A>
+            <S.OverallIcon />
+            <S.H3>Overall</S.H3>
+          </S.A>
+        </Link>
+      </S.Li>
+      <S.Li>
+        <Link href={routes.HIGHSCORES} exact>
+          <S.A>
+            <S.HighscoresIcon />
+            <S.H3>Highscores</S.H3>
+          </S.A>
+        </Link>
+      </S.Li>
     </S.Ul>
   </S.Nav>
 )

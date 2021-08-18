@@ -4,11 +4,11 @@ export function setupRareItemsAuctions(
 ): Set<number> {
   const auctionIdSet = new Set<number>([])
 
-  for (const itemName of [...itemNameSet]) {
-    for (const setItem of [...rareItemData[itemName]]) {
+  ;[...itemNameSet].forEach((itemName) => {
+    ;[...rareItemData[itemName]].forEach((setItem) => {
       auctionIdSet.add(setItem)
-    }
-  }
+    })
+  })
 
   return auctionIdSet
 }
@@ -16,9 +16,8 @@ export function setupRareItemsAuctions(
 export function setDoesntHasValue<T>(set: Set<T>, value: T): boolean {
   if (set.size && !set.has(value)) {
     return true
-  } else {
-    return false
   }
+  return false
 }
 
 export function setDoesntHasAnyValue<T>(
@@ -29,11 +28,7 @@ export function setDoesntHasAnyValue<T>(
 
   const checkingSet = new Set(valueArray)
 
-  for (const value of Array.from(set)) {
-    if (!checkingSet.has(value)) return true
-  }
-
-  return false
+  return Array.from(set).some((value) => !checkingSet.has(value))
 }
 
 const specialCharacters = /[äëïöüÿ'-.,]/i

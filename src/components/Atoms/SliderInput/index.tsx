@@ -1,4 +1,4 @@
-import React, {
+import {
   useState,
   useEffect,
   useRef,
@@ -31,9 +31,8 @@ const SliderInput = ({
   const trackWidth: number = trackRef.current?.offsetWidth ?? 1
 
   const positionToValue = useCallback(
-    (position: number): number => {
-      return Math.round((max - min) * (position / trackWidth) + min)
-    },
+    (position: number): number =>
+      Math.round((max - min) * (position / trackWidth) + min),
     [min, max, trackWidth],
   )
 
@@ -81,7 +80,7 @@ const SliderInput = ({
     if (!action) return
 
     event.nativeEvent.preventDefault()
-    setValue(prev => clampValue(action(prev), [min, max]))
+    setValue((prev) => clampValue(action(prev), [min, max]))
   }
 
   const handleTrackKeyPress = (event: React.KeyboardEvent) => {
@@ -97,7 +96,7 @@ const SliderInput = ({
     if (!action) return
 
     event.nativeEvent.preventDefault()
-    setValue(prev => clampValue(action(prev), [min, max]))
+    setValue((prev) => clampValue(action(prev), [min, max]))
   }
 
   useEffect(() => {
@@ -119,7 +118,6 @@ const SliderInput = ({
   useEffect(() => {
     setSliderInputValue(value.toString())
     if (isMounted) dispatchSyntheticEvent()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [value, dispatchSyntheticEvent])
 
   useLayoutEffect(() => {
@@ -160,7 +158,7 @@ const SliderInput = ({
         hidden
         aria-invalid={!isValid}
         value={value}
-        onInput={event =>
+        onInput={(event) =>
           onChange?.(event as React.ChangeEvent<HTMLInputElement>)
         }
         ref={inputRef}

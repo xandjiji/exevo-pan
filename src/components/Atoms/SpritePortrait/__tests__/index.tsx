@@ -5,7 +5,9 @@ import SpritePortrait from '..'
 
 describe('<SpritePortrait />', () => {
   test('should render correctly with src', () => {
-    renderWithProviders(<SpritePortrait alt="Red skull" src={imageSrc} />)
+    renderWithProviders(
+      <SpritePortrait alt="Red skull" src={imageSrc as unknown as string} />,
+    )
 
     const imgElement = screen.getByAltText('Red skull')
     const loadingElement = screen.getByRole('alert')

@@ -7,11 +7,9 @@ export const Wrapper = styled.div`
   ${Shadow}
   ${CustomScrollbar}
 
-  scrollbar-color: ${({ theme }) => theme.colors.primaryVariant} ${({
-    theme,
-  }) => theme.colors.surface};
+  scrollbar-color: var(--primaryVariant) var(--surface);
 
   ::-webkit-scrollbar {
-    background-color: ${({ theme }) => theme.colors.surface};
+    background-color: var(--surface);
   }
 `

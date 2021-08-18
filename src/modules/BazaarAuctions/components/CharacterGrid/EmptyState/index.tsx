@@ -7,7 +7,10 @@ const EmptyState = ({
 }: EmptyStateProps): JSX.Element => (
   <S.Wrapper {...props}>
     <S.Text>Sorry, no auction was found</S.Text>
-    <S.NotFound />
+
+    <S.NotFoundWrapper>
+      <S.NotFound />
+    </S.NotFoundWrapper>
     <S.Chip
       overrideStatus
       onClick={buttonAction}

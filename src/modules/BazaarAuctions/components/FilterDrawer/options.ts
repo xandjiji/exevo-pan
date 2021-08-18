@@ -1,13 +1,13 @@
 export const buildServerOptions = (serverData: ServerObject[]): Option[] =>
   serverData
-    .map(server => ({
+    .map((server) => ({
       name: server.serverName,
       value: server.serverName,
     }))
     .sort((a, b) => a.name.localeCompare(b.name))
 
 export const buildRareItemsOptions = (itemData: RareItemData): Option[] =>
-  Object.keys(itemData).map(item => ({ name: item, value: item }))
+  Object.keys(itemData).map((item) => ({ name: item, value: item }))
 
 const imbuementNames = [
   'Critical Hit',
@@ -35,7 +35,7 @@ const imbuementNames = [
   'Earth Protection',
 ]
 
-export const imbuementOptions = imbuementNames.map(imbuement => ({
+export const imbuementOptions = imbuementNames.map((imbuement) => ({
   name: imbuement,
   value: imbuement,
 }))

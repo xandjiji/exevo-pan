@@ -54,7 +54,7 @@ describe('<Chip />', () => {
 
   test('should be controlled correctly', () => {
     const { rerender } = renderWithProviders(
-      <Chip onClick={mockedOnClick} overrideStatus={true} />,
+      <Chip onClick={mockedOnClick} overrideStatus />,
     )
 
     const chipElement = screen.getByRole('switch')

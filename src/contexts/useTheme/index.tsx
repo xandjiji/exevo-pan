@@ -1,6 +1,8 @@
-import { createContext, useContext, useState, useEffect } from 'react'
+import { createContext, useContext, useState } from 'react'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import Themes from 'styles/themes'
+import { localStorageKeys } from 'Constants'
+import { getInitialTheme, injectCssVariables } from './utils'
 import { ThemeContextState, ThemeProviderProps } from './types'
 
 const defaultThemeState: ThemeContextState = {
@@ -13,31 +15,16 @@ const ThemeContext = createContext<ThemeContextState>(defaultThemeState)
 export const ThemeProvider = ({
   children,
 }: ThemeProviderProps): JSX.Element => {
-  const [currentThemeTitle, setCurrentThemeTitle] = useState<string>(
-    () =>
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
-      Themes[localStorage.getItem('theme') ?? Themes.default.title]?.title ??
-      Themes.default.title,
-  )
+  const [currentThemeTitle, setCurrentThemeTitle] =
+    useState<string>(getInitialTheme)
   const currentTheme = Themes[currentThemeTitle]
 
   const toggleTheme = () => {
     const newThemeTitle = currentTheme.next
     setCurrentThemeTitle(newThemeTitle)
-    localStorage.setItem('theme', newThemeTitle)
+    injectCssVariables(newThemeTitle)
+    localStorage.setItem(localStorageKeys.THEME_DATA, newThemeTitle)
   }
-
-  useEffect(() => {
-    const { primary } = currentTheme.colors
-
-    document
-      .querySelector('meta[name=theme-color]')
-      ?.setAttribute('content', primary)
-
-    document
-      .querySelector('meta[name=msapplication-navbutton-color]')
-      ?.setAttribute('content', primary)
-  }, [currentTheme])
 
   return (
     <StyledThemeProvider theme={currentTheme}>

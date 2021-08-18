@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PercentageCard /> should style values correctly 1`] = `
+<span
+  class="styles__Percentage-sc-1hhpwse-2 dhpXSa"
+>
+  0
+  %
+</span>
+`;
+
+exports[`<PercentageCard /> should style values correctly 2`] = `
+<span
+  class="styles__Percentage-sc-1hhpwse-2 guwMsa"
+>
+  50
+  %
+</span>
+`;
+
+exports[`<PercentageCard /> should style values correctly 3`] = `
+<span
+  class="styles__Percentage-sc-1hhpwse-2 guwMsa"
+>
+  100
+  %
+</span>
+`;
+
+exports[`<PercentageCard /> should style values correctly 4`] = `
+<span
+  class="styles__Percentage-sc-1hhpwse-2 guwMsa"
+>
+  1000
+  %
+</span>
+`;
+
+exports[`<PercentageCard /> should style values correctly 5`] = `
+<span
+  class="styles__Percentage-sc-1hhpwse-2 dhpXSa"
+>
+  0.1
+  %
+</span>
+`;
+
+exports[`<PercentageCard /> should style values correctly 6`] = `
+<span
+  class="styles__Percentage-sc-1hhpwse-2 dhpXSa"
+>
+  49.9999
+  %
+</span>
+`;

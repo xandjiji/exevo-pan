@@ -13,10 +13,11 @@ export const FloatingLabel = styled.div`
   align-items: center;
 
   border-radius: 5px;
-  background-color: ${({ theme }) => theme.colors.alert};
+  background-color: var(--alert);
 
   font-size: 12px;
   font-weight: 600;
+  color: #000;
 
   ${Shadow}
 `
@@ -24,9 +25,9 @@ export const Spinner = styled(BaseSpinner)`
   margin-right: 8px;
   width: 12px;
   height: 12px;
-  background-color: ${({ theme }) => theme.colors.alert};
+  background-color: var(--alert);
 
   &:after {
-    background: ${({ theme }) => theme.colors.alert};
+    background: var(--alert);
   }
 `

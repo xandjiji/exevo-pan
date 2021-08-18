@@ -1,8 +1,7 @@
 import styled, { css } from 'styled-components'
-import { NavLink } from 'react-router-dom'
 import { Shadow, InnerContainer, Smooth } from 'styles'
-import { ReactComponent as OverallIconSvg } from 'assets/svgs/charts.svg'
-import { ReactComponent as HighscoresIconSvg } from 'assets/svgs/trophy.svg'
+import OverallIconSvg from 'assets/svgs/charts.svg'
+import HighscoresIconSvg from 'assets/svgs/trophy.svg'
 
 export const Nav = styled.nav`
   position: relative;
@@ -10,7 +9,7 @@ export const Nav = styled.nav`
   ${InnerContainer}
   ${Shadow}
   ${Smooth}
-  background-color: ${({ theme }) => theme.colors.darkerPrimary};
+  background-color: var(--darkerPrimary);
 `
 
 export const Ul = styled.ul`
@@ -20,19 +19,16 @@ export const Ul = styled.ul`
 
 export const Li = styled.li``
 
-export const Navigation = styled(NavLink)`
+export const A = styled.a`
   padding: 13px 20px 10px 20px;
   display: flex;
   align-items: center;
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  color: ${({ theme }) => theme.colors.onPrimary};
-  white-space: nowrap;
   border-bottom: solid 3px transparent;
+  cursor: pointer;
   ${Smooth}
 
-  &.active, &:hover {
-    border-color: ${({ theme }) => theme.colors.onPrimary};
+  &[aria-current='page'], &:hover {
+    border-color: var(--onPrimary);
   }
 `
 
@@ -40,7 +36,7 @@ const NavIconStyle = css`
   margin-right: 6px;
   width: 18px;
   height: 18px;
-  fill: ${({ theme }) => theme.colors.onPrimary};
+  fill: var(--onPrimary);
 `
 
 export const OverallIcon = styled(OverallIconSvg)`
@@ -48,4 +44,12 @@ export const OverallIcon = styled(OverallIconSvg)`
 `
 export const HighscoresIcon = styled(HighscoresIconSvg)`
   ${NavIconStyle}
+`
+
+export const H3 = styled.h3`
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  color: var(--onPrimary);
+  white-space: nowrap;
 `

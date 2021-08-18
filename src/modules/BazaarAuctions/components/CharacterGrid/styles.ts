@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import { Paginator as BasePaginator } from 'components/Atoms'
-import { ReactComponent as FilterIconSvg } from 'assets/svgs/filter.svg'
-import { ReactComponent as SortIconSvg } from 'assets/svgs/sort.svg'
+import FilterIconSvg from 'assets/svgs/filter.svg'
+import SortIconSvg from 'assets/svgs/sort.svg'
 import {
   InnerContainer,
   Shadow,
@@ -9,6 +9,7 @@ import {
   CustomScrollbar,
   Smooth,
 } from 'styles'
+import { CardSkeleton as BaseCardSkeleton } from '../CharacterCard'
 
 export const Main = styled.main``
 
@@ -21,7 +22,7 @@ export const Head = styled.div`
 
   display: flex;
   align-items: flex-end;
-  background-color: ${({ theme }) => theme.colors.surface};
+  background-color: var(--surface);
   user-select: none;
 
   ${InnerContainer}
@@ -36,7 +37,7 @@ export const ActiveIcon = styled.div`
   width: 17px;
   height: 17px;
   border-radius: 50%;
-  background-color: ${({ theme }) => theme.colors.battleYellow};
+  background-color: var(--battleYellow);
   ${Shadow}
   ${Smooth}
 
@@ -55,7 +56,7 @@ export const IconStyling = css`
   width: 37px;
   height: 37px;
   border-radius: 4px;
-  fill: ${({ theme }) => theme.colors.onSurface};
+  fill: var(--onSurface);
 `
 
 export const FilterIcon = styled(FilterIconSvg)`
@@ -83,6 +84,8 @@ export const Paginator = styled(BasePaginator)`
   margin-left: auto;
 `
 
+export const CardSkeleton = styled(BaseCardSkeleton)``
+
 export const Grid = styled.div`
   padding-top: 16px;
   position: relative;
@@ -95,7 +98,7 @@ export const Grid = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-auto-rows: auto;
 
-  background-color: ${({ theme }) => theme.colors.background};
+  background-color: var(--background);
 
   &::after {
     content: '';
@@ -113,11 +116,17 @@ export const Grid = styled.div`
     height: 72px;
     background-image: linear-gradient(
       to top,
-      ${({ theme }) => theme.colors.background},
+      var(--background),
       rgba(0, 0, 0, 0)
     );
     pointer-events: none;
   }
 
   ${InnerContainer}
+
+  @media(max-width: 767px) {
+    ${CardSkeleton}:nth-child(n + 3) {
+      display: none;
+    }
+  }
 `

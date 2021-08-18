@@ -33,8 +33,11 @@ const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
       tooltips: {
         displayColors: false,
         callbacks: {
-          label: (tooltipItem, data) => {
-            const index: number = tooltipItem.index
+          label: (
+            tooltipItem: Record<string, number>,
+            data: Record<string, Record<string, string>[]>,
+          ) => {
+            const { index } = tooltipItem
             return `${data.labels[index]}: ${data.datasets[0].data[index]}%`
           },
         },
@@ -50,7 +53,7 @@ const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
         {
           label: title,
           /* @ ToDo: remove Number casting after backend refactor */
-          data: Object.keys(pieDataSet).map(item => Number(pieDataSet[item])),
+          data: Object.keys(pieDataSet).map((item) => Number(pieDataSet[item])),
           fill: false,
           backgroundColor: chartColors,
           borderColor: chartColors,

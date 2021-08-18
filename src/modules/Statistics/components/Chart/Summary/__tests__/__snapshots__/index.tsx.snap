@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Summary /> should style trend red/green 1`] = `
+<span
+  class="styles__Percentage-sc-zf1m03-4 ucl"
+>
+  <image
+    aria-label="Upwards trend"
+    class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
+  />
+  50.00%
+</span>
+`;
+
+exports[`<Summary /> should style trend red/green 3`] = `
+<span
+  class="styles__Percentage-sc-zf1m03-4 MvqMn"
+>
+  <image
+    aria-label="Downwards trend"
+    class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
+  />
+  50.00%
+</span>
+`;
+
+exports[`<Summary /> should style trend red/green 4`] = `
+<image
+  aria-label="Downwards trend"
+  class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
+/>
+`;
+
+exports[`<Summary /> should style trend red/green 5`] = `
+<span
+  class="styles__Percentage-sc-zf1m03-4 ucl"
+>
+  <image
+    aria-label="Upwards trend"
+    class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
+  />
+  50.00%
+</span>
+`;
+
+exports[`<Summary /> should style trend red/green 6`] = `
+<image
+  aria-label="Upwards trend"
+  class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
+/>
+`;

@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useRouter } from 'next/router'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
 import {
@@ -34,14 +34,13 @@ const CharacterCard = ({
     charms,
   } = characterData
 
-  const { pathname } = useLocation()
+  const { pathname } = useRouter()
 
   const getBidLabelText = () => {
     if (pathname === routes.BAZAAR_HISTORY) {
       return hasBeenBidded ? 'Auction Successful' : 'Auction Failed'
-    } else {
-      return hasBeenBidded ? 'Current Bid' : 'Minimum Bid'
     }
+    return hasBeenBidded ? 'Current Bid' : 'Minimum Bid'
   }
 
   return (
@@ -92,7 +91,7 @@ const CharacterCard = ({
 
         {!!charms.length && (
           <S.CharmWrapper>
-            {charms.map(charm => (
+            {charms.map((charm) => (
               <S.Charm key={charm}>{charm}</S.Charm>
             ))}
           </S.CharmWrapper>

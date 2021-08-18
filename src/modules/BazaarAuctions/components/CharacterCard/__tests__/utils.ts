@@ -9,4 +9,4 @@ export const vocationEnum = {
   '12': 'Paladin',
   '13': 'Sorcerer',
   '14': 'Druid',
-}
+} as Record<string, string>

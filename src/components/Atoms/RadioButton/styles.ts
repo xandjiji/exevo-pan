@@ -7,7 +7,7 @@ export const Radio = styled.div`
   width: 16px;
   height: 16px;
   border-radius: 50%;
-  border: solid 2px ${({ theme }) => theme.colors.separator};
+  border: solid 2px var(--separator);
   transition: box-shadow 0.2s ease-out;
 
   &::after {
@@ -20,7 +20,7 @@ export const Radio = styled.div`
     border-radius: 50%;
     width: 8px;
     height: 8px;
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: var(--primary);
     transition: opacity 0.2s ease-out;
   }
 `
@@ -30,7 +30,7 @@ export const Wrapper = styled.div`
   cursor: pointer;
 
   font-size: 14px;
-  color: ${({ theme }) => theme.colors.onSurface};
+  color: var(--onSurface);
 
   &:hover {
     ${Radio} {

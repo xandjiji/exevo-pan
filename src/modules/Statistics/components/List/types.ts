@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
   title: string
   charactersList: CharacterInfo[]

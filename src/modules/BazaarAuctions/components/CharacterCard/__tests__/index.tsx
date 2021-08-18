@@ -1,6 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
-import { Router } from 'react-router-dom'
-import { createBrowserHistory } from 'history'
+import { useRouter, NextRouter } from 'next/router'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
@@ -15,7 +14,7 @@ import { vocationEnum } from './utils'
 */
 
 const { characterData } = randomDataset()
-const currentHistory = createBrowserHistory()
+const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
 
 describe('<CharacterCard />', () => {
   test('should write every info correctly', async () => {
@@ -46,11 +45,10 @@ describe('<CharacterCard />', () => {
       ),
     ).toBeInTheDocument()
     expect(
-      screen.getByLabelText(
+      screen.getByText(
         character.transfer
           ? 'Regular World Transfer available'
           : 'Regular World Transfer NOT available',
-        { selector: 'svg' },
       ),
     ).toBeInTheDocument()
     expect(
@@ -71,10 +69,10 @@ describe('<CharacterCard />', () => {
     expect(
       screen.getByText(`Imbuements: ${character.imbuements.length}/23`),
     ).toBeInTheDocument()
-    character.imbuements.forEach(imbuement => {
+    character.imbuements.forEach((imbuement) => {
       expect(screen.getByText(imbuement)).toBeInTheDocument()
     })
-    character.charms.forEach(charm => {
+    character.charms.forEach((charm) => {
       expect(screen.getByText(charm)).toBeInTheDocument()
     })
 
@@ -82,13 +80,11 @@ describe('<CharacterCard />', () => {
   })
 
   test(`should render a different bid label for ${routes.BAZAAR_HISTORY} route`, async () => {
-    currentHistory.push(routes.BAZAAR_HISTORY)
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.BAZAAR_HISTORY,
+    } as NextRouter)
     const character = characterData[1]
-    renderWithProviders(
-      <Router history={currentHistory}>
-        <CharacterCard characterData={character} />
-      </Router>,
-    )
+    renderWithProviders(<CharacterCard characterData={character} />)
     expect(
       screen.getByText(
         character.hasBeenBidded ? 'Auction Successful' : 'Auction Failed',

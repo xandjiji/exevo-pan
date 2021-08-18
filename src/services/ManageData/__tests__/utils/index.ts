@@ -93,6 +93,10 @@ describe('utils/', () => {
   })
 
   describe('checkAndHash()', () => {
+    beforeEach(() => {
+      mockedGetFromLocalStorage.mockClear()
+    })
+
     test('on equal hash, should fetch and return data from DB', async () => {
       mockedGetFromLocalStorage.mockReturnValueOnce(111111)
       mockedGet.mockResolvedValue(
