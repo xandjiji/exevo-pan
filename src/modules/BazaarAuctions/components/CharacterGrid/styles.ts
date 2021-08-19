@@ -62,10 +62,6 @@ export const IconStyling = css`
 export const FilterIcon = styled(FilterIconSvg)`
   ${IconStyling}
 `
-export const SortIcon = styled(SortIconSvg)`
-  ${Clickable}
-  ${IconStyling}
-`
 export const FilterButton = styled.button`
   position: relative;
   ${IconStyling}
