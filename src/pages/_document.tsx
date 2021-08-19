@@ -44,7 +44,6 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://static.tibia.com/" />
           <link rel="preconnect" href="https://exevopan-data.netlify.app/" />
           <link
