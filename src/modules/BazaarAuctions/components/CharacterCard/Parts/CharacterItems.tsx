@@ -26,7 +26,7 @@ const CharacterItems = ({
   ...props
 }: CharacterItemsProps): JSX.Element => (
   <ItemWrapper {...props}>
-    {items.map(item => (
+    {items.map((item) => (
       <SpritePortrait
         key={uuidv4()}
         alt="Featured item"
