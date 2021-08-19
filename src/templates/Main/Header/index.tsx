@@ -58,7 +58,7 @@ const Header = (): JSX.Element => {
         </S.Ul>
       </S.Nav>
 
-      <S.RightWrapper suppressHydrationWarning={true}>
+      <S.RightWrapper suppressHydrationWarning>
         {process.browser && (
           <Switch
             active={currentTheme === 'dark-theme'}
