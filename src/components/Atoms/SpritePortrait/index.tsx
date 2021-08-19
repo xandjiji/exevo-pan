@@ -18,20 +18,24 @@ const SpritePortrait = ({
 
   return (
     <S.Wrapper ref={ref as React.RefObject<HTMLDivElement>}>
-      <S.Img
-        src={currentSrc}
-        aria-hidden={!currentSrc || !loaded}
-        hidden={!currentSrc}
-        onLoad={() => setLoaded(true)}
-        onError={() => setLoaded(false)}
-        {...props}
-      />
-      <S.Spinner
-        role="alert"
-        aria-label="Loading indicator"
-        aria-busy="true"
-        aria-hidden={loaded}
-      />
+      {src && (
+        <S.Img
+          src={currentSrc}
+          aria-hidden={!currentSrc || !loaded}
+          hidden={!currentSrc}
+          onLoad={() => setLoaded(true)}
+          onError={() => setLoaded(false)}
+          {...props}
+        />
+      )}
+
+      {src && !loaded && (
+        <S.Spinner
+          role="alert"
+          aria-label="Loading indicator"
+          aria-busy="true"
+        />
+      )}
     </S.Wrapper>
   )
 }
