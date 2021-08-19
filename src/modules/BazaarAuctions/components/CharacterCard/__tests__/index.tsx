@@ -63,9 +63,6 @@ describe('<CharacterCard />', () => {
     expect(screen.queryAllByAltText('Featured item')).toHaveLength(
       character.items.length,
     )
-    expect(screen.queryAllByAltText('No item')).toHaveLength(
-      4 - character.items.length,
-    )
     expect(
       screen.getByText(`Imbuements: ${character.imbuements.length}/23`),
     ).toBeInTheDocument()
