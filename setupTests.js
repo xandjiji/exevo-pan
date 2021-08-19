@@ -17,4 +17,6 @@ Object.defineProperty(window, 'matchMedia', {
     })),
 })
 
+jest.mock('hooks/useOnScreen', () => jest.fn().mockReturnValue(true))
+
 expect.extend(toHaveNoViolations);
