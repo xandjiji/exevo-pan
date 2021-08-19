@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
+import { endpoints, paths } from 'Constants'
 
 export default function Home(): JSX.Element {
   return (
@@ -28,19 +29,19 @@ export default function Home(): JSX.Element {
 
         <link
           rel="preload"
-          href="https://exevopan-data.netlify.app/MinifiedCharacterData.json"
+          href={`${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`}
           as="fetch"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="https://exevopan-data.netlify.app/ServerData.json"
+          href={`${endpoints.BASE_DATA}${paths.SERVER_DATA}`}
           as="fetch"
           crossOrigin="anonymous"
         />
         <link
           rel="preload"
-          href="https://exevopan-data.netlify.app/ItemsData.json"
+          href={`${endpoints.BASE_DATA}${paths.ITEMS_DATA}`}
           as="fetch"
           crossOrigin="anonymous"
         />
