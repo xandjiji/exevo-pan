@@ -25,6 +25,25 @@ export default function Home(): JSX.Element {
           content="Filter and search for Tibia characters on the official Char Bazaar!"
         />
         <meta property="og:type" content="website" />
+
+        <link
+          rel="preload"
+          href="https://exevopan-data.netlify.app/MinifiedCharacterData.json"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="https://exevopan-data.netlify.app/ServerData.json"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="https://exevopan-data.netlify.app/ItemsData.json"
+          as="fetch"
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <Main>
