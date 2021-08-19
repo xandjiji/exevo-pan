@@ -62,6 +62,7 @@ export const ExevoPanLogo = styled(Image).attrs({
 export const Nav = styled.nav`
   margin-right: 24px;
   display: flex;
+  flex-shrink: 0;
 `
 
 export const Ul = styled.ul`
