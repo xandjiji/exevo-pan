@@ -27,6 +27,7 @@ export const Head = styled(AlignedFlex)`
   > *:first-child {
     width: 56px;
     height: 56px;
+    flex-shrink: 0;
   }
 `
 
