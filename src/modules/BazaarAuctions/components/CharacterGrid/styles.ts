@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Paginator as BasePaginator } from 'components/Atoms'
 import FilterIconSvg from 'assets/svgs/filter.svg'
-import SortIconSvg from 'assets/svgs/sort.svg'
 import {
   InnerContainer,
   Shadow,
