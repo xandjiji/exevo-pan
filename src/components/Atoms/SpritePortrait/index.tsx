@@ -29,7 +29,7 @@ const SpritePortrait = ({
         />
       )}
 
-      {src && !loaded && (
+      {currentSrc && !loaded && (
         <S.Spinner
           role="alert"
           aria-label="Loading indicator"
