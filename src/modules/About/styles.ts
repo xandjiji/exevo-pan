@@ -44,9 +44,10 @@ export const Section = styled.section`
 export const Paragraph = styled.p`
   font-size: 16px;
   line-height: 1.6;
+  font-weight: 300;
 
   strong {
-    font-weight: 600;
+    font-weight: 400;
   }
 
   a {
@@ -94,7 +95,12 @@ export const Anchor = styled.a`
   letter-spacing: 0.5px;
 
   && {
+    box-shadow: none;
     color: var(--onSurface);
+  }
+
+  &:active {
+    box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
 
   &::before {
@@ -102,6 +108,7 @@ export const Anchor = styled.a`
     margin-right: 2px;
     font-family: 'Courier New', Courier, monospace;
   }
+
   &::after {
     display: none;
   }
