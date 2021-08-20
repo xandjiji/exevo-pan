@@ -37,6 +37,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             <S.Anchor href="#contact-section">contact-channels</S.Anchor>.
           </S.Paragraph>
         </S.Section>
+
         <S.Section>
           <S.H2>About me</S.H2>
           <S.Paragraph>
@@ -69,6 +70,40 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             .
           </S.Paragraph>
         </S.Section>
+
+        <S.Section>
+          <S.H2>Disclaimers</S.H2>
+          <S.Paragraph>
+            <a
+              href="https://www.tibia.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Tibia
+            </a>{' '}
+            is a game made by{' '}
+            <a
+              href="https://www.cipsoft.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CipSoft
+            </a>
+            . All assets presented in this website are copyrighted by them and I
+            don&apos;t own any of it.
+          </S.Paragraph>
+          <S.Paragraph>
+            Most of the data used in this application used the official Tibia
+            website as a source of truth. Despite of that, we can&apos;t
+            guarantee that they are completely accurate and/or up-to-date.
+          </S.Paragraph>
+          <S.Paragraph>
+            We promote that Tibia should be played in a fair and healthy manner.
+            That means we are against cheating, real life harassment and
+            anti-sportsmanship.
+          </S.Paragraph>
+        </S.Section>
+
         <S.Section id="contact-section">
           <S.H2>Contact information</S.H2>
           <S.Ul>
