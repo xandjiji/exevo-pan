@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Image from 'next/image'
-import { InnerContainer, NegativeContainer, Shadow } from 'styles'
+import { InnerContainer, NegativeContainer, Smooth } from 'styles'
 import HeroFood from 'assets/herofood.png'
 
 export const Wrapper = styled.section`
@@ -15,6 +15,8 @@ export const Wrapper = styled.section`
   align-items: center;
   justify-content: center;
   position: relative;
+
+  ${Smooth}
 
   @media (min-width: 768px) {
     padding-top: 96px;
