@@ -8,6 +8,11 @@ export const Wrapper = styled.main`
   ${InnerContainer}
 `
 
+export const BodyLayout = styled.div`
+  margin: 0 auto;
+  max-width: clamp(45ch, 50%, 75ch);
+`
+
 export const SurfaceWrapper = styled.div`
   ${MaterialCard}
   ${InnerContainer}
@@ -16,10 +21,23 @@ export const SurfaceWrapper = styled.div`
 `
 
 export const Section = styled.section`
+  position: relative;
+
   &:not(:last-child) {
-    padding-bottom: 32px;
-    margin-bottom: 32px;
-    border-bottom: solid 1px var(--separator);
+    margin-bottom: 64px;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: calc(100% + 32px);
+      left: 0;
+      width: 30%;
+      min-width: 200px;
+      max-width: 400px;
+      height: 1px;
+      background-color: var(--separator);
+      opacity: 0.7;
+    }
   }
 `
 
@@ -52,14 +70,19 @@ export const Paragraph = styled.p`
       position: absolute;
       top: calc(100% - 1px);
       left: 0;
-      width: 100%;
+      width: 16px;
       height: 1px;
       background-color: var(--primary);
+      opacity: 0.75;
     }
   }
 
   &:not(:last-child) {
     margin-bottom: 16px;
+  }
+
+  [role='img'] {
+    font-size: 19px;
   }
 `
 
