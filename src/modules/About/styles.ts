@@ -41,6 +41,13 @@ export const Section = styled.section`
   }
 `
 
+export const H2 = styled.h2`
+  margin-bottom: 24px;
+  font-size: 32px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+`
+
 export const Paragraph = styled.p`
   font-size: 16px;
   line-height: 1.6;
@@ -116,11 +123,9 @@ export const Anchor = styled.a`
 
 export const Link = styled.a``
 
-export const H2 = styled.h2`
-  margin-bottom: 24px;
-  font-size: 32px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
+export const Character = styled.span`
+  font-weight: 400;
+  color: var(--primary);
 `
 
 export const Ul = styled.ul`

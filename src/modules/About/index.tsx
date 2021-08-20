@@ -1,4 +1,5 @@
-import { Hero } from './components'
+import { Tooltip } from 'components/Organisms'
+import { Hero, KsuTooltip } from './components'
 import * as S from './styles'
 
 const About = (): JSX.Element => (
@@ -43,8 +44,12 @@ const About = (): JSX.Element => (
             UI/UX and design.
           </S.Paragraph>
           <S.Paragraph>
-            My character nickname is Ksu. Though I don&apos;t play the game much
-            anymore, eventually you may find me online as a rare boss spawn{' '}
+            My character nickname is{' '}
+            <Tooltip content={<KsuTooltip />}>
+              <S.Character>Ksu</S.Character>
+            </Tooltip>
+            . Though I don&apos;t play the game much anymore, eventually you may
+            find me online as a rare boss spawn{' '}
             <span role="img" aria-label="tongue">
               😋
             </span>
