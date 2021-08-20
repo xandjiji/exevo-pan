@@ -8,8 +8,8 @@ export const Wrapper = styled.section`
   ${NegativeContainer}
   padding-top: 64px;
   padding-bottom: 64px;
-  background-color: var(--darkerPrimary);
-  color: var(--onPrimary);
+  background-color: var(--surface);
+  color: var(--onSurface);
 
   display: flex;
   align-items: center;
@@ -72,6 +72,6 @@ export const Subtitle = styled.span`
 
   @media (min-width: 768px) {
     font-size: 18px;
-    margin-left: 134px;
+    margin-left: 138px;
   }
 `
