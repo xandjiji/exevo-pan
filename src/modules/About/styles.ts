@@ -21,7 +21,10 @@ export const Column = styled.section`
   ${MaterialCard}
 `
 
-export const H1 = styled.h1``
+export const H1 = styled.h1`
+  font-size: 32px;
+  text-align: center;
+`
 
 export const Paragraph = styled.p``
 
@@ -50,6 +53,7 @@ export const Li = styled.li`
 
   ${Link} {
     color: var(--onPrimary);
+    line-height: 1.6;
     transition: transform 0.2s ease-out;
 
     &:hover {
