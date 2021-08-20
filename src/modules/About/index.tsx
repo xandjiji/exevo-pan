@@ -1,5 +1,5 @@
 import { Tooltip } from 'components/Organisms'
-import { Hero, KsuTooltip } from './components'
+import { Hero, KsuTooltip, Footer } from './components'
 import * as S from './styles'
 import { KsuData } from './types'
 
@@ -141,6 +141,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
         </S.Section>
       </S.SurfaceWrapper>
     </S.BodyLayout>
+    <Footer />
   </S.Wrapper>
 )
 

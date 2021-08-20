@@ -10,6 +10,7 @@ export const Wrapper = styled.main`
 
 export const BodyLayout = styled.div`
   margin: 0 auto;
+  margin-bottom: 32px;
   max-width: clamp(45ch, 50%, 75ch);
 `
 
