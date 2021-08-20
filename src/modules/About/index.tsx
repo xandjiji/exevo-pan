@@ -44,7 +44,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             based in Brazil. My main interests orbits around web applications,
             UI/UX and design.
           </S.Paragraph>
-          <S.Paragraph>
+          <S.Paragraph as="span">
             My character nickname is{' '}
             <Tooltip content={<KsuTooltip characterData={characterData} />}>
               <S.Character>Ksu</S.Character>

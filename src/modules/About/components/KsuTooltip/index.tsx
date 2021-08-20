@@ -9,7 +9,7 @@ const KsuTooltip = ({
   const { name, level, vocation, world } = characterData.characters.data
   return (
     <S.Wrapper>
-      <S.SpritePortrait src="https://static.tibia.com/images/charactertrade/outfits/152_3.gif" />
+      <S.SpritePortrait src="https://static.tibia.com/images/charactertrade/outfits/128_0.gif" />
       <div>
         <S.Nickname>
           {name}
