@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
+import AboutContent from 'modules/About'
 
 export default function About(): JSX.Element {
   return (
@@ -26,7 +27,9 @@ export default function About(): JSX.Element {
         <meta property="og:type" content="website" />
       </Head>
 
-      <Main>{/* @ ToDo: add module */}</Main>
+      <Main>
+        <AboutContent />
+      </Main>
     </div>
   )
 }
