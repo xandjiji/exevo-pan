@@ -6,27 +6,28 @@ import LinkedinSvg from 'assets/svgs/linkedin.svg'
 
 export const Wrapper = styled.main`
   ${InnerContainer}
-  padding-top: 16px;
-  padding-bottom: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 
-  @media (min-width: 768px) {
-    flex-direction: unset;
+  > * {
+    margin-bottom: 16px;
   }
 `
 
-export const Column = styled.section`
+export const SurfaceWrapper = styled.div`
   ${MaterialCard}
+  ${InnerContainer}
+  padding-top: 32px;
+  padding-bottom: 32px;
+
+  display: grid;
+  grid-gap: 48px;
 `
 
-export const H1 = styled.h1`
-  font-size: 32px;
-  text-align: center;
-`
+export const Section = styled.section``
 
-export const Paragraph = styled.p``
+export const Paragraph = styled.p`
+  font-size: 16px;
+  line-height: 1.6;
+`
 
 export const Link = styled.a``
 
@@ -38,6 +39,7 @@ export const H2 = styled.h2`
 `
 
 export const Ul = styled.ul`
+  width: fit-content;
   > *:not(:last-child) {
     margin-bottom: 8px;
   }

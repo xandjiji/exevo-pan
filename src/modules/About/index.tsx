@@ -1,17 +1,14 @@
+import { Hero } from './components'
 import * as S from './styles'
 
-const About = (): JSX.Element => {
-  console.log(9)
-  return (
-    <S.Wrapper>
-      <S.Column>
-        <S.H1>About us</S.H1>
+const About = (): JSX.Element => (
+  <S.Wrapper>
+    <Hero />
+    <S.SurfaceWrapper>
+      <S.Section>
         <S.Paragraph>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam nec
-          porttitor ipsum. Curabitur id tempor libero, vel luctus quam.
-          Pellentesque vulputate iaculis justo in lobortis. Integer ultrices
-          justo vel interdum tristique. In facilisis pulvinar vulputate. Nullam
-          tristique lorem quis ex efficitur, ut aliquet risus rhoncus.
+          My name is Alexandre Regali Seleghim, I&apos;m a front-end developer
+          based in Brazil.
         </S.Paragraph>
         <S.Paragraph>
           Donec eget ultrices leo. Curabitur non tincidunt purus. Sed ornare
@@ -21,10 +18,9 @@ const About = (): JSX.Element => {
           nibh. Sed tristique, nisi nec tincidunt euismod, arcu lorem commodo
           eros, et rutrum turpis justo id eros.
         </S.Paragraph>
-      </S.Column>
-      <S.Column>
+      </S.Section>
+      <S.Section>
         <S.H2>Contact information</S.H2>
-
         <S.Ul>
           <S.Li>
             <S.MailIcon />
@@ -57,9 +53,9 @@ const About = (): JSX.Element => {
             </S.Link>
           </S.Li>
         </S.Ul>
-      </S.Column>
-    </S.Wrapper>
-  )
-}
+      </S.Section>
+    </S.SurfaceWrapper>
+  </S.Wrapper>
+)
 
 export default About
