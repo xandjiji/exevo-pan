@@ -29,6 +29,11 @@ const GlobalStyles = createGlobalStyle`
     font: 400 16px Roboto, sans-serif;
     background-color: var(--background);
     color: var(--onSurface);
+
+    *::selection {
+        color: var(--onSurface);
+        background: var(--primaryVariant);
+    }
   }
 
   svg {
