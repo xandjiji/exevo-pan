@@ -1,8 +1,9 @@
 import { Tooltip } from 'components/Organisms'
 import { Hero, KsuTooltip } from './components'
 import * as S from './styles'
+import { KsuData } from './types'
 
-const About = (): JSX.Element => (
+const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
   <S.Wrapper>
     <Hero />
     <S.BodyLayout>
@@ -45,7 +46,7 @@ const About = (): JSX.Element => (
           </S.Paragraph>
           <S.Paragraph>
             My character nickname is{' '}
-            <Tooltip content={<KsuTooltip />}>
+            <Tooltip content={<KsuTooltip characterData={characterData} />}>
               <S.Character>Ksu</S.Character>
             </Tooltip>
             . Though I don&apos;t play the game much anymore, eventually you may

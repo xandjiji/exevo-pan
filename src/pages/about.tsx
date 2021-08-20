@@ -1,8 +1,14 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import AboutContent from 'modules/About'
+import { KsuData } from 'modules/About/types'
+import { GetStaticProps } from 'next'
 
-export default function About(): JSX.Element {
+export default function About({
+  characterData,
+}: {
+  characterData: KsuData
+}): JSX.Element {
   return (
     <div>
       <Head>
@@ -28,8 +34,18 @@ export default function About(): JSX.Element {
       </Head>
 
       <Main>
-        <AboutContent />
+        <AboutContent characterData={characterData} />
       </Main>
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const result = await fetch('https://api.tibiadata.com/v2/characters/Ksu.json')
+
+  const ksuData = (await result.json()) as KsuData
+
+  return {
+    props: { characterData: ksuData },
+  }
 }
