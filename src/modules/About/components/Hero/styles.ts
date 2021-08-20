@@ -8,14 +8,13 @@ export const Wrapper = styled.section`
   ${NegativeContainer}
   padding-top: 64px;
   padding-bottom: 64px;
-  background-color: var(--surface);
+  background-color: var(--background);
   color: var(--onSurface);
 
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
-  ${Shadow}
 
   @media (min-width: 768px) {
     padding-top: 96px;
@@ -30,6 +29,7 @@ export const HeroImageWrapper = styled.div`
   transform: translate(-100%, -50%);
   width: 162px;
   height: 162px;
+  user-select: none;
 
   @media (min-width: 768px) {
     width: unset;
@@ -38,9 +38,8 @@ export const HeroImageWrapper = styled.div`
 `
 
 export const HeroImage = styled(Image).attrs({ src: HeroFood })`
-  filter: grayscale(0.9);
-  opacity: 0.1;
-  user-select: none;
+  filter: grayscale(0.85);
+  opacity: 0.15;
 `
 
 export const TitleWrapper = styled.div`
