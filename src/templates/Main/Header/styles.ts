@@ -6,7 +6,7 @@ import MarketIconSvg from 'assets/svgs/market.svg'
 import HistoryIconSvg from 'assets/svgs/history.svg'
 import StatisticsIconSvg from 'assets/svgs/statistics.svg'
 import AboutIconSvg from 'assets/svgs/about.svg'
-import { InnerContainer, CustomScrollbar, Clickable } from 'styles'
+import { InnerContainer, CustomScrollbar, Clickable, Shadow } from 'styles'
 
 export const Wrapper = styled.header`
   position: relative;
@@ -36,6 +36,8 @@ export const Wrapper = styled.header`
     );
     pointer-events: none;
   }
+  ${Shadow}
+  z-index: 1;
 `
 
 export const LogoWrapper = styled.a`
