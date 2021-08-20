@@ -5,6 +5,7 @@ import MoonIconSvg from 'assets/svgs/moon.svg'
 import MarketIconSvg from 'assets/svgs/market.svg'
 import HistoryIconSvg from 'assets/svgs/history.svg'
 import StatisticsIconSvg from 'assets/svgs/statistics.svg'
+import AboutIconSvg from 'assets/svgs/about.svg'
 import { InnerContainer, CustomScrollbar, Clickable } from 'styles'
 
 export const Wrapper = styled.header`
@@ -118,5 +119,9 @@ export const HistoryIcon = styled(HistoryIconSvg)`
 `
 
 export const StatisticsIcon = styled(StatisticsIconSvg)`
+  ${NavIconStyle}
+`
+
+export const AboutIcon = styled(AboutIconSvg)`
   ${NavIconStyle}
 `

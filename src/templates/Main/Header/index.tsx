@@ -55,6 +55,14 @@ const Header = (): JSX.Element => {
               </S.A>
             </Link>
           </S.Li>
+          <S.Li>
+            <Link href={routes.ABOUT}>
+              <S.A>
+                <S.AboutIcon />
+                <S.H2>About</S.H2>
+              </S.A>
+            </Link>
+          </S.Li>
         </S.Ul>
       </S.Nav>
 
