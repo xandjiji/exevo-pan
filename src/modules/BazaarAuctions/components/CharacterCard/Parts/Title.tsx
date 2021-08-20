@@ -7,7 +7,6 @@ interface TitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
 }
 
 const Nickname = styled.p`
-  margin-bottom: -3px;
   display: flex;
   align-items: center;
   font-size: 16px;
