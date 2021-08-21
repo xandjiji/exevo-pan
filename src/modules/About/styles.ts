@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { InnerContainer, MaterialCard, Smooth } from 'styles'
+import { InnerContainer, MaterialCard } from 'styles'
 import MailSvg from 'assets/svgs/mail.svg'
 import GithubSvg from 'assets/svgs/github.svg'
 import LinkedinSvg from 'assets/svgs/linkedin.svg'
@@ -48,8 +48,6 @@ export const Anchor = styled.a`
   }
 `
 
-export const Link = styled.a``
-
 export const Character = styled.span`
   font-weight: 400;
   color: var(--primary);
@@ -71,7 +69,7 @@ export const Li = styled.li`
   font-size: 12px;
   box-shadow: none;
 
-  ${Link} {
+  a {
     color: var(--onPrimary);
     line-height: 1.6;
     transition: transform 0.2s ease-out;

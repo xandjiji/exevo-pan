@@ -105,33 +105,33 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           <S.Ul>
             <S.Li>
               <S.MailIcon />
-              <S.Link
+              <a
                 href="mailto:xandjiji@gmail.com"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 xandjiji@gmail.com
-              </S.Link>
+              </a>
             </S.Li>
             <S.Li>
               <S.GithubIcon />
-              <S.Link
+              <a
                 href="https://github.com/xandjiji"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 https://github.com/xandjiji
-              </S.Link>
+              </a>
             </S.Li>
             <S.Li>
               <S.LinkedinIcon />
-              <S.Link
+              <a
                 href="https://www.linkedin.com/in/xandjiji"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 https://www.linkedin.com/in/xandjiji
-              </S.Link>
+              </a>
             </S.Li>
           </S.Ul>
         </Section>
