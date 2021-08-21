@@ -24,17 +24,19 @@ export const SpritePortrait = styled(BaseSpriteProtrait)`
 `
 
 export const Nickname = styled.p`
-  margin-bottom: -1px;
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--primary);
-  filter: brightness(130%);
+  &&& {
+    margin-bottom: -1px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--primary);
+    filter: brightness(130%);
 
-  a {
-    margin-left: 4px;
-    font-size: 0;
+    a {
+      margin-left: 4px;
+      font-size: 0;
+    }
   }
 `
 
@@ -54,8 +56,10 @@ export const ExternalIcon = styled(ExternalIconSvg)`
 `
 
 export const Description = styled.span`
-  font-size: 12px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  color: var(--onSurface);
+  && {
+    font-size: 12px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    color: var(--onSurface);
+  }
 `
