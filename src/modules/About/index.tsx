@@ -8,7 +8,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
     <Hero />
     <S.BodyLayout>
       <S.SurfaceWrapper>
-        <Section title="Exevo Pan">
+        <Section id="exevo-pan-section" title="Exevo Pan">
           <p>
             Our goal is to help the Tibia community to grow, providing useful
             tools with the best user experience possible. This is a long-term
@@ -37,7 +37,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           </p>
         </Section>
 
-        <Section title="About me">
+        <Section id="about-me-section" title="About me">
           <p>
             My name is Alexandre Regali Seleghim, I&apos;m a front-end developer
             based in Brazil. My main interests orbits around web applications,
@@ -69,7 +69,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           </p>
         </Section>
 
-        <Section title="Disclaimers">
+        <Section id="disclaimer-section" title="Disclaimers">
           <p>
             <a
               href="https://www.tibia.com/"
@@ -101,7 +101,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           </p>
         </Section>
 
-        <Section title="Contact information" id="contact-section">
+        <Section id="contact-section" title="Contact information">
           <S.Ul>
             <S.Li>
               <S.MailIcon />
