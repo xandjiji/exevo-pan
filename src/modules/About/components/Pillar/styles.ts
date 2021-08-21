@@ -1,15 +1,17 @@
 import styled from 'styled-components'
 
 export const Aside = styled.aside`
-  position: sticky;
-  top: 60px;
-  left: 0;
+  @media (min-width: 768px) {
+    position: sticky;
+    top: 60px;
+    left: 0;
+  }
 `
 
 export const Nav = styled.nav`
   position: absolute;
   right: 100%;
-  margin-right: 32px;
+  margin-right: 24px;
 `
 
 export const Title = styled.h3`
@@ -29,7 +31,17 @@ export const Ul = styled.ul`
 `
 
 export const Li = styled.li`
-  font-size: 12px;
-  font-weight: 300;
-  color: var(--onSurface);
+  a {
+    font-size: 12px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: var(--onSurface);
+    white-space: nowrap;
+  }
+
+  &::before {
+    content: '·';
+    margin-right: 6px;
+    font-weight: 700;
+  }
 `
