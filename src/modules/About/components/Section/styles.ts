@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Smooth } from 'styles'
+import { Smooth, Clickable } from 'styles'
 import AnchorSvg from 'assets/svgs/anchor.svg'
 
 export const Section = styled.section`
@@ -87,14 +87,14 @@ export const Title = styled.h2`
 export const AnchorIcon = styled(AnchorSvg).attrs({
   'aria-label': 'Copy link',
 })`
+  padding: 2px;
   margin-top: 1px;
   margin-left: 8px;
+  border-radius: 4px;
   fill: var(--separator);
   cursor: pointer;
-  transform: rotate(-45deg);
-  ${Smooth}
-
+  ${Clickable}/* 
   &:not(:hover) {
     opacity: 0.7;
-  }
+  } */
 `
