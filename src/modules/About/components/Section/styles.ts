@@ -93,8 +93,5 @@ export const AnchorIcon = styled(AnchorSvg).attrs({
   border-radius: 4px;
   fill: var(--separator);
   cursor: pointer;
-  ${Clickable}/* 
-  &:not(:hover) {
-    opacity: 0.7;
-  } */
+  ${Clickable}
 `
