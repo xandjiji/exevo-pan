@@ -1,5 +1,5 @@
 import { Tooltip } from 'components/Organisms'
-import { Hero, KsuTooltip, Footer } from './components'
+import { Hero, Section, KsuTooltip, Footer } from './components'
 import * as S from './styles'
 import { KsuData } from './types'
 
@@ -8,17 +8,16 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
     <Hero />
     <S.BodyLayout>
       <S.SurfaceWrapper>
-        <S.Section>
-          <S.H2>Exevo Pan</S.H2>
-          <S.Paragraph>
+        <Section title="Exevo Pan">
+          <p>
             Our goal is to help the Tibia community to grow, providing useful
             tools with the best user experience possible. This is a long-term
             project and we have many more features in our roadmap!{' '}
             <span role="img" aria-label="smiling">
               😄
             </span>
-          </S.Paragraph>
-          <S.Paragraph>
+          </p>
+          <p>
             This website is{' '}
             <strong>100% free and open-source and unlicensed</strong>. This
             means that not only you can contribute or fork this project, but we
@@ -31,21 +30,20 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
               here
             </a>
             , in the official GitHub repository.
-          </S.Paragraph>
-          <S.Paragraph>
+          </p>
+          <p>
             Feel free to give us any feedback through our{' '}
             <S.Anchor href="#contact-section">contact-channels</S.Anchor>.
-          </S.Paragraph>
-        </S.Section>
+          </p>
+        </Section>
 
-        <S.Section>
-          <S.H2>About me</S.H2>
-          <S.Paragraph>
+        <Section title="About me">
+          <p>
             My name is Alexandre Regali Seleghim, I&apos;m a front-end developer
             based in Brazil. My main interests orbits around web applications,
             UI/UX and design.
-          </S.Paragraph>
-          <S.Paragraph as="span">
+          </p>
+          <span>
             My character nickname is{' '}
             <Tooltip content={<KsuTooltip characterData={characterData} />}>
               <S.Character>Ksu</S.Character>
@@ -56,9 +54,9 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
               😋
             </span>
             .
-          </S.Paragraph>
+          </span>
 
-          <S.Paragraph>
+          <p>
             Fun fact: I&apos;m also the same creator of{' '}
             <a
               href="https://www.youtube.com/channel/UC2srmu0R5yNikl3cnfqcomQ"
@@ -68,12 +66,11 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
               TibiaClips
             </a>
             .
-          </S.Paragraph>
-        </S.Section>
+          </p>
+        </Section>
 
-        <S.Section>
-          <S.H2>Disclaimers</S.H2>
-          <S.Paragraph>
+        <Section title="Disclaimers">
+          <p>
             <a
               href="https://www.tibia.com/"
               target="_blank"
@@ -91,21 +88,20 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             </a>
             . All assets presented in this website are copyrighted by them and I
             don&apos;t own any of it.
-          </S.Paragraph>
-          <S.Paragraph>
+          </p>
+          <p>
             Most of the data used in this application used the official Tibia
             website as a source of truth. Despite of that, we can&apos;t
             guarantee that they are completely accurate and/or up-to-date.
-          </S.Paragraph>
-          <S.Paragraph>
+          </p>
+          <p>
             We promote that Tibia should be played in a fair and healthy manner.
             That means we are against cheating, real life harassment and
             anti-sportsmanship.
-          </S.Paragraph>
-        </S.Section>
+          </p>
+        </Section>
 
-        <S.Section id="contact-section">
-          <S.H2>Contact information</S.H2>
+        <Section title="Contact information" id="contact-section">
           <S.Ul>
             <S.Li>
               <S.MailIcon />
@@ -138,7 +134,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
               </S.Link>
             </S.Li>
           </S.Ul>
-        </S.Section>
+        </Section>
       </S.SurfaceWrapper>
     </S.BodyLayout>
     <Footer />
