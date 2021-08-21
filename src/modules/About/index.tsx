@@ -1,5 +1,5 @@
 import { Tooltip } from 'components/Organisms'
-import { Hero, Section, KsuTooltip, Footer } from './components'
+import { Hero, Pillar, Section, KsuTooltip, Footer } from './components'
 import * as S from './styles'
 import { KsuData } from './types'
 
@@ -7,6 +7,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
   <S.Wrapper>
     <Hero />
     <S.BodyLayout>
+      <Pillar />
       <S.SurfaceWrapper>
         <Section id="exevo-pan-section" title="Exevo Pan">
           <p>
