@@ -52,6 +52,7 @@ export const Ul = styled.ul`
   margin: -8px 0;
   display: flex;
   overflow: auto;
+  scroll-behavior: smooth;
   ${CustomScrollbar}
 
   > *:not(:last-child) {

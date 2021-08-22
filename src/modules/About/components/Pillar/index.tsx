@@ -22,7 +22,15 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
         .sort((a, b) => Math.abs(a.relativeToTop) - Math.abs(b.relativeToTop))
         .shift()
 
-      if (mostCentered) setHighlightedId(mostCentered.element?.id)
+      if (mostCentered) {
+        const { element } = mostCentered
+        const navElement = document.getElementById(`${element?.id}-nav`)
+
+        navElement?.scrollIntoView({
+          block: 'nearest',
+        })
+        setHighlightedId(element?.id)
+      }
     }, 250)
 
     handleScroll()
@@ -42,6 +50,7 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
           {sections.map((sectionItem) => (
             <S.Li
               key={sectionItem.id}
+              id={`${sectionItem.id}-nav`}
               aria-current={
                 highlightedId && highlightedId === sectionItem.id
                   ? 'step'
