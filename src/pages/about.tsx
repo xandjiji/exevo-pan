@@ -1,9 +1,20 @@
 import Head from 'next/head'
-import { Main } from 'templates'
+import styled from 'styled-components'
+import { Main as BaseMain } from 'templates'
 import AboutContent from 'modules/About'
 import { KsuData } from 'modules/About/types'
 import { GetStaticProps } from 'next'
 import { endpoints } from 'Constants'
+
+const Main = styled(BaseMain)`
+  header {
+    position: fixed;
+  }
+
+  main {
+    margin-top: 60px;
+  }
+`
 
 export default function About({
   characterData,

@@ -6,7 +6,6 @@ import LinkedinSvg from 'assets/svgs/linkedin.svg'
 
 export const Wrapper = styled.main`
   ${InnerContainer}
-  scroll-padding-top: 104px;
 `
 
 export const BodyLayout = styled.div`
