@@ -13,7 +13,7 @@ const Main = styled(BaseMain)`
 
   main {
     margin-top: 60px;
-    scroll-padding-top: 60px;
+    scroll-padding-top: 104px;
   }
 
   @media (min-width: 768px) {
