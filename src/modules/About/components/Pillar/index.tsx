@@ -13,16 +13,16 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
       ) ?? []
 
     const handleScroll = debounce(() => {
-      const { element: mostCentered } = sectionElements
+      const mostCentered = sectionElements
         .map((element) => ({
           element,
           relativeToTop: (element as Element).getBoundingClientRect().top - 60,
         }))
         .filter((element) => element.relativeToTop >= 0)
         .sort((a, b) => Math.abs(a.relativeToTop) - Math.abs(b.relativeToTop))
-        .shift() as { element: Element }
+        .shift()
 
-      setHighlightedId(mostCentered.id)
+      if (mostCentered) setHighlightedId(mostCentered.element?.id)
     }, 250)
 
     handleScroll()
