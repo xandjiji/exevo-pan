@@ -7,7 +7,6 @@ interface TitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
 }
 
 const Nickname = styled.p`
-  margin-bottom: -3px;
   display: flex;
   align-items: center;
   font-size: 16px;
@@ -38,7 +37,7 @@ const Title = ({
     <a
       href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${characterId}&source=overview`}
       target="_blank"
-      rel="noreferrer"
+      rel="noreferrer noopener"
     >
       <ExternalIcon />
       Go to character page

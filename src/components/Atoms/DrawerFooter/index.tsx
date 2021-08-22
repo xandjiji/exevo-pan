@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { links } from 'Constants'
 import * as S from './styles'
 
 const DrawerFooter = ({
@@ -6,18 +7,18 @@ const DrawerFooter = ({
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => (
   <S.Wrapper {...props}>
     <S.RepositoryLink
-      href="https://github.com/xandjiji/exevo-pan"
+      href={links.GITHUB_REPOSITORY}
       target="_blank"
-      rel="noreferrer"
+      rel="noreferrer noopener external"
     >
       <S.GithubIcon />
       Go to this repository
     </S.RepositoryLink>
     made by
     <S.ProfileLink
-      href="https://github.com/xandjiji"
+      href={links.GITHUB_PROFILE}
       target="_blank"
-      rel="noreferrer"
+      rel="noopener noreferrer author external"
     >
       xandjiji
     </S.ProfileLink>

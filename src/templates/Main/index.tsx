@@ -1,12 +1,9 @@
 import Header from './Header'
 import * as S from './styles'
+import { MainProps } from './types'
 
-const MasterLayout = ({
-  children,
-}: {
-  children: React.ReactNode
-}): JSX.Element => (
-  <S.Wrapper>
+const MasterLayout = ({ children, ...props }: MainProps): JSX.Element => (
+  <S.Wrapper {...props}>
     <Header />
     {children}
   </S.Wrapper>

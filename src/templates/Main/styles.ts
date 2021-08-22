@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
     height: calc(100vh - 60px);
     overflow: auto;
     background-color: var(--background);
+    scroll-behavior: smooth;
     ${CustomScrollbar}
     ${Smooth}
   }

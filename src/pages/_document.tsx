@@ -7,7 +7,7 @@ import Document, {
   NextScript,
 } from 'next/document'
 import { ServerStyleSheet } from 'styled-components'
-import { google } from 'Constants'
+import { endpoints, google } from 'Constants'
 
 export default class MyDocument extends Document {
   static async getInitialProps(
@@ -45,11 +45,8 @@ export default class MyDocument extends Document {
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
           <link rel="preconnect" href="https://static.tibia.com/" />
-          <link rel="preconnect" href="https://exevopan-data.netlify.app/" />
-          <link
-            rel="preconnect"
-            href="https://exevopan-history-data.netlify.app/"
-          />
+          <link rel="preconnect" href={endpoints.BASE_DATA} />
+          <link rel="preconnect" href={endpoints.BASE_HISTORY_DATA} />
 
           <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700&display=swap"

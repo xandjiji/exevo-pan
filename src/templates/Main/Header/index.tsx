@@ -13,12 +13,14 @@ const heading = {
     'Top levels, highest skills and biggests bids on Tibia Char Bazzar!',
 }
 
-const Header = (): JSX.Element => {
+const Header = ({
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const { currentTheme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
 
   return (
-    <S.Wrapper>
+    <S.Wrapper {...props}>
       <S.Nav>
         <NextLink href={routes.HOME}>
           <S.LogoWrapper>
@@ -52,6 +54,14 @@ const Header = (): JSX.Element => {
               <S.A>
                 <S.StatisticsIcon />
                 <S.H2>Statistics</S.H2>
+              </S.A>
+            </Link>
+          </S.Li>
+          <S.Li>
+            <Link href={routes.ABOUT}>
+              <S.A>
+                <S.AboutIcon />
+                <S.H2>About</S.H2>
               </S.A>
             </Link>
           </S.Li>

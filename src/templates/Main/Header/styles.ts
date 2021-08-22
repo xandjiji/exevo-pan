@@ -5,10 +5,14 @@ import MoonIconSvg from 'assets/svgs/moon.svg'
 import MarketIconSvg from 'assets/svgs/market.svg'
 import HistoryIconSvg from 'assets/svgs/history.svg'
 import StatisticsIconSvg from 'assets/svgs/statistics.svg'
-import { InnerContainer, CustomScrollbar, Clickable } from 'styles'
+import AboutIconSvg from 'assets/svgs/about.svg'
+import { InnerContainer, CustomScrollbar, Clickable, Shadow } from 'styles'
 
 export const Wrapper = styled.header`
-  position: relative;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 70;
   width: 100%;
   height: 60px;
   display: flex;
@@ -19,6 +23,7 @@ export const Wrapper = styled.header`
   transition: 0.2s background ease-out;
   ${InnerContainer}
   ${CustomScrollbar}
+  ${Shadow}
 
   &::after {
     content: '';
@@ -118,5 +123,9 @@ export const HistoryIcon = styled(HistoryIconSvg)`
 `
 
 export const StatisticsIcon = styled(StatisticsIconSvg)`
+  ${NavIconStyle}
+`
+
+export const AboutIcon = styled(AboutIconSvg)`
   ${NavIconStyle}
 `
