@@ -8,7 +8,7 @@ const Pillar = ({ sections }: { sections: SectionProps[] }): JSX.Element => (
       <S.Ul>
         {sections.map((sectionItem) => (
           <S.Li>
-            <a key={sectionItem.id} href={sectionItem.id}>
+            <a key={sectionItem.id} href={`#${sectionItem.id}`}>
               {sectionItem.title}
             </a>
           </S.Li>
