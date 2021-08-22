@@ -10,6 +10,7 @@ import { InnerContainer, CustomScrollbar, Clickable, Shadow } from 'styles'
 
 export const Wrapper = styled.header`
   position: relative;
+  z-index: 10;
   width: 100%;
   height: 60px;
   display: flex;
@@ -20,6 +21,7 @@ export const Wrapper = styled.header`
   transition: 0.2s background ease-out;
   ${InnerContainer}
   ${CustomScrollbar}
+  ${Shadow}
 
   &::after {
     content: '';
@@ -36,8 +38,6 @@ export const Wrapper = styled.header`
     );
     pointer-events: none;
   }
-  ${Shadow}
-  z-index: 1;
 `
 
 export const LogoWrapper = styled.a`
