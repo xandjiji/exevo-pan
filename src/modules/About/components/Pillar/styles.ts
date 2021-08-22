@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Smooth } from 'styles'
 
 export const Aside = styled.aside`
   @media (min-width: 768px) {
@@ -37,11 +38,22 @@ export const Li = styled.li`
     line-height: 1.6;
     color: var(--onSurface);
     white-space: nowrap;
+    ${Smooth}
   }
 
   &::before {
     content: '·';
     margin-right: 6px;
     font-weight: 700;
+    color: var(--onSurface);
+    ${Smooth}
+  }
+
+  &[aria-current='step'] {
+    a,
+    &::before {
+      color: var(--primary);
+      filter: brightness(130%);
+    }
   }
 `
