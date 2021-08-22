@@ -19,6 +19,7 @@ export const SurfaceWrapper = styled.div`
   ${InnerContainer}
   padding-top: 32px;
   padding-bottom: 32px;
+  overflow: hidden;
 `
 
 export const Anchor = styled.a`
@@ -63,9 +64,9 @@ export const Ul = styled.ul`
 export const Li = styled.li`
   ${MaterialCard}
   padding: 12px 24px;
-  background-color: var(--primary);
   display: flex;
   align-items: center;
+  background-color: var(--primary);
   font-size: 12px;
   box-shadow: none;
 
