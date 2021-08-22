@@ -3,6 +3,7 @@ import { Main } from 'templates'
 import AboutContent from 'modules/About'
 import { KsuData } from 'modules/About/types'
 import { GetStaticProps } from 'next'
+import { endpoints } from 'Constants'
 
 export default function About({
   characterData,
@@ -41,7 +42,7 @@ export default function About({
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const result = await fetch('https://api.tibiadata.com/v2/characters/Ksu.json')
+  const result = await fetch(`${endpoints.TIBIADATA}/Ksu.json`)
 
   const ksuData = (await result.json()) as KsuData
 
