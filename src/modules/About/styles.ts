@@ -6,6 +6,7 @@ import LinkedinSvg from 'assets/svgs/linkedin.svg'
 
 export const Wrapper = styled.main`
   ${InnerContainer}
+  scroll-padding-top: 104px;
 `
 
 export const BodyLayout = styled.div`
@@ -14,7 +15,7 @@ export const BodyLayout = styled.div`
   max-width: clamp(45ch, 50%, 75ch);
 `
 
-export const SurfaceWrapper = styled.div`
+export const SurfaceWrapper = styled.article`
   ${MaterialCard}
   ${InnerContainer}
   padding-top: 32px;
