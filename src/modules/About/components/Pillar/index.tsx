@@ -1,22 +1,18 @@
 import * as S from './styles'
+import { SectionProps } from '../../types'
 
-const Pillar = (): JSX.Element => (
+const Pillar = ({ sections }: { sections: SectionProps[] }): JSX.Element => (
   <S.Aside>
     <S.Nav>
       <S.Title>Contents</S.Title>
       <S.Ul>
-        <S.Li>
-          <a href="#exevo-pan-section">Exevo Pan</a>
-        </S.Li>
-        <S.Li>
-          <a href="#about-me-section">About me</a>
-        </S.Li>
-        <S.Li>
-          <a href="#disclaimer-section">Disclaimer</a>
-        </S.Li>
-        <S.Li>
-          <a href="#contact-section">Contact information</a>
-        </S.Li>
+        {sections.map((sectionItem) => (
+          <S.Li>
+            <a key={sectionItem.id} href={sectionItem.id}>
+              {sectionItem.title}
+            </a>
+          </S.Li>
+        ))}
       </S.Ul>
     </S.Nav>
   </S.Aside>

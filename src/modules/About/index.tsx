@@ -1,5 +1,6 @@
 import { Tooltip } from 'components/Organisms'
 import { Hero, Pillar, Section, KsuTooltip, Footer } from './components'
+import { sections } from './sections'
 import * as S from './styles'
 import { KsuData } from './types'
 
@@ -7,9 +8,9 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
   <S.Wrapper>
     <Hero />
     <S.BodyLayout>
-      <Pillar />
+      <Pillar sections={Object.values(sections)} />
       <S.SurfaceWrapper>
-        <Section id="exevo-pan-section" title="Exevo Pan">
+        <Section {...sections.EXEVO_PAN}>
           <p>
             Our goal is to help the Tibia community to grow, providing useful
             tools with the best user experience possible. This is a long-term
@@ -34,17 +35,20 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           </p>
           <p>
             Feel free to give us any feedback through our{' '}
-            <S.Anchor href="#contact-section">contact-channels</S.Anchor>.
+            <S.Anchor href={sections.CONTACT_INFORMATION.id}>
+              contact-channels
+            </S.Anchor>
+            .
           </p>
         </Section>
 
-        <Section id="about-me-section" title="About me">
+        <Section {...sections.ABOUT_ME}>
           <p>
             My name is Alexandre Regali Seleghim, I&apos;m a front-end developer
             based in Brazil. My main interests orbits around web applications,
             UI/UX and design.
           </p>
-          <span>
+          <span style={{ display: 'block' }}>
             My character nickname is{' '}
             <Tooltip content={<KsuTooltip characterData={characterData} />}>
               <S.Character>Ksu</S.Character>
@@ -70,7 +74,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           </p>
         </Section>
 
-        <Section id="disclaimer-section" title="Disclaimers">
+        <Section {...sections.DISCLAIMER}>
           <p>
             <a
               href="https://www.tibia.com/"
@@ -102,7 +106,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           </p>
         </Section>
 
-        <Section id="contact-section" title="Contact information">
+        <Section {...sections.CONTACT_INFORMATION}>
           <S.Ul>
             <S.Li>
               <S.MailIcon />

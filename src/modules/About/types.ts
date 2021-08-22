@@ -8,3 +8,8 @@ export type KsuData = {
     }
   }
 }
+
+export type SectionProps = {
+  title: string
+  id: string
+}
