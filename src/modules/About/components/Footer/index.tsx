@@ -1,3 +1,4 @@
+import { links } from 'Constants'
 import * as S from './styles'
 
 const Footer = (): JSX.Element => (
@@ -6,7 +7,7 @@ const Footer = (): JSX.Element => (
       <S.UnlicenseIcon aria-label="Unlicensed" />
       {new Date().getFullYear()} Exevo Pan - made by
       <a
-        href="https://github.com/xandjiji"
+        href={links.GITHUB_PROFILE}
         target="_blank"
         rel="noopener noreferrer"
         style={{ marginLeft: 3 }}
@@ -42,7 +43,7 @@ const Footer = (): JSX.Element => (
     </S.UnlicenseParagraph>
     <S.UnlicenseParagraph>
       For more information, please refer to{' '}
-      <a href="https://unlicense.org" target="_blank" rel="noopener noreferrer">
+      <a href={links.UNLICENSE} target="_blank" rel="noopener noreferrer">
         The Unlicense
       </a>
       .
