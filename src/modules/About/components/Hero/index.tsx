@@ -3,7 +3,7 @@ import * as S from './styles'
 const Hero = (): JSX.Element => (
   <S.Wrapper>
     <S.HeroImageWrapper>
-      <S.HeroImage unoptimized alt="Exevo Pan Logo" />
+      <S.HeroImage unoptimized priority alt="Exevo Pan Logo" />
     </S.HeroImageWrapper>
     <S.TitleWrapper>
       <S.Title>About us</S.Title>
