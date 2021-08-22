@@ -3,7 +3,7 @@ import { renderWithProviders } from 'utils/test'
 import { mockCharacterData } from './mock'
 import KsuTooltip from '..'
 
-describe('<Footer />', () => {
+describe('<KsuTooltip />', () => {
   test('should render character data correctly', () => {
     renderWithProviders(<KsuTooltip characterData={mockCharacterData} />)
     const { name, level, vocation, world } = mockCharacterData.characters.data

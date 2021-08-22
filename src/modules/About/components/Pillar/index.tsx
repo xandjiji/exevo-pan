@@ -23,7 +23,9 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
         .map((element, index) => ({
           element,
           navElement: navElements[index],
-          relativeToTop: (element as Element).getBoundingClientRect().top - 60,
+          relativeToTop: element
+            ? element.getBoundingClientRect().top - 60
+            : -1,
         }))
         .filter((element) => element.relativeToTop >= 0)
         .sort((a, b) => Math.abs(a.relativeToTop) - Math.abs(b.relativeToTop))
