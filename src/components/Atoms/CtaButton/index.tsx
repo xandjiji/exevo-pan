@@ -9,7 +9,7 @@ const CtaButton = ({
   <S.Button
     href={links.REI_DOS_COINS_REF}
     target="_blank"
-    rel="noopener external"
+    rel="noopener external nofollow"
     {...props}
   >
     <S.ImgWrapper>

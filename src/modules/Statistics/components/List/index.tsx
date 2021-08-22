@@ -33,7 +33,7 @@ const List = ({
               <S.Link
                 href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${character.id}&source=overview`}
                 target="_blank"
-                rel="noreferrer"
+                rel="noreferrer noopener external"
               >
                 {character.nickname}
               </S.Link>

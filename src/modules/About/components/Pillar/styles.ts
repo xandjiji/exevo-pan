@@ -34,10 +34,10 @@ export const Nav = styled.nav`
   }
 `
 
-export const Title = styled.h3`
+export const Title = styled.span`
   margin-right: 24px;
+  display: block;
   font-size: 16px;
-  font-weight: 400;
   color: var(--onPrimary);
 
   @media (min-width: 768px) {

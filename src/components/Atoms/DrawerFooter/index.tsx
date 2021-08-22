@@ -9,13 +9,17 @@ const DrawerFooter = ({
     <S.RepositoryLink
       href={links.GITHUB_REPOSITORY}
       target="_blank"
-      rel="noreferrer"
+      rel="noreferrer noopener external"
     >
       <S.GithubIcon />
       Go to this repository
     </S.RepositoryLink>
     made by
-    <S.ProfileLink href={links.GITHUB_PROFILE} target="_blank" rel="noreferrer">
+    <S.ProfileLink
+      href={links.GITHUB_PROFILE}
+      target="_blank"
+      rel="noopener noreferrer author external"
+    >
       xandjiji
     </S.ProfileLink>
   </S.Wrapper>

@@ -16,7 +16,7 @@ const KsuTooltip = ({
           <S.Link
             href={`https://www.tibia.com/community/?name=${name}`}
             target="_blank"
-            rel="noreferrer"
+            rel="noreferrer noopener external"
           >
             <S.ExternalIcon />
             Go to character page

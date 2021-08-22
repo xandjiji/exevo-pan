@@ -24,15 +24,15 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             This website is{' '}
             <strong>100% free and open-source and unlicensed</strong>. This
             means that not only you can contribute or fork this project, but we
-            encourage you to do so. You can start{' '}
+            encourage you to do so. You can start in the official GitHub{' '}
             <a
               href={links.GITHUB_REPOSITORY}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer external"
             >
-              here
+              repository
             </a>
-            , in the official GitHub repository.
+            .
           </p>
           <p>
             Feel free to give us any feedback through our{' '}
@@ -67,7 +67,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             <a
               href={links.TIBIACLIPS}
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener noreferrer external"
             >
               TibiaClips
             </a>
@@ -77,11 +77,19 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
 
         <Section {...sections.DISCLAIMER}>
           <p>
-            <a href={links.TIBIA} target="_blank" rel="noopener noreferrer">
+            <a
+              href={links.TIBIA}
+              target="_blank"
+              rel="noopener noreferrer external"
+            >
               Tibia
             </a>{' '}
             is a game made by{' '}
-            <a href={links.CIPSOFT} target="_blank" rel="noopener noreferrer">
+            <a
+              href={links.CIPSOFT}
+              target="_blank"
+              rel="noopener noreferrer external"
+            >
               CipSoft
             </a>
             . All assets presented in this website are copyrighted by them and I
@@ -112,7 +120,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
               <a
                 href={links.GITHUB_PROFILE}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer external author"
               >
                 {links.GITHUB_PROFILE}
               </a>
@@ -122,7 +130,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
               <a
                 href={links.LINKEDIN}
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener noreferrer external author"
               >
                 {links.LINKEDIN}
               </a>

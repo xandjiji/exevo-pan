@@ -37,7 +37,7 @@ const Title = ({
     <a
       href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${characterId}&source=overview`}
       target="_blank"
-      rel="noreferrer"
+      rel="noreferrer noopener"
     >
       <ExternalIcon />
       Go to character page
