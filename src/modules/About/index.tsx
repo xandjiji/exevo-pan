@@ -103,7 +103,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           <p>
             We promote that Tibia should be played in a fair and healthy manner.
             That means we are against cheating, real life harassment and
-            anti-sportsmanship.
+            anti-sportsmanship behavior.
           </p>
         </Section>
 
