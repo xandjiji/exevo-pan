@@ -22,8 +22,8 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
           </p>
           <p>
             This website is{' '}
-            <strong>100% free, open-source and unlicensed</strong>. This
-            means that not only you can contribute or fork this project, but we
+            <strong>100% free, open-source and unlicensed</strong>. This means
+            that not only you can contribute or fork this project, but we
             encourage you to do so. You can start in the official GitHub{' '}
             <a
               href={links.GITHUB_REPOSITORY}
@@ -96,9 +96,9 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             don&apos;t own any of it.
           </p>
           <p>
-            Most of the data in this application used the official Tibia
-            website as a source of truth. Despite of that, we can&apos;t
-            guarantee that they are completely accurate and/or up-to-date.
+            Most of the data in this application used the official Tibia website
+            as a source of truth. Despite of that, we can&apos;t guarantee that
+            they are completely accurate and/or up-to-date.
           </p>
           <p>
             We promote that Tibia should be played in a fair and healthy manner.
