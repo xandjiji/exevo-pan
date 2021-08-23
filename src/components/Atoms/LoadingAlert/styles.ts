@@ -5,7 +5,7 @@ export const FloatingLabel = styled.div`
   position: absolute;
   top: 26px;
   left: 50%;
-  z-index: 60;
+  z-index: 75;
   transform: translate(-50%);
 
   padding: 6px 16px;
