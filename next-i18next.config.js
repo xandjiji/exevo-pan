@@ -5,6 +5,10 @@ module.exports = {
         domains: [
             { domain: 'exevopan.com', defaultLocale: 'en' },
             { domain: 'exevopan.com.br', defaultLocale: 'pt' }
-        ]
+        ],
+        localeDetection: false
     },
+    react: {
+        useSuspense: false
+    }
 }
