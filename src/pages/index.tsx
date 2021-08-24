@@ -1,6 +1,8 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
+import { GetStaticProps } from 'next'
 import { endpoints, paths } from 'Constants'
 
 export default function Home(): JSX.Element {
@@ -53,3 +55,9 @@ export default function Home(): JSX.Element {
     </div>
   )
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, ['common'])),
+  },
+})

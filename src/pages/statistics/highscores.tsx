@@ -1,3 +1,4 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
@@ -43,10 +44,13 @@ export default function Highscores({
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const statisticsData = await ManageDataClient.fetchStatisticsData()
 
   return {
-    props: { statisticsData },
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common'])),
+      statisticsData,
+    },
   }
 }

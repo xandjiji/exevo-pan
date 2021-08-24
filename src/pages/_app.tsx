@@ -1,3 +1,4 @@
+import { appWithTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -40,4 +41,4 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     </>
   )
 }
-export default MyApp
+export default appWithTranslation(MyApp)

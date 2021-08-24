@@ -1,6 +1,8 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
+import { GetStaticProps } from 'next'
 
 export default function BazaarHistory(): JSX.Element {
   return (
@@ -33,3 +35,9 @@ export default function BazaarHistory(): JSX.Element {
     </div>
   )
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, ['common'])),
+  },
+})

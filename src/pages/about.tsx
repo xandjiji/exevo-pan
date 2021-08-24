@@ -1,3 +1,4 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import Head from 'next/head'
 import styled from 'styled-components'
 import { Main as BaseMain } from 'templates'
@@ -59,12 +60,15 @@ export default function About({
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const result = await fetch(`${endpoints.TIBIADATA}/Ksu.json`)
 
   const ksuData = (await result.json()) as KsuData
 
   return {
-    props: { characterData: ksuData },
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common'])),
+      characterData: ksuData,
+    },
   }
 }
