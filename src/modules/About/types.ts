@@ -1,5 +1,6 @@
 export type KsuData = {
   characters: {
+    error?: string
     data: {
       name: string
       vocation: string
