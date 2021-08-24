@@ -61,18 +61,6 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             </span>
             .
           </span>
-
-          <p>
-            Fun fact: I&apos;m also the same creator of{' '}
-            <a
-              href={links.TIBIACLIPS}
-              target="_blank"
-              rel="noopener noreferrer external"
-            >
-              TibiaClips
-            </a>
-            .
-          </p>
         </Section>
 
         <Section {...sections.DISCLAIMER}>

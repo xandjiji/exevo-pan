@@ -6,6 +6,6 @@ export const links = {
   TIBIACLIPS: 'https://www.youtube.com/channel/UC2srmu0R5yNikl3cnfqcomQ',
   TIBIA: 'https://www.tibia.com',
   CIPSOFT: 'https://www.cipsoft.com',
-  REI_DOS_COINS_REF: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
+  COINS_REF: '#',
   UNLICENSE: 'https://unlicense.org',
 }

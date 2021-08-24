@@ -7,7 +7,7 @@ const CtaButton = ({
   ...props
 }: React.HTMLAttributes<HTMLAnchorElement>): JSX.Element => (
   <S.Button
-    href={links.REI_DOS_COINS_REF}
+    href={links.COINS_REF}
     target="_blank"
     rel="noopener external nofollow"
     {...props}

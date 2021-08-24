@@ -1,6 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import { Link, CtaButton, Switch } from 'components/Atoms/'
+import { Link, Switch } from 'components/Atoms/'
 import { useTheme } from 'contexts/useTheme'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
@@ -88,7 +88,7 @@ const Header = ({
             aria-label={t('Header.themeSwitch')}
           />
         )}
-        <CtaButton />
+        {/* <CtaButton /> */}
       </S.RightWrapper>
     </S.Wrapper>
   )
