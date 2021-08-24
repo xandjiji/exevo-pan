@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { Link, CtaButton, Switch } from 'components/Atoms/'
 import { useTheme } from 'contexts/useTheme'
@@ -6,16 +7,18 @@ import { routes } from 'Constants'
 import * as S from './styles'
 
 const heading = {
-  [routes.HOME]: 'Buy and sell Tibia characters on the official Char Bazaar!',
-  [routes.BAZAAR_HISTORY]: 'Explore through Tibia Char Bazaar history data!',
-  [routes.STATISTICS]: 'Find statistics for Tibia Char Bazaar characters!',
-  [routes.HIGHSCORES]:
-    'Top levels, highest skills and biggests bids on Tibia Char Bazzar!',
+  [routes.HOME]: 'home',
+  [routes.BAZAAR_HISTORY]: 'bazaarHistory',
+  [routes.STATISTICS]: 'statistics',
+  [routes.HIGHSCORES]: 'highscores',
+  [routes.ABOUT]: 'about',
 }
 
 const Header = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+  const { t } = useTranslation()
+
   const { currentTheme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
 
@@ -24,11 +27,19 @@ const Header = ({
       <S.Nav>
         <NextLink href={routes.HOME}>
           <S.LogoWrapper>
-            <S.H1>{heading[pathname] ?? 'Exevo Pan'}</S.H1>
+            <S.H1>
+              {heading[pathname]
+                ? t(`Header.H1.${heading[pathname]}`)
+                : 'Exevo Pan'}
+            </S.H1>
             <S.ExevoPanLogo
               priority
-              aria-label="Go to homepage"
-              alt={heading[pathname] ?? 'Exevo Pan'}
+              aria-label={t('Header.logoLabel')}
+              alt={
+                heading[pathname]
+                  ? t(`Header.H1.${heading[pathname]}`)
+                  : 'Exevo Pan'
+              }
             />
           </S.LogoWrapper>
         </NextLink>
@@ -37,7 +48,7 @@ const Header = ({
             <Link href={routes.HOME} exact>
               <S.A>
                 <S.MarketIcon />
-                <S.H2>Current Auctions</S.H2>
+                <S.H2>{t('Header.nav.currentAuctions')}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -45,7 +56,7 @@ const Header = ({
             <Link href={routes.BAZAAR_HISTORY}>
               <S.A>
                 <S.HistoryIcon />
-                <S.H2>Bazaar History</S.H2>
+                <S.H2>{t('Header.nav.bazaarHistory')}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -53,7 +64,7 @@ const Header = ({
             <Link href={routes.STATISTICS}>
               <S.A>
                 <S.StatisticsIcon />
-                <S.H2>Statistics</S.H2>
+                <S.H2>{t('Header.nav.statistics')}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -61,7 +72,7 @@ const Header = ({
             <Link href={routes.ABOUT}>
               <S.A>
                 <S.AboutIcon />
-                <S.H2>About</S.H2>
+                <S.H2>{t('Header.nav.about')}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -74,7 +85,7 @@ const Header = ({
             active={currentTheme === 'dark-theme'}
             onClick={toggleTheme}
             icon={<S.MoonIcon />}
-            aria-label="Toggle dark theme"
+            aria-label={t('Header.themeSwitch')}
           />
         )}
         <CtaButton />
