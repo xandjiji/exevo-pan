@@ -2,5 +2,17 @@
   "Meta": {
     "title": "Exevo Pan - About us",
     "description": "About the Exevo Pan website, disclaimers and contact information"
+  },
+  "AboutExevoPan": {
+    "title": "Exevo Pan"
+  },
+  "AboutMe": {
+    "title": "About me"
+  },
+  "AboutDisclaimer": {
+    "title": "Disclaimer"
+  },
+  "AboutContact": {
+    "title": "Contact Information"
   }
 }
