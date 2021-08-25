@@ -15,5 +15,6 @@
   "AboutContact": {
     "title": "Informações de contato"
   },
-  "AnchorIconLabel": "Copiar link"
+  "AnchorIconLabel": "Copiar link",
+  "KsuTooltipLabel": "Ir para a página do personagem"
 }

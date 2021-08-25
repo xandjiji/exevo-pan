@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import * as S from './styles'
 import { KsuData } from '../../types'
 
@@ -13,6 +14,8 @@ const KsuTooltip = ({
 }: {
   characterData: KsuData
 }): JSX.Element => {
+  const { t } = useTranslation('about')
+
   const { error, data } = characterData.characters
   const { name, level, vocation, world } = error ? fallbackData : data
   return (
@@ -27,7 +30,7 @@ const KsuTooltip = ({
             rel="noreferrer noopener external"
           >
             <S.ExternalIcon />
-            Go to character page
+            {t('KsuTooltipLabel')}
           </S.Link>
         </S.Nickname>
         <S.Description>
