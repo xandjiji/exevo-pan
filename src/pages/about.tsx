@@ -30,26 +30,20 @@ export default function About({
 }: {
   characterData: KsuData
 }): JSX.Element {
-  const { t } = useTranslation()
+  const { t } = useTranslation('about')
 
   return (
     <div>
       <Head>
-        <title>{t('AboutPage.Meta.title')}</title>
-        <meta name="title" content={t('AboutPage.Meta.title')} />
-        <meta property="og:site_name" content={t('AboutPage.Meta.title')} />
-        <meta property="og:title" content={t('AboutPage.Meta.title')} />
-        <meta property="twitter:title" content={t('AboutPage.Meta.title')} />
+        <title>{t('Meta.title')}</title>
+        <meta name="title" content={t('Meta.title')} />
+        <meta property="og:site_name" content={t('Meta.title')} />
+        <meta property="og:title" content={t('Meta.title')} />
+        <meta property="twitter:title" content={t('Meta.title')} />
 
-        <meta name="description" content={t('AboutPage.Meta.description')} />
-        <meta
-          property="twitter:description"
-          content={t('AboutPage.Meta.description')}
-        />
-        <meta
-          property="og:description"
-          content={t('AboutPage.Meta.description')}
-        />
+        <meta name="description" content={t('Meta.description')} />
+        <meta property="twitter:description" content={t('Meta.description')} />
+        <meta property="og:description" content={t('Meta.description')} />
         <meta property="og:type" content="website" />
       </Head>
 
@@ -67,7 +61,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['common'])),
+      ...(await serverSideTranslations(locale as string, ['common', 'about'])),
       characterData: ksuData,
     },
   }

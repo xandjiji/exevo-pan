@@ -6,26 +6,20 @@ import ErrorPage from 'modules/ErrorPage'
 import { GetStaticProps } from 'next'
 
 export default function Custom404(): JSX.Element {
-  const { t } = useTranslation()
+  const { t } = useTranslation('404')
 
   return (
     <div>
       <Head>
-        <title>{t('ErrorPage.Meta.title')}</title>
-        <meta name="title" content={t('ErrorPage.Meta.title')} />
-        <meta property="og:site_name" content={t('ErrorPage.Meta.title')} />
-        <meta property="og:title" content={t('ErrorPage.Meta.title')} />
-        <meta property="twitter:title" content={t('ErrorPage.Meta.title')} />
+        <title>{t('Meta.title')}</title>
+        <meta name="title" content={t('Meta.title')} />
+        <meta property="og:site_name" content={t('Meta.title')} />
+        <meta property="og:title" content={t('Meta.title')} />
+        <meta property="twitter:title" content={t('Meta.title')} />
 
-        <meta name="description" content={t('ErrorPage.Meta.description')} />
-        <meta
-          property="twitter:description"
-          content={t('ErrorPage.Meta.description')}
-        />
-        <meta
-          property="og:description"
-          content={t('ErrorPage.Meta.description')}
-        />
+        <meta name="description" content={t('Meta.description')} />
+        <meta property="twitter:description" content={t('Meta.description')} />
+        <meta property="og:description" content={t('Meta.description')} />
         <meta property="og:type" content="website" />
       </Head>
 
@@ -38,6 +32,6 @@ export default function Custom404(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['common'])),
+    ...(await serverSideTranslations(locale as string, ['common', '404'])),
   },
 })

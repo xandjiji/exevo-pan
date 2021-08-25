@@ -1,30 +1,6 @@
 {
-  "Homepage": {
-    "Meta": {
-      "title": "Exevo Pan - Leilões",
-      "description": "Filtre e explore chares de Tibia no Char Bazaar oficial!"
-    }
-  },
-  "HistoryPage": {
-    "Meta": {
-      "title": "Exevo Pan - Histórico do Bazaar",
-      "description": "Filtre e explore pelos dados históricos e estatísticas do Char Bazaar do Tibia!"
-    }
-  },
-  "AboutPage": {
-    "Meta": {
-      "title": "Exevo Pan - Sobre nós",
-      "description": "Sobre o site Exevo Pan, declarações e informações de contato"
-    }
-  },
-  "ErrorPage": {
-    "Meta": {
-      "title": "Exevo Pan - 404",
-      "description": "Oops! Página não encontrada!"
-    }
-  },
   "Header": {
-    "H1": {
+    "h1": {
       "home": "Compre e venda de chares de Tibia no Char Bazaar oficial!",
       "bazaarHistory": "Explore através do histórico do Char Bazaar!",
       "statistics": "Descubra estatísticas sobre personagens vendidos no Char Bazaar!",

@@ -1,30 +1,6 @@
 {
-  "Homepage": {
-    "Meta": {
-      "title": "Exevo Pan - Current Auctions",
-      "description": "Filter and search for Tibia characters on the official Char Bazaar!"
-    }
-  },
-  "HistoryPage": {
-    "Meta": {
-      "title": "Exevo Pan - Bazaar History",
-      "description": "Filter and search through all Tibia Char Bazaar historic data and statistics!"
-    }
-  },
-  "AboutPage": {
-    "Meta": {
-      "title": "Exevo Pan - About us",
-      "description": "About the Exevo Pan website, disclaimers and contact information"
-    }
-  },
-  "ErrorPage": {
-    "Meta": {
-      "title": "Exevo Pan - 404",
-      "description": "Oops! Page not found!"
-    }
-  },
   "Header": {
-    "H1": {
+    "h1": {
       "home": "Buy and sell Tibia characters on the official Char Bazaar!",
       "bazaarHistory": "Explore through Tibia Char Bazaar history data!",
       "statistics": "Find statistics for Tibia Char Bazaar characters!",

@@ -17,7 +17,7 @@ const heading = {
 const Header = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
-  const { t } = useTranslation()
+  const { t } = useTranslation('common')
 
   const { currentTheme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
@@ -29,7 +29,7 @@ const Header = ({
           <S.LogoWrapper>
             <S.H1>
               {heading[pathname]
-                ? t(`Header.H1.${heading[pathname]}`)
+                ? t(`Header.h1.${heading[pathname]}`)
                 : 'Exevo Pan'}
             </S.H1>
             <S.ExevoPanLogo
@@ -37,7 +37,7 @@ const Header = ({
               aria-label={t('Header.logoLabel')}
               alt={
                 heading[pathname]
-                  ? t(`Header.H1.${heading[pathname]}`)
+                  ? t(`Header.h1.${heading[pathname]}`)
                   : 'Exevo Pan'
               }
             />
