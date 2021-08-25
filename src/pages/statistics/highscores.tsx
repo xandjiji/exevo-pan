@@ -11,20 +11,26 @@ export default function Highscores({
 }: {
   statisticsData: StatisticsData
 }): JSX.Element {
-  const { t } = useTranslation('highscores')
+  const { t } = useTranslation('statistics')
 
   return (
     <div>
       <Head>
-        <title>{t('Meta.title')}</title>
-        <meta name="title" content={t('Meta.title')} />
-        <meta property="og:site_name" content={t('Meta.title')} />
-        <meta property="og:title" content={t('Meta.title')} />
-        <meta property="twitter:title" content={t('Meta.title')} />
+        <title>{t('Meta.Highscores.title')}</title>
+        <meta name="title" content={t('Meta.Highscores.title')} />
+        <meta property="og:site_name" content={t('Meta.Highscores.title')} />
+        <meta property="og:title" content={t('Meta.Highscores.title')} />
+        <meta property="twitter:title" content={t('Meta.Highscores.title')} />
 
-        <meta name="description" content={t('Meta.description')} />
-        <meta property="twitter:description" content={t('Meta.description')} />
-        <meta property="og:description" content={t('Meta.description')} />
+        <meta name="description" content={t('Meta.Highscores.description')} />
+        <meta
+          property="twitter:description"
+          content={t('Meta.Highscores.description')}
+        />
+        <meta
+          property="og:description"
+          content={t('Meta.Highscores.description')}
+        />
         <meta property="og:type" content="website" />
       </Head>
 
@@ -45,7 +51,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       ...(await serverSideTranslations(locale as string, [
         'common',
-        'highscores',
+        'statistics',
       ])),
       statisticsData,
     },

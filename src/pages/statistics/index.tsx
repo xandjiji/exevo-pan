@@ -16,15 +16,21 @@ export default function Statistics({
   return (
     <div>
       <Head>
-        <title>{t('Meta.title')}</title>
-        <meta name="title" content={t('Meta.title')} />
-        <meta property="og:site_name" content={t('Meta.title')} />
-        <meta property="og:title" content={t('Meta.title')} />
-        <meta property="twitter:title" content={t('Meta.title')} />
+        <title>{t('Meta.Statistics.title')}</title>
+        <meta name="title" content={t('Meta.Statistics.title')} />
+        <meta property="og:site_name" content={t('Meta.Statistics.title')} />
+        <meta property="og:title" content={t('Meta.Statistics.title')} />
+        <meta property="twitter:title" content={t('Meta.Statistics.title')} />
 
-        <meta name="description" content={t('Meta.description')} />
-        <meta property="twitter:description" content={t('Meta.description')} />
-        <meta property="og:description" content={t('Meta.description')} />
+        <meta name="description" content={t('Meta.Statistics.description')} />
+        <meta
+          property="twitter:description"
+          content={t('Meta.Statistics.description')}
+        />
+        <meta
+          property="og:description"
+          content={t('Meta.Statistics.description')}
+        />
         <meta property="og:type" content="website" />
       </Head>
 
