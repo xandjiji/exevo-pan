@@ -1,30 +1,30 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
 import { GetStaticProps } from 'next'
 
 export default function BazaarHistory(): JSX.Element {
+  const { t } = useTranslation()
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Bazaar History</title>
-        <meta name="title" content="Exevo Pan - Bazaar History" />
-        <meta property="og:site_name" content="Exevo Pan - Bazaar History" />
-        <meta property="og:title" content="Exevo Pan - Bazaar History" />
-        <meta property="twitter:title" content="Exevo Pan - Bazaar History" />
+        <title>{t('HistoryPage.Meta.title')}</title>
+        <meta name="title" content={t('HistoryPage.Meta.title')} />
+        <meta property="og:site_name" content={t('HistoryPage.Meta.title')} />
+        <meta property="og:title" content={t('HistoryPage.Meta.title')} />
+        <meta property="twitter:title" content={t('HistoryPage.Meta.title')} />
 
-        <meta
-          name="description"
-          content="Filter and search through all Tibia Char Bazaar historic data and statistics!"
-        />
+        <meta name="description" content={t('HistoryPage.Meta.description')} />
         <meta
           property="twitter:description"
-          content="Filter and search through all Tibia Char Bazaar historic data and statistics!"
+          content={t('HistoryPage.Meta.description')}
         />
         <meta
           property="og:description"
-          content="Filter and search through all Tibia Char Bazaar historic data and statistics!"
+          content={t('HistoryPage.Meta.description')}
         />
         <meta property="og:type" content="website" />
       </Head>

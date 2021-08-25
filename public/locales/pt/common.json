@@ -5,6 +5,12 @@
       "description": "Filtre e explore chares de Tibia no Char Bazaar oficial!"
     }
   },
+  "HistoryPage": {
+    "Meta": {
+      "title": "Exevo Pan - Histórico do Bazaar",
+      "description": "Filtre e explore pelos dados históricos e estatísticas do Char Bazaar do Tibia!"
+    }
+  },
   "AboutPage": {
     "Meta": {
       "title": "Exevo Pan - Sobre nós",
