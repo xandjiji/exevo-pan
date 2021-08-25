@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useState, useEffect } from 'react'
 import { debounce } from 'utils'
 import { generateNavId } from './utils'
@@ -5,6 +6,8 @@ import * as S from './styles'
 import { PillarProps } from './types'
 
 const Pillar = ({ sections }: PillarProps): JSX.Element => {
+  const { t } = useTranslation('about')
+
   const [highlightedId, setHighlightedId] = useState<string | undefined>()
 
   useEffect(() => {
@@ -65,7 +68,9 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
                   : undefined
               }
             >
-              <a href={`#${sectionItem.id}`}>{sectionItem.title}</a>
+              <a href={`#${sectionItem.id}`}>
+                {t(`${sectionItem.title}.title`)}
+              </a>
             </S.Li>
           ))}
         </S.Ul>

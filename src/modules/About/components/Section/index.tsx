@@ -15,7 +15,10 @@ const Section = ({
     <S.Section id={id} {...props}>
       <S.Title>
         <a href={`#${id}`}>{t(`${title}.title`)}</a>
-        <S.AnchorIcon onClick={() => CopyToClipboard(id)} />
+        <S.AnchorIcon
+          aria-label={t('AnchorIconLabel')}
+          onClick={() => CopyToClipboard(id)}
+        />
       </S.Title>
       {children}
     </S.Section>
