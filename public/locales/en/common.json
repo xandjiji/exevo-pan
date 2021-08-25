@@ -1,4 +1,10 @@
 {
+  "AboutPage": {
+    "Meta": {
+      "title": "Exevo Pan - About us",
+      "description": "About the Exevo Pan website, disclaimers and contact information"
+    }
+  },
   "Header": {
     "H1": {
       "home": "Buy and sell Tibia characters on the official Char Bazaar!",

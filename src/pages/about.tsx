@@ -1,4 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import styled from 'styled-components'
 import { Main as BaseMain } from 'templates'
@@ -29,26 +30,25 @@ export default function About({
 }: {
   characterData: KsuData
 }): JSX.Element {
+  const { t } = useTranslation()
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - About us</title>
-        <meta name="title" content="Exevo Pan - About us" />
-        <meta property="og:site_name" content="Exevo Pan - About us" />
-        <meta property="og:title" content="Exevo Pan - About us" />
-        <meta property="twitter:title" content="Exevo Pan - About us" />
+        <title>{t('AboutPage.Meta.title')}</title>
+        <meta name="title" content={t('AboutPage.Meta.title')} />
+        <meta property="og:site_name" content={t('AboutPage.Meta.title')} />
+        <meta property="og:title" content={t('AboutPage.Meta.title')} />
+        <meta property="twitter:title" content={t('AboutPage.Meta.title')} />
 
-        <meta
-          name="description"
-          content="About Exevo Pan and our contact info"
-        />
+        <meta name="description" content={t('AboutPage.Meta.description')} />
         <meta
           property="twitter:description"
-          content="About Exevo Pan and our contact info"
+          content={t('AboutPage.Meta.description')}
         />
         <meta
           property="og:description"
-          content="About Exevo Pan and our contact info"
+          content={t('AboutPage.Meta.description')}
         />
         <meta property="og:type" content="website" />
       </Head>

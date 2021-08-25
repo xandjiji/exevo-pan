@@ -1,4 +1,10 @@
 {
+  "AboutPage": {
+    "Meta": {
+      "title": "Exevo Pan - Sobre nós",
+      "description": "Sobre o site Exevo Pan, declarações e informações de contato"
+    }
+  },
   "Header": {
     "H1": {
       "home": "Compre e venda de chares de Tibia no Char Bazaar oficial!",
