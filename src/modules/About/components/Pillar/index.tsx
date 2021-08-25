@@ -56,7 +56,7 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
   return (
     <S.Aside>
       <S.Nav>
-        <S.Title>Contents</S.Title>
+        <S.Title>{t(`PillarTitle`)}</S.Title>
         <S.Ul>
           {sections.map((sectionItem) => (
             <S.Li
