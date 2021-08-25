@@ -1,4 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
@@ -10,33 +11,20 @@ export default function Statistics({
 }: {
   statisticsData: StatisticsData
 }): JSX.Element {
+  const { t } = useTranslation('statistics')
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Overall Statistics</title>
-        <meta name="title" content="Exevo Pan - Overall Statistics" />
-        <meta
-          property="og:site_name"
-          content="Exevo Pan - Overall Statistics"
-        />
-        <meta property="og:title" content="Exevo Pan - Overall Statistics" />
-        <meta
-          property="twitter:title"
-          content="Exevo Pan - Overall Statistics"
-        />
+        <title>{t('Meta.title')}</title>
+        <meta name="title" content={t('Meta.title')} />
+        <meta property="og:site_name" content={t('Meta.title')} />
+        <meta property="og:title" content={t('Meta.title')} />
+        <meta property="twitter:title" content={t('Meta.title')} />
 
-        <meta
-          name="description"
-          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
-        />
-        <meta
-          property="twitter:description"
-          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
-        />
-        <meta
-          property="og:description"
-          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
-        />
+        <meta name="description" content={t('Meta.description')} />
+        <meta property="twitter:description" content={t('Meta.description')} />
+        <meta property="og:description" content={t('Meta.description')} />
         <meta property="og:type" content="website" />
       </Head>
 
@@ -55,7 +43,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, ['common'])),
+      ...(await serverSideTranslations(locale as string, [
+        'common',
+        'statistics',
+      ])),
       statisticsData,
     },
   }
