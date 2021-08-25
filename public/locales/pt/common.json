@@ -17,6 +17,12 @@
       "description": "Sobre o site Exevo Pan, declarações e informações de contato"
     }
   },
+  "ErrorPage": {
+    "Meta": {
+      "title": "Exevo Pan - 404",
+      "description": "Oops! Página não encontrada!"
+    }
+  },
   "Header": {
     "H1": {
       "home": "Compre e venda de chares de Tibia no Char Bazaar oficial!",
