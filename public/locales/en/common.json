@@ -1,4 +1,10 @@
 {
+  "Homepage": {
+    "Meta": {
+      "title": "Exevo Pan - Current Auctions",
+      "description": "Filter and search for Tibia characters on the official Char Bazaar!"
+    }
+  },
   "AboutPage": {
     "Meta": {
       "title": "Exevo Pan - About us",

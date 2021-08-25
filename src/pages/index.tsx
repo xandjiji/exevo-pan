@@ -1,4 +1,5 @@
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
@@ -6,26 +7,25 @@ import { GetStaticProps } from 'next'
 import { endpoints, paths } from 'Constants'
 
 export default function Home(): JSX.Element {
+  const { t } = useTranslation()
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Current Auctions</title>
-        <meta name="title" content="Exevo Pan - Current Auctions" />
-        <meta property="og:site_name" content="Exevo Pan - Current Auctions" />
-        <meta property="og:title" content="Exevo Pan - Current Auctions" />
-        <meta property="twitter:title" content="Exevo Pan - Current Auctions" />
+        <title>{t('Homepage.Meta.title')}</title>
+        <meta name="title" content={t('Homepage.Meta.title')} />
+        <meta property="og:site_name" content={t('Homepage.Meta.title')} />
+        <meta property="og:title" content={t('Homepage.Meta.title')} />
+        <meta property="twitter:title" content={t('Homepage.Meta.title')} />
 
-        <meta
-          name="description"
-          content="Filter and search for Tibia characters on the official Char Bazaar!"
-        />
+        <meta name="description" content={t('Homepage.Meta.description')} />
         <meta
           property="twitter:description"
-          content="Filter and search for Tibia characters on the official Char Bazaar!"
+          content={t('Homepage.Meta.description')}
         />
         <meta
           property="og:description"
-          content="Filter and search for Tibia characters on the official Char Bazaar!"
+          content={t('Homepage.Meta.description')}
         />
         <meta property="og:type" content="website" />
 
