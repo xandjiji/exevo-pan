@@ -13,11 +13,9 @@ const HighscoresGrid = ({
 
   return (
     <S.Wrapper {...props}>
-      <S.PageTitle>
-        Tibia Bazaar top 10 characters, ranking and highscores
-      </S.PageTitle>
+      <S.PageTitle>{t('HighscoresGrid.title')}</S.PageTitle>
       <List
-        title="Bid"
+        title={t('HighscoresGrid.top10BidTitle')}
         charactersList={statisticsData.top10Bid}
         displayedDataKey="currentBid"
         format={useCallback(

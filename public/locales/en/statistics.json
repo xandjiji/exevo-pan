@@ -32,6 +32,10 @@
       "title": "Vocation distribution"
     }
   },
+  "HighscoresGrid": {
+    "title": "Tibia Bazaar top 10 characters, ranking and highscores",
+    "top10BidTitle": "Bid"
+  },
   "Days": "days",
   "Weekdays": {
     "Sun": "Sun",

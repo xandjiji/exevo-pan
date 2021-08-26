@@ -32,6 +32,10 @@
       "title": "Distribuição de vocações"
     }
   },
+  "HighscoresGrid": {
+    "title": "Rankings, top 10 personagens e recordes do Char Bazaar",
+    "top10BidTitle": "Preço"
+  },
   "Days": "dias",
   "Weekdays": {
     "Sun": "Dom",
