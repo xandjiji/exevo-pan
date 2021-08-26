@@ -9,6 +9,10 @@
       "description": "See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!"
     }
   },
+  "Header": {
+    "Overall": "Overall",
+    "Highscores": "Highscores"
+  },
   "OverallGrid": {
     "title": "Tibia Bazaar statistics data and analytics",
     "Chart1": {

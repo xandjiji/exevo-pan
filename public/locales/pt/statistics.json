@@ -9,6 +9,10 @@
       "description": "Veja rankings dos chares mais caros, top levels e maiores skills do Char Bazaar do Tibia!"
     }
   },
+  "Header": {
+    "Overall": "Estatísticas gerais",
+    "Highscores": "Rankings"
+  },
   "OverallGrid": {
     "title": "Estatísticas e análise de dados do Char Bazaar",
     "Chart1": {
