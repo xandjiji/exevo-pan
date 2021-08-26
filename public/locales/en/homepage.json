@@ -41,6 +41,9 @@
       "level": "Level",
       "price": "Price",
       "priceBidded": "Price (bidded only)"
-    }
+    },
+    "noAuctionFound": "Sorry, no auction was found",
+    "changeFilters": "Change filters",
+    "notFoundAlt": "No character was found"
   }
 }

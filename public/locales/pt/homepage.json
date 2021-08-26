@@ -41,6 +41,9 @@
       "level": "Level",
       "price": "Preço",
       "priceBidded": "Preço (apenas com lance)"
-    }
+    },
+    "noAuctionFound": "Desculpe, nenhum leilão foi encontrado",
+    "changeFilters": "Mudar filtros",
+    "notFoundAlt": "Nenhum personagem foi encontrado"
   }
 }

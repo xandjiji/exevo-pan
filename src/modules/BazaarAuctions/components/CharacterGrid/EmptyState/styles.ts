@@ -29,7 +29,6 @@ export const NotFoundWrapper = styled.div`
 
 export const NotFound = styled(Image).attrs({
   src: NotFoundImage,
-  alt: 'No character was found',
 })``
 
 export const Text = styled.span`
