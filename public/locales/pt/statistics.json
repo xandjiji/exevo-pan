@@ -8,5 +8,24 @@
       "title": "Exevo Pan - Rankings",
       "description": "Veja rankings dos chares mais caros, top levels e maiores skills do Char Bazaar do Tibia!"
     }
+  },
+  "OverallGrid": {
+    "title": "Estatísticas e análise de dados do Char Bazaar",
+    "Chart1": {
+      "totalLabel": "Volume total",
+      "yesterdayLabel": "Volume de ontem",
+      "tooltipLabel": "Volume de Tibia Coins"
+    },
+    "Chart2": {
+      "totalLabel": "Receita total da Cipsoft",
+      "yesterdayLabel": "Receita de ontem",
+      "tooltipLabel": "Receita da Cipsoft"
+    },
+    "PercentageCard1": {
+      "title": "Taxa de sucesso de leilões"
+    },
+    "PieChart1": {
+      "title": "Distribuição de vocações"
+    }
   }
 }

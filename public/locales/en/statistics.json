@@ -8,5 +8,24 @@
       "title": "Exevo Pan - Highscores",
       "description": "See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!"
     }
+  },
+  "OverallGrid": {
+    "title": "Tibia Bazaar statistics data and analytics",
+    "Chart1": {
+      "totalLabel": "Total volume",
+      "yesterdayLabel": "Yesterday's volume",
+      "tooltipLabel": "Tibia Coins volume"
+    },
+    "Chart2": {
+      "totalLabel": "Cipsoft's total revenue",
+      "yesterdayLabel": "Yesterday's revenue",
+      "tooltipLabel": "Cipsoft revenue"
+    },
+    "PercentageCard1": {
+      "title": "Auction success rate"
+    },
+    "PieChart1": {
+      "title": "Vocation distribution"
+    }
   }
 }
