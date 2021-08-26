@@ -26,12 +26,21 @@
   },
   "CharacterGrid": {
     "filterButtonLabel": "Abrir menu de filtros",
+    "sortingButtonLabel": "Defina um critério de ordenação",
     "filter": "filtro",
     "filters": "filtros",
     "is": "está",
     "are": "estão",
     "active": "ativo",
     "noItemsPagination": "Nenhum personagem",
-    "filterDrawerLabel": "Formulário de filtros"
+    "filterDrawerLabel": "Formulário de filtros",
+    "descendingSwitchLabel": "Ordenar por ordem decrescente",
+    "descending": "Decrescente",
+    "sortModes": {
+      "auctionEnd": "Fim do leilão",
+      "level": "Level",
+      "price": "Preço",
+      "priceBidded": "Preço (apenas com lance)"
+    }
   }
 }

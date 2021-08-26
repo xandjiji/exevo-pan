@@ -26,12 +26,21 @@
   },
   "CharacterGrid": {
     "filterButtonLabel": "Open filter drawer",
+    "sortingButtonLabel": "Set the sorting order and criteria",
     "filter": "filter",
     "filters": "filters",
     "is": "is",
     "are": "are",
     "active": "active",
     "noItemsPagination": "No characters found",
-    "filterDrawerLabel": "Filter form"
+    "filterDrawerLabel": "Filter form",
+    "descendingSwitchLabel": "Sort by descending order",
+    "descending": "Descending",
+    "sortModes": {
+      "auctionEnd": "Auction End",
+      "level": "Level",
+      "price": "Price",
+      "priceBidded": "Price (bidded only)"
+    }
   }
 }
