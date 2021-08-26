@@ -8,12 +8,8 @@ export const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
   ${Smooth}
-
-  @media (max-width: 440px) {
-    width: 100%;
-    align-items: center;
-  }
 `
 
 export const Title = styled.h4`
