@@ -23,5 +23,15 @@
       "toFav": "to favorites"
     },
     "imbuementsListLabel": "Imbuements list"
+  },
+  "CharacterGrid": {
+    "filterButtonLabel": "Open filter drawer",
+    "filter": "filter",
+    "filters": "filters",
+    "is": "is",
+    "are": "are",
+    "active": "active",
+    "noItemsPagination": "No characters found",
+    "filterDrawerLabel": "Filter form"
   }
 }

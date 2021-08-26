@@ -23,5 +23,15 @@
       "toFav": "dos favoritos"
     },
     "imbuementsListLabel": "Lista de imbuements"
+  },
+  "CharacterGrid": {
+    "filterButtonLabel": "Abrir menu de filtros",
+    "filter": "filtro",
+    "filters": "filtros",
+    "is": "está",
+    "are": "estão",
+    "active": "ativo",
+    "noItemsPagination": "Nenhum personagem",
+    "filterDrawerLabel": "Formulário de filtros"
   }
 }
