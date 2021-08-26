@@ -49,5 +49,10 @@
   "Summary": {
     "positiveTrendLabel": "Tendência de aumento",
     "negativeTrendLabel": "Tendência de queda"
+  },
+  "List": {
+    "captionTop10": "Ranking top 10 personagens por",
+    "captionDescription": "",
+    "titleLabel": "Posição no ranking"
   }
 }
