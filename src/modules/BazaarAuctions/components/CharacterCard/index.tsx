@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { memo } from 'react'
 import { useRouter } from 'next/router'
 import { formatNumberWithCommas } from 'utils'
@@ -17,6 +18,8 @@ const CharacterCard = ({
   characterData,
   ...props
 }: CharacterCardProps): JSX.Element => {
+  const { t } = useTranslation('homepage')
+
   const {
     id,
     nickname,
@@ -38,9 +41,13 @@ const CharacterCard = ({
 
   const getBidLabelText = () => {
     if (pathname === routes.BAZAAR_HISTORY) {
-      return hasBeenBidded ? 'Auction Successful' : 'Auction Failed'
+      return hasBeenBidded
+        ? t('CharacterCard.bidLabelText.auctionSuccessful')
+        : t('CharacterCard.bidLabelText.auctionFailed')
     }
-    return hasBeenBidded ? 'Current Bid' : 'Minimum Bid'
+    return hasBeenBidded
+      ? t('CharacterCard.bidLabelText.currentBid')
+      : t('CharacterCard.bidLabelText.minimumBid')
   }
 
   return (
@@ -72,7 +79,7 @@ const CharacterCard = ({
           {serverData.pvpType.string}
         </S.LabeledTextBox>
 
-        <S.LabeledTextBox labelText="Auction End">
+        <S.LabeledTextBox labelText={t('CharacterCard.auctionEnd')}>
           <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
         </S.LabeledTextBox>
 
