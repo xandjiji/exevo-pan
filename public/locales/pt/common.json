@@ -45,8 +45,10 @@
   "ClearInputLabel": "Limpar campo",
   "WarningLabel": "Cuidado!",
   "Of": "de",
-  "PaginatorFirstLabel": "Ir para a primeira página",
-  "PaginatorPreviousLabel": "Ir para a página anterior",
-  "PaginatorNextLabel": "Ir para a próxima página",
-  "PaginatorLastLabel": "Ir para a última página"
+  "Paginator": {
+    "FirstLabel": "Ir para a primeira página",
+    "PreviousLabel": "Ir para a página anterior",
+    "NextLabel": "Ir para a próxima página",
+    "LastLabel": "Ir para a última página"
+  }
 }

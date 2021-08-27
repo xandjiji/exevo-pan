@@ -56,7 +56,7 @@ const Paginator = ({
 
       <S.CursorWrapper>
         <S.Cursor
-          aria-label={t('PaginatorFirstLabel')}
+          aria-label={t('Paginator.FirstLabel')}
           aria-disabled={!hasPrev}
           disabled={!hasPrev}
           invert
@@ -65,7 +65,7 @@ const Paginator = ({
           <S.LastIcon />
         </S.Cursor>
         <S.Cursor
-          aria-label={t('PaginatorPreviousLabel')}
+          aria-label={t('Paginator.PreviousLabel')}
           aria-disabled={!hasPrev}
           disabled={!hasPrev}
           invert
@@ -75,7 +75,7 @@ const Paginator = ({
         </S.Cursor>
 
         <S.Cursor
-          aria-label={t('PaginatorNextLabel')}
+          aria-label={t('Paginator.NextLabel')}
           aria-disabled={!hasNext}
           disabled={!hasNext}
           onClick={() => changePage(derivedCurrentPage + 1)}
@@ -83,7 +83,7 @@ const Paginator = ({
           <S.NextIcon />
         </S.Cursor>
         <S.Cursor
-          aria-label={t('PaginatorLastLabel')}
+          aria-label={t('Paginator.LastLabel')}
           aria-disabled={!hasNext}
           disabled={!hasNext}
           onClick={() => changePage(pageCount)}

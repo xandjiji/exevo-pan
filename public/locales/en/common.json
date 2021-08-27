@@ -45,8 +45,10 @@
   "ClearInputLabel": "Clear input",
   "WarningLabel": "Warning!",
   "Of": "of",
-  "PaginatorFirstLabel": "Go to first page",
-  "PaginatorPreviousLabel": "Go to previous page",
-  "PaginatorNextLabel": "Go to next page",
-  "PaginatorLastLabel": "Go to last page"
+  "Paginator": {
+    "FirstLabel": "Go to first page",
+    "PreviousLabel": "Go to previous page",
+    "NextLabel": "Go to next page",
+    "LastLabel": "Go to last page"
+  }
 }
