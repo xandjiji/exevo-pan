@@ -39,5 +39,7 @@
   },
   "RemoveItem": "Remove item",
   "TibiaCoinsCta": "Get Tibia Coins",
-  "CloseDrawerLabel": "Close drawer"
+  "CloseDrawerLabel": "Close drawer",
+  "RepoLinkText": "Go to this repository",
+  "MadeBy": "made by"
 }
