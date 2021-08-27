@@ -52,5 +52,6 @@
     "LastLabel": "Ir para a última página"
   },
   "PopoverCloseLabel": "Clique aqui para fechar",
-  "ChangeValueLabel": "alterar valor"
+  "ChangeValueLabel": "alterar valor",
+  "LoadingLabel": "Carregando"
 }

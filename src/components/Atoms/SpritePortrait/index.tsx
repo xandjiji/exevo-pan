@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useRef, useState, useEffect } from 'react'
 import { useOnScreen } from 'hooks'
 import * as S from './styles'
@@ -6,6 +7,8 @@ const SpritePortrait = ({
   src,
   ...props
 }: React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const ref = useRef<HTMLDivElement | null>()
 
   const [loaded, setLoaded] = useState<boolean>(!src)
@@ -32,7 +35,7 @@ const SpritePortrait = ({
       {currentSrc && !loaded && (
         <S.Spinner
           role="alert"
-          aria-label="Loading indicator"
+          aria-label={t('LoadingLabel')}
           aria-busy="true"
         />
       )}
