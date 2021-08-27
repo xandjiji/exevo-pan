@@ -38,5 +38,6 @@
     "auctionEnded": "Leilão encerrado!"
   },
   "RemoveItem": "Remover item",
-  "TibiaCoinsCta": "Comprar Tibia Coins"
+  "TibiaCoinsCta": "Comprar Tibia Coins",
+  "CloseDrawerLabel": "Fechar menu"
 }

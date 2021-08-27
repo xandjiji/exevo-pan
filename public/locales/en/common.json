@@ -38,5 +38,6 @@
     "auctionEnded": "Auction Ended!"
   },
   "RemoveItem": "Remove item",
-  "TibiaCoinsCta": "Get Tibia Coins"
+  "TibiaCoinsCta": "Get Tibia Coins",
+  "CloseDrawerLabel": "Close drawer"
 }
