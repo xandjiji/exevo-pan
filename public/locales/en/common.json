@@ -43,5 +43,10 @@
   "RepoLinkText": "Go to this repository",
   "MadeBy": "made by",
   "ClearInputLabel": "Clear input",
-  "WarningLabel": "Warning!"
+  "WarningLabel": "Warning!",
+  "Of": "of",
+  "PaginatorFirstLabel": "Go to first page",
+  "PaginatorPreviousLabel": "Go to previous page",
+  "PaginatorNextLabel": "Go to next page",
+  "PaginatorLastLabel": "Go to last page"
 }

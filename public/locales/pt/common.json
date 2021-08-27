@@ -43,5 +43,10 @@
   "RepoLinkText": "Ir para este repositório",
   "MadeBy": "criado por",
   "ClearInputLabel": "Limpar campo",
-  "WarningLabel": "Cuidado!"
+  "WarningLabel": "Cuidado!",
+  "Of": "de",
+  "PaginatorFirstLabel": "Ir para a primeira página",
+  "PaginatorPreviousLabel": "Ir para a página anterior",
+  "PaginatorNextLabel": "Ir para a próxima página",
+  "PaginatorLastLabel": "Ir para a última página"
 }
