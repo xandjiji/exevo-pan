@@ -45,5 +45,31 @@
     "noAuctionFound": "Sorry, no auction was found",
     "changeFilters": "Change filters",
     "notFoundAlt": "No character was found"
+  },
+  "FilterDrawer": {
+    "title": "Filters",
+    "searchNicknameLabel": "Search nickname",
+    "searchNicknameTooltip": "Regex is enabled! Example: ['-.,]",
+    "vocationLabel": "Vocation",
+    "green": "Green",
+    "yellow": "Yellow",
+    "serverLocationLabel": "Server location",
+    "serverPlaceholder": "Choose a server",
+    "minSkillLabel": "Minimum skill level",
+    "imbuementsPlaceholder": "Select imbuements",
+    "allImbuementsButton": "All imbuements",
+    "rareItemsLabel": "Rare items",
+    "rareItemsTooltip": "If a rare item is not on this list it means that there are no auctions available with it.",
+    "rareItemsPlaceholder": "Choose an item",
+    "allItemsButton": "All items",
+    "miscLabel": "Misc",
+    "favTooltip": "Save your favorite auctions pressing the ❤️ button!",
+    "favoritedButton": "Favorited",
+    "heartEmoji": "heart",
+    "rareNicknamesTooltip": "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",
+    "rareNicknamesButton": "Rare nicknames",
+    "soulwarTooltip": "Characters level 400+ with Soul War not completed",
+    "soulwarButton": "Soulwar available",
+    "skullEmoji": "skull"
   }
 }
