@@ -51,5 +51,6 @@
     "NextLabel": "Go to next page",
     "LastLabel": "Go to last page"
   },
-  "PopoverCloseLabel": "Click here to close"
+  "PopoverCloseLabel": "Click here to close",
+  "ChangeValueLabel": "change value"
 }
