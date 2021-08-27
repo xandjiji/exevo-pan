@@ -36,5 +36,6 @@
     "auctionEndsIn": "Auction ends in",
     "auctionIsOver": "Auction is over",
     "auctionEnded": "Auction Ended!"
-  }
+  },
+  "RemoveItem": "Remove item"
 }
