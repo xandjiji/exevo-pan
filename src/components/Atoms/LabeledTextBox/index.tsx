@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useRef } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import * as S from './styles'
@@ -9,6 +10,8 @@ const LabeledTextBox = ({
   warning,
   ...props
 }: LabeledTextBoxProps): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const { current: labelId } = useRef(uuidv4())
   return (
     <S.Wrapper
@@ -19,7 +22,7 @@ const LabeledTextBox = ({
       {labelText && (
         <S.Label id={labelId}>
           {labelText}
-          {warning && <S.WarningIcon title="Warning!" />}
+          {warning && <S.WarningIcon title={t('WarningLabel')} />}
         </S.Label>
       )}
       {children}

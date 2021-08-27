@@ -42,5 +42,6 @@
   "CloseDrawerLabel": "Fechar menu",
   "RepoLinkText": "Ir para este repositório",
   "MadeBy": "criado por",
-  "ClearInputLabel": "Limpar campo"
+  "ClearInputLabel": "Limpar campo",
+  "WarningLabel": "Cuidado!"
 }

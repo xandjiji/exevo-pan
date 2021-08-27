@@ -42,5 +42,6 @@
   "CloseDrawerLabel": "Close drawer",
   "RepoLinkText": "Go to this repository",
   "MadeBy": "made by",
-  "ClearInputLabel": "Clear input"
+  "ClearInputLabel": "Clear input",
+  "WarningLabel": "Warning!"
 }
