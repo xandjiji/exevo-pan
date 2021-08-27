@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useState, useRef, memo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import * as S from './styles'
@@ -12,6 +13,8 @@ const Input = ({
   onChange,
   ...props
 }: InputProps): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const { current: errorId } = useRef(uuidv4())
 
   const [value, setValue] = useState<string>(valueProp ?? '')
@@ -60,7 +63,7 @@ const Input = ({
         />
         {allowClear && (
           <S.ClearButton
-            aria-label="Clear input"
+            aria-label={t('ClearInputLabel')}
             disabled={!isClearButtonActive}
             aria-hidden={!isClearButtonActive}
             onClick={handleClearClick}

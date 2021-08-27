@@ -41,5 +41,6 @@
   "TibiaCoinsCta": "Get Tibia Coins",
   "CloseDrawerLabel": "Close drawer",
   "RepoLinkText": "Go to this repository",
-  "MadeBy": "made by"
+  "MadeBy": "made by",
+  "ClearInputLabel": "Clear input"
 }
