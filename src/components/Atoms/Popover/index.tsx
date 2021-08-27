@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import {
   useState,
   useMemo,
@@ -21,6 +22,8 @@ const Popover = ({
   offset = [0, 0],
   ...props
 }: PopoverProps): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const [isVisible, setVisible] = useState<boolean>(visible ?? false)
   const derivedVisibility =
     trigger === 'none' ? visible ?? isVisible : isVisible
@@ -121,7 +124,7 @@ const Popover = ({
       </S.PopoverContent>
       {trigger === 'click' && derivedVisibility && (
         <S.Backdrop
-          aria-label="Click here to close"
+          aria-label={t('PopoverCloseLabel')}
           onClick={() => setVisible(false)}
         />
       )}

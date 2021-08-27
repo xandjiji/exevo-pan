@@ -50,5 +50,6 @@
     "PreviousLabel": "Go to previous page",
     "NextLabel": "Go to next page",
     "LastLabel": "Go to last page"
-  }
+  },
+  "PopoverCloseLabel": "Click here to close"
 }
