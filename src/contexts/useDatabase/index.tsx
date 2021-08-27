@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import {
   createContext,
   useContext,
@@ -61,6 +62,8 @@ export const DatabaseProvider = ({
 }: {
   children: React.ReactNode
 }): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const [
     { characterData, serverData, rareItemData, historyData, statisticsData },
     dispatch,
@@ -157,7 +160,9 @@ export const DatabaseProvider = ({
           <StatisticsDataContext.Provider value={{ statisticsData, loading }}>
             <DatabaseDispatchContext.Provider value={{ dispatch }}>
               {loading && (
-                <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
+                <LoadingAlert>
+                  {t('UpdatingDataText')} {loadedPercentage}
+                </LoadingAlert>
               )}
               {children}
             </DatabaseDispatchContext.Provider>

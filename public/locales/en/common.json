@@ -53,5 +53,6 @@
   },
   "PopoverCloseLabel": "Click here to close",
   "ChangeValueLabel": "change value",
-  "LoadingLabel": "Loading"
+  "LoadingLabel": "Loading",
+  "UpdatingDataText": "Updating data..."
 }
