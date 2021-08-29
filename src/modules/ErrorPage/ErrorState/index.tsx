@@ -30,6 +30,11 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => (
             </Link>
           </S.Li>
           <S.Li>
+            <Link href={routes.LIBERTABRA_WAR}>
+              <S.A>Libertabra War</S.A>
+            </Link>
+          </S.Li>
+          <S.Li>
             <Link href={routes.STATISTICS}>
               <S.A>Statistics</S.A>
             </Link>
