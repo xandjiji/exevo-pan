@@ -7,7 +7,7 @@ const OverallGrid = (): JSX.Element => {
   const { warStatisticsData } = useWarStatisticsData()
 
   /* @ ToDo: skeleton */
-  if (!warStatisticsData) return <div>loading...</div>
+  if (!warStatisticsData) return <S.Loading />
   const { score, onlineCount } = warStatisticsData
   return (
     <S.Wrapper>
