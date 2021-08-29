@@ -7,4 +7,7 @@ export const localStorageKeys = {
   HISTORY_HASH_PREFIX: 'historyHash',
   HISTORY_DATA_PREFIX: 'historyData',
   STATISTICS_DATA: 'statisticsData',
+  WAR_STATISTICS_DATA: 'warStatisticsData',
+  PUNE_GUILD_DATA: 'puneData',
+  BONES_GUILD_DATA: 'bonesData',
 }
