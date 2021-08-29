@@ -4,6 +4,7 @@ import CrossIconSvg from 'assets/svgs/cross.svg'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
+  padding: 20px;
   text-align: center;
 
   @media (min-width: 768px) {
