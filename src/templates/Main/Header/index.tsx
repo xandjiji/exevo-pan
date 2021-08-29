@@ -11,6 +11,8 @@ const heading = {
   [routes.STATISTICS]: 'Find statistics for Tibia Char Bazaar characters!',
   [routes.HIGHSCORES]:
     'Top levels, highest skills and biggests bids on Tibia Char Bazzar!',
+  [routes.LIBERTABRA_WAR]:
+    'Follow live data and statistics from Libertabra War!',
 }
 
 const Header = ({
@@ -54,6 +56,14 @@ const Header = ({
               <S.A>
                 <S.StatisticsIcon />
                 <S.H2>Statistics</S.H2>
+              </S.A>
+            </Link>
+          </S.Li>
+          <S.Li>
+            <Link href={routes.LIBERTABRA_WAR}>
+              <S.A>
+                <S.WarIcon />
+                <S.H2>Libertabra War</S.H2>
               </S.A>
             </Link>
           </S.Li>
