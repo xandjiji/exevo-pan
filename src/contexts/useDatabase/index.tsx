@@ -109,7 +109,7 @@ export const DatabaseProvider = ({
       })
     } finally {
       setLoadedPercentage(null)
-      dispatchLoad({ type: 'FINISH_LOADING', path: currentPath })
+      dispatchLoad({ type: 'FINISH_LOADING', paths: [currentPath] })
     }
   }, [])
 
@@ -122,20 +122,29 @@ export const DatabaseProvider = ({
         warStatisticsData: warData,
       })
     } finally {
-      dispatchLoad({ type: 'FINISH_LOADING', path: routes.LIBERTABRA_WAR })
+      dispatchLoad({
+        type: 'FINISH_LOADING',
+        paths: [routes.LIBERTABRA_WAR, routes.LIBERTABRA_WAR_TOP_10],
+      })
     }
   }, [])
 
   useEffect(() => {
     if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
-        dispatchLoad({ type: 'START_LOADING', path: pathname })
+        dispatchLoad({ type: 'START_LOADING', paths: [pathname] })
         fetchCharacterData(pathname)
       }
     }
-    if (pathname === routes.LIBERTABRA_WAR) {
+    if (
+      pathname === routes.LIBERTABRA_WAR ||
+      pathname === routes.LIBERTABRA_WAR_TOP_10
+    ) {
       if (!navigated.includes(pathname)) {
-        dispatchLoad({ type: 'START_LOADING', path: pathname })
+        dispatchLoad({
+          type: 'START_LOADING',
+          paths: [routes.LIBERTABRA_WAR, routes.LIBERTABRA_WAR_TOP_10],
+        })
         fetchWarStatisticsData()
       }
     }
