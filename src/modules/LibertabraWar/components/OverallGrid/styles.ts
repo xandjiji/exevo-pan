@@ -14,6 +14,10 @@ export const Wrapper = styled.article`
   background-color: var(--background);
   ${Smooth}
 
+  > * {
+    margin-bottom: 16px;
+  }
+
   &::before {
     content: '';
     position: fixed;

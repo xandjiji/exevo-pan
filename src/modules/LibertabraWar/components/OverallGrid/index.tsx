@@ -1,5 +1,6 @@
 import { useWarStatisticsData } from 'contexts/useDatabase'
 import Scoreboard from '../Scoreboard'
+import OnlineChart from '../OnlineChart'
 import * as S from './styles'
 
 const OverallGrid = (): JSX.Element => {
@@ -18,6 +19,16 @@ const OverallGrid = (): JSX.Element => {
         guildB={{
           name: 'Bones Alliance',
           kills: warStatisticsData.score.guildB,
+        }}
+      />
+      <OnlineChart
+        guildA={{
+          name: 'Libertabra Pune',
+          online: warStatisticsData.onlineCount.guildA,
+        }}
+        guildB={{
+          name: 'Bones Alliance',
+          online: warStatisticsData.onlineCount.guildB,
         }}
       />
     </S.Wrapper>
