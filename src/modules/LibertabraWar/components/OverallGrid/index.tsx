@@ -17,11 +17,13 @@ const OverallGrid = (): JSX.Element => {
           name: 'Libertabra Pune',
           kills: score.guildA,
           diff: score.diffGuildA,
+          href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Libertabra%20Pune&onlyshowonline=0',
         }}
         guildB={{
           name: 'Bones Alliance',
           kills: score.guildB,
           diff: score.diffGuildB,
+          href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Bones%20Alliance&onlyshowonline=0',
         }}
       />
       <OnlineChart

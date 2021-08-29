@@ -12,6 +12,7 @@ const Scoreboard = ({
     <S.GuildWrapper>
       <GuildSummary
         guildName={guildA.name}
+        href={guildA.href}
         totalKills={guildA.kills}
         diff={guildA.diff}
         winning={guildA.kills >= guildB.kills}
@@ -19,6 +20,7 @@ const Scoreboard = ({
 
       <GuildSummary
         guildName={guildB.name}
+        href={guildB.href}
         totalKills={guildB.kills}
         diff={guildB.diff}
         winning={guildB.kills >= guildA.kills}

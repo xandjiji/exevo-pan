@@ -1,8 +1,11 @@
 import styled from 'styled-components'
+import { Clickable } from 'styles'
+import ExternalIconSvg from 'assets/svgs/external.svg'
 
 export const Wrapper = styled.div``
 
 export const GuildName = styled.h4`
+  position: relative;
   margin-bottom: 8px;
   font-size: 16px;
   font-weight: 400;
@@ -10,11 +13,24 @@ export const GuildName = styled.h4`
   letter-spacing: 0.5px;
 `
 
+export const Link = styled.a`
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+`
+
+export const ExternalIcon = styled(ExternalIconSvg)`
+  padding: 2px;
+  width: 28px;
+  height: 28px;
+  border-radius: 4px;
+  fill: var(--onSurface);
+  ${Clickable}
+`
+
 export const Kills = styled.span<{ winning: boolean }>`
   position: relative;
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
   font-size: 44px;
   font-weight: 700;
   letter-spacing: 1px;
