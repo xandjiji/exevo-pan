@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { Header } from 'modules/LibertabraWar'
+import { Header, OverallGrid } from 'modules/LibertabraWar'
 
 export default function LibertabraWar(): JSX.Element {
   return (
@@ -30,7 +30,7 @@ export default function LibertabraWar(): JSX.Element {
       <Main>
         <main>
           <Header />
-          {/* <OverallGrid statisticsData={statisticsData} /> */}
+          <OverallGrid />
         </main>
       </Main>
     </div>
