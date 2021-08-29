@@ -1,4 +1,4 @@
-declare type MiniGuildMember = [string, number, number, number]
+declare type MiniGuildMember = [string, number, number, number, number]
 
 declare type GuildMember = {
   nickname: string
