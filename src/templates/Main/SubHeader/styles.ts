@@ -1,7 +1,5 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { Shadow, InnerContainer, Smooth } from 'styles'
-import OverallIconSvg from 'assets/svgs/charts.svg'
-import HighscoresIconSvg from 'assets/svgs/trophy.svg'
 
 export const Nav = styled.nav`
   position: relative;
@@ -30,20 +28,13 @@ export const A = styled.a`
   &[aria-current='page'], &:hover {
     border-color: var(--onPrimary);
   }
-`
 
-const NavIconStyle = css`
-  margin-right: 6px;
-  width: 18px;
-  height: 18px;
-  fill: var(--onPrimary);
-`
-
-export const OverallIcon = styled(OverallIconSvg)`
-  ${NavIconStyle}
-`
-export const HighscoresIcon = styled(HighscoresIconSvg)`
-  ${NavIconStyle}
+  svg {
+    margin-right: 6px;
+    width: 18px;
+    height: 18px;
+    fill: var(--onPrimary);
+  }
 `
 
 export const H3 = styled.h3`
