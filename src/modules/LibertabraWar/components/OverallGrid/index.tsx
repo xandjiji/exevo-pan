@@ -8,27 +8,30 @@ const OverallGrid = (): JSX.Element => {
 
   /* @ ToDo: skeleton */
   if (!warStatisticsData) return <div>loading...</div>
+  const { score, onlineCount } = warStatisticsData
   return (
     <S.Wrapper>
       <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
       <Scoreboard
         guildA={{
           name: 'Libertabra Pune',
-          kills: warStatisticsData.score.guildA,
+          kills: score.guildA,
+          diff: score.diffGuildA,
         }}
         guildB={{
           name: 'Bones Alliance',
-          kills: warStatisticsData.score.guildB,
+          kills: score.guildB,
+          diff: score.diffGuildB,
         }}
       />
       <OnlineChart
         guildA={{
           name: 'Libertabra Pune',
-          online: warStatisticsData.onlineCount.guildA,
+          online: onlineCount.guildA,
         }}
         guildB={{
           name: 'Bones Alliance',
-          online: warStatisticsData.onlineCount.guildB,
+          online: onlineCount.guildB,
         }}
       />
     </S.Wrapper>

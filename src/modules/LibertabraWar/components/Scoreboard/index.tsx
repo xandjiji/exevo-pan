@@ -12,14 +12,20 @@ const Scoreboard = ({
       <S.GuildName>{guildA.name}</S.GuildName>
       <S.ScoreCount winning={guildA.kills >= guildB.kills}>
         {guildA.kills}
+        <S.DiffCount>+{guildA.diff}</S.DiffCount>
       </S.ScoreCount>
+      <S.Label>Kills</S.Label>
     </S.GuildWrapper>
     <S.VsIcon />
     <S.GuildWrapper>
       <S.GuildName>{guildB.name}</S.GuildName>
       <S.ScoreCount winning={guildB.kills >= guildA.kills}>
         {guildB.kills}
+        <S.DiffCount title={`+${guildB.diff} since last update`}>
+          +{guildB.diff}
+        </S.DiffCount>
       </S.ScoreCount>
+      <S.Label>Kills</S.Label>
     </S.GuildWrapper>
   </S.Wrapper>
 )

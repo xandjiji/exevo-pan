@@ -26,19 +26,34 @@ export const GuildName = styled.h4`
 `
 
 export const ScoreCount = styled.span<{ winning: boolean }>`
-  font-size: 32px;
+  display: flex;
+  align-items: center;
+  font-size: 44px;
   font-weight: 700;
+  letter-spacing: 1px;
   color: ${({ winning }) => (winning ? 'var(--green)' : 'var(--red)')};
+`
 
-  &::after {
-    content: 'kills';
-    display: block;
-    font-size: 10px;
-    font-weight: 300;
-    color: var(--onSurface);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-  }
+export const DiffCount = styled.span`
+  padding: 4px 8px;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+
+  background-color: var(--alert);
+  border-radius: 4px;
+
+  font-size: 12px;
+  color: #000;
+`
+
+export const Label = styled.span`
+  display: block;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--onSurface);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 `
 
 export const VsIcon = styled(CrossIconSvg)`

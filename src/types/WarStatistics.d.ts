@@ -19,6 +19,8 @@ declare type WarStatistics = {
   score: {
     guildA: number
     guildB: number
+    diffGuildA: number
+    diffGuildB: number
   }
   top10Kills: {
     guildA: GuildMemberStats[]
