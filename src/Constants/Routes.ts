@@ -4,5 +4,6 @@ export const routes = {
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
   LIBERTABRA_WAR: '/libertabra-war',
+  LIBERTABRA_WAR_TOP_10: '/libertabra-war/top-10',
   ABOUT: '/about',
 }
