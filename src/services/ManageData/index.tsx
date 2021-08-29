@@ -5,6 +5,7 @@ import {
   filterItemData,
   checkAndHash,
   getPercentage,
+  unminifyGuildData,
 } from './utils'
 
 export default class ManageDataClient {
@@ -130,6 +131,33 @@ export default class ManageDataClient {
       return getFromLocalStorage<WarStatistics>(
         localStorageKeys.WAR_STATISTICS_DATA,
         {} as WarStatistics,
+      )
+    }
+  }
+
+  static async fetchGuildWarData(guildName: string): Promise<GuildMember[]> {
+    let path = paths.PUNE_DATA
+    let guildLocalStorageKey = localStorageKeys.PUNE_GUILD_DATA
+    let guildId = 0
+    if (guildName === 'Bones Alliance') {
+      path = paths.BONES_DATA
+      guildLocalStorageKey = localStorageKeys.BONES_GUILD_DATA
+      guildId = 1
+    }
+
+    try {
+      const response = await fetch(`${endpoints.WAR_DATA}${path}`)
+      const data = (await response.json()) as MiniGuildMember[]
+      const buildedData = unminifyGuildData(data, guildName, guildId)
+
+      saveToLocalStorage(guildLocalStorageKey, buildedData)
+
+      return buildedData
+    } catch (error: unknown) {
+      console.log(error)
+      return getFromLocalStorage<GuildMember[]>(
+        guildLocalStorageKey,
+        [] as GuildMember[],
       )
     }
   }
