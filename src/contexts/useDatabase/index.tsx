@@ -19,7 +19,7 @@ import {
   DatabaseContextValues,
   CharactersContextValues,
   DrawerFieldsContextValues,
-  StatisticsDataContextValues,
+  WarStatisticsDataContextValues,
   DatabaseDispatchContextValues,
 } from './types'
 
@@ -29,7 +29,7 @@ const defaultDatabaseState: DatabaseContextValues = {
   serverData: [],
   rareItemData: {},
   historyData: [],
-  statisticsData: null,
+  warStatisticsData: null,
   dispatch: () => {},
 }
 const DatabaseContext =
@@ -47,9 +47,9 @@ const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
   rareItemData: defaultDatabaseState.rareItemData,
 })
 
-const StatisticsDataContext = createContext<StatisticsDataContextValues>({
+const WarStatisticsDataContext = createContext<WarStatisticsDataContextValues>({
   loading: defaultDatabaseState.loading,
-  statisticsData: defaultDatabaseState.statisticsData,
+  warStatisticsData: defaultDatabaseState.warStatisticsData,
 })
 
 const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
@@ -62,7 +62,7 @@ export const DatabaseProvider = ({
   children: React.ReactNode
 }): JSX.Element => {
   const [
-    { characterData, serverData, rareItemData, historyData, statisticsData },
+    { characterData, serverData, rareItemData, historyData, warStatisticsData },
     dispatch,
   ] = useReducer(DatabaseReducer, {
     baseCharacterData: defaultDatabaseState.characterData,
@@ -71,7 +71,7 @@ export const DatabaseProvider = ({
     rareItemData: defaultDatabaseState.rareItemData,
     baseHistoryData: defaultDatabaseState.historyData,
     historyData: defaultDatabaseState.historyData,
-    statisticsData: defaultDatabaseState.statisticsData,
+    warStatisticsData: defaultDatabaseState.warStatisticsData,
   })
 
   const [{ loadingPaths, navigated }, dispatchLoad] = useReducer(
@@ -113,11 +113,30 @@ export const DatabaseProvider = ({
     }
   }, [])
 
+  const fetchWarStatisticsData = useCallback(async () => {
+    try {
+      const warData = await ManageDataClient.fetchWarStatisticsData()
+
+      dispatch({
+        type: 'WAR_STATISTICS_DATA_LOAD',
+        warStatisticsData: warData,
+      })
+    } finally {
+      dispatchLoad({ type: 'FINISH_LOADING', path: routes.LIBERTABRA_WAR })
+    }
+  }, [])
+
   useEffect(() => {
     if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
         dispatchLoad({ type: 'START_LOADING', path: pathname })
         fetchCharacterData(pathname)
+      }
+    }
+    if (pathname === routes.LIBERTABRA_WAR) {
+      if (!navigated.includes(pathname)) {
+        dispatchLoad({ type: 'START_LOADING', path: pathname })
+        fetchWarStatisticsData()
       }
     }
   }, [pathname, navigated, fetchCharacterData])
@@ -146,22 +165,24 @@ export const DatabaseProvider = ({
         serverData,
         rareItemData,
         historyData,
+        warStatisticsData,
         dispatch,
-        statisticsData,
       }}
     >
       <CharactersContext.Provider
         value={{ loading, characterData, historyData }}
       >
         <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
-          <StatisticsDataContext.Provider value={{ statisticsData, loading }}>
+          <WarStatisticsDataContext.Provider
+            value={{ warStatisticsData, loading }}
+          >
             <DatabaseDispatchContext.Provider value={{ dispatch }}>
               {loading && (
                 <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
               )}
               {children}
             </DatabaseDispatchContext.Provider>
-          </StatisticsDataContext.Provider>
+          </WarStatisticsDataContext.Provider>
         </DrawerFieldsContext.Provider>
       </CharactersContext.Provider>
     </DatabaseContext.Provider>
@@ -177,8 +198,8 @@ export const useCharacters = (): CharactersContextValues =>
 export const useDrawerFields = (): DrawerFieldsContextValues =>
   useContext(DrawerFieldsContext)
 
-export const useStatisticsData = (): StatisticsDataContextValues =>
-  useContext(StatisticsDataContext)
+export const useWarStatisticsData = (): WarStatisticsDataContextValues =>
+  useContext(WarStatisticsDataContext)
 
 export const useDatabaseDispatch = (): DatabaseDispatchContextValues =>
   useContext(DatabaseDispatchContext)

@@ -15,8 +15,8 @@ export type Action =
       type: 'RESET_TO_BASE_DATA'
     }
   | {
-      type: 'STATISTICS_DATA_LOAD'
-      statisticsData: StatisticsData
+      type: 'WAR_STATISTICS_DATA_LOAD'
+      warStatisticsData: WarStatistics
     }
 
 export interface DatabaseContextValues {
@@ -25,7 +25,7 @@ export interface DatabaseContextValues {
   serverData: ServerObject[]
   rareItemData: RareItemData
   historyData: CharacterObject[]
-  statisticsData: StatisticsData | null
+  warStatisticsData: WarStatistics | null
   dispatch: (action: Action) => void
 }
 
@@ -41,8 +41,8 @@ export interface DrawerFieldsContextValues {
   rareItemData: RareItemData
 }
 
-export interface StatisticsDataContextValues {
-  statisticsData: StatisticsData | null
+export interface WarStatisticsDataContextValues {
+  warStatisticsData: WarStatistics | null
   loading: boolean
 }
 
@@ -57,5 +57,5 @@ export interface DatabaseReducerState {
   rareItemData: RareItemData
   baseHistoryData: CharacterObject[]
   historyData: CharacterObject[]
-  statisticsData: StatisticsData | null
+  warStatisticsData: WarStatistics | null
 }
