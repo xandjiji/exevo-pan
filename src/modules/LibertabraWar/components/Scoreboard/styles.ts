@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { MaterialCard } from 'styles'
 import CrossIconSvg from 'assets/svgs/cross.svg'
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.section`
   ${MaterialCard}
   text-align: center;
 
