@@ -18,4 +18,9 @@ export const GuildWrapper = styled.div`
     flex-direction: unset;
     gap: 132px;
   }
+
+  @media (min-width: 1024px) {
+    flex-direction: column;
+    gap: 48px;
+  }
 `

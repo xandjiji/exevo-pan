@@ -5,12 +5,18 @@ import ExternalIconSvg from 'assets/svgs/external.svg'
 export const Wrapper = styled.div``
 
 export const GuildName = styled.h4`
+  margin: 0 auto;
+  width: fit-content;
   position: relative;
   margin-bottom: 8px;
   font-size: 16px;
   font-weight: 400;
   color: var(--onSurface);
   letter-spacing: 0.5px;
+
+  @media (min-width: 1024px) {
+    font-size: 24px;
+  }
 `
 
 export const Link = styled.a`
@@ -18,6 +24,10 @@ export const Link = styled.a`
   top: 50%;
   left: 100%;
   transform: translateY(-50%);
+
+  @media (min-width: 1024px) {
+    left: calc(100% + 6px);
+  }
 `
 
 export const ExternalIcon = styled(ExternalIconSvg)`
@@ -35,6 +45,10 @@ export const Kills = styled.span<{ winning: boolean }>`
   font-weight: 700;
   letter-spacing: 1px;
   color: ${({ winning }) => (winning ? 'var(--green)' : 'var(--red)')};
+
+  @media (min-width: 1024px) {
+    font-size: 80px;
+  }
 `
 
 export const Diff = styled.span`
@@ -49,6 +63,11 @@ export const Diff = styled.span`
   border-radius: 4px;
   font-size: 12px;
   color: #000;
+
+  @media (min-width: 1024px) {
+    margin-left: 16px;
+    font-size: 20px;
+  }
 `
 
 export const Label = styled.span`
@@ -58,4 +77,8 @@ export const Label = styled.span`
   color: var(--onSurface);
   text-transform: uppercase;
   letter-spacing: 1px;
+
+  @media (min-width: 1024px) {
+    font-size: 16px;
+  }
 `

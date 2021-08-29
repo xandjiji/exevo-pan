@@ -12,30 +12,32 @@ const OverallGrid = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
-      <Scoreboard
-        guildA={{
-          name: 'Libertabra Pune',
-          kills: score.guildA,
-          diff: score.diffGuildA,
-          href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Libertabra%20Pune&onlyshowonline=0',
-        }}
-        guildB={{
-          name: 'Bones Alliance',
-          kills: score.guildB,
-          diff: score.diffGuildB,
-          href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Bones%20Alliance&onlyshowonline=0',
-        }}
-      />
-      <OnlineChart
-        guildA={{
-          name: 'Libertabra Pune',
-          online: onlineCount.guildA,
-        }}
-        guildB={{
-          name: 'Bones Alliance',
-          online: onlineCount.guildB,
-        }}
-      />
+      <S.FirstRow>
+        <Scoreboard
+          guildA={{
+            name: 'Libertabra Pune',
+            kills: score.guildA,
+            diff: score.diffGuildA,
+            href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Libertabra%20Pune&onlyshowonline=0',
+          }}
+          guildB={{
+            name: 'Bones Alliance',
+            kills: score.guildB,
+            diff: score.diffGuildB,
+            href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Bones%20Alliance&onlyshowonline=0',
+          }}
+        />
+        <OnlineChart
+          guildA={{
+            name: 'Libertabra Pune',
+            online: onlineCount.guildA,
+          }}
+          guildB={{
+            name: 'Bones Alliance',
+            online: onlineCount.guildB,
+          }}
+        />
+      </S.FirstRow>
     </S.Wrapper>
   )
 }

@@ -38,3 +38,26 @@ export const Wrapper = styled.article`
 export const PageTitle = styled.h2`
   display: none;
 `
+
+export const FirstRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  > * {
+    width: 100%;
+  }
+
+  @media (min-width: 1024px) {
+    > *:first-child {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 488px;
+    }
+
+    > *:last-child {
+      width: calc(100% - 16px - 488px);
+    }
+  }
+`
