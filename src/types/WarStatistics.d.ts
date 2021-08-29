@@ -3,7 +3,7 @@ declare type OnlineSnapshot = {
   timeStamp: number
 }
 
-declare type WarGuildMember = {
+declare type GuildMemberStats = {
   nickname: string
   vocation: string
   level: number
@@ -21,11 +21,11 @@ declare type WarStatistics = {
     guildB: number
   }
   top10Kills: {
-    guildA: WarGuildMember[]
-    guildB: WarGuildMember[]
+    guildA: GuildMemberStats[]
+    guildB: GuildMemberStats[]
   }
   top10Deaths: {
-    guildA: WarGuildMember[]
-    guildB: WarGuildMember[]
+    guildA: GuildMemberStats[]
+    guildB: GuildMemberStats[]
   }
 }
