@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { Header, OverallGrid } from 'modules/LibertabraWar'
+import { Header, Top10Grid } from 'modules/LibertabraWar'
 import { endpoints, paths } from 'Constants'
 
 export default function LibertabraWar(): JSX.Element {
@@ -38,7 +38,7 @@ export default function LibertabraWar(): JSX.Element {
       <Main>
         <main>
           <Header />
-          <OverallGrid />
+          <Top10Grid />
         </main>
       </Main>
     </div>
