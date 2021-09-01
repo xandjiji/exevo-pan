@@ -1,5 +1,8 @@
 import { useWarStatisticsData } from 'contexts/useDatabase'
+import { formatNumberWithCommas } from 'utils'
 import ScoreboardXP from './ScoreboardXP'
+import ComparisonChart from '../ComparisonChart'
+import { xpToDataSnapshot } from './utils'
 import * as S from './styles'
 
 const GuildXPGrid = (): JSX.Element => {
@@ -8,7 +11,7 @@ const GuildXPGrid = (): JSX.Element => {
   /* @ ToDo: skeleton */
   if (!warStatisticsData) return <S.Loading />
   const {
-    xpStats: { todayDiff, lastDiff },
+    xpStats: { todayDiff, lastDiff, dailyXP, currentXP },
   } = warStatisticsData
   return (
     <S.Wrapper>
@@ -26,6 +29,21 @@ const GuildXPGrid = (): JSX.Element => {
           lastDiff: lastDiff.guildB,
           href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Bones%20Alliance&onlyshowonline=0',
         }}
+      />
+
+      <ComparisonChart
+        guildA={{
+          name: 'Libertabra Pune',
+          summaryValue: `${formatNumberWithCommas(currentXP.guildA)} total XP`,
+          dataArray: xpToDataSnapshot(dailyXP.guildA),
+        }}
+        guildB={{
+          name: 'Bones Alliance',
+          summaryValue: `${formatNumberWithCommas(currentXP.guildB)} total XP`,
+          dataArray: xpToDataSnapshot(dailyXP.guildB),
+        }}
+        tooltipSuffix="total XP"
+        dateLabelType="Date"
       />
     </S.Wrapper>
   )
