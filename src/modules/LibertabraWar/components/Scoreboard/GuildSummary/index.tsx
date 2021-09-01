@@ -1,4 +1,4 @@
-import { getNumberSign } from 'utils'
+import { getNumberSign, formatNumberWithCommas } from 'utils'
 import * as S from './styles'
 import { GuildSummaryProps } from './types'
 
@@ -18,12 +18,14 @@ const GuildSummary = ({
       </S.Link>
     </S.GuildName>
     <S.Kills winning={winning}>
-      {totalKills}
+      {formatNumberWithCommas(totalKills)}
       <S.Diff
-        title={`${getNumberSign(diff)}${Math.abs(diff)} since last update`}
+        title={`${getNumberSign(diff)}${formatNumberWithCommas(
+          Math.abs(diff),
+        )} since last update`}
       >
         {getNumberSign(diff)}
-        {Math.abs(diff)}
+        {formatNumberWithCommas(Math.abs(diff))}
       </S.Diff>
     </S.Kills>
     <S.Label>Kills</S.Label>
