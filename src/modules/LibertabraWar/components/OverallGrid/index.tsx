@@ -1,6 +1,6 @@
 import { useWarStatisticsData } from 'contexts/useDatabase'
 import Scoreboard from './Scoreboard'
-import OnlineChart from '../OnlineChart'
+import ComparisonChart from '../ComparisonChart'
 import * as S from './styles'
 
 const OverallGrid = (): JSX.Element => {
@@ -27,15 +27,23 @@ const OverallGrid = (): JSX.Element => {
             href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Bones%20Alliance&onlyshowonline=0',
           }}
         />
-        <OnlineChart
+        <ComparisonChart
           guildA={{
             name: 'Libertabra Pune',
-            online: onlineCount.guildA,
+            dataArray: onlineCount.guildA.map((dataItem) => ({
+              value: dataItem.count,
+              timeStamp: dataItem.timeStamp,
+            })),
           }}
           guildB={{
             name: 'Bones Alliance',
-            online: onlineCount.guildB,
+            dataArray: onlineCount.guildB.map((dataItem) => ({
+              value: dataItem.count,
+              timeStamp: dataItem.timeStamp,
+            })),
           }}
+          tooltipSuffix="members online"
+          dateLabelType="Time"
         />
       </S.FirstRow>
     </S.Wrapper>
