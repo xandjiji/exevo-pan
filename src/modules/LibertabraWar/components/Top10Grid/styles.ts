@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
+import CharacterTable from './CharacterTable'
 
 export const Wrapper = styled.article`
   position: relative;
@@ -53,4 +54,32 @@ export const Loading = styled(Spinner)`
   left: 50%;
   z-index: 1;
   transform: translate(-50%, -50%);
+`
+
+const HighlightedTh = css`
+  &::before {
+    content: '⬆';
+    position: relative;
+    left: -2px;
+  }
+`
+
+export const KillsTable = styled(CharacterTable)`
+  th:nth-child(3) {
+    ${HighlightedTh}
+  }
+  tbody td:nth-child(3) {
+    color: var(--green);
+    font-weight: 400;
+  }
+`
+
+export const DeathsTable = styled(CharacterTable)`
+  th:nth-child(4) {
+    ${HighlightedTh}
+  }
+  tbody td:nth-child(4) {
+    color: var(--red);
+    font-weight: 400;
+  }
 `
