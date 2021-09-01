@@ -1,3 +1,4 @@
+import { getNumberSign } from 'utils'
 import * as S from './styles'
 import { GuildSummaryProps } from './types'
 
@@ -18,7 +19,12 @@ const GuildSummary = ({
     </S.GuildName>
     <S.Kills winning={winning}>
       {totalKills}
-      <S.Diff title={`+${diff} since last update`}>+{diff}</S.Diff>
+      <S.Diff
+        title={`${getNumberSign(diff)}${Math.abs(diff)} since last update`}
+      >
+        {getNumberSign(diff)}
+        {Math.abs(diff)}
+      </S.Diff>
     </S.Kills>
     <S.Label>Kills</S.Label>
   </S.Wrapper>
