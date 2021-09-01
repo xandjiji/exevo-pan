@@ -1,4 +1,5 @@
 import { useWarStatisticsData } from 'contexts/useDatabase'
+import { getLastArrayElement } from 'utils'
 import Scoreboard from './Scoreboard'
 import ComparisonChart from '../ComparisonChart'
 import { onlineToDataSnapshot } from './utils'
@@ -32,14 +33,14 @@ const OverallGrid = (): JSX.Element => {
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${
-              onlineCount.guildA[onlineCount.guildA.length - 1].count
+              getLastArrayElement(onlineCount.guildA).count
             } online`,
             dataArray: onlineToDataSnapshot(onlineCount.guildA),
           }}
           guildB={{
             name: 'Bones Alliance',
             summaryValue: `${
-              onlineCount.guildB[onlineCount.guildB.length - 1].count
+              getLastArrayElement(onlineCount.guildB).count
             } online`,
             dataArray: onlineToDataSnapshot(onlineCount.guildB),
           }}
