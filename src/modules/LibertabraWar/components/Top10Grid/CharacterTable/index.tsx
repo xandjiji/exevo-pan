@@ -32,8 +32,10 @@ const CharacterTable = ({
             </a>
             <S.CharacterInfo>{`Level ${member.level} - ${member.vocation}`}</S.CharacterInfo>
           </S.CharacterColumn>
-          <Table.Column>{member.kills}</Table.Column>
-          <Table.Column>{member.deathCount}</Table.Column>
+          <Table.Column title="Total kills">{member.kills}</Table.Column>
+          <Table.Column title="Total death count">
+            {member.deathCount}
+          </Table.Column>
         </Table.Row>
       ))}
     </Table.Body>
