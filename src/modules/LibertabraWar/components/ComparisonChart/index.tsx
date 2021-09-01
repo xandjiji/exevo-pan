@@ -3,20 +3,22 @@ import { useTheme } from 'styled-components'
 import { Line } from 'react-chartjs-2'
 import { formatDateLabel } from './utils'
 import * as S from './styles'
-import { OnlineChartProps } from './types'
+import { ComparisonChartProps } from './types'
 
 const colorA = '#118AB2'
 const colorB = '#EF476F'
 
-const OnlineChart = ({
+const ComparisonChart = ({
   guildA,
   guildB,
+  tooltipSuffix,
+  dateLabelType,
   ...props
-}: OnlineChartProps): JSX.Element => {
+}: ComparisonChartProps): JSX.Element => {
   const { colors } = useTheme()
 
-  const lastOnlineCountA = guildA.online[guildA.online.length - 1].count
-  const lastOnlineCountB = guildB.online[guildB.online.length - 1].count
+  const lastOnlineCountA = guildA.dataArray[guildA.dataArray.length - 1].value
+  const lastOnlineCountB = guildB.dataArray[guildB.dataArray.length - 1].value
 
   const options = useMemo(
     () => ({
@@ -60,7 +62,7 @@ const OnlineChart = ({
       tooltips: {
         callbacks: {
           label: (tooltipItem: Record<string, number>) =>
-            `${tooltipItem.value} members online`,
+            `${tooltipItem.value} ${tooltipSuffix}`,
         },
         displayColors: false,
       },
@@ -70,20 +72,20 @@ const OnlineChart = ({
 
   const chartDataObject = useMemo(
     () => ({
-      labels: guildA.online.map((snapshot) =>
-        formatDateLabel(snapshot.timeStamp),
+      labels: guildA.dataArray.map((snapshot) =>
+        formatDateLabel(snapshot.timeStamp, dateLabelType),
       ),
       datasets: [
         {
           label: guildA.name,
-          data: guildA.online.map((snapshot) => snapshot.count),
+          data: guildA.dataArray.map((snapshot) => snapshot.value),
           fill: false,
           backgroundColor: colorA,
           borderColor: colorA,
         },
         {
           label: guildB.name,
-          data: guildB.online.map((snapshot) => snapshot.count),
+          data: guildB.dataArray.map((snapshot) => snapshot.value),
           fill: false,
           backgroundColor: colorB,
           borderColor: colorB,
@@ -112,4 +114,4 @@ const OnlineChart = ({
   )
 }
 
-export default memo(OnlineChart)
+export default memo(ComparisonChart)
