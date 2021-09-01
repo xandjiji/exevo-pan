@@ -58,9 +58,10 @@ export const Loading = styled(Spinner)`
 
 const HighlightedTh = css`
   &::before {
-    content: '⬆';
+    content: '▴';
     position: relative;
-    left: -2px;
+    top: -1px;
+    left: -3px;
   }
 `
 
