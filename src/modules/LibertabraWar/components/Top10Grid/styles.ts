@@ -33,6 +33,18 @@ export const Wrapper = styled.article`
     );
     pointer-events: none;
   }
+
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 1400px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
 `
 
 export const Loading = styled(Spinner)`
