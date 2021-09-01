@@ -24,11 +24,9 @@ export const Table = styled(BaseTable)`
   }
 
   ${BaseTable.Column} {
-    padding-top: 10px;
-
     &:nth-child(1) {
       font-size: 10px;
-      line-height: 1.75;
+      line-height: 1.6;
       vertical-align: top;
     }
   }
