@@ -59,7 +59,22 @@ export const HeadColumn = styled.th`
   color: var(--onSurface);
 `
 
-export const Body = styled.tbody``
+export const Body = styled.tbody`
+  > *:not(:last-child) {
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      height: 1px;
+      background-color: var(--separator);
+      opacity: 0.3;
+    }
+  }
+`
 
 export const Column = styled.td`
   padding-top: 6px;
