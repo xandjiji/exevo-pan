@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, Top10Grid } from 'modules/LibertabraWar'
+import { endpoints, paths } from 'Constants'
 
 export default function LibertabraWar(): JSX.Element {
   return (
@@ -25,6 +26,13 @@ export default function LibertabraWar(): JSX.Element {
           content="Follow live data and statistics from Libertabra War!"
         />
         <meta property="og:type" content="website" />
+
+        <link
+          rel="preload"
+          href={`${endpoints.WAR_DATA}${paths.WAR_STATISTICS}`}
+          as="fetch"
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <Main>
