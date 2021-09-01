@@ -63,6 +63,7 @@ export const Body = styled.tbody``
 
 export const Column = styled.td`
   padding-top: 6px;
+  padding-bottom: 6px;
   font-size: 14px;
   font-weight: 300;
   color: var(--onSurface);
