@@ -1,6 +1,7 @@
 import { useWarStatisticsData } from 'contexts/useDatabase'
 import Scoreboard from './Scoreboard'
 import ComparisonChart from '../ComparisonChart'
+import { onlineToDataSnapshot } from './utils'
 import * as S from './styles'
 
 const OverallGrid = (): JSX.Element => {
@@ -33,20 +34,14 @@ const OverallGrid = (): JSX.Element => {
             summaryValue: `${
               onlineCount.guildA[onlineCount.guildA.length - 1].count
             } online`,
-            dataArray: onlineCount.guildA.map((dataItem) => ({
-              value: dataItem.count,
-              timeStamp: dataItem.timeStamp,
-            })),
+            dataArray: onlineToDataSnapshot(onlineCount.guildA),
           }}
           guildB={{
             name: 'Bones Alliance',
             summaryValue: `${
               onlineCount.guildB[onlineCount.guildB.length - 1].count
             } online`,
-            dataArray: onlineCount.guildB.map((dataItem) => ({
-              value: dataItem.count,
-              timeStamp: dataItem.timeStamp,
-            })),
+            dataArray: onlineToDataSnapshot(onlineCount.guildB),
           }}
           tooltipSuffix="members online"
           dateLabelType="Time"
