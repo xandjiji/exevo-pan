@@ -11,10 +11,33 @@ declare type GuildMemberStats = {
   kills: number
 }
 
+declare type XPSnapshot = {
+  xp: number
+  timeStamp: number
+}
+
 declare type WarStatistics = {
   onlineCount: {
     guildA: OnlineSnapshot[]
     guildB: OnlineSnapshot[]
+  }
+  xpStats: {
+    dailyXP: {
+      guildA: XPSnapshot[]
+      guildB: XPSnapshot[]
+    }
+    currentXP: {
+      guildA: number
+      guildB: number
+    }
+    todayDiff: {
+      guildA: number
+      guildB: number
+    }
+    lastDiff: {
+      guildA: number
+      guildB: number
+    }
   }
   score: {
     guildA: number
