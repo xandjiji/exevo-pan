@@ -17,9 +17,6 @@ const ComparisonChart = ({
 }: ComparisonChartProps): JSX.Element => {
   const { colors } = useTheme()
 
-  const lastOnlineCountA = guildA.dataArray[guildA.dataArray.length - 1].value
-  const lastOnlineCountB = guildB.dataArray[guildB.dataArray.length - 1].value
-
   const options = useMemo(
     () => ({
       responsive: true,
@@ -100,12 +97,12 @@ const ComparisonChart = ({
       <S.SummaryWrapper>
         <S.GuildSummary style={{ color: colorA }}>
           <S.GuildName>{guildA.name}</S.GuildName>
-          <S.OnlineCount>{lastOnlineCountA} online</S.OnlineCount>
+          <S.OnlineCount>{guildA.summaryValue}</S.OnlineCount>
         </S.GuildSummary>
 
         <S.GuildSummary style={{ color: colorB }}>
           <S.GuildName>{guildB.name}</S.GuildName>
-          <S.OnlineCount>{lastOnlineCountB} online</S.OnlineCount>
+          <S.OnlineCount>{guildB.summaryValue}</S.OnlineCount>
         </S.GuildSummary>
       </S.SummaryWrapper>
 

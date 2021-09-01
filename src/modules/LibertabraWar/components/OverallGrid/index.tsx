@@ -30,6 +30,9 @@ const OverallGrid = (): JSX.Element => {
         <ComparisonChart
           guildA={{
             name: 'Libertabra Pune',
+            summaryValue: `${
+              onlineCount.guildA[onlineCount.guildA.length - 1].count
+            } online`,
             dataArray: onlineCount.guildA.map((dataItem) => ({
               value: dataItem.count,
               timeStamp: dataItem.timeStamp,
@@ -37,6 +40,9 @@ const OverallGrid = (): JSX.Element => {
           }}
           guildB={{
             name: 'Bones Alliance',
+            summaryValue: `${
+              onlineCount.guildB[onlineCount.guildB.length - 1].count
+            } online`,
             dataArray: onlineCount.guildB.map((dataItem) => ({
               value: dataItem.count,
               timeStamp: dataItem.timeStamp,

@@ -1,13 +1,13 @@
+type ComparisonItem = {
+  name: string
+  summaryValue: string
+  dataArray: DataSnapshot[]
+}
+
 export interface ComparisonChartProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  guildA: {
-    name: string
-    dataArray: DataSnapshot[]
-  }
-  guildB: {
-    name: string
-    dataArray: DataSnapshot[]
-  }
+  guildA: ComparisonItem
+  guildB: ComparisonItem
   tooltipSuffix: string
   dateLabelType: 'Time' | 'Date'
 }
