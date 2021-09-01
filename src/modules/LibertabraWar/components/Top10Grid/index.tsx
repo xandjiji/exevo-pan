@@ -10,23 +10,23 @@ const Top10Grid = (): JSX.Element => {
   return (
     <S.Wrapper>
       <CharacterTable
-        title="Most kills"
+        title="Most kills ⚔️"
         subtitle="Libertabra Pune"
         characterList={warStatisticsData.top10Kills.guildA}
       />
       <CharacterTable
-        title="Most kills"
+        title="Most kills ⚔️"
         subtitle="Bones Alliance"
         characterList={warStatisticsData.top10Kills.guildB}
       />
 
       <CharacterTable
-        title="Most deaths"
+        title="Most deaths 💀"
         subtitle="Libertabra Pune"
         characterList={warStatisticsData.top10Deaths.guildA}
       />
       <CharacterTable
-        title="Most deaths"
+        title="Most deaths 💀"
         subtitle="Bones Alliance"
         characterList={warStatisticsData.top10Deaths.guildB}
       />
