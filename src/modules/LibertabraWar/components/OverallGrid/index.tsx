@@ -1,5 +1,5 @@
 import { useWarStatisticsData } from 'contexts/useDatabase'
-import Scoreboard from '../Scoreboard'
+import Scoreboard from './Scoreboard'
 import OnlineChart from '../OnlineChart'
 import * as S from './styles'
 

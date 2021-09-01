@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import GuildSummary from '../GuildSummary'
+import GuildSummary from '../../GuildSummary'
 import * as S from './styles'
 import { ScoreboardProps } from './types'
 
