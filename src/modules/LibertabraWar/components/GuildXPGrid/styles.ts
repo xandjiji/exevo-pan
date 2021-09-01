@@ -39,6 +39,16 @@ export const PageTitle = styled.h2`
   display: none;
 `
 
+export const FirstRow = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+
+  > * {
+    width: 100%;
+  }
+`
+
 export const Loading = styled(Spinner)`
   position: fixed;
   top: 50%;

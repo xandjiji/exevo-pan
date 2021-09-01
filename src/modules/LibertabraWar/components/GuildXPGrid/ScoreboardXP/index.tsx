@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import GuildSummary from '../../GuildSummary'
 import * as S from './styles'
 import { ScoreboardXPProps } from './types'
 
@@ -10,7 +9,7 @@ const ScoreboardXP = ({
 }: ScoreboardXPProps): JSX.Element => (
   <S.Wrapper {...props}>
     <S.GuildWrapper>
-      <GuildSummary
+      <S.GuildSummary
         guildName={guildA.name}
         href={guildA.href}
         displayNumber={guildA.todayDiff}
@@ -19,7 +18,7 @@ const ScoreboardXP = ({
         label="Today XP"
       />
 
-      <GuildSummary
+      <S.GuildSummary
         guildName={guildB.name}
         href={guildB.href}
         displayNumber={guildB.todayDiff}
