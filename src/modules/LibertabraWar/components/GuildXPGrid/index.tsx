@@ -38,14 +38,14 @@ const GuildXPGrid = (): JSX.Element => {
             name: 'Libertabra Pune',
             summaryValue: `${formatNumberWithCommas(
               Math.trunc(currentXP.guildA / 1000000),
-            )}M XP`,
+            )}M total XP`,
             dataArray: xpToDataSnapshot(dailyXPDiff.guildA),
           }}
           guildB={{
             name: 'Bones Alliance',
             summaryValue: `${formatNumberWithCommas(
               Math.trunc(currentXP.guildB / 1000000),
-            )}M XP`,
+            )}M total XP`,
             dataArray: xpToDataSnapshot(dailyXPDiff.guildB),
           }}
           tooltipSuffix="XP difference"
