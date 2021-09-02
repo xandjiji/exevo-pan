@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Shadow, InnerContainer, Smooth } from 'styles'
+import { Shadow, InnerContainer, Smooth, CustomScrollbar } from 'styles'
 
 export const Nav = styled.nav`
   position: relative;
@@ -8,6 +8,9 @@ export const Nav = styled.nav`
   ${Shadow}
   ${Smooth}
   background-color: var(--darkerPrimary);
+
+  overflow: auto;
+  ${CustomScrollbar}
 `
 
 export const Ul = styled.ul`
