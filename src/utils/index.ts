@@ -1,6 +1,7 @@
 export * from './capitalizeFirstLetter'
 export * from './checkKeyboardTrigger'
 export * from './clampValue'
+export * from './compactNumberFormatter'
 export * from './debounce'
 export * from './fillArrayUntil'
 export * from './formatNumberWithCommas'
