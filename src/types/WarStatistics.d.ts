@@ -26,6 +26,10 @@ declare type WarStatistics = {
       guildA: XPSnapshot[]
       guildB: XPSnapshot[]
     }
+    dailyXPDiff: {
+      guildA: XPSnapshot[]
+      guildB: XPSnapshot[]
+    }
     currentXP: {
       guildA: number
       guildB: number
