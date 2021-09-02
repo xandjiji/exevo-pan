@@ -11,7 +11,7 @@ const GuildXPGrid = (): JSX.Element => {
   /* @ ToDo: skeleton */
   if (!warStatisticsData) return <S.Loading />
   const {
-    xpStats: { todayDiff, lastDiff, dailyXP, currentXP },
+    xpStats: { todayDiff, lastDiff, dailyXPDiff, currentXP },
   } = warStatisticsData
   return (
     <S.Wrapper>
@@ -36,15 +36,19 @@ const GuildXPGrid = (): JSX.Element => {
         <ComparisonChart
           guildA={{
             name: 'Libertabra Pune',
-            summaryValue: `${formatNumberWithCommas(currentXP.guildA)} XP`,
-            dataArray: xpToDataSnapshot(dailyXP.guildA),
+            summaryValue: `${formatNumberWithCommas(
+              Math.trunc(currentXP.guildA / 1000000),
+            )}M XP`,
+            dataArray: xpToDataSnapshot(dailyXPDiff.guildA),
           }}
           guildB={{
             name: 'Bones Alliance',
-            summaryValue: `${formatNumberWithCommas(currentXP.guildB)} XP`,
-            dataArray: xpToDataSnapshot(dailyXP.guildB),
+            summaryValue: `${formatNumberWithCommas(
+              Math.trunc(currentXP.guildB / 1000000),
+            )}M XP`,
+            dataArray: xpToDataSnapshot(dailyXPDiff.guildB),
           }}
-          tooltipSuffix="total XP"
+          tooltipSuffix="XP difference"
           dateLabelType="Date"
         />
       </S.FirstRow>
