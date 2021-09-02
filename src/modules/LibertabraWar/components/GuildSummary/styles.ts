@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Clickable } from 'styles'
+import { Clickable, Shadow } from 'styles'
 import ExternalIconSvg from 'assets/svgs/external.svg'
 
 export const Wrapper = styled.div``
@@ -39,7 +39,7 @@ export const ExternalIcon = styled(ExternalIconSvg)`
   ${Clickable}
 `
 
-export const Kills = styled.span<{ winning: boolean }>`
+export const DisplayNumber = styled.span<{ winning: boolean }>`
   position: relative;
   font-size: 44px;
   font-weight: 700;
@@ -63,6 +63,7 @@ export const Diff = styled.span`
   border-radius: 4px;
   font-size: 12px;
   color: #000;
+  ${Shadow}
 
   @media (min-width: 1024px) {
     margin-left: 16px;

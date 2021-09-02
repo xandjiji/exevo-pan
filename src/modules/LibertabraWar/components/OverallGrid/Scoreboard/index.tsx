@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import GuildSummary from './GuildSummary'
+import GuildSummary from '../../GuildSummary'
 import * as S from './styles'
 import { ScoreboardProps } from './types'
 
@@ -13,17 +13,19 @@ const Scoreboard = ({
       <GuildSummary
         guildName={guildA.name}
         href={guildA.href}
-        totalKills={guildA.kills}
+        displayNumber={guildA.kills}
         diff={guildA.diff}
         winning={guildA.kills >= guildB.kills}
+        label="Kills"
       />
 
       <GuildSummary
         guildName={guildB.name}
         href={guildB.href}
-        totalKills={guildB.kills}
+        displayNumber={guildB.kills}
         diff={guildB.diff}
         winning={guildB.kills >= guildA.kills}
+        label="Kills"
       />
     </S.GuildWrapper>
   </S.Wrapper>

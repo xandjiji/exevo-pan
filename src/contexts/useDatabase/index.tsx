@@ -124,7 +124,11 @@ export const DatabaseProvider = ({
     } finally {
       dispatchLoad({
         type: 'FINISH_LOADING',
-        paths: [routes.LIBERTABRA_WAR, routes.LIBERTABRA_WAR_TOP_10],
+        paths: [
+          routes.LIBERTABRA_WAR,
+          routes.LIBERTABRA_WAR_TOP_10,
+          routes.LIBERTABRA_WAR_GUILD_XP,
+        ],
       })
     }
   }, [])
@@ -138,12 +142,17 @@ export const DatabaseProvider = ({
     }
     if (
       pathname === routes.LIBERTABRA_WAR ||
-      pathname === routes.LIBERTABRA_WAR_TOP_10
+      pathname === routes.LIBERTABRA_WAR_TOP_10 ||
+      routes.LIBERTABRA_WAR_GUILD_XP
     ) {
       if (!navigated.includes(pathname)) {
         dispatchLoad({
           type: 'START_LOADING',
-          paths: [routes.LIBERTABRA_WAR, routes.LIBERTABRA_WAR_TOP_10],
+          paths: [
+            routes.LIBERTABRA_WAR,
+            routes.LIBERTABRA_WAR_TOP_10,
+            routes.LIBERTABRA_WAR_GUILD_XP,
+          ],
         })
         fetchWarStatisticsData()
       }

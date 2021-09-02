@@ -2,7 +2,8 @@ export interface GuildSummaryProps
   extends React.HTMLAttributes<HTMLDivElement> {
   guildName: string
   href: string
-  totalKills: number
+  displayNumber: number
   diff: number
+  label: string
   winning: boolean
 }

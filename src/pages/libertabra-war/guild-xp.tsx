@@ -1,38 +1,38 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { Header, Top10Grid } from 'modules/LibertabraWar'
+import { Header, GuildXPGrid } from 'modules/LibertabraWar'
 import { endpoints, paths } from 'Constants'
 
 export default function LibertabraWar(): JSX.Element {
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Libertabra War Rankings</title>
-        <meta name="title" content="Exevo Pan - Libertabra War Rankings" />
+        <title>Exevo Pan - Libertabra War Guild XP</title>
+        <meta name="title" content="Exevo Pan - Libertabra War Guild XP" />
         <meta
           property="og:site_name"
-          content="Exevo Pan - Libertabra War Rankings"
+          content="Exevo Pan - Libertabra War Guild XP"
         />
         <meta
           property="og:title"
-          content="Exevo Pan - Libertabra War Rankings"
+          content="Exevo Pan - Libertabra War Guild XP"
         />
         <meta
           property="twitter:title"
-          content="Exevo Pan - Libertabra War Rankings"
+          content="Exevo Pan - Libertabra War Guild XP"
         />
 
         <meta
           name="description"
-          content="Check out top frags and most deaths from Libertabra War!"
+          content="Compare daily guild XP differences from Libertabra War!"
         />
         <meta
           property="twitter:description"
-          content="Check out top frags and most deaths from Libertabra War!"
+          content="Compare daily guild XP differences from Libertabra War!"
         />
         <meta
           property="og:description"
-          content="Check out top frags and most deaths from Libertabra War!"
+          content="Compare daily guild XP differences from Libertabra War!"
         />
         <meta property="og:type" content="website" />
 
@@ -47,7 +47,7 @@ export default function LibertabraWar(): JSX.Element {
       <Main>
         <main>
           <Header />
-          <Top10Grid />
+          <GuildXPGrid />
         </main>
       </Main>
     </div>
