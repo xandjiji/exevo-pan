@@ -7,23 +7,32 @@ export default function LibertabraWar(): JSX.Element {
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Libertabra War</title>
-        <meta name="title" content="Exevo Pan - Libertabra War" />
-        <meta property="og:site_name" content="Exevo Pan - Libertabra War" />
-        <meta property="og:title" content="Exevo Pan - Libertabra War" />
-        <meta property="twitter:title" content="Exevo Pan - Libertabra War" />
+        <title>Exevo Pan - Libertabra War Rankings</title>
+        <meta name="title" content="Exevo Pan - Libertabra War Rankings" />
+        <meta
+          property="og:site_name"
+          content="Exevo Pan - Libertabra War Rankings"
+        />
+        <meta
+          property="og:title"
+          content="Exevo Pan - Libertabra War Rankings"
+        />
+        <meta
+          property="twitter:title"
+          content="Exevo Pan - Libertabra War Rankings"
+        />
 
         <meta
           name="description"
-          content="Follow live data and statistics from Libertabra War!"
+          content="Check out top frags and most deaths from Libertabra War!"
         />
         <meta
           property="twitter:description"
-          content="Follow live data and statistics from Libertabra War!"
+          content="Check out top frags and most deaths from Libertabra War!"
         />
         <meta
           property="og:description"
-          content="Follow live data and statistics from Libertabra War!"
+          content="Check out top frags and most deaths from Libertabra War!"
         />
         <meta property="og:type" content="website" />
 
