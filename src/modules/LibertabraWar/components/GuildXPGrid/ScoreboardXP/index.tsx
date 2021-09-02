@@ -12,7 +12,7 @@ const ScoreboardXP = ({
       <S.GuildSummary
         guildName={guildA.name}
         href={guildA.href}
-        displayNumber={guildA.todayDiff}
+        displayNumber={Math.abs(guildA.todayDiff)}
         diff={guildA.lastDiff}
         winning={guildA.todayDiff >= 0}
         label="Today XP"
@@ -21,7 +21,7 @@ const ScoreboardXP = ({
       <S.GuildSummary
         guildName={guildB.name}
         href={guildB.href}
-        displayNumber={guildB.todayDiff}
+        displayNumber={Math.abs(guildB.todayDiff)}
         diff={guildB.lastDiff}
         winning={guildB.todayDiff >= 0}
         label="Today XP"
