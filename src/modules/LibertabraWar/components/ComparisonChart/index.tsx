@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 import { Line } from 'react-chartjs-2'
-import { formatNumberWithCommas } from 'utils'
+import { compactNumberFormatter } from 'utils'
 import { formatDateLabel } from './utils'
 import * as S from './styles'
 import { ComparisonChartProps } from './types'
@@ -49,7 +49,7 @@ const ComparisonChart = ({
           {
             ticks: {
               fontColor: colors.onSurface,
-              callback: (value: number) => formatNumberWithCommas(value),
+              callback: (value: number) => compactNumberFormatter(value),
             },
             gridLines: {
               color: `${colors.separator}60`,
