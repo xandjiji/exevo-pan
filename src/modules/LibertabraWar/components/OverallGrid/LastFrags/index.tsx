@@ -29,7 +29,9 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
         <Table.Head>
           <Table.Row>
             <Table.HeadColumn>Killed</Table.HeadColumn>
-            <Table.HeadColumn highlighted>Character</Table.HeadColumn>
+            <Table.HeadColumn highlighted title="Sorted by character level">
+              Character
+            </Table.HeadColumn>
           </Table.Row>
         </Table.Head>
 
