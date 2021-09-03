@@ -1,6 +1,10 @@
 import styled from 'styled-components'
 import { Table as BaseTable } from 'components/Atoms'
 
+export const Wrapper = styled.div`
+  position: relative;
+`
+
 export const Table = styled(BaseTable)`
   ${BaseTable.HeadColumn}, ${BaseTable.Column} {
     &:nth-child(1) {
@@ -29,4 +33,11 @@ export const CharacterInfo = styled.span`
   margin-top: 6px;
   display: block;
   font-size: 10px;
+`
+
+export const ObserverElement = styled.div`
+  position: absolute;
+  bottom: 440px;
+  left: 0;
+  z-index: 1;
 `
