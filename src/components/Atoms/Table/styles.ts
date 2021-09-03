@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { MaterialCard, Smooth, Shadow, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.section`
@@ -52,11 +52,22 @@ export const Head = styled.thead`
   border-bottom: solid 1px var(--separator);
 `
 
-export const HeadColumn = styled.th`
+export const HeadColumn = styled.th<{ highlighted?: boolean }>`
   padding-bottom: 6px;
   font-size: 12px;
   font-weight: 600;
   color: var(--onSurface);
+
+  ${({ highlighted }) =>
+    highlighted &&
+    css`
+      &::before {
+        content: '▴';
+        position: relative;
+        top: -1px;
+        left: -3px;
+      }
+    `}
 `
 
 export const Body = styled.tbody`
