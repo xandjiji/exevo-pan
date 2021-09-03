@@ -1,3 +1,10 @@
+declare type RecentFrag = {
+  nickname: string
+  level: number
+  vocation: string
+  timeStamp: number
+}
+
 declare type OnlineSnapshot = {
   count: number
   timeStamp: number
@@ -56,5 +63,9 @@ declare type WarStatistics = {
   top10Deaths: {
     guildA: GuildMemberStats[]
     guildB: GuildMemberStats[]
+  }
+  lastDeaths: {
+    guildA: RecentFrag[]
+    guildB: RecentFrag[]
   }
 }
