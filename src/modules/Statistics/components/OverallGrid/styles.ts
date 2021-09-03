@@ -6,6 +6,7 @@ export const Wrapper = styled.article`
 
   ${InnerContainer}
   padding-top: 16px;
+  padding-bottom: 16px;
 
   max-height: calc(100% - 44px);
   overflow: auto;
