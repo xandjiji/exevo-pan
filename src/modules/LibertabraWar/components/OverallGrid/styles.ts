@@ -6,6 +6,7 @@ export const Wrapper = styled.article`
 
   ${InnerContainer}
   padding-top: 16px;
+  padding-bottom: 16px;
 
   max-height: calc(100% - 44px);
   overflow: auto;
@@ -59,6 +60,20 @@ export const FirstRow = styled.div`
     > *:last-child {
       width: calc(100% - 16px - 488px);
     }
+  }
+`
+
+export const SecondRow = styled.div`
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 1fr;
+
+  > * {
+    height: fit-content;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
   }
 `
 

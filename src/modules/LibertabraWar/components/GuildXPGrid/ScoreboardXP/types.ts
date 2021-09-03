@@ -1,7 +1,6 @@
 type GuildStats = {
   name: string
   todayDiff: number
-  lastDiff: number
   href: string
 }
 
