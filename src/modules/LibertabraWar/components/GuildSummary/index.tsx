@@ -20,14 +20,16 @@ const GuildSummary = ({
     </S.GuildName>
     <S.DisplayNumber winning={winning}>
       {formatNumberWithCommas(displayNumber)}
-      <S.Diff
-        title={`${getNumberSign(diff)}${formatNumberWithCommas(
-          Math.abs(diff),
-        )} since last update`}
-      >
-        {getNumberSign(diff)}
-        {formatNumberWithCommas(Math.abs(diff))}
-      </S.Diff>
+      {!!diff && (
+        <S.Diff
+          title={`${getNumberSign(diff)}${formatNumberWithCommas(
+            Math.abs(diff),
+          )} since last update`}
+        >
+          {getNumberSign(diff)}
+          {formatNumberWithCommas(Math.abs(diff))}
+        </S.Diff>
+      )}
     </S.DisplayNumber>
     <S.Label>{label}</S.Label>
   </S.Wrapper>

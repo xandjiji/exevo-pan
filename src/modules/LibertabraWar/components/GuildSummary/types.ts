@@ -3,7 +3,7 @@ export interface GuildSummaryProps
   guildName: string
   href: string
   displayNumber: number
-  diff: number
+  diff?: number
   label: string
   winning: boolean
 }
