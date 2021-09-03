@@ -143,7 +143,7 @@ export const DatabaseProvider = ({
     if (
       pathname === routes.LIBERTABRA_WAR ||
       pathname === routes.LIBERTABRA_WAR_TOP_10 ||
-      routes.LIBERTABRA_WAR_GUILD_XP
+      pathname === routes.LIBERTABRA_WAR_GUILD_XP
     ) {
       if (!navigated.includes(pathname)) {
         dispatchLoad({
@@ -157,7 +157,7 @@ export const DatabaseProvider = ({
         fetchWarStatisticsData()
       }
     }
-  }, [pathname, navigated, fetchCharacterData])
+  }, [pathname, navigated, fetchCharacterData, fetchWarStatisticsData])
 
   const isMounted = useIsMounted()
   useEffect(() => {
