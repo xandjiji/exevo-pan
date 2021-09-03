@@ -82,6 +82,11 @@ export default class MyDocument extends Document {
             `,
             }}
           />
+          <script
+            async
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${google.ADSENSE_ID}`}
+            crossOrigin="anonymous"
+          />
         </Head>
         <body>
           <script type="text/javascript" src="/loadTheme.js" />
