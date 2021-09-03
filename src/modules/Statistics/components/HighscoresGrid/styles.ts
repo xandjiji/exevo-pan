@@ -34,6 +34,12 @@ export const Wrapper = styled.article`
     );
     pointer-events: none;
   }
+
+  &::after {
+    content: '';
+    grid-column: 1 / -1;
+    height: 24px;
+  }
 `
 
 export const PageTitle = styled.h2`

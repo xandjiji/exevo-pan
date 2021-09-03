@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react'
 import { useTheme } from 'styled-components'
 import { Line } from 'react-chartjs-2'
-import { compactNumberFormatter } from 'utils'
+import { compactNumberFormatter, formatNumberWithCommas } from 'utils'
 import { formatDateLabel } from './utils'
 import * as S from './styles'
 import { ComparisonChartProps } from './types'
@@ -61,7 +61,7 @@ const ComparisonChart = ({
       tooltips: {
         callbacks: {
           label: (tooltipItem: Record<string, number>) =>
-            `${tooltipItem.value} ${tooltipSuffix}`,
+            `${formatNumberWithCommas(tooltipItem.value)} ${tooltipSuffix}`,
         },
         displayColors: false,
       },

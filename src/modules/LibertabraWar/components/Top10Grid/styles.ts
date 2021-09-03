@@ -46,6 +46,12 @@ export const Wrapper = styled.article`
   @media (min-width: 1400px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
+
+  ::after {
+    content: '';
+    grid-column: 1 / -1;
+    height: 16px;
+  }
 `
 
 export const Loading = styled(Spinner)`

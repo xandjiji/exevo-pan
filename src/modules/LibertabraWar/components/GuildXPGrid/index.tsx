@@ -11,7 +11,7 @@ const GuildXPGrid = (): JSX.Element => {
   /* @ ToDo: skeleton */
   if (!warStatisticsData) return <S.Loading />
   const {
-    xpStats: { todayDiff, lastDiff, dailyXPDiff, currentXP },
+    xpStats: { todayDiff, dailyXPDiff, currentXP },
   } = warStatisticsData
   return (
     <S.Wrapper>
@@ -22,13 +22,11 @@ const GuildXPGrid = (): JSX.Element => {
           guildA={{
             name: 'Libertabra Pune',
             todayDiff: todayDiff.guildA,
-            lastDiff: lastDiff.guildA,
             href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Libertabra%20Pune&onlyshowonline=0',
           }}
           guildB={{
             name: 'Bones Alliance',
             todayDiff: todayDiff.guildB,
-            lastDiff: lastDiff.guildB,
             href: 'https://www.tibia.com/community/?subtopic=guilds&page=view&order=level_desc&GuildName=Bones%20Alliance&onlyshowonline=0',
           }}
         />

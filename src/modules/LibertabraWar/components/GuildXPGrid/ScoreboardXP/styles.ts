@@ -22,63 +22,25 @@ export const GuildWrapper = styled.div`
 `
 
 export const GuildSummary = styled(BaseGuildSummary)`
-  @media (min-width: 1400px) {
-    margin-left: -80px;
-  }
-
   h4 + span {
     display: block;
     margin-bottom: 4px;
-    font-size: 16px;
+    font-size: 24px;
 
     &::before {
       content: '${({ winning }) => (winning ? '+' : '-')}';
     }
 
-    span {
-      font-size: 10px;
-    }
-
     @media (min-width: 420px) {
-      font-size: 20px;
-      span {
-        font-size: 12px;
-      }
-    }
-
-    @media (min-width: 460px) {
-      font-size: 24px;
-      span {
-        font-size: 12px;
-      }
-    }
-
-    @media (min-width: 560px) {
       font-size: 32px;
-      span {
-        font-size: 14px;
-      }
     }
 
-    @media (min-width: 660px) {
-      font-size: 40px;
-      span {
-        font-size: 14px;
-      }
-    }
-
-    @media (min-width: 660px) {
-      font-size: 40px;
-      span {
-        font-size: 14px;
-      }
+    @media (min-width: 768px) {
+      font-size: 54px;
     }
 
     @media (min-width: 1024px) {
-      font-size: 54px;
-      span {
-        font-size: 16px;
-      }
+      font-size: 60px;
     }
   }
 `
