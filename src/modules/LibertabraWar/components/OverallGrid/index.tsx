@@ -1,6 +1,7 @@
 import { useWarStatisticsData } from 'contexts/useDatabase'
 import { getLastArrayElement } from 'utils'
 import Scoreboard from './Scoreboard'
+import LastFrags from './LastFrags'
 import ComparisonChart from '../ComparisonChart'
 import { onlineToDataSnapshot } from './utils'
 import * as S from './styles'
@@ -10,7 +11,7 @@ const OverallGrid = (): JSX.Element => {
 
   /* @ ToDo: skeleton */
   if (!warStatisticsData) return <S.Loading />
-  const { score, onlineCount } = warStatisticsData
+  const { score, onlineCount, lastDeaths } = warStatisticsData
   return (
     <S.Wrapper>
       <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
@@ -48,6 +49,19 @@ const OverallGrid = (): JSX.Element => {
           dateLabelType="Time"
         />
       </S.FirstRow>
+
+      <S.SecondRow>
+        <LastFrags
+          title="Recent deaths ⚰️"
+          subtitle="Libertabra Pune"
+          fragsList={lastDeaths.guildA}
+        />
+        <LastFrags
+          title="Recent deaths ⚰️"
+          subtitle="Bones Alliance"
+          fragsList={lastDeaths.guildB}
+        />
+      </S.SecondRow>
     </S.Wrapper>
   )
 }

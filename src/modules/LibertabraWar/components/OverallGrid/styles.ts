@@ -63,6 +63,20 @@ export const FirstRow = styled.div`
   }
 `
 
+export const SecondRow = styled.div`
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: 1fr;
+
+  > * {
+    height: fit-content;
+  }
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`
+
 export const Loading = styled(Spinner)`
   position: fixed;
   top: 50%;
