@@ -66,6 +66,10 @@ export default class MyDocument extends Document {
             name="google-site-verification"
             content={google.SITE_VERIFICATION}
           />
+          <meta
+            name="purpleads-verification"
+            content="d9c5bf34c756843afc4ec3c8"
+          />
 
           <script
             async
