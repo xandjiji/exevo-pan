@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { InnerContainer, Shadow } from 'styles'
+import { InnerPadding, Shadow } from 'styles'
 
 export const DrawerFooter = styled.div`
   display: flex;
@@ -18,6 +18,6 @@ export const DrawerFooter = styled.div`
     color: var(--onPrimary);
   }
 
-  ${InnerContainer}
+  ${InnerPadding}
   ${Shadow}
 `

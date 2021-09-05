@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 import GithubSvg from 'assets/svgs/github.svg'
-import { InnerContainer, Clickable } from 'styles'
+import { InnerPadding, Clickable } from 'styles'
 
 const typographyStyle = css`
   font-size: 14px;
@@ -8,7 +8,7 @@ const typographyStyle = css`
 `
 
 export const Wrapper = styled.footer`
-  ${InnerContainer}
+  ${InnerPadding}
   padding-top: 12px;
   padding-bottom: 12px;
   display: flex;
