@@ -38,12 +38,14 @@ export const Wrapper = styled.article`
   display: grid;
   grid-gap: 16px;
   grid-template-columns: 1fr;
+  grid-template-columns: repeat(auto-fit, minmax(0, 440px));
+  justify-content: center;
 
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
   }
 
-  @media (min-width: 1400px) {
+  @media (min-width: 1600px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 
