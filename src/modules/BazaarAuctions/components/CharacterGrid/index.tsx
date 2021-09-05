@@ -158,20 +158,6 @@ const CharacterGrid = ({
         />
       )}
 
-      <div
-        id="div-gpt-ad-1630765737059-0"
-        style={{ minWidth: 300, minHeight: 75 }}
-      >
-        <script
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `
-                googletag.cmd.push(function() { googletag.display('div-gpt-ad-1630765737059-0'); });
-            `,
-          }}
-        />
-      </div>
-
       <S.Grid ref={gridRef} id="character-grid">
         {gridState.current !== 'ready' ? (
           Array.from({ length: 10 }, (_, index) => (

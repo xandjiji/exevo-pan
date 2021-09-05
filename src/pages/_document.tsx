@@ -82,23 +82,6 @@ export default class MyDocument extends Document {
             `,
             }}
           />
-          <script
-            async
-            src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"
-          />
-          <script
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={{
-              __html: `
-                window.googletag = window.googletag || {cmd: []};
-                googletag.cmd.push(function() {
-                    googletag.defineSlot('/22584664158/exevopan-banner', [300, 75], 'div-gpt-ad-1630765737059-0').addService(googletag.pubads());
-                    googletag.pubads().enableSingleRequest();
-                    googletag.enableServices();
-                });
-            `,
-            }}
-          />
         </Head>
         <body>
           <script type="text/javascript" src="/loadTheme.js" />
