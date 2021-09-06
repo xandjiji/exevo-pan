@@ -5,7 +5,7 @@ import { GuildSummaryProps } from './types'
 const GuildSummary = ({
   guildName,
   href,
-  displayNumber,
+  displayValue,
   diff,
   label,
   winning,
@@ -19,7 +19,7 @@ const GuildSummary = ({
       </S.Link>
     </S.GuildName>
     <S.DisplayNumber winning={winning}>
-      {formatNumberWithCommas(displayNumber)}
+      {displayValue}
       {!!diff && (
         <S.Diff
           title={`${getNumberSign(diff)}${formatNumberWithCommas(
