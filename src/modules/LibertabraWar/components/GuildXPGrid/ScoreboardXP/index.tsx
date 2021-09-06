@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { formatDisplayValue } from './utils'
 import * as S from './styles'
 import { ScoreboardXPProps } from './types'
 
@@ -12,7 +13,7 @@ const ScoreboardXP = ({
       <S.GuildSummary
         guildName={guildA.name}
         href={guildA.href}
-        displayNumber={Math.abs(guildA.todayDiff)}
+        displayValue={formatDisplayValue(guildA.todayDiff)}
         winning={guildA.todayDiff >= 0}
         label="Today XP"
       />
@@ -20,7 +21,7 @@ const ScoreboardXP = ({
       <S.GuildSummary
         guildName={guildB.name}
         href={guildB.href}
-        displayNumber={Math.abs(guildB.todayDiff)}
+        displayValue={formatDisplayValue(guildB.todayDiff)}
         winning={guildB.todayDiff >= 0}
         label="Today XP"
       />

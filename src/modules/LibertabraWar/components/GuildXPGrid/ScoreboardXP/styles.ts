@@ -27,10 +27,6 @@ export const GuildSummary = styled(BaseGuildSummary)`
     margin-bottom: 4px;
     font-size: 24px;
 
-    &::before {
-      content: '${({ winning }) => (winning ? '+' : '-')}';
-    }
-
     @media (min-width: 420px) {
       font-size: 32px;
     }
