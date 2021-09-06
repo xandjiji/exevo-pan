@@ -15,6 +15,7 @@ const GuildSummary = ({
       {guildName}
       <S.Link target="_blank" rel="noreferrer noopener" href={href}>
         <S.ExternalIcon />
+        Go to guild page
       </S.Link>
     </S.GuildName>
     <S.DisplayNumber winning={winning}>
