@@ -1,9 +1,9 @@
 import Image from 'next/image'
 import { Tooltip } from 'components/Organisms'
 import { links } from 'Constants'
+import fansiteImg from 'assets/fansite-logo.png'
 import { Hero, Pillar, Section, KsuTooltip, Footer } from './components'
 import { sections } from './sections'
-import fansiteImg from 'assets/fansite-logo.png'
 import * as S from './styles'
 import { KsuData } from './types'
 
