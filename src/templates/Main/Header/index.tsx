@@ -28,6 +28,7 @@ const Header = ({
           <S.LogoWrapper>
             <S.H1>{heading[pathname] ?? 'Exevo Pan'}</S.H1>
             <S.ExevoPanLogo
+              unoptimized
               priority
               aria-label="Go to homepage"
               alt={heading[pathname] ?? 'Exevo Pan'}
