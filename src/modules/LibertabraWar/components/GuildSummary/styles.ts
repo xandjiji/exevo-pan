@@ -24,6 +24,7 @@ export const Link = styled.a`
   top: 50%;
   left: 100%;
   transform: translateY(-50%);
+  font-size: 0;
 
   @media (min-width: 1024px) {
     left: calc(100% + 6px);

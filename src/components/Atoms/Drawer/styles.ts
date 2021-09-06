@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Smooth, Shadow, InnerContainer, CustomScrollbar } from 'styles'
+import { Smooth, Shadow, InnerPadding, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.div`
   position: fixed;
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
 export const DrawerBody = styled.div`
   padding-bottom: 16px;
   padding-top: 16px;
-  ${InnerContainer}
+  ${InnerPadding}
 
   position: relative;
   height: 100%;

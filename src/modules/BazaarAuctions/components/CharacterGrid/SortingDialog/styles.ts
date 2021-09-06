@@ -6,7 +6,7 @@ import { IconStyling } from '../styles'
 export const SortIcon = styled(SortIconSvg)`
   ${Clickable}
   ${IconStyling}
-  transform: translateY(4px);
+  vertical-align: middle;
 `
 
 export const Dialog = styled.div`

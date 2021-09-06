@@ -1,4 +1,6 @@
 import { memo } from 'react'
+import { formatNumberWithCommas } from 'utils'
+import { formatDiffValue } from './utils'
 import GuildSummary from '../../GuildSummary'
 import * as S from './styles'
 import { ScoreboardProps } from './types'
@@ -13,8 +15,8 @@ const Scoreboard = ({
       <GuildSummary
         guildName={guildA.name}
         href={guildA.href}
-        displayNumber={guildA.kills}
-        diff={guildA.diff}
+        displayValue={formatNumberWithCommas(guildA.kills)}
+        diffText={formatDiffValue(guildA.diff)}
         winning={guildA.kills >= guildB.kills}
         label="Kills"
       />
@@ -22,8 +24,8 @@ const Scoreboard = ({
       <GuildSummary
         guildName={guildB.name}
         href={guildB.href}
-        displayNumber={guildB.kills}
-        diff={guildB.diff}
+        displayValue={formatNumberWithCommas(guildB.kills)}
+        diffText={formatDiffValue(guildB.diff)}
         winning={guildB.kills >= guildA.kills}
         label="Kills"
       />

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { InnerContainer, Shadow, Clickable } from 'styles'
+import { InnerPadding, Shadow, Clickable } from 'styles'
 import ArrowIconSvg from 'assets/svgs/arrowBack.svg'
 
 export const DrawerHead = styled.div`
@@ -9,7 +9,7 @@ export const DrawerHead = styled.div`
   height: 60px;
   background-color: var(--primary);
 
-  ${InnerContainer}
+  ${InnerPadding}
   ${Shadow}
 `
 

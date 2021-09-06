@@ -40,7 +40,7 @@ export const HeroImageWrapper = styled.div`
 `
 
 export const HeroImage = styled(Image).attrs({ src: HeroFood })`
-  filter: grayscale(0.85);
+  filter: grayscale(0.75);
   opacity: 0.15;
 `
 

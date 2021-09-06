@@ -1,12 +1,11 @@
-import { getNumberSign, formatNumberWithCommas } from 'utils'
 import * as S from './styles'
 import { GuildSummaryProps } from './types'
 
 const GuildSummary = ({
   guildName,
   href,
-  displayNumber,
-  diff,
+  displayValue,
+  diffText,
   label,
   winning,
   ...props
@@ -16,19 +15,13 @@ const GuildSummary = ({
       {guildName}
       <S.Link target="_blank" rel="noreferrer noopener" href={href}>
         <S.ExternalIcon />
+        Go to guild page
       </S.Link>
     </S.GuildName>
     <S.DisplayNumber winning={winning}>
-      {formatNumberWithCommas(displayNumber)}
-      {!!diff && (
-        <S.Diff
-          title={`${getNumberSign(diff)}${formatNumberWithCommas(
-            Math.abs(diff),
-          )} since last update`}
-        >
-          {getNumberSign(diff)}
-          {formatNumberWithCommas(Math.abs(diff))}
-        </S.Diff>
+      {displayValue}
+      {!!diffText && (
+        <S.Diff title={`${diffText} since last update`}>{diffText}</S.Diff>
       )}
     </S.DisplayNumber>
     <S.Label>{label}</S.Label>

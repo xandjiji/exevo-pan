@@ -1,5 +1,7 @@
+import Image from 'next/image'
 import { Tooltip } from 'components/Organisms'
 import { links } from 'Constants'
+import fansiteImg from 'assets/fansite-logo.png'
 import { Hero, Pillar, Section, KsuTooltip, Footer } from './components'
 import { sections } from './sections'
 import * as S from './styles'
@@ -93,6 +95,12 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
             That means we are against cheating, real life harassment and
             anti-sportsmanship behavior.
           </p>
+          <Image
+            src={fansiteImg}
+            alt="Supported fansite"
+            width="100"
+            height="100"
+          />
         </Section>
 
         <Section {...sections.CONTACT_INFORMATION}>

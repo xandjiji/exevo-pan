@@ -49,7 +49,7 @@ export const FirstRow = styled.div`
     width: 100%;
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1200px) {
     > *:first-child {
       display: flex;
       align-items: center;
