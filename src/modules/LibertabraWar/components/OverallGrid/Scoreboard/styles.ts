@@ -1,10 +1,11 @@
 import styled from 'styled-components'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Smooth } from 'styles'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
   padding: 20px;
   text-align: center;
+  ${Smooth}
 `
 
 export const GuildWrapper = styled.div`
