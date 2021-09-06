@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { InnerContainer, MaterialCard } from 'styles'
+import { InnerContainer, InnerPadding, MaterialCard } from 'styles'
 import MailSvg from 'assets/svgs/mail.svg'
 import GithubSvg from 'assets/svgs/github.svg'
 import LinkedinSvg from 'assets/svgs/linkedin.svg'
@@ -16,7 +16,7 @@ export const BodyLayout = styled.div`
 
 export const SurfaceWrapper = styled.article`
   ${MaterialCard}
-  ${InnerContainer}
+  ${InnerPadding}
   padding-top: 32px;
   padding-bottom: 32px;
   overflow: hidden;

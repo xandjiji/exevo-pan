@@ -85,15 +85,20 @@ export const Grid = styled.div`
   padding-top: 16px;
   position: relative;
   height: calc(100% - 70px);
+  background-color: var(--background);
   overflow: auto;
   ${CustomScrollbar}
 
   display: grid;
   grid-gap: 16px;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-auto-rows: auto;
 
-  background-color: var(--background);
+  grid-template-columns: repeat(auto-fit, minmax(0, 440px));
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 
   &::after {
     content: '';
