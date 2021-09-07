@@ -12,11 +12,18 @@ const MembersTable = ({
 }: MembersTableProps): JSX.Element => {
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')
+  const [currentGuild, setCurrentGuild] = useState<0 | 1 | null>(null)
 
   const onPageChange = useCallback(
     (newPage: number) => setCurrentPage(newPage),
     [],
   )
+
+  const toggleGuild = (newGuildId: 0 | 1) =>
+    setCurrentGuild((prevGuildId) => {
+      if (newGuildId === prevGuildId) return null
+      return newGuildId
+    })
 
   const onSearchChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -25,8 +32,13 @@ const MembersTable = ({
   )
 
   const filteredList = useMemo(() => {
-    setCurrentPage(1)
     let filteringList = [...memberList]
+
+    if (currentGuild !== null) {
+      filteringList = filteringList.filter(
+        (member) => member.guildId === currentGuild,
+      )
+    }
 
     if (searchTerm) {
       filteringList = filteringList.filter((member) =>
@@ -34,8 +46,9 @@ const MembersTable = ({
       )
     }
 
+    setCurrentPage(1)
     return filteringList
-  }, [memberList, searchTerm])
+  }, [memberList, currentGuild, searchTerm])
 
   const currentListPage = useMemo(
     () =>
@@ -48,8 +61,18 @@ const MembersTable = ({
       <S.ControlHeader>
         <S.ToggleFiltersGroup label="Filters">
           <S.FiltersChipWrapper>
-            <S.Chip>Libertabra Pune</S.Chip>
-            <S.Chip>Bones Alliance</S.Chip>
+            <S.Chip
+              overrideStatus={currentGuild === 0}
+              onClick={() => toggleGuild(0)}
+            >
+              Libertabra Pune
+            </S.Chip>
+            <S.Chip
+              overrideStatus={currentGuild === 1}
+              onClick={() => toggleGuild(1)}
+            >
+              Bones Alliance
+            </S.Chip>
             <S.Chip>
               <S.KnightIcon />
               Knight
