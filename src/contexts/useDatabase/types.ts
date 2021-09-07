@@ -18,6 +18,10 @@ export type Action =
       type: 'WAR_STATISTICS_DATA_LOAD'
       warStatisticsData: WarStatistics
     }
+  | {
+      type: 'WAR_GUILD_DATA_LOAD'
+      warGuildData: MemberWarData[]
+    }
 
 export interface DatabaseContextValues {
   loading: boolean

@@ -133,6 +133,29 @@ export const DatabaseProvider = ({
     }
   }, [])
 
+  const fetchGuildWarData = useCallback(async () => {
+    try {
+      const [miniGuildDataA, miniGuildDataB] = await Promise.all([
+        ManageDataClient.fetchGuildWarData('Libertabra Pune'),
+        ManageDataClient.fetchGuildWarData('Bones Alliance'),
+      ])
+
+      const allGuildMembers = [...miniGuildDataA, ...miniGuildDataB].sort(
+        (a, b) => b.level - a.level,
+      )
+
+      dispatch({
+        type: 'WAR_GUILD_DATA_LOAD',
+        warGuildData: allGuildMembers,
+      })
+    } finally {
+      dispatchLoad({
+        type: 'FINISH_LOADING',
+        paths: [routes.LIBERTABRA_WAR_SEARCH],
+      })
+    }
+  }, [])
+
   useEffect(() => {
     if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
@@ -157,7 +180,22 @@ export const DatabaseProvider = ({
         fetchWarStatisticsData()
       }
     }
-  }, [pathname, navigated, fetchCharacterData, fetchWarStatisticsData])
+    if (pathname === routes.LIBERTABRA_WAR_SEARCH) {
+      if (!navigated.includes(pathname)) {
+        dispatchLoad({
+          type: 'START_LOADING',
+          paths: [routes.LIBERTABRA_WAR_SEARCH],
+        })
+        fetchGuildWarData()
+      }
+    }
+  }, [
+    pathname,
+    navigated,
+    fetchCharacterData,
+    fetchWarStatisticsData,
+    fetchGuildWarData,
+  ])
 
   const isMounted = useIsMounted()
   useEffect(() => {
