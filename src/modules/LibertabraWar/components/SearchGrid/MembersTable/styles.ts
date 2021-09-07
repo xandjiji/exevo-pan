@@ -6,7 +6,6 @@ import {
   Paginator as BasePaginator,
   Chip as BaseChip,
 } from 'components/Atoms'
-import { Smooth } from 'styles'
 import KnightImage from 'assets/knight.png'
 import PaladinImage from 'assets/paladin.png'
 import SorcererImage from 'assets/sorcerer.png'
@@ -14,6 +13,10 @@ import DruidImage from 'assets/druid.png'
 import LabelGroup from './LabelGroup'
 
 export const Table = styled(BaseTable)`
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 768px;
+
   margin-bottom: 16px;
   ${BaseTable.HeadColumn}, ${BaseTable.Column} {
     &:nth-child(1) {
