@@ -26,29 +26,31 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Table {...props}>
-        <Table.Head>
-          <Table.Row>
-            <Table.HeadColumn>Killed</Table.HeadColumn>
-            <Table.HeadColumn highlighted title="Sorted by character level">
-              Character
-            </Table.HeadColumn>
-          </Table.Row>
-        </Table.Head>
-
-        <Table.Body>
-          {currentList.map((frag) => (
-            <Table.Row key={`${frag.timeStamp}-${frag.nickname}`}>
-              <Table.Column>{getTimeDiff(frag.timeStamp)}</Table.Column>
-              <CharacterInfoColumn
-                nickname={frag.nickname}
-                level={frag.level}
-                vocation={frag.vocation}
-              />
+      <Table.Element>
+        <S.Table {...props}>
+          <Table.Head>
+            <Table.Row>
+              <Table.HeadColumn>Killed</Table.HeadColumn>
+              <Table.HeadColumn highlighted title="Sorted by character level">
+                Character
+              </Table.HeadColumn>
             </Table.Row>
-          ))}
-        </Table.Body>
-      </S.Table>
+          </Table.Head>
+
+          <Table.Body>
+            {currentList.map((frag) => (
+              <Table.Row key={`${frag.timeStamp}-${frag.nickname}`}>
+                <Table.Column>{getTimeDiff(frag.timeStamp)}</Table.Column>
+                <CharacterInfoColumn
+                  nickname={frag.nickname}
+                  level={frag.level}
+                  vocation={frag.vocation}
+                />
+              </Table.Row>
+            ))}
+          </Table.Body>
+        </S.Table>
+      </Table.Element>
       {!reachedMaxPage && (
         <S.ObserverElement ref={ref as React.RefObject<HTMLDivElement>} />
       )}
