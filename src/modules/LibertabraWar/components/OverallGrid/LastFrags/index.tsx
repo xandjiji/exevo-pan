@@ -1,6 +1,7 @@
 import { useState, useMemo, useRef, useEffect } from 'react'
 import { Table } from 'components/Atoms'
 import { useOnScreen } from 'hooks'
+import CharacterInfoColumn from '../../CharacterInfoColumn'
 import { getTimeDiff } from './utils'
 import * as S from './styles'
 import { LastFragsProps } from './types'
@@ -39,18 +40,11 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
           {currentList.map((frag) => (
             <Table.Row key={`${frag.timeStamp}-${frag.nickname}`}>
               <Table.Column>{getTimeDiff(frag.timeStamp)}</Table.Column>
-              <S.CharacterColumn>
-                <a
-                  href={`https://www.tibia.com/community/?name=${encodeURIComponent(
-                    frag.nickname,
-                  )}`}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  {frag.nickname}
-                </a>
-                <S.CharacterInfo>{`Level ${frag.level} - ${frag.vocation}`}</S.CharacterInfo>
-              </S.CharacterColumn>
+              <CharacterInfoColumn
+                nickname={frag.nickname}
+                level={frag.level}
+                vocation={frag.vocation}
+              />
             </Table.Row>
           ))}
         </Table.Body>

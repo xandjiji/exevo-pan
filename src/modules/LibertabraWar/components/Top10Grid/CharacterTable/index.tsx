@@ -1,4 +1,5 @@
 import { Table } from 'components/Atoms'
+import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
 import { CharacterTableProps } from './types'
 
@@ -20,18 +21,11 @@ const CharacterTable = ({
       {characterList.map((member, index) => (
         <Table.Row key={member.nickname}>
           <Table.Column>{index + 1}</Table.Column>
-          <S.CharacterColumn>
-            <a
-              href={`https://www.tibia.com/community/?name=${encodeURIComponent(
-                member.nickname,
-              )}`}
-              target="_blank"
-              rel="noreferrer noopener"
-            >
-              {member.nickname}
-            </a>
-            <S.CharacterInfo>{`Level ${member.level} - ${member.vocation}`}</S.CharacterInfo>
-          </S.CharacterColumn>
+          <CharacterInfoColumn
+            nickname={member.nickname}
+            level={member.level}
+            vocation={member.vocation}
+          />
           <Table.Column title="Total kills">{member.kills}</Table.Column>
           <Table.Column title="Total death count">
             {member.deathCount}
