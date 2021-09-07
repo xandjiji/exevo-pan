@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Table as BaseTable } from 'components/Atoms'
+import { Table as BaseTable, Input as BaseInput } from 'components/Atoms'
 
 export const Table = styled(BaseTable)`
   ${BaseTable.HeadColumn}, ${BaseTable.Column} {
@@ -18,6 +18,10 @@ export const Table = styled(BaseTable)`
       min-width: 50px;
       text-align: center;
     }
+
+    &:nth-child(2) {
+      min-width: 64px;
+    }
   }
 
   ${BaseTable.Column} {
@@ -30,5 +34,13 @@ export const Table = styled(BaseTable)`
 export const ControlHeader = styled.div`
   margin-bottom: 24px;
   display: flex;
-  justify-content: flex-end;
+  align-items: flex-end;
+  justify-content: space-between;
+`
+
+export const Input = styled(BaseInput)`
+  max-width: 200px;
+  [role='alert'] {
+    display: none;
+  }
 `
