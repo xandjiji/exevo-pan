@@ -4,7 +4,7 @@ import { MaterialCard, Smooth, Shadow, CustomScrollbar } from 'styles'
 export const Wrapper = styled.section`
   ${MaterialCard}
   padding: 18px 24px;
-  overflow: hidden;
+  overflow: auto;
   ${Smooth}
   ${CustomScrollbar}
 

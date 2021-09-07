@@ -18,6 +18,10 @@ export type Action =
       type: 'WAR_STATISTICS_DATA_LOAD'
       warStatisticsData: WarStatistics
     }
+  | {
+      type: 'WAR_GUILD_DATA_LOAD'
+      warGuildData: MemberWarData[]
+    }
 
 export interface DatabaseContextValues {
   loading: boolean
@@ -26,6 +30,7 @@ export interface DatabaseContextValues {
   rareItemData: RareItemData
   historyData: CharacterObject[]
   warStatisticsData: WarStatistics | null
+  warGuildData: MemberWarData[]
   dispatch: (action: Action) => void
 }
 
@@ -46,6 +51,11 @@ export interface WarStatisticsDataContextValues {
   loading: boolean
 }
 
+export interface WarGuildDataContextValues {
+  warGuildData: MemberWarData[]
+  loading: boolean
+}
+
 export interface DatabaseDispatchContextValues {
   dispatch: (action: Action) => void
 }
@@ -58,4 +68,5 @@ export interface DatabaseReducerState {
   baseHistoryData: CharacterObject[]
   historyData: CharacterObject[]
   warStatisticsData: WarStatistics | null
+  warGuildData: MemberWarData[]
 }

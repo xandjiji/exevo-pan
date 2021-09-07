@@ -135,7 +135,7 @@ export default class ManageDataClient {
     }
   }
 
-  static async fetchGuildWarData(guildName: string): Promise<GuildMember[]> {
+  static async fetchGuildWarData(guildName: string): Promise<MemberWarData[]> {
     let path = paths.PUNE_DATA
     let guildLocalStorageKey = localStorageKeys.PUNE_GUILD_DATA
     let guildId = 0
@@ -147,7 +147,7 @@ export default class ManageDataClient {
 
     try {
       const response = await fetch(`${endpoints.WAR_DATA}${path}`)
-      const data = (await response.json()) as MiniGuildMember[]
+      const data = (await response.json()) as MiniMemberWarData[]
       const buildedData = unminifyGuildData(data, guildName, guildId)
 
       saveToLocalStorage(guildLocalStorageKey, buildedData)
@@ -155,9 +155,9 @@ export default class ManageDataClient {
       return buildedData
     } catch (error: unknown) {
       console.log(error)
-      return getFromLocalStorage<GuildMember[]>(
+      return getFromLocalStorage<MemberWarData[]>(
         guildLocalStorageKey,
-        [] as GuildMember[],
+        [] as MemberWarData[],
       )
     }
   }

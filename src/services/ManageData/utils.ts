@@ -100,10 +100,10 @@ const getVocationString = (vocationId: number): string => {
 }
 
 export const unminifyGuildData = (
-  guildData: MiniGuildMember[],
+  guildData: MiniMemberWarData[],
   guildName: string,
   guildId: number,
-): GuildMember[] =>
+): MemberWarData[] =>
   guildData.map((member) => {
     const [nickname, vocationId, level, deathCount, kills] = member
 

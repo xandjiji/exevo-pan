@@ -27,14 +27,6 @@ export const Table = styled(BaseTable)`
   }
 `
 
-export const CharacterColumn = styled(Table.Column)``
-
-export const CharacterInfo = styled.span`
-  margin-top: 6px;
-  display: block;
-  font-size: 10px;
-`
-
 export const ObserverElement = styled.div`
   position: absolute;
   bottom: 440px;
