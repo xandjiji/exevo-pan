@@ -3,6 +3,7 @@ import Image from 'next/image'
 import {
   Table as BaseTable,
   Input as BaseInput,
+  Paginator as BasePaginator,
   Chip as BaseChip,
 } from 'components/Atoms'
 import KnightImage from 'assets/knight.png'
@@ -12,6 +13,7 @@ import DruidImage from 'assets/druid.png'
 import LabelGroup from './LabelGroup'
 
 export const Table = styled(BaseTable)`
+  margin-bottom: 16px;
   ${BaseTable.HeadColumn}, ${BaseTable.Column} {
     &:nth-child(1) {
       width: 100%;
@@ -47,17 +49,28 @@ export const ControlHeader = styled.div`
   align-items: flex-end;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 16px;
+`
+
+export const SearchGroup = styled(LabelGroup)`
+  width: 100%;
+
+  @media (min-width: 768px) {
+    max-width: 300px;
+  }
 `
 
 export const Input = styled(BaseInput)`
-  max-width: 200px;
   [role='alert'] {
     display: none;
   }
 `
 
+export const Paginator = styled(BasePaginator)`
+  margin-left: auto;
+`
+
 export const ToggleFiltersGroup = styled(LabelGroup)`
-  margin-bottom: 16px;
   width: 100%;
 `
 

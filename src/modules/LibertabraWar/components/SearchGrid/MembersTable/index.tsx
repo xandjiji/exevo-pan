@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
-import { Table, Paginator, Chip } from 'components/Atoms'
+import { Table } from 'components/Atoms'
 import LabelGroup from './LabelGroup'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
@@ -68,7 +68,10 @@ const MembersTable = ({
             </S.Chip>
           </S.FiltersChipWrapper>
         </S.ToggleFiltersGroup>
-        <LabelGroup label="Search for nickname" htmlFor="search-nickname-input">
+        <S.SearchGroup
+          label="Search for nickname"
+          htmlFor="search-nickname-input"
+        >
           <S.Input
             id="search-nickname-input"
             aria-controls="members-grid"
@@ -76,8 +79,8 @@ const MembersTable = ({
             placeholder="Nickname"
             onChange={onSearchChange}
           />
-        </LabelGroup>
-        <Paginator
+        </S.SearchGroup>
+        <S.Paginator
           aria-controls="members-grid"
           pageSize={pageSize}
           totalItems={filteredList.length}
