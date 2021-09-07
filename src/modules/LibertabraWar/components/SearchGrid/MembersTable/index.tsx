@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { Table } from 'components/Atoms'
+import EmptyState from './EmptyState'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
 import { MembersTableProps, SortMode } from './types'
@@ -216,6 +217,7 @@ const MembersTable = ({
           ))}
         </Table.Body>
       </Table.Element>
+      {!currentListPage.length && <EmptyState />}
     </S.Table>
   )
 }

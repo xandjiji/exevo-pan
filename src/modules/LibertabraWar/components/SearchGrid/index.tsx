@@ -4,7 +4,6 @@ import * as S from './styles'
 
 const SearchGrid = (): JSX.Element => {
   const { warGuildData } = useWarGuildData()
-  console.log(warGuildData)
 
   /* @ ToDo: skeleton */
   if (warGuildData.length === 0) return <S.Loading />
