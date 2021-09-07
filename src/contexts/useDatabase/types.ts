@@ -30,6 +30,7 @@ export interface DatabaseContextValues {
   rareItemData: RareItemData
   historyData: CharacterObject[]
   warStatisticsData: WarStatistics | null
+  warGuildData: MemberWarData[]
   dispatch: (action: Action) => void
 }
 
@@ -50,6 +51,11 @@ export interface WarStatisticsDataContextValues {
   loading: boolean
 }
 
+export interface WarGuildDataContextValues {
+  warStatisticsData: MemberWarData[]
+  loading: boolean
+}
+
 export interface DatabaseDispatchContextValues {
   dispatch: (action: Action) => void
 }
@@ -62,4 +68,5 @@ export interface DatabaseReducerState {
   baseHistoryData: CharacterObject[]
   historyData: CharacterObject[]
   warStatisticsData: WarStatistics | null
+  warGuildData: MemberWarData[]
 }

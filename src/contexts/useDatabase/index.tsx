@@ -30,6 +30,7 @@ const defaultDatabaseState: DatabaseContextValues = {
   rareItemData: {},
   historyData: [],
   warStatisticsData: null,
+  warGuildData: [],
   dispatch: () => {},
 }
 const DatabaseContext =
@@ -62,7 +63,14 @@ export const DatabaseProvider = ({
   children: React.ReactNode
 }): JSX.Element => {
   const [
-    { characterData, serverData, rareItemData, historyData, warStatisticsData },
+    {
+      characterData,
+      serverData,
+      rareItemData,
+      historyData,
+      warStatisticsData,
+      warGuildData,
+    },
     dispatch,
   ] = useReducer(DatabaseReducer, {
     baseCharacterData: defaultDatabaseState.characterData,
@@ -72,6 +80,7 @@ export const DatabaseProvider = ({
     baseHistoryData: defaultDatabaseState.historyData,
     historyData: defaultDatabaseState.historyData,
     warStatisticsData: defaultDatabaseState.warStatisticsData,
+    warGuildData: defaultDatabaseState.warGuildData,
   })
 
   const [{ loadingPaths, navigated }, dispatchLoad] = useReducer(
@@ -222,6 +231,7 @@ export const DatabaseProvider = ({
         rareItemData,
         historyData,
         warStatisticsData,
+        warGuildData,
         dispatch,
       }}
     >
