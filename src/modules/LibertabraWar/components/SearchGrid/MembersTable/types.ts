@@ -3,3 +3,8 @@ export interface MembersTableProps
   pageSize?: number
   memberList: MemberWarData[]
 }
+
+export type SortMode = {
+  sortKey: 'deathCount' | 'level' | 'kills'
+  desc: boolean
+}

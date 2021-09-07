@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo } from 'react'
 import { Table } from 'components/Atoms'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
-import { MembersTableProps } from './types'
+import { MembersTableProps, SortMode } from './types'
 
 const MembersTable = ({
   pageSize = 10,
@@ -15,6 +15,20 @@ const MembersTable = ({
   const [currentVocations, setCurrentVocations] = useState<Set<number>>(
     new Set([]),
   )
+
+  const [sortMode, setSortMode] = useState<SortMode>({
+    sortKey: 'level',
+    desc: true,
+  })
+
+  const { sortKey: currentSortKey, desc: currentDesc } = sortMode
+
+  const toggleSortMode = (sortKey: typeof sortMode.sortKey) =>
+    setSortMode((prevSortMode) => {
+      const { sortKey: prevSortKey, desc: prevDesc } = prevSortMode
+      if (prevSortKey === sortKey) return { desc: !prevDesc, sortKey }
+      return { desc: true, sortKey }
+    })
 
   const onPageChange = useCallback(
     (newPage: number) => setCurrentPage(newPage),
@@ -65,9 +79,17 @@ const MembersTable = ({
       )
     }
 
+    filteringList = filteringList.sort((a, b) => {
+      const { sortKey, desc } = sortMode
+      if (desc) {
+        return b[sortKey] - a[sortKey]
+      }
+      return a[sortKey] - b[sortKey]
+    })
+
     setCurrentPage(1)
     return filteringList
-  }, [memberList, currentGuild, currentVocations, searchTerm])
+  }, [memberList, currentGuild, currentVocations, searchTerm, sortMode])
 
   const currentListPage = useMemo(
     () =>
@@ -152,10 +174,28 @@ const MembersTable = ({
       <Table.Element id="members-grid">
         <Table.Head>
           <Table.Row>
-            <Table.HeadColumn>Nickname</Table.HeadColumn>
+            <S.SorteableHeadColumn
+              highlighted={currentSortKey === 'level'}
+              desc={currentDesc}
+              onClick={() => toggleSortMode('level')}
+            >
+              Nickname
+            </S.SorteableHeadColumn>
             <Table.HeadColumn>Guild</Table.HeadColumn>
-            <Table.HeadColumn>Kills</Table.HeadColumn>
-            <Table.HeadColumn>Deaths</Table.HeadColumn>
+            <S.SorteableHeadColumn
+              highlighted={currentSortKey === 'kills'}
+              desc={currentDesc}
+              onClick={() => toggleSortMode('kills')}
+            >
+              Kills
+            </S.SorteableHeadColumn>
+            <S.SorteableHeadColumn
+              highlighted={currentSortKey === 'deathCount'}
+              desc={currentDesc}
+              onClick={() => toggleSortMode('deathCount')}
+            >
+              Deaths
+            </S.SorteableHeadColumn>
           </Table.Row>
         </Table.Head>
 

@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import {
   Table as BaseTable,
@@ -6,6 +6,7 @@ import {
   Paginator as BasePaginator,
   Chip as BaseChip,
 } from 'components/Atoms'
+import { Smooth } from 'styles'
 import KnightImage from 'assets/knight.png'
 import PaladinImage from 'assets/paladin.png'
 import SorcererImage from 'assets/sorcerer.png'
@@ -27,12 +28,8 @@ export const Table = styled(BaseTable)`
     &:nth-child(4) {
       padding-left: 8px;
       padding-right: 8px;
-      min-width: 50px;
-      text-align: center;
-    }
-
-    &:nth-child(2) {
       min-width: 64px;
+      text-align: center;
     }
   }
 
@@ -41,6 +38,17 @@ export const Table = styled(BaseTable)`
       font-size: 10px;
     }
   }
+`
+
+export const SorteableHeadColumn = styled(Table.HeadColumn)<{ desc: boolean }>`
+  cursor: pointer;
+  ${({ highlighted, desc }) =>
+    highlighted &&
+    css`
+      &::before {
+        content: ${desc ? "'▴'" : "'▾'"};
+      }
+    `}
 `
 
 export const ControlHeader = styled.div`
