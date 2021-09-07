@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
-import { Table, Paginator } from 'components/Atoms'
+import { Table, Paginator, Chip } from 'components/Atoms'
 import LabelGroup from './LabelGroup'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
@@ -46,9 +46,32 @@ const MembersTable = ({
   return (
     <S.Table {...props}>
       <S.ControlHeader>
+        <S.ToggleFiltersGroup label="Filters">
+          <S.FiltersChipWrapper>
+            <S.Chip>Libertabra Pune</S.Chip>
+            <S.Chip>Bones Alliance</S.Chip>
+            <S.Chip>
+              <S.KnightIcon />
+              Knight
+            </S.Chip>
+            <S.Chip>
+              <S.PaladinIcon />
+              Paladin
+            </S.Chip>
+            <S.Chip>
+              <S.SorcererIcon />
+              Sorcerer
+            </S.Chip>
+            <S.Chip>
+              <S.DruidIcon />
+              Druid
+            </S.Chip>
+          </S.FiltersChipWrapper>
+        </S.ToggleFiltersGroup>
         <LabelGroup label="Search for nickname" htmlFor="search-nickname-input">
           <S.Input
             id="search-nickname-input"
+            aria-controls="members-grid"
             allowClear
             placeholder="Nickname"
             onChange={onSearchChange}

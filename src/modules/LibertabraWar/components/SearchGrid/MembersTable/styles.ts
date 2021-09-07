@@ -1,5 +1,15 @@
 import styled from 'styled-components'
-import { Table as BaseTable, Input as BaseInput } from 'components/Atoms'
+import Image from 'next/image'
+import {
+  Table as BaseTable,
+  Input as BaseInput,
+  Chip as BaseChip,
+} from 'components/Atoms'
+import KnightImage from 'assets/knight.png'
+import PaladinImage from 'assets/paladin.png'
+import SorcererImage from 'assets/sorcerer.png'
+import DruidImage from 'assets/druid.png'
+import LabelGroup from './LabelGroup'
 
 export const Table = styled(BaseTable)`
   ${BaseTable.HeadColumn}, ${BaseTable.Column} {
@@ -36,6 +46,7 @@ export const ControlHeader = styled.div`
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
+  flex-wrap: wrap;
 `
 
 export const Input = styled(BaseInput)`
@@ -44,3 +55,37 @@ export const Input = styled(BaseInput)`
     display: none;
   }
 `
+
+export const ToggleFiltersGroup = styled(LabelGroup)`
+  margin-bottom: 16px;
+  width: 100%;
+`
+
+export const FiltersChipWrapper = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+`
+
+export const Chip = styled(BaseChip)`
+  > div {
+    margin-right: 4px !important;
+  }
+`
+
+export const KnightIcon = styled(Image).attrs({
+  src: KnightImage,
+  alt: 'Knight',
+})``
+export const PaladinIcon = styled(Image).attrs({
+  src: PaladinImage,
+  alt: 'Paladin',
+})``
+export const SorcererIcon = styled(Image).attrs({
+  src: SorcererImage,
+  alt: 'Sorcerer',
+})``
+export const DruidIcon = styled(Image).attrs({
+  src: DruidImage,
+  alt: 'Druid',
+})``
