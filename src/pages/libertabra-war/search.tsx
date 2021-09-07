@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { Header } from 'modules/LibertabraWar'
+import { Header, SearchGrid } from 'modules/LibertabraWar'
 import { endpoints, paths } from 'Constants'
 
 export default function LibertabraWar(): JSX.Element {
@@ -47,6 +47,7 @@ export default function LibertabraWar(): JSX.Element {
       <Main>
         <main>
           <Header />
+          <SearchGrid />
         </main>
       </Main>
     </div>
