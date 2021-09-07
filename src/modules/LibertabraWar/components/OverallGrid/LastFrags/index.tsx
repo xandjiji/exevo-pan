@@ -26,8 +26,8 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <Table.Element>
-        <S.Table {...props}>
+      <S.Table {...props}>
+        <Table.Element>
           <Table.Head>
             <Table.Row>
               <Table.HeadColumn>Killed</Table.HeadColumn>
@@ -49,8 +49,8 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
               </Table.Row>
             ))}
           </Table.Body>
-        </S.Table>
-      </Table.Element>
+        </Table.Element>
+      </S.Table>
       {!reachedMaxPage && (
         <S.ObserverElement ref={ref as React.RefObject<HTMLDivElement>} />
       )}
