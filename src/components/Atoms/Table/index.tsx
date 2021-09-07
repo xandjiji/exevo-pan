@@ -14,11 +14,11 @@ const Table = ({
         {!!title && <S.Title>{title}</S.Title>}
       </S.CardHead>
     ) : null}
-
-    <S.Table>{children}</S.Table>
+    {children}
   </S.Wrapper>
 )
 
+Table.Element = S.Table
 Table.Head = S.Head
 Table.Row = S.Row
 Table.HeadColumn = S.HeadColumn
