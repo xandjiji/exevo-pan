@@ -3,7 +3,7 @@ import { Table } from 'components/Atoms'
 import LabelGroup from './LabelGroup'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
-import { MembersTableProps } from './types'
+import { MembersTableProps, VocationId } from './types'
 
 const MembersTable = ({
   pageSize = 10,
@@ -13,6 +13,9 @@ const MembersTable = ({
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')
   const [currentGuild, setCurrentGuild] = useState<0 | 1 | null>(null)
+  const [currentVocations, setCurrentVocations] = useState<Set<number>>(
+    new Set([]),
+  )
 
   const onPageChange = useCallback(
     (newPage: number) => setCurrentPage(newPage),
@@ -24,6 +27,17 @@ const MembersTable = ({
       if (newGuildId === prevGuildId) return null
       return newGuildId
     })
+
+  const toggleVocationSet = (vocationId: number) => {
+    const newVocationSet = new Set([...currentVocations])
+    if (newVocationSet.has(vocationId)) {
+      newVocationSet.delete(vocationId)
+    } else {
+      newVocationSet.add(vocationId)
+    }
+
+    setCurrentVocations(newVocationSet)
+  }
 
   const onSearchChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) =>
@@ -40,6 +54,12 @@ const MembersTable = ({
       )
     }
 
+    if (currentVocations.size) {
+      filteringList = filteringList.filter((member) =>
+        currentVocations.has(member.vocationId),
+      )
+    }
+
     if (searchTerm) {
       filteringList = filteringList.filter((member) =>
         member.nickname.toLowerCase().includes(searchTerm),
@@ -48,7 +68,7 @@ const MembersTable = ({
 
     setCurrentPage(1)
     return filteringList
-  }, [memberList, currentGuild, searchTerm])
+  }, [memberList, currentGuild, currentVocations, searchTerm])
 
   const currentListPage = useMemo(
     () =>
@@ -73,19 +93,31 @@ const MembersTable = ({
             >
               Bones Alliance
             </S.Chip>
-            <S.Chip>
+            <S.Chip
+              overrideStatus={currentVocations.has(1)}
+              onClick={() => toggleVocationSet(1)}
+            >
               <S.KnightIcon />
               Knight
             </S.Chip>
-            <S.Chip>
+            <S.Chip
+              overrideStatus={currentVocations.has(2)}
+              onClick={() => toggleVocationSet(2)}
+            >
               <S.PaladinIcon />
               Paladin
             </S.Chip>
-            <S.Chip>
+            <S.Chip
+              overrideStatus={currentVocations.has(3)}
+              onClick={() => toggleVocationSet(3)}
+            >
               <S.SorcererIcon />
               Sorcerer
             </S.Chip>
-            <S.Chip>
+            <S.Chip
+              overrideStatus={currentVocations.has(4)}
+              onClick={() => toggleVocationSet(4)}
+            >
               <S.DruidIcon />
               Druid
             </S.Chip>
