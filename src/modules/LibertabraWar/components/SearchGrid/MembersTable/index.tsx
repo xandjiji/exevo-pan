@@ -1,9 +1,8 @@
 import { useState, useCallback, useMemo } from 'react'
 import { Table } from 'components/Atoms'
-import LabelGroup from './LabelGroup'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
-import { MembersTableProps, VocationId } from './types'
+import { MembersTableProps } from './types'
 
 const MembersTable = ({
   pageSize = 10,
@@ -85,12 +84,18 @@ const MembersTable = ({
               overrideStatus={currentGuild === 0}
               onClick={() => toggleGuild(0)}
             >
+              <S.Emoji role="img" aria-label="goat">
+                🐐
+              </S.Emoji>
               Libertabra Pune
             </S.Chip>
             <S.Chip
               overrideStatus={currentGuild === 1}
               onClick={() => toggleGuild(1)}
             >
+              <S.Emoji role="img" aria-label="skull">
+                💀
+              </S.Emoji>
               Bones Alliance
             </S.Chip>
             <S.Chip

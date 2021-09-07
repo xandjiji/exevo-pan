@@ -102,3 +102,9 @@ export const DruidIcon = styled(Image).attrs({
   src: DruidImage,
   alt: 'Druid',
 })``
+
+export const Emoji = styled.span`
+  margin-right: 4px;
+  margin-left: -3px;
+  font-size: 12px;
+`
