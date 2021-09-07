@@ -14,7 +14,7 @@ const SearchGrid = (): JSX.Element => {
         Search for guild members active in Libertabra War!
       </S.PageTitle>
 
-      <MembersTable memberList={warGuildData.slice(0, 100)} />
+      <MembersTable memberList={warGuildData} />
     </S.Wrapper>
   )
 }

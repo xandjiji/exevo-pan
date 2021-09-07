@@ -15,7 +15,7 @@ export const Table = styled(BaseTable)`
     &:nth-child(4) {
       padding-left: 8px;
       padding-right: 8px;
-      width: fit-content;
+      min-width: 50px;
       text-align: center;
     }
   }
@@ -25,4 +25,10 @@ export const Table = styled(BaseTable)`
       font-size: 10px;
     }
   }
+`
+
+export const ControlHeader = styled.div`
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: flex-end;
 `
