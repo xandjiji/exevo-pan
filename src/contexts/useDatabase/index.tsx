@@ -20,6 +20,7 @@ import {
   CharactersContextValues,
   DrawerFieldsContextValues,
   WarStatisticsDataContextValues,
+  WarGuildDataContextValues,
   DatabaseDispatchContextValues,
 } from './types'
 
@@ -51,6 +52,11 @@ const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
 const WarStatisticsDataContext = createContext<WarStatisticsDataContextValues>({
   loading: defaultDatabaseState.loading,
   warStatisticsData: defaultDatabaseState.warStatisticsData,
+})
+
+const WarGuildDataContext = createContext<WarGuildDataContextValues>({
+  loading: defaultDatabaseState.loading,
+  warGuildData: defaultDatabaseState.warGuildData,
 })
 
 const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
@@ -242,12 +248,16 @@ export const DatabaseProvider = ({
           <WarStatisticsDataContext.Provider
             value={{ warStatisticsData, loading }}
           >
-            <DatabaseDispatchContext.Provider value={{ dispatch }}>
-              {loading && (
-                <LoadingAlert>Updating data... {loadedPercentage}</LoadingAlert>
-              )}
-              {children}
-            </DatabaseDispatchContext.Provider>
+            <WarGuildDataContext.Provider value={{ warGuildData, loading }}>
+              <DatabaseDispatchContext.Provider value={{ dispatch }}>
+                {loading && (
+                  <LoadingAlert>
+                    Updating data... {loadedPercentage}
+                  </LoadingAlert>
+                )}
+                {children}
+              </DatabaseDispatchContext.Provider>
+            </WarGuildDataContext.Provider>
           </WarStatisticsDataContext.Provider>
         </DrawerFieldsContext.Provider>
       </CharactersContext.Provider>
@@ -266,6 +276,9 @@ export const useDrawerFields = (): DrawerFieldsContextValues =>
 
 export const useWarStatisticsData = (): WarStatisticsDataContextValues =>
   useContext(WarStatisticsDataContext)
+
+export const useWarGuildData = (): WarGuildDataContextValues =>
+  useContext(WarGuildDataContext)
 
 export const useDatabaseDispatch = (): DatabaseDispatchContextValues =>
   useContext(DatabaseDispatchContext)

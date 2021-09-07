@@ -52,7 +52,7 @@ export interface WarStatisticsDataContextValues {
 }
 
 export interface WarGuildDataContextValues {
-  warStatisticsData: MemberWarData[]
+  warGuildData: MemberWarData[]
   loading: boolean
 }
 
