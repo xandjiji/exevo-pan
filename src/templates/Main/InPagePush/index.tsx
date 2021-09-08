@@ -24,7 +24,10 @@ const InPagePush = (): JSX.Element | null => {
         </S.SubHeading>
       </div>
 
-      <S.CloseButton onClick={() => setIsVisible(false)} />
+      <S.CloseButton
+        aria-label="Close push modal"
+        onClick={() => setIsVisible(false)}
+      />
     </S.Wrapper>
   )
 }
