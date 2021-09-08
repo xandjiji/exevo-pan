@@ -70,6 +70,8 @@ export const BottomText = styled(Heading)`
 `
 
 export const Code = styled.span`
+  position: relative;
+  z-index: 1;
   padding: 6px 12px;
   margin: 16px auto;
   display: block;
