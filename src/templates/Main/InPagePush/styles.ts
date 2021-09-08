@@ -1,10 +1,10 @@
 import styled from 'styled-components'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Shadow } from 'styles'
 import KwaiSvg from 'assets/svgs/kwai.svg'
 
 export const Wrapper = styled.div`
   position: fixed;
-  bottom: 40px;
+  bottom: 20px;
   right: 20px;
   z-index: 10;
   ${MaterialCard}
@@ -85,4 +85,32 @@ export const KwaiLogo = styled(KwaiSvg)`
   background-color: #fff;
 `
 
-export const CloseButton = styled.button``
+export const CloseButton = styled.button`
+  position: absolute;
+  top: -6px;
+  right: -6px;
+
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background-color: #fff;
+
+  ${Shadow}
+
+  &::after, &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+
+    width: 2px;
+    height: 9px;
+    border-radius: 16px;
+    background-color: var(--kwai);
+  }
+
+  &::before {
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+`
