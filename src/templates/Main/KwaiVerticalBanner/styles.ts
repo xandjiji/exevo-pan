@@ -103,7 +103,7 @@ export const Money = styled.span`
   &::after {
     content: 'R$10,00';
     margin-left: 3px;
-    animation: tickingUp 2s ease-out;
+    animation: tickingUp 1.7s ease-out;
   }
 
   @keyframes tickingUp {
