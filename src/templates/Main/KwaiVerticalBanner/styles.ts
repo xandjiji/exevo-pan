@@ -97,4 +97,56 @@ export const Money = styled.span`
   color: var(--green);
   font-weight: 700;
   letter-spacing: 0.5px;
+
+  &::after {
+    content: 'R$10,00';
+    margin-left: 3px;
+    animation: tickingUp 2s ease-out;
+  }
+
+  @keyframes tickingUp {
+    0% {
+      content: 'R$0,00';
+    }
+
+    10% {
+      content: 'R$1,00';
+    }
+
+    20% {
+      content: 'R$2,00';
+    }
+
+    30% {
+      content: 'R$3,00';
+    }
+
+    40% {
+      content: 'R$4,00';
+    }
+
+    50% {
+      content: 'R$5,00';
+    }
+
+    60% {
+      content: 'R$6,00';
+    }
+
+    70% {
+      content: 'R$7,00';
+    }
+
+    80% {
+      content: 'R$8,00';
+    }
+
+    90% {
+      content: 'R$9,00';
+    }
+
+    100% {
+      content: 'R$10,00';
+    }
+  }
 `

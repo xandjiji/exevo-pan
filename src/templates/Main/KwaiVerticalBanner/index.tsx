@@ -28,7 +28,7 @@ const KwaiVerticalBanner = (): JSX.Element => (
     <S.BottomText>Use o código:</S.BottomText>
     <S.Code>980 500 783</S.Code>
     <S.BottomText>para ganhar agora mesmo</S.BottomText>
-    <S.Money>+ R$10,00</S.Money>
+    <S.Money>+</S.Money>
     <S.BottomText>ao cadastrar!</S.BottomText>
   </S.Wrapper>
 )
