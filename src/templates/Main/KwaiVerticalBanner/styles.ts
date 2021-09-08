@@ -6,7 +6,7 @@ import KwaiSvg from 'assets/svgs/kwai.svg'
 export const Wrapper = styled.section`
   position: fixed;
   top: 50%;
-  right: 20px;
+  left: 20px;
   z-index: 1;
   transform: translateY(-50%);
 
