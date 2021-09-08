@@ -56,6 +56,7 @@ export const Heading = styled.h5`
   margin-bottom: 6px;
   font-size: 12px;
   font-weight: 700;
+  letter-spacing: 0.4px;
 
   strong {
     font-weight: 700;
