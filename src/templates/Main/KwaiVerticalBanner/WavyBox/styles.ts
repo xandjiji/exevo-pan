@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
     margin-top: -2px;
     margin-bottom: -2px;
     fill: var(--surface);
+    ${Smooth}
   }
 `
 
