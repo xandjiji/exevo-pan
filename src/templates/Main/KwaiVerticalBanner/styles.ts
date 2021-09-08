@@ -82,6 +82,8 @@ export const Code = styled.span`
   text-align: center;
   color: var(--onSurface);
   font-family: monospace;
+
+  ${Smooth}
 `
 
 export const Money = styled.span`
