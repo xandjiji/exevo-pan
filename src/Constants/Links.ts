@@ -8,4 +8,5 @@ export const links = {
   CIPSOFT: 'https://www.cipsoft.com',
   COINS_REF: '#',
   UNLICENSE: 'https://unlicense.org',
+  KWAI_REF: 'https://s.kwai.app/s/NdQpYgkz',
 }
