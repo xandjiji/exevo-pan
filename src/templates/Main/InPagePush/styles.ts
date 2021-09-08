@@ -94,7 +94,7 @@ export const CloseButton = styled.button`
   height: 20px;
   border-radius: 50%;
   background-color: #fff;
-
+  cursor: pointer;
   ${Shadow}
 
   &::after, &::before {
