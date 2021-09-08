@@ -11,10 +11,45 @@ export const Wrapper = styled.div`
 
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
 
   background-color: var(--kwai);
   color: #fff;
+
+  transform: translate3d(3000px, 0, 0);
+  animation: bounceInRight 1s;
+  animation-delay: 2s;
+  animation-fill-mode: forwards;
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+
+  @keyframes bounceInRight {
+    from,
+    60%,
+    75%,
+    90%,
+    to {
+      animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+    from {
+      opacity: 0;
+    }
+    60% {
+      opacity: 1;
+      transform: translate3d(-25px, 0, 0);
+    }
+    75% {
+      transform: translate3d(10px, 0, 0);
+    }
+    90% {
+      transform: translate3d(-5px, 0, 0);
+    }
+    to {
+      transform: none;
+    }
+  }
 `
 
 export const Heading = styled.h5`
@@ -43,9 +78,11 @@ export const SubHeading = styled.span`
 `
 
 export const KwaiLogo = styled(KwaiSvg)`
-  margin: -12px 0 -12px -8px;
-  width: 48px;
-  height: 48px;
+  margin: -12px 0 -12px -6px;
+  width: 46px;
+  height: 46px;
   border-radius: 5px;
   background-color: #fff;
 `
+
+export const CloseButton = styled.button``
