@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { MagicButton as BaseMagicButton } from 'components/Atoms'
 import { Shadow, Smooth } from 'styles'
 import KwaiSvg from 'assets/svgs/kwai.svg'
 
@@ -8,10 +9,8 @@ export const Wrapper = styled.section`
   right: 20px;
   z-index: 1;
   transform: translateY(-50%);
-  padding: 16px;
 
   width: 140px;
-  height: 600px;
 
   border-radius: 6px;
   background-color: var(--kwai);
@@ -19,6 +18,11 @@ export const Wrapper = styled.section`
   line-height: 1.4;
   ${Shadow}
   ${Smooth}
+
+  > a {
+    display: block;
+    padding: 16px;
+  }
 
   strong {
     font-weight: 700;
@@ -36,15 +40,53 @@ export const Heading = styled.h5`
   letter-spacing: 0.5px;
 `
 
-export const KwaiOrange = styled.span`
-  font-size: 32px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--kwai);
-`
-
 export const KwaiLogo = styled(KwaiSvg)`
   width: 100%;
   height: 130px;
+`
+
+export const MagicButton = styled(BaseMagicButton)`
+  margin: 16px auto;
+`
+
+export const ButtonText = styled.span`
+  display: block;
+  padding: 6px 20px;
+  font-size: 16px;
+  font-weight: 700;
+`
+
+export const BottomText = styled(Heading)`
+  && {
+    font-size: 16px;
+    text-align: center;
+  }
+`
+
+export const Code = styled.span`
+  padding: 6px 12px;
+  margin: 16px auto;
+  display: block;
+  border-radius: 6px;
+  background-color: var(--surface);
+
+  font-size: 12px;
+  text-align: center;
+  color: var(--onSurface);
+  font-family: monospace;
+`
+
+export const Money = styled.span`
+  padding: 6px 12px;
+  margin: 10px auto;
+  display: block;
+
+  width: fit-content;
+  border-radius: 6px;
+  background-color: var(--alert);
+
+  text-align: center;
+  color: var(--green);
+  font-weight: 700;
+  letter-spacing: 0.5px;
 `

@@ -10,7 +10,8 @@ export const Wrapper = styled.div`
   }
 
   svg {
-    fill: #fff;
+    margin-top: -2px;
+    margin-bottom: -2px;
     fill: var(--surface);
   }
 `
