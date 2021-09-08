@@ -26,10 +26,8 @@ export const Edge = styled.span`
 export const Front = styled.span`
   display: block;
   position: relative;
-  padding: 12px 42px;
   border-radius: 12px;
-  font-size: 1.25rem;
-  color: white;
+  color: var(--onPrimary);
   background: hsl(345deg 100% 47%);
   will-change: transform;
   transform: translateY(-4px);
