@@ -10,6 +10,7 @@ export const Wrapper = styled.section`
   z-index: 1;
   transform: translateY(-50%);
 
+  padding: 16px;
   width: 140px;
 
   border-radius: 6px;
@@ -19,11 +20,6 @@ export const Wrapper = styled.section`
   ${Shadow}
   ${Smooth}
 
-  > a {
-    display: block;
-    padding: 16px;
-  }
-
   strong {
     font-weight: 700;
   }
@@ -31,6 +27,16 @@ export const Wrapper = styled.section`
   @media (max-width: 1023px) {
     display: none;
   }
+`
+
+export const ContainerLink = styled.a`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  font-size: 0;
 `
 
 export const Heading = styled.h5`
