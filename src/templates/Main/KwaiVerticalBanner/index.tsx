@@ -21,7 +21,7 @@ const KwaiVerticalBanner = (): JSX.Element => (
 
     <a href={links.KWAI_REF} target="_blank" rel="noopener noreferrer external">
       <S.MagicButton>
-        <S.ButtonText>Começar!</S.ButtonText>
+        <S.ButtonText aria-label="Start now!">Começar!</S.ButtonText>
       </S.MagicButton>
     </a>
 
