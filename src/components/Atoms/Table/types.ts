@@ -3,3 +3,8 @@ export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string
   subtitle?: string
 }
+
+export interface HeadColumnStyleProps {
+  highlighted?: boolean
+  desc?: boolean
+}
