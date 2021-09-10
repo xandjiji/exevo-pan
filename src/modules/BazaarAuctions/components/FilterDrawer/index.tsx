@@ -499,7 +499,7 @@ const FilterDrawer = ({
                 Rare nicknames
               </Chip>
             </Tooltip>
-            <Tooltip content="Characters level 400+ with Soul War not completed">
+            <Tooltip content="Characters level 250+ with Soul War not completed">
               <Chip
                 overrideStatus={filters.soulwarFilter}
                 onClick={() => {
@@ -507,7 +507,7 @@ const FilterDrawer = ({
                     updateFilters('minLevel', defaultValues.minLevel as number)
                     updateFilters('soulwarFilter', false)
                   } else {
-                    updateFilters('minLevel', 400)
+                    updateFilters('minLevel', 250)
                     updateFilters('maxLevel', defaultValues.maxLevel as number)
                     updateFilters('soulwarFilter', true)
                   }
