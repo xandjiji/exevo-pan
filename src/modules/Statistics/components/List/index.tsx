@@ -1,4 +1,5 @@
 import { memo } from 'react'
+import { Table } from 'components/Atoms'
 import * as S from './styles'
 import { ListProps } from './types'
 
@@ -9,45 +10,40 @@ const List = ({
   format,
   ...props
 }: ListProps): JSX.Element => (
-  <S.Wrapper {...props}>
-    <S.CardHead>
-      Top 10
-      <S.Title>{title}</S.Title>
-    </S.CardHead>
+  <S.Table {...props} title={title} subtitle="Top 10">
+    <Table.Element>
+      <caption>{`Top 10 ${title} players ranking`}</caption>
+      <Table.Head>
+        <Table.Row>
+          <Table.HeadColumn aria-label="Ranking position">#</Table.HeadColumn>
+          <Table.HeadColumn>Nickname</Table.HeadColumn>
+          <Table.HeadColumn>{title}</Table.HeadColumn>
+        </Table.Row>
+      </Table.Head>
 
-    <S.Table>
-      <S.Caption>{`Top 10 ${title} players ranking`}</S.Caption>
-      <S.TableHead>
-        <tr>
-          <S.HeadItem aria-label="Ranking position">#</S.HeadItem>
-          <S.HeadItem>Nickname</S.HeadItem>
-          <S.HeadItem>{title}</S.HeadItem>
-        </tr>
-      </S.TableHead>
-
-      <tbody>
+      <Table.Body>
         {charactersList.map((character, index) => (
-          <tr key={character.id}>
-            <S.RowItem>{index + 1}</S.RowItem>
-            <S.RowItem>
-              <S.Link
+          <Table.Row key={character.id}>
+            <Table.Column>{index + 1}</Table.Column>
+            <Table.Column>
+              <a
                 href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${character.id}&source=overview`}
                 target="_blank"
                 rel="noreferrer noopener external"
               >
                 {character.nickname}
-              </S.Link>
-            </S.RowItem>
-            <S.RowItem>
+              </a>
+            </Table.Column>
+            <Table.Column>
               {format
                 ? format(character[displayedDataKey] as never)
                 : character[displayedDataKey]}
-            </S.RowItem>
-          </tr>
+            </Table.Column>
+          </Table.Row>
         ))}
-      </tbody>
-    </S.Table>
-  </S.Wrapper>
+      </Table.Body>
+    </Table.Element>
+  </S.Table>
 )
 
 export default memo(List)
