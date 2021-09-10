@@ -38,6 +38,10 @@ export const Table = styled.table`
   margin-left: -3px;
   width: calc(100% + 3px);
   border-collapse: collapse;
+
+  caption {
+    display: none;
+  }
 `
 
 export const Row = styled.tr`
