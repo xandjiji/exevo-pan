@@ -67,7 +67,49 @@ describe('<Table />', () => {
     expect(screen.getByText('subtitle content')).toBeInTheDocument()
   })
 
-  test.todo('caption element should NOT be visible')
+  test('caption element should NOT be visible', () => {
+    renderWithProviders(
+      <Table title="Main title">
+        <div>visible content</div>
+        <caption>hidden content</caption>
+      </Table>,
+    )
 
-  test.todo('head column highlight prop should display asc/desc symbol')
+    expect(screen.getByText('visible content')).toBeInTheDocument()
+    expect(screen.queryByRole('caption')).not.toBeInTheDocument()
+  })
+
+  test('head column highlight prop should display asc/desc symbol', () => {
+    const { container, rerender } = renderWithProviders(
+      <Table>
+        <Table.Element>
+          <Table.Head>
+            <Table.Row>
+              <Table.HeadColumn highlighted>#</Table.HeadColumn>
+              <Table.HeadColumn>Nickname</Table.HeadColumn>
+            </Table.Row>
+          </Table.Head>
+        </Table.Element>
+      </Table>,
+    )
+
+    expect(container).toMatchSnapshot()
+
+    rerender(
+      <Table>
+        <Table.Element>
+          <Table.Head>
+            <Table.Row>
+              <Table.HeadColumn highlighted desc>
+                #
+              </Table.HeadColumn>
+              <Table.HeadColumn>Nickname</Table.HeadColumn>
+            </Table.Row>
+          </Table.Head>
+        </Table.Element>
+      </Table>,
+    )
+
+    expect(container).toMatchSnapshot()
+  })
 })
