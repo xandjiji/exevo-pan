@@ -49,12 +49,12 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
 
       <S.SecondRow>
         <LastFrags
-          title="Recent deaths ⚰️"
+          title={`Recent deaths (${lastDeaths.guildA.length}) ⚰️`}
           subtitle="Libertabra Pune"
           fragsList={lastDeaths.guildA}
         />
         <LastFrags
-          title="Recent deaths ⚰️"
+          title={`Recent deaths (${lastDeaths.guildB.length}) ⚰️`}
           subtitle="Bones Alliance"
           fragsList={lastDeaths.guildB}
         />
