@@ -5,7 +5,12 @@ import { mockCharacterList } from './mock'
 
 describe('<CharacterTable />', () => {
   test('should render all items correctly', () => {
-    renderWithProviders(<CharacterTable characterList={mockCharacterList} />)
+    renderWithProviders(
+      <CharacterTable
+        characterList={mockCharacterList}
+        caption="table caption"
+      />,
+    )
 
     screen.getAllByTitle('Total kills').forEach((killElement, index) => {
       expect(killElement).toHaveTextContent(
