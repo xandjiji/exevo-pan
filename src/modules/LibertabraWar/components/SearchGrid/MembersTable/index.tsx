@@ -176,6 +176,8 @@ const MembersTable = ({
         <Table.Head>
           <Table.Row>
             <S.SorteableHeadColumn
+              aria-label="Click to sort by Level"
+              aria-selected={currentSortKey === 'level'}
               highlighted={currentSortKey === 'level'}
               desc={currentDesc}
               onClick={() => toggleSortMode('level')}
@@ -184,6 +186,8 @@ const MembersTable = ({
             </S.SorteableHeadColumn>
             <Table.HeadColumn>Guild</Table.HeadColumn>
             <S.SorteableHeadColumn
+              aria-label="Click to sort by Kills"
+              aria-selected={currentSortKey === 'kills'}
               highlighted={currentSortKey === 'kills'}
               desc={currentDesc}
               onClick={() => toggleSortMode('kills')}
@@ -191,6 +195,8 @@ const MembersTable = ({
               Kills
             </S.SorteableHeadColumn>
             <S.SorteableHeadColumn
+              aria-label="Click to sort by Deaths"
+              aria-selected={currentSortKey === 'deathCount'}
               highlighted={currentSortKey === 'deathCount'}
               desc={currentDesc}
               onClick={() => toggleSortMode('deathCount')}
