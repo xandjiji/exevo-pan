@@ -41,7 +41,6 @@ const initialDatabaseValue = {
   rareItemData: {},
   historyData: [],
   warGuildData: [],
-  warStatisticsData: null,
   dispatch: expect.any(Function),
 }
 
