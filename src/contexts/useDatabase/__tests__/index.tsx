@@ -15,6 +15,7 @@ import {
   initialFilter,
   mockFavArray,
   filteredFavArray,
+  mockedGuildData,
 } from './mock'
 
 jest.mock('utils/localStorage', () => ({
@@ -65,6 +66,11 @@ describe('useDatabase()', () => {
     jest
       .spyOn(ManageDataClient, 'fetchStatisticsData')
       .mockResolvedValueOnce(mockStatisticsData)
+
+    jest
+      .spyOn(ManageDataClient, 'fetchGuildWarData')
+      .mockResolvedValueOnce(mockedGuildData.puneMembersData)
+      .mockResolvedValueOnce(mockedGuildData.bonesMembersData)
 
     getFavArrayMock.mockReturnValue(mockFavArray)
   })
@@ -601,6 +607,27 @@ describe('useDatabase()', () => {
       characterData: mockedCharacterData,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
+    })
+  })
+
+  test(`checking ${routes.LIBERTABRA_WAR_SEARCH} path`, async () => {
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.LIBERTABRA_WAR_SEARCH,
+    } as NextRouter)
+    const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
+      wrapper: ComponentWrapper,
+    })
+
+    expect(result.current).toEqual({
+      ...initialDatabaseValue,
+      loading: true,
+    })
+
+    await waitForNextUpdate()
+
+    expect(result.current).toEqual({
+      ...initialDatabaseValue,
+      warGuildData: mockedGuildData.allGuildMembers,
     })
   })
 })
