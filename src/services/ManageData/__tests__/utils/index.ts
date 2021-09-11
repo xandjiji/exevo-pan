@@ -1,12 +1,18 @@
 import { get, set } from 'idb-keyval'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import { endpoints, localStorageKeys } from 'Constants'
-import { buildCharacterData, filterItemData, checkAndHash } from '../../utils'
+import {
+  buildCharacterData,
+  filterItemData,
+  checkAndHash,
+  unminifyGuildData,
+} from '../../utils'
 import {
   pastMiniAuction,
   futureMiniAuction,
   pastPartialAuction,
   futurePartialAuction,
+  mockedMembersData,
 } from './mock'
 
 global.fetch = jest.fn()
@@ -147,5 +153,15 @@ describe('utils/', () => {
 
       expect(result).toEqual([pastPartialAuction, futurePartialAuction])
     })
+  })
+
+  test('unminifyGuildData()', () => {
+    expect(
+      unminifyGuildData(
+        mockedMembersData.miniPuneMembersData,
+        'Libertabra Pune',
+        0,
+      ),
+    ).toEqual(mockedMembersData.puneMembersData)
   })
 })
