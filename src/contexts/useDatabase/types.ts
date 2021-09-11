@@ -15,10 +15,6 @@ export type Action =
       type: 'RESET_TO_BASE_DATA'
     }
   | {
-      type: 'WAR_STATISTICS_DATA_LOAD'
-      warStatisticsData: WarStatistics
-    }
-  | {
       type: 'WAR_GUILD_DATA_LOAD'
       warGuildData: MemberWarData[]
     }
@@ -29,7 +25,6 @@ export interface DatabaseContextValues {
   serverData: ServerObject[]
   rareItemData: RareItemData
   historyData: CharacterObject[]
-  warStatisticsData: WarStatistics | null
   warGuildData: MemberWarData[]
   dispatch: (action: Action) => void
 }
@@ -44,11 +39,6 @@ export interface DrawerFieldsContextValues {
   loading: boolean
   serverData: ServerObject[]
   rareItemData: RareItemData
-}
-
-export interface WarStatisticsDataContextValues {
-  warStatisticsData: WarStatistics | null
-  loading: boolean
 }
 
 export interface WarGuildDataContextValues {
@@ -67,6 +57,5 @@ export interface DatabaseReducerState {
   rareItemData: RareItemData
   baseHistoryData: CharacterObject[]
   historyData: CharacterObject[]
-  warStatisticsData: WarStatistics | null
   warGuildData: MemberWarData[]
 }

@@ -1,18 +1,14 @@
-import { useWarStatisticsData } from 'contexts/useDatabase'
 import { formatNumberWithCommas } from 'utils'
 import ScoreboardXP from './ScoreboardXP'
 import ComparisonChart from '../ComparisonChart'
 import { xpToDataSnapshot } from './utils'
 import * as S from './styles'
+import { GuildXPGridProps } from './types'
 
-const GuildXPGrid = (): JSX.Element => {
-  const { warStatisticsData } = useWarStatisticsData()
-
-  /* @ ToDo: skeleton */
-  if (!warStatisticsData) return <S.Loading />
+const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
   const {
     xpStats: { todayDiff, dailyXPDiff, currentXP },
-  } = warStatisticsData
+  } = warData
   return (
     <S.Wrapper>
       <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
@@ -32,6 +28,7 @@ const GuildXPGrid = (): JSX.Element => {
         />
 
         <ComparisonChart
+          title="Comparing daily XP gain or loss between Libertabra Pune and Bones Alliance"
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${formatNumberWithCommas(

@@ -1,17 +1,13 @@
-import { useWarStatisticsData } from 'contexts/useDatabase'
 import { getLastArrayElement } from 'utils'
 import Scoreboard from './Scoreboard'
 import LastFrags from './LastFrags'
 import ComparisonChart from '../ComparisonChart'
 import { onlineToDataSnapshot } from './utils'
 import * as S from './styles'
+import { OverallGridProps } from './types'
 
-const OverallGrid = (): JSX.Element => {
-  const { warStatisticsData } = useWarStatisticsData()
-
-  /* @ ToDo: skeleton */
-  if (!warStatisticsData) return <S.Loading />
-  const { score, onlineCount, lastDeaths } = warStatisticsData
+const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
+  const { score, onlineCount, lastDeaths } = warData
   return (
     <S.Wrapper>
       <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
@@ -31,6 +27,7 @@ const OverallGrid = (): JSX.Element => {
           }}
         />
         <ComparisonChart
+          title="Comparing total online members of Libertabra Pune and Bones Alliance in the last 4 hours"
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${
@@ -52,12 +49,12 @@ const OverallGrid = (): JSX.Element => {
 
       <S.SecondRow>
         <LastFrags
-          title="Recent deaths ⚰️"
+          title={`Recent deaths (${lastDeaths.guildA.length}) ⚰️`}
           subtitle="Libertabra Pune"
           fragsList={lastDeaths.guildA}
         />
         <LastFrags
-          title="Recent deaths ⚰️"
+          title={`Recent deaths (${lastDeaths.guildB.length}) ⚰️`}
           subtitle="Bones Alliance"
           fragsList={lastDeaths.guildB}
         />

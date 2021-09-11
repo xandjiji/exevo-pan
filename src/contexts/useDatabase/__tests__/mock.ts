@@ -6,6 +6,9 @@ const {
   itemData,
   characterData,
   statisticsData,
+  puneMembersData,
+  bonesMembersData,
+  allGuildMembers,
 } = randomDataset()
 
 export const mockedPartialCharacterData = partialCharacterData
@@ -37,3 +40,9 @@ const favED: CharacterObject = { ...characterData[1], vocationId: 4 }
 
 export const mockFavArray = [favEK, favED] as CharacterObject[]
 export const filteredFavArray = [favEK] as CharacterObject[]
+
+export const mockedGuildData = {
+  puneMembersData,
+  bonesMembersData,
+  allGuildMembers,
+}

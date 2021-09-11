@@ -45,13 +45,6 @@ export const Table = styled(BaseTable)`
 
 export const SorteableHeadColumn = styled(Table.HeadColumn)<{ desc: boolean }>`
   cursor: pointer;
-  ${({ highlighted, desc }) =>
-    highlighted &&
-    css`
-      &::before {
-        content: ${desc ? "'▴'" : "'▾'"};
-      }
-    `}
 `
 
 export const ControlHeader = styled.div`

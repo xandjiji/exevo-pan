@@ -5,10 +5,12 @@ import { CharacterTableProps } from './types'
 
 const CharacterTable = ({
   characterList,
+  caption,
   ...props
 }: CharacterTableProps): JSX.Element => (
   <S.Table {...props}>
     <Table.Element>
+      <caption>{caption}</caption>
       <Table.Head>
         <Table.Row>
           <Table.HeadColumn>#</Table.HeadColumn>

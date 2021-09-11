@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
+import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
 
 export const Wrapper = styled.article`
   position: relative;
@@ -75,12 +75,4 @@ export const SecondRow = styled.div`
   @media (min-width: 768px) {
     grid-template-columns: 1fr 1fr;
   }
-`
-
-export const Loading = styled(Spinner)`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
 `

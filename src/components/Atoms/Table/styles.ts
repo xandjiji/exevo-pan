@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { MaterialCard, Smooth, Shadow, CustomScrollbar } from 'styles'
+import { HeadColumnStyleProps } from './types'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
@@ -37,6 +38,10 @@ export const Table = styled.table`
   margin-left: -3px;
   width: calc(100% + 3px);
   border-collapse: collapse;
+
+  caption {
+    display: none;
+  }
 `
 
 export const Row = styled.tr`
@@ -52,17 +57,17 @@ export const Head = styled.thead`
   border-bottom: solid 1px var(--separator);
 `
 
-export const HeadColumn = styled.th<{ highlighted?: boolean }>`
+export const HeadColumn = styled.th<HeadColumnStyleProps>`
   padding-bottom: 6px;
   font-size: 12px;
   font-weight: 600;
   color: var(--onSurface);
 
-  ${({ highlighted }) =>
+  ${({ highlighted, desc }) =>
     highlighted &&
     css`
       &::before {
-        content: '▴';
+        content: ${desc ? "'▴'" : "'▾'"};
         position: relative;
         top: -1px;
         left: -3px;

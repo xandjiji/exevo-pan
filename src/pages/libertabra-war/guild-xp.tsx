@@ -1,9 +1,14 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, GuildXPGrid } from 'modules/LibertabraWar'
-import { endpoints, paths } from 'Constants'
+import { ManageDataClient } from 'services'
+import { GetStaticProps } from 'next'
 
-export default function LibertabraWar(): JSX.Element {
+export default function LibertabraWar({
+  warData,
+}: {
+  warData: WarStatistics
+}): JSX.Element {
   return (
     <div>
       <Head>
@@ -35,21 +40,23 @@ export default function LibertabraWar(): JSX.Element {
           content="Compare daily guild XP differences from Libertabra War!"
         />
         <meta property="og:type" content="website" />
-
-        <link
-          rel="preload"
-          href={`${endpoints.WAR_DATA}${paths.WAR_STATISTICS}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
       </Head>
 
       <Main>
         <main>
           <Header />
-          <GuildXPGrid />
+          <GuildXPGrid warData={warData} />
         </main>
       </Main>
     </div>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const warData = await ManageDataClient.fetchWarStatisticsData()
+
+  return {
+    props: { warData },
+    revalidate: 600,
+  }
 }
