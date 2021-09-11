@@ -7,4 +7,5 @@ export type Dataset = {
   rawItemData: RareItemData
   itemData: RareItemData
   statisticsData: StatisticsData
+  warStatistics: WarStatistics
 }

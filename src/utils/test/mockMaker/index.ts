@@ -3,6 +3,7 @@ import { randomServerData } from './makers/serverMaker'
 import { randomCharacterData } from './makers/characterMaker'
 import { randomItemData } from './makers/rareItemMaker'
 import { randomStatisticsData } from './makers/statisticsMaker'
+import { randomWarStatisticsData } from './makers/warStatisticsMaker'
 import { Dataset } from './types'
 
 export const randomDataset = (charAmount = 10000): Dataset => {
@@ -22,5 +23,6 @@ export const randomDataset = (charAmount = 10000): Dataset => {
     rawItemData,
     itemData,
     statisticsData: randomStatisticsData(),
+    warStatistics: randomWarStatisticsData(),
   }
 }
