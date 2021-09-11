@@ -8,4 +8,7 @@ export type Dataset = {
   itemData: RareItemData
   statisticsData: StatisticsData
   warStatistics: WarStatistics
+  miniMembersWarData: MiniMemberWarData[]
+  puneMembersData: MemberWarData[]
+  bonesMembersData: MemberWarData[]
 }
