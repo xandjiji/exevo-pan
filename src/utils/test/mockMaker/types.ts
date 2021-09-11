@@ -12,4 +12,5 @@ export type Dataset = {
   miniBonesMembersData: MiniMemberWarData[]
   puneMembersData: MemberWarData[]
   bonesMembersData: MemberWarData[]
+  allGuildMembers: MemberWarData[]
 }

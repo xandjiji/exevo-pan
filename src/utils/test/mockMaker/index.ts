@@ -4,8 +4,7 @@ import { randomCharacterData } from './makers/characterMaker'
 import { randomItemData } from './makers/rareItemMaker'
 import { randomStatisticsData } from './makers/statisticsMaker'
 import { randomWarStatisticsData } from './makers/warStatisticsMaker'
-import { randomMembersWarData } from './makers/membersWarDataMaker'
-import { unminifyGuildData } from './utils'
+import { randomGuildWarData } from './makers/membersWarDataMaker'
 import { Dataset } from './types'
 
 export const randomDataset = (charAmount = 10000): Dataset => {
@@ -16,8 +15,7 @@ export const randomDataset = (charAmount = 10000): Dataset => {
 
   const buildedCharacterData = buildCharacterData(characterList, serverList)
 
-  const miniPuneMembersData = randomMembersWarData()
-  const miniBonesMembersData = randomMembersWarData()
+  const guildWarData = randomGuildWarData()
 
   return {
     rawServerData,
@@ -29,17 +27,6 @@ export const randomDataset = (charAmount = 10000): Dataset => {
     itemData,
     statisticsData: randomStatisticsData(),
     warStatistics: randomWarStatisticsData(),
-    miniPuneMembersData,
-    miniBonesMembersData,
-    puneMembersData: unminifyGuildData(
-      miniPuneMembersData,
-      'Libertabra Pune',
-      0,
-    ),
-    bonesMembersData: unminifyGuildData(
-      miniBonesMembersData,
-      'Bones Alliance',
-      1,
-    ),
+    ...guildWarData,
   }
 }
