@@ -16,6 +16,9 @@ export const randomDataset = (charAmount = 10000): Dataset => {
 
   const buildedCharacterData = buildCharacterData(characterList, serverList)
 
+  const miniPuneMembersData = randomMembersWarData()
+  const miniBonesMembersData = randomMembersWarData()
+
   return {
     rawServerData,
     serverData: serverList,
@@ -26,14 +29,15 @@ export const randomDataset = (charAmount = 10000): Dataset => {
     itemData,
     statisticsData: randomStatisticsData(),
     warStatistics: randomWarStatisticsData(),
-    miniMembersWarData: randomMembersWarData(),
+    miniPuneMembersData,
+    miniBonesMembersData,
     puneMembersData: unminifyGuildData(
-      randomMembersWarData(),
+      miniPuneMembersData,
       'Libertabra Pune',
       0,
     ),
     bonesMembersData: unminifyGuildData(
-      randomMembersWarData(),
+      miniBonesMembersData,
       'Bones Alliance',
       1,
     ),
