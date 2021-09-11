@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
+import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
 import CharacterTable from './CharacterTable'
 
 export const Wrapper = styled.article`
@@ -54,14 +54,6 @@ export const Wrapper = styled.article`
     grid-column: 1 / -1;
     height: 16px;
   }
-`
-
-export const Loading = styled(Spinner)`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
 `
 
 const HighlightedTh = css`

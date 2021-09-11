@@ -1,17 +1,13 @@
-import { useWarStatisticsData } from 'contexts/useDatabase'
 import { getLastArrayElement } from 'utils'
 import Scoreboard from './Scoreboard'
 import LastFrags from './LastFrags'
 import ComparisonChart from '../ComparisonChart'
 import { onlineToDataSnapshot } from './utils'
 import * as S from './styles'
+import { OverallGridProps } from './types'
 
-const OverallGrid = (): JSX.Element => {
-  const { warStatisticsData } = useWarStatisticsData()
-
-  /* @ ToDo: skeleton */
-  if (!warStatisticsData) return <S.Loading />
-  const { score, onlineCount, lastDeaths } = warStatisticsData
+const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
+  const { score, onlineCount, lastDeaths } = warData
   return (
     <S.Wrapper>
       <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
