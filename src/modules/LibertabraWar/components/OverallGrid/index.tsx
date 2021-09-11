@@ -27,6 +27,7 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
           }}
         />
         <ComparisonChart
+          title="Comparing total online members of Libertabra Pune and Bones Alliance in the last 4 hours"
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${

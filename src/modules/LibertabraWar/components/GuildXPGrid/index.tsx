@@ -28,6 +28,7 @@ const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
         />
 
         <ComparisonChart
+          title="Comparing daily XP gain or loss between Libertabra Pune and Bones Alliance"
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${formatNumberWithCommas(
