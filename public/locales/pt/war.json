@@ -17,6 +17,12 @@
       "description": "Busque por todos os personagens lutando na guerra de Libertabra!"
     }
   },
+  "Header": {
+    "Overall": "Geral",
+    "Top10": "Top 10",
+    "GuildXP": "Guild XP",
+    "Search": "Procurar membros"
+  },
   "PageTitle": "Veja estatísticas ao vivo da guerra de Libertabra!",
   "GuildSummary": {
     "linkText": "Ir para a página da guild",
