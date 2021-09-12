@@ -1,5 +1,6 @@
 import { useTranslation } from 'next-i18next'
 import { memo } from 'react'
+import { Table } from 'components/Atoms'
 import * as S from './styles'
 import { ListProps } from './types'
 
@@ -13,47 +14,44 @@ const List = ({
   const { t } = useTranslation('statistics')
 
   return (
-    <S.Wrapper {...props}>
-      <S.CardHead>
-        Top 10
-        <S.Title>{title}</S.Title>
-      </S.CardHead>
-
-      <S.Table>
-        <S.Caption>{`${t('List.captionTop10')} ${title} ${t(
+    <S.Table {...props} title={title} subtitle="Top 10">
+      <Table.Element>
+        <caption>{`${t('List.captionTop10')} ${title} ${t(
           'List.captionDescription',
-        )}`}</S.Caption>
-        <S.TableHead>
-          <tr>
-            <S.HeadItem aria-label={t('List.titleLabel')}>#</S.HeadItem>
-            <S.HeadItem>Nickname</S.HeadItem>
-            <S.HeadItem>{title}</S.HeadItem>
-          </tr>
-        </S.TableHead>
+        )}`}</caption>
+        <Table.Head>
+          <Table.Row>
+            <Table.HeadColumn aria-label={t('List.titleLabel')}>
+              #
+            </Table.HeadColumn>
+            <Table.HeadColumn>Nickname</Table.HeadColumn>
+            <Table.HeadColumn>{title}</Table.HeadColumn>
+          </Table.Row>
+        </Table.Head>
 
-        <tbody>
+        <Table.Body>
           {charactersList.map((character, index) => (
-            <tr key={character.id}>
-              <S.RowItem>{index + 1}</S.RowItem>
-              <S.RowItem>
-                <S.Link
+            <Table.Row key={character.id}>
+              <Table.Column>{index + 1}</Table.Column>
+              <Table.Column>
+                <a
                   href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${character.id}&source=overview`}
                   target="_blank"
                   rel="noreferrer noopener external"
                 >
                   {character.nickname}
-                </S.Link>
-              </S.RowItem>
-              <S.RowItem>
+                </a>
+              </Table.Column>
+              <Table.Column>
                 {format
                   ? format(character[displayedDataKey] as never)
                   : character[displayedDataKey]}
-              </S.RowItem>
-            </tr>
+              </Table.Column>
+            </Table.Row>
           ))}
-        </tbody>
-      </S.Table>
-    </S.Wrapper>
+        </Table.Body>
+      </Table.Element>
+    </S.Table>
   )
 }
 

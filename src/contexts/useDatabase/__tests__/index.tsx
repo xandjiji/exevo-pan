@@ -15,6 +15,7 @@ import {
   initialFilter,
   mockFavArray,
   filteredFavArray,
+  mockedGuildData,
 } from './mock'
 
 jest.mock('utils/localStorage', () => ({
@@ -33,6 +34,16 @@ const ComponentWrapper = ({
     <DatabaseProvider>{children}</DatabaseProvider>
   </ThemeProvider>
 )
+
+const initialDatabaseValue = {
+  loading: false,
+  characterData: [],
+  serverData: [],
+  rareItemData: {},
+  historyData: [],
+  warGuildData: [],
+  dispatch: expect.any(Function),
+}
 
 describe('useDatabase()', () => {
   beforeEach(() => {
@@ -56,6 +67,11 @@ describe('useDatabase()', () => {
       .spyOn(ManageDataClient, 'fetchStatisticsData')
       .mockResolvedValueOnce(mockStatisticsData)
 
+    jest
+      .spyOn(ManageDataClient, 'fetchGuildWarData')
+      .mockResolvedValueOnce(mockedGuildData.puneMembersData)
+      .mockResolvedValueOnce(mockedGuildData.bonesMembersData)
+
     getFavArrayMock.mockReturnValue(mockFavArray)
   })
 
@@ -67,15 +83,7 @@ describe('useDatabase()', () => {
       wrapper: ComponentWrapper,
     })
 
-    expect(result.current).toEqual({
-      loading: false,
-      characterData: [],
-      serverData: [],
-      rareItemData: {},
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
-    })
+    expect(result.current).toEqual(initialDatabaseValue)
   })
 
   test(`checking ${routes.HOME} path and filters dispatch`, async () => {
@@ -87,25 +95,17 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current).toEqual({
+      ...initialDatabaseValue,
       loading: true,
-      characterData: [],
-      serverData: [],
-      rareItemData: {},
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
     })
 
     await waitForNextUpdate()
 
     expect(result.current).toEqual({
-      loading: false,
+      ...initialDatabaseValue,
       characterData: mockedCharacterData,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
     })
 
     act(() => {
@@ -334,25 +334,17 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current).toEqual({
+      ...initialDatabaseValue,
       loading: true,
-      characterData: [],
-      serverData: [],
-      rareItemData: {},
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
     })
 
     await waitForNextUpdate()
 
     expect(result.current).toEqual({
-      loading: false,
-      characterData: [],
+      ...initialDatabaseValue,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
       historyData: mockedCharacterData,
-      statisticsData: null,
-      dispatch: expect.any(Function),
     })
 
     act(() => {
@@ -581,25 +573,17 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current).toEqual({
+      ...initialDatabaseValue,
       loading: true,
-      characterData: [],
-      serverData: [],
-      rareItemData: {},
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
     })
 
     await waitForNextUpdate()
 
     expect(result.current).toEqual({
-      loading: false,
+      ...initialDatabaseValue,
       characterData: mockedCharacterData,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
     })
 
     act(() => {
@@ -619,13 +603,31 @@ describe('useDatabase()', () => {
     })
 
     expect(result.current).toEqual({
-      loading: false,
+      ...initialDatabaseValue,
       characterData: mockedCharacterData,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
-      historyData: [],
-      statisticsData: null,
-      dispatch: expect.any(Function),
+    })
+  })
+
+  test(`checking ${routes.LIBERTABRA_WAR_SEARCH} path`, async () => {
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.LIBERTABRA_WAR_SEARCH,
+    } as NextRouter)
+    const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
+      wrapper: ComponentWrapper,
+    })
+
+    expect(result.current).toEqual({
+      ...initialDatabaseValue,
+      loading: true,
+    })
+
+    await waitForNextUpdate()
+
+    expect(result.current).toEqual({
+      ...initialDatabaseValue,
+      warGuildData: mockedGuildData.allGuildMembers,
     })
   })
 })

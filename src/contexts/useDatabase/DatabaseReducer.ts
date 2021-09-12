@@ -43,11 +43,8 @@ const DatabaseReducer = (
       }
     }
 
-    case 'STATISTICS_DATA_LOAD':
-      return {
-        ...state,
-        statisticsData: action.statisticsData,
-      }
+    case 'WAR_GUILD_DATA_LOAD':
+      return { ...state, warGuildData: action.warGuildData }
 
     case 'APPLY_FILTERS':
       if (action.isHistory) {

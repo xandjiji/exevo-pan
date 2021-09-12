@@ -6,11 +6,11 @@ interface LoadingReducerState {
 type Action =
   | {
       type: 'FINISH_LOADING'
-      path: string
+      paths: string[]
     }
   | {
       type: 'START_LOADING'
-      path: string
+      paths: string[]
     }
 
 const LoadingReducer = (
@@ -21,15 +21,15 @@ const LoadingReducer = (
     case 'START_LOADING':
       return {
         ...state,
-        navigated: [...state.navigated, action.path],
-        loadingPaths: [...state.loadingPaths, action.path],
+        navigated: [...state.navigated, ...action.paths],
+        loadingPaths: [...state.loadingPaths, ...action.paths],
       }
 
     case 'FINISH_LOADING':
       return {
         ...state,
         loadingPaths: [...state.loadingPaths].filter(
-          (path) => action.path !== path,
+          (path) => !action.paths.includes(path),
         ),
       }
 

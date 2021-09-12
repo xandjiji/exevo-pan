@@ -5,13 +5,15 @@
       "bazaarHistory": "Explore através do histórico do Char Bazaar!",
       "statistics": "Descubra estatísticas sobre personagens vendidos no Char Bazaar!",
       "highscores": "Top levels, maiores skills e personagens mais caros do Char Bazaar!",
-      "about": "Sobre o site Exevo Pan, declarações e informações de contato."
+      "about": "Sobre o site Exevo Pan, declarações e informações de contato.",
+      "war": "Acompanhe estatísticas ao vivo da guerra de Libertabra!"
     },
     "logoLabel": "Ir para a página inicial",
     "nav": {
       "currentAuctions": "Leilões",
       "bazaarHistory": "Histórico do Bazaar",
       "statistics": "Estatísticas",
+      "war": "Libertabra War",
       "about": "Sobre"
     },
     "themeSwitch": "Habilitar tema noturno"

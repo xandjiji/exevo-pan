@@ -32,6 +32,11 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
               </Link>
             </S.Li>
             <S.Li>
+              <Link href={routes.LIBERTABRA_WAR}>
+                <S.A>{tCommon('Header.nav.war')}</S.A>
+              </Link>
+            </S.Li>
+            <S.Li>
               <Link href={routes.STATISTICS}>
                 <S.A>{tCommon('Header.nav.statistics')}</S.A>
               </Link>

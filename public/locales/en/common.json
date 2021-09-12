@@ -5,13 +5,15 @@
       "bazaarHistory": "Explore through Tibia Char Bazaar history data!",
       "statistics": "Find statistics for Tibia Char Bazaar characters!",
       "highscores": "Top levels, highest skills and biggests bids on Tibia Char Bazaar!",
-      "about": "About the Exevo Pan website, disclaimers and contact information."
+      "about": "About the Exevo Pan website, disclaimers and contact information.",
+      "war": "Follow live data and statistics from Libertabra War!"
     },
     "logoLabel": "Go to homepage",
     "nav": {
       "currentAuctions": "Current Auctions",
       "bazaarHistory": "Bazaar History",
       "statistics": "Statistics",
+      "war": "Libertabra War",
       "about": "About"
     },
     "themeSwitch": "Toggle dark theme"

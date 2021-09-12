@@ -7,4 +7,10 @@ export type Dataset = {
   rawItemData: RareItemData
   itemData: RareItemData
   statisticsData: StatisticsData
+  warStatistics: WarStatistics
+  miniPuneMembersData: MiniMemberWarData[]
+  miniBonesMembersData: MiniMemberWarData[]
+  puneMembersData: MemberWarData[]
+  bonesMembersData: MemberWarData[]
+  allGuildMembers: MemberWarData[]
 }

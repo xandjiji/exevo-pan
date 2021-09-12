@@ -3,6 +3,8 @@ import { randomServerData } from './makers/serverMaker'
 import { randomCharacterData } from './makers/characterMaker'
 import { randomItemData } from './makers/rareItemMaker'
 import { randomStatisticsData } from './makers/statisticsMaker'
+import { randomWarStatisticsData } from './makers/warStatisticsMaker'
+import { randomGuildWarData } from './makers/membersWarDataMaker'
 import { Dataset } from './types'
 
 export const randomDataset = (charAmount = 10000): Dataset => {
@@ -13,6 +15,8 @@ export const randomDataset = (charAmount = 10000): Dataset => {
 
   const buildedCharacterData = buildCharacterData(characterList, serverList)
 
+  const guildWarData = randomGuildWarData()
+
   return {
     rawServerData,
     serverData: serverList,
@@ -22,5 +26,7 @@ export const randomDataset = (charAmount = 10000): Dataset => {
     rawItemData,
     itemData,
     statisticsData: randomStatisticsData(),
+    warStatistics: randomWarStatisticsData(),
+    ...guildWarData,
   }
 }

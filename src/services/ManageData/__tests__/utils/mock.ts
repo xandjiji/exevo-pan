@@ -1,6 +1,11 @@
 import { randomDataset } from 'utils/test'
 
-const { minifiedCharacterData, partialCharacterData } = randomDataset()
+const {
+  minifiedCharacterData,
+  partialCharacterData,
+  miniPuneMembersData,
+  puneMembersData,
+} = randomDataset()
 
 const past = +new Date() / 1000 - 100000
 const future = +new Date() / 1000 + 100000
@@ -19,4 +24,9 @@ export const pastPartialAuction = {
 export const futurePartialAuction = {
   ...partialCharacterData[1],
   auctionEnd: future,
+}
+
+export const mockedMembersData = {
+  miniPuneMembersData,
+  puneMembersData,
 }

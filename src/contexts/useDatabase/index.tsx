@@ -20,7 +20,7 @@ import {
   DatabaseContextValues,
   CharactersContextValues,
   DrawerFieldsContextValues,
-  StatisticsDataContextValues,
+  WarGuildDataContextValues,
   DatabaseDispatchContextValues,
 } from './types'
 
@@ -30,7 +30,7 @@ const defaultDatabaseState: DatabaseContextValues = {
   serverData: [],
   rareItemData: {},
   historyData: [],
-  statisticsData: null,
+  warGuildData: [],
   dispatch: () => {},
 }
 const DatabaseContext =
@@ -48,9 +48,9 @@ const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
   rareItemData: defaultDatabaseState.rareItemData,
 })
 
-const StatisticsDataContext = createContext<StatisticsDataContextValues>({
+const WarGuildDataContext = createContext<WarGuildDataContextValues>({
   loading: defaultDatabaseState.loading,
-  statisticsData: defaultDatabaseState.statisticsData,
+  warGuildData: defaultDatabaseState.warGuildData,
 })
 
 const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
@@ -65,7 +65,7 @@ export const DatabaseProvider = ({
   const { t } = useTranslation('common')
 
   const [
-    { characterData, serverData, rareItemData, historyData, statisticsData },
+    { characterData, serverData, rareItemData, historyData, warGuildData },
     dispatch,
   ] = useReducer(DatabaseReducer, {
     baseCharacterData: defaultDatabaseState.characterData,
@@ -74,7 +74,7 @@ export const DatabaseProvider = ({
     rareItemData: defaultDatabaseState.rareItemData,
     baseHistoryData: defaultDatabaseState.historyData,
     historyData: defaultDatabaseState.historyData,
-    statisticsData: defaultDatabaseState.statisticsData,
+    warGuildData: defaultDatabaseState.warGuildData,
   })
 
   const [{ loadingPaths, navigated }, dispatchLoad] = useReducer(
@@ -112,18 +112,50 @@ export const DatabaseProvider = ({
       })
     } finally {
       setLoadedPercentage(null)
-      dispatchLoad({ type: 'FINISH_LOADING', path: currentPath })
+      dispatchLoad({ type: 'FINISH_LOADING', paths: [currentPath] })
+    }
+  }, [])
+
+  const fetchGuildWarData = useCallback(async () => {
+    try {
+      const [miniGuildDataA, miniGuildDataB] = await Promise.all([
+        ManageDataClient.fetchGuildWarData('Libertabra Pune'),
+        ManageDataClient.fetchGuildWarData('Bones Alliance'),
+      ])
+
+      const allGuildMembers = [...miniGuildDataA, ...miniGuildDataB].sort(
+        (a, b) => b.level - a.level,
+      )
+
+      dispatch({
+        type: 'WAR_GUILD_DATA_LOAD',
+        warGuildData: allGuildMembers,
+      })
+    } finally {
+      dispatchLoad({
+        type: 'FINISH_LOADING',
+        paths: [routes.LIBERTABRA_WAR_SEARCH],
+      })
     }
   }, [])
 
   useEffect(() => {
     if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
       if (!navigated.includes(pathname)) {
-        dispatchLoad({ type: 'START_LOADING', path: pathname })
+        dispatchLoad({ type: 'START_LOADING', paths: [pathname] })
         fetchCharacterData(pathname)
       }
     }
-  }, [pathname, navigated, fetchCharacterData])
+    if (pathname === routes.LIBERTABRA_WAR_SEARCH) {
+      if (!navigated.includes(pathname)) {
+        dispatchLoad({
+          type: 'START_LOADING',
+          paths: [routes.LIBERTABRA_WAR_SEARCH],
+        })
+        fetchGuildWarData()
+      }
+    }
+  }, [pathname, navigated, fetchCharacterData, fetchGuildWarData])
 
   const isMounted = useIsMounted()
   useEffect(() => {
@@ -149,15 +181,15 @@ export const DatabaseProvider = ({
         serverData,
         rareItemData,
         historyData,
+        warGuildData,
         dispatch,
-        statisticsData,
       }}
     >
       <CharactersContext.Provider
         value={{ loading, characterData, historyData }}
       >
         <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
-          <StatisticsDataContext.Provider value={{ statisticsData, loading }}>
+          <WarGuildDataContext.Provider value={{ warGuildData, loading }}>
             <DatabaseDispatchContext.Provider value={{ dispatch }}>
               {loading && (
                 <LoadingAlert>
@@ -166,7 +198,7 @@ export const DatabaseProvider = ({
               )}
               {children}
             </DatabaseDispatchContext.Provider>
-          </StatisticsDataContext.Provider>
+          </WarGuildDataContext.Provider>
         </DrawerFieldsContext.Provider>
       </CharactersContext.Provider>
     </DatabaseContext.Provider>
@@ -182,8 +214,8 @@ export const useCharacters = (): CharactersContextValues =>
 export const useDrawerFields = (): DrawerFieldsContextValues =>
   useContext(DrawerFieldsContext)
 
-export const useStatisticsData = (): StatisticsDataContextValues =>
-  useContext(StatisticsDataContext)
+export const useWarGuildData = (): WarGuildDataContextValues =>
+  useContext(WarGuildDataContext)
 
 export const useDatabaseDispatch = (): DatabaseDispatchContextValues =>
   useContext(DatabaseDispatchContext)

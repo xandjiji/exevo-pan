@@ -12,6 +12,7 @@ const heading = {
   [routes.STATISTICS]: 'statistics',
   [routes.HIGHSCORES]: 'highscores',
   [routes.ABOUT]: 'about',
+  [routes.LIBERTABRA_WAR]: 'war',
 }
 
 const Header = ({
@@ -33,6 +34,7 @@ const Header = ({
                 : 'Exevo Pan'}
             </S.H1>
             <S.ExevoPanLogo
+              unoptimized
               priority
               aria-label={t('Header.logoLabel')}
               alt={
@@ -65,6 +67,14 @@ const Header = ({
               <S.A>
                 <S.StatisticsIcon />
                 <S.H2>{t('Header.nav.statistics')}</S.H2>
+              </S.A>
+            </Link>
+          </S.Li>
+          <S.Li>
+            <Link href={routes.LIBERTABRA_WAR}>
+              <S.A>
+                <S.WarIcon />
+                <S.H2>Libertabra War</S.H2>
               </S.A>
             </Link>
           </S.Li>

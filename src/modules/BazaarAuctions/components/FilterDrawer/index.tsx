@@ -510,7 +510,7 @@ const FilterDrawer = ({
                     updateFilters('minLevel', defaultValues.minLevel as number)
                     updateFilters('soulwarFilter', false)
                   } else {
-                    updateFilters('minLevel', 400)
+                    updateFilters('minLevel', 250)
                     updateFilters('maxLevel', defaultValues.maxLevel as number)
                     updateFilters('soulwarFilter', true)
                   }

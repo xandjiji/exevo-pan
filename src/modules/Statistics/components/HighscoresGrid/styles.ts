@@ -34,9 +34,10 @@ export const Wrapper = styled.article`
     pointer-events: none;
   }
 
-  grid-template-columns: auto-fit;
-  @media (min-width: 360px) {
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  &::after {
+    content: '';
+    grid-column: 1 / -1;
+    height: 24px;
   }
 `
 
