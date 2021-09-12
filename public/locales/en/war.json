@@ -47,6 +47,7 @@
     }
   },
   "SearchGrid": {
+    "Title": "Search for guild members fighting in Libertabra War!",
     "MembersTable": {
       "filters": "Filters",
       "goatLabel": "goat",

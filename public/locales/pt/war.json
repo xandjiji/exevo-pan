@@ -47,6 +47,7 @@
     }
   },
   "SearchGrid": {
+    "Title": "Procure por membros das guilds lutando na guerra de Libertabra!",
     "MembersTable": {
       "filters": "Filtros",
       "goatLabel": "bode",
