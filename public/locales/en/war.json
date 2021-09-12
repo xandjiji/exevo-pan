@@ -45,5 +45,13 @@
     "ScoreboardXP": {
       "summaryLabel": "Today XP"
     }
+  },
+  "SearchGrid": {
+    "MembersTable": {
+      "EmptyState": {
+        "p": "No characters were found",
+        "alt": "No character was found"
+      }
+    }
   }
 }
