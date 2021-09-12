@@ -17,7 +17,11 @@ const CharacterTable = ({
         <caption>{caption}</caption>
         <Table.Head>
           <Table.Row>
-            <Table.HeadColumn>#</Table.HeadColumn>
+            <Table.HeadColumn
+              aria-label={t('Top10Grid.CharacterTable.positionLabel')}
+            >
+              #
+            </Table.HeadColumn>
             <Table.HeadColumn>Nickname</Table.HeadColumn>
             <Table.HeadColumn>Kills</Table.HeadColumn>
             <Table.HeadColumn>

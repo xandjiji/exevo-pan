@@ -40,6 +40,7 @@
   },
   "Top10Grid": {
     "CharacterTable": {
+      "positionLabel": "Posição no ranking",
       "deathsHeadColumn": "Mortes",
       "killsTitle": "Total de kills",
       "deathsTitle": "Total de mortes"
