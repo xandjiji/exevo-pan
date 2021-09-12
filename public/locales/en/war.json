@@ -29,6 +29,9 @@
     "diffTitleSuffix": "since last update"
   },
   "OverallGrid": {
+    "comparisonChartTitle": "Comparing total online members of Libertabra Pune and Bones Alliance in the last 4 hours",
+    "comparisonChartSuffix": "members online",
+    "recentDeathsTitle": "Recent deaths",
     "LastFrags": {
       "killedHeadColumn": "Killed",
       "characterHeadColumnTitle": "Sorted by level",
