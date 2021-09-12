@@ -20,5 +20,10 @@
   "GuildSummary": {
     "linkText": "Ir para a página da guild",
     "diffTitleSuffix": "desde a última atualização"
+  },
+  "GuildXPGrid": {
+    "ScoreboardXP": {
+      "summaryLabel": "XP de hoje"
+    }
   }
 }
