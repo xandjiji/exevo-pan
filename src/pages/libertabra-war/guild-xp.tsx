@@ -1,3 +1,5 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, GuildXPGrid } from 'modules/LibertabraWar'
@@ -9,35 +11,25 @@ export default function LibertabraWar({
 }: {
   warData: WarStatistics
 }): JSX.Element {
+  const { t } = useTranslation('war')
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Libertabra War Guild XP</title>
-        <meta name="title" content="Exevo Pan - Libertabra War Guild XP" />
-        <meta
-          property="og:site_name"
-          content="Exevo Pan - Libertabra War Guild XP"
-        />
-        <meta
-          property="og:title"
-          content="Exevo Pan - Libertabra War Guild XP"
-        />
-        <meta
-          property="twitter:title"
-          content="Exevo Pan - Libertabra War Guild XP"
-        />
+        <title>{t('Meta.GuildXP.title')}</title>
+        <meta name="title" content={t('Meta.GuildXP.title')} />
+        <meta property="og:site_name" content={t('Meta.GuildXP.title')} />
+        <meta property="og:title" content={t('Meta.GuildXP.title')} />
+        <meta property="twitter:title" content={t('Meta.GuildXP.title')} />
 
-        <meta
-          name="description"
-          content="Compare daily guild XP differences from Libertabra War!"
-        />
+        <meta name="description" content={t('Meta.GuildXP.description')} />
         <meta
           property="twitter:description"
-          content="Compare daily guild XP differences from Libertabra War!"
+          content={t('Meta.GuildXP.description')}
         />
         <meta
           property="og:description"
-          content="Compare daily guild XP differences from Libertabra War!"
+          content={t('Meta.GuildXP.description')}
         />
         <meta property="og:type" content="website" />
       </Head>
@@ -52,11 +44,14 @@ export default function LibertabraWar({
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const warData = await ManageDataClient.fetchWarStatisticsData()
 
   return {
-    props: { warData },
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common', 'war'])),
+      warData,
+    },
     revalidate: 600,
   }
 }

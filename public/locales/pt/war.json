@@ -1,0 +1,20 @@
+{
+  "Meta": {
+    "Overall": {
+      "title": "Exevo Pan - Libertabra War",
+      "description": "Acompanhe dados e estatísticas ao vivo da guerra de Libertabra!"
+    },
+    "Top10": {
+      "title": "Exevo Pan - Libertabra War Rankings",
+      "description": "Confira os top frags e mais mortes da guerra de Libertabra!"
+    },
+    "GuildXP": {
+      "title": "Exevo Pan - Libertabra War Guild XP",
+      "description": "Compare as diferenças diárias de XP entre as guilds da guerra de Libertabra!"
+    },
+    "Search": {
+      "title": "Exevo Pan - Procurar personagens",
+      "description": "Busque por todos os personagens lutando na guerra de Libertabra!"
+    }
+  }
+}

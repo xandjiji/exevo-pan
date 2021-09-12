@@ -1,3 +1,5 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, Top10Grid } from 'modules/LibertabraWar'
@@ -9,36 +11,23 @@ export default function LibertabraWar({
 }: {
   warData: WarStatistics
 }): JSX.Element {
+  const { t } = useTranslation('war')
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Libertabra War Rankings</title>
-        <meta name="title" content="Exevo Pan - Libertabra War Rankings" />
-        <meta
-          property="og:site_name"
-          content="Exevo Pan - Libertabra War Rankings"
-        />
-        <meta
-          property="og:title"
-          content="Exevo Pan - Libertabra War Rankings"
-        />
-        <meta
-          property="twitter:title"
-          content="Exevo Pan - Libertabra War Rankings"
-        />
+        <title>{t('Meta.Top10.title')}</title>
+        <meta name="title" content={t('Meta.Top10.title')} />
+        <meta property="og:site_name" content={t('Meta.Top10.title')} />
+        <meta property="og:title" content={t('Meta.Top10.title')} />
+        <meta property="twitter:title" content={t('Meta.Top10.title')} />
 
-        <meta
-          name="description"
-          content="Check out top frags and most deaths from Libertabra War!"
-        />
+        <meta name="description" content={t('Meta.Top10.description')} />
         <meta
           property="twitter:description"
-          content="Check out top frags and most deaths from Libertabra War!"
+          content={t('Meta.Top10.description')}
         />
-        <meta
-          property="og:description"
-          content="Check out top frags and most deaths from Libertabra War!"
-        />
+        <meta property="og:description" content={t('Meta.Top10.description')} />
         <meta property="og:type" content="website" />
       </Head>
 
@@ -52,11 +41,14 @@ export default function LibertabraWar({
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const warData = await ManageDataClient.fetchWarStatisticsData()
 
   return {
-    props: { warData },
+    props: {
+      ...(await serverSideTranslations(locale as string, ['common', 'war'])),
+      warData,
+    },
     revalidate: 600,
   }
 }
