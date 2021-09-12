@@ -25,7 +25,9 @@ const List = ({
               #
             </Table.HeadColumn>
             <Table.HeadColumn>Nickname</Table.HeadColumn>
-            <Table.HeadColumn>{title}</Table.HeadColumn>
+            <Table.HeadColumn highlighted desc>
+              {title}
+            </Table.HeadColumn>
           </Table.Row>
         </Table.Head>
 
