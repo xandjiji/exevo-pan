@@ -16,5 +16,9 @@
       "title": "Exevo Pan - Procurar personagens",
       "description": "Busque por todos os personagens lutando na guerra de Libertabra!"
     }
+  },
+  "GuildSummary": {
+    "linkText": "Ir para a página da guild",
+    "diffTitleSuffix": "desde a última atualização"
   }
 }

@@ -16,5 +16,9 @@
       "title": "Exevo Pan - Search characters",
       "description": "Search for all characters fighting in Libertabra War!"
     }
+  },
+  "GuildSummary": {
+    "linkText": "Go to guild page",
+    "diffTitleSuffix": "since last update"
   }
 }
