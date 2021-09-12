@@ -13,6 +13,7 @@ export const Wrapper = styled.article`
   ${CustomScrollbar}
 
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 24px;
 
   background-color: var(--background);
