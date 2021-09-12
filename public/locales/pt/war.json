@@ -38,6 +38,13 @@
       "timeDiffSuffix": "minutos atrás"
     }
   },
+  "Top10Grid": {
+    "CharacterTable": {
+      "deathsHeadColumn": "Mortes",
+      "killsTitle": "Total de kills",
+      "deathsTitle": "Total de mortes"
+    }
+  },
   "GuildXPGrid": {
     "comparisonChartTitle": "Comparando o ganho ou perda de XP diário entre Libertabra Pune e Bones Alliance",
     "guildSummaryValueSuffix": "XP total",
