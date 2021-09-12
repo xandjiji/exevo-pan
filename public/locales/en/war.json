@@ -39,6 +39,10 @@
     }
   },
   "Top10Grid": {
+    "mostKillsTitle": "Most kills",
+    "mostKillsCaptionSuffix": "members with the most kills",
+    "mostDeathsTitle": "Most deaths",
+    "mostDeathsCaptionSuffix": "members with the most deaths",
     "CharacterTable": {
       "positionLabel": "Ranking position",
       "deathsHeadColumn": "Deaths",
