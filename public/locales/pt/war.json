@@ -17,11 +17,15 @@
       "description": "Busque por todos os personagens lutando na guerra de Libertabra!"
     }
   },
+  "PageTitle": "Veja estatísticas ao vivo da guerra de Libertabra!",
   "GuildSummary": {
     "linkText": "Ir para a página da guild",
     "diffTitleSuffix": "desde a última atualização"
   },
   "GuildXPGrid": {
+    "comparisonChartTitle": "Comparando o ganho ou perda de XP diário entre Libertabra Pune e Bones Alliance",
+    "guildSummaryValueSuffix": "XP total",
+    "comparisonChartSuffix": "diferença de XP",
     "ScoreboardXP": {
       "summaryLabel": "XP de hoje"
     }
