@@ -48,6 +48,17 @@
   },
   "SearchGrid": {
     "MembersTable": {
+      "filters": "Filters",
+      "goatLabel": "goat",
+      "skullLabel": "skull",
+      "searchLabel": "Search for nickname",
+      "paginatorNoItems": "No characters found",
+      "levelSortLabel": "Click to sort by Level",
+      "killsSortLabel": "Click to sort by Kills",
+      "deathSortLabel": "Click to sort by Deaths",
+      "deathsHeadColumn": "Deaths",
+      "killsTitle": "Total kills",
+      "deathsTitle": "Total death count",
       "EmptyState": {
         "p": "No characters were found",
         "alt": "No character was found"

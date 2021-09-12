@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useState, useCallback, useMemo } from 'react'
 import { Table } from 'components/Atoms'
 import EmptyState from './EmptyState'
@@ -10,6 +11,8 @@ const MembersTable = ({
   memberList,
   ...props
 }: MembersTableProps): JSX.Element => {
+  const { t } = useTranslation('war')
+
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')
   const [currentGuild, setCurrentGuild] = useState<0 | 1 | null>(null)
@@ -101,13 +104,16 @@ const MembersTable = ({
   return (
     <S.Table {...props}>
       <S.ControlHeader>
-        <S.ToggleFiltersGroup label="Filters">
+        <S.ToggleFiltersGroup label={t('SearchGrid.MembersTable.filters')}>
           <S.FiltersChipWrapper>
             <S.Chip
               overrideStatus={currentGuild === 0}
               onClick={() => toggleGuild(0)}
             >
-              <S.Emoji role="img" aria-label="goat">
+              <S.Emoji
+                role="img"
+                aria-label={t('SearchGrid.MembersTable.goatLabel')}
+              >
                 🐐
               </S.Emoji>
               Libertabra Pune
@@ -116,7 +122,10 @@ const MembersTable = ({
               overrideStatus={currentGuild === 1}
               onClick={() => toggleGuild(1)}
             >
-              <S.Emoji role="img" aria-label="skull">
+              <S.Emoji
+                role="img"
+                aria-label={t('SearchGrid.MembersTable.skullLabel')}
+              >
                 💀
               </S.Emoji>
               Bones Alliance
@@ -152,7 +161,7 @@ const MembersTable = ({
           </S.FiltersChipWrapper>
         </S.ToggleFiltersGroup>
         <S.SearchGroup
-          label="Search for nickname"
+          label={t('SearchGrid.MembersTable.searchLabel')}
           htmlFor="search-nickname-input"
         >
           <S.Input
@@ -169,14 +178,14 @@ const MembersTable = ({
           totalItems={filteredList.length}
           currentPage={currentPage}
           onChange={onPageChange}
-          noItemsMessage="No characters found"
+          noItemsMessage={t('SearchGrid.MembersTable.paginatorNoItems')}
         />
       </S.ControlHeader>
       <Table.Element id="members-grid">
         <Table.Head>
           <Table.Row>
             <S.SorteableHeadColumn
-              aria-label="Click to sort by Level"
+              aria-label={t('SearchGrid.MembersTable.levelSortLabel')}
               aria-selected={currentSortKey === 'level'}
               highlighted={currentSortKey === 'level'}
               desc={currentDesc}
@@ -186,7 +195,7 @@ const MembersTable = ({
             </S.SorteableHeadColumn>
             <Table.HeadColumn>Guild</Table.HeadColumn>
             <S.SorteableHeadColumn
-              aria-label="Click to sort by Kills"
+              aria-label={t('SearchGrid.MembersTable.killsSortLabel')}
               aria-selected={currentSortKey === 'kills'}
               highlighted={currentSortKey === 'kills'}
               desc={currentDesc}
@@ -195,13 +204,13 @@ const MembersTable = ({
               Kills
             </S.SorteableHeadColumn>
             <S.SorteableHeadColumn
-              aria-label="Click to sort by Deaths"
+              aria-label={t('SearchGrid.MembersTable.deathSortLabel')}
               aria-selected={currentSortKey === 'deathCount'}
               highlighted={currentSortKey === 'deathCount'}
               desc={currentDesc}
               onClick={() => toggleSortMode('deathCount')}
             >
-              Deaths
+              {t('SearchGrid.MembersTable.deathsHeadColumn')}
             </S.SorteableHeadColumn>
           </Table.Row>
         </Table.Head>
@@ -215,8 +224,10 @@ const MembersTable = ({
                 vocation={member.vocation}
               />
               <Table.Column>{member.guild}</Table.Column>
-              <Table.Column title="Total kills">{member.kills}</Table.Column>
-              <Table.Column title="Total death count">
+              <Table.Column title={t('SearchGrid.MembersTable.killsTitle')}>
+                {member.kills}
+              </Table.Column>
+              <Table.Column title={t('SearchGrid.MembersTable.deathsTitle')}>
                 {member.deathCount}
               </Table.Column>
             </Table.Row>

@@ -48,6 +48,17 @@
   },
   "SearchGrid": {
     "MembersTable": {
+      "filters": "Filtros",
+      "goatLabel": "bode",
+      "skullLabel": "caveira",
+      "searchLabel": "Buscar por nickname",
+      "paginatorNoItems": "Nenhum personagem encontrado",
+      "levelSortLabel": "Clique para ordenar por Level",
+      "killsSortLabel": "Clique para ordenar por Kills",
+      "deathSortLabel": "Clique para ordenar por Mortes",
+      "deathsHeadColumn": "Mortes",
+      "killsTitle": "Total de kills",
+      "deathsTitle": "Total de mortes",
       "EmptyState": {
         "p": "Nenhum personagem encontrado",
         "alt": "Nenhum personagem foi encontrado"
