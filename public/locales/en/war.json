@@ -28,6 +28,13 @@
     "linkText": "Go to guild page",
     "diffTitleSuffix": "since last update"
   },
+  "OverallGrid": {
+    "LastFrags": {
+      "killedHeadColumn": "Killed",
+      "characterHeadColumnTitle": "Sorted by level",
+      "timeDiffSuffix": "minutes ago"
+    }
+  },
   "GuildXPGrid": {
     "comparisonChartTitle": "Comparing daily XP gain or loss between Libertabra Pune and Bones Alliance",
     "guildSummaryValueSuffix": "total XP",
