@@ -56,5 +56,6 @@
   "PopoverCloseLabel": "Click here to close",
   "ChangeValueLabel": "change value",
   "LoadingLabel": "Loading",
-  "UpdatingDataText": "Updating data..."
+  "UpdatingDataText": "Updating data...",
+  "PreferredLanguageLabel": "Select preferred language"
 }
