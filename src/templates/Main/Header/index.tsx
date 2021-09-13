@@ -4,6 +4,7 @@ import { Link, Switch } from 'components/Atoms/'
 import { useTheme } from 'contexts/useTheme'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
+import LanguagePicker from './LanguagePicker'
 import * as S from './styles'
 
 const heading = {
@@ -90,6 +91,7 @@ const Header = ({
       </S.Nav>
 
       <S.RightWrapper suppressHydrationWarning>
+        <LanguagePicker />
         {process.browser && (
           <Switch
             active={currentTheme === 'dark-theme'}

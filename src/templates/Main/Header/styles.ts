@@ -105,6 +105,7 @@ export const H2 = styled.h2`
 export const RightWrapper = styled.div`
   display: flex;
   align-items: center;
+  gap: 16px;
 `
 
 export const MoonIcon = styled(MoonIconSvg)``
