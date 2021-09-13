@@ -6,6 +6,10 @@ export const Wrapper = styled.div`
   height: 24px;
 `
 
+export const Button = styled.button`
+  height: 24px;
+`
+
 export const LanguageIcon = styled(LanguageSvg)`
   border-radius: 50%;
   fill: var(--onPrimary);
@@ -43,14 +47,8 @@ export const Picker = styled.div`
   width: fit-content;
 
   > *:not(:last-child) {
-    margin-bottom: 6px;
+    margin-bottom: 8px;
   }
 
   ${visibilityStyle}
-`
-
-export const Item = styled.div`
-  display: flex;
-  align-items: center;
-  cursor: pointer;
 `

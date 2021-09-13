@@ -16,16 +16,20 @@ const LanguagePicker = (): JSX.Element => {
     setIsVisible(false)
   }
 
-  const wrapperRef = useRef<HTMLDivElement | null>()
+  const wrapperRef = useRef<HTMLButtonElement | null>()
   const absoluteWrapperPosition =
     wrapperRef.current?.getBoundingClientRect().right
 
   return (
-    <S.Wrapper ref={wrapperRef as React.RefObject<HTMLDivElement>}>
-      <S.LanguageIcon
+    <S.Wrapper>
+      <button
         aria-label={t('PreferredLanguageLabel')}
-        onClick={() => setIsVisible(true)}
-      />
+        type="button"
+        ref={wrapperRef as React.RefObject<HTMLButtonElement>}
+        onClick={() => setIsVisible((prev) => !prev)}
+      >
+        <S.LanguageIcon />
+      </button>
       <S.Picker
         role="dialog"
         aria-hidden={!isVisible}
@@ -33,14 +37,20 @@ const LanguagePicker = (): JSX.Element => {
           left: absoluteWrapperPosition ? absoluteWrapperPosition - 12 : '100%',
         }}
       >
-        <S.Item onClick={() => handleLocaleSelect('en')}>
-          <RadioButton active={locale === 'en'} />
+        <RadioButton
+          active={locale === 'en'}
+          onClick={() => handleLocaleSelect('en')}
+          tabIndex={isVisible ? 1 : -1}
+        >
           English
-        </S.Item>
-        <S.Item onClick={() => handleLocaleSelect('pt')}>
-          <RadioButton active={locale === 'pt'} />
+        </RadioButton>
+        <RadioButton
+          active={locale === 'pt'}
+          onClick={() => handleLocaleSelect('pt')}
+          tabIndex={isVisible ? 1 : -1}
+        >
           Português
-        </S.Item>
+        </RadioButton>
       </S.Picker>
       <S.Backdrop
         aria-label={t('PopoverCloseLabel')}
