@@ -84,7 +84,7 @@ export const CardSkeleton = styled(BaseCardSkeleton)``
 export const Grid = styled.div`
   padding-top: 16px;
   position: relative;
-  height: calc(100% - 70px);
+  height: calc(100% - 72px);
   background-color: var(--background);
   overflow: auto;
   ${CustomScrollbar}
