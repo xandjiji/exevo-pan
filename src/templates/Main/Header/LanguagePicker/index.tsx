@@ -2,7 +2,10 @@ import { useTranslation } from 'next-i18next'
 import { memo, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { RadioButton } from 'components/Atoms'
+import { setCookie } from 'utils'
 import * as S from './styles'
+
+const SECONDS_IN_A_YEAR = 31536000
 
 const LanguagePicker = (): JSX.Element => {
   const { t } = useTranslation('common')
@@ -14,6 +17,7 @@ const LanguagePicker = (): JSX.Element => {
   const handleLocaleSelect = (selectedLocale: 'en' | 'pt') => {
     push(pathname, pathname, { locale: selectedLocale })
     setIsVisible(false)
+    setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
   }
 
   const wrapperRef = useRef<HTMLButtonElement | null>()
