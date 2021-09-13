@@ -11,16 +11,18 @@ const LanguagePicker = (): JSX.Element => {
   return (
     <S.Wrapper>
       <S.LanguageIcon aria-label="Select preferred language" />
-      <S.Picker>
-        <S.Item onClick={() => handleLocaleSelect('en')}>
-          <RadioButton active={locale === 'en'} />
-          English
-        </S.Item>
-        <S.Item onClick={() => handleLocaleSelect('pt')}>
-          <RadioButton active={locale === 'pt'} />
-          Português
-        </S.Item>
-      </S.Picker>
+      <S.FixedWrapper>
+        <S.Picker>
+          <S.Item onClick={() => handleLocaleSelect('en')}>
+            <RadioButton active={locale === 'en'} />
+            English
+          </S.Item>
+          <S.Item onClick={() => handleLocaleSelect('pt')}>
+            <RadioButton active={locale === 'pt'} />
+            Português
+          </S.Item>
+        </S.Picker>
+      </S.FixedWrapper>
     </S.Wrapper>
   )
 }

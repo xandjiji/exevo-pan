@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 import LanguageSvg from 'assets/svgs/language.svg'
-import { Clickable, MaterialCard } from 'styles'
-
-export const Wrapper = styled.div`
-  position: relative;
-  height: 24px;
-`
+import { Clickable, MaterialCard, Smooth } from 'styles'
 
 export const LanguageIcon = styled(LanguageSvg)`
   border-radius: 50%;
@@ -13,15 +8,32 @@ export const LanguageIcon = styled(LanguageSvg)`
   ${Clickable}
 `
 
+export const FixedWrapper = styled.div`
+  position: fixed;
+  z-index: 10;
+  transform: translate(calc(-50% + 12px), -50%);
+  height: 10px;
+  width: 100px;
+  ${Smooth}
+`
+
+export const Wrapper = styled.div`
+  position: relative;
+  height: 24px;
+
+  :not(:hover) ${FixedWrapper} {
+    opacity: 0;
+    pointer-events: none;
+  }
+`
+
 export const Picker = styled.div`
   position: absolute;
-  position: fixed;
-  top: 50%;
-  right: calc(100% + 8px);
-  top: 50%;
+  top: 100%;
   left: 50%;
+  transform: translateX(-50%);
   z-index: 10;
-  transform: translateY(-50%);
+
   ${MaterialCard}
   width: fit-content;
 
