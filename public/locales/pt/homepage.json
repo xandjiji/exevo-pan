@@ -19,8 +19,8 @@
     "favButton": {
       "remove": "Remover",
       "add": "Adicionar",
-      "fromFav": "aos favoritos",
-      "toFav": "dos favoritos"
+      "fromFav": "dos favoritos",
+      "toFav": "aos favoritos"
     },
     "imbuementsListLabel": "Lista de imbuements"
   },
