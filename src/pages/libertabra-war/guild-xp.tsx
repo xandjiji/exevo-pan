@@ -65,14 +65,10 @@ export default function LibertabraWar({
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const warData = await ManageDataClient.fetchWarStatisticsData()
-
-  return {
-    props: {
-      ...(await serverSideTranslations(locale as string, ['common', 'war'])),
-      warData,
-    },
-    revalidate: 60,
-  }
-}
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, ['common', 'war'])),
+    warData: await ManageDataClient.fetchWarStatisticsData(),
+  },
+  revalidate: 60,
+})
