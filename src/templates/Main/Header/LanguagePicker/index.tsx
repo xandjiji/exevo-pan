@@ -14,7 +14,7 @@ const LanguagePicker = (): JSX.Element => {
 
   const [isVisible, setIsVisible] = useState(false)
 
-  const handleLocaleSelect = (selectedLocale: 'en' | 'pt') => {
+  const handleLocaleSelect = (selectedLocale: 'en' | 'es' | 'pt') => {
     push(pathname, pathname, { locale: selectedLocale })
     setIsVisible(false)
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
@@ -23,6 +23,8 @@ const LanguagePicker = (): JSX.Element => {
   const wrapperRef = useRef<HTMLButtonElement | null>()
   const absoluteWrapperPosition =
     wrapperRef.current?.getBoundingClientRect().right
+
+  const isTabeable = isVisible ? 1 : -1
 
   return (
     <S.Wrapper>
@@ -44,14 +46,21 @@ const LanguagePicker = (): JSX.Element => {
         <RadioButton
           active={locale === 'en'}
           onClick={() => handleLocaleSelect('en')}
-          tabIndex={isVisible ? 1 : -1}
+          tabIndex={isTabeable}
         >
           English
         </RadioButton>
         <RadioButton
+          active={locale === 'es'}
+          onClick={() => handleLocaleSelect('es')}
+          tabIndex={isTabeable}
+        >
+          Español
+        </RadioButton>
+        <RadioButton
           active={locale === 'pt'}
           onClick={() => handleLocaleSelect('pt')}
-          tabIndex={isVisible ? 1 : -1}
+          tabIndex={isTabeable}
         >
           Português
         </RadioButton>
