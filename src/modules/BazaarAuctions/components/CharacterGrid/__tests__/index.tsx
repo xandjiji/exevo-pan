@@ -38,11 +38,13 @@ describe('<CharacterGrid />', () => {
     )
     expect(mockScrollTo).toHaveBeenCalledTimes(2)
 
-    userEvent.click(screen.getByLabelText('Go to last page'))
+    userEvent.click(screen.getByLabelText('Paginator.LastLabel'))
     expect(mockScrollTo).toHaveBeenCalledTimes(3)
 
-    userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
-    userEvent.click(screen.getByLabelText('Sort by descending order'))
+    userEvent.click(screen.getByLabelText('CharacterGrid.sortingButtonLabel'))
+    userEvent.click(
+      screen.getByLabelText('CharacterGrid.descendingSwitchLabel'),
+    )
     expect(mockScrollTo).toHaveBeenCalledTimes(4)
 
     userEvent.click(screen.getAllByRole('radio')[1])
@@ -54,8 +56,8 @@ describe('<CharacterGrid />', () => {
       <CharacterGrid characterList={characterData} isLoading={false} />,
     )
 
-    userEvent.click(screen.getByLabelText('Go to last page'))
-    expect(screen.getByText('9991 - 10000 of 10000')).toBeInTheDocument()
+    userEvent.click(screen.getByLabelText('Paginator.LastLabel'))
+    expect(screen.getByText('9991 - 10000 Of 10000')).toBeInTheDocument()
 
     rerender(
       <CharacterGrid
@@ -63,20 +65,22 @@ describe('<CharacterGrid />', () => {
         isLoading={false}
       />,
     )
-    expect(screen.getByText('1 - 10 of 100')).toBeInTheDocument()
+    expect(screen.getByText('1 - 10 Of 100')).toBeInTheDocument()
 
-    userEvent.click(screen.getByLabelText('Go to last page'))
-    expect(screen.getByText('91 - 100 of 100')).toBeInTheDocument()
+    userEvent.click(screen.getByLabelText('Paginator.LastLabel'))
+    expect(screen.getByText('91 - 100 Of 100')).toBeInTheDocument()
 
-    userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
-    userEvent.click(screen.getByLabelText('Sort by descending order'))
-    expect(screen.getByText('91 - 100 of 100')).toBeInTheDocument()
+    userEvent.click(screen.getByLabelText('CharacterGrid.sortingButtonLabel'))
+    userEvent.click(
+      screen.getByLabelText('CharacterGrid.descendingSwitchLabel'),
+    )
+    expect(screen.getByText('91 - 100 Of 100')).toBeInTheDocument()
 
     userEvent.click(screen.getAllByRole('radio')[2])
-    expect(screen.getByText('91 - 100 of 100')).toBeInTheDocument()
+    expect(screen.getByText('91 - 100 Of 100')).toBeInTheDocument()
 
     userEvent.click(screen.getAllByRole('radio')[3])
-    expect(screen.queryByText('91 - 100 of 100')).not.toBeInTheDocument()
+    expect(screen.queryByText('91 - 100 Of 100')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
@@ -86,13 +90,13 @@ describe('<CharacterGrid />', () => {
       <CharacterGrid characterList={characterData} isLoading={false} />,
     )
 
-    userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
+    userEvent.click(screen.getByLabelText('CharacterGrid.sortingButtonLabel'))
     const orderSwitch = screen.getByRole('switch')
     const [auctionEnd, , , biddedOnly] = screen.getAllByRole('radio')
     expect(orderSwitch).not.toBeChecked()
     expect(auctionEnd).toBeChecked()
     expect(biddedOnly).not.toBeChecked()
-    expect(screen.getByText('1 - 10 of 10000')).toBeInTheDocument()
+    expect(screen.getByText('1 - 10 Of 10000')).toBeInTheDocument()
 
     rerender(
       <CharacterGrid
@@ -107,7 +111,7 @@ describe('<CharacterGrid />', () => {
       expect(orderSwitch).toBeChecked()
       expect(auctionEnd).not.toBeChecked()
       expect(biddedOnly).toBeChecked()
-      expect(screen.queryByText('1 - 10 of 10000')).not.toBeInTheDocument()
+      expect(screen.queryByText('1 - 10 Of 10000')).not.toBeInTheDocument()
     })
 
     await waitFor(() => {})
@@ -118,12 +122,14 @@ describe('<CharacterGrid />', () => {
       <CharacterGrid characterList={[]} isLoading />,
     )
 
-    expect(screen.queryAllByText('Bid status')).toHaveLength(10)
+    expect(screen.queryAllByText('CharacterGrid.BidStatus')).toHaveLength(10)
 
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
 
-    expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
+    expect(
+      screen.queryByText('CharacterGrid.BidStatus'),
+    ).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
@@ -135,11 +141,15 @@ describe('<CharacterGrid />', () => {
 
     rerender(<CharacterGrid characterList={[]} isLoading={false} />)
 
-    expect(screen.getByText('Sorry, no auction was found')).toBeInTheDocument()
+    expect(screen.getByText('CharacterGrid.noAuctionFound')).toBeInTheDocument()
 
-    userEvent.click(screen.getByRole('button', { name: 'Change filters' }))
+    userEvent.click(
+      screen.getByRole('button', { name: 'CharacterGrid.changeFilters' }),
+    )
     await waitFor(() => {
-      expect(screen.getByLabelText('Filter form')).toBeVisible()
+      expect(
+        screen.getByLabelText('CharacterGrid.filterDrawerLabel'),
+      ).toBeVisible()
     })
 
     await waitFor(() => {})

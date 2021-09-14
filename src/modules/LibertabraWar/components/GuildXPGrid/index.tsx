@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { formatNumberWithCommas } from 'utils'
 import ScoreboardXP from './ScoreboardXP'
 import ComparisonChart from '../ComparisonChart'
@@ -6,12 +7,15 @@ import * as S from './styles'
 import { GuildXPGridProps } from './types'
 
 const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
+  const { t } = useTranslation('war')
+
   const {
     xpStats: { todayDiff, dailyXPDiff, currentXP },
   } = warData
+
   return (
     <S.Wrapper>
-      <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
+      <S.PageTitle>{t('PageTitle')}</S.PageTitle>
 
       <S.FirstRow>
         <ScoreboardXP
@@ -28,22 +32,22 @@ const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
         />
 
         <ComparisonChart
-          title="Comparing daily XP gain or loss between Libertabra Pune and Bones Alliance"
+          title={t('GuildXPGrid.comparisonChartTitle')}
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${formatNumberWithCommas(
               Math.trunc(currentXP.guildA / 1000000),
-            )}M total XP`,
+            )}M ${t('GuildXPGrid.guildSummaryValueSuffix')}`,
             dataArray: xpToDataSnapshot(dailyXPDiff.guildA),
           }}
           guildB={{
             name: 'Bones Alliance',
             summaryValue: `${formatNumberWithCommas(
               Math.trunc(currentXP.guildB / 1000000),
-            )}M total XP`,
+            )}M ${t('GuildXPGrid.guildSummaryValueSuffix')}`,
             dataArray: xpToDataSnapshot(dailyXPDiff.guildB),
           }}
-          tooltipSuffix="XP difference"
+          tooltipSuffix={t('GuildXPGrid.comparisonChartSuffix')}
           dateLabelType="Date"
         />
       </S.FirstRow>

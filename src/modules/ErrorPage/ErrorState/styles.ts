@@ -42,14 +42,14 @@ export const ErrorIcon = styled(ErrorIconSvg)`
   margin-bottom: 32px;
   width: 128px;
   height: 128px;
-  fill: var(--surface);
+  fill: var(--onPrimary);
 `
 
 export const Paragraph = styled.p`
   margin-bottom: 8px;
   font-size: 14px;
   letter-spacing: 1.5px;
-  color: var(--surface);
+  color: var(--onPrimary);
 `
 
 export const Nav = styled.nav`

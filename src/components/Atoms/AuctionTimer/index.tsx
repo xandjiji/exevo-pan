@@ -1,7 +1,7 @@
+import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
 import { routes } from 'Constants'
 import useCountdownTick from './useCountdownTick'
-import { monthStr } from './utils'
 import { AuctionTimerProps } from './types'
 import * as S from './styles'
 
@@ -9,6 +9,8 @@ const AuctionTimer = ({
   endDate,
   ...props
 }: AuctionTimerProps): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
   const { pathname } = useRouter()
   const isBazaarHistory = pathname === routes.BAZAAR_HISTORY
@@ -18,7 +20,9 @@ const AuctionTimer = ({
     .toString()
     .padStart(2, '0')}`
 
-  const endDateString = `${endDate.getDate()} ${monthStr[endDate.getMonth()]}`
+  const endDateString = `${endDate.getDate()} ${t(
+    `Month.${endDate.getMonth()}`,
+  )}`
 
   const countdownTime = hours
     ? `${hours}h ${minutes}m`
@@ -30,7 +34,9 @@ const AuctionTimer = ({
         <S.Countdown
           role="timer"
           aria-label={
-            isBazaarHistory ? 'Auction finished at' : 'Auction ends at'
+            isBazaarHistory
+              ? t('AuctionTimer.finishedAuction')
+              : t('AuctionTimer.unfinishedAuction')
           }
           {...props}
         >
@@ -46,7 +52,7 @@ const AuctionTimer = ({
       <>
         <S.Countdown
           role="timer"
-          aria-label="Auction ends in"
+          aria-label={t('AuctionTimer.auctionEndsIn')}
           endingSoon
           {...props}
         >
@@ -60,11 +66,11 @@ const AuctionTimer = ({
   return (
     <S.Countdown
       role="timer"
-      aria-label="Auction is over"
+      aria-label={t('AuctionTimer.auctionIsOver')}
       endingSoon
       {...props}
     >
-      Auction Ended!
+      {t('AuctionTimer.auctionEnded')}
     </S.Countdown>
   )
 }

@@ -1,6 +1,14 @@
 import '@testing-library/jest-dom'
 import { toHaveNoViolations } from "jest-axe";
 
+jest.mock('react-i18next', () => ({
+    useTranslation: () => {
+        return {
+            t: (str) => str
+        };
+    },
+}));
+
 jest.mock('utils/debounce', () => ({ debounce: (fn) => fn }))
 jest.mock('next/router', () => ({
     __esModule: true,

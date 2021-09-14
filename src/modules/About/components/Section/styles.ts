@@ -84,9 +84,7 @@ export const Title = styled.h2`
   }
 `
 
-export const AnchorIcon = styled(AnchorSvg).attrs({
-  'aria-label': 'Copy link',
-})`
+export const AnchorIcon = styled(AnchorSvg)`
   padding: 2px;
   margin-top: 1px;
   margin-left: 8px;

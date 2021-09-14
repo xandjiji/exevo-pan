@@ -16,6 +16,7 @@ export const Table = styled(BaseTable)`
 
     &:nth-child(3) {
       width: fit-content;
+      white-space: nowrap;
       text-align: right;
     }
   }

@@ -62,7 +62,7 @@ export const Title = styled.h1`
 
 export const Subtitle = styled.span`
   margin-right: 4px;
-  margin-left: 100px;
+  margin-left: 118px;
   display: block;
   font-size: 16px;
   font-weight: 300;
@@ -73,6 +73,6 @@ export const Subtitle = styled.span`
 
   @media (min-width: 768px) {
     font-size: 18px;
-    margin-left: 138px;
+    margin-left: 154px;
   }
 `

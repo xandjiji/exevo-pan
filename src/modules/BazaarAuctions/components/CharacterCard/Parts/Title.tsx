@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { Clickable } from 'styles'
 import ExternalIconSvg from 'assets/svgs/external.svg'
@@ -31,18 +32,22 @@ const Title = ({
   children,
   characterId,
   ...props
-}: TitleProps): JSX.Element => (
-  <Nickname {...props}>
-    {children}
-    <a
-      href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${characterId}&source=overview`}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      <ExternalIcon />
-      Go to character page
-    </a>
-  </Nickname>
-)
+}: TitleProps): JSX.Element => {
+  const { t } = useTranslation('homepage')
+
+  return (
+    <Nickname {...props}>
+      {children}
+      <a
+        href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${characterId}&source=overview`}
+        target="_blank"
+        rel="noreferrer noopener"
+      >
+        <ExternalIcon />
+        {t('CharacterCard.linkLabel')}
+      </a>
+    </Nickname>
+  )
+}
 
 export default Title

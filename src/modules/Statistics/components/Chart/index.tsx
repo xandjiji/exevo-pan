@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import { useTranslation } from 'next-i18next'
 import { memo, useState, useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 import { Chip } from 'components/Atoms'
@@ -9,8 +10,6 @@ import Summary from './Summary'
 import * as S from './styles'
 import { ChartProps } from './types'
 
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
 const Chart = ({
   totalLabel,
   yesterdayLabel,
@@ -18,6 +17,9 @@ const Chart = ({
   chartData,
   ...props
 }: ChartProps): JSX.Element => {
+  const { t: tCommon } = useTranslation('common')
+  const { t } = useTranslation('statistics')
+
   const { colors } = useTheme()
 
   const [dataSize, setDataSize] = useState(7)
@@ -90,9 +92,9 @@ const Chart = ({
         .map((_, index) => {
           const date = new Date()
           date.setDate(date.getDate() - index)
-          return `${date.getDate()}/${date.getMonth() + 1}, ${
-            weekdays[date.getDay()]
-          }`
+          return `${date.getDate()}/${date.getMonth() + 1}, ${tCommon(
+            `Weekdays.${date.getDay()}`,
+          )}`
         })
         .reverse(),
       datasets: [
@@ -130,10 +132,10 @@ const Chart = ({
 
       <S.ChipWrapper>
         <Chip overrideStatus={dataSize === 28} onClick={() => setDataSize(28)}>
-          28 days
+          28 {t('Days')}
         </Chip>
         <Chip overrideStatus={dataSize === 7} onClick={() => setDataSize(7)}>
-          7 days
+          7 {t('Days')}
         </Chip>
       </S.ChipWrapper>
     </S.Wrapper>

@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { getLastArrayElement } from 'utils'
 import Scoreboard from './Scoreboard'
 import LastFrags from './LastFrags'
@@ -7,10 +8,13 @@ import * as S from './styles'
 import { OverallGridProps } from './types'
 
 const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
+  const { t } = useTranslation('war')
+
   const { score, onlineCount, lastDeaths } = warData
+
   return (
     <S.Wrapper>
-      <S.PageTitle>Get live statistics for Libertabra War!</S.PageTitle>
+      <S.PageTitle>{t('PageTitle')}</S.PageTitle>
       <S.FirstRow>
         <Scoreboard
           guildA={{
@@ -27,7 +31,7 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
           }}
         />
         <ComparisonChart
-          title="Comparing total online members of Libertabra Pune and Bones Alliance in the last 4 hours"
+          title={t('OverallGrid.comparisonChartTitle')}
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${
@@ -42,19 +46,23 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
             } online`,
             dataArray: onlineToDataSnapshot(onlineCount.guildB),
           }}
-          tooltipSuffix="members online"
+          tooltipSuffix={t('OverallGrid.comparisonChartSuffix')}
           dateLabelType="Time"
         />
       </S.FirstRow>
 
       <S.SecondRow>
         <LastFrags
-          title={`Recent deaths (${lastDeaths.guildA.length}) ⚰️`}
+          title={`${t('OverallGrid.recentDeathsTitle')} (${
+            lastDeaths.guildA.length
+          }) ⚰️`}
           subtitle="Libertabra Pune"
           fragsList={lastDeaths.guildA}
         />
         <LastFrags
-          title={`Recent deaths (${lastDeaths.guildB.length}) ⚰️`}
+          title={`${t('OverallGrid.recentDeathsTitle')} (${
+            lastDeaths.guildB.length
+          }) ⚰️`}
           subtitle="Bones Alliance"
           fragsList={lastDeaths.guildB}
         />

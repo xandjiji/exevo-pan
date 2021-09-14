@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import { useIsMounted } from 'hooks'
 import { urlParametersState } from 'utils'
@@ -16,6 +17,8 @@ const CharacterGrid = ({
   defaultDescendingOrder = false,
   ...props
 }: CharacterGridProps): JSX.Element => {
+  const { t } = useTranslation('homepage')
+
   const isMounted = useIsMounted()
 
   const { getUrlValues, defaultValues, setUrlValues } = useMemo(
@@ -115,7 +118,7 @@ const CharacterGrid = ({
         <S.FilterButton
           tabIndex={0}
           role="button"
-          aria-label="Open filter drawer"
+          aria-label={t('CharacterGrid.filterButtonLabel')}
           aria-controls="filter-drawer"
           onClick={() => setDrawerOpen(true)}
         >
@@ -123,8 +126,14 @@ const CharacterGrid = ({
           <S.ActiveIcon
             role="status"
             aria-label={`${activeFilterCount} ${
-              activeFilterCount === 1 ? 'filter' : 'filters'
-            } ${activeFilterCount === 1 ? 'is' : 'are'} active`}
+              activeFilterCount === 1
+                ? t('CharacterGrid.filter')
+                : t('CharacterGrid.filters')
+            } ${
+              activeFilterCount === 1
+                ? t('CharacterGrid.is')
+                : t('CharacterGrid.are')
+            } ${t('CharacterGrid.active')}`}
             aria-hidden={activeFilterCount < 1}
           >
             {activeFilterCount}
@@ -144,14 +153,14 @@ const CharacterGrid = ({
           totalItems={sortedData.length}
           currentPage={currentPage}
           onChange={onPageChange}
-          noItemsMessage="No characters found"
+          noItemsMessage={t('CharacterGrid.noItemsPagination')}
         />
       </S.Head>
 
       {isMounted && (
         <FilterDrawer
           id="filter-drawer"
-          aria-label="Filter form"
+          aria-label={t('CharacterGrid.filterDrawerLabel')}
           open={drawerOpen}
           onClose={closeDrawer}
           setActiveFilterCount={setActiveFilterCount}

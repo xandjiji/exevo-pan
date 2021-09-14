@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import Image from 'next/image'
 import { Tooltip } from 'components/Organisms'
 import { links } from 'Constants'
@@ -7,136 +8,123 @@ import { sections } from './sections'
 import * as S from './styles'
 import { KsuData } from './types'
 
-const About = ({ characterData }: { characterData: KsuData }): JSX.Element => (
-  <S.Wrapper>
-    <Hero />
-    <S.BodyLayout>
-      <Pillar sections={Object.values(sections)} />
-      <S.SurfaceWrapper>
-        <Section {...sections.EXEVO_PAN}>
-          <p>
-            Our goal is to help the Tibia community to grow, providing useful
-            tools with the best user experience possible. This is a long-term
-            project and we have many more features in our roadmap!{' '}
-            <span role="img" aria-label="smiling">
-              😄
-            </span>
-          </p>
-          <p>
-            This website is{' '}
-            <strong>100% free, open-source and unlicensed</strong>. This means
-            that not only you can contribute or fork this project, but we
-            encourage you to do so. You can start in the official GitHub{' '}
-            <a
-              href={links.GITHUB_REPOSITORY}
-              target="_blank"
-              rel="noopener noreferrer external"
-            >
-              repository
-            </a>
-            .
-          </p>
-          <p>
-            Feel free to give us any feedback through our{' '}
-            <S.Anchor href={`#${sections.CONTACT_INFORMATION.id}`}>
-              contact-channels
-            </S.Anchor>
-            .
-          </p>
-        </Section>
+const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
+  const { t } = useTranslation('about')
 
-        <Section {...sections.ABOUT_ME}>
-          <p>
-            My name is Alexandre Regali Seleghim, I&apos;m a front-end developer
-            based in Brazil. My main interests orbits around web applications,
-            UI/UX and design.
-          </p>
-          <span style={{ display: 'block' }}>
-            My character nickname is{' '}
-            <Tooltip content={<KsuTooltip characterData={characterData} />}>
-              <S.Character>Ksu</S.Character>
-            </Tooltip>
-            . Though I don&apos;t play the game much anymore, eventually you may
-            find me online as a rare boss spawn{' '}
-            <span role="img" aria-label="tongue">
-              😋
-            </span>
-            .
-          </span>
-        </Section>
-
-        <Section {...sections.DISCLAIMER}>
-          <p>
-            <a
-              href={links.TIBIA}
-              target="_blank"
-              rel="noopener noreferrer external"
-            >
-              Tibia
-            </a>{' '}
-            is a game made by{' '}
-            <a
-              href={links.CIPSOFT}
-              target="_blank"
-              rel="noopener noreferrer external"
-            >
-              CipSoft
-            </a>
-            . All assets presented in this website are copyrighted by them and I
-            don&apos;t own any of it.
-          </p>
-          <p>
-            Most of the data in this application used the official Tibia website
-            as a source of truth. Despite of that, we can&apos;t guarantee that
-            they are completely accurate and/or up-to-date.
-          </p>
-          <p>
-            We promote that Tibia should be played in a fair and healthy manner.
-            That means we are against cheating, real life harassment and
-            anti-sportsmanship behavior.
-          </p>
-          <Image
-            src={fansiteImg}
-            alt="Supported fansite"
-            width="100"
-            height="100"
-          />
-        </Section>
-
-        <Section {...sections.CONTACT_INFORMATION}>
-          <S.Ul>
-            <S.Li>
-              <S.MailIcon />
-              <a href={links.EMAIL} target="_blank" rel="noopener noreferrer">
-                xandjiji@gmail.com
-              </a>
-            </S.Li>
-            <S.Li>
-              <S.GithubIcon />
+  return (
+    <S.Wrapper>
+      <Hero />
+      <S.BodyLayout>
+        <Pillar sections={Object.values(sections)} />
+        <S.SurfaceWrapper>
+          <Section {...sections.EXEVO_PAN}>
+            <p>
+              {t('AboutExevoPan.p1')}{' '}
+              <span role="img" aria-label={t('AboutExevoPan.smilingEmoji')}>
+                😄
+              </span>
+            </p>
+            <p>
+              {t('AboutExevoPan.p2')}{' '}
+              <strong>{t('AboutExevoPan.strong')}</strong>.{' '}
+              {t('AboutExevoPan.p3')}{' '}
               <a
-                href={links.GITHUB_PROFILE}
+                href={links.GITHUB_REPOSITORY}
                 target="_blank"
-                rel="noopener noreferrer external author"
+                rel="noopener noreferrer external"
               >
-                {links.GITHUB_PROFILE}
+                {t('AboutExevoPan.p4')}
               </a>
-            </S.Li>
-            <S.Li>
-              <S.LinkedinIcon />
+              .
+            </p>
+            <p>
+              {t('AboutExevoPan.p5')}{' '}
+              <S.Anchor href={`#${sections.CONTACT_INFORMATION.id}`}>
+                {t('AboutExevoPan.contactChannels')}
+              </S.Anchor>
+              .
+            </p>
+          </Section>
+
+          <Section {...sections.ABOUT_ME}>
+            <p>{t('AboutMe.p1')}</p>
+            <span style={{ display: 'block' }}>
+              {t('AboutMe.p2')}{' '}
+              <Tooltip content={<KsuTooltip characterData={characterData} />}>
+                <S.Character>Ksu</S.Character>
+              </Tooltip>
+              . {t('AboutMe.p3')}{' '}
+              <span role="img" aria-label={t('AboutMe.tongueEmoji')}>
+                😋
+              </span>
+              .
+            </span>
+          </Section>
+
+          <Section {...sections.DISCLAIMER}>
+            <p>
               <a
-                href={links.LINKEDIN}
+                href={links.TIBIA}
                 target="_blank"
-                rel="noopener noreferrer external author"
+                rel="noopener noreferrer external"
               >
-                {links.LINKEDIN}
+                Tibia
+              </a>{' '}
+              {t('AboutDisclaimer.p1')}{' '}
+              <a
+                href={links.CIPSOFT}
+                target="_blank"
+                rel="noopener noreferrer external"
+              >
+                CipSoft
               </a>
-            </S.Li>
-          </S.Ul>
-        </Section>
-      </S.SurfaceWrapper>
-    </S.BodyLayout>
-    <Footer />
-  </S.Wrapper>
-)
+              . {t('AboutDisclaimer.p2')}
+            </p>
+            <p>{t('AboutDisclaimer.p3')}</p>
+            <p>{t('AboutDisclaimer.p4')}</p>
+            <Image
+              src={fansiteImg}
+              alt="Supported fansite"
+              width="100"
+              height="100"
+            />
+          </Section>
+
+          <Section {...sections.CONTACT_INFORMATION}>
+            <S.Ul>
+              <S.Li>
+                <S.MailIcon />
+                <a href={links.EMAIL} target="_blank" rel="noopener noreferrer">
+                  xandjiji@gmail.com
+                </a>
+              </S.Li>
+              <S.Li>
+                <S.GithubIcon />
+                <a
+                  href={links.GITHUB_PROFILE}
+                  target="_blank"
+                  rel="noopener noreferrer external author"
+                >
+                  {links.GITHUB_PROFILE}
+                </a>
+              </S.Li>
+              <S.Li>
+                <S.LinkedinIcon />
+                <a
+                  href={links.LINKEDIN}
+                  target="_blank"
+                  rel="noopener noreferrer external author"
+                >
+                  {links.LINKEDIN}
+                </a>
+              </S.Li>
+            </S.Ul>
+          </Section>
+        </S.SurfaceWrapper>
+      </S.BodyLayout>
+      <Footer />
+    </S.Wrapper>
+  )
+}
 
 export default About

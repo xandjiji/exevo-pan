@@ -30,6 +30,10 @@ export const Wrapper = styled.article`
     );
     pointer-events: none;
   }
+
+  > * {
+    margin-bottom: 16px;
+  }
 `
 
 export const PageTitle = styled.h2`
@@ -44,17 +48,29 @@ export const Loading = styled(Spinner)`
   transform: translate(-50%, -50%);
 `
 
-export const ItemWrapper = styled.div`
+export const GridRow = styled.div`
   display: flex;
-  justify-content: space-between;
+  gap: 16px;
   flex-wrap: wrap;
+`
 
+export const ItemWrapper = styled(GridRow)`
   > * {
-    margin-bottom: 16px;
+    width: 100%;
+  }
+
+  @media (min-width: 768px) {
+    > *:first-child {
+      width: 240px;
+    }
+
+    > *:last-child {
+      width: calc(100% - 240px - 16px);
+    }
   }
 `
 
-export const ChartWrapper = styled(ItemWrapper)`
+export const ChartWrapper = styled(GridRow)`
   @media (min-width: 768px) {
     > * {
       width: calc(50% - 8px);

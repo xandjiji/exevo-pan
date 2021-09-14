@@ -40,7 +40,7 @@ export default class MyDocument extends Document {
 
   render(): JSX.Element {
     return (
-      <Html lang="en">
+      <Html>
         <Head>
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
@@ -53,10 +53,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="icon" href="/favicon.ico" />
-
-          <link rel="canonical" href="https://exevopan.com/" />
-          <meta property="og:url" content="https://exevopan.com/" />
-          <meta property="twitter:url" content="https://exevopan.com/" />
 
           <meta property="og:image" content="/preview.png" />
           <meta property="twitter:image" content="/preview.png" />

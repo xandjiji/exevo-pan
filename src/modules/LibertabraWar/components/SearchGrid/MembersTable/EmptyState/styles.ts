@@ -25,7 +25,6 @@ export const Text = styled.p`
 
 export const NotFound = styled(Image).attrs({
   src: NotFoundImage,
-  alt: 'No character was found',
 })`
   filter: grayscale(0.5);
   opacity: 0.15;

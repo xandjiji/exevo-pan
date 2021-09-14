@@ -1,42 +1,58 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
 import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
+import { buildUrl } from 'utils'
+import { routes } from 'Constants'
+
+const pageUrl = buildUrl(routes.STATISTICS)
 
 export default function Statistics({
   statisticsData,
 }: {
   statisticsData: StatisticsData
 }): JSX.Element {
+  const { t } = useTranslation('statistics')
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Overall Statistics</title>
-        <meta name="title" content="Exevo Pan - Overall Statistics" />
-        <meta
-          property="og:site_name"
-          content="Exevo Pan - Overall Statistics"
-        />
-        <meta property="og:title" content="Exevo Pan - Overall Statistics" />
-        <meta
-          property="twitter:title"
-          content="Exevo Pan - Overall Statistics"
-        />
+        <title>{t('Meta.Statistics.title')}</title>
+        <meta name="title" content={t('Meta.Statistics.title')} />
+        <meta property="og:site_name" content={t('Meta.Statistics.title')} />
+        <meta property="og:title" content={t('Meta.Statistics.title')} />
+        <meta property="twitter:title" content={t('Meta.Statistics.title')} />
 
-        <meta
-          name="description"
-          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
-        />
+        <meta name="description" content={t('Meta.Statistics.description')} />
         <meta
           property="twitter:description"
-          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
+          content={t('Meta.Statistics.description')}
         />
         <meta
           property="og:description"
-          content="Statistics, trends and data analytics about daily and historic Tibia Char Bazaar stats"
+          content={t('Meta.Statistics.description')}
         />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.STATISTICS, 'pt')}
+        />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.STATISTICS, 'es')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 
       <Main>
@@ -49,10 +65,17 @@ export default function Statistics({
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const statisticsData = await ManageDataClient.fetchStatisticsData()
 
   return {
-    props: { statisticsData },
+    props: {
+      ...(await serverSideTranslations(locale as string, [
+        'common',
+        'statistics',
+      ])),
+      statisticsData,
+    },
+    revalidate: 3600,
   }
 }

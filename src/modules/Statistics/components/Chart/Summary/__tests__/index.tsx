@@ -27,10 +27,11 @@ describe('<Summary />', () => {
 
     /* expect(textElement).toHaveStyle('color: #377712') */
     expect(textElement).toMatchSnapshot()
-    /* expect(screen.getByLabelText('Upwards trend')).toHaveStyle('fill: #377712') */
-    expect(screen.getByLabelText('Upwards trend')).toMatchInlineSnapshot(`
+    /* expect(screen.getByLabelText('Summary.positiveTrendLabel')).toHaveStyle('fill: #377712') */
+    expect(screen.getByLabelText('Summary.positiveTrendLabel'))
+      .toMatchInlineSnapshot(`
       <image
-        aria-label="Upwards trend"
+        aria-label="Summary.positiveTrendLabel"
         class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
       />
     `)
@@ -46,10 +47,12 @@ describe('<Summary />', () => {
 
     /* expect(textElement).toHaveStyle('color: #C51313') */
     expect(textElement).toMatchSnapshot()
-    /* expect(screen.getByLabelText('Downwards trend')).toHaveStyle(
+    /* expect(screen.getByLabelText('Summary.negativeTrendLabel')).toHaveStyle(
       'fill: #C51313',
     ) */
-    expect(screen.getByLabelText('Downwards trend')).toMatchSnapshot()
+    expect(
+      screen.getByLabelText('Summary.negativeTrendLabel'),
+    ).toMatchSnapshot()
 
     rerender(
       <Summary title="Total volume" value={1000} percentage={50} positive />,
@@ -57,7 +60,9 @@ describe('<Summary />', () => {
 
     /* expect(textElement).toHaveStyle('color: #377712') */
     expect(textElement).toMatchSnapshot()
-    /* expect(screen.getByLabelText('Upwards trend')).toHaveStyle('fill: #377712') */
-    expect(screen.getByLabelText('Upwards trend')).toMatchSnapshot()
+    /* expect(screen.getByLabelText('Summary.positiveTrendLabel')).toHaveStyle('fill: #377712') */
+    expect(
+      screen.getByLabelText('Summary.positiveTrendLabel'),
+    ).toMatchSnapshot()
   })
 })

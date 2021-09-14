@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { useState, memo } from 'react'
 import { clampValue, debounce } from 'utils'
 import usePagination from './usePagination'
@@ -12,6 +13,8 @@ const Paginator = ({
   noItemsMessage = 'No items',
   ...props
 }: PaginatorProps): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const [currentPage, setCurrentPage] = useState<number>(currentPageProp ?? 1)
   const derivedCurrentPage = currentPageProp ?? currentPage
 
@@ -23,7 +26,7 @@ const Paginator = ({
 
   const trackerDisplay =
     totalItems > 0
-      ? `${startOffset} - ${endOffset} of ${totalItems}`
+      ? `${startOffset} - ${endOffset} ${t('Of')} ${totalItems}`
       : noItemsMessage
 
   const changePage = debounce((newPage: number) => {
@@ -53,7 +56,7 @@ const Paginator = ({
 
       <S.CursorWrapper>
         <S.Cursor
-          aria-label="Go to first page"
+          aria-label={t('Paginator.FirstLabel')}
           aria-disabled={!hasPrev}
           disabled={!hasPrev}
           invert
@@ -62,7 +65,7 @@ const Paginator = ({
           <S.LastIcon />
         </S.Cursor>
         <S.Cursor
-          aria-label="Go to previous page"
+          aria-label={t('Paginator.PreviousLabel')}
           aria-disabled={!hasPrev}
           disabled={!hasPrev}
           invert
@@ -72,7 +75,7 @@ const Paginator = ({
         </S.Cursor>
 
         <S.Cursor
-          aria-label="Go to next page"
+          aria-label={t('Paginator.NextLabel')}
           aria-disabled={!hasNext}
           disabled={!hasNext}
           onClick={() => changePage(derivedCurrentPage + 1)}
@@ -80,7 +83,7 @@ const Paginator = ({
           <S.NextIcon />
         </S.Cursor>
         <S.Cursor
-          aria-label="Go to last page"
+          aria-label={t('Paginator.LastLabel')}
           aria-disabled={!hasNext}
           disabled={!hasNext}
           onClick={() => changePage(pageCount)}

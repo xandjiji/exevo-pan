@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import { Tooltip } from 'components/Organisms'
 import * as S from './styles'
 import { CharacterImbuementsProps } from './types'
@@ -16,10 +17,12 @@ const highlightedImbuements = {
 const CharacterImbuements = ({
   imbuements,
   ...props
-}: CharacterImbuementsProps): JSX.Element =>
-  imbuements.length ? (
+}: CharacterImbuementsProps): JSX.Element => {
+  const { t } = useTranslation('homepage')
+
+  return imbuements.length ? (
     <Tooltip
-      aria-label="Imbuements list"
+      aria-label={t('CharacterCard.imbuementsListLabel')}
       content={imbuements.map((imbuement) => (
         <S.Imbuement
           key={imbuement}
@@ -40,5 +43,6 @@ const CharacterImbuements = ({
       Imbuements: 0/23
     </S.Wrapper>
   )
+}
 
 export default CharacterImbuements

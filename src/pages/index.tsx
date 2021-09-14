@@ -1,31 +1,47 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
-import { endpoints, paths } from 'Constants'
+import { GetStaticProps } from 'next'
+import { buildUrl } from 'utils'
+import { endpoints, paths, routes } from 'Constants'
+
+const pageUrl = buildUrl(routes.HOME)
 
 export default function Home(): JSX.Element {
+  const { t } = useTranslation('homepage')
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Current Auctions</title>
-        <meta name="title" content="Exevo Pan - Current Auctions" />
-        <meta property="og:site_name" content="Exevo Pan - Current Auctions" />
-        <meta property="og:title" content="Exevo Pan - Current Auctions" />
-        <meta property="twitter:title" content="Exevo Pan - Current Auctions" />
+        <title>{t('Meta.title')}</title>
+        <meta name="title" content={t('Meta.title')} />
+        <meta property="og:site_name" content={t('Meta.title')} />
+        <meta property="og:title" content={t('Meta.title')} />
+        <meta property="twitter:title" content={t('Meta.title')} />
 
-        <meta
-          name="description"
-          content="Filter and search for Tibia characters on the official Char Bazaar!"
-        />
-        <meta
-          property="twitter:description"
-          content="Filter and search for Tibia characters on the official Char Bazaar!"
-        />
-        <meta
-          property="og:description"
-          content="Filter and search for Tibia characters on the official Char Bazaar!"
-        />
+        <meta name="description" content={t('Meta.description')} />
+        <meta property="twitter:description" content={t('Meta.description')} />
+        <meta property="og:description" content={t('Meta.description')} />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.HOME, 'pt')}
+        />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.HOME, 'es')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <link
           rel="preload"
@@ -53,3 +69,9 @@ export default function Home(): JSX.Element {
     </div>
   )
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, ['common', 'homepage'])),
+  },
+})

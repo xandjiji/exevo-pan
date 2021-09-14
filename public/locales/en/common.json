@@ -1,0 +1,70 @@
+{
+  "Header": {
+    "h1": {
+      "home": "Buy and sell Tibia characters on the official Char Bazaar!",
+      "bazaarHistory": "Explore through Tibia Char Bazaar history data!",
+      "statistics": "Find statistics for Tibia Char Bazaar characters!",
+      "highscores": "Top levels, highest skills and biggests bids on Tibia Char Bazaar!",
+      "about": "About the Exevo Pan website, disclaimers and contact information.",
+      "war": "Follow live data and statistics from Libertabra War!"
+    },
+    "logoLabel": "Go to homepage",
+    "nav": {
+      "currentAuctions": "Current Auctions",
+      "bazaarHistory": "Bazaar History",
+      "statistics": "Statistics",
+      "war": "Libertabra War",
+      "about": "About"
+    },
+    "themeSwitch": "Toggle dark theme"
+  },
+  "Month": {
+    "0": "Jan",
+    "1": "Fev",
+    "2": "Mar",
+    "3": "Apr",
+    "4": "May",
+    "5": "Jun",
+    "6": "Jul",
+    "7": "Aug",
+    "8": "Set",
+    "9": "Oct",
+    "10": "Nov",
+    "11": "Dec"
+  },
+  "Weekdays": {
+    "0": "Sun",
+    "1": "Mon",
+    "2": "Tue",
+    "3": "Wed",
+    "4": "Thu",
+    "5": "Fri",
+    "6": "Sat"
+  },
+  "AuctionTimer": {
+    "finishedAuction": "Auction finished at",
+    "unfinishedAuction": "Auction ends at",
+    "auctionEndsIn": "Auction ends in",
+    "auctionIsOver": "Auction is over",
+    "auctionEnded": "Auction Ended!"
+  },
+  "RemoveItem": "Remove item",
+  "TibiaCoinsCta": "Get Tibia Coins",
+  "CloseDrawerLabel": "Close drawer",
+  "RepoLinkText": "Go to this repository",
+  "MadeBy": "made by",
+  "ClearInputLabel": "Clear input",
+  "WarningLabel": "Warning!",
+  "Of": "of",
+  "Paginator": {
+    "FirstLabel": "Go to first page",
+    "PreviousLabel": "Go to previous page",
+    "NextLabel": "Go to next page",
+    "LastLabel": "Go to last page"
+  },
+  "PopoverCloseLabel": "Click here to close",
+  "ChangeValueLabel": "change value",
+  "LoadingLabel": "Loading",
+  "UpdatingDataText": "Updating data...",
+  "PreferredLanguageLabel": "Select preferred language"
+}

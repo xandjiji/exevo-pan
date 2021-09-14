@@ -22,7 +22,7 @@ describe('<SliderInput />', () => {
     expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
     expect(cursorElement).toHaveAttribute('aria-valuemin', '0')
     expect(cursorElement).toHaveAttribute('aria-valuemax', '100')
-    expect(cursorElement).toHaveAttribute('aria-label', 'change value')
+    expect(cursorElement).toHaveAttribute('aria-label', 'ChangeValueLabel')
 
     const [displayInput] = screen.getAllByLabelText('test-aria-label')
     expect(displayInput).toHaveAttribute(
@@ -42,7 +42,7 @@ describe('<SliderInput />', () => {
       />,
     )
     const [displayInput] = screen.getAllByLabelText('choose a skill level')
-    const cursorElement = screen.getByLabelText('change value')
+    const cursorElement = screen.getByLabelText('ChangeValueLabel')
 
     expect(displayInput).toHaveValue('0')
     expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
@@ -124,7 +124,7 @@ describe('<SliderInput />', () => {
       />,
     )
     const [displayInput] = screen.getAllByLabelText('choose a skill level')
-    const cursorElement = screen.getByLabelText('change value')
+    const cursorElement = screen.getByLabelText('ChangeValueLabel')
 
     expect(displayInput).toHaveValue('0')
     expect(cursorElement).toHaveAttribute('aria-valuenow', '0')

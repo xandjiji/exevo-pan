@@ -22,9 +22,7 @@ describe('<Popover />', () => {
 
     expect(screen.queryByRole('none')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
-    expect(
-      screen.queryByLabelText('Click here to close'),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('PopoverCloseLabel')).not.toBeInTheDocument()
 
     userEvent.hover(wrappedElement)
     const contentElement = screen.getByRole('none')
@@ -59,7 +57,7 @@ describe('<Popover />', () => {
 
     userEvent.click(wrappedElement)
     expect(contentElement).toBeVisible()
-    userEvent.click(screen.getByLabelText('Click here to close'))
+    userEvent.click(screen.getByLabelText('PopoverCloseLabel'))
     expect(contentElement).not.toBeVisible()
 
     await waitFor(() => {})
@@ -74,9 +72,7 @@ describe('<Popover />', () => {
 
     expect(screen.queryByRole('none')).not.toBeInTheDocument()
     expect(screen.getByRole('heading')).toBeInTheDocument()
-    expect(
-      screen.queryByLabelText('Click here to close'),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('PopoverCloseLabel')).not.toBeInTheDocument()
 
     userEvent.tab()
     const contentElement = screen.getByRole('none')
@@ -125,9 +121,7 @@ describe('<Popover />', () => {
 
     expect(contentElement).toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
-    expect(
-      screen.queryByLabelText('Click here to close'),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('PopoverCloseLabel')).not.toBeInTheDocument()
 
     expect(contentElement).toBeVisible()
 
@@ -151,9 +145,7 @@ describe('<Popover />', () => {
       </Popover>,
     )
 
-    expect(
-      screen.queryByLabelText('Click here to close'),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('PopoverCloseLabel')).not.toBeInTheDocument()
 
     expect(contentElement).not.toBeVisible()
 

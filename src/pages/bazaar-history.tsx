@@ -1,30 +1,47 @@
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
+import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
+import { GetStaticProps } from 'next'
+import { buildUrl } from 'utils'
+import { routes } from 'Constants'
+
+const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
 
 export default function BazaarHistory(): JSX.Element {
+  const { t } = useTranslation('bazaar-history')
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Bazaar History</title>
-        <meta name="title" content="Exevo Pan - Bazaar History" />
-        <meta property="og:site_name" content="Exevo Pan - Bazaar History" />
-        <meta property="og:title" content="Exevo Pan - Bazaar History" />
-        <meta property="twitter:title" content="Exevo Pan - Bazaar History" />
+        <title>{t('Meta.title')}</title>
+        <meta name="title" content={t('Meta.title')} />
+        <meta property="og:site_name" content={t('Meta.title')} />
+        <meta property="og:title" content={t('Meta.title')} />
+        <meta property="twitter:title" content={t('Meta.title')} />
 
-        <meta
-          name="description"
-          content="Filter and search through all Tibia Char Bazaar historic data and statistics!"
-        />
-        <meta
-          property="twitter:description"
-          content="Filter and search through all Tibia Char Bazaar historic data and statistics!"
-        />
-        <meta
-          property="og:description"
-          content="Filter and search through all Tibia Char Bazaar historic data and statistics!"
-        />
+        <meta name="description" content={t('Meta.description')} />
+        <meta property="twitter:description" content={t('Meta.description')} />
+        <meta property="og:description" content={t('Meta.description')} />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.BAZAAR_HISTORY, 'pt')}
+        />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.BAZAAR_HISTORY, 'es')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 
       <Main>
@@ -33,3 +50,13 @@ export default function BazaarHistory(): JSX.Element {
     </div>
   )
 }
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    ...(await serverSideTranslations(locale as string, [
+      'common',
+      'homepage',
+      'bazaar-history',
+    ])),
+  },
+})

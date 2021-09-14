@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import * as S from './styles'
 
 interface TransferIconProps {
@@ -5,29 +6,35 @@ interface TransferIconProps {
   nickname: string
 }
 
-const TransferIcon = ({ transfer, nickname }: TransferIconProps): JSX.Element =>
-  transfer ? (
+const TransferIcon = ({
+  transfer,
+  nickname,
+}: TransferIconProps): JSX.Element => {
+  const { t } = useTranslation('homepage')
+
+  return transfer ? (
     <S.Tooltip
       aria-labelledby={`transfer-availability-${nickname}`}
       content={
         <S.TooltipText id={`transfer-availability-${nickname}`}>
-          Regular World Transfer available
+          {t('CharacterCard.transferAvailable')}
         </S.TooltipText>
       }
     >
-      <S.Server aria-label="Regular World Transfer available" />
+      <S.Server aria-label={t('CharacterCard.transferAvailable')} />
     </S.Tooltip>
   ) : (
     <S.Tooltip
       aria-labelledby={`transfer-availability-${nickname}`}
       content={
         <S.TooltipText id={`transfer-availability-${nickname}`}>
-          Regular World Transfer NOT available
+          {t('CharacterCard.transferUnavailable')}
         </S.TooltipText>
       }
     >
-      <S.NoServer aria-label="Regular World Transfer NOT available" />
+      <S.NoServer aria-label={t('CharacterCard.transferUnavailable')} />
     </S.Tooltip>
   )
+}
 
 export default TransferIcon

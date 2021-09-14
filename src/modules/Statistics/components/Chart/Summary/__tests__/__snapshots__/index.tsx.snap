@@ -5,7 +5,7 @@ exports[`<Summary /> should style trend red/green 1`] = `
   class="styles__Percentage-sc-zf1m03-4 ucl"
 >
   <image
-    aria-label="Upwards trend"
+    aria-label="Summary.positiveTrendLabel"
     class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
   />
   50.00%
@@ -17,7 +17,7 @@ exports[`<Summary /> should style trend red/green 3`] = `
   class="styles__Percentage-sc-zf1m03-4 MvqMn"
 >
   <image
-    aria-label="Downwards trend"
+    aria-label="Summary.negativeTrendLabel"
     class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
   />
   50.00%
@@ -26,7 +26,7 @@ exports[`<Summary /> should style trend red/green 3`] = `
 
 exports[`<Summary /> should style trend red/green 4`] = `
 <image
-  aria-label="Downwards trend"
+  aria-label="Summary.negativeTrendLabel"
   class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
 />
 `;
@@ -36,7 +36,7 @@ exports[`<Summary /> should style trend red/green 5`] = `
   class="styles__Percentage-sc-zf1m03-4 ucl"
 >
   <image
-    aria-label="Upwards trend"
+    aria-label="Summary.positiveTrendLabel"
     class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
   />
   50.00%
@@ -45,7 +45,7 @@ exports[`<Summary /> should style trend red/green 5`] = `
 
 exports[`<Summary /> should style trend red/green 6`] = `
 <image
-  aria-label="Upwards trend"
+  aria-label="Summary.positiveTrendLabel"
   class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
 />
 `;

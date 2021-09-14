@@ -1,3 +1,4 @@
+import { useTranslation } from 'next-i18next'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { SpritePortrait } from 'components/Atoms'
@@ -24,18 +25,22 @@ const fillItems = (amount: number) =>
 const CharacterItems = ({
   items,
   ...props
-}: CharacterItemsProps): JSX.Element => (
-  <ItemWrapper {...props}>
-    {items.map((item) => (
-      <SpritePortrait
-        key={uuidv4()}
-        alt="Featured item"
-        src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
-        style={{ width: 32, height: 32 }}
-      />
-    ))}
-    {fillItems(4 - items.length)}
-  </ItemWrapper>
-)
+}: CharacterItemsProps): JSX.Element => {
+  const { t } = useTranslation('homepage')
+
+  return (
+    <ItemWrapper {...props}>
+      {items.map((item) => (
+        <SpritePortrait
+          key={uuidv4()}
+          alt={t('CharacterCard.featuredItem')}
+          src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
+          style={{ width: 32, height: 32 }}
+        />
+      ))}
+      {fillItems(4 - items.length)}
+    </ItemWrapper>
+  )
+}
 
 export default CharacterItems

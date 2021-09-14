@@ -12,6 +12,8 @@ describe('<LastFrags />', () => {
     expect(container.querySelectorAll('tbody tr')).toHaveLength(
       mockedFragsList.length < 40 ? mockedFragsList.length : 40,
     )
-    expect(screen.getByTitle('Sorted by character level')).toBeInTheDocument()
+    expect(
+      screen.getByTitle('OverallGrid.LastFrags.characterHeadColumnTitle'),
+    ).toBeInTheDocument()
   })
 })

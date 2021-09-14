@@ -1,0 +1,78 @@
+{
+  "Meta": {
+    "title": "Exevo Pan - Current Auctions",
+    "description": "Filter and search for Tibia characters on the official Char Bazaar!"
+  },
+  "CharacterCard": {
+    "linkLabel": "Go to character page",
+    "bidLabelText": {
+      "auctionSuccessful": "Auction Successful",
+      "auctionFailed": "Auction Failed",
+      "currentBid": "Current Bid",
+      "minimumBid": "Minimum Bid"
+    },
+    "auctionEnd": "Auction end",
+    "featuredItem": "Featured item",
+    "experimentalServer": "This is an experimental server!",
+    "transferAvailable": "Regular World Transfer available",
+    "transferUnavailable": "Regular World Transfer NOT available",
+    "favButton": {
+      "remove": "Remove",
+      "add": "Add",
+      "fromFav": "from favorites",
+      "toFav": "to favorites"
+    },
+    "imbuementsListLabel": "Imbuements list"
+  },
+  "CharacterGrid": {
+    "filterButtonLabel": "Open filter drawer",
+    "sortingButtonLabel": "Set the sorting order and criteria",
+    "filter": "filter",
+    "filters": "filters",
+    "is": "is",
+    "are": "are",
+    "active": "active",
+    "noItemsPagination": "No characters found",
+    "filterDrawerLabel": "Filter form",
+    "descendingSwitchLabel": "Sort by descending order",
+    "descending": "Descending",
+    "sortModes": {
+      "auctionEnd": "Auction End",
+      "level": "Level",
+      "price": "Price",
+      "priceBidded": "Price (bidded only)"
+    },
+    "noAuctionFound": "Sorry, no auction was found",
+    "changeFilters": "Change filters",
+    "notFoundAlt": "No character was found",
+    "AuctionStatus": "Auction status",
+    "BidStatus": "Bid status"
+  },
+  "FilterDrawer": {
+    "title": "Filters",
+    "resetFilters": "Reset filters",
+    "searchNicknameLabel": "Search nickname",
+    "searchNicknameTooltip": "Regex is enabled! Example: ['-.,]",
+    "vocationLabel": "Vocation",
+    "green": "Green",
+    "yellow": "Yellow",
+    "serverLocationLabel": "Server location",
+    "serverPlaceholder": "Choose a server",
+    "minSkillLabel": "Minimum skill level",
+    "imbuementsPlaceholder": "Select imbuements",
+    "allImbuementsButton": "All imbuements",
+    "rareItemsLabel": "Rare items",
+    "rareItemsTooltip": "If a rare item is not on this list it means that there are no auctions available with it.",
+    "rareItemsPlaceholder": "Choose an item",
+    "allItemsButton": "All items",
+    "miscLabel": "Misc",
+    "favTooltip": "Save your favorite auctions pressing the ❤️ button!",
+    "favoritedButton": "Favorited",
+    "heartEmoji": "heart",
+    "rareNicknamesTooltip": "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",
+    "rareNicknamesButton": "Rare nicknames",
+    "soulwarTooltip": "Characters level 250+ with Soul War not completed",
+    "soulwarButton": "Soulwar available",
+    "skullEmoji": "skull"
+  }
+}

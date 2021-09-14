@@ -277,7 +277,7 @@ describe('<AutocompleteInput />', () => {
     userEvent.type(inputElement, 'a')
     expect(listboxElement).toBeVisible()
 
-    userEvent.click(screen.getByLabelText('Clear input'))
+    userEvent.click(screen.getByLabelText('ClearInputLabel'))
     expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, 'a')
@@ -315,7 +315,7 @@ describe('<AutocompleteInput />', () => {
 
     userEvent.type(inputElement, 'a')
     expect(listboxElement).toBeVisible()
-    userEvent.click(screen.getByLabelText('Clear input'))
+    userEvent.click(screen.getByLabelText('ClearInputLabel'))
     expect(listboxElement).toBeVisible()
 
     const [firstOption] = screen.getAllByRole('option')
@@ -356,7 +356,7 @@ describe('<AutocompleteInput />', () => {
     userEvent.type(inputElement, 'o')
     expect(screen.queryByRole('option')).not.toBeInTheDocument()
 
-    userEvent.click(screen.getByLabelText('Clear input'))
+    userEvent.click(screen.getByLabelText('ClearInputLabel'))
     screen.getAllByRole('option').forEach((option, index) => {
       expect(option).toHaveTextContent(mockedItemList[index].name)
       expect(option).toHaveValue(mockedItemList[index].value)
