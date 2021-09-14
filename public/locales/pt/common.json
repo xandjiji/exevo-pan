@@ -32,6 +32,15 @@
     "10": "Nov",
     "11": "Dez"
   },
+  "Weekdays": {
+    "0": "Dom",
+    "1": "Seg",
+    "2": "Ter",
+    "3": "Qua",
+    "4": "Qui",
+    "5": "Sex",
+    "6": "Sáb"
+  },
   "AuctionTimer": {
     "finishedAuction": "Leilão terminou em",
     "unfinishedAuction": "Leilão termina em",
