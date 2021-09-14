@@ -13,12 +13,12 @@ describe('<RangeSliderInput />', () => {
     expect(screen.getByTestId('test')).toBeInTheDocument()
 
     const [cursorA, cursorB] = screen.getAllByRole('slider')
-    expect(cursorA).toHaveAttribute('aria-label', 'change value')
+    expect(cursorA).toHaveAttribute('aria-label', 'ChangeValueLabel')
     expect(cursorA).toHaveAttribute('aria-valuenow', '0')
     expect(cursorA).toHaveAttribute('aria-valuemax', '100')
     expect(cursorA).toHaveAttribute('aria-valuemin', '0')
 
-    expect(cursorB).toHaveAttribute('aria-label', 'change value')
+    expect(cursorB).toHaveAttribute('aria-label', 'ChangeValueLabel')
     expect(cursorB).toHaveAttribute('aria-valuenow', '100')
     expect(cursorB).toHaveAttribute('aria-valuemax', '100')
     expect(cursorB).toHaveAttribute('aria-valuemin', '0')
