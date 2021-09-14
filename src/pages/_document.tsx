@@ -54,10 +54,6 @@ export default class MyDocument extends Document {
           />
           <link rel="icon" href="/favicon.ico" />
 
-          <link rel="canonical" href="https://exevopan.com/" />
-          <meta property="og:url" content="https://exevopan.com/" />
-          <meta property="twitter:url" content="https://exevopan.com/" />
-
           <meta property="og:image" content="/preview.png" />
           <meta property="twitter:image" content="/preview.png" />
           <meta property="twitter:card" content="summary_large_image" />
