@@ -37,15 +37,6 @@
     "top10BidTitle": "Preço"
   },
   "Days": "dias",
-  "Weekdays": {
-    "Sun": "Dom",
-    "Mon": "Seg",
-    "Tue": "Ter",
-    "Wed": "Qua",
-    "Thu": "Qui",
-    "Fri": "Sex",
-    "Sat": "Sáb"
-  },
   "Summary": {
     "positiveTrendLabel": "Tendência de aumento",
     "negativeTrendLabel": "Tendência de queda"

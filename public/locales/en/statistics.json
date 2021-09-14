@@ -37,15 +37,6 @@
     "top10BidTitle": "Bid"
   },
   "Days": "days",
-  "Weekdays": {
-    "Sun": "Sun",
-    "Mon": "Mon",
-    "Tue": "Tue",
-    "Wed": "Wed",
-    "Thu": "Thu",
-    "Fri": "Fri",
-    "Sat": "Sat"
-  },
   "Summary": {
     "positiveTrendLabel": "Upwards trend",
     "negativeTrendLabel": "Downwards trend"

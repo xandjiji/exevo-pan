@@ -10,8 +10,6 @@ import Summary from './Summary'
 import * as S from './styles'
 import { ChartProps } from './types'
 
-const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-
 const Chart = ({
   totalLabel,
   yesterdayLabel,
@@ -19,6 +17,7 @@ const Chart = ({
   chartData,
   ...props
 }: ChartProps): JSX.Element => {
+  const { t: tCommon } = useTranslation('common')
   const { t } = useTranslation('statistics')
 
   const { colors } = useTheme()
@@ -93,8 +92,8 @@ const Chart = ({
         .map((_, index) => {
           const date = new Date()
           date.setDate(date.getDate() - index)
-          return `${date.getDate()}/${date.getMonth() + 1}, ${t(
-            `Weekdays.${weekdays[date.getDay()]}`,
+          return `${date.getDate()}/${date.getMonth() + 1}, ${tCommon(
+            `Weekdays.${date.getDay()}`,
           )}`
         })
         .reverse(),
