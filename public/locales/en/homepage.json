@@ -44,7 +44,9 @@
     },
     "noAuctionFound": "Sorry, no auction was found",
     "changeFilters": "Change filters",
-    "notFoundAlt": "No character was found"
+    "notFoundAlt": "No character was found",
+    "AuctionStatus": "Auction status",
+    "BidStatus": "Bid status"
   },
   "FilterDrawer": {
     "title": "Filters",

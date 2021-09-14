@@ -44,7 +44,9 @@
     },
     "noAuctionFound": "Desculpe, nenhum leilão foi encontrado",
     "changeFilters": "Mudar filtros",
-    "notFoundAlt": "Nenhum personagem foi encontrado"
+    "notFoundAlt": "Nenhum personagem foi encontrado",
+    "AuctionStatus": "Status do leilão",
+    "BidStatus": "Lance atual"
   },
   "FilterDrawer": {
     "title": "Filtros",
