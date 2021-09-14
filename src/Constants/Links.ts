@@ -1,4 +1,5 @@
 export const links = {
+  CANONICAL: 'https://exevopan.com',
   EMAIL: 'mailto:xandjiji@gmail.com',
   LINKEDIN: 'https://www.linkedin.com/in/xandjiji',
   GITHUB_PROFILE: 'https://github.com/xandjiji',
