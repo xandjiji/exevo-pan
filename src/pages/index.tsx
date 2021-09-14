@@ -4,7 +4,10 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
 import { GetStaticProps } from 'next'
-import { endpoints, paths } from 'Constants'
+import { buildUrl } from 'utils'
+import { endpoints, paths, routes } from 'Constants'
+
+const pageUrl = buildUrl(routes.HOME)
 
 export default function Home(): JSX.Element {
   const { t } = useTranslation('homepage')
@@ -22,6 +25,18 @@ export default function Home(): JSX.Element {
         <meta property="twitter:description" content={t('Meta.description')} />
         <meta property="og:description" content={t('Meta.description')} />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.HOME, 'pt')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <link
           rel="preload"

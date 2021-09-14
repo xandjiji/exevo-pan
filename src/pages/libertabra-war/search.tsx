@@ -3,8 +3,11 @@ import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, SearchGrid } from 'modules/LibertabraWar'
-import { endpoints, paths } from 'Constants'
 import { GetStaticProps } from 'next'
+import { buildUrl } from 'utils'
+import { routes, endpoints, paths } from 'Constants'
+
+const pageUrl = buildUrl(routes.LIBERTABRA_WAR_SEARCH)
 
 export default function LibertabraWar(): JSX.Element {
   const { t } = useTranslation('war')
@@ -28,6 +31,18 @@ export default function LibertabraWar(): JSX.Element {
           content={t('Meta.Search.description')}
         />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.LIBERTABRA_WAR_SEARCH, 'pt')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <link
           rel="preload"

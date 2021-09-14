@@ -5,6 +5,10 @@ import { Main } from 'templates'
 import { Header, Top10Grid } from 'modules/LibertabraWar'
 import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
+import { buildUrl } from 'utils'
+import { routes } from 'Constants'
+
+const pageUrl = buildUrl(routes.LIBERTABRA_WAR_TOP_10)
 
 export default function LibertabraWar({
   warData,
@@ -29,6 +33,18 @@ export default function LibertabraWar({
         />
         <meta property="og:description" content={t('Meta.Top10.description')} />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.LIBERTABRA_WAR_TOP_10, 'pt')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 
       <Main>

@@ -5,6 +5,10 @@ import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
 import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
+import { buildUrl } from 'utils'
+import { routes } from 'Constants'
+
+const pageUrl = buildUrl(routes.HIGHSCORES)
 
 export default function Highscores({
   statisticsData,
@@ -32,6 +36,18 @@ export default function Highscores({
           content={t('Meta.Highscores.description')}
         />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.HIGHSCORES, 'pt')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 
       <Main>

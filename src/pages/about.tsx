@@ -6,7 +6,10 @@ import { Main as BaseMain } from 'templates'
 import AboutContent from 'modules/About'
 import { KsuData } from 'modules/About/types'
 import { GetStaticProps } from 'next'
-import { endpoints } from 'Constants'
+import { buildUrl } from 'utils'
+import { routes, endpoints } from 'Constants'
+
+const pageUrl = buildUrl(routes.ABOUT)
 
 const Main = styled(BaseMain)`
   header {
@@ -45,6 +48,18 @@ export default function About({
         <meta property="twitter:description" content={t('Meta.description')} />
         <meta property="og:description" content={t('Meta.description')} />
         <meta property="og:type" content="website" />
+
+        <link rel="canonical" href={pageUrl} />
+        <meta property="og:url" content={pageUrl} />
+        <meta property="twitter:url" content={pageUrl} />
+
+        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link
+          rel="alternate"
+          hrefLang="pt"
+          href={buildUrl(routes.ABOUT, 'pt')}
+        />
+        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 
       <Main>
