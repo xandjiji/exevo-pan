@@ -1,4 +1,3 @@
-import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import Header from '..'
 
