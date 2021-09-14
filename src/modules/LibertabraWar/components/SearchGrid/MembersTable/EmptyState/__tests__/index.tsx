@@ -7,7 +7,7 @@ describe('<EmptyState />', () => {
     renderWithProviders(<EmptyState />)
     expect(screen.getByRole('img')).toHaveAttribute(
       'alt',
-      'No character was found',
+      'SearchGrid.MembersTable.EmptyState.alt',
     )
   })
 })
