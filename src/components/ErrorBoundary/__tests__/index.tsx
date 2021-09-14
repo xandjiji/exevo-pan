@@ -33,7 +33,7 @@ describe('<ErrorBoundary />', () => {
     expect(console.error).toHaveBeenCalledTimes(3)
     expect(screen.getByRole('alert')).toHaveAttribute(
       'aria-label',
-      'Error, something unexpected happened',
+      'ErrorLabel',
     )
   })
 })
