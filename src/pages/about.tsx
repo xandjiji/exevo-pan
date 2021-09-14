@@ -59,6 +59,11 @@ export default function About({
           hrefLang="pt"
           href={buildUrl(routes.ABOUT, 'pt')}
         />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.ABOUT, 'es')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 

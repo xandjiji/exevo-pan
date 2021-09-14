@@ -5,7 +5,7 @@ import { Main } from 'templates'
 import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
 import { GetStaticProps } from 'next'
 import { buildUrl } from 'utils'
-import { links, routes } from 'Constants'
+import { routes } from 'Constants'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
 
@@ -35,6 +35,11 @@ export default function BazaarHistory(): JSX.Element {
           rel="alternate"
           hrefLang="pt"
           href={buildUrl(routes.BAZAAR_HISTORY, 'pt')}
+        />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.BAZAAR_HISTORY, 'es')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>

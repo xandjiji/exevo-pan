@@ -42,6 +42,11 @@ export default function LibertabraWar(): JSX.Element {
           hrefLang="pt"
           href={buildUrl(routes.LIBERTABRA_WAR_SEARCH, 'pt')}
         />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.LIBERTABRA_WAR_SEARCH, 'es')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <link

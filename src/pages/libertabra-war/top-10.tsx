@@ -44,6 +44,11 @@ export default function LibertabraWar({
           hrefLang="pt"
           href={buildUrl(routes.LIBERTABRA_WAR_TOP_10, 'pt')}
         />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.LIBERTABRA_WAR_TOP_10, 'es')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 

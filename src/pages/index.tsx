@@ -36,6 +36,11 @@ export default function Home(): JSX.Element {
           hrefLang="pt"
           href={buildUrl(routes.HOME, 'pt')}
         />
+        <link
+          rel="alternate"
+          hrefLang="es"
+          href={buildUrl(routes.HOME, 'es')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <link
