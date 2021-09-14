@@ -157,7 +157,7 @@ const FilterDrawer = ({
               )
             }}
           >
-            Reset filters
+            {t('FilterDrawer.resetFilters')}
             <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
           </S.ResetButton>
         </S.HeadWrapper>

@@ -50,6 +50,7 @@
   },
   "FilterDrawer": {
     "title": "Filtros",
+    "resetFilters": "Resetar filtros",
     "searchNicknameLabel": "Procurar nickname",
     "searchNicknameTooltip": "Regex habilitado! Exemplo: ['-.,]",
     "vocationLabel": "Vocação",
