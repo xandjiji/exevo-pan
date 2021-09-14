@@ -1,8 +1,8 @@
-import { memo, useMemo } from 'react'
+import { useTranslation } from 'next-i18next'
+import { memo, useMemo, useCallback } from 'react'
 import { useTheme } from 'styled-components'
 import { Line } from 'react-chartjs-2'
 import { compactNumberFormatter, formatNumberWithCommas } from 'utils'
-import { formatDateLabel } from './utils'
 import * as S from './styles'
 import { ComparisonChartProps } from './types'
 
@@ -16,7 +16,35 @@ const ComparisonChart = ({
   dateLabelType,
   ...props
 }: ComparisonChartProps): JSX.Element => {
+  const { t } = useTranslation('common')
+
   const { colors } = useTheme()
+
+  const formatDateLabel = useCallback(
+    (timestamp: number, formatType: 'Time' | 'Date'): string => {
+      const currentDate = new Date(timestamp)
+
+      switch (formatType) {
+        case 'Time': {
+          const hours = currentDate.getHours().toString().padStart(2, '0')
+          const minutes = currentDate.getMinutes().toString().padStart(2, '0')
+          return `${hours}:${minutes}h`
+        }
+
+        case 'Date': {
+          const day = currentDate.getDate().toString()
+          const month = currentDate.getMonth() + 1
+          const weekday = currentDate.getDay()
+
+          return `${day}/${month}, ${t(`Weekdays.${[weekday]}`)}`
+        }
+
+        default:
+          return currentDate.toLocaleString()
+      }
+    },
+    [t],
+  )
 
   const options = useMemo(
     () => ({
