@@ -5,7 +5,7 @@ exports[`<Summary /> should style trend red/green 1`] = `
   class="styles__Percentage-sc-zf1m03-4 ucl"
 >
   <image
-    aria-label="Upwards trend"
+    aria-label="Summary.positiveTrendLabel"
     class="styles__TrendIcon-sc-zf1m03-3 efoYRJ"
   />
   50.00%
