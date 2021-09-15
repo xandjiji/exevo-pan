@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useState, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { dequal } from 'dequal'
@@ -31,7 +31,9 @@ const FilterDrawer = ({
   setActiveFilterCount,
   ...props
 }: FilterDrawerProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   const { serverData, rareItemData } = useDrawerFields()
   const { dispatch } = useDatabaseDispatch()
@@ -145,7 +147,7 @@ const FilterDrawer = ({
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>
         <S.HeadWrapper>
-          {t('FilterDrawer.title')}
+          {homepage.FilterDrawer.title}
           <S.ResetButton
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
@@ -157,20 +159,20 @@ const FilterDrawer = ({
               )
             }}
           >
-            {t('FilterDrawer.resetFilters')}
+            {homepage.FilterDrawer.resetFilters}
             <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
           </S.ResetButton>
         </S.HeadWrapper>
       </Drawer.Head>
       <Drawer.Body>
         <FilterGroup
-          label={t('FilterDrawer.searchNicknameLabel')}
+          label={homepage.FilterDrawer.searchNicknameLabel}
           htmlFor="search-nickname-input"
           labelSuffix={
             <Tooltip
               offset={[0, 8]}
               placement="top"
-              content={t('FilterDrawer.searchNicknameTooltip')}
+              content={homepage.FilterDrawer.searchNicknameTooltip}
             >
               <Icon.Exclamation />
             </Tooltip>
@@ -187,7 +189,7 @@ const FilterDrawer = ({
           />
         </FilterGroup>
 
-        <FilterGroup label={t('FilterDrawer.vocationLabel')}>
+        <FilterGroup label={homepage.FilterDrawer.vocationLabel}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filters.vocation.has(0)}
@@ -274,19 +276,19 @@ const FilterDrawer = ({
               onClick={() => updateFilters('battleye', true)}
             >
               <Icon.Status color="battleGreen" />
-              {t('FilterDrawer.green')}
+              {homepage.FilterDrawer.green}
             </S.IconChip>
             <S.IconChip
               overrideStatus={filters.battleye.has(false)}
               onClick={() => updateFilters('battleye', false)}
             >
               <Icon.Status color="battleYellow" />
-              {t('FilterDrawer.yellow')}
+              {homepage.FilterDrawer.yellow}
             </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={t('FilterDrawer.serverLocationLabel')}>
+        <FilterGroup label={homepage.FilterDrawer.serverLocationLabel}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filters.location.has(0)}
@@ -316,7 +318,7 @@ const FilterDrawer = ({
           <S.AutocompleteInput
             id="server-input"
             aria-controls="server-list"
-            placeholder={t('FilterDrawer.serverPlaceholder')}
+            placeholder={homepage.FilterDrawer.serverPlaceholder}
             style={{ marginBottom: 12 }}
             itemList={availableServerOptions}
             onItemSelect={useCallback(
@@ -354,7 +356,7 @@ const FilterDrawer = ({
 
         <FilterGroup label="Skill">
           <SliderInput
-            aria-label={t('FilterDrawer.minSkillLabel')}
+            aria-label={homepage.FilterDrawer.minSkillLabel}
             min={10}
             max={130}
             value={filters.minSkill}
@@ -409,7 +411,7 @@ const FilterDrawer = ({
             <S.AutocompleteInput
               id="imbuements-input"
               aria-controls="imbuements-list"
-              placeholder={t('FilterDrawer.imbuementsPlaceholder')}
+              placeholder={homepage.FilterDrawer.imbuementsPlaceholder}
               itemList={availableImbuementOptions}
               onItemSelect={useCallback(
                 (option: Option) =>
@@ -423,7 +425,7 @@ const FilterDrawer = ({
               }
               onClick={() => toggleFilterSet('imbuementsSet', imbuementOptions)}
             >
-              {t('FilterDrawer.allImbuementsButton')}
+              {homepage.FilterDrawer.allImbuementsButton}
             </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="imbuements-list">
@@ -439,13 +441,13 @@ const FilterDrawer = ({
         </FilterGroup>
 
         <FilterGroup
-          label={t('FilterDrawer.rareItemsLabel')}
+          label={homepage.FilterDrawer.rareItemsLabel}
           htmlFor="rare-items-input"
           labelSuffix={
             <Tooltip
               offset={[0, 8]}
               placement="top"
-              content={t('FilterDrawer.rareItemsTooltip')}
+              content={homepage.FilterDrawer.rareItemsTooltip}
             >
               <Icon.Exclamation />
             </Tooltip>
@@ -455,7 +457,7 @@ const FilterDrawer = ({
             <S.AutocompleteInput
               id="rare-items-input"
               aria-controls="rare-items-list"
-              placeholder={t('FilterDrawer.rareItemsPlaceholder')}
+              placeholder={homepage.FilterDrawer.rareItemsPlaceholder}
               itemList={availableRareItemOptions}
               onItemSelect={useCallback(
                 (option: Option) => updateFilters('itemSet', option.value),
@@ -466,7 +468,7 @@ const FilterDrawer = ({
               overrideStatus={filters.itemSet.size === rareItemOptions.length}
               onClick={() => toggleFilterSet('itemSet', rareItemOptions)}
             >
-              {t('FilterDrawer.allItemsButton')}
+              {homepage.FilterDrawer.allItemsButton}
             </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="rare-items-list">
@@ -478,31 +480,34 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={t('FilterDrawer.miscLabel')}>
+        <FilterGroup label={homepage.FilterDrawer.miscLabel}>
           <S.ChipWrapper>
-            <Tooltip content={t('FilterDrawer.favTooltip')}>
+            <Tooltip content={homepage.FilterDrawer.favTooltip}>
               <Chip
                 overrideStatus={filters.fav}
                 onClick={() => updateFilters('fav', !filters.fav)}
               >
-                {t('FilterDrawer.favoritedButton')}
-                <S.Emoji role="img" aria-label={t('FilterDrawer.heartEmoji')}>
+                {homepage.FilterDrawer.favoritedButton}
+                <S.Emoji
+                  role="img"
+                  aria-label={homepage.FilterDrawer.heartEmoji}
+                >
                   ❤️
                 </S.Emoji>
               </Chip>
             </Tooltip>
             <Tooltip
               style={{ width: 280 }}
-              content={t('FilterDrawer.rareNicknamesTooltip')}
+              content={homepage.FilterDrawer.rareNicknamesTooltip}
             >
               <Chip
                 overrideStatus={filters.rareNick}
                 onClick={() => updateFilters('rareNick', !filters.rareNick)}
               >
-                {t('FilterDrawer.rareNicknamesButton')}
+                {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
             </Tooltip>
-            <Tooltip content={t('FilterDrawer.soulwarTooltip')}>
+            <Tooltip content={homepage.FilterDrawer.soulwarTooltip}>
               <Chip
                 overrideStatus={filters.soulwarFilter}
                 onClick={() => {
@@ -516,8 +521,11 @@ const FilterDrawer = ({
                   }
                 }}
               >
-                {t('FilterDrawer.soulwarButton')}
-                <S.Emoji role="img" aria-label={t('FilterDrawer.skullEmoji')}>
+                {homepage.FilterDrawer.soulwarButton}
+                <S.Emoji
+                  role="img"
+                  aria-label={homepage.FilterDrawer.skullEmoji}
+                >
                   💀
                 </S.Emoji>
               </Chip>
