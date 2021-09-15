@@ -1,15 +1,17 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { links } from 'Constants'
 import * as S from './styles'
 
 const Footer = (): JSX.Element => {
-  const { t } = useTranslation('about')
+  const {
+    translations: { about },
+  } = useTranslations()
 
   return (
     <S.Wrapper>
       <S.Title>
         <S.UnlicenseIcon aria-label="Unlicensed" />
-        {new Date().getFullYear()} {t('FooterTitle')}
+        {new Date().getFullYear()} {about.FooterTitle}
         <a
           href={links.GITHUB_PROFILE}
           target="_blank"

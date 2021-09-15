@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import { Tooltip } from 'components/Organisms'
 import { links } from 'Constants'
@@ -9,7 +9,9 @@ import * as S from './styles'
 import { KsuData } from './types'
 
 const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
-  const { t } = useTranslation('about')
+  const {
+    translations: { about },
+  } = useTranslations()
 
   return (
     <S.Wrapper>
@@ -19,42 +21,42 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
         <S.SurfaceWrapper>
           <Section {...sections.EXEVO_PAN}>
             <p>
-              {t('AboutExevoPan.p1')}{' '}
-              <span role="img" aria-label={t('AboutExevoPan.smilingEmoji')}>
+              {about.AboutExevoPan.p1}{' '}
+              <span role="img" aria-label={about.AboutExevoPan.smilingEmoji}>
                 😄
               </span>
             </p>
             <p>
-              {t('AboutExevoPan.p2')}{' '}
-              <strong>{t('AboutExevoPan.strong')}</strong>.{' '}
-              {t('AboutExevoPan.p3')}{' '}
+              {about.AboutExevoPan.p2}{' '}
+              <strong>{about.AboutExevoPan.strong}</strong>.{' '}
+              {about.AboutExevoPan.p3}{' '}
               <a
                 href={links.GITHUB_REPOSITORY}
                 target="_blank"
                 rel="noopener noreferrer external"
               >
-                {t('AboutExevoPan.p4')}
+                {about.AboutExevoPan.p4}
               </a>
               .
             </p>
             <p>
-              {t('AboutExevoPan.p5')}{' '}
+              {about.AboutExevoPan.p5}{' '}
               <S.Anchor href={`#${sections.CONTACT_INFORMATION.id}`}>
-                {t('AboutExevoPan.contactChannels')}
+                {about.AboutExevoPan.contactChannels}
               </S.Anchor>
               .
             </p>
           </Section>
 
           <Section {...sections.ABOUT_ME}>
-            <p>{t('AboutMe.p1')}</p>
+            <p>{about.AboutMe.p1}</p>
             <span style={{ display: 'block' }}>
-              {t('AboutMe.p2')}{' '}
+              {about.AboutMe.p2}{' '}
               <Tooltip content={<KsuTooltip characterData={characterData} />}>
                 <S.Character>Ksu</S.Character>
               </Tooltip>
-              . {t('AboutMe.p3')}{' '}
-              <span role="img" aria-label={t('AboutMe.tongueEmoji')}>
+              . {about.AboutMe.p3}{' '}
+              <span role="img" aria-label={about.AboutMe.tongueEmoji}>
                 😋
               </span>
               .
@@ -70,7 +72,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
               >
                 Tibia
               </a>{' '}
-              {t('AboutDisclaimer.p1')}{' '}
+              {about.AboutDisclaimer.p1}{' '}
               <a
                 href={links.CIPSOFT}
                 target="_blank"
@@ -78,10 +80,10 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
               >
                 CipSoft
               </a>
-              . {t('AboutDisclaimer.p2')}
+              . {about.AboutDisclaimer.p2}
             </p>
-            <p>{t('AboutDisclaimer.p3')}</p>
-            <p>{t('AboutDisclaimer.p4')}</p>
+            <p>{about.AboutDisclaimer.p3}</p>
+            <p>{about.AboutDisclaimer.p4}</p>
             <Image
               src={fansiteImg}
               alt="Supported fansite"

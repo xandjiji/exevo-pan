@@ -1,8 +1,10 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
 
 const Hero = (): JSX.Element => {
-  const { t } = useTranslation('about')
+  const {
+    translations: { about },
+  } = useTranslations()
 
   return (
     <S.Wrapper>
@@ -10,7 +12,7 @@ const Hero = (): JSX.Element => {
         <S.HeroImage unoptimized priority alt="Exevo Pan Logo" />
       </S.HeroImageWrapper>
       <S.TitleWrapper>
-        <S.Title>{t('HeroTitle')}</S.Title>
+        <S.Title>{about.HeroTitle}</S.Title>
         <S.Subtitle>(hi tibia yes)</S.Subtitle>
       </S.TitleWrapper>
     </S.Wrapper>
