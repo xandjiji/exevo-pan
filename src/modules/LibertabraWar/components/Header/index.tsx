@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { SubHeader } from 'templates'
 import { routes } from 'Constants'
 import OverallIcon from 'assets/svgs/charts.svg'
@@ -7,26 +7,28 @@ import GuildXPIcon from 'assets/svgs/group.svg'
 import SearchMembersIcon from 'assets/svgs/search.svg'
 
 const Header = (): JSX.Element => {
-  const { t } = useTranslation('war')
+  const {
+    translations: { war },
+  } = useTranslations()
 
   const navItems = [
     {
-      title: t('Header.Overall'),
+      title: war.Header.Overall,
       href: routes.LIBERTABRA_WAR,
       icon: <OverallIcon />,
     },
     {
-      title: t('Header.Top10'),
+      title: war.Header.Top10,
       href: routes.LIBERTABRA_WAR_TOP_10,
       icon: <HighscoresIcon />,
     },
     {
-      title: t('Header.GuildXP'),
+      title: war.Header.GuildXP,
       href: routes.LIBERTABRA_WAR_GUILD_XP,
       icon: <GuildXPIcon />,
     },
     {
-      title: t('Header.Search'),
+      title: war.Header.Search,
       href: routes.LIBERTABRA_WAR_SEARCH,
       icon: <SearchMembersIcon />,
     },

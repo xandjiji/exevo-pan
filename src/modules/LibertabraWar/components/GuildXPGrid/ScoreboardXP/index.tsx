@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { formatDisplayValue } from './utils'
 import * as S from './styles'
@@ -9,7 +9,9 @@ const ScoreboardXP = ({
   guildB,
   ...props
 }: ScoreboardXPProps): JSX.Element => {
-  const { t } = useTranslation('war')
+  const {
+    translations: { war },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
@@ -19,7 +21,7 @@ const ScoreboardXP = ({
           href={guildA.href}
           displayValue={formatDisplayValue(guildA.todayDiff)}
           winning={guildA.todayDiff >= 0}
-          label={t('GuildXPGrid.ScoreboardXP.summaryLabel')}
+          label={war.GuildXPGrid.ScoreboardXP.summaryLabel}
         />
 
         <S.GuildSummary
@@ -27,7 +29,7 @@ const ScoreboardXP = ({
           href={guildB.href}
           displayValue={formatDisplayValue(guildB.todayDiff)}
           winning={guildB.todayDiff >= 0}
-          label={t('GuildXPGrid.ScoreboardXP.summaryLabel')}
+          label={war.GuildXPGrid.ScoreboardXP.summaryLabel}
         />
       </S.GuildWrapper>
     </S.Wrapper>

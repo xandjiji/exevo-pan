@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { Table } from 'components/Atoms'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
@@ -9,7 +9,9 @@ const CharacterTable = ({
   caption,
   ...props
 }: CharacterTableProps): JSX.Element => {
-  const { t } = useTranslation('war')
+  const {
+    translations: { war },
+  } = useTranslations()
 
   return (
     <S.Table {...props}>
@@ -18,14 +20,14 @@ const CharacterTable = ({
         <Table.Head>
           <Table.Row>
             <Table.HeadColumn
-              aria-label={t('Top10Grid.CharacterTable.positionLabel')}
+              aria-label={war.Top10Grid.CharacterTable.positionLabel}
             >
               #
             </Table.HeadColumn>
             <Table.HeadColumn>Nickname</Table.HeadColumn>
             <Table.HeadColumn>Kills</Table.HeadColumn>
             <Table.HeadColumn>
-              {t('Top10Grid.CharacterTable.deathsHeadColumn')}
+              {war.Top10Grid.CharacterTable.deathsHeadColumn}
             </Table.HeadColumn>
           </Table.Row>
         </Table.Head>
@@ -39,10 +41,10 @@ const CharacterTable = ({
                 level={member.level}
                 vocation={member.vocation}
               />
-              <Table.Column title={t('Top10Grid.CharacterTable.killsTitle')}>
+              <Table.Column title={war.Top10Grid.CharacterTable.killsTitle}>
                 {member.kills}
               </Table.Column>
-              <Table.Column title={t('Top10Grid.CharacterTable.deathsTitle')}>
+              <Table.Column title={war.Top10Grid.CharacterTable.deathsTitle}>
                 {member.deathCount}
               </Table.Column>
             </Table.Row>

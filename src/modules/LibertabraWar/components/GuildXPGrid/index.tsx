@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { formatNumberWithCommas } from 'utils'
 import ScoreboardXP from './ScoreboardXP'
 import ComparisonChart from '../ComparisonChart'
@@ -7,7 +7,9 @@ import * as S from './styles'
 import { GuildXPGridProps } from './types'
 
 const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
-  const { t } = useTranslation('war')
+  const {
+    translations: { war },
+  } = useTranslations()
 
   const {
     xpStats: { todayDiff, dailyXPDiff, currentXP },
@@ -15,7 +17,7 @@ const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.PageTitle>{t('PageTitle')}</S.PageTitle>
+      <S.PageTitle>{war.PageTitle}</S.PageTitle>
 
       <S.FirstRow>
         <ScoreboardXP
@@ -32,22 +34,22 @@ const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
         />
 
         <ComparisonChart
-          title={t('GuildXPGrid.comparisonChartTitle')}
+          title={war.GuildXPGrid.comparisonChartTitle}
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${formatNumberWithCommas(
               Math.trunc(currentXP.guildA / 1000000),
-            )}M ${t('GuildXPGrid.guildSummaryValueSuffix')}`,
+            )}M ${war.GuildXPGrid.guildSummaryValueSuffix}`,
             dataArray: xpToDataSnapshot(dailyXPDiff.guildA),
           }}
           guildB={{
             name: 'Bones Alliance',
             summaryValue: `${formatNumberWithCommas(
               Math.trunc(currentXP.guildB / 1000000),
-            )}M ${t('GuildXPGrid.guildSummaryValueSuffix')}`,
+            )}M ${war.GuildXPGrid.guildSummaryValueSuffix}`,
             dataArray: xpToDataSnapshot(dailyXPDiff.guildB),
           }}
-          tooltipSuffix={t('GuildXPGrid.comparisonChartSuffix')}
+          tooltipSuffix={war.GuildXPGrid.comparisonChartSuffix}
           dateLabelType="Date"
         />
       </S.FirstRow>

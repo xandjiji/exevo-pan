@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
 import { GuildSummaryProps } from './types'
 
@@ -11,7 +11,9 @@ const GuildSummary = ({
   winning,
   ...props
 }: GuildSummaryProps): JSX.Element => {
-  const { t } = useTranslation('war')
+  const {
+    translations: { war },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
@@ -19,13 +21,13 @@ const GuildSummary = ({
         {guildName}
         <S.Link target="_blank" rel="noreferrer noopener" href={href}>
           <S.ExternalIcon />
-          {t('GuildSummary.linkText')}
+          {war.GuildSummary.linkText}
         </S.Link>
       </S.GuildName>
       <S.DisplayNumber winning={winning}>
         {displayValue}
         {!!diffText && (
-          <S.Diff title={`${diffText} ${t('GuildSummary.diffTitleSuffix')}`}>
+          <S.Diff title={`${diffText} ${war.GuildSummary.diffTitleSuffix}`}>
             {diffText}
           </S.Diff>
         )}
