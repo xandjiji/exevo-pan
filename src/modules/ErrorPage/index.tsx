@@ -1,10 +1,12 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import ErrorState from './ErrorState'
 
 const ErrorPage = (): JSX.Element => {
-  const { t } = useTranslation('404')
+  const {
+    translations: { error },
+  } = useTranslations()
 
-  return <ErrorState title="404" paragraphs={[t('P1'), t('P2')]} />
+  return <ErrorState title="404" paragraphs={[error.P1, error.P2]} />
 }
 
 export default ErrorPage
