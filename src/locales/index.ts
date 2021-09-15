@@ -1,6 +1,6 @@
-import errorEN from './en/404'
-import errorES from './es/404'
-import errorPT from './pt/404'
+import errorEN from './en/error'
+import errorES from './es/error'
+import errorPT from './pt/error'
 
 import aboutEN from './en/about'
 import aboutES from './es/about'
