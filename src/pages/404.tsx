@@ -1,4 +1,3 @@
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import ErrorPage from 'modules/ErrorPage'
