@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { useState } from 'react'
 import { getFavArray, saveToLocalStorage } from 'utils'
 import { localStorageKeys } from 'Constants'
@@ -10,7 +10,9 @@ const FavButton = ({
   characterObject,
   ...props
 }: FavButtonProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   const [active, setActive] = useState<boolean>(() =>
     isIdFavorited(characterObject.id),
@@ -38,12 +40,8 @@ const FavButton = ({
     saveToLocalStorage(localStorageKeys.FAV_CHARACTER_DATA, favArray)
   }
 
-  const isFavLabel = `${t('CharacterCard.favButton.remove')} ${
-    characterObject.nickname
-  } ${t('CharacterCard.favButton.fromFav')}`
-  const isntFavLabel = `${t('CharacterCard.favButton.add')} ${
-    characterObject.nickname
-  } ${t('CharacterCard.favButton.toFav')}`
+  const isFavLabel = `${homepage.CharacterCard.favButton.remove} ${characterObject.nickname} ${homepage.CharacterCard.favButton.fromFav}`
+  const isntFavLabel = `${homepage.CharacterCard.favButton.add} ${characterObject.nickname} ${homepage.CharacterCard.favButton.toFav}`
 
   return (
     <S.FavButton

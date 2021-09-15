@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import * as S from '../styles'
 import * as Skeletons from './styles'
@@ -6,7 +6,9 @@ import * as Skeletons from './styles'
 const CardSkeleton = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
@@ -39,11 +41,11 @@ const CardSkeleton = ({
             <Skeletons.Text style={{ width: '70%' }} />
           </Skeletons.Flex>
         </S.LabeledTextBox>
-        <S.LabeledTextBox labelText={t('CharacterGrid.AuctionStatus')}>
+        <S.LabeledTextBox labelText={homepage.CharacterGrid.AuctionStatus}>
           <Skeletons.Text style={{ width: '65%' }} />
         </S.LabeledTextBox>
 
-        <S.LabeledTextBox labelText={t('CharacterGrid.BidStatus')}>
+        <S.LabeledTextBox labelText={homepage.CharacterGrid.BidStatus}>
           <Skeletons.Flex>
             <Skeletons.Circle
               style={{ width: 12, height: 12, marginRight: 4 }}

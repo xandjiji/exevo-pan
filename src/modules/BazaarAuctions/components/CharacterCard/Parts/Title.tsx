@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import styled from 'styled-components'
 import { Clickable } from 'styles'
 import ExternalIconSvg from 'assets/svgs/external.svg'
@@ -33,7 +33,9 @@ const Title = ({
   characterId,
   ...props
 }: TitleProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   return (
     <Nickname {...props}>
@@ -44,7 +46,7 @@ const Title = ({
         rel="noreferrer noopener"
       >
         <ExternalIcon />
-        {t('CharacterCard.linkLabel')}
+        {homepage.CharacterCard.linkLabel}
       </a>
     </Nickname>
   )

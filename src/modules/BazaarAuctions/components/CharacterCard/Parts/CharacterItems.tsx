@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import styled from 'styled-components'
 import { v4 as uuidv4 } from 'uuid'
 import { SpritePortrait } from 'components/Atoms'
@@ -26,14 +26,16 @@ const CharacterItems = ({
   items,
   ...props
 }: CharacterItemsProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   return (
     <ItemWrapper {...props}>
       {items.map((item) => (
         <SpritePortrait
           key={uuidv4()}
-          alt={t('CharacterCard.featuredItem')}
+          alt={homepage.CharacterCard.featuredItem}
           src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
           style={{ width: 32, height: 32 }}
         />
