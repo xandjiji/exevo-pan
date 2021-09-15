@@ -85,5 +85,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
     },
     warData: await ManageDataClient.fetchWarStatisticsData(),
   },
-  revalidate: 60,
+  revalidate: 300,
 })
