@@ -1,9 +1,9 @@
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/LibertabraWar'
 import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes } from 'Constants'
 import { common, war } from 'locales'
@@ -15,25 +15,37 @@ export default function LibertabraWar({
 }: {
   warData: WarStatistics
 }): JSX.Element {
-  const { t } = useTranslation('war')
+  const { translations } = useTranslations()
 
   return (
     <div>
       <Head>
-        <title>{t('Meta.Overall.title')}</title>
-        <meta name="title" content={t('Meta.Overall.title')} />
-        <meta property="og:site_name" content={t('Meta.Overall.title')} />
-        <meta property="og:title" content={t('Meta.Overall.title')} />
-        <meta property="twitter:title" content={t('Meta.Overall.title')} />
+        <title>{translations.war.Meta.Overall.title}</title>
+        <meta name="title" content={translations.war.Meta.Overall.title} />
+        <meta
+          property="og:site_name"
+          content={translations.war.Meta.Overall.title}
+        />
+        <meta
+          property="og:title"
+          content={translations.war.Meta.Overall.title}
+        />
+        <meta
+          property="twitter:title"
+          content={translations.war.Meta.Overall.title}
+        />
 
-        <meta name="description" content={t('Meta.Overall.description')} />
+        <meta
+          name="description"
+          content={translations.war.Meta.Overall.description}
+        />
         <meta
           property="twitter:description"
-          content={t('Meta.Overall.description')}
+          content={translations.war.Meta.Overall.description}
         />
         <meta
           property="og:description"
-          content={t('Meta.Overall.description')}
+          content={translations.war.Meta.Overall.description}
         />
         <meta property="og:type" content="website" />
 

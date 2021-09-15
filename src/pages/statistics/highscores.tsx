@@ -1,9 +1,9 @@
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
 import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes } from 'Constants'
 import { common, statistics } from 'locales'
@@ -15,25 +15,40 @@ export default function Highscores({
 }: {
   statisticsData: StatisticsData
 }): JSX.Element {
-  const { t } = useTranslation('statistics')
+  const { translations } = useTranslations()
 
   return (
     <div>
       <Head>
-        <title>{t('Meta.Highscores.title')}</title>
-        <meta name="title" content={t('Meta.Highscores.title')} />
-        <meta property="og:site_name" content={t('Meta.Highscores.title')} />
-        <meta property="og:title" content={t('Meta.Highscores.title')} />
-        <meta property="twitter:title" content={t('Meta.Highscores.title')} />
+        <title>{translations.statistics.Meta.Highscores.title}</title>
+        <meta
+          name="title"
+          content={translations.statistics.Meta.Highscores.title}
+        />
+        <meta
+          property="og:site_name"
+          content={translations.statistics.Meta.Highscores.title}
+        />
+        <meta
+          property="og:title"
+          content={translations.statistics.Meta.Highscores.title}
+        />
+        <meta
+          property="twitter:title"
+          content={translations.statistics.Meta.Highscores.title}
+        />
 
-        <meta name="description" content={t('Meta.Highscores.description')} />
+        <meta
+          name="description"
+          content={translations.statistics.Meta.Highscores.description}
+        />
         <meta
           property="twitter:description"
-          content={t('Meta.Highscores.description')}
+          content={translations.statistics.Meta.Highscores.description}
         />
         <meta
           property="og:description"
-          content={t('Meta.Highscores.description')}
+          content={translations.statistics.Meta.Highscores.description}
         />
         <meta property="og:type" content="website" />
 
