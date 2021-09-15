@@ -1,4 +1,3 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
@@ -7,6 +6,7 @@ import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
 import { buildUrl } from 'utils'
 import { routes } from 'Constants'
+import { common, statistics } from 'locales'
 
 const pageUrl = buildUrl(routes.HIGHSCORES)
 
@@ -70,10 +70,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, [
-        'common',
-        'statistics',
-      ])),
+      translations: {
+        common: common[locale as RegisteredLocale],
+        statistics: statistics[locale as RegisteredLocale],
+      },
       statisticsData,
     },
     revalidate: 3600,

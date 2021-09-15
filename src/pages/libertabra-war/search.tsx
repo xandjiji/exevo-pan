@@ -1,4 +1,3 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
@@ -6,6 +5,7 @@ import { Header, SearchGrid } from 'modules/LibertabraWar'
 import { GetStaticProps } from 'next'
 import { buildUrl } from 'utils'
 import { routes, endpoints, paths } from 'Constants'
+import { common, war } from 'locales'
 
 const pageUrl = buildUrl(routes.LIBERTABRA_WAR_SEARCH)
 
@@ -75,6 +75,9 @@ export default function LibertabraWar(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['common', 'war'])),
+    translations: {
+      common: common[locale as RegisteredLocale],
+      war: war[locale as RegisteredLocale],
+    },
   },
 })

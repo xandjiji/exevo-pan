@@ -88,8 +88,8 @@ export default function Home(): JSX.Element {
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
-      common: common[locale as keyof typeof common] ?? common.en,
-      homepage: homepage[locale as keyof typeof homepage] ?? homepage.en,
+      common: common[locale as RegisteredLocale],
+      homepage: homepage[locale as RegisteredLocale],
     },
   },
 })

@@ -1,4 +1,3 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
@@ -6,6 +5,7 @@ import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
 import { GetStaticProps } from 'next'
 import { buildUrl } from 'utils'
 import { routes } from 'Constants'
+import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
 
@@ -53,10 +53,10 @@ export default function BazaarHistory(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, [
-      'common',
-      'homepage',
-      'bazaar-history',
-    ])),
+    translations: {
+      common: common[locale as RegisteredLocale],
+      homepage: homepage[locale as RegisteredLocale],
+      bazaarHistory: bazaarHistory[locale as RegisteredLocale],
+    },
   },
 })

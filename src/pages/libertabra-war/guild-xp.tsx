@@ -1,4 +1,3 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
@@ -7,6 +6,7 @@ import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
 import { buildUrl } from 'utils'
 import { routes } from 'Constants'
+import { common, war } from 'locales'
 
 const pageUrl = buildUrl(routes.LIBERTABRA_WAR_GUILD_XP)
 
@@ -67,7 +67,10 @@ export default function LibertabraWar({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['common', 'war'])),
+    translations: {
+      common: common[locale as RegisteredLocale],
+      war: war[locale as RegisteredLocale],
+    },
     warData: await ManageDataClient.fetchWarStatisticsData(),
   },
   revalidate: 60,

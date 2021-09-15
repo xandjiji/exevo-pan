@@ -1,9 +1,9 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
 import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import ErrorPage from 'modules/ErrorPage'
 import { GetStaticProps } from 'next'
+import { common, error } from 'locales'
 
 export default function Custom404(): JSX.Element {
   const { t } = useTranslation('404')
@@ -32,6 +32,9 @@ export default function Custom404(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['common', '404'])),
+    translations: {
+      common: common[locale as RegisteredLocale],
+      error: error[locale as RegisteredLocale],
+    },
   },
 })

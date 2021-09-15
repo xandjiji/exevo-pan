@@ -68,8 +68,8 @@ export default function LibertabraWar({
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
-      common: common[locale as keyof typeof common] ?? common.en,
-      war: war[locale as keyof typeof war] ?? war.en,
+      common: common[locale as RegisteredLocale],
+      war: war[locale as RegisteredLocale],
     },
     warData: await ManageDataClient.fetchWarStatisticsData(),
   },
