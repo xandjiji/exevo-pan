@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import Chart from '../Chart'
 import PieChart from '../PieChart'
@@ -10,33 +10,35 @@ const OverallGrid = ({
   statisticsData,
   ...props
 }: OverallGridProps): JSX.Element => {
-  const { t } = useTranslation('statistics')
+  const {
+    translations: { statistics },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
-      <S.PageTitle>{t('OverallGrid.title')}</S.PageTitle>
+      <S.PageTitle>{statistics.OverallGrid.title}</S.PageTitle>
       <S.ChartWrapper>
         <Chart
-          totalLabel={t('OverallGrid.Chart1.totalLabel')}
-          yesterdayLabel={t('OverallGrid.Chart1.yesterdayLabel')}
-          tooltipLabel={t('OverallGrid.Chart1.tooltipLabel')}
+          totalLabel={statistics.OverallGrid.Chart1.totalLabel}
+          yesterdayLabel={statistics.OverallGrid.Chart1.yesterdayLabel}
+          tooltipLabel={statistics.OverallGrid.Chart1.tooltipLabel}
           chartData={statisticsData.totalTibiaCoins}
         />
         <Chart
-          totalLabel={t('OverallGrid.Chart2.totalLabel')}
-          yesterdayLabel={t('OverallGrid.Chart2.yesterdayLabel')}
-          tooltipLabel={t('OverallGrid.Chart2.tooltipLabel')}
+          totalLabel={statistics.OverallGrid.Chart2.totalLabel}
+          yesterdayLabel={statistics.OverallGrid.Chart2.yesterdayLabel}
+          tooltipLabel={statistics.OverallGrid.Chart2.tooltipLabel}
           chartData={statisticsData.totalRevenue}
         />
       </S.ChartWrapper>
       <S.ItemWrapper>
         <PercentageCard
-          title={t('OverallGrid.PercentageCard1.title')}
+          title={statistics.OverallGrid.PercentageCard1.title}
           /* @ ToDo: change this assertion after backend refactor */
           percentage={statisticsData.successRate as unknown as number}
         />
         <PieChart
-          title={t('OverallGrid.PieChart1.title')}
+          title={statistics.OverallGrid.PieChart1.title}
           pieDataSet={statisticsData.vocationPercentage}
         />
       </S.ItemWrapper>

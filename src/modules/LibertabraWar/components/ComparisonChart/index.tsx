@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useCallback } from 'react'
 import { useTheme } from 'styled-components'
 import { Line } from 'react-chartjs-2'
@@ -16,7 +16,9 @@ const ComparisonChart = ({
   dateLabelType,
   ...props
 }: ComparisonChartProps): JSX.Element => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   const { colors } = useTheme()
 
@@ -36,14 +38,14 @@ const ComparisonChart = ({
           const month = currentDate.getMonth() + 1
           const weekday = currentDate.getDay()
 
-          return `${day}/${month}, ${t(`Weekdays.${[weekday]}`)}`
+          return `${day}/${month}, ${common.Weekdays[weekday]}`
         }
 
         default:
           return currentDate.toLocaleString()
       }
     },
-    [t],
+    [common],
   )
 
   const options = useMemo(

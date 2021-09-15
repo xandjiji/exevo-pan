@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import {
   createContext,
   useContext,
@@ -62,7 +62,9 @@ export const DatabaseProvider = ({
 }: {
   children: React.ReactNode
 }): JSX.Element => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   const [
     { characterData, serverData, rareItemData, historyData, warGuildData },
@@ -193,7 +195,7 @@ export const DatabaseProvider = ({
             <DatabaseDispatchContext.Provider value={{ dispatch }}>
               {loading && (
                 <LoadingAlert>
-                  {t('UpdatingDataText')} {loadedPercentage}
+                  {common.UpdatingDataText} {loadedPercentage}
                 </LoadingAlert>
               )}
               {children}

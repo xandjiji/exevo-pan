@@ -1,34 +1,46 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, SearchGrid } from 'modules/LibertabraWar'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes, endpoints, paths } from 'Constants'
+import { common, war } from 'locales'
 
 const pageUrl = buildUrl(routes.LIBERTABRA_WAR_SEARCH)
 
 export default function LibertabraWar(): JSX.Element {
-  const { t } = useTranslation('war')
+  const { translations } = useTranslations()
 
   return (
     <div>
       <Head>
-        <title>{t('Meta.Search.title')}</title>
-        <meta name="title" content={t('Meta.Search.title')} />
-        <meta property="og:site_name" content={t('Meta.Search.title')} />
-        <meta property="og:title" content={t('Meta.Search.title')} />
-        <meta property="twitter:title" content={t('Meta.Search.title')} />
+        <title>{translations.war.Meta.Search.title}</title>
+        <meta name="title" content={translations.war.Meta.Search.title} />
+        <meta
+          property="og:site_name"
+          content={translations.war.Meta.Search.title}
+        />
+        <meta
+          property="og:title"
+          content={translations.war.Meta.Search.title}
+        />
+        <meta
+          property="twitter:title"
+          content={translations.war.Meta.Search.title}
+        />
 
-        <meta name="description" content={t('Meta.Search.description')} />
+        <meta
+          name="description"
+          content={translations.war.Meta.Search.description}
+        />
         <meta
           property="twitter:description"
-          content={t('Meta.Search.description')}
+          content={translations.war.Meta.Search.description}
         />
         <meta
           property="og:description"
-          content={t('Meta.Search.description')}
+          content={translations.war.Meta.Search.description}
         />
         <meta property="og:type" content="website" />
 
@@ -75,6 +87,9 @@ export default function LibertabraWar(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['common', 'war'])),
+    translations: {
+      common: common[locale as RegisteredLocale],
+      war: war[locale as RegisteredLocale],
+    },
   },
 })

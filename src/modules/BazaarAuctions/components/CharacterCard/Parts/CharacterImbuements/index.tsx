@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
 import * as S from './styles'
 import { CharacterImbuementsProps } from './types'
@@ -18,11 +18,13 @@ const CharacterImbuements = ({
   imbuements,
   ...props
 }: CharacterImbuementsProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   return imbuements.length ? (
     <Tooltip
-      aria-label={t('CharacterCard.imbuementsListLabel')}
+      aria-label={homepage.CharacterCard.imbuementsListLabel}
       content={imbuements.map((imbuement) => (
         <S.Imbuement
           key={imbuement}

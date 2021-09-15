@@ -1,12 +1,12 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
 import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes } from 'Constants'
+import { common, statistics } from 'locales'
 
 const pageUrl = buildUrl(routes.STATISTICS)
 
@@ -15,25 +15,40 @@ export default function Statistics({
 }: {
   statisticsData: StatisticsData
 }): JSX.Element {
-  const { t } = useTranslation('statistics')
+  const { translations } = useTranslations()
 
   return (
     <div>
       <Head>
-        <title>{t('Meta.Statistics.title')}</title>
-        <meta name="title" content={t('Meta.Statistics.title')} />
-        <meta property="og:site_name" content={t('Meta.Statistics.title')} />
-        <meta property="og:title" content={t('Meta.Statistics.title')} />
-        <meta property="twitter:title" content={t('Meta.Statistics.title')} />
+        <title>{translations.statistics.Meta.Statistics.title}</title>
+        <meta
+          name="title"
+          content={translations.statistics.Meta.Statistics.title}
+        />
+        <meta
+          property="og:site_name"
+          content={translations.statistics.Meta.Statistics.title}
+        />
+        <meta
+          property="og:title"
+          content={translations.statistics.Meta.Statistics.title}
+        />
+        <meta
+          property="twitter:title"
+          content={translations.statistics.Meta.Statistics.title}
+        />
 
-        <meta name="description" content={t('Meta.Statistics.description')} />
+        <meta
+          name="description"
+          content={translations.statistics.Meta.Statistics.description}
+        />
         <meta
           property="twitter:description"
-          content={t('Meta.Statistics.description')}
+          content={translations.statistics.Meta.Statistics.description}
         />
         <meta
           property="og:description"
-          content={t('Meta.Statistics.description')}
+          content={translations.statistics.Meta.Statistics.description}
         />
         <meta property="og:type" content="website" />
 
@@ -70,10 +85,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
-      ...(await serverSideTranslations(locale as string, [
-        'common',
-        'statistics',
-      ])),
+      translations: {
+        common: common[locale as RegisteredLocale],
+        statistics: statistics[locale as RegisteredLocale],
+      },
       statisticsData,
     },
     revalidate: 3600,

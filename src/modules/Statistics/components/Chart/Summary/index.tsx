@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { formatNumberWithCommas } from 'utils/formatNumberWithCommas'
 import * as S from './styles'
@@ -11,7 +11,9 @@ const Summary = ({
   positive = true,
   ...props
 }: SummaryProps): JSX.Element => {
-  const { t } = useTranslation('statistics')
+  const {
+    translations: { statistics },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
@@ -19,9 +21,11 @@ const Summary = ({
       <S.Value>{`${formatNumberWithCommas(value)} TC`}</S.Value>
       <S.Percentage positive={positive}>
         <S.TrendIcon
-          aria-label={t(
-            `Summary.${positive ? 'positiveTrendLabel' : 'negativeTrendLabel'}`,
-          )}
+          aria-label={
+            statistics.Summary[
+              positive ? 'positiveTrendLabel' : 'negativeTrendLabel'
+            ]
+          }
         />
         {`${percentage.toFixed(2)}%`}
       </S.Percentage>

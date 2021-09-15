@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { getLastArrayElement } from 'utils'
 import Scoreboard from './Scoreboard'
 import LastFrags from './LastFrags'
@@ -8,13 +8,13 @@ import * as S from './styles'
 import { OverallGridProps } from './types'
 
 const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
-  const { t } = useTranslation('war')
+  const { translations } = useTranslations()
 
   const { score, onlineCount, lastDeaths } = warData
 
   return (
     <S.Wrapper>
-      <S.PageTitle>{t('PageTitle')}</S.PageTitle>
+      <S.PageTitle>{translations.war.PageTitle}</S.PageTitle>
       <S.FirstRow>
         <Scoreboard
           guildA={{
@@ -31,7 +31,7 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
           }}
         />
         <ComparisonChart
-          title={t('OverallGrid.comparisonChartTitle')}
+          title={translations.war.OverallGrid.comparisonChartTitle}
           guildA={{
             name: 'Libertabra Pune',
             summaryValue: `${
@@ -46,23 +46,19 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
             } online`,
             dataArray: onlineToDataSnapshot(onlineCount.guildB),
           }}
-          tooltipSuffix={t('OverallGrid.comparisonChartSuffix')}
+          tooltipSuffix={translations.war.OverallGrid.comparisonChartSuffix}
           dateLabelType="Time"
         />
       </S.FirstRow>
 
       <S.SecondRow>
         <LastFrags
-          title={`${t('OverallGrid.recentDeathsTitle')} (${
-            lastDeaths.guildA.length
-          }) ⚰️`}
+          title={`${translations.war.OverallGrid.recentDeathsTitle} (${lastDeaths.guildA.length}) ⚰️`}
           subtitle="Libertabra Pune"
           fragsList={lastDeaths.guildA}
         />
         <LastFrags
-          title={`${t('OverallGrid.recentDeathsTitle')} (${
-            lastDeaths.guildB.length
-          }) ⚰️`}
+          title={`${translations.war.OverallGrid.recentDeathsTitle} (${lastDeaths.guildB.length}) ⚰️`}
           subtitle="Bones Alliance"
           fragsList={lastDeaths.guildB}
         />

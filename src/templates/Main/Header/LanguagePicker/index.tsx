@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo, useState, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { RadioButton } from 'components/Atoms'
@@ -8,13 +8,15 @@ import * as S from './styles'
 const SECONDS_IN_A_YEAR = 31536000
 
 const LanguagePicker = (): JSX.Element => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   const { locale, push, pathname } = useRouter()
 
   const [isVisible, setIsVisible] = useState(false)
 
-  const handleLocaleSelect = (selectedLocale: 'en' | 'es' | 'pt') => {
+  const handleLocaleSelect = (selectedLocale: RegisteredLocale) => {
     push(pathname, pathname, { locale: selectedLocale })
     setIsVisible(false)
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
@@ -29,7 +31,7 @@ const LanguagePicker = (): JSX.Element => {
   return (
     <S.Wrapper>
       <button
-        aria-label={t('PreferredLanguageLabel')}
+        aria-label={common.PreferredLanguageLabel}
         type="button"
         ref={wrapperRef as React.RefObject<HTMLButtonElement>}
         onClick={() => setIsVisible((prev) => !prev)}
@@ -66,7 +68,7 @@ const LanguagePicker = (): JSX.Element => {
         </RadioButton>
       </S.Picker>
       <S.Backdrop
-        aria-label={t('PopoverCloseLabel')}
+        aria-label={common.PopoverCloseLabel}
         aria-hidden={!isVisible}
         onClick={() => setIsVisible(false)}
       />

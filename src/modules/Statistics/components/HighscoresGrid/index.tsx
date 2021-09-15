@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo, useCallback } from 'react'
 import { formatNumberWithCommas } from 'utils'
 import List from '../List'
@@ -9,13 +9,15 @@ const HighscoresGrid = ({
   statisticsData,
   ...props
 }: HighscoresGridProps): JSX.Element => {
-  const { t } = useTranslation('statistics')
+  const {
+    translations: { statistics },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
-      <S.PageTitle>{t('HighscoresGrid.title')}</S.PageTitle>
+      <S.PageTitle>{statistics.HighscoresGrid.title}</S.PageTitle>
       <List
-        title={t('HighscoresGrid.top10BidTitle')}
+        title={statistics.HighscoresGrid.top10BidTitle}
         charactersList={statisticsData.top10Bid}
         displayedDataKey="currentBid"
         format={useCallback(

@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { Link, Switch } from 'components/Atoms/'
 import { useTheme } from 'contexts/useTheme'
@@ -19,7 +19,9 @@ const heading = {
 const Header = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   const { currentTheme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
@@ -31,16 +33,16 @@ const Header = ({
           <S.LogoWrapper>
             <S.H1>
               {heading[pathname]
-                ? t(`Header.h1.${heading[pathname]}`)
+                ? common.Header.h1[heading[pathname]]
                 : 'Exevo Pan'}
             </S.H1>
             <S.ExevoPanLogo
               unoptimized
               priority
-              aria-label={t('Header.logoLabel')}
+              aria-label={common.Header.logoLabel}
               alt={
                 heading[pathname]
-                  ? t(`Header.h1.${heading[pathname]}`)
+                  ? common.Header.h1[heading[pathname]]
                   : 'Exevo Pan'
               }
             />
@@ -51,7 +53,7 @@ const Header = ({
             <Link href={routes.HOME} exact>
               <S.A>
                 <S.MarketIcon />
-                <S.H2>{t('Header.nav.currentAuctions')}</S.H2>
+                <S.H2>{common.Header.nav.currentAuctions}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -59,7 +61,7 @@ const Header = ({
             <Link href={routes.BAZAAR_HISTORY}>
               <S.A>
                 <S.HistoryIcon />
-                <S.H2>{t('Header.nav.bazaarHistory')}</S.H2>
+                <S.H2>{common.Header.nav.bazaarHistory}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -67,7 +69,7 @@ const Header = ({
             <Link href={routes.STATISTICS}>
               <S.A>
                 <S.StatisticsIcon />
-                <S.H2>{t('Header.nav.statistics')}</S.H2>
+                <S.H2>{common.Header.nav.statistics}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -83,7 +85,7 @@ const Header = ({
             <Link href={routes.ABOUT}>
               <S.A>
                 <S.AboutIcon />
-                <S.H2>{t('Header.nav.about')}</S.H2>
+                <S.H2>{common.Header.nav.about}</S.H2>
               </S.A>
             </Link>
           </S.Li>
@@ -97,7 +99,7 @@ const Header = ({
             active={currentTheme === 'dark-theme'}
             onClick={toggleTheme}
             icon={<S.MoonIcon />}
-            aria-label={t('Header.themeSwitch')}
+            aria-label={common.Header.themeSwitch}
           />
         )}
         {/* <CtaButton /> */}

@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { Switch, RadioButton } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
@@ -20,7 +20,9 @@ const SortingDialog = ({
   setDescendingOrder,
   ...props
 }: SortingDialogProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   return (
     <Tooltip
@@ -31,9 +33,9 @@ const SortingDialog = ({
           <Switch
             active={descendingOrder}
             onClick={() => setDescendingOrder((prev) => !prev)}
-            aria-label={t('CharacterGrid.descendingSwitchLabel')}
+            aria-label={homepage.CharacterGrid.descendingSwitchLabel}
           >
-            {t('CharacterGrid.descending')}
+            {homepage.CharacterGrid.descending}
           </Switch>
           {sortModes.map((mode, index) => (
             <RadioButton
@@ -41,14 +43,14 @@ const SortingDialog = ({
               onClick={() => setSortMode(index)}
               active={sortMode === index}
             >
-              {t(`CharacterGrid.sortModes.${sortModesTranslationKey[mode]}`)}
+              {homepage.CharacterGrid.sortModes[sortModesTranslationKey[mode]]}
             </RadioButton>
           ))}
         </S.Dialog>
       }
     >
       <S.SortIcon
-        aria-label={t('CharacterGrid.sortingButtonLabel')}
+        aria-label={homepage.CharacterGrid.sortingButtonLabel}
         aria-haspopup="dialog"
       />
     </Tooltip>

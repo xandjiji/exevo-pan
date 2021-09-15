@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
 import { EmptyStateProps } from './types'
 
@@ -6,14 +6,16 @@ const EmptyState = ({
   buttonAction,
   ...props
 }: EmptyStateProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
-      <S.Text>{t('CharacterGrid.noAuctionFound')}</S.Text>
+      <S.Text>{homepage.CharacterGrid.noAuctionFound}</S.Text>
 
       <S.NotFoundWrapper>
-        <S.NotFound alt={t('CharacterGrid.notFoundAlt')} />
+        <S.NotFound alt={homepage.CharacterGrid.notFoundAlt} />
       </S.NotFoundWrapper>
       <S.Chip
         overrideStatus
@@ -21,7 +23,7 @@ const EmptyState = ({
         role="button"
         aria-checked={undefined}
       >
-        {t('CharacterGrid.changeFilters')}
+        {homepage.CharacterGrid.changeFilters}
       </S.Chip>
     </S.Wrapper>
   )

@@ -1,12 +1,12 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, Top10Grid } from 'modules/LibertabraWar'
 import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes } from 'Constants'
+import { common, war } from 'locales'
 
 const pageUrl = buildUrl(routes.LIBERTABRA_WAR_TOP_10)
 
@@ -15,23 +15,35 @@ export default function LibertabraWar({
 }: {
   warData: WarStatistics
 }): JSX.Element {
-  const { t } = useTranslation('war')
+  const { translations } = useTranslations()
 
   return (
     <div>
       <Head>
-        <title>{t('Meta.Top10.title')}</title>
-        <meta name="title" content={t('Meta.Top10.title')} />
-        <meta property="og:site_name" content={t('Meta.Top10.title')} />
-        <meta property="og:title" content={t('Meta.Top10.title')} />
-        <meta property="twitter:title" content={t('Meta.Top10.title')} />
+        <title>{translations.war.Meta.Top10.title}</title>
+        <meta name="title" content={translations.war.Meta.Top10.title} />
+        <meta
+          property="og:site_name"
+          content={translations.war.Meta.Top10.title}
+        />
+        <meta property="og:title" content={translations.war.Meta.Top10.title} />
+        <meta
+          property="twitter:title"
+          content={translations.war.Meta.Top10.title}
+        />
 
-        <meta name="description" content={t('Meta.Top10.description')} />
+        <meta
+          name="description"
+          content={translations.war.Meta.Top10.description}
+        />
         <meta
           property="twitter:description"
-          content={t('Meta.Top10.description')}
+          content={translations.war.Meta.Top10.description}
         />
-        <meta property="og:description" content={t('Meta.Top10.description')} />
+        <meta
+          property="og:description"
+          content={translations.war.Meta.Top10.description}
+        />
         <meta property="og:type" content="website" />
 
         <link rel="canonical" href={pageUrl} />
@@ -64,8 +76,11 @@ export default function LibertabraWar({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['common', 'war'])),
+    translations: {
+      common: common[locale as RegisteredLocale],
+      war: war[locale as RegisteredLocale],
+    },
     warData: await ManageDataClient.fetchWarStatisticsData(),
   },
-  revalidate: 60,
+  revalidate: 300,
 })

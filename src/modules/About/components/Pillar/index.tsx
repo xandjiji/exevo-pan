@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { useState, useEffect } from 'react'
 import { debounce } from 'utils'
 import { generateNavId } from './utils'
@@ -6,7 +6,9 @@ import * as S from './styles'
 import { PillarProps } from './types'
 
 const Pillar = ({ sections }: PillarProps): JSX.Element => {
-  const { t } = useTranslation('about')
+  const {
+    translations: { about },
+  } = useTranslations()
 
   const [highlightedId, setHighlightedId] = useState<string | undefined>()
 
@@ -56,7 +58,7 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
   return (
     <S.Aside>
       <S.Nav>
-        <S.Title>{t(`PillarTitle`)}</S.Title>
+        <S.Title>{about.PillarTitle}</S.Title>
         <S.Ul>
           {sections.map((sectionItem) => (
             <S.Li
@@ -69,7 +71,7 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
               }
             >
               <a href={`#${sectionItem.id}`}>
-                {t(`${sectionItem.title}.title`)}
+                {about[sectionItem.title].title}
               </a>
             </S.Li>
           ))}

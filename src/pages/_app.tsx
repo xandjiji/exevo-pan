@@ -1,8 +1,8 @@
-import { appWithTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ErrorBoundary from 'components/ErrorBoundary'
+import { TranslationsProvider } from 'contexts/useTranslation'
 import { ThemeProvider } from 'contexts/useTheme'
 import { DatabaseProvider } from 'contexts/useDatabase'
 import { GlobalStyles } from 'styles'
@@ -10,6 +10,7 @@ import { AppProps } from 'next/app'
 import { google } from 'Constants'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+  const { translations } = pageProps
   const router = useRouter()
 
   const handleRouteChange = (url: string) => {
@@ -30,15 +31,17 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
       <Head>
         <meta name="viewport" content="width=device-width" />
       </Head>
-      <ErrorBoundary>
-        <ThemeProvider>
-          <DatabaseProvider>
-            <Component {...pageProps} />
-            <GlobalStyles />
-          </DatabaseProvider>
-        </ThemeProvider>
-      </ErrorBoundary>
+      <TranslationsProvider value={{ translations }}>
+        <ErrorBoundary>
+          <ThemeProvider>
+            <DatabaseProvider>
+              <Component {...pageProps} />
+              <GlobalStyles />
+            </DatabaseProvider>
+          </ThemeProvider>
+        </ErrorBoundary>
+      </TranslationsProvider>
     </>
   )
 }
-export default appWithTranslation(MyApp)
+export default MyApp

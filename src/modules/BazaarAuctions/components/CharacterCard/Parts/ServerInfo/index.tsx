@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { LabeledTextBox } from 'components/Atoms'
 import TransferIcon from './TransferIcon'
 import * as S from './styles'
@@ -15,7 +15,9 @@ const ServerInfo = ({
   nickname,
   ...props
 }: ServerInfoProps): JSX.Element => {
-  const { t } = useTranslation('homepage')
+  const {
+    translations: { homepage },
+  } = useTranslations()
 
   return (
     <LabeledTextBox
@@ -23,7 +25,7 @@ const ServerInfo = ({
       warning={serverData.experimental}
       title={
         serverData.experimental
-          ? t('CharacterCard.experimentalServer')
+          ? homepage.CharacterCard.experimentalServer
           : undefined
       }
     >

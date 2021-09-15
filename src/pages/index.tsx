@@ -1,29 +1,44 @@
-import { serverSideTranslations } from 'next-i18next/serverSideTranslations'
-import { useTranslation } from 'next-i18next'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { endpoints, paths, routes } from 'Constants'
+import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
 export default function Home(): JSX.Element {
-  const { t } = useTranslation('homepage')
+  const { translations } = useTranslations()
 
   return (
     <div>
       <Head>
-        <title>{t('Meta.title')}</title>
-        <meta name="title" content={t('Meta.title')} />
-        <meta property="og:site_name" content={t('Meta.title')} />
-        <meta property="og:title" content={t('Meta.title')} />
-        <meta property="twitter:title" content={t('Meta.title')} />
+        <title>{translations.homepage.Meta.title}</title>
+        <meta name="title" content={translations.homepage.Meta.title} />
+        <meta
+          property="og:site_name"
+          content={translations.homepage.Meta.title}
+        />
+        <meta property="og:title" content={translations.homepage.Meta.title} />
+        <meta
+          property="twitter:title"
+          content={translations.homepage.Meta.title}
+        />
 
-        <meta name="description" content={t('Meta.description')} />
-        <meta property="twitter:description" content={t('Meta.description')} />
-        <meta property="og:description" content={t('Meta.description')} />
+        <meta
+          name="description"
+          content={translations.homepage.Meta.description}
+        />
+        <meta
+          property="twitter:description"
+          content={translations.homepage.Meta.description}
+        />
+        <meta
+          property="og:description"
+          content={translations.homepage.Meta.description}
+        />
         <meta property="og:type" content="website" />
 
         <link rel="canonical" href={pageUrl} />
@@ -72,6 +87,9 @@ export default function Home(): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
-    ...(await serverSideTranslations(locale as string, ['common', 'homepage'])),
+    translations: {
+      common: common[locale as RegisteredLocale],
+      homepage: homepage[locale as RegisteredLocale],
+    },
   },
 })

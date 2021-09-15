@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
 import { DrawerHeadProps } from './types'
 
@@ -7,14 +7,16 @@ const DrawerHead = ({
   children,
   ...props
 }: DrawerHeadProps): JSX.Element => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   return (
     <S.DrawerHead {...props}>
       {onClose && (
         <S.BackButton
           tabIndex={0}
-          aria-label={t('CloseDrawerLabel')}
+          aria-label={common.CloseDrawerLabel}
           onClick={onClose}
         >
           <S.ArrowIcon />

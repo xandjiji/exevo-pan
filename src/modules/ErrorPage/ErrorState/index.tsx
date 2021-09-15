@@ -1,12 +1,13 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import Link from 'next/link'
 import { routes } from 'Constants'
 import * as S from './styles'
 import { ErrorStateProps } from './types'
 
 const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
-  const { t } = useTranslation('404')
-  const { t: tCommon } = useTranslation('common')
+  const {
+    translations: { error, common },
+  } = useTranslations()
 
   return (
     <S.Wrapper>
@@ -14,7 +15,7 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
         <S.Title>{title}</S.Title>
       </S.Top>
       <S.Bottom>
-        <S.ErrorIcon role="alert" aria-label={t('ErrorLabel')} />
+        <S.ErrorIcon role="alert" aria-label={error.ErrorLabel} />
         {paragraphs?.map((p) => (
           <S.Paragraph key={p}>{p}</S.Paragraph>
         ))}
@@ -23,27 +24,27 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
           <S.Ul>
             <S.Li>
               <Link href={routes.HOME}>
-                <S.A>{tCommon('Header.nav.currentAuctions')}</S.A>
+                <S.A>{common.Header.nav.currentAuctions}</S.A>
               </Link>
             </S.Li>
             <S.Li>
               <Link href={routes.BAZAAR_HISTORY}>
-                <S.A>{tCommon('Header.nav.bazaarHistory')}</S.A>
+                <S.A>{common.Header.nav.bazaarHistory}</S.A>
               </Link>
             </S.Li>
             <S.Li>
               <Link href={routes.LIBERTABRA_WAR}>
-                <S.A>{tCommon('Header.nav.war')}</S.A>
+                <S.A>{common.Header.nav.war}</S.A>
               </Link>
             </S.Li>
             <S.Li>
               <Link href={routes.STATISTICS}>
-                <S.A>{tCommon('Header.nav.statistics')}</S.A>
+                <S.A>{common.Header.nav.statistics}</S.A>
               </Link>
             </S.Li>
             <S.Li>
               <Link href={routes.ABOUT}>
-                <S.A>{tCommon('Header.nav.about')}</S.A>
+                <S.A>{common.Header.nav.about}</S.A>
               </Link>
             </S.Li>
           </S.Ul>

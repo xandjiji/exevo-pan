@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
 import { CopyToClipboard } from './utils'
 import { SectionProps } from './types'
@@ -9,14 +9,16 @@ const Section = ({
   children,
   ...props
 }: SectionProps): JSX.Element => {
-  const { t } = useTranslation('about')
+  const {
+    translations: { about },
+  } = useTranslations()
 
   return (
     <S.Section id={id} {...props}>
       <S.Title>
-        <a href={`#${id}`}>{t(`${title}.title`)}</a>
+        <a href={`#${id}`}>{about[title].title}</a>
         <S.AnchorIcon
-          aria-label={t('AnchorIconLabel')}
+          aria-label={about.AnchorIconLabel}
           onClick={() => CopyToClipboard(id)}
         />
       </S.Title>

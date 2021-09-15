@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { useState, useMemo, useRef, useEffect } from 'react'
 import { Table } from 'components/Atoms'
 import { useOnScreen } from 'hooks'
@@ -10,7 +10,9 @@ import { LastFragsProps } from './types'
 const PAGE_SIZE = 20
 
 const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
-  const { t } = useTranslation('war')
+  const {
+    translations: { war },
+  } = useTranslations()
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const maxIndex = Math.ceil(fragsList.length / PAGE_SIZE) - 1
@@ -34,12 +36,12 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
           <Table.Head>
             <Table.Row>
               <Table.HeadColumn>
-                {t('OverallGrid.LastFrags.killedHeadColumn')}
+                {war.OverallGrid.LastFrags.killedHeadColumn}
               </Table.HeadColumn>
               <Table.HeadColumn
                 highlighted
                 desc
-                title={t('OverallGrid.LastFrags.characterHeadColumnTitle')}
+                title={war.OverallGrid.LastFrags.characterHeadColumnTitle}
               >
                 Character
               </Table.HeadColumn>
@@ -49,9 +51,9 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
           <Table.Body>
             {currentList.map((frag) => (
               <Table.Row key={`${frag.timeStamp}-${frag.nickname}`}>
-                <Table.Column>{`${getTimeDiff(frag.timeStamp)} ${t(
-                  'OverallGrid.LastFrags.timeDiffSuffix',
-                )}`}</Table.Column>
+                <Table.Column>{`${getTimeDiff(frag.timeStamp)} ${
+                  war.OverallGrid.LastFrags.timeDiffSuffix
+                }`}</Table.Column>
                 <CharacterInfoColumn
                   nickname={frag.nickname}
                   level={frag.level}
