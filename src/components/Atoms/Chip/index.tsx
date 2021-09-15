@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { useState, memo } from 'react'
 import { checkKeyboardTrigger } from 'utils'
 import { ChipProps } from './types'
@@ -11,7 +11,9 @@ const ChipComponent = ({
   overrideStatus,
   ...props
 }: ChipProps) => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   const [active, setActive] = useState<boolean>(false)
   const derivedActive = overrideStatus ?? active
@@ -43,7 +45,7 @@ const ChipComponent = ({
     >
       {children}
       {!!onClose && (
-        <S.CloseButton aria-label={t('RemoveItem')} onClick={onClose} />
+        <S.CloseButton aria-label={common.RemoveItem} onClick={onClose} />
       )}
     </S.Chip>
   )

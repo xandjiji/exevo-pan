@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import {
   useState,
   useEffect,
@@ -22,7 +22,9 @@ const SliderInput = ({
   value: propValue = min,
   ...props
 }: SliderInputProps): JSX.Element => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   const [value, setValue] = useState<number>(propValue)
   const [sliderInputValue, setSliderInputValue] = useState<string>(
@@ -139,7 +141,7 @@ const SliderInput = ({
         >
           <S.Cursor
             role="slider"
-            aria-label={t('ChangeValueLabel')}
+            aria-label={common.ChangeValueLabel}
             aria-valuenow={value}
             aria-valuemax={max}
             aria-valuemin={min}

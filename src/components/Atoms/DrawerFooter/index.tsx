@@ -1,4 +1,4 @@
-import { useTranslation } from 'next-i18next'
+import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { links } from 'Constants'
 import * as S from './styles'
@@ -6,7 +6,9 @@ import * as S from './styles'
 const DrawerFooter = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
-  const { t } = useTranslation('common')
+  const {
+    translations: { common },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
@@ -16,9 +18,9 @@ const DrawerFooter = ({
         rel="noreferrer noopener external"
       >
         <S.GithubIcon />
-        {t('RepoLinkText')}
+        {common.RepoLinkText}
       </S.RepositoryLink>
-      {t('MadeBy')}
+      {common.MadeBy}
       <S.ProfileLink
         href={links.GITHUB_PROFILE}
         target="_blank"
