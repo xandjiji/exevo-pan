@@ -118,14 +118,12 @@ describe('<CharacterGrid />', () => {
       <CharacterGrid characterList={[]} isLoading />,
     )
 
-    expect(screen.queryAllByText('CharacterGrid.BidStatus')).toHaveLength(10)
+    expect(screen.queryAllByText('Bid status')).toHaveLength(10)
 
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
 
-    expect(
-      screen.queryByText('CharacterGrid.BidStatus'),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
