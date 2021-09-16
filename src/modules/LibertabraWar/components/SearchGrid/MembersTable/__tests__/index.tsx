@@ -8,27 +8,16 @@ describe('<MembersTable />', () => {
   test('should display empty state', () => {
     renderWithProviders(<MembersTable memberList={mockGuildMembers} />)
 
-    userEvent.type(
-      screen.getByLabelText('SearchGrid.MembersTable.searchLabel'),
-      'asdasdsa',
-    )
-    expect(
-      screen.getByAltText('SearchGrid.MembersTable.EmptyState.alt'),
-    ).toBeInTheDocument()
+    userEvent.type(screen.getByLabelText('Search for nickname'), 'asdasdsa')
+    expect(screen.getByAltText('No character was found')).toBeInTheDocument()
   })
 
   test('should sort by level, kills and deaths (both ascending and descending)', () => {
     renderWithProviders(<MembersTable memberList={mockGuildMembers} />)
 
-    const levelElement = screen.getByLabelText(
-      'SearchGrid.MembersTable.levelSortLabel',
-    )
-    const killsElement = screen.getByLabelText(
-      'SearchGrid.MembersTable.killsSortLabel',
-    )
-    const deathsElement = screen.getByLabelText(
-      'SearchGrid.MembersTable.deathSortLabel',
-    )
+    const levelElement = screen.getByLabelText('Click to sort by Level')
+    const killsElement = screen.getByLabelText('Click to sort by Kills')
+    const deathsElement = screen.getByLabelText('Click to sort by Deaths')
 
     expect(levelElement).toHaveAttribute('aria-selected', 'true')
     expect(killsElement).toHaveAttribute('aria-selected', 'false')
@@ -37,7 +26,7 @@ describe('<MembersTable />', () => {
     userEvent.click(killsElement)
 
     screen
-      .getAllByTitle('SearchGrid.MembersTable.killsTitle')
+      .getAllByTitle('Total kills')
       .forEach((killCountElement, index, array) => {
         const nextKillCountElement = array[index + 1]
         if (nextKillCountElement) {
@@ -55,7 +44,7 @@ describe('<MembersTable />', () => {
     expect(deathsElement).toHaveAttribute('aria-selected', 'false')
 
     screen
-      .getAllByTitle('SearchGrid.MembersTable.killsTitle')
+      .getAllByTitle('Total kills')
       .forEach((killCountElement, index, array) => {
         const nextKillCountElement = array[index + 1]
         if (nextKillCountElement) {
@@ -77,7 +66,7 @@ describe('<MembersTable />', () => {
     expect(deathsElement).toHaveAttribute('aria-selected', 'true')
 
     screen
-      .getAllByTitle('SearchGrid.MembersTable.deathsTitle')
+      .getAllByTitle('Total death count')
       .forEach((deathCountElement, index, array) => {
         const nextDeathCountElement = array[index + 1]
         if (nextDeathCountElement) {
@@ -94,9 +83,7 @@ describe('<MembersTable />', () => {
       <MembersTable memberList={mockGuildMembers} />,
     )
 
-    const nicknameInput = screen.getByLabelText(
-      'SearchGrid.MembersTable.searchLabel',
-    )
+    const nicknameInput = screen.getByLabelText('Search for nickname')
     userEvent.type(nicknameInput, 'j')
 
     screen.getAllByRole('link').forEach((linkElement) => {

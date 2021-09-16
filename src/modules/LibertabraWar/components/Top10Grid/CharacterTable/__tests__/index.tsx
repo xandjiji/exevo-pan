@@ -12,21 +12,17 @@ describe('<CharacterTable />', () => {
       />,
     )
 
-    screen
-      .getAllByTitle('Top10Grid.CharacterTable.killsTitle')
-      .forEach((killElement, index) => {
-        expect(killElement).toHaveTextContent(
-          mockCharacterList[index].kills.toString(),
-        )
-      })
+    screen.getAllByTitle('Total kills').forEach((killElement, index) => {
+      expect(killElement).toHaveTextContent(
+        mockCharacterList[index].kills.toString(),
+      )
+    })
 
-    screen
-      .getAllByTitle('Top10Grid.CharacterTable.deathsTitle')
-      .forEach((deathElement, index) => {
-        expect(deathElement).toHaveTextContent(
-          mockCharacterList[index].deathCount.toString(),
-        )
-      })
+    screen.getAllByTitle('Total death count').forEach((deathElement, index) => {
+      expect(deathElement).toHaveTextContent(
+        mockCharacterList[index].deathCount.toString(),
+      )
+    })
 
     screen.getAllByRole('link').forEach((linkElement, index) => {
       expect(linkElement).toHaveTextContent(mockCharacterList[index].nickname)

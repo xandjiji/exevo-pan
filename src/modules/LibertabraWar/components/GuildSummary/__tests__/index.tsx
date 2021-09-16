@@ -20,13 +20,11 @@ describe('<GuildSummary />', () => {
 
     expect(screen.getByTitle('test title')).toBeInTheDocument()
     expect(screen.getByRole('heading')).toHaveTextContent('Libertabra Pune')
-    expect(linkElement).toHaveTextContent('GuildSummary.linkText')
+    expect(linkElement).toHaveTextContent('Go to guild page')
     expect(linkElement).toHaveAttribute('href', 'linkhref')
     expect(screen.getByText('main display value')).toBeInTheDocument()
     expect(screen.getByText('+38')).toBeInTheDocument()
-    expect(
-      screen.getByTitle('+38 GuildSummary.diffTitleSuffix'),
-    ).toBeInTheDocument()
+    expect(screen.getByTitle('+38 since last update')).toBeInTheDocument()
     expect(screen.getByText('label text'))
   })
 })
