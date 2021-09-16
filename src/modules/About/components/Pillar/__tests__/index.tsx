@@ -12,7 +12,7 @@ describe('<Pillar />', () => {
     )
 
     mockPillarSections.forEach((sectionItem) => {
-      const sectionElement = screen.getByText(`${sectionItem.title}.title`)
+      const sectionElement = screen.getByText(sectionItem.title)
 
       expect(sectionElement).toBeInTheDocument()
 
