@@ -10,7 +10,7 @@ describe('<Input />', () => {
     renderWithProviders(<Input allowClear aria-label="input" />)
 
     const inputElement = screen.getByLabelText('input')
-    const clearButton = screen.getByLabelText('ClearInputLabel')
+    const clearButton = screen.getByLabelText('Clear input')
 
     expect(clearButton).toBeDisabled()
     expect(clearButton).not.toBeVisible()
@@ -45,7 +45,7 @@ describe('<Input />', () => {
 
     const inputElement = screen.getByLabelText('input')
 
-    expect(screen.queryByLabelText('ClearInputLabel')).not.toBeInTheDocument()
+    expect(screen.queryByLabelText('Clear input')).not.toBeInTheDocument()
 
     userEvent.type(inputElement, 'text')
     expect(inputElement).toHaveValue('text')
@@ -122,7 +122,7 @@ describe('<Input />', () => {
     )
 
     const inputElement = screen.getByPlaceholderText('Search a nickname')
-    const clearButton = screen.getByLabelText('ClearInputLabel')
+    const clearButton = screen.getByLabelText('Clear input')
 
     expect(inputElement).toHaveValue('Eternal Oblivion')
     expect(clearButton).toBeEnabled()
