@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
-import { mockPillarSections } from './mock'
+import { mockPillarSections, mockTitles } from './mock'
 import Pillar from '..'
 
 describe('<Pillar />', () => {
@@ -11,8 +11,8 @@ describe('<Pillar />', () => {
       </main>,
     )
 
-    mockPillarSections.forEach((sectionItem) => {
-      const sectionElement = screen.getByText(sectionItem.title)
+    mockPillarSections.forEach((sectionItem, index) => {
+      const sectionElement = screen.getByText(mockTitles[index])
 
       expect(sectionElement).toBeInTheDocument()
 
