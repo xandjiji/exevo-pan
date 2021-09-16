@@ -176,7 +176,7 @@ describe('<FilterDrawer />', () => {
 
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(4)
 
-    userEvent.click(screen.getByText('FilterDrawer.resetFilters'))
+    userEvent.click(screen.getByText('Reset filters'))
 
     expect(nickInput).toHaveValue('')
     expect(knightChip).not.toBeChecked()
