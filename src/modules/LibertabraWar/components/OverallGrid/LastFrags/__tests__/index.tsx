@@ -12,6 +12,6 @@ describe('<LastFrags />', () => {
     expect(container.querySelectorAll('tbody tr')).toHaveLength(
       mockedFragsList.length < 40 ? mockedFragsList.length : 40,
     )
-    expect(screen.getByTitle('Sorted by Level')).toBeInTheDocument()
+    expect(screen.getByTitle('Sorted by level')).toBeInTheDocument()
   })
 })
