@@ -40,31 +40,27 @@ describe('<CharacterCard />', () => {
     expect(
       screen.getByText(
         character.transfer
-          ? 'CharacterCard.transferAvailable'
-          : 'CharacterCard.transferUnavailable',
+          ? 'Regular World Transfer available'
+          : 'Regular World Transfer NOT available',
       ),
     ).toBeInTheDocument()
     expect(
       screen.getByText(
         character.transfer
-          ? 'CharacterCard.transferAvailable'
-          : 'CharacterCard.transferUnavailable',
+          ? 'Regular World Transfer available'
+          : 'Regular World Transfer NOT available',
       ),
     ).toBeInTheDocument()
     expect(
       screen.getByText(character.serverData.pvpType.string),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(
-        character.hasBeenBidded
-          ? 'CharacterCard.bidLabelText.currentBid'
-          : 'CharacterCard.bidLabelText.minimumBid',
-      ),
+      screen.getByText(character.hasBeenBidded ? 'Current Bid' : 'Minimum Bid'),
     ).toBeInTheDocument()
     expect(
       screen.getByText(formatNumberWithCommas(character.currentBid)),
     ).toBeInTheDocument()
-    expect(screen.queryAllByAltText('CharacterCard.featuredItem')).toHaveLength(
+    expect(screen.queryAllByAltText('Featured item')).toHaveLength(
       character.items.length,
     )
     expect(
@@ -88,9 +84,7 @@ describe('<CharacterCard />', () => {
     renderWithProviders(<CharacterCard characterData={character} />)
     expect(
       screen.getByText(
-        character.hasBeenBidded
-          ? 'CharacterCard.bidLabelText.auctionSuccessful'
-          : 'CharacterCard.bidLabelText.auctionFailed',
+        character.hasBeenBidded ? 'Auction Successful' : 'Auction Failed',
       ),
     ).toBeInTheDocument()
 

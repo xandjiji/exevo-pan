@@ -17,7 +17,7 @@ describe('<Chip />', () => {
 
     expect(screen.getByTestId('testid')).toBeInTheDocument()
     expect(screen.getByText(/test/i)).toBeInTheDocument()
-    expect(screen.queryByLabelText(/RemoveItem/i)).not.toBeInTheDocument()
+    expect(screen.queryByLabelText(/remove item/i)).not.toBeInTheDocument()
     expect(screen.queryByRole('switch')).not.toBeInTheDocument()
   })
 
@@ -46,7 +46,7 @@ describe('<Chip />', () => {
   test('it triggers close handler', () => {
     renderWithProviders(<Chip onClose={mockedOnClose} />)
 
-    const closeButton = screen.getByLabelText(/RemoveItem/i)
+    const closeButton = screen.getByLabelText(/remove item/i)
     userEvent.click(closeButton)
     expect(closeButton).toBeInTheDocument()
     expect(mockedOnClose).toBeCalledTimes(1)
@@ -88,7 +88,7 @@ describe('<Chip />', () => {
 
     test('should trigger on close button keypress', () => {
       renderWithProviders(<Chip onClose={mockedOnClose} />)
-      const closeButton = screen.getByLabelText(/RemoveItem/i)
+      const closeButton = screen.getByLabelText(/remove item/i)
 
       userEvent.tab()
       expect(closeButton).toHaveFocus()

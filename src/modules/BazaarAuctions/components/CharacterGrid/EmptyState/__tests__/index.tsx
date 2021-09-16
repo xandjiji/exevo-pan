@@ -13,7 +13,7 @@ describe('<EmptyState />', () => {
   test('should render every element correctly', () => {
     renderWithProviders(<EmptyState buttonAction={mockButtonAction} />)
 
-    expect(screen.getByAltText('CharacterGrid.notFoundAlt')).toBeInTheDocument()
+    expect(screen.getByAltText('No character was found')).toBeInTheDocument()
     expect(screen.getByRole('button')).toBeInTheDocument()
   })
 

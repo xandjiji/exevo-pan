@@ -10,7 +10,7 @@ describe('<LabeledTextBox />', () => {
 
     expect(screen.getByText('children content')).toBeInTheDocument()
     expect(screen.getByText('test label')).toBeInTheDocument()
-    expect(screen.queryByTitle('WarningLabel')).not.toBeInTheDocument()
+    expect(screen.queryByTitle('Warning!')).not.toBeInTheDocument()
   })
 
   test('should render with children, labelText and warning', () => {
@@ -22,7 +22,7 @@ describe('<LabeledTextBox />', () => {
 
     expect(screen.getByText('children content')).toBeInTheDocument()
     expect(screen.getByText('test label')).toBeInTheDocument()
-    expect(screen.getByTitle('WarningLabel')).toBeInTheDocument()
+    expect(screen.getByTitle('Warning!')).toBeInTheDocument()
   })
 
   test('should render with NO children and NO labelText', () => {
@@ -30,6 +30,6 @@ describe('<LabeledTextBox />', () => {
 
     expect(screen.queryByText('children content')).not.toBeInTheDocument()
     expect(screen.queryByText('test label')).not.toBeInTheDocument()
-    expect(screen.queryByTitle('WarningLabel')).not.toBeInTheDocument()
+    expect(screen.queryByTitle('Warning!')).not.toBeInTheDocument()
   })
 })

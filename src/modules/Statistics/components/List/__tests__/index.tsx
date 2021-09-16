@@ -15,7 +15,7 @@ describe('<List />', () => {
     const [rankingPosition, nickname, value] =
       container.querySelectorAll('table thead tr th')
 
-    expect(rankingPosition).toHaveAttribute('aria-label', 'List.titleLabel')
+    expect(rankingPosition).toHaveAttribute('aria-label', 'Ranking position')
     expect(rankingPosition).toHaveTextContent('#')
 
     expect(nickname).toHaveTextContent('Nickname')

@@ -29,7 +29,7 @@ describe('<FavButton />', () => {
 
       expect(
         screen.getByLabelText(
-          `CharacterCard.favButton.remove ${mockedCharacterObject.nickname} CharacterCard.favButton.fromFav`,
+          `Remove ${mockedCharacterObject.nickname} from favorites`,
         ),
       ).toBeInTheDocument()
       expect(screen.getByRole('button')).toHaveAttribute('aria-pressed', 'true')
@@ -43,7 +43,7 @@ describe('<FavButton />', () => {
 
       expect(
         screen.getByLabelText(
-          `CharacterCard.favButton.add ${mockedCharacterObject.nickname} CharacterCard.favButton.toFav`,
+          `Add ${mockedCharacterObject.nickname} to favorites`,
         ),
       ).toBeInTheDocument()
       expect(screen.getByRole('button')).toHaveAttribute(
@@ -58,7 +58,7 @@ describe('<FavButton />', () => {
 
       expect(
         screen.getByLabelText(
-          `CharacterCard.favButton.add ${mockedCharacterObject.nickname} CharacterCard.favButton.toFav`,
+          `Add ${mockedCharacterObject.nickname} to favorites`,
         ),
       ).toBeInTheDocument()
       expect(screen.getByRole('button')).toHaveAttribute(

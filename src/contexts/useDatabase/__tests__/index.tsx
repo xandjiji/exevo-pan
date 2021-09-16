@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useRouter, NextRouter } from 'next/router'
-import { ThemeProvider } from 'contexts/useTheme'
+import { wrapWithProviders } from 'utils/test'
 import { ManageDataClient } from 'services'
 import { getFavArray } from 'utils'
 import { routes } from 'Constants'
@@ -29,11 +29,8 @@ const ComponentWrapper = ({
   children,
 }: {
   children: React.ReactNode
-}): React.ReactElement => (
-  <ThemeProvider>
-    <DatabaseProvider>{children}</DatabaseProvider>
-  </ThemeProvider>
-)
+}): React.ReactElement =>
+  wrapWithProviders(<DatabaseProvider>{children}</DatabaseProvider>)
 
 const initialDatabaseValue = {
   loading: false,
