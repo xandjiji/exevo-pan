@@ -9,6 +9,7 @@ export default {
       about:
         'About the Exevo Pan website, disclaimers and contact information.',
       war: 'Follow live data and statistics from Libertabra War!',
+      advertise: 'Highlight your own auction and get higher bids!',
     },
     logoLabel: 'Go to homepage',
     nav: {
@@ -17,6 +18,7 @@ export default {
       statistics: 'Statistics',
       war: 'Libertabra War',
       about: 'About',
+      advertise: 'Advertise',
     },
     themeSwitch: 'Toggle dark theme',
   },

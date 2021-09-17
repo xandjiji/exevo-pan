@@ -10,6 +10,7 @@ export default {
       about:
         'Acerca del sitio, declaraciones e información de contacto de Exevo Pan.',
       war: '¡Sigue las estadísticas en vivo de la guerra de Libertabra!',
+      advertise: '¡Destaque su propia subasta y obtenga ofertas más altas!',
     },
     logoLabel: 'Ir a la pagina principal',
     nav: {
@@ -18,6 +19,7 @@ export default {
       statistics: 'Estadísticas',
       war: 'Libertabra War',
       about: 'Sobre',
+      advertise: 'Anunciar',
     },
     themeSwitch: 'Habilitar tema nocturno',
   },

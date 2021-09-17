@@ -9,6 +9,7 @@ export default {
         'Top levels, maiores skills e personagens mais caros do Char Bazaar!',
       about: 'Sobre o site Exevo Pan, declarações e informações de contato.',
       war: 'Acompanhe estatísticas ao vivo da guerra de Libertabra!',
+      advertise: 'Destaque seu leilão e receba lances mais altos!',
     },
     logoLabel: 'Ir para a página inicial',
     nav: {
@@ -17,6 +18,7 @@ export default {
       statistics: 'Estatísticas',
       war: 'Libertabra War',
       about: 'Sobre',
+      advertise: 'Anunciar',
     },
     themeSwitch: 'Habilitar tema noturno',
   },
