@@ -114,7 +114,10 @@ export const DatabaseProvider = ({
       })
     } finally {
       setLoadedPercentage(null)
-      dispatchLoad({ type: 'FINISH_LOADING', paths: [currentPath] })
+      dispatchLoad({
+        type: 'FINISH_LOADING',
+        paths: [isHistory ? currentPath : routes.HOME, routes.ADVERTISE],
+      })
     }
   }, [])
 
@@ -142,9 +145,22 @@ export const DatabaseProvider = ({
   }, [])
 
   useEffect(() => {
-    if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
+    if (
+      pathname === routes.HOME ||
+      pathname === routes.BAZAAR_HISTORY ||
+      pathname === routes.ADVERTISE
+    ) {
       if (!navigated.includes(pathname)) {
-        dispatchLoad({ type: 'START_LOADING', paths: [pathname] })
+        const isHistory = pathname === routes.BAZAAR_HISTORY
+
+        if (isHistory) {
+          dispatchLoad({ type: 'START_LOADING', paths: [pathname] })
+        } else {
+          dispatchLoad({
+            type: 'START_LOADING',
+            paths: [routes.HOME, routes.ADVERTISE],
+          })
+        }
         fetchCharacterData(pathname)
       }
     }
