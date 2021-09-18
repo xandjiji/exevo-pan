@@ -71,4 +71,27 @@ export default {
   LoadingLabel: 'Loading',
   UpdatingDataText: 'Updating data...',
   PreferredLanguageLabel: 'Select preferred language',
+  CharacterCard: {
+    linkLabel: 'Go to character page',
+    bidLabelText: {
+      auctionSuccessful: 'Auction Successful',
+      auctionFailed: 'Auction Failed',
+      currentBid: 'Current Bid',
+      minimumBid: 'Minimum Bid',
+    },
+    auctionEnd: 'Auction end',
+    featuredItem: 'Featured item',
+    experimentalServer: 'This is an experimental server!',
+    transferAvailable: 'Regular World Transfer available',
+    transferUnavailable: 'Regular World Transfer NOT available',
+    favButton: {
+      remove: 'Remove',
+      add: 'Add',
+      fromFav: 'from favorites',
+      toFav: 'to favorites',
+    },
+    imbuementsListLabel: 'Imbuements list',
+    AuctionStatus: 'Auction status',
+    BidStatus: 'Bid status',
+  },
 }

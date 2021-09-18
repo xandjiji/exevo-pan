@@ -3,27 +3,6 @@ export default {
     title: 'Exevo Pan - Leilões',
     description: 'Filtre e explore chares de Tibia no Char Bazaar oficial!',
   },
-  CharacterCard: {
-    linkLabel: 'Ir para a página do personagem',
-    bidLabelText: {
-      auctionSuccessful: 'Leilão sucedeu',
-      auctionFailed: 'Leilão falhou',
-      currentBid: 'Lance atual',
-      minimumBid: 'Lance mínimo',
-    },
-    auctionEnd: 'Fim do leilão',
-    featuredItem: 'Item destacado',
-    experimentalServer: 'Este é um servidor experimental!',
-    transferAvailable: 'Transferência comum de servidor disponível',
-    transferUnavailable: 'Transferência comum de servidor NÃO disponível',
-    favButton: {
-      remove: 'Remover',
-      add: 'Adicionar',
-      fromFav: 'dos favoritos',
-      toFav: 'aos favoritos',
-    },
-    imbuementsListLabel: 'Lista de imbuements',
-  },
   CharacterGrid: {
     filterButtonLabel: 'Abrir menu de filtros',
     sortingButtonLabel: 'Defina um critério de ordenação',
@@ -45,8 +24,6 @@ export default {
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
     changeFilters: 'Mudar filtros',
     notFoundAlt: 'Nenhum personagem foi encontrado',
-    AuctionStatus: 'Status do leilão',
-    BidStatus: 'Lance atual',
   },
   FilterDrawer: {
     title: 'Filtros',

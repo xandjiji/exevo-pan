@@ -71,4 +71,27 @@ export default {
   LoadingLabel: 'Carregando',
   UpdatingDataText: 'Atualizando dados...',
   PreferredLanguageLabel: 'Selecione seu idioma',
+  CharacterCard: {
+    linkLabel: 'Ir para a página do personagem',
+    bidLabelText: {
+      auctionSuccessful: 'Leilão sucedeu',
+      auctionFailed: 'Leilão falhou',
+      currentBid: 'Lance atual',
+      minimumBid: 'Lance mínimo',
+    },
+    auctionEnd: 'Fim do leilão',
+    featuredItem: 'Item destacado',
+    experimentalServer: 'Este é um servidor experimental!',
+    transferAvailable: 'Transferência comum de servidor disponível',
+    transferUnavailable: 'Transferência comum de servidor NÃO disponível',
+    favButton: {
+      remove: 'Remover',
+      add: 'Adicionar',
+      fromFav: 'dos favoritos',
+      toFav: 'aos favoritos',
+    },
+    imbuementsListLabel: 'Lista de imbuements',
+    AuctionStatus: 'Status do leilão',
+    BidStatus: 'Lance atual',
+  },
 }
