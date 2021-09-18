@@ -40,14 +40,6 @@ export const PageTitle = styled.h2`
   display: none;
 `
 
-export const Loading = styled(Spinner)`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
-`
-
 export const GridRow = styled.div`
   display: flex;
   gap: 16px;
