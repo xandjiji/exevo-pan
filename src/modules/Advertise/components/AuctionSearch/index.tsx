@@ -62,6 +62,7 @@ const AuctionSearch = (): JSX.Element => {
       </S.SearchHeader>
 
       <S.AuctionList id="auction-list">
+        {/* @ ToDo: skeletons */}
         {currentListPage.map((character) => (
           <AuctionItem
             nickname={character.nickname}
