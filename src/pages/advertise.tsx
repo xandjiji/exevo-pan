@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
+import { AuctionSearch } from 'modules/Advertise'
 import { GetStaticProps } from 'next'
 import { buildUrl } from 'utils'
 import { endpoints, paths, routes } from 'Constants'
@@ -68,7 +69,9 @@ export default function Advertise(): JSX.Element {
         />
       </Head>
 
-      <Main>teste</Main>
+      <Main>
+        <AuctionSearch />
+      </Main>
     </div>
   )
 }
