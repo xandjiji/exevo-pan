@@ -5,11 +5,12 @@ import {
 } from 'components/Atoms'
 import { MaterialCard } from 'styles'
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.section`
   ${MaterialCard}
 `
 
 export const SearchHeader = styled.div`
+  margin-bottom: 24px;
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
@@ -33,4 +34,10 @@ export const Input = styled(BaseInput)`
 export const Paginator = styled(BasePaginator)`
   margin-left: auto;
   width: fit-content;
+`
+
+export const AuctionList = styled.div`
+  > *:not(:last-child) {
+    margin-bottom: 8px;
+  }
 `

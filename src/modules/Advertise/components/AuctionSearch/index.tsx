@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import { useCharacters } from 'contexts/useDatabase'
+import AuctionItem from './AuctionItem'
 import * as S from './styles'
 
 const PAGE_SIZE = 10
@@ -28,7 +29,13 @@ const AuctionSearch = (): JSX.Element => {
     return characterData.filter((character) =>
       character.nickname.toLowerCase().includes(lowerCaseTerm),
     )
-  }, [nickname])
+  }, [characterData, nickname])
+
+  const currentListPage = useMemo(
+    () =>
+      auctionList.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
+    [auctionList, currentPage],
+  )
 
   return (
     <S.Wrapper>
@@ -45,8 +52,7 @@ const AuctionSearch = (): JSX.Element => {
           />
         </S.InputWrapper>
         <S.Paginator
-          /* @ ToDo: add aria-controls */
-          aria-controls="members-grid"
+          aria-controls="auction-list"
           pageSize={PAGE_SIZE}
           totalItems={auctionList.length}
           currentPage={currentPage}
@@ -54,6 +60,17 @@ const AuctionSearch = (): JSX.Element => {
           noItemsMessage="No auctions"
         />
       </S.SearchHeader>
+
+      <S.AuctionList id="auction-list">
+        {currentListPage.map((character) => (
+          <AuctionItem
+            nickname={character.nickname}
+            level={character.level}
+            vocationId={character.vocationId}
+            outfitId={character.outfitId}
+          />
+        ))}
+      </S.AuctionList>
     </S.Wrapper>
   )
 }
