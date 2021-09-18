@@ -23,7 +23,6 @@ const AuctionItem = ({
 }: AuctionItemProps): JSX.Element => (
   <S.Wrapper {...props}>
     <S.SpritePortrait
-      key={nickname}
       src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
       alt={nickname}
       title={nickname}
