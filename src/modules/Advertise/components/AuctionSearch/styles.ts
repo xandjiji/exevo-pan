@@ -3,10 +3,11 @@ import {
   Input as BaseInput,
   Paginator as BasePaginator,
 } from 'components/Atoms'
-import { MaterialCard } from 'styles'
+import { MaterialCard, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
+  height: fit-content;
 `
 
 export const SearchHeader = styled.div`
@@ -14,6 +15,10 @@ export const SearchHeader = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 16px;
+
+  @media (min-width: 768px) {
+    flex-wrap: unset;
+  }
 `
 
 export const InputWrapper = styled.div`
@@ -37,7 +42,15 @@ export const Paginator = styled(BasePaginator)`
 `
 
 export const AuctionList = styled.div`
-  > *:not(:last-child) {
+  max-height: 256px;
+  overflow: auto;
+  ${CustomScrollbar}
+
+  > * {
     margin-bottom: 8px;
+  }
+
+  @media (min-width: 768px) {
+    max-height: unset;
   }
 `

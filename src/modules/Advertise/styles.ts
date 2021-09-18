@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
 
-export const Wrapper = styled.article`
+export const Wrapper = styled.main`
   position: relative;
 
   ${InnerContainer}
   padding-top: 16px;
   padding-bottom: 16px;
 
-  max-height: calc(100% - 44px);
+  max-height: calc(100% - 60px);
   overflow: auto;
   ${CustomScrollbar}
 
@@ -33,6 +33,14 @@ export const Wrapper = styled.article`
 
   > * {
     margin-bottom: 16px;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+
+    > * {
+      width: calc(50% - 12px);
+    }
   }
 `
 

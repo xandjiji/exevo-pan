@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useRef } from 'react'
 import { useCharacters } from 'contexts/useDatabase'
 import AuctionItem from './AuctionItem'
 import * as S from './styles'
@@ -10,6 +10,8 @@ const AuctionSearch = (): JSX.Element => {
 
   const [nickname, setNickname] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
+
+  const listRef = useRef<HTMLDivElement>(null)
 
   const onInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,11 +33,13 @@ const AuctionSearch = (): JSX.Element => {
     )
   }, [characterData, nickname])
 
-  const currentListPage = useMemo(
-    () =>
-      auctionList.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE),
-    [auctionList, currentPage],
-  )
+  const currentListPage = useMemo(() => {
+    listRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
+    return auctionList.slice(
+      (currentPage - 1) * PAGE_SIZE,
+      currentPage * PAGE_SIZE,
+    )
+  }, [auctionList, currentPage])
 
   return (
     <S.Wrapper>
@@ -61,7 +65,7 @@ const AuctionSearch = (): JSX.Element => {
         />
       </S.SearchHeader>
 
-      <S.AuctionList id="auction-list">
+      <S.AuctionList id="auction-list" ref={listRef}>
         {/* @ ToDo: skeletons */}
         {currentListPage.map((character) => (
           <AuctionItem

@@ -27,6 +27,7 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 16px;
+  width: fit-content;
   cursor: pointer;
   ${Smooth}
 
