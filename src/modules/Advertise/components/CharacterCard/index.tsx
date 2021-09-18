@@ -1,16 +1,16 @@
-import CharacterCardComponent, { CardSkeleton } from 'components/CharacterCard'
 import { useSelectedCharacter } from '../../contexts/SelectedCharacter'
+import * as S from './styles'
 
 const CharacterCard = (): JSX.Element => {
   const { selectedCharacter } = useSelectedCharacter()
 
   return selectedCharacter ? (
-    <CharacterCardComponent
+    <S.CharacterCard
       key={selectedCharacter.id}
       characterData={selectedCharacter}
     />
   ) : (
-    <CardSkeleton />
+    <S.CardSkeleton />
   )
 }
 

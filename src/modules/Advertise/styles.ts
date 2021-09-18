@@ -7,8 +7,10 @@ export const Wrapper = styled.main`
   ${InnerContainer}
   padding-top: 16px;
   padding-bottom: 16px;
+  margin: 0 auto;
 
   max-height: calc(100% - 60px);
+  max-width: 500px;
   overflow: auto;
   ${CustomScrollbar}
 
@@ -37,8 +39,11 @@ export const Wrapper = styled.main`
 
   @media (min-width: 768px) {
     display: flex;
+    gap: 24px;
+    max-width: 1200px;
 
     > * {
+      height: fit-content;
       width: calc(50% - 12px);
     }
   }

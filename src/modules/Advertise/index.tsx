@@ -1,6 +1,6 @@
 import { useCharacters } from 'contexts/useDatabase'
 import { SelectedCharacterProvider } from './contexts/SelectedCharacter'
-import { AuctionSearch } from './components'
+import { AuctionSearch, CharacterCard } from './components'
 import * as S from './styles'
 
 const AdvertiseGrid = (): JSX.Element => {
@@ -11,6 +11,7 @@ const AdvertiseGrid = (): JSX.Element => {
       <SelectedCharacterProvider>
         {loading && <S.Loading />}
         <AuctionSearch />
+        <CharacterCard />
       </SelectedCharacterProvider>
     </S.Wrapper>
   )

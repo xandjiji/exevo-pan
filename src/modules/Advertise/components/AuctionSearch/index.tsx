@@ -69,6 +69,7 @@ const AuctionSearch = (): JSX.Element => {
 
       <S.AuctionList id="auction-list" ref={listRef}>
         {/* @ ToDo: skeletons */}
+        {/* @ ToDo: EmptyState */}
         {currentListPage.map((character) => (
           <AuctionItem
             key={character.id}

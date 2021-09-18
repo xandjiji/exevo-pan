@@ -7,7 +7,7 @@ import { MaterialCard, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
-  height: fit-content;
+  padding: 16px;
 `
 
 export const SearchHeader = styled.div`
