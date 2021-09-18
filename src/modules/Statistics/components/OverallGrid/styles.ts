@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
+import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
 
 export const Wrapper = styled.article`
   position: relative;
