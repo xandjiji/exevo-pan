@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo, useRef } from 'react'
 import { useCharacters } from 'contexts/useDatabase'
+import { useSelectedCharacter } from '../../contexts/SelectedCharacter'
 import AuctionItem from './AuctionItem'
 import * as S from './styles'
 
@@ -7,6 +8,7 @@ const PAGE_SIZE = 10
 
 const AuctionSearch = (): JSX.Element => {
   const { characterData } = useCharacters()
+  const { setCharacter } = useSelectedCharacter()
 
   const [nickname, setNickname] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
@@ -74,6 +76,7 @@ const AuctionSearch = (): JSX.Element => {
             level={character.level}
             vocationId={character.vocationId}
             outfitId={character.outfitId}
+            onClick={() => setCharacter(character)}
           />
         ))}
       </S.AuctionList>
