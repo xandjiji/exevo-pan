@@ -43,7 +43,9 @@ export const Paginator = styled(BasePaginator)`
 
 export const AuctionList = styled.div`
   max-height: 256px;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+
   ${CustomScrollbar}
 
   > * {

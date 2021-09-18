@@ -1,3 +1,4 @@
+import { useSelectedCharacter } from '../../../contexts/SelectedCharacter'
 import * as S from './styles'
 import { AuctionItemProps } from './types'
 
@@ -20,25 +21,33 @@ const AuctionItem = ({
   vocationId,
   outfitId,
   ...props
-}: AuctionItemProps): JSX.Element => (
-  <S.Wrapper {...props}>
-    <S.SpritePortrait
-      src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
-      alt={nickname}
-      title={nickname}
-    />
-    <div>
-      <S.Nickname>{nickname}</S.Nickname>
+}: AuctionItemProps): JSX.Element => {
+  const { selectedCharacter } = useSelectedCharacter()
 
-      <S.Info>
-        Level {level}
-        {' - '}
-        {level >= 20
-          ? vocationEnum[vocationId]
-          : vocationEnum[`1${vocationId}`]}
-      </S.Info>
-    </div>
-  </S.Wrapper>
-)
+  return (
+    <S.Wrapper
+      {...props}
+      aria-selected={selectedCharacter?.nickname === nickname}
+    >
+      <S.SpritePortrait
+        src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+        alt={nickname}
+        title={nickname}
+      />
+      <div>
+        <S.Nickname>{nickname}</S.Nickname>
+
+        <S.Info>
+          Level {level}
+          {' - '}
+          {level >= 20
+            ? vocationEnum[vocationId]
+            : vocationEnum[`1${vocationId}`]}
+        </S.Info>
+      </div>
+      <S.Arrow />
+    </S.Wrapper>
+  )
+}
 
 export default AuctionItem

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { SpritePortrait as BaseSpriteProtrait } from 'components/Atoms'
+import NextSvg from 'assets/svgs/next.svg'
 import { Smooth } from 'styles'
 
 export const SpritePortrait = styled(BaseSpriteProtrait)`
@@ -23,20 +24,47 @@ export const Info = styled.span`
   color: var(--onSurface);
 `
 
+export const Arrow = styled(NextSvg)`
+  margin-left: auto;
+  width: 32px;
+  fill: var(--onSurface);
+`
+
 export const Wrapper = styled.div`
+  position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
-  width: fit-content;
   cursor: pointer;
   ${Smooth}
 
   > *:first-child {
     width: 56px;
     height: 56px;
+    background-color: var(--primaryVariant);
+    ${Smooth}
   }
 
-  :hover {
-    transform: translateX(3px);
+  :hover,
+  &[aria-selected='true'] {
+    transform: translateX(6px);
+  }
+
+  &[aria-selected='true'] {
+    > *:first-child {
+      background-color: var(--primary);
+      filter: brightness(130%) saturate(80%);
+    }
+  }
+
+  &:not(:last-child) ::after {
+    content: '';
+    position: absolute;
+    top: calc(100% + 4px);
+    right: 8px;
+    width: calc(100% - 80px);
+    height: 1px;
+    background-color: var(--separator);
+    opacity: 0.3;
   }
 `
