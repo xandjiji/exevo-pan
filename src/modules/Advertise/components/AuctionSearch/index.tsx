@@ -69,7 +69,10 @@ const AuctionSearch = (): JSX.Element => {
       </S.SearchHeader>
 
       <S.AuctionList id="auction-list" ref={listRef}>
-        {loading && Array.from({ length: PAGE_SIZE }, () => <SkeletonItem />)}
+        {loading &&
+          Array.from({ length: PAGE_SIZE }, (_, index) => (
+            <SkeletonItem key={index} />
+          ))}
         {currentListPage.map((character) => (
           <AuctionItem
             key={character.id}
@@ -80,7 +83,7 @@ const AuctionSearch = (): JSX.Element => {
             onClick={() => setCharacter(character)}
           />
         ))}
-        {!loading && !currentListPage.length && <EmptyState />}
+        {!loading && nickname && !currentListPage.length && <EmptyState />}
       </S.AuctionList>
     </S.Wrapper>
   )
