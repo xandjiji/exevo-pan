@@ -1,4 +1,5 @@
 export { default as AuctionTimer } from './AuctionTimer'
+export { default as Button } from './Button'
 export { default as Chip } from './Chip'
 export { default as CtaButton } from './CtaButton'
 export { default as Drawer } from './Drawer'
