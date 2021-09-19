@@ -7,15 +7,22 @@ export const Wrapper = styled.main`
   ${InnerContainer}
   padding-top: 16px;
   padding-bottom: 16px;
-  margin: 0 auto;
 
   max-height: calc(100% - 60px);
-  max-width: 500px;
   overflow: auto;
   ${CustomScrollbar}
 
   background-color: var(--background);
   ${Smooth}
+
+  > * {
+    margin: 0 auto;
+    max-width: 500px;
+
+    &:last-child {
+      margin-bottom: 48px;
+    }
+  }
 
   &::before {
     content: '';
@@ -33,16 +40,13 @@ export const Wrapper = styled.main`
     pointer-events: none;
   }
 
-  > *:last-child {
-    margin-bottom: 48px;
-  }
-
   @media (min-width: 768px) {
     display: flex;
     gap: 24px;
-    max-width: 1200px;
+    justify-content: center;
 
     > * {
+      margin: unset;
       height: fit-content;
       width: calc(50% - 12px);
     }
