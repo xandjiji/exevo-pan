@@ -14,6 +14,7 @@ const AuctionSearch = (): JSX.Element => {
   const [nickname, setNickname] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
 
+  const loadState = useRef<'loading' | 'ready'>('loading')
   const listRef = useRef<HTMLDivElement>(null)
 
   const onInputChange = useCallback(
@@ -30,6 +31,9 @@ const AuctionSearch = (): JSX.Element => {
   )
 
   const auctionList = useMemo(() => {
+    if (loadState.current === 'loading' && characterData.length) {
+      loadState.current = 'ready'
+    }
     const lowerCaseTerm = nickname.toLowerCase()
     return characterData.filter((character) =>
       character.nickname.toLowerCase().includes(lowerCaseTerm),
@@ -69,7 +73,7 @@ const AuctionSearch = (): JSX.Element => {
       </S.SearchHeader>
 
       <S.AuctionList id="auction-list" ref={listRef}>
-        {loading &&
+        {loadState.current === 'loading' &&
           Array.from({ length: PAGE_SIZE }, (_, index) => (
             <SkeletonItem key={index} />
           ))}
