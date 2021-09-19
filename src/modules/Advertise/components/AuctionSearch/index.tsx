@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo, useRef } from 'react'
 import { useCharacters } from 'contexts/useDatabase'
 import { useSelectedCharacter } from '../../contexts/SelectedCharacter'
 import AuctionItem, { SkeletonItem } from './AuctionItem'
+import EmptyState from './EmptyState'
 import * as S from './styles'
 
 const PAGE_SIZE = 10
@@ -68,7 +69,6 @@ const AuctionSearch = (): JSX.Element => {
       </S.SearchHeader>
 
       <S.AuctionList id="auction-list" ref={listRef}>
-        {/* @ ToDo: EmptyState */}
         {loading && Array.from({ length: PAGE_SIZE }, () => <SkeletonItem />)}
         {currentListPage.map((character) => (
           <AuctionItem
@@ -80,6 +80,7 @@ const AuctionSearch = (): JSX.Element => {
             onClick={() => setCharacter(character)}
           />
         ))}
+        {!loading && !currentListPage.length && <EmptyState />}
       </S.AuctionList>
     </S.Wrapper>
   )
