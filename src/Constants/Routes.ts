@@ -1,7 +1,7 @@
 export const routes = {
   HOME: '/',
   BAZAAR_HISTORY: '/bazaar-history',
-  ADVERTISE: '/advertise',
+  ADVERTISE: '/highlight-auction',
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
   LIBERTABRA_WAR: '/libertabra-war',
