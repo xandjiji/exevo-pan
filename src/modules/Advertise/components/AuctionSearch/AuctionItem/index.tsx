@@ -51,3 +51,4 @@ const AuctionItem = ({
 }
 
 export default AuctionItem
+export { default as SkeletonItem } from './SkeletonItem'
