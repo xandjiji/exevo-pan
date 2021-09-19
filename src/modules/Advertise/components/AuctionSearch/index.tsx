@@ -69,7 +69,7 @@ const AuctionSearch = (): JSX.Element => {
 
       <S.AuctionList id="auction-list" ref={listRef}>
         {/* @ ToDo: EmptyState */}
-        {loading && Array.from({ length: 10 }, () => <SkeletonItem />)}
+        {loading && Array.from({ length: PAGE_SIZE }, () => <SkeletonItem />)}
         {currentListPage.map((character) => (
           <AuctionItem
             key={character.id}
