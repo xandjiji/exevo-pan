@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { CustomScrollbar, InnerContainer, Smooth, Spinner } from 'styles'
+import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
 
 export const Wrapper = styled.main`
   position: relative;
@@ -33,8 +33,8 @@ export const Wrapper = styled.main`
     pointer-events: none;
   }
 
-  > * {
-    margin-bottom: 16px;
+  > *:last-child {
+    margin-bottom: 48px;
   }
 
   @media (min-width: 768px) {
@@ -47,12 +47,4 @@ export const Wrapper = styled.main`
       width: calc(50% - 12px);
     }
   }
-`
-
-export const Loading = styled(Spinner)`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 1;
-  transform: translate(-50%, -50%);
 `
