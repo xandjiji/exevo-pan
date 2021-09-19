@@ -1,4 +1,5 @@
-export interface AuctionItemProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AuctionItemProps
+  extends React.HTMLAttributes<HTMLButtonElement> {
   nickname: string
   level: number
   vocationId: number

@@ -30,11 +30,13 @@ export const Arrow = styled(NextSvg)`
   fill: var(--onSurface);
 `
 
-export const Wrapper = styled.div`
+export const ButtonWrapper = styled.button`
   position: relative;
   display: flex;
   align-items: center;
   gap: 16px;
+  width: 100%;
+  text-align: left;
   cursor: pointer;
   ${Smooth}
 

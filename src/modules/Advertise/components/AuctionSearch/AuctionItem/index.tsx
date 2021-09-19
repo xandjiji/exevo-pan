@@ -25,8 +25,9 @@ const AuctionItem = ({
   const { selectedCharacter } = useSelectedCharacter()
 
   return (
-    <S.Wrapper
+    <S.ButtonWrapper
       {...props}
+      type="button"
       aria-selected={selectedCharacter?.nickname === nickname}
     >
       <S.SpritePortrait
@@ -46,7 +47,7 @@ const AuctionItem = ({
         </S.Info>
       </div>
       <S.Arrow />
-    </S.Wrapper>
+    </S.ButtonWrapper>
   )
 }
 
