@@ -1,13 +1,13 @@
 import { useState, useCallback, useMemo, useRef } from 'react'
 import { useCharacters } from 'contexts/useDatabase'
 import { useSelectedCharacter } from '../../contexts/SelectedCharacter'
-import AuctionItem from './AuctionItem'
+import AuctionItem, { SkeletonItem } from './AuctionItem'
 import * as S from './styles'
 
 const PAGE_SIZE = 10
 
 const AuctionSearch = (): JSX.Element => {
-  const { characterData } = useCharacters()
+  const { characterData, loading } = useCharacters()
   const { setCharacter } = useSelectedCharacter()
 
   const [nickname, setNickname] = useState('')
@@ -68,8 +68,8 @@ const AuctionSearch = (): JSX.Element => {
       </S.SearchHeader>
 
       <S.AuctionList id="auction-list" ref={listRef}>
-        {/* @ ToDo: skeletons */}
         {/* @ ToDo: EmptyState */}
+        {loading && Array.from({ length: 10 }, () => <SkeletonItem />)}
         {currentListPage.map((character) => (
           <AuctionItem
             key={character.id}
