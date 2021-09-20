@@ -40,6 +40,8 @@ const CharactersContext = createContext<CharactersContextValues>({
   loading: defaultDatabaseState.loading,
   characterData: defaultDatabaseState.characterData,
   historyData: defaultDatabaseState.historyData,
+  baseCharacterData: defaultDatabaseState.characterData,
+  baseHistoryData: defaultDatabaseState.historyData,
 })
 
 const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
@@ -67,7 +69,15 @@ export const DatabaseProvider = ({
   } = useTranslations()
 
   const [
-    { characterData, serverData, rareItemData, historyData, warGuildData },
+    {
+      characterData,
+      serverData,
+      rareItemData,
+      historyData,
+      warGuildData,
+      baseCharacterData,
+      baseHistoryData,
+    },
     dispatch,
   ] = useReducer(DatabaseReducer, {
     baseCharacterData: defaultDatabaseState.characterData,
@@ -204,7 +214,13 @@ export const DatabaseProvider = ({
       }}
     >
       <CharactersContext.Provider
-        value={{ loading, characterData, historyData }}
+        value={{
+          loading,
+          characterData,
+          historyData,
+          baseCharacterData,
+          baseHistoryData,
+        }}
       >
         <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
           <WarGuildDataContext.Provider value={{ warGuildData, loading }}>

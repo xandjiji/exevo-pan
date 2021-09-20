@@ -33,6 +33,8 @@ export interface CharactersContextValues {
   loading: boolean
   characterData: CharacterObject[]
   historyData: CharacterObject[]
+  baseCharacterData: CharacterObject[]
+  baseHistoryData: CharacterObject[]
 }
 
 export interface DrawerFieldsContextValues {
