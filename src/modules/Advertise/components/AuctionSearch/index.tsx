@@ -8,7 +8,7 @@ import * as S from './styles'
 const PAGE_SIZE = 10
 
 const AuctionSearch = (): JSX.Element => {
-  const { characterData, loading } = useCharacters()
+  const { baseCharacterData, loading } = useCharacters()
   const { setCharacter } = useSelectedCharacter()
 
   const [nickname, setNickname] = useState('')
@@ -31,14 +31,14 @@ const AuctionSearch = (): JSX.Element => {
   )
 
   const auctionList = useMemo(() => {
-    if (loadState.current === 'loading' && characterData.length) {
+    if (loadState.current === 'loading' && baseCharacterData.length) {
       loadState.current = 'ready'
     }
     const lowerCaseTerm = nickname.toLowerCase()
-    return characterData.filter((character) =>
+    return baseCharacterData.filter((character) =>
       character.nickname.toLowerCase().includes(lowerCaseTerm),
     )
-  }, [characterData, nickname])
+  }, [baseCharacterData, nickname])
 
   const currentListPage = useMemo(() => {
     listRef.current?.scrollTo({ top: 0, behavior: 'smooth' })
