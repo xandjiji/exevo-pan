@@ -1,5 +1,5 @@
 import { memo, useMemo } from 'react'
-import { getDaysUntilAuctionEnd } from './utils'
+import { getDaysUntilAuctionEnd, fillWithDays } from './utils'
 import * as S from './styles'
 import { RangeDatePickerProps } from './types'
 
@@ -10,7 +10,8 @@ const RangeDatePicker = ({
   ...props
 }: RangeDatePickerProps): JSX.Element => {
   const days = useMemo(() => getDaysUntilAuctionEnd(auctionEnd), [auctionEnd])
-  const firstWeekday = days[0]
+  const firstDay = days[0]
+  const lastDay = days[days.length - 1]
 
   return (
     <S.Wrapper {...props}>
@@ -20,12 +21,19 @@ const RangeDatePicker = ({
           <S.Weekday>{weekday}</S.Weekday>
         ))}
 
-        {Array.from({ length: new Date(firstWeekday).getDay() }, () => (
-          <div />
-        ))}
+        {fillWithDays(firstDay, new Date(firstDay).getDay(), -1).map(
+          (fillDay) => (
+            <S.FillDay>{new Date(fillDay).getDate()}</S.FillDay>
+          ),
+        )}
         {days.map((dateString) => (
           <S.Day>{new Date(dateString).getDate()}</S.Day>
         ))}
+        {fillWithDays(lastDay, 6 - new Date(lastDay).getDay(), 1).map(
+          (fillDay) => (
+            <S.FillDay>{new Date(fillDay).getDate()}</S.FillDay>
+          ),
+        )}
       </S.CalendarGrid>
     </S.Wrapper>
   )

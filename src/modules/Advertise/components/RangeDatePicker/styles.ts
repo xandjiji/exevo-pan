@@ -45,3 +45,13 @@ export const Day = styled.span`
     ${Shadow}
   }
 `
+
+export const FillDay = styled(Day)`
+  font-weight: 300;
+  color: var(--separator);
+  cursor: unset;
+
+  && {
+    box-shadow: none;
+  }
+`

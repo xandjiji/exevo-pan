@@ -21,3 +21,18 @@ export const getDaysUntilAuctionEnd = (auctionEnd: number): string[] => {
 
   return daysInRange
 }
+
+export const fillWithDays = (
+  initialDateString: string,
+  amount: number,
+  step: number,
+): string[] => {
+  const currentDate = new Date(initialDateString)
+
+  return Array.from(
+    { length: amount },
+    () => +currentDate.setDate(currentDate.getDate() + step),
+  )
+    .sort((a, b) => a - b)
+    .map(formatDate)
+}
