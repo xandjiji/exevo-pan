@@ -36,3 +36,8 @@ export const fillWithDays = (
     .sort((a, b) => a - b)
     .map(formatDate)
 }
+
+export const getWeekdayNumber = (date: string): number =>
+  new Date(date).getDay()
+
+export const getDay = (date: string): number => new Date(date).getDate()
