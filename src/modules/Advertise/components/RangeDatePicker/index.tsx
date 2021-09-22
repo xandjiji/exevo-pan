@@ -1,5 +1,5 @@
-/* eslint-disable react/no-array-index-key */
 import { Fragment, memo, useMemo, useState, useCallback } from 'react'
+import Weekdays from './Weekdays'
 import FillDates from './FillDates'
 import FillColumns from './FillColumns'
 import {
@@ -56,9 +56,7 @@ const RangeDatePicker = ({
     <S.Wrapper {...props}>
       <S.MonthName aria-label="Current month">Setembro</S.MonthName>
       <S.CalendarGrid>
-        {weekdays.map((weekday, index) => (
-          <S.Weekday key={`${weekday}-${index}`}>{weekday}</S.Weekday>
-        ))}
+        <Weekdays />
 
         <FillDates
           firstDay={firstDay}

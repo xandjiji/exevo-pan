@@ -26,10 +26,6 @@ export const CalendarGrid = styled.div`
   background-color: var(--surface);
   text-align: center;
 `
-export const Weekday = styled.span`
-  margin-bottom: 6px;
-  color: var(--separator);
-`
 
 export const Day = styled.button`
   padding: 8px 4px;
