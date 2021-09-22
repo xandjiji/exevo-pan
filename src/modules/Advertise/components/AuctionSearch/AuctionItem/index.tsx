@@ -1,4 +1,4 @@
-import { useSelectedCharacter } from '../../../contexts/SelectedCharacter'
+import { useForm } from '../../../contexts/Form'
 import * as S from './styles'
 import { AuctionItemProps } from './types'
 
@@ -22,7 +22,7 @@ const AuctionItem = ({
   outfitId,
   ...props
 }: AuctionItemProps): JSX.Element => {
-  const { selectedCharacter } = useSelectedCharacter()
+  const { selectedCharacter } = useForm()
 
   return (
     <S.ButtonWrapper

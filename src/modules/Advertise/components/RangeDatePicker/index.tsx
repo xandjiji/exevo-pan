@@ -1,4 +1,5 @@
-import { Fragment, memo, useMemo, useState, useCallback } from 'react'
+import { Fragment, memo, useMemo } from 'react'
+import { useForm } from '../../contexts/Form'
 import Weekdays from './Weekdays'
 import FillDates from './FillDates'
 import FillColumns from './FillColumns'
@@ -10,8 +11,6 @@ import {
 } from './utils'
 import * as S from './styles'
 import { RangeDatePickerProps } from './types'
-
-const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
 const months = [
   'Janeiro',
@@ -32,25 +31,11 @@ const RangeDatePicker = ({
   auctionEnd,
   ...props
 }: RangeDatePickerProps): JSX.Element => {
-  const [selectedDates, setSelectedDates] = useState(new Set<string>([]))
+  const { selectedDates, dispatch } = useForm()
 
   const days = useMemo(() => getDaysUntilAuctionEnd(auctionEnd), [auctionEnd])
   const partitionedDates = useMemo(() => partitionByMonths(days), [days])
   const firstDay = days[0]
-
-  const toggleDate = useCallback(
-    (date: string) =>
-      setSelectedDates((currentDates) => {
-        const newSet = new Set([...currentDates])
-        if (currentDates.has(date)) {
-          newSet.delete(date)
-        } else {
-          newSet.add(date)
-        }
-        return newSet
-      }),
-    [],
-  )
 
   return (
     <S.Wrapper {...props}>
@@ -69,8 +54,8 @@ const RangeDatePicker = ({
             <S.Day
               key={date}
               aria-label={date}
-              aria-selected={selectedDates.has(date)}
-              onClick={() => toggleDate(date)}
+              aria-selected={selectedDates.includes(date)}
+              onClick={() => dispatch({ type: 'TOGGLE_DATE', date })}
             >
               {new Date(date).getDate()}
             </S.Day>

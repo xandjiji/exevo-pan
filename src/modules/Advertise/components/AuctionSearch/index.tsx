@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo, useRef } from 'react'
 import { useCharacters } from 'contexts/useDatabase'
-import { useSelectedCharacter } from '../../contexts/SelectedCharacter'
+import { useForm } from '../../contexts/Form'
 import AuctionItem, { SkeletonItem } from './AuctionItem'
 import EmptyState from './EmptyState'
 import * as S from './styles'
@@ -9,7 +9,7 @@ const PAGE_SIZE = 10
 
 const AuctionSearch = (): JSX.Element => {
   const { baseCharacterData, loading } = useCharacters()
-  const { setCharacter } = useSelectedCharacter()
+  const { dispatch } = useForm()
 
   const [nickname, setNickname] = useState('')
   const [currentPage, setCurrentPage] = useState(1)
@@ -84,7 +84,7 @@ const AuctionSearch = (): JSX.Element => {
             level={character.level}
             vocationId={character.vocationId}
             outfitId={character.outfitId}
-            onClick={() => setCharacter(character)}
+            onClick={() => dispatch({ type: 'SELECT_CHARACTER', character })}
           />
         ))}
         {!loading && nickname && !currentListPage.length && <EmptyState />}

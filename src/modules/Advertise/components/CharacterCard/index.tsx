@@ -1,10 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { Button } from 'components/Atoms'
-import { useSelectedCharacter } from '../../contexts/SelectedCharacter'
+import { useForm } from '../../contexts/Form'
 import * as S from './styles'
 
 const CharacterCard = (): JSX.Element => {
-  const { selectedCharacter } = useSelectedCharacter()
+  const { selectedCharacter } = useForm()
 
   const wrapperRef = useRef<HTMLDivElement | null>(null)
 
