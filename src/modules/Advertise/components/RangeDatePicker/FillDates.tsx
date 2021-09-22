@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import styled from 'styled-components'
 import { Day } from './styles'
 import { fillWithDays, getDay } from './utils'
@@ -25,4 +26,4 @@ const FillDates = ({ firstDay, amount, step }: FillDatesProps): JSX.Element => (
     ))}
   </>
 )
-export default FillDates
+export default memo(FillDates)
