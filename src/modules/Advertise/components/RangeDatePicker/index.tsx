@@ -10,7 +10,6 @@ import {
   partitionByMonths,
 } from './utils'
 import * as S from './styles'
-import { RangeDatePickerProps } from './types'
 
 const months = [
   'Janeiro',
@@ -27,18 +26,18 @@ const months = [
   'Dezembro',
 ]
 
-const RangeDatePicker = ({
-  auctionEnd,
-  ...props
-}: RangeDatePickerProps): JSX.Element => {
-  const { selectedDates, dispatch } = useForm()
+const RangeDatePicker = (): JSX.Element => {
+  const { selectedCharacter, selectedDates, dispatch } = useForm()
 
-  const days = useMemo(() => getDaysUntilAuctionEnd(auctionEnd), [auctionEnd])
+  const days = useMemo(
+    () => getDaysUntilAuctionEnd(selectedCharacter?.auctionEnd),
+    [selectedCharacter],
+  )
   const partitionedDates = useMemo(() => partitionByMonths(days), [days])
   const firstDay = days[0]
 
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper>
       <S.MonthName aria-label="Current month">Setembro</S.MonthName>
       <S.CalendarGrid>
         <Weekdays />

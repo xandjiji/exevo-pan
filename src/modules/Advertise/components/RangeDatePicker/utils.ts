@@ -7,7 +7,9 @@ const formatDate = (timestamp: number): string => {
   return `${month}/${day}/${year}`
 }
 
-export const getDaysUntilAuctionEnd = (auctionEnd: number): string[] => {
+export const getDaysUntilAuctionEnd = (auctionEnd?: number): string[] => {
+  if (!auctionEnd) return []
+
   const formatedEndDate = formatDate(auctionEnd * 1000)
   const formatedCurrentDate = formatDate(+new Date())
 

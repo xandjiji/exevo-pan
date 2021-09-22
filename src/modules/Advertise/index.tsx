@@ -3,12 +3,9 @@ import { AuctionSearch, RangeDatePicker, CharacterCard } from './components'
 import * as S from './styles'
 
 const Form = (): JSX.Element => {
-  const { currentStep, selectedCharacter } = useForm()
+  const { currentStep } = useForm()
 
-  const FormSteps = [
-    <AuctionSearch />,
-    <RangeDatePicker auctionEnd={selectedCharacter?.auctionEnd ?? 0} />,
-  ]
+  const FormSteps = [<AuctionSearch />, <RangeDatePicker />]
 
   return (
     <>
