@@ -1,4 +1,5 @@
-import { FillDay } from './styles'
+import styled from 'styled-components'
+import { Day } from './styles'
 import { fillWithDays, getDay } from './utils'
 
 interface FillDatesProps {
@@ -6,6 +7,16 @@ interface FillDatesProps {
   amount: number
   step: 1 | -1
 }
+
+const FillDay = styled(Day)`
+  font-weight: 300;
+  color: var(--separator);
+  cursor: unset;
+
+  && {
+    box-shadow: none;
+  }
+`
 
 const FillDates = ({ firstDay, amount, step }: FillDatesProps): JSX.Element => (
   <>

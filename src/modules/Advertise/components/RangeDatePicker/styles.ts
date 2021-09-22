@@ -46,16 +46,6 @@ export const Day = styled.span`
   }
 `
 
-export const FillDay = styled(Day)`
-  font-weight: 300;
-  color: var(--separator);
-  cursor: unset;
-
-  && {
-    box-shadow: none;
-  }
-`
-
 export const MonthRow = styled.span`
   padding: 12px 0 6px 0;
   grid-column: 1 / -1;
