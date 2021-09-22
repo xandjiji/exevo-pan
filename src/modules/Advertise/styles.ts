@@ -17,7 +17,7 @@ export const Wrapper = styled.main`
 
   > * {
     margin: 0 auto;
-    max-width: 500px;
+    max-width: 420px;
 
     &:last-child {
       margin-bottom: 48px;
