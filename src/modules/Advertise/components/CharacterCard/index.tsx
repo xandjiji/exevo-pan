@@ -4,7 +4,7 @@ import { useForm } from '../../contexts/Form'
 import * as S from './styles'
 
 const CharacterCard = (): JSX.Element => {
-  const { selectedCharacter } = useForm()
+  const { selectedCharacter, currentStep, dispatch } = useForm()
 
   const wrapperRef = useRef<HTMLDivElement | null>(null)
 
@@ -14,8 +14,14 @@ const CharacterCard = (): JSX.Element => {
     }
   }, [selectedCharacter])
 
+  useEffect(() => {
+    document
+      .getElementById('main-wrapper')
+      ?.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [currentStep])
+
   return (
-    <S.Wrapper id="second-column" ref={wrapperRef}>
+    <S.Wrapper ref={wrapperRef}>
       {selectedCharacter ? (
         <S.CharacterCard
           key={selectedCharacter.id}
@@ -24,7 +30,11 @@ const CharacterCard = (): JSX.Element => {
       ) : (
         <S.CardSkeleton />
       )}
-      <Button type="button" disabled={!selectedCharacter}>
+      <Button
+        type="button"
+        disabled={!selectedCharacter}
+        onClick={() => dispatch({ type: 'NEXT_STEP' })}
+      >
         Next
       </Button>
     </S.Wrapper>

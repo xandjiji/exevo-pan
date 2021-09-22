@@ -3,7 +3,7 @@ import FormReducer from './FormReducer'
 import { FormProviderProps, FormValues } from './types'
 
 const defaultState: FormValues = {
-  formStep: 0,
+  currentStep: 0,
   selectedCharacter: undefined,
   selectedDates: [],
   dispatch: () => {},
@@ -12,18 +12,16 @@ const defaultState: FormValues = {
 const FormContext = createContext<FormValues>(defaultState)
 
 export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
-  const [{ formStep, selectedCharacter, selectedDates }, dispatch] = useReducer(
-    FormReducer,
-    {
-      formStep: defaultState.formStep,
+  const [{ currentStep, selectedCharacter, selectedDates }, dispatch] =
+    useReducer(FormReducer, {
+      currentStep: defaultState.currentStep,
       selectedCharacter: defaultState.selectedCharacter,
       selectedDates: defaultState.selectedDates,
-    },
-  )
+    })
 
   return (
     <FormContext.Provider
-      value={{ formStep, selectedCharacter, selectedDates, dispatch }}
+      value={{ currentStep, selectedCharacter, selectedDates, dispatch }}
     >
       {children}
     </FormContext.Provider>

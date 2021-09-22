@@ -2,6 +2,9 @@ import { ReactNode } from 'react'
 
 export type Action =
   | {
+      type: 'NEXT_STEP'
+    }
+  | {
       type: 'SELECT_CHARACTER'
       character: CharacterObject
     }
@@ -15,7 +18,7 @@ export type Action =
     }
 
 export interface FormContextState {
-  formStep: number
+  currentStep: number
   selectedCharacter: CharacterObject | undefined
   selectedDates: string[]
 }
