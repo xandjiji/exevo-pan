@@ -55,3 +55,9 @@ export const FillDay = styled(Day)`
     box-shadow: none;
   }
 `
+
+export const MonthRow = styled.span`
+  padding: 12px 0 6px 0;
+  grid-column: 1 / -1;
+  color: var(--separator);
+`

@@ -1,14 +1,31 @@
 import { memo, useMemo } from 'react'
+import FillDates from './FillDates'
+import FillColumns from './FillColumns'
 import {
   getDaysUntilAuctionEnd,
-  fillWithDays,
   getWeekdayNumber,
-  getDay,
+  getMonth,
+  partitionByMonths,
 } from './utils'
 import * as S from './styles'
 import { RangeDatePickerProps } from './types'
 
 const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+
+const months = [
+  'Jan',
+  'Fev',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Set',
+  'Oct',
+  'Nov',
+  'Dec',
+]
 
 const RangeDatePicker = ({
   auctionEnd,
@@ -16,7 +33,7 @@ const RangeDatePicker = ({
 }: RangeDatePickerProps): JSX.Element => {
   const days = useMemo(() => getDaysUntilAuctionEnd(auctionEnd), [auctionEnd])
   const firstDay = days[0]
-  const lastDay = days[days.length - 1]
+  const partitionedDates = useMemo(() => partitionByMonths(days), [days])
 
   return (
     <S.Wrapper {...props}>
@@ -26,19 +43,40 @@ const RangeDatePicker = ({
           <S.Weekday>{weekday}</S.Weekday>
         ))}
 
-        {fillWithDays(firstDay, getWeekdayNumber(firstDay), -1).map(
-          (fillDay) => (
-            <S.FillDay>{getDay(fillDay)}</S.FillDay>
-          ),
-        )}
-        {days.map((dateString) => (
-          <S.Day>{new Date(dateString).getDate()}</S.Day>
-        ))}
-        {fillWithDays(lastDay, 6 - getWeekdayNumber(lastDay), 1).map(
-          (fillDay) => (
-            <S.FillDay>{getDay(fillDay)}</S.FillDay>
-          ),
-        )}
+        <FillDates
+          firstDay={firstDay}
+          amount={getWeekdayNumber(firstDay)}
+          step={-1}
+        />
+
+        {partitionedDates.map((monthDates, index) => {
+          const monthDatesElements = monthDates.map((dates) => (
+            <S.Day>{new Date(dates).getDate()}</S.Day>
+          ))
+
+          const hasNextMonth = index + 1 !== partitionedDates.length
+          const currentMonthLastDay = monthDates[monthDates.length - 1]
+          const currentMonthLastWeekday = getWeekdayNumber(currentMonthLastDay)
+
+          return (
+            <>
+              {monthDatesElements}
+              {hasNextMonth && (
+                <S.MonthRow>{months[getMonth(monthDates[0]) + 1]}</S.MonthRow>
+              )}
+              {!hasNextMonth && (
+                <FillDates
+                  firstDay={currentMonthLastDay}
+                  amount={6 - currentMonthLastWeekday}
+                  step={1}
+                />
+              )}
+              {hasNextMonth && (
+                <FillColumns amount={currentMonthLastWeekday + 1} />
+              )}
+            </>
+          )
+        })}
       </S.CalendarGrid>
     </S.Wrapper>
   )

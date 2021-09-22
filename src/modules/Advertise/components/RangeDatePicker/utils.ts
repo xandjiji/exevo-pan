@@ -22,6 +22,23 @@ export const getDaysUntilAuctionEnd = (auctionEnd: number): string[] => {
   return daysInRange
 }
 
+export const partitionByMonths = (dateArray: string[]): string[][] => {
+  const monthsPartition = new Set<string>([])
+
+  dateArray.forEach((dateString) => {
+    const [month] = dateString.split('/')
+    monthsPartition.add(month)
+  })
+
+  return [...monthsPartition].map((month) =>
+    dateArray.filter((dateString) => {
+      const [dateStringMonth] = dateString.split('/')
+
+      return month === dateStringMonth
+    }),
+  )
+}
+
 export const fillWithDays = (
   initialDateString: string,
   amount: number,
@@ -41,3 +58,5 @@ export const getWeekdayNumber = (date: string): number =>
   new Date(date).getDay()
 
 export const getDay = (date: string): number => new Date(date).getDate()
+
+export const getMonth = (date: string): number => new Date(date).getMonth()
