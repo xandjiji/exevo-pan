@@ -68,7 +68,11 @@ const RangeDatePicker = ({
 
         {partitionedDates.map((monthDates, index) => {
           const monthDatesElements = monthDates.map((date) => (
-            <S.Day key={date} onClick={() => toggleDate(date)}>
+            <S.Day
+              key={date}
+              aria-selected={selectedDates.has(date)}
+              onClick={() => toggleDate(date)}
+            >
               {new Date(date).getDate()}
             </S.Day>
           ))

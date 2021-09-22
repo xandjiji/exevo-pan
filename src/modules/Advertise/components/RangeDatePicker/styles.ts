@@ -44,6 +44,15 @@ export const Day = styled.span`
   &:hover {
     ${Shadow}
   }
+
+  &:active {
+    box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
+  }
+
+  &[aria-selected='true'] {
+    background-color: var(--primaryVariant);
+    /* color: var(--onPrimary); */
+  }
 `
 
 export const MonthRow = styled.span`
