@@ -56,7 +56,8 @@ export const Day = styled.button`
 `
 
 export const MonthRow = styled.span`
-  padding: 12px 0 6px 0;
+  padding: 8px 0 4px 0;
+  margin-bottom: -6px;
   grid-column: 1 / -1;
   color: var(--separator);
 `

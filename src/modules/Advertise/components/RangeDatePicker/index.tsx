@@ -14,18 +14,18 @@ import { RangeDatePickerProps } from './types'
 const weekdays = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
 const months = [
-  'Jan',
-  'Fev',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Set',
-  'Oct',
-  'Nov',
-  'Dec',
+  'Janeiro',
+  'Fevereiro',
+  'Março',
+  'Abril',
+  'Maio',
+  'Junho',
+  'Julho',
+  'Agosto',
+  'Setembro',
+  'Outubro',
+  'Novembro',
+  'Dezembro',
 ]
 
 const RangeDatePicker = ({
@@ -54,7 +54,7 @@ const RangeDatePicker = ({
 
   return (
     <S.Wrapper {...props}>
-      <S.MonthName>Setembro</S.MonthName>
+      <S.MonthName aria-label="Current month">Setembro</S.MonthName>
       <S.CalendarGrid>
         {weekdays.map((weekday, index) => (
           <S.Weekday key={`${weekday}-${index}`}>{weekday}</S.Weekday>
@@ -70,6 +70,7 @@ const RangeDatePicker = ({
           const monthDatesElements = monthDates.map((date) => (
             <S.Day
               key={date}
+              aria-label={date}
               aria-selected={selectedDates.has(date)}
               onClick={() => toggleDate(date)}
             >
@@ -85,7 +86,9 @@ const RangeDatePicker = ({
             <Fragment key={`month-${currentMonthLastDay}`}>
               {monthDatesElements}
               {hasNextMonth && (
-                <S.MonthRow>{months[getMonth(monthDates[0]) + 1]}</S.MonthRow>
+                <S.MonthRow aria-label="Next month">
+                  {months[getMonth(monthDates[0]) + 1]}
+                </S.MonthRow>
               )}
               {!hasNextMonth && (
                 <FillDates
