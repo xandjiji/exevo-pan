@@ -31,10 +31,11 @@ export const Weekday = styled.span`
   color: var(--separator);
 `
 
-export const Day = styled.span`
+export const Day = styled.button`
   padding: 8px 4px;
 
   font-size: 16px;
+  color: var(--onSurface);
 
   border-radius: 5px;
   box-shadow: 2px 2px 2px 0px rgba(0, 0, 0, 0.09);
@@ -51,7 +52,6 @@ export const Day = styled.span`
 
   &[aria-selected='true'] {
     background-color: var(--primaryVariant);
-    /* color: var(--onPrimary); */
   }
 `
 
