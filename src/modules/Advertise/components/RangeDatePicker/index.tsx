@@ -1,4 +1,5 @@
-import { memo, useMemo } from 'react'
+/* eslint-disable react/no-array-index-key */
+import { Fragment, memo, useMemo, useState, useCallback } from 'react'
 import FillDates from './FillDates'
 import FillColumns from './FillColumns'
 import {
@@ -31,16 +32,32 @@ const RangeDatePicker = ({
   auctionEnd,
   ...props
 }: RangeDatePickerProps): JSX.Element => {
+  const [selectedDates, setSelectedDates] = useState(new Set<string>([]))
+
   const days = useMemo(() => getDaysUntilAuctionEnd(auctionEnd), [auctionEnd])
-  const firstDay = days[0]
   const partitionedDates = useMemo(() => partitionByMonths(days), [days])
+  const firstDay = days[0]
+
+  const toggleDate = useCallback(
+    (date: string) =>
+      setSelectedDates((currentDates) => {
+        const newSet = new Set([...currentDates])
+        if (currentDates.has(date)) {
+          newSet.delete(date)
+        } else {
+          newSet.add(date)
+        }
+        return newSet
+      }),
+    [],
+  )
 
   return (
     <S.Wrapper {...props}>
       <S.MonthName>Setembro</S.MonthName>
       <S.CalendarGrid>
-        {weekdays.map((weekday) => (
-          <S.Weekday>{weekday}</S.Weekday>
+        {weekdays.map((weekday, index) => (
+          <S.Weekday key={`${weekday}-${index}`}>{weekday}</S.Weekday>
         ))}
 
         <FillDates
@@ -50,8 +67,10 @@ const RangeDatePicker = ({
         />
 
         {partitionedDates.map((monthDates, index) => {
-          const monthDatesElements = monthDates.map((dates) => (
-            <S.Day>{new Date(dates).getDate()}</S.Day>
+          const monthDatesElements = monthDates.map((date) => (
+            <S.Day key={date} onClick={() => toggleDate(date)}>
+              {new Date(date).getDate()}
+            </S.Day>
           ))
 
           const hasNextMonth = index + 1 !== partitionedDates.length
@@ -59,7 +78,7 @@ const RangeDatePicker = ({
           const currentMonthLastWeekday = getWeekdayNumber(currentMonthLastDay)
 
           return (
-            <>
+            <Fragment key={`month-${currentMonthLastDay}`}>
               {monthDatesElements}
               {hasNextMonth && (
                 <S.MonthRow>{months[getMonth(monthDates[0]) + 1]}</S.MonthRow>
@@ -74,7 +93,7 @@ const RangeDatePicker = ({
               {hasNextMonth && (
                 <FillColumns amount={currentMonthLastWeekday + 1} />
               )}
-            </>
+            </Fragment>
           )
         })}
       </S.CalendarGrid>
