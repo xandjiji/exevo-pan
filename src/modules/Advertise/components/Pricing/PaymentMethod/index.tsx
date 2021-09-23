@@ -9,7 +9,7 @@ const PaymentMethod = ({
   ...props
 }: PaymentMethodProps): JSX.Element => (
   <S.Button type="button" aria-selected={active} {...props}>
-    <RadioButton active={active}>
+    <RadioButton active={active} tabIndex={-1}>
       <S.Content>
         {icon}
         {children}

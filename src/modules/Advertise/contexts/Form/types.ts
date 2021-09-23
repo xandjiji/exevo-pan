@@ -1,5 +1,7 @@
 import { ReactNode } from 'react'
 
+type PaymentMethods = 'TIBIA_COINS' | 'PIX'
+
 export type Action =
   | {
       type: 'NEXT_STEP'
@@ -16,11 +18,16 @@ export type Action =
       type: 'TOGGLE_DATE'
       date: string
     }
+  | {
+      type: 'SET_PAYMENT_METHOD'
+      method: PaymentMethods
+    }
 
 export interface FormContextState {
   currentStep: number
   selectedCharacter: CharacterObject | undefined
   selectedDates: string[]
+  paymentMethod: PaymentMethods
 }
 
 export interface FormValues extends FormContextState {

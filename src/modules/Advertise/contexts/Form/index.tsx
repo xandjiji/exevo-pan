@@ -6,22 +6,32 @@ const defaultState: FormValues = {
   currentStep: 0,
   selectedCharacter: undefined,
   selectedDates: [],
+  paymentMethod: 'TIBIA_COINS',
   dispatch: () => {},
 }
 
 const FormContext = createContext<FormValues>(defaultState)
 
 export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
-  const [{ currentStep, selectedCharacter, selectedDates }, dispatch] =
-    useReducer(FormReducer, {
-      currentStep: defaultState.currentStep,
-      selectedCharacter: defaultState.selectedCharacter,
-      selectedDates: defaultState.selectedDates,
-    })
+  const [
+    { currentStep, selectedCharacter, selectedDates, paymentMethod },
+    dispatch,
+  ] = useReducer(FormReducer, {
+    currentStep: defaultState.currentStep,
+    selectedCharacter: defaultState.selectedCharacter,
+    selectedDates: defaultState.selectedDates,
+    paymentMethod: defaultState.paymentMethod,
+  })
 
   return (
     <FormContext.Provider
-      value={{ currentStep, selectedCharacter, selectedDates, dispatch }}
+      value={{
+        currentStep,
+        selectedCharacter,
+        selectedDates,
+        paymentMethod,
+        dispatch,
+      }}
     >
       {children}
     </FormContext.Provider>

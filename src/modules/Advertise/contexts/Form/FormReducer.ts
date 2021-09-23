@@ -38,6 +38,12 @@ const FormReducer = (
       }
     }
 
+    case 'SET_PAYMENT_METHOD':
+      return {
+        ...state,
+        paymentMethod: action.method,
+      }
+
     default:
       return { ...state }
   }
