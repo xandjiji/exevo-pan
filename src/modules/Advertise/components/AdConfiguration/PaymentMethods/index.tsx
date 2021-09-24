@@ -2,7 +2,7 @@ import Image from 'next/image'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import MethodButton from './MethodButton'
-import { useForm } from '../../contexts/Form'
+import { useForm } from '../../../contexts/Form'
 import * as S from './styles'
 
 const PaymentMethods = (): JSX.Element => {

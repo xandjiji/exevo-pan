@@ -1,11 +1,11 @@
 import { FormProvider, useForm } from './contexts/Form'
-import { AuctionSearch, RangeDatePicker, CharacterCard } from './components'
+import { AuctionSearch, AdConfiguration, CharacterCard } from './components'
 import * as S from './styles'
 
 const Form = (): JSX.Element => {
   const { currentStep } = useForm()
 
-  const FormSteps = [<AuctionSearch />, <RangeDatePicker />]
+  const FormSteps = [<AuctionSearch />, <AdConfiguration />]
 
   return (
     <>
