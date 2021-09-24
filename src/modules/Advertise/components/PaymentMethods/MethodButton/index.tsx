@@ -1,13 +1,13 @@
 import { RadioButton } from 'components/Atoms'
 import * as S from './styles'
-import { PaymentMethodProps } from './types'
+import { MethodButtonProps } from './types'
 
-const PaymentMethod = ({
+const MethodButton = ({
   active,
   icon,
   children,
   ...props
-}: PaymentMethodProps): JSX.Element => (
+}: MethodButtonProps): JSX.Element => (
   <S.Button type="button" aria-selected={active} {...props}>
     <RadioButton active={active} tabIndex={-1}>
       <S.Content>
@@ -18,4 +18,4 @@ const PaymentMethod = ({
   </S.Button>
 )
 
-export default PaymentMethod
+export default MethodButton

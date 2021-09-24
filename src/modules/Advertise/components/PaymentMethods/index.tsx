@@ -1,15 +1,15 @@
 import Image from 'next/image'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
-import PaymentMethod from './PaymentMethod'
+import MethodButton from './MethodButton'
 import { useForm } from '../../contexts/Form'
 import * as S from './styles'
 
-const Pricing = (): JSX.Element => {
+const PaymentMethods = (): JSX.Element => {
   const { paymentMethod, dispatch } = useForm()
   return (
     <S.Wrapper>
-      <PaymentMethod
+      <MethodButton
         active={paymentMethod === 'TIBIA_COINS'}
         onClick={() =>
           dispatch({ type: 'SET_PAYMENT_METHOD', method: 'TIBIA_COINS' })
@@ -19,16 +19,16 @@ const Pricing = (): JSX.Element => {
         }
       >
         Tibia Coins
-      </PaymentMethod>
-      <PaymentMethod
+      </MethodButton>
+      <MethodButton
         active={paymentMethod === 'PIX'}
         onClick={() => dispatch({ type: 'SET_PAYMENT_METHOD', method: 'PIX' })}
-        icon={<Image src={PixSrc} alt="Tibia Coins" width="24" height="24" />}
+        icon={<Image src={PixSrc} alt="Pix" width="24" height="24" />}
       >
         Pix
-      </PaymentMethod>
+      </MethodButton>
     </S.Wrapper>
   )
 }
 
-export default Pricing
+export default PaymentMethods
