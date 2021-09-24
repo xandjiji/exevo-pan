@@ -1,13 +1,13 @@
 import RangeDatePicker from './RangeDatePicker'
 import PaymentMethods from './PaymentMethods'
-import Receipt from './Receipt'
+import Summary from './Summary'
 import * as S from './styles'
 
 const AdConfiguration = (): JSX.Element => (
   <S.Wrapper>
     <RangeDatePicker />
     <PaymentMethods />
-    <Receipt />
+    <Summary />
   </S.Wrapper>
 )
 

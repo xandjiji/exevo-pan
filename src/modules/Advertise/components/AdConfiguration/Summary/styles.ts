@@ -4,7 +4,8 @@ import { MaterialCard } from 'styles'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
-  display:grid;
+  padding: 16px;
+  display: grid;
   grid-gap: 16px;
 `
 

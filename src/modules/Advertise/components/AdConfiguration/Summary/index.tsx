@@ -1,8 +1,9 @@
 import { useForm } from '../../../contexts/Form'
+import { calculatePrice } from './utils'
 import * as S from './styles'
 
-const Receipt = (): JSX.Element => {
-  const { selectedCharacter, selectedDates } = useForm()
+const Summary = (): JSX.Element => {
+  const { selectedCharacter, selectedDates, paymentMethod } = useForm()
 
   return (
     <S.Wrapper>
@@ -22,11 +23,13 @@ const Receipt = (): JSX.Element => {
       </S.GroupItem>
 
       <S.GroupItem>
-        <S.Strong>{selectedDates.length * 50} Tibia Coins</S.Strong>
+        <S.Strong>
+          {calculatePrice(selectedDates.length, paymentMethod)}
+        </S.Strong>
         <S.SubText>Total cost</S.SubText>
       </S.GroupItem>
     </S.Wrapper>
   )
 }
 
-export default Receipt
+export default Summary

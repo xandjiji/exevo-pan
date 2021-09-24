@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-type PaymentMethods = 'TIBIA_COINS' | 'PIX'
+export type PaymentMethods = 'TIBIA_COINS' | 'PIX'
 
 export type Action =
   | {
