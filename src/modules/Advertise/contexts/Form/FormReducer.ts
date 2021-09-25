@@ -6,12 +6,6 @@ const FormReducer = (
   action: Action,
 ): FormContextState => {
   switch (action.type) {
-    case 'NEXT_STEP':
-      return {
-        ...state,
-        currentStep: state.currentStep + 1,
-      }
-
     case 'SET_STEP':
       return {
         ...state,

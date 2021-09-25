@@ -33,7 +33,7 @@ const CharacterCard = (): JSX.Element => {
       <Button
         type="button"
         disabled={!isValid}
-        onClick={() => dispatch({ type: 'NEXT_STEP' })}
+        onClick={() => dispatch({ type: 'SET_STEP', newStep: currentStep + 1 })}
       >
         Next
       </Button>

@@ -4,9 +4,6 @@ export type PaymentMethods = 'TIBIA_COINS' | 'PIX'
 
 export type Action =
   | {
-      type: 'NEXT_STEP'
-    }
-  | {
       type: 'SET_STEP'
       newStep: number
     }
