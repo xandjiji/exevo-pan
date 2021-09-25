@@ -2,10 +2,13 @@ import styled from 'styled-components'
 import CheckSvg from 'assets/svgs/check.svg'
 import { Smooth, Shadow } from 'styles'
 
-export const StepItem = styled.button`
+export const Wrapper = styled.div`
   display: flex;
-  align-items: center;
-  cursor: pointer;
+  justify-content: space-between;
+
+  * {
+    ${Smooth}
+  }
 `
 
 export const Circle = styled.div`
@@ -17,16 +20,16 @@ export const Circle = styled.div`
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  background-color: var(--primary);
+  background-color: var(--separator);
 
   font-size: 16px;
   font-weight: 700;
-  color: var(--onPrimary);
+  color: var(--onSurface);
 
   svg {
     width: 19px;
     height: 19px;
-    fill: var(--onPrimary);
+    fill: var(--onSurface);
   }
 `
 
@@ -48,46 +51,40 @@ export const Separator = styled.div`
   flex-grow: 1;
   height: 3px;
   width: 100%;
-  background-color: var(--primary);
+  background-color: var(--separator);
   opacity: 0.5;
 `
 
-export const Wrapper = styled.div`
+export const StepItem = styled.button`
   display: flex;
-  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
 
-  ${Smooth}
-
-  * {
-    ${Smooth}
-  }
-
-  [aria-current='step'] ~ ${StepItem} {
+  &[aria-current='step'],
+  &[aria-checked='true'] {
     ${Circle} {
-      background-color: var(--separator);
-      color: var(--onSurface);
+      background-color: var(--primary);
+      color: var(--onPrimary);
 
       svg {
-        fill: var(--onSurface);
+        fill: var(--onPrimary);
       }
-    }
-
-    ${Separator} {
-      background-color: var(--separator);
     }
   }
 
-  ${StepItem}[aria-current='step'] {
-    ${Separator} {
-      background-color: var(--separator);
-    }
-
+  &[aria-current='step'] {
     ${Title} {
       font-weight: 700;
     }
 
     ${Circle} {
       ${Shadow}
+    }
+  }
+
+  &[aria-checked='true'] {
+    ${Separator} {
+      background-color: var(--primary);
     }
   }
 `
