@@ -7,6 +7,10 @@ export type Action =
       type: 'NEXT_STEP'
     }
   | {
+      type: 'SET_STEP'
+      newStep: number
+    }
+  | {
       type: 'SELECT_CHARACTER'
       character: CharacterObject
     }

@@ -11,6 +11,12 @@ const FormReducer = (
         currentStep: state.currentStep + 1,
       }
 
+    case 'SET_STEP':
+      return {
+        ...state,
+        currentStep: action.newStep,
+      }
+
     case 'SELECT_CHARACTER':
       return {
         ...state,
