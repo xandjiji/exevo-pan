@@ -3,24 +3,37 @@ import { AuctionSearch, AdConfiguration, CharacterCard } from './components'
 import * as S from './styles'
 
 const Form = (): JSX.Element => {
-  const { currentStep } = useForm()
+  const { currentStep, dispatch } = useForm()
+
+  const setStep = (newStep: number) => {
+    if (newStep < currentStep) dispatch({ type: 'SET_STEP', newStep })
+  }
+
+  const stepItems = [
+    { title: 'Auction select', onClick: setStep },
+    { title: 'Configure', onClick: setStep },
+    { title: 'Checkout' },
+  ]
 
   const FormSteps = [<AuctionSearch />, <AdConfiguration />]
 
   return (
     <>
-      {FormSteps[currentStep]}
-      <CharacterCard />
+      <S.Stepper steps={stepItems} currentStep={currentStep} />
+      <S.FormStepsWrapper>
+        {FormSteps[currentStep]}
+        <CharacterCard />
+      </S.FormStepsWrapper>
     </>
   )
 }
 
 const AdvertiseGrid = (): JSX.Element => (
-  <S.Wrapper id="main-wrapper">
-    <FormProvider>
+  <FormProvider>
+    <S.Wrapper id="main-wrapper">
       <Form />
-    </FormProvider>
-  </S.Wrapper>
+    </S.Wrapper>
+  </FormProvider>
 )
 
 export default AdvertiseGrid

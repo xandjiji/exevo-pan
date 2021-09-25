@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Stepper as BaseStepper } from 'components/Atoms'
 import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
 
 export const Wrapper = styled.main`
@@ -15,15 +16,6 @@ export const Wrapper = styled.main`
   background-color: var(--background);
   ${Smooth}
 
-  > * {
-    margin: 0 auto;
-    max-width: 420px;
-
-    &:last-child {
-      margin-bottom: 48px;
-    }
-  }
-
   &::before {
     content: '';
     position: fixed;
@@ -39,6 +31,17 @@ export const Wrapper = styled.main`
     );
     pointer-events: none;
   }
+`
+
+export const FormStepsWrapper = styled.div`
+  > * {
+    margin: 0 auto;
+    max-width: 420px;
+
+    &:last-child {
+      margin-bottom: 48px;
+    }
+  }
 
   @media (min-width: 768px) {
     display: flex;
@@ -50,5 +53,15 @@ export const Wrapper = styled.main`
       height: fit-content;
       width: calc(50% - 12px);
     }
+  }
+`
+
+export const Stepper = styled(BaseStepper)`
+  padding: 0 40px;
+  margin: 0 auto 54px auto;
+  max-width: 420px;
+
+  @media (min-width: 768px) {
+    max-width: 560px;
   }
 `
