@@ -7,6 +7,7 @@ const defaultState: FormValues = {
   selectedCharacter: undefined,
   selectedDates: [],
   paymentMethod: 'TIBIA_COINS',
+  isValid: false,
   dispatch: () => {},
 }
 
@@ -23,6 +24,10 @@ export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
     paymentMethod: defaultState.paymentMethod,
   })
 
+  const isValid: boolean = [!!selectedCharacter, !!selectedDates.length][
+    currentStep
+  ]
+
   return (
     <FormContext.Provider
       value={{
@@ -30,6 +35,7 @@ export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
         selectedCharacter,
         selectedDates,
         paymentMethod,
+        isValid,
         dispatch,
       }}
     >

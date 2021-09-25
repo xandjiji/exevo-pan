@@ -35,6 +35,7 @@ export interface FormContextState {
 }
 
 export interface FormValues extends FormContextState {
+  isValid: boolean
   dispatch: (action: Action) => void
 }
 

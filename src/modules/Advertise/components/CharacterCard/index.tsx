@@ -4,7 +4,7 @@ import { useForm } from '../../contexts/Form'
 import * as S from './styles'
 
 const CharacterCard = (): JSX.Element => {
-  const { selectedCharacter, currentStep, dispatch } = useForm()
+  const { selectedCharacter, currentStep, isValid, dispatch } = useForm()
 
   const wrapperRef = useRef<HTMLDivElement | null>(null)
 
@@ -32,7 +32,7 @@ const CharacterCard = (): JSX.Element => {
       )}
       <Button
         type="button"
-        disabled={!selectedCharacter}
+        disabled={!isValid}
         onClick={() => dispatch({ type: 'NEXT_STEP' })}
       >
         Next
