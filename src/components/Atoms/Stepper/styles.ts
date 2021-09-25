@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import CheckSvg from 'assets/svgs/check.svg'
 import { Smooth, Shadow } from 'styles'
 
 export const StepItem = styled.button`
@@ -77,6 +78,22 @@ export const Wrapper = styled.div`
 
     ${Circle} {
       ${Shadow}
+    }
+  }
+`
+
+export const CompletedIcon = styled(CheckSvg)`
+  fill: var(--onPrimary);
+  animation-timing-function: ease-out;
+  animation-duration: 0.5s;
+  animation-name: fadeIn;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
     }
   }
 `

@@ -10,7 +10,7 @@ const Form = (): JSX.Element => {
   }
 
   const stepItems = [
-    { title: 'Auction select', onClick: setStep },
+    { title: 'Select', onClick: setStep },
     { title: 'Configure', onClick: setStep },
     { title: 'Checkout' },
   ]
