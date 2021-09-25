@@ -1,17 +1,24 @@
-import { Fragment } from 'react'
 import * as S from './styles'
 import { StepperProps } from './types'
 
-const Stepper = ({ steps, ...props }: StepperProps): JSX.Element => (
+const Stepper = ({
+  steps,
+  currentStep,
+  ...props
+}: StepperProps): JSX.Element => (
   <S.Wrapper {...props}>
     {steps.map((step, index, stepArray) => (
-      <Fragment key={step.title}>
-        <S.StepItem onClick={() => step.onClick?.(index)}>
-          <S.Circle>{step.icon ?? index}</S.Circle>
+      <S.StepItem
+        key={step.title}
+        onClick={() => step.onClick?.(index)}
+        aria-current={currentStep === index ? 'step' : undefined}
+      >
+        <S.Circle>
+          {step.icon ?? index + 1}
           <S.Title>{step.title}</S.Title>
-        </S.StepItem>
+        </S.Circle>
         {index < stepArray.length - 1 && <S.Separator />}
-      </Fragment>
+      </S.StepItem>
     ))}
   </S.Wrapper>
 )
