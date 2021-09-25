@@ -12,12 +12,17 @@ const Stepper = ({
       const isCompleted = index < currentStep
       const isLast = index === stepArray.length - 1
 
+      const stepDescriptionId = `step-item-${step.title}`
+
       return (
         <S.StepItem
           key={step.title}
           onClick={() => step.onClick?.(index)}
-          aria-current={isCurrent ? 'step' : undefined}
           style={{ flexGrow: +!isLast }}
+          type="button"
+          aria-current={isCurrent ? 'step' : undefined}
+          aria-checked={isCompleted}
+          aria-labelledby={stepDescriptionId}
         >
           <S.Circle>
             {isCompleted ? (
@@ -25,7 +30,7 @@ const Stepper = ({
             ) : (
               step.icon ?? index + 1
             )}
-            <S.Title>{step.title}</S.Title>
+            <S.Title id={stepDescriptionId}>{step.title}</S.Title>
           </S.Circle>
           {!isLast && <S.Separator />}
         </S.StepItem>
