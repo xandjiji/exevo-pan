@@ -1,3 +1,4 @@
+import { getRecommendedDays } from './utils'
 import { FormContextState, Action } from './types'
 
 const FormReducer = (
@@ -21,6 +22,7 @@ const FormReducer = (
       return {
         ...state,
         selectedCharacter: action.character,
+        selectedDates: getRecommendedDays(action.character.auctionEnd),
       }
 
     case 'SELECT_DATES':
