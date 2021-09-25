@@ -4,7 +4,6 @@ import { Smooth } from 'styles'
 export const StepItem = styled.button`
   display: flex;
   align-items: center;
-  flex-grow: 1;
   cursor: pointer;
 `
 
