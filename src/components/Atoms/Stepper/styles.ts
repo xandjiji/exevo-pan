@@ -22,6 +22,12 @@ export const Circle = styled.div`
   font-size: 16px;
   font-weight: 700;
   color: var(--onPrimary);
+
+  svg {
+    width: 19px;
+    height: 19px;
+    fill: var(--onPrimary);
+  }
 `
 
 export const Title = styled.h2`
@@ -60,6 +66,10 @@ export const Wrapper = styled.div`
     ${Circle} {
       background-color: var(--separator);
       color: var(--onSurface);
+
+      svg {
+        fill: var(--onSurface);
+      }
     }
 
     ${Separator} {

@@ -23,7 +23,7 @@ const Stepper = ({
             {isCompleted ? (
               <S.CompletedIcon aria-label="step completed" />
             ) : (
-              index + 1
+              step.icon ?? index + 1
             )}
             <S.Title>{step.title}</S.Title>
           </S.Circle>
