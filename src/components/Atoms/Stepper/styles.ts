@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Smooth } from 'styles'
+import { Smooth, Shadow } from 'styles'
 
 export const StepItem = styled.button`
   display: flex;
@@ -73,6 +73,10 @@ export const Wrapper = styled.div`
 
     ${Title} {
       font-weight: 700;
+    }
+
+    ${Circle} {
+      ${Shadow}
     }
   }
 `
