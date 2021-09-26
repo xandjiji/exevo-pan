@@ -54,6 +54,10 @@ export const FormStepsWrapper = styled.div`
       width: calc(50% - 12px);
     }
   }
+
+  @media (min-width: 1024px) {
+    gap: 60px;
+  }
 `
 
 export const Stepper = styled(BaseStepper)`
