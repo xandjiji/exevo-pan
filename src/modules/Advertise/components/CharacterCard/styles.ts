@@ -25,18 +25,16 @@ const mobileCardStyle = css`
   }
 `
 
-export const CharacterCard = styled(BaseCharacterCard)`
+export const CharacterCard = styled(BaseCharacterCard)<{ smaller: boolean }>`
   button {
     display: none;
   }
 
-  ${mobileCardStyle}
+  ${({ smaller }) => smaller && mobileCardStyle}
 `
 
 export const CardSkeleton = styled(BaseCardSkeleton)`
   button {
     display: none;
   }
-
-  ${mobileCardStyle}
 `

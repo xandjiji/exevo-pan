@@ -26,6 +26,7 @@ const CharacterCard = (): JSX.Element => {
         <S.CharacterCard
           key={selectedCharacter.id}
           characterData={selectedCharacter}
+          smaller={currentStep >= 1}
         />
       ) : (
         <S.CardSkeleton />
