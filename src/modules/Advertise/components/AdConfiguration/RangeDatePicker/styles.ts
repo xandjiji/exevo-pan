@@ -57,3 +57,9 @@ export const MonthRow = styled.span`
   grid-column: 1 / -1;
   color: var(--separator);
 `
+
+export const Subtext = styled.p`
+  margin-top: -12px;
+  font-size: 10px;
+  letter-spacing: 0.2px;
+`

@@ -37,56 +37,60 @@ const RangeDatePicker = (): JSX.Element => {
   const firstDay = days[0]
 
   return (
-    <S.Wrapper>
-      <S.MonthName aria-label="Current month">Setembro</S.MonthName>
-      <S.CalendarGrid>
-        <Weekdays />
+    <>
+      <S.Wrapper>
+        <S.MonthName aria-label="Current month">Setembro</S.MonthName>
+        <S.CalendarGrid>
+          <Weekdays />
 
-        <FillDates
-          firstDay={firstDay}
-          amount={getWeekdayNumber(firstDay)}
-          step={-1}
-        />
+          <FillDates
+            firstDay={firstDay}
+            amount={getWeekdayNumber(firstDay)}
+            step={-1}
+          />
 
-        {partitionedDates.map((monthDates, index) => {
-          const monthDatesElements = monthDates.map((date) => (
-            <S.Day
-              key={date}
-              aria-label={date}
-              aria-selected={selectedDates.includes(date)}
-              onClick={() => dispatch({ type: 'TOGGLE_DATE', date })}
-            >
-              {new Date(date).getDate()}
-            </S.Day>
-          ))
+          {partitionedDates.map((monthDates, index) => {
+            const monthDatesElements = monthDates.map((date) => (
+              <S.Day
+                key={date}
+                aria-label={date}
+                aria-selected={selectedDates.includes(date)}
+                onClick={() => dispatch({ type: 'TOGGLE_DATE', date })}
+              >
+                {new Date(date).getDate()}
+              </S.Day>
+            ))
 
-          const hasNextMonth = index + 1 !== partitionedDates.length
-          const currentMonthLastDay = monthDates[monthDates.length - 1]
-          const currentMonthLastWeekday = getWeekdayNumber(currentMonthLastDay)
+            const hasNextMonth = index + 1 !== partitionedDates.length
+            const currentMonthLastDay = monthDates[monthDates.length - 1]
+            const currentMonthLastWeekday =
+              getWeekdayNumber(currentMonthLastDay)
 
-          return (
-            <Fragment key={`month-${currentMonthLastDay}`}>
-              {monthDatesElements}
-              {hasNextMonth && (
-                <S.MonthRow aria-label="Next month">
-                  {months[getMonth(monthDates[0]) + 1]}
-                </S.MonthRow>
-              )}
-              {!hasNextMonth && (
-                <FillDates
-                  firstDay={currentMonthLastDay}
-                  amount={6 - currentMonthLastWeekday}
-                  step={1}
-                />
-              )}
-              {hasNextMonth && (
-                <FillColumns amount={currentMonthLastWeekday + 1} />
-              )}
-            </Fragment>
-          )
-        })}
-      </S.CalendarGrid>
-    </S.Wrapper>
+            return (
+              <Fragment key={`month-${currentMonthLastDay}`}>
+                {monthDatesElements}
+                {hasNextMonth && (
+                  <S.MonthRow aria-label="Next month">
+                    {months[getMonth(monthDates[0]) + 1]}
+                  </S.MonthRow>
+                )}
+                {!hasNextMonth && (
+                  <FillDates
+                    firstDay={currentMonthLastDay}
+                    amount={6 - currentMonthLastWeekday}
+                    step={1}
+                  />
+                )}
+                {hasNextMonth && (
+                  <FillColumns amount={currentMonthLastWeekday + 1} />
+                )}
+              </Fragment>
+            )
+          })}
+        </S.CalendarGrid>
+      </S.Wrapper>
+      <S.Subtext>Choose the days you want to highlight your auction.</S.Subtext>
+    </>
   )
 }
 
