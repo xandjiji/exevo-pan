@@ -1,5 +1,10 @@
 import { FormProvider, useForm } from './contexts/Form'
-import { AuctionSearch, AdConfiguration, CharacterCard } from './components'
+import {
+  AuctionSearch,
+  AdConfiguration,
+  Checkout,
+  CharacterCard,
+} from './components'
 import * as S from './styles'
 
 const Form = (): JSX.Element => {
@@ -15,7 +20,7 @@ const Form = (): JSX.Element => {
     { title: 'Checkout' },
   ]
 
-  const FormSteps = [<AuctionSearch />, <AdConfiguration />]
+  const FormSteps = [<AuctionSearch />, <AdConfiguration />, <Checkout />]
 
   return (
     <>
