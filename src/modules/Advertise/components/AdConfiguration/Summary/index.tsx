@@ -18,7 +18,25 @@ const Summary = (): JSX.Element => {
       </S.GroupItem>
 
       <S.GroupItem>
-        <S.Strong>{selectedDates.length} days</S.Strong>
+        <S.Strong>
+          {selectedDates.length}{' '}
+          <S.Tooltip
+            content={
+              <>
+                <S.TooltipTitle>
+                  Your auction will be highlighted during the following days:
+                </S.TooltipTitle>
+                <S.AllDates>
+                  {selectedDates.map((fullDate) => (
+                    <S.FullDate key={fullDate}>{fullDate}</S.FullDate>
+                  ))}
+                </S.AllDates>
+              </>
+            }
+          >
+            <S.Highlight>days</S.Highlight>
+          </S.Tooltip>
+        </S.Strong>
         <S.SubText>Advertising duration</S.SubText>
       </S.GroupItem>
 
