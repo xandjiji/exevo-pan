@@ -3,19 +3,23 @@ import LabelledInput from '../LabelledInput'
 import { validateEmail } from './utils'
 
 const EmailInput = (): JSX.Element => {
-  const [errorMessage, setErrorMessage] = useState<string>('')
+  const [validationState, setValidationState] = useState<
+    'invalid' | 'neutral' | 'valid'
+  >('neutral')
 
   const validate = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
-    if (value && !validateEmail(event.target.value)) {
-      setErrorMessage('Invalid email')
-    } else {
-      setErrorMessage('')
+    if (value) {
+      if (!validateEmail(event.target.value)) {
+        setValidationState('invalid')
+      } else {
+        setValidationState('valid')
+      }
     }
   }, [])
 
   const clearErrors = useCallback(() => {
-    setErrorMessage('')
+    setValidationState('neutral')
   }, [])
 
   return (
@@ -23,10 +27,10 @@ const EmailInput = (): JSX.Element => {
       id="email-input"
       labelText="Email"
       placeholder="you@email.com"
-      allowClear
-      errorMessage={errorMessage}
+      errorMessage={validationState === 'invalid' ? 'Invalid email' : undefined}
       onChange={clearErrors}
       onBlur={validate}
+      validationState={validationState}
     />
   )
 }
