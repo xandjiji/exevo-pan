@@ -1,11 +1,9 @@
 import { useState, useCallback } from 'react'
-import LabelledInput from '../LabelledInput'
+import LabelledInput, { InputStates } from '../LabelledInput'
 import { validateEmail } from './utils'
 
 const EmailInput = (): JSX.Element => {
-  const [validationState, setValidationState] = useState<
-    'invalid' | 'neutral' | 'valid'
-  >('neutral')
+  const [validationState, setValidationState] = useState<InputStates>('neutral')
 
   const validate = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target
