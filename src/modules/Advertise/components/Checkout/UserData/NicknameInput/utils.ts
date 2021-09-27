@@ -1,5 +1,7 @@
+import { endpoints } from 'Constants'
+
 const buildUrl = (nickname: string): string =>
-  `https://api.tibiadata.com/v2/characters/${nickname}.json`
+  `${endpoints.TIBIADATA}/${nickname}.json`
 
 export const isCharacterValid = async (nickname: string): Promise<boolean> => {
   try {
