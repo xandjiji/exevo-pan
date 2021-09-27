@@ -1,16 +1,15 @@
 import { useState, useCallback } from 'react'
-import LabelledInput from '../LabelledInput'
+import LabelledInput, { InputStates } from '../LabelledInput'
 import { isCharacterValid } from './utils'
 
 const NicknameInput = (): JSX.Element => {
-  const [validationState, setValidationState] = useState<
-    'invalid' | 'neutral' | 'valid'
-  >('neutral')
+  const [validationState, setValidationState] = useState<InputStates>('neutral')
 
   const validate = useCallback(
     async (event: React.ChangeEvent<HTMLInputElement>) => {
       const { value } = event.target
       if (value) {
+        setValidationState('loading')
         const isValid = await isCharacterValid(value)
         if (isValid) {
           setValidationState('valid')
