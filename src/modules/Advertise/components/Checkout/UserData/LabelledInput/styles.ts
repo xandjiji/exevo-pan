@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { Input as BaseInput } from 'components/Atoms'
 import InvalidSvg from 'assets/svgs/invalid.svg'
 import ValidSvg from 'assets/svgs/valid.svg'
-import { Smooth } from 'styles'
+import { Smooth, Spinner } from 'styles'
 
 export const Label = styled.label`
   margin-bottom: 6px;
@@ -74,5 +74,13 @@ export const ValidIcon = styled(ValidSvg)`
     to {
       transform: none;
     }
+  }
+`
+
+export const Loading = styled(Spinner)`
+  ${IconStyle}
+
+  &::after {
+    background-color: var(--surface);
   }
 `
