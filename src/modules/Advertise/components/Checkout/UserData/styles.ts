@@ -7,6 +7,10 @@ export const Wrapper = styled.section`
   padding-top: 0;
   border-radius: 12px;
   overflow: hidden;
+
+  div + div {
+    margin-top: 8px;
+  }
 `
 
 export const Title = styled.h2`
