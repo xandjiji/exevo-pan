@@ -8,6 +8,8 @@ const defaultState: FormValues = {
   selectedDates: [],
   paymentMethod: 'TIBIA_COINS',
   isValid: false,
+  email: '',
+  sendingCoinsCharacter: '',
   dispatch: () => {},
 }
 
@@ -15,13 +17,22 @@ const FormContext = createContext<FormValues>(defaultState)
 
 export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
   const [
-    { currentStep, selectedCharacter, selectedDates, paymentMethod },
+    {
+      currentStep,
+      selectedCharacter,
+      selectedDates,
+      paymentMethod,
+      email,
+      sendingCoinsCharacter,
+    },
     dispatch,
   ] = useReducer(FormReducer, {
     currentStep: defaultState.currentStep,
     selectedCharacter: defaultState.selectedCharacter,
     selectedDates: defaultState.selectedDates,
     paymentMethod: defaultState.paymentMethod,
+    email: defaultState.email,
+    sendingCoinsCharacter: defaultState.sendingCoinsCharacter,
   })
 
   const isValid: boolean = [!!selectedCharacter, !!selectedDates.length][
@@ -36,6 +47,8 @@ export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
         selectedDates,
         paymentMethod,
         isValid,
+        email,
+        sendingCoinsCharacter,
         dispatch,
       }}
     >

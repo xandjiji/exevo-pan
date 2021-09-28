@@ -46,6 +46,18 @@ const FormReducer = (
         paymentMethod: action.method,
       }
 
+    case 'SET_EMAIL':
+      return {
+        ...state,
+        email: action.email,
+      }
+
+    case 'SET_COINS_CHARACTER':
+      return {
+        ...state,
+        sendingCoinsCharacter: action.sendingCoinsCharacter,
+      }
+
     default:
       return { ...state }
   }

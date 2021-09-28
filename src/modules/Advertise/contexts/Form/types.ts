@@ -23,12 +23,22 @@ export type Action =
       type: 'SET_PAYMENT_METHOD'
       method: PaymentMethods
     }
+  | {
+      type: 'SET_EMAIL'
+      email: string
+    }
+  | {
+      type: 'SET_COINS_CHARACTER'
+      sendingCoinsCharacter: string
+    }
 
 export interface FormContextState {
   currentStep: number
   selectedCharacter: CharacterObject | undefined
   selectedDates: string[]
   paymentMethod: PaymentMethods
+  email: string
+  sendingCoinsCharacter: string
 }
 
 export interface FormValues extends FormContextState {
