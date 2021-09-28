@@ -1,9 +1,12 @@
 import { endpoints } from 'Constants'
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+export const validateEmail = (email: string): boolean => emailRegex.test(email)
+
 const buildUrl = (nickname: string): string =>
   `${endpoints.TIBIADATA}/${nickname}.json`
 
-export const isCharacterValid = async (nickname: string): Promise<boolean> => {
+export const validateCharacter = async (nickname: string): Promise<boolean> => {
   try {
     const response = await fetch(buildUrl(nickname))
     const data = await response.json()

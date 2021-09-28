@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Button as BaseButton } from 'components/Atoms'
 import { MaterialCard } from 'styles'
 
 export const Wrapper = styled.section`
@@ -17,4 +18,10 @@ export const Title = styled.h2`
   font-size: 24px;
   font-weight: 400;
   color: var(--onPrimary);
+`
+
+export const Button = styled(BaseButton)`
+  margin-top: 16px;
+  margin-left: auto;
+  display: block;
 `
