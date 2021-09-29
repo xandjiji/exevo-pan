@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { Stepper as BaseStepper } from 'components/Atoms'
 import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
 
@@ -60,7 +60,7 @@ export const FormStepsWrapper = styled.div`
   }
 `
 
-export const Stepper = styled(BaseStepper)`
+export const Stepper = styled(BaseStepper)<{ finished: boolean }>`
   padding: 0 40px;
   margin: 0 auto 54px auto;
   max-width: 420px;
@@ -68,4 +68,15 @@ export const Stepper = styled(BaseStepper)`
   @media (min-width: 768px) {
     max-width: 560px;
   }
+
+  ${({ finished }) =>
+    finished &&
+    css`
+      &&& button {
+        cursor: unset;
+        > div {
+          background-color: var(--green);
+        }
+      }
+    `}
 `

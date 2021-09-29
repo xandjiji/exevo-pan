@@ -11,7 +11,8 @@ const Form = (): JSX.Element => {
   const { currentStep, dispatch } = useForm()
 
   const setStep = (newStep: number) => {
-    if (newStep < currentStep) dispatch({ type: 'SET_STEP', newStep })
+    if (newStep < currentStep && currentStep <= 2)
+      dispatch({ type: 'SET_STEP', newStep })
   }
 
   const stepItems = [
@@ -24,7 +25,11 @@ const Form = (): JSX.Element => {
 
   return (
     <>
-      <S.Stepper steps={stepItems} currentStep={currentStep} />
+      <S.Stepper
+        steps={stepItems}
+        currentStep={currentStep}
+        finished={currentStep > 2}
+      />
       <S.FormStepsWrapper>
         {FormSteps[currentStep]}
         <CharacterCard />
