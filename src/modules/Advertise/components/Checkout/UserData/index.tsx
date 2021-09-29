@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useForm } from '../../../contexts/Form'
 import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter } from './utils'
@@ -18,15 +18,18 @@ const UserData = (): JSX.Element => {
   const invalidFields =
     email.state === 'invalid' || paymentCharacter.state === 'invalid'
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = event.target
-    dispatch({
-      type: 'SET_INPUT',
-      values: {
-        [id]: { value, state: 'neutral' },
-      },
-    })
-  }
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { id, value } = event.target
+      dispatch({
+        type: 'SET_INPUT',
+        values: {
+          [id]: { value, state: 'neutral' },
+        },
+      })
+    },
+    [dispatch],
+  )
 
   const submit = async () => {
     setSendingEmail(true)
