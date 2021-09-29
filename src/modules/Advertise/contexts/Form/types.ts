@@ -1,6 +1,21 @@
 import { ReactNode } from 'react'
 
+export type InputStates = 'invalid' | 'loading' | 'neutral' | 'valid'
 export type PaymentMethods = 'TIBIA_COINS' | 'PIX'
+
+export type InputState = {
+  value: string
+  state: InputStates
+}
+
+export interface FormContextState {
+  currentStep: number
+  selectedCharacter: CharacterObject | undefined
+  selectedDates: string[]
+  paymentMethod: PaymentMethods
+  email: InputState
+  paymentCharacter: InputState
+}
 
 export type Action =
   | {
@@ -24,22 +39,19 @@ export type Action =
       method: PaymentMethods
     }
   | {
-      type: 'SET_EMAIL'
-      email: string
+      type: 'SET_INPUT'
+      values: Partial<Pick<FormContextState, 'email' | 'paymentCharacter'>>
     }
   | {
-      type: 'SET_COINS_CHARACTER'
-      sendingCoinsCharacter: string
+      type: 'VALIDATE_INPUT'
+      key: keyof Pick<FormContextState, 'email' | 'paymentCharacter'>
+      state: InputStates
     }
-
-export interface FormContextState {
-  currentStep: number
-  selectedCharacter: CharacterObject | undefined
-  selectedDates: string[]
-  paymentMethod: PaymentMethods
-  email: string
-  sendingCoinsCharacter: string
-}
+/*   | {
+      type: 'FINISH_CHECKOUT'
+      email: string
+      sendingCoinsCharacter: string
+    } */
 
 export interface FormValues extends FormContextState {
   isValid: boolean

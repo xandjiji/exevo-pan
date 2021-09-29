@@ -1,23 +1,10 @@
-import { useReducer } from 'react'
-import UserDataReducer from './reducer'
 import { useForm } from '../../../contexts/Form'
 import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter } from './utils'
 import * as S from './styles'
-import { InputState } from './types'
-
-const initialInput: InputState = {
-  value: '',
-  state: 'neutral',
-}
 
 const UserData = (): JSX.Element => {
-  const { paymentMethod } = useForm()
-
-  const [{ email, paymentCharacter }, dispatch] = useReducer(UserDataReducer, {
-    email: { ...initialInput },
-    paymentCharacter: { ...initialInput },
-  })
+  const { paymentMethod, email, paymentCharacter, dispatch } = useForm()
 
   const needsCharacterInfo = paymentMethod === 'TIBIA_COINS'
 
@@ -39,10 +26,11 @@ const UserData = (): JSX.Element => {
   }
 
   const validateAndSubmit = async () => {
+    const isEmailValid = validateEmail(email.value)
     dispatch({
       type: 'VALIDATE_INPUT',
       key: 'email',
-      state: validateEmail(email.value) ? 'valid' : 'invalid',
+      state: isEmailValid ? 'valid' : 'invalid',
     })
 
     if (needsCharacterInfo) {

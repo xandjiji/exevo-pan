@@ -1,6 +1,11 @@
 import { createContext, useContext, useReducer } from 'react'
 import FormReducer from './FormReducer'
-import { FormProviderProps, FormValues } from './types'
+import { FormProviderProps, FormValues, InputState } from './types'
+
+const initialInput: InputState = {
+  value: '',
+  state: 'neutral',
+}
 
 const defaultState: FormValues = {
   currentStep: 0,
@@ -8,8 +13,8 @@ const defaultState: FormValues = {
   selectedDates: [],
   paymentMethod: 'TIBIA_COINS',
   isValid: false,
-  email: '',
-  sendingCoinsCharacter: '',
+  email: { ...initialInput },
+  paymentCharacter: { ...initialInput },
   dispatch: () => {},
 }
 
@@ -23,7 +28,7 @@ export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
       selectedDates,
       paymentMethod,
       email,
-      sendingCoinsCharacter,
+      paymentCharacter,
     },
     dispatch,
   ] = useReducer(FormReducer, {
@@ -32,7 +37,7 @@ export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
     selectedDates: defaultState.selectedDates,
     paymentMethod: defaultState.paymentMethod,
     email: defaultState.email,
-    sendingCoinsCharacter: defaultState.sendingCoinsCharacter,
+    paymentCharacter: defaultState.paymentCharacter,
   })
 
   const isValid: boolean = [!!selectedCharacter, !!selectedDates.length][
@@ -48,7 +53,7 @@ export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
         paymentMethod,
         isValid,
         email,
-        sendingCoinsCharacter,
+        paymentCharacter,
         dispatch,
       }}
     >

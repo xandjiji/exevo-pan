@@ -46,17 +46,24 @@ const FormReducer = (
         paymentMethod: action.method,
       }
 
-    case 'SET_EMAIL':
+    case 'SET_INPUT':
+      return {
+        ...state,
+        ...action.values,
+      }
+    case 'VALIDATE_INPUT':
+      return {
+        ...state,
+        [action.key]: { ...state[action.key], state: action.state },
+      }
+
+    /* case 'FINISH_CHECKOUT':
       return {
         ...state,
         email: action.email,
-      }
-
-    case 'SET_COINS_CHARACTER':
-      return {
-        ...state,
         sendingCoinsCharacter: action.sendingCoinsCharacter,
-      }
+        currentStep: state.currentStep + 1,
+      } */
 
     default:
       return { ...state }
