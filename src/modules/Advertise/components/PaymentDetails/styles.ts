@@ -23,3 +23,18 @@ export const ReceiptIcon = styled(SuccessSvg)`
   margin-right: 6px;
   fill: var(--primary);
 `
+
+export const Text = styled.p`
+  font-size: 14px;
+  line-height: 1.6;
+`
+
+export const Strong = styled.strong`
+  color: var(--primary);
+  letter-spacing: 0.5px;
+`
+
+export const Small = styled.span`
+  font-size: 10px;
+  letter-spacing: 0.2px;
+`
