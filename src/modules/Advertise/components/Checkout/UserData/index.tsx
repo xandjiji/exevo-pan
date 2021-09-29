@@ -1,46 +1,62 @@
-import { useState } from 'react'
+import { useReducer } from 'react'
+import UserDataReducer from './reducer'
 import { useForm } from '../../../contexts/Form'
-import LabelledInput, { InputStates } from './LabelledInput'
+import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter } from './utils'
 import * as S from './styles'
+import { InputState } from './types'
+
+const initialInput: InputState = {
+  value: '',
+  state: 'neutral',
+}
 
 const UserData = (): JSX.Element => {
   const { paymentMethod } = useForm()
 
-  const [email, setEmail] = useState('')
-  const [emailValidation, setEmailValidation] = useState<InputStates>('neutral')
-
-  const [character, setCharacter] = useState('')
-  const [characterValidation, setCharacterValidation] =
-    useState<InputStates>('neutral')
+  const [{ email, paymentCharacter }, dispatch] = useReducer(UserDataReducer, {
+    email: { ...initialInput },
+    paymentCharacter: { ...initialInput },
+  })
 
   const needsCharacterInfo = paymentMethod === 'TIBIA_COINS'
 
-  const emptyFields = needsCharacterInfo ? !email || !character : !email
+  const emptyFields = needsCharacterInfo
+    ? !email.value || !paymentCharacter.value
+    : !email.value
 
   const invalidFields =
-    emailValidation === 'invalid' || characterValidation === 'invalid'
+    email.state === 'invalid' || paymentCharacter.state === 'invalid'
 
-  const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmailValidation('neutral')
-    setEmail(event.target.value)
-  }
-
-  const handleCharacterChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setCharacterValidation('neutral')
-    setCharacter(event.target.value)
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = event.target
+    dispatch({
+      type: 'SET_INPUT',
+      values: {
+        [id]: { value, state: 'neutral' },
+      },
+    })
   }
 
   const validateAndSubmit = async () => {
-    const isEmailValid = validateEmail(email)
-    setEmailValidation(isEmailValid ? 'valid' : 'invalid')
+    dispatch({
+      type: 'VALIDATE_INPUT',
+      key: 'email',
+      state: validateEmail(email.value) ? 'valid' : 'invalid',
+    })
 
     if (needsCharacterInfo) {
-      setCharacterValidation('loading')
-      const isCharacterValid = await validateCharacter(character)
-      setCharacterValidation(isCharacterValid ? 'valid' : 'invalid')
+      dispatch({
+        type: 'VALIDATE_INPUT',
+        key: 'paymentCharacter',
+        state: 'loading',
+      })
+      const isCharacterValid = await validateCharacter(paymentCharacter.value)
+      dispatch({
+        type: 'VALIDATE_INPUT',
+        key: 'paymentCharacter',
+        state: isCharacterValid ? 'valid' : 'invalid',
+      })
     }
   }
 
@@ -48,27 +64,25 @@ const UserData = (): JSX.Element => {
     <S.Wrapper>
       <S.Title>Your information</S.Title>
       <LabelledInput
-        id="email-input"
+        id="email"
         labelText="Email"
         placeholder="you@email.com"
-        errorMessage={
-          emailValidation === 'invalid' ? 'Invalid email' : undefined
-        }
-        onChange={handleEmailChange}
-        validationState={emailValidation}
+        errorMessage={email.state === 'invalid' ? 'Invalid email' : undefined}
+        onChange={handleChange}
+        validationState={email.state}
       />
       {paymentMethod === 'TIBIA_COINS' && (
         <LabelledInput
-          id="nickname-input"
+          id="paymentCharacter"
           labelText="Sending coins character"
           placeholder="e.g, 'Eternal Oblivion'"
           errorMessage={
-            characterValidation === 'invalid'
+            paymentCharacter.state === 'invalid'
               ? 'Character does not exist'
               : undefined
           }
-          onChange={handleCharacterChange}
-          validationState={characterValidation}
+          onChange={handleChange}
+          validationState={paymentCharacter.state}
         />
       )}
 
