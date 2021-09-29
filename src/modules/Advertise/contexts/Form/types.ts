@@ -47,11 +47,6 @@ export type Action =
       key: keyof Pick<FormContextState, 'email' | 'paymentCharacter'>
       state: InputStates
     }
-/*   | {
-      type: 'FINISH_CHECKOUT'
-      email: string
-      sendingCoinsCharacter: string
-    } */
 
 export interface FormValues extends FormContextState {
   isValid: boolean

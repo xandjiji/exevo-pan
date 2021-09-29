@@ -57,14 +57,6 @@ const FormReducer = (
         [action.key]: { ...state[action.key], state: action.state },
       }
 
-    /* case 'FINISH_CHECKOUT':
-      return {
-        ...state,
-        email: action.email,
-        sendingCoinsCharacter: action.sendingCoinsCharacter,
-        currentStep: state.currentStep + 1,
-      } */
-
     default:
       return { ...state }
   }
