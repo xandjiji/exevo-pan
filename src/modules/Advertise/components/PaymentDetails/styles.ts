@@ -3,6 +3,11 @@ import SuccessSvg from 'assets/svgs/check.svg'
 import { MaterialCard } from 'styles'
 
 export const Wrapper = styled.section`
+  display: grid;
+  grid-gap: 24px;
+`
+
+export const TransactionInformation = styled.section`
   ${MaterialCard}
   padding: 16px;
   display: grid;
