@@ -1,5 +1,6 @@
 import { useForm } from '../../contexts/Form'
 import TransactionId from './TransactionId'
+import CoinsPayment from './CoinsPayment'
 import Summary from '../Summary'
 import * as S from './styles'
 
@@ -21,6 +22,8 @@ const PaymentDetails = (): JSX.Element => {
           An email was sent to <S.Strong>{email.value}</S.Strong> containing the
           order details.
         </S.Text>
+
+        <CoinsPayment />
 
         <S.Small>
           If the purchase can&apos;t be completed, you will receive a refund.
