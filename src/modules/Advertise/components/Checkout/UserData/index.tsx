@@ -57,6 +57,7 @@ const UserData = (): JSX.Element => {
         placeholder="you@email.com"
         errorMessage={email.state === 'invalid' ? 'Invalid email' : undefined}
         onChange={handleChange}
+        value={email.value}
         validationState={email.state}
       />
       {paymentMethod === 'TIBIA_COINS' && (
@@ -70,6 +71,7 @@ const UserData = (): JSX.Element => {
               : undefined
           }
           onChange={handleChange}
+          value={paymentCharacter.value}
           validationState={paymentCharacter.state}
         />
       )}

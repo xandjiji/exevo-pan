@@ -6,3 +6,5 @@ export interface LabelledInputProps extends InputProps {
   labelText: string
   validationState?: InputStates
 }
+
+export type { InputStates }
