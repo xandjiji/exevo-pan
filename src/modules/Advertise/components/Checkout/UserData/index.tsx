@@ -1,10 +1,13 @@
+import { useState } from 'react'
 import { useForm } from '../../../contexts/Form'
 import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter } from './utils'
 import * as S from './styles'
 
 const UserData = (): JSX.Element => {
-  const { paymentMethod, email, paymentCharacter, dispatch } = useForm()
+  const { paymentMethod, email, paymentCharacter, currentStep, dispatch } =
+    useForm()
+  const [sendingEmail, setSendingEmail] = useState(false)
 
   const needsCharacterInfo = paymentMethod === 'TIBIA_COINS'
 
@@ -23,6 +26,17 @@ const UserData = (): JSX.Element => {
         [id]: { value, state: 'neutral' },
       },
     })
+  }
+
+  const submit = async () => {
+    setSendingEmail(true)
+    /* @ ToDo: add real email api */
+    /* @ ToDo: handle errors with try-catch */
+    await new Promise((r) => setTimeout(r, 2000))
+    setSendingEmail(false)
+
+    /* @ ToDo: use new finish action */
+    dispatch({ type: 'SET_STEP', newStep: currentStep + 1 })
   }
 
   const validateAndSubmit = async () => {
@@ -45,6 +59,10 @@ const UserData = (): JSX.Element => {
         key: 'paymentCharacter',
         state: isCharacterValid ? 'valid' : 'invalid',
       })
+
+      if (isEmailValid && isCharacterValid) submit()
+    } else if (isEmailValid) {
+      submit()
     }
   }
 
@@ -82,7 +100,7 @@ const UserData = (): JSX.Element => {
         disabled={emptyFields || invalidFields}
         onClick={validateAndSubmit}
       >
-        Checkout
+        {sendingEmail ? <S.Loading /> : 'Checkout'}
       </S.Button>
     </S.Wrapper>
   )

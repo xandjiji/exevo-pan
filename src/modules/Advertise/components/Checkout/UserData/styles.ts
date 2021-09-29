@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Button as BaseButton } from 'components/Atoms'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Spinner } from 'styles'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
@@ -28,4 +28,23 @@ export const Button = styled(BaseButton)`
   margin-top: 16px;
   margin-left: auto;
   display: block;
+  min-width: 150px;
+  min-height: 52px;
+`
+
+export const Loading = styled(Spinner)`
+  margin: 0 auto;
+  background: linear-gradient(
+    to right,
+    var(--onPrimary) 10%,
+    rgba(255, 255, 255, 0) 58%
+  );
+
+  &:before {
+    background: var(--onPrimary);
+  }
+
+  &:after {
+    background: var(--primary);
+  }
 `
