@@ -7,7 +7,7 @@ import * as S from './styles'
 const uuid = '23438b05-31d5-45b1-ae6c-55d6e35c2d6d'
 
 const PaymentDetails = (): JSX.Element => {
-  const { email } = useForm()
+  const { email, paymentMethod } = useForm()
 
   return (
     <S.Wrapper>
@@ -23,7 +23,7 @@ const PaymentDetails = (): JSX.Element => {
           order details.
         </S.Text>
 
-        <CoinsPayment />
+        {paymentMethod === 'TIBIA_COINS' ? <CoinsPayment /> : null}
 
         <S.Small>
           If the purchase can&apos;t be completed, you will receive a refund.

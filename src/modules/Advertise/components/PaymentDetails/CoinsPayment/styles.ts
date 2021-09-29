@@ -4,7 +4,7 @@ import { Clickable } from 'styles'
 
 export const Text = styled.p`
   font-size: 14px;
-  line-height: 1.6;
+  line-height: 1;
 `
 
 export const Strong = styled.strong`
