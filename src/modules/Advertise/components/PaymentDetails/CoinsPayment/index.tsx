@@ -1,3 +1,4 @@
+import { pricing } from 'Constants'
 import { useForm } from '../../../contexts/Form'
 import * as S from './styles'
 
@@ -8,7 +9,10 @@ const CoinsPayment = (): JSX.Element => {
     <>
       <S.Text>
         Please complete your order sending{' '}
-        <S.Strong>{selectedDates.length * 50} Tibia Coins</S.Strong> to{' '}
+        <S.Strong>
+          {selectedDates.length * pricing.TIBIA_COINS_ADVERTISE} Tibia Coins
+        </S.Strong>{' '}
+        to{' '}
         <S.Link
           href="https://www.tibia.com/community/?name=Ksu"
           target="_blank"

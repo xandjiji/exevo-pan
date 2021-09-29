@@ -1,3 +1,4 @@
+import { pricing } from 'Constants'
 import { PaymentMethods } from '../../contexts/Form/types'
 
 export const calculatePrice = (
@@ -6,10 +7,10 @@ export const calculatePrice = (
 ): string => {
   switch (paymentMethod) {
     case 'PIX':
-      return `R$ ${daysCount * 10},00 reais`
+      return `R$ ${daysCount * pricing.BRL_ADVERTISE},00 reais`
 
     case 'TIBIA_COINS':
     default:
-      return `${daysCount * 50} Tibia Coins`
+      return `${daysCount * pricing.TIBIA_COINS_ADVERTISE} Tibia Coins`
   }
 }
