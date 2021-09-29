@@ -4,6 +4,7 @@ import {
   AdConfiguration,
   Checkout,
   CharacterCard,
+  PaymentDetails,
 } from './components'
 import * as S from './styles'
 
@@ -21,7 +22,12 @@ const Form = (): JSX.Element => {
     { title: 'Checkout' },
   ]
 
-  const FormSteps = [<AuctionSearch />, <AdConfiguration />, <Checkout />]
+  const FormSteps = [
+    <AuctionSearch />,
+    <AdConfiguration />,
+    <Checkout />,
+    <PaymentDetails />,
+  ]
 
   return (
     <>
