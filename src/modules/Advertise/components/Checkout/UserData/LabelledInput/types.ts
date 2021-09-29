@@ -1,6 +1,5 @@
 import { InputProps } from 'components/Atoms/Input/types'
-
-export type InputStates = 'invalid' | 'loading' | 'neutral' | 'valid'
+import { InputStates } from '../../../../contexts/Form/types'
 
 export interface LabelledInputProps extends InputProps {
   id: string
