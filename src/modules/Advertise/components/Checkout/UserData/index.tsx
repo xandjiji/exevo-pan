@@ -18,6 +18,8 @@ const UserData = (): JSX.Element => {
   const invalidFields =
     email.state === 'invalid' || paymentCharacter.state === 'invalid'
 
+  const isButtonDisabled = emptyFields || invalidFields
+
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
       const { id, value } = event.target
@@ -69,6 +71,12 @@ const UserData = (): JSX.Element => {
     }
   }
 
+  const handleKeypress = (event: React.KeyboardEvent) => {
+    if (event.code === 'Enter' && !isButtonDisabled) {
+      validateAndSubmit()
+    }
+  }
+
   return (
     <S.Wrapper>
       <S.Title>Your information</S.Title>
@@ -76,31 +84,33 @@ const UserData = (): JSX.Element => {
         id="email"
         labelText="Email"
         placeholder="you@email.com"
+        validationState={email.state}
         errorMessage={email.state === 'invalid' ? 'Invalid email' : undefined}
+        onKeyPress={handleKeypress}
         onChange={handleChange}
         value={email.value}
-        validationState={email.state}
       />
       {paymentMethod === 'TIBIA_COINS' && (
         <LabelledInput
           id="paymentCharacter"
           labelText="Sending coins character"
           placeholder="e.g, 'Eternal Oblivion'"
+          validationState={paymentCharacter.state}
           errorMessage={
             paymentCharacter.state === 'invalid'
               ? 'Character does not exist'
               : undefined
           }
+          onKeyPress={handleKeypress}
           onChange={handleChange}
           value={paymentCharacter.value}
-          validationState={paymentCharacter.state}
         />
       )}
 
       <S.Button
         type="button"
         aria-label="Validate and submit checkout"
-        disabled={emptyFields || invalidFields}
+        disabled={isButtonDisabled}
         onClick={validateAndSubmit}
       >
         {sendingEmail ? <S.Loading /> : 'Checkout'}
