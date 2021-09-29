@@ -1,4 +1,4 @@
-import { PaymentMethods } from '../../../contexts/Form/types'
+import { PaymentMethods } from '../../contexts/Form/types'
 
 export const calculatePrice = (
   daysCount: number,

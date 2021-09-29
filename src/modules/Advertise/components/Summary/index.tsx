@@ -1,4 +1,4 @@
-import { useForm } from '../../../contexts/Form'
+import { useForm } from '../../contexts/Form'
 import { calculatePrice } from './utils'
 import * as S from './styles'
 
