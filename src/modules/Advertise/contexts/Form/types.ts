@@ -9,12 +9,14 @@ export type InputState = {
 }
 
 export interface FormContextState {
+  uuid: string
   currentStep: number
   selectedCharacter: CharacterObject | undefined
   selectedDates: string[]
   paymentMethod: PaymentMethods
   email: InputState
   paymentCharacter: InputState
+  finished: boolean
 }
 
 export type Action =
@@ -46,6 +48,9 @@ export type Action =
       type: 'VALIDATE_INPUT'
       key: keyof Pick<FormContextState, 'email' | 'paymentCharacter'>
       state: InputStates
+    }
+  | {
+      type: 'FINISH_FORM'
     }
 
 export interface FormValues extends FormContextState {

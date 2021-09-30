@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { getRecommendedDays } from './utils'
 import { FormContextState, Action } from './types'
 
@@ -51,10 +52,19 @@ const FormReducer = (
         ...state,
         ...action.values,
       }
+
     case 'VALIDATE_INPUT':
       return {
         ...state,
         [action.key]: { ...state[action.key], state: action.state },
+      }
+
+    case 'FINISH_FORM':
+      return {
+        ...state,
+        uuid: uuidv4(),
+        currentStep: state.currentStep + 1,
+        finished: true,
       }
 
     default:

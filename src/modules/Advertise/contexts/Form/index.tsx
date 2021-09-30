@@ -1,4 +1,5 @@
 import { createContext, useContext, useReducer } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import FormReducer from './FormReducer'
 import { FormProviderProps, FormValues, InputState } from './types'
 
@@ -8,6 +9,7 @@ const initialInput: InputState = {
 }
 
 const defaultState: FormValues = {
+  uuid: uuidv4(),
   currentStep: 0,
   selectedCharacter: undefined,
   selectedDates: [],
@@ -15,48 +17,32 @@ const defaultState: FormValues = {
   isValid: false,
   email: { ...initialInput },
   paymentCharacter: { ...initialInput },
+  finished: false,
   dispatch: () => {},
 }
 
 const FormContext = createContext<FormValues>(defaultState)
 
 export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
-  const [
-    {
-      currentStep,
-      selectedCharacter,
-      selectedDates,
-      paymentMethod,
-      email,
-      paymentCharacter,
-    },
-    dispatch,
-  ] = useReducer(FormReducer, {
+  const [formValues, dispatch] = useReducer(FormReducer, {
+    uuid: defaultState.uuid,
     currentStep: defaultState.currentStep,
     selectedCharacter: defaultState.selectedCharacter,
     selectedDates: defaultState.selectedDates,
     paymentMethod: defaultState.paymentMethod,
     email: defaultState.email,
     paymentCharacter: defaultState.paymentCharacter,
+    finished: defaultState.finished,
   })
+
+  const { selectedCharacter, selectedDates, currentStep } = formValues
 
   const isValid: boolean = [!!selectedCharacter, !!selectedDates.length][
     currentStep
   ]
 
   return (
-    <FormContext.Provider
-      value={{
-        currentStep,
-        selectedCharacter,
-        selectedDates,
-        paymentMethod,
-        isValid,
-        email,
-        paymentCharacter,
-        dispatch,
-      }}
-    >
+    <FormContext.Provider value={{ ...formValues, isValid, dispatch }}>
       {children}
     </FormContext.Provider>
   )
