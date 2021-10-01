@@ -20,8 +20,8 @@ const CopyButton = ({ copyString, ...props }: CopyButtonProps): JSX.Element => {
     <S.Button
       type="button"
       aria-label={clicked ? 'Copied to clipboard' : 'Copy to clipboard'}
-      onClick={handleClick}
       {...props}
+      onClick={handleClick}
     >
       {clicked ? <S.ValidIcon /> : <S.CopyIcon />}
     </S.Button>
