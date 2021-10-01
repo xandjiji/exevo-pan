@@ -2,9 +2,7 @@ import { QrCodePix } from 'qrcode-pix'
 import { pricing } from 'Constants'
 
 interface PixParams {
-  uuid: string
-  nickname: string
-  email: string
+  txId: number
   daysAmount: number
 }
 
@@ -14,18 +12,17 @@ interface PixObject {
 }
 
 export const generateQrCode = async ({
-  uuid,
-  nickname,
-  email,
+  txId,
   daysAmount,
 }: PixParams): Promise<PixObject> => {
+  const id = txId.toString()
   const tx = QrCodePix({
     version: '01',
     key: pricing.PIX_KEY,
-    name: nickname,
-    city: '',
-    message: email,
-    transactionId: uuid,
+    name: id,
+    city: id,
+    message: id,
+    transactionId: id,
     value: daysAmount * pricing.BRL_ADVERTISE,
   })
 

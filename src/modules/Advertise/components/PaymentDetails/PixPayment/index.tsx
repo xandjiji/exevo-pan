@@ -4,7 +4,7 @@ import * as S from './styles'
 import { generateQrCode } from './utils'
 
 const PixPayment = (): JSX.Element => {
-  const { uuid, selectedCharacter, email, selectedDates } = useForm()
+  const { selectedCharacter, selectedDates } = useForm()
 
   const [qrCode, setQrCode] = useState<string | undefined>()
   const [txKey, setTxKey] = useState<string | undefined>()
@@ -12,9 +12,7 @@ const PixPayment = (): JSX.Element => {
   useEffect(() => {
     const generateAndSetQrCode = async () => {
       const pixObject = await generateQrCode({
-        uuid,
-        nickname: selectedCharacter?.nickname ?? '',
-        email: email.value,
+        txId: selectedCharacter?.id ?? 0,
         daysAmount: selectedDates.length,
       })
       setQrCode(pixObject.qrCode)
