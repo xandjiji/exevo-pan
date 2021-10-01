@@ -1,5 +1,5 @@
 import { QrCodePix } from 'qrcode-pix'
-import { pricing } from 'Constants'
+import { advertising } from 'Constants'
 
 interface PixParams {
   txId: number
@@ -18,12 +18,12 @@ export const generateQrCode = async ({
   const id = txId.toString()
   const tx = QrCodePix({
     version: '01',
-    key: pricing.PIX_KEY,
+    key: advertising.PIX_KEY,
     name: id,
     city: id,
     message: id,
     transactionId: id,
-    value: daysAmount * pricing.BRL_ADVERTISE,
+    value: daysAmount * advertising.BRL_ADVERTISE,
   })
 
   return {
