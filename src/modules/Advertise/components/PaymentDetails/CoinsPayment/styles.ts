@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { CopyButton as BaseCopyButton } from 'components/Atoms'
 import CopySvg from 'assets/svgs/copy.svg'
 import { Clickable } from 'styles'
 
@@ -29,4 +30,10 @@ export const CopyIcon = styled(CopySvg)`
   transform: translateY(6px);
 
   fill: var(--onSurface);
+`
+
+export const CopyButton = styled(BaseCopyButton)`
+  margin-left: 1px;
+  display: inline-block;
+  transform: translateY(6px);
 `

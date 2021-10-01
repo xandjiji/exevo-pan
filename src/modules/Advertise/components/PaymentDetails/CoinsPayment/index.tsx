@@ -1,5 +1,4 @@
 import { pricing } from 'Constants'
-import { copyToClipboard } from 'utils'
 import { useForm } from '../../../contexts/Form'
 import * as S from './styles'
 
@@ -21,7 +20,7 @@ const CoinsPayment = (): JSX.Element => {
         >
           Ksu
         </S.Link>
-        <S.CopyIcon onClick={() => copyToClipboard('Ksu')} />
+        <S.CopyButton copyString="Ksu" />
       </S.Text>
     </>
   )
