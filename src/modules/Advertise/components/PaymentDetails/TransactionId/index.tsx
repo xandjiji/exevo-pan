@@ -7,7 +7,7 @@ const TransactionId = ({
 }): JSX.Element => (
   <S.Wrapper>
     <S.Label>Transaction ID:</S.Label>
-    <S.Code>{children}</S.Code>
+    <S.Id>{children}</S.Id>
   </S.Wrapper>
 )
 
