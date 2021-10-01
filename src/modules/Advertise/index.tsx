@@ -9,10 +9,10 @@ import {
 import * as S from './styles'
 
 const Form = (): JSX.Element => {
-  const { currentStep, dispatch } = useForm()
+  const { currentStep, finished, dispatch } = useForm()
 
   const setStep = (newStep: number) => {
-    if (newStep < currentStep && currentStep <= 2)
+    if (newStep < currentStep && !finished)
       dispatch({ type: 'SET_STEP', newStep })
   }
 
@@ -34,7 +34,7 @@ const Form = (): JSX.Element => {
       <S.Stepper
         steps={stepItems}
         currentStep={currentStep}
-        finished={currentStep > 2}
+        finished={finished}
       />
       <S.FormStepsWrapper>
         {FormSteps[currentStep]}

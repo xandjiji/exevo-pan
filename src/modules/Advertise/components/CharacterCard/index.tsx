@@ -4,7 +4,8 @@ import { useForm } from '../../contexts/Form'
 import * as S from './styles'
 
 const CharacterCard = (): JSX.Element | null => {
-  const { selectedCharacter, currentStep, isValid, dispatch } = useForm()
+  const { selectedCharacter, currentStep, finished, isValid, dispatch } =
+    useForm()
 
   const wrapperRef = useRef<HTMLDivElement | null>(null)
 
@@ -20,7 +21,7 @@ const CharacterCard = (): JSX.Element | null => {
       ?.scrollTo({ top: 0, behavior: 'smooth' })
   }, [currentStep])
 
-  if (currentStep < 3) {
+  if (!finished) {
     return (
       <S.Wrapper ref={wrapperRef}>
         {selectedCharacter ? (

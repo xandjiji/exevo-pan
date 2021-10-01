@@ -5,8 +5,7 @@ import { validateEmail, validateCharacter } from './utils'
 import * as S from './styles'
 
 const Checkout = (): JSX.Element => {
-  const { paymentMethod, email, paymentCharacter, currentStep, dispatch } =
-    useForm()
+  const { paymentMethod, email, paymentCharacter, dispatch } = useForm()
   const [sendingEmail, setSendingEmail] = useState(false)
 
   const needsCharacterInfo = paymentMethod === 'TIBIA_COINS'
@@ -40,8 +39,7 @@ const Checkout = (): JSX.Element => {
     await new Promise((r) => setTimeout(r, 2000))
     setSendingEmail(false)
 
-    /* @ ToDo: use new finish action */
-    dispatch({ type: 'SET_STEP', newStep: currentStep + 1 })
+    dispatch({ type: 'FINISH_FORM' })
   }
 
   const validateAndSubmit = async () => {
