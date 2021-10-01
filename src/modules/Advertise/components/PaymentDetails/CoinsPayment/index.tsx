@@ -14,13 +14,13 @@ const CoinsPayment = (): JSX.Element => {
         </S.Strong>{' '}
         from <S.Strong>{paymentCharacter.value}</S.Strong> to{' '}
         <S.Link
-          href="https://www.tibia.com/community/?name=Ksu"
+          href={`https://www.tibia.com/community/?name=${advertising.BANK_CHARACTER}`}
           target="_blank"
           rel="noreferrer noopener external"
         >
-          Ksu
+          {advertising.BANK_CHARACTER}
         </S.Link>
-        <S.CopyButton copyString="Ksu" />
+        <S.CopyButton copyString={advertising.BANK_CHARACTER} />
       </S.Text>
     </>
   )
