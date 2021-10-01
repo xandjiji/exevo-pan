@@ -1,6 +1,7 @@
 import { useForm } from '../../contexts/Form'
 import TransactionId from './TransactionId'
 import CoinsPayment from './CoinsPayment'
+import PixPayment from './PixPayment'
 import Summary from '../Summary'
 import * as S from './styles'
 
@@ -21,7 +22,7 @@ const PaymentDetails = (): JSX.Element => {
           order details.
         </S.Text>
 
-        {paymentMethod === 'TIBIA_COINS' ? <CoinsPayment /> : null}
+        {paymentMethod === 'TIBIA_COINS' ? <CoinsPayment /> : <PixPayment />}
 
         <S.Small>
           If the purchase can&apos;t be completed, you will receive a refund.
