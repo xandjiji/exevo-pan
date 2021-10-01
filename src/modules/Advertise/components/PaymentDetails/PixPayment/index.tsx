@@ -24,7 +24,10 @@ const PixPayment = (): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Payload>{txKey}</S.Payload>
+      <S.Payload>
+        {txKey}
+        <S.CopyButton copyString={txKey as string} />
+      </S.Payload>
       <S.QrCode src={qrCode} />
     </S.Wrapper>
   )
