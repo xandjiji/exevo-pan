@@ -9,7 +9,7 @@ const initialInput: InputState = {
 }
 
 const defaultState: FormValues = {
-  uuid: uuidv4(),
+  uuid: '',
   currentStep: 0,
   selectedCharacter: undefined,
   selectedDates: [],
@@ -25,7 +25,7 @@ const FormContext = createContext<FormValues>(defaultState)
 
 export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
   const [formValues, dispatch] = useReducer(FormReducer, {
-    uuid: defaultState.uuid,
+    uuid: uuidv4(),
     currentStep: defaultState.currentStep,
     selectedCharacter: defaultState.selectedCharacter,
     selectedDates: defaultState.selectedDates,
