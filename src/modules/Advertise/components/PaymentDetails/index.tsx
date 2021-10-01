@@ -4,10 +4,8 @@ import CoinsPayment from './CoinsPayment'
 import Summary from '../Summary'
 import * as S from './styles'
 
-const uuid = '23438b05-31d5-45b1-ae6c-55d6e35c2d6d'
-
 const PaymentDetails = (): JSX.Element => {
-  const { email, paymentMethod } = useForm()
+  const { uuid, email, paymentMethod } = useForm()
 
   return (
     <S.Wrapper>
