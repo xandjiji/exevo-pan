@@ -1,4 +1,5 @@
 export { default as Clickable } from './Clickable'
+export { default as Code } from './Code'
 export { default as Container } from './Container'
 export { default as CustomScrollbar } from './CustomScrollbar'
 export { default as GlobalStyles } from './GlobalStyles'
