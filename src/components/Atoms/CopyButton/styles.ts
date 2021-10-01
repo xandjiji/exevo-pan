@@ -1,18 +1,30 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import CopySvg from 'assets/svgs/copy.svg'
-import { Clickable } from 'styles'
+import CheckSvg from 'assets/svgs/valid.svg'
+import { Clickable, RollInAnimation } from 'styles'
 
-export const Button = styled.button``
-
-export const CopyIcon = styled(CopySvg)`
+export const Button = styled.button`
   ${Clickable}
-  padding: 3px;
-  margin-left: 2px;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+  background-color: var(--surface);
+  overflow: hidden;
+`
 
+const IconStyle = css`
   width: 24px;
   height: 24px;
-  border-radius: 4px;
-  transform: translateY(6px);
+  padding: 3px;
+`
 
+export const CopyIcon = styled(CopySvg)`
+  ${IconStyle}
   fill: var(--onSurface);
+`
+
+export const ValidIcon = styled(CheckSvg)`
+  ${IconStyle}
+  ${RollInAnimation}
+  fill: var(--green);
 `
