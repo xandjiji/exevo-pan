@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 import { Input as BaseInput } from 'components/Atoms'
 import InvalidSvg from 'assets/svgs/invalid.svg'
 import ValidSvg from 'assets/svgs/valid.svg'
-import { Smooth, Spinner } from 'styles'
+import { Smooth, Spinner, RollInAnimation } from 'styles'
 
 export const Label = styled.label`
   margin-bottom: 6px;
@@ -50,31 +50,8 @@ export const InvalidIcon = styled(InvalidSvg)`
 
 export const ValidIcon = styled(ValidSvg)`
   ${IconStyle}
+  ${RollInAnimation}
   fill: var(--green);
-
-  animation-timing-function: ease-in;
-  animation-duration: 0.8s;
-  animation-name: rollIn;
-
-  @keyframes rollIn {
-    from {
-      opacity: 0;
-      transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 200deg);
-    }
-    20% {
-      transform: translate3d(75%, 0, 0) rotate3d(0, 0, 1, 150deg);
-    }
-    40% {
-      opacity: 1;
-      transform: translate3d(-10%, 0, 0) rotate3d(0, 0, 1, -30deg);
-    }
-    60% {
-      transform: translate3d(5%, 0, 0) rotate3d(0, 0, 1, 15deg);
-    }
-    to {
-      transform: none;
-    }
-  }
 `
 
 export const Loading = styled(Spinner)`
