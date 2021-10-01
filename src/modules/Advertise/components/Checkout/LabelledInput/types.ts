@@ -1,5 +1,5 @@
 import { InputProps } from 'components/Atoms/Input/types'
-import { InputStates } from '../../../../contexts/Form/types'
+import { InputStates } from '../../../contexts/Form/types'
 
 export interface LabelledInputProps extends InputProps {
   id: string
