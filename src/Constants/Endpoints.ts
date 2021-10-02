@@ -3,4 +3,5 @@ export const endpoints = {
   BASE_HISTORY_DATA: 'https://exevopan-history-data.netlify.app',
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
+  MAIL_CHECKOUT: '/api/mail-checkout',
 }
