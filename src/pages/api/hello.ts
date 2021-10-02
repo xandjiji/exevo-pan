@@ -18,8 +18,7 @@ export default async (
   request: VercelRequest,
   response: VercelResponse,
 ): Promise<void> => {
-  await new Promise((resolve, reject) => {
-    // verify connection configuration
+  /* await new Promise((resolve, reject) => {
     mailer.verify((error, success) => {
       if (error) {
         console.log(error)
@@ -29,7 +28,7 @@ export default async (
         resolve(success)
       }
     })
-  })
+  }) */
 
   const { name = 'World' } = request.query
 
@@ -40,20 +39,7 @@ export default async (
     html: 'deu certo',
   }
 
-  await new Promise((resolve, reject) => {
-    // send mail
-    mailer.sendMail(mailOptions, (err, info) => {
-      if (err) {
-        console.error(err)
-        reject(err)
-      } else {
-        console.log(info)
-        resolve(info)
-      }
-    })
-  })
-
-  /* mailer.sendMail(mailOptions) */
+  await mailer.sendMail(mailOptions)
 
   response.status(200).send(`Hello ${name}!`)
 }
