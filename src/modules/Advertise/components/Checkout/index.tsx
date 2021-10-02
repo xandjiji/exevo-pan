@@ -1,11 +1,20 @@
 import { useState, useCallback } from 'react'
+import { MailCheckoutClient } from 'services'
 import { useForm } from '../../contexts/Form'
 import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter } from './utils'
 import * as S from './styles'
 
 const Checkout = (): JSX.Element => {
-  const { paymentMethod, email, paymentCharacter, dispatch } = useForm()
+  const {
+    uuid,
+    selectedCharacter,
+    selectedDates,
+    paymentMethod,
+    email,
+    paymentCharacter,
+    dispatch,
+  } = useForm()
   const [sendingEmail, setSendingEmail] = useState(false)
 
   const needsCharacterInfo = paymentMethod === 'TIBIA_COINS'
@@ -34,9 +43,14 @@ const Checkout = (): JSX.Element => {
 
   const submit = async () => {
     setSendingEmail(true)
-    /* @ ToDo: add real email api */
-    /* @ ToDo: handle errors with try-catch */
-    await new Promise((r) => setTimeout(r, 2000))
+    await MailCheckoutClient.postMail({
+      uuid,
+      selectedCharacter: selectedCharacter as CharacterObject,
+      selectedDates,
+      paymentMethod,
+      email: email.value,
+      paymentCharacter: paymentCharacter.value,
+    })
     setSendingEmail(false)
 
     dispatch({ type: 'FINISH_FORM' })
