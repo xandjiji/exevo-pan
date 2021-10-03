@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as nodemailer from 'nodemailer'
+import { EmailTemplate } from 'modules/Advertise/components'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 
 const mailCredentials = {
@@ -23,8 +24,8 @@ export default async (
   const mailOptions = {
     from: `Exevo Pan <${mailCredentials.auth.user}>`,
     to: body.email,
-    subject: body.uuid,
-    html: JSON.stringify(body),
+    subject: 'Thank you for your order!',
+    html: EmailTemplate(body),
   }
 
   await mailer.sendMail(mailOptions)
