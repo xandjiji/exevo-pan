@@ -24,7 +24,7 @@ export const Payload = styled.span`
   gap: 6px;
 `
 
-export const QrCode = styled.img.attrs({ alt: 'AR Code' })`
+export const QrCode = styled.img.attrs({ alt: 'QR Code' })`
   display: block;
   margin: 0 auto;
 `
