@@ -6,11 +6,6 @@ interface PixParams {
   daysAmount: number
 }
 
-interface PixObject {
-  payload: string
-  qrCode: string
-}
-
 export const generateQrCode = async ({
   txId,
   daysAmount,
