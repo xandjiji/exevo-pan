@@ -1,5 +1,6 @@
 export interface ThankYouProps {
-  selectedDays: string[]
-  paymentMethod: string
-  pixPayment: PixObject
+  auctionId: number
+  selectedDates: string[]
+  paymentMethod: PaymentMethods
+  paymentCharacter: string
 }

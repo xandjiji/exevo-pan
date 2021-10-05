@@ -1,7 +1,6 @@
 import { ReactNode } from 'react'
 
 export type InputStates = 'invalid' | 'loading' | 'neutral' | 'valid'
-export type PaymentMethods = 'TIBIA_COINS' | 'PIX'
 
 export type InputState = {
   value: string
