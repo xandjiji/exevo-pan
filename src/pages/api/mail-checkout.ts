@@ -21,11 +21,13 @@ export default async (
 ): Promise<void> => {
   const { body }: { body: AdvertisePurchase } = request
 
+  const html = await EmailTemplate(body)
+
   const mailOptions = {
     from: `Exevo Pan <${mailCredentials.auth.user}>`,
     to: body.email,
     subject: 'Thank you for your order!',
-    html: EmailTemplate(body),
+    html,
   }
 
   await mailer.sendMail(mailOptions)
