@@ -7,7 +7,6 @@ import * as S from './styles'
 
 const Checkout = (): JSX.Element => {
   const {
-    uuid,
     selectedCharacter,
     selectedDates,
     paymentMethod,
@@ -43,8 +42,7 @@ const Checkout = (): JSX.Element => {
 
   const submit = async () => {
     setSendingEmail(true)
-    await MailCheckoutClient.postMail({
-      uuid,
+    const uuid = await MailCheckoutClient.postMail({
       selectedCharacter: selectedCharacter as CharacterObject,
       selectedDates,
       paymentMethod,
@@ -53,7 +51,7 @@ const Checkout = (): JSX.Element => {
     })
     setSendingEmail(false)
 
-    dispatch({ type: 'FINISH_FORM' })
+    dispatch({ type: 'FINISH_FORM', uuid })
   }
 
   const validateAndSubmit = async () => {

@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid'
 import { links, endpoints } from 'Constants'
 
 export default class MailCheckoutClient {
@@ -5,9 +6,9 @@ export default class MailCheckoutClient {
   /* static mailChekoutUrl = `${links.CANONICAL}${endpoints.MAIL_CHECKOUT}` */
   static mailChekoutUrl = `http://localhost:3000${endpoints.MAIL_CHECKOUT}`
 
-  static async postMail(purchase: AdvertisePurchase): Promise<200 | 400> {
+  static async postMail(purchase: AdvertisePurchase): Promise<string> {
     try {
-      await fetch(this.mailChekoutUrl, {
+      const response = await fetch(this.mailChekoutUrl, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -16,9 +17,11 @@ export default class MailCheckoutClient {
         body: JSON.stringify(purchase),
       })
 
-      return 200
+      const { uuid } = await response.json()
+
+      return uuid
     } catch (error: unknown) {
-      return 400
+      return uuidv4()
     }
   }
 }

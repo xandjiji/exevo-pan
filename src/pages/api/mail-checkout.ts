@@ -29,11 +29,11 @@ export default async (
   const mailOptions = {
     from: `Exevo Pan <${mailCredentials.auth.user}>`,
     to: body.email,
-    subject: 'Thank you for your order!',
+    subject: `Thank you for your order! (${uuid})`,
     html,
   }
 
   await mailer.sendMail(mailOptions)
 
-  response.status(200).send('')
+  response.status(200).json({ uuid })
 }

@@ -1,5 +1,4 @@
 import { createContext, useContext, useReducer } from 'react'
-import { v4 as uuidv4 } from 'uuid'
 import FormReducer from './FormReducer'
 import { FormProviderProps, FormValues, InputState } from './types'
 
@@ -25,7 +24,7 @@ const FormContext = createContext<FormValues>(defaultState)
 
 export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
   const [formValues, dispatch] = useReducer(FormReducer, {
-    uuid: uuidv4(),
+    uuid: defaultState.uuid,
     currentStep: defaultState.currentStep,
     selectedCharacter: defaultState.selectedCharacter,
     selectedDates: defaultState.selectedDates,

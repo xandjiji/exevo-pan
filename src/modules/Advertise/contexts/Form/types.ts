@@ -50,6 +50,7 @@ export type Action =
     }
   | {
       type: 'FINISH_FORM'
+      uuid: string
     }
 
 export interface FormValues extends FormContextState {

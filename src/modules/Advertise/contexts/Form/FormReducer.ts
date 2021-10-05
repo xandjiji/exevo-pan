@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid'
 import { getRecommendedDays } from './utils'
 import { FormContextState, Action } from './types'
 
@@ -62,7 +61,7 @@ const FormReducer = (
     case 'FINISH_FORM':
       return {
         ...state,
-        uuid: uuidv4(),
+        uuid: action.uuid,
         currentStep: state.currentStep + 1,
         finished: true,
       }
