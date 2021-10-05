@@ -1,5 +1,4 @@
 import { advertising } from 'Constants'
-import { PaymentMethods } from '../../contexts/Form/types'
 
 export const calculatePrice = (
   daysCount: number,
