@@ -5,8 +5,7 @@ declare type PixObject = {
   qrCode: string
 }
 
-declare type AdvertisePurchase = {
-  uuid: string
+declare interface AdvertisePurchase {
   selectedCharacter: CharacterObject
   selectedDates: string[]
   paymentMethod: PaymentMethods

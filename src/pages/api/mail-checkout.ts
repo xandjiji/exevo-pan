@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as nodemailer from 'nodemailer'
+import { v4 as uuidv4 } from 'uuid'
 import { EmailTemplate } from 'modules/Advertise/components'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 
@@ -21,7 +22,9 @@ export default async (
 ): Promise<void> => {
   const { body }: { body: AdvertisePurchase } = request
 
-  const html = await EmailTemplate(body)
+  const uuid = uuidv4()
+
+  const html = await EmailTemplate({ ...body, uuid })
 
   const mailOptions = {
     from: `Exevo Pan <${mailCredentials.auth.user}>`,

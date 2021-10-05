@@ -1,7 +1,8 @@
 import { advertising } from 'Constants'
 import { generateQrCode } from '../PaymentDetails/PixPayment/utils'
+import { calculatePrice } from '../Summary/utils'
 import * as T from './components'
-import { ThankYouProps } from './types'
+import { EmailTemplateProps, ThankYouProps, SummaryProps } from './types'
 
 const ThankYouCard = async ({
   auctionId,
@@ -36,28 +37,41 @@ const ThankYouCard = async ({
   `)
 }
 
-const SummaryCard = (): string =>
-  T.Card(`
+const SummaryCard = ({
+  uuid,
+  advertisedCharacter,
+  selectedDates,
+  paymentMethod,
+}: SummaryProps): string => {
+  const daysCount = selectedDates.length
+
+  return T.Card(`
     ${T.Title('Summary')}
 
     ${T.TxInfo('Transaction ID:')}
-    ${T.Code('eba132cb-25f3-419f-81bc-0c39317cacd7')}
+    ${T.Code(uuid)}
 
-    ${T.DetailItem('Elra Alyas')}
+    ${T.DetailItem(advertisedCharacter)}
     ${T.DetailInfo('Auctioned character')}
 
-    ${T.DetailItem('1 days')}
+    ${T.DetailItem(daysCount.toString())}
     ${T.DetailInfo('Advertising duration')}
 
-    ${T.DetailItem('250 Tibia Coins')}
+    ${T.DetailItem(calculatePrice(daysCount, paymentMethod))}
     ${T.DetailInfo('Total cost')}
 `)
+}
 
 const BuildEmailHtml = async (
-  purchaseData: AdvertisePurchase,
+  purchaseData: EmailTemplateProps,
 ): Promise<string> => {
-  const { selectedCharacter, selectedDates, paymentMethod, paymentCharacter } =
-    purchaseData
+  const {
+    uuid,
+    selectedCharacter,
+    selectedDates,
+    paymentMethod,
+    paymentCharacter,
+  } = purchaseData
 
   return `
     <div style="font-family: Helvetica;">
@@ -67,7 +81,12 @@ const BuildEmailHtml = async (
           paymentMethod,
           paymentCharacter,
         })}
-        ${SummaryCard()}
+        ${SummaryCard({
+          uuid,
+          advertisedCharacter: selectedCharacter.nickname,
+          selectedDates,
+          paymentMethod,
+        })}
     </div>
     `
 }
