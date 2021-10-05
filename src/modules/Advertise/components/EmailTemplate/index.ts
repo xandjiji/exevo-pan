@@ -34,6 +34,9 @@ const ThankYouCard = async ({
   return T.Card(`
       ${T.Title('Thank you for your order!')}      
       ${paymentInfo}
+      ${T.Small(
+        "If the purchase can't be completed, you will receive a refund.",
+      )}
   `)
 }
 
