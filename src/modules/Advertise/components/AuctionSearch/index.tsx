@@ -1,3 +1,4 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useMemo, useRef } from 'react'
 import { useCharacters } from 'contexts/useDatabase'
 import { useForm } from '../../contexts/Form'
@@ -8,6 +9,10 @@ import * as S from './styles'
 const PAGE_SIZE = 10
 
 const AuctionSearch = (): JSX.Element => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
+
   const { baseCharacterData, loading } = useCharacters()
   const { dispatch } = useForm()
 
@@ -52,11 +57,13 @@ const AuctionSearch = (): JSX.Element => {
     <S.Wrapper>
       <S.SearchHeader>
         <S.InputWrapper>
-          <S.Label htmlFor="search-input">Search by nickname</S.Label>
+          <S.Label htmlFor="search-input">
+            {advertise.AuctionSearch.inputLabel}
+          </S.Label>
           <S.Input
             id="search-input"
-            placeholder="Nickname"
-            aria-label="Search an auction by its character nickname"
+            placeholder={advertise.AuctionSearch.placeholder}
+            aria-label={advertise.AuctionSearch.inputAriaLabel}
             allowClear
             value={nickname}
             onChange={onInputChange}
@@ -68,7 +75,7 @@ const AuctionSearch = (): JSX.Element => {
           totalItems={auctionList.length}
           currentPage={currentPage}
           onChange={onPageChange}
-          noItemsMessage="No auctions"
+          noItemsMessage={advertise.AuctionSearch.paginatorNoItems}
         />
       </S.SearchHeader>
 

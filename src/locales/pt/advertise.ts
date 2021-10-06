@@ -13,4 +13,10 @@ export default {
     nextMonthLabel: 'Próximo mês',
     smallDescription: 'Escolha os dias que você quer destacar seu leilão.',
   },
+  AuctionSearch: {
+    inputLabel: 'Procurar por nickname',
+    placeholder: 'Nickname',
+    inputAriaLabel: 'Procurar um leilão pelo nome do personagem',
+    paginatorNoItems: 'Nenhum leilão',
+  },
 }

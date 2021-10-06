@@ -13,4 +13,10 @@ export default {
     nextMonthLabel: 'Next month',
     smallDescription: 'Choose the days you want to highlight your auction.',
   },
+  AuctionSearch: {
+    inputLabel: 'Search by nickname',
+    placeholder: 'Nickname',
+    inputAriaLabel: 'Search an auction by its character nickname',
+    paginatorNoItems: 'No auctions',
+  },
 }

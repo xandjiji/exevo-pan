@@ -13,4 +13,10 @@ export default {
     nextMonthLabel: 'Proximo mes',
     smallDescription: 'Elija los días en los que desea destacar su subasta.',
   },
+  AuctionSearch: {
+    inputLabel: 'Buscar por nickname',
+    placeholder: 'Nickname',
+    inputAriaLabel: 'Buscar una subasta por nombre de personaje',
+    paginatorNoItems: 'Sin subasta',
+  },
 }
