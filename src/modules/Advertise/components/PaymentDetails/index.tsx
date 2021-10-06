@@ -19,7 +19,10 @@ const PaymentDetails = (): JSX.Element => {
 
         <S.Text>
           An email was sent to <S.Strong>{email.value}</S.Strong> containing the
-          order details.
+          order details. Please check your span folder{' '}
+          <span role="img" aria-label="Smiley face">
+            😄
+          </span>
         </S.Text>
 
         {paymentMethod === 'TIBIA_COINS' ? <CoinsPayment /> : <PixPayment />}
