@@ -95,4 +95,5 @@ export default {
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
   },
+  StepperCompletedLabel: 'Paso completado',
 }

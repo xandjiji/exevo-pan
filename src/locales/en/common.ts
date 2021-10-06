@@ -94,4 +94,5 @@ export default {
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
   },
+  StepperCompletedLabel: 'Step completed',
 }

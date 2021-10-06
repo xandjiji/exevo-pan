@@ -94,4 +94,5 @@ export default {
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',
   },
+  StepperCompletedLabel: 'Passo completado',
 }
