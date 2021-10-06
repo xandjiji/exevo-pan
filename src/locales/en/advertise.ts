@@ -18,5 +18,6 @@ export default {
     placeholder: 'Nickname',
     inputAriaLabel: 'Search an auction by its character nickname',
     paginatorNoItems: 'No auctions',
+    emptyStateText: 'No auction was found',
   },
 }

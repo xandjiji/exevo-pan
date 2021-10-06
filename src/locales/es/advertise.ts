@@ -18,5 +18,6 @@ export default {
     placeholder: 'Nickname',
     inputAriaLabel: 'Buscar una subasta por nombre de personaje',
     paginatorNoItems: 'Sin subasta',
+    emptyStateText: 'No se encontraron subastas',
   },
 }

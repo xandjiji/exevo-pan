@@ -18,5 +18,6 @@ export default {
     placeholder: 'Nickname',
     inputAriaLabel: 'Procurar um leilão pelo nome do personagem',
     paginatorNoItems: 'Nenhum leilão',
+    emptyStateText: 'Nenhum leilão encontrado',
   },
 }
