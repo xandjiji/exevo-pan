@@ -1,3 +1,4 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { FormProvider, useForm } from './contexts/Form'
 import {
   AuctionSearch,
@@ -9,6 +10,10 @@ import {
 import * as S from './styles'
 
 const Form = (): JSX.Element => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
+
   const { currentStep, finished, dispatch } = useForm()
 
   const setStep = (newStep: number) => {
@@ -17,9 +22,9 @@ const Form = (): JSX.Element => {
   }
 
   const stepItems = [
-    { title: 'Select', onClick: setStep },
-    { title: 'Configure', onClick: setStep },
-    { title: 'Checkout' },
+    { title: advertise.StepItems.Select, onClick: setStep },
+    { title: advertise.StepItems.Configure, onClick: setStep },
+    { title: advertise.StepItems.Checkout },
   ]
 
   const FormSteps = [
