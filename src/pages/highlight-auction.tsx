@@ -2,33 +2,42 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import AdvertiseGrid from 'modules/Advertise'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { endpoints, paths, routes } from 'Constants'
-import { common, homepage } from 'locales'
+import { common, advertise } from 'locales'
 
 const pageUrl = buildUrl(routes.ADVERTISE)
 
 export default function Advertise(): JSX.Element {
+  const { translations } = useTranslations()
+
   return (
     <div>
       <Head>
-        <title>Exevo Pan - Advertise</title>
-        <meta name="title" content="Exevo Pan - Advertise" />
-        <meta property="og:site_name" content="Exevo Pan - Advertise" />
-        <meta property="og:title" content="Exevo Pan - Advertise" />
-        <meta property="twitter:title" content="Exevo Pan - Advertise" />
+        <title>{translations.advertise.Meta.title}</title>
+        <meta name="title" content={translations.advertise.Meta.title} />
+        <meta
+          property="og:site_name"
+          content={translations.advertise.Meta.title}
+        />
+        <meta property="og:title" content={translations.advertise.Meta.title} />
+        <meta
+          property="twitter:title"
+          content={translations.advertise.Meta.title}
+        />
 
         <meta
           name="description"
-          content="Highlight your own auction and get higher bids!"
+          content={translations.advertise.Meta.description}
         />
         <meta
           property="twitter:description"
-          content="Highlight your own auction and get higher bids!"
+          content={translations.advertise.Meta.description}
         />
         <meta
           property="og:description"
-          content="Highlight your own auction and get higher bids!"
+          content={translations.advertise.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -80,7 +89,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
       common: common[locale as RegisteredLocale],
-      homepage: homepage[locale as RegisteredLocale],
+      advertise: advertise[locale as RegisteredLocale],
     },
   },
 })
