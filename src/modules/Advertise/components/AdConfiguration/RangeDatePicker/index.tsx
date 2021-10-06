@@ -1,3 +1,4 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { Fragment, memo, useMemo } from 'react'
 import { useForm } from '../../../contexts/Form'
 import Weekdays from './Weekdays'
@@ -11,22 +12,11 @@ import {
 } from './utils'
 import * as S from './styles'
 
-const months = [
-  'Janeiro',
-  'Fevereiro',
-  'Março',
-  'Abril',
-  'Maio',
-  'Junho',
-  'Julho',
-  'Agosto',
-  'Setembro',
-  'Outubro',
-  'Novembro',
-  'Dezembro',
-]
-
 const RangeDatePicker = (): JSX.Element => {
+  const {
+    translations: { common, advertise },
+  } = useTranslations()
+
   const { selectedCharacter, selectedDates, dispatch } = useForm()
 
   const days = useMemo(
@@ -39,7 +29,9 @@ const RangeDatePicker = (): JSX.Element => {
   return (
     <>
       <S.Wrapper>
-        <S.MonthName aria-label="Current month">Setembro</S.MonthName>
+        <S.MonthName aria-label={advertise.RangeDatePicker.currentMonthLabel}>
+          {common.FullMonth[new Date().getMonth()]}
+        </S.MonthName>
         <S.CalendarGrid>
           <Weekdays />
 
@@ -70,8 +62,10 @@ const RangeDatePicker = (): JSX.Element => {
               <Fragment key={`month-${currentMonthLastDay}`}>
                 {monthDatesElements}
                 {hasNextMonth && (
-                  <S.MonthRow aria-label="Next month">
-                    {months[getMonth(monthDates[0]) + 1]}
+                  <S.MonthRow
+                    aria-label={advertise.RangeDatePicker.nextMonthLabel}
+                  >
+                    {common.FullMonth[getMonth(monthDates[0]) + 1]}
                   </S.MonthRow>
                 )}
                 {!hasNextMonth && (
@@ -89,7 +83,7 @@ const RangeDatePicker = (): JSX.Element => {
           })}
         </S.CalendarGrid>
       </S.Wrapper>
-      <S.Subtext>Choose the days you want to highlight your auction.</S.Subtext>
+      <S.Subtext>{advertise.RangeDatePicker.smallDescription}</S.Subtext>
     </>
   )
 }

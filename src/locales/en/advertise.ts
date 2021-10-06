@@ -8,4 +8,9 @@ export default {
     Configure: 'Configure',
     Checkout: 'Checkout',
   },
+  RangeDatePicker: {
+    currentMonthLabel: 'Current month',
+    nextMonthLabel: 'Next month',
+    smallDescription: 'Choose the days you want to highlight your auction.',
+  },
 }

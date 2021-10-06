@@ -8,4 +8,9 @@ export default {
     Configure: 'Configurar',
     Checkout: 'Pagar',
   },
+  RangeDatePicker: {
+    currentMonthLabel: 'Mes actual',
+    nextMonthLabel: 'Proximo mes',
+    smallDescription: 'Elija los días en los que desea destacar su subasta.',
+  },
 }

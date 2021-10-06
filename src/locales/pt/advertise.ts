@@ -8,4 +8,9 @@ export default {
     Configure: 'Configurar',
     Checkout: 'Pagar',
   },
+  RangeDatePicker: {
+    currentMonthLabel: 'Mês atual',
+    nextMonthLabel: 'Próximo mês',
+    smallDescription: 'Escolha os dias que você quer destacar seu leilão.',
+  },
 }
