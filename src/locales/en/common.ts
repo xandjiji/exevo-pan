@@ -95,4 +95,8 @@ export default {
     BidStatus: 'Bid status',
   },
   StepperCompletedLabel: 'Step completed',
+  CopyButton: {
+    toCopyLabel: 'Copy to clipboard',
+    copiedLabel: 'Copied to clipboard',
+  },
 }

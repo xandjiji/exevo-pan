@@ -95,4 +95,8 @@ export default {
     BidStatus: 'Lance atual',
   },
   StepperCompletedLabel: 'Passo completado',
+  CopyButton: {
+    toCopyLabel: 'Copiar',
+    copiedLabel: 'Copiado',
+  },
 }

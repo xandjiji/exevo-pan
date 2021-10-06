@@ -96,4 +96,8 @@ export default {
     BidStatus: 'Oferta actual',
   },
   StepperCompletedLabel: 'Paso completado',
+  CopyButton: {
+    toCopyLabel: 'Copiar',
+    copiedLabel: 'Copiado',
+  },
 }
