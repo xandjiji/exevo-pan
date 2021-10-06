@@ -6,6 +6,10 @@ import aboutEN from './en/about'
 import aboutES from './es/about'
 import aboutPT from './pt/about'
 
+import advertiseEN from './en/advertise'
+import advertiseES from './es/advertise'
+import advertisePT from './pt/advertise'
+
 import commonEN from './en/common'
 import commonES from './es/common'
 import commonPT from './pt/common'
@@ -28,6 +32,7 @@ import warPT from './pt/war'
 
 export const error = { en: errorEN, es: errorES, pt: errorPT }
 export const about = { en: aboutEN, es: aboutES, pt: aboutPT }
+export const advertise = { en: advertiseEN, es: advertiseES, pt: advertisePT }
 export const bazaarHistory = {
   en: bazaarHistoryEN,
   es: bazaarHistoryES,
