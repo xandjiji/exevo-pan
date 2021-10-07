@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 import { MailCheckoutClient } from 'services'
 import { useForm } from '../../contexts/Form'
 import LabelledInput from './LabelledInput'
-import { validateEmail, validateCharacter } from './utils'
+import { validateEmail, validateCharacter, randomCharacter } from './utils'
 import * as S from './styles'
 
 const Checkout = (): JSX.Element => {
@@ -113,7 +113,7 @@ const Checkout = (): JSX.Element => {
         <LabelledInput
           id="paymentCharacter"
           labelText={advertise.Checkout.paymentCharacterLabel}
-          placeholder="e.g, 'Eternal Oblivion'"
+          placeholder={`e.g, '${randomCharacter()}'`}
           validationState={paymentCharacter.state}
           errorMessage={
             paymentCharacter.state === 'invalid'
