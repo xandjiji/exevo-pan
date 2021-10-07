@@ -47,5 +47,9 @@ export default {
       from: 'from',
       to: 'to',
     },
+    PixPayment: {
+      codeText: 'Please complete your order paying the following Pix code:',
+      qrText: 'or using the following QR Code:',
+    },
   },
 }

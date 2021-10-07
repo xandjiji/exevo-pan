@@ -1,9 +1,14 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useState, useEffect } from 'react'
 import { useForm } from '../../../contexts/Form'
 import * as S from './styles'
 import { generateQrCode } from './utils'
 
 const PixPayment = (): JSX.Element => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
+
   const { selectedCharacter, selectedDates } = useForm()
 
   const [qrCode, setQrCode] = useState<string | undefined>()
@@ -24,12 +29,12 @@ const PixPayment = (): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Text>Please complete your order paying the following Pix code:</S.Text>
+      <S.Text>{advertise.PaymentDetails.PixPayment.codeText}</S.Text>
       <S.Payload>
         {txKey}
         <S.CopyButton copyString={txKey as string} />
       </S.Payload>
-      <S.QRText>or using the following QR Code:</S.QRText>
+      <S.QRText>{advertise.PaymentDetails.PixPayment.qrText}</S.QRText>
       <S.QrCode src={qrCode} />
     </S.Wrapper>
   )
