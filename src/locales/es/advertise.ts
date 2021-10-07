@@ -34,4 +34,14 @@ export default {
       loading: 'Validando...',
     },
   },
+  PaymentDetails: {
+    titleIconLabel: 'Completado con éxito',
+    title: '¡Tu compra ha sido enviada!',
+    emailText1: 'Se ha enviado un email a',
+    emailText2:
+      'que contiene los detalles de su pedido. Por favor mira en la caja de spam',
+    emojiLabel: 'Cara sonriente',
+    smallDisclaimer:
+      'Si la compra no se puede completar, se reembolsará su dinero.',
+  },
 }

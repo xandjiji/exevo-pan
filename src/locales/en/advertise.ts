@@ -34,4 +34,13 @@ export default {
       loading: 'Validating...',
     },
   },
+  PaymentDetails: {
+    titleIconLabel: 'Successful checkout',
+    title: 'Your order was placed!',
+    emailText1: 'An email was sent to',
+    emailText2: 'containing the order details. Please check your spam folder',
+    emojiLabel: 'Smiley face',
+    smallDisclaimer:
+      "If the purchase can't be completed, you will receive a refund.",
+  },
 }
