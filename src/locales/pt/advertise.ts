@@ -20,4 +20,13 @@ export default {
     paginatorNoItems: 'Nenhum leilão',
     emptyStateText: 'Nenhum leilão encontrado',
   },
+  Checkout: {
+    title: 'Seus dados',
+    emailPlaceholder: 'seu@email.com.br',
+    emailInvalidMessage: 'Email inválido',
+    paymentCharacterLabel: 'Personagem que enviará as coins',
+    paymentCharacterInvalidMessage: 'Personagem não existe',
+    checkoutButtonLabel: 'Validar e finalizar compra',
+    checkoutButton: 'Finalizar',
+  },
 }

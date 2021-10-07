@@ -20,4 +20,13 @@ export default {
     paginatorNoItems: 'No auctions',
     emptyStateText: 'No auction was found',
   },
+  Checkout: {
+    title: 'Your information',
+    emailPlaceholder: 'your@email.com',
+    emailInvalidMessage: 'Invalid email',
+    paymentCharacterLabel: 'Sending coins character',
+    paymentCharacterInvalidMessage: 'Character does not exist',
+    checkoutButtonLabel: 'Validate and submit checkout',
+    checkoutButton: 'Checkout',
+  },
 }

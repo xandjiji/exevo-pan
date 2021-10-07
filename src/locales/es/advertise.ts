@@ -20,4 +20,13 @@ export default {
     paginatorNoItems: 'Sin subasta',
     emptyStateText: 'No se encontraron subastas',
   },
+  Checkout: {
+    title: 'Sus datos',
+    emailPlaceholder: 'seu@email.com.br',
+    emailInvalidMessage: 'Email inválido',
+    paymentCharacterLabel: 'Personaje que enviará las coins',
+    paymentCharacterInvalidMessage: 'Personaje no existe',
+    checkoutButtonLabel: 'Validar y finalizar compra',
+    checkoutButton: 'Finalizar',
+  },
 }

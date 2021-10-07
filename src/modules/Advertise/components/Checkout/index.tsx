@@ -1,3 +1,4 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
 import { MailCheckoutClient } from 'services'
 import { useForm } from '../../contexts/Form'
@@ -6,6 +7,10 @@ import { validateEmail, validateCharacter } from './utils'
 import * as S from './styles'
 
 const Checkout = (): JSX.Element => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
+
   const {
     selectedCharacter,
     selectedDates,
@@ -89,13 +94,17 @@ const Checkout = (): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Title>Your information</S.Title>
+      <S.Title>{advertise.Checkout.title}</S.Title>
       <LabelledInput
         id="email"
         labelText="Email"
-        placeholder="you@email.com"
+        placeholder={advertise.Checkout.emailPlaceholder}
         validationState={email.state}
-        errorMessage={email.state === 'invalid' ? 'Invalid email' : undefined}
+        errorMessage={
+          email.state === 'invalid'
+            ? advertise.Checkout.emailInvalidMessage
+            : undefined
+        }
         onKeyPress={handleKeypress}
         onChange={handleChange}
         value={email.value}
@@ -103,12 +112,12 @@ const Checkout = (): JSX.Element => {
       {paymentMethod === 'TIBIA_COINS' && (
         <LabelledInput
           id="paymentCharacter"
-          labelText="Sending coins character"
+          labelText={advertise.Checkout.paymentCharacterLabel}
           placeholder="e.g, 'Eternal Oblivion'"
           validationState={paymentCharacter.state}
           errorMessage={
             paymentCharacter.state === 'invalid'
-              ? 'Character does not exist'
+              ? advertise.Checkout.paymentCharacterInvalidMessage
               : undefined
           }
           onKeyPress={handleKeypress}
@@ -119,11 +128,11 @@ const Checkout = (): JSX.Element => {
 
       <S.Button
         type="button"
-        aria-label="Validate and submit checkout"
+        aria-label={advertise.Checkout.checkoutButtonLabel}
         disabled={isButtonDisabled}
         onClick={validateAndSubmit}
       >
-        {sendingEmail ? <S.Loading /> : 'Checkout'}
+        {sendingEmail ? <S.Loading /> : advertise.Checkout.checkoutButton}
       </S.Button>
     </S.Wrapper>
   )
