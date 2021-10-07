@@ -4,6 +4,7 @@ import inlineBase64 from 'nodemailer-plugin-inline-base64'
 import { v4 as uuidv4 } from 'uuid'
 import { EmailTemplate } from 'modules/Advertise/components'
 import { VercelRequest, VercelResponse } from '@vercel/node'
+import { advertise } from 'locales'
 
 const mailCredentials = {
   service: 'gmail',
@@ -23,6 +24,7 @@ export default async (
   response: VercelResponse,
 ): Promise<void> => {
   const { body }: { body: AdvertisePurchase } = request
+  const dictionary = advertise[body.locale as keyof typeof advertise]
 
   const uuid = uuidv4()
 
@@ -31,7 +33,7 @@ export default async (
   const mailOptions = {
     from: `Exevo Pan <${mailCredentials.auth.user}>`,
     to: body.email,
-    subject: 'Thank you for your order!',
+    subject: dictionary.EmailTitle,
     html,
   }
 
