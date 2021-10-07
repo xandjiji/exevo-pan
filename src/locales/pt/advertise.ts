@@ -6,7 +6,7 @@ export default {
   StepItems: {
     Select: 'Selecionar',
     Configure: 'Configurar',
-    Checkout: 'Pagar',
+    Checkout: 'Finalizar',
   },
   RangeDatePicker: {
     currentMonthLabel: 'Mês atual',
