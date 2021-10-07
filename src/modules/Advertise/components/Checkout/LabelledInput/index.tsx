@@ -1,12 +1,7 @@
+import { useTranslations } from 'contexts/useTranslation'
+import { useMemo } from 'react'
 import * as S from './styles'
 import { LabelledInputProps, InputStates } from './types'
-
-const SelectIcon = {
-  valid: <S.ValidIcon aria-label="Field is valid" />,
-  invalid: <S.InvalidIcon aria-label="Field is invalid" />,
-  neutral: <S.InvalidIcon aria-hidden />,
-  loading: <S.Loading aria-label="Validating..." />,
-} as Record<InputStates, React.ReactNode>
 
 const LabelledInput = ({
   id,
@@ -14,13 +9,38 @@ const LabelledInput = ({
   validationState = 'neutral',
   ...props
 }: LabelledInputProps): JSX.Element => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
+
+  const StateIcon = useMemo(
+    () =>
+      ((
+        {
+          valid: (
+            <S.ValidIcon aria-label={advertise.Checkout.LabelledInput.valid} />
+          ),
+          invalid: (
+            <S.InvalidIcon
+              aria-label={advertise.Checkout.LabelledInput.invalid}
+            />
+          ),
+          neutral: <S.InvalidIcon aria-hidden />,
+          loading: (
+            <S.Loading aria-label={advertise.Checkout.LabelledInput.loading} />
+          ),
+        } as Record<InputStates, React.ReactNode>
+      )[validationState]),
+    [advertise, validationState],
+  )
+
   const isValid = validationState === 'valid'
 
   return (
     <S.Wrapper valid={isValid}>
       <S.Label htmlFor={id}>{labelText}</S.Label>
       <S.Input id={id} {...props} />
-      {SelectIcon[validationState]}
+      {StateIcon}
     </S.Wrapper>
   )
 }

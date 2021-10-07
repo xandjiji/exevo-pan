@@ -28,5 +28,10 @@ export default {
     paymentCharacterInvalidMessage: 'Character does not exist',
     checkoutButtonLabel: 'Validate and submit checkout',
     checkoutButton: 'Checkout',
+    LabelledInput: {
+      valid: 'Field is valid',
+      invalid: 'Field is invalid',
+      loading: 'Validating...',
+    },
   },
 }
