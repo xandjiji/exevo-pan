@@ -51,5 +51,6 @@ export default {
       codeText: 'Please complete your order paying the following Pix code:',
       qrText: 'or using the following QR Code:',
     },
+    TransactionIdLabel: 'Transaction ID:',
   },
 }
