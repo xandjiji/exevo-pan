@@ -43,5 +43,10 @@ export default {
     emojiLabel: 'Rosto sorrindo',
     smallDisclaimer:
       'Se a compra não puder ser completada, seu dinheiro será devolvido.',
+    CoinsPayment: {
+      instruction: 'Por favor complete seu pedido enviando',
+      from: 'de',
+      to: 'para',
+    },
   },
 }

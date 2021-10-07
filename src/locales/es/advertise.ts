@@ -43,5 +43,10 @@ export default {
     emojiLabel: 'Cara sonriente',
     smallDisclaimer:
       'Si la compra no se puede completar, se reembolsará su dinero.',
+    CoinsPayment: {
+      instruction: 'Por favor complete su pedido enviando',
+      from: 'de',
+      to: 'para',
+    },
   },
 }

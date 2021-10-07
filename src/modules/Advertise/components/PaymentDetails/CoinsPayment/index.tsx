@@ -1,18 +1,25 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { advertising } from 'Constants'
 import { useForm } from '../../../contexts/Form'
 import * as S from './styles'
 
 const CoinsPayment = (): JSX.Element => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
+
   const { selectedDates, paymentCharacter } = useForm()
 
   return (
     <>
       <S.Text>
-        Please complete your order sending{' '}
+        {advertise.PaymentDetails.CoinsPayment.instruction}{' '}
         <S.Strong>
           {selectedDates.length * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins
         </S.Strong>{' '}
-        from <S.Strong>{paymentCharacter.value}</S.Strong> to{' '}
+        {advertise.PaymentDetails.CoinsPayment.from}{' '}
+        <S.Strong>{paymentCharacter.value}</S.Strong>{' '}
+        {advertise.PaymentDetails.CoinsPayment.to}{' '}
         <S.Link
           href={`https://www.tibia.com/community/?name=${advertising.BANK_CHARACTER}`}
           target="_blank"

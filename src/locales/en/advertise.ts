@@ -42,5 +42,10 @@ export default {
     emojiLabel: 'Smiley face',
     smallDisclaimer:
       "If the purchase can't be completed, you will receive a refund.",
+    CoinsPayment: {
+      instruction: 'Please complete your order sending',
+      from: 'from',
+      to: 'to',
+    },
   },
 }
