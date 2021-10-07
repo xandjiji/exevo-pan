@@ -1,3 +1,4 @@
+import { advertise } from 'locales'
 import { advertising } from 'Constants'
 import { generateQrCode } from '../PaymentDetails/PixPayment/utils'
 import { calculatePrice } from '../Summary/utils'
@@ -9,34 +10,36 @@ const ThankYouCard = async ({
   selectedDates,
   paymentMethod,
   paymentCharacter,
+  locale,
 }: ThankYouProps): Promise<string> => {
+  const dictionary = advertise[locale as keyof typeof advertise]
   const daysAmount = selectedDates.length
 
   let paymentInfo = ''
   if (paymentMethod === 'TIBIA_COINS') {
     paymentInfo = T.Text(
-      `Please complete your purchase sending <strong>${
+      `${dictionary.PaymentDetails.CoinsPayment.instruction} <strong>${
         daysAmount * advertising.TIBIA_COINS_ADVERTISE
-      } Tibia Coins</strong> from ${paymentCharacter} to <strong>${
-        advertising.BANK_CHARACTER
-      }</strong>`,
+      } Tibia Coins</strong> ${
+        dictionary.PaymentDetails.CoinsPayment.from
+      } ${paymentCharacter} ${
+        dictionary.PaymentDetails.CoinsPayment.to
+      } <strong>${advertising.BANK_CHARACTER}</strong>`,
     )
   } else {
     const qrCode = await generateQrCode({ txId: auctionId, daysAmount })
     paymentInfo = `
-    ${T.Text('Please complete your order paying the following Pix code:')}
+    ${T.Text(dictionary.PaymentDetails.PixPayment.codeText)}
     ${T.Code(qrCode.payload)}
-    ${T.QRCodeText('or using the following QR Code:')}
+    ${T.QRCodeText(dictionary.PaymentDetails.PixPayment.qrText)}
     ${T.QRCode(qrCode.qrCode)}
     `
   }
 
   return T.Card(`
-      ${T.Title('Thank you for your order!')}      
+      ${T.Title(dictionary.EmailTitle)}      
       ${paymentInfo}
-      ${T.Small(
-        "If the purchase can't be completed, you will receive a refund.",
-      )}
+      ${T.Small(dictionary.PaymentDetails.smallDisclaimer)}
   `)
 }
 
@@ -45,23 +48,29 @@ const SummaryCard = ({
   advertisedCharacter,
   selectedDates,
   paymentMethod,
+  locale,
 }: SummaryProps): string => {
+  const dictionary = advertise[locale as keyof typeof advertise]
   const daysCount = selectedDates.length
 
   return T.Card(`
-    ${T.Title('Summary')}
+    ${T.Title(dictionary.PaymentDetails.Summary.title)}
 
-    ${T.TxInfo('Transaction ID:')}
+    ${T.TxInfo(dictionary.PaymentDetails.TransactionIdLabel)}
     ${T.Code(uuid)}
 
     ${T.DetailItem(advertisedCharacter)}
-    ${T.DetailInfo('Auctioned character')}
+    ${T.DetailInfo(dictionary.PaymentDetails.Summary.auctionedCharacter)}
 
-    ${T.DetailItem(daysCount.toString())}
-    ${T.DetailInfo('Advertising duration')}
+    ${T.DetailItem(
+      `${daysCount.toString()} ${
+        dictionary.PaymentDetails.Summary[daysCount > 1 ? 'days' : 'day']
+      }`,
+    )}
+    ${T.DetailInfo(dictionary.PaymentDetails.Summary.durationText)}
 
     ${T.DetailItem(calculatePrice(daysCount, paymentMethod))}
-    ${T.DetailInfo('Total cost')}
+    ${T.DetailInfo(dictionary.PaymentDetails.Summary.costText)}
 `)
 }
 
@@ -74,6 +83,7 @@ const BuildEmailHtml = async (
     selectedDates,
     paymentMethod,
     paymentCharacter,
+    locale,
   } = purchaseData
 
   return `
@@ -83,12 +93,14 @@ const BuildEmailHtml = async (
           selectedDates,
           paymentMethod,
           paymentCharacter,
+          locale,
         })}
         ${SummaryCard({
           uuid,
           advertisedCharacter: selectedCharacter.nickname,
           selectedDates,
           paymentMethod,
+          locale,
         })}
     </div>
     `

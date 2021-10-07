@@ -1,5 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef } from 'react'
+import { useRouter } from 'next/router'
 import { MailCheckoutClient } from 'services'
 import { useForm } from '../../contexts/Form'
 import LabelledInput from './LabelledInput'
@@ -10,6 +11,8 @@ const Checkout = (): JSX.Element => {
   const {
     translations: { advertise },
   } = useTranslations()
+
+  const { locale } = useRouter()
 
   const {
     selectedCharacter,
@@ -53,6 +56,7 @@ const Checkout = (): JSX.Element => {
       paymentMethod,
       email: email.value,
       paymentCharacter: paymentCharacter.value,
+      locale: locale ?? 'en',
     })
     setSendingEmail(false)
 

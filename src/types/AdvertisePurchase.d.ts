@@ -11,4 +11,5 @@ declare interface AdvertisePurchase {
   paymentMethod: PaymentMethods
   email: string
   paymentCharacter: string
+  locale: string
 }

@@ -7,6 +7,7 @@ export interface ThankYouProps {
   selectedDates: string[]
   paymentMethod: PaymentMethods
   paymentCharacter: string
+  locale: string
 }
 
 export interface SummaryProps {
@@ -14,4 +15,5 @@ export interface SummaryProps {
   advertisedCharacter: string
   selectedDates: string[]
   paymentMethod: PaymentMethods
+  locale: string
 }

@@ -63,4 +63,5 @@ export default {
       costText: 'Custo total',
     },
   },
+  EmailTitle: 'Obrigado pelo seu pedido!',
 }
