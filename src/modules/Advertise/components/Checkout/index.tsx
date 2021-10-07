@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import { MailCheckoutClient } from 'services'
 import { useForm } from '../../contexts/Form'
 import LabelledInput from './LabelledInput'
@@ -92,6 +92,8 @@ const Checkout = (): JSX.Element => {
     }
   }
 
+  const { current: randomNickname } = useRef(randomCharacter())
+
   return (
     <S.Wrapper>
       <S.Title>{advertise.Checkout.title}</S.Title>
@@ -113,7 +115,7 @@ const Checkout = (): JSX.Element => {
         <LabelledInput
           id="paymentCharacter"
           labelText={advertise.Checkout.paymentCharacterLabel}
-          placeholder={`e.g, '${randomCharacter()}'`}
+          placeholder={`e.g, '${randomNickname}'`}
           validationState={paymentCharacter.state}
           errorMessage={
             paymentCharacter.state === 'invalid'
