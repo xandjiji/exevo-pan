@@ -1,5 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import * as nodemailer from 'nodemailer'
+import inlineBase64 from 'nodemailer-plugin-inline-base64'
 import { v4 as uuidv4 } from 'uuid'
 import { EmailTemplate } from 'modules/Advertise/components'
 import { VercelRequest, VercelResponse } from '@vercel/node'
@@ -15,6 +16,7 @@ const mailCredentials = {
 }
 
 const mailer = nodemailer.createTransport(mailCredentials)
+mailer.use('compile', inlineBase64())
 
 export default async (
   request: VercelRequest,
