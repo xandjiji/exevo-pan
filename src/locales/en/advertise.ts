@@ -52,5 +52,15 @@ export default {
       qrText: 'or using the following QR Code:',
     },
     TransactionIdLabel: 'Transaction ID:',
+    Summary: {
+      title: 'Summary',
+      auctionedCharacter: 'Auctioned character',
+      datesTooltipText:
+        'Your auction will be highlighted during the following days:',
+      day: 'day',
+      days: 'days',
+      durationText: 'Advertising duration',
+      costText: 'Total cost',
+    },
   },
 }
