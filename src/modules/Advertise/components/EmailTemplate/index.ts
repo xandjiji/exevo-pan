@@ -18,13 +18,11 @@ const ThankYouCard = async ({
   let paymentInfo = ''
   if (paymentMethod === 'TIBIA_COINS') {
     paymentInfo = T.Text(
-      `${dictionary.PaymentDetails.CoinsPayment.instruction} <strong>${
-        daysAmount * advertising.TIBIA_COINS_ADVERTISE
-      } Tibia Coins</strong> ${
-        dictionary.PaymentDetails.CoinsPayment.from
-      } ${paymentCharacter} ${
+      `${dictionary.PaymentDetails.CoinsPayment.instruction} ${T.Strong(
+        `${daysAmount * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins`,
+      )} ${dictionary.PaymentDetails.CoinsPayment.from} ${paymentCharacter} ${
         dictionary.PaymentDetails.CoinsPayment.to
-      } <strong>${advertising.BANK_CHARACTER}</strong>`,
+      } ${T.Strong(advertising.BANK_CHARACTER)}`,
     )
   } else {
     const qrCode = await generateQrCode({ txId: auctionId, daysAmount })
