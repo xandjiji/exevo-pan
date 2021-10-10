@@ -44,6 +44,7 @@ const ThankYouCard = async ({
 const SummaryCard = ({
   uuid,
   advertisedCharacter,
+  auctionId,
   selectedDates,
   paymentMethod,
   locale,
@@ -57,7 +58,9 @@ const SummaryCard = ({
     ${T.TxInfo(dictionary.PaymentDetails.TransactionIdLabel)}
     ${T.Code(uuid)}
 
-    ${T.DetailItem(advertisedCharacter)}
+    ${T.DetailItem(
+      `${advertisedCharacter} ${T.AuctionIdLink(auctionId.toString())}`,
+    )}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.auctionedCharacter)}
 
     ${T.DetailItem(
@@ -96,6 +99,7 @@ const BuildEmailHtml = async (
         ${SummaryCard({
           uuid,
           advertisedCharacter: selectedCharacter.nickname,
+          auctionId: selectedCharacter.id,
           selectedDates,
           paymentMethod,
           locale,

@@ -13,6 +13,7 @@ export interface ThankYouProps {
 export interface SummaryProps {
   uuid: string
   advertisedCharacter: string
+  auctionId: number
   selectedDates: string[]
   paymentMethod: PaymentMethods
   locale: string
