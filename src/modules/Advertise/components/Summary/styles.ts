@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Tooltip as BaseTooltip } from 'components/Organisms'
 import ReceiptSvg from 'assets/svgs/receipt.svg'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Smooth } from 'styles'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
@@ -31,6 +31,14 @@ export const Strong = styled.h3`
   margin-bottom: 2px;
   font-size: 16px;
   letter-spacing: 0.5px;
+`
+
+export const AuctionLink = styled.a`
+  position: relative;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  color: var(--onSurface);
 `
 
 export const SubText = styled.p`

@@ -18,7 +18,16 @@ const Summary = (): JSX.Element => {
       </S.Title>
 
       <S.GroupItem>
-        <S.Strong>{selectedCharacter?.nickname}</S.Strong>
+        <S.Strong>
+          {selectedCharacter?.nickname}{' '}
+          <S.AuctionLink
+            href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${selectedCharacter?.id}&source=overview`}
+            target="_blank"
+            rel="noreferrer noopener"
+          >
+            (#{selectedCharacter?.id})
+          </S.AuctionLink>
+        </S.Strong>
         <S.SubText>
           {advertise.PaymentDetails.Summary.auctionedCharacter}
         </S.SubText>
