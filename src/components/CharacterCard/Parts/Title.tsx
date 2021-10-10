@@ -5,14 +5,16 @@ import ExternalIconSvg from 'assets/svgs/external.svg'
 
 interface TitleProps extends React.HTMLAttributes<HTMLParagraphElement> {
   characterId: number
+  highlighted: boolean
 }
 
-const Nickname = styled.p`
+const Nickname = styled.p<{ highlighted: boolean }>`
   display: flex;
   align-items: center;
   font-size: 16px;
   font-weight: 600;
-  color: var(--primary);
+  color: ${({ highlighted }) =>
+    highlighted ? 'var(--kwai)' : 'var(--primary)'};
   filter: brightness(130%);
 
   a {

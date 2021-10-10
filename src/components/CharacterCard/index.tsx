@@ -16,6 +16,7 @@ import { CharacterCardProps } from './types'
 
 const CharacterCard = ({
   characterData,
+  highlighted = false,
   ...props
 }: CharacterCardProps): JSX.Element => {
   const {
@@ -62,7 +63,9 @@ const CharacterCard = ({
         />
 
         <S.HeadInfo>
-          <Title characterId={id}>{nickname}</Title>
+          <Title characterId={id} highlighted={highlighted}>
+            {nickname}
+          </Title>
           <Subtitle level={level} vocation={vocationId} />
         </S.HeadInfo>
 
