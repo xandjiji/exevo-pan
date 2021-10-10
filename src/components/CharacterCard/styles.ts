@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import {
   SpritePortrait as BaseSpriteProtrait,
   LabeledTextBox as BaseLabeledTextBox,
@@ -16,9 +16,33 @@ export const AlignedFlex = styled.div`
   align-items: center;
 `
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.div<{ highlighted: boolean }>`
   ${MaterialCard}
   padding: 16px;
+
+  ${({ highlighted }) =>
+    highlighted &&
+    css`
+      animation: zoom 0.6s ease-out forwards;
+      animation-delay: 1s;
+
+      @keyframes zoom {
+        0% {
+          transform: scale(1);
+        }
+        20% {
+          transform: scale(1.02);
+          box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
+        }
+        80% {
+          transform: scale(1.02);
+          box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+    `}
 `
 
 export const Head = styled(AlignedFlex)`

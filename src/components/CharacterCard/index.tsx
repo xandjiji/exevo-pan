@@ -54,7 +54,7 @@ const CharacterCard = ({
   }
 
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper highlighted={highlighted} {...props}>
       <S.Head>
         <S.SpritePortrait
           src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
