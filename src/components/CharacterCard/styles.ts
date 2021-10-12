@@ -96,6 +96,7 @@ export const HighlightedIcon = styled(TagSvg)`
   animation-delay: 1s;
   transform-origin: 0 0;
   transform: rotate(45deg);
+  fill: var(--green);
 
   @keyframes swing {
     0% {
