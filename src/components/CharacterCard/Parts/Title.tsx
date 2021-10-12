@@ -14,7 +14,7 @@ const Nickname = styled.p<{ highlighted: boolean }>`
   font-size: 16px;
   font-weight: 600;
   color: ${({ highlighted }) =>
-    highlighted ? 'var(--kwai)' : 'var(--primary)'};
+    highlighted ? 'var(--green)' : 'var(--primary)'};
   filter: brightness(130%);
 
   a {

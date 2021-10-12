@@ -24,6 +24,10 @@ export const Wrapper = styled.div<{ highlighted: boolean }>`
   ${({ highlighted }) =>
     highlighted &&
     css`
+      --surface: var(--kwaiSurface);
+      --primary: var(--kwai);
+      --primaryVariant: var(--kwaiVariant);
+
       animation: zoom 0.6s ease-out forwards;
       animation-delay: 1s;
 
