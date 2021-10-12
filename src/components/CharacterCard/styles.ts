@@ -8,6 +8,7 @@ import {
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
+import TagSvg from 'assets/svgs/tag.svg'
 import { FavButton as BaseFavButton } from './Parts'
 import { BattleyeStatusStyleProps } from './types'
 
@@ -77,6 +78,57 @@ export const Subtitle = styled.span`
 export const FavButton = styled(BaseFavButton)`
   align-self: flex-start;
 `
+
+export const HighlightedIcon = styled(TagSvg)`
+  position: absolute;
+  top: 8px;
+  right: -22px;
+
+  width: 54px;
+  height: 54px;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+
+  animation: swing 1.2s ease-out forwards;
+  animation-delay: 1s;
+  transform-origin: 0 0;
+  transform: rotate(45deg);
+
+  @keyframes swing {
+    0% {
+      transform: rotate3d(0, 0, 1, 45deg);
+    }
+    20% {
+      transform: rotate3d(0, 0, 1, 40deg);
+    }
+    30% {
+      transform: rotate3d(0, 0, 1, 38deg);
+    }
+    50% {
+      transform: rotate3d(0, 0, 1, 35deg);
+    }
+
+    60% {
+      transform: rotate3d(0, 0, 1, 60deg);
+    }
+
+    70% {
+      transform: rotate3d(0, 0, 1, 35deg);
+    }
+
+    80% {
+      transform: rotate3d(0, 0, 1, 50deg);
+    }
+
+    90% {
+      transform: rotate3d(0, 0, 1, 40deg);
+    }
+
+    100% {
+      transform: rotate3d(0, 0, 1, 45deg);
+    }
+  }
+`
+
 export const InfoGrid = styled.div`
   margin-bottom: 12px;
   display: grid;

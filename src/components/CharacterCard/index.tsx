@@ -69,7 +69,11 @@ const CharacterCard = ({
           <Subtitle level={level} vocation={vocationId} />
         </S.HeadInfo>
 
-        <S.FavButton characterObject={characterData} />
+        {highlighted ? (
+          <S.HighlightedIcon />
+        ) : (
+          <S.FavButton characterObject={characterData} />
+        )}
       </S.Head>
 
       <S.InfoGrid>
