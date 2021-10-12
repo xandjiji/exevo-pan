@@ -16,6 +16,8 @@ const Themes = {
             battleYellow: '#FFDD00',
             primaryVariantHighlight: '#714CA1',
             kwai: '#FF7705',
+            kwaiSurface: '#453D3C',
+            kwaiVariant: '#995F2E',
         },
     },
     'light-theme': {
@@ -35,6 +37,8 @@ const Themes = {
             battleYellow: '#FFDD00',
             primaryVariantHighlight: '#E7E8EE',
             kwai: '#FF7705',
+            kwaiSurface: '#FFF7F0',
+            kwaiVariant: '#FFC696',
         }
     }
 }
