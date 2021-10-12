@@ -92,44 +92,45 @@ export const HighlightedIcon = styled(TagSvg)`
   height: 54px;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
 
+  --initialAngle: 45deg;
   animation: swing 1.2s ease-out forwards;
   animation-delay: 1s;
   transform-origin: 0 0;
-  transform: rotate(45deg);
+  transform: rotate(var(--initialAngle));
   fill: var(--green);
 
   @keyframes swing {
     0% {
-      transform: rotate3d(0, 0, 1, 45deg);
+      transform: rotate3d(0, 0, 1, var(--initialAngle));
     }
     20% {
-      transform: rotate3d(0, 0, 1, 40deg);
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 5deg));
     }
     30% {
-      transform: rotate3d(0, 0, 1, 38deg);
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 7deg));
     }
     50% {
-      transform: rotate3d(0, 0, 1, 35deg);
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 10deg));
     }
 
     60% {
-      transform: rotate3d(0, 0, 1, 60deg);
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) + 15deg));
     }
 
     70% {
-      transform: rotate3d(0, 0, 1, 35deg);
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 10deg));
     }
 
     80% {
-      transform: rotate3d(0, 0, 1, 50deg);
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) + 5deg));
     }
 
     90% {
-      transform: rotate3d(0, 0, 1, 40deg);
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 2deg));
     }
 
     100% {
-      transform: rotate3d(0, 0, 1, 45deg);
+      transform: rotate3d(0, 0, 1, var(--initialAngle));
     }
   }
 `
