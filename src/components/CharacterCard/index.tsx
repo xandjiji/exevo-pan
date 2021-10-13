@@ -10,6 +10,7 @@ import {
   CharacterItems,
   CharacterSkills,
   CharacterImbuements,
+  TagButton,
 } from './Parts'
 import * as S from './styles'
 import { CharacterCardProps } from './types'
@@ -70,7 +71,7 @@ const CharacterCard = ({
         </S.HeadInfo>
 
         {highlighted ? (
-          <S.HighlightedIcon />
+          <TagButton />
         ) : (
           <S.FavButton characterObject={characterData} />
         )}
