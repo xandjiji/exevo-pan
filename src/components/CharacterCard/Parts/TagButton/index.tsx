@@ -15,9 +15,12 @@ const TagButton = (): JSX.Element => {
 
   return (
     <S.Wrapper
+      tabIndex={0}
       animation={hoverState}
       onMouseOver={handleHover}
+      onFocus={handleHover}
       onMouseOut={handleUnhover}
+      onBlur={handleUnhover}
     >
       <S.Icon />
     </S.Wrapper>
