@@ -1,5 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import TagSvg from 'assets/svgs/tag.svg'
+import { Smooth } from 'styles'
 import { HoveredState } from './types'
 
 export const Icon = styled(TagSvg)`
@@ -49,49 +50,72 @@ export const Icon = styled(TagSvg)`
   }
 `
 
+export const Text = styled.p`
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+
+  font-size: 10px;
+  text-align: center;
+  color: var(--onSurface);
+  ${Smooth}
+`
+
 export const Wrapper = styled.div<{ animation: HoveredState }>`
+  position: relative;
   align-self: flex-start;
   flex-shrink: 0;
   height: 44px;
   width: 28px;
   cursor: pointer;
   --initialAngle: 0deg;
+  --maxAngle: -100deg;
 
   ${Icon} {
     animation: ${({ animation }) => animation} 1s ease-out forwards;
   }
+
+  ${({ animation }) =>
+    animation !== 'hover' &&
+    css`
+      ${Text} {
+        opacity: 0;
+      }
+    `}
 
   @keyframes hover {
     0% {
       transform: rotate3d(0, 0, 1, var(--initialAngle));
     }
     20% {
-      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) -45deg));
+      transform: rotate3d(0, 0, 1, var(--maxAngle));
     }
     100% {
-      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) -45deg));
+      transform: rotate3d(0, 0, 1, var(--maxAngle));
     }
   }
 
   @keyframes off {
     0% {
-      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) -45deg));
+      transform: rotate3d(0, 0, 1, var(--maxAngle));
     }
 
     20% {
-      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) + 30deg));
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) + 60deg));
     }
 
     40% {
-      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 20deg));
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 40deg));
     }
 
     60% {
-      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) + 10deg));
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) + 20deg));
     }
 
     80% {
-      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 5deg));
+      transform: rotate3d(0, 0, 1, calc(var(--initialAngle) - 10deg));
     }
 
     100% {

@@ -23,6 +23,7 @@ const TagButton = (): JSX.Element => {
       onBlur={handleUnhover}
     >
       <S.Icon />
+      <S.Text>Highlight your auction!</S.Text>
     </S.Wrapper>
   )
 }
