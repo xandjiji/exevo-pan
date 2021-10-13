@@ -84,19 +84,17 @@ export const FavButton = styled(BaseFavButton)`
 `
 
 export const HighlightedIcon = styled(TagSvg)`
-  position: absolute;
-  top: 8px;
-  right: -22px;
+  height: 44px;
+  width: 28px;
+  align-self: flex-start;
+  flex-shrink: 0;
 
-  width: 54px;
-  height: 54px;
   filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
 
-  --initialAngle: 45deg;
+  --initialAngle: 0deg;
   animation: swing 1.2s ease-out forwards;
   animation-delay: 1s;
-  transform-origin: 0 0;
-  transform: rotate(var(--initialAngle));
+  transform-origin: 50% 0;
   fill: var(--green);
 
   @keyframes swing {
