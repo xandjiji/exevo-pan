@@ -1,18 +1,18 @@
 import styled, { css } from 'styled-components'
 import TagSvg from 'assets/svgs/tag.svg'
+import AdvertiseSvg from 'assets/svgs/advertise.svg'
 import { Smooth } from 'styles'
 import { HoveredState } from './types'
 
-export const Icon = styled(TagSvg)`
+export const IconWrapper = styled.div`
+  position: relative;
   width: 100%;
   height: 100%;
-  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
 
   --initialAngle: 0deg;
   animation: swing 1.2s ease-out forwards;
   animation-delay: 1s;
   transform-origin: 50% 0;
-  fill: var(--green);
 
   @keyframes swing {
     0% {
@@ -50,6 +50,24 @@ export const Icon = styled(TagSvg)`
   }
 `
 
+export const TagIcon = styled(TagSvg)`
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(2px 2px 2px rgba(0, 0, 0, 0.3));
+`
+
+export const AdvertiseIcon = styled(AdvertiseSvg)`
+  position: absolute;
+  top: calc(50% + 6px);
+  left: calc(50% - 1px);
+  transform: translate(-50%, -50%);
+  z-index: 1;
+
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+`
+
 export const Text = styled.p`
   position: absolute;
   bottom: 0;
@@ -73,7 +91,7 @@ export const Wrapper = styled.div<{ animation: HoveredState }>`
   --initialAngle: 0deg;
   --maxAngle: -100deg;
 
-  ${Icon} {
+  ${IconWrapper} {
     animation: ${({ animation }) => animation} 1s ease-out forwards;
   }
 
@@ -89,7 +107,7 @@ export const Wrapper = styled.div<{ animation: HoveredState }>`
     0% {
       transform: rotate3d(0, 0, 1, var(--initialAngle));
     }
-    20% {
+    15% {
       transform: rotate3d(0, 0, 1, var(--maxAngle));
     }
     100% {

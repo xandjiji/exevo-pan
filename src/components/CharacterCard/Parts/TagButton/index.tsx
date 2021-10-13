@@ -22,7 +22,11 @@ const TagButton = (): JSX.Element => {
       onMouseOut={handleUnhover}
       onBlur={handleUnhover}
     >
-      <S.Icon />
+      <S.IconWrapper>
+        <S.TagIcon />
+        <S.AdvertiseIcon />
+      </S.IconWrapper>
+
       <S.Text>Highlight your auction!</S.Text>
     </S.Wrapper>
   )
