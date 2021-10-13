@@ -91,6 +91,16 @@ export const Wrapper = styled.div<{ animation: HoveredState }>`
   --initialAngle: 0deg;
   --maxAngle: -100deg;
 
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 64px;
+    height: 72px;
+  }
+
   ${IconWrapper} {
     animation: ${({ animation }) => animation} 1s ease-out forwards;
   }
