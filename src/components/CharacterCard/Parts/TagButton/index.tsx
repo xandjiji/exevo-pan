@@ -1,8 +1,13 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
 import * as S from './styles'
 import { HoveredState } from './types'
 
 const TagButton = (): JSX.Element => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const [hoverState, setHoverState] = useState<HoveredState>('initial')
 
   const handleHover = useCallback(() => {
@@ -27,7 +32,7 @@ const TagButton = (): JSX.Element => {
         <S.AdvertiseIcon />
       </S.IconWrapper>
 
-      <S.Text>Highlight your auction!</S.Text>
+      <S.Text>{common.CharacterCard.highlightLabelText}</S.Text>
     </S.Wrapper>
   )
 }

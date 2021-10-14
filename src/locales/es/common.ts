@@ -117,6 +117,7 @@ export default {
     imbuementsListLabel: 'Lista de imbuements',
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
+    highlightLabelText: '¡Destaque su subasta!',
   },
   StepperCompletedLabel: 'Paso completado',
   CopyButton: {

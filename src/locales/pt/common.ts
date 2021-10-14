@@ -116,6 +116,7 @@ export default {
     imbuementsListLabel: 'Lista de imbuements',
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',
+    highlightLabelText: 'Destaque seu leilão!',
   },
   StepperCompletedLabel: 'Passo completado',
   CopyButton: {

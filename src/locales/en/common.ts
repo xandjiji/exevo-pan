@@ -116,6 +116,7 @@ export default {
     imbuementsListLabel: 'Imbuements list',
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
+    highlightLabelText: 'Highlight your auction!',
   },
   StepperCompletedLabel: 'Step completed',
   CopyButton: {
