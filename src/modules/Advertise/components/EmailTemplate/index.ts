@@ -1,7 +1,7 @@
 import { advertise } from 'locales'
 import { advertising } from 'Constants'
 import { generateQrCode } from '../PaymentDetails/PixPayment/utils'
-import { calculatePrice } from '../Summary/utils'
+import { calculatePrice, sortAndFormatDates } from '../Summary/utils'
 import * as T from './components'
 import { EmailTemplateProps, ThankYouProps, SummaryProps } from './types'
 
@@ -76,7 +76,7 @@ const SummaryCard = ({
     ${T.Small(
       `${
         dictionary.PaymentDetails.Summary.highlightedDays
-      } ${selectedDates.join(', ')}`,
+      } ${sortAndFormatDates(selectedDates).join(', ')}`,
     )}
 `)
 }
