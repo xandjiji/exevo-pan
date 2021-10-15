@@ -76,6 +76,12 @@ export default function Advertise(): JSX.Element {
           as="fetch"
           crossOrigin="anonymous"
         />
+        <link
+          rel="preload"
+          href={`${endpoints.HIGHLIGHTED_DATA}${paths.HIGHLIGHTED_AUCTIONS}`}
+          as="fetch"
+          crossOrigin="anonymous"
+        />
       </Head>
 
       <Main>
