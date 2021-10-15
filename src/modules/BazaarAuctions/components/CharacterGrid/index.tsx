@@ -177,7 +177,11 @@ const CharacterGrid = ({
         {gridState.current === 'ready' &&
           shouldDisplayHighlighted &&
           highlightedList?.map((item) => (
-            <CharacterCard key={item.id} highlighted characterData={item} />
+            <CharacterCard
+              key={`${item.id}-highlighted`}
+              highlighted
+              characterData={item}
+            />
           ))}
 
         {gridState.current !== 'ready' ? (
