@@ -2,9 +2,15 @@ import { useCharacters } from 'contexts/useDatabase'
 import CharacterGrid from './components/CharacterGrid'
 
 export const CurrentAuctions = (): JSX.Element => {
-  const { characterData, loading } = useCharacters()
+  const { characterData, highlightedAuctions, loading } = useCharacters()
 
-  return <CharacterGrid characterList={characterData} isLoading={loading} />
+  return (
+    <CharacterGrid
+      characterList={characterData}
+      highlightedList={highlightedAuctions}
+      isLoading={loading}
+    />
+  )
 }
 
 export const BazaarHistory = (): JSX.Element => {

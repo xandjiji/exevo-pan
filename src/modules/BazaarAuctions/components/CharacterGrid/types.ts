@@ -5,4 +5,5 @@ export interface CharacterGridProps
   isLoading?: boolean
   defaultSortMode?: number
   defaultDescendingOrder?: boolean
+  highlightedList?: CharacterObject[]
 }
