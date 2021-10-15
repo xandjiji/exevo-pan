@@ -61,6 +61,7 @@ export default {
       days: 'days',
       durationText: 'Advertising duration',
       costText: 'Total cost',
+      highlightedDays: 'Highlighted days:',
     },
   },
   EmailTitle: 'Thank you for your order!',

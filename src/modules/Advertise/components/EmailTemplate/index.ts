@@ -72,6 +72,12 @@ const SummaryCard = ({
 
     ${T.DetailItem(calculatePrice(daysCount, paymentMethod))}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.costText)}
+
+    ${T.Small(
+      `${
+        dictionary.PaymentDetails.Summary.highlightedDays
+      } ${selectedDates.join(', ')}`,
+    )}
 `)
 }
 

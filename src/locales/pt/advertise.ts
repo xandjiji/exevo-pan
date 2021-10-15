@@ -61,6 +61,7 @@ export default {
       days: 'dias',
       durationText: 'Duração do destaque',
       costText: 'Custo total',
+      highlightedDays: 'Dias de destaque:',
     },
   },
   EmailTitle: 'Obrigado pelo seu pedido!',
