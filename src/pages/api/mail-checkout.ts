@@ -23,7 +23,13 @@ export default async (
   request: VercelRequest,
   response: VercelResponse,
 ): Promise<void> => {
-  const { body }: { body: AdvertisePurchase } = request
+  const { method, body } = request
+
+  if (method !== 'POST') {
+    response.status(405).end()
+    return
+  }
+
   const dictionary = advertise[body.locale as keyof typeof advertise]
 
   const uuid = uuidv4()
