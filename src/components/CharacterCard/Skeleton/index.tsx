@@ -11,7 +11,7 @@ const CardSkeleton = ({
   } = useTranslations()
 
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper highlighted={false} {...props}>
       <S.Head>
         <Skeletons.Square />
         <S.HeadInfo>
