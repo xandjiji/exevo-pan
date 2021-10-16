@@ -127,10 +127,16 @@ const FilterDrawer = ({
   useEffect(() => {
     const isReset = dequal(filters, defaultValues)
     setIsFilterReset(isReset)
-    setActiveFilterCount(
-      countActiveFilters(defaultValues as FilterState, filters),
+    const dispatchedTimer = setTimeout(
+      () =>
+        setActiveFilterCount(
+          countActiveFilters(defaultValues as FilterState, filters),
+        ),
+      DEBOUNCE_DELAY,
     )
     setUrlValues(filters)
+
+    return () => clearTimeout(dispatchedTimer)
   }, [filters, setActiveFilterCount])
 
   const { pathname } = useRouter()

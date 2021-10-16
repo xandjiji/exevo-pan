@@ -17,6 +17,7 @@ const defaultArgs = {
 
 describe('<FilterDrawer />', () => {
   beforeEach(() => {
+    jest.useFakeTimers()
     mockOnClose.mockClear()
     mockSetActiveFilterCount.mockClear()
     mockSetUrlValues.mockClear()
@@ -50,40 +51,49 @@ describe('<FilterDrawer />', () => {
   test('should call setActiveFilterCount', () => {
     renderWithProviders(<FilterDrawer {...defaultArgs} />)
 
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
 
     userEvent.click(screen.getByAltText('Knight'))
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
+    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+
+    userEvent.click(screen.getByAltText('Druid'))
+    jest.runAllTimers()
     expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(3)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
 
-    userEvent.click(screen.getByAltText('Druid'))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(4)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
-
     userEvent.type(screen.getByLabelText('Search nickname'), 'K')
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(5)
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(4)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
 
     userEvent.click(screen.getByText('Rare nicknames'))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(6)
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(5)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(3)
 
     userEvent.click(screen.getByText('Rare nicknames'))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(7)
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(6)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
 
     userEvent.click(screen.getByAltText('Knight'))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(8)
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(7)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
 
     userEvent.click(screen.getByAltText('Druid'))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(9)
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(8)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
 
     userEvent.click(screen.getByPlaceholderText('Select imbuements'))
     userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(10)
+    jest.runAllTimers()
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(9)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
   })
 
@@ -119,8 +129,9 @@ describe('<FilterDrawer />', () => {
     userEvent.click(inputElement)
     expect(screen.queryAllByRole('option')).toHaveLength(23)
     expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
+    jest.runAllTimers()
 
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
 
     const toggleElement = screen.getByRole('switch', { name: 'All imbuements' })
@@ -128,8 +139,9 @@ describe('<FilterDrawer />', () => {
     userEvent.click(inputElement)
     expect(screen.queryByRole('option')).not.toBeInTheDocument()
     expect(screen.queryAllByLabelText('Remove item')).toHaveLength(23)
+    jest.runAllTimers()
 
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(3)
+    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
 
     screen.queryAllByLabelText('Remove item').forEach((element) => {
@@ -139,6 +151,8 @@ describe('<FilterDrawer />', () => {
     userEvent.click(inputElement)
     expect(screen.queryAllByRole('option')).toHaveLength(23)
     expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
+    jest.runAllTimers()
+
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
   })
 
@@ -160,6 +174,7 @@ describe('<FilterDrawer />', () => {
     expect(toggleChip).toBeChecked()
     expect(rareNickChip).toBeChecked()
     expect(screen.getAllByLabelText('Remove item')).toHaveLength(23)
+    jest.runAllTimers()
 
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(4)
 
@@ -170,6 +185,7 @@ describe('<FilterDrawer />', () => {
     expect(toggleChip).not.toBeChecked()
     expect(rareNickChip).not.toBeChecked()
     expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
+    jest.runAllTimers()
 
     expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
   })
