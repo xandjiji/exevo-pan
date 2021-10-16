@@ -74,14 +74,15 @@ const Header = ({
               </S.A>
             </Link>
           </S.Li>
-          <S.Li>
+          {/* @ ToDo: add general wars */}
+          {/* <S.Li>
             <Link href={routes.LIBERTABRA_WAR}>
               <S.A>
                 <S.WarIcon />
                 <S.H2>Libertabra War</S.H2>
               </S.A>
             </Link>
-          </S.Li>
+          </S.Li> */}
           <S.Li>
             <Link href={routes.ADVERTISE}>
               <S.A>
