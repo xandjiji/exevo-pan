@@ -1,8 +1,8 @@
 export const links = {
   CANONICAL:
-    process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000'
-      : 'https://exevopan.com',
+    process.env.NEXT_PUBLIC_VERCEL_ENV !== 'development'
+      ? `https://www.${process.env.NEXT_PUBLIC_VERCEL_URL}`
+      : 'http://localhost:3000',
   EMAIL: 'mailto:xandjiji@gmail.com',
   LINKEDIN: 'https://www.linkedin.com/in/xandjiji',
   GITHUB_PROFILE: 'https://github.com/xandjiji',
