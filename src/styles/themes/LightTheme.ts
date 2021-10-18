@@ -16,6 +16,8 @@ const LightTheme = {
     battleYellow: '#FFDD00',
     primaryVariantHighlight: '#E7E8EE',
     kwai: '#FF7705',
+    kwaiSurface: '#FFF7F0',
+    kwaiVariant: '#FFC696',
   },
 }
 

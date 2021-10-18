@@ -4,6 +4,7 @@ import ExevoPanLogoImage from 'assets/logo.png'
 import MoonIconSvg from 'assets/svgs/moon.svg'
 import MarketIconSvg from 'assets/svgs/market.svg'
 import HistoryIconSvg from 'assets/svgs/history.svg'
+import AdvertiseIconSvg from 'assets/svgs/advertise.svg'
 import StatisticsIconSvg from 'assets/svgs/statistics.svg'
 import WarIconSvg from 'assets/svgs/war.svg'
 import AboutIconSvg from 'assets/svgs/about.svg'
@@ -121,6 +122,10 @@ export const MarketIcon = styled(MarketIconSvg)`
   ${NavIconStyle}
 `
 export const HistoryIcon = styled(HistoryIconSvg)`
+  ${NavIconStyle}
+`
+
+export const AdvertiseIcon = styled(AdvertiseIconSvg)`
   ${NavIconStyle}
 `
 

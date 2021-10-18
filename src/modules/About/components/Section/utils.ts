@@ -1,8 +1,6 @@
-export const CopyToClipboard = (id: string): void => {
-  const { clipboard } = navigator
-  if (clipboard) {
-    clipboard.writeText(
-      `https://${window.location.hostname}${window.location.pathname}#${id}`,
-    )
-  }
-}
+import { copyToClipboard } from 'utils'
+
+export const CopyToClipboard = (id: string): void =>
+  copyToClipboard(
+    `https://${window.location.hostname}${window.location.pathname}#${id}`,
+  )

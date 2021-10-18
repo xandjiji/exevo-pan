@@ -7,6 +7,7 @@ export type Action =
   | {
       type: 'INITIAL_DATA_LOAD'
       characterData: CharacterObject[]
+      highlightedAuctions: HighlightedAuction[]
       serverData: ServerObject[]
       rareItemData: RareItemData
       isHistory: boolean
@@ -25,6 +26,7 @@ export interface DatabaseContextValues {
   serverData: ServerObject[]
   rareItemData: RareItemData
   historyData: CharacterObject[]
+  highlightedAuctions: CharacterObject[]
   warGuildData: MemberWarData[]
   dispatch: (action: Action) => void
 }
@@ -33,6 +35,9 @@ export interface CharactersContextValues {
   loading: boolean
   characterData: CharacterObject[]
   historyData: CharacterObject[]
+  baseCharacterData: CharacterObject[]
+  baseHistoryData: CharacterObject[]
+  highlightedAuctions: CharacterObject[]
 }
 
 export interface DrawerFieldsContextValues {
@@ -57,5 +62,6 @@ export interface DatabaseReducerState {
   rareItemData: RareItemData
   baseHistoryData: CharacterObject[]
   historyData: CharacterObject[]
+  highlightedAuctions: CharacterObject[]
   warGuildData: MemberWarData[]
 }

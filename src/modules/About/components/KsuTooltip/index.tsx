@@ -2,13 +2,6 @@ import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
 import { KsuData } from '../../types'
 
-const fallbackData = {
-  name: 'Ksu',
-  level: 425,
-  vocation: 'Elite Knight',
-  world: 'Belobra',
-}
-
 const KsuTooltip = ({
   characterData,
 }: {
@@ -18,8 +11,8 @@ const KsuTooltip = ({
     translations: { about },
   } = useTranslations()
 
-  const { error, data } = characterData.characters
-  const { name, level, vocation, world } = error ? fallbackData : data
+  const { name, level, vocation, world } = characterData.characters.data
+
   return (
     <S.Wrapper>
       <S.SpritePortrait src="https://static.tibia.com/images/charactertrade/outfits/128_0.gif" />

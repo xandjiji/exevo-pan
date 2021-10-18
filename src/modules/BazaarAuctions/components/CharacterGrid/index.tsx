@@ -1,9 +1,9 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
+import CharacterCard from 'components/CharacterCard'
 import { useIsMounted } from 'hooks'
 import { urlParametersState } from 'utils'
 import FilterDrawer from '../FilterDrawer'
-import CharacterCard from '../CharacterCard'
 import SortingDialog from './SortingDialog'
 import EmptyState from './EmptyState'
 import { applySort } from './applySort'
@@ -13,6 +13,7 @@ import { CharacterGridProps } from './types'
 const CharacterGrid = ({
   itemsPerPage = 10,
   characterList,
+  highlightedList,
   defaultSortMode = 0,
   defaultDescendingOrder = false,
   ...props
@@ -114,6 +115,9 @@ const CharacterGrid = ({
     setDescendingOrder(getUrlValues().descending as boolean)
   }, [])
 
+  const shouldDisplayHighlighted: boolean =
+    currentPage === 1 && sortMode === defaultSortMode && activeFilterCount === 0
+
   return (
     <S.Main {...props}>
       <S.Head>
@@ -170,6 +174,16 @@ const CharacterGrid = ({
       )}
 
       <S.Grid ref={gridRef} id="character-grid">
+        {gridState.current === 'ready' &&
+          shouldDisplayHighlighted &&
+          highlightedList?.map((item) => (
+            <CharacterCard
+              key={`${item.id}-highlighted`}
+              highlighted
+              characterData={item}
+            />
+          ))}
+
         {gridState.current !== 'ready' ? (
           Array.from({ length: 10 }, (_, index) => (
             <S.CardSkeleton key={index} />

@@ -38,6 +38,7 @@ const initialDatabaseValue = {
   serverData: [],
   rareItemData: {},
   historyData: [],
+  highlightedAuctions: [],
   warGuildData: [],
   dispatch: expect.any(Function),
 }

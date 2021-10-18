@@ -4,27 +4,6 @@ export default {
     description:
       '¡Filtra y explora los caracteres de Tibia en el Char Bazaar oficial!',
   },
-  CharacterCard: {
-    linkLabel: 'Ir a la página del personaje',
-    bidLabelText: {
-      auctionSuccessful: 'Subasta exitosa',
-      auctionFailed: 'Subasta fallida',
-      currentBid: 'Oferta actual',
-      minimumBid: 'Oferta mínima',
-    },
-    auctionEnd: 'Fin de la subasta',
-    featuredItem: 'Artículo destacado',
-    experimentalServer: '¡Este es un servidor experimental!',
-    transferAvailable: 'Transferencia de servidor común disponible',
-    transferUnavailable: 'Transferencia de servidor común NO disponible',
-    favButton: {
-      remove: 'Eliminar',
-      add: 'Agregar',
-      fromFav: 'de favoritos',
-      toFav: 'a favoritos',
-    },
-    imbuementsListLabel: 'Lista de imbuements',
-  },
   CharacterGrid: {
     filterButtonLabel: 'Abrir menú de filtros',
     sortingButtonLabel: 'Definir un criterio de clasificación',
@@ -46,8 +25,6 @@ export default {
     noAuctionFound: 'Desculpa, no se encontró subasta',
     changeFilters: 'Cambiar filtros',
     notFoundAlt: 'No se encontraron caracteres',
-    AuctionStatus: 'Estado de la subasta',
-    BidStatus: 'Oferta actual',
   },
   FilterDrawer: {
     title: 'Filtros',

@@ -1,4 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
+import { Button } from 'components/Atoms'
 import * as S from './styles'
 import { EmptyStateProps } from './types'
 
@@ -17,14 +18,9 @@ const EmptyState = ({
       <S.NotFoundWrapper>
         <S.NotFound alt={homepage.CharacterGrid.notFoundAlt} />
       </S.NotFoundWrapper>
-      <S.Chip
-        overrideStatus
-        onClick={buttonAction}
-        role="button"
-        aria-checked={undefined}
-      >
+      <Button type="button" onClick={buttonAction}>
         {homepage.CharacterGrid.changeFilters}
-      </S.Chip>
+      </Button>
     </S.Wrapper>
   )
 }

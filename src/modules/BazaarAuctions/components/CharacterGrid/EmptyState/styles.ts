@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Chip as BaseChip } from 'components/Atoms'
 import Image from 'next/image'
 import NotFoundImage from 'assets/notFound.png'
 
@@ -37,10 +36,4 @@ export const Text = styled.span`
   font-size: 32px;
   text-align: center;
   color: var(--onSurface);
-`
-
-export const Chip = styled(BaseChip)`
-  padding: 12px 24px;
-
-  font-size: 24px;
 `

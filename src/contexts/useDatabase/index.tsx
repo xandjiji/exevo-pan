@@ -30,6 +30,7 @@ const defaultDatabaseState: DatabaseContextValues = {
   serverData: [],
   rareItemData: {},
   historyData: [],
+  highlightedAuctions: [],
   warGuildData: [],
   dispatch: () => {},
 }
@@ -40,6 +41,9 @@ const CharactersContext = createContext<CharactersContextValues>({
   loading: defaultDatabaseState.loading,
   characterData: defaultDatabaseState.characterData,
   historyData: defaultDatabaseState.historyData,
+  baseCharacterData: defaultDatabaseState.characterData,
+  baseHistoryData: defaultDatabaseState.historyData,
+  highlightedAuctions: defaultDatabaseState.highlightedAuctions,
 })
 
 const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
@@ -67,7 +71,16 @@ export const DatabaseProvider = ({
   } = useTranslations()
 
   const [
-    { characterData, serverData, rareItemData, historyData, warGuildData },
+    {
+      characterData,
+      serverData,
+      rareItemData,
+      historyData,
+      warGuildData,
+      baseCharacterData,
+      baseHistoryData,
+      highlightedAuctions,
+    },
     dispatch,
   ] = useReducer(DatabaseReducer, {
     baseCharacterData: defaultDatabaseState.characterData,
@@ -76,6 +89,7 @@ export const DatabaseProvider = ({
     rareItemData: defaultDatabaseState.rareItemData,
     baseHistoryData: defaultDatabaseState.historyData,
     historyData: defaultDatabaseState.historyData,
+    highlightedAuctions: defaultDatabaseState.highlightedAuctions,
     warGuildData: defaultDatabaseState.warGuildData,
   })
 
@@ -96,14 +110,19 @@ export const DatabaseProvider = ({
     setLoadedPercentage(null)
 
     try {
-      const [freshCharacterData, freshServerArray, freshItemData] =
-        await Promise.all([
-          isHistory
-            ? ManageDataClient.fetchHistoryData(setLoadedPercentage)
-            : ManageDataClient.fetchCharacterData(),
-          ManageDataClient.fetchServerData(),
-          ManageDataClient.fetchItemData(),
-        ])
+      const [
+        freshCharacterData,
+        freshServerArray,
+        freshItemData,
+        highlightedAuctionData,
+      ] = await Promise.all([
+        isHistory
+          ? ManageDataClient.fetchHistoryData(setLoadedPercentage)
+          : ManageDataClient.fetchCharacterData(),
+        ManageDataClient.fetchServerData(),
+        ManageDataClient.fetchItemData(),
+        ManageDataClient.fetchHighlightedAuctions(),
+      ])
 
       dispatch({
         type: 'INITIAL_DATA_LOAD',
@@ -111,10 +130,14 @@ export const DatabaseProvider = ({
         serverData: freshServerArray,
         rareItemData: freshItemData,
         isHistory,
+        highlightedAuctions: highlightedAuctionData,
       })
     } finally {
       setLoadedPercentage(null)
-      dispatchLoad({ type: 'FINISH_LOADING', paths: [currentPath] })
+      dispatchLoad({
+        type: 'FINISH_LOADING',
+        paths: [isHistory ? currentPath : routes.HOME, routes.ADVERTISE],
+      })
     }
   }, [])
 
@@ -142,9 +165,18 @@ export const DatabaseProvider = ({
   }, [])
 
   useEffect(() => {
-    if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
+    if (
+      pathname === routes.HOME ||
+      pathname === routes.BAZAAR_HISTORY ||
+      pathname === routes.ADVERTISE
+    ) {
       if (!navigated.includes(pathname)) {
-        dispatchLoad({ type: 'START_LOADING', paths: [pathname] })
+        const isHistory = pathname === routes.BAZAAR_HISTORY
+
+        dispatchLoad({
+          type: 'START_LOADING',
+          paths: [isHistory ? pathname : routes.HOME, routes.ADVERTISE],
+        })
         fetchCharacterData(pathname)
       }
     }
@@ -183,12 +215,20 @@ export const DatabaseProvider = ({
         serverData,
         rareItemData,
         historyData,
+        highlightedAuctions,
         warGuildData,
         dispatch,
       }}
     >
       <CharactersContext.Provider
-        value={{ loading, characterData, historyData }}
+        value={{
+          loading,
+          characterData,
+          historyData,
+          baseCharacterData,
+          baseHistoryData,
+          highlightedAuctions,
+        }}
       >
         <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
           <WarGuildDataContext.Provider value={{ warGuildData, loading }}>

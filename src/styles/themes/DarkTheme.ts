@@ -16,6 +16,8 @@ const DarkTheme = {
     battleYellow: '#FFDD00',
     primaryVariantHighlight: '#714CA1',
     kwai: '#FF7705',
+    kwaiSurface: '#453D3C',
+    kwaiVariant: '#995F2E',
   },
 }
 

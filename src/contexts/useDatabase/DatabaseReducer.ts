@@ -2,7 +2,7 @@ import { dequal } from 'dequal'
 import { urlParametersState } from 'utils'
 import { filterSchema } from 'modules/BazaarAuctions/components/FilterDrawer/schema'
 import { DatabaseReducerState, Action } from './types'
-import { filterCharacters } from './utils'
+import { filterCharacters, filterHighlightedAuctions } from './utils'
 
 const { getUrlValues, defaultValues } = urlParametersState(filterSchema)
 
@@ -38,6 +38,10 @@ const DatabaseReducer = (
         ...state,
         baseCharacterData: action.characterData,
         characterData: filteredInitialData,
+        highlightedAuctions: filterHighlightedAuctions(
+          action.characterData,
+          action.highlightedAuctions,
+        ),
         serverData: action.serverData,
         rareItemData: action.rareItemData,
       }

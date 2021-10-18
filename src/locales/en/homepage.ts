@@ -4,27 +4,6 @@ export default {
     description:
       'Filter and search for Tibia characters on the official Char Bazaar!',
   },
-  CharacterCard: {
-    linkLabel: 'Go to character page',
-    bidLabelText: {
-      auctionSuccessful: 'Auction Successful',
-      auctionFailed: 'Auction Failed',
-      currentBid: 'Current Bid',
-      minimumBid: 'Minimum Bid',
-    },
-    auctionEnd: 'Auction end',
-    featuredItem: 'Featured item',
-    experimentalServer: 'This is an experimental server!',
-    transferAvailable: 'Regular World Transfer available',
-    transferUnavailable: 'Regular World Transfer NOT available',
-    favButton: {
-      remove: 'Remove',
-      add: 'Add',
-      fromFav: 'from favorites',
-      toFav: 'to favorites',
-    },
-    imbuementsListLabel: 'Imbuements list',
-  },
   CharacterGrid: {
     filterButtonLabel: 'Open filter drawer',
     sortingButtonLabel: 'Set the sorting order and criteria',
@@ -46,8 +25,6 @@ export default {
     noAuctionFound: 'Sorry, no auction was found',
     changeFilters: 'Change filters',
     notFoundAlt: 'No character was found',
-    AuctionStatus: 'Auction status',
-    BidStatus: 'Bid status',
   },
   FilterDrawer: {
     title: 'Filters',

@@ -86,10 +86,30 @@ export default function About({
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const result = await fetch(`${endpoints.TIBIADATA}/Ksu.json`)
+const fallbackData: KsuData = {
+  characters: {
+    data: {
+      name: 'Ksu',
+      level: 425,
+      vocation: 'Elite Knight',
+      world: 'Belobra',
+    },
+  },
+}
 
-  const ksuData = (await result.json()) as KsuData
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  let ksuData: KsuData = { ...fallbackData }
+  try {
+    const result = await fetch(`${endpoints.TIBIADATA}/Ksu.json`)
+
+    const freshData = (await result.json()) as KsuData
+
+    if (!freshData.characters.error) {
+      ksuData = { ...freshData }
+    }
+  } catch (error) {
+    /* fallback data is already assigned */
+  }
 
   return {
     props: {

@@ -1,4 +1,8 @@
-import { getFromLocalStorage, saveToLocalStorage } from 'utils'
+import {
+  getFromLocalStorage,
+  saveToLocalStorage,
+  readableCurrentDate,
+} from 'utils'
 import { endpoints, paths, localStorageKeys } from 'Constants'
 import {
   buildCharacterData,
@@ -14,6 +18,8 @@ export default class ManageDataClient {
   static characterDataUrl = `${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`
 
   static rareItemDataUrl = `${endpoints.BASE_DATA}${paths.ITEMS_DATA}`
+
+  static highlightedAuctionDataUrl = `${endpoints.HIGHLIGHTED_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
 
   static historyHashDataUrl = `${endpoints.BASE_HISTORY_DATA}${paths.HISTORY_HASH}`
 
@@ -75,6 +81,23 @@ export default class ManageDataClient {
         localStorageKeys.RARE_ITEM_DATA,
         {},
       )
+    }
+  }
+
+  static async fetchHighlightedAuctions(): Promise<HighlightedAuction[]> {
+    try {
+      const response = await fetch(this.highlightedAuctionDataUrl)
+      const auctionData = (await response.json()) as HighlightedAuction[]
+
+      const currentDate = readableCurrentDate()
+      const filteredAuctions = auctionData.filter((auction) =>
+        auction.days.includes(currentDate),
+      )
+
+      return filteredAuctions
+    } catch (error: unknown) {
+      console.log(error)
+      return []
     }
   }
 

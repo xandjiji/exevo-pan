@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Paginator as BasePaginator } from 'components/Atoms'
+import { CardSkeleton as BaseCardSkeleton } from 'components/CharacterCard'
 import FilterIconSvg from 'assets/svgs/filter.svg'
 import {
   InnerContainer,
@@ -8,7 +9,6 @@ import {
   CustomScrollbar,
   Smooth,
 } from 'styles'
-import { CardSkeleton as BaseCardSkeleton } from '../CharacterCard'
 
 export const Main = styled.main``
 
