@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid'
-import { links, endpoints } from 'Constants'
+import { endpoints } from 'Constants'
 
 export default class MailCheckoutClient {
-  static mailChekoutUrl = `${links.CANONICAL}${endpoints.MAIL_CHECKOUT}`
+  static mailChekoutUrl = `${endpoints.MAIL_CHECKOUT}`
 
   static async postMail(purchase: AdvertisePurchase): Promise<string> {
     try {
