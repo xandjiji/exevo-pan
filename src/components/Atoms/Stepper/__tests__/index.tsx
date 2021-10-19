@@ -84,6 +84,10 @@ describe('<Stepper />', () => {
         } else {
           expect(currentButton).not.toHaveAttribute('aria-current', 'step')
         }
+
+        if (index < currentStep) {
+          expect(currentButton).toHaveAttribute('data-completed', 'true')
+        }
       })
       currentStep += 1
       rerender(<Stepper currentStep={currentStep} steps={mockedSteps} />)

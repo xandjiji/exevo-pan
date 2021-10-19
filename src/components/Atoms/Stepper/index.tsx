@@ -27,7 +27,7 @@ const Stepper = ({
             style={{ flexGrow: +!isLast }}
             type="button"
             aria-current={isCurrent ? 'step' : undefined}
-            aria-checked={isCompleted}
+            data-completed={isCompleted}
             aria-labelledby={stepDescriptionId}
           >
             <S.Circle>
