@@ -6,7 +6,9 @@ import { routes } from 'Constants'
 import * as S from './styles'
 import { HoveredState } from './types'
 
-const TagButton = (): JSX.Element => {
+const TagButton = ({
+  ...props
+}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -33,6 +35,7 @@ const TagButton = (): JSX.Element => {
         onMouseOut={handleUnhover}
         onBlur={handleUnhover}
         aria-describedby={labelId}
+        {...props}
       >
         <S.IconWrapper>
           <S.TagIcon />
