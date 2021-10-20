@@ -90,4 +90,12 @@ describe('<CharacterCard />', () => {
 
     await waitFor(() => {})
   })
+
+  test(`should render highlighted card correctly`, async () => {
+    renderWithProviders(
+      <CharacterCard characterData={characterData[0]} highlighted />,
+    )
+
+    expect(screen.getByText('Highlight your auction!')).toBeInTheDocument()
+  })
 })

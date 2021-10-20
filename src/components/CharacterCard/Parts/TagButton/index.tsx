@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
+import { v4 as uuidv4 } from 'uuid'
 import { routes } from 'Constants'
 import * as S from './styles'
 import { HoveredState } from './types'
@@ -20,6 +21,8 @@ const TagButton = (): JSX.Element => {
     setHoverState('off')
   }, [])
 
+  const { current: labelId } = useRef(uuidv4())
+
   return (
     <NextLink href={routes.ADVERTISE}>
       <S.Wrapper
@@ -29,13 +32,14 @@ const TagButton = (): JSX.Element => {
         onFocus={handleHover}
         onMouseOut={handleUnhover}
         onBlur={handleUnhover}
+        aria-describedby={labelId}
       >
         <S.IconWrapper>
           <S.TagIcon />
           <S.AdvertiseIcon />
         </S.IconWrapper>
 
-        <S.Text>{common.CharacterCard.highlightLabelText}</S.Text>
+        <S.Text id={labelId}>{common.CharacterCard.highlightLabelText}</S.Text>
       </S.Wrapper>
     </NextLink>
   )
