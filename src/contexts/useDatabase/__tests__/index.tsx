@@ -16,6 +16,8 @@ import {
   mockFavArray,
   filteredFavArray,
   mockedGuildData,
+  mockedHighlightedAuctions,
+  mockedHighlightedAuctionsData,
 } from './mock'
 
 jest.mock('utils/localStorage', () => ({
@@ -52,6 +54,10 @@ describe('useDatabase()', () => {
     jest
       .spyOn(ManageDataClient, 'fetchCharacterData')
       .mockResolvedValueOnce(mockedPartialCharacterData)
+
+    jest
+      .spyOn(ManageDataClient, 'fetchHighlightedAuctions')
+      .mockResolvedValueOnce(mockedHighlightedAuctionsData)
 
     jest
       .spyOn(ManageDataClient, 'fetchHistoryData')
@@ -102,6 +108,7 @@ describe('useDatabase()', () => {
     expect(result.current).toEqual({
       ...initialDatabaseValue,
       characterData: mockedCharacterData,
+      highlightedAuctions: mockedHighlightedAuctions,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
     })
@@ -580,6 +587,7 @@ describe('useDatabase()', () => {
     expect(result.current).toEqual({
       ...initialDatabaseValue,
       characterData: mockedCharacterData,
+      highlightedAuctions: mockedHighlightedAuctions,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
     })
@@ -603,6 +611,7 @@ describe('useDatabase()', () => {
     expect(result.current).toEqual({
       ...initialDatabaseValue,
       characterData: mockedCharacterData,
+      highlightedAuctions: mockedHighlightedAuctions,
       serverData: mockedServerData,
       rareItemData: mockedItemData,
     })
@@ -626,6 +635,23 @@ describe('useDatabase()', () => {
     expect(result.current).toEqual({
       ...initialDatabaseValue,
       warGuildData: mockedGuildData.allGuildMembers,
+    })
+  })
+
+  test('old auctions should be filtered out from highlighted data', async () => {
+    mockedUseRouter.mockReturnValue({
+      pathname: routes.ADVERTISE,
+    } as NextRouter)
+
+    const { result, waitForNextUpdate } = renderHook(() => useDatabase(), {
+      wrapper: ComponentWrapper,
+    })
+
+    await waitForNextUpdate()
+
+    const currentTimestamp = +new Date() / 1000
+    result.current.highlightedAuctions.forEach((auction) => {
+      expect(auction.auctionEnd > currentTimestamp).toBeTruthy()
     })
   })
 })

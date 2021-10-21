@@ -46,3 +46,11 @@ export const mockedGuildData = {
   bonesMembersData,
   allGuildMembers,
 }
+
+export const mockedHighlightedAuctions: CharacterObject[] = characterData.slice(
+  0,
+  20,
+)
+
+export const mockedHighlightedAuctionsData: HighlightedAuction[] =
+  mockedHighlightedAuctions.map((auction) => ({ id: auction.id, days: [] }))
