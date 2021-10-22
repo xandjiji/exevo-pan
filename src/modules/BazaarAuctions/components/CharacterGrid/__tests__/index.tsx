@@ -144,4 +144,23 @@ describe('<CharacterGrid />', () => {
 
     await waitFor(() => {})
   })
+
+  test('should display highlighted characters', async () => {
+    const gridComponent = (
+      <CharacterGrid
+        characterList={characterData}
+        highlightedList={[
+          { ...characterData[0], nickname: 'HIGHLIGHTED CHARACTER' },
+        ]}
+        isLoading={false}
+      />
+    )
+
+    const { rerender } = renderWithProviders(gridComponent)
+    rerender(gridComponent)
+
+    expect(screen.getByText('HIGHLIGHTED CHARACTER')).toBeInTheDocument()
+
+    await waitFor(() => {})
+  })
 })
