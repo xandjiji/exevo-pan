@@ -19,7 +19,7 @@ const CharacterCard = ({
   characterData,
   highlighted = false,
   ...props
-}: CharacterCardProps): JSX.Element => {
+}: CharacterCardProps): JSX.Element | null => {
   const {
     translations: { common },
   } = useTranslations()
@@ -53,6 +53,9 @@ const CharacterCard = ({
       ? common.CharacterCard.bidLabelText.currentBid
       : common.CharacterCard.bidLabelText.minimumBid
   }
+
+  /* @ ToDo: remove this once fixed server data bug */
+  if (!serverData) return null
 
   return (
     <S.Wrapper highlighted={highlighted} {...props}>
