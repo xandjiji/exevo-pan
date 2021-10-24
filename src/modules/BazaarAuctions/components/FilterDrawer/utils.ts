@@ -13,7 +13,7 @@ export function toggleSet<T>(set: Set<T>, value: T): Set<T> {
 }
 
 export const isHistory = (): boolean =>
-  window.location.pathname === routes.BAZAAR_HISTORY
+  window.location.pathname.includes(routes.BAZAAR_HISTORY)
 
 export const countActiveFilters = (
   defaultFilters: FilterState,
