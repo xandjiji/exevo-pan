@@ -121,4 +121,19 @@ describe('<AuctionSearch />', () => {
     userEvent.type(screen.getByPlaceholderText('Nickname'), 'asdsa0d0sd0ad0a')
     expect(screen.getByAltText('No auction was found')).toBeInTheDocument()
   })
+
+  test('should select the characters correctly', () => {
+    const { container } = renderWithProviders(
+      <FormProvider>
+        <AuctionSearch />
+      </FormProvider>,
+    )
+
+    const auctionButtons = container.querySelectorAll('#auction-list button')
+    auctionButtons.forEach((button) => {
+      userEvent.click(button)
+
+      expect(button).toHaveAttribute('aria-selected', 'true')
+    })
+  })
 })
