@@ -1,18 +1,42 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
+import { useCharacters } from 'contexts/useDatabase'
+import { CharactersContextValues } from 'contexts/useDatabase/types'
 import { FormProvider } from '../../../contexts/Form'
 import AuctionSearch from '..'
 import { mockedCharacterData } from './mock'
 
 jest.mock('contexts/useDatabase', () => ({
-  useCharacters: () => ({ baseCharacterData: mockedCharacterData }),
+  useCharacters: jest.fn(),
 }))
+
+const mockedUseCharacters = useCharacters as jest.MockedFunction<
+  typeof useCharacters
+>
 
 window.HTMLElement.prototype.scrollTo = jest.fn()
 
 describe('<AuctionSearch />', () => {
-  /* test('should render skeletons on loading', () => {
+  beforeEach(() => {
+    mockedUseCharacters.mockImplementation(
+      () =>
+        ({
+          baseCharacterData: mockedCharacterData,
+          loading: false,
+        } as CharactersContextValues),
+    )
+  })
+
+  test('should render skeletons on loading', () => {
+    mockedUseCharacters.mockImplementation(
+      () =>
+        ({
+          baseCharacterData: [] as CharacterObject[],
+          loading: true,
+        } as CharactersContextValues),
+    )
+
     renderWithProviders(
       <FormProvider>
         <AuctionSearch />
@@ -20,7 +44,10 @@ describe('<AuctionSearch />', () => {
     )
 
     expect(screen.queryAllByText(/Level/)).toHaveLength(0)
-  }) */
+    expect(
+      screen.queryByAltText('No auction was found'),
+    ).not.toBeInTheDocument()
+  })
 
   test('should page data correctly', () => {
     renderWithProviders(
@@ -64,5 +91,34 @@ describe('<AuctionSearch />', () => {
     mockedCharacterData.slice(0, 10).forEach((character) => {
       expect(screen.getByText(character.nickname)).toBeInTheDocument()
     })
+  })
+
+  test('should filter by nickname', () => {
+    renderWithProviders(
+      <FormProvider>
+        <AuctionSearch />
+      </FormProvider>,
+    )
+
+    const randomNickname = mockedCharacterData[200].nickname
+
+    userEvent.type(screen.getByPlaceholderText('Nickname'), randomNickname)
+    expect(screen.queryAllByText(randomNickname).length > 0).toBeTruthy()
+
+    userEvent.click(screen.getByRole('button', { name: 'Clear input' }))
+    mockedCharacterData.slice(0, 10).forEach((character) => {
+      expect(screen.getByText(character.nickname)).toBeInTheDocument()
+    })
+  })
+
+  test('should display empty state', () => {
+    renderWithProviders(
+      <FormProvider>
+        <AuctionSearch />
+      </FormProvider>,
+    )
+
+    userEvent.type(screen.getByPlaceholderText('Nickname'), 'asdsa0d0sd0ad0a')
+    expect(screen.getByAltText('No auction was found')).toBeInTheDocument()
   })
 })
