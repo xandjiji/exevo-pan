@@ -29,11 +29,20 @@ describe('<CharacterCard />', () => {
     mockedUseForm.mockImplementation(() => mockedFormValues)
   })
 
-  test.todo('after the first step, it should have smaller style')
+  test('if no character is selected, the skeleton should be displayed', () => {
+    const { rerender } = renderWithProviders(<CharacterCard />)
 
-  test.todo('if no character is selected, the skeleton should be displayed')
+    const cardElement = screen.getByText(/level/i)
+    expect(cardElement).toBeInTheDocument()
 
-  test.todo('if no character is selected, the skeleton should be displayed')
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      selectedCharacter: undefined,
+    }))
+    rerender(<CharacterCard />)
+
+    expect(cardElement).not.toBeInTheDocument()
+  })
 
   test('isValid should control button enable/disable', () => {
     const { rerender } = renderWithProviders(<CharacterCard />)
@@ -55,6 +64,27 @@ describe('<CharacterCard />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Next' }))
     expect(mockedFormValues.dispatch).toBeCalledTimes(1)
+  })
+
+  test('after the second step, the next button should NOT render', () => {
+    const { rerender } = renderWithProviders(<CharacterCard />)
+
+    const nextButton = screen.getByRole('button', { name: 'Next' })
+    expect(nextButton).toBeInTheDocument()
+
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      currentStep: 1,
+    }))
+    rerender(<CharacterCard />)
+    expect(nextButton).toBeInTheDocument()
+
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      currentStep: 2,
+    }))
+    rerender(<CharacterCard />)
+    expect(nextButton).not.toBeInTheDocument()
   })
 
   test('if finished, it should not render', () => {
