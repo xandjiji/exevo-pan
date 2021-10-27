@@ -32,7 +32,7 @@ describe('<CharacterCard />', () => {
   test('if no character is selected, the skeleton should be displayed', () => {
     const { rerender } = renderWithProviders(<CharacterCard />)
 
-    const cardElement = screen.getByText(/level/i)
+    const cardElement = screen.getByText(mockedCharacterData.nickname)
     expect(cardElement).toBeInTheDocument()
 
     mockedUseForm.mockImplementation(() => ({
