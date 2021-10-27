@@ -65,31 +65,31 @@ describe('<AuctionSearch />', () => {
     const lastButton = screen.getByRole('button', { name: 'Go to last page' })
 
     mockedCharacterData.slice(0, 10).forEach((character) => {
-      expect(screen.getByText(character.nickname)).toBeInTheDocument()
+      expect(screen.getAllByText(character.nickname)).not.toHaveLength(0)
     })
 
     userEvent.click(nextButton)
     mockedCharacterData.slice(10, 20).forEach((character) => {
-      expect(screen.getByText(character.nickname)).toBeInTheDocument()
+      expect(screen.getAllByText(character.nickname)).not.toHaveLength(0)
     })
 
     userEvent.click(lastButton)
     mockedCharacterData
       .slice(mockedCharacterData.length - 10, mockedCharacterData.length)
       .forEach((character) => {
-        expect(screen.getByText(character.nickname)).toBeInTheDocument()
+        expect(screen.getAllByText(character.nickname)).not.toHaveLength(0)
       })
 
     userEvent.click(prevButton)
     mockedCharacterData
       .slice(mockedCharacterData.length - 20, mockedCharacterData.length - 10)
       .forEach((character) => {
-        expect(screen.getByText(character.nickname)).toBeInTheDocument()
+        expect(screen.getAllByText(character.nickname)).not.toHaveLength(0)
       })
 
     userEvent.click(firstButton)
     mockedCharacterData.slice(0, 10).forEach((character) => {
-      expect(screen.getByText(character.nickname)).toBeInTheDocument()
+      expect(screen.getAllByText(character.nickname)).not.toHaveLength(0)
     })
   })
 
@@ -107,7 +107,7 @@ describe('<AuctionSearch />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Clear input' }))
     mockedCharacterData.slice(0, 10).forEach((character) => {
-      expect(screen.getByText(character.nickname)).toBeInTheDocument()
+      expect(screen.getAllByText(character.nickname)).not.toHaveLength(0)
     })
   })
 
