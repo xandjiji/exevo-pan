@@ -25,6 +25,7 @@ const mockedFormValues = {
 
 describe('<CharacterCard />', () => {
   beforeEach(() => {
+    mockedUseForm.mockClear()
     mockedUseForm.mockImplementation(() => mockedFormValues)
   })
 
@@ -49,7 +50,21 @@ describe('<CharacterCard />', () => {
     expect(nextButton).toBeDisabled()
   })
 
-  test.todo('button should dispatch SET_STEP')
+  test('button should dispatch SET_STEP', () => {
+    renderWithProviders(<CharacterCard />)
 
-  test.todo('if finished, it should not render')
+    userEvent.click(screen.getByRole('button', { name: 'Next' }))
+    expect(mockedFormValues.dispatch).toBeCalledTimes(1)
+  })
+
+  test('if finished, it should not render', () => {
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      finished: true,
+    }))
+
+    const { container } = renderWithProviders(<CharacterCard />)
+
+    expect(container.childElementCount).toEqual(0)
+  })
 })
