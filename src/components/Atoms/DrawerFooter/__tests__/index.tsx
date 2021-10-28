@@ -2,7 +2,7 @@ import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
 import DrawerFooter from '..'
 
-describe('<CtaButton />', () => {
+describe('<DrawerFooter />', () => {
   test('it renders correctly', () => {
     renderWithProviders(<DrawerFooter data-testid="testid" />)
 

@@ -10,7 +10,7 @@ export const links = {
   TIBIACLIPS: 'https://www.youtube.com/channel/UC2srmu0R5yNikl3cnfqcomQ',
   TIBIA: 'https://www.tibia.com',
   CIPSOFT: 'https://www.cipsoft.com',
-  COINS_REF: '#',
+  COINS_REF: 'https://tibiaforsale.com/produto/tibia-coins/?wpam_id=361',
   UNLICENSE: 'https://unlicense.org',
   KWAI_REF: 'https://s.kwai.app/s/RdhBQPPn',
 }
