@@ -146,4 +146,16 @@ describe('<Checkout />', () => {
       expect(mockedMailCheckoutClient.postMail).toHaveBeenCalled()
     })
   })
+
+  test('on user input, should dispatch onChange', async () => {
+    renderWithProviders(<Checkout />)
+
+    userEvent.type(screen.getByLabelText('Email'), 'a')
+    expect(mockedFormValues.dispatch).toHaveBeenLastCalledWith({
+      type: 'SET_INPUT',
+      values: {
+        email: { value: 'a', state: 'neutral' },
+      },
+    })
+  })
 })
