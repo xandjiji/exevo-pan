@@ -1,4 +1,4 @@
-import { validateEmail } from '../utils'
+import { validateEmail, randomCharacter } from '../utils'
 
 describe('utils/validateEmail', () => {
   test('should validate email correctly', () => {
@@ -12,5 +12,11 @@ describe('utils/validateEmail', () => {
     expect(validateEmail('aa.com')).toBeFalsy()
     expect(validateEmail('a@a@b.com')).toBeFalsy()
     expect(validateEmail('a@@b.com')).toBeFalsy()
+  })
+})
+
+describe('utils/randomCharacter', () => {
+  test('should return with a string', () => {
+    expect(typeof randomCharacter() === 'string').toBeTruthy()
   })
 })
