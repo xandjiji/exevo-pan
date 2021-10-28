@@ -1,14 +1,37 @@
-import { screen } from '@testing-library/react'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
+import { MailCheckoutClient } from 'services'
 import { useForm } from '../../../contexts/Form'
 import { FormValues } from '../../../contexts/Form/types'
-import CharacterCard from '..'
+import { validateEmail, validateCharacter } from '../utils'
+import Checkout from '..'
 import { mockedCharacterData } from './mock'
 
 jest.mock('next/router', () => ({
   useRouter: () => ({ locale: 'en' }),
 }))
+
+jest.mock('../utils', () => ({
+  validateEmail: jest.fn().mockImplementation(() => true),
+  validateCharacter: jest.fn().mockImplementation(async () => true),
+  randomCharacter: jest.fn().mockImplementation(() => 'Bubble'),
+}))
+
+const mockedValidateEmail = validateEmail as jest.MockedFunction<
+  typeof validateEmail
+>
+const mockedValidateCharacter = validateCharacter as jest.MockedFunction<
+  typeof validateCharacter
+>
+
+jest.mock('services', () => ({
+  MailCheckoutClient: { postMail: jest.fn().mockResolvedValue('new-uuid') },
+}))
+
+const mockedMailCheckoutClient = MailCheckoutClient as jest.MockedClass<
+  typeof MailCheckoutClient
+>
 
 jest.mock('../../../contexts/Form', () => ({
   useForm: jest.fn(),
@@ -16,17 +39,18 @@ jest.mock('../../../contexts/Form', () => ({
 
 const mockedUseForm = useForm as jest.MockedFunction<typeof useForm>
 
-window.HTMLElement.prototype.scrollTo = jest.fn()
-window.HTMLElement.prototype.scrollIntoView = jest.fn()
-
 const mockedFormValues = {
+  uuid: '',
+  currentStep: 2,
   selectedCharacter: mockedCharacterData,
-  selectedDates: [],
+  selectedDates: [] as string[],
   paymentMethod: 'TIBIA_COINS',
-  email: 'my@email.com',
-  paymentCharacter: 'Bubble',
+  email: { value: '', state: 'neutral' },
+  paymentCharacter: { value: '', state: 'neutral' },
+  isValid: true,
+  finished: false,
   dispatch: jest.fn(),
-} as unknown as FormValues
+} as FormValues
 
 describe('<Checkout />', () => {
   beforeEach(() => {
@@ -34,13 +58,92 @@ describe('<Checkout />', () => {
     mockedUseForm.mockImplementation(() => mockedFormValues)
   })
 
-  test.todo('should render all elements for PIX payment')
+  test('should render all elements for PIX payment', () => {
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      paymentMethod: 'PIX',
+    }))
 
-  test.todo('should render all elements for TIBIA_COINS payment')
+    renderWithProviders(<Checkout />)
 
-  test.todo('button should be disabled if empty/invalid fields')
+    expect(screen.getByLabelText('Email')).toBeInTheDocument()
+    expect(
+      screen.queryByLabelText('Sending coins character'),
+    ).not.toBeInTheDocument()
+  })
 
-  test.todo('should validate and submit')
+  test('should render all elements for TIBIA_COINS payment', () => {
+    renderWithProviders(<Checkout />)
 
-  test.todo('should validate display error')
+    expect(screen.getByLabelText('Email')).toBeInTheDocument()
+    expect(screen.getByLabelText('Sending coins character')).toBeInTheDocument()
+  })
+
+  test('button should be disabled if empty fields', () => {
+    renderWithProviders(<Checkout />)
+
+    const buttonElement = screen.getByRole('button')
+
+    expect(buttonElement).toBeDisabled()
+  })
+
+  test('button should be disabled if invalid fields', () => {
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      paymentCharacter: { value: 'Bubble', state: 'invalid' },
+      email: { value: 'my@email.com', state: 'invalid' },
+    }))
+    renderWithProviders(<Checkout />)
+
+    const buttonElement = screen.getByRole('button')
+
+    expect(buttonElement).toBeDisabled()
+  })
+
+  test('button should be enabled if valid fields', () => {
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      paymentCharacter: { value: 'Bubble', state: 'valid' },
+      email: { value: 'my@email.com', state: 'valid' },
+    }))
+    renderWithProviders(<Checkout />)
+
+    const buttonElement = screen.getByRole('button')
+
+    expect(buttonElement).not.toBeDisabled()
+  })
+
+  test('should validate and submit', async () => {
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      paymentCharacter: { value: 'Bubble', state: 'neutral' },
+      email: { value: 'my@email.com', state: 'neutral' },
+    }))
+    renderWithProviders(<Checkout />)
+
+    userEvent.click(screen.getByRole('button'))
+
+    await waitFor(() => {
+      expect(mockedValidateEmail).toHaveBeenCalledWith('my@email.com')
+      expect(mockedValidateCharacter).toHaveBeenCalledWith('Bubble')
+      expect(mockedMailCheckoutClient.postMail).toHaveBeenCalled()
+    })
+  })
+
+  test('should validate and submit by typing ENTER', async () => {
+    mockedUseForm.mockImplementation(() => ({
+      ...mockedFormValues,
+      paymentCharacter: { value: 'Bubble', state: 'neutral' },
+      email: { value: 'my@email.com', state: 'neutral' },
+    }))
+    renderWithProviders(<Checkout />)
+
+    userEvent.type(screen.getByLabelText('Email'), '{Enter}')
+
+    await waitFor(() => {
+      expect(mockedValidateEmail).toHaveBeenCalledWith('my@email.com')
+      expect(mockedValidateCharacter).toHaveBeenCalledWith('Bubble')
+      expect(mockedMailCheckoutClient.postMail).toHaveBeenCalled()
+    })
+  })
 })
