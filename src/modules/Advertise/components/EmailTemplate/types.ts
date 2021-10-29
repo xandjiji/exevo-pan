@@ -1,4 +1,4 @@
-export interface EmailTemplateProps extends AdvertisePurchase {
+export interface EmailTemplateProps extends Omit<AdvertisePurchase, 'email'> {
   uuid: string
 }
 
