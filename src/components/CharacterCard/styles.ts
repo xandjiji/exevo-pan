@@ -27,6 +27,8 @@ export const Wrapper = styled.div<{ highlighted: boolean }>`
       --primary: var(--kwai);
       --primaryVariant: var(--kwaiVariant);
 
+      z-index: 2;
+
       animation: zoom 0.6s ease-out forwards;
       animation-delay: 1s;
 
