@@ -84,10 +84,10 @@ const Checkout = (): JSX.Element => {
         state: isCharacterValid ? 'valid' : 'invalid',
       })
 
-      if (isEmailValid && isCharacterValid) submit()
-    } else if (isEmailValid) {
-      submit()
+      if (!isCharacterValid) return
     }
+    if (!isEmailValid) return
+    submit()
   }
 
   const handleKeypress = (event: React.KeyboardEvent) => {

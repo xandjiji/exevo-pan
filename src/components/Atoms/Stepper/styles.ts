@@ -61,7 +61,7 @@ export const StepItem = styled.button`
   cursor: pointer;
 
   &[aria-current='step'],
-  &[aria-checked='true'] {
+  &[data-completed='true'] {
     ${Circle} {
       background-color: var(--primary);
       color: var(--onPrimary);
@@ -82,7 +82,7 @@ export const StepItem = styled.button`
     }
   }
 
-  &[aria-checked='true'] {
+  &[data-completed='true'] {
     ${Separator} {
       background-color: var(--primary);
     }
