@@ -55,12 +55,13 @@ describe('<Popover />', () => {
     expect(contentElement).toBeVisible()
 
     userEvent.click(wrappedElement)
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
 
     userEvent.click(wrappedElement)
-    expect(contentElement).toBeVisible()
+    expect(screen.getByRole('none')).toBeVisible()
+
     userEvent.click(screen.getByLabelText('Click here to close'))
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
@@ -79,14 +80,13 @@ describe('<Popover />', () => {
     ).not.toBeInTheDocument()
 
     userEvent.tab()
-    const contentElement = screen.getByRole('none')
-    expect(contentElement).toBeVisible()
+    expect(screen.getByRole('none')).toBeVisible()
 
     userEvent.tab()
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
 
     userEvent.tab()
-    expect(contentElement).toBeVisible()
+    expect(screen.getByRole('none')).toBeVisible()
 
     await waitFor(() => {})
   })
