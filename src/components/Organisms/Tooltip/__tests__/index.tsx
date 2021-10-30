@@ -18,22 +18,20 @@ describe('<Tooltip />', () => {
       </Tooltip>,
     )
 
-    const contentElement = screen.getByText('tooltip content')
+    /*     const contentElement = screen.getByText('tooltip content') */
     const wrappedElement = screen.getByRole('heading')
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
     expect(
       screen.queryByLabelText('Click here to close'),
     ).not.toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.hover(wrappedElement)
-    expect(contentElement).toBeVisible()
+    expect(screen.getByText('tooltip content')).toBeVisible()
 
     userEvent.unhover(wrappedElement)
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
@@ -45,26 +43,26 @@ describe('<Tooltip />', () => {
       </Tooltip>,
     )
 
-    const contentElement = screen.getByText('tooltip content')
+    /* const contentElement = screen.getByText('tooltip content') */
     const wrappedElement = screen.getByRole('heading')
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.click(wrappedElement)
+    let contentElement = screen.getByText('tooltip content')
     expect(contentElement).toBeVisible()
     userEvent.click(contentElement)
     expect(contentElement).toBeVisible()
 
     userEvent.click(wrappedElement)
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
 
     userEvent.click(wrappedElement)
+    contentElement = screen.getByText('tooltip content')
     expect(contentElement).toBeVisible()
     userEvent.click(screen.getByLabelText('Click here to close'))
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
@@ -76,24 +74,22 @@ describe('<Tooltip />', () => {
       </Tooltip>,
     )
 
-    const contentElement = screen.getByText('tooltip content')
+    /* const contentElement = screen.getByText('tooltip content') */
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     expect(screen.getByRole('heading')).toBeInTheDocument()
     expect(
       screen.queryByLabelText('Click here to close'),
     ).not.toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
+    userEvent.tab()
+    expect(screen.getByText('tooltip content')).toBeVisible()
 
     userEvent.tab()
-    expect(contentElement).toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
 
     userEvent.tab()
-    expect(contentElement).not.toBeVisible()
-
-    userEvent.tab()
-    expect(contentElement).toBeVisible()
+    expect(screen.getByText('tooltip content')).toBeVisible()
 
     await waitFor(() => {})
   })
@@ -105,20 +101,18 @@ describe('<Tooltip />', () => {
       </Tooltip>,
     )
 
-    const contentElement = screen.getByText('tooltip content')
+    /* const contentElement = screen.getByText('tooltip content') */
     const wrappedElement = screen.getByRole('heading')
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.tab()
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     userEvent.keyboard('{enter}')
-    expect(contentElement).toBeVisible()
+    expect(screen.getByText('tooltip content')).toBeVisible()
     userEvent.type(wrappedElement, '{space}')
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
@@ -165,25 +159,23 @@ describe('<Tooltip />', () => {
       </Tooltip>,
     )
 
-    expect(contentElement).toBeInTheDocument()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     expect(wrappedElement).toBeInTheDocument()
     expect(
       screen.queryByLabelText('Click here to close'),
     ).not.toBeInTheDocument()
 
-    expect(contentElement).not.toBeVisible()
-
     userEvent.tab()
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     userEvent.keyboard('{enter}')
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     userEvent.type(wrappedElement, '{space}')
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
 
     userEvent.click(wrappedElement)
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
     userEvent.click(wrappedElement)
-    expect(contentElement).not.toBeVisible()
+    expect(screen.queryByText('tooltip content')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
