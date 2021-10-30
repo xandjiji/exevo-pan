@@ -125,7 +125,6 @@ const CharacterGrid = ({
           tabIndex={0}
           role="button"
           aria-label={homepage.CharacterGrid.filterButtonLabel}
-          aria-controls="filter-drawer"
           onClick={() => setDrawerOpen(true)}
         >
           <S.FilterIcon />
