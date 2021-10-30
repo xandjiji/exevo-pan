@@ -1,4 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { useRouter, NextRouter } from 'next/router'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
@@ -38,14 +39,7 @@ describe('<CharacterCard />', () => {
       screen.getByText(character.serverData.serverName),
     ).toBeInTheDocument()
     expect(
-      screen.getByText(
-        character.transfer
-          ? 'Regular World Transfer available'
-          : 'Regular World Transfer NOT available',
-      ),
-    ).toBeInTheDocument()
-    expect(
-      screen.getByText(
+      screen.getByLabelText(
         character.transfer
           ? 'Regular World Transfer available'
           : 'Regular World Transfer NOT available',
@@ -66,6 +60,8 @@ describe('<CharacterCard />', () => {
     expect(
       screen.getByText(`Imbuements: ${character.imbuements.length}/23`),
     ).toBeInTheDocument()
+
+    userEvent.hover(screen.getByText(/Imbuements:/))
     character.imbuements.forEach((imbuement) => {
       expect(screen.getByText(imbuement)).toBeInTheDocument()
     })
