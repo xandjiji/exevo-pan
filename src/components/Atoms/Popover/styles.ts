@@ -26,14 +26,21 @@ export const PopoverReference = styled.div<PopoverReferenceProps>`
   }
 `
 
+const fadeInStyle = css`
+  animation: fadeIn 0.2s ease-out;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
+
 export const PopoverContent = styled.div`
   z-index: 51;
-  transition: opacity 0.2s ease-out;
-
-  &[aria-hidden='true'] {
-    opacity: 0;
-    pointer-events: none;
-  }
+  ${fadeInStyle}
 `
 
 export const Backdrop = styled.div`
@@ -45,13 +52,5 @@ export const Backdrop = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.1);
 
-  animation: fadeIn 0.2s ease-out;
-  @keyframes fadeIn {
-    0% {
-      opacity: 0;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+  ${fadeInStyle}
 `

@@ -2,7 +2,6 @@ import { useTranslations } from 'contexts/useTranslation'
 import {
   useState,
   useMemo,
-  useEffect,
   Children,
   isValidElement,
   cloneElement,
@@ -88,10 +87,6 @@ const Popover = ({
     }
   }, [trigger])
 
-  useEffect(() => {
-    if (derivedVisibility) window.dispatchEvent(new Event('resize'))
-  }, [derivedVisibility])
-
   return (
     <>
       <S.PopoverReference
@@ -103,27 +98,27 @@ const Popover = ({
       >
         {children}
       </S.PopoverReference>
-      <S.PopoverContent
-        ref={setPopperElement}
-        aria-hidden={!derivedVisibility}
-        style={styles.popper}
-        {...attributes.popper}
-        {...props}
-        {...(trigger === 'hover' && derivedVisibility
-          ? { ...triggers, tabIndex: undefined }
-          : {})}
-      >
-        {Children.map(content, (contentChild) => {
-          if (!isValidElement(contentChild)) return contentChild
-          if (typeof contentChild.type === 'string') return contentChild
+      {derivedVisibility && (
+        <S.PopoverContent
+          ref={setPopperElement}
+          aria-hidden="false"
+          style={styles.popper}
+          {...attributes.popper}
+          {...props}
+          {...(trigger === 'hover' ? { ...triggers, tabIndex: undefined } : {})}
+        >
+          {Children.map(content, (contentChild) => {
+            if (!isValidElement(contentChild)) return contentChild
+            if (typeof contentChild.type === 'string') return contentChild
 
-          return cloneElement(contentChild, {
-            'aria-hidden': !derivedVisibility,
-            disabled: !derivedVisibility,
-            hidden: !derivedVisibility,
-          })
-        })}
-      </S.PopoverContent>
+            return cloneElement(contentChild, {
+              'aria-hidden': false,
+              disabled: false,
+              hidden: false,
+            })
+          })}
+        </S.PopoverContent>
+      )}
       {trigger === 'click' && derivedVisibility && (
         <S.Backdrop
           aria-label={common.PopoverCloseLabel}
