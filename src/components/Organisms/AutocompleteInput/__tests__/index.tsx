@@ -253,28 +253,30 @@ describe('<AutocompleteInput />', () => {
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     userEvent.tab()
-    const listboxElement = screen.getByRole('listbox')
+    let listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, '{esc}')
-    expect(listboxElement).not.toBeVisible()
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     userEvent.click(inputElement)
-    expect(listboxElement).toBeVisible()
+    expect(screen.getByRole('listbox')).toBeInTheDocument()
 
     userEvent.type(inputElement, '{esc}')
-    expect(listboxElement).not.toBeVisible()
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     userEvent.click(inputElement)
+    listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, 'a')
     expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, '{esc}')
-    expect(listboxElement).not.toBeVisible()
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     userEvent.type(inputElement, 'a')
+    listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
 
     userEvent.click(screen.getByLabelText('Clear input'))
@@ -285,14 +287,15 @@ describe('<AutocompleteInput />', () => {
     expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, 'dra{enter}')
-    expect(listboxElement).not.toBeVisible()
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     userEvent.type(inputElement, 'a')
+    listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
     userEvent.keyboard('{arrowdown}')
     expect(listboxElement).toBeVisible()
     userEvent.keyboard('{enter}')
-    expect(listboxElement).not.toBeVisible()
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     await waitFor(() => {})
   })
@@ -304,13 +307,14 @@ describe('<AutocompleteInput />', () => {
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     userEvent.click(inputElement)
-    const listboxElement = screen.getByRole('listbox')
+    let listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, '{esc}')
-    expect(listboxElement).not.toBeVisible()
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     fireEvent.focus(inputElement)
+    listboxElement = screen.getByRole('listbox')
     expect(listboxElement).toBeVisible()
 
     userEvent.type(inputElement, 'a')
@@ -320,10 +324,10 @@ describe('<AutocompleteInput />', () => {
 
     const [firstOption] = screen.getAllByRole('option')
     userEvent.click(firstOption)
-    expect(listboxElement).not.toBeVisible()
+    expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
 
     userEvent.click(inputElement)
-    expect(listboxElement).toBeVisible()
+    expect(screen.getByRole('listbox')).toBeVisible()
 
     await waitFor(() => {})
   })
