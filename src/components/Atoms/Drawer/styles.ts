@@ -26,6 +26,18 @@ export const Wrapper = styled.div`
     visibility: hidden;
     transform: translateX(-100%);
   }
+
+  animation: slideIn 0.2s ease-out;
+  @keyframes slideIn {
+    0% {
+      opacity: 0;
+      transform: translateX(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
 `
 
 export const DrawerBody = styled.div`
@@ -71,5 +83,15 @@ export const Backdrop = styled.div`
   &[aria-hidden='true'] {
     opacity: 0;
     pointer-events: none;
+  }
+
+  animation: fadeIn 0.2s ease-out;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
   }
 `

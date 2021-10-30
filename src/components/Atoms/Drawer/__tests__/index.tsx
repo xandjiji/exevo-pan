@@ -35,11 +35,10 @@ describe('<Drawer />', () => {
   test('should toggle state correctly', () => {
     const { rerender } = renderWithProviders(<DrawerComponent open={false} />)
 
-    const drawerElement = screen.getByTestId('drawer-id')
-    expect(drawerElement).not.toBeVisible()
+    expect(screen.queryByTestId('drawer-id')).not.toBeInTheDocument()
 
     rerender(<DrawerComponent open />)
-    expect(drawerElement).toBeVisible()
+    expect(screen.getByTestId('drawer-id')).toBeVisible()
   })
 
   test('should call onClose with ESC key', () => {

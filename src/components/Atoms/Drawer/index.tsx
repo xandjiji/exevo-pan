@@ -14,6 +14,7 @@ const Drawer = ({
 }: DrawerProps): JSX.Element | null => {
   const initialDrag = useRef<number | null>(null)
   const [drawerOffset, setDrawerOffset] = useState<number>(0)
+  const [shouldBeRendered, setShouldBeRendered] = useState<boolean>(isOpen)
 
   const { elementToFocusRef, onKeyDown } = useEscToClose({
     open: isOpen,
@@ -45,7 +46,15 @@ const Drawer = ({
 
   const isMounted = useIsMounted()
 
-  return isMounted
+  useEffect(() => {
+    if (!isOpen) {
+      setTimeout(() => setShouldBeRendered(false), 200)
+    } else {
+      setShouldBeRendered(true)
+    }
+  }, [isOpen])
+
+  return isMounted && shouldBeRendered
     ? createPortal(
         <>
           <S.Wrapper
