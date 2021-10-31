@@ -1,5 +1,8 @@
 import styled, { css } from 'styled-components'
-import { Paginator as BasePaginator } from 'components/Atoms'
+import {
+  Paginator as BasePaginator,
+  LazyRender as BaseLazyRender,
+} from 'components/Atoms'
 import { CardSkeleton as BaseCardSkeleton } from 'components/CharacterCard'
 import FilterIconSvg from 'assets/svgs/filter.svg'
 import {
@@ -79,7 +82,22 @@ export const Paginator = styled(BasePaginator)`
   margin-left: auto;
 `
 
-export const CardSkeleton = styled(BaseCardSkeleton)``
+export const LazyRender = styled(BaseLazyRender).attrs({
+  estimatedHeight: 454,
+  mediaQuery: '(min-width: 768px)',
+})`
+  > * {
+    height: 100%;
+  }
+`
+
+export const CardSkeleton = styled(BaseCardSkeleton)`
+  @media (max-width: 767px) {
+    &:nth-child(n + 3) {
+      display: none;
+    }
+  }
+`
 
 export const Grid = styled.div`
   padding-top: 16px;

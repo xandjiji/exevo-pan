@@ -44,9 +44,6 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
-          <link rel="preconnect" href="https://static.tibia.com/" />
-          <link rel="preconnect" href={endpoints.BASE_DATA} />
-          <link rel="preconnect" href={endpoints.BASE_HISTORY_DATA} />
 
           <link
             href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700&display=swap"

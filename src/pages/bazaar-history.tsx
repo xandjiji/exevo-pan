@@ -4,7 +4,7 @@ import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes } from 'Constants'
+import { routes, endpoints } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -15,6 +15,7 @@ export default function BazaarHistory(): JSX.Element {
   return (
     <div>
       <Head>
+        <link rel="preconnect" href={endpoints.BASE_HISTORY_DATA} />
         <title>{translations.bazaarHistory.Meta.title}</title>
         <meta name="title" content={translations.bazaarHistory.Meta.title} />
         <meta
