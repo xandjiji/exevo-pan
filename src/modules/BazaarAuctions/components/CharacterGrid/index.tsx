@@ -187,7 +187,7 @@ const CharacterGrid = ({
       <S.Grid ref={gridRef} id="character-grid">
         {gridState.current !== 'ready' ? (
           Array.from({ length: 10 }, (_, index) => (
-            <S.CardSkeleton key={index} />
+            <S.CardSkeleton key={`skeleton-card-${index}`} />
           ))
         ) : characterPage.length ? (
           shouldDisplayHighlighted ? (
