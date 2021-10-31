@@ -15,6 +15,7 @@ export default function Home(): JSX.Element {
   return (
     <div>
       <Head>
+        <link rel="preconnect" href={endpoints.BASE_DATA} />
         <title>{translations.homepage.Meta.title}</title>
         <meta name="title" content={translations.homepage.Meta.title} />
         <meta

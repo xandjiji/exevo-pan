@@ -15,6 +15,7 @@ export default function Advertise(): JSX.Element {
   return (
     <div>
       <Head>
+        <link rel="preconnect" href={endpoints.BASE_DATA} />
         <title>{translations.advertise.Meta.title}</title>
         <meta name="title" content={translations.advertise.Meta.title} />
         <meta
