@@ -84,6 +84,7 @@ export const Paginator = styled(BasePaginator)`
 
 export const LazyRender = styled(BaseLazyRender).attrs({
   estimatedHeight: 454,
+  mediaQuery: '(min-width: 768px)',
 })`
   > * {
     height: 100%;
