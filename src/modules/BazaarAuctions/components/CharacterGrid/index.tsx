@@ -13,7 +13,7 @@ import { CharacterGridProps } from './types'
 const CharacterGrid = ({
   itemsPerPage = 10,
   characterList,
-  highlightedList,
+  highlightedList = [],
   defaultSortMode = 0,
   defaultDescendingOrder = false,
   ...props
@@ -115,6 +115,18 @@ const CharacterGrid = ({
     setDescendingOrder(getUrlValues().descending as boolean)
   }, [])
 
+  const pageElements = characterPage.map((item) => (
+    <CharacterCard key={item.id} characterData={item} />
+  ))
+
+  const highlightedElements = highlightedList.map((item) => (
+    <CharacterCard
+      key={`${item.id}-highlighted`}
+      highlighted
+      characterData={item}
+    />
+  ))
+
   const shouldDisplayHighlighted: boolean =
     currentPage === 1 && sortMode === defaultSortMode && activeFilterCount === 0
 
@@ -173,24 +185,16 @@ const CharacterGrid = ({
       )}
 
       <S.Grid ref={gridRef} id="character-grid">
-        {gridState.current === 'ready' &&
-          shouldDisplayHighlighted &&
-          highlightedList?.map((item) => (
-            <CharacterCard
-              key={`${item.id}-highlighted`}
-              highlighted
-              characterData={item}
-            />
-          ))}
-
         {gridState.current !== 'ready' ? (
           Array.from({ length: 10 }, (_, index) => (
             <S.CardSkeleton key={index} />
           ))
         ) : characterPage.length ? (
-          characterPage.map((item) => (
-            <CharacterCard key={item.id} characterData={item} />
-          ))
+          shouldDisplayHighlighted ? (
+            [highlightedElements, pageElements]
+          ) : (
+            pageElements
+          )
         ) : (
           <EmptyState buttonAction={() => setDrawerOpen(true)} />
         )}
