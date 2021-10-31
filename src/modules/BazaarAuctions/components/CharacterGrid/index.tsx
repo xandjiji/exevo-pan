@@ -116,15 +116,19 @@ const CharacterGrid = ({
   }, [])
 
   const pageElements = characterPage.map((item) => (
-    <CharacterCard key={item.id} characterData={item} />
+    <S.LazyRender>
+      <CharacterCard key={item.id} characterData={item} />
+    </S.LazyRender>
   ))
 
   const highlightedElements = highlightedList.map((item) => (
-    <CharacterCard
-      key={`${item.id}-highlighted`}
-      highlighted
-      characterData={item}
-    />
+    <S.LazyRender>
+      <CharacterCard
+        key={`${item.id}-highlighted`}
+        highlighted
+        characterData={item}
+      />
+    </S.LazyRender>
   ))
 
   const shouldDisplayHighlighted: boolean =
