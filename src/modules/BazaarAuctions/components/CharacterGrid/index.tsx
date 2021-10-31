@@ -116,18 +116,14 @@ const CharacterGrid = ({
   }, [])
 
   const pageElements = characterPage.map((item) => (
-    <S.LazyRender>
-      <CharacterCard key={item.id} characterData={item} />
+    <S.LazyRender key={item.id}>
+      <CharacterCard characterData={item} />
     </S.LazyRender>
   ))
 
   const highlightedElements = highlightedList.map((item) => (
-    <S.LazyRender>
-      <CharacterCard
-        key={`${item.id}-highlighted`}
-        highlighted
-        characterData={item}
-      />
+    <S.LazyRender key={`${item.id}-highlighted`}>
+      <CharacterCard highlighted characterData={item} />
     </S.LazyRender>
   ))
 
