@@ -1,4 +1,4 @@
-import { dateToDateObject } from 'utils'
+import { dateToDateObject, padStringDate } from 'utils'
 
 const MILLISECONDS_IN_A_DAY = 86400000
 const today = new Date()
@@ -11,7 +11,7 @@ const [convertedToday, convertedYesterday, convertedTomorrow] = [
   tomorrow,
 ].map((date: Date) => {
   const { day, month, year } = dateToDateObject(date)
-  return `${day}/${month}/${year}`
+  return padStringDate(`${day}/${month}/${year}`)
 })
 
 export const mockedHighlightedAuctionData: HighlightedAuction[] = [

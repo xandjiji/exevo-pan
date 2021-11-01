@@ -94,6 +94,8 @@ export default class ManageDataClient {
         auction.days.includes(currentDate),
       )
 
+      console.log(currentDate)
+
       return filteredAuctions
     } catch (error: unknown) {
       console.log(error)
