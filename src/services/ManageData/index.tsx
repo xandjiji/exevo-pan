@@ -2,6 +2,7 @@ import {
   getFromLocalStorage,
   saveToLocalStorage,
   readableCurrentDate,
+  padStringDate,
 } from 'utils'
 import { endpoints, paths, localStorageKeys } from 'Constants'
 import {
@@ -90,11 +91,12 @@ export default class ManageDataClient {
       const auctionData = (await response.json()) as HighlightedAuction[]
 
       const currentDate = readableCurrentDate()
-      const filteredAuctions = auctionData.filter((auction) =>
-        auction.days.includes(currentDate),
-      )
-
-      console.log(currentDate)
+      const filteredAuctions = auctionData
+        .map((auction) => ({
+          ...auction,
+          days: auction.days.map(padStringDate),
+        }))
+        .filter((auction) => auction.days.includes(currentDate))
 
       return filteredAuctions
     } catch (error: unknown) {
