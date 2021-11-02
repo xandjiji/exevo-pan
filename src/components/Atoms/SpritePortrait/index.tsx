@@ -1,5 +1,5 @@
-import { useTranslations } from 'contexts/useTranslation'
 import { useRef, useState, useEffect } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { useOnScreen } from 'hooks'
 import * as S from './styles'
 
