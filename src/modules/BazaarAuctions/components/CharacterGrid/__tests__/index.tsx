@@ -21,6 +21,7 @@ jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 describe('<CharacterGrid />', () => {
   beforeEach(() => {
     mockScrollTo.mockClear()
+    process.browser = true
   })
 
   test('should scroll grid to top on interactions', async () => {
@@ -118,7 +119,7 @@ describe('<CharacterGrid />', () => {
       <CharacterGrid characterList={[]} isLoading />,
     )
 
-    expect(screen.queryAllByText('Bid status')).toHaveLength(10)
+    expect(screen.queryAllByText('Bid status').length > 1).toBeTruthy()
 
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
     rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
