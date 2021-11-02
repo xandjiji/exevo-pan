@@ -31,7 +31,7 @@ const SliderInput = ({
     propValue.toString(),
   )
 
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
   const trackRef = useRef<HTMLDivElement>(null)
   const trackWidth: number = trackRef.current?.offsetWidth ?? 1
 

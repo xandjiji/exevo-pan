@@ -22,7 +22,7 @@ const LanguagePicker = (): JSX.Element => {
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
   }
 
-  const wrapperRef = useRef<HTMLButtonElement | null>()
+  const wrapperRef = useRef<HTMLButtonElement>()
   const absoluteWrapperPosition =
     wrapperRef.current?.getBoundingClientRect().right
 

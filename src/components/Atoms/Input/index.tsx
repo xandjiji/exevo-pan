@@ -24,7 +24,7 @@ const Input = ({
   const isClearButtonActive = allowClear && !!derivedValue
   const isInvalid = !!errorMessage
 
-  const inputRef = useRef<HTMLInputElement | null>(null)
+  const inputRef = useRef<HTMLInputElement>(null)
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setValue(event.target.value)
