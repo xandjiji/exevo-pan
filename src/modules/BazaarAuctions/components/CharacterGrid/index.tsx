@@ -1,7 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import CharacterCard from 'components/CharacterCard'
-import { useIsMounted } from 'hooks'
 import { urlParametersState } from 'utils'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
@@ -21,8 +20,6 @@ const CharacterGrid = ({
   const {
     translations: { homepage },
   } = useTranslations()
-
-  const isMounted = useIsMounted()
 
   const { getUrlValues, defaultValues, setUrlValues } = useMemo(
     () =>
@@ -174,7 +171,7 @@ const CharacterGrid = ({
         />
       </S.Head>
 
-      {isMounted && (
+      {process.browser && (
         <FilterDrawer
           id="filter-drawer"
           aria-label={homepage.CharacterGrid.filterDrawerLabel}
