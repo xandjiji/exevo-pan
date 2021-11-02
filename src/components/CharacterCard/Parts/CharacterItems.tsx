@@ -19,7 +19,7 @@ interface CharacterItemsProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const fillItems = (amount: number) =>
   Array.from({ length: amount }, () => (
-    <SpritePortrait key={uuidv4()} alt="No item" />
+    <SpritePortrait key={uuidv4()} alt="No item" lazy={false} />
   ))
 
 const CharacterItems = ({
@@ -38,6 +38,7 @@ const CharacterItems = ({
           alt={common.CharacterCard.featuredItem}
           src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
           style={{ width: 32, height: 32 }}
+          lazy={false}
         />
       ))}
       {fillItems(4 - items.length)}

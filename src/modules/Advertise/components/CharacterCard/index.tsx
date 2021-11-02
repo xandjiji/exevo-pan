@@ -7,7 +7,7 @@ const CharacterCard = (): JSX.Element | null => {
   const { selectedCharacter, currentStep, finished, isValid, dispatch } =
     useForm()
 
-  const wrapperRef = useRef<HTMLDivElement | null>(null)
+  const wrapperRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     if (selectedCharacter) {

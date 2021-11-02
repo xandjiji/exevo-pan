@@ -1,28 +1,32 @@
-import { useTranslations } from 'contexts/useTranslation'
 import { useRef, useState, useEffect } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { useOnScreen } from 'hooks'
+import { SpritePortraitProps } from './types'
 import * as S from './styles'
 
 const SpritePortrait = ({
   src,
+  lazy = true,
   ...props
-}: React.ImgHTMLAttributes<HTMLImageElement>): JSX.Element => {
+}: SpritePortraitProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
 
-  const ref = useRef<HTMLDivElement | null>()
+  const ref = useRef<HTMLDivElement>(null)
 
   const [loaded, setLoaded] = useState<boolean>(!src)
-  const [currentSrc, setCurrentSrc] = useState<string | undefined>()
+  const [currentSrc, setCurrentSrc] = useState<string | undefined>(
+    lazy ? undefined : src,
+  )
 
   const onScreen = useOnScreen<HTMLDivElement>(ref)
   useEffect(() => {
-    if (src && onScreen) setCurrentSrc(src)
+    if (src && lazy && onScreen) setCurrentSrc(src)
   }, [onScreen])
 
   return (
-    <S.Wrapper ref={ref as React.RefObject<HTMLDivElement>}>
+    <S.Wrapper ref={ref}>
       {src && (
         <S.Img
           src={currentSrc}

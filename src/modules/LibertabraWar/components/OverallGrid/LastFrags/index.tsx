@@ -23,7 +23,7 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
     [currentIndex],
   )
 
-  const ref = useRef<HTMLDivElement | null>()
+  const ref = useRef<HTMLDivElement>()
   const onScreen = useOnScreen<HTMLDivElement>(ref)
   useEffect(() => {
     if (onScreen) setCurrentIndex((prevIndex) => prevIndex + 1)

@@ -1,10 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useMemo, useRef, useEffect, useCallback } from 'react'
 import CharacterCard from 'components/CharacterCard'
-import { useIsMounted } from 'hooks'
 import { urlParametersState } from 'utils'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
+import VirtualizedListView from './VirtualizedListView'
 import EmptyState from './EmptyState'
 import { applySort } from './applySort'
 import * as S from './styles'
@@ -21,8 +21,6 @@ const CharacterGrid = ({
   const {
     translations: { homepage },
   } = useTranslations()
-
-  const isMounted = useIsMounted()
 
   const { getUrlValues, defaultValues, setUrlValues } = useMemo(
     () =>
@@ -116,15 +114,15 @@ const CharacterGrid = ({
   }, [])
 
   const pageElements = characterPage.map((item) => (
-    <S.LazyRender key={item.id}>
-      <CharacterCard characterData={item} />
-    </S.LazyRender>
+    <CharacterCard key={item.id} characterData={item} />
   ))
 
   const highlightedElements = highlightedList.map((item) => (
-    <S.LazyRender key={`${item.id}-highlighted`}>
-      <CharacterCard highlighted characterData={item} />
-    </S.LazyRender>
+    <CharacterCard
+      key={`${item.id}-highlighted`}
+      highlighted
+      characterData={item}
+    />
   ))
 
   const shouldDisplayHighlighted: boolean =
@@ -174,7 +172,7 @@ const CharacterGrid = ({
         />
       </S.Head>
 
-      {isMounted && (
+      {process.browser && (
         <FilterDrawer
           id="filter-drawer"
           aria-label={homepage.CharacterGrid.filterDrawerLabel}
@@ -184,7 +182,7 @@ const CharacterGrid = ({
         />
       )}
 
-      <S.Grid ref={gridRef} id="character-grid">
+      <VirtualizedListView ref={gridRef} id="character-grid">
         {gridState.current !== 'ready' ? (
           Array.from({ length: 10 }, (_, index) => (
             <S.CardSkeleton key={`skeleton-card-${index}`} />
@@ -198,7 +196,7 @@ const CharacterGrid = ({
         ) : (
           <EmptyState buttonAction={() => setDrawerOpen(true)} />
         )}
-      </S.Grid>
+      </VirtualizedListView>
     </S.Main>
   )
 }
