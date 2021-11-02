@@ -5,13 +5,7 @@ import {
 } from 'components/Atoms'
 import { CardSkeleton as BaseCardSkeleton } from 'components/CharacterCard'
 import FilterIconSvg from 'assets/svgs/filter.svg'
-import {
-  InnerContainer,
-  Shadow,
-  Clickable,
-  CustomScrollbar,
-  Smooth,
-} from 'styles'
+import { InnerContainer, Shadow, Clickable, Smooth } from 'styles'
 
 export const Main = styled.main``
 
