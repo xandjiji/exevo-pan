@@ -11,7 +11,7 @@ const SpritePortrait = ({
     translations: { common },
   } = useTranslations()
 
-  const ref = useRef<HTMLDivElement | null>()
+  const ref = useRef<HTMLDivElement>(null)
 
   const [loaded, setLoaded] = useState<boolean>(!src)
   const [currentSrc, setCurrentSrc] = useState<string | undefined>()
@@ -22,7 +22,7 @@ const SpritePortrait = ({
   }, [onScreen])
 
   return (
-    <S.Wrapper ref={ref as React.RefObject<HTMLDivElement>}>
+    <S.Wrapper ref={ref}>
       {src && (
         <S.Img
           src={currentSrc}
