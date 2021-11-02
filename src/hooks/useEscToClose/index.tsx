@@ -6,7 +6,7 @@ export const useEscapeToClose = ({
   onClose,
 }: UseEscapeToCloseProps): UseEscapeToCloseObject => {
   const elementToFocusRef = useRef<HTMLDivElement>(null)
-  const previousFocusedElement = useRef<HTMLElement>(null)
+  const previousFocusedElement = useRef<HTMLElement | null>(null)
 
   useEffect(() => {
     if (open) {
