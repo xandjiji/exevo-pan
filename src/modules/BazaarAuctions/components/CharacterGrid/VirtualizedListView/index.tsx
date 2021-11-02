@@ -9,7 +9,7 @@ import {
 } from 'react'
 import { clampValue } from 'utils'
 import FillElement from './FillElement'
-import { ListViewProps, OnScrollEvent, VirtualizedState } from './types'
+import { ListViewProps, OnScrollEvent } from './types'
 import * as S from './styles'
 
 const ESTIMATED_HEIGHT = 470
@@ -18,10 +18,8 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
   ({ children, ...props }: ListViewProps, ref) => {
     const childrenCount = Children.count(children)
 
-    const [{ minIndex, maxIndex }, setIndexState] = useState<VirtualizedState>({
-      minIndex: 0,
-      maxIndex: 1,
-    })
+    const [minIndex, setMinIndex] = useState(0)
+    const [maxIndex, setMaxIndex] = useState(1)
 
     const handleScroll = useCallback(
       (event: OnScrollEvent) => {
@@ -40,10 +38,8 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
           childrenCount - 1,
         ])
 
-        setIndexState({
-          minIndex: newMinIndex,
-          maxIndex: newMaxIndex,
-        })
+        setMinIndex(newMinIndex)
+        setMaxIndex(newMaxIndex)
       },
       [childrenCount],
     )
