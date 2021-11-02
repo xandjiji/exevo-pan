@@ -4,6 +4,7 @@ import CharacterCard from 'components/CharacterCard'
 import { urlParametersState } from 'utils'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
+import ListView from './ListView'
 import EmptyState from './EmptyState'
 import { applySort } from './applySort'
 import * as S from './styles'
@@ -181,7 +182,7 @@ const CharacterGrid = ({
         />
       )}
 
-      <S.Grid ref={gridRef} id="character-grid">
+      <ListView ref={gridRef} id="character-grid">
         {gridState.current !== 'ready' ? (
           Array.from({ length: 10 }, (_, index) => (
             <S.CardSkeleton key={`skeleton-card-${index}`} />
@@ -195,7 +196,7 @@ const CharacterGrid = ({
         ) : (
           <EmptyState buttonAction={() => setDrawerOpen(true)} />
         )}
-      </S.Grid>
+      </ListView>
     </S.Main>
   )
 }
