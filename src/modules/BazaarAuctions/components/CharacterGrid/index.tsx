@@ -182,7 +182,12 @@ const CharacterGrid = ({
         />
       )}
 
-      <VirtualizedListView ref={gridRef} id="character-grid">
+      <VirtualizedListView
+        ref={gridRef}
+        id="character-grid"
+        estimatedHeight={504}
+        overScan={1}
+      >
         {gridState.current !== 'ready' ? (
           Array.from({ length: 10 }, (_, index) => (
             <S.CardSkeleton key={`skeleton-card-${index}`} />
