@@ -17,6 +17,19 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
     { estimatedHeight, overScan = 0, children, ...props }: ListViewProps,
     ref,
   ) => {
+    const [isDesktop, setIsDesktop] = useState(true)
+
+    useEffect(() => {
+      const updateMediaQuery = () => {
+        setIsDesktop(window.matchMedia('(min-width: 768px)').matches)
+      }
+
+      updateMediaQuery()
+      window.addEventListener('resize', updateMediaQuery)
+
+      return () => window.removeEventListener('resize', updateMediaQuery)
+    }, [])
+
     const childrenCount = Children.count(children)
 
     const [minIndex, setMinIndex] = useState(0)
@@ -42,33 +55,16 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
       [childrenCount],
     )
 
-    const fillTopElements = minIndex
-    const fillBottomElements = childrenCount - (maxIndex + 1)
-
-    const childrenElements = useMemo(
-      () => (Array.isArray(children) ? children.flat(1) : children),
-      [children],
-    )
     const renderedChildren = useMemo(
       () =>
-        Array.isArray(childrenElements)
-          ? childrenElements.slice(minIndex, maxIndex + 1)
-          : childrenElements,
-      [childrenElements, minIndex, maxIndex],
+        Array.isArray(children)
+          ? children.slice(minIndex, maxIndex + 1)
+          : children,
+      [children, minIndex, maxIndex],
     )
 
-    const [isDesktop, setIsDesktop] = useState(true)
-
-    useEffect(() => {
-      const updateMediaQuery = () => {
-        setIsDesktop(window.matchMedia('(min-width: 768px)').matches)
-      }
-
-      updateMediaQuery()
-      window.addEventListener('resize', updateMediaQuery)
-
-      return () => window.removeEventListener('resize', updateMediaQuery)
-    }, [])
+    const fillTopElements = minIndex
+    const fillBottomElements = childrenCount - (maxIndex + 1)
 
     return (
       <S.Grid

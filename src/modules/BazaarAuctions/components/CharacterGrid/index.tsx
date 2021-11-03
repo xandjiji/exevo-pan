@@ -117,16 +117,20 @@ const CharacterGrid = ({
     <CharacterCard key={item.id} characterData={item} />
   ))
 
-  const highlightedElements = highlightedList.map((item) => (
-    <CharacterCard
-      key={`${item.id}-highlighted`}
-      highlighted
-      characterData={item}
-    />
-  ))
-
   const shouldDisplayHighlighted: boolean =
     currentPage === 1 && sortMode === defaultSortMode && activeFilterCount === 0
+
+  const highlightedElements = shouldDisplayHighlighted
+    ? highlightedList.map((item) => (
+        <CharacterCard
+          key={`${item.id}-highlighted`}
+          highlighted
+          characterData={item}
+        />
+      ))
+    : []
+
+  const listElements = [...highlightedElements, ...pageElements]
 
   return (
     <S.Main {...props}>
@@ -192,12 +196,8 @@ const CharacterGrid = ({
           Array.from({ length: 10 }, (_, index) => (
             <S.CardSkeleton key={`skeleton-card-${index}`} />
           ))
-        ) : characterPage.length ? (
-          shouldDisplayHighlighted ? (
-            [highlightedElements, pageElements]
-          ) : (
-            pageElements
-          )
+        ) : listElements.length ? (
+          listElements
         ) : (
           <EmptyState buttonAction={() => setDrawerOpen(true)} />
         )}
