@@ -12,6 +12,9 @@ import FillElement from './FillElement'
 import { ListViewProps, OnScrollEvent } from './types'
 import * as S from './styles'
 
+const DEFAULT_MIN_INDEX = 0
+const DEFAULT_MAX_INDEX = 1
+
 const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
   (
     { estimatedHeight, overScan = 0, children, ...props }: ListViewProps,
@@ -32,8 +35,8 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
 
     const childrenCount = Children.count(children)
 
-    const [minIndex, setMinIndex] = useState(0)
-    const [maxIndex, setMaxIndex] = useState(1)
+    const [minIndex, setMinIndex] = useState(DEFAULT_MIN_INDEX)
+    const [maxIndex, setMaxIndex] = useState(DEFAULT_MAX_INDEX)
 
     const handleScroll = useCallback(
       (event: OnScrollEvent) => {
@@ -54,6 +57,11 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
       },
       [childrenCount],
     )
+
+    useEffect(() => {
+      setMinIndex(DEFAULT_MIN_INDEX)
+      setMaxIndex(DEFAULT_MAX_INDEX)
+    }, [childrenCount])
 
     const renderedChildren = useMemo(
       () =>
