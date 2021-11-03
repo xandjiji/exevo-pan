@@ -12,10 +12,11 @@ import FillElement from './FillElement'
 import { ListViewProps, OnScrollEvent } from './types'
 import * as S from './styles'
 
-const ESTIMATED_HEIGHT = 470
-
 const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
-  ({ children, ...props }: ListViewProps, ref) => {
+  (
+    { estimatedHeight, overScan = 0, children, ...props }: ListViewProps,
+    ref,
+  ) => {
     const childrenCount = Children.count(children)
 
     const [minIndex, setMinIndex] = useState(0)
@@ -25,21 +26,18 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
       (event: OnScrollEvent) => {
         const { clientHeight, scrollTop } = event.currentTarget
 
-        const newMinIndex = Math.floor(scrollTop / ESTIMATED_HEIGHT)
+        const newMinIndex = Math.floor(scrollTop / estimatedHeight)
 
-        const firstItemOffset =
-          ESTIMATED_HEIGHT - (scrollTop % ESTIMATED_HEIGHT)
+        const firstItemOffset = estimatedHeight - (scrollTop % estimatedHeight)
         const viewportOverflow = Math.ceil(
-          (clientHeight - firstItemOffset) / ESTIMATED_HEIGHT,
+          (clientHeight - firstItemOffset) / estimatedHeight,
         )
 
-        const newMaxIndex = clampValue(newMinIndex + viewportOverflow, [
-          0,
-          childrenCount - 1,
-        ])
+        const newMaxIndex = newMinIndex + viewportOverflow
 
-        setMinIndex(newMinIndex)
-        setMaxIndex(newMaxIndex)
+        const indexRange: [number, number] = [0, childrenCount - 1]
+        setMinIndex(clampValue(newMinIndex - overScan, indexRange))
+        setMaxIndex(clampValue(newMaxIndex + overScan, indexRange))
       },
       [childrenCount],
     )
@@ -83,14 +81,14 @@ const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
         ) : (
           <>
             <FillElement
-              elementSize={ESTIMATED_HEIGHT}
+              elementSize={estimatedHeight}
               elementsCount={fillTopElements}
             />
 
             {renderedChildren}
 
             <FillElement
-              elementSize={ESTIMATED_HEIGHT}
+              elementSize={estimatedHeight}
               elementsCount={fillBottomElements}
             />
           </>
