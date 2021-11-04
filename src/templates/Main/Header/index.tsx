@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { Link, Switch, CtaButton } from 'components/Atoms/'
@@ -25,13 +26,15 @@ const Header = ({
     translations: { common },
   } = useTranslations()
 
+  const [menuOpen, setMenuOpen] = useState(false)
+
   const { currentTheme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
 
   return (
     <S.Wrapper {...props}>
       <S.Nav>
-        <S.MenuIcon />
+        <S.MenuIcon onClick={() => setMenuOpen((prev) => !prev)} />
         <NextLink href={routes.HOME}>
           <S.LogoWrapper>
             <S.H1>
@@ -51,7 +54,7 @@ const Header = ({
             />
           </S.LogoWrapper>
         </NextLink>
-        <S.Ul>
+        <S.Ul aria-expanded={menuOpen}>
           {NavItems.map(({ title, href, exact, icon }) => (
             <S.Li key={title}>
               <Link href={href} exact={exact}>

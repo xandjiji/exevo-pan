@@ -9,7 +9,13 @@ import AdvertiseIconSvg from 'assets/svgs/advertise.svg'
 import StatisticsIconSvg from 'assets/svgs/statistics.svg'
 import WarIconSvg from 'assets/svgs/war.svg'
 import AboutIconSvg from 'assets/svgs/about.svg'
-import { InnerContainer, CustomScrollbar, Clickable, Shadow } from 'styles'
+import {
+  InnerContainer,
+  CustomScrollbar,
+  Clickable,
+  Shadow,
+  Smooth,
+} from 'styles'
 
 export const Wrapper = styled.header`
   position: sticky;
@@ -100,18 +106,30 @@ export const Ul = styled.ul`
   display: grid;
   grid-gap: 16px;
   grid-auto-columns: min-content;
+  border-radius: 0 0 6px 0;
 
   background-color: var(--darkerPrimary);
   ${Shadow}
+  ${Smooth}
+
+  &[aria-expanded="false"] {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
 
   @media (min-width: 768px) {
-    position: unset;
-    padding: unset;
-    background-color: unset;
-    box-shadow: unset;
+    && {
+      position: unset;
+      transform: unset;
+      padding: unset;
+      background-color: unset;
+      border-radius: unset;
+      box-shadow: unset;
+      opacity: unset;
 
-    display: flex;
-    align-items: center;
+      display: flex;
+      align-items: center;
+    }
   }
 `
 
