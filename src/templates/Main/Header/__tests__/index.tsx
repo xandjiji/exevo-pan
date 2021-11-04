@@ -1,3 +1,5 @@
+import { screen } from '@testing-library/dom'
+import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import Header from '..'
 
@@ -14,5 +16,25 @@ describe('<Header />', () => {
     expect(statistics).not.toHaveAttribute('aria-current', 'page')
     expect(war).not.toHaveAttribute('aria-current', 'page')
     expect(about).not.toHaveAttribute('aria-current', 'page')
+  })
+
+  test('should toggle menu open/close', () => {
+    const { container } = renderWithProviders(<Header />)
+
+    const menuToggle = container.querySelector('button')
+    const menuElement = container.querySelector('ul')
+
+    expect(menuToggle).not.toBeChecked()
+    expect(menuElement).toHaveAttribute('aria-expanded', 'false')
+
+    userEvent.click(menuToggle as HTMLElement)
+
+    expect(menuToggle).toBeChecked()
+    expect(menuElement).toHaveAttribute('aria-expanded', 'true')
+
+    userEvent.click(menuToggle as HTMLElement)
+
+    expect(menuToggle).not.toBeChecked()
+    expect(menuElement).toHaveAttribute('aria-expanded', 'false')
   })
 })
