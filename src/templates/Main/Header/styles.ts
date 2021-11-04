@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import ExevoPanLogoImage from 'assets/logo.png'
+import MenuIconSvg from 'assets/svgs/menu.svg'
 import MoonIconSvg from 'assets/svgs/moon.svg'
 import MarketIconSvg from 'assets/svgs/market.svg'
 import HistoryIconSvg from 'assets/svgs/history.svg'
@@ -44,17 +45,41 @@ export const Wrapper = styled.header`
   }
 `
 
-export const LogoWrapper = styled.a`
-  margin-right: 18px;
+export const Nav = styled.nav`
+  margin-right: 24px;
   display: flex;
-  justify-content: center;
   align-items: center;
-  cursor: pointer;
   flex-shrink: 0;
+`
 
-  transition: 0.2s filter ease-out;
-  &:hover {
-    filter: brightness(110%);
+export const MenuIcon = styled(MenuIconSvg)`
+  ${Clickable}
+  padding: 2px;
+  height: 36px;
+  width: 36px;
+  border-radius: 4px;
+  fill: var(--onPrimary);
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+`
+
+export const LogoWrapper = styled.a`
+  display: none;
+
+  @media (min-width: 768px) {
+    margin-right: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    flex-shrink: 0;
+
+    transition: 0.2s filter ease-out;
+    &:hover {
+      filter: brightness(110%);
+    }
   }
 `
 
@@ -66,15 +91,11 @@ export const ExevoPanLogo = styled(Image).attrs({
   src: ExevoPanLogoImage,
 })``
 
-export const Nav = styled.nav`
-  margin-right: 24px;
-  display: flex;
-  flex-shrink: 0;
-`
-
 export const Ul = styled.ul`
-  display: flex;
-  align-items: center;
+  @media (min-width: 768px) {
+    display: flex;
+    align-items: center;
+  }
 `
 
 export const Li = styled.li`

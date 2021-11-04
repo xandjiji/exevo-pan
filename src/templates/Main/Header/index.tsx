@@ -31,6 +31,7 @@ const Header = ({
   return (
     <S.Wrapper {...props}>
       <S.Nav>
+        <S.MenuIcon />
         <NextLink href={routes.HOME}>
           <S.LogoWrapper>
             <S.H1>
