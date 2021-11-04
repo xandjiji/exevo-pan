@@ -11,6 +11,8 @@ export default {
       war: 'Follow live data and statistics from Libertabra War!',
       advertise: 'Highlight your own auction and get higher bids!',
     },
+    openMenuLabel: 'Open the navigation menu',
+    closeMenuLabel: 'Close the navigation menu',
     logoLabel: 'Go to homepage',
     nav: {
       currentAuctions: 'Current Auctions',
