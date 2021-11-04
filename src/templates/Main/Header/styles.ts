@@ -58,17 +58,22 @@ export const Nav = styled.nav`
   flex-shrink: 0;
 `
 
-export const MenuIcon = styled(MenuIconSvg)`
+export const MenuButton = styled.button`
   ${Clickable}
   padding: 2px;
   height: 36px;
   width: 36px;
   border-radius: 4px;
-  fill: var(--onPrimary);
 
   @media (min-width: 768px) {
     display: none;
   }
+`
+
+export const MenuIcon = styled(MenuIconSvg)`
+  width: 100%;
+  height: 100%;
+  fill: var(--onPrimary);
 `
 
 export const LogoWrapper = styled.a`
