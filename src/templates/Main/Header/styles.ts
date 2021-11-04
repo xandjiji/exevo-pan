@@ -92,7 +92,24 @@ export const ExevoPanLogo = styled(Image).attrs({
 })``
 
 export const Ul = styled.ul`
+  position: fixed;
+  top: 60px;
+  left: 0;
+
+  padding: 20px;
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-columns: min-content;
+
+  background-color: var(--darkerPrimary);
+  ${Shadow}
+
   @media (min-width: 768px) {
+    position: unset;
+    padding: unset;
+    background-color: unset;
+    box-shadow: unset;
+
     display: flex;
     align-items: center;
   }
