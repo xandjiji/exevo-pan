@@ -5,6 +5,7 @@ import { useTheme } from 'contexts/useTheme'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
 import LanguagePicker from './LanguagePicker'
+import { NavItems } from './routes'
 import * as S from './styles'
 
 const heading = {
@@ -50,55 +51,16 @@ const Header = ({
           </S.LogoWrapper>
         </NextLink>
         <S.Ul>
-          <S.Li>
-            <Link href={routes.HOME} exact>
-              <S.A>
-                <S.MarketIcon />
-                <S.H2>{common.Header.nav.currentAuctions}</S.H2>
-              </S.A>
-            </Link>
-          </S.Li>
-          <S.Li>
-            <Link href={routes.BAZAAR_HISTORY}>
-              <S.A>
-                <S.HistoryIcon />
-                <S.H2>{common.Header.nav.bazaarHistory}</S.H2>
-              </S.A>
-            </Link>
-          </S.Li>
-          <S.Li>
-            <Link href={routes.STATISTICS}>
-              <S.A>
-                <S.StatisticsIcon />
-                <S.H2>{common.Header.nav.statistics}</S.H2>
-              </S.A>
-            </Link>
-          </S.Li>
-          {/* @ ToDo: add general wars */}
-          {/* <S.Li>
-            <Link href={routes.LIBERTABRA_WAR}>
-              <S.A>
-                <S.WarIcon />
-                <S.H2>Libertabra War</S.H2>
-              </S.A>
-            </Link>
-          </S.Li> */}
-          <S.Li>
-            <Link href={routes.ADVERTISE}>
-              <S.A>
-                <S.AdvertiseIcon />
-                <S.H2>{common.Header.nav.advertise}</S.H2>
-              </S.A>
-            </Link>
-          </S.Li>
-          <S.Li>
-            <Link href={routes.ABOUT}>
-              <S.A>
-                <S.AboutIcon />
-                <S.H2>{common.Header.nav.about}</S.H2>
-              </S.A>
-            </Link>
-          </S.Li>
+          {NavItems.map(({ title, href, exact, icon }) => (
+            <S.Li key={title}>
+              <Link href={href} exact={exact}>
+                <S.A>
+                  {icon}
+                  <S.H2>{common.Header.nav[title]}</S.H2>
+                </S.A>
+              </Link>
+            </S.Li>
+          ))}
         </S.Ul>
       </S.Nav>
 
