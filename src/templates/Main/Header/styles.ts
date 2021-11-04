@@ -133,6 +133,29 @@ export const Ul = styled.ul`
   }
 `
 
+export const Backdrop = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+
+  ${Smooth}
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (min-width: 768px) {
+    opacity: 0;
+    pointer-events: none;
+  }
+`
+
 export const Li = styled.li`
   &:not(:last-child) {
     margin-right: 8px;
