@@ -37,7 +37,11 @@ const Header = ({
     <>
       <S.Wrapper {...props}>
         <S.Nav>
-          <S.MenuButton type="button" onClick={toggleMenu}>
+          <S.MenuButton
+            type="button"
+            aria-checked={menuOpen}
+            onClick={toggleMenu}
+          >
             <S.MenuIcon />
           </S.MenuButton>
           <NextLink href={routes.HOME}>

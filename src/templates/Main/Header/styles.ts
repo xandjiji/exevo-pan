@@ -58,6 +58,17 @@ export const Nav = styled.nav`
   flex-shrink: 0;
 `
 
+export const MenuIcon = styled(MenuIconSvg)`
+  width: 100%;
+  height: 100%;
+  fill: var(--onPrimary);
+
+  rect {
+    ${Smooth}
+    transform-origin: center;
+  }
+`
+
 export const MenuButton = styled.button`
   ${Clickable}
   padding: 2px;
@@ -65,15 +76,23 @@ export const MenuButton = styled.button`
   width: 36px;
   border-radius: 4px;
 
+  &[aria-checked='true'] ${MenuIcon} rect {
+    &:nth-child(1) {
+      transform: translate(-4px, 4px) rotate(45deg);
+    }
+
+    &:nth-child(2) {
+      opacity: 0;
+    }
+
+    &:nth-child(3) {
+      transform: translate(-4px, -3px) rotate(-45deg);
+    }
+  }
+
   @media (min-width: 768px) {
     display: none;
   }
-`
-
-export const MenuIcon = styled(MenuIconSvg)`
-  width: 100%;
-  height: 100%;
-  fill: var(--onPrimary);
 `
 
 export const LogoWrapper = styled.a`
