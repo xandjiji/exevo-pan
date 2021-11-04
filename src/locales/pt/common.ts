@@ -11,6 +11,8 @@ export default {
       war: 'Acompanhe estatísticas ao vivo da guerra de Libertabra!',
       advertise: 'Destaque seu leilão e receba lances mais altos!',
     },
+    openMenuLabel: 'Abre el menú de navegación',
+    closeMenuLabel: 'Cerrar el menú de navegación',
     logoLabel: 'Ir para a página inicial',
     nav: {
       currentAuctions: 'Leilões',

@@ -39,7 +39,11 @@ const Header = ({
         <S.Nav>
           <S.MenuButton
             type="button"
+            role="switch"
             aria-checked={menuOpen}
+            aria-label={
+              common.Header[menuOpen ? 'closeMenuLabel' : 'openMenuLabel']
+            }
             onClick={toggleMenu}
           >
             <S.MenuIcon />
@@ -90,7 +94,11 @@ const Header = ({
           <CtaButton />
         </S.RightWrapper>
       </S.Wrapper>
-      <S.Backdrop aria-hidden={!menuOpen} onClick={toggleMenu} />
+      <S.Backdrop
+        aria-hidden={!menuOpen}
+        aria-label={common.Header.closeMenuLabel}
+        onClick={toggleMenu}
+      />
     </>
   )
 }
