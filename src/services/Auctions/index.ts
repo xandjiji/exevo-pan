@@ -1,5 +1,5 @@
 import { endpoints } from 'Constants'
-import { PaginationOptions } from './types'
+import { PaginationOptions, CacheObject } from './types'
 
 const DEFAULT_PAGE_INDEX = 0
 const DEFAULT_PAGE_SIZE = 10
@@ -15,21 +15,37 @@ const EMPTY_RESPONSE: PaginatedData<CharacterObject> = {
 }
 
 export default class AuctionsClient {
+  static cache: CacheObject = {}
+
   static currentAuctionsUrl = endpoints.CURRENT_AUCTIONS
+
+  static getCache(key: string): PaginatedData<CharacterObject> | undefined {
+    return this.cache[key]
+  }
+
+  static setCache(key: string, data: PaginatedData<CharacterObject>): void {
+    this.cache[key] = data
+    setTimeout(() => delete this.cache[key], 10000)
+  }
 
   static async fetchAuctionPage({
     pageIndex = DEFAULT_PAGE_INDEX,
     pageSize = DEFAULT_PAGE_SIZE,
   }: PaginationOptions): Promise<PaginatedData<CharacterObject>> {
     const body = { pageIndex, pageSize }
+    const bodyPayload = JSON.stringify(body)
+
+    const cachedResult = this.getCache(bodyPayload)
+    if (cachedResult) return cachedResult
 
     try {
       const response = await fetch(this.currentAuctionsUrl, {
         method: 'POST',
-        body: JSON.stringify(body),
+        body: bodyPayload,
       })
 
       const data = (await response.json()) as PaginatedData<CharacterObject>
+      this.setCache(bodyPayload, data)
 
       return data
     } catch (error: unknown) {
