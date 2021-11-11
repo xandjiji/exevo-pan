@@ -101,7 +101,6 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const initialAuctionData = await AuctionsClient.fetchAuctionPage({
     pageIndex: 0,
-    pageSize: 0,
   })
 
   return {
