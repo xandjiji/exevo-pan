@@ -1,6 +1,7 @@
 import { endpoints } from 'Constants'
 import { PaginationOptions, CacheObject } from './types'
 
+const CACHE_MAX_AGE = 180000
 const DEFAULT_PAGE_INDEX = 0
 const DEFAULT_PAGE_SIZE = 10
 
@@ -25,14 +26,15 @@ export default class AuctionsClient {
 
   static setCache(key: string, data: PaginatedData<CharacterObject>): void {
     this.cache[key] = data
-    setTimeout(() => delete this.cache[key], 10000)
+    setTimeout(() => delete this.cache[key], CACHE_MAX_AGE)
   }
 
   static async fetchAuctionPage({
     pageIndex = DEFAULT_PAGE_INDEX,
     pageSize = DEFAULT_PAGE_SIZE,
   }: PaginationOptions): Promise<PaginatedData<CharacterObject>> {
-    const body = { pageIndex, pageSize }
+    const paginationOptions = { pageIndex, pageSize }
+    const body = { paginationOptions }
     const bodyPayload = JSON.stringify(body)
 
     const cachedResult = this.getCache(bodyPayload)
