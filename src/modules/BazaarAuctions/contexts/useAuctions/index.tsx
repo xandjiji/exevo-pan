@@ -38,7 +38,6 @@ export const AuctionsProvider = ({
     const data = await AuctionsClient.fetchAuctionPage({
       pageIndex: pageIndex - 1,
     })
-    console.log(data)
     dispatch({ type: 'STORE_DATA', data })
   }, [])
 

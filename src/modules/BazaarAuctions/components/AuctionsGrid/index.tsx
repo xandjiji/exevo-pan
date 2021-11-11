@@ -13,7 +13,7 @@ const CharacterGrid = (): JSX.Element => {
     translations: { homepage },
   } = useTranslations()
 
-  const { page, pageData } = useAuctions()
+  const { page, pageData, handlePaginatorFetch } = useAuctions()
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const [activeFilterCount, setActiveFilterCount] = useState<number>(0)
@@ -61,7 +61,7 @@ const CharacterGrid = (): JSX.Element => {
           pageSize={10}
           totalItems={pageData.totalItems}
           currentPage={pageData.pageIndex + 1}
-          onChange={() => {}}
+          onChange={handlePaginatorFetch}
           noItemsMessage={homepage.CharacterGrid.noItemsPagination}
         />
       </S.Head>
