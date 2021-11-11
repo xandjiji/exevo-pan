@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
+import { AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -9,7 +10,11 @@ import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
-export default function Home(): JSX.Element {
+export default function Home({
+  initialAuctionData,
+}: {
+  initialAuctionData: PaginatedData<CharacterObject>
+}): JSX.Element {
   const { translations } = useTranslations()
 
   return (
@@ -87,17 +92,26 @@ export default function Home(): JSX.Element {
       </Head>
 
       <Main>
-        <CurrentAuctionsGrid />
+        <CurrentAuctionsGrid initialAuctionData={initialAuctionData} />
       </Main>
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    translations: {
-      common: common[locale as RegisteredLocale],
-      homepage: homepage[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const initialAuctionData = await AuctionsClient.fetchAuctionPage({
+    pageIndex: 0,
+    pageSize: 0,
+  })
+
+  return {
+    props: {
+      translations: {
+        common: common[locale as RegisteredLocale],
+        homepage: homepage[locale as RegisteredLocale],
+      },
+      initialAuctionData,
     },
-  },
-})
+    revalidate: 60,
+  }
+}
