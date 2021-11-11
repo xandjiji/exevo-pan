@@ -1,15 +1,18 @@
 import { useCharacters } from 'contexts/useDatabase'
+import { AuctionsProvider } from './contexts/useAuctions'
+import AuctionsGrid from './components/AuctionsGrid'
 import CharacterGrid from './components/CharacterGrid'
+import { CurrentAuctionsProps } from './types'
 
-export const CurrentAuctions = (): JSX.Element => {
-  const { characterData, highlightedAuctions, loading } = useCharacters()
+export const CurrentAuctions = ({
+  initialAuctionData,
+}: CurrentAuctionsProps): JSX.Element => {
+  const { page, ...pageData } = initialAuctionData
 
   return (
-    <CharacterGrid
-      characterList={characterData}
-      highlightedList={highlightedAuctions}
-      isLoading={loading}
-    />
+    <AuctionsProvider initialPage={page} initialPageData={pageData}>
+      <AuctionsGrid />
+    </AuctionsProvider>
   )
 }
 
