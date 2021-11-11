@@ -1,4 +1,6 @@
-import { createContext, useContext, useCallback, useState } from 'react'
+import { createContext, useContext, useReducer, useCallback } from 'react'
+import { AuctionsClient } from 'services'
+import AuctionsReducer from './reducer'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
@@ -12,6 +14,8 @@ const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
     hasNext: false,
     hasPrev: false,
   },
+  handlePaginatorFetch: async () => {},
+  dispatch: () => {},
 }
 
 const AuctionsContext = createContext<AuctionsContextValues>(
@@ -23,13 +27,25 @@ export const AuctionsProvider = ({
   initialPageData,
   children,
 }: AuctionsProviderProps): JSX.Element => {
-  /* @ ToDo: refactor this into a reducer once we introduce filters */
-  const [loading, setLoading] = useState<boolean>(false)
-  const [page, setPage] = useState<CharacterObject[]>(initialPage)
-  const [pageData, setPageData] = useState<PageData>(initialPageData)
+  const [{ loading, page, pageData }, dispatch] = useReducer(AuctionsReducer, {
+    loading: true,
+    page: initialPage,
+    pageData: initialPageData,
+  })
+
+  const handlePaginatorFetch = useCallback(async (pageIndex: number) => {
+    dispatch({ type: 'SET_LOADING', value: true })
+    const data = await AuctionsClient.fetchAuctionPage({
+      pageIndex: pageIndex - 1,
+    })
+    console.log(data)
+    dispatch({ type: 'STORE_DATA', data })
+  }, [])
 
   return (
-    <AuctionsContext.Provider value={{ loading, page, pageData }}>
+    <AuctionsContext.Provider
+      value={{ loading, page, pageData, handlePaginatorFetch, dispatch }}
+    >
       {children}
     </AuctionsContext.Provider>
   )
