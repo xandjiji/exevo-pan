@@ -4,6 +4,10 @@ export type Action =
       value: boolean
     }
   | {
+      type: 'SET_PAGE_INDEX'
+      value: number
+    }
+  | {
       type: 'STORE_DATA'
       data: PaginatedData<CharacterObject>
     }
@@ -17,7 +21,7 @@ export interface AuctionsContextState {
 }
 
 export interface AuctionsContextValues extends AuctionsContextState {
-  handlePaginatorFetch: (pageIndex: number) => Promise<void>
+  handlePaginatorFetch: (pageIndex: number) => void
   dispatch: React.Dispatch<Action>
 }
 

@@ -8,6 +8,12 @@ const AuctionsReducer = (
     case 'SET_LOADING':
       return { ...state, loading: action.value }
 
+    case 'SET_PAGE_INDEX':
+      return {
+        ...state,
+        pageData: { ...state.pageData, pageIndex: action.value },
+      }
+
     case 'STORE_DATA': {
       const { page, ...pageData } = action.data
       return {

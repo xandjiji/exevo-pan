@@ -1,4 +1,11 @@
-import { createContext, useContext, useReducer, useCallback } from 'react'
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useRef,
+  useEffect,
+  useCallback,
+} from 'react'
 import { AuctionsClient } from 'services'
 import AuctionsReducer from './reducer'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
@@ -39,24 +46,36 @@ export const AuctionsProvider = ({
     descendingOrder: initialDescendingOrder,
   })
 
-  const { sortingMode, descendingOrder } = state
+  const {
+    pageData: { pageIndex },
+    sortingMode,
+    descendingOrder,
+  } = state
 
-  const handlePaginatorFetch = useCallback(
-    async (pageIndex: number) => {
-      dispatch({ type: 'SET_LOADING', value: true })
-      const data = await AuctionsClient.fetchAuctionPage(
-        {
-          pageIndex: pageIndex - 1,
-        },
-        {
-          sortingMode,
-          descendingOrder,
-        },
-      )
-      dispatch({ type: 'STORE_DATA', data })
-    },
-    [sortingMode, descendingOrder],
-  )
+  const isMounted = useRef(false)
+  useEffect(() => {
+    if (isMounted.current) {
+      ;(async () => {
+        dispatch({ type: 'SET_LOADING', value: true })
+        const data = await AuctionsClient.fetchAuctionPage(
+          {
+            pageIndex,
+          },
+          {
+            sortingMode,
+            descendingOrder,
+          },
+        )
+        dispatch({ type: 'STORE_DATA', data })
+      })()
+    } else {
+      isMounted.current = true
+    }
+  }, [pageIndex, sortingMode, descendingOrder])
+
+  const handlePaginatorFetch = useCallback((newPageIndex: number) => {
+    dispatch({ type: 'SET_PAGE_INDEX', value: newPageIndex - 1 })
+  }, [])
 
   return (
     <AuctionsContext.Provider
