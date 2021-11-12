@@ -8,6 +8,13 @@ export type Action =
       value: number
     }
   | {
+      type: 'SET_SORTING_MODE'
+      value: number
+    }
+  | {
+      type: 'TOGGLE_DESCENDING_ORDER'
+    }
+  | {
       type: 'STORE_DATA'
       data: PaginatedData<CharacterObject>
     }

@@ -2,8 +2,8 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { Switch, RadioButton } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
+import { useAuctions } from '../../../contexts/useAuctions'
 import * as S from './styles'
-import { SortingDialogProps } from './types'
 
 const sortModes = ['Auction end', 'Level', 'Price', 'Price (bidded only)']
 const sortModesTranslationKey = {
@@ -13,26 +13,22 @@ const sortModesTranslationKey = {
   'Price (bidded only)': 'priceBidded',
 } as Record<string, string>
 
-const SortingDialog = ({
-  sortMode,
-  setSortMode,
-  descendingOrder,
-  setDescendingOrder,
-  ...props
-}: SortingDialogProps): JSX.Element => {
+const SortingDialog = (): JSX.Element => {
   const {
     translations: { homepage },
   } = useTranslations()
+
+  const { sortingMode, descendingOrder, dispatch } = useAuctions()
 
   return (
     <Tooltip
       role="dialog"
       trigger="click"
       content={
-        <S.Dialog {...props}>
+        <S.Dialog>
           <Switch
             active={descendingOrder}
-            onClick={() => setDescendingOrder((prev) => !prev)}
+            onClick={() => dispatch({ type: 'TOGGLE_DESCENDING_ORDER' })}
             aria-label={homepage.CharacterGrid.descendingSwitchLabel}
           >
             {homepage.CharacterGrid.descending}
@@ -40,8 +36,10 @@ const SortingDialog = ({
           {sortModes.map((mode, index) => (
             <RadioButton
               key={mode}
-              onClick={() => setSortMode(index)}
-              active={sortMode === index}
+              onClick={() =>
+                dispatch({ type: 'SET_SORTING_MODE', value: index })
+              }
+              active={sortingMode === index}
             >
               {homepage.CharacterGrid.sortModes[sortModesTranslationKey[mode]]}
             </RadioButton>

@@ -49,12 +49,7 @@ const CharacterGrid = (): JSX.Element => {
           </S.ActiveIcon>
         </S.FilterButton>
 
-        <SortingDialog
-          sortMode={0}
-          setSortMode={() => {}}
-          descendingOrder={false}
-          setDescendingOrder={() => {}}
-        />
+        <SortingDialog />
 
         <S.Paginator
           aria-controls="character-grid"
