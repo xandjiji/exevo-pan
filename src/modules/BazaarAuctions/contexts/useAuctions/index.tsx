@@ -14,6 +14,8 @@ const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
     hasNext: false,
     hasPrev: false,
   },
+  sortingMode: 0,
+  descendingOrder: false,
   handlePaginatorFetch: async () => {},
   dispatch: () => {},
 }
@@ -25,25 +27,44 @@ const AuctionsContext = createContext<AuctionsContextValues>(
 export const AuctionsProvider = ({
   initialPage,
   initialPageData,
+  initialSortingMode,
+  initialDescendingOrder,
   children,
 }: AuctionsProviderProps): JSX.Element => {
-  const [{ loading, page, pageData }, dispatch] = useReducer(AuctionsReducer, {
+  const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: true,
     page: initialPage,
     pageData: initialPageData,
+    sortingMode: initialSortingMode,
+    descendingOrder: initialDescendingOrder,
   })
 
-  const handlePaginatorFetch = useCallback(async (pageIndex: number) => {
-    dispatch({ type: 'SET_LOADING', value: true })
-    const data = await AuctionsClient.fetchAuctionPage({
-      pageIndex: pageIndex - 1,
-    })
-    dispatch({ type: 'STORE_DATA', data })
-  }, [])
+  const { sortingMode, descendingOrder } = state
+
+  const handlePaginatorFetch = useCallback(
+    async (pageIndex: number) => {
+      dispatch({ type: 'SET_LOADING', value: true })
+      const data = await AuctionsClient.fetchAuctionPage(
+        {
+          pageIndex: pageIndex - 1,
+        },
+        {
+          sortingMode,
+          descendingOrder,
+        },
+      )
+      dispatch({ type: 'STORE_DATA', data })
+    },
+    [sortingMode, descendingOrder],
+  )
 
   return (
     <AuctionsContext.Provider
-      value={{ loading, page, pageData, handlePaginatorFetch, dispatch }}
+      value={{
+        ...state,
+        handlePaginatorFetch,
+        dispatch,
+      }}
     >
       {children}
     </AuctionsContext.Provider>

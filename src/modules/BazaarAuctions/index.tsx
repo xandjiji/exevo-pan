@@ -10,7 +10,12 @@ export const CurrentAuctions = ({
   const { page, ...pageData } = initialAuctionData
 
   return (
-    <AuctionsProvider initialPage={page} initialPageData={pageData}>
+    <AuctionsProvider
+      initialPage={page}
+      initialPageData={pageData}
+      initialSortingMode={0}
+      initialDescendingOrder={false}
+    >
       <AuctionsGrid />
     </AuctionsProvider>
   )

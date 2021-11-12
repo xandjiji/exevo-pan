@@ -12,6 +12,8 @@ export interface AuctionsContextState {
   loading: boolean
   page: CharacterObject[]
   pageData: PageData
+  sortingMode: number
+  descendingOrder: boolean
 }
 
 export interface AuctionsContextValues extends AuctionsContextState {
@@ -22,5 +24,7 @@ export interface AuctionsContextValues extends AuctionsContextState {
 export interface AuctionsProviderProps {
   initialPage: CharacterObject[]
   initialPageData: PageData
+  initialSortingMode: number
+  initialDescendingOrder: boolean
   children: React.ReactNode
 }
