@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
-import { AuctionsClient } from 'services'
+import { DrawerFieldsProvider } from 'modules/BazaarAuctions/contexts/useDrawerFields'
+import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -10,11 +11,17 @@ import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
-export default function Home({
-  initialAuctionData,
-}: {
+type HomeStaticProps = {
+  serverOptions: Option[]
+  auctionedItemOptions: Option[]
   initialAuctionData: PaginatedData<CharacterObject>
-}): JSX.Element {
+}
+
+export default function Home({
+  serverOptions,
+  auctionedItemOptions,
+  initialAuctionData,
+}: HomeStaticProps): JSX.Element {
   const { translations } = useTranslations()
 
   return (
@@ -92,23 +99,33 @@ export default function Home({
       </Head>
 
       <Main>
-        <CurrentAuctionsGrid initialAuctionData={initialAuctionData} />
+        <DrawerFieldsProvider
+          serverOptions={serverOptions}
+          auctionedItemOptions={auctionedItemOptions}
+        >
+          <CurrentAuctionsGrid initialAuctionData={initialAuctionData} />
+        </DrawerFieldsProvider>
       </Main>
     </div>
   )
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const initialAuctionData = await AuctionsClient.fetchAuctionPage(
-    {
-      pageIndex: 0,
-      pageSize: 10,
-    },
-    {
-      sortingMode: 0,
-      descendingOrder: false,
-    },
-  )
+  const [serverOptions, auctionedItemOptions, initialAuctionData] =
+    await Promise.all([
+      DrawerFieldsClient.fetchServerOptions(),
+      DrawerFieldsClient.fetchAuctionedItemOptions(),
+      AuctionsClient.fetchAuctionPage(
+        {
+          pageIndex: 0,
+          pageSize: 10,
+        },
+        {
+          sortingMode: 0,
+          descendingOrder: false,
+        },
+      ),
+    ])
 
   return {
     props: {
@@ -116,6 +133,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         homepage: homepage[locale as RegisteredLocale],
       },
+      serverOptions,
+      auctionedItemOptions,
       initialAuctionData,
     },
     revalidate: 60,

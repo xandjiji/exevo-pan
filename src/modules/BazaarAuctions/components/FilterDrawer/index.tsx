@@ -7,18 +7,15 @@ import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useIsMounted } from 'hooks'
 import { urlParametersState, debounce } from 'utils'
-import { useDrawerFields, useDatabaseDispatch } from 'contexts/useDatabase'
+import { useDatabaseDispatch } from 'contexts/useDatabase'
+import { useDrawerFields } from '../../contexts/useDrawerFields'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
 import { toggleSet, isHistory, countActiveFilters } from './utils'
-import {
-  buildServerOptions,
-  buildRareItemsOptions,
-  imbuementOptions,
-} from './options'
+import { imbuementOptions } from './options'
 import { filterSchema } from './schema'
 
 const DEBOUNCE_DELAY = 250
@@ -35,16 +32,8 @@ const FilterDrawer = ({
     translations: { homepage },
   } = useTranslations()
 
-  const { serverData, rareItemData } = useDrawerFields()
+  const { serverOptions, auctionedItemOptions } = useDrawerFields()
   const { dispatch } = useDatabaseDispatch()
-  const serverOptions = useMemo(
-    () => buildServerOptions(serverData),
-    [serverData],
-  )
-  const rareItemOptions = useMemo(
-    () => buildRareItemsOptions(rareItemData),
-    [rareItemData],
-  )
 
   const debouncedDispatchFilters = useMemo(
     () =>
@@ -81,8 +70,10 @@ const FilterDrawer = ({
 
   const availableRareItemOptions = useMemo(
     () =>
-      rareItemOptions.filter((option) => !filters.itemSet.has(option.value)),
-    [rareItemOptions, filters.itemSet],
+      auctionedItemOptions.filter(
+        (option) => !filters.itemSet.has(option.value),
+      ),
+    [auctionedItemOptions, filters.itemSet],
   )
 
   const updateFilters = useCallback(
@@ -471,8 +462,10 @@ const FilterDrawer = ({
               )}
             />
             <Chip
-              overrideStatus={filters.itemSet.size === rareItemOptions.length}
-              onClick={() => toggleFilterSet('itemSet', rareItemOptions)}
+              overrideStatus={
+                filters.itemSet.size === auctionedItemOptions.length
+              }
+              onClick={() => toggleFilterSet('itemSet', auctionedItemOptions)}
             >
               {homepage.FilterDrawer.allItemsButton}
             </Chip>

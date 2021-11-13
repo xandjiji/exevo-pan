@@ -1,14 +1,3 @@
-export const buildServerOptions = (serverData: ServerObject[]): Option[] =>
-  serverData
-    .map((server) => ({
-      name: server.serverName,
-      value: server.serverName,
-    }))
-    .sort((a, b) => a.name.localeCompare(b.name))
-
-export const buildRareItemsOptions = (itemData: RareItemData): Option[] =>
-  Object.keys(itemData).map((item) => ({ name: item, value: item }))
-
 const imbuementNames = [
   'Critical Hit',
   'Life Leech',
