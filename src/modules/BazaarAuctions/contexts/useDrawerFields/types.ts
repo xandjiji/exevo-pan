@@ -3,8 +3,14 @@ import React from 'react'
 export interface DrawerFieldsContextData {
   serverOptions: Option[]
   auctionedItemOptions: Option[]
+  imbuementOptions: Option[]
 }
 
-export interface DrawerFieldsProviderProps extends DrawerFieldsContextData {
+type ServerSideProps = Pick<
+  DrawerFieldsContextData,
+  'serverOptions' | 'auctionedItemOptions'
+>
+
+export interface DrawerFieldsProviderProps extends ServerSideProps {
   children: React.ReactNode
 }
