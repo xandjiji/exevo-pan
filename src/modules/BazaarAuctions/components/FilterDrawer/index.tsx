@@ -15,7 +15,6 @@ import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
 import { toggleSet, isHistory, countActiveFilters } from './utils'
-import { imbuementOptions } from './options'
 import { filterSchema } from './schema'
 
 const DEBOUNCE_DELAY = 250
@@ -32,7 +31,8 @@ const FilterDrawer = ({
     translations: { homepage },
   } = useTranslations()
 
-  const { serverOptions, auctionedItemOptions } = useDrawerFields()
+  const { serverOptions, auctionedItemOptions, imbuementOptions } =
+    useDrawerFields()
   const { dispatch } = useDatabaseDispatch()
 
   const debouncedDispatchFilters = useMemo(
