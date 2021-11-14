@@ -31,23 +31,26 @@ const CharacterGrid = (): JSX.Element => {
           role="button"
           aria-label={homepage.CharacterGrid.filterButtonLabel}
           onClick={() => setDrawerOpen(true)}
+          suppressHydrationWarning
         >
           <S.FilterIcon />
-          <S.ActiveIcon
-            role="status"
-            aria-label={`${activeFilterCount} ${
-              activeFilterCount === 1
-                ? homepage.CharacterGrid.filter
-                : homepage.CharacterGrid.filters
-            } ${
-              activeFilterCount === 1
-                ? homepage.CharacterGrid.is
-                : homepage.CharacterGrid.are
-            } ${homepage.CharacterGrid.active}`}
-            aria-hidden={activeFilterCount < 1}
-          >
-            {activeFilterCount}
-          </S.ActiveIcon>
+          {process.browser && (
+            <S.ActiveIcon
+              role="status"
+              aria-label={`${activeFilterCount} ${
+                activeFilterCount === 1
+                  ? homepage.CharacterGrid.filter
+                  : homepage.CharacterGrid.filters
+              } ${
+                activeFilterCount === 1
+                  ? homepage.CharacterGrid.is
+                  : homepage.CharacterGrid.are
+              } ${homepage.CharacterGrid.active}`}
+              aria-hidden={activeFilterCount === 0}
+            >
+              {activeFilterCount}
+            </S.ActiveIcon>
+          )}
         </S.FilterButton>
 
         <SortingDialog />

@@ -6,18 +6,25 @@ import {
   useCallback,
 } from 'react'
 import { urlParametersState } from 'utils'
+import { countActiveFilters } from './utils'
 import { filterSchema } from './schema'
 import FilterReducer from './reducer'
 import { FiltersContextValues } from './types'
 
-const { defaultValues: untypedDefaultValues, setUrlValues } =
-  urlParametersState(filterSchema)
+const {
+  defaultValues: untypedDefaultValues,
+  getUrlValues,
+  setUrlValues,
+} = urlParametersState(filterSchema)
 const defaultValues = untypedDefaultValues as FilterState
 
+const initialFilterState =
+  (getUrlValues() as FilterState | undefined) ?? defaultValues
+
 const DEFAULT_STATE: FiltersContextValues = {
-  filterState: defaultValues,
+  filterState: initialFilterState,
   defaultValues,
-  activeFilterCount: 0,
+  activeFilterCount: countActiveFilters(defaultValues, initialFilterState),
   updateFilters: () => {},
   toggleAllOptions: () => {},
   dispatch: () => {},

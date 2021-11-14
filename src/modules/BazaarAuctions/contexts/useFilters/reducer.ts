@@ -1,12 +1,6 @@
 import { toggleFilterValue, countActiveFilters } from './utils'
 import { FiltersContextState, Action } from './types'
 
-/*
-    @ ToDo:
-    - sincronizar url state, get url values on mount
-    - debounced
-*/
-
 const updateFiltersReducer = (
   state: FiltersContextState,
   action: Action,
