@@ -10,7 +10,7 @@ import { AuctionsClient } from 'services'
 import AuctionsReducer from './reducer'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
-const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
+const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
   page: [],
   pageData: {
@@ -27,9 +27,7 @@ const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
   dispatch: () => {},
 }
 
-const AuctionsContext = createContext<AuctionsContextValues>(
-  DEFAULT_AUCTIONS_STATE,
-)
+const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
 export const AuctionsProvider = ({
   initialPage,
