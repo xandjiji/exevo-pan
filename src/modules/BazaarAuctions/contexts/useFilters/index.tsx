@@ -4,10 +4,13 @@ import { filterSchema } from './schema'
 import FilterReducer from './reducer'
 import { FiltersContextValues } from './types'
 
-const { defaultValues } = urlParametersState(filterSchema)
+const { defaultValues: untypedDefaultValues } = urlParametersState(filterSchema)
+const defaultValues = untypedDefaultValues as FilterState
 
 const DEFAULT_STATE: FiltersContextValues = {
-  filterState: defaultValues as FilterState,
+  filterState: defaultValues,
+  defaultValues,
+  activeFilterCount: 0,
   updateFilters: () => {},
   toggleAllOptions: () => {},
   dispatch: () => {},
@@ -22,6 +25,8 @@ export const FiltersProvider = ({
 }): JSX.Element => {
   const [state, dispatch] = useReducer(FilterReducer, {
     filterState: DEFAULT_STATE.filterState,
+    defaultValues: DEFAULT_STATE.defaultValues,
+    activeFilterCount: DEFAULT_STATE.activeFilterCount,
   })
 
   const updateFilters = useCallback(

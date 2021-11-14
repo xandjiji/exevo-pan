@@ -1,16 +1,15 @@
-import { toggleFilterValue } from './utils'
+import { toggleFilterValue, countActiveFilters } from './utils'
 import { FiltersContextState, Action } from './types'
 
 /*
     @ ToDo:
-    - wrapper filterCount e isFilterReset
     - resetar filters
     - resetar com pathname
     - sincronizar url state
     - debounced
 */
 
-const FilterReducer = (
+const updateFiltersReducer = (
   state: FiltersContextState,
   action: Action,
 ): FiltersContextState => {
@@ -59,6 +58,23 @@ const FilterReducer = (
 
     default:
       return { ...state }
+  }
+}
+
+const FilterReducer = (
+  state: FiltersContextState,
+  action: Action,
+): FiltersContextState => {
+  const newFilterState = updateFiltersReducer(state, action)
+
+  const activeFilterCount = countActiveFilters(
+    newFilterState.defaultValues,
+    newFilterState.filterState,
+  )
+
+  return {
+    ...newFilterState,
+    activeFilterCount,
   }
 }
 

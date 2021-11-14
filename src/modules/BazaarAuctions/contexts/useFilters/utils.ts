@@ -1,3 +1,5 @@
+import { dequal } from 'dequal'
+
 function toggleSet<T>(set: Set<T>, value: T): Set<T> {
   const newSet = new Set<T>([...set])
   if (newSet.has(value)) {
@@ -17,3 +19,22 @@ export const toggleFilterValue = (
   ...currentFilters,
   [key]: toggleSet(currentFilters[key] as Set<typeof value>, value),
 })
+
+export const countActiveFilters = (
+  defaultFilters: FilterState,
+  currentFilters: FilterState,
+): number => {
+  let count = 0
+
+  Object.keys(defaultFilters).forEach((filter) => {
+    if (
+      !dequal(
+        defaultFilters[filter as keyof FilterState],
+        currentFilters[filter as keyof FilterState],
+      )
+    )
+      count += 1
+  })
+
+  return count
+}

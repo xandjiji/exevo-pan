@@ -12,6 +12,8 @@ export type Action =
 
 export interface FiltersContextState {
   filterState: FilterState
+  defaultValues: FilterState
+  activeFilterCount: number
 }
 
 export interface FiltersContextValues extends FiltersContextState {
