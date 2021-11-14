@@ -5,7 +5,8 @@ import { FiltersContextState, Action } from './types'
     @ ToDo:
     - resetar filters
     - resetar com pathname
-    - sincronizar url state
+    - soulwar action
+    - sincronizar url state, get url values on mount
     - debounced
 */
 
@@ -54,6 +55,12 @@ const updateFiltersReducer = (
             ...action.allOptions.map((option) => option.value),
           ]),
         },
+      }
+
+    case 'RESET_FILTERS':
+      return {
+        ...state,
+        filterState: { ...state.defaultValues },
       }
 
     default:

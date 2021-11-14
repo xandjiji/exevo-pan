@@ -9,6 +9,9 @@ export type Action =
       key: keyof FilterState
       allOptions: Option[]
     }
+  | {
+      type: 'RESET_FILTERS'
+    }
 
 export interface FiltersContextState {
   filterState: FilterState

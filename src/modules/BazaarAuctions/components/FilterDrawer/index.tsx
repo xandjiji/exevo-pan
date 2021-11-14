@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useState, useCallback, useEffect } from 'react'
+import { memo, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useIsMounted } from 'hooks'
 import { urlParametersState } from 'utils'
-import { useDatabaseDispatch } from 'contexts/useDatabase'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useOptionsSet from './useOptionsSet'
@@ -17,9 +16,7 @@ import { FilterDrawerProps } from './types'
 
 import { filterSchema } from './schema'
 
-const DEBOUNCE_DELAY = 250
-const { getUrlValues, setUrlValues, defaultValues } =
-  urlParametersState(filterSchema)
+const { setUrlValues, defaultValues } = urlParametersState(filterSchema)
 
 const FilterDrawer = ({
   open,
@@ -32,13 +29,15 @@ const FilterDrawer = ({
 
   const { serverOptions, auctionedItemOptions, imbuementOptions } =
     useDrawerFields()
-  const { filterState, activeFilterCount, updateFilters, toggleAllOptions } =
-    useFilters()
-  const { dispatch } = useDatabaseDispatch()
+  const {
+    filterState,
+    activeFilterCount,
+    updateFilters,
+    toggleAllOptions,
+    dispatch,
+  } = useFilters()
 
   const isFilterReset = activeFilterCount === 0
-
-  const [, setFilters] = useState<FilterState>(getUrlValues() as FilterState)
 
   useEffect(() => {
     setUrlValues(filterState)
@@ -49,7 +48,7 @@ const FilterDrawer = ({
 
   useEffect(() => {
     if (isMounted) {
-      setFilters(defaultValues as FilterState)
+      dispatch({ type: 'RESET_FILTERS' })
       setUrlValues(defaultValues)
     }
   }, [pathname])
@@ -62,13 +61,7 @@ const FilterDrawer = ({
           <S.ResetButton
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
-            onClick={() => {
-              setFilters(defaultValues as FilterState)
-              setTimeout(
-                () => dispatch({ type: 'RESET_TO_BASE_DATA' }),
-                DEBOUNCE_DELAY,
-              )
-            }}
+            onClick={() => dispatch({ type: 'RESET_FILTERS' })}
           >
             {homepage.FilterDrawer.resetFilters}
             <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
