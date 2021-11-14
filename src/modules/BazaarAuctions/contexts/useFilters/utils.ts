@@ -23,18 +23,14 @@ export const toggleFilterValue = (
 export const countActiveFilters = (
   defaultFilters: FilterState,
   currentFilters: FilterState,
-): number => {
-  let count = 0
-
-  Object.keys(defaultFilters).forEach((filter) => {
-    if (
-      !dequal(
-        defaultFilters[filter as keyof FilterState],
-        currentFilters[filter as keyof FilterState],
+): number =>
+  Object.keys(defaultFilters).reduce(
+    (acc, filterKey) =>
+      dequal(
+        defaultFilters[filterKey as keyof FilterState],
+        currentFilters[filterKey as keyof FilterState],
       )
-    )
-      count += 1
-  })
-
-  return count
-}
+        ? acc
+        : acc + 1,
+    0,
+  )
