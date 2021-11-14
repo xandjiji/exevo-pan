@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react'
+import { createContext, useContext, useReducer, useCallback } from 'react'
 import { urlParametersState } from 'utils'
 import { filterSchema } from './schema'
 import FilterReducer from './reducer'
@@ -8,6 +8,7 @@ const { defaultValues } = urlParametersState(filterSchema)
 
 const DEFAULT_STATE: FiltersContextValues = {
   filterState: defaultValues as FilterState,
+  updateFilters: () => {},
   dispatch: () => {},
 }
 
@@ -22,8 +23,16 @@ export const FiltersProvider = ({
     filterState: DEFAULT_STATE.filterState,
   })
 
+  console.log(state.filterState)
+
+  const updateFilters = useCallback(
+    (key: keyof FilterState, value: any) =>
+      dispatch({ type: 'UPDATE_FILTER', key, value }),
+    [dispatch],
+  )
+
   return (
-    <FiltersContext.Provider value={{ ...state, dispatch }}>
+    <FiltersContext.Provider value={{ ...state, updateFilters, dispatch }}>
       {children}
     </FiltersContext.Provider>
   )

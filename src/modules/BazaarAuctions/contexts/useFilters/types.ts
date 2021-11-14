@@ -1,6 +1,7 @@
 export type Action = {
-  type: 'SET_LOADING'
-  value: boolean
+  type: 'UPDATE_FILTER'
+  key: keyof FilterState
+  value: any
 }
 
 export interface FiltersContextState {
@@ -8,5 +9,6 @@ export interface FiltersContextState {
 }
 
 export interface FiltersContextValues extends FiltersContextState {
+  updateFilters: (key: keyof FilterState, value: any) => void
   dispatch: React.Dispatch<Action>
 }
