@@ -9,6 +9,7 @@ const { defaultValues } = urlParametersState(filterSchema)
 const DEFAULT_STATE: FiltersContextValues = {
   filterState: defaultValues as FilterState,
   updateFilters: () => {},
+  toggleAllOptions: () => {},
   dispatch: () => {},
 }
 
@@ -23,16 +24,22 @@ export const FiltersProvider = ({
     filterState: DEFAULT_STATE.filterState,
   })
 
-  console.log(state.filterState)
-
   const updateFilters = useCallback(
     (key: keyof FilterState, value: any) =>
       dispatch({ type: 'UPDATE_FILTER', key, value }),
-    [dispatch],
+    [],
+  )
+
+  const toggleAllOptions = useCallback(
+    (key: keyof FilterState, allOptions: Option[]) =>
+      dispatch({ type: 'TOGGLE_ALL_OPTIONS', key, allOptions }),
+    [],
   )
 
   return (
-    <FiltersContext.Provider value={{ ...state, updateFilters, dispatch }}>
+    <FiltersContext.Provider
+      value={{ ...state, updateFilters, toggleAllOptions, dispatch }}
+    >
       {children}
     </FiltersContext.Provider>
   )

@@ -6,7 +6,7 @@ import { dequal } from 'dequal'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useIsMounted } from 'hooks'
-import { urlParametersState, debounce } from 'utils'
+import { urlParametersState } from 'utils'
 import { useDatabaseDispatch } from 'contexts/useDatabase'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
@@ -16,7 +16,7 @@ import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
-import { isHistory, countActiveFilters } from './utils'
+import { countActiveFilters } from './utils'
 import { filterSchema } from './schema'
 
 const DEBOUNCE_DELAY = 250
@@ -35,46 +35,12 @@ const FilterDrawer = ({
 
   const { serverOptions, auctionedItemOptions, imbuementOptions } =
     useDrawerFields()
-  const { filterState, updateFilters } = useFilters()
+  const { filterState, updateFilters, toggleAllOptions } = useFilters()
   const { dispatch } = useDatabaseDispatch()
 
-  const debouncedDispatchFilters = useMemo(
-    () =>
-      debounce((updatedFilters: FilterState) => {
-        dispatch({
-          type: 'APPLY_FILTERS',
-          filters: updatedFilters,
-          isHistory: isHistory(),
-        })
-      }, DEBOUNCE_DELAY),
-    [dispatch],
-  )
-
-  const [, /* filters */ setFilters] = useState<FilterState>(
-    getUrlValues() as FilterState,
-  )
+  const [, setFilters] = useState<FilterState>(getUrlValues() as FilterState)
   const [isFilterReset, setIsFilterReset] = useState<boolean>(() =>
     dequal(filterState, defaultValues),
-  )
-
-  const toggleFilterSet = useCallback(
-    (key: keyof FilterState, allOptions: Option[]) => {
-      setFilters((currentFilters) => {
-        let updatedFilters = {} as FilterState
-        if ((currentFilters[key] as Set<string>).size < allOptions.length) {
-          updatedFilters = {
-            ...currentFilters,
-            [key]: new Set([...allOptions.map((option) => option.value)]),
-          }
-        } else {
-          updatedFilters = { ...currentFilters, [key]: new Set([]) }
-        }
-
-        debouncedDispatchFilters(updatedFilters)
-        return updatedFilters
-      })
-    },
-    [debouncedDispatchFilters],
   )
 
   useEffect(() => {
@@ -385,7 +351,9 @@ const FilterDrawer = ({
               overrideStatus={
                 filterState.imbuementsSet.size === imbuementOptions.length
               }
-              onClick={() => toggleFilterSet('imbuementsSet', imbuementOptions)}
+              onClick={() =>
+                toggleAllOptions('imbuementsSet', imbuementOptions)
+              }
             >
               {homepage.FilterDrawer.allImbuementsButton}
             </Chip>
@@ -433,7 +401,7 @@ const FilterDrawer = ({
               overrideStatus={
                 filterState.itemSet.size === auctionedItemOptions.length
               }
-              onClick={() => toggleFilterSet('itemSet', auctionedItemOptions)}
+              onClick={() => toggleAllOptions('itemSet', auctionedItemOptions)}
             >
               {homepage.FilterDrawer.allItemsButton}
             </Chip>

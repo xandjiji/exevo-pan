@@ -1,8 +1,4 @@
 import { dequal } from 'dequal'
-import { routes } from 'Constants'
-
-export const isHistory = (): boolean =>
-  window.location.pathname.includes(routes.BAZAAR_HISTORY)
 
 export const countActiveFilters = (
   defaultFilters: FilterState,
