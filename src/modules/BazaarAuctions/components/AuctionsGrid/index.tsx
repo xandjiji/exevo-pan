@@ -2,6 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef } from 'react'
 import CharacterCard from 'components/CharacterCard'
 import { useAuctions } from '../../contexts/useAuctions'
+import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import VirtualizedListView from './VirtualizedListView'
@@ -14,9 +15,9 @@ const CharacterGrid = (): JSX.Element => {
   } = useTranslations()
 
   const { page, pageData, handlePaginatorFetch } = useAuctions()
+  const { activeFilterCount } = useFilters()
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
-  const [activeFilterCount, setActiveFilterCount] = useState<number>(0)
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
 
@@ -67,7 +68,6 @@ const CharacterGrid = (): JSX.Element => {
           aria-label={homepage.CharacterGrid.filterDrawerLabel}
           open={drawerOpen}
           onClose={closeDrawer}
-          setActiveFilterCount={setActiveFilterCount}
         />
       )}
 

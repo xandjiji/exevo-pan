@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useMemo, useState, useCallback, useEffect } from 'react'
+import { memo, useState, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { dequal } from 'dequal'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useIsMounted } from 'hooks'
@@ -16,7 +15,6 @@ import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
-import { countActiveFilters } from './utils'
 import { filterSchema } from './schema'
 
 const DEBOUNCE_DELAY = 250
@@ -26,7 +24,6 @@ const { getUrlValues, setUrlValues, defaultValues } =
 const FilterDrawer = ({
   open,
   onClose,
-  setActiveFilterCount,
   ...props
 }: FilterDrawerProps): JSX.Element => {
   const {
@@ -35,28 +32,17 @@ const FilterDrawer = ({
 
   const { serverOptions, auctionedItemOptions, imbuementOptions } =
     useDrawerFields()
-  const { filterState, updateFilters, toggleAllOptions } = useFilters()
+  const { filterState, activeFilterCount, updateFilters, toggleAllOptions } =
+    useFilters()
   const { dispatch } = useDatabaseDispatch()
 
+  const isFilterReset = activeFilterCount === 0
+
   const [, setFilters] = useState<FilterState>(getUrlValues() as FilterState)
-  const [isFilterReset, setIsFilterReset] = useState<boolean>(() =>
-    dequal(filterState, defaultValues),
-  )
 
   useEffect(() => {
-    const isReset = dequal(filterState, defaultValues)
-    setIsFilterReset(isReset)
-    const dispatchedTimer = setTimeout(
-      () =>
-        setActiveFilterCount(
-          countActiveFilters(defaultValues as FilterState, filterState),
-        ),
-      DEBOUNCE_DELAY,
-    )
     setUrlValues(filterState)
-
-    return () => clearTimeout(dispatchedTimer)
-  }, [filterState, setActiveFilterCount])
+  }, [filterState])
 
   const { pathname } = useRouter()
   const isMounted = useIsMounted()
