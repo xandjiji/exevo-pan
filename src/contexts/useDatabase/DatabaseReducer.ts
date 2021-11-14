@@ -1,6 +1,6 @@
 import { dequal } from 'dequal'
 import { urlParametersState } from 'utils'
-import { filterSchema } from 'modules/BazaarAuctions/components/FilterDrawer/schema'
+import { filterSchema } from 'modules/BazaarAuctions/contexts/useFilters/schema'
 import { DatabaseReducerState, Action } from './types'
 import { filterCharacters, filterHighlightedAuctions } from './utils'
 

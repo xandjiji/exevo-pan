@@ -1,11 +1,8 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useCallback, useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { memo, useCallback } from 'react'
 import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
-import { useIsMounted } from 'hooks'
-import { urlParametersState } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useOptionsSet from './useOptionsSet'
@@ -13,10 +10,6 @@ import FilterGroup from './FilterGroup'
 import * as S from './styles'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
-
-import { filterSchema } from './schema'
-
-const { setUrlValues, defaultValues } = urlParametersState(filterSchema)
 
 const FilterDrawer = ({
   open,
@@ -31,6 +24,7 @@ const FilterDrawer = ({
     useDrawerFields()
   const {
     filterState,
+    defaultValues,
     activeFilterCount,
     updateFilters,
     toggleAllOptions,
@@ -38,20 +32,6 @@ const FilterDrawer = ({
   } = useFilters()
 
   const isFilterReset = activeFilterCount === 0
-
-  useEffect(() => {
-    setUrlValues(filterState)
-  }, [filterState])
-
-  const { pathname } = useRouter()
-  const isMounted = useIsMounted()
-
-  useEffect(() => {
-    if (isMounted) {
-      dispatch({ type: 'RESET_FILTERS' })
-      setUrlValues(defaultValues)
-    }
-  }, [pathname])
 
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>

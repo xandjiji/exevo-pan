@@ -1,10 +1,17 @@
-import { createContext, useContext, useReducer, useCallback } from 'react'
+import {
+  createContext,
+  useContext,
+  useReducer,
+  useEffect,
+  useCallback,
+} from 'react'
 import { urlParametersState } from 'utils'
 import { filterSchema } from './schema'
 import FilterReducer from './reducer'
 import { FiltersContextValues } from './types'
 
-const { defaultValues: untypedDefaultValues } = urlParametersState(filterSchema)
+const { defaultValues: untypedDefaultValues, setUrlValues } =
+  urlParametersState(filterSchema)
 const defaultValues = untypedDefaultValues as FilterState
 
 const DEFAULT_STATE: FiltersContextValues = {
@@ -28,6 +35,10 @@ export const FiltersProvider = ({
     defaultValues: DEFAULT_STATE.defaultValues,
     activeFilterCount: DEFAULT_STATE.activeFilterCount,
   })
+
+  useEffect(() => {
+    setUrlValues(state.filterState)
+  }, [state.filterState])
 
   const updateFilters = useCallback(
     (key: keyof FilterState, value: any) =>
