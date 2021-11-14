@@ -3,9 +3,6 @@ import { FiltersContextState, Action } from './types'
 
 /*
     @ ToDo:
-    - resetar filters
-    - resetar com pathname
-    - soulwar action
     - sincronizar url state, get url values on mount
     - debounced
 */
