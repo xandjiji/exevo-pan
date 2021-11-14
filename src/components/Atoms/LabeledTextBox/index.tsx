@@ -17,12 +17,13 @@ const LabeledTextBox = ({
   const { current: labelId } = useRef(uuidv4())
   return (
     <S.Wrapper
+      suppressHydrationWarning
       aria-labelledby={labelText ? labelId : undefined}
       warning={warning}
       {...props}
     >
       {labelText && (
-        <S.Label id={labelId}>
+        <S.Label suppressHydrationWarning id={labelId}>
           {labelText}
           {warning && <S.WarningIcon title={common.WarningLabel} />}
         </S.Label>
