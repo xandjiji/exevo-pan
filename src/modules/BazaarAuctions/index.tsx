@@ -1,5 +1,6 @@
 import { useCharacters } from 'contexts/useDatabase'
 import { AuctionsProvider } from './contexts/useAuctions'
+import { FiltersProvider } from './contexts/useFilters'
 import AuctionsGrid from './components/AuctionsGrid'
 import CharacterGrid from './components/CharacterGrid'
 import { CurrentAuctionsProps } from './types'
@@ -10,14 +11,16 @@ export const CurrentAuctions = ({
   const { page, ...pageData } = initialAuctionData
 
   return (
-    <AuctionsProvider
-      initialPage={page}
-      initialPageData={pageData}
-      initialSortingMode={0}
-      initialDescendingOrder={false}
-    >
-      <AuctionsGrid />
-    </AuctionsProvider>
+    <FiltersProvider>
+      <AuctionsProvider
+        initialPage={page}
+        initialPageData={pageData}
+        initialSortingMode={0}
+        initialDescendingOrder={false}
+      >
+        <AuctionsGrid />
+      </AuctionsProvider>
+    </FiltersProvider>
   )
 }
 
