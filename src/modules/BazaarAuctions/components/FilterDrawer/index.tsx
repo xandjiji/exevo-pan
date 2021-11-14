@@ -9,6 +9,7 @@ import { useIsMounted } from 'hooks'
 import { urlParametersState, debounce } from 'utils'
 import { useDatabaseDispatch } from 'contexts/useDatabase'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
+import useOptionsSet from './useOptionsSet'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
 import * as Icon from './icons'
@@ -52,28 +53,6 @@ const FilterDrawer = ({
   )
   const [isFilterReset, setIsFilterReset] = useState<boolean>(() =>
     dequal(filters, defaultValues),
-  )
-
-  const availableServerOptions = useMemo(
-    () =>
-      serverOptions.filter((option) => !filters.serverSet.has(option.value)),
-    [serverOptions, filters.serverSet],
-  )
-
-  const availableImbuementOptions = useMemo(
-    () =>
-      imbuementOptions.filter(
-        (option) => !filters.imbuementsSet.has(option.value),
-      ),
-    [filters.imbuementsSet],
-  )
-
-  const availableRareItemOptions = useMemo(
-    () =>
-      auctionedItemOptions.filter(
-        (option) => !filters.itemSet.has(option.value),
-      ),
-    [auctionedItemOptions, filters.itemSet],
   )
 
   const updateFilters = useCallback(
@@ -317,7 +296,7 @@ const FilterDrawer = ({
             aria-controls="server-list"
             placeholder={homepage.FilterDrawer.serverPlaceholder}
             style={{ marginBottom: 12 }}
-            itemList={availableServerOptions}
+            itemList={useOptionsSet(serverOptions, filters.serverSet)}
             onItemSelect={useCallback(
               (option: Option) => updateFilters('serverSet', option.value),
               [updateFilters],
@@ -409,7 +388,7 @@ const FilterDrawer = ({
               id="imbuements-input"
               aria-controls="imbuements-list"
               placeholder={homepage.FilterDrawer.imbuementsPlaceholder}
-              itemList={availableImbuementOptions}
+              itemList={useOptionsSet(imbuementOptions, filters.imbuementsSet)}
               onItemSelect={useCallback(
                 (option: Option) =>
                   updateFilters('imbuementsSet', option.value),
@@ -455,7 +434,7 @@ const FilterDrawer = ({
               id="rare-items-input"
               aria-controls="rare-items-list"
               placeholder={homepage.FilterDrawer.rareItemsPlaceholder}
-              itemList={availableRareItemOptions}
+              itemList={useOptionsSet(auctionedItemOptions, filters.itemSet)}
               onItemSelect={useCallback(
                 (option: Option) => updateFilters('itemSet', option.value),
                 [updateFilters],
