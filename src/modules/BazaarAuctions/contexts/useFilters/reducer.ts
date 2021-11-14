@@ -1,4 +1,4 @@
-import { toggleSet } from './utils'
+import { toggleFilterValue } from './utils'
 import { FiltersContextState, Action } from './types'
 
 /*
@@ -9,15 +9,6 @@ import { FiltersContextState, Action } from './types'
     - sincronizar url state
     - debounced
 */
-
-const toggleFilterValue = (
-  currentFilters: FilterState,
-  key: keyof FilterState,
-  value: any,
-): FilterState => ({
-  ...currentFilters,
-  [key]: toggleSet(currentFilters[key] as Set<typeof value>, value),
-})
 
 const FilterReducer = (
   state: FiltersContextState,

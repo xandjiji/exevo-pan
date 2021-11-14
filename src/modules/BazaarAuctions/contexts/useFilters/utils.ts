@@ -1,4 +1,4 @@
-export function toggleSet<T>(set: Set<T>, value: T): Set<T> {
+function toggleSet<T>(set: Set<T>, value: T): Set<T> {
   const newSet = new Set<T>([...set])
   if (newSet.has(value)) {
     newSet.delete(value)
@@ -8,3 +8,12 @@ export function toggleSet<T>(set: Set<T>, value: T): Set<T> {
 
   return newSet
 }
+
+export const toggleFilterValue = (
+  currentFilters: FilterState,
+  key: keyof FilterState,
+  value: any,
+): FilterState => ({
+  ...currentFilters,
+  [key]: toggleSet(currentFilters[key] as Set<typeof value>, value),
+})
