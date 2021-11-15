@@ -6,6 +6,7 @@ import {
   useEffect,
   useCallback,
 } from 'react'
+import { dequal } from 'dequal'
 import { AuctionsClient } from 'services'
 import AuctionsReducer from './reducer'
 import { useFilters } from '../useFilters'
@@ -46,6 +47,7 @@ export const AuctionsProvider = ({
   })
 
   const { filterState } = useFilters()
+  const lastFilterState = useRef(filterState)
 
   const {
     pageData: { pageIndex },
@@ -55,20 +57,30 @@ export const AuctionsProvider = ({
 
   const isMounted = useRef(false)
   useEffect(() => {
-    if (isMounted.current) {
-      ;(async () => {
-        dispatch({ type: 'SET_LOADING', value: true })
-        const paginationOptions = { pageIndex, pageSize: 10 }
-        const sortOptions = { sortingMode, descendingOrder }
+    const fetchData = async () => {
+      dispatch({ type: 'SET_LOADING', value: true })
 
-        const data = await AuctionsClient.fetchAuctionPage({
-          paginationOptions,
-          sortOptions,
-          filterOptions: filterState,
-        })
-        dispatch({ type: 'STORE_DATA', data })
-      })()
+      const filterChanged = !dequal(filterState, lastFilterState.current)
+      const paginationOptions = {
+        pageIndex: filterChanged ? 0 : pageIndex,
+        pageSize: 10,
+      }
+      const sortOptions = { sortingMode, descendingOrder }
+
+      const data = await AuctionsClient.fetchAuctionPage({
+        paginationOptions,
+        sortOptions,
+        filterOptions: filterState,
+      })
+
+      lastFilterState.current = filterState
+      dispatch({ type: 'STORE_DATA', data })
+    }
+
+    if (isMounted.current) {
+      fetchData()
     } else {
+      /* @ ToDo: fetch data with url params */
       isMounted.current = true
     }
   }, [pageIndex, sortingMode, descendingOrder, filterState])
