@@ -56,14 +56,14 @@ export const AuctionsProvider = ({
     descendingOrder: initialDescendingOrder,
   })
 
-  const { filterState, activeFilterCount } = useFilters()
-  const lastFilterState = useRef(filterState)
-
   const {
     pageData: { pageIndex },
     sortingMode,
     descendingOrder,
   } = state
+
+  const { filterState, activeFilterCount } = useFilters()
+  const lastFilterState = useRef(filterState)
 
   const fetchData = useCallback(
     async (
@@ -74,6 +74,7 @@ export const AuctionsProvider = ({
     ) => {
       dispatch({ type: 'SET_LOADING', value: true })
 
+      lastFilterState.current = filterOptions
       const paginationOptions = {
         pageIndex: newPageIndex,
         pageSize: 10,
@@ -88,8 +89,6 @@ export const AuctionsProvider = ({
         sortOptions,
         filterOptions,
       })
-
-      lastFilterState.current = filterState
       dispatch({ type: 'STORE_DATA', data })
     },
     [],
