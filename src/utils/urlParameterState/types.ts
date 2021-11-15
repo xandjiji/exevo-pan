@@ -11,5 +11,6 @@ export type ParameterObject = Record<string, any>
 export interface urlParameterStateObject {
   getUrlValues: () => ParameterObject
   setUrlValues: (newValues: ParameterObject) => void
+  isCurrentlyDefaultValues: () => boolean
   defaultValues: ParameterObject
 }

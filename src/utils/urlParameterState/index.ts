@@ -75,5 +75,13 @@ export function urlParametersState(
     )
   }
 
-  return { getUrlValues, setUrlValues, defaultValues: getDefaultValues() }
+  const isCurrentlyDefaultValues = (): boolean =>
+    dequal(getDefaultValues(), getUrlValues())
+
+  return {
+    getUrlValues,
+    setUrlValues,
+    isCurrentlyDefaultValues,
+    defaultValues: getDefaultValues(),
+  }
 }
