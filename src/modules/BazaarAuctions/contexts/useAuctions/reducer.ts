@@ -28,11 +28,13 @@ const AuctionsReducer = (
       }
 
     case 'STORE_DATA': {
-      const { page, ...pageData } = action.data
+      const { page, sortingMode, descendingOrder, ...pageData } = action.data
       return {
         ...state,
         page,
         pageData,
+        sortingMode,
+        descendingOrder,
         loading: false,
       }
     }

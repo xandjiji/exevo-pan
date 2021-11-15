@@ -7,9 +7,12 @@ import {
   useCallback,
 } from 'react'
 import { dequal } from 'dequal'
+import { urlParametersState } from 'utils'
+import { useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services'
 import AuctionsReducer from './reducer'
 import { useFilters } from '../useFilters'
+import { buildSchema } from './schema'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const DEFAULT_STATE: AuctionsContextValues = {
@@ -31,6 +34,7 @@ const DEFAULT_STATE: AuctionsContextValues = {
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
+/* @ ToDo: change 'initial' to 'default' */
 export const AuctionsProvider = ({
   initialPage,
   initialPageData,
@@ -38,6 +42,12 @@ export const AuctionsProvider = ({
   initialDescendingOrder,
   children,
 }: AuctionsProviderProps): JSX.Element => {
+  const {
+    current: { isCurrentlyDefaultValues, getUrlValues, setUrlValues },
+  } = useRef(
+    urlParametersState(buildSchema(initialSortingMode, initialDescendingOrder)),
+  )
+
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: true,
     page: initialPage,
@@ -46,7 +56,7 @@ export const AuctionsProvider = ({
     descendingOrder: initialDescendingOrder,
   })
 
-  const { filterState } = useFilters()
+  const { filterState, activeFilterCount } = useFilters()
   const lastFilterState = useRef(filterState)
 
   const {
@@ -55,35 +65,68 @@ export const AuctionsProvider = ({
     descendingOrder,
   } = state
 
-  const isMounted = useRef(false)
-  useEffect(() => {
-    const fetchData = async () => {
+  const fetchData = useCallback(
+    async (
+      newPageIndex: number,
+      newSortingMode: number,
+      newDescendingOrder: boolean,
+      filterOptions: FilterState,
+    ) => {
       dispatch({ type: 'SET_LOADING', value: true })
 
-      const filterChanged = !dequal(filterState, lastFilterState.current)
       const paginationOptions = {
-        pageIndex: filterChanged ? 0 : pageIndex,
+        pageIndex: newPageIndex,
         pageSize: 10,
       }
-      const sortOptions = { sortingMode, descendingOrder }
+      const sortOptions = {
+        sortingMode: newSortingMode,
+        descendingOrder: newDescendingOrder,
+      }
 
       const data = await AuctionsClient.fetchAuctionPage({
         paginationOptions,
         sortOptions,
-        filterOptions: filterState,
+        filterOptions,
       })
 
       lastFilterState.current = filterState
       dispatch({ type: 'STORE_DATA', data })
-    }
+    },
+    [],
+  )
 
-    if (isMounted.current) {
-      fetchData()
-    } else {
-      /* @ ToDo: fetch data with url params */
-      isMounted.current = true
+  const isMounted = useIsMounted()
+  useEffect(() => {
+    if (isMounted) {
+      const filterChanged = !dequal(filterState, lastFilterState.current)
+      fetchData(
+        filterChanged ? 0 : pageIndex,
+        sortingMode,
+        descendingOrder,
+        filterState,
+      )
     }
-  }, [pageIndex, sortingMode, descendingOrder, filterState])
+  }, [pageIndex, sortingMode, descendingOrder, filterState, fetchData])
+
+  /* Detecting and fetching new data if there are url parameters */
+  useEffect(() => {
+    if (!isMounted) {
+      if (!isCurrentlyDefaultValues() || activeFilterCount > 0) {
+        const { currentPage, orderBy, descending } = getUrlValues()
+        fetchData(currentPage - 1, orderBy, descending, filterState)
+      }
+    }
+  }, [])
+
+  useEffect(
+    () =>
+      setUrlValues({
+        currentPage: pageIndex + 1,
+        descending: descendingOrder,
+        orderBy: sortingMode,
+      }),
+    [pageIndex, descendingOrder, sortingMode],
+  )
 
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {
     dispatch({ type: 'SET_PAGE_INDEX', value: newPageIndex - 1 })
