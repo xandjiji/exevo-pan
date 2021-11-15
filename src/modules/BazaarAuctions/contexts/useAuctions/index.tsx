@@ -8,6 +8,7 @@ import {
 } from 'react'
 import { AuctionsClient } from 'services'
 import AuctionsReducer from './reducer'
+import { useFilters } from '../useFilters'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const DEFAULT_STATE: AuctionsContextValues = {
@@ -44,6 +45,8 @@ export const AuctionsProvider = ({
     descendingOrder: initialDescendingOrder,
   })
 
+  const { filterState } = useFilters()
+
   const {
     pageData: { pageIndex },
     sortingMode,
@@ -55,21 +58,19 @@ export const AuctionsProvider = ({
     if (isMounted.current) {
       ;(async () => {
         dispatch({ type: 'SET_LOADING', value: true })
-        const data = await AuctionsClient.fetchAuctionPage(
-          {
-            pageIndex,
-          },
-          {
-            sortingMode,
-            descendingOrder,
-          },
-        )
+        const paginationOptions = { pageIndex, pageSize: 10 }
+        const sortOptions = { sortingMode, descendingOrder }
+
+        const data = await AuctionsClient.fetchAuctionPage({
+          paginationOptions,
+          sortOptions,
+        })
         dispatch({ type: 'STORE_DATA', data })
       })()
     } else {
       isMounted.current = true
     }
-  }, [pageIndex, sortingMode, descendingOrder])
+  }, [pageIndex, sortingMode, descendingOrder, filterState])
 
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {
     dispatch({ type: 'SET_PAGE_INDEX', value: newPageIndex - 1 })

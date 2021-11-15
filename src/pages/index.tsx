@@ -111,20 +111,14 @@ export default function Home({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const paginationOptions = { pageIndex: 0, pageSize: 10 }
+  const sortOptions = { sortingMode: 0, descendingOrder: false }
+
   const [serverOptions, auctionedItemOptions, initialAuctionData] =
     await Promise.all([
       DrawerFieldsClient.fetchServerOptions(),
       DrawerFieldsClient.fetchAuctionedItemOptions(),
-      AuctionsClient.fetchAuctionPage(
-        {
-          pageIndex: 0,
-          pageSize: 10,
-        },
-        {
-          sortingMode: 0,
-          descendingOrder: false,
-        },
-      ),
+      AuctionsClient.fetchAuctionPage({ paginationOptions, sortOptions }),
     ])
 
   return {
