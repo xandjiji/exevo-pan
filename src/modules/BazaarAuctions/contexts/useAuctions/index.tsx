@@ -64,6 +64,7 @@ export const AuctionsProvider = ({
         const data = await AuctionsClient.fetchAuctionPage({
           paginationOptions,
           sortOptions,
+          filterOptions: filterState,
         })
         dispatch({ type: 'STORE_DATA', data })
       })()

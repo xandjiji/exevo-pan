@@ -1,15 +1,19 @@
-/* @ ToDo find better variable names */
+declare type VocationOptions = 0 | 1 | 2 | 3 | 4
+declare type PvpOptions = 0 | 1 | 2 | 3 | 4
+declare type LocationOptions = 0 | 1 | 2
+declare type ImbuementOptions = 'axe' | 'club' | 'distance' | 'magic' | 'sword'
+
 declare interface FilterState {
   nicknameFilter: string
-  vocation: Set<0 | 1 | 2 | 3 | 4>
-  pvp: Set<0 | 1 | 2 | 3 | 4>
+  vocation: Set<VocationOptions>
+  pvp: Set<PvpOptions>
   battleye: Set<boolean>
-  location: Set<0 | 1 | 2>
+  location: Set<LocationOptions>
   serverSet: Set<string>
   minLevel: number
   maxLevel: number
   minSkill: number
-  skillKey: Set<'axe' | 'club' | 'distance' | 'magic' | 'sword'>
+  skillKey: Set<ImbuementOptions>
   imbuementsSet: Set<string>
   itemSet: Set<string>
   fav: boolean

@@ -1,4 +1,5 @@
 import { endpoints } from 'Constants'
+import { serializeBody } from './utils'
 import { FetchAuctionPageParameters, CacheObject } from './types'
 
 const CACHE_MAX_AGE = 180000
@@ -32,8 +33,11 @@ export default class AuctionsClient {
     sortOptions,
     filterOptions,
   }: FetchAuctionPageParameters): Promise<PaginatedData<CharacterObject>> {
-    const body = { paginationOptions, sortOptions }
-    const bodyPayload = JSON.stringify(body)
+    const bodyPayload = serializeBody(
+      paginationOptions,
+      sortOptions,
+      filterOptions,
+    )
 
     const cachedResult = this.getCache(bodyPayload)
     if (cachedResult) return cachedResult
