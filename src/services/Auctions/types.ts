@@ -1,6 +1,6 @@
 export type PaginationOptions = {
-  pageIndex?: number
-  pageSize?: number
+  pageIndex: number
+  pageSize: number
 }
 
 export type SortOptions = {

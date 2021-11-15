@@ -50,7 +50,7 @@ export default class AuctionsClient {
       return data
     } catch (error: unknown) {
       console.log(error)
-      return { ...EMPTY_RESPONSE, pageIndex }
+      return { ...EMPTY_RESPONSE, pageIndex: paginationOptions.pageIndex }
     }
   }
 }
