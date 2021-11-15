@@ -9,4 +9,6 @@ declare interface PageData {
 
 declare interface PaginatedData<T> extends PageData {
   page: T[]
+  sortingMode: number
+  descendingOrder: boolean
 }

@@ -12,6 +12,8 @@ const EMPTY_RESPONSE: PaginatedData<CharacterObject> = {
   endOffset: 0,
   hasPrev: false,
   hasNext: false,
+  sortingMode: 0,
+  descendingOrder: false,
 }
 
 export default class AuctionsClient {
@@ -54,7 +56,11 @@ export default class AuctionsClient {
       return data
     } catch (error: unknown) {
       console.log(error)
-      return { ...EMPTY_RESPONSE, pageIndex: paginationOptions.pageIndex }
+      return {
+        ...EMPTY_RESPONSE,
+        ...sortOptions,
+        pageIndex: paginationOptions.pageIndex,
+      }
     }
   }
 }

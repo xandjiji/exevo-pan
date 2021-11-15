@@ -8,15 +8,15 @@ import { CurrentAuctionsProps } from './types'
 export const CurrentAuctions = ({
   initialAuctionData,
 }: CurrentAuctionsProps): JSX.Element => {
-  const { page, ...pageData } = initialAuctionData
+  const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
 
   return (
     <FiltersProvider>
       <AuctionsProvider
         initialPage={page}
         initialPageData={pageData}
-        initialSortingMode={0}
-        initialDescendingOrder={false}
+        initialSortingMode={sortingMode}
+        initialDescendingOrder={descendingOrder}
       >
         <AuctionsGrid />
       </AuctionsProvider>
