@@ -35,7 +35,7 @@ export interface AuctionsContextValues extends AuctionsContextState {
 export interface AuctionsProviderProps {
   initialPage: CharacterObject[]
   initialPageData: PageData
-  initialSortingMode: number
-  initialDescendingOrder: boolean
+  defaultSortingMode: number
+  defaultDescendingOrder: boolean
   children: React.ReactNode
 }

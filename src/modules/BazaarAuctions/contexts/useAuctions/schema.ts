@@ -1,3 +1,22 @@
+import { AuctionsContextValues } from './types'
+
+export const DEFAULT_STATE: AuctionsContextValues = {
+  loading: false,
+  page: [],
+  pageData: {
+    pageIndex: 0,
+    totalItems: 0,
+    startOffset: 0,
+    endOffset: 0,
+    hasNext: false,
+    hasPrev: false,
+  },
+  sortingMode: 0,
+  descendingOrder: false,
+  handlePaginatorFetch: async () => {},
+  dispatch: () => {},
+}
+
 export const buildSchema = (
   orderByDefault: number,
   descendingDefault: boolean,

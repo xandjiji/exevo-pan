@@ -15,8 +15,8 @@ export const CurrentAuctions = ({
       <AuctionsProvider
         initialPage={page}
         initialPageData={pageData}
-        initialSortingMode={sortingMode}
-        initialDescendingOrder={descendingOrder}
+        defaultSortingMode={sortingMode}
+        defaultDescendingOrder={descendingOrder}
       >
         <AuctionsGrid />
       </AuctionsProvider>
