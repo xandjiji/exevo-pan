@@ -55,14 +55,16 @@ const CharacterGrid = (): JSX.Element => {
 
         <SortingDialog />
 
-        <S.Paginator
-          aria-controls="character-grid"
-          pageSize={10}
-          totalItems={pageData.totalItems}
-          currentPage={pageData.pageIndex + 1}
-          onChange={handlePaginatorFetch}
-          noItemsMessage={homepage.CharacterGrid.noItemsPagination}
-        />
+        {process.browser && (
+          <S.Paginator
+            aria-controls="character-grid"
+            pageSize={10}
+            totalItems={pageData.totalItems}
+            currentPage={pageData.pageIndex + 1}
+            onChange={handlePaginatorFetch}
+            noItemsMessage={homepage.CharacterGrid.noItemsPagination}
+          />
+        )}
       </S.Head>
 
       {process.browser && (

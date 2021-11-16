@@ -29,13 +29,17 @@ export const AuctionsProvider = ({
   } = useRef(
     urlParametersState(buildSchema(defaultSortingMode, defaultDescendingOrder)),
   )
+  const initialUrlState = useRef(getUrlValues())
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
-    loading: true,
+    loading: false,
     page: initialPage,
-    pageData: initialPageData,
-    sortingMode: defaultSortingMode,
-    descendingOrder: defaultDescendingOrder,
+    pageData: {
+      ...initialPageData,
+      pageIndex: initialUrlState.current.currentPage - 1,
+    },
+    sortingMode: initialUrlState.current.orderBy,
+    descendingOrder: initialUrlState.current.descending,
   })
 
   const {
@@ -93,7 +97,7 @@ export const AuctionsProvider = ({
   useEffect(() => {
     if (!isMounted) {
       if (!isCurrentlyDefaultValues() || activeFilterCount > 0) {
-        const { currentPage, orderBy, descending } = getUrlValues()
+        const { currentPage, orderBy, descending } = initialUrlState.current
         fetchData(currentPage - 1, orderBy, descending, filterState)
       }
     }
