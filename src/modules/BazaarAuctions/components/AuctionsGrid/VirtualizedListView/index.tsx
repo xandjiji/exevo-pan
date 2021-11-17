@@ -1,11 +1,11 @@
 import {
-  forwardRef,
   memo,
   useState,
   useCallback,
   useMemo,
   Children,
   useEffect,
+  useRef,
 } from 'react'
 import { clampValue } from 'utils'
 import FillElement from './FillElement'
@@ -15,91 +15,94 @@ import * as S from './styles'
 const DEFAULT_MIN_INDEX = 0
 const DEFAULT_MAX_INDEX = 1
 
-const VirtualizedListView = forwardRef<HTMLDivElement, ListViewProps>(
-  (
-    { estimatedHeight, overScan = 0, children, ...props }: ListViewProps,
-    ref,
-  ) => {
-    const [isDesktop, setIsDesktop] = useState(true)
+const VirtualizedListView = ({
+  estimatedHeight,
+  overScan = 0,
+  children,
+  ...props
+}: ListViewProps) => {
+  const [isDesktop, setIsDesktop] = useState(true)
 
-    useEffect(() => {
-      const updateMediaQuery = () => {
-        setIsDesktop(window.matchMedia('(min-width: 768px)').matches)
-      }
+  useEffect(() => {
+    const updateMediaQuery = () => {
+      setIsDesktop(window.matchMedia('(min-width: 768px)').matches)
+    }
 
-      updateMediaQuery()
-      window.addEventListener('resize', updateMediaQuery)
+    updateMediaQuery()
+    window.addEventListener('resize', updateMediaQuery)
 
-      return () => window.removeEventListener('resize', updateMediaQuery)
-    }, [])
+    return () => window.removeEventListener('resize', updateMediaQuery)
+  }, [])
 
-    const childrenCount = Children.count(children)
+  const childrenCount = Children.count(children)
 
-    const [minIndex, setMinIndex] = useState(DEFAULT_MIN_INDEX)
-    const [maxIndex, setMaxIndex] = useState(DEFAULT_MAX_INDEX)
+  const [minIndex, setMinIndex] = useState(DEFAULT_MIN_INDEX)
+  const [maxIndex, setMaxIndex] = useState(DEFAULT_MAX_INDEX)
 
-    const handleScroll = useCallback(
-      (event: OnScrollEvent) => {
-        const { clientHeight, scrollTop } = event.currentTarget
+  const handleScroll = useCallback(
+    (event: OnScrollEvent) => {
+      const { clientHeight, scrollTop } = event.currentTarget
 
-        const newMinIndex = Math.floor(scrollTop / estimatedHeight)
+      const newMinIndex = Math.floor(scrollTop / estimatedHeight)
 
-        const firstItemOffset = estimatedHeight - (scrollTop % estimatedHeight)
-        const viewportOverflow = Math.ceil(
-          (clientHeight - firstItemOffset) / estimatedHeight,
-        )
+      const firstItemOffset = estimatedHeight - (scrollTop % estimatedHeight)
+      const viewportOverflow = Math.ceil(
+        (clientHeight - firstItemOffset) / estimatedHeight,
+      )
 
-        const newMaxIndex = newMinIndex + viewportOverflow
+      const newMaxIndex = newMinIndex + viewportOverflow
 
-        const indexRange: [number, number] = [0, childrenCount - 1]
-        setMinIndex(clampValue(newMinIndex - overScan, indexRange))
-        setMaxIndex(clampValue(newMaxIndex + overScan, indexRange))
-      },
-      [childrenCount],
-    )
+      const indexRange: [number, number] = [0, childrenCount - 1]
+      setMinIndex(clampValue(newMinIndex - overScan, indexRange))
+      setMaxIndex(clampValue(newMaxIndex + overScan, indexRange))
+    },
+    [childrenCount],
+  )
 
-    useEffect(() => {
-      setMinIndex(DEFAULT_MIN_INDEX)
-      setMaxIndex(DEFAULT_MAX_INDEX)
-    }, [childrenCount])
+  useEffect(() => {
+    setMinIndex(DEFAULT_MIN_INDEX)
+    setMaxIndex(DEFAULT_MAX_INDEX)
+  }, [childrenCount])
 
-    const renderedChildren = useMemo(
-      () =>
-        Array.isArray(children)
-          ? children.slice(minIndex, maxIndex + 1)
-          : children,
-      [children, minIndex, maxIndex],
-    )
+  const renderedChildren = useMemo(
+    () =>
+      Array.isArray(children)
+        ? children.slice(minIndex, maxIndex + 1)
+        : children,
+    [children, minIndex, maxIndex],
+  )
 
-    const fillTopElements = minIndex
-    const fillBottomElements = childrenCount - (maxIndex + 1)
+  const gridRef = useRef<HTMLDivElement>(null)
+  useEffect(() => gridRef.current?.scrollTo({ top: 0 }), [children])
 
-    return (
-      <S.Grid
-        ref={ref}
-        onScroll={isDesktop ? undefined : handleScroll}
-        {...props}
-      >
-        {isDesktop ? (
-          children
-        ) : (
-          <>
-            <FillElement
-              elementSize={estimatedHeight}
-              elementsCount={fillTopElements}
-            />
+  const fillTopElements = minIndex
+  const fillBottomElements = childrenCount - (maxIndex + 1)
 
-            {renderedChildren}
+  return (
+    <S.Grid
+      ref={gridRef}
+      onScroll={isDesktop ? undefined : handleScroll}
+      {...props}
+    >
+      {isDesktop ? (
+        children
+      ) : (
+        <>
+          <FillElement
+            elementSize={estimatedHeight}
+            elementsCount={fillTopElements}
+          />
 
-            <FillElement
-              elementSize={estimatedHeight}
-              elementsCount={fillBottomElements}
-            />
-          </>
-        )}
-      </S.Grid>
-    )
-  },
-)
+          {renderedChildren}
+
+          <FillElement
+            elementSize={estimatedHeight}
+            elementsCount={fillBottomElements}
+          />
+        </>
+      )}
+    </S.Grid>
+  )
+}
 
 export default memo(VirtualizedListView)

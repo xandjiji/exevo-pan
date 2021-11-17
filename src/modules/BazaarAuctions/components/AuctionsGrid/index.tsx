@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback, useRef } from 'react'
+import { useState, useCallback } from 'react'
 import CharacterCard from 'components/CharacterCard'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
@@ -20,8 +20,6 @@ const CharacterGrid = (): JSX.Element => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
-
-  const gridRef = useRef<HTMLDivElement | null>(null)
 
   return (
     <S.Main>
@@ -77,7 +75,6 @@ const CharacterGrid = (): JSX.Element => {
       )}
 
       <VirtualizedListView
-        ref={gridRef}
         id="character-grid"
         estimatedHeight={504}
         overScan={1}
