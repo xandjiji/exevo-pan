@@ -17,7 +17,7 @@ const LanguagePicker = (): JSX.Element => {
   const [isVisible, setIsVisible] = useState(false)
 
   const handleLocaleSelect = (selectedLocale: RegisteredLocale) => {
-    push(pathname, pathname, { locale: selectedLocale })
+    push(pathname, window.location.search, { locale: selectedLocale })
     setIsVisible(false)
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
   }
