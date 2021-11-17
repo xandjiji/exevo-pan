@@ -5,6 +5,7 @@ import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
+import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import FilterGroup from './FilterGroup'
 import * as S from './styles'
@@ -30,6 +31,11 @@ const FilterDrawer = ({
     toggleAllOptions,
     dispatch,
   } = useFilters()
+
+  const [nickname, setNickname] = useDebouncedFilter<string>(
+    'nicknameFilter',
+    filterState.nicknameFilter,
+  )
 
   const isFilterReset = activeFilterCount === 0
 
@@ -66,10 +72,8 @@ const FilterDrawer = ({
             id="search-nickname-input"
             placeholder="Nickname"
             allowClear
-            value={filterState.nicknameFilter}
-            onChange={(event) =>
-              updateFilters('nicknameFilter', event.target.value)
-            }
+            value={nickname}
+            onChange={(event) => setNickname(event.target.value)}
           />
         </FilterGroup>
 
