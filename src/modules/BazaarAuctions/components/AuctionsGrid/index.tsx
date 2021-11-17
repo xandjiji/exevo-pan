@@ -25,7 +25,7 @@ const CharacterGrid = (): JSX.Element => {
 
   return (
     <S.Main>
-      <S.Head>
+      <S.Head suppressHydrationWarning>
         <S.FilterButton
           tabIndex={0}
           role="button"
