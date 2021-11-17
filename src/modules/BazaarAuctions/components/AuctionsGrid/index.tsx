@@ -83,6 +83,9 @@ const CharacterGrid = (): JSX.Element => {
           <CharacterCard key={auction.id} characterData={auction} />
         ))}
       </VirtualizedListView>
+      {page.length === 0 && (
+        <EmptyState buttonAction={() => setDrawerOpen(true)} />
+      )}
     </S.Main>
   )
 }
