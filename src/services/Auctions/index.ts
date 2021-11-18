@@ -1,4 +1,4 @@
-import { endpoints } from 'Constants'
+import { endpoints, paths } from 'Constants'
 import { serializeBody } from './utils'
 import { FetchAuctionPageParameters, CacheObject } from './types'
 
@@ -20,6 +20,8 @@ export default class AuctionsClient {
   static cache: CacheObject = {}
 
   static currentAuctionsUrl = endpoints.CURRENT_AUCTIONS
+
+  static highlightedAuctionsUrl = `${endpoints.BASE_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
 
   static getCache(key: string): PaginatedData<CharacterObject> | undefined {
     return this.cache[key]
@@ -50,7 +52,7 @@ export default class AuctionsClient {
         body: bodyPayload,
       })
 
-      const data = (await response.json()) as PaginatedData<CharacterObject>
+      const data: PaginatedData<CharacterObject> = await response.json()
       this.setCache(bodyPayload, data)
 
       return data
@@ -61,6 +63,23 @@ export default class AuctionsClient {
         ...sortOptions,
         pageIndex: paginationOptions.pageIndex,
       }
+    }
+  }
+
+  static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
+    try {
+      const response = await fetch(this.highlightedAuctionsUrl)
+      const auctions: CharacterObject[] = await response.json()
+
+      const currentTimestamp = +new Date() / 1000
+      const activeAuctions = auctions.filter(
+        (auction) => auction.auctionEnd > currentTimestamp,
+      )
+
+      return activeAuctions
+    } catch (error: unknown) {
+      console.log(error)
+      return []
     }
   }
 }
