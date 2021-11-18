@@ -4,7 +4,7 @@ export const paths = {
   OVERALL_STATISTICS: '/overallStatistics.json',
   CHARACTER_DATA: '/MinifiedCharacterData.json',
   HISTORY_HASH: '/hash.json',
-  HIGHLIGHTED_AUCTIONS: '/highlighted.json',
+  HIGHLIGHTED_AUCTIONS: '/HighlightedAuctions.json',
   WAR_STATISTICS: '/statistics.json',
   PUNE_DATA: '/miniLibertabraPuneData.json',
   BONES_DATA: '/miniBonesAllianceData.json',
