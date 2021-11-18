@@ -28,11 +28,13 @@ export interface AuctionsContextState {
 }
 
 export interface AuctionsContextValues extends AuctionsContextState {
+  highlightedAuctions: CharacterObject[]
   handlePaginatorFetch: (pageIndex: number) => void
   dispatch: React.Dispatch<Action>
 }
 
 export interface AuctionsProviderProps {
+  highlightedAuctions: CharacterObject[]
   initialPage: CharacterObject[]
   initialPageData: PageData
   defaultSortingMode: number

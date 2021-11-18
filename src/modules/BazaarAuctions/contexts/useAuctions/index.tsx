@@ -5,6 +5,7 @@ import {
   useRef,
   useEffect,
   useCallback,
+  useMemo,
 } from 'react'
 import { dequal } from 'dequal'
 import { urlParametersState } from 'utils'
@@ -18,6 +19,7 @@ import { AuctionsContextValues, AuctionsProviderProps } from './types'
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
 export const AuctionsProvider = ({
+  highlightedAuctions: highlightedAuctionsData,
   initialPage,
   initialPageData,
   defaultSortingMode,
@@ -117,10 +119,30 @@ export const AuctionsProvider = ({
     dispatch({ type: 'SET_PAGE_INDEX', value: newPageIndex - 1 })
   }, [])
 
+  const highlightedAuctions = useMemo(() => {
+    const isDefaultGridState =
+      pageIndex === 0 &&
+      sortingMode === defaultSortingMode &&
+      descendingOrder === defaultDescendingOrder
+    const noFilterApplied = activeFilterCount === 0
+
+    const shouldDisplayHighlightedAuctions =
+      isDefaultGridState && noFilterApplied
+
+    return shouldDisplayHighlightedAuctions ? highlightedAuctionsData : []
+  }, [
+    highlightedAuctionsData,
+    pageIndex,
+    sortingMode,
+    descendingOrder,
+    activeFilterCount,
+  ])
+
   return (
     <AuctionsContext.Provider
       value={{
         ...state,
+        highlightedAuctions,
         handlePaginatorFetch,
         dispatch,
       }}
