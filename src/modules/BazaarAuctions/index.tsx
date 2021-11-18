@@ -7,12 +7,14 @@ import { CurrentAuctionsProps } from './types'
 
 export const CurrentAuctions = ({
   initialAuctionData,
+  highlightedAuctions,
 }: CurrentAuctionsProps): JSX.Element => {
   const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
 
   return (
     <FiltersProvider>
       <AuctionsProvider
+        highlightedAuctions={highlightedAuctions}
         initialPage={page}
         initialPageData={pageData}
         defaultSortingMode={sortingMode}

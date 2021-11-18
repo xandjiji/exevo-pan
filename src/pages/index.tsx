@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
 import { DrawerFieldsProvider } from 'modules/BazaarAuctions/contexts/useDrawerFields'
+import { HighlightedAuctionsProvider } from 'modules/BazaarAuctions/contexts/useHighlightedAuctions'
 import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -15,12 +16,14 @@ type HomeStaticProps = {
   serverOptions: Option[]
   auctionedItemOptions: Option[]
   initialAuctionData: PaginatedData<CharacterObject>
+  highlightedAuctions: CharacterObject[]
 }
 
 export default function Home({
   serverOptions,
   auctionedItemOptions,
   initialAuctionData,
+  highlightedAuctions,
 }: HomeStaticProps): JSX.Element {
   const { translations } = useTranslations()
 
@@ -103,7 +106,10 @@ export default function Home({
           serverOptions={serverOptions}
           auctionedItemOptions={auctionedItemOptions}
         >
-          <CurrentAuctionsGrid initialAuctionData={initialAuctionData} />
+          <CurrentAuctionsGrid
+            initialAuctionData={initialAuctionData}
+            highlightedAuctions={highlightedAuctions}
+          />
         </DrawerFieldsProvider>
       </Main>
     </div>
@@ -114,12 +120,17 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const paginationOptions = { pageIndex: 0, pageSize: 10 }
   const sortOptions = { sortingMode: 0, descendingOrder: false }
 
-  const [serverOptions, auctionedItemOptions, initialAuctionData] =
-    await Promise.all([
-      DrawerFieldsClient.fetchServerOptions(),
-      DrawerFieldsClient.fetchAuctionedItemOptions(),
-      AuctionsClient.fetchAuctionPage({ paginationOptions, sortOptions }),
-    ])
+  const [
+    serverOptions,
+    auctionedItemOptions,
+    initialAuctionData,
+    highlightedAuctions,
+  ] = await Promise.all([
+    DrawerFieldsClient.fetchServerOptions(),
+    DrawerFieldsClient.fetchAuctionedItemOptions(),
+    AuctionsClient.fetchAuctionPage({ paginationOptions, sortOptions }),
+    AuctionsClient.fetchHighlightedAuctions(),
+  ])
 
   return {
     props: {
@@ -130,6 +141,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       serverOptions,
       auctionedItemOptions,
       initialAuctionData,
+      highlightedAuctions,
     },
     revalidate: 60,
   }
