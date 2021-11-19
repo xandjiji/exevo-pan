@@ -34,7 +34,8 @@ const VirtualizedListView = ({
     return () => window.removeEventListener('resize', updateMediaQuery)
   }, [])
 
-  const childrenCount = Children.count(children)
+  const flattenChildren = useMemo(() => Children.toArray(children), [children])
+  const childrenCount = Children.count(flattenChildren)
 
   const [minIndex, setMinIndex] = useState(DEFAULT_MIN_INDEX)
   const [maxIndex, setMaxIndex] = useState(DEFAULT_MAX_INDEX)
@@ -65,11 +66,8 @@ const VirtualizedListView = ({
   }, [childrenCount])
 
   const renderedChildren = useMemo(
-    () =>
-      Array.isArray(children)
-        ? children.slice(minIndex, maxIndex + 1)
-        : children,
-    [children, minIndex, maxIndex],
+    () => flattenChildren.slice(minIndex, maxIndex + 1),
+    [flattenChildren, minIndex, maxIndex],
   )
 
   const gridRef = useRef<HTMLDivElement>(null)
