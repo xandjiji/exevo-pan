@@ -28,6 +28,7 @@ const TagButton = ({
   return (
     <NextLink href={routes.ADVERTISE}>
       <S.Wrapper
+        suppressHydrationWarning
         tabIndex={0}
         animation={hoverState}
         onMouseOver={handleHover}
@@ -42,7 +43,9 @@ const TagButton = ({
           <S.AdvertiseIcon />
         </S.IconWrapper>
 
-        <S.Text id={labelId}>{common.CharacterCard.highlightLabelText}</S.Text>
+        <S.Text suppressHydrationWarning id={labelId}>
+          {common.CharacterCard.highlightLabelText}
+        </S.Text>
       </S.Wrapper>
     </NextLink>
   )
