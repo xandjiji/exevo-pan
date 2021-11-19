@@ -61,7 +61,7 @@ const CharacterCard = ({
           src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
           alt={nickname}
           title={nickname}
-          lazy={false}
+          lazy
         />
 
         <S.HeadInfo>
