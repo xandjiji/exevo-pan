@@ -18,6 +18,15 @@ export const samplesFrom = <T>(
   return shuffledArray.slice(0, randomAmount)
 }
 
+export const buildCharacterData = (
+  characterData: PartialCharacterObject[],
+  serverData: ServerObject[],
+): CharacterObject[] =>
+  characterData.map((character) => ({
+    ...character,
+    serverData: serverData[character.serverId],
+  }))
+
 export const unminifyCharacterData = (
   initialCharacterData: MinifiedCharacterObject[],
 ): PartialCharacterObject[] =>
