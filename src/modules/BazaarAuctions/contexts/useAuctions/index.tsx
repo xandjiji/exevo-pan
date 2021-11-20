@@ -35,6 +35,7 @@ export const AuctionsProvider = ({
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: false,
+    localIndex: initialUrlState.current.currentPage - 1,
     page: initialPage,
     pageData: {
       ...initialPageData,
@@ -45,6 +46,7 @@ export const AuctionsProvider = ({
   })
 
   const {
+    localIndex,
     pageData: { pageIndex },
     sortingMode,
     descendingOrder,
@@ -87,13 +89,13 @@ export const AuctionsProvider = ({
     if (isMounted) {
       const filterChanged = !dequal(filterState, lastFilterState.current)
       fetchData(
-        filterChanged ? 0 : pageIndex,
+        filterChanged ? 0 : localIndex,
         sortingMode,
         descendingOrder,
         filterState,
       )
     }
-  }, [pageIndex, sortingMode, descendingOrder, filterState, fetchData])
+  }, [localIndex, sortingMode, descendingOrder, filterState, fetchData])
 
   /* Detecting and fetching new data if there are url parameters */
   useEffect(() => {
@@ -116,7 +118,7 @@ export const AuctionsProvider = ({
   )
 
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {
-    dispatch({ type: 'SET_PAGE_INDEX', value: newPageIndex - 1 })
+    dispatch({ type: 'SET_LOCAL_INDEX', value: newPageIndex - 1 })
   }, [])
 
   const highlightedAuctions = useMemo(() => {
