@@ -17,6 +17,7 @@ export type Action =
   | {
       type: 'STORE_DATA'
       data: PaginatedData<CharacterObject>
+      shouldDisplayHighlightedAuctions: boolean
     }
 
 export interface AuctionsContextState {
@@ -26,6 +27,7 @@ export interface AuctionsContextState {
   pageData: PageData
   sortingMode: number
   descendingOrder: boolean
+  shouldDisplayHighlightedAuctions: boolean
 }
 
 export interface AuctionsContextValues extends AuctionsContextState {

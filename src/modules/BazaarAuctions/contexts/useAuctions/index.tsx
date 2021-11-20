@@ -5,7 +5,6 @@ import {
   useRef,
   useEffect,
   useCallback,
-  useMemo,
 } from 'react'
 import { dequal } from 'dequal'
 import { urlParametersState } from 'utils'
@@ -19,7 +18,7 @@ import { AuctionsContextValues, AuctionsProviderProps } from './types'
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
 export const AuctionsProvider = ({
-  highlightedAuctions: highlightedAuctionsData,
+  highlightedAuctions,
   initialPage,
   initialPageData,
   defaultSortingMode,
@@ -43,6 +42,8 @@ export const AuctionsProvider = ({
     },
     sortingMode: initialUrlState.current.orderBy,
     descendingOrder: initialUrlState.current.descending,
+    shouldDisplayHighlightedAuctions:
+      DEFAULT_STATE.shouldDisplayHighlightedAuctions,
   })
 
   const {
@@ -61,6 +62,7 @@ export const AuctionsProvider = ({
       newSortingMode: number,
       newDescendingOrder: boolean,
       filterOptions: FilterState,
+      newFilterCount: number,
     ) => {
       dispatch({ type: 'SET_LOADING', value: true })
 
@@ -79,7 +81,18 @@ export const AuctionsProvider = ({
         sortOptions,
         filterOptions,
       })
-      dispatch({ type: 'STORE_DATA', data })
+
+      const isDefaultGridState =
+        newPageIndex === 0 &&
+        newSortingMode === defaultSortingMode &&
+        newDescendingOrder === defaultDescendingOrder
+      const noFilterApplied = newFilterCount === 0
+
+      dispatch({
+        type: 'STORE_DATA',
+        data,
+        shouldDisplayHighlightedAuctions: isDefaultGridState && noFilterApplied,
+      })
     },
     [],
   )
@@ -93,16 +106,30 @@ export const AuctionsProvider = ({
         sortingMode,
         descendingOrder,
         filterState,
+        activeFilterCount,
       )
     }
-  }, [localIndex, sortingMode, descendingOrder, filterState, fetchData])
+  }, [
+    localIndex,
+    sortingMode,
+    descendingOrder,
+    filterState,
+    activeFilterCount,
+    fetchData,
+  ])
 
   /* Detecting and fetching new data if there are url parameters */
   useEffect(() => {
     if (!isMounted) {
       if (!isCurrentlyDefaultValues() || activeFilterCount > 0) {
         const { currentPage, orderBy, descending } = initialUrlState.current
-        fetchData(currentPage - 1, orderBy, descending, filterState)
+        fetchData(
+          currentPage - 1,
+          orderBy,
+          descending,
+          filterState,
+          activeFilterCount,
+        )
       }
     }
   }, [])
@@ -120,25 +147,6 @@ export const AuctionsProvider = ({
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {
     dispatch({ type: 'SET_LOCAL_INDEX', value: newPageIndex - 1 })
   }, [])
-
-  const highlightedAuctions = useMemo(() => {
-    const isDefaultGridState =
-      pageIndex === 0 &&
-      sortingMode === defaultSortingMode &&
-      descendingOrder === defaultDescendingOrder
-    const noFilterApplied = activeFilterCount === 0
-
-    const shouldDisplayHighlightedAuctions =
-      isDefaultGridState && noFilterApplied
-
-    return shouldDisplayHighlightedAuctions ? highlightedAuctionsData : []
-  }, [
-    highlightedAuctionsData,
-    pageIndex,
-    sortingMode,
-    descendingOrder,
-    activeFilterCount,
-  ])
 
   return (
     <AuctionsContext.Provider

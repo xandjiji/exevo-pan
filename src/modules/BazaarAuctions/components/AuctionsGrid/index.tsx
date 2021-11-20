@@ -14,8 +14,13 @@ const AuctionsGrid = (): JSX.Element => {
     translations: { homepage },
   } = useTranslations()
 
-  const { page, pageData, handlePaginatorFetch, highlightedAuctions } =
-    useAuctions()
+  const {
+    page,
+    pageData,
+    handlePaginatorFetch,
+    highlightedAuctions,
+    shouldDisplayHighlightedAuctions,
+  } = useAuctions()
   const { activeFilterCount } = useFilters()
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
@@ -80,13 +85,14 @@ const AuctionsGrid = (): JSX.Element => {
         estimatedHeight={504}
         overScan={1}
       >
-        {highlightedAuctions.map((auction) => (
-          <CharacterCard
-            key={`${auction.id}-highlighted`}
-            characterData={auction}
-            highlighted
-          />
-        ))}
+        {shouldDisplayHighlightedAuctions &&
+          highlightedAuctions.map((auction) => (
+            <CharacterCard
+              key={`${auction.id}-highlighted`}
+              characterData={auction}
+              highlighted
+            />
+          ))}
         {page.map((auction) => (
           <CharacterCard key={auction.id} characterData={auction} />
         ))}

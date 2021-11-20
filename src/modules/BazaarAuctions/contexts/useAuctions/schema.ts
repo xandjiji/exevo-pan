@@ -15,6 +15,7 @@ export const DEFAULT_STATE: AuctionsContextValues = {
   },
   sortingMode: 0,
   descendingOrder: false,
+  shouldDisplayHighlightedAuctions: true,
   handlePaginatorFetch: async () => {},
   dispatch: () => {},
 }

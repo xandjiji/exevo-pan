@@ -29,6 +29,8 @@ const AuctionsReducer = (
 
     case 'STORE_DATA': {
       const { page, sortingMode, descendingOrder, ...pageData } = action.data
+      const { shouldDisplayHighlightedAuctions } = action
+
       return {
         ...state,
         localIndex: pageData.pageIndex,
@@ -37,6 +39,7 @@ const AuctionsReducer = (
         sortingMode,
         descendingOrder,
         loading: false,
+        shouldDisplayHighlightedAuctions,
       }
     }
 
