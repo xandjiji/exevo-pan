@@ -6,7 +6,7 @@ import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { endpoints, paths, routes } from 'Constants'
+import { endpoints, routes } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
@@ -29,8 +29,7 @@ export default function Home({
   return (
     <div>
       <Head>
-        <link rel="preconnect" href={endpoints.BASE_DATA} />
-        <link rel="preconnect" href={endpoints.HIGHLIGHTED_DATA} />
+        <link rel="preconnect" href={endpoints.CURRENT_AUCTIONS} />
         <title>{translations.homepage.Meta.title}</title>
         <meta name="title" content={translations.homepage.Meta.title} />
         <meta
@@ -73,31 +72,6 @@ export default function Home({
           href={buildUrl(routes.HOME, 'es')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
-
-        <link
-          rel="preload"
-          href={`${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={`${endpoints.BASE_DATA}${paths.SERVER_DATA}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={`${endpoints.BASE_DATA}${paths.ITEMS_DATA}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={`${endpoints.HIGHLIGHTED_DATA}${paths.HIGHLIGHTED_AUCTIONS}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
       </Head>
 
       <Main>
