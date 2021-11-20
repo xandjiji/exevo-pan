@@ -71,11 +71,7 @@ const CharacterCard = ({
           <Subtitle level={level} vocation={vocationId} />
         </S.HeadInfo>
 
-        {highlighted ? (
-          <TagButton />
-        ) : (
-          <S.FavButton characterObject={characterData} />
-        )}
+        {highlighted && <TagButton />}
       </S.Head>
 
       <S.InfoGrid>
