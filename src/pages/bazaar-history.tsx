@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
+import { DrawerFieldsProvider } from 'modules/BazaarAuctions/contexts/useDrawerFields'
+import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -9,7 +11,17 @@ import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
 
-export default function BazaarHistory(): JSX.Element {
+type HistoryStaticProps = {
+  serverOptions: Option[]
+  auctionedItemOptions: Option[]
+  initialAuctionData: PaginatedData<CharacterObject>
+}
+
+export default function BazaarHistory({
+  serverOptions,
+  auctionedItemOptions,
+  initialAuctionData,
+}: HistoryStaticProps): JSX.Element {
   const { translations } = useTranslations()
 
   return (
@@ -64,18 +76,39 @@ export default function BazaarHistory(): JSX.Element {
       </Head>
 
       <Main>
-        <BazaarHistoryGrid />
+        <DrawerFieldsProvider
+          serverOptions={serverOptions}
+          auctionedItemOptions={auctionedItemOptions}
+        >
+          <BazaarHistoryGrid initialAuctionData={initialAuctionData} />
+        </DrawerFieldsProvider>
       </Main>
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    translations: {
-      common: common[locale as RegisteredLocale],
-      homepage: homepage[locale as RegisteredLocale],
-      bazaarHistory: bazaarHistory[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const paginationOptions = { pageIndex: 0, pageSize: 10 }
+  const sortOptions = { sortingMode: 0, descendingOrder: true }
+
+  const [serverOptions, auctionedItemOptions, initialAuctionData] =
+    await Promise.all([
+      DrawerFieldsClient.fetchServerOptions(),
+      DrawerFieldsClient.fetchAuctionedItemOptions(),
+      AuctionsClient.fetchAuctionPage({ paginationOptions, sortOptions }),
+    ])
+
+  return {
+    props: {
+      translations: {
+        common: common[locale as RegisteredLocale],
+        homepage: homepage[locale as RegisteredLocale],
+        bazaarHistory: bazaarHistory[locale as RegisteredLocale],
+      },
+      serverOptions,
+      auctionedItemOptions,
+      initialAuctionData,
     },
-  },
-})
+    revalidate: 3600,
+  }
+}

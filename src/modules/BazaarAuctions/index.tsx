@@ -1,9 +1,7 @@
-import { useCharacters } from 'contexts/useDatabase'
 import { AuctionsProvider } from './contexts/useAuctions'
 import { FiltersProvider } from './contexts/useFilters'
 import AuctionsGrid from './components/AuctionsGrid'
-import CharacterGrid from './components/CharacterGrid'
-import { CurrentAuctionsProps } from './types'
+import { CurrentAuctionsProps, BazaarHistoryProps } from './types'
 
 export const CurrentAuctions = ({
   initialAuctionData,
@@ -26,14 +24,22 @@ export const CurrentAuctions = ({
   )
 }
 
-export const BazaarHistory = (): JSX.Element => {
-  const { historyData, loading } = useCharacters()
+export const BazaarHistory = ({
+  initialAuctionData,
+}: BazaarHistoryProps): JSX.Element => {
+  const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
 
   return (
-    <CharacterGrid
-      characterList={historyData}
-      defaultDescendingOrder
-      isLoading={loading}
-    />
+    <FiltersProvider>
+      <AuctionsProvider
+        highlightedAuctions={[]}
+        initialPage={page}
+        initialPageData={pageData}
+        defaultSortingMode={sortingMode}
+        defaultDescendingOrder={descendingOrder}
+      >
+        <AuctionsGrid />
+      </AuctionsProvider>
+    </FiltersProvider>
   )
 }
