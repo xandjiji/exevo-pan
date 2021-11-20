@@ -70,7 +70,8 @@ export default class ManageDataClient {
   static async fetchItemData(): Promise<RareItemData> {
     try {
       const response = await fetch(this.rareItemDataUrl)
-      const data = (await response.json()) as RareItemData
+      let data = (await response.json()) as RareItemData
+      data = { ...data, 'Menacing Egg': [] }
       const rareItemData = filterItemData(data)
 
       saveToLocalStorage(localStorageKeys.RARE_ITEM_DATA, rareItemData)
