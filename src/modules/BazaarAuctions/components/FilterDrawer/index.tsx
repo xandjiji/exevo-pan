@@ -380,20 +380,6 @@ const FilterDrawer = ({
 
         <FilterGroup label={homepage.FilterDrawer.miscLabel}>
           <S.ChipWrapper>
-            <Tooltip content={homepage.FilterDrawer.favTooltip}>
-              <Chip
-                overrideStatus={filterState.fav}
-                onClick={() => updateFilters('fav', !filterState.fav)}
-              >
-                {homepage.FilterDrawer.favoritedButton}
-                <S.Emoji
-                  role="img"
-                  aria-label={homepage.FilterDrawer.heartEmoji}
-                >
-                  ❤️
-                </S.Emoji>
-              </Chip>
-            </Tooltip>
             <Tooltip
               style={{ width: 280 }}
               content={homepage.FilterDrawer.rareNicknamesTooltip}

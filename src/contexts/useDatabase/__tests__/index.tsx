@@ -7,10 +7,6 @@ import { routes } from 'Constants'
 import { DatabaseProvider, useDatabase } from '../index'
 import { mockStatisticsData, mockedGuildData } from './mock'
 
-jest.mock('utils/localStorage', () => ({
-  getFavArray: jest.fn(),
-}))
-
 const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
 
 const ComponentWrapper = ({

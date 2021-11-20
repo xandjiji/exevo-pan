@@ -88,10 +88,6 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
-    key: 'fav',
-    defaultValue: false,
-  },
-  {
     key: 'rareNick',
     defaultValue: false,
   },

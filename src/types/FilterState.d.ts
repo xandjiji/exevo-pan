@@ -16,7 +16,6 @@ declare interface FilterState {
   skillKey: Set<ImbuementOptions>
   imbuementsSet: Set<string>
   itemSet: Set<string>
-  fav: boolean
   rareNick: boolean
   soulwarFilter: boolean
 }

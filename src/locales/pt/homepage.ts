@@ -44,7 +44,6 @@ export default {
     rareItemsPlaceholder: 'Escolha um item',
     allItemsButton: 'Todos os items',
     miscLabel: 'Diversos',
-    heartEmoji: 'coração',
     rareNicknamesTooltip:
       "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",
     rareNicknamesButton: 'Nicknames raros',
