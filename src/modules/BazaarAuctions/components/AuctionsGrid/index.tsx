@@ -9,7 +9,7 @@ import VirtualizedListView from './VirtualizedListView'
 import EmptyState from './EmptyState'
 import * as S from './styles'
 
-const CharacterGrid = (): JSX.Element => {
+const AuctionsGrid = (): JSX.Element => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -98,4 +98,4 @@ const CharacterGrid = (): JSX.Element => {
   )
 }
 
-export default CharacterGrid
+export default AuctionsGrid
