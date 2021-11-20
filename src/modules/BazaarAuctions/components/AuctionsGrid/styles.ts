@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import { Paginator as BasePaginator } from 'components/Atoms'
-import { CardSkeleton as BaseCardSkeleton } from 'components/CharacterCard'
 import FilterIconSvg from 'assets/svgs/filter.svg'
 import { InnerContainer, Shadow, Clickable, Smooth } from 'styles'
 
@@ -71,12 +70,4 @@ export const FilterButton = styled.button`
 
 export const Paginator = styled(BasePaginator)`
   margin-left: auto;
-`
-
-export const CardSkeleton = styled(BaseCardSkeleton)`
-  @media (max-width: 767px) {
-    &:nth-child(n + 3) {
-      display: none;
-    }
-  }
 `
