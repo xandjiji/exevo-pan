@@ -28,7 +28,7 @@ const AuctionsGrid = (): JSX.Element => {
         <S.FilterButton
           tabIndex={0}
           role="button"
-          aria-label={homepage.CharacterGrid.filterButtonLabel}
+          aria-label={homepage.AuctionsGrid.filterButtonLabel}
           onClick={() => setDrawerOpen(true)}
           suppressHydrationWarning
         >
@@ -38,13 +38,13 @@ const AuctionsGrid = (): JSX.Element => {
               role="status"
               aria-label={`${activeFilterCount} ${
                 activeFilterCount === 1
-                  ? homepage.CharacterGrid.filter
-                  : homepage.CharacterGrid.filters
+                  ? homepage.AuctionsGrid.filter
+                  : homepage.AuctionsGrid.filters
               } ${
                 activeFilterCount === 1
-                  ? homepage.CharacterGrid.is
-                  : homepage.CharacterGrid.are
-              } ${homepage.CharacterGrid.active}`}
+                  ? homepage.AuctionsGrid.is
+                  : homepage.AuctionsGrid.are
+              } ${homepage.AuctionsGrid.active}`}
               aria-hidden={activeFilterCount === 0}
             >
               {activeFilterCount}
@@ -61,7 +61,7 @@ const AuctionsGrid = (): JSX.Element => {
             totalItems={pageData.totalItems}
             currentPage={pageData.pageIndex + 1}
             onChange={handlePaginatorFetch}
-            noItemsMessage={homepage.CharacterGrid.noItemsPagination}
+            noItemsMessage={homepage.AuctionsGrid.noItemsPagination}
           />
         )}
       </S.Head>
@@ -69,7 +69,7 @@ const AuctionsGrid = (): JSX.Element => {
       {process.browser && (
         <FilterDrawer
           id="filter-drawer"
-          aria-label={homepage.CharacterGrid.filterDrawerLabel}
+          aria-label={homepage.AuctionsGrid.filterDrawerLabel}
           open={drawerOpen}
           onClose={closeDrawer}
         />

@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset } from 'utils/test'
-import CharacterGrid from '..'
+import AuctionsGrid from '..'
 
 /*
     We are using 'await waitFor(() => {})' at the end
@@ -18,7 +18,7 @@ window.HTMLElement.prototype.scrollTo = mockScrollTo
 
 jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 
-describe('<CharacterGrid />', () => {
+describe('<AuctionsGrid />', () => {
   beforeEach(() => {
     mockScrollTo.mockClear()
     process.browser = true
@@ -26,13 +26,13 @@ describe('<CharacterGrid />', () => {
 
   test('should scroll grid to top on interactions', async () => {
     const { rerender } = renderWithProviders(
-      <CharacterGrid characterList={characterData} isLoading={false} />,
+      <AuctionsGrid characterList={characterData} isLoading={false} />,
     )
 
     expect(mockScrollTo).toHaveBeenCalledTimes(1)
 
     rerender(
-      <CharacterGrid
+      <AuctionsGrid
         characterList={characterData.slice(0, 100)}
         isLoading={false}
       />,
@@ -52,14 +52,14 @@ describe('<CharacterGrid />', () => {
 
   test('should reset paging on character list length change)', async () => {
     const { rerender } = renderWithProviders(
-      <CharacterGrid characterList={characterData} isLoading={false} />,
+      <AuctionsGrid characterList={characterData} isLoading={false} />,
     )
 
     userEvent.click(screen.getByLabelText('Go to last page'))
     expect(screen.getByText('9991 - 10000 of 10000')).toBeInTheDocument()
 
     rerender(
-      <CharacterGrid
+      <AuctionsGrid
         characterList={characterData.slice(0, 100)}
         isLoading={false}
       />,
@@ -84,7 +84,7 @@ describe('<CharacterGrid />', () => {
 
   test('should change default sort/order mode by props', async () => {
     const { rerender } = renderWithProviders(
-      <CharacterGrid characterList={characterData} isLoading={false} />,
+      <AuctionsGrid characterList={characterData} isLoading={false} />,
     )
 
     userEvent.click(screen.getByLabelText('Set the sorting order and criteria'))
@@ -96,7 +96,7 @@ describe('<CharacterGrid />', () => {
     expect(screen.getByText('1 - 10 of 10000')).toBeInTheDocument()
 
     rerender(
-      <CharacterGrid
+      <AuctionsGrid
         characterList={characterData}
         isLoading={false}
         defaultDescendingOrder
@@ -116,13 +116,13 @@ describe('<CharacterGrid />', () => {
 
   test('should display skeletons while loading', async () => {
     const { rerender } = renderWithProviders(
-      <CharacterGrid characterList={[]} isLoading />,
+      <AuctionsGrid characterList={[]} isLoading />,
     )
 
     expect(screen.queryAllByText('Bid status').length > 1).toBeTruthy()
 
-    rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
-    rerender(<CharacterGrid characterList={characterData} isLoading={false} />)
+    rerender(<AuctionsGrid characterList={characterData} isLoading={false} />)
+    rerender(<AuctionsGrid characterList={characterData} isLoading={false} />)
 
     expect(screen.queryByText('Bid status')).not.toBeInTheDocument()
 
@@ -131,10 +131,10 @@ describe('<CharacterGrid />', () => {
 
   test('should display empty state if there are no characters', async () => {
     const { rerender } = renderWithProviders(
-      <CharacterGrid characterList={characterData} isLoading={false} />,
+      <AuctionsGrid characterList={characterData} isLoading={false} />,
     )
 
-    rerender(<CharacterGrid characterList={[]} isLoading={false} />)
+    rerender(<AuctionsGrid characterList={[]} isLoading={false} />)
 
     expect(screen.getByText('Sorry, no auction was found')).toBeInTheDocument()
 
@@ -148,7 +148,7 @@ describe('<CharacterGrid />', () => {
 
   test('should display highlighted characters', async () => {
     const gridComponent = (
-      <CharacterGrid
+      <AuctionsGrid
         characterList={characterData}
         highlightedList={[
           { ...characterData[0], nickname: 'HIGHLIGHTED CHARACTER' },

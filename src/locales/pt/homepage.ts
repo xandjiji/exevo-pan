@@ -3,7 +3,7 @@ export default {
     title: 'Exevo Pan - Leilões',
     description: 'Filtre e explore chares de Tibia no Char Bazaar oficial!',
   },
-  CharacterGrid: {
+  AuctionsGrid: {
     filterButtonLabel: 'Abrir menu de filtros',
     sortingButtonLabel: 'Defina um critério de ordenação',
     filter: 'filtro',

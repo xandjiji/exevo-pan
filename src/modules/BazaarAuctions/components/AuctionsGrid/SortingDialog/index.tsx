@@ -29,9 +29,9 @@ const SortingDialog = (): JSX.Element => {
           <Switch
             active={descendingOrder}
             onClick={() => dispatch({ type: 'TOGGLE_DESCENDING_ORDER' })}
-            aria-label={homepage.CharacterGrid.descendingSwitchLabel}
+            aria-label={homepage.AuctionsGrid.descendingSwitchLabel}
           >
-            {homepage.CharacterGrid.descending}
+            {homepage.AuctionsGrid.descending}
           </Switch>
           {sortModes.map((mode, index) => (
             <RadioButton
@@ -41,14 +41,14 @@ const SortingDialog = (): JSX.Element => {
               }
               active={sortingMode === index}
             >
-              {homepage.CharacterGrid.sortModes[sortModesTranslationKey[mode]]}
+              {homepage.AuctionsGrid.sortModes[sortModesTranslationKey[mode]]}
             </RadioButton>
           ))}
         </S.Dialog>
       }
     >
       <S.SortIcon
-        aria-label={homepage.CharacterGrid.sortingButtonLabel}
+        aria-label={homepage.AuctionsGrid.sortingButtonLabel}
         aria-haspopup="dialog"
       />
     </Tooltip>

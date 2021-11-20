@@ -13,13 +13,13 @@ const EmptyState = ({
 
   return (
     <S.Wrapper {...props}>
-      <S.Text>{homepage.CharacterGrid.noAuctionFound}</S.Text>
+      <S.Text>{homepage.AuctionsGrid.noAuctionFound}</S.Text>
 
       <S.NotFoundWrapper>
-        <S.NotFound alt={homepage.CharacterGrid.notFoundAlt} />
+        <S.NotFound alt={homepage.AuctionsGrid.notFoundAlt} />
       </S.NotFoundWrapper>
       <Button type="button" onClick={buttonAction}>
-        {homepage.CharacterGrid.changeFilters}
+        {homepage.AuctionsGrid.changeFilters}
       </Button>
     </S.Wrapper>
   )

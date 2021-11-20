@@ -4,7 +4,7 @@ export default {
     description:
       '¡Filtra y explora los caracteres de Tibia en el Char Bazaar oficial!',
   },
-  CharacterGrid: {
+  AuctionsGrid: {
     filterButtonLabel: 'Abrir menú de filtros',
     sortingButtonLabel: 'Definir un criterio de clasificación',
     filter: 'filtro',

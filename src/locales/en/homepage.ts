@@ -4,7 +4,7 @@ export default {
     description:
       'Filter and search for Tibia characters on the official Char Bazaar!',
   },
-  CharacterGrid: {
+  AuctionsGrid: {
     filterButtonLabel: 'Open filter drawer',
     sortingButtonLabel: 'Set the sorting order and criteria',
     filter: 'filter',
