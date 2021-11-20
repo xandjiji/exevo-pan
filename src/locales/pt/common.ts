@@ -109,12 +109,6 @@ export default {
     experimentalServer: 'Este é um servidor experimental!',
     transferAvailable: 'Transferência comum de servidor disponível',
     transferUnavailable: 'Transferência comum de servidor NÃO disponível',
-    favButton: {
-      remove: 'Remover',
-      add: 'Adicionar',
-      fromFav: 'dos favoritos',
-      toFav: 'aos favoritos',
-    },
     imbuementsListLabel: 'Lista de imbuements',
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',

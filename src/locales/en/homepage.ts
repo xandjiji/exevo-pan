@@ -45,8 +45,6 @@ export default {
     rareItemsPlaceholder: 'Choose an item',
     allItemsButton: 'All items',
     miscLabel: 'Misc',
-    favTooltip: 'Save your favorite auctions pressing the ❤️ button!',
-    favoritedButton: 'Favorited',
     heartEmoji: 'heart',
     rareNicknamesTooltip:
       "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",
