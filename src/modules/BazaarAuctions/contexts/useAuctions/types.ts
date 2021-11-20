@@ -4,7 +4,7 @@ export type Action =
       value: boolean
     }
   | {
-      type: 'SET_LOCAL_INDEX'
+      type: 'SET_PAGE_INDEX'
       value: number
     }
   | {
@@ -22,7 +22,6 @@ export type Action =
 
 export interface AuctionsContextState {
   loading: boolean
-  localIndex: number
   page: CharacterObject[]
   pageData: PageData
   sortingMode: number

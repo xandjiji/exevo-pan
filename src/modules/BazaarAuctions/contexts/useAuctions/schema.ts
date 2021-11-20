@@ -2,7 +2,6 @@ import { AuctionsContextValues } from './types'
 
 export const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
-  localIndex: 0,
   highlightedAuctions: [],
   page: [],
   pageData: {

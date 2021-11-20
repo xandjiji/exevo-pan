@@ -8,17 +8,17 @@ const AuctionsReducer = (
     case 'SET_LOADING':
       return { ...state, loading: action.value }
 
-    case 'SET_LOCAL_INDEX':
+    case 'SET_PAGE_INDEX':
       return {
         ...state,
-        localIndex: action.value,
+        pageData: { ...state.pageData, pageIndex: action.value },
       }
 
     case 'SET_SORTING_MODE':
       return {
         ...state,
         sortingMode: action.value,
-        localIndex: 0,
+        pageData: { ...state.pageData, pageIndex: 0 },
       }
 
     case 'TOGGLE_DESCENDING_ORDER':
@@ -33,7 +33,6 @@ const AuctionsReducer = (
 
       return {
         ...state,
-        localIndex: pageData.pageIndex,
         page,
         pageData,
         sortingMode,
