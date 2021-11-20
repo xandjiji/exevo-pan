@@ -18,12 +18,3 @@ export function getFromLocalStorage<T>(key: string, fallbackObject: T): T {
 
   return fallbackObject
 }
-
-export const getFavArray = (): CharacterObject[] => {
-  const favArray: CharacterObject[] = getFromLocalStorage(
-    localStorageKeys.FAV_CHARACTER_DATA,
-    [],
-  )
-
-  return favArray
-}
