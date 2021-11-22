@@ -31,6 +31,9 @@ export default async (
     return
   }
 
+  console.log('email was sent')
+  console.log(body)
+
   const dictionary = advertise[body.locale as keyof typeof advertise]
 
   const uuid = uuidv4()
