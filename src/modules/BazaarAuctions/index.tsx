@@ -2,6 +2,7 @@ import { endpoints } from 'Constants'
 import { AuctionsProvider } from './contexts/useAuctions'
 import { FiltersProvider } from './contexts/useFilters'
 import AuctionsGrid from './components/AuctionsGrid'
+import LoadingState from './components/LoadingState'
 import { CurrentAuctionsProps, BazaarHistoryProps } from './types'
 
 export const CurrentAuctions = ({
@@ -41,7 +42,9 @@ export const BazaarHistory = ({
         defaultSortingMode={sortingMode}
         defaultDescendingOrder={descendingOrder}
       >
-        <AuctionsGrid />
+        <LoadingState>
+          <AuctionsGrid />
+        </LoadingState>
       </AuctionsProvider>
     </FiltersProvider>
   )
