@@ -1,3 +1,4 @@
+import { endpoints } from 'Constants'
 import {
   PaginationOptions,
   SortOptions,
@@ -30,4 +31,12 @@ export const serializeBody = (
   }
 
   return JSON.stringify({ paginationOptions, sortOptions })
+}
+
+export const buildHeaders = (endpoint: string): Headers => {
+  const headers = new Headers()
+  if (endpoint === endpoints.HISTORY_AUCTIONS) {
+    headers.set('Content-Type', 'application/json')
+  }
+  return headers
 }

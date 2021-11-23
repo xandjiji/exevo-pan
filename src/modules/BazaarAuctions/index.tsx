@@ -1,3 +1,4 @@
+import { endpoints } from 'Constants'
 import { AuctionsProvider } from './contexts/useAuctions'
 import { FiltersProvider } from './contexts/useFilters'
 import AuctionsGrid from './components/AuctionsGrid'
@@ -12,6 +13,7 @@ export const CurrentAuctions = ({
   return (
     <FiltersProvider>
       <AuctionsProvider
+        endpoint={endpoints.CURRENT_AUCTIONS}
         highlightedAuctions={highlightedAuctions}
         initialPage={page}
         initialPageData={pageData}
@@ -32,6 +34,7 @@ export const BazaarHistory = ({
   return (
     <FiltersProvider>
       <AuctionsProvider
+        endpoint={endpoints.HISTORY_AUCTIONS}
         highlightedAuctions={[]}
         initialPage={page}
         initialPageData={pageData}

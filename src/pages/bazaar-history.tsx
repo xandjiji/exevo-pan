@@ -6,7 +6,7 @@ import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes } from 'Constants'
+import { routes, endpoints } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -27,6 +27,7 @@ export default function BazaarHistory({
   return (
     <div>
       <Head>
+        <link rel="preconnect" href={endpoints.HISTORY_AUCTIONS} />
         <title>{translations.bazaarHistory.Meta.title}</title>
         <meta name="title" content={translations.bazaarHistory.Meta.title} />
         <meta
@@ -94,7 +95,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     await Promise.all([
       DrawerFieldsClient.fetchServerOptions(),
       DrawerFieldsClient.fetchAuctionedItemOptions(),
-      AuctionsClient.fetchAuctionPage({ paginationOptions, sortOptions }),
+      AuctionsClient.fetchAuctionPage({
+        paginationOptions,
+        sortOptions,
+        endpoint: endpoints.HISTORY_AUCTIONS,
+      }),
     ])
 
   return {

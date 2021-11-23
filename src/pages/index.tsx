@@ -101,7 +101,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   ] = await Promise.all([
     DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
-    AuctionsClient.fetchAuctionPage({ paginationOptions, sortOptions }),
+    AuctionsClient.fetchAuctionPage({
+      paginationOptions,
+      sortOptions,
+      endpoint: endpoints.CURRENT_AUCTIONS,
+    }),
     AuctionsClient.fetchHighlightedAuctions(),
   ])
 

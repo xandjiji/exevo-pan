@@ -18,6 +18,7 @@ import { AuctionsContextValues, AuctionsProviderProps } from './types'
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
 export const AuctionsProvider = ({
+  endpoint,
   highlightedAuctions,
   initialPage,
   initialPageData,
@@ -78,6 +79,7 @@ export const AuctionsProvider = ({
         paginationOptions,
         sortOptions,
         filterOptions,
+        endpoint,
       })
 
       const isDefaultGridState =
@@ -92,7 +94,7 @@ export const AuctionsProvider = ({
         shouldDisplayHighlightedAuctions: isDefaultGridState && noFilterApplied,
       })
     },
-    [],
+    [endpoint],
   )
 
   const isMounted = useIsMounted()

@@ -32,6 +32,7 @@ export interface SerializedFilterOptions extends FilterOptionsPrimitives {
 export interface FetchAuctionPageParameters {
   paginationOptions: PaginationOptions
   sortOptions: SortOptions
+  endpoint: string
   filterOptions?: FilterState
 }
 

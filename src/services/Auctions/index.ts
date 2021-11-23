@@ -1,5 +1,5 @@
 import { endpoints, paths } from 'Constants'
-import { serializeBody } from './utils'
+import { serializeBody, buildHeaders } from './utils'
 import { FetchAuctionPageParameters, CacheObject } from './types'
 
 const CACHE_MAX_AGE = 180000
@@ -19,8 +19,6 @@ const EMPTY_RESPONSE: PaginatedData<CharacterObject> = {
 export default class AuctionsClient {
   static cache: CacheObject = {}
 
-  static currentAuctionsUrl = endpoints.CURRENT_AUCTIONS
-
   static highlightedAuctionsUrl = `${endpoints.BASE_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
 
   static getCache(key: string): PaginatedData<CharacterObject> | undefined {
@@ -36,6 +34,7 @@ export default class AuctionsClient {
     paginationOptions,
     sortOptions,
     filterOptions,
+    endpoint,
   }: FetchAuctionPageParameters): Promise<PaginatedData<CharacterObject>> {
     const bodyPayload = serializeBody(
       paginationOptions,
@@ -47,8 +46,9 @@ export default class AuctionsClient {
     if (cachedResult) return cachedResult
 
     try {
-      const response = await fetch(this.currentAuctionsUrl, {
+      const response = await fetch(endpoint, {
         method: 'POST',
+        headers: buildHeaders(endpoint),
         body: bodyPayload,
       })
 
