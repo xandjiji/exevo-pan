@@ -9,6 +9,8 @@ import VirtualizedListView from './VirtualizedListView'
 import EmptyState from './EmptyState'
 import * as S from './styles'
 
+const PAGE_SIZE = 10
+
 const AuctionsGrid = (): JSX.Element => {
   const {
     translations: { homepage },
@@ -62,7 +64,7 @@ const AuctionsGrid = (): JSX.Element => {
         {process.browser && (
           <S.Paginator
             aria-controls="character-grid"
-            pageSize={10}
+            pageSize={PAGE_SIZE}
             totalItems={pageData.totalItems}
             currentPage={pageData.pageIndex + 1}
             onChange={handlePaginatorFetch}
