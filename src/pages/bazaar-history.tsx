@@ -88,7 +88,6 @@ export default function BazaarHistory({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const paginationOptions = { pageIndex: 0, pageSize: 10 }
   const sortOptions = { sortingMode: 0, descendingOrder: true }
 
   const [serverOptions, auctionedItemOptions, initialAuctionData] =
@@ -96,7 +95,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       DrawerFieldsClient.fetchServerOptions(),
       DrawerFieldsClient.fetchAuctionedItemOptions(),
       AuctionsClient.fetchAuctionPage({
-        paginationOptions,
         sortOptions,
         endpoint: endpoints.HISTORY_AUCTIONS,
       }),
