@@ -9,6 +9,7 @@ export const Head = styled.div`
   position: relative;
   z-index: 10;
   width: 100%;
+  height: 70px;
   padding-top: 8px;
   padding-bottom: 8px;
 
