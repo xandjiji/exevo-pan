@@ -1,6 +1,6 @@
 export const endpoints = {
   CURRENT_AUCTIONS: 'https://worker-exevopan.exevopan.workers.dev',
-  HISTORY_AUCTIONS: 'http://history.exevopan.com',
+  HISTORY_AUCTIONS: 'https://history.exevopan.com',
   BASE_DATA: 'https://exevopan-data.netlify.app',
   BASE_HISTORY_DATA: 'https://exevopan-history-data.netlify.app',
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
