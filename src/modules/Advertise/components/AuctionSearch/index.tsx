@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
-/* import { useState, useCallback, useMemo, useRef } from 'react' */
 import { useAuctions } from '../../contexts/useAuctions'
 import { useForm } from '../../contexts/Form'
+import useDebouncedNickname from './useDebouncedNickname'
 import AuctionItem from './AuctionItem'
 import EmptyState from './EmptyState'
 import * as S from './styles'
@@ -16,6 +16,8 @@ const AuctionSearch = (): JSX.Element => {
   const { page, pageData, handlePaginatorFetch } = useAuctions()
   const { dispatch } = useForm()
 
+  const [nickname, setNickname] = useDebouncedNickname()
+
   return (
     <S.Wrapper>
       <S.SearchHeader>
@@ -28,8 +30,8 @@ const AuctionSearch = (): JSX.Element => {
             placeholder={advertise.AuctionSearch.placeholder}
             aria-label={advertise.AuctionSearch.inputAriaLabel}
             allowClear
-            /* value={nickname}
-            onChange={onInputChange} */
+            value={nickname}
+            onChange={(event) => setNickname(event.target.value)}
           />
         </S.InputWrapper>
         <S.Paginator
