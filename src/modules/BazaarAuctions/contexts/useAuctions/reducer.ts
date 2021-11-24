@@ -6,7 +6,7 @@ const AuctionsReducer = (
 ): AuctionsContextState => {
   switch (action.type) {
     case 'SET_LOADING':
-      return { ...state, loading: action.value }
+      return { ...state, loading: true }
 
     case 'SET_PAGE_INDEX':
       return {
