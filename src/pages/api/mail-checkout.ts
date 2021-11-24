@@ -6,13 +6,14 @@ import { EmailTemplate } from 'modules/Advertise/components'
 import { NotifyAdminClient } from 'services'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { advertise } from 'locales'
+import { email } from 'Constants'
 
 const mailCredentials = {
-  service: 'gmail',
   port: 465,
-  host: 'smtp.gmail.com',
+  host: 'smtp.sendgrid.net',
+  secure: true,
   auth: {
-    user: process.env.MAILER_EMAIL_ADDRESS,
+    user: 'apikey',
     pass: process.env.MAILER_EMAIL_PASSWORD,
   },
 }
@@ -40,15 +41,22 @@ export default async (
 
   const html = await EmailTemplate({ ...body, uuid })
 
-  const mailOptions = {
-    from: `Exevo Pan <${mailCredentials.auth.user}>`,
+  const customerEmail = {
+    from: `Exevo Pan <${email.EXEVOPAN_EMAIL}>`,
     to: body.email,
     subject: dictionary.EmailTitle,
     html,
   }
 
+  const myEmail = {
+    ...customerEmail,
+    to: email.MY_EMAIL,
+    subject: body.selectedCharacter.nickname,
+  }
+
   await Promise.all([
-    mailer.sendMail(mailOptions),
+    mailer.sendMail(customerEmail),
+    mailer.sendMail(myEmail),
     NotifyAdminClient.notifyPurchase(),
   ])
 
