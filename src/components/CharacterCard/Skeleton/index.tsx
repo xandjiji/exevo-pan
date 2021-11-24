@@ -18,11 +18,6 @@ const CardSkeleton = ({
           <Skeletons.Text style={{ width: '50%' }} />
           <Skeletons.Text style={{ width: '75%', height: 8 }} />
         </S.HeadInfo>
-
-        <S.FavButton
-          style={{ pointerEvents: 'none' }}
-          characterObject={{} as CharacterObject}
-        />
       </S.Head>
 
       <S.InfoGrid>

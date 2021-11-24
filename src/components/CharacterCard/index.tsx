@@ -61,7 +61,7 @@ const CharacterCard = ({
           src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
           alt={nickname}
           title={nickname}
-          lazy={false}
+          lazy
         />
 
         <S.HeadInfo>
@@ -71,11 +71,7 @@ const CharacterCard = ({
           <Subtitle level={level} vocation={vocationId} />
         </S.HeadInfo>
 
-        {highlighted ? (
-          <TagButton />
-        ) : (
-          <S.FavButton characterObject={characterData} />
-        )}
+        {highlighted && <TagButton />}
       </S.Head>
 
       <S.InfoGrid>

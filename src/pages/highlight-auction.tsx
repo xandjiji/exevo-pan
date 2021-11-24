@@ -1,21 +1,31 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import AdvertiseGrid from 'modules/Advertise'
+import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
+import { AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { endpoints, paths, routes } from 'Constants'
+import { endpoints, routes } from 'Constants'
 import { common, advertise } from 'locales'
 
 const pageUrl = buildUrl(routes.ADVERTISE)
 
-export default function Advertise(): JSX.Element {
+type AdvertiseStaticProps = {
+  initialAuctionData: PaginatedData<CharacterObject>
+}
+
+export default function Advertise({
+  initialAuctionData,
+}: AdvertiseStaticProps): JSX.Element {
   const { translations } = useTranslations()
+
+  const { page, ...pageData } = initialAuctionData
 
   return (
     <div>
       <Head>
-        <link rel="preconnect" href={endpoints.BASE_DATA} />
+        <link rel="preconnect" href={endpoints.CURRENT_AUCTIONS} />
         <title>{translations.advertise.Meta.title}</title>
         <meta name="title" content={translations.advertise.Meta.title} />
         <meta
@@ -58,45 +68,30 @@ export default function Advertise(): JSX.Element {
           href={buildUrl(routes.ADVERTISE, 'es')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
-
-        <link
-          rel="preload"
-          href={`${endpoints.BASE_DATA}${paths.CHARACTER_DATA}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={`${endpoints.BASE_DATA}${paths.SERVER_DATA}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={`${endpoints.BASE_DATA}${paths.ITEMS_DATA}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
-        <link
-          rel="preload"
-          href={`${endpoints.HIGHLIGHTED_DATA}${paths.HIGHLIGHTED_AUCTIONS}`}
-          as="fetch"
-          crossOrigin="anonymous"
-        />
       </Head>
 
       <Main>
-        <AdvertiseGrid />
+        <AuctionsProvider initialPage={page} initialPageData={pageData}>
+          <AdvertiseGrid />
+        </AuctionsProvider>
       </Main>
     </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    translations: {
-      common: common[locale as RegisteredLocale],
-      advertise: advertise[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const initialAuctionData = await AuctionsClient.fetchAuctionPage({
+    endpoint: endpoints.CURRENT_AUCTIONS,
+  })
+
+  return {
+    props: {
+      translations: {
+        common: common[locale as RegisteredLocale],
+        advertise: advertise[locale as RegisteredLocale],
+      },
+      initialAuctionData,
     },
-  },
-})
+    revalidate: 60,
+  }
+}

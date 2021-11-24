@@ -13,7 +13,20 @@ const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
 export function urlParametersState(
   registeredParams: ParamRegister[],
 ): urlParameterStateObject {
+  const getDefaultValues = (): ParameterObject => {
+    const defaultValues = {} as ParameterObject
+
+    registeredParams.forEach((param) => {
+      const { key, defaultValue } = param
+      defaultValues[key] = defaultValue
+    })
+
+    return defaultValues
+  }
+
   const getUrlValues = (): ParameterObject => {
+    if (typeof window === 'undefined') return getDefaultValues()
+
     const urlParams = getCurrentUrlParams()
 
     const urlValues = {} as ParameterObject
@@ -62,16 +75,13 @@ export function urlParametersState(
     )
   }
 
-  function getDefaultValues(): ParameterObject {
-    const defaultValues = {} as ParameterObject
+  const isCurrentlyDefaultValues = (): boolean =>
+    dequal(getDefaultValues(), getUrlValues())
 
-    registeredParams.forEach((param) => {
-      const { key, defaultValue } = param
-      defaultValues[key] = defaultValue
-    })
-
-    return defaultValues
+  return {
+    getUrlValues,
+    setUrlValues,
+    isCurrentlyDefaultValues,
+    defaultValues: getDefaultValues(),
   }
-
-  return { getUrlValues, setUrlValues, defaultValues: getDefaultValues() }
 }

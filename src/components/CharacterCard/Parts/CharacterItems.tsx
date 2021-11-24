@@ -38,7 +38,7 @@ const CharacterItems = ({
           alt={common.CharacterCard.featuredItem}
           src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
           style={{ width: 32, height: 32 }}
-          lazy={false}
+          lazy
         />
       ))}
       {fillItems(4 - items.length)}

@@ -3,7 +3,7 @@ export default {
     title: 'Exevo Pan - Leilões',
     description: 'Filtre e explore chares de Tibia no Char Bazaar oficial!',
   },
-  CharacterGrid: {
+  AuctionsGrid: {
     filterButtonLabel: 'Abrir menu de filtros',
     sortingButtonLabel: 'Defina um critério de ordenação',
     filter: 'filtro',
@@ -44,9 +44,6 @@ export default {
     rareItemsPlaceholder: 'Escolha um item',
     allItemsButton: 'Todos os items',
     miscLabel: 'Diversos',
-    favTooltip: 'Salve seus leilões favoritos pressionando o botão de ❤️!',
-    favoritedButton: 'Favoritos',
-    heartEmoji: 'coração',
     rareNicknamesTooltip:
       "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",
     rareNicknamesButton: 'Nicknames raros',

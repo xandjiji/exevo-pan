@@ -5,52 +5,26 @@ import {
   useReducer,
   useEffect,
   useCallback,
-  useState,
-  useMemo,
 } from 'react'
 import { useRouter } from 'next/router'
 import { ManageDataClient } from 'services'
-import { useIsMounted } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
 import { routes } from 'Constants'
 import DatabaseReducer from './DatabaseReducer'
 import LoadingReducer from './LoadingReducer'
-import { buildCharacterData } from './utils'
 import {
   DatabaseContextValues,
-  CharactersContextValues,
-  DrawerFieldsContextValues,
   WarGuildDataContextValues,
   DatabaseDispatchContextValues,
 } from './types'
 
 const defaultDatabaseState: DatabaseContextValues = {
   loading: false,
-  characterData: [],
-  serverData: [],
-  rareItemData: {},
-  historyData: [],
-  highlightedAuctions: [],
   warGuildData: [],
   dispatch: () => {},
 }
 const DatabaseContext =
   createContext<DatabaseContextValues>(defaultDatabaseState)
-
-const CharactersContext = createContext<CharactersContextValues>({
-  loading: defaultDatabaseState.loading,
-  characterData: defaultDatabaseState.characterData,
-  historyData: defaultDatabaseState.historyData,
-  baseCharacterData: defaultDatabaseState.characterData,
-  baseHistoryData: defaultDatabaseState.historyData,
-  highlightedAuctions: defaultDatabaseState.highlightedAuctions,
-})
-
-const DrawerFieldsContext = createContext<DrawerFieldsContextValues>({
-  loading: defaultDatabaseState.loading,
-  serverData: defaultDatabaseState.serverData,
-  rareItemData: defaultDatabaseState.rareItemData,
-})
 
 const WarGuildDataContext = createContext<WarGuildDataContextValues>({
   loading: defaultDatabaseState.loading,
@@ -70,26 +44,7 @@ export const DatabaseProvider = ({
     translations: { common },
   } = useTranslations()
 
-  const [
-    {
-      characterData,
-      serverData,
-      rareItemData,
-      historyData,
-      warGuildData,
-      baseCharacterData,
-      baseHistoryData,
-      highlightedAuctions,
-    },
-    dispatch,
-  ] = useReducer(DatabaseReducer, {
-    baseCharacterData: defaultDatabaseState.characterData,
-    characterData: defaultDatabaseState.characterData,
-    serverData: defaultDatabaseState.serverData,
-    rareItemData: defaultDatabaseState.rareItemData,
-    baseHistoryData: defaultDatabaseState.historyData,
-    historyData: defaultDatabaseState.historyData,
-    highlightedAuctions: defaultDatabaseState.highlightedAuctions,
+  const [{ warGuildData }, dispatch] = useReducer(DatabaseReducer, {
     warGuildData: defaultDatabaseState.warGuildData,
   })
 
@@ -103,43 +58,6 @@ export const DatabaseProvider = ({
 
   const { pathname } = useRouter()
   const loading = loadingPaths.includes(pathname)
-
-  const [loadedPercentage, setLoadedPercentage] = useState<string | null>()
-  const fetchCharacterData = useCallback(async (currentPath: string) => {
-    const isHistory = currentPath === routes.BAZAAR_HISTORY
-    setLoadedPercentage(null)
-
-    try {
-      const [
-        freshCharacterData,
-        freshServerArray,
-        freshItemData,
-        highlightedAuctionData,
-      ] = await Promise.all([
-        isHistory
-          ? ManageDataClient.fetchHistoryData(setLoadedPercentage)
-          : ManageDataClient.fetchCharacterData(),
-        ManageDataClient.fetchServerData(),
-        ManageDataClient.fetchItemData(),
-        ManageDataClient.fetchHighlightedAuctions(),
-      ])
-
-      dispatch({
-        type: 'INITIAL_DATA_LOAD',
-        characterData: buildCharacterData(freshCharacterData, freshServerArray),
-        serverData: freshServerArray,
-        rareItemData: freshItemData,
-        isHistory,
-        highlightedAuctions: highlightedAuctionData,
-      })
-    } finally {
-      setLoadedPercentage(null)
-      dispatchLoad({
-        type: 'FINISH_LOADING',
-        paths: [isHistory ? currentPath : routes.HOME, routes.ADVERTISE],
-      })
-    }
-  }, [])
 
   const fetchGuildWarData = useCallback(async () => {
     try {
@@ -165,21 +83,6 @@ export const DatabaseProvider = ({
   }, [])
 
   useEffect(() => {
-    if (
-      pathname === routes.HOME ||
-      pathname === routes.BAZAAR_HISTORY ||
-      pathname === routes.ADVERTISE
-    ) {
-      if (!navigated.includes(pathname)) {
-        const isHistory = pathname === routes.BAZAAR_HISTORY
-
-        dispatchLoad({
-          type: 'START_LOADING',
-          paths: [isHistory ? pathname : routes.HOME, routes.ADVERTISE],
-        })
-        fetchCharacterData(pathname)
-      }
-    }
     if (pathname === routes.LIBERTABRA_WAR_SEARCH) {
       if (!navigated.includes(pathname)) {
         dispatchLoad({
@@ -189,72 +92,28 @@ export const DatabaseProvider = ({
         fetchGuildWarData()
       }
     }
-  }, [pathname, navigated, fetchCharacterData, fetchGuildWarData])
-
-  const isMounted = useIsMounted()
-  useEffect(() => {
-    if (pathname === routes.HOME || pathname === routes.BAZAAR_HISTORY) {
-      if (isMounted) dispatch({ type: 'RESET_TO_BASE_DATA' })
-    }
-  }, [pathname, navigated, fetchCharacterData])
-
-  const drawerFields = useMemo(
-    () => ({
-      serverData,
-      rareItemData,
-    }),
-    [serverData, rareItemData],
-  )
+  }, [pathname, navigated, fetchGuildWarData])
 
   return (
-    /* @ ToDo: remove DatabaseContext */
     <DatabaseContext.Provider
       value={{
         loading,
-        characterData,
-        serverData,
-        rareItemData,
-        historyData,
-        highlightedAuctions,
         warGuildData,
         dispatch,
       }}
     >
-      <CharactersContext.Provider
-        value={{
-          loading,
-          characterData,
-          historyData,
-          baseCharacterData,
-          baseHistoryData,
-          highlightedAuctions,
-        }}
-      >
-        <DrawerFieldsContext.Provider value={{ ...drawerFields, loading }}>
-          <WarGuildDataContext.Provider value={{ warGuildData, loading }}>
-            <DatabaseDispatchContext.Provider value={{ dispatch }}>
-              {loading && (
-                <LoadingAlert>
-                  {common.UpdatingDataText} {loadedPercentage}
-                </LoadingAlert>
-              )}
-              {children}
-            </DatabaseDispatchContext.Provider>
-          </WarGuildDataContext.Provider>
-        </DrawerFieldsContext.Provider>
-      </CharactersContext.Provider>
+      <WarGuildDataContext.Provider value={{ warGuildData, loading }}>
+        <DatabaseDispatchContext.Provider value={{ dispatch }}>
+          {loading && <LoadingAlert>{common.UpdatingDataText}</LoadingAlert>}
+          {children}
+        </DatabaseDispatchContext.Provider>
+      </WarGuildDataContext.Provider>
     </DatabaseContext.Provider>
   )
 }
 
 export const useDatabase = (): DatabaseContextValues =>
   useContext(DatabaseContext)
-
-export const useCharacters = (): CharactersContextValues =>
-  useContext(CharactersContext)
-
-export const useDrawerFields = (): DrawerFieldsContextValues =>
-  useContext(DrawerFieldsContext)
 
 export const useWarGuildData = (): WarGuildDataContextValues =>
   useContext(WarGuildDataContext)

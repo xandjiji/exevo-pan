@@ -8,7 +8,6 @@ import {
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
-import { FavButton as BaseFavButton } from './Parts'
 import { BattleyeStatusStyleProps } from './types'
 
 export const AlignedFlex = styled.div`
@@ -78,10 +77,6 @@ export const Subtitle = styled.span`
   font-weight: 300;
   letter-spacing: 0.5px;
   color: var(--onSurface);
-`
-
-export const FavButton = styled(BaseFavButton)`
-  align-self: flex-start;
 `
 
 export const InfoGrid = styled.div`

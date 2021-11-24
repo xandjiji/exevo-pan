@@ -1,10 +1,10 @@
-import { buildCharacterData } from 'contexts/useDatabase/utils'
 import { randomServerData } from './makers/serverMaker'
 import { randomCharacterData } from './makers/characterMaker'
 import { randomItemData } from './makers/rareItemMaker'
 import { randomStatisticsData } from './makers/statisticsMaker'
 import { randomWarStatisticsData } from './makers/warStatisticsMaker'
 import { randomGuildWarData } from './makers/membersWarDataMaker'
+import { buildCharacterData } from './utils'
 import { Dataset } from './types'
 
 export const randomDataset = (charAmount = 10000): Dataset => {

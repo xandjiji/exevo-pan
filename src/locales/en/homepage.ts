@@ -4,7 +4,7 @@ export default {
     description:
       'Filter and search for Tibia characters on the official Char Bazaar!',
   },
-  CharacterGrid: {
+  AuctionsGrid: {
     filterButtonLabel: 'Open filter drawer',
     sortingButtonLabel: 'Set the sorting order and criteria',
     filter: 'filter',
@@ -45,9 +45,6 @@ export default {
     rareItemsPlaceholder: 'Choose an item',
     allItemsButton: 'All items',
     miscLabel: 'Misc',
-    favTooltip: 'Save your favorite auctions pressing the ❤️ button!',
-    favoritedButton: 'Favorited',
-    heartEmoji: 'heart',
     rareNicknamesTooltip:
       "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",
     rareNicknamesButton: 'Rare nicknames',

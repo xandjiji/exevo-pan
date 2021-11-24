@@ -109,12 +109,6 @@ export default {
     experimentalServer: 'This is an experimental server!',
     transferAvailable: 'Regular World Transfer available',
     transferUnavailable: 'Regular World Transfer NOT available',
-    favButton: {
-      remove: 'Remove',
-      add: 'Add',
-      fromFav: 'from favorites',
-      toFav: 'to favorites',
-    },
     imbuementsListLabel: 'Imbuements list',
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
