@@ -19,3 +19,24 @@ declare interface FilterState {
   rareNick: boolean
   soulwarFilter: boolean
 }
+
+type FilterOptionsPrimitives = Pick<
+  FilterState,
+  | 'nicknameFilter'
+  | 'minLevel'
+  | 'maxLevel'
+  | 'minSkill'
+  | 'rareNick'
+  | 'soulwarFilter'
+>
+
+declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
+  vocation: number[]
+  pvp: number[]
+  battleye: boolean[]
+  location: number[]
+  serverSet: string[]
+  skillKey: string[]
+  imbuementsSet: string[]
+  itemSet: string[]
+}
