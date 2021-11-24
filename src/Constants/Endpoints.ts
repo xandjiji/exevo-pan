@@ -7,4 +7,5 @@ export const endpoints = {
   HIGHLIGHTED_DATA: 'https://exevo-pan-highlighted.netlify.app',
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
   MAIL_CHECKOUT: '/api/mail-checkout',
+  FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
 }

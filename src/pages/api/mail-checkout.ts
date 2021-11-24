@@ -3,6 +3,7 @@ import * as nodemailer from 'nodemailer'
 import inlineBase64 from 'nodemailer-plugin-inline-base64'
 import { v4 as uuidv4 } from 'uuid'
 import { EmailTemplate } from 'modules/Advertise/components'
+import { NotifyAdminClient } from 'services'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { advertise } from 'locales'
 
@@ -43,7 +44,10 @@ export default async (
     html,
   }
 
-  await mailer.sendMail(mailOptions)
+  await Promise.all([
+    mailer.sendMail(mailOptions),
+    NotifyAdminClient.notifyPurchase(),
+  ])
 
   response.status(200).json({ uuid })
 }
