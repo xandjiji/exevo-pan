@@ -9,8 +9,8 @@ export type SortOptions = {
 }
 
 export interface FetchAuctionPageParameters {
-  paginationOptions: PaginationOptions
-  sortOptions: SortOptions
+  paginationOptions?: PaginationOptions
+  sortOptions?: SortOptions
   endpoint: string
   filterOptions?: FilterState
 }

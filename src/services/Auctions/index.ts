@@ -1,5 +1,10 @@
 import { endpoints, paths } from 'Constants'
 import { serializeBody, buildHeaders } from './utils'
+import {
+  DEFAULT_PAGINATION_OPTIONS,
+  DEFAULT_SORT_OPTIONS,
+  DEFAULT_FILTER_STATE,
+} from './defaults'
 import { FetchAuctionPageParameters, CacheObject } from './types'
 
 const CACHE_MAX_AGE = 180000
@@ -31,9 +36,9 @@ export default class AuctionsClient {
   }
 
   static async fetchAuctionPage({
-    paginationOptions,
-    sortOptions,
-    filterOptions,
+    paginationOptions = DEFAULT_PAGINATION_OPTIONS,
+    sortOptions = DEFAULT_SORT_OPTIONS,
+    filterOptions = DEFAULT_FILTER_STATE,
     endpoint,
   }: FetchAuctionPageParameters): Promise<PaginatedData<CharacterObject>> {
     const bodyPayload = serializeBody(
