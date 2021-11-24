@@ -25,7 +25,6 @@ export default function Advertise({
   return (
     <div>
       <Head>
-        <link rel="preconnect" href={endpoints.CURRENT_AUCTIONS} />
         <title>{translations.advertise.Meta.title}</title>
         <meta name="title" content={translations.advertise.Meta.title} />
         <meta

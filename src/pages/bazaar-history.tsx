@@ -27,7 +27,6 @@ export default function BazaarHistory({
   return (
     <div>
       <Head>
-        <link rel="preconnect" href={endpoints.HISTORY_AUCTIONS} />
         <title>{translations.bazaarHistory.Meta.title}</title>
         <meta name="title" content={translations.bazaarHistory.Meta.title} />
         <meta

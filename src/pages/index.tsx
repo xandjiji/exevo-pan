@@ -29,7 +29,6 @@ export default function Home({
   return (
     <div>
       <Head>
-        <link rel="preconnect" href={endpoints.CURRENT_AUCTIONS} />
         <title>{translations.homepage.Meta.title}</title>
         <meta name="title" content={translations.homepage.Meta.title} />
         <meta
