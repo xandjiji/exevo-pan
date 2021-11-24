@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import { Tooltip } from 'components/Organisms'
-import { links } from 'Constants'
+import { links, email } from 'Constants'
 import fansiteImg from 'assets/fansite-logo.png'
 import { Hero, Pillar, Section, KsuTooltip, Footer } from './components'
 import { sections } from './sections'
@@ -97,7 +97,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
               <S.Li>
                 <S.MailIcon />
                 <a href={links.EMAIL} target="_blank" rel="noopener noreferrer">
-                  xandjiji@gmail.com
+                  {email.MY_EMAIL}
                 </a>
               </S.Li>
               <S.Li>
