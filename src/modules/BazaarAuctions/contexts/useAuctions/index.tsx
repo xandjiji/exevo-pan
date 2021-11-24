@@ -12,7 +12,7 @@ import { useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services'
 import AuctionsReducer from './reducer'
 import { useFilters } from '../useFilters'
-import { DEFAULT_STATE, buildSchema } from './schema'
+import { DEFAULT_STATE, buildSchema, PAGE_SIZE } from './schema'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
@@ -68,7 +68,7 @@ export const AuctionsProvider = ({
       lastFilterState.current = filterOptions
       const paginationOptions = {
         pageIndex: newPageIndex,
-        pageSize: 10,
+        pageSize: PAGE_SIZE,
       }
       const sortOptions = {
         sortingMode: newSortingMode,

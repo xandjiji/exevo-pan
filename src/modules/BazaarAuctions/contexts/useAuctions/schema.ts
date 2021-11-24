@@ -39,3 +39,5 @@ export const buildSchema = (
     decode: (value: string) => decodeURIComponent(value) === 'true',
   },
 ]
+
+export const PAGE_SIZE = 10
