@@ -64,6 +64,12 @@ export default class MyDocument extends Document {
 
           <script
             async
+            crossOrigin="anonymous"
+            src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${google.ADSENSE_ID}`}
+          />
+
+          <script
+            async
             src={`https://www.googletagmanager.com/gtag/js?id=${google.GTM_ID}`}
           />
           <script
