@@ -110,6 +110,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       auctionedItemOptions,
       initialAuctionData,
     },
-    revalidate: 3600,
+    revalidate: 60,
   }
 }
