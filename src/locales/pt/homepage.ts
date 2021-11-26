@@ -29,7 +29,6 @@ export default {
     title: 'Filtros',
     resetFilters: 'Resetar filtros',
     searchNicknameLabel: 'Procurar nickname',
-    searchNicknameTooltip: "Regex habilitado! Exemplo: ['-.,]",
     vocationLabel: 'Vocação',
     green: 'Verde',
     yellow: 'Amarelo',

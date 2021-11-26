@@ -61,15 +61,6 @@ const FilterDrawer = ({
         <FilterGroup
           label={homepage.FilterDrawer.searchNicknameLabel}
           htmlFor="search-nickname-input"
-          labelSuffix={
-            <Tooltip
-              offset={[0, 8]}
-              placement="top"
-              content={homepage.FilterDrawer.searchNicknameTooltip}
-            >
-              <Icon.Exclamation />
-            </Tooltip>
-          }
         >
           <S.Input
             id="search-nickname-input"

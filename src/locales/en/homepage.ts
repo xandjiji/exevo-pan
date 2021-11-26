@@ -30,7 +30,6 @@ export default {
     title: 'Filters',
     resetFilters: 'Reset filters',
     searchNicknameLabel: 'Search nickname',
-    searchNicknameTooltip: "Regex is enabled! Example: ['-.,]",
     vocationLabel: 'Vocation',
     green: 'Green',
     yellow: 'Yellow',
