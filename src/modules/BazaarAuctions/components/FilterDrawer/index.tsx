@@ -391,15 +391,15 @@ const FilterDrawer = ({
             </Tooltip>
             <Tooltip content={homepage.FilterDrawer.soulwarTooltip}>
               <Chip
-                overrideStatus={filterState.soulwarFilter}
+                overrideStatus={filterState.soulwarAvailable}
                 onClick={() => {
-                  if (filterState.soulwarFilter) {
+                  if (filterState.soulwarAvailable) {
                     updateFilters('minLevel', defaultValues.minLevel as number)
-                    updateFilters('soulwarFilter', false)
+                    updateFilters('soulwarAvailable', false)
                   } else {
                     updateFilters('minLevel', 250)
                     updateFilters('maxLevel', defaultValues.maxLevel as number)
-                    updateFilters('soulwarFilter', true)
+                    updateFilters('soulwarAvailable', true)
                   }
                 }}
               >

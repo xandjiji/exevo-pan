@@ -82,6 +82,12 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
+    key: 'charmsSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
     key: 'itemSet',
     defaultValue: new Set<string>([]),
     encode: encodeSet,
@@ -92,7 +98,31 @@ export const filterSchema = [
     defaultValue: false,
   },
   {
-    key: 'soulwarFilter',
+    key: 'questSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'outfitSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'mountSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'achievementSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'soulwarAvailable',
     defaultValue: false,
   },
 ]

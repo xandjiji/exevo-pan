@@ -23,7 +23,10 @@ declare interface CharacterObject {
   items: number[]
   charms: string[]
   transfer: boolean
-  hasSoulwar: boolean
+  quests: string[]
+  outfits: string[]
+  mounts: string[]
+  rareAchievements: string[]
   skills: CharacterSkillsObject
   serverData: ServerObject
 }
@@ -45,5 +48,8 @@ declare type MinifiedCharacterObject = [
   number[],
   boolean,
   number[],
-  boolean,
+  number[],
+  number[],
+  number[],
+  number[],
 ]

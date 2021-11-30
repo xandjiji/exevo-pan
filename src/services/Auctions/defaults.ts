@@ -22,9 +22,14 @@ export const DEFAULT_FILTER_STATE: FilterState = {
   minSkill: 10,
   skillKey: new Set([]),
   imbuementsSet: new Set([]),
+  charmsSet: new Set([]),
   itemSet: new Set([]),
   rareNick: false,
-  soulwarFilter: false,
+  questSet: new Set([]),
+  outfitSet: new Set([]),
+  mountSet: new Set([]),
+  achievementSet: new Set([]),
+  soulwarAvailable: false,
 }
 
 export const DEFAULT_SERIALIZED_FILTER_STATE: SerializedFilterOptions = {
@@ -36,5 +41,10 @@ export const DEFAULT_SERIALIZED_FILTER_STATE: SerializedFilterOptions = {
   serverSet: [],
   skillKey: [],
   imbuementsSet: [],
+  charmsSet: [],
   itemSet: [],
+  questSet: [],
+  outfitSet: [],
+  mountSet: [],
+  achievementSet: [],
 }
