@@ -390,6 +390,36 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
+        <FilterGroup
+          label={homepage.FilterDrawer.labels.rareAchievements}
+          htmlFor="achievements-input"
+        >
+          <S.AutocompleteInput
+            id="achievement-input"
+            aria-controls="achievement-list"
+            placeholder={homepage.FilterDrawer.placeholders.achievements}
+            style={{ marginBottom: 12 }}
+            itemList={useOptionsSet(
+              achievementOptions,
+              filterState.achievementSet,
+            )}
+            onItemSelect={useCallback(
+              (option: Option) => updateFilters('achievementSet', option.value),
+              [updateFilters],
+            )}
+          />
+          <S.ChipWrapper id="achievement-list">
+            {[...filterState.achievementSet].map((achievement) => (
+              <Chip
+                key={achievement}
+                onClose={() => updateFilters('achievementSet', achievement)}
+              >
+                {achievement}
+              </Chip>
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
+
         {!historyPage && (
           <FilterGroup
             label={homepage.FilterDrawer.labels.rareItems}

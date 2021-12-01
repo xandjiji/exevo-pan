@@ -33,6 +33,7 @@ export default {
       vocation: 'Vocación',
       serverLocation: 'Ubicación del servidor',
       minSkill: 'Skill level mínimo',
+      rareAchievements: 'Achievements raros',
       rareItems: 'Items raros',
       misc: 'Variados',
     },
@@ -41,6 +42,7 @@ export default {
       imbuements: 'Seleccione imbuements',
       charms: 'Seleccione charms',
       quests: 'Seleccione quests',
+      achievements: 'Seleccione achievements',
       rareItems: 'Escoge uno item',
     },
     tooltips: {

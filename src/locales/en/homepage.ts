@@ -34,6 +34,7 @@ export default {
       serverLocation: 'Server location',
       minSkill: 'Minimum skill level',
       rareItems: 'Rare items',
+      rareAchievements: 'Rare achievements',
       misc: 'Misc',
     },
     placeholders: {
@@ -41,6 +42,7 @@ export default {
       imbuements: 'Select imbuements',
       charms: 'Select charms',
       quests: 'Select quests',
+      achievements: 'Select achievements',
       rareItems: 'Choose an item',
     },
     tooltips: {
