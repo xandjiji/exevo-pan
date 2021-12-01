@@ -23,7 +23,7 @@ const Accordion = ({
 
   return (
     <S.Wrapper {...props}>
-      <S.Button onClick={handleClick}>
+      <S.Button role="button" aria-expanded={open} onClick={handleClick}>
         {title}
         <S.ArrowIcon />
       </S.Button>

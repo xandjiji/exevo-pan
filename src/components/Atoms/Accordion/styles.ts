@@ -1,25 +1,33 @@
 import styled from 'styled-components'
 import ArrowSvg from 'assets/svgs/chevronDown.svg'
-import { Clickable, Smooth } from 'styles'
 
 export const Wrapper = styled.div``
 
 export const ArrowIcon = styled(ArrowSvg)`
-  ${Clickable}
   margin-left: auto;
   border-radius: 4px;
+  flex-shrink: 0;
   fill: var(--onSurface);
-  ${Smooth}
+  transition: transform 0.15s ease-out;
 `
 
 export const Button = styled.button`
-  padding: 4px 0;
+  padding: 4px 8px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
   width: 100%;
   cursor: pointer;
+  transition: padding 0.15s ease-out;
+
+  &[aria-expanded='true'] {
+    padding: 8px 8px;
+
+    ${ArrowIcon} {
+      transform: rotate(180deg);
+    }
+  }
 `
 
 export const Content = styled.div``
