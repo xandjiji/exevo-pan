@@ -3,7 +3,8 @@ import { Shadow, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.div`
   border-radius: 5px;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
   ${Shadow}
   ${CustomScrollbar}
 
