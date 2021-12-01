@@ -65,7 +65,7 @@ const FilterDrawer = ({
       </Drawer.Head>
       <Drawer.Body>
         <FilterGroup
-          label={homepage.FilterDrawer.searchNicknameLabel}
+          label={homepage.FilterDrawer.labels.searchNickname}
           htmlFor="search-nickname-input"
         >
           <S.Input
@@ -77,7 +77,7 @@ const FilterDrawer = ({
           />
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.vocationLabel}>
+        <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.vocation.has(0)}
@@ -176,7 +176,7 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.serverLocationLabel}>
+        <FilterGroup label={homepage.FilterDrawer.labels.serverLocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.location.has(0)}
@@ -244,7 +244,7 @@ const FilterDrawer = ({
 
         <FilterGroup label="Skill">
           <SliderInput
-            aria-label={homepage.FilterDrawer.minSkillLabel}
+            aria-label={homepage.FilterDrawer.labels.minSkill}
             min={10}
             max={130}
             value={filterState.minSkill}
@@ -368,7 +368,7 @@ const FilterDrawer = ({
 
         {!historyPage && (
           <FilterGroup
-            label={homepage.FilterDrawer.rareItemsLabel}
+            label={homepage.FilterDrawer.labels.rareItems}
             htmlFor="rare-items-input"
             labelSuffix={
               <Tooltip
@@ -415,7 +415,7 @@ const FilterDrawer = ({
           </FilterGroup>
         )}
 
-        <FilterGroup label={homepage.FilterDrawer.miscLabel}>
+        <FilterGroup label={homepage.FilterDrawer.labels.misc}>
           <S.ChipWrapper>
             <Tooltip
               style={{ width: 280 }}
