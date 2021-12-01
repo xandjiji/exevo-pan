@@ -41,19 +41,20 @@ export default {
       charms: 'Selecionar charms',
       rareItems: 'Escolha um item',
     },
+    tooltips: {
+      rareItems:
+        'Se um item raro não estiver nesta lista é porque não há nenhum leilão com ele no momento.',
+      rareNicknames:
+        "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",
+      soulwar: 'Personagens com nivel 250+ e com a Soul War não completada',
+    },
     resetFilters: 'Resetar filtros',
     green: 'Verde',
     yellow: 'Amarelo',
     allImbuementsButton: 'Todos os imbuements',
     allCharmsButton: 'Todos os charms',
-    rareItemsTooltip:
-      'Se um item raro não estiver nesta lista é porque não há nenhum leilão com ele no momento.',
     allItemsButton: 'Todos os items',
-    rareNicknamesTooltip:
-      "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",
     rareNicknamesButton: 'Nicknames raros',
-    soulwarTooltip:
-      'Personagens com nivel 250+ e com a Soul War não completada',
     soulwarButton: 'Soulwar disponível',
     skullEmoji: 'caveira',
   },

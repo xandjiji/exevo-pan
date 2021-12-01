@@ -42,18 +42,20 @@ export default {
       charms: 'Select charms',
       rareItems: 'Choose an item',
     },
+    tooltips: {
+      rareItems:
+        'If a rare item is not on this list it means that there are no auctions available with it.',
+      rareNicknames:
+        "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",
+      soulwar: 'Characters level 250+ with Soul War not completed',
+    },
     resetFilters: 'Reset filters',
     green: 'Green',
     yellow: 'Yellow',
     allImbuementsButton: 'All imbuements',
     allCharmsButton: 'All charms',
-    rareItemsTooltip:
-      'If a rare item is not on this list it means that there are no auctions available with it.',
     allItemsButton: 'All items',
-    rareNicknamesTooltip:
-      "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",
     rareNicknamesButton: 'Rare nicknames',
-    soulwarTooltip: 'Characters level 250+ with Soul War not completed',
     soulwarButton: 'Soulwar available',
     skullEmoji: 'skull',
   },

@@ -374,7 +374,7 @@ const FilterDrawer = ({
               <Tooltip
                 offset={[0, 8]}
                 placement="top"
-                content={homepage.FilterDrawer.rareItemsTooltip}
+                content={homepage.FilterDrawer.tooltips.rareItems}
               >
                 <Icon.Exclamation />
               </Tooltip>
@@ -419,7 +419,7 @@ const FilterDrawer = ({
           <S.ChipWrapper>
             <Tooltip
               style={{ width: 280 }}
-              content={homepage.FilterDrawer.rareNicknamesTooltip}
+              content={homepage.FilterDrawer.tooltips.rareNicknames}
             >
               <Chip
                 overrideStatus={filterState.rareNick}
@@ -428,7 +428,7 @@ const FilterDrawer = ({
                 {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
             </Tooltip>
-            <Tooltip content={homepage.FilterDrawer.soulwarTooltip}>
+            <Tooltip content={homepage.FilterDrawer.tooltips.soulwar}>
               <Chip
                 overrideStatus={filterState.soulwarAvailable}
                 onClick={() => {
