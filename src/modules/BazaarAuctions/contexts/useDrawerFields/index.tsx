@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
-import { imbuementOptions } from './imbuements'
+import { imbuementOptions } from './options'
 import { DrawerFieldsContextData, DrawerFieldsProviderProps } from './types'
 
 const DEFAULT_STATE: DrawerFieldsContextData = {
