@@ -366,6 +366,30 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
+        <FilterGroup label="Quests" htmlFor="quest-input">
+          <S.AutocompleteInput
+            id="quest-input"
+            aria-controls="quest-list"
+            placeholder={homepage.FilterDrawer.placeholders.quests}
+            style={{ marginBottom: 12 }}
+            itemList={useOptionsSet(questOptions, filterState.questSet)}
+            onItemSelect={useCallback(
+              (option: Option) => updateFilters('questSet', option.value),
+              [updateFilters],
+            )}
+          />
+          <S.ChipWrapper id="quest-list">
+            {[...filterState.questSet].map((quest) => (
+              <Chip
+                key={quest}
+                onClose={() => updateFilters('questSet', quest)}
+              >
+                {quest}
+              </Chip>
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
+
         {!historyPage && (
           <FilterGroup
             label={homepage.FilterDrawer.labels.rareItems}

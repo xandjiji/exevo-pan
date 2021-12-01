@@ -40,6 +40,7 @@ export default {
       server: 'Choose a server',
       imbuements: 'Select imbuements',
       charms: 'Select charms',
+      quests: 'Select quests',
       rareItems: 'Choose an item',
     },
     tooltips: {
