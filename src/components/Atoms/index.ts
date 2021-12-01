@@ -1,3 +1,4 @@
+export { default as Accordion } from './Accordion'
 export { default as AuctionTimer } from './AuctionTimer'
 export { default as Button } from './Button'
 export { default as Chip } from './Chip'
