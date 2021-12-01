@@ -38,6 +38,8 @@ export default {
     minSkillLabel: 'Skill level mínimo',
     imbuementsPlaceholder: 'Seleccione imbuements',
     allImbuementsButton: 'Todos los imbuements',
+    charmsPlaceholder: 'Seleccione charms',
+    allCharmsButton: 'Todos los charms',
     rareItemsLabel: 'Items raros',
     rareItemsTooltip:
       'Si un artículo raro no está en esta lista, actualmente no hay subasta para él.',

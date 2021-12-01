@@ -24,8 +24,14 @@ const FilterDrawer = ({
 
   const { current: historyPage } = useRef(isHistory())
 
-  const { serverOptions, auctionedItemOptions, imbuementOptions } =
-    useDrawerFields()
+  const {
+    serverOptions,
+    auctionedItemOptions,
+    imbuementOptions,
+    charmOptions,
+    questOptions,
+    achievementOptions,
+  } = useDrawerFields()
   const {
     filterState,
     defaultValues,
@@ -322,6 +328,39 @@ const FilterDrawer = ({
                 onClose={() => updateFilters('imbuementsSet', imbuement)}
               >
                 {imbuement}
+              </Chip>
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
+
+        <FilterGroup label="Charms">
+          <S.FlexWrapper>
+            <S.AutocompleteInput
+              id="charms-input"
+              aria-controls="charms-list"
+              placeholder={homepage.FilterDrawer.charmsPlaceholder}
+              itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
+              onItemSelect={useCallback(
+                (option: Option) => updateFilters('charmsSet', option.value),
+                [updateFilters],
+              )}
+            />
+            <Chip
+              overrideStatus={
+                filterState.charmsSet.size === charmOptions.length
+              }
+              onClick={() => toggleAllOptions('charmsSet', charmOptions)}
+            >
+              {homepage.FilterDrawer.allCharmsButton}
+            </Chip>
+          </S.FlexWrapper>
+          <S.ChipWrapper id="charms-list">
+            {[...filterState.charmsSet].map((charm) => (
+              <Chip
+                key={charm}
+                onClose={() => updateFilters('charmsSet', charm)}
+              >
+                {charm}
               </Chip>
             ))}
           </S.ChipWrapper>
