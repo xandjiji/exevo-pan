@@ -318,7 +318,7 @@ const FilterDrawer = ({
                 toggleAllOptions('imbuementsSet', imbuementOptions)
               }
             >
-              {homepage.FilterDrawer.allImbuementsButton}
+              {homepage.FilterDrawer.toggleAll.imbuements}
             </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="imbuements-list">
@@ -351,7 +351,7 @@ const FilterDrawer = ({
               }
               onClick={() => toggleAllOptions('charmsSet', charmOptions)}
             >
-              {homepage.FilterDrawer.allCharmsButton}
+              {homepage.FilterDrawer.toggleAll.charms}
             </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="charms-list">
@@ -402,7 +402,7 @@ const FilterDrawer = ({
                   toggleAllOptions('itemSet', auctionedItemOptions)
                 }
               >
-                {homepage.FilterDrawer.allItemsButton}
+                {homepage.FilterDrawer.toggleAll.items}
               </Chip>
             </S.FlexWrapper>
             <S.ChipWrapper id="rare-items-list">
