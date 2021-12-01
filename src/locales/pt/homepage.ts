@@ -35,17 +35,19 @@ export default {
       rareItems: 'Items raros',
       misc: 'Diversos',
     },
+    placeholders: {
+      server: 'Escolha um servidor',
+      imbuements: 'Selecionar imbuements',
+      charms: 'Selecionar charms',
+      rareItems: 'Escolha um item',
+    },
     resetFilters: 'Resetar filtros',
     green: 'Verde',
     yellow: 'Amarelo',
-    serverPlaceholder: 'Escolha um servidor',
-    imbuementsPlaceholder: 'Selecionar imbuements',
     allImbuementsButton: 'Todos os imbuements',
-    charmsPlaceholder: 'Selecionar charms',
     allCharmsButton: 'Todos os charms',
     rareItemsTooltip:
       'Se um item raro não estiver nesta lista é porque não há nenhum leilão com ele no momento.',
-    rareItemsPlaceholder: 'Escolha um item',
     allItemsButton: 'Todos os items',
     rareNicknamesTooltip:
       "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",

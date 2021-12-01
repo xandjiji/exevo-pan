@@ -36,17 +36,19 @@ export default {
       rareItems: 'Rare items',
       misc: 'Misc',
     },
+    placeholders: {
+      server: 'Choose a server',
+      imbuements: 'Select imbuements',
+      charms: 'Select charms',
+      rareItems: 'Choose an item',
+    },
     resetFilters: 'Reset filters',
     green: 'Green',
     yellow: 'Yellow',
-    serverPlaceholder: 'Choose a server',
-    imbuementsPlaceholder: 'Select imbuements',
     allImbuementsButton: 'All imbuements',
-    charmsPlaceholder: 'Select charms',
     allCharmsButton: 'All charms',
     rareItemsTooltip:
       'If a rare item is not on this list it means that there are no auctions available with it.',
-    rareItemsPlaceholder: 'Choose an item',
     allItemsButton: 'All items',
     rareNicknamesTooltip:
       "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",

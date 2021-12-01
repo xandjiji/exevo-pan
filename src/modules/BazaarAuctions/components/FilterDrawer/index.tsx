@@ -206,7 +206,7 @@ const FilterDrawer = ({
           <S.AutocompleteInput
             id="server-input"
             aria-controls="server-list"
-            placeholder={homepage.FilterDrawer.serverPlaceholder}
+            placeholder={homepage.FilterDrawer.placeholders.server}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(serverOptions, filterState.serverSet)}
             onItemSelect={useCallback(
@@ -299,7 +299,7 @@ const FilterDrawer = ({
             <S.AutocompleteInput
               id="imbuements-input"
               aria-controls="imbuements-list"
-              placeholder={homepage.FilterDrawer.imbuementsPlaceholder}
+              placeholder={homepage.FilterDrawer.placeholders.imbuements}
               itemList={useOptionsSet(
                 imbuementOptions,
                 filterState.imbuementsSet,
@@ -338,7 +338,7 @@ const FilterDrawer = ({
             <S.AutocompleteInput
               id="charms-input"
               aria-controls="charms-list"
-              placeholder={homepage.FilterDrawer.charmsPlaceholder}
+              placeholder={homepage.FilterDrawer.placeholders.charms}
               itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
               onItemSelect={useCallback(
                 (option: Option) => updateFilters('charmsSet', option.value),
@@ -384,7 +384,7 @@ const FilterDrawer = ({
               <S.AutocompleteInput
                 id="rare-items-input"
                 aria-controls="rare-items-list"
-                placeholder={homepage.FilterDrawer.rareItemsPlaceholder}
+                placeholder={homepage.FilterDrawer.placeholders.rareItems}
                 itemList={useOptionsSet(
                   auctionedItemOptions,
                   filterState.itemSet,

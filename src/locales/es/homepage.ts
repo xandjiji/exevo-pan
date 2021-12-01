@@ -36,17 +36,19 @@ export default {
       rareItems: 'Items raros',
       misc: 'Variados',
     },
+    placeholders: {
+      server: 'Elige un servidor',
+      imbuements: 'Seleccione imbuements',
+      charms: 'Seleccione charms',
+      rareItems: 'Escoge uno item',
+    },
     resetFilters: 'Resetar filtros',
     green: 'Verde',
     yellow: 'Amarillo',
-    serverPlaceholder: 'Elige un servidor',
-    imbuementsPlaceholder: 'Seleccione imbuements',
     allImbuementsButton: 'Todos los imbuements',
-    charmsPlaceholder: 'Seleccione charms',
     allCharmsButton: 'Todos los charms',
     rareItemsTooltip:
       'Si un artículo raro no está en esta lista, actualmente no hay subasta para él.',
-    rareItemsPlaceholder: 'Escoge uno item',
     allItemsButton: 'Todos los items',
     rareNicknamesTooltip:
       "Nicknames con caracteres especiales (äëïöüÿ'-.,), tamaño de 2-3 caracteres y letras mayúsculas consecutivas (e.g XVI)",
