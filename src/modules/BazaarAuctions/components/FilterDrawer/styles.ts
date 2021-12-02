@@ -4,11 +4,9 @@ import {
   DrawerFooter as BaseDrawerFooter,
   Input as BaseInput,
   Chip as BaseChip,
-  Accordion as BaseAccordion,
 } from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
 import { Smooth } from 'styles'
-import { Label as BaseFilterGroupLabel } from './FilterGroup/styles'
 
 export const HeadWrapper = styled.div`
   display: flex;
@@ -105,18 +103,4 @@ export const ResetButton = styled.button`
   &:active {
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
-`
-
-export const Accordion = styled(BaseAccordion)`
-  padding-bottom: 6px;
-  margin-top: -9px;
-  border-bottom: solid 1px var(--separator);
-`
-
-export const AccordionLabel = styled(BaseFilterGroupLabel)`
-  margin-left: -8px;
-  flex: none;
-  width: calc(100% - 2px);
-  text-align: left;
-  cursor: pointer;
 `

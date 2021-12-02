@@ -8,6 +8,7 @@ import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import FilterGroup from './FilterGroup'
+import SpritePicker from './SpritePicker'
 import { isHistory } from './utils'
 import * as S from './styles'
 import * as Icon from './icons'
@@ -77,15 +78,12 @@ const FilterDrawer = ({
           />
         </FilterGroup>
 
-        <S.Accordion title={<S.AccordionLabel>Outfits</S.AccordionLabel>}>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-          <p>asd</p>
-        </S.Accordion>
+        <SpritePicker
+          title="Outfits"
+          spriteDirectory="outfits"
+          filterKey="outfitSet"
+          options={['Mage', 'Citzen']}
+        />
 
         <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
           <S.ChipWrapper>
