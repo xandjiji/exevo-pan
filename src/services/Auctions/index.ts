@@ -26,13 +26,22 @@ export default class AuctionsClient {
 
   static highlightedAuctionsUrl = `${endpoints.BASE_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
 
-  static getCache(key: string): PaginatedData<CharacterObject> | undefined {
-    return this.cache[key]
+  static getCache(
+    key: string,
+    endpoint: string,
+  ): PaginatedData<CharacterObject> | undefined {
+    const cacheKey = `${key}${endpoint}`
+    return this.cache[cacheKey]
   }
 
-  static setCache(key: string, data: PaginatedData<CharacterObject>): void {
-    this.cache[key] = data
-    setTimeout(() => delete this.cache[key], CACHE_MAX_AGE)
+  static setCache(
+    key: string,
+    endpoint: string,
+    data: PaginatedData<CharacterObject>,
+  ): void {
+    const cacheKey = `${key}${endpoint}`
+    this.cache[cacheKey] = data
+    setTimeout(() => delete this.cache[cacheKey], CACHE_MAX_AGE)
   }
 
   static async fetchAuctionPage({
@@ -47,7 +56,7 @@ export default class AuctionsClient {
       filterOptions,
     )
 
-    const cachedResult = this.getCache(bodyPayload)
+    const cachedResult = this.getCache(bodyPayload, endpoint)
     if (cachedResult) return cachedResult
 
     try {
@@ -58,7 +67,7 @@ export default class AuctionsClient {
       })
 
       const data: PaginatedData<CharacterObject> = await response.json()
-      this.setCache(bodyPayload, data)
+      this.setCache(bodyPayload, endpoint, data)
 
       return data
     } catch (error: unknown) {
