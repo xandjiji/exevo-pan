@@ -13,6 +13,7 @@ declare interface FilterState {
   minLevel: number
   maxLevel: number
   minSkill: number
+  maxSkill: number
   skillKey: Set<ImbuementOptions>
   imbuementsSet: Set<string>
   itemSet: Set<string>
@@ -26,6 +27,7 @@ type FilterOptionsPrimitives = Pick<
   | 'minLevel'
   | 'maxLevel'
   | 'minSkill'
+  | 'maxSkill'
   | 'rareNick'
   | 'soulwarFilter'
 >

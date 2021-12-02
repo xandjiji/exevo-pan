@@ -3,6 +3,7 @@ import {
   DrawerFooter as BaseDrawerFooter,
   Input as BaseInput,
   Chip as BaseChip,
+  RangeSliderInput as BaseRangeSliderInput,
 } from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
 import { Smooth } from 'styles'
@@ -96,4 +97,8 @@ export const ResetButton = styled.button`
   &:active {
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
+`
+
+export const RangeSliderInput = styled(BaseRangeSliderInput)`
+  margin-bottom: 16px;
 `

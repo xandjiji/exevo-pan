@@ -68,6 +68,10 @@ export const filterSchema = [
     key: 'minSkill',
     defaultValue: 10,
   },
+  {
+    key: 'maxSkill',
+    defaultValue: 150,
+  },
 
   {
     key: 'skillKey',

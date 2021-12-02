@@ -20,6 +20,7 @@ export const DEFAULT_FILTER_STATE: FilterState = {
   minLevel: 8,
   maxLevel: 2000,
   minSkill: 10,
+  maxSkill: 150,
   skillKey: new Set([]),
   imbuementsSet: new Set([]),
   itemSet: new Set([]),

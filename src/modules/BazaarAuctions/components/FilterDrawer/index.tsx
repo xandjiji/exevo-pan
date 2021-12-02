@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
-import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
+import { Drawer, Chip, RangeSliderInput } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
@@ -237,17 +237,19 @@ const FilterDrawer = ({
         </FilterGroup>
 
         <FilterGroup label="Skill">
-          <SliderInput
+          <S.RangeSliderInput
             aria-label={homepage.FilterDrawer.minSkillLabel}
             min={10}
-            max={130}
-            value={filterState.minSkill}
+            max={150}
+            value={[filterState.minSkill, filterState.maxSkill]}
             onChange={useCallback(
-              (event: React.ChangeEvent<HTMLInputElement>) =>
-                updateFilters('minSkill', parseInt(event.target.value, 10)),
+              (values: [number, number]) => {
+                const [newMin, newMax] = values
+                updateFilters('minSkill', newMin)
+                updateFilters('maxSkill', newMax)
+              },
               [updateFilters],
             )}
-            style={{ marginBottom: 16 }}
           />
           <S.ChipWrapper>
             <S.IconChip
