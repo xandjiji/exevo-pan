@@ -108,8 +108,8 @@ export const ResetButton = styled.button`
 `
 
 export const Accordion = styled(BaseAccordion)`
-  margin-top: -4px;
-
+  padding-bottom: 6px;
+  margin-top: -9px;
   border-bottom: solid 1px var(--separator);
 `
 
