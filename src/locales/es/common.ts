@@ -120,4 +120,8 @@ export default {
     toCopyLabel: 'Copiar',
     copiedLabel: 'Copiado',
   },
+  Accordion: {
+    open: 'Abrir',
+    close: 'Cerrar',
+  },
 }

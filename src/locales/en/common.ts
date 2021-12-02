@@ -119,4 +119,8 @@ export default {
     toCopyLabel: 'Copy to clipboard',
     copiedLabel: 'Copied to clipboard',
   },
+  Accordion: {
+    open: 'Open',
+    close: 'Close',
+  },
 }
