@@ -7,6 +7,8 @@ export interface DrawerFieldsContextData {
   charmOptions: Option[]
   questOptions: Option[]
   achievementOptions: Option[]
+  outfitValues: string[]
+  mountValues: string[]
 }
 
 type ServerSideProps = Pick<

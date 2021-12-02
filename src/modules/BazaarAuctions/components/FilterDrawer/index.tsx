@@ -32,6 +32,7 @@ const FilterDrawer = ({
     charmOptions,
     questOptions,
     achievementOptions,
+    outfitValues,
   } = useDrawerFields()
   const {
     filterState,
@@ -82,7 +83,7 @@ const FilterDrawer = ({
           title="Outfits"
           spriteDirectory="outfits"
           filterKey="outfitSet"
-          options={['Mage', 'Citzen']}
+          options={outfitValues}
         />
 
         <FilterGroup label={homepage.FilterDrawer.labels.vocation}>

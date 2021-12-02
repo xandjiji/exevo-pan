@@ -9,6 +9,8 @@ const DEFAULT_STATE: DrawerFieldsContextData = {
   charmOptions: [],
   questOptions: [],
   achievementOptions: [],
+  outfitValues: [],
+  mountValues: [],
 }
 
 const DrawerFieldsContext =
