@@ -63,7 +63,7 @@ const FilterDrawer = ({
           </S.ResetButton>
         </S.HeadWrapper>
       </Drawer.Head>
-      <Drawer.Body>
+      <S.DrawerBody>
         <FilterGroup
           label={homepage.FilterDrawer.labels.searchNickname}
           htmlFor="search-nickname-input"
@@ -76,6 +76,16 @@ const FilterDrawer = ({
             onChange={(event) => setNickname(event.target.value)}
           />
         </FilterGroup>
+
+        <S.Accordion title={<S.AccordionLabel>Outfits</S.AccordionLabel>}>
+          <p>asd</p>
+          <p>asd</p>
+          <p>asd</p>
+          <p>asd</p>
+          <p>asd</p>
+          <p>asd</p>
+          <p>asd</p>
+        </S.Accordion>
 
         <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
           <S.ChipWrapper>
@@ -507,7 +517,7 @@ const FilterDrawer = ({
             </Tooltip>
           </S.ChipWrapper>
         </FilterGroup>
-      </Drawer.Body>
+      </S.DrawerBody>
       <S.DrawerFooter />
     </Drawer>
   )

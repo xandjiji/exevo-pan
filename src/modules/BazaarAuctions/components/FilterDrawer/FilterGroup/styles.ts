@@ -3,7 +3,6 @@ import styled from 'styled-components'
 export const Wrapper = styled.div`
   &:not(:last-child) {
     padding-bottom: 16px;
-    margin-bottom: 16px;
     border-bottom: solid 1px;
     border-color: var(--separator);
   }

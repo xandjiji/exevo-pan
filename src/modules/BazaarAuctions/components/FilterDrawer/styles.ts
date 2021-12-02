@@ -1,11 +1,14 @@
 import styled from 'styled-components'
 import {
+  Drawer as BaseDrawer,
   DrawerFooter as BaseDrawerFooter,
   Input as BaseInput,
   Chip as BaseChip,
+  Accordion as BaseAccordion,
 } from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
 import { Smooth } from 'styles'
+import { Label as BaseFilterGroupLabel } from './FilterGroup/styles'
 
 export const HeadWrapper = styled.div`
   display: flex;
@@ -13,6 +16,12 @@ export const HeadWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   flex-grow: 1;
+`
+
+export const DrawerBody = styled(BaseDrawer.Body)`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
 `
 
 export const DrawerFooter = styled(BaseDrawerFooter)`
@@ -96,4 +105,18 @@ export const ResetButton = styled.button`
   &:active {
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
+`
+
+export const Accordion = styled(BaseAccordion)`
+  margin-top: -4px;
+
+  border-bottom: solid 1px var(--separator);
+`
+
+export const AccordionLabel = styled(BaseFilterGroupLabel)`
+  margin-left: -8px;
+  flex: none;
+  width: calc(100% - 2px);
+  text-align: left;
+  cursor: pointer;
 `
