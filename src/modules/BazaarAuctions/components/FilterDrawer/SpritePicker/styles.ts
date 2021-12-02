@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Accordion as BaseAccordion } from 'components/Atoms'
-import { Shadow } from 'styles'
+import { Clickable, Smooth } from 'styles'
 import { Label as BaseFilterGroupLabel } from '../FilterGroup/styles'
 
 export const Accordion = styled(BaseAccordion)`
@@ -23,7 +23,7 @@ export const SpriteGrid = styled.div`
   gap: 8px;
 `
 
-export const Portrait = styled.div`
+export const Portrait = styled.button`
   position: relative;
   padding: 8px;
   width: 56px;
@@ -31,12 +31,18 @@ export const Portrait = styled.div`
   border-radius: 5px;
   background-color: var(--primaryVariant);
   user-select: none;
-  transition: background-color 0.2s ease-out;
 
-  ${Shadow}
+  ${Clickable}
+  ${Smooth}
 
-  img {
-    margin-left: -24px;
-    margin-top: -24px;
+  &[aria-checked='true'] {
+    background-color: var(--primary);
+    filter: brightness(130%) saturate(80%);
   }
+`
+
+export const Sprite = styled.img`
+  margin-left: -24px;
+  margin-top: -24px;
+  pointer-events: none;
 `
