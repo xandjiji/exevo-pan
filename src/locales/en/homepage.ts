@@ -63,5 +63,9 @@ export default {
     rareNicknamesButton: 'Rare nicknames',
     soulwarButton: 'Soulwar available',
     skullEmoji: 'skull',
+    SpritePicker: {
+      item: 'item is selected',
+      items: 'items are selected',
+    },
   },
 }

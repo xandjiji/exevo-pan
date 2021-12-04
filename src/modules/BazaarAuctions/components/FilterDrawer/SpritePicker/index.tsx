@@ -1,3 +1,4 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useFilters } from '../../../contexts/useFilters'
 import * as S from './styles'
 import { SpritePickerProps } from './types'
@@ -11,17 +12,28 @@ const SpritePicker = ({
   options,
   filterKey,
 }: SpritePickerProps): JSX.Element => {
+  const {
+    translations: { homepage },
+  } = useTranslations()
+
   const { filterState, updateFilters } = useFilters()
 
-  const currentSet = filterState[filterKey] as Set<string>
+  const selectedCount = (filterState[filterKey] as Set<string>).size
 
   return (
     <S.Accordion
       title={
         <S.AccordionLabel>
           {title}
-          <S.Counter aria-hidden={!currentSet.size}>
-            {currentSet.size}
+          <S.Counter
+            aria-label={`${selectedCount} ${
+              homepage.FilterDrawer.SpritePicker[
+                selectedCount === 1 ? 'item' : 'items'
+              ]
+            }`}
+            aria-hidden={!selectedCount}
+          >
+            {selectedCount}
           </S.Counter>
         </S.AccordionLabel>
       }
