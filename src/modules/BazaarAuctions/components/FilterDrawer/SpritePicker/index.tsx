@@ -17,6 +17,7 @@ const SpritePicker = ({
         {options.map((name) => (
           <S.Portrait
             role="switch"
+            title={name}
             aria-checked={(filterState[filterKey] as Set<string>).has(name)}
             onClick={() => updateFilters(filterKey, name)}
           >
