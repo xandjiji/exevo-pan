@@ -23,6 +23,7 @@ declare interface CharacterObject {
   outfitId: string
   serverId: number
   vocationId: number
+  sex: boolean
   level: number
   imbuements: string[]
   items: number[]
@@ -39,24 +40,3 @@ declare interface CharacterObject {
 }
 
 declare type PartialCharacterObject = Omit<CharacterObject, 'serverData'>
-
-declare type MinifiedCharacterObject = [
-  number,
-  string,
-  number,
-  number,
-  boolean,
-  string,
-  number,
-  number,
-  number,
-  number[],
-  number[],
-  number[],
-  boolean,
-  number[],
-  number[],
-  number[],
-  number[],
-  number[],
-]

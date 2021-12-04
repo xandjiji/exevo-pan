@@ -21,6 +21,7 @@ declare interface FilterState {
   rareNick: boolean
   questSet: Set<string>
   addon: number
+  sex: boolean
   outfitSet: Set<string>
   storeOutfitSet: Set<string>
   mountSet: Set<string>
@@ -38,6 +39,7 @@ type FilterOptionsPrimitives = Pick<
   | 'maxSkill'
   | 'rareNick'
   | 'addon'
+  | 'sex'
   | 'soulwarAvailable'
 >
 
