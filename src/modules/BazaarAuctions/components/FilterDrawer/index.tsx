@@ -49,7 +49,7 @@ const FilterDrawer = ({
     filterState.nicknameFilter,
   )
 
-  const sexDirectory = filterState.sex ? 'male' : 'female'
+  const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
 
   return (

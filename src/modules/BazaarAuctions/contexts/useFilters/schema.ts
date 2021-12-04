@@ -78,7 +78,7 @@ export const filterSchema = [
   },
   {
     key: 'sex',
-    defaultValue: true,
+    defaultValue: false,
   },
   {
     key: 'skillKey',

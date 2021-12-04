@@ -27,7 +27,7 @@ export const DEFAULT_FILTER_STATE: FilterState = {
   itemSet: new Set([]),
   rareNick: false,
   addon: 3,
-  sex: true,
+  sex: false,
   questSet: new Set([]),
   outfitSet: new Set([]),
   mountSet: new Set([]),
