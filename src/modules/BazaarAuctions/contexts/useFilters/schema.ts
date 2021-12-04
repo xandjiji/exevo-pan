@@ -68,7 +68,18 @@ export const filterSchema = [
     key: 'minSkill',
     defaultValue: 10,
   },
-
+  {
+    key: 'maxSkill',
+    defaultValue: 150,
+  },
+  {
+    key: 'addon',
+    defaultValue: 3,
+  },
+  {
+    key: 'sex',
+    defaultValue: true,
+  },
   {
     key: 'skillKey',
     defaultValue: new Set<'axe' | 'club' | 'distance' | 'magic' | 'sword'>([]),
