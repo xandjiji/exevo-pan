@@ -9,6 +9,11 @@ declare interface CharacterSkillsObject {
   shielding: number
 }
 
+declare type Outfit = {
+  name: string
+  type: number
+}
+
 declare interface CharacterObject {
   id: number
   nickname: string
@@ -24,8 +29,10 @@ declare interface CharacterObject {
   charms: string[]
   transfer: boolean
   quests: string[]
-  outfits: string[]
+  outfits: Outfit[]
+  storeOutfits: Outfit[]
   mounts: string[]
+  storeMounts: string[]
   rareAchievements: string[]
   skills: CharacterSkillsObject
   serverData: ServerObject

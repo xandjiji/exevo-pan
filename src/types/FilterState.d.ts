@@ -13,14 +13,18 @@ declare interface FilterState {
   minLevel: number
   maxLevel: number
   minSkill: number
+  maxSkill: number
   skillKey: Set<SkillOptions>
   imbuementsSet: Set<string>
   charmsSet: Set<string>
   itemSet: Set<string>
   rareNick: boolean
   questSet: Set<string>
+  addon: number
   outfitSet: Set<string>
+  storeOutfitSet: Set<string>
   mountSet: Set<string>
+  storeMountSet: Set<string>
   achievementSet: Set<string>
   soulwarAvailable: boolean
 }
@@ -31,7 +35,9 @@ type FilterOptionsPrimitives = Pick<
   | 'minLevel'
   | 'maxLevel'
   | 'minSkill'
+  | 'maxSkill'
   | 'rareNick'
+  | 'addon'
   | 'soulwarAvailable'
 >
 
@@ -47,6 +53,8 @@ declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
   itemSet: string[]
   questSet: string[]
   outfitSet: string[]
+  storeOutfitSet: string[]
   mountSet: string[]
+  storeMountSet: string[]
   achievementSet: string[]
 }
