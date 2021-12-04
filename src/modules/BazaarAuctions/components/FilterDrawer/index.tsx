@@ -34,6 +34,8 @@ const FilterDrawer = ({
     achievementOptions,
     outfitValues,
     storeOutfitValues,
+    mountValues,
+    storeMountValues,
   } = useDrawerFields()
   const {
     filterState,
@@ -95,6 +97,20 @@ const FilterDrawer = ({
           directorySuffix={`_${filterState.addon}`}
           filterKey="storeOutfitSet"
           options={storeOutfitValues}
+        />
+
+        <SpritePicker
+          title="Mounts"
+          spriteDirectory="mounts"
+          filterKey="mountSet"
+          options={mountValues}
+        />
+
+        <SpritePicker
+          title="Store Mounts"
+          spriteDirectory="storemounts"
+          filterKey="storeMountSet"
+          options={storeMountValues}
         />
 
         <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
