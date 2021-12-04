@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Accordion as BaseAccordion } from 'components/Atoms'
-import { Clickable, Smooth } from 'styles'
+import { Clickable, Smooth, Shadow } from 'styles'
 import { Label as BaseFilterGroupLabel } from '../FilterGroup/styles'
 
 export const Accordion = styled(BaseAccordion)`
@@ -11,10 +11,32 @@ export const Accordion = styled(BaseAccordion)`
 
 export const AccordionLabel = styled(BaseFilterGroupLabel)`
   margin-left: -8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
   flex: none;
   width: calc(100% - 2px);
   text-align: left;
   cursor: pointer;
+`
+
+export const Counter = styled.strong`
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background-color: var(--battleYellow);
+  ${Smooth}
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: #000;
+
+  &[aria-hidden='true'] {
+    opacity: 0;
+  }
 `
 
 export const SpriteGrid = styled.div`

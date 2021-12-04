@@ -2,6 +2,8 @@ import { useFilters } from '../../../contexts/useFilters'
 import * as S from './styles'
 import { SpritePickerProps } from './types'
 
+const a = null
+
 const SpritePicker = ({
   title,
   spriteDirectory,
@@ -11,8 +13,19 @@ const SpritePicker = ({
 }: SpritePickerProps): JSX.Element => {
   const { filterState, updateFilters } = useFilters()
 
+  const currentSet = filterState[filterKey] as Set<string>
+
   return (
-    <S.Accordion title={<S.AccordionLabel>{title}</S.AccordionLabel>}>
+    <S.Accordion
+      title={
+        <S.AccordionLabel>
+          {title}
+          <S.Counter aria-hidden={!currentSet.size}>
+            {currentSet.size}
+          </S.Counter>
+        </S.AccordionLabel>
+      }
+    >
       <S.SpriteGrid>
         {options.map((name) => (
           <S.Portrait
