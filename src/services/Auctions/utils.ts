@@ -20,6 +20,8 @@ export const serializeBody = (
     questSet: [...filterOptions.questSet],
     outfitSet: [...filterOptions.outfitSet],
     mountSet: [...filterOptions.mountSet],
+    storeOutfitSet: [...filterOptions.storeOutfitSet],
+    storeMountSet: [...filterOptions.storeMountSet],
     achievementSet: [...filterOptions.achievementSet],
   }
 

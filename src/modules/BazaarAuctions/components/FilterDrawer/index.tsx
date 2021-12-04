@@ -33,6 +33,7 @@ const FilterDrawer = ({
     questOptions,
     achievementOptions,
     outfitValues,
+    storeOutfitValues,
   } = useDrawerFields()
   const {
     filterState,
@@ -48,6 +49,7 @@ const FilterDrawer = ({
     filterState.nicknameFilter,
   )
 
+  const sexDirectory = filterState.sex ? 'male' : 'female'
   const isFilterReset = activeFilterCount === 0
 
   return (
@@ -81,10 +83,18 @@ const FilterDrawer = ({
 
         <SpritePicker
           title="Outfits"
-          spriteDirectory={`outfits/${filterState.sex ? 'male' : 'female'}`}
+          spriteDirectory={`outfits/${sexDirectory}`}
           directorySuffix={`_${filterState.addon}`}
           filterKey="outfitSet"
           options={outfitValues}
+        />
+
+        <SpritePicker
+          title="Store Outfits"
+          spriteDirectory={`storeoutfits/${sexDirectory}`}
+          directorySuffix={`_${filterState.addon}`}
+          filterKey="storeOutfitSet"
+          options={storeOutfitValues}
         />
 
         <FilterGroup label={homepage.FilterDrawer.labels.vocation}>

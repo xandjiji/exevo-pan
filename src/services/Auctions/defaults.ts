@@ -20,15 +20,20 @@ export const DEFAULT_FILTER_STATE: FilterState = {
   minLevel: 8,
   maxLevel: 2000,
   minSkill: 10,
+  maxSkill: 150,
   skillKey: new Set([]),
   imbuementsSet: new Set([]),
   charmsSet: new Set([]),
   itemSet: new Set([]),
   rareNick: false,
+  addon: 3,
+  sex: true,
   questSet: new Set([]),
   outfitSet: new Set([]),
   mountSet: new Set([]),
   achievementSet: new Set([]),
+  storeOutfitSet: new Set([]),
+  storeMountSet: new Set([]),
   soulwarAvailable: false,
 }
 
@@ -47,4 +52,6 @@ export const DEFAULT_SERIALIZED_FILTER_STATE: SerializedFilterOptions = {
   outfitSet: [],
   mountSet: [],
   achievementSet: [],
+  storeOutfitSet: [],
+  storeMountSet: [],
 }

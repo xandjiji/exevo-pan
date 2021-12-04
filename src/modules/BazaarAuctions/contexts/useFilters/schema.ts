@@ -121,7 +121,19 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
+    key: 'storeOutfitSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
     key: 'mountSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'storeMountSet',
     defaultValue: new Set<string>([]),
     encode: encodeSet,
     decode: decodeStringSet,
