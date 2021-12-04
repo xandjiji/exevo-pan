@@ -81,7 +81,8 @@ const FilterDrawer = ({
 
         <SpritePicker
           title="Outfits"
-          spriteDirectory="outfits"
+          spriteDirectory={`outfits/${filterState.sex ? 'male' : 'female'}`}
+          directorySuffix={`_${filterState.addon}`}
           filterKey="outfitSet"
           options={outfitValues}
         />
