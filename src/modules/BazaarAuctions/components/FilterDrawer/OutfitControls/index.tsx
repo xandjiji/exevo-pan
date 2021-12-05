@@ -3,7 +3,7 @@ import { useFilters } from '../../../contexts/useFilters'
 import * as S from './styles'
 
 const OutfitControls = (): JSX.Element => {
-  const { filterState, updateFilters } = useFilters()
+  const { filterState, updateFilters, dispatch } = useFilters()
 
   const firstAddonSelected = filterState.addon === 1 || filterState.addon === 3
   const secondAddonSelected = filterState.addon === 2 || filterState.addon === 3
@@ -19,12 +19,12 @@ const OutfitControls = (): JSX.Element => {
       <Checkbox
         label="Addon 1"
         checked={firstAddonSelected}
-        onClick={() => updateFilters('addon', 0)}
+        onClick={() => dispatch({ type: 'TOGGLE_ADDON', value: 1 })}
       />
       <Checkbox
         label="Addon 2"
         checked={secondAddonSelected}
-        onClick={() => updateFilters('addon', 2)}
+        onClick={() => dispatch({ type: 'TOGGLE_ADDON', value: 2 })}
       />
     </S.Wrapper>
   )
