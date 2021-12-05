@@ -1,4 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
+import { memo } from 'react'
 import { useFilters } from '../../../contexts/useFilters'
 import * as S from './styles'
 import { SpritePickerProps } from './types'
@@ -41,6 +42,7 @@ const SpritePicker = ({
         {children}
         {options.map((name) => (
           <S.Portrait
+            key={name}
             role="switch"
             title={name}
             aria-checked={(filterState[filterKey] as Set<string>).has(name)}
@@ -60,4 +62,4 @@ const SpritePicker = ({
   )
 }
 
-export default SpritePicker
+export default memo(SpritePicker)
