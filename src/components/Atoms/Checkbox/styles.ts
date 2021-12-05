@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import TickSvg from 'assets/svgs/check.svg'
 import { Smooth } from 'styles'
 
@@ -18,9 +18,14 @@ export const Input = styled.input`
     background-color: var(--primary);
     border-color: var(--primary);
   }
+
+  &:disabled {
+    background-color: var(--separator);
+    border-color: var(--separator);
+  }
 `
 
-export const Label = styled.label`
+export const Label = styled.label<{ disabled: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,6 +41,12 @@ export const Label = styled.label`
   &:active ${Input} {
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
+
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      pointer-events: none;
+    `};
 `
 
 export const TickIcon = styled(TickSvg)`

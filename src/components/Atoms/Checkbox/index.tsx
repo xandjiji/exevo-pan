@@ -5,6 +5,7 @@ import { CheckboxProps } from './types'
 const Checkbox = ({
   label,
   id,
+  disabled = false,
   checked: checkedProp,
   onChange,
   ...props
@@ -21,10 +22,11 @@ const Checkbox = ({
   )
 
   return (
-    <S.Label>
+    <S.Label disabled={disabled}>
       <S.InputWrapper style={{ marginRight: label ? 6 : undefined }}>
         <S.Input
           id={id}
+          disabled={disabled}
           type="checkbox"
           checked={checked}
           onChange={handleChange}
