@@ -21,6 +21,9 @@ const decodeNumberSet = (encodedValue: string): Set<number> =>
 const decodeStringSet = (encodedValue: string): Set<string> =>
   decodeSet(encodedValue, 'string') as Set<string>
 
+const decodeNumber = (encodedValue: string): number => Number(encodedValue)
+const decodeBoolean = (encodedValue: string): boolean => encodedValue === 'true'
+
 export const filterSchema = [
   {
     key: 'nicknameFilter',
@@ -59,26 +62,32 @@ export const filterSchema = [
   {
     key: 'minLevel',
     defaultValue: 8,
+    decode: decodeNumber,
   },
   {
     key: 'maxLevel',
     defaultValue: 2000,
+    decode: decodeNumber,
   },
   {
     key: 'minSkill',
     defaultValue: 10,
+    decode: decodeNumber,
   },
   {
     key: 'maxSkill',
     defaultValue: 150,
+    decode: decodeNumber,
   },
   {
     key: 'addon',
     defaultValue: 3,
+    decode: decodeNumber,
   },
   {
     key: 'sex',
     defaultValue: false,
+    decode: decodeBoolean,
   },
   {
     key: 'skillKey',
@@ -107,6 +116,7 @@ export const filterSchema = [
   {
     key: 'rareNick',
     defaultValue: false,
+    decode: decodeBoolean,
   },
   {
     key: 'questSet',
@@ -147,5 +157,6 @@ export const filterSchema = [
   {
     key: 'soulwarAvailable',
     defaultValue: false,
+    decode: decodeBoolean,
   },
 ]
