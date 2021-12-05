@@ -9,18 +9,13 @@ const SpritePicker = ({
   directorySuffix = '',
   options,
   filterKey,
-  toggleSex = false,
+  children,
 }: SpritePickerProps): JSX.Element => {
   const {
     translations: { homepage },
   } = useTranslations()
 
   const { filterState, updateFilters } = useFilters()
-
-  const handleSexToggle = (event: React.MouseEvent<HTMLDivElement>) => {
-    event.stopPropagation()
-    updateFilters('sex', !filterState.sex)
-  }
 
   const selectedCount = (filterState[filterKey] as Set<string>).size
 
@@ -39,18 +34,11 @@ const SpritePicker = ({
           >
             {selectedCount}
           </S.Counter>
-
-          {toggleSex && (
-            <S.SwitchWrapper onClick={handleSexToggle}>
-              Male
-              <S.Switch active={filterState.sex} />
-              Female
-            </S.SwitchWrapper>
-          )}
         </S.AccordionLabel>
       }
     >
       <S.SpriteGrid>
+        {children}
         {options.map((name) => (
           <S.Portrait
             role="switch"

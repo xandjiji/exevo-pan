@@ -1,8 +1,5 @@
 import styled from 'styled-components'
-import {
-  Accordion as BaseAccordion,
-  Switch as BaseSwitch,
-} from 'components/Atoms'
+import { Accordion as BaseAccordion } from 'components/Atoms'
 import { Clickable, Smooth } from 'styles'
 import { Label as BaseFilterGroupLabel } from '../FilterGroup/styles'
 
@@ -70,20 +67,4 @@ export const Sprite = styled.img`
   margin-left: -24px;
   margin-top: -24px;
   pointer-events: none;
-`
-
-export const SwitchWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 6px;
-
-  font-size: 12px;
-  height: 24px;
-`
-
-export const Switch = styled(BaseSwitch)`
-  > * {
-    margin: 0;
-  }
 `

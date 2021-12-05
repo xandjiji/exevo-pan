@@ -4,6 +4,5 @@ export type SpritePickerProps = {
   directorySuffix?: string
   filterKey: keyof FilterState
   options: string[]
-  toggleSex?: boolean
-  addons?: boolean
+  children?: React.ReactNode
 }
