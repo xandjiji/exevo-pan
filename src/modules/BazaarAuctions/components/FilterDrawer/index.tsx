@@ -89,6 +89,7 @@ const FilterDrawer = ({
           directorySuffix={`_${filterState.addon}`}
           filterKey="outfitSet"
           options={outfitValues}
+          toggleSex
         />
 
         <SpritePicker

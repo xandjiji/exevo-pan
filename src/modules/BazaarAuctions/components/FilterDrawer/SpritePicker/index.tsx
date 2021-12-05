@@ -3,20 +3,24 @@ import { useFilters } from '../../../contexts/useFilters'
 import * as S from './styles'
 import { SpritePickerProps } from './types'
 
-const a = null
-
 const SpritePicker = ({
   title,
   spriteDirectory,
   directorySuffix = '',
   options,
   filterKey,
+  toggleSex = false,
 }: SpritePickerProps): JSX.Element => {
   const {
     translations: { homepage },
   } = useTranslations()
 
   const { filterState, updateFilters } = useFilters()
+
+  const handleSexToggle = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation()
+    updateFilters('sex', !filterState.sex)
+  }
 
   const selectedCount = (filterState[filterKey] as Set<string>).size
 
@@ -35,6 +39,14 @@ const SpritePicker = ({
           >
             {selectedCount}
           </S.Counter>
+
+          {toggleSex && (
+            <S.SwitchWrapper onClick={handleSexToggle}>
+              Male
+              <S.Switch active={filterState.sex} />
+              Female
+            </S.SwitchWrapper>
+          )}
         </S.AccordionLabel>
       }
     >
