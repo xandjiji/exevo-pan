@@ -203,7 +203,21 @@ const outfits: OutfitToken[] = [
     },
   },
   {
-    name: 'Demon',
+    name: 'Crystal Warlord',
+    id: {
+      male: 512,
+      female: 513,
+    },
+  },
+  {
+    name: 'Soil Guardian',
+    id: {
+      male: 516,
+      female: 514,
+    },
+  },
+  {
+    name: 'Demon Outfit',
     id: {
       male: 542,
       female: 541,
@@ -252,7 +266,7 @@ const outfits: OutfitToken[] = [
     },
   },
   {
-    name: 'Festive',
+    name: 'Festive Outfit',
     id: {
       male: 931,
       female: 929,
@@ -294,7 +308,7 @@ const outfits: OutfitToken[] = [
     },
   },
   {
-    name: 'Golden',
+    name: 'Golden Outfit',
     id: {
       male: 1210,
       female: 1211,
