@@ -9,6 +9,7 @@ import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import FilterGroup from './FilterGroup'
 import SpritePicker from './SpritePicker'
+import OutfitControls from './OutfitControls'
 import { isHistory } from './utils'
 import * as S from './styles'
 import * as Icon from './icons'
@@ -89,8 +90,9 @@ const FilterDrawer = ({
           directorySuffix={`_${filterState.addon}`}
           filterKey="outfitSet"
           options={outfitValues}
-          toggleSex
-        />
+        >
+          <OutfitControls />
+        </SpritePicker>
 
         <SpritePicker
           title="Store Outfits"
