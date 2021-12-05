@@ -1,8 +1,11 @@
 import { Checkbox } from 'components/Atoms'
 import { useFilters } from '../../../contexts/useFilters'
 import * as S from './styles'
+import { OutfitControlsProps } from './types'
 
-const OutfitControls = (): JSX.Element => {
+const OutfitControls = ({
+  disableAddons = false,
+}: OutfitControlsProps): JSX.Element => {
   const { filterState, updateFilters, dispatch } = useFilters()
 
   const firstAddonSelected = filterState.addon === 1 || filterState.addon === 3
@@ -18,12 +21,14 @@ const OutfitControls = (): JSX.Element => {
 
       <Checkbox
         label="Addon 1"
-        checked={firstAddonSelected}
+        disabled={disableAddons}
+        checked={disableAddons || firstAddonSelected}
         onClick={() => dispatch({ type: 'TOGGLE_ADDON', value: 1 })}
       />
       <Checkbox
         label="Addon 2"
-        checked={secondAddonSelected}
+        disabled={disableAddons}
+        checked={disableAddons || secondAddonSelected}
         onClick={() => dispatch({ type: 'TOGGLE_ADDON', value: 2 })}
       />
     </S.Wrapper>

@@ -97,10 +97,12 @@ const FilterDrawer = ({
         <SpritePicker
           title="Store Outfits"
           spriteDirectory={`storeoutfits/${sexDirectory}`}
-          directorySuffix={`_${filterState.addon}`}
+          directorySuffix="_3"
           filterKey="storeOutfitSet"
           options={storeOutfitValues}
-        />
+        >
+          <OutfitControls disableAddons />
+        </SpritePicker>
 
         <SpritePicker
           title="Mounts"
