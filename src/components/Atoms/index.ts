@@ -1,6 +1,7 @@
 export { default as Accordion } from './Accordion'
 export { default as AuctionTimer } from './AuctionTimer'
 export { default as Button } from './Button'
+export { default as Checkbox } from './Checkbox'
 export { default as Chip } from './Chip'
 export { default as CopyButton } from './CopyButton'
 export { default as CtaButton } from './CtaButton'
