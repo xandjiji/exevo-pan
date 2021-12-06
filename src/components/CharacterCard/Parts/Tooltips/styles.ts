@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components'
 import MagicSvg from 'assets/svgs/magic.svg'
 import CharmSvg from 'assets/svgs/charms.svg'
+import BookSvg from 'assets/svgs/book.svg'
 
 const iconStyle = css`
   margin-right: 4px;
@@ -14,7 +15,9 @@ export const Wrapper = styled.div`
   font-size: 12px;
 `
 
-export const Item = styled.span<{ active: boolean }>`
+export const ListWrapper = styled.ul``
+
+export const Item = styled.li<{ active: boolean }>`
   display: block;
   font-size: 12px;
   text-align: left;
@@ -41,5 +44,9 @@ export const ImbuementIcon = styled(MagicSvg)`
 `
 
 export const CharmIcon = styled(CharmSvg)`
+  ${iconStyle}
+`
+
+export const QuestIcon = styled(BookSvg)`
   ${iconStyle}
 `
