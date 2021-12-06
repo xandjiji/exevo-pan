@@ -1,4 +1,3 @@
-export interface CharacterImbuementsProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface TooltipProps extends React.HTMLAttributes<HTMLDivElement> {
   items: string[]
 }

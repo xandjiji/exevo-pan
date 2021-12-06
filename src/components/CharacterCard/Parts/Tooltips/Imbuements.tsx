@@ -3,12 +3,12 @@ import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'DataDictionary/dictionaries/imbuement'
 import * as S from './styles'
-import { CharacterImbuementsProps } from './types'
+import { TooltipProps } from './types'
 
 const CharacterImbuements = ({
   items,
   ...props
-}: CharacterImbuementsProps): JSX.Element => {
+}: TooltipProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()

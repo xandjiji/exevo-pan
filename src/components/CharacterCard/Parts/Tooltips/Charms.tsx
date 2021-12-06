@@ -3,12 +3,9 @@ import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'DataDictionary/dictionaries/charm'
 import * as S from './styles'
-import { CharacterImbuementsProps } from './types'
+import { TooltipProps } from './types'
 
-const CharacterImbuements = ({
-  items,
-  ...props
-}: CharacterImbuementsProps): JSX.Element => {
+const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -32,4 +29,4 @@ const CharacterImbuements = ({
   )
 }
 
-export default CharacterImbuements
+export default CharacterQuests
