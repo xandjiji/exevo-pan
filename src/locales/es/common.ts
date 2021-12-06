@@ -116,6 +116,12 @@ export default {
         charms: 'Lista de charms',
         quests: 'Lista de quests',
       },
+      quests: {
+        utilitary: 'Útiles',
+        access: 'Accesos',
+        boss: 'Bosses',
+        other: 'Otros',
+      },
     },
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',

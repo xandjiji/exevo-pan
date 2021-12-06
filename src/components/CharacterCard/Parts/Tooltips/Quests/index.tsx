@@ -21,23 +21,23 @@ const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
       content={
         <Grid>
           <Group>
-            <Title>Utilitary</Title>
+            <Title>{common.CharacterCard.Tooltips.quests.utilitary}</Title>
             <ListedItems fullList={utilitary} characterSet={characterQuests} />
           </Group>
 
           <Group>
-            <Title>Access</Title>
+            <Title>{common.CharacterCard.Tooltips.quests.access}</Title>
             <ListedItems fullList={access} characterSet={characterQuests} />
           </Group>
 
           <Group>
-            <Title>Bosses</Title>
+            <Title>{common.CharacterCard.Tooltips.quests.boss}</Title>
             <ListedItems fullList={bosses} characterSet={characterQuests} />
           </Group>
 
           {!!others.length && (
             <Group>
-              <Title>Others</Title>
+              <Title>{common.CharacterCard.Tooltips.quests.other}</Title>
               <ListedItems fullList={others} characterSet={characterQuests} />
             </Group>
           )}
