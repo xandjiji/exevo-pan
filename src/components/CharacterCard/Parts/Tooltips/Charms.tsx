@@ -2,10 +2,11 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'DataDictionary/dictionaries/charm'
+import ListedItems from './ListedItems'
 import * as S from './styles'
 import { TooltipProps } from './types'
 
-const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
+const CharacterCharms = ({ items, ...props }: TooltipProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -15,11 +16,7 @@ const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.charms}
-      content={tokens.map((charm) => (
-        <S.Item key={charm} active={characterCharms.has(charm)}>
-          {charm}
-        </S.Item>
-      ))}
+      content={<ListedItems fullList={tokens} characterSet={characterCharms} />}
     >
       <S.Wrapper {...props}>
         <S.CharmIcon />
@@ -29,4 +26,4 @@ const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
   )
 }
 
-export default CharacterQuests
+export default CharacterCharms

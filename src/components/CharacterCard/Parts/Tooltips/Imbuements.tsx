@@ -2,6 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'DataDictionary/dictionaries/imbuement'
+import ListedItems from './ListedItems'
 import * as S from './styles'
 import { TooltipProps } from './types'
 
@@ -21,11 +22,9 @@ const CharacterImbuements = ({
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.imbuements}
-      content={tokens.map((imbuement) => (
-        <S.Item key={imbuement} active={characterImbuements.has(imbuement)}>
-          {imbuement}
-        </S.Item>
-      ))}
+      content={
+        <ListedItems fullList={tokens} characterSet={characterImbuements} />
+      }
     >
       <S.Wrapper {...props}>
         <S.ImbuementIcon />
