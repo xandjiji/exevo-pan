@@ -126,6 +126,12 @@ export default {
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
     highlightLabelText: '¡Destaque su subasta!',
+    SpecialTags: {
+      manyCharms: 'Muchas charms',
+      manyQuests: 'Muchas quests',
+      manyMounts: 'Muchas mounts',
+      manyStoryCosmetics: 'Muchos cosmeticos comprados',
+    },
   },
   StepperCompletedLabel: 'Paso completado',
   CopyButton: {

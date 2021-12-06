@@ -125,6 +125,12 @@ export default {
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',
     highlightLabelText: 'Destaque seu leilão!',
+    SpecialTags: {
+      manyCharms: 'Muitos charms',
+      manyQuests: 'Muitas quests',
+      manyMounts: 'Muitas mounts',
+      manyStoryCosmetics: 'Muitos cosmeticos comprados',
+    },
   },
   StepperCompletedLabel: 'Passo completado',
   CopyButton: {

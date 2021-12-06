@@ -125,6 +125,12 @@ export default {
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
     highlightLabelText: 'Highlight your auction!',
+    SpecialTags: {
+      manyCharms: 'Many charms',
+      manyQuests: 'Many quests',
+      manyMounts: 'Many mounts',
+      manyStoryCosmetics: 'Many store cosmetics',
+    },
   },
   StepperCompletedLabel: 'Step completed',
   CopyButton: {
