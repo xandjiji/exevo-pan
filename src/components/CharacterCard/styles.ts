@@ -3,7 +3,6 @@ import {
   SpritePortrait as BaseSpriteProtrait,
   LabeledTextBox as BaseLabeledTextBox,
   AuctionTimer as BaseAuctionTimer,
-  Chip as BaseChip,
 } from 'components/Atoms'
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
@@ -135,20 +134,5 @@ export const Footer = styled.div`
 
   > * {
     width: fit-content;
-  }
-`
-
-export const CharmWrapper = styled.div`
-  margin-top: 4px;
-  margin-bottom: -8px;
-  display: flex;
-  flex-wrap: wrap;
-`
-
-export const Charm = styled(BaseChip)`
-  margin-bottom: 8px;
-
-  &:not(:last-child) {
-    margin-right: 8px;
   }
 `

@@ -13,6 +13,7 @@ import {
   CharmsTooltip,
   QuestsTooltip,
   TagButton,
+  SpecialTags,
 } from './Parts'
 import * as S from './styles'
 import { CharacterCardProps } from './types'
@@ -108,13 +109,7 @@ const CharacterCard = ({
         <CharmsTooltip items={charms} />
         <QuestsTooltip items={quests} />
 
-        {!!charms.length && (
-          <S.CharmWrapper>
-            {charms.map((charm) => (
-              <S.Charm key={charm}>{charm}</S.Charm>
-            ))}
-          </S.CharmWrapper>
-        )}
+        <SpecialTags character={characterData} />
       </S.Footer>
     </S.Wrapper>
   )
