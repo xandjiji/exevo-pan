@@ -1,5 +1,6 @@
 export { default as ImbuementsTooltip } from './Tooltips/Imbuements'
 export { default as CharmsTooltip } from './Tooltips/Charms'
+export { default as QuestsTooltip } from './Tooltips/Quests'
 export { default as CharacterItems } from './CharacterItems'
 export { default as CharacterSkills } from './CharacterSkills'
 export { default as ServerInfo } from './ServerInfo'

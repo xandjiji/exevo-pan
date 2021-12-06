@@ -11,6 +11,7 @@ import {
   CharacterSkills,
   ImbuementsTooltip,
   CharmsTooltip,
+  QuestsTooltip,
   TagButton,
 } from './Parts'
 import * as S from './styles'
@@ -40,6 +41,7 @@ const CharacterCard = ({
     skills,
     imbuements,
     charms,
+    quests,
   } = characterData
 
   const { pathname } = useRouter()
@@ -104,6 +106,7 @@ const CharacterCard = ({
       <S.Footer>
         <ImbuementsTooltip items={imbuements} />
         <CharmsTooltip items={charms} />
+        <QuestsTooltip items={quests} />
 
         {!!charms.length && (
           <S.CharmWrapper>
