@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
-import { tokens } from 'DataDictionary/dictionaries/imbuement'
+import { tokens } from 'DataDictionary/dictionaries/charm'
 import * as S from './styles'
 import { CharacterImbuementsProps } from './types'
 
@@ -13,23 +13,20 @@ const CharacterImbuements = ({
     translations: { common },
   } = useTranslations()
 
-  const characterImbuements = useMemo(
-    () => new Set<string>([...items]),
-    [items],
-  )
+  const characterCharms = useMemo(() => new Set<string>([...items]), [items])
 
   return (
     <Tooltip
-      aria-label={common.CharacterCard.Tooltips.labels.imbuements}
-      content={tokens.map((imbuement) => (
-        <S.Item key={imbuement} active={characterImbuements.has(imbuement)}>
-          {imbuement}
+      aria-label={common.CharacterCard.Tooltips.labels.charms}
+      content={tokens.map((charm) => (
+        <S.Item key={charm} active={characterCharms.has(charm)}>
+          {charm}
         </S.Item>
       ))}
     >
       <S.Wrapper {...props}>
-        <S.ImbuementIcon />
-        {`Imbuements: ${items.length}/${tokens.length}`}
+        <S.CharmIcon />
+        {`Charms: ${items.length}/${tokens.length}`}
       </S.Wrapper>
     </Tooltip>
   )

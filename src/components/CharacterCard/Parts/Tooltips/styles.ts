@@ -1,16 +1,16 @@
 import styled, { css } from 'styled-components'
 import MagicSvg from 'assets/svgs/magic.svg'
+import CharmSvg from 'assets/svgs/charms.svg'
 
 const iconStyle = css`
   margin-right: 4px;
   width: 18px;
   height: 18px;
-  transform: translateY(3px);
+  transform: translateY(4px);
   fill: var(--onSurface);
 `
 
 export const Wrapper = styled.div`
-  margin-bottom: 12px;
   font-size: 12px;
 `
 
@@ -37,5 +37,9 @@ export const Item = styled.span<{ active: boolean }>`
 `
 
 export const ImbuementIcon = styled(MagicSvg)`
+  ${iconStyle}
+`
+
+export const CharmIcon = styled(CharmSvg)`
   ${iconStyle}
 `

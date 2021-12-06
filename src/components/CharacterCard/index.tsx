@@ -10,6 +10,7 @@ import {
   CharacterItems,
   CharacterSkills,
   ImbuementsTooltip,
+  CharmsTooltip,
   TagButton,
 } from './Parts'
 import * as S from './styles'
@@ -102,6 +103,7 @@ const CharacterCard = ({
 
       <S.Footer>
         <ImbuementsTooltip items={imbuements} />
+        <CharmsTooltip items={charms} />
 
         {!!charms.length && (
           <S.CharmWrapper>

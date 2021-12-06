@@ -128,9 +128,18 @@ export const TibiaCoinIcon = styled(Image).attrs({
 export const Footer = styled.div`
   padding-top: 6px;
   border-top: solid 1px var(--separator);
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 8px;
+
+  > * {
+    width: fit-content;
+  }
 `
 
 export const CharmWrapper = styled.div`
+  margin-top: 4px;
   margin-bottom: -8px;
   display: flex;
   flex-wrap: wrap;
