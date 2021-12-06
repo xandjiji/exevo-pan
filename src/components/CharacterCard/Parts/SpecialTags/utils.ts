@@ -3,7 +3,7 @@ import { OutfitCheck } from './types'
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26
 const MOUNT_CHECK = 35
-const STORE_CHECK = 5
+const STORE_CHECK = 4
 const rareMounts = new Set<string>([
   'Rift Runner',
   'Phantasmal Jade',
