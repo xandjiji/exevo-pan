@@ -6,7 +6,13 @@ export const Grid = styled.div`
   justify-content: space-between;
 `
 
-export const Group = styled.div``
+export const Group = styled.div`
+  @media (max-width: 460px) {
+    * {
+      font-size: 10px;
+    }
+  }
+`
 
 export const Title = styled.h5`
   margin-bottom: 8px;
