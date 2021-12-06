@@ -4,5 +4,5 @@ export interface SpecialTagsProps {
 
 export type OutfitCheck = {
   tag: string
-  test: (outfit: Outfit) => boolean
+  test: (outfit: Outfit, character: CharacterObject) => boolean
 }

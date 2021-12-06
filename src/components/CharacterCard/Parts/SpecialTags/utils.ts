@@ -16,7 +16,11 @@ const rareMounts = new Set<string>([
 
 const outfitChecks: Record<string, OutfitCheck> = {
   Mage: {
-    test: ({ type }) => type >= 2,
+    test: ({ type }, characterObject) => !characterObject.sex && type >= 2,
+    tag: "Ferumbras' Hat",
+  },
+  Summoner: {
+    test: ({ type }, characterObject) => characterObject.sex && type >= 2,
     tag: "Ferumbras' Hat",
   },
   Elementalist: {
@@ -33,14 +37,10 @@ const outfitChecks: Record<string, OutfitCheck> = {
   },
 }
 
-export const getCharacterTags = ({
-  charms,
-  quests,
-  mounts,
-  outfits,
-  storeMounts,
-  storeOutfits,
-}: CharacterObject): string[] => {
+export const getCharacterTags = (character: CharacterObject): string[] => {
+  const { charms, quests, mounts, outfits, storeMounts, storeOutfits } =
+    character
+
   const tags: string[] = []
 
   if (charms.length >= CHARM_CHECK) tags.push('manyCharms')
@@ -56,7 +56,7 @@ export const getCharacterTags = ({
 
   outfits.forEach((outfit) => {
     const check = outfitChecks[outfit.name]
-    if (check?.test(outfit)) tags.push(check.tag)
+    if (check?.test(outfit, character)) tags.push(check.tag)
   })
 
   return tags
