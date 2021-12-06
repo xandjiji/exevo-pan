@@ -1,4 +1,4 @@
-export { default as CharacterImbuements } from './CharacterImbuements'
+export { default as ImbuementsTooltip } from './Tooltips/Imbuements'
 export { default as CharacterItems } from './CharacterItems'
 export { default as CharacterSkills } from './CharacterSkills'
 export { default as ServerInfo } from './ServerInfo'

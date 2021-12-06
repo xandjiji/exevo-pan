@@ -9,7 +9,7 @@ import {
   ServerInfo,
   CharacterItems,
   CharacterSkills,
-  CharacterImbuements,
+  ImbuementsTooltip,
   TagButton,
 } from './Parts'
 import * as S from './styles'
@@ -101,7 +101,7 @@ const CharacterCard = ({
       <CharacterSkills skills={skills} />
 
       <S.Footer>
-        <CharacterImbuements imbuements={imbuements} />
+        <ImbuementsTooltip items={imbuements} />
 
         {!!charms.length && (
           <S.CharmWrapper>
