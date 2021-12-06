@@ -84,40 +84,6 @@ const FilterDrawer = ({
           />
         </FilterGroup>
 
-        <SpritePicker
-          title="Outfits"
-          spriteDirectory={`outfits/${sexDirectory}`}
-          directorySuffix={`_${filterState.addon}`}
-          filterKey="outfitSet"
-          options={outfitValues}
-        >
-          <OutfitControls />
-        </SpritePicker>
-
-        <SpritePicker
-          title="Store Outfits"
-          spriteDirectory={`storeoutfits/${sexDirectory}`}
-          directorySuffix="_3"
-          filterKey="storeOutfitSet"
-          options={storeOutfitValues}
-        >
-          <OutfitControls disableAddons />
-        </SpritePicker>
-
-        <SpritePicker
-          title="Mounts"
-          spriteDirectory="mounts"
-          filterKey="mountSet"
-          options={mountValues}
-        />
-
-        <SpritePicker
-          title="Store Mounts"
-          spriteDirectory="storemounts"
-          filterKey="storeMountSet"
-          options={storeMountValues}
-        />
-
         <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
           <S.ChipWrapper>
             <S.IconChip
@@ -334,6 +300,40 @@ const FilterDrawer = ({
             </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
+
+        <SpritePicker
+          title="Outfits"
+          spriteDirectory={`outfits/${sexDirectory}`}
+          directorySuffix={`_${filterState.addon}`}
+          filterKey="outfitSet"
+          options={outfitValues}
+        >
+          <OutfitControls />
+        </SpritePicker>
+
+        <SpritePicker
+          title="Store Outfits"
+          spriteDirectory={`storeoutfits/${sexDirectory}`}
+          directorySuffix="_3"
+          filterKey="storeOutfitSet"
+          options={storeOutfitValues}
+        >
+          <OutfitControls disableAddons />
+        </SpritePicker>
+
+        <SpritePicker
+          title="Mounts"
+          spriteDirectory="mounts"
+          filterKey="mountSet"
+          options={mountValues}
+        />
+
+        <SpritePicker
+          title="Store Mounts"
+          spriteDirectory="storemounts"
+          filterKey="storeMountSet"
+          options={storeMountValues}
+        />
 
         <FilterGroup label="Imbuements">
           <S.FlexWrapper>
