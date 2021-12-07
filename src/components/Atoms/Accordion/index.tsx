@@ -43,7 +43,7 @@ const Accordion = ({
         {title}
         <S.ArrowIcon />
       </S.Button>
-      <S.Content id={contentId} aria-labelledby={buttonId}>
+      <S.Content id={contentId} aria-describedby={buttonId}>
         {open && children}
       </S.Content>
     </S.Wrapper>
