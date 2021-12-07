@@ -27,28 +27,44 @@ export default {
   },
   FilterDrawer: {
     title: 'Filtros',
+    labels: {
+      searchNickname: 'Procurar nickname',
+      vocation: 'Vocação',
+      serverLocation: 'Localização do servidor',
+      minSkill: 'Skill level mínimo',
+      rareAchievements: 'Achievements raros',
+      rareItems: 'Items raros',
+      misc: 'Diversos',
+    },
+    placeholders: {
+      server: 'Escolha um servidor',
+      imbuements: 'Selecionar imbuements',
+      charms: 'Selecionar charms',
+      quests: 'Selecionar quests',
+      achievements: 'Selecionar achievements',
+      rareItems: 'Escolha um item',
+    },
+    tooltips: {
+      rareItems:
+        'Se um item raro não estiver nesta lista é porque não há nenhum leilão com ele no momento.',
+      rareNicknames:
+        "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",
+      soulwar: 'Personagens com nivel 250+ e com a Soul War não completada',
+    },
+    toggleAll: {
+      imbuements: 'Todos os imbuements',
+      charms: 'Todos os charms',
+      items: 'Todos os items',
+    },
     resetFilters: 'Resetar filtros',
-    searchNicknameLabel: 'Procurar nickname',
-    vocationLabel: 'Vocação',
     green: 'Verde',
     yellow: 'Amarelo',
-    serverLocationLabel: 'Localização do servidor',
-    serverPlaceholder: 'Escolha um servidor',
-    minSkillLabel: 'Skill level mínimo',
-    imbuementsPlaceholder: 'Selecionar imbuements',
-    allImbuementsButton: 'Todos os imbuements',
-    rareItemsLabel: 'Items raros',
-    rareItemsTooltip:
-      'Se um item raro não estiver nesta lista é porque não há nenhum leilão com ele no momento.',
-    rareItemsPlaceholder: 'Escolha um item',
-    allItemsButton: 'Todos os items',
-    miscLabel: 'Diversos',
-    rareNicknamesTooltip:
-      "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",
     rareNicknamesButton: 'Nicknames raros',
-    soulwarTooltip:
-      'Personagens com nivel 250+ e com a Soul War não completada',
     soulwarButton: 'Soulwar disponível',
     skullEmoji: 'caveira',
+    SpritePicker: {
+      item: 'item está selecionado',
+      items: 'items estão selecionados',
+    },
   },
 }

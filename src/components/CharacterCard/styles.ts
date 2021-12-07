@@ -3,7 +3,6 @@ import {
   SpritePortrait as BaseSpriteProtrait,
   LabeledTextBox as BaseLabeledTextBox,
   AuctionTimer as BaseAuctionTimer,
-  Chip as BaseChip,
 } from 'components/Atoms'
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
@@ -128,18 +127,12 @@ export const TibiaCoinIcon = styled(Image).attrs({
 export const Footer = styled.div`
   padding-top: 6px;
   border-top: solid 1px var(--separator);
-`
 
-export const CharmWrapper = styled.div`
-  margin-bottom: -8px;
-  display: flex;
-  flex-wrap: wrap;
-`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 8px;
 
-export const Charm = styled(BaseChip)`
-  margin-bottom: 8px;
-
-  &:not(:last-child) {
-    margin-right: 8px;
+  > * {
+    width: fit-content;
   }
 `

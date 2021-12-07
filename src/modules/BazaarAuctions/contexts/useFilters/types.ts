@@ -10,6 +10,10 @@ export type Action =
       allOptions: Option[]
     }
   | {
+      type: 'TOGGLE_ADDON'
+      value: number
+    }
+  | {
       type: 'RESET_FILTERS'
     }
 

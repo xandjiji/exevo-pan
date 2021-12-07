@@ -4,6 +4,13 @@ export interface DrawerFieldsContextData {
   serverOptions: Option[]
   auctionedItemOptions: Option[]
   imbuementOptions: Option[]
+  charmOptions: Option[]
+  questOptions: Option[]
+  achievementOptions: Option[]
+  outfitValues: string[]
+  storeOutfitValues: string[]
+  mountValues: string[]
+  storeMountValues: string[]
 }
 
 type ServerSideProps = Pick<

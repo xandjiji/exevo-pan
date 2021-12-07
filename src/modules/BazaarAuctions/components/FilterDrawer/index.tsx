@@ -8,6 +8,8 @@ import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import FilterGroup from './FilterGroup'
+import SpritePicker from './SpritePicker'
+import OutfitControls from './OutfitControls'
 import { isHistory } from './utils'
 import * as S from './styles'
 import * as Icon from './icons'
@@ -24,8 +26,18 @@ const FilterDrawer = ({
 
   const { current: historyPage } = useRef(isHistory())
 
-  const { serverOptions, auctionedItemOptions, imbuementOptions } =
-    useDrawerFields()
+  const {
+    serverOptions,
+    auctionedItemOptions,
+    imbuementOptions,
+    charmOptions,
+    questOptions,
+    achievementOptions,
+    outfitValues,
+    storeOutfitValues,
+    mountValues,
+    storeMountValues,
+  } = useDrawerFields()
   const {
     filterState,
     defaultValues,
@@ -40,6 +52,7 @@ const FilterDrawer = ({
     filterState.nicknameFilter,
   )
 
+  const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
 
   return (
@@ -57,9 +70,9 @@ const FilterDrawer = ({
           </S.ResetButton>
         </S.HeadWrapper>
       </Drawer.Head>
-      <Drawer.Body>
+      <S.DrawerBody>
         <FilterGroup
-          label={homepage.FilterDrawer.searchNicknameLabel}
+          label={homepage.FilterDrawer.labels.searchNickname}
           htmlFor="search-nickname-input"
         >
           <S.Input
@@ -71,7 +84,7 @@ const FilterDrawer = ({
           />
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.vocationLabel}>
+        <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.vocation.has(0)}
@@ -170,7 +183,7 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.serverLocationLabel}>
+        <FilterGroup label={homepage.FilterDrawer.labels.serverLocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.location.has(0)}
@@ -200,7 +213,7 @@ const FilterDrawer = ({
           <S.AutocompleteInput
             id="server-input"
             aria-controls="server-list"
-            placeholder={homepage.FilterDrawer.serverPlaceholder}
+            placeholder={homepage.FilterDrawer.placeholders.server}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(serverOptions, filterState.serverSet)}
             onItemSelect={useCallback(
@@ -238,7 +251,7 @@ const FilterDrawer = ({
 
         <FilterGroup label="Skill">
           <SliderInput
-            aria-label={homepage.FilterDrawer.minSkillLabel}
+            aria-label={homepage.FilterDrawer.labels.minSkill}
             min={10}
             max={130}
             value={filterState.minSkill}
@@ -288,12 +301,46 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
+        <SpritePicker
+          title="Outfits"
+          spriteDirectory={`outfits/${sexDirectory}`}
+          directorySuffix={`_${filterState.addon}`}
+          filterKey="outfitSet"
+          options={outfitValues}
+        >
+          <OutfitControls />
+        </SpritePicker>
+
+        <SpritePicker
+          title="Store Outfits"
+          spriteDirectory={`storeoutfits/${sexDirectory}`}
+          directorySuffix="_3"
+          filterKey="storeOutfitSet"
+          options={storeOutfitValues}
+        >
+          <OutfitControls disableAddons />
+        </SpritePicker>
+
+        <SpritePicker
+          title="Mounts"
+          spriteDirectory="mounts"
+          filterKey="mountSet"
+          options={mountValues}
+        />
+
+        <SpritePicker
+          title="Store Mounts"
+          spriteDirectory="storemounts"
+          filterKey="storeMountSet"
+          options={storeMountValues}
+        />
+
         <FilterGroup label="Imbuements">
           <S.FlexWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
               aria-controls="imbuements-list"
-              placeholder={homepage.FilterDrawer.imbuementsPlaceholder}
+              placeholder={homepage.FilterDrawer.placeholders.imbuements}
               itemList={useOptionsSet(
                 imbuementOptions,
                 filterState.imbuementsSet,
@@ -312,7 +359,7 @@ const FilterDrawer = ({
                 toggleAllOptions('imbuementsSet', imbuementOptions)
               }
             >
-              {homepage.FilterDrawer.allImbuementsButton}
+              {homepage.FilterDrawer.toggleAll.imbuements}
             </Chip>
           </S.FlexWrapper>
           <S.ChipWrapper id="imbuements-list">
@@ -327,15 +374,103 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
+        <FilterGroup label="Charms" htmlFor="charms-input" newSticker>
+          <S.FlexWrapper>
+            <S.AutocompleteInput
+              id="charms-input"
+              aria-controls="charms-list"
+              placeholder={homepage.FilterDrawer.placeholders.charms}
+              itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
+              onItemSelect={useCallback(
+                (option: Option) => updateFilters('charmsSet', option.value),
+                [updateFilters],
+              )}
+            />
+            <Chip
+              overrideStatus={
+                filterState.charmsSet.size === charmOptions.length
+              }
+              onClick={() => toggleAllOptions('charmsSet', charmOptions)}
+            >
+              {homepage.FilterDrawer.toggleAll.charms}
+            </Chip>
+          </S.FlexWrapper>
+          <S.ChipWrapper id="charms-list">
+            {[...filterState.charmsSet].map((charm) => (
+              <Chip
+                key={charm}
+                onClose={() => updateFilters('charmsSet', charm)}
+              >
+                {charm}
+              </Chip>
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
+
+        <FilterGroup label="Quests" htmlFor="quest-input" newSticker>
+          <S.AutocompleteInput
+            id="quest-input"
+            aria-controls="quest-list"
+            placeholder={homepage.FilterDrawer.placeholders.quests}
+            style={{ marginBottom: 12 }}
+            itemList={useOptionsSet(questOptions, filterState.questSet)}
+            onItemSelect={useCallback(
+              (option: Option) => updateFilters('questSet', option.value),
+              [updateFilters],
+            )}
+          />
+          <S.ChipWrapper id="quest-list">
+            {[...filterState.questSet].map((quest) => (
+              <Chip
+                key={quest}
+                onClose={() => updateFilters('questSet', quest)}
+              >
+                {quest}
+              </Chip>
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
+
+        <FilterGroup
+          label={homepage.FilterDrawer.labels.rareAchievements}
+          htmlFor="achievements-input"
+          newSticker
+        >
+          <S.AutocompleteInput
+            id="achievement-input"
+            aria-controls="achievement-list"
+            placeholder={homepage.FilterDrawer.placeholders.achievements}
+            style={{ marginBottom: 12 }}
+            itemList={useOptionsSet(
+              achievementOptions,
+              filterState.achievementSet,
+            )}
+            onItemSelect={useCallback(
+              (option: Option) => updateFilters('achievementSet', option.value),
+              [updateFilters],
+            )}
+          />
+          <S.ChipWrapper id="achievement-list">
+            {[...filterState.achievementSet].map((achievement) => (
+              <Chip
+                key={achievement}
+                onClose={() => updateFilters('achievementSet', achievement)}
+              >
+                {achievement}
+              </Chip>
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
+
         {!historyPage && (
           <FilterGroup
-            label={homepage.FilterDrawer.rareItemsLabel}
+            label={homepage.FilterDrawer.labels.rareItems}
             htmlFor="rare-items-input"
             labelSuffix={
               <Tooltip
                 offset={[0, 8]}
                 placement="top"
-                content={homepage.FilterDrawer.rareItemsTooltip}
+                content={homepage.FilterDrawer.tooltips.rareItems}
               >
                 <Icon.Exclamation />
               </Tooltip>
@@ -345,7 +480,7 @@ const FilterDrawer = ({
               <S.AutocompleteInput
                 id="rare-items-input"
                 aria-controls="rare-items-list"
-                placeholder={homepage.FilterDrawer.rareItemsPlaceholder}
+                placeholder={homepage.FilterDrawer.placeholders.rareItems}
                 itemList={useOptionsSet(
                   auctionedItemOptions,
                   filterState.itemSet,
@@ -363,7 +498,7 @@ const FilterDrawer = ({
                   toggleAllOptions('itemSet', auctionedItemOptions)
                 }
               >
-                {homepage.FilterDrawer.allItemsButton}
+                {homepage.FilterDrawer.toggleAll.items}
               </Chip>
             </S.FlexWrapper>
             <S.ChipWrapper id="rare-items-list">
@@ -376,11 +511,11 @@ const FilterDrawer = ({
           </FilterGroup>
         )}
 
-        <FilterGroup label={homepage.FilterDrawer.miscLabel}>
+        <FilterGroup label={homepage.FilterDrawer.labels.misc}>
           <S.ChipWrapper>
             <Tooltip
               style={{ width: 280 }}
-              content={homepage.FilterDrawer.rareNicknamesTooltip}
+              content={homepage.FilterDrawer.tooltips.rareNicknames}
             >
               <Chip
                 overrideStatus={filterState.rareNick}
@@ -389,17 +524,17 @@ const FilterDrawer = ({
                 {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
             </Tooltip>
-            <Tooltip content={homepage.FilterDrawer.soulwarTooltip}>
+            <Tooltip content={homepage.FilterDrawer.tooltips.soulwar}>
               <Chip
-                overrideStatus={filterState.soulwarFilter}
+                overrideStatus={filterState.soulwarAvailable}
                 onClick={() => {
-                  if (filterState.soulwarFilter) {
+                  if (filterState.soulwarAvailable) {
                     updateFilters('minLevel', defaultValues.minLevel as number)
-                    updateFilters('soulwarFilter', false)
+                    updateFilters('soulwarAvailable', false)
                   } else {
                     updateFilters('minLevel', 250)
                     updateFilters('maxLevel', defaultValues.maxLevel as number)
-                    updateFilters('soulwarFilter', true)
+                    updateFilters('soulwarAvailable', true)
                   }
                 }}
               >
@@ -414,7 +549,7 @@ const FilterDrawer = ({
             </Tooltip>
           </S.ChipWrapper>
         </FilterGroup>
-      </Drawer.Body>
+      </S.DrawerBody>
       <S.DrawerFooter />
     </Drawer>
   )

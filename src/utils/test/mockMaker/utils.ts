@@ -28,7 +28,8 @@ export const buildCharacterData = (
   }))
 
 export const unminifyCharacterData = (
-  initialCharacterData: MinifiedCharacterObject[],
+  /* initialCharacterData: MinifiedCharacterObject[], */
+  initialCharacterData: any[],
 ): PartialCharacterObject[] =>
   initialCharacterData.map(
     minifiedToObject,

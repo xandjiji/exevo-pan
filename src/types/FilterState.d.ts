@@ -1,7 +1,7 @@
 declare type VocationOptions = 0 | 1 | 2 | 3 | 4
 declare type PvpOptions = 0 | 1 | 2 | 3 | 4
 declare type LocationOptions = 0 | 1 | 2
-declare type ImbuementOptions = 'axe' | 'club' | 'distance' | 'magic' | 'sword'
+declare type SkillOptions = 'axe' | 'club' | 'distance' | 'magic' | 'sword'
 
 declare interface FilterState {
   nicknameFilter: string
@@ -13,11 +13,21 @@ declare interface FilterState {
   minLevel: number
   maxLevel: number
   minSkill: number
-  skillKey: Set<ImbuementOptions>
+  maxSkill: number
+  skillKey: Set<SkillOptions>
   imbuementsSet: Set<string>
+  charmsSet: Set<string>
   itemSet: Set<string>
   rareNick: boolean
-  soulwarFilter: boolean
+  questSet: Set<string>
+  addon: number
+  sex: boolean
+  outfitSet: Set<string>
+  storeOutfitSet: Set<string>
+  mountSet: Set<string>
+  storeMountSet: Set<string>
+  achievementSet: Set<string>
+  soulwarAvailable: boolean
 }
 
 type FilterOptionsPrimitives = Pick<
@@ -26,8 +36,11 @@ type FilterOptionsPrimitives = Pick<
   | 'minLevel'
   | 'maxLevel'
   | 'minSkill'
+  | 'maxSkill'
   | 'rareNick'
-  | 'soulwarFilter'
+  | 'addon'
+  | 'sex'
+  | 'soulwarAvailable'
 >
 
 declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
@@ -38,5 +51,12 @@ declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
   serverSet: string[]
   skillKey: string[]
   imbuementsSet: string[]
+  charmsSet: string[]
   itemSet: string[]
+  questSet: string[]
+  outfitSet: string[]
+  storeOutfitSet: string[]
+  mountSet: string[]
+  storeMountSet: string[]
+  achievementSet: string[]
 }

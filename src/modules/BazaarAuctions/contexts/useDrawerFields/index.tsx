@@ -1,11 +1,18 @@
 import { createContext, useContext } from 'react'
-import { imbuementOptions } from './imbuements'
+import * as options from './options'
 import { DrawerFieldsContextData, DrawerFieldsProviderProps } from './types'
 
 const DEFAULT_STATE: DrawerFieldsContextData = {
   serverOptions: [],
   auctionedItemOptions: [],
   imbuementOptions: [],
+  charmOptions: [],
+  questOptions: [],
+  achievementOptions: [],
+  outfitValues: [],
+  storeOutfitValues: [],
+  mountValues: [],
+  storeMountValues: [],
 }
 
 const DrawerFieldsContext =
@@ -17,7 +24,7 @@ export const DrawerFieldsProvider = ({
   children,
 }: DrawerFieldsProviderProps): JSX.Element => (
   <DrawerFieldsContext.Provider
-    value={{ serverOptions, auctionedItemOptions, imbuementOptions }}
+    value={{ serverOptions, auctionedItemOptions, ...options }}
   >
     {children}
   </DrawerFieldsContext.Provider>

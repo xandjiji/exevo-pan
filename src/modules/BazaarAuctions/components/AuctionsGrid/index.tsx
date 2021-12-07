@@ -10,6 +10,7 @@ import EmptyState from './EmptyState'
 import * as S from './styles'
 
 const PAGE_SIZE = 10
+const ESTIMATED_HEIGHT = 508
 
 const AuctionsGrid = (): JSX.Element => {
   const {
@@ -39,6 +40,7 @@ const AuctionsGrid = (): JSX.Element => {
           onClick={() => setDrawerOpen(true)}
           suppressHydrationWarning
         >
+          <S.Sticker localStorageKey="newFilters">New</S.Sticker>
           <S.FilterIcon />
           {process.browser && (
             <S.ActiveIcon
@@ -84,7 +86,7 @@ const AuctionsGrid = (): JSX.Element => {
 
       <VirtualizedListView
         id="character-grid"
-        estimatedHeight={504}
+        estimatedHeight={ESTIMATED_HEIGHT}
         overScan={1}
       >
         {shouldDisplayHighlightedAuctions &&

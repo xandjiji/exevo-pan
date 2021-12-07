@@ -21,6 +21,9 @@ const decodeNumberSet = (encodedValue: string): Set<number> =>
 const decodeStringSet = (encodedValue: string): Set<string> =>
   decodeSet(encodedValue, 'string') as Set<string>
 
+const decodeNumber = (encodedValue: string): number => Number(encodedValue)
+const decodeBoolean = (encodedValue: string): boolean => encodedValue === 'true'
+
 export const filterSchema = [
   {
     key: 'nicknameFilter',
@@ -59,16 +62,33 @@ export const filterSchema = [
   {
     key: 'minLevel',
     defaultValue: 8,
+    decode: decodeNumber,
   },
   {
     key: 'maxLevel',
     defaultValue: 2000,
+    decode: decodeNumber,
   },
   {
     key: 'minSkill',
     defaultValue: 10,
+    decode: decodeNumber,
   },
-
+  {
+    key: 'maxSkill',
+    defaultValue: 150,
+    decode: decodeNumber,
+  },
+  {
+    key: 'addon',
+    defaultValue: 3,
+    decode: decodeNumber,
+  },
+  {
+    key: 'sex',
+    defaultValue: false,
+    decode: decodeBoolean,
+  },
   {
     key: 'skillKey',
     defaultValue: new Set<'axe' | 'club' | 'distance' | 'magic' | 'sword'>([]),
@@ -82,6 +102,12 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
+    key: 'charmsSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
     key: 'itemSet',
     defaultValue: new Set<string>([]),
     encode: encodeSet,
@@ -90,9 +116,47 @@ export const filterSchema = [
   {
     key: 'rareNick',
     defaultValue: false,
+    decode: decodeBoolean,
   },
   {
-    key: 'soulwarFilter',
+    key: 'questSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'outfitSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'storeOutfitSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'mountSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'storeMountSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'achievementSet',
+    defaultValue: new Set<string>([]),
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
+    key: 'soulwarAvailable',
     defaultValue: false,
+    decode: decodeBoolean,
   },
 ]

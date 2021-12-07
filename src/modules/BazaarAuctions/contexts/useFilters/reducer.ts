@@ -48,6 +48,19 @@ const updateFiltersReducer = (
         },
       }
 
+    case 'TOGGLE_ADDON': {
+      const { addon } = state.filterState
+      const { value } = action
+
+      return {
+        ...state,
+        filterState: {
+          ...state.filterState,
+          addon: addon === 3 || addon === value ? addon - value : addon + value,
+        },
+      }
+    }
+
     case 'RESET_FILTERS':
       return {
         ...state,

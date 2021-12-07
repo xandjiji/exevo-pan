@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import {
+  Drawer as BaseDrawer,
   DrawerFooter as BaseDrawerFooter,
   Input as BaseInput,
   Chip as BaseChip,
@@ -13,6 +14,12 @@ export const HeadWrapper = styled.div`
   justify-content: space-between;
   width: 100%;
   flex-grow: 1;
+`
+
+export const DrawerBody = styled(BaseDrawer.Body)`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 16px;
 `
 
 export const DrawerFooter = styled(BaseDrawerFooter)`

@@ -28,27 +28,44 @@ export default {
   },
   FilterDrawer: {
     title: 'Filtros',
+    labels: {
+      searchNickname: 'Buscar nickname',
+      vocation: 'Vocación',
+      serverLocation: 'Ubicación del servidor',
+      minSkill: 'Skill level mínimo',
+      rareAchievements: 'Achievements raros',
+      rareItems: 'Items raros',
+      misc: 'Variados',
+    },
+    placeholders: {
+      server: 'Elige un servidor',
+      imbuements: 'Seleccione imbuements',
+      charms: 'Seleccione charms',
+      quests: 'Seleccione quests',
+      achievements: 'Seleccione achievements',
+      rareItems: 'Escoge uno item',
+    },
+    tooltips: {
+      rareItems:
+        'Si un artículo raro no está en esta lista, actualmente no hay subasta para él.',
+      rareNicknames:
+        "Nicknames con caracteres especiales (äëïöüÿ'-.,), tamaño de 2-3 caracteres y letras mayúsculas consecutivas (e.g XVI)",
+      soulwar: 'Personajes con nivel 250+ e sin completar la Soul War',
+    },
+    toggleAll: {
+      imbuements: 'Todos los imbuements',
+      charms: 'Todos los charms',
+      items: 'Todos los items',
+    },
     resetFilters: 'Resetar filtros',
-    searchNicknameLabel: 'Buscar nickname',
-    vocationLabel: 'Vocación',
     green: 'Verde',
     yellow: 'Amarillo',
-    serverLocationLabel: 'Ubicación del servidor',
-    serverPlaceholder: 'Elige un servidor',
-    minSkillLabel: 'Skill level mínimo',
-    imbuementsPlaceholder: 'Seleccione imbuements',
-    allImbuementsButton: 'Todos los imbuements',
-    rareItemsLabel: 'Items raros',
-    rareItemsTooltip:
-      'Si un artículo raro no está en esta lista, actualmente no hay subasta para él.',
-    rareItemsPlaceholder: 'Escoge uno item',
-    allItemsButton: 'Todos los items',
-    miscLabel: 'Variados',
-    rareNicknamesTooltip:
-      "Nicknames con caracteres especiales (äëïöüÿ'-.,), tamaño de 2-3 caracteres y letras mayúsculas consecutivas (e.g XVI)",
     rareNicknamesButton: 'Nicknames raros',
-    soulwarTooltip: 'Personajes con nivel 250+ e sin completar la Soul War',
     soulwarButton: 'Soulwar disponible',
     skullEmoji: 'cráneo',
+    SpritePicker: {
+      item: 'item está seleccionado',
+      items: 'items estan seleccionados',
+    },
   },
 }

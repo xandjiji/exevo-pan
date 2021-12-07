@@ -9,8 +9,11 @@ import {
   ServerInfo,
   CharacterItems,
   CharacterSkills,
-  CharacterImbuements,
+  ImbuementsTooltip,
+  CharmsTooltip,
+  QuestsTooltip,
   TagButton,
+  SpecialTags,
 } from './Parts'
 import * as S from './styles'
 import { CharacterCardProps } from './types'
@@ -39,6 +42,7 @@ const CharacterCard = ({
     skills,
     imbuements,
     charms,
+    quests,
   } = characterData
 
   const { pathname } = useRouter()
@@ -101,15 +105,11 @@ const CharacterCard = ({
       <CharacterSkills skills={skills} />
 
       <S.Footer>
-        <CharacterImbuements imbuements={imbuements} />
+        <ImbuementsTooltip items={imbuements} />
+        <CharmsTooltip items={charms} />
+        <QuestsTooltip items={quests} />
 
-        {!!charms.length && (
-          <S.CharmWrapper>
-            {charms.map((charm) => (
-              <S.Charm key={charm}>{charm}</S.Charm>
-            ))}
-          </S.CharmWrapper>
-        )}
+        <SpecialTags character={characterData} />
       </S.Footer>
     </S.Wrapper>
   )

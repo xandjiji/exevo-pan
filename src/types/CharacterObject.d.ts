@@ -9,6 +9,11 @@ declare interface CharacterSkillsObject {
   shielding: number
 }
 
+declare type Outfit = {
+  name: string
+  type: number
+}
+
 declare interface CharacterObject {
   id: number
   nickname: string
@@ -18,32 +23,20 @@ declare interface CharacterObject {
   outfitId: string
   serverId: number
   vocationId: number
+  sex: boolean
   level: number
   imbuements: string[]
   items: number[]
   charms: string[]
   transfer: boolean
-  hasSoulwar: boolean
+  quests: string[]
+  outfits: Outfit[]
+  storeOutfits: Outfit[]
+  mounts: string[]
+  storeMounts: string[]
+  rareAchievements: string[]
   skills: CharacterSkillsObject
   serverData: ServerObject
 }
 
 declare type PartialCharacterObject = Omit<CharacterObject, 'serverData'>
-
-declare type MinifiedCharacterObject = [
-  number,
-  string,
-  number,
-  number,
-  boolean,
-  string,
-  number,
-  number,
-  number,
-  number[],
-  number[],
-  number[],
-  boolean,
-  number[],
-  boolean,
-]

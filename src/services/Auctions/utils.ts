@@ -15,7 +15,14 @@ export const serializeBody = (
     serverSet: [...filterOptions.serverSet],
     skillKey: [...filterOptions.skillKey],
     imbuementsSet: [...filterOptions.imbuementsSet],
+    charmsSet: [...filterOptions.charmsSet],
     itemSet: [...filterOptions.itemSet],
+    questSet: [...filterOptions.questSet],
+    outfitSet: [...filterOptions.outfitSet],
+    mountSet: [...filterOptions.mountSet],
+    storeOutfitSet: [...filterOptions.storeOutfitSet],
+    storeMountSet: [...filterOptions.storeMountSet],
+    achievementSet: [...filterOptions.achievementSet],
   }
 
   return JSON.stringify({

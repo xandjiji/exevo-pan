@@ -3,6 +3,7 @@ import * as S from './styles'
 import { FilterGroupProps } from './types'
 
 const FilterGroup = ({
+  newSticker = false,
   label,
   labelSuffix,
   htmlFor,
@@ -11,7 +12,10 @@ const FilterGroup = ({
 }: FilterGroupProps): JSX.Element => (
   <S.Wrapper {...props}>
     <S.LabelWrapper>
-      <S.Label htmlFor={htmlFor}>{label}</S.Label>
+      <S.Label htmlFor={htmlFor}>
+        {newSticker && <S.Sticker localStorageKey={label}>New</S.Sticker>}
+        {label}
+      </S.Label>
       {labelSuffix}
     </S.LabelWrapper>
     {children}

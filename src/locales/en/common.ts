@@ -109,14 +109,36 @@ export default {
     experimentalServer: 'This is an experimental server!',
     transferAvailable: 'Regular World Transfer available',
     transferUnavailable: 'Regular World Transfer NOT available',
-    imbuementsListLabel: 'Imbuements list',
+    Tooltips: {
+      labels: {
+        imbuements: 'Imbuements list',
+        charms: 'Charms list',
+        quests: 'Quests list',
+      },
+      quests: {
+        utilitary: 'Utilitary',
+        access: 'Access',
+        boss: 'Bosses',
+        other: 'Others',
+      },
+    },
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
     highlightLabelText: 'Highlight your auction!',
+    SpecialTags: {
+      manyCharms: 'Many charms',
+      manyQuests: 'Many quests',
+      manyMounts: 'Many mounts',
+      manyStoryCosmetics: 'Many store cosmetics',
+    },
   },
   StepperCompletedLabel: 'Step completed',
   CopyButton: {
     toCopyLabel: 'Copy to clipboard',
     copiedLabel: 'Copied to clipboard',
+  },
+  Accordion: {
+    open: 'Open',
+    close: 'Close',
   },
 }

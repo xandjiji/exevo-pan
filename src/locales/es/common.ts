@@ -110,14 +110,36 @@ export default {
     experimentalServer: '¡Este es un servidor experimental!',
     transferAvailable: 'Transferencia de servidor común disponible',
     transferUnavailable: 'Transferencia de servidor común NO disponible',
-    imbuementsListLabel: 'Lista de imbuements',
+    Tooltips: {
+      labels: {
+        imbuements: 'Lista de imbuements',
+        charms: 'Lista de charms',
+        quests: 'Lista de quests',
+      },
+      quests: {
+        utilitary: 'Útiles',
+        access: 'Accesos',
+        boss: 'Bosses',
+        other: 'Otros',
+      },
+    },
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
     highlightLabelText: '¡Destaque su subasta!',
+    SpecialTags: {
+      manyCharms: 'Muchas charms',
+      manyQuests: 'Muchas quests',
+      manyMounts: 'Muchas mounts',
+      manyStoryCosmetics: 'Muchos cosmeticos comprados',
+    },
   },
   StepperCompletedLabel: 'Paso completado',
   CopyButton: {
     toCopyLabel: 'Copiar',
     copiedLabel: 'Copiado',
+  },
+  Accordion: {
+    open: 'Abrir',
+    close: 'Cerrar',
   },
 }
