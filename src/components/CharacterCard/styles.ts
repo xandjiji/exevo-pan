@@ -125,12 +125,12 @@ export const TibiaCoinIcon = styled(Image).attrs({
 `
 
 export const Footer = styled.div`
-  padding-top: 6px;
+  padding-top: 12px;
   border-top: solid 1px var(--separator);
 
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 8px;
+  grid-gap: 12px;
 
   > * {
     width: fit-content;

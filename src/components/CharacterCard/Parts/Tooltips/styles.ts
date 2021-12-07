@@ -7,11 +7,14 @@ const iconStyle = css`
   margin-right: 4px;
   width: 18px;
   height: 18px;
-  transform: translateY(4px);
+  transform: translateY(-1px);
   fill: var(--onSurface);
 `
 
 export const Wrapper = styled.div`
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
   font-size: 12px;
 `
 

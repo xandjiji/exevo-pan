@@ -10,7 +10,7 @@ import EmptyState from './EmptyState'
 import * as S from './styles'
 
 const PAGE_SIZE = 10
-const ESTIMATED_HEIGHT = 508
+const ESTIMATED_HEIGHT = 479
 
 const AuctionsGrid = (): JSX.Element => {
   const {
