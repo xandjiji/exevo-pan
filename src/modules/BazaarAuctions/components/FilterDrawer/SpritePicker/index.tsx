@@ -24,6 +24,7 @@ const SpritePicker = ({
     <S.Accordion
       title={
         <S.AccordionLabel>
+          <S.Sticker localStorageKey={title}>New</S.Sticker>
           {title}
           <S.Counter
             aria-label={`${selectedCount} ${
