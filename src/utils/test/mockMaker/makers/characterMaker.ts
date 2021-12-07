@@ -2,7 +2,8 @@
 import * as faker from 'faker'
 import { unminifyCharacterData } from '../utils'
 
-const randomMinifiedCharacter = (): MinifiedCharacterObject => [
+/* const randomMinifiedCharacter = (): MinifiedCharacterObject => [ */
+const randomMinifiedCharacter = (): any => [
   faker.datatype.number({ min: 0, max: 999999 }),
   faker.name.firstName(),
   Math.trunc(+faker.date.future() / 1000),
@@ -30,12 +31,13 @@ const randomMinifiedCharacter = (): MinifiedCharacterObject => [
 export const randomCharacterData = (
   amount: number,
 ): {
-  minifiedCharacterData: MinifiedCharacterObject[]
+  /* minifiedCharacterData: MinifiedCharacterObject[] */
+  minifiedCharacterData: any[]
   characterList: PartialCharacterObject[]
 } => {
-  const minifiedCharacterData: MinifiedCharacterObject[] = Array.from(
-    { length: amount },
-    () => randomMinifiedCharacter(),
+  /* const minifiedCharacterData: MinifiedCharacterObject[] = Array.from( */
+  const minifiedCharacterData: any[] = Array.from({ length: amount }, () =>
+    randomMinifiedCharacter(),
   )
 
   const sortedCharacterData = minifiedCharacterData.sort((a, b) => a[2] - b[2])
