@@ -4,6 +4,10 @@ export const Grid = styled.div`
   display: flex;
   gap: 16px;
   justify-content: space-between;
+
+  @media (min-width: 460px) {
+    width: max-content;
+  }
 `
 
 export const Group = styled.div`
