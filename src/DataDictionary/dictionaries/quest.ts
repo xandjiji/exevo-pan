@@ -2,8 +2,8 @@ import { dictionaryFactory } from '../utils'
 
 export const scrapingTokens = {
   'The Postman Missions': 'The Postman Missions',
-  'The Djinn War - Marid Faction': 'The Djinn War (green)',
-  'The Djinn War - Efreet Faction': 'The Djinn War (blue)',
+  'The Djinn War - Marid Faction': 'The Djinn War (blue)',
+  'The Djinn War - Efreet Faction': 'The Djinn War (green)',
   'Recognised Trader': 'The Travelling Trader (Rashid)',
   'The Thieves Guild': 'The Thieves Guild',
   'The Explorer Society': 'The Explorer Society',
