@@ -5,6 +5,7 @@ export default class NotifyAdminClient {
 
   static async notifyPurchase(): Promise<boolean> {
     try {
+      const tokens = (process.env.TELTOKENS ?? '').split(',')
       await fetch(this.fcmSendUrl, {
         method: 'POST',
         headers: {
@@ -12,11 +13,7 @@ export default class NotifyAdminClient {
           Authorization: `key=${process.env.NOTIFICATION_SERVER_KEY}`,
         },
         body: JSON.stringify({
-          registration_ids: [
-            process.env.TELTOKEN_1,
-            process.env.TELTOKEN_2,
-            process.env.TELTOKEN_3,
-          ],
+          registration_ids: tokens,
           notification: {
             title: 'Exevo Pan',
             body: 'Opa!',
