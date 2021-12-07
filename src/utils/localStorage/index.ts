@@ -1,5 +1,3 @@
-import { localStorageKeys } from 'Constants'
-
 export function saveToLocalStorage<T>(key: string, data: T): void {
   if (typeof window !== 'undefined') {
     const serializedData = JSON.stringify(data)
