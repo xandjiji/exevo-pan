@@ -72,8 +72,6 @@ export default class AuctionsClient {
   }
 
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
-    /* @ ToDo: remove this fallback */
-    return []
     try {
       const response = await fetch(this.highlightedAuctionsUrl)
       const auctions: CharacterObject[] = await response.json()
