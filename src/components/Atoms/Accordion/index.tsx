@@ -37,7 +37,7 @@ const Accordion = ({
         role="button"
         aria-expanded={open}
         aria-controls={contentId}
-        aria-label={common.Accordion[open ? 'open' : 'close']}
+        aria-label={common.Accordion[open ? 'close' : 'open']}
         onClick={handleClick}
       >
         {title}
