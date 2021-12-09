@@ -10,9 +10,9 @@ import { Dataset } from './types'
 export const randomDataset = (charAmount = 10000): Dataset => {
   const { rawServerData, serverList } = randomServerData(100)
   const characterList = Array.from({ length: charAmount }, randomCharacter)
-  const { rawItemData, itemData } = randomItemData()
 
   const buildedCharacterData = buildCharacterData(characterList, serverList)
+  const itemData = randomItemData(buildedCharacterData)
 
   const guildWarData = randomGuildWarData()
 
@@ -21,7 +21,6 @@ export const randomDataset = (charAmount = 10000): Dataset => {
     serverData: serverList,
     partialCharacterData: characterList,
     characterData: buildedCharacterData,
-    rawItemData,
     itemData,
     statisticsData: randomStatisticsData(),
     warStatistics: randomWarStatisticsData(),

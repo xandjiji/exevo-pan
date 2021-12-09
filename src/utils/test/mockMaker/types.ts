@@ -3,7 +3,6 @@ export type Dataset = {
   serverData: ServerObject[]
   partialCharacterData: PartialCharacterObject[]
   characterData: CharacterObject[]
-  rawItemData: RareItemData
   itemData: RareItemData
   statisticsData: StatisticsData
   warStatistics: WarStatistics

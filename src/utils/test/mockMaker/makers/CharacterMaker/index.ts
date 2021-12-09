@@ -16,11 +16,14 @@ import {
   randomStoreOutfits,
 } from './randomOutfit'
 
+export const randomAuctionId = (): number =>
+  faker.datatype.number({ min: 0, max: 9999999 })
+
 export const randomCharacter = (): PartialCharacterObject => {
   const sex = faker.datatype.boolean()
 
   return {
-    id: faker.datatype.number({ min: 0, max: 999999999 }),
+    id: randomAuctionId(),
     nickname: `${faker.name.firstName()} ${faker.name.lastName()}`,
     auctionEnd: Math.trunc(+faker.date.future() / 1000),
     currentBid: faker.datatype.number({ min: 57, max: 300000 }),

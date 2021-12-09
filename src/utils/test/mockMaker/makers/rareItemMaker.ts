@@ -1,27 +1,30 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker'
-import { filterItemData } from '../utils'
+import { rareItem } from 'DataDictionary/dictionaries'
+import { randomAuctionId } from './CharacterMaker'
+import { samplesFrom } from '../utils'
 
-const randomItem = (): RareItemObject => {
-  if (faker.datatype.boolean()) {
-    return []
-  }
-  return Array.from({ length: 8 }, () =>
-    faker.datatype.number({ min: 100000, max: 999999 }),
-  ).slice(faker.datatype.number({ min: 0, max: 3 }))
-}
+const getIdsFromAuctions = (auctions: CharacterObject[]) =>
+  samplesFrom(auctions)
+    .slice(faker.datatype.number({ min: 0, max: 3 }))
+    .map(({ id }) => id)
 
-export const randomItemData = (): {
-  rawItemData: RareItemData
-  itemData: RareItemData
-} => {
-  const randomAmount = faker.datatype.number({ min: 20, max: 50 })
-  const rawItemData: RareItemData = {}
-  for (let i = 0; i < randomAmount; i += 1) {
-    rawItemData[faker.name.lastName()] = randomItem()
-  }
+export const randomItemData = (auctions?: CharacterObject[]): RareItemData => {
+  const itemData: RareItemData = {}
 
-  const itemData = filterItemData(rawItemData)
+  rareItem.tokens.forEach((item) => {
+    if (faker.datatype.boolean()) {
+      itemData[item] = []
+    } else {
+      const auctionIds: number[] = auctions
+        ? (itemData[item] = getIdsFromAuctions(auctions))
+        : Array.from({ length: 8 }, randomAuctionId).slice(
+            faker.datatype.number({ min: 0, max: 3 }),
+          )
 
-  return { rawItemData, itemData }
+      itemData[item] = auctionIds
+    }
+  })
+
+  return itemData
 }
