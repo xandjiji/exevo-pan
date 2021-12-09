@@ -39,8 +39,9 @@ describe('<Accordion />', () => {
   })
 
   test('should be controlled', () => {
+    const mockedOnClick = jest.fn()
     const { rerender } = renderWithProviders(
-      <Accordion open={false}>
+      <Accordion open={false} onClick={mockedOnClick}>
         <div role="none" />
       </Accordion>,
     )
@@ -48,15 +49,26 @@ describe('<Accordion />', () => {
     const buttonElement = screen.getByRole('button')
     expect(buttonElement).toHaveAccessibleName('Open')
     expect(screen.queryByRole('none')).not.toBeInTheDocument()
+    expect(mockedOnClick).toBeCalledTimes(0)
+
+    userEvent.click(buttonElement)
+    expect(buttonElement).toHaveAccessibleName('Open')
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
+    expect(mockedOnClick).toBeCalledTimes(1)
 
     rerender(
-      <Accordion open>
+      <Accordion open onClick={mockedOnClick}>
         <div role="none" />
       </Accordion>,
     )
 
     expect(buttonElement).toHaveAccessibleName('Close')
     expect(screen.queryByRole('none')).toBeInTheDocument()
+
+    userEvent.click(buttonElement)
+    expect(buttonElement).toHaveAccessibleName('Close')
+    expect(screen.queryByRole('none')).toBeInTheDocument()
+    expect(mockedOnClick).toBeCalledTimes(2)
 
     rerender(
       <Accordion open={false}>
