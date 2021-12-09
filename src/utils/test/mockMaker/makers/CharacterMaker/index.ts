@@ -8,6 +8,7 @@ import {
   mount,
   storeMount,
 } from 'DataDictionary/dictionaries'
+import { auctions } from '../../constants'
 import { samplesFrom } from '../../utils'
 import { randomServerId } from '../serverMaker'
 import {
@@ -17,7 +18,14 @@ import {
 } from './randomOutfit'
 
 export const randomAuctionId = (): number =>
-  faker.datatype.number({ min: 0, max: 9999999 })
+  faker.datatype.number({ min: auctions.id.MIN, max: auctions.id.MAX })
+
+export const randomSkillValue = (): number =>
+  faker.datatype.float({
+    min: auctions.skills.MIN,
+    max: auctions.skills.MAX,
+    precision: auctions.skills.PRECISION,
+  })
 
 export const randomCharacter = (): PartialCharacterObject => {
   const sex = faker.datatype.boolean()
@@ -26,27 +34,44 @@ export const randomCharacter = (): PartialCharacterObject => {
     id: randomAuctionId(),
     nickname: `${faker.name.firstName()} ${faker.name.lastName()}`,
     auctionEnd: Math.trunc(+faker.date.future() / 1000),
-    currentBid: faker.datatype.number({ min: 57, max: 300000 }),
+    currentBid: faker.datatype.number({
+      min: auctions.currentBid.MIN,
+      max: auctions.currentBid.MAX,
+    }),
     hasBeenBidded: faker.datatype.boolean(),
     transfer: faker.datatype.boolean(),
     sex,
     outfitId: randomOutfitId(sex),
     serverId: randomServerId(),
-    vocationId: faker.datatype.number({ min: 0, max: 4 }),
-    level: faker.datatype.number({ min: 8, max: 2000 }),
+    vocationId: faker.datatype.number({
+      min: auctions.vocationId.MIN,
+      max: auctions.vocationId.MAX,
+    }),
+    level: faker.datatype.number({
+      min: auctions.level.MIN,
+      max: auctions.level.MAX,
+    }),
     skills: {
-      magic: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
-      club: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
-      fist: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
-      sword: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
-      fishing: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
-      axe: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
-      distance: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
-      shielding: faker.datatype.float({ min: 10, max: 130, precision: 0.01 }),
+      magic: randomSkillValue(),
+      club: randomSkillValue(),
+      fist: randomSkillValue(),
+      sword: randomSkillValue(),
+      fishing: randomSkillValue(),
+      axe: randomSkillValue(),
+      distance: randomSkillValue(),
+      shielding: randomSkillValue(),
     },
-    items: Array.from({ length: 4 }, () =>
-      faker.datatype.number({ min: 3100, max: 3400 }),
-    ).slice(faker.datatype.number({ min: 0, max: 4 })),
+    items: Array.from({ length: auctions.items.size.MAX }, () =>
+      faker.datatype.number({
+        min: auctions.items.id.MIN,
+        max: auctions.items.id.MAX,
+      }),
+    ).slice(
+      faker.datatype.number({
+        min: auctions.items.size.MIN,
+        max: auctions.items.size.MAX,
+      }),
+    ),
     charms: samplesFrom(charm.tokens),
     imbuements: samplesFrom(imbuement.tokens),
     quests: samplesFrom(quest.tokens),
