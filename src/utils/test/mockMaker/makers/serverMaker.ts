@@ -2,6 +2,12 @@
 import * as faker from 'faker'
 import { singleSampleFrom } from '../utils'
 
+const MIN_SERVER_ID = 0
+const MAX_SERVER_ID = 99
+
+export const randomServerId = (): number =>
+  faker.datatype.number({ min: MIN_SERVER_ID, max: MAX_SERVER_ID })
+
 const randomServerLocation = (): ServerLocation => {
   const possibleLocations: ServerLocation[] = [
     { string: 'BR', type: 2 },
@@ -27,7 +33,7 @@ const randomPvpType = (): PvpType => {
 export const randomServer = (): ServerObject => ({
   battleye: faker.datatype.boolean(),
   experimental: faker.datatype.boolean(),
-  serverId: faker.datatype.number({ min: 0, max: 99 }),
+  serverId: randomServerId(),
   serverName: faker.name.lastName(),
   serverLocation: randomServerLocation(),
   pvpType: randomPvpType(),

@@ -9,6 +9,7 @@ import {
   storeMount,
 } from 'DataDictionary/dictionaries'
 import { samplesFrom } from '../../utils'
+import { randomServerId } from '../serverMaker'
 import {
   randomOutfitId,
   randomOutfits,
@@ -20,14 +21,14 @@ export const randomCharacter = (): PartialCharacterObject => {
 
   return {
     id: faker.datatype.number({ min: 0, max: 999999999 }),
-    nickname: faker.name.firstName(),
+    nickname: `${faker.name.firstName()} ${faker.name.lastName()}`,
     auctionEnd: Math.trunc(+faker.date.future() / 1000),
     currentBid: faker.datatype.number({ min: 57, max: 300000 }),
     hasBeenBidded: faker.datatype.boolean(),
     transfer: faker.datatype.boolean(),
     sex,
     outfitId: randomOutfitId(sex),
-    serverId: faker.datatype.number({ min: 0, max: 99 }),
+    serverId: randomServerId(),
     vocationId: faker.datatype.number({ min: 0, max: 4 }),
     level: faker.datatype.number({ min: 8, max: 2000 }),
     skills: {
