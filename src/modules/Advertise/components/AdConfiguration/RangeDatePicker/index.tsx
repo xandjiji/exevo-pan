@@ -53,7 +53,7 @@ const RangeDatePicker = (): JSX.Element => {
               </S.Day>
             ))
 
-            const hasNextMonth = index + 1 !== partitionedDates.length
+            const hasNextMonth = index + 1 < partitionedDates.length
             const currentMonthLastDay = monthDates[monthDates.length - 1]
             const currentMonthLastWeekday =
               getWeekdayNumber(currentMonthLastDay)
@@ -65,7 +65,7 @@ const RangeDatePicker = (): JSX.Element => {
                   <S.MonthRow
                     aria-label={advertise.RangeDatePicker.nextMonthLabel}
                   >
-                    {common.FullMonth[getMonth(monthDates[0]) + 1]}
+                    {common.FullMonth[(getMonth(monthDates[0]) + 1) % 12]}
                   </S.MonthRow>
                 )}
                 {!hasNextMonth && (
