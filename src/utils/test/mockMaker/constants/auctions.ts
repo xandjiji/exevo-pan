@@ -18,7 +18,7 @@ export default {
   skills: {
     MIN: 10,
     MAX: 130,
-    PRECISION: 0.001,
+    PRECISION: 0.01,
   },
   items: {
     size: {

@@ -1,6 +1,10 @@
-import { screen } from '@testing-library/react'
-import { renderWithProviders } from 'utils/test'
+import { screen, waitFor } from '@testing-library/react'
+import { renderWithProviders, randomDataset } from 'utils/test'
 import SkillBar from '..'
+
+const { characterData } = randomDataset()
+const character = characterData[0]
+const skillArray = Object.values(character.skills)
 
 describe('<SkillBar />', () => {
   beforeEach(() => {
@@ -8,16 +12,16 @@ describe('<SkillBar />', () => {
       .spyOn(window, 'setTimeout')
       .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   })
-  test('should render correctly', () => {
-    renderWithProviders(
-      <SkillBar
-        skillName="test"
-        skillValue={10}
-        highlight
-        data-testid="test"
-      />,
-    )
-    expect(screen.getByTestId('test')).toBeInTheDocument()
+  test.each(skillArray)('should render correctly', async (skillValue) => {
+    renderWithProviders(<SkillBar skillName="test" skillValue={skillValue} />)
+
+    const [integer, decimals] = skillValue.toString().split('.')
+    expect(screen.getByText(integer)).toBeInTheDocument()
+    await waitFor(() => {
+      expect(
+        screen.getByTitle(`${Number(decimals.padEnd(2, '0'))}%`),
+      ).toBeInTheDocument()
+    })
   })
 
   describe('should calculate percentages correctly', () => {
