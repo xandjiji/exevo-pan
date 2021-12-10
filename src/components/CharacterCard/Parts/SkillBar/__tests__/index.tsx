@@ -18,9 +18,15 @@ describe('<SkillBar />', () => {
     const [integer, decimals] = skillValue.toString().split('.')
     expect(screen.getByText(integer)).toBeInTheDocument()
     await waitFor(() => {
-      expect(
-        screen.getByTitle(`${Number(decimals.padEnd(2, '0'))}%`),
-      ).toBeInTheDocument()
+      const percentage = `${Number(decimals.padEnd(2, '0'))}%`
+      const percentageElement = screen.getByTitle(percentage)
+
+      expect(percentageElement).toBeInTheDocument()
+
+      const parentElement = percentageElement.querySelector('div:last-child')
+      const widthElement = parentElement?.querySelector('div > div')
+
+      expect(widthElement).toHaveStyle(`width: ${percentage};`)
     })
   })
 
