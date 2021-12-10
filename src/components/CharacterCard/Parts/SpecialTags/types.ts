@@ -1,4 +1,4 @@
-export interface SpecialTagsProps {
+export interface SpecialTagsProps extends React.HTMLAttributes<HTMLDivElement> {
   character: CharacterObject
 }
 

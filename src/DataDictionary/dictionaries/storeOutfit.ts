@@ -5,7 +5,7 @@ import {
 } from '../utils'
 import { OutfitToken } from '../types'
 
-const outfits: OutfitToken[] = [
+export const outfits: OutfitToken[] = [
   {
     name: 'Entrepreneur',
     id: {
