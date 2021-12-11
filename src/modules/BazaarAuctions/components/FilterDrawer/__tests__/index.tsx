@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { imbuement } from 'DataDictionary/dictionaries'
 import { renderWithProviders } from 'utils/test'
 import { WrappedFilterDrawer } from './mock'
 
@@ -36,13 +37,103 @@ describe('<FilterDrawer />', () => {
     expect(mockedOnClose).toHaveBeenCalledTimes(1)
   })
 
-  test.todo('should update filters')
+  test('should update filters', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
 
-  test.todo('should toggle all options')
+    const knightButton = screen.getByRole('switch', { name: 'Knight' })
+    const paladinButton = screen.getByRole('switch', { name: 'Paladin' })
 
-  test.todo('should control reset button based on active filter count')
+    expect(knightButton).not.toBeChecked()
+    expect(paladinButton).not.toBeChecked()
 
-  test.todo('autocompleteInputs should control its chips/options correctly')
+    userEvent.click(knightButton)
+    expect(knightButton).toBeChecked()
+    expect(paladinButton).not.toBeChecked()
 
-  test.todo('should reset filters')
+    userEvent.click(paladinButton)
+    expect(knightButton).toBeChecked()
+    expect(paladinButton).toBeChecked()
+
+    const nicknameInput = screen.getByLabelText('Search nickname')
+    expect(nicknameInput).toHaveValue('')
+    userEvent.type(nicknameInput, 'Ksu')
+    expect(nicknameInput).toHaveValue('Ksu')
+  })
+
+  test('autocomplete inputs should work correctly', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    const imbuementInput = screen.getByLabelText('Imbuements')
+    expect(screen.queryByText('Critical Hit')).not.toBeInTheDocument()
+    userEvent.click(imbuementInput)
+
+    userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
+    expect(screen.queryByText('Critical Hit')).toBeInTheDocument()
+
+    userEvent.click(screen.getByLabelText('Remove item'))
+    expect(screen.queryByText('Critical Hit')).not.toBeInTheDocument()
+
+    userEvent.click(imbuementInput)
+    userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
+    expect(screen.queryByText('Critical Hit')).toBeInTheDocument()
+
+    const toggleAllButton = screen.getByRole('switch', {
+      name: 'All imbuements',
+    })
+
+    userEvent.click(toggleAllButton)
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).toBeInTheDocument()
+    })
+
+    userEvent.click(toggleAllButton)
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).not.toBeInTheDocument()
+    })
+
+    userEvent.click(toggleAllButton)
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).toBeInTheDocument()
+    })
+
+    screen.getAllByLabelText('Remove item').forEach((removeButton) => {
+      userEvent.click(removeButton)
+      expect(removeButton).not.toBeInTheDocument()
+    })
+  })
+
+  test('filter reset button should work correctly', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    expect(
+      screen.queryByRole('button', { name: 'Reset filters' }),
+    ).not.toBeInTheDocument()
+
+    const knightButton = screen.getByRole('switch', { name: 'Knight' })
+    userEvent.click(knightButton)
+
+    const resetFilterButton = screen.getByRole('button', {
+      name: 'Reset filters',
+    })
+    expect(resetFilterButton).toBeVisible()
+
+    userEvent.click(resetFilterButton)
+    expect(knightButton).not.toBeChecked()
+    expect(resetFilterButton).not.toBeVisible()
+
+    userEvent.click(knightButton)
+    userEvent.click(
+      screen.getByRole('switch', {
+        name: 'All imbuements',
+      }),
+    )
+
+    expect(resetFilterButton).toBeVisible()
+
+    userEvent.click(resetFilterButton)
+    expect(knightButton).not.toBeChecked()
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).not.toBeInTheDocument()
+    })
+  })
 })
