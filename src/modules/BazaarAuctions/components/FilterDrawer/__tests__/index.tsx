@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { imbuement } from 'DataDictionary/dictionaries'
+import { imbuement, outfit } from 'DataDictionary/dictionaries'
 import { renderWithProviders } from 'utils/test'
 import { WrappedFilterDrawer } from './mock'
 
@@ -135,5 +135,51 @@ describe('<FilterDrawer />', () => {
     imbuement.tokens.forEach((imbuementName) => {
       expect(screen.queryByText(imbuementName)).not.toBeInTheDocument()
     })
+  })
+
+  test('outfit/mount picker should work correctly', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    outfit.tokens.forEach((outfitName) => {
+      expect(screen.queryByTitle(outfitName)).not.toBeInTheDocument()
+    })
+
+    userEvent.click(screen.getByText('Outfits'))
+
+    expect(
+      screen.queryByRole('button', { name: 'Reset filters' }),
+    ).not.toBeInTheDocument()
+
+    outfit.tokens.forEach((outfitName) => {
+      const switchElement = screen.getByTitle(outfitName)
+
+      expect(switchElement).not.toBeChecked()
+      userEvent.click(switchElement)
+      expect(switchElement).toBeChecked()
+    })
+
+    const resetButton = screen.getByRole('button', { name: 'Reset filters' })
+    expect(resetButton).toBeVisible()
+
+    outfit.tokens.forEach((outfitName) => {
+      const switchElement = screen.getByTitle(outfitName)
+
+      expect(switchElement).toBeChecked()
+      userEvent.click(switchElement)
+      expect(switchElement).not.toBeChecked()
+    })
+
+    expect(resetButton).not.toBeVisible()
+
+    const addonElement = screen.getByRole('checkbox', { name: 'Addon 1' })
+    expect(addonElement).toBeChecked()
+
+    userEvent.click(addonElement)
+    expect(addonElement).not.toBeChecked()
+    expect(resetButton).toBeVisible()
+
+    userEvent.click(resetButton)
+    expect(addonElement).toBeChecked()
+    expect(resetButton).not.toBeVisible()
   })
 })
