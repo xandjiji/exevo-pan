@@ -182,4 +182,25 @@ describe('<FilterDrawer />', () => {
     expect(addonElement).toBeChecked()
     expect(resetButton).not.toBeVisible()
   })
+
+  test('useDebouncedFilter should dispatch filters after a while', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    expect(
+      screen.queryByRole('button', {
+        name: 'Reset filters',
+      }),
+    ).not.toBeInTheDocument()
+
+    const nicknameInput = screen.getByLabelText('Search nickname')
+    expect(nicknameInput).toHaveValue('')
+    userEvent.type(nicknameInput, 'Ksu')
+    expect(nicknameInput).toHaveValue('Ksu')
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Reset filters',
+      }),
+    ).toBeInTheDocument()
+  })
 })
