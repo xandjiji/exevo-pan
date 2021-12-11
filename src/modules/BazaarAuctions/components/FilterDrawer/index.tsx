@@ -233,6 +233,7 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
+        {/* @ ToDo: add htmlFor after rangeSlider refactor */}
         <FilterGroup label="Level">
           <RangeSliderInput
             min={8}
@@ -249,8 +250,9 @@ const FilterDrawer = ({
           />
         </FilterGroup>
 
-        <FilterGroup label="Skill">
+        <FilterGroup label="Skill" htmlFor="skill-slider">
           <SliderInput
+            id="skill-slider"
             aria-label={homepage.FilterDrawer.labels.minSkill}
             min={10}
             max={130}
@@ -335,7 +337,7 @@ const FilterDrawer = ({
           options={storeMountValues}
         />
 
-        <FilterGroup label="Imbuements">
+        <FilterGroup label="Imbuements" htmlFor="imbuements-input">
           <S.FlexWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
