@@ -1,8 +1,5 @@
 import styled from 'styled-components'
-import {
-  Accordion as BaseAccordion,
-  Sticker as BaseSticker,
-} from 'components/Atoms'
+import { Accordion as BaseAccordion } from 'components/Atoms'
 import { Clickable, Smooth } from 'styles'
 import { Label as BaseFilterGroupLabel } from '../FilterGroup/styles'
 
@@ -71,11 +68,4 @@ export const Sprite = styled.img`
   margin-left: -24px;
   margin-top: -24px;
   pointer-events: none;
-`
-
-export const Sticker = styled(BaseSticker)`
-  position: absolute;
-  bottom: 100%;
-  right: 100%;
-  transform: rotate(-15deg);
 `

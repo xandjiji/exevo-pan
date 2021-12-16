@@ -1,8 +1,5 @@
 import styled, { css } from 'styled-components'
-import {
-  Paginator as BasePaginator,
-  Sticker as BaseSticker,
-} from 'components/Atoms'
+import { Paginator as BasePaginator } from 'components/Atoms'
 import FilterIconSvg from 'assets/svgs/filter.svg'
 import { InnerContainer, Shadow, Clickable, Smooth } from 'styles'
 
@@ -74,11 +71,4 @@ export const FilterButton = styled.button`
 
 export const Paginator = styled(BasePaginator)`
   margin-left: auto;
-`
-
-export const Sticker = styled(BaseSticker)`
-  position: absolute;
-  bottom: 75%;
-  right: 60%;
-  transform: rotate(-20deg);
 `

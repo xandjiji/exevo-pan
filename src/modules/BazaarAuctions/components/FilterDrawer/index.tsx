@@ -374,7 +374,7 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Charms" htmlFor="charms-input" newSticker>
+        <FilterGroup label="Charms" htmlFor="charms-input">
           <S.FlexWrapper>
             <S.AutocompleteInput
               id="charms-input"
@@ -407,7 +407,7 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Quests" htmlFor="quest-input" newSticker>
+        <FilterGroup label="Quests" htmlFor="quest-input">
           <S.AutocompleteInput
             id="quest-input"
             aria-controls="quest-list"
@@ -434,7 +434,6 @@ const FilterDrawer = ({
         <FilterGroup
           label={homepage.FilterDrawer.labels.rareAchievements}
           htmlFor="achievements-input"
-          newSticker
         >
           <S.AutocompleteInput
             id="achievement-input"

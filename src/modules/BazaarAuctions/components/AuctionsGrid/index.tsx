@@ -40,7 +40,6 @@ const AuctionsGrid = (): JSX.Element => {
           onClick={() => setDrawerOpen(true)}
           suppressHydrationWarning
         >
-          <S.Sticker localStorageKey="newFilters">New</S.Sticker>
           <S.FilterIcon />
           {process.browser && (
             <S.ActiveIcon
