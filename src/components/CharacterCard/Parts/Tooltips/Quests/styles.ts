@@ -5,15 +5,17 @@ export const Grid = styled.div`
   gap: 16px;
   justify-content: space-between;
 
-  @media (min-width: 460px) {
+  @media (min-width: 768px) {
     width: max-content;
   }
 `
 
 export const Group = styled.div`
-  @media (max-width: 460px) {
+  font-size: 10px;
+
+  @media (min-width: 768px) {
     * {
-      font-size: 10px;
+      font-size: 12px;
     }
   }
 `
