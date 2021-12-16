@@ -18,6 +18,11 @@ export const Wrapper = styled.div<{ highlighted: boolean }>`
   ${MaterialCard}
   padding: 16px;
 
+  &:hover {
+    position: relative;
+    z-index: 5;
+  }
+
   ${({ highlighted }) =>
     highlighted &&
     css`
