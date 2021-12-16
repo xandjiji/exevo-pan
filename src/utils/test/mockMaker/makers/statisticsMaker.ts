@@ -1,64 +1,57 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker'
-import { randomCharacterData } from './characterMaker'
+import { statistics } from '../constants'
+import { randomCharacter } from './CharacterMaker'
 
 const randomMonthlySummary = (): MonthlySummary => ({
-  current: faker.datatype.number({ min: 50000000, max: 99999999 }),
-  lastMonth: Array.from({ length: 28 }, () =>
-    faker.datatype.number({ min: 100000, max: 400000 }),
+  current: faker.datatype.number({
+    min: statistics.month.current.MIN,
+    max: statistics.month.current.MAX,
+  }),
+  lastMonth: Array.from({ length: statistics.month.lastMonth.SIZE }, () =>
+    faker.datatype.number({
+      min: statistics.month.lastMonth.MIN,
+      max: statistics.month.lastMonth.MAX,
+    }),
   ),
 })
 
-const skillKeys = [
-  'magic',
-  'club',
-  'fist',
-  'sword',
-  'fishing',
-  'axe',
-  'distance',
-  'shielding',
-]
-
 const randomCharacterInfo = (key: keyof CharacterInfoKey): CharacterInfo => {
-  const { characterList } = randomCharacterData(1)
-  const randomCharacter = characterList[0]
+  const character = randomCharacter()
+
+  const skillKeys = Object.keys(character.skills)
 
   const value = skillKeys.includes(key)
-    ? randomCharacter.skills[key as keyof CharacterSkillsObject]
-    : randomCharacter[key as keyof PartialCharacterObject]
+    ? character.skills[key as keyof CharacterSkillsObject]
+    : character[key as keyof PartialCharacterObject]
 
   return {
-    id: randomCharacter.id,
-    nickname: randomCharacter.nickname,
+    id: character.id,
+    nickname: character.nickname,
     [key]: value,
   }
 }
 
 const randomDistributionData = (): DistributionData => {
-  const distributionItems = Array.from(
-    {
-      length: faker.datatype.number({ min: 2, max: 10 }),
-    },
-    () => ({
-      key: faker.name.firstName(),
-      value: faker.datatype
-        .float({
-          min: 10,
-          max: 130,
-          precision: 0.01,
-        })
-        .toString(),
+  const [knight, paladin, sorcerer, druid] = Array.from({ length: 4 }, () =>
+    faker.datatype.float({
+      min: 0,
+      max: 25,
+      precision: 0.01,
     }),
   )
+  const rooker = 100 - (knight + paladin + sorcerer + druid)
 
-  const newDistributionData = {} as DistributionData
-  distributionItems.forEach((distributionItem) => {
-    newDistributionData[distributionItem.key] = distributionItem.value
-  })
+  const data = {
+    rooker: rooker.toString(),
+    knight: knight.toString(),
+    paladin: paladin.toString(),
+    sorcerer: sorcerer.toString(),
+    druid: druid.toString(),
+  }
 
-  return newDistributionData
+  return data
 }
 
 export const randomStatisticsData = (): StatisticsData => ({
@@ -66,25 +59,39 @@ export const randomStatisticsData = (): StatisticsData => ({
   totalTibiaCoins: randomMonthlySummary(),
   successRate: faker.datatype
     .float({
-      min: 10,
-      max: 130,
+      min: 40,
+      max: 50,
       precision: 0.01,
     })
     .toString(),
-  top10Bid: Array.from({ length: 10 }, () => randomCharacterInfo('currentBid')),
-  top10Level: Array.from({ length: 10 }, () => randomCharacterInfo('level')),
-  top10Magic: Array.from({ length: 10 }, () => randomCharacterInfo('magic')),
-  top10Club: Array.from({ length: 10 }, () => randomCharacterInfo('club')),
-  top10Fist: Array.from({ length: 10 }, () => randomCharacterInfo('fist')),
-  top10Sword: Array.from({ length: 10 }, () => randomCharacterInfo('sword')),
-  top10Fishing: Array.from({ length: 10 }, () =>
+  top10Bid: Array.from({ length: statistics.top.SIZE }, () =>
+    randomCharacterInfo('currentBid'),
+  ),
+  top10Level: Array.from({ length: statistics.top.SIZE }, () =>
+    randomCharacterInfo('level'),
+  ),
+  top10Magic: Array.from({ length: statistics.top.SIZE }, () =>
+    randomCharacterInfo('magic'),
+  ),
+  top10Club: Array.from({ length: statistics.top.SIZE }, () =>
+    randomCharacterInfo('club'),
+  ),
+  top10Fist: Array.from({ length: statistics.top.SIZE }, () =>
+    randomCharacterInfo('fist'),
+  ),
+  top10Sword: Array.from({ length: statistics.top.SIZE }, () =>
+    randomCharacterInfo('sword'),
+  ),
+  top10Fishing: Array.from({ length: statistics.top.SIZE }, () =>
     randomCharacterInfo('fishing'),
   ),
-  top10Axe: Array.from({ length: 10 }, () => randomCharacterInfo('axe')),
-  top10Distance: Array.from({ length: 10 }, () =>
+  top10Axe: Array.from({ length: statistics.top.SIZE }, () =>
+    randomCharacterInfo('axe'),
+  ),
+  top10Distance: Array.from({ length: statistics.top.SIZE }, () =>
     randomCharacterInfo('distance'),
   ),
-  top10Shielding: Array.from({ length: 10 }, () =>
+  top10Shielding: Array.from({ length: statistics.top.SIZE }, () =>
     randomCharacterInfo('shielding'),
   ),
   vocationPercentage: randomDistributionData(),

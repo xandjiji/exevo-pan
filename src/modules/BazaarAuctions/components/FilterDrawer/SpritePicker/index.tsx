@@ -50,7 +50,6 @@ const SpritePicker = ({
           >
             <S.Sprite
               alt={name}
-              title={name}
               src={`/sprites/${spriteDirectory}/${name}${directorySuffix}.gif`}
               width="64"
               height="64"

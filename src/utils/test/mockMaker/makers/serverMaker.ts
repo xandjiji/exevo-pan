@@ -1,34 +1,21 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import * as faker from 'faker'
+import { servers } from '../constants'
 import { singleSampleFrom } from '../utils'
 
-const randomServerLocation = (): ServerLocation => {
-  const possibleLocations: ServerLocation[] = [
-    { string: 'BR', type: 2 },
-    { string: 'EU', type: 0 },
-    { string: 'NA', type: 1 },
-  ]
+export const randomServerId = (): number =>
+  faker.datatype.number({ min: servers.id.MIN, max: servers.id.MAX })
 
-  return singleSampleFrom(possibleLocations)
-}
+const randomServerLocation = (): ServerLocation =>
+  singleSampleFrom(servers.locations)
 
-const randomPvpType = (): PvpType => {
-  const possiblePvps: PvpType[] = [
-    { string: 'Hardcore', type: 3 },
-    { string: 'Open', type: 1 },
-    { string: 'Optional', type: 0 },
-    { string: 'Retro Hardcore', type: 4 },
-    { string: 'Retro Open', type: 2 },
-  ]
-
-  return singleSampleFrom(possiblePvps)
-}
+const randomPvpType = (): PvpType => singleSampleFrom(servers.pvpTypes)
 
 export const randomServer = (): ServerObject => ({
   battleye: faker.datatype.boolean(),
   experimental: faker.datatype.boolean(),
-  serverId: faker.datatype.number({ min: 0, max: 99 }),
-  serverName: faker.name.lastName(),
+  serverId: randomServerId(),
+  serverName: faker.address.cityName(),
   serverLocation: randomServerLocation(),
   pvpType: randomPvpType(),
 })

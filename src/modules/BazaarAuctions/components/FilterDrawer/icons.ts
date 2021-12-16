@@ -29,77 +29,95 @@ export const Reset = styled(ResetIcon)`
 export const Rook = styled(Image).attrs({
   src: RookIcon,
   alt: 'None',
+  role: 'none',
 })``
 export const Knight = styled(Image).attrs({
   src: KnightIcon,
   alt: 'Knight',
+  role: 'none',
 })``
 export const Paladin = styled(Image).attrs({
   src: PaladinIcon,
   alt: 'Paladin',
+  role: 'none',
 })``
 export const Sorcerer = styled(Image).attrs({
   src: SorcererIcon,
   alt: 'Sorcerer',
+  role: 'none',
 })``
 export const Druid = styled(Image).attrs({
   src: DruidIcon,
   alt: 'Druid',
+  role: 'none',
 })``
 
 export const Magic = styled(Image).attrs({
   src: MagicIcon,
   alt: 'Magic Level',
+  role: 'none',
 })``
 export const Distance = styled(Image).attrs({
   src: DistanceIcon,
   alt: 'Distance Fighting',
+  role: 'none',
 })``
 export const Club = styled(Image).attrs({
   src: ClubIcon,
   alt: 'Club Fighting',
+  role: 'none',
 })``
 export const Sword = styled(Image).attrs({
   src: SwordIcon,
   alt: 'Sword Fighting',
+  role: 'none',
 })``
 export const Axe = styled(Image).attrs({
   src: AxeIcon,
   alt: 'Axe Fighting',
+  role: 'none',
 })``
 
 export const Dove = styled(Image).attrs({
   src: DoveIcon,
   alt: 'Optional Pvp',
+  role: 'none',
 })``
 export const WhiteSkull = styled(Image).attrs({
   src: WhiteSkullIcon,
   alt: 'Open Pvp',
+  role: 'none',
 })``
 export const OrangeSkull = styled(Image).attrs({
   src: OrangeSkullIcon,
   alt: 'Retro Open Pvp',
+  role: 'none',
 })``
 export const RedSkull = styled(Image).attrs({
   src: RedSkullIcon,
   alt: 'Hardcore Pvp',
+  role: 'none',
 })``
 export const BlackSkull = styled(Image).attrs({
   src: BlackSkullIcon,
   alt: 'Retro Hardcore Pvp',
+  role: 'none',
 })``
 
 export const EuFlag = styled(Image).attrs({
   src: EuFlagIcon,
   alt: 'Europe',
+  role: 'none',
 })``
 export const NaFlag = styled(Image).attrs({
   src: NaFlagIcon,
   alt: 'North America',
+  role: 'none',
 })``
 export const BrFlag = styled(Image).attrs({
   src: BrFlagIcon,
   alt: 'South America',
+  role: 'none',
 })``
 
 export const Status = styled.div<StatusStyleProps>`

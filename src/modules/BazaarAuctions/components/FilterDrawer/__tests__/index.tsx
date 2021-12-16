@@ -1,192 +1,206 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { imbuement, outfit } from 'DataDictionary/dictionaries'
 import { renderWithProviders } from 'utils/test'
-import FilterDrawer from '..'
+import { WrappedFilterDrawer } from './mock'
 
 jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
-
-const mockOnClose = jest.fn()
-const mockSetActiveFilterCount = jest.fn()
-const mockSetUrlValues = jest.fn()
-
-const defaultArgs = {
-  open: true,
-  onClose: mockOnClose,
-  setActiveFilterCount: mockSetActiveFilterCount,
-}
 
 describe('<FilterDrawer />', () => {
   beforeEach(() => {
     jest.useFakeTimers()
-    mockOnClose.mockClear()
-    mockSetActiveFilterCount.mockClear()
-    mockSetUrlValues.mockClear()
 
     jest
       .spyOn(window, 'setTimeout')
       .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   })
 
-  test('should toggle between open/close', () => {
-    const { rerender } = renderWithProviders(<FilterDrawer {...defaultArgs} />)
+  test('drawer visibility should be controlled correctly', () => {
+    const { rerender } = renderWithProviders(<WrappedFilterDrawer open />)
 
     const drawerElement = screen.getByRole('dialog')
     expect(drawerElement).toBeVisible()
 
-    rerender(<FilterDrawer {...defaultArgs} open={false} />)
+    rerender(<WrappedFilterDrawer open={false} />)
     expect(drawerElement).not.toBeVisible()
 
-    rerender(<FilterDrawer {...defaultArgs} />)
+    rerender(<WrappedFilterDrawer open />)
     expect(drawerElement).toBeVisible()
   })
 
   test('should call onClose', () => {
-    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+    const mockedOnClose = jest.fn()
+    renderWithProviders(<WrappedFilterDrawer onClose={mockedOnClose} />)
 
-    expect(mockOnClose).toHaveBeenCalledTimes(0)
+    expect(mockedOnClose).toHaveBeenCalledTimes(0)
     userEvent.click(screen.getByLabelText('Close drawer'))
-    expect(mockOnClose).toHaveBeenCalledTimes(1)
+    expect(mockedOnClose).toHaveBeenCalledTimes(1)
   })
 
-  test('should call setActiveFilterCount', () => {
-    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+  test('should update filters', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
 
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
+    const knightButton = screen.getByRole('switch', { name: 'Knight' })
+    const paladinButton = screen.getByRole('switch', { name: 'Paladin' })
 
-    userEvent.click(screen.getByAltText('Knight'))
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+    expect(knightButton).not.toBeChecked()
+    expect(paladinButton).not.toBeChecked()
 
-    userEvent.click(screen.getByAltText('Druid'))
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(3)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
+    userEvent.click(knightButton)
+    expect(knightButton).toBeChecked()
+    expect(paladinButton).not.toBeChecked()
 
-    userEvent.type(screen.getByLabelText('Search nickname'), 'K')
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(4)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+    userEvent.click(paladinButton)
+    expect(knightButton).toBeChecked()
+    expect(paladinButton).toBeChecked()
 
-    userEvent.click(screen.getByText('Rare nicknames'))
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(5)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(3)
-
-    userEvent.click(screen.getByText('Rare nicknames'))
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(6)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
-
-    userEvent.click(screen.getByAltText('Knight'))
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(7)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
-
-    userEvent.click(screen.getByAltText('Druid'))
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(8)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
-
-    userEvent.click(screen.getByPlaceholderText('Select imbuements'))
-    userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
-    jest.runAllTimers()
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(9)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(2)
+    const nicknameInput = screen.getByLabelText('Search nickname')
+    expect(nicknameInput).toHaveValue('')
+    userEvent.type(nicknameInput, 'Ksu')
+    expect(nicknameInput).toHaveValue('Ksu')
   })
 
-  test('autocompleteInputs should control its chips/options correctly', () => {
-    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+  test('autocomplete inputs should work correctly', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
 
-    const inputElement = screen.getByPlaceholderText('Select imbuements')
+    const imbuementInput = screen.getByLabelText('Imbuements')
+    expect(screen.queryByText('Critical Hit')).not.toBeInTheDocument()
+    userEvent.click(imbuementInput)
 
-    userEvent.click(inputElement)
     userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
-    expect(
-      screen.queryByRole('option', { name: 'Critical Hit' }),
-    ).not.toBeInTheDocument()
-    expect(screen.getByLabelText('Remove item')).toBeInTheDocument()
-
-    userEvent.click(inputElement)
-    expect(
-      screen.queryByRole('option', { name: 'Critical Hit' }),
-    ).not.toBeInTheDocument()
+    expect(screen.queryByText('Critical Hit')).toBeInTheDocument()
 
     userEvent.click(screen.getByLabelText('Remove item'))
-    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
-    userEvent.click(inputElement)
-    expect(
-      screen.getByRole('option', { name: 'Critical Hit' }),
-    ).toBeInTheDocument()
-  })
+    expect(screen.queryByText('Critical Hit')).not.toBeInTheDocument()
 
-  test('toggle all items/imbuements should control filters correctly', () => {
-    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+    userEvent.click(imbuementInput)
+    userEvent.click(screen.getByRole('option', { name: 'Critical Hit' }))
+    expect(screen.queryByText('Critical Hit')).toBeInTheDocument()
 
-    const inputElement = screen.getByPlaceholderText('Select imbuements')
-    userEvent.click(inputElement)
-    expect(screen.queryAllByRole('option')).toHaveLength(23)
-    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
-    jest.runAllTimers()
-
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(1)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
-
-    const toggleElement = screen.getByRole('switch', { name: 'All imbuements' })
-    userEvent.click(toggleElement)
-    userEvent.click(inputElement)
-    expect(screen.queryByRole('option')).not.toBeInTheDocument()
-    expect(screen.queryAllByLabelText('Remove item')).toHaveLength(23)
-    jest.runAllTimers()
-
-    expect(mockSetActiveFilterCount).toHaveBeenCalledTimes(2)
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(1)
-
-    screen.queryAllByLabelText('Remove item').forEach((element) => {
-      userEvent.click(element)
+    const toggleAllButton = screen.getByRole('switch', {
+      name: 'All imbuements',
     })
 
-    userEvent.click(inputElement)
-    expect(screen.queryAllByRole('option')).toHaveLength(23)
-    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
-    jest.runAllTimers()
+    userEvent.click(toggleAllButton)
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).toBeInTheDocument()
+    })
 
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
+    userEvent.click(toggleAllButton)
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).not.toBeInTheDocument()
+    })
+
+    userEvent.click(toggleAllButton)
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).toBeInTheDocument()
+    })
+
+    screen.getAllByLabelText('Remove item').forEach((removeButton) => {
+      userEvent.click(removeButton)
+      expect(removeButton).not.toBeInTheDocument()
+    })
   })
 
-  test('should reset filters correctly', () => {
-    renderWithProviders(<FilterDrawer {...defaultArgs} />)
+  test('filter reset button should work correctly', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
 
-    const nickInput = screen.getByLabelText('Search nickname')
-    const knightChip = screen.getByText('Knight')
-    const toggleChip = screen.getByRole('switch', { name: 'All imbuements' })
-    const rareNickChip = screen.getByText('Rare nicknames')
+    expect(
+      screen.queryByRole('button', { name: 'Reset filters' }),
+    ).not.toBeInTheDocument()
 
-    userEvent.type(nickInput, 'Ksu')
-    userEvent.click(knightChip)
-    userEvent.click(toggleChip)
-    userEvent.click(rareNickChip)
+    const knightButton = screen.getByRole('switch', { name: 'Knight' })
+    userEvent.click(knightButton)
 
-    expect(nickInput).toHaveValue('Ksu')
-    expect(knightChip).toBeChecked()
-    expect(toggleChip).toBeChecked()
-    expect(rareNickChip).toBeChecked()
-    expect(screen.getAllByLabelText('Remove item')).toHaveLength(23)
-    jest.runAllTimers()
+    const resetFilterButton = screen.getByRole('button', {
+      name: 'Reset filters',
+    })
+    expect(resetFilterButton).toBeVisible()
 
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(4)
+    userEvent.click(resetFilterButton)
+    expect(knightButton).not.toBeChecked()
+    expect(resetFilterButton).not.toBeVisible()
 
-    userEvent.click(screen.getByText('Reset filters'))
+    userEvent.click(knightButton)
+    userEvent.click(
+      screen.getByRole('switch', {
+        name: 'All imbuements',
+      }),
+    )
 
-    expect(nickInput).toHaveValue('')
-    expect(knightChip).not.toBeChecked()
-    expect(toggleChip).not.toBeChecked()
-    expect(rareNickChip).not.toBeChecked()
-    expect(screen.queryByLabelText('Remove item')).not.toBeInTheDocument()
-    jest.runAllTimers()
+    expect(resetFilterButton).toBeVisible()
 
-    expect(mockSetActiveFilterCount).toHaveBeenLastCalledWith(0)
+    userEvent.click(resetFilterButton)
+    expect(knightButton).not.toBeChecked()
+    imbuement.tokens.forEach((imbuementName) => {
+      expect(screen.queryByText(imbuementName)).not.toBeInTheDocument()
+    })
+  })
+
+  test('outfit/mount picker should work correctly', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    outfit.tokens.forEach((outfitName) => {
+      expect(screen.queryByTitle(outfitName)).not.toBeInTheDocument()
+    })
+
+    userEvent.click(screen.getByText('Outfits'))
+
+    expect(
+      screen.queryByRole('button', { name: 'Reset filters' }),
+    ).not.toBeInTheDocument()
+
+    outfit.tokens.forEach((outfitName) => {
+      const switchElement = screen.getByTitle(outfitName)
+
+      expect(switchElement).not.toBeChecked()
+      userEvent.click(switchElement)
+      expect(switchElement).toBeChecked()
+    })
+
+    const resetButton = screen.getByRole('button', { name: 'Reset filters' })
+    expect(resetButton).toBeVisible()
+
+    outfit.tokens.forEach((outfitName) => {
+      const switchElement = screen.getByTitle(outfitName)
+
+      expect(switchElement).toBeChecked()
+      userEvent.click(switchElement)
+      expect(switchElement).not.toBeChecked()
+    })
+
+    expect(resetButton).not.toBeVisible()
+
+    const addonElement = screen.getByRole('checkbox', { name: 'Addon 1' })
+    expect(addonElement).toBeChecked()
+
+    userEvent.click(addonElement)
+    expect(addonElement).not.toBeChecked()
+    expect(resetButton).toBeVisible()
+
+    userEvent.click(resetButton)
+    expect(addonElement).toBeChecked()
+    expect(resetButton).not.toBeVisible()
+  })
+
+  test('useDebouncedFilter should dispatch filters after a while', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    expect(
+      screen.queryByRole('button', {
+        name: 'Reset filters',
+      }),
+    ).not.toBeInTheDocument()
+
+    const nicknameInput = screen.getByLabelText('Search nickname')
+    expect(nicknameInput).toHaveValue('')
+    userEvent.type(nicknameInput, 'Ksu')
+    expect(nicknameInput).toHaveValue('Ksu')
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Reset filters',
+      }),
+    ).toBeInTheDocument()
   })
 })

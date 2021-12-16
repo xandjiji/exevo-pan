@@ -6,7 +6,7 @@ import AuctionItem from './AuctionItem'
 import EmptyState from './EmptyState'
 import * as S from './styles'
 
-const PAGE_SIZE = 10
+export const PAGE_SIZE = 10
 
 const AuctionSearch = (): JSX.Element => {
   const {

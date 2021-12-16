@@ -9,7 +9,7 @@ import VirtualizedListView from './VirtualizedListView'
 import EmptyState from './EmptyState'
 import * as S from './styles'
 
-const PAGE_SIZE = 10
+export const PAGE_SIZE = 10
 const ESTIMATED_HEIGHT = 479
 
 const AuctionsGrid = (): JSX.Element => {
