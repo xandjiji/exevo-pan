@@ -1,9 +1,6 @@
 import { randomDataset } from 'utils/test'
 
-const { statisticsData, puneMembersData, bonesMembersData, allGuildMembers } =
-  randomDataset()
-
-export const mockStatisticsData = statisticsData
+const { puneMembersData, bonesMembersData, allGuildMembers } = randomDataset()
 
 export const mockedGuildData = {
   puneMembersData,

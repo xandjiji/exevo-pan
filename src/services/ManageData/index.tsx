@@ -3,26 +3,7 @@ import { endpoints, paths, localStorageKeys } from 'Constants'
 import { unminifyGuildData } from './utils'
 
 export default class ManageDataClient {
-  static statisticsDataUrl = `${endpoints.BASE_HISTORY_DATA}${paths.OVERALL_STATISTICS}`
-
   static warStatisticsDataUrl = `${endpoints.WAR_DATA}${paths.WAR_STATISTICS}`
-
-  static async fetchStatisticsData(): Promise<StatisticsData> {
-    try {
-      const response = await fetch(this.statisticsDataUrl)
-      const data = (await response.json()) as StatisticsData
-
-      saveToLocalStorage(localStorageKeys.STATISTICS_DATA, data)
-
-      return data
-    } catch (error: unknown) {
-      console.log(error)
-      return getFromLocalStorage<StatisticsData>(
-        localStorageKeys.STATISTICS_DATA,
-        {} as StatisticsData,
-      )
-    }
-  }
 
   static async fetchWarStatisticsData(): Promise<WarStatistics> {
     try {
