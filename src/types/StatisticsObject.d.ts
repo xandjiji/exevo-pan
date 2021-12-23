@@ -13,13 +13,12 @@ declare interface CharacterInfo extends CharacterInfoKey {
   nickname: string
 }
 
-/* @ ToDo: change this to Record<string, number> after backend fix */
-declare type DistributionData = Record<string, string>
+declare type DistributionData = Record<string, number>
 
 declare type StatisticsData = {
   totalRevenue: MonthlySummary
   totalTibiaCoins: MonthlySummary
-  successRate: string
+  successRate: number
   top10Bid: CharacterInfo[]
   top10Level: CharacterInfo[]
   top10Magic: CharacterInfo[]

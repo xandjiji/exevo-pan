@@ -44,11 +44,11 @@ const randomDistributionData = (): DistributionData => {
   const rooker = 100 - (knight + paladin + sorcerer + druid)
 
   const data = {
-    rooker: rooker.toString(),
-    knight: knight.toString(),
-    paladin: paladin.toString(),
-    sorcerer: sorcerer.toString(),
-    druid: druid.toString(),
+    rooker,
+    knight,
+    paladin,
+    sorcerer,
+    druid,
   }
 
   return data
@@ -57,13 +57,11 @@ const randomDistributionData = (): DistributionData => {
 export const randomStatisticsData = (): StatisticsData => ({
   totalRevenue: randomMonthlySummary(),
   totalTibiaCoins: randomMonthlySummary(),
-  successRate: faker.datatype
-    .float({
-      min: 40,
-      max: 50,
-      precision: 0.01,
-    })
-    .toString(),
+  successRate: faker.datatype.float({
+    min: 40,
+    max: 50,
+    precision: 0.01,
+  }),
   top10Bid: Array.from({ length: statistics.top.SIZE }, () =>
     randomCharacterInfo('currentBid'),
   ),
