@@ -5,7 +5,7 @@ import { wrapWithProviders } from 'utils/test'
 import { ManageDataClient } from 'services'
 import { routes } from 'Constants'
 import { DatabaseProvider, useDatabase } from '../index'
-import { mockStatisticsData, mockedGuildData } from './mock'
+import { mockedGuildData } from './mock'
 
 const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
 
@@ -24,10 +24,6 @@ const initialDatabaseValue = {
 
 describe('useDatabase()', () => {
   beforeEach(() => {
-    jest
-      .spyOn(ManageDataClient, 'fetchStatisticsData')
-      .mockResolvedValueOnce(mockStatisticsData)
-
     jest
       .spyOn(ManageDataClient, 'fetchGuildWarData')
       .mockResolvedValueOnce(mockedGuildData.puneMembersData)

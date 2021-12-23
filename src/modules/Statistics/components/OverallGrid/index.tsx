@@ -34,8 +34,7 @@ const OverallGrid = ({
       <S.ItemWrapper>
         <PercentageCard
           title={statistics.OverallGrid.PercentageCard1.title}
-          /* @ ToDo: change this assertion after backend refactor */
-          percentage={statisticsData.successRate as unknown as number}
+          percentage={statisticsData.successRate}
         />
         <PieChart
           title={statistics.OverallGrid.PieChart1.title}

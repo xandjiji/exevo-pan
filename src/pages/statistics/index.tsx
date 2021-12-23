@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
-import { ManageDataClient } from 'services'
+import { HistoryStatisticsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -81,7 +81,7 @@ export default function Statistics({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const statisticsData = await ManageDataClient.fetchStatisticsData()
+  const statisticsData = await HistoryStatisticsClient.fetchStatisticsData()
 
   return {
     props: {
