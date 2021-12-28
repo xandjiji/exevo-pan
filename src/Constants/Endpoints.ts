@@ -1,6 +1,7 @@
 export const endpoints = {
   CURRENT_AUCTIONS: 'https://auctions.exevopan.workers.dev',
-  HISTORY_AUCTIONS: 'https://exevopan.pagekite.me',
+  /* HISTORY_AUCTIONS: 'https://exevopan.pagekite.me', */
+  HISTORY_AUCTIONS: 'https://compatibility-karen-are-sphere.trycloudflare.com',
   STATIC_DATA: 'https://static-exevopan.surge.sh',
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
   HIGHLIGHTED_DATA: 'https://exevo-pan-highlighted.netlify.app',
