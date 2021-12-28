@@ -6,9 +6,9 @@ import {
 } from './utils'
 
 export default class DrawerFieldsClient {
-  static serverDataUrl = `${endpoints.BASE_DATA}${paths.SERVER_DATA}`
+  static serverDataUrl = `${endpoints.STATIC_DATA}${paths.SERVER_DATA}`
 
-  static rareItemDataUrl = `${endpoints.BASE_DATA}${paths.ITEMS_DATA}`
+  static rareItemDataUrl = `${endpoints.STATIC_DATA}${paths.ITEMS_DATA}`
 
   static async fetchServerOptions(): Promise<Option[]> {
     const response = await fetch(this.serverDataUrl)

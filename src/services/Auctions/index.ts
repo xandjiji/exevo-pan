@@ -24,7 +24,7 @@ const EMPTY_RESPONSE: PaginatedData<CharacterObject> = {
 export default class AuctionsClient {
   static cache: CacheObject = {}
 
-  static highlightedAuctionsUrl = `${endpoints.BASE_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
+  static highlightedAuctionsUrl = `${endpoints.STATIC_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
 
   static getCache(
     key: string,

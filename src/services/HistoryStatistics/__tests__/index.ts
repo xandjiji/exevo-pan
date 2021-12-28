@@ -22,7 +22,7 @@ describe('services/StatisticsData', () => {
 
     expect(fetch).toHaveBeenCalledTimes(1)
     expect(fetch).toHaveBeenCalledWith(
-      `${endpoints.BASE_HISTORY_DATA}${paths.OVERALL_STATISTICS}`,
+      `${endpoints.STATIC_DATA}${paths.OVERALL_STATISTICS}`,
     )
 
     expect(result).toEqual(mockedStatisticsData)

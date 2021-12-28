@@ -1,8 +1,7 @@
 export const endpoints = {
   CURRENT_AUCTIONS: 'https://auctions.exevopan.workers.dev',
   HISTORY_AUCTIONS: 'https://exevopan.pagekite.me',
-  BASE_DATA: 'https://exevopan-data.netlify.app',
-  BASE_HISTORY_DATA: 'https://exevopan-history-data.netlify.app',
+  STATIC_DATA: 'https://static-exevopan.surge.sh',
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
   HIGHLIGHTED_DATA: 'https://exevo-pan-highlighted.netlify.app',
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
