@@ -24,7 +24,7 @@ const EMPTY_RESPONSE: PaginatedData<CharacterObject> = {
 export default class AuctionsClient {
   static cache: CacheObject = {}
 
-  static highlightedAuctionsUrl = `${endpoints.BASE_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
+  static highlightedAuctionsUrl = `${endpoints.STATIC_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
 
   static getCache(
     key: string,
@@ -59,25 +59,16 @@ export default class AuctionsClient {
     const cachedResult = this.getCache(bodyPayload, endpoint)
     if (cachedResult) return cachedResult
 
-    try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: buildHeaders(endpoint),
-        body: bodyPayload,
-      })
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: buildHeaders(endpoint),
+      body: bodyPayload,
+    })
 
-      const data: PaginatedData<CharacterObject> = await response.json()
-      this.setCache(bodyPayload, endpoint, data)
+    const data: PaginatedData<CharacterObject> = await response.json()
+    this.setCache(bodyPayload, endpoint, data)
 
-      return data
-    } catch (error: unknown) {
-      console.log(error)
-      return {
-        ...EMPTY_RESPONSE,
-        ...sortOptions,
-        pageIndex: paginationOptions.pageIndex,
-      }
-    }
+    return data
   }
 
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
