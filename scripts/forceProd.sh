@@ -1,0 +1,1 @@
+cp apps/exevo-pan/.env.production apps/exevo-pan/.env.development.local

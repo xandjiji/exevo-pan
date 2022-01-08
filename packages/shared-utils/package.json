@@ -1,0 +1,26 @@
+{
+  "name": "shared-utils",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Shared utils for Exevo Pan",
+  "license": "Unlicense",
+  "main": "dist",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "build": "rm -rf dist/ && tsc",
+    "build:packages": "rm -rf dist/ && tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "logging": "*"
+  },
+  "devDependencies": {
+    "@types/exevo-pan": "*",
+    "config": "*",
+    "typescript": "4.3.5"
+  }
+}

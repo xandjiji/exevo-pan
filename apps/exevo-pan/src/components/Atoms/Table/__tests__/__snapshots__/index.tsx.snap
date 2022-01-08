@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Table /> head column highlight prop should display asc/desc symbol 1`] = `
+<div>
+  <section
+    class="styles__Wrapper-sc-1fjp964-0 ikjZPp"
+  >
+    <table
+      class="styles__Table-sc-1fjp964-3 fTMZNp"
+    >
+      <thead
+        class="styles__Head-sc-1fjp964-5 epnWUi"
+      >
+        <tr
+          class="styles__Row-sc-1fjp964-4 Mnsia"
+        >
+          <th
+            class="styles__HeadColumn-sc-1fjp964-6 ljkzzB"
+          >
+            #
+          </th>
+          <th
+            class="styles__HeadColumn-sc-1fjp964-6 jYwysM"
+          >
+            Nickname
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </section>
+</div>
+`;
+
+exports[`<Table /> head column highlight prop should display asc/desc symbol 2`] = `
+<div>
+  <section
+    class="styles__Wrapper-sc-1fjp964-0 ikjZPp"
+  >
+    <table
+      class="styles__Table-sc-1fjp964-3 fTMZNp"
+    >
+      <thead
+        class="styles__Head-sc-1fjp964-5 epnWUi"
+      >
+        <tr
+          class="styles__Row-sc-1fjp964-4 Mnsia"
+        >
+          <th
+            class="styles__HeadColumn-sc-1fjp964-6 fvlJDH"
+          >
+            #
+          </th>
+          <th
+            class="styles__HeadColumn-sc-1fjp964-6 jYwysM"
+          >
+            Nickname
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </section>
+</div>
+`;

@@ -1,51 +1,117 @@
+# Exevo Pan 🍎
 
-# Exevo Pan
-
-This application is 100% free and open-source. Run it in any device through a web-browser! Designed for both Mobile and Desktop.
-
-You can find the application [here](https://exevopan.com/).
+[Exevo Pan](https://www.exevopan.com/) is an official [Tibia](https://www.tibia.com/) supported fansite focused on improving your Char Bazaar experience.
 
 <p align="center">
-	<img src="https://exevopan.netlify.app/icons/favicon-96x96.png">
+    <img alt="Exevo Pan" src="https://i.imgur.com/0x3ZPkF.png">
 </p>
 
-## Current Features
+# What's inside?
 
-- List all available character auctions
-- List all past character auctions
-- Analytics and summary data about the Bazaar
-- Search by nickname
-- Filter by server types, character stats and more!
-- Rare items finder
-- Bookmark auctions
-- Dark Theme
-<p align="center">
-	<img src="https://i.imgur.com/A5Pk3jL.png">
-</p>
+This monorepo contains the entire codebase of our project. Here is the anatomy:
 
-## Future Features
+```
+├── automations
+├── apps
+│   ├── bazaar-scraper
+│   ├── current-auctions-worker
+│   ├── exevo-pan
+│   └── history-server
+├── packages
+│   ├── auction-queries
+│   ├── config
+│   ├── data-dictionary
+│   ├── logging
+│   ├── mock-maker
+│   ├── shared-utils
+│   ├── tsconfig
+│   └── @types
+└── package.json
+```
 
-- Notifications for auctions close to ending
+The entire stack is built using `typescript`, so you will need `Node.js` and `yarn`. If you are starting from a fresh clone of this repository, start with:
+```bash
+yarn
+```
 
-## Char Bazaar Data
+This will install and build all the `apps` dependencies. You will also need to install Workers CLI:
 
-Since there is no official API from Cipsoft, all the data used in this app is scraped from the official [Tibia](https://www.tibia.com/) website. You can check the scraping scripts [here](https://github.com/xandjiji/tibia-bazaar-scraper).
+```bash
+yarn global add @cloudflare/wrangler
+```
 
-All live data is fetched from these endpoints:
+## Apps
 
-`https://exevopan-data.netlify.app/MinifiedCharacterData.json`
+- [exevo-pan](apps/exevo-pan): the frontend application, built with `React`
+- [bazaar-scraper](apps/bazaar-scraper): a custom built tool for scraping Char Bazaar data from the official [Tibia](https://www.tibia.com/) website
+- [current-auctions-worker](apps/current-auctions-worker): a [Cloudflare Worker](https://workers.cloudflare.com/) that serves current auctions data
+- [history-server](apps/history-server): an `Express` webserver responsible for serving past auctions data
 
-`https://exevopan-data.netlify.app/ItemsData.json`
+# Setup
 
-`https://exevopan-data.netlify.app/ServerData.json`
+It's advisible that you read every app documentation before trying to run the full stack. Still, here is a simple recipe for you to get started:
 
-`https://exevopan-history-data.netlify.app/hash.json`
+## Install all the dependencies
+```
+yarn && yarn build:packages
+```
 
-`https://exevopan-history-data.netlify.app/historyData{index}.json`
+## Scraping current auctions data
 
-They are being updated around every 10 minutes
+At the `apps/bazaar-scraper` directory, run:
+```
+yarn scrap:auctions
+```
 
-## More informations
+to get current auctions data. Then, fetch for highlighted auctions:
+```
+yarn update:highlighted
+```
 
-This project was done using [React.js](https://reactjs.org/).
-If you have any suggestions, questions or need any help, feel free to contact me :-)
+## Scraping history auctions data
+
+To get some history auction data, start with:
+```
+yarn scrap:history
+```
+
+Scraping the entire History data will take several days, but you can skip this process as soon as `HistoryAuctions.jsonl` has been outputted.
+
+Now generate some history statistics data using:
+```
+yarn update:statistics
+```
+
+#
+At this point, your `apps/bazaar-scraper/Output` directory should have this set of data:
+
+```
+├── CurrentAuctions.json
+├── HighlightedAuctions.json
+├── HistoryAuctions.jsonl
+├── HistoryStatistics.json
+├── ItemsData.json
+├── ScrapHistoryData.json
+└── ServerData.json
+```
+
+#
+
+Now you are ready to have a minimal dev enviroment! Go back to the repository root directory and run:
+```
+yarn dev
+```
+
+Now you are ready to roll! Apps will be running on:
+- **exevo-pan**: [http://localhost:3000](http://localhost:3000)
+- **current-auctions-worker**: [http://localhost:8787](http://localhost:8787)
+- **history-server**: [http://localhost:4000](http://localhost:4000)
+- **static-data-server**: [http://localhost:5555](http://localhost:5555)
+
+# About
+
+This software is 100% free, open-source and unlicensed.
+
+You can find more info about me or this project [here](https://www.exevopan.com/about) 😄
+
+Contact: xandjiji@gmail.com
