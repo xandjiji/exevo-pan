@@ -1,1 +1,0 @@
-{"version":3,"file":"serverMaker.d.ts","sourceRoot":"","sources":["../../../src/makers/serverMaker.ts"],"names":[],"mappings":";AAIA,eAAO,MAAM,cAAc,QAAO,MACmC,CAAA;AAOrE,eAAO,MAAM,YAAY,QAAO,YAO9B,CAAA;AAEF,eAAO,MAAM,gBAAgB,WAAY,MAAM,KAAG,YAAY,EAY7D,CAAA;AAED,eAAO,MAAM,gBAAgB,WACnB,MAAM;mBAEC,OAAO,MAAM,EAAE,YAAY,CAAC;gBAC/B,YAAY,EAAE;CAW3B,CAAA"}
