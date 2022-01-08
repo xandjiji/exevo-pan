@@ -1,71 +1,81 @@
 {
-  "name": "exevo-pan-next",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint",
-    "test": "jest --watch --silent --coverage",
-    "test:all": "jest --silent --coverage"
+  "name": "exevo-pan",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "The entire Exevo Pan stack monorepo",
+  "license": "Unlicense",
+  "homepage": "https://exevopan.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xandjiji/exevo-pan"
   },
-  "dependencies": {
-    "@popperjs/core": "^2.9.2",
-    "chart.js": "^2.9.3",
-    "dequal": "^2.0.2",
-    "next": "11.0.1",
-    "next-react-svg": "^1.1.3",
-    "nodemailer": "^6.6.5",
-    "nodemailer-plugin-inline-base64": "^2.1.1",
-    "qrcode-pix": "^3.0.3",
-    "react": "17.0.2",
-    "react-chartjs-2": "^2.9.0",
-    "react-dom": "17.0.2",
-    "react-popper": "^2.2.5",
-    "styled-components": "^5.3.0",
-    "uuid": "^8.3.2",
-    "yarn": "^1.22.15"
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "lint": "turbo run lint",
+    "format": "turbo run format",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "test": "turbo run test:all",
+    "dev": "scripts/setupDev.sh && turbo run dev --parallel",
+    "dev:scraper": "yarn --cwd apps/bazaar-scraper dev:scraper",
+    "dev:front": "scripts/forceProd.sh && turbo run dev --scope=exevo-pan",
+    "postinstall": "turbo run build:packages --include-dependencies --no-deps",
+    "build": "turbo run build",
+    "build:front": "NODE_ENV=production turbo run build --scope=exevo-pan --include-dependencies --no-deps",
+    "build:exevo-pan": "turbo run build --scope=exevo-pan --include-dependencies --no-deps",
+    "build:current-auctions-worker": "turbo run build --scope=current-auctions-worker --include-dependencies --no-deps",
+    "build:history-server": "turbo run build --scope=history-server --include-dependencies --no-deps",
+    "build:bazaar-scraper": "turbo run build --scope=bazaar-scraper --include-dependencies --no-deps",
+    "start:front": "NODE_ENV=production turbo run start --scope=exevo-pan",
+    "start:staging": "turbo run staging"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.13.12",
-    "@babel/preset-typescript": "^7.13.0",
-    "@testing-library/dom": "^7.30.3",
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/react-hooks": "^7.0.0",
-    "@testing-library/user-event": "^13.1.9",
-    "@types/faker": "^5.5.7",
-    "@types/jest": "^26.0.23",
-    "@types/jest-axe": "^3.5.2",
-    "@types/node": "^15.9.0",
-    "@types/nodemailer": "^6.4.4",
-    "@types/react": "17.0.17",
-    "@types/react-dom": "^17.0.6",
-    "@types/styled-components": "^5.1.12",
-    "@types/uuid": "^8.3.1",
-    "@typescript-eslint/eslint-plugin": "^4.29.1",
-    "@typescript-eslint/parser": "^4.29.1",
-    "@vercel/node": "^1.12.1",
-    "babel-jest": "^26.6.3",
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb": "^18.2.1",
-    "eslint-config-next": "11.0.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.0",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-react": "^7.24.0",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "faker": "^5.5.3",
-    "jest": "^26.6.3",
-    "jest-axe": "^5.0.1",
-    "jest-cli": "^26.6.3",
-    "jest-dom": "^4.0.0",
-    "prettier": "^2.3.2",
-    "ts-jest": "^26.5.0",
-    "ts-node": "^10.2.0",
-    "typescript": "4.3.5"
+    "prettier": "^2.5.1",
+    "turbo": "latest"
+  },
+  "turbo": {
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          "dist/**",
+          ".next/**"
+        ]
+      },
+      "build:packages": {
+        "dependsOn": [
+          "^build:packages"
+        ],
+        "cache": false
+      },
+      "test:all": {
+        "outputs": [
+          "coverage/**"
+        ]
+      },
+      "lint": {},
+      "format": {},
+      "dev": {
+        "cache": false
+      },
+      "start": {
+        "cache": false
+      },
+      "clean": {
+        "cache": false
+      },
+      "staging": {
+        "cache": false
+      }
+    }
+  },
+  "engines": {
+    "npm": ">=7.0.0",
+    "node": ">=14.0.0"
   }
 }

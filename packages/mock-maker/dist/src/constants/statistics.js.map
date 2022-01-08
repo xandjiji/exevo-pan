@@ -1,0 +1,1 @@
+{"version":3,"file":"statistics.js","sourceRoot":"","sources":["../../../src/constants/statistics.ts"],"names":[],"mappings":";;AAAA,qBAAe;IACb,KAAK,EAAE;QACL,OAAO,EAAE;YACP,GAAG,EAAE,QAAQ;YACb,GAAG,EAAE,QAAQ;SACd;QACD,SAAS,EAAE;YACT,IAAI,EAAE,EAAE;YACR,GAAG,EAAE,MAAM;YACX,GAAG,EAAE,MAAM;SACZ;KACF;IACD,GAAG,EAAE;QACH,IAAI,EAAE,EAAE;KACT;CACF,CAAA"}

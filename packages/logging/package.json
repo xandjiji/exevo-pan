@@ -1,0 +1,23 @@
+{
+  "name": "logging",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Logging utility for Exevo Pan backend jobs",
+  "license": "Unlicense",
+  "main": "dist",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "build": "rm -rf dist/ && tsc",
+    "build:packages": "rm -rf dist/ && tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/exevo-pan": "*",
+    "config": "*",
+    "typescript": "4.3.5"
+  }
+}

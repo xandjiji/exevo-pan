@@ -1,0 +1,9 @@
+{
+  "name": "@types/exevo-pan",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Shared types used across Exevo Pan projects",
+  "license": "Unlicense",
+  "main": "",
+  "types": "index.d.ts"
+}
