@@ -1,12 +1,15 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
+import { advertising } from 'Constants'
 import Summary from '..'
 import { mockedFormValues } from './mock'
 
 jest.mock('../../../contexts/Form', () => ({
   useForm: () => mockedFormValues,
 }))
+
+const DAYS_COUNT = mockedFormValues.selectedDates.length
 
 describe('<Summary />', () => {
   test('should display auction config data', () => {
@@ -33,6 +36,8 @@ describe('<Summary />', () => {
     expect(screen.getByText('21/10/2021')).toBeVisible()
     expect(screen.getByText('22/10/2021')).toBeVisible()
 
-    expect(screen.getByText('R$ 20,00 reais')).toBeInTheDocument()
+    expect(
+      screen.getByText(`R$ ${DAYS_COUNT * advertising.BRL_ADVERTISE},00 reais`),
+    ).toBeInTheDocument()
   })
 })

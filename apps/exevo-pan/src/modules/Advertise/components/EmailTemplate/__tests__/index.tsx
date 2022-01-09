@@ -1,9 +1,13 @@
 /* eslint-disable react/no-danger */
 import { render, screen } from '@testing-library/react'
+import { advertising } from 'Constants'
 import BuildEmailHtml from '..'
 import { generateQrCode } from '../../PaymentDetails/PixPayment/utils'
 import { sortAndFormatDates } from '../../Summary/utils'
 import { mockedPixPurchaseData, mockedTCPurchaseData } from './mock'
+
+const PIX_DAY_COUNT = mockedPixPurchaseData.selectedDates.length
+const TC_DAY_COUNT = mockedTCPurchaseData.selectedDates.length
 
 describe('<BuildEmailHtml />', () => {
   test('should render all data correctly for PIX', async () => {
@@ -32,7 +36,11 @@ describe('<BuildEmailHtml />', () => {
 
     expect(screen.getByText('3 days')).toBeInTheDocument()
 
-    expect(screen.getByText('R$ 30,00 reais')).toBeInTheDocument()
+    expect(
+      screen.getByText(
+        `R$ ${PIX_DAY_COUNT * advertising.BRL_ADVERTISE},00 reais`,
+      ),
+    ).toBeInTheDocument()
 
     sortAndFormatDates(mockedPixPurchaseData.selectedDates).forEach((date) => {
       expect(screen.getByText(date, { exact: false })).toBeInTheDocument()
@@ -63,7 +71,11 @@ describe('<BuildEmailHtml />', () => {
 
     expect(screen.getByText('1 day')).toBeInTheDocument()
 
-    expect(screen.getAllByText('50 Tibia Coins')).toHaveLength(2)
+    expect(
+      screen.getAllByText(
+        `${TC_DAY_COUNT * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins`,
+      ),
+    ).toHaveLength(2)
 
     sortAndFormatDates(mockedTCPurchaseData.selectedDates).forEach((date) => {
       expect(screen.getByText(date, { exact: false })).toBeInTheDocument()

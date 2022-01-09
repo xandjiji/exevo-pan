@@ -1,5 +1,6 @@
 import { screen, waitFor } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
+import { advertising } from 'Constants'
 import { useForm } from '../../../contexts/Form'
 import { FormValues } from '../../../contexts/Form/types'
 import PaymentDetails from '..'
@@ -10,6 +11,8 @@ jest.mock('../../../contexts/Form', () => ({
 }))
 
 const mockedUseForm = useForm as jest.MockedFunction<typeof useForm>
+
+const DAYS_COUNT = mockedFormValues.selectedDates.length
 
 describe('<PaymentDetails />', () => {
   beforeEach(() => {
@@ -29,7 +32,10 @@ describe('<PaymentDetails />', () => {
     renderWithProviders(<PaymentDetails />)
 
     expect(
-      screen.getAllByText('100 Tibia Coins', { exact: false }),
+      screen.getAllByText(
+        `${DAYS_COUNT * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins`,
+        { exact: false },
+      ),
     ).toHaveLength(2)
     expect(screen.getByText('Ksu', { exact: false })).toBeInTheDocument()
     expect(screen.getByText('Bubble', { exact: false })).toBeInTheDocument()
