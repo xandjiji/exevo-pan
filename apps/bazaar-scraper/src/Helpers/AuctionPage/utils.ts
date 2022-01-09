@@ -91,3 +91,10 @@ export const loadCheerio = (content: CheerioAPI | string): CheerioAPI => {
   }
   return content
 }
+
+const numberRegex = /\d+/g
+export const findNumber = (text: string): number => {
+  const [number] = text.match(numberRegex) ?? [-1]
+
+  return +number
+}

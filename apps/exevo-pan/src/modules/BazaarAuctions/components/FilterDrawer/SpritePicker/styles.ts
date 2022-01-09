@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Accordion as BaseAccordion } from 'components/Atoms'
+import { Accordion as BaseAccordion, ActiveCount } from 'components/Atoms'
 import { Clickable, Smooth } from 'styles'
 import { Label as BaseFilterGroupLabel } from '../FilterGroup/styles'
 
@@ -22,22 +22,8 @@ export const AccordionLabel = styled(BaseFilterGroupLabel)`
   cursor: pointer;
 `
 
-export const Counter = styled.strong`
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  background-color: var(--battleYellow);
-  ${Smooth}
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  color: #000;
-
-  &[aria-hidden='true'] {
-    opacity: 0;
-  }
+export const Counter = styled(ActiveCount)`
+  font-weight: 700;
 `
 
 export const SpriteGrid = styled.div`

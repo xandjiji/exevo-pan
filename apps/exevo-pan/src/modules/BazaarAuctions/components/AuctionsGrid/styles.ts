@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
-import { Paginator as BasePaginator } from 'components/Atoms'
+import { Paginator as BasePaginator, ActiveCount } from 'components/Atoms'
 import FilterIconSvg from 'assets/svgs/filter.svg'
-import { InnerContainer, Shadow, Clickable, Smooth } from 'styles'
+import { InnerContainer, Shadow, Clickable } from 'styles'
 
 export const Main = styled.main``
 
@@ -26,23 +26,7 @@ export const Head = styled.div`
   }
 `
 
-export const ActiveIcon = styled.div`
-  width: 17px;
-  height: 17px;
-  border-radius: 50%;
-  background-color: var(--battleYellow);
-  ${Shadow}
-  ${Smooth}
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-
-  &[aria-hidden='true'] {
-    opacity: 0;
-  }
-`
+export const ActiveIcon = styled(ActiveCount)``
 
 export const IconStyling = css`
   padding: 2px;
