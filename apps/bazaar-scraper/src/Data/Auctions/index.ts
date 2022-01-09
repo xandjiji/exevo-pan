@@ -25,11 +25,11 @@ export default class CurrentAuctionsData {
   }
 
   private async save(): Promise<void> {
-    if (this.currentAuctions.length === 0) {
+    /* if (this.currentAuctions.length === 0) {
       broadcast(`WARNING! Writing empty values to ${FILE_NAME}`, 'fail')
       broadcast('exiting gracefully...', 'control')
       process.exit()
-    }
+    } */
 
     this.currentAuctions = this.currentAuctions.sort(
       (a, b) => a.auctionEnd - b.auctionEnd,
@@ -53,7 +53,7 @@ export default class CurrentAuctionsData {
     let removedCount = 0
     let updatedCount = 0
 
-    this.currentAuctions = this.currentAuctions
+    const newCurrentAuctions = this.currentAuctions
       .filter(({ id }) => {
         const finished = !auctionBlockIds.has(id)
         if (finished) removedCount += 1
@@ -78,6 +78,14 @@ export default class CurrentAuctionsData {
           hasBeenBidded: freshAuctionBlock.hasBeenBidded,
         }
       })
+
+    if (this.currentAuctions.length > 0 && newCurrentAuctions.length === 0) {
+      broadcast(`WARNING! Writing empty values to ${FILE_NAME}`, 'fail')
+      broadcast('exiting gracefully...', 'control')
+      process.exit()
+    }
+
+    this.currentAuctions = newCurrentAuctions
 
     await this.save()
     broadcast(
