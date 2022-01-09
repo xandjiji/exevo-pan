@@ -1,9 +1,14 @@
 import styled from 'styled-components'
+import { CustomScrollbar } from 'styles'
 
 export const Grid = styled.div`
   display: flex;
   gap: 16px;
   justify-content: space-between;
+
+  width: calc(100vw - 36px);
+  overflow-x: auto;
+  ${CustomScrollbar}
 
   @media (min-width: 768px) {
     width: max-content;
@@ -11,13 +16,8 @@ export const Grid = styled.div`
 `
 
 export const Group = styled.div`
-  font-size: 10px;
-
-  @media (min-width: 768px) {
-    * {
-      font-size: 12px;
-    }
-  }
+  flex-shrink: 0;
+  font-size: 12px;
 `
 
 export const Title = styled.h5`
