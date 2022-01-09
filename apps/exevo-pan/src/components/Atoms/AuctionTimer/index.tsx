@@ -25,7 +25,7 @@ const AuctionTimer = ({
   if (days > 0 || isBazaarHistory) {
     const endDateString = `${endDate.getDate()} ${
       common.Month[endDate.getMonth()]
-    }`
+    }${isBazaarHistory ? ` ${endDate.getFullYear()}` : ''}`
 
     return (
       <>
