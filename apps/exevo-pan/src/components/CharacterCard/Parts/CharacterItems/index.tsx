@@ -23,9 +23,8 @@ const CharacterItems = ({
         const [item, tier] = floatItem.toString().split('.')
         if (tier) {
           return (
-            <S.SpriteWrapper>
+            <S.SpriteWrapper key={uuidv4()}>
               <SpritePortrait
-                key={uuidv4()}
                 alt={common.CharacterCard.featuredItem}
                 src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
                 style={{ width: 32, height: 32 }}
