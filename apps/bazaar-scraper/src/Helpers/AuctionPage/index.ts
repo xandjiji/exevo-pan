@@ -9,7 +9,7 @@ import {
 } from 'data-dictionary/dist/dictionaries'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { filterListTable } from '../utils'
-import { getPagedData, loadCheerio } from './utils'
+import { getPagedData, loadCheerio, findNumber } from './utils'
 import { HistoryCheck } from './types'
 
 export default class AuctionPage {
@@ -173,16 +173,29 @@ export default class AuctionPage {
   }
 
   items($: CheerioAPI): number[] {
-    const itemImages = $('.AuctionItemsViewBox .CVIcon > img')
+    const itemImages = $('.AuctionItemsViewBox .CVIcon')
 
     const itemArray: number[] = []
     // eslint-disable-next-line array-callback-return
     itemImages.map((_, element) => {
+      const itemImg = cheerio('img', element).first()
+      const [tierImg] = cheerio('.ObjectTier img', element).toArray()
+
+      let tierNumber = 0
+      if (tierImg) {
+        /* eslint-disable-next-line */
+        const [, tier] = cheerio(tierImg).attr('src')?.split('/tiers/')!
+        const foundTier = findNumber(tier)
+        if (foundTier > 0) {
+          tierNumber = foundTier / 10
+        }
+      }
+
       /* eslint-disable-next-line */
-      const [, src] = cheerio(element).attr('src')?.split('/objects/')!
+      const [, src] = cheerio(itemImg).attr('src')?.split('/objects/')!
 
       const [itemId] = src.split('.')
-      itemArray.push(+itemId)
+      itemArray.push(+itemId + tierNumber)
     })
 
     return itemArray
