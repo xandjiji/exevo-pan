@@ -22,15 +22,11 @@ const AuctionTimer = ({
     .toString()
     .padStart(2, '0')}`
 
-  const endDateString = `${endDate.getDate()} ${
-    common.Month[endDate.getMonth()]
-  }`
-
-  const countdownTime = hours
-    ? `${hours}h ${minutes}m`
-    : `${minutes}m ${seconds}s`
-
   if (days > 0 || isBazaarHistory) {
+    const endDateString = `${endDate.getDate()} ${
+      common.Month[endDate.getMonth()]
+    }`
+
     return (
       <>
         <S.Countdown
@@ -51,6 +47,10 @@ const AuctionTimer = ({
   }
 
   if (hours + minutes + seconds > 0) {
+    const countdownTime = hours
+      ? `${hours}h ${minutes}m`
+      : `${minutes}m ${seconds}s`
+
     return (
       <>
         <S.Countdown
