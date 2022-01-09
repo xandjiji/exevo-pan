@@ -26,7 +26,7 @@ export default {
   },
   Month: {
     '0': 'Jan',
-    '1': 'Fev',
+    '1': 'Feb',
     '2': 'Mar',
     '3': 'Apr',
     '4': 'May',

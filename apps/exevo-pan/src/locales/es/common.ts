@@ -34,7 +34,7 @@ export default {
     '5': 'Jun',
     '6': 'Jul',
     '7': 'Ago',
-    '8': 'Set',
+    '8': 'Sep',
     '9': 'Oct',
     '10': 'Nov',
     '11': 'Dic',
