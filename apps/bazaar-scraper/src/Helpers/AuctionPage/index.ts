@@ -173,12 +173,14 @@ export default class AuctionPage {
   }
 
   items($: CheerioAPI): number[] {
-    const itemImages = $('.AuctionItemsViewBox .CVIcon')
+    const itemImages = $('.AuctionItemsViewBox > .CVIcon')
 
     const itemArray: number[] = []
     // eslint-disable-next-line array-callback-return
     itemImages.map((_, element) => {
-      const itemImg = cheerio('img', element).first()
+      const [itemImg] = cheerio('img', element).toArray()
+      if (!itemImg) return
+
       const [tierImg] = cheerio('.ObjectTier img', element).toArray()
 
       let tierNumber = 0
