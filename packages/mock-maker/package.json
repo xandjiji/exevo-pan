@@ -11,6 +11,7 @@
   "scripts": {
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
+    "dev:mock": "NODE_PATH=./src nodemon -q src/dev.ts",
     "build": "rm -rf dist/ && tsc",
     "build:packages": "rm -rf dist/ && tsc",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
@@ -24,6 +25,8 @@
     "@types/exevo-pan": "*",
     "@types/faker": "^5.5.9",
     "config": "*",
+    "nodemon": "^2.0.15",
+    "sucrase": "^3.20.3",
     "typescript": "4.3.5"
   }
 }
