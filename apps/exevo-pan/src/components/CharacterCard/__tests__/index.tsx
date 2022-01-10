@@ -61,6 +61,14 @@ describe('<CharacterCard />', () => {
       character.items.length,
     )
 
+    character.items.forEach((itemId) => {
+      const [, tier] = itemId.toString().split('.')
+      if (tier) {
+        const [first] = screen.queryAllByTitle(`tier ${tier}`)
+        expect(first).toBeInTheDocument()
+      }
+    })
+
     expect(
       screen.getByText(
         `Imbuements: ${character.imbuements.length}/${imbuement.tokens.length}`,

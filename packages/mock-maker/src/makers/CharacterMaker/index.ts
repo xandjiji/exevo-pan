@@ -8,7 +8,7 @@ import {
   storeMount,
 } from 'data-dictionary/dist/dictionaries'
 import { auctions } from '../../constants'
-import { samplesFrom } from '../../utils'
+import { samplesFrom, randomChance } from '../../utils'
 import { randomServerId } from '../serverMaker'
 import {
   randomOutfitId,
@@ -25,6 +25,25 @@ export const randomSkillValue = (): number =>
     max: auctions.skills.MAX,
     precision: auctions.skills.PRECISION,
   })
+
+export const randomItem = (): number => {
+  const itemId = faker.datatype.number({
+    min: auctions.items.id.MIN,
+    max: auctions.items.id.MAX,
+  })
+
+  const hasTier = randomChance(0.1)
+  if (hasTier) {
+    const tier = faker.datatype.number({
+      min: auctions.items.tier.MIN,
+      max: auctions.items.tier.MAX,
+    })
+
+    return itemId + tier / 10
+  }
+
+  return itemId
+}
 
 export const randomCharacter = (): PartialCharacterObject => {
   const sex = faker.datatype.boolean()
@@ -60,12 +79,7 @@ export const randomCharacter = (): PartialCharacterObject => {
       distance: randomSkillValue(),
       shielding: randomSkillValue(),
     },
-    items: Array.from({ length: auctions.items.size.MAX }, () =>
-      faker.datatype.number({
-        min: auctions.items.id.MIN,
-        max: auctions.items.id.MAX,
-      }),
-    ).slice(
+    items: Array.from({ length: auctions.items.size.MAX }, randomItem).slice(
       faker.datatype.number({
         min: auctions.items.size.MIN,
         max: auctions.items.size.MAX,

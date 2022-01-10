@@ -15,3 +15,6 @@ export const samplesFrom = <T>(
   const shuffledArray = faker.helpers.shuffle(array)
   return shuffledArray.slice(0, randomAmount)
 }
+
+export const randomChance = (percentageChance: number): boolean =>
+  percentageChance >= Math.random()

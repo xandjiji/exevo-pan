@@ -29,6 +29,11 @@ export default {
       MIN: 3100,
       MAX: 3400,
     },
+    tier: {
+      CHANCE: 0.1,
+      MIN: 1,
+      MAX: 10,
+    },
   },
   outfit: {
     addon: {
