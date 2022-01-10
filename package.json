@@ -15,6 +15,7 @@
     "packages/*"
   ],
   "scripts": {
+    "prepare": "husky install",
     "lint": "turbo run lint",
     "format": "turbo run format",
     "clean": "turbo run clean && rm -rf node_modules",
@@ -34,6 +35,8 @@
     "start:staging": "turbo run staging"
   },
   "devDependencies": {
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.7",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },
@@ -74,6 +77,15 @@
         "cache": false
       }
     }
+  },
+  "lint-staged": {
+    "*.md": [
+      "prettier --write"
+    ],
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ]
   },
   "engines": {
     "npm": ">=7.0.0",
