@@ -9,6 +9,7 @@ import AdvertiseIconSvg from 'assets/svgs/advertise.svg'
 import StatisticsIconSvg from 'assets/svgs/statistics.svg'
 import WarIconSvg from 'assets/svgs/war.svg'
 import AboutIconSvg from 'assets/svgs/about.svg'
+import BlogIconSvg from 'assets/svgs/blog.svg'
 import {
   InnerContainer,
   CustomScrollbar,
@@ -243,5 +244,9 @@ export const WarIcon = styled(WarIconSvg)`
 `
 
 export const AboutIcon = styled(AboutIconSvg)`
+  ${NavIconStyle}
+`
+
+export const BlogIcon = styled(BlogIconSvg)`
   ${NavIconStyle}
 `

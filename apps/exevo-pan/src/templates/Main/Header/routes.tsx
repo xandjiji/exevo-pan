@@ -30,6 +30,11 @@ export const NavItems: NavItem[] = [
     title: 'advertise',
   },
   {
+    href: routes.BLOG,
+    icon: <S.BlogIcon />,
+    title: 'blog',
+  },
+  {
     href: routes.ABOUT,
     icon: <S.AboutIcon />,
     title: 'about',

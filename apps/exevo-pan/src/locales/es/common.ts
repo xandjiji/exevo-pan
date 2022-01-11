@@ -22,6 +22,7 @@ export default {
       war: 'Libertabra War',
       about: 'Sobre',
       advertise: 'Anunciar',
+      blog: 'Blog',
     },
     themeSwitch: 'Habilitar tema nocturno',
   },

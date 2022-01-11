@@ -21,6 +21,7 @@ export default {
       war: 'Libertabra War',
       about: 'About',
       advertise: 'Advertise',
+      blog: 'Blog',
     },
     themeSwitch: 'Toggle dark theme',
   },

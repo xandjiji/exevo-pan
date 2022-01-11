@@ -33,6 +33,10 @@ const Header = ({
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), [])
 
+  const pageTitle = heading[pathname]
+    ? common.Header.h1[heading[pathname]]
+    : null
+
   return (
     <>
       <S.Wrapper {...props}>
@@ -50,11 +54,7 @@ const Header = ({
           </S.MenuButton>
           <NextLink href={routes.HOME}>
             <S.LogoWrapper>
-              <S.H1>
-                {heading[pathname]
-                  ? common.Header.h1[heading[pathname]]
-                  : 'Exevo Pan'}
-              </S.H1>
+              {pageTitle && <S.H1>{pageTitle}</S.H1>}
               <S.ExevoPanLogo
                 unoptimized
                 priority
