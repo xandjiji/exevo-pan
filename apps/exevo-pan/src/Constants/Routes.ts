@@ -9,4 +9,5 @@ export const routes = {
   LIBERTABRA_WAR_GUILD_XP: '/libertabra-war/guild-xp',
   LIBERTABRA_WAR_SEARCH: '/libertabra-war/search',
   ABOUT: '/about',
+  BLOG: '/blog',
 }
