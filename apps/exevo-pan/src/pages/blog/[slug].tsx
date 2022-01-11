@@ -5,6 +5,8 @@ import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { POSTS_PATH, postFilePaths } from 'utils/mdx'
+import { Main } from 'templates'
+import { common } from 'locales'
 
 const components = {
   Button: dynamic(() => import('components/Atoms/Button')),
@@ -16,23 +18,15 @@ type Props = {
 
 export default function PostPage({ mdxSource }: Props): JSX.Element {
   return (
-    <body>
-      <header>
-        <nav>
-          <ul>
-            <li>nav 1</li>
-            <li>nav 2</li>
-          </ul>
-        </nav>
-      </header>
-      <main>
+    <div>
+      <Main>
         <MDXRemote {...mdxSource} components={components} />
-      </main>
-    </body>
+      </Main>
+    </div>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const postFilePath = path.join(POSTS_PATH, `${params?.slug}.mdx`)
   const source = fs.readFileSync(postFilePath)
 
@@ -41,6 +35,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return {
     props: {
       mdxSource,
+      translations: {
+        common: common[locale as RegisteredLocale],
+      },
     },
   }
 }
