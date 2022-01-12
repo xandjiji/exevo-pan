@@ -14,8 +14,10 @@
     "dev:static": "serve -l 4444 _posts",
     "dev:worker": "yarn setup:data && wrangler dev --port 3132",
     "dev": "concurrently --kill-others \"yarn dev:static\" \"yarn dev:worker\"",
-    "staging": "yarn setup:data && wrangler publish --env development",
-    "deploy:posts": "cd _posts/ && surge ./ blog-exevopan.surge.sh",
+    "staging:posts": "cd _posts/ && surge ./ staging-blog-exevopan.surge.sh",
+    "staging:worker": "yarn setup:data && wrangler publish --env development",
+    "staging": "yarn staging:worker && yarn staging:posts",
+    "deploy:posts": "cd _posts/ && surge ./",
     "deploy:worker": "wrangler publish",
     "deploy": "yarn setup:data && yarn deploy:posts && yarn deploy:worker"
   },
