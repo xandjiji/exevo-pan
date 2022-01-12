@@ -12,7 +12,7 @@
     "format": "prettier --write 'src/**/*.{js,ts}'",
     "setup:data": "NODE_PATH=./src sucrase-node src/setupData.ts",
     "dev": "yarn setup:data && wrangler dev --port 3132",
-    "staging": "wrangler publish --env development",
+    "staging": "yarn setup:data && wrangler publish --env development",
     "deploy:posts": "cd _posts/ && surge ./ blog-exevopan.surge.sh",
     "deploy:worker": "wrangler publish",
     "deploy": "yarn setup:data && yarn deploy:posts && yarn deploy:worker"
