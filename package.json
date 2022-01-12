@@ -32,7 +32,8 @@
     "build:history-server": "turbo run build --scope=history-server --include-dependencies --no-deps",
     "build:bazaar-scraper": "turbo run build --scope=bazaar-scraper --include-dependencies --no-deps",
     "start:front": "NODE_ENV=production turbo run start --scope=exevo-pan",
-    "start:staging": "turbo run staging"
+    "start:staging": "turbo run staging",
+    "deploy:post": "yarn --cwd apps/blog-worker deploy:post"
   },
   "devDependencies": {
     "husky": "^7.0.4",
