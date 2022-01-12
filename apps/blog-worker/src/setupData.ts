@@ -2,6 +2,7 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
+const SAMPLE_POST_SLUG = 'hello-world'
 const POSTS_PATH = path.join(process.cwd(), '_posts/en')
 const POST_DATA_PATH = path.join(process.cwd(), 'src')
 
@@ -33,6 +34,7 @@ const main = () => {
         date: timestamp,
       } as BlogPost
     })
+    .filter(({ slug }) => slug !== SAMPLE_POST_SLUG)
     .sort((postA, postB) => postB.date - postA.date)
 
   fs.writeFileSync(`${POST_DATA_PATH}/PostData.json`, JSON.stringify(postData))
