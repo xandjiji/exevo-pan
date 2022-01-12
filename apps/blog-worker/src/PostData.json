@@ -1,0 +1,8 @@
+[
+  {
+    "title": "Hello World",
+    "slug": "hello-world",
+    "description": "This is the sample post description",
+    "tags": ["article", "news"]
+  }
+]
