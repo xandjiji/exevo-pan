@@ -15,6 +15,7 @@
     "staging": "wrangler publish --env development"
   },
   "dependencies": {
+    "auction-queries": "*",
     "shared-utils": "*"
   },
   "devDependencies": {

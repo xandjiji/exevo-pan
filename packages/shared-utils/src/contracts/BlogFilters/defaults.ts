@@ -5,7 +5,7 @@ export const DEFAULT_PAGINATION_OPTIONS: PaginationOptions = {
 
 export const DEFAULT_SORT_OPTIONS: SortOptions = {
   sortingMode: 0,
-  descendingOrder: false,
+  descendingOrder: true,
 }
 
 export const DEFAULT_FILTER_OPTIONS: BlogFilterOptions = {

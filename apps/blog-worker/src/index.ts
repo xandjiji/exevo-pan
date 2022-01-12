@@ -1,5 +1,7 @@
 import { deserializeBody } from 'shared-utils/dist/contracts/BlogFilters/utils'
+import { paginateData } from 'auction-queries/dist/src/Paginating'
 import { filterPosts } from './Filtering'
+import { applySort } from './Sorting'
 import posts from './PostData.json'
 import { headers } from './headers'
 
@@ -17,9 +19,8 @@ async function handleRequest(request: Request): Promise<Response> {
     filters: filterOptions,
   })
 
-  /* const sortedAuctions = applySort(filteredAuctions, sortOptions)
-
-  const paginatedData = paginateData(sortedAuctions, paginationOptions)
+  const sortedPosts = applySort(filteredPosts, sortOptions)
+  const paginatedData = paginateData(sortedPosts, paginationOptions)
 
   const responseBody = {
     ...paginatedData,
@@ -27,10 +28,6 @@ async function handleRequest(request: Request): Promise<Response> {
   }
 
   const response = new Response(JSON.stringify(responseBody), {
-    headers,
-  }) */
-
-  const response = new Response(JSON.stringify(filteredPosts), {
     headers,
   })
 
