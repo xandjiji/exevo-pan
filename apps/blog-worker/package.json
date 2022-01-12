@@ -10,21 +10,26 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
-    "dev": "wrangler dev",
-    "deploy": "wrangler publish",
+    "setup:data": "NODE_PATH=./src sucrase-node src/setupData.ts",
+    "dev": "yarn setup:data && wrangler dev --port 3132",
     "staging": "wrangler publish --env development",
-    "deploy:post": "cd _posts/ && surge ./ blog-exevopan.surge.sh"
+    "deploy:posts": "cd _posts/ && surge ./ blog-exevopan.surge.sh",
+    "deploy:worker": "wrangler publish",
+    "deploy": "yarn setup:data && yarn deploy:posts && yarn deploy:worker"
   },
   "dependencies": {
     "auction-queries": "*",
+    "gray-matter": "^4.0.3",
     "shared-utils": "*"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.0.0",
     "@types/exevo-pan": "*",
+    "@types/node": "^17.0.8",
     "@types/service-worker-mock": "^2.0.1",
     "config": "*",
     "service-worker-mock": "^2.0.5",
+    "sucrase": "^3.20.3",
     "surge": "^0.23.0",
     "ts-loader": "^9.2.2",
     "typescript": "^4.3.2",
