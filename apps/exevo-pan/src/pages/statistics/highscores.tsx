@@ -67,6 +67,11 @@ export default function Highscores({
           hrefLang="es"
           href={buildUrl(routes.HIGHSCORES, 'es')}
         />
+        <link
+          rel="alternate"
+          hrefLang="pl"
+          href={buildUrl(routes.HIGHSCORES, 'pl')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 

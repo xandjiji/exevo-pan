@@ -67,6 +67,11 @@ export default function Statistics({
           hrefLang="es"
           href={buildUrl(routes.STATISTICS, 'es')}
         />
+        <link
+          rel="alternate"
+          hrefLang="pl"
+          href={buildUrl(routes.STATISTICS, 'pl')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 
