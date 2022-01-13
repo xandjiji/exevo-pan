@@ -50,6 +50,7 @@ export default function PostPage({ mdxSource, metaData }: Props): JSX.Element {
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(postRoute, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(postRoute, 'es')} />
+        <link rel="alternate" hrefLang="pl" href={buildUrl(postRoute, 'pl')} />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 
