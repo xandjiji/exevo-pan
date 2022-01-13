@@ -19,6 +19,21 @@ const updateFiltersReducer = (
         requestStatus: 'IDLE',
       }
 
+    case 'TOGGLE_TAG': {
+      const newState: FetchPostsReducerState = {
+        ...state,
+        currentIndex: 0,
+        postList: [],
+        requestStatus: 'IDLE',
+      }
+      if (state.filterOptions.tags.has(action.tag)) {
+        newState.filterOptions.tags.delete(action.tag)
+        return newState
+      }
+      newState.filterOptions.tags.add(action.tag)
+      return newState
+    }
+
     case 'APPEND_POSTS':
       return {
         ...state,

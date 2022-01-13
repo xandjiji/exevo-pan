@@ -4,6 +4,10 @@ export type Action =
       filterOptions: Partial<BlogFilterOptions>
     }
   | {
+      type: 'TOGGLE_TAG'
+      tag: string
+    }
+  | {
       type: 'APPEND_POSTS'
       newPosts: BlogPost[]
       hasNext: boolean
