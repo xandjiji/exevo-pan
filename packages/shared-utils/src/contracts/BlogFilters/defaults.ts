@@ -1,6 +1,6 @@
 export const DEFAULT_PAGINATION_OPTIONS: PaginationOptions = {
   pageIndex: 0,
-  pageSize: 3,
+  pageSize: 6,
 }
 
 export const DEFAULT_SORT_OPTIONS: SortOptions = {
