@@ -1,7 +1,7 @@
 export type Action =
   | {
       type: 'APPLY_FILTERS'
-      filterOptions: BlogFilterOptions
+      filterOptions: Partial<BlogFilterOptions>
     }
   | {
       type: 'APPEND_POSTS'

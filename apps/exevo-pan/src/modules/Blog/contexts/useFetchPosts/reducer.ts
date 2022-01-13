@@ -12,7 +12,10 @@ const updateFiltersReducer = (
         ...state,
         currentIndex: 0,
         postList: [],
-        filterOptions: action.filterOptions,
+        filterOptions: {
+          ...state.filterOptions,
+          ...action.filterOptions,
+        },
         requestStatus: 'IDLE',
       }
 

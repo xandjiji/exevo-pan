@@ -1,7 +1,7 @@
 import { useRef, useCallback } from 'react'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
-import { useFetchPromos } from '../../../contexts/useFetchPosts'
+import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import * as S from './styles'
 import { PostGridViewProps } from './types'
 
@@ -11,7 +11,7 @@ const PostGridView = ({
 }: PostGridViewProps): JSX.Element => (
   <S.Grid>
     {postList.map(({ title, date, slug, description, tags }) => (
-      <div style={{ marginBottom: 60 }}>
+      <div key={slug} style={{ marginBottom: 60 }}>
         <h2>{title}</h2>
         <h2>{date}</h2>
         <NextLink href={`${routes.BLOG}/${slug}`}>Go to</NextLink>
@@ -25,7 +25,7 @@ const PostGridView = ({
 )
 
 const PostGridController = (): JSX.Element => {
-  const { postList, requestStatus, fetchNextPage } = useFetchPromos()
+  const { postList, requestStatus, fetchNextPage } = useFetchPosts()
 
   const observer = useRef<IntersectionObserver | null>(null)
   const lastFactRef = useCallback(

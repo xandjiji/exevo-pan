@@ -74,5 +74,5 @@ export const FetchPostsProvider = ({
   )
 }
 
-export const useFetchPromos = (): FetchPostsContextValues =>
+export const useFetchPosts = (): FetchPostsContextValues =>
   useContext(FetchPostsContext)
