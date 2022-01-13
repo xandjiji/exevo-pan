@@ -29,7 +29,7 @@ export default {
     p4: 'Promujemy ideę, że Tibia powinna być grana w sprawiedliwy, i zdrowy dla Ciebie sposób. To znaczy że jestesmy przeciwko oszukiwaniu, grożeniu w życiu realnym, i niesportowemu zachowaniu.',
   },
   AboutContact: {
-    title: 'Informację kontaktowe',
+    title: 'Informacje kontaktowe',
   },
   PillarTitle: 'Zawartość',
   AnchorIconLabel: 'Skopiuj link',
