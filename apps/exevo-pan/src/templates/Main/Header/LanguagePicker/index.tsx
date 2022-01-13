@@ -66,6 +66,13 @@ const LanguagePicker = (): JSX.Element => {
         >
           Português
         </RadioButton>
+        <RadioButton
+          active={locale === 'pl'}
+          onClick={() => handleLocaleSelect('pl')}
+          tabIndex={isTabeable}
+        >
+          Polski
+        </RadioButton>
       </S.Picker>
       <S.Backdrop
         aria-label={common.PopoverCloseLabel}

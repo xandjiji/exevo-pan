@@ -71,6 +71,11 @@ export default function BazaarHistory({
           hrefLang="es"
           href={buildUrl(routes.BAZAAR_HISTORY, 'es')}
         />
+        <link
+          rel="alternate"
+          hrefLang="pl"
+          href={buildUrl(routes.BAZAAR_HISTORY, 'pl')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 

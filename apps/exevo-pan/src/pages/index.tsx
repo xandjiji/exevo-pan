@@ -70,6 +70,11 @@ export default function Home({
           hrefLang="es"
           href={buildUrl(routes.HOME, 'es')}
         />
+        <link
+          rel="alternate"
+          hrefLang="pl"
+          href={buildUrl(routes.HOME, 'pl')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 

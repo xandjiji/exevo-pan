@@ -52,6 +52,7 @@ export const Anchor = styled.a`
 export const Character = styled.span`
   font-weight: 400;
   color: var(--primary);
+  filter: brightness(130%);
 `
 
 export const Ul = styled.ul`
@@ -62,6 +63,20 @@ export const Ul = styled.ul`
 `
 
 export const Li = styled.li`
+  display: flex;
+  align-items: center;
+
+  font-size: 16px;
+  font-weight: 300;
+
+  &::before {
+    content: '·';
+    margin-right: 4px;
+    font-weight: 700;
+  }
+`
+
+export const ButtonLi = styled.li`
   ${MaterialCard}
   padding: 12px 24px;
   display: flex;

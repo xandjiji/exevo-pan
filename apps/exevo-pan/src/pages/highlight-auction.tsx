@@ -66,6 +66,11 @@ export default function Advertise({
           hrefLang="es"
           href={buildUrl(routes.ADVERTISE, 'es')}
         />
+        <link
+          rel="alternate"
+          hrefLang="pl"
+          href={buildUrl(routes.ADVERTISE, 'pl')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 

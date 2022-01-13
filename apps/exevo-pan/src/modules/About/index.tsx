@@ -3,12 +3,16 @@ import Image from 'next/image'
 import { Tooltip } from 'components/Organisms'
 import { links, email } from 'Constants'
 import fansiteImg from 'assets/fansite-logo.png'
-import { Hero, Pillar, Section, KsuTooltip, Footer } from './components'
+import { Hero, Pillar, Section, CharacterTooltip, Footer } from './components'
 import { sections } from './sections'
 import * as S from './styles'
-import { KsuData } from './types'
+import { SingleCharacterData } from './types'
 
-const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
+const About = ({
+  singleCharactersData,
+}: {
+  singleCharactersData: Record<string, SingleCharacterData>
+}): JSX.Element => {
   const {
     translations: { about },
   } = useTranslations()
@@ -52,7 +56,11 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
             <p>{about.AboutMe.p1}</p>
             <span style={{ display: 'block' }}>
               {about.AboutMe.p2}{' '}
-              <Tooltip content={<KsuTooltip characterData={characterData} />}>
+              <Tooltip
+                content={
+                  <CharacterTooltip characterData={singleCharactersData.Ksu} />
+                }
+              >
                 <S.Character>Ksu</S.Character>
               </Tooltip>
               . {about.AboutMe.p3}{' '}
@@ -61,6 +69,26 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
               </span>
               .
             </span>
+          </Section>
+
+          <Section {...sections.CONTRIBUTORS}>
+            <S.Ul>
+              <S.Li>
+                {about.AboutContributors.Bartek}: Bartek (
+                <Tooltip
+                  content={
+                    <CharacterTooltip
+                      characterData={singleCharactersData.Algoolek}
+                    />
+                  }
+                >
+                  <S.Character>
+                    {singleCharactersData.Algoolek.characters.data.name}
+                  </S.Character>
+                </Tooltip>
+                )
+              </S.Li>
+            </S.Ul>
           </Section>
 
           <Section {...sections.DISCLAIMER}>
@@ -94,13 +122,13 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
 
           <Section {...sections.CONTACT_INFORMATION}>
             <S.Ul>
-              <S.Li>
+              <S.ButtonLi>
                 <S.MailIcon />
                 <a href={links.EMAIL} target="_blank" rel="noopener noreferrer">
                   {email.MY_EMAIL}
                 </a>
-              </S.Li>
-              <S.Li>
+              </S.ButtonLi>
+              <S.ButtonLi>
                 <S.GithubIcon />
                 <a
                   href={links.GITHUB_PROFILE}
@@ -109,8 +137,8 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
                 >
                   {links.GITHUB_PROFILE}
                 </a>
-              </S.Li>
-              <S.Li>
+              </S.ButtonLi>
+              <S.ButtonLi>
                 <S.LinkedinIcon />
                 <a
                   href={links.LINKEDIN}
@@ -119,7 +147,7 @@ const About = ({ characterData }: { characterData: KsuData }): JSX.Element => {
                 >
                   {links.LINKEDIN}
                 </a>
-              </S.Li>
+              </S.ButtonLi>
             </S.Ul>
           </Section>
         </S.SurfaceWrapper>
