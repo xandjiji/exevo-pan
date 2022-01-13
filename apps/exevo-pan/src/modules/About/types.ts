@@ -1,4 +1,4 @@
-export type KsuData = {
+export type SingleCharacterData = {
   characters: {
     error?: string
     data: {

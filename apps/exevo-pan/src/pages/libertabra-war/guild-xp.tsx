@@ -64,6 +64,11 @@ export default function LibertabraWar({
           hrefLang="es"
           href={buildUrl(routes.LIBERTABRA_WAR_GUILD_XP, 'es')}
         />
+        <link
+          rel="alternate"
+          hrefLang="pl"
+          href={buildUrl(routes.LIBERTABRA_WAR_GUILD_XP, 'pl')}
+        />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
       </Head>
 

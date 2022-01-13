@@ -22,6 +22,10 @@ export default {
     p3: 'Aunque no he jugado mucho últimamente, eventualmente podrás encontrarme online como un boss raro',
     tongueEmoji: 'lingua',
   },
+  AboutContributors: {
+    title: 'Contribuyentes',
+    Bartek: 'Traducciones al polaco',
+  },
   AboutDisclaimer: {
     title: 'Declaraciones',
     p1: 'es un juego hecho por',
@@ -34,7 +38,7 @@ export default {
   },
   PillarTitle: 'Índice',
   AnchorIconLabel: 'Copiar link',
-  KsuTooltipLabel: 'Ir a la página del personaje',
+  CharacterTooltip: 'Ir a la página del personaje',
   HeroTitle: 'Sobre nosotros',
   FooterTitle: 'Exevo Pan - criado por',
 }

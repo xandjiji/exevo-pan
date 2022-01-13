@@ -22,6 +22,10 @@ export default {
     p3: "Though I don't play the game much anymore, eventually you may find me online as a rare boss spawn",
     tongueEmoji: 'tongue',
   },
+  AboutContributors: {
+    title: 'Contributors',
+    Bartek: 'Polish translations',
+  },
   AboutDisclaimer: {
     title: 'Disclaimer',
     p1: 'is a game made by',
@@ -34,7 +38,7 @@ export default {
   },
   PillarTitle: 'Contents',
   AnchorIconLabel: 'Copy link',
-  KsuTooltipLabel: 'Go to character page',
+  CharacterTooltipLabel: 'Go to character page',
   HeroTitle: 'About us',
   FooterTitle: 'Exevo Pan - made by',
 }
