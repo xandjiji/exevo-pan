@@ -2,6 +2,7 @@ import { createContext, useContext, useCallback, useReducer } from 'react'
 import {
   DEFAULT_FILTER_OPTIONS,
   DEFAULT_PAGINATION_OPTIONS,
+  DEFAULT_SORT_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { BlogClient } from 'services'
 import FetchPostReducer from './reducer'
@@ -16,6 +17,7 @@ const defaultReducerState: FetchPostsReducerState = {
   postList: [],
   filterOptions: DEFAULT_FILTER_OPTIONS,
   activeFilterCount: 0,
+  sortOptions: DEFAULT_SORT_OPTIONS,
   requestStatus: 'IDLE',
 }
 
@@ -31,7 +33,14 @@ export const FetchPostsProvider = ({
   children,
 }: FetchPostsProviderProps): JSX.Element => {
   const [
-    { currentIndex, postList, filterOptions, activeFilterCount, requestStatus },
+    {
+      currentIndex,
+      postList,
+      filterOptions,
+      activeFilterCount,
+      sortOptions,
+      requestStatus,
+    },
     dispatch,
   ] = useReducer(FetchPostReducer, {
     ...defaultReducerState,
@@ -44,6 +53,7 @@ export const FetchPostsProvider = ({
 
     try {
       const { page, hasNext } = await BlogClient.queryBlog({
+        sortOptions,
         filterOptions,
         paginationOptions: {
           ...DEFAULT_PAGINATION_OPTIONS,
@@ -55,7 +65,7 @@ export const FetchPostsProvider = ({
     } catch (error) {
       dispatch({ type: 'SET_STATUS', status: 'ERROR' })
     }
-  }, [currentIndex, filterOptions])
+  }, [currentIndex, filterOptions, sortOptions])
 
   return (
     <FetchPostsContext.Provider
@@ -64,6 +74,7 @@ export const FetchPostsProvider = ({
         postList,
         filterOptions,
         activeFilterCount,
+        sortOptions,
         requestStatus,
         fetchNextPage,
         dispatchFetchPosts: dispatch,

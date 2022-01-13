@@ -2,6 +2,15 @@ import { countObjectDiff } from 'shared-utils/dist/countObjectDiff'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { FetchPostsReducerState, Action } from './types'
 
+const INITIAL_LIST: Pick<
+  FetchPostsReducerState,
+  'currentIndex' | 'postList' | 'requestStatus'
+> = {
+  currentIndex: 0,
+  postList: [],
+  requestStatus: 'IDLE',
+}
+
 const updateFiltersReducer = (
   state: FetchPostsReducerState,
   action: Action,
@@ -10,21 +19,17 @@ const updateFiltersReducer = (
     case 'APPLY_FILTERS':
       return {
         ...state,
-        currentIndex: 0,
-        postList: [],
+        ...INITIAL_LIST,
         filterOptions: {
           ...state.filterOptions,
           ...action.filterOptions,
         },
-        requestStatus: 'IDLE',
       }
 
     case 'TOGGLE_TAG': {
       const newState: FetchPostsReducerState = {
         ...state,
-        currentIndex: 0,
-        postList: [],
-        requestStatus: 'IDLE',
+        ...INITIAL_LIST,
       }
       if (state.filterOptions.tags.has(action.tag)) {
         newState.filterOptions.tags.delete(action.tag)
@@ -33,6 +38,13 @@ const updateFiltersReducer = (
       newState.filterOptions.tags.add(action.tag)
       return newState
     }
+
+    case 'APPLY_SORT':
+      return {
+        ...state,
+        ...INITIAL_LIST,
+        sortOptions: action.sortOptions,
+      }
 
     case 'APPEND_POSTS':
       return {
@@ -51,9 +63,7 @@ const updateFiltersReducer = (
     case 'RELOAD_LIST':
       return {
         ...state,
-        currentIndex: 0,
-        postList: [],
-        requestStatus: 'IDLE',
+        ...INITIAL_LIST,
       }
 
     default:

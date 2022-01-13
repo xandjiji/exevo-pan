@@ -1,10 +1,10 @@
 import { useCallback } from 'react'
-import { Input, Chip } from 'components/Atoms'
+import { Input, Chip, Switch, RadioButton } from 'components/Atoms'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
 import * as S from './styles'
 
-const tags = [
+const allTags = [
   {
     name: 'Article',
     id: 'article',
@@ -16,7 +16,7 @@ const tags = [
 ]
 
 const Filters = (): JSX.Element => {
-  const { filterOptions, dispatchFetchPosts } = useFetchPosts()
+  const { filterOptions, sortOptions, dispatchFetchPosts } = useFetchPosts()
 
   const [query, setQuery] = useDebouncedFilter(
     'queryString',
@@ -32,9 +32,38 @@ const Filters = (): JSX.Element => {
 
   return (
     <S.Wrapper>
+      <Switch
+        active={sortOptions.descendingOrder}
+        onClick={() =>
+          dispatchFetchPosts({
+            type: 'APPLY_SORT',
+            sortOptions: {
+              ...sortOptions,
+              descendingOrder: !sortOptions.descendingOrder,
+            },
+          })
+        }
+      >
+        Descending
+      </Switch>
+      <RadioButton
+        active={sortOptions.sortingMode === 0}
+        onClick={() =>
+          dispatchFetchPosts({
+            type: 'APPLY_SORT',
+            sortOptions: {
+              ...sortOptions,
+              sortingMode: 0,
+            },
+          })
+        }
+      >
+        Most recent
+      </RadioButton>
+
       <Input value={query} onChange={onQueryChange} placeholder="Search" />
 
-      {tags.map(({ id, name }) => (
+      {allTags.map(({ id, name }) => (
         <Chip
           key={id}
           overrideStatus={filterOptions.tags.has(id)}

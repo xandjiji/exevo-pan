@@ -8,6 +8,10 @@ export type Action =
       tag: string
     }
   | {
+      type: 'APPLY_SORT'
+      sortOptions: SortOptions
+    }
+  | {
       type: 'APPEND_POSTS'
       newPosts: BlogPost[]
       hasNext: boolean
@@ -25,6 +29,7 @@ export interface FetchPostsReducerState {
   postList: BlogPost[]
   filterOptions: BlogFilterOptions
   activeFilterCount: number
+  sortOptions: SortOptions
   requestStatus: RequestStatus
 }
 
