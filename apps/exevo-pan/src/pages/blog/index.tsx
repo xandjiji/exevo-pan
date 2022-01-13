@@ -1,4 +1,5 @@
 import { Home } from 'modules/Blog'
+import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { GetStaticProps } from 'next'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
@@ -55,15 +56,19 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
       </Head>
 
       <Main>
-        <Home initialPosts={initialPosts} />
+        <Home
+          initialIndex={DEFAULT_PAGINATION_OPTIONS.pageIndex + 1}
+          initialPosts={initialPosts}
+        />
       </Main>
     </div>
   )
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const paginationOptions: PaginationOptions = { pageIndex: 0, pageSize: 6 }
-  const { page: posts } = await BlogClient.queryBlog({ paginationOptions })
+  const { page: posts } = await BlogClient.queryBlog({
+    paginationOptions: DEFAULT_PAGINATION_OPTIONS,
+  })
 
   return {
     props: {

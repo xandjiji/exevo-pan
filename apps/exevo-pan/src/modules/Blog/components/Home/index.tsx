@@ -1,24 +1,21 @@
-import NextLink from 'next/link'
-import { routes } from 'Constants'
+import { FetchPostsProvider } from '../../contexts/useFetchPosts'
+import Filters from './Filters'
+import PostGrid from './PostGrid'
+import { Newsletter } from '..'
 import * as S from './styles'
 import { HomeProps } from './types'
 
-const Home = ({ initialPosts }: HomeProps): JSX.Element => {
+const Home = ({ initialIndex, initialPosts }: HomeProps): JSX.Element => {
   console.log(initialPosts)
 
   return (
-    <S.Wrapper>
-      {initialPosts.map(({ title, date, slug, description, tags }) => (
-        <div style={{ marginBottom: 60 }}>
-          <h2>{title}</h2>
-          <h2>{date}</h2>
-          <NextLink href={`${routes.BLOG}/${slug}`}>Go to</NextLink>
-          <h2>{slug}</h2>
-          <h2>{description}</h2>
-          <h2>[{tags.join(', ')}]</h2>
-        </div>
-      ))}
-    </S.Wrapper>
+    <FetchPostsProvider initialIndex={initialIndex} initialPosts={initialPosts}>
+      <S.Wrapper>
+        <Filters />
+        <PostGrid />
+        <Newsletter />
+      </S.Wrapper>
+    </FetchPostsProvider>
   )
 }
 
