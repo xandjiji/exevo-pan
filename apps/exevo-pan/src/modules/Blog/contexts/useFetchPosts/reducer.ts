@@ -1,18 +1,18 @@
 import { countObjectDiff } from 'shared-utils/dist/countObjectDiff'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
-import { FetchPostReducerState, Action } from './types'
+import { FetchPostsReducerState, Action } from './types'
 
 const updateFiltersReducer = (
-  state: FetchPostReducerState,
+  state: FetchPostsReducerState,
   action: Action,
-): FetchPostReducerState => {
+): FetchPostsReducerState => {
   switch (action.type) {
     case 'APPLY_FILTERS':
       return {
         ...state,
         currentIndex: 0,
         postList: [],
-        filters: action.filters,
+        filterOptions: action.filterOptions,
         requestStatus: 'SUCCESSFUL',
       }
 
@@ -44,14 +44,14 @@ const updateFiltersReducer = (
 }
 
 const FetchPostReducer = (
-  state: FetchPostReducerState,
+  state: FetchPostsReducerState,
   action: Action,
-): FetchPostReducerState => {
+): FetchPostsReducerState => {
   const newFilterState = updateFiltersReducer(state, action)
 
   const activeFilterCount = countObjectDiff(
     DEFAULT_FILTER_OPTIONS,
-    state.filters,
+    state.filterOptions,
   )
 
   return {

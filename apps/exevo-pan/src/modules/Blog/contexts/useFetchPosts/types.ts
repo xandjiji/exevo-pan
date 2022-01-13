@@ -3,7 +3,7 @@ type StatusRequest = 'SUCCESSFUL' | 'ERROR' | 'LOADING' | 'EXHAUSTED'
 export type Action =
   | {
       type: 'APPLY_FILTERS'
-      filters: BlogFilterOptions
+      filterOptions: BlogFilterOptions
     }
   | {
       type: 'APPEND_POSTS'

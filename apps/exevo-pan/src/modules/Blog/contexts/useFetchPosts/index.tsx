@@ -1,5 +1,8 @@
 import { createContext, useContext, useCallback, useReducer } from 'react'
-import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
+import {
+  DEFAULT_FILTER_OPTIONS,
+  DEFAULT_PAGINATION_OPTIONS,
+} from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { BlogClient } from 'services'
 import FetchPostReducer from './reducer'
 import {
@@ -40,7 +43,13 @@ export const FetchPostsProvider = ({
     dispatch({ type: 'SET_STATUS', status: 'LOADING' })
 
     try {
-      const { page, hasNext } = await BlogClient.queryBlog({ filterOptions })
+      const { page, hasNext } = await BlogClient.queryBlog({
+        filterOptions,
+        paginationOptions: {
+          ...DEFAULT_PAGINATION_OPTIONS,
+          pageIndex: currentIndex,
+        },
+      })
 
       dispatch({ type: 'APPEND_POSTS', newPosts: page, hasNext })
     } catch (error) {
