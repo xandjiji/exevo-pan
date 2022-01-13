@@ -1,5 +1,3 @@
-type StatusRequest = 'SUCCESSFUL' | 'ERROR' | 'LOADING' | 'EXHAUSTED'
-
 export type Action =
   | {
       type: 'APPLY_FILTERS'
@@ -12,7 +10,7 @@ export type Action =
     }
   | {
       type: 'SET_STATUS'
-      status: StatusRequest
+      status: RequestStatus
     }
   | {
       type: 'RELOAD_LIST'
@@ -23,7 +21,7 @@ export interface FetchPostsReducerState {
   postList: BlogPost[]
   filterOptions: BlogFilterOptions
   activeFilterCount: number
-  requestStatus: StatusRequest
+  requestStatus: RequestStatus
 }
 
 export interface FetchPostsContextValues extends FetchPostsReducerState {
