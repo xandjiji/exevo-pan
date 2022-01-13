@@ -22,6 +22,13 @@ type Props = {
   metaData: Record<string, string>
 }
 
+type PathItem = {
+  params: {
+    slug: string
+  }
+  locale: string
+}
+
 export default function PostPage({ mdxSource, metaData }: Props): JSX.Element {
   const postRoute = `${routes.BLOG}/${metaData.slug}`
   const pageUrl = buildUrl(postRoute)
@@ -58,8 +65,10 @@ export default function PostPage({ mdxSource, metaData }: Props): JSX.Element {
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug as string
-  /* @ ToDo: add locale from static parameter */
-  const source = await BlogClient.getStaticPost({ slug, locale: 'en' })
+  const source = await BlogClient.getStaticPost({
+    slug,
+    locale: locale as string,
+  })
   const { content, data } = matter(source)
   const mdxSource = await serialize(content)
 
@@ -74,10 +83,22 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const paginationOptions: PaginationOptions = { pageIndex: 0, pageSize: 999 }
   const { page: posts } = await BlogClient.queryBlog({ paginationOptions })
-  const paths = posts.map(({ slug }) => ({ params: { slug } }))
+
+  const paths: PathItem[] = []
+  posts.forEach(({ slug }) => {
+    const pathItem = {
+      params: {
+        slug,
+      },
+    }
+
+    locales?.forEach((locale) => {
+      paths.push({ ...pathItem, locale })
+    })
+  })
 
   return {
     paths,

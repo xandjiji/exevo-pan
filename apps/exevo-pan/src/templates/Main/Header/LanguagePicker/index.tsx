@@ -12,12 +12,19 @@ const LanguagePicker = (): JSX.Element => {
     translations: { common },
   } = useTranslations()
 
-  const { locale, push, pathname } = useRouter()
+  const { locale, push, pathname, query } = useRouter()
 
   const [isVisible, setIsVisible] = useState(false)
 
   const handleLocaleSelect = (selectedLocale: RegisteredLocale) => {
-    push(pathname, window.location.search, { locale: selectedLocale })
+    push(
+      {
+        pathname,
+        query,
+      },
+      window.location.search,
+      { locale: selectedLocale },
+    )
     setIsVisible(false)
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
   }
