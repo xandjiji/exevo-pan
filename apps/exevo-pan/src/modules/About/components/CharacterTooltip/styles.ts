@@ -18,7 +18,7 @@ export const Wrapper = styled.div`
 
 export const SpritePortrait = styled(BaseSpriteProtrait)`
   margin-top: -24px;
-  margin-left: -24px;
+  margin-left: -8px;
   width: 64px;
   height: 64px;
 `

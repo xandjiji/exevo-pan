@@ -1,8 +1,10 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import Head from 'next/head'
 import styled from 'styled-components'
 import { Main as BaseMain } from 'templates'
 import AboutContent from 'modules/About'
-import { KsuData } from 'modules/About/types'
+import { SingleCharacterData } from 'modules/About/types'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -29,9 +31,9 @@ const Main = styled(BaseMain)`
 `
 
 export default function About({
-  characterData,
+  singleCharactersData,
 }: {
-  characterData: KsuData
+  singleCharactersData: Record<string, SingleCharacterData>
 }): JSX.Element {
   const { translations } = useTranslations()
 
@@ -85,32 +87,49 @@ export default function About({
       </Head>
 
       <Main>
-        <AboutContent characterData={characterData} />
+        <AboutContent singleCharactersData={singleCharactersData} />
       </Main>
     </div>
   )
 }
 
-const fallbackData: KsuData = {
-  characters: {
-    data: {
-      name: 'Ksu',
-      level: 425,
-      vocation: 'Elite Knight',
-      world: 'Belobra',
+const fallbackData: Record<string, SingleCharacterData> = {
+  Ksu: {
+    characters: {
+      data: {
+        name: 'Ksu',
+        level: 425,
+        vocation: 'Elite Knight',
+        world: 'Belobra',
+      },
+    },
+  },
+  Algoolek: {
+    characters: {
+      data: {
+        name: 'Algoolek',
+        level: 568,
+        vocation: 'Elite Knight',
+        world: 'Bona',
+      },
     },
   },
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  let ksuData: KsuData = { ...fallbackData }
+  const singleCharactersData: Record<string, SingleCharacterData> = {
+    ...fallbackData,
+  }
   try {
-    const result = await fetch(`${endpoints.TIBIADATA}/Ksu.json`)
+    const characterList = Object.values(fallbackData)
+    for (const { characters } of characterList) {
+      const nickname = characters.data.name
+      const result = await fetch(`${endpoints.TIBIADATA}/${nickname}.json`)
 
-    const freshData = (await result.json()) as KsuData
-
-    if (!freshData.characters.error) {
-      ksuData = { ...freshData }
+      const freshData = (await result.json()) as SingleCharacterData
+      if (!freshData.characters.error) {
+        singleCharactersData[nickname] = freshData
+      }
     }
   } catch (error) {
     /* fallback data is already assigned */
@@ -122,7 +141,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         about: about[locale as RegisteredLocale],
       },
-      characterData: ksuData,
+      singleCharactersData,
     },
   }
 }

@@ -1,11 +1,16 @@
 import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
-import { KsuData } from '../../types'
+import { SingleCharacterData } from '../../types'
 
-const KsuTooltip = ({
+const outfits = {
+  Ksu: 'https://i.imgur.com/O38datw.png',
+  Algoolek: 'https://i.imgur.com/dPnnICm.png',
+}
+
+const CharacterTooltip = ({
   characterData,
 }: {
-  characterData: KsuData
+  characterData: SingleCharacterData
 }): JSX.Element => {
   const {
     translations: { about },
@@ -15,7 +20,7 @@ const KsuTooltip = ({
 
   return (
     <S.Wrapper>
-      <S.SpritePortrait src="https://static.tibia.com/images/charactertrade/outfits/128_0.gif" />
+      <S.SpritePortrait src={outfits[name as keyof typeof outfits]} />
       <div>
         <S.Nickname>
           {name}
@@ -25,7 +30,7 @@ const KsuTooltip = ({
             rel="noreferrer noopener external"
           >
             <S.ExternalIcon />
-            {about.KsuTooltipLabel}
+            {about.CharacterTooltipLabel}
           </S.Link>
         </S.Nickname>
         <S.Description>
@@ -36,4 +41,4 @@ const KsuTooltip = ({
   )
 }
 
-export default KsuTooltip
+export default CharacterTooltip

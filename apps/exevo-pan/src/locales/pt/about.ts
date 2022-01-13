@@ -33,7 +33,7 @@ export default {
   },
   PillarTitle: 'Índice',
   AnchorIconLabel: 'Copiar link',
-  KsuTooltipLabel: 'Ir para a página do personagem',
+  CharacterTooltip: 'Ir para a página do personagem',
   HeroTitle: 'Sobre nós',
   FooterTitle: 'Exevo Pan - criado por',
 }

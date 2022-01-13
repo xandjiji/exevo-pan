@@ -33,7 +33,7 @@ export default {
   },
   PillarTitle: 'Zawartość',
   AnchorIconLabel: 'Skopiuj link',
-  KsuTooltipLabel: 'Idź do strony postaci',
+  CharacterTooltip: 'Idź do strony postaci',
   HeroTitle: 'O nas',
   FooterTitle: 'Exevo Pan - stworzony przez',
 }

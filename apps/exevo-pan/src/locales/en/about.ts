@@ -34,7 +34,7 @@ export default {
   },
   PillarTitle: 'Contents',
   AnchorIconLabel: 'Copy link',
-  KsuTooltipLabel: 'Go to character page',
+  CharacterTooltipLabel: 'Go to character page',
   HeroTitle: 'About us',
   FooterTitle: 'Exevo Pan - made by',
 }
