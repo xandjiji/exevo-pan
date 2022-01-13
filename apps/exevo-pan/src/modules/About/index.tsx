@@ -71,6 +71,26 @@ const About = ({
             </span>
           </Section>
 
+          <Section {...sections.CONTRIBUTORS}>
+            <S.Ul>
+              <S.Li>
+                {about.AboutContributors.Bartek}: Bartek (
+                <Tooltip
+                  content={
+                    <CharacterTooltip
+                      characterData={singleCharactersData.Algoolek}
+                    />
+                  }
+                >
+                  <S.Character>
+                    {singleCharactersData.Algoolek.characters.data.name}
+                  </S.Character>
+                </Tooltip>
+                )
+              </S.Li>
+            </S.Ul>
+          </Section>
+
           <Section {...sections.DISCLAIMER}>
             <p>
               <a
@@ -102,13 +122,13 @@ const About = ({
 
           <Section {...sections.CONTACT_INFORMATION}>
             <S.Ul>
-              <S.Li>
+              <S.ButtonLi>
                 <S.MailIcon />
                 <a href={links.EMAIL} target="_blank" rel="noopener noreferrer">
                   {email.MY_EMAIL}
                 </a>
-              </S.Li>
-              <S.Li>
+              </S.ButtonLi>
+              <S.ButtonLi>
                 <S.GithubIcon />
                 <a
                   href={links.GITHUB_PROFILE}
@@ -117,8 +137,8 @@ const About = ({
                 >
                   {links.GITHUB_PROFILE}
                 </a>
-              </S.Li>
-              <S.Li>
+              </S.ButtonLi>
+              <S.ButtonLi>
                 <S.LinkedinIcon />
                 <a
                   href={links.LINKEDIN}
@@ -127,7 +147,7 @@ const About = ({
                 >
                   {links.LINKEDIN}
                 </a>
-              </S.Li>
+              </S.ButtonLi>
             </S.Ul>
           </Section>
         </S.SurfaceWrapper>

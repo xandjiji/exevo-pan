@@ -22,6 +22,10 @@ export default {
     p3: 'Aunque no he jugado mucho últimamente, eventualmente podrás encontrarme online como un boss raro',
     tongueEmoji: 'lingua',
   },
+  AboutContributors: {
+    title: 'Contribuyentes',
+    Bartek: 'Traducciones al polaco',
+  },
   AboutDisclaimer: {
     title: 'Declaraciones',
     p1: 'es un juego hecho por',

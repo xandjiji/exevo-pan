@@ -21,6 +21,10 @@ export default {
     p3: 'I choć nie gram już tak dużo , to czasami możecie mnie spotkać jako rzadkiego bossa.',
     tongueEmoji: 'tongue',
   },
+  AboutContributors: {
+    title: 'Współtwórcy',
+    Bartek: 'Polskie tłumaczenia',
+  },
   AboutDisclaimer: {
     title: 'Zastrzeżenie',
     p1: 'Jest to gra wyprodukowana przez',
