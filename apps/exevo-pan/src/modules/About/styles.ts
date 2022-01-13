@@ -52,6 +52,7 @@ export const Anchor = styled.a`
 export const Character = styled.span`
   font-weight: 400;
   color: var(--primary);
+  filter: brightness(130%);
 `
 
 export const Ul = styled.ul`
