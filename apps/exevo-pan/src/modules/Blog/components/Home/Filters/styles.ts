@@ -1,7 +1,8 @@
 import styled from 'styled-components'
+import { MaterialCard } from 'styles'
 
 export const Wrapper = styled.section`
-  height: 320px;
-  color: white;
-  background-color: red;
+  ${MaterialCard}
+  position: sticky;
+  top: 0;
 `
