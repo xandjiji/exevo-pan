@@ -13,7 +13,7 @@ const updateFiltersReducer = (
         currentIndex: 0,
         postList: [],
         filterOptions: action.filterOptions,
-        requestStatus: 'SUCCESSFUL',
+        requestStatus: 'IDLE',
       }
 
     case 'APPEND_POSTS':
@@ -35,7 +35,7 @@ const updateFiltersReducer = (
         ...state,
         currentIndex: 0,
         postList: [],
-        requestStatus: 'SUCCESSFUL',
+        requestStatus: 'IDLE',
       }
 
     default:

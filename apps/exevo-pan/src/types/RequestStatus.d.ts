@@ -1,1 +1,6 @@
-declare type RequestStatus = 'SUCCESSFUL' | 'ERROR' | 'LOADING' | 'EXHAUSTED'
+declare type RequestStatus =
+  | 'IDLE'
+  | 'SUCCESSFUL'
+  | 'ERROR'
+  | 'LOADING'
+  | 'EXHAUSTED'

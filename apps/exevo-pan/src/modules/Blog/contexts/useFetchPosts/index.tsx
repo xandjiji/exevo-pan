@@ -16,7 +16,7 @@ const defaultReducerState: FetchPostsReducerState = {
   postList: [],
   filterOptions: DEFAULT_FILTER_OPTIONS,
   activeFilterCount: 0,
-  requestStatus: 'SUCCESSFUL',
+  requestStatus: 'IDLE',
 }
 
 const FetchPostsContext = createContext<FetchPostsContextValues>({
