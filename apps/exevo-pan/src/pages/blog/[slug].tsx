@@ -8,6 +8,7 @@ import matter from 'gray-matter'
 import { buildUrl } from 'utils'
 import { POSTS_PATH, postFilePaths } from 'utils/mdx'
 import Head from 'next/head'
+import { BlogClient } from 'services'
 import { Main } from 'templates'
 import { routes } from 'Constants'
 import { common } from 'locales'
@@ -56,10 +57,9 @@ export default function PostPage({ mdxSource, metaData }: Props): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const slug = params?.slug
-  const postFilePath = path.join(POSTS_PATH, `${slug}.mdx`)
-  const source = fs.readFileSync(postFilePath)
-
+  const slug = params?.slug as string
+  /* @ ToDo: add locale from static parameter */
+  const source = await BlogClient.getStaticPost({ slug, locale: 'en' })
   const { content, data } = matter(source)
   const mdxSource = await serialize(content)
 
@@ -75,9 +75,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = postFilePaths
-    .map((filename) => filename.replace(/\.mdx?$/, ''))
-    .map((slug) => ({ params: { slug } }))
+  const paginationOptions: PaginationOptions = { pageIndex: 0, pageSize: 999 }
+  const { page: posts } = await BlogClient.queryBlog({ paginationOptions })
+  const paths = posts.map(({ slug }) => ({ params: { slug } }))
 
   return {
     paths,

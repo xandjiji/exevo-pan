@@ -6,23 +6,24 @@ import {
   DEFAULT_SORT_OPTIONS,
   DEFAULT_FILTER_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
-import { CacheObject } from './types'
+import { CacheObject, GetStaticContentProps } from './types'
 
 const CACHE_MAX_AGE = 180000
+const MDX_EXTENSION = '.mdx'
 
 export default class BlogClient {
-  static cache: CacheObject = {}
+  private static cache: CacheObject = {}
 
-  static blogQueryUrl = `${endpoints.BLOG_QUERY}`
+  private static blogQueryUrl = `${endpoints.BLOG_QUERY}`
 
-  static blogStaticUrl = `${endpoints.BLOG_STATIC}`
+  private static blogStaticUrl = `${endpoints.BLOG_STATIC}`
 
-  static getCache(key: string): BlogFilterResponse | undefined {
+  private static getCache(key: string): BlogFilterResponse | undefined {
     const cacheKey = key
     return this.cache[cacheKey]
   }
 
-  static setCache(key: string, data: BlogFilterResponse): void {
+  private static setCache(key: string, data: BlogFilterResponse): void {
     const cacheKey = key
     this.cache[cacheKey] = data
     setTimeout(() => delete this.cache[cacheKey], CACHE_MAX_AGE)
@@ -51,5 +52,16 @@ export default class BlogClient {
     this.setCache(bodyPayload, data)
 
     return data
+  }
+
+  static async getStaticPost({
+    locale,
+    slug,
+  }: GetStaticContentProps): Promise<string> {
+    const response = await fetch(
+      `${this.blogStaticUrl}/${locale}/${slug}${MDX_EXTENSION}`,
+    )
+
+    return response.text()
   }
 }
