@@ -55,7 +55,7 @@ const Filters = (): JSX.Element => {
       <S.GroupWrapper>
         <S.Label as="p">Tags</S.Label>
         <S.TagWrapper>
-          {blogTags.map(({ id, name, color }) => (
+          {blogTags.all.map(({ id, name, color }) => (
             <Tag
               key={id}
               clickable
