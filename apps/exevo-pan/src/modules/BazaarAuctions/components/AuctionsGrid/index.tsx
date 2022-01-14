@@ -32,7 +32,7 @@ const AuctionsGrid = (): JSX.Element => {
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
 
   return (
-    <S.Main>
+    <main>
       <S.Head suppressHydrationWarning>
         <S.FilterButton
           tabIndex={0}
@@ -104,7 +104,7 @@ const AuctionsGrid = (): JSX.Element => {
       {page.length === 0 && (
         <EmptyState buttonAction={() => setDrawerOpen(true)} />
       )}
-    </S.Main>
+    </main>
   )
 }
 

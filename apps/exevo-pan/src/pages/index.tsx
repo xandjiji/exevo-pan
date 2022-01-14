@@ -7,7 +7,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { endpoints, routes } from 'Constants'
-import { common, homepage } from 'locales'
+import { common, homepage, about } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
@@ -27,7 +27,7 @@ export default function Home({
   const { translations } = useTranslations()
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.homepage.Meta.title}</title>
         <meta name="title" content={translations.homepage.Meta.title} />
@@ -89,7 +89,7 @@ export default function Home({
           />
         </DrawerFieldsProvider>
       </Main>
-    </div>
+    </>
   )
 }
 

@@ -1,5 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 import Reset from './Reset'
+import CustomScrollbar from './CustomScrollbar'
 
 const GlobalStyles = createGlobalStyle`
   ${Reset}
@@ -21,8 +22,8 @@ const GlobalStyles = createGlobalStyle`
     --primaryVariantHighlight: #E7E8EE;
   }
 
-  html, body, #root {
-    overflow-x: hidden;
+  body {
+    ${CustomScrollbar}
   }
 
   body {

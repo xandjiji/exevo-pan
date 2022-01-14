@@ -142,4 +142,5 @@ export default {
     open: 'Otwórz',
     close: 'Zamknij',
   },
+  FooterTitle: 'Exevo Pan - stworzony przez',
 }

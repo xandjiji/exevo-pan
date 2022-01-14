@@ -40,5 +40,4 @@ export default {
   AnchorIconLabel: 'Copy link',
   CharacterTooltipLabel: 'Go to character page',
   HeroTitle: 'About us',
-  FooterTitle: 'Exevo Pan - made by',
 }

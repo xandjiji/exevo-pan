@@ -3,10 +3,9 @@ import { Paginator as BasePaginator, ActiveCount } from 'components/Atoms'
 import FilterIconSvg from 'assets/svgs/filter.svg'
 import { InnerContainer, Shadow, Clickable } from 'styles'
 
-export const Main = styled.main``
-
 export const Head = styled.div`
-  position: relative;
+  position: sticky;
+  top: 60px;
   z-index: 10;
   width: 100%;
   height: 70px;
