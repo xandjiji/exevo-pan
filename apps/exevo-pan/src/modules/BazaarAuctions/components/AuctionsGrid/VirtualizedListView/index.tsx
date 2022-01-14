@@ -6,7 +6,7 @@ import * as S from './styles'
 
 const DEFAULT_MIN_INDEX = 0
 const DEFAULT_MAX_INDEX = 1
-const HEADER_OFFSET = 130
+const HEADER_OFFSET = 70
 const VIRTUALIZED_MAX_WIDTH = 768
 const THROTTLE_DELAY = 300
 
