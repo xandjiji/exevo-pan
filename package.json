@@ -15,7 +15,7 @@
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "is-ci || husky install",
     "lint": "turbo run lint",
     "format": "turbo run format",
     "clean": "turbo run clean && rm -rf node_modules",
