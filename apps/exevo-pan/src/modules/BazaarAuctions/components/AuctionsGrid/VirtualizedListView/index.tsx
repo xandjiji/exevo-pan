@@ -9,6 +9,7 @@ const DEFAULT_MAX_INDEX = 1
 const HEADER_OFFSET = 70
 const VIRTUALIZED_MAX_WIDTH = 768
 const THROTTLE_DELAY = 300
+const SCROLL_DELAY = 400
 
 const VirtualizedListView = ({
   estimatedHeight,
@@ -69,7 +70,23 @@ const VirtualizedListView = ({
     [flattenChildren, minIndex, maxIndex],
   )
 
-  useEffect(() => window.scrollTo({ top: 0 }), [children])
+  const isMounted = useRef(false)
+  useEffect(() => {
+    let scrollTimer: NodeJS.Timeout
+
+    if (isMounted.current) {
+      const HEADER_HEIGHT = 60
+      const newScrollY = window.scrollY >= HEADER_HEIGHT ? HEADER_HEIGHT : 0
+      scrollTimer = setTimeout(
+        () => window.scrollTo({ top: newScrollY, behavior: 'smooth' }),
+        SCROLL_DELAY,
+      )
+    } else {
+      isMounted.current = true
+    }
+
+    return () => clearTimeout(scrollTimer)
+  }, [children])
 
   const fillTopElements = minIndex
   const fillBottomElements = childrenCount - (maxIndex + 1)
