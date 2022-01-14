@@ -66,7 +66,7 @@ export const InputWrapper = styled.div<InputWrapperProps>`
   cursor: text;
 
   ${Smooth}
-  transition-property: border-color;
+  transition-property: border-color, background-color;
 
   &:focus-within {
     border-color: var(--primary);

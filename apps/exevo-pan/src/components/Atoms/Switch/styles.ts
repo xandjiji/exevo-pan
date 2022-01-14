@@ -39,7 +39,7 @@ export const ToggleButton = styled.div<ToggleStyleProps>`
   height: ${({ hasIcon }) => (hasIcon ? '16px' : '8px')};
   border-radius: 16px;
   background-color: var(--separator);
-  transition: background 0.2s ease-out;
+  transition: background-color 0.2s ease-out;
 
   > *,
   &::after {
