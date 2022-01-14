@@ -33,13 +33,18 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
               </Link>
             </S.Li>
             <S.Li>
-              <Link href={routes.LIBERTABRA_WAR}>
-                <S.A>{common.Header.nav.war}</S.A>
+              <Link href={routes.STATISTICS}>
+                <S.A>{common.Header.nav.statistics}</S.A>
               </Link>
             </S.Li>
             <S.Li>
-              <Link href={routes.STATISTICS}>
-                <S.A>{common.Header.nav.statistics}</S.A>
+              <Link href={routes.ADVERTISE}>
+                <S.A>{common.Header.nav.advertise}</S.A>
+              </Link>
+            </S.Li>
+            <S.Li>
+              <Link href={routes.BLOG}>
+                <S.A>{common.Header.nav.blog}</S.A>
               </Link>
             </S.Li>
             <S.Li>
