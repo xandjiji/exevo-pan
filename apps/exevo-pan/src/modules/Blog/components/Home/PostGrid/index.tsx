@@ -12,7 +12,7 @@ const PostGridView = ({
     {postList.map((postData) => (
       <PostCard key={postData.slug} postData={postData} />
     ))}
-    <div ref={observerRef} />
+    <S.LazyWatcher ref={observerRef} />
   </S.Grid>
 )
 
