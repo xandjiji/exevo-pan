@@ -1,19 +1,9 @@
 import { useCallback } from 'react'
-import { Input, Chip, Switch, RadioButton } from 'components/Atoms'
+import { blogTags } from 'Constants'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
+import { Tag } from '../..'
 import * as S from './styles'
-
-const allTags = [
-  {
-    name: 'Article',
-    id: 'article',
-  },
-  {
-    name: 'News',
-    id: 'news',
-  },
-]
 
 const Filters = (): JSX.Element => {
   const { filterOptions, sortOptions, dispatchFetchPosts } = useFetchPosts()
@@ -32,46 +22,54 @@ const Filters = (): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <Switch
-        active={sortOptions.descendingOrder}
-        onClick={() =>
-          dispatchFetchPosts({
-            type: 'APPLY_SORT',
-            sortOptions: {
-              ...sortOptions,
-              descendingOrder: !sortOptions.descendingOrder,
-            },
-          })
-        }
-      >
-        Descending
-      </Switch>
-      <RadioButton
-        active={sortOptions.sortingMode === 0}
-        onClick={() =>
-          dispatchFetchPosts({
-            type: 'APPLY_SORT',
-            sortOptions: {
-              ...sortOptions,
-              sortingMode: 0,
-            },
-          })
-        }
-      >
-        Most recent
-      </RadioButton>
+      <S.Title>Filter posts</S.Title>
 
-      <Input value={query} onChange={onQueryChange} placeholder="Search" />
-
-      {allTags.map(({ id, name }) => (
-        <Chip
-          key={id}
-          overrideStatus={filterOptions.tags.has(id)}
-          onClick={() => dispatchFetchPosts({ type: 'TOGGLE_TAG', tag: id })}
+      <S.GroupWrapper>
+        <S.Switch
+          active={sortOptions.descendingOrder}
+          onClick={() =>
+            dispatchFetchPosts({
+              type: 'APPLY_SORT',
+              sortOptions: {
+                ...sortOptions,
+                descendingOrder: !sortOptions.descendingOrder,
+              },
+            })
+          }
         >
-          {name}
-        </Chip>
-      ))}
+          Most recent
+        </S.Switch>
+      </S.GroupWrapper>
+
+      <S.GroupWrapper>
+        <S.Label htmlFor="query-input">Blog search</S.Label>
+        <S.Input
+          id="query-input"
+          value={query}
+          onChange={onQueryChange}
+          placeholder="Search for posts"
+          allowClear
+        />
+      </S.GroupWrapper>
+
+      <S.GroupWrapper>
+        <S.Label as="p">Tags</S.Label>
+        <S.TagWrapper>
+          {blogTags.map(({ id, name, color }) => (
+            <Tag
+              key={id}
+              clickable
+              active={filterOptions.tags.has(id)}
+              onClick={() =>
+                dispatchFetchPosts({ type: 'TOGGLE_TAG', tag: id })
+              }
+              tagColor={color}
+            >
+              {name}
+            </Tag>
+          ))}
+        </S.TagWrapper>
+      </S.GroupWrapper>
     </S.Wrapper>
   )
 }

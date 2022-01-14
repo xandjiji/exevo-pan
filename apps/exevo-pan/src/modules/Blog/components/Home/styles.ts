@@ -5,7 +5,7 @@ export const Wrapper = styled.main`
   ${InnerContainer}
 
   display: grid;
-  grid-template-columns: 320px 1fr 320px;
+  grid-template-columns: 224px 1fr 320px;
   align-items: start;
   grid-gap: 32px;
 `
