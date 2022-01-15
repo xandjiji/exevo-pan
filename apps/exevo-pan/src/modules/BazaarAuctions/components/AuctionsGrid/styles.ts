@@ -64,9 +64,16 @@ export const GridWrapper = styled.div`
 `
 
 export const EmptyState = styled(BaseEmptyState)`
+  span {
+    white-space: unset;
+  }
+  button {
+    white-space: nowrap;
+  }
   @media (min-width: 768px) {
     margin-top: calc(25vh - 60px);
     span {
+      white-space: nowrap;
       font-size: 32px;
     }
   }
