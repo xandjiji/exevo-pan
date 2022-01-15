@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
 export const Grid = styled.section`
+  padding-bottom: 32px;
   position: relative;
   display: grid;
   gap: 32px;
