@@ -45,7 +45,7 @@ const GlobalStyles = createGlobalStyle`
     flex-direction: column;
 
     main {
-        flex-grow: 1;
+      flex-grow: 1;
     }
   }
 
