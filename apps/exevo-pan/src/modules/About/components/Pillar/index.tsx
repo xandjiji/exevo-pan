@@ -48,11 +48,9 @@ const Pillar = ({ sections }: PillarProps): JSX.Element => {
 
     handleScroll()
 
-    const mainElement = document.querySelector('main') as Element
+    window.addEventListener('scroll', handleScroll, { passive: true })
 
-    mainElement.addEventListener('scroll', handleScroll, { passive: true })
-
-    return () => mainElement.removeEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
   })
 
   return (

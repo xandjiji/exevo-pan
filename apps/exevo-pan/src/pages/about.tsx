@@ -1,8 +1,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import Head from 'next/head'
-import styled from 'styled-components'
-import { Main as BaseMain } from 'templates'
+import { Main } from 'templates'
 import AboutContent from 'modules/About'
 import { SingleCharacterData } from 'modules/About/types'
 import { GetStaticProps } from 'next'
@@ -12,23 +11,6 @@ import { routes, endpoints } from 'Constants'
 import { common, about } from 'locales'
 
 const pageUrl = buildUrl(routes.ABOUT)
-
-const Main = styled(BaseMain)`
-  header {
-    position: fixed;
-  }
-
-  main {
-    margin-top: 60px;
-    scroll-padding-top: 104px;
-  }
-
-  @media (min-width: 768px) {
-    main {
-      scroll-padding-top: unset;
-    }
-  }
-`
 
 export default function About({
   singleCharactersData,
@@ -84,6 +66,17 @@ export default function About({
           href={buildUrl(routes.ABOUT, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <style
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `
+            html {
+                scroll-padding-top: 104px;
+            }
+         `,
+          }}
+        />
       </Head>
 
       <Main>

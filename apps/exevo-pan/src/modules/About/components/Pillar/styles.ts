@@ -15,7 +15,7 @@ export const Aside = styled.aside`
 
   @media (min-width: 768px) {
     position: sticky;
-    top: 60px;
+    top: 120px;
     left: 0;
     padding: 0;
     box-shadow: none;
