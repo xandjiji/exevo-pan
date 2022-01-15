@@ -1,13 +1,13 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
 import CharacterCard from 'components/CharacterCard'
+import EmptyState from 'components/EmptyState'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import VirtualizedListView from './VirtualizedListView'
-import EmptyState from './EmptyState'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
@@ -102,7 +102,12 @@ const AuctionsGrid = (): JSX.Element => {
         ))}
       </VirtualizedListView>
       {page.length === 0 && (
-        <EmptyState buttonAction={() => setDrawerOpen(true)} />
+        <EmptyState
+          buttonText={homepage.AuctionsGrid.changeFilters}
+          buttonAction={() => setDrawerOpen(true)}
+        >
+          {homepage.AuctionsGrid.noAuctionFound}
+        </EmptyState>
       )}
     </main>
   )

@@ -23,7 +23,6 @@ export default {
     },
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
     changeFilters: 'Mudar filtros',
-    notFoundAlt: 'Nenhum personagem foi encontrado',
   },
   FilterDrawer: {
     title: 'Filtros',

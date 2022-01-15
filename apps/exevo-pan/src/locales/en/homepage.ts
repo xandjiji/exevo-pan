@@ -24,7 +24,6 @@ export default {
     },
     noAuctionFound: 'Sorry, no auction was found',
     changeFilters: 'Change filters',
-    notFoundAlt: 'No character was found',
   },
   FilterDrawer: {
     title: 'Filters',

@@ -24,7 +24,6 @@ export default {
     },
     noAuctionFound: 'Desculpa, no se encontró subasta',
     changeFilters: 'Cambiar filtros',
-    notFoundAlt: 'No se encontraron caracteres',
   },
   FilterDrawer: {
     title: 'Filtros',
