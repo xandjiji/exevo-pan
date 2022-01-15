@@ -51,7 +51,7 @@ const Form = (): JSX.Element => {
 
 const AdvertiseGrid = (): JSX.Element => (
   <FormProvider>
-    <S.Wrapper id="main-wrapper">
+    <S.Wrapper>
       <Form />
     </S.Wrapper>
   </FormProvider>

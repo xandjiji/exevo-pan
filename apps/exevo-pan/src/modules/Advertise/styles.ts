@@ -1,36 +1,11 @@
 import styled, { css } from 'styled-components'
 import { Stepper as BaseStepper } from 'components/Atoms'
-import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
+import { InnerContainer } from 'styles'
 
 export const Wrapper = styled.main`
-  position: relative;
-
   ${InnerContainer}
   padding-top: 16px;
   padding-bottom: 16px;
-
-  max-height: calc(100% - 60px);
-  overflow: auto;
-  ${CustomScrollbar}
-
-  background-color: var(--background);
-  ${Smooth}
-
-  &::before {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    height: 72px;
-    background-image: linear-gradient(
-      to top,
-      var(--background),
-      rgba(0, 0, 0, 0)
-    );
-    pointer-events: none;
-  }
 `
 
 export const FormStepsWrapper = styled.div`

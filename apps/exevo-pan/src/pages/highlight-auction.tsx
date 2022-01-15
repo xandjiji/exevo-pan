@@ -23,7 +23,7 @@ export default function Advertise({
   const { page, ...pageData } = initialAuctionData
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.advertise.Meta.title}</title>
         <meta name="title" content={translations.advertise.Meta.title} />
@@ -79,7 +79,7 @@ export default function Advertise({
           <AdvertiseGrid />
         </AuctionsProvider>
       </Main>
-    </div>
+    </>
   )
 }
 
