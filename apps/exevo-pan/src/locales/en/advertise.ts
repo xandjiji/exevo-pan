@@ -8,6 +8,7 @@ export default {
     Configure: 'Configure',
     Checkout: 'Checkout',
   },
+  NextButton: 'Next',
   RangeDatePicker: {
     currentMonthLabel: 'Current month',
     nextMonthLabel: 'Next month',

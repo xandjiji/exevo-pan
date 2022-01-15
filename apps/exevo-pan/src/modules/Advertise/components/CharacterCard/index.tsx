@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import { useForm } from '../../contexts/Form'
 import * as S from './styles'
@@ -7,6 +8,9 @@ const HEADER_OFFSET = 60
 const MAX_WIDTH = 768
 
 const CharacterCard = (): JSX.Element | null => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
   const { selectedCharacter, currentStep, finished, isValid, dispatch } =
     useForm()
 
@@ -46,7 +50,7 @@ const CharacterCard = (): JSX.Element | null => {
               dispatch({ type: 'SET_STEP', newStep: currentStep + 1 })
             }
           >
-            Next
+            {advertise.NextButton}
           </Button>
         )}
       </S.Wrapper>
