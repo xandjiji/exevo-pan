@@ -5,6 +5,7 @@ export const Grid = styled.div`
   ${InnerContainer}
   padding-top: 16px;
   padding-bottom: 16px;
+  width: 100%;
 
   display: grid;
   grid-gap: 16px;
