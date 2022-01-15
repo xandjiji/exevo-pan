@@ -103,11 +103,15 @@ const AuctionsGrid = (): JSX.Element => {
       </VirtualizedListView>
       {page.length === 0 && (
         <EmptyState
-          buttonText={homepage.AuctionsGrid.changeFilters}
-          buttonAction={() => setDrawerOpen(true)}
-        >
-          {homepage.AuctionsGrid.noAuctionFound}
-        </EmptyState>
+          button={{
+            content: homepage.AuctionsGrid.changeFilters,
+            action: () => setDrawerOpen(true),
+          }}
+          text={{
+            content: homepage.AuctionsGrid.noAuctionFound,
+            size: 32,
+          }}
+        />
       )}
     </main>
   )

@@ -11,24 +11,32 @@ describe('<EmptyState />', () => {
   })
 
   test('should render every element correctly', () => {
-    const text = 'No character was found'
-    const buttonText = 'Change filters'
-    renderWithProviders(
-      <EmptyState buttonText={buttonText} buttonAction={mockButtonAction}>
-        {text}
-      </EmptyState>,
-    )
+    const text = {
+      content: 'No character was found',
+      size: 12,
+    }
+    const button = {
+      content: 'Change filters',
+      action: mockButtonAction,
+    }
+    renderWithProviders(<EmptyState text={text} button={button} />)
 
     expect(screen.getByAltText('No character was found')).toBeInTheDocument()
-    expect(screen.getByRole('button', { name: buttonText })).toBeInTheDocument()
+    expect(
+      screen.getByRole('button', { name: button.content }),
+    ).toBeInTheDocument()
   })
 
   test('should call buttonAction on button click', () => {
-    renderWithProviders(
-      <EmptyState buttonAction={mockButtonAction}>
-        No character was found
-      </EmptyState>,
-    )
+    const text = {
+      content: 'No character was found',
+      size: 12,
+    }
+    const button = {
+      content: 'Change filters',
+      action: mockButtonAction,
+    }
+    renderWithProviders(<EmptyState text={text} button={button} />)
 
     expect(mockButtonAction).toHaveBeenCalledTimes(0)
     userEvent.click(screen.getByRole('button'))

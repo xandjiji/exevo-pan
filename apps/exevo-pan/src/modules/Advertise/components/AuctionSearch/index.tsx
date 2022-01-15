@@ -1,9 +1,9 @@
 import { useTranslations } from 'contexts/useTranslation'
+import EmptyState from 'components/EmptyState'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useForm } from '../../contexts/Form'
 import useDebouncedNickname from './useDebouncedNickname'
 import AuctionItem from './AuctionItem'
-import EmptyState from './EmptyState'
 import * as S from './styles'
 
 export const PAGE_SIZE = 10
@@ -55,7 +55,16 @@ const AuctionSearch = (): JSX.Element => {
             onClick={() => dispatch({ type: 'SELECT_CHARACTER', character })}
           />
         ))}
-        {page.length === 0 && <EmptyState />}
+        {page.length === 0 && (
+          <EmptyState
+            style={{ marginTop: 16 }}
+            height={96}
+            text={{
+              content: advertise.AuctionSearch.emptyStateText,
+              size: 24,
+            }}
+          />
+        )}
       </S.AuctionList>
     </S.Wrapper>
   )
