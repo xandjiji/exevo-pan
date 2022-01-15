@@ -7,6 +7,7 @@ export const Wrapper = styled.footer`
   padding-top: 16px;
   padding-bottom: 16px;
   background-color: var(--primary);
+  transition: background-color 0.2s ease-out;
 
   &,
   a {

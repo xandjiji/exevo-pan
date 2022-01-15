@@ -22,10 +22,15 @@ const GlobalStyles = createGlobalStyle`
     --primaryVariantHighlight: #e7e8ee;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
     font: 400 16px Roboto, sans-serif;
     background-color: var(--background);
     color: var(--onSurface);
+    transition: background-color 0.2s ease-out;
     ${CustomScrollbar}
 
     *::selection {
