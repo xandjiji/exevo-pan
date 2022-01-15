@@ -34,7 +34,11 @@ export const Wrapper = styled.header`
   ${CustomScrollbar}
   ${Shadow}
 
-  @media(min-width: 768px) {
+  &[data-active='true'] {
+    z-index: 75;
+  }
+
+  @media (min-width: 768px) {
     &::after {
       content: '';
       position: fixed;
@@ -163,7 +167,7 @@ export const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 50;
+  z-index: 74;
 
   width: 100vw;
   height: 100vh;

@@ -39,7 +39,7 @@ const Header = ({
 
   return (
     <>
-      <S.Wrapper {...props}>
+      <S.Wrapper data-active={menuOpen} {...props}>
         <S.Nav>
           <S.MenuButton
             type="button"
