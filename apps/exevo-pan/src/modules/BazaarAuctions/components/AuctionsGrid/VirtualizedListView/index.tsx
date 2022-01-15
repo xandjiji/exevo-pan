@@ -9,7 +9,6 @@ const DEFAULT_MAX_INDEX = 1
 const HEADER_OFFSET = 70
 const VIRTUALIZED_MAX_WIDTH = 768
 const THROTTLE_DELAY = 300
-const SCROLL_DELAY = 400
 
 const VirtualizedListView = ({
   estimatedHeight,
@@ -79,7 +78,7 @@ const VirtualizedListView = ({
       const newScrollY = window.scrollY >= HEADER_HEIGHT ? HEADER_HEIGHT : 0
       scrollTimer = setTimeout(
         () => window.scrollTo({ top: newScrollY, behavior: 'smooth' }),
-        SCROLL_DELAY,
+        THROTTLE_DELAY,
       )
     } else {
       isMounted.current = true
