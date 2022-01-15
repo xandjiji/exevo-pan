@@ -1,20 +1,22 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useState, useRef } from 'react'
+import { memo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { RadioButton } from 'components/Atoms'
 import { setCookie } from 'utils'
 import * as S from './styles'
+import { LanguagePickerProps } from './type'
 
 const SECONDS_IN_A_YEAR = 31536000
 
-const LanguagePicker = (): JSX.Element => {
+const LanguagePicker = ({
+  isOpen,
+  setLanguageOpen,
+}: LanguagePickerProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
 
   const { locale, push, pathname, query } = useRouter()
-
-  const [isVisible, setIsVisible] = useState(false)
 
   const handleLocaleSelect = (selectedLocale: RegisteredLocale) => {
     push(
@@ -25,7 +27,7 @@ const LanguagePicker = (): JSX.Element => {
       window.location.search,
       { locale: selectedLocale },
     )
-    setIsVisible(false)
+    setLanguageOpen(false)
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
   }
 
@@ -33,7 +35,7 @@ const LanguagePicker = (): JSX.Element => {
   const absoluteWrapperPosition =
     wrapperRef.current?.getBoundingClientRect().right
 
-  const isTabeable = isVisible ? 1 : -1
+  const isTabeable = isOpen ? 1 : -1
 
   return (
     <S.Wrapper>
@@ -41,13 +43,13 @@ const LanguagePicker = (): JSX.Element => {
         aria-label={common.PreferredLanguageLabel}
         type="button"
         ref={wrapperRef as React.RefObject<HTMLButtonElement>}
-        onClick={() => setIsVisible((prev) => !prev)}
+        onClick={() => setLanguageOpen((prev) => !prev)}
       >
         <S.LanguageIcon />
       </button>
       <S.Picker
         role="dialog"
-        aria-hidden={!isVisible}
+        aria-hidden={!isOpen}
         style={{
           left: absoluteWrapperPosition ? absoluteWrapperPosition - 12 : '100%',
         }}
@@ -83,8 +85,8 @@ const LanguagePicker = (): JSX.Element => {
       </S.Picker>
       <S.Backdrop
         aria-label={common.PopoverCloseLabel}
-        aria-hidden={!isVisible}
-        onClick={() => setIsVisible(false)}
+        aria-hidden={!isOpen}
+        onClick={() => setLanguageOpen(false)}
       />
     </S.Wrapper>
   )

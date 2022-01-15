@@ -27,6 +27,7 @@ const Header = ({
   } = useTranslations()
 
   const [menuOpen, setMenuOpen] = useState(false)
+  const [languageOpen, setLanguageOpen] = useState(false)
 
   const { currentTheme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
@@ -37,9 +38,11 @@ const Header = ({
     ? common.Header.h1[heading[pathname]]
     : null
 
+  const shouldMenuOverlap = menuOpen || languageOpen
+
   return (
     <>
-      <S.Wrapper data-active={menuOpen} {...props}>
+      <S.Wrapper data-active={shouldMenuOverlap} {...props}>
         <S.Nav>
           <S.MenuButton
             type="button"
@@ -82,7 +85,10 @@ const Header = ({
         </S.Nav>
 
         <S.RightWrapper suppressHydrationWarning>
-          <LanguagePicker />
+          <LanguagePicker
+            isOpen={languageOpen}
+            setLanguageOpen={setLanguageOpen}
+          />
           {process.browser && (
             <Switch
               active={currentTheme === 'dark-theme'}
