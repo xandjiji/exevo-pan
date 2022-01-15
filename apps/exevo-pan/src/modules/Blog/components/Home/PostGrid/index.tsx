@@ -6,15 +6,27 @@ import { PostGridViewProps } from './types'
 
 const PostGridView = ({
   postList,
+  requestStatus,
   observerRef,
-}: PostGridViewProps): JSX.Element => (
-  <S.Grid>
-    {postList.map((postData) => (
-      <PostCard key={postData.slug} postData={postData} />
-    ))}
-    <S.LazyWatcher ref={observerRef} />
-  </S.Grid>
-)
+}: PostGridViewProps): JSX.Element => {
+  const noResults = requestStatus === 'EXHAUSTED' && !postList.length
+  return (
+    <S.Grid>
+      {postList.map((postData) => (
+        <PostCard key={postData.slug} postData={postData} />
+      ))}
+      {noResults && (
+        <S.EmptyState
+          text={{
+            content: 'No posts were found',
+            size: 32,
+          }}
+        />
+      )}
+      <S.LazyWatcher ref={observerRef} />
+    </S.Grid>
+  )
+}
 
 const PostGridController = (): JSX.Element => {
   const { postList, requestStatus, fetchNextPage } = useFetchPosts()
@@ -38,6 +50,7 @@ const PostGridController = (): JSX.Element => {
   return (
     <PostGridView
       postList={postList}
+      requestStatus={requestStatus}
       observerRef={requestStatus === 'EXHAUSTED' ? undefined : lastFactRef}
     />
   )

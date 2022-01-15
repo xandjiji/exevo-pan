@@ -19,7 +19,7 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
   const TITLE = 'Blog'
   const DESCRIPTION = 'This is the blog homepage'
   return (
-    <div>
+    <>
       <Head>
         <title>{TITLE} - Exevo Pan</title>
         <meta name="title" content={TITLE} />
@@ -61,7 +61,7 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
           initialPosts={initialPosts}
         />
       </Main>
-    </div>
+    </>
   )
 }
 

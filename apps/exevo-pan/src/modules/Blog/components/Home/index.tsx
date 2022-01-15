@@ -5,18 +5,14 @@ import { Newsletter } from '..'
 import * as S from './styles'
 import { HomeProps } from './types'
 
-const Home = ({ initialIndex, initialPosts }: HomeProps): JSX.Element => {
-  console.log(initialPosts)
-
-  return (
-    <FetchPostsProvider initialIndex={initialIndex} initialPosts={initialPosts}>
-      <S.Wrapper>
-        <Filters />
-        <PostGrid />
-        <Newsletter />
-      </S.Wrapper>
-    </FetchPostsProvider>
-  )
-}
+const Home = ({ initialIndex, initialPosts }: HomeProps): JSX.Element => (
+  <FetchPostsProvider initialIndex={initialIndex} initialPosts={initialPosts}>
+    <S.Wrapper>
+      <Filters />
+      <PostGrid />
+      <Newsletter />
+    </S.Wrapper>
+  </FetchPostsProvider>
+)
 
 export default Home
