@@ -38,9 +38,9 @@ const VirtualizedListView = ({
   const [maxIndex, setMaxIndex] = useState(DEFAULT_MAX_INDEX)
 
   useEffect(() => {
-    const scrollHandler = throttle(() => {
-      if (window.innerWidth < VIRTUALIZED_MAX_WIDTH) {
-        const scrollTop = window.scrollY + HEADER_OFFSET
+    const scrollHandler = throttle((event) => {
+      if (!event.currentTarget && window.innerWidth < VIRTUALIZED_MAX_WIDTH) {
+        const scrollTop = window.scrollY - HEADER_OFFSET
 
         const newMinIndex = Math.floor(scrollTop / estimatedHeight)
 
