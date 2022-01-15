@@ -3,7 +3,7 @@ import Image from 'next/image'
 import { Tooltip } from 'components/Organisms'
 import { links, email } from 'Constants'
 import fansiteImg from 'assets/fansite-logo.png'
-import { Hero, Pillar, Section, CharacterTooltip, Footer } from './components'
+import { Hero, Pillar, Section, CharacterTooltip } from './components'
 import { sections } from './sections'
 import * as S from './styles'
 import { SingleCharacterData } from './types'
@@ -152,7 +152,6 @@ const About = ({
           </Section>
         </S.SurfaceWrapper>
       </S.BodyLayout>
-      <Footer />
     </S.Wrapper>
   )
 }

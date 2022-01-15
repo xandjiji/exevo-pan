@@ -38,7 +38,7 @@ export default function About({
   const { translations } = useTranslations()
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.about.Meta.title}</title>
         <meta name="title" content={translations.about.Meta.title} />
@@ -89,7 +89,7 @@ export default function About({
       <Main>
         <AboutContent singleCharactersData={singleCharactersData} />
       </Main>
-    </div>
+    </>
   )
 }
 
