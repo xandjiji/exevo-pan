@@ -39,6 +39,16 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
+  #__next > div {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+
+    main {
+        flex-grow: 1;
+    }
+  }
+
   svg {
     transition: fill 0.2s ease-out;
   }
