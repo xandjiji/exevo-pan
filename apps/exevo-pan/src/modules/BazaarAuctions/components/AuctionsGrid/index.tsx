@@ -1,7 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
 import CharacterCard from 'components/CharacterCard'
-import EmptyState from 'components/EmptyState'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
@@ -84,35 +83,37 @@ const AuctionsGrid = (): JSX.Element => {
         />
       )}
 
-      <VirtualizedListView
-        id="character-grid"
-        estimatedHeight={ESTIMATED_HEIGHT}
-        overScan={1}
-      >
-        {shouldDisplayHighlightedAuctions &&
-          highlightedAuctions.map((auction) => (
-            <CharacterCard
-              key={`${auction.id}-highlighted`}
-              characterData={auction}
-              highlighted
-            />
+      <S.GridWrapper>
+        <VirtualizedListView
+          id="character-grid"
+          estimatedHeight={ESTIMATED_HEIGHT}
+          overScan={1}
+        >
+          {shouldDisplayHighlightedAuctions &&
+            highlightedAuctions.map((auction) => (
+              <CharacterCard
+                key={`${auction.id}-highlighted`}
+                characterData={auction}
+                highlighted
+              />
+            ))}
+          {page.map((auction) => (
+            <CharacterCard key={auction.id} characterData={auction} />
           ))}
-        {page.map((auction) => (
-          <CharacterCard key={auction.id} characterData={auction} />
-        ))}
-      </VirtualizedListView>
-      {page.length === 0 && (
-        <EmptyState
-          button={{
-            content: homepage.AuctionsGrid.changeFilters,
-            action: () => setDrawerOpen(true),
-          }}
-          text={{
-            content: homepage.AuctionsGrid.noAuctionFound,
-            size: 32,
-          }}
-        />
-      )}
+        </VirtualizedListView>
+        {page.length === 0 && (
+          <S.EmptyState
+            button={{
+              content: homepage.AuctionsGrid.changeFilters,
+              action: () => setDrawerOpen(true),
+            }}
+            text={{
+              content: homepage.AuctionsGrid.noAuctionFound,
+              size: 24,
+            }}
+          />
+        )}
+      </S.GridWrapper>
     </main>
   )
 }

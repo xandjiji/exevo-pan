@@ -93,23 +93,23 @@ const VirtualizedListView = ({
 
   return (
     <S.Grid id="virtualized-view" data-item-count={childrenCount} {...props}>
-      {isDesktop ? (
-        children
-      ) : (
-        <>
-          <FillElement
-            elementSize={estimatedHeight}
-            elementsCount={fillTopElements}
-          />
+      {isDesktop
+        ? children
+        : !!childrenCount && (
+            <>
+              <FillElement
+                elementSize={estimatedHeight}
+                elementsCount={fillTopElements}
+              />
 
-          {renderedChildren}
+              {renderedChildren}
 
-          <FillElement
-            elementSize={estimatedHeight}
-            elementsCount={fillBottomElements}
-          />
-        </>
-      )}
+              <FillElement
+                elementSize={estimatedHeight}
+                elementsCount={fillBottomElements}
+              />
+            </>
+          )}
     </S.Grid>
   )
 }

@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import BaseEmptyState from 'components/EmptyState'
 import { Paginator as BasePaginator, ActiveCount } from 'components/Atoms'
 import FilterIconSvg from 'assets/svgs/filter.svg'
 import { InnerContainer, Shadow, Clickable } from 'styles'
@@ -54,4 +55,19 @@ export const FilterButton = styled.button`
 
 export const Paginator = styled(BasePaginator)`
   margin-left: auto;
+`
+
+export const GridWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+export const EmptyState = styled(BaseEmptyState)`
+  @media (min-width: 768px) {
+    margin-top: calc(25vh - 60px);
+    span {
+      font-size: 32px;
+    }
+  }
 `
