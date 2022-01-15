@@ -18,7 +18,7 @@ export default function Highscores({
   const { translations } = useTranslations()
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.statistics.Meta.Highscores.title}</title>
         <meta
@@ -81,7 +81,7 @@ export default function Highscores({
           <HighscoresGrid statisticsData={statisticsData} />
         </main>
       </Main>
-    </div>
+    </>
   )
 }
 

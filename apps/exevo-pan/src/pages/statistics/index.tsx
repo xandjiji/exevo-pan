@@ -18,7 +18,7 @@ export default function Statistics({
   const { translations } = useTranslations()
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.statistics.Meta.Statistics.title}</title>
         <meta
@@ -81,7 +81,7 @@ export default function Statistics({
           <OverallGrid statisticsData={statisticsData} />
         </main>
       </Main>
-    </div>
+    </>
   )
 }
 

@@ -6,34 +6,31 @@ const GlobalStyles = createGlobalStyle`
   ${Reset}
 
   :root {
-    --background: #EEEEEE;
-    --surface: #FFFFFF;
+    --background: #eeeeee;
+    --surface: #ffffff;
     --onSurface: #000000;
-    --separator: #B4B4B4;
-    --primary: #3F51B5;
-    --onPrimary: #FFFFFF;
-    --primaryVariant: #C5CAE9;
-    --darkerPrimary: #323D8E;
+    --separator: #b4b4b4;
+    --primary: #3f51b5;
+    --onPrimary: #ffffff;
+    --primaryVariant: #c5cae9;
+    --darkerPrimary: #323d8e;
     --green: #377712;
-    --red: #C51313;
-    --alert: #F9EEC1;
-    --battleGreen: #43B600;
-    --battleYellow: #FFDD00;
-    --primaryVariantHighlight: #E7E8EE;
-  }
-
-  body {
-    ${CustomScrollbar}
+    --red: #c51313;
+    --alert: #f9eec1;
+    --battleGreen: #43b600;
+    --battleYellow: #ffdd00;
+    --primaryVariantHighlight: #e7e8ee;
   }
 
   body {
     font: 400 16px Roboto, sans-serif;
     background-color: var(--background);
     color: var(--onSurface);
+    ${CustomScrollbar}
 
     *::selection {
-        color: var(--onSurface);
-        background: var(--primaryVariant);
+      color: var(--onSurface);
+      background: var(--primaryVariant);
     }
   }
 
