@@ -19,7 +19,7 @@ const PostCard = ({ index, postData }: PostCardProps): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Thumbnail seed={index}>
+      <S.Thumbnail seed={index} suppressHydrationWarning>
         <NextImage
           src="https://i.imgur.com/fk8gZ4i.png"
           alt={title}
