@@ -4,11 +4,14 @@ import BaseEmptyState from 'components/EmptyState'
 export const Grid = styled.section`
   padding-bottom: 32px;
   position: relative;
+  height: 100%;
+
   display: grid;
   gap: 32px;
-  grid-template-columns: 1fr 1fr;
 
-  height: 100%;
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
 `
 
 export const EmptyState = styled(BaseEmptyState)`
