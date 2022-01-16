@@ -29,6 +29,7 @@ export interface FetchPostsReducerState {
   activeFilterCount: number
   sortOptions: SortOptions
   requestStatus: RequestStatus
+  backgroundSeed: number
 }
 
 export interface FetchPostsContextValues extends FetchPostsReducerState {

@@ -1,25 +1,21 @@
-import { useState, useRef, useCallback } from 'react'
+import { useRef, useCallback } from 'react'
 import PostCard from './PostCard'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
-import { getRandomIndex } from './utils'
 import * as S from './styles'
 import { PostGridViewProps } from './types'
 
 const PostGridView = ({
+  seed,
   postList,
   requestStatus,
   observerRef,
 }: PostGridViewProps): JSX.Element => {
-  const [startIndex] = useState(getRandomIndex)
   const noResults = requestStatus === 'EXHAUSTED' && !postList.length
+
   return (
     <S.Grid>
       {postList.map((postData, index) => (
-        <PostCard
-          key={postData.slug}
-          index={startIndex + index}
-          postData={postData}
-        />
+        <PostCard key={postData.slug} seed={seed + index} postData={postData} />
       ))}
       {noResults && (
         <S.EmptyState
@@ -35,7 +31,8 @@ const PostGridView = ({
 }
 
 const PostGridController = (): JSX.Element => {
-  const { postList, requestStatus, fetchNextPage } = useFetchPosts()
+  const { postList, backgroundSeed, requestStatus, fetchNextPage } =
+    useFetchPosts()
 
   const observer = useRef<IntersectionObserver | null>(null)
   const lastFactRef = useCallback(
@@ -56,6 +53,7 @@ const PostGridController = (): JSX.Element => {
   return (
     <PostGridView
       postList={postList}
+      seed={backgroundSeed}
       requestStatus={requestStatus}
       observerRef={requestStatus === 'EXHAUSTED' ? undefined : lastFactRef}
     />
