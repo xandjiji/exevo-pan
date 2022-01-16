@@ -47,7 +47,7 @@ const updateFiltersReducer = (
     case 'SET_POSTS':
       return {
         ...state,
-        currentIndex: 0,
+        currentIndex: 1,
         postList: action.posts,
         requestStatus: action.hasNext ? 'SUCCESSFUL' : 'EXHAUSTED',
       }
