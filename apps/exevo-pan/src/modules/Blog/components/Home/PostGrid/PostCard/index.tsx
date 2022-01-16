@@ -9,7 +9,7 @@ import { PostCardProps } from './types'
 
 const { tagById } = blogTags
 
-const PostCard = ({ postData }: PostCardProps): JSX.Element => {
+const PostCard = ({ index, postData }: PostCardProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -19,9 +19,9 @@ const PostCard = ({ postData }: PostCardProps): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Thumbnail>
+      <S.Thumbnail seed={index}>
         <NextImage
-          src="https://i.imgur.com/SpsRRfW.jpg"
+          src="https://i.imgur.com/fk8gZ4i.png"
           alt={title}
           layout="fill"
         />

@@ -1,29 +1,21 @@
 import styled from 'styled-components'
 import { MaterialCard, Smooth, Shadow } from 'styles'
 import BaseTag from '../../../Tag'
+import { backgroundStyles } from './backgrounds'
 
-export const Thumbnail = styled.div`
+const variants = backgroundStyles.length
+
+export const Thumbnail = styled.div<{ seed: number }>`
   position: relative;
   flex-shrink: 0;
   height: 240px;
   width: 100%;
+  background: var(--primaryVariantHighlight);
+  transition: background 0.2s ease-out;
+  ${({ seed }) => backgroundStyles[seed % variants]}
 
   img {
-    object-fit: cover;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
-    transition: background-color 0.2s ease-out;
-    pointer-events: none;
+    object-fit: scale-down;
   }
 `
 

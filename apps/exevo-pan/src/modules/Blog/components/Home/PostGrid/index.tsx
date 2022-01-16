@@ -1,6 +1,7 @@
-import { useRef, useCallback } from 'react'
+import { useState, useRef, useCallback } from 'react'
 import PostCard from './PostCard'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
+import { getRandomIndex } from './utils'
 import * as S from './styles'
 import { PostGridViewProps } from './types'
 
@@ -9,11 +10,16 @@ const PostGridView = ({
   requestStatus,
   observerRef,
 }: PostGridViewProps): JSX.Element => {
+  const [startIndex] = useState(getRandomIndex)
   const noResults = requestStatus === 'EXHAUSTED' && !postList.length
   return (
     <S.Grid>
-      {postList.map((postData) => (
-        <PostCard key={postData.slug} postData={postData} />
+      {postList.map((postData, index) => (
+        <PostCard
+          key={postData.slug}
+          index={startIndex + index}
+          postData={postData}
+        />
       ))}
       {noResults && (
         <S.EmptyState

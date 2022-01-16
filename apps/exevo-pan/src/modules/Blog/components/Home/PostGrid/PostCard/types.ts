@@ -1,4 +1,5 @@
 export interface PostCardProps {
+  index: number
   postData: BlogPost
 }
 
