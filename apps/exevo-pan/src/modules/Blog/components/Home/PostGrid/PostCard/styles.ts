@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MaterialCard, Smooth, Shadow } from 'styles'
+import { MaterialCard } from 'styles'
 import BaseTag from '../../../Tag'
 import { backgroundStyles } from './backgrounds'
 
@@ -30,17 +30,6 @@ export const Wrapper = styled.li`
 
   display: flex;
   flex-direction: column;
-
-  ${Smooth}
-
-  &:hover {
-    ${Shadow}
-    transform: translateY(-2px);
-
-    ${Thumbnail}::after {
-      background-color: rgba(0, 0, 0, 0.2);
-    }
-  }
 
   a {
     position: absolute;

@@ -2,48 +2,15 @@ import { countObjectDiff } from 'shared-utils/dist/countObjectDiff'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { FetchPostsReducerState, Action } from './types'
 
-const INITIAL_LIST: Pick<
-  FetchPostsReducerState,
-  'currentIndex' | 'postList' | 'requestStatus'
-> = {
-  currentIndex: 0,
-  postList: [],
-  requestStatus: 'IDLE',
-}
-
 const updateFiltersReducer = (
   state: FetchPostsReducerState,
   action: Action,
 ): FetchPostsReducerState => {
   switch (action.type) {
-    case 'APPLY_FILTERS':
+    case 'SET_STATUS':
       return {
         ...state,
-        ...INITIAL_LIST,
-        filterOptions: {
-          ...state.filterOptions,
-          ...action.filterOptions,
-        },
-      }
-
-    case 'TOGGLE_TAG': {
-      const newState: FetchPostsReducerState = {
-        ...state,
-        ...INITIAL_LIST,
-      }
-      if (state.filterOptions.tags.has(action.tag)) {
-        newState.filterOptions.tags.delete(action.tag)
-        return newState
-      }
-      newState.filterOptions.tags.add(action.tag)
-      return newState
-    }
-
-    case 'APPLY_SORT':
-      return {
-        ...state,
-        ...INITIAL_LIST,
-        sortOptions: action.sortOptions,
+        requestStatus: action.status,
       }
 
     case 'APPEND_POSTS':
@@ -54,16 +21,43 @@ const updateFiltersReducer = (
         requestStatus: action.hasNext ? 'SUCCESSFUL' : 'EXHAUSTED',
       }
 
-    case 'SET_STATUS':
+    case 'APPLY_FILTERS': {
+      const newState: FetchPostsReducerState = {
+        ...state,
+        requestStatus: 'IDLE',
+      }
+
+      if (action.filterOptions) {
+        newState.filterOptions = {
+          ...state.filterOptions,
+          ...action.filterOptions,
+        }
+      }
+
+      if (action.sortOptions) {
+        newState.sortOptions = {
+          ...state.sortOptions,
+          ...action.sortOptions,
+        }
+      }
+
+      return newState
+    }
+
+    case 'SET_POSTS':
       return {
         ...state,
-        requestStatus: action.status,
+        currentIndex: 0,
+        postList: action.posts,
+        requestStatus: action.hasNext ? 'SUCCESSFUL' : 'EXHAUSTED',
       }
 
     case 'RELOAD_LIST':
       return {
         ...state,
-        ...INITIAL_LIST,
+        currentIndex: 0,
+        requestStatus: 'IDLE',
+        postList: [],
       }
 
     default:

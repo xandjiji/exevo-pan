@@ -1,15 +1,7 @@
 export type Action =
   | {
-      type: 'APPLY_FILTERS'
-      filterOptions: Partial<BlogFilterOptions>
-    }
-  | {
-      type: 'TOGGLE_TAG'
-      tag: string
-    }
-  | {
-      type: 'APPLY_SORT'
-      sortOptions: SortOptions
+      type: 'SET_STATUS'
+      status: RequestStatus
     }
   | {
       type: 'APPEND_POSTS'
@@ -17,8 +9,14 @@ export type Action =
       hasNext: boolean
     }
   | {
-      type: 'SET_STATUS'
-      status: RequestStatus
+      type: 'APPLY_FILTERS'
+      filterOptions?: Partial<BlogFilterOptions>
+      sortOptions?: Partial<SortOptions>
+    }
+  | {
+      type: 'SET_POSTS'
+      posts: BlogPost[]
+      hasNext: boolean
     }
   | {
       type: 'RELOAD_LIST'
@@ -42,4 +40,10 @@ export interface FetchPostsProviderProps {
   children: React.ReactNode
   initialPosts: BlogPost[]
   initialIndex: number
+}
+
+export type QueryParams = {
+  pageIndex: number
+  filterOptions: BlogFilterOptions
+  sortOptions: SortOptions
 }

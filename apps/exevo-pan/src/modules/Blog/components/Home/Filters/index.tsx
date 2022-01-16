@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { blogTags } from 'Constants'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
@@ -20,6 +20,26 @@ const Filters = (): JSX.Element => {
     [],
   )
 
+  const [activeTags, setActiveTags] = useState(filterOptions.tags)
+  const toggleTag = useCallback(
+    (toggledTag: string) =>
+      setActiveTags((prevTags) => {
+        const newTags = new Set(prevTags)
+
+        if (prevTags.has(toggledTag)) {
+          newTags.delete(toggledTag)
+        } else {
+          newTags.add(toggledTag)
+        }
+        dispatchFetchPosts({
+          type: 'APPLY_FILTERS',
+          filterOptions: { tags: newTags },
+        })
+        return newTags
+      }),
+    [],
+  )
+
   return (
     <S.Wrapper>
       <S.Title>Filter posts</S.Title>
@@ -29,9 +49,8 @@ const Filters = (): JSX.Element => {
           active={sortOptions.descendingOrder}
           onClick={() =>
             dispatchFetchPosts({
-              type: 'APPLY_SORT',
+              type: 'APPLY_FILTERS',
               sortOptions: {
-                ...sortOptions,
                 descendingOrder: !sortOptions.descendingOrder,
               },
             })
@@ -59,10 +78,8 @@ const Filters = (): JSX.Element => {
             <Tag
               key={id}
               clickable
-              active={filterOptions.tags.has(id)}
-              onClick={() =>
-                dispatchFetchPosts({ type: 'TOGGLE_TAG', tag: id })
-              }
+              active={activeTags.has(id)}
+              onClick={() => toggleTag(id)}
               tagColor={color}
             >
               {name}

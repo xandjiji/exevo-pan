@@ -1,4 +1,11 @@
-import { createContext, useContext, useCallback, useReducer } from 'react'
+import {
+  createContext,
+  useContext,
+  useCallback,
+  useReducer,
+  useEffect,
+  useRef,
+} from 'react'
 import {
   DEFAULT_FILTER_OPTIONS,
   DEFAULT_PAGINATION_OPTIONS,
@@ -10,6 +17,7 @@ import {
   FetchPostsReducerState,
   FetchPostsContextValues,
   FetchPostsProviderProps,
+  QueryParams,
 } from './types'
 
 const defaultReducerState: FetchPostsReducerState = {
@@ -66,6 +74,36 @@ export const FetchPostsProvider = ({
       dispatch({ type: 'SET_STATUS', status: 'ERROR' })
     }
   }, [currentIndex, filterOptions, sortOptions])
+
+  const query = useCallback(
+    async ({ pageIndex, ...queryArgs }: QueryParams) => {
+      dispatch({ type: 'SET_STATUS', status: 'LOADING' })
+
+      try {
+        const { page, hasNext } = await BlogClient.queryBlog({
+          ...queryArgs,
+          paginationOptions: {
+            ...DEFAULT_PAGINATION_OPTIONS,
+            pageIndex,
+          },
+        })
+
+        dispatch({ type: 'SET_POSTS', posts: page, hasNext })
+      } catch (error) {
+        dispatch({ type: 'SET_STATUS', status: 'ERROR' })
+      }
+    },
+    [],
+  )
+
+  const isMounted = useRef(false)
+  useEffect(() => {
+    if (isMounted.current) {
+      query({ pageIndex: 0, filterOptions, sortOptions })
+    } else {
+      isMounted.current = true
+    }
+  }, [filterOptions, sortOptions])
 
   return (
     <FetchPostsContext.Provider
