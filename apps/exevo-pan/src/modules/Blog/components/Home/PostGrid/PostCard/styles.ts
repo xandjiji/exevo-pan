@@ -12,7 +12,7 @@ export const Thumbnail = styled.div<{ seed: number }>`
   width: 100%;
 
   background: var(--primaryVariantHighlight);
-  transition: background 0.2s ease-out;
+  transition: background 0.5s ease-out;
   ${({ seed }) => backgroundStyles[seed % variants]}
 
   display:grid;

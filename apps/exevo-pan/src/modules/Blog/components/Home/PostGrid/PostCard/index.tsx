@@ -14,14 +14,14 @@ const PostCard = ({ seed, postData }: PostCardProps): JSX.Element => {
     translations: { common },
   } = useTranslations()
 
-  const { title, date, slug, description, tags } = postData
+  const { thumbnail, title, date, slug, description, tags } = postData
   const dateObject = useMemo(() => extractDate(date), [date])
 
   return (
     <S.Wrapper>
       <S.Thumbnail seed={seed} suppressHydrationWarning>
         <NextImage
-          src="https://i.imgur.com/5RuluNc.png"
+          src={thumbnail}
           alt={title}
           layout="fixed"
           width={160}
