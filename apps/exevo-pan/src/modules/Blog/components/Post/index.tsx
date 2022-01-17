@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MaterialCard, Smooth } from 'styles'
+import { MaterialCard, InnerPadding, Smooth } from 'styles'
 import { headings } from './headings'
 import { bold } from './bold'
 import { link } from './link'
@@ -10,11 +10,18 @@ import { table } from './table'
 
 export const Wrapper = styled.div`
   ${MaterialCard}
-  padding: 32px 40px;
+  ${InnerPadding}
+  padding-top: 32px;
+  padding-bottom: 32px;
   margin: 0 auto;
-  max-width: clamp(45ch, 50%, 75ch);
 
-  display: grid;
+  position: relative;
+  z-index: 1;
+  width: clamp(45ch, 50%, 75ch);
+  max-width: calc(100% - 40px);
+
+  display: flex;
+  flex-direction: column;
   gap: 16px;
 
   font-size: 16px;

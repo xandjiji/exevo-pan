@@ -1,5 +1,5 @@
 import { css } from 'styled-components'
-import { Code } from 'styles'
+import { Code, CustomScrollbar } from 'styles'
 
 export const code = css`
   pre {
@@ -8,6 +8,9 @@ export const code = css`
     code {
       padding: 16px 24px;
       width: 100%;
+
+      overflow: auto;
+      ${CustomScrollbar}
     }
   }
 
