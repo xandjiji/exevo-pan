@@ -28,7 +28,7 @@ export const ImageWrapper = styled.div`
 `
 
 export const HeroImage = styled(Image)`
-  filter: grayscale(0.75) brightness(175%);
+  filter: grayscale(0.75) brightness(150%);
   opacity: 0.15;
 `
 
