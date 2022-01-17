@@ -77,5 +77,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
       },
     },
+    revalidate: 60,
   }
 }
