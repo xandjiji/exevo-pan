@@ -10,9 +10,13 @@ export const Thumbnail = styled.div<{ seed: number }>`
   flex-shrink: 0;
   height: 240px;
   width: 100%;
+
   background: var(--primaryVariantHighlight);
   transition: background 0.2s ease-out;
   ${({ seed }) => backgroundStyles[seed % variants]}
+
+  display:grid;
+  place-content: center;
 
   img {
     object-fit: scale-down;

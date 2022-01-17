@@ -21,9 +21,11 @@ const PostCard = ({ seed, postData }: PostCardProps): JSX.Element => {
     <S.Wrapper>
       <S.Thumbnail seed={seed} suppressHydrationWarning>
         <NextImage
-          src="https://i.imgur.com/fk8gZ4i.png"
+          src="https://i.imgur.com/5RuluNc.png"
           alt={title}
-          layout="fill"
+          layout="fixed"
+          width={160}
+          height={160}
         />
       </S.Thumbnail>
       <S.Body>
