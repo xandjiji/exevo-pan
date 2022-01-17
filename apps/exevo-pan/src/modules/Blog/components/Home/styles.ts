@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { InnerContainer } from 'styles'
+import { Hero as BaseHero } from '..'
 
 export const Wrapper = styled.main`
   ${InnerContainer}
@@ -8,4 +9,20 @@ export const Wrapper = styled.main`
   grid-template-columns: 224px 1fr 320px;
   align-items: start;
   grid-gap: 32px;
+`
+
+export const Hero = styled(BaseHero)`
+  h1 {
+    font-size: 48px;
+  }
+
+  @media (min-width: 768px) {
+    .hero-image {
+      margin-left: -112px;
+    }
+
+    h1 {
+      font-size: 64px;
+    }
+  }
 `
