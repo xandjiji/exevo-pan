@@ -1,3 +1,4 @@
+import { Hero } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -17,6 +18,7 @@ const components = {
 type Props = {
   mdxSource: MDXRemoteSerializeResult
   metaData: Record<string, string>
+  translations: any
 }
 
 type PathItem = {
@@ -26,11 +28,17 @@ type PathItem = {
   locale: string
 }
 
-export default function PostPage({ mdxSource, metaData }: Props): JSX.Element {
+export default function PostPage({
+  mdxSource,
+  metaData,
+  translations,
+}: Props): JSX.Element {
   const postRoute = `${routes.BLOG}/${metaData.slug}`
   const pageUrl = buildUrl(postRoute)
+
+  const [day, month, year] = metaData.date.split('-')
   return (
-    <div>
+    <>
       <Head>
         <title>{metaData.title} - Exevo Pan</title>
         <meta name="title" content={metaData.title} />
@@ -55,9 +63,16 @@ export default function PostPage({ mdxSource, metaData }: Props): JSX.Element {
       </Head>
 
       <Main>
+        <Hero
+          title={metaData.title}
+          subtitle={`${
+            translations.common.FullMonth[+month - 1]
+          } ${day}, ${year}`}
+          src={metaData.thumbnail}
+        />
         <MDXRemote {...mdxSource} components={components} />
       </Main>
-    </div>
+    </>
   )
 }
 
