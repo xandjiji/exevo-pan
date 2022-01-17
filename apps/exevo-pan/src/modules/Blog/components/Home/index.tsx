@@ -6,7 +6,7 @@ import { HomeProps } from './types'
 
 const Home = ({ initialIndex, initialPosts }: HomeProps): JSX.Element => (
   <FetchPostsProvider initialIndex={initialIndex} initialPosts={initialPosts}>
-    <S.Hero title="Blog" src="https://i.imgur.com/5RuluNc.png" />
+    <S.Hero title="Blog" src="https://i.imgur.com/Jjh4f3q.png" />
     <S.Wrapper>
       <Filters />
       <PostGrid />
