@@ -1,5 +1,12 @@
 import styled from 'styled-components'
-import { MaterialCard, Smooth, Code } from 'styles'
+import { MaterialCard, Smooth } from 'styles'
+import { headings } from './headings'
+import { bold } from './bold'
+import { link } from './link'
+import { code } from './code'
+import { lists } from './lists'
+import { blockquote } from './blockquote'
+import { table } from './table'
 
 export const Wrapper = styled.div`
   ${MaterialCard}
@@ -15,53 +22,17 @@ export const Wrapper = styled.div`
   font-weight: 300;
   color: var(--onSurface);
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-size: 32px;
-    font-weight: 300;
-    letter-spacing: 0.5px;
-  }
+  ${Smooth}
 
-  strong {
-    font-weight: 400;
-  }
-
-  a {
-    position: relative;
-    color: var(--primary);
-    filter: brightness(130%);
-
+  * {
     ${Smooth}
-
-    &::selection {
-      background: var(--primary);
-      color: var(--onPrimary);
-    }
-
-    &:hover {
-      opacity: 0.75;
-    }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: calc(100% - 1px);
-      left: 0;
-      width: 16px;
-      height: 1px;
-      background-color: var(--primary);
-      opacity: 0.75;
-    }
   }
 
-  code {
-    ${Code}
-    padding: 4px 12px;
-    font-size: 16px;
-    letter-spacing: 0.5px;
-  }
+  ${headings}
+  ${bold}
+  ${link}
+  ${code}
+  ${lists}
+  ${blockquote}
+  ${table}
 `
