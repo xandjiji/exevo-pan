@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { InnerContainer } from 'styles'
 import { Hero as BaseHero } from '..'
+import BaseNewsletter from '../Newsletter'
 
 export const Wrapper = styled.main`
   ${InnerContainer}
@@ -25,4 +26,9 @@ export const Hero = styled(BaseHero)`
       font-size: 64px;
     }
   }
+`
+
+export const Newsletter = styled(BaseNewsletter)`
+  position: sticky;
+  top: 120px;
 `

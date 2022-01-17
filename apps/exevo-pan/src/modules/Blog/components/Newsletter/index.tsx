@@ -1,9 +1,11 @@
 import * as S from './styles'
 
-const Newsletter = (): JSX.Element => {
+const Newsletter = (
+  props: React.HTMLAttributes<HTMLDivElement>,
+): JSX.Element => {
   console.log('Newsletter')
   return (
-    <S.Wrapper>
+    <S.Wrapper {...props}>
       <h2>Newsletter</h2>
     </S.Wrapper>
   )

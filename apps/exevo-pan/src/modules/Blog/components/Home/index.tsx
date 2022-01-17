@@ -1,5 +1,4 @@
 import { FetchPostsProvider } from '../../contexts/useFetchPosts'
-import { Newsletter } from '..'
 import Filters from './Filters'
 import PostGrid from './PostGrid'
 import * as S from './styles'
@@ -11,7 +10,7 @@ const Home = ({ initialIndex, initialPosts }: HomeProps): JSX.Element => (
     <S.Wrapper>
       <Filters />
       <PostGrid />
-      <Newsletter />
+      <S.Newsletter />
     </S.Wrapper>
   </FetchPostsProvider>
 )

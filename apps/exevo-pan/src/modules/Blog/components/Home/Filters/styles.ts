@@ -1,9 +1,9 @@
 import styled, { css } from 'styled-components'
 import { Switch as BaseSwitch, Input as BaseInput } from 'components/Atoms'
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.aside`
   position: sticky;
-  top: 0;
+  top: 120px;
 
   display: grid;
   gap: 16px;
