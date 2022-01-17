@@ -1,4 +1,4 @@
-import { Hero } from 'modules/Blog'
+import { Hero, Post } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -12,6 +12,8 @@ import { routes } from 'Constants'
 import { common } from 'locales'
 
 const components = {
+  h1: 'h2',
+  wrapper: Post.Wrapper,
   Button: dynamic(() => import('components/Atoms/Button')),
 }
 
