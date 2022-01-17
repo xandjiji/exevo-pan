@@ -15,6 +15,7 @@ const components = {
   h1: 'h2',
   wrapper: Post.Wrapper,
   Button: dynamic(() => import('components/Atoms/Button')),
+  table: Post.Table,
 }
 
 type Props = {

@@ -6,7 +6,6 @@ import { link } from './link'
 import { code } from './code'
 import { lists } from './lists'
 import { blockquote } from './blockquote'
-import { table } from './table'
 
 export const Wrapper = styled.div`
   ${MaterialCard}
@@ -41,5 +40,6 @@ export const Wrapper = styled.div`
   ${code}
   ${lists}
   ${blockquote}
-  ${table}
 `
+
+export { Table } from './Table'
