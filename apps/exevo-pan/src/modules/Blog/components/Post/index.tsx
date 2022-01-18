@@ -45,5 +45,5 @@ export const Wrapper = styled.div`
 
 export { ContentWrapper } from './contentWrapper'
 export { default as Pillar } from './Pillar'
-export { Section } from './Section'
-export { Table } from './Table'
+export { default as Section } from './Section'
+export { default as Table } from './Table'

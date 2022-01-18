@@ -1,12 +1,12 @@
 import styled from 'styled-components'
 import { CustomScrollbar } from 'styles'
 
-const Wrapper = styled.div`
+export const Wrapper = styled.div`
   overflow: auto;
   ${CustomScrollbar}
 `
 
-const BaseTable = styled.table`
+export const BaseTable = styled.table`
   width: 100%;
   border-collapse: collapse;
 
@@ -46,11 +46,3 @@ const BaseTable = styled.table`
     color: var(--onSurface);
   }
 `
-
-export const Table = (
-  props: React.HTMLAttributes<HTMLTableElement>,
-): JSX.Element => (
-  <Wrapper>
-    <BaseTable {...props} />
-  </Wrapper>
-)
