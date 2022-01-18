@@ -1,4 +1,4 @@
-import { Hero, Post, parseMarkdownSections } from 'modules/Blog'
+import { Post, parseMarkdownSections } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -98,7 +98,7 @@ export default function PostPage({
       </Head>
 
       <Main>
-        <Hero
+        <Post.Hero
           title={metaData.title}
           subtitle={`${
             translations.common.FullMonth[+month - 1]
@@ -108,11 +108,6 @@ export default function PostPage({
         <Post.ContentWrapper>
           <Post.Pillar titles={titles} />
           <MDXRemote {...mdxSource} components={components} />
-          {/* <div>
-            {titles.map((title) => (
-              <p key={title}>{title}</p>
-            ))}
-          </div> */}
         </Post.ContentWrapper>
       </Main>
     </>

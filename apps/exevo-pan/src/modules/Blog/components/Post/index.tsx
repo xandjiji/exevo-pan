@@ -44,6 +44,7 @@ export const Wrapper = styled.div`
 `
 
 export { default as ContentWrapper } from './ContentWrapper'
+export { default as Hero } from './Hero'
 export { default as Pillar } from './Pillar'
 export { default as Section } from './Section'
 export { default as Table } from './Table'
