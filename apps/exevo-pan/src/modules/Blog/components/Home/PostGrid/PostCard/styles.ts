@@ -15,7 +15,7 @@ export const Thumbnail = styled.div`
     linear-gradient(90deg, var(--primaryVariant) 1px, transparent 1px);
   background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
   background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
-  transition: background 0.5s ease-out;
+  transition: background 0.2s ease-out;
 
   display: grid;
   place-content: center;
