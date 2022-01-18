@@ -90,9 +90,9 @@ export const Ul = styled.ul`
 `
 
 export const Li = styled.li`
-  ${Smooth}
-  flex:none;
+  flex: none;
   height: min-content;
+  ${Smooth}
 
   a {
     font-size: 12px;
