@@ -46,7 +46,7 @@ const Heading = styled.h2`
 const generateId = (title: string): string =>
   title
     .toString()
-    .replaceAll(/\s/g, '-')
+    .replace(/\s/g, '-')
     .split('-')
     .map((token) => token.replace(/\W/g, ''))
     .join('-')
