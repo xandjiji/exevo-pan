@@ -37,7 +37,6 @@ export default {
     title: 'Información del contacto',
   },
   PillarTitle: 'Índice',
-  AnchorIconLabel: 'Copiar link',
   CharacterTooltip: 'Ir a la página del personaje',
   HeroTitle: 'Sobre nosotros',
 }

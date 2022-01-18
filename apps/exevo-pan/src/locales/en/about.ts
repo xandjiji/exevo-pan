@@ -37,7 +37,6 @@ export default {
     title: 'Contact Information',
   },
   PillarTitle: 'Contents',
-  AnchorIconLabel: 'Copy link',
   CharacterTooltipLabel: 'Go to character page',
   HeroTitle: 'About us',
 }

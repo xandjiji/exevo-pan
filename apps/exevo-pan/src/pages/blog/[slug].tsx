@@ -13,6 +13,7 @@ import { common } from 'locales'
 
 const components = {
   h1: 'h2',
+  h2: Post.Section,
   wrapper: Post.Wrapper,
   Button: dynamic(() => import('components/Atoms/Button')),
   table: Post.Table,
@@ -63,6 +64,17 @@ export default function PostPage({
         <link rel="alternate" hrefLang="es" href={buildUrl(postRoute, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(postRoute, 'pl')} />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <style
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: `
+            html {
+                scroll-padding-top: 104px;
+            }
+         `,
+          }}
+        />
       </Head>
 
       <Main>

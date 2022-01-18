@@ -42,4 +42,5 @@ export const Wrapper = styled.div`
   ${blockquote}
 `
 
+export { Section } from './Section'
 export { Table } from './Table'

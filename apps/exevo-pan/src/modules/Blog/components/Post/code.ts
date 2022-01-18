@@ -16,8 +16,8 @@ export const code = css`
 
   code {
     ${Code}
-    padding: 4px 12px;
-    font-size: 16px;
+    padding: 2px 8px;
+    font-size: 14px;
     letter-spacing: 0.5px;
   }
 `

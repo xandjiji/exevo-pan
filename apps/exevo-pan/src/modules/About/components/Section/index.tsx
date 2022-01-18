@@ -10,7 +10,7 @@ const Section = ({
   ...props
 }: SectionProps): JSX.Element => {
   const {
-    translations: { about },
+    translations: { about, common },
   } = useTranslations()
 
   return (
@@ -18,7 +18,7 @@ const Section = ({
       <S.Title>
         <a href={`#${id}`}>{about[title].title}</a>
         <S.AnchorIcon
-          aria-label={about.AnchorIconLabel}
+          aria-label={common.AnchorIconLabel}
           onClick={() => CopyToClipboard(id)}
         />
       </S.Title>

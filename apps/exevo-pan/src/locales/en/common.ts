@@ -143,4 +143,5 @@ export default {
     close: 'Close',
   },
   FooterTitle: 'Exevo Pan - made by',
+  AnchorIconLabel: 'Copy link',
 }

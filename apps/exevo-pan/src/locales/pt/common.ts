@@ -143,4 +143,5 @@ export default {
     close: 'Fechar',
   },
   FooterTitle: 'Exevo Pan - criado por',
+  AnchorIconLabel: 'Copiar link',
 }
