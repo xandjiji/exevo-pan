@@ -7,9 +7,12 @@ export const generateNavId = (title: string): string => `${title}-nav`
 const isDesktop = () => window.matchMedia('(min-width: 768px)').matches
 
 export const debouncedScrollIntoView = debounce((title: string) => {
-  if (!isDesktop) {
+  if (!isDesktop()) {
     const navElement = document.getElementById(generateNavId(title))
 
-    navElement?.scrollIntoView({ behavior: 'smooth' })
+    if (navElement) {
+      const { offsetLeft, parentElement } = navElement
+      parentElement?.scroll({ left: offsetLeft, behavior: 'smooth' })
+    }
   }
 }, DEBOUNCE_DELAY)
