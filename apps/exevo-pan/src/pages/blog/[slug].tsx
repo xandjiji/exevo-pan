@@ -117,11 +117,11 @@ export default function PostPage({
         <Post.ContentWrapper>
           <Post.Pillar titles={titles} />
           <MDXRemote {...mdxSource} components={components} />
-          <div>
+          {/* <div>
             {titles.map((title) => (
               <p key={title}>{title}</p>
             ))}
-          </div>
+          </div> */}
         </Post.ContentWrapper>
       </Main>
     </>
