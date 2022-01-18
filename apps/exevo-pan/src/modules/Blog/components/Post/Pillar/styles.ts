@@ -91,6 +91,8 @@ export const Ul = styled.ul`
 
 export const Li = styled.li`
   ${Smooth}
+  flex:none;
+  height: min-content;
 
   a {
     font-size: 12px;
