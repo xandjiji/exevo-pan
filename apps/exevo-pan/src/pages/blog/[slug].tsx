@@ -1,4 +1,4 @@
-import { Hero, Post } from 'modules/Blog'
+import { Hero, Post, parseMarkdownSections } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -32,15 +32,6 @@ type PathItem = {
   locale: string
 }
 
-const getTitlesFromSource = (src: string): string[] =>
-  src
-    .split('),mdx(')
-    .filter((value) => value.includes('h2'))
-    .map((value) => {
-      const [, , , title] = value.split('\\"')
-      return title
-    })
-
 export default function PostPage({
   mdxSource,
   metaData,
@@ -51,7 +42,7 @@ export default function PostPage({
 
   const src = JSON.stringify(mdxSource)
 
-  const titles = getTitlesFromSource(src)
+  const titles = parseMarkdownSections(src)
 
   const [day, month, year] = metaData.date.split('-')
   return (
