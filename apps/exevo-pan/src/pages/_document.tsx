@@ -53,10 +53,6 @@ export default class MyDocument extends Document {
           />
           <link rel="icon" href="/favicon.ico" />
 
-          <meta property="og:image" content="/preview.png" />
-          <meta property="twitter:image" content="/preview.png" />
-          <meta property="twitter:card" content="summary_large_image" />
-
           <meta
             name="google-site-verification"
             content={google.SITE_VERIFICATION}

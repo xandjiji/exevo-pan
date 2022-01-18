@@ -59,9 +59,21 @@ export default function PostPage({
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <meta property="og:image" content={metaData.thumbnail} />
-        <meta property="twitter:image" content={metaData.thumbnail} />
-        <meta property="twitter:card" content={metaData.thumbnail} />
+        <meta
+          key="preview-1"
+          property="og:image"
+          content={metaData.thumbnail}
+        />
+        <meta
+          key="preview-2"
+          property="twitter:image"
+          content={metaData.thumbnail}
+        />
+        <meta
+          key="preview-3"
+          property="twitter:card"
+          content={metaData.thumbnail}
+        />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(postRoute, 'pt')} />
