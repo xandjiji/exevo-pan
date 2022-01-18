@@ -1,6 +1,5 @@
 import { countObjectDiff } from 'shared-utils/dist/countObjectDiff'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
-import { getRandomSeed } from './utils'
 import { FetchPostsReducerState, Action } from './types'
 
 const updateFiltersReducer = (
@@ -51,7 +50,6 @@ const updateFiltersReducer = (
         currentIndex: 1,
         postList: action.posts,
         requestStatus: action.hasNext ? 'SUCCESSFUL' : 'EXHAUSTED',
-        backgroundSeed: getRandomSeed(),
       }
 
     case 'RELOAD_LIST':
@@ -60,7 +58,6 @@ const updateFiltersReducer = (
         currentIndex: 0,
         requestStatus: 'IDLE',
         postList: [],
-        backgroundSeed: getRandomSeed(),
       }
 
     default:

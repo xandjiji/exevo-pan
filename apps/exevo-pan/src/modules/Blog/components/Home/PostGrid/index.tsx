@@ -5,7 +5,6 @@ import * as S from './styles'
 import { PostGridViewProps } from './types'
 
 const PostGridView = ({
-  seed,
   postList,
   requestStatus,
   observerRef,
@@ -14,8 +13,8 @@ const PostGridView = ({
 
   return (
     <S.Grid>
-      {postList.map((postData, index) => (
-        <PostCard key={postData.slug} seed={seed + index} postData={postData} />
+      {postList.map((postData) => (
+        <PostCard key={postData.slug} postData={postData} />
       ))}
       {noResults && (
         <S.EmptyState
@@ -31,8 +30,7 @@ const PostGridView = ({
 }
 
 const PostGridController = (): JSX.Element => {
-  const { postList, backgroundSeed, requestStatus, fetchNextPage } =
-    useFetchPosts()
+  const { postList, requestStatus, fetchNextPage } = useFetchPosts()
 
   const observer = useRef<IntersectionObserver | null>(null)
   const lastFactRef = useCallback(
@@ -53,7 +51,6 @@ const PostGridController = (): JSX.Element => {
   return (
     <PostGridView
       postList={postList}
-      seed={backgroundSeed}
       requestStatus={requestStatus}
       observerRef={requestStatus === 'EXHAUSTED' ? undefined : lastFactRef}
     />

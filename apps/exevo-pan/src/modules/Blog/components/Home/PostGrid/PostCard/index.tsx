@@ -9,7 +9,7 @@ import { PostCardProps } from './types'
 
 const { tagById } = blogTags
 
-const PostCard = ({ seed, postData }: PostCardProps): JSX.Element => {
+const PostCard = ({ postData }: PostCardProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -19,7 +19,7 @@ const PostCard = ({ seed, postData }: PostCardProps): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Thumbnail seed={seed} suppressHydrationWarning>
+      <S.Thumbnail suppressHydrationWarning>
         <NextImage
           src={thumbnail}
           alt={title}

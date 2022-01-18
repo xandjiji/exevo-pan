@@ -13,7 +13,6 @@ import {
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { BlogClient } from 'services'
 import FetchPostReducer from './reducer'
-import { getRandomSeed } from './utils'
 import {
   FetchPostsReducerState,
   FetchPostsContextValues,
@@ -28,7 +27,6 @@ const defaultReducerState: FetchPostsReducerState = {
   activeFilterCount: 0,
   sortOptions: DEFAULT_SORT_OPTIONS,
   requestStatus: 'IDLE',
-  backgroundSeed: getRandomSeed(),
 }
 
 const FetchPostsContext = createContext<FetchPostsContextValues>({
@@ -50,7 +48,6 @@ export const FetchPostsProvider = ({
       activeFilterCount,
       sortOptions,
       requestStatus,
-      backgroundSeed,
     },
     dispatch,
   ] = useReducer(FetchPostReducer, {
@@ -117,7 +114,6 @@ export const FetchPostsProvider = ({
         activeFilterCount,
         sortOptions,
         requestStatus,
-        backgroundSeed,
         fetchNextPage,
         dispatchFetchPosts: dispatch,
       }}

@@ -1,21 +1,23 @@
 import styled from 'styled-components'
 import { MaterialCard } from 'styles'
 import BaseTag from '../../../Tag'
-import { backgroundStyles } from './backgrounds'
 
-const variants = backgroundStyles.length
-
-export const Thumbnail = styled.div<{ seed: number }>`
+export const Thumbnail = styled.div`
   position: relative;
   flex-shrink: 0;
   height: 240px;
   width: 100%;
 
   background: var(--primaryVariantHighlight);
+  background-image: linear-gradient(var(--primaryVariant) 2px, transparent 2px),
+    linear-gradient(90deg, var(--primaryVariant) 2px, transparent 2px),
+    linear-gradient(var(--primaryVariant) 1px, transparent 1px),
+    linear-gradient(90deg, var(--primaryVariant) 1px, transparent 1px);
+  background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+  background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
   transition: background 0.5s ease-out;
-  ${({ seed }) => backgroundStyles[seed % variants]}
 
-  display:grid;
+  display: grid;
   place-content: center;
 
   img {
