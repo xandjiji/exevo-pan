@@ -7,7 +7,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { endpoints, routes } from 'Constants'
-import { common, homepage, about } from 'locales'
+import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
