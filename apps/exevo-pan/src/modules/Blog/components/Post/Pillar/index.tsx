@@ -1,9 +1,10 @@
+import { useCurrentSection } from '../../../contexts/useCurrentSection'
 import { generateSectionId } from '../../../utils'
 import * as S from './styles'
 import { PillarProps } from './types'
 
 const Pillar = ({ titles, ...props }: PillarProps): JSX.Element => {
-  console.log(titles)
+  const { currentSection } = useCurrentSection()
 
   return (
     <S.Nav {...props}>
@@ -11,7 +12,14 @@ const Pillar = ({ titles, ...props }: PillarProps): JSX.Element => {
 
       <S.Ul>
         {titles.map((title) => (
-          <S.Li>
+          <S.Li
+            aria-current={
+              currentSection && currentSection.title === title
+                ? 'step'
+                : undefined
+            }
+            key={title}
+          >
             <a href={`#${generateSectionId(title.trim())}`}>{title}</a>
           </S.Li>
         ))}

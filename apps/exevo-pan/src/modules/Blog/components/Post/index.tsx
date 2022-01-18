@@ -43,7 +43,7 @@ export const Wrapper = styled.div`
   ${blockquote}
 `
 
-export { ContentWrapper } from './contentWrapper'
+export { default as ContentWrapper } from './ContentWrapper'
 export { default as Pillar } from './Pillar'
 export { default as Section } from './Section'
 export { default as Table } from './Table'
