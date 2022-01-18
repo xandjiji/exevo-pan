@@ -32,6 +32,15 @@ type PathItem = {
   locale: string
 }
 
+const getTitlesFromSource = (src: string): string[] =>
+  src
+    .split('),mdx(')
+    .filter((value) => value.includes('h2'))
+    .map((value) => {
+      const [, , , title] = value.split('\\"')
+      return title
+    })
+
 export default function PostPage({
   mdxSource,
   metaData,
@@ -39,6 +48,10 @@ export default function PostPage({
 }: Props): JSX.Element {
   const postRoute = `${routes.BLOG}/${metaData.slug}`
   const pageUrl = buildUrl(postRoute)
+
+  const src = JSON.stringify(mdxSource)
+
+  const titles = getTitlesFromSource(src)
 
   const [day, month, year] = metaData.date.split('-')
   return (
@@ -101,7 +114,15 @@ export default function PostPage({
           } ${day}, ${year}`}
           src={metaData.thumbnail}
         />
-        <MDXRemote {...mdxSource} components={components} />
+        <Post.ContentWrapper>
+          <Post.Pillar titles={titles} />
+          <MDXRemote {...mdxSource} components={components} />
+          <div>
+            {titles.map((title) => (
+              <p key={title}>{title}</p>
+            ))}
+          </div>
+        </Post.ContentWrapper>
       </Main>
     </>
   )

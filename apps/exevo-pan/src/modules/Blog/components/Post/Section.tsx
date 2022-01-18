@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { copyToClipboard } from 'utils'
 import { Clickable } from 'styles'
 import AnchorSvg from 'assets/svgs/anchor.svg'
+import { generateSectionId } from '../../utils'
 
 const Wrapper = styled.div`
   display: flex;
@@ -43,14 +44,6 @@ const Heading = styled.h2`
   flex-grow: 1;
 `
 
-const generateId = (title: string): string =>
-  title
-    .toString()
-    .replace(/\s/g, '-')
-    .split('-')
-    .map((token) => token.replace(/\W/g, ''))
-    .join('-')
-
 export const CopyToClipboard = (id: string): void =>
   copyToClipboard(
     `https://${window.location.hostname}${window.location.pathname}#${id}`,
@@ -64,7 +57,7 @@ export const Section = ({
     translations: { common },
   } = useTranslations()
 
-  const [anchorId] = useState(generateId(children as string))
+  const [anchorId] = useState(generateSectionId(children as string))
 
   return (
     <Wrapper>

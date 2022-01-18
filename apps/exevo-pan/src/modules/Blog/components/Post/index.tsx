@@ -16,8 +16,9 @@ export const Wrapper = styled.div`
 
   position: relative;
   z-index: 1;
+  flex-shrink: 0;
   width: clamp(45ch, 50%, 75ch);
-  max-width: calc(100% - 40px);
+  max-width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -42,5 +43,7 @@ export const Wrapper = styled.div`
   ${blockquote}
 `
 
+export { ContentWrapper } from './contentWrapper'
+export { default as Pillar } from './Pillar'
 export { Section } from './Section'
 export { Table } from './Table'
