@@ -12,6 +12,7 @@ export const Wrapper = styled.section`
 export const Title = styled.h2`
   font-size: 24px;
   font-weight: 400;
+  color: var(--onSurface);
 `
 
 export const Subtitle = styled.p`
