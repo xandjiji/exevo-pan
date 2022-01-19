@@ -10,7 +10,7 @@ const PostGridView = ({
   requestStatus,
   observerRef,
 }: PostGridViewProps): JSX.Element => {
-  const noResults = requestStatus === 'EXHAUSTED' && !postList.length
+  const noResults = requestStatus !== 'LOADING' && !postList.length
 
   return (
     <S.Grid empty={noResults}>
