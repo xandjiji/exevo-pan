@@ -1,5 +1,6 @@
-export interface PostCardProps {
+export interface PostCardProps extends React.HTMLAttributes<HTMLDivElement> {
   postData: BlogPost
+  as?: React.ElementType
 }
 
 export type DateObject = {

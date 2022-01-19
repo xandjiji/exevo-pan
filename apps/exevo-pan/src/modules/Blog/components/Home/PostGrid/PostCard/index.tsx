@@ -9,7 +9,7 @@ import { PostCardProps } from './types'
 
 const { tagById } = blogTags
 
-const PostCard = ({ postData }: PostCardProps): JSX.Element => {
+const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -18,7 +18,7 @@ const PostCard = ({ postData }: PostCardProps): JSX.Element => {
   const dateObject = useMemo(() => extractDate(date), [date])
 
   return (
-    <S.Wrapper>
+    <S.Wrapper {...props}>
       <S.Thumbnail suppressHydrationWarning>
         <NextImage
           src={thumbnail}

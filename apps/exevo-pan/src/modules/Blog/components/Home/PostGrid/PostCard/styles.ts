@@ -25,7 +25,7 @@ export const Thumbnail = styled.div`
   }
 `
 
-export const Wrapper = styled.li`
+export const Wrapper = styled.div`
   ${MaterialCard}
   padding: 0;
   box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.09);

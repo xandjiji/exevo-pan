@@ -15,7 +15,7 @@ const PostGridView = ({
   return (
     <S.Grid empty={noResults}>
       {postList.map((postData) => (
-        <PostCard key={postData.slug} postData={postData} />
+        <PostCard key={postData.slug} as="li" postData={postData} />
       ))}
       {noResults && (
         <EmptyState
