@@ -1,4 +1,5 @@
 import { useRef, useCallback } from 'react'
+import EmptyState from 'components/EmptyState'
 import PostCard from './PostCard'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import * as S from './styles'
@@ -12,12 +13,12 @@ const PostGridView = ({
   const noResults = requestStatus === 'EXHAUSTED' && !postList.length
 
   return (
-    <S.Grid>
+    <S.Grid empty={noResults}>
       {postList.map((postData) => (
         <PostCard key={postData.slug} postData={postData} />
       ))}
       {noResults && (
-        <S.EmptyState
+        <EmptyState
           text={{
             content: 'No posts were found',
             size: 32,
