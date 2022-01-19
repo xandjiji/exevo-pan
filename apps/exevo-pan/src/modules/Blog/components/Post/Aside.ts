@@ -7,7 +7,7 @@ const Aside = styled.aside`
   width: 100%;
   z-index: 5;
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     width: fit-content;
   }
 `

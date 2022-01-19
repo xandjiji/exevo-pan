@@ -1,9 +1,6 @@
 import styled from 'styled-components'
 import BaseNewsletter from '../Newsletter'
 
-const Newsletter = styled(BaseNewsletter)`
-  /*   flex: none;
-  width: 100%; */
-`
+const Newsletter = styled(BaseNewsletter)``
 
 export default Newsletter

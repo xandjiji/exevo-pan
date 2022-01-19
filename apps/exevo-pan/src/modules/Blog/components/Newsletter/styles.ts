@@ -42,9 +42,11 @@ export const Label = styled.label``
 
 export const Button = styled(BaseButton)`
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
   gap: 16px;
+  white-space: nowrap;
 `
 
 export const LetterImage = styled(Image).attrs({

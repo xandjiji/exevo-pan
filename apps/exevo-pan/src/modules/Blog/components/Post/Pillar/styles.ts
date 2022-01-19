@@ -18,7 +18,7 @@ export const Nav = styled.nav`
   background-color: var(--darkerPrimary);
   ${Shadow}
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     position: unset;
     padding: 0;
 
@@ -36,7 +36,7 @@ export const MainTitle = styled.span`
   font-size: 16px;
   color: var(--onPrimary);
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     margin: 0 0 12px 0;
     color: var(--onSurface);
   }
@@ -71,7 +71,7 @@ export const Ul = styled.ul`
     pointer-events: none;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     padding: 6px 12px;
     margin: 0;
     display: block;
@@ -118,7 +118,7 @@ export const Li = styled.li`
     }
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1024px) {
     a,
     &::before {
       color: var(--onSurface);

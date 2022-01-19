@@ -12,10 +12,17 @@ export const Wrapper = styled.div`
   gap: 32px;
 
   @media (min-width: 768px) {
-    flex-direction: row;
+    margin: 0 auto;
+    max-width: 640px;
+  }
+
+  @media (min-width: 1024px) {
+    margin: unset;
+    max-width: unset;
     align-items: unset;
     justify-content: unset;
 
+    flex-direction: row;
     display: grid;
 
     grid-template-columns: 1fr clamp(45ch, 50%, 75ch) 1fr;
