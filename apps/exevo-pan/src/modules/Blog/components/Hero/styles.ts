@@ -37,10 +37,6 @@ export const TitleWrapper = styled.div`
   gap: 16px;
   position: relative;
   z-index: 1;
-
-  @media (min-width: 768px) {
-    gap: 48px;
-  }
 `
 
 export const Title = styled.h1`
