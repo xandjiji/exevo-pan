@@ -21,7 +21,15 @@ const Left = styled(Aside)`
 
   @media (min-width: 1024px) {
     flex-direction: column;
-    max-width: 280px;
+    max-width: 172px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 216px;
+  }
+
+  @media (min-width: 1600px) {
+    max-width: 276px;
   }
 `
 
