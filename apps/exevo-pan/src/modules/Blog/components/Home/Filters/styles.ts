@@ -1,12 +1,11 @@
 import styled, { css } from 'styled-components'
 import { Switch as BaseSwitch, Input as BaseInput } from 'components/Atoms'
 
-export const Wrapper = styled.aside`
-  position: sticky;
-  top: 120px;
-
+export const Wrapper = styled.section`
   display: grid;
   gap: 16px;
+  flex-shrink: 0;
+  max-width: 200px;
 `
 
 export const Title = styled.h2`

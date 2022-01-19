@@ -1,15 +1,31 @@
 import styled from 'styled-components'
 import { InnerContainer } from 'styles'
 import BaseHero from '../Hero'
-import BaseNewsletter from '../Newsletter'
 
 export const Wrapper = styled.main`
   ${InnerContainer}
+  padding-bottom: 32px;
 
-  display: grid;
-  grid-template-columns: 224px 1fr 320px;
-  align-items: start;
-  grid-gap: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @media (min-width: 1024px) {
+    flex-direction: row-reverse;
+  }
+`
+
+export const Aside = styled.aside`
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @media (min-width: 1024px) {
+    position: sticky;
+    top: 120px;
+    flex-shrink: 0;
+    height: min-content;
+  }
 `
 
 export const Hero = styled(BaseHero)`
@@ -26,9 +42,4 @@ export const Hero = styled(BaseHero)`
       font-size: 64px;
     }
   }
-`
-
-export const Newsletter = styled(BaseNewsletter)`
-  position: sticky;
-  top: 120px;
 `
