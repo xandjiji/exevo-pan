@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Smooth, Shadow } from 'styles'
 import BaseTag from '../../../Tag'
 
 export const Thumbnail = styled.div`
@@ -27,15 +27,18 @@ export const Thumbnail = styled.div`
 
 export const Wrapper = styled.div`
   ${MaterialCard}
-  padding: 0;
-  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.09);
-
   position: relative;
-  overflow: hidden;
-  list-style-type: none;
+  top: 0;
+  padding: 0;
 
   display: flex;
   flex-direction: column;
+
+  overflow: hidden;
+  list-style-type: none;
+
+  box-shadow: 2px 2px 4px 2px rgba(0, 0, 0, 0.09);
+  ${Smooth}
 
   a {
     position: absolute;
@@ -44,6 +47,15 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     color: transparent;
+  }
+
+  &:hover {
+    top: -3px;
+    ${Shadow}
+  }
+
+  &:active {
+    box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
 `
 
