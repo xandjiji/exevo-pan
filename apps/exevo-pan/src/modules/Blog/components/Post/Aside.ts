@@ -12,6 +12,7 @@ const Aside = styled.aside`
     top: 88px;
     z-index: 5;
     width: fit-content;
+    max-width: 280px;
   }
 `
 
