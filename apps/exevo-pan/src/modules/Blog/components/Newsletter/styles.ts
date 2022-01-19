@@ -7,6 +7,7 @@ import LetterPng from 'assets/letter.png'
 
 export const Wrapper = styled.section`
   ${MaterialCard}
+  position: relative;
   padding: 16px;
   background-color: var(--primaryVariant);
 

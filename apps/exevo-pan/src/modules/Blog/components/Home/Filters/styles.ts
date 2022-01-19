@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import { Switch as BaseSwitch, Input as BaseInput } from 'components/Atoms'
 
 export const Wrapper = styled.section`
+  padding-top: 8px;
   display: grid;
   gap: 16px;
   flex-shrink: 0;
@@ -9,7 +10,7 @@ export const Wrapper = styled.section`
 `
 
 export const Title = styled.h2`
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 400;
 `
 

@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { Accordion } from 'components/Atoms'
 import { blogTags } from 'Constants'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
@@ -41,53 +42,53 @@ const Filters = (): JSX.Element => {
   )
 
   return (
-    <S.Wrapper>
-      <S.Title>Filter posts</S.Title>
+    <Accordion title={<S.Title>Filter posts</S.Title>}>
+      <S.Wrapper>
+        <S.GroupWrapper>
+          <S.Switch
+            active={sortOptions.descendingOrder}
+            onClick={() =>
+              dispatchFetchPosts({
+                type: 'APPLY_FILTERS',
+                sortOptions: {
+                  descendingOrder: !sortOptions.descendingOrder,
+                },
+              })
+            }
+          >
+            Most recent
+          </S.Switch>
+        </S.GroupWrapper>
 
-      <S.GroupWrapper>
-        <S.Switch
-          active={sortOptions.descendingOrder}
-          onClick={() =>
-            dispatchFetchPosts({
-              type: 'APPLY_FILTERS',
-              sortOptions: {
-                descendingOrder: !sortOptions.descendingOrder,
-              },
-            })
-          }
-        >
-          Most recent
-        </S.Switch>
-      </S.GroupWrapper>
+        <S.GroupWrapper>
+          <S.Label htmlFor="query-input">Blog search</S.Label>
+          <S.Input
+            id="query-input"
+            value={query}
+            onChange={onQueryChange}
+            placeholder="Search for posts"
+            allowClear
+          />
+        </S.GroupWrapper>
 
-      <S.GroupWrapper>
-        <S.Label htmlFor="query-input">Blog search</S.Label>
-        <S.Input
-          id="query-input"
-          value={query}
-          onChange={onQueryChange}
-          placeholder="Search for posts"
-          allowClear
-        />
-      </S.GroupWrapper>
-
-      <S.GroupWrapper>
-        <S.Label as="p">Tags</S.Label>
-        <S.TagWrapper>
-          {blogTags.all.map(({ id, name, color }) => (
-            <Tag
-              key={id}
-              clickable
-              active={activeTags.has(id)}
-              onClick={() => toggleTag(id)}
-              tagColor={color}
-            >
-              {name}
-            </Tag>
-          ))}
-        </S.TagWrapper>
-      </S.GroupWrapper>
-    </S.Wrapper>
+        <S.GroupWrapper>
+          <S.Label as="p">Tags</S.Label>
+          <S.TagWrapper>
+            {blogTags.all.map(({ id, name, color }) => (
+              <Tag
+                key={id}
+                clickable
+                active={activeTags.has(id)}
+                onClick={() => toggleTag(id)}
+                tagColor={color}
+              >
+                {name}
+              </Tag>
+            ))}
+          </S.TagWrapper>
+        </S.GroupWrapper>
+      </S.Wrapper>
+    </Accordion>
   )
 }
 
