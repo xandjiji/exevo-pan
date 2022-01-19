@@ -16,7 +16,7 @@ export const Wrapper = styled.div`
   position: relative;
   z-index: 1;
   flex-shrink: 0;
-  width: clamp(45ch, 50%, 75ch);
+  width: 100%;
   max-width: 100%;
 
   display: flex;

@@ -106,11 +106,11 @@ export default function PostPage({
           src={metaData.thumbnail}
         />
         <Post.ContentWrapper>
-          <Post.Aside>
+          <Post.Aside style={{ justifySelf: 'right' }}>
             <Post.Pillar titles={titles} />
           </Post.Aside>
           <MDXRemote {...mdxSource} components={components} />
-          <Post.Aside style={{ zIndex: 4 }}>
+          <Post.Aside style={{ justifySelf: 'left', zIndex: 4 }}>
             <Post.Newsletter />
           </Post.Aside>
         </Post.ContentWrapper>
