@@ -11,13 +11,10 @@ export const Accordion = styled(BaseAccordion)`
 
 export const AccordionLabel = styled(BaseFilterGroupLabel)`
   position: relative;
-  margin-left: -8px;
   display: flex;
   align-items: center;
   gap: 6px;
 
-  flex: none;
-  width: calc(100% - 2px);
   text-align: left;
   cursor: pointer;
 `

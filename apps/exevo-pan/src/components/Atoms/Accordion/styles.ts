@@ -12,7 +12,7 @@ export const ArrowIcon = styled(ArrowSvg)`
 `
 
 export const Button = styled.button`
-  padding: 4px 8px;
+  padding: 4px 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -22,7 +22,7 @@ export const Button = styled.button`
   transition: padding 0.15s ease-out;
 
   &[aria-expanded='true'] {
-    padding: 8px 8px;
+    padding: 8px 0;
 
     ${ArrowIcon} {
       transform: rotate(180deg);
