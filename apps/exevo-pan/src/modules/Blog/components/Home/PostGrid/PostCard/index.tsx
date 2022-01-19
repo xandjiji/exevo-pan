@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import NextImage from 'next/image'
@@ -14,18 +14,21 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
     translations: { common },
   } = useTranslations()
 
+  const [loaded, setLoaded] = useState(false)
+
   const { thumbnail, title, date, slug, description, tags } = postData
   const dateObject = useMemo(() => extractDate(date), [date])
 
   return (
     <S.Wrapper {...props}>
-      <S.Thumbnail suppressHydrationWarning>
+      <S.Thumbnail suppressHydrationWarning data-loaded={loaded}>
         <NextImage
           src={thumbnail}
           alt={title}
           layout="fixed"
           width={160}
           height={160}
+          onLoad={() => setLoaded(true)}
         />
       </S.Thumbnail>
       <S.Body>

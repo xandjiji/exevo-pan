@@ -22,6 +22,13 @@ export const Thumbnail = styled.div`
 
   img {
     object-fit: scale-down;
+    opacity: 0;
+
+    transition: opacity 0.2s ease-out;
+  }
+
+  &[data-loaded='true'] img {
+    opacity: 1;
   }
 `
 
