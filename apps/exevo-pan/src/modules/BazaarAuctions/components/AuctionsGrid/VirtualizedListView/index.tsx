@@ -1,4 +1,5 @@
 import { memo, useState, useMemo, Children, useEffect, useRef } from 'react'
+import { useIsDesktop } from 'hooks'
 import { clampValue, throttle } from 'utils'
 import FillElement from './FillElement'
 import { ListViewProps } from './types'
@@ -16,17 +17,7 @@ const VirtualizedListView = ({
   children,
   ...props
 }: ListViewProps) => {
-  const [isDesktop, setIsDesktop] = useState(true)
-  useEffect(() => {
-    const updateMediaQuery = throttle(() => {
-      setIsDesktop(window.matchMedia('(min-width: 768px)').matches)
-    }, THROTTLE_DELAY)
-
-    updateMediaQuery()
-    window.addEventListener('resize', updateMediaQuery)
-
-    return () => window.removeEventListener('resize', updateMediaQuery)
-  }, [])
+  const isDesktop = useIsDesktop(true)
 
   const flattenChildren = useMemo(() => Children.toArray(children), [children])
   const childrenCount = Children.count(flattenChildren)
