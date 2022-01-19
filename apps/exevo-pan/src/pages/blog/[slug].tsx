@@ -106,14 +106,15 @@ export default function PostPage({
           src={metaData.thumbnail}
         />
         <Post.ContentWrapper>
-          <Post.Aside style={{ justifySelf: 'right' }}>
+          <Post.Aside.Left style={{ justifySelf: 'right' }}>
             <Post.Breadcrumbs postTitle={metaData.title} />
             <Post.Pillar titles={titles} />
-          </Post.Aside>
+            <Post.Tags tags={metaData.tags as unknown as string[]} />
+          </Post.Aside.Left>
           <MDXRemote {...mdxSource} components={components} />
-          <Post.Aside style={{ justifySelf: 'left', zIndex: 4 }}>
+          <Post.Aside.Right style={{ justifySelf: 'left', zIndex: 4 }}>
             <Post.Newsletter />
-          </Post.Aside>
+          </Post.Aside.Right>
         </Post.ContentWrapper>
       </Main>
     </>
