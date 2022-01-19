@@ -19,9 +19,7 @@ export const Nav = styled.nav`
   ${Shadow}
 
   @media (min-width: 768px) {
-    position: sticky;
-    top: 120px;
-    left: 0;
+    position: unset;
     padding: 0;
 
     display: unset;

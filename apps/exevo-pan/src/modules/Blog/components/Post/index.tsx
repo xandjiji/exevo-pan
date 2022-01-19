@@ -43,6 +43,7 @@ export const Wrapper = styled.div`
   ${blockquote}
 `
 
+export { default as Aside } from './Aside'
 export { default as ContentWrapper } from './ContentWrapper'
 export { default as Hero } from './Hero'
 export { default as Pillar } from './Pillar'

@@ -1,4 +1,5 @@
 export { Home } from './components'
 export { Hero } from './components'
+export { Newsletter } from './components'
 export { Post } from './components'
 export { parseMarkdownSections } from './utils'
