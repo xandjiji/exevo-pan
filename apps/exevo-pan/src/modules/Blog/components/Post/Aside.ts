@@ -1,13 +1,16 @@
 import styled from 'styled-components'
 
 const Aside = styled.aside`
-  position: sticky;
-  top: 120px;
-  height: min-content;
+  display: grid;
+  gap: 32px;
+
   width: 100%;
-  z-index: 5;
+  height: min-content;
 
   @media (min-width: 1024px) {
+    position: sticky;
+    top: 88px;
+    z-index: 5;
     width: fit-content;
   }
 `

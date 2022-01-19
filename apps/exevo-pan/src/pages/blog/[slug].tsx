@@ -107,6 +107,7 @@ export default function PostPage({
         />
         <Post.ContentWrapper>
           <Post.Aside style={{ justifySelf: 'right' }}>
+            <Post.Breadcrumbs postTitle={metaData.title} />
             <Post.Pillar titles={titles} />
           </Post.Aside>
           <MDXRemote {...mdxSource} components={components} />
