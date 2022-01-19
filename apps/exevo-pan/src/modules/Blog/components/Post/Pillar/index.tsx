@@ -5,7 +5,7 @@ import { debouncedScrollIntoView, generateNavId } from './utils'
 import * as S from './styles'
 import { PillarProps } from './types'
 
-const Pillar = ({ titles, ...props }: PillarProps): JSX.Element => {
+const Pillar = ({ titles, ...props }: PillarProps): JSX.Element | null => {
   const { currentSection } = useCurrentSection()
 
   useEffect(() => {
@@ -13,6 +13,8 @@ const Pillar = ({ titles, ...props }: PillarProps): JSX.Element => {
       debouncedScrollIntoView(currentSection.title)
     }
   }, [currentSection?.title])
+
+  if (titles.length === 0) return null
 
   return (
     <S.Nav {...props}>
