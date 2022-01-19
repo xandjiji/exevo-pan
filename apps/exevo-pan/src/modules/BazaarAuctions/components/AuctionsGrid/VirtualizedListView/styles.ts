@@ -17,4 +17,9 @@ export const Grid = styled.div`
   @media (min-width: 768px) {
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   }
+
+  &::after {
+    content: '';
+    grid-column: 1 / -1;
+  }
 `

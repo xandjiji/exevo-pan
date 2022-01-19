@@ -10,11 +10,17 @@ export const Grid = styled.section<{ empty: boolean }>`
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 
   ${({ empty }) =>
-    empty &&
-    css`
-      justify-self: center;
-      align-self: center;
-    `}
+    empty
+      ? css`
+          justify-self: center;
+          align-self: center;
+        `
+      : css`
+          &::after {
+            content: '';
+            grid-column: 1 / -1;
+          }
+        `}
 `
 
 export const LazyWatcher = styled.div.attrs({ role: 'none' })`
