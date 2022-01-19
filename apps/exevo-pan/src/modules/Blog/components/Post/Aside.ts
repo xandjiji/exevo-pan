@@ -4,7 +4,12 @@ const Aside = styled.aside`
   position: sticky;
   top: 120px;
   height: min-content;
-  z-index: 10;
+  width: 100%;
+  z-index: 5;
+
+  @media (min-width: 768px) {
+    width: unset;
+  }
 `
 
 export default Aside

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { InnerContainer } from 'styles'
-import { Hero as BaseHero } from '..'
+import BaseHero from '../Hero'
 import BaseNewsletter from '../Newsletter'
 
 export const Wrapper = styled.main`

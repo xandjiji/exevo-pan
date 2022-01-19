@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Hero as BaseHero } from '..'
+import BaseHero from '../Hero'
 
 const Hero = styled(BaseHero)`
   margin-top: 42px;

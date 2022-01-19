@@ -1,4 +1,4 @@
-import { Post, Newsletter, parseMarkdownSections } from 'modules/Blog'
+import { Post, parseMarkdownSections } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -110,8 +110,8 @@ export default function PostPage({
             <Post.Pillar titles={titles} />
           </Post.Aside>
           <MDXRemote {...mdxSource} components={components} />
-          <Post.Aside>
-            <Newsletter />
+          <Post.Aside style={{ zIndex: 4 }}>
+            <Post.Newsletter />
           </Post.Aside>
         </Post.ContentWrapper>
       </Main>

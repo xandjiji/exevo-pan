@@ -3,8 +3,17 @@ import { InnerContainer } from 'styles'
 
 export const Wrapper = styled.div`
   padding-bottom: 32px;
+  ${InnerContainer}
+
   position: relative;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 32px;
-  ${InnerContainer}
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: unset;
+    justify-content: center;
+  }
 `

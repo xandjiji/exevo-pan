@@ -1,6 +1,4 @@
-export { default as Hero } from './Hero'
 export { default as Home } from './Home'
-export { default as Newsletter } from './Newsletter'
 export { default as Tag } from './Tag'
 
 export * as Post from './Post'

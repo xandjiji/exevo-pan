@@ -12,7 +12,6 @@ export const Wrapper = styled.div`
   ${InnerPadding}
   padding-top: 32px;
   padding-bottom: 32px;
-  margin: 0 auto;
 
   position: relative;
   z-index: 1;
@@ -46,6 +45,7 @@ export const Wrapper = styled.div`
 export { default as Aside } from './Aside'
 export { default as ContentWrapper } from './ContentWrapper'
 export { default as Hero } from './Hero'
+export { default as Newsletter } from './Newsletter'
 export { default as Pillar } from './Pillar'
 export { default as Section } from './Section'
 export { default as Table } from './Table'
