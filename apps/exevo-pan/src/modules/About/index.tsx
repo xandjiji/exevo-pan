@@ -6,7 +6,6 @@ import fansiteImg from 'assets/fansite-logo.png'
 import { Hero, Pillar, Section, CharacterTooltip } from './components'
 import { sections } from './sections'
 import * as S from './styles'
-import { SingleCharacterData } from './types'
 
 const About = ({
   singleCharactersData,

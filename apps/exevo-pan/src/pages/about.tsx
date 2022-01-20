@@ -3,7 +3,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import AboutContent from 'modules/About'
-import { SingleCharacterData } from 'modules/About/types'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'

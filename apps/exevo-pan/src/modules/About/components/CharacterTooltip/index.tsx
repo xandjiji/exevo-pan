@@ -1,6 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
-import { SingleCharacterData } from '../../types'
 
 const outfits = {
   Ksu: 'https://i.imgur.com/O38datw.png',
