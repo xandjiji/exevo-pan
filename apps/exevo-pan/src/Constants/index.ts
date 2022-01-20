@@ -1,4 +1,5 @@
 export * from './Advertising'
+export * from './Authors'
 export * from './BlogTags'
 export * from './Email'
 export * from './Endpoints'

@@ -8,7 +8,7 @@ import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient, TibiaDataClient } from 'services'
 import { Main } from 'templates'
-import { routes } from 'Constants'
+import { routes, authors } from 'Constants'
 import { common } from 'locales'
 
 const components = {
@@ -132,13 +132,29 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     slug,
     locale: locale as string,
   })
-  const { content, data } = matter(source)
-  const mdxSource = await serialize(content)
+  const parsedData = matter(source)
 
-  const author = {
-    ...(await TibiaDataClient.character(data.author.name)),
+  let { content, data } = parsedData
+  let mdxSource
+
+  try {
+    mdxSource = await serialize(content)
+  } catch {
+    const fallBackSource = await BlogClient.getStaticPost({
+      slug,
+    })
+    const fallbackParsedData = matter(fallBackSource)
+
+    content = fallbackParsedData.content
+    data = fallbackParsedData.data
+
+    mdxSource = await serialize(content)
+  }
+
+  const author: AuthorData = {
+    ...((await TibiaDataClient.character(data.author.name)) || authors.Ksu),
     outfitSrc: data.author.outfit,
-  } as unknown as AuthorData
+  }
 
   let translator: AuthorData | false = false
   if (data.translator) {
@@ -148,6 +164,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         ...characterData,
         outfitSrc: data.translator.outfit,
       }
+    } else {
+      translator =
+        authors[data.translator.name as keyof typeof authors] ?? false
     }
   }
 

@@ -2,21 +2,16 @@ import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { Tooltip } from 'components/Organisms'
-import { links, email } from 'Constants'
+import { authors, links, email } from 'Constants'
 import fansiteImg from 'assets/fansite-logo.png'
 import { Hero, Pillar, Section } from './components'
 import { sections } from './sections'
 import * as S from './styles'
 
-const outfits = {
-  Ksu: 'https://i.imgur.com/Cnw2PBZ.png',
-  Algoolek: 'https://i.imgur.com/bkaVflV.png',
-}
-
 const About = ({
-  singleCharactersData,
+  authorsData,
 }: {
-  singleCharactersData: Record<string, SingleCharacterData>
+  authorsData: typeof authors
 }): JSX.Element => {
   const {
     translations: { about },
@@ -66,12 +61,12 @@ const About = ({
                   <CharacterMiniCard
                     displayLink
                     displayServer
-                    outfitSrc={outfits.Ksu}
-                    characterData={singleCharactersData.Ksu}
+                    outfitSrc={authorsData.Ksu.outfitSrc}
+                    characterData={authorsData.Ksu}
                   />
                 }
               >
-                <S.Character>Ksu</S.Character>
+                <S.Character>{authorsData.Ksu.name}</S.Character>
               </Tooltip>
               . {about.AboutMe.p3}{' '}
               <span role="img" aria-label={about.AboutMe.tongueEmoji}>
@@ -90,14 +85,12 @@ const About = ({
                     <CharacterMiniCard
                       displayLink
                       displayServer
-                      outfitSrc={outfits.Algoolek}
-                      characterData={singleCharactersData.Algoolek}
+                      outfitSrc={authorsData.Algoolek.outfitSrc}
+                      characterData={authorsData.Algoolek}
                     />
                   }
                 >
-                  <S.Character>
-                    {singleCharactersData.Algoolek.name}
-                  </S.Character>
+                  <S.Character>{authorsData.Algoolek.name}</S.Character>
                 </Tooltip>
                 )
               </S.Li>

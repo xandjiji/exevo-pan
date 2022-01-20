@@ -66,16 +66,9 @@ export default class BlogClient {
     locale = DEFAULT_LOCALE,
     slug,
   }: GetStaticContentProps): Promise<string> {
-    try {
-      const response = await fetch(
-        `${this.blogStaticUrl}/${locale}/${slug}${MDX_EXTENSION}`,
-      )
-      return response.text()
-    } catch {
-      const response = await fetch(
-        `${this.blogStaticUrl}/${DEFAULT_LOCALE}/${slug}${MDX_EXTENSION}`,
-      )
-      return response.text()
-    }
+    const response = await fetch(
+      `${this.blogStaticUrl}/${locale}/${slug}${MDX_EXTENSION}`,
+    )
+    return response.text()
   }
 }

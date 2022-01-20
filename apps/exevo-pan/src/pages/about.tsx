@@ -7,15 +7,15 @@ import { TibiaDataClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes } from 'Constants'
+import { authors, routes } from 'Constants'
 import { common, about } from 'locales'
 
 const pageUrl = buildUrl(routes.ABOUT)
 
 export default function About({
-  singleCharactersData,
+  authorsData,
 }: {
-  singleCharactersData: Record<string, SingleCharacterData>
+  authorsData: typeof authors
 }): JSX.Element {
   const { translations } = useTranslations()
 
@@ -80,38 +80,26 @@ export default function About({
       </Head>
 
       <Main>
-        <AboutContent singleCharactersData={singleCharactersData} />
+        <AboutContent authorsData={authorsData} />
       </Main>
     </>
   )
 }
 
-const fallbackData: Record<string, SingleCharacterData> = {
-  Ksu: {
-    name: 'Ksu',
-    level: 425,
-    vocation: 'Elite Knight',
-    world: 'Belobra',
-  },
-  Algoolek: {
-    name: 'Algoolek',
-    level: 568,
-    vocation: 'Elite Knight',
-    world: 'Bona',
-  },
-}
+const authorsData = { ...authors }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const singleCharactersData: Record<string, SingleCharacterData> = {
-    ...fallbackData,
-  }
   try {
-    const nicknames = Object.keys(fallbackData)
+    const nicknames = Object.keys(authorsData)
     for (const nickname of nicknames) {
+      const typedNickname = nickname as keyof typeof authorsData
       const data = await TibiaDataClient.character(nickname)
 
       if (data) {
-        fallbackData[nickname] = data
+        authorsData[typedNickname] = {
+          ...authorsData[typedNickname],
+          ...data,
+        }
       }
     }
   } catch (error) {
@@ -124,7 +112,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         about: about[locale as RegisteredLocale],
       },
-      singleCharactersData,
+      authorsData,
     },
   }
 }
