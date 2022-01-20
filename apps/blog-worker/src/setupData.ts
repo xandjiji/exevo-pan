@@ -2,42 +2,64 @@ import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
 
-const SAMPLE_POST_SLUG = 'hello-world'
-const POSTS_PATH = path.join(process.cwd(), '_posts/en')
+const MAIN_DIRECTORY = 'en'
+const SAMPLE_POST = 'hello-world.mdx'
+const POSTS_PATH = path.join(process.cwd(), '_posts')
 const POST_DATA_PATH = path.join(process.cwd(), 'src')
 
-const getFileNames = () =>
+const getFileNames = (dirent: string) =>
   fs
-    .readdirSync(POSTS_PATH)
-    .filter((filename) => /\.mdx?$/.test(filename))
+    .readdirSync(`${POSTS_PATH}/${dirent}`)
+    .filter((filename) => /\.mdx?$/.test(filename) && filename !== SAMPLE_POST)
     .map((filename) => filename)
 
-const main = () => {
-  const postFileNames = getFileNames()
+const readPostData = (fileName: string, localization: string): BlogPost => {
+  const filePath = `${POSTS_PATH}/${localization}/${fileName}`
 
-  const postData = postFileNames
-    .map((fileName) => {
-      const filePath = `${POSTS_PATH}/${fileName}`
+  const source = fs.readFileSync(filePath)
+  const { data } = matter(source)
 
-      const source = fs.readFileSync(filePath)
-      const { data } = matter(source)
+  const [slug] = fileName.split('.')
 
-      const [slug] = fileName.split('.')
+  const { date } = data
+  const [day, month, year] = date.split('-')
+  const timestamp = +new Date(`${month}-${day}-${year}`)
 
-      const { date } = data
-      const [day, month, year] = date.split('-')
-      const timestamp = +new Date(`${month}-${day}-${year}`)
+  return {
+    ...data,
+    slug,
+    date: timestamp,
+  } as BlogPost
+}
 
-      return {
-        ...data,
-        slug,
-        date: timestamp,
-      } as BlogPost
+const readAllPostFiles = (
+  fileNames: string[],
+  localization: string,
+): BlogPost[] =>
+  fileNames
+    .map((fileName: string) => {
+      try {
+        return readPostData(fileName, localization)
+      } catch {
+        return readPostData(fileName, MAIN_DIRECTORY)
+      }
     })
-    .filter(({ slug }) => slug !== SAMPLE_POST_SLUG)
     .sort((postA, postB) => postB.date - postA.date)
 
-  fs.writeFileSync(`${POST_DATA_PATH}/PostData.json`, JSON.stringify(postData))
+const main = () => {
+  const postFileNames = getFileNames(MAIN_DIRECTORY)
+
+  const allPostData = {
+    '/en': readAllPostFiles(postFileNames, 'en'),
+    '/es': readAllPostFiles(postFileNames, 'es'),
+    '/pl': readAllPostFiles(postFileNames, 'pl'),
+    '/pt': readAllPostFiles(postFileNames, 'pt'),
+  }
+
+  fs.writeFileSync(
+    `${POST_DATA_PATH}/PostData.json`,
+    JSON.stringify(allPostData),
+  )
 }
 
 main()

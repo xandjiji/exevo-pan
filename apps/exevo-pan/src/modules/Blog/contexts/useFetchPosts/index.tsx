@@ -6,6 +6,7 @@ import {
   useEffect,
   useRef,
 } from 'react'
+import { useRouter } from 'next/router'
 import {
   DEFAULT_FILTER_OPTIONS,
   DEFAULT_PAGINATION_OPTIONS,
@@ -56,44 +57,52 @@ export const FetchPostsProvider = ({
     postList: initialPosts,
   })
 
+  const { locale } = useRouter()
+
   const fetchNextPage = useCallback(async () => {
     dispatch({ type: 'SET_STATUS', status: 'LOADING' })
 
     try {
-      const { page, hasNext } = await BlogClient.queryBlog({
-        sortOptions,
-        filterOptions,
-        paginationOptions: {
-          ...DEFAULT_PAGINATION_OPTIONS,
-          pageIndex: currentIndex,
+      const { page, hasNext } = await BlogClient.queryBlog(
+        {
+          sortOptions,
+          filterOptions,
+          paginationOptions: {
+            ...DEFAULT_PAGINATION_OPTIONS,
+            pageIndex: currentIndex,
+          },
         },
-      })
+        locale,
+      )
 
       dispatch({ type: 'APPEND_POSTS', newPosts: page, hasNext })
     } catch (error) {
       dispatch({ type: 'SET_STATUS', status: 'ERROR' })
     }
-  }, [currentIndex, filterOptions, sortOptions])
+  }, [locale, currentIndex, filterOptions, sortOptions])
 
   const query = useCallback(
     async ({ pageIndex, ...queryArgs }: QueryParams) => {
       dispatch({ type: 'SET_STATUS', status: 'LOADING' })
 
       try {
-        const { page, hasNext } = await BlogClient.queryBlog({
-          ...queryArgs,
-          paginationOptions: {
-            ...DEFAULT_PAGINATION_OPTIONS,
-            pageIndex,
+        const { page, hasNext } = await BlogClient.queryBlog(
+          {
+            ...queryArgs,
+            paginationOptions: {
+              ...DEFAULT_PAGINATION_OPTIONS,
+              pageIndex,
+            },
           },
-        })
+          locale,
+        )
 
         dispatch({ type: 'SET_POSTS', posts: page, hasNext })
       } catch (error) {
         dispatch({ type: 'SET_STATUS', status: 'ERROR' })
       }
     },
-    [],
+    [locale],
   )
 
   const isMounted = useRef(false)

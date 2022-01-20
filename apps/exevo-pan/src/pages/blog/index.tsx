@@ -66,9 +66,12 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const { page: posts } = await BlogClient.queryBlog({
-    paginationOptions: DEFAULT_PAGINATION_OPTIONS,
-  })
+  const { page: posts } = await BlogClient.queryBlog(
+    {
+      paginationOptions: DEFAULT_PAGINATION_OPTIONS,
+    },
+    locale,
+  )
 
   return {
     props: {

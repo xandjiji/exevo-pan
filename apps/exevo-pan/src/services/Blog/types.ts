@@ -1,6 +1,6 @@
 export type CacheObject = Record<string, BlogFilterResponse>
 
 export type GetStaticContentProps = {
-  locale: string
+  locale?: string
   slug: string
 }

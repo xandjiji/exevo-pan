@@ -14,8 +14,10 @@ async function handleRequest(request: Request): Promise<Response> {
   const { filterOptions, sortOptions, paginationOptions } =
     deserializeBody(serializedBody)
 
+  const { pathname } = new URL(request.url)
+
   const filteredPosts = filterPosts({
-    posts,
+    posts: posts[pathname as keyof typeof posts] ?? posts['/en'],
     filters: filterOptions,
   })
 

@@ -9,6 +9,7 @@ import {
 import { CacheObject, GetStaticContentProps } from './types'
 
 const CACHE_MAX_AGE = 180000
+const DEFAULT_LOCALE = 'en'
 const MDX_EXTENSION = '.mdx'
 
 export default class BlogClient {
@@ -29,11 +30,14 @@ export default class BlogClient {
     setTimeout(() => delete this.cache[cacheKey], CACHE_MAX_AGE)
   }
 
-  static async queryBlog({
-    paginationOptions = DEFAULT_PAGINATION_OPTIONS,
-    sortOptions = DEFAULT_SORT_OPTIONS,
-    filterOptions = DEFAULT_FILTER_OPTIONS,
-  }: Partial<BlogFilterBodyPayload>): Promise<BlogFilterResponse> {
+  static async queryBlog(
+    {
+      paginationOptions = DEFAULT_PAGINATION_OPTIONS,
+      sortOptions = DEFAULT_SORT_OPTIONS,
+      filterOptions = DEFAULT_FILTER_OPTIONS,
+    }: Partial<BlogFilterBodyPayload>,
+    locale = DEFAULT_LOCALE,
+  ): Promise<BlogFilterResponse> {
     const bodyPayload = serializeBody({
       paginationOptions,
       sortOptions,
@@ -43,7 +47,7 @@ export default class BlogClient {
     const cachedResult = this.getCache(bodyPayload)
     if (cachedResult) return cachedResult
 
-    const response = await fetch(this.blogQueryUrl, {
+    const response = await fetch(`${this.blogQueryUrl}/${locale}`, {
       method: 'POST',
       body: bodyPayload,
     })
@@ -55,13 +59,19 @@ export default class BlogClient {
   }
 
   static async getStaticPost({
-    locale,
+    locale = DEFAULT_LOCALE,
     slug,
   }: GetStaticContentProps): Promise<string> {
-    const response = await fetch(
-      `${this.blogStaticUrl}/${locale}/${slug}${MDX_EXTENSION}`,
-    )
-
-    return response.text()
+    try {
+      const response = await fetch(
+        `${this.blogStaticUrl}/${locale}/${slug}${MDX_EXTENSION}`,
+      )
+      return response.text()
+    } catch {
+      const response = await fetch(
+        `${this.blogStaticUrl}/${DEFAULT_LOCALE}/${slug}${MDX_EXTENSION}`,
+      )
+      return response.text()
+    }
   }
 }

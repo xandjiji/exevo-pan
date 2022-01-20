@@ -1,6 +1,6 @@
 declare type BlogPostAuthor = {
   name: string
-  avatar: string
+  outfit: string
 }
 
 declare type BlogPost = {
@@ -11,4 +11,5 @@ declare type BlogPost = {
   date: number
   tags: string[]
   author: BlogPostAuthor
+  translator?: BlogPostAuthor
 }
