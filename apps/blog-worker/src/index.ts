@@ -14,7 +14,8 @@ async function handleRequest(request: Request): Promise<Response> {
   const { filterOptions, sortOptions, paginationOptions } =
     deserializeBody(serializedBody)
 
-  const { pathname } = new URL(request.url)
+  const { pathname, searchParams } = new URL(request.url)
+  const showHidden = searchParams.get('hidden') === 'true'
 
   const filteredPosts = filterPosts({
     posts: posts[pathname as keyof typeof posts] ?? posts['/en'],
@@ -22,7 +23,10 @@ async function handleRequest(request: Request): Promise<Response> {
   })
 
   const sortedPosts = applySort(filteredPosts, sortOptions)
-  const paginatedData = paginateData(sortedPosts, paginationOptions)
+  const paginatedData = paginateData(
+    showHidden ? sortedPosts : sortedPosts.filter(({ hidden }) => !hidden),
+    paginationOptions,
+  )
 
   const responseBody = {
     ...paginatedData,

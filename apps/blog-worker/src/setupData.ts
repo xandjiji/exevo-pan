@@ -3,14 +3,13 @@ import path from 'path'
 import matter from 'gray-matter'
 
 const MAIN_DIRECTORY = 'en'
-const SAMPLE_POST = 'hello-world.mdx'
 const POSTS_PATH = path.join(process.cwd(), '_posts')
 const POST_DATA_PATH = path.join(process.cwd(), 'src')
 
 const getFileNames = (dirent: string) =>
   fs
     .readdirSync(`${POSTS_PATH}/${dirent}`)
-    .filter((filename) => /\.mdx?$/.test(filename) && filename !== SAMPLE_POST)
+    .filter((filename) => /\.mdx?$/.test(filename))
     .map((filename) => filename)
 
 const readPostData = (fileName: string, localization: string): BlogPost => {

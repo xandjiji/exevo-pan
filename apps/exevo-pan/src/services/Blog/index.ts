@@ -37,6 +37,7 @@ export default class BlogClient {
       filterOptions = DEFAULT_FILTER_OPTIONS,
     }: Partial<BlogFilterBodyPayload>,
     locale = DEFAULT_LOCALE,
+    showHidden = false,
   ): Promise<BlogFilterResponse> {
     const bodyPayload = serializeBody({
       paginationOptions,
@@ -47,10 +48,13 @@ export default class BlogClient {
     const cachedResult = this.getCache(bodyPayload)
     if (cachedResult) return cachedResult
 
-    const response = await fetch(`${this.blogQueryUrl}/${locale}`, {
-      method: 'POST',
-      body: bodyPayload,
-    })
+    const response = await fetch(
+      `${this.blogQueryUrl}/${locale}${showHidden ? '?hidden=true' : ''}`,
+      {
+        method: 'POST',
+        body: bodyPayload,
+      },
+    )
 
     const data: BlogFilterResponse = await response.json()
     this.setCache(bodyPayload, data)

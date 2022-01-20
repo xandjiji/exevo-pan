@@ -144,7 +144,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   const paginationOptions: PaginationOptions = { pageIndex: 0, pageSize: 999 }
-  const { page: posts } = await BlogClient.queryBlog({ paginationOptions })
+  const { page: posts } = await BlogClient.queryBlog(
+    { paginationOptions },
+    undefined,
+    true,
+  )
 
   const paths: PathItem[] = []
   posts.forEach(({ slug }) => {

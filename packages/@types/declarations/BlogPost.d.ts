@@ -4,6 +4,7 @@ declare type BlogPostAuthor = {
 }
 
 declare type BlogPost = {
+  hidden?: boolean
   title: string
   slug: string
   description: string
