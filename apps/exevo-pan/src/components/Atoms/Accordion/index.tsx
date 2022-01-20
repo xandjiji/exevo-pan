@@ -9,6 +9,7 @@ const Accordion = ({
   initialValue = false,
   open: openProp,
   onClick,
+  border = false,
   children,
   ...props
 }: AccordionProps): JSX.Element => {
@@ -39,6 +40,7 @@ const Accordion = ({
         aria-controls={contentId}
         aria-label={common.Accordion[open ? 'close' : 'open']}
         onClick={handleClick}
+        border={border}
       >
         {title}
         <S.ArrowIcon />
