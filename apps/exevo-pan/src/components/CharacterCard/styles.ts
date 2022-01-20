@@ -1,6 +1,5 @@
 import styled, { css } from 'styled-components'
 import {
-  SpritePortrait as BaseSpriteProtrait,
   LabeledTextBox as BaseLabeledTextBox,
   AuctionTimer as BaseAuctionTimer,
 } from 'components/Atoms'
@@ -56,33 +55,18 @@ export const Wrapper = styled.div<{ highlighted: boolean }>`
     `}
 `
 
-export const Head = styled(AlignedFlex)`
+export const Head = styled(AlignedFlex)<{ highlighted: boolean }>`
   margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
 
-  > *:first-child {
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
-  }
-`
-
-export const SpritePortrait = styled(BaseSpriteProtrait)`
-  margin-top: -24px;
-  margin-left: -24px;
-  width: 64px;
-  height: 64px;
-`
-
-export const HeadInfo = styled.div`
-  margin: 0 16px;
-  width: 100%;
-`
-
-export const Subtitle = styled.span`
-  font-size: 12px;
-  font-weight: 300;
-  letter-spacing: 0.5px;
-  color: var(--onSurface);
+  ${({ highlighted }) =>
+    highlighted &&
+    css`
+      p {
+        color: var(--green) !important;
+      }
+    `};
 `
 
 export const InfoGrid = styled.div`

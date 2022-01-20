@@ -1,11 +1,11 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { useRouter } from 'next/router'
+import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
+import CharacterMiniCard from '../CharacterMiniCard'
 import {
-  Title,
-  Subtitle,
   ServerInfo,
   CharacterItems,
   CharacterSkills,
@@ -60,20 +60,17 @@ const CharacterCard = ({
 
   return (
     <S.Wrapper highlighted={highlighted} {...props}>
-      <S.Head>
-        <S.SpritePortrait
-          src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
-          alt={nickname}
-          title={nickname}
-          lazy
+      <S.Head highlighted={highlighted}>
+        <CharacterMiniCard
+          displayLink
+          outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+          characterData={{
+            name: nickname,
+            level,
+            vocation: vocationHelper.getFullName(vocationId, level),
+            world: serverData.serverName,
+          }}
         />
-
-        <S.HeadInfo>
-          <Title characterId={id} highlighted={highlighted}>
-            {nickname}
-          </Title>
-          <Subtitle level={level} vocation={vocationId} />
-        </S.HeadInfo>
 
         {highlighted && <TagButton />}
       </S.Head>
