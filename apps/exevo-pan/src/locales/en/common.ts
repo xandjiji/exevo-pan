@@ -144,4 +144,5 @@ export default {
   },
   FooterTitle: 'Exevo Pan - made by',
   AnchorIconLabel: 'Copy link',
+  CharacterTooltipLabel: 'Go to character page',
 }

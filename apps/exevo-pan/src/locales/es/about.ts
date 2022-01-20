@@ -37,6 +37,5 @@ export default {
     title: 'Información del contacto',
   },
   PillarTitle: 'Índice',
-  CharacterTooltip: 'Ir a la página del personaje',
   HeroTitle: 'Sobre nosotros',
 }

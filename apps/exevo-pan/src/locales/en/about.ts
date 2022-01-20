@@ -37,6 +37,5 @@ export default {
     title: 'Contact Information',
   },
   PillarTitle: 'Contents',
-  CharacterTooltipLabel: 'Go to character page',
   HeroTitle: 'About us',
 }
