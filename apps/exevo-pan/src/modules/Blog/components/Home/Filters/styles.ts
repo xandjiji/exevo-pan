@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components'
 import { Switch as BaseSwitch, Input as BaseInput } from 'components/Atoms'
+import SearchSvg from 'assets/svgs/search.svg'
 
 export const Wrapper = styled.section`
   padding-top: 8px;
@@ -9,9 +10,20 @@ export const Wrapper = styled.section`
   max-width: 200px;
 `
 
+export const Icon = styled(SearchSvg)`
+  width: 24px;
+  height: 24px;
+  fill: var(--onSurface);
+`
+
 export const Title = styled.h2`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 300;
   color: var(--onSurface);
 `
 

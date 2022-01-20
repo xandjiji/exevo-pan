@@ -42,7 +42,15 @@ const Filters = (): JSX.Element => {
   )
 
   return (
-    <Accordion title={<S.Title>Filter posts</S.Title>}>
+    <Accordion
+      border
+      title={
+        <S.Title>
+          <S.Icon />
+          Filter posts
+        </S.Title>
+      }
+    >
       <S.Wrapper>
         <S.GroupWrapper>
           <S.Switch
