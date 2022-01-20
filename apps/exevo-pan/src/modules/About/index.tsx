@@ -1,11 +1,17 @@
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
+import CharacterMiniCard from 'components/CharacterMiniCard'
 import { Tooltip } from 'components/Organisms'
 import { links, email } from 'Constants'
 import fansiteImg from 'assets/fansite-logo.png'
-import { Hero, Pillar, Section, CharacterTooltip } from './components'
+import { Hero, Pillar, Section } from './components'
 import { sections } from './sections'
 import * as S from './styles'
+
+const outfits = {
+  Ksu: 'https://i.imgur.com/Cnw2PBZ.png',
+  Algoolek: 'https://i.imgur.com/bkaVflV.png',
+}
 
 const About = ({
   singleCharactersData,
@@ -57,7 +63,12 @@ const About = ({
               {about.AboutMe.p2}{' '}
               <Tooltip
                 content={
-                  <CharacterTooltip characterData={singleCharactersData.Ksu} />
+                  <CharacterMiniCard
+                    displayLink
+                    displayServer
+                    outfitSrc={outfits.Ksu}
+                    characterData={singleCharactersData.Ksu}
+                  />
                 }
               >
                 <S.Character>Ksu</S.Character>
@@ -76,7 +87,10 @@ const About = ({
                 {about.AboutContributors.Bartek}: Bartek (
                 <Tooltip
                   content={
-                    <CharacterTooltip
+                    <CharacterMiniCard
+                      displayLink
+                      displayServer
+                      outfitSrc={outfits.Algoolek}
                       characterData={singleCharactersData.Algoolek}
                     />
                   }
