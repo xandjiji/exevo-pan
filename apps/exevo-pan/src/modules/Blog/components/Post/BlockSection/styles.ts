@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { InnerContainer, MaterialCard } from 'styles'
 
 export const Wrapper = styled.section`
+  margin-bottom: 32px;
   ${InnerContainer}
 `
 export const Section = styled.div`

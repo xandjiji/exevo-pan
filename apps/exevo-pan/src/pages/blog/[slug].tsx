@@ -6,7 +6,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import matter from 'gray-matter'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
-import { BlogClient } from 'services'
+import { BlogClient, TibiaDataClient } from 'services'
 import { Main } from 'templates'
 import { routes } from 'Constants'
 import { common } from 'locales'
@@ -22,6 +22,8 @@ const components = {
 type Props = {
   mdxSource: MDXRemoteSerializeResult
   metaData: Record<string, string>
+  author: AuthorData
+  translator: AuthorData | false
   translations: any
 }
 
@@ -35,6 +37,8 @@ type PathItem = {
 export default function PostPage({
   mdxSource,
   metaData,
+  author,
+  translator,
   translations,
 }: Props): JSX.Element {
   const postRoute = `${routes.BLOG}/${metaData.slug}`
@@ -116,6 +120,7 @@ export default function PostPage({
             <Post.Newsletter />
           </Post.Aside.Right>
         </Post.ContentWrapper>
+        <Post.Authors author={author} translator={translator} />
       </Main>
     </>
   )
@@ -130,10 +135,28 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { content, data } = matter(source)
   const mdxSource = await serialize(content)
 
+  const author = {
+    ...(await TibiaDataClient.character(data.author.name)),
+    outfitSrc: data.author.outfit,
+  } as unknown as AuthorData
+
+  let translator: AuthorData | false = false
+  if (data.translator) {
+    const characterData = await TibiaDataClient.character(data.translator.name)
+    if (characterData) {
+      translator = {
+        ...characterData,
+        outfitSrc: data.translator.outfit,
+      }
+    }
+  }
+
   return {
     props: {
       mdxSource,
       metaData: { ...data, slug },
+      author,
+      translator,
       translations: {
         common: common[locale as RegisteredLocale],
       },
