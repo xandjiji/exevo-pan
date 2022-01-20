@@ -82,7 +82,7 @@ const About = ({
                   }
                 >
                   <S.Character>
-                    {singleCharactersData.Algoolek.characters.data.name}
+                    {singleCharactersData.Algoolek.name}
                   </S.Character>
                 </Tooltip>
                 )

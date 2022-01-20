@@ -15,7 +15,7 @@ const CharacterTooltip = ({
     translations: { about },
   } = useTranslations()
 
-  const { name, level, vocation, world } = characterData.characters.data
+  const { name, level, vocation, world } = characterData
 
   return (
     <S.Wrapper>

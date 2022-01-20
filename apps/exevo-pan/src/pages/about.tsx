@@ -3,10 +3,11 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import AboutContent from 'modules/About'
+import { TibiaDataClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes, endpoints } from 'Constants'
+import { routes } from 'Constants'
 import { common, about } from 'locales'
 
 const pageUrl = buildUrl(routes.ABOUT)
@@ -87,24 +88,16 @@ export default function About({
 
 const fallbackData: Record<string, SingleCharacterData> = {
   Ksu: {
-    characters: {
-      data: {
-        name: 'Ksu',
-        level: 425,
-        vocation: 'Elite Knight',
-        world: 'Belobra',
-      },
-    },
+    name: 'Ksu',
+    level: 425,
+    vocation: 'Elite Knight',
+    world: 'Belobra',
   },
   Algoolek: {
-    characters: {
-      data: {
-        name: 'Algoolek',
-        level: 568,
-        vocation: 'Elite Knight',
-        world: 'Bona',
-      },
-    },
+    name: 'Algoolek',
+    level: 568,
+    vocation: 'Elite Knight',
+    world: 'Bona',
   },
 }
 
@@ -113,14 +106,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     ...fallbackData,
   }
   try {
-    const characterList = Object.values(fallbackData)
-    for (const { characters } of characterList) {
-      const nickname = characters.data.name
-      const result = await fetch(`${endpoints.TIBIADATA}/${nickname}.json`)
+    const nicknames = Object.keys(fallbackData)
+    for (const nickname of nicknames) {
+      const data = await TibiaDataClient.character(nickname)
 
-      const freshData = (await result.json()) as SingleCharacterData
-      if (!freshData.characters.error) {
-        singleCharactersData[nickname] = freshData
+      if (data) {
+        fallbackData[nickname] = data
       }
     }
   } catch (error) {
