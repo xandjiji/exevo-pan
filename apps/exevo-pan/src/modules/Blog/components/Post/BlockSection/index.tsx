@@ -4,8 +4,8 @@ const BlockSection = ({
   children,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => (
-  <S.Wrapper {...props}>
-    <S.Section>{children}</S.Section>
+  <S.Wrapper>
+    <S.Section {...props}>{children}</S.Section>
   </S.Wrapper>
 )
 

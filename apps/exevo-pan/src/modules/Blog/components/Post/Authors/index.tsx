@@ -1,18 +1,28 @@
 import CharacterMiniCard from 'components/CharacterMiniCard'
-import { BlockSection } from '..'
 import * as S from './styles'
 import { AuthorsProps } from './types'
 
 const Authors = ({ author, translator }: AuthorsProps): JSX.Element => (
-  <BlockSection>
-    <CharacterMiniCard characterData={author} outfitSrc={author.outfitSrc} />
+  <S.BlockSection>
+    <S.Title>
+      Enjoyed this content?
+      <br />
+      Support the authors donating Tibia Coins 😄
+    </S.Title>
+    <CharacterMiniCard
+      characterData={author}
+      outfitSrc={author.outfitSrc}
+      displayLink
+      style={translator ? { marginBottom: 8 } : undefined}
+    />
     {translator && (
       <CharacterMiniCard
         characterData={translator}
         outfitSrc={translator.outfitSrc}
+        displayLink
       />
     )}
-  </BlockSection>
+  </S.BlockSection>
 )
 
 export default Authors
