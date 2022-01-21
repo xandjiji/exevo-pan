@@ -10,7 +10,7 @@ const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => {
       <S.ImageWrapper className="hero-image" data-loaded={loaded}>
         <S.HeroImage
           src={src}
-          alt="Title"
+          alt={title}
           layout="intrinsic"
           width={240}
           height={240}
