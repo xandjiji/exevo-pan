@@ -43,7 +43,6 @@ export const Wrapper = styled.div`
 `
 
 export { default as Authors } from './Authors'
-export { default as BlockSection } from './BlockSection'
 export { default as Breadcrumbs } from './Breadcrumbs'
 export { default as Layout } from './Layout'
 export { default as Hero } from './Hero'

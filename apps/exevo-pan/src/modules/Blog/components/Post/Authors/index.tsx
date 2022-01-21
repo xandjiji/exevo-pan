@@ -3,7 +3,7 @@ import * as S from './styles'
 import { AuthorsProps } from './types'
 
 const Authors = ({ author, translator }: AuthorsProps): JSX.Element => (
-  <S.BlockSection>
+  <section>
     <S.Title>
       Enjoyed this content?
       <br />
@@ -24,7 +24,7 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => (
         displayLink
       />
     )}
-  </S.BlockSection>
+  </section>
 )
 
 export default Authors
