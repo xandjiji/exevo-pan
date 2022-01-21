@@ -5,7 +5,7 @@ import BaseTag from '../../../Tag'
 export const Thumbnail = styled.div`
   position: relative;
   flex-shrink: 0;
-  height: 240px;
+  height: 180px;
   width: 100%;
 
   background: var(--primaryVariantHighlight);

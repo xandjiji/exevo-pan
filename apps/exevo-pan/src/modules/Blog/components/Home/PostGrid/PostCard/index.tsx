@@ -26,8 +26,8 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
           src={thumbnail}
           alt={title}
           layout="fixed"
-          width={160}
-          height={160}
+          width={120}
+          height={120}
           onLoad={() => setLoaded(true)}
         />
       </S.Thumbnail>
