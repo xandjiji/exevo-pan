@@ -7,4 +7,8 @@ const Layout = (props: React.HTMLAttributes<HTMLDivElement>): JSX.Element => (
   </CurrentSectionProvider>
 )
 
+Layout.Center = S.Center
+Layout.Left = S.Left
+Layout.Right = S.Right
+
 export default Layout

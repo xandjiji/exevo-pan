@@ -111,20 +111,20 @@ export default function PostPage({
         />
 
         <Post.Layout>
-          <Post.Aside.Left>
+          <Post.Layout.Left>
             <Post.Breadcrumbs postTitle={metaData.title} />
             <Post.Pillar titles={titles} />
             <Post.Tags tags={metaData.tags as unknown as string[]} />
-          </Post.Aside.Left>
+          </Post.Layout.Left>
 
-          <Post.Center>
+          <Post.Layout.Center>
             <MDXRemote {...mdxSource} components={components} />
             <Post.Authors author={author} translator={translator} />
-          </Post.Center>
+          </Post.Layout.Center>
 
-          <Post.Aside.Right>
+          <Post.Layout.Right>
             <Post.Newsletter />
-          </Post.Aside.Right>
+          </Post.Layout.Right>
         </Post.Layout>
       </Main>
     </>
