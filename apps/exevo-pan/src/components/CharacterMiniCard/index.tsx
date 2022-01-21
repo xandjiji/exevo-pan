@@ -11,6 +11,7 @@ const CharacterMiniCard = ({
   displayServer = false,
   outfitSrc = DEFAULT_OUTFIT_SRC,
   characterData,
+  forceSubtitle,
   ...props
 }: CharacterMiniCardProps): JSX.Element => {
   const {
@@ -37,7 +38,8 @@ const CharacterMiniCard = ({
           )}
         </S.Nickname>
         <S.Description>
-          Level {level} - {vocation} {displayServer && `(${world})`}
+          {forceSubtitle ??
+            `Level ${level} - ${vocation}${displayServer ? ` (${world})` : ''}`}
         </S.Description>
       </div>
     </S.Wrapper>

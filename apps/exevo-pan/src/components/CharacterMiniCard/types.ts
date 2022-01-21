@@ -5,4 +5,5 @@ export interface CharacterMiniCardProps
   displayServer?: boolean
   outfitSrc?: string
   characterData: SingleCharacterData
+  forceSubtitle?: string
 }

@@ -10,6 +10,7 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => (
       Support the authors donating Tibia Coins 😄
     </S.Title>
     <CharacterMiniCard
+      forceSubtitle="Author"
       characterData={author}
       outfitSrc={author.outfitSrc}
       displayLink
@@ -17,6 +18,7 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => (
     />
     {translator && (
       <CharacterMiniCard
+        forceSubtitle="Translator"
         characterData={translator}
         outfitSrc={translator.outfitSrc}
         displayLink

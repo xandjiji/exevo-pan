@@ -35,4 +35,15 @@ describe('<CharacterMiniCard />', () => {
       screen.getByRole('link', { name: 'Go to character page' }),
     ).toBeInTheDocument()
   })
+
+  test('should render forced subtitle', () => {
+    renderWithProviders(
+      <CharacterMiniCard
+        characterData={mockCharacterData}
+        forceSubtitle="This is a forced subtitle"
+      />,
+    )
+
+    expect(screen.getByText('This is a forced subtitle')).toBeInTheDocument()
+  })
 })
