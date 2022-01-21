@@ -4,10 +4,8 @@ import { Smooth, InnerContainer } from 'styles'
 import ErrorIconSvg from 'assets/svgs/error.svg'
 
 export const Wrapper = styled.main`
-  position: relative;
-  z-index: 99;
-  width: 100vw;
-  height: 100%;
+  display: grid;
+  grid-template-rows: 25vh 1fr;
 
   * {
     ${Smooth}
@@ -15,11 +13,10 @@ export const Wrapper = styled.main`
 `
 
 export const Top = styled.div`
+  padding-bottom: 16px;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  width: 100%;
-  height: 50%;
   background-color: var(--surface);
 `
 
@@ -31,9 +28,8 @@ export const Title = styled.span`
 `
 
 export const Bottom = styled.div`
-  padding-top: 6px;
-  width: 100%;
-  height: 50%;
+  padding-bottom: 64px;
+  padding-top: 16px;
   background-color: var(--primary);
   text-align: center;
 `
