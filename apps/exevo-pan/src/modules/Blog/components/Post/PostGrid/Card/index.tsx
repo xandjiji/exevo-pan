@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useOnImageLoad } from 'hooks'
 import NextLink from 'next/link'
 import NextImage from 'next/image'
 import { routes } from 'Constants'
@@ -7,7 +7,7 @@ import { CardProps } from './types'
 
 const Card = ({ post }: CardProps): JSX.Element => {
   const { thumbnail, title } = post
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, onLoad] = useOnImageLoad()
 
   return (
     <S.Card key={post.slug}>
@@ -18,7 +18,7 @@ const Card = ({ post }: CardProps): JSX.Element => {
           layout="fixed"
           width={48}
           height={48}
-          onLoad={() => setLoaded(true)}
+          onLoad={onLoad}
         />
       </S.ThumbnailWrapper>
 

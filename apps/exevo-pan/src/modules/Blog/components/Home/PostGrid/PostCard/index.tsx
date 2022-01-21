@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import { useOnImageLoad } from 'hooks'
 import NextLink from 'next/link'
 import NextImage from 'next/image'
 import { routes, blogTags } from 'Constants'
@@ -14,7 +15,7 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
     translations: { common },
   } = useTranslations()
 
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, onLoad] = useOnImageLoad()
 
   const { thumbnail, title, date, slug, description, tags } = postData
   const dateObject = useMemo(() => extractDate(date), [date])
@@ -28,7 +29,7 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
           layout="fixed"
           width={120}
           height={120}
-          onLoad={() => setLoaded(true)}
+          onLoad={onLoad}
         />
       </S.Thumbnail>
       <S.Body>

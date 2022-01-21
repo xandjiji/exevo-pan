@@ -1,9 +1,9 @@
-import { useState } from 'react'
+import { useOnImageLoad } from 'hooks'
 import * as S from './styles'
 import { HeroProps } from './types'
 
 const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => {
-  const [loaded, setLoaded] = useState(false)
+  const [loaded, onLoad] = useOnImageLoad()
 
   return (
     <S.Wrapper {...props}>
@@ -14,8 +14,7 @@ const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => {
           layout="intrinsic"
           width={240}
           height={240}
-          onLoad={() => setLoaded(true)}
-          priority
+          onLoad={onLoad}
         />
       </S.ImageWrapper>
       <S.TitleWrapper>

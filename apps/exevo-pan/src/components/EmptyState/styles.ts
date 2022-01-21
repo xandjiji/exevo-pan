@@ -8,14 +8,22 @@ export const Wrapper = styled.div`
   border-radius: 24px;
 `
 
-export const NotFoundWrapper = styled.div``
+export const NotFoundWrapper = styled.div`
+  img {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+  }
+
+  &[data-loaded='true'] img {
+    opacity: 0.15;
+  }
+`
 
 export const NotFound = styled(Image).attrs({
   objectFit: 'scale-down',
   src: NotFoundImage,
 })`
   filter: grayscale(0.5);
-  opacity: 0.15;
 `
 
 export const ContentWrapper = styled.div`
