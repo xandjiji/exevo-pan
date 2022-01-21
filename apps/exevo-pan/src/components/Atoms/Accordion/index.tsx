@@ -41,6 +41,7 @@ const Accordion = ({
         aria-label={common.Accordion[open ? 'close' : 'open']}
         onClick={handleClick}
         border={border}
+        suppressHydrationWarning
       >
         {title}
         <S.ArrowIcon />
