@@ -45,6 +45,9 @@ const Aside = styled.aside`
 
 export const Center = styled.div`
   max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
 `
 
 export const Left = styled(Aside)`
