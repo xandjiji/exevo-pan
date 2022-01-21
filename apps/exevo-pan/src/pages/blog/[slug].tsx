@@ -24,6 +24,7 @@ type Props = {
   metaData: Record<string, string>
   author: AuthorData
   translator: AuthorData | false
+  recentPosts: BlogPost[]
   translations: any
 }
 
@@ -39,6 +40,7 @@ export default function PostPage({
   metaData,
   author,
   translator,
+  recentPosts,
   translations,
 }: Props): JSX.Element {
   const postRoute = `${routes.BLOG}/${metaData.slug}`
@@ -124,12 +126,15 @@ export default function PostPage({
 
           <Post.Layout.Right>
             <Post.Newsletter />
+            <Post.PostGrid gridTitle="Recent posts" posts={recentPosts} />
           </Post.Layout.Right>
         </Post.Layout>
       </Main>
     </>
   )
 }
+
+const RECENT_POSTS_AMOUNT = 3
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const slug = params?.slug as string
@@ -175,12 +180,27 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   }
 
+  const { page: posts } = await BlogClient.queryBlog(
+    {
+      paginationOptions: {
+        pageIndex: 0,
+        pageSize: RECENT_POSTS_AMOUNT + 1,
+      },
+    },
+    locale,
+  )
+
+  const recentPosts: BlogPost[] = posts
+    .filter((post) => post.slug !== slug)
+    .slice(0, RECENT_POSTS_AMOUNT)
+
   return {
     props: {
       mdxSource,
       metaData: { ...data, slug },
       author,
       translator,
+      recentPosts,
       translations: {
         common: common[locale as RegisteredLocale],
       },
