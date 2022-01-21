@@ -6,7 +6,7 @@ import { CopyToClipboard } from './utils'
 import * as S from './styles'
 import { generateSectionId } from '../../../utils'
 
-const Section = ({
+const HeadingSection = ({
   children,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element => {
@@ -41,4 +41,4 @@ const Section = ({
   )
 }
 
-export default Section
+export default HeadingSection
