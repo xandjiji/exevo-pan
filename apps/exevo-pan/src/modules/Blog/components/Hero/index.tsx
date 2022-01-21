@@ -15,6 +15,7 @@ const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => {
           width={240}
           height={240}
           onLoad={() => setLoaded(true)}
+          priority
         />
       </S.ImageWrapper>
       <S.TitleWrapper>
