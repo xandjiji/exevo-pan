@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
   gap: 16px;
 
   width: fit-content;
+
+  &:not(:first-child) {
+    margin-top: 12px;
+  }
 `
 
 export const Link = styled.a`

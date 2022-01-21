@@ -10,5 +10,9 @@ export const headings = css`
     font-size: 32px;
     font-weight: 300;
     letter-spacing: 0.5px;
+
+    &:not(:first-child) {
+      margin-top: 12px;
+    }
   }
 `
