@@ -42,11 +42,12 @@ export const Wrapper = styled.div`
   ${blockquote}
 `
 
-export { default as Aside } from './Aside'
 export { default as Authors } from './Authors'
+export { default as Aside } from './Aside'
 export { default as BlockSection } from './BlockSection'
 export { default as Breadcrumbs } from './Breadcrumbs'
-export { default as ContentWrapper } from './ContentWrapper'
+export { default as Center } from './Center'
+export { default as Layout } from './Layout'
 export { default as Hero } from './Hero'
 export { default as Newsletter } from './Newsletter'
 export { default as Pillar } from './Pillar'

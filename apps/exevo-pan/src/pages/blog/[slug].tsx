@@ -109,18 +109,23 @@ export default function PostPage({
           } ${day}, ${year}`}
           src={metaData.thumbnail}
         />
-        <Post.ContentWrapper>
-          <Post.Aside.Left style={{ justifySelf: 'right' }}>
+
+        <Post.Layout>
+          <Post.Aside.Left>
             <Post.Breadcrumbs postTitle={metaData.title} />
             <Post.Pillar titles={titles} />
             <Post.Tags tags={metaData.tags as unknown as string[]} />
           </Post.Aside.Left>
-          <MDXRemote {...mdxSource} components={components} />
-          <Post.Aside.Right style={{ justifySelf: 'left', zIndex: 4 }}>
+
+          <Post.Center>
+            <MDXRemote {...mdxSource} components={components} />
+            <Post.Authors author={author} translator={translator} />
+          </Post.Center>
+
+          <Post.Aside.Right>
             <Post.Newsletter />
           </Post.Aside.Right>
-        </Post.ContentWrapper>
-        <Post.Authors author={author} translator={translator} />
+        </Post.Layout>
       </Main>
     </>
   )
