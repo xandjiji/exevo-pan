@@ -25,6 +25,15 @@ export const ImageWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  img {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+  }
+
+  &[data-loaded='true'] img {
+    opacity: 0.15;
+  }
 `
 
 export const HeroImage = styled(Image)`
