@@ -28,7 +28,11 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
           layout="fixed"
           width={160}
           height={160}
-          onLoad={() => setLoaded(true)}
+          onLoad={(event) => {
+            if (event.target.src.indexOf('data:image/gif;base64') < 0) {
+              setLoaded(true)
+            }
+          }}
         />
       </S.Thumbnail>
       <S.Body>
