@@ -1,10 +1,10 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useOnScreen } from 'hooks'
-import { useCurrentSection } from '../../../contexts/useCurrentSection'
+import { useCurrentSection } from '../../../../contexts/useCurrentSection'
 import { CopyToClipboard } from './utils'
 import * as S from './styles'
-import { generateSectionId } from '../../../utils'
+import { generateSectionId } from '../../../../utils'
 
 const HeadingSection = ({
   children,

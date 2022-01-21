@@ -14,7 +14,7 @@ import { common } from 'locales'
 const components = {
   h1: 'h2',
   h2: Post.HeadingSection,
-  wrapper: Post.Wrapper,
+  wrapper: Post.ContentWrapper,
   Button: dynamic(() => import('components/Atoms/Button')),
   table: Post.Table,
 }
