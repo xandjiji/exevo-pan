@@ -30,6 +30,7 @@ export const Wrapper = styled.div`
 `
 const Aside = styled.aside`
   display: flex;
+  flex-direction: column;
   gap: 32px;
 
   width: 100%;
@@ -39,7 +40,15 @@ const Aside = styled.aside`
     position: sticky;
     top: 88px;
     z-index: 5;
-    width: fit-content;
+    max-width: 172px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 216px;
+  }
+
+  @media (min-width: 1600px) {
+    max-width: 276px;
   }
 `
 
@@ -56,19 +65,9 @@ export const Left = styled(Aside)`
 
   @media (min-width: 1024px) {
     flex-direction: column;
-    max-width: 172px;
-  }
-
-  @media (min-width: 1200px) {
-    max-width: 216px;
-  }
-
-  @media (min-width: 1600px) {
-    max-width: 276px;
   }
 `
 
 export const Right = styled(Aside)`
   justify-self: left;
-  z-index: 4;
 `
