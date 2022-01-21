@@ -1,12 +1,10 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 
 export const Card = styled.li`
   position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
-
-  list-style-type: none;
 
   a {
     position: absolute;
@@ -48,26 +46,17 @@ export const ThumbnailWrapper = styled.div`
   }
 `
 
-const ellipsedText = css`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-`
-
 export const TextWrapper = styled.div`
-  ${ellipsedText}
   display: grid;
   gap: 2px;
 `
 
 export const Title = styled.h5`
-  ${ellipsedText}
   font-size: 16px;
   font-weight: 400;
-`
 
-export const Description = styled.p`
-  ${ellipsedText}
-  font-size: 12px;
-  font-weight: 300;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 `

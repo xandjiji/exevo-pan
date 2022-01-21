@@ -6,7 +6,7 @@ import * as S from './styles'
 import { CardProps } from './types'
 
 const Card = ({ post }: CardProps): JSX.Element => {
-  const { thumbnail, title, description } = post
+  const { thumbnail, title } = post
   const [loaded, setLoaded] = useState(false)
 
   return (
@@ -24,7 +24,6 @@ const Card = ({ post }: CardProps): JSX.Element => {
 
       <S.TextWrapper>
         <S.Title>{title}</S.Title>
-        <S.Description>{description}</S.Description>
       </S.TextWrapper>
       <NextLink href={`${routes.BLOG}/${post.slug}`}>{title}</NextLink>
     </S.Card>
