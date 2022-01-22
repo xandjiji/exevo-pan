@@ -1,4 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
+import { SpritePortrait } from 'components/Atoms'
 import * as S from './styles'
 import { CharacterMiniCardProps } from './types'
 
@@ -22,7 +23,14 @@ const CharacterMiniCard = ({
 
   return (
     <S.Wrapper isCard={isCard} {...props}>
-      <S.SpritePortrait src={outfitSrc} alt={name} title={name} />
+      <SpritePortrait
+        offset
+        width={64}
+        height={64}
+        src={outfitSrc}
+        alt={name}
+        title={name}
+      />
       <div>
         <S.Nickname>
           {name}

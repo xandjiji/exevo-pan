@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { SpritePortrait as BaseSpriteProtrait } from 'components/Atoms'
 import { MaterialCard, Clickable } from 'styles'
 import ExternalIconSvg from 'assets/svgs/external.svg'
 
@@ -8,19 +7,6 @@ export const Wrapper = styled.div<{ isCard: boolean }>`
   display: flex;
   align-items: center;
   gap: 16px;
-
-  > *:first-child {
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
-  }
-`
-
-export const SpritePortrait = styled(BaseSpriteProtrait)`
-  margin-top: -24px;
-  margin-left: -24px;
-  width: 64px;
-  height: 64px;
 `
 
 export const Nickname = styled.p`
