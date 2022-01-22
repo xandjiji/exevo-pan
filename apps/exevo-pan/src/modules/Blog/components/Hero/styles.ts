@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { FadeImage } from 'components/Atoms'
 import { InnerContainer, Smooth } from 'styles'
 
 export const Wrapper = styled.section`
@@ -20,7 +19,7 @@ export const Wrapper = styled.section`
   }
 `
 
-export const Image = styled(FadeImage)`
+export const ImageWrapper = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
