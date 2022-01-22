@@ -1,8 +1,9 @@
 import styled from 'styled-components'
+import { FadeImage } from 'components/Atoms'
 import { MaterialCard, Smooth, Shadow } from 'styles'
 import BaseTag from '../../../Tag'
 
-export const Thumbnail = styled.div`
+export const Thumbnail = styled(FadeImage)`
   position: relative;
   flex-shrink: 0;
   height: 180px;
@@ -22,13 +23,6 @@ export const Thumbnail = styled.div`
 
   img {
     object-fit: scale-down;
-    opacity: 0;
-
-    transition: opacity 0.2s ease-out;
-  }
-
-  &[data-loaded='true'] img {
-    opacity: 1;
   }
 `
 

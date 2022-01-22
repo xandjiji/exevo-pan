@@ -1,8 +1,6 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useOnImageLoad } from 'hooks'
 import NextLink from 'next/link'
-import NextImage from 'next/image'
 import { routes, blogTags } from 'Constants'
 import { extractDate } from './utils'
 import * as S from './styles'
@@ -15,23 +13,19 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
     translations: { common },
   } = useTranslations()
 
-  const [loaded, onLoad] = useOnImageLoad()
-
   const { thumbnail, title, date, slug, description, tags } = postData
   const dateObject = useMemo(() => extractDate(date), [date])
 
   return (
     <S.Wrapper {...props}>
-      <S.Thumbnail suppressHydrationWarning data-loaded={loaded}>
-        <NextImage
-          src={thumbnail}
-          alt={title}
-          layout="fixed"
-          width={120}
-          height={120}
-          onLoad={onLoad}
-        />
-      </S.Thumbnail>
+      <S.Thumbnail
+        src={thumbnail}
+        alt={title}
+        layout="fixed"
+        width={120}
+        height={120}
+      />
+
       <S.Body>
         <S.Title>{title}</S.Title>
         <S.Date>

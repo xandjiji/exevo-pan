@@ -9,14 +9,7 @@ const Newsletter = (
       Get our <strong>newsletter</strong>
       <br />
       and receive every new content!
-      <S.ImageWrapper>
-        <S.MailboxImage
-          alt="Royal mail"
-          layout="fixed"
-          width={64}
-          height={64}
-        />
-      </S.ImageWrapper>
+      <S.MailboxImage alt="Royal mail" layout="fixed" width={64} height={64} />
     </S.Title>
 
     <S.FormGroup>

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Image from 'next/image'
+import { FadeImage } from 'components/Atoms'
 import { InnerContainer, Smooth } from 'styles'
 
 export const Wrapper = styled.section`
@@ -20,23 +20,12 @@ export const Wrapper = styled.section`
   }
 `
 
-export const ImageWrapper = styled.div`
+export const Image = styled(FadeImage)`
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 
-  img {
-    opacity: 0;
-    transition: opacity 0.2s ease-out;
-  }
-
-  &[data-loaded='true'] img {
-    opacity: 0.15;
-  }
-`
-
-export const HeroImage = styled(Image)`
   filter: grayscale(0.75) brightness(150%);
   opacity: 0.15;
 `

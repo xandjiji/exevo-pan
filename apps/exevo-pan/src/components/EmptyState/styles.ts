@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Image from 'next/image'
+import { FadeImage } from 'components/Atoms'
 import NotFoundImage from 'assets/notFound.png'
 
 export const Wrapper = styled.div`
@@ -8,21 +8,11 @@ export const Wrapper = styled.div`
   border-radius: 24px;
 `
 
-export const NotFoundWrapper = styled.div`
-  img {
-    opacity: 0;
-    transition: opacity 0.2s ease-out;
-  }
-
-  &[data-loaded='true'] img {
-    opacity: 0.15;
-  }
-`
-
-export const NotFound = styled(Image).attrs({
+export const Image = styled(FadeImage).attrs({
   objectFit: 'scale-down',
   src: NotFoundImage,
 })`
+  opacity: 0.15;
   filter: grayscale(0.5);
 `
 

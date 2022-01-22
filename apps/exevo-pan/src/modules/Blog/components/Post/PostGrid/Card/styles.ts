@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { FadeImage } from 'components/Atoms'
 
 export const Card = styled.li`
   position: relative;
@@ -22,7 +23,7 @@ export const Card = styled.li`
   }
 `
 
-export const ThumbnailWrapper = styled.div`
+export const Thumbnail = styled(FadeImage)`
   position: relative;
   flex-shrink: 0;
   height: 56px;
@@ -36,13 +37,6 @@ export const ThumbnailWrapper = styled.div`
 
   img {
     object-fit: contain;
-    opacity: 0;
-
-    transition: opacity 0.2s ease-out;
-  }
-
-  &[data-loaded='true'] img {
-    opacity: 1;
   }
 `
 

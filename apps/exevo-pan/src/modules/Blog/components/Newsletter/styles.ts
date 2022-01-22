@@ -1,6 +1,5 @@
 import styled from 'styled-components'
-import Image from 'next/image'
-import { Button as BaseButton } from 'components/Atoms'
+import { Button as BaseButton, FadeImage } from 'components/Atoms'
 import { MaterialCard } from 'styles'
 import MailboxPng from 'assets/mailbox.png'
 import LetterPng from 'assets/letter.png'
@@ -21,15 +20,11 @@ export const Title = styled.h4`
   font-weight: 300;
 `
 
-export const ImageWrapper = styled.div`
+export const MailboxImage = styled(FadeImage).attrs({ src: MailboxPng })`
   position: absolute;
   top: 0;
   right: 0;
-`
 
-export const MailboxImage = styled(Image).attrs({
-  src: MailboxPng,
-})`
   filter: grayscale(0.75);
   opacity: 0.1;
 `
@@ -50,6 +45,6 @@ export const Button = styled(BaseButton)`
   white-space: nowrap;
 `
 
-export const LetterImage = styled(Image).attrs({
+export const LetterImage = styled(FadeImage).attrs({
   src: LetterPng,
 })``
