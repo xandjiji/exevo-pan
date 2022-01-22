@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Image from 'next/image'
 import { useOnImageLoad } from 'hooks'
 import * as S from './styles'
@@ -17,4 +18,4 @@ const FadeImage = ({
   )
 }
 
-export default FadeImage
+export default memo(FadeImage)
