@@ -7,7 +7,7 @@ module.exports = withReactSvg({
   reactStrictMode: true,
   include: path.resolve(__dirname, 'src/assets/svgs'),
   images: {
-    domains: ['i.imgur.com'],
+    domains: ['static.tibia.com', 'i.imgur.com'],
   },
   webpack(config) {
     return config
