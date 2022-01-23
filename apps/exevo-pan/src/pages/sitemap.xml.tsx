@@ -1,12 +1,18 @@
 import { GetServerSideProps } from 'next'
+import { BlogClient } from 'services'
 import { links, routes } from 'Constants'
+
+const MAIN_LANGUAGE = 'en'
 
 const buildRoute = (route: string): string => `${links.CANONICAL}${route}`
 
-const today = () => {
-  const now = new Date()
-  return `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
-}
+const buildPostRoute = (slug: string, locale = ''): string =>
+  `${links.CANONICAL}${locale}${routes.BLOG}/${slug}`
+
+const formatDate = (date: Date) =>
+  `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
+const today = () => formatDate(new Date())
 
 const Sitemap: React.FC = () => null
 
@@ -59,11 +65,55 @@ const about = `
     <changefreq>monthly</changefreq>
 </url>`
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+const generatePostEntries = (
+  posts: BlogPost[],
+  alternateLocales: string[],
+): string => {
+  const generateAlternates = (slug: string) => {
+    let alternates = ''
+    alternateLocales.forEach((locale) => {
+      alternates += `
+<xhtml:link
+    rel="alternate"
+    hreflang="${locale}"
+    href="${buildPostRoute(slug, `/${locale}`)}"/>`
+    })
+
+    return alternates
+  }
+
+  let entries = ''
+  posts.forEach(({ slug, date }) => {
+    entries += `
+<url>
+    <loc>${buildPostRoute(slug)}</loc>
+    <lastmod>${formatDate(new Date(date))}</lastmod>
+    <changefreq>monthly</changefreq>
+    ${generateAlternates(slug)}
+</url>`
+  })
+
+  return entries
+}
+
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  locales,
+}) => {
+  const paginationOptions: PaginationOptions = { pageIndex: 0, pageSize: 999 }
+  const { page: posts } = await BlogClient.queryBlog({ paginationOptions })
+
+  const alternateLocales = (locales ?? []).filter(
+    (locale) => locale !== MAIN_LANGUAGE,
+  )
+
   if (res) {
     res.setHeader('Content-Type', 'text/xml')
     res.write(`<?xml version="1.0" encoding="UTF-8"?>
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset
+    xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+    xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
     ${index}
     ${history}
     ${statistics}
@@ -71,6 +121,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     ${blog}
     ${advertise}
     ${about}
+
+    ${generatePostEntries(posts, alternateLocales)}
     </urlset>`)
     res.end()
   }
