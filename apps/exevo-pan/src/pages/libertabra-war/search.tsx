@@ -18,10 +18,6 @@ export default function LibertabraWar(): JSX.Element {
         <title>{translations.war.Meta.Search.title}</title>
         <meta name="title" content={translations.war.Meta.Search.title} />
         <meta
-          property="og:site_name"
-          content={translations.war.Meta.Search.title}
-        />
-        <meta
           property="og:title"
           content={translations.war.Meta.Search.title}
         />

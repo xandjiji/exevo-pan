@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Leilões',
+    title: 'Leilões',
     description: 'Filtre e explore chares de Tibia no Char Bazaar oficial!',
   },
   AuctionsGrid: {

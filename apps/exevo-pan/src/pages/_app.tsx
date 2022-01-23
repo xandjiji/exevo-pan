@@ -29,6 +29,7 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     <>
       <Head>
         <meta name="viewport" content="width=device-width" />
+        <meta property="og:site_name" content="Exevo Pan" />
         <meta key="preview-1" property="og:image" content="/preview.png" />
         <meta key="preview-2" property="twitter:image" content="/preview.png" />
         <meta

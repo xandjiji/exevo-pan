@@ -26,10 +26,6 @@ export default function Highscores({
           content={translations.statistics.Meta.Highscores.title}
         />
         <meta
-          property="og:site_name"
-          content={translations.statistics.Meta.Highscores.title}
-        />
-        <meta
           property="og:title"
           content={translations.statistics.Meta.Highscores.title}
         />

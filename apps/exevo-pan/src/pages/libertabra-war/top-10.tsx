@@ -22,10 +22,6 @@ export default function LibertabraWar({
       <Head>
         <title>{translations.war.Meta.Top10.title}</title>
         <meta name="title" content={translations.war.Meta.Top10.title} />
-        <meta
-          property="og:site_name"
-          content={translations.war.Meta.Top10.title}
-        />
         <meta property="og:title" content={translations.war.Meta.Top10.title} />
         <meta
           property="twitter:title"

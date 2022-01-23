@@ -31,10 +31,6 @@ export default function Home({
       <Head>
         <title>{translations.homepage.Meta.title}</title>
         <meta name="title" content={translations.homepage.Meta.title} />
-        <meta
-          property="og:site_name"
-          content={translations.homepage.Meta.title}
-        />
         <meta property="og:title" content={translations.homepage.Meta.title} />
         <meta
           property="twitter:title"

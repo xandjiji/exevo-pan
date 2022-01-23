@@ -27,10 +27,6 @@ export default function Advertise({
       <Head>
         <title>{translations.advertise.Meta.title}</title>
         <meta name="title" content={translations.advertise.Meta.title} />
-        <meta
-          property="og:site_name"
-          content={translations.advertise.Meta.title}
-        />
         <meta property="og:title" content={translations.advertise.Meta.title} />
         <meta
           property="twitter:title"

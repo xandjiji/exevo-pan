@@ -30,10 +30,6 @@ export default function BazaarHistory({
         <title>{translations.bazaarHistory.Meta.title}</title>
         <meta name="title" content={translations.bazaarHistory.Meta.title} />
         <meta
-          property="og:site_name"
-          content={translations.bazaarHistory.Meta.title}
-        />
-        <meta
           property="og:title"
           content={translations.bazaarHistory.Meta.title}
         />

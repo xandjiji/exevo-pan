@@ -1,7 +1,7 @@
 export default {
   Meta: {
     Overall: {
-      title: 'Exevo Pan - Libertabra War',
+      title: 'Libertabra War',
       description:
         '¡Siga los datos y estadísticas de guerra de Libertabra en vivo!',
     },

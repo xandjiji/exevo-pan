@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Advertise',
+    title: 'Advertise',
     description: 'Highlight your own auction and get higher bids!',
   },
   StepItems: {

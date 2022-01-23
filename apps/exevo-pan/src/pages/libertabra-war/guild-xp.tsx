@@ -23,10 +23,6 @@ export default function LibertabraWar({
         <title>{translations.war.Meta.GuildXP.title}</title>
         <meta name="title" content={translations.war.Meta.GuildXP.title} />
         <meta
-          property="og:site_name"
-          content={translations.war.Meta.GuildXP.title}
-        />
-        <meta
           property="og:title"
           content={translations.war.Meta.GuildXP.title}
         />

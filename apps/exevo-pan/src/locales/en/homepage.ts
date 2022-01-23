@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Current Auctions',
+    title: 'Current Auctions',
     description:
       'Filter and search for Tibia characters on the official Char Bazaar!',
   },

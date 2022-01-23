@@ -57,7 +57,6 @@ export default function PostPage({
       <Head>
         <title>{metaData.title} - Exevo Pan</title>
         <meta name="title" content={metaData.title} />
-        <meta property="og:site_name" content={metaData.title} />
         <meta property="og:title" content={metaData.title} />
         <meta property="twitter:title" content={metaData.title} />
 

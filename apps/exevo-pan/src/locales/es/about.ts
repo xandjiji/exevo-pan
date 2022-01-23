@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Sobre nosotros',
+    title: 'Sobre nosotros',
     description:
       'Sobre el sitio Exevo Pan, declaraciones e información de contacto',
   },

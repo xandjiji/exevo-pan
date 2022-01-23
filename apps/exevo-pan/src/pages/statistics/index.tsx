@@ -26,10 +26,6 @@ export default function Statistics({
           content={translations.statistics.Meta.Statistics.title}
         />
         <meta
-          property="og:site_name"
-          content={translations.statistics.Meta.Statistics.title}
-        />
-        <meta
           property="og:title"
           content={translations.statistics.Meta.Statistics.title}
         />

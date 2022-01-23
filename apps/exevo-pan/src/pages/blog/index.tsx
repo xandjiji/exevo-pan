@@ -23,7 +23,6 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
       <Head>
         <title>{TITLE} - Exevo Pan</title>
         <meta name="title" content={TITLE} />
-        <meta property="og:site_name" content={TITLE} />
         <meta property="og:title" content={TITLE} />
         <meta property="twitter:title" content={TITLE} />
 

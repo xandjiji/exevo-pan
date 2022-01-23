@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Subastas',
+    title: 'Subastas',
     description:
       '¡Filtra y explora los caracteres de Tibia en el Char Bazaar oficial!',
   },
