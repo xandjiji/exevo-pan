@@ -6,7 +6,7 @@ import { AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { endpoints, routes } from 'Constants'
+import { endpoints, routes, jsonld } from 'Constants'
 import { common, advertise } from 'locales'
 
 const pageUrl = buildUrl(routes.ADVERTISE)
@@ -68,6 +68,14 @@ export default function Advertise({
           href={buildUrl(routes.ADVERTISE, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
+        />
       </Head>
 
       <Main>

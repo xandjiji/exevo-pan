@@ -7,7 +7,7 @@ import { TibiaDataClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { authors, routes } from 'Constants'
+import { authors, routes, jsonld } from 'Constants'
 import { common, about } from 'locales'
 
 const pageUrl = buildUrl(routes.ABOUT)
@@ -74,6 +74,14 @@ export default function About({
                 scroll-padding-top: 104px;
             }
          `,
+          }}
+        />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
           }}
         />
       </Head>

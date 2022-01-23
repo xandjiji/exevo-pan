@@ -4,7 +4,7 @@ import { Header, SearchGrid } from 'modules/LibertabraWar'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes, endpoints, paths } from 'Constants'
+import { routes, endpoints, paths, jsonld } from 'Constants'
 import { common, war } from 'locales'
 
 const pageUrl = buildUrl(routes.LIBERTABRA_WAR_SEARCH)
@@ -73,6 +73,14 @@ export default function LibertabraWar(): JSX.Element {
           href={`${endpoints.WAR_DATA}${paths.BONES_DATA}`}
           as="fetch"
           crossOrigin="anonymous"
+        />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
         />
       </Head>
 

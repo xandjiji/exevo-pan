@@ -5,7 +5,7 @@ import { ManageDataClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common, war } from 'locales'
 
 const pageUrl = buildUrl(routes.LIBERTABRA_WAR)
@@ -66,6 +66,14 @@ export default function LibertabraWar({
           href={buildUrl(routes.LIBERTABRA_WAR, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
+        />
       </Head>
 
       <Main>

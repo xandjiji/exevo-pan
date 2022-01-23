@@ -6,7 +6,7 @@ import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes, endpoints } from 'Constants'
+import { routes, endpoints, jsonld } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -73,6 +73,14 @@ export default function BazaarHistory({
           href={buildUrl(routes.BAZAAR_HISTORY, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
+        />
       </Head>
 
       <Main>
