@@ -60,7 +60,6 @@ const Header = ({
               {pageTitle && <S.H1>{pageTitle}</S.H1>}
               <S.ExevoPanLogo
                 unoptimized
-                priority
                 aria-label={common.Header.logoLabel}
                 alt={
                   heading[pathname]
