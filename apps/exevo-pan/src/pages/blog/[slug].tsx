@@ -63,7 +63,13 @@ export default function PostPage({
         <meta name="description" content={metaData.description} />
         <meta property="twitter:description" content={metaData.description} />
         <meta property="og:description" content={metaData.description} />
-        <meta property="og:type" content="website" />
+
+        <meta property="og:type" content="article" />
+        <meta property="article:author" content={author.name} />
+        <meta
+          property="article:published_time"
+          content={`${year}-${month}-${day}`}
+        />
 
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
