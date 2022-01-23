@@ -12,8 +12,23 @@ export const Figure = styled.figure`
     margin-left: auto;
   }
 
-  > div > div {
-    ${Shadow}
+  > div {
+    transition: box-shadow 0.2s ease-out;
+  }
+
+  img {
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+  }
+
+  &[data-loaded='true'] {
+    > div {
+      ${Shadow}
+    }
+
+    img {
+      opacity: 1;
+    }
   }
 `
 
