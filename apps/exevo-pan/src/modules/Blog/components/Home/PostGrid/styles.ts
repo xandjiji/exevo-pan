@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
 
-export const Grid = styled.section<{ empty: boolean }>`
+export const Grid = styled.ul<{ empty: boolean }>`
   height: 100%;
   flex-grow: 1;
 

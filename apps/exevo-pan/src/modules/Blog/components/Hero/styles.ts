@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { InnerContainer, Smooth } from 'styles'
 
-export const Wrapper = styled.section`
+export const Wrapper = styled.div`
   ${InnerContainer}
   padding-top: 24px;
   padding-bottom: 24px;

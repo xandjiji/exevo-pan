@@ -141,31 +141,33 @@ export default function PostPage({
       </Head>
 
       <Main>
-        <Post.Hero
-          title={metaData.title}
-          subtitle={`${
-            translations.common.FullMonth[+month - 1]
-          } ${day}, ${year}`}
-          src={metaData.thumbnail}
-        />
+        <article>
+          <Post.Hero
+            title={metaData.title}
+            subtitle={`${
+              translations.common.FullMonth[+month - 1]
+            } ${day}, ${year}`}
+            src={metaData.thumbnail}
+          />
 
-        <Post.Layout>
-          <Post.Layout.Left>
-            <Post.Breadcrumbs postTitle={metaData.title} />
-            <Post.Pillar titles={titles} />
-            <Post.Tags tags={metaData.tags as unknown as string[]} />
-          </Post.Layout.Left>
+          <Post.Layout>
+            <Post.Layout.Left>
+              <Post.Breadcrumbs postTitle={metaData.title} />
+              <Post.Pillar titles={titles} />
+              <Post.Tags tags={metaData.tags as unknown as string[]} />
+            </Post.Layout.Left>
 
-          <Post.Layout.Center>
-            <MDXRemote {...mdxSource} components={components} />
-            <Post.Authors author={author} translator={translator} />
-          </Post.Layout.Center>
+            <Post.Layout.Center>
+              <MDXRemote {...mdxSource} components={components} />
+              <Post.Authors author={author} translator={translator} />
+            </Post.Layout.Center>
 
-          <Post.Layout.Right>
-            <Post.Newsletter />
-            <Post.PostGrid gridTitle="Recent posts" posts={recentPosts} />
-          </Post.Layout.Right>
-        </Post.Layout>
+            <Post.Layout.Right>
+              <Post.Newsletter />
+              <Post.PostGrid gridTitle="Recent posts" posts={recentPosts} />
+            </Post.Layout.Right>
+          </Post.Layout>
+        </article>
       </Main>
     </>
   )

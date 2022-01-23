@@ -7,7 +7,7 @@ import { code } from './code'
 import { lists } from './lists'
 import { blockquote } from './blockquote'
 
-export const ContentWrapper = styled.div`
+export const ContentWrapper = styled.main`
   ${MaterialCard}
   ${InnerPadding}
 
