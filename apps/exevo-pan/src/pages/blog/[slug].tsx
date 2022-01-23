@@ -92,6 +92,42 @@ export default function PostPage({
         <link rel="alternate" hrefLang="pl" href={buildUrl(postRoute, 'pl')} />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'http://schema.org',
+              '@type': 'Article',
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': pageUrl,
+              },
+              url: pageUrl,
+              image: metaData.thumbnail,
+              publisher: {
+                '@context': 'http://schema.org',
+                '@type': 'Organization',
+                name: 'Exevo Pan',
+                logo: {
+                  '@context': 'http://schema.org',
+                  '@type': 'ImageObject',
+                  url: 'https://i.imgur.com/OEGEUK0.png',
+                  width: '150',
+                  height: '100',
+                },
+              },
+              headline: metaData.title,
+              author: {
+                '@context': 'http://schema.org',
+                '@type': 'Person',
+                name: author.name,
+              },
+              datePublished: `${year}-${month}-${day}`,
+            }),
+          }}
+        />
+
         <style
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
