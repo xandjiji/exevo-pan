@@ -12,11 +12,12 @@ import { routes, authors } from 'Constants'
 import { common } from 'locales'
 
 const components = {
+  wrapper: Post.ContentWrapper,
   h1: 'h2',
   h2: Post.HeadingSection,
-  wrapper: Post.ContentWrapper,
-  Button: dynamic(() => import('components/Atoms/Button')),
   table: Post.Table,
+  Image: Post.Image,
+  Button: dynamic(() => import('components/Atoms/Button')),
 }
 
 type Props = {
