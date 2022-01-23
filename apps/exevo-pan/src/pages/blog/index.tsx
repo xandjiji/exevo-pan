@@ -5,7 +5,7 @@ import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
 import { Main } from 'templates'
-import { routes } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common } from 'locales'
 
 const pageUrl = buildUrl(routes.BLOG)
@@ -52,6 +52,14 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
           href={buildUrl(routes.BLOG, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
+        />
       </Head>
 
       <Main>
