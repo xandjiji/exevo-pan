@@ -19,6 +19,9 @@ const components = {
   table: Post.Table,
   Image: Post.Image,
   Button: dynamic(() => import('components/Atoms/Button')),
+  AboutPageStyle: dynamic(
+    () => import('modules/Blog/components/Post/custom/AboutPageStyle'),
+  ),
 }
 
 type Props = {
