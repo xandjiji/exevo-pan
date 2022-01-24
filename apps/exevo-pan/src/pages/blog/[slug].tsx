@@ -22,6 +22,9 @@ const components = {
   AboutPageStyle: dynamic(
     () => import('modules/Blog/components/Post/custom/AboutPageStyle'),
   ),
+  ContactSection: dynamic(
+    () => import('modules/Blog/components/Post/custom/ContactSection'),
+  ),
 }
 
 type Props = {
