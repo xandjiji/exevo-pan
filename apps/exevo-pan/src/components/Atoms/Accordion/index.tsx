@@ -21,7 +21,7 @@ const Accordion = ({
   const { current: contentId } = useRef(uuidv4())
 
   const [innerOpen, setOpen] = useState(initialValue)
-  const open = openProp ?? innerOpen
+  const open = true ?? openProp ?? innerOpen
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
@@ -46,7 +46,11 @@ const Accordion = ({
         {title}
         <S.ArrowIcon />
       </S.Button>
-      <S.Content id={contentId} aria-describedby={buttonId}>
+      <S.Content
+        id={contentId}
+        aria-describedby={buttonId}
+        suppressHydrationWarning
+      >
         {open && children}
       </S.Content>
     </S.Wrapper>
