@@ -9,7 +9,7 @@ export const tagById: Record<string, BlogTag> = {
   },
   tutorial: {
     id: 'tutorial',
-    color: 140,
+    color: 110,
   },
 }
 
