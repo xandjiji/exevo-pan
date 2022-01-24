@@ -28,7 +28,6 @@ const CharacterCard = ({
   } = useTranslations()
 
   const {
-    id,
     nickname,
     outfitId,
     level,
