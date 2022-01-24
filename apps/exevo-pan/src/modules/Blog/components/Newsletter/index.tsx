@@ -27,7 +27,7 @@ const Newsletter = (
         <S.Label htmlFor="newsletter-email-input">Email</S.Label>
         <Input
           id="newsletter-email-input"
-          placeholder="your@email.com"
+          placeholder={blog.Newsletter.emailPlaceholder}
           allowClear
         />
       </S.FormGroup>

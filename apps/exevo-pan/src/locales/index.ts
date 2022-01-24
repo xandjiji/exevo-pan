@@ -6,6 +6,7 @@ import errorPL from './pl/error'
 import blogEN from './en/blog'
 import blogES from './es/blog'
 import blogPT from './pt/blog'
+import blogPL from './pl/blog'
 
 import aboutEN from './en/about'
 import aboutES from './es/about'
@@ -52,7 +53,7 @@ export const blog = {
   en: blogEN,
   es: blogES,
   pt: blogPT,
-  pl: blogEN,
+  pl: blogPL,
 }
 export const about = {
   en: aboutEN,

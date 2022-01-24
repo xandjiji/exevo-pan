@@ -13,7 +13,7 @@ export default {
   },
   Filters: {
     title: 'Filtrar posts',
-    searchLabel: 'Pesquisar pelo blog',
+    searchLabel: 'Pesquisar',
     searchPlaceholder: 'Buscar por posts',
     tagsLabel: 'Tags',
   },
@@ -24,6 +24,7 @@ export default {
     getOur: 'Assine nossa',
     newsletter: 'newsletter',
     for: 'e receba todo conteúdo fresquinho!',
+    emailPlaceholder: 'seu@email.com.br',
     buttonText: 'Assinar',
   },
   Authors: {
