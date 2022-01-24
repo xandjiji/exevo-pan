@@ -21,7 +21,7 @@ const Accordion = ({
   const { current: contentId } = useRef(uuidv4())
 
   const [innerOpen, setOpen] = useState(initialValue)
-  const open = true ?? openProp ?? innerOpen
+  const open = openProp ?? innerOpen
 
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {

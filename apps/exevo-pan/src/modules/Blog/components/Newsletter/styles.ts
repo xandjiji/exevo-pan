@@ -14,7 +14,7 @@ export const Wrapper = styled.section`
   gap: 24px;
 `
 
-export const Title = styled.h4`
+export const Title = styled.h2`
   position: relative;
   font-size: 18px;
   font-weight: 300;

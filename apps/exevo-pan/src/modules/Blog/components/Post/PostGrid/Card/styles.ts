@@ -45,7 +45,7 @@ export const TextWrapper = styled.div`
   gap: 2px;
 `
 
-export const Title = styled.h5`
+export const Title = styled.h4`
   font-size: 16px;
   font-weight: 400;
 
