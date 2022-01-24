@@ -13,7 +13,7 @@ export const AlignedFlex = styled.div`
   align-items: center;
 `
 
-export const Wrapper = styled.div<{ highlighted: boolean }>`
+export const Wrapper = styled.article<{ highlighted: boolean }>`
   ${MaterialCard}
   padding: 16px;
 
