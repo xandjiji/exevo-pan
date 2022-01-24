@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import Image from 'next/image'
 import * as S from './styles'
 import { HeroProps } from './types'
@@ -24,4 +25,4 @@ const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => (
   </S.Wrapper>
 )
 
-export default Hero
+export default memo(Hero)

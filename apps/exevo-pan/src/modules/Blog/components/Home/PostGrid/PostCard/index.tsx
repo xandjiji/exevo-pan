@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { routes, blogTags } from 'Constants'
@@ -46,4 +46,4 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
   )
 }
 
-export default PostCard
+export default memo(PostCard)

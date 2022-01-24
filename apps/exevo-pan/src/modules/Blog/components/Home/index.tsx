@@ -12,16 +12,21 @@ const Home = ({ initialIndex, initialPosts }: HomeProps): JSX.Element => {
   } = useTranslations()
 
   return (
-    <FetchPostsProvider initialIndex={initialIndex} initialPosts={initialPosts}>
+    <>
       <S.Hero title={blog.Meta.title} src="https://i.imgur.com/Jjh4f3q.png" />
       <S.Wrapper>
-        <S.Aside>
-          <Newsletter />
-          <Filters />
-        </S.Aside>
-        <PostGrid />
+        <FetchPostsProvider
+          initialIndex={initialIndex}
+          initialPosts={initialPosts}
+        >
+          <S.Aside>
+            <Newsletter />
+            <Filters />
+          </S.Aside>
+          <PostGrid />
+        </FetchPostsProvider>
       </S.Wrapper>
-    </FetchPostsProvider>
+    </>
   )
 }
 

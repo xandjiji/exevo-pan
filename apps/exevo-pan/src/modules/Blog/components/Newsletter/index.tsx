@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Input } from 'components/Atoms'
 import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
@@ -44,4 +45,4 @@ const Newsletter = (
   )
 }
 
-export default Newsletter
+export default memo(Newsletter)
