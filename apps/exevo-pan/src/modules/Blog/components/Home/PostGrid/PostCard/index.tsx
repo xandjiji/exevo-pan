@@ -10,7 +10,7 @@ const { tagById } = blogTags
 
 const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
   const {
-    translations: { common },
+    translations: { common, blog },
   } = useTranslations()
 
   const { thumbnail, title, date, slug, description, tags } = postData
@@ -36,7 +36,7 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
         <S.TagWrapper>
           {tags.map((tagId) => (
             <S.Tag key={tagId} tagColor={tagById[tagId].color}>
-              {tagById[tagId].name}
+              {blog.Tags[tagId]}
             </S.Tag>
           ))}
         </S.TagWrapper>

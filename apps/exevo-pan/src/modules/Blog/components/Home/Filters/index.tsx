@@ -86,7 +86,7 @@ const Filters = (): JSX.Element => {
         <S.GroupWrapper>
           <S.Label as="p">{blog.Filters.tagsLabel}</S.Label>
           <S.TagWrapper>
-            {blogTags.all.map(({ id, name, color }) => (
+            {blogTags.all.map(({ id, color }) => (
               <Tag
                 key={id}
                 clickable
@@ -94,7 +94,7 @@ const Filters = (): JSX.Element => {
                 onClick={() => toggleTag(id)}
                 tagColor={color}
               >
-                {name}
+                {blog.Tags[id]}
               </Tag>
             ))}
           </S.TagWrapper>

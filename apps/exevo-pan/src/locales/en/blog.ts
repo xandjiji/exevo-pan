@@ -5,6 +5,11 @@ export default {
     breadcrumbRoot: 'Home',
   },
   recentPosts: 'Recent posts',
+  Tags: {
+    news: 'News',
+    article: 'Article',
+    tutorial: 'Tutorial',
+  },
   Filters: {
     title: 'Filter posts',
     searchLabel: 'Blog search',

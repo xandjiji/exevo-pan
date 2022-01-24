@@ -1,21 +1,19 @@
-const news = {
-  id: 'news',
-  name: 'News',
-  color: 210,
-}
-
-const article = {
-  id: 'article',
-  name: 'Article',
-  color: 40,
-}
-
-export const all: BlogTag[] = [news, article]
-
 export const tagById: Record<string, BlogTag> = {
-  news,
-  article,
+  news: {
+    id: 'news',
+    color: 210,
+  },
+  article: {
+    id: 'article',
+    color: 40,
+  },
+  tutorial: {
+    id: 'tutorial',
+    color: 140,
+  },
 }
+
+export const all: BlogTag[] = Object.values(tagById)
 
 export const blogTags = {
   all,

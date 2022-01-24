@@ -1,4 +1,5 @@
-import { memo, useMemo } from 'react'
+import { memo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
 import * as S from './styles'
 import { TagsProps } from './types'
@@ -6,16 +7,15 @@ import { TagsProps } from './types'
 const Tags = ({ tags, ...props }: TagsProps): JSX.Element | null => {
   if (tags.length === 0) return null
 
-  const renderedTags = useMemo(
-    () => blogTags.all.filter(({ id }) => tags.includes(id)),
-    [tags],
-  )
+  const {
+    translations: { blog },
+  } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
-      {renderedTags.map(({ id, name, color }) => (
-        <S.Tag key={id} tagColor={color}>
-          {name}
+      {tags.map((tagId) => (
+        <S.Tag key={tagId} tagColor={blogTags.tagById[tagId].color}>
+          {blog.Tags[tagId]}
         </S.Tag>
       ))}
     </S.Wrapper>
