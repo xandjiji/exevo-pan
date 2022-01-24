@@ -3,6 +3,8 @@ import errorES from './es/error'
 import errorPT from './pt/error'
 import errorPL from './pl/error'
 
+import blogEN from './en/blog'
+
 import aboutEN from './en/about'
 import aboutES from './es/about'
 import aboutPT from './pt/about'
@@ -43,6 +45,12 @@ export const error = {
   es: errorES,
   pt: errorPT,
   pl: errorPL,
+}
+export const blog = {
+  en: blogEN,
+  es: blogEN,
+  pt: blogEN,
+  pl: blogEN,
 }
 export const about = {
   en: aboutEN,

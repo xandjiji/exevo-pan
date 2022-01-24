@@ -1,12 +1,13 @@
 import { Home } from 'modules/Blog'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
 import { Main } from 'templates'
 import { routes, jsonld } from 'Constants'
-import { common } from 'locales'
+import { common, blog } from 'locales'
 
 const pageUrl = buildUrl(routes.BLOG)
 
@@ -15,9 +16,11 @@ type Props = {
 }
 
 export default function PostPage({ initialPosts }: Props): JSX.Element {
-  /* @ ToDo: i18n */
-  const TITLE = 'Blog'
-  const DESCRIPTION = 'This is the blog homepage'
+  const { translations } = useTranslations()
+
+  const TITLE = translations.blog.Meta.title
+  const DESCRIPTION = translations.blog.Meta.description
+
   return (
     <>
       <Head>
@@ -85,6 +88,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       initialPosts: posts,
       translations: {
         common: common[locale as RegisteredLocale],
+        blog: blog[locale as RegisteredLocale],
       },
     },
     revalidate: 60,

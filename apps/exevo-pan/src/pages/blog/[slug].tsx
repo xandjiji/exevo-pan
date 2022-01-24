@@ -1,5 +1,6 @@
 import { Post, parseMarkdownSections } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useTranslations } from 'contexts/useTranslation'
 import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
@@ -9,7 +10,7 @@ import Head from 'next/head'
 import { BlogClient, TibiaDataClient } from 'services'
 import { Main } from 'templates'
 import { routes, authors } from 'Constants'
-import { common } from 'locales'
+import { common, blog } from 'locales'
 
 const components = {
   wrapper: Post.ContentWrapper,
@@ -42,8 +43,9 @@ export default function PostPage({
   author,
   translator,
   recentPosts,
-  translations,
 }: Props): JSX.Element {
+  const { translations } = useTranslations()
+
   const postRoute = `${routes.BLOG}/${metaData.slug}`
   const pageUrl = buildUrl(postRoute)
 
@@ -164,7 +166,10 @@ export default function PostPage({
 
             <Post.Layout.Right>
               <Post.Newsletter />
-              <Post.PostGrid gridTitle="Recent posts" posts={recentPosts} />
+              <Post.PostGrid
+                gridTitle={translations.blog.recentPosts}
+                posts={recentPosts}
+              />
             </Post.Layout.Right>
           </Post.Layout>
         </article>
@@ -242,6 +247,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       recentPosts,
       translations: {
         common: common[locale as RegisteredLocale],
+        blog: blog[locale as RegisteredLocale],
       },
     },
     revalidate: 60,
