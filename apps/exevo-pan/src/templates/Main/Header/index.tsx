@@ -14,7 +14,6 @@ const heading = {
   [routes.BAZAAR_HISTORY]: 'bazaarHistory',
   [routes.STATISTICS]: 'statistics',
   [routes.HIGHSCORES]: 'highscores',
-  [routes.ABOUT]: 'about',
   [routes.LIBERTABRA_WAR]: 'war',
   [routes.ADVERTISE]: 'advertise',
 }

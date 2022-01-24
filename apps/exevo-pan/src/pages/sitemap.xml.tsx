@@ -58,13 +58,6 @@ const advertise = `
     <changefreq>always</changefreq>
 </url>`
 
-const about = `
-<url>
-    <loc>${buildRoute(routes.ABOUT)}</loc>
-    <lastmod>${today()}</lastmod>
-    <changefreq>monthly</changefreq>
-</url>`
-
 const generatePostEntries = (
   posts: BlogPost[],
   alternateLocales: string[],
@@ -120,7 +113,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     ${highscores}
     ${blog}
     ${advertise}
-    ${about}
 
     ${generatePostEntries(posts, alternateLocales)}
     </urlset>`)
