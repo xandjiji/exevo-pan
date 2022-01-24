@@ -8,11 +8,6 @@ import blogES from './es/blog'
 import blogPT from './pt/blog'
 import blogPL from './pl/blog'
 
-import aboutEN from './en/about'
-import aboutES from './es/about'
-import aboutPT from './pt/about'
-import aboutPL from './pl/about'
-
 import advertiseEN from './en/advertise'
 import advertiseES from './es/advertise'
 import advertisePT from './pt/advertise'
@@ -54,12 +49,6 @@ export const blog = {
   es: blogES,
   pt: blogPT,
   pl: blogPL,
-}
-export const about = {
-  en: aboutEN,
-  es: aboutES,
-  pt: aboutPT,
-  pl: aboutPL,
 }
 export const advertise = {
   en: advertiseEN,
