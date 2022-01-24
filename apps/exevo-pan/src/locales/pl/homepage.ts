@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Obecje aukcje',
+    title: 'Exevo Pan - Obecne aukcje',
     description: 'Filtruj i szukaj aukcji na Oficjalnym Bazarze Tibijskim!',
   },
   AuctionsGrid: {
