@@ -26,6 +26,6 @@ export const Grid = styled.ul<{ empty: boolean }>`
 
 export const LazyWatcher = styled.div.attrs({ role: 'none' })`
   position: absolute;
-  bottom: 200px;
+  bottom: 80px;
   left: 0;
 `
