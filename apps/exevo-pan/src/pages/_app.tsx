@@ -31,8 +31,16 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
         <meta name="viewport" content="width=device-width" />
         <meta property="og:site_name" content="Exevo Pan" />
         <meta name="twitter:card" content="summary" />
-        <meta key="preview-1" property="og:image" content="/preview.png" />
-        <meta key="preview-2" property="twitter:image" content="/preview.png" />
+        <meta
+          key="preview-1"
+          property="og:image"
+          content="https://i.imgur.com/obDJJOI.png"
+        />
+        <meta
+          key="preview-2"
+          property="twitter:image"
+          content="https://i.imgur.com/obDJJOI.png"
+        />
       </Head>
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
