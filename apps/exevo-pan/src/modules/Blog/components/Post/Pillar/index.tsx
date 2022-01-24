@@ -1,3 +1,4 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useEffect } from 'react'
 import { useCurrentSection } from '../../../contexts/useCurrentSection'
 import { generateSectionId } from '../../../utils'
@@ -6,6 +7,10 @@ import * as S from './styles'
 import { PillarProps } from './types'
 
 const Pillar = ({ titles, ...props }: PillarProps): JSX.Element | null => {
+  const {
+    translations: { blog },
+  } = useTranslations()
+
   const { currentSection } = useCurrentSection()
 
   useEffect(() => {
@@ -18,7 +23,7 @@ const Pillar = ({ titles, ...props }: PillarProps): JSX.Element | null => {
 
   return (
     <S.Nav {...props}>
-      <S.MainTitle>Índice</S.MainTitle>
+      <S.MainTitle>{blog.Pillar.title}</S.MainTitle>
 
       <S.Ul>
         {titles.map((title) => (

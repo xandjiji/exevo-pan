@@ -16,8 +16,10 @@ const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => (
     </S.ImageWrapper>
 
     <S.TitleWrapper>
-      <S.Title>{title}</S.Title>
-      {!!subtitle && <S.Subtitle>{subtitle}</S.Subtitle>}
+      <S.Title className="hero-title">{title}</S.Title>
+      {!!subtitle && (
+        <S.Subtitle className="hero-subtitle">{subtitle}</S.Subtitle>
+      )}
     </S.TitleWrapper>
   </S.Wrapper>
 )

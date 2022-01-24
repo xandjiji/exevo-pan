@@ -1,5 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Accordion } from 'components/Atoms'
+import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
@@ -7,6 +8,9 @@ import { Tag } from '../..'
 import * as S from './styles'
 
 const Filters = (): JSX.Element => {
+  const {
+    translations: { blog },
+  } = useTranslations()
   const { filterOptions, sortOptions, dispatchFetchPosts } = useFetchPosts()
 
   const [query, setQuery] = useDebouncedFilter(
@@ -47,7 +51,7 @@ const Filters = (): JSX.Element => {
       title={
         <S.Title>
           <S.Icon />
-          Filter posts
+          {blog.Filters.title}
         </S.Title>
       }
     >
@@ -69,18 +73,18 @@ const Filters = (): JSX.Element => {
         </S.GroupWrapper>
 
         <S.GroupWrapper>
-          <S.Label htmlFor="query-input">Blog search</S.Label>
+          <S.Label htmlFor="query-input">{blog.Filters.searchLabel}</S.Label>
           <S.Input
             id="query-input"
             value={query}
             onChange={onQueryChange}
-            placeholder="Search for posts"
+            placeholder={blog.Filters.searchPlaceholder}
             allowClear
           />
         </S.GroupWrapper>
 
         <S.GroupWrapper>
-          <S.Label as="p">Tags</S.Label>
+          <S.Label as="p">{blog.Filters.tagsLabel}</S.Label>
           <S.TagWrapper>
             {blogTags.all.map(({ id, name, color }) => (
               <Tag

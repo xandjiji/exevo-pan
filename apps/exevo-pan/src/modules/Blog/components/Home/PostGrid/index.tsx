@@ -1,4 +1,5 @@
 import { useRef, useCallback } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import EmptyState from 'components/EmptyState'
 import PostCard from './PostCard'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
@@ -10,6 +11,10 @@ const PostGridView = ({
   requestStatus,
   observerRef,
 }: PostGridViewProps): JSX.Element => {
+  const {
+    translations: { blog },
+  } = useTranslations()
+
   const noResults = requestStatus !== 'LOADING' && !postList.length
 
   return (
@@ -20,7 +25,7 @@ const PostGridView = ({
       {noResults && (
         <EmptyState
           text={{
-            content: 'No posts were found',
+            content: blog.PostGrid.emptyMessage,
             size: 32,
           }}
         />
