@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { MaterialCard, InnerPadding, Smooth } from 'styles'
 import { headings } from './headings'
+import { hr } from './hr'
 import { bold } from './bold'
 import { link } from './link'
 import { code } from './code'
@@ -36,6 +37,7 @@ export const ContentWrapper = styled.main`
   }
 
   ${headings}
+  ${hr}
   ${bold}
   ${link}
   ${code}
