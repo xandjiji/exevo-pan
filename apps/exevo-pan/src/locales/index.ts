@@ -4,6 +4,8 @@ import errorPT from './pt/error'
 import errorPL from './pl/error'
 
 import blogEN from './en/blog'
+import blogES from './es/blog'
+import blogPT from './pt/blog'
 
 import aboutEN from './en/about'
 import aboutES from './es/about'
@@ -48,8 +50,8 @@ export const error = {
 }
 export const blog = {
   en: blogEN,
-  es: blogEN,
-  pt: blogEN,
+  es: blogES,
+  pt: blogPT,
   pl: blogEN,
 }
 export const about = {

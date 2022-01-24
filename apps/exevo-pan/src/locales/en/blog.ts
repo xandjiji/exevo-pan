@@ -1,7 +1,8 @@
 export default {
   Meta: {
     title: 'Blog',
-    description: 'Find tutorials, articles and news about Tibia and Exevo Pan',
+    description:
+      'Here you can find tutorials, articles and news about Tibia and Exevo Pan',
     breadcrumbRoot: 'Home',
   },
   recentPosts: 'Recent posts',
@@ -22,7 +23,7 @@ export default {
   Newsletter: {
     getOur: 'Get our',
     newsletter: 'newsletter',
-    for: 'and receive every new content!',
+    for: 'and receive every fresh content!',
     buttonText: 'Sign up',
   },
   Authors: {
