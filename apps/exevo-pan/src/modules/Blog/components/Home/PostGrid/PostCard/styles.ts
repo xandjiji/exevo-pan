@@ -26,7 +26,7 @@ export const Thumbnail = styled(FadeImage)`
   }
 `
 
-export const Wrapper = styled.div`
+export const Wrapper = styled.article`
   ${MaterialCard}
   position: relative;
   top: 0;
