@@ -24,6 +24,7 @@ const SortingDialog = (): JSX.Element => {
     <Tooltip
       role="dialog"
       trigger="click"
+      placement="bottom"
       content={
         <S.Dialog>
           <Switch
