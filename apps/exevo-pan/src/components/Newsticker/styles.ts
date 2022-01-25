@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { FadeImage as BaseFadeImage } from 'components/Atoms'
-import { InnerContainer, Shadow, Smooth } from 'styles'
+import { InnerContainer, Shadow, CustomScrollbar, Smooth } from 'styles'
+import BaseTag from '../Tag'
 
 export const Wrapper = styled.aside`
   ${InnerContainer}
@@ -8,9 +9,11 @@ export const Wrapper = styled.aside`
   padding-bottom: 12px;
 
   display: flex;
-  flex-direction: column;
   gap: 12px;
   background-color: var(--darkerPrimary);
+
+  overflow: auto;
+  ${CustomScrollbar}
 
   ${Smooth}
 
@@ -30,6 +33,8 @@ export const Card = styled.article`
   display: flex;
   align-items: center;
   gap: 12px;
+  flex: none;
+  max-width: 80vw;
 
   a {
     position: absolute;
@@ -44,6 +49,10 @@ export const Card = styled.article`
 
   &:hover {
     transform: translateX(4px);
+  }
+
+  @media (min-width: 768px) {
+    max-width: unset;
   }
 `
 
@@ -60,13 +69,14 @@ export const Thumbnail = styled.div`
 
 export const FadeImage = styled(BaseFadeImage)`
   position: relative;
-  width: 24px;
-  height: 24px;
+  width: 48px;
+  height: 48px;
+`
 
-  @media (min-width: 768px) {
-    width: 32px;
-    height: 32px;
-  }
+export const Body = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 `
 
 export const Title = styled.h3`
@@ -84,4 +94,17 @@ export const Title = styled.h3`
   @media (min-width: 768px) {
     font-size: 16px;
   }
+`
+
+export const TagWrapper = styled.div`
+  display: flex;
+  gap: 8px;
+`
+
+export const Tag = styled(BaseTag)`
+  padding: 4px 8px;
+  border-radius: 5px;
+  font-size: 10px;
+
+  ${Shadow}
 `
