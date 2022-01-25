@@ -12,6 +12,7 @@ import BaseTag from '../Tag'
 export const Wrapper = styled.aside`
   ${InnerContainer}
   padding-top: 12px;
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -24,11 +25,30 @@ export const Wrapper = styled.aside`
     ${Smooth}
   }
 
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: calc(100% - 6px);
+    width: 32px;
+    background-image: linear-gradient(
+      to left,
+      var(--darkerPrimary),
+      rgba(0, 0, 0, 0)
+    );
+    pointer-events: none;
+  }
+
   @media (min-width: 768px) {
     padding-bottom: 12px;
     flex-direction: row;
     align-items: center;
     gap: 24px;
+
+    &::after {
+      content: unset;
+    }
   }
 `
 
