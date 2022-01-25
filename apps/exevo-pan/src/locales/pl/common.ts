@@ -150,4 +150,5 @@ export default {
   FooterTitle: 'Exevo Pan - stworzony przez',
   AnchorIconLabel: 'Skopiuj link',
   CharacterTooltipLabel: 'Idź do strony postaci',
+  Newsticker: 'Ostatnie artykuły',
 }

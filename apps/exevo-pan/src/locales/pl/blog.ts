@@ -2,7 +2,7 @@ export default {
   Meta: {
     title: 'Blog',
     description:
-      'Tutaj możesz znaleźć poradniki, artykuły oraz najnowsze informacji dotyczące Tibii , jak i naszej strony - Exevo Pan',
+      'Tutaj możesz znaleźć poradniki, artykuły oraz najnowsze informacji dotyczące Tibii, jak i naszej strony - Exevo Pan',
     breadcrumbRoot: 'Home',
   },
   recentPosts: 'Ostatnie posty',

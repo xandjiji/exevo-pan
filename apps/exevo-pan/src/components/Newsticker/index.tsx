@@ -1,39 +1,46 @@
+import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
 import * as S from './styles'
 import { NewstickerProps } from './types'
 
-const Newsticker = ({ blogPosts, ...props }: NewstickerProps): JSX.Element => (
-  <S.Wrapper {...props}>
-    <S.SectionTitle>Recent articles</S.SectionTitle>
+const Newsticker = ({ blogPosts, ...props }: NewstickerProps): JSX.Element => {
+  const {
+    translations: { common },
+  } = useTranslations()
 
-    <S.PostWrapper>
-      {blogPosts.map(({ slug, title, tags, thumbnail }) => (
-        <S.Card key={slug}>
-          <S.Thumbnail>
-            <S.FadeImage
-              src={thumbnail}
-              layout="fixed"
-              width={48}
-              height={48}
-            />
-          </S.Thumbnail>
+  return (
+    <S.Wrapper {...props}>
+      <S.SectionTitle>{common.Newsticker}</S.SectionTitle>
 
-          <S.Body>
-            <S.Title>{title}</S.Title>
+      <S.PostWrapper>
+        {blogPosts.map(({ slug, title, tags, thumbnail }) => (
+          <S.Card key={slug}>
+            <S.Thumbnail>
+              <S.FadeImage
+                src={thumbnail}
+                layout="fixed"
+                width={48}
+                height={48}
+              />
+            </S.Thumbnail>
 
-            <S.TagWrapper>
-              {tags.map((tag) => (
-                <S.Tag key={tag} tagId={tag} />
-              ))}
-            </S.TagWrapper>
-          </S.Body>
+            <S.Body>
+              <S.Title>{title}</S.Title>
 
-          <NextLink href={`${routes.BLOG}/${slug}`}>{title}</NextLink>
-        </S.Card>
-      ))}
-    </S.PostWrapper>
-  </S.Wrapper>
-)
+              <S.TagWrapper>
+                {tags.map((tag) => (
+                  <S.Tag key={tag} tagId={tag} />
+                ))}
+              </S.TagWrapper>
+            </S.Body>
+
+            <NextLink href={`${routes.BLOG}/${slug}`}>{title}</NextLink>
+          </S.Card>
+        ))}
+      </S.PostWrapper>
+    </S.Wrapper>
+  )
+}
 
 export default Newsticker
