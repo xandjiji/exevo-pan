@@ -7,7 +7,8 @@ import {
   LoadingState,
   AuctionsGrid,
 } from 'modules/BazaarAuctions'
-import { DrawerFieldsClient, AuctionsClient } from 'services'
+import Newsticker from 'components/Newsticker'
+import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -20,12 +21,14 @@ type HistoryStaticProps = {
   serverOptions: Option[]
   auctionedItemOptions: Option[]
   initialAuctionData: PaginatedData<CharacterObject>
+  blogPosts: BlogPost[]
 }
 
 export default function BazaarHistory({
   serverOptions,
   auctionedItemOptions,
   initialAuctionData,
+  blogPosts,
 }: HistoryStaticProps): JSX.Element {
   const { translations } = useTranslations()
 
@@ -91,6 +94,7 @@ export default function BazaarHistory({
       </Head>
 
       <Main>
+        <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
           auctionedItemOptions={auctionedItemOptions}
@@ -118,15 +122,28 @@ export default function BazaarHistory({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const sortOptions = { sortingMode: 0, descendingOrder: true }
 
-  const [serverOptions, auctionedItemOptions, initialAuctionData] =
-    await Promise.all([
-      DrawerFieldsClient.fetchServerOptions(),
-      DrawerFieldsClient.fetchAuctionedItemOptions(),
-      AuctionsClient.fetchAuctionPage({
-        sortOptions,
-        endpoint: endpoints.HISTORY_AUCTIONS,
-      }),
-    ])
+  const [
+    serverOptions,
+    auctionedItemOptions,
+    initialAuctionData,
+    { page: blogPosts },
+  ] = await Promise.all([
+    DrawerFieldsClient.fetchServerOptions(),
+    DrawerFieldsClient.fetchAuctionedItemOptions(),
+    AuctionsClient.fetchAuctionPage({
+      sortOptions,
+      endpoint: endpoints.HISTORY_AUCTIONS,
+    }),
+    BlogClient.queryBlog(
+      {
+        paginationOptions: {
+          pageIndex: 0,
+          pageSize: 3,
+        },
+      },
+      locale,
+    ),
+  ])
 
   return {
     props: {
@@ -138,6 +155,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       serverOptions,
       auctionedItemOptions,
       initialAuctionData,
+      blogPosts,
     },
     revalidate: 60,
   }
