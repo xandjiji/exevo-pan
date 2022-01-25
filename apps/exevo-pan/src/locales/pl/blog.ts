@@ -21,6 +21,12 @@ export default {
     for: 'aby otrzymywać najświeższe wiadomości!',
     emailPlaceholder: 'twój@email.com',
     buttonText: 'Zapisz się',
+    message: {
+      invalidEmail: 'Niepoprawny email',
+      alreadyRegistered: 'Ten email jest już zarejestrowany',
+      success: 'Dziękuję',
+      generic: 'Coś poszło nie tak',
+    },
   },
   Authors: {
     headline1: 'Podobała Ci się zawartość?',

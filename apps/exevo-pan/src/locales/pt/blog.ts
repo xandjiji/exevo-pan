@@ -21,6 +21,12 @@ export default {
     for: 'e receba todo conteúdo fresquinho!',
     emailPlaceholder: 'seu@email.com.br',
     buttonText: 'Assinar',
+    message: {
+      invalidEmail: 'Email inválido',
+      alreadyRegistered: 'Este email já está registrado',
+      success: 'Obrigado',
+      generic: 'Algo deu errado',
+    },
   },
   Authors: {
     headline1: 'Curtiu esse conteúdo?',

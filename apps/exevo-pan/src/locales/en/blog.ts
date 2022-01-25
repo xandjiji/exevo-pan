@@ -21,6 +21,12 @@ export default {
     for: 'and receive every fresh content!',
     emailPlaceholder: 'your@email.com',
     buttonText: 'Sign up',
+    message: {
+      invalidEmail: 'Invalid email',
+      alreadyRegistered: 'This email is already registered',
+      success: 'Thank you',
+      generic: 'Something went wrong',
+    },
   },
   Authors: {
     headline1: 'Enjoyed this content?',

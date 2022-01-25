@@ -12,9 +12,7 @@ const Newsletter = (
   } = useTranslations()
 
   const [email, setEmail] = useState('')
-  const { state, register } = useNewsletter()
-
-  console.log(state)
+  const { request, register } = useNewsletter()
 
   return (
     <S.Wrapper {...props}>
@@ -38,6 +36,11 @@ const Newsletter = (
           allowClear
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          errorMessage={
+            request.status === 'ERROR'
+              ? blog.Newsletter.message[request.message as string]
+              : undefined
+          }
         />
       </S.FormGroup>
       <S.Button type="button" onClick={() => register(email)}>

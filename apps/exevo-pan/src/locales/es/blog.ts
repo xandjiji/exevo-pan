@@ -21,6 +21,12 @@ export default {
     for: 'y recibe todo el contenido nuevo!',
     emailPlaceholder: 'seu@email.com.br',
     buttonText: 'Firmar',
+    message: {
+      invalidEmail: 'Email inválido',
+      alreadyRegistered: 'Este email ya está registrado',
+      success: 'Gracias',
+      generic: 'Algo salió mal',
+    },
   },
   Authors: {
     headline1: '¿Te gustó este contenido?',

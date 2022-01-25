@@ -17,7 +17,6 @@ export default class NewsletterClient {
 
       return message
     } catch (error) {
-      console.log(error)
       const { message } = await (error as any).response.json()
       return message
     }

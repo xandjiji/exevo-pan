@@ -3,7 +3,9 @@ import { NewsletterClient } from 'services'
 import { UseNewsletterState, RegisterStatus } from './types'
 
 export const useNewsletter = (): UseNewsletterState => {
-  const [state, setStatus] = useState<RegisterStatus>({ status: 'IDLE' })
+  const [request, setStatus] = useState<RegisterStatus>({
+    status: 'IDLE',
+  })
 
   const register = useCallback(async (email: string): Promise<void> => {
     setStatus({ status: 'LOADING' })
@@ -13,5 +15,5 @@ export const useNewsletter = (): UseNewsletterState => {
     setStatus({ status, message })
   }, [])
 
-  return { state, register }
+  return { request, register }
 }
