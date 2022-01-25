@@ -6,7 +6,8 @@ import {
   AuctionsProvider,
   AuctionsGrid,
 } from 'modules/BazaarAuctions'
-import { DrawerFieldsClient, AuctionsClient } from 'services'
+import Newsticker from 'components/Newsticker'
+import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -20,6 +21,7 @@ type HomeStaticProps = {
   auctionedItemOptions: Option[]
   initialAuctionData: PaginatedData<CharacterObject>
   highlightedAuctions: CharacterObject[]
+  blogPosts: BlogPost[]
 }
 
 export default function Home({
@@ -27,6 +29,7 @@ export default function Home({
   auctionedItemOptions,
   initialAuctionData,
   highlightedAuctions,
+  blogPosts,
 }: HomeStaticProps): JSX.Element {
   const { translations } = useTranslations()
 
@@ -89,6 +92,7 @@ export default function Home({
       </Head>
 
       <Main>
+        <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
           auctionedItemOptions={auctionedItemOptions}
@@ -117,6 +121,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     auctionedItemOptions,
     initialAuctionData,
     highlightedAuctions,
+    { page: blogPosts },
   ] = await Promise.all([
     DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
@@ -124,6 +129,15 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       endpoint: endpoints.CURRENT_AUCTIONS,
     }),
     AuctionsClient.fetchHighlightedAuctions(),
+    BlogClient.queryBlog(
+      {
+        paginationOptions: {
+          pageIndex: 0,
+          pageSize: 3,
+        },
+      },
+      locale,
+    ),
   ])
 
   return {
@@ -136,6 +150,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       auctionedItemOptions,
       initialAuctionData,
       highlightedAuctions,
+      blogPosts,
     },
     revalidate: 60,
   }
