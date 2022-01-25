@@ -14,6 +14,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf .next"
   },
   "dependencies": {
+    "@mailchimp/mailchimp_marketing": "^3.0.74",
     "@popperjs/core": "^2.9.2",
     "chart.js": "^2.9.3",
     "data-dictionary": "*",
@@ -45,6 +46,7 @@
     "@types/exevo-pan": "*",
     "@types/jest": "^26.0.23",
     "@types/jest-axe": "^3.5.2",
+    "@types/mailchimp__mailchimp_marketing": "^3.0.3",
     "@types/node": "^15.9.0",
     "@types/nodemailer": "^6.4.4",
     "@types/react": "17.0.17",

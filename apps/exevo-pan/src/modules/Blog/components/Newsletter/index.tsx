@@ -1,6 +1,7 @@
-import { memo } from 'react'
+import { memo, useState } from 'react'
 import { Input } from 'components/Atoms'
 import { useTranslations } from 'contexts/useTranslation'
+import { useNewsletter } from './useNewsletter'
 import * as S from './styles'
 
 const Newsletter = (
@@ -9,6 +10,11 @@ const Newsletter = (
   const {
     translations: { blog },
   } = useTranslations()
+
+  const [email, setEmail] = useState('')
+  const { state, register } = useNewsletter()
+
+  console.log(state)
 
   return (
     <S.Wrapper {...props}>
@@ -30,9 +36,11 @@ const Newsletter = (
           id="newsletter-email-input"
           placeholder={blog.Newsletter.emailPlaceholder}
           allowClear
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
       </S.FormGroup>
-      <S.Button type="button">
+      <S.Button type="button" onClick={() => register(email)}>
         {blog.Newsletter.buttonText}
         <S.LetterImage
           alt="Stamped letter"

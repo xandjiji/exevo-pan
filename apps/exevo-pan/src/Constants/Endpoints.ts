@@ -7,5 +7,6 @@ export const endpoints = {
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
   MAIL_CHECKOUT: '/api/mail-checkout',
+  NEWSLETTER: '/api/mailchimp',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
 }
