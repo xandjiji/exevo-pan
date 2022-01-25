@@ -49,3 +49,9 @@ export const Button = styled(BaseButton)`
 export const LetterImage = styled(FadeImage).attrs({
   src: LetterPng,
 })``
+
+export const ThankYou = styled.span`
+  display: block;
+  font-size: 24px;
+  text-align: center;
+`

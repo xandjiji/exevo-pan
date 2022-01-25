@@ -37,35 +37,41 @@ const Newsletter = (
         />
       </S.Title>
 
-      <S.FormGroup>
-        <S.Label htmlFor="newsletter-email-input">Email</S.Label>
-        <Input
-          id="newsletter-email-input"
-          placeholder={blog.Newsletter.emailPlaceholder}
-          allowClear
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          onKeyDown={onKeyDown}
-          errorMessage={
-            request.status === 'ERROR'
-              ? blog.Newsletter.message[request.message as string]
-              : undefined
-          }
-        />
-      </S.FormGroup>
-      <S.Button
-        type="submit"
-        loading={request.status === 'LOADING'}
-        onClick={() => register(email)}
-      >
-        {blog.Newsletter.buttonText}
-        <S.LetterImage
-          alt="Stamped letter"
-          layout="fixed"
-          width={26}
-          height={15}
-        />
-      </S.Button>
+      {request.status === 'SUCCESSFUL' ? (
+        <S.ThankYou>{blog.Newsletter.message.success} 😄</S.ThankYou>
+      ) : (
+        <>
+          <S.FormGroup>
+            <S.Label htmlFor="newsletter-email-input">Email</S.Label>
+            <Input
+              id="newsletter-email-input"
+              placeholder={blog.Newsletter.emailPlaceholder}
+              allowClear
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+              onKeyDown={onKeyDown}
+              errorMessage={
+                request.status === 'ERROR'
+                  ? blog.Newsletter.message[request.message as string]
+                  : undefined
+              }
+            />
+          </S.FormGroup>
+          <S.Button
+            type="submit"
+            loading={request.status === 'LOADING'}
+            onClick={() => register(email)}
+          >
+            {blog.Newsletter.buttonText}
+            <S.LetterImage
+              alt="Stamped letter"
+              layout="fixed"
+              width={26}
+              height={15}
+            />
+          </S.Button>
+        </>
+      )}
     </S.Wrapper>
   )
 }
