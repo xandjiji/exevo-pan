@@ -1,7 +1,11 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { CurrentAuctions as CurrentAuctionsGrid } from 'modules/BazaarAuctions'
-import { DrawerFieldsProvider } from 'modules/BazaarAuctions/contexts/useDrawerFields'
+import {
+  DrawerFieldsProvider,
+  FiltersProvider,
+  AuctionsProvider,
+  AuctionsGrid,
+} from 'modules/BazaarAuctions'
 import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -25,6 +29,8 @@ export default function Home({
   highlightedAuctions,
 }: HomeStaticProps): JSX.Element {
   const { translations } = useTranslations()
+
+  const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
 
   return (
     <>
@@ -87,10 +93,18 @@ export default function Home({
           serverOptions={serverOptions}
           auctionedItemOptions={auctionedItemOptions}
         >
-          <CurrentAuctionsGrid
-            initialAuctionData={initialAuctionData}
-            highlightedAuctions={highlightedAuctions}
-          />
+          <FiltersProvider>
+            <AuctionsProvider
+              endpoint={endpoints.CURRENT_AUCTIONS}
+              highlightedAuctions={highlightedAuctions}
+              initialPage={page}
+              initialPageData={pageData}
+              defaultSortingMode={sortingMode}
+              defaultDescendingOrder={descendingOrder}
+            >
+              <AuctionsGrid />
+            </AuctionsProvider>
+          </FiltersProvider>
         </DrawerFieldsProvider>
       </Main>
     </>

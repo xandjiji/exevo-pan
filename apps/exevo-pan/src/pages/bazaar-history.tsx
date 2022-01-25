@@ -1,7 +1,12 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
-import { DrawerFieldsProvider } from 'modules/BazaarAuctions/contexts/useDrawerFields'
+import {
+  DrawerFieldsProvider,
+  FiltersProvider,
+  AuctionsProvider,
+  LoadingState,
+  AuctionsGrid,
+} from 'modules/BazaarAuctions'
 import { DrawerFieldsClient, AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -23,6 +28,8 @@ export default function BazaarHistory({
   initialAuctionData,
 }: HistoryStaticProps): JSX.Element {
   const { translations } = useTranslations()
+
+  const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
 
   return (
     <div>
@@ -88,7 +95,20 @@ export default function BazaarHistory({
           serverOptions={serverOptions}
           auctionedItemOptions={auctionedItemOptions}
         >
-          <BazaarHistoryGrid initialAuctionData={initialAuctionData} />
+          <FiltersProvider>
+            <AuctionsProvider
+              endpoint={endpoints.CURRENT_AUCTIONS}
+              highlightedAuctions={[]}
+              initialPage={page}
+              initialPageData={pageData}
+              defaultSortingMode={sortingMode}
+              defaultDescendingOrder={descendingOrder}
+            >
+              <LoadingState>
+                <AuctionsGrid />
+              </LoadingState>
+            </AuctionsProvider>
+          </FiltersProvider>
         </DrawerFieldsProvider>
       </Main>
     </div>
