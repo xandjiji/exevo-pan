@@ -25,28 +25,6 @@ export const Wrapper = styled.aside`
   }
 `
 
-export const Thumbnail = styled.div`
-  padding: 8px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 6px;
-  background-color: var(--primaryVariant);
-
-  ${Shadow}
-`
-
-export const FadeImage = styled(BaseFadeImage)`
-  position: relative;
-  width: 24px;
-  height: 24px;
-
-  @media (min-width: 768px) {
-    width: 32px;
-    height: 32px;
-  }
-`
-
 export const Card = styled.article`
   position: relative;
   display: flex;
@@ -67,10 +45,27 @@ export const Card = styled.article`
   &:hover {
     transform: translateX(4px);
   }
+`
 
-  /* @ ToDo: remove this workaround after color var refactor */
-  &[data-theme='dark-theme'] ${Thumbnail} {
-    background-color: var(--primary);
+export const Thumbnail = styled.div`
+  padding: 8px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background-color: var(--primaryVariant);
+
+  ${Shadow}
+`
+
+export const FadeImage = styled(BaseFadeImage)`
+  position: relative;
+  width: 24px;
+  height: 24px;
+
+  @media (min-width: 768px) {
+    width: 32px;
+    height: 32px;
   }
 `
 
