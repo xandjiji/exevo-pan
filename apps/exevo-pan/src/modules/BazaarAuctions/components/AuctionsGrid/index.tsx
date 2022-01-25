@@ -32,7 +32,7 @@ const AuctionsGrid = (): JSX.Element => {
 
   return (
     <main>
-      <S.Head suppressHydrationWarning>
+      <S.Head suppressHydrationWarning id="grid-header">
         <S.FilterButton
           tabIndex={0}
           role="button"

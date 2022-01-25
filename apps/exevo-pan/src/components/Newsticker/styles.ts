@@ -17,6 +17,7 @@ export const Wrapper = styled.aside`
   flex-direction: column;
   gap: 12px;
 
+  height: 134px;
   background-color: var(--darkerPrimary);
 
   ${Smooth}
@@ -45,6 +46,7 @@ export const Wrapper = styled.aside`
     flex-direction: row;
     align-items: center;
     gap: 24px;
+    height: 88px;
 
     &::after {
       content: unset;

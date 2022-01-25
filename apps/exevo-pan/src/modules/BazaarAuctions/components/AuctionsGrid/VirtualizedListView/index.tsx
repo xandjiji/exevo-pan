@@ -7,7 +7,7 @@ import * as S from './styles'
 
 const DEFAULT_MIN_INDEX = 0
 const DEFAULT_MAX_INDEX = 1
-const HEADER_OFFSET = 70
+const HEADER_OFFSET = 60 + 134
 const VIRTUALIZED_MAX_WIDTH = 768
 const THROTTLE_DELAY = 150
 
@@ -60,19 +60,20 @@ const VirtualizedListView = ({
     [flattenChildren, minIndex, maxIndex],
   )
 
-  const isMounted = useRef(false)
+  const gridHeadOffset = useRef(0)
   useEffect(() => {
     let scrollTimer: NodeJS.Timeout
 
-    if (isMounted.current) {
-      const HEADER_HEIGHT = 60
-      const newScrollY = window.scrollY >= HEADER_HEIGHT ? HEADER_HEIGHT : 0
+    if (gridHeadOffset.current) {
+      const newScrollY =
+        window.scrollY >= gridHeadOffset.current ? gridHeadOffset.current : 0
       scrollTimer = setTimeout(
         () => window.scrollTo({ top: newScrollY, behavior: 'smooth' }),
         THROTTLE_DELAY,
       )
     } else {
-      isMounted.current = true
+      const gridHeader = document.getElementById('grid-header')
+      gridHeadOffset.current = gridHeader?.offsetTop ?? -1
     }
 
     return () => clearTimeout(scrollTimer)
