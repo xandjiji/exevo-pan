@@ -17,7 +17,9 @@ const Newsletter = (
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     const { code } = event
     if (code === 'Enter' || code === 'NumpadEnter') {
-      register(email)
+      if (request.status !== 'LOADING') {
+        register(email)
+      }
     }
   }
 
@@ -51,7 +53,11 @@ const Newsletter = (
           }
         />
       </S.FormGroup>
-      <S.Button type="submit" onClick={() => register(email)}>
+      <S.Button
+        type="submit"
+        loading={request.status === 'LOADING'}
+        onClick={() => register(email)}
+      >
         {blog.Newsletter.buttonText}
         <S.LetterImage
           alt="Stamped letter"

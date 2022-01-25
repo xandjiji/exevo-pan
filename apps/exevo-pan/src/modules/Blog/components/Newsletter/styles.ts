@@ -37,6 +37,7 @@ export const FormGroup = styled.div`
 export const Label = styled.label``
 
 export const Button = styled(BaseButton)`
+  min-height: 52px;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
