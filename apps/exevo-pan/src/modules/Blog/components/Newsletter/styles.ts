@@ -25,8 +25,8 @@ export const MailboxImage = styled(FadeImage).attrs({ src: MailboxPng })`
   top: 0;
   right: 0;
 
-  filter: grayscale(0.75);
-  opacity: 0.1;
+  opacity: 0.5;
+  mix-blend-mode: soft-light;
 `
 
 export const FormGroup = styled.div`

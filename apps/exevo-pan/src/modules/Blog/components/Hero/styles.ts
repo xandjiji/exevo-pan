@@ -24,9 +24,7 @@ export const ImageWrapper = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  filter: grayscale(0.75) brightness(150%);
-  opacity: 0.15;
+  mix-blend-mode: overlay;
 `
 
 export const TitleWrapper = styled.div`

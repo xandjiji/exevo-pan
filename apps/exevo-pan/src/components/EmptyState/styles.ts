@@ -12,8 +12,7 @@ export const Image = styled(FadeImage).attrs({
   objectFit: 'scale-down',
   src: NotFoundImage,
 })`
-  opacity: 0.15;
-  filter: grayscale(0.5);
+  mix-blend-mode: overlay;
 `
 
 export const ContentWrapper = styled.div`
