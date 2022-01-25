@@ -1,17 +1,11 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import { FadeImage as BaseFadeImage } from 'components/Atoms'
-import { InnerContainer, Shadow, Smooth, CustomScrollbar } from 'styles'
-
-const ellipsedText = css`
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-`
+import { InnerContainer, Shadow, Smooth } from 'styles'
 
 export const Wrapper = styled.aside`
   ${InnerContainer}
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 12px;
+  padding-bottom: 12px;
 
   display: flex;
   flex-direction: column;
@@ -23,18 +17,34 @@ export const Wrapper = styled.aside`
   * {
     ${Smooth}
   }
+
+  @media (min-width: 768px) {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 `
 
-export const Thumbnail = styled(BaseFadeImage)`
+export const Thumbnail = styled.div`
   padding: 8px;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-
   border-radius: 6px;
   background-color: var(--primaryVariant);
 
   ${Shadow}
+`
+
+export const FadeImage = styled(BaseFadeImage)`
+  position: relative;
+  width: 24px;
+  height: 24px;
+
+  @media (min-width: 768px) {
+    width: 32px;
+    height: 32px;
+  }
 `
 
 export const Card = styled.article`
@@ -64,8 +74,6 @@ export const Card = styled.article`
   }
 `
 
-export const Body = styled.div``
-
 export const Title = styled.h3`
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -77,8 +85,8 @@ export const Title = styled.h3`
   letter-spacing: 0.5px;
   line-height: 1.3;
   color: var(--onPrimary);
-`
 
-export const Description = styled.p`
-  font-size: 0;
+  @media (min-width: 768px) {
+    font-size: 16px;
+  }
 `

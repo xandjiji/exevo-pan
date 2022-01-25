@@ -9,14 +9,17 @@ const Newsticker = ({ blogPosts, ...props }: NewstickerProps): JSX.Element => {
 
   return (
     <S.Wrapper {...props}>
-      {blogPosts.map(({ slug, title, description, thumbnail }) => (
+      {blogPosts.map(({ slug, title, thumbnail }) => (
         <S.Card key={slug} data-theme={currentTheme}>
-          <S.Thumbnail src={thumbnail} width={24} height={24} />
+          <S.Thumbnail>
+            <S.FadeImage
+              src={thumbnail}
+              layout="fill"
+              sizes="(max-width: 767px) 24px, 32px"
+            />
+          </S.Thumbnail>
 
-          <S.Body>
-            <S.Title>{title}</S.Title>
-            <S.Description>{description}</S.Description>
-          </S.Body>
+          <S.Title>{title}</S.Title>
           <NextLink href={`${routes.BLOG}/${slug}`}>{title}</NextLink>
         </S.Card>
       ))}
