@@ -1,16 +1,14 @@
 import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import { routes, blogTags } from 'Constants'
+import { routes } from 'Constants'
 import { extractDate } from './utils'
 import * as S from './styles'
 import { PostCardProps } from './types'
 
-const { tagById } = blogTags
-
 const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
   const {
-    translations: { common, blog },
+    translations: { common },
   } = useTranslations()
 
   const { thumbnail, title, date, slug, description, tags } = postData
@@ -35,9 +33,7 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
         <S.Description>{description}</S.Description>
         <S.TagWrapper>
           {tags.map((tagId) => (
-            <S.Tag key={tagId} tagColor={tagById[tagId].color}>
-              {blog.Tags[tagId]}
-            </S.Tag>
+            <S.Tag key={tagId} tagId={tagId} />
           ))}
         </S.TagWrapper>
       </S.Body>

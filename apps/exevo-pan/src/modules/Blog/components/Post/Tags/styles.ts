@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import BaseTag from '../../Tag'
+import BaseTag from 'components/Tag'
 
 export const Wrapper = styled.div`
   display: flex;

@@ -25,6 +25,11 @@ export default {
     },
     themeSwitch: 'Przełącz na tryb ciemny',
   },
+  BlogTags: {
+    news: 'Aktualności',
+    article: 'Artykuł',
+    tutorial: 'Poradnik',
+  },
   Month: {
     '0': 'Sty',
     '1': 'Lut',

@@ -1,10 +1,10 @@
 import { useState, useCallback } from 'react'
 import { Accordion } from 'components/Atoms'
+import Tag from 'components/Tag'
 import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
-import { Tag } from '../..'
 import * as S from './styles'
 
 const Filters = (): JSX.Element => {
@@ -86,16 +86,14 @@ const Filters = (): JSX.Element => {
         <S.GroupWrapper>
           <S.Label as="p">{blog.Filters.tagsLabel}</S.Label>
           <S.TagWrapper>
-            {blogTags.all.map(({ id, color }) => (
+            {blogTags.all.map(({ id }) => (
               <Tag
                 key={id}
+                tagId={id}
                 clickable
                 active={activeTags.has(id)}
                 onClick={() => toggleTag(id)}
-                tagColor={color}
-              >
-                {blog.Tags[id]}
-              </Tag>
+              />
             ))}
           </S.TagWrapper>
         </S.GroupWrapper>

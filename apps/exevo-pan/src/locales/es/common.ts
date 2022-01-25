@@ -26,6 +26,11 @@ export default {
     },
     themeSwitch: 'Habilitar tema nocturno',
   },
+  BlogTags: {
+    news: 'Noticias',
+    article: 'Artículo',
+    tutorial: 'Tutorial',
+  },
   Month: {
     '0': 'Ene',
     '1': 'Feb',

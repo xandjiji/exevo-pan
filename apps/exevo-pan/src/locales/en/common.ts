@@ -25,6 +25,11 @@ export default {
     },
     themeSwitch: 'Toggle dark theme',
   },
+  BlogTags: {
+    news: 'News',
+    article: 'Article',
+    tutorial: 'Tutorial',
+  },
   Month: {
     '0': 'Jan',
     '1': 'Feb',

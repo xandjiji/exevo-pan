@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { FadeImage } from 'components/Atoms'
+import BaseTag from 'components/Tag'
 import { MaterialCard, Smooth, Shadow } from 'styles'
-import BaseTag from '../../../Tag'
 
 export const Thumbnail = styled(FadeImage)`
   position: relative;

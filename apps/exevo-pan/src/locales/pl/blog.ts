@@ -6,11 +6,6 @@ export default {
     breadcrumbRoot: 'Home',
   },
   recentPosts: 'Ostatnie posty',
-  Tags: {
-    news: 'Aktualności',
-    article: 'Artykuł',
-    tutorial: 'Poradnik',
-  },
   Filters: {
     title: 'Filtry',
     searchLabel: 'Search',
