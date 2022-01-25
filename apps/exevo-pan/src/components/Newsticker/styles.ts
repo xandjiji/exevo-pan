@@ -1,3 +1,84 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { FadeImage as BaseFadeImage } from 'components/Atoms'
+import { InnerContainer, Shadow, Smooth, CustomScrollbar } from 'styles'
 
-export const Wrapper = styled.aside``
+const ellipsedText = css`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`
+
+export const Wrapper = styled.aside`
+  ${InnerContainer}
+  padding-top: 16px;
+  padding-bottom: 16px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--darkerPrimary);
+
+  ${Smooth}
+
+  * {
+    ${Smooth}
+  }
+`
+
+export const Thumbnail = styled(BaseFadeImage)`
+  padding: 8px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+
+  border-radius: 6px;
+  background-color: var(--primaryVariant);
+
+  ${Shadow}
+`
+
+export const Card = styled.article`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  a {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: transparent;
+  }
+
+  transition: transform 0.2s ease-out;
+
+  &:hover {
+    transform: translateX(4px);
+  }
+
+  /* @ ToDo: remove this workaround after color var refactor */
+  &[data-theme='dark-theme'] ${Thumbnail} {
+    background-color: var(--primary);
+  }
+`
+
+export const Body = styled.div``
+
+export const Title = styled.h3`
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+
+  font-size: 14px;
+  font-weight: 300;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  color: var(--onPrimary);
+`
+
+export const Description = styled.p`
+  font-size: 0;
+`
