@@ -93,6 +93,17 @@ export const PostWrapper = styled.div`
   }
 `
 
+export const Thumbnail = styled.div`
+  padding: 8px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 6px;
+  background-color: var(--primaryVariant);
+
+  ${Shadow}
+`
+
 export const Card = styled.article`
   position: relative;
   display: flex;
@@ -110,26 +121,13 @@ export const Card = styled.article`
     color: transparent;
   }
 
-  transition: transform 0.2s ease-out;
-
-  &:hover {
-    transform: translateY(-2px);
+  &:hover ${Thumbnail} {
+    transform: translateY(-3px);
   }
 
   @media (min-width: 768px) {
     max-width: unset;
   }
-`
-
-export const Thumbnail = styled.div`
-  padding: 8px;
-  flex-shrink: 0;
-  display: grid;
-  place-items: center;
-  border-radius: 6px;
-  background-color: var(--primaryVariant);
-
-  ${Shadow}
 `
 
 export const FadeImage = styled(BaseFadeImage)`
