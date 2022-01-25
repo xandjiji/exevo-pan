@@ -14,6 +14,13 @@ const Newsletter = (
   const [email, setEmail] = useState('')
   const { request, register } = useNewsletter()
 
+  const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+    const { code } = event
+    if (code === 'Enter' || code === 'NumpadEnter') {
+      register(email)
+    }
+  }
+
   return (
     <S.Wrapper {...props}>
       <S.Title>
@@ -36,6 +43,7 @@ const Newsletter = (
           allowClear
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          onKeyDown={onKeyDown}
           errorMessage={
             request.status === 'ERROR'
               ? blog.Newsletter.message[request.message as string]
@@ -43,7 +51,7 @@ const Newsletter = (
           }
         />
       </S.FormGroup>
-      <S.Button type="button" onClick={() => register(email)}>
+      <S.Button type="submit" onClick={() => register(email)}>
         {blog.Newsletter.buttonText}
         <S.LetterImage
           alt="Stamped letter"
