@@ -1,19 +1,22 @@
 import styled from 'styled-components'
 import { FadeImage as BaseFadeImage } from 'components/Atoms'
-import { InnerContainer, Shadow, CustomScrollbar, Smooth } from 'styles'
+import {
+  InnerContainer,
+  NegativeContainer,
+  Shadow,
+  CustomScrollbar,
+  Smooth,
+} from 'styles'
 import BaseTag from '../Tag'
 
 export const Wrapper = styled.aside`
   ${InnerContainer}
   padding-top: 12px;
-  padding-bottom: 12px;
-
   display: flex;
+  flex-direction: column;
   gap: 12px;
-  background-color: var(--darkerPrimary);
 
-  overflow: auto;
-  ${CustomScrollbar}
+  background-color: var(--darkerPrimary);
 
   ${Smooth}
 
@@ -22,9 +25,49 @@ export const Wrapper = styled.aside`
   }
 
   @media (min-width: 768px) {
+    padding-bottom: 12px;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+  }
+`
+
+export const SectionTitle = styled.h2`
+  color: var(--onPrimary);
+  letter-spacing: 0.5px;
+
+  @media (min-width: 768px) {
+    width: min-content;
+  }
+`
+
+export const PostWrapper = styled.div`
+  ${NegativeContainer}
+  padding-bottom: 12px;
+  display: flex;
+  gap: 12px;
+
+  overflow: auto;
+  ${CustomScrollbar}
+
+  &::before, &::after {
+    content: '';
+    flex: none;
+    width: 8px;
+  }
+
+  @media (min-width: 768px) {
+    padding-bottom: unset;
+    margin: unset;
+    overflow: unset;
     display: grid;
     gap: 24px;
     grid-template-columns: 1fr 1fr 1fr;
+
+    &::before,
+    &::after {
+      content: unset;
+    }
   }
 `
 
@@ -48,7 +91,7 @@ export const Card = styled.article`
   transition: transform 0.2s ease-out;
 
   &:hover {
-    transform: translateX(4px);
+    transform: translateY(-2px);
   }
 
   @media (min-width: 768px) {
@@ -93,6 +136,7 @@ export const Title = styled.h3`
 
   @media (min-width: 768px) {
     font-size: 16px;
+    line-height: unset;
   }
 `
 
