@@ -5,13 +5,15 @@ import { CardProps } from './types'
 
 const Card = ({ post: { slug, thumbnail, title } }: CardProps): JSX.Element => (
   <S.Card key={slug}>
-    <S.Thumbnail
-      src={thumbnail}
-      alt={title}
-      layout="fixed"
-      width={48}
-      height={48}
-    />
+    <S.Thumbnail>
+      <S.FadeImage
+        src={thumbnail}
+        alt={title}
+        layout="fixed"
+        width={32}
+        height={32}
+      />
+    </S.Thumbnail>
 
     <S.TextWrapper>
       <S.Title>{title}</S.Title>

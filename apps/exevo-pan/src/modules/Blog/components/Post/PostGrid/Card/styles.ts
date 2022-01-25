@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { FadeImage } from 'components/Atoms'
+import { FadeImage as BaseFadeImage } from 'components/Atoms'
 
 export const Card = styled.li`
   position: relative;
@@ -23,21 +23,18 @@ export const Card = styled.li`
   }
 `
 
-export const Thumbnail = styled(FadeImage)`
-  position: relative;
+export const Thumbnail = styled.div`
+  padding: 6px;
   flex-shrink: 0;
-  height: 56px;
-  width: 56px;
-  border-radius: 5px;
-
-  background-color: var(--primaryVariant);
-
   display: grid;
   place-content: center;
+  border-radius: 5px;
+  background-color: var(--primaryVariant);
+`
 
-  img {
-    object-fit: contain;
-  }
+export const FadeImage = styled(BaseFadeImage)`
+  width: 32px;
+  height: 32px;
 `
 
 export const TextWrapper = styled.div`
