@@ -2,10 +2,11 @@ import { memo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Input } from 'components/Atoms'
 import { useTranslations } from 'contexts/useTranslation'
+import { locales } from 'Constants'
 import { useNewsletter } from './useNewsletter'
 import * as S from './styles'
 
-const DEFAULT_LOCALE = 'en'
+const { DEFAULT_LOCALE } = locales
 
 const Newsletter = (
   props: React.HTMLAttributes<HTMLDivElement>,

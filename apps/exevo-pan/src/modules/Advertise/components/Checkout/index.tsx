@@ -2,10 +2,13 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { MailCheckoutClient } from 'services'
+import { locales } from 'Constants'
 import { useForm } from '../../contexts/Form'
 import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter, randomCharacter } from './utils'
 import * as S from './styles'
+
+const { DEFAULT_LOCALE } = locales
 
 const Checkout = (): JSX.Element => {
   const {
@@ -56,7 +59,7 @@ const Checkout = (): JSX.Element => {
       paymentMethod,
       email: email.value,
       paymentCharacter: paymentCharacter.value,
-      locale: locale ?? 'en',
+      locale: locale ?? DEFAULT_LOCALE,
     })
     setSendingEmail(false)
 
