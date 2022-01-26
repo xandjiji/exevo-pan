@@ -11,7 +11,7 @@ import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { endpoints, routes, jsonld } from 'Constants'
+import { endpoints, routes, jsonld, registeredLocales } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
@@ -121,7 +121,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     auctionedItemOptions,
     initialAuctionData,
     highlightedAuctions,
-    { page: blogPosts },
   ] = await Promise.all([
     DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
@@ -129,16 +128,25 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       endpoint: endpoints.CURRENT_AUCTIONS,
     }),
     AuctionsClient.fetchHighlightedAuctions(),
-    BlogClient.queryBlog(
-      {
-        paginationOptions: {
-          pageIndex: 0,
-          pageSize: 3,
-        },
-      },
-      locale,
-    ),
   ])
+
+  const blogPostData = {} as Record<RegisteredLocale, BlogPost[]>
+
+  await Promise.all(
+    registeredLocales.map((registeredLocale) => async () => {
+      const { page: blogPosts } = await BlogClient.queryBlog(
+        {
+          paginationOptions: {
+            pageIndex: 0,
+            pageSize: 3,
+          },
+        },
+        registeredLocale,
+      )
+
+      blogPostData[registeredLocale] = blogPosts
+    }),
+  )
 
   return {
     props: {
@@ -150,7 +158,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       auctionedItemOptions,
       initialAuctionData,
       highlightedAuctions,
-      blogPosts,
+      blogPosts: blogPostData[locale as RegisteredLocale],
     },
     revalidate: 60,
   }
