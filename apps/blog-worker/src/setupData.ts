@@ -59,6 +59,8 @@ const main = () => {
     `${POST_DATA_PATH}/PostData.json`,
     JSON.stringify(allPostData),
   )
+
+  fs.writeFileSync(`${POSTS_PATH}/PostData.json`, JSON.stringify(allPostData))
 }
 
 main()
