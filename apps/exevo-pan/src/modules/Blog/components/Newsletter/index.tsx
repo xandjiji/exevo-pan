@@ -1,8 +1,11 @@
 import { memo, useState } from 'react'
+import { useRouter } from 'next/router'
 import { Input } from 'components/Atoms'
 import { useTranslations } from 'contexts/useTranslation'
 import { useNewsletter } from './useNewsletter'
 import * as S from './styles'
+
+const DEFAULT_LOCALE = 'en'
 
 const Newsletter = (
   props: React.HTMLAttributes<HTMLDivElement>,
@@ -11,14 +14,17 @@ const Newsletter = (
     translations: { blog },
   } = useTranslations()
 
+  const { locale } = useRouter()
+
   const [email, setEmail] = useState('')
   const { request, register } = useNewsletter()
 
+  const registerUser = () => register(email, locale ?? DEFAULT_LOCALE)
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
     const { code } = event
     if (code === 'Enter' || code === 'NumpadEnter') {
       if (request.status !== 'LOADING') {
-        register(email)
+        registerUser()
       }
     }
   }
@@ -60,7 +66,7 @@ const Newsletter = (
           <S.Button
             type="submit"
             loading={request.status === 'LOADING'}
-            onClick={() => register(email)}
+            onClick={registerUser}
           >
             {blog.Newsletter.buttonText}
             <S.LetterImage

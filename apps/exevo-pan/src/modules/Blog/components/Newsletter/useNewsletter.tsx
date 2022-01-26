@@ -7,13 +7,17 @@ export const useNewsletter = (): UseNewsletterState => {
     status: 'IDLE',
   })
 
-  const register = useCallback(async (email: string): Promise<void> => {
-    setStatus({ status: 'LOADING' })
+  const register = useCallback(
+    async (email: string, locale: string): Promise<void> => {
+      setStatus({ status: 'LOADING' })
 
-    const message = await NewsletterClient.registerEmail(email)
-    const status: RequestStatus = message === 'success' ? 'SUCCESSFUL' : 'ERROR'
-    setStatus({ status, message })
-  }, [])
+      const message = await NewsletterClient.registerEmail(email, locale)
+      const status: RequestStatus =
+        message === 'success' ? 'SUCCESSFUL' : 'ERROR'
+      setStatus({ status, message })
+    },
+    [],
+  )
 
   return { request, register }
 }

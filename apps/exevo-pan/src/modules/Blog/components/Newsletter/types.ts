@@ -5,5 +5,5 @@ export type RegisterStatus = {
 
 export type UseNewsletterState = {
   request: RegisterStatus
-  register: (email: string) => Promise<void>
+  register: (email: string, locale: string) => Promise<void>
 }

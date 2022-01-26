@@ -1,7 +1,7 @@
 import { endpoints } from 'Constants'
 
 export default class NewsletterClient {
-  static async registerEmail(email: string): Promise<string> {
+  static async registerEmail(email: string, locale: string): Promise<string> {
     try {
       const response = await fetch(endpoints.NEWSLETTER, {
         method: 'POST',
@@ -10,6 +10,7 @@ export default class NewsletterClient {
         },
         body: JSON.stringify({
           email,
+          locale,
         }),
       })
 

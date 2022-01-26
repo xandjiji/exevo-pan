@@ -16,14 +16,11 @@ const STATUS_MAP = {
   DEFAULT: 'generic',
 }
 
-const DEFAULT_LOCALE = 'en'
-
 export default async (
   request: VercelRequest,
   response: VercelResponse,
 ): Promise<void> => {
-  const locale = request.cookies.NEXT_LOCALE ?? DEFAULT_LOCALE
-  const { email } = request.body
+  const { email, locale } = request.body
 
   try {
     await mailchimp.lists.addListMember(LIST_ID, {
