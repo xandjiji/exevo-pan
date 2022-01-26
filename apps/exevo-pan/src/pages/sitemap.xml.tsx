@@ -1,8 +1,8 @@
 import { GetServerSideProps } from 'next'
 import { BlogClient } from 'services'
-import { links, routes } from 'Constants'
+import { links, routes, locales } from 'Constants'
 
-const MAIN_LANGUAGE = 'en'
+const { ALL_LOCALES, DEFAULT_LOCALE } = locales
 
 const buildRoute = (route: string): string => `${links.CANONICAL}${route}`
 
@@ -89,15 +89,11 @@ const generatePostEntries = (
   return entries
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-  res,
-  locales,
-}) => {
-  const paginationOptions: PaginationOptions = { pageIndex: 0, pageSize: 999 }
-  const { page: posts } = await BlogClient.queryBlog({ paginationOptions })
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+  const { en: posts } = await BlogClient.getEveryPostLocale({})
 
-  const alternateLocales = (locales ?? []).filter(
-    (locale) => locale !== MAIN_LANGUAGE,
+  const alternateLocales = ALL_LOCALES.filter(
+    (locale) => locale !== DEFAULT_LOCALE,
   )
 
   if (res) {
