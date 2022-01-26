@@ -6,7 +6,12 @@ import {
   DEFAULT_SORT_OPTIONS,
   DEFAULT_FILTER_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
-import { CacheObject, GetStaticContentProps, AllBlogPosts } from './types'
+import {
+  CacheObject,
+  GetStaticContentProps,
+  GetEveryPostLocaleProps,
+  AllBlogPosts,
+} from './types'
 
 const { DEFAULT_LOCALE } = locales
 const CACHE_MAX_AGE = 180000
@@ -37,7 +42,7 @@ export default class BlogClient {
       sortOptions = DEFAULT_SORT_OPTIONS,
       filterOptions = DEFAULT_FILTER_OPTIONS,
     }: Partial<BlogFilterBodyPayload>,
-    locale = DEFAULT_LOCALE,
+    locale = DEFAULT_LOCALE as string,
     showHidden = false,
   ): Promise<BlogFilterResponse> {
     const bodyPayload = serializeBody({
@@ -64,7 +69,7 @@ export default class BlogClient {
   }
 
   static async getStaticPost({
-    locale = DEFAULT_LOCALE,
+    locale = DEFAULT_LOCALE as string,
     slug,
   }: GetStaticContentProps): Promise<string> {
     const response = await fetch(
@@ -73,7 +78,11 @@ export default class BlogClient {
     return response.text()
   }
 
-  static async getEveryPostLocale(pageSize: number): Promise<AllBlogPosts> {
+  static async getEveryPostLocale({
+    pageSize,
+    excludedSlug,
+    showHidden = false,
+  }: GetEveryPostLocaleProps): Promise<AllBlogPosts> {
     const response = await fetch(`${this.blogStaticUrl}/${POST_DATA_FILE}`)
 
     const data: Record<string, BlogPost[]> = await response.json()
@@ -82,7 +91,8 @@ export default class BlogClient {
     Object.keys(data).forEach((localeRoute) => {
       const localeKey = localeRoute.replace('/', '') as RegisteredLocale
       paginatedData[localeKey] = data[localeRoute]
-        .filter(({ hidden }) => !hidden)
+        .filter(({ hidden }) => showHidden || !hidden)
+        .filter(({ slug }) => slug !== excludedSlug)
         .slice(0, pageSize)
     })
 

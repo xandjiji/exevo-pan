@@ -76,16 +76,13 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const { page: posts } = await BlogClient.queryBlog(
-    {
-      paginationOptions: DEFAULT_PAGINATION_OPTIONS,
-    },
-    locale,
-  )
+  const allBlogPosts = await BlogClient.getEveryPostLocale({
+    pageSize: DEFAULT_PAGINATION_OPTIONS.pageSize,
+  })
 
   return {
     props: {
-      initialPosts: posts,
+      initialPosts: allBlogPosts[locale as RegisteredLocale],
       translations: {
         common: common[locale as RegisteredLocale],
         blog: blog[locale as RegisteredLocale],

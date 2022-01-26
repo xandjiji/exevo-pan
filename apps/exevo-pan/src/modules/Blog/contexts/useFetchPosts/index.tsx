@@ -13,6 +13,7 @@ import {
   DEFAULT_SORT_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { BlogClient } from 'services'
+import { locales } from 'Constants'
 import FetchPostReducer from './reducer'
 import {
   FetchPostsReducerState,
@@ -72,7 +73,7 @@ export const FetchPostsProvider = ({
             pageIndex: currentIndex,
           },
         },
-        locale,
+        locale ?? locales.DEFAULT_LOCALE,
       )
 
       dispatch({ type: 'APPEND_POSTS', newPosts: page, hasNext })
@@ -94,7 +95,7 @@ export const FetchPostsProvider = ({
               pageIndex,
             },
           },
-          locale,
+          locale ?? locales.DEFAULT_LOCALE,
         )
 
         dispatch({ type: 'SET_POSTS', posts: page, hasNext })

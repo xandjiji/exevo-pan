@@ -126,7 +126,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     serverOptions,
     auctionedItemOptions,
     initialAuctionData,
-    { page: blogPosts },
+    localizedBlogPosts,
   ] = await Promise.all([
     DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
@@ -134,15 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       sortOptions,
       endpoint: endpoints.HISTORY_AUCTIONS,
     }),
-    BlogClient.queryBlog(
-      {
-        paginationOptions: {
-          pageIndex: 0,
-          pageSize: 3,
-        },
-      },
-      locale,
-    ),
+    await BlogClient.getEveryPostLocale({ pageSize: 3 }),
   ])
 
   return {
@@ -155,7 +147,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       serverOptions,
       auctionedItemOptions,
       initialAuctionData,
-      blogPosts,
+      blogPosts: localizedBlogPosts[locale as RegisteredLocale],
     },
     revalidate: 60,
   }

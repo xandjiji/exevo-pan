@@ -244,19 +244,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
   }
 
-  const { page: posts } = await BlogClient.queryBlog(
-    {
-      paginationOptions: {
-        pageIndex: 0,
-        pageSize: RECENT_POSTS_AMOUNT + 1,
-      },
-    },
-    locale,
-  )
+  const allPostData = await BlogClient.getEveryPostLocale({
+    pageSize: RECENT_POSTS_AMOUNT,
+    excludedSlug: slug,
+  })
 
-  const recentPosts: BlogPost[] = posts
-    .filter((post) => post.slug !== slug)
-    .slice(0, RECENT_POSTS_AMOUNT)
+  const recentPosts: BlogPost[] = allPostData[locale as RegisteredLocale]
 
   return {
     props: {
@@ -276,23 +269,17 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const paginationOptions: PaginationOptions = { pageIndex: 0, pageSize: 999 }
-  const { page: posts } = await BlogClient.queryBlog(
-    { paginationOptions },
-    undefined,
-    true,
-  )
+  const allPostData = await BlogClient.getEveryPostLocale({})
 
   const paths: PathItem[] = []
-  posts.forEach(({ slug }) => {
-    const pathItem = {
-      params: {
-        slug,
-      },
-    }
-
+  allPostData.en.forEach(({ slug }) => {
     locales?.forEach((locale) => {
-      paths.push({ ...pathItem, locale })
+      paths.push({
+        params: {
+          slug,
+        },
+        locale,
+      })
     })
   })
 

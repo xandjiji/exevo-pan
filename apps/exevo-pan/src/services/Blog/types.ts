@@ -5,4 +5,10 @@ export type GetStaticContentProps = {
   slug: string
 }
 
+export type GetEveryPostLocaleProps = {
+  pageSize?: number
+  excludedSlug?: string
+  showHidden?: boolean
+}
+
 export type AllBlogPosts = Record<RegisteredLocale, BlogPost[]>
