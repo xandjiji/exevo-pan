@@ -71,6 +71,13 @@ export default function PostPage({
         <meta name="description" content={metaData.description} />
         <meta property="twitter:description" content={metaData.description} />
         <meta property="og:description" content={metaData.description} />
+        {(metaData.tags as unknown as string[]).map((tag) => (
+          <meta
+            key={tag}
+            property="article:tag"
+            content={translations.common.BlogTags[tag]}
+          />
+        ))}
 
         <meta property="og:type" content="article" />
         <meta property="article:author" content={author.name} />
