@@ -60,6 +60,10 @@ export const FetchPostsProvider = ({
 
   const { locale } = useRouter()
 
+  useEffect(() => {
+    dispatch({ type: 'RELOAD_LIST' })
+  }, [locale])
+
   const fetchNextPage = useCallback(async () => {
     dispatch({ type: 'SET_STATUS', status: 'LOADING' })
 

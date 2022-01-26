@@ -25,13 +25,20 @@ export default class BlogClient {
 
   private static blogStaticUrl = `${endpoints.BLOG_STATIC}`
 
-  private static getCache(key: string): BlogFilterResponse | undefined {
-    const cacheKey = key
+  private static getCache(
+    key: string,
+    locale: string,
+  ): BlogFilterResponse | undefined {
+    const cacheKey = `${locale}${key}`
     return this.cache[cacheKey]
   }
 
-  private static setCache(key: string, data: BlogFilterResponse): void {
-    const cacheKey = key
+  private static setCache(
+    key: string,
+    locale: string,
+    data: BlogFilterResponse,
+  ): void {
+    const cacheKey = `${locale}${key}`
     this.cache[cacheKey] = data
     setTimeout(() => delete this.cache[cacheKey], CACHE_MAX_AGE)
   }
@@ -51,7 +58,7 @@ export default class BlogClient {
       filterOptions,
     })
 
-    const cachedResult = this.getCache(bodyPayload)
+    const cachedResult = this.getCache(bodyPayload, locale)
     if (cachedResult) return cachedResult
 
     const response = await fetch(
@@ -63,7 +70,7 @@ export default class BlogClient {
     )
 
     const data: BlogFilterResponse = await response.json()
-    this.setCache(bodyPayload, data)
+    this.setCache(bodyPayload, locale, data)
 
     return data
   }
