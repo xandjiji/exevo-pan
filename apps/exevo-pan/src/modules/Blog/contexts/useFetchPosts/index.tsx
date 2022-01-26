@@ -60,10 +60,6 @@ export const FetchPostsProvider = ({
 
   const { locale } = useRouter()
 
-  useEffect(() => {
-    dispatch({ type: 'RELOAD_LIST' })
-  }, [locale])
-
   const fetchNextPage = useCallback(async () => {
     dispatch({ type: 'SET_STATUS', status: 'LOADING' })
 
@@ -110,14 +106,23 @@ export const FetchPostsProvider = ({
     [locale],
   )
 
-  const isMounted = useRef(false)
+  const filterMountedCheck = useRef(false)
   useEffect(() => {
-    if (isMounted.current) {
+    if (filterMountedCheck.current) {
       query({ pageIndex: 0, filterOptions, sortOptions })
     } else {
-      isMounted.current = true
+      filterMountedCheck.current = true
     }
   }, [filterOptions, sortOptions])
+
+  const localeMountedCheck = useRef(false)
+  useEffect(() => {
+    if (localeMountedCheck.current) {
+      dispatch({ type: 'RELOAD_LIST' })
+    } else {
+      localeMountedCheck.current = true
+    }
+  }, [locale])
 
   return (
     <FetchPostsContext.Provider
