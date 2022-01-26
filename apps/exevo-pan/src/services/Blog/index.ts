@@ -1,16 +1,17 @@
 /* eslint-disable no-console */
-import { endpoints } from 'Constants'
+import { endpoints, locales } from 'Constants'
 import { serializeBody } from 'shared-utils/dist/contracts/BlogFilters/utils'
 import {
   DEFAULT_PAGINATION_OPTIONS,
   DEFAULT_SORT_OPTIONS,
   DEFAULT_FILTER_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
-import { CacheObject, GetStaticContentProps } from './types'
+import { CacheObject, GetStaticContentProps, AllBlogPosts } from './types'
 
+const { DEFAULT_LOCALE } = locales
 const CACHE_MAX_AGE = 180000
-const DEFAULT_LOCALE = 'en'
 const MDX_EXTENSION = '.mdx'
+const POST_DATA_FILE = 'PostData.json'
 
 export default class BlogClient {
   private static cache: CacheObject = {}
@@ -70,5 +71,21 @@ export default class BlogClient {
       `${this.blogStaticUrl}/${locale}/${slug}${MDX_EXTENSION}`,
     )
     return response.text()
+  }
+
+  static async getEveryPostLocale(pageSize: number): Promise<AllBlogPosts> {
+    const response = await fetch(`${this.blogStaticUrl}/${POST_DATA_FILE}`)
+
+    const data: Record<string, BlogPost[]> = await response.json()
+    const paginatedData = {} as AllBlogPosts
+
+    Object.keys(data).forEach((localeRoute) => {
+      const localeKey = localeRoute.replace('/', '') as RegisteredLocale
+      paginatedData[localeKey] = data[localeRoute]
+        .filter(({ hidden }) => !hidden)
+        .slice(0, pageSize)
+    })
+
+    return paginatedData
   }
 }
