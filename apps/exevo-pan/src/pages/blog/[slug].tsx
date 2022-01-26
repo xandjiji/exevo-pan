@@ -1,4 +1,4 @@
-import { Post, parseMarkdownSections } from 'modules/Blog'
+import { Post, Links, parseMarkdownSections } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import dynamic from 'next/dynamic'
@@ -18,6 +18,7 @@ const components = {
   h2: Post.HeadingSection,
   table: Post.Table,
   Image: Post.Image,
+  ...Links,
   Button: dynamic(() => import('components/Atoms/Button')),
   AboutPageStyle: dynamic(
     () => import('modules/Blog/components/Post/custom/AboutPageStyle'),
