@@ -9,7 +9,7 @@ import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient, TibiaDataClient } from 'services'
 import { Main } from 'templates'
-import { routes, authors } from 'Constants'
+import { routes, authors, links } from 'Constants'
 import { common, blog } from 'locales'
 
 const components = {
@@ -34,6 +34,7 @@ type Props = {
   translator: AuthorData | false
   recentPosts: BlogPost[]
   translations: any
+  locale: RegisteredLocale
 }
 
 type PathItem = {
@@ -49,6 +50,7 @@ export default function PostPage({
   author,
   translator,
   recentPosts,
+  locale,
 }: Props): JSX.Element {
   const { translations } = useTranslations()
 
@@ -60,6 +62,7 @@ export default function PostPage({
   const titles = parseMarkdownSections(src)
 
   const [day, month, year] = metaData.date.split('-')
+  const tags = metaData.tags as unknown as string[]
   return (
     <>
       <Head>
@@ -71,7 +74,7 @@ export default function PostPage({
         <meta name="description" content={metaData.description} />
         <meta property="twitter:description" content={metaData.description} />
         <meta property="og:description" content={metaData.description} />
-        {(metaData.tags as unknown as string[]).map((tag) => (
+        {tags.map((tag) => (
           <meta
             key={tag}
             property="article:tag"
@@ -114,12 +117,14 @@ export default function PostPage({
             __html: JSON.stringify({
               '@context': 'http://schema.org',
               '@type': 'Article',
-              mainEntityOfPage: {
-                '@type': 'WebPage',
-                '@id': pageUrl,
-              },
-              url: pageUrl,
+              url: buildUrl(postRoute, locale),
               image: metaData.thumbnail,
+              headline: metaData.title,
+              datePublished: `${year}-${month}-${day}`,
+              keywords: tags
+                .map((tag) => translations.common.BlogTags[tag])
+                .join(', '),
+              description: metaData.description,
               publisher: {
                 '@context': 'http://schema.org',
                 '@type': 'Organization',
@@ -132,13 +137,15 @@ export default function PostPage({
                   height: '100',
                 },
               },
-              headline: metaData.title,
               author: {
                 '@context': 'http://schema.org',
                 '@type': 'Person',
                 name: author.name,
               },
-              datePublished: `${year}-${month}-${day}`,
+              mainEntityOfPage: {
+                '@type': 'WebPage',
+                '@id': links.CANONICAL,
+              },
             }),
           }}
         />
@@ -169,7 +176,7 @@ export default function PostPage({
             <Post.Layout.Left>
               <Post.Breadcrumbs postTitle={metaData.title} />
               <Post.Pillar titles={titles} />
-              <Post.Tags tags={metaData.tags as unknown as string[]} />
+              <Post.Tags tags={tags} />
             </Post.Layout.Left>
 
             <Post.Layout.Center>
@@ -262,6 +269,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         common: common[locale as RegisteredLocale],
         blog: blog[locale as RegisteredLocale],
       },
+      locale: locale as RegisteredLocale,
     },
     revalidate: 60,
   }
