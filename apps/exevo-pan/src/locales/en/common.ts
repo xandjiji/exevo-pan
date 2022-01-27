@@ -29,6 +29,7 @@ export default {
     news: 'News',
     article: 'Article',
     tutorial: 'Tutorial',
+    tips: 'Tips',
   },
   Month: {
     '0': 'Jan',

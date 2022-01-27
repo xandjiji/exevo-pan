@@ -11,6 +11,10 @@ export const tagById: Record<string, BlogTag> = {
     id: 'tutorial',
     color: 110,
   },
+  tips: {
+    id: 'tips',
+    color: 255,
+  },
 }
 
 export const all: BlogTag[] = Object.values(tagById)
