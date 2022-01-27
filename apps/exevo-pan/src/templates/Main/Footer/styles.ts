@@ -4,8 +4,12 @@ import UnlicenseSvg from 'assets/svgs/unlicense.svg'
 
 export const Wrapper = styled.footer`
   ${InnerContainer}
-  padding-top: 16px;
-  padding-bottom: 16px;
+  padding-top: 32px;
+  padding-bottom: 32px;
+
+  position: relative;
+  z-index: 71;
+
   background-color: var(--primary);
   transition: background-color 0.2s ease-out;
 
@@ -18,7 +22,7 @@ export const Wrapper = styled.footer`
 `
 
 export const Title = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -33,7 +37,37 @@ export const UnlicenseIcon = styled(UnlicenseSvg)`
   }
 `
 
-export const UnlicenseParagraph = styled.p`
-  text-align: center;
-  line-height: 1.6;
+export const Nav = styled.nav`
+  ${InnerContainer}
+`
+
+export const Ul = styled.ul`
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+`
+
+export const Li = styled.li`
+  &:not(:last-child)::after {
+    content: '|';
+    margin-left: 12px;
+    font-size: 14px;
+    color: var(--onPrimary);
+    opacity: 0.5;
+  }
+`
+
+export const A = styled.a`
+  && {
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    color: var(--onPrimary);
+    cursor: pointer;
+
+    @media (min-width: 768px) {
+      font-size: 16px;
+    }
+  }
 `
