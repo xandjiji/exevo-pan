@@ -7,9 +7,9 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import matter from 'gray-matter'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
-import { BlogClient, TibiaDataClient } from 'services'
+import { BlogClient } from 'services'
 import { Main } from 'templates'
-import { routes, authors, links } from 'Constants'
+import { routes, links } from 'Constants'
 import { common, blog } from 'locales'
 
 const components = {
@@ -30,9 +30,7 @@ const components = {
 
 type Props = {
   mdxSource: MDXRemoteSerializeResult
-  metaData: Record<string, string>
-  author: AuthorData
-  translator: AuthorData | false
+  metaData: BlogPost
   recentPosts: BlogPost[]
   translations: any
   locale: RegisteredLocale
@@ -48,8 +46,6 @@ type PathItem = {
 export default function PostPage({
   mdxSource,
   metaData,
-  author,
-  translator,
   recentPosts,
   locale,
 }: Props): JSX.Element {
@@ -62,7 +58,7 @@ export default function PostPage({
 
   const titles = parseMarkdownSections(src)
 
-  const [day, month, year] = metaData.date.split('-')
+  const [day, month, year] = metaData.date.toString().split('-')
   const tags = metaData.tags as unknown as string[]
   return (
     <>
@@ -84,7 +80,10 @@ export default function PostPage({
         ))}
 
         <meta property="og:type" content="article" />
-        <meta property="article:author" content={author.name} />
+        <meta
+          property="article:author"
+          content={metaData.author.name as string}
+        />
         <meta
           property="article:published_time"
           content={`${year}-${month}-${day}`}
@@ -141,7 +140,7 @@ export default function PostPage({
               author: {
                 '@context': 'http://schema.org',
                 '@type': 'Person',
-                name: author.name,
+                name: metaData.author.name,
               },
               mainEntityOfPage: {
                 '@type': 'WebPage',
@@ -182,7 +181,10 @@ export default function PostPage({
 
             <Post.Layout.Center>
               <MDXRemote {...mdxSource} components={components} />
-              <Post.Authors author={author} translator={translator} />
+              <Post.Authors
+                author={metaData.author}
+                translator={metaData.translator}
+              />
             </Post.Layout.Center>
 
             <Post.Layout.Right>
@@ -226,25 +228,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     mdxSource = await serialize(content)
   }
 
-  const author: AuthorData = {
-    ...((await TibiaDataClient.character(data.author.name)) || authors.Ksu),
-    outfitSrc: data.author.outfit,
-  }
-
-  let translator: AuthorData | false = false
-  if (data.translator) {
-    const characterData = await TibiaDataClient.character(data.translator.name)
-    if (characterData) {
-      translator = {
-        ...characterData,
-        outfitSrc: data.translator.outfit,
-      }
-    } else {
-      translator =
-        authors[data.translator.name as keyof typeof authors] ?? false
-    }
-  }
-
   const allPostData = await BlogClient.getEveryPostLocale({
     pageSize: RECENT_POSTS_AMOUNT,
     excludedSlug: slug,
@@ -256,8 +239,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     props: {
       mdxSource,
       metaData: { ...data, slug },
-      author,
-      translator,
       recentPosts,
       translations: {
         common: common[locale as RegisteredLocale],

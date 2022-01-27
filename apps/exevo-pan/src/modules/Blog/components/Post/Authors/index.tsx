@@ -17,16 +17,16 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => {
       </S.Title>
       <CharacterMiniCard
         forceSubtitle={blog.Authors.author}
-        characterData={author}
-        outfitSrc={author.outfitSrc}
+        characterName={author.name}
+        outfitSrc={author.outfit}
         displayLink
         style={translator ? { marginBottom: 8 } : undefined}
       />
       {translator && (
         <CharacterMiniCard
           forceSubtitle={blog.Authors.translator}
-          characterData={translator}
-          outfitSrc={translator.outfitSrc}
+          characterName={translator.name}
+          outfitSrc={translator.outfit}
           displayLink
         />
       )}

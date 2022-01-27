@@ -1,4 +1,4 @@
 export interface AuthorsProps {
-  author: AuthorData
-  translator: AuthorData | false
+  author: BlogPostAuthor
+  translator?: BlogPostAuthor
 }
