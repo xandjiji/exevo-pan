@@ -21,8 +21,6 @@ const Tag = ({
 
   const type = clickable ? 'button' : undefined
 
-  console.log(tagId)
-
   return (
     <S.Wrapper
       as={type}
