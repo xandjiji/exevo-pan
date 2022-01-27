@@ -1,12 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
-import Link from 'next/link'
-import { routes } from 'Constants'
 import * as S from './styles'
 import { ErrorStateProps } from './types'
 
 const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
   const {
-    translations: { error, common },
+    translations: { error },
   } = useTranslations()
 
   return (
@@ -19,41 +17,6 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
         {paragraphs?.map((p) => (
           <S.Paragraph key={p}>{p}</S.Paragraph>
         ))}
-
-        <S.Nav>
-          <S.Ul>
-            <S.Li>
-              <Link href={routes.HOME}>
-                <S.A>{common.Header.nav.currentAuctions}</S.A>
-              </Link>
-            </S.Li>
-            <S.Li>
-              <Link href={routes.BAZAAR_HISTORY}>
-                <S.A>{common.Header.nav.bazaarHistory}</S.A>
-              </Link>
-            </S.Li>
-            <S.Li>
-              <Link href={routes.STATISTICS}>
-                <S.A>{common.Header.nav.statistics}</S.A>
-              </Link>
-            </S.Li>
-            <S.Li>
-              <Link href={routes.ADVERTISE}>
-                <S.A>{common.Header.nav.advertise}</S.A>
-              </Link>
-            </S.Li>
-            <S.Li>
-              <Link href={routes.BLOG}>
-                <S.A>{common.Header.nav.blog}</S.A>
-              </Link>
-            </S.Li>
-            <S.Li>
-              <Link href={routes.ABOUT}>
-                <S.A>{common.Header.nav.about}</S.A>
-              </Link>
-            </S.Li>
-          </S.Ul>
-        </S.Nav>
       </S.Bottom>
     </S.Wrapper>
   )
