@@ -10,20 +10,6 @@ const Footer = (): JSX.Element => {
 
   return (
     <S.Wrapper>
-      <S.Title>
-        <S.UnlicenseIcon aria-label="Unlicensed" />
-        {new Date().getFullYear()} {common.FooterTitle}
-        <a
-          href={links.GITHUB_PROFILE}
-          target="_blank"
-          rel="noopener noreferrer author external"
-          style={{ marginLeft: 3 }}
-        >
-          xandjiji
-        </a>
-        .
-      </S.Title>
-
       <S.Nav>
         <S.Ul>
           <S.Li>
@@ -58,6 +44,19 @@ const Footer = (): JSX.Element => {
           </S.Li>
         </S.Ul>
       </S.Nav>
+      <S.Title>
+        <S.UnlicenseIcon aria-label="Unlicensed" />
+        {new Date().getFullYear()} {common.FooterTitle}
+        <a
+          href={links.GITHUB_PROFILE}
+          target="_blank"
+          rel="noopener noreferrer author external"
+          style={{ marginLeft: 3 }}
+        >
+          xandjiji
+        </a>
+        .
+      </S.Title>
     </S.Wrapper>
   )
 }

@@ -4,8 +4,8 @@ import UnlicenseSvg from 'assets/svgs/unlicense.svg'
 
 export const Wrapper = styled.footer`
   ${InnerContainer}
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: 24px;
+  padding-bottom: 24px;
 
   position: relative;
   z-index: 71;
@@ -22,7 +22,7 @@ export const Wrapper = styled.footer`
 `
 
 export const Title = styled.div`
-  margin-bottom: 24px;
+  margin-top: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
