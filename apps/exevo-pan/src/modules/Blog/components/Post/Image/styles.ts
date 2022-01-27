@@ -33,7 +33,6 @@ export const Figure = styled.figure`
 `
 
 export const Caption = styled.figcaption`
-  margin-top: 8px;
   display: block;
 
   font-size: 12px;
