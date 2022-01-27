@@ -22,6 +22,7 @@ const Newsticker = ({ blogPosts, ...props }: NewstickerProps): JSX.Element => {
                 layout="fixed"
                 width={48}
                 height={48}
+                alt={title}
               />
             </S.Thumbnail>
 
