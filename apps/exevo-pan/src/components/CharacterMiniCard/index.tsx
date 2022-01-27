@@ -20,7 +20,7 @@ const CharacterMiniCard = ({
     translations: { common },
   } = useTranslations()
 
-  const name = characterName ?? characterData.name
+  const name = characterName ?? (characterData as SingleCharacterData).name
 
   return (
     <S.Wrapper isCard={isCard} {...props}>
