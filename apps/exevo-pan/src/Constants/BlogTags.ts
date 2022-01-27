@@ -13,7 +13,7 @@ export const tagById: Record<string, BlogTag> = {
   },
   tips: {
     id: 'tips',
-    color: 255,
+    color: 300,
   },
 }
 
