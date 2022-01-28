@@ -54,7 +54,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     .join(NEWLINE)}`
 
   if (res) {
-    res.setHeader('Content-Type', 'application/xml')
+    res.setHeader('Content-Type', 'text/xml')
     res.write(XmlWrapper(sitemapContent))
     res.end()
   }
