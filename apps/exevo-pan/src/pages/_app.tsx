@@ -41,6 +41,8 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           property="twitter:image"
           content="https://i.imgur.com/obDJJOI.png"
         />
+        <meta name="theme-color" content="#3F51B5" />
+        <meta name="msapplication-navbutton-color" content="#3F51B5" />
       </Head>
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
