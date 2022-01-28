@@ -8,6 +8,22 @@ export const Wrapper = styled.main`
   padding-bottom: 16px;
 `
 
+export const Title = styled.h2`
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 300;
+
+  a {
+    color: var(--primary);
+    filter: brightness(130%);
+    font-weight: 700;
+  }
+
+  @media (min-width: 768px) {
+    text-align: center;
+  }
+`
+
 export const FormStepsWrapper = styled.div`
   > * {
     margin: 0 auto;
