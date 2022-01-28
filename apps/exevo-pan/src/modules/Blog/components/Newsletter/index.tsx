@@ -41,6 +41,7 @@ const Newsletter = (
           layout="fixed"
           width={64}
           height={64}
+          unoptimized
         />
       </S.Title>
 

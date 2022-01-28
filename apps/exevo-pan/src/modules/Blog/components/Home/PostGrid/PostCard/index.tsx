@@ -22,6 +22,7 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
         layout="fixed"
         width={120}
         height={120}
+        unoptimized
       />
 
       <S.Body>
