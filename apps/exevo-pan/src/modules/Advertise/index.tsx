@@ -40,6 +40,10 @@ const Form = (): JSX.Element => {
 
   return (
     <>
+      <S.Title>
+        {advertise.FAQText}{' '}
+        <NextLink href={`${routes.BLOG}/${FAQ_SLUG}`}>FAQ</NextLink>
+      </S.Title>
       <S.Stepper
         steps={stepItems}
         currentStep={currentStep}
@@ -56,10 +60,6 @@ const Form = (): JSX.Element => {
 const AdvertiseGrid = (): JSX.Element => (
   <FormProvider>
     <S.Wrapper>
-      <S.Title>
-        Not sure how advertising works? Check out our{' '}
-        <NextLink href={`${routes.BLOG}/${FAQ_SLUG}`}>FAQ</NextLink>
-      </S.Title>
       <Form />
     </S.Wrapper>
   </FormProvider>

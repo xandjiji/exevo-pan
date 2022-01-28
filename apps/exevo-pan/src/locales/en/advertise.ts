@@ -3,6 +3,7 @@ export default {
     title: 'Advertise',
     description: 'Highlight your own auction and get higher bids!',
   },
+  FAQText: 'Not sure how advertising works? Check out our',
   StepItems: {
     Select: 'Select',
     Configure: 'Configure',

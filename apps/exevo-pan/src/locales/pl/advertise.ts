@@ -3,6 +3,7 @@ export default {
     title: 'Reklama',
     description: 'Podświetl swoją aukcję, aby uzyskać lepszą cenę!',
   },
+  FAQText: 'Not sure how advertising works? Check out our',
   StepItems: {
     Select: 'Wybierz',
     Configure: 'Konfiguruj',
