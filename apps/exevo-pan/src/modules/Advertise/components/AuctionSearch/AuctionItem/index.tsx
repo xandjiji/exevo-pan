@@ -1,4 +1,5 @@
 import { vocation } from 'shared-utils/dist/vocations'
+import CharacterMiniCard from 'components/CharacterMiniCard'
 import { useForm } from '../../../contexts/Form'
 import * as S from './styles'
 import { AuctionItemProps } from './types'
@@ -13,29 +14,22 @@ const AuctionItem = ({
   const { selectedCharacter } = useForm()
 
   return (
-    <S.ButtonWrapper
+    <S.Button
       {...props}
-      type="button"
       aria-selected={selectedCharacter?.nickname === nickname}
     >
-      <S.SpritePortrait
-        src={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
-        alt={nickname}
-        title={nickname}
+      <CharacterMiniCard
+        outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+        characterData={{
+          level,
+          name: nickname,
+          vocation: vocation.getFullName(vocationId, level),
+          world: '',
+        }}
       />
-      <div>
-        <S.Nickname>{nickname}</S.Nickname>
-
-        <S.Info>
-          Level {level}
-          {' - '}
-          {vocation.getFullName(vocationId, level)}
-        </S.Info>
-      </div>
       <S.Arrow />
-    </S.ButtonWrapper>
+    </S.Button>
   )
 }
 
 export default AuctionItem
-export { default as SkeletonItem } from './SkeletonItem'

@@ -3,10 +3,10 @@ import errorES from './es/error'
 import errorPT from './pt/error'
 import errorPL from './pl/error'
 
-import aboutEN from './en/about'
-import aboutES from './es/about'
-import aboutPT from './pt/about'
-import aboutPL from './pl/about'
+import blogEN from './en/blog'
+import blogES from './es/blog'
+import blogPT from './pt/blog'
+import blogPL from './pl/blog'
 
 import advertiseEN from './en/advertise'
 import advertiseES from './es/advertise'
@@ -44,11 +44,11 @@ export const error = {
   pt: errorPT,
   pl: errorPL,
 }
-export const about = {
-  en: aboutEN,
-  es: aboutES,
-  pt: aboutPT,
-  pl: aboutPL,
+export const blog = {
+  en: blogEN,
+  es: blogES,
+  pt: blogPT,
+  pl: blogPL,
 }
 export const advertise = {
   en: advertiseEN,

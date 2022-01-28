@@ -1,24 +1,33 @@
 import { useEffect, useRef } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import { useForm } from '../../contexts/Form'
 import * as S from './styles'
 
+const HEADER_OFFSET = 60
+const MAX_WIDTH = 768
+
 const CharacterCard = (): JSX.Element | null => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
   const { selectedCharacter, currentStep, finished, isValid, dispatch } =
     useForm()
 
   const wrapperRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (selectedCharacter) {
-      wrapperRef.current?.scrollIntoView({ block: 'start' })
+    const shouldScroll = window.innerWidth < MAX_WIDTH
+    if (selectedCharacter && shouldScroll) {
+      window.scrollTo({
+        top: (wrapperRef.current?.offsetTop ?? 0) - HEADER_OFFSET,
+        behavior: 'smooth',
+      })
     }
   }, [selectedCharacter])
 
   useEffect(() => {
-    document
-      .getElementById('main-wrapper')
-      ?.scrollTo({ top: 0, behavior: 'smooth' })
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }, [currentStep])
 
   if (!finished) {
@@ -41,7 +50,7 @@ const CharacterCard = (): JSX.Element | null => {
               dispatch({ type: 'SET_STEP', newStep: currentStep + 1 })
             }
           >
-            Next
+            {advertise.NextButton}
           </Button>
         )}
       </S.Wrapper>

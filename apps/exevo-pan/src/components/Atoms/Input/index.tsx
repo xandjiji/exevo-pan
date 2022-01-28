@@ -72,7 +72,12 @@ const Input = ({
           />
         )}
       </S.InputWrapper>
-      <S.ErrorMessage id={errorId} aria-hidden={!isInvalid} role="alert">
+      <S.ErrorMessage
+        id={errorId}
+        aria-hidden={!isInvalid}
+        role="alert"
+        suppressHydrationWarning
+      >
         {errorMessage}
       </S.ErrorMessage>
     </S.Wrapper>

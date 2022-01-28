@@ -1,4 +1,9 @@
-import { links } from 'Constants'
+import { links, locales } from 'Constants'
 
-export const buildUrl = (route: string, locale?: string): string =>
-  `${links.CANONICAL}${locale ? `/${locale}` : ''}${route}`
+const { DEFAULT_LOCALE } = locales
+
+export const buildUrl = (
+  route: string,
+  locale = DEFAULT_LOCALE as string,
+): string =>
+  `${links.CANONICAL}${locale === DEFAULT_LOCALE ? '' : `/${locale}`}${route}`

@@ -5,7 +5,7 @@ import { HistoryStatisticsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common, statistics } from 'locales'
 
 const pageUrl = buildUrl(routes.STATISTICS)
@@ -18,15 +18,11 @@ export default function Statistics({
   const { translations } = useTranslations()
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.statistics.Meta.Statistics.title}</title>
         <meta
           name="title"
-          content={translations.statistics.Meta.Statistics.title}
-        />
-        <meta
-          property="og:site_name"
           content={translations.statistics.Meta.Statistics.title}
         />
         <meta
@@ -73,6 +69,14 @@ export default function Statistics({
           href={buildUrl(routes.STATISTICS, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
+        />
       </Head>
 
       <Main>
@@ -81,7 +85,7 @@ export default function Statistics({
           <OverallGrid statisticsData={statisticsData} />
         </main>
       </Main>
-    </div>
+    </>
   )
 }
 

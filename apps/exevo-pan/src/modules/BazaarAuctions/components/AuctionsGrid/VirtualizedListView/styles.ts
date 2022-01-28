@@ -1,13 +1,11 @@
 import styled from 'styled-components'
-import { InnerContainer, CustomScrollbar } from 'styles'
+import { InnerContainer } from 'styles'
 
 export const Grid = styled.div`
+  ${InnerContainer}
   padding-top: 16px;
-  position: relative;
-  height: calc(100% - 72px);
-  background-color: var(--background);
-  overflow: auto;
-  ${CustomScrollbar}
+  padding-bottom: 16px;
+  width: 100%;
 
   display: grid;
   grid-gap: 16px;
@@ -23,24 +21,5 @@ export const Grid = styled.div`
   &::after {
     content: '';
     grid-column: 1 / -1;
-    height: 48px;
   }
-
-  &::before {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    height: 72px;
-    background-image: linear-gradient(
-      to top,
-      var(--background),
-      rgba(0, 0, 0, 0)
-    );
-    pointer-events: none;
-  }
-
-  ${InnerContainer}
 `

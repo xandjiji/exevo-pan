@@ -1,5 +1,3 @@
-export { default as Title } from './Title'
-export { default as Subtitle } from './Subtitle'
 export { default as TagButton } from './TagButton'
 export { default as ServerInfo } from './ServerInfo'
 export { default as CharacterSkills } from './CharacterSkills'

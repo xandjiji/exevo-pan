@@ -15,7 +15,7 @@
     "packages/*"
   ],
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "is-ci || husky install",
     "lint": "turbo run lint",
     "format": "turbo run format",
     "clean": "turbo run clean && rm -rf node_modules",
@@ -27,12 +27,13 @@
     "postinstall": "turbo run build:packages --include-dependencies --no-deps",
     "build": "turbo run build",
     "build:front": "NODE_ENV=production turbo run build --scope=exevo-pan --include-dependencies --no-deps",
-    "build:exevo-pan": "turbo run build --scope=exevo-pan --include-dependencies --no-deps",
+    "build:exevo-pan": "turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
     "build:current-auctions-worker": "turbo run build --scope=current-auctions-worker --include-dependencies --no-deps",
     "build:history-server": "turbo run build --scope=history-server --include-dependencies --no-deps",
     "build:bazaar-scraper": "turbo run build --scope=bazaar-scraper --include-dependencies --no-deps",
     "start:front": "NODE_ENV=production turbo run start --scope=exevo-pan",
-    "start:staging": "turbo run staging"
+    "start:staging": "turbo run staging",
+    "deploy:posts": "yarn --cwd apps/blog-worker deploy"
   },
   "devDependencies": {
     "husky": "^7.0.4",

@@ -5,7 +5,7 @@ import { HistoryStatisticsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common, statistics } from 'locales'
 
 const pageUrl = buildUrl(routes.HIGHSCORES)
@@ -18,15 +18,11 @@ export default function Highscores({
   const { translations } = useTranslations()
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.statistics.Meta.Highscores.title}</title>
         <meta
           name="title"
-          content={translations.statistics.Meta.Highscores.title}
-        />
-        <meta
-          property="og:site_name"
           content={translations.statistics.Meta.Highscores.title}
         />
         <meta
@@ -73,6 +69,14 @@ export default function Highscores({
           href={buildUrl(routes.HIGHSCORES, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
+        />
       </Head>
 
       <Main>
@@ -81,7 +85,7 @@ export default function Highscores({
           <HighscoresGrid statisticsData={statisticsData} />
         </main>
       </Main>
-    </div>
+    </>
   )
 }
 

@@ -36,6 +36,7 @@ export const Backdrop = styled.div`
 
 export const Picker = styled.div`
   position: fixed;
+  top: 46px;
   transform: translate(-50%, 6px);
   z-index: 10;
 

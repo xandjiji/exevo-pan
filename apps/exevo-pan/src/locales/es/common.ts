@@ -12,8 +12,8 @@ export default {
       war: '¡Sigue las estadísticas en vivo de la guerra de Libertabra!',
       advertise: '¡Destaque su propia subasta y obtenga ofertas más altas!',
     },
-    openMenuLabel: 'Open the navigation menu',
-    closeMenuLabel: 'Close the navigation menu',
+    openMenuLabel: 'Abre el menú de navegación',
+    closeMenuLabel: 'Cerrar el menú de navegación',
     logoLabel: 'Ir a la pagina principal',
     nav: {
       currentAuctions: 'Subastas',
@@ -22,8 +22,15 @@ export default {
       war: 'Libertabra War',
       about: 'Sobre',
       advertise: 'Anunciar',
+      blog: 'Blog',
     },
     themeSwitch: 'Habilitar tema nocturno',
+  },
+  BlogTags: {
+    news: 'Noticias',
+    article: 'Artículo',
+    tutorial: 'Tutorial',
+    tips: 'Consejos',
   },
   Month: {
     '0': 'Ene',
@@ -142,4 +149,8 @@ export default {
     open: 'Abrir',
     close: 'Cerrar',
   },
+  FooterTitle: 'Exevo Pan - criado por',
+  AnchorIconLabel: 'Copiar link',
+  CharacterTooltipLabel: 'Ir a la página del personaje',
+  Newsticker: 'Artículos recientes',
 }

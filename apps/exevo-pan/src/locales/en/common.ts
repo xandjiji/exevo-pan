@@ -21,8 +21,15 @@ export default {
       war: 'Libertabra War',
       about: 'About',
       advertise: 'Advertise',
+      blog: 'Blog',
     },
     themeSwitch: 'Toggle dark theme',
+  },
+  BlogTags: {
+    news: 'News',
+    article: 'Article',
+    tutorial: 'Tutorial',
+    tips: 'Tips',
   },
   Month: {
     '0': 'Jan',
@@ -141,4 +148,8 @@ export default {
     open: 'Open',
     close: 'Close',
   },
+  FooterTitle: 'Exevo Pan - made by',
+  AnchorIconLabel: 'Copy link',
+  CharacterTooltipLabel: 'Go to character page',
+  Newsticker: 'Recent articles',
 }

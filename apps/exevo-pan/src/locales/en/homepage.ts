@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Current Auctions',
+    title: 'Current Auctions',
     description:
       'Filter and search for Tibia characters on the official Char Bazaar!',
   },
@@ -24,7 +24,6 @@ export default {
     },
     noAuctionFound: 'Sorry, no auction was found',
     changeFilters: 'Change filters',
-    notFoundAlt: 'No character was found',
   },
   FilterDrawer: {
     title: 'Filters',

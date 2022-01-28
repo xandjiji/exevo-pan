@@ -9,6 +9,7 @@ const Accordion = ({
   initialValue = false,
   open: openProp,
   onClick,
+  border = false,
   children,
   ...props
 }: AccordionProps): JSX.Element => {
@@ -39,11 +40,17 @@ const Accordion = ({
         aria-controls={contentId}
         aria-label={common.Accordion[open ? 'close' : 'open']}
         onClick={handleClick}
+        border={border}
+        suppressHydrationWarning
       >
         {title}
         <S.ArrowIcon />
       </S.Button>
-      <S.Content id={contentId} aria-describedby={buttonId}>
+      <S.Content
+        id={contentId}
+        aria-describedby={buttonId}
+        suppressHydrationWarning
+      >
         {open && children}
       </S.Content>
     </S.Wrapper>

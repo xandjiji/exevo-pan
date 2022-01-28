@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - 404',
+    title: '404',
     description: 'Ojej! Nie znaleziono strony!',
   },
   P1: 'Ojej!',

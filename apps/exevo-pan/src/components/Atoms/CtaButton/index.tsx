@@ -19,13 +19,7 @@ const CtaButton = ({
       {...props}
     >
       <S.ImgWrapper>
-        <Image
-          src={coinsGif}
-          priority
-          alt="Tibia Coins"
-          width="24"
-          height="24"
-        />
+        <Image src={coinsGif} alt="Tibia Coins" width="24" height="24" />
       </S.ImgWrapper>
       {common.TibiaCoinsCta}
     </S.Button>

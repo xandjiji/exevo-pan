@@ -1,13 +1,15 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Reklama',
+    title: 'Reklama',
     description: 'Podświetl swoją aukcję, aby uzyskać lepszą cenę!',
   },
+  FAQText: 'Nie wiesz jak działa nasz system promowania aukcji? Sprawdź nasze',
   StepItems: {
     Select: 'Wybierz',
     Configure: 'Konfiguruj',
     Checkout: 'Podsumowanie',
   },
+  NextButton: 'Następny',
   RangeDatePicker: {
     currentMonthLabel: 'Obecny miesiąc',
     nextMonthLabel: 'Następny miesiąc',

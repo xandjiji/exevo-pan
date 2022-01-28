@@ -1,7 +1,7 @@
 export default {
   Meta: {
     Statistics: {
-      title: 'Exevo Pan - Ogólne statystyki',
+      title: 'Ogólne statystyki',
       description:
         'Statystyki, trendy i codzienna analiza danych z Tibijskiego Bazaru Postaci!',
     },

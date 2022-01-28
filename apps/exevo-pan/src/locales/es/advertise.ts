@@ -1,13 +1,15 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Anunciar',
+    title: 'Anunciar',
     description: '¡Destaque su propia subasta y obtenga ofertas más altas!',
   },
+  FAQText: '¿No sabes cómo funcionan nuestros anuncios? Consulte nuestro',
   StepItems: {
     Select: 'Seleccionar',
     Configure: 'Configurar',
     Checkout: 'Finalizar',
   },
+  NextButton: 'Siguiente',
   RangeDatePicker: {
     currentMonthLabel: 'Mes actual',
     nextMonthLabel: 'Proximo mes',

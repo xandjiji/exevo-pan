@@ -72,7 +72,7 @@ export const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 70;
+  z-index: 74;
 
   width: 100vw;
   height: 100vh;

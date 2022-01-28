@@ -44,6 +44,8 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
+          <meta name="theme-color" content="#3F51B5" />
+          <meta name="msapplication-navbutton-color" content="#3F51B5" />
 
           <link rel="preconnect" href="https://fonts.gstatic.com/" />
           <link rel="dns-prefetch" href="//fonts.googleapis.com" />
@@ -52,10 +54,6 @@ export default class MyDocument extends Document {
             rel="stylesheet"
           />
           <link rel="icon" href="/favicon.ico" />
-
-          <meta property="og:image" content="/preview.png" />
-          <meta property="twitter:image" content="/preview.png" />
-          <meta property="twitter:card" content="summary_large_image" />
 
           <meta
             name="google-site-verification"

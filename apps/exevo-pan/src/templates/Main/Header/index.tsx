@@ -14,7 +14,6 @@ const heading = {
   [routes.BAZAAR_HISTORY]: 'bazaarHistory',
   [routes.STATISTICS]: 'statistics',
   [routes.HIGHSCORES]: 'highscores',
-  [routes.ABOUT]: 'about',
   [routes.LIBERTABRA_WAR]: 'war',
   [routes.ADVERTISE]: 'advertise',
 }
@@ -27,15 +26,22 @@ const Header = ({
   } = useTranslations()
 
   const [menuOpen, setMenuOpen] = useState(false)
+  const [languageOpen, setLanguageOpen] = useState(false)
 
   const { currentTheme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), [])
 
+  const pageTitle = heading[pathname]
+    ? common.Header.h1[heading[pathname]]
+    : null
+
+  const shouldMenuOverlap = menuOpen || languageOpen
+
   return (
     <>
-      <S.Wrapper {...props}>
+      <S.Wrapper data-active={shouldMenuOverlap} {...props}>
         <S.Nav>
           <S.MenuButton
             type="button"
@@ -50,14 +56,9 @@ const Header = ({
           </S.MenuButton>
           <NextLink href={routes.HOME}>
             <S.LogoWrapper>
-              <S.H1>
-                {heading[pathname]
-                  ? common.Header.h1[heading[pathname]]
-                  : 'Exevo Pan'}
-              </S.H1>
+              {pageTitle && <S.H1>{pageTitle}</S.H1>}
               <S.ExevoPanLogo
                 unoptimized
-                priority
                 aria-label={common.Header.logoLabel}
                 alt={
                   heading[pathname]
@@ -82,7 +83,10 @@ const Header = ({
         </S.Nav>
 
         <S.RightWrapper suppressHydrationWarning>
-          <LanguagePicker />
+          <LanguagePicker
+            isOpen={languageOpen}
+            setLanguageOpen={setLanguageOpen}
+          />
           {process.browser && (
             <Switch
               active={currentTheme === 'dark-theme'}

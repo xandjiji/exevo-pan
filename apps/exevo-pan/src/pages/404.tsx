@@ -9,11 +9,10 @@ export default function Custom404(): JSX.Element {
   const { translations } = useTranslations()
 
   return (
-    <div>
+    <>
       <Head>
         <title>{translations.error.Meta.title}</title>
         <meta name="title" content={translations.error.Meta.title} />
-        <meta property="og:site_name" content={translations.error.Meta.title} />
         <meta property="og:title" content={translations.error.Meta.title} />
         <meta
           property="twitter:title"
@@ -38,7 +37,7 @@ export default function Custom404(): JSX.Element {
       <Main>
         <ErrorPage />
       </Main>
-    </div>
+    </>
   )
 }
 

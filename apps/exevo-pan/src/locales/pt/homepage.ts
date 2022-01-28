@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Leilões',
+    title: 'Leilões',
     description: 'Filtre e explore chares de Tibia no Char Bazaar oficial!',
   },
   AuctionsGrid: {
@@ -23,7 +23,6 @@ export default {
     },
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
     changeFilters: 'Mudar filtros',
-    notFoundAlt: 'Nenhum personagem foi encontrado',
   },
   FilterDrawer: {
     title: 'Filtros',

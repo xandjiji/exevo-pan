@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Shadow, Smooth } from 'styles'
+import { Shadow, Smooth, Spinner } from 'styles'
 
 export const Button = styled.button`
   padding: 12px 24px;
@@ -23,12 +23,28 @@ export const Button = styled.button`
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
 
-  :disabled {
+  :disabled:not([data-loading='true']) {
     background-color: var(--separator);
     color: #000;
     opacity: 0.6;
     filter: unset;
     box-shadow: unset;
     cursor: unset;
+  }
+`
+
+export const LoadingState = styled(Spinner)`
+  background: linear-gradient(
+    to right,
+    var(--primaryVariant) 10%,
+    rgba(255, 255, 255, 0) 42%
+  );
+
+  &::before {
+    background: var(--primaryVariant);
+  }
+
+  &::after {
+    background: var(--primary);
   }
 `

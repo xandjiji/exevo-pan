@@ -12,12 +12,12 @@ const CardSkeleton = ({
 
   return (
     <S.Wrapper highlighted={false} {...props}>
-      <S.Head>
+      <S.Head highlighted={false}>
         <Skeletons.Square />
-        <S.HeadInfo>
+        <Skeletons.HeadInfo>
           <Skeletons.Text style={{ width: '50%' }} />
           <Skeletons.Text style={{ width: '75%', height: 8 }} />
-        </S.HeadInfo>
+        </Skeletons.HeadInfo>
       </S.Head>
 
       <S.InfoGrid>

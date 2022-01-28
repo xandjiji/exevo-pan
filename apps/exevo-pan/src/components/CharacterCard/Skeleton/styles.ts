@@ -7,6 +7,11 @@ export const Flex = styled.div`
   height: 100%;
 `
 
+export const HeadInfo = styled.div`
+  margin: 0 16px;
+  width: 100%;
+`
+
 export const Square = styled(Skeleton)`
   flex-shrink: 0;
   width: 56px;

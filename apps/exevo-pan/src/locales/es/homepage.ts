@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Subastas',
+    title: 'Subastas',
     description:
       '¡Filtra y explora los caracteres de Tibia en el Char Bazaar oficial!',
   },
@@ -24,7 +24,6 @@ export default {
     },
     noAuctionFound: 'Desculpa, no se encontró subasta',
     changeFilters: 'Cambiar filtros',
-    notFoundAlt: 'No se encontraron caracteres',
   },
   FilterDrawer: {
     title: 'Filtros',

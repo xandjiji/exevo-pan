@@ -1,12 +1,18 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { BazaarHistory as BazaarHistoryGrid } from 'modules/BazaarAuctions'
-import { DrawerFieldsProvider } from 'modules/BazaarAuctions/contexts/useDrawerFields'
-import { DrawerFieldsClient, AuctionsClient } from 'services'
+import {
+  DrawerFieldsProvider,
+  FiltersProvider,
+  AuctionsProvider,
+  LoadingState,
+  AuctionsGrid,
+} from 'modules/BazaarAuctions'
+import Newsticker from 'components/Newsticker'
+import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
-import { routes, endpoints } from 'Constants'
+import { routes, endpoints, jsonld } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -15,24 +21,24 @@ type HistoryStaticProps = {
   serverOptions: Option[]
   auctionedItemOptions: Option[]
   initialAuctionData: PaginatedData<CharacterObject>
+  blogPosts: BlogPost[]
 }
 
 export default function BazaarHistory({
   serverOptions,
   auctionedItemOptions,
   initialAuctionData,
+  blogPosts,
 }: HistoryStaticProps): JSX.Element {
   const { translations } = useTranslations()
+
+  const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
 
   return (
     <div>
       <Head>
         <title>{translations.bazaarHistory.Meta.title}</title>
         <meta name="title" content={translations.bazaarHistory.Meta.title} />
-        <meta
-          property="og:site_name"
-          content={translations.bazaarHistory.Meta.title}
-        />
         <meta
           property="og:title"
           content={translations.bazaarHistory.Meta.title}
@@ -77,14 +83,36 @@ export default function BazaarHistory({
           href={buildUrl(routes.BAZAAR_HISTORY, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+
+        <script
+          type="application/ld+json"
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: jsonld.standard,
+          }}
+        />
       </Head>
 
       <Main>
+        <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
           auctionedItemOptions={auctionedItemOptions}
         >
-          <BazaarHistoryGrid initialAuctionData={initialAuctionData} />
+          <FiltersProvider>
+            <AuctionsProvider
+              endpoint={endpoints.HISTORY_AUCTIONS}
+              highlightedAuctions={[]}
+              initialPage={page}
+              initialPageData={pageData}
+              defaultSortingMode={sortingMode}
+              defaultDescendingOrder={descendingOrder}
+            >
+              <LoadingState>
+                <AuctionsGrid />
+              </LoadingState>
+            </AuctionsProvider>
+          </FiltersProvider>
         </DrawerFieldsProvider>
       </Main>
     </div>
@@ -94,15 +122,20 @@ export default function BazaarHistory({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const sortOptions = { sortingMode: 0, descendingOrder: true }
 
-  const [serverOptions, auctionedItemOptions, initialAuctionData] =
-    await Promise.all([
-      DrawerFieldsClient.fetchServerOptions(),
-      DrawerFieldsClient.fetchAuctionedItemOptions(),
-      AuctionsClient.fetchAuctionPage({
-        sortOptions,
-        endpoint: endpoints.HISTORY_AUCTIONS,
-      }),
-    ])
+  const [
+    serverOptions,
+    auctionedItemOptions,
+    initialAuctionData,
+    localizedBlogPosts,
+  ] = await Promise.all([
+    DrawerFieldsClient.fetchServerOptions(),
+    DrawerFieldsClient.fetchAuctionedItemOptions(),
+    AuctionsClient.fetchAuctionPage({
+      sortOptions,
+      endpoint: endpoints.HISTORY_AUCTIONS,
+    }),
+    await BlogClient.getEveryPostLocale({ pageSize: 3 }),
+  ])
 
   return {
     props: {
@@ -114,6 +147,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       serverOptions,
       auctionedItemOptions,
       initialAuctionData,
+      blogPosts: localizedBlogPosts[locale as RegisteredLocale],
     },
     revalidate: 60,
   }

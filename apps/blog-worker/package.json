@@ -1,0 +1,45 @@
+{
+  "name": "blog-worker",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Exevo Pan Blog Cloudflare Worker",
+  "license": "Unlicense",
+  "main": "dist/worker.js",
+  "scripts": {
+    "build": "webpack",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "setup:data": "NODE_PATH=./src sucrase-node src/setupData.ts",
+    "dev:static": "serve -l 4444 _posts",
+    "dev:worker": "yarn setup:data && wrangler dev --port 3132",
+    "dev": "concurrently --kill-others \"yarn dev:static\" \"yarn dev:worker\"",
+    "staging:posts": "cd _posts/ && surge ./ staging-blog-exevopan.surge.sh",
+    "staging:worker": "yarn setup:data && wrangler publish --env development",
+    "staging": "yarn staging:worker && yarn staging:posts",
+    "deploy:posts": "cd _posts/ && surge ./",
+    "deploy:worker": "wrangler publish",
+    "deploy": "yarn setup:data && yarn deploy:posts && yarn deploy:worker"
+  },
+  "dependencies": {
+    "auction-queries": "*",
+    "gray-matter": "^4.0.3",
+    "shared-utils": "*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^3.0.0",
+    "@types/exevo-pan": "*",
+    "@types/node": "^17.0.8",
+    "@types/service-worker-mock": "^2.0.1",
+    "concurrently": "^7.0.0",
+    "config": "*",
+    "serve": "^13.0.2",
+    "service-worker-mock": "^2.0.5",
+    "sucrase": "^3.20.3",
+    "surge": "^0.23.0",
+    "ts-loader": "^9.2.2",
+    "typescript": "^4.3.2",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.0"
+  }
+}

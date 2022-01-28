@@ -9,6 +9,7 @@ import AdvertiseIconSvg from 'assets/svgs/advertise.svg'
 import StatisticsIconSvg from 'assets/svgs/statistics.svg'
 import WarIconSvg from 'assets/svgs/war.svg'
 import AboutIconSvg from 'assets/svgs/about.svg'
+import BlogIconSvg from 'assets/svgs/blog.svg'
 import {
   InnerContainer,
   CustomScrollbar,
@@ -20,7 +21,6 @@ import {
 export const Wrapper = styled.header`
   position: sticky;
   top: 0;
-  left: 0;
   z-index: 70;
   width: 100%;
   height: 60px;
@@ -34,7 +34,11 @@ export const Wrapper = styled.header`
   ${CustomScrollbar}
   ${Shadow}
 
-  @media(min-width: 768px) {
+  &[data-active='true'] {
+    z-index: 75;
+  }
+
+  @media (min-width: 768px) {
     &::after {
       content: '';
       position: fixed;
@@ -163,7 +167,7 @@ export const Backdrop = styled.div`
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 50;
+  z-index: 74;
 
   width: 100vw;
   height: 100vh;
@@ -243,5 +247,9 @@ export const WarIcon = styled(WarIconSvg)`
 `
 
 export const AboutIcon = styled(AboutIconSvg)`
+  ${NavIconStyle}
+`
+
+export const BlogIcon = styled(BlogIconSvg)`
   ${NavIconStyle}
 `

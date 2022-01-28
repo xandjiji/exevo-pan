@@ -1,4 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
+import NextLink from 'next/link'
+import { routes } from 'Constants'
 import { FormProvider, useForm } from './contexts/Form'
 import {
   AuctionSearch,
@@ -8,6 +10,8 @@ import {
   PaymentDetails,
 } from './components'
 import * as S from './styles'
+
+const FAQ_SLUG = 'how-highlighting-works'
 
 const Form = (): JSX.Element => {
   const {
@@ -36,6 +40,10 @@ const Form = (): JSX.Element => {
 
   return (
     <>
+      <S.Title>
+        {advertise.FAQText}{' '}
+        <NextLink href={`${routes.BLOG}/${FAQ_SLUG}`}>FAQ</NextLink>
+      </S.Title>
       <S.Stepper
         steps={stepItems}
         currentStep={currentStep}
@@ -51,7 +59,7 @@ const Form = (): JSX.Element => {
 
 const AdvertiseGrid = (): JSX.Element => (
   <FormProvider>
-    <S.Wrapper id="main-wrapper">
+    <S.Wrapper>
       <Form />
     </S.Wrapper>
   </FormProvider>

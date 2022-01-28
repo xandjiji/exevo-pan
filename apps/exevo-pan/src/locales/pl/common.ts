@@ -25,6 +25,12 @@ export default {
     },
     themeSwitch: 'Przełącz na tryb ciemny',
   },
+  BlogTags: {
+    news: 'Aktualności',
+    article: 'Artykuł',
+    tutorial: 'Poradnik',
+    tips: 'Porady',
+  },
   Month: {
     '0': 'Sty',
     '1': 'Lut',
@@ -142,4 +148,8 @@ export default {
     open: 'Otwórz',
     close: 'Zamknij',
   },
+  FooterTitle: 'Exevo Pan - stworzony przez',
+  AnchorIconLabel: 'Skopiuj link',
+  CharacterTooltipLabel: 'Idź do strony postaci',
+  Newsticker: 'Ostatnie artykuły',
 }

@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { Shadow, InnerContainer, Smooth } from 'styles'
 
 export const Nav = styled.nav`
-  position: relative;
+  position: sticky;
+  top: 60px;
   z-index: 1;
   ${InnerContainer}
   ${Shadow}

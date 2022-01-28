@@ -1,7 +1,7 @@
 export default {
   Meta: {
     Statistics: {
-      title: 'Exevo Pan - Estatísticas gerais',
+      title: 'Estatísticas gerais',
       description:
         'Estatísticas, tendências, análise de dados diários e informações históricas do Char Bazaar do Tibia!',
     },

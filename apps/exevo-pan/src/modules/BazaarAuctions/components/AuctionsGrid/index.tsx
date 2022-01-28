@@ -7,7 +7,6 @@ import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import VirtualizedListView from './VirtualizedListView'
-import EmptyState from './EmptyState'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
@@ -32,8 +31,8 @@ const AuctionsGrid = (): JSX.Element => {
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
 
   return (
-    <S.Main>
-      <S.Head suppressHydrationWarning>
+    <main>
+      <S.Head suppressHydrationWarning id="grid-header">
         <S.FilterButton
           tabIndex={0}
           role="button"
@@ -84,27 +83,38 @@ const AuctionsGrid = (): JSX.Element => {
         />
       )}
 
-      <VirtualizedListView
-        id="character-grid"
-        estimatedHeight={ESTIMATED_HEIGHT}
-        overScan={1}
-      >
-        {shouldDisplayHighlightedAuctions &&
-          highlightedAuctions.map((auction) => (
-            <CharacterCard
-              key={`${auction.id}-highlighted`}
-              characterData={auction}
-              highlighted
-            />
+      <S.GridWrapper>
+        <VirtualizedListView
+          id="character-grid"
+          estimatedHeight={ESTIMATED_HEIGHT}
+          overScan={1}
+        >
+          {shouldDisplayHighlightedAuctions &&
+            highlightedAuctions.map((auction) => (
+              <CharacterCard
+                key={`${auction.id}-highlighted`}
+                characterData={auction}
+                highlighted
+              />
+            ))}
+          {page.map((auction) => (
+            <CharacterCard key={auction.id} characterData={auction} />
           ))}
-        {page.map((auction) => (
-          <CharacterCard key={auction.id} characterData={auction} />
-        ))}
-      </VirtualizedListView>
-      {page.length === 0 && (
-        <EmptyState buttonAction={() => setDrawerOpen(true)} />
-      )}
-    </S.Main>
+        </VirtualizedListView>
+        {page.length === 0 && (
+          <S.EmptyState
+            button={{
+              content: homepage.AuctionsGrid.changeFilters,
+              action: () => setDrawerOpen(true),
+            }}
+            text={{
+              content: homepage.AuctionsGrid.noAuctionFound,
+              size: 24,
+            }}
+          />
+        )}
+      </S.GridWrapper>
+    </main>
   )
 }
 

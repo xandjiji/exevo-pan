@@ -1,13 +1,15 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Anunciar',
+    title: 'Anunciar',
     description: 'Destaque seu leilão e alcance lances mais altos!',
   },
+  FAQText: 'Não sabe como funcionam os nossos anúncios? Confira nosso',
   StepItems: {
     Select: 'Selecionar',
     Configure: 'Configurar',
     Checkout: 'Finalizar',
   },
+  NextButton: 'Próximo',
   RangeDatePicker: {
     currentMonthLabel: 'Mês atual',
     nextMonthLabel: 'Próximo mês',

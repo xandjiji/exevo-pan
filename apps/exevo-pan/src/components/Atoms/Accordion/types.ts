@@ -8,4 +8,5 @@ export interface AccordionProps extends ExtendedProps {
   open?: boolean
   initialValue?: boolean
   onClick?: React.MouseEventHandler<HTMLButtonElement>
+  border?: boolean
 }

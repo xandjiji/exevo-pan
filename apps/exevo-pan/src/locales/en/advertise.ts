@@ -1,13 +1,15 @@
 export default {
   Meta: {
-    title: 'Exevo Pan - Advertise',
+    title: 'Advertise',
     description: 'Highlight your own auction and get higher bids!',
   },
+  FAQText: 'Not sure how advertising works? Check out our',
   StepItems: {
     Select: 'Select',
     Configure: 'Configure',
     Checkout: 'Checkout',
   },
+  NextButton: 'Next',
   RangeDatePicker: {
     currentMonthLabel: 'Current month',
     nextMonthLabel: 'Next month',

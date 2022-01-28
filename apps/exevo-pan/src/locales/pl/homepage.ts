@@ -23,7 +23,6 @@ export default {
     },
     noAuctionFound: 'Przepraszam, nie znaleziono aukcji',
     changeFilters: 'Zmień filtry',
-    notFoundAlt: 'Nie znaleziono postaci',
   },
   FilterDrawer: {
     title: 'Filtry',

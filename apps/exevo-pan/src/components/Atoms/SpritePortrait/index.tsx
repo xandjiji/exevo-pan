@@ -1,44 +1,35 @@
-import { useRef, useState, useEffect } from 'react'
+import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useOnScreen } from 'hooks'
-import { SpritePortraitProps } from './types'
+import Image from 'next/image'
+import { useOnImageLoad } from 'hooks'
 import * as S from './styles'
+import { SpritePortraitProps } from './types'
 
 const SpritePortrait = ({
+  offset = false,
   src,
-  lazy = true,
+  alt,
+  width,
+  height,
   ...props
 }: SpritePortraitProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
 
-  const ref = useRef<HTMLDivElement>(null)
-
-  const [loaded, setLoaded] = useState<boolean>(!src)
-  const [currentSrc, setCurrentSrc] = useState<string | undefined>(
-    lazy ? undefined : src,
-  )
-
-  const onScreen = useOnScreen<HTMLDivElement>(ref)
-  useEffect(() => {
-    if (src && lazy && onScreen) setCurrentSrc(src)
-  }, [onScreen])
+  const [loaded, onLoad] = useOnImageLoad()
 
   return (
-    <S.Wrapper ref={ref}>
-      {src && (
-        <S.Img
-          src={currentSrc}
-          aria-hidden={!currentSrc || !loaded}
-          hidden={!currentSrc}
-          onLoad={() => setLoaded(true)}
-          onError={() => setLoaded(false)}
-          {...props}
-        />
-      )}
-
-      {currentSrc && !loaded && (
+    <S.Wrapper {...props} data-offset={offset} data-loaded={loaded}>
+      <Image
+        alt={alt}
+        src={src}
+        layout="fixed"
+        width={width}
+        height={height}
+        onLoad={onLoad}
+      />
+      {!loaded && (
         <S.Spinner
           role="alert"
           aria-label={common.LoadingLabel}
@@ -49,4 +40,4 @@ const SpritePortrait = ({
   )
 }
 
-export default SpritePortrait
+export default memo(SpritePortrait)

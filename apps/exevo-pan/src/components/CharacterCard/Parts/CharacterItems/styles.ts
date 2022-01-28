@@ -5,10 +5,6 @@ export const ItemWrapper = styled.div`
   margin-bottom: 12px;
   display: flex;
   justify-content: space-around;
-  > * {
-    width: 48px;
-    height: 48px;
-  }
 `
 
 export const SpriteWrapper = styled.div`

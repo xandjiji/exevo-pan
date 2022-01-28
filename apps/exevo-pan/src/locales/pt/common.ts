@@ -11,8 +11,8 @@ export default {
       war: 'Acompanhe estatísticas ao vivo da guerra de Libertabra!',
       advertise: 'Destaque seu leilão e receba lances mais altos!',
     },
-    openMenuLabel: 'Abre el menú de navegación',
-    closeMenuLabel: 'Cerrar el menú de navegación',
+    openMenuLabel: 'Abrir menu',
+    closeMenuLabel: 'Fechar menu',
     logoLabel: 'Ir para a página inicial',
     nav: {
       currentAuctions: 'Leilões',
@@ -21,8 +21,15 @@ export default {
       war: 'Libertabra War',
       about: 'Sobre',
       advertise: 'Anunciar',
+      blog: 'Blog',
     },
     themeSwitch: 'Habilitar tema noturno',
+  },
+  BlogTags: {
+    news: 'Notícias',
+    article: 'Artigo',
+    tutorial: 'Tutorial',
+    tips: 'Dicas',
   },
   Month: {
     '0': 'Jan',
@@ -141,4 +148,8 @@ export default {
     open: 'Abrir',
     close: 'Fechar',
   },
+  FooterTitle: 'Exevo Pan - criado por',
+  AnchorIconLabel: 'Copiar link',
+  CharacterTooltipLabel: 'Ir para a página do personagem',
+  Newsticker: 'Artigos recentes',
 }

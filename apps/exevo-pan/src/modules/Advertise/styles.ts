@@ -1,35 +1,26 @@
 import styled, { css } from 'styled-components'
 import { Stepper as BaseStepper } from 'components/Atoms'
-import { CustomScrollbar, InnerContainer, Smooth } from 'styles'
+import { InnerContainer } from 'styles'
 
 export const Wrapper = styled.main`
-  position: relative;
-
   ${InnerContainer}
   padding-top: 16px;
   padding-bottom: 16px;
+`
 
-  max-height: calc(100% - 60px);
-  overflow: auto;
-  ${CustomScrollbar}
+export const Title = styled.h2`
+  margin-bottom: 16px;
+  font-size: 12px;
+  font-weight: 300;
 
-  background-color: var(--background);
-  ${Smooth}
+  a {
+    color: var(--primary);
+    filter: brightness(130%);
+    font-weight: 700;
+  }
 
-  &::before {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    z-index: 2;
-    width: 100%;
-    height: 72px;
-    background-image: linear-gradient(
-      to top,
-      var(--background),
-      rgba(0, 0, 0, 0)
-    );
-    pointer-events: none;
+  @media (min-width: 768px) {
+    text-align: center;
   }
 `
 

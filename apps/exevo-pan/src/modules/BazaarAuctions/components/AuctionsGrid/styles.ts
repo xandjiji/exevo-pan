@@ -1,13 +1,13 @@
 import styled, { css } from 'styled-components'
+import BaseEmptyState from 'components/EmptyState'
 import { Paginator as BasePaginator, ActiveCount } from 'components/Atoms'
 import FilterIconSvg from 'assets/svgs/filter.svg'
 import { InnerContainer, Shadow, Clickable } from 'styles'
 
-export const Main = styled.main``
-
 export const Head = styled.div`
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0px;
+  z-index: 71;
   width: 100%;
   height: 70px;
   padding-top: 8px;
@@ -55,4 +55,26 @@ export const FilterButton = styled.button`
 
 export const Paginator = styled(BasePaginator)`
   margin-left: auto;
+`
+
+export const GridWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
+
+export const EmptyState = styled(BaseEmptyState)`
+  span {
+    white-space: unset;
+  }
+  button {
+    white-space: nowrap;
+  }
+  @media (min-width: 768px) {
+    margin-top: calc(25vh - 60px);
+    span {
+      white-space: nowrap;
+      font-size: 32px;
+    }
+  }
 `
