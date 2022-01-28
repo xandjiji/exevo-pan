@@ -1,0 +1,42 @@
+import { links, locales } from 'Constants'
+import { UrlConfig, TemplateConfig } from './types'
+
+const ALTERNATIVE_LOCALES = locales.ALL_LOCALES.filter(
+  (locale) => locale !== locales.DEFAULT_LOCALE,
+)
+
+const NEWLINE = '\n'
+
+const buildUrl = ({ locale, route }: UrlConfig): string =>
+  `${links.CANONICAL}${locale ? `/${locale}` : ''}${route}`
+
+const formatDate = (date: Date) =>
+  `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+
+const AlternateTemplate = (props: Required<UrlConfig>): string =>
+  `<xhtml:link rel="alternate" hreflang="${props.locale}" href="${buildUrl(
+    props,
+  )}"/>`
+
+export const XmlTemplate = ({
+  route,
+  date,
+  changefreq,
+}: TemplateConfig): string =>
+  `<url>
+        <loc>${buildUrl({ route })}</loc>
+        <lastmod>${formatDate(date)}</lastmod>
+        <changefreq>${changefreq}</changefreq>
+        
+        ${ALTERNATIVE_LOCALES.map((locale) =>
+          AlternateTemplate({ locale, route }),
+        ).join(NEWLINE)}
+    </url>`
+
+export const XmlWrapper = (content: string): string =>
+  `<?xml version="1.0" encoding="UTF-8"?>
+    <urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xhtml="http://www.w3.org/1999/xhtml">
+        ${content}
+</urlset>`
