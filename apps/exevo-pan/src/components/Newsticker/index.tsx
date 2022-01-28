@@ -23,6 +23,7 @@ const Newsticker = ({ blogPosts, ...props }: NewstickerProps): JSX.Element => {
                 width={48}
                 height={48}
                 alt={title}
+                unoptimized
               />
             </S.Thumbnail>
 
