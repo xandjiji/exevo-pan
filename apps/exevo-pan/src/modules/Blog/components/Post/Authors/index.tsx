@@ -20,6 +20,7 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => {
         characterName={author.name}
         outfitSrc={author.outfit}
         displayLink
+        linkUrl={`https://www.tibia.com/community/?name=${author.name}`}
         style={translator ? { marginBottom: 8 } : undefined}
       />
       {translator && (
@@ -28,6 +29,7 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => {
           characterName={translator.name}
           outfitSrc={translator.outfit}
           displayLink
+          linkUrl={`https://www.tibia.com/community/?name=${translator.name}`}
         />
       )}
     </footer>
