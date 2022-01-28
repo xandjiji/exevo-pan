@@ -2,9 +2,11 @@ import {
   createContext,
   useContext,
   useState,
+  useEffect,
   useCallback,
   useMemo,
 } from 'react'
+import { useRouter } from 'next/router'
 import {
   CurrentSectionContextValues,
   CurrentSectionProviderProps,
@@ -23,6 +25,10 @@ export const CurrentSectionProvider = ({
   children,
 }: CurrentSectionProviderProps): JSX.Element => {
   const [currentSections, setCurrentSections] = useState<Section[]>([])
+
+  const { query } = useRouter()
+
+  useEffect(() => setCurrentSections([]), [query])
 
   const setSectionStatus = useCallback(
     (updatingSection: Section) =>
