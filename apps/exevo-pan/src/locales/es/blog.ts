@@ -20,7 +20,7 @@ export default {
     newsletter: 'newsletter',
     for: 'y recibe todo el contenido nuevo!',
     emailPlaceholder: 'seu@email.com.br',
-    buttonText: 'Firmar',
+    buttonText: 'Subscribirse',
     message: {
       invalidEmail: 'Email inválido',
       alreadyRegistered: 'Este email ya está registrado',
