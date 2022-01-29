@@ -14,11 +14,13 @@ type GTagEvent = {
 }
 
 const event = ({ action, category, label, value }: GTagEvent): void => {
-  window.gtag('event', action, {
-    event_category: category,
-    event_label: label,
-    value,
-  })
+  if (typeof window !== undefined) {
+    window.gtag('event', action, {
+      event_category: category,
+      event_label: label,
+      value,
+    })
+  }
 }
 
 const blogPostView = (slug: string): void =>
@@ -29,8 +31,16 @@ const blogPostView = (slug: string): void =>
     value: 0,
   })
 
+const filterUsed = (filterKey: string): void =>
+  event({
+    category: 'Filters',
+    action: 'use',
+    label: filterKey,
+    value: 0,
+  })
+
 export const gtag = {
   pageView,
-  event,
   blogPostView,
+  filterUsed,
 }
