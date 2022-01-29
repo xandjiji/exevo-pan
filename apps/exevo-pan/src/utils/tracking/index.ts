@@ -25,16 +25,16 @@ const event = ({ action, category, label, value }: GTagEvent): void => {
 
 const blogPostView = (slug: string): void =>
   event({
-    category: 'Posts',
-    action: 'view',
+    category: 'blog',
+    action: 'PostsView',
     label: slug,
     value: 0,
   })
 
 const filterUsed = (filterKey: string): void =>
   event({
-    category: 'Filters',
-    action: 'use',
+    category: 'auctions',
+    action: 'UseFilter',
     label: filterKey,
     value: 0,
   })
