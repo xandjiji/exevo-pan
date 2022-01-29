@@ -1,24 +1,37 @@
 import styled from 'styled-components'
-import { CustomScrollbar } from 'styles'
+import { CustomScrollbar, Smooth } from 'styles'
 
 export const Wrapper = styled.div`
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 6px 6px 0 0;
   overflow: auto;
   ${CustomScrollbar}
+  ${Smooth}
+* {
+    ${Smooth}
+  }
 `
 
 export const BaseTable = styled.table`
-  width: 100%;
+  max-width: 100%;
   border-collapse: collapse;
 
   thead {
     border-bottom: solid 1px var(--separator);
   }
 
+  th,
+  td {
+    padding: 8px;
+  }
+
   th {
-    padding-bottom: 6px;
     font-size: 16px;
-    font-weight: 700;
-    color: var(--onSurface);
+    font-weight: 400;
+    color: var(--onPrimary);
+    background-color: var(--primary);
   }
 
   tbody {
@@ -36,11 +49,13 @@ export const BaseTable = styled.table`
         opacity: 0.3;
       }
     }
+
+    tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.1);
+    }
   }
 
   td {
-    padding-top: 6px;
-    padding-bottom: 6px;
     font-size: 14px;
     font-weight: 300;
     color: var(--onSurface);
