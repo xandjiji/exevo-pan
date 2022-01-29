@@ -21,6 +21,12 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
     }
   }, [router.events])
 
+  useEffect(() => {
+    if (typeof router.query.slug === 'string') {
+      gtag.blogPostView(router.query.slug)
+    }
+  }, [router.query.slug])
+
   return (
     <>
       <Head>

@@ -21,7 +21,16 @@ const event = ({ action, category, label, value }: GTagEvent): void => {
   })
 }
 
+const blogPostView = (slug: string): void =>
+  event({
+    category: 'Posts',
+    action: 'view',
+    label: slug,
+    value: 0,
+  })
+
 export const gtag = {
   pageView,
   event,
+  blogPostView,
 }
