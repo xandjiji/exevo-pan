@@ -4,19 +4,15 @@ import { useRouter } from 'next/router'
 import ErrorBoundary from 'components/ErrorBoundary'
 import { TranslationsProvider } from 'contexts/useTranslation'
 import { ThemeProvider } from 'contexts/useTheme'
+import { gtag } from 'utils'
 import { GlobalStyles } from 'styles'
 import { AppProps } from 'next/app'
-import { google } from 'Constants'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const { translations } = pageProps
   const router = useRouter()
 
-  const handleRouteChange = (url: string) => {
-    ;(window as WindowObject).gtag('config', google.GTM_ID, {
-      page_path: url,
-    })
-  }
+  const handleRouteChange = (url: URL) => gtag.pageView(url)
 
   useEffect(() => {
     router.events.on('routeChangeComplete', handleRouteChange)

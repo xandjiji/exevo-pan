@@ -44,6 +44,7 @@
     "@testing-library/react-hooks": "^7.0.0",
     "@testing-library/user-event": "^13.1.9",
     "@types/exevo-pan": "*",
+    "@types/gtag.js": "^0.0.8",
     "@types/jest": "^26.0.23",
     "@types/jest-axe": "^3.5.2",
     "@types/mailchimp__mailchimp_marketing": "^3.0.3",
