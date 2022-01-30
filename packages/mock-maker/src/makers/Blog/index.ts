@@ -18,7 +18,7 @@ export const randomBlogPost = (): BlogPost => ({
       }),
     },
     () => faker.lorem.word(),
-  ).join(','),
+  ).join('-'),
   tags: Array.from(
     {
       length: faker.datatype.number({
