@@ -17,7 +17,7 @@ const CharacterCard = ({
   }, [])
 
   return (
-    <S.Wrapper {...props}>
+    <S.Wrapper {...props} estimatedHeight={height}>
       <ins
         className="adsbygoogle"
         style={{
