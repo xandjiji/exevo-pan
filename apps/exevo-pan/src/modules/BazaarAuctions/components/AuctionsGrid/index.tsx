@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback } from 'react'
+import { Fragment, useState, useCallback } from 'react'
 import { Ads } from 'templates'
 import CharacterCard from 'components/CharacterCard'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
@@ -97,8 +97,13 @@ const AuctionsGrid = (): JSX.Element => {
                 highlighted
               />
             ))}
-          {page.map((auction) => (
-            <CharacterCard key={auction.id} characterData={auction} />
+          {page.map((auction, index) => (
+            <Fragment key={auction.id}>
+              <CharacterCard characterData={auction} />
+              {(index + 1) % 3 === 0 && (
+                <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
+              )}
+            </Fragment>
           ))}
         </VirtualizedListView>
         {page.length === 0 && (
