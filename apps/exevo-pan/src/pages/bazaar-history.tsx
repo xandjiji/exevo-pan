@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Main } from 'templates'
+import { Main, Ads } from 'templates'
 import {
   DrawerFieldsProvider,
   FiltersProvider,
@@ -114,6 +114,8 @@ export default function BazaarHistory({
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>
+
+        <Ads.FooterBanner />
       </Main>
     </div>
   )

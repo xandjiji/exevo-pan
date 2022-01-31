@@ -110,6 +110,8 @@ export default function Home({
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>
+
+        <Ads.FooterBanner />
       </Main>
     </>
   )
