@@ -7,9 +7,8 @@ const HorizontalBanner = (
 ): JSX.Element => {
   useEffect(() => {
     try {
-      ;(window as any).adsbygoogle = ((window as any).adsbygoogle || []).push(
-        {} as any,
-      )
+      ;(window as any).adsbygoogle = (window as any).adsbygoogle || []
+      ;(window as any).adsbygoogle.push({} as any)
     } catch (error) {
       console.log(error)
     }

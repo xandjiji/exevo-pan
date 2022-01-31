@@ -1,5 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
+import { Ads } from 'templates'
 import CharacterCard from 'components/CharacterCard'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
@@ -29,7 +30,6 @@ const AuctionsGrid = (): JSX.Element => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
-
   return (
     <main>
       <S.Head suppressHydrationWarning id="grid-header">
@@ -114,6 +114,8 @@ const AuctionsGrid = (): JSX.Element => {
           />
         )}
       </S.GridWrapper>
+
+      <Ads.FooterBanner key={pageData.pageIndex} />
     </main>
   )
 }
