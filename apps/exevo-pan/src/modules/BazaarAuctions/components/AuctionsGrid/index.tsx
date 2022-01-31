@@ -30,6 +30,11 @@ const AuctionsGrid = (): JSX.Element => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+
+  const currentVisibleHighlighteds = shouldDisplayHighlightedAuctions
+    ? highlightedAuctions.length
+    : 0
+
   return (
     <main>
       <S.Head suppressHydrationWarning id="grid-header">
@@ -100,7 +105,7 @@ const AuctionsGrid = (): JSX.Element => {
           {page.map((auction, index) => (
             <Fragment key={auction.id}>
               <CharacterCard characterData={auction} />
-              {(index + 1) % 3 === 0 && (
+              {(index + currentVisibleHighlighteds + 1) % 3 === 0 && (
                 <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
               )}
             </Fragment>
