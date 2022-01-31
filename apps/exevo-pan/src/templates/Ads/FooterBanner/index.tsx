@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { google } from 'Constants'
 import * as S from './styles'
 
-const HorizontalBanner = (
+/* const HorizontalBanner = (
   props: React.HTMLAttributes<HTMLDivElement>,
 ): JSX.Element => {
   useEffect(() => {
@@ -25,6 +25,8 @@ const HorizontalBanner = (
       />
     </S.Wrapper>
   )
-}
+} */
+
+const HorizontalBanner = (): null => null
 
 export default HorizontalBanner
