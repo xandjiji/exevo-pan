@@ -8,7 +8,7 @@ import matter from 'gray-matter'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
-import { Main } from 'templates'
+import { Main, Ads } from 'templates'
 import { routes, links } from 'Constants'
 import { common, blog } from 'locales'
 
@@ -196,6 +196,7 @@ export default function PostPage({
             </Post.Layout.Right>
           </Post.Layout>
         </article>
+        <Ads.FooterBanner />
       </Main>
     </>
   )
@@ -246,7 +247,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       },
       locale: locale as RegisteredLocale,
     },
-    revalidate: 60000,
+    revalidate: 60,
   }
 }
 
