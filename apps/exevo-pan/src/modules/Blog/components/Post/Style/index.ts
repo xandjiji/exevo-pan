@@ -1,12 +1,13 @@
 import styled from 'styled-components'
 import { MaterialCard, InnerPadding, Smooth } from 'styles'
+import { blockquote } from './blockquote'
+import { bold } from './bold'
+import { code } from './code'
 import { headings } from './headings'
 import { hr } from './hr'
-import { bold } from './bold'
 import { link } from './link'
-import { code } from './code'
 import { lists } from './lists'
-import { blockquote } from './blockquote'
+import { small } from './small'
 
 export const ContentWrapper = styled.main`
   ${MaterialCard}
@@ -43,6 +44,7 @@ export const ContentWrapper = styled.main`
   ${code}
   ${lists}
   ${blockquote}
+  ${small}
 `
 
 export { default as HeadingSection } from './HeadingSection'
