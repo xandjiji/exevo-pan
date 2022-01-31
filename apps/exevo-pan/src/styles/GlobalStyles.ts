@@ -52,6 +52,10 @@ const GlobalStyles = createGlobalStyle`
   svg {
     transition: fill 0.2s ease-out;
   }
+
+  ins {
+    background-color: var(--surface);
+  }
 `
 
 export default GlobalStyles

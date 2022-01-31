@@ -196,6 +196,7 @@ export default function PostPage({
             </Post.Layout.Right>
           </Post.Layout>
         </article>
+
         <Ads.FooterBanner />
       </Main>
     </>
@@ -247,7 +248,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       },
       locale: locale as RegisteredLocale,
     },
-    revalidate: 60,
+    revalidate: 60000,
   }
 }
 
