@@ -28,6 +28,7 @@ const CharacterCard = ({
   } = useTranslations()
 
   const {
+    id,
     nickname,
     outfitId,
     level,
@@ -69,6 +70,7 @@ const CharacterCard = ({
             vocation: vocationHelper.getFullName(vocationId, level),
             world: serverData.serverName,
           }}
+          linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
         />
 
         {highlighted && <TagButton />}

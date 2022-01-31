@@ -25,7 +25,7 @@ const LabeledTextBox = ({
       {labelText && (
         <S.Label suppressHydrationWarning id={labelId}>
           {labelText}
-          {warning && <S.WarningIcon title={common.WarningLabel} />}
+          {warning && <S.WarningIcon title={common.WarningLabel} unoptimized />}
         </S.Label>
       )}
       {children}

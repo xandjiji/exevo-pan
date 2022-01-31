@@ -1,4 +1,5 @@
 import { dequal } from 'dequal'
+import { gtag } from 'utils'
 
 function toggleSet<T>(set: Set<T>, value: T): Set<T> {
   const newSet = new Set<T>([...set])
@@ -23,14 +24,19 @@ export const toggleFilterValue = (
 export const countActiveFilters = (
   defaultFilters: FilterOptions,
   currentFilters: FilterOptions,
-): number =>
-  Object.keys(defaultFilters).reduce(
-    (acc, filterKey) =>
-      dequal(
-        defaultFilters[filterKey as keyof FilterOptions],
-        currentFilters[filterKey as keyof FilterOptions],
-      )
-        ? acc
-        : acc + 1,
-    0,
-  )
+): number => {
+  let count = 0
+  Object.keys(defaultFilters).forEach((filterKey) => {
+    const diff = !dequal(
+      defaultFilters[filterKey as keyof FilterOptions],
+      currentFilters[filterKey as keyof FilterOptions],
+    )
+
+    if (diff) {
+      count += 1
+      gtag.filterUsed(filterKey)
+    }
+  })
+
+  return count
+}

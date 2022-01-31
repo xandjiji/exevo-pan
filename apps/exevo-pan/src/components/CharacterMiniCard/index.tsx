@@ -14,6 +14,7 @@ const CharacterMiniCard = ({
   characterData,
   characterName,
   forceSubtitle,
+  linkUrl,
   ...props
 }: CharacterMiniCardProps): JSX.Element => {
   const {
@@ -37,7 +38,7 @@ const CharacterMiniCard = ({
           {name}
           {displayLink && (
             <S.Link
-              href={`https://www.tibia.com/community/?name=${name}`}
+              href={linkUrl}
               target="_blank"
               rel="noreferrer noopener external"
             >

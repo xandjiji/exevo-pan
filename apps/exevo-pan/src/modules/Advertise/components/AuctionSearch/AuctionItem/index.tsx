@@ -5,6 +5,7 @@ import * as S from './styles'
 import { AuctionItemProps } from './types'
 
 const AuctionItem = ({
+  auctionId,
   nickname,
   level,
   vocationId,
@@ -26,6 +27,7 @@ const AuctionItem = ({
           vocation: vocation.getFullName(vocationId, level),
           world: '',
         }}
+        linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auctionId}`}
       />
       <S.Arrow />
     </S.Button>

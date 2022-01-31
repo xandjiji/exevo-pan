@@ -12,6 +12,7 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps): JSX.Element => (
         layout="fixed"
         width={32}
         height={32}
+        unoptimized
       />
     </S.Thumbnail>
 

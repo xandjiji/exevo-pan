@@ -19,7 +19,7 @@ const Image = ({
       data-align={align}
       data-loaded={loaded}
     >
-      <NextImage {...props} onLoad={onLoad} />
+      <NextImage {...props} onLoad={onLoad} unoptimized />
       {caption && <S.Caption>{caption}</S.Caption>}
     </S.Figure>
   )

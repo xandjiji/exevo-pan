@@ -28,6 +28,7 @@ const SpritePortrait = ({
         width={width}
         height={height}
         onLoad={onLoad}
+        unoptimized
       />
       {!loaded && (
         <S.Spinner

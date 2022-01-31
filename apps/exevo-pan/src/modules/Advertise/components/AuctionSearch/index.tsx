@@ -48,6 +48,7 @@ const AuctionSearch = (): JSX.Element => {
         {page.map((character) => (
           <AuctionItem
             key={character.id}
+            auctionId={character.id}
             nickname={character.nickname}
             level={character.level}
             vocationId={character.vocationId}
