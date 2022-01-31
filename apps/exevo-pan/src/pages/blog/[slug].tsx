@@ -23,6 +23,7 @@ const components = {
   AboutPageStyle: dynamic(
     () => import('modules/Blog/components/Post/custom/AboutPageStyle'),
   ),
+  Charm: dynamic(() => import('modules/Blog/components/Post/custom/Charm')),
   ContactSection: dynamic(
     () => import('modules/Blog/components/Post/custom/ContactSection'),
   ),
