@@ -6,9 +6,11 @@ const HorizontalBanner = (
   props: React.HTMLAttributes<HTMLDivElement>,
 ): JSX.Element => {
   useEffect(() => {
-    ;(window as any).adsbygoogle = ((window as any).adsbygoogle || []).push(
-      {} as any,
-    )
+    if (typeof window !== undefined) {
+      ;(window as any).adsbygoogle = ((window as any).adsbygoogle || []).push(
+        {} as any,
+      )
+    }
   }, [])
 
   return (
