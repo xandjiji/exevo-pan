@@ -2,14 +2,16 @@ import { useEffect } from 'react'
 import { google } from 'Constants'
 import * as S from './styles'
 
-/* const HorizontalBanner = (
+const HorizontalBanner = (
   props: React.HTMLAttributes<HTMLDivElement>,
 ): JSX.Element => {
   useEffect(() => {
-    if (typeof window !== undefined) {
+    try {
       ;(window as any).adsbygoogle = ((window as any).adsbygoogle || []).push(
         {} as any,
       )
+    } catch (error) {
+      console.log(error)
     }
   }, [])
 
@@ -25,8 +27,6 @@ import * as S from './styles'
       />
     </S.Wrapper>
   )
-} */
-
-const HorizontalBanner = (): null => null
+}
 
 export default HorizontalBanner
