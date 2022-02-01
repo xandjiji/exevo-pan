@@ -27,11 +27,7 @@ const CharacterCard = ({
         }}
         data-ad-client={google.ADSENSE_ID}
         data-ad-slot="6250183199"
-      >
-        <S.UnfilledState>
-          <img alt="ads" src="/ads.png" width={104} height={62} />
-        </S.UnfilledState>
-      </ins>
+      />
     </S.Wrapper>
   )
 }
