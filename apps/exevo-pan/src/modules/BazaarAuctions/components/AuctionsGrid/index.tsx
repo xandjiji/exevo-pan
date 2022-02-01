@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { Fragment, useState, useCallback } from 'react'
+import { Fragment, useState, useCallback, useRef, useEffect } from 'react'
 import { Ads } from 'templates'
 import { LazyRender } from 'components/Atoms'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
@@ -33,6 +33,25 @@ const AuctionsGrid = (): JSX.Element => {
   const currentVisibleHighlighteds = shouldDisplayHighlightedAuctions
     ? highlightedAuctions.length
     : 0
+
+  const gridHeadOffset = useRef(0)
+  useEffect(() => {
+    let scrollTimer: NodeJS.Timeout
+
+    if (gridHeadOffset.current) {
+      const newScrollY =
+        window.scrollY >= gridHeadOffset.current ? gridHeadOffset.current : 0
+      scrollTimer = setTimeout(
+        () => window.scrollTo({ top: newScrollY, behavior: 'smooth' }),
+        0,
+      )
+    } else {
+      const gridHeader = document.getElementById('grid-header')
+      gridHeadOffset.current = gridHeader?.offsetTop ?? -1
+    }
+
+    return () => clearTimeout(scrollTimer)
+  }, [page])
 
   return (
     <main>
