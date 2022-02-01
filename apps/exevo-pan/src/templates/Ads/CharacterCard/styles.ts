@@ -8,8 +8,4 @@ export const Wrapper = styled.div<{ estimatedHeight: number }>`
     flex: none;
     flex-shrink: 0;
   }
-
-  ins {
-    background-color: unset;
-  }
 `
