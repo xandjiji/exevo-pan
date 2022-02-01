@@ -1,4 +1,5 @@
 import styled, { css } from 'styled-components'
+import BaseCharacterCard from 'components/CharacterCard'
 import BaseEmptyState from 'components/EmptyState'
 import { Paginator as BasePaginator, ActiveCount } from 'components/Atoms'
 import FilterIconSvg from 'assets/svgs/filter.svg'
@@ -61,6 +62,33 @@ export const GridWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+`
+
+export const Grid = styled.div`
+  ${InnerContainer}
+  padding-top: 16px;
+  padding-bottom: 16px;
+  width: 100%;
+
+  display: grid;
+  grid-gap: 16px;
+  grid-auto-rows: auto;
+
+  grid-template-columns: repeat(auto-fit, minmax(0, 440px));
+  justify-content: center;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+
+  &::after {
+    content: '';
+    grid-column: 1 / -1;
+  }
+`
+
+export const CharacterCard = styled(BaseCharacterCard)`
+  height: 100%;
 `
 
 export const EmptyState = styled(BaseEmptyState)`

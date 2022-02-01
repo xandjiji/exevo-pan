@@ -1,13 +1,12 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { Fragment, useState, useCallback } from 'react'
 import { Ads } from 'templates'
-import CharacterCard from 'components/CharacterCard'
+import { LazyRender } from 'components/Atoms'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
-import VirtualizedListView from './VirtualizedListView'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
@@ -89,28 +88,31 @@ const AuctionsGrid = (): JSX.Element => {
       )}
 
       <S.GridWrapper>
-        <VirtualizedListView
-          id="character-grid"
-          estimatedHeight={ESTIMATED_HEIGHT}
-          overScan={1}
-        >
+        <S.Grid id="character-grid">
           {shouldDisplayHighlightedAuctions &&
             highlightedAuctions.map((auction) => (
-              <CharacterCard
+              <LazyRender
                 key={`${auction.id}-highlighted`}
-                characterData={auction}
-                highlighted
-              />
+                mediaQuery="(min-width: 768px)"
+                estimatedHeight={ESTIMATED_HEIGHT}
+              >
+                <S.CharacterCard characterData={auction} highlighted />
+              </LazyRender>
             ))}
           {page.map((auction, index) => (
             <Fragment key={auction.id}>
-              <CharacterCard characterData={auction} />
+              <LazyRender
+                mediaQuery="(min-width: 768px)"
+                estimatedHeight={ESTIMATED_HEIGHT}
+              >
+                <S.CharacterCard characterData={auction} />
+              </LazyRender>
               {(index + currentVisibleHighlighteds + 1) % 3 === 0 && (
                 <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
               )}
             </Fragment>
           ))}
-        </VirtualizedListView>
+        </S.Grid>
         {page.length === 0 && (
           <S.EmptyState
             button={{
