@@ -30,6 +30,7 @@ export const Label = styled.label<{ disabled: boolean }>`
   align-items: center;
 
   font-size: 12px;
+  line-height: 1;
 
   cursor: pointer;
 
