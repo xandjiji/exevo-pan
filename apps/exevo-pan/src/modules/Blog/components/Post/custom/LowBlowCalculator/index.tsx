@@ -15,50 +15,19 @@ const SPRITE_PATH = '/sprites/charms'
 
 const LowBlowCalculator = (): JSX.Element => {
   const [averageDamage, setAverageDamage] = useState(500)
+  const finalDamageA = Math.floor(averageDamage * LOW_BLOW_MULTIPLIER)
 
   const [creatureHp, setCreatureHp] = useState(2000)
-  const [powerfulA, setPowerfulA] = useState(false)
-  const finalDamageA = Math.floor(
+  const [powerful, setPowerful] = useState(false)
+  const finalDamageB = Math.floor(
     creatureHp * ELEMENTAL_MULTIPLIER +
-      averageDamage * (powerfulA ? POWERFUL_MULTIPLIER : 1),
+      averageDamage * (powerful ? POWERFUL_MULTIPLIER : 1),
   )
-
-  const finalDamageB = Math.floor(averageDamage * LOW_BLOW_MULTIPLIER)
 
   return (
     <S.Wrapper>
       <S.Group>
-        <S.GroupTitle>
-          <Sprite src={`${SPRITE_PATH}/Charm.png`} width={32} height={32}>
-            Elemental charm
-          </Sprite>
-        </S.GroupTitle>
-
-        <S.Label>
-          Creature HP
-          <Input
-            type="number"
-            step={100}
-            min={0}
-            value={creatureHp}
-            onChange={(event) => setCreatureHp(+event.target.value)}
-            hasAlert={false}
-          />
-        </S.Label>
-
-        <Checkbox
-          label="Powerful Strike imbuement"
-          checked={powerfulA}
-          onClick={() => setPowerfulA((prev) => !prev)}
-        />
-
-        <p>
-          Final average damage: <code>{finalDamageA}</code>
-        </p>
-      </S.Group>
-
-      <S.Group>
-        <S.GroupTitle>
+        <S.GroupTitle style={{ marginLeft: -5 }}>
           <Sprite src={`${SPRITE_PATH}/Low Blow.png`} width={32} height={32}>
             Low Blow
           </Sprite>
@@ -80,9 +49,39 @@ const LowBlowCalculator = (): JSX.Element => {
           />
         </S.Label>
 
-        <p>
+        <S.Result>
+          Final average damage: <code>{finalDamageA}</code>
+        </S.Result>
+      </S.Group>
+
+      <S.Group>
+        <S.GroupTitle style={{ marginLeft: -2 }}>
+          <Sprite src={`${SPRITE_PATH}/Charm.png`} width={32} height={32}>
+            Elemental charm
+          </Sprite>
+        </S.GroupTitle>
+
+        <S.Label>
+          Creature HP
+          <Input
+            type="number"
+            step={100}
+            min={0}
+            value={creatureHp}
+            onChange={(event) => setCreatureHp(+event.target.value)}
+            hasAlert={false}
+          />
+        </S.Label>
+
+        <Checkbox
+          label="Powerful Strike imbuement"
+          checked={powerful}
+          onClick={() => setPowerful((prev) => !prev)}
+        />
+
+        <S.Result>
           Final average damage: <code>{finalDamageB}</code>
-        </p>
+        </S.Result>
       </S.Group>
     </S.Wrapper>
   )
