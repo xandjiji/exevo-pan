@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Input, Checkbox } from 'components/Atoms'
+import { useRouter } from 'next/router'
 import Sprite from '../Sprite'
 import * as S from './styles'
 
@@ -12,6 +13,33 @@ const POWERFUL_MULTIPLIER = 1.05
 
 const SPRITE_PATH = '/sprites/charms'
 
+const translations = {
+  en: {
+    yourAverageDamage: 'Your average damage',
+    finalAverageDamage: 'Final average damage',
+    elementalCharm: 'Elemental charm',
+    creatureHP: 'Creature HP',
+  },
+  es: {
+    yourAverageDamage: 'Your average damage',
+    finalAverageDamage: 'Final average damage',
+    elementalCharm: 'Elemental charm',
+    creatureHP: 'Creature HP',
+  },
+  pl: {
+    yourAverageDamage: 'Your average damage',
+    finalAverageDamage: 'Final average damage',
+    elementalCharm: 'Elemental charm',
+    creatureHP: 'Creature HP',
+  },
+  pt: {
+    yourAverageDamage: 'Seu dano médio',
+    finalAverageDamage: 'Dano médio final',
+    elementalCharm: 'Charm elemental',
+    creatureHP: 'HP da criatura',
+  },
+}
+
 const LowBlowCalculator = (): JSX.Element => {
   const [averageDamage, setAverageDamage] = useState(500)
   const finalDamageA = Math.round(averageDamage * LOW_BLOW_MULTIPLIER)
@@ -22,6 +50,8 @@ const LowBlowCalculator = (): JSX.Element => {
     creatureHp * ELEMENTAL_MULTIPLIER +
       averageDamage * (powerful ? POWERFUL_MULTIPLIER : 1),
   )
+
+  const { locale } = useRouter()
 
   return (
     <S.Wrapper>
@@ -37,7 +67,7 @@ const LowBlowCalculator = (): JSX.Element => {
         </S.GroupTitle>
 
         <S.Label>
-          Your average damage
+          {translations[locale as RegisteredLocale].yourAverageDamage}
           <Input
             type="number"
             step={100}
@@ -49,19 +79,20 @@ const LowBlowCalculator = (): JSX.Element => {
         </S.Label>
 
         <S.Result>
-          Final average damage: <code>{finalDamageA}</code>
+          {translations[locale as RegisteredLocale].finalAverageDamage}:{' '}
+          <code>{finalDamageA}</code>
         </S.Result>
       </S.Group>
 
       <S.Group>
         <S.GroupTitle style={{ marginLeft: -2 }}>
           <Sprite src={`${SPRITE_PATH}/Charm.png`} width={32} height={32}>
-            Elemental charm
+            {translations[locale as RegisteredLocale].elementalCharm}
           </Sprite>
         </S.GroupTitle>
 
         <S.Label>
-          Creature HP
+          {translations[locale as RegisteredLocale].creatureHP}
           <Input
             type="number"
             step={100}
@@ -79,7 +110,8 @@ const LowBlowCalculator = (): JSX.Element => {
         />
 
         <S.Result>
-          Final average damage: <code>{finalDamageB}</code>
+          {translations[locale as RegisteredLocale].finalAverageDamage}:{' '}
+          <code>{finalDamageB}</code>
         </S.Result>
       </S.Group>
     </S.Wrapper>
