@@ -1,55 +1,89 @@
 import { useState } from 'react'
 import { Input, Checkbox } from 'components/Atoms'
+import Sprite from '../Sprite'
 import * as S from './styles'
 
-const LOW_BLOW_DAMAGE_MULTIPLIER = 1.09
+const POWERFUL_MULTIPLIER = 1.05
+
+const LOW_BLOW_MULTIPLIER = 1.09
+
+const ELEMENTAL_DAMAGE = 0.05
+const ELEMENTAL_PROC_CHANCE = 0.1
+const ELEMENTAL_MULTIPLIER = ELEMENTAL_PROC_CHANCE * ELEMENTAL_DAMAGE
+
+const SPRITE_PATH = '/sprites/charms'
 
 const LowBlowCalculator = (): JSX.Element => {
-  const [creatureHp, setCreatureHp] = useState(2000)
-  const [elementalPowerfulStrike, setElementalPowerfulStrike] = useState(true)
-
   const [averageDamage, setAverageDamage] = useState(500)
+
+  const [creatureHp, setCreatureHp] = useState(2000)
+  const [powerfulA, setPowerfulA] = useState(false)
+  const finalDamageA = Math.floor(
+    creatureHp * ELEMENTAL_MULTIPLIER +
+      averageDamage * (powerfulA ? POWERFUL_MULTIPLIER : 1),
+  )
+
+  const finalDamageB = Math.floor(averageDamage * LOW_BLOW_MULTIPLIER)
 
   return (
     <S.Wrapper>
-      <S.Label>
-        Creature HP
-        <Input
-          type="number"
-          step={100}
-          min={0}
-          value={creatureHp}
-          onChange={(event) => setCreatureHp(+event.target.value)}
-          hasAlert={false}
-        />
-      </S.Label>
-      <Checkbox
-        label="Powerful Strike imbuement"
-        checked={elementalPowerfulStrike}
-        onClick={() => setElementalPowerfulStrike((prev) => !prev)}
-      />
-      <p>
-        Your average damage with an elemental charm would be:{' '}
-        {averageDamage * LOW_BLOW_DAMAGE_MULTIPLIER}
-      </p>
+      <S.Group>
+        <S.GroupTitle>
+          <Sprite src={`${SPRITE_PATH}/Charm.png`} width={32} height={32}>
+            Elemental charm
+          </Sprite>
+        </S.GroupTitle>
 
-      <S.Label>
-        Your average damage
-        <Input
-          type="number"
-          step={100}
-          min={0}
-          value={averageDamage}
-          onChange={(event) => setAverageDamage(+event.target.value)}
-          hasAlert={false}
-        />
-      </S.Label>
-      <p>
-        Your average damage with Low Blow would be:{' '}
-        {averageDamage * LOW_BLOW_DAMAGE_MULTIPLIER}
-      </p>
+        <S.Label>
+          Creature HP
+          <Input
+            type="number"
+            step={100}
+            min={0}
+            value={creatureHp}
+            onChange={(event) => setCreatureHp(+event.target.value)}
+            hasAlert={false}
+          />
+        </S.Label>
 
-      <Checkbox label="Powerful Strike imbuement" />
+        <Checkbox
+          label="Powerful Strike imbuement"
+          checked={powerfulA}
+          onClick={() => setPowerfulA((prev) => !prev)}
+        />
+
+        <p>
+          Final average damage: <code>{finalDamageA}</code>
+        </p>
+      </S.Group>
+
+      <S.Group>
+        <S.GroupTitle>
+          <Sprite src={`${SPRITE_PATH}/Low Blow.png`} width={32} height={32}>
+            Low Blow
+          </Sprite>
+          {' + '}
+          <Sprite src="/sprites/crit.png" width={37} height={30}>
+            Powerful Strike
+          </Sprite>
+        </S.GroupTitle>
+
+        <S.Label>
+          Your average damage
+          <Input
+            type="number"
+            step={100}
+            min={0}
+            value={averageDamage}
+            onChange={(event) => setAverageDamage(+event.target.value)}
+            hasAlert={false}
+          />
+        </S.Label>
+
+        <p>
+          Final average damage: <code>{finalDamageB}</code>
+        </p>
+      </S.Group>
     </S.Wrapper>
   )
 }
