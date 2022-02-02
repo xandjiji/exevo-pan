@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useOnScreen } from 'hooks'
 import { LazyRenderProps } from './types'
 
@@ -8,19 +8,23 @@ const LazyRender = ({
   children,
   ...props
 }: LazyRenderProps): JSX.Element => {
+  const [shouldRender, setShouldRender] = useState(true)
+
   const ref = useRef<HTMLDivElement>()
-
   const onScreen = useOnScreen<HTMLDivElement>(ref)
-  const mediaQueryMatches = mediaQuery
-    ? window.matchMedia(mediaQuery).matches
-    : false
 
-  const shouldRender = onScreen || mediaQueryMatches
+  useEffect(() => {
+    const mediaQueryMatches = mediaQuery
+      ? window.matchMedia(mediaQuery).matches
+      : false
+
+    setShouldRender(onScreen || mediaQueryMatches)
+  }, [onScreen])
 
   return (
     <div
       ref={ref as React.RefObject<HTMLDivElement>}
-      style={{ height: onScreen ? undefined : `${estimatedHeight}px` }}
+      style={{ minHeight: onScreen ? undefined : `${estimatedHeight}px` }}
       {...props}
     >
       {shouldRender && children}

@@ -1,12 +1,12 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback } from 'react'
-import CharacterCard from 'components/CharacterCard'
+import { Fragment, useState, useCallback, useRef, useEffect } from 'react'
+import { Ads } from 'templates'
+import { LazyRender } from 'components/Atoms'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
-import VirtualizedListView from './VirtualizedListView'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
@@ -29,6 +29,29 @@ const AuctionsGrid = (): JSX.Element => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
 
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+
+  const currentVisibleHighlighteds = shouldDisplayHighlightedAuctions
+    ? highlightedAuctions.length
+    : 0
+
+  const gridHeadOffset = useRef(0)
+  useEffect(() => {
+    let scrollTimer: NodeJS.Timeout
+
+    if (gridHeadOffset.current) {
+      const newScrollY =
+        window.scrollY >= gridHeadOffset.current ? gridHeadOffset.current : 0
+      scrollTimer = setTimeout(
+        () => window.scrollTo({ top: newScrollY, behavior: 'smooth' }),
+        0,
+      )
+    } else {
+      const gridHeader = document.getElementById('grid-header')
+      gridHeadOffset.current = gridHeader?.offsetTop ?? -1
+    }
+
+    return () => clearTimeout(scrollTimer)
+  }, [page])
 
   return (
     <main>
@@ -84,23 +107,31 @@ const AuctionsGrid = (): JSX.Element => {
       )}
 
       <S.GridWrapper>
-        <VirtualizedListView
-          id="character-grid"
-          estimatedHeight={ESTIMATED_HEIGHT}
-          overScan={1}
-        >
+        <S.Grid id="character-grid">
           {shouldDisplayHighlightedAuctions &&
             highlightedAuctions.map((auction) => (
-              <CharacterCard
+              <LazyRender
                 key={`${auction.id}-highlighted`}
-                characterData={auction}
-                highlighted
-              />
+                mediaQuery="(min-width: 768px)"
+                estimatedHeight={ESTIMATED_HEIGHT}
+              >
+                <S.CharacterCard characterData={auction} highlighted />
+              </LazyRender>
             ))}
-          {page.map((auction) => (
-            <CharacterCard key={auction.id} characterData={auction} />
+          {page.map((auction, index) => (
+            <Fragment key={auction.id}>
+              <LazyRender
+                mediaQuery="(min-width: 768px)"
+                estimatedHeight={ESTIMATED_HEIGHT}
+              >
+                <S.CharacterCard characterData={auction} />
+              </LazyRender>
+              {(index + currentVisibleHighlighteds + 1) % 3 === 0 && (
+                <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
+              )}
+            </Fragment>
           ))}
-        </VirtualizedListView>
+        </S.Grid>
         {page.length === 0 && (
           <S.EmptyState
             button={{
@@ -114,6 +145,8 @@ const AuctionsGrid = (): JSX.Element => {
           />
         )}
       </S.GridWrapper>
+
+      <Ads.FooterBanner key={pageData.pageIndex} />
     </main>
   )
 }
