@@ -18,32 +18,33 @@ export const Ul = styled.ul`
   align-items: center;
 `
 
-export const Li = styled.li``
+export const Li = styled.li`
+  a {
+    padding: 13px 20px 10px 20px;
+    display: flex;
+    align-items: center;
+    border-bottom: solid 3px transparent;
+    cursor: pointer;
+    ${Smooth}
 
-export const A = styled.a`
-  padding: 13px 20px 10px 20px;
-  display: flex;
-  align-items: center;
-  border-bottom: solid 3px transparent;
-  cursor: pointer;
-  ${Smooth}
+    h3 {
+      font-size: 14px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+      color: var(--onPrimary);
+      white-space: nowrap;
+    }
 
-  &[aria-current='page'], &:hover {
-    border-color: var(--onPrimary);
+    &[aria-current='page'],
+    &:hover {
+      border-color: var(--onPrimary);
+    }
+
+    svg {
+      margin-right: 6px;
+      width: 18px;
+      height: 18px;
+      fill: var(--onPrimary);
+    }
   }
-
-  svg {
-    margin-right: 6px;
-    width: 18px;
-    height: 18px;
-    fill: var(--onPrimary);
-  }
-`
-
-export const H3 = styled.h3`
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.5px;
-  color: var(--onPrimary);
-  white-space: nowrap;
 `

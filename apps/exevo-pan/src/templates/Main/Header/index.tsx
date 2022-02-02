@@ -72,10 +72,10 @@ const Header = ({
             {NavItems.map(({ title, href, exact, icon }) => (
               <S.Li key={title}>
                 <Link href={href} exact={exact}>
-                  <S.A>
+                  <>
                     {icon}
-                    <S.H2>{common.Header.nav[title]}</S.H2>
-                  </S.A>
+                    <h2>{common.Header.nav[title]}</h2>
+                  </>
                 </Link>
               </S.Li>
             ))}

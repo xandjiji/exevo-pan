@@ -9,10 +9,10 @@ const SubHeader = ({ navItems, ...props }: SubHeaderProps): JSX.Element => (
       {navItems.map((navItem) => (
         <S.Li key={navItem.title}>
           <Link href={navItem.href} exact>
-            <S.A>
+            <>
               {navItem.icon}
-              <S.H3>{navItem.title}</S.H3>
-            </S.A>
+              <h3>{navItem.title}</h3>
+            </>
           </Link>
         </S.Li>
       ))}
