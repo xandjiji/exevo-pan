@@ -12,6 +12,7 @@ const Wrapper = styled.span<{ name: string; inline: boolean }>`
   position: relative;
   margin-left: 35px;
   font-weight: 400;
+  white-space: nowrap;
 
   ${({ inline }) =>
     inline &&
