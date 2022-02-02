@@ -28,10 +28,6 @@ export const DrawerFooter = styled(BaseDrawerFooter)`
 
 export const Input = styled(BaseInput)`
   max-width: 200px;
-
-  [role='alert'] {
-    display: none;
-  }
 `
 
 export const ChipWrapper = styled.div`

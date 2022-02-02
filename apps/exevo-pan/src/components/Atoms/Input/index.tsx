@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, useRef, memo } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import * as S from './styles'
-import { InputProps } from './types'
+import { InputProps, InputValue } from './types'
 
 const Input = ({
   className,
@@ -11,6 +11,7 @@ const Input = ({
   errorMessage,
   value: valueProp,
   onChange,
+  hasAlert = true,
   ...props
 }: InputProps): JSX.Element => {
   const {
@@ -19,7 +20,7 @@ const Input = ({
 
   const { current: errorId } = useRef(uuidv4())
 
-  const [value, setValue] = useState<string>(valueProp ?? '')
+  const [value, setValue] = useState<InputValue>(valueProp ?? '')
   const derivedValue = valueProp ?? value
   const isClearButtonActive = allowClear && !!derivedValue
   const isInvalid = !!errorMessage
@@ -72,14 +73,16 @@ const Input = ({
           />
         )}
       </S.InputWrapper>
-      <S.ErrorMessage
-        id={errorId}
-        aria-hidden={!isInvalid}
-        role="alert"
-        suppressHydrationWarning
-      >
-        {errorMessage}
-      </S.ErrorMessage>
+      {hasAlert && (
+        <S.ErrorMessage
+          id={errorId}
+          aria-hidden={!isInvalid}
+          role="alert"
+          suppressHydrationWarning
+        >
+          {errorMessage}
+        </S.ErrorMessage>
+      )}
     </S.Wrapper>
   )
 }

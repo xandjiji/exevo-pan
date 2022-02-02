@@ -24,6 +24,9 @@ const components = {
     () => import('modules/Blog/components/Post/custom/AboutPageStyle'),
   ),
   Charm: dynamic(() => import('modules/Blog/components/Post/custom/Charm')),
+  LowBlowCalculator: dynamic(
+    () => import('modules/Blog/components/Post/custom/LowBlowCalculator'),
+  ),
   ContactSection: dynamic(
     () => import('modules/Blog/components/Post/custom/ContactSection'),
   ),

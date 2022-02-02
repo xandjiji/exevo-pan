@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import Image from 'next/image'
 import {
   Table as BaseTable,
-  Input as BaseInput,
   Paginator as BasePaginator,
   Chip as BaseChip,
 } from 'components/Atoms'
@@ -61,12 +60,6 @@ export const SearchGroup = styled(LabelGroup)`
 
   @media (min-width: 768px) {
     max-width: 300px;
-  }
-`
-
-export const Input = styled(BaseInput)`
-  [role='alert'] {
-    display: none;
   }
 `
 

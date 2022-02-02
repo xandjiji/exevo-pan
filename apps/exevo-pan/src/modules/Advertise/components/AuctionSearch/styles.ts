@@ -1,8 +1,5 @@
 import styled from 'styled-components'
-import {
-  Input as BaseInput,
-  Paginator as BasePaginator,
-} from 'components/Atoms'
+import { Paginator as BasePaginator } from 'components/Atoms'
 import { MaterialCard, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.section`
@@ -28,12 +25,6 @@ export const InputWrapper = styled.div`
 export const Label = styled.label`
   display: block;
   margin-bottom: 8px;
-`
-
-export const Input = styled(BaseInput)`
-  [role='alert'] {
-    display: none;
-  }
 `
 
 export const Paginator = styled(BasePaginator)`

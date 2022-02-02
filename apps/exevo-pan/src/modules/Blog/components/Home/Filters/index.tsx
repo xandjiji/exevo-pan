@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { Accordion } from 'components/Atoms'
+import { Accordion, Input } from 'components/Atoms'
 import Tag from 'components/Tag'
 import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
@@ -74,12 +74,13 @@ const Filters = (): JSX.Element => {
 
         <S.GroupWrapper>
           <S.Label htmlFor="query-input">{blog.Filters.searchLabel}</S.Label>
-          <S.Input
+          <Input
             id="query-input"
             value={query}
             onChange={onQueryChange}
             placeholder={blog.Filters.searchPlaceholder}
             allowClear
+            hasAlert={false}
           />
         </S.GroupWrapper>
 

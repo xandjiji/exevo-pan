@@ -1,10 +1,13 @@
-import { HTMLAttributes } from 'react'
+import { InputHTMLAttributes } from 'react'
 
-export interface InputProps extends HTMLAttributes<HTMLInputElement> {
+export type InputValue = number | string
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   allowClear?: boolean
   errorMessage?: string
-  value?: string
+  value?: InputValue
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  hasAlert?: boolean
 }
 
 export interface InputWrapperProps {
