@@ -3,23 +3,22 @@ import { Input, Checkbox } from 'components/Atoms'
 import Sprite from '../Sprite'
 import * as S from './styles'
 
-const POWERFUL_MULTIPLIER = 1.05
-
 const LOW_BLOW_MULTIPLIER = 1.09
 
 const ELEMENTAL_DAMAGE = 0.05
 const ELEMENTAL_PROC_CHANCE = 0.1
 const ELEMENTAL_MULTIPLIER = ELEMENTAL_PROC_CHANCE * ELEMENTAL_DAMAGE
+const POWERFUL_MULTIPLIER = 1.05
 
 const SPRITE_PATH = '/sprites/charms'
 
 const LowBlowCalculator = (): JSX.Element => {
   const [averageDamage, setAverageDamage] = useState(500)
-  const finalDamageA = Math.floor(averageDamage * LOW_BLOW_MULTIPLIER)
+  const finalDamageA = Math.round(averageDamage * LOW_BLOW_MULTIPLIER)
 
   const [creatureHp, setCreatureHp] = useState(2000)
   const [powerful, setPowerful] = useState(false)
-  const finalDamageB = Math.floor(
+  const finalDamageB = Math.round(
     creatureHp * ELEMENTAL_MULTIPLIER +
       averageDamage * (powerful ? POWERFUL_MULTIPLIER : 1),
   )

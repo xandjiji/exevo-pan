@@ -2,9 +2,7 @@ import styled from 'styled-components'
 
 export const Wrapper = styled.div`
   margin: 8px auto;
-
-  /* RESOLVER */
-  width: 420px;
+  max-width: fit-content;
 
   display: grid;
   gap: 24px;
