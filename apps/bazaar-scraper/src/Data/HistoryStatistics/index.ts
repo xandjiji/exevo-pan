@@ -3,7 +3,7 @@
 import fs from 'fs/promises'
 import { broadcast, coloredText, coloredDiff } from 'logging'
 import { file } from 'Constants'
-import { countObjectDiff } from 'utils'
+import { countObjectDiff } from 'shared-utils/dist/countObjectDiff'
 import { EMPTY_STATISTICS } from './schema'
 
 const FILE_PATH = file.HISTORY_STATISTICS.path
