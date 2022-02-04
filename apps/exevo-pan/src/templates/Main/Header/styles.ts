@@ -190,26 +190,26 @@ export const Li = styled.li`
   &:not(:last-child) {
     margin-right: 8px;
   }
-`
 
-export const A = styled.a`
-  padding: 8px 16px;
-  display: flex;
-  align-items: center;
-  border-radius: 9px;
+  a {
+    padding: 8px 16px;
+    display: flex;
+    align-items: center;
+    border-radius: 9px;
 
-  ${Clickable}
-  &[aria-current='page'] {
-    box-shadow: inset 3px 3px rgb(0 0 0 / 14%);
+    h2 {
+      font-size: 14px;
+      letter-spacing: 0.5px;
+      font-weight: 400;
+      color: var(--onPrimary);
+      white-space: nowrap;
+    }
+
+    ${Clickable}
+    &[aria-current='page'] {
+      box-shadow: inset 3px 3px rgb(0 0 0 / 14%);
+    }
   }
-`
-
-export const H2 = styled.h2`
-  font-size: 14px;
-  letter-spacing: 0.5px;
-  font-weight: 400;
-  color: var(--onPrimary);
-  white-space: nowrap;
 `
 
 export const RightWrapper = styled.div`

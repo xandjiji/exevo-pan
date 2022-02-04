@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Switch as BaseSwitch, Input as BaseInput } from 'components/Atoms'
+import { Switch as BaseSwitch } from 'components/Atoms'
 import SearchSvg from 'assets/svgs/search.svg'
 
 export const Wrapper = styled.section`
@@ -50,12 +50,6 @@ export const Switch = styled(BaseSwitch)`
 export const Label = styled.label`
   display: block;
   ${labelStyle}
-`
-
-export const Input = styled(BaseInput)`
-  [role='alert'] {
-    display: none;
-  }
 `
 
 export const TagWrapper = styled.div`

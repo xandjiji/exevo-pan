@@ -26,7 +26,7 @@ const Tag = ({
       as={type}
       type={type}
       role={clickable ? 'switch' : undefined}
-      aria-checked={clickable && active}
+      aria-checked={clickable ? active : undefined}
       tagColor={tagColor ?? tagById[tagId as string]?.color ?? FALLBACK_COLOR}
       {...props}
     >

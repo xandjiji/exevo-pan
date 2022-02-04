@@ -28,9 +28,9 @@ export const Input = styled.input`
 export const Label = styled.label<{ disabled: boolean }>`
   display: flex;
   align-items: center;
-  justify-content: space-between;
 
   font-size: 12px;
+  line-height: 1;
 
   cursor: pointer;
 

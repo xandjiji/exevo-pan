@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useMemo } from 'react'
-import { Table } from 'components/Atoms'
+import { Table, Input } from 'components/Atoms'
 import EmptyState from './EmptyState'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import * as S from './styles'
@@ -166,12 +166,13 @@ const MembersTable = ({
           label={war.SearchGrid.MembersTable.searchLabel}
           htmlFor="search-nickname-input"
         >
-          <S.Input
+          <Input
             id="search-nickname-input"
             aria-controls="members-grid"
             allowClear
             placeholder="Nickname"
             onChange={onSearchChange}
+            hasAlert={false}
           />
         </S.SearchGroup>
         <S.Paginator

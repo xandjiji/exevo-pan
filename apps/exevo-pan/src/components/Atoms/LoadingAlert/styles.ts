@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { Shadow, Spinner as BaseSpinner } from 'styles'
 
 export const FloatingLabel = styled.div`
-  position: absolute;
+  position: fixed;
   top: 26px;
   left: 50%;
   z-index: 99;

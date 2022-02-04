@@ -1,4 +1,4 @@
-import { cloneElement } from 'react'
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { LinkProps } from './types'
@@ -10,9 +10,7 @@ const Link = ({ href, exact = false, children }: LinkProps): JSX.Element => {
 
   return (
     <NextLink href={href}>
-      {cloneElement(children, {
-        'aria-current': isCurrent ? 'page' : undefined,
-      })}
+      <a aria-current={isCurrent ? 'page' : undefined}>{children}</a>
     </NextLink>
   )
 }

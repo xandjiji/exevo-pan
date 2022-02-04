@@ -25,6 +25,12 @@ export const BaseTable = styled.table`
   th,
   td {
     padding: 8px;
+
+    vertical-align: middle;
+
+    * {
+      vertical-align: middle;
+    }
   }
 
   th {

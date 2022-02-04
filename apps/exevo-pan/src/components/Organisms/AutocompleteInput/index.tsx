@@ -6,7 +6,7 @@ import {
   useRef,
   memo,
 } from 'react'
-import { Option } from 'components/Atoms'
+import { Option, Input } from 'components/Atoms'
 import { v4 as uuidv4 } from 'uuid'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import * as S from './styles'
@@ -121,7 +121,7 @@ const AutocompleteInput = ({
           </S.Listbox>
         }
       >
-        <S.Input
+        <Input
           aria-haspopup
           role="combobox"
           aria-autocomplete="list"
@@ -133,6 +133,7 @@ const AutocompleteInput = ({
           onFocus={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
           onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
           onKeyDown={handleKeyboard}
+          hasAlert={false}
           {...props}
         />
       </S.Popover>

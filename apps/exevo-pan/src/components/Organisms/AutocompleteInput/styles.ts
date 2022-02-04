@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import {
-  Input as BaseInput,
   Popover as BasePopover,
   Listbox as BaseListbox,
 } from 'components/Atoms'
@@ -10,12 +9,6 @@ export const Wrapper = styled.div`
 
   > * {
     width: 100%;
-  }
-`
-
-export const Input = styled(BaseInput)`
-  [role='alert'] {
-    display: none;
   }
 `
 

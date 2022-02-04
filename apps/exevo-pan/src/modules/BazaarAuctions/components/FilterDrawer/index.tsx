@@ -81,6 +81,7 @@ const FilterDrawer = ({
             allowClear
             value={nickname}
             onChange={(event) => setNickname(event.target.value)}
+            hasAlert={false}
           />
         </FilterGroup>
 

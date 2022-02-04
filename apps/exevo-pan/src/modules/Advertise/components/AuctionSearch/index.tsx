@@ -1,4 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
+import { Input } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useForm } from '../../contexts/Form'
@@ -25,13 +26,14 @@ const AuctionSearch = (): JSX.Element => {
           <S.Label htmlFor="search-input">
             {advertise.AuctionSearch.inputLabel}
           </S.Label>
-          <S.Input
+          <Input
             id="search-input"
             placeholder={advertise.AuctionSearch.placeholder}
             aria-label={advertise.AuctionSearch.inputAriaLabel}
             allowClear
             value={nickname}
             onChange={(event) => setNickname(event.target.value)}
+            hasAlert={false}
           />
         </S.InputWrapper>
         <S.Paginator
