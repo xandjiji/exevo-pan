@@ -30,6 +30,7 @@ export const randomBlogPost = (): BlogPost => ({
   ),
   thumbnail: faker.image.imageUrl(),
   translator: faker.datatype.boolean() ? generateAuthor() : undefined,
+  hidden: faker.datatype.boolean() ? true : undefined,
 })
 
 export const generateBlogPosts = (): BlogPost[] =>
