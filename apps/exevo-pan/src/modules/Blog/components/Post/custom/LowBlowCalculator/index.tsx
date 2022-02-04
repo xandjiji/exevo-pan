@@ -27,10 +27,10 @@ const translations = {
     creatureHP: 'Vida de la criatura',
   },
   pl: {
-    yourAverageDamage: 'Your average damage',
-    finalAverageDamage: 'Final average damage',
-    elementalCharm: 'Elemental charm',
-    creatureHP: 'Creature HP',
+    yourAverageDamage: 'Twoje średnie obrażenia',
+    finalAverageDamage: 'Końcowe średnie obrażenia',
+    elementalCharm: 'Charm ofensywny',
+    creatureHP: 'Punkty zdrowia potwora',
   },
   pt: {
     yourAverageDamage: 'Seu dano médio',
