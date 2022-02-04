@@ -10,8 +10,13 @@ const NEWLINE = '\n'
 const buildUrl = ({ locale, route }: UrlConfig): string =>
   `${links.CANONICAL}${locale ? `/${locale}` : ''}${route}`
 
-const formatDate = (date: Date) =>
-  `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+const formatDate = (date: Date): string => {
+  const year = date.getFullYear()
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const day = date.getDate().toString().padStart(2, '0')
+
+  return `${year}-${month}-${day}`
+}
 
 const AlternateTemplate = (props: Required<UrlConfig>): string =>
   `<xhtml:link rel="alternate" hreflang="${props.locale}" href="${buildUrl(
