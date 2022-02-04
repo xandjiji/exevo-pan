@@ -4,16 +4,22 @@ import {
   DEFAULT_SORT_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import BlogClient from '..'
-import { blogPosts } from './mock'
+import { blogPosts, staticPostData, staticPostDataResponse } from './mock'
 
 global.fetch = jest.fn()
 const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+
+const locales = ['en', 'es', 'pl', 'pt']
+
+const randomFrom = <T>(array: T[]): T =>
+  array[Math.floor(Math.random() * array.length)]
 
 describe('BlogClient()', () => {
   beforeEach(() => {
     mockedFetch.mockClear()
     mockedFetch.mockResolvedValue({
-      json: async () => ({ page: blogPosts } as BlogFilterResponse),
+      json: async () => ({ page: blogPosts }),
+      text: async () => 'content',
     } as Response)
   })
 
@@ -47,16 +53,60 @@ describe('BlogClient()', () => {
   })
 
   describe('getStaticPost()', () => {
-    test.todo('should request the correct endpoint')
+    test.each(blogPosts.slice(0, 10))(
+      'should request the correct endpoint',
+      async ({ slug }) => {
+        const locale = randomFrom(locales)
+        await BlogClient.getStaticPost({
+          locale,
+          slug,
+        })
+
+        const [[calledUrl]] = mockedFetch.mock.calls
+        const [, localePath, postFileName] = (calledUrl as string).split('/')
+        expect(`${localePath}/${postFileName}`).toEqual(`${locale}/${slug}.mdx`)
+      },
+    )
   })
 
   describe('getEveryPostLocale()', () => {
-    test.todo('should bring all posts')
+    beforeEach(() => {
+      mockedFetch.mockClear()
+      mockedFetch.mockResolvedValue({
+        json: async () => staticPostData,
+      } as Response)
+    })
 
-    test.todo('should filter out a specific slug')
+    test('should return all posts', async () => {
+      const response = await BlogClient.getEveryPostLocale({ showHidden: true })
+      expect(response).toEqual(staticPostDataResponse)
+    })
 
-    test.todo('should NOT filter hidden posts')
+    test('should return all posts that are not hidden', async () => {
+      const response = await BlogClient.getEveryPostLocale({})
 
-    test.todo('should return the correct page size')
+      Object.values(response).forEach((posts) =>
+        expect(posts.every(({ hidden }) => !hidden)).toBeTruthy(),
+      )
+    })
+
+    test('should filter out a specific slug', async () => {
+      const { slug: excludedSlug } = randomFrom(staticPostData['/en'])
+
+      const response = await BlogClient.getEveryPostLocale({ excludedSlug })
+
+      Object.values(response).forEach((posts) =>
+        expect(posts.every(({ slug }) => slug !== excludedSlug)).toBeTruthy(),
+      )
+    })
+
+    test('should return the correct page size', async () => {
+      const pageSize = 10
+      const response = await BlogClient.getEveryPostLocale({ pageSize })
+
+      Object.values(response).forEach((posts) =>
+        expect(posts.length).toEqual(pageSize),
+      )
+    })
   })
 })
