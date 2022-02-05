@@ -68,7 +68,7 @@ const Filters = (): JSX.Element => {
               })
             }
           >
-            Most recent
+            {blog.Filters.mostRecentLabel}
           </S.Switch>
         </S.GroupWrapper>
 

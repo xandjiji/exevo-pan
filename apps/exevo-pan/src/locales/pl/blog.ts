@@ -8,6 +8,7 @@ export default {
   recentPosts: 'Ostatnie posty',
   Filters: {
     title: 'Filtry',
+    mostRecentLabel: 'Najnowszy',
     searchLabel: 'Search',
     searchPlaceholder: 'Search for posts',
     tagsLabel: 'Tags',
