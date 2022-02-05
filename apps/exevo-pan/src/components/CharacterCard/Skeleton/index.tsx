@@ -70,7 +70,7 @@ const CardSkeleton = ({
         ))}
       </Skeletons.SkillWrapper>
 
-      <S.Footer>
+      <S.TooltipWrapper>
         <Skeletons.Flex>
           <Skeletons.ImbuementsIcon />
           <Skeletons.Text style={{ width: 126, height: 10 }} />
@@ -89,7 +89,7 @@ const CardSkeleton = ({
           <Skeletons.Charm style={{ width: 54 }} />
           <Skeletons.Charm />
         </Skeletons.Flex>
-      </S.Footer>
+      </S.TooltipWrapper>
     </S.Wrapper>
   )
 }

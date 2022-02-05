@@ -1,9 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo } from 'react'
+import { memo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
+import useShouldRender from './useShouldRender'
 import CharacterMiniCard from '../CharacterMiniCard'
 import {
   ServerInfo,
@@ -18,9 +19,12 @@ import {
 import * as S from './styles'
 import { CharacterCardProps } from './types'
 
+const FIXED_BODY_HEIGHT = 375
+
 const CharacterCard = ({
   characterData,
   highlighted = false,
+  lazyRender = false,
   ...props
 }: CharacterCardProps): JSX.Element => {
   const {
@@ -58,8 +62,15 @@ const CharacterCard = ({
       : common.CharacterCard.bidLabelText.minimumBid
   }
 
+  const ref = useRef<HTMLDivElement>()
+  const shouldRenderBody = useShouldRender(lazyRender, ref)
+
   return (
-    <S.Wrapper highlighted={highlighted} {...props}>
+    <S.Wrapper
+      ref={ref as React.RefObject<HTMLDivElement>}
+      highlighted={highlighted}
+      {...props}
+    >
       <S.Head highlighted={highlighted}>
         <CharacterMiniCard
           displayLink
@@ -76,39 +87,45 @@ const CharacterCard = ({
         {highlighted && <TagButton />}
       </S.Head>
 
-      <S.InfoGrid>
-        <ServerInfo
-          serverData={serverData}
-          nickname={nickname}
-          transfer={transfer}
-        />
+      <S.Body style={{ height: FIXED_BODY_HEIGHT }}>
+        {shouldRenderBody && (
+          <>
+            <S.InfoGrid>
+              <ServerInfo
+                serverData={serverData}
+                nickname={nickname}
+                transfer={transfer}
+              />
 
-        <S.LabeledTextBox labelText="PvP">
-          <S.BattleyeStatus active={serverData.battleye} />
-          {serverData.pvpType.string}
-        </S.LabeledTextBox>
+              <S.LabeledTextBox labelText="PvP">
+                <S.BattleyeStatus active={serverData.battleye} />
+                {serverData.pvpType.string}
+              </S.LabeledTextBox>
 
-        <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
-          <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
-        </S.LabeledTextBox>
+              <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
+                <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
+              </S.LabeledTextBox>
 
-        <S.LabeledTextBox labelText={getBidLabelText()}>
-          <S.TibiaCoinIcon />
-          {formatNumberWithCommas(currentBid)}
-        </S.LabeledTextBox>
-      </S.InfoGrid>
+              <S.LabeledTextBox labelText={getBidLabelText()}>
+                <S.TibiaCoinIcon />
+                {formatNumberWithCommas(currentBid)}
+              </S.LabeledTextBox>
+            </S.InfoGrid>
 
-      <CharacterItems items={items} />
+            <CharacterItems items={items} />
 
-      <CharacterSkills skills={skills} />
+            <CharacterSkills skills={skills} />
 
-      <S.Footer>
-        <ImbuementsTooltip items={imbuements} />
-        <CharmsTooltip items={charms} />
-        <QuestsTooltip items={quests} />
+            <S.TooltipWrapper>
+              <ImbuementsTooltip items={imbuements} />
+              <CharmsTooltip items={charms} />
+              <QuestsTooltip items={quests} />
+            </S.TooltipWrapper>
+          </>
+        )}
+      </S.Body>
 
-        <SpecialTags character={characterData} />
-      </S.Footer>
+      <SpecialTags character={characterData} />
     </S.Wrapper>
   )
 }

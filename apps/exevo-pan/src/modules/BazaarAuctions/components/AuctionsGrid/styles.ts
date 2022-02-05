@@ -89,18 +89,6 @@ export const Grid = styled.div`
 
 export const CharacterCard = styled(BaseCharacterCard)`
   height: 100%;
-
-  @media (max-width: 767px) {
-    animation: fadeIn 0.2s ease-out;
-    @keyframes fadeIn {
-      0% {
-        opacity: 0;
-      }
-      100% {
-        opacity: 1;
-      }
-    }
-  }
 `
 
 export const EmptyState = styled(BaseEmptyState)`

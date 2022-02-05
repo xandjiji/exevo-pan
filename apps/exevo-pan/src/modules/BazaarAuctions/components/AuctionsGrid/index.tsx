@@ -1,7 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { Fragment, useState, useCallback, useRef, useEffect } from 'react'
 import { Ads } from 'templates'
-import { LazyRender } from 'components/Atoms'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
@@ -110,22 +109,17 @@ const AuctionsGrid = (): JSX.Element => {
         <S.Grid id="character-grid">
           {shouldDisplayHighlightedAuctions &&
             highlightedAuctions.map((auction) => (
-              <LazyRender
+              <S.CharacterCard
                 key={`${auction.id}-highlighted`}
-                mediaQuery="(min-width: 768px)"
-                estimatedHeight={ESTIMATED_HEIGHT}
-              >
-                <S.CharacterCard characterData={auction} highlighted />
-              </LazyRender>
+                characterData={auction}
+                highlighted
+                lazyRender
+              />
             ))}
           {page.map((auction, index) => (
             <Fragment key={auction.id}>
-              <LazyRender
-                mediaQuery="(min-width: 768px)"
-                estimatedHeight={ESTIMATED_HEIGHT}
-              >
-                <S.CharacterCard characterData={auction} />
-              </LazyRender>
+              <S.CharacterCard lazyRender characterData={auction} />
+
               {(index + currentVisibleHighlighteds + 1) % 3 === 0 && (
                 <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
               )}
