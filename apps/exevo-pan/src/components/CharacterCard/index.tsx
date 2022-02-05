@@ -1,9 +1,9 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useRef } from 'react'
+import { memo, useState, useEffect, useRef, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { useOnScreen } from 'hooks'
-import { formatNumberWithCommas } from 'utils'
+import { formatNumberWithCommas, debounce } from 'utils'
 import { routes } from 'Constants'
 import CharacterMiniCard from '../CharacterMiniCard'
 import {
@@ -20,6 +20,8 @@ import * as S from './styles'
 import { CharacterCardProps } from './types'
 
 const FIXED_BODY_HEIGHT = 375
+const UPDATE_SCREEN_DELAY = 200
+const LAZY_LOAD_OVERSCAN = '270px'
 
 const CharacterCard = ({
   characterData,
@@ -63,9 +65,23 @@ const CharacterCard = ({
   }
 
   const ref = useRef<HTMLDivElement>()
-  const onScreen = useOnScreen(ref)
+  const onScreen = useOnScreen(ref, LAZY_LOAD_OVERSCAN)
 
-  const shouldRenderBody = !lazyRender || onScreen
+  const [shouldRender, setShouldRender] = useState(true)
+
+  const debouncedSetRender = useMemo(
+    () =>
+      debounce((value: boolean) => {
+        setShouldRender(value)
+      }, UPDATE_SCREEN_DELAY),
+    [],
+  )
+
+  useEffect(() => {
+    debouncedSetRender(onScreen)
+  }, [onScreen])
+
+  const shouldRenderBody = !lazyRender || shouldRender
 
   return (
     <S.Wrapper
