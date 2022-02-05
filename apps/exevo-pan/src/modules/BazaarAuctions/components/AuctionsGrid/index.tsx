@@ -9,6 +9,7 @@ import SortingDialog from './SortingDialog'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
+const ESTIMATED_HEIGHT = 479
 
 const AuctionsGrid = (): JSX.Element => {
   const {
@@ -120,7 +121,7 @@ const AuctionsGrid = (): JSX.Element => {
               <S.CharacterCard lazyRender characterData={auction} />
 
               {(index + currentVisibleHighlighteds + 1) % 3 === 0 && (
-                <Ads.CharacterCard />
+                <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
               )}
             </Fragment>
           ))}

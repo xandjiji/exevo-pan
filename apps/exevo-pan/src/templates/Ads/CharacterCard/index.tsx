@@ -1,10 +1,12 @@
 import { useEffect } from 'react'
 import { google } from 'Constants'
 import * as S from './styles'
+import { CharacterCardProps } from './types'
 
-const CharacterCard = (
-  props: React.HTMLAttributes<HTMLDivElement>,
-): JSX.Element => {
+const CharacterCard = ({
+  height,
+  ...props
+}: CharacterCardProps): JSX.Element => {
   useEffect(() => {
     try {
       ;(window as any).adsbygoogle = (window as any).adsbygoogle || []
@@ -15,12 +17,16 @@ const CharacterCard = (
   }, [])
 
   return (
-    <S.Wrapper {...props} aria-hidden>
+    <S.Wrapper {...props} estimatedHeight={height} aria-hidden>
       <ins
         className="adsbygoogle"
+        style={{
+          display: 'block',
+          width: 320,
+          height,
+        }}
         data-ad-client={google.ADSENSE_ID}
         data-ad-slot="6250183199"
-        data-ad-format="auto"
       />
     </S.Wrapper>
   )
