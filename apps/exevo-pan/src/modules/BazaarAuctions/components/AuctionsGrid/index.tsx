@@ -113,11 +113,12 @@ const AuctionsGrid = (): JSX.Element => {
                 key={`${auction.id}-highlighted`}
                 characterData={auction}
                 highlighted
+                lazyRender
               />
             ))}
           {page.map((auction, index) => (
             <Fragment key={auction.id}>
-              <S.CharacterCard characterData={auction} />
+              <S.CharacterCard lazyRender characterData={auction} />
 
               {(index + currentVisibleHighlighteds + 1) % 3 === 0 && (
                 <Ads.CharacterCard height={ESTIMATED_HEIGHT} />

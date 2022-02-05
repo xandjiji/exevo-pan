@@ -115,7 +115,7 @@ export const TibiaCoinIcon = styled(Image).attrs({
   transform: translateY(1px);
 `
 
-export const Footer = styled.div`
+export const TooltipWrapper = styled.div`
   padding-top: 12px;
   border-top: solid 1px var(--separator);
 
@@ -126,4 +126,7 @@ export const Footer = styled.div`
   > * {
     width: fit-content;
   }
+`
+export const Body = styled.div`
+  margin-bottom: 12px;
 `
