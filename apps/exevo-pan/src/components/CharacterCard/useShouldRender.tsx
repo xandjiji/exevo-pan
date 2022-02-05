@@ -6,8 +6,11 @@ const UPDATE_SCREEN_DELAY = 200
 const LAZY_LOAD_OVERSCAN = '270px'
 
 const useShouldRender = (
+  isLazy: boolean,
   ref: React.MutableRefObject<HTMLDivElement | undefined>,
 ): boolean => {
+  if (!isLazy) return true
+
   const onScreen = useOnScreen(ref, LAZY_LOAD_OVERSCAN)
 
   const [shouldRender, setShouldRender] = useState(true)

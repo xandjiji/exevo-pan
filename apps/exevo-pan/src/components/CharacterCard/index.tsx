@@ -63,9 +63,7 @@ const CharacterCard = ({
   }
 
   const ref = useRef<HTMLDivElement>()
-  const shouldRender = useShouldRender(ref)
-
-  const shouldRenderBody = !lazyRender || shouldRender
+  const shouldRenderBody = useShouldRender(lazyRender, ref)
 
   return (
     <S.Wrapper
