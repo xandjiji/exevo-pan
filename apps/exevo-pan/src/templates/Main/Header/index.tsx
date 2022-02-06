@@ -56,7 +56,13 @@ const Header = ({
             <S.MenuIcon />
           </S.MenuButton>
           <NextLink href={routes.HOME}>
-            <a>
+            <a
+              aria-label={
+                heading[pathname]
+                  ? common.Header.h1[heading[pathname]]
+                  : 'Exevo Pan'
+              }
+            >
               <S.LogoWrapper>
                 {pageTitle && <S.H1>{pageTitle}</S.H1>}
                 <S.ExevoPanLogo
