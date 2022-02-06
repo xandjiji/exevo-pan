@@ -14,7 +14,9 @@ describe('<Newsletter />', () => {
     } as Response)
   })
 
-  test('should display success state correctly', async () => {
+  test.todo('should make a resquest with the user data')
+
+  test('should display success state', async () => {
     renderWithProviders(<Newsletter />)
 
     userEvent.type(screen.getByLabelText('Email'), 'my@email.com')
@@ -27,5 +29,20 @@ describe('<Newsletter />', () => {
     })
   })
 
-  test.todo('should display error state correctly')
+  test('should display a generic error state', async () => {
+    mockedFetch.mockRejectedValue({
+      response: { json: async () => ({ message: 'ops!' }) },
+    })
+
+    renderWithProviders(<Newsletter />)
+
+    userEvent.type(screen.getByLabelText('Email'), 'my@email.com')
+    userEvent.click(screen.getByRole('button', { name: /sign up/i }))
+
+    expect(screen.getByRole('alert')).toBeInTheDocument()
+
+    await waitFor(() => {
+      expect(screen.getByText(/something went wrong/i)).toBeInTheDocument()
+    })
+  })
 })
