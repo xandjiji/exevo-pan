@@ -15,7 +15,7 @@ const HorizontalBanner = (
   }, [])
 
   return (
-    <S.Wrapper {...props} aria-hidden>
+    <S.Wrapper {...props}>
       <ins
         className="adsbygoogle"
         style={{ display: 'block' }}
