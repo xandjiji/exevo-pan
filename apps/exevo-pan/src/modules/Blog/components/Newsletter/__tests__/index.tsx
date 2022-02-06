@@ -14,7 +14,17 @@ describe('<Newsletter />', () => {
     } as Response)
   })
 
-  test.todo('should make a resquest with the user data')
+  test('should make a resquest with the user data', () => {
+    renderWithProviders(<Newsletter />)
+
+    userEvent.type(screen.getByLabelText('Email'), 'my@email.com')
+    userEvent.keyboard('{enter}')
+
+    const [[, payload]] = mockedFetch.mock.calls
+    const body = JSON.parse((payload as any).body)
+    expect(body.email).toEqual('my@email.com')
+    expect(body.locale).toEqual('en')
+  })
 
   test('should display success state', async () => {
     renderWithProviders(<Newsletter />)
