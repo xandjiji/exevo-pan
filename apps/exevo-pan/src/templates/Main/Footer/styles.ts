@@ -50,17 +50,7 @@ export const Ul = styled.ul`
 `
 
 export const Li = styled.li`
-  &:not(:last-child)::after {
-    content: '|';
-    margin-left: 12px;
-    font-size: 14px;
-    color: var(--onPrimary);
-    opacity: 0.5;
-  }
-`
-
-export const A = styled.a`
-  && {
+  a {
     font-size: 14px;
     letter-spacing: 0.5px;
     color: var(--onPrimary);
@@ -69,5 +59,13 @@ export const A = styled.a`
     @media (min-width: 768px) {
       font-size: 16px;
     }
+  }
+
+  &:not(:last-child)::after {
+    content: '|';
+    margin-left: 12px;
+    font-size: 14px;
+    color: var(--onPrimary);
+    opacity: 0.5;
   }
 `

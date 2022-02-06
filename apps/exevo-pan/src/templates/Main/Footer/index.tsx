@@ -14,33 +14,29 @@ const Footer = (): JSX.Element => {
         <S.Ul>
           <S.Li>
             <NextLink href={routes.HOME}>
-              <S.A>{common.Header.nav.currentAuctions}</S.A>
+              {common.Header.nav.currentAuctions}
             </NextLink>
           </S.Li>
           <S.Li>
             <NextLink href={routes.BAZAAR_HISTORY}>
-              <S.A>{common.Header.nav.bazaarHistory}</S.A>
+              {common.Header.nav.bazaarHistory}
             </NextLink>
           </S.Li>
           <S.Li>
             <NextLink href={routes.STATISTICS}>
-              <S.A>{common.Header.nav.statistics}</S.A>
+              {common.Header.nav.statistics}
             </NextLink>
           </S.Li>
           <S.Li>
             <NextLink href={routes.ADVERTISE}>
-              <S.A>{common.Header.nav.advertise}</S.A>
+              {common.Header.nav.advertise}
             </NextLink>
           </S.Li>
           <S.Li>
-            <NextLink href={routes.BLOG}>
-              <S.A>{common.Header.nav.blog}</S.A>
-            </NextLink>
+            <NextLink href={routes.BLOG}>{common.Header.nav.blog}</NextLink>
           </S.Li>
           <S.Li>
-            <NextLink href={routes.ABOUT}>
-              <S.A>{common.Header.nav.about}</S.A>
-            </NextLink>
+            <NextLink href={routes.ABOUT}>{common.Header.nav.about}</NextLink>
           </S.Li>
         </S.Ul>
       </S.Nav>
