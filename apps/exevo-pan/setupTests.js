@@ -25,6 +25,14 @@ mockIntersectionObserver.mockReturnValue({
 })
 window.IntersectionObserver = mockIntersectionObserver
 
+const mockGtag = jest.fn()
+mockGtag.mockReturnValue({
+  pageView: jest.fn(),
+  blogPostView: jest.fn(),
+  filterUsed: jest.fn(),
+})
+window.gtag = mockGtag
+
 jest.mock('hooks/useOnScreen', () => jest.fn().mockReturnValue(true))
 
 expect.extend(toHaveNoViolations)
