@@ -74,5 +74,45 @@ describe('<Home />', () => {
     }
   })
 
-  test.todo('selected tags should be active')
+  test('selected tags should be active', () => {
+    const { page, pageIndex } = randomPaginatedPosts()
+    renderWithProviders(<Home initialIndex={pageIndex} initialPosts={page} />)
+
+    const accordionButton = screen.getByRole('heading', {
+      name: 'Filter posts',
+    })
+
+    userEvent.click(accordionButton)
+
+    const tagState = {
+      News: false,
+      Article: false,
+      Tutorial: false,
+      Tips: false,
+    }
+
+    const toggleAndAssert = (name: keyof typeof tagState) => {
+      userEvent.click(screen.getByRole('switch', { name }))
+      tagState[name] = !tagState[name]
+
+      Object.keys(tagState).forEach((key) => {
+        const tagName = key as keyof typeof tagState
+
+        const currentTag = screen.getByRole('switch', { name: tagName })
+        if (tagState[tagName]) {
+          expect(currentTag).toBeChecked()
+        } else {
+          expect(currentTag).not.toBeChecked()
+        }
+      })
+    }
+
+    toggleAndAssert('News')
+    toggleAndAssert('Tutorial')
+    toggleAndAssert('Tips')
+    toggleAndAssert('Tutorial')
+    toggleAndAssert('Article')
+    toggleAndAssert('News')
+    toggleAndAssert('Tutorial')
+  })
 })
