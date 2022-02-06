@@ -40,6 +40,10 @@ const Header = ({
 
   const shouldMenuOverlap = menuOpen || languageOpen
 
+  const accessibleLogoName = heading[pathname]
+    ? common.Header.h1[heading[pathname]]
+    : 'Exevo Pan'
+
   return (
     <>
       <S.Wrapper data-active={shouldMenuOverlap} {...props}>
@@ -56,23 +60,13 @@ const Header = ({
             <S.MenuIcon />
           </S.MenuButton>
           <NextLink href={routes.HOME}>
-            <a
-              aria-label={
-                heading[pathname]
-                  ? common.Header.h1[heading[pathname]]
-                  : 'Exevo Pan'
-              }
-            >
+            <a aria-label={accessibleLogoName}>
               <S.LogoWrapper>
                 {pageTitle && <S.H1>{pageTitle}</S.H1>}
                 <S.ExevoPanLogo
                   unoptimized
                   aria-label={common.Header.logoLabel}
-                  alt={
-                    heading[pathname]
-                      ? common.Header.h1[heading[pathname]]
-                      : 'Exevo Pan'
-                  }
+                  alt={accessibleLogoName}
                 />
               </S.LogoWrapper>
             </a>
