@@ -5,7 +5,12 @@ import CharacterMiniCard from '..'
 
 describe('<CharacterMiniCard />', () => {
   test('should render all info correctly', () => {
-    renderWithProviders(<CharacterMiniCard characterData={mockCharacterData} />)
+    renderWithProviders(
+      <CharacterMiniCard
+        linkUrl="character.html"
+        characterData={mockCharacterData}
+      />,
+    )
     const { name, level, vocation } = mockCharacterData
 
     expect(screen.getByText(name)).toBeInTheDocument()
@@ -15,7 +20,11 @@ describe('<CharacterMiniCard />', () => {
 
   test('should render with server data', () => {
     renderWithProviders(
-      <CharacterMiniCard characterData={mockCharacterData} displayServer />,
+      <CharacterMiniCard
+        linkUrl="character.html"
+        characterData={mockCharacterData}
+        displayServer
+      />,
     )
     const { name, level, vocation, world } = mockCharacterData
 
@@ -28,7 +37,11 @@ describe('<CharacterMiniCard />', () => {
 
   test('should render with link', () => {
     renderWithProviders(
-      <CharacterMiniCard characterData={mockCharacterData} displayLink />,
+      <CharacterMiniCard
+        linkUrl="character.html"
+        characterData={mockCharacterData}
+        displayLink
+      />,
     )
 
     expect(
@@ -39,6 +52,7 @@ describe('<CharacterMiniCard />', () => {
   test('should render forced subtitle', () => {
     renderWithProviders(
       <CharacterMiniCard
+        linkUrl="character.html"
         characterData={mockCharacterData}
         forceSubtitle="This is a forced subtitle"
       />,
