@@ -101,7 +101,7 @@ export const MenuButton = styled.button`
   }
 `
 
-export const LogoWrapper = styled.a`
+export const LogoWrapper = styled.div`
   display: none;
 
   @media (min-width: 768px) {
