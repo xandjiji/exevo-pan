@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
@@ -55,18 +56,20 @@ const Header = ({
             <S.MenuIcon />
           </S.MenuButton>
           <NextLink href={routes.HOME}>
-            <S.LogoWrapper>
-              {pageTitle && <S.H1>{pageTitle}</S.H1>}
-              <S.ExevoPanLogo
-                unoptimized
-                aria-label={common.Header.logoLabel}
-                alt={
-                  heading[pathname]
-                    ? common.Header.h1[heading[pathname]]
-                    : 'Exevo Pan'
-                }
-              />
-            </S.LogoWrapper>
+            <a>
+              <S.LogoWrapper>
+                {pageTitle && <S.H1>{pageTitle}</S.H1>}
+                <S.ExevoPanLogo
+                  unoptimized
+                  aria-label={common.Header.logoLabel}
+                  alt={
+                    heading[pathname]
+                      ? common.Header.h1[heading[pathname]]
+                      : 'Exevo Pan'
+                  }
+                />
+              </S.LogoWrapper>
+            </a>
           </NextLink>
           <S.Ul aria-expanded={menuOpen}>
             {NavItems.map(({ title, href, exact, icon }) => (
