@@ -1,10 +1,16 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import Home from '..'
 import { randomPaginatedPosts } from './mock'
 
 global.fetch = jest.fn()
 const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+
+const getLastBody = (mockedFn: typeof mockedFetch): BlogFilterBodyPayload => {
+  const [, args] = mockedFn.mock.calls.shift()!
+  return JSON.parse((args as any).body)
+}
 
 describe('<Home />', () => {
   beforeEach(() => {
@@ -25,7 +31,48 @@ describe('<Home />', () => {
     })
   })
 
-  test.todo('selecting filters should filter posts')
+  test('selecting filters should filter posts', () => {
+    const { page, pageIndex } = randomPaginatedPosts()
+    renderWithProviders(<Home initialIndex={pageIndex} initialPosts={page} />)
+
+    const accordionButton = screen.getByRole('heading', {
+      name: 'Filter posts',
+    })
+
+    userEvent.click(accordionButton)
+    const mostRecentToggle = screen.getByRole('switch', { name: 'Most recent' })
+    const searchInput = screen.getByPlaceholderText('Search for posts')
+    const newsTag = screen.getByRole('switch', { name: 'News' })
+
+    expect(mostRecentToggle).toBeChecked()
+    userEvent.click(mostRecentToggle)
+    expect(mostRecentToggle).not.toBeChecked()
+
+    {
+      const { sortOptions } = getLastBody(mockedFetch)
+      expect(sortOptions.descendingOrder).toEqual(false)
+    }
+
+    userEvent.type(searchInput, 'a')
+    expect(searchInput).toHaveValue('a')
+
+    {
+      const { sortOptions, filterOptions } = getLastBody(mockedFetch)
+      expect(sortOptions.descendingOrder).toEqual(false)
+      expect(filterOptions.queryString).toEqual('a')
+    }
+
+    expect(newsTag).not.toBeChecked()
+    userEvent.click(newsTag)
+    expect(newsTag).toBeChecked()
+
+    {
+      const { sortOptions, filterOptions } = getLastBody(mockedFetch)
+      expect(sortOptions.descendingOrder).toEqual(false)
+      expect(filterOptions.queryString).toEqual('a')
+      expect(filterOptions.tags).toEqual(['news'])
+    }
+  })
 
   test.todo('selected tags should be active')
 })
