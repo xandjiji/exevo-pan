@@ -5,6 +5,7 @@ import {
   useEffect,
   useCallback,
   useMemo,
+  useRef,
 } from 'react'
 import { useRouter } from 'next/router'
 import {
@@ -51,18 +52,26 @@ export const CurrentSectionProvider = ({
     [],
   )
 
-  const currentSection: Section | null = useMemo(() => {
-    let lowestOffsetSection: Section | null = null
+  const lastSectionRef = useRef<Section | undefined>()
+  const currentSection: Section | undefined = useMemo(() => {
+    let lowestOffsetSection: Section | undefined
 
-    currentSections
-      .filter(({ status }) => status)
-      .forEach((section) => {
-        if (!lowestOffsetSection) {
-          lowestOffsetSection = section
-        } else if (section.offset < lowestOffsetSection.offset) {
-          lowestOffsetSection = section
-        }
-      })
+    const activeSections = currentSections.filter(({ status }) => status)
+    const noActiveSections = activeSections.length === 0
+
+    if (noActiveSections) {
+      return lastSectionRef.current
+    }
+
+    activeSections.forEach((section) => {
+      if (!lowestOffsetSection) {
+        lowestOffsetSection = section
+      } else if (section.offset < lowestOffsetSection.offset) {
+        lowestOffsetSection = section
+      }
+    })
+
+    lastSectionRef.current = lowestOffsetSection
     return lowestOffsetSection
   }, [currentSections])
 
