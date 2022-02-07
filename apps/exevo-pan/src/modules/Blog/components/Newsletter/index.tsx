@@ -60,7 +60,8 @@ const Newsletter = (
               onKeyDown={onKeyDown}
               errorMessage={
                 request.status === 'ERROR'
-                  ? blog.Newsletter.message[request.message as string]
+                  ? blog.Newsletter.message[request.message as string] ??
+                    blog.Newsletter.message.generic
                   : undefined
               }
             />

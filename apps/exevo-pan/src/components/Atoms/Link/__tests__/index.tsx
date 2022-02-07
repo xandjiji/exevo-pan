@@ -21,7 +21,7 @@ describe('<Link />', () => {
         </Link>,
       )
 
-      expect(screen.getByRole('none')).toHaveAttribute('aria-current', 'page')
+      expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'page')
     })
 
     test('aria-current should NOT be set if href does NOT matches pathname', () => {
@@ -35,7 +35,7 @@ describe('<Link />', () => {
         </Link>,
       )
 
-      expect(screen.getByRole('none')).not.toHaveAttribute(
+      expect(screen.getByRole('link')).not.toHaveAttribute(
         'aria-current',
         'page',
       )
@@ -52,7 +52,7 @@ describe('<Link />', () => {
         </Link>,
       )
 
-      expect(screen.getByRole('none')).toHaveAttribute('aria-current', 'page')
+      expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'page')
     })
   })
 
@@ -68,7 +68,7 @@ describe('<Link />', () => {
         </Link>,
       )
 
-      expect(screen.getByRole('none')).toHaveAttribute('aria-current', 'page')
+      expect(screen.getByRole('link')).toHaveAttribute('aria-current', 'page')
     })
 
     test('aria-current should NOT be set if href does NOT matches pathname', () => {
@@ -82,7 +82,7 @@ describe('<Link />', () => {
         </Link>,
       )
 
-      expect(screen.getByRole('none')).not.toHaveAttribute(
+      expect(screen.getByRole('link')).not.toHaveAttribute(
         'aria-current',
         'page',
       )
@@ -99,7 +99,7 @@ describe('<Link />', () => {
         </Link>,
       )
 
-      expect(screen.getByRole('none')).not.toHaveAttribute(
+      expect(screen.getByRole('link')).not.toHaveAttribute(
         'aria-current',
         'page',
       )
