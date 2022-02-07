@@ -17,6 +17,11 @@ Object.defineProperty(window, 'matchMedia', {
   })),
 })
 
+Object.defineProperty(window.Element.prototype, 'scroll', {
+  writable: true,
+  value: jest.fn(),
+})
+
 const mockIntersectionObserver = jest.fn()
 mockIntersectionObserver.mockReturnValue({
   observe: jest.fn(),
