@@ -1,7 +1,8 @@
 import { advertise } from 'locales'
 import { advertising } from 'Constants'
 import { generateQrCode } from '../PaymentDetails/PixPayment/utils'
-import { calculatePrice, sortAndFormatDates } from '../Summary/utils'
+import { sortAndFormatDates } from '../Summary/utils'
+import { calculatePrice } from '../../utils'
 import * as T from './components'
 import { EmailTemplateProps, ThankYouProps, SummaryProps } from './types'
 
@@ -14,12 +15,13 @@ const ThankYouCard = async ({
 }: ThankYouProps): Promise<string> => {
   const dictionary = advertise[locale as keyof typeof advertise]
   const daysAmount = selectedDates.length
+  const { readablePrice } = calculatePrice(selectedDates.length, paymentMethod)
 
   let paymentInfo = ''
   if (paymentMethod === 'TIBIA_COINS') {
     paymentInfo = T.Text(
       `${dictionary.PaymentDetails.CoinsPayment.instruction} ${T.Strong(
-        `${daysAmount * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins`,
+        `${readablePrice} Tibia Coins`,
       )} ${dictionary.PaymentDetails.CoinsPayment.from} ${paymentCharacter} ${
         dictionary.PaymentDetails.CoinsPayment.to
       } ${T.Strong(advertising.BANK_CHARACTER)}`,
@@ -52,6 +54,8 @@ const SummaryCard = ({
   const dictionary = advertise[locale as keyof typeof advertise]
   const daysCount = selectedDates.length
 
+  const { readablePrice } = calculatePrice(daysCount, paymentMethod)
+
   return T.Card(`
     ${T.Title(dictionary.PaymentDetails.Summary.title)}
 
@@ -70,7 +74,7 @@ const SummaryCard = ({
     )}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.durationText)}
 
-    ${T.DetailItem(calculatePrice(daysCount, paymentMethod))}
+    ${T.DetailItem(readablePrice)}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.costText)}
 
     ${T.Small(
