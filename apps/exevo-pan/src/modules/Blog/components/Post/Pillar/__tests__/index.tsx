@@ -30,9 +30,17 @@ const TestComponent = ({ section }: { section: Section }) => {
 }
 
 describe('<Pillar />', () => {
+  test('if no titles available, it should render nothing', () => {
+    const { container } = renderWithProviders(<Pillar titles={[]} />, {
+      wrapper: CurrentSectionProvider as React.ComponentType,
+    })
+
+    expect(container.childElementCount).toEqual(0)
+  })
+
   test('should render every title correctly', () => {
     renderWithProviders(<TestComponent section={{} as Section} />, {
-      wrapper: CurrentSectionProvider,
+      wrapper: CurrentSectionProvider as React.ComponentType,
     })
 
     titles.forEach((title) => {
@@ -46,7 +54,7 @@ describe('<Pillar />', () => {
     const { rerender } = renderWithProviders(
       <TestComponent section={{ ...third, status: true }} />,
       {
-        wrapper: CurrentSectionProvider,
+        wrapper: CurrentSectionProvider as React.ComponentType,
       },
     )
     const setter = screen.getByRole('button')
@@ -91,5 +99,44 @@ describe('<Pillar />', () => {
     expect(firstElement).toHaveAttribute('aria-current', 'step')
     expect(secondElement).not.toHaveAttribute('aria-current', 'step')
     expect(thirdElement).not.toHaveAttribute('aria-current', 'step')
+  })
+
+  test('if no visible section available, preserver the last highlighted section', () => {
+    const [first, second, third] = sections
+
+    const { rerender } = renderWithProviders(
+      <TestComponent section={{ ...second, status: true }} />,
+      {
+        wrapper: CurrentSectionProvider as React.ComponentType,
+      },
+    )
+    const setter = screen.getByRole('button')
+
+    const [firstElement, secondElement, thirdElement] =
+      screen.getAllByRole('listitem')
+
+    expect(firstElement).not.toHaveAttribute('aria-current', 'step')
+    expect(secondElement).not.toHaveAttribute('aria-current', 'step')
+    expect(thirdElement).not.toHaveAttribute('aria-current', 'step')
+
+    userEvent.click(setter)
+
+    expect(firstElement).not.toHaveAttribute('aria-current', 'step')
+    expect(secondElement).toHaveAttribute('aria-current', 'step')
+    expect(thirdElement).not.toHaveAttribute('aria-current', 'step')
+
+    rerender(<TestComponent section={{ ...second, status: false }} />)
+    userEvent.click(setter)
+
+    expect(firstElement).not.toHaveAttribute('aria-current', 'step')
+    expect(secondElement).toHaveAttribute('aria-current', 'step')
+    expect(thirdElement).not.toHaveAttribute('aria-current', 'step')
+
+    rerender(<TestComponent section={{ ...third, status: true }} />)
+    userEvent.click(setter)
+
+    expect(firstElement).not.toHaveAttribute('aria-current', 'step')
+    expect(secondElement).not.toHaveAttribute('aria-current', 'step')
+    expect(thirdElement).toHaveAttribute('aria-current', 'step')
   })
 })

@@ -52,9 +52,9 @@ export const CurrentSectionProvider = ({
     [],
   )
 
-  const lastSectionRef = useRef<Section | undefined>()
-  const currentSection: Section | undefined = useMemo(() => {
-    let lowestOffsetSection: Section | undefined
+  const lastSectionRef = useRef<Section | null>(null)
+  const currentSection: Section | null = useMemo(() => {
+    let lowestOffsetSection: Section | null = null
 
     const activeSections = currentSections.filter(({ status }) => status)
     const noActiveSections = activeSections.length === 0
