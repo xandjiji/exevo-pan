@@ -28,11 +28,11 @@ const Discount = (): JSX.Element => {
     <S.Wrapper>
       <S.Title>
         <S.OfferIcon />
-        {advertise.title}
+        {advertise.Discount.title}
       </S.Title>
 
       <S.Group>
-        <S.Small>{advertise.description}</S.Small>
+        <S.Small>{advertise.Discount.description}</S.Small>
         <S.OfferWrapper>
           <S.Strong>{readableOffer}</S.Strong>{' '}
           <S.Striked aria-hidden={noDiscount}>
