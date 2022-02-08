@@ -17,7 +17,7 @@ const Discount = (): JSX.Element => {
   )
 
   const discountTier = getDiscountTier(daysCount)
-  const noDiscount = daysCount === 0
+  const noDiscount = daysCount <= 1
 
   return (
     <S.Wrapper>
@@ -40,11 +40,15 @@ const Discount = (): JSX.Element => {
       </S.Group>
 
       <S.Group>
-        <S.Small aria-hidden={noDiscount}>Tier {discountTier}</S.Small>
+        <S.Small>Tier {discountTier}</S.Small>
         <S.Bar>
           <S.TierSeparator style={{ left: '60%' }} />
           <S.TierSeparator style={{ left: '90%' }} />
-          <S.Fill data-tier={discountTier} data-progress={daysCount} />
+          <S.Fill
+            data-tier={discountTier}
+            data-progress={daysCount}
+            data-empty={daysCount === 0}
+          />
         </S.Bar>
       </S.Group>
     </S.Wrapper>

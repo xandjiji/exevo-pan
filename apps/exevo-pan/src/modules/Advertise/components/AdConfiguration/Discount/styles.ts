@@ -103,6 +103,10 @@ export const Fill = styled.div`
     background-color: var(--green);
   }
 
+  &[data-empty='true'] {
+    width: 0%;
+  }
+
   ${Smooth}
 `
 
