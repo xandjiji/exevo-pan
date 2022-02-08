@@ -1,6 +1,5 @@
 import { advertising } from 'Constants'
-import { readablePrice } from './utils'
-import { DiscountParameters, AdvertisePrice, AdvertiseOffer } from './types'
+import { DiscountParameters, AdvertiseOffer } from './types'
 
 const { TIBIA_COINS_ADVERTISE, BRL_ADVERTISE } = advertising
 
@@ -25,7 +24,7 @@ const applyDiscount = ({ base, days }: DiscountParameters): number => {
   return base * days
 }
 
-const calculateOffer = ({ base, days }: DiscountParameters): AdvertisePrice => {
+const calculateOffer = ({ base, days }: DiscountParameters): AdvertiseOffer => {
   const basePrice = base * days
 
   const discountedPrice = applyDiscount({ base, days })
@@ -42,16 +41,8 @@ const calculateOffer = ({ base, days }: DiscountParameters): AdvertisePrice => {
 export const calculatePrice = (
   days: number,
   paymentMethod: PaymentMethods,
-): AdvertiseOffer => {
-  const offer = calculateOffer({
+): AdvertiseOffer =>
+  calculateOffer({
     base: paymentMethod === 'PIX' ? BRL_ADVERTISE : TIBIA_COINS_ADVERTISE,
     days,
   })
-  const { totalPrice, saved } = offer
-
-  return {
-    ...offer,
-    readablePrice: readablePrice(totalPrice, paymentMethod),
-    readableSaved: readablePrice(saved, paymentMethod),
-  }
-}

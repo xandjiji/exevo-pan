@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useForm } from '../../contexts/Form'
 import { sortAndFormatDates } from './utils'
-import { calculatePrice } from '../../utils'
+import { calculatePrice, readablePrice } from '../../utils'
 import * as S from './styles'
 
 const Summary = (): JSX.Element => {
@@ -16,8 +16,6 @@ const Summary = (): JSX.Element => {
     () => sortAndFormatDates(selectedDates),
     [selectedDates],
   )
-
-  const { readablePrice } = calculatePrice(selectedDates.length, paymentMethod)
 
   return (
     <S.Wrapper>
@@ -72,7 +70,11 @@ const Summary = (): JSX.Element => {
       </S.GroupItem>
 
       <S.GroupItem>
-        <S.Strong>{readablePrice}</S.Strong>
+        <S.Strong>
+          {readablePrice.full[paymentMethod](
+            calculatePrice(selectedDates.length, paymentMethod).totalPrice,
+          )}
+        </S.Strong>
         <S.SubText>{advertise.PaymentDetails.Summary.costText}</S.SubText>
       </S.GroupItem>
     </S.Wrapper>

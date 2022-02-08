@@ -1,12 +1,7 @@
-export interface AdvertisePrice {
+export interface AdvertiseOffer {
   totalPrice: number
   saved: number
   offPercentage: string
-}
-
-export interface AdvertiseOffer extends AdvertisePrice {
-  readablePrice: string
-  readableSaved: string
 }
 
 export type DiscountParameters = {
