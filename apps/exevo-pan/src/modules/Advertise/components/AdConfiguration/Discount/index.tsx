@@ -17,6 +17,7 @@ const Discount = (): JSX.Element => {
   )
 
   const discountTier = getDiscountTier(daysCount)
+  const noDiscount = daysCount === 0
 
   return (
     <S.Wrapper>
@@ -29,13 +30,17 @@ const Discount = (): JSX.Element => {
         <S.Small>Aproveite nossos descontos progressivos!</S.Small>
         <S.OfferWrapper>
           <S.Strong>{readableOffer}</S.Strong>{' '}
-          <S.Striked>{readableOriginalPrice}</S.Striked>{' '}
-          <S.DiscountTag>-{offPercentage}</S.DiscountTag>
+          <S.Striked aria-hidden={noDiscount}>
+            {readableOriginalPrice}
+          </S.Striked>{' '}
+          <S.DiscountTag aria-hidden={noDiscount}>
+            -{offPercentage}
+          </S.DiscountTag>
         </S.OfferWrapper>
       </S.Group>
 
       <S.Group>
-        <S.Small>Tier {discountTier}</S.Small>
+        <S.Small aria-hidden={noDiscount}>Tier {discountTier}</S.Small>
         <S.Bar>
           <S.TierSeparator style={{ left: '60%' }} />
           <S.TierSeparator style={{ left: '90%' }} />

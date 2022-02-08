@@ -30,11 +30,12 @@ const calculateOffer = ({ base, days }: DiscountParameters): AdvertiseOffer => {
   const discountedPrice = applyDiscount({ base, days })
 
   const saved = basePrice - discountedPrice
+  const offPercentage = Math.round((saved / basePrice) * 100)
 
   return {
     totalPrice: discountedPrice,
     saved: basePrice - discountedPrice,
-    offPercentage: `${Math.round((saved / basePrice) * 100)}%`,
+    offPercentage: `${Number.isNaN(offPercentage) ? 0 : offPercentage}%`,
   }
 }
 

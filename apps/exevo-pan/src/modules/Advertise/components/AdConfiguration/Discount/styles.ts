@@ -9,6 +9,10 @@ export const Wrapper = styled.div`
   padding: 16px;
   display: grid;
   grid-gap: 16px;
+
+  *[aria-hidden='true'] {
+    opacity: 0;
+  }
 `
 
 export const Title = styled.h2`
@@ -34,6 +38,7 @@ export const Group = styled.div`
 
 export const Small = styled.small`
   font-weight: 300;
+  ${Smooth}
 `
 
 export const Strong = styled.strong`
@@ -43,6 +48,7 @@ export const Strong = styled.strong`
 
 export const Striked = styled.del`
   font-size: 14px;
+  ${Smooth}
 `
 
 export const OfferWrapper = styled.div`
@@ -62,6 +68,7 @@ export const DiscountTag = styled.span`
   color: var(--onPrimary);
 
   ${Shadow}
+  ${Smooth}
 `
 
 export const Bar = styled.div`
