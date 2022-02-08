@@ -22,6 +22,10 @@ export default {
     paginatorNoItems: 'Sin subasta',
     emptyStateText: 'No se encontraron subastas',
   },
+  Discount: {
+    title: 'Discounts',
+    description: 'Check out our progressive discounts!',
+  },
   Checkout: {
     title: 'Sus datos',
     emailPlaceholder: 'seu@email.com.br',

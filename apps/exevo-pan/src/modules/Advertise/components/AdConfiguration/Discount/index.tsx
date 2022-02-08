@@ -1,8 +1,13 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useForm } from '../../../contexts/Form'
 import { calculatePrice, readablePrice, getDiscountTier } from '../../../utils'
 import * as S from './styles'
 
 const Discount = (): JSX.Element => {
+  const {
+    translations: { advertise },
+  } = useTranslations()
+
   const { selectedDates, paymentMethod } = useForm()
   const daysCount = selectedDates.length
 
@@ -23,11 +28,11 @@ const Discount = (): JSX.Element => {
     <S.Wrapper>
       <S.Title>
         <S.OfferIcon />
-        Desconto
+        {advertise.title}
       </S.Title>
 
       <S.Group>
-        <S.Small>Aproveite nossos descontos progressivos!</S.Small>
+        <S.Small>{advertise.description}</S.Small>
         <S.OfferWrapper>
           <S.Strong>{readableOffer}</S.Strong>{' '}
           <S.Striked aria-hidden={noDiscount}>

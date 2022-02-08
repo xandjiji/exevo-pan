@@ -22,6 +22,10 @@ export default {
     paginatorNoItems: 'Nenhum leilão',
     emptyStateText: 'Nenhum leilão encontrado',
   },
+  Discount: {
+    title: 'Descontos',
+    description: 'Aproveite nossos descontos progressivos!',
+  },
   Checkout: {
     title: 'Seus dados',
     emailPlaceholder: 'seu@email.com.br',
