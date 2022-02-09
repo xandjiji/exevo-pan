@@ -24,7 +24,7 @@ const RangeDatePicker = (): JSX.Element => {
     [selectedCharacter],
   )
   const partitionedDates = useMemo(() => partitionByMonths(days), [days])
-  const firstDay = days[0]
+  const [firstDay] = days
 
   return (
     <>
@@ -41,19 +41,24 @@ const RangeDatePicker = (): JSX.Element => {
             step={-1}
           />
 
-          {partitionedDates.map((monthDates, index) => {
-            const monthDatesElements = monthDates.map((date) => (
-              <S.Day
-                key={date}
-                aria-label={date}
-                aria-selected={selectedDates.includes(date)}
-                onClick={() => dispatch({ type: 'TOGGLE_DATE', date })}
-              >
-                {new Date(date).getDate()}
-              </S.Day>
-            ))
+          {partitionedDates.map((monthDates, monthIndex) => {
+            const monthDatesElements = monthDates.map((date, dayIndex) => {
+              const isToday = dayIndex + monthIndex === 0
 
-            const hasNextMonth = index + 1 < partitionedDates.length
+              return (
+                <S.Day
+                  key={date}
+                  aria-label={date}
+                  aria-selected={selectedDates.includes(date)}
+                  data-today={isToday}
+                  onClick={() => dispatch({ type: 'TOGGLE_DATE', date })}
+                >
+                  {new Date(date).getDate()}
+                </S.Day>
+              )
+            })
+
+            const hasNextMonth = monthIndex + 1 < partitionedDates.length
             const currentMonthLastDay = monthDates[monthDates.length - 1]
             const currentMonthLastWeekday =
               getWeekdayNumber(currentMonthLastDay)
