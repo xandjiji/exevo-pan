@@ -23,12 +23,12 @@ export default {
     emptyStateText: 'No se encontraron subastas',
   },
   Discount: {
-    title: 'Discounts',
-    description: 'Check out our progressive discounts!',
+    title: 'Descuentos',
+    description: '¡Aprovecha nuestros descuentos progresivos!',
   },
   Checkout: {
     title: 'Sus datos',
-    emailPlaceholder: 'seu@email.com.br',
+    emailPlaceholder: 'tu@email.com',
     emailInvalidMessage: 'Email inválido',
     paymentCharacterLabel: 'Personaje que enviará las coins',
     paymentCharacterInvalidMessage: 'Personaje no existe',
@@ -45,7 +45,7 @@ export default {
     title: '¡Tu compra ha sido enviada!',
     emailText1: 'Se ha enviado un email a',
     emailText2:
-      'que contiene los detalles de su pedido. Por favor mira en la caja de spam',
+      'que contiene los detalles de su pedido. Por favor mira en la carpeta de spam',
     emojiLabel: 'Cara sonriente',
     smallDisclaimer:
       'Si la compra no se puede completar, se reembolsará su dinero.',
@@ -66,8 +66,8 @@ export default {
       day: 'día',
       days: 'dias',
       durationText: 'Duración del anuncio',
-      costText: 'Costo total',
-      highlightedDays: 'Días de destaque:',
+      costText: 'Precio total',
+      highlightedDays: 'Días destacados:',
     },
   },
   EmailTitle: 'Gracias por su pedido!',

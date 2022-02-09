@@ -9,7 +9,7 @@ export default {
   Filters: {
     title: 'Filtrar posts',
     mostRecentLabel: 'Más recientes',
-    searchLabel: 'Pesquisar',
+    searchLabel: 'Buscar',
     searchPlaceholder: 'Buscar publicaciones',
     tagsLabel: 'Tags',
   },
@@ -17,10 +17,10 @@ export default {
     emptyMessage: 'No se encontró ninguna publicación',
   },
   Newsletter: {
-    getOur: '¡Firma nuestra',
+    getOur: '¡Subscribete a nuestra',
     newsletter: 'newsletter',
     for: 'y recibe todo el contenido nuevo!',
-    emailPlaceholder: 'seu@email.com.br',
+    emailPlaceholder: 'tu@email.com',
     buttonText: 'Subscribirse',
     message: {
       invalidEmail: 'Email inválido',

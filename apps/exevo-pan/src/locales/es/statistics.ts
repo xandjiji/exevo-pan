@@ -1,14 +1,14 @@
 export default {
   Meta: {
     Statistics: {
-      title: 'Estatísticas gerais',
+      title: 'Estadísticas generales',
       description:
-        'Estatísticas, tendências, análise de dados diários e informações históricas do Char Bazaar do Tibia!',
+        '¡Estadísticas, tendencias, análisis de datos diários y informaciones históricas del Char Bazaar de Tibia!',
     },
     Highscores: {
       title: 'Exevo Pan - Rankings',
       description:
-        'Vea rankings dos chares más caros, top levels e mayores skills del Char Bazaar de Tibia!',
+        'Vea rankings de los charss más caros, top levels y mayores skills del Char Bazaar de Tibia!',
     },
   },
   Header: {
@@ -25,7 +25,7 @@ export default {
     Chart2: {
       totalLabel: 'Ingresos totales de Cipsoft',
       yesterdayLabel: 'Ingresos de ayer',
-      tooltipLabel: 'Ingreso de Cipsoft',
+      tooltipLabel: 'Ingresos de Cipsoft',
     },
     PercentageCard1: {
       title: 'Tasa de éxito de la subasta',

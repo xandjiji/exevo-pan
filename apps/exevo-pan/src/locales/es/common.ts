@@ -2,11 +2,11 @@ export default {
   Header: {
     h1: {
       home: '¡Compra y vende caracteres de Tibia en el Char Bazaar oficial!',
-      bazaarHistory: '¡Explora la historia de Char Bazaar!',
+      bazaarHistory: '¡Explora el histórico del Char Bazaar!',
       statistics:
-        '¡Descubre estadísticas sobre personajes vendidos en Char Bazaar!',
+        '¡Descubre estadísticas sobre personajes vendidos en el Char Bazaar!',
       highscores:
-        'Top levels, top skills y personajes más caros de Char Bazaar!',
+        'Top levels, top skills y personajes más caros del Char Bazaar!',
       about:
         'Acerca del sitio, declaraciones e información de contacto de Exevo Pan.',
       war: '¡Sigue las estadísticas en vivo de la guerra de Libertabra!',
@@ -85,11 +85,11 @@ export default {
     auctionIsOver: 'Subasta finalizada',
     auctionEnded: '¡Subasta cerrada!',
   },
-  RemoveItem: 'Remover el artículo',
+  RemoveItem: 'Eliminar el artículo',
   TibiaCoinsCta: 'Compra Tibia Coins',
   CloseDrawerLabel: 'Cerrar el menú',
   RepoLinkText: 'Ir a este repositorio',
-  MadeBy: 'criado por',
+  MadeBy: 'creado por',
   ClearInputLabel: 'Limpiar el campo',
   WarningLabel: '¡Cuidado!',
   Of: 'de',
@@ -134,7 +134,7 @@ export default {
     BidStatus: 'Oferta actual',
     highlightLabelText: '¡Destaque su subasta!',
     SpecialTags: {
-      manyCharms: 'Muchas charms',
+      manyCharms: 'Muchos charms',
       manyQuests: 'Muchas quests',
       manyMounts: 'Muchas mounts',
       manyStoryCosmetics: 'Muchos cosmeticos comprados',
@@ -149,7 +149,7 @@ export default {
     open: 'Abrir',
     close: 'Cerrar',
   },
-  FooterTitle: 'Exevo Pan - criado por',
+  FooterTitle: 'Exevo Pan - creado por',
   AnchorIconLabel: 'Copiar link',
   CharacterTooltipLabel: 'Ir a la página del personaje',
   Newsticker: 'Artículos recientes',
