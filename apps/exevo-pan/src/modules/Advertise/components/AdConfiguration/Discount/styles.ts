@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { MaterialCard, Shadow, Smooth } from 'styles'
 import OfferSvg from 'assets/svgs/offer.svg'
 
-export const TIER_1_WIDTH = '30%'
+export const TIER_2_WIDTH = '60%'
+export const TIER_3_WIDTH = '90%'
 
 export const Wrapper = styled.div`
   ${MaterialCard}
@@ -73,7 +74,7 @@ export const DiscountTag = styled.span`
 
 export const Bar = styled.div`
   position: relative;
-  width: 200px;
+  max-width: 220px;
   height: 12px;
   border-radius: 3px;
   background-color: var(--separator);
@@ -86,7 +87,7 @@ export const Fill = styled.div`
   background-color: var(--primaryVariant);
 
   &[data-tier='2'] {
-    width: 60%;
+    width: ${TIER_2_WIDTH};
     background-color: var(--primary);
 
     &[data-progress='3'] {

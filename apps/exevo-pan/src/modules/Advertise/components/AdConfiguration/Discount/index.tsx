@@ -47,8 +47,8 @@ const Discount = (): JSX.Element => {
       <S.Group>
         <S.Small>Tier {discountTier}</S.Small>
         <S.Bar>
-          <S.TierSeparator style={{ left: '60%' }} />
-          <S.TierSeparator style={{ left: '90%' }} />
+          <S.TierSeparator style={{ left: S.TIER_2_WIDTH }} />
+          <S.TierSeparator style={{ left: S.TIER_3_WIDTH }} />
           <S.Fill
             data-tier={discountTier}
             data-progress={daysCount}
