@@ -14,7 +14,7 @@ const applyDiscount = ({ base, days }: DiscountParameters): number => {
   const baseDiscount = base / 3
 
   if (discountTier === 3) {
-    return base * days - days * baseDiscount
+    return (base - baseDiscount) * days
   }
 
   if (discountTier === 2) {
