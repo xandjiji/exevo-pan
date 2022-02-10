@@ -1,7 +1,8 @@
 import { advertise } from 'locales'
 import { advertising } from 'Constants'
 import { generateQrCode } from '../PaymentDetails/PixPayment/utils'
-import { calculatePrice, sortAndFormatDates } from '../Summary/utils'
+import { sortAndFormatDates } from '../Summary/utils'
+import { calculatePrice, readablePrice } from '../../utils'
 import * as T from './components'
 import { EmailTemplateProps, ThankYouProps, SummaryProps } from './types'
 
@@ -19,7 +20,9 @@ const ThankYouCard = async ({
   if (paymentMethod === 'TIBIA_COINS') {
     paymentInfo = T.Text(
       `${dictionary.PaymentDetails.CoinsPayment.instruction} ${T.Strong(
-        `${daysAmount * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins`,
+        `${readablePrice.full.TIBIA_COINS(
+          calculatePrice(daysAmount, paymentMethod).totalPrice,
+        )}`,
       )} ${dictionary.PaymentDetails.CoinsPayment.from} ${paymentCharacter} ${
         dictionary.PaymentDetails.CoinsPayment.to
       } ${T.Strong(advertising.BANK_CHARACTER)}`,
@@ -70,7 +73,11 @@ const SummaryCard = ({
     )}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.durationText)}
 
-    ${T.DetailItem(calculatePrice(daysCount, paymentMethod))}
+    ${T.DetailItem(
+      readablePrice.full[paymentMethod](
+        calculatePrice(daysCount, paymentMethod).totalPrice,
+      ),
+    )}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.costText)}
 
     ${T.Small(

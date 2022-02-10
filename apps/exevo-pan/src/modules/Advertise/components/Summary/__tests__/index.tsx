@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
-import { advertising } from 'Constants'
+import { calculatePrice, readablePrice } from '../../../utils'
 import Summary from '..'
 import { mockedFormValues } from './mock'
 
@@ -37,7 +37,9 @@ describe('<Summary />', () => {
     expect(screen.getByText('22/10/2021')).toBeVisible()
 
     expect(
-      screen.getByText(`R$ ${DAYS_COUNT * advertising.BRL_ADVERTISE},00 reais`),
+      screen.getByText(
+        readablePrice.full.PIX(calculatePrice(DAYS_COUNT, 'PIX').totalPrice),
+      ),
     ).toBeInTheDocument()
   })
 })

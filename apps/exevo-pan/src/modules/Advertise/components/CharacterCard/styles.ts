@@ -11,6 +11,8 @@ export const Wrapper = styled.div`
 
   @media (min-width: 768px) {
     padding-top: unset;
+    position: sticky;
+    top: 76px;
   }
 `
 

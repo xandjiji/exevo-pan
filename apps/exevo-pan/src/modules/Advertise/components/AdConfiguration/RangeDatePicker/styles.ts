@@ -31,6 +31,7 @@ export const Day = styled.button`
   padding: 8px 4px;
 
   font-size: 16px;
+  font-weight: 300;
   color: var(--onSurface);
 
   border-radius: 5px;
@@ -48,6 +49,10 @@ export const Day = styled.button`
 
   &[aria-selected='true'] {
     background-color: var(--primaryVariant);
+  }
+
+  &[data-today='true'] {
+    font-weight: 700;
   }
 `
 

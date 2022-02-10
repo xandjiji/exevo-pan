@@ -6,7 +6,7 @@ export default {
   },
   AuctionsGrid: {
     filterButtonLabel: 'Abrir menú de filtros',
-    sortingButtonLabel: 'Definir un criterio de clasificación',
+    sortingButtonLabel: 'Definir un criterio de ordenación',
     filter: 'filtro',
     filters: 'filtros',
     is: 'está',
@@ -15,14 +15,14 @@ export default {
     noItemsPagination: 'Sin personajes',
     filterDrawerLabel: 'Formulario de filtro',
     descendingSwitchLabel: 'Ordenar en orden descendente',
-    descending: 'Decrescente',
+    descending: 'Descendente',
     sortModes: {
       auctionEnd: 'Fin de la subasta',
       level: 'Level',
       price: 'Precio',
-      priceBidded: 'Precio (apenas com oferta)',
+      priceBidded: 'Precio (solo con oferta)',
     },
-    noAuctionFound: 'Desculpa, no se encontró subasta',
+    noAuctionFound: 'Disculpa, no se encontró ninguna subasta',
     changeFilters: 'Cambiar filtros',
   },
   FilterDrawer: {
@@ -42,7 +42,7 @@ export default {
       charms: 'Seleccione charms',
       quests: 'Seleccione quests',
       achievements: 'Seleccione achievements',
-      rareItems: 'Escoge uno item',
+      rareItems: 'Escoge un item',
     },
     tooltips: {
       rareItems:

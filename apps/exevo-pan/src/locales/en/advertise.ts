@@ -22,6 +22,10 @@ export default {
     paginatorNoItems: 'No auctions',
     emptyStateText: 'No auction was found',
   },
+  Discount: {
+    title: 'Discounts',
+    description: 'Check out our progressive discounts!',
+  },
   Checkout: {
     title: 'Your information',
     emailPlaceholder: 'your@email.com',

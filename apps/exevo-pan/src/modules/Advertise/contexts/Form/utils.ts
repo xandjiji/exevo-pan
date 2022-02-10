@@ -1,7 +1,7 @@
 import { getDaysUntilAuctionEnd } from '../../components/AdConfiguration/RangeDatePicker/utils'
 
-const getLastThree = <T>(array: T[]): T[] =>
-  array.slice(Math.max(array.length - 3, 0))
+const getLastItems = <T>(array: T[], amount: number): T[] =>
+  array.slice(Math.max(array.length - amount, 0))
 
 export const getRecommendedDays = (endDate: number): string[] =>
-  getLastThree(getDaysUntilAuctionEnd(endDate))
+  getLastItems(getDaysUntilAuctionEnd(endDate), 2)

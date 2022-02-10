@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { advertising } from 'Constants'
 import { useForm } from '../../../contexts/Form'
+import { calculatePrice, readablePrice } from '../../../utils'
 import * as S from './styles'
 
 const CoinsPayment = (): JSX.Element => {
@@ -15,7 +16,9 @@ const CoinsPayment = (): JSX.Element => {
       <S.Text>
         {advertise.PaymentDetails.CoinsPayment.instruction}{' '}
         <S.Strong>
-          {selectedDates.length * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins
+          {readablePrice.full.TIBIA_COINS(
+            calculatePrice(selectedDates.length, 'TIBIA_COINS').totalPrice,
+          )}
         </S.Strong>{' '}
         {advertise.PaymentDetails.CoinsPayment.from}{' '}
         <S.Strong>{paymentCharacter.value}</S.Strong>{' '}

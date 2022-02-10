@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Shadow } from 'styles'
 import { WrapperProps, ProgressBarProps } from './types'
 
 export const Value = styled.div`
@@ -15,8 +14,6 @@ export const Value = styled.div`
   font-weight: 600;
   transition: all 0.2s ease-out;
   transition-property: background-color, color;
-
-  ${Shadow}
 `
 
 export const ProgressBar = styled.div<ProgressBarProps>`

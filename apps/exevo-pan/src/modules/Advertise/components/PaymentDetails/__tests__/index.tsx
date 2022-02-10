@@ -1,8 +1,8 @@
 import { screen, waitFor } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
-import { advertising } from 'Constants'
 import { useForm } from '../../../contexts/Form'
 import { FormValues } from '../../../contexts/Form/types'
+import { calculatePrice, readablePrice } from '../../../utils'
 import PaymentDetails from '..'
 import { mockedFormValues } from './mock'
 
@@ -33,7 +33,9 @@ describe('<PaymentDetails />', () => {
 
     expect(
       screen.getAllByText(
-        `${DAYS_COUNT * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins`,
+        readablePrice.full.TIBIA_COINS(
+          calculatePrice(DAYS_COUNT, 'TIBIA_COINS').totalPrice,
+        ),
         { exact: false },
       ),
     ).toHaveLength(2)

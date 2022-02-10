@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useForm } from '../../contexts/Form'
-import { calculatePrice, sortAndFormatDates } from './utils'
+import { sortAndFormatDates } from './utils'
+import { calculatePrice, readablePrice } from '../../utils'
 import * as S from './styles'
 
 const Summary = (): JSX.Element => {
@@ -70,7 +71,9 @@ const Summary = (): JSX.Element => {
 
       <S.GroupItem>
         <S.Strong>
-          {calculatePrice(selectedDates.length, paymentMethod)}
+          {readablePrice.full[paymentMethod](
+            calculatePrice(selectedDates.length, paymentMethod).totalPrice,
+          )}
         </S.Strong>
         <S.SubText>{advertise.PaymentDetails.Summary.costText}</S.SubText>
       </S.GroupItem>

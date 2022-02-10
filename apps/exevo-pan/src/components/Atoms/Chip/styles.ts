@@ -1,17 +1,16 @@
 import styled, { css } from 'styled-components'
-import { Shadow, Clickable } from 'styles'
+import { Clickable } from 'styles'
 import { ChipStyleProps } from './types'
 
 const clickableStyle = css`
   cursor: pointer;
+  box-shadow: 2px 2px 3px 1px rgba(0, 0, 0, 0.09);
   &:active {
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
 `
 
 export const Chip = styled.div<ChipStyleProps>`
-  ${Shadow}
-
   padding: 6px 12px;
   display: flex;
   align-items: center;
