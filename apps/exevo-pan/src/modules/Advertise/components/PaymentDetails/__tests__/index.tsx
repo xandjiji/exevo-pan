@@ -1,6 +1,5 @@
 import { screen, waitFor } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
-import { advertising } from 'Constants'
 import { useForm } from '../../../contexts/Form'
 import { FormValues } from '../../../contexts/Form/types'
 import { calculatePrice, readablePrice } from '../../../utils'
