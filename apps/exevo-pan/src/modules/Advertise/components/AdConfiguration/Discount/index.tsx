@@ -1,15 +1,12 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useForm } from '../../../contexts/Form'
 import { calculatePrice, readablePrice, getDiscountTier } from '../../../utils'
 import * as S from './styles'
+import { DiscountProps } from './types'
 
-const Discount = (): JSX.Element => {
+const Discount = ({ daysCount, paymentMethod }: DiscountProps): JSX.Element => {
   const {
     translations: { advertise },
   } = useTranslations()
-
-  const { selectedDates, paymentMethod } = useForm()
-  const daysCount = selectedDates.length
 
   const { totalPrice, saved, offPercentage } = calculatePrice(
     daysCount,
