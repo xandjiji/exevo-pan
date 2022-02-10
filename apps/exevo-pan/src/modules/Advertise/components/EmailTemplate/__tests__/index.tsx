@@ -4,6 +4,7 @@ import { advertising } from 'Constants'
 import BuildEmailHtml from '..'
 import { generateQrCode } from '../../PaymentDetails/PixPayment/utils'
 import { sortAndFormatDates } from '../../Summary/utils'
+import { calculatePrice, readablePrice } from '../../../utils'
 import { mockedPixPurchaseData, mockedTCPurchaseData } from './mock'
 
 const PIX_DAY_COUNT = mockedPixPurchaseData.selectedDates.length
@@ -38,7 +39,10 @@ describe('<BuildEmailHtml />', () => {
 
     expect(
       screen.getByText(
-        `R$ ${PIX_DAY_COUNT * advertising.BRL_ADVERTISE},00 reais`,
+        readablePrice.full.PIX(
+          calculatePrice(mockedPixPurchaseData.selectedDates.length, 'PIX')
+            .totalPrice,
+        ),
       ),
     ).toBeInTheDocument()
 
@@ -73,7 +77,12 @@ describe('<BuildEmailHtml />', () => {
 
     expect(
       screen.getAllByText(
-        `${TC_DAY_COUNT * advertising.TIBIA_COINS_ADVERTISE} Tibia Coins`,
+        readablePrice.full.TIBIA_COINS(
+          calculatePrice(
+            mockedTCPurchaseData.selectedDates.length,
+            'TIBIA_COINS',
+          ).totalPrice,
+        ),
       ),
     ).toHaveLength(2)
 
