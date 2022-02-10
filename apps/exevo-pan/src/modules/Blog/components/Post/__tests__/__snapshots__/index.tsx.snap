@@ -183,7 +183,7 @@ exports[`<Post /> should pass this smoke test 1`] = `
             <span
               aria-hidden="true"
               class="styles__ErrorMessage-sc-1iw3xv8-2 krQlfx"
-              id="c993a17d-9b31-4ed1-9960-1b41ac4266be"
+              id="f7e55ea0-4753-498b-bd2f-e7fe8332bfe1"
               role="alert"
             />
           </div>
