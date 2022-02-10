@@ -1,50 +1,60 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
+import {
+  calculatePrice,
+  getDiscountTier,
+  readablePrice,
+} from '../../../../utils'
 import Discount from '..'
 
+type TestCase = { daysCount: number; paymentMethod: PaymentMethods }
+
+const days = [0, 1, 2, 3, 4, 5, 6, 7, 100]
+
+const cases: TestCase[] = [
+  ...days.map(
+    (daysCount): TestCase => ({ daysCount, paymentMethod: 'TIBIA_COINS' }),
+  ),
+  ...days.map((daysCount): TestCase => ({ daysCount, paymentMethod: 'PIX' })),
+]
+
 describe('<Discount />', () => {
-  test('the tier and discount values should be correct', () => {
-    const { rerender } = renderWithProviders(
-      <Discount daysCount={0} paymentMethod="TIBIA_COINS" />,
-    )
-    const tagElement = screen.getByText('-0%')
-    const tierElement = screen.getByText('Tier 1')
-    expect(tierElement).toBeInTheDocument()
-    expect(tagElement).not.toBeVisible()
+  test.each(cases)(
+    'all values should be displayed correctly',
+    ({ daysCount, paymentMethod }) => {
+      renderWithProviders(
+        <Discount daysCount={daysCount} paymentMethod={paymentMethod} />,
+      )
 
-    rerender(<Discount daysCount={1} paymentMethod="TIBIA_COINS" />)
-    expect(tierElement).toHaveTextContent('Tier 1')
-    expect(tagElement).toHaveTextContent('-0%')
-    expect(tagElement).not.toBeVisible()
+      const { offPercentage, totalPrice, saved } = calculatePrice(
+        daysCount,
+        paymentMethod,
+      )
+      const tier = getDiscountTier(daysCount)
 
-    rerender(<Discount daysCount={2} paymentMethod="TIBIA_COINS" />)
-    expect(tierElement).toHaveTextContent('Tier 2')
-    expect(tagElement).toHaveTextContent('-17%')
-    expect(tagElement).toBeVisible()
+      expect(screen.getByText(`Tier ${tier}`)).toBeInTheDocument()
 
-    rerender(<Discount daysCount={3} paymentMethod="TIBIA_COINS" />)
-    expect(tierElement).toHaveTextContent('Tier 2')
-    expect(tagElement).toHaveTextContent('-22%')
-    expect(tagElement).toBeVisible()
+      const tagElement = screen.getByText(`-${offPercentage}`)
+      if (saved > 0) {
+        expect(
+          screen.getByText(readablePrice.short[paymentMethod](totalPrice)),
+        ).toBeInTheDocument()
 
-    rerender(<Discount daysCount={4} paymentMethod="TIBIA_COINS" />)
-    expect(tierElement).toHaveTextContent('Tier 2')
-    expect(tagElement).toHaveTextContent('-25%')
-    expect(tagElement).toBeVisible()
+        expect(
+          screen.getByText(
+            readablePrice.short[paymentMethod](saved + totalPrice),
+          ),
+        ).toBeInTheDocument()
+        expect(tagElement).toBeVisible()
+      } else {
+        const [finalPriceElement, originalPriceElement] = screen.getAllByText(
+          readablePrice.short[paymentMethod](totalPrice),
+        )
 
-    rerender(<Discount daysCount={5} paymentMethod="TIBIA_COINS" />)
-    expect(tierElement).toHaveTextContent('Tier 3')
-    expect(tagElement).toHaveTextContent('-33%')
-    expect(tagElement).toBeVisible()
-
-    rerender(<Discount daysCount={6} paymentMethod="TIBIA_COINS" />)
-    expect(tierElement).toHaveTextContent('Tier 3')
-    expect(tagElement).toHaveTextContent('-33%')
-    expect(tagElement).toBeVisible()
-
-    rerender(<Discount daysCount={100} paymentMethod="TIBIA_COINS" />)
-    expect(tierElement).toHaveTextContent('Tier 3')
-    expect(tagElement).toHaveTextContent('-33%')
-    expect(tagElement).toBeVisible()
-  })
+        expect(finalPriceElement).toBeVisible()
+        expect(originalPriceElement).not.toBeVisible()
+        expect(tagElement).not.toBeVisible()
+      }
+    },
+  )
 })
