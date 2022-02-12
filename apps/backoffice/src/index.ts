@@ -10,12 +10,17 @@ async function handleRequest(request: Request): Promise<Response> {
 
   if (method === 'POST') {
     const newHighlight: HighlightedAuctionData = await request.json()
+    const value = JSON.stringify(newHighlight)
 
-    await HIGHLIGHTED.put(
-      newHighlight.id.toString(),
-      JSON.stringify(newHighlight),
-      { expirationTtl: SECONDS_IN_A_MONTH },
-    )
+    await HIGHLIGHTED.put(newHighlight.timestamp.toString(), value, {
+      metadata: value,
+      expirationTtl: SECONDS_IN_A_MONTH,
+    })
+  }
+
+  if (method === 'GET') {
+    const values = await HIGHLIGHTED.list<HighlightedAuctionData>()
+    return new Response(JSON.stringify(values.keys))
   }
 
   const response = new Response('hello world')
