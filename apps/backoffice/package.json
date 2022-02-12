@@ -1,8 +1,8 @@
 {
-  "name": "highlighted-auctions-worker",
+  "name": "backoffice",
   "version": "0.0.0",
   "author": "xandjiji <xandjiji@gmail.com>",
-  "description": "Exevo Pan Cloudflare Worker for managing highlighted auctions",
+  "description": "Exevo Pan Cloudflare Worker for backoffice",
   "license": "Unlicense",
   "main": "dist/worker.js",
   "scripts": {

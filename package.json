@@ -23,7 +23,7 @@
     "dev": "scripts/setupDev.sh && turbo run dev --parallel",
     "dev:scraper": "yarn --cwd apps/bazaar-scraper dev:scraper",
     "dev:mock": "yarn --cwd packages/mock-maker dev:mock",
-    "dev:backoffice": "yarn --cwd apps/highlighted-auctions-worker dev:backoffice",
+    "dev:backoffice": "yarn --cwd apps/backoffice dev:backoffice",
     "dev:front": "scripts/forceProd.sh && turbo run dev --scope=exevo-pan",
     "postinstall": "turbo run build:packages --include-dependencies --no-deps",
     "build": "turbo run build",
@@ -35,7 +35,7 @@
     "start:front": "NODE_ENV=production turbo run start --scope=exevo-pan",
     "start:staging": "turbo run staging",
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",
-    "deploy:backoffice": "yarn --cwd apps/highlighted-auctions-worker deploy"
+    "deploy:backoffice": "yarn --cwd apps/backoffice deploy"
   },
   "devDependencies": {
     "husky": "^7.0.4",
