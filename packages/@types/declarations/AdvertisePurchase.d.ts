@@ -17,4 +17,5 @@ declare interface AdvertisePurchase {
 declare type HighlightedAuctionData = {
   id: number
   days: string[]
+  timestamp: number
 }
