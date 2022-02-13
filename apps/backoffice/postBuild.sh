@@ -1,0 +1,1 @@
+cp src/package.json dist/

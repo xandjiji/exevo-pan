@@ -10,6 +10,10 @@ kv_namespaces = [
   { binding = "HIGHLIGHTED", preview_id = "10cf29ecac6f4237960cbf667e8aab07", id = "ef2de6545c7d4d4eb86cf596fd6af99a" }
 ]
 
+[site]
+bucket = "./public"
+entry-point = "dist"
+
 [env.development]
 name = "backoffice-development"
 

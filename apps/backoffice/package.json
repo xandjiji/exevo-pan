@@ -6,13 +6,16 @@
   "license": "Unlicense",
   "main": "dist/worker.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack && ./postBuild.sh",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
     "dev:backoffice": "wrangler dev --port 9696",
     "deploy": "wrangler publish",
     "staging": "wrangler publish --env development"
+  },
+  "dependencies": {
+    "@cloudflare/kv-asset-handler": "~0.1.2"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^3.0.0",

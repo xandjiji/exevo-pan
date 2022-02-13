@@ -1,12 +1,23 @@
+import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
+
 declare const HIGHLIGHTED: KVNamespace
 const SECONDS_IN_A_MONTH = 2592000
 
 addEventListener('fetch', (event) => {
-  event.respondWith(handleRequest(event.request))
+  event.respondWith(handleRequest(event))
 })
 
-async function handleRequest(request: Request): Promise<Response> {
-  const { method } = request
+async function handleRequest(event: FetchEvent): Promise<Response> {
+  const { request } = event
+  const { method, url } = request
+
+  if (url.includes('admin')) {
+    const page = await getAssetFromKV(event, {
+      mapRequestToAsset: (req) =>
+        new Request(`${new URL(req.url).origin}/index.html`, req),
+    })
+    return new Response(page.body, page)
+  }
 
   if (method === 'POST') {
     const newHighlight: HighlightedAuctionData = await request.json()
