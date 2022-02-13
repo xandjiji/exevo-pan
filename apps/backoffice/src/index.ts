@@ -25,6 +25,10 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
       metadata: value,
       expirationTtl: SECONDS_IN_A_MONTH,
     })
+
+    return new Response(`[${newHighlight.nickname}] was updated successfully`, {
+      headers,
+    })
   }
 
   if (method === 'GET') {
@@ -35,6 +39,7 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
   if (method === 'DELETE') {
     const { id }: { id: string } = await request.json()
     await HIGHLIGHTED.delete(id)
+    return new Response(`[${id}] was deleted successfully`, { headers })
   }
 
   const response = new Response(JSON.stringify({ result: 'ok' }), { headers })

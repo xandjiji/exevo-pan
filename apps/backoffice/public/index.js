@@ -17,15 +17,31 @@ const today = () => {
 const getAuction = (timestamp) =>
   highlighted.find((auction) => auction.timestamp === timestamp)
 
+const toggleLoadingState = () => {
+  const loaderElement = document.getElementById('loading-state')
+  loaderElement.classList.toggle('active')
+}
+
+const afterRequest = async (response) => {
+  const logElement = document.getElementById('request-log')
+
+  const { status } = response
+  const responseMessage = await response.text()
+  const newResponse = `STATUS: ${status} - MESSAGE: ${responseMessage}\n`
+  logElement.value += newResponse
+  toggleLoadingState()
+}
+
 /************* ⏸️ TOGGLE **************/
 
 const toggleAction = (timestamp) => {
   const auction = getAuction(timestamp)
 
+  toggleLoadingState()
   fetch(API, {
     method: 'POST',
     body: JSON.stringify({ ...auction, active: !auction.active }),
-  })
+  }).then(afterRequest)
 }
 
 const toggleButton = (timestamp) => {
@@ -37,11 +53,13 @@ const toggleButton = (timestamp) => {
 
 /************* ❌ DELETE **************/
 
-const deleteAction = (timestamp) =>
+const deleteAction = (timestamp) => {
+  toggleLoadingState()
   fetch(API, {
     method: 'DELETE',
     body: JSON.stringify({ id: timestamp }),
-  })
+  }).then(afterRequest)
+}
 
 const deleteButton = (timestamp) =>
   `<button onclick="deleteAction(${timestamp})">❌</button>`
@@ -70,10 +88,11 @@ const dateAction = (timestamp) => {
     }
   }
 
+  toggleLoadingState()
   fetch(API, {
     method: 'POST',
     body: JSON.stringify(auction),
-  })
+  }).then(afterRequest)
 }
 
 const dateButton = (timestamp) =>
