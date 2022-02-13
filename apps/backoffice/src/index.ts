@@ -32,6 +32,6 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
     return new Response(JSON.stringify(values.keys), { headers })
   }
 
-  const response = new Response('hello world', { headers })
+  const response = new Response(JSON.stringify({ result: 'ok' }), { headers })
   return response
 }

@@ -1,0 +1,60 @@
+:root {
+  --background: #202225;
+  --surface: #36393f;
+  --onSurface: #ffffff;
+  --separator: #72767d;
+  --primary: #9857e7;
+  --onPrimary: #ffffff;
+  --primaryVariant: #5e4480;
+  --darkerPrimary: #581f9b;
+  --green: #5a9935;
+  --red: #ff5b5b;
+  --alert: #f9eec1;
+  --battleGreen: #43b600;
+  --battleYellow: #ffdd00;
+  --primaryVariantHighlight: #714ca1;
+  --kwai: #ff7705;
+  --kwaiSurface: #453d3c;
+  --kwaiVariant: #995f2e;
+}
+
+html {
+  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  color: var(--onSurface);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+table td,
+table th {
+  border: 1px solid var(--onPrimary);
+  padding: 8px;
+  text-align: center;
+}
+
+table tr {
+  background-color: var(--surface);
+}
+
+table th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background-color: var(--primary);
+  color: var(--onPrimary);
+}
+
+td.date-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+table button {
+  padding: 6px;
+  background-color: var(--primary);
+  cursor: pointer;
+}
