@@ -2,6 +2,7 @@ import { getAssetFromKV } from '@cloudflare/kv-asset-handler'
 import { headers } from './headers'
 
 declare const HIGHLIGHTED: KVNamespace
+declare const AUTH_TOKEN: string
 const SECONDS_IN_A_MONTH = 2592000
 
 addEventListener('fetch', (event) => {
@@ -18,7 +19,11 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
   }
 
   if (method === 'POST') {
-    const newHighlight: HighlightedAuctionData = await request.json()
+    const { authToken, ...newHighlight } = await request.json()
+    if (authToken !== AUTH_TOKEN) {
+      return new Response('invalid credentials')
+    }
+
     const value = JSON.stringify(newHighlight)
 
     await HIGHLIGHTED.put(newHighlight.timestamp.toString(), value, {
@@ -37,7 +42,11 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
   }
 
   if (method === 'DELETE') {
-    const { id }: { id: string } = await request.json()
+    const { id, authToken } = await request.json()
+    if (authToken !== AUTH_TOKEN) {
+      return new Response('invalid credentials')
+    }
+
     await HIGHLIGHTED.delete(id)
     return new Response(`[${id}] was deleted successfully`, { headers })
   }

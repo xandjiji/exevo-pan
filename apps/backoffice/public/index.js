@@ -5,6 +5,8 @@ const API =
 
 let highlighted = []
 
+const [, authToken] = window.location.search.split('=')
+
 const today = () => {
   const date = new Date()
   const day = date.getDate().toString().padStart(2, '0')
@@ -40,7 +42,7 @@ const toggleAction = (timestamp) => {
   toggleLoadingState()
   fetch(API, {
     method: 'POST',
-    body: JSON.stringify({ ...auction, active: !auction.active }),
+    body: JSON.stringify({ ...auction, active: !auction.active, authToken }),
   }).then(afterRequest)
 }
 
@@ -57,7 +59,7 @@ const deleteAction = (timestamp) => {
   toggleLoadingState()
   fetch(API, {
     method: 'DELETE',
-    body: JSON.stringify({ id: timestamp }),
+    body: JSON.stringify({ id: timestamp, authToken }),
   }).then(afterRequest)
 }
 
@@ -91,7 +93,7 @@ const dateAction = (timestamp) => {
   toggleLoadingState()
   fetch(API, {
     method: 'POST',
-    body: JSON.stringify(auction),
+    body: JSON.stringify({ ...auction, authToken }),
   }).then(afterRequest)
 }
 
