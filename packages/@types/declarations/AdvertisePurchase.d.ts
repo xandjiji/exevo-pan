@@ -19,4 +19,5 @@ declare type HighlightedAuctionData = {
   id: number
   days: string[]
   timestamp: number
+  active: boolean
 }

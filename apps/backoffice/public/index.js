@@ -3,11 +3,50 @@ const API =
     ? 'http://localhost:9696/api'
     : '/api'
 
-const deleteAction = (timestamp) => console.log(timestamp)
+let highlighted = []
 
-const actionsTemplate = (timestamp) => `
-<button onclick="deleteAction(${timestamp})">❌</button>
-`
+const getAuction = (timestamp) =>
+  highlighted.find((auction) => auction.timestamp === timestamp)
+
+/************* ⏸️ TOGGLE **************/
+
+const toggleAction = (timestamp) => {
+  const auction = getAuction(timestamp)
+
+  fetch(API, {
+    method: 'POST',
+    body: JSON.stringify({ ...auction, active: !auction.active }),
+  })
+}
+
+const toggleButton = (timestamp) => {
+  const auction = getAuction(timestamp)
+  return `<button onclick="toggleAction(${timestamp})">${
+    auction.active ? '⏸️' : '▶️'
+  }</button>`
+}
+
+/************* ❌ DELETE **************/
+
+const deleteAction = (timestamp) =>
+  fetch(API, {
+    method: 'DELETE',
+    body: JSON.stringify({ id: timestamp }),
+  })
+
+const deleteButton = (timestamp) =>
+  `<button onclick="deleteAction(${timestamp})">❌</button>`
+
+/************* ACTIONS **************/
+
+const actionsTemplate = (timestamp) => {
+  let buttons = ''
+
+  buttons += toggleButton(timestamp)
+  buttons += deleteButton(timestamp)
+
+  return buttons
+}
 
 const higlightedTemplate = ({ nickname, id, days, timestamp }) => `
 <tr>
@@ -22,7 +61,7 @@ const higlightedTemplate = ({ nickname, id, days, timestamp }) => `
 
 fetch(API).then((response) => {
   response.json().then((data) => {
-    const highlighted = data
+    highlighted = data
       .map(({ metadata }) => JSON.parse(metadata))
       .sort((a, b) => b.timestamp - a.timestamp)
 

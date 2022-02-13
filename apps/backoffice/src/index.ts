@@ -32,6 +32,11 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
     return new Response(JSON.stringify(values.keys), { headers })
   }
 
+  if (method === 'DELETE') {
+    const { id }: { id: string } = await request.json()
+    await HIGHLIGHTED.delete(id)
+  }
+
   const response = new Response(JSON.stringify({ result: 'ok' }), { headers })
   return response
 }
