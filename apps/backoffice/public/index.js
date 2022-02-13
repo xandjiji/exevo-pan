@@ -5,6 +5,15 @@ const API =
 
 let highlighted = []
 
+const today = () => {
+  const date = new Date()
+  const day = date.getDate().toString().padStart(2, '0')
+  const month = (date.getMonth() + 1).toString().padStart(2, '0')
+  const year = date.getFullYear()
+
+  return `${day}/${month}/${year}`
+}
+
 const getAuction = (timestamp) =>
   highlighted.find((auction) => auction.timestamp === timestamp)
 
@@ -88,7 +97,10 @@ const higlightedTemplate = ({ nickname, id, days, timestamp }) => `
     <td>${id}</td>
     <td>${nickname} - ${new Date(timestamp).toLocaleString()}</td>
     <td class="date-wrapper">${days
-      .map((date) => `<span>${date}</span>`)
+      .map(
+        (date) =>
+          `<span class="${date === today() ? 'today' : ''}">${date}</span>`,
+      )
       .join('')}
       <input id="${timestamp}-date" type="date">
     </td>

@@ -53,6 +53,10 @@ td.date-wrapper {
   gap: 8px;
 }
 
+td.date-wrapper .today {
+  background-color: var(--primaryVariant);
+}
+
 table button {
   padding: 6px;
   background-color: var(--primary);
