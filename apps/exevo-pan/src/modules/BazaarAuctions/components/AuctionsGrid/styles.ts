@@ -64,31 +64,49 @@ export const GridWrapper = styled.div`
   align-items: center;
 `
 
+export const CharacterCard = styled(BaseCharacterCard)`
+  height: 100%;
+`
+
 export const Grid = styled.div`
   ${InnerContainer}
   padding-top: 16px;
   padding-bottom: 16px;
   width: 100%;
 
-  display: grid;
-  grid-gap: 16px;
-  grid-auto-rows: auto;
+  ${CharacterCard} {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 440px;
+  }
 
-  grid-template-columns: repeat(auto-fit, minmax(0, 440px));
-  justify-content: center;
+  > *:not(:last-child) {
+    margin-bottom: 16px;
+  }
 
   @media (min-width: 768px) {
+    display: grid;
+    grid-gap: 16px;
+    grid-auto-rows: auto;
+
+    justify-content: center;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  }
 
-  &::after {
-    content: '';
-    grid-column: 1 / -1;
-  }
-`
+    ${CharacterCard} {
+      max-width: unset;
+      margin-left: unset;
+      margin-right: unset;
+    }
 
-export const CharacterCard = styled(BaseCharacterCard)`
-  height: 100%;
+    > *:not(:last-child) {
+      margin-bottom: unset;
+    }
+
+    &::after {
+      content: '';
+      grid-column: 1 / -1;
+    }
+  }
 `
 
 export const EmptyState = styled(BaseEmptyState)`
