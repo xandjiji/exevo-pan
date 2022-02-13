@@ -56,5 +56,6 @@ td.date-wrapper {
 table button {
   padding: 6px;
   background-color: var(--primary);
+  color: var(--onPrimary);
   cursor: pointer;
 }

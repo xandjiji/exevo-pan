@@ -37,11 +37,45 @@ const deleteAction = (timestamp) =>
 const deleteButton = (timestamp) =>
   `<button onclick="deleteAction(${timestamp})">❌</button>`
 
+/************* 📅 DATE **************/
+
+const dateAction = (timestamp) => {
+  const { value } = document.getElementById(`${timestamp}-date`)
+  if (!value) return
+
+  const [year, month, day] = value.split('-')
+  const newDate = `${day}/${month}/${year}`
+
+  let auction = getAuction(timestamp)
+  const alreadyHasDate = auction.days.some((day) => day === newDate)
+
+  if (alreadyHasDate) {
+    auction = {
+      ...auction,
+      days: auction.days.filter((day) => day !== newDate),
+    }
+  } else {
+    auction = {
+      ...auction,
+      days: [...auction.days, newDate],
+    }
+  }
+
+  fetch(API, {
+    method: 'POST',
+    body: JSON.stringify(auction),
+  })
+}
+
+const dateButton = (timestamp) =>
+  `<button onclick="dateAction(${timestamp})">📅</button>`
+
 /************* ACTIONS **************/
 
 const actionsTemplate = (timestamp) => {
   let buttons = ''
 
+  buttons += dateButton(timestamp)
   buttons += toggleButton(timestamp)
   buttons += deleteButton(timestamp)
 
@@ -55,7 +89,9 @@ const higlightedTemplate = ({ nickname, id, days, timestamp }) => `
     <td>${nickname} - ${new Date(timestamp).toLocaleString()}</td>
     <td class="date-wrapper">${days
       .map((date) => `<span>${date}</span>`)
-      .join('')}</td>
+      .join('')}
+      <input id="${timestamp}-date" type="date">
+    </td>
 </tr>
 `
 
@@ -64,6 +100,8 @@ fetch(API).then((response) => {
     highlighted = data
       .map(({ metadata }) => JSON.parse(metadata))
       .sort((a, b) => b.timestamp - a.timestamp)
+
+    console.log(highlighted)
 
     const elements = highlighted.map(higlightedTemplate).join('')
 
