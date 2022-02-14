@@ -4,7 +4,7 @@ import * as nodemailer from 'nodemailer'
 import inlineBase64 from 'nodemailer-plugin-inline-base64'
 import { v4 as uuidv4 } from 'uuid'
 import { EmailTemplate } from 'modules/Advertise/components'
-import { NotifyAdminClient } from 'services'
+import { NotifyAdminClient, BackofficeClient } from 'services'
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { advertise } from 'locales'
 import { email } from 'Constants'
@@ -19,6 +19,8 @@ const mailCredentials = {
   },
 }
 
+const authToken = process.env.BACKOFFICE_TOKEN as string
+
 const mailer = nodemailer.createTransport(mailCredentials)
 mailer.use('compile', inlineBase64())
 
@@ -27,6 +29,7 @@ export default async (
   response: VercelResponse,
 ): Promise<void> => {
   const { method, body } = request
+  const { selectedDates, selectedCharacter } = body as AdvertisePurchase
 
   if (method !== 'POST') {
     response.status(405).end()
@@ -59,6 +62,14 @@ export default async (
     mailer.sendMail(customerEmail),
     mailer.sendMail(myEmail),
     NotifyAdminClient.notifyPurchase(),
+    BackofficeClient.notifyHighlight({
+      id: selectedCharacter.id,
+      nickname: selectedCharacter.nickname,
+      timestamp: +new Date(),
+      days: selectedDates,
+      active: true,
+      authToken,
+    }),
   ])
 
   response.status(200).json({ uuid })
