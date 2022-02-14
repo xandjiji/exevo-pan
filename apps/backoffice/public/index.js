@@ -119,8 +119,10 @@ const actionsTemplate = (timestamp) => {
 const higlightedTemplate = ({ nickname, id, days, timestamp }) => `
 <tr>
     <td>${actionsTemplate(timestamp)}</td>
-    <td>${id}</td>
-    <td>${nickname} - ${new Date(timestamp).toLocaleString()}</td>
+    <td><a target="_blank" href="https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}">${id}</a></td>
+    <td>${nickname} - ${new Date(timestamp).toLocaleString('pt-BR', {
+  hour12: false,
+})}</td>
     <td class="date-wrapper">${days
       .map(
         (date) =>

@@ -75,6 +75,12 @@ td.date-wrapper .today {
   background-color: var(--primaryVariant);
 }
 
+td a {
+  color: var(--primary);
+  font-weight: 700;
+  filter: brightness(130%);
+}
+
 table button {
   padding: 6px;
   background-color: var(--primary);
