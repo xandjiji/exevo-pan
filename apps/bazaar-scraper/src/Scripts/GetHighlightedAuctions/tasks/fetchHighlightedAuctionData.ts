@@ -15,6 +15,8 @@ const fetchData = retryWrapper(async () =>
   HttpClient.getJSON<RawHighlightedData[]>(`${DATA_ENDPOINT}/api`),
 )
 
+const MILLISECONDS_IN_15_MINUTES = 900000
+
 export const fetchHighlightedIds = async (): Promise<number[]> => {
   broadcast(`Fetching highlighted auction data...`, 'neutral')
   const dirtyData = await fetchData()
@@ -22,10 +24,17 @@ export const fetchHighlightedIds = async (): Promise<number[]> => {
     JSON.parse(metadata),
   )
 
+  const currentTimestamp = +new Date()
+
   const currentDate = currentStringDate()
 
   const activeHighlightedIds = parsedData
-    .filter(({ days, active }) => days.includes(currentDate) && active)
+    .filter(({ days }) => days.includes(currentDate))
+    .filter(({ active }) => active)
+    .filter(
+      ({ timestamp }) =>
+        currentTimestamp - timestamp >= MILLISECONDS_IN_15_MINUTES,
+    )
     .map(({ id }) => id)
 
   const idSet = new Set<number>(activeHighlightedIds)
