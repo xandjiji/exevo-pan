@@ -11,7 +11,7 @@ const sortByHighestBids = (
     .sort((a, b) => b.currentBid - a.currentBid)
 
 export const buildHighlightedAuctions = async (
-  highlightedAuctionData: HighlightedAuctionData[],
+  highlightedIds: number[],
 ): Promise<CharacterObject[]> => {
   broadcast(`Building character objects...`, 'neutral')
 
@@ -22,13 +22,11 @@ export const buildHighlightedAuctions = async (
 
   const allAuctions = auctionData.getAllAuctions()
 
-  const highlightedIds = new Set<number>(
-    highlightedAuctionData.map(({ id }) => id),
-  )
+  const highlightedIdSet = new Set<number>(highlightedIds)
   const currentTimestamp = +new Date() / 1000
 
   const partialAuctions: PartialCharacterObject[] = allAuctions
-    .filter(({ id }) => highlightedIds.has(id))
+    .filter(({ id }) => highlightedIdSet.has(id))
     .filter(({ auctionEnd }) => auctionEnd > currentTimestamp)
 
   const sortedByHighestBid: PartialCharacterObject[] =
