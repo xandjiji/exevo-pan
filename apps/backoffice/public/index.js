@@ -56,11 +56,15 @@ const toggleButton = (timestamp) => {
 /************* ❌ DELETE **************/
 
 const deleteAction = (timestamp) => {
-  toggleLoadingState()
-  fetch(API, {
-    method: 'DELETE',
-    body: JSON.stringify({ id: timestamp, authToken }),
-  }).then(afterRequest)
+  const confirmed = confirm('Are you sure you want to DELETE?')
+
+  if (confirmed) {
+    toggleLoadingState()
+    fetch(API, {
+      method: 'DELETE',
+      body: JSON.stringify({ id: timestamp, authToken }),
+    }).then(afterRequest)
+  }
 }
 
 const deleteButton = (timestamp) =>
