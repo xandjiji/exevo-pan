@@ -49,7 +49,7 @@ const toggleAction = (timestamp) => {
 const toggleButton = (timestamp) => {
   const auction = getAuction(timestamp)
   return `<button onclick="toggleAction(${timestamp})">${
-    auction.active ? '⏸️' : '▶️'
+    auction.active ? '⏸️' : '☑️'
   }</button>`
 }
 
