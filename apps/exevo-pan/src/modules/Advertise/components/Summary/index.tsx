@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
 import { useForm } from '../../contexts/Form'
-import { sortAndFormatDates } from './utils'
 import { calculatePrice, readablePrice } from '../../utils'
 import * as S from './styles'
 
@@ -12,8 +12,8 @@ const Summary = (): JSX.Element => {
 
   const { selectedCharacter, selectedDates, paymentMethod } = useForm()
 
-  const formatedDates = useMemo(
-    () => sortAndFormatDates(selectedDates),
+  const formattedDates = useMemo(
+    () => selectedDates.map(mmddyyyy2ddmmyyy).sort(sortStringDates),
     [selectedDates],
   )
 
@@ -50,7 +50,7 @@ const Summary = (): JSX.Element => {
                   {advertise.PaymentDetails.Summary.datesTooltipText}
                 </S.TooltipTitle>
                 <S.AllDates>
-                  {formatedDates.map((fullDate) => (
+                  {formattedDates.map((fullDate) => (
                     <S.FullDate key={fullDate}>{fullDate}</S.FullDate>
                   ))}
                 </S.AllDates>
