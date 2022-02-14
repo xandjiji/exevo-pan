@@ -1,7 +1,7 @@
 import { applySort, paginateData } from 'auction-queries'
 import { deserializeBody } from 'shared-utils/dist/contracts/Filters/utils'
 import { auctions } from './Data/auctions'
-import { filterOldAuctions } from './utils'
+import { robots, filterOldAuctions } from './utils'
 import { filterCharacters } from './filterWrapper'
 import { headers } from './headers'
 
@@ -10,6 +10,10 @@ addEventListener('fetch', (event) => {
 })
 
 async function handleRequest(request: Request): Promise<Response> {
+  if (request.method === 'GET') {
+    return robots()
+  }
+
   const currentAuctions = filterOldAuctions(auctions, +new Date() / 1000)
 
   const serializedBody: SerializedFilterBody = await request.json()

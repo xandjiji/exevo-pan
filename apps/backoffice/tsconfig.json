@@ -14,8 +14,8 @@
     "types": [
       "@cloudflare/workers-types",
       "@types/jest",
-      "@types/node",
-      "@types/service-worker-mock"
+      "@types/service-worker-mock",
+      "@types/exevo-pan"
     ]
   },
   "include": ["src"],

@@ -2,7 +2,6 @@
 import { render, screen } from '@testing-library/react'
 import BuildEmailHtml from '..'
 import { generateQrCode } from '../../PaymentDetails/PixPayment/utils'
-import { sortAndFormatDates } from '../../Summary/utils'
 import { calculatePrice, readablePrice } from '../../../utils'
 import { mockedPixPurchaseData, mockedTCPurchaseData } from './mock'
 
@@ -42,7 +41,7 @@ describe('<BuildEmailHtml />', () => {
       ),
     ).toBeInTheDocument()
 
-    sortAndFormatDates(mockedPixPurchaseData.selectedDates).forEach((date) => {
+    mockedPixPurchaseData.selectedDates.forEach((date) => {
       expect(screen.getByText(date, { exact: false })).toBeInTheDocument()
     })
   })
@@ -82,7 +81,7 @@ describe('<BuildEmailHtml />', () => {
       ),
     ).toHaveLength(2)
 
-    sortAndFormatDates(mockedTCPurchaseData.selectedDates).forEach((date) => {
+    mockedTCPurchaseData.selectedDates.forEach((date) => {
       expect(screen.getByText(date, { exact: false })).toBeInTheDocument()
     })
   })
