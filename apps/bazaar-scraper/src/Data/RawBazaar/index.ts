@@ -7,6 +7,7 @@ import { printFilename } from './utils'
 import { ScrapHistoryData } from './types'
 
 const { SCRAP_RAW_DATA, RAW_DATA_FOLDER } = file
+const BASE_INDEX = 2
 
 export default class RawBazaarData {
   private lastScrapedId = 0
@@ -51,10 +52,10 @@ export default class RawBazaarData {
     Object.keys(pageableData).forEach((key) => {
       const currentPageable = pageableData[key as keyof typeof pageableData]
 
-      currentPageable.forEach((content) => {
+      currentPageable.forEach((content, index) => {
         fileWriteCalls.push(() =>
           fs.writeFile(
-            RAW_DATA_FOLDER.auctionResolver(id, key),
+            RAW_DATA_FOLDER.auctionResolver(id, `${key}-${index + BASE_INDEX}`),
             zlib.gzipSync(content),
           ),
         )
