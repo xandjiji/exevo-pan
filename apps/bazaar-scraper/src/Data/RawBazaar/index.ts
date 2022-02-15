@@ -1,4 +1,5 @@
 import fs from 'fs/promises'
+import zlib from 'zlib'
 import { broadcast, coloredDiff } from 'logging'
 import { file } from 'Constants'
 import { makeRangeArray } from 'utils'
@@ -52,7 +53,10 @@ export default class RawBazaarData {
 
       currentPageable.forEach((content) => {
         fileWriteCalls.push(() =>
-          fs.writeFile(RAW_DATA_FOLDER.auctionResolver(id, key), content),
+          fs.writeFile(
+            RAW_DATA_FOLDER.auctionResolver(id, key),
+            zlib.gzipSync(content),
+          ),
         )
       })
     })
@@ -60,7 +64,10 @@ export default class RawBazaarData {
     await fs.mkdir(RAW_DATA_FOLDER.dirResolver(id), { recursive: true })
 
     await Promise.all([
-      fs.writeFile(RAW_DATA_FOLDER.auctionResolver(id, 'html'), html),
+      fs.writeFile(
+        RAW_DATA_FOLDER.auctionResolver(id, 'html'),
+        zlib.gzipSync(html),
+      ),
       ...fileWriteCalls.map((fn) => fn()),
     ])
   }
