@@ -25,7 +25,6 @@ export const fetchUnscrapedAuctions = async (
     taskTracking.incTask()
     const readableProgress = taskTracking.getProgress()
 
-    /* verificar o status do leilao (acabou?) */
     const checkResult = await helper.checkRawAuction(html)
 
     if (checkResult.result === 'NOT_FOUND') {
