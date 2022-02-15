@@ -11,6 +11,8 @@ export const SCRAP_RAW_DATA: FileConstant = {
 
 export const RAW_DATA_FOLDER = {
   path: `${OUTPUT_PATH}/rawData`,
-  resolver: (auctionId: number, name: string): string =>
+  dirResolver: (auctionId: number): string =>
+    `${OUTPUT_PATH}/rawData/${auctionId}`,
+  auctionResolver: (auctionId: number, name: string): string =>
     `${OUTPUT_PATH}/rawData/${auctionId}/${name}`,
 }

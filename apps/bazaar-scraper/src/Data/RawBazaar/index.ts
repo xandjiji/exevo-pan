@@ -5,7 +5,7 @@ import { makeRangeArray } from 'utils'
 import { printFilename } from './utils'
 import { ScrapHistoryData } from './types'
 
-const { SCRAP_RAW_DATA } = file
+const { SCRAP_RAW_DATA, RAW_DATA_FOLDER } = file
 
 export default class RawBazaarData {
   private lastScrapedId = 0
@@ -43,12 +43,38 @@ export default class RawBazaarData {
     }
   }
 
+  private async saveRawAuction(rawAuction: RawAuction): Promise<void> {
+    const { id, html, pageableData } = rawAuction
+
+    const fileWriteCalls: Array<() => Promise<void>> = []
+    Object.keys(pageableData).forEach((key) => {
+      const currentPageable = pageableData[key as keyof typeof pageableData]
+
+      currentPageable.forEach((content) => {
+        fileWriteCalls.push(() =>
+          fs.writeFile(RAW_DATA_FOLDER.auctionResolver(id, key), content),
+        )
+      })
+    })
+
+    await fs.mkdir(RAW_DATA_FOLDER.dirResolver(id), { recursive: true })
+
+    await Promise.all([
+      fs.writeFile(RAW_DATA_FOLDER.auctionResolver(id, 'html'), html),
+      ...fileWriteCalls.map((fn) => fn()),
+    ])
+  }
+
   private async save(): Promise<void> {
     const scrapHistoryData: ScrapHistoryData = {
       lastScrapedId: this.lastScrapedId,
       unfinishedAuctions: this.unfinishedAuctions,
     }
     await fs.writeFile(SCRAP_RAW_DATA.path, JSON.stringify(scrapHistoryData))
+
+    await Promise.all(
+      this.rawBuffer.map((rawAuction) => this.saveRawAuction(rawAuction)),
+    )
   }
 
   private appendBuffers(): void {
@@ -93,11 +119,12 @@ export default class RawBazaarData {
     this.maturedIdsBuffer.add(id)
   }
 
-  /* remover ou alterar */
   public async saveBuffers(): Promise<void> {
     const previousUnfinishedCount = this.unfinishedAuctions.length
     this.appendBuffers()
-    /* this.lastScrapedId = highestScrapedId */
+
+    const [highestId] = this.rawBuffer.map(({ id }) => id).sort((a, b) => b - a)
+    this.lastScrapedId = highestId
     await this.save()
 
     const unfinishedDiff =
