@@ -2,7 +2,8 @@ import { RawBazaar } from 'Data'
 import { broadcast, coloredText, Timer } from 'logging'
 import {
   fetchHighestAuctionId,
-  /* fetchUnscrapedAuctions,
+  fetchUnscrapedAuctions,
+  /*
   fetchMaturedAuctions, */
 } from './tasks'
 
@@ -24,10 +25,11 @@ const main = async (): Promise<void> => {
 
   const unscrapedIds = rawData.getUnscrapedIds(await fetchHighestAuctionId())
 
-  /*
   if (unscrapedIds.length) {
     await fetchUnscrapedAuctions(unscrapedIds, rawData)
   }
+
+  /*
 
   const maturedIds = rawData.getMaturedAuctionIds()
   if (maturedIds.length) {

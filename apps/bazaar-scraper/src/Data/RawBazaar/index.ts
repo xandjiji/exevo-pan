@@ -14,6 +14,8 @@ export default class RawBazaarData {
 
   private unfinishedBuffer: UnfinishedAuction[] = []
 
+  private rawBuffer: RawAuction[] = []
+
   private maturedIdsBuffer: Set<number> = new Set([])
 
   private async loadScrapData(): Promise<void> {
@@ -59,6 +61,7 @@ export default class RawBazaarData {
   }
 
   private flushBuffers(): void {
+    this.rawBuffer = []
     this.unfinishedBuffer = []
     this.maturedIdsBuffer = new Set([])
   }
@@ -78,6 +81,10 @@ export default class RawBazaarData {
       .map(({ id }) => id)
   }
 
+  public appendRawBuffer(rawData: RawAuction): void {
+    this.rawBuffer.push(rawData)
+  }
+
   public appendUnfinishedBuffer(unfinishedAuction: UnfinishedAuction): void {
     this.unfinishedBuffer.push(unfinishedAuction)
   }
@@ -86,10 +93,11 @@ export default class RawBazaarData {
     this.maturedIdsBuffer.add(id)
   }
 
-  public async saveBuffers(highestScrapedId: number): Promise<void> {
+  /* remover ou alterar */
+  public async saveBuffers(): Promise<void> {
     const previousUnfinishedCount = this.unfinishedAuctions.length
     this.appendBuffers()
-    this.lastScrapedId = highestScrapedId
+    /* this.lastScrapedId = highestScrapedId */
     await this.save()
 
     const unfinishedDiff =

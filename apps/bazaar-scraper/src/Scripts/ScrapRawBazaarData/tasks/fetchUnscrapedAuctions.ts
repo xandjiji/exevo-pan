@@ -1,6 +1,6 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import { History } from 'Data'
+import { RawBazaar } from 'Data'
 import { AuctionPage } from 'Helpers'
 import { broadcast, coloredText, TrackETA } from 'logging'
 import { batchPromises, arrayPartitions } from 'utils'
@@ -8,7 +8,7 @@ import { BUFFER_SIZE, fetchAuctionPage } from '../utils'
 
 export const fetchUnscrapedAuctions = async (
   unscrapedIds: number[],
-  historyData: History,
+  rawData: RawBazaar,
 ): Promise<void> => {
   const batchSize = unscrapedIds.length
   const taskTracking = new TrackETA(
@@ -17,7 +17,6 @@ export const fetchUnscrapedAuctions = async (
   )
 
   const helper = new AuctionPage()
-  await helper.loadServerData()
 
   const auctionPageRequests = unscrapedIds.map((auctionId) => async () => {
     const readableId = coloredText(auctionId, 'highlight')
@@ -26,7 +25,8 @@ export const fetchUnscrapedAuctions = async (
     taskTracking.incTask()
     const readableProgress = taskTracking.getProgress()
 
-    const checkResult = await helper.checkHistoryAuction(html)
+    /* verificar o status do leilao (acabou?) */
+    const checkResult = await helper.checkRawAuction(html)
 
     if (checkResult.result === 'NOT_FOUND') {
       broadcast(
@@ -41,7 +41,7 @@ export const fetchUnscrapedAuctions = async (
         `Unfinished auction id: ${readableId} ${readableProgress}`,
         'neutral',
       )
-      historyData.appendUnfinishedBuffer(checkResult.data)
+      rawData.appendUnfinishedBuffer(checkResult.data)
       return
     }
 
@@ -49,13 +49,13 @@ export const fetchUnscrapedAuctions = async (
       `Scraping   auction id: ${readableId} ${readableProgress}`,
       'neutral',
     )
-    historyData.appendFinishedBuffer(checkResult.data)
+    rawData.appendRawBuffer(checkResult.data)
   })
 
   const requestQueues = arrayPartitions(auctionPageRequests, BUFFER_SIZE)
   for (const queue of requestQueues) {
     await batchPromises(queue)
-    await historyData.saveBuffers()
+    await rawData.saveBuffers()
   }
 
   taskTracking.finish()
