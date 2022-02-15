@@ -11,6 +11,7 @@
     "dev:scraper": "NODE_PATH=./src nodemon -q src/dev.ts",
     "scrap:auctions": "NODE_PATH=./src sucrase-node src/Scripts/UpdateAuctions/run.ts",
     "scrap:history": "NODE_PATH=./src sucrase-node src/Scripts/ScrapHistory/run.ts",
+    "scrap:raw": "NODE_PATH=./src sucrase-node src/Scripts/ScrapRawBazaarData/run.ts",
     "update:statistics": "NODE_PATH=./src sucrase-node src/Scripts/UpdateHistoryStatistics/run.ts",
     "update:highlighted": "NODE_PATH=./src sucrase-node src/Scripts/GetHighlightedAuctions/run.ts",
     "dev": "serve -l 5555 Output",
