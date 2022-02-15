@@ -3,18 +3,10 @@ import { broadcast, coloredText, Timer } from 'logging'
 import {
   fetchHighestAuctionId,
   fetchUnscrapedAuctions,
-  /*
-  fetchMaturedAuctions, */
+  fetchMaturedAuctions,
 } from './tasks'
 
 const SCRIPT_NAME = coloredText('ScrapRawBazaarData', 'highlight')
-
-/*
-@ ToDo:   
-    - save data
-        html
-        post html data
-*/
 
 const main = async (): Promise<void> => {
   const timer = new Timer()
@@ -29,12 +21,10 @@ const main = async (): Promise<void> => {
     await fetchUnscrapedAuctions(unscrapedIds, rawData)
   }
 
-  /*
-
   const maturedIds = rawData.getMaturedAuctionIds()
   if (maturedIds.length) {
     await fetchMaturedAuctions(maturedIds, rawData)
-  } */
+  }
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,
