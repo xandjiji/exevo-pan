@@ -85,6 +85,89 @@ export const getPagedData = async (
   }
 }
 
+export const getPageableAuctionData = async (
+  auctionId: number,
+  $: CheerioAPI,
+): Promise<PageableAuctionData> => {
+  const helper = new AuctionPage()
+
+  const lastIndexes = {
+    storeItems: helper.boxSectionLastIndex('StoreItemSummary', $),
+    mounts: helper.boxSectionLastIndex('Mounts', $),
+    storeMounts: helper.boxSectionLastIndex('StoreMounts', $),
+    outfits: helper.boxSectionLastIndex('Outfits', $),
+    storeOutfits: helper.boxSectionLastIndex('StoreOutfits', $),
+  }
+
+  const pageableAuctionData: PageableAuctionData = {
+    storeItems: [],
+    mounts: [],
+    storeMounts: [],
+    outfits: [],
+    storeOutfits: [],
+  }
+
+  for (let pageIndex = 2; pageIndex <= lastIndexes.storeItems; pageIndex += 1) {
+    pageableAuctionData.storeItems.push(
+      await getPostData({
+        auctionId,
+        pageIndex,
+        type: 'storeItems',
+      }),
+    )
+  }
+
+  for (let pageIndex = 2; pageIndex <= lastIndexes.outfits; pageIndex += 1) {
+    pageableAuctionData.outfits.push(
+      await getPostData({
+        auctionId,
+        pageIndex,
+        type: 'outfits',
+      }),
+    )
+  }
+
+  for (
+    let pageIndex = 2;
+    pageIndex <= lastIndexes.storeOutfits;
+    pageIndex += 1
+  ) {
+    pageableAuctionData.storeOutfits.push(
+      await getPostData({
+        auctionId,
+        pageIndex,
+        type: 'storeOutfits',
+      }),
+    )
+  }
+
+  for (let pageIndex = 2; pageIndex <= lastIndexes.mounts; pageIndex += 1) {
+    pageableAuctionData.mounts.push(
+      await getPostData({
+        auctionId,
+        pageIndex,
+        type: 'mounts',
+      }),
+    )
+  }
+
+  for (
+    let pageIndex = 2;
+    pageIndex <= lastIndexes.storeMounts;
+    pageIndex += 1
+  ) {
+    pageableAuctionData.storeMounts.push(
+      await getPostData({
+        auctionId,
+        pageIndex,
+        type: 'storeMounts',
+      }),
+    )
+  }
+
+  return pageableAuctionData
+}
+
 export const loadCheerio = (content: CheerioAPI | string): CheerioAPI => {
   if (typeof content === 'string') {
     return cheerio.load(content)

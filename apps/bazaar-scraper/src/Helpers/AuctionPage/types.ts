@@ -19,10 +19,7 @@ export type HistoryCheck =
   | { result: 'NOT_FINISHED'; data: UnfinishedAuction }
   | { result: 'IS_FINISHED'; data: PartialCharacterObject }
 
-export type PageableAuctionData = {
-  storeItems: number
-  mounts: number
-  storeMounts: number
-  outfits: number
-  storeOutfits: number
-}
+export type RawCheck =
+  | { result: 'NOT_FOUND'; data: null }
+  | { result: 'NOT_FINISHED'; data: UnfinishedAuction }
+  | { result: 'IS_FINISHED'; data: RawAuction }
