@@ -10,7 +10,7 @@ import {
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { filterListTable } from '../utils'
 import { getPagedData, loadCheerio, findNumber } from './utils'
-import { HistoryCheck } from './types'
+import { HistoryCheck, PageableAuctionData } from './types'
 
 export default class AuctionPage {
   private serverDataHelper = new ServerData()
@@ -374,6 +374,20 @@ export default class AuctionPage {
     return {
       result: 'IS_FINISHED',
       data: await this.partialCharacterObject($),
+    }
+  }
+
+  async getPageableData(content: string): Promise<PageableAuctionData> {
+    const $ = cheerio.load(content)
+
+    exitIfMaintenance(() => this.maintenanceCheck($))
+
+    return {
+      storeItems: this.boxSectionLastIndex('StoreItemSummary', $),
+      mounts: this.boxSectionLastIndex('Mounts', $),
+      storeMounts: this.boxSectionLastIndex('StoreMounts', $),
+      outfits: this.boxSectionLastIndex('Outfits', $),
+      storeOutfits: this.boxSectionLastIndex('StoreOutfits', $),
     }
   }
 }
