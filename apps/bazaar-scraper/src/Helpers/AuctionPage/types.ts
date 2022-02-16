@@ -2,7 +2,7 @@ import { RequestTypes } from 'services/httpClient/types'
 
 export type CharacterPostData = Pick<
   PartialCharacterObject,
-  'outfits' | 'storeOutfits' | 'mounts' | 'storeMounts'
+  'storeItems' | 'outfits' | 'storeOutfits' | 'mounts' | 'storeMounts'
 >
 
 export const readableTypes: Record<RequestTypes, string> = {

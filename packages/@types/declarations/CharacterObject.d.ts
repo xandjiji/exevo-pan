@@ -1,3 +1,8 @@
+declare type CharacterItem = {
+  name: string
+  amount: number
+}
+
 declare interface CharacterSkillsObject {
   magic: number
   club: number
@@ -30,6 +35,7 @@ declare interface CharacterObject {
   charms: string[]
   transfer: boolean
   quests: string[]
+  storeItems: CharacterItem[]
   outfits: Outfit[]
   storeOutfits: Outfit[]
   mounts: string[]

@@ -40,4 +40,23 @@ export default class PostData {
 
     return mounts
   }
+
+  // @ ToDo:
+  // regex for item name
+  // filter item description
+  // ignore item filter
+
+  items(content: string): CharacterItem[] {
+    const $ = cheerio.load(content)
+    const icons = $('.CVIcon')
+
+    const items: CharacterItem[] = []
+    icons.each((_, element) => {
+      const { title } = element.attribs
+
+      items.push({ name: title, amount: 0 })
+    })
+
+    return items
+  }
 }
