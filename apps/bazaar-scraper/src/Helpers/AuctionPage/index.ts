@@ -291,12 +291,14 @@ export default class AuctionPage {
 
   storeFirstPage($: CheerioAPI): CharacterItem[] {
     const firstPage = $('#StoreItemSummary .TableContent tbody .BlockPage')
-    return this.postHelper.items(firstPage.html()!)
+    const html = firstPage.html()
+    return html ? this.postHelper.items(html) : []
   }
 
   outfitFirstPage($: CheerioAPI): Outfit[] {
     const firstPage = $('#Outfits .TableContent tbody .BlockPage')
-    return this.postHelper.outfits(firstPage.html()!)
+    const html = firstPage.html()
+    return html ? this.postHelper.outfits(html) : []
   }
 
   storeOutfitFirstPage($: CheerioAPI): Outfit[] {
