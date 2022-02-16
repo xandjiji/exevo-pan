@@ -1,5 +1,7 @@
 import cheerio from 'cheerio/lib/index'
 
+const itemQuantityRegex = new RegExp(/^[0-9]+(,[0-9]+)*x /)
+
 export default class PostData {
   private normalizedName: Record<string, string> = {
     Noblewoman: 'Nobleman',
@@ -42,7 +44,6 @@ export default class PostData {
   }
 
   // @ ToDo:
-  // regex for item name
   // filter item description
   // ignore item filter
 
@@ -54,7 +55,17 @@ export default class PostData {
     icons.each((_, element) => {
       const { title } = element.attribs
 
-      items.push({ name: title, amount: 0 })
+      let amount = 1
+      const itemName = title.replace(itemQuantityRegex, (match) => {
+        const [stringAmount] = match.replace(/,/g, '').split('x')
+        if (stringAmount) {
+          amount = +stringAmount
+        }
+
+        return ''
+      })
+
+      items.push({ name: itemName, amount })
     })
 
     return items
