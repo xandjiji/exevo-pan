@@ -3,3 +3,4 @@
 !.gitignore
 !ServerData.json
 static/ServerData.json
+rawData/

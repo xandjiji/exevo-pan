@@ -35,7 +35,8 @@
     "start:front": "NODE_ENV=production turbo run start --scope=exevo-pan",
     "start:staging": "turbo run staging",
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",
-    "deploy:backoffice": "yarn --cwd apps/backoffice deploy"
+    "deploy:backoffice": "yarn --cwd apps/backoffice deploy",
+    "scrap:raw": "yarn --cwd apps/bazaar-scraper scrap:raw"
   },
   "devDependencies": {
     "husky": "^7.0.4",

@@ -18,3 +18,8 @@ export type HistoryCheck =
   | { result: 'NOT_FOUND'; data: null }
   | { result: 'NOT_FINISHED'; data: UnfinishedAuction }
   | { result: 'IS_FINISHED'; data: PartialCharacterObject }
+
+export type RawCheck =
+  | { result: 'NOT_FOUND'; data: null }
+  | { result: 'NOT_FINISHED'; data: UnfinishedAuction }
+  | { result: 'IS_FINISHED'; data: RawAuction }

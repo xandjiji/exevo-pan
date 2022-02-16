@@ -9,8 +9,13 @@ import {
 } from 'data-dictionary/dist/dictionaries'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { filterListTable } from '../utils'
-import { getPagedData, loadCheerio, findNumber } from './utils'
-import { HistoryCheck } from './types'
+import {
+  getPagedData,
+  getPageableAuctionData,
+  loadCheerio,
+  findNumber,
+} from './utils'
+import { HistoryCheck, RawCheck } from './types'
 
 export default class AuctionPage {
   private serverDataHelper = new ServerData()
@@ -374,6 +379,46 @@ export default class AuctionPage {
     return {
       result: 'IS_FINISHED',
       data: await this.partialCharacterObject($),
+    }
+  }
+
+  async getPageableData(content: string): Promise<RawAuction> {
+    const $ = cheerio.load(content)
+
+    const auctionId = this.id($)
+
+    return {
+      id: this.id($),
+      html: content,
+      pageableData: await getPageableAuctionData(auctionId, $),
+    }
+  }
+
+  async checkRawAuction(content: string): Promise<RawCheck> {
+    const $ = cheerio.load(content)
+
+    exitIfMaintenance(() => this.maintenanceCheck($))
+
+    if (this.errorCheck($)) {
+      return {
+        result: 'NOT_FOUND',
+        data: null,
+      }
+    }
+
+    if (!this.isFinished($)) {
+      return {
+        result: 'NOT_FINISHED',
+        data: {
+          id: this.id($),
+          auctionEnd: this.auctionEnd($),
+        },
+      }
+    }
+
+    return {
+      result: 'IS_FINISHED',
+      data: await this.getPageableData(content),
     }
   }
 }
