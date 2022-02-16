@@ -43,10 +43,6 @@ export default class PostData {
     return mounts
   }
 
-  // @ ToDo:
-  // filter item description
-  // ignore item filter
-
   items(content: string): CharacterItem[] {
     const $ = cheerio.load(content)
     const icons = $('.CVIcon')
@@ -56,7 +52,7 @@ export default class PostData {
       const { title } = element.attribs
 
       let amount = 1
-      const itemName = title.replace(itemQuantityRegex, (match) => {
+      const rawItemName = title.replace(itemQuantityRegex, (match) => {
         const [stringAmount] = match.replace(/,/g, '').split('x')
         if (stringAmount) {
           amount = +stringAmount
@@ -64,6 +60,8 @@ export default class PostData {
 
         return ''
       })
+
+      const [itemName] = rawItemName.split('\n')
 
       items.push({ name: itemName, amount })
     })
