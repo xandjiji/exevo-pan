@@ -1,4 +1,5 @@
 import cheerio from 'cheerio/lib/index'
+import { ignoreList } from 'data-dictionary/dist/dictionaries/store'
 
 const itemQuantityRegex = new RegExp(/^[0-9]+(,[0-9]+)*x /)
 
@@ -63,7 +64,9 @@ export default class PostData {
 
       const [itemName] = rawItemName.split('\n')
 
-      items.push({ name: itemName, amount })
+      if (!ignoreList.has(itemName)) {
+        items.push({ name: itemName, amount })
+      }
     })
 
     return items
