@@ -23,8 +23,8 @@ export default {
     emptyStateText: 'Nie znaleziono aukcji',
   },
   Discount: {
-    title: 'Discounts',
-    description: 'Check out our progressive discounts!',
+    title: 'Zniżki',
+    description: 'Sprawdź nasze pakiety zniżkowe',
   },
   Checkout: {
     title: 'Twoje informacje',
