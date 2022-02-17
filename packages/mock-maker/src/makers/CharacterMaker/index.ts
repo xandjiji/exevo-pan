@@ -93,5 +93,7 @@ export const randomCharacter = (): PartialCharacterObject => {
     storeMounts: samplesFrom(storeMount.tokens),
     outfits: randomOutfits(),
     storeOutfits: randomStoreOutfits(),
+    /* @ ToDo: add store items mock */
+    storeItems: [],
   }
 }
