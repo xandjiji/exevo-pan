@@ -1,5 +1,6 @@
 import cheerio from 'cheerio/lib/index'
 import { ignoreList } from 'data-dictionary/dist/dictionaries/store'
+import { stringToNumber } from '../utils'
 
 const itemQuantityRegex = new RegExp(/^[0-9]+(,[0-9]+)*x /)
 
@@ -54,9 +55,9 @@ export default class PostData {
 
       let amount = 1
       const rawItemName = title.replace(itemQuantityRegex, (match) => {
-        const [stringAmount] = match.replace(/,/g, '').split('x')
+        const [stringAmount] = match.split('x')
         if (stringAmount) {
-          amount = +stringAmount
+          amount = stringToNumber(stringAmount)
         }
 
         return ''

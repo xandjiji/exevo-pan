@@ -8,7 +8,7 @@ import {
   rareAchievement as achievementDictionary,
 } from 'data-dictionary/dist/dictionaries'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
-import { filterListTable } from '../utils'
+import { filterListTable, stringToNumber } from '../utils'
 import {
   getPagedData,
   getPageableAuctionData,
@@ -71,7 +71,7 @@ export default class AuctionPage {
 
   currentBid($: CheerioAPI): number {
     const currentBidText = $('.ShortAuctionDataValue b').text()
-    return +currentBidText.replace(/,/g, '')
+    return stringToNumber(currentBidText)
   }
 
   hasBeenBidded($: CheerioAPI): boolean {
@@ -180,7 +180,7 @@ export default class AuctionPage {
   achievementPoints($: CheerioAPI): number {
     const achievPointsLabel = $('.LabelV:contains("Achievement Points:")')
     const pointsCountElement = achievPointsLabel.next()
-    return +pointsCountElement.text().replace(/,/g, '')
+    return stringToNumber(pointsCountElement.text())
   }
 
   items($: CheerioAPI): number[] {

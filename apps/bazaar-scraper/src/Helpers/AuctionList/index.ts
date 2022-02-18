@@ -1,5 +1,6 @@
 import cheerio, { Element } from 'cheerio/lib/index'
 import { exitIfMaintenance } from 'utils'
+import { stringToNumber } from '../utils'
 
 export default class AuctionList {
   private maintenanceCheck(content: string) {
@@ -30,7 +31,7 @@ export default class AuctionList {
 
   private currentBid(element: Element) {
     const currentBidText = cheerio('.ShortAuctionDataValue b', element).text()
-    return +currentBidText.replace(/,/g, '')
+    return stringToNumber(currentBidText)
   }
 
   lastPageIndex(content: string): number {
