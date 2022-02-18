@@ -192,6 +192,24 @@ export default class AuctionPage {
     return charmExpansionText === 'yes'
   }
 
+  huntingSlot($: CheerioAPI): boolean {
+    const huntingSlotText = $(
+      '.LabelV:contains("Permanent Hunting Task Slots:")',
+    )
+      .next()
+      .text()
+
+    return huntingSlotText === '1'
+  }
+
+  preySlot($: CheerioAPI): boolean {
+    const huntingSlotText = $('.LabelV:contains("Permanent Prey Slots:")')
+      .next()
+      .text()
+
+    return huntingSlotText === '1'
+  }
+
   /* @ ToDo: use Pick<CharacterObject, 'charmPoints' | 'availableCharmPoints'> */
   allCharmPoints($: CheerioAPI): {
     charmPoints: number
