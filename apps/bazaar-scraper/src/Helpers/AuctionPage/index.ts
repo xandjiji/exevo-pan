@@ -183,6 +183,15 @@ export default class AuctionPage {
     return stringToNumber(pointsCountElement.text())
   }
 
+  charmExpansion($: CheerioAPI): boolean {
+    const charmExpansionText = $('.LabelV:contains("Charm Expansion:")')
+      .next()
+      .text()
+      .trim()
+
+    return charmExpansionText === 'yes'
+  }
+
   /* @ ToDo: use Pick<CharacterObject, 'charmPoints' | 'availableCharmPoints'> */
   allCharmPoints($: CheerioAPI): {
     charmPoints: number
