@@ -229,6 +229,20 @@ export default class AuctionPage {
     }
   }
 
+  hirelings($: CheerioAPI): HirelingsInfo {
+    const count = stringToNumber(
+      $('.LabelV:contains("Hirelings:")').next().text(),
+    )
+    const jobs = stringToNumber(
+      $('.LabelV:contains("Hireling Jobs:")').next().text(),
+    )
+    const outfits = stringToNumber(
+      $('.LabelV:contains("Hireling Outfits:")').next().text(),
+    )
+
+    return { count, jobs, outfits }
+  }
+
   items($: CheerioAPI): number[] {
     const itemImages = $('.AuctionItemsViewBox > .CVIcon')
 

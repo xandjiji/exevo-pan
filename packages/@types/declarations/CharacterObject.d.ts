@@ -3,6 +3,12 @@ declare type CharacterItem = {
   amount: number
 }
 
+declare type HirelingsInfo = {
+  count: number
+  jobs: number
+  outfits: number
+}
+
 declare interface CharacterSkillsObject {
   magic: number
   club: number
