@@ -183,6 +183,25 @@ export default class AuctionPage {
     return stringToNumber(pointsCountElement.text())
   }
 
+  /* @ ToDo: use Pick<CharacterObject, 'charmPoints' | 'availableCharmPoints'> */
+  allCharmPoints($: CheerioAPI): {
+    charmPoints: number
+    availableCharmPoints: number
+  } {
+    const availableCharmPoints = stringToNumber(
+      $('.LabelV:contains("Available Charm Points:")').next().text(),
+    )
+
+    const spentCharmPoints = stringToNumber(
+      $('.LabelV:contains("Spent Charm Points:")').next().text(),
+    )
+
+    return {
+      availableCharmPoints,
+      charmPoints: availableCharmPoints + spentCharmPoints,
+    }
+  }
+
   items($: CheerioAPI): number[] {
     const itemImages = $('.AuctionItemsViewBox > .CVIcon')
 
