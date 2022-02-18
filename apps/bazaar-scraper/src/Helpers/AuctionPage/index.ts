@@ -177,6 +177,12 @@ export default class AuctionPage {
     }
   }
 
+  achievementPoints($: CheerioAPI): number {
+    const achievPointsLabel = $('.LabelV:contains("Achievement Points:")')
+    const pointsCountElement = achievPointsLabel.next()
+    return +pointsCountElement.text().replace(/,/g, '')
+  }
+
   items($: CheerioAPI): number[] {
     const itemImages = $('.AuctionItemsViewBox > .CVIcon')
 
