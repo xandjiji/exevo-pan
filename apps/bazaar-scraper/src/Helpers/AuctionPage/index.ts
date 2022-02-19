@@ -210,12 +210,8 @@ export default class AuctionPage {
     return huntingSlotText === '1'
   }
 
-  /* @ ToDo: use Pick<CharacterObject, 'charmPoints' | 'availableCharmPoints'> */
-  allCharmPoints($: CheerioAPI): {
-    charmPoints: number
-    availableCharmPoints: number
-  } {
-    const availableCharmPoints = stringToNumber(
+  allCharmPoints($: CheerioAPI): Pick<CharmInfo, 'total' | 'unspent'> {
+    const unspent = stringToNumber(
       $('.LabelV:contains("Available Charm Points:")').next().text(),
     )
 
@@ -224,8 +220,8 @@ export default class AuctionPage {
     )
 
     return {
-      availableCharmPoints,
-      charmPoints: availableCharmPoints + spentCharmPoints,
+      unspent,
+      total: unspent + spentCharmPoints,
     }
   }
 
@@ -416,6 +412,7 @@ export default class AuctionPage {
       vocationId: this.vocationId($),
       sex: this.sex($),
       level: this.level($),
+      achievementPoints: this.achievementPoints($),
       skills: this.skills($),
       items: this.items($),
       charms: this.charms($),
@@ -424,6 +421,13 @@ export default class AuctionPage {
       quests: this.quests($),
       ...(await getPagedData($)),
       rareAchievements: this.rareAchievements($),
+      hirelings: this.hirelings($),
+      huntingSlot: this.huntingSlot($),
+      preySlot: this.preySlot($),
+      charmInfo: {
+        ...this.allCharmPoints($),
+        expansion: this.charmExpansion($),
+      },
     }
   }
 

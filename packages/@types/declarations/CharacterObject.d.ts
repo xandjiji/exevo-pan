@@ -9,6 +9,12 @@ declare type HirelingsInfo = {
   outfits: number
 }
 
+declare type CharmInfo = {
+  expansion: boolean
+  total: number
+  unspent: number
+}
+
 declare interface CharacterSkillsObject {
   magic: number
   club: number
@@ -36,6 +42,7 @@ declare interface CharacterObject {
   vocationId: number
   sex: boolean
   level: number
+  achievementPoints: number
   imbuements: string[]
   items: number[]
   charms: string[]
@@ -49,6 +56,10 @@ declare interface CharacterObject {
   rareAchievements: string[]
   skills: CharacterSkillsObject
   serverData: ServerObject
+  hirelings: HirelingsInfo
+  preySlot: boolean
+  huntingSlot: boolean
+  charmInfo: CharmInfo
 }
 
 declare type PartialCharacterObject = Omit<CharacterObject, 'serverData'>
