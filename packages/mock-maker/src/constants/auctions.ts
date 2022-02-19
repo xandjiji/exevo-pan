@@ -49,4 +49,18 @@ export default {
       MAX: 4,
     },
   },
+  storeItem: {
+    array: { min: 0, max: 15 },
+    amount: { min: 1, max: 5 },
+  },
+  achievementPoints: { min: 0, max: 2000 },
+  charmInfo: {
+    spent: { min: 0, max: 4800 },
+    unspent: { min: 0, max: 900 },
+  },
+  hirelings: {
+    count: { min: 0, max: 4 },
+    jobs: { min: 0, max: 4 },
+    outfits: { min: 0, max: 8 },
+  },
 }

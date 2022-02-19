@@ -12,3 +12,9 @@ export type Dataset = {
   bonesMembersData: MemberWarData[]
   allGuildMembers: MemberWarData[]
 }
+
+export type Quantity = {
+  min: number
+  max: number
+  precision?: number
+}

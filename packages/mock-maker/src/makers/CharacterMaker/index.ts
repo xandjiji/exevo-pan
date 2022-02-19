@@ -8,7 +8,12 @@ import {
   storeMount,
 } from 'data-dictionary/dist/dictionaries'
 import { auctions } from '../../constants'
-import { samplesFrom, randomChance } from '../../utils'
+import {
+  samplesFrom,
+  randomChance,
+  randomQuantity,
+  randomArrayFrom,
+} from '../../utils'
 import { randomServerId } from '../serverMaker'
 import {
   randomOutfitId,
@@ -43,6 +48,33 @@ export const randomItem = (): number => {
   }
 
   return itemId
+}
+
+const randomCharacterItem = (): CharacterItem => ({
+  name: faker.lorem.words(randomQuantity({ min: 2, max: 4 })),
+  amount: randomQuantity(auctions.storeItem.amount),
+})
+
+const randomCharmInfo = (): CharmInfo => {
+  const spent = randomQuantity(auctions.charmInfo.spent)
+  const unspent = randomQuantity(auctions.charmInfo.unspent)
+
+  return {
+    expansion: faker.datatype.boolean(),
+    total: spent + unspent,
+    unspent,
+  }
+}
+
+const randomHirelingsInfo = (): HirelingsInfo => {
+  const count = randomQuantity(auctions.hirelings.count)
+  const hasHireling = count > 0
+
+  return {
+    count,
+    jobs: hasHireling ? randomQuantity(auctions.hirelings.jobs) : 0,
+    outfits: hasHireling ? randomQuantity(auctions.hirelings.outfits) : 0,
+  }
 }
 
 export const randomCharacter = (): PartialCharacterObject => {
@@ -93,7 +125,11 @@ export const randomCharacter = (): PartialCharacterObject => {
     storeMounts: samplesFrom(storeMount.tokens),
     outfits: randomOutfits(),
     storeOutfits: randomStoreOutfits(),
-    /* @ ToDo: add store items mock */
-    storeItems: [],
+    storeItems: randomArrayFrom(auctions.storeItem.array, randomCharacterItem),
+    achievementPoints: randomQuantity(auctions.achievementPoints),
+    preySlot: faker.datatype.boolean(),
+    huntingSlot: faker.datatype.boolean(),
+    charmInfo: randomCharmInfo(),
+    hirelings: randomHirelingsInfo(),
   }
 }
