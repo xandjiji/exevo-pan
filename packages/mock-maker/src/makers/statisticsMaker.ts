@@ -2,17 +2,12 @@
 import * as faker from 'faker'
 import { statistics } from '../constants'
 import { randomCharacter } from './CharacterMaker'
+import { randomRange } from '../utils'
 
 const randomMonthlySummary = (): MonthlySummary => ({
-  current: faker.datatype.number({
-    min: statistics.month.current.MIN,
-    max: statistics.month.current.MAX,
-  }),
+  current: randomRange(statistics.month.current),
   lastMonth: Array.from({ length: statistics.month.lastMonth.SIZE }, () =>
-    faker.datatype.number({
-      min: statistics.month.lastMonth.MIN,
-      max: statistics.month.lastMonth.MAX,
-    }),
+    randomRange(statistics.month.lastMonth),
   ),
 })
 

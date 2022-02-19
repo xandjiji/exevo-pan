@@ -1,6 +1,6 @@
 export default {
   auctions: {
-    MIN: 0,
-    MAX: 3,
+    min: 0,
+    max: 3,
   },
 }
