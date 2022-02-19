@@ -25,6 +25,15 @@ type FilterOptionsPrimitives = Pick<
   | 'addon'
   | 'sex'
   | 'soulwarAvailable'
+  | 'charmExpansion'
+  | 'preySlot'
+  | 'huntingSlot'
+  | 'rewardShrine'
+  | 'imbuementShrine'
+  | 'dummy'
+  | 'mailbox'
+  | 'goldPouch'
+  | 'hireling'
 >
 
 declare interface SerializedFilterOptions extends FilterOptionsPrimitives {

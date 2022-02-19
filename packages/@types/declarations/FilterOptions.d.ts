@@ -28,4 +28,13 @@ declare interface FilterOptions {
   storeMountSet: Set<string>
   achievementSet: Set<string>
   soulwarAvailable: boolean
+  charmExpansion: boolean
+  preySlot: boolean
+  huntingSlot: boolean
+  rewardShrine: boolean
+  imbuementShrine: boolean
+  dummy: boolean
+  mailbox: boolean
+  goldPouch: boolean
+  hireling: boolean
 }
