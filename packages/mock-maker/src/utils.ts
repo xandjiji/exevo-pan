@@ -20,8 +20,8 @@ export const samplesFrom = <T>(
 export const randomChance = (percentageChance: number): boolean =>
   percentageChance >= Math.random()
 
-export const randomQuantity = (quantity: Quantity): number =>
+export const randomRange = (quantity: Quantity): number =>
   faker.datatype.number(quantity)
 
 export const randomArrayFrom = <T>(quantity: Quantity, fn: () => T): T[] =>
-  Array.from({ length: randomQuantity(quantity) }, fn)
+  Array.from({ length: randomRange(quantity) }, fn)
