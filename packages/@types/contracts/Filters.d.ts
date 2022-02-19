@@ -34,6 +34,7 @@ type FilterOptionsPrimitives = Pick<
   | 'mailbox'
   | 'goldPouch'
   | 'hireling'
+  | 'transferAvailable'
 >
 
 declare interface SerializedFilterOptions extends FilterOptionsPrimitives {

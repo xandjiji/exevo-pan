@@ -37,4 +37,5 @@ declare interface FilterOptions {
   mailbox: boolean
   goldPouch: boolean
   hireling: boolean
+  transferAvailable: boolean
 }
