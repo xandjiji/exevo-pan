@@ -7,10 +7,10 @@ import { currentAuctions, historyAuctions } from './Data'
 import { applySort, filterCharacters } from './cachedWrapper'
 
 const { PORT, MODE } = process.env
-const isHistory = () => MODE === 'history'
+const IS_HISTORY = MODE === 'history'
 
 const main = async () => {
-  const auctions = isHistory()
+  const auctions = IS_HISTORY
     ? await historyAuctions()
     : await currentAuctions()
 
@@ -45,7 +45,7 @@ const main = async () => {
   app.listen(PORT, () => {
     broadcast(
       `${coloredText(
-        isHistory() ? 'History Server' : 'Current Auctions Server',
+        IS_HISTORY ? 'History Server' : 'Current Auctions Server',
         'highlight',
       )} is running at http://localhost:${PORT}`,
       'success',
