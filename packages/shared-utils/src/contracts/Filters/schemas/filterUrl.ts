@@ -161,4 +161,55 @@ export const filterSchema = [
     defaultValue: DEFAULT_FILTER_OPTIONS.soulwarAvailable,
     decode: decodeBoolean,
   },
+  {
+    key: 'charmExpansion',
+    defaultValue: DEFAULT_FILTER_OPTIONS.charmExpansion,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'preySlot',
+    defaultValue: DEFAULT_FILTER_OPTIONS.preySlot,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'huntingSlot',
+    defaultValue: DEFAULT_FILTER_OPTIONS.huntingSlot,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'rewardShrine',
+    defaultValue: DEFAULT_FILTER_OPTIONS.rewardShrine,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'imbuementShrine',
+    defaultValue: DEFAULT_FILTER_OPTIONS.imbuementShrine,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'dummy',
+    defaultValue: DEFAULT_FILTER_OPTIONS.dummy,
+    decode: decodeBoolean,
+  },
+
+  {
+    key: 'mailbox',
+    defaultValue: DEFAULT_FILTER_OPTIONS.mailbox,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'goldPouch',
+    defaultValue: DEFAULT_FILTER_OPTIONS.goldPouch,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'hireling',
+    defaultValue: DEFAULT_FILTER_OPTIONS.hireling,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'transferAvailable',
+    defaultValue: DEFAULT_FILTER_OPTIONS.transferAvailable,
+    decode: decodeBoolean,
+  },
 ]

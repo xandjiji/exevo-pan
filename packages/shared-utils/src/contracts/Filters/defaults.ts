@@ -33,6 +33,16 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   storeOutfitSet: new Set([]),
   storeMountSet: new Set([]),
   soulwarAvailable: false,
+  charmExpansion: false,
+  preySlot: false,
+  huntingSlot: false,
+  rewardShrine: false,
+  imbuementShrine: false,
+  dummy: false,
+  mailbox: false,
+  goldPouch: false,
+  hireling: false,
+  transferAvailable: false,
 }
 
 export const DEFAULT_SERIALIZED_FILTER_OPTIONS: SerializedFilterOptions = {
