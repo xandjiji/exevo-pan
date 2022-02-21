@@ -5,6 +5,7 @@ import { paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { currentAuctions, historyAuctions } from './Data'
 import { applySort, filterCharacters } from './cachedWrapper'
+import { filterOldAuctions } from './utils'
 
 const { PORT, MODE } = process.env
 const IS_HISTORY = MODE === 'history'
@@ -23,7 +24,10 @@ const main = async () => {
       request.body,
     )
 
-    const sortedAuctions = applySort(auctions, sortOptions)
+    const sortedAuctions = applySort(
+      IS_HISTORY ? auctions : filterOldAuctions(auctions),
+      sortOptions,
+    )
 
     const filteredAuctions = filterCharacters({
       sortOptions,
