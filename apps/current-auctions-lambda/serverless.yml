@@ -1,0 +1,20 @@
+service: current-auctions
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  filterAuctions:
+    handler: handler.filterCurrentAuctions
+    description: Filter current auctions
+    memorySize: 128
+    events:
+      - httpApi:
+          path: /
+          method: post
+
+plugins:
+  - serverless-plugin-typescript
