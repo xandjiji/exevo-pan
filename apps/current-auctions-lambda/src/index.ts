@@ -8,9 +8,18 @@ import { filterCharacters } from './filterWrapper'
 export const filterCurrentAuctions = async (
   event: APIGatewayProxyEvent,
 ): Promise<APIGatewayProxyResult> => {
+  if (!event.body) {
+    return {
+      statusCode: 400,
+      headers: {
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({ error: 'empty body' }),
+    }
+  }
   const currentAuctions = filterOldAuctions(auctions, +new Date() / 1000)
 
-  const serializedBody: SerializedFilterBody = JSON.parse(event.body ?? '')
+  const serializedBody: SerializedFilterBody = JSON.parse(event.body)
   const { filterOptions, sortOptions, paginationOptions } =
     deserializeBody(serializedBody)
 

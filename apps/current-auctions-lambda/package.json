@@ -4,6 +4,7 @@
   "author": "xandjiji <xandjiji@gmail.com>",
   "description": "Exevo Pan AWS Lambda",
   "license": "Unlicense",
+  "main": "index.js",
   "scripts": {
     "build": "webpack",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
@@ -21,6 +22,7 @@
     "@types/aws-lambda": "^8.10.79",
     "@types/exevo-pan": "*",
     "config": "*",
+    "serverless-plugin-optimize": "^4.2.1-rc.1",
     "serverless-plugin-typescript": "^1.1.9",
     "typescript": "^4.3.2"
   }

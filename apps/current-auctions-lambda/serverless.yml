@@ -8,13 +8,16 @@ provider:
 
 functions:
   filterAuctions:
-    handler: handler.filterCurrentAuctions
-    description: Filter current auctions
+    handler: src/index.filterCurrentAuctions
     memorySize: 128
     events:
-      - httpApi:
+      - http:
           path: /
           method: post
 
 plugins:
   - serverless-plugin-typescript
+  - serverless-plugin-optimize
+
+package:
+  individually: true
