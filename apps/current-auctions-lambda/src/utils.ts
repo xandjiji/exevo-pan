@@ -2,15 +2,15 @@ export const filterOldAuctions = (
   auctionArray: CharacterObject[],
 ): CharacterObject[] => {
   const currentTimestamp = Math.round(+new Date() / 1000)
-  const mutatedArray = [...auctionArray]
 
-  auctionArray.some((characterObject) => {
-    if (currentTimestamp > characterObject.auctionEnd) {
-      mutatedArray.shift()
-      return false
+  let i = 0
+  while (i < auctionArray.length) {
+    if (auctionArray[i].auctionEnd < currentTimestamp) {
+      auctionArray.shift()
+    } else {
+      return auctionArray
     }
-    return true
-  })
-
-  return mutatedArray
+    i += 1
+  }
+  return auctionArray
 }
