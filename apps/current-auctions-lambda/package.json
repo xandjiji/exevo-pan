@@ -11,8 +11,8 @@
     "dev": "serverless offline --httpPort 8787",
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
-    "deploy": "wrangler publish",
-    "staging": "wrangler publish --env development"
+    "deploy": "serverless deploy -s prod",
+    "staging": "serverless deploy -s dev"
   },
   "dependencies": {
     "auction-queries": "*",
