@@ -23,6 +23,7 @@
     "@types/aws-lambda": "^8.10.79",
     "@types/exevo-pan": "*",
     "config": "*",
+    "serverless-domain-manager": "^6.0.2",
     "serverless-offline": "^8.5.0",
     "serverless-plugin-optimize": "^4.2.1-rc.1",
     "serverless-plugin-typescript": "^1.1.9",

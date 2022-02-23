@@ -20,6 +20,14 @@ plugins:
   - serverless-plugin-typescript
   - serverless-plugin-optimize
   - serverless-offline
+  - serverless-domain-manager
 
 package:
   individually: true
+
+custom:
+  customDomain:
+    domainName: ${opt:stage, 'dev'}-auctions.service-exevopan.com
+    certificateName: service-exevopan.com
+    basePath: ''
+    createRoute53Record: true
