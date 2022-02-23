@@ -17,9 +17,10 @@ export const filterCurrentAuctions = async (
       body: JSON.stringify({ error: 'empty body' }),
     }
   }
-  const currentAuctions = filterOldAuctions(auctions, +new Date() / 1000)
 
-  const serializedBody: SerializedFilterBody = JSON.parse(event.body)
+  const currentAuctions = filterOldAuctions(auctions)
+
+  const serializedBody: SerializedFilterBody = JSON.parse(event.body as string)
   const { filterOptions, sortOptions, paginationOptions } =
     deserializeBody(serializedBody)
 

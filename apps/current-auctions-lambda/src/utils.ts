@@ -1,7 +1,7 @@
 export const filterOldAuctions = (
   auctionArray: CharacterObject[],
-  currentTimestamp: number,
 ): CharacterObject[] => {
+  const currentTimestamp = Math.round(+new Date() / 1000)
   const mutatedArray = [...auctionArray]
 
   auctionArray.some((characterObject) => {
