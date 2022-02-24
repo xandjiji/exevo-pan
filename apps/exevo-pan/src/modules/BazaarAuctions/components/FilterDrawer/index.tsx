@@ -413,7 +413,7 @@ const FilterDrawer = ({
         />
 
         <FilterGroup label="Imbuements" htmlFor="imbuements-input">
-          <S.FlexWrapper>
+          <S.InputWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
               aria-controls="imbuements-list"
@@ -438,7 +438,7 @@ const FilterDrawer = ({
             >
               {homepage.FilterDrawer.toggleAll.imbuements}
             </Chip>
-          </S.FlexWrapper>
+          </S.InputWrapper>
           <S.ChipWrapper id="imbuements-list">
             {[...filterState.imbuementsSet].map((imbuement) => (
               <Chip
@@ -452,7 +452,7 @@ const FilterDrawer = ({
         </FilterGroup>
 
         <FilterGroup label="Charms" htmlFor="charms-input">
-          <S.FlexWrapper>
+          <S.InputWrapper>
             <S.AutocompleteInput
               id="charms-input"
               aria-controls="charms-list"
@@ -471,7 +471,7 @@ const FilterDrawer = ({
             >
               {homepage.FilterDrawer.toggleAll.charms}
             </Chip>
-          </S.FlexWrapper>
+          </S.InputWrapper>
           <S.ChipWrapper id="charms-list">
             {[...filterState.charmsSet].map((charm) => (
               <Chip
@@ -552,7 +552,7 @@ const FilterDrawer = ({
               </Tooltip>
             }
           >
-            <S.FlexWrapper>
+            <S.InputWrapper>
               <S.AutocompleteInput
                 id="rare-items-input"
                 aria-controls="rare-items-list"
@@ -576,7 +576,7 @@ const FilterDrawer = ({
               >
                 {homepage.FilterDrawer.toggleAll.items}
               </Chip>
-            </S.FlexWrapper>
+            </S.InputWrapper>
             <S.ChipWrapper id="rare-items-list">
               {[...filterState.itemSet].map((item) => (
                 <Chip key={item} onClose={() => updateFilters('itemSet', item)}>
