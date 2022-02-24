@@ -12,6 +12,7 @@
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
     "deploy": "serverless deploy -s prod",
+    "deploy:fast": "serverless deploy function -f filterAuctions -s prod",
     "staging": "serverless deploy -s dev"
   },
   "dependencies": {
