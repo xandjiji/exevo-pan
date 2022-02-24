@@ -100,3 +100,9 @@ export const ResetButton = styled.button`
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
 `
+
+export const CheckboxWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
+`

@@ -1,7 +1,13 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
-import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
+import {
+  Drawer,
+  Chip,
+  RangeSliderInput,
+  SliderInput,
+  Checkbox,
+} from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
@@ -232,6 +238,74 @@ const FilterDrawer = ({
               </Chip>
             ))}
           </S.ChipWrapper>
+        </FilterGroup>
+
+        <FilterGroup label="Store items">
+          <S.CheckboxWrapper>
+            <Checkbox
+              label="Training Dummy"
+              checked={filterState.dummy}
+              onClick={() => updateFilters('dummy', !filterState.dummy)}
+            />
+            <Checkbox
+              label="Hirelings"
+              checked={filterState.hireling}
+              onClick={() => updateFilters('hireling', !filterState.hireling)}
+            />
+            <Checkbox
+              label="Gold Pouch"
+              checked={filterState.goldPouch}
+              onClick={() => updateFilters('goldPouch', !filterState.goldPouch)}
+            />
+            <Checkbox
+              label="Charm Expansion"
+              checked={filterState.charmExpansion}
+              onClick={() =>
+                updateFilters('charmExpansion', !filterState.charmExpansion)
+              }
+            />
+            <Checkbox
+              label="Prey Slot"
+              checked={filterState.preySlot}
+              onClick={() => updateFilters('preySlot', !filterState.preySlot)}
+            />
+            <Checkbox
+              label="Hunting Task Slot"
+              checked={filterState.huntingSlot}
+              onClick={() =>
+                updateFilters('huntingSlot', !filterState.huntingSlot)
+              }
+            />
+            <Checkbox
+              label="Mailbox"
+              checked={filterState.mailbox}
+              onClick={() => updateFilters('mailbox', !filterState.mailbox)}
+            />
+            <Checkbox
+              label="Imbuement Shrine"
+              checked={filterState.imbuementShrine}
+              onClick={() =>
+                updateFilters('imbuementShrine', !filterState.imbuementShrine)
+              }
+            />
+            <Checkbox
+              label="Reward Shrine"
+              checked={filterState.rewardShrine}
+              onClick={() =>
+                updateFilters('rewardShrine', !filterState.rewardShrine)
+              }
+            />
+            <Checkbox
+              label="Regular world transfer"
+              checked={filterState.transferAvailable}
+              onClick={() =>
+                updateFilters(
+                  'transferAvailable',
+                  !filterState.transferAvailable,
+                )
+              }
+            />
+          </S.CheckboxWrapper>
         </FilterGroup>
 
         {/* @ ToDo: add htmlFor after rangeSlider refactor */}
