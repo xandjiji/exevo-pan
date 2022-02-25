@@ -2,6 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
+import { Checkbox } from 'components/Atoms'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
 import useShouldRender from './useShouldRender'
@@ -47,6 +48,8 @@ const CharacterCard = ({
     imbuements,
     charms,
     quests,
+    charmInfo,
+    preySlot,
   } = characterData
 
   const { pathname } = useRouter()
@@ -116,11 +119,36 @@ const CharacterCard = ({
 
             <CharacterSkills skills={skills} />
 
-            <S.TooltipWrapper>
-              <ImbuementsTooltip items={imbuements} />
-              <CharmsTooltip items={charms} />
-              <QuestsTooltip items={quests} />
-            </S.TooltipWrapper>
+            <S.FlexWrapper>
+              <S.FlexColumn>
+                <ImbuementsTooltip items={imbuements} />
+                <CharmsTooltip items={charms} />
+                <QuestsTooltip items={quests} />
+              </S.FlexColumn>
+
+              <S.FlexColumn>
+                <S.Checkbox
+                  aria-readonly
+                  disabled
+                  label="Charm Expansion"
+                  checked={charmInfo.expansion}
+                />
+
+                <S.Checkbox
+                  aria-readonly
+                  disabled
+                  label="Extra Prey Slot"
+                  checked={preySlot}
+                />
+
+                <S.Checkbox
+                  aria-readonly
+                  disabled
+                  label="Prey Slot"
+                  checked={preySlot}
+                />
+              </S.FlexColumn>
+            </S.FlexWrapper>
           </>
         )}
       </S.Body>

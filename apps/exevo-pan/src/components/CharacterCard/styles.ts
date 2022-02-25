@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components'
 import {
   LabeledTextBox as BaseLabeledTextBox,
   AuctionTimer as BaseAuctionTimer,
+  Checkbox as BaseCheckbox,
 } from 'components/Atoms'
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
@@ -115,18 +116,30 @@ export const TibiaCoinIcon = styled(Image).attrs({
   transform: translateY(1px);
 `
 
-export const TooltipWrapper = styled.div`
+export const FlexWrapper = styled.div`
   padding-top: 12px;
   border-top: solid 1px var(--separator);
+  display: flex;
+  justify-content: space-between;
+`
 
+export const FlexColumn = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 12px;
+  grid-gap: 8px;
 
   > * {
     width: fit-content;
   }
 `
+
+export const Checkbox = styled(BaseCheckbox)`
+  &:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+  }
+`
+
 export const Body = styled.div`
   margin-bottom: 12px;
 `
