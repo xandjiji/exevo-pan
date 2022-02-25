@@ -14,4 +14,5 @@
 /// <reference path="declarations/RareItemObject.d.ts" />
 /// <reference path="declarations/ServerObject.d.ts" />
 /// <reference path="declarations/StatisticsObject.d.ts" />
+/// <reference path="declarations/StoreItem.d.ts" />
 /// <reference path="declarations/WarStatistics.d.ts" />
