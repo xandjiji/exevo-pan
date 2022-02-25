@@ -2,7 +2,6 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
-import { Checkbox } from 'components/Atoms'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
 import useShouldRender from './useShouldRender'
@@ -17,6 +16,7 @@ import {
   TagButton,
   SpecialTags,
 } from './Parts'
+import { calculateTotalInvestment } from './utils'
 import * as S from './styles'
 import { CharacterCardProps } from './types'
 
@@ -137,16 +137,11 @@ const CharacterCard = ({
                 <S.Checkbox
                   aria-readonly
                   disabled
-                  label="Extra Prey Slot"
-                  checked={preySlot}
-                />
-
-                <S.Checkbox
-                  aria-readonly
-                  disabled
                   label="Prey Slot"
                   checked={preySlot}
                 />
+
+                <p>TC Spent: {calculateTotalInvestment(characterData)}</p>
               </S.FlexColumn>
             </S.FlexWrapper>
           </>
