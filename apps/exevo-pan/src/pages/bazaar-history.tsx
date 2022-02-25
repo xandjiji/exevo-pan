@@ -4,7 +4,6 @@ import {
   DrawerFieldsProvider,
   FiltersProvider,
   AuctionsProvider,
-  LoadingState,
   AuctionsGrid,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
@@ -108,9 +107,7 @@ export default function BazaarHistory({
               defaultSortingMode={sortingMode}
               defaultDescendingOrder={descendingOrder}
             >
-              <LoadingState>
-                <AuctionsGrid />
-              </LoadingState>
+              <AuctionsGrid />
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>

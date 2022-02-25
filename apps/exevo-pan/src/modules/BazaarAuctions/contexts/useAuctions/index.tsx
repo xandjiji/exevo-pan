@@ -7,9 +7,11 @@ import {
   useCallback,
 } from 'react'
 import { dequal } from 'dequal'
+import { useTranslations } from 'contexts/useTranslation'
 import { urlParametersState } from 'utils'
 import { useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services'
+import { LoadingAlert } from 'components/Atoms'
 import AuctionsReducer from './reducer'
 import { useFilters } from '../useFilters'
 import { DEFAULT_STATE, buildSchema, PAGE_SIZE } from './schema'
@@ -26,6 +28,10 @@ export const AuctionsProvider = ({
   defaultDescendingOrder,
   children,
 }: AuctionsProviderProps): JSX.Element => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const {
     current: { isCurrentlyDefaultValues, getUrlValues, setUrlValues },
   } = useRef(
@@ -157,6 +163,7 @@ export const AuctionsProvider = ({
         dispatch,
       }}
     >
+      {state.loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       {children}
     </AuctionsContext.Provider>
   )
