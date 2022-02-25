@@ -1,6 +1,6 @@
 import { storeItems } from 'data-dictionary/dist/dictionaries/store'
 
-export default (characterStoreItems: CharacterItem[]): number => {
+const getStoreItemValue = (characterStoreItems: CharacterItem[]): number => {
   let sum = 0
 
   characterStoreItems.forEach(({ name, amount }) => {
@@ -15,3 +15,5 @@ export default (characterStoreItems: CharacterItem[]): number => {
 
   return sum
 }
+
+export default getStoreItemValue

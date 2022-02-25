@@ -33,7 +33,7 @@ const getDressValue = (outfits: number): number => {
   return sum
 }
 
-export default ({ count, jobs, outfits }: HirelingsInfo): number => {
+const getHirelingsValue = ({ count, jobs, outfits }: HirelingsInfo): number => {
   let sum = 0
 
   sum += count * HIRELING_BASE_VALUE
@@ -42,3 +42,5 @@ export default ({ count, jobs, outfits }: HirelingsInfo): number => {
 
   return sum
 }
+
+export default getHirelingsValue
