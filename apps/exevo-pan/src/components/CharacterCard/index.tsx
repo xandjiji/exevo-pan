@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
-import { formatNumberWithCommas } from 'utils'
+import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import { routes } from 'Constants'
 import useShouldRender from './useShouldRender'
 import CharacterMiniCard from '../CharacterMiniCard'
@@ -16,7 +16,6 @@ import {
   TagButton,
   SpecialTags,
 } from './Parts'
-import { calculateTotalInvestment } from './utils'
 import * as S from './styles'
 import { CharacterCardProps } from './types'
 

@@ -1,4 +1,5 @@
 export * from './buildUrl'
+export * from './calculateTotalInvestment'
 export * from './capitalizeFirstLetter'
 export * from './checkKeyboardTrigger'
 export * from './clampValue'
