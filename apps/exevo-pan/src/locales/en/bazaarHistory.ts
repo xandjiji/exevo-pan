@@ -4,5 +4,4 @@ export default {
     description:
       'Filter and search through all Tibia Char Bazaar historic data and statistics!',
   },
-  LoadingState: 'Loading...',
 }

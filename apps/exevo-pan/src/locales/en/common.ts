@@ -152,4 +152,5 @@ export default {
   AnchorIconLabel: 'Copy link',
   CharacterTooltipLabel: 'Go to character page',
   Newsticker: 'Recent articles',
+  LoadingState: 'Loading...',
 }

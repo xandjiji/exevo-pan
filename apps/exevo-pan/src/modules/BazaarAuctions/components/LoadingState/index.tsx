@@ -6,12 +6,12 @@ import { LoadingStateProps } from './types'
 const LoadingState = ({ children }: LoadingStateProps): JSX.Element => {
   const { loading } = useAuctions()
   const {
-    translations: { bazaarHistory },
+    translations: { common },
   } = useTranslations()
 
   return (
     <>
-      {loading && <LoadingAlert>{bazaarHistory.LoadingState}</LoadingAlert>}
+      {loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       {children}
     </>
   )
