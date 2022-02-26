@@ -14,4 +14,5 @@ declare type OutfitToken = {
 declare type MountToken = {
   name: string
   id: number
+  value: number
 }
