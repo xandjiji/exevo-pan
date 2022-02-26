@@ -8,6 +8,7 @@ declare type Id = {
 declare type OutfitToken = {
   name: string
   id: Id
+  value: number
 }
 
 declare type MountToken = {

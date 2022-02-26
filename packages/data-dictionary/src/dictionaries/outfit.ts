@@ -11,6 +11,7 @@ export const outfits: OutfitToken[] = [
       male: 128,
       female: 136,
     },
+    value: 0,
   },
   {
     name: 'Hunter',
@@ -18,6 +19,7 @@ export const outfits: OutfitToken[] = [
       male: 129,
       female: 137,
     },
+    value: 0,
   },
   {
     name: 'Mage',
@@ -25,6 +27,7 @@ export const outfits: OutfitToken[] = [
       male: 130,
       female: 138,
     },
+    value: 0,
   },
   {
     name: 'Knight',
@@ -32,6 +35,7 @@ export const outfits: OutfitToken[] = [
       male: 131,
       female: 139,
     },
+    value: 0,
   },
   {
     name: 'Nobleman',
@@ -39,6 +43,7 @@ export const outfits: OutfitToken[] = [
       male: 132,
       female: 140,
     },
+    value: 0,
   },
   {
     name: 'Summoner',
@@ -46,6 +51,7 @@ export const outfits: OutfitToken[] = [
       male: 133,
       female: 141,
     },
+    value: 0,
   },
   {
     name: 'Warrior',
@@ -53,6 +59,7 @@ export const outfits: OutfitToken[] = [
       male: 134,
       female: 142,
     },
+    value: 0,
   },
   {
     name: 'Barbarian',
@@ -60,6 +67,7 @@ export const outfits: OutfitToken[] = [
       male: 143,
       female: 147,
     },
+    value: 0,
   },
   {
     name: 'Druid',
@@ -67,6 +75,7 @@ export const outfits: OutfitToken[] = [
       male: 144,
       female: 148,
     },
+    value: 0,
   },
   {
     name: 'Wizard',
@@ -74,6 +83,7 @@ export const outfits: OutfitToken[] = [
       male: 145,
       female: 149,
     },
+    value: 0,
   },
   {
     name: 'Oriental',
@@ -81,6 +91,7 @@ export const outfits: OutfitToken[] = [
       male: 146,
       female: 150,
     },
+    value: 0,
   },
   {
     name: 'Pirate',
@@ -88,6 +99,7 @@ export const outfits: OutfitToken[] = [
       male: 151,
       female: 155,
     },
+    value: 0,
   },
   {
     name: 'Assassin',
@@ -95,6 +107,7 @@ export const outfits: OutfitToken[] = [
       male: 152,
       female: 156,
     },
+    value: 0,
   },
   {
     name: 'Beggar',
@@ -102,6 +115,7 @@ export const outfits: OutfitToken[] = [
       male: 153,
       female: 157,
     },
+    value: 0,
   },
   {
     name: 'Shaman',
@@ -109,6 +123,7 @@ export const outfits: OutfitToken[] = [
       male: 154,
       female: 158,
     },
+    value: 0,
   },
   {
     name: 'Norseman',
@@ -116,6 +131,7 @@ export const outfits: OutfitToken[] = [
       male: 251,
       female: 252,
     },
+    value: 0,
   },
   {
     name: 'Nightmare',
@@ -123,6 +139,7 @@ export const outfits: OutfitToken[] = [
       male: 268,
       female: 269,
     },
+    value: 0,
   },
   {
     name: 'Jester',
@@ -130,6 +147,7 @@ export const outfits: OutfitToken[] = [
       male: 273,
       female: 270,
     },
+    value: 0,
   },
   {
     name: 'Brotherhood',
@@ -137,6 +155,7 @@ export const outfits: OutfitToken[] = [
       male: 278,
       female: 279,
     },
+    value: 0,
   },
   {
     name: 'Demon Hunter',
@@ -144,6 +163,7 @@ export const outfits: OutfitToken[] = [
       male: 289,
       female: 288,
     },
+    value: 0,
   },
   {
     name: 'Yalaharian',
@@ -151,6 +171,7 @@ export const outfits: OutfitToken[] = [
       male: 324,
       female: 325,
     },
+    value: 0,
   },
   {
     name: 'Newly Wed',
@@ -158,6 +179,7 @@ export const outfits: OutfitToken[] = [
       male: 328,
       female: 329,
     },
+    value: 0,
   },
   {
     name: 'Warmaster',
@@ -165,6 +187,7 @@ export const outfits: OutfitToken[] = [
       male: 335,
       female: 336,
     },
+    value: 0,
   },
   {
     name: 'Wayfarer',
@@ -172,6 +195,7 @@ export const outfits: OutfitToken[] = [
       male: 366,
       female: 367,
     },
+    value: 0,
   },
   {
     name: 'Afflicted',
@@ -179,6 +203,7 @@ export const outfits: OutfitToken[] = [
       male: 430,
       female: 431,
     },
+    value: 0,
   },
   {
     name: 'Elementalist',
@@ -186,6 +211,7 @@ export const outfits: OutfitToken[] = [
       male: 432,
       female: 433,
     },
+    value: 0,
   },
   {
     name: 'Deepling',
@@ -193,6 +219,7 @@ export const outfits: OutfitToken[] = [
       male: 463,
       female: 464,
     },
+    value: 0,
   },
   {
     name: 'Insectoid',
@@ -200,6 +227,7 @@ export const outfits: OutfitToken[] = [
       male: 465,
       female: 466,
     },
+    value: 0,
   },
   {
     name: 'Crystal Warlord',
@@ -207,6 +235,7 @@ export const outfits: OutfitToken[] = [
       male: 512,
       female: 513,
     },
+    value: 0,
   },
   {
     name: 'Soil Guardian',
@@ -214,6 +243,7 @@ export const outfits: OutfitToken[] = [
       male: 516,
       female: 514,
     },
+    value: 0,
   },
   {
     name: 'Demon Outfit',
@@ -221,6 +251,7 @@ export const outfits: OutfitToken[] = [
       male: 542,
       female: 541,
     },
+    value: 0,
   },
   {
     name: 'Cave Explorer',
@@ -228,6 +259,7 @@ export const outfits: OutfitToken[] = [
       male: 574,
       female: 575,
     },
+    value: 0,
   },
   {
     name: 'Dream Warden',
@@ -235,6 +267,7 @@ export const outfits: OutfitToken[] = [
       male: 577,
       female: 578,
     },
+    value: 0,
   },
   {
     name: 'Glooth Engineer',
@@ -242,6 +275,7 @@ export const outfits: OutfitToken[] = [
       male: 610,
       female: 618,
     },
+    value: 0,
   },
   {
     name: 'Jersey',
@@ -249,6 +283,7 @@ export const outfits: OutfitToken[] = [
       male: 619,
       female: 620,
     },
+    value: 0,
   },
   {
     name: 'Recruiter',
@@ -256,6 +291,7 @@ export const outfits: OutfitToken[] = [
       male: 746,
       female: 745,
     },
+    value: 0,
   },
   {
     name: 'Rift Warrior',
@@ -263,6 +299,7 @@ export const outfits: OutfitToken[] = [
       male: 846,
       female: 845,
     },
+    value: 0,
   },
   {
     name: 'Festive Outfit',
@@ -270,6 +307,7 @@ export const outfits: OutfitToken[] = [
       male: 931,
       female: 929,
     },
+    value: 0,
   },
   {
     name: 'Makeshift Warrior',
@@ -277,6 +315,7 @@ export const outfits: OutfitToken[] = [
       male: 1042,
       female: 1043,
     },
+    value: 0,
   },
   {
     name: 'Battle Mage',
@@ -284,6 +323,7 @@ export const outfits: OutfitToken[] = [
       male: 1069,
       female: 1070,
     },
+    value: 0,
   },
   {
     name: 'Discoverer',
@@ -291,6 +331,7 @@ export const outfits: OutfitToken[] = [
       male: 1094,
       female: 1095,
     },
+    value: 0,
   },
   {
     name: 'Dream Warrior',
@@ -298,6 +339,7 @@ export const outfits: OutfitToken[] = [
       male: 1146,
       female: 1147,
     },
+    value: 0,
   },
   {
     name: 'Percht Raider',
@@ -305,6 +347,7 @@ export const outfits: OutfitToken[] = [
       male: 1161,
       female: 1162,
     },
+    value: 0,
   },
   {
     name: 'Golden Outfit',
@@ -312,6 +355,7 @@ export const outfits: OutfitToken[] = [
       male: 1210,
       female: 1211,
     },
+    value: 0,
   },
   {
     name: 'Hand of the Inquisition',
@@ -319,6 +363,7 @@ export const outfits: OutfitToken[] = [
       male: 1243,
       female: 1244,
     },
+    value: 0,
   },
   {
     name: 'Orcsoberfest Garb',
@@ -326,6 +371,7 @@ export const outfits: OutfitToken[] = [
       male: 1251,
       female: 1252,
     },
+    value: 0,
   },
   {
     name: 'Poltergeist',
@@ -333,6 +379,7 @@ export const outfits: OutfitToken[] = [
       male: 1270,
       female: 1271,
     },
+    value: 0,
   },
   {
     name: 'Falconer',
@@ -340,6 +387,7 @@ export const outfits: OutfitToken[] = [
       male: 1282,
       female: 1283,
     },
+    value: 0,
   },
   {
     name: 'Revenant',
@@ -347,6 +395,7 @@ export const outfits: OutfitToken[] = [
       male: 1322,
       female: 1323,
     },
+    value: 0,
   },
   {
     name: 'Rascoohan',
@@ -354,6 +403,7 @@ export const outfits: OutfitToken[] = [
       male: 1371,
       female: 1372,
     },
+    value: 0,
   },
   {
     name: 'Citizen of Issavi',
@@ -361,6 +411,7 @@ export const outfits: OutfitToken[] = [
       male: 1386,
       female: 1387,
     },
+    value: 0,
   },
   {
     name: 'Royal Bounacean Advisor',
@@ -368,6 +419,7 @@ export const outfits: OutfitToken[] = [
       male: 1436,
       female: 1437,
     },
+    value: 0,
   },
   {
     name: 'Royal Costume',
@@ -375,6 +427,7 @@ export const outfits: OutfitToken[] = [
       male: 1457,
       female: 1456,
     },
+    value: 0,
   },
   {
     name: 'Formal Dress',
@@ -382,6 +435,7 @@ export const outfits: OutfitToken[] = [
       male: 1460,
       female: 1461,
     },
+    value: 0,
   },
 ]
 
