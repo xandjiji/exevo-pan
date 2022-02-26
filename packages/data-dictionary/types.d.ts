@@ -1,18 +1,24 @@
 declare type ScrapingTokens = Record<string, string>
 
+declare interface Nameable {
+  name: string
+}
+
+declare interface Cosmetic extends Nameable {
+  value: number
+}
+
 declare type Id = {
   male: number
   female: number
 }
 
-declare type OutfitToken = {
-  name: string
+declare interface OutfitToken extends Cosmetic {
   id: Id
-  value: number
 }
 
-declare type MountToken = {
-  name: string
+declare interface MountToken extends Cosmetic {
   id: number
-  value: number
 }
+
+declare type PriceMap = Record<string, number>

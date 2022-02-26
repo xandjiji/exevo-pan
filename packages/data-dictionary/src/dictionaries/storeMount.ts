@@ -1,4 +1,5 @@
 import {
+  cosmeticToPriceMap,
   nameableToScrapingTokens,
   lowerCaseKeys,
   dictionaryFactory,
@@ -651,6 +652,8 @@ const mounts: MountToken[] = [
     value: 690,
   },
 ]
+
+export const priceMap = cosmeticToPriceMap(mounts)
 
 export const scrapingTokens = lowerCaseKeys(nameableToScrapingTokens(mounts))
 

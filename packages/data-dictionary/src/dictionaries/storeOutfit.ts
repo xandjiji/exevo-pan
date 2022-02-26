@@ -1,4 +1,5 @@
 import {
+  cosmeticToPriceMap,
   lowerCaseKeys,
   nameableToScrapingTokens,
   dictionaryFactory,
@@ -382,6 +383,8 @@ export const outfits: OutfitToken[] = [
     value: 600,
   },
 ]
+
+export const priceMap = cosmeticToPriceMap(outfits)
 
 export const scrapingTokens = lowerCaseKeys(nameableToScrapingTokens(outfits))
 
