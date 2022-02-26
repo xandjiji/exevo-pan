@@ -30,6 +30,7 @@ export default {
       searchNickname: 'Procurar nickname',
       vocation: 'Vocação',
       serverLocation: 'Localização do servidor',
+      storeItems: 'Items da store',
       minSkill: 'Skill level mínimo',
       rareAchievements: 'Achievements raros',
       rareItems: 'Items raros',

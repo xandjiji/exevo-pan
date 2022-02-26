@@ -240,7 +240,7 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Store items">
+        <FilterGroup label={homepage.FilterDrawer.labels.storeItems}>
           <S.CheckboxWrapper>
             <Checkbox
               label="Training Dummy"

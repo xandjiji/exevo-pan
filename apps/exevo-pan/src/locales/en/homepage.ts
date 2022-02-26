@@ -31,6 +31,7 @@ export default {
       searchNickname: 'Search nickname',
       vocation: 'Vocation',
       serverLocation: 'Server location',
+      storeItems: 'Store items',
       minSkill: 'Minimum skill level',
       rareItems: 'Rare items',
       rareAchievements: 'Rare achievements',

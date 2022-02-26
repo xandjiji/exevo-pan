@@ -30,6 +30,7 @@ export default {
       searchNickname: 'Szukaj nazwy',
       vocation: 'Klasa postaci',
       serverLocation: 'Serwer',
+      storeItems: 'Store items',
       minSkill: 'Minimalny level skilla',
       rareItems: 'Rzadkie przedmioty',
       rareAchievements: 'Rzadkie osiągnięcia',
