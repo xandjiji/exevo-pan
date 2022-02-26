@@ -122,9 +122,12 @@ export const FlexWrapper = styled.div`
   gap: 6px;
 `
 
-export const FlexFooter = styled(FlexWrapper)`
+export const FlexFooter = styled.div`
   padding-top: 12px;
   border-top: solid 1px var(--separator);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 32px;
 `
 
 export const FlexColumn = styled.div`
@@ -149,6 +152,14 @@ export const CheckboxContainer = styled.div`
   height: 16px;
   display: grid;
   place-items: center;
+`
+
+export const Strong = styled.span`
+  &[data-has-investment='true'] {
+    color: var(--primary);
+    filter: brightness(130%);
+    font-weight: 700;
+  }
 `
 
 export const Body = styled.div`

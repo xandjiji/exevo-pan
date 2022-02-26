@@ -151,7 +151,9 @@ const CharacterCard = ({
                   <S.CheckboxContainer>
                     <S.TibiaCoinIcon />
                   </S.CheckboxContainer>
-                  {tcInvested} invested
+                  <S.Strong data-has-investment={tcInvested !== '0'}>
+                    {tcInvested} invested
+                  </S.Strong>
                 </S.FlexWrapper>
               </S.FlexColumn>
             </S.FlexFooter>
