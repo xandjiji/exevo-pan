@@ -1,23 +1,15 @@
 import getStoreItemValue from './storeItems'
 import getHirelingsValue from './hirelings'
+import getCosmeticsValue from './cosmetics'
 
 const CHARM_EXPANSION_VALUE = 450
 const HUNTING_SLOT_VALUE = 750
 const PREY_SLOT_VALUE = 900
 
-/* outfits */
-/* mounts */
-
 export const calculateTotalInvestment = (
   character: CharacterObject,
 ): number => {
-  const {
-    charmInfo,
-    huntingSlot,
-    preySlot,
-    hirelings,
-    storeItems: characterStoreItems,
-  } = character
+  const { charmInfo, huntingSlot, preySlot, hirelings, storeItems } = character
 
   let sum = 0
 
@@ -26,7 +18,8 @@ export const calculateTotalInvestment = (
   if (preySlot) sum += PREY_SLOT_VALUE
   if (hirelings.count) sum += getHirelingsValue(hirelings)
 
-  sum += getStoreItemValue(characterStoreItems)
+  sum += getCosmeticsValue(character)
+  sum += getStoreItemValue(storeItems)
 
   return sum
 }
