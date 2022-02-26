@@ -146,13 +146,13 @@ const CharacterCard = ({
                 />
 
                 <S.FlexWrapper
-                  title={`This character has invested at least ${tcInvested} Tibia Coins in store purchases`}
+                  title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
                 >
                   <S.CheckboxContainer>
                     <S.TibiaCoinIcon />
                   </S.CheckboxContainer>
                   <S.Strong data-has-investment={tcInvested !== '0'}>
-                    {tcInvested} invested
+                    {tcInvested} {common.CharacterCard.tcInvested.invested}
                   </S.Strong>
                 </S.FlexWrapper>
               </S.FlexColumn>

@@ -129,6 +129,11 @@ export default {
         other: 'Inne',
       },
     },
+    tcInvested: {
+      prefix: 'This character has invested at least',
+      suffix: 'Tibia Coins in store purchases',
+      invested: 'invested',
+    },
     AuctionStatus: 'Status Aukcji',
     BidStatus: 'Status Oferty',
     highlightLabelText: 'Podświetl swoją aukcje',

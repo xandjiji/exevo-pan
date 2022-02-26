@@ -129,6 +129,11 @@ export default {
         other: 'Outros',
       },
     },
+    tcInvested: {
+      prefix: 'Este personagem tem investido pelo menos',
+      suffix: 'Tibia Coins em compras na store',
+      invested: 'investido',
+    },
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',
     highlightLabelText: 'Destaque seu leilão!',
