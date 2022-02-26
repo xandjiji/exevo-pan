@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useRef } from 'react'
+import { memo, useRef, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
@@ -53,7 +53,7 @@ const CharacterCard = ({
 
   const { pathname } = useRouter()
 
-  const getBidLabelText = () => {
+  const bidLabelText = useMemo(() => {
     if (pathname === routes.BAZAAR_HISTORY) {
       return hasBeenBidded
         ? common.CharacterCard.bidLabelText.auctionSuccessful
@@ -62,7 +62,12 @@ const CharacterCard = ({
     return hasBeenBidded
       ? common.CharacterCard.bidLabelText.currentBid
       : common.CharacterCard.bidLabelText.minimumBid
-  }
+  }, [pathname, hasBeenBidded, common])
+
+  const tcInvested = useMemo(
+    () => formatNumberWithCommas(calculateTotalInvestment(characterData)),
+    [characterData],
+  )
 
   const ref = useRef<HTMLDivElement>()
   const shouldRenderBody = useShouldRender(lazyRender, ref)
@@ -108,7 +113,7 @@ const CharacterCard = ({
                 <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
               </S.LabeledTextBox>
 
-              <S.LabeledTextBox labelText={getBidLabelText()}>
+              <S.LabeledTextBox labelText={bidLabelText}>
                 <S.TibiaCoinIcon />
                 {formatNumberWithCommas(currentBid)}
               </S.LabeledTextBox>
@@ -118,7 +123,7 @@ const CharacterCard = ({
 
             <CharacterSkills skills={skills} />
 
-            <S.FlexWrapper>
+            <S.FlexFooter>
               <S.FlexColumn>
                 <ImbuementsTooltip items={imbuements} />
                 <CharmsTooltip items={charms} />
@@ -140,9 +145,16 @@ const CharacterCard = ({
                   checked={preySlot}
                 />
 
-                <p>TC Spent: {calculateTotalInvestment(characterData)}</p>
+                <S.FlexWrapper
+                  title={`This character has invested at least ${tcInvested} Tibia Coins in store purchases`}
+                >
+                  <S.CheckboxContainer>
+                    <S.TibiaCoinIcon />
+                  </S.CheckboxContainer>
+                  {tcInvested} invested
+                </S.FlexWrapper>
               </S.FlexColumn>
-            </S.FlexWrapper>
+            </S.FlexFooter>
           </>
         )}
       </S.Body>

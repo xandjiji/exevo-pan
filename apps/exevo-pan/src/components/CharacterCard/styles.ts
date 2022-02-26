@@ -109,18 +109,22 @@ export const AuctionTimer = styled(BaseAuctionTimer)`
 export const TibiaCoinIcon = styled(Image).attrs({
   src: TibiaCoinImage,
   alt: 'Tibia Coin',
+  unoptimized: true,
 })`
   width: 12px;
   height: 12px;
-  border-radius: 50%;
-  transform: translateY(1px);
 `
 
 export const FlexWrapper = styled.div`
-  padding-top: 12px;
-  border-top: solid 1px var(--separator);
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 6px;
+`
+
+export const FlexFooter = styled(FlexWrapper)`
+  padding-top: 12px;
+  border-top: solid 1px var(--separator);
 `
 
 export const FlexColumn = styled.div`
@@ -138,6 +142,13 @@ export const Checkbox = styled(BaseCheckbox)`
     background-color: var(--primary);
     border-color: var(--primary);
   }
+`
+
+export const CheckboxContainer = styled.div`
+  width: 16px;
+  height: 16px;
+  display: grid;
+  place-items: center;
 `
 
 export const Body = styled.div`
