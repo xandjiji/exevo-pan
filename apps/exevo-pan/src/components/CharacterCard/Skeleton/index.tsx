@@ -70,26 +70,43 @@ const CardSkeleton = ({
         ))}
       </Skeletons.SkillWrapper>
 
-      <S.TooltipWrapper>
-        <Skeletons.Flex>
-          <Skeletons.ImbuementsIcon />
-          <Skeletons.Text style={{ width: 126, height: 10 }} />
-        </Skeletons.Flex>
-        <Skeletons.Flex>
-          <Skeletons.ImbuementsIcon />
-          <Skeletons.Text style={{ width: 100, height: 10 }} />
-        </Skeletons.Flex>
-        <Skeletons.Flex>
-          <Skeletons.ImbuementsIcon />
-          <Skeletons.Text style={{ width: 100, height: 10 }} />
-        </Skeletons.Flex>
+      <S.FlexFooter style={{ marginBottom: 12 }}>
+        <S.FlexColumn>
+          <Skeletons.Flex>
+            <Skeletons.ImbuementsIcon />
+            <Skeletons.Text style={{ width: 126, height: 10 }} />
+          </Skeletons.Flex>
+          <Skeletons.Flex>
+            <Skeletons.ImbuementsIcon />
+            <Skeletons.Text style={{ width: 100, height: 10 }} />
+          </Skeletons.Flex>
+          <Skeletons.Flex>
+            <Skeletons.ImbuementsIcon />
+            <Skeletons.Text style={{ width: 100, height: 10 }} />
+          </Skeletons.Flex>
+        </S.FlexColumn>
 
-        <Skeletons.Flex>
-          <Skeletons.Charm style={{ width: 94 }} />
-          <Skeletons.Charm style={{ width: 54 }} />
-          <Skeletons.Charm />
-        </Skeletons.Flex>
-      </S.TooltipWrapper>
+        <S.FlexColumn>
+          <Skeletons.Flex>
+            <Skeletons.ImbuementsIcon />
+            <Skeletons.Text style={{ width: 110, height: 10 }} />
+          </Skeletons.Flex>
+          <Skeletons.Flex>
+            <Skeletons.ImbuementsIcon />
+            <Skeletons.Text style={{ width: 58, height: 10 }} />
+          </Skeletons.Flex>
+          <Skeletons.Flex>
+            <Skeletons.ImbuementsIcon />
+            <Skeletons.Text style={{ width: 66, height: 10 }} />
+          </Skeletons.Flex>
+        </S.FlexColumn>
+      </S.FlexFooter>
+
+      <Skeletons.Flex>
+        <Skeletons.Charm style={{ width: 94 }} />
+        <Skeletons.Charm style={{ width: 54 }} />
+        <Skeletons.Charm />
+      </Skeletons.Flex>
     </S.Wrapper>
   )
 }
