@@ -19,7 +19,7 @@ import {
 import * as S from './styles'
 import { CharacterCardProps } from './types'
 
-const FIXED_BODY_HEIGHT = 375
+const FIXED_BODY_HEIGHT = 367
 
 const CharacterCard = ({
   characterData,
