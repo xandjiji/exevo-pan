@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { LabeledTextBox } from '../../styles'
+import { AuctionTimer } from 'components/Atoms'
 import * as S from './styles'
 
 const AuctionEnd = ({
@@ -11,9 +11,9 @@ const AuctionEnd = ({
   } = useTranslations()
 
   return (
-    <LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
-      <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
-    </LabeledTextBox>
+    <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
+      <AuctionTimer endDate={new Date(auctionEnd * 1000)} />
+    </S.LabeledTextBox>
   )
 }
 

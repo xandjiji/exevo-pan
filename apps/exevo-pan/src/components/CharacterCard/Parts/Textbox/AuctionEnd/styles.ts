@@ -1,10 +1,6 @@
 import styled from 'styled-components'
-import { AuctionTimer as BaseAuctionTimer } from 'components/Atoms'
+import { LabeledTextBox as BaseLabeledTextBox } from '../../styles'
 
-export const AuctionTimer = styled(BaseAuctionTimer)`
-  font-size: 14px;
-  *,
-  + span {
-    font-size: 14px;
-  }
+export const LabeledTextBox = styled(BaseLabeledTextBox)`
+  gap: unset;
 `
