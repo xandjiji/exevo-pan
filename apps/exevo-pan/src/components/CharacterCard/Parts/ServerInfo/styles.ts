@@ -7,24 +7,13 @@ import euFlag from 'assets/eu-flag.png'
 import naFlag from 'assets/na-flag.png'
 import brFlag from 'assets/br-flag.png'
 
-export const Wrapper = styled.div`
-  margin: -4px 0;
-  display: flex;
-  align-items: center;
-
-  > div:first-child {
-    flex-shrink: 0;
-    margin-right: 4px !important;
-  }
-`
-
 export const flags = [euFlag, naFlag, brFlag]
 export const Flag = styled(Image).attrs({ width: 16, height: 10 })`
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
 `
 
 export const ServerName = styled.span`
-  width: 100%;
+  margin-right: auto;
   font-size: 14px;
 `
 
@@ -37,7 +26,7 @@ export const TooltipText = styled.span`
 `
 
 const IconStyling = css`
-  margin-top: 4px;
+  margin-bottom: -3px;
   width: 16px;
   height: 16px;
   fill: var(--onSurface);

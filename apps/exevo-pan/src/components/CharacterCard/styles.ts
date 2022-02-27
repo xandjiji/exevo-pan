@@ -59,11 +59,10 @@ export const InfoGrid = styled.div`
 `
 
 export const LabeledTextBox = styled(BaseLabeledTextBox)`
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 14px;
-
-  > div {
-    margin-right: 4px !important;
-  }
 `
 
 export const AuctionTimer = styled(BaseAuctionTimer)`

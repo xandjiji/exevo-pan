@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
 export const BattleyeStatus = styled.div`
-  margin-right: 4px;
-  display: inline-block;
   width: 10px;
   height: 10px;
   border-radius: 50%;
