@@ -1,7 +1,7 @@
-import { LabeledTextBox } from 'components/CharacterCard/styles'
+import { LabeledTextBox } from '../styles'
 import * as S from './styles'
 
-const PvpInfo = ({
+const Pvp = ({
   serverData,
 }: Pick<CharacterObject, 'serverData'>): JSX.Element => (
   <LabeledTextBox labelText="PvP">
@@ -10,4 +10,4 @@ const PvpInfo = ({
   </LabeledTextBox>
 )
 
-export default PvpInfo
+export default Pvp

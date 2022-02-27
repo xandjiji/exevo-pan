@@ -6,8 +6,7 @@ import { routes } from 'Constants'
 import useShouldRender from './useShouldRender'
 import {
   Head,
-  ServerInfo,
-  PvpInfo,
+  Textbox,
   CharacterItems,
   CharacterSkills,
   ImbuementsTooltip,
@@ -91,13 +90,13 @@ const CharacterCard = ({
         {shouldRenderBody && (
           <>
             <S.InfoGrid>
-              <ServerInfo
+              <Textbox.Server
                 serverData={serverData}
                 nickname={nickname}
                 transfer={transfer}
               />
 
-              <PvpInfo serverData={serverData} />
+              <Textbox.Pvp serverData={serverData} />
 
               <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
                 <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />

@@ -1,6 +1,5 @@
 export { default as Head } from './Head'
-export { default as ServerInfo } from './ServerInfo'
-export { default as PvpInfo } from './PvpInfo'
+export * as Textbox from './Textbox'
 export { default as CharacterSkills } from './CharacterSkills'
 export { default as ImbuementsTooltip } from './Tooltips/Imbuements'
 export { default as CharmsTooltip } from './Tooltips/Charms'

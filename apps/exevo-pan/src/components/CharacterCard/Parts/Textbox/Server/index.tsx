@@ -1,15 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { LabeledTextBox } from 'components/CharacterCard/styles'
 import TransferIcon from './TransferIcon'
+import { LabeledTextBox } from '../styles'
 import * as S from './styles'
+import { ServerInfoProps } from './types'
 
-interface ServerInfoProps {
-  serverData: ServerObject
-  transfer: boolean
-  nickname: string
-}
-
-const ServerInfo = ({
+const Server = ({
   serverData,
   transfer,
   nickname,
@@ -41,4 +36,4 @@ const ServerInfo = ({
   )
 }
 
-export default ServerInfo
+export default Server
