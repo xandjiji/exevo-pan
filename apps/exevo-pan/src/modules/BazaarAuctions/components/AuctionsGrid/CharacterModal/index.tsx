@@ -1,3 +1,5 @@
+import { InfoGrid } from 'components/CharacterCard/styles'
+import { Head, Textbox } from 'components/CharacterCard/Parts'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
 
@@ -7,10 +9,48 @@ const CharacterModal = ({
   onClose,
 }: CharacterModalProps): JSX.Element | null => {
   if (!open || !characterData) return null
+  const {
+    id,
+    outfitId,
+    nickname,
+    level,
+    vocationId,
+    serverData,
+    transfer,
+    auctionEnd,
+    hasBeenBidded,
+    currentBid,
+  } = characterData
 
   return (
     <>
-      <S.Wrapper>modal</S.Wrapper>
+      <S.Wrapper>
+        <Head
+          id={id}
+          outfitId={outfitId}
+          nickname={nickname}
+          level={level}
+          vocationId={vocationId}
+          serverName={serverData.serverName}
+        />
+
+        <InfoGrid>
+          <Textbox.Server
+            serverData={serverData}
+            nickname={nickname}
+            transfer={transfer}
+          />
+
+          <Textbox.Pvp serverData={serverData} />
+
+          <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+
+          <Textbox.AuctionBid
+            hasBeenBidded={hasBeenBidded}
+            currentBid={currentBid}
+          />
+        </InfoGrid>
+      </S.Wrapper>
       <S.Backdrop onClick={onClose} />
     </>
   )
