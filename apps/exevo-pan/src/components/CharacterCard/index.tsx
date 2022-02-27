@@ -1,8 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useMemo } from 'react'
-import { useRouter } from 'next/router'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
-import { routes } from 'Constants'
 import useShouldRender from './useShouldRender'
 import {
   Head,
@@ -49,19 +47,6 @@ const CharacterCard = ({
     preySlot,
   } = characterData
 
-  const { pathname } = useRouter()
-
-  const bidLabelText = useMemo(() => {
-    if (pathname === routes.BAZAAR_HISTORY) {
-      return hasBeenBidded
-        ? common.CharacterCard.bidLabelText.auctionSuccessful
-        : common.CharacterCard.bidLabelText.auctionFailed
-    }
-    return hasBeenBidded
-      ? common.CharacterCard.bidLabelText.currentBid
-      : common.CharacterCard.bidLabelText.minimumBid
-  }, [pathname, hasBeenBidded, common])
-
   const tcInvested = useMemo(
     () => formatNumberWithCommas(calculateTotalInvestment(characterData)),
     [characterData],
@@ -102,10 +87,10 @@ const CharacterCard = ({
                 <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
               </S.LabeledTextBox>
 
-              <S.LabeledTextBox labelText={bidLabelText}>
-                <S.TibiaCoinIcon />
-                {formatNumberWithCommas(currentBid)}
-              </S.LabeledTextBox>
+              <Textbox.AuctionBid
+                hasBeenBidded={hasBeenBidded}
+                currentBid={currentBid}
+              />
             </S.InfoGrid>
 
             <CharacterItems items={items} />

@@ -1,6 +1,7 @@
+import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import TransferIcon from './TransferIcon'
-import { LabeledTextBox } from '../styles'
+import { LabeledTextBox } from '../../styles'
 import * as S from './styles'
 import { ServerInfoProps } from './types'
 
@@ -36,4 +37,4 @@ const Server = ({
   )
 }
 
-export default Server
+export default memo(Server)

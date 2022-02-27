@@ -1,4 +1,5 @@
-import { LabeledTextBox } from '../styles'
+import { memo } from 'react'
+import { LabeledTextBox } from '../../styles'
 import * as S from './styles'
 
 const Pvp = ({
@@ -10,4 +11,4 @@ const Pvp = ({
   </LabeledTextBox>
 )
 
-export default Pvp
+export default memo(Pvp)
