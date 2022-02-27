@@ -5,7 +5,3 @@ export interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
   highlighted?: boolean
   lazyRender?: boolean
 }
-
-export interface BattleyeStatusStyleProps {
-  active: boolean
-}

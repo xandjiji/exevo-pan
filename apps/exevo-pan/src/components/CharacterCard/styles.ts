@@ -7,12 +7,6 @@ import {
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
-import { BattleyeStatusStyleProps } from './types'
-
-export const AlignedFlex = styled.div`
-  display: flex;
-  align-items: center;
-`
 
 export const Wrapper = styled.article<{ highlighted: boolean }>`
   ${MaterialCard}
@@ -56,20 +50,6 @@ export const Wrapper = styled.article<{ highlighted: boolean }>`
     `}
 `
 
-export const Head = styled(AlignedFlex)<{ highlighted: boolean }>`
-  margin-bottom: 16px;
-  display: flex;
-  justify-content: space-between;
-
-  ${({ highlighted }) =>
-    highlighted &&
-    css`
-      p {
-        color: var(--green) !important;
-      }
-    `};
-`
-
 export const InfoGrid = styled.div`
   margin-bottom: 12px;
   display: grid;
@@ -84,18 +64,6 @@ export const LabeledTextBox = styled(BaseLabeledTextBox)`
   > div {
     margin-right: 4px !important;
   }
-`
-
-export const BattleyeStatus = styled.div<BattleyeStatusStyleProps>`
-  margin-right: 4px;
-  display: inline-block;
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: solid 1px #00000020;
-  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.14);
-  background-color: ${({ active }) =>
-    active ? 'var(--battleGreen)' : 'var(--battleYellow)'};
 `
 
 export const AuctionTimer = styled(BaseAuctionTimer)`

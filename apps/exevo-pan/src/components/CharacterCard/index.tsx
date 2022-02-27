@@ -7,6 +7,7 @@ import useShouldRender from './useShouldRender'
 import {
   Head,
   ServerInfo,
+  PvpInfo,
   CharacterItems,
   CharacterSkills,
   ImbuementsTooltip,
@@ -96,10 +97,7 @@ const CharacterCard = ({
                 transfer={transfer}
               />
 
-              <S.LabeledTextBox labelText="PvP">
-                <S.BattleyeStatus active={serverData.battleye} />
-                {serverData.pvpType.string}
-              </S.LabeledTextBox>
+              <PvpInfo serverData={serverData} />
 
               <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
                 <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
