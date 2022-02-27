@@ -74,7 +74,7 @@ const CharacterCard = ({
   return (
     <S.Wrapper
       ref={ref as React.RefObject<HTMLDivElement>}
-      highlighted={highlighted}
+      data-highlighted={highlighted}
       {...props}
     >
       <Head

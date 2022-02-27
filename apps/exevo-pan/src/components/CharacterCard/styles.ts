@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components'
+import styled from 'styled-components'
 import {
   LabeledTextBox as BaseLabeledTextBox,
   AuctionTimer as BaseAuctionTimer,
@@ -8,7 +8,7 @@ import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
 
-export const Wrapper = styled.article<{ highlighted: boolean }>`
+export const Wrapper = styled.article`
   ${MaterialCard}
   padding: 16px;
 
@@ -17,37 +17,35 @@ export const Wrapper = styled.article<{ highlighted: boolean }>`
     z-index: 5;
   }
 
-  ${({ highlighted }) =>
-    highlighted &&
-    css`
-      --surface: var(--kwaiSurface);
-      --primary: var(--kwai);
-      --primaryVariant: var(--kwaiVariant);
+  &[data-highlighted='true'] {
+    --surface: var(--kwaiSurface);
+    --primary: var(--kwai);
+    --primaryVariant: var(--kwaiVariant);
 
-      z-index: 2;
+    z-index: 2;
 
-      @media (min-width: 768px) {
-        animation: zoom 0.6s ease-out forwards;
-        animation-delay: 1s;
+    @media (min-width: 768px) {
+      animation: zoom 0.6s ease-out forwards;
+      animation-delay: 1s;
 
-        @keyframes zoom {
-          0% {
-            transform: scale(1);
-          }
-          20% {
-            transform: scale(1.02);
-            box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
-          }
-          80% {
-            transform: scale(1.02);
-            box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
-          }
-          100% {
-            transform: scale(1);
-          }
+      @keyframes zoom {
+        0% {
+          transform: scale(1);
+        }
+        20% {
+          transform: scale(1.02);
+          box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
+        }
+        80% {
+          transform: scale(1.02);
+          box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.1);
+        }
+        100% {
+          transform: scale(1);
         }
       }
-    `}
+    }
+  }
 `
 
 export const InfoGrid = styled.div`
