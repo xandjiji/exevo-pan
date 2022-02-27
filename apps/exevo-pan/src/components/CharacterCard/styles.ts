@@ -1,9 +1,5 @@
 import styled from 'styled-components'
-import {
-  LabeledTextBox as BaseLabeledTextBox,
-  AuctionTimer as BaseAuctionTimer,
-  Checkbox as BaseCheckbox,
-} from 'components/Atoms'
+import { Checkbox as BaseCheckbox } from 'components/Atoms'
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
@@ -54,21 +50,6 @@ export const InfoGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 8px;
   grid-row-gap: 12px;
-`
-
-export const LabeledTextBox = styled(BaseLabeledTextBox)`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
-`
-
-export const AuctionTimer = styled(BaseAuctionTimer)`
-  font-size: 14px;
-  *,
-  + span {
-    font-size: 14px;
-  }
 `
 
 export const TibiaCoinIcon = styled(Image).attrs({

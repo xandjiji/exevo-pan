@@ -83,9 +83,7 @@ const CharacterCard = ({
 
               <Textbox.Pvp serverData={serverData} />
 
-              <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
-                <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
-              </S.LabeledTextBox>
+              <Textbox.AuctionEnd auctionEnd={auctionEnd} />
 
               <Textbox.AuctionBid
                 hasBeenBidded={hasBeenBidded}
