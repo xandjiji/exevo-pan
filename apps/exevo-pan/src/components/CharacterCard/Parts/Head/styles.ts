@@ -6,7 +6,7 @@ export const Head = styled.div`
   align-items: center;
   justify-content: space-between;
 
-  &[data-highlighted='true'] p {
-    color: var(--green) !important;
+  &&[data-highlighted='true'] p {
+    color: var(--green);
   }
 `
