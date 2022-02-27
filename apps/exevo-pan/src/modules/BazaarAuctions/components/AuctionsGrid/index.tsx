@@ -157,6 +157,7 @@ const AuctionsGrid = (): JSX.Element => {
       <CharacterModal
         open={!!selectedCharacter}
         characterData={selectedCharacter}
+        onClose={() => selectCharacter(undefined)}
       />
 
       <Ads.FooterBanner key={pageData.pageIndex} />
