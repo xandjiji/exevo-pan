@@ -1,19 +1,17 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import { routes } from 'Constants'
 import useShouldRender from './useShouldRender'
-import CharacterMiniCard from '../CharacterMiniCard'
 import {
+  Head,
   ServerInfo,
   CharacterItems,
   CharacterSkills,
   ImbuementsTooltip,
   CharmsTooltip,
   QuestsTooltip,
-  TagButton,
   SpecialTags,
 } from './Parts'
 import * as S from './styles'
@@ -78,21 +76,15 @@ const CharacterCard = ({
       highlighted={highlighted}
       {...props}
     >
-      <S.Head highlighted={highlighted}>
-        <CharacterMiniCard
-          displayLink
-          outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
-          characterData={{
-            name: nickname,
-            level,
-            vocation: vocationHelper.getFullName(vocationId, level),
-            world: serverData.serverName,
-          }}
-          linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
-        />
-
-        {highlighted && <TagButton />}
-      </S.Head>
+      <Head
+        highlighted={highlighted}
+        id={id}
+        outfitId={outfitId}
+        nickname={nickname}
+        level={level}
+        vocationId={vocationId}
+        serverName={serverData.serverName}
+      />
 
       <S.Body style={{ height: FIXED_BODY_HEIGHT }}>
         {shouldRenderBody && (
