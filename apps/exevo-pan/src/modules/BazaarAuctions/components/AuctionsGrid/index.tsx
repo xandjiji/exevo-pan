@@ -6,6 +6,7 @@ import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
+import CharacterModal from './CharacterModal'
 import { shouldInsertAd } from './utils'
 import * as S from './styles'
 
@@ -27,8 +28,11 @@ const AuctionsGrid = (): JSX.Element => {
   const { activeFilterCount } = useFilters()
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
-
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
+
+  const [selectedCharacter, selectCharacter] = useState<
+    CharacterObject | undefined
+  >()
 
   const currentVisibleHighlighteds = shouldDisplayHighlightedAuctions
     ? highlightedAuctions.length
@@ -115,6 +119,7 @@ const AuctionsGrid = (): JSX.Element => {
                   characterData={auction}
                   highlighted
                   lazyRender
+                  onClick={() => selectCharacter(auction)}
                 />
 
                 {shouldInsertAd(index) && (
@@ -124,7 +129,11 @@ const AuctionsGrid = (): JSX.Element => {
             ))}
           {page.map((auction, index) => (
             <Fragment key={auction.id}>
-              <S.CharacterCard lazyRender characterData={auction} />
+              <S.CharacterCard
+                lazyRender
+                characterData={auction}
+                onClick={() => selectCharacter(auction)}
+              />
 
               {shouldInsertAd(index + currentVisibleHighlighteds) && (
                 <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
@@ -145,6 +154,10 @@ const AuctionsGrid = (): JSX.Element => {
           />
         )}
       </S.GridWrapper>
+      <CharacterModal
+        open={!!selectedCharacter}
+        characterData={selectedCharacter}
+      />
 
       <Ads.FooterBanner key={pageData.pageIndex} />
     </main>
