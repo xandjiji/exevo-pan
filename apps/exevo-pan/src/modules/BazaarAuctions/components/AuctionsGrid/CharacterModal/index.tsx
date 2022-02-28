@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { InfoGrid, Checkbox } from 'components/CharacterCard/styles'
 import {
   Head,
@@ -5,6 +6,7 @@ import {
   CharacterItems,
   CharacterSkills,
 } from 'components/CharacterCard/Parts'
+import { checkStore } from './utils'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
 
@@ -27,7 +29,14 @@ const CharacterModal = ({
     currentBid,
     items,
     skills,
+    hirelings,
+    charmInfo,
+    preySlot,
+    huntingSlot,
+    storeItems,
   } = characterData
+
+  const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
   return (
     <>
@@ -57,19 +66,25 @@ const CharacterModal = ({
 
         <CharacterItems items={items} />
 
-        <S.CheckboxWrapper>
-          <Checkbox label="Training Dummy" />
-          <Checkbox label="Gold pouch" />
-          <Checkbox label="Hirelings" />
-          <Checkbox label="Charm expansion" />
-          <Checkbox label="Prey Slot" />
-          <Checkbox label="Hunting Task Slot" />
-          <Checkbox label="Imbuement Shrine" />
-          <Checkbox label="Reward Shrine" />
-          <Checkbox label="Mailbox" />
-        </S.CheckboxWrapper>
-
         <CharacterSkills skills={skills} />
+
+        <S.CheckboxWrapper>
+          <Checkbox label="Training Dummy" checked={checkboxRecords.dummy} />
+          <Checkbox label="Gold pouch" checked={checkboxRecords.goldPouch} />
+          <Checkbox label="Hirelings" checked={hirelings.count > 0} />
+          <Checkbox label="Charm expansion" checked={charmInfo.expansion} />
+          <Checkbox label="Prey Slot" checked={preySlot} />
+          <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
+          <Checkbox
+            label="Imbuement Shrine"
+            checked={checkboxRecords.imbuementShrine}
+          />
+          <Checkbox
+            label="Reward Shrine"
+            checked={checkboxRecords.rewardShrine}
+          />
+          <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
+        </S.CheckboxWrapper>
       </S.Wrapper>
       <S.Backdrop onClick={onClose} />
     </>
