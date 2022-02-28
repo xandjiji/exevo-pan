@@ -107,16 +107,18 @@ const CharacterCard = ({
 
                 <S.Checkbox label="Prey Slot" checked={preySlot} />
 
-                <S.FlexWrapper
-                  title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
-                >
-                  <S.CheckboxContainer>
-                    <S.TibiaCoinIcon />
-                  </S.CheckboxContainer>
-                  <S.Strong data-has-investment={tcInvested !== '0'}>
-                    {tcInvested} {common.CharacterCard.tcInvested.invested}
-                  </S.Strong>
-                </S.FlexWrapper>
+                {tcInvested !== '0' && (
+                  <S.FlexWrapper
+                    title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
+                  >
+                    <S.CheckboxContainer>
+                      <S.TibiaCoinIcon />
+                    </S.CheckboxContainer>
+                    <S.Strong>
+                      {tcInvested} {common.CharacterCard.tcInvested.invested}
+                    </S.Strong>
+                  </S.FlexWrapper>
+                )}
               </S.FlexColumn>
             </S.FlexFooter>
           </>

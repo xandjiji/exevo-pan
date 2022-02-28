@@ -74,6 +74,7 @@ export const FlexFooter = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 32px;
+  align-items: flex-start;
 `
 
 export const FlexColumn = styled.div`
@@ -83,6 +84,7 @@ export const FlexColumn = styled.div`
 
   > * {
     width: fit-content;
+    height: 18px;
   }
 `
 
@@ -103,12 +105,9 @@ export const CheckboxContainer = styled.div`
   place-items: center;
 `
 
-export const Strong = styled.span`
-  &[data-has-investment='true'] {
-    color: var(--primary);
-    filter: brightness(130%);
-    font-weight: 700;
-  }
+export const Strong = styled.strong`
+  color: var(--primary);
+  filter: brightness(130%);
 `
 
 export const Body = styled.div`
