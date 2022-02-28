@@ -1,4 +1,4 @@
-import { InfoGrid } from 'components/CharacterCard/styles'
+import { InfoGrid, Checkbox } from 'components/CharacterCard/styles'
 import {
   Head,
   Textbox,
@@ -56,6 +56,18 @@ const CharacterModal = ({
         </InfoGrid>
 
         <CharacterItems items={items} />
+
+        <S.CheckboxWrapper>
+          <Checkbox label="Training Dummy" />
+          <Checkbox label="Gold pouch" />
+          <Checkbox label="Hirelings" />
+          <Checkbox label="Charm expansion" />
+          <Checkbox label="Prey Slot" />
+          <Checkbox label="Hunting Task Slot" />
+          <Checkbox label="Imbuement Shrine" />
+          <Checkbox label="Reward Shrine" />
+          <Checkbox label="Mailbox" />
+        </S.CheckboxWrapper>
 
         <CharacterSkills skills={skills} />
       </S.Wrapper>

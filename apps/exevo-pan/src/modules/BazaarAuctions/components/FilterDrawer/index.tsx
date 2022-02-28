@@ -248,16 +248,6 @@ const FilterDrawer = ({
               onClick={() => updateFilters('dummy', !filterState.dummy)}
             />
             <Checkbox
-              label="Hirelings"
-              checked={filterState.hireling}
-              onClick={() => updateFilters('hireling', !filterState.hireling)}
-            />
-            <Checkbox
-              label="Gold Pouch"
-              checked={filterState.goldPouch}
-              onClick={() => updateFilters('goldPouch', !filterState.goldPouch)}
-            />
-            <Checkbox
               label="Charm Expansion"
               checked={filterState.charmExpansion}
               onClick={() =>
@@ -265,9 +255,33 @@ const FilterDrawer = ({
               }
             />
             <Checkbox
+              label="Imbuement Shrine"
+              checked={filterState.imbuementShrine}
+              onClick={() =>
+                updateFilters('imbuementShrine', !filterState.imbuementShrine)
+              }
+            />
+            <Checkbox
+              label="Gold Pouch"
+              checked={filterState.goldPouch}
+              onClick={() => updateFilters('goldPouch', !filterState.goldPouch)}
+            />
+            <Checkbox
               label="Prey Slot"
               checked={filterState.preySlot}
               onClick={() => updateFilters('preySlot', !filterState.preySlot)}
+            />
+            <Checkbox
+              label="Reward Shrine"
+              checked={filterState.rewardShrine}
+              onClick={() =>
+                updateFilters('rewardShrine', !filterState.rewardShrine)
+              }
+            />
+            <Checkbox
+              label="Hirelings"
+              checked={filterState.hireling}
+              onClick={() => updateFilters('hireling', !filterState.hireling)}
             />
             <Checkbox
               label="Hunting Task Slot"
@@ -280,20 +294,6 @@ const FilterDrawer = ({
               label="Mailbox"
               checked={filterState.mailbox}
               onClick={() => updateFilters('mailbox', !filterState.mailbox)}
-            />
-            <Checkbox
-              label="Imbuement Shrine"
-              checked={filterState.imbuementShrine}
-              onClick={() =>
-                updateFilters('imbuementShrine', !filterState.imbuementShrine)
-              }
-            />
-            <Checkbox
-              label="Reward Shrine"
-              checked={filterState.rewardShrine}
-              onClick={() =>
-                updateFilters('rewardShrine', !filterState.rewardShrine)
-              }
             />
             <Checkbox
               label="Regular world transfer"
