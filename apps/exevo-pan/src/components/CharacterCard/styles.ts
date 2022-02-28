@@ -86,7 +86,10 @@ export const FlexColumn = styled.div`
   }
 `
 
-export const Checkbox = styled(BaseCheckbox)`
+export const Checkbox = styled(BaseCheckbox).attrs({
+  disabled: true,
+  'aria-readonly': true,
+})`
   &:checked {
     background-color: var(--primary);
     border-color: var(--primary);

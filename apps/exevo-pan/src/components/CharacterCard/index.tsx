@@ -101,18 +101,11 @@ const CharacterCard = ({
 
               <S.FlexColumn>
                 <S.Checkbox
-                  aria-readonly
-                  disabled
                   label="Charm Expansion"
                   checked={charmInfo.expansion}
                 />
 
-                <S.Checkbox
-                  aria-readonly
-                  disabled
-                  label="Prey Slot"
-                  checked={preySlot}
-                />
+                <S.Checkbox label="Prey Slot" checked={preySlot} />
 
                 <S.FlexWrapper
                   title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
