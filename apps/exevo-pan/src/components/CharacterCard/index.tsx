@@ -80,11 +80,8 @@ const CharacterCard = ({
                 nickname={nickname}
                 transfer={transfer}
               />
-
               <Textbox.Pvp serverData={serverData} />
-
               <Textbox.AuctionEnd auctionEnd={auctionEnd} />
-
               <Textbox.AuctionBid
                 hasBeenBidded={hasBeenBidded}
                 currentBid={currentBid}
