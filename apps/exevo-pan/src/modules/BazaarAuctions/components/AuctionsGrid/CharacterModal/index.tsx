@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { Accordion } from 'components/Atoms'
 import { InfoGrid, Checkbox } from 'components/CharacterCard/styles'
 import {
   Head,
@@ -6,9 +7,19 @@ import {
   CharacterItems,
   CharacterSkills,
 } from 'components/CharacterCard/Parts'
+import Lister from 'components/CharacterCard/Parts/Tooltips/Lister'
+import {
+  Icons,
+  TitleWrapper as AccordionTitle,
+} from 'components/CharacterCard/Parts/Tooltips/styles'
+import { tokens as imbuementTokens } from 'data-dictionary/dist/dictionaries/imbuement'
 import { checkStore } from './utils'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
+
+const MAX_LINES = {
+  imbuements: 12,
+}
 
 const CharacterModal = ({
   open,
@@ -34,6 +45,7 @@ const CharacterModal = ({
     preySlot,
     huntingSlot,
     storeItems,
+    imbuements,
   } = characterData
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
@@ -85,6 +97,22 @@ const CharacterModal = ({
           />
           <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
         </S.CheckboxWrapper>
+
+        <Accordion
+          title={
+            <AccordionTitle>
+              <Icons.Imbuement />
+              {`Imbuements: ${imbuements.length}/${imbuementTokens.length}`}
+            </AccordionTitle>
+          }
+          initialValue
+        >
+          <Lister
+            maxLines={MAX_LINES.imbuements}
+            partialList={imbuements}
+            fullList={imbuementTokens}
+          />
+        </Accordion>
       </S.Wrapper>
       <S.Backdrop onClick={onClose} />
     </>
