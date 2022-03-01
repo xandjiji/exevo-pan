@@ -7,6 +7,7 @@ const iconStyle = css`
   margin-right: 4px;
   width: 18px;
   height: 18px;
+  transform: translateY(-1px);
   fill: var(--onSurface);
 `
 
