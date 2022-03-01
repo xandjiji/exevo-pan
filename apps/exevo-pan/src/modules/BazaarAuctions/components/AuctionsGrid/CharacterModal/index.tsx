@@ -13,12 +13,14 @@ import {
   TitleWrapper as AccordionTitle,
 } from 'components/CharacterCard/Parts/Tooltips/styles'
 import { tokens as imbuementTokens } from 'data-dictionary/dist/dictionaries/imbuement'
+import { tokens as charmTokens } from 'data-dictionary/dist/dictionaries/charm'
 import { checkStore } from './utils'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
 
 const MAX_LINES = {
   imbuements: 12,
+  charms: 10,
 }
 
 const CharacterModal = ({
@@ -46,6 +48,7 @@ const CharacterModal = ({
     huntingSlot,
     storeItems,
     imbuements,
+    charms,
   } = characterData
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
@@ -111,6 +114,26 @@ const CharacterModal = ({
             maxLines={MAX_LINES.imbuements}
             partialList={imbuements}
             fullList={imbuementTokens}
+          />
+        </Accordion>
+
+        <Accordion
+          title={
+            <AccordionTitle>
+              <Icons.Imbuement />
+              Charms: {charms.length}/{charmTokens.length} (
+              <strong style={{ marginRight: 2 }}>{charmInfo.total}</strong>{' '}
+              total points,
+              <strong style={{ margin: 2 }}>{charmInfo.unspent}</strong>{' '}
+              unspent)
+            </AccordionTitle>
+          }
+          initialValue
+        >
+          <Lister
+            maxLines={MAX_LINES.charms}
+            partialList={charms}
+            fullList={charmTokens}
           />
         </Accordion>
       </S.Wrapper>
