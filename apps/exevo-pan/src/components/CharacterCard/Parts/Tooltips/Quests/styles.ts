@@ -25,4 +25,5 @@ export const Title = styled.h5`
   font-size: 14px;
   color: var(--primary);
   filter: brightness(130%);
+  text-align: center;
 `

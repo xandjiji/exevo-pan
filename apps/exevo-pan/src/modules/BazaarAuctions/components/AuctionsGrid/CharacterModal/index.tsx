@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { Accordion } from 'components/Atoms'
 import { InfoGrid, Checkbox } from 'components/CharacterCard/styles'
 import {
@@ -12,8 +13,11 @@ import {
   Icons,
   TitleWrapper as AccordionTitle,
 } from 'components/CharacterCard/Parts/Tooltips/styles'
+import * as QuestStyled from 'components/CharacterCard/Parts/Tooltips/Quests/styles'
+import * as questList from 'components/CharacterCard/Parts/Tooltips/Quests/lists'
 import { tokens as imbuementTokens } from 'data-dictionary/dist/dictionaries/imbuement'
 import { tokens as charmTokens } from 'data-dictionary/dist/dictionaries/charm'
+import { tokens as questTokens } from 'data-dictionary/dist/dictionaries/quest'
 import { checkStore } from './utils'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
@@ -29,6 +33,11 @@ const CharacterModal = ({
   onClose,
 }: CharacterModalProps): JSX.Element | null => {
   if (!open || !characterData) return null
+
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const {
     id,
     outfitId,
@@ -49,6 +58,7 @@ const CharacterModal = ({
     storeItems,
     imbuements,
     charms,
+    quests,
   } = characterData
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
@@ -135,6 +145,48 @@ const CharacterModal = ({
             partialList={charms}
             fullList={charmTokens}
           />
+        </Accordion>
+
+        <Accordion
+          title={
+            <AccordionTitle>
+              <Icons.Quest />
+              Quests: {quests.length}/{questTokens.length}
+            </AccordionTitle>
+          }
+          initialValue
+        >
+          <QuestStyled.Grid>
+            <QuestStyled.Group>
+              <QuestStyled.Title>
+                {common.CharacterCard.Tooltips.quests.utilitary}
+              </QuestStyled.Title>
+              <Lister partialList={quests} fullList={questList.utilitary} />
+            </QuestStyled.Group>
+
+            <QuestStyled.Group>
+              <QuestStyled.Title>
+                {common.CharacterCard.Tooltips.quests.access}
+              </QuestStyled.Title>
+              <Lister partialList={quests} fullList={questList.access} />
+            </QuestStyled.Group>
+
+            <QuestStyled.Group>
+              <QuestStyled.Title>
+                {common.CharacterCard.Tooltips.quests.boss}
+              </QuestStyled.Title>
+              <Lister partialList={quests} fullList={questList.bosses} />
+            </QuestStyled.Group>
+
+            {!!questList.others.length && (
+              <QuestStyled.Group>
+                <QuestStyled.Title>
+                  {common.CharacterCard.Tooltips.quests.other}
+                </QuestStyled.Title>
+                <Lister partialList={quests} fullList={questList.others} />
+              </QuestStyled.Group>
+            )}
+          </QuestStyled.Grid>
         </Accordion>
       </S.Wrapper>
       <S.Backdrop onClick={onClose} />
