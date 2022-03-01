@@ -1,6 +1,14 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Ul = styled.ul``
+export const Ul = styled.ul<{ maxLines?: number }>`
+  ${({ maxLines }) =>
+    maxLines &&
+    css`
+      display: grid;
+      grid-auto-flow: column;
+      grid-template-rows: repeat(${maxLines}, 1fr);
+    `}
+`
 
 export const Li = styled.li`
   display: block;

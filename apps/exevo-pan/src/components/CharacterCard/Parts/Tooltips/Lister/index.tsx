@@ -2,14 +2,18 @@ import { memo, useMemo } from 'react'
 import * as S from './styles'
 import { ListerProps } from './types'
 
-const Lister = ({ partialList, fullList }: ListerProps): JSX.Element => {
+const Lister = ({
+  maxLines,
+  partialList,
+  fullList,
+}: ListerProps): JSX.Element => {
   const partialSet = useMemo(
     () => new Set<string>([...partialList]),
     [partialList],
   )
 
   return (
-    <S.Ul>
+    <S.Ul maxLines={maxLines}>
       {fullList.map((item) => (
         <S.Li data-active={partialSet.has(item)}>{item}</S.Li>
       ))}
