@@ -45,7 +45,6 @@ export const Wrapper = styled.article`
 `
 
 export const InfoGrid = styled.div`
-  margin-bottom: 12px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 8px;
@@ -111,5 +110,7 @@ export const Strong = styled.strong`
 `
 
 export const Body = styled.div`
+  display: grid;
+  gap: 12px;
   margin-bottom: 12px;
 `
