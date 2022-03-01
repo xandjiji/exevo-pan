@@ -1,9 +1,9 @@
+import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/quest'
 import { utilitary, access, bosses, others } from './lists'
-import ListedItems from '../ListedItems'
+import Lister from '../Lister'
 import * as S from '../styles'
 import { Grid, Group, Title } from './styles'
 import { TooltipProps } from '../types'
@@ -13,8 +13,6 @@ const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
     translations: { common },
   } = useTranslations()
 
-  const characterQuests = useMemo(() => new Set<string>([...items]), [items])
-
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.quests}
@@ -22,34 +20,34 @@ const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
         <Grid>
           <Group>
             <Title>{common.CharacterCard.Tooltips.quests.utilitary}</Title>
-            <ListedItems fullList={utilitary} characterSet={characterQuests} />
+            <Lister partialList={items} fullList={utilitary} />
           </Group>
 
           <Group>
             <Title>{common.CharacterCard.Tooltips.quests.access}</Title>
-            <ListedItems fullList={access} characterSet={characterQuests} />
+            <Lister partialList={items} fullList={access} />
           </Group>
 
           <Group>
             <Title>{common.CharacterCard.Tooltips.quests.boss}</Title>
-            <ListedItems fullList={bosses} characterSet={characterQuests} />
+            <Lister partialList={items} fullList={bosses} />
           </Group>
 
           {!!others.length && (
             <Group>
               <Title>{common.CharacterCard.Tooltips.quests.other}</Title>
-              <ListedItems fullList={others} characterSet={characterQuests} />
+              <Lister partialList={items} fullList={others} />
             </Group>
           )}
         </Grid>
       }
     >
-      <S.Wrapper {...props}>
-        <S.QuestIcon />
+      <S.TitleWrapper {...props}>
+        <S.Icons.Quest />
         {`Quests: ${items.length}/${tokens.length}`}
-      </S.Wrapper>
+      </S.TitleWrapper>
     </Tooltip>
   )
 }
 
-export default CharacterQuests
+export default memo(CharacterQuests)

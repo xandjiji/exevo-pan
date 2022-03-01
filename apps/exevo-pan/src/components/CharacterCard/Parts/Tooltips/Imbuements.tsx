@@ -1,8 +1,8 @@
+import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/imbuement'
-import ListedItems from './ListedItems'
+import Lister from './Lister'
 import * as S from './styles'
 import { TooltipProps } from './types'
 
@@ -14,24 +14,17 @@ const CharacterImbuements = ({
     translations: { common },
   } = useTranslations()
 
-  const characterImbuements = useMemo(
-    () => new Set<string>([...items]),
-    [items],
-  )
-
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.imbuements}
-      content={
-        <ListedItems fullList={tokens} characterSet={characterImbuements} />
-      }
+      content={<Lister partialList={items} fullList={tokens} />}
     >
-      <S.Wrapper {...props}>
-        <S.ImbuementIcon />
+      <S.TitleWrapper {...props}>
+        <S.Icons.Imbuement />
         {`Imbuements: ${items.length}/${tokens.length}`}
-      </S.Wrapper>
+      </S.TitleWrapper>
     </Tooltip>
   )
 }
 
-export default CharacterImbuements
+export default memo(CharacterImbuements)

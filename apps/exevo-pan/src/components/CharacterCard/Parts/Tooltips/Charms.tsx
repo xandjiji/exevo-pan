@@ -1,8 +1,8 @@
+import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/charm'
-import ListedItems from './ListedItems'
+import Lister from './Lister'
 import * as S from './styles'
 import { TooltipProps } from './types'
 
@@ -11,19 +11,17 @@ const CharacterCharms = ({ items, ...props }: TooltipProps): JSX.Element => {
     translations: { common },
   } = useTranslations()
 
-  const characterCharms = useMemo(() => new Set<string>([...items]), [items])
-
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.charms}
-      content={<ListedItems fullList={tokens} characterSet={characterCharms} />}
+      content={<Lister partialList={items} fullList={tokens} />}
     >
-      <S.Wrapper {...props}>
-        <S.CharmIcon />
+      <S.TitleWrapper {...props}>
+        <S.Icons.Charm />
         {`Charms: ${items.length}/${tokens.length}`}
-      </S.Wrapper>
+      </S.TitleWrapper>
     </Tooltip>
   )
 }
 
-export default CharacterCharms
+export default memo(CharacterCharms)
