@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { MaterialCard } from 'styles'
+import { MaterialCard, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.div`
   ${MaterialCard}
@@ -21,6 +21,14 @@ export const Backdrop = styled.div`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
+`
+
+export const ScrollableContainer = styled.div`
+  margin: 0 -12px;
+  padding: 0 12px;
+  max-height: 50vh;
+  overflow: auto;
+  ${CustomScrollbar}
 `
 
 export const CheckboxWrapper = styled.div`

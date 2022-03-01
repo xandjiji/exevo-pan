@@ -89,105 +89,107 @@ const CharacterModal = ({
           />
         </InfoGrid>
 
-        <CharacterItems items={items} />
+        <S.ScrollableContainer>
+          <CharacterItems items={items} />
 
-        <CharacterSkills skills={skills} />
+          <CharacterSkills skills={skills} />
 
-        <S.CheckboxWrapper>
-          <Checkbox label="Training Dummy" checked={checkboxRecords.dummy} />
-          <Checkbox label="Gold pouch" checked={checkboxRecords.goldPouch} />
-          <Checkbox label="Hirelings" checked={hirelings.count > 0} />
-          <Checkbox label="Charm expansion" checked={charmInfo.expansion} />
-          <Checkbox label="Prey Slot" checked={preySlot} />
-          <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
-          <Checkbox
-            label="Imbuement Shrine"
-            checked={checkboxRecords.imbuementShrine}
-          />
-          <Checkbox
-            label="Reward Shrine"
-            checked={checkboxRecords.rewardShrine}
-          />
-          <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
-        </S.CheckboxWrapper>
+          <S.CheckboxWrapper>
+            <Checkbox label="Training Dummy" checked={checkboxRecords.dummy} />
+            <Checkbox label="Gold pouch" checked={checkboxRecords.goldPouch} />
+            <Checkbox label="Hirelings" checked={hirelings.count > 0} />
+            <Checkbox label="Charm expansion" checked={charmInfo.expansion} />
+            <Checkbox label="Prey Slot" checked={preySlot} />
+            <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
+            <Checkbox
+              label="Imbuement Shrine"
+              checked={checkboxRecords.imbuementShrine}
+            />
+            <Checkbox
+              label="Reward Shrine"
+              checked={checkboxRecords.rewardShrine}
+            />
+            <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
+          </S.CheckboxWrapper>
 
-        <Accordion
-          title={
-            <AccordionTitle>
-              <Icons.Imbuement />
-              {`Imbuements: ${imbuements.length}/${imbuementTokens.length}`}
-            </AccordionTitle>
-          }
-          initialValue
-        >
-          <Lister
-            maxLines={MAX_LINES.imbuements}
-            partialList={imbuements}
-            fullList={imbuementTokens}
-          />
-        </Accordion>
+          <Accordion
+            title={
+              <AccordionTitle>
+                <Icons.Imbuement />
+                {`Imbuements: ${imbuements.length}/${imbuementTokens.length}`}
+              </AccordionTitle>
+            }
+            initialValue
+          >
+            <Lister
+              maxLines={MAX_LINES.imbuements}
+              partialList={imbuements}
+              fullList={imbuementTokens}
+            />
+          </Accordion>
 
-        <Accordion
-          title={
-            <AccordionTitle>
-              <Icons.Imbuement />
-              Charms: {charms.length}/{charmTokens.length} (
-              <strong style={{ marginRight: 2 }}>{charmInfo.total}</strong>{' '}
-              total points,
-              <strong style={{ margin: 2 }}>{charmInfo.unspent}</strong>{' '}
-              unspent)
-            </AccordionTitle>
-          }
-          initialValue
-        >
-          <Lister
-            maxLines={MAX_LINES.charms}
-            partialList={charms}
-            fullList={charmTokens}
-          />
-        </Accordion>
+          <Accordion
+            title={
+              <AccordionTitle>
+                <Icons.Imbuement />
+                Charms: {charms.length}/{charmTokens.length} (
+                <strong style={{ marginRight: 2 }}>{charmInfo.total}</strong>{' '}
+                total points,
+                <strong style={{ margin: 2 }}>{charmInfo.unspent}</strong>{' '}
+                unspent)
+              </AccordionTitle>
+            }
+            initialValue
+          >
+            <Lister
+              maxLines={MAX_LINES.charms}
+              partialList={charms}
+              fullList={charmTokens}
+            />
+          </Accordion>
 
-        <Accordion
-          title={
-            <AccordionTitle>
-              <Icons.Quest />
-              Quests: {quests.length}/{questTokens.length}
-            </AccordionTitle>
-          }
-          initialValue
-        >
-          <QuestStyled.Grid>
-            <QuestStyled.Group>
-              <QuestStyled.Title>
-                {common.CharacterCard.Tooltips.quests.utilitary}
-              </QuestStyled.Title>
-              <Lister partialList={quests} fullList={questList.utilitary} />
-            </QuestStyled.Group>
-
-            <QuestStyled.Group>
-              <QuestStyled.Title>
-                {common.CharacterCard.Tooltips.quests.access}
-              </QuestStyled.Title>
-              <Lister partialList={quests} fullList={questList.access} />
-            </QuestStyled.Group>
-
-            <QuestStyled.Group>
-              <QuestStyled.Title>
-                {common.CharacterCard.Tooltips.quests.boss}
-              </QuestStyled.Title>
-              <Lister partialList={quests} fullList={questList.bosses} />
-            </QuestStyled.Group>
-
-            {!!questList.others.length && (
+          <Accordion
+            title={
+              <AccordionTitle>
+                <Icons.Quest />
+                Quests: {quests.length}/{questTokens.length}
+              </AccordionTitle>
+            }
+            initialValue
+          >
+            <QuestStyled.Grid>
               <QuestStyled.Group>
                 <QuestStyled.Title>
-                  {common.CharacterCard.Tooltips.quests.other}
+                  {common.CharacterCard.Tooltips.quests.utilitary}
                 </QuestStyled.Title>
-                <Lister partialList={quests} fullList={questList.others} />
+                <Lister partialList={quests} fullList={questList.utilitary} />
               </QuestStyled.Group>
-            )}
-          </QuestStyled.Grid>
-        </Accordion>
+
+              <QuestStyled.Group>
+                <QuestStyled.Title>
+                  {common.CharacterCard.Tooltips.quests.access}
+                </QuestStyled.Title>
+                <Lister partialList={quests} fullList={questList.access} />
+              </QuestStyled.Group>
+
+              <QuestStyled.Group>
+                <QuestStyled.Title>
+                  {common.CharacterCard.Tooltips.quests.boss}
+                </QuestStyled.Title>
+                <Lister partialList={quests} fullList={questList.bosses} />
+              </QuestStyled.Group>
+
+              {!!questList.others.length && (
+                <QuestStyled.Group>
+                  <QuestStyled.Title>
+                    {common.CharacterCard.Tooltips.quests.other}
+                  </QuestStyled.Title>
+                  <Lister partialList={quests} fullList={questList.others} />
+                </QuestStyled.Group>
+              )}
+            </QuestStyled.Grid>
+          </Accordion>
+        </S.ScrollableContainer>
       </S.Wrapper>
       <S.Backdrop onClick={onClose} />
     </>
