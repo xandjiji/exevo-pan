@@ -18,7 +18,7 @@ const CharacterCharms = ({ items, ...props }: TooltipProps): JSX.Element => {
     >
       <S.TitleWrapper {...props}>
         <S.Icons.Charm />
-        {`Charms: ${items.length}/${tokens.length}`}
+        Charms: {items.length}/{tokens.length}
       </S.TitleWrapper>
     </Tooltip>
   )

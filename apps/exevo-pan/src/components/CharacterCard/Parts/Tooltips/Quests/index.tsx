@@ -44,7 +44,7 @@ const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
     >
       <S.TitleWrapper {...props}>
         <S.Icons.Quest />
-        {`Quests: ${items.length}/${tokens.length}`}
+        Quests: {items.length}/{tokens.length}
       </S.TitleWrapper>
     </Tooltip>
   )

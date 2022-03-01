@@ -21,7 +21,7 @@ const CharacterImbuements = ({
     >
       <S.TitleWrapper {...props}>
         <S.Icons.Imbuement />
-        {`Imbuements: ${items.length}/${tokens.length}`}
+        Imbuements: {items.length}/{tokens.length}
       </S.TitleWrapper>
     </Tooltip>
   )
