@@ -1,6 +1,10 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { InfoGrid, Checkbox } from 'components/CharacterCard/styles'
+import {
+  InfoGrid,
+  Checkbox,
+  TibiaCoinIcon,
+} from 'components/CharacterCard/styles'
 import {
   Head,
   Textbox,
@@ -17,6 +21,7 @@ import * as questList from 'components/CharacterCard/Parts/Tooltips/Quests/lists
 import { tokens as imbuementTokens } from 'data-dictionary/dist/dictionaries/imbuement'
 import { tokens as charmTokens } from 'data-dictionary/dist/dictionaries/charm'
 import { tokens as questTokens } from 'data-dictionary/dist/dictionaries/quest'
+import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import { checkStore } from './utils'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
@@ -62,6 +67,11 @@ const CharacterModal = ({
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
+  const tcInvested = useMemo(
+    () => formatNumberWithCommas(calculateTotalInvestment(characterData)),
+    [characterData],
+  )
+
   return (
     <>
       <S.Wrapper>
@@ -93,23 +103,37 @@ const CharacterModal = ({
 
           <CharacterSkills skills={skills} />
 
-          <S.CheckboxWrapper>
-            <Checkbox label="Training Dummy" checked={checkboxRecords.dummy} />
-            <Checkbox label="Gold pouch" checked={checkboxRecords.goldPouch} />
-            <Checkbox label="Hirelings" checked={hirelings.count > 0} />
-            <Checkbox label="Charm expansion" checked={charmInfo.expansion} />
-            <Checkbox label="Prey Slot" checked={preySlot} />
-            <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
-            <Checkbox
-              label="Imbuement Shrine"
-              checked={checkboxRecords.imbuementShrine}
-            />
-            <Checkbox
-              label="Reward Shrine"
-              checked={checkboxRecords.rewardShrine}
-            />
-            <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
-          </S.CheckboxWrapper>
+          <S.Section>
+            <S.CheckboxWrapper>
+              <Checkbox
+                label="Training Dummy"
+                checked={checkboxRecords.dummy}
+              />
+              <Checkbox
+                label="Gold pouch"
+                checked={checkboxRecords.goldPouch}
+              />
+              <Checkbox label="Hirelings" checked={hirelings.count > 0} />
+              <Checkbox label="Charm expansion" checked={charmInfo.expansion} />
+              <Checkbox label="Prey Slot" checked={preySlot} />
+              <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
+              <Checkbox
+                label="Imbuement Shrine"
+                checked={checkboxRecords.imbuementShrine}
+              />
+              <Checkbox
+                label="Reward Shrine"
+                checked={checkboxRecords.rewardShrine}
+              />
+              <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
+            </S.CheckboxWrapper>
+            <S.SectionText>
+              <TibiaCoinIcon /> Total invested:{' '}
+              <S.CoinsValue data-active={tcInvested !== '0'}>
+                {tcInvested} Tibia Coins
+              </S.CoinsValue>
+            </S.SectionText>
+          </S.Section>
 
           <S.Accordion
             title={

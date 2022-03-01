@@ -35,14 +35,38 @@ export const ScrollableContainer = styled.div`
   gap: 16px;
 `
 
+export const Section = styled.div`
+  padding-bottom: 12px;
+  border-bottom: solid 1px var(--separator);
+
+  display: grid;
+  gap: 16px;
+`
+
+export const SectionText = styled.p`
+  display: flex;
+  align-items: center;
+  gap: 5px;
+
+  font-size: 12px;
+  font-weight: 400;
+`
+
+export const CoinsValue = styled.strong`
+  font-weight: 400;
+
+  &[data-active='true'] {
+    color: var(--primary);
+    filter: brightness(130%);
+    font-weight: 700;
+  }
+`
+
 export const CheckboxWrapper = styled.div`
   display: grid;
   grid-template-rows: 1fr 1fr 1fr;
   gap: 8px;
   grid-auto-flow: column;
-
-  padding-bottom: 12px;
-  border-bottom: solid 1px var(--separator);
 `
 
 export const Accordion = styled(BaseAccordion)`
