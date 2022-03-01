@@ -135,41 +135,47 @@ const CharacterModal = ({
             </S.SectionText>
           </S.Section>
 
-          <S.Accordion
-            title={
-              <AccordionTitle>
-                <Icons.Imbuement />
-                {`Imbuements: ${imbuements.length}/${imbuementTokens.length}`}
-              </AccordionTitle>
-            }
-            initialValue
-          >
-            <Lister
-              maxLines={MAX_LINES.imbuements}
-              partialList={imbuements}
-              fullList={imbuementTokens}
-            />
-          </S.Accordion>
+          <S.Section>
+            <S.Accordion
+              title={
+                <AccordionTitle>
+                  <Icons.Imbuement />
+                  {`Imbuements: ${imbuements.length}/${imbuementTokens.length}`}
+                </AccordionTitle>
+              }
+              initialValue
+            >
+              <Lister
+                maxLines={MAX_LINES.imbuements}
+                partialList={imbuements}
+                fullList={imbuementTokens}
+              />
+            </S.Accordion>
+          </S.Section>
 
-          <S.Accordion
-            title={
-              <AccordionTitle>
-                <Icons.Charm />
-                Charms: {charms.length}/{charmTokens.length} (
-                <strong style={{ marginRight: 2 }}>{charmInfo.total}</strong>{' '}
-                total points,
-                <strong style={{ margin: 2 }}>{charmInfo.unspent}</strong>{' '}
-                unspent)
-              </AccordionTitle>
-            }
-            initialValue
-          >
-            <Lister
-              maxLines={MAX_LINES.charms}
-              partialList={charms}
-              fullList={charmTokens}
-            />
-          </S.Accordion>
+          <S.Section>
+            <S.Accordion
+              title={
+                <AccordionTitle>
+                  <Icons.Charm />
+                  Charms: {charms.length}/{charmTokens.length} (
+                  <strong style={{ marginRight: 2 }}>{charmInfo.total}</strong>{' '}
+                  total points,
+                  <strong style={{ margin: 2 }}>
+                    {charmInfo.unspent}
+                  </strong>{' '}
+                  unspent)
+                </AccordionTitle>
+              }
+              initialValue
+            >
+              <Lister
+                maxLines={MAX_LINES.charms}
+                partialList={charms}
+                fullList={charmTokens}
+              />
+            </S.Accordion>
+          </S.Section>
 
           <S.Accordion
             title={
