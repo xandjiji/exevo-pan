@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Accordion as BaseAccordion } from 'components/Atoms'
 import { MaterialCard, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.div`
@@ -24,11 +25,14 @@ export const Backdrop = styled.div`
 `
 
 export const ScrollableContainer = styled.div`
-  margin: 0 -12px;
+  margin: 12px -12px;
   padding: 0 12px;
   max-height: 50vh;
   overflow: auto;
   ${CustomScrollbar}
+
+  display: grid;
+  gap: 16px;
 `
 
 export const CheckboxWrapper = styled.div`
@@ -36,4 +40,11 @@ export const CheckboxWrapper = styled.div`
   grid-template-rows: 1fr 1fr 1fr;
   gap: 8px;
   grid-auto-flow: column;
+
+  padding-bottom: 12px;
+  border-bottom: solid 1px var(--separator);
+`
+
+export const Accordion = styled(BaseAccordion)`
+  margin: -8px 0;
 `

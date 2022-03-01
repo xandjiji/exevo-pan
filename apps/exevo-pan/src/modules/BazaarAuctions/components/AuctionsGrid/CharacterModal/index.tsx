@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Accordion } from 'components/Atoms'
 import { InfoGrid, Checkbox } from 'components/CharacterCard/styles'
 import {
   Head,
@@ -112,7 +111,7 @@ const CharacterModal = ({
             <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
           </S.CheckboxWrapper>
 
-          <Accordion
+          <S.Accordion
             title={
               <AccordionTitle>
                 <Icons.Imbuement />
@@ -126,12 +125,12 @@ const CharacterModal = ({
               partialList={imbuements}
               fullList={imbuementTokens}
             />
-          </Accordion>
+          </S.Accordion>
 
-          <Accordion
+          <S.Accordion
             title={
               <AccordionTitle>
-                <Icons.Imbuement />
+                <Icons.Charm />
                 Charms: {charms.length}/{charmTokens.length} (
                 <strong style={{ marginRight: 2 }}>{charmInfo.total}</strong>{' '}
                 total points,
@@ -146,9 +145,9 @@ const CharacterModal = ({
               partialList={charms}
               fullList={charmTokens}
             />
-          </Accordion>
+          </S.Accordion>
 
-          <Accordion
+          <S.Accordion
             title={
               <AccordionTitle>
                 <Icons.Quest />
@@ -188,7 +187,7 @@ const CharacterModal = ({
                 </QuestStyled.Group>
               )}
             </QuestStyled.Grid>
-          </Accordion>
+          </S.Accordion>
         </S.ScrollableContainer>
       </S.Wrapper>
       <S.Backdrop onClick={onClose} />
