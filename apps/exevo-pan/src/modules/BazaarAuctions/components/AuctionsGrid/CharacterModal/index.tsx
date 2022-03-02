@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { Tabs } from 'components/Atoms'
 import {
   InfoGrid,
   Checkbox,
@@ -136,30 +137,36 @@ const CharacterModal = ({
               <QuestsTooltip items={quests} />
             </S.TooltipSection>
 
-            <S.SpriteSection>
-              {outfits.map(({ name, type }) => (
-                <SpriteBox
-                  key={name}
-                  offset
-                  name={name}
-                  src={resolvers.outfit(name, sex, type)}
-                  type={type}
-                  rareSet={rareSet.mount}
-                />
-              ))}
-            </S.SpriteSection>
+            <Tabs>
+              <Tabs.Panel label="Outfits">
+                <S.SpriteSection>
+                  {outfits.map(({ name, type }) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      src={resolvers.outfit(name, sex, type)}
+                      type={type}
+                      rareSet={rareSet.mount}
+                    />
+                  ))}
+                </S.SpriteSection>
+              </Tabs.Panel>
 
-            <S.SpriteSection>
-              {mounts.map((name) => (
-                <SpriteBox
-                  key={name}
-                  offset
-                  name={name}
-                  src={resolvers.mount(name)}
-                  rareSet={rareSet.mount}
-                />
-              ))}
-            </S.SpriteSection>
+              <Tabs.Panel label="Mounts">
+                <S.SpriteSection>
+                  {mounts.map((name) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      src={resolvers.mount(name)}
+                      rareSet={rareSet.mount}
+                    />
+                  ))}
+                </S.SpriteSection>
+              </Tabs.Panel>
+            </Tabs>
           </S.Grid>
         </S.ScrollableContainer>
       </S.Wrapper>
