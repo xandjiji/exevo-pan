@@ -10,26 +10,14 @@ import {
   Textbox,
   CharacterItems,
   CharacterSkills,
+  ImbuementsTooltip,
+  CharmsTooltip,
+  QuestsTooltip,
 } from 'components/CharacterCard/Parts'
-import Lister from 'components/CharacterCard/Parts/Tooltips/Lister'
-import {
-  Icons,
-  TitleWrapper as AccordionTitle,
-} from 'components/CharacterCard/Parts/Tooltips/styles'
-import * as QuestStyled from 'components/CharacterCard/Parts/Tooltips/Quests/styles'
-import * as questList from 'components/CharacterCard/Parts/Tooltips/Quests/lists'
-import { tokens as imbuementTokens } from 'data-dictionary/dist/dictionaries/imbuement'
-import { tokens as charmTokens } from 'data-dictionary/dist/dictionaries/charm'
-import { tokens as questTokens } from 'data-dictionary/dist/dictionaries/quest'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import { checkStore } from './utils'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
-
-const MAX_LINES = {
-  imbuements: 12,
-  charms: 10,
-}
 
 const CharacterModal = ({
   open,
@@ -38,6 +26,7 @@ const CharacterModal = ({
 }: CharacterModalProps): JSX.Element | null => {
   if (!open || !characterData) return null
 
+  /* @ ToDo: remove if unused? */
   const {
     translations: { common },
   } = useTranslations()
@@ -84,140 +73,68 @@ const CharacterModal = ({
           serverName={serverData.serverName}
         />
 
-        <InfoGrid>
-          <Textbox.Server
-            serverData={serverData}
-            nickname={nickname}
-            transfer={transfer}
-          />
-          <Textbox.Pvp serverData={serverData} />
-          <Textbox.AuctionEnd auctionEnd={auctionEnd} />
-          <Textbox.AuctionBid
-            hasBeenBidded={hasBeenBidded}
-            currentBid={currentBid}
-          />
-        </InfoGrid>
-
         <S.ScrollableContainer>
-          <CharacterItems items={items} />
-
-          <CharacterSkills skills={skills} />
-
-          <S.Section>
-            <S.CheckboxWrapper>
-              <Checkbox
-                label="Training Dummy"
-                checked={checkboxRecords.dummy}
+          <S.Grid>
+            <InfoGrid>
+              <Textbox.Server
+                serverData={serverData}
+                nickname={nickname}
+                transfer={transfer}
               />
-              <Checkbox
-                label="Gold pouch"
-                checked={checkboxRecords.goldPouch}
+              <Textbox.Pvp serverData={serverData} />
+              <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+              <Textbox.AuctionBid
+                hasBeenBidded={hasBeenBidded}
+                currentBid={currentBid}
               />
-              <Checkbox label="Hirelings" checked={hirelings.count > 0} />
-              <Checkbox label="Charm expansion" checked={charmInfo.expansion} />
-              <Checkbox label="Prey Slot" checked={preySlot} />
-              <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
-              <Checkbox
-                label="Imbuement Shrine"
-                checked={checkboxRecords.imbuementShrine}
-              />
-              <Checkbox
-                label="Reward Shrine"
-                checked={checkboxRecords.rewardShrine}
-              />
-              <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
-            </S.CheckboxWrapper>
-            <S.SectionText>
-              <TibiaCoinIcon /> Total invested:{' '}
-              <S.CoinsValue data-active={tcInvested !== '0'}>
-                {tcInvested} Tibia Coins
-              </S.CoinsValue>
-            </S.SectionText>
-          </S.Section>
+            </InfoGrid>
 
-          <S.Section>
-            <S.Accordion
-              title={
-                <AccordionTitle>
-                  <Icons.Imbuement />
-                  {`Imbuements: ${imbuements.length}/${imbuementTokens.length}`}
-                </AccordionTitle>
-              }
-              initialValue
-            >
-              <Lister
-                maxLines={MAX_LINES.imbuements}
-                partialList={imbuements}
-                fullList={imbuementTokens}
-              />
-            </S.Accordion>
-          </S.Section>
+            <CharacterItems items={items} />
 
-          <S.Section>
-            <S.Accordion
-              title={
-                <AccordionTitle>
-                  <Icons.Charm />
-                  Charms: {charms.length}/{charmTokens.length} (
-                  <strong style={{ marginRight: 2 }}>{charmInfo.total}</strong>{' '}
-                  total points,
-                  <strong style={{ margin: 2 }}>
-                    {charmInfo.unspent}
-                  </strong>{' '}
-                  unspent)
-                </AccordionTitle>
-              }
-              initialValue
-            >
-              <Lister
-                maxLines={MAX_LINES.charms}
-                partialList={charms}
-                fullList={charmTokens}
-              />
-            </S.Accordion>
-          </S.Section>
+            <CharacterSkills skills={skills} />
 
-          <S.Accordion
-            title={
-              <AccordionTitle>
-                <Icons.Quest />
-                Quests: {quests.length}/{questTokens.length}
-              </AccordionTitle>
-            }
-            initialValue
-          >
-            <QuestStyled.Grid>
-              <QuestStyled.Group>
-                <QuestStyled.Title>
-                  {common.CharacterCard.Tooltips.quests.utilitary}
-                </QuestStyled.Title>
-                <Lister partialList={quests} fullList={questList.utilitary} />
-              </QuestStyled.Group>
+            <S.Section>
+              <S.CheckboxWrapper>
+                <Checkbox
+                  label="Training Dummy"
+                  checked={checkboxRecords.dummy}
+                />
+                <Checkbox
+                  label="Gold pouch"
+                  checked={checkboxRecords.goldPouch}
+                />
+                <Checkbox label="Hirelings" checked={hirelings.count > 0} />
+                <Checkbox
+                  label="Charm expansion"
+                  checked={charmInfo.expansion}
+                />
+                <Checkbox label="Prey Slot" checked={preySlot} />
+                <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
+                <Checkbox
+                  label="Imbuement Shrine"
+                  checked={checkboxRecords.imbuementShrine}
+                />
+                <Checkbox
+                  label="Reward Shrine"
+                  checked={checkboxRecords.rewardShrine}
+                />
+                <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
+              </S.CheckboxWrapper>
 
-              <QuestStyled.Group>
-                <QuestStyled.Title>
-                  {common.CharacterCard.Tooltips.quests.access}
-                </QuestStyled.Title>
-                <Lister partialList={quests} fullList={questList.access} />
-              </QuestStyled.Group>
+              <S.SectionText>
+                <TibiaCoinIcon /> Total invested:{' '}
+                <S.CoinsValue data-active={tcInvested !== '0'}>
+                  {tcInvested} Tibia Coins
+                </S.CoinsValue>
+              </S.SectionText>
+            </S.Section>
 
-              <QuestStyled.Group>
-                <QuestStyled.Title>
-                  {common.CharacterCard.Tooltips.quests.boss}
-                </QuestStyled.Title>
-                <Lister partialList={quests} fullList={questList.bosses} />
-              </QuestStyled.Group>
-
-              {!!questList.others.length && (
-                <QuestStyled.Group>
-                  <QuestStyled.Title>
-                    {common.CharacterCard.Tooltips.quests.other}
-                  </QuestStyled.Title>
-                  <Lister partialList={quests} fullList={questList.others} />
-                </QuestStyled.Group>
-              )}
-            </QuestStyled.Grid>
-          </S.Accordion>
+            <S.TooltipSection>
+              <ImbuementsTooltip items={imbuements} />
+              <CharmsTooltip items={charms} charmInfo={charmInfo} />
+              <QuestsTooltip items={quests} />
+            </S.TooltipSection>
+          </S.Grid>
         </S.ScrollableContainer>
       </S.Wrapper>
       <S.Backdrop onClick={onClose} />
