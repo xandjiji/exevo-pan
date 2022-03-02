@@ -29,6 +29,7 @@ const CharacterModal = ({
 
   const {
     id,
+    sex,
     outfitId,
     nickname,
     level,
@@ -48,6 +49,7 @@ const CharacterModal = ({
     imbuements,
     charms,
     quests,
+    outfits,
     mounts,
   } = characterData
 
@@ -135,12 +137,24 @@ const CharacterModal = ({
             </S.TooltipSection>
 
             <S.SpriteSection>
+              {outfits.map(({ name, type }) => (
+                <SpriteBox
+                  key={name}
+                  offset
+                  name={name}
+                  src={resolvers.outfit(name, sex, type)}
+                  rareSet={rareSet.mount}
+                />
+              ))}
+            </S.SpriteSection>
+
+            <S.SpriteSection>
               {mounts.map((name) => (
                 <SpriteBox
                   key={name}
                   offset
                   name={name}
-                  srcResolver={resolvers.mount}
+                  src={resolvers.mount(name)}
                   rareSet={rareSet.mount}
                 />
               ))}
