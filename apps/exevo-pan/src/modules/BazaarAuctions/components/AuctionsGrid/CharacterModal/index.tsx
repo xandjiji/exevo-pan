@@ -16,7 +16,7 @@ import {
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import SpriteBox from './SpriteBox'
 import { checkStore } from './utils'
-import { resolvers } from './resolvers'
+import { resolvers, rareSet } from './resolvers'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
 
@@ -136,7 +136,13 @@ const CharacterModal = ({
 
             <S.SpriteSection>
               {mounts.map((name) => (
-                <SpriteBox offset name={name} srcResolver={resolvers.mount} />
+                <SpriteBox
+                  key={name}
+                  offset
+                  name={name}
+                  srcResolver={resolvers.mount}
+                  rareSet={rareSet.mount}
+                />
               ))}
             </S.SpriteSection>
           </S.Grid>

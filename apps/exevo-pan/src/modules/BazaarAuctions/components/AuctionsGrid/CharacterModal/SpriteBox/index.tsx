@@ -7,11 +7,13 @@ const SpriteBox = ({
   offset = false,
   name,
   srcResolver,
+  rareSet,
 }: SpriteBoxProps): JSX.Element => {
   const resolvedSrc = useMemo(() => srcResolver(name), [name])
+  const isRare = useMemo(() => (rareSet ? rareSet.has(name) : false), [name])
 
   return (
-    <S.Wrapper title={name}>
+    <S.Wrapper title={name} data-rare={isRare}>
       <SpritePortrait
         offset={offset}
         alt={name}
