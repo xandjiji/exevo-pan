@@ -91,7 +91,9 @@ const CharacterModal = ({
 
             <CharacterItems items={items} />
 
-            <CharacterSkills skills={skills} />
+            <S.Section>
+              <CharacterSkills skills={skills} />
+            </S.Section>
 
             <S.Section>
               <S.CheckboxWrapper>
