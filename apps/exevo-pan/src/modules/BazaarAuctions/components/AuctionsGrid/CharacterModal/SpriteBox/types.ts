@@ -3,4 +3,5 @@ export interface SpriteBoxProps {
   name: string
   src: string
   rareSet?: Set<string>
+  type?: number
 }

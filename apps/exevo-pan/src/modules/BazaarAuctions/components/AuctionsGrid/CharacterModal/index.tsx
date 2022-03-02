@@ -143,6 +143,7 @@ const CharacterModal = ({
                   offset
                   name={name}
                   src={resolvers.outfit(name, sex, type)}
+                  type={type}
                   rareSet={rareSet.mount}
                 />
               ))}
