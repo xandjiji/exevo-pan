@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { useTranslations } from 'contexts/useTranslation'
 import {
   InfoGrid,
   Checkbox,
@@ -15,7 +14,9 @@ import {
   QuestsTooltip,
 } from 'components/CharacterCard/Parts'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
+import SpriteBox from './SpriteBox'
 import { checkStore } from './utils'
+import { resolvers } from './resolvers'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
 
@@ -25,11 +26,6 @@ const CharacterModal = ({
   onClose,
 }: CharacterModalProps): JSX.Element | null => {
   if (!open || !characterData) return null
-
-  /* @ ToDo: remove if unused? */
-  const {
-    translations: { common },
-  } = useTranslations()
 
   const {
     id,
@@ -52,6 +48,7 @@ const CharacterModal = ({
     imbuements,
     charms,
     quests,
+    mounts,
   } = characterData
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
@@ -136,6 +133,12 @@ const CharacterModal = ({
               <CharmsTooltip items={charms} charmInfo={charmInfo} />
               <QuestsTooltip items={quests} />
             </S.TooltipSection>
+
+            <S.SpriteSection>
+              {mounts.map((name) => (
+                <SpriteBox offset name={name} srcResolver={resolvers.mount} />
+              ))}
+            </S.SpriteSection>
           </S.Grid>
         </S.ScrollableContainer>
       </S.Wrapper>

@@ -77,6 +77,12 @@ export const CheckboxWrapper = styled.div`
   grid-auto-flow: column;
 `
 
+export const SpriteSection = styled(Section)`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+`
+
 export const TooltipSection = styled(Section)`
   display: grid;
   grid-template-columns: 1fr;
