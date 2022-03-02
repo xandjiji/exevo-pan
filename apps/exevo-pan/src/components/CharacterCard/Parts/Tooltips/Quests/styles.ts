@@ -7,6 +7,7 @@ export const Grid = styled.div`
   justify-content: space-between;
 
   width: calc(100vw - 36px);
+  max-width: max-content;
   overflow-x: auto;
   ${CustomScrollbar}
 
