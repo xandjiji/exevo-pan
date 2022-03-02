@@ -4,9 +4,13 @@ import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/charm'
 import Lister from './Lister'
 import * as S from './styles'
-import { TooltipProps } from './types'
+import { CharacterCharmsProps } from './types'
 
-const CharacterCharms = ({ items, ...props }: TooltipProps): JSX.Element => {
+const CharacterCharms = ({
+  charmInfo,
+  items,
+  ...props
+}: CharacterCharmsProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -19,6 +23,14 @@ const CharacterCharms = ({ items, ...props }: TooltipProps): JSX.Element => {
       <S.TitleWrapper {...props}>
         <S.Icons.Charm />
         Charms: {items.length}/{tokens.length}
+        {charmInfo && (
+          <>
+            {' '}
+            (<strong style={{ marginRight: 2 }}>{charmInfo.total}</strong> total
+            points,
+            <strong style={{ margin: 2 }}>{charmInfo.unspent}</strong> unspent)
+          </>
+        )}
       </S.TitleWrapper>
     </Tooltip>
   )
