@@ -99,7 +99,7 @@ const CharacterCard = ({
                 <QuestsTooltip items={quests} />
               </S.FlexColumn>
 
-              <S.FlexColumn>
+              <S.FlexColumn data-checkbox>
                 <S.Checkbox
                   label="Charm Expansion"
                   checked={charmInfo.expansion}
