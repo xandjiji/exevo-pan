@@ -1,14 +1,30 @@
-import { useState, Children, isValidElement, cloneElement } from 'react'
+import {
+  useState,
+  useCallback,
+  Children,
+  isValidElement,
+  cloneElement,
+} from 'react'
 import * as S from './styles'
 import { TabsProps, PanelProps } from './types'
 
 const Tabs = ({
   activeIndex: indexProp,
   initialActive = 0,
+  onChange,
   children,
 }: TabsProps): JSX.Element => {
   const [innerIndex, setInnerIndex] = useState(indexProp ?? initialActive)
   const activeIndex = indexProp ?? innerIndex
+
+  const handleClick = useCallback(
+    (newIndex: number) =>
+      setInnerIndex((prevIndex) => {
+        if (prevIndex !== activeIndex) onChange?.(newIndex)
+        return newIndex
+      }),
+    [onChange],
+  )
 
   return (
     <S.Wrapper>
@@ -25,6 +41,7 @@ const Tabs = ({
               id="random-tab-id"
               tabIndex={0}
               aria-selected={childIndex === activeIndex}
+              onClick={() => handleClick(childIndex)}
             >
               {label}
             </S.TabItem>
