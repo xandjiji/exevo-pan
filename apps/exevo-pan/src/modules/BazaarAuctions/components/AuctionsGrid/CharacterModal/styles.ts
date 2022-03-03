@@ -1,4 +1,5 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { Tabs as BaseTabs } from 'components/Atoms'
 import { MaterialCard, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.div`
@@ -13,7 +14,8 @@ export const Wrapper = styled.div`
   max-width: 400px;
 
   @media (min-width: 768px) {
-    max-width: fit-content;
+    width: fit-content;
+    max-width: calc(100% - 80px);
   }
 `
 
@@ -29,26 +31,61 @@ export const Backdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.4);
 `
 
-export const Grid = styled.div`
-  padding-top: 3px;
-  display: grid;
-  gap: 16px;
-`
-
 export const ScrollableContainer = styled.div`
   margin: 0 -12px;
   padding: 0 12px;
   max-height: 60vh;
-  overflow-y: auto;
+  overflow: auto;
   ${CustomScrollbar}
+
+  @media(min-width: 768px) {
+    max-height: unset;
+    overflow: unset;
+  }
 `
+
+const layoutSpacing = css`
+  display: grid;
+  gap: 16px;
+`
+
+export const Grid = styled.div`
+  padding-top: 3px;
+  ${layoutSpacing}
+
+  @media(min-width: 768px) {
+    display: flex;
+    height: 382px;
+
+    overflow: auto;
+    ${CustomScrollbar}
+  }
+`
+
+const Column = styled.div`
+  ${layoutSpacing}
+`
+
+export const DesktopColumn = {
+  Left: styled(Column)`
+    flex-shrink: 0;
+    max-width: 360px;
+
+    @media (min-width: 768px) {
+      position: sticky;
+      top: 3px;
+    }
+  `,
+  Right: styled(Column)`
+    max-width: 470px;
+  `,
+}
 
 export const Section = styled.div`
   padding-bottom: 12px;
-  border-bottom: solid 1px var(--separator);
+  border-bottom: solid 0.5px var(--separator);
 
-  display: grid;
-  gap: 16px;
+  ${layoutSpacing}
 `
 
 export const SectionText = styled.p`
@@ -77,10 +114,22 @@ export const CheckboxWrapper = styled.div`
   grid-auto-flow: column;
 `
 
+export const Tabs = styled(BaseTabs)`
+  display: flex;
+  flex-direction: column;
+
+  [role='tablist'] {
+    flex-shrink: 0;
+  }
+`
+
 export const SpriteSection = styled(Section)`
+  padding-top: 12px;
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+  width: 100%;
+  border-bottom: none;
 `
 
 export const TooltipSection = styled(Section)`
@@ -90,5 +139,9 @@ export const TooltipSection = styled(Section)`
 
   > * {
     width: fit-content;
+  }
+
+  @media (min-width: 768px) {
+    border-bottom: none;
   }
 `

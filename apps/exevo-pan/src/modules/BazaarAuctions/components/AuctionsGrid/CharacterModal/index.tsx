@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { Tabs } from 'components/Atoms'
 import {
   InfoGrid,
   Checkbox,
@@ -75,98 +74,112 @@ const CharacterModal = ({
 
         <S.ScrollableContainer>
           <S.Grid>
-            <InfoGrid>
-              <Textbox.Server
-                serverData={serverData}
-                nickname={nickname}
-                transfer={transfer}
-              />
-              <Textbox.Pvp serverData={serverData} />
-              <Textbox.AuctionEnd auctionEnd={auctionEnd} />
-              <Textbox.AuctionBid
-                hasBeenBidded={hasBeenBidded}
-                currentBid={currentBid}
-              />
-            </InfoGrid>
-
-            <CharacterItems items={items} />
-
-            <S.Section>
-              <CharacterSkills skills={skills} />
-            </S.Section>
-
-            <S.Section>
-              <S.CheckboxWrapper>
-                <Checkbox
-                  label="Training Dummy"
-                  checked={checkboxRecords.dummy}
+            <S.DesktopColumn.Left>
+              <InfoGrid>
+                <Textbox.Server
+                  serverData={serverData}
+                  nickname={nickname}
+                  transfer={transfer}
                 />
-                <Checkbox
-                  label="Gold pouch"
-                  checked={checkboxRecords.goldPouch}
+                <Textbox.Pvp serverData={serverData} />
+                <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+                <Textbox.AuctionBid
+                  hasBeenBidded={hasBeenBidded}
+                  currentBid={currentBid}
                 />
-                <Checkbox label="Hirelings" checked={hirelings.count > 0} />
-                <Checkbox
-                  label="Charm expansion"
-                  checked={charmInfo.expansion}
-                />
-                <Checkbox label="Prey Slot" checked={preySlot} />
-                <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
-                <Checkbox
-                  label="Imbuement Shrine"
-                  checked={checkboxRecords.imbuementShrine}
-                />
-                <Checkbox
-                  label="Reward Shrine"
-                  checked={checkboxRecords.rewardShrine}
-                />
-                <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
-              </S.CheckboxWrapper>
+              </InfoGrid>
 
-              <S.SectionText>
-                <TibiaCoinIcon /> Total invested:{' '}
-                <S.CoinsValue data-active={tcInvested !== '0'}>
-                  {tcInvested} Tibia Coins
-                </S.CoinsValue>
-              </S.SectionText>
-            </S.Section>
+              <CharacterItems items={items} />
 
-            <S.TooltipSection>
-              <ImbuementsTooltip items={imbuements} />
-              <CharmsTooltip items={charms} charmInfo={charmInfo} />
-              <QuestsTooltip items={quests} />
-            </S.TooltipSection>
+              <S.Section>
+                <CharacterSkills skills={skills} />
+              </S.Section>
 
-            <Tabs>
-              <Tabs.Panel label="Outfits">
-                <S.SpriteSection>
-                  {outfits.map(({ name, type }) => (
-                    <SpriteBox
-                      key={name}
-                      offset
-                      name={name}
-                      src={resolvers.outfit(name, sex, type)}
-                      type={type}
-                      rareSet={rareSet.mount}
-                    />
-                  ))}
-                </S.SpriteSection>
-              </Tabs.Panel>
+              <S.TooltipSection>
+                <ImbuementsTooltip items={imbuements} />
+                <CharmsTooltip items={charms} charmInfo={charmInfo} />
+                <QuestsTooltip items={quests} />
+              </S.TooltipSection>
+            </S.DesktopColumn.Left>
 
-              <Tabs.Panel label="Mounts">
-                <S.SpriteSection>
-                  {mounts.map((name) => (
-                    <SpriteBox
-                      key={name}
-                      offset
-                      name={name}
-                      src={resolvers.mount(name)}
-                      rareSet={rareSet.mount}
-                    />
-                  ))}
-                </S.SpriteSection>
-              </Tabs.Panel>
-            </Tabs>
+            <S.DesktopColumn.Right>
+              <S.Section>
+                <S.SectionText>
+                  <TibiaCoinIcon /> Total invested:{' '}
+                  <S.CoinsValue data-active={tcInvested !== '0'}>
+                    {tcInvested} Tibia Coins
+                  </S.CoinsValue>
+                </S.SectionText>
+
+                <S.CheckboxWrapper>
+                  <Checkbox
+                    label="Training Dummy"
+                    checked={checkboxRecords.dummy}
+                  />
+                  <Checkbox
+                    label="Gold pouch"
+                    checked={checkboxRecords.goldPouch}
+                  />
+                  <Checkbox label="Hirelings" checked={hirelings.count > 0} />
+                  <Checkbox
+                    label="Charm expansion"
+                    checked={charmInfo.expansion}
+                  />
+                  <Checkbox label="Prey Slot" checked={preySlot} />
+                  <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
+                  <Checkbox
+                    label="Imbuement Shrine"
+                    checked={checkboxRecords.imbuementShrine}
+                  />
+                  <Checkbox
+                    label="Reward Shrine"
+                    checked={checkboxRecords.rewardShrine}
+                  />
+                  <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
+                </S.CheckboxWrapper>
+              </S.Section>
+
+              <S.Tabs>
+                <S.Tabs.Panel label="👚 Outfits">
+                  <S.SpriteSection>
+                    {outfits.map(({ name, type }) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        src={resolvers.outfit(name, sex, type)}
+                        type={type}
+                        rareSet={rareSet.mount}
+                      />
+                    ))}
+                    {outfits.map(({ name, type }) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        src={resolvers.outfit(name, sex, type)}
+                        type={type}
+                        rareSet={rareSet.mount}
+                      />
+                    ))}
+                  </S.SpriteSection>
+                </S.Tabs.Panel>
+
+                <S.Tabs.Panel label="🐎 Mounts">
+                  <S.SpriteSection>
+                    {mounts.map((name) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        src={resolvers.mount(name)}
+                        rareSet={rareSet.mount}
+                      />
+                    ))}
+                  </S.SpriteSection>
+                </S.Tabs.Panel>
+              </S.Tabs>
+            </S.DesktopColumn.Right>
           </S.Grid>
         </S.ScrollableContainer>
       </S.Wrapper>
