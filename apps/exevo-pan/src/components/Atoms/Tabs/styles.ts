@@ -23,6 +23,9 @@ export const Tab = styled.button`
   padding: 8px 16px;
   border-bottom: solid 2px transparent;
 
+  display: flex;
+  gap: 3px;
+
   color: var(--separator);
   font-weight: 700;
   letter-spacing: 0.4px;
@@ -30,14 +33,27 @@ export const Tab = styled.button`
   cursor: pointer;
   ${Smooth}
 
+  svg {
+    margin-top: -1px;
+    fill: var(--separator);
+  }
+
   &[aria-selected='true'] {
     color: var(--primary);
     border-color: var(--primary);
+
+    svg {
+      fill: var(--primary);
+    }
   }
 
   &:not([aria-selected='true']):hover {
-    background-color: var(--primaryVariantHighlight);
     color: var(--onSurface);
+    background-color: var(--primaryVariantHighlight);
+
+    svg {
+      fill: var(--onSurface);
+    }
   }
 `
 
