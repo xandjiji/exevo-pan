@@ -35,8 +35,9 @@ export const Tab = styled.button`
     border-color: var(--primary);
   }
 
-  &:hover {
+  &:not([aria-selected='true']):hover {
     background-color: var(--primaryVariantHighlight);
+    color: var(--onSurface);
   }
 `
 
