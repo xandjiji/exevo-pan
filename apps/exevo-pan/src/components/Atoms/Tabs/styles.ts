@@ -3,6 +3,8 @@ import { Smooth, CustomScrollbar } from 'styles'
 
 export const Wrapper = styled.div`
   width: 100%;
+  display: grid;
+  gap: 12px;
   overflow: hidden;
 `
 
@@ -40,4 +42,8 @@ export const Tab = styled.button`
 
 export const Panel = styled.div`
   width: 100%;
+
+  &[data-active='false'] {
+    display: none;
+  }
 `
