@@ -5,6 +5,7 @@ import {
   isValidElement,
   cloneElement,
 } from 'react'
+import useIds from './useIds'
 import * as S from './styles'
 import { TabsProps, PanelProps } from './types'
 
@@ -17,6 +18,8 @@ const Tabs = ({
 }: TabsProps): JSX.Element => {
   const [innerIndex, setInnerIndex] = useState(indexProp ?? initialActive)
   const activeIndex = indexProp ?? innerIndex
+
+  const { getTabId, getPanelId } = useIds()
 
   const handleClick = useCallback(
     (newIndex: number) =>
@@ -38,8 +41,8 @@ const Tabs = ({
             <S.Tab
               type="button"
               role="tab"
-              aria-controls="random-panel-id"
-              id="random-tab-id"
+              aria-controls={getPanelId(childIndex)}
+              id={getTabId(childIndex)}
               tabIndex={0}
               aria-selected={childIndex === activeIndex}
               onClick={() => handleClick(childIndex)}
@@ -54,8 +57,8 @@ const Tabs = ({
         if (!isValidElement(child)) return child
 
         return cloneElement(child, {
-          id: 'random-panel-id',
-          'aria-labelledby': 'random-tab-id',
+          id: getPanelId(childIndex),
+          'aria-labelledby': getTabId(childIndex),
           active: childIndex === activeIndex,
         })
       })}
