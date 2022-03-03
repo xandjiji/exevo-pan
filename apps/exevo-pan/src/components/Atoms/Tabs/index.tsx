@@ -34,7 +34,7 @@ const Tabs = ({
           const { label } = child.props as PanelProps
 
           return (
-            <S.TabItem
+            <S.Tab
               type="button"
               role="tab"
               aria-controls="random-panel-id"
@@ -44,7 +44,7 @@ const Tabs = ({
               onClick={() => handleClick(childIndex)}
             >
               {label}
-            </S.TabItem>
+            </S.Tab>
           )
         })}
       </S.TabWrapper>
