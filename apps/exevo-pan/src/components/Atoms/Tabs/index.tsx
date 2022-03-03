@@ -14,6 +14,7 @@ const Tabs = ({
   initialActive = 0,
   onChange,
   children,
+  'aria-label': ariaLabelProp,
   ...props
 }: TabsProps): JSX.Element => {
   const [innerIndex, setInnerIndex] = useState(indexProp ?? initialActive)
@@ -32,7 +33,7 @@ const Tabs = ({
 
   return (
     <S.Wrapper {...props}>
-      <S.TabWrapper aria-label="basic tabs example" role="tablist">
+      <S.TabWrapper aria-label={ariaLabelProp} role="tablist">
         {Children.map(children, (child, childIndex) => {
           if (!isValidElement(child)) return child
           const { label } = child.props as PanelProps
