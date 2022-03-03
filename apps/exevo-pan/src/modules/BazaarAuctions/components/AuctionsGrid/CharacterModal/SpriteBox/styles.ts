@@ -15,6 +15,7 @@ export const Wrapper = styled.div`
 
   &[data-rare='true'] {
     --primaryVariant: var(--primary);
+    filter: brightness(130%) saturate(80%);
   }
 `
 
