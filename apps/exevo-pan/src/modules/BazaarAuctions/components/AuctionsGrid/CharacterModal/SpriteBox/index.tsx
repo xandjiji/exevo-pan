@@ -1,5 +1,4 @@
 import { useMemo } from 'react'
-import { SpritePortrait } from 'components/Atoms'
 import { Checkbox } from 'components/CharacterCard/styles'
 import { addonCheck } from './utils'
 import * as S from './styles'
@@ -16,10 +15,9 @@ const SpriteBox = ({
   const showAddon = type !== undefined
 
   return (
-    <S.Wrapper data-rare={isRare} data-show-addon={showAddon}>
-      <SpritePortrait
+    <S.Wrapper title={name} data-rare={isRare} data-show-addon={showAddon}>
+      <S.SpritePortrait
         offset={offset}
-        title={name}
         alt={name}
         src={src}
         width={64}
