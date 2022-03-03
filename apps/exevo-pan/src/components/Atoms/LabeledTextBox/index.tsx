@@ -1,6 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useRef } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useUuid } from 'hooks'
 import * as S from './styles'
 import { LabeledTextBoxProps } from './types'
 
@@ -14,7 +13,8 @@ const LabeledTextBox = ({
     translations: { common },
   } = useTranslations()
 
-  const { current: labelId } = useRef(uuidv4())
+  const labelId = useUuid()
+
   return (
     <S.Wrapper
       suppressHydrationWarning

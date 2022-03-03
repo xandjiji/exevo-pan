@@ -1,13 +1,6 @@
-import {
-  useState,
-  useReducer,
-  useCallback,
-  useEffect,
-  useRef,
-  memo,
-} from 'react'
+import { useState, useReducer, useCallback, useEffect, memo } from 'react'
 import { Option, Input } from 'components/Atoms'
-import { v4 as uuidv4 } from 'uuid'
+import { useUuid } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import * as S from './styles'
 import { filterByTerm } from './utils'
@@ -21,7 +14,7 @@ const AutocompleteInput = ({
   onItemSelect,
   ...props
 }: AutocompleteInputProps): JSX.Element => {
-  const { current: listboxId } = useRef(uuidv4())
+  const listboxId = useUuid()
 
   const [currentList, setCurrentList] = useState<Option[]>(itemList)
   const [{ listboxStatus, highlightedIndex, inputValue }, dispatch] =

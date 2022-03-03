@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useRef, memo } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useUuid } from 'hooks'
 import * as S from './styles'
 import { InputProps, InputValue } from './types'
 
@@ -18,7 +18,7 @@ const Input = ({
     translations: { common },
   } = useTranslations()
 
-  const { current: errorId } = useRef(uuidv4())
+  const errorId = useUuid()
 
   const [value, setValue] = useState<InputValue>(valueProp ?? '')
   const derivedValue = valueProp ?? value

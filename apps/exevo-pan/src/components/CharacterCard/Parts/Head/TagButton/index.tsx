@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import { useState, useCallback, useRef } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useState, useCallback } from 'react'
+import { useUuid } from 'hooks'
 import { routes } from 'Constants'
 import * as S from './styles'
 import { HoveredState } from './types'
@@ -23,7 +23,7 @@ const TagButton = ({
     setHoverState('off')
   }, [])
 
-  const { current: labelId } = useRef(uuidv4())
+  const labelId = useUuid()
 
   return (
     <NextLink href={routes.ADVERTISE}>
