@@ -1,34 +1,53 @@
-import { useState, Children, isValidElement } from 'react'
+import { useState, Children, isValidElement, cloneElement } from 'react'
 import * as S from './styles'
 import { TabsProps, PanelProps } from './types'
 
 const Tabs = ({
-  currentIndex,
-  initialIndex = 0,
+  activeIndex: indexProp,
+  initialActive = 0,
   children,
 }: TabsProps): JSX.Element => {
-  const [innerIndex, setInnerIndex] = useState(currentIndex ?? initialIndex)
-  const derivedIndex = currentIndex ?? innerIndex
+  const [innerIndex, setInnerIndex] = useState(indexProp ?? initialActive)
+  const activeIndex = indexProp ?? innerIndex
 
   return (
     <S.Wrapper>
-      <div>
-        {Children.map(children, (child) => {
-          if (!isValidElement(child)) return
+      <S.TabWrapper aria-label="basic tabs example" role="tablist">
+        {Children.map(children, (child, childIndex) => {
+          if (!isValidElement(child)) return child
           const { label } = child.props as PanelProps
 
-          // eslint-disable-next-line consistent-return
-          return <S.TabItem>{label}</S.TabItem>
+          return (
+            <S.TabItem
+              type="button"
+              role="tab"
+              aria-controls="random-panel-id"
+              id="random-tab-id"
+              tabIndex={0}
+              aria-selected={childIndex === activeIndex}
+            >
+              {label}
+            </S.TabItem>
+          )
         })}
-      </div>
-      {Children.map(children, (child, index) =>
-        index === derivedIndex ? child : null,
-      )}
+      </S.TabWrapper>
+
+      {Children.map(children, (child, childIndex) => {
+        if (!isValidElement(child)) return child
+
+        return cloneElement(child, {
+          id: 'random-panel-id',
+          'aria-labelledby': 'random-tab-id',
+          active: childIndex === activeIndex,
+        })
+      })}
     </S.Wrapper>
   )
 }
 
-const Panel = ({ children }: PanelProps): JSX.Element => <div>{children}</div>
+const Panel = ({ active, children, ...props }: PanelProps): JSX.Element => (
+  <S.Panel {...props}>{active && children}</S.Panel>
+)
 
 Tabs.Panel = Panel
 
