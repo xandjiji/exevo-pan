@@ -41,36 +41,29 @@ export const Backdrop = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
 `
-const layoutSpacing = css`
+
+export const Spacer = styled.div`
   display: grid;
   gap: 16px;
 `
 
-export const Grid = styled.div`
+export const Grid = styled(Spacer)`
   ${negativeContainer}
   height: 60vh;
   overflow: auto;
   ${CustomScrollbar}
-
-  ${layoutSpacing}
-`
-
-const Column = styled.div`
-  ${layoutSpacing}
 `
 
 export const DesktopColumn = {
-  Left: styled(Column)`
+  Left: styled(Spacer)`
     padding-top: 3px;
   `,
-  Right: styled(Column)``,
+  Right: styled(Spacer)``,
 }
 
-export const Section = styled.div`
+export const Section = styled(Spacer)`
   padding-bottom: 12px;
   border-bottom: solid 0.5px var(--separator);
-
-  ${layoutSpacing}
 `
 
 export const SectionText = styled.p`
@@ -99,7 +92,7 @@ export const CheckboxWrapper = styled.div`
   grid-auto-flow: column;
 `
 
-export const Tabs = styled(BaseTabs)`
+export const TabGroup = styled(BaseTabs.Group)`
   display: block;
   overflow: unset;
 
@@ -107,8 +100,9 @@ export const Tabs = styled(BaseTabs)`
     padding-top: 2px;
 
     position: sticky;
-    top: -1px;
+    top: 0px;
     z-index: 2;
+    box-shadow: -${LATERAL_MARGIN}px -6px 0px 6px var(--surface);
   }
 `
 

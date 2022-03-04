@@ -1,4 +1,5 @@
-import { useMemo } from 'react'
+import { useMemo, useRef, useCallback } from 'react'
+import { Tabs } from 'components/Atoms'
 import {
   InfoGrid,
   Checkbox,
@@ -58,6 +59,16 @@ const CharacterModal = ({
   const tcInvested = useMemo(
     () => formatNumberWithCommas(calculateTotalInvestment(characterData)),
     [characterData],
+  )
+
+  const tabRef = useRef<HTMLDivElement>(null)
+
+  const handleTabChange = useCallback(
+    () =>
+      tabRef.current?.scrollIntoView({
+        block: 'start',
+      }),
+    [],
   )
 
   return (
@@ -138,8 +149,8 @@ const CharacterModal = ({
               </S.CheckboxWrapper>
             </S.Section>
 
-            <S.Tabs>
-              <S.Tabs.Panel label="👚 Outfits">
+            <S.TabGroup onChange={handleTabChange} ref={tabRef}>
+              <Tabs.Panel label="👚 Outfits">
                 <S.SpriteSection>
                   {outfits.map(({ name, type }) => (
                     <SpriteBox
@@ -162,9 +173,9 @@ const CharacterModal = ({
                     />
                   ))}
                 </S.SpriteSection>
-              </S.Tabs.Panel>
+              </Tabs.Panel>
 
-              <S.Tabs.Panel label="🐎 Mounts">
+              <Tabs.Panel label="🐎 Mounts">
                 <S.SpriteSection>
                   {mounts.map((name) => (
                     <SpriteBox
@@ -176,8 +187,8 @@ const CharacterModal = ({
                     />
                   ))}
                 </S.SpriteSection>
-              </S.Tabs.Panel>
-            </S.Tabs>
+              </Tabs.Panel>
+            </S.TabGroup>
           </S.DesktopColumn.Right>
         </S.Grid>
       </S.Wrapper>
