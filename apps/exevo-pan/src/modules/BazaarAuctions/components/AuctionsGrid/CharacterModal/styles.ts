@@ -53,9 +53,9 @@ export const Spacer = styled.div`
 `
 
 export const Grid = styled(Spacer)`
-  ${negativeContainer}
   height: 60vh;
   overflow: auto;
+  ${negativeContainer}
   ${CustomScrollbar}
 
   @media(min-width:768px) {
@@ -82,7 +82,7 @@ export const DesktopColumn = {
       top: 0;
     }
   `,
-  Right: styled(Column)``,
+  Right: Column,
 }
 
 export const Section = styled(Spacer)`
