@@ -80,6 +80,7 @@ export const DesktopColumn = {
 
       position: sticky;
       top: 0;
+      z-index: 4;
     }
   `,
   Right: Column,
