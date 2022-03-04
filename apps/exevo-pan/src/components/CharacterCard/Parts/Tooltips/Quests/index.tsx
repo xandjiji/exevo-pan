@@ -8,7 +8,11 @@ import * as S from '../styles'
 import { Grid, Group, Title } from './styles'
 import { TooltipProps } from '../types'
 
-const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
+const CharacterQuests = ({
+  items,
+  placement,
+  ...props
+}: TooltipProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -16,6 +20,7 @@ const CharacterQuests = ({ items, ...props }: TooltipProps): JSX.Element => {
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.quests}
+      placement={placement}
       content={
         <Grid>
           <Group>

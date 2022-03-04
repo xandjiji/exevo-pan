@@ -10,6 +10,7 @@ import { CharacterCharmsProps } from './types'
 const CharacterCharms = ({
   charmInfo,
   items,
+  placement,
   ...props
 }: CharacterCharmsProps): JSX.Element => {
   const {
@@ -20,6 +21,7 @@ const CharacterCharms = ({
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.charms}
       content={<Lister partialList={items} fullList={tokens} />}
+      placement={placement}
     >
       <S.TitleWrapper {...props}>
         <S.Icons.Charm />

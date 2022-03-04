@@ -8,6 +8,7 @@ import { TooltipProps } from './types'
 
 const CharacterImbuements = ({
   items,
+  placement,
   ...props
 }: TooltipProps): JSX.Element => {
   const {
@@ -18,6 +19,7 @@ const CharacterImbuements = ({
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.imbuements}
       content={<Lister partialList={items} fullList={tokens} />}
+      placement={placement}
     >
       <S.TitleWrapper {...props}>
         <S.Icons.Imbuement />
