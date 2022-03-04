@@ -42,7 +42,7 @@ export const Backdrop = styled.div`
   z-index: 71;
   transform: translate(-50%, -50%);
 
-  width: 100vw;
+  width: 101vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
 `
@@ -130,11 +130,7 @@ export const TabGroup = styled(BaseTabs.Group)`
     position: sticky;
     top: 0px;
     z-index: 2;
-    box-shadow: -${LATERAL_MARGIN}px -6px 0px 6px var(--surface);
-
-    @media (min-width: 768px) {
-      top: -8px;
-    }
+    box-shadow: -${LATERAL_MARGIN - 6}px -6px 0px 6px var(--surface);
   }
 `
 
