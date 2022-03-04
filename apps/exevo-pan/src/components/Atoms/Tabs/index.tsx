@@ -10,7 +10,7 @@ import useIds from './useIds'
 import * as S from './styles'
 import { TabsProps, PanelProps } from './types'
 
-const Tabs = forwardRef(
+const Group = forwardRef(
   (
     {
       activeIndex: indexProp,
@@ -79,8 +79,4 @@ const Panel = ({ active, children, ...props }: PanelProps): JSX.Element => (
   </S.Panel>
 )
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-Tabs.Panel = Panel
-
-export default Tabs
+export default { Group, Panel }
