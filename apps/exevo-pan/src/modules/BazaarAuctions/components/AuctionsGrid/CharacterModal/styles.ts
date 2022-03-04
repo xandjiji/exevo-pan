@@ -3,6 +3,7 @@ import { Tabs as BaseTabs } from 'components/Atoms'
 import { MaterialCard, CustomScrollbar } from 'styles'
 
 const LATERAL_MARGIN = 14
+const CARD_FIXED_HEIGHT = 382
 
 const negativeContainer = css`
   margin-left: -${LATERAL_MARGIN}px;
@@ -24,10 +25,14 @@ export const Wrapper = styled.div`
   width: 100%;
   max-width: 400px;
 
-  /* @media (min-width: 768px) {
+  @media (min-width: 768px) {
     width: fit-content;
     max-width: calc(100% - 80px);
-  } */
+  }
+
+  @media (min-width: 1100px) {
+    max-width: 1012px;
+  }
 `
 
 export const Backdrop = styled.div`
@@ -52,13 +57,32 @@ export const Grid = styled(Spacer)`
   height: 60vh;
   overflow: auto;
   ${CustomScrollbar}
+
+  @media(min-width:768px) {
+    display: flex;
+    gap: 24px;
+    height: ${CARD_FIXED_HEIGHT}px;
+  }
+`
+
+const Column = styled(Spacer)`
+  height: fit-content;
 `
 
 export const DesktopColumn = {
-  Left: styled(Spacer)`
+  Left: styled(Column)`
     padding-top: 3px;
+
+    @media (min-width: 768px) {
+      flex-shrink: 0;
+      min-width: 280px;
+      max-width: fit-content;
+
+      position: sticky;
+      top: 0;
+    }
   `,
-  Right: styled(Spacer)``,
+  Right: styled(Column)``,
 }
 
 export const Section = styled(Spacer)`
@@ -90,6 +114,10 @@ export const CheckboxWrapper = styled.div`
   grid-template-rows: 1fr 1fr 1fr;
   gap: 8px;
   grid-auto-flow: column;
+
+  @media (min-width: 768px) {
+    max-width: 400px;
+  }
 `
 
 export const TabGroup = styled(BaseTabs.Group)`
@@ -103,6 +131,10 @@ export const TabGroup = styled(BaseTabs.Group)`
     top: 0px;
     z-index: 2;
     box-shadow: -${LATERAL_MARGIN}px -6px 0px 6px var(--surface);
+
+    @media (min-width: 768px) {
+      top: -8px;
+    }
   }
 `
 
@@ -126,6 +158,7 @@ export const TooltipSection = styled(Section)`
   }
 
   @media (min-width: 768px) {
+    padding-bottom: 0;
     border-bottom: none;
   }
 `
