@@ -7,6 +7,8 @@ import Lister from './Lister'
 import * as S from './styles'
 import { CharacterCharmsProps } from './types'
 
+const MAX_LINES = 10
+
 const CharacterCharms = ({
   charmInfo,
   items,
@@ -20,7 +22,9 @@ const CharacterCharms = ({
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.charms}
-      content={<Lister partialList={items} fullList={tokens} />}
+      content={
+        <Lister maxLines={MAX_LINES} partialList={items} fullList={tokens} />
+      }
       placement={placement}
     >
       <S.TitleWrapper {...props}>

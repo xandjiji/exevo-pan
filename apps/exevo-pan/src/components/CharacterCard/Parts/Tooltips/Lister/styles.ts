@@ -7,6 +7,7 @@ export const Ul = styled.ul<{ maxLines?: number }>`
       display: grid;
       grid-auto-flow: column;
       grid-template-rows: repeat(${maxLines}, 1fr);
+      gap: 0 16px;
     `}
 `
 

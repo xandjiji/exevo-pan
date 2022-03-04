@@ -6,6 +6,8 @@ import Lister from './Lister'
 import * as S from './styles'
 import { TooltipProps } from './types'
 
+const MAX_LINES = 12
+
 const CharacterImbuements = ({
   items,
   placement,
@@ -18,7 +20,9 @@ const CharacterImbuements = ({
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.imbuements}
-      content={<Lister partialList={items} fullList={tokens} />}
+      content={
+        <Lister maxLines={MAX_LINES} partialList={items} fullList={tokens} />
+      }
       placement={placement}
     >
       <S.TitleWrapper {...props}>
