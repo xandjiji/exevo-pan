@@ -72,116 +72,114 @@ const CharacterModal = ({
           serverName={serverData.serverName}
         />
 
-        <S.ScrollableContainer>
-          <S.Grid>
-            <S.DesktopColumn.Left>
-              <InfoGrid>
-                <Textbox.Server
-                  serverData={serverData}
-                  nickname={nickname}
-                  transfer={transfer}
+        <S.Grid>
+          <S.DesktopColumn.Left>
+            <InfoGrid>
+              <Textbox.Server
+                serverData={serverData}
+                nickname={nickname}
+                transfer={transfer}
+              />
+              <Textbox.Pvp serverData={serverData} />
+              <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+              <Textbox.AuctionBid
+                hasBeenBidded={hasBeenBidded}
+                currentBid={currentBid}
+              />
+            </InfoGrid>
+
+            <CharacterItems items={items} />
+
+            <S.Section>
+              <CharacterSkills skills={skills} />
+            </S.Section>
+
+            <S.TooltipSection>
+              <ImbuementsTooltip items={imbuements} />
+              <CharmsTooltip items={charms} charmInfo={charmInfo} />
+              <QuestsTooltip items={quests} />
+            </S.TooltipSection>
+          </S.DesktopColumn.Left>
+
+          <S.DesktopColumn.Right>
+            <S.Section>
+              <S.SectionText>
+                <TibiaCoinIcon /> Total invested:{' '}
+                <S.CoinsValue data-active={tcInvested !== '0'}>
+                  {tcInvested} Tibia Coins
+                </S.CoinsValue>
+              </S.SectionText>
+
+              <S.CheckboxWrapper>
+                <Checkbox
+                  label="Training Dummy"
+                  checked={checkboxRecords.dummy}
                 />
-                <Textbox.Pvp serverData={serverData} />
-                <Textbox.AuctionEnd auctionEnd={auctionEnd} />
-                <Textbox.AuctionBid
-                  hasBeenBidded={hasBeenBidded}
-                  currentBid={currentBid}
+                <Checkbox
+                  label="Gold pouch"
+                  checked={checkboxRecords.goldPouch}
                 />
-              </InfoGrid>
+                <Checkbox label="Hirelings" checked={hirelings.count > 0} />
+                <Checkbox
+                  label="Charm expansion"
+                  checked={charmInfo.expansion}
+                />
+                <Checkbox label="Prey Slot" checked={preySlot} />
+                <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
+                <Checkbox
+                  label="Imbuement Shrine"
+                  checked={checkboxRecords.imbuementShrine}
+                />
+                <Checkbox
+                  label="Reward Shrine"
+                  checked={checkboxRecords.rewardShrine}
+                />
+                <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
+              </S.CheckboxWrapper>
+            </S.Section>
 
-              <CharacterItems items={items} />
+            <S.Tabs>
+              <S.Tabs.Panel label="👚 Outfits">
+                <S.SpriteSection>
+                  {outfits.map(({ name, type }) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      src={resolvers.outfit(name, sex, type)}
+                      type={type}
+                      rareSet={rareSet.mount}
+                    />
+                  ))}
+                  {outfits.map(({ name, type }) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      src={resolvers.outfit(name, sex, type)}
+                      type={type}
+                      rareSet={rareSet.mount}
+                    />
+                  ))}
+                </S.SpriteSection>
+              </S.Tabs.Panel>
 
-              <S.Section>
-                <CharacterSkills skills={skills} />
-              </S.Section>
-
-              <S.TooltipSection>
-                <ImbuementsTooltip items={imbuements} />
-                <CharmsTooltip items={charms} charmInfo={charmInfo} />
-                <QuestsTooltip items={quests} />
-              </S.TooltipSection>
-            </S.DesktopColumn.Left>
-
-            <S.DesktopColumn.Right>
-              <S.Section>
-                <S.SectionText>
-                  <TibiaCoinIcon /> Total invested:{' '}
-                  <S.CoinsValue data-active={tcInvested !== '0'}>
-                    {tcInvested} Tibia Coins
-                  </S.CoinsValue>
-                </S.SectionText>
-
-                <S.CheckboxWrapper>
-                  <Checkbox
-                    label="Training Dummy"
-                    checked={checkboxRecords.dummy}
-                  />
-                  <Checkbox
-                    label="Gold pouch"
-                    checked={checkboxRecords.goldPouch}
-                  />
-                  <Checkbox label="Hirelings" checked={hirelings.count > 0} />
-                  <Checkbox
-                    label="Charm expansion"
-                    checked={charmInfo.expansion}
-                  />
-                  <Checkbox label="Prey Slot" checked={preySlot} />
-                  <Checkbox label="Hunting Task Slot" checked={huntingSlot} />
-                  <Checkbox
-                    label="Imbuement Shrine"
-                    checked={checkboxRecords.imbuementShrine}
-                  />
-                  <Checkbox
-                    label="Reward Shrine"
-                    checked={checkboxRecords.rewardShrine}
-                  />
-                  <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
-                </S.CheckboxWrapper>
-              </S.Section>
-
-              <S.Tabs>
-                <S.Tabs.Panel label="👚 Outfits">
-                  <S.SpriteSection>
-                    {outfits.map(({ name, type }) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        src={resolvers.outfit(name, sex, type)}
-                        type={type}
-                        rareSet={rareSet.mount}
-                      />
-                    ))}
-                    {outfits.map(({ name, type }) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        src={resolvers.outfit(name, sex, type)}
-                        type={type}
-                        rareSet={rareSet.mount}
-                      />
-                    ))}
-                  </S.SpriteSection>
-                </S.Tabs.Panel>
-
-                <S.Tabs.Panel label="🐎 Mounts">
-                  <S.SpriteSection>
-                    {mounts.map((name) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        src={resolvers.mount(name)}
-                        rareSet={rareSet.mount}
-                      />
-                    ))}
-                  </S.SpriteSection>
-                </S.Tabs.Panel>
-              </S.Tabs>
-            </S.DesktopColumn.Right>
-          </S.Grid>
-        </S.ScrollableContainer>
+              <S.Tabs.Panel label="🐎 Mounts">
+                <S.SpriteSection>
+                  {mounts.map((name) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      src={resolvers.mount(name)}
+                      rareSet={rareSet.mount}
+                    />
+                  ))}
+                </S.SpriteSection>
+              </S.Tabs.Panel>
+            </S.Tabs>
+          </S.DesktopColumn.Right>
+        </S.Grid>
       </S.Wrapper>
       <S.Backdrop onClick={onClose} />
     </>

@@ -2,8 +2,19 @@ import styled, { css } from 'styled-components'
 import { Tabs as BaseTabs } from 'components/Atoms'
 import { MaterialCard, CustomScrollbar } from 'styles'
 
+const LATERAL_MARGIN = 14
+
+const negativeContainer = css`
+  margin-left: -${LATERAL_MARGIN}px;
+  margin-right: -${LATERAL_MARGIN}px;
+  padding-left: ${LATERAL_MARGIN}px;
+  padding-right: ${LATERAL_MARGIN}px;
+`
+
 export const Wrapper = styled.div`
   ${MaterialCard}
+  padding: ${LATERAL_MARGIN}px;
+
   position: fixed;
   top: 50%;
   left: 50%;
@@ -13,10 +24,10 @@ export const Wrapper = styled.div`
   width: 100%;
   max-width: 400px;
 
-  @media (min-width: 768px) {
+  /* @media (min-width: 768px) {
     width: fit-content;
     max-width: calc(100% - 80px);
-  }
+  } */
 `
 
 export const Backdrop = styled.div`
@@ -30,36 +41,18 @@ export const Backdrop = styled.div`
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.4);
 `
-
-export const ScrollableContainer = styled.div`
-  margin: 0 -12px;
-  padding: 0 12px;
-  max-height: 60vh;
-  overflow: auto;
-  ${CustomScrollbar}
-
-  @media(min-width: 768px) {
-    max-height: unset;
-    overflow: unset;
-  }
-`
-
 const layoutSpacing = css`
   display: grid;
   gap: 16px;
 `
 
 export const Grid = styled.div`
-  padding-top: 3px;
+  ${negativeContainer}
+  height: 60vh;
+  overflow: auto;
+  ${CustomScrollbar}
+
   ${layoutSpacing}
-
-  @media(min-width: 768px) {
-    display: flex;
-    height: 382px;
-
-    overflow: auto;
-    ${CustomScrollbar}
-  }
 `
 
 const Column = styled.div`
@@ -68,17 +61,9 @@ const Column = styled.div`
 
 export const DesktopColumn = {
   Left: styled(Column)`
-    flex-shrink: 0;
-    max-width: 360px;
-
-    @media (min-width: 768px) {
-      position: sticky;
-      top: 3px;
-    }
+    padding-top: 3px;
   `,
-  Right: styled(Column)`
-    max-width: 470px;
-  `,
+  Right: styled(Column)``,
 }
 
 export const Section = styled.div`
@@ -115,11 +100,15 @@ export const CheckboxWrapper = styled.div`
 `
 
 export const Tabs = styled(BaseTabs)`
-  display: flex;
-  flex-direction: column;
+  display: block;
+  overflow: unset;
 
   [role='tablist'] {
-    flex-shrink: 0;
+    padding-top: 2px;
+
+    position: sticky;
+    top: -1px;
+    z-index: 2;
   }
 `
 
@@ -129,6 +118,7 @@ export const SpriteSection = styled(Section)`
   flex-wrap: wrap;
   gap: 12px;
   width: 100%;
+
   border-bottom: none;
 `
 

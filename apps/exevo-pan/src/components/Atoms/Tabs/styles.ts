@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
 export const TabWrapper = styled.div`
   width: 100%;
   border-bottom: solid 1px var(--separator);
+  background-color: var(--surface);
 
   display: flex;
   flex-wrap: nowrap;

@@ -25,7 +25,7 @@ const Tabs = ({
   const handleClick = useCallback(
     (newIndex: number) =>
       setInnerIndex((prevIndex) => {
-        if (prevIndex !== activeIndex) onChange?.(newIndex)
+        if (prevIndex !== newIndex) onChange?.(newIndex)
         return newIndex
       }),
     [onChange],
