@@ -106,13 +106,13 @@ const CharacterModal = ({
             </S.Section>
 
             <S.TooltipSection>
-              <ImbuementsTooltip items={imbuements} />
+              <ImbuementsTooltip placement="top-start" items={imbuements} />
               <CharmsTooltip
-                placement="bottom-start"
+                placement="top-start"
                 items={charms}
                 charmInfo={charmInfo}
               />
-              <QuestsTooltip placement="bottom-start" items={quests} />
+              <QuestsTooltip placement="top-start" items={quests} />
             </S.TooltipSection>
           </S.DesktopColumn.Left>
 
