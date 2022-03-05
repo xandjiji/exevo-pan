@@ -3,7 +3,7 @@ export const memoize = <R, T extends (...args: any[]) => R>(fn: T): T => {
 
   const result = (...args: any[]) => {
     const argsKey = JSON.stringify(args)
-    if (!cache[argsKey]) {
+    if (cache[argsKey] === undefined) {
       cache[argsKey] = fn(...args)
     }
 
