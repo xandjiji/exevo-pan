@@ -54,6 +54,8 @@ const CharacterModal = ({
     quests,
     outfits,
     mounts,
+    storeOutfits,
+    storeMounts,
     achievementPoints,
   } = characterData
 
@@ -185,6 +187,34 @@ const CharacterModal = ({
                       sex={sex}
                       src={resolvers.mount(name)}
                       checkRareMount
+                    />
+                  ))}
+                </S.SpriteSection>
+              </Tabs.Panel>
+
+              <Tabs.Panel label={`👚 Store Outfits (${storeOutfits.length})`}>
+                <S.SpriteSection>
+                  {storeOutfits.map(({ name, type }) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      sex={sex}
+                      src={resolvers.storeOutfit(name, sex, type)}
+                    />
+                  ))}
+                </S.SpriteSection>
+              </Tabs.Panel>
+
+              <Tabs.Panel label={`🐎 Store Mounts (${storeMounts.length})`}>
+                <S.SpriteSection>
+                  {storeMounts.map((name) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      sex={sex}
+                      src={resolvers.storeMount(name)}
                     />
                   ))}
                 </S.SpriteSection>
