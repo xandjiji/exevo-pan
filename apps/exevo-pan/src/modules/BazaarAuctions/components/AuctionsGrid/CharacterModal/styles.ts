@@ -4,6 +4,7 @@ import { MaterialCard, CustomScrollbar } from 'styles'
 
 const LATERAL_MARGIN = 14
 const CARD_FIXED_HEIGHT = 450
+const GRID_MOBILE_HEIGHT = '60vh'
 
 const negativeContainer = css`
   margin-left: -${LATERAL_MARGIN}px;
@@ -53,7 +54,7 @@ export const Spacer = styled.div`
 `
 
 export const Grid = styled(Spacer)`
-  height: 60vh;
+  height: ${GRID_MOBILE_HEIGHT};
   overflow-y: auto;
   /* overflow-x: hidden; */
   ${negativeContainer}
@@ -146,6 +147,14 @@ export const TabGroup = styled(BaseTabs.Group)`
     @media (min-width: 1100px) {
       gap: unset;
     }
+  }
+`
+
+export const PanelWrapper = styled.div`
+  min-height: ${GRID_MOBILE_HEIGHT};
+
+  @media (min-width: 768px) {
+    min-height: unset;
   }
 `
 

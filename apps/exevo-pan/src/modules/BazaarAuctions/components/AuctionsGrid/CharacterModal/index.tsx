@@ -162,62 +162,70 @@ const CharacterModal = ({
 
             <S.TabGroup onChange={handleTabChange} ref={tabRef}>
               <Tabs.Panel label={`👚 Outfits (${outfits.length})`}>
-                <S.SpriteSection>
-                  {outfits.map(({ name, type }) => (
-                    <SpriteBox
-                      key={name}
-                      offset
-                      name={name}
-                      sex={sex}
-                      src={resolvers.outfit(name, sex, type)}
-                      type={type}
-                      checkRareOutfit
-                    />
-                  ))}
-                </S.SpriteSection>
+                <S.PanelWrapper>
+                  <S.SpriteSection>
+                    {outfits.map(({ name, type }) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        sex={sex}
+                        src={resolvers.outfit(name, sex, type)}
+                        type={type}
+                        checkRareOutfit
+                      />
+                    ))}
+                  </S.SpriteSection>
+                </S.PanelWrapper>
               </Tabs.Panel>
 
               <Tabs.Panel label={`🐎 Mounts (${mounts.length})`}>
-                <S.SpriteSection>
-                  {mounts.map((name) => (
-                    <SpriteBox
-                      key={name}
-                      offset
-                      name={name}
-                      sex={sex}
-                      src={resolvers.mount(name)}
-                      checkRareMount
-                    />
-                  ))}
-                </S.SpriteSection>
+                <S.PanelWrapper>
+                  <S.SpriteSection>
+                    {mounts.map((name) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        sex={sex}
+                        src={resolvers.mount(name)}
+                        checkRareMount
+                      />
+                    ))}
+                  </S.SpriteSection>
+                </S.PanelWrapper>
               </Tabs.Panel>
 
               <Tabs.Panel label={`👚 Store Outfits (${storeOutfits.length})`}>
-                <S.SpriteSection>
-                  {storeOutfits.map(({ name, type }) => (
-                    <SpriteBox
-                      key={name}
-                      offset
-                      name={name}
-                      sex={sex}
-                      src={resolvers.storeOutfit(name, sex, type)}
-                    />
-                  ))}
-                </S.SpriteSection>
+                <S.PanelWrapper>
+                  <S.SpriteSection>
+                    {storeOutfits.map(({ name, type }) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        sex={sex}
+                        src={resolvers.storeOutfit(name, sex, type)}
+                      />
+                    ))}
+                  </S.SpriteSection>
+                </S.PanelWrapper>
               </Tabs.Panel>
 
               <Tabs.Panel label={`🐎 Store Mounts (${storeMounts.length})`}>
-                <S.SpriteSection>
-                  {storeMounts.map((name) => (
-                    <SpriteBox
-                      key={name}
-                      offset
-                      name={name}
-                      sex={sex}
-                      src={resolvers.storeMount(name)}
-                    />
-                  ))}
-                </S.SpriteSection>
+                <S.PanelWrapper>
+                  <S.SpriteSection>
+                    {storeMounts.map((name) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        sex={sex}
+                        src={resolvers.storeMount(name)}
+                      />
+                    ))}
+                  </S.SpriteSection>
+                </S.PanelWrapper>
               </Tabs.Panel>
             </S.TabGroup>
           </S.DesktopColumn.Right>
