@@ -54,7 +54,8 @@ export const Spacer = styled.div`
 
 export const Grid = styled(Spacer)`
   height: 60vh;
-  overflow: auto;
+  overflow-y: auto;
+  /* overflow-x: hidden; */
   ${negativeContainer}
   ${CustomScrollbar}
 
@@ -129,11 +130,22 @@ export const TabGroup = styled(BaseTabs.Group)`
 
   [role='tablist'] {
     padding-top: 2px;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: space-evenly;
 
     position: sticky;
     top: 0px;
     z-index: 2;
-    box-shadow: -${LATERAL_MARGIN - 6}px -6px 0px 6px var(--surface);
+    box-shadow: 0px -${LATERAL_MARGIN}px 0px ${LATERAL_MARGIN}px var(--surface);
+
+    @media (min-width: 768px) {
+      justify-content: unset;
+    }
+
+    @media (min-width: 1100px) {
+      gap: unset;
+    }
   }
 `
 
