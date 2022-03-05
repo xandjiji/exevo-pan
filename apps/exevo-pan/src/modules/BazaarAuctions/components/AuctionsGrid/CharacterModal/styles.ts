@@ -3,7 +3,7 @@ import { Tabs as BaseTabs } from 'components/Atoms'
 import { MaterialCard, CustomScrollbar } from 'styles'
 
 const LATERAL_MARGIN = 14
-const CARD_FIXED_HEIGHT = 382
+const CARD_FIXED_HEIGHT = 440
 
 const negativeContainer = css`
   margin-left: -${LATERAL_MARGIN}px;

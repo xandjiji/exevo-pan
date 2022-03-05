@@ -13,6 +13,8 @@ import {
   ImbuementsTooltip,
   CharmsTooltip,
   QuestsTooltip,
+  Achievements,
+  Hirelings,
 } from 'components/CharacterCard/Parts'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import SpriteBox from './SpriteBox'
@@ -52,6 +54,7 @@ const CharacterModal = ({
     quests,
     outfits,
     mounts,
+    achievementPoints,
   } = characterData
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
@@ -113,6 +116,8 @@ const CharacterModal = ({
                 charmInfo={charmInfo}
               />
               <QuestsTooltip placement="top-start" items={quests} />
+              <Hirelings hirelingsInfo={hirelings} />
+              <Achievements achievementPoints={achievementPoints} />
             </S.TooltipSection>
           </S.DesktopColumn.Left>
 
