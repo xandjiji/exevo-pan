@@ -1,8 +1,9 @@
+import { memoize } from 'utils'
 import { RareOutfitTestParams, RareOutfitTest } from './types'
 
 export const addonCheck = {
-  first: (type: number): boolean => type === 1 || type === 3,
-  second: (type: number): boolean => type === 2 || type === 3,
+  first: memoize((type: number): boolean => type === 1 || type === 3),
+  second: memoize((type: number): boolean => type === 2 || type === 3),
 }
 
 const rareOutfitTests: RareOutfitTest[] = [
@@ -13,8 +14,9 @@ const rareOutfitTests: RareOutfitTest[] = [
   ({ name }) => name === 'Golden Outfit',
 ]
 
-export const testRareOutfit = (params: RareOutfitTestParams): boolean =>
-  rareOutfitTests.some((test) => test(params))
+export const testRareOutfit = memoize((params: RareOutfitTestParams): boolean =>
+  rareOutfitTests.some((test) => test(params)),
+)
 
 export const rareMountSet = new Set([
   'Rift Runner',
