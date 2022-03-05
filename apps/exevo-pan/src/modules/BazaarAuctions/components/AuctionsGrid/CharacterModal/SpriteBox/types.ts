@@ -3,9 +3,9 @@ export interface SpriteBoxProps {
   sex: boolean
   name: string
   src: string
-  rareSet?: Set<string>
   type?: number
   checkRareOutfit?: boolean
+  checkRareMount?: boolean
 }
 
 export type RareOutfitTestParams = {

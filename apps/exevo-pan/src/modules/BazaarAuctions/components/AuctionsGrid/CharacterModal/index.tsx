@@ -19,7 +19,7 @@ import {
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import SpriteBox from './SpriteBox'
 import { checkStore } from './utils'
-import { resolvers, rareSet } from './resolvers'
+import { resolvers } from './resolvers'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
 
@@ -184,7 +184,7 @@ const CharacterModal = ({
                       name={name}
                       sex={sex}
                       src={resolvers.mount(name)}
-                      rareSet={rareSet.mount}
+                      checkRareMount
                     />
                   ))}
                 </S.SpriteSection>
