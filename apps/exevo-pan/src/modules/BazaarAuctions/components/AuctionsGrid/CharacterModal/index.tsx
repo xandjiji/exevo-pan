@@ -16,6 +16,7 @@ import {
   Achievements,
   Hirelings,
 } from 'components/CharacterCard/Parts'
+import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import SpriteBox from './SpriteBox'
 import { checkStore } from './utils'
@@ -67,14 +68,15 @@ const CharacterModal = ({
   )
 
   const tabRef = useRef<HTMLDivElement>(null)
+  const isDesktop = useIsDesktop()
 
-  const handleTabChange = useCallback(
-    () =>
+  const handleTabChange = useCallback(() => {
+    if (!isDesktop) {
       tabRef.current?.scrollIntoView({
         block: 'start',
-      }),
-    [],
-  )
+      })
+    }
+  }, [isDesktop])
 
   return (
     <>
