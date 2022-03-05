@@ -3,7 +3,7 @@ import { Tabs as BaseTabs } from 'components/Atoms'
 import { MaterialCard, CustomScrollbar } from 'styles'
 
 const LATERAL_MARGIN = 14
-const CARD_FIXED_HEIGHT = 440
+const CARD_FIXED_HEIGHT = 450
 
 const negativeContainer = css`
   margin-left: -${LATERAL_MARGIN}px;
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
   }
 
   @media (min-width: 1100px) {
-    max-width: 1012px;
+    width: 1012px;
   }
 `
 
