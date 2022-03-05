@@ -83,7 +83,9 @@ export const DesktopColumn = {
       z-index: 4;
     }
   `,
-  Right: Column,
+  Right: styled(Column)`
+    width: 100%;
+  `,
 }
 
 export const Section = styled(Spacer)`

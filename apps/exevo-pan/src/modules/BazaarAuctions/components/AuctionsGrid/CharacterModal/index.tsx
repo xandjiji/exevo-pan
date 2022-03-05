@@ -159,7 +159,7 @@ const CharacterModal = ({
             </S.Section>
 
             <S.TabGroup onChange={handleTabChange} ref={tabRef}>
-              <Tabs.Panel label="👚 Outfits">
+              <Tabs.Panel label={`👚 Outfits (${outfits.length})`}>
                 <S.SpriteSection>
                   {outfits.map(({ name, type }) => (
                     <SpriteBox
@@ -175,7 +175,7 @@ const CharacterModal = ({
                 </S.SpriteSection>
               </Tabs.Panel>
 
-              <Tabs.Panel label="🐎 Mounts">
+              <Tabs.Panel label={`🐎 Mounts (${mounts.length})`}>
                 <S.SpriteSection>
                   {mounts.map((name) => (
                     <SpriteBox
