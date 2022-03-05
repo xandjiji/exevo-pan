@@ -166,19 +166,10 @@ const CharacterModal = ({
                       key={name}
                       offset
                       name={name}
+                      sex={sex}
                       src={resolvers.outfit(name, sex, type)}
                       type={type}
-                      rareSet={rareSet.mount}
-                    />
-                  ))}
-                  {outfits.map(({ name, type }) => (
-                    <SpriteBox
-                      key={name}
-                      offset
-                      name={name}
-                      src={resolvers.outfit(name, sex, type)}
-                      type={type}
-                      rareSet={rareSet.mount}
+                      checkRareOutfit
                     />
                   ))}
                 </S.SpriteSection>
@@ -191,6 +182,7 @@ const CharacterModal = ({
                       key={name}
                       offset
                       name={name}
+                      sex={sex}
                       src={resolvers.mount(name)}
                       rareSet={rareSet.mount}
                     />

@@ -17,6 +17,14 @@ export const Wrapper = styled.div`
   &[data-rare='true'] {
     --primaryVariant: var(--primary);
     filter: brightness(130%) saturate(80%);
+
+    input {
+      background-color: var(--green);
+
+      &:not(:checked) {
+        background-color: var(--separator);
+      }
+    }
   }
 `
 

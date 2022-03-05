@@ -1,17 +1,31 @@
 import { useMemo } from 'react'
 import { Checkbox } from 'components/CharacterCard/styles'
 import { addonCheck } from './utils'
+import { testRareOutfit } from './rareOutfitCheck'
 import * as S from './styles'
 import { SpriteBoxProps } from './types'
 
 const SpriteBox = ({
   offset = false,
   name,
+  sex,
   src,
   type,
   rareSet,
+  checkRareOutfit = false,
 }: SpriteBoxProps): JSX.Element => {
-  const isRare = useMemo(() => (rareSet ? rareSet.has(name) : false), [name])
+  const isRareMount = useMemo(
+    () => (rareSet ? rareSet.has(name) : false),
+    [name],
+  )
+
+  const isRareOutfit = useMemo(
+    () =>
+      checkRareOutfit && type ? testRareOutfit({ name, type, sex }) : false,
+    [name, type, sex],
+  )
+
+  const isRare = isRareMount || isRareOutfit
   const showAddon = type !== undefined
 
   return (

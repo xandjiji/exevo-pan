@@ -5,5 +5,13 @@ export const resolvers = {
 }
 
 export const rareSet = {
-  mount: new Set(['Neon Sparkid']),
+  mount: new Set([
+    'Rift Runner',
+    'Phantasmal Jade',
+    'Singeing Steed',
+    'Neon Sparkid',
+    'Vortexion',
+    'Phant',
+    'Antelope',
+  ]),
 }
