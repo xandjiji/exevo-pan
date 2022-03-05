@@ -2,6 +2,8 @@ import styled, { css } from 'styled-components'
 import MagicSvg from 'assets/svgs/magic.svg'
 import CharmSvg from 'assets/svgs/charms.svg'
 import BookSvg from 'assets/svgs/book.svg'
+import PeopleSvg from 'assets/svgs/people.svg'
+import StarSvg from 'assets/svgs/star.svg'
 
 const iconStyle = css`
   margin-right: 4px;
@@ -27,6 +29,12 @@ export const Icons = {
     ${iconStyle}
   `,
   Quest: styled(BookSvg)`
+    ${iconStyle}
+  `,
+  Hireling: styled(PeopleSvg)`
+    ${iconStyle}
+  `,
+  Achievements: styled(StarSvg)`
     ${iconStyle}
   `,
 }

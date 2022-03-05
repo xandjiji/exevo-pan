@@ -34,11 +34,11 @@ const CharacterCharms = ({
           <>
             {' '}
             (
-            <strong style={{ marginRight: 2 }}>
+            <strong style={{ marginRight: 3 }}>
               {formatNumberWithCommas(charmInfo.total)}
             </strong>{' '}
             total points,
-            <strong style={{ margin: 2 }}>
+            <strong style={{ margin: '0 3px' }}>
               {formatNumberWithCommas(charmInfo.unspent)}
             </strong>{' '}
             unspent)
