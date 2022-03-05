@@ -91,7 +91,7 @@ export const Section = styled(Spacer)`
   border-bottom: solid 0.5px var(--separator);
 `
 
-export const SectionText = styled.p`
+export const SectionText = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
