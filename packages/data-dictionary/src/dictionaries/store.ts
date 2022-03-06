@@ -22,7 +22,7 @@ export const ignoreList = new Set<string>([
   'great mana keg',
   'ultimate mana keg',
   'great spririt keg',
-  'ultimate spririt keg',
+  'ultimate spirit keg',
   /* CASKS */
   'mana cask',
   'strong mana cask',
@@ -228,7 +228,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Azure Carpet',
     value: 35,
   },
-  'zaoan divider': {
+  'Zaoan divider': {
     name: 'Zaoan Divider',
     value: 60,
   },
@@ -244,19 +244,19 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Pink Roses',
     value: 50,
   },
-  'zaoan bamboo tiles': {
+  'Zaoan bamboo tiles': {
     name: 'Zaoan Bamboo Tiles',
     value: 30,
   },
-  'zaoan panel': {
+  'Zaoan panel': {
     name: 'Zaoan Panel',
     value: 50,
   },
-  'zaoan panel base': {
+  'Zaoan panel base': {
     name: 'Zaoan Panel Base',
     value: 50,
   },
-  'blank zaoan panel': {
+  'blank Zaoan panel': {
     name: 'Blank Zaoan Panel',
     value: 50,
   },
@@ -304,7 +304,11 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Emerald Carpet',
     value: 35,
   },
-  'kraken shelf': {
+  'filled kraken shelf': {
+    name: 'Kraken Shelf',
+    value: 100,
+  },
+  'empty kraken shelf': {
     name: 'Kraken Shelf',
     value: 100,
   },
@@ -312,15 +316,15 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Midnight Panther Rug',
     value: 30,
   },
-  'zaoan pot bamboo': {
+  'Zaoan pot bamboo': {
     name: 'Zaoan Pot Bamboo',
     value: 50,
   },
-  'zaoan wall lamps': {
+  'Zaoan wall lamps': {
     name: 'Zaoan Wall Lamps',
     value: 60,
   },
-  'zaoan wall lamp': {
+  'Zaoan wall lamp': {
     name: 'Zaoan Wall Lamp',
     value: 60,
   },
@@ -424,7 +428,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Volcanic Bulb',
     value: 80,
   },
-  'zaoan bonsai': {
+  'Zaoan bonsai': {
     name: 'Zaoan Bonsai',
     value: 50,
   },
@@ -500,7 +504,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Yellow Shroom Lamp',
     value: 60,
   },
-  'zaoan drawing': {
+  'Zaoan drawing': {
     name: 'Zaoan Drawing',
     value: 50,
   },
@@ -537,6 +541,10 @@ export const storeItems: Record<string, StoreItem> = {
     value: 250,
   },
   'rolled-up colourful carpet': {
+    name: 'Colourful Carpet',
+    value: 35,
+  },
+  'colourful pom-pom carpet': {
     name: 'Colourful Carpet',
     value: 35,
   },
@@ -656,7 +664,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Wallcupboard',
     value: 50,
   },
-  'zaoan paravent': {
+  'Zaoan paravent': {
     name: 'Zaoan Paravent',
     value: 60,
   },
@@ -928,7 +936,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Pirate Ship Ballista',
     value: 120,
   },
-  'pirate skeleton cage': {
+  'skeleton in a cage': {
     name: 'Pirate Skeleton Cage',
     value: 120,
   },
@@ -956,7 +964,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Sabertooth Skull',
     value: 100,
   },
-  'sculpture of a noblewooman': {
+  'sculpture of a noblewoman': {
     name: 'Sculpture of a Noblewoman',
     value: 120,
   },
@@ -1089,7 +1097,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Vengothic Chair',
     value: 50,
   },
-  'zaoan hassock': {
+  'Zaoan hassock': {
     name: 'Zaoan Hassock',
     value: 60,
   },
@@ -1101,7 +1109,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Round Side Table',
     value: 50,
   },
-  'zaoan side table': {
+  'Zaoan side table': {
     name: 'Zaoan Side Table',
     value: 60,
   },
@@ -1193,7 +1201,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Wooden Bookcase',
     value: 80,
   },
-  'zaoan cabinet': {
+  'Zaoan cabinet': {
     name: 'Zaoan Cabinet',
     value: 100,
   },
@@ -1405,7 +1413,44 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Wooden Stool',
     value: 50,
   },
+  /* RASCACOON */
+  'blue shark trophy': {
+    name: 'Blue Shark Trophy',
+    value: 0,
+  },
+  'brown shark trophy': {
+    name: 'Brown Shark Trophy',
+    value: 0,
+  },
+  'golden shark trophy': {
+    name: 'Golden Shark Trophy',
+    value: 0,
+  },
+  'hammerhead trophy': {
+    name: 'Hammerhead Trophy',
+    value: 0,
+  },
+  'striped shark trophy': {
+    name: 'Stripped Shark Trophy',
+    value: 0,
+  },
+  'shark jaws': {
+    name: 'Shark Jaws',
+    value: 0,
+  },
   /* TOURNAMENT */
+  'gold cup': {
+    name: 'Gold Cup',
+    value: 0,
+  },
+  'silver cup': {
+    name: 'Silver Cup',
+    value: 0,
+  },
+  'bronze cup': {
+    name: 'Bronze Cup',
+    value: 0,
+  },
   'gold deed': {
     name: 'Gold Deed',
     value: 0,
@@ -1518,7 +1563,7 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Gilded Crown',
     value: 0,
   },
-  'gilded magic longsowrd': {
+  'gilded magic longsword': {
     name: 'Gilded Magic Longsword',
     value: 0,
   },
@@ -1556,6 +1601,14 @@ export const storeItems: Record<string, StoreItem> = {
     value: 0,
   },
   'bone bed': {
+    name: 'Bone Bed',
+    value: 0,
+  },
+  'bone headboard': {
+    name: 'Bone Bed',
+    value: 0,
+  },
+  'bone footboard': {
     name: 'Bone Bed',
     value: 0,
   },
@@ -1616,8 +1669,41 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Beer Barrel',
     value: 0,
   },
-  'wall hangings': {
-    name: 'Wall Hangings',
+  'red wall hangings': {
+    name: 'Red Wall Hangings',
+    value: 0,
+  },
+  'blue wall hangings': {
+    name: 'Blue Wall Hangings',
+    value: 0,
+  },
+  'green wall hangings': {
+    name: 'Green Wall Hangings',
+    value: 0,
+  },
+  /* TIBIADROME */
+  'arena badge replica': {
+    name: 'Arena Badge Replica',
+    value: 0,
+  },
+  'plushie of a domestikion': {
+    name: 'Plushie of a Domestikion',
+    value: 0,
+  },
+  'plushie of a hoodinion': {
+    name: 'Plushie of a Hoodinion',
+    value: 0,
+  },
+  'plushie of a mearidion': {
+    name: 'Plushie of a Mearidion',
+    value: 0,
+  },
+  'plushie of a murmillion': {
+    name: 'Plushie of a Murmillion',
+    value: 0,
+  },
+  'plushie of a scissorion': {
+    name: 'Plushie of a Scissorion',
     value: 0,
   },
 }
