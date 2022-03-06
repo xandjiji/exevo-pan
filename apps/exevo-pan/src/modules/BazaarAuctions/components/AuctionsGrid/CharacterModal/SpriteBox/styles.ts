@@ -27,7 +27,8 @@ export const Wrapper = styled.div`
       background-color: var(--green);
 
       &:not(:checked) {
-        background-color: var(--separator);
+        background-color: var(--primary);
+        border-color: var(--green);
       }
     }
   }
