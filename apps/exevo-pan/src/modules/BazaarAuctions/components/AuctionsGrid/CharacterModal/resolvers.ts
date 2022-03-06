@@ -5,4 +5,5 @@ export const resolvers = {
   storeOutfit: (name: string, sex: boolean, type: number): string =>
     `/sprites/storeoutfits/${sex ? 'female' : 'male'}/${name}_${type}.gif`,
   storeMount: (name: string): string => `/sprites/storemounts/${name}.gif`,
+  storeItem: (name: string): string => `/sprites/store/${name}.gif`,
 }

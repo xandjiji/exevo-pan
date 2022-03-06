@@ -229,6 +229,22 @@ const CharacterModal = ({
                   </S.SpriteSection>
                 </S.PanelWrapper>
               </Tabs.Panel>
+
+              <Tabs.Panel label={`🛍️ Store Items (${storeItems.length})`}>
+                <S.PanelWrapper>
+                  <S.SpriteSection>
+                    {storeItems.map(({ name }) => (
+                      <SpriteBox
+                        key={name}
+                        offset
+                        name={name}
+                        sex={sex}
+                        src={resolvers.storeItem(name)}
+                      />
+                    ))}
+                  </S.SpriteSection>
+                </S.PanelWrapper>
+              </Tabs.Panel>
             </S.TabGroup>
           </S.DesktopColumn.Right>
         </S.Grid>
