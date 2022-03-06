@@ -236,7 +236,6 @@ const CharacterModal = ({
                     {storeItems.map(({ name }) => (
                       <SpriteBox
                         key={name}
-                        offset
                         name={name}
                         sex={sex}
                         src={resolvers.storeItem(name)}

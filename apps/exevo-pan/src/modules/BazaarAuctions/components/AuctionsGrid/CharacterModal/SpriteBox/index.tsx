@@ -25,8 +25,8 @@ const SpriteBox = ({
         offset={offset}
         alt={name}
         src={src}
-        width={64}
-        height={64}
+        width={offset ? 64 : 32}
+        height={offset ? 64 : 32}
       />
 
       {showAddon && (
