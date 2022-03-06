@@ -4,6 +4,7 @@ export interface SpriteBoxProps {
   name: string
   src: string
   type?: number
+  amount?: number
   checkRareOutfit?: boolean
   checkRareMount?: boolean
 }

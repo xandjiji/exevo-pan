@@ -1,3 +1,4 @@
+import { formatNumberWithCommas } from 'utils'
 import { Checkbox } from 'components/CharacterCard/styles'
 import { addonCheck, testRareOutfit, rareMountSet } from './utils'
 import * as S from './styles'
@@ -9,6 +10,7 @@ const SpriteBox = ({
   sex,
   src,
   type,
+  amount = 0,
   checkRareMount = false,
   checkRareOutfit = false,
 }: SpriteBoxProps): JSX.Element => {
@@ -20,7 +22,11 @@ const SpriteBox = ({
   const showAddon = type !== undefined
 
   return (
-    <S.Wrapper title={name} data-rare={isRare} data-show-addon={showAddon}>
+    <S.Wrapper
+      title={amount > 1 ? `${formatNumberWithCommas(amount)}x ${name}` : name}
+      data-rare={isRare}
+      data-show-addon={showAddon}
+    >
       <S.SpritePortrait
         offset={offset}
         alt={name}
@@ -39,6 +45,8 @@ const SpriteBox = ({
           />
         </S.CheckboxWrapper>
       )}
+
+      {amount > 1 && <S.Count>{amount}</S.Count>}
     </S.Wrapper>
   )
 }
