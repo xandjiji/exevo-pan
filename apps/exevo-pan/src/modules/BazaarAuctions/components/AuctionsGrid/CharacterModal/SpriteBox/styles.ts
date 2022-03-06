@@ -52,9 +52,11 @@ export const Count = styled(ActiveCount)`
   width: unset;
   height: unset;
   border-radius: 4px;
+  font-weight: 700;
 
   &::after {
     content: 'x';
     margin-left: 1px;
+    font-weight: 400;
   }
 `
