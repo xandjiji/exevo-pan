@@ -7,7 +7,6 @@ import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import CharacterModal from './CharacterModal'
-import { shouldInsertAd } from './utils'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
@@ -113,32 +112,22 @@ const AuctionsGrid = (): JSX.Element => {
       <S.GridWrapper>
         <S.Grid id="character-grid">
           {shouldDisplayHighlightedAuctions &&
-            highlightedAuctions.map((auction, index) => (
-              <Fragment key={`${auction.id}-highlighted`}>
-                <S.CharacterCard
-                  characterData={auction}
-                  highlighted
-                  lazyRender
-                  onClick={() => selectCharacter(auction)}
-                />
-
-                {shouldInsertAd(index) && (
-                  <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
-                )}
-              </Fragment>
-            ))}
-          {page.map((auction, index) => (
-            <Fragment key={auction.id}>
+            highlightedAuctions.map((auction) => (
               <S.CharacterCard
-                lazyRender
+                key={`${auction.id}-highlighted`}
                 characterData={auction}
+                highlighted
+                lazyRender
                 onClick={() => selectCharacter(auction)}
               />
-
-              {shouldInsertAd(index + currentVisibleHighlighteds) && (
-                <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
-              )}
-            </Fragment>
+            ))}
+          {page.map((auction) => (
+            <S.CharacterCard
+              key={auction.id}
+              lazyRender
+              characterData={auction}
+              onClick={() => selectCharacter(auction)}
+            />
           ))}
         </S.Grid>
         {page.length === 0 && (
