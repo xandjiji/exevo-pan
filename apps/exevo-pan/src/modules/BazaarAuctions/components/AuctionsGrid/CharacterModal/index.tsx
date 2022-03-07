@@ -16,7 +16,6 @@ import {
   Achievements,
   Hirelings,
 } from 'components/CharacterCard/Parts'
-import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import SpriteBox from './SpriteBox'
 import { checkStore, tabCounter } from './utils'
@@ -68,15 +67,14 @@ const CharacterModal = ({
   )
 
   const tabRef = useRef<HTMLDivElement>(null)
-  const isDesktop = useIsDesktop()
 
-  const handleTabChange = useCallback(() => {
-    if (!isDesktop) {
+  const handleTabChange = useCallback(
+    () =>
       tabRef.current?.scrollIntoView({
         block: 'start',
-      })
-    }
-  }, [isDesktop])
+      }),
+    [],
+  )
 
   return (
     <>
@@ -169,40 +167,38 @@ const CharacterModal = ({
                   storeOutfits.length,
                 )}`}
               >
-                <S.PanelWrapper>
-                  <S.SpriteSection>
-                    {outfits.map(({ name, type }) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        sex={sex}
-                        src={resolvers.outfit(name, sex, type)}
-                        type={type}
-                        checkRareOutfit
-                      />
-                    ))}
-                  </S.SpriteSection>
+                <S.SpriteSection>
+                  {outfits.map(({ name, type }) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      sex={sex}
+                      src={resolvers.outfit(name, sex, type)}
+                      type={type}
+                      checkRareOutfit
+                    />
+                  ))}
+                </S.SpriteSection>
 
-                  {storeOutfits.length > 0 && (
-                    <>
-                      <S.SpriteSectionDivisor>
-                        Store outfits ({storeOutfits.length})
-                      </S.SpriteSectionDivisor>
-                      <S.SpriteSection>
-                        {storeOutfits.map(({ name, type }) => (
-                          <SpriteBox
-                            key={name}
-                            offset
-                            name={name}
-                            sex={sex}
-                            src={resolvers.storeOutfit(name, sex, type)}
-                          />
-                        ))}
-                      </S.SpriteSection>
-                    </>
-                  )}
-                </S.PanelWrapper>
+                {storeOutfits.length > 0 && (
+                  <>
+                    <S.SpriteSectionDivisor>
+                      Store outfits ({storeOutfits.length})
+                    </S.SpriteSectionDivisor>
+                    <S.SpriteSection>
+                      {storeOutfits.map(({ name, type }) => (
+                        <SpriteBox
+                          key={name}
+                          offset
+                          name={name}
+                          sex={sex}
+                          src={resolvers.storeOutfit(name, sex, type)}
+                        />
+                      ))}
+                    </S.SpriteSection>
+                  </>
+                )}
               </Tabs.Panel>
 
               <Tabs.Panel
@@ -211,55 +207,51 @@ const CharacterModal = ({
                   storeMounts.length,
                 )}`}
               >
-                <S.PanelWrapper>
-                  <S.SpriteSection>
-                    {mounts.map((name) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        sex={sex}
-                        src={resolvers.mount(name)}
-                        checkRareMount
-                      />
-                    ))}
-                  </S.SpriteSection>
+                <S.SpriteSection>
+                  {mounts.map((name) => (
+                    <SpriteBox
+                      key={name}
+                      offset
+                      name={name}
+                      sex={sex}
+                      src={resolvers.mount(name)}
+                      checkRareMount
+                    />
+                  ))}
+                </S.SpriteSection>
 
-                  {storeMounts.length > 0 && (
-                    <>
-                      <S.SpriteSectionDivisor>
-                        Store mounts ({storeMounts.length})
-                      </S.SpriteSectionDivisor>
-                      <S.SpriteSection>
-                        {storeMounts.map((name) => (
-                          <SpriteBox
-                            key={name}
-                            offset
-                            name={name}
-                            sex={sex}
-                            src={resolvers.storeMount(name)}
-                          />
-                        ))}
-                      </S.SpriteSection>
-                    </>
-                  )}
-                </S.PanelWrapper>
+                {storeMounts.length > 0 && (
+                  <>
+                    <S.SpriteSectionDivisor>
+                      Store mounts ({storeMounts.length})
+                    </S.SpriteSectionDivisor>
+                    <S.SpriteSection>
+                      {storeMounts.map((name) => (
+                        <SpriteBox
+                          key={name}
+                          offset
+                          name={name}
+                          sex={sex}
+                          src={resolvers.storeMount(name)}
+                        />
+                      ))}
+                    </S.SpriteSection>
+                  </>
+                )}
               </Tabs.Panel>
 
               <Tabs.Panel label={`📥 Store Items (${storeItems.length})`}>
-                <S.PanelWrapper>
-                  <S.SpriteSection>
-                    {storeItems.map(({ name, amount }) => (
-                      <SpriteBox
-                        key={name}
-                        name={name}
-                        amount={amount}
-                        sex={sex}
-                        src={resolvers.storeItem(name)}
-                      />
-                    ))}
-                  </S.SpriteSection>
-                </S.PanelWrapper>
+                <S.SpriteSection>
+                  {storeItems.map(({ name, amount }) => (
+                    <SpriteBox
+                      key={name}
+                      name={name}
+                      amount={amount}
+                      sex={sex}
+                      src={resolvers.storeItem(name)}
+                    />
+                  ))}
+                </S.SpriteSection>
               </Tabs.Panel>
             </S.TabGroup>
           </S.DesktopColumn.Right>

@@ -128,6 +128,11 @@ export const CheckboxWrapper = styled.div`
 export const TabGroup = styled(BaseTabs.Group)`
   display: block;
   overflow: unset;
+  min-height: ${GRID_MOBILE_HEIGHT};
+
+  @media (min-width: 768px) {
+    min-height: unset;
+  }
 
   [role='tablist'] {
     padding-top: 2px;
@@ -147,14 +152,6 @@ export const TabGroup = styled(BaseTabs.Group)`
     @media (min-width: 1100px) {
       gap: unset;
     }
-  }
-`
-
-export const PanelWrapper = styled.div`
-  min-height: ${GRID_MOBILE_HEIGHT};
-
-  @media (min-width: 768px) {
-    min-height: unset;
   }
 `
 
