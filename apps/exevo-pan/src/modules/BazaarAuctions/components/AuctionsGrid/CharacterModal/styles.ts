@@ -4,7 +4,10 @@ import { MaterialCard, CustomScrollbar } from 'styles'
 
 const LATERAL_MARGIN = 14
 const CARD_FIXED_HEIGHT = 450
+const CARD_MAX_MOBILE_WIDTH = 368
+
 const GRID_MOBILE_HEIGHT = '60vh'
+const SCROLLBAR_WIDTH = 6
 
 const negativeContainer = css`
   margin-left: -${LATERAL_MARGIN}px;
@@ -24,7 +27,7 @@ export const Wrapper = styled.div`
   transform: translate(-50%, -50%);
 
   width: 100%;
-  max-width: 400px;
+  max-width: ${CARD_MAX_MOBILE_WIDTH}px;
 
   @media (min-width: 768px) {
     width: fit-content;
@@ -32,7 +35,7 @@ export const Wrapper = styled.div`
   }
 
   @media (min-width: 1100px) {
-    width: 1012px;
+    width: 1029px;
   }
 `
 
@@ -53,17 +56,24 @@ export const Spacer = styled.div`
   gap: 16px;
 `
 
-export const Grid = styled(Spacer)`
-  height: ${GRID_MOBILE_HEIGHT};
+export const ScrollableContainer = styled.div`
   overflow-y: auto;
-  /* overflow-x: hidden; */
-  ${negativeContainer}
   ${CustomScrollbar}
+  ${negativeContainer}
 
-  @media(min-width:768px) {
+  height: ${GRID_MOBILE_HEIGHT};
+
+  @media (min-width: 768px) {
+    height: ${CARD_FIXED_HEIGHT}px;
+  }
+`
+
+export const Grid = styled(Spacer)`
+  width: 100%;
+
+  @media (min-width: 768px) {
     display: flex;
     gap: 24px;
-    height: ${CARD_FIXED_HEIGHT}px;
   }
 `
 
@@ -136,9 +146,10 @@ export const TabGroup = styled(BaseTabs.Group)`
 
   [role='tablist'] {
     padding-top: 2px;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: space-evenly;
+    width: calc(100vw - ${2 * LATERAL_MARGIN + SCROLLBAR_WIDTH}px);
+    max-width: calc(
+      ${CARD_MAX_MOBILE_WIDTH}px - ${2 * LATERAL_MARGIN + SCROLLBAR_WIDTH}px
+    );
 
     position: sticky;
     top: 0px;
@@ -146,11 +157,13 @@ export const TabGroup = styled(BaseTabs.Group)`
     box-shadow: 0px -${LATERAL_MARGIN}px 0px ${LATERAL_MARGIN}px var(--surface);
 
     @media (min-width: 768px) {
-      justify-content: unset;
+      width: unset;
+      max-width: calc(100vw - 440px);
     }
 
-    @media (min-width: 1100px) {
-      gap: unset;
+    @media (min-width: 900px) {
+      max-width: unset;
+      box-shadow: 0px -${LATERAL_MARGIN}px 0px ${LATERAL_MARGIN - 2}px var(--surface);
     }
   }
 `
