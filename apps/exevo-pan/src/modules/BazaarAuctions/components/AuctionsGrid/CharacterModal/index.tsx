@@ -19,7 +19,7 @@ import {
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import SpriteBox from './SpriteBox'
-import { checkStore } from './utils'
+import { checkStore, tabCounter } from './utils'
 import { resolvers } from './resolvers'
 import * as S from './styles'
 import { CharacterModalProps } from './types'
@@ -163,7 +163,12 @@ const CharacterModal = ({
             </S.Section>
 
             <S.TabGroup onChange={handleTabChange} ref={tabRef}>
-              <Tabs.Panel label={`👚 Outfits (${outfits.length})`}>
+              <Tabs.Panel
+                label={`👚 Outfits ${tabCounter(
+                  outfits.length,
+                  storeOutfits.length,
+                )}`}
+              >
                 <S.PanelWrapper>
                   <S.SpriteSection>
                     {outfits.map(({ name, type }) => (
@@ -178,10 +183,34 @@ const CharacterModal = ({
                       />
                     ))}
                   </S.SpriteSection>
+
+                  {storeOutfits.length > 0 && (
+                    <>
+                      <S.SpriteSectionDivisor>
+                        Store outfits ({storeOutfits.length})
+                      </S.SpriteSectionDivisor>
+                      <S.SpriteSection>
+                        {storeOutfits.map(({ name, type }) => (
+                          <SpriteBox
+                            key={name}
+                            offset
+                            name={name}
+                            sex={sex}
+                            src={resolvers.storeOutfit(name, sex, type)}
+                          />
+                        ))}
+                      </S.SpriteSection>
+                    </>
+                  )}
                 </S.PanelWrapper>
               </Tabs.Panel>
 
-              <Tabs.Panel label={`🐎 Mounts (${mounts.length})`}>
+              <Tabs.Panel
+                label={`🐎 Mounts ${tabCounter(
+                  mounts.length,
+                  storeMounts.length,
+                )}`}
+              >
                 <S.PanelWrapper>
                   <S.SpriteSection>
                     {mounts.map((name) => (
@@ -195,38 +224,25 @@ const CharacterModal = ({
                       />
                     ))}
                   </S.SpriteSection>
-                </S.PanelWrapper>
-              </Tabs.Panel>
 
-              <Tabs.Panel label={`👚 Store Outfits (${storeOutfits.length})`}>
-                <S.PanelWrapper>
-                  <S.SpriteSection>
-                    {storeOutfits.map(({ name, type }) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        sex={sex}
-                        src={resolvers.storeOutfit(name, sex, type)}
-                      />
-                    ))}
-                  </S.SpriteSection>
-                </S.PanelWrapper>
-              </Tabs.Panel>
-
-              <Tabs.Panel label={`🐎 Store Mounts (${storeMounts.length})`}>
-                <S.PanelWrapper>
-                  <S.SpriteSection>
-                    {storeMounts.map((name) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        sex={sex}
-                        src={resolvers.storeMount(name)}
-                      />
-                    ))}
-                  </S.SpriteSection>
+                  {storeMounts.length > 0 && (
+                    <>
+                      <S.SpriteSectionDivisor>
+                        Store mounts ({storeMounts.length})
+                      </S.SpriteSectionDivisor>
+                      <S.SpriteSection>
+                        {storeMounts.map((name) => (
+                          <SpriteBox
+                            key={name}
+                            offset
+                            name={name}
+                            sex={sex}
+                            src={resolvers.storeMount(name)}
+                          />
+                        ))}
+                      </S.SpriteSection>
+                    </>
+                  )}
                 </S.PanelWrapper>
               </Tabs.Panel>
 

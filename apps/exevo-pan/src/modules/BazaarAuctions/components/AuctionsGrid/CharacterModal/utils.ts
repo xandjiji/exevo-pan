@@ -36,3 +36,11 @@ export const checkStore = (storeItems: CharacterItem[]): CheckboxRecord => {
 
   return checkboxes
 }
+
+export const tabCounter = (regular: number, additional = 0): string => {
+  if (additional > 0) {
+    return `(${regular} + ${additional})`
+  }
+
+  return `(${regular})`
+}

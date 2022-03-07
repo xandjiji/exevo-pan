@@ -182,3 +182,8 @@ export const TooltipSection = styled(Section)`
     border-bottom: none;
   }
 `
+
+export const SpriteSectionDivisor = styled.div`
+  padding: 6px 0;
+  border-bottom: solid 1px var(--separator);
+`
