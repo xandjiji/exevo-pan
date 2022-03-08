@@ -74,7 +74,7 @@ const Group = forwardRef(
 )
 
 const Panel = ({ active, children, ...props }: PanelProps): JSX.Element => (
-  <S.Panel data-active={active} {...props}>
+  <S.Panel role="tabpanel" data-active={active} {...props}>
     {active && children}
   </S.Panel>
 )
