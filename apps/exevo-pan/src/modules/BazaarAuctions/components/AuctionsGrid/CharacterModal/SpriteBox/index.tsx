@@ -25,7 +25,7 @@ const SpriteBox = ({
   const showAddon = type !== undefined
 
   const notifyError = useCallback(
-    () => NotifyErrorClient.broadcast({ auctionId, name, src }),
+    () => NotifyErrorClient.setMessage({ auctionId, name, src }),
     [auctionId, name, src],
   )
 
