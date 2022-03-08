@@ -4,4 +4,5 @@ export type SpritePortraitProps = React.HTMLAttributes<HTMLDivElement> & {
   alt?: string
   width: number
   height: number
+  onError?: () => void
 }

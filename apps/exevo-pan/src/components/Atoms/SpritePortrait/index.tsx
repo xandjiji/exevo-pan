@@ -11,6 +11,7 @@ const SpritePortrait = ({
   alt,
   width,
   height,
+  onError,
   ...props
 }: SpritePortraitProps): JSX.Element => {
   const {
@@ -28,6 +29,7 @@ const SpritePortrait = ({
         width={width}
         height={height}
         onLoad={onLoad}
+        onError={onError}
         unoptimized
       />
       {!loaded && (
