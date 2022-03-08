@@ -9,7 +9,8 @@ const PREY_SLOT_VALUE = 900
 export const calculateTotalInvestment = (
   character: CharacterObject,
 ): number => {
-  const { charmInfo, huntingSlot, preySlot, hirelings, storeItems } = character
+  const { id, charmInfo, huntingSlot, preySlot, hirelings, storeItems } =
+    character
 
   let sum = 0
 
@@ -18,8 +19,8 @@ export const calculateTotalInvestment = (
   if (preySlot) sum += PREY_SLOT_VALUE
   if (hirelings.count) sum += getHirelingsValue(hirelings)
 
-  sum += getCosmeticsValue(character)
-  sum += getStoreItemValue(storeItems)
+  sum += getCosmeticsValue(character, id)
+  sum += getStoreItemValue(storeItems, id)
 
   return sum
 }
