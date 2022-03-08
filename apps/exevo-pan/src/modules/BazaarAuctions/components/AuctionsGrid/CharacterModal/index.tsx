@@ -204,58 +204,62 @@ const CharacterModal = ({
                   )}
                 </Tabs.Panel>
 
-                <Tabs.Panel
-                  label={`🐎 Mounts ${tabCounter(
-                    mounts.length,
-                    storeMounts.length,
-                  )}`}
-                >
-                  <S.SpriteSection>
-                    {mounts.map((name) => (
-                      <SpriteBox
-                        key={name}
-                        offset
-                        name={name}
-                        sex={sex}
-                        src={resolvers.mount(name)}
-                        checkRareMount
-                      />
-                    ))}
-                  </S.SpriteSection>
+                {mounts.length + storeMounts.length > 0 && (
+                  <Tabs.Panel
+                    label={`🐎 Mounts ${tabCounter(
+                      mounts.length,
+                      storeMounts.length,
+                    )}`}
+                  >
+                    <S.SpriteSection>
+                      {mounts.map((name) => (
+                        <SpriteBox
+                          key={name}
+                          offset
+                          name={name}
+                          sex={sex}
+                          src={resolvers.mount(name)}
+                          checkRareMount
+                        />
+                      ))}
+                    </S.SpriteSection>
 
-                  {storeMounts.length > 0 && (
-                    <>
-                      <S.SpriteSectionDivisor>
-                        Store mounts ({storeMounts.length})
-                      </S.SpriteSectionDivisor>
-                      <S.SpriteSection>
-                        {storeMounts.map((name) => (
-                          <SpriteBox
-                            key={name}
-                            offset
-                            name={name}
-                            sex={sex}
-                            src={resolvers.storeMount(name)}
-                          />
-                        ))}
-                      </S.SpriteSection>
-                    </>
-                  )}
-                </Tabs.Panel>
+                    {storeMounts.length > 0 && (
+                      <>
+                        <S.SpriteSectionDivisor>
+                          Store mounts ({storeMounts.length})
+                        </S.SpriteSectionDivisor>
+                        <S.SpriteSection>
+                          {storeMounts.map((name) => (
+                            <SpriteBox
+                              key={name}
+                              offset
+                              name={name}
+                              sex={sex}
+                              src={resolvers.storeMount(name)}
+                            />
+                          ))}
+                        </S.SpriteSection>
+                      </>
+                    )}
+                  </Tabs.Panel>
+                )}
 
-                <Tabs.Panel label={`📥 Store Items (${storeItems.length})`}>
-                  <S.SpriteSection>
-                    {storeItems.map(({ name, amount }) => (
-                      <SpriteBox
-                        key={name}
-                        name={name}
-                        amount={amount}
-                        sex={sex}
-                        src={resolvers.storeItem(name)}
-                      />
-                    ))}
-                  </S.SpriteSection>
-                </Tabs.Panel>
+                {storeItems.length > 0 && (
+                  <Tabs.Panel label={`📥 Store Items (${storeItems.length})`}>
+                    <S.SpriteSection>
+                      {storeItems.map(({ name, amount }) => (
+                        <SpriteBox
+                          key={name}
+                          name={name}
+                          amount={amount}
+                          sex={sex}
+                          src={resolvers.storeItem(name)}
+                        />
+                      ))}
+                    </S.SpriteSection>
+                  </Tabs.Panel>
+                )}
               </S.TabGroup>
             </S.DesktopColumn.Right>
           </S.Grid>
