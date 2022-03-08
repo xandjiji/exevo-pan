@@ -175,6 +175,7 @@ const CharacterModal = ({
                       <SpriteBox
                         key={name}
                         offset
+                        auctionId={id}
                         name={name}
                         sex={sex}
                         src={resolvers.outfit(name, sex, type)}
@@ -194,6 +195,7 @@ const CharacterModal = ({
                           <SpriteBox
                             key={name}
                             offset
+                            auctionId={id}
                             name={name}
                             sex={sex}
                             src={resolvers.storeOutfit(name, sex, type)}
@@ -216,6 +218,7 @@ const CharacterModal = ({
                         <SpriteBox
                           key={name}
                           offset
+                          auctionId={id}
                           name={name}
                           sex={sex}
                           src={resolvers.mount(name)}
@@ -234,6 +237,7 @@ const CharacterModal = ({
                             <SpriteBox
                               key={name}
                               offset
+                              auctionId={id}
                               name={name}
                               sex={sex}
                               src={resolvers.storeMount(name)}
@@ -251,6 +255,7 @@ const CharacterModal = ({
                       {storeItems.map(({ name, amount }) => (
                         <SpriteBox
                           key={name}
+                          auctionId={id}
                           name={name}
                           amount={amount}
                           sex={sex}

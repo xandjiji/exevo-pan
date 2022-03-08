@@ -1,4 +1,5 @@
 export interface SpriteBoxProps {
+  auctionId: number
   offset?: boolean
   sex: boolean
   name: string

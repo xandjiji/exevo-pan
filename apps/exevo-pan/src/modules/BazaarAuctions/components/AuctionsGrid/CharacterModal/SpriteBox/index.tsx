@@ -1,10 +1,13 @@
+import { useCallback } from 'react'
 import { formatNumberWithCommas } from 'utils'
 import { Checkbox } from 'components/CharacterCard/styles'
+import { NotifyErrorClient } from 'services'
 import { addonCheck, testRareOutfit, rareMountSet } from './utils'
 import * as S from './styles'
 import { SpriteBoxProps } from './types'
 
 const SpriteBox = ({
+  auctionId,
   offset = false,
   name,
   sex,
@@ -21,6 +24,11 @@ const SpriteBox = ({
   const isRare = isRareMount || isRareOutfit
   const showAddon = type !== undefined
 
+  const notifyError = useCallback(
+    () => NotifyErrorClient.broadcast({ auctionId, name, src }),
+    [auctionId, name, src],
+  )
+
   return (
     <S.Wrapper
       title={amount > 1 ? `${formatNumberWithCommas(amount)}x ${name}` : name}
@@ -33,6 +41,7 @@ const SpriteBox = ({
         src={src}
         width={offset ? 64 : 32}
         height={offset ? 64 : 32}
+        onError={notifyError}
       />
 
       {showAddon && (
