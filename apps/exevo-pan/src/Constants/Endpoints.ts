@@ -9,5 +9,6 @@ export const endpoints = {
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
   MAIL_CHECKOUT: '/api/mail-checkout',
   NEWSLETTER: '/api/mailchimp',
+  ERROR_REPORT: '/api/error-report',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
 }
