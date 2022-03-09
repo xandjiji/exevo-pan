@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components'
-import { Tabs as BaseTabs } from 'components/Atoms'
-import { MaterialCard, CustomScrollbar } from 'styles'
+import { Tabs as BaseTabs, Modal as BaseModal } from 'components/Atoms'
+import { CustomScrollbar } from 'styles'
 
 const LATERAL_MARGIN = 14
 const CARD_FIXED_HEIGHT = 450
@@ -16,15 +16,8 @@ const negativeContainer = css`
   padding-right: ${LATERAL_MARGIN}px;
 `
 
-export const Wrapper = styled.div`
-  ${MaterialCard}
+export const Modal = styled(BaseModal)`
   padding: ${LATERAL_MARGIN}px;
-
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 72;
-  transform: translate(-50%, -50%);
 
   width: 100%;
   max-width: ${CARD_MAX_MOBILE_WIDTH}px;

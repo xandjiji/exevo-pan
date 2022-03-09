@@ -80,7 +80,7 @@ const CharacterModal = ({
 
   return (
     <>
-      <S.Wrapper>
+      <S.Modal isOpen={open} onClose={onClose}>
         <Head
           id={id}
           outfitId={outfitId}
@@ -269,7 +269,7 @@ const CharacterModal = ({
             </S.DesktopColumn.Right>
           </S.Grid>
         </S.ScrollableContainer>
-      </S.Wrapper>
+      </S.Modal>
       <S.Backdrop onClick={onClose} />
     </>
   )
