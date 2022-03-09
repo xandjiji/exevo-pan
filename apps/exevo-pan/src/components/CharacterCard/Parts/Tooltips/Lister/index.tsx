@@ -15,7 +15,9 @@ const Lister = ({
   return (
     <S.Ul maxLines={maxLines}>
       {fullList.map((item) => (
-        <S.Li data-active={partialSet.has(item)}>{item}</S.Li>
+        <S.Li key={item} data-active={partialSet.has(item)}>
+          {item}
+        </S.Li>
       ))}
     </S.Ul>
   )
