@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import { createPortal } from 'react-dom'
-import { useEscToClose } from 'hooks'
+import { useEscToClose, useLockBody } from 'hooks'
 import * as S from './styles'
 import { ModalProps } from './types'
 
@@ -14,6 +14,8 @@ const Modal = ({
     open: isOpen,
     onClose,
   })
+
+  useLockBody(isOpen)
 
   return isOpen
     ? createPortal(
