@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { v4 as uuidv4 } from 'uuid'
 import { SpritePortrait } from 'components/Atoms'
@@ -15,6 +16,8 @@ const CharacterItems = ({
   const {
     translations: { common },
   } = useTranslations()
+
+  const emptyItems = useMemo(() => fillItems(4 - items.length), [items.length])
 
   return (
     <S.ItemWrapper {...props}>
@@ -44,9 +47,9 @@ const CharacterItems = ({
           />
         )
       })}
-      {fillItems(4 - items.length)}
+      {emptyItems}
     </S.ItemWrapper>
   )
 }
 
-export default CharacterItems
+export default memo(CharacterItems)
