@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import { createPortal } from 'react-dom'
-import { useIsMounted, useEscToClose } from 'hooks'
+import { useEscToClose } from 'hooks'
 import * as S from './styles'
 import { ModalProps } from './types'
 
@@ -15,21 +15,24 @@ const Modal = ({
     onClose,
   })
 
-  const isMounted = useIsMounted()
-
-  return isMounted && isOpen
+  return isOpen
     ? createPortal(
-        <S.Wrapper
-          tabIndex={0}
-          aria-hidden={!isOpen}
-          aria-modal="true"
-          role="dialog"
-          ref={elementToFocusRef}
-          onKeyDown={onKeyDown}
-          {...props}
-        >
-          {children}
-        </S.Wrapper>,
+        <>
+          <S.Backdrop aria-hidden={!isOpen} onClick={onClose}>
+            <S.Wrapper
+              tabIndex={0}
+              aria-hidden={!isOpen}
+              aria-modal="true"
+              role="dialog"
+              ref={elementToFocusRef}
+              onKeyDown={onKeyDown}
+              onClick={(event) => event.stopPropagation()}
+              {...props}
+            >
+              {children}
+            </S.Wrapper>
+          </S.Backdrop>
+        </>,
         document.body,
       )
     : null

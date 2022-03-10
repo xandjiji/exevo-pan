@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { Fragment, useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { Ads } from 'templates'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
@@ -10,7 +10,6 @@ import CharacterModal from './CharacterModal'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
-const ESTIMATED_HEIGHT = 479
 
 const AuctionsGrid = (): JSX.Element => {
   const {
@@ -32,10 +31,6 @@ const AuctionsGrid = (): JSX.Element => {
   const [selectedCharacter, selectCharacter] = useState<
     CharacterObject | undefined
   >()
-
-  const currentVisibleHighlighteds = shouldDisplayHighlightedAuctions
-    ? highlightedAuctions.length
-    : 0
 
   const gridHeadOffset = useRef(0)
   useEffect(() => {
@@ -143,11 +138,12 @@ const AuctionsGrid = (): JSX.Element => {
           />
         )}
       </S.GridWrapper>
-      <CharacterModal
-        open={!!selectedCharacter}
-        characterData={selectedCharacter}
-        onClose={() => selectCharacter(undefined)}
-      />
+      {!!selectedCharacter && (
+        <CharacterModal
+          characterData={selectedCharacter}
+          onClose={() => selectCharacter(undefined)}
+        />
+      )}
 
       <Ads.FooterBanner key={pageData.pageIndex} />
     </main>

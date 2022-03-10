@@ -1,6 +1,5 @@
 export interface CharacterModalProps {
-  open: boolean
-  characterData?: CharacterObject
+  characterData: CharacterObject
   onClose: () => void
 }
 

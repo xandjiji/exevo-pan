@@ -21,6 +21,7 @@ export const Modal = styled(BaseModal)`
 
   width: 100%;
   max-width: ${CARD_MAX_MOBILE_WIDTH}px;
+  outline: none;
 
   @media (min-width: 768px) {
     width: fit-content;
@@ -30,18 +31,6 @@ export const Modal = styled(BaseModal)`
   @media (min-width: 1100px) {
     width: 1029px;
   }
-`
-
-export const Backdrop = styled.div`
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  z-index: 71;
-  transform: translate(-50%, -50%);
-
-  width: 101vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
 `
 
 export const Spacer = styled.div`
