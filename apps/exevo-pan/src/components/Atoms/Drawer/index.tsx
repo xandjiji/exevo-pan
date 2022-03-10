@@ -1,5 +1,6 @@
 import { createPortal } from 'react-dom'
 import { useState, useEffect, useRef } from 'react'
+import FocusLock from 'react-focus-lock'
 import { useDrag, useEscToClose, useIsMounted, useLockBody } from 'hooks'
 import DrawerHead from './DrawerHead'
 import DrawerFooter from './DrawerFooter'
@@ -58,7 +59,7 @@ const Drawer = ({
 
   return isMounted && shouldBeRendered
     ? createPortal(
-        <>
+        <FocusLock>
           <S.Wrapper
             tabIndex={0}
             aria-hidden={!isOpen}
@@ -76,7 +77,7 @@ const Drawer = ({
             style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}
             {...binders}
           />
-        </>,
+        </FocusLock>,
         document.body,
       )
     : null
