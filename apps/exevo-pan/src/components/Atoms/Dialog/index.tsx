@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 import { createPortal } from 'react-dom'
+import FocusLock from 'react-focus-lock'
 import { useEscToClose, useLockBody } from 'hooks'
 import * as S from './styles'
 import { DialogProps } from './types'
@@ -19,7 +20,7 @@ const Modal = ({
 
   return isOpen
     ? createPortal(
-        <>
+        <FocusLock>
           <S.Backdrop aria-hidden={!isOpen} onClick={onClose}>
             <S.Wrapper
               tabIndex={0}
@@ -38,7 +39,7 @@ const Modal = ({
               {children}
             </S.Wrapper>
           </S.Backdrop>
-        </>,
+        </FocusLock>,
         document.body,
       )
     : null
