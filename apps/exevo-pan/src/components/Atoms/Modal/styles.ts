@@ -1,5 +1,6 @@
 import styled from 'styled-components'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Clickable } from 'styles'
+import CrossSvg from 'assets/svgs/cross.svg'
 
 export const Wrapper = styled.div`
   ${MaterialCard}
@@ -18,4 +19,16 @@ export const Backdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+`
+
+export const CloseButton = styled.button`
+  ${Clickable}
+  float: right;
+  display: grid;
+  place-items: center;
+  border-radius: 4px;
+`
+
+export const CloseIcon = styled(CrossSvg)`
+  fill: var(--onSurface);
 `

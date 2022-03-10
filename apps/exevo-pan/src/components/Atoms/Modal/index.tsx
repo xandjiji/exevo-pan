@@ -31,6 +31,10 @@ const Modal = ({
               onClick={(event) => event.stopPropagation()}
               {...props}
             >
+              {/* @ ToDo: i18n aria label */}
+              <S.CloseButton type="button" onClick={onClose}>
+                <S.CloseIcon />
+              </S.CloseButton>
               {children}
             </S.Wrapper>
           </S.Backdrop>
