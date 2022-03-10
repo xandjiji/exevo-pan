@@ -18,11 +18,12 @@ const CharacterItems = ({
 
   return (
     <S.ItemWrapper {...props}>
-      {items.map((floatItem) => {
+      {items.map((floatItem, childrenIndex) => {
         const [item, tier] = floatItem.toString().split('.')
+        const key = `${childrenIndex}-${item}`
         if (tier) {
           return (
-            <S.SpriteWrapper key={uuidv4()}>
+            <S.SpriteWrapper key={key}>
               <SpritePortrait
                 alt={common.CharacterCard.featuredItem}
                 src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
@@ -35,7 +36,7 @@ const CharacterItems = ({
         }
         return (
           <SpritePortrait
-            key={uuidv4()}
+            key={key}
             alt={common.CharacterCard.featuredItem}
             src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
             width={32}
