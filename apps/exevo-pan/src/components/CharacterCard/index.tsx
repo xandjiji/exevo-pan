@@ -71,7 +71,9 @@ const CharacterCard = ({
         serverName={serverData.serverName}
       />
 
-      <S.Body style={{ height: FIXED_BODY_HEIGHT }}>
+      <S.Body
+        style={{ height: shouldRenderBody ? undefined : FIXED_BODY_HEIGHT }}
+      >
         {shouldRenderBody && (
           <>
             <S.InfoGrid>
