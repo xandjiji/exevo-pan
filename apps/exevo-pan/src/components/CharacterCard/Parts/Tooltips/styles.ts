@@ -7,6 +7,7 @@ import StarSvg from 'assets/svgs/star.svg'
 
 const iconStyle = css`
   margin-right: 4px;
+  flex-shrink: 0;
   width: 18px;
   height: 18px;
   transform: translateY(-1px);
