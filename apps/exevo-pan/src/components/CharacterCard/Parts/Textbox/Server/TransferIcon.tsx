@@ -1,14 +1,18 @@
+/* eslint-disable react/require-default-props */
+import { Placement } from '@popperjs/core'
 import { useTranslations } from 'contexts/useTranslation'
 import * as S from './styles'
 
 interface TransferIconProps {
   transfer: boolean
   nickname: string
+  placement?: Placement
 }
 
 const TransferIcon = ({
   transfer,
   nickname,
+  placement,
 }: TransferIconProps): JSX.Element => {
   const {
     translations: { common },
@@ -16,6 +20,7 @@ const TransferIcon = ({
 
   return transfer ? (
     <S.Tooltip
+      placement={placement}
       aria-labelledby={`transfer-availability-${nickname}`}
       content={
         <S.TooltipText id={`transfer-availability-${nickname}`}>

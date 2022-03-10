@@ -9,6 +9,7 @@ const Server = ({
   serverData,
   transfer,
   nickname,
+  placement,
 }: ServerInfoProps): JSX.Element => {
   const {
     translations: { common },
@@ -32,7 +33,11 @@ const Server = ({
         src={S.flags[serverData.serverLocation.type] ?? fallbackFlag}
       />
       <S.ServerName>{serverData.serverName}</S.ServerName>
-      <TransferIcon transfer={transfer} nickname={nickname} />
+      <TransferIcon
+        transfer={transfer}
+        nickname={nickname}
+        placement={placement}
+      />
     </LabeledTextBox>
   )
 }

@@ -94,6 +94,7 @@ const CharacterModal = ({
                 serverData={serverData}
                 nickname={nickname}
                 transfer={transfer}
+                placement="bottom"
               />
               <Textbox.Pvp serverData={serverData} />
               <Textbox.AuctionEnd auctionEnd={auctionEnd} />
