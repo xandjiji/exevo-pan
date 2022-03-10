@@ -248,9 +248,10 @@ const CharacterModal = ({
               {storeItems.length > 0 && (
                 <Tabs.Panel label={`📥 Store Items (${storeItems.length})`}>
                   <S.SpriteSection>
-                    {storeItems.map(({ name, amount }) => (
+                    {storeItems.map(({ name, amount }, childIndex) => (
                       <SpriteBox
-                        key={name}
+                        // eslint-disable-next-line react/no-array-index-key
+                        key={`${childIndex}-${name}`}
                         auctionId={id}
                         name={name}
                         amount={amount}
