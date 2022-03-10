@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components'
-import { Tabs as BaseTabs, Modal as BaseModal } from 'components/Atoms'
+import { Tabs as BaseTabs, Dialog as BaseDialog } from 'components/Atoms'
 import { CustomScrollbar } from 'styles'
 
 const LATERAL_MARGIN = 14
@@ -16,7 +16,7 @@ const negativeContainer = css`
   padding-right: ${LATERAL_MARGIN}px;
 `
 
-export const Modal = styled(BaseModal)`
+export const Dialog = styled(BaseDialog)`
   padding: ${LATERAL_MARGIN}px;
 
   width: 100%;

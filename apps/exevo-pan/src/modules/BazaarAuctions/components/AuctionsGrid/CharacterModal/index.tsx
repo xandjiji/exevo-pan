@@ -76,7 +76,7 @@ const CharacterModal = ({
   }, [isDesktop])
 
   return (
-    <S.Modal isOpen onClose={onClose}>
+    <S.Dialog isOpen onClose={onClose}>
       <Head
         id={id}
         outfitId={outfitId}
@@ -266,7 +266,7 @@ const CharacterModal = ({
           </S.DesktopColumn.Right>
         </S.Grid>
       </S.ScrollableContainer>
-    </S.Modal>
+    </S.Dialog>
   )
 }
 

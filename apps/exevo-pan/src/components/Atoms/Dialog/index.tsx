@@ -2,14 +2,14 @@
 import { createPortal } from 'react-dom'
 import { useEscToClose, useLockBody } from 'hooks'
 import * as S from './styles'
-import { ModalProps } from './types'
+import { DialogProps } from './types'
 
 const Modal = ({
   isOpen,
   onClose,
   children,
   ...props
-}: ModalProps): JSX.Element | null => {
+}: DialogProps): JSX.Element | null => {
   const { elementToFocusRef, onKeyDown } = useEscToClose({
     open: isOpen,
     onClose,
