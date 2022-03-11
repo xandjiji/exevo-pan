@@ -2,10 +2,6 @@ import styled from 'styled-components'
 import { MaterialCard, Clickable } from 'styles'
 import CrossSvg from 'assets/svgs/cross.svg'
 
-export const Wrapper = styled.div`
-  ${MaterialCard}
-`
-
 export const Backdrop = styled.div`
   position: fixed;
   top: 0;
@@ -19,6 +15,32 @@ export const Backdrop = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  animation: fadeIn 0.1s ease-out;
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`
+
+export const Wrapper = styled.div`
+  ${MaterialCard}
+
+  animation: rushIn 0.1s ease-out;
+  @keyframes rushIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: unset;
+    }
+  }
 `
 
 export const CloseButton = styled.button`
