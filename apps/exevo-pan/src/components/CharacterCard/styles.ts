@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Checkbox as BaseCheckbox } from 'components/Atoms'
 import Image from 'next/image'
-import { MaterialCard } from 'styles'
+import { MaterialCard, Clickable } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
 import ExpandSvg from 'assets/svgs/expand.svg'
 import { Nickname } from 'components/CharacterMiniCard/styles'
@@ -48,6 +48,13 @@ export const Wrapper = styled.article`
       }
     }
   }
+`
+
+export const Button = styled.button`
+  ${Clickable}
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
 `
 
 export const Icons = {

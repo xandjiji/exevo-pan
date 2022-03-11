@@ -71,6 +71,9 @@ const CharacterCard = ({
         serverName={serverData.serverName}
       >
         {highlighted && <TagButton />}
+        <S.Button type="button">
+          <S.Icons.Expand />
+        </S.Button>
       </Head>
 
       <S.Body

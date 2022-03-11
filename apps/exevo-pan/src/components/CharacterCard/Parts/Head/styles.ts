@@ -1,8 +1,13 @@
 import styled from 'styled-components'
+import BaseCharacterMiniCard from '../../../CharacterMiniCard'
 
 export const Head = styled.div`
   margin-bottom: 16px;
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-start;
+`
+
+export const CharacterMiniCard = styled(BaseCharacterMiniCard)`
+  margin-right: auto;
 `
