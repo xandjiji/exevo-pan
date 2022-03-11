@@ -6,7 +6,6 @@ import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
-import CharacterModal from './CharacterModal'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
@@ -27,10 +26,6 @@ const AuctionsGrid = (): JSX.Element => {
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
-
-  const [selectedCharacter, selectCharacter] = useState<
-    CharacterObject | undefined
-  >()
 
   const gridHeadOffset = useRef(0)
   useEffect(() => {
@@ -113,7 +108,7 @@ const AuctionsGrid = (): JSX.Element => {
                 characterData={auction}
                 highlighted
                 lazyRender
-                onClick={() => selectCharacter(auction)}
+                expandable
               />
             ))}
           {page.map((auction) => (
@@ -121,7 +116,7 @@ const AuctionsGrid = (): JSX.Element => {
               key={auction.id}
               lazyRender
               characterData={auction}
-              onClick={() => selectCharacter(auction)}
+              expandable
             />
           ))}
         </S.Grid>
@@ -138,12 +133,6 @@ const AuctionsGrid = (): JSX.Element => {
           />
         )}
       </S.GridWrapper>
-      {!!selectedCharacter && (
-        <CharacterModal
-          characterData={selectedCharacter}
-          onClose={() => selectCharacter(undefined)}
-        />
-      )}
 
       <Ads.FooterBanner key={pageData.pageIndex} />
     </main>
