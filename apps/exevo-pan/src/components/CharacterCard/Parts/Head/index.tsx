@@ -6,29 +6,28 @@ import * as S from './styles'
 import { HeadProps } from './types'
 
 const Head = ({
+  characterData,
   highlighted = false,
-  id,
-  nickname,
-  outfitId,
-  level,
-  vocationId,
   serverName,
-}: HeadProps): JSX.Element => (
-  <S.Head data-highlighted={highlighted}>
-    <CharacterMiniCard
-      displayLink
-      outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
-      characterData={{
-        name: nickname,
-        level,
-        vocation: vocation.getFullName(vocationId, level),
-        world: serverName,
-      }}
-      linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
-    />
+}: HeadProps): JSX.Element => {
+  const { id, nickname, level, vocationId, outfitId } = characterData
+  return (
+    <S.Head data-highlighted={highlighted}>
+      <CharacterMiniCard
+        displayLink
+        outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+        characterData={{
+          name: nickname,
+          level,
+          vocation: vocation.getFullName(vocationId, level),
+          world: serverName,
+        }}
+        linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
+      />
 
-    {highlighted && <TagButton />}
-  </S.Head>
-)
+      {highlighted && <TagButton />}
+    </S.Head>
+  )
+}
 
 export default memo(Head)

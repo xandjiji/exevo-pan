@@ -77,14 +77,7 @@ const CharacterModal = ({
 
   return (
     <S.Dialog isOpen onClose={onClose}>
-      <Head
-        id={id}
-        outfitId={outfitId}
-        nickname={nickname}
-        level={level}
-        vocationId={vocationId}
-        serverName={serverData.serverName}
-      />
+      <Head characterData={characterData} serverName={serverData.serverName} />
 
       <S.ScrollableContainer>
         <S.Grid>

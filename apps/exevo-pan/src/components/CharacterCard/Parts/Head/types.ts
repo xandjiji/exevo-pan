@@ -1,8 +1,5 @@
-export interface HeadProps
-  extends Pick<
-    CharacterObject,
-    'id' | 'nickname' | 'outfitId' | 'level' | 'vocationId'
-  > {
+export interface HeadProps {
+  characterData: CharacterObject
   highlighted?: boolean
   serverName: string
 }
