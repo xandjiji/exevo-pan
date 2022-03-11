@@ -63,7 +63,11 @@ const CharacterCard = ({
     >
       <Head
         highlighted={highlighted}
-        characterData={characterData}
+        id={id}
+        outfitId={outfitId}
+        nickname={nickname}
+        level={level}
+        vocationId={vocationId}
         serverName={serverData.serverName}
       />
 
