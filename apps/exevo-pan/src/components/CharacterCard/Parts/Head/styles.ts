@@ -4,7 +4,7 @@ import BaseCharacterMiniCard from '../../../CharacterMiniCard'
 export const Head = styled.div`
   margin-bottom: 16px;
   display: flex;
-  gap: 16px;
+  gap: 6px;
   align-items: flex-start;
 `
 
