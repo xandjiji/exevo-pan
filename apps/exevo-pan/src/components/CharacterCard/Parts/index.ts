@@ -1,4 +1,5 @@
 export { default as Head } from './Head'
+export { default as TagButton } from './TagButton'
 export * as Textbox from './Textbox'
 export { default as CharacterSkills } from './CharacterSkills'
 export { default as ImbuementsTooltip } from './Tooltips/Imbuements'

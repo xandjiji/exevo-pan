@@ -4,6 +4,7 @@ import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import useShouldRender from './useShouldRender'
 import {
   Head,
+  TagButton,
   Textbox,
   CharacterItems,
   CharacterSkills,
@@ -69,7 +70,9 @@ const CharacterCard = ({
         level={level}
         vocationId={vocationId}
         serverName={serverData.serverName}
-      />
+      >
+        {highlighted && <TagButton />}
+      </Head>
 
       <S.Body
         style={{ height: shouldRenderBody ? undefined : FIXED_BODY_HEIGHT }}
