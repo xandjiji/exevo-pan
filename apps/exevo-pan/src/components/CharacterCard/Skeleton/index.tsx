@@ -11,43 +11,45 @@ const CardSkeleton = ({
   } = useTranslations()
 
   return (
-    <S.Wrapper highlighted={false} {...props}>
-      <S.Head highlighted={false}>
+    <S.Wrapper {...props}>
+      <Skeletons.Head>
         <Skeletons.Square />
         <Skeletons.HeadInfo>
           <Skeletons.Text style={{ width: '50%' }} />
           <Skeletons.Text style={{ width: '75%', height: 8 }} />
         </Skeletons.HeadInfo>
-      </S.Head>
+      </Skeletons.Head>
 
-      <S.InfoGrid>
-        <S.LabeledTextBox labelText="Server">
+      <S.InfoGrid style={{ marginBottom: 12 }}>
+        <Skeletons.LabeledTextBox labelText="Server">
           <Skeletons.Flex>
             <Skeletons.Flag />
             <Skeletons.Text style={{ width: '35%' }} />
             <Skeletons.Circle style={{ marginLeft: 'auto' }} />
           </Skeletons.Flex>
-        </S.LabeledTextBox>
-        <S.LabeledTextBox labelText="PvP">
+        </Skeletons.LabeledTextBox>
+        <Skeletons.LabeledTextBox labelText="PvP">
           <Skeletons.Flex>
             <Skeletons.Circle
               style={{ width: 12, height: 12, marginRight: 4 }}
             />
             <Skeletons.Text style={{ width: '70%' }} />
           </Skeletons.Flex>
-        </S.LabeledTextBox>
-        <S.LabeledTextBox labelText={common.CharacterCard.AuctionStatus}>
+        </Skeletons.LabeledTextBox>
+        <Skeletons.LabeledTextBox
+          labelText={common.CharacterCard.AuctionStatus}
+        >
           <Skeletons.Text style={{ width: '65%' }} />
-        </S.LabeledTextBox>
+        </Skeletons.LabeledTextBox>
 
-        <S.LabeledTextBox labelText={common.CharacterCard.BidStatus}>
+        <Skeletons.LabeledTextBox labelText={common.CharacterCard.BidStatus}>
           <Skeletons.Flex>
             <Skeletons.Circle
               style={{ width: 12, height: 12, marginRight: 4 }}
             />
             <Skeletons.Text style={{ width: '50%' }} />
           </Skeletons.Flex>
-        </S.LabeledTextBox>
+        </Skeletons.LabeledTextBox>
       </S.InfoGrid>
 
       <Skeletons.ItemWrapper>

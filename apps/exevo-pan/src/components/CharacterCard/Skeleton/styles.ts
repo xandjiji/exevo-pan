@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { Skeleton } from 'components/Atoms'
+import { Head as BaseHead } from '../Parts/Head/styles'
+import { LabeledTextBox as BaseLabeledTextBox } from '../Parts/styles'
 
 export const Flex = styled.div`
   display: flex;
@@ -7,9 +9,22 @@ export const Flex = styled.div`
   height: 100%;
 `
 
+export const Head = styled(BaseHead)`
+  align-items: center;
+  gap: 0px;
+`
+
 export const HeadInfo = styled.div`
   margin: 0 16px;
   width: 100%;
+`
+
+export const LabeledTextBox = styled(BaseLabeledTextBox)`
+  align-items: center;
+  height: 36px;
+  > div {
+    width: 100%;
+  }
 `
 
 export const Square = styled(Skeleton)`
