@@ -116,7 +116,7 @@ const CharacterCard = ({
                     title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
                   >
                     <S.CheckboxContainer>
-                      <S.TibiaCoinIcon />
+                      <S.Icons.TibiaCoin />
                     </S.CheckboxContainer>
                     <S.Strong>
                       {tcInvested} {common.CharacterCard.tcInvested.invested}

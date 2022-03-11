@@ -3,6 +3,7 @@ import { Checkbox as BaseCheckbox } from 'components/Atoms'
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
+import ExpandSvg from 'assets/svgs/expand.svg'
 import { Nickname } from 'components/CharacterMiniCard/styles'
 
 export const Wrapper = styled.article`
@@ -48,6 +49,18 @@ export const Wrapper = styled.article`
     }
   }
 `
+
+export const Icons = {
+  Expand: styled(ExpandSvg)``,
+  TibiaCoin: styled(Image).attrs({
+    src: TibiaCoinImage,
+    alt: 'Tibia Coin',
+    unoptimized: true,
+  })`
+    width: 12px;
+    height: 12px;
+  `,
+}
 
 export const InfoGrid = styled.div`
   display: grid;

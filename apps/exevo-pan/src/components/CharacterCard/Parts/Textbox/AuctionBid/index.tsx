@@ -3,7 +3,8 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
-import { LabeledTextBox, Icons } from '../../styles'
+import { Icons } from '../../../styles'
+import { LabeledTextBox } from '../../styles'
 
 const AuctionBid = ({
   hasBeenBidded,
