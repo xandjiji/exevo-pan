@@ -63,7 +63,6 @@ const CharacterCard = ({
       {...props}
     >
       <Head
-        highlighted={highlighted}
         id={id}
         outfitId={outfitId}
         nickname={nickname}

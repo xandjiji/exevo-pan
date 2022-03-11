@@ -3,7 +3,6 @@ export interface HeadProps
     CharacterObject,
     'id' | 'nickname' | 'outfitId' | 'level' | 'vocationId'
   > {
-  highlighted?: boolean
   serverName: string
   children?: React.ReactNode
 }

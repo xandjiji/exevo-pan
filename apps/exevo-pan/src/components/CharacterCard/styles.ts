@@ -3,6 +3,7 @@ import { Checkbox as BaseCheckbox } from 'components/Atoms'
 import Image from 'next/image'
 import { MaterialCard } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
+import { Nickname } from 'components/CharacterMiniCard/styles'
 
 export const Wrapper = styled.article`
   ${MaterialCard}
@@ -19,6 +20,10 @@ export const Wrapper = styled.article`
     --primaryVariant: var(--kwaiVariant);
 
     z-index: 2;
+
+    ${Nickname} {
+      color: var(--green);
+    }
 
     @media (min-width: 768px) {
       animation: zoom 0.6s ease-out forwards;
