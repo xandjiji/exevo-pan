@@ -58,7 +58,10 @@ export const Button = styled.button`
 `
 
 export const Icons = {
-  Expand: styled(ExpandSvg)``,
+  Expand: styled(ExpandSvg)`
+    fill: var(--onSurface);
+    transition: 0.2s fill ease-out;
+  `,
   TibiaCoin: styled(Image).attrs({
     src: TibiaCoinImage,
     alt: 'Tibia Coin',
@@ -74,15 +77,6 @@ export const InfoGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 8px;
   grid-row-gap: 12px;
-`
-
-export const TibiaCoinIcon = styled(Image).attrs({
-  src: TibiaCoinImage,
-  alt: 'Tibia Coin',
-  unoptimized: true,
-})`
-  width: 12px;
-  height: 12px;
 `
 
 export const FlexWrapper = styled.div`

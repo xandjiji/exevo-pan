@@ -1,10 +1,6 @@
 import { useMemo, useRef, useCallback } from 'react'
 import { Tabs } from 'components/Atoms'
-import {
-  InfoGrid,
-  Checkbox,
-  TibiaCoinIcon,
-} from 'components/CharacterCard/styles'
+import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/styles'
 import {
   Head,
   Textbox,
@@ -126,7 +122,7 @@ const CharacterModal = ({
           <S.DesktopColumn.Right>
             <S.Section style={{ zIndex: 3 }}>
               <S.SectionText>
-                <TibiaCoinIcon /> Total invested:{' '}
+                <Icons.TibiaCoin /> Total invested:{' '}
                 <S.CoinsValue data-active={tcInvested !== '0'}>
                   {tcInvested} Tibia Coins
                 </S.CoinsValue>
