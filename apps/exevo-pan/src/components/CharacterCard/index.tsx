@@ -78,8 +78,7 @@ const CharacterCard = ({
           {highlighted && <TagButton />}
           {expandable && (
             <S.Button
-              /* @ ToDo: i18n */
-              aria-label="Expand for full auction details"
+              aria-label={common.CharacterCard.expand}
               type="button"
               onClick={() => setExpanded(true)}
             >

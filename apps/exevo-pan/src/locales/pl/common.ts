@@ -143,6 +143,13 @@ export default {
       manyMounts: 'Dużo mountów',
       manyStoryCosmetics: 'Duzo przedmiotów z Tibia Store',
     },
+    expand: 'Expand for full auction details',
+    CharacterModal: {
+      SpriteBox: {
+        firstAddon: 'First addon',
+        secondAddon: 'Second addon',
+      },
+    },
   },
   StepperCompletedLabel: 'Krok wykonany',
   CopyButton: {
@@ -152,6 +159,9 @@ export default {
   Accordion: {
     open: 'Otwórz',
     close: 'Zamknij',
+  },
+  Dialog: {
+    close: 'Close dialog',
   },
   FooterTitle: 'Exevo Pan - stworzony przez',
   AnchorIconLabel: 'Skopiuj link',

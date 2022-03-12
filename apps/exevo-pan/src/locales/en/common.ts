@@ -143,6 +143,13 @@ export default {
       manyMounts: 'Many mounts',
       manyStoryCosmetics: 'Many store cosmetics',
     },
+    expand: 'Expand for full auction details',
+    CharacterModal: {
+      SpriteBox: {
+        firstAddon: 'First addon',
+        secondAddon: 'Second addon',
+      },
+    },
   },
   StepperCompletedLabel: 'Step completed',
   CopyButton: {
@@ -152,6 +159,9 @@ export default {
   Accordion: {
     open: 'Open',
     close: 'Close',
+  },
+  Dialog: {
+    close: 'Close dialog',
   },
   FooterTitle: 'Exevo Pan - made by',
   AnchorIconLabel: 'Copy link',

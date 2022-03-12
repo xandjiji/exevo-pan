@@ -1,4 +1,5 @@
 import { useCallback } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { formatNumberWithCommas } from 'utils'
 import { Checkbox } from 'components/CharacterCard/styles'
 import { NotifyErrorClient } from 'services'
@@ -17,6 +18,10 @@ const SpriteBox = ({
   checkRareMount = false,
   checkRareOutfit = false,
 }: SpriteBoxProps): JSX.Element => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const isRareMount = checkRareMount ? rareMountSet.has(name) : false
   const isRareOutfit =
     checkRareOutfit && type ? testRareOutfit({ name, type, sex }) : false
@@ -45,11 +50,17 @@ const SpriteBox = ({
       />
 
       {showAddon && (
-        /* @ ToDo: i18n */
         <S.CheckboxWrapper>
-          <Checkbox aria-label="First addon" checked={addonCheck.first(type)} />
           <Checkbox
-            aria-label="Second addon"
+            aria-label={
+              common.CharacterCard.CharacterModal.SpriteBox.firstAddon
+            }
+            checked={addonCheck.first(type)}
+          />
+          <Checkbox
+            aria-label={
+              common.CharacterCard.CharacterModal.SpriteBox.secondAddon
+            }
             checked={addonCheck.second(type)}
           />
         </S.CheckboxWrapper>

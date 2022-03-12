@@ -1,4 +1,5 @@
 /* eslint-disable consistent-return */
+import { useTranslations } from 'contexts/useTranslation'
 import { createPortal } from 'react-dom'
 import FocusLock from 'react-focus-lock'
 import { useEscToClose, useLockBody } from 'hooks'
@@ -11,6 +12,10 @@ const Modal = ({
   children,
   ...props
 }: DialogProps): JSX.Element | null => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const { elementToFocusRef, onKeyDown } = useEscToClose({
     open: isOpen,
     onClose,
@@ -32,8 +37,11 @@ const Modal = ({
               onClick={(event) => event.stopPropagation()}
               {...props}
             >
-              {/* @ ToDo: i18n aria label */}
-              <S.CloseButton type="button" onClick={onClose}>
+              <S.CloseButton
+                type="button"
+                aria-label={common.Dialog.close}
+                onClick={onClose}
+              >
                 <S.CloseIcon />
               </S.CloseButton>
               {children}
