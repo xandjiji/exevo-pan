@@ -10,6 +10,9 @@ jest.mock('next/router', () => ({
 const mockedImageComponent = ({ ...props }) => <img {...props} />
 jest.mock('next/image', () => mockedImageComponent)
 
+const mockedFocusLock = ({ children }) => children
+jest.mock('react-focus-lock', () => mockedFocusLock)
+
 Object.defineProperty(window, 'matchMedia', {
   writable: true,
   value: jest.fn().mockImplementation(() => ({
