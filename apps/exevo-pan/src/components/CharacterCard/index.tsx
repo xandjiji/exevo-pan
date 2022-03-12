@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useState, useRef, useMemo } from 'react'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
+import { Sticker } from 'components/Atoms'
 import useShouldRender from './useShouldRender'
 import {
   Head,
@@ -81,7 +82,21 @@ const CharacterCard = ({
               aria-label={common.CharacterCard.expand}
               type="button"
               onClick={() => setExpanded(true)}
+              /* @ ToDo: remove this sticker */
+              style={{ position: 'relative' }}
             >
+              <Sticker
+                /* @ ToDo: remove this sticker */
+                style={{
+                  position: 'absolute',
+                  top: -12,
+                  right: -16,
+                  transform: 'rotate(30deg)',
+                }}
+                localStorageKey="card-expansion-120322"
+              >
+                New
+              </Sticker>
               <S.Icons.Expand />
             </S.Button>
           )}

@@ -7,6 +7,7 @@ import {
   RangeSliderInput,
   SliderInput,
   Checkbox,
+  Sticker,
 } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
@@ -240,7 +241,23 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.labels.storeItems}>
+        <FilterGroup
+          label={homepage.FilterDrawer.labels.storeItems}
+          /* @ ToDo: remove this sticker */
+          style={{ position: 'relative' }}
+        >
+          <Sticker
+            /* @ ToDo: remove this sticker */
+            style={{
+              position: 'absolute',
+              top: -16,
+              left: -24,
+              transform: 'rotate(-30deg)',
+            }}
+            localStorageKey="store-filters-120322"
+          >
+            New
+          </Sticker>
           <S.CheckboxWrapper>
             <Checkbox
               label="Training Dummy"
