@@ -25,7 +25,7 @@ export const Tab = styled.button`
   border-bottom: solid 2px transparent;
 
   display: flex;
-  gap: 3px;
+  gap: 6px;
 
   color: var(--separator);
   font-weight: 700;
@@ -36,6 +36,8 @@ export const Tab = styled.button`
 
   svg {
     margin-top: -1px;
+    width: 16px;
+    height: 16px;
     fill: var(--separator);
   }
 
