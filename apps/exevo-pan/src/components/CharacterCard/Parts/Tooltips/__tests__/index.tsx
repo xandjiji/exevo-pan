@@ -3,21 +3,19 @@ import { renderWithProviders, randomDataset } from 'utils/test'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
-import ListedItems from '../ListedItems'
+import Lister from '../Lister'
 
 const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
 
-describe('<ListedItems />', () => {
+describe('<Lister />', () => {
   test.each(characterList)(
     'should render all items for Charms',
     ({ charms }) => {
       const set = new Set(charms)
       const fullList = charm.tokens
 
-      renderWithProviders(
-        <ListedItems fullList={fullList} characterSet={set} />,
-      )
+      renderWithProviders(<Lister fullList={fullList} partialList={charms} />)
 
       fullList.forEach((name) => {
         const active = set.has(name)
@@ -35,7 +33,7 @@ describe('<ListedItems />', () => {
       const fullList = imbuement.tokens
 
       renderWithProviders(
-        <ListedItems fullList={fullList} characterSet={set} />,
+        <Lister fullList={fullList} partialList={imbuements} />,
       )
 
       fullList.forEach((name) => {
@@ -53,9 +51,7 @@ describe('<ListedItems />', () => {
       const set = new Set(quests)
       const fullList = quest.tokens
 
-      renderWithProviders(
-        <ListedItems fullList={fullList} characterSet={set} />,
-      )
+      renderWithProviders(<Lister fullList={fullList} partialList={quests} />)
 
       fullList.forEach((name) => {
         const active = set.has(name)
