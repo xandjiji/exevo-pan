@@ -142,7 +142,7 @@ export default {
       manyCharms: 'Muchos charms',
       manyQuests: 'Muchas quests',
       manyMounts: 'Muchas mounts',
-      manyStoryCosmetics: 'Muchos cosmeticos comprados',
+      manyStoreCosmetics: 'Muchos cosmeticos comprados',
     },
     expand: 'Expand for full auction details',
     CharacterModal: {

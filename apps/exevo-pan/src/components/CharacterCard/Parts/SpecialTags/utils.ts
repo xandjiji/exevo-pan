@@ -47,7 +47,7 @@ export const getCharacterTags = (character: CharacterObject): string[] => {
   if (quests.length >= QUEST_CHECK) tags.push('manyQuests')
   if (mounts.length >= MOUNT_CHECK) tags.push('manyMounts')
   if (storeOutfits.length + storeMounts.length >= STORE_CHECK) {
-    tags.push('manyStoryCosmetics')
+    tags.push('manyStoreCosmetics')
   }
 
   mounts.forEach((mount) => {

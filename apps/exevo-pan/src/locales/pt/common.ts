@@ -141,7 +141,7 @@ export default {
       manyCharms: 'Muitos charms',
       manyQuests: 'Muitas quests',
       manyMounts: 'Muitas mounts',
-      manyStoryCosmetics: 'Muitos cosmeticos comprados',
+      manyStoreCosmetics: 'Muitos cosmeticos comprados',
     },
     expand: 'Expandir todos os detalhes do leilão',
     CharacterModal: {
