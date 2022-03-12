@@ -145,6 +145,7 @@ export default {
     },
     expand: 'Expand for full auction details',
     CharacterModal: {
+      totalInvested: 'Total invested',
       SpriteBox: {
         firstAddon: 'First addon',
         secondAddon: 'Second addon',

@@ -145,6 +145,7 @@ export default {
     },
     expand: 'Expandir todos os detalhes do leilão',
     CharacterModal: {
+      totalInvested: 'Total investido',
       SpriteBox: {
         firstAddon: 'Primeiro addon',
         secondAddon: 'Segundo addon',

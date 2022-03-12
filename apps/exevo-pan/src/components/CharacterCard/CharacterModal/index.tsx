@@ -1,4 +1,5 @@
 import { useMemo, useRef, useCallback } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { Tabs } from 'components/Atoms'
 import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/styles'
 import {
@@ -52,6 +53,10 @@ const CharacterModal = ({
     storeMounts,
     achievementPoints,
   } = characterData
+
+  const {
+    translations: { common },
+  } = useTranslations()
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
@@ -121,8 +126,11 @@ const CharacterModal = ({
 
           <S.DesktopColumn.Right>
             <S.Section style={{ zIndex: 3 }}>
-              <S.SectionText>
-                <Icons.TibiaCoin /> Total invested:{' '}
+              <S.SectionText
+                title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
+              >
+                <Icons.TibiaCoin />{' '}
+                {common.CharacterCard.CharacterModal.totalInvested}:{' '}
                 <S.CoinsValue data-active={tcInvested !== '0'}>
                   {tcInvested} Tibia Coins
                 </S.CoinsValue>
