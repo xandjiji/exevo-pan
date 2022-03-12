@@ -28,9 +28,7 @@ const defaultReducerState: FetchPostsReducerState = {
   filterOptions: DEFAULT_FILTER_OPTIONS,
   activeFilterCount: 0,
   sortOptions: DEFAULT_SORT_OPTIONS,
-  /* @ ToDo: enable next link after we have more than 6 posts */
-  /* requestStatus: 'IDLE', */
-  requestStatus: 'EXHAUSTED',
+  requestStatus: 'IDLE',
 }
 
 const FetchPostsContext = createContext<FetchPostsContextValues>({
