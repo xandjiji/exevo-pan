@@ -1,6 +1,9 @@
 import styled, { css } from 'styled-components'
 import { Tabs as BaseTabs, Dialog as BaseDialog } from 'components/Atoms'
 import { CustomScrollbar } from 'styles'
+import OutfitSvg from 'assets/svgs/outfit.svg'
+import HorseSvg from 'assets/svgs/horse.svg'
+import InboxSvg from 'assets/svgs/inbox.svg'
 
 const LATERAL_MARGIN = 14
 const CARD_FIXED_HEIGHT = 450
@@ -179,3 +182,17 @@ export const SpriteSectionDivisor = styled.div`
   padding: 6px 0;
   border-bottom: solid 1px var(--separator);
 `
+
+const iconStyle = css``
+
+export const Icons = {
+  Outfit: styled(OutfitSvg)`
+    ${iconStyle}
+  `,
+  Mount: styled(HorseSvg)`
+    ${iconStyle}
+  `,
+  Store: styled(InboxSvg)`
+    ${iconStyle}
+  `,
+}

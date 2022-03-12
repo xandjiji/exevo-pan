@@ -166,10 +166,12 @@ const CharacterModal = ({
 
             <S.TabGroup onChange={handleTabChange} ref={tabRef}>
               <Tabs.Panel
-                label={`👚 Outfits ${tabCounter(
-                  outfits.length,
-                  storeOutfits.length,
-                )}`}
+                label={
+                  <>
+                    <S.Icons.Outfit />
+                    Outfits {tabCounter(outfits.length, storeOutfits.length)}
+                  </>
+                }
               >
                 <S.SpriteSection>
                   {outfits.map(({ name, type }) => (
@@ -209,10 +211,12 @@ const CharacterModal = ({
 
               {mounts.length + storeMounts.length > 0 && (
                 <Tabs.Panel
-                  label={`🐎 Mounts ${tabCounter(
-                    mounts.length,
-                    storeMounts.length,
-                  )}`}
+                  label={
+                    <>
+                      <S.Icons.Mount />
+                      Mounts {tabCounter(mounts.length, storeMounts.length)}
+                    </>
+                  }
                 >
                   <S.SpriteSection>
                     {mounts.map((name) => (
@@ -251,7 +255,14 @@ const CharacterModal = ({
               )}
 
               {storeItems.length > 0 && (
-                <Tabs.Panel label={`📥 Store Items (${storeItems.length})`}>
+                <Tabs.Panel
+                  label={
+                    <>
+                      <S.Icons.Store />
+                      Store Items ({storeItems.length})
+                    </>
+                  }
+                >
                   <S.SpriteSection>
                     {storeItems.map(({ name, amount }, childIndex) => (
                       <SpriteBox
