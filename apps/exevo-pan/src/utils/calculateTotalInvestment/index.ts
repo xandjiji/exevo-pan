@@ -1,4 +1,4 @@
-/* import getStoreItemValue from './storeItems'
+import getStoreItemValue from './storeItems'
 import getHirelingsValue from './hirelings'
 import getCosmeticsValue from './cosmetics'
 
@@ -23,7 +23,4 @@ export const calculateTotalInvestment = (
   sum += getStoreItemValue(storeItems, id)
 
   return sum
-} */
-
-/* @ ToDo: UNMOCK */
-export const calculateTotalInvestment = ({ id }: CharacterObject): number => id
+}
