@@ -141,7 +141,9 @@ export default {
       manyCharms: 'Many charms',
       manyQuests: 'Many quests',
       manyMounts: 'Many mounts',
-      manyStoreCosmetics: 'Many store cosmetics',
+      manyStoreCosmetics: 'Many store cosmetics 🛍️',
+      rareMounts: 'Rare mounts ✨',
+      rareOutfits: 'Rare outfits 💎',
     },
     expand: 'Expand for full auction details',
     CharacterModal: {

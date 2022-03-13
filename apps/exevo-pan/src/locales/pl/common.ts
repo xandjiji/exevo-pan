@@ -141,7 +141,9 @@ export default {
       manyCharms: 'Dużo charmów',
       manyQuests: 'Dużo questów',
       manyMounts: 'Dużo mountów',
-      manyStoreCosmetics: 'Duzo przedmiotów z Tibia Store',
+      manyStoreCosmetics: 'Duzo przedmiotów z Tibia Store 🛍️',
+      rareMounts: 'Rzadkie mountów ✨',
+      rareOutfits: 'Rzadkie outfitów 💎',
     },
     expand: 'Expand for full auction details',
     CharacterModal: {
