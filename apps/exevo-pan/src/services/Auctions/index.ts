@@ -51,7 +51,7 @@ export default class AuctionsClient {
 
     const response = await fetch(endpoint, {
       method: 'POST',
-      headers: buildHeaders(),
+      headers: buildHeaders(endpoint),
       body: bodyPayload,
     })
 

@@ -12,7 +12,10 @@ export const filterCurrentAuctions = async (
     return {
       statusCode: 400,
       headers: {
-        'content-type': 'application/json',
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Headers': '*',
+        'Access-Control-Allow-Credentials': true,
       },
       body: JSON.stringify({ error: 'empty body' }),
     }
@@ -41,7 +44,10 @@ export const filterCurrentAuctions = async (
   return {
     statusCode: 200,
     headers: {
-      'content-type': 'application/json',
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Headers': '*',
+      'Access-Control-Allow-Credentials': true,
     },
     body: JSON.stringify(responseBody),
   }
