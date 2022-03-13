@@ -43,6 +43,7 @@ export const Tab = styled.button`
 
   &[aria-selected='true'] {
     color: var(--primary);
+    filter: brightness(130%);
     border-color: var(--primary);
 
     svg {
