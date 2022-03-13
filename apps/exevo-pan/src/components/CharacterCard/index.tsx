@@ -135,10 +135,15 @@ const CharacterCard = ({
                 <S.FlexColumn data-checkbox>
                   <S.Checkbox
                     label="Charm Expansion"
-                    checked={charmInfo.expansion}
+                    /* @ ToDo: UNMOCK */
+                    checked={charmInfo?.expansion ?? false}
                   />
 
-                  <S.Checkbox label="Prey Slot" checked={preySlot} />
+                  <S.Checkbox
+                    label="Prey Slot"
+                    /* @ ToDo: UNMOCK */
+                    checked={preySlot ?? true}
+                  />
 
                   {tcInvested !== '0' && (
                     <S.FlexWrapper
