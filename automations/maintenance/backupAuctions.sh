@@ -1,1 +1,1 @@
-cp ~/exevo-pan/apps/current-auctions-worker/dist/worker.js ~/backups/"$(date +"%H").js"
+#cp ~/exevo-pan/apps/current-auctions-worker/.build/worker.js ~/backups/"$(date +"%H").js"
