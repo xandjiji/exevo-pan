@@ -1,0 +1,26 @@
+{
+  "name": "auction-queries",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Querying functions for Char Bazaar",
+  "license": "Unlicense",
+  "main": "dist",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "build": "rm -rf dist/ && tsc",
+    "build:packages": "rm -rf dist/ && tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "shared-utils": "*"
+  },
+  "devDependencies": {
+    "@types/exevo-pan": "*",
+    "config": "*",
+    "typescript": "4.3.5"
+  }
+}

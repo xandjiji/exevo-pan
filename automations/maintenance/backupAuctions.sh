@@ -1,0 +1,1 @@
+cp ~/exevo-pan/apps/current-auctions-lambda/.serverless/filterAuctions.zip ~/backups/"$(date +"%H").js"

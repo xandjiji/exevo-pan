@@ -1,0 +1,39 @@
+{
+  "name": "bazaar-scraper",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Helpers for scraping data from the official Tibia website",
+  "license": "Unlicense",
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules",
+    "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "dev:scraper": "NODE_PATH=./src nodemon -q src/dev.ts",
+    "scrap:auctions": "NODE_PATH=./src sucrase-node src/Scripts/UpdateAuctions/run.ts",
+    "scrap:history": "NODE_PATH=./src sucrase-node src/Scripts/ScrapHistory/run.ts",
+    "scrap:raw": "NODE_PATH=./src sucrase-node src/Scripts/ScrapRawBazaarData/run.ts",
+    "update:statistics": "NODE_PATH=./src sucrase-node src/Scripts/UpdateHistoryStatistics/run.ts",
+    "update:highlighted": "NODE_PATH=./src sucrase-node src/Scripts/GetHighlightedAuctions/run.ts",
+    "dev": "serve -l 5555 Output",
+    "staging": "Output/staging/deployStaging.sh"
+  },
+  "dependencies": {
+    "@types/cheerio": "^0.22.30",
+    "@types/exevo-pan": "*",
+    "@types/node-fetch": "^2.5.12",
+    "@types/user-agents": "^1.0.2",
+    "cheerio": "^1.0.0-rc.10",
+    "config": "*",
+    "data-dictionary": "*",
+    "dequal": "^2.0.2",
+    "form-data": "^4.0.0",
+    "logging": "*",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.15",
+    "serve": "^13.0.2",
+    "shared-utils": "*",
+    "sucrase": "^3.20.3",
+    "surge": "^0.23.0",
+    "user-agents": "^1.0.862"
+  }
+}

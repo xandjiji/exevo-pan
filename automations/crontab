@@ -1,0 +1,7 @@
+#*/1 * * * * ~/duckdns/duck.sh >/dev/null 2>&1
+
+0 4 * * * ~/exevo-pan/automations/maintenance/flushLogs.sh
+0 4 * * 3 ~/exevo-pan/automations/maintenance/backupHistory.sh
+0 * * * * ~/exevo-pan/automations/maintenance/backupAuctions.sh
+
+0 6 * * * ~/exevo-pan/automations/updateStatistics.sh

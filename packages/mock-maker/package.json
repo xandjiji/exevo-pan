@@ -1,0 +1,32 @@
+{
+  "name": "mock-maker",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Mock generators for Exevo Pan",
+  "license": "Unlicense",
+  "main": "dist",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "format": "prettier --write 'src/**/*.{js,ts}'",
+    "dev:mock": "NODE_PATH=./src nodemon -q src/dev.ts",
+    "build": "rm -rf dist/ && tsc",
+    "build:packages": "rm -rf dist/ && tsc",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "data-dictionary": "*",
+    "faker": "^5.5.3",
+    "shared-utils": "*"
+  },
+  "devDependencies": {
+    "@types/exevo-pan": "*",
+    "@types/faker": "^5.5.9",
+    "config": "*",
+    "nodemon": "^2.0.15",
+    "sucrase": "^3.20.3",
+    "typescript": "4.3.5"
+  }
+}

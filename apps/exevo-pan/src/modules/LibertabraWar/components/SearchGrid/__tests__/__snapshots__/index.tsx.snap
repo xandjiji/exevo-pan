@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SearchGrid /> should render 1`] = `
+<div>
+  <div
+    class="Spinner-sc-ruslx7-0 styles__Loading-sc-1ouhqh4-2 dlwEcX hfMspw"
+  />
+</div>
+`;

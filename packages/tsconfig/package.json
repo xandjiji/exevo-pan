@@ -1,0 +1,11 @@
+{
+  "name": "tsconfig",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "license": "Unlicense",
+  "main": "index.js",
+  "files": [
+    "base.json",
+    "react.json"
+  ]
+}
