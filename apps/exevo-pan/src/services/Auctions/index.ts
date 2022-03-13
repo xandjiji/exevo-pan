@@ -58,19 +58,7 @@ export default class AuctionsClient {
     const data: FilterResponse = await response.json()
     this.setCache(bodyPayload, endpoint, data)
 
-    return {
-      ...data,
-      page: data.page.map((characterObject) => ({
-        ...characterObject,
-        sex: false,
-        achievementPoints: 1234,
-        storeItems: [{ name: 'ferumbras exercise dummy', amount: 2 }],
-        hirelings: { count: 2, jobs: 1, outfits: 0 },
-        preySlot: true,
-        huntingSlot: false,
-        charmInfo: { expansion: false, total: 12000, unspent: 400 },
-      })),
-    }
+    return data
   }
 
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
