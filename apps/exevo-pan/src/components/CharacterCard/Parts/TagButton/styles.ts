@@ -4,6 +4,9 @@ import AdvertiseSvg from 'assets/svgs/advertise.svg'
 import { Smooth } from 'styles'
 import { HoveredState } from './types'
 
+const TAG_WIDTH = 28
+const TAG_HEIGHT = 44
+
 export const IconWrapper = styled.div`
   position: relative;
   width: 100%;
@@ -82,11 +85,12 @@ export const Text = styled.p`
 `
 
 export const Wrapper = styled.div<{ animation: HoveredState }>`
+  margin: 0 6px;
   position: relative;
   align-self: flex-start;
   flex-shrink: 0;
-  height: 44px;
-  width: 28px;
+  width: ${TAG_WIDTH}px;
+  height: ${TAG_HEIGHT}px;
   cursor: pointer;
   --initialAngle: 0deg;
   --maxAngle: -100deg;

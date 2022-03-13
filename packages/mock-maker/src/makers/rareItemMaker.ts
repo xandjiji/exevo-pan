@@ -2,16 +2,11 @@ import * as faker from 'faker'
 import * as rareItem from 'data-dictionary/dist/dictionaries/rareItems'
 import { randomAuctionId } from './CharacterMaker'
 import { rareItems } from '../constants'
-import { samplesFrom } from '../utils'
+import { samplesFrom, randomRange, randomArrayFrom } from '../utils'
 
 const getIdsFromAuctions = (auctions: CharacterObject[]) =>
   samplesFrom(auctions)
-    .slice(
-      faker.datatype.number({
-        min: rareItems.auctions.MIN,
-        max: rareItems.auctions.MAX,
-      }),
-    )
+    .slice(randomRange(rareItems.auctions))
     .map(({ id }) => id)
 
 export const randomItemData = (auctions?: CharacterObject[]): RareItemData => {
@@ -23,15 +18,7 @@ export const randomItemData = (auctions?: CharacterObject[]): RareItemData => {
     } else {
       const auctionIds: number[] = auctions
         ? (itemData[item] = getIdsFromAuctions(auctions))
-        : Array.from(
-            {
-              length: faker.datatype.number({
-                min: rareItems.auctions.MIN,
-                max: rareItems.auctions.MAX,
-              }),
-            },
-            randomAuctionId,
-          )
+        : randomArrayFrom(rareItems.auctions, randomAuctionId)
 
       itemData[item] = auctionIds
     }

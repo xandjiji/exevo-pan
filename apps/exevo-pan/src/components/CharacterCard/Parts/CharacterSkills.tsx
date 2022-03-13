@@ -6,7 +6,7 @@ interface CharacterSkillsProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Wrapper = styled.div`
-  margin-bottom: 16px;
+  margin-bottom: 4px;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 16px;

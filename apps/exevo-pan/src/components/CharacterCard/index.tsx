@@ -1,30 +1,30 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useRef } from 'react'
-import { useRouter } from 'next/router'
-import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
-import { formatNumberWithCommas } from 'utils'
-import { routes } from 'Constants'
+import { memo, useState, useRef, useMemo } from 'react'
+import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
+import { Sticker } from 'components/Atoms'
 import useShouldRender from './useShouldRender'
-import CharacterMiniCard from '../CharacterMiniCard'
 import {
-  ServerInfo,
+  Head,
+  TagButton,
+  Textbox,
   CharacterItems,
   CharacterSkills,
   ImbuementsTooltip,
   CharmsTooltip,
   QuestsTooltip,
-  TagButton,
   SpecialTags,
 } from './Parts'
+import CharacterModal from './CharacterModal'
 import * as S from './styles'
 import { CharacterCardProps } from './types'
 
-const FIXED_BODY_HEIGHT = 375
+const FIXED_BODY_HEIGHT = 367
 
 const CharacterCard = ({
   characterData,
   highlighted = false,
   lazyRender = false,
+  expandable = false,
   ...props
 }: CharacterCardProps): JSX.Element => {
   const {
@@ -47,86 +47,126 @@ const CharacterCard = ({
     imbuements,
     charms,
     quests,
+    charmInfo,
+    preySlot,
   } = characterData
 
-  const { pathname } = useRouter()
-
-  const getBidLabelText = () => {
-    if (pathname === routes.BAZAAR_HISTORY) {
-      return hasBeenBidded
-        ? common.CharacterCard.bidLabelText.auctionSuccessful
-        : common.CharacterCard.bidLabelText.auctionFailed
-    }
-    return hasBeenBidded
-      ? common.CharacterCard.bidLabelText.currentBid
-      : common.CharacterCard.bidLabelText.minimumBid
-  }
+  const tcInvested = useMemo(
+    () => formatNumberWithCommas(calculateTotalInvestment(characterData)),
+    [characterData],
+  )
 
   const ref = useRef<HTMLDivElement>()
   const shouldRenderBody = useShouldRender(lazyRender, ref)
 
+  const [isExpanded, setExpanded] = useState(false)
+
   return (
-    <S.Wrapper
-      ref={ref as React.RefObject<HTMLDivElement>}
-      highlighted={highlighted}
-      {...props}
-    >
-      <S.Head highlighted={highlighted}>
-        <CharacterMiniCard
-          displayLink
-          outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
-          characterData={{
-            name: nickname,
-            level,
-            vocation: vocationHelper.getFullName(vocationId, level),
-            world: serverData.serverName,
-          }}
-          linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
+    <>
+      <S.Wrapper
+        ref={ref as React.RefObject<HTMLDivElement>}
+        data-highlighted={highlighted}
+        {...props}
+      >
+        <Head
+          id={id}
+          outfitId={outfitId}
+          nickname={nickname}
+          level={level}
+          vocationId={vocationId}
+          serverName={serverData.serverName}
+        >
+          {highlighted && <TagButton />}
+          {expandable && (
+            <S.Button
+              aria-label={common.CharacterCard.expand}
+              type="button"
+              onClick={() => setExpanded(true)}
+              /* @ ToDo: remove this sticker */
+              style={{ position: 'relative' }}
+            >
+              <Sticker
+                /* @ ToDo: remove this sticker */
+                style={{
+                  position: 'absolute',
+                  top: -12,
+                  right: -16,
+                  transform: 'rotate(30deg)',
+                }}
+                localStorageKey="card-expansion-120322"
+              >
+                New
+              </Sticker>
+              <S.Icons.Expand />
+            </S.Button>
+          )}
+        </Head>
+
+        <S.Body
+          style={{ height: shouldRenderBody ? undefined : FIXED_BODY_HEIGHT }}
+        >
+          {shouldRenderBody && (
+            <>
+              <S.InfoGrid>
+                <Textbox.Server
+                  serverData={serverData}
+                  nickname={nickname}
+                  transfer={transfer}
+                />
+                <Textbox.Pvp serverData={serverData} />
+                <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+                <Textbox.AuctionBid
+                  hasBeenBidded={hasBeenBidded}
+                  currentBid={currentBid}
+                />
+              </S.InfoGrid>
+
+              <CharacterItems items={items} />
+
+              <CharacterSkills skills={skills} />
+
+              <S.FlexFooter>
+                <S.FlexColumn>
+                  <ImbuementsTooltip items={imbuements} />
+                  <CharmsTooltip items={charms} />
+                  <QuestsTooltip items={quests} />
+                </S.FlexColumn>
+
+                <S.FlexColumn data-checkbox>
+                  <S.Checkbox
+                    label="Charm Expansion"
+                    checked={charmInfo.expansion}
+                  />
+
+                  <S.Checkbox label="Prey Slot" checked={preySlot} />
+
+                  {tcInvested !== '0' && (
+                    <S.FlexWrapper
+                      title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
+                    >
+                      <S.CheckboxContainer>
+                        <S.Icons.TibiaCoin />
+                      </S.CheckboxContainer>
+                      <S.Strong>
+                        {tcInvested} {common.CharacterCard.tcInvested.invested}
+                      </S.Strong>
+                    </S.FlexWrapper>
+                  )}
+                </S.FlexColumn>
+              </S.FlexFooter>
+            </>
+          )}
+        </S.Body>
+
+        <SpecialTags character={characterData} />
+      </S.Wrapper>
+      {isExpanded && (
+        <CharacterModal
+          characterData={characterData}
+          onClose={() => setExpanded(false)}
         />
-
-        {highlighted && <TagButton />}
-      </S.Head>
-
-      <S.Body style={{ height: FIXED_BODY_HEIGHT }}>
-        {shouldRenderBody && (
-          <>
-            <S.InfoGrid>
-              <ServerInfo
-                serverData={serverData}
-                nickname={nickname}
-                transfer={transfer}
-              />
-
-              <S.LabeledTextBox labelText="PvP">
-                <S.BattleyeStatus active={serverData.battleye} />
-                {serverData.pvpType.string}
-              </S.LabeledTextBox>
-
-              <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
-                <S.AuctionTimer endDate={new Date(auctionEnd * 1000)} />
-              </S.LabeledTextBox>
-
-              <S.LabeledTextBox labelText={getBidLabelText()}>
-                <S.TibiaCoinIcon />
-                {formatNumberWithCommas(currentBid)}
-              </S.LabeledTextBox>
-            </S.InfoGrid>
-
-            <CharacterItems items={items} />
-
-            <CharacterSkills skills={skills} />
-
-            <S.TooltipWrapper>
-              <ImbuementsTooltip items={imbuements} />
-              <CharmsTooltip items={charms} />
-              <QuestsTooltip items={quests} />
-            </S.TooltipWrapper>
-          </>
-        )}
-      </S.Body>
-
-      <SpecialTags character={characterData} />
-    </S.Wrapper>
+      )}
+    </>
   )
 }
 

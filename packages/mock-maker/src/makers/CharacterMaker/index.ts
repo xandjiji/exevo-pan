@@ -8,7 +8,12 @@ import {
   storeMount,
 } from 'data-dictionary/dist/dictionaries'
 import { auctions } from '../../constants'
-import { samplesFrom, randomChance } from '../../utils'
+import {
+  samplesFrom,
+  randomChance,
+  randomRange,
+  randomArrayFrom,
+} from '../../utils'
 import { randomServerId } from '../serverMaker'
 import {
   randomOutfitId,
@@ -16,33 +21,48 @@ import {
   randomStoreOutfits,
 } from './randomOutfit'
 
-export const randomAuctionId = (): number =>
-  faker.datatype.number({ min: auctions.id.MIN, max: auctions.id.MAX })
+export const randomAuctionId = (): number => randomRange(auctions.id)
 
-export const randomSkillValue = (): number =>
-  faker.datatype.float({
-    min: auctions.skills.MIN,
-    max: auctions.skills.MAX,
-    precision: auctions.skills.PRECISION,
-  })
+export const randomSkillValue = (): number => randomRange(auctions.skills)
 
 export const randomItem = (): number => {
-  const itemId = faker.datatype.number({
-    min: auctions.items.id.MIN,
-    max: auctions.items.id.MAX,
-  })
+  const itemId = randomRange(auctions.items.id)
 
-  const hasTier = randomChance(0.1)
+  const hasTier = randomChance(auctions.items.tier.CHANCE)
   if (hasTier) {
-    const tier = faker.datatype.number({
-      min: auctions.items.tier.MIN,
-      max: auctions.items.tier.MAX,
-    })
+    const tier = randomRange(auctions.items.tier)
 
     return itemId + tier / 10
   }
 
   return itemId
+}
+
+const randomCharacterItem = (): CharacterItem => ({
+  name: faker.lorem.words(randomRange({ min: 2, max: 4 })),
+  amount: randomRange(auctions.storeItem.amount),
+})
+
+const randomCharmInfo = (): CharmInfo => {
+  const spent = randomRange(auctions.charmInfo.spent)
+  const unspent = randomRange(auctions.charmInfo.unspent)
+
+  return {
+    expansion: faker.datatype.boolean(),
+    total: spent + unspent,
+    unspent,
+  }
+}
+
+const randomHirelingsInfo = (): HirelingsInfo => {
+  const count = randomRange(auctions.hirelings.count)
+  const hasHireling = count > 0
+
+  return {
+    count,
+    jobs: hasHireling ? randomRange(auctions.hirelings.jobs) : 0,
+    outfits: hasHireling ? randomRange(auctions.hirelings.outfits) : 0,
+  }
 }
 
 export const randomCharacter = (): PartialCharacterObject => {
@@ -52,23 +72,14 @@ export const randomCharacter = (): PartialCharacterObject => {
     id: randomAuctionId(),
     nickname: `${faker.name.firstName()} ${faker.name.lastName()}`,
     auctionEnd: Math.trunc(+faker.date.future() / 1000),
-    currentBid: faker.datatype.number({
-      min: auctions.currentBid.MIN,
-      max: auctions.currentBid.MAX,
-    }),
+    currentBid: randomRange(auctions.currentBid),
     hasBeenBidded: faker.datatype.boolean(),
     transfer: faker.datatype.boolean(),
     sex,
     outfitId: randomOutfitId(sex),
     serverId: randomServerId(),
-    vocationId: faker.datatype.number({
-      min: auctions.vocationId.MIN,
-      max: auctions.vocationId.MAX,
-    }),
-    level: faker.datatype.number({
-      min: auctions.level.MIN,
-      max: auctions.level.MAX,
-    }),
+    vocationId: randomRange(auctions.vocationId),
+    level: randomRange(auctions.level),
     skills: {
       magic: randomSkillValue(),
       club: randomSkillValue(),
@@ -79,12 +90,7 @@ export const randomCharacter = (): PartialCharacterObject => {
       distance: randomSkillValue(),
       shielding: randomSkillValue(),
     },
-    items: Array.from({ length: auctions.items.size.MAX }, randomItem).slice(
-      faker.datatype.number({
-        min: auctions.items.size.MIN,
-        max: auctions.items.size.MAX,
-      }),
-    ),
+    items: randomArrayFrom(auctions.items.array, randomItem),
     charms: samplesFrom(charm.tokens),
     imbuements: samplesFrom(imbuement.tokens),
     quests: samplesFrom(quest.tokens),
@@ -93,5 +99,11 @@ export const randomCharacter = (): PartialCharacterObject => {
     storeMounts: samplesFrom(storeMount.tokens),
     outfits: randomOutfits(),
     storeOutfits: randomStoreOutfits(),
+    storeItems: randomArrayFrom(auctions.storeItem.array, randomCharacterItem),
+    achievementPoints: randomRange(auctions.achievementPoints),
+    preySlot: faker.datatype.boolean(),
+    huntingSlot: faker.datatype.boolean(),
+    charmInfo: randomCharmInfo(),
+    hirelings: randomHirelingsInfo(),
   }
 }

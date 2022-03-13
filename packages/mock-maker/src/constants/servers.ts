@@ -1,7 +1,7 @@
 export default {
   id: {
-    MIN: 0,
-    MAX: 99,
+    min: 0,
+    max: 99,
   },
   locations: [
     { string: 'BR', type: 2 },

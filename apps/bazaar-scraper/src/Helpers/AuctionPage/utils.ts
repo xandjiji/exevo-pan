@@ -32,13 +32,26 @@ export const getPagedData = async (
 
   const auctionId = helper.id($)
 
-  const outfitLastIndex = helper.boxSectionLastIndex('Outfits', $)
-  const sOutfitLastIndex = helper.boxSectionLastIndex('StoreOutfits', $)
-  const mountsLastIndex = helper.boxSectionLastIndex('Mounts', $)
-  const sMountsLastIndex = helper.boxSectionLastIndex('StoreMounts', $)
+  const lastIndexes = {
+    storeItems: helper.boxSectionLastIndex('StoreItemSummary', $),
+    mounts: helper.boxSectionLastIndex('Mounts', $),
+    storeMounts: helper.boxSectionLastIndex('StoreMounts', $),
+    outfits: helper.boxSectionLastIndex('Outfits', $),
+    storeOutfits: helper.boxSectionLastIndex('StoreOutfits', $),
+  }
+
+  let storeItems: CharacterItem[] = helper.storeFirstPage($)
+  for (let pageIndex = 2; pageIndex <= lastIndexes.storeItems; pageIndex += 1) {
+    const html = await getPostData({
+      auctionId,
+      pageIndex,
+      type: 'storeItems',
+    })
+    storeItems = [...storeItems, ...postHelper.items(html)]
+  }
 
   let outfits: Outfit[] = helper.outfitFirstPage($)
-  for (let pageIndex = 2; pageIndex <= outfitLastIndex; pageIndex += 1) {
+  for (let pageIndex = 2; pageIndex <= lastIndexes.outfits; pageIndex += 1) {
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -48,7 +61,11 @@ export const getPagedData = async (
   }
 
   let storeOutfits: Outfit[] = helper.storeOutfitFirstPage($)
-  for (let pageIndex = 2; pageIndex <= sOutfitLastIndex; pageIndex += 1) {
+  for (
+    let pageIndex = 2;
+    pageIndex <= lastIndexes.storeOutfits;
+    pageIndex += 1
+  ) {
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -58,7 +75,7 @@ export const getPagedData = async (
   }
 
   let mounts: string[] = helper.mountFirstPage($)
-  for (let pageIndex = 2; pageIndex <= mountsLastIndex; pageIndex += 1) {
+  for (let pageIndex = 2; pageIndex <= lastIndexes.mounts; pageIndex += 1) {
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -68,7 +85,11 @@ export const getPagedData = async (
   }
 
   let storeMounts: string[] = helper.storeMountFirstPage($)
-  for (let pageIndex = 2; pageIndex <= sMountsLastIndex; pageIndex += 1) {
+  for (
+    let pageIndex = 2;
+    pageIndex <= lastIndexes.storeMounts;
+    pageIndex += 1
+  ) {
     const html = await getPostData({
       auctionId,
       pageIndex,
@@ -78,6 +99,7 @@ export const getPagedData = async (
   }
 
   return {
+    storeItems,
     outfits,
     storeOutfits,
     mounts,

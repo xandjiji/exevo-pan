@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useRef, useMemo, memo } from 'react'
+import { useMemo, memo } from 'react'
 import { useTheme } from 'styled-components'
 import { Doughnut } from 'react-chartjs-2'
-import { v4 as uuidv4 } from 'uuid'
+import { useUuid } from 'hooks'
 import { capitalizeFirstLetter } from 'utils'
 import * as S from './styles'
 import { PieChartProps } from './types'
@@ -11,7 +11,7 @@ import { PieChartProps } from './types'
 const chartColors = ['#8338EC', '#FFD166', '#118AB2', '#06D6A0', '#EF476F']
 
 const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
-  const { current: titleId } = useRef(uuidv4())
+  const titleId = useUuid()
   const { colors } = useTheme()
 
   const options = useMemo(

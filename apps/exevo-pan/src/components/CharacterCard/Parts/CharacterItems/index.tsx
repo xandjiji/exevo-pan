@@ -1,3 +1,4 @@
+import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { v4 as uuidv4 } from 'uuid'
 import { SpritePortrait } from 'components/Atoms'
@@ -16,13 +17,16 @@ const CharacterItems = ({
     translations: { common },
   } = useTranslations()
 
+  const emptyItems = useMemo(() => fillItems(4 - items.length), [items.length])
+
   return (
     <S.ItemWrapper {...props}>
-      {items.map((floatItem) => {
+      {items.map((floatItem, childrenIndex) => {
         const [item, tier] = floatItem.toString().split('.')
+        const key = `${childrenIndex}-${item}`
         if (tier) {
           return (
-            <S.SpriteWrapper key={uuidv4()}>
+            <S.SpriteWrapper key={key}>
               <SpritePortrait
                 alt={common.CharacterCard.featuredItem}
                 src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
@@ -35,7 +39,7 @@ const CharacterItems = ({
         }
         return (
           <SpritePortrait
-            key={uuidv4()}
+            key={key}
             alt={common.CharacterCard.featuredItem}
             src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
             width={32}
@@ -43,9 +47,9 @@ const CharacterItems = ({
           />
         )
       })}
-      {fillItems(4 - items.length)}
+      {emptyItems}
     </S.ItemWrapper>
   )
 }
 
-export default CharacterItems
+export default memo(CharacterItems)

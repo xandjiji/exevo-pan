@@ -8,9 +8,9 @@ export const lowerCaseKeys = (object: ScrapingTokens): ScrapingTokens => {
 }
 
 export const nameableToScrapingTokens = (
-  outfitArray: { name: string }[],
+  nameableArray: Nameable[],
 ): ScrapingTokens => {
-  const names = outfitArray.map(({ name }) => name)
+  const names = nameableArray.map(({ name }) => name)
 
   const scrapingTokens: ScrapingTokens = {}
   names.forEach((name) => {
@@ -18,6 +18,15 @@ export const nameableToScrapingTokens = (
   })
 
   return scrapingTokens
+}
+
+export const cosmeticToPriceMap = (cosmeticArray: Cosmetic[]): PriceMap => {
+  const priceMap: PriceMap = {}
+  cosmeticArray.forEach(({ name, value }) => {
+    priceMap[name] = value
+  })
+
+  return priceMap
 }
 
 export const dictionaryFactory = (keyArray: string[]): Dictionary => {

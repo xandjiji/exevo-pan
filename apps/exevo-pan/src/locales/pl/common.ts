@@ -129,6 +129,11 @@ export default {
         other: 'Inne',
       },
     },
+    tcInvested: {
+      prefix: 'This character has invested at least',
+      suffix: 'Tibia Coins in store purchases',
+      invested: 'invested',
+    },
     AuctionStatus: 'Status Aukcji',
     BidStatus: 'Status Oferty',
     highlightLabelText: 'Podświetl swoją aukcje',
@@ -136,7 +141,17 @@ export default {
       manyCharms: 'Dużo charmów',
       manyQuests: 'Dużo questów',
       manyMounts: 'Dużo mountów',
-      manyStoryCosmetics: 'Duzo przedmiotów z Tibia Store',
+      manyStoreCosmetics: 'Duzo przedmiotów z Tibia Store 🛍️',
+      rareMounts: 'Rzadkie mountów ✨',
+      rareOutfits: 'Rzadkie outfitów 💎',
+    },
+    expand: 'Expand for full auction details',
+    CharacterModal: {
+      totalInvested: 'Total invested',
+      SpriteBox: {
+        firstAddon: 'First addon',
+        secondAddon: 'Second addon',
+      },
     },
   },
   StepperCompletedLabel: 'Krok wykonany',
@@ -148,8 +163,12 @@ export default {
     open: 'Otwórz',
     close: 'Zamknij',
   },
+  Dialog: {
+    close: 'Close dialog',
+  },
   FooterTitle: 'Exevo Pan - stworzony przez',
   AnchorIconLabel: 'Skopiuj link',
   CharacterTooltipLabel: 'Idź do strony postaci',
   Newsticker: 'Ostatnie artykuły',
+  LoadingState: 'Wczytuję...',
 }

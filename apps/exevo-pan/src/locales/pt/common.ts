@@ -129,6 +129,11 @@ export default {
         other: 'Outros',
       },
     },
+    tcInvested: {
+      prefix: 'Este personagem tem investido pelo menos',
+      suffix: 'Tibia Coins em compras na store',
+      invested: 'investido',
+    },
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',
     highlightLabelText: 'Destaque seu leilão!',
@@ -136,7 +141,17 @@ export default {
       manyCharms: 'Muitos charms',
       manyQuests: 'Muitas quests',
       manyMounts: 'Muitas mounts',
-      manyStoryCosmetics: 'Muitos cosmeticos comprados',
+      manyStoreCosmetics: 'Muitos cosmeticos comprados 🛍️',
+      rareMounts: 'Mounts raras ✨',
+      rareOutfits: 'Outfits raras 💎',
+    },
+    expand: 'Expandir todos os detalhes do leilão',
+    CharacterModal: {
+      totalInvested: 'Total investido',
+      SpriteBox: {
+        firstAddon: 'Primeiro addon',
+        secondAddon: 'Segundo addon',
+      },
     },
   },
   StepperCompletedLabel: 'Passo completado',
@@ -148,8 +163,12 @@ export default {
     open: 'Abrir',
     close: 'Fechar',
   },
+  Dialog: {
+    close: 'Fechar modal',
+  },
   FooterTitle: 'Exevo Pan - criado por',
   AnchorIconLabel: 'Copiar link',
   CharacterTooltipLabel: 'Ir para a página do personagem',
   Newsticker: 'Artigos recentes',
+  LoadingState: 'Carregando...',
 }

@@ -12,14 +12,6 @@ export const applySort = (
 ): CharacterObject[] => {
   const data = [...oldData]
 
-  /* the data is already sorted by this default */
-  if (
-    sortingMode === DEFAULT_SORT_MODE &&
-    descendingOrder === DEFAULT_DESCENDING_ORDER
-  ) {
-    return data
-  }
-
   const byAuctionEnd = (a: CharacterObject, b: CharacterObject) => {
     if (!descendingOrder) return a.auctionEnd - b.auctionEnd
     return b.auctionEnd - a.auctionEnd

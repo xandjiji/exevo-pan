@@ -18,7 +18,7 @@ module.exports = {
       name: 'ScrapHistory',
       cwd: __dirname,
       script: 'scrapHistory.sh',
-      restart_delay: HOUR * 4,
+      restart_delay: HOUR * 10,
     },
     {
       name: 'ScrapAuctions',

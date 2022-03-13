@@ -11,12 +11,7 @@
     "sourceMap": false,
     "esModuleInterop": true,
     "resolveJsonModule": true,
-    "types": [
-      "@cloudflare/workers-types",
-      "@types/jest",
-      "@types/service-worker-mock",
-      "@types/exevo-pan"
-    ]
+    "types": ["@cloudflare/workers-types", "@types/jest", "@types/exevo-pan"]
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "test"]

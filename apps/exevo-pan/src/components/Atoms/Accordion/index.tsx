@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useRef, useState, useCallback } from 'react'
-import { v4 as uuidv4 } from 'uuid'
+import { useState, useCallback } from 'react'
+import { useUuid } from 'hooks'
 import * as S from './styles'
 import { AccordionProps } from './types'
 
@@ -17,8 +17,8 @@ const Accordion = ({
     translations: { common },
   } = useTranslations()
 
-  const { current: buttonId } = useRef(uuidv4())
-  const { current: contentId } = useRef(uuidv4())
+  const buttonId = useUuid()
+  const contentId = useUuid()
 
   const [innerOpen, setOpen] = useState(initialValue)
   const open = openProp ?? innerOpen

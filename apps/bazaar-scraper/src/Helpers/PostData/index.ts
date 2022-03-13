@@ -1,4 +1,8 @@
 import cheerio from 'cheerio/lib/index'
+import { ignoreList } from 'data-dictionary/dist/dictionaries/store'
+import { stringToNumber } from '../utils'
+
+const itemQuantityRegex = new RegExp(/^[0-9]+(,[0-9]+)*x /)
 
 export default class PostData {
   private normalizedName: Record<string, string> = {
@@ -39,5 +43,33 @@ export default class PostData {
     })
 
     return mounts
+  }
+
+  items(content: string): CharacterItem[] {
+    const $ = cheerio.load(content)
+    const icons = $('.CVIcon')
+
+    const items: CharacterItem[] = []
+    icons.each((_, element) => {
+      const { title } = element.attribs
+
+      let amount = 1
+      const rawItemName = title.replace(itemQuantityRegex, (match) => {
+        const [stringAmount] = match.split('x')
+        if (stringAmount) {
+          amount = stringToNumber(stringAmount)
+        }
+
+        return ''
+      })
+
+      const [itemName] = rawItemName.split('\n')
+
+      if (!ignoreList.has(itemName)) {
+        items.push({ name: itemName, amount })
+      }
+    })
+
+    return items
   }
 }

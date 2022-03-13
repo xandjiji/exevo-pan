@@ -2,7 +2,6 @@ import styled from 'styled-components'
 import { ActiveCount as BaseActiveCount } from 'components/Atoms'
 
 export const ItemWrapper = styled.div`
-  margin-bottom: 12px;
   display: flex;
   justify-content: space-around;
 `

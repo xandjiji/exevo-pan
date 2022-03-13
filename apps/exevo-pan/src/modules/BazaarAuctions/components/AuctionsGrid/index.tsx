@@ -1,16 +1,15 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { Fragment, useState, useCallback, useRef, useEffect } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { Ads } from 'templates'
+import { Sticker } from 'components/Atoms'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
-import { shouldInsertAd } from './utils'
 import * as S from './styles'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
-const ESTIMATED_HEIGHT = 479
 
 const AuctionsGrid = (): JSX.Element => {
   const {
@@ -27,12 +26,7 @@ const AuctionsGrid = (): JSX.Element => {
   const { activeFilterCount } = useFilters()
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
-
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
-
-  const currentVisibleHighlighteds = shouldDisplayHighlightedAuctions
-    ? highlightedAuctions.length
-    : 0
 
   const gridHeadOffset = useRef(0)
   useEffect(() => {
@@ -81,6 +75,18 @@ const AuctionsGrid = (): JSX.Element => {
               {activeFilterCount}
             </S.ActiveIcon>
           )}
+          <Sticker
+            /* @ ToDo: remove this sticker */
+            style={{
+              position: 'absolute',
+              top: -12,
+              left: -16,
+              transform: 'rotate(-30deg)',
+            }}
+            localStorageKey="filter-button-120322"
+          >
+            New
+          </Sticker>
         </S.FilterButton>
 
         <SortingDialog />
@@ -109,27 +115,22 @@ const AuctionsGrid = (): JSX.Element => {
       <S.GridWrapper>
         <S.Grid id="character-grid">
           {shouldDisplayHighlightedAuctions &&
-            highlightedAuctions.map((auction, index) => (
-              <Fragment key={`${auction.id}-highlighted`}>
-                <S.CharacterCard
-                  characterData={auction}
-                  highlighted
-                  lazyRender
-                />
-
-                {shouldInsertAd(index) && (
-                  <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
-                )}
-              </Fragment>
+            highlightedAuctions.map((auction) => (
+              <S.CharacterCard
+                key={`${auction.id}-highlighted`}
+                characterData={auction}
+                highlighted
+                lazyRender
+                expandable
+              />
             ))}
-          {page.map((auction, index) => (
-            <Fragment key={auction.id}>
-              <S.CharacterCard lazyRender characterData={auction} />
-
-              {shouldInsertAd(index + currentVisibleHighlighteds) && (
-                <Ads.CharacterCard height={ESTIMATED_HEIGHT} />
-              )}
-            </Fragment>
+          {page.map((auction) => (
+            <S.CharacterCard
+              key={auction.id}
+              lazyRender
+              characterData={auction}
+              expandable
+            />
           ))}
         </S.Grid>
         {page.length === 0 && (

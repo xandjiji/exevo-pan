@@ -4,8 +4,5 @@ export interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
   characterData: CharacterObject
   highlighted?: boolean
   lazyRender?: boolean
-}
-
-export interface BattleyeStatusStyleProps {
-  active: boolean
+  expandable?: boolean
 }

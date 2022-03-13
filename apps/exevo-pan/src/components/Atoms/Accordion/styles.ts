@@ -18,6 +18,9 @@ export const Button = styled.button<{ border: boolean }>`
   align-items: center;
 
   width: 100%;
+  color: var(--onSurface);
+  font-size: 12px;
+
   cursor: pointer;
   transition: padding 0.15s ease-out;
 

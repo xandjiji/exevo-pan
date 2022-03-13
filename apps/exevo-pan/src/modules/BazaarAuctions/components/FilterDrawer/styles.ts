@@ -31,18 +31,10 @@ export const Input = styled(BaseInput)`
 `
 
 export const ChipWrapper = styled.div`
-  margin-bottom: -8px;
   display: flex;
-  align-items: center;
   flex-wrap: wrap;
-
-  > * {
-    margin-bottom: 8px;
-  }
-
-  > *:not(:last-child) {
-    margin-right: 8px;
-  }
+  gap: 8px;
+  align-items: center;
 `
 
 export const IconChip = styled(BaseChip)`
@@ -55,18 +47,9 @@ export const AutocompleteInput = styled(BaseAutocompleteInput)`
   max-width: 200px;
 `
 
-export const FlexWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-
-  > * {
-    margin-bottom: 12px;
-  }
-
-  > *:not(:last-child) {
-    margin-right: 16px;
-  }
+export const InputWrapper = styled(ChipWrapper)`
+  margin-bottom: 12px;
+  gap: 16px;
 `
 
 export const Emoji = styled.span`
@@ -99,4 +82,10 @@ export const ResetButton = styled.button`
   &:active {
     box-shadow: inset 2px 2px rgba(0, 0, 0, 0.14);
   }
+`
+
+export const CheckboxWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 8px;
 `

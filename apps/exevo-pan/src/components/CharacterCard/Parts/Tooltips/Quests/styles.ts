@@ -7,6 +7,7 @@ export const Grid = styled.div`
   justify-content: space-between;
 
   width: calc(100vw - 36px);
+  max-width: max-content;
   overflow-x: auto;
   ${CustomScrollbar}
 
@@ -25,4 +26,5 @@ export const Title = styled.h5`
   font-size: 14px;
   color: var(--primary);
   filter: brightness(130%);
+  text-align: center;
 `

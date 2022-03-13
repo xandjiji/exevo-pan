@@ -1,29 +1,52 @@
+import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useMemo } from 'react'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/charm'
-import ListedItems from './ListedItems'
+import { formatNumberWithCommas } from 'utils'
+import Lister from './Lister'
 import * as S from './styles'
-import { TooltipProps } from './types'
+import { CharacterCharmsProps } from './types'
 
-const CharacterCharms = ({ items, ...props }: TooltipProps): JSX.Element => {
+const MAX_LINES = 10
+
+const CharacterCharms = ({
+  charmInfo,
+  items,
+  placement,
+  ...props
+}: CharacterCharmsProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
 
-  const characterCharms = useMemo(() => new Set<string>([...items]), [items])
-
   return (
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.charms}
-      content={<ListedItems fullList={tokens} characterSet={characterCharms} />}
+      content={
+        <Lister maxLines={MAX_LINES} partialList={items} fullList={tokens} />
+      }
+      placement={placement}
     >
-      <S.Wrapper {...props}>
-        <S.CharmIcon />
-        {`Charms: ${items.length}/${tokens.length}`}
-      </S.Wrapper>
+      <S.TitleWrapper {...props}>
+        <S.Icons.Charm />
+        Charms: {items.length}/{tokens.length}
+        {charmInfo && (
+          <>
+            {' '}
+            (
+            <strong style={{ marginRight: 3 }}>
+              {formatNumberWithCommas(charmInfo.total)}
+            </strong>{' '}
+            total points,
+            <strong style={{ margin: '0 3px' }}>
+              {formatNumberWithCommas(charmInfo.unspent)}
+            </strong>{' '}
+            unspent)
+          </>
+        )}
+      </S.TitleWrapper>
     </Tooltip>
   )
 }
 
-export default CharacterCharms
+export default memo(CharacterCharms)

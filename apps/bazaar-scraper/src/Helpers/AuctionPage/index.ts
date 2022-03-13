@@ -8,7 +8,7 @@ import {
   rareAchievement as achievementDictionary,
 } from 'data-dictionary/dist/dictionaries'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
-import { filterListTable } from '../utils'
+import { filterListTable, stringToNumber } from '../utils'
 import {
   getPagedData,
   getPageableAuctionData,
@@ -71,7 +71,7 @@ export default class AuctionPage {
 
   currentBid($: CheerioAPI): number {
     const currentBidText = $('.ShortAuctionDataValue b').text()
-    return +currentBidText.replace(/,/g, '')
+    return stringToNumber(currentBidText)
   }
 
   hasBeenBidded($: CheerioAPI): boolean {
@@ -175,6 +175,68 @@ export default class AuctionPage {
       distance,
       shielding,
     }
+  }
+
+  achievementPoints($: CheerioAPI): number {
+    const achievPointsLabel = $('.LabelV:contains("Achievement Points:")')
+    const pointsCountElement = achievPointsLabel.next()
+    return stringToNumber(pointsCountElement.text())
+  }
+
+  charmExpansion($: CheerioAPI): boolean {
+    const charmExpansionText = $('.LabelV:contains("Charm Expansion:")')
+      .next()
+      .text()
+      .trim()
+
+    return charmExpansionText === 'yes'
+  }
+
+  huntingSlot($: CheerioAPI): boolean {
+    const huntingSlotText = $(
+      '.LabelV:contains("Permanent Hunting Task Slots:")',
+    )
+      .next()
+      .text()
+
+    return huntingSlotText === '1'
+  }
+
+  preySlot($: CheerioAPI): boolean {
+    const huntingSlotText = $('.LabelV:contains("Permanent Prey Slots:")')
+      .next()
+      .text()
+
+    return huntingSlotText === '1'
+  }
+
+  allCharmPoints($: CheerioAPI): Pick<CharmInfo, 'total' | 'unspent'> {
+    const unspent = stringToNumber(
+      $('.LabelV:contains("Available Charm Points:")').next().text(),
+    )
+
+    const spentCharmPoints = stringToNumber(
+      $('.LabelV:contains("Spent Charm Points:")').next().text(),
+    )
+
+    return {
+      unspent,
+      total: unspent + spentCharmPoints,
+    }
+  }
+
+  hirelings($: CheerioAPI): HirelingsInfo {
+    const count = stringToNumber(
+      $('.LabelV:contains("Hirelings:")').next().text(),
+    )
+    const jobs = stringToNumber(
+      $('.LabelV:contains("Hireling Jobs:")').next().text(),
+    )
+    const outfits = stringToNumber(
+      $('.LabelV:contains("Hireling Outfits:")').next().text(),
+    )
+
+    return { count, jobs, outfits }
   }
 
   items($: CheerioAPI): number[] {
@@ -289,9 +351,16 @@ export default class AuctionPage {
     return [...achievementSet]
   }
 
+  storeFirstPage($: CheerioAPI): CharacterItem[] {
+    const firstPage = $('#StoreItemSummary .TableContent tbody .BlockPage')
+    const html = firstPage.html()
+    return html ? this.postHelper.items(html) : []
+  }
+
   outfitFirstPage($: CheerioAPI): Outfit[] {
     const firstPage = $('#Outfits .TableContent tbody .BlockPage')
-    return this.postHelper.outfits(firstPage.html()!)
+    const html = firstPage.html()
+    return html ? this.postHelper.outfits(html) : []
   }
 
   storeOutfitFirstPage($: CheerioAPI): Outfit[] {
@@ -343,6 +412,7 @@ export default class AuctionPage {
       vocationId: this.vocationId($),
       sex: this.sex($),
       level: this.level($),
+      achievementPoints: this.achievementPoints($),
       skills: this.skills($),
       items: this.items($),
       charms: this.charms($),
@@ -351,6 +421,13 @@ export default class AuctionPage {
       quests: this.quests($),
       ...(await getPagedData($)),
       rareAchievements: this.rareAchievements($),
+      hirelings: this.hirelings($),
+      huntingSlot: this.huntingSlot($),
+      preySlot: this.preySlot($),
+      charmInfo: {
+        ...this.allCharmPoints($),
+        expansion: this.charmExpansion($),
+      },
     }
   }
 

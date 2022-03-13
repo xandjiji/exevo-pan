@@ -1,7 +1,14 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
-import { Drawer, Chip, RangeSliderInput, SliderInput } from 'components/Atoms'
+import {
+  Drawer,
+  Chip,
+  RangeSliderInput,
+  SliderInput,
+  Checkbox,
+  Sticker,
+} from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
@@ -234,6 +241,90 @@ const FilterDrawer = ({
           </S.ChipWrapper>
         </FilterGroup>
 
+        <FilterGroup
+          label={homepage.FilterDrawer.labels.storeItems}
+          /* @ ToDo: remove this sticker */
+          style={{ position: 'relative' }}
+        >
+          <Sticker
+            /* @ ToDo: remove this sticker */
+            style={{
+              position: 'absolute',
+              top: -16,
+              left: -24,
+              transform: 'rotate(-30deg)',
+            }}
+            localStorageKey="store-filters-120322"
+          >
+            New
+          </Sticker>
+          <S.CheckboxWrapper>
+            <Checkbox
+              label="Training Dummy"
+              checked={filterState.dummy}
+              onClick={() => updateFilters('dummy', !filterState.dummy)}
+            />
+            <Checkbox
+              label="Charm Expansion"
+              checked={filterState.charmExpansion}
+              onClick={() =>
+                updateFilters('charmExpansion', !filterState.charmExpansion)
+              }
+            />
+            <Checkbox
+              label="Imbuement Shrine"
+              checked={filterState.imbuementShrine}
+              onClick={() =>
+                updateFilters('imbuementShrine', !filterState.imbuementShrine)
+              }
+            />
+            <Checkbox
+              label="Gold Pouch"
+              checked={filterState.goldPouch}
+              onClick={() => updateFilters('goldPouch', !filterState.goldPouch)}
+            />
+            <Checkbox
+              label="Prey Slot"
+              checked={filterState.preySlot}
+              onClick={() => updateFilters('preySlot', !filterState.preySlot)}
+            />
+            <Checkbox
+              label="Reward Shrine"
+              checked={filterState.rewardShrine}
+              onClick={() =>
+                updateFilters('rewardShrine', !filterState.rewardShrine)
+              }
+            />
+            <Checkbox
+              label="Hirelings"
+              checked={filterState.hireling}
+              onClick={() => updateFilters('hireling', !filterState.hireling)}
+            />
+            <Checkbox
+              label="Hunting Task Slot"
+              checked={filterState.huntingSlot}
+              onClick={() =>
+                updateFilters('huntingSlot', !filterState.huntingSlot)
+              }
+            />
+            <Checkbox
+              label="Mailbox"
+              checked={filterState.mailbox}
+              onClick={() => updateFilters('mailbox', !filterState.mailbox)}
+            />
+            <Checkbox
+              label="Regular world transfer"
+              checked={filterState.transferAvailable}
+              onClick={() =>
+                updateFilters(
+                  'transferAvailable',
+                  !filterState.transferAvailable,
+                )
+              }
+            />
+          </S.CheckboxWrapper>
+        </FilterGroup>
+
         {/* @ ToDo: add htmlFor after rangeSlider refactor */}
         <FilterGroup label="Level">
           <RangeSliderInput
@@ -339,7 +430,7 @@ const FilterDrawer = ({
         />
 
         <FilterGroup label="Imbuements" htmlFor="imbuements-input">
-          <S.FlexWrapper>
+          <S.InputWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
               aria-controls="imbuements-list"
@@ -364,7 +455,7 @@ const FilterDrawer = ({
             >
               {homepage.FilterDrawer.toggleAll.imbuements}
             </Chip>
-          </S.FlexWrapper>
+          </S.InputWrapper>
           <S.ChipWrapper id="imbuements-list">
             {[...filterState.imbuementsSet].map((imbuement) => (
               <Chip
@@ -378,7 +469,7 @@ const FilterDrawer = ({
         </FilterGroup>
 
         <FilterGroup label="Charms" htmlFor="charms-input">
-          <S.FlexWrapper>
+          <S.InputWrapper>
             <S.AutocompleteInput
               id="charms-input"
               aria-controls="charms-list"
@@ -397,7 +488,7 @@ const FilterDrawer = ({
             >
               {homepage.FilterDrawer.toggleAll.charms}
             </Chip>
-          </S.FlexWrapper>
+          </S.InputWrapper>
           <S.ChipWrapper id="charms-list">
             {[...filterState.charmsSet].map((charm) => (
               <Chip
@@ -478,7 +569,7 @@ const FilterDrawer = ({
               </Tooltip>
             }
           >
-            <S.FlexWrapper>
+            <S.InputWrapper>
               <S.AutocompleteInput
                 id="rare-items-input"
                 aria-controls="rare-items-list"
@@ -502,7 +593,7 @@ const FilterDrawer = ({
               >
                 {homepage.FilterDrawer.toggleAll.items}
               </Chip>
-            </S.FlexWrapper>
+            </S.InputWrapper>
             <S.ChipWrapper id="rare-items-list">
               {[...filterState.itemSet].map((item) => (
                 <Chip key={item} onClose={() => updateFilters('itemSet', item)}>

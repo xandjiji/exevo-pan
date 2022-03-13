@@ -1,4 +1,5 @@
 import {
+  cosmeticToPriceMap,
   lowerCaseKeys,
   nameableToScrapingTokens,
   dictionaryFactory,
@@ -11,6 +12,7 @@ export const outfits: OutfitToken[] = [
       male: 472,
       female: 471,
     },
+    value: 750,
   },
   {
     name: 'Champion',
@@ -18,6 +20,7 @@ export const outfits: OutfitToken[] = [
       male: 633,
       female: 632,
     },
+    value: 570,
   },
   {
     name: 'Conjurer',
@@ -25,6 +28,7 @@ export const outfits: OutfitToken[] = [
       male: 634,
       female: 635,
     },
+    value: 720,
   },
   {
     name: 'Beastmaster',
@@ -32,6 +36,7 @@ export const outfits: OutfitToken[] = [
       male: 636,
       female: 637,
     },
+    value: 870,
   },
   {
     name: 'Chaos Acolyte',
@@ -39,6 +44,7 @@ export const outfits: OutfitToken[] = [
       male: 665,
       female: 664,
     },
+    value: 900,
   },
   {
     name: 'Death Herald',
@@ -46,6 +52,7 @@ export const outfits: OutfitToken[] = [
       male: 667,
       female: 666,
     },
+    value: 600,
   },
   {
     name: 'Ranger',
@@ -53,6 +60,7 @@ export const outfits: OutfitToken[] = [
       male: 684,
       female: 683,
     },
+    value: 750,
   },
   {
     name: 'Ceremonial Garb',
@@ -60,6 +68,7 @@ export const outfits: OutfitToken[] = [
       male: 695,
       female: 694,
     },
+    value: 750,
   },
   {
     name: 'Puppeteer',
@@ -67,6 +76,7 @@ export const outfits: OutfitToken[] = [
       male: 697,
       female: 696,
     },
+    value: 870,
   },
   {
     name: 'Spirit Caller',
@@ -74,6 +84,7 @@ export const outfits: OutfitToken[] = [
       male: 699,
       female: 698,
     },
+    value: 600,
   },
   {
     name: 'Evoker',
@@ -81,6 +92,7 @@ export const outfits: OutfitToken[] = [
       male: 725,
       female: 724,
     },
+    value: 840,
   },
   {
     name: 'Seaweaver',
@@ -88,6 +100,7 @@ export const outfits: OutfitToken[] = [
       male: 733,
       female: 732,
     },
+    value: 570,
   },
   {
     name: 'Sea Dog',
@@ -95,6 +108,7 @@ export const outfits: OutfitToken[] = [
       male: 750,
       female: 749,
     },
+    value: 600,
   },
   {
     name: 'Royal Pumpkin',
@@ -102,6 +116,7 @@ export const outfits: OutfitToken[] = [
       male: 760,
       female: 759,
     },
+    value: 840,
   },
   {
     name: 'Winter Warden',
@@ -109,6 +124,7 @@ export const outfits: OutfitToken[] = [
       male: 853,
       female: 852,
     },
+    value: 870,
   },
   {
     name: 'Philosopher',
@@ -116,6 +132,7 @@ export const outfits: OutfitToken[] = [
       male: 873,
       female: 874,
     },
+    value: 750,
   },
   {
     name: 'Arena Champion',
@@ -123,6 +140,7 @@ export const outfits: OutfitToken[] = [
       male: 884,
       female: 885,
     },
+    value: 870,
   },
   {
     name: 'Lupine Warden',
@@ -130,6 +148,7 @@ export const outfits: OutfitToken[] = [
       male: 899,
       female: 900,
     },
+    value: 840,
   },
   {
     name: 'Grove Keeper',
@@ -137,6 +156,7 @@ export const outfits: OutfitToken[] = [
       male: 908,
       female: 909,
     },
+    value: 870,
   },
   {
     name: 'Pharaoh',
@@ -144,6 +164,7 @@ export const outfits: OutfitToken[] = [
       male: 955,
       female: 956,
     },
+    value: 750,
   },
   {
     name: 'Trophy Hunter',
@@ -151,6 +172,7 @@ export const outfits: OutfitToken[] = [
       male: 957,
       female: 958,
     },
+    value: 870,
   },
   {
     name: 'Retro Warrior',
@@ -158,6 +180,7 @@ export const outfits: OutfitToken[] = [
       male: 962,
       female: 963,
     },
+    value: 870,
   },
   {
     name: 'Retro Summoner',
@@ -165,6 +188,7 @@ export const outfits: OutfitToken[] = [
       male: 964,
       female: 965,
     },
+    value: 870,
   },
   {
     name: 'Retro Nobleman',
@@ -172,6 +196,7 @@ export const outfits: OutfitToken[] = [
       male: 966,
       female: 967,
     },
+    value: 870,
   },
   {
     name: 'Retro Mage',
@@ -179,6 +204,7 @@ export const outfits: OutfitToken[] = [
       male: 968,
       female: 969,
     },
+    value: 870,
   },
   {
     name: 'Retro Knight',
@@ -186,6 +212,7 @@ export const outfits: OutfitToken[] = [
       male: 970,
       female: 971,
     },
+    value: 870,
   },
   {
     name: 'Retro Hunter',
@@ -193,6 +220,7 @@ export const outfits: OutfitToken[] = [
       male: 972,
       female: 973,
     },
+    value: 870,
   },
   {
     name: 'Retro Citizen',
@@ -200,6 +228,7 @@ export const outfits: OutfitToken[] = [
       male: 974,
       female: 975,
     },
+    value: 870,
   },
   {
     name: 'Herbalist',
@@ -207,6 +236,7 @@ export const outfits: OutfitToken[] = [
       male: 1021,
       female: 1020,
     },
+    value: 750,
   },
   {
     name: 'Sun Priest',
@@ -214,6 +244,7 @@ export const outfits: OutfitToken[] = [
       male: 1023,
       female: 1024,
     },
+    value: 750,
   },
   {
     name: 'Siege Master',
@@ -221,6 +252,7 @@ export const outfits: OutfitToken[] = [
       male: 1050,
       female: 1051,
     },
+    value: 600,
   },
   {
     name: 'Mercenary',
@@ -228,6 +260,7 @@ export const outfits: OutfitToken[] = [
       male: 1056,
       female: 1057,
     },
+    value: 870,
   },
   {
     name: 'Sinister Archer',
@@ -235,6 +268,7 @@ export const outfits: OutfitToken[] = [
       male: 1102,
       female: 1103,
     },
+    value: 600,
   },
   {
     name: 'Pumpkin Mummy',
@@ -242,6 +276,7 @@ export const outfits: OutfitToken[] = [
       male: 1127,
       female: 1128,
     },
+    value: 870,
   },
   {
     name: 'Owl Keeper',
@@ -249,6 +284,7 @@ export const outfits: OutfitToken[] = [
       male: 1173,
       female: 1174,
     },
+    value: 600,
   },
   {
     name: 'Guidon Bearer',
@@ -256,6 +292,7 @@ export const outfits: OutfitToken[] = [
       male: 1186,
       female: 1187,
     },
+    value: 870,
   },
   {
     name: 'Breezy Garb',
@@ -263,6 +300,7 @@ export const outfits: OutfitToken[] = [
       male: 1245,
       female: 1246,
     },
+    value: 600,
   },
   {
     name: 'Herder',
@@ -270,6 +308,7 @@ export const outfits: OutfitToken[] = [
       male: 1279,
       female: 1280,
     },
+    value: 750,
   },
   {
     name: 'Trailblazer',
@@ -277,6 +316,7 @@ export const outfits: OutfitToken[] = [
       male: 1292,
       female: 1293,
     },
+    value: 600,
   },
   {
     name: 'Jouster',
@@ -284,6 +324,7 @@ export const outfits: OutfitToken[] = [
       male: 1331,
       female: 1332,
     },
+    value: 750,
   },
   {
     name: 'Moth Cape',
@@ -291,6 +332,7 @@ export const outfits: OutfitToken[] = [
       male: 1338,
       female: 1339,
     },
+    value: 600,
   },
   {
     name: 'Merry Garb',
@@ -298,6 +340,7 @@ export const outfits: OutfitToken[] = [
       male: 1382,
       female: 1383,
     },
+    value: 600,
   },
   {
     name: 'Rune Master',
@@ -305,6 +348,7 @@ export const outfits: OutfitToken[] = [
       male: 1384,
       female: 1385,
     },
+    value: 870,
   },
   {
     name: 'Forest Warden',
@@ -312,6 +356,7 @@ export const outfits: OutfitToken[] = [
       male: 1415,
       female: 1416,
     },
+    value: 750,
   },
   {
     name: 'Dragon Knight',
@@ -319,6 +364,7 @@ export const outfits: OutfitToken[] = [
       male: 1444,
       female: 1445,
     },
+    value: 870,
   },
   {
     name: 'Arbalester',
@@ -326,6 +372,7 @@ export const outfits: OutfitToken[] = [
       male: 1449,
       female: 1450,
     },
+    value: 600,
   },
   {
     name: 'Ghost Blade',
@@ -333,8 +380,11 @@ export const outfits: OutfitToken[] = [
       male: 1489,
       female: 1490,
     },
+    value: 600,
   },
 ]
+
+export const priceMap = cosmeticToPriceMap(outfits)
 
 export const scrapingTokens = lowerCaseKeys(nameableToScrapingTokens(outfits))
 
