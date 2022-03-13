@@ -56,13 +56,13 @@ const SpriteBox = ({
             aria-label={
               common.CharacterCard.CharacterModal.SpriteBox.firstAddon
             }
-            checked={addonCheck.first(type ?? 0)}
+            checked={addonCheck.first(type)}
           />
           <Checkbox
             aria-label={
               common.CharacterCard.CharacterModal.SpriteBox.secondAddon
             }
-            checked={addonCheck.second(type ?? 0)}
+            checked={addonCheck.second(type)}
           />
         </S.CheckboxWrapper>
       )}

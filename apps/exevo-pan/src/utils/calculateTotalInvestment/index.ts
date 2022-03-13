@@ -9,7 +9,6 @@ const PREY_SLOT_VALUE = 900
 export const calculateTotalInvestment = (
   character: CharacterObject,
 ): number => {
-  return character.id
   const { id, charmInfo, huntingSlot, preySlot, hirelings, storeItems } =
     character
 
