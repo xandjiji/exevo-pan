@@ -2,7 +2,8 @@ export interface SpecialTagsProps extends React.HTMLAttributes<HTMLDivElement> {
   character: CharacterObject
 }
 
-export type OutfitCheck = {
-  tag: string
-  test: (outfit: Outfit, character: CharacterObject) => boolean
-}
+export type RareOutfitTestParams = {
+  sex: boolean
+} & Outfit
+
+export type RareOutfitTest = (params: RareOutfitTestParams) => boolean
