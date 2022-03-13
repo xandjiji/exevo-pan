@@ -11,7 +11,11 @@ const rareOutfitTests: RareOutfitTest[] = [
   ({ name, type, sex }) => name === 'Summoner' && sex && type >= 2,
   ({ name, type }) => name === 'Elementalist' && type > 0,
   ({ name, type }) => name === 'Revenant' && type > 0,
+  ({ name, type }) => name === 'Battle Mage' && type > 0,
+  ({ name, type }) => name === 'Demon Outfit' && type >= 2,
   ({ name }) => name === 'Golden Outfit',
+  ({ name }) => name === 'Makeshift Warrior',
+  ({ name }) => name === 'Royal Costume',
 ]
 
 export const testRareOutfit = memoize((params: RareOutfitTestParams): boolean =>
@@ -26,4 +30,5 @@ export const rareMountSet = new Set([
   'Vortexion',
   'Phant',
   'Antelope',
+  'Fleeting Knowledge',
 ])
