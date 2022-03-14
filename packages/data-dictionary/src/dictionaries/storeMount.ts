@@ -651,6 +651,21 @@ const mounts: MountToken[] = [
     id: 1455,
     value: 690,
   },
+  {
+    name: 'Topaz Shrine',
+    id: 1491,
+    value: 690,
+  },
+  {
+    name: 'Jade Shrine',
+    id: 1492,
+    value: 690,
+  },
+  {
+    name: 'Obsidian Shrine',
+    id: 1493,
+    value: 690,
+  },
 ]
 
 export const priceMap = cosmeticToPriceMap(mounts)
