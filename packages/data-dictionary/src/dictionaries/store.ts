@@ -107,6 +107,30 @@ export const ignoreList = new Set<string>([
 
 export const storeItems: Record<string, StoreItem> = {
   /* @ ToDo: remove this once the database is cleaned up */
+  'durable exercise axe': {
+    name: 'Durable exercise axe',
+    value: 0,
+  },
+  'durable exercise bow': {
+    name: 'Durable exercise bow',
+    value: 0,
+  },
+  'durable exercise club': {
+    name: 'Durable exercise club',
+    value: 0,
+  },
+  'durable exercise sword': {
+    name: 'Durable exercise sword',
+    value: 0,
+  },
+  'durable exercise rod': {
+    name: 'Durable exercise rod',
+    value: 0,
+  },
+  'durable exercise wand': {
+    name: 'Durable exercise wand',
+    value: 0,
+  },
   'lasting exercise axe': {
     name: 'Lasting exercise axe',
     value: 0,
