@@ -1,17 +1,15 @@
 import express from 'express'
 import cors from 'cors'
 import { deserializeBody } from 'shared-utils/dist/contracts/Filters/utils'
-import { paginateData } from 'auction-queries'
+import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
-import { preloadCache, applySort, filterCharacters } from './cachedWrapper'
 import { exposeLocalhost } from './localtunnel'
 
 const { PORT, STAGING } = process.env
 
 const main = async () => {
   const auctions = await loadAuctions()
-  preloadCache(auctions)
 
   const app = express()
   app.use(cors())
@@ -25,8 +23,6 @@ const main = async () => {
     const sortedAuctions = applySort(auctions, sortOptions)
 
     const filteredAuctions = filterCharacters({
-      sortOptions,
-      serializedFilterOptions: request.body.filterOptions,
       auctions: sortedAuctions,
       filters: filterOptions,
     })
