@@ -34,6 +34,7 @@ const main = async () => {
       ...sortOptions,
     }
 
+    broadcast('Server hit', 'success')
     response.json(responseBody)
   })
 
