@@ -6,6 +6,8 @@ import TibiaCoinImage from 'assets/tibiacoin.png'
 import ExpandSvg from 'assets/svgs/expand.svg'
 import { Nickname } from 'components/CharacterMiniCard/styles'
 
+const FIXED_BODY_HEIGHT = 370
+
 export const Wrapper = styled.article`
   ${MaterialCard}
   padding: 16px;
@@ -132,7 +134,13 @@ export const Strong = styled.strong`
 `
 
 export const Body = styled.div`
+  padding-top: 3px;
   display: grid;
   gap: 12px;
   margin-bottom: 12px;
+
+  &[data-lazy='true'] {
+    content-visibility: auto;
+    contain-intrinsic-size: ${FIXED_BODY_HEIGHT}px;
+  }
 `
