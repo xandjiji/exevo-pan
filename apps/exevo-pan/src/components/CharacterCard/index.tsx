@@ -2,7 +2,6 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo, useState, useRef, useMemo } from 'react'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import { Sticker } from 'components/Atoms'
-import useShouldRender from './useShouldRender'
 import {
   Head,
   TagButton,
@@ -17,8 +16,6 @@ import {
 import CharacterModal from './CharacterModal'
 import * as S from './styles'
 import { CharacterCardProps } from './types'
-
-const FIXED_BODY_HEIGHT = 367
 
 const CharacterCard = ({
   characterData,
@@ -57,7 +54,6 @@ const CharacterCard = ({
   )
 
   const ref = useRef<HTMLDivElement>()
-  const shouldRenderBody = useShouldRender(lazyRender, ref)
 
   const [isExpanded, setExpanded] = useState(false)
 
@@ -102,60 +98,54 @@ const CharacterCard = ({
           )}
         </Head>
 
-        <S.Body
-          style={{ height: shouldRenderBody ? undefined : FIXED_BODY_HEIGHT }}
-        >
-          {shouldRenderBody && (
-            <>
-              <S.InfoGrid>
-                <Textbox.Server
-                  serverData={serverData}
-                  nickname={nickname}
-                  transfer={transfer}
-                />
-                <Textbox.Pvp serverData={serverData} />
-                <Textbox.AuctionEnd auctionEnd={auctionEnd} />
-                <Textbox.AuctionBid
-                  hasBeenBidded={hasBeenBidded}
-                  currentBid={currentBid}
-                />
-              </S.InfoGrid>
+        <S.Body data-lazy={lazyRender}>
+          <S.InfoGrid>
+            <Textbox.Server
+              serverData={serverData}
+              nickname={nickname}
+              transfer={transfer}
+            />
+            <Textbox.Pvp serverData={serverData} />
+            <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+            <Textbox.AuctionBid
+              hasBeenBidded={hasBeenBidded}
+              currentBid={currentBid}
+            />
+          </S.InfoGrid>
 
-              <CharacterItems items={items} />
+          <CharacterItems items={items} />
 
-              <CharacterSkills skills={skills} />
+          <CharacterSkills skills={skills} />
 
-              <S.FlexFooter>
-                <S.FlexColumn>
-                  <ImbuementsTooltip items={imbuements} />
-                  <CharmsTooltip items={charms} />
-                  <QuestsTooltip items={quests} />
-                </S.FlexColumn>
+          <S.FlexFooter>
+            <S.FlexColumn>
+              <ImbuementsTooltip items={imbuements} />
+              <CharmsTooltip items={charms} />
+              <QuestsTooltip items={quests} />
+            </S.FlexColumn>
 
-                <S.FlexColumn data-checkbox>
-                  <S.Checkbox
-                    label="Charm Expansion"
-                    checked={charmInfo.expansion}
-                  />
+            <S.FlexColumn data-checkbox>
+              <S.Checkbox
+                label="Charm Expansion"
+                checked={charmInfo.expansion}
+              />
 
-                  <S.Checkbox label="Prey Slot" checked={preySlot} />
+              <S.Checkbox label="Prey Slot" checked={preySlot} />
 
-                  {tcInvested !== '0' && (
-                    <S.FlexWrapper
-                      title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
-                    >
-                      <S.CheckboxContainer>
-                        <S.Icons.TibiaCoin />
-                      </S.CheckboxContainer>
-                      <S.Strong>
-                        {tcInvested} {common.CharacterCard.tcInvested.invested}
-                      </S.Strong>
-                    </S.FlexWrapper>
-                  )}
-                </S.FlexColumn>
-              </S.FlexFooter>
-            </>
-          )}
+              {tcInvested !== '0' && (
+                <S.FlexWrapper
+                  title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
+                >
+                  <S.CheckboxContainer>
+                    <S.Icons.TibiaCoin />
+                  </S.CheckboxContainer>
+                  <S.Strong>
+                    {tcInvested} {common.CharacterCard.tcInvested.invested}
+                  </S.Strong>
+                </S.FlexWrapper>
+              )}
+            </S.FlexColumn>
+          </S.FlexFooter>
         </S.Body>
 
         <SpecialTags character={characterData} />
