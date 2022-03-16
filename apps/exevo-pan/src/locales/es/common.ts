@@ -131,10 +131,11 @@ export default {
       },
     },
     tcInvested: {
-      prefix: 'This character has invested at least',
-      suffix: 'Tibia Coins in store purchases',
-      invested: 'invested',
+      prefix: 'Este personaje ha invertido al menos',
+      suffix: 'Tibia Coins en compras de la tienda',
+      invested: 'invertido',
     },
+
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
     highlightLabelText: '¡Destaque su subasta!',
@@ -146,12 +147,12 @@ export default {
       rareMounts: 'Mounts raras ✨',
       rareOutfits: 'Outfits raras 💎',
     },
-    expand: 'Expand for full auction details',
+    expand: 'Expandir para ver todos los detalles de la subasta',
     CharacterModal: {
-      totalInvested: 'Total invested',
+      totalInvested: 'Total invertido',
       SpriteBox: {
-        firstAddon: 'First addon',
-        secondAddon: 'Second addon',
+        firstAddon: 'Primer addon',
+        secondAddon: 'Segundo addon',
       },
     },
   },
@@ -165,7 +166,7 @@ export default {
     close: 'Cerrar',
   },
   Dialog: {
-    close: 'Close dialog',
+    close: 'Cerrar ventana',
   },
   FooterTitle: 'Exevo Pan - creado por',
   AnchorIconLabel: 'Copiar link',
