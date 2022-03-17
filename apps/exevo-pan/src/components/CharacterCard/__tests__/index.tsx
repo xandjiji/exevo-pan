@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react'
-import { useRouter, NextRouter } from 'next/router'
-import { renderWithProviders, randomDataset } from 'utils/test'
+import { renderWithProviders, randomDataset, setup } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
@@ -12,7 +11,7 @@ import CharacterCard from '..'
 const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
 
-const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
+const mockedUseRouter = setup.useRouter()
 
 describe('<CharacterCard />', () => {
   test.each(characterList)('should write every info correctly', (character) => {
@@ -93,7 +92,7 @@ describe('<CharacterCard />', () => {
     (character) => {
       mockedUseRouter.mockReturnValue({
         pathname: routes.BAZAAR_HISTORY,
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(<CharacterCard characterData={character} />)
       expect(
