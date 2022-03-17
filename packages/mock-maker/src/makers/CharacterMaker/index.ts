@@ -40,7 +40,7 @@ export const randomItem = (): number => {
 }
 
 const randomCharacterItems = (): CharacterItem[] =>
-  samplesFrom(store.tokens, randomRange(auctions.storeItem.array)).map(
+  samplesFrom(store.scrapingTokens, randomRange(auctions.storeItem.array)).map(
     (name) => ({
       name,
       amount: randomRange(auctions.storeItem.amount),

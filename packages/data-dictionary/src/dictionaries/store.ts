@@ -1710,8 +1710,4 @@ export const storeItems: Record<string, StoreItem> = {
   },
 }
 
-export const scrapingTokens = nameableToScrapingTokens(
-  Object.values(storeItems),
-)
-
-export const tokens: string[] = Object.values(scrapingTokens)
+export const scrapingTokens = Object.keys(storeItems)
