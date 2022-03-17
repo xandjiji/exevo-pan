@@ -1,6 +1,7 @@
 import { setup, randomDataset } from 'utils/test'
 import { priceMap as mountPrices } from 'data-dictionary/dist/dictionaries/storeMount'
 import { priceMap as outfitPrices } from 'data-dictionary/dist/dictionaries/storeOutfit'
+import { storeItems } from 'data-dictionary/dist/dictionaries/store'
 import getHirelingsValue from '../hirelings'
 import getStoreItemValue from '../storeItems'
 import getCosmeticsValue from '../cosmetics'
@@ -76,6 +77,29 @@ describe('getHirelingsValue()', () => {
 
         await expect(mockedFetch).toHaveBeenCalledTimes(1)
       })
+    })
+  })
+
+  describe('getStoreItemValue()', () => {
+    test('should calculate all values correctly', () => {
+      characterData.forEach((character) => {
+        let sum = 0
+
+        character.storeItems.forEach(({ name, amount }) => {
+          const foundPrice = storeItems[name]
+          if (foundPrice) sum += foundPrice.value * amount
+        })
+
+        expect(getStoreItemValue(character.storeItems, character.id)).toEqual(
+          sum,
+        )
+      })
+    })
+
+    test("if an item isn't found, it should call NotifyErrorClient", async () => {
+      getStoreItemValue([{ name: 'weird store item', amount: 1 }], 1)
+
+      await expect(mockedFetch).toHaveBeenCalledTimes(1)
     })
   })
 })
