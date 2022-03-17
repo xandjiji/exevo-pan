@@ -143,4 +143,8 @@ export const Body = styled.div`
     content-visibility: auto;
     contain-intrinsic-size: ${FIXED_BODY_HEIGHT}px;
   }
+
+  &&:hover {
+    content-visibility: unset;
+  }
 `
