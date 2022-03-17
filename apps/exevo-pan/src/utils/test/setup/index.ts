@@ -1,9 +1,6 @@
 import { useRouter } from 'next/router'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 
-/* @ ToDo: utility function jest.MockedFunction< */
-/* @ ToDo: setupar control + F 'as jest' */
-
 export const setup = {
   setTimeout: (): void => {
     jest.useFakeTimers()
