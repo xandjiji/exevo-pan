@@ -15,7 +15,7 @@ This monorepo contains the entire codebase of our project. Here is the anatomy:
 ├── apps
 │   ├── bazaar-scraper
 │   ├── blog-worker
-│   ├── current-auctions-worker
+│   ├── current-auctions-lambda
 │   ├── exevo-pan
 │   └── history-server
 ├── packages
@@ -42,11 +42,17 @@ This will install and build all the `apps` dependencies. You will also need to i
 yarn global add @cloudflare/wrangler
 ```
 
+and Serverless Framework CLI:
+
+```bash
+yarn global add serverless
+```
+
 ## Apps
 
 - [exevo-pan](apps/exevo-pan): the frontend application, built with `React`
 - [bazaar-scraper](apps/bazaar-scraper): a custom built tool for scraping Char Bazaar data from the official [Tibia](https://www.tibia.com/) website
-- [current-auctions-worker](apps/current-auctions-worker): a [Cloudflare Worker](https://workers.cloudflare.com/) that serves current auctions data
+- [current-auctions-lambda](apps/current-auctions-lambda): a [AWS Lambda](https://aws.amazon.com/lambda/) that serves current auctions data
 - [history-server](apps/history-server): an `Express` webserver responsible for serving past auctions data
 - [blog-worker](apps/blog-worker): a [Cloudflare Worker](https://workers.cloudflare.com/) that queries blog posts
 
@@ -115,7 +121,7 @@ yarn dev
 Now you are ready to roll! Apps will be running on:
 
 - **exevo-pan**: [http://localhost:3000](http://localhost:3000)
-- **current-auctions-worker**: [http://localhost:8787](http://localhost:8787)
+- **current-auctions-lambda**: [http://localhost:8787](http://localhost:8787)
 - **history-server**: [http://localhost:4000](http://localhost:4000)
 - **static-data-server**: [http://localhost:5555](http://localhost:5555)
 - **blog-worker**: [http://localhost:3132](http://localhost:3132)
