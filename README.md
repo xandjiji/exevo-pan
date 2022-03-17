@@ -112,7 +112,7 @@ At this point, your `apps/bazaar-scraper/Output` directory should have this set 
 
 #
 
-Now you are ready to have a minimal dev enviroment! Go back to the repository root directory and run:
+Now you are ready to have a minimal dev environment! Go back to the repository root directory and run:
 
 ```
 yarn dev

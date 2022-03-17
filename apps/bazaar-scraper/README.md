@@ -36,6 +36,7 @@ The list rare items that are tracked can be found at [`items.ts`](src/Scripts/Sc
 It first checks for current auction ids on the [main list pages](https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades?currentpage=1) (starting at `?currentpage=1`). Then, it will scrape every id individually by fetching it's auction page and collecting all of the data.
 
 Outputs:
+
 - `ServerData.json`
 - `CurrentAuctions.json`
 - `ItemsData.json`
@@ -49,6 +50,7 @@ Scrapes past auctions data by incrementally checking individual auctions url (st
 Since scraping the entire history takes days, all the collected data will be saved after every `100` ids checked. This means that the script can be then stopped without losing data, and, if started again, it will pick up from where it left.
 
 Outputs:
+
 - `ServerData.json`
 - `ScrapHistoryData.json`
 - `HistoryAuctions.jsonl`
@@ -60,9 +62,11 @@ Since the `HistoryAuctions.jsonl` file stores tons of data (currently it has ove
 Reads the history data and calculate statistics from it.
 
 Input:
+
 - `HistoryAuctions.jsonl`
 
 Output:
+
 - `HistoryStatistics.json`
 
 # Data structure
@@ -136,6 +140,7 @@ const character: PartialCharacterObject = {
 ```
 
 # Config
+
 You can tune way requests are made to the official [Tibia](https://tibia.com/) website, to prevent their servers from rate-limiting you. Here is the default [config file](src/Constants/requests.ts):
 
 ```typescript
@@ -146,7 +151,7 @@ export const requests = {
 }
 ```
 
-# Enviroment
+# Environment
 
 I use [`pm2`](https://www.npmjs.com/package/pm2) to keep all my scraping jobs running. Most of the scripts and tasks configurations can be found at the [`automations`](../../automations) directory.
 
