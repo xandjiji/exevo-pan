@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router'
+
 export const setup = {
   setTimeout: (): void => {
     jest.useFakeTimers()
@@ -10,4 +12,6 @@ export const setup = {
     global.fetch = jest.fn()
     return fetch as jest.MockedFunction<typeof fetch>
   },
+  useRouter: (): jest.MockedFunction<typeof useRouter> =>
+    useRouter as jest.MockedFunction<typeof useRouter>,
 }
