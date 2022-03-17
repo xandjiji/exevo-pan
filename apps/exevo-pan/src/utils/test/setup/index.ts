@@ -1,4 +1,8 @@
 import { useRouter } from 'next/router'
+import { getFromLocalStorage, saveToLocalStorage } from 'utils'
+
+/* @ ToDo: utility function jest.MockedFunction< */
+/* @ ToDo: setupar control + F 'as jest' */
 
 export const setup = {
   setTimeout: (): void => {
@@ -14,4 +18,8 @@ export const setup = {
   },
   useRouter: (): jest.MockedFunction<typeof useRouter> =>
     useRouter as jest.MockedFunction<typeof useRouter>,
+  getFromLocalStorage: (): jest.MockedFunction<typeof getFromLocalStorage> =>
+    getFromLocalStorage as jest.MockedFunction<typeof getFromLocalStorage>,
+  saveToLocalStorage: (): jest.MockedFunction<typeof saveToLocalStorage> =>
+    saveToLocalStorage as jest.MockedFunction<typeof saveToLocalStorage>,
 }

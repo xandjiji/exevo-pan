@@ -1,22 +1,13 @@
 import { setup } from 'utils/test'
-import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import { endpoints, paths, localStorageKeys } from 'Constants'
 import ManageDataClient from '../..'
 import { mockedWarStatistics } from './mock'
 
 global.console.log = jest.fn()
-jest.mock('utils', () => ({
-  getFromLocalStorage: jest.fn(),
-  saveToLocalStorage: jest.fn(),
-}))
 
 const mockedFetch = setup.fetch()
-const mockedGetFromLocalStorage = getFromLocalStorage as jest.MockedFunction<
-  typeof getFromLocalStorage
->
-const mockedSaveToLocalStorage = saveToLocalStorage as jest.MockedFunction<
-  typeof saveToLocalStorage
->
+const mockedGetFromLocalStorage = setup.getFromLocalStorage()
+const mockedSaveToLocalStorage = setup.saveToLocalStorage()
 
 describe('services/fetchWarStatisticsData', () => {
   beforeEach(async () => {

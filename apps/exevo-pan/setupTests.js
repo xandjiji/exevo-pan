@@ -7,6 +7,11 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn().mockReturnValue({ pathname: '/' }),
 }))
 
+jest.mock('utils/localStorage', () => ({
+  getFromLocalStorage: jest.fn(),
+  saveToLocalStorage: jest.fn(),
+}))
+
 const mockedImageComponent = ({ ...props }) => <img {...props} />
 jest.mock('next/image', () => mockedImageComponent)
 
