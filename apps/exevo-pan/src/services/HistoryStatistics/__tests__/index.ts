@@ -1,12 +1,12 @@
 import { endpoints, paths } from 'Constants'
+import { setup } from 'utils/test'
 import HistoryStatisticsClient from '..'
 import { EMPTY_STATISTICS } from '../schema'
 import { mockedStatisticsData } from './mock'
 
-global.fetch = jest.fn()
 global.console.log = jest.fn()
 
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+const mockedFetch = setup.fetch()
 
 describe('services/StatisticsData', () => {
   beforeEach(async () => {

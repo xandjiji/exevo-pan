@@ -1,11 +1,10 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import Home from '..'
 import { randomPaginatedPosts } from './mock'
 
-global.fetch = jest.fn()
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+const mockedFetch = setup.fetch()
 
 const getLastBody = (mockedFn: typeof mockedFetch): BlogFilterBodyPayload => {
   const [, args] = mockedFn.mock.calls.shift()!

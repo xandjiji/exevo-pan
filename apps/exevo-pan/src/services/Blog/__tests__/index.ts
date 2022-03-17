@@ -3,11 +3,11 @@ import {
   DEFAULT_PAGINATION_OPTIONS,
   DEFAULT_SORT_OPTIONS,
 } from 'shared-utils/dist/contracts/BlogFilters/defaults'
+import { setup } from 'utils/test'
 import BlogClient from '..'
 import { blogPosts, staticPostData, staticPostDataResponse } from './mock'
 
-global.fetch = jest.fn()
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+const mockedFetch = setup.fetch()
 
 const locales = ['en', 'es', 'pl', 'pt']
 
