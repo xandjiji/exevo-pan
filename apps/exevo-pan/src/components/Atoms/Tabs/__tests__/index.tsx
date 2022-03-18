@@ -2,20 +2,46 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import Tabs from '..'
+import { TabsProps } from '../types'
 
 const tabs = [
   { label: 'Item 0', children: <div role="none">Item 0 content</div> },
   { label: <h1>Item 1</h1>, children: <div role="none">Item 1 content</div> },
-  { label: 'Item 2', children: <div role="none">Item 2 content</div> },
+  { label: 'Item 2', children: 'Item 2 content' },
 ]
 
-const TabExample = () => (
-  <Tabs.Group>
+const TabExample = (props: Partial<TabsProps>) => (
+  <Tabs.Group {...props}>
     {tabs.map((tabItem) => (
       <Tabs.Panel {...tabItem} key={tabItem.label.toString()} />
     ))}
   </Tabs.Group>
 )
+
+const setup = (initialIndex = 0) => {
+  const tabElements = screen.getAllByRole('tab')
+  let currentSelected = initialIndex
+  const assertCurrentSelected = () =>
+    tabElements.forEach((element, index) => {
+      const isSelected = currentSelected === index
+      expect(element).toHaveAttribute(
+        'aria-selected',
+        isSelected ? 'true' : 'false',
+      )
+    })
+
+  const clickAndAssert = (index: number) => {
+    userEvent.click(screen.getAllByRole('tab')[index])
+    currentSelected = index
+
+    assertCurrentSelected()
+    expect(screen.getByRole('tabpanel')).toHaveTextContent(
+      `Item ${index} content`,
+    )
+  }
+
+  return { assertCurrentSelected, clickAndAssert }
+}
 
 describe('<Tabs />', () => {
   test('should render everything properly', async () => {
@@ -58,29 +84,32 @@ describe('<Tabs />', () => {
     })
   })
 
-  /* test('should navigate properly between tabs', () => {
-    renderWithProviders(
-      <Tabs.Group>
-        <Tabs.Panel label="Item 1">
-          <div role="none">Item 1 content</div>
-        </Tabs.Panel>
-        <Tabs.Panel label="Item 2">
-          <div role="none">Item 2 content</div>
-        </Tabs.Panel>
-        <Tabs.Panel label="Item 3">
-          <div role="none">Item 3 content</div>
-        </Tabs.Panel>
-      </Tabs.Group>,
-    )
+  test('should navigate properly between tabs', () => {
+    renderWithProviders(<TabExample />)
 
-    const tabElements = screen.getAllByRole('tab')
+    const { assertCurrentSelected, clickAndAssert } = setup()
 
-    tabElements.forEach((element) => {})
-  }) */
+    assertCurrentSelected()
+    clickAndAssert(1)
+    clickAndAssert(2)
+    clickAndAssert(0)
+    clickAndAssert(2)
+  })
 
-  test.todo('`initialActive` should define the initial active tab')
+  test('`initialActive` should define the initial active tab', () => {
+    const initialActive = 2
+    renderWithProviders(<TabExample initialActive={initialActive} />)
 
-  test.todo('should be able to be controlled by`activeIndex`')
+    const { assertCurrentSelected, clickAndAssert } = setup(initialActive)
+
+    assertCurrentSelected()
+    clickAndAssert(2)
+    clickAndAssert(0)
+    clickAndAssert(2)
+    clickAndAssert(1)
+  })
+
+  test.todo('should be able to be controlled by `activeIndex`')
 
   test.todo('`onChange` should be called with the current tab')
 })
