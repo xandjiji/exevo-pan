@@ -106,8 +106,12 @@ export const FlexColumn = styled.div`
     width: fit-content;
   }
 
-  &[data-checkbox='true'] > * {
-    height: 18px;
+  &[data-store-column='true'] {
+    cursor: pointer;
+
+    > * {
+      height: 18px;
+    }
   }
 `
 
