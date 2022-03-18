@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Switch from '..'
 
 const mockedOnClick = jest.fn()
@@ -58,5 +58,10 @@ describe('<Switch />', () => {
     expect(switchElement).not.toBeChecked()
     userEvent.click(switchElement)
     expect(switchElement).not.toBeChecked()
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(<Switch aria-label="label" />)
+    await assertNoA11yViolations(container)
   })
 })

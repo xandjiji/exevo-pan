@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import SliderInput from '..'
 
 const mockedOnChange = jest.fn()
@@ -304,5 +304,12 @@ describe('<SliderInput />', () => {
     expect(displayInput).toHaveValue('50')
     expect(hiddenInput).toHaveValue('50')
     expect(cursor).toHaveStyle('left: 50%')
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <SliderInput aria-label="label" min={0} max={100} />,
+    )
+    await assertNoA11yViolations(container)
   })
 })

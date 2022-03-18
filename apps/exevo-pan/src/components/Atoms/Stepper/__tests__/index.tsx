@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import userEvent from '@testing-library/user-event'
 import Stepper from '..'
 
@@ -97,5 +97,12 @@ describe('<Stepper />', () => {
     verifyCurrentAria()
     verifyCurrentAria()
     verifyCurrentAria()
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Stepper currentStep={0} steps={mockedSteps} />,
+    )
+    await assertNoA11yViolations(container)
   })
 })
