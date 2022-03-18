@@ -136,6 +136,17 @@ const character: PartialCharacterObject = {
   mounts: ['Donkey', 'War Horse'],
   storeMounts: ['Desert King'],
   rareAchievements: ['His True Face'],
+  achievementPoints: 201,
+  huntingSlot: false,
+  preySlot: true,
+  charmInfo: { unspent: 746, total: 4546, expansion: true },
+  hirelings: { count: 2, jobs: 2, outfits: 0 },
+  storeItems: [
+    {
+      name: 'hireling lamp',
+      amount: 2,
+    },
+  ],
 }
 ```
 
