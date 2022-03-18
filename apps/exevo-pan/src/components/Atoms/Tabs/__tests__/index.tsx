@@ -109,7 +109,44 @@ describe('<Tabs />', () => {
     clickAndAssert(1)
   })
 
-  test.todo('should be able to be controlled by `activeIndex`')
+  test('should be able to be controlled by `activeIndex`', () => {
+    const { rerender } = renderWithProviders(
+      <Tabs.Group activeIndex={2}>
+        <Tabs.Panel label="item-0">item 0</Tabs.Panel>
+        <Tabs.Panel label="item-1">item 0</Tabs.Panel>
+        <Tabs.Panel label="item-2">item 0</Tabs.Panel>
+      </Tabs.Group>,
+    )
+
+    const tabElements = screen.getAllByRole('tab')
+
+    const rerenderAndAssert = (newActive: number) => {
+      rerender(
+        <Tabs.Group activeIndex={newActive}>
+          <Tabs.Panel label="item-0">item 0</Tabs.Panel>
+          <Tabs.Panel label="item-1">item 1</Tabs.Panel>
+          <Tabs.Panel label="item-2">item 2</Tabs.Panel>
+        </Tabs.Group>,
+      )
+
+      tabElements.forEach((tabItem, index) => {
+        const isActive = index === newActive
+        expect(tabItem).toHaveAttribute(
+          'aria-selected',
+          isActive ? 'true' : 'false',
+        )
+      })
+
+      expect(screen.getByRole('tabpanel')).toHaveTextContent(
+        `item ${newActive}`,
+      )
+    }
+
+    rerenderAndAssert(2)
+    rerenderAndAssert(0)
+    rerenderAndAssert(2)
+    rerenderAndAssert(1)
+  })
 
   test.todo('`onChange` should be called with the current tab')
 })
