@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Tabs from '..'
 import { TabsProps } from '../types'
 
@@ -172,5 +172,10 @@ describe('<Tabs />', () => {
     clickAndAssert(0)
     clickAndAssert(2)
     clickAndAssert(1)
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(<TabExample />)
+    await assertNoA11yViolations(container)
   })
 })
