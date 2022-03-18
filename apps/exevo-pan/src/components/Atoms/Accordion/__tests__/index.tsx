@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Accordion from '..'
 
 describe('<Accordion />', () => {
@@ -98,5 +98,14 @@ describe('<Accordion />', () => {
     userEvent.click(buttonElement)
     expect(buttonElement).toHaveAccessibleName('Close')
     expect(screen.queryByRole('none')).toBeInTheDocument()
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Accordion>
+        <div role="none" />
+      </Accordion>,
+    )
+    await assertNoA11yViolations(container)
   })
 })
