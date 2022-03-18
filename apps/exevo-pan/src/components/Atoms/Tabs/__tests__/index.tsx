@@ -45,8 +45,13 @@ const setup = (initialIndex = 0) => {
 
 describe('<Tabs />', () => {
   test('should render everything properly', async () => {
-    const { container } = renderWithProviders(<TabExample />)
+    const { container } = renderWithProviders(
+      <TabExample aria-label="Tablist label" />,
+    )
 
+    expect(
+      screen.getByRole('tablist', { name: 'Tablist label' }),
+    ).toBeInTheDocument()
     expect(screen.getByRole('none')).toHaveTextContent('Item 0 content')
 
     const tabElements = screen.getAllByRole('tab')
@@ -148,5 +153,24 @@ describe('<Tabs />', () => {
     rerenderAndAssert(1)
   })
 
-  test.todo('`onChange` should be called with the current tab')
+  test('`onChange` should be called with the current tab', () => {
+    const onChangeMock = jest.fn()
+    renderWithProviders(<TabExample onChange={onChangeMock} />)
+
+    const tabElements = screen.getAllByRole('tab')
+
+    let changeCount = 0
+    const clickAndAssert = (index: number) => {
+      userEvent.click(tabElements[index])
+      changeCount += 1
+
+      expect(onChangeMock).toHaveBeenCalledTimes(changeCount)
+      expect(onChangeMock).toHaveBeenLastCalledWith(index)
+    }
+
+    clickAndAssert(1)
+    clickAndAssert(0)
+    clickAndAssert(2)
+    clickAndAssert(1)
+  })
 })
