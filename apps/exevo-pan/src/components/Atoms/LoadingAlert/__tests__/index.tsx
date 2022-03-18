@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import LoadingAlert from '..'
 
 describe('<LoadingAlert />', () => {
@@ -10,5 +10,12 @@ describe('<LoadingAlert />', () => {
 
     expect(screen.getByRole('alert')).toHaveTextContent('Updating data...')
     expect(screen.getByLabelText('Loading data')).toBeInTheDocument()
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <LoadingAlert aria-label="Loading data">Updating data...</LoadingAlert>,
+    )
+    await assertNoA11yViolations(container)
   })
 })

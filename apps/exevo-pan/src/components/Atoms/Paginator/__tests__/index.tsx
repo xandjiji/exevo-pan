@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Paginator from '..'
 
 const fakeArgs = {
@@ -168,5 +168,10 @@ describe('<Paginator />', () => {
       <Paginator {...fakeArgs} currentPage={101} onChange={mockedOnChange} />,
     )
     expect(screen.getByText('1001 - 1010 of 3664')).toBeInTheDocument()
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(<Paginator {...fakeArgs} />)
+    await assertNoA11yViolations(container)
   })
 })
