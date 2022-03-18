@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Option } from 'components/Atoms'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Listbox from '..'
 
 const mockedOnSelectOption = jest.fn()
@@ -197,5 +197,16 @@ describe('<Listbox />', () => {
     screen.queryAllByRole('option').forEach((option) => {
       expect(option).toBeInTheDocument()
     })
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Listbox aria-label="label">
+        <Option>option A</Option>
+        <Option>option B</Option>
+        <Option>option C</Option>
+      </Listbox>,
+    )
+    await assertNoA11yViolations(container)
   })
 })
