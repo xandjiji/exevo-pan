@@ -6,7 +6,7 @@ import { useEscToClose, useLockBody } from 'hooks'
 import * as S from './styles'
 import { DialogProps } from './types'
 
-const Modal = ({
+const Dialog = ({
   isOpen,
   onClose,
   children,
@@ -53,4 +53,4 @@ const Modal = ({
     : null
 }
 
-export default Modal
+export default Dialog
