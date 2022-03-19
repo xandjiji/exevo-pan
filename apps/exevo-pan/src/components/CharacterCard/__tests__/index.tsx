@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders, randomDataset, setup } from 'utils/test'
-import { formatNumberWithCommas } from 'utils'
+import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
@@ -85,6 +85,36 @@ describe('<CharacterCard />', () => {
         `Quests: ${character.quests.length}/${quest.tokens.length}`,
       ),
     ).toBeInTheDocument()
+
+    const charmCheckbox = screen.getByRole('checkbox', {
+      name: 'Charm Expansion',
+    })
+    if (character.charmInfo.expansion) {
+      expect(charmCheckbox).toBeChecked()
+    } else {
+      expect(charmCheckbox).not.toBeChecked()
+    }
+
+    const preyCheckbox = screen.getByRole('checkbox', {
+      name: 'Prey Slot',
+    })
+    if (character.preySlot) {
+      expect(preyCheckbox).toBeChecked()
+    } else {
+      expect(preyCheckbox).not.toBeChecked()
+    }
+
+    const totalInvestment = formatNumberWithCommas(
+      calculateTotalInvestment(character),
+    )
+
+    if (totalInvestment === '0') {
+      expect(screen.queryByText(totalInvestment)).not.toBeInTheDocument()
+    } else {
+      expect(
+        screen.getByText(totalInvestment, { exact: false }),
+      ).toBeInTheDocument()
+    }
   })
 
   test.each(characterList)(
@@ -113,4 +143,8 @@ describe('<CharacterCard />', () => {
       expect(screen.getByText('Highlight your auction!')).toBeInTheDocument()
     },
   )
+
+  test.todo('clicking on the expand button should open a dialog window')
+
+  test.todo('clicking on the store section should open a dialog window')
 })
