@@ -20,9 +20,44 @@ describe('<Dialog />', () => {
     expect(screen.getByRole('none')).toBeInTheDocument()
   })
 
-  test.todo('should handle `onClose` calls')
+  test('should handle `onClose` calls', () => {
+    renderWithProviders(
+      <Dialog isOpen onClose={onCloseMock}>
+        <div role="none" />
+      </Dialog>,
+    )
 
-  test.todo('should be controlled with `isOpen` prop')
+    expect(onCloseMock).toHaveBeenCalledTimes(0)
 
-  test.todo('a11y')
+    userEvent.click(screen.getByRole('button'))
+    expect(onCloseMock).toHaveBeenCalledTimes(1)
+  })
+
+  test('should be controlled with `isOpen` prop', () => {
+    const { rerender } = renderWithProviders(
+      <Dialog isOpen onClose={onCloseMock}>
+        <div role="none" />
+      </Dialog>,
+    )
+
+    expect(screen.getByRole('none')).toBeInTheDocument()
+
+    rerender(
+      <Dialog isOpen={false} onClose={onCloseMock}>
+        <div role="none" />
+      </Dialog>,
+    )
+
+    expect(screen.queryByRole('none')).not.toBeInTheDocument()
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Dialog isOpen onClose={onCloseMock}>
+        <div role="none" />
+      </Dialog>,
+    )
+
+    await assertNoA11yViolations(container)
+  })
 })
