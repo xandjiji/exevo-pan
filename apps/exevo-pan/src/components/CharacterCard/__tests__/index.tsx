@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset, setup } from 'utils/test'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
@@ -144,7 +145,24 @@ describe('<CharacterCard />', () => {
     },
   )
 
-  test.todo('clicking on the expand button should open a dialog window')
+  test('the character card should be able to be expanded', () => {
+    const [character] = characterList
+    renderWithProviders(<CharacterCard characterData={character} expandable />)
 
-  test.todo('clicking on the store section should open a dialog window')
+    const [expandButton, storeSection] = screen.getAllByRole('button', {
+      name: 'Expand for full auction details',
+    })
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+
+    userEvent.click(expandButton)
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+
+    userEvent.click(storeSection)
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+  })
 })
