@@ -127,6 +127,7 @@ const CharacterCard = ({
             <S.FlexColumn
               data-store-column
               as="button"
+              aria-label={common.CharacterCard.expand}
               onClick={() => setExpanded(true)}
             >
               <S.Checkbox
