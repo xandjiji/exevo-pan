@@ -102,6 +102,8 @@ export const FlexColumn = styled.div`
   grid-template-columns: 1fr;
   grid-gap: 8px;
 
+  color: var(--onSurface);
+
   > * {
     width: fit-content;
   }
