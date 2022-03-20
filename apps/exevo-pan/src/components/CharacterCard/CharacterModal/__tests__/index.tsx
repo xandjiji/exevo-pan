@@ -9,12 +9,14 @@ const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
 
 const mockedFetch = setup.fetch()
+const scrollIntoViewMock = setup.scrollIntoView()
 const mockOnClose = jest.fn()
 
 describe('<CharacterModal />', () => {
   beforeEach(() => {
-    mockOnClose.mockClear()
     mockedFetch.mockClear()
+    scrollIntoViewMock.mockClear()
+    mockOnClose.mockClear()
     setup.setTimeout()
   })
 
@@ -135,5 +137,23 @@ describe('<CharacterModal />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
     expect(mockOnClose).toHaveBeenCalledTimes(1)
+  })
+
+  test('should be tabbable', () => {
+    const [character] = characterList
+    renderWithProviders(
+      <CharacterModal characterData={character} onClose={mockOnClose} />,
+    )
+
+    const [tab1, tab2] = screen.getAllByRole('tab')
+    expect(scrollIntoViewMock).toHaveBeenCalledTimes(0)
+
+    expect(tab1).toHaveAttribute('aria-selected', 'true')
+    expect(tab2).toHaveAttribute('aria-selected', 'false')
+
+    userEvent.click(tab2)
+    expect(tab1).toHaveAttribute('aria-selected', 'false')
+    expect(tab2).toHaveAttribute('aria-selected', 'true')
+    expect(scrollIntoViewMock).toHaveBeenCalledTimes(1)
   })
 })
