@@ -35,6 +35,7 @@ const CharacterCard = (): JSX.Element | null => {
       <S.Wrapper ref={wrapperRef}>
         {selectedCharacter ? (
           <S.CharacterCard
+            expandable={currentStep === 0}
             key={selectedCharacter.id}
             characterData={selectedCharacter}
             smaller={currentStep >= 1}

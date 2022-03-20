@@ -28,10 +28,6 @@ const mobileCardStyle = css`
 `
 
 export const CharacterCard = styled(BaseCharacterCard)<{ smaller: boolean }>`
-  button {
-    display: none;
-  }
-
   ${({ smaller }) => smaller && mobileCardStyle}
 `
 

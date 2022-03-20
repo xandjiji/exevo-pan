@@ -108,12 +108,12 @@ export const FlexColumn = styled.div`
     width: fit-content;
   }
 
-  &[data-store-column='true'] {
-    cursor: pointer;
+  &[data-store-column='true'] > * {
+    height: 18px;
+  }
 
-    > * {
-      height: 18px;
-    }
+  &[data-button='true'] {
+    cursor: pointer;
   }
 `
 
