@@ -19,24 +19,29 @@ describe('<CharacterModal />', () => {
 
   test.todo('should render every element correctly')
 
-  test.todo('should render every element correctly')
-
-  test('if a sprite is not found, it should call `NotifyErrorClient`', () => {
+  test('if a sprite is not found, it should call `NotifyErrorClient`', async () => {
     const [character] = characterList
+
+    const { rerender } = renderWithProviders(
+      <CharacterModal
+        characterData={{ ...character, storeMounts: [] }}
+        onClose={mockOnClose}
+      />,
+    )
 
     expect(mockedFetch).toHaveBeenCalledTimes(0)
 
-    renderWithProviders(
+    rerender(
       <CharacterModal
         characterData={{
           ...character,
-          outfits: [{ name: 'weird outfit', type: 0 }],
+          storeMounts: ['weird mount'],
         }}
         onClose={mockOnClose}
       />,
     )
 
-    expect(mockedFetch).toHaveBeenCalledTimes(1)
+    await waitFor(() => expect(mockedFetch).toHaveBeenCalledTimes(1))
   })
 
   test('should call `onClose` handler', () => {
