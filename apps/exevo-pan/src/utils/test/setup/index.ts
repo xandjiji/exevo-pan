@@ -13,6 +13,12 @@ export const setup = {
     global.fetch = jest.fn()
     return fetch as jest.MockedFunction<typeof fetch>
   },
+  scrollIntoView: (): jest.Mock<any, any> => {
+    const mockedScrollIntoView = jest.fn()
+    window.HTMLElement.prototype.scrollIntoView = mockedScrollIntoView
+
+    return mockedScrollIntoView
+  },
   useRouter: (): jest.MockedFunction<typeof useRouter> =>
     useRouter as jest.MockedFunction<typeof useRouter>,
   getFromLocalStorage: (): jest.MockedFunction<typeof getFromLocalStorage> =>
