@@ -1,3 +1,5 @@
+import { nameableToScrapingTokens } from '../utils'
+
 export const ignoreList = new Set<string>([
   /* POTIONS */
   'mana potion',
@@ -1707,3 +1709,5 @@ export const storeItems: Record<string, StoreItem> = {
     value: 0,
   },
 }
+
+export const scrapingTokens = Object.keys(storeItems)

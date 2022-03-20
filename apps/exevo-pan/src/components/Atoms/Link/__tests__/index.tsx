@@ -1,9 +1,8 @@
 import { screen } from '@testing-library/react'
-import { useRouter, NextRouter } from 'next/router'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import Link from '..'
 
-const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
+const mockedUseRouter = setup.useRouter()
 
 describe('<Link />', () => {
   beforeEach(() => {
@@ -13,7 +12,7 @@ describe('<Link />', () => {
     test('aria-current should be set if href matches pathname (exact)', () => {
       mockedUseRouter.mockReturnValueOnce({
         pathname: '/homepage',
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(
         <Link href="/homepage">
@@ -27,7 +26,7 @@ describe('<Link />', () => {
     test('aria-current should NOT be set if href does NOT matches pathname', () => {
       mockedUseRouter.mockReturnValueOnce({
         pathname: '/about',
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(
         <Link href="/homepage">
@@ -44,7 +43,7 @@ describe('<Link />', () => {
     test('aria-current should be set if href matches pathname (not exact)', () => {
       mockedUseRouter.mockReturnValueOnce({
         pathname: '/homepages',
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(
         <Link href="/homepage">
@@ -60,7 +59,7 @@ describe('<Link />', () => {
     test('aria-current should be set if href matches pathname (exact)', () => {
       mockedUseRouter.mockReturnValueOnce({
         pathname: '/homepage',
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(
         <Link href="/homepage" exact>
@@ -74,7 +73,7 @@ describe('<Link />', () => {
     test('aria-current should NOT be set if href does NOT matches pathname', () => {
       mockedUseRouter.mockReturnValueOnce({
         pathname: '/about',
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(
         <Link href="/homepage" exact>
@@ -91,7 +90,7 @@ describe('<Link />', () => {
     test('aria-current should NOT be set if href does NOT matches pathname (not exact)', () => {
       mockedUseRouter.mockReturnValueOnce({
         pathname: '/homepages',
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(
         <Link href="/homepage" exact>

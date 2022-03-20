@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Input from '..'
 
 const mockedOnChange = jest.fn()
@@ -147,5 +147,12 @@ describe('<Input />', () => {
     )
 
     expect(inputElement).toHaveValue('Cachero')
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Input allowClear aria-label="input label" />,
+    )
+    await assertNoA11yViolations(container)
   })
 })

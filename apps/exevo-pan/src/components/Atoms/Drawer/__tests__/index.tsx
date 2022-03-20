@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Drawer from '..'
 
 jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
@@ -55,5 +55,10 @@ describe('<Drawer />', () => {
     expect(mockOnClose).toBeCalledTimes(0)
     userEvent.click(screen.getByRole('button'))
     expect(mockOnClose).toBeCalledTimes(1)
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(<DrawerComponent open />)
+    await assertNoA11yViolations(container)
   })
 })

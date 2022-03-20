@@ -1,10 +1,9 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import Newsletter from '..'
 
-global.fetch = jest.fn()
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+const mockedFetch = setup.fetch()
 
 describe('<Newsletter />', () => {
   beforeEach(() => {

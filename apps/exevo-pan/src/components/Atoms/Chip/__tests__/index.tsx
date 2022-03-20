@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import userEvent from '@testing-library/user-event'
 import Chip from '..'
 
@@ -99,5 +99,10 @@ describe('<Chip />', () => {
       userEvent.type(closeButton, '{space}')
       expect(mockedOnClose).toBeCalledTimes(3)
     })
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(<Chip>content</Chip>)
+    await assertNoA11yViolations(container)
   })
 })

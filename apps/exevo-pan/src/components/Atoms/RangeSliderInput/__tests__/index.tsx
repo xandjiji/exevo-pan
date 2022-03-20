@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import RangeSliderInput from '..'
 
 const mockedOnChange = jest.fn()
@@ -225,5 +225,12 @@ describe('<RangeSliderInput />', () => {
     expect(cursorA).toHaveAttribute('aria-valuenow', '0')
     expect(screen.getByText('1000')).toBeInTheDocument()
     expect(cursorB).toHaveAttribute('aria-valuenow', '1000')
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <RangeSliderInput min={0} max={2000} value={[0, 1000]} />,
+    )
+    await assertNoA11yViolations(container)
   })
 })

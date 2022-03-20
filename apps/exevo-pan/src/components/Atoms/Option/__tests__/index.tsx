@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Option from '..'
 
 const mockedOnClick = jest.fn()
@@ -61,5 +61,14 @@ describe('<Option />', () => {
       name: 'children',
       value: 'children',
     })
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <div role="listbox" aria-label="label">
+        <Option>children</Option>
+      </div>,
+    )
+    await assertNoA11yViolations(container)
   })
 })

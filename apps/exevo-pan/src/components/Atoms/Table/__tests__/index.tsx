@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Table from '..'
 
 describe('<Table />', () => {
@@ -111,5 +111,32 @@ describe('<Table />', () => {
     )
 
     expect(container).toMatchSnapshot()
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Table>
+        <Table.Element>
+          <Table.Head>
+            <Table.Row>
+              <Table.HeadColumn>#</Table.HeadColumn>
+              <Table.HeadColumn>Nickname</Table.HeadColumn>
+            </Table.Row>
+          </Table.Head>
+
+          <Table.Body>
+            <Table.Row>
+              <Table.Column>1</Table.Column>
+              <Table.Column>Ksu</Table.Column>
+            </Table.Row>
+            <Table.Row>
+              <Table.Column>2</Table.Column>
+              <Table.Column>Nana</Table.Column>
+            </Table.Row>
+          </Table.Body>
+        </Table.Element>
+      </Table>,
+    )
+    await assertNoA11yViolations(container)
   })
 })

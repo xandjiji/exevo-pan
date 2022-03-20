@@ -1,13 +1,12 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders } from 'utils/test'
-import { getFromLocalStorage } from 'utils'
+import { renderWithProviders, setup } from 'utils/test'
 import Sticker from '..'
 
-jest.mock('utils')
+const mockedGetFromLocalStorage = setup.getFromLocalStorage()
 
 describe('<Sticker />', () => {
   test('should be rendered if localStorage is empty', () => {
-    ;(getFromLocalStorage as jest.Mock).mockReturnValue(true)
+    mockedGetFromLocalStorage.mockReturnValue(true)
 
     renderWithProviders(
       <Sticker localStorageKey="myKey">
@@ -19,7 +18,7 @@ describe('<Sticker />', () => {
   })
 
   test('should NOT be rendered if localStorage has its key', () => {
-    ;(getFromLocalStorage as jest.Mock).mockReturnValue(false)
+    mockedGetFromLocalStorage.mockReturnValue(false)
 
     renderWithProviders(
       <Sticker localStorageKey="myKey">

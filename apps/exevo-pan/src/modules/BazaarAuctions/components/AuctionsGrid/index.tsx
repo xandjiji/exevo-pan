@@ -1,7 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { Ads } from 'templates'
-import { Sticker } from 'components/Atoms'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
@@ -75,18 +74,6 @@ const AuctionsGrid = (): JSX.Element => {
               {activeFilterCount}
             </S.ActiveIcon>
           )}
-          <Sticker
-            /* @ ToDo: remove this sticker */
-            style={{
-              position: 'absolute',
-              top: -12,
-              left: -16,
-              transform: 'rotate(-30deg)',
-            }}
-            localStorageKey="filter-button-120322"
-          >
-            New
-          </Sticker>
         </S.FilterButton>
 
         <SortingDialog />

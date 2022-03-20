@@ -1,6 +1,7 @@
 import styled from 'styled-components'
-import { InnerContainer } from 'styles'
+import { InnerContainer, Clickable } from 'styles'
 import UnlicenseSvg from 'assets/svgs/unlicense.svg'
+import GithubSvg from 'assets/svgs/github.svg'
 
 export const Wrapper = styled.footer`
   ${InnerContainer}
@@ -22,7 +23,7 @@ export const Wrapper = styled.footer`
 `
 
 export const Title = styled.div`
-  margin-top: 12px;
+  margin-top: 19px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -68,4 +69,12 @@ export const Li = styled.li`
     color: var(--onPrimary);
     opacity: 0.5;
   }
+`
+
+export const GithubIcon = styled(GithubSvg)`
+  padding: 0;
+  border-radius: 50%;
+  fill: var(--onPrimary);
+
+  ${Clickable}
 `

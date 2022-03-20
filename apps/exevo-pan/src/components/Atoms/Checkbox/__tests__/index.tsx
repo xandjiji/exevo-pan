@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Checkbox from '..'
 
 const mockedOnChange = jest.fn()
@@ -89,5 +89,12 @@ describe('<Checkbox />', () => {
     userEvent.click(checkboxElement)
     expect(checkboxElement).toBeChecked()
     expect(mockedOnChange).toHaveBeenCalledTimes(1)
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Checkbox label="checkbox label" />,
+    )
+    await assertNoA11yViolations(container)
   })
 })

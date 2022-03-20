@@ -52,6 +52,15 @@ const Footer = (): JSX.Element => {
           xandjiji
         </a>
         .
+        <a
+          href={links.GITHUB_REPOSITORY}
+          target="_blank"
+          rel="noreferrer noopener external"
+          title={common.RepoLinkText}
+          style={{ marginLeft: 8 }}
+        >
+          <S.GithubIcon />
+        </a>
       </S.Title>
     </S.Wrapper>
   )

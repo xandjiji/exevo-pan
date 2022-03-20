@@ -6,6 +6,7 @@ import {
   rareAchievement,
   mount,
   storeMount,
+  store,
 } from 'data-dictionary/dist/dictionaries'
 import { auctions } from '../../constants'
 import {
@@ -38,10 +39,13 @@ export const randomItem = (): number => {
   return itemId
 }
 
-const randomCharacterItem = (): CharacterItem => ({
-  name: faker.lorem.words(randomRange({ min: 2, max: 4 })),
-  amount: randomRange(auctions.storeItem.amount),
-})
+const randomCharacterItems = (): CharacterItem[] =>
+  samplesFrom(store.scrapingTokens, randomRange(auctions.storeItem.array)).map(
+    (name) => ({
+      name,
+      amount: randomRange(auctions.storeItem.amount),
+    }),
+  )
 
 const randomCharmInfo = (): CharmInfo => {
   const spent = randomRange(auctions.charmInfo.spent)
@@ -99,7 +103,7 @@ export const randomCharacter = (): PartialCharacterObject => {
     storeMounts: samplesFrom(storeMount.tokens),
     outfits: randomOutfits(),
     storeOutfits: randomStoreOutfits(),
-    storeItems: randomArrayFrom(auctions.storeItem.array, randomCharacterItem),
+    storeItems: randomCharacterItems(),
     achievementPoints: randomRange(auctions.achievementPoints),
     preySlot: faker.datatype.boolean(),
     huntingSlot: faker.datatype.boolean(),

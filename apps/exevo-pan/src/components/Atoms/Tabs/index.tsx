@@ -66,6 +66,7 @@ const Group = forwardRef(
             id: getPanelId(childIndex),
             'aria-labelledby': getTabId(childIndex),
             active: childIndex === activeIndex,
+            label: undefined,
           })
         })}
       </S.Wrapper>

@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Button from '..'
 
 const mockOnClick = jest.fn()
@@ -41,5 +41,12 @@ describe('<Button />', () => {
 
     userEvent.keyboard('{space}')
     expect(mockOnClick).toHaveBeenCalledTimes(2)
+  })
+
+  test('a11y', async () => {
+    const { container } = renderWithProviders(
+      <Button type="button">test button</Button>,
+    )
+    await assertNoA11yViolations(container)
   })
 })

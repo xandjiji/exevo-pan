@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
-import { useRouter, NextRouter } from 'next/router'
-import { renderWithProviders, randomDataset } from 'utils/test'
-import { formatNumberWithCommas } from 'utils'
+import userEvent from '@testing-library/user-event'
+import { renderWithProviders, randomDataset, setup } from 'utils/test'
+import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
@@ -12,7 +12,7 @@ import CharacterCard from '..'
 const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
 
-const mockedUseRouter = useRouter as jest.MockedFunction<typeof useRouter>
+const mockedUseRouter = setup.useRouter()
 
 describe('<CharacterCard />', () => {
   test.each(characterList)('should write every info correctly', (character) => {
@@ -86,6 +86,36 @@ describe('<CharacterCard />', () => {
         `Quests: ${character.quests.length}/${quest.tokens.length}`,
       ),
     ).toBeInTheDocument()
+
+    const charmCheckbox = screen.getByRole('checkbox', {
+      name: 'Charm Expansion',
+    })
+    if (character.charmInfo.expansion) {
+      expect(charmCheckbox).toBeChecked()
+    } else {
+      expect(charmCheckbox).not.toBeChecked()
+    }
+
+    const preyCheckbox = screen.getByRole('checkbox', {
+      name: 'Prey Slot',
+    })
+    if (character.preySlot) {
+      expect(preyCheckbox).toBeChecked()
+    } else {
+      expect(preyCheckbox).not.toBeChecked()
+    }
+
+    const totalInvestment = formatNumberWithCommas(
+      calculateTotalInvestment(character),
+    )
+
+    if (totalInvestment === '0') {
+      expect(screen.queryByText(totalInvestment)).not.toBeInTheDocument()
+    } else {
+      expect(
+        screen.getByText(totalInvestment, { exact: false }),
+      ).toBeInTheDocument()
+    }
   })
 
   test.each(characterList)(
@@ -93,7 +123,7 @@ describe('<CharacterCard />', () => {
     (character) => {
       mockedUseRouter.mockReturnValue({
         pathname: routes.BAZAAR_HISTORY,
-      } as NextRouter)
+      } as any)
 
       renderWithProviders(<CharacterCard characterData={character} />)
       expect(
@@ -114,4 +144,25 @@ describe('<CharacterCard />', () => {
       expect(screen.getByText('Highlight your auction!')).toBeInTheDocument()
     },
   )
+
+  test('the character card should be able to be expanded', () => {
+    const [character] = characterList
+    renderWithProviders(<CharacterCard characterData={character} expandable />)
+
+    const [expandButton, storeSection] = screen.getAllByRole('button', {
+      name: 'Expand for full auction details',
+    })
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+
+    userEvent.click(expandButton)
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+
+    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+
+    userEvent.click(storeSection)
+    expect(screen.getByRole('dialog')).toBeInTheDocument()
+  })
 })

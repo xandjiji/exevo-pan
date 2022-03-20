@@ -1,6 +1,6 @@
 import { screen, fireEvent, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import AutocompleteInput from '..'
 import { mockedItemList } from './mock'
 
@@ -12,8 +12,7 @@ import { mockedItemList } from './mock'
 */
 
 const mockedOnItemSelect = jest.fn()
-const mockedScrollIntoView = jest.fn()
-window.HTMLElement.prototype.scrollIntoView = mockedScrollIntoView
+const mockedScrollIntoView = setup.scrollIntoView()
 
 describe('<AutocompleteInput />', () => {
   beforeEach(() => {

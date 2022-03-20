@@ -1,8 +1,7 @@
-import { randomDataset } from 'utils/test'
+import { randomDataset, setup } from 'utils/test'
 import AuctionsClient from '..'
 
-global.fetch = jest.fn()
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+const mockedFetch = setup.fetch()
 
 const { characterData } = randomDataset()
 

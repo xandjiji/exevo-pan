@@ -1,8 +1,8 @@
+import { setup } from 'utils/test'
 import { validate as validateUuid } from 'uuid'
 import MailCheckoutClient from '..'
 
-global.fetch = jest.fn()
-const mockedFetch = fetch as jest.MockedFunction<typeof fetch>
+const mockedFetch = setup.fetch()
 
 const mockPurchase = {
   selectedDates: [],
