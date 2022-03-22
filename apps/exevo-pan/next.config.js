@@ -13,5 +13,4 @@ module.exports = withReactSvg({
   webpack(config) {
     return config
   },
-  swcMinify: true,
 })
