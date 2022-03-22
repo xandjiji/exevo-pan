@@ -1,7 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import coinsGif from 'assets/tibiaCoins.gif'
-import { links } from 'Constants'
 import * as S from './styles'
 
 const CtaButton = ({
@@ -13,7 +12,7 @@ const CtaButton = ({
 
   return (
     <S.Button
-      href={links.COINS_REF}
+      href={common.TibiaCoinsCta.link}
       target="_blank"
       rel="noopener external nofollow"
       {...props}
@@ -21,7 +20,7 @@ const CtaButton = ({
       <S.ImgWrapper>
         <Image src={coinsGif} alt="Tibia Coins" width="24" height="24" />
       </S.ImgWrapper>
-      {common.TibiaCoinsCta}
+      {common.TibiaCoinsCta.text}
     </S.Button>
   )
 }

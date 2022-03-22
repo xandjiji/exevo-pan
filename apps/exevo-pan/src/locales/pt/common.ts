@@ -85,7 +85,10 @@ export default {
     auctionEnded: 'Leilão encerrado!',
   },
   RemoveItem: 'Remover item',
-  TibiaCoinsCta: 'Comprar Tibia Coins',
+  TibiaCoinsCta: {
+    text: 'Comprar Tibia Coins',
+    link: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
+  },
   CloseDrawerLabel: 'Fechar menu',
   RepoLinkText: 'Ir para este repositório',
   MadeBy: 'criado por',

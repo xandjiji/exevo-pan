@@ -85,7 +85,10 @@ export default {
     auctionEnded: 'Auction Ended!',
   },
   RemoveItem: 'Remove item',
-  TibiaCoinsCta: 'Get Tibia Coins',
+  TibiaCoinsCta: {
+    text: 'Get Tibia Coins',
+    link: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
+  },
   CloseDrawerLabel: 'Close drawer',
   RepoLinkText: 'Go to this repository',
   MadeBy: 'made by',

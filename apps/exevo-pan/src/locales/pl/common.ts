@@ -85,7 +85,10 @@ export default {
     auctionEnded: 'Aukcja zakończona!',
   },
   RemoveItem: 'Usuń przedmiot',
-  TibiaCoinsCta: 'Kup Tibia Coinsy',
+  TibiaCoinsCta: {
+    text: 'Kup Tibia Coinsy',
+    link: 'https://www.facebook.com/mehowcoins',
+  },
   CloseDrawerLabel: 'Zamknij szufladę',
   RepoLinkText: 'Idź do tego repozytorium',
   MadeBy: 'Stworzone przez',
