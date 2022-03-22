@@ -78,7 +78,7 @@ export const FiltersChipWrapper = styled.div`
 `
 
 export const Chip = styled(BaseChip)`
-  > div {
+  > span {
     margin-right: 4px !important;
   }
 `

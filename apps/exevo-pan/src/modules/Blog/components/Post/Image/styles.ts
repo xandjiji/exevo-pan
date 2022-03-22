@@ -12,7 +12,7 @@ export const Figure = styled.figure`
     margin-left: auto;
   }
 
-  > div {
+  > span {
     transition: box-shadow 0.2s ease-out;
   }
 
@@ -22,7 +22,7 @@ export const Figure = styled.figure`
   }
 
   &[data-loaded='true'] {
-    > div {
+    > span {
       ${Shadow}
     }
 
