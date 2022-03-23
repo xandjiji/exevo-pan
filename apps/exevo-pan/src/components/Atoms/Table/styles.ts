@@ -29,7 +29,7 @@ export const CardHead = styled.div`
 export const Title = styled.h4`
   margin-top: 4px;
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 1px;
   color: var(--onPrimary);
 `
@@ -60,7 +60,7 @@ export const Head = styled.thead`
 export const HeadColumn = styled.th<HeadColumnStyleProps>`
   padding-bottom: 6px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--onSurface);
 
   ${({ highlighted, desc }) =>

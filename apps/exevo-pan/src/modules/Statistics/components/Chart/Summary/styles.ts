@@ -20,7 +20,7 @@ export const Value = styled.span`
   display: flex;
   align-items: center;
   font-size: 20px;
-  font-weight: 600;
+  font-weight: 700;
   color: var(--onSurface);
 `
 
@@ -35,7 +35,7 @@ export const Percentage = styled.span<PositiveStyleProps>`
   align-items: center;
 
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: ${({ positive }) => (positive ? 'var(--green)' : 'var(--red)')};
 
   ${TrendIcon} {

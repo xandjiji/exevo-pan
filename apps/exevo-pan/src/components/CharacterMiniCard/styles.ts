@@ -15,7 +15,7 @@ export const Nickname = styled.p`
     display: flex;
     align-items: center;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--primary);
     filter: brightness(130%);
 
