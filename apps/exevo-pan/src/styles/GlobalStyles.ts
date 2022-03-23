@@ -27,7 +27,8 @@ const GlobalStyles = createGlobalStyle`
   }
 
   body {
-    font: 400 16px Roboto, sans-serif;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
     background-color: var(--background);
     color: var(--onSurface);
     transition: background-color 0.2s ease-out;
