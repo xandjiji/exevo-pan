@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { StyledComponent, DefaultTheme } from 'styled-components'
 import { Shadow, InnerContainer, Smooth } from 'styles'
 
 export const Nav = styled.nav`
@@ -11,7 +11,7 @@ export const Nav = styled.nav`
   background-color: var(--darkerPrimary);
 
   overflow: auto;
-`
+` as StyledComponent<'div', DefaultTheme, Record<string, any>, never>
 
 export const Ul = styled.ul`
   display: flex;

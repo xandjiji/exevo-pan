@@ -93,7 +93,9 @@ const Checkout = (): JSX.Element => {
     submit()
   }
 
-  const handleKeypress = (event: React.KeyboardEvent) => {
+  const handleKeypress: React.KeyboardEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
     if (event.code === 'Enter' && !isButtonDisabled) {
       validateAndSubmit()
     }

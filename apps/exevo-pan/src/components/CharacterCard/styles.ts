@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { StyledComponent, DefaultTheme } from 'styled-components'
 import { Checkbox as BaseCheckbox } from 'components/Atoms'
 import Image from 'next/image'
 import { MaterialCard, Clickable } from 'styles'
@@ -50,7 +50,7 @@ export const Wrapper = styled.article`
       }
     }
   }
-`
+` as StyledComponent<'div', DefaultTheme, Record<string, any>, never>
 
 export const Button = styled.button`
   ${Clickable}
