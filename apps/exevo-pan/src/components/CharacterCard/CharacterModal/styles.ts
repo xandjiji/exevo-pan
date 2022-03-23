@@ -68,7 +68,7 @@ const Column = styled(Spacer)`
 
 export const DesktopColumn = {
   Left: styled(Column)`
-    padding-top: 3px;
+    padding-top: 6px;
 
     @media (min-width: 768px) {
       flex-shrink: 0;
