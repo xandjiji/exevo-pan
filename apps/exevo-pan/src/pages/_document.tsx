@@ -42,17 +42,18 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <link
+            rel="preload"
+            href="/fonts/roboto-400.woff2"
+            as="font"
+            type="font/woff2"
+            crossOrigin="anonymous"
+          />
+
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
           <meta name="theme-color" content="#3F51B5" />
           <meta name="msapplication-navbutton-color" content="#3F51B5" />
-
-          <link rel="preconnect" href="https://fonts.gstatic.com/" />
-          <link rel="dns-prefetch" href="//fonts.googleapis.com" />
-          <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap"
-            rel="stylesheet"
-          />
           <link rel="icon" href="/favicon.ico" />
 
           <meta

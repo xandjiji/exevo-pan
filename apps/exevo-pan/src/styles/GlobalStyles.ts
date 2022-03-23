@@ -5,6 +5,27 @@ import CustomScrollbar from './CustomScrollbar'
 const GlobalStyles = createGlobalStyle`
   ${Reset}
 
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 300;
+    src: url('/fonts/roboto-300.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/roboto-400.woff2') format('woff2');
+  }
+
+  @font-face {
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 700;
+    src: url('/fonts/roboto-700.woff2') format('woff2');
+  }
+
   :root {
     --background: #eeeeee;
     --surface: #ffffff;
