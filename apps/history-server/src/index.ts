@@ -4,6 +4,7 @@ import { deserializeBody } from 'shared-utils/dist/contracts/Filters/utils'
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
+import { revalidate } from './revalidate'
 import { exposeLocalhost } from './localtunnel'
 
 const { PORT, STAGING } = process.env
@@ -48,6 +49,8 @@ const main = async () => {
     )
   })
 
+  broadcast(`Revalidating /bazaar-history ...`, 'neutral')
+  revalidate().then(() => broadcast(`Pages revalidated!`, 'success'))
   if (STAGING) exposeLocalhost()
 }
 
