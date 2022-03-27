@@ -20,6 +20,29 @@ const GlobalStyles = createGlobalStyle`
     --battleGreen: #43b600;
     --battleYellow: #ffdd00;
     --primaryVariantHighlight: #e7e8ee;
+    --kwai: #ff7705;
+    --kwaiSurface: #fff7f0;
+    --kwaiVariant: #ffc696;
+  }
+
+  [data-theme='dark'] {
+    --background: #202225;
+    --surface: #36393f;
+    --onsurface: #ffffff;
+    --separator: #72767d;
+    --primary: #9857e7;
+    --onprimary: #ffffff;
+    --primaryvariant: #5e4480;
+    --darkerprimary: #581f9b;
+    --green: #5a9935;
+    --red: #ff5b5b;
+    --alert: #f9eec1;
+    --battlegreen: #43b600;
+    --battleyellow: #ffdd00;
+    --primaryvarianthighlight: #714ca1;
+    --kwai: #ff7705;
+    --kwaisurface: #453d3c;
+    --kwaivariant: #995f2e;
   }
 
   html {

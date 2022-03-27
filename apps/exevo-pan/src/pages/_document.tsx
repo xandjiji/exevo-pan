@@ -88,7 +88,6 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
-          <script type="text/javascript" src="/loadTheme.js" />
           <Main />
           <NextScript />
         </body>
