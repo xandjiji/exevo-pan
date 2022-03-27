@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
+import { useTheme } from 'next-themes'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { Link, Switch, CtaButton } from 'components/Atoms/'
-import { useTheme } from 'contexts/useTheme'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
 import LanguagePicker from './LanguagePicker'
@@ -29,8 +29,13 @@ const Header = ({
   const [menuOpen, setMenuOpen] = useState(false)
   const [languageOpen, setLanguageOpen] = useState(false)
 
-  const { currentTheme, toggleTheme } = useTheme()
+  const { resolvedTheme, setTheme } = useTheme()
   const { pathname } = useRouter()
+
+  const toggleTheme = useCallback(
+    () => setTheme(resolvedTheme === 'light' ? 'dark' : 'light'),
+    [resolvedTheme, setTheme],
+  )
 
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), [])
 
@@ -92,7 +97,7 @@ const Header = ({
           />
           {process.browser && (
             <Switch
-              active={currentTheme === 'dark-theme'}
+              active={resolvedTheme === 'dark'}
               onClick={toggleTheme}
               icon={<S.MoonIcon />}
               aria-label={common.Header.themeSwitch}
