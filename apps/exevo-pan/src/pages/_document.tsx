@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -80,7 +81,6 @@ export default class MyDocument extends Document {
             src={`https://www.googletagmanager.com/gtag/js?id=${google.GTM_ID}`}
           />
           <script
-            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
@@ -92,7 +92,12 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
-          <script type="text/javascript" src="/loadThemeMin.js" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                '!function(t){const e="light"===t?"#3F51B5":"#9857E7";document.documentElement.setAttribute("data-theme",t),document.getElementById("address-bar-1")?.setAttribute("content",e),document.getElementById("address-bar-2")?.setAttribute("content",e)}(function(){if("undefined"!=typeof window){const t=window.localStorage.getItem("data-theme");if(t)return t;if(window.matchMedia("(prefers-color-scheme: dark)").matches)return"dark"}return"light"}());',
+            }}
+          />
           <Main />
           <NextScript />
         </body>

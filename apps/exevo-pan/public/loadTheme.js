@@ -1,3 +1,5 @@
+/* minify and add to _document.tsx */
+
 function getInitialTheme() {
   if (typeof window !== 'undefined') {
     const persistedColorPreference = window.localStorage.getItem('data-theme')
