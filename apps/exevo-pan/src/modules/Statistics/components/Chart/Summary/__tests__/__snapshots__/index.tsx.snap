@@ -2,7 +2,7 @@
 
 exports[`<Summary /> should style trend red/green 1`] = `
 <span
-  class="styles__Percentage-sc-5rbl8j-4 drShaa"
+  class="styles__Percentage-sc-5rbl8j-4 dXHqCH"
 >
   <image
     aria-label="Upwards trend"
@@ -14,7 +14,7 @@ exports[`<Summary /> should style trend red/green 1`] = `
 
 exports[`<Summary /> should style trend red/green 3`] = `
 <span
-  class="styles__Percentage-sc-5rbl8j-4 fiolhQ"
+  class="styles__Percentage-sc-5rbl8j-4 jgvhKN"
 >
   <image
     aria-label="Downwards trend"
@@ -33,7 +33,7 @@ exports[`<Summary /> should style trend red/green 4`] = `
 
 exports[`<Summary /> should style trend red/green 5`] = `
 <span
-  class="styles__Percentage-sc-5rbl8j-4 drShaa"
+  class="styles__Percentage-sc-5rbl8j-4 dXHqCH"
 >
   <image
     aria-label="Upwards trend"

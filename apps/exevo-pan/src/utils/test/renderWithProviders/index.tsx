@@ -1,7 +1,6 @@
 import { ReactElement } from 'react'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { render, RenderResult, RenderOptions } from '@testing-library/react'
-import { ThemeProvider } from 'next-themes'
 import { TranslationsProvider } from 'contexts/useTranslation'
 import * as Locales from 'locales'
 
@@ -11,9 +10,7 @@ Object.keys(Locales).forEach((locale) => {
 })
 
 export const wrapWithProviders = (ui: ReactElement): ReactElement => (
-  <TranslationsProvider value={{ translations }}>
-    <ThemeProvider>{ui}</ThemeProvider>
-  </TranslationsProvider>
+  <TranslationsProvider value={{ translations }}>{ui}</TranslationsProvider>
 )
 
 export const renderWithProviders = (

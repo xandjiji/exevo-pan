@@ -15,12 +15,12 @@ exports[`<Table /> head column highlight prop should display asc/desc symbol 1`]
           class="styles__Row-sc-1fjp964-4 Mnsia"
         >
           <th
-            class="styles__HeadColumn-sc-1fjp964-6 ljkzzB"
+            class="styles__HeadColumn-sc-1fjp964-6 jKjivA"
           >
             #
           </th>
           <th
-            class="styles__HeadColumn-sc-1fjp964-6 jYwysM"
+            class="styles__HeadColumn-sc-1fjp964-6 cIIfGF"
           >
             Nickname
           </th>
@@ -46,12 +46,12 @@ exports[`<Table /> head column highlight prop should display asc/desc symbol 2`]
           class="styles__Row-sc-1fjp964-4 Mnsia"
         >
           <th
-            class="styles__HeadColumn-sc-1fjp964-6 fvlJDH"
+            class="styles__HeadColumn-sc-1fjp964-6 dWkszG"
           >
             #
           </th>
           <th
-            class="styles__HeadColumn-sc-1fjp964-6 jYwysM"
+            class="styles__HeadColumn-sc-1fjp964-6 cIIfGF"
           >
             Nickname
           </th>
