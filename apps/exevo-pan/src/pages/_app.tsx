@@ -44,11 +44,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           content="https://i.imgur.com/obDJJOI.png"
         />
       </Head>
+      <GlobalStyles />
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
           <ThemeProvider>
             <Component {...pageProps} />
-            <GlobalStyles />
           </ThemeProvider>
         </ErrorBoundary>
       </TranslationsProvider>
