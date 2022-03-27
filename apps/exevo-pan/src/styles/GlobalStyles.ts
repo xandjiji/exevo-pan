@@ -28,21 +28,21 @@ const GlobalStyles = createGlobalStyle`
   [data-theme='dark'] {
     --background: #202225;
     --surface: #36393f;
-    --onsurface: #ffffff;
+    --onSurface: #ffffff;
     --separator: #72767d;
     --primary: #9857e7;
-    --onprimary: #ffffff;
-    --primaryvariant: #5e4480;
-    --darkerprimary: #581f9b;
+    --onPrimary: #ffffff;
+    --primaryVariant: #5e4480;
+    --darkerPrimary: #581f9b;
     --green: #5a9935;
     --red: #ff5b5b;
     --alert: #f9eec1;
-    --battlegreen: #43b600;
-    --battleyellow: #ffdd00;
-    --primaryvarianthighlight: #714ca1;
+    --battleGreen: #43b600;
+    --battleYellow: #ffdd00;
+    --primaryVariantHighlight: #714ca1;
     --kwai: #ff7705;
-    --kwaisurface: #453d3c;
-    --kwaivariant: #995f2e;
+    --kwaiSurface: #453d3c;
+    --kwaiVariant: #995f2e;
   }
 
   html {
