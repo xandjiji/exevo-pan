@@ -50,7 +50,9 @@ const main = async () => {
   })
 
   broadcast(`Revalidating /bazaar-history ...`, 'neutral')
-  revalidate().then(() => broadcast(`Pages revalidated!`, 'success'))
+  revalidate()
+    .catch(() => broadcast(`Pages could not be revalidated!`, 'fail'))
+    .then(() => broadcast(`Pages revalidated!`, 'success'))
   if (STAGING) exposeLocalhost()
 }
 
