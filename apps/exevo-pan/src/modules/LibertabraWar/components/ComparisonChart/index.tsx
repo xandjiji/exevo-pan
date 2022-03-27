@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useCallback } from 'react'
-import { useTheme } from 'hooks'
 import { Line } from 'react-chartjs-2'
+import { useTheme } from 'contexts/useTheme'
 import { compactNumberFormatter, formatNumberWithCommas } from 'utils'
 import * as S from './styles'
 import { ComparisonChartProps } from './types'

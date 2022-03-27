@@ -8,3 +8,5 @@ const Themes: Record<string, Theme> & { default: Theme } = {
 }
 
 export default Themes
+
+export const DEFAULT_THEME = 'light'

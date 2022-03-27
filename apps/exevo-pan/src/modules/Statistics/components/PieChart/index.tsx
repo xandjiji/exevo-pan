@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useMemo, memo } from 'react'
 import { Doughnut } from 'react-chartjs-2'
-import { useTheme, useUuid } from 'hooks'
+import { useTheme } from 'contexts/useTheme'
+import { useUuid } from 'hooks'
 import { capitalizeFirstLetter } from 'utils'
 import * as S from './styles'
 import { PieChartProps } from './types'

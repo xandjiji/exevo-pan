@@ -44,8 +44,12 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
-          <meta name="theme-color" content="#3F51B5" />
-          <meta name="msapplication-navbutton-color" content="#3F51B5" />
+          <meta id="address-bar-1" name="theme-color" content="#3F51B5" />
+          <meta
+            id="address-bar-2"
+            name="msapplication-navbutton-color"
+            content="#3F51B5"
+          />
 
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
@@ -88,6 +92,7 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
+          <script type="text/javascript" src="/loadThemeMin.js" />
           <Main />
           <NextScript />
         </body>

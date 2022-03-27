@@ -1,6 +1,9 @@
 export type UseThemeValues = {
   theme: string
   toggleTheme: () => void
-  setTheme: (theme: string) => void
   colors: Theme
+}
+
+export interface ThemeProviderProps {
+  children: React.ReactNode
 }
