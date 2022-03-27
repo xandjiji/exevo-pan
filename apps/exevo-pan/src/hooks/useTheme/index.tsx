@@ -7,13 +7,19 @@ export default (): UseThemeValues => {
   const { resolvedTheme, setTheme } = useTheme()
 
   const theme = resolvedTheme ?? 'light'
-
-  const toggleTheme = useCallback(
-    () => setTheme(theme === 'light' ? 'dark' : 'light'),
-    [theme, setTheme],
-  )
-
   const colors = Themes[theme] ?? Themes.default
+
+  const toggleTheme = useCallback(() => {
+    setTheme(theme === 'light' ? 'dark' : 'light')
+
+    document
+      .querySelector('meta[name=theme-color]')
+      ?.setAttribute('content', colors.primary)
+
+    document
+      .querySelector('meta[name=msapplication-navbutton-color]')
+      ?.setAttribute('content', colors.primary)
+  }, [theme, colors, setTheme])
 
   return { theme, toggleTheme, setTheme, colors }
 }
