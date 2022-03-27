@@ -16,7 +16,7 @@ export const FloatingLabel = styled.div`
   background-color: var(--alert);
 
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   color: #000;
 
   ${Shadow}

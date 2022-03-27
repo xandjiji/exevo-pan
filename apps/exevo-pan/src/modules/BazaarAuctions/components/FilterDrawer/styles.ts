@@ -38,7 +38,7 @@ export const ChipWrapper = styled.div`
 `
 
 export const IconChip = styled(BaseChip)`
-  > div {
+  > span {
     margin-right: 6px !important;
   }
 `

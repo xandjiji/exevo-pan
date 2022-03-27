@@ -2,8 +2,8 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ErrorBoundary from 'components/ErrorBoundary'
-import { TranslationsProvider } from 'contexts/useTranslation'
 import { ThemeProvider } from 'contexts/useTheme'
+import { TranslationsProvider } from 'contexts/useTranslation'
 import { gtag } from 'utils'
 import { GlobalStyles } from 'styles'
 import { AppProps } from 'next/app'
@@ -44,11 +44,11 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           content="https://i.imgur.com/obDJJOI.png"
         />
       </Head>
+      <GlobalStyles />
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
           <ThemeProvider>
             <Component {...pageProps} />
-            <GlobalStyles />
           </ThemeProvider>
         </ErrorBoundary>
       </TranslationsProvider>

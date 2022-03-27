@@ -11,7 +11,7 @@ export const Value = styled.div`
   background-color: var(--primary);
   color: var(--onPrimary);
   text-align: right;
-  font-weight: 600;
+  font-weight: 700;
   transition: all 0.2s ease-out;
   transition-property: background-color, color;
 `

@@ -32,7 +32,9 @@ const AutocompleteInput = ({
     [itemList],
   )
 
-  const handleKeyboard = (event: React.KeyboardEvent) => {
+  const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
     switch (event.code) {
       case 'Tab':
       case 'Escape':

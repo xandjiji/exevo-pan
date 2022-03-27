@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import Document, {
   DocumentContext,
   DocumentInitialProps,
@@ -44,15 +45,24 @@ export default class MyDocument extends Document {
         <Head>
           <meta charSet="utf-8" />
           <meta name="robots" content="all" />
-          <meta name="theme-color" content="#3F51B5" />
-          <meta name="msapplication-navbutton-color" content="#3F51B5" />
+          <meta id="address-bar-1" name="theme-color" content="#3F51B5" />
+          <meta
+            id="address-bar-2"
+            name="msapplication-navbutton-color"
+            content="#3F51B5"
+          />
 
-          <link rel="preconnect" href="https://fonts.gstatic.com/" />
-          <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link
-            href="https://fonts.googleapis.com/css?family=Roboto:300,400,600,700&display=swap"
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin="anonymous"
+          />
+          <link
+            href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap"
             rel="stylesheet"
           />
+
           <link rel="icon" href="/favicon.ico" />
 
           <meta
@@ -71,7 +81,6 @@ export default class MyDocument extends Document {
             src={`https://www.googletagmanager.com/gtag/js?id=${google.GTM_ID}`}
           />
           <script
-            // eslint-disable-next-line react/no-danger
             dangerouslySetInnerHTML={{
               __html: `
               window.dataLayer = window.dataLayer || [];
@@ -83,7 +92,12 @@ export default class MyDocument extends Document {
           />
         </Head>
         <body>
-          <script type="text/javascript" src="/loadTheme.js" />
+          <script
+            dangerouslySetInnerHTML={{
+              __html:
+                '!function(t){const e="light"===t?"#3F51B5":"#9857E7";document.documentElement.setAttribute("data-theme",t),document.getElementById("address-bar-1")?.setAttribute("content",e),document.getElementById("address-bar-2")?.setAttribute("content",e)}(function(){if("undefined"!=typeof window){const t=window.localStorage.getItem("data-theme");if(t)return t;if(window.matchMedia("(prefers-color-scheme: dark)").matches)return"dark"}return"light"}());',
+            }}
+          />
           <Main />
           <NextScript />
         </body>

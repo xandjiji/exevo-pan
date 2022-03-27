@@ -14,3 +14,8 @@ cp ~/exevo-pan/apps/bazaar-scraper/Output/ItemsData.json ~/exevo-pan/apps/curren
 
 cd ~/exevo-pan/apps/current-auctions-lambda
 yarn deploy:fast
+
+sleep 10s
+cd ~/exevo-pan/apps/bazaar-scraper/
+yarn revalidate
+yarn revalidate highlight-auction

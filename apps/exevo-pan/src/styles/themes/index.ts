@@ -1,10 +1,12 @@
-import LightTheme from './LightTheme'
-import DarkTheme from './DarkTheme'
+import light from './light'
+import dark from './dark'
 
-const Themes = {
-  [LightTheme.title]: { ...LightTheme, next: DarkTheme.title },
-  [DarkTheme.title]: { ...DarkTheme, next: LightTheme.title },
-  default: { ...LightTheme, next: DarkTheme.title },
+const Themes: Record<string, Theme> & { default: Theme } = {
+  light,
+  dark,
+  default: light,
 }
 
 export default Themes
+
+export const DEFAULT_THEME = 'light'

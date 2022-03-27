@@ -1,40 +1,40 @@
-import { createContext, useContext, useState } from 'react'
-import { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import Themes from 'styles/themes'
+import { createContext, useContext, useState, useCallback } from 'react'
+import Themes, { DEFAULT_THEME } from 'styles/themes'
 import { localStorageKeys } from 'Constants'
 import { getInitialTheme, injectCssVariables } from './utils'
-import { ThemeContextState, ThemeProviderProps } from './types'
+import { UseThemeValues, ThemeProviderProps } from './types'
 
-const defaultThemeState: ThemeContextState = {
-  currentTheme: Themes.default.title,
+const defaultThemeState: UseThemeValues = {
+  theme: DEFAULT_THEME,
   toggleTheme: () => null,
+  colors: Themes.default,
 }
 
-const ThemeContext = createContext<ThemeContextState>(defaultThemeState)
+const ThemeContext = createContext<UseThemeValues>(defaultThemeState)
 
 export const ThemeProvider = ({
   children,
 }: ThemeProviderProps): JSX.Element => {
-  const [currentThemeTitle, setCurrentThemeTitle] =
-    useState<string>(getInitialTheme)
-  const currentTheme = Themes[currentThemeTitle]
+  const [theme, setTheme] = useState<string>(getInitialTheme)
 
-  const toggleTheme = () => {
-    const newThemeTitle = currentTheme.next
-    setCurrentThemeTitle(newThemeTitle)
-    injectCssVariables(newThemeTitle)
-    localStorage.setItem(localStorageKeys.THEME_DATA, newThemeTitle)
-  }
+  const toggleTheme = useCallback(() => {
+    setTheme((currentTheme) => {
+      const newTheme = currentTheme === 'light' ? 'dark' : 'light'
+
+      injectCssVariables(newTheme)
+      localStorage.setItem(localStorageKeys.THEME_DATA, newTheme)
+
+      return newTheme
+    })
+  }, [])
+
+  const colors = Themes[theme] ?? Themes.default
 
   return (
-    <StyledThemeProvider theme={currentTheme}>
-      <ThemeContext.Provider
-        value={{ currentTheme: currentThemeTitle, toggleTheme }}
-      >
-        {children}
-      </ThemeContext.Provider>
-    </StyledThemeProvider>
+    <ThemeContext.Provider value={{ theme, toggleTheme, colors }}>
+      {children}
+    </ThemeContext.Provider>
   )
 }
 
-export const useTheme = (): ThemeContextState => useContext(ThemeContext)
+export const useTheme = (): UseThemeValues => useContext(ThemeContext)

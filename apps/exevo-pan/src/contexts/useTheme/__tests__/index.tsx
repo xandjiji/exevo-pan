@@ -19,57 +19,57 @@ describe('useTheme()', () => {
   test('should work correctly, with empty localStorage', () => {
     const { result } = renderHook(() => useTheme(), { wrapper: ThemeProvider })
 
-    expect(result.current.currentTheme).toEqual('light-theme')
+    expect(result.current.theme).toEqual('light')
     expect(mockGetItem).toBeCalledTimes(1)
     expect(mockGetItem).toHaveBeenLastCalledWith(localStorageKeys.THEME_DATA)
 
     act(() => {
       result.current.toggleTheme()
     })
-    expect(result.current.currentTheme).toEqual('dark-theme')
+    expect(result.current.theme).toEqual('dark')
     expect(mockSetItem).toBeCalledTimes(1)
     expect(mockSetItem).toHaveBeenLastCalledWith(
       localStorageKeys.THEME_DATA,
-      'dark-theme',
+      'dark',
     )
 
     act(() => {
       result.current.toggleTheme()
     })
-    expect(result.current.currentTheme).toEqual('light-theme')
+    expect(result.current.theme).toEqual('light')
     expect(mockSetItem).toBeCalledTimes(2)
     expect(mockSetItem).toHaveBeenLastCalledWith(
       localStorageKeys.THEME_DATA,
-      'light-theme',
+      'light',
     )
   })
 
   test('should work correctly, with an initial localStorage value', () => {
-    mockGetItem.mockReturnValueOnce('dark-theme')
+    mockGetItem.mockReturnValueOnce('dark')
     const { result } = renderHook(() => useTheme(), { wrapper: ThemeProvider })
 
-    expect(result.current.currentTheme).toEqual('dark-theme')
+    expect(result.current.theme).toEqual('dark')
     expect(mockGetItem).toBeCalledTimes(1)
     expect(mockGetItem).toHaveBeenLastCalledWith(localStorageKeys.THEME_DATA)
 
     act(() => {
       result.current.toggleTheme()
     })
-    expect(result.current.currentTheme).toEqual('light-theme')
+    expect(result.current.theme).toEqual('light')
     expect(mockSetItem).toBeCalledTimes(1)
     expect(mockSetItem).toHaveBeenLastCalledWith(
       localStorageKeys.THEME_DATA,
-      'light-theme',
+      'light',
     )
 
     act(() => {
       result.current.toggleTheme()
     })
-    expect(result.current.currentTheme).toEqual('dark-theme')
+    expect(result.current.theme).toEqual('dark')
     expect(mockSetItem).toBeCalledTimes(2)
     expect(mockSetItem).toHaveBeenLastCalledWith(
       localStorageKeys.THEME_DATA,
-      'dark-theme',
+      'dark',
     )
   })
 
@@ -77,28 +77,28 @@ describe('useTheme()', () => {
     mockGetItem.mockReturnValueOnce('pink-theme')
     const { result } = renderHook(() => useTheme(), { wrapper: ThemeProvider })
 
-    expect(result.current.currentTheme).toEqual('light-theme')
+    expect(result.current.theme).toEqual('light')
     expect(mockGetItem).toBeCalledTimes(1)
     expect(mockGetItem).toHaveBeenLastCalledWith(localStorageKeys.THEME_DATA)
 
     act(() => {
       result.current.toggleTheme()
     })
-    expect(result.current.currentTheme).toEqual('dark-theme')
+    expect(result.current.theme).toEqual('dark')
     expect(mockSetItem).toBeCalledTimes(1)
     expect(mockSetItem).toHaveBeenLastCalledWith(
       localStorageKeys.THEME_DATA,
-      'dark-theme',
+      'dark',
     )
 
     act(() => {
       result.current.toggleTheme()
     })
-    expect(result.current.currentTheme).toEqual('light-theme')
+    expect(result.current.theme).toEqual('light')
     expect(mockSetItem).toBeCalledTimes(2)
     expect(mockSetItem).toHaveBeenLastCalledWith(
       localStorageKeys.THEME_DATA,
-      'light-theme',
+      'light',
     )
   })
 })

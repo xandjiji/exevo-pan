@@ -1,4 +1,4 @@
-import Themes from 'styles/themes'
+import Themes, { DEFAULT_THEME } from 'styles/themes'
 import { localStorageKeys } from 'Constants'
 
 export const getInitialTheme = (): string => {
@@ -6,29 +6,26 @@ export const getInitialTheme = (): string => {
     const persistedColorPreference = window.localStorage.getItem(
       localStorageKeys.THEME_DATA,
     )
-    if (persistedColorPreference && Themes[persistedColorPreference]?.title)
+    if (persistedColorPreference && Themes[persistedColorPreference])
       return persistedColorPreference
 
     const browserDefault = window.matchMedia('(prefers-color-scheme: dark)')
-    if (browserDefault?.matches) return 'dark-theme'
+    if (browserDefault?.matches) return 'dark'
   }
 
-  return Themes.default.title
+  return DEFAULT_THEME
 }
 
-export const injectCssVariables = (themeName: keyof typeof Themes): void => {
-  const { colors } = Themes[themeName]
-  const root = document.documentElement
+export const injectCssVariables = (themeName: string): void => {
+  const primaryColor = themeName === 'light' ? '#3F51B5' : '#9857E7'
 
-  Object.keys(colors).forEach((key) => {
-    root.style.setProperty(`--${key}`, colors[key as keyof typeof colors])
-  })
+  document.documentElement.setAttribute('data-theme', themeName)
 
   document
-    .querySelector('meta[name=theme-color]')
-    ?.setAttribute('content', colors.primary)
+    .getElementById('address-bar-1')
+    ?.setAttribute('content', primaryColor)
 
   document
-    .querySelector('meta[name=msapplication-navbutton-color]')
-    ?.setAttribute('content', colors.primary)
+    .getElementById('address-bar-2')
+    ?.setAttribute('content', primaryColor)
 }

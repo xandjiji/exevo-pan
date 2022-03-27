@@ -30,7 +30,7 @@ export const Wrapper = styled(Background)`
     width: 56px;
     height: 56px;
 
-    > div {
+    > span {
       left: -24px;
       top: -24px;
     }
