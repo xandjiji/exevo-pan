@@ -252,7 +252,6 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       },
       locale: locale as RegisteredLocale,
     },
-    revalidate: 60000,
   }
 }
 
