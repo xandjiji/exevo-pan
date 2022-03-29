@@ -12,11 +12,6 @@ export const Wrapper = styled.article`
   ${MaterialCard}
   padding: 16px;
 
-  &:hover {
-    position: relative;
-    z-index: 5;
-  }
-
   &[data-highlighted='true'] {
     --surface: var(--kwaiSurface);
     --primary: var(--kwai);
@@ -111,10 +106,6 @@ export const FlexColumn = styled.div`
   &[data-store-column='true'] > * {
     height: 18px;
   }
-
-  &[data-button='true'] {
-    cursor: pointer;
-  }
 `
 
 export const Checkbox = styled(BaseCheckbox).attrs({
@@ -145,12 +136,15 @@ export const Body = styled.div`
   gap: 12px;
   margin-bottom: 12px;
 
-  &[data-lazy='true'] {
+  &[data-lazy='true']:not(:hover) {
     content-visibility: auto;
     contain-intrinsic-size: ${FIXED_BODY_HEIGHT}px;
   }
 
-  &&:hover {
-    content-visibility: unset;
+  @media (min-width: 768px) {
+    &&[data-lazy='true'] {
+      content-visibility: unset;
+      contain-intrinsic-size: unset;
+    }
   }
 `

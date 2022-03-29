@@ -109,13 +109,7 @@ const CharacterCard = ({
               <QuestsTooltip items={quests} />
             </S.FlexColumn>
 
-            <S.FlexColumn
-              data-store-column
-              data-button={expandable}
-              as={expandable ? 'button' : undefined}
-              aria-label={common.CharacterCard.expand}
-              onClick={expandable ? () => setExpanded(true) : undefined}
-            >
+            <S.FlexColumn data-store-column>
               <S.Checkbox
                 label="Charm Expansion"
                 checked={charmInfo.expansion}
