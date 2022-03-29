@@ -12,6 +12,10 @@ export const Wrapper = styled.article`
   ${MaterialCard}
   padding: 16px;
 
+  &[role='button'] {
+    cursor: pointer;
+  }
+
   &[data-highlighted='true'] {
     --surface: var(--kwaiSurface);
     --primary: var(--kwai);

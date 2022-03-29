@@ -41,6 +41,7 @@ const CharacterMiniCard = ({
               href={linkUrl}
               target="_blank"
               rel="noreferrer noopener external"
+              onClick={(event) => event.stopPropagation()}
             >
               <S.ExternalIcon />
               {common.CharacterTooltipLabel}

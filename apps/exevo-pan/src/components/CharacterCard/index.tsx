@@ -1,6 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useState, useRef, useMemo } from 'react'
-import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
+import { memo, useState, useRef, useMemo, useCallback } from 'react'
+import {
+  formatNumberWithCommas,
+  calculateTotalInvestment,
+  checkKeyboardTrigger,
+} from 'utils'
 import {
   Head,
   TagButton,
@@ -56,11 +60,24 @@ const CharacterCard = ({
 
   const [isExpanded, setExpanded] = useState(false)
 
+  const expandCard = useCallback(() => setExpanded(true), [])
+  const handleKeyPress = useCallback(
+    (event: React.KeyboardEvent) => {
+      if (checkKeyboardTrigger(event.code)) expandCard()
+    },
+    [expandCard],
+  )
+
   return (
     <>
       <S.Wrapper
         ref={ref as React.RefObject<HTMLDivElement>}
         data-highlighted={highlighted}
+        role={expandable ? 'button' : undefined}
+        tabIndex={expandable ? 1 : undefined}
+        aria-label={expandable ? common.CharacterCard.expand : undefined}
+        onClick={expandable ? expandCard : undefined}
+        onKeyPress={expandable ? handleKeyPress : undefined}
         {...props}
       >
         <Head
@@ -72,15 +89,6 @@ const CharacterCard = ({
           serverName={serverData.serverName}
         >
           {highlighted && <TagButton />}
-          {expandable && (
-            <S.Button
-              aria-label={common.CharacterCard.expand}
-              type="button"
-              onClick={() => setExpanded(true)}
-            >
-              <S.Icons.Expand />
-            </S.Button>
-          )}
         </Head>
 
         <S.Body data-lazy={lazyRender}>

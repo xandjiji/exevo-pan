@@ -85,7 +85,6 @@ export const Text = styled.p`
 `
 
 export const Wrapper = styled.div<{ animation: HoveredState }>`
-  margin: 0 6px;
   position: relative;
   align-self: flex-start;
   flex-shrink: 0;

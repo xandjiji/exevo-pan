@@ -149,7 +149,7 @@ describe('<CharacterCard />', () => {
     const [character] = characterList
     renderWithProviders(<CharacterCard characterData={character} expandable />)
 
-    const [expandButton, storeSection] = screen.getAllByRole('button', {
+    const expandButton = screen.getByRole('button', {
       name: 'Expand for full auction details',
     })
 
@@ -161,8 +161,5 @@ describe('<CharacterCard />', () => {
     userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-
-    userEvent.click(storeSection)
-    expect(screen.getByRole('dialog')).toBeInTheDocument()
   })
 })

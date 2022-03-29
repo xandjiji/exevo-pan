@@ -36,6 +36,7 @@ const TagButton = ({
         onMouseOut={handleUnhover}
         onBlur={handleUnhover}
         aria-describedby={labelId}
+        onClick={(event) => event.stopPropagation()}
         {...props}
       >
         <S.IconWrapper>
