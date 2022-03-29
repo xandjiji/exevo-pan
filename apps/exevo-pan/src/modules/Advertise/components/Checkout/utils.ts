@@ -8,6 +8,8 @@ const buildUrl = (nickname: string): string =>
 
 export const validateCharacter = async (nickname: string): Promise<boolean> => {
   try {
+    return true
+    /* @ ToDo: custom validation endpoint */
     const response = await fetch(buildUrl(nickname))
     const data = await response.json()
     return !data.characters.error
