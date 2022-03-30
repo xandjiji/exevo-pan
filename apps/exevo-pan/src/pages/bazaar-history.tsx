@@ -107,7 +107,7 @@ export default function BazaarHistory({
               defaultSortingMode={sortingMode}
               defaultDescendingOrder={descendingOrder}
             >
-              <AuctionsGrid />
+              <AuctionsGrid past />
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>

@@ -1,23 +1,21 @@
 import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useRouter } from 'next/router'
 import { formatNumberWithCommas } from 'utils'
-import { routes } from 'Constants'
 import { Icons } from '../../../styles'
 import { LabeledTextBox } from '../../styles'
+import { AuctionBidProps } from './types'
 
 const AuctionBid = ({
   hasBeenBidded,
   currentBid,
-}: Pick<CharacterObject, 'hasBeenBidded' | 'currentBid'>): JSX.Element => {
+  past,
+}: AuctionBidProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
 
-  const { pathname } = useRouter()
-
   const bidLabelText = useMemo(() => {
-    if (pathname === routes.BAZAAR_HISTORY) {
+    if (past) {
       return hasBeenBidded
         ? common.CharacterCard.bidLabelText.auctionSuccessful
         : common.CharacterCard.bidLabelText.auctionFailed
@@ -25,7 +23,7 @@ const AuctionBid = ({
     return hasBeenBidded
       ? common.CharacterCard.bidLabelText.currentBid
       : common.CharacterCard.bidLabelText.minimumBid
-  }, [pathname, hasBeenBidded, common])
+  }, [past, hasBeenBidded, common])
 
   return (
     <LabeledTextBox labelText={bidLabelText}>

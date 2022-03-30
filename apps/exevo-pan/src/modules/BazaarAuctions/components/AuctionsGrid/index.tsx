@@ -7,10 +7,11 @@ import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import * as S from './styles'
+import { AuctionGridProps } from './types'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-const AuctionsGrid = (): JSX.Element => {
+const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -109,6 +110,7 @@ const AuctionsGrid = (): JSX.Element => {
                 highlighted
                 lazyRender
                 expandable
+                past={past}
               />
             ))}
           {page.map((auction) => (
@@ -117,6 +119,7 @@ const AuctionsGrid = (): JSX.Element => {
               lazyRender
               characterData={auction}
               expandable
+              past={past}
             />
           ))}
         </S.Grid>

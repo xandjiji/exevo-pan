@@ -24,6 +24,7 @@ import { CharacterModalProps } from './types'
 const CharacterModal = ({
   characterData,
   onClose,
+  past = false,
 }: CharacterModalProps): JSX.Element => {
   const {
     id,
@@ -98,10 +99,11 @@ const CharacterModal = ({
                 placement="bottom"
               />
               <Textbox.Pvp serverData={serverData} />
-              <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+              <Textbox.AuctionEnd auctionEnd={auctionEnd} past={past} />
               <Textbox.AuctionBid
                 hasBeenBidded={hasBeenBidded}
                 currentBid={currentBid}
+                past={past}
               />
             </InfoGrid>
 

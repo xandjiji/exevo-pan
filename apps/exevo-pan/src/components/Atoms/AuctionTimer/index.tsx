@@ -1,12 +1,11 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useRouter } from 'next/router'
-import { routes } from 'Constants'
 import useCountdownTick from './useCountdownTick'
 import { AuctionTimerProps } from './types'
 import * as S from './styles'
 
 const AuctionTimer = ({
   endDate,
+  past,
   ...props
 }: AuctionTimerProps): JSX.Element => {
   const {
@@ -14,18 +13,16 @@ const AuctionTimer = ({
   } = useTranslations()
 
   const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
-  const { pathname } = useRouter()
-  const isBazaarHistory = pathname === routes.BAZAAR_HISTORY
 
   const endTime = `, ${endDate.getHours()}:${endDate
     .getMinutes()
     .toString()
     .padStart(2, '0')}`
 
-  if (days > 0 || isBazaarHistory) {
+  if (days > 0 || past) {
     const endDateString = `${endDate.getDate()} ${
       common.Month[endDate.getMonth()]
-    }${isBazaarHistory ? ` ${endDate.getFullYear()}` : ''}`
+    }${past ? ` ${endDate.getFullYear()}` : ''}`
 
     return (
       <>
@@ -33,7 +30,7 @@ const AuctionTimer = ({
           suppressHydrationWarning
           role="timer"
           aria-label={
-            isBazaarHistory
+            past
               ? common.AuctionTimer.finishedAuction
               : common.AuctionTimer.unfinishedAuction
           }

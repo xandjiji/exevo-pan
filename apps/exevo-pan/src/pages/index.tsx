@@ -106,7 +106,7 @@ export default function Home({
               defaultSortingMode={sortingMode}
               defaultDescendingOrder={descendingOrder}
             >
-              <AuctionsGrid />
+              <AuctionsGrid past={false} />
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>

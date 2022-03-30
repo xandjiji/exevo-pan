@@ -1,6 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders, setup } from 'utils/test'
-import { routes } from 'Constants'
+import { renderWithProviders } from 'utils/test'
 import AuctionTimer from '..'
 import {
   MILLISECONDS_IN_A_DAY,
@@ -14,14 +13,7 @@ const tomorrow = new Date(Date.now() + MILLISECONDS_IN_A_DAY + 1)
 const nextHour = new Date(Date.now() + MILLISECONDS_IN_AN_HOUR + 1)
 const soon = new Date(Date.now() + MILLISECONDS_IN_A_MINUTE + 1)
 
-const mockedUseRouter = setup.useRouter()
-
 describe('<AuctionTimer />', () => {
-  beforeEach(() => {
-    mockedUseRouter.mockReturnValue({
-      pathname: routes.HOME,
-    } as any)
-  })
   describe('it renders Auction Ended message', () => {
     test('for right now', () => {
       renderWithProviders(<AuctionTimer endDate={new Date()} />)
@@ -47,11 +39,8 @@ describe('<AuctionTimer />', () => {
       expect(screen.getByText(/0:00/)).toBeInTheDocument()
     })
 
-    test(`for a past date at ${routes.BAZAAR_HISTORY} route`, () => {
-      mockedUseRouter.mockReturnValue({
-        pathname: routes.BAZAAR_HISTORY,
-      } as any)
-      renderWithProviders(<AuctionTimer endDate={past} />)
+    test(`for a past date`, () => {
+      renderWithProviders(<AuctionTimer endDate={past} past />)
 
       expect(screen.getByRole('timer')).toHaveTextContent(/1 Jan/)
       expect(screen.getByLabelText('Auction finished at')).toBeInTheDocument()

@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders, randomDataset, setup } from 'utils/test'
+import { renderWithProviders, randomDataset } from 'utils/test'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
@@ -11,8 +11,6 @@ import CharacterCard from '..'
 
 const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
-
-const mockedUseRouter = setup.useRouter()
 
 describe('<CharacterCard />', () => {
   test.each(characterList)('should write every info correctly', (character) => {
@@ -121,11 +119,7 @@ describe('<CharacterCard />', () => {
   test.each(characterList)(
     `should render a different bid label for ${routes.BAZAAR_HISTORY} route`,
     (character) => {
-      mockedUseRouter.mockReturnValue({
-        pathname: routes.BAZAAR_HISTORY,
-      } as any)
-
-      renderWithProviders(<CharacterCard characterData={character} />)
+      renderWithProviders(<CharacterCard characterData={character} past />)
       expect(
         screen.getByText(
           character.hasBeenBidded ? 'Auction Successful' : 'Auction Failed',

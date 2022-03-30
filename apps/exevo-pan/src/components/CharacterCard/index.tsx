@@ -25,6 +25,7 @@ const CharacterCard = ({
   highlighted = false,
   lazyRender = false,
   expandable = false,
+  past = false,
   ...props
 }: CharacterCardProps): JSX.Element => {
   const {
@@ -99,10 +100,11 @@ const CharacterCard = ({
               transfer={transfer}
             />
             <Textbox.Pvp serverData={serverData} />
-            <Textbox.AuctionEnd auctionEnd={auctionEnd} />
+            <Textbox.AuctionEnd auctionEnd={auctionEnd} past={past} />
             <Textbox.AuctionBid
               hasBeenBidded={hasBeenBidded}
               currentBid={currentBid}
+              past={past}
             />
           </S.InfoGrid>
 

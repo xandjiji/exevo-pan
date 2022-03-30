@@ -1,6 +1,7 @@
 export interface CharacterModalProps {
   characterData: CharacterObject
   onClose: () => void
+  past?: boolean
 }
 
 export type CheckboxRecord = {

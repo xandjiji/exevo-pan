@@ -58,6 +58,7 @@ const Top25TCTable = (): JSX.Element => {
           <CharacterModal
             characterData={expandedCharacter}
             onClose={() => setExpandedCharacter(undefined)}
+            past
           />
         )}
       </Table>

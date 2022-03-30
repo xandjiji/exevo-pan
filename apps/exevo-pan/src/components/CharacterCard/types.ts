@@ -5,4 +5,5 @@ export interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
   highlighted?: boolean
   lazyRender?: boolean
   expandable?: boolean
+  past?: boolean
 }
