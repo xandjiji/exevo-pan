@@ -24,6 +24,7 @@ const Top25TCTable = (): JSX.Element => {
           <tr>
             <th>Character</th>
             <th>Invested</th>
+            <th>Sold for</th>
           </tr>
         </thead>
 
@@ -42,10 +43,16 @@ const Top25TCTable = (): JSX.Element => {
                     ),
                     world: auction.serverData.serverName,
                   }}
+                  /* @ ToDo: remove this prop */
                   linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auction.id}`}
                 />
               </td>
               <td>{formatNumberWithCommas(invested)} TC</td>
+              <td>
+                {auction.hasBeenBidded
+                  ? `${formatNumberWithCommas(auction.currentBid)} TC`
+                  : ''}
+              </td>
             </S.ClickableTR>
           ))}
         </tbody>
