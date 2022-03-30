@@ -1,47 +1,62 @@
+import { useState } from 'react'
 import CharacterMiniCard from 'components/CharacterMiniCard'
+import CharacterModal from 'components/CharacterCard/CharacterModal'
 import { vocation } from 'shared-utils/dist/vocations'
 import { formatNumberWithCommas } from 'utils'
 import Table from '../../Style/Table'
-import ranking from './ranking.json'
+import * as S from './styles'
+import rankingData from './ranking.json'
+import { RankingEntry } from './types'
+
+const ranking = rankingData as RankingEntry[]
 
 /* @ ToDo: i18n */
 
 const Top25TCTable = (): JSX.Element => {
-  console.log('ranking')
+  const [expandedCharacter, setExpandedCharacter] = useState<
+    CharacterObject | undefined
+  >()
 
   return (
-    <Table>
-      <thead>
-        <tr>
-          <th>Character</th>
-          <th>Invested</th>
-        </tr>
-      </thead>
-
-      <tbody>
-        {ranking.map(({ invested, auction }) => (
+    <>
+      <Table>
+        <thead>
           <tr>
-            <td>
-              <CharacterMiniCard
-                displayLink
-                outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${auction.outfitId}.gif`}
-                characterData={{
-                  name: auction.nickname,
-                  level: auction.level,
-                  vocation: vocation.getFullName(
-                    auction.vocationId,
-                    auction.level,
-                  ),
-                  world: auction.serverData.serverName,
-                }}
-                linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auction.id}`}
-              />
-            </td>
-            <td>{formatNumberWithCommas(invested)} TC</td>
+            <th>Character</th>
+            <th>Invested</th>
           </tr>
-        ))}
-      </tbody>
-    </Table>
+        </thead>
+
+        <tbody>
+          {ranking.map(({ invested, auction }) => (
+            <S.ClickableTR onClick={() => setExpandedCharacter(auction)}>
+              <td>
+                <CharacterMiniCard
+                  outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${auction.outfitId}.gif`}
+                  characterData={{
+                    name: auction.nickname,
+                    level: auction.level,
+                    vocation: vocation.getFullName(
+                      auction.vocationId,
+                      auction.level,
+                    ),
+                    world: auction.serverData.serverName,
+                  }}
+                  linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auction.id}`}
+                />
+              </td>
+              <td>{formatNumberWithCommas(invested)} TC</td>
+            </S.ClickableTR>
+          ))}
+        </tbody>
+        {expandedCharacter && (
+          <CharacterModal
+            characterData={expandedCharacter}
+            onClose={() => setExpandedCharacter(undefined)}
+          />
+        )}
+      </Table>
+    </>
   )
 }
 

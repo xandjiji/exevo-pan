@@ -1,3 +1,4 @@
 export type RankingEntry = {
   invested: number
-} & CharacterData
+  auction: CharacterObject
+}
