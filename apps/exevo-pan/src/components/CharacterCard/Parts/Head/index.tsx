@@ -14,7 +14,6 @@ const Head = ({
 }: HeadProps): JSX.Element => (
   <S.Head>
     <S.CharacterMiniCard
-      displayLink
       outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
       characterData={{
         name: nickname,

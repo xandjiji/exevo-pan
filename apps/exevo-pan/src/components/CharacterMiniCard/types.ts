@@ -14,8 +14,7 @@ type WithForcedData = {
 
 export type CharacterMiniCardProps = {
   isCard?: boolean
-  displayLink?: boolean
   outfitSrc?: string
-  linkUrl: string
+  linkUrl?: string
 } & React.HTMLAttributes<HTMLDivElement> &
   (WithCharacterData | WithForcedData)

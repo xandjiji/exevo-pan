@@ -19,7 +19,6 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => {
         forceSubtitle={blog.Authors.author}
         characterName={author.name}
         outfitSrc={author.outfit}
-        displayLink
         linkUrl={`https://www.tibia.com/community/?name=${author.name}`}
         style={translator ? { marginBottom: 8 } : undefined}
       />
@@ -28,7 +27,6 @@ const Authors = ({ author, translator }: AuthorsProps): JSX.Element => {
           forceSubtitle={blog.Authors.translator}
           characterName={translator.name}
           outfitSrc={translator.outfit}
-          displayLink
           linkUrl={`https://www.tibia.com/community/?name=${translator.name}`}
         />
       )}

@@ -8,7 +8,6 @@ const DEFAULT_OUTFIT_SRC =
 
 const CharacterMiniCard = ({
   isCard = false,
-  displayLink = false,
   displayServer = false,
   outfitSrc = DEFAULT_OUTFIT_SRC,
   characterData,
@@ -36,7 +35,7 @@ const CharacterMiniCard = ({
       <div>
         <S.Nickname>
           {name}
-          {displayLink && (
+          {linkUrl && (
             <S.Link
               href={linkUrl}
               target="_blank"
