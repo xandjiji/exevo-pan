@@ -1,3 +1,5 @@
+import CharacterMiniCard from 'components/CharacterMiniCard'
+import { vocation } from 'shared-utils/dist/vocations'
 import { formatNumberWithCommas } from 'utils'
 import Table from '../../Style/Table'
 import ranking from './ranking.json'
@@ -20,7 +22,20 @@ const Top25TCTable = (): JSX.Element => {
         {ranking.map(({ invested, auction }) => (
           <tr>
             <td>
-              {auction.nickname} - Level {auction.level}
+              <CharacterMiniCard
+                displayLink
+                outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${auction.outfitId}.gif`}
+                characterData={{
+                  name: auction.nickname,
+                  level: auction.level,
+                  vocation: vocation.getFullName(
+                    auction.vocationId,
+                    auction.level,
+                  ),
+                  world: auction.serverData.serverName,
+                }}
+                linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auction.id}`}
+              />
             </td>
             <td>{formatNumberWithCommas(invested)} TC</td>
           </tr>
