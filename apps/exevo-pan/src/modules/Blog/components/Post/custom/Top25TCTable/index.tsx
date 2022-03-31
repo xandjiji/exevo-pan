@@ -23,7 +23,7 @@ const Top25TCTable = (): JSX.Element => {
         <thead>
           <tr>
             <th>Character</th>
-            <th>Invested</th>
+            <th>Spent</th>
             <th>Sold for</th>
           </tr>
         </thead>
@@ -45,11 +45,23 @@ const Top25TCTable = (): JSX.Element => {
                   }}
                 />
               </td>
-              <td>{formatNumberWithCommas(invested)} TC</td>
               <td>
-                {auction.hasBeenBidded
-                  ? `${formatNumberWithCommas(auction.currentBid)} TC`
-                  : ''}
+                <S.Flex>
+                  <S.TibiaCoinIcon />
+                  {formatNumberWithCommas(invested)}
+                </S.Flex>
+              </td>
+              <td>
+                <S.Flex>
+                  {auction.hasBeenBidded ? (
+                    <>
+                      <S.TibiaCoinIcon />
+                      {formatNumberWithCommas(auction.currentBid)}
+                    </>
+                  ) : (
+                    '–'
+                  )}
+                </S.Flex>
               </td>
             </S.ClickableTR>
           ))}
