@@ -20,6 +20,7 @@ const components = {
   Image: Post.Image,
   ...Links,
   Button: dynamic(() => import('components/Atoms/Button')),
+  TibiaCoin: dynamic(() => import('components/Atoms/Text/TibiaCoin')),
   AboutPageStyle: dynamic(
     () => import('modules/Blog/components/Post/custom/AboutPageStyle'),
   ),

@@ -3,7 +3,7 @@ import Image from 'next/image'
 import TibiaCoinImage from 'assets/tibiacoin.png'
 
 export const Flex = styled.span`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
