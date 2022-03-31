@@ -3,6 +3,7 @@ import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterCard/CharacterModal'
 import { vocation } from 'shared-utils/dist/vocations'
 import { formatNumberWithCommas } from 'utils'
+import { Text } from 'components/Atoms'
 import Table from '../../Style/Table'
 import * as S from './styles'
 import rankingData from './ranking.json'
@@ -46,22 +47,14 @@ const Top25TCTable = (): JSX.Element => {
                 />
               </td>
               <td>
-                <S.Flex>
-                  <S.TibiaCoinIcon />
-                  {formatNumberWithCommas(invested)}
-                </S.Flex>
+                <Text.TibiaCoin value={invested} />
               </td>
-              <td>
-                <S.Flex>
-                  {auction.hasBeenBidded ? (
-                    <>
-                      <S.TibiaCoinIcon />
-                      {formatNumberWithCommas(auction.currentBid)}
-                    </>
-                  ) : (
-                    '–'
-                  )}
-                </S.Flex>
+              <td align="center">
+                {auction.hasBeenBidded ? (
+                  <Text.TibiaCoin value={auction.currentBid} />
+                ) : (
+                  '–'
+                )}
               </td>
             </S.ClickableTR>
           ))}
