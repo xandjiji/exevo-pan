@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { formatNumberWithCommas } from 'utils'
 import * as S from './styles'
 
@@ -16,4 +17,4 @@ const TibiaCoin = ({ value, ...props }: TibiaCoinProps): JSX.Element => {
   )
 }
 
-export default TibiaCoin
+export default memo(TibiaCoin)
