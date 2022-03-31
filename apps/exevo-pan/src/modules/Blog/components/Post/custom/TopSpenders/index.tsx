@@ -6,13 +6,15 @@ import { Text } from 'components/Atoms'
 import Table from '../../Style/Table'
 import * as S from './styles'
 import rankingData from './ranking.json'
-import { RankingEntry } from './types'
+import { RankingEntry, TopSpendersProps } from './types'
 
 const ranking = rankingData as RankingEntry[]
 
-/* @ ToDo: i18n */
-
-const TopSpenders = (): JSX.Element => {
+const TopSpenders = ({
+  characterLabel,
+  spentLabel,
+  soldForLabel,
+}: TopSpendersProps): JSX.Element => {
   const [expandedCharacter, setExpandedCharacter] = useState<
     CharacterObject | undefined
   >()
@@ -22,9 +24,9 @@ const TopSpenders = (): JSX.Element => {
       <Table>
         <thead>
           <tr>
-            <th>Character</th>
-            <th>Spent</th>
-            <th>Sold for</th>
+            <th>{characterLabel}</th>
+            <th>{spentLabel}</th>
+            <th>{soldForLabel}</th>
           </tr>
         </thead>
 
