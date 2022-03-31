@@ -2,7 +2,6 @@ import { useState } from 'react'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterCard/CharacterModal'
 import { vocation } from 'shared-utils/dist/vocations'
-import { formatNumberWithCommas } from 'utils'
 import { Text } from 'components/Atoms'
 import Table from '../../Style/Table'
 import * as S from './styles'
@@ -13,7 +12,7 @@ const ranking = rankingData as RankingEntry[]
 
 /* @ ToDo: i18n */
 
-const Top25TCTable = (): JSX.Element => {
+const TopSpenders = (): JSX.Element => {
   const [expandedCharacter, setExpandedCharacter] = useState<
     CharacterObject | undefined
   >()
@@ -71,4 +70,4 @@ const Top25TCTable = (): JSX.Element => {
   )
 }
 
-export default Top25TCTable
+export default TopSpenders

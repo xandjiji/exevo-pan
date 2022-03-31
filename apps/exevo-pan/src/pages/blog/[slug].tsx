@@ -31,8 +31,8 @@ const components = {
   ContactSection: dynamic(
     () => import('modules/Blog/components/Post/custom/ContactSection'),
   ),
-  Top25TCTable: dynamic(
-    () => import('modules/Blog/components/Post/custom/Top25TCTable'),
+  TopSpenders: dynamic(
+    () => import('modules/Blog/components/Post/custom/TopSpenders'),
   ),
 }
 
