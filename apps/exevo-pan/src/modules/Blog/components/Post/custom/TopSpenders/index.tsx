@@ -32,7 +32,10 @@ const TopSpenders = ({
 
         <tbody>
           {ranking.map(({ invested, auction }) => (
-            <S.ClickableTR onClick={() => setExpandedCharacter(auction)}>
+            <S.ClickableTR
+              onClick={() => setExpandedCharacter(auction)}
+              key={auction.id}
+            >
               <td>
                 <CharacterMiniCard
                   outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${auction.outfitId}.gif`}
