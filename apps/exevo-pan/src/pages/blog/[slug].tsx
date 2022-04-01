@@ -34,6 +34,9 @@ const components = {
   TopSpenders: dynamic(
     () => import('modules/Blog/components/Post/custom/TopSpenders'),
   ),
+  StoreItemDistribution: dynamic(
+    () => import('modules/Blog/components/Post/custom/StoreItemDistribution'),
+  ),
 }
 
 type Props = {
