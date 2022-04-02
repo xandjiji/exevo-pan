@@ -36,7 +36,7 @@ const TopCosmetics = ({ mounts }: TopCosmeticsProps): JSX.Element => {
     : (name: string) => `/sprites/storeoutfits/male/${name}_3.gif`
 
   return (
-    <S.Ul>
+    <S.Ul data-mounts={!!mounts}>
       {data.map(({ name, percentage, price }) => (
         <S.Li key={name}>
           <S.SpriteWrapper title={`${name} - ${percentage}`}>
