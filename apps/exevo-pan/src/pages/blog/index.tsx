@@ -5,7 +5,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
-import { Main, Ads } from 'templates'
+import { Main } from 'templates'
 import { routes, jsonld } from 'Constants'
 import { common, blog } from 'locales'
 
@@ -70,7 +70,6 @@ export default function PostPage({ initialPosts }: Props): JSX.Element {
           initialIndex={DEFAULT_PAGINATION_OPTIONS.pageIndex + 1}
           initialPosts={initialPosts}
         />
-        <Ads.FooterBanner />
       </Main>
     </>
   )

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Main, Ads } from 'templates'
+import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
 import { HistoryStatisticsClient } from 'services'
 import { GetStaticProps } from 'next'
@@ -83,7 +83,6 @@ export default function Highscores({
         <main>
           <Header />
           <HighscoresGrid statisticsData={statisticsData} />
-          <Ads.FooterBanner />
         </main>
       </Main>
     </>

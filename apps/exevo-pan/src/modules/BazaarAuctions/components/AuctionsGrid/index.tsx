@@ -1,6 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { Ads } from 'templates'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
@@ -136,8 +135,6 @@ const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
           />
         )}
       </S.GridWrapper>
-
-      <Ads.FooterBanner key={pageData.pageIndex} />
     </main>
   )
 }
