@@ -144,5 +144,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       highlightedAuctions,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
     },
+    revalidate: 60,
   }
 }
