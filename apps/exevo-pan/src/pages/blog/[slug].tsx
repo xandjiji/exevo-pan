@@ -37,15 +37,8 @@ const components = {
   StoreItemDistribution: dynamic(
     () => import('modules/Blog/components/Post/custom/StoreItemDistribution'),
   ),
-  TopStoreOutfits: dynamic(
-    () =>
-      import(
-        'modules/Blog/components/Post/custom/TopCosmetics/TopStoreOutfits'
-      ),
-  ),
-  TopStoreMounts: dynamic(
-    () =>
-      import('modules/Blog/components/Post/custom/TopCosmetics/TopStoreMounts'),
+  TopCosmetics: dynamic(
+    () => import('modules/Blog/components/Post/custom/TopCosmetics'),
   ),
 }
 
