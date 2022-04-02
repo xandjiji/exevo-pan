@@ -1,5 +1,16 @@
 import * as S from './styles'
-import distributionData from './distribution.json'
+
+const distributionData = {
+  dummy: '46,8%',
+  goldPouch: '21,6%',
+  imbuementShrine: '20,4%',
+  rewardShrine: '39,2%',
+  mailbox: '9,3%',
+  charmExpansion: '25,6%',
+  preySlot: '63,4%',
+  hirelings: '1,8%',
+  huntingSlot: '2,1%',
+}
 
 const StoreItemDistribution = (): JSX.Element => (
   <S.Ul>
