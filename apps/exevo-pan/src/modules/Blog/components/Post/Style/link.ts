@@ -2,7 +2,6 @@ import { css } from 'styled-components'
 
 export const link = css`
   a {
-    display: inline-block;
     position: relative;
     color: var(--primary);
     filter: brightness(130%);
@@ -14,10 +13,6 @@ export const link = css`
 
     &:hover {
       opacity: 0.75;
-    }
-
-    &::first-letter {
-      border-bottom: solid 1px var(--primary);
     }
   }
 `
