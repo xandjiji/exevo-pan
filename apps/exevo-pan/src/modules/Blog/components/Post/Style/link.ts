@@ -2,6 +2,7 @@ import { css } from 'styled-components'
 
 export const link = css`
   a {
+    display: inline-block;
     position: relative;
     color: var(--primary);
     filter: brightness(130%);
@@ -15,15 +16,8 @@ export const link = css`
       opacity: 0.75;
     }
 
-    &::after {
-      content: '';
-      position: absolute;
-      top: calc(100% - 1px);
-      left: 0;
-      width: 16px;
-      height: 1px;
-      background-color: var(--primary);
-      opacity: 0.75;
+    &::first-letter {
+      border-bottom: solid 1px var(--primary);
     }
   }
 `
