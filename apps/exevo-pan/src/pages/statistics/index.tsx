@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Main, Ads } from 'templates'
+import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
 import { HistoryStatisticsClient } from 'services'
 import { GetStaticProps } from 'next'
@@ -83,7 +83,6 @@ export default function Statistics({
         <main>
           <Header />
           <OverallGrid statisticsData={statisticsData} />
-          <Ads.FooterBanner />
         </main>
       </Main>
     </>
@@ -101,5 +100,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
       statisticsData,
     },
+    revalidate: 6000,
   }
 }

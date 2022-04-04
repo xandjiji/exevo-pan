@@ -14,16 +14,5 @@ export const link = css`
     &:hover {
       opacity: 0.75;
     }
-
-    &::after {
-      content: '';
-      position: absolute;
-      top: calc(100% - 1px);
-      left: 0;
-      width: 16px;
-      height: 1px;
-      background-color: var(--primary);
-      opacity: 0.75;
-    }
   }
 `

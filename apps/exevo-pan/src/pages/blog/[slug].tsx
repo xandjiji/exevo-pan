@@ -8,7 +8,7 @@ import matter from 'gray-matter'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
-import { Main, Ads } from 'templates'
+import { Main } from 'templates'
 import { routes, links } from 'Constants'
 import { common, blog } from 'locales'
 
@@ -20,6 +20,7 @@ const components = {
   Image: Post.Image,
   ...Links,
   Button: dynamic(() => import('components/Atoms/Button')),
+  TibiaCoin: dynamic(() => import('components/Atoms/Text/TibiaCoin')),
   AboutPageStyle: dynamic(
     () => import('modules/Blog/components/Post/custom/AboutPageStyle'),
   ),
@@ -30,8 +31,14 @@ const components = {
   ContactSection: dynamic(
     () => import('modules/Blog/components/Post/custom/ContactSection'),
   ),
-  Top25TCTable: dynamic(
-    () => import('modules/Blog/components/Post/custom/Top25TCTable'),
+  TopSpenders: dynamic(
+    () => import('modules/Blog/components/Post/custom/TopSpenders'),
+  ),
+  StoreItemDistribution: dynamic(
+    () => import('modules/Blog/components/Post/custom/StoreItemDistribution'),
+  ),
+  TopCosmetics: dynamic(
+    () => import('modules/Blog/components/Post/custom/TopCosmetics'),
   ),
 }
 
@@ -203,8 +210,6 @@ export default function PostPage({
             </Post.Layout.Right>
           </Post.Layout>
         </article>
-
-        <Ads.FooterBanner />
       </Main>
     </>
   )

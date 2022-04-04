@@ -2,17 +2,19 @@ import { useState } from 'react'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterCard/CharacterModal'
 import { vocation } from 'shared-utils/dist/vocations'
-import { formatNumberWithCommas } from 'utils'
+import { Text } from 'components/Atoms'
 import Table from '../../Style/Table'
 import * as S from './styles'
 import rankingData from './ranking.json'
-import { RankingEntry } from './types'
+import { RankingEntry, TopSpendersProps } from './types'
 
 const ranking = rankingData as RankingEntry[]
 
-/* @ ToDo: i18n */
-
-const Top25TCTable = (): JSX.Element => {
+const TopSpenders = ({
+  characterLabel,
+  spentLabel,
+  soldForLabel,
+}: TopSpendersProps): JSX.Element => {
   const [expandedCharacter, setExpandedCharacter] = useState<
     CharacterObject | undefined
   >()
@@ -22,15 +24,18 @@ const Top25TCTable = (): JSX.Element => {
       <Table>
         <thead>
           <tr>
-            <th>Character</th>
-            <th>Invested</th>
-            <th>Sold for</th>
+            <th>{characterLabel}</th>
+            <th>{spentLabel}</th>
+            <th>{soldForLabel}</th>
           </tr>
         </thead>
 
         <tbody>
           {ranking.map(({ invested, auction }) => (
-            <S.ClickableTR onClick={() => setExpandedCharacter(auction)}>
+            <S.ClickableTR
+              onClick={() => setExpandedCharacter(auction)}
+              key={auction.id}
+            >
               <td>
                 <CharacterMiniCard
                   outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${auction.outfitId}.gif`}
@@ -45,11 +50,15 @@ const Top25TCTable = (): JSX.Element => {
                   }}
                 />
               </td>
-              <td>{formatNumberWithCommas(invested)} TC</td>
               <td>
-                {auction.hasBeenBidded
-                  ? `${formatNumberWithCommas(auction.currentBid)} TC`
-                  : ''}
+                <Text.TibiaCoin value={invested} />
+              </td>
+              <td align="center">
+                {auction.hasBeenBidded ? (
+                  <Text.TibiaCoin value={auction.currentBid} />
+                ) : (
+                  '–'
+                )}
               </td>
             </S.ClickableTR>
           ))}
@@ -66,4 +75,4 @@ const Top25TCTable = (): JSX.Element => {
   )
 }
 
-export default Top25TCTable
+export default TopSpenders

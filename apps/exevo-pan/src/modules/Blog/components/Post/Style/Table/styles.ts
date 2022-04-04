@@ -56,6 +56,10 @@ export const BaseTable = styled.table`
       }
     }
 
+    tr:nth-child(odd) {
+      background-color: rgba(0, 0, 0, 0.02);
+    }
+
     tr:nth-child(even) {
       background-color: rgba(0, 0, 0, 0.1);
     }

@@ -2,6 +2,7 @@ import {
   forwardRef,
   useState,
   useCallback,
+  useEffect,
   Children,
   isValidElement,
   cloneElement,
@@ -35,6 +36,15 @@ const Group = forwardRef(
         }),
       [onChange],
     )
+
+    useEffect(() => {
+      const activeTab = document.getElementById(getTabId(activeIndex))
+
+      if (activeTab) {
+        const { offsetLeft, parentElement } = activeTab
+        parentElement?.scroll({ left: offsetLeft, behavior: 'smooth' })
+      }
+    }, [activeIndex, getTabId])
 
     return (
       <S.Wrapper {...props} ref={ref as React.RefObject<HTMLDivElement>}>
