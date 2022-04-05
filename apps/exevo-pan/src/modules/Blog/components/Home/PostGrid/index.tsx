@@ -30,7 +30,7 @@ const PostGridView = ({
           }}
         />
       )}
-      <S.LazyWatcher ref={observerRef} />
+      {observerRef && <S.LazyWatcher ref={observerRef} />}
     </S.Grid>
   )
 }
