@@ -1,5 +1,6 @@
 export { default as useDrag } from './useDrag'
 export { default as useEscToClose } from './useEscToClose'
+export { default as useInfiniteScroll } from './useInfiniteScroll'
 export { default as useIsDesktop } from './useIsDesktop'
 export { default as useIsMounted } from './useIsMounted'
 export { default as useLockBody } from './useLockBody'
