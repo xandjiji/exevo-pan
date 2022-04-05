@@ -1,5 +1,5 @@
-import { useRef, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import { useInfiniteScroll } from 'hooks'
 import EmptyState from 'components/EmptyState'
 import PostCard from './PostCard'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
@@ -38,21 +38,7 @@ const PostGridView = ({
 const PostGridController = (): JSX.Element => {
   const { postList, requestStatus, fetchNextPage } = useFetchPosts()
 
-  const observer = useRef<IntersectionObserver | null>(null)
-  const lastFactRef = useCallback(
-    (node) => {
-      observer.current?.disconnect()
-
-      observer.current = new IntersectionObserver((entries) => {
-        const [entry] = entries
-        if (entry.isIntersecting) {
-          fetchNextPage()
-        }
-      })
-      if (node) observer.current?.observe(node)
-    },
-    [fetchNextPage],
-  )
+  const lastFactRef = useInfiniteScroll(fetchNextPage)
 
   return (
     <PostGridView
