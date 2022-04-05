@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
+import * as IntersectionObserver from './intersectionObserver'
 
 export const setup = {
   setTimeout: (): void => {
@@ -19,6 +20,7 @@ export const setup = {
 
     return mockedScrollIntoView
   },
+  IntersectionObserver,
   useRouter: (): jest.MockedFunction<typeof useRouter> =>
     useRouter as jest.MockedFunction<typeof useRouter>,
   getFromLocalStorage: (): jest.MockedFunction<typeof getFromLocalStorage> =>
