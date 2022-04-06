@@ -38,4 +38,9 @@ export default {
   Pillar: {
     title: 'Contents',
   },
+  TranslationAlert: {
+    content:
+      "This post isn't available in English yet! You can help us to translate this content",
+    link: 'here',
+  },
 }

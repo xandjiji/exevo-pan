@@ -38,4 +38,9 @@ export default {
   Pillar: {
     title: 'Índice',
   },
+  TranslationAlert: {
+    content:
+      'Esse post ainda não está disponível em Português! Você pode nos ajudar a traduizr esse conteúdo',
+    link: 'aqui',
+  },
 }
