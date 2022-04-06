@@ -44,6 +44,10 @@ export const Button = styled(BaseButton)`
   justify-content: center;
   gap: 16px;
   white-space: nowrap;
+
+  @media (min-width: 1024px) and (max-width: 1199px) {
+    font-size: 16px;
+  }
 `
 
 export const LetterImage = styled(FadeImage).attrs({
