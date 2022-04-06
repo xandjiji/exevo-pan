@@ -14,4 +14,5 @@ export const links = {
   CIPSOFT: 'https://www.cipsoft.com',
   UNLICENSE: 'https://unlicense.org',
   KWAI_REF: 'https://s.kwai.app/s/RdhBQPPn',
+  I18N: 'https://docs.google.com/spreadsheets/d/1t0fEtS2DqumaL9r_m8FeYnZ9Szh0Ay2R-jhbBHo-SlM/edit?usp=sharing',
 }

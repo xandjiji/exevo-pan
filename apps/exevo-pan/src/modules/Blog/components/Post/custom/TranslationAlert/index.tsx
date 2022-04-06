@@ -1,13 +1,22 @@
 import { useTranslations } from 'contexts/useTranslation'
+import { links } from 'Constants'
+import { ExternalLink } from '../Links'
 
 const TranslationAlert = (): JSX.Element => {
-  const { translations: blog } = useTranslations()
+  const {
+    translations: { blog },
+  } = useTranslations()
 
   return (
-    <code>
+    <blockquote>
       {blog.TranslationAlert.content}{' '}
-      <a href="/dasdsada">{blog.TranslationAlert.link}</a>
-    </code>
+      <strong>
+        <ExternalLink href={links.I18N}>
+          {blog.TranslationAlert.link}
+        </ExternalLink>
+      </strong>{' '}
+      😄
+    </blockquote>
   )
 }
 
