@@ -21,7 +21,7 @@ const TopSpenders = ({
 
   return (
     <>
-      <Table>
+      <Table style={{ maxHeight: '100%', overflow: 'hidden' }}>
         <thead>
           <tr>
             <th>{characterLabel}</th>
