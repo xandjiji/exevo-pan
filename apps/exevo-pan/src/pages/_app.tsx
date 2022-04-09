@@ -7,6 +7,7 @@ import { TranslationsProvider } from 'contexts/useTranslation'
 import { gtag } from 'utils'
 import { GlobalStyles } from 'styles'
 import { AppProps } from 'next/app'
+import 'styles/globals.css'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const { translations } = pageProps
