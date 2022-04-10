@@ -1,3 +1,5 @@
+const plugin = require('tailwindcss/plugin')
+
 const withOpacityValue = (variable) => {
   return ({ opacityValue }) => {
     if (opacityValue === undefined) {
@@ -42,5 +44,10 @@ module.exports = {
       kwaiVariant: withOpacityValue('(--tw-kwaiVariant)'),
     },
   },
-  plugins: [require('@tailwindcss/line-clamp')],
+  plugins: [
+    require('@tailwindcss/line-clamp'),
+    plugin(function ({ addVariant }) {
+      addVariant('hocus', ['&:hover', '&:focus'])
+    }),
+  ],
 }
