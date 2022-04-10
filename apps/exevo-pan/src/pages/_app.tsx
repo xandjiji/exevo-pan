@@ -5,9 +5,9 @@ import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
 import { gtag } from 'utils'
-import { GlobalStyles } from 'styles'
 import { AppProps } from 'next/app'
 import 'styles/globals.css'
+import 'styles/reset.css'
 
 function MyApp({ Component, pageProps }: AppProps): JSX.Element {
   const { translations } = pageProps
@@ -45,7 +45,6 @@ function MyApp({ Component, pageProps }: AppProps): JSX.Element {
           content="https://i.imgur.com/obDJJOI.png"
         />
       </Head>
-      <GlobalStyles />
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
           <ThemeProvider>
