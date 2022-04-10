@@ -3,6 +3,12 @@
 @tailwind utilities;
 
 @layer utilities {
+  /* clickable */
+  .clickable {
+    @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
+  }
+
+  /* scrollbar */
   .custom-scrollbar {
     scrollbar-color: var(--primaryVariant) transparent;
     scrollbar-width: thin;
