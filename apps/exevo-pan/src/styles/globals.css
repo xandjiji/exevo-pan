@@ -8,6 +8,11 @@
     @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
   }
 
+  /* code */
+  .code {
+    @apply bg-background inline-block cursor-text rounded-md py-1.5 px-3 font-mono text-xs;
+  }
+
   /* scrollbar */
   .custom-scrollbar {
     scrollbar-color: var(--primaryVariant) transparent;
