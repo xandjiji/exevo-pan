@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .custom-scrollbar {
+    scrollbar-color: var(--primaryVariant) transparent;
+    scrollbar-width: thin;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: transparent;
+    border-radius: 2px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: var(--primaryVariant);
+    border-radius: 2px;
+  }
+}
+
 :root {
   --background: #eeeeee;
   --surface: #ffffff;
@@ -51,7 +70,7 @@ body {
   background-color: var(--background);
   color: var(--onSurface);
   transition: background-color 0.2s ease-out;
-  /* custom scrollbar */
+  @apply custom-scrollbar;
 }
 
 ::selection {
