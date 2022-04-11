@@ -4,15 +4,17 @@
   --onSurface: #ffffff;
   --separator: #72767d;
   --primary: #9857e7;
+  --primaryHighlight: #c671ff;
+  --darkerPrimary: #581f9b;
   --onPrimary: #ffffff;
   --primaryVariant: #5e4480;
-  --darkerPrimary: #581f9b;
+  --primaryVariantHighlight: #714ca1;
   --green: #5a9935;
+  --greenHighlight: #75c745;
   --red: #ff5b5b;
   --alert: #f9eec1;
   --battleGreen: #43b600;
   --battleYellow: #ffdd00;
-  --primaryVariantHighlight: #714ca1;
   --kwai: #ff7705;
   --kwaiSurface: #453d3c;
   --kwaiVariant: #995f2e;
@@ -76,9 +78,8 @@ td.date-wrapper .today {
 }
 
 td a {
-  color: var(--primary);
+  color: var(--primaryHighlight);
   font-weight: 700;
-  filter: brightness(130%);
 }
 
 table button {

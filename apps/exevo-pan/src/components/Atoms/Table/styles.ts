@@ -48,8 +48,7 @@ export const Row = styled.tr`
   a {
     font-size: 14px;
     font-weight: 400;
-    color: var(--primary);
-    filter: brightness(130%);
+    color: var(--primaryHighlight);
   }
 `
 

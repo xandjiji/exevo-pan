@@ -5,8 +5,7 @@ export const Wrapper = styled.div`
   font-size: 12px;
 
   a {
-    color: var(--primary);
-    filter: brightness(130%);
+    color: var(--primaryHighlight);
   }
 
   white-space: nowrap;

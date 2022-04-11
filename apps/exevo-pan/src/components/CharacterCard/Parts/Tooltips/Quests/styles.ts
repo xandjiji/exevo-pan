@@ -24,7 +24,6 @@ export const Group = styled.div`
 export const Title = styled.h5`
   margin-bottom: 8px;
   font-size: 14px;
-  color: var(--primary);
-  filter: brightness(130%);
+  color: var(--primaryHighlight);
   text-align: center;
 `

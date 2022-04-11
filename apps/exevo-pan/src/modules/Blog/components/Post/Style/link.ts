@@ -3,8 +3,7 @@ import { css } from 'styled-components'
 export const link = css`
   a {
     position: relative;
-    color: var(--primary);
-    filter: brightness(130%);
+    color: var(--primaryHighlight);
 
     &::selection {
       background: var(--primary);

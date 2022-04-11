@@ -135,8 +135,7 @@ export const Li = styled.li`
     &[aria-current='step'] {
       a,
       &::before {
-        color: var(--primary);
-        filter: brightness(130%);
+        color: var(--primaryHighlight);
       }
     }
   }

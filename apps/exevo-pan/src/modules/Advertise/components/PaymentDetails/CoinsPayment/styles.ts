@@ -11,10 +11,9 @@ export const Strong = styled.strong`
 `
 
 export const Link = styled.a`
-  color: var(--primary);
+  color: var(--primaryHighlight);
   font-weight: 700;
   letter-spacing: 0.5px;
-  filter: brightness(130%);
 `
 
 export const CopyButton = styled(BaseCopyButton)`

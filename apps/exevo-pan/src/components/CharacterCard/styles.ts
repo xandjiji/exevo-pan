@@ -24,7 +24,7 @@ export const Wrapper = styled.article`
     z-index: 2;
 
     ${Nickname} {
-      color: var(--green);
+      color: var(--greenHighlight);
     }
 
     @media (min-width: 768px) {
@@ -130,8 +130,7 @@ export const CheckboxContainer = styled.div`
 `
 
 export const Strong = styled.strong`
-  color: var(--primary);
-  filter: brightness(130%);
+  color: var(--primaryHighlight);
 `
 
 export const Body = styled.div`

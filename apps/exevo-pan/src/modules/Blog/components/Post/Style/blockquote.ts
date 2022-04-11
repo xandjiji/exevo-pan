@@ -10,11 +10,10 @@ export const blockquote = css`
 
     font-size: 19px;
     letter-spacing: 0.5px;
-    color: var(--primary);
+    color: var(--primaryHighlight);
 
     p {
       font-weight: 400;
-      filter: brightness(130%);
     }
   }
 `

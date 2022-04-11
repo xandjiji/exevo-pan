@@ -35,9 +35,8 @@ export const Text = styled.p`
 `
 
 export const Strong = styled.strong`
-  color: var(--primary);
+  color: var(--primaryHighlight);
   letter-spacing: 0.5px;
-  filter: brightness(130%);
 `
 
 export const Small = styled.span`

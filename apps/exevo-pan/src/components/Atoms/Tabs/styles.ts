@@ -42,12 +42,11 @@ export const Tab = styled.button`
   }
 
   &[aria-selected='true'] {
-    color: var(--primary);
-    filter: brightness(130%);
-    border-color: var(--primary);
+    color: var(--primaryHighlight);
+    border-color: var(--primaryHighlight);
 
     svg {
-      fill: var(--primary);
+      fill: var(--primaryHighlight);
     }
   }
 

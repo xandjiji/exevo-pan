@@ -69,8 +69,7 @@ export const Body = styled.div`
 
 export const Title = styled.h3`
   font-size: 32px;
-  color: var(--primary);
-  filter: brightness(130%);
+  color: var(--primaryHighlight);
 `
 
 export const Date = styled.p`

@@ -16,8 +16,7 @@ export const Nickname = styled.p`
     align-items: center;
     font-size: 16px;
     font-weight: 700;
-    color: var(--primary);
-    filter: brightness(130%);
+    color: var(--primaryHighlight);
 
     a {
       margin-left: 4px;

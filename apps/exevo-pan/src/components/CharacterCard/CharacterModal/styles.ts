@@ -103,8 +103,7 @@ export const CoinsValue = styled.strong`
   font-weight: 400;
 
   &[data-active='true'] {
-    color: var(--primary);
-    filter: brightness(130%);
+    color: var(--primaryHighlight);
     font-weight: 700;
   }
 `

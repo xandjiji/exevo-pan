@@ -14,8 +14,7 @@ export const Title = styled.h2`
   font-weight: 300;
 
   a {
-    color: var(--primary);
-    filter: brightness(130%);
+    color: var(--primaryHighlight);
     font-weight: 700;
   }
 
