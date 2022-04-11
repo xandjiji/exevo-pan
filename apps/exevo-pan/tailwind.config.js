@@ -2,10 +2,8 @@ const plugin = require('tailwindcss/plugin')
 
 const withOpacityValue = (variable) => {
   return ({ opacityValue }) => {
-    if (opacityValue === undefined) {
-      return `rgb(var(${variable}))`
-    }
-    return `rgb(var(${variable}) / ${opacityValue})`
+    if (opacityValue) return `rgb(var(${variable}) / ${opacityValue})`
+    return `rgb(var(${variable}))`
   }
 }
 
