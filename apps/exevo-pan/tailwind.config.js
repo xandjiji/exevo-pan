@@ -21,6 +21,7 @@ module.exports = {
     },
     /* @ ToDo: remove this 'tw' prefix */
     colors: {
+      transparent: 'transparent',
       background: withOpacityValue('--tw-background'),
       surface: withOpacityValue('--tw-surface'),
       onSurface: withOpacityValue('--tw-onSurface'),
@@ -40,6 +41,11 @@ module.exports = {
       kwai: withOpacityValue('--tw-kwai'),
       kwaiSurface: withOpacityValue('--tw-kwaiSurface'),
       kwaiVariant: withOpacityValue('--tw-kwaiVariant'),
+    },
+    extend: {
+      transitionProperty: {
+        fill: 'fill',
+      },
     },
   },
   plugins: [

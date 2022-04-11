@@ -3,32 +3,25 @@
 @tailwind utilities;
 
 @layer utilities {
-  /* clickable */
   .clickable {
     @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
   }
 
-  /* code */
   .code {
     @apply bg-background inline-block cursor-text rounded-md py-1.5 px-3 font-mono text-xs;
   }
 
-  /* scrollbar */
   .custom-scrollbar {
     scrollbar-color: var(--primaryVariant) transparent;
     scrollbar-width: thin;
   }
 
   .custom-scrollbar::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background-color: transparent;
-    border-radius: 2px;
+    @apply h-1.5 w-1.5 rounded-sm bg-transparent;
   }
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: var(--primaryVariant);
-    border-radius: 2px;
+    @apply bg-primaryVariant rounded-sm;
   }
 }
 
@@ -78,27 +71,21 @@ html {
 body {
   font-family: 'Roboto', sans-serif;
   font-size: 16px;
-  background-color: var(--background);
-  color: var(--onSurface);
-  transition: background-color 0.2s ease-out;
-  @apply custom-scrollbar;
+  @apply custom-scrollbar text-onSurface bg-background transition-colors;
 }
 
 ::selection {
-  color: var(--onSurface);
-  background: var(--primaryVariant);
+  @apply text-onSurface bg-primaryVariant;
 }
 
 #__next > div {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+  @apply flex min-h-screen flex-col;
 }
 
 main {
-  flex-grow: 1;
+  @apply flex-grow;
 }
 
 svg {
-  transition: fill 0.2s ease-out;
+  @apply transition-fill;
 }
