@@ -1,6 +1,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components {
+  .loading-spinner {
+    @apply before:bg-primary after:bg-background relative h-6 w-6 rounded-full transition-opacity before:absolute before:top-0 before:left-0 before:h-1/2 before:w-1/2 before:rounded-tl-full after:absolute after:top-0 after:left-0 after:bottom-0 after:right-0 after:m-auto after:h-3/4 after:w-3/4 after:rounded-full;
+
+    background: linear-gradient(
+      to right,
+      var(--primary) 10%,
+      rgba(255, 255, 255, 0) 42%
+    );
+    animation: spinAnimation 1.4s infinite ease-out;
+  }
+
+  .roll-in-animation {
+    animation-timing-function: ease-in;
+    animation-duration: 0.8s;
+    animation-name: rollIn;
+  }
+}
+
 @layer utilities {
   .clickable {
     @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
@@ -37,6 +56,10 @@
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
     @apply bg-primaryVariant rounded-sm;
+  }
+
+  .card {
+    @apply bg-surface text-onSurface rounded p-3 text-xs font-normal shadow-md;
   }
 }
 
@@ -140,6 +163,11 @@ body {
   @apply text-onSurface bg-primaryVariant;
 }
 
+::before,
+::after {
+  --tw-content: '';
+}
+
 #__next > div {
   @apply flex min-h-screen flex-col;
 }
@@ -150,4 +178,34 @@ main {
 
 svg {
   @apply transition-fill;
+}
+
+@keyframes spinAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rollIn {
+  from {
+    opacity: 0;
+    transform: translate3d(100%, 0, 0) rotate3d(0, 0, 1, 200deg);
+  }
+  20% {
+    transform: translate3d(75%, 0, 0) rotate3d(0, 0, 1, 150deg);
+  }
+  40% {
+    opacity: 1;
+    transform: translate3d(-10%, 0, 0) rotate3d(0, 0, 1, -30deg);
+  }
+  60% {
+    transform: translate3d(5%, 0, 0) rotate3d(0, 0, 1, 15deg);
+  }
+  to {
+    transform: none;
+  }
 }
