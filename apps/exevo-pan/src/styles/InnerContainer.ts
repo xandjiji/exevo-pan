@@ -10,13 +10,13 @@ const InnerContainer = css`
   }
 
   @media (min-width: 1024px) {
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 96px;
+    padding-right: 96px;
   }
 
   @media (min-width: 1400px) {
-    padding-left: 180px;
-    padding-right: 180px;
+    padding-left: 176px;
+    padding-right: 176px;
   }
 `
 

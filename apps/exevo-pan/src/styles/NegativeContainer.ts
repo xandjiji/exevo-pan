@@ -10,13 +10,13 @@ const NegativeContainer = css`
   }
 
   @media (min-width: 1024px) {
-    margin-left: -140px;
-    margin-right: -140px;
+    margin-left: -96px;
+    margin-right: -96px;
   }
 
   @media (min-width: 1400px) {
-    margin-left: -180px;
-    margin-right: -180px;
+    margin-left: -176px;
+    margin-right: -176px;
   }
 `
 

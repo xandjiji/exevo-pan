@@ -10,6 +10,22 @@
     @apply bg-background inline-block cursor-text rounded-md py-1.5 px-3 font-mono text-xs;
   }
 
+  .container {
+    @apply mx-5 md:mx-10 lg:mx-24 xl:mx-44;
+  }
+
+  .negative-container {
+    @apply -mx-5 md:-mx-10 lg:-mx-24 xl:-mx-44;
+  }
+
+  .inner-container {
+    @apply px-5 md:px-10 lg:px-24 xl:px-44;
+  }
+
+  .inner-padding {
+    @apply px-5 md:px-10;
+  }
+
   .custom-scrollbar {
     scrollbar-color: var(--primaryVariant) transparent;
     scrollbar-width: thin;

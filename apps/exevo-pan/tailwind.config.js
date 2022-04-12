@@ -18,6 +18,7 @@ module.exports = {
     screens: {
       md: '768px',
       lg: '1024px',
+      xl: '1400px',
     },
     /* @ ToDo: remove this 'tw' prefix */
     colors: {
@@ -54,4 +55,7 @@ module.exports = {
       addVariant('hocus', ['&:hover', '&:focus'])
     }),
   ],
+  corePlugins: {
+    container: false,
+  },
 }
