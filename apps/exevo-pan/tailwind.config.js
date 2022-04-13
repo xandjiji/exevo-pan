@@ -43,6 +43,16 @@ module.exports = {
       kwaiSurface: withOpacityValue('--tw-kwaiSurface'),
       kwaiVariant: withOpacityValue('--tw-kwaiVariant'),
     },
+    fontSize: {
+      xs: '0.625rem',
+      tsm: '0.750rem',
+      s: '0.875rem',
+      base: '1rem',
+      // txl
+      // l
+      // xl
+      // 2xl etc
+    },
     extend: {
       transitionProperty: {
         fill: 'fill',
