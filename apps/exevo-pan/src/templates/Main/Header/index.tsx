@@ -1,11 +1,13 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { Link, Switch, CtaButton } from 'components/Atoms/'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
+import MenuButton from './MenuButton'
 import LanguagePicker from './LanguagePicker'
 import { NavItems } from './routes'
 import * as S from './styles'
@@ -20,6 +22,7 @@ const heading = {
 }
 
 const Header = ({
+  className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
   const {
@@ -46,19 +49,23 @@ const Header = ({
 
   return (
     <>
-      <S.Wrapper data-active={shouldMenuOverlap} {...props}>
-        <S.Nav>
-          <S.MenuButton
-            type="button"
-            role="switch"
+      <header
+        className={clsx(
+          'bg-primary inner-container custom-scrollbar after:z-1 from-primary sticky top-0 flex h-[60px] w-full items-center justify-between overflow-x-auto to-transparent shadow-md transition-colors after:pointer-events-none after:fixed after:top-0 after:right-0 after:hidden after:h-[60px] after:w-8 after:bg-gradient-to-tl md:after:block',
+          shouldMenuOverlap ? 'z-75' : 'z-71',
+          className,
+        )}
+        {...props}
+      >
+        <nav className="mr-6 flex shrink-0 items-center">
+          <MenuButton
             aria-checked={menuOpen}
             aria-label={
               common.Header[menuOpen ? 'closeMenuLabel' : 'openMenuLabel']
             }
             onClick={toggleMenu}
-          >
-            <S.MenuIcon />
-          </S.MenuButton>
+          />
+
           <NextLink href={routes.HOME}>
             <a aria-label={accessibleLogoName}>
               <S.LogoWrapper>
@@ -83,7 +90,7 @@ const Header = ({
               </S.Li>
             ))}
           </S.Ul>
-        </S.Nav>
+        </nav>
 
         <S.RightWrapper suppressHydrationWarning>
           <LanguagePicker
@@ -100,7 +107,7 @@ const Header = ({
           )}
           <CtaButton />
         </S.RightWrapper>
-      </S.Wrapper>
+      </header>
       <S.Backdrop
         aria-hidden={!menuOpen}
         aria-label={common.Header.closeMenuLabel}

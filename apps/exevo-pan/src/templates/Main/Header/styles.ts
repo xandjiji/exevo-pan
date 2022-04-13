@@ -1,7 +1,6 @@
 import styled, { css } from 'styled-components'
 import Image from 'next/image'
 import ExevoPanLogoImage from 'assets/logo.png'
-import MenuIconSvg from 'assets/svgs/menu.svg'
 import MoonIconSvg from 'assets/svgs/moon.svg'
 import MarketIconSvg from 'assets/svgs/market.svg'
 import HistoryIconSvg from 'assets/svgs/history.svg'
@@ -10,96 +9,7 @@ import StatisticsIconSvg from 'assets/svgs/statistics.svg'
 import WarIconSvg from 'assets/svgs/war.svg'
 import AboutIconSvg from 'assets/svgs/about.svg'
 import BlogIconSvg from 'assets/svgs/blog.svg'
-import {
-  InnerContainer,
-  CustomScrollbar,
-  Clickable,
-  Shadow,
-  Smooth,
-} from 'styles'
-
-export const Wrapper = styled.header`
-  position: sticky;
-  top: 0;
-  z-index: 70;
-  width: 100%;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  overflow-x: auto;
-  background-color: var(--primary);
-  transition: 0.2s background ease-out;
-  ${InnerContainer}
-  ${CustomScrollbar}
-  ${Shadow}
-
-  &[data-active='true'] {
-    z-index: 75;
-  }
-
-  @media (min-width: 768px) {
-    &::after {
-      content: '';
-      position: fixed;
-      right: 0;
-      top: 0;
-      z-index: 1;
-      height: 60px;
-      width: 32px;
-      background-image: linear-gradient(
-        to left,
-        var(--primary),
-        rgba(0, 0, 0, 0)
-      );
-      pointer-events: none;
-    }
-  }
-`
-
-export const Nav = styled.nav`
-  margin-right: 24px;
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-`
-
-export const MenuIcon = styled(MenuIconSvg)`
-  width: 100%;
-  height: 100%;
-  fill: var(--onPrimary);
-
-  rect {
-    ${Smooth}
-    transform-origin: center;
-  }
-`
-
-export const MenuButton = styled.button`
-  ${Clickable}
-  padding: 2px;
-  height: 36px;
-  width: 36px;
-  border-radius: 4px;
-
-  &[aria-checked='true'] ${MenuIcon} rect {
-    &:nth-child(1) {
-      transform: translate(-4px, 4px) rotate(45deg);
-    }
-
-    &:nth-child(2) {
-      opacity: 0;
-    }
-
-    &:nth-child(3) {
-      transform: translate(-4px, -3px) rotate(-45deg);
-    }
-  }
-
-  @media (min-width: 768px) {
-    display: none;
-  }
-`
+import { Clickable, Shadow, Smooth } from 'styles'
 
 export const LogoWrapper = styled.div`
   display: none;
