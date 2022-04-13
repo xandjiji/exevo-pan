@@ -37,7 +37,6 @@ const LanguagePicker = ({
     wrapperRef.current?.getBoundingClientRect().right
 
   const isTabeable = isOpen ? 1 : -1
-
   const visibilityStyle = !isOpen && 'pointer-events-none opacity-0'
 
   return (
@@ -95,7 +94,7 @@ const LanguagePicker = ({
       <button
         type="button"
         className={clsx(
-          'fixed top-0 left-0 z-[1] h-screen w-screen bg-black/10 transition-opacity',
+          'z-1 fixed top-0 left-0 h-screen w-screen bg-black/10 transition-opacity',
           visibilityStyle,
         )}
         aria-label={common.PopoverCloseLabel}
