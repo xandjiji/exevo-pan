@@ -27,6 +27,7 @@ module.exports = {
     'import/prefer-default-export': 'off',
     'no-nested-ternary': 'off',
     '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/react-in-jsx-scope': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-filename-extension': [
