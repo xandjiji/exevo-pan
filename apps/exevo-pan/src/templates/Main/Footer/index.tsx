@@ -16,11 +16,7 @@ const listItems = [
   { href: routes.ABOUT, content: 'about' },
 ]
 
-export const Link = ({
-  className,
-  rel,
-  ...props
-}: JSX.IntrinsicElements['a']) => (
+const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
   <a
     rel={clsx('noopener noreferrer external', rel)}
     className={clsx('text-onPrimary text-xs tracking-wider', className)}
