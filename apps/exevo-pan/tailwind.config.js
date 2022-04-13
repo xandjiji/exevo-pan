@@ -42,6 +42,7 @@ module.exports = {
       kwai: withOpacityValue('--tw-kwai'),
       kwaiSurface: withOpacityValue('--tw-kwaiSurface'),
       kwaiVariant: withOpacityValue('--tw-kwaiVariant'),
+      black: withOpacityValue('--tw-black'),
     },
     fontSize: {
       xs: '0.625rem',

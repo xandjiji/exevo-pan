@@ -104,6 +104,7 @@
   --tw-kwai: 255 119 5;
   --tw-kwaiSurface: 255 247 240;
   --tw-kwaiVariant: 255 198 150;
+  --tw-black: 0 0 0;
 }
 
 html[data-theme='dark'] {
@@ -147,6 +148,7 @@ html[data-theme='dark'] {
   --tw-kwai: 255 119 5;
   --tw-kwaiSurface: 69 61 60;
   --tw-kwaiVariant: 153 95 46;
+  --tw-black: 0 0 0;
 }
 
 html {

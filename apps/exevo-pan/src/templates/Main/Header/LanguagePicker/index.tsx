@@ -1,9 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
 import { memo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { RadioButton } from 'components/Atoms'
 import { setCookie } from 'utils'
-import * as S from './styles'
+import LanguageIcon from 'assets/svgs/language.svg'
 import { LanguagePickerProps } from './type'
 
 const SECONDS_IN_A_YEAR = 31536000
@@ -31,27 +32,34 @@ const LanguagePicker = ({
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
   }
 
-  const wrapperRef = useRef<HTMLButtonElement>()
+  const wrapperRef = useRef<HTMLButtonElement>(null)
   const absoluteWrapperPosition =
     wrapperRef.current?.getBoundingClientRect().right
 
   const isTabeable = isOpen ? 1 : -1
 
+  const visibilityStyle = !isOpen && 'pointer-events-none opacity-0'
+
   return (
-    <S.Wrapper>
+    <div className="h-6">
       <button
         aria-label={common.PreferredLanguageLabel}
         type="button"
-        ref={wrapperRef as React.RefObject<HTMLButtonElement>}
+        ref={wrapperRef}
         onClick={() => setLanguageOpen((prev) => !prev)}
       >
-        <S.LanguageIcon />
+        <LanguageIcon className="fill-onPrimary clickable rounded-full" />
       </button>
-      <S.Picker
+      <div
+        className={clsx(
+          'card fixed top-[46] z-10 grid w-fit gap-2 transition-opacity',
+          visibilityStyle,
+        )}
         role="dialog"
         aria-hidden={!isOpen}
         style={{
           left: absoluteWrapperPosition ? absoluteWrapperPosition - 12 : '100%',
+          transform: 'translate(-50%, 6px)',
         }}
       >
         <RadioButton
@@ -82,13 +90,20 @@ const LanguagePicker = ({
         >
           Polski
         </RadioButton>
-      </S.Picker>
-      <S.Backdrop
+      </div>
+
+      <button
+        type="button"
+        className={clsx(
+          'fixed top-0 left-0 z-[1] h-screen w-screen bg-black/10 transition-opacity',
+          visibilityStyle,
+        )}
         aria-label={common.PopoverCloseLabel}
         aria-hidden={!isOpen}
         onClick={() => setLanguageOpen(false)}
+        tabIndex={isOpen ? 1 : -1}
       />
-    </S.Wrapper>
+    </div>
   )
 }
 
