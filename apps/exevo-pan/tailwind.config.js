@@ -55,14 +55,12 @@ module.exports = {
       // 2xl etc
     },
     zIndex: {
-      '-3': '-3',
-      '-2': '-2',
-      '-1': '-1',
       1: '1',
       2: '2',
       3: '3',
       10: '10',
       71: '71',
+      74: '74',
       75: '75',
     },
     extend: {
@@ -75,6 +73,7 @@ module.exports = {
     require('@tailwindcss/line-clamp'),
     plugin(function ({ addVariant }) {
       addVariant('hocus', ['&:hover', '&:focus'])
+      addVariant('currentpage', "&[aria-current='page']")
     }),
   ],
   corePlugins: {
