@@ -1,6 +1,4 @@
-export interface LinkProps {
-  className?: string
-  children: React.ReactNode
+export type LinkProps = JSX.IntrinsicElements['a'] & {
   href: string
   exact?: boolean
 }
