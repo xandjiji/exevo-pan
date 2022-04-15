@@ -63,6 +63,11 @@ module.exports = {
       74: '74',
       75: '75',
     },
+    extend: {
+      borderWidth: {
+        1: '1px',
+      },
+    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),

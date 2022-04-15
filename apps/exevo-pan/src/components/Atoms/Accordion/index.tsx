@@ -1,7 +1,8 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
+import clsx from 'clsx'
 import { useUuid } from 'hooks'
-import * as S from './styles'
+import ArrowIcon from 'assets/svgs/chevronDown.svg'
 import { AccordionProps } from './types'
 
 const Accordion = ({
@@ -32,28 +33,31 @@ const Accordion = ({
   )
 
   return (
-    <S.Wrapper {...props}>
-      <S.Button
+    <div {...props}>
+      <button
         id={buttonId}
-        role="button"
+        type="button"
         aria-expanded={open}
         aria-controls={contentId}
         aria-label={common.Accordion[open ? 'close' : 'open']}
         onClick={handleClick}
-        border={border}
         suppressHydrationWarning
+        className={clsx(
+          'text-onSurface text-tsm flex w-full cursor-pointer items-center justify-between transition-all',
+          border && 'border-b-1 border-separator border-solid',
+          open ? 'py-2' : 'py-1',
+        )}
       >
         {title}
-        <S.ArrowIcon />
-      </S.Button>
-      <S.Content
-        id={contentId}
-        aria-describedby={buttonId}
-        suppressHydrationWarning
-      >
+        <ArrowIcon
+          className="fill-onSurface ml-auto shrink-0 rounded transition-all"
+          style={{ transform: clsx(open && 'rotate(180deg)') }}
+        />
+      </button>
+      <div id={contentId} aria-describedby={buttonId} suppressHydrationWarning>
         {open && children}
-      </S.Content>
-    </S.Wrapper>
+      </div>
+    </div>
   )
 }
 
