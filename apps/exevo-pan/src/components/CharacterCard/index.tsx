@@ -149,6 +149,7 @@ const CharacterCard = ({
         <CharacterModal
           characterData={characterData}
           onClose={() => setExpanded(false)}
+          past={past}
         />
       )}
     </>
