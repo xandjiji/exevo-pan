@@ -170,10 +170,6 @@ body {
   --tw-content: '';
 }
 
-#__next > div {
-  @apply flex min-h-screen flex-col;
-}
-
 main {
   @apply flex-grow;
 }
