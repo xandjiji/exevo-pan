@@ -1,28 +1,46 @@
 import { useTranslations } from 'contexts/useTranslation'
-import * as S from './styles'
+import clsx from 'clsx'
 import { ButtonProps } from './types'
 
 const Button = ({
+  className,
   children,
-  loading,
+  loading = false,
   disabled,
   ...props
 }: ButtonProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
+
   return (
-    <S.Button
+    <button
+      className={clsx(
+        'bg-primary text-onPrimary hover:bg-primaryHighlight active:bg-primary cursor-pointer rounded-xl py-3 px-6 text-2xl shadow-md transition-all hover:shadow-lg active:shadow-inner',
+        disabled &&
+          !loading &&
+          'bg-separator cursor-default text-black opacity-60 shadow-none',
+        (loading || disabled) && 'pointer-events-none',
+        className,
+      )}
       {...props}
-      data-loading={loading}
+      type="button"
       disabled={loading ? true : disabled}
     >
       {loading ? (
-        <S.LoadingState role="alert" aria-label={common.LoadingLabel} />
+        <div
+          className="loading-spinner before:bg-primaryVariant after:bg-primary mx-auto"
+          style={{
+            background:
+              'linear-gradient(to right, var(--primaryVariant) 10%, rgba(255, 255, 255, 0) 42%)',
+          }}
+          role="alert"
+          aria-label={common.LoadingLabel}
+        />
       ) : (
         children
       )}
-    </S.Button>
+    </button>
   )
 }
 

@@ -142,8 +142,9 @@ const Checkout = (): JSX.Element => {
         aria-label={advertise.Checkout.checkoutButtonLabel}
         disabled={isButtonDisabled}
         onClick={validateAndSubmit}
+        loading={sendingEmail}
       >
-        {sendingEmail ? <S.Loading /> : advertise.Checkout.checkoutButton}
+        {advertise.Checkout.checkoutButton}
       </S.Button>
     </S.Wrapper>
   )
