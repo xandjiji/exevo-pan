@@ -32,20 +32,16 @@ export default ({
     >
       <Rect
         y="6"
-        style={
-          isOpen
-            ? { transform: 'translate(-4px, 4px) rotate(45deg)' }
-            : undefined
-        }
+        style={{
+          transform: clsx(isOpen && 'translate(-4px, 4px) rotate(45deg)'),
+        }}
       />
       <Rect y="11" style={{ opacity: isOpen ? '0' : '1' }} />
       <Rect
         y="16"
-        style={
-          isOpen
-            ? { transform: 'translate(-4px, -3px) rotate(-45deg)' }
-            : undefined
-        }
+        style={{
+          transform: clsx(isOpen && 'translate(-4px, -3px) rotate(-45deg)'),
+        }}
       />
     </svg>
   </button>
