@@ -179,7 +179,7 @@ main {
 }
 
 svg {
-  @apply transition-fill;
+  @apply transition-colors;
 }
 
 @keyframes spinAnimation {

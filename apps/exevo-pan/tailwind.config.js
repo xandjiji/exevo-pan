@@ -63,11 +63,6 @@ module.exports = {
       74: '74',
       75: '75',
     },
-    extend: {
-      transitionProperty: {
-        fill: 'fill',
-      },
-    },
   },
   plugins: [
     require('@tailwindcss/line-clamp'),
