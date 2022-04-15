@@ -20,6 +20,10 @@ export const Wrapper = styled.article`
     --surface: var(--kwaiSurface);
     --primary: var(--kwai);
     --primaryVariant: var(--kwaiVariant);
+    /* @ ToDo: remove this tw prefix */
+    --tw-surface: var(--tw-kwaiSurface);
+    --tw-primary: var(--tw-kwai);
+    --tw-primaryVariant: var(--tw-kwaiVariant);
 
     z-index: 2;
 
