@@ -39,11 +39,12 @@ export const AuctionList = styled.div`
 
   ${CustomScrollbar}
 
-  > * {
+  > *:not(:last-child) {
     margin-bottom: 8px;
   }
 
   @media (min-width: 768px) {
     max-height: unset;
+    overflow: unset;
   }
 `
