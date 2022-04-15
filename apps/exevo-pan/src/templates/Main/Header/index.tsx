@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { useState, useCallback, cloneElement } from 'react'
+import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
@@ -11,6 +11,7 @@ import { routes } from 'Constants'
 import Logo from 'assets/logo.png'
 import ThemeIcon from 'assets/svgs/moon.svg'
 import MenuButton from './MenuButton'
+import HeaderIcon from './HeaderIcon'
 import LanguagePicker from './LanguagePicker'
 import { NavItems } from './routes'
 
@@ -96,9 +97,7 @@ const Header = ({
                   exact={exact}
                 >
                   <>
-                    {cloneElement(icon, {
-                      className: 'mr-[6px] w-[18px] h-[18px] fill-onPrimary',
-                    })}
+                    <HeaderIcon icon={icon} spaced />
                     <h2 className="text-s text-onPrimary whitespace-nowrap font-normal tracking-wider">
                       {common.Header.nav[title]}
                     </h2>
