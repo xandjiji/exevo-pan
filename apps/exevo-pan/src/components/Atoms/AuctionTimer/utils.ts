@@ -8,7 +8,7 @@ export const calcCountdown = (
   startTime: number,
   endTime: number,
 ): CountdownObject => {
-  const timeDiff = Math.abs(endTime - startTime)
+  const timeDiff = endTime - startTime
 
   const days = Math.floor(timeDiff / MILLISECONDS_IN_A_DAY)
   const hours = Math.floor(

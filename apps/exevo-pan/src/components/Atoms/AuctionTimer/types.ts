@@ -13,6 +13,6 @@ export interface CountdownObject {
   seconds: number
 }
 
-export interface CountdownProps {
+export type CountdownProps = {
   endingSoon?: boolean
-}
+} & JSX.IntrinsicElements['span']

@@ -1,7 +1,26 @@
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
 import useCountdownTick from './useCountdownTick'
-import { AuctionTimerProps } from './types'
-import * as S from './styles'
+import { CountdownProps, AuctionTimerProps } from './types'
+
+const Countdown = ({
+  endingSoon = false,
+  className,
+  ...props
+}: CountdownProps) => (
+  <span
+    className={clsx(
+      'transition-colors',
+      endingSoon ? 'text-red' : 'text-onSurface',
+      className,
+    )}
+    {...props}
+  />
+)
+
+const EndTime = ({ className, ...props }: JSX.IntrinsicElements['span']) => (
+  <span className={clsx('text-onSurface', className)} {...props} />
+)
 
 const AuctionTimer = ({
   endDate,
@@ -26,7 +45,7 @@ const AuctionTimer = ({
 
     return (
       <>
-        <S.Countdown
+        <Countdown
           suppressHydrationWarning
           role="timer"
           aria-label={
@@ -37,8 +56,8 @@ const AuctionTimer = ({
           {...props}
         >
           {endDateString}
-        </S.Countdown>
-        <S.EndTime>{endTime}</S.EndTime>
+        </Countdown>
+        <EndTime>{endTime}</EndTime>
       </>
     )
   }
@@ -50,7 +69,7 @@ const AuctionTimer = ({
 
     return (
       <>
-        <S.Countdown
+        <Countdown
           suppressHydrationWarning
           role="timer"
           aria-label={common.AuctionTimer.auctionEndsIn}
@@ -58,14 +77,14 @@ const AuctionTimer = ({
           {...props}
         >
           {countdownTime}
-        </S.Countdown>
-        <S.EndTime>{endTime}</S.EndTime>
+        </Countdown>
+        <EndTime>{endTime}</EndTime>
       </>
     )
   }
 
   return (
-    <S.Countdown
+    <Countdown
       suppressHydrationWarning
       role="timer"
       aria-label={common.AuctionTimer.auctionIsOver}
@@ -73,7 +92,7 @@ const AuctionTimer = ({
       {...props}
     >
       {common.AuctionTimer.auctionEnded}
-    </S.Countdown>
+    </Countdown>
   )
 }
 
