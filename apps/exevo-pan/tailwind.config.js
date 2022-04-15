@@ -28,31 +28,33 @@ module.exports = {
       onSurface: withOpacityValue('--tw-onSurface'),
       separator: withOpacityValue('--tw-separator'),
       primary: withOpacityValue('--tw-primary'),
+      primaryHighlight: withOpacityValue('--tw-primaryHighlight'),
+      darkerPrimary: withOpacityValue('--tw-darkerPrimary'),
       onPrimary: withOpacityValue('--tw-onPrimary'),
       primaryVariant: withOpacityValue('--tw-primaryVariant'),
-      darkerPrimary: withOpacityValue('--tw-darkerPrimary'),
+      primaryVariantHighlight: withOpacityValue(
+        '--tw-primaryVariantHighlight)',
+      ),
       green: withOpacityValue('--tw-green'),
+      greenHighlight: withOpacityValue('--tw-greenHighlight'),
       red: withOpacityValue('--tw-red'),
       alert: withOpacityValue('--tw-alert'),
       battleGreen: withOpacityValue('--tw-battleGreen'),
       battleYellow: withOpacityValue('--tw-battleYellow'),
-      primaryVariantHighlight: withOpacityValue(
-        '--tw-primaryVariantHighlight)',
-      ),
       kwai: withOpacityValue('--tw-kwai'),
       kwaiSurface: withOpacityValue('--tw-kwaiSurface'),
       kwaiVariant: withOpacityValue('--tw-kwaiVariant'),
       black: withOpacityValue('--tw-black'),
     },
     fontSize: {
-      xs: '0.625rem',
-      tsm: '0.750rem',
-      s: '0.875rem',
-      base: '1rem',
-      // txl
-      // l
-      // xl
-      // 2xl etc
+      xs: '0.625rem', // 10px
+      tsm: '0.75rem', // 12px
+      s: '0.875rem', // 14px
+      base: '1rem', // 16px
+      txl: '1.125rem', // 18px
+      l: '1.25rem', // 20px
+      xl: '1.375rem', // 22px
+      '2xl': '1.5rem', // 24px
     },
     zIndex: {
       1: '1',
