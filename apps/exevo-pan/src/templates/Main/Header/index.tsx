@@ -85,7 +85,7 @@ const Header = ({
 
           <ul
             className={clsx(
-              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-4 rounded-b-md p-5 shadow-md transition-opacity md:static md:flex md:transform-none md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
+              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-4 rounded-br-md p-5 shadow-md transition-opacity md:static md:flex md:transform-none md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
               !menuOpen && 'opacity-0',
             )}
           >
@@ -127,7 +127,7 @@ const Header = ({
 
       <button
         className={clsx(
-          'z-74 fixed top-0 left-0 h-screen w-screen bg-black/50 transition-opacity md:hidden',
+          'z-74 bg-backdrop fixed top-0 left-0 h-screen w-screen transition-opacity md:hidden',
           !menuOpen && 'pointer-events-none opacity-0',
         )}
         type="button"

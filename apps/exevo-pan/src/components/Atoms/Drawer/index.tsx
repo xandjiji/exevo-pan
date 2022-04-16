@@ -89,7 +89,7 @@ const Drawer = ({
 
           <div
             className={clsx(
-              'z-74 animate-fadeIn fixed top-0 left-0 h-screen w-screen bg-black/40 transition-all',
+              'z-74 animate-fadeIn bg-backdrop fixed top-0 left-0 h-screen w-screen transition-all',
               !isOpen && 'pointer-events-none opacity-0',
             )}
             style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}

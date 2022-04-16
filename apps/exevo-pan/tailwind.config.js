@@ -22,6 +22,7 @@ module.exports = {
     },
     /* @ ToDo: remove this 'tw' prefix */
     colors: {
+      backdrop: 'rgba(0, 0, 0, 0.4)',
       transparent: 'transparent',
       background: withOpacityValue('--tw-background'),
       surface: withOpacityValue('--tw-surface'),

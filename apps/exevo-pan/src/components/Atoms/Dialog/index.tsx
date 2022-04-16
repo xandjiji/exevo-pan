@@ -30,7 +30,7 @@ const Dialog = ({
     ? createPortal(
         <FocusLock>
           <button
-            className="z-71 animate-fadeIn fixed top-0 left-0 flex h-full w-full items-center justify-center bg-black/40 text-left"
+            className="z-71 animate-fadeIn bg-backdrop fixed top-0 left-0 flex h-full w-full items-center justify-center text-left"
             type="button"
             aria-hidden={!isOpen}
             onClick={onClose}

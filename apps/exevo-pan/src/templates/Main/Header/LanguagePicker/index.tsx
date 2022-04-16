@@ -91,7 +91,7 @@ const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
       <button
         type="button"
         className={clsx(
-          'z-1 fixed top-0 left-0 h-screen w-screen bg-black/10 transition-opacity',
+          'z-2 bg-backdrop fixed top-0 left-0 h-screen w-screen transition-opacity',
           visibilityStyle,
         )}
         aria-label={common.PopoverCloseLabel}
