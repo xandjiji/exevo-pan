@@ -5,9 +5,10 @@
   .loading-spinner {
     @apply before:bg-primary after:bg-background relative h-6 w-6 rounded-full transition-opacity before:absolute before:top-0 before:left-0 before:h-1/2 before:w-1/2 before:rounded-tl-full after:absolute after:top-0 after:left-0 after:bottom-0 after:right-0 after:m-auto after:h-3/4 after:w-3/4 after:rounded-full;
 
+    /* @ ToDo: remove this 'tw' prefix */
     background: linear-gradient(
       to right,
-      var(--primary) 10%,
+      rgb(var(--tw-primary)) 10%,
       rgba(255, 255, 255, 0) 42%
     );
     animation: spinAnimation 1.4s infinite ease-out;
@@ -17,6 +18,17 @@
     animation-timing-function: ease-in;
     animation-duration: 0.8s;
     animation-name: rollIn;
+  }
+
+  .animated-background {
+    /* @ ToDo: remove this 'tw' prefix */
+    background: linear-gradient(
+      270deg,
+      rgb(var(--tw-primaryVariantHighlight)),
+      rgb(var(--tw-primaryVariant))
+    );
+    background-size: 800% 800%;
+    animation: animatedBg 3s ease-out infinite;
   }
 }
 
@@ -55,7 +67,8 @@
   }
 
   .custom-scrollbar {
-    scrollbar-color: var(--primaryVariant) transparent;
+    /* @ ToDo: remove this 'tw' prefix */
+    scrollbar-color: rgb(var(--tw-primaryVariant)) transparent;
     scrollbar-width: thin;
   }
 
@@ -214,5 +227,17 @@ svg {
   }
   to {
     transform: none;
+  }
+}
+
+@keyframes animatedBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
