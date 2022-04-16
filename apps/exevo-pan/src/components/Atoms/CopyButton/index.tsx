@@ -41,7 +41,7 @@ const CopyButton = ({
       onClick={handleClick}
     >
       {clicked ? (
-        <ValidIcon className="fill-green roll-in-animation h-6 w-6 p-[3px]" />
+        <ValidIcon className="fill-green animate-rollIn h-6 w-6 p-[3px]" />
       ) : (
         <CopyIcon className="fill-onSurface h-6 w-6 p-[3px]" />
       )}
