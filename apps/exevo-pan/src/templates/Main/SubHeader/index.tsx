@@ -4,11 +4,7 @@ import { Link } from 'components/Atoms'
 import HeaderIcon from '../Header/HeaderIcon'
 import { SubHeaderProps } from './types'
 
-const SubHeader = ({
-  navItems,
-  className,
-  ...props
-}: SubHeaderProps): JSX.Element => (
+const SubHeader = ({ navItems, className, ...props }: SubHeaderProps) => (
   <nav
     className={clsx(
       'z-1 inner-container bg-darkerPrimary md:custom-scrollbar sticky top-[60px] overflow-auto shadow-md transition-all',

@@ -9,10 +9,7 @@ import { LanguagePickerProps } from './type'
 
 const SECONDS_IN_A_YEAR = 31536000
 
-const LanguagePicker = ({
-  isOpen,
-  setLanguageOpen,
-}: LanguagePickerProps): JSX.Element => {
+const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
   const {
     translations: { common },
   } = useTranslations()

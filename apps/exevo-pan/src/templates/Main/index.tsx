@@ -3,7 +3,7 @@ import Footer from './Footer'
 
 type MainProps = { children: React.ReactNode }
 
-export default ({ children }: MainProps): JSX.Element => (
+export default ({ children }: MainProps) => (
   <div className="flex min-h-screen flex-col">
     <Header />
     {children}

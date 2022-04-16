@@ -3,9 +3,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import coinsGif from 'assets/tibiaCoins.gif'
 
-const CtaButton = ({
-  ...props
-}: React.HTMLAttributes<HTMLAnchorElement>): JSX.Element => {
+const CtaButton = ({ ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
   const {
     translations: { common },
   } = useTranslations()

@@ -6,11 +6,7 @@ import CopyIcon from 'assets/svgs/copy.svg'
 import ValidIcon from 'assets/svgs/valid.svg'
 import { CopyButtonProps } from './types'
 
-const CopyButton = ({
-  className,
-  copyString,
-  ...props
-}: CopyButtonProps): JSX.Element => {
+const CopyButton = ({ className, copyString, ...props }: CopyButtonProps) => {
   const {
     translations: { common },
   } = useTranslations()

@@ -13,7 +13,7 @@ const Accordion = ({
   border = false,
   children,
   ...props
-}: AccordionProps): JSX.Element => {
+}: AccordionProps) => {
   const {
     translations: { common },
   } = useTranslations()

@@ -12,7 +12,7 @@ const Checkbox = ({
   onChange,
   className,
   ...props
-}: CheckboxProps): JSX.Element => {
+}: CheckboxProps) => {
   const [innerChecked, setChecked] = useState(checkedProp ?? false)
   const checked = checkedProp ?? innerChecked
 

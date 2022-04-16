@@ -27,7 +27,7 @@ const heading = {
 const Header = ({
   className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+}: React.HTMLAttributes<HTMLDivElement>) => {
   const {
     translations: { common },
   } = useTranslations()

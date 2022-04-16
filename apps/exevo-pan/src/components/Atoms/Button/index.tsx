@@ -8,7 +8,7 @@ const Button = ({
   loading = false,
   disabled,
   ...props
-}: ButtonProps): JSX.Element => {
+}: ButtonProps) => {
   const {
     translations: { common },
   } = useTranslations()
