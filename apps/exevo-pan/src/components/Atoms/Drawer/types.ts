@@ -3,3 +3,7 @@ export interface DrawerProps extends React.HTMLAttributes<HTMLDivElement> {
   onClose: () => void
   children: React.ReactNode
 }
+
+export interface DrawerHeadProps extends React.HTMLAttributes<HTMLDivElement> {
+  onClose?: () => void
+}

@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import ArrowIcon from 'assets/svgs/arrowBack.svg'
 import { DrawerHeadProps } from './types'
 
-const DrawerHead = ({
+export default ({
   onClose,
   children,
   className,
@@ -38,5 +38,3 @@ const DrawerHead = ({
     </div>
   )
 }
-
-export default DrawerHead

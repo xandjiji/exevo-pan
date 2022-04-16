@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 
-const DrawerFooter = ({
+export default ({
   className,
   children,
   ...props
@@ -15,5 +15,3 @@ const DrawerFooter = ({
     {children}
   </div>
 )
-
-export default DrawerFooter
