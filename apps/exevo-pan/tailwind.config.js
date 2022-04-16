@@ -47,6 +47,7 @@ module.exports = {
       black: withOpacityValue('--tw-black'),
     },
     fontSize: {
+      none: '0', // 0
       xs: '0.625rem', // 10px
       tsm: '0.75rem', // 12px
       s: '0.875rem', // 14px

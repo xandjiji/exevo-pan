@@ -1,29 +1,41 @@
 import { useTranslations } from 'contexts/useTranslation'
-import * as S from './styles'
+import clsx from 'clsx'
+import ArrowIcon from 'assets/svgs/arrowBack.svg'
 import { DrawerHeadProps } from './types'
 
 const DrawerHead = ({
   onClose,
   children,
+  className,
   ...props
-}: DrawerHeadProps): JSX.Element => {
+}: DrawerHeadProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
-    <S.DrawerHead {...props}>
+    <div
+      className={clsx(
+        'bg-primary inner-padding flex h-[60px] flex-none items-center shadow-md',
+        className,
+      )}
+      {...props}
+    >
       {onClose && (
-        <S.BackButton
+        <button
+          className="clickable text-none mr-6 h-[30px] w-[30px] rounded p-[2px]"
+          type="button"
           tabIndex={0}
           aria-label={common.CloseDrawerLabel}
           onClick={onClose}
         >
-          <S.ArrowIcon />
-        </S.BackButton>
+          <ArrowIcon className="fill-onPrimary" />
+        </button>
       )}
-      <S.ContentWrapper>{children}</S.ContentWrapper>
-    </S.DrawerHead>
+      <div className="text-onPrimary w-full text-base tracking-wider">
+        {children}
+      </div>
+    </div>
   )
 }
 
