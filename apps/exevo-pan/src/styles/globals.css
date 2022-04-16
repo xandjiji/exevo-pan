@@ -21,6 +21,15 @@
 }
 
 @layer utilities {
+  /* @ ToDo: remove these once `brightness` utility is fixed */
+  .highlight-10 {
+    filter: brightness(110%);
+  }
+
+  .highlight-30 {
+    filter: brightness(130%);
+  }
+
   .clickable {
     @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
   }
