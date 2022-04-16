@@ -74,6 +74,7 @@ module.exports = {
         rollIn: 'rollIn 0.8s ease-in',
         fadeIn: 'fadeIn 0.1s ease-out',
         rushIn: 'rushIn 0.1s ease-out',
+        slideIn: 'slideIn 0.2s ease-out',
       },
       keyframes: {
         rollIn: {
@@ -100,6 +101,10 @@ module.exports = {
         rushIn: {
           '0%': { opacity: 0, transform: 'scale(0.95)' },
           '100%': { opacity: 1, transform: 'unset' },
+        },
+        slideIn: {
+          '0%': { opacity: 0, transform: 'translateX(-100%)' },
+          '100%': { opacity: 1, transform: 'translateX(0)' },
         },
       },
     },

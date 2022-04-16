@@ -1,18 +1,22 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
 import { createPortal } from 'react-dom'
 import { useState, useEffect, useRef } from 'react'
+import clsx from 'clsx'
 import FocusLock from 'react-focus-lock'
 import { useDrag, useEscToClose, useIsMounted, useLockBody } from 'hooks'
 import DrawerHead from './DrawerHead'
 import DrawerFooter from './DrawerFooter'
-import * as S from './styles'
+import DrawerBody from './DrawerBody'
 import { DrawerProps } from './types'
 
 const Drawer = ({
   isOpen,
   onClose,
   children,
+  className,
   ...props
-}: DrawerProps): JSX.Element | null => {
+}: DrawerProps) => {
   const initialDrag = useRef<number | null>(null)
   const [drawerOffset, setDrawerOffset] = useState<number>(0)
   const [shouldBeRendered, setShouldBeRendered] = useState<boolean>(isOpen)
@@ -60,21 +64,36 @@ const Drawer = ({
   return isMounted && shouldBeRendered
     ? createPortal(
         <FocusLock>
-          <S.Wrapper
+          <div
             tabIndex={0}
             aria-hidden={!isOpen}
             aria-modal="true"
             role="dialog"
             ref={elementToFocusRef}
             onKeyDown={onKeyDown}
-            style={{ marginLeft: `${drawerOffset}px` }}
+            className={clsx(
+              'animate-slideIn z-75 bg-surface fixed top-0 left-0 flex h-screen w-[90vw] max-w-[600px] flex-col shadow-lg outline-none',
+              !isOpen && 'invisible opacity-0',
+              className,
+            )}
+            style={{
+              marginLeft: `${drawerOffset}px`,
+              transform: `translateX(${isOpen ? '0' : '-100%'})`,
+              transition: '0.2s ease-out',
+              transitionProperty: 'opacity, transform, visibility',
+            }}
             {...props}
           >
             {children}
-          </S.Wrapper>
-          <S.Backdrop
-            aria-hidden={!isOpen}
+          </div>
+
+          <div
+            className={clsx(
+              'z-74 animate-fadeIn fixed top-0 left-0 h-screen w-screen bg-black/40 transition-all',
+              !isOpen && 'pointer-events-none opacity-0',
+            )}
             style={{ cursor: isMousePressed ? 'grabbing' : 'unset' }}
+            aria-hidden={!isOpen}
             {...binders}
           />
         </FocusLock>,
@@ -84,7 +103,7 @@ const Drawer = ({
 }
 
 Drawer.Head = DrawerHead
-Drawer.Body = S.DrawerBody
+Drawer.Body = DrawerBody
 Drawer.Footer = DrawerFooter
 
 export default Drawer
