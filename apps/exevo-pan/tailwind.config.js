@@ -71,6 +71,8 @@ module.exports = {
       },
       animation: {
         rollIn: 'rollIn 0.8s ease-in',
+        fadeIn: 'fadeIn 0.1s ease-out',
+        rushIn: 'rushIn 0.1s ease-out',
       },
       keyframes: {
         rollIn: {
@@ -89,6 +91,14 @@ module.exports = {
             transform: 'translate3d(5%, 0, 0) rotate3d(0, 0, 1, 15deg)',
           },
           '100%': { transform: 'none' },
+        },
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        rushIn: {
+          '0%': { opacity: 0, transform: 'scale(0.95)' },
+          '100%': { opacity: 1, transform: 'unset' },
         },
       },
     },

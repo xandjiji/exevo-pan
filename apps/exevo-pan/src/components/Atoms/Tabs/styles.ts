@@ -27,6 +27,7 @@ export const Tab = styled.button`
   display: flex;
   gap: 6px;
 
+  font-size: 12px;
   color: var(--separator);
   font-weight: 700;
   letter-spacing: 0.4px;
