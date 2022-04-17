@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useRef, memo } from 'react'
+import clsx from 'clsx'
 import { useUuid } from 'hooks'
-import * as S from './styles'
+import ClearIcon from 'assets/svgs/cross.svg'
 import { InputProps, InputValue } from './types'
 
 const Input = ({
@@ -13,7 +16,7 @@ const Input = ({
   onChange,
   hasAlert = true,
   ...props
-}: InputProps): JSX.Element => {
+}: InputProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -48,13 +51,17 @@ const Input = ({
   }
 
   return (
-    <S.Wrapper className={className} style={style}>
-      <S.InputWrapper
-        isClearButtonActive={isClearButtonActive}
-        isInvalid={isInvalid}
+    <div className={className} style={style}>
+      <div
+        className={clsx(
+          'border-1 bg-surface flex w-full cursor-text rounded-md border-solid transition-colors',
+          isInvalid
+            ? 'border-red'
+            : 'border-separator focus-within:border-primary',
+        )}
         onClick={() => inputRef.current?.focus()}
       >
-        <S.Input
+        <input
           ref={inputRef}
           value={derivedValue}
           onChange={handleChange}
@@ -62,28 +69,43 @@ const Input = ({
           aria-invalid={isInvalid}
           aria-errormessage={isInvalid ? errorId : undefined}
           autoComplete="off"
+          className="text-tsm text-onSurface w-full border-none bg-transparent py-[10px] px-4 outline-none transition-all"
+          style={{ paddingRight: isClearButtonActive ? 0 : undefined }}
           {...props}
         />
         {allowClear && (
-          <S.ClearButton
+          <button
+            type="button"
             aria-label={common.ClearInputLabel}
             disabled={!isClearButtonActive}
             aria-hidden={!isClearButtonActive}
             onClick={handleClearClick}
-          />
+            className={clsx(
+              'text-none w-[40px] shrink-0 transition-opacity',
+              isClearButtonActive
+                ? 'cursor-pointer'
+                : 'pointer-events-none opacity-0',
+            )}
+          >
+            <ClearIcon className="fill-onSurface h-5 w-5" />
+          </button>
         )}
-      </S.InputWrapper>
+      </div>
       {hasAlert && (
-        <S.ErrorMessage
+        <span
           id={errorId}
           aria-hidden={!isInvalid}
           role="alert"
+          className={clsx(
+            'text-red px-[10px] text-xs transition-opacity',
+            !isInvalid && 'opacity-0',
+          )}
           suppressHydrationWarning
         >
           {errorMessage}
-        </S.ErrorMessage>
+        </span>
       )}
-    </S.Wrapper>
+    </div>
   )
 }
 
