@@ -24,6 +24,11 @@
     background-size: 800% 800%;
     animation: animatedBg 3s ease-out infinite;
   }
+
+  /* @ ToDo: remove this once `raw` image type is available */
+  .warning-icon {
+    transform: translate(1px, -1px) scale(0.75);
+  }
 }
 
 @layer utilities {
