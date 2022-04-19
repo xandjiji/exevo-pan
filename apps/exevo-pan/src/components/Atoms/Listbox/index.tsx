@@ -33,7 +33,7 @@ const Listbox = (
       aria-activedescendant={currentActiveDescendantId}
       tabIndex={-1}
       className={clsx(
-        'custom-scrollbar overflow-y-auto overflow-x-hidden rounded-md shadow-lg',
+        'custom-scrollbar bg-surface overflow-y-auto overflow-x-hidden rounded-md shadow-lg',
         className,
       )}
       {...props}
