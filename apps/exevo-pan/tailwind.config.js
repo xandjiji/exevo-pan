@@ -66,6 +66,7 @@ module.exports = {
       71: '71',
       74: '74',
       75: '75',
+      99: '99',
     },
     extend: {
       borderWidth: {
