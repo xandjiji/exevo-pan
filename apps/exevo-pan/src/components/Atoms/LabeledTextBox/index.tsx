@@ -11,7 +11,7 @@ const LabeledTextBox = ({
   labelText,
   warning = false,
   ...props
-}: LabeledTextBoxProps): JSX.Element => {
+}: LabeledTextBoxProps) => {
   const {
     translations: { common },
   } = useTranslations()

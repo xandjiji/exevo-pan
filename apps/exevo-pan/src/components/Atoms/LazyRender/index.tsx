@@ -7,7 +7,7 @@ const LazyRender = ({
   mediaQuery,
   children,
   ...props
-}: LazyRenderProps): JSX.Element => {
+}: LazyRenderProps) => {
   const [shouldRender, setShouldRender] = useState(true)
 
   const ref = useRef<HTMLDivElement>()

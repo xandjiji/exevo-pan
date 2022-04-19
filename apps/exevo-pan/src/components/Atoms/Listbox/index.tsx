@@ -21,7 +21,7 @@ const Listbox = (
     ...props
   }: ListboxProps,
   refProp: Ref<HTMLDivElement>,
-): JSX.Element => {
+) => {
   const currentActiveDescendantId = useMemo(
     () => indexToId(highlightedIndex, props.id),
     [highlightedIndex, props.id],

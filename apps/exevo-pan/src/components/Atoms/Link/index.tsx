@@ -3,7 +3,7 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { LinkProps } from './types'
 
-const Link = ({ href, exact = false, ...props }: LinkProps): JSX.Element => {
+const Link = ({ href, exact = false, ...props }: LinkProps) => {
   const { pathname } = useRouter()
 
   const isCurrent = exact ? pathname === href : pathname.includes(href)

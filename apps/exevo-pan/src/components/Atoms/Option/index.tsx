@@ -9,7 +9,7 @@ const Option = ({
   highlighted = false,
   onClick,
   ...props
-}: OptionProps): JSX.Element => (
+}: OptionProps) => (
   <option
     className={clsx(
       'text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors',

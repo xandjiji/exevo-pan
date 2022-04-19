@@ -4,7 +4,7 @@ const LoadingAlert = ({
   className,
   children,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => (
+}: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     role="alert"
     className={clsx(
