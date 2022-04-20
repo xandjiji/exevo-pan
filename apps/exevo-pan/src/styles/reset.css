@@ -5,11 +5,20 @@ body {
 a {
   text-decoration: none;
 }
-ul, ol {
+ul,
+ol {
   list-style-type: none;
 }
 
-ul, ol, p, h1, h2, h3, h4, h5, h6 {
+ul,
+ol,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   padding: 0;
   margin: 0;
 }
@@ -34,6 +43,13 @@ button {
   border: none;
   background-color: transparent;
   font: unset;
+  -moz-appearance: textfield;
+}
+
+button::-webkit-outer-spin-button,
+button::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 * {

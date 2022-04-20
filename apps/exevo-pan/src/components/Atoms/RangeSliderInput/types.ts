@@ -7,3 +7,7 @@ export interface RangeSliderInputProps
   onChange?: (values: [number, number]) => void
   value?: [number, number]
 }
+
+export type TrackFillProps = {
+  isMousePressed: boolean
+} & JSX.IntrinsicElements['div']

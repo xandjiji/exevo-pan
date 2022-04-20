@@ -13,21 +13,8 @@ import {
 import clsx from 'clsx'
 import { useIsMounted, useDrag } from 'hooks'
 import { normalize, clampValue, debounce } from 'utils'
+import { ValueDisplay, Cursor, TrackFill } from './atomics'
 import { RangeSliderInputProps } from './types'
-
-const ValueDisplay = (args: JSX.IntrinsicElements['span']) => (
-  <span
-    className="bg-primaryVariant text-tsm text-onSurface w-10 shrink-0 rounded-lg py-[7px] text-center outline-none"
-    {...args}
-  />
-)
-
-const Cursor = (args: JSX.IntrinsicElements['div']) => (
-  <span
-    className="bg-primary pointer-events-none absolute top-1/2 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full shadow-md"
-    {...args}
-  />
-)
 
 const RangeSliderInput = ({
   className,
@@ -160,27 +147,13 @@ const RangeSliderInput = ({
         {clampValue(Math.min(cursorAValue, cursorBValue), [min, max])}
       </ValueDisplay>
       <div className="w-full">
-        <div
+        <TrackFill
           ref={trackRef}
           tabIndex={0}
           onKeyDown={(event) => handleKeyPress(event)}
-          className="bg-primaryVariant relative h-1 w-full cursor-pointer shadow"
+          isMousePressed={track.isMousePressed}
           {...track.binders}
         >
-          <div
-            role="none"
-            className="absolute top-1/2 left-1/2"
-            style={{
-              transform: 'translate(-50%, -50%)',
-              width: 'calc(100% + 30px)',
-              height: 'calc(100% + 30px)',
-            }}
-          />
-
-          {track.isMousePressed && (
-            <div className="z-99 fixed top-0 left-0 h-screen w-screen" />
-          )}
-
           <Cursor
             role="slider"
             aria-label={common.ChangeValueLabel}
@@ -205,7 +178,7 @@ const RangeSliderInput = ({
               width: `${trackFillRight - trackFillLeft}%`,
             }}
           />
-        </div>
+        </TrackFill>
       </div>
       <ValueDisplay>
         {clampValue(Math.max(cursorAValue, cursorBValue), [min, max])}
