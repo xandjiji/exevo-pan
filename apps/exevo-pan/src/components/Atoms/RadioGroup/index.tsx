@@ -1,21 +1,24 @@
+/* eslint-disable jsx-a11y/aria-activedescendant-has-tabindex */
 import { useState, Children, isValidElement, cloneElement } from 'react'
-import * as S from './styles'
+import clsx from 'clsx'
 import { RadioGroupProps } from './types'
 import { indexToId } from './utils'
 
 const RadioGroup = ({
+  className,
   children,
   indexValue: indexProp,
   onChange,
   ...props
-}: RadioGroupProps): JSX.Element => {
+}: RadioGroupProps) => {
   const [innerIndex, setInnerIndex] = useState<number | undefined>(indexProp)
   const derivedActiveIndex = indexProp ?? innerIndex
 
   return (
-    <S.Wrapper
+    <div
       role="radiogroup"
       aria-activedescendant={indexToId(derivedActiveIndex)}
+      className={clsx('grid gap-3', className)}
       {...props}
     >
       {Children.map(children, (child, index) => {
@@ -33,7 +36,7 @@ const RadioGroup = ({
           },
         })
       })}
-    </S.Wrapper>
+    </div>
   )
 }
 
