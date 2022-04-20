@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useTranslations } from 'contexts/useTranslation'
 import {
   useState,
@@ -8,18 +10,33 @@ import {
   useLayoutEffect,
   memo,
 } from 'react'
+import clsx from 'clsx'
 import { useIsMounted, useDrag } from 'hooks'
 import { normalize, clampValue, debounce } from 'utils'
 import { RangeSliderInputProps } from './types'
-import * as S from './styles'
+
+const ValueDisplay = (args: JSX.IntrinsicElements['span']) => (
+  <span
+    className="bg-primaryVariant text-tsm text-onSurface w-10 shrink-0 rounded-lg py-[7px] text-center outline-none"
+    {...args}
+  />
+)
+
+const Cursor = (args: JSX.IntrinsicElements['div']) => (
+  <span
+    className="bg-primary pointer-events-none absolute top-1/2 left-0 -mt-2 -ml-2 h-4 w-4 rounded-full shadow-md"
+    {...args}
+  />
+)
 
 const RangeSliderInput = ({
+  className,
   min,
   max,
   onChange,
   value: propValue = [min, max],
   ...props
-}: RangeSliderInputProps): JSX.Element => {
+}: RangeSliderInputProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -135,19 +152,36 @@ const RangeSliderInput = ({
     normalize(clampValue(cursorBValue, [min, max]), [min, max]) * 100
 
   return (
-    <S.Wrapper {...props}>
-      <S.ValueDisplay>
+    <div
+      className={clsx('flex w-[270px] items-center gap-3', className)}
+      {...props}
+    >
+      <ValueDisplay>
         {clampValue(Math.min(cursorAValue, cursorBValue), [min, max])}
-      </S.ValueDisplay>
-      <div style={{ width: '100%' }}>
-        <S.Track
+      </ValueDisplay>
+      <div className="w-full">
+        <div
           ref={trackRef}
-          active={track.isMousePressed}
           tabIndex={0}
           onKeyDown={(event) => handleKeyPress(event)}
+          className="bg-primaryVariant relative h-1 w-full cursor-pointer shadow"
           {...track.binders}
         >
-          <S.Cursor
+          <div
+            role="none"
+            className="absolute top-1/2 left-1/2"
+            style={{
+              transform: 'translate(-50%, -50%)',
+              width: 'calc(100% + 30px)',
+              height: 'calc(100% + 30px)',
+            }}
+          />
+
+          {track.isMousePressed && (
+            <div className="z-99 fixed top-0 left-0 h-screen w-screen" />
+          )}
+
+          <Cursor
             role="slider"
             aria-label={common.ChangeValueLabel}
             aria-valuenow={cursorAValue}
@@ -155,7 +189,7 @@ const RangeSliderInput = ({
             aria-valuemin={min}
             style={{ left: `${cursorAPosition}%` }}
           />
-          <S.Cursor
+          <Cursor
             role="slider"
             aria-label={common.ChangeValueLabel}
             aria-valuenow={cursorBValue}
@@ -163,18 +197,20 @@ const RangeSliderInput = ({
             aria-valuemin={min}
             style={{ left: `${cursorBPosition}%` }}
           />
-          <S.TrackFill
+
+          <div
+            className="bg-primary absolute top-0 h-full opacity-70"
             style={{
               left: `${trackFillLeft}%`,
               width: `${trackFillRight - trackFillLeft}%`,
             }}
           />
-        </S.Track>
+        </div>
       </div>
-      <S.ValueDisplay>
+      <ValueDisplay>
         {clampValue(Math.max(cursorAValue, cursorBValue), [min, max])}
-      </S.ValueDisplay>
-    </S.Wrapper>
+      </ValueDisplay>
+    </div>
   )
 }
 
