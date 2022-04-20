@@ -6,13 +6,14 @@ import {
   isValidElement,
   cloneElement,
 } from 'react'
+import clsx from 'clsx'
 import { usePopper } from 'react-popper'
 import { Modifier } from '@popperjs/core'
 import { checkKeyboardTrigger } from 'utils'
-import * as S from './styles'
 import { PopoverProps, PopperReferenceElement } from './types'
 
 const Popover = ({
+  className,
   children,
   content,
   placement = 'top',
@@ -20,7 +21,7 @@ const Popover = ({
   visible,
   offset = [0, 0],
   ...props
-}: PopoverProps): JSX.Element => {
+}: PopoverProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -87,23 +88,40 @@ const Popover = ({
     }
   }, [trigger])
 
+  const increaseHoverArea = trigger === 'hover' && derivedVisibility
+
   return (
     <>
-      <S.PopoverReference
+      <div
         ref={setReferenceElement}
-        padX={offset[0]}
-        padY={offset[1]}
-        increaseHoverArea={trigger === 'hover' && derivedVisibility}
+        className="child:z-1 child:relative relative inline-block cursor-pointer"
         {...triggers}
       >
+        {increaseHoverArea && (
+          <div
+            className="bg-red top-1/2 left-1/2"
+            style={{
+              position: 'absolute',
+              transform: 'translate(-50%, -50%)',
+              width: `calc(100% + ${offset[0] + 8}px)`,
+              height: `calc(100% + ${offset[1] + 8}px)`,
+            }}
+          />
+        )}
+
         {children}
-      </S.PopoverReference>
+      </div>
+
       {derivedVisibility && (
-        <S.PopoverContent
+        <div
           ref={setPopperElement}
-          aria-hidden="false"
           style={styles.popper}
           {...attributes.popper}
+          className={clsx(
+            'z-51 animate-fadeIn',
+            className,
+            attributes.popper?.className,
+          )}
           {...props}
           {...(trigger === 'hover' ? { ...triggers, tabIndex: undefined } : {})}
         >
@@ -117,10 +135,13 @@ const Popover = ({
               hidden: false,
             })
           })}
-        </S.PopoverContent>
+        </div>
       )}
+
       {trigger === 'click' && derivedVisibility && (
-        <S.Backdrop
+        <button
+          type="button"
+          className="bg-backdrop animate-fadeIn fixed top-0 left-0 z-50 h-screen w-screen"
           aria-label={common.PopoverCloseLabel}
           onClick={() => setVisible(false)}
         />

@@ -63,6 +63,8 @@ module.exports = {
       2: '2',
       3: '3',
       10: '10',
+      50: '50',
+      51: '51',
       71: '71',
       74: '74',
       75: '75',
@@ -116,6 +118,7 @@ module.exports = {
     plugin(function ({ addVariant }) {
       addVariant('hocus', ['&:hover', '&:focus'])
       addVariant('currentpage', "&[aria-current='page']")
+      addVariant('child', '& > *')
     }),
   ],
   corePlugins: {
