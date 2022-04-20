@@ -33,7 +33,7 @@ const RadioButton = ({
       aria-checked={derivedActive}
       tabIndex={0}
       className={clsx(
-        'radio-wrapper text-s text-onSurface active:child:bg-red flex cursor-pointer items-center gap-[6px]',
+        'radio-wrapper text-s text-onSurface flex cursor-pointer items-center gap-[6px]',
         className,
       )}
       {...props}
