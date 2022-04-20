@@ -13,19 +13,21 @@ const Button = ({
     translations: { common },
   } = useTranslations()
 
+  const isDisabled = loading || disabled
+
   return (
     <button
       className={clsx(
-        'bg-primary text-onPrimary active:bg-primary hover:highlight-10 cursor-pointer rounded-xl py-3 px-6 text-2xl shadow-md transition-all hover:shadow-lg active:shadow-inner',
+        'bg-primary active:bg-primary hover:highlight-10 cursor-pointer rounded-xl py-3 px-6 text-2xl shadow-md transition-all hover:shadow-lg active:shadow-inner',
         disabled &&
           !loading &&
           'bg-separator cursor-default text-black opacity-60 shadow-none',
-        (loading || disabled) && 'pointer-events-none',
+        isDisabled ? 'pointer-events-none text-black' : 'text-onPrimary',
         className,
       )}
       {...props}
       type="button"
-      disabled={loading ? true : disabled}
+      disabled={isDisabled}
     >
       {loading ? (
         <div
