@@ -100,7 +100,7 @@ const Popover = ({
         {increaseHoverArea && (
           <div
             role="none"
-            className="bg-red top-1/2 left-1/2"
+            className="top-1/2 left-1/2"
             style={{
               position: 'absolute',
               transform: 'translate(-50%, -50%)',
