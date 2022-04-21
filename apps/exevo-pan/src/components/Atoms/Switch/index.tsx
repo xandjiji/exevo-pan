@@ -1,44 +1,66 @@
-import { useState } from 'react'
-import { checkKeyboardTrigger } from 'utils'
-import * as S from './styles'
+import { useState, cloneElement } from 'react'
+import clsx from 'clsx'
 import { SwitchProps } from './types'
 
 const Switch = ({
+  className,
   children,
   active,
   onClick,
   icon,
   ...props
-}: SwitchProps): JSX.Element => {
+}: SwitchProps) => {
   const [activeState, setActive] = useState<boolean>(active ?? false)
   const derivedActive = active ?? activeState
 
-  const handleClick = (event?: React.MouseEvent) => {
+  const handleClick: React.MouseEventHandler<HTMLButtonElement> = (event) => {
     setActive((prev) => !prev)
     onClick?.(event)
   }
 
-  const handleKeypress = (event: React.KeyboardEvent) => {
-    if (checkKeyboardTrigger(event.code)) {
-      event.preventDefault()
-      handleClick()
-    }
-  }
-
   return (
-    <S.Switch
+    <button
+      type="button"
       role="switch"
-      tabIndex={0}
       onClick={handleClick}
-      onKeyPress={handleKeypress}
       aria-checked={derivedActive}
+      className={clsx(
+        'text-s text-onSurface flex cursor-pointer select-none items-center gap-2',
+        className,
+      )}
       {...props}
     >
-      <S.ToggleButton active={derivedActive} hasIcon={!!icon}>
-        {icon}
-      </S.ToggleButton>
+      <div
+        className={clsx(
+          'relative rounded-2xl transition-colors',
+          derivedActive ? 'bg-primaryVariant' : 'bg-separator',
+          icon ? 'h-4 w-[52px]' : 'h-2 w-7',
+        )}
+      >
+        <div
+          className={clsx(
+            'z-1 absolute top-1/2 grid place-items-center rounded-full shadow-md transition-all',
+            derivedActive ? 'bg-primary' : 'bg-surface',
+            icon ? 'h-8 w-8' : 'h-4 w-4',
+          )}
+          style={{
+            left: derivedActive
+              ? `calc(100% - ${icon ? '32px' : '16px'})`
+              : '0px',
+            transform: 'translateY(-50%)',
+          }}
+        >
+          {icon &&
+            cloneElement(icon, {
+              className: clsx(
+                'z-1 transition-colors',
+                derivedActive ? 'fill-onPrimary' : 'fill-onSurface',
+              ),
+            })}
+        </div>
+      </div>
       {children}
-    </S.Switch>
+    </button>
   )
 }
 
