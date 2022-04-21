@@ -6,3 +6,7 @@ export type SpritePortraitProps = React.HTMLAttributes<HTMLDivElement> & {
   height: number
   onError?: () => void
 }
+
+export type BackgroundProps = {
+  offset?: boolean
+} & JSX.IntrinsicElements['div']

@@ -2,7 +2,7 @@ import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { v4 as uuidv4 } from 'uuid'
 import { SpritePortrait } from 'components/Atoms'
-import { Background } from 'components/Atoms/SpritePortrait/styles'
+import { Background } from 'components/Atoms/SpritePortrait'
 import * as S from './styles'
 import { CharacterItemsProps } from './types'
 
