@@ -1,19 +1,20 @@
 import { memo, useState, useRef, useEffect } from 'react'
+import clsx from 'clsx'
 import { useOnScreen } from 'hooks'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
-import { Wrapper } from './styles'
 import { StickerProps } from './types'
 
 const Sticker = ({
   localStorageKey,
+  className,
   children,
   ...props
-}: StickerProps): JSX.Element | null => {
+}: StickerProps) => {
   const [hasSticker] = useState(() =>
     getFromLocalStorage(localStorageKey, true),
   )
 
-  const ref = useRef<HTMLSpanElement>()
+  const ref = useRef<HTMLSpanElement>(null)
   const onScreen = useOnScreen<HTMLSpanElement>(ref)
 
   useEffect(() => {
@@ -22,9 +23,16 @@ const Sticker = ({
 
   if (!hasSticker) return null
   return (
-    <Wrapper {...props} ref={ref as React.RefObject<HTMLSpanElement>}>
+    <span
+      className={clsx(
+        'bg-battleYellow border-1 border-separator rounded-md border-dashed p-[3px] text-[9px] uppercase tracking-wider text-black opacity-80',
+        className,
+      )}
+      {...props}
+      ref={ref}
+    >
       {children}
-    </Wrapper>
+    </span>
   )
 }
 
