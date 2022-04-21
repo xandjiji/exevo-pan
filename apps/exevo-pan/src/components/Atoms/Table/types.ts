@@ -1,10 +1,10 @@
 export interface TableProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode
   title?: string
   subtitle?: string
 }
 
-export interface HeadColumnStyleProps {
+export interface HeadColumnProps
+  extends React.HTMLAttributes<HTMLTableCellElement> {
   highlighted?: boolean
   desc?: boolean
 }

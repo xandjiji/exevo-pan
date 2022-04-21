@@ -29,9 +29,21 @@
   .warning-icon {
     transform: translate(1px, -1px) scale(0.75);
   }
+
+  .card {
+    @apply bg-surface text-onSurface rounded p-3 text-xs font-normal shadow-md;
+  }
 }
 
 @layer utilities {
+  .styled-link a {
+    @apply text-primaryHighlight text-s font-normal;
+  }
+
+  .invisible-caption caption {
+    @apply sr-only;
+  }
+
   .radio-wrapper:active .inner-radio {
     @apply shadow-inner;
   }
@@ -81,10 +93,6 @@
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
     @apply bg-primaryVariant rounded-sm;
-  }
-
-  .card {
-    @apply bg-surface text-onSurface rounded p-3 text-xs font-normal shadow-md;
   }
 }
 

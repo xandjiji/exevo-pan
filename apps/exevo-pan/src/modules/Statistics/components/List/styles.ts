@@ -2,7 +2,8 @@ import styled from 'styled-components'
 import { Table as BaseTable } from 'components/Atoms'
 
 export const Table = styled(BaseTable)`
-  ${BaseTable.HeadColumn}, ${BaseTable.Column} {
+  th,
+  td {
     &:nth-child(1) {
       width: 16px;
       text-align: center;
@@ -21,11 +22,9 @@ export const Table = styled(BaseTable)`
     }
   }
 
-  ${BaseTable.Column} {
-    &:nth-child(1) {
-      font-size: 10px;
-      line-height: 1.6;
-      vertical-align: top;
-    }
+  td:nth-child(1) {
+    font-size: 10px;
+    line-height: 1.6;
+    vertical-align: top;
   }
 `
