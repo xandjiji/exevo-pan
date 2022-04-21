@@ -1,5 +1,4 @@
 import clsx from 'clsx'
-import styled, { css } from 'styled-components'
 import { HeadColumnProps } from './types'
 
 export const Table = ({
