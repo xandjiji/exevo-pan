@@ -12,8 +12,8 @@ export const Background = ({
 }: BackgroundProps) => (
   <div
     className={clsx(
-      'bg-primaryVariant select-none rounded-md shadow-md transition-colors',
-      offset ? 'h-14 w-14' : 'h-12 w-12',
+      'bg-primaryVariant relative select-none rounded-md p-2 shadow-md transition-colors',
+      offset ? 'sprite-offset h-14 w-14' : 'h-12 w-12',
       className,
     )}
     {...props}
@@ -36,7 +36,7 @@ const SpritePortrait = ({
   const [loaded, onLoad] = useOnImageLoad()
 
   return (
-    <Background className="relative p-2" offset={offset} {...props}>
+    <Background offset={offset} {...props}>
       <Image
         alt={alt}
         src={src}
@@ -46,11 +46,7 @@ const SpritePortrait = ({
         onLoad={onLoad}
         onError={onError}
         unoptimized
-        className={clsx(
-          'z-1 transition-opacity',
-          !loaded && 'opacity-0',
-          offset && '!-ml-6 !-mt-6',
-        )}
+        className={clsx('z-1 transition-opacity', !loaded && 'opacity-0')}
       />
       {!loaded && (
         <div
