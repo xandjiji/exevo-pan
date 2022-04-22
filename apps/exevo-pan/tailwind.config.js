@@ -33,9 +33,7 @@ module.exports = {
       darkerPrimary: withOpacityValue('--tw-darkerPrimary'),
       onPrimary: withOpacityValue('--tw-onPrimary'),
       primaryVariant: withOpacityValue('--tw-primaryVariant'),
-      primaryVariantHighlight: withOpacityValue(
-        '--tw-primaryVariantHighlight)',
-      ),
+      primaryVariantHighlight: withOpacityValue('--tw-primaryVariantHighlight'),
       green: withOpacityValue('--tw-green'),
       greenHighlight: withOpacityValue('--tw-greenHighlight'),
       red: withOpacityValue('--tw-red'),
