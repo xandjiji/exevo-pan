@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { FadeImage } from 'components/Atoms'
-import BaseTag from 'components/Tag'
+import BaseTag from 'components/Atoms/Tag'
 import { MaterialCard, Smooth, Shadow } from 'styles'
 
 export const Thumbnail = styled(FadeImage)`

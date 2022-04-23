@@ -1,6 +1,6 @@
 import { useState, useCallback } from 'react'
 import { Accordion, Input } from 'components/Atoms'
-import Tag from 'components/Tag'
+import Tag from 'components/Atoms/Tag'
 import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'

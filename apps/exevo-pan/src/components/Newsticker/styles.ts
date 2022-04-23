@@ -7,7 +7,7 @@ import {
   CustomScrollbar,
   Smooth,
 } from 'styles'
-import BaseTag from '../Tag'
+import BaseTag from '../Atoms/Tag'
 
 export const Wrapper = styled.aside`
   ${InnerContainer}
