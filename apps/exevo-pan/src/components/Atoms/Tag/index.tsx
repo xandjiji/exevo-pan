@@ -1,37 +1,73 @@
-import { memo } from 'react'
+import { memo, useMemo } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
+import { generateTagColors } from 'utils'
 import { blogTags } from 'Constants'
-import * as S from './styles'
 import { TagProps } from './types'
 
-const { tagById } = blogTags
-const FALLBACK_COLOR = 0
+const { tagById, fallbackColor } = blogTags
 
 const Tag = ({
   clickable = false,
   active = false,
   tagId,
   tagColor,
+  className,
   children,
   ...props
-}: TagProps): JSX.Element => {
+}: TagProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
-  const type = clickable ? 'button' : undefined
+  const colors = useMemo(
+    () =>
+      tagColor
+        ? generateTagColors(tagColor)
+        : tagById[tagId as string] ?? fallbackColor,
+    [tagColor, tagId],
+  )
+
+  const content =
+    children ?? common.BlogTags[tagById[tagId as string]?.id] ?? tagId
+
+  if (clickable)
+    return (
+      <button
+        type="button"
+        role="switch"
+        aria-checked={active}
+        className={clsx(
+          'w-fit rounded-[9px] py-[6px] px-4 font-bold transition-all',
+          'clickable',
+          className,
+        )}
+        style={{
+          backgroundColor: active
+            ? colors.background.active
+            : colors.background.inactive,
+          color: active ? colors.text.active : colors.text.inactive,
+        }}
+        {...(props as JSX.IntrinsicElements['button'])}
+      >
+        {content}
+      </button>
+    )
 
   return (
-    <S.Wrapper
-      as={type}
-      type={type}
-      role={clickable ? 'switch' : undefined}
-      aria-checked={clickable ? active : undefined}
-      tagColor={tagColor ?? tagById[tagId as string]?.color ?? FALLBACK_COLOR}
-      {...props}
+    <div
+      className={clsx(
+        'w-fit rounded-[9px] py-[6px] px-4 font-bold transition-all',
+        className,
+      )}
+      style={{
+        backgroundColor: colors.background.active,
+        color: colors.text.active,
+      }}
+      {...(props as JSX.IntrinsicElements['div'])}
     >
-      {children ?? common.BlogTags[tagById[tagId as string]?.id] ?? tagId}
-    </S.Wrapper>
+      {content}
+    </div>
   )
 }
 

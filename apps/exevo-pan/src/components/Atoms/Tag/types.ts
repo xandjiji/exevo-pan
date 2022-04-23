@@ -1,4 +1,5 @@
-type ButtonProps = Omit<React.HTMLAttributes<HTMLButtonElement>, 'children'>
+type ButtonProps = Omit<JSX.IntrinsicElements['button'], 'children'>
+type DivProps = Omit<JSX.IntrinsicElements['div'], 'children'>
 
 type CustomTag = {
   children: string
@@ -15,7 +16,9 @@ type TagId = {
 type TagPropOptions = CustomTag | TagId
 
 export type TagProps = {
-  clickable?: boolean
   active?: boolean
-} & ButtonProps &
-  TagPropOptions
+} & TagPropOptions &
+  (
+    | ({ clickable: true } & ButtonProps)
+    | ({ clickable: false | never } & DivProps)
+  )
