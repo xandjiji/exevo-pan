@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useState, useReducer, useCallback, useEffect, memo } from 'react'
-import { Option, Input } from 'components/Atoms'
+import clsx from 'clsx'
+import { Popover, Listbox, Option, Input } from 'components/Atoms'
 import { useUuid } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
-import * as S from './styles'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import AutocompleteInputReducer from './reducer'
@@ -13,7 +14,7 @@ const AutocompleteInput = ({
   itemList = [],
   onItemSelect,
   ...props
-}: AutocompleteInputProps): JSX.Element => {
+}: AutocompleteInputProps) => {
   const listboxId = useUuid()
 
   const [currentList, setCurrentList] = useState<Option[]>(itemList)
@@ -97,23 +98,24 @@ const AutocompleteInput = ({
   )
 
   return (
-    <S.Wrapper className={className} style={style}>
-      <S.Popover
+    <div className={clsx('child:w-full relative', className)} style={style}>
+      <Popover
         placement="bottom"
         trigger="none"
         visible={listboxStatus}
         content={
-          <S.Listbox
+          <Listbox
             id={listboxId}
             highlightedIndex={highlightedIndex}
             onSelectOption={onSelectOption}
+            className="max-h-[210px]"
           >
             {currentList.map((item) => (
               <Option key={item.value} value={item.value}>
                 {item.name}
               </Option>
             ))}
-          </S.Listbox>
+          </Listbox>
         }
       >
         <Input
@@ -131,12 +133,14 @@ const AutocompleteInput = ({
           hasAlert={false}
           {...props}
         />
-      </S.Popover>
-      <S.Backdrop
+      </Popover>
+      <button
+        type="button"
         onMouseUp={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
         hidden={!listboxStatus}
+        className="fixed top-0 left-0 h-screen w-screen"
       />
-    </S.Wrapper>
+    </div>
   )
 }
 
