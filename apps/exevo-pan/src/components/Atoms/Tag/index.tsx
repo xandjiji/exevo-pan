@@ -12,6 +12,7 @@ const Tag = ({
   active = false,
   tagId,
   tagColor,
+  style,
   className,
   children,
   ...props
@@ -43,6 +44,7 @@ const Tag = ({
           className,
         )}
         style={{
+          ...style,
           backgroundColor: active
             ? colors.background.active
             : colors.background.inactive,
@@ -61,6 +63,7 @@ const Tag = ({
         className,
       )}
       style={{
+        ...style,
         backgroundColor: colors.background.active,
         color: colors.text.active,
       }}

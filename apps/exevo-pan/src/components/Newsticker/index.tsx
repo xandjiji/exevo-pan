@@ -1,47 +1,76 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
+import { FadeImage, Tag } from 'components/Atoms'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
-import * as S from './styles'
 import { NewstickerProps } from './types'
 
-const Newsticker = ({ blogPosts, ...props }: NewstickerProps): JSX.Element => {
+const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
-    <S.Wrapper {...props}>
-      <S.SectionTitle>{common.Newsticker}</S.SectionTitle>
+    <aside
+      className={clsx(
+        'inner-container bg-darkerPrimary relative flex h-[134px] flex-col gap-3 pt-3 transition-colors md:h-[88px] md:flex-row md:items-center md:gap-6 md:pb-3',
+        className,
+      )}
+      {...props}
+    >
+      <div
+        className="z-1 from-darkerPrimary pointer-events-none absolute top-0 right-0 w-8 bg-gradient-to-l to-transparent"
+        style={{ height: 'calc(100% - 6px)' }}
+      />
+      <h2 className="text-onPrimary tracking-wide md:w-min">
+        {common.Newsticker}
+      </h2>
 
-      <S.PostWrapper>
+      <div className="negative-container custom-scrollbar flex gap-3 overflow-auto pb-3 before:w-2 before:flex-none after:w-2 after:flex-none md:m-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 md:before:content-[unset] md:after:content-[unset]">
         {blogPosts.map(({ slug, title, tags, thumbnail }) => (
-          <S.Card key={slug}>
-            <S.Thumbnail>
-              <S.FadeImage
+          <article
+            key={slug}
+            className="group relative flex max-w-[80vw] flex-none items-center gap-3 md:max-w-none"
+          >
+            <div className="bg-primaryVariant relative top-0 grid shrink-0 place-items-center rounded-md p-2 shadow-md transition-all group-hover:top-[-2px]">
+              <FadeImage
                 src={thumbnail}
                 layout="fixed"
                 width={48}
                 height={48}
                 alt={title}
                 unoptimized
+                className="relative h-12 w-12"
               />
-            </S.Thumbnail>
+            </div>
 
-            <S.Body>
-              <S.Title>{title}</S.Title>
+            <div className="flex flex-col gap-[6px]">
+              <h3 className="text-s line-clamp-2 text-onPrimary font-light leading-tight tracking-wide md:text-base md:leading-none">
+                {title}
+              </h3>
 
-              <S.TagWrapper>
+              <div className="flex gap-2">
                 {tags.map((tag) => (
-                  <S.Tag key={tag} tagId={tag} />
+                  <Tag
+                    className="text-xs shadow-md"
+                    key={tag}
+                    tagId={tag}
+                    style={{ padding: '4px 8px', borderRadius: '5px' }}
+                  />
                 ))}
-              </S.TagWrapper>
-            </S.Body>
+              </div>
+            </div>
 
-            <NextLink href={`${routes.BLOG}/${slug}`}>{title}</NextLink>
-          </S.Card>
+            <NextLink href={`${routes.BLOG}/${slug}`}>
+              <a className="absolute top-0 left-0 h-full w-full text-transparent">
+                {title}
+              </a>
+            </NextLink>
+          </article>
         ))}
-      </S.PostWrapper>
-    </S.Wrapper>
+      </div>
+    </aside>
   )
 }
 

@@ -56,6 +56,11 @@ module.exports = {
       xl: '1.375rem', // 22px
       '2xl': '1.5rem', // 24px
     },
+    lineHeight: {
+      none: 'normal',
+      tight: '1.3',
+      relaxed: '1.6',
+    },
     zIndex: {
       1: '1',
       2: '2',

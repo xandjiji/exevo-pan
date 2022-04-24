@@ -17,8 +17,6 @@ type TagPropOptions = CustomTag | TagId
 
 export type TagProps = {
   active?: boolean
+  clickable?: boolean
 } & TagPropOptions &
-  (
-    | ({ clickable: true } & ButtonProps)
-    | ({ clickable: false | never } & DivProps)
-  )
+  (ButtonProps | DivProps)
