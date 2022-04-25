@@ -4,7 +4,6 @@ import Image from 'next/image'
 import { MaterialCard, Clickable } from 'styles'
 import TibiaCoinImage from 'assets/tibiacoin.png'
 import ExpandSvg from 'assets/svgs/expand.svg'
-import { Nickname } from 'components/CharacterMiniCard/styles'
 
 const FIXED_BODY_HEIGHT = 373
 
@@ -27,8 +26,8 @@ export const Wrapper = styled.article`
 
     z-index: 2;
 
-    ${Nickname} {
-      color: var(--greenHighlight);
+    .character-mini-card p {
+      color: rgb(var(--tw-greenHighlight));
     }
 
     @media (min-width: 768px) {
