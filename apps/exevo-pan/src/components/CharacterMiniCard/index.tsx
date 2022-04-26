@@ -15,6 +15,7 @@ const CharacterMiniCard = ({
   characterName,
   forceSubtitle,
   linkUrl,
+  highlighted = false,
   className,
   ...props
 }: CharacterMiniCardProps): JSX.Element => {
@@ -42,7 +43,12 @@ const CharacterMiniCard = ({
         title={name}
       />
       <div>
-        <p className="text-primaryHighlight flex items-center text-base font-bold">
+        <p
+          className={clsx(
+            'flex items-center text-base font-bold',
+            highlighted ? 'text-greenHighlight' : 'text-primaryHighlight',
+          )}
+        >
           {name}
           {linkUrl && (
             <a
