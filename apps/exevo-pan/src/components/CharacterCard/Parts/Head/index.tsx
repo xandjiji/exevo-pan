@@ -4,6 +4,7 @@ import * as S from './styles'
 import { HeadProps } from './types'
 
 const Head = ({
+  highlighted = false,
   id,
   nickname,
   outfitId,
@@ -14,6 +15,7 @@ const Head = ({
 }: HeadProps): JSX.Element => (
   <S.Head>
     <S.CharacterMiniCard
+      highlighted={highlighted}
       outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
       characterData={{
         name: nickname,

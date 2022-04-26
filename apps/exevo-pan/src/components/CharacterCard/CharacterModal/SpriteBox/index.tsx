@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { formatNumberWithCommas } from 'utils'
-import { Checkbox } from 'components/CharacterCard/styles'
+import { Checkbox } from 'components/CharacterCard/atoms'
 import { NotifyErrorClient } from 'services'
 import { rareMountSet, testRareOutfit } from '../../Parts/SpecialTags/utils'
 import { addonCheck } from './utils'

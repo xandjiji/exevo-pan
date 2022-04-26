@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
-import * as S from '../styles'
+import * as S from '../atoms'
 import * as Skeletons from './styles'
 
 const CardSkeleton = ({

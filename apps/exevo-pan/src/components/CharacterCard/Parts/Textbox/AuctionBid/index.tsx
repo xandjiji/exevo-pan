@@ -1,7 +1,7 @@
 import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { formatNumberWithCommas } from 'utils'
-import { Icons } from '../../../styles'
+import { Icons } from '../../../atoms'
 import { LabeledTextBox } from '../../styles'
 import { AuctionBidProps } from './types'
 

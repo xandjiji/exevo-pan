@@ -36,6 +36,16 @@
 }
 
 @layer utilities {
+  /* @ ToDo: remove this 'tw' prefix and extra variable declarations */
+  .highlighted-palette {
+    --surface: var(--kwaiSurface);
+    --primary: var(--kwai);
+    --primaryVariant: var(--kwaiVariant);
+    --tw-surface: var(--tw-kwaiSurface);
+    --tw-primary: var(--tw-kwai);
+    --tw-primaryVariant: var(--tw-kwaiVariant);
+  }
+
   .sprite-offset span {
     @apply !-ml-6 !-mt-6;
   }
@@ -217,6 +227,13 @@ main {
 
 svg {
   @apply transition-colors;
+}
+
+@media (max-width: 767px) {
+  .auction-card-lazy-render:not(:hover) {
+    content-visibility: auto;
+    contain-intrinsic-size: 373px;
+  }
 }
 
 @keyframes spinAnimation {

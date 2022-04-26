@@ -82,6 +82,7 @@ module.exports = {
         fadeIn: 'fadeIn 0.1s ease-out',
         rushIn: 'rushIn 0.1s ease-out',
         slideIn: 'slideIn 0.2s ease-out',
+        zoomInAndOut: 'zoom 0.6s ease-out forwards 1s',
       },
       keyframes: {
         rollIn: {
@@ -112,6 +113,18 @@ module.exports = {
         slideIn: {
           '0%': { opacity: 0, transform: 'translateX(-100%)' },
           '100%': { opacity: 1, transform: 'translateX(0)' },
+        },
+        zoomInAndOut: {
+          '0%': { transform: 'scale(1)' },
+          '20%': {
+            transform: 'scale(1.02)',
+            boxShadow: '4px 4px 8px 4px rgba(0, 0, 0, 0.1)',
+          },
+          '80%': {
+            transform: 'scale(1.02)',
+            boxShadow: '4px 4px 8px 4px rgba(0, 0, 0, 0.1)',
+          },
+          '100%': { transform: 'scale(1)' },
         },
       },
     },

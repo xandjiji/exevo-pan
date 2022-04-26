@@ -1,7 +1,7 @@
 import { useMemo, useRef, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tabs } from 'components/Atoms'
-import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/styles'
+import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
 import {
   Head,
   Textbox,
