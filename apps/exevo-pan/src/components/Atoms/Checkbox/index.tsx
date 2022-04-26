@@ -8,6 +8,7 @@ const Checkbox = ({
   label,
   id,
   disabled = false,
+  enabledStyle = false,
   checked: checkedProp,
   onChange,
   className,
@@ -38,7 +39,8 @@ const Checkbox = ({
       >
         <input
           className={clsx(
-            'border-1 border-separator checked:bg-primary checked:border-primary disabled:bg-separator disabled:border-separator m-0 h-4 w-4 cursor-pointer appearance-none rounded border-solid transition-all active:shadow-inner',
+            'border-1 border-separator checked:bg-primary checked:border-primary m-0 h-4 w-4 cursor-pointer appearance-none rounded border-solid transition-all active:shadow-inner',
+            !enabledStyle && 'disabled:bg-separator disabled:border-separator',
             className,
           )}
           id={id}
