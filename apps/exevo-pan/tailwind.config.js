@@ -82,7 +82,7 @@ module.exports = {
         fadeIn: 'fadeIn 0.1s ease-out',
         rushIn: 'rushIn 0.1s ease-out',
         slideIn: 'slideIn 0.2s ease-out',
-        zoomInAndOut: 'zoom 0.6s ease-out forwards 1s',
+        zoomInAndOut: 'zoomInAndOut 0.6s ease-out forwards 1s',
       },
       keyframes: {
         rollIn: {
