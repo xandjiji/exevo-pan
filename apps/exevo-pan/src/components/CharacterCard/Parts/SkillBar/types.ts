@@ -5,11 +5,3 @@ export interface SkillBarProps extends HTMLAttributes<HTMLDivElement> {
   skillValue: number
   highlight?: boolean
 }
-
-export interface WrapperProps {
-  highlight: boolean
-}
-
-export interface ProgressBarProps {
-  skillName?: string
-}
