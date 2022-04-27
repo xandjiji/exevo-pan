@@ -1,15 +1,13 @@
 import styled from 'styled-components'
 import { Skeleton } from 'components/Atoms'
-import { Head as BaseHead } from '../Parts/Head/styles'
+import { HeadWrapper } from '../Parts/Head'
 import { LabeledTextBox as BaseLabeledTextBox } from '../Parts/styles'
 
-export const Flex = styled.div`
-  display: flex;
-  align-items: center;
-  height: 100%;
-`
+export const Flex = (args: JSX.IntrinsicElements['div']) => (
+  <div className="flex h-full items-center" {...args} />
+)
 
-export const Head = styled(BaseHead)`
+export const Head = styled(HeadWrapper)`
   align-items: center;
   gap: 0px;
 `
