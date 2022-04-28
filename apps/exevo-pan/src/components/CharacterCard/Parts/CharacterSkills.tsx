@@ -1,25 +1,21 @@
-import styled from 'styled-components'
+import clsx from 'clsx'
 import SkillBar from './SkillBar'
 
 interface CharacterSkillsProps extends React.HTMLAttributes<HTMLDivElement> {
   skills: CharacterSkillsObject
 }
 
-const Wrapper = styled.div`
-  margin-bottom: 4px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 16px;
-  grid-row-gap: 8px;
-`
-
 const CharacterSkills = ({
   skills,
+  className,
   ...props
-}: CharacterSkillsProps): JSX.Element => {
+}: CharacterSkillsProps) => {
   const highlightedSkillValue = Math.max(...(Object.values(skills) as number[]))
   return (
-    <Wrapper {...props}>
+    <div
+      className={clsx('mb-1 grid grid-cols-2 gap-x-4 gap-y-2', className)}
+      {...props}
+    >
       {Object.keys(skills).map((skillName) => {
         const skillValue = skills[skillName as keyof CharacterSkillsObject]
         return (
@@ -31,7 +27,7 @@ const CharacterSkills = ({
           />
         )
       })}
-    </Wrapper>
+    </div>
   )
 }
 
