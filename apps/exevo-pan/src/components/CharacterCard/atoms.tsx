@@ -7,6 +7,7 @@ import { WrapperProps, FlexColumnProps, BodyProps } from './types'
 
 export const Wrapper = ({
   highlighted = false,
+  style,
   className,
   ...props
 }: WrapperProps) => (
@@ -17,6 +18,7 @@ export const Wrapper = ({
       props.role === 'button' && 'cursor-pointer',
       className,
     )}
+    style={{ animationDelay: '1s', ...style }}
     {...props}
   />
 )

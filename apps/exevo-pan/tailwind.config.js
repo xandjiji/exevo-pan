@@ -82,7 +82,7 @@ module.exports = {
         fadeIn: 'fadeIn 0.1s ease-out',
         rushIn: 'rushIn 0.1s ease-out',
         slideIn: 'slideIn 0.2s ease-out',
-        zoomInAndOut: 'zoomInAndOut 0.6s ease-out forwards 1s',
+        zoomInAndOut: 'zoomInAndOut 0.6s ease-out forwards',
         swing: 'swing 1.2s ease-out forwards',
         tilt: 'tilt 1s ease-out forwards',
         letGo: 'letGo 1s ease-out forwards',
