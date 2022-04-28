@@ -5,11 +5,7 @@ import { Icons } from '../../../atoms'
 import { LabeledTextBox } from '../../styles'
 import { AuctionBidProps } from './types'
 
-const AuctionBid = ({
-  hasBeenBidded,
-  currentBid,
-  past,
-}: AuctionBidProps): JSX.Element => {
+const AuctionBid = ({ hasBeenBidded, currentBid, past }: AuctionBidProps) => {
   const {
     translations: { common },
   } = useTranslations()

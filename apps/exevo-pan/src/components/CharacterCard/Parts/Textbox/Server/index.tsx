@@ -1,21 +1,26 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import Image from 'next/image'
+import euFlag from 'assets/eu-flag.png'
+import naFlag from 'assets/na-flag.png'
+import brFlag from 'assets/br-flag.png'
 import TransferIcon from './TransferIcon'
 import { LabeledTextBox } from '../../styles'
-import * as S from './styles'
 import { ServerInfoProps } from './types'
+
+export const flags = [euFlag, naFlag, brFlag]
 
 const Server = ({
   serverData,
   transfer,
   nickname,
   placement,
-}: ServerInfoProps): JSX.Element => {
+}: ServerInfoProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
-  const [fallbackFlag] = S.flags
+  const [fallbackFlag] = flags
 
   return (
     <LabeledTextBox
@@ -27,12 +32,15 @@ const Server = ({
           : undefined
       }
     >
-      <S.Flag
+      <Image
         alt={serverData.serverLocation.string}
         title={serverData.serverLocation.string}
-        src={S.flags[serverData.serverLocation.type] ?? fallbackFlag}
+        src={flags[serverData.serverLocation.type] ?? fallbackFlag}
+        width={16}
+        height={10}
+        className="shadow-sm"
       />
-      <S.ServerName>{serverData.serverName}</S.ServerName>
+      <span className="text-s mr-auto">{serverData.serverName}</span>
       <TransferIcon
         transfer={transfer}
         nickname={nickname}

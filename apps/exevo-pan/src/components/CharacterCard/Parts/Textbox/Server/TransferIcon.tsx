@@ -1,46 +1,45 @@
-/* eslint-disable react/require-default-props */
-import { Placement } from '@popperjs/core'
 import { useTranslations } from 'contexts/useTranslation'
-import * as S from './styles'
+import { Tooltip } from 'components/Organisms'
+import Server from 'assets/svgs/server.svg'
+import NoServer from 'assets/svgs/noserver.svg'
+import { TransferIconProps } from './types'
 
-interface TransferIconProps {
-  transfer: boolean
-  nickname: string
-  placement?: Placement
-}
-
-const TransferIcon = ({
-  transfer,
-  nickname,
-  placement,
-}: TransferIconProps): JSX.Element => {
+const TransferIcon = ({ transfer, nickname, placement }: TransferIconProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return transfer ? (
-    <S.Tooltip
+    <Tooltip
+      className="min-w-[240px]"
       placement={placement}
       aria-labelledby={`transfer-availability-${nickname}`}
       content={
-        <S.TooltipText id={`transfer-availability-${nickname}`}>
+        <span id={`transfer-availability-${nickname}`} className="text-tsm">
           {common.CharacterCard.transferAvailable}
-        </S.TooltipText>
+        </span>
       }
     >
-      <S.Server aria-label={common.CharacterCard.transferAvailable} />
-    </S.Tooltip>
+      <Server
+        className="fill-onSurface mb-[-3px] h-4 w-4"
+        aria-label={common.CharacterCard.transferAvailable}
+      />
+    </Tooltip>
   ) : (
-    <S.Tooltip
+    <Tooltip
+      className="min-w-[240px]"
       aria-labelledby={`transfer-availability-${nickname}`}
       content={
-        <S.TooltipText id={`transfer-availability-${nickname}`}>
+        <span id={`transfer-availability-${nickname}`} className="text-tsm">
           {common.CharacterCard.transferUnavailable}
-        </S.TooltipText>
+        </span>
       }
     >
-      <S.NoServer aria-label={common.CharacterCard.transferUnavailable} />
-    </S.Tooltip>
+      <NoServer
+        className="fill-onSurface mb-[-3px] h-4 w-4"
+        aria-label={common.CharacterCard.transferUnavailable}
+      />
+    </Tooltip>
   )
 }
 

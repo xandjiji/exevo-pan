@@ -1,18 +1,21 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { AuctionTimer } from 'components/Atoms'
-import * as S from './styles'
+import { LabeledTextBox } from '../../styles'
 import { AuctionEndProps } from './types'
 
-const AuctionEnd = ({ auctionEnd, past }: AuctionEndProps): JSX.Element => {
+const AuctionEnd = ({ auctionEnd, past }: AuctionEndProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
-    <S.LabeledTextBox labelText={common.CharacterCard.auctionEnd}>
+    <LabeledTextBox
+      style={{ gap: 'unset' }}
+      labelText={common.CharacterCard.auctionEnd}
+    >
       <AuctionTimer endDate={new Date(auctionEnd * 1000)} past={past} />
-    </S.LabeledTextBox>
+    </LabeledTextBox>
   )
 }
 
