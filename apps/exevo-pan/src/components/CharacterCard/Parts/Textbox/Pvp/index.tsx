@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import clsx from 'clsx'
-import { LabeledTextBox } from '../../styles'
+import { LabeledTextBox } from '../../atoms'
 
 const Pvp = ({ serverData }: Pick<CharacterObject, 'serverData'>) => (
   <LabeledTextBox labelText="PvP">

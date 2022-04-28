@@ -2,7 +2,7 @@ import { memo, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { formatNumberWithCommas } from 'utils'
 import { Icons } from '../../../atoms'
-import { LabeledTextBox } from '../../styles'
+import { LabeledTextBox } from '../../atoms'
 import { AuctionBidProps } from './types'
 
 const AuctionBid = ({ hasBeenBidded, currentBid, past }: AuctionBidProps) => {

@@ -1,113 +1,107 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
+import { Skeleton } from 'components/Atoms'
+import { HeadWrapper } from '../Parts/Head'
 import * as S from '../atoms'
 import * as Skeletons from './atoms'
 
-const CardSkeleton = ({
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
     <S.Wrapper {...props}>
-      <Skeletons.Head>
-        <Skeletons.Square />
-        <Skeletons.HeadInfo>
-          <Skeletons.Text style={{ width: '50%' }} />
-          <Skeletons.Text style={{ width: '75%', height: 8 }} />
-        </Skeletons.HeadInfo>
-      </Skeletons.Head>
+      <HeadWrapper style={{ alignItems: 'center', gap: 0 }}>
+        <Skeleton className="h-14 w-14 shrink-0 rounded-md" />
+        <div className="mx-4 grid w-full gap-2">
+          <Skeleton className="h-3 w-1/2" />
+          <Skeleton className="h-2 w-3/4" />
+        </div>
+      </HeadWrapper>
 
-      <S.InfoGrid style={{ marginBottom: 12 }}>
+      <S.InfoGrid className="mb-3">
         <Skeletons.LabeledTextBox labelText="Server">
-          <Skeletons.Flex>
-            <Skeletons.Flag />
-            <Skeletons.Text style={{ width: '35%' }} />
-            <Skeletons.Circle style={{ marginLeft: 'auto' }} />
-          </Skeletons.Flex>
+          <Skeletons.LabelledFlex>
+            <Skeleton className="mr-1 h-[10px] w-4" />
+            <Skeleton className="h-3 w-2/5" />
+            <Skeleton className="ml-auto h-4 w-4 rounded-full" />
+          </Skeletons.LabelledFlex>
         </Skeletons.LabeledTextBox>
         <Skeletons.LabeledTextBox labelText="PvP">
-          <Skeletons.Flex>
-            <Skeletons.Circle
-              style={{ width: 12, height: 12, marginRight: 4 }}
-            />
-            <Skeletons.Text style={{ width: '70%' }} />
-          </Skeletons.Flex>
+          <Skeletons.LabelledFlex>
+            <Skeleton className="mr-1 h-3 w-3 rounded-full" />
+            <Skeleton className="h-3 w-3/4" />
+          </Skeletons.LabelledFlex>
         </Skeletons.LabeledTextBox>
         <Skeletons.LabeledTextBox
           labelText={common.CharacterCard.AuctionStatus}
         >
-          <Skeletons.Text style={{ width: '65%' }} />
+          <Skeleton className="h-3 w-3/5" />
         </Skeletons.LabeledTextBox>
 
         <Skeletons.LabeledTextBox labelText={common.CharacterCard.BidStatus}>
-          <Skeletons.Flex>
-            <Skeletons.Circle
-              style={{ width: 12, height: 12, marginRight: 4 }}
-            />
-            <Skeletons.Text style={{ width: '50%' }} />
-          </Skeletons.Flex>
+          <Skeletons.LabelledFlex>
+            <Skeleton className="mr-1 h-3 w-3 rounded-full" />
+            <Skeleton className="h-3 w-1/2" />
+          </Skeletons.LabelledFlex>
         </Skeletons.LabeledTextBox>
       </S.InfoGrid>
 
-      <Skeletons.ItemWrapper>
+      <div className="mb-3 flex w-full justify-around">
         {Array.from({ length: 4 }, (_, index) => (
-          <Skeletons.Square key={index} style={{ width: 48, height: 48 }} />
+          <Skeleton key={index} className="h-12 w-12 shrink-0 rounded-md" />
         ))}
-      </Skeletons.ItemWrapper>
+      </div>
 
-      <Skeletons.SkillWrapper>
+      <div className="mb-4 grid grid-cols-2 gap-x-4 gap-y-2">
         {Array.from({ length: 8 }, (_, index) => (
-          <Skeletons.SkillItem key={index}>
-            <Skeletons.Skillbox />
-            <div style={{ width: '100%' }}>
-              <Skeletons.Text
-                style={{ width: 48, height: 6, marginBottom: 3 }}
-              />
-              <Skeletons.Text style={{ width: '100%', height: 4 }} />
+          <div key={index} className="flex items-end gap-[6px]">
+            <Skeleton className="h-[22px] w-8 shrink-0 rounded-md" />
+            <div className="grid w-full gap-1">
+              <Skeleton className="mb-[3x] h-[6px] w-12" />
+              <Skeleton className="h-1 w-full" />
             </div>
-          </Skeletons.SkillItem>
+          </div>
         ))}
-      </Skeletons.SkillWrapper>
+      </div>
 
-      <S.FlexFooter style={{ marginBottom: 12 }}>
+      <S.FlexFooter className="mb-3">
         <S.FlexColumn>
-          <Skeletons.Flex>
+          <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeletons.Text style={{ width: 126, height: 10 }} />
-          </Skeletons.Flex>
-          <Skeletons.Flex>
+            <Skeleton className="h-[10px] w-[126px]" />
+          </Skeletons.ImbuementFlex>
+          <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeletons.Text style={{ width: 100, height: 10 }} />
-          </Skeletons.Flex>
-          <Skeletons.Flex>
+            <Skeleton className="h-[10px] w-[100px]" />
+          </Skeletons.ImbuementFlex>
+          <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeletons.Text style={{ width: 100, height: 10 }} />
-          </Skeletons.Flex>
+            <Skeleton className="h-[10px] w-[100px]" />
+          </Skeletons.ImbuementFlex>
         </S.FlexColumn>
 
         <S.FlexColumn>
-          <Skeletons.Flex>
+          <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeletons.Text style={{ width: 110, height: 10 }} />
-          </Skeletons.Flex>
-          <Skeletons.Flex>
+            <Skeleton className="h-[10px] w-[110px]" />
+          </Skeletons.ImbuementFlex>
+          <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeletons.Text style={{ width: 58, height: 10 }} />
-          </Skeletons.Flex>
-          <Skeletons.Flex>
+            <Skeleton className="h-[10px] w-14" />
+          </Skeletons.ImbuementFlex>
+          <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeletons.Text style={{ width: 66, height: 10 }} />
-          </Skeletons.Flex>
+            <Skeleton className="h-[10px] w-16" />
+          </Skeletons.ImbuementFlex>
         </S.FlexColumn>
       </S.FlexFooter>
 
-      <Skeletons.Flex>
-        <Skeletons.Charm style={{ width: 94 }} />
-        <Skeletons.Charm style={{ width: 54 }} />
-        <Skeletons.Charm />
+      <Skeletons.Flex className="gap-2">
+        <Skeleton className="h-6 w-24 rounded-xl" />
+        <Skeleton className="h-6 w-14 rounded-xl" />
+        <Skeleton className="h-6 w-16 rounded-xl" />
       </Skeletons.Flex>
     </S.Wrapper>
   )

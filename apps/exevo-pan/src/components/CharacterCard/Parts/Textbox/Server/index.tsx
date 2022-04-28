@@ -5,7 +5,7 @@ import euFlag from 'assets/eu-flag.png'
 import naFlag from 'assets/na-flag.png'
 import brFlag from 'assets/br-flag.png'
 import TransferIcon from './TransferIcon'
-import { LabeledTextBox } from '../../styles'
+import { LabeledTextBox } from '../../atoms'
 import { ServerInfoProps } from './types'
 
 export const flags = [euFlag, naFlag, brFlag]

@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { AuctionTimer } from 'components/Atoms'
-import { LabeledTextBox } from '../../styles'
+import { LabeledTextBox } from '../../atoms'
 import { AuctionEndProps } from './types'
 
 const AuctionEnd = ({ auctionEnd, past }: AuctionEndProps) => {
