@@ -4,7 +4,7 @@ import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/charm'
 import { formatNumberWithCommas } from 'utils'
 import Lister from './Lister'
-import * as S from './styles'
+import * as S from './atoms'
 import { CharacterCharmsProps } from './types'
 
 const MAX_LINES = 10

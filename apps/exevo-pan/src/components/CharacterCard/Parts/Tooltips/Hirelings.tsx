@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import * as S from './styles'
+import * as S from './atoms'
 import { CharacterHirelingsProps } from './types'
 
 const MAX_JOBS = 4

@@ -4,7 +4,7 @@ import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/quest'
 import { utilitary, access, bosses, others } from './lists'
 import Lister from '../Lister'
-import * as S from '../styles'
+import * as S from '../atoms'
 import { Grid, Group, Title } from './styles'
 import { TooltipProps } from '../types'
 
