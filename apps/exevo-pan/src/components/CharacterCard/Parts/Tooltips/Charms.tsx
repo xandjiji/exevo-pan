@@ -14,7 +14,7 @@ const CharacterCharms = ({
   items,
   placement,
   ...props
-}: CharacterCharmsProps): JSX.Element => {
+}: CharacterCharmsProps) => {
   const {
     translations: { common },
   } = useTranslations()

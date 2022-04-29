@@ -6,7 +6,7 @@ import { CharacterAchievementsProps } from './types'
 const CharacterAchievements = ({
   achievementPoints,
   ...props
-}: CharacterAchievementsProps): JSX.Element => (
+}: CharacterAchievementsProps) => (
   <S.TitleWrapper {...props}>
     <S.Icons.Achievements />
     Achievement points: {formatNumberWithCommas(achievementPoints)}
