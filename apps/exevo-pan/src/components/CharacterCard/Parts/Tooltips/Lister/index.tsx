@@ -1,25 +1,31 @@
 import { memo, useMemo } from 'react'
-import * as S from './styles'
+import clsx from 'clsx'
 import { ListerProps } from './types'
 
-const Lister = ({
-  maxLines,
-  partialList,
-  fullList,
-}: ListerProps): JSX.Element => {
+const Lister = ({ maxLines, partialList, fullList }: ListerProps) => {
   const partialSet = useMemo(
     () => new Set<string>([...partialList]),
     [partialList],
   )
 
   return (
-    <S.Ul maxLines={maxLines}>
+    <ul
+      className={clsx(maxLines && 'grid grid-flow-col gap-y-0 gap-x-4')}
+      style={{ gridTemplateRows: `repeat(${maxLines}, 1fr)` }}
+    >
       {fullList.map((item) => (
-        <S.Li key={item} data-active={partialSet.has(item)}>
+        <li
+          key={item}
+          className={clsx(
+            "text-tsm text-onSurface block text-left before:mr-1 before:font-bold before:content-['·']",
+            !partialSet.has(item) && 'font-light opacity-50',
+          )}
+          data-active={partialSet.has(item)}
+        >
           {item}
-        </S.Li>
+        </li>
       ))}
-    </S.Ul>
+    </ul>
   )
 }
 
