@@ -1,4 +1,6 @@
+/* eslint-disable jsx-a11y/heading-has-content */
 import styled, { css } from 'styled-components'
+import clsx from 'clsx'
 import MagicSvg from 'assets/svgs/magic.svg'
 import CharmSvg from 'assets/svgs/charms.svg'
 import BookSvg from 'assets/svgs/book.svg'
@@ -14,13 +16,18 @@ const iconStyle = css`
   fill: var(--onSurface);
 `
 
-export const TitleWrapper = styled.h5`
-  display: flex;
-  flex-wrap: nowrap;
-  align-items: center;
-  font-size: 12px;
-  font-weight: 400;
-`
+export const TitleWrapper = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['h5']) => (
+  <h5
+    className={clsx(
+      'text-tsm flex flex-nowrap items-center font-normal',
+      className,
+    )}
+    {...props}
+  />
+)
 
 export const Icons = {
   Imbuement: styled(MagicSvg)`
