@@ -1,20 +1,12 @@
 /* eslint-disable jsx-a11y/heading-has-content */
-import styled, { css } from 'styled-components'
+import { cloneElement } from 'react'
 import clsx from 'clsx'
-import MagicSvg from 'assets/svgs/magic.svg'
-import CharmSvg from 'assets/svgs/charms.svg'
-import BookSvg from 'assets/svgs/book.svg'
-import PeopleSvg from 'assets/svgs/people.svg'
-import StarSvg from 'assets/svgs/star.svg'
-
-const iconStyle = css`
-  margin-right: 4px;
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  transform: translateY(-1px);
-  fill: var(--onSurface);
-`
+import MagicIcon from 'assets/svgs/magic.svg'
+import CharmIcon from 'assets/svgs/charms.svg'
+import BookIcon from 'assets/svgs/book.svg'
+import PeopleIcon from 'assets/svgs/people.svg'
+import StarIcon from 'assets/svgs/star.svg'
+import { IconProps } from './types'
 
 export const TitleWrapper = ({
   className,
@@ -29,20 +21,19 @@ export const TitleWrapper = ({
   />
 )
 
-export const Icons = {
-  Imbuement: styled(MagicSvg)`
-    ${iconStyle}
-  `,
-  Charm: styled(CharmSvg)`
-    ${iconStyle}
-  `,
-  Quest: styled(BookSvg)`
-    ${iconStyle}
-  `,
-  Hireling: styled(PeopleSvg)`
-    ${iconStyle}
-  `,
-  Achievements: styled(StarSvg)`
-    ${iconStyle}
-  `,
+const Icon = ({ icon, className, ...props }: IconProps) =>
+  cloneElement(icon, {
+    className: clsx(
+      'mr-1 shrink-0 w-[18px] h-[18px] fill-onSurface',
+      className,
+    ),
+    ...props,
+  })
+
+export const Icons: Record<string, React.FC<JSX.IntrinsicElements['svg']>> = {
+  Imbuement: (args) => <Icon icon={<MagicIcon />} {...args} />,
+  Charm: (args) => <Icon icon={<CharmIcon />} {...args} />,
+  Quest: (args) => <Icon icon={<BookIcon />} {...args} />,
+  Hireling: (args) => <Icon icon={<PeopleIcon />} {...args} />,
+  Achievements: (args) => <Icon icon={<StarIcon />} {...args} />,
 }
