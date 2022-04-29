@@ -20,7 +20,6 @@ const Lister = ({ maxLines, partialList, fullList }: ListerProps) => {
             "text-tsm text-onSurface block text-left before:mr-1 before:font-bold before:content-['·']",
             !partialSet.has(item) && 'font-light opacity-50',
           )}
-          data-active={partialSet.has(item)}
         >
           {item}
         </li>
