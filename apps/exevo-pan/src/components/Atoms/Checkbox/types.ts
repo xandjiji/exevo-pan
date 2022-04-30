@@ -8,4 +8,5 @@ export interface CheckboxProps extends NativeProps {
   disabled?: boolean
   checked?: boolean
   enabledStyle?: boolean
+  greenVariant?: boolean
 }

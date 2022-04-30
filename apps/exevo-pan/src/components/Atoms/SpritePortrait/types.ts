@@ -1,5 +1,6 @@
 export type SpritePortraitProps = React.HTMLAttributes<HTMLDivElement> & {
   offset?: boolean
+  highlight?: boolean
   src: string
   alt?: string
   width: number
@@ -7,6 +8,8 @@ export type SpritePortraitProps = React.HTMLAttributes<HTMLDivElement> & {
   onError?: () => void
 }
 
-export type BackgroundProps = {
-  offset?: boolean
-} & JSX.IntrinsicElements['div']
+export type BackgroundProps = Pick<
+  SpritePortraitProps,
+  'offset' | 'highlight'
+> &
+  JSX.IntrinsicElements['div']
