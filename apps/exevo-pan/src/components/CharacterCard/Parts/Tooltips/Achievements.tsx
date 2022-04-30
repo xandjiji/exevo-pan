@@ -1,12 +1,12 @@
 import { memo } from 'react'
 import { formatNumberWithCommas } from 'utils'
-import * as S from './styles'
+import * as S from './atoms'
 import { CharacterAchievementsProps } from './types'
 
 const CharacterAchievements = ({
   achievementPoints,
   ...props
-}: CharacterAchievementsProps): JSX.Element => (
+}: CharacterAchievementsProps) => (
   <S.TitleWrapper {...props}>
     <S.Icons.Achievements />
     Achievement points: {formatNumberWithCommas(achievementPoints)}
