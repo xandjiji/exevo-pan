@@ -4,7 +4,6 @@ import { Tabs as BaseTabs } from 'components/Atoms'
 import { SectionProps } from './types'
 
 const LATERAL_MARGIN = 14
-const CARD_FIXED_HEIGHT = 450
 const CARD_MAX_MOBILE_WIDTH = 368
 
 const GRID_MOBILE_HEIGHT = '60vh'
@@ -24,29 +23,6 @@ export const Spacer = ({
 }: JSX.IntrinsicElements['div']) => (
   <div className={clsx('grid gap-4', className)} {...props} />
 )
-
-const Column = styled(Spacer)`
-  height: fit-content;
-`
-
-export const DesktopColumn = {
-  Left: styled(Column)`
-    padding-top: 6px;
-
-    @media (min-width: 768px) {
-      flex-shrink: 0;
-      min-width: 280px;
-      max-width: fit-content;
-
-      position: sticky;
-      top: 0;
-      z-index: 4;
-    }
-  `,
-  Right: styled(Column)`
-    width: 100%;
-  `,
-}
 
 export const Section = ({
   border = false,
@@ -127,32 +103,25 @@ export const TabGroup = styled(BaseTabs.Group)`
   }
 `
 
-export const SpriteSection = styled(Section)`
-  padding-top: 12px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  width: 100%;
+export const SpriteSection = (args: JSX.IntrinsicElements['div']) => (
+  <Section className="!flex w-full flex-wrap !gap-3 pt-3" {...args} />
+)
 
-  border-bottom: none;
-`
+export const TooltipSection = (args: JSX.IntrinsicElements['div']) => (
+  <Section
+    border
+    className="child:w-fit grid grid-cols-1 !gap-2 md:border-b-transparent md:pb-0"
+    {...args}
+  />
+)
 
-export const TooltipSection = styled(Section)`
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-gap: 8px;
-
-  > * {
-    width: fit-content;
-  }
-
-  @media (min-width: 768px) {
-    padding-bottom: 0;
-    border-bottom: none;
-  }
-`
-
-export const SpriteSectionDivisor = styled.div`
-  padding: 6px 0;
-  border-bottom: solid 1px var(--separator);
-`
+export const SpriteSectionDivisor = (args: JSX.IntrinsicElements['div']) => (
+  <div
+    className="border-b-separator text-tsm py-[6px]"
+    style={{
+      borderBottomStyle: 'solid',
+      borderBottomWidth: 1,
+    }}
+    {...args}
+  />
+)

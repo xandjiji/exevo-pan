@@ -105,7 +105,7 @@ const CharacterModal = ({
 
       <div className="custom-scrollbar -mx-[var(--lateralMargin)] h-[var(--gridMobileHeight)] overflow-y-auto px-[var(--lateralMargin)] md:h-[var(--cardFixedHeight)]">
         <S.Spacer className="w-full md:flex md:gap-6">
-          <S.DesktopColumn.Left>
+          <S.Spacer className="md:z-4 h-fit pt-[6px] md:sticky md:top-0 md:min-w-[280px] md:max-w-fit md:shrink-0">
             <InfoGrid>
               <Textbox.Server
                 serverData={serverData}
@@ -139,9 +139,9 @@ const CharacterModal = ({
               <Hirelings hirelingsInfo={hirelings} />
               <Achievements achievementPoints={achievementPoints} />
             </S.TooltipSection>
-          </S.DesktopColumn.Left>
+          </S.Spacer>
 
-          <S.DesktopColumn.Right>
+          <S.Spacer className="h-fit w-full">
             <S.Section border className="z-3">
               <S.SectionText
                 title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
@@ -296,7 +296,7 @@ const CharacterModal = ({
                 </Tabs.Panel>
               )}
             </S.TabGroup>
-          </S.DesktopColumn.Right>
+          </S.Spacer>
         </S.Spacer>
       </div>
     </Dialog>
