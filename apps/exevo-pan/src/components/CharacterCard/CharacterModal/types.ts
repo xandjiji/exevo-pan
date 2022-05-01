@@ -13,3 +13,7 @@ export type CheckboxRecord = {
 }
 
 export type StoreRecord = Record<string, keyof CheckboxRecord>
+
+export type SectionProps = {
+  border?: boolean
+} & JSX.IntrinsicElements['div']

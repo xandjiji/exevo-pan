@@ -18,6 +18,7 @@ module.exports = {
     screens: {
       md: '768px',
       lg: '1024px',
+      lgr: '1100px',
       xl: '1400px',
     },
     /* @ ToDo: remove this 'tw' prefix */

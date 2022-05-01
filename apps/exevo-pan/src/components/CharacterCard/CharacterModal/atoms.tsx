@@ -1,9 +1,7 @@
-import styled, { css } from 'styled-components'
-import { Tabs as BaseTabs, Dialog as BaseDialog } from 'components/Atoms'
-import { CustomScrollbar } from 'styles'
-import OutfitSvg from 'assets/svgs/outfit.svg'
-import HorseSvg from 'assets/svgs/horse.svg'
-import InboxSvg from 'assets/svgs/inbox.svg'
+import clsx from 'clsx'
+import styled from 'styled-components'
+import { Tabs as BaseTabs } from 'components/Atoms'
+import { SectionProps } from './types'
 
 const LATERAL_MARGIN = 14
 const CARD_FIXED_HEIGHT = 450
@@ -12,55 +10,20 @@ const CARD_MAX_MOBILE_WIDTH = 368
 const GRID_MOBILE_HEIGHT = '60vh'
 const SCROLLBAR_WIDTH = 6
 
-const negativeContainer = css`
-  margin-left: -${LATERAL_MARGIN}px;
-  margin-right: -${LATERAL_MARGIN}px;
-  padding-left: ${LATERAL_MARGIN}px;
-  padding-right: ${LATERAL_MARGIN}px;
-`
+/*
+    --lateralMargin: 14;
+    --cardFixedHeight: 450;
+    --cardMaxMobileWidth: 368;
+    --gridMobileHeight: '60vh';
+    --scrollbarWidth: 6;
+*/
 
-export const Dialog = styled(BaseDialog)`
-  padding: ${LATERAL_MARGIN}px;
-
-  width: 100%;
-  max-width: ${CARD_MAX_MOBILE_WIDTH}px;
-  outline: none;
-
-  @media (min-width: 768px) {
-    width: fit-content;
-    max-width: calc(100% - 80px);
-  }
-
-  @media (min-width: 1100px) {
-    width: 1029px;
-  }
-`
-
-export const Spacer = styled.div`
-  display: grid;
-  gap: 16px;
-`
-
-export const ScrollableContainer = styled.div`
-  overflow-y: auto;
-  ${CustomScrollbar}
-  ${negativeContainer}
-
-  height: ${GRID_MOBILE_HEIGHT};
-
-  @media (min-width: 768px) {
-    height: ${CARD_FIXED_HEIGHT}px;
-  }
-`
-
-export const Grid = styled(Spacer)`
-  width: 100%;
-
-  @media (min-width: 768px) {
-    display: flex;
-    gap: 24px;
-  }
-`
+export const Spacer = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div className={clsx('grid gap-4', className)} {...props} />
+)
 
 const Column = styled(Spacer)`
   height: fit-content;
@@ -85,10 +48,22 @@ export const DesktopColumn = {
   `,
 }
 
-export const Section = styled(Spacer)`
-  padding-bottom: 12px;
-  border-bottom: solid 0.5px var(--separator);
-`
+export const Section = ({
+  border = false,
+  className,
+  style,
+  ...props
+}: SectionProps) => (
+  <Spacer
+    className={clsx('border-b-separator pb-3', className)}
+    style={{
+      borderBottomStyle: 'solid',
+      borderBottomWidth: border ? '0.5px' : 0,
+      ...style,
+    }}
+    {...props}
+  />
+)
 
 export const SectionText = styled.div`
   display: flex;
@@ -181,17 +156,3 @@ export const SpriteSectionDivisor = styled.div`
   padding: 6px 0;
   border-bottom: solid 1px var(--separator);
 `
-
-const iconStyle = css``
-
-export const Icons = {
-  Outfit: styled(OutfitSvg)`
-    ${iconStyle}
-  `,
-  Mount: styled(HorseSvg)`
-    ${iconStyle}
-  `,
-  Store: styled(InboxSvg)`
-    ${iconStyle}
-  `,
-}
