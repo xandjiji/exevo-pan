@@ -131,6 +131,6 @@ Now you are ready to roll! Apps will be running on:
 
 This software is 100% free, open-source and unlicensed.
 
-You can find more info about me or this project [here](https://www.exevopan.com/about) 😄
+You can find more info about me or this project [here](https://www.exevopan.com/blog/about) 😄
 
 Contact: xandjiji@gmail.com
