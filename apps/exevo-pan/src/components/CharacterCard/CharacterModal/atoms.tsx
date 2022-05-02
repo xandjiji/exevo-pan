@@ -41,44 +41,7 @@ export const Section = ({
   />
 )
 
-export const SectionText = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 5px;
-
-  font-size: 12px;
-  font-weight: 400;
-`
-
-export const CoinsValue = styled.strong`
-  font-weight: 400;
-
-  &[data-active='true'] {
-    color: var(--primaryHighlight);
-    font-weight: 700;
-  }
-`
-
-export const CheckboxWrapper = styled.div`
-  display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
-  gap: 8px;
-  grid-auto-flow: column;
-
-  @media (min-width: 768px) {
-    max-width: 400px;
-  }
-`
-
 export const TabGroup = styled(BaseTabs.Group)`
-  display: block;
-  overflow: unset;
-  min-height: ${GRID_MOBILE_HEIGHT};
-
-  @media (min-width: 768px) {
-    min-height: unset;
-  }
-
   [role='tablist'] {
     padding-top: 2px;
     width: calc(100vw - ${2 * LATERAL_MARGIN + SCROLLBAR_WIDTH}px);

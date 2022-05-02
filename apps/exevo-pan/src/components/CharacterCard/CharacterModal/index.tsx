@@ -1,4 +1,5 @@
 import { useMemo, useRef, useCallback } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, Tabs } from 'components/Atoms'
 import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
@@ -143,17 +144,24 @@ const CharacterModal = ({
 
           <S.Spacer className="h-fit w-full">
             <S.Section border className="z-3">
-              <S.SectionText
+              <div
                 title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
+                className="text-tsm flex items-center gap-[5px]"
               >
                 <Icons.TibiaCoin />{' '}
                 {common.CharacterCard.CharacterModal.totalInvested}:{' '}
-                <S.CoinsValue data-active={tcInvested !== '0'}>
+                <strong
+                  className={clsx(
+                    tcInvested === '0'
+                      ? 'font-normal'
+                      : 'text-primaryHighlight',
+                  )}
+                >
                   {tcInvested} Tibia Coins
-                </S.CoinsValue>
-              </S.SectionText>
+                </strong>
+              </div>
 
-              <S.CheckboxWrapper>
+              <div className="grid grid-flow-col grid-rows-3 gap-2 md:max-w-[400px]">
                 <Checkbox
                   label="Training Dummy"
                   checked={checkboxRecords.dummy}
@@ -178,10 +186,15 @@ const CharacterModal = ({
                   checked={checkboxRecords.rewardShrine}
                 />
                 <Checkbox label="Mailbox" checked={checkboxRecords.mailbox} />
-              </S.CheckboxWrapper>
+              </div>
             </S.Section>
 
-            <S.TabGroup onChange={handleTabChange} ref={tabRef}>
+            <Tabs.Group
+              className="block min-h-[var(--gridMobileHeight)] md:min-h-[unset]"
+              style={{ overflow: 'unset' }}
+              onChange={handleTabChange}
+              ref={tabRef}
+            >
               <Tabs.Panel
                 label={
                   <>
@@ -295,7 +308,7 @@ const CharacterModal = ({
                   </S.SpriteSection>
                 </Tabs.Panel>
               )}
-            </S.TabGroup>
+            </Tabs.Group>
           </S.Spacer>
         </S.Spacer>
       </div>
