@@ -8,12 +8,14 @@ import { BackgroundProps, SpritePortraitProps } from './types'
 export const Background = ({
   className,
   offset = false,
+  highlight = false,
   ...props
 }: BackgroundProps) => (
   <div
     className={clsx(
-      'bg-primaryVariant relative select-none rounded-md p-2 shadow-md transition-colors',
+      'relative select-none rounded-md p-2 shadow-md transition-colors',
       offset ? 'sprite-offset h-14 w-14' : 'h-12 w-12',
+      highlight ? 'bg-primaryHighlight' : 'bg-primaryVariant',
       className,
     )}
     {...props}
@@ -22,6 +24,7 @@ export const Background = ({
 
 const SpritePortrait = ({
   offset = false,
+  highlight = false,
   src,
   alt,
   width,
@@ -36,7 +39,7 @@ const SpritePortrait = ({
   const [loaded, onLoad] = useOnImageLoad()
 
   return (
-    <Background offset={offset} {...props}>
+    <Background offset={offset} highlight={highlight} {...props}>
       <Image
         alt={alt}
         src={src}
@@ -53,7 +56,10 @@ const SpritePortrait = ({
           role="alert"
           aria-label={common.LoadingLabel}
           aria-busy="true"
-          className={clsx('loading-spinner after:bg-primaryVariant absolute')}
+          className={clsx(
+            'loading-spinner absolute',
+            highlight ? 'after:bg-primaryHighlight' : 'after:bg-primaryVariant',
+          )}
           style={{ top: 'calc(50% - 12px)', left: 'calc(50% - 12px)' }}
         />
       )}

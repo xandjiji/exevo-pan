@@ -27,7 +27,7 @@ const CharacterCard = ({
   expandable = false,
   past = false,
   ...props
-}: CharacterCardProps): JSX.Element => {
+}: CharacterCardProps) => {
   const {
     translations: { common },
   } = useTranslations()

@@ -1,6 +1,6 @@
 import { useMemo, useRef, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Tabs } from 'components/Atoms'
+import { Dialog, Tabs } from 'components/Atoms'
 import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
 import {
   Head,
@@ -15,17 +15,28 @@ import {
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
+import OutfitIcon from 'assets/svgs/outfit.svg'
+import MountIcon from 'assets/svgs/horse.svg'
+import StoreIcon from 'assets/svgs/inbox.svg'
 import SpriteBox from './SpriteBox'
 import { checkStore, tabCounter } from './utils'
 import { resolvers } from './resolvers'
-import * as S from './styles'
+import * as S from './atoms'
 import { CharacterModalProps } from './types'
+
+/*
+--lateralMargin: 14px;
+--cardFixedHeight: 450px;
+--cardMaxMobileWidth: 368px;
+--gridMobileHeight: 60vh;
+--scrollbarWidth: 6px;
+*/
 
 const CharacterModal = ({
   characterData,
   onClose,
   past = false,
-}: CharacterModalProps): JSX.Element => {
+}: CharacterModalProps) => {
   const {
     id,
     sex,
@@ -78,7 +89,11 @@ const CharacterModal = ({
   }, [isDesktop])
 
   return (
-    <S.Dialog isOpen onClose={onClose}>
+    <Dialog
+      isOpen
+      onClose={onClose}
+      className="character-modal lgr:w-[1029px] w-full max-w-[var(--cardMaxMobileWidth)] p-[var(--lateralMargin)] outline-none md:w-fit md:max-w-[calc(100%-80px)]"
+    >
       <Head
         id={id}
         outfitId={outfitId}
@@ -88,9 +103,9 @@ const CharacterModal = ({
         serverName={serverData.serverName}
       />
 
-      <S.ScrollableContainer>
-        <S.Grid>
-          <S.DesktopColumn.Left>
+      <div className="custom-scrollbar -mx-[var(--lateralMargin)] h-[var(--gridMobileHeight)] overflow-y-auto px-[var(--lateralMargin)] md:h-[var(--cardFixedHeight)]">
+        <S.Spacer className="w-full md:flex md:gap-6">
+          <S.Spacer className="md:z-4 h-fit pt-[6px] md:sticky md:top-0 md:min-w-[280px] md:max-w-fit md:shrink-0">
             <InfoGrid>
               <Textbox.Server
                 serverData={serverData}
@@ -109,7 +124,7 @@ const CharacterModal = ({
 
             <CharacterItems items={items} />
 
-            <S.Section>
+            <S.Section border>
               <CharacterSkills skills={skills} />
             </S.Section>
 
@@ -124,10 +139,10 @@ const CharacterModal = ({
               <Hirelings hirelingsInfo={hirelings} />
               <Achievements achievementPoints={achievementPoints} />
             </S.TooltipSection>
-          </S.DesktopColumn.Left>
+          </S.Spacer>
 
-          <S.DesktopColumn.Right>
-            <S.Section style={{ zIndex: 3 }}>
+          <S.Spacer className="h-fit w-full">
+            <S.Section border className="z-3">
               <S.SectionText
                 title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
               >
@@ -170,7 +185,7 @@ const CharacterModal = ({
               <Tabs.Panel
                 label={
                   <>
-                    <S.Icons.Outfit />
+                    <OutfitIcon />
                     Outfits {tabCounter(outfits.length, storeOutfits.length)}
                   </>
                 }
@@ -215,7 +230,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <S.Icons.Mount />
+                      <MountIcon />
                       Mounts {tabCounter(mounts.length, storeMounts.length)}
                     </>
                   }
@@ -260,7 +275,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <S.Icons.Store />
+                      <StoreIcon />
                       Store Items ({storeItems.length})
                     </>
                   }
@@ -281,10 +296,10 @@ const CharacterModal = ({
                 </Tabs.Panel>
               )}
             </S.TabGroup>
-          </S.DesktopColumn.Right>
-        </S.Grid>
-      </S.ScrollableContainer>
-    </S.Dialog>
+          </S.Spacer>
+        </S.Spacer>
+      </div>
+    </Dialog>
   )
 }
 

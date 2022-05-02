@@ -229,6 +229,14 @@ svg {
   @apply transition-colors;
 }
 
+.character-modal {
+    --lateralMargin: 14px;
+    --cardFixedHeight: 450px;
+    --cardMaxMobileWidth: 368px;
+    --gridMobileHeight: 60vh;
+    --scrollbarWidth: 6px;
+}
+
 @media (max-width: 767px) {
   .auction-card-lazy-render:not(:hover) {
     content-visibility: auto;
