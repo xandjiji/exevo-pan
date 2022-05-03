@@ -1,0 +1,7 @@
+@media (max-width: 767px) {
+  .lazy:not(:hover) {
+    content-visibility: auto;
+    contain-intrinsic-size: 373px;
+    background-color: red !important;
+  }
+}

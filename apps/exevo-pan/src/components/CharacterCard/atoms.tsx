@@ -3,6 +3,7 @@ import { Checkbox as BaseCheckbox } from 'components/Atoms'
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoin.png'
 import ExpandIcon from 'assets/svgs/expand.svg'
+import styles from './styles.module.css'
 import { WrapperProps, FlexColumnProps, BodyProps } from './types'
 
 export const Wrapper = ({
@@ -112,11 +113,7 @@ export const Strong = ({
 
 export const Body = ({ lazy = false, className, ...props }: BodyProps) => (
   <div
-    className={clsx(
-      'mb-3 grid gap-3 pt-[6px]',
-      lazy && 'auction-card-lazy-render',
-      className,
-    )}
+    className={clsx('mb-3 grid gap-3 pt-[6px]', lazy && styles.lazy, className)}
     {...props}
   />
 )
