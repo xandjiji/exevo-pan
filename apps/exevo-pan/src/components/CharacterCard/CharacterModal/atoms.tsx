@@ -1,21 +1,5 @@
 import clsx from 'clsx'
-import styled from 'styled-components'
-import { Tabs as BaseTabs } from 'components/Atoms'
 import { SectionProps } from './types'
-
-const LATERAL_MARGIN = 14
-const CARD_MAX_MOBILE_WIDTH = 368
-
-const GRID_MOBILE_HEIGHT = '60vh'
-const SCROLLBAR_WIDTH = 6
-
-/*
-    --lateralMargin: 14;
-    --cardFixedHeight: 450;
-    --cardMaxMobileWidth: 368;
-    --gridMobileHeight: '60vh';
-    --scrollbarWidth: 6;
-*/
 
 export const Spacer = ({
   className,
@@ -40,31 +24,6 @@ export const Section = ({
     {...props}
   />
 )
-
-export const TabGroup = styled(BaseTabs.Group)`
-  [role='tablist'] {
-    padding-top: 2px;
-    width: calc(100vw - ${2 * LATERAL_MARGIN + SCROLLBAR_WIDTH}px);
-    max-width: calc(
-      ${CARD_MAX_MOBILE_WIDTH}px - ${2 * LATERAL_MARGIN + SCROLLBAR_WIDTH}px
-    );
-
-    position: sticky;
-    top: 0px;
-    z-index: 2;
-    box-shadow: 0px -${LATERAL_MARGIN}px 0px ${LATERAL_MARGIN}px var(--surface);
-
-    @media (min-width: 768px) {
-      width: unset;
-      max-width: calc(100vw - 440px);
-    }
-
-    @media (min-width: 900px) {
-      max-width: unset;
-      box-shadow: 0px -${LATERAL_MARGIN}px 0px ${LATERAL_MARGIN - 2}px var(--surface);
-    }
-  }
-`
 
 export const SpriteSection = (args: JSX.IntrinsicElements['div']) => (
   <Section className="!flex w-full flex-wrap !gap-3 pt-3" {...args} />
