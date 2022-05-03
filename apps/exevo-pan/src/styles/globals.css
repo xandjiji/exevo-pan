@@ -39,10 +39,6 @@
     @apply sr-only;
   }
 
-  .radio-wrapper:active .inner-radio {
-    @apply shadow-inner;
-  }
-
   /* @ ToDo: remove these once `brightness` utility is fixed */
   .highlight-10 {
     filter: brightness(110%);

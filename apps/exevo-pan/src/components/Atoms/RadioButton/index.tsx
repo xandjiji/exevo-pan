@@ -33,12 +33,12 @@ const RadioButton = ({
       aria-checked={derivedActive}
       tabIndex={0}
       className={clsx(
-        'radio-wrapper text-s text-onSurface flex cursor-pointer items-center gap-[6px]',
+        'text-s text-onSurface group flex cursor-pointer items-center gap-[6px]',
         className,
       )}
       {...props}
     >
-      <div className="inner-radio border-separator relative grid h-4 w-4 shrink-0 place-items-center rounded-full border-2 border-solid transition-shadow">
+      <div className="border-separator relative grid h-4 w-4 shrink-0 place-items-center rounded-full border-2 border-solid transition-shadow group-active:shadow-inner">
         <div
           className={clsx(
             'bg-primary h-2 w-2 rounded-full transition-opacity',
