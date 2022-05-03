@@ -50,10 +50,6 @@
     @apply !-ml-6 !-mt-6;
   }
 
-  .tab-icon-style svg {
-    @apply mt-[-1px] h-4 w-4;
-  }
-
   .styled-link a {
     @apply text-primaryHighlight text-s font-normal;
   }

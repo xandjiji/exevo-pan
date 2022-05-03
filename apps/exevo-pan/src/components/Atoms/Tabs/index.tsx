@@ -9,6 +9,7 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import useIds from './useIds'
+import styles from './styles.module.css'
 import { TabsProps, PanelProps } from './types'
 
 const Group = forwardRef(
@@ -75,7 +76,8 @@ const Group = forwardRef(
                 aria-selected={childIndex === activeIndex}
                 onClick={() => handleClick(childIndex)}
                 className={clsx(
-                  'text-tsm tab-icon-style flex cursor-pointer gap-[6px] py-2 px-4 font-bold tracking-wider transition-colors',
+                  styles.iconStyle,
+                  'text-tsm flex cursor-pointer gap-[6px] py-2 px-4 font-bold tracking-wider transition-colors',
                   isSelected
                     ? 'text-primaryHighlight child:fill-primaryHighlight'
                     : 'text-separator hover:bg-primaryVariantHighlight hover:text-onSurface child:fill-separator child:hover:fill-onSurface',
