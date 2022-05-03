@@ -15,7 +15,7 @@ export const Wrapper = ({
   <article
     className={clsx(
       'card p-4',
-      highlighted && 'highlighted-palette z-2 md:animate-zoomInAndOut',
+      highlighted && `${styles.highlightedPalette} z-2 md:animate-zoomInAndOut`,
       props.role === 'button' && 'cursor-pointer',
       className,
     )}

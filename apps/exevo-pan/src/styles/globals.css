@@ -36,16 +36,6 @@
 }
 
 @layer utilities {
-  /* @ ToDo: remove this 'tw' prefix and extra variable declarations */
-  .highlighted-palette {
-    --surface: var(--kwaiSurface);
-    --primary: var(--kwai);
-    --primaryVariant: var(--kwaiVariant);
-    --tw-surface: var(--tw-kwaiSurface);
-    --tw-primary: var(--tw-kwai);
-    --tw-primaryVariant: var(--tw-kwaiVariant);
-  }
-
   .styled-link a {
     @apply text-primaryHighlight text-s font-normal;
   }
