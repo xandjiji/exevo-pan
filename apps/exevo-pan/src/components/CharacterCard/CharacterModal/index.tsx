@@ -23,6 +23,7 @@ import SpriteBox from './SpriteBox'
 import { checkStore, tabCounter } from './utils'
 import { resolvers } from './resolvers'
 import * as S from './atoms'
+import styles from './styles.module.css'
 import { CharacterModalProps } from './types'
 
 /*
@@ -93,7 +94,10 @@ const CharacterModal = ({
     <Dialog
       isOpen
       onClose={onClose}
-      className="character-modal lgr:w-[1029px] w-full max-w-[var(--cardMaxMobileWidth)] p-[var(--lateralMargin)] outline-none md:w-fit md:max-w-[calc(100%-80px)]"
+      className={clsx(
+        styles.wrapper,
+        'lgr:w-[1029px] w-full max-w-[var(--cardMaxMobileWidth)] p-[var(--lateralMargin)] outline-none md:w-fit md:max-w-[calc(100%-80px)]',
+      )}
     >
       <Head
         id={id}
