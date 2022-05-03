@@ -25,11 +25,6 @@
     animation: animatedBg 3s ease-out infinite;
   }
 
-  /* @ ToDo: remove this once `raw` image type is available */
-  .warning-icon {
-    transform: translate(1px, -1px) scale(0.75);
-  }
-
   .card {
     @apply bg-surface text-onSurface rounded p-3 text-xs font-normal shadow-md;
   }

@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { useUuid } from 'hooks'
 import Image from 'next/image'
 import warningSrc from 'assets/warning.png'
+import styles from './styles.module.css'
 import { LabeledTextBoxProps } from './types'
 
 const LabeledTextBox = ({
@@ -45,7 +46,7 @@ const LabeledTextBox = ({
               src={warningSrc}
               title={common.WarningLabel}
               unoptimized
-              className="warning-icon"
+              className={styles.warning}
             />
           )}
         </span>
