@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import { useOnImageLoad } from 'hooks'
+import styles from './styles.module.css'
 import { BackgroundProps, SpritePortraitProps } from './types'
 
 export const Background = ({
@@ -14,7 +15,7 @@ export const Background = ({
   <div
     className={clsx(
       'relative select-none rounded-md p-2 shadow-md transition-colors',
-      offset ? 'sprite-offset h-14 w-14' : 'h-12 w-12',
+      offset ? `${styles.offsetImage} h-14 w-14` : 'h-12 w-12',
       highlight ? 'bg-primaryHighlight' : 'bg-primaryVariant',
       className,
     )}

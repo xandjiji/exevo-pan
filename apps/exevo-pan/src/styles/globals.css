@@ -46,10 +46,6 @@
     --tw-primaryVariant: var(--tw-kwaiVariant);
   }
 
-  .sprite-offset span {
-    @apply !-ml-6 !-mt-6;
-  }
-
   .styled-link a {
     @apply text-primaryHighlight text-s font-normal;
   }
