@@ -1,16 +1,21 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useMemo, memo } from 'react'
+import clsx from 'clsx'
 import { Doughnut } from 'react-chartjs-2'
 import { useTheme } from 'contexts/useTheme'
 import { useUuid } from 'hooks'
 import { capitalizeFirstLetter } from 'utils'
-import * as S from './styles'
 import { PieChartProps } from './types'
 
 const chartColors = ['#8338EC', '#FFD166', '#118AB2', '#06D6A0', '#EF476F']
 
-const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
+const PieChart = ({
+  title,
+  pieDataSet,
+  className,
+  ...props
+}: PieChartProps) => {
   const titleId = useUuid()
   const { colors } = useTheme()
 
@@ -64,12 +69,20 @@ const PieChart = ({ title, pieDataSet }: PieChartProps): JSX.Element => {
   )
 
   return (
-    <S.Wrapper>
-      <S.Title id={titleId}>{title}</S.Title>
-      <S.ChartWrapper aria-describedby={titleId}>
+    <section
+      className={clsx('card p-5 transition-colors', className)}
+      {...props}
+    >
+      <h4
+        id={titleId}
+        className="text-onSurface mb-2 text-center text-base font-light"
+      >
+        {title}
+      </h4>
+      <div aria-describedby={titleId} className="w-full">
         <Doughnut data={chartData} options={options} />
-      </S.ChartWrapper>
-    </S.Wrapper>
+      </div>
+    </section>
   )
 }
 export default memo(PieChart)
