@@ -10,24 +10,27 @@ import Summary from './Summary'
 import * as S from './styles'
 import { ChartProps } from './types'
 
+const DAYS_IN_A_WEEK = 7
+const DAYS_IN_A_MONTH = 28
+
 const Chart = ({
   totalLabel,
   yesterdayLabel,
   tooltipLabel,
   chartData,
   ...props
-}: ChartProps): JSX.Element => {
+}: ChartProps) => {
   const {
     translations: { statistics, common },
   } = useTranslations()
 
   const { colors } = useTheme()
 
-  const [dataSize, setDataSize] = useState(7)
+  const [dataSize, setDataSize] = useState(DAYS_IN_A_WEEK)
 
   const { current, lastMonth: originalLastMonth } = chartData
   const lastMonth = useMemo(
-    () => fillArrayUntil(originalLastMonth, 28),
+    () => fillArrayUntil(originalLastMonth, DAYS_IN_A_MONTH),
     [originalLastMonth],
   )
   const todayValue = lastMonth[lastMonth.length - 1]
@@ -132,11 +135,17 @@ const Chart = ({
       </S.ChartWrapper>
 
       <S.ChipWrapper>
-        <Chip overrideStatus={dataSize === 28} onClick={() => setDataSize(28)}>
-          28 {statistics.Days}
+        <Chip
+          overrideStatus={dataSize === DAYS_IN_A_MONTH}
+          onClick={() => setDataSize(DAYS_IN_A_MONTH)}
+        >
+          {DAYS_IN_A_MONTH} {statistics.Days}
         </Chip>
-        <Chip overrideStatus={dataSize === 7} onClick={() => setDataSize(7)}>
-          7 {statistics.Days}
+        <Chip
+          overrideStatus={dataSize === DAYS_IN_A_WEEK}
+          onClick={() => setDataSize(DAYS_IN_A_WEEK)}
+        >
+          {DAYS_IN_A_WEEK} {statistics.Days}
         </Chip>
       </S.ChipWrapper>
     </S.Wrapper>
