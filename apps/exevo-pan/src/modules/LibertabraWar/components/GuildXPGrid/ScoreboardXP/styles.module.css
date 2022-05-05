@@ -1,0 +1,21 @@
+.summary h4 + span {
+  @apply mb-1 block text-2xl;
+}
+
+@media (min-width: 420px) {
+  .summary {
+    font-size: 32px;
+  }
+}
+
+@media (min-width: 768px) {
+  .summary {
+    font-size: 54px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .summary {
+    font-size: 60px;
+  }
+}
