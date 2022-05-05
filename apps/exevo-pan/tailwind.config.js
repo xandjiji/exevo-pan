@@ -20,6 +20,7 @@ module.exports = {
       lg: '1024px',
       lgr: '1100px',
       xl: '1400px',
+      '2xl': '1600px',
     },
     /* @ ToDo: remove this 'tw' prefix */
     colors: {
