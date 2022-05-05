@@ -3,10 +3,9 @@ import { formatNumberWithCommas } from 'utils'
 import ScoreboardXP from './ScoreboardXP'
 import ComparisonChart from '../ComparisonChart'
 import { xpToDataSnapshot } from './utils'
-import * as S from './styles'
 import { GuildXPGridProps } from './types'
 
-const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
+const GuildXPGrid = ({ warData }: GuildXPGridProps) => {
   const {
     translations: { war },
   } = useTranslations()
@@ -16,10 +15,10 @@ const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
   } = warData
 
   return (
-    <S.Wrapper>
-      <S.PageTitle>{war.PageTitle}</S.PageTitle>
+    <article className="inner-container custom-scrollbar bg-backdrop relative grid max-h-[calc(100%-44px)] gap-4 overflow-auto py-4 transition-colors">
+      <h2 className="hidden">{war.PageTitle}</h2>
 
-      <S.FirstRow>
+      <div className="child:w-full flex flex-wrap gap-4">
         <ScoreboardXP
           guildA={{
             name: 'Libertabra Pune',
@@ -52,8 +51,8 @@ const GuildXPGrid = ({ warData }: GuildXPGridProps): JSX.Element => {
           tooltipSuffix={war.GuildXPGrid.comparisonChartSuffix}
           dateLabelType="Date"
         />
-      </S.FirstRow>
-    </S.Wrapper>
+      </div>
+    </article>
   )
 }
 
