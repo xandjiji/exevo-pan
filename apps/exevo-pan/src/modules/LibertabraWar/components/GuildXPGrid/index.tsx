@@ -15,7 +15,7 @@ const GuildXPGrid = ({ warData }: GuildXPGridProps) => {
   } = warData
 
   return (
-    <article className="inner-container custom-scrollbar bg-backdrop relative grid max-h-[calc(100%-44px)] gap-4 overflow-auto py-4 transition-colors">
+    <article className="inner-container custom-scrollbar bg-background relative grid max-h-[calc(100%-44px)] gap-4 overflow-auto py-4 transition-colors">
       <h2 className="hidden">{war.PageTitle}</h2>
 
       <div className="child:w-full flex flex-wrap gap-4">
