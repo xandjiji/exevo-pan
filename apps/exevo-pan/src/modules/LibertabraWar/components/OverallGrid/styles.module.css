@@ -1,0 +1,16 @@
+.firstRow {
+  @apply child:w-full flex flex-wrap gap-4;
+}
+
+@media (min-width: 1200px) {
+  .firstRow > *:first-child {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 488px;
+  }
+
+  .firstRow > *:last-child {
+    width: calc(100% - 16px - 488px);
+  }
+}
