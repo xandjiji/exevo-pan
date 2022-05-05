@@ -1,4 +1,3 @@
-import * as S from './styles'
 import { LabelGroupProps } from './types'
 
 const LabelGroup = ({
@@ -6,11 +5,13 @@ const LabelGroup = ({
   htmlFor,
   children,
   ...props
-}: LabelGroupProps): JSX.Element => (
-  <S.Wrapper {...props}>
-    <S.Label htmlFor={htmlFor}>{label}</S.Label>
+}: LabelGroupProps) => (
+  <div {...props}>
+    <label htmlFor={htmlFor} className="mb-2 block">
+      {label}
+    </label>
     {children}
-  </S.Wrapper>
+  </div>
 )
 
 export default LabelGroup
