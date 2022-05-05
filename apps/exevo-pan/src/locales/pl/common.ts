@@ -87,7 +87,7 @@ export default {
   RemoveItem: 'Usuń przedmiot',
   TibiaCoinsCta: {
     text: 'Kup Tibia Coinsy',
-    link: 'https://www.facebook.com/mehowcoins',
+    link: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
   },
   CloseDrawerLabel: 'Zamknij szufladę',
   RepoLinkText: 'Idź do tego repozytorium',
