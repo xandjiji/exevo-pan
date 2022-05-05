@@ -1,21 +1,31 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useCallback } from 'react'
 import { Line } from 'react-chartjs-2'
 import { useTheme } from 'contexts/useTheme'
 import { compactNumberFormatter, formatNumberWithCommas } from 'utils'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { ComparisonChartProps } from './types'
 
 const colorA = '#118AB2'
 const colorB = '#EF476F'
+
+const GuildName = (args: JSX.IntrinsicElements['span']) => (
+  <span className="text-s mb-[6px] block" {...args} />
+)
+
+const OnlineCount = (args: JSX.IntrinsicElements['span']) => (
+  <span className="text-l block font-bold" {...args} />
+)
 
 const ComparisonChart = ({
   guildA,
   guildB,
   tooltipSuffix,
   dateLabelType,
+  className,
   ...props
-}: ComparisonChartProps): JSX.Element => {
+}: ComparisonChartProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -125,21 +135,28 @@ const ComparisonChart = ({
   )
 
   return (
-    <S.Wrapper {...props}>
-      <S.SummaryWrapper>
-        <S.GuildSummary style={{ color: colorA }}>
-          <S.GuildName>{guildA.name}</S.GuildName>
-          <S.OnlineCount>{guildA.summaryValue}</S.OnlineCount>
-        </S.GuildSummary>
+    <section
+      className={clsx(
+        styles.wrapper,
+        'card h-[500px] pt-5 pr-4 pb-[86px] pl-[26px] transition-colors',
+        className,
+      )}
+      {...props}
+    >
+      <div className="child:text-onSurface mb-5 flex gap-6 md:gap-9">
+        <div style={{ color: colorA }}>
+          <GuildName>{guildA.name}</GuildName>
+          <OnlineCount>{guildA.summaryValue}</OnlineCount>
+        </div>
 
-        <S.GuildSummary style={{ color: colorB }}>
-          <S.GuildName>{guildB.name}</S.GuildName>
-          <S.OnlineCount>{guildB.summaryValue}</S.OnlineCount>
-        </S.GuildSummary>
-      </S.SummaryWrapper>
+        <div style={{ color: colorB }}>
+          <GuildName>{guildB.name}</GuildName>
+          <OnlineCount>{guildB.summaryValue}</OnlineCount>
+        </div>
+      </div>
 
       <Line data={chartDataObject} options={options} />
-    </S.Wrapper>
+    </section>
   )
 }
 
