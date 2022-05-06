@@ -1,16 +1,27 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useMemo } from 'react'
-import { Table, Input } from 'components/Atoms'
+import { Table, Input, Paginator, Chip } from 'components/Atoms'
+import Image from 'next/image'
+import knightSrc from 'assets/knight.png'
+import paladinSrc from 'assets/paladin.png'
+import sorcererSrc from 'assets/sorcerer.png'
+import druidSrc from 'assets/druid.png'
 import EmptyState from './EmptyState'
+import LabelGroup from './LabelGroup'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
-import * as S from './styles'
 import { MembersTableProps, SortMode } from './types'
+
+const Emoji = (args: JSX.IntrinsicElements['span']) => (
+  <span {...args} className="text-tsm mr-1 ml-[-3px]" />
+)
 
 const MembersTable = ({
   pageSize = 10,
   memberList,
+  className,
   ...props
-}: MembersTableProps): JSX.Element => {
+}: MembersTableProps) => {
   const {
     translations: { war },
   } = useTranslations()
@@ -104,67 +115,77 @@ const MembersTable = ({
   )
 
   return (
-    <S.Table {...props}>
-      <S.ControlHeader>
-        <S.ToggleFiltersGroup label={war.SearchGrid.MembersTable.filters}>
-          <S.FiltersChipWrapper>
-            <S.Chip
+    <Table className={clsx('mx-auto mb-4 max-w-3xl', className)} {...props}>
+      <div className="mb-6 flex flex-wrap items-end justify-between gap-4">
+        <LabelGroup
+          label={war.SearchGrid.MembersTable.filters}
+          className="w-full"
+        >
+          <div className="flex flex-wrap gap-2">
+            <Chip
               overrideStatus={currentGuild === 0}
               onClick={() => toggleGuild(0)}
+              className="!child:mr-1"
             >
-              <S.Emoji
+              <Emoji
                 role="img"
                 aria-label={war.SearchGrid.MembersTable.goatLabel}
               >
                 🐐
-              </S.Emoji>
+              </Emoji>
               Libertabra Pune
-            </S.Chip>
-            <S.Chip
+            </Chip>
+            <Chip
               overrideStatus={currentGuild === 1}
               onClick={() => toggleGuild(1)}
+              className="!child:mr-1"
             >
-              <S.Emoji
+              <Emoji
                 role="img"
                 aria-label={war.SearchGrid.MembersTable.skullLabel}
               >
                 💀
-              </S.Emoji>
+              </Emoji>
               Bones Alliance
-            </S.Chip>
-            <S.Chip
+            </Chip>
+            <Chip
               overrideStatus={currentVocations.has(1)}
               onClick={() => toggleVocationSet(1)}
+              className="!child:mr-1"
             >
-              <S.KnightIcon />
+              <Image src={knightSrc} alt="Knight" />
               Knight
-            </S.Chip>
-            <S.Chip
+            </Chip>
+            <Chip
               overrideStatus={currentVocations.has(2)}
               onClick={() => toggleVocationSet(2)}
+              className="!child:mr-1"
             >
-              <S.PaladinIcon />
+              <Image src={paladinSrc} alt="Paladin" />
               Paladin
-            </S.Chip>
-            <S.Chip
+            </Chip>
+            <Chip
               overrideStatus={currentVocations.has(3)}
               onClick={() => toggleVocationSet(3)}
+              className="!child:mr-1"
             >
-              <S.SorcererIcon />
+              <Image src={sorcererSrc} alt="Sorcerer" />
               Sorcerer
-            </S.Chip>
-            <S.Chip
+            </Chip>
+            <Chip
               overrideStatus={currentVocations.has(4)}
               onClick={() => toggleVocationSet(4)}
+              className="!child:mr-1"
             >
-              <S.DruidIcon />
+              <Image src={druidSrc} alt="Druid" />
               Druid
-            </S.Chip>
-          </S.FiltersChipWrapper>
-        </S.ToggleFiltersGroup>
-        <S.SearchGroup
+            </Chip>
+          </div>
+        </LabelGroup>
+        <LabelGroup
           label={war.SearchGrid.MembersTable.searchLabel}
           htmlFor="search-nickname-input"
+          className="w-full md:max-w-[300px]"
         >
           <Input
             id="search-nickname-input"
@@ -174,47 +195,53 @@ const MembersTable = ({
             onChange={onSearchChange}
             hasAlert={false}
           />
-        </S.SearchGroup>
-        <S.Paginator
+        </LabelGroup>
+        <Paginator
           aria-controls="members-grid"
           pageSize={pageSize}
           totalItems={filteredList.length}
           currentPage={currentPage}
           onChange={onPageChange}
           noItemsMessage={war.SearchGrid.MembersTable.paginatorNoItems}
+          className="ml-auto"
         />
-      </S.ControlHeader>
+      </div>
       <Table.Element id="members-grid">
         <Table.Head>
           <Table.Row>
-            <S.SorteableHeadColumn
+            <Table.HeadColumn
               aria-label={war.SearchGrid.MembersTable.levelSortLabel}
               aria-selected={currentSortKey === 'level'}
               highlighted={currentSortKey === 'level'}
               desc={currentDesc}
               onClick={() => toggleSortMode('level')}
+              className="w-full cursor-pointer px-2 text-left"
             >
               Nickname
-            </S.SorteableHeadColumn>
-            <Table.HeadColumn>Guild</Table.HeadColumn>
-            <S.SorteableHeadColumn
+            </Table.HeadColumn>
+            <Table.HeadColumn className="min-w-[64px] px-2 text-center text-xs">
+              Guild
+            </Table.HeadColumn>
+            <Table.HeadColumn
               aria-label={war.SearchGrid.MembersTable.killsSortLabel}
               aria-selected={currentSortKey === 'kills'}
               highlighted={currentSortKey === 'kills'}
               desc={currentDesc}
               onClick={() => toggleSortMode('kills')}
+              className="min-w-[64px] px-2 text-center"
             >
               Kills
-            </S.SorteableHeadColumn>
-            <S.SorteableHeadColumn
+            </Table.HeadColumn>
+            <Table.HeadColumn
               aria-label={war.SearchGrid.MembersTable.deathSortLabel}
               aria-selected={currentSortKey === 'deathCount'}
               highlighted={currentSortKey === 'deathCount'}
               desc={currentDesc}
               onClick={() => toggleSortMode('deathCount')}
+              className="min-w-[64px] px-2 text-center"
             >
               {war.SearchGrid.MembersTable.deathsHeadColumn}
-            </S.SorteableHeadColumn>
+            </Table.HeadColumn>
           </Table.Row>
         </Table.Head>
 
@@ -225,12 +252,21 @@ const MembersTable = ({
                 nickname={member.nickname}
                 level={member.level}
                 vocation={member.vocation}
+                className="w-full px-2 text-left"
               />
-              <Table.Column>{member.guild}</Table.Column>
-              <Table.Column title={war.SearchGrid.MembersTable.killsTitle}>
+              <Table.Column className="min-w-[64px] px-2 text-center text-xs">
+                {member.guild}
+              </Table.Column>
+              <Table.Column
+                title={war.SearchGrid.MembersTable.killsTitle}
+                className="min-w-[64px] px-2 text-center"
+              >
                 {member.kills}
               </Table.Column>
-              <Table.Column title={war.SearchGrid.MembersTable.deathsTitle}>
+              <Table.Column
+                title={war.SearchGrid.MembersTable.deathsTitle}
+                className="min-w-[64px] px-2 text-center"
+              >
                 {member.deathCount}
               </Table.Column>
             </Table.Row>
@@ -238,7 +274,7 @@ const MembersTable = ({
         </Table.Body>
       </Table.Element>
       {!currentListPage.length && <EmptyState />}
-    </S.Table>
+    </Table>
   )
 }
 
