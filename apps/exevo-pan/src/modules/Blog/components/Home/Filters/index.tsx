@@ -1,13 +1,16 @@
 import { useState, useCallback } from 'react'
-import { Accordion, Input } from 'components/Atoms'
-import Tag from 'components/Atoms/Tag'
+import { Accordion, Switch, Input, Tag } from 'components/Atoms'
 import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
+import SearchIcon from 'assets/svgs/search.svg'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
-import * as S from './styles'
 
-const Filters = (): JSX.Element => {
+const GroupWrapper = (args: JSX.IntrinsicElements['div']) => (
+  <div className="grid gap-2" {...args} />
+)
+
+const Filters = () => {
   const {
     translations: { blog },
   } = useTranslations()
@@ -49,15 +52,17 @@ const Filters = (): JSX.Element => {
     <Accordion
       border
       title={
-        <S.Title>
-          <S.Icon />
+        <h2 className="text-onSurface flex w-full items-center gap-2 text-2xl font-light">
+          <SearchIcon className="fill-onSurface h-6 w-6" />
           {blog.Filters.title}
-        </S.Title>
+        </h2>
       }
     >
-      <S.Wrapper>
-        <S.GroupWrapper>
-          <S.Switch
+      <section className="grid max-w-[200px] shrink-0 gap-4 pt-2">
+        <GroupWrapper>
+          <Switch
+            className="font-light tracking-wide"
+            style={{ fontSize: 12 }}
             active={sortOptions.descendingOrder}
             onClick={() =>
               dispatchFetchPosts({
@@ -69,11 +74,16 @@ const Filters = (): JSX.Element => {
             }
           >
             {blog.Filters.mostRecentLabel}
-          </S.Switch>
-        </S.GroupWrapper>
+          </Switch>
+        </GroupWrapper>
 
-        <S.GroupWrapper>
-          <S.Label htmlFor="query-input">{blog.Filters.searchLabel}</S.Label>
+        <GroupWrapper>
+          <label
+            htmlFor="query-input"
+            className="text-tsm block font-light tracking-wide"
+          >
+            {blog.Filters.searchLabel}
+          </label>
           <Input
             id="query-input"
             value={query}
@@ -82,11 +92,13 @@ const Filters = (): JSX.Element => {
             allowClear
             hasAlert={false}
           />
-        </S.GroupWrapper>
+        </GroupWrapper>
 
-        <S.GroupWrapper>
-          <S.Label as="p">{blog.Filters.tagsLabel}</S.Label>
-          <S.TagWrapper>
+        <GroupWrapper>
+          <p className="text-tsm block font-light tracking-wide">
+            {blog.Filters.tagsLabel}
+          </p>
+          <div className="flex flex-wrap gap-2">
             {blogTags.all.map(({ id }) => (
               <Tag
                 key={id}
@@ -96,9 +108,9 @@ const Filters = (): JSX.Element => {
                 onClick={() => toggleTag(id)}
               />
             ))}
-          </S.TagWrapper>
-        </S.GroupWrapper>
-      </S.Wrapper>
+          </div>
+        </GroupWrapper>
+      </section>
     </Accordion>
   )
 }
