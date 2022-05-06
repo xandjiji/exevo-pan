@@ -9,7 +9,7 @@ const Section = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
 
 const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
   const {
-    translations: { error },
+    translations: { common },
   } = useTranslations()
 
   return (
@@ -25,7 +25,7 @@ const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
       <Section className="bg-primary text-center">
         <ErrorIcon
           role="alert"
-          aria-label={error.ErrorLabel}
+          aria-label={common.error.ErrorLabel}
           className="fill-onPrimary mb-8 h-32 w-32"
         />
         {paragraphs?.map((p) => (

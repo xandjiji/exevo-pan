@@ -3,10 +3,12 @@ import ErrorState from './ErrorState'
 
 const ErrorPage = (): JSX.Element => {
   const {
-    translations: { error },
+    translations: { common },
   } = useTranslations()
 
-  return <ErrorState title="404" paragraphs={[error.P1, error.P2]} />
+  return (
+    <ErrorState title="404" paragraphs={[common.error.P1, common.error.P2]} />
+  )
 }
 
 export default ErrorPage

@@ -1,4 +1,9 @@
 export default {
+  error: {
+    P1: 'Ojej!',
+    P2: 'Nie znaleziono strony!',
+    ErrorLabel: 'Problem! Wydarzyło się coś nieprzewidzianego',
+  },
   Header: {
     h1: {
       home: 'Kupuj i sprzedawaj postacie na oficjalnym Tibijskim Bazarze Postaci!',

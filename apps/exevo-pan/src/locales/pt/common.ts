@@ -1,4 +1,9 @@
 export default {
+  error: {
+    P1: 'oops!',
+    P2: 'página não encontrada!',
+    ErrorLabel: 'Erro, algo inesperado aconteceu',
+  },
   Header: {
     h1: {
       home: 'Compre e venda de chares de Tibia no Char Bazaar oficial!',
