@@ -1,23 +1,27 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useWarGuildData } from 'contexts/useDatabase'
 import MembersTable from './MembersTable'
-import * as S from './styles'
 
-const SearchGrid = (): JSX.Element => {
+const SearchGrid = () => {
   const {
     translations: { war },
   } = useTranslations()
 
   const { warGuildData } = useWarGuildData()
 
-  /* @ ToDo: skeleton */
-  if (warGuildData.length === 0) return <S.Loading />
+  if (warGuildData.length === 0)
+    return (
+      <div
+        className="loading-spinner z-1 fixed top-1/2 left-1/2"
+        style={{ transform: 'translate(-50%, -50%)' }}
+      />
+    )
   return (
-    <S.Wrapper>
-      <S.PageTitle>{war.SearchGrid.Title}</S.PageTitle>
+    <article className="inner-container custom-scrollbar bg-background relative max-h-[calc(100%-44px)] overflow-auto py-4 transition-colors">
+      <h2 className="hidden">{war.SearchGrid.Title}</h2>
 
       <MembersTable memberList={warGuildData} />
-    </S.Wrapper>
+    </article>
   )
 }
 
