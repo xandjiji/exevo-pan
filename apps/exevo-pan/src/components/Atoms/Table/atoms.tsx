@@ -23,7 +23,10 @@ export const Row = ({ className, ...props }: JSX.IntrinsicElements['tr']) => (
 )
 
 export const Head = (args: JSX.IntrinsicElements['thead']) => (
-  <thead style={{ borderBottom: 'solid 1px var(--separator)' }} {...args} />
+  <thead
+    style={{ borderBottom: 'solid 1px rgb(var(--tw-separator))' }}
+    {...args}
+  />
 )
 
 export const HeadColumn = ({

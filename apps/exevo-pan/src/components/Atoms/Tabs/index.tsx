@@ -58,7 +58,7 @@ const Group = forwardRef(
           role="tablist"
           aria-label={ariaLabelProp}
           className="bg-surface custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
-          style={{ borderBottom: 'solid 1px var(--separator)' }}
+          style={{ borderBottom: 'solid 1px rgb(var(--tw-separator))' }}
         >
           {Children.map(children, (child, childIndex) => {
             if (!isValidElement(child)) return child

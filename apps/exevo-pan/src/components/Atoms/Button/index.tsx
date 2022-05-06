@@ -34,7 +34,7 @@ const Button = ({
           className="loading-spinner before:bg-primaryVariant after:bg-primary mx-auto"
           style={{
             background:
-              'linear-gradient(to right, var(--primaryVariant) 10%, rgba(255, 255, 255, 0) 42%)',
+              'linear-gradient(to right, rgb(var(--tw-primaryVariant)) 10%, rgba(255, 255, 255, 0) 42%)',
           }}
           role="alert"
           aria-label={common.LoadingLabel}
