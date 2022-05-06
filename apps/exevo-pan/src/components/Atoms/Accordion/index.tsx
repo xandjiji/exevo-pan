@@ -44,9 +44,13 @@ const Accordion = ({
         suppressHydrationWarning
         className={clsx(
           'text-onSurface text-tsm flex w-full cursor-pointer items-center justify-between transition-all',
-          border && 'border-b-1 border-separator border-solid',
+          border && 'border-separator',
           open ? 'py-2' : 'py-1',
         )}
+        style={{
+          borderBottomStyle: 'solid',
+          borderBottomWidth: border ? '1px' : 0,
+        }}
       >
         {title}
         <ArrowIcon
