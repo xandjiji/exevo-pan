@@ -1,12 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { memo, useMemo } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
+import { FadeImage, Tag } from 'components/Atoms'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
 import { extractDate } from './utils'
-import * as S from './styles'
 import { PostCardProps } from './types'
 
-const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
+const PostCard = ({ postData, className, ...props }: PostCardProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -15,31 +17,44 @@ const PostCard = ({ postData, ...props }: PostCardProps): JSX.Element => {
   const dateObject = useMemo(() => extractDate(date), [date])
 
   return (
-    <S.Wrapper {...props}>
-      <S.Thumbnail
-        src={thumbnail}
-        alt={title}
-        layout="fixed"
-        width={120}
-        height={120}
-        unoptimized
-      />
+    <article
+      className={clsx(
+        'card relative top-0 flex list-disc flex-col overflow-hidden p-0 shadow-md transition-all hover:top-[-3px] hover:shadow-lg active:shadow-inner',
+        className,
+      )}
+      {...props}
+    >
+      <div className="grid-background relative grid h-[180px] w-full shrink-0 place-content-center">
+        <FadeImage
+          src={thumbnail}
+          alt={title}
+          layout="fixed"
+          width={120}
+          height={120}
+          unoptimized
+          objectFit="scale-down"
+        />
+      </div>
 
-      <S.Body>
-        <S.Title>{title}</S.Title>
-        <S.Date>
+      <div className="flex flex-grow flex-col py-4 px-6">
+        <h3 className="text-primaryHighlight text-[32px]">{title}</h3>
+        <p className="text-tsm font-light tracking-wide">
           {common.FullMonth[dateObject.month]} {dateObject.day},{' '}
           {dateObject.year}
-        </S.Date>
-        <S.Description>{description}</S.Description>
-        <S.TagWrapper>
+        </p>
+        <p className="text-tsm my-4 flex-grow">{description}</p>
+        <div className="flex flex-wrap gap-2">
           {tags.map((tagId) => (
-            <S.Tag key={tagId} tagId={tagId} />
+            <Tag key={tagId} tagId={tagId} className="text-tsm" />
           ))}
-        </S.TagWrapper>
-      </S.Body>
-      <NextLink href={`${routes.BLOG}/${slug}`}>{title}</NextLink>
-    </S.Wrapper>
+        </div>
+      </div>
+      <NextLink href={`${routes.BLOG}/${slug}`}>
+        <a className="absolute top-0 left-0 h-full w-full text-transparent">
+          {title}
+        </a>
+      </NextLink>
+    </article>
   )
 }
 

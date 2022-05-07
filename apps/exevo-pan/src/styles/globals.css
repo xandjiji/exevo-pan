@@ -2,6 +2,20 @@
 @tailwind utilities;
 
 @layer components {
+  .grid-background {
+    background: rgb(var(--tw-primaryVariantHighlight));
+    background-image: linear-gradient(
+        rgb(var(--tw-primaryVariant)) 2px,
+        transparent 2px
+      ),
+      linear-gradient(90deg, rgb(var(--tw-primaryVariant)) 2px, transparent 2px),
+      linear-gradient(rgb(var(--tw-primaryVariant)) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--tw-primaryVariant)) 1px, transparent 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    @apply transition-colors;
+  }
+
   .loading-spinner {
     @apply before:bg-primary after:bg-background relative h-6 w-6 rounded-full transition-opacity before:absolute before:top-0 before:left-0 before:h-1/2 before:w-1/2 before:rounded-tl-full after:absolute after:top-0 after:left-0 after:bottom-0 after:right-0 after:m-auto after:h-3/4 after:w-3/4 after:rounded-full;
 
