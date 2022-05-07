@@ -1,16 +1,16 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useInfiniteScroll } from 'hooks'
 import EmptyState from 'components/EmptyState'
 import PostCard from './PostCard'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
-import * as S from './styles'
 import { PostGridViewProps } from './types'
 
 const PostGridView = ({
   postList,
   requestStatus,
   observerRef,
-}: PostGridViewProps): JSX.Element => {
+}: PostGridViewProps) => {
   const {
     translations: { blog },
   } = useTranslations()
@@ -18,7 +18,12 @@ const PostGridView = ({
   const noResults = requestStatus !== 'LOADING' && !postList.length
 
   return (
-    <S.Grid empty={noResults}>
+    <div
+      className={clsx(
+        'relative grid h-full flex-grow grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-8',
+        noResults ? 'self-center justify-self-center' : 'after:col-span-full',
+      )}
+    >
       {postList.map((postData) => (
         <PostCard key={postData.slug} postData={postData} />
       ))}
@@ -30,8 +35,14 @@ const PostGridView = ({
           }}
         />
       )}
-      {observerRef && <S.LazyWatcher ref={observerRef} />}
-    </S.Grid>
+      {observerRef && (
+        <div
+          ref={observerRef}
+          role="none"
+          className="absolute bottom-20 left-0"
+        />
+      )}
+    </div>
   )
 }
 
