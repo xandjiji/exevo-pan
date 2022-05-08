@@ -1,96 +1,14 @@
 import styled from 'styled-components'
-import { InnerContainer, Shadow, CustomScrollbar, Smooth } from 'styles'
-
-export const Nav = styled.nav`
-  ${InnerContainer}
-  padding-top: 8px;
-  padding-bottom: 8px;
-
-  position: fixed;
-  top: 60px;
-  left: 0;
-  z-index: 10;
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-
-  background-color: var(--darkerPrimary);
-  ${Shadow}
-
-  @media (min-width: 1024px) {
-    position: unset;
-    padding: 0;
-
-    display: unset;
-    width: unset;
-    height: min-content;
-    box-shadow: none;
-    background-color: unset;
-  }
-`
-
-export const MainTitle = styled.span`
-  margin-right: 24px;
-  display: block;
-  font-size: 16px;
-  color: var(--onPrimary);
-
-  @media (min-width: 1024px) {
-    margin: 0 0 12px 0;
-    color: var(--onSurface);
-  }
-`
-
-export const Ul = styled.ul`
-  position: relative;
-  padding: 8px 0;
-  margin: -8px 0;
-  display: flex;
-  overflow: auto;
-  scroll-behavior: smooth;
-  ${CustomScrollbar}
-
-  > *:not(:last-child) {
-    margin: 0 24px 0 0;
-  }
-
-  &::after {
-    content: '';
-    position: fixed;
-    right: 0;
-    top: 60px;
-    z-index: 1;
-    height: 36px;
-    width: 32px;
-    background-image: linear-gradient(
-      to left,
-      var(--darkerPrimary),
-      rgba(0, 0, 0, 0)
-    );
-    pointer-events: none;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 6px 12px;
-    margin: 0;
-    display: block;
-    border-left: solid 1px var(--separator);
-
-    > *:not(:last-child) {
-      margin: 0 0 12px 0;
-    }
-
-    &::after {
-      display: none;
-    }
-  }
-`
+import { Smooth } from 'styles'
 
 export const Li = styled.li`
   flex: none;
   height: min-content;
   ${Smooth}
+
+  &:not(:last-child) {
+    margin: 0 24px 0 0;
+  }
 
   a {
     font-size: 12px;
@@ -119,6 +37,10 @@ export const Li = styled.li`
   }
 
   @media (min-width: 1024px) {
+    &:not(:last-child) {
+      margin: 0 0 12px 0;
+    }
+
     a,
     &::before {
       color: var(--onSurface);
