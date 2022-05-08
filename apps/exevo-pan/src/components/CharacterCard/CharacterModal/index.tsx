@@ -96,7 +96,7 @@ const CharacterModal = ({
       onClose={onClose}
       className={clsx(
         styles.wrapper,
-        'lgr:w-[1029px] w-full max-w-[var(--cardMaxMobileWidth)] p-[var(--lateralMargin)] outline-none md:w-fit md:max-w-[calc(100%-80px)]',
+        'w-full max-w-[var(--cardMaxMobileWidth)] p-[var(--lateralMargin)] outline-none md:w-fit md:max-w-[calc(100%-80px)]',
       )}
     >
       <Head
