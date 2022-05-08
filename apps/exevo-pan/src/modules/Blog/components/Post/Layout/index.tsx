@@ -11,7 +11,7 @@ const Aside = ({ className, ...props }: JSX.IntrinsicElements['aside']) => (
   />
 )
 
-const Layout = (props: React.HTMLAttributes<HTMLDivElement>): JSX.Element => (
+const Layout = (props: React.HTMLAttributes<HTMLDivElement>) => (
   <CurrentSectionProvider>
     <div
       className="inner-container relative flex flex-col items-center gap-8 pb-8 md:mx-auto md:max-w-[640px] lg:grid lg:max-w-none lg:grid-cols-[1fr_clamp(45ch,50%,75ch)_1fr] lg:flex-row lg:items-start"
