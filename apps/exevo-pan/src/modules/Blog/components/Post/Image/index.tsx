@@ -1,6 +1,6 @@
 import NextImage from 'next/image'
+import clsx from 'clsx'
 import { useOnImageLoad } from 'hooks'
-import * as S from './styles'
 import { ImageProps } from './types'
 
 const Image = ({
@@ -9,19 +9,33 @@ const Image = ({
   align = 'left',
   caption,
   ...props
-}: ImageProps): JSX.Element => {
+}: ImageProps) => {
   const [loaded, onLoad] = useOnImageLoad()
 
   return (
-    <S.Figure
+    <figure
       id={id}
-      className={className}
-      data-align={align}
-      data-loaded={loaded}
+      className={clsx(
+        'block',
+        align === 'center' && 'mx-auto',
+        align === 'right' && 'ml-auto',
+        className,
+      )}
     >
-      <NextImage {...props} onLoad={onLoad} unoptimized />
-      {caption && <S.Caption>{caption}</S.Caption>}
-    </S.Figure>
+      <div className={clsx('transition-shadow', loaded && 'shadow-md')}>
+        <NextImage
+          {...props}
+          className={clsx('transition-opacity', !loaded && 'opacity-0')}
+          onLoad={onLoad}
+          unoptimized
+        />
+      </div>
+      {caption && (
+        <figcaption className="text-tsm block text-center">
+          {caption}
+        </figcaption>
+      )}
+    </figure>
   )
 }
 
