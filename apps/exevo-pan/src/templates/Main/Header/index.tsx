@@ -85,8 +85,8 @@ const Header = ({
 
           <ul
             className={clsx(
-              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-4 rounded-br-md p-5 shadow-md transition-opacity md:static md:flex md:transform-none md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
-              !menuOpen && 'opacity-0',
+              menuOpen ? 'left-0' : '-left-full opacity-0',
+              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-4 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
             )}
           >
             {NavItems.map(({ title, href, exact, icon }) => (
