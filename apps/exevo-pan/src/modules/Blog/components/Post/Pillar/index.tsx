@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { useCurrentSection } from '../../../contexts/useCurrentSection'
 import { generateSectionId } from '../../../utils'
 import { debouncedScrollIntoView, generateNavId } from './utils'
-import * as S from './styles'
 import { PillarProps } from './types'
 
 const Cloudy = () => (
@@ -42,22 +41,37 @@ const Pillar = ({ titles, className, ...props }: PillarProps) => {
       </span>
 
       <ul
-        className="custom-scrollbar lg:border-separator relative -my-2 flex overflow-auto scroll-smooth py-2 lg:m-0 lg:block lg:border-solid lg:p-[6px] lg:px-3"
+        className="custom-scrollbar lg:border-separator relative -my-2 flex gap-6 overflow-auto scroll-smooth py-2 lg:m-0 lg:grid lg:gap-2 lg:border-solid lg:p-[6px] lg:px-3"
         style={{ borderWidth: 0, borderLeftWidth: 1 }}
       >
-        {titles.map((title) => (
-          <S.Li
-            id={generateNavId(title)}
-            aria-current={
-              currentSection && currentSection.title === title
-                ? 'step'
-                : undefined
-            }
-            key={title}
-          >
-            <a href={`#${generateSectionId(title)}`}>{title}</a>
-          </S.Li>
-        ))}
+        {titles.map((title) => {
+          const isCurrent = currentSection && currentSection.title === title
+
+          return (
+            <li
+              key={title}
+              id={generateNavId(title)}
+              aria-current={isCurrent ? 'step' : undefined}
+              className={clsx(
+                "before:text-onPrimary h-min flex-none before:mr-[6px] before:font-bold before:transition-all before:content-['·']",
+                !isCurrent && 'before:opacity-0',
+                isCurrent
+                  ? 'lg:before:text-primaryHighlight'
+                  : 'lg:before:text-onSurface',
+              )}
+            >
+              <a
+                className={clsx(
+                  'text-tsm text-onPrimary lg:hover:text-primary whitespace-nowrap font-light leading-relaxed transition-colors lg:whitespace-normal',
+                  isCurrent ? 'lg:text-primaryHighlight' : 'lg:text-onSurface',
+                )}
+                href={`#${generateSectionId(title)}`}
+              >
+                {title}
+              </a>
+            </li>
+          )
+        })}
       </ul>
 
       <Cloudy />
