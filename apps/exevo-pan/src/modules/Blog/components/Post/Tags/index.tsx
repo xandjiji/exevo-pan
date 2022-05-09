@@ -1,16 +1,17 @@
 import { memo } from 'react'
-import * as S from './styles'
+import clsx from 'clsx'
+import { Tag } from 'components/Atoms'
 import { TagsProps } from './types'
 
-const Tags = ({ tags, ...props }: TagsProps): JSX.Element | null => {
+const Tags = ({ tags, className, ...props }: TagsProps) => {
   if (tags.length === 0) return null
 
   return (
-    <S.Wrapper {...props}>
+    <div className={clsx('flex flex-wrap gap-2', className)} {...props}>
       {tags.map((tagId) => (
-        <S.Tag key={tagId} tagId={tagId} />
+        <Tag key={tagId} tagId={tagId} className="text-tsm" />
       ))}
-    </S.Wrapper>
+    </div>
   )
 }
 
