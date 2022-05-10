@@ -1,6 +1,5 @@
 import { memo } from 'react'
-import { SpritePortrait, Text } from 'components/Atoms'
-import * as S from './styles'
+import { SpritePortrait, Text, ActiveCount } from 'components/Atoms'
 import { TopCosmeticsProps, CosmeticEntry } from './types'
 
 const topOutfits: CosmeticEntry[] = [
@@ -36,11 +35,24 @@ const TopCosmetics = ({ mounts }: TopCosmeticsProps): JSX.Element => {
     : (name: string) => `/sprites/storeoutfits/male/${name}_3.gif`
 
   return (
-    <S.Ul data-mounts={!!mounts}>
+    <ul data-mounts={!!mounts} className="flex flex-wrap justify-center gap-6">
       {data.map(({ name, percentage, price }) => (
-        <S.Li key={name}>
-          <S.SpriteWrapper title={`${name} - ${percentage}`}>
-            <S.Percentage>{percentage}</S.Percentage>
+        <li
+          key={name}
+          className="text-tsm flex flex-col items-center gap-[6px] whitespace-nowrap"
+        >
+          <div title={`${name} - ${percentage}`} className="relative w-min">
+            <ActiveCount
+              className="z-2 absolute top-[-6px] right-0 py-[2px] px-1"
+              style={{
+                borderRadius: 4,
+                width: 'fit-content',
+                height: 'unset',
+                transform: 'translateX(50%)',
+              }}
+            >
+              {percentage}
+            </ActiveCount>
             <div>
               <SpritePortrait
                 offset
@@ -50,14 +62,14 @@ const TopCosmetics = ({ mounts }: TopCosmeticsProps): JSX.Element => {
                 height={64}
               />
             </div>
-          </S.SpriteWrapper>
+          </div>
 
           <p style={{ marginBottom: -6 }}>{name}</p>
 
           <Text.TibiaCoin value={price} />
-        </S.Li>
+        </li>
       ))}
-    </S.Ul>
+    </ul>
   )
 }
 
