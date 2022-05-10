@@ -1,11 +1,12 @@
+import clsx from 'clsx'
 import { useState } from 'react'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterCard/CharacterModal'
 import { vocation } from 'shared-utils/dist/vocations'
 import { Text } from 'components/Atoms'
 import Table from '../../Style/Table'
-import * as S from './styles'
 import rankingData from './ranking.json'
+import styles from './styles.module.css'
 import { RankingEntry, TopSpendersProps } from './types'
 
 const ranking = rankingData as RankingEntry[]
@@ -14,7 +15,7 @@ const TopSpenders = ({
   characterLabel,
   spentLabel,
   soldForLabel,
-}: TopSpendersProps): JSX.Element => {
+}: TopSpendersProps) => {
   const [expandedCharacter, setExpandedCharacter] = useState<
     CharacterObject | undefined
   >()
@@ -32,12 +33,14 @@ const TopSpenders = ({
 
         <tbody>
           {ranking.map(({ invested, auction }) => (
-            <S.ClickableTR
-              onClick={() => setExpandedCharacter(auction)}
+            <tr
               key={auction.id}
+              onClick={() => setExpandedCharacter(auction)}
+              className={clsx(styles.hoverable, 'hoverable cursor-pointer')}
             >
               <td>
                 <CharacterMiniCard
+                  className="transition-transform"
                   outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${auction.outfitId}.gif`}
                   characterData={{
                     name: auction.nickname,
@@ -60,7 +63,7 @@ const TopSpenders = ({
                   '–'
                 )}
               </td>
-            </S.ClickableTR>
+            </tr>
           ))}
         </tbody>
         {expandedCharacter && (

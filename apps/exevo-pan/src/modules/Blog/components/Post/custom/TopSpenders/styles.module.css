@@ -1,0 +1,3 @@
+.hoverable:hover td:first-child > div:first-child > div:first-child {
+  transform: translateX(3px);
+}
