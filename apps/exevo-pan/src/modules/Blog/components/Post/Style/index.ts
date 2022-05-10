@@ -39,7 +39,7 @@ const ContentWrapper = styled.main`
   ${headings}
   ${hr}
   ${bold}
-  ${link}
+  /* ${link} */
   ${code}
   ${blockquote}
   ${small}
