@@ -14,10 +14,10 @@ import { common, blog } from 'locales'
 
 const components = {
   ...Post.styles,
+  ...Links,
   wrapper: Post.ContentWrapper,
   h1: 'h2',
   Image: Post.Image,
-  ...Links,
   Button: dynamic(() => import('components/Atoms/Button')),
   TibiaCoin: dynamic(() => import('components/Atoms/Text/TibiaCoin')),
   AboutPageStyle: dynamic(

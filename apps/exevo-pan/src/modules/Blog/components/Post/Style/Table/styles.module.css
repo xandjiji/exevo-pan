@@ -1,0 +1,38 @@
+.table thead {
+  border-bottom: solid 1px rgb(var(--tw-separator));
+}
+
+.table th,
+.table td {
+  @apply p-2 align-middle;
+}
+
+.table th *,
+.table td * {
+  @apply align-middle;
+}
+
+.table th {
+  @apply text-onPrimary bg-primary text-base font-normal;
+}
+
+.table td {
+  @apply text-s text-onSurface font-light;
+}
+
+.table tbody > *:not(:last-child) {
+  @apply relative;
+}
+
+.table tbody > *:not(:last-child)::after {
+  @apply bg-separator absolute top-full left-0 h-[1px] w-full opacity-30;
+  content: '';
+}
+
+.table tbody tr:nth-child(odd) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.table tbody tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.1);
+}
