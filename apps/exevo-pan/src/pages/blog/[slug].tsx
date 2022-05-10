@@ -13,10 +13,9 @@ import { routes, links } from 'Constants'
 import { common, blog } from 'locales'
 
 const components = {
+  ...Post.styles,
   wrapper: Post.ContentWrapper,
   h1: 'h2',
-  h2: Post.HeadingSection,
-  table: Post.Table,
   Image: Post.Image,
   ...Links,
   Button: dynamic(() => import('components/Atoms/Button')),

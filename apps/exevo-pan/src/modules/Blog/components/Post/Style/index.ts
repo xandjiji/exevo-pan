@@ -6,10 +6,9 @@ import { code } from './code'
 import { headings } from './headings'
 import { hr } from './hr'
 import { link } from './link'
-import { lists } from './lists'
 import { small } from './small'
 
-export const ContentWrapper = styled.main`
+const ContentWrapper = styled.main`
   ${MaterialCard}
   ${InnerPadding}
 
@@ -42,10 +41,11 @@ export const ContentWrapper = styled.main`
   ${bold}
   ${link}
   ${code}
-  ${lists}
   ${blockquote}
   ${small}
 `
+export default ContentWrapper
 
-export { default as HeadingSection } from './HeadingSection'
-export { default as Table } from './Table'
+export * from './Lists'
+export { default as h2 } from './HeadingSection'
+export { default as table } from './Table'

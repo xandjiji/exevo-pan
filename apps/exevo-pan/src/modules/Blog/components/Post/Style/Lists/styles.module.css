@@ -1,0 +1,22 @@
+.list ol,
+.list ul {
+  @apply pl-4;
+}
+
+.list li::before {
+  @apply text-primary mr-2 font-normal;
+  content: '•';
+}
+
+.orderedList {
+  @apply list-none;
+  counter-reset: li;
+}
+
+.orderedList li {
+  counter-increment: li;
+}
+
+.orderedList li::before {
+  content: counter(li) ' -';
+}

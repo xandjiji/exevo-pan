@@ -1,4 +1,5 @@
-export * from './Style'
+export { default as ContentWrapper } from './Style'
+export * as styles from './Style'
 export { default as Authors } from './Authors'
 export { default as Breadcrumbs } from './Breadcrumbs'
 export { default as Image } from './Image'
