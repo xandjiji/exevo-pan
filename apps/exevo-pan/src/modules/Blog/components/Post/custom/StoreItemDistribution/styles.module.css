@@ -1,0 +1,16 @@
+.list {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 360px) {
+  .list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 560px) and (max-width: 1023px), (min-width: 1200px) {
+  .list {
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-auto-flow: column;
+  }
+}
