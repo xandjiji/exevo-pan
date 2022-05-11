@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { routes, locales } from 'Constants'
+import { a as A } from '../../Style/Link'
 
 const { BLOG } = routes
 const { DEFAULT_LOCALE } = locales
@@ -11,7 +12,7 @@ type LinkProps = {
   href: string
 }
 
-export const SlugLink = ({ children, href }: LinkProps): JSX.Element => {
+export const SlugLink = ({ children, href }: LinkProps) => {
   const { locale } = useRouter()
 
   const routedHref = useMemo(
@@ -20,18 +21,20 @@ export const SlugLink = ({ children, href }: LinkProps): JSX.Element => {
   )
 
   return (
-    <a href={routedHref} target="_blank" rel="noreferrer noopener">
+    <A href={routedHref} target="_blank" rel="noreferrer noopener">
       {children}
-    </a>
+    </A>
   )
 }
 
-export const RouteLink = (props: LinkProps): JSX.Element => (
-  <NextLink {...props} />
+export const RouteLink = ({ children, ...props }: LinkProps) => (
+  <NextLink {...props}>
+    <A>{children}</A>
+  </NextLink>
 )
 
-export const ExternalLink = ({ children, href }: LinkProps): JSX.Element => (
-  <a href={href} target="_blank" rel="noopener noreferrer external">
+export const ExternalLink = ({ children, href }: LinkProps) => (
+  <A href={href} target="_blank" rel="noopener noreferrer external">
     {children}
-  </a>
+  </A>
 )
