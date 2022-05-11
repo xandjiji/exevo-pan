@@ -1,6 +1,7 @@
 import NextImage from 'next/image'
 import clsx from 'clsx'
 import { useOnImageLoad } from 'hooks'
+import styles from './styles.module.css'
 import { ImageProps } from './types'
 
 const Image = ({
@@ -22,7 +23,7 @@ const Image = ({
         className,
       )}
     >
-      <div className={clsx('transition-shadow', loaded && 'shadow-md')}>
+      <div className={clsx('transition-shadow', loaded && styles.wrapper)}>
         <NextImage
           {...props}
           className={clsx('transition-opacity', !loaded && 'opacity-0')}
