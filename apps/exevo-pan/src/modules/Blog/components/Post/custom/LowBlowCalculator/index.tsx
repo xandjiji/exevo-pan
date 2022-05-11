@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Input, Checkbox } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import Sprite from '../Sprite'
-import * as S from './styles'
+import * as S from './atoms'
 
 const LOW_BLOW_MULTIPLIER = 1.09
 
@@ -40,7 +40,7 @@ const translations = {
   },
 }
 
-const LowBlowCalculator = (): JSX.Element => {
+const LowBlowCalculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
   const finalDamageA = Math.round(averageDamage * LOW_BLOW_MULTIPLIER)
 
@@ -54,9 +54,9 @@ const LowBlowCalculator = (): JSX.Element => {
   const { locale } = useRouter()
 
   return (
-    <S.Wrapper>
+    <div className="my-2 mx-auto grid max-w-fit gap-6">
       <S.Group>
-        <S.GroupTitle style={{ marginLeft: -5 }}>
+        <S.Group.Title style={{ marginLeft: -5 }}>
           <Sprite src={`${SPRITE_PATH}/Low Blow.png`} width={32} height={32}>
             Low Blow
           </Sprite>
@@ -64,7 +64,7 @@ const LowBlowCalculator = (): JSX.Element => {
           <Sprite src="/sprites/crit.png" width={37} height={30}>
             Powerful Strike
           </Sprite>
-        </S.GroupTitle>
+        </S.Group.Title>
 
         <S.Label>
           {translations[locale as RegisteredLocale].yourAverageDamage}
@@ -85,11 +85,11 @@ const LowBlowCalculator = (): JSX.Element => {
       </S.Group>
 
       <S.Group>
-        <S.GroupTitle style={{ marginLeft: -2 }}>
+        <S.Group.Title style={{ marginLeft: -2 }}>
           <Sprite src={`${SPRITE_PATH}/Charm.png`} width={32} height={32}>
             {translations[locale as RegisteredLocale].elementalCharm}
           </Sprite>
-        </S.GroupTitle>
+        </S.Group.Title>
 
         <S.Label>
           {translations[locale as RegisteredLocale].creatureHP}
@@ -114,7 +114,7 @@ const LowBlowCalculator = (): JSX.Element => {
           <code>{finalDamageB}</code>
         </S.Result>
       </S.Group>
-    </S.Wrapper>
+    </div>
   )
 }
 
