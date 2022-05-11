@@ -47,25 +47,6 @@
     @apply bg-background text-tsm text-onSurface inline-block cursor-text rounded-md py-1.5 px-3;
     font-family: monospace;
   }
-}
-
-@layer utilities {
-  .styled-link a {
-    @apply text-primaryHighlight text-s font-normal;
-  }
-
-  .invisible-caption caption {
-    @apply sr-only;
-  }
-
-  /* @ ToDo: remove these once `brightness` utility is fixed */
-  .highlight-10 {
-    filter: brightness(110%);
-  }
-
-  .highlight-30 {
-    filter: brightness(130%);
-  }
 
   .clickable {
     @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
@@ -99,6 +80,25 @@
 
   .custom-scrollbar::-webkit-scrollbar-thumb {
     @apply bg-primaryVariant rounded-sm;
+  }
+}
+
+@layer utilities {
+  .styled-link a {
+    @apply text-primaryHighlight text-s font-normal;
+  }
+
+  .invisible-caption caption {
+    @apply sr-only;
+  }
+
+  /* @ ToDo: remove these once `brightness` utility is fixed */
+  .highlight-10 {
+    filter: brightness(110%);
+  }
+
+  .highlight-30 {
+    filter: brightness(130%);
   }
 }
 
