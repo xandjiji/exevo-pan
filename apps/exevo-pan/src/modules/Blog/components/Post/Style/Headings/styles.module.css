@@ -1,0 +1,7 @@
+.title {
+  @apply text-[32px] font-light tracking-wide;
+}
+
+.title:not(:first-child) {
+  @apply mt-3;
+}

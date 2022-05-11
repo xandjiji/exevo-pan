@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useOnScreen } from 'hooks'
 import AnchorIcon from 'assets/svgs/anchor.svg'
+import { h2 as H2 } from '../Headings/index'
 import { useCurrentSection } from '../../../../contexts/useCurrentSection'
 import { CopyToClipboard } from './utils'
 import { generateSectionId } from '../../../../utils'
@@ -32,11 +33,11 @@ const HeadingSection = ({
   return (
     <div
       ref={elementRef}
-      className="flex w-fit items-center justify-start gap-4"
+      className="mt-3 flex w-fit items-center justify-start gap-4"
     >
-      <h2 {...props} id={anchorId} className="flex-grow">
+      <H2 {...props} id={anchorId} className="flex-grow">
         {children}
-      </h2>
+      </H2>
       <a
         href={`#${anchorId}`}
         onClick={() => CopyToClipboard(anchorId)}

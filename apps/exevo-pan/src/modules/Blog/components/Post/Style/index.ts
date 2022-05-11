@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { MaterialCard, InnerPadding, Smooth } from 'styles'
-import { headings } from './headings'
 import { hr } from './hr'
 import { link } from './link'
 import { small } from './small'
@@ -33,7 +32,6 @@ const ContentWrapper = styled.main`
     ${Smooth}
   }
 
-  ${headings}
   ${hr}
   /* ${link} */
   ${small}
@@ -45,3 +43,4 @@ export { default as h2 } from './HeadingSection'
 export { default as table } from './Table'
 export * from './Blockquote'
 export * from './Code'
+export * from './Headings'
