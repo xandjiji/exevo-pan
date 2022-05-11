@@ -6,5 +6,5 @@ export const pre = (args: JSX.IntrinsicElements['pre']) => (
 )
 
 export const code = (args: JSX.IntrinsicElements['code']) => (
-  <code {...args} className="code !text-s !py-[2px] !px-2 tracking-wider" />
+  <code {...args} className="code text-s py-[2px] px-2 tracking-wider" />
 )

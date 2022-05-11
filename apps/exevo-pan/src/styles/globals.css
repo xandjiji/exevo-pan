@@ -44,7 +44,8 @@
   }
 
   .code {
-    @apply bg-background text-tsm text-onSurface inline-block cursor-text rounded-md py-[6px] px-3 font-mono;
+    @apply bg-background text-tsm text-onSurface inline-block cursor-text rounded-md py-1.5 px-3;
+    font-family: monospace;
   }
 }
 
@@ -68,10 +69,6 @@
 
   .clickable {
     @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
-  }
-
-  .code {
-    @apply bg-background inline-block cursor-text rounded-md py-1.5 px-3 font-mono text-xs;
   }
 
   .container {
