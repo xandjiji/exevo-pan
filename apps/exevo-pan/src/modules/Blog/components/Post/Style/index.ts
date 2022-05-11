@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { MaterialCard, InnerPadding, Smooth } from 'styles'
 import { link } from './link'
-import { small } from './small'
 
 const ContentWrapper = styled.main`
   ${MaterialCard}
@@ -32,7 +31,6 @@ const ContentWrapper = styled.main`
   }
 
   /* ${link} */
-  ${small}
 `
 export default ContentWrapper
 
@@ -43,3 +41,4 @@ export * from './Blockquote'
 export * from './Code'
 export * from './Headings'
 export * from './Hr'
+export * from './Small'
