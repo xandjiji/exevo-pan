@@ -1,16 +1,21 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
+import { ActiveCount, Paginator } from 'components/Atoms'
+import CharacterCard from 'components/CharacterCard'
+import EmptyState from 'components/EmptyState'
+import FilterIcon from 'assets/svgs/filter.svg'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
-import * as S from './styles'
+import * as S from './atoms'
+import styles from './styles.module.css'
 import { AuctionGridProps } from './types'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
+const AuctionsGrid = ({ past }: AuctionGridProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -48,17 +53,21 @@ const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
 
   return (
     <main>
-      <S.Head suppressHydrationWarning id="grid-header">
-        <S.FilterButton
+      <div
+        suppressHydrationWarning
+        id="grid-header"
+        className="z-71 bg-surface inner-container sticky top-0 flex h-[70px] w-full select-none items-end gap-2 py-2 shadow-md md:items-center"
+      >
+        <S.Button
           tabIndex={0}
-          role="button"
           aria-label={homepage.AuctionsGrid.filterButtonLabel}
           onClick={() => setDrawerOpen(true)}
-          suppressHydrationWarning
+          className="relative"
         >
-          <S.FilterIcon />
+          <FilterIcon className={styles.icon} />
           {process.browser && (
-            <S.ActiveIcon
+            <ActiveCount
+              className="absolute top-[-2px] right-[-2px]"
               role="status"
               aria-label={`${activeFilterCount} ${
                 activeFilterCount === 1
@@ -72,23 +81,24 @@ const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
               aria-hidden={activeFilterCount === 0}
             >
               {activeFilterCount}
-            </S.ActiveIcon>
+            </ActiveCount>
           )}
-        </S.FilterButton>
+        </S.Button>
 
         <SortingDialog />
 
         {process.browser && (
-          <S.Paginator
+          <Paginator
             aria-controls="character-grid"
             pageSize={PAGE_SIZE}
             totalItems={pageData.totalItems}
             currentPage={pageData.pageIndex + 1}
             onChange={handlePaginatorFetch}
             noItemsMessage={homepage.AuctionsGrid.noItemsPagination}
+            className="ml-auto"
           />
         )}
-      </S.Head>
+      </div>
 
       {process.browser && (
         <FilterDrawer
@@ -99,11 +109,14 @@ const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
         />
       )}
 
-      <S.GridWrapper>
-        <S.Grid id="character-grid">
+      <div className="flex flex-col items-center">
+        <div
+          id="character-grid"
+          className="inner-container grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 py-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
+        >
           {shouldDisplayHighlightedAuctions &&
             highlightedAuctions.map((auction) => (
-              <S.CharacterCard
+              <CharacterCard
                 key={`${auction.id}-highlighted`}
                 characterData={auction}
                 highlighted
@@ -113,7 +126,7 @@ const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
               />
             ))}
           {page.map((auction) => (
-            <S.CharacterCard
+            <CharacterCard
               key={auction.id}
               lazyRender
               characterData={auction}
@@ -121,9 +134,10 @@ const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
               past={past}
             />
           ))}
-        </S.Grid>
+        </div>
         {page.length === 0 && (
-          <S.EmptyState
+          <EmptyState
+            className={styles.empty}
             button={{
               content: homepage.AuctionsGrid.changeFilters,
               action: () => setDrawerOpen(true),
@@ -134,7 +148,7 @@ const AuctionsGrid = ({ past }: AuctionGridProps): JSX.Element => {
             }}
           />
         )}
-      </S.GridWrapper>
+      </div>
     </main>
   )
 }
