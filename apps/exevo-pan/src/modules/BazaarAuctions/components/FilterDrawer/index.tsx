@@ -587,7 +587,10 @@ const FilterDrawer = ({
           </FilterGroup>
         )}
 
-        <FilterGroup label={homepage.FilterDrawer.labels.misc}>
+        <FilterGroup
+          label={homepage.FilterDrawer.labels.misc}
+          style={{ border: 'none' }}
+        >
           <S.ChipWrapper>
             <Tooltip
               style={{ width: 280 }}

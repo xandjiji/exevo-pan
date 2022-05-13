@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Accordion as BaseAccordion, ActiveCount } from 'components/Atoms'
 import { Clickable, Smooth } from 'styles'
-import { Label as BaseFilterGroupLabel } from '../FilterGroup/styles'
+import { Label as BaseFilterGroupLabel } from '../FilterGroup'
 
 export const Accordion = styled(BaseAccordion)`
   padding-bottom: 6px;
