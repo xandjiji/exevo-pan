@@ -6,7 +6,7 @@ export const Button = ({
 }: JSX.IntrinsicElements['button']) => (
   <button
     type="button"
-    className={clsx('clickable grid place-items-center', className)}
+    className={clsx('clickable grid place-items-center rounded', className)}
     suppressHydrationWarning
     {...props}
   />
