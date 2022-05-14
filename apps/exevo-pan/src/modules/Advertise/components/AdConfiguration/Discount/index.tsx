@@ -1,9 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
+import OfferIcon from 'assets/svgs/offer.svg'
 import { calculatePrice, readablePrice, getDiscountTier } from '../../../utils'
-import * as S from './styles'
+import * as S from './atoms'
 import { DiscountProps } from './types'
 
-const Discount = ({ daysCount, paymentMethod }: DiscountProps): JSX.Element => {
+const Discount = ({ daysCount, paymentMethod }: DiscountProps) => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -22,30 +23,33 @@ const Discount = ({ daysCount, paymentMethod }: DiscountProps): JSX.Element => {
   const noDiscount = daysCount <= 1
 
   return (
-    <S.Wrapper>
-      <S.Title>
-        <S.OfferIcon />
+    <div className="card grid gap-4 p-4">
+      <h2
+        className="border-separator -mb-1 flex items-center border-solid pb-1 text-2xl"
+        style={{ borderWidth: 0, borderBottomWidth: 1 }}
+      >
+        <OfferIcon className="fill-onSurface mr-1.5 transition-colors" />
         {advertise.Discount.title}
-      </S.Title>
+      </h2>
 
       <S.Group>
         <S.Small>{advertise.Discount.description}</S.Small>
-        <S.OfferWrapper>
+        <div className="flex items-center gap-1.5">
           <S.Strong>{readableOffer}</S.Strong>{' '}
-          <S.Striked aria-hidden={noDiscount}>
+          <S.Striked className={noDiscount ? 'opacity-0' : 'opacity-100'}>
             {readableOriginalPrice}
           </S.Striked>{' '}
-          <S.DiscountTag aria-hidden={noDiscount}>
+          <S.DiscountTag className={noDiscount ? 'opacity-0' : 'opacity-100'}>
             -{offPercentage}
           </S.DiscountTag>
-        </S.OfferWrapper>
+        </div>
       </S.Group>
 
       <S.Group>
         <S.Small>Tier {discountTier}</S.Small>
         <S.Bar>
-          <S.TierSeparator style={{ left: S.TIER_2_WIDTH }} />
-          <S.TierSeparator style={{ left: S.TIER_3_WIDTH }} />
+          <S.TierSeparator data-tier={2} />
+          <S.TierSeparator data-tier={3} />
           <S.Fill
             data-tier={discountTier}
             data-progress={daysCount}
@@ -53,7 +57,7 @@ const Discount = ({ daysCount, paymentMethod }: DiscountProps): JSX.Element => {
           />
         </S.Bar>
       </S.Group>
-    </S.Wrapper>
+    </div>
   )
 }
 
