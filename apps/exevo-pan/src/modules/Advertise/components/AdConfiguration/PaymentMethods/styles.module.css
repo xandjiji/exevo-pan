@@ -1,0 +1,7 @@
+.wrapper {
+  @apply card overflow-hidden p-0;
+}
+
+.wrapper > *:not(:last-child) {
+  border-bottom: solid 1px rgb(var(--tw-separator)) !important;
+}
