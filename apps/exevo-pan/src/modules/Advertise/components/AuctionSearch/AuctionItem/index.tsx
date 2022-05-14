@@ -1,7 +1,9 @@
+import clsx from 'clsx'
 import { vocation } from 'shared-utils/dist/vocations'
+import Arrow from 'assets/svgs/next.svg'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { useForm } from '../../../contexts/Form'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { AuctionItemProps } from './types'
 
 const AuctionItem = ({
@@ -9,14 +11,23 @@ const AuctionItem = ({
   level,
   vocationId,
   outfitId,
+  className,
   ...props
 }: AuctionItemProps) => {
   const { selectedCharacter } = useForm()
+  const isSelected = selectedCharacter?.nickname === nickname
 
   return (
-    <S.Button
+    <button
+      type="button"
+      className={clsx(
+        'relative left-0 flex w-full cursor-pointer items-center justify-between text-left transition-all hover:left-[6px]',
+        isSelected && 'left-[6px]',
+        isSelected && styles.highlight,
+        styles.button,
+        className,
+      )}
       {...props}
-      aria-selected={selectedCharacter?.nickname === nickname}
     >
       <CharacterMiniCard
         outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
@@ -27,8 +38,8 @@ const AuctionItem = ({
           world: '',
         }}
       />
-      <S.Arrow />
-    </S.Button>
+      <Arrow className="fill-onSurface w-8" />
+    </button>
   )
 }
 
