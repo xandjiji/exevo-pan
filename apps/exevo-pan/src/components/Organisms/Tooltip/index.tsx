@@ -16,7 +16,7 @@ const Tooltip = ({
     content={
       <div
         role="tooltip"
-        className={clsx('card text-center', className)}
+        className={clsx('card text-tsm text-center', className)}
         {...props}
       >
         {content}
