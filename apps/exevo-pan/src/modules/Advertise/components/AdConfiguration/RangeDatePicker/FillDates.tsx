@@ -1,6 +1,5 @@
 import { memo } from 'react'
-import styled from 'styled-components'
-import { Day } from './styles'
+import { Day } from './atoms'
 import { fillWithDays, getDay } from './utils'
 
 interface FillDatesProps {
@@ -9,20 +8,12 @@ interface FillDatesProps {
   step: 1 | -1
 }
 
-const FillDay = styled(Day)`
-  font-weight: 300;
-  color: var(--separator);
-  cursor: unset;
-
-  && {
-    box-shadow: none;
-  }
-`
-
-const FillDates = ({ firstDay, amount, step }: FillDatesProps): JSX.Element => (
+const FillDates = ({ firstDay, amount, step }: FillDatesProps) => (
   <>
     {fillWithDays(firstDay, amount, step).map((fillDay) => (
-      <FillDay key={fillDay}>{getDay(fillDay)}</FillDay>
+      <Day key={fillDay} disabled tabIndex={-1}>
+        {getDay(fillDay)}
+      </Day>
     ))}
   </>
 )
