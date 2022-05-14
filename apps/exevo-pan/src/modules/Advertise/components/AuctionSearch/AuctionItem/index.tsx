@@ -5,13 +5,12 @@ import * as S from './styles'
 import { AuctionItemProps } from './types'
 
 const AuctionItem = ({
-  auctionId,
   nickname,
   level,
   vocationId,
   outfitId,
   ...props
-}: AuctionItemProps): JSX.Element => {
+}: AuctionItemProps) => {
   const { selectedCharacter } = useForm()
 
   return (
