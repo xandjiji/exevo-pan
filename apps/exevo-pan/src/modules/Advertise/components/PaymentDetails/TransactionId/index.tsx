@@ -1,20 +1,17 @@
 import { useTranslations } from 'contexts/useTranslation'
-import * as S from './styles'
 
-const TransactionId = ({
-  children,
-}: {
-  children: React.ReactNode
-}): JSX.Element => {
+const TransactionId = ({ children }: { children: React.ReactNode }) => {
   const {
     translations: { advertise },
   } = useTranslations()
 
   return (
-    <S.Wrapper>
-      <S.Label>{advertise.PaymentDetails.TransactionIdLabel}</S.Label>
-      <S.Id>{children}</S.Id>
-    </S.Wrapper>
+    <div>
+      <p className="text-tsm mb-1 tracking-wide">
+        {advertise.PaymentDetails.TransactionIdLabel}
+      </p>
+      <span className="code text-center">{children}</span>
+    </div>
   )
 }
 
