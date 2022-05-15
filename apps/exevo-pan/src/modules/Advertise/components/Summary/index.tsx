@@ -1,11 +1,25 @@
+/* eslint-disable jsx-a11y/heading-has-content */
+import clsx from 'clsx'
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import { Tooltip } from 'components/Organisms'
 import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
+import ReceiptIcon from 'assets/svgs/receipt.svg'
 import { useForm } from '../../contexts/Form'
 import { calculatePrice, readablePrice } from '../../utils'
-import * as S from './styles'
 
-const Summary = (): JSX.Element => {
+const Strong = ({ className, ...props }: JSX.IntrinsicElements['h3']) => (
+  <h3
+    className={clsx('mb-[2px] text-base tracking-wide', className)}
+    {...props}
+  />
+)
+
+const SubText = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
+  <p className={clsx('text-tsm font-light', className)} {...props} />
+)
+
+const Summary = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -18,66 +32,78 @@ const Summary = (): JSX.Element => {
   )
 
   return (
-    <S.Wrapper>
-      <S.Title>
-        <S.ReceiptIcon />
+    <section className="card grid gap-4 p-4">
+      <h2
+        className="border-separator -mb-1 flex items-center border-solid pb-1 text-2xl"
+        style={{ borderWidth: 0, borderBottomWidth: 1 }}
+      >
+        <ReceiptIcon className="fill-onSurface mr-1.5" />
         {advertise.PaymentDetails.Summary.title}
-      </S.Title>
+      </h2>
 
-      <S.GroupItem>
-        <S.Strong>
+      <div>
+        <Strong>
           {selectedCharacter?.nickname}{' '}
-          <S.AuctionLink
+          <a
             href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${selectedCharacter?.id}&source=overview`}
             target="_blank"
             rel="noreferrer noopener"
+            className="text-tsm text-onSurface relative font-light tracking-widest"
           >
             (#{selectedCharacter?.id})
-          </S.AuctionLink>
-        </S.Strong>
-        <S.SubText>
-          {advertise.PaymentDetails.Summary.auctionedCharacter}
-        </S.SubText>
-      </S.GroupItem>
+          </a>
+        </Strong>
+        <SubText>{advertise.PaymentDetails.Summary.auctionedCharacter}</SubText>
+      </div>
 
-      <S.GroupItem>
-        <S.Strong>
+      <div>
+        <Strong>
           {selectedDates.length}{' '}
-          <S.Tooltip
+          <Tooltip
+            className="w-[160px]"
             content={
               <>
-                <S.TooltipTitle>
+                <p className="mb-2 font-bold">
                   {advertise.PaymentDetails.Summary.datesTooltipText}
-                </S.TooltipTitle>
-                <S.AllDates>
+                </p>
+
+                <ul className="grid gap-[3px] text-left">
                   {formattedDates.map((fullDate) => (
-                    <S.FullDate key={fullDate}>{fullDate}</S.FullDate>
+                    <li
+                      key={fullDate}
+                      className="before:mr-[3px] before:font-bold before:content-['·']"
+                    >
+                      {fullDate}
+                    </li>
                   ))}
-                </S.AllDates>
+                </ul>
               </>
             }
           >
-            <S.Highlight>
+            <Strong
+              className="border-onSurface inline border-dashed"
+              style={{ borderWidth: 0, borderBottomWidth: 1 }}
+            >
               {
                 advertise.PaymentDetails.Summary[
                   selectedDates.length > 1 ? 'days' : 'day'
                 ]
               }
-            </S.Highlight>
-          </S.Tooltip>
-        </S.Strong>
-        <S.SubText>{advertise.PaymentDetails.Summary.durationText}</S.SubText>
-      </S.GroupItem>
+            </Strong>
+          </Tooltip>
+        </Strong>
+        <SubText>{advertise.PaymentDetails.Summary.durationText}</SubText>
+      </div>
 
-      <S.GroupItem>
-        <S.Strong>
+      <div>
+        <Strong>
           {readablePrice.full[paymentMethod](
             calculatePrice(selectedDates.length, paymentMethod).totalPrice,
           )}
-        </S.Strong>
-        <S.SubText>{advertise.PaymentDetails.Summary.costText}</S.SubText>
-      </S.GroupItem>
-    </S.Wrapper>
+        </Strong>
+        <SubText>{advertise.PaymentDetails.Summary.costText}</SubText>
+      </div>
+    </section>
   )
 }
 
