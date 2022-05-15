@@ -1,10 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useEffect } from 'react'
+import { CopyButton } from 'components/Atoms'
 import { useForm } from '../../../contexts/Form'
-import * as S from './styles'
 import { generateQrCode } from './utils'
 
-const PixPayment = (): JSX.Element => {
+const PixPayment = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -28,15 +28,22 @@ const PixPayment = (): JSX.Element => {
   }, [])
 
   return (
-    <S.Wrapper>
-      <S.Text>{advertise.PaymentDetails.PixPayment.codeText}</S.Text>
-      <S.Payload>
+    <div>
+      <p className="text-s mb-1.5">
+        {advertise.PaymentDetails.PixPayment.codeText}
+      </p>
+      <span className="code flex items-center gap-1.5 break-all text-xs">
         {txKey}
-        <S.CopyButton copyString={txKey as string} />
-      </S.Payload>
-      <S.QRText>{advertise.PaymentDetails.PixPayment.qrText}</S.QRText>
-      <S.QrCode src={qrCode} />
-    </S.Wrapper>
+        <CopyButton
+          copyString={txKey as string}
+          className="!bg-primary child:fill-onPrimary shrink-0"
+        />
+      </span>
+      <p className="text-s mb-1.5 mt-[22px] text-center">
+        {advertise.PaymentDetails.PixPayment.qrText}
+      </p>
+      <img className="mx-auto block" alt="QR Code" src={qrCode} />
+    </div>
   )
 }
 
