@@ -1,16 +1,16 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
+import { Button } from 'components/Atoms'
 import { MailCheckoutClient } from 'services'
 import { locales } from 'Constants'
 import { useForm } from '../../contexts/Form'
 import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter, randomCharacter } from './utils'
-import * as S from './styles'
 
 const { DEFAULT_LOCALE } = locales
 
-const Checkout = (): JSX.Element => {
+const Checkout = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -104,8 +104,10 @@ const Checkout = (): JSX.Element => {
   const { current: randomNickname } = useRef(randomCharacter())
 
   return (
-    <S.Wrapper>
-      <S.Title>{advertise.Checkout.title}</S.Title>
+    <section className="card overflow-hidden rounded-xl pt-0">
+      <h2 className="bg-primary text-onPrimary -mx-3 mb-4 py-3 px-6 text-2xl font-normal">
+        {advertise.Checkout.title}
+      </h2>
       <LabelledInput
         id="email"
         labelText="Email"
@@ -121,32 +123,36 @@ const Checkout = (): JSX.Element => {
         value={email.value}
       />
       {paymentMethod === 'TIBIA_COINS' && (
-        <LabelledInput
-          id="paymentCharacter"
-          labelText={advertise.Checkout.paymentCharacterLabel}
-          placeholder={`e.g, '${randomNickname}'`}
-          validationState={paymentCharacter.state}
-          errorMessage={
-            paymentCharacter.state === 'invalid'
-              ? advertise.Checkout.paymentCharacterInvalidMessage
-              : undefined
-          }
-          onKeyPress={handleKeypress}
-          onChange={handleChange}
-          value={paymentCharacter.value}
-        />
+        <>
+          <div role="none" className="mt-2" />
+          <LabelledInput
+            id="paymentCharacter"
+            labelText={advertise.Checkout.paymentCharacterLabel}
+            placeholder={`e.g, '${randomNickname}'`}
+            validationState={paymentCharacter.state}
+            errorMessage={
+              paymentCharacter.state === 'invalid'
+                ? advertise.Checkout.paymentCharacterInvalidMessage
+                : undefined
+            }
+            onKeyPress={handleKeypress}
+            onChange={handleChange}
+            value={paymentCharacter.value}
+          />
+        </>
       )}
 
-      <S.Button
+      <Button
         type="button"
         aria-label={advertise.Checkout.checkoutButtonLabel}
         disabled={isButtonDisabled}
         onClick={validateAndSubmit}
         loading={sendingEmail}
+        className="mt-4 ml-auto block min-h-[52px] min-w-[150px]"
       >
         {advertise.Checkout.checkoutButton}
-      </S.Button>
-    </S.Wrapper>
+      </Button>
+    </section>
   )
 }
 
