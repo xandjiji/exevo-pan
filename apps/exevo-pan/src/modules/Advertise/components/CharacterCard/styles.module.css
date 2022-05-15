@@ -1,0 +1,13 @@
+@media (max-width: 767px) {
+  .miniCard > *:first-child {
+    margin-bottom: 0;
+  }
+
+  .miniCard > *:not(:first-child) {
+    display: none;
+  }
+}
+
+.skeleton button {
+  display: none;
+}
