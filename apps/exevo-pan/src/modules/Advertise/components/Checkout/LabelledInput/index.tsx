@@ -1,47 +1,65 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
-import * as S from './styles'
+import { Input } from 'components/Atoms'
+import ValidIcon from 'assets/svgs/valid.svg'
+import InvalidIcon from 'assets/svgs/invalid.svg'
+import styles from './styles.module.css'
 import { LabelledInputProps, InputStates } from './types'
 
 const LabelledInput = ({
   id,
   labelText,
   validationState = 'neutral',
+  className,
   ...props
-}: LabelledInputProps): JSX.Element => {
+}: LabelledInputProps) => {
   const {
     translations: { advertise },
   } = useTranslations()
 
-  const StateIcon = useMemo(
-    () =>
-      ((
-        {
-          valid: (
-            <S.ValidIcon aria-label={advertise.Checkout.LabelledInput.valid} />
-          ),
-          invalid: (
-            <S.InvalidIcon
-              aria-label={advertise.Checkout.LabelledInput.invalid}
-            />
-          ),
-          neutral: <S.InvalidIcon aria-hidden />,
-          loading: (
-            <S.Loading aria-label={advertise.Checkout.LabelledInput.loading} />
-          ),
-        } as Record<InputStates, React.ReactNode>
-      )[validationState]),
-    [advertise, validationState],
+  const StateIcon: Record<InputStates, React.ReactNode> = useMemo(
+    () => ({
+      valid: (
+        <ValidIcon
+          aria-label={advertise.Checkout.LabelledInput.valid}
+          className={clsx('animate-rollIn fill-green', styles.icon)}
+        />
+      ),
+      invalid: (
+        <InvalidIcon
+          aria-label={advertise.Checkout.LabelledInput.invalid}
+          className={clsx('fill-red', styles.icon)}
+        />
+      ),
+      neutral: (
+        <InvalidIcon aria-hidden className={clsx('fill-red', styles.icon)} />
+      ),
+      loading: (
+        <div
+          aria-label={advertise.Checkout.LabelledInput.loading}
+          className={clsx('loading-spinner after:bg-surface', styles.icon)}
+        />
+      ),
+    }),
+    [advertise],
   )
 
   const isValid = validationState === 'valid'
 
   return (
-    <S.Wrapper valid={isValid}>
-      <S.Label htmlFor={id}>{labelText}</S.Label>
-      <S.Input id={id} {...props} />
-      {StateIcon}
-    </S.Wrapper>
+    <div className="relative">
+      <label htmlFor={id} className="text-tsm mb-1.5 block">
+        {labelText}
+      </label>
+      <Input
+        id={id}
+        className={clsx('', styles.input, isValid && styles.valid, className)}
+        {...props}
+        ref={undefined}
+      />
+      {StateIcon[validationState]}
+    </div>
   )
 }
 
