@@ -51,7 +51,7 @@ const Input = ({
   }
 
   return (
-    <div className={className} style={style}>
+    <div className={clsx('text-tsm', className)} style={style}>
       <div
         className={clsx(
           'border-1 bg-surface flex w-full cursor-text rounded-md border-solid transition-colors',
