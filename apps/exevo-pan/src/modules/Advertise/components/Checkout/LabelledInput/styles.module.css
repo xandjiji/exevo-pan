@@ -7,7 +7,7 @@
 }
 
 .icon {
-  @apply absolute right-2 bottom-6 h-4 w-4 transition-all;
+  @apply absolute right-2 bottom-[21px] h-4 w-4 transition-all;
 }
 
 .icon[aria-hidden='true'] {
