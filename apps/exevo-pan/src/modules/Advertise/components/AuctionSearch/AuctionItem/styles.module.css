@@ -7,5 +7,5 @@
 }
 
 .highlight > * > *:first-child {
-  background-color: rgb(var(--tw-primaryHighlight));
+  background-color: rgb(var(--primaryHighlight));
 }

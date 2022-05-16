@@ -1,5 +1,5 @@
 .table thead {
-  border-bottom: solid 1px rgb(var(--tw-separator));
+  border-bottom: solid 1px rgb(var(--separator));
 }
 
 .table th,

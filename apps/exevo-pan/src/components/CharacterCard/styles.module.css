@@ -1,11 +1,7 @@
-/* @ ToDo: remove this 'tw' prefix and extra variable declarations */
 .highlightedPalette {
   --surface: var(--kwaiSurface);
   --primary: var(--kwai);
   --primaryVariant: var(--kwaiVariant);
-  --tw-surface: var(--tw-kwaiSurface);
-  --tw-primary: var(--tw-kwai);
-  --tw-primaryVariant: var(--tw-kwaiVariant);
 }
 
 @media (max-width: 767px) {

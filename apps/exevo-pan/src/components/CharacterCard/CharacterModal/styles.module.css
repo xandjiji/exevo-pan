@@ -16,7 +16,7 @@
 
   /* @ ToDo: remove this 'tw' prefix */
   box-shadow: 0px calc(-1 * var(--lateralMargin)) 0px var(--lateralMargin)
-    rgb(var(--tw-surface));
+    rgb(var(--surface));
 }
 
 @media (min-width: 768px) {
@@ -31,7 +31,7 @@
   .wrapper [role='tablist'] {
     max-width: unset;
     box-shadow: 0px calc(-1 * var(--lateralMargin)) 0px
-      calc(var(--lateralMargin) - 2px) rgb(var(--tw-surface));
+      calc(var(--lateralMargin) - 2px) rgb(var(--surface));
   }
 }
 
