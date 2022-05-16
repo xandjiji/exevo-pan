@@ -24,7 +24,7 @@ const Li = (args: JSX.IntrinsicElements['li']) => (
   <li {...args} className="text-tsm whitespace-nowrap" />
 )
 
-const StoreItemDistribution = (): JSX.Element => (
+const StoreItemDistribution = () => (
   <ul className={clsx('mx-auto grid min-w-fit gap-y-2 gap-x-3', styles.list)}>
     <Li>
       <Percentage>{distributionData.dummy}</Percentage> Training Dummy

@@ -46,7 +46,7 @@ const PostGridView = ({
   )
 }
 
-const PostGridController = (): JSX.Element => {
+const PostGridController = () => {
   const { postList, requestStatus, fetchNextPage } = useFetchPosts()
 
   const lastFactRef = useInfiniteScroll(fetchNextPage)

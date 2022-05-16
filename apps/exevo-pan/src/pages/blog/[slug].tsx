@@ -64,7 +64,7 @@ export default function PostPage({
   metaData,
   recentPosts,
   locale,
-}: Props): JSX.Element {
+}: Props) {
   const { translations } = useTranslations()
 
   const postRoute = `${routes.BLOG}/${metaData.slug}`

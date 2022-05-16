@@ -23,7 +23,7 @@ const Head = ({
   vocationId,
   serverName,
   children,
-}: HeadProps): JSX.Element => (
+}: HeadProps) => (
   <HeadWrapper>
     <CharacterMiniCard
       className="mr-auto"

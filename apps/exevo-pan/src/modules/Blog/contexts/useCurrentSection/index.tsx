@@ -24,7 +24,7 @@ const CurrentSectionContext =
 
 export const CurrentSectionProvider = ({
   children,
-}: CurrentSectionProviderProps): JSX.Element => {
+}: CurrentSectionProviderProps) => {
   const [currentSections, setCurrentSections] = useState<Section[]>([])
 
   const { query } = useRouter()

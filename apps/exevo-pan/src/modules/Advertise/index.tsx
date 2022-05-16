@@ -70,7 +70,7 @@ const Form = () => {
   )
 }
 
-const AdvertiseGrid = (): JSX.Element => (
+const AdvertiseGrid = () => (
   <FormProvider>
     <main className="inner-container py-4">
       <Form />

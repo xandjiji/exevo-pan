@@ -36,7 +36,7 @@ export const FiltersProvider = ({
   children,
 }: {
   children: React.ReactNode
-}): JSX.Element => {
+}) => {
   const [state, dispatch] = useReducer(FilterReducer, {
     filterState: DEFAULT_STATE.filterState,
     defaultValues: DEFAULT_STATE.defaultValues,

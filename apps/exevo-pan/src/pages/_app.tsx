@@ -9,7 +9,7 @@ import { AppProps } from 'next/app'
 import 'styles/globals.css'
 import 'styles/reset.css'
 
-function MyApp({ Component, pageProps }: AppProps): JSX.Element {
+function MyApp({ Component, pageProps }: AppProps) {
   const { translations } = pageProps
   const router = useRouter()
 

@@ -28,7 +28,7 @@ export default function BazaarHistory({
   auctionedItemOptions,
   initialAuctionData,
   blogPosts,
-}: HistoryStaticProps): JSX.Element {
+}: HistoryStaticProps) {
   const { translations } = useTranslations()
 
   const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData

@@ -41,7 +41,7 @@ export const FetchPostsProvider = ({
   initialIndex,
   initialPosts,
   children,
-}: FetchPostsProviderProps): JSX.Element => {
+}: FetchPostsProviderProps) => {
   const [
     {
       currentIndex,

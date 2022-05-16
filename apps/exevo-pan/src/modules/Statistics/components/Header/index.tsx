@@ -5,7 +5,7 @@ import { routes } from 'Constants'
 import OverallIcon from 'assets/svgs/charts.svg'
 import HighscoresIcon from 'assets/svgs/trophy.svg'
 
-const Header = (): JSX.Element => {
+const Header = () => {
   const {
     translations: { statistics },
   } = useTranslations()

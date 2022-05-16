@@ -10,7 +10,7 @@ const EmptyState = ({
   className,
   children,
   ...props
-}: EmptyStateProps): JSX.Element => (
+}: EmptyStateProps) => (
   <div
     className={clsx('relative rounded-3xl text-center', className)}
     {...props}

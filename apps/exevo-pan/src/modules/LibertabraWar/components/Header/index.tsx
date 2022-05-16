@@ -6,7 +6,7 @@ import HighscoresIcon from 'assets/svgs/trophy.svg'
 import GuildXPIcon from 'assets/svgs/group.svg'
 import SearchMembersIcon from 'assets/svgs/search.svg'
 
-const Header = (): JSX.Element => {
+const Header = () => {
   const {
     translations: { war },
   } = useTranslations()

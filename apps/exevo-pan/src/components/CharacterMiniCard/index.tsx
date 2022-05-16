@@ -18,7 +18,7 @@ const CharacterMiniCard = ({
   highlighted = false,
   className,
   ...props
-}: CharacterMiniCardProps): JSX.Element => {
+}: CharacterMiniCardProps) => {
   const {
     translations: { common },
   } = useTranslations()

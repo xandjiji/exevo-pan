@@ -7,7 +7,7 @@ const Section = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div className={clsx('flex-grow py-4', className)} {...props} />
 )
 
-const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
+const ErrorState = ({ title, paragraphs }: ErrorStateProps) => {
   const {
     translations: { common },
   } = useTranslations()

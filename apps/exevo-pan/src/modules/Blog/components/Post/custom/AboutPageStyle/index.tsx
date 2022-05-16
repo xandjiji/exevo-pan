@@ -1,4 +1,4 @@
-const AboutPageStyle = (): JSX.Element => (
+const AboutPageStyle = () => (
   <style>{`
 main h2 {
     color: var(--primaryHighlight);

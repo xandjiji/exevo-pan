@@ -11,9 +11,7 @@ import { useUuid } from 'hooks'
 import { routes } from 'Constants'
 import { HoveredState } from './types'
 
-const TagButton = ({
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const {
     translations: { common },
   } = useTranslations()

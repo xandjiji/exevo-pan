@@ -12,7 +12,7 @@ const Component = ({
 }: {
   open: boolean
   onClose?: () => void
-}): JSX.Element => {
+}) => {
   const { elementToFocusRef, onKeyDown } = useEscToClose({ open, onClose })
 
   return (

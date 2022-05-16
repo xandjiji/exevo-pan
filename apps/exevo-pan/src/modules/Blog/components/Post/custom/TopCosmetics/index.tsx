@@ -28,7 +28,7 @@ const topMounts: CosmeticEntry[] = [
   { name: 'Night Waccoon', percentage: '0,3%', price: 750 },
 ]
 
-const TopCosmetics = ({ mounts }: TopCosmeticsProps): JSX.Element => {
+const TopCosmetics = ({ mounts }: TopCosmeticsProps) => {
   const data = mounts ? topMounts : topOutfits
   const resolver = mounts
     ? (name: string) => `/sprites/storemounts/${name}.gif`

@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { links } from 'Constants'
 import { ExternalLink } from '../Links'
 
-const TranslationAlert = (): JSX.Element => {
+const TranslationAlert = () => {
   const {
     translations: { blog },
   } = useTranslations()

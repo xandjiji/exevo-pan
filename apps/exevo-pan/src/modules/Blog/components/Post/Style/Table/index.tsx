@@ -1,9 +1,7 @@
 import clsx from 'clsx'
 import styles from './styles.module.css'
 
-export const table = (
-  props: React.HTMLAttributes<HTMLTableElement>,
-): JSX.Element => (
+export const table = (props: React.HTMLAttributes<HTMLTableElement>) => (
   <div className="custom-scrollbar mx-auto max-w-full overflow-auto rounded-t-md transition-colors">
     <table
       {...props}

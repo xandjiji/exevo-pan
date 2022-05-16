@@ -7,7 +7,7 @@ jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 
 const mockOnClose = jest.fn()
 
-const DrawerComponent = ({ open = false }: { open: boolean }): JSX.Element => (
+const DrawerComponent = ({ open = false }: { open: boolean }) => (
   <Drawer data-testid="drawer-id" isOpen={open} onClose={mockOnClose}>
     <Drawer.Head onClose={mockOnClose}>head</Drawer.Head>
     <Drawer.Body>body</Drawer.Body>

@@ -8,7 +8,7 @@ const Strong = (args: JSX.IntrinsicElements['strong']) => (
   <strong {...args} className="whitespace-nowrap" />
 )
 
-const CoinsPayment = (): JSX.Element => {
+const CoinsPayment = () => {
   const {
     translations: { advertise },
   } = useTranslations()

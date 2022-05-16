@@ -22,11 +22,7 @@ const EndTime = ({ className, ...props }: JSX.IntrinsicElements['span']) => (
   <span className={clsx('text-onSurface', className)} {...props} />
 )
 
-const AuctionTimer = ({
-  endDate,
-  past,
-  ...props
-}: AuctionTimerProps): JSX.Element => {
+const AuctionTimer = ({ endDate, past, ...props }: AuctionTimerProps) => {
   const {
     translations: { common },
   } = useTranslations()

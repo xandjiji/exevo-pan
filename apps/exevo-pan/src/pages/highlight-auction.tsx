@@ -17,7 +17,7 @@ type AdvertiseStaticProps = {
 
 export default function Advertise({
   initialAuctionData,
-}: AdvertiseStaticProps): JSX.Element {
+}: AdvertiseStaticProps) {
   const { translations } = useTranslations()
 
   const { page, ...pageData } = initialAuctionData

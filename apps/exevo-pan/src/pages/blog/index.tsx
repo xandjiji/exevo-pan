@@ -15,7 +15,7 @@ type Props = {
   initialPosts: BlogPost[]
 }
 
-export default function PostPage({ initialPosts }: Props): JSX.Element {
+export default function PostPage({ initialPosts }: Props) {
   const { translations } = useTranslations()
 
   const TITLE = translations.blog.Meta.title

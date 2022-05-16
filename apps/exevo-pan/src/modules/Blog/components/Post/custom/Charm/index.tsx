@@ -8,7 +8,7 @@ type CharmProps = {
 
 const SPRITE_PATH = '/sprites/charms'
 
-const Charm = ({ name, inline = false }: CharmProps): JSX.Element => (
+const Charm = ({ name, inline = false }: CharmProps) => (
   <Sprite
     src={`${SPRITE_PATH}/${name}.png`}
     width={32}

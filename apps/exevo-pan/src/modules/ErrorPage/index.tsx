@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import ErrorState from './ErrorState'
 
-const ErrorPage = (): JSX.Element => {
+const ErrorPage = () => {
   const {
     translations: { common },
   } = useTranslations()

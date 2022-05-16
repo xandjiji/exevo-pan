@@ -30,7 +30,7 @@ export default function Home({
   initialAuctionData,
   highlightedAuctions,
   blogPosts,
-}: HomeStaticProps): JSX.Element {
+}: HomeStaticProps) {
   const { translations } = useTranslations()
 
   const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
