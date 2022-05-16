@@ -4,5 +4,4 @@ module.exports = {
     '@babel/preset-typescript',
     'next/babel',
   ],
-  plugins: [['styled-components', { ssr: true }]],
 }
