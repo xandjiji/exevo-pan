@@ -19,7 +19,6 @@
   .loading-spinner {
     @apply before:bg-primary after:bg-background relative h-6 w-6 rounded-full transition-opacity before:absolute before:top-0 before:left-0 before:h-1/2 before:w-1/2 before:rounded-tl-full after:absolute after:top-0 after:left-0 after:bottom-0 after:right-0 after:m-auto after:h-3/4 after:w-3/4 after:rounded-full;
 
-    /* @ ToDo: remove this 'tw' prefix */
     background: linear-gradient(
       to right,
       rgb(var(--primary)) 10%,

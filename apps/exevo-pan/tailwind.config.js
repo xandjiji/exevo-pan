@@ -22,7 +22,6 @@ module.exports = {
       xl: '1400px',
       '2xl': '1600px',
     },
-    /* @ ToDo: remove this 'tw' prefix */
     colors: {
       backdrop: 'rgba(0, 0, 0, 0.4)',
       transparent: 'transparent',
