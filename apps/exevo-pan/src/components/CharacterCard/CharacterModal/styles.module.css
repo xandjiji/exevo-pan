@@ -14,7 +14,6 @@
       ((2 * var(--lateralMargin)) + var(--scrollbarWidth))
   );
 
-  /* @ ToDo: remove this 'tw' prefix */
   box-shadow: 0px calc(-1 * var(--lateralMargin)) 0px var(--lateralMargin)
     rgb(var(--surface));
 }
@@ -27,7 +26,6 @@
 }
 
 @media (min-width: 900px) {
-  /* @ ToDo: remove this 'tw' prefix */
   .wrapper [role='tablist'] {
     max-width: unset;
     box-shadow: 0px calc(-1 * var(--lateralMargin)) 0px
