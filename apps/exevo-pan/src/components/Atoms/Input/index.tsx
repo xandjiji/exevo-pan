@@ -69,7 +69,7 @@ const Input = ({
           aria-invalid={isInvalid}
           aria-errormessage={isInvalid ? errorId : undefined}
           autoComplete="off"
-          className="text-tsm text-onSurface w-full border-none bg-transparent py-[10px] px-4 outline-none transition-all"
+          className="text-tsm text-onSurface w-full border-none bg-transparent py-2.5 px-4 outline-none transition-all"
           style={{ paddingRight: isClearButtonActive ? 0 : undefined }}
           {...props}
         />
@@ -97,7 +97,7 @@ const Input = ({
           aria-hidden={!isInvalid}
           role="alert"
           className={clsx(
-            'text-red px-[10px] text-xs transition-opacity',
+            'text-red px-2.5 text-xs transition-opacity',
             !isInvalid && 'opacity-0',
           )}
           suppressHydrationWarning

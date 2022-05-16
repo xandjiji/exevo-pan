@@ -39,7 +39,7 @@ export const TooltipSection = (args: JSX.IntrinsicElements['div']) => (
 
 export const SpriteSectionDivisor = (args: JSX.IntrinsicElements['div']) => (
   <div
-    className="border-b-separator text-tsm py-[6px]"
+    className="border-b-separator text-tsm py-1.5"
     style={{
       borderBottomStyle: 'solid',
       borderBottomWidth: 1,

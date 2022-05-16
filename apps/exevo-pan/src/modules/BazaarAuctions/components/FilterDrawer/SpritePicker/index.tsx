@@ -27,7 +27,7 @@ const SpritePicker = ({
       className="border-separator mt-[-9px] border-solid pb-1.5"
       style={{ borderWidth: 0, borderBottomWidth: 1 }}
       title={
-        <Label className="relative flex cursor-pointer items-center gap-[6px] text-left">
+        <Label className="relative flex cursor-pointer items-center gap-1.5 text-left">
           {title}
           <ActiveCount
             aria-label={`${selectedCount} ${

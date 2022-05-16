@@ -39,11 +39,11 @@ const TopCosmetics = ({ mounts }: TopCosmeticsProps) => {
       {data.map(({ name, percentage, price }) => (
         <li
           key={name}
-          className="text-tsm flex flex-col items-center gap-[6px] whitespace-nowrap"
+          className="text-tsm flex flex-col items-center gap-1.5 whitespace-nowrap"
         >
           <div title={`${name} - ${percentage}`} className="relative w-min">
             <ActiveCount
-              className="z-2 absolute top-[-6px] right-0 py-[2px] px-1"
+              className="z-2 absolute -top-1.5 right-0 py-0.5 px-1"
               style={{
                 borderRadius: 4,
                 width: 'fit-content',

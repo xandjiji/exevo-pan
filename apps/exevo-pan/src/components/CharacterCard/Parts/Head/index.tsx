@@ -9,7 +9,7 @@ export const HeadWrapper = ({
   ...props
 }: JSX.IntrinsicElements['div']) => (
   <div
-    className={clsx('mb-4 flex items-start gap-[6px]', className)}
+    className={clsx('mb-4 flex items-start gap-1.5', className)}
     {...props}
   />
 )

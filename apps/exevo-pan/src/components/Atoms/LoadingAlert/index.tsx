@@ -8,7 +8,7 @@ const LoadingAlert = ({
   <div
     role="alert"
     className={clsx(
-      'z-99 bg-alert text-tsm fixed top-7 left-1/2 flex items-center rounded-md py-[6px] px-4 font-bold text-black shadow-md',
+      'z-99 bg-alert text-tsm fixed top-7 left-1/2 flex items-center rounded-md py-1.5 px-4 font-bold text-black shadow-md',
       className,
     )}
     style={{ transform: 'translateX(-50%)' }}

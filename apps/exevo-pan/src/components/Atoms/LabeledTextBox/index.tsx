@@ -22,7 +22,7 @@ const LabeledTextBox = ({
   return (
     <div
       className={clsx(
-        'border-1 relative rounded-md border-solid px-3 pt-[10px] pb-2',
+        'border-1 relative rounded-md border-solid px-3 pt-2.5 pb-2',
         warning ? 'border-red' : 'border-separator',
         className,
       )}

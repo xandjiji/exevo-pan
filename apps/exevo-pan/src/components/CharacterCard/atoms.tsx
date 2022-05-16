@@ -113,7 +113,7 @@ export const Strong = ({
 
 export const Body = ({ lazy = false, className, ...props }: BodyProps) => (
   <div
-    className={clsx('mb-3 grid gap-3 pt-[6px]', lazy && styles.lazy, className)}
+    className={clsx('mb-3 grid gap-3 pt-1.5', lazy && styles.lazy, className)}
     {...props}
   />
 )

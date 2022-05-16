@@ -56,7 +56,7 @@ const Checkbox = ({
         />
         <TickIcon
           className={clsx(
-            'absolute top-1/2 left-1/2 h-[14px] w-[14px]',
+            'absolute top-1/2 left-1/2 h-3.5 w-3.5',
             checked ? 'fill-onPrimary' : 'fill-transparent',
           )}
           style={{ transform: 'translate(-50%,-50%)' }}

@@ -18,7 +18,7 @@ const CharacterInfoColumn = ({
     >
       {nickname}
     </a>
-    <span className="mt-[6px] block text-xs">{`Level ${level} - ${vocation}`}</span>
+    <span className="mt-1.5 block text-xs">{`Level ${level} - ${vocation}`}</span>
   </Table.Column>
 )
 

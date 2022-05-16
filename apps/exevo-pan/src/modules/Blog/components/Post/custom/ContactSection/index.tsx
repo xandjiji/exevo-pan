@@ -16,7 +16,7 @@ const ButtonLi = (args: JSX.IntrinsicElements['li']) => (
 const Link = (args: JSX.IntrinsicElements['a']) => (
   <a
     {...args}
-    className="text-onPrimary relative left-0 leading-relaxed transition-all hover:left-[2px]"
+    className="text-onPrimary relative left-0 leading-relaxed transition-all hover:left-0.5"
   />
 )
 

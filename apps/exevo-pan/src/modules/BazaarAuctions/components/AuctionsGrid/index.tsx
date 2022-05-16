@@ -67,7 +67,7 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
           <FilterIcon className={styles.icon} />
           {process.browser && (
             <ActiveCount
-              className="absolute top-[-2px] right-[-2px]"
+              className="absolute -top-0.5 -right-0.5"
               role="status"
               aria-label={`${activeFilterCount} ${
                 activeFilterCount === 1

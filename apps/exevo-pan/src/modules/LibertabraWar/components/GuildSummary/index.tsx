@@ -27,7 +27,7 @@ const GuildSummary = ({
           className="text-none absolute top-1/2 left-full lg:left-[calc(100%+6px)]"
           style={{ transform: 'translateY(-50%)' }}
         >
-          <ExternalIcon className="fill-onSurface clickable h-7 w-7 rounded p-[2px]" />
+          <ExternalIcon className="fill-onSurface clickable h-7 w-7 rounded p-0.5" />
           {war.GuildSummary.linkText}
         </a>
       </h4>

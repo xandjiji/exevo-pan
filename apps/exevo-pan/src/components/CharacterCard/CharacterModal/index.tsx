@@ -110,7 +110,7 @@ const CharacterModal = ({
 
       <div className="custom-scrollbar -mx-[var(--lateralMargin)] h-[var(--gridMobileHeight)] overflow-y-auto px-[var(--lateralMargin)] md:h-[var(--cardFixedHeight)]">
         <S.Spacer className="w-full md:flex md:gap-6">
-          <S.Spacer className="md:z-4 h-fit pt-[6px] md:sticky md:top-0 md:min-w-[280px] md:max-w-fit md:shrink-0">
+          <S.Spacer className="md:z-4 h-fit pt-1.5 md:sticky md:top-0 md:min-w-[280px] md:max-w-fit md:shrink-0">
             <InfoGrid>
               <Textbox.Server
                 serverData={serverData}

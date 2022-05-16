@@ -2,7 +2,7 @@
 export const Group = (args: JSX.IntrinsicElements['div']) => (
   <div
     {...args}
-    className="border-separator border-1 grid gap-[6px] rounded-md border-solid p-6"
+    className="border-separator border-1 grid gap-1.5 rounded-md border-solid p-6"
   />
 )
 
@@ -15,5 +15,5 @@ export const Label = (args: JSX.IntrinsicElements['label']) => (
 )
 
 export const Result = (args: JSX.IntrinsicElements['p']) => (
-  <p {...args} className="text-s mt-[6px] font-normal" />
+  <p {...args} className="text-s mt-1.5 font-normal" />
 )

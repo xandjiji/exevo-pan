@@ -11,7 +11,7 @@ const colorA = '#118AB2'
 const colorB = '#EF476F'
 
 const GuildName = (args: JSX.IntrinsicElements['span']) => (
-  <span className="text-s mb-[6px] block" {...args} />
+  <span className="text-s mb-1.5 block" {...args} />
 )
 
 const OnlineCount = (args: JSX.IntrinsicElements['span']) => (

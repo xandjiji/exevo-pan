@@ -27,7 +27,7 @@ const SkillBar = ({
     >
       <div
         className={clsx(
-          'text-s text-onPrimary mr-[6px] w-8 flex-none rounded p-[3px] text-right font-bold tracking-wider transition-colors',
+          'text-s text-onPrimary mr-1.5 w-8 flex-none rounded p-[3px] text-right font-bold tracking-wider transition-colors',
           highlight ? 'bg-green' : 'bg-primary',
         )}
       >

@@ -4,5 +4,5 @@
 
 /* changes made here should also be added to `code` component */
 .contentWrapper code {
-  @apply code text-s py-[2px] px-2 tracking-wider;
+  @apply code text-s py-0.5 px-2 tracking-wider;
 }

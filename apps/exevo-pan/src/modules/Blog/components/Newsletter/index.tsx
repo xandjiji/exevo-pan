@@ -67,7 +67,7 @@ const Newsletter = ({
         </span>
       ) : (
         <>
-          <div className="grid gap-[6px]">
+          <div className="grid gap-1.5">
             <label htmlFor="newsletter-email-input" className="text-tsm">
               Email
             </label>

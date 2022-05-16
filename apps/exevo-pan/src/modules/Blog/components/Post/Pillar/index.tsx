@@ -36,12 +36,12 @@ const Pillar = ({ titles, className, ...props }: PillarProps) => {
       )}
       {...props}
     >
-      <span className="text-onPrimary lg:text-onSurface mr-6 block text-base lg:mr-0 lg:mb-[12px]">
+      <span className="text-onPrimary lg:text-onSurface mr-6 block text-base lg:mr-0 lg:mb-3">
         {blog.Pillar.title}
       </span>
 
       <ul
-        className="custom-scrollbar lg:border-separator relative -my-2 flex gap-6 overflow-auto scroll-smooth py-2 lg:m-0 lg:grid lg:gap-2 lg:border-solid lg:p-[6px] lg:px-3"
+        className="custom-scrollbar lg:border-separator relative -my-2 flex gap-6 overflow-auto scroll-smooth py-2 lg:m-0 lg:grid lg:gap-2 lg:border-solid lg:p-1.5 lg:px-3"
         style={{ borderWidth: 0, borderLeftWidth: 1 }}
       >
         {titles.map((title) => {
@@ -53,7 +53,7 @@ const Pillar = ({ titles, className, ...props }: PillarProps) => {
               id={generateNavId(title)}
               aria-current={isCurrent ? 'step' : undefined}
               className={clsx(
-                "before:text-onPrimary h-min flex-none before:mr-[6px] before:font-bold before:transition-all before:content-['·']",
+                "before:text-onPrimary h-min flex-none before:mr-1.5 before:font-bold before:transition-all before:content-['·']",
                 !isCurrent && 'before:opacity-0',
                 isCurrent
                   ? 'lg:before:text-primaryHighlight'

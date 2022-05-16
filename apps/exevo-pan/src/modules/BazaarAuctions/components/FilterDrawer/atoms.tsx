@@ -36,7 +36,7 @@ export const InputWrapper: typeof ChipWrapper = ({
 )
 
 export const IconChip = ({ className, ...props }: ChipProps) => (
-  <BaseChip className={clsx('gap-[6px]', className)} {...props} />
+  <BaseChip className={clsx('gap-1.5', className)} {...props} />
 )
 
 export const AutocompleteInput = ({

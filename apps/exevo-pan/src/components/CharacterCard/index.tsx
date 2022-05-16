@@ -130,7 +130,7 @@ const CharacterCard = ({
 
               {tcInvested !== '0' && (
                 <div
-                  className="flex items-center justify-between gap-[6px]"
+                  className="flex items-center justify-between gap-1.5"
                   title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
                 >
                   <S.CheckboxContainer>

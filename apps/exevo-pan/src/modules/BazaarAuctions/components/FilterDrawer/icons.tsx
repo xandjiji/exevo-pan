@@ -75,7 +75,7 @@ export const BrFlag = () => (
 export const Status = ({ color }: StatusStyleProps) => (
   <div
     className={clsx(
-      'border-1 inline-block h-[10px] w-[10px] rounded-full border-solid border-black/30 shadow',
+      'border-1 inline-block h-2.5 w-2.5 rounded-full border-solid border-black/30 shadow',
       color === 'battleGreen' ? 'bg-battleGreen' : 'bg-battleYellow',
     )}
   />

@@ -21,8 +21,8 @@ const AuctionItem = ({
     <button
       type="button"
       className={clsx(
-        'relative left-0 flex w-full cursor-pointer items-center justify-between text-left transition-all hover:left-[6px]',
-        isSelected && 'left-[6px]',
+        'relative left-0 flex w-full cursor-pointer items-center justify-between text-left transition-all hover:left-1.5',
+        isSelected && 'left-1.5',
         isSelected && styles.highlight,
         styles.button,
         className,

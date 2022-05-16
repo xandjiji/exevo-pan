@@ -9,7 +9,7 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
     key={slug}
     className="relative left-0 flex items-center gap-2 transition-all hover:left-1"
   >
-    <div className="bg-primaryVariant grid shrink-0 place-content-center rounded-md p-[6px]">
+    <div className="bg-primaryVariant grid shrink-0 place-content-center rounded-md p-1.5">
       <FadeImage
         src={thumbnail}
         alt={title}
@@ -20,7 +20,7 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
       />
     </div>
 
-    <div className="grid gap-[2px]">
+    <div className="grid gap-0.5">
       <h4 className="line-clamp-2 text-base font-normal">{title}</h4>
     </div>
     <NextLink href={`${routes.BLOG}/${slug}`}>

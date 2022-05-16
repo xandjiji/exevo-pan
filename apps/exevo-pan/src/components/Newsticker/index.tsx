@@ -33,7 +33,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
             key={slug}
             className="group relative flex max-w-[80vw] flex-none items-center gap-3 md:max-w-none"
           >
-            <div className="bg-primaryVariant relative top-0 grid shrink-0 place-items-center rounded-md p-2 shadow-md transition-all group-hover:top-[-2px]">
+            <div className="bg-primaryVariant relative top-0 grid shrink-0 place-items-center rounded-md p-2 shadow-md transition-all group-hover:-top-0.5">
               <FadeImage
                 src={thumbnail}
                 layout="fixed"
@@ -45,7 +45,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
               />
             </div>
 
-            <div className="flex flex-col gap-[6px]">
+            <div className="flex flex-col gap-1.5">
               <h3 className="text-s line-clamp-2 text-onPrimary font-light leading-tight tracking-wide md:text-base md:leading-none">
                 {title}
               </h3>

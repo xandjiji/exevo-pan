@@ -39,7 +39,7 @@ const Tag = ({
         role="switch"
         aria-checked={active}
         className={clsx(
-          'w-fit rounded-[9px] py-[6px] px-4 font-bold transition-all',
+          'w-fit rounded-[9px] py-1.5 px-4 font-bold transition-all',
           'clickable',
           className,
         )}
@@ -59,7 +59,7 @@ const Tag = ({
   return (
     <div
       className={clsx(
-        'w-fit rounded-[9px] py-[6px] px-4 font-bold transition-all',
+        'w-fit rounded-[9px] py-1.5 px-4 font-bold transition-all',
         className,
       )}
       style={{

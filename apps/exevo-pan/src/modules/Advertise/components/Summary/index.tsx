@@ -10,7 +10,7 @@ import { calculatePrice, readablePrice } from '../../utils'
 
 const Strong = ({ className, ...props }: JSX.IntrinsicElements['h3']) => (
   <h3
-    className={clsx('mb-[2px] text-base tracking-wide', className)}
+    className={clsx('mb-0.5 text-base tracking-wide', className)}
     {...props}
   />
 )

@@ -23,7 +23,7 @@ export default ({
     >
       {onClose && (
         <button
-          className="clickable text-none mr-6 h-[30px] w-[30px] rounded p-[2px]"
+          className="clickable text-none mr-6 h-[30px] w-[30px] rounded p-0.5"
           type="button"
           tabIndex={0}
           aria-label={common.CloseDrawerLabel}

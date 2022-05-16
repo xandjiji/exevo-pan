@@ -21,7 +21,7 @@ const Summary = ({
       <h4 className="text-s text-onSurface font-light transition-colors">
         {title}
       </h4>
-      <span className="text-l text-onSurface mt-[6px] mb-2 flex items-center font-bold">{`${formatNumberWithCommas(
+      <span className="text-l text-onSurface mt-1.5 mb-2 flex items-center font-bold">{`${formatNumberWithCommas(
         value,
       )} TC`}</span>
       <span

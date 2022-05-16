@@ -45,7 +45,7 @@ const HeadingSection = ({
       >
         <AnchorIcon
           aria-label={common.AnchorIconLabel}
-          className="fill-separator hover:fill-primary clickable m-0 h-full w-full cursor-pointer rounded p-[2px] transition-all"
+          className="fill-separator hover:fill-primary clickable m-0 h-full w-full cursor-pointer rounded p-0.5 transition-all"
         />
       </a>
     </div>

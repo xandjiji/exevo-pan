@@ -58,7 +58,7 @@ const CharacterMiniCard = ({
               onClick={(event) => event.stopPropagation()}
               className="text-none ml-1"
             >
-              <ExternalIcon className="clickable fill-onSurface mt-[-2px] h-7 w-7 rounded p-[2px]" />
+              <ExternalIcon className="clickable fill-onSurface -mt-0.5 h-7 w-7 rounded p-0.5" />
               {common.CharacterTooltipLabel}
             </a>
           )}

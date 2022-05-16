@@ -73,7 +73,7 @@ const RangeDatePicker = () => {
                 {hasNextMonth && (
                   <span
                     aria-label={advertise.RangeDatePicker.nextMonthLabel}
-                    className="text-separator col-span-full mb-[-6px] pt-2 pb-1"
+                    className="text-separator col-span-full -mb-1.5 pt-2 pb-1"
                   >
                     {common.FullMonth[(getMonth(monthDates[0]) + 1) % 12]}
                   </span>

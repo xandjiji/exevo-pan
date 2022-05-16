@@ -23,7 +23,7 @@ const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
       <S.InfoGrid className="mb-3">
         <Skeletons.LabeledTextBox labelText="Server">
           <Skeletons.LabelledFlex>
-            <Skeleton className="mr-1 h-[10px] w-4" />
+            <Skeleton className="mr-1 h-2.5 w-4" />
             <Skeleton className="h-3 w-2/5" />
             <Skeleton className="ml-auto h-4 w-4 rounded-full" />
           </Skeletons.LabelledFlex>
@@ -56,10 +56,10 @@ const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
 
       <div className="mb-4 grid grid-cols-2 gap-x-4 gap-y-2">
         {Array.from({ length: 8 }, (_, index) => (
-          <div key={index} className="flex items-end gap-[6px]">
+          <div key={index} className="flex items-end gap-1.5">
             <Skeleton className="h-[22px] w-8 shrink-0 rounded-md" />
             <div className="grid w-full gap-1">
-              <Skeleton className="mb-[3x] h-[6px] w-12" />
+              <Skeleton className="mb-[3x] h-1.5 w-12" />
               <Skeleton className="h-1 w-full" />
             </div>
           </div>
@@ -70,30 +70,30 @@ const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
         <S.FlexColumn>
           <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeleton className="h-[10px] w-[126px]" />
+            <Skeleton className="h-2.5 w-[126px]" />
           </Skeletons.ImbuementFlex>
           <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeleton className="h-[10px] w-[100px]" />
+            <Skeleton className="h-2.5 w-[100px]" />
           </Skeletons.ImbuementFlex>
           <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeleton className="h-[10px] w-[100px]" />
+            <Skeleton className="h-2.5 w-[100px]" />
           </Skeletons.ImbuementFlex>
         </S.FlexColumn>
 
         <S.FlexColumn>
           <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeleton className="h-[10px] w-[110px]" />
+            <Skeleton className="h-2.5 w-[110px]" />
           </Skeletons.ImbuementFlex>
           <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeleton className="h-[10px] w-14" />
+            <Skeleton className="h-2.5 w-14" />
           </Skeletons.ImbuementFlex>
           <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
-            <Skeleton className="h-[10px] w-16" />
+            <Skeleton className="h-2.5 w-16" />
           </Skeletons.ImbuementFlex>
         </S.FlexColumn>
       </S.FlexFooter>

@@ -19,7 +19,7 @@ export default ({
   ...props
 }: JSX.IntrinsicElements['button']) => (
   <button
-    className="clickable h-9 w-9 rounded p-[2px] md:hidden"
+    className="clickable h-9 w-9 rounded p-0.5 md:hidden"
     type="button"
     role="switch"
     aria-checked={isOpen}

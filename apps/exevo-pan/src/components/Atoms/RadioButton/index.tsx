@@ -33,7 +33,7 @@ const RadioButton = ({
       aria-checked={derivedActive}
       tabIndex={0}
       className={clsx(
-        'text-s text-onSurface group flex cursor-pointer items-center gap-[6px]',
+        'text-s text-onSurface group flex cursor-pointer items-center gap-1.5',
         className,
       )}
       {...props}

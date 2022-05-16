@@ -8,5 +8,5 @@ type HeaderIconProps = {
 
 export default ({ icon, spaced = false }: HeaderIconProps) =>
   cloneElement(icon, {
-    className: clsx('w-[18px] h-[18px] fill-onPrimary', spaced && 'mr-[6px]'),
+    className: clsx('w-[18px] h-[18px] fill-onPrimary', spaced && 'mr-1.5'),
   })

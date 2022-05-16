@@ -78,7 +78,7 @@ const SpriteBox = ({
 
       {amount > 1 && (
         <ActiveCount
-          className="z-1 absolute top-[-6px] right-[-6px] py-[2px] px-1 font-bold after:ml-[1px] after:font-normal after:content-['x']"
+          className="z-1 absolute -top-1.5 -right-1.5 py-0.5 px-1 font-bold after:ml-[1px] after:font-normal after:content-['x']"
           style={{
             width: 'unset',
             height: 'unset',

@@ -13,7 +13,7 @@ const OutfitControls = ({ disableAddons = false }: OutfitControlsProps) => {
   const secondAddonSelected = filterState.addon === 2 || filterState.addon === 3
 
   return (
-    <div className="mt-1.5 mb-2 flex w-full flex-wrap items-center gap-[14px]">
+    <div className="mt-1.5 mb-2 flex w-full flex-wrap items-center gap-3.5">
       <div
         onClick={() => updateFilters('sex', !filterState.sex)}
         className={clsx(

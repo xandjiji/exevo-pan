@@ -10,7 +10,7 @@ export const Small = (args: JSX.IntrinsicElements['small']) => (
 )
 
 export const Strong = (args: JSX.IntrinsicElements['strong']) => (
-  <strong {...args} className="mb-[2px] text-[19px]" />
+  <strong {...args} className="mb-0.5text-[19px]" />
 )
 
 export const Striked = ({

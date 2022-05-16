@@ -37,7 +37,7 @@ export const HeadColumn = ({
 }: HeadColumnProps) => (
   <th
     className={clsx(
-      'text-tsm text-onSurface pb-[6px] font-bold',
+      'text-tsm text-onSurface pb-1.5 font-bold',
       highlighted && 'before:relative before:top-[-1px] before:left-[-3px]',
       highlighted && (desc ? "before:content-['▴']" : "before:content-['▾']"),
       className,
@@ -55,7 +55,7 @@ export const Column = ({
   ...props
 }: JSX.IntrinsicElements['td']) => (
   <td
-    className={clsx('text-s text-onSurface py-[6px] font-light', className)}
+    className={clsx('text-s text-onSurface py-1.5 font-light', className)}
     {...props}
   />
 )

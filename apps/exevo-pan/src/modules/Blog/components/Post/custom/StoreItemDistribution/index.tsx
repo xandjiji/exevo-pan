@@ -16,7 +16,7 @@ const distributionData = {
 const Percentage = (args: JSX.IntrinsicElements['span']) => (
   <span
     {...args}
-    className="bg-primary text-tsm text-onPrimary inline-block min-w-[44px] rounded-md py-[2px] px-1 text-right font-bold tracking-wide"
+    className="bg-primary text-tsm text-onPrimary inline-block min-w-[44px] rounded-md py-0.5 px-1 text-right font-bold tracking-wide"
   />
 )
 
