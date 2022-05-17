@@ -127,12 +127,12 @@ html[data-theme='dark'] {
   --surface: 54 57 63;
   --onSurface: 255 255 255;
   --separator: 114 118 125;
-  --primary: 152 87 231;
-  --primaryHighlight: 198 113 255;
+  --primary: 139 99 227;
+  --primaryHighlight: 164 136 255;
   --darkerPrimary: 88 31 155;
   --onPrimary: 255 255 255;
-  --primaryVariant: 94 68 128;
-  --primaryVariantHighlight: 113 76 161;
+  --primaryVariant: 102 75 128;
+  --primaryVariantHighlight: 120 105 128;
   --green: 90 153 53;
   --greenHighlight: 117 199 69;
   --red: 255 91 91;

@@ -4,13 +4,16 @@ declare type Theme = {
   onSurface: string
   separator: string
   primary: string
-  onPrimary: string
+  primaryHighlight: string
   darkerPrimary: string
+  onPrimary: string
   primaryVariant: string
+  primaryVariantHighlight: string
   green: string
   red: string
   alert: string
   battleGreen: string
   battleYellow: string
   primaryVariantHighlight: string
+  black: string
 }

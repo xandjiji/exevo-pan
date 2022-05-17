@@ -13,7 +13,7 @@ function getInitialTheme() {
 }
 
 function injectCssVariables(themeName) {
-  const primaryColor = themeName === 'light' ? '#3F51B5' : '#9857E7'
+  const primaryColor = themeName === 'light' ? '#3F51B5' : '#8B63E3'
 
   document.documentElement.setAttribute('data-theme', themeName)
 
