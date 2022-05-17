@@ -76,6 +76,14 @@ module.exports = {
       75: '75',
       99: '99',
     },
+    boxShadow: {
+      sm: '2px 2px 4px 2px rgba(0, 0, 0, 0.04)',
+      DEFAULT: '2px 2px 4px 2px rgba(0, 0, 0, 0.07)',
+      md: '2px 2px 4px 2px rgba(0, 0, 0, 0.1)',
+      lg: '2px 2px 4px 2px rgba(0, 0, 0, 0.13)',
+      inner: 'inset 2px 2px rgba(0, 0, 0, 0.14)',
+      none: '0 0 #0000',
+    },
     extend: {
       borderWidth: {
         1: '1px',
