@@ -10,7 +10,7 @@ export const Small = (args: JSX.IntrinsicElements['small']) => (
 )
 
 export const Strong = (args: JSX.IntrinsicElements['strong']) => (
-  <strong {...args} className="mb-0.5text-[19px]" />
+  <strong {...args} className="mb-0.5 text-[19px]" />
 )
 
 export const Striked = ({
@@ -26,7 +26,7 @@ export const DiscountTag = ({
 }: JSX.IntrinsicElements['span']) => (
   <span
     className={clsx(
-      'bg-primary text-tsm text-onPrimary rounded py-[3px] px-1 font-bold tracking-wide shadow transition-all',
+      'bg-primary text-tsm text-onPrimary rounded py-[3px] px-1 font-bold tracking-wide shadow-md transition-all',
       className,
     )}
     {...props}
