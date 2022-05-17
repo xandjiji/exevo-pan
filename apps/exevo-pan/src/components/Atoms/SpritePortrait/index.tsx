@@ -14,7 +14,7 @@ export const Background = ({
 }: BackgroundProps) => (
   <div
     className={clsx(
-      'relative select-none rounded-md p-2 shadow-md transition-colors',
+      'relative select-none rounded-md p-2 shadow transition-colors',
       offset ? `${styles.offsetImage} h-14 w-14` : 'h-12 w-12',
       highlight ? 'bg-primaryHighlight' : 'bg-primaryVariant',
       className,
