@@ -68,7 +68,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
             onClick={() => dispatch({ type: 'RESET_FILTERS' })}
-            className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow transition-all hover:shadow-md active:shadow-inner disabled:invisible disabled:opacity-0"
+            className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow-md transition-all hover:shadow-lg active:shadow-inner disabled:invisible disabled:opacity-0"
           >
             {homepage.FilterDrawer.resetFilters}
             <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />

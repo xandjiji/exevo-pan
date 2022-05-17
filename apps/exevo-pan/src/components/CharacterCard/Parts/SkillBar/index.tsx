@@ -33,7 +33,7 @@ const SkillBar = ({
       >
         {Math.floor(skillValue)}
       </div>
-      <div className="bg-primaryVariant relative mt-[1px] h-1 w-full shadow">
+      <div className="bg-primaryVariant relative mt-[1px] h-1 w-full shadow-sm">
         <span
           className="text-tsm text-onSurface absolute left-0 font-light capitalize"
           style={{ bottom: 'calc(100% + 1px)' }}
