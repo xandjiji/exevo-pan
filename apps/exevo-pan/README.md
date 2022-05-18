@@ -18,7 +18,7 @@
 ## Built using
 
 - typescript
-- My own design system, based on React.js + styled-components
+- My own design system, based on React.js + Tailwind
 - My own simple i18n library
 - Next.js
 - Jest
