@@ -13,22 +13,22 @@ describe('<Input />', () => {
     const clearButton = screen.getByLabelText('Clear input')
 
     expect(clearButton).toBeDisabled()
-    expect(clearButton).not.toBeVisible()
+    expect(clearButton).toHaveClass('opacity-0')
 
     userEvent.type(inputElement, 'text')
     expect(clearButton).toBeEnabled()
-    expect(clearButton).toBeVisible()
+    expect(clearButton).not.toHaveClass('opacity-0')
     expect(inputElement).toHaveValue('text')
 
     userEvent.click(clearButton)
     expect(inputElement).toHaveValue('')
     expect(clearButton).toBeDisabled()
-    expect(clearButton).not.toBeVisible()
+    expect(clearButton).toHaveClass('opacity-0')
     expect(inputElement).toHaveFocus()
 
     userEvent.keyboard('another text')
     expect(clearButton).toBeEnabled()
-    expect(clearButton).toBeVisible()
+    expect(clearButton).not.toHaveClass('opacity-0')
     expect(inputElement).toHaveValue('another text')
 
     userEvent.tab()
@@ -36,7 +36,7 @@ describe('<Input />', () => {
     userEvent.keyboard('{enter}')
     expect(inputElement).toHaveValue('')
     expect(clearButton).toBeDisabled()
-    expect(clearButton).not.toBeVisible()
+    expect(clearButton).toHaveClass('opacity-0')
     expect(inputElement).toHaveFocus()
   })
 
@@ -60,7 +60,7 @@ describe('<Input />', () => {
     const errorElement = screen.getByRole('alert')
 
     expect(inputElement).toBeInvalid()
-    expect(errorElement).toBeVisible()
+    expect(errorElement).not.toHaveClass('opacity-0')
     expect(errorElement).toHaveTextContent('invalid field')
 
     expect(inputElement).toHaveAttribute(
@@ -78,7 +78,7 @@ describe('<Input />', () => {
     const errorElement = screen.getByRole('alert')
 
     expect(inputElement).toBeInvalid()
-    expect(errorElement).toBeVisible()
+    expect(errorElement).not.toHaveClass('opacity-0')
     expect(errorElement).toHaveTextContent('field is invalid')
 
     expect(inputElement).toHaveAttribute(
@@ -89,7 +89,7 @@ describe('<Input />', () => {
     rerender(<Input aria-label="input" />)
 
     expect(inputElement).not.toBeInvalid()
-    expect(errorElement).not.toBeVisible()
+    expect(errorElement).toHaveClass('opacity-0')
     expect(errorElement).toHaveTextContent('')
 
     expect(inputElement).not.toHaveAttribute(
@@ -126,7 +126,7 @@ describe('<Input />', () => {
 
     expect(inputElement).toHaveValue('Eternal Oblivion')
     expect(clearButton).toBeEnabled()
-    expect(clearButton).toBeVisible()
+    expect(clearButton).not.toHaveClass('opacity-0')
 
     userEvent.tab()
     userEvent.keyboard('BUBBLE')
