@@ -29,7 +29,7 @@ describe('<Dialog />', () => {
 
     expect(onCloseMock).toHaveBeenCalledTimes(0)
 
-    userEvent.click(screen.getByRole('button'))
+    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
     expect(onCloseMock).toHaveBeenCalledTimes(1)
   })
 
