@@ -1,5 +1,6 @@
 import { renderWithProviders } from 'utils/test'
-import { ContentWrapper, Hero, Newsletter, Table, Layout } from '..'
+import { ContentWrapper, Hero, Newsletter, Layout } from '..'
+import { table as Table } from '../Style/Table'
 
 describe('<Post />', () => {
   test('should pass this smoke test', () => {
