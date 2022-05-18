@@ -12,9 +12,7 @@ const defaultThemeState: UseThemeValues = {
 
 const ThemeContext = createContext<UseThemeValues>(defaultThemeState)
 
-export const ThemeProvider = ({
-  children,
-}: ThemeProviderProps): JSX.Element => {
+export const ThemeProvider = ({ children }: ThemeProviderProps) => {
   const [theme, setTheme] = useState<string>(getInitialTheme)
 
   const toggleTheme = useCallback(() => {

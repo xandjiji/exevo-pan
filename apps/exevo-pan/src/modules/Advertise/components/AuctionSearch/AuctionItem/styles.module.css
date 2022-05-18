@@ -1,0 +1,11 @@
+.button:not(:last-child)::after {
+  @apply bg-separator pointer-events-none absolute right-2 opacity-30;
+  content: '';
+  top: calc(100% + 4px);
+  width: calc(100% - 80px);
+  height: 1px;
+}
+
+.highlight > * > *:first-child {
+  background-color: rgb(var(--primaryHighlight));
+}

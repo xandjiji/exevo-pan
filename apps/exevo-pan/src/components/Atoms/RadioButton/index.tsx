@@ -1,14 +1,15 @@
 import { useState } from 'react'
+import clsx from 'clsx'
 import { checkKeyboardTrigger } from 'utils'
 import { RadioButtonProps } from './types'
-import * as S from './styles'
 
 const RadioButton = ({
+  className,
   children,
   active: propActive,
   onClick,
   ...props
-}: RadioButtonProps): JSX.Element => {
+}: RadioButtonProps) => {
   const [active, setActive] = useState<boolean>(propActive ?? false)
   const derivedActive = propActive ?? active
 
@@ -25,17 +26,28 @@ const RadioButton = ({
   }
 
   return (
-    <S.Wrapper
+    <div
       onClick={handleClick}
       onKeyPress={handleKeyPress}
       role="radio"
       aria-checked={derivedActive}
       tabIndex={0}
+      className={clsx(
+        'text-s text-onSurface group flex cursor-pointer items-center gap-1.5',
+        className,
+      )}
       {...props}
     >
-      <S.Radio />
+      <div className="border-separator relative grid h-4 w-4 shrink-0 place-items-center rounded-full border-2 border-solid transition-shadow group-active:shadow-inner">
+        <div
+          className={clsx(
+            'bg-primary h-2 w-2 rounded-full transition-opacity',
+            !derivedActive && 'opacity-0',
+          )}
+        />
+      </div>
       {children}
-    </S.Wrapper>
+    </div>
   )
 }
 

@@ -1,10 +1,12 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
+import clsx from 'clsx'
 import { copyToClipboard } from 'utils'
-import * as S from './styles'
+import CopyIcon from 'assets/svgs/copy.svg'
+import ValidIcon from 'assets/svgs/valid.svg'
 import { CopyButtonProps } from './types'
 
-const CopyButton = ({ copyString, ...props }: CopyButtonProps): JSX.Element => {
+const CopyButton = ({ className, copyString, ...props }: CopyButtonProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -22,16 +24,24 @@ const CopyButton = ({ copyString, ...props }: CopyButtonProps): JSX.Element => {
   )
 
   return (
-    <S.Button
+    <button
       type="button"
       aria-label={
         clicked ? common.CopyButton.copiedLabel : common.CopyButton.toCopyLabel
       }
+      className={clsx(
+        'clickable bg-surface grid place-items-center overflow-hidden rounded',
+        className,
+      )}
       {...props}
       onClick={handleClick}
     >
-      {clicked ? <S.ValidIcon /> : <S.CopyIcon />}
-    </S.Button>
+      {clicked ? (
+        <ValidIcon className="fill-green animate-rollIn h-6 w-6 p-[3px]" />
+      ) : (
+        <CopyIcon className="fill-onSurface h-6 w-6 p-[3px]" />
+      )}
+    </button>
   )
 }
 

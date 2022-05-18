@@ -13,12 +13,11 @@ import { routes, links } from 'Constants'
 import { common, blog } from 'locales'
 
 const components = {
+  ...Post.styles,
+  ...Links,
   wrapper: Post.ContentWrapper,
   h1: 'h2',
-  h2: Post.HeadingSection,
-  table: Post.Table,
   Image: Post.Image,
-  ...Links,
   Button: dynamic(() => import('components/Atoms/Button')),
   TibiaCoin: dynamic(() => import('components/Atoms/Text/TibiaCoin')),
   AboutPageStyle: dynamic(
@@ -65,7 +64,7 @@ export default function PostPage({
   metaData,
   recentPosts,
   locale,
-}: Props): JSX.Element {
+}: Props) {
   const { translations } = useTranslations()
 
   const postRoute = `${routes.BLOG}/${metaData.slug}`

@@ -22,7 +22,7 @@ export const DrawerFieldsProvider = ({
   serverOptions,
   auctionedItemOptions,
   children,
-}: DrawerFieldsProviderProps): JSX.Element => (
+}: DrawerFieldsProviderProps) => (
   <DrawerFieldsContext.Provider
     value={{ serverOptions, auctionedItemOptions, ...options }}
   >

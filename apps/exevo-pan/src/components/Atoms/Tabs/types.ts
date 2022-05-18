@@ -8,6 +8,5 @@ export interface TabsProps
 
 export interface PanelProps extends React.HTMLAttributes<HTMLDivElement> {
   label: React.ReactNode
-  children: React.ReactNode
   active?: boolean
 }

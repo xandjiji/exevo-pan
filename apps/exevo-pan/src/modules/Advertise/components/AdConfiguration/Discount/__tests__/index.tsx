@@ -45,15 +45,15 @@ describe('<Discount />', () => {
             readablePrice.short[paymentMethod](saved + totalPrice),
           ),
         ).toBeInTheDocument()
-        expect(tagElement).toBeVisible()
+        expect(tagElement).toHaveClass('opacity-100')
       } else {
         const [finalPriceElement, originalPriceElement] = screen.getAllByText(
           readablePrice.short[paymentMethod](totalPrice),
         )
 
-        expect(finalPriceElement).toBeVisible()
-        expect(originalPriceElement).not.toBeVisible()
-        expect(tagElement).not.toBeVisible()
+        expect(finalPriceElement).not.toHaveClass('opacity-0')
+        expect(originalPriceElement).toHaveClass('opacity-0')
+        expect(tagElement).toHaveClass('opacity-0')
       }
     },
   )

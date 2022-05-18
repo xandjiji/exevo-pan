@@ -4,7 +4,3 @@ export interface SummaryProps extends React.HTMLAttributes<HTMLDivElement> {
   percentage: number
   positive?: boolean
 }
-
-export interface PositiveStyleProps {
-  positive: boolean
-}

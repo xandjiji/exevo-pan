@@ -1,12 +1,15 @@
 import { memo } from 'react'
-import { LabeledTextBox } from '../../styles'
-import * as S from './styles'
+import clsx from 'clsx'
+import { LabeledTextBox } from '../../atoms'
 
-const Pvp = ({
-  serverData,
-}: Pick<CharacterObject, 'serverData'>): JSX.Element => (
+const Pvp = ({ serverData }: Pick<CharacterObject, 'serverData'>) => (
   <LabeledTextBox labelText="PvP">
-    <S.BattleyeStatus data-battleye-protected={serverData.battleye} />
+    <div
+      className={clsx(
+        'border-1 h-2.5 w-2.5 rounded-full border-solid border-black/20 shadow-sm',
+        serverData.battleye ? 'bg-battleGreen' : ' bg-battleYellow',
+      )}
+    />
     {serverData.pvpType.string}
   </LabeledTextBox>
 )

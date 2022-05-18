@@ -1,0 +1,8 @@
+.pre code {
+  @apply custom-scrollbar text-s custom-scrollbar w-full overflow-auto py-4 px-6;
+}
+
+/* changes made here should also be added to `code` component */
+.contentWrapper code {
+  @apply code text-s py-0.5 px-2 tracking-wider;
+}

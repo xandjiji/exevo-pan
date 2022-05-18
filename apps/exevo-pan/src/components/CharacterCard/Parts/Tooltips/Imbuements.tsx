@@ -3,16 +3,12 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/imbuement'
 import Lister from './Lister'
-import * as S from './styles'
+import * as S from './atoms'
 import { TooltipProps } from './types'
 
 const MAX_LINES = 12
 
-const CharacterImbuements = ({
-  items,
-  placement,
-  ...props
-}: TooltipProps): JSX.Element => {
+const CharacterImbuements = ({ items, placement, ...props }: TooltipProps) => {
   const {
     translations: { common },
   } = useTranslations()

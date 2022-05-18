@@ -12,14 +12,14 @@ describe('<PaymentMethods />', () => {
       </FormProvider>,
     )
 
-    const tibiaCoinsButton = screen.getByRole('button', { name: 'Tibia Coins' })
-    const pixButton = screen.getByRole('button', { name: 'Pix' })
+    const tibiaCoinsButton = screen.getByRole('radio', { name: 'Tibia Coins' })
+    const pixButton = screen.getByRole('radio', { name: 'Pix' })
 
-    expect(tibiaCoinsButton).toHaveAttribute('aria-selected', 'true')
-    expect(pixButton).toHaveAttribute('aria-selected', 'false')
+    expect(tibiaCoinsButton).toBeChecked()
+    expect(pixButton).not.toBeChecked()
 
     userEvent.click(pixButton)
-    expect(tibiaCoinsButton).toHaveAttribute('aria-selected', 'false')
-    expect(pixButton).toHaveAttribute('aria-selected', 'true')
+    expect(tibiaCoinsButton).not.toBeChecked()
+    expect(pixButton).toBeChecked()
   })
 })

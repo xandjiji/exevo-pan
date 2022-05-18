@@ -1,4 +1,9 @@
 export default {
+  error: {
+    P1: 'oops!',
+    P2: 'page not found!',
+    ErrorLabel: 'Error, something unexpected happened',
+  },
   Header: {
     h1: {
       home: 'Buy and sell Tibia characters on the official Char Bazaar!',

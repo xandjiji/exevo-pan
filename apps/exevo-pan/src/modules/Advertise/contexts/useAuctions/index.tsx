@@ -20,7 +20,7 @@ export const AuctionsProvider = ({
   initialPage,
   initialPageData,
   children,
-}: AuctionsProviderProps): JSX.Element => {
+}: AuctionsProviderProps) => {
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: DEFAULT_STATE.loading,
     nickname: DEFAULT_STATE.nickname,

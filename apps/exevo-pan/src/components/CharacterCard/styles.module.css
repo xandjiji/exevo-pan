@@ -1,0 +1,12 @@
+.highlightedPalette {
+  --surface: var(--kwaiSurface);
+  --primary: var(--kwai);
+  --primaryVariant: var(--kwaiVariant);
+}
+
+@media (max-width: 767px) {
+  .lazy:not(:hover) {
+    content-visibility: auto;
+    contain-intrinsic-size: 373px;
+  }
+}

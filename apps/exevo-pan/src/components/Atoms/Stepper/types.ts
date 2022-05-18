@@ -1,6 +1,6 @@
 export type Step = {
   title: string
-  icon?: React.ReactNode
+  icon?: React.ReactElement
   onClick?: (index: number) => void
 }
 

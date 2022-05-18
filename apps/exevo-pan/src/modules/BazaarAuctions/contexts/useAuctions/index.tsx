@@ -27,7 +27,7 @@ export const AuctionsProvider = ({
   defaultSortingMode,
   defaultDescendingOrder,
   children,
-}: AuctionsProviderProps): JSX.Element => {
+}: AuctionsProviderProps) => {
   const {
     translations: { common },
   } = useTranslations()

@@ -1,22 +1,28 @@
 import { routes } from 'Constants'
-import * as S from './styles'
+import Market from 'assets/svgs/market.svg'
+import History from 'assets/svgs/history.svg'
+import Statistics from 'assets/svgs/statistics.svg'
+import Advertise from 'assets/svgs/advertise.svg'
+/* import WarIconSvg from 'assets/svgs/war.svg' */
+import Blog from 'assets/svgs/blog.svg'
+import About from 'assets/svgs/about.svg'
 import { NavItem } from './types'
 
 export const NavItems: NavItem[] = [
   {
     href: routes.HOME,
     exact: true,
-    icon: <S.MarketIcon />,
+    icon: <Market />,
     title: 'currentAuctions',
   },
   {
     href: routes.BAZAAR_HISTORY,
-    icon: <S.HistoryIcon />,
+    icon: <History />,
     title: 'bazaarHistory',
   },
   {
     href: routes.STATISTICS,
-    icon: <S.StatisticsIcon />,
+    icon: <Statistics />,
     title: 'statistics',
   },
   /* {
@@ -26,17 +32,17 @@ export const NavItems: NavItem[] = [
     }, */
   {
     href: routes.ADVERTISE,
-    icon: <S.AdvertiseIcon />,
+    icon: <Advertise />,
     title: 'advertise',
   },
   {
     href: routes.BLOG,
-    icon: <S.BlogIcon />,
+    icon: <Blog />,
     title: 'blog',
   },
   {
     href: routes.ABOUT,
-    icon: <S.AboutIcon />,
+    icon: <About />,
     title: 'about',
   },
 ]

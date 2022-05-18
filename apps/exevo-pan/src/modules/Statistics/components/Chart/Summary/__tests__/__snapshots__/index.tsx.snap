@@ -2,11 +2,12 @@
 
 exports[`<Summary /> should style trend red/green 1`] = `
 <span
-  class="styles__Percentage-sc-5rbl8j-4 dXHqCH"
+  class="text-tsm flex items-center font-bold text-green"
 >
   <image
     aria-label="Upwards trend"
-    class="styles__TrendIcon-sc-5rbl8j-3 bRQjW"
+    class="mr-1 h-4 w-4 fill-green"
+    style="transform: none;"
   />
   50.00%
 </span>
@@ -14,11 +15,12 @@ exports[`<Summary /> should style trend red/green 1`] = `
 
 exports[`<Summary /> should style trend red/green 3`] = `
 <span
-  class="styles__Percentage-sc-5rbl8j-4 jgvhKN"
+  class="text-tsm flex items-center font-bold text-red"
 >
   <image
     aria-label="Downwards trend"
-    class="styles__TrendIcon-sc-5rbl8j-3 bRQjW"
+    class="mr-1 h-4 w-4 fill-red"
+    style="transform: scaleY(-1);"
   />
   50.00%
 </span>
@@ -27,17 +29,19 @@ exports[`<Summary /> should style trend red/green 3`] = `
 exports[`<Summary /> should style trend red/green 4`] = `
 <image
   aria-label="Downwards trend"
-  class="styles__TrendIcon-sc-5rbl8j-3 bRQjW"
+  class="mr-1 h-4 w-4 fill-red"
+  style="transform: scaleY(-1);"
 />
 `;
 
 exports[`<Summary /> should style trend red/green 5`] = `
 <span
-  class="styles__Percentage-sc-5rbl8j-4 dXHqCH"
+  class="text-tsm flex items-center font-bold text-green"
 >
   <image
     aria-label="Upwards trend"
-    class="styles__TrendIcon-sc-5rbl8j-3 bRQjW"
+    class="mr-1 h-4 w-4 fill-green"
+    style="transform: none;"
   />
   50.00%
 </span>
@@ -46,6 +50,7 @@ exports[`<Summary /> should style trend red/green 5`] = `
 exports[`<Summary /> should style trend red/green 6`] = `
 <image
   aria-label="Upwards trend"
-  class="styles__TrendIcon-sc-5rbl8j-3 bRQjW"
+  class="mr-1 h-4 w-4 fill-green"
+  style="transform: none;"
 />
 `;

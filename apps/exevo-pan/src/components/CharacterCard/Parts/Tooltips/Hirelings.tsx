@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import * as S from './styles'
+import * as S from './atoms'
 import { CharacterHirelingsProps } from './types'
 
 const MAX_JOBS = 4
@@ -7,7 +7,7 @@ const MAX_JOBS = 4
 const CharacterHirelings = ({
   hirelingsInfo,
   ...props
-}: CharacterHirelingsProps): JSX.Element => (
+}: CharacterHirelingsProps) => (
   <S.TitleWrapper {...props}>
     <S.Icons.Hireling />
     Hirelings: {hirelingsInfo.count} (

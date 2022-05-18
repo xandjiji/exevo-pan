@@ -1,7 +1,9 @@
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
 import { memo } from 'react'
+import { Accordion, ActiveCount } from 'components/Atoms'
+import { Label } from '../FilterGroup'
 import { useFilters } from '../../../contexts/useFilters'
-import * as S from './styles'
 import { SpritePickerProps } from './types'
 
 const SpritePicker = ({
@@ -11,7 +13,7 @@ const SpritePicker = ({
   options,
   filterKey,
   children,
-}: SpritePickerProps): JSX.Element => {
+}: SpritePickerProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -21,43 +23,56 @@ const SpritePicker = ({
   const selectedCount = (filterState[filterKey] as Set<string>).size
 
   return (
-    <S.Accordion
+    <Accordion
+      className="border-separator mt-[-9px] border-solid pb-1.5"
+      style={{ borderWidth: 0, borderBottomWidth: 1 }}
       title={
-        <S.AccordionLabel>
+        <Label className="relative flex cursor-pointer items-center gap-1.5 text-left">
           {title}
-          <S.Counter
+          <ActiveCount
             aria-label={`${selectedCount} ${
               homepage.FilterDrawer.SpritePicker[
                 selectedCount === 1 ? 'item' : 'items'
               ]
             }`}
             aria-hidden={!selectedCount}
+            className="pointer-events-none"
           >
             {selectedCount}
-          </S.Counter>
-        </S.AccordionLabel>
+          </ActiveCount>
+        </Label>
       }
     >
-      <S.SpriteGrid>
+      <div className="flex flex-wrap gap-2">
         {children}
-        {options.map((name) => (
-          <S.Portrait
-            key={name}
-            role="switch"
-            title={name}
-            aria-checked={(filterState[filterKey] as Set<string>).has(name)}
-            onClick={() => updateFilters(filterKey, name)}
-          >
-            <S.Sprite
-              alt={name}
-              src={`/sprites/${spriteDirectory}/${name}${directorySuffix}.gif`}
-              width="64"
-              height="64"
-            />
-          </S.Portrait>
-        ))}
-      </S.SpriteGrid>
-    </S.Accordion>
+        {options.map((name) => {
+          const isChecked = (filterState[filterKey] as Set<string>).has(name)
+
+          return (
+            <button
+              key={name}
+              type="button"
+              role="switch"
+              title={name}
+              aria-checked={isChecked}
+              onClick={() => updateFilters(filterKey, name)}
+              className={clsx(
+                'clickable relative h-14 w-14 select-none rounded-md p-2 transition-colors',
+                isChecked ? 'bg-primaryHighlight' : 'bg-primaryVariant',
+              )}
+            >
+              <img
+                alt={name}
+                src={`/sprites/${spriteDirectory}/${name}${directorySuffix}.gif`}
+                width="64"
+                height="64"
+                className="pointer-events-none -ml-6 -mt-6"
+              />
+            </button>
+          )
+        })}
+      </div>
+    </Accordion>
   )
 }
 

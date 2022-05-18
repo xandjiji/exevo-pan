@@ -3,19 +3,18 @@ import PaymentMethods from './PaymentMethods'
 import Discount from './Discount'
 import Summary from '../Summary'
 import { useForm } from '../../contexts/Form'
-import * as S from './styles'
 
-const AdConfiguration = (): JSX.Element => {
+const AdConfiguration = () => {
   const { selectedDates, paymentMethod } = useForm()
 
   const daysCount = selectedDates.length
   return (
-    <S.Wrapper>
+    <section className="grid gap-6">
       <RangeDatePicker />
       <PaymentMethods />
       <Discount daysCount={daysCount} paymentMethod={paymentMethod} />
       <Summary />
-    </S.Wrapper>
+    </section>
   )
 }
 

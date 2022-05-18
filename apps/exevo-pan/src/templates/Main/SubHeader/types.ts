@@ -3,10 +3,9 @@ import React from 'react'
 export type NavItem = {
   title: string
   href: string
-  icon: React.ReactNode
+  icon: React.ReactElement
 }
 
-export interface SubHeaderProps
-  extends React.HtmlHTMLAttributes<HTMLDivElement> {
+export type SubHeaderProps = {
   navItems: NavItem[]
-}
+} & JSX.IntrinsicElements['nav']

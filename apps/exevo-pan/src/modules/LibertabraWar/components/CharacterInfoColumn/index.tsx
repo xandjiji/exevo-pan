@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import * as S from './styles'
+import { Table } from 'components/Atoms'
 import { CharacterInfoColumnProps } from './types'
 
 const CharacterInfoColumn = ({
@@ -7,8 +7,8 @@ const CharacterInfoColumn = ({
   level,
   vocation,
   ...props
-}: CharacterInfoColumnProps): JSX.Element => (
-  <S.CharacterColumn {...props}>
+}: CharacterInfoColumnProps) => (
+  <Table.Column {...props}>
     <a
       href={`https://www.tibia.com/community/?name=${encodeURIComponent(
         nickname,
@@ -18,8 +18,8 @@ const CharacterInfoColumn = ({
     >
       {nickname}
     </a>
-    <S.CharacterInfo>{`Level ${level} - ${vocation}`}</S.CharacterInfo>
-  </S.CharacterColumn>
+    <span className="mt-1.5 block text-xs">{`Level ${level} - ${vocation}`}</span>
+  </Table.Column>
 )
 
 export default memo(CharacterInfoColumn)

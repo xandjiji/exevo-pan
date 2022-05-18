@@ -3,7 +3,3 @@ export interface PercentageCardProps
   title: string
   percentage: number
 }
-
-export interface PercentageStyleProps {
-  positive: boolean
-}

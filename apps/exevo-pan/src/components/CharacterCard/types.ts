@@ -1,9 +1,18 @@
-import { HTMLAttributes } from 'react'
-
-export interface CharacterCardProps extends HTMLAttributes<HTMLDivElement> {
+export type CharacterCardProps = {
   characterData: CharacterObject
   highlighted?: boolean
   lazyRender?: boolean
   expandable?: boolean
   past?: boolean
-}
+} & JSX.IntrinsicElements['article']
+
+export type WrapperProps = Pick<CharacterCardProps, 'highlighted'> &
+  JSX.IntrinsicElements['article']
+
+export type FlexColumnProps = {
+  storeColumn?: boolean
+} & JSX.IntrinsicElements['div']
+
+export type BodyProps = {
+  lazy?: boolean
+} & JSX.IntrinsicElements['div']

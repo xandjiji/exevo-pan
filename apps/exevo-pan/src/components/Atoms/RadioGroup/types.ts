@@ -1,8 +1,7 @@
 import { HTMLAttributes } from 'react'
 
-export interface RadioGroupProps {
-  children: React.ReactNode
+export interface RadioGroupProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   indexValue?: number
   onChange?: (index: number) => void
-  props?: HTMLAttributes<HTMLDivElement>
 }

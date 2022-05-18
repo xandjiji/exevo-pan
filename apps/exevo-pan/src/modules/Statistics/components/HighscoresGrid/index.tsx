@@ -1,21 +1,30 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useCallback } from 'react'
 import { formatNumberWithCommas } from 'utils'
 import List from '../List'
-import * as S from './styles'
 import { HighscoresGridProps } from './types'
 
 const HighscoresGrid = ({
   statisticsData,
+  className,
+  style,
   ...props
-}: HighscoresGridProps): JSX.Element => {
+}: HighscoresGridProps) => {
   const {
     translations: { statistics },
   } = useTranslations()
 
   return (
-    <S.Wrapper {...props}>
-      <S.PageTitle>{statistics.HighscoresGrid.title}</S.PageTitle>
+    <div
+      className={clsx('inner-container grid gap-6 py-4', className)}
+      style={{
+        gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
+        ...style,
+      }}
+      {...props}
+    >
+      <h2 className="hidden">{statistics.HighscoresGrid.title}</h2>
       <List
         title={statistics.HighscoresGrid.top10BidTitle}
         charactersList={statisticsData.top10Bid}
@@ -71,7 +80,7 @@ const HighscoresGrid = ({
         charactersList={statisticsData.top10Fishing}
         displayedDataKey="fishing"
       />
-    </S.Wrapper>
+    </div>
   )
 }
 

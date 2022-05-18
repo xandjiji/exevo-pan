@@ -77,7 +77,7 @@ describe('<AuctionSearch />', () => {
     auctionButtons.forEach((button) => {
       userEvent.click(button)
 
-      expect(button).toHaveAttribute('aria-selected', 'true')
+      expect(button).toHaveClass('highlight')
     })
   })
 

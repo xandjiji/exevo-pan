@@ -1,9 +1,9 @@
 import { memo, useMemo } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { v4 as uuidv4 } from 'uuid'
-import { SpritePortrait } from 'components/Atoms'
-import { Background } from 'components/Atoms/SpritePortrait/styles'
-import * as S from './styles'
+import { SpritePortrait, ActiveCount } from 'components/Atoms'
+import { Background } from 'components/Atoms/SpritePortrait'
 import { CharacterItemsProps } from './types'
 
 const fillItems = (amount: number) =>
@@ -11,8 +11,9 @@ const fillItems = (amount: number) =>
 
 const CharacterItems = ({
   items,
+  className,
   ...props
-}: CharacterItemsProps): JSX.Element => {
+}: CharacterItemsProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -20,21 +21,27 @@ const CharacterItems = ({
   const emptyItems = useMemo(() => fillItems(4 - items.length), [items.length])
 
   return (
-    <S.ItemWrapper {...props}>
+    <div className={clsx('flex justify-around', className)} {...props}>
       {items.map((floatItem, childrenIndex) => {
         const [item, tier] = floatItem.toString().split('.')
         const key = `${childrenIndex}-${item}`
         if (tier) {
           return (
-            <S.SpriteWrapper key={key}>
+            <div className="relative" key={key}>
               <SpritePortrait
                 alt={common.CharacterCard.featuredItem}
                 src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
                 width={32}
                 height={32}
               />
-              <S.ActiveCount title={`tier ${tier}`}>{tier}</S.ActiveCount>
-            </S.SpriteWrapper>
+              <ActiveCount
+                title={`tier ${tier}`}
+                className="z-1 absolute top-0 right-0"
+                style={{ transform: 'translate(50%, -50%)' }}
+              >
+                {tier}
+              </ActiveCount>
+            </div>
           )
         }
         return (
@@ -48,7 +55,7 @@ const CharacterItems = ({
         )
       })}
       {emptyItems}
-    </S.ItemWrapper>
+    </div>
   )
 }
 

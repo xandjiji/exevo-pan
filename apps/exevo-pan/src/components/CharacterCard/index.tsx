@@ -17,7 +17,7 @@ import {
   SpecialTags,
 } from './Parts'
 import CharacterModal from './CharacterModal'
-import * as S from './styles'
+import * as S from './atoms'
 import { CharacterCardProps } from './types'
 
 const CharacterCard = ({
@@ -27,7 +27,7 @@ const CharacterCard = ({
   expandable = false,
   past = false,
   ...props
-}: CharacterCardProps): JSX.Element => {
+}: CharacterCardProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -73,7 +73,7 @@ const CharacterCard = ({
     <>
       <S.Wrapper
         ref={ref as React.RefObject<HTMLDivElement>}
-        data-highlighted={highlighted}
+        highlighted={highlighted}
         role={expandable ? 'button' : undefined}
         tabIndex={expandable ? 1 : undefined}
         aria-label={expandable ? common.CharacterCard.expand : undefined}
@@ -88,11 +88,12 @@ const CharacterCard = ({
           level={level}
           vocationId={vocationId}
           serverName={serverData.serverName}
+          highlighted={highlighted}
         >
           {highlighted && <TagButton />}
         </Head>
 
-        <S.Body data-lazy={lazyRender}>
+        <S.Body lazy={lazyRender}>
           <S.InfoGrid>
             <Textbox.Server
               serverData={serverData}
@@ -119,7 +120,7 @@ const CharacterCard = ({
               <QuestsTooltip items={quests} />
             </S.FlexColumn>
 
-            <S.FlexColumn data-store-column>
+            <S.FlexColumn storeColumn>
               <S.Checkbox
                 label="Charm Expansion"
                 checked={charmInfo.expansion}
@@ -128,7 +129,8 @@ const CharacterCard = ({
               <S.Checkbox label="Prey Slot" checked={preySlot} />
 
               {tcInvested !== '0' && (
-                <S.FlexWrapper
+                <div
+                  className="flex items-center justify-between gap-1.5"
                   title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
                 >
                   <S.CheckboxContainer>
@@ -137,7 +139,7 @@ const CharacterCard = ({
                   <S.Strong>
                     {tcInvested} {common.CharacterCard.tcInvested.invested}
                   </S.Strong>
-                </S.FlexWrapper>
+                </div>
               )}
             </S.FlexColumn>
           </S.FlexFooter>
@@ -149,6 +151,7 @@ const CharacterCard = ({
         <CharacterModal
           characterData={characterData}
           onClose={() => setExpanded(false)}
+          past={past}
         />
       )}
     </>

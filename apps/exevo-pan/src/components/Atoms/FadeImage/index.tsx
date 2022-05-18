@@ -1,20 +1,18 @@
 import { memo } from 'react'
-import Image from 'next/image'
+import clsx from 'clsx'
+import Image, { ImageProps } from 'next/image'
 import { useOnImageLoad } from 'hooks'
-import * as S from './styles'
-import { FadeImageProps } from './types'
 
-const FadeImage = ({
-  className,
-  id,
-  ...props
-}: FadeImageProps): JSX.Element => {
+const FadeImage = ({ className, id, ...props }: ImageProps) => {
   const [loaded, onLoad] = useOnImageLoad()
 
   return (
-    <S.Wrapper className={className} id={id} data-loaded={loaded}>
-      <Image {...props} onLoad={onLoad} />
-    </S.Wrapper>
+    <Image
+      className={clsx('transition-opacity', !loaded && 'opacity-0', className)}
+      id={id}
+      {...props}
+      onLoad={onLoad}
+    />
   )
 }
 

@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useTranslations } from 'contexts/useTranslation'
 import {
   useState,
@@ -8,18 +10,20 @@ import {
   useLayoutEffect,
   memo,
 } from 'react'
+import clsx from 'clsx'
 import { useIsMounted, useDrag } from 'hooks'
 import { normalize, clampValue, debounce } from 'utils'
+import { ValueDisplay, Cursor, TrackFill } from './atomics'
 import { RangeSliderInputProps } from './types'
-import * as S from './styles'
 
 const RangeSliderInput = ({
+  className,
   min,
   max,
   onChange,
   value: propValue = [min, max],
   ...props
-}: RangeSliderInputProps): JSX.Element => {
+}: RangeSliderInputProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -135,19 +139,22 @@ const RangeSliderInput = ({
     normalize(clampValue(cursorBValue, [min, max]), [min, max]) * 100
 
   return (
-    <S.Wrapper {...props}>
-      <S.ValueDisplay>
+    <div
+      className={clsx('flex w-[270px] items-center gap-3', className)}
+      {...props}
+    >
+      <ValueDisplay>
         {clampValue(Math.min(cursorAValue, cursorBValue), [min, max])}
-      </S.ValueDisplay>
-      <div style={{ width: '100%' }}>
-        <S.Track
+      </ValueDisplay>
+      <div className="w-full">
+        <TrackFill
           ref={trackRef}
-          active={track.isMousePressed}
           tabIndex={0}
           onKeyDown={(event) => handleKeyPress(event)}
+          isMousePressed={track.isMousePressed}
           {...track.binders}
         >
-          <S.Cursor
+          <Cursor
             role="slider"
             aria-label={common.ChangeValueLabel}
             aria-valuenow={cursorAValue}
@@ -155,7 +162,7 @@ const RangeSliderInput = ({
             aria-valuemin={min}
             style={{ left: `${cursorAPosition}%` }}
           />
-          <S.Cursor
+          <Cursor
             role="slider"
             aria-label={common.ChangeValueLabel}
             aria-valuenow={cursorBValue}
@@ -163,18 +170,20 @@ const RangeSliderInput = ({
             aria-valuemin={min}
             style={{ left: `${cursorBPosition}%` }}
           />
-          <S.TrackFill
+
+          <div
+            className="bg-primary absolute top-0 h-full opacity-70"
             style={{
               left: `${trackFillLeft}%`,
               width: `${trackFillRight - trackFillLeft}%`,
             }}
           />
-        </S.Track>
+        </TrackFill>
       </div>
-      <S.ValueDisplay>
+      <ValueDisplay>
         {clampValue(Math.max(cursorAValue, cursorBValue), [min, max])}
-      </S.ValueDisplay>
-    </S.Wrapper>
+      </ValueDisplay>
+    </div>
   )
 }
 

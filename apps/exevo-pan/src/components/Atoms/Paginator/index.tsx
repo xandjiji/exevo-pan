@@ -1,18 +1,43 @@
+/* eslint-disable jsx-a11y/no-noninteractive-tabindex */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, memo } from 'react'
+import { useState, cloneElement, memo } from 'react'
+import clsx from 'clsx'
 import { clampValue, debounce } from 'utils'
+import NextIcon from 'assets/svgs/next.svg'
+import LastIcon from 'assets/svgs/last.svg'
 import usePagination from './usePagination'
-import * as S from './styles'
-import { PaginatorProps } from './types'
+import { IconProps, PaginatorProps } from './types'
+
+const Icon = ({ icon, disabled }: IconProps) =>
+  cloneElement(icon, {
+    className: clsx(
+      'w-8 fill-onSurface transition-opacity',
+      disabled && 'opacity-40',
+    ),
+  })
+
+const Cursor = ({ className, ...props }: JSX.IntrinsicElements['button']) => (
+  <button
+    className={clsx(
+      'clickable h-8 cursor-pointer rounded',
+      props.disabled && 'pointer-events-none',
+      className,
+    )}
+    type="button"
+    {...props}
+  />
+)
 
 const Paginator = ({
+  className,
   currentPage: currentPageProp,
   pageSize = 1,
   totalItems,
   onChange,
   noItemsMessage = 'No items',
   ...props
-}: PaginatorProps): JSX.Element => {
+}: PaginatorProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -53,47 +78,54 @@ const Paginator = ({
   }
 
   return (
-    <S.Wrapper tabIndex={0} onKeyDown={handleKeyPress} {...props}>
-      <S.Tracker>{trackerDisplay}</S.Tracker>
+    <div
+      tabIndex={0}
+      onKeyDown={handleKeyPress}
+      className={clsx('text-right', className)}
+      {...props}
+    >
+      <span className="text-tsm text-onSurface mb-2 block tracking-wider">
+        {trackerDisplay}
+      </span>
 
-      <S.CursorWrapper>
-        <S.Cursor
+      <div className="flex gap-4">
+        <Cursor
           aria-label={common.Paginator.FirstLabel}
-          aria-disabled={!hasPrev}
           disabled={!hasPrev}
-          invert
           onClick={() => changePage(1)}
         >
-          <S.LastIcon />
-        </S.Cursor>
-        <S.Cursor
+          <Icon
+            disabled={!hasPrev}
+            icon={<LastIcon style={{ transform: 'rotate(180deg)' }} />}
+          />
+        </Cursor>
+        <Cursor
           aria-label={common.Paginator.PreviousLabel}
-          aria-disabled={!hasPrev}
           disabled={!hasPrev}
-          invert
           onClick={() => changePage(derivedCurrentPage - 1)}
         >
-          <S.NextIcon />
-        </S.Cursor>
+          <Icon
+            disabled={!hasPrev}
+            icon={<NextIcon style={{ transform: 'rotate(180deg)' }} />}
+          />
+        </Cursor>
 
-        <S.Cursor
+        <Cursor
           aria-label={common.Paginator.NextLabel}
-          aria-disabled={!hasNext}
           disabled={!hasNext}
           onClick={() => changePage(derivedCurrentPage + 1)}
         >
-          <S.NextIcon />
-        </S.Cursor>
-        <S.Cursor
+          <Icon disabled={!hasNext} icon={<NextIcon />} />
+        </Cursor>
+        <Cursor
           aria-label={common.Paginator.LastLabel}
-          aria-disabled={!hasNext}
           disabled={!hasNext}
           onClick={() => changePage(pageCount)}
         >
-          <S.LastIcon />
-        </S.Cursor>
-      </S.CursorWrapper>
-    </S.Wrapper>
+          <Icon disabled={!hasNext} icon={<LastIcon />} />
+        </Cursor>
+      </div>
+    </div>
   )
 }
 

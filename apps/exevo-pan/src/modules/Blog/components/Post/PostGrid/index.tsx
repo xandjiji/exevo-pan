@@ -1,16 +1,22 @@
 import Card from './Card'
-import * as S from './styles'
 import { PostGridProps } from './types'
 
-const PostGrid = ({ gridTitle, posts }: PostGridProps): JSX.Element => (
+const PostGrid = ({ gridTitle, posts }: PostGridProps) => (
   <section>
-    {gridTitle && <S.Title>{gridTitle}</S.Title>}
+    {gridTitle && (
+      <h3
+        className="border-separator mb-3 border-solid pb-1 text-[32px] font-normal tracking-wide"
+        style={{ borderWidth: 0, borderBottomWidth: 1 }}
+      >
+        {gridTitle}
+      </h3>
+    )}
 
-    <S.Grid>
+    <ul className="grid gap-2">
       {posts.map((post) => (
         <Card key={post.slug} post={post} />
       ))}
-    </S.Grid>
+    </ul>
   </section>
 )
 export default PostGrid

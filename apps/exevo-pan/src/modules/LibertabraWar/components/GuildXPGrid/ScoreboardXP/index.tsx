@@ -1,22 +1,29 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
+import GuildSummary from '../../GuildSummary'
 import { formatDisplayValue } from './utils'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { ScoreboardXPProps } from './types'
 
 const ScoreboardXP = ({
   guildA,
   guildB,
+  className,
   ...props
-}: ScoreboardXPProps): JSX.Element => {
+}: ScoreboardXPProps) => {
   const {
     translations: { war },
   } = useTranslations()
 
   return (
-    <S.Wrapper {...props}>
-      <S.GuildWrapper>
-        <S.GuildSummary
+    <section
+      className={clsx('card p-5 text-center transition-colors', className)}
+      {...props}
+    >
+      <div className="flex flex-col items-center justify-center gap-6 xl:flex-row xl:justify-around">
+        <GuildSummary
+          className={styles.summary}
           guildName={guildA.name}
           href={guildA.href}
           displayValue={formatDisplayValue(guildA.todayDiff)}
@@ -24,15 +31,16 @@ const ScoreboardXP = ({
           label={war.GuildXPGrid.ScoreboardXP.summaryLabel}
         />
 
-        <S.GuildSummary
+        <GuildSummary
+          className={styles.summary}
           guildName={guildB.name}
           href={guildB.href}
           displayValue={formatDisplayValue(guildB.todayDiff)}
           winning={guildB.todayDiff >= 0}
           label={war.GuildXPGrid.ScoreboardXP.summaryLabel}
         />
-      </S.GuildWrapper>
-    </S.Wrapper>
+      </div>
+    </section>
   )
 }
 

@@ -1,20 +1,19 @@
 import { useTranslations } from 'contexts/useTranslation'
 import CharacterMiniCard from 'components/CharacterMiniCard'
-import * as S from './styles'
 import { AuthorsProps } from './types'
 
-const Authors = ({ author, translator }: AuthorsProps): JSX.Element => {
+const Authors = ({ author, translator }: AuthorsProps) => {
   const {
     translations: { blog },
   } = useTranslations()
 
   return (
     <footer>
-      <S.Title>
+      <h3 className="text-txl mb-4 font-light leading-tight tracking-wide">
         {blog.Authors.headline1}
         <br />
         {blog.Authors.headline2} 😄
-      </S.Title>
+      </h3>
       <CharacterMiniCard
         forceSubtitle={blog.Authors.author}
         characterName={author.name}

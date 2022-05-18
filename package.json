@@ -93,5 +93,8 @@
   "engines": {
     "npm": ">=7.0.0",
     "node": ">=14.0.0"
+  },
+  "dependencies": {
+    "prettier-plugin-tailwindcss": "^0.1.8"
   }
 }

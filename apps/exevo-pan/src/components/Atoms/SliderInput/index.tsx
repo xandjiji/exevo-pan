@@ -8,10 +8,11 @@ import {
   useLayoutEffect,
   memo,
 } from 'react'
+import clsx from 'clsx'
 import { useIsMounted, useDrag } from 'hooks'
 import { clampValue, normalize, strToInt, debounce } from 'utils'
+import { Cursor, TrackFill } from '../RangeSliderInput/atomics'
 import { SliderInputProps } from './types'
-import * as S from './styles'
 
 const SliderInput = ({
   className,
@@ -21,7 +22,7 @@ const SliderInput = ({
   onChange,
   value: propValue = min,
   ...props
-}: SliderInputProps): JSX.Element => {
+}: SliderInputProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -130,16 +131,19 @@ const SliderInput = ({
   }, [propValue])
 
   return (
-    <S.Wrapper className={className} style={style}>
+    <div
+      className={clsx('flex w-[270px] items-center gap-3 pl-2', className)}
+      style={style}
+    >
       <div style={{ width: '100%' }}>
-        <S.Track
+        <TrackFill
           ref={trackRef}
-          active={isMousePressed}
+          isMousePressed={isMousePressed}
           tabIndex={0}
           onKeyDown={handleTrackKeyPress}
           {...binders}
         >
-          <S.Cursor
+          <Cursor
             role="slider"
             aria-label={common.ChangeValueLabel}
             aria-valuenow={value}
@@ -147,10 +151,13 @@ const SliderInput = ({
             aria-valuemin={min}
             style={{ left: valueToTrackPercentage(value) }}
           />
-          <S.TrackFill style={{ width: valueToTrackPercentage(value) }} />
-        </S.Track>
+          <div
+            className="bg-primary after:bg-primary pointer-events-none absolute top-0 left-0 h-full after:pointer-events-none after:absolute after:right-full after:top-0 after:h-full after:w-[7px]"
+            style={{ width: valueToTrackPercentage(value) }}
+          />
+        </TrackFill>
       </div>
-      <S.SliderInput
+      <input
         aria-label={props['aria-label']}
         aria-labelledby={props['aria-labelledby']}
         aria-invalid={!isValid}
@@ -158,6 +165,12 @@ const SliderInput = ({
         onChange={handleInputChange}
         onBlur={handleInputBlur}
         onKeyDown={handleInputKeyPress}
+        className={clsx(
+          'text-tsm selection:bg-primary selection:text-onPrimary w-10 shrink-0 rounded-lg border-none py-[7px] text-center outline-none transition-colors',
+          isValid
+            ? 'bg-primaryVariant text-onSurface'
+            : 'bg-red text-onPrimary selection',
+        )}
       />
       <input
         hidden
@@ -169,7 +182,7 @@ const SliderInput = ({
         ref={inputRef}
         {...props}
       />
-    </S.Wrapper>
+    </div>
   )
 }
 

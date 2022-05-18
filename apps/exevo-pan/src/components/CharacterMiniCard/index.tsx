@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
 import { SpritePortrait } from 'components/Atoms'
-import * as S from './styles'
+import ExternalIcon from 'assets/svgs/external.svg'
 import { CharacterMiniCardProps } from './types'
 
 const DEFAULT_OUTFIT_SRC =
@@ -14,8 +15,10 @@ const CharacterMiniCard = ({
   characterName,
   forceSubtitle,
   linkUrl,
+  highlighted = false,
+  className,
   ...props
-}: CharacterMiniCardProps): JSX.Element => {
+}: CharacterMiniCardProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -23,7 +26,14 @@ const CharacterMiniCard = ({
   const name = characterName ?? (characterData as SingleCharacterData).name
 
   return (
-    <S.Wrapper isCard={isCard} {...props}>
+    <div
+      className={clsx(
+        'character-mini-card flex items-center gap-4',
+        isCard && 'card',
+        className,
+      )}
+      {...props}
+    >
       <SpritePortrait
         offset
         width={64}
@@ -33,29 +43,35 @@ const CharacterMiniCard = ({
         title={name}
       />
       <div>
-        <S.Nickname>
+        <p
+          className={clsx(
+            'flex items-center text-base font-bold',
+            highlighted ? 'text-greenHighlight' : 'text-primaryHighlight',
+          )}
+        >
           {name}
           {linkUrl && (
-            <S.Link
+            <a
               href={linkUrl}
               target="_blank"
               rel="noreferrer noopener external"
               onClick={(event) => event.stopPropagation()}
+              className="text-none ml-1"
             >
-              <S.ExternalIcon />
+              <ExternalIcon className="clickable fill-onSurface -mt-0.5 h-7 w-7 rounded p-0.5" />
               {common.CharacterTooltipLabel}
-            </S.Link>
+            </a>
           )}
-        </S.Nickname>
-        <S.Description>
+        </p>
+        <span className="text-tsm text-onSurface font-light tracking-wider">
           {forceSubtitle ??
             (characterData &&
               `Level ${characterData.level} - ${characterData.vocation}${
                 displayServer ? ` (${characterData.world})` : ''
               }`)}
-        </S.Description>
+        </span>
       </div>
-    </S.Wrapper>
+    </div>
   )
 }
 

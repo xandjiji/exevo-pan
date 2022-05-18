@@ -1,0 +1,50 @@
+.fill,
+.tierSeparator {
+  --tier1Width: 30%;
+  --tier2Width: 60%;
+  --tier3Width: 90%;
+}
+
+.tierSeparator[data-tier='2'] {
+  left: var(--tier2Width);
+}
+
+.tierSeparator[data-tier='3'] {
+  left: var(--tier3Width);
+}
+
+/* FILL */
+
+.fill {
+  @apply h-full transition-all;
+}
+
+/* tier 1 */
+.fill[data-tier='1'] {
+  width: var(--tier1Width);
+  @apply bg-primaryVariant;
+}
+
+.fill[data-tier='1'][data-empty='true'] {
+  width: 0%;
+}
+
+/* tier 2 */
+.fill[data-tier='2'] {
+  width: var(--tier2Width);
+  @apply bg-primary;
+}
+
+.fill[data-tier='2'][data-progress='3'] {
+  width: 75%;
+}
+
+.fill[data-tier='2'][data-progress='4'] {
+  width: 85%;
+}
+
+/* tier 3 */
+.fill[data-tier='3'] {
+  width: 100%;
+  @apply bg-green;
+}

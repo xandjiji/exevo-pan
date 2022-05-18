@@ -2,10 +2,11 @@ import { screen } from '@testing-library/react'
 import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import userEvent from '@testing-library/user-event'
 import Stepper from '..'
+import { Step } from '../types'
 
 const mockedClickHandlers = [jest.fn(), jest.fn(), jest.fn()]
 
-const mockedSteps = [
+const mockedSteps: Step[] = [
   {
     title: 'First step',
     icon: <span>first icon</span>,
@@ -13,7 +14,6 @@ const mockedSteps = [
   },
   {
     title: 'Second step',
-    icon: 'secondIcon',
     onClick: mockedClickHandlers[1],
   },
   {
@@ -33,7 +33,6 @@ describe('<Stepper />', () => {
       ).toBeInTheDocument()
     })
     expect(screen.getByText('first icon')).toBeInTheDocument()
-    expect(screen.getByText('secondIcon')).toBeInTheDocument()
     expect(screen.getByText('3')).toBeInTheDocument()
     expect(screen.getByText('fourth icon')).toBeInTheDocument()
   })

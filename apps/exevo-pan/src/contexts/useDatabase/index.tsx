@@ -39,7 +39,7 @@ export const DatabaseProvider = ({
   children,
 }: {
   children: React.ReactNode
-}): JSX.Element => {
+}) => {
   const {
     translations: { common },
   } = useTranslations()

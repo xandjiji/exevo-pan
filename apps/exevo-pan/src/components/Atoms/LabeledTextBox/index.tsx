@@ -1,14 +1,18 @@
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
 import { useUuid } from 'hooks'
-import * as S from './styles'
+import Image from 'next/image'
+import warningSrc from 'assets/warning.png'
+import styles from './styles.module.css'
 import { LabeledTextBoxProps } from './types'
 
 const LabeledTextBox = ({
+  className,
   children,
   labelText,
-  warning,
+  warning = false,
   ...props
-}: LabeledTextBoxProps): JSX.Element => {
+}: LabeledTextBoxProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -16,20 +20,39 @@ const LabeledTextBox = ({
   const labelId = useUuid()
 
   return (
-    <S.Wrapper
-      suppressHydrationWarning
+    <div
+      className={clsx(
+        'border-1 relative rounded-md border-solid px-3 pt-2.5 pb-2',
+        warning ? 'border-red' : 'border-separator',
+        className,
+      )}
       aria-labelledby={labelText ? labelId : undefined}
-      warning={warning}
+      suppressHydrationWarning
       {...props}
     >
       {labelText && (
-        <S.Label suppressHydrationWarning id={labelId}>
+        <span
+          id={labelId}
+          suppressHydrationWarning
+          className={clsx(
+            'bg-surface absolute top-0 left-2 flex select-none items-center px-1 text-[9px] font-light uppercase tracking-wider',
+            warning ? 'text-red' : 'text-onSurface',
+          )}
+          style={{ transform: 'translateY(-50%)' }}
+        >
           {labelText}
-          {warning && <S.WarningIcon title={common.WarningLabel} unoptimized />}
-        </S.Label>
+          {warning && (
+            <Image
+              src={warningSrc}
+              title={common.WarningLabel}
+              unoptimized
+              className={styles.warning}
+            />
+          )}
+        </span>
       )}
       {children}
-    </S.Wrapper>
+    </div>
   )
 }
 

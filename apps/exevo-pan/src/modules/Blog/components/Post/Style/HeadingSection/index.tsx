@@ -1,22 +1,23 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useOnScreen } from 'hooks'
+import AnchorIcon from 'assets/svgs/anchor.svg'
+import { h2 as H2 } from '../Headings/index'
 import { useCurrentSection } from '../../../../contexts/useCurrentSection'
 import { CopyToClipboard } from './utils'
-import * as S from './styles'
 import { generateSectionId } from '../../../../utils'
 
 const HeadingSection = ({
   children,
   ...props
-}: React.HTMLAttributes<HTMLHeadingElement>): JSX.Element => {
+}: React.HTMLAttributes<HTMLHeadingElement>) => {
   const {
     translations: { common },
   } = useTranslations()
 
   const [anchorId] = useState(generateSectionId(children as string))
 
-  const elementRef = useRef<HTMLDivElement>()
+  const elementRef = useRef<HTMLDivElement>(null)
   const onScreen = useOnScreen(elementRef)
 
   const { setSectionStatus } = useCurrentSection()
@@ -30,14 +31,24 @@ const HeadingSection = ({
   }, [onScreen, setSectionStatus])
 
   return (
-    <S.Wrapper ref={elementRef as React.RefObject<HTMLDivElement>}>
-      <S.Heading {...props} id={anchorId}>
+    <div
+      ref={elementRef}
+      className="mt-3 flex w-fit items-center justify-start gap-4"
+    >
+      <H2 {...props} id={anchorId} className="flex-grow">
         {children}
-      </S.Heading>
-      <S.Link href={`#${anchorId}`} onClick={() => CopyToClipboard(anchorId)}>
-        <S.AnchorIcon aria-label={common.AnchorIconLabel} />
-      </S.Link>
-    </S.Wrapper>
+      </H2>
+      <a
+        href={`#${anchorId}`}
+        onClick={() => CopyToClipboard(anchorId)}
+        className="block h-9 w-9 shrink-0"
+      >
+        <AnchorIcon
+          aria-label={common.AnchorIconLabel}
+          className="fill-separator hover:fill-primary clickable m-0 h-full w-full cursor-pointer rounded p-0.5 transition-all"
+        />
+      </a>
+    </div>
   )
 }
 

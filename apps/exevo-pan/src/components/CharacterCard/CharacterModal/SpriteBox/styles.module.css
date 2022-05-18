@@ -1,0 +1,7 @@
+.highlighted {
+  filter: brightness(130%) saturate(80%);
+}
+
+.highlighted > div {
+  @apply bg-transparent;
+}

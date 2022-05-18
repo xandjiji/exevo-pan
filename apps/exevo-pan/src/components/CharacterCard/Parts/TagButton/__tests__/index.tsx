@@ -10,11 +10,11 @@ describe('<TagButton />', () => {
     const textElement = screen.getByText('Highlight your auction!')
     const wrapperElement = screen.getByTestId('test-element')
 
-    expect(textElement).toHaveStyle('opacity: 0')
+    expect(textElement).toHaveClass('opacity-0')
     userEvent.hover(wrapperElement)
-    expect(textElement).not.toHaveStyle('opacity: 0')
+    expect(textElement).not.toHaveClass('opacity-0')
     userEvent.unhover(wrapperElement)
-    expect(textElement).toHaveStyle('opacity: 0')
+    expect(textElement).toHaveClass('opacity-0')
   })
 
   test('should control its state by keyboard', () => {
@@ -22,10 +22,10 @@ describe('<TagButton />', () => {
 
     const textElement = screen.getByText('Highlight your auction!')
 
-    expect(textElement).toHaveStyle('opacity: 0')
+    expect(textElement).toHaveClass('opacity-0')
     userEvent.tab()
-    expect(textElement).not.toHaveStyle('opacity: 0')
+    expect(textElement).not.toHaveClass('opacity-0')
     userEvent.tab()
-    expect(textElement).toHaveStyle('opacity: 0')
+    expect(textElement).toHaveClass('opacity-0')
   })
 })

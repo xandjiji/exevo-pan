@@ -2,8 +2,10 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { Switch, RadioButton } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
+import SortIcon from 'assets/svgs/sort.svg'
 import { useAuctions } from '../../../contexts/useAuctions'
-import * as S from './styles'
+import { Button } from '../atoms'
+import styles from '../styles.module.css'
 
 const sortModes = ['Auction end', 'Level', 'Price', 'Price (bidded only)']
 const sortModesTranslationKey = {
@@ -13,7 +15,7 @@ const sortModesTranslationKey = {
   'Price (bidded only)': 'priceBidded',
 } as Record<string, string>
 
-const SortingDialog = (): JSX.Element => {
+const SortingDialog = () => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -26,11 +28,12 @@ const SortingDialog = (): JSX.Element => {
       trigger="click"
       placement="bottom"
       content={
-        <S.Dialog>
+        <div className="grid gap-3">
           <Switch
             active={descendingOrder}
             onClick={() => dispatch({ type: 'TOGGLE_DESCENDING_ORDER' })}
             aria-label={homepage.AuctionsGrid.descendingSwitchLabel}
+            className="mb-1"
           >
             {homepage.AuctionsGrid.descending}
           </Switch>
@@ -45,13 +48,15 @@ const SortingDialog = (): JSX.Element => {
               {homepage.AuctionsGrid.sortModes[sortModesTranslationKey[mode]]}
             </RadioButton>
           ))}
-        </S.Dialog>
+        </div>
       }
     >
-      <S.SortIcon
+      <Button
         aria-label={homepage.AuctionsGrid.sortingButtonLabel}
         aria-haspopup="dialog"
-      />
+      >
+        <SortIcon className={styles.icon} />
+      </Button>
     </Tooltip>
   )
 }

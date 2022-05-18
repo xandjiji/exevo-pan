@@ -14,7 +14,7 @@ export default function Statistics({
   statisticsData,
 }: {
   statisticsData: StatisticsData
-}): JSX.Element {
+}) {
   const { translations } = useTranslations()
 
   return (

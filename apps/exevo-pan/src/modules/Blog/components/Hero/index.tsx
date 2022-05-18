@@ -1,11 +1,20 @@
+import clsx from 'clsx'
 import { memo } from 'react'
 import Image from 'next/image'
-import * as S from './styles'
 import { HeroProps } from './types'
 
-const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => (
-  <S.Wrapper {...props}>
-    <S.ImageWrapper className="hero-image">
+const Hero = ({ title, subtitle, src, className, ...props }: HeroProps) => (
+  <div
+    className={clsx(
+      'inner-container relative flex items-center justify-center py-6 md:py-24',
+      className,
+    )}
+    {...props}
+  >
+    <div
+      className="hero-image absolute top-1/2 left-1/2 mix-blend-overlay"
+      style={{ transform: 'translate(-50%, -50%)' }}
+    >
       <Image
         src={src}
         alt={title}
@@ -15,15 +24,19 @@ const Hero = ({ title, subtitle, src, ...props }: HeroProps): JSX.Element => (
         priority
         unoptimized
       />
-    </S.ImageWrapper>
+    </div>
 
-    <S.TitleWrapper>
-      <S.Title className="hero-title">{title}</S.Title>
+    <div className="z-1 relative grid gap-4">
+      <h1 className="hero-title text-[32px] font-normal tracking-wide md:text-[48px]">
+        {title}
+      </h1>
       {!!subtitle && (
-        <S.Subtitle className="hero-subtitle">{subtitle}</S.Subtitle>
+        <span className="hero-subtitle text-s block whitespace-nowrap font-light italic tracking-wide opacity-90 md:text-base">
+          {subtitle}
+        </span>
       )}
-    </S.TitleWrapper>
-  </S.Wrapper>
+    </div>
+  </div>
 )
 
 export default memo(Hero)

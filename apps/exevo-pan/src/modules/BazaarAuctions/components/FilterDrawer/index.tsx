@@ -3,6 +3,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
 import {
   Drawer,
+  DrawerFooter,
   Chip,
   RangeSliderInput,
   SliderInput,
@@ -17,15 +18,11 @@ import FilterGroup from './FilterGroup'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
 import { isHistory } from './utils'
-import * as S from './styles'
+import * as S from './atoms'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
-const FilterDrawer = ({
-  open,
-  onClose,
-  ...props
-}: FilterDrawerProps): JSX.Element => {
+const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -64,19 +61,21 @@ const FilterDrawer = ({
   return (
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>
-        <S.HeadWrapper>
+        <div className="flex w-full flex-grow items-center justify-between">
           {homepage.FilterDrawer.title}
-          <S.ResetButton
+          <button
+            type="button"
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
             onClick={() => dispatch({ type: 'RESET_FILTERS' })}
+            className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow-md transition-all hover:shadow-lg active:shadow-inner disabled:invisible disabled:opacity-0"
           >
             {homepage.FilterDrawer.resetFilters}
             <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
-          </S.ResetButton>
-        </S.HeadWrapper>
+          </button>
+        </div>
       </Drawer.Head>
-      <S.DrawerBody>
+      <Drawer.Body className="grid grid-cols-1 gap-4">
         <FilterGroup
           label={homepage.FilterDrawer.labels.searchNickname}
           htmlFor="search-nickname-input"
@@ -241,7 +240,7 @@ const FilterDrawer = ({
         </FilterGroup>
 
         <FilterGroup label={homepage.FilterDrawer.labels.storeItems}>
-          <S.CheckboxWrapper>
+          <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="Training Dummy"
               checked={filterState.dummy}
@@ -305,7 +304,7 @@ const FilterDrawer = ({
                 )
               }
             />
-          </S.CheckboxWrapper>
+          </div>
         </FilterGroup>
 
         {/* @ ToDo: add htmlFor after rangeSlider refactor */}
@@ -587,7 +586,10 @@ const FilterDrawer = ({
           </FilterGroup>
         )}
 
-        <FilterGroup label={homepage.FilterDrawer.labels.misc}>
+        <FilterGroup
+          label={homepage.FilterDrawer.labels.misc}
+          style={{ border: 'none' }}
+        >
           <S.ChipWrapper>
             <Tooltip
               style={{ width: 280 }}
@@ -625,8 +627,8 @@ const FilterDrawer = ({
             </Tooltip>
           </S.ChipWrapper>
         </FilterGroup>
-      </S.DrawerBody>
-      <S.DrawerFooter />
+      </Drawer.Body>
+      <DrawerFooter className="flex-none" />
     </Drawer>
   )
 }

@@ -21,19 +21,15 @@ describe('<Header />', () => {
     const { container } = renderWithProviders(<Header />)
 
     const menuToggle = container.querySelector('button')
-    const menuElement = container.querySelector('ul')
 
     expect(menuToggle).not.toBeChecked()
-    expect(menuElement).toHaveAttribute('aria-expanded', 'false')
 
     userEvent.click(menuToggle as HTMLElement)
 
     expect(menuToggle).toBeChecked()
-    expect(menuElement).toHaveAttribute('aria-expanded', 'true')
 
     userEvent.click(menuToggle as HTMLElement)
 
     expect(menuToggle).not.toBeChecked()
-    expect(menuElement).toHaveAttribute('aria-expanded', 'false')
   })
 })

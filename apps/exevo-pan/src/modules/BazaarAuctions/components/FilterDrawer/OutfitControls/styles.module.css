@@ -1,0 +1,5 @@
+@media (min-width: 450px) {
+  .switchWrapper {
+    width: unset;
+  }
+}

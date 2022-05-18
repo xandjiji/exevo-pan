@@ -3,9 +3,8 @@
 exports[`<Listbox /> should render with no highlighted <Option /> 1`] = `
 <option
   aria-selected="false"
-  class="styles__Option-sc-1q1emy4-0 gHUAlZ"
+  class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
   id="listbox-item-0"
-  role="option"
   value="option A"
 >
   option A
@@ -15,9 +14,8 @@ exports[`<Listbox /> should render with no highlighted <Option /> 1`] = `
 exports[`<Listbox /> should render with no highlighted <Option /> 2`] = `
 <option
   aria-selected="false"
-  class="styles__Option-sc-1q1emy4-0 gHUAlZ"
+  class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
   id="listbox-item-1"
-  role="option"
   value="option B"
 >
   option B
@@ -27,9 +25,8 @@ exports[`<Listbox /> should render with no highlighted <Option /> 2`] = `
 exports[`<Listbox /> should render with no highlighted <Option /> 3`] = `
 <option
   aria-selected="false"
-  class="styles__Option-sc-1q1emy4-0 gHUAlZ"
+  class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
   id="listbox-item-2"
-  role="option"
   value="option C"
 >
   option C

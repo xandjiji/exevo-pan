@@ -4,12 +4,11 @@ import { Table } from 'components/Atoms'
 import { useOnScreen } from 'hooks'
 import CharacterInfoColumn from '../../CharacterInfoColumn'
 import { getTimeDiff } from './utils'
-import * as S from './styles'
 import { LastFragsProps } from './types'
 
 const PAGE_SIZE = 20
 
-const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
+const LastFrags = ({ fragsList, ...props }: LastFragsProps) => {
   const {
     translations: { war },
   } = useTranslations()
@@ -30,18 +29,19 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
   }, [onScreen])
 
   return (
-    <S.Wrapper>
-      <S.Table {...props}>
+    <div className="relative">
+      <Table {...props}>
         <Table.Element>
           <Table.Head>
             <Table.Row>
-              <Table.HeadColumn>
+              <Table.HeadColumn className="w-20 text-left">
                 {war.OverallGrid.LastFrags.killedHeadColumn}
               </Table.HeadColumn>
               <Table.HeadColumn
                 highlighted
                 desc
                 title={war.OverallGrid.LastFrags.characterHeadColumnTitle}
+                className="px-4 text-left"
               >
                 Character
               </Table.HeadColumn>
@@ -51,23 +51,27 @@ const LastFrags = ({ fragsList, ...props }: LastFragsProps): JSX.Element => {
           <Table.Body>
             {currentList.map((frag) => (
               <Table.Row key={`${frag.timeStamp}-${frag.nickname}`}>
-                <Table.Column>{`${getTimeDiff(frag.timeStamp)} ${
-                  war.OverallGrid.LastFrags.timeDiffSuffix
-                }`}</Table.Column>
+                <Table.Column className="w-20 text-left align-top text-xs leading-relaxed">{`${getTimeDiff(
+                  frag.timeStamp,
+                )} ${war.OverallGrid.LastFrags.timeDiffSuffix}`}</Table.Column>
                 <CharacterInfoColumn
                   nickname={frag.nickname}
                   level={frag.level}
                   vocation={frag.vocation}
+                  className="px-4 text-left"
                 />
               </Table.Row>
             ))}
           </Table.Body>
         </Table.Element>
-      </S.Table>
+      </Table>
       {!reachedMaxPage && (
-        <S.ObserverElement ref={ref as React.RefObject<HTMLDivElement>} />
+        <div
+          className="z-1 absolute bottom-[440px] left-0"
+          ref={ref as React.RefObject<HTMLDivElement>}
+        />
       )}
-    </S.Wrapper>
+    </div>
   )
 }
 

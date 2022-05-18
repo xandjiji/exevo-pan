@@ -1,8 +1,4 @@
-import { ReactElement, JSXElementConstructor } from 'react'
-
-export interface LinkProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  children: ReactElement<any, string | JSXElementConstructor<any>>
+export type LinkProps = JSX.IntrinsicElements['a'] & {
   href: string
   exact?: boolean
 }

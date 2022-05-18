@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useState, useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
@@ -7,27 +8,31 @@ import { useTheme } from 'contexts/useTheme'
 import { Chip } from 'components/Atoms'
 import { formatNumberWithCommas, fillArrayUntil } from 'utils'
 import Summary from './Summary'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { ChartProps } from './types'
+
+const DAYS_IN_A_WEEK = 7
+const DAYS_IN_A_MONTH = 28
 
 const Chart = ({
   totalLabel,
   yesterdayLabel,
   tooltipLabel,
   chartData,
+  className,
   ...props
-}: ChartProps): JSX.Element => {
+}: ChartProps) => {
   const {
     translations: { statistics, common },
   } = useTranslations()
 
   const { colors } = useTheme()
 
-  const [dataSize, setDataSize] = useState(7)
+  const [dataSize, setDataSize] = useState(DAYS_IN_A_WEEK)
 
   const { current, lastMonth: originalLastMonth } = chartData
   const lastMonth = useMemo(
-    () => fillArrayUntil(originalLastMonth, 28),
+    () => fillArrayUntil(originalLastMonth, DAYS_IN_A_MONTH),
     [originalLastMonth],
   )
   const todayValue = lastMonth[lastMonth.length - 1]
@@ -112,8 +117,15 @@ const Chart = ({
   )
 
   return (
-    <S.Wrapper {...props}>
-      <S.SummaryWrapper>
+    <section
+      className={clsx(
+        styles.wrapper,
+        'card w-full py-5 pr-4 pl-[26px] transition-colors',
+        className,
+      )}
+      {...props}
+    >
+      <div className="mb-5 flex items-center gap-12">
         <Summary
           title={totalLabel}
           value={current}
@@ -125,21 +137,27 @@ const Chart = ({
           percentage={(Math.abs(dailyDifference) / yesterdayValue) * 100}
           positive={dailyDifference > 0}
         />
-      </S.SummaryWrapper>
+      </div>
 
-      <S.ChartWrapper>
+      <div className="h-[260px] w-full">
         <Line data={chartDataObject} options={options} />
-      </S.ChartWrapper>
+      </div>
 
-      <S.ChipWrapper>
-        <Chip overrideStatus={dataSize === 28} onClick={() => setDataSize(28)}>
-          28 {statistics.Days}
+      <div className="mt-[22px] flex gap-2">
+        <Chip
+          overrideStatus={dataSize === DAYS_IN_A_MONTH}
+          onClick={() => setDataSize(DAYS_IN_A_MONTH)}
+        >
+          {DAYS_IN_A_MONTH} {statistics.Days}
         </Chip>
-        <Chip overrideStatus={dataSize === 7} onClick={() => setDataSize(7)}>
-          7 {statistics.Days}
+        <Chip
+          overrideStatus={dataSize === DAYS_IN_A_WEEK}
+          onClick={() => setDataSize(DAYS_IN_A_WEEK)}
+        >
+          {DAYS_IN_A_WEEK} {statistics.Days}
         </Chip>
-      </S.ChipWrapper>
-    </S.Wrapper>
+      </div>
+    </section>
   )
 }
 

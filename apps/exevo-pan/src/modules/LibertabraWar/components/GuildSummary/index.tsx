@@ -1,5 +1,6 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import * as S from './styles'
+import ExternalIcon from 'assets/svgs/external.svg'
 import { GuildSummaryProps } from './types'
 
 const GuildSummary = ({
@@ -10,30 +11,47 @@ const GuildSummary = ({
   label,
   winning,
   ...props
-}: GuildSummaryProps): JSX.Element => {
+}: GuildSummaryProps) => {
   const {
     translations: { war },
   } = useTranslations()
 
   return (
-    <S.Wrapper {...props}>
-      <S.GuildName>
+    <div {...props}>
+      <h4 className="text-onSurface relative mx-auto mb-2 w-fit text-base font-normal -tracking-wider lg:text-2xl">
         {guildName}
-        <S.Link target="_blank" rel="noreferrer noopener" href={href}>
-          <S.ExternalIcon />
+        <a
+          target="_blank"
+          rel="noreferrer noopener"
+          href={href}
+          className="text-none absolute top-1/2 left-full lg:left-[calc(100%+6px)]"
+          style={{ transform: 'translateY(-50%)' }}
+        >
+          <ExternalIcon className="fill-onSurface clickable h-7 w-7 rounded p-0.5" />
           {war.GuildSummary.linkText}
-        </S.Link>
-      </S.GuildName>
-      <S.DisplayNumber winning={winning}>
+        </a>
+      </h4>
+      <span
+        className={clsx(
+          'relative text-[44px] font-bold tracking-widest lg:text-[80px]',
+          winning ? 'text-green' : 'text-red',
+        )}
+      >
         {displayValue}
         {!!diffText && (
-          <S.Diff title={`${diffText} ${war.GuildSummary.diffTitleSuffix}`}>
+          <span
+            className="bg-alert text-tsm lg:text-l absolute top-1/2 left-full rounded py-1 px-2 text-black shadow-md lg:ml-4"
+            style={{ transform: 'translateY(-50%)' }}
+            title={`${diffText} ${war.GuildSummary.diffTitleSuffix}`}
+          >
             {diffText}
-          </S.Diff>
+          </span>
         )}
-      </S.DisplayNumber>
-      <S.Label>{label}</S.Label>
-    </S.Wrapper>
+      </span>
+      <span className="text-onSurface block text-xs font-light uppercase tracking-widest lg:text-base">
+        {label}
+      </span>
+    </div>
   )
 }
 

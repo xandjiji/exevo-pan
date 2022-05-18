@@ -1,13 +1,15 @@
 import { useEffect, useRef } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
+import BaseCharacterCard, { CardSkeleton } from 'components/CharacterCard'
 import { useForm } from '../../contexts/Form'
-import * as S from './styles'
+import styles from './styles.module.css'
 
 const HEADER_OFFSET = 60
 const MAX_WIDTH = 768
 
-const CharacterCard = (): JSX.Element | null => {
+const CharacterCard = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -32,16 +34,19 @@ const CharacterCard = (): JSX.Element | null => {
 
   if (!finished) {
     return (
-      <S.Wrapper ref={wrapperRef}>
+      <div
+        ref={wrapperRef}
+        className="sticky top-[76px] flex flex-col gap-4 pt-4 md:pt-0"
+      >
         {selectedCharacter ? (
-          <S.CharacterCard
+          <BaseCharacterCard
             expandable={currentStep === 0}
             key={selectedCharacter.id}
             characterData={selectedCharacter}
-            smaller={currentStep >= 1}
+            className={clsx(currentStep >= 1 && styles.miniCard)}
           />
         ) : (
-          <S.CardSkeleton />
+          <CardSkeleton className={styles.skeleton} />
         )}
         {currentStep < 2 && (
           <Button
@@ -54,7 +59,7 @@ const CharacterCard = (): JSX.Element | null => {
             {advertise.NextButton}
           </Button>
         )}
-      </S.Wrapper>
+      </div>
     )
   }
   return null

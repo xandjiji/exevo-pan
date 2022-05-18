@@ -1,23 +1,27 @@
 import { memo } from 'react'
-import * as S from './styles'
+import clsx from 'clsx'
 import { OptionProps } from './types'
 
 const Option = ({
+  className,
   children,
   value = children,
   highlighted = false,
   onClick,
   ...props
-}: OptionProps): JSX.Element => (
-  <S.Option
-    role="option"
+}: OptionProps) => (
+  <option
+    className={clsx(
+      'text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors',
+      highlighted ? 'bg-primaryVariant' : 'bg-surface',
+      className,
+    )}
     value={value}
-    highlighted={highlighted}
     onClick={() => onClick?.({ name: children, value })}
     {...props}
   >
     {children}
-  </S.Option>
+  </option>
 )
 
 export default memo(Option)

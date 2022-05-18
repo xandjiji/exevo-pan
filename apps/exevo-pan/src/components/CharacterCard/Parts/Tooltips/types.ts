@@ -23,3 +23,7 @@ export interface ListedItemsProps {
   fullList: string[]
   characterSet: Set<string>
 }
+
+export type IconProps = {
+  icon: React.ReactElement
+} & JSX.IntrinsicElements['svg']

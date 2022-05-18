@@ -1,14 +1,11 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
+import clsx from 'clsx'
 import { Chip } from 'components/Atoms'
 import { getCharacterTags } from './utils'
-import { Wrapper } from './styles'
 import { SpecialTagsProps } from './types'
 
-const SpecialTags = ({
-  character,
-  ...props
-}: SpecialTagsProps): JSX.Element | null => {
+const SpecialTags = ({ character, className, ...props }: SpecialTagsProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -18,11 +15,11 @@ const SpecialTags = ({
   if (tags.length === 0) return null
 
   return (
-    <Wrapper {...props}>
+    <div className={clsx('flex flex-wrap gap-2', className)} {...props}>
       {tags.map((tag) => (
         <Chip key={tag}>{common.CharacterCard.SpecialTags[tag] ?? tag}</Chip>
       ))}
-    </Wrapper>
+    </div>
   )
 }
 

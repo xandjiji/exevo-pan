@@ -1,9 +1,21 @@
 import { memo } from 'react'
+import clsx from 'clsx'
 import { vocation } from 'shared-utils/dist/vocations'
-import * as S from './styles'
+import CharacterMiniCard from '../../../CharacterMiniCard'
 import { HeadProps } from './types'
 
+export const HeadWrapper = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div
+    className={clsx('mb-4 flex items-start gap-1.5', className)}
+    {...props}
+  />
+)
+
 const Head = ({
+  highlighted = false,
   id,
   nickname,
   outfitId,
@@ -11,9 +23,11 @@ const Head = ({
   vocationId,
   serverName,
   children,
-}: HeadProps): JSX.Element => (
-  <S.Head>
-    <S.CharacterMiniCard
+}: HeadProps) => (
+  <HeadWrapper>
+    <CharacterMiniCard
+      className="mr-auto"
+      highlighted={highlighted}
       outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
       characterData={{
         name: nickname,
@@ -25,7 +39,7 @@ const Head = ({
     />
 
     {children}
-  </S.Head>
+  </HeadWrapper>
 )
 
 export default memo(Head)

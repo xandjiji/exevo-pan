@@ -1,34 +1,44 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
+import clsx from 'clsx'
+import GithubIcon from 'assets/svgs/github.svg'
 import { links } from 'Constants'
-import * as S from './styles'
 
 const DrawerFooter = ({
+  className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+}: JSX.IntrinsicElements['footer']) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
-    <S.Wrapper {...props}>
-      <S.RepositoryLink
+    <footer
+      className={clsx(
+        'inner-padding bg-primary text-s text-onPrimary flex h-[60px] items-center py-3 font-light',
+        className,
+      )}
+      {...props}
+    >
+      <a
+        className="text-none"
         href={links.GITHUB_REPOSITORY}
         target="_blank"
         rel="noreferrer noopener external"
       >
-        <S.GithubIcon />
+        <GithubIcon className="fill-onPrimary clickable mr-4 rounded-full p-0" />
         {common.RepoLinkText}
-      </S.RepositoryLink>
+      </a>
       {common.MadeBy}
-      <S.ProfileLink
+      <a
+        className="text-s text-onPrimary ml-[3px] font-normal tracking-wider"
         href={links.GITHUB_PROFILE}
         target="_blank"
         rel="noopener noreferrer author external"
       >
         xandjiji
-      </S.ProfileLink>
-    </S.Wrapper>
+      </a>
+    </footer>
   )
 }
 

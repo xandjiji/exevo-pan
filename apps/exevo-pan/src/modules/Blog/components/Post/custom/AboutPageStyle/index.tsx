@@ -1,8 +1,7 @@
-const AboutPageStyle = (): JSX.Element => (
+const AboutPageStyle = () => (
   <style>{`
 main h2 {
-    color: var(--primary);
-    filter: brightness(130%);
+    color: var(--primaryHighlight);
 }
 
 .hero-image {

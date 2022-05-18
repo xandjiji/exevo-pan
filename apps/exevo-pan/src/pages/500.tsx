@@ -5,7 +5,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { common, error } from 'locales'
 
-export default function Custom404(): JSX.Element {
+export default function Custom404() {
   const { translations } = useTranslations()
 
   return (

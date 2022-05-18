@@ -1,24 +1,44 @@
 import { useTranslations } from 'contexts/useTranslation'
-import * as S from './styles'
+import clsx from 'clsx'
+import ErrorIcon from 'assets/svgs/error.svg'
 import { ErrorStateProps } from './types'
 
-const ErrorState = ({ title, paragraphs }: ErrorStateProps): JSX.Element => {
+const Section = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
+  <div className={clsx('flex-grow py-4', className)} {...props} />
+)
+
+const ErrorState = ({ title, paragraphs }: ErrorStateProps) => {
   const {
-    translations: { error },
+    translations: { common },
   } = useTranslations()
 
   return (
-    <S.Wrapper>
-      <S.Top>
-        <S.Title>{title}</S.Title>
-      </S.Top>
-      <S.Bottom>
-        <S.ErrorIcon role="alert" aria-label={error.ErrorLabel} />
+    <main className="flex flex-grow flex-col transition-colors">
+      <Section className="bg-surface flex items-end justify-center">
+        <span
+          className="text-primary text-[64px] font-bold"
+          style={{ letterSpacing: '8px' }}
+        >
+          {title}
+        </span>
+      </Section>
+      <Section className="bg-primary text-center">
+        <ErrorIcon
+          role="alert"
+          aria-label={common.error.ErrorLabel}
+          className="fill-onPrimary mb-8 h-32 w-32"
+        />
         {paragraphs?.map((p) => (
-          <S.Paragraph key={p}>{p}</S.Paragraph>
+          <p
+            key={p}
+            className="text-s text-onPrimary mb-2"
+            style={{ letterSpacing: '1.5px' }}
+          >
+            {p}
+          </p>
         ))}
-      </S.Bottom>
-    </S.Wrapper>
+      </Section>
+    </main>
   )
 }
 

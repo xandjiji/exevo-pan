@@ -1,14 +1,19 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { Link, Switch, CtaButton } from 'components/Atoms/'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
+import Logo from 'assets/logo.png'
+import ThemeIcon from 'assets/svgs/moon.svg'
+import MenuButton from './MenuButton'
+import HeaderIcon from './HeaderIcon'
 import LanguagePicker from './LanguagePicker'
 import { NavItems } from './routes'
-import * as S from './styles'
 
 const heading = {
   [routes.HOME]: 'home',
@@ -20,8 +25,9 @@ const heading = {
 }
 
 const Header = ({
+  className,
   ...props
-}: React.HTMLAttributes<HTMLDivElement>): JSX.Element => {
+}: React.HTMLAttributes<HTMLDivElement>) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -46,46 +52,63 @@ const Header = ({
 
   return (
     <>
-      <S.Wrapper data-active={shouldMenuOverlap} {...props}>
-        <S.Nav>
-          <S.MenuButton
-            type="button"
-            role="switch"
+      <header
+        className={clsx(
+          'bg-primary inner-container custom-scrollbar after:z-1 from-primary sticky top-0 flex h-[60px] w-full items-center justify-between overflow-x-auto to-transparent shadow-md transition-colors after:pointer-events-none after:fixed after:top-0 after:right-0 after:hidden after:h-[60px] after:w-8 after:bg-gradient-to-l md:after:block',
+          className,
+        )}
+        style={{ zIndex: shouldMenuOverlap ? 75 : 71 }}
+        {...props}
+      >
+        <nav className="mr-6 flex shrink-0 items-center">
+          <MenuButton
             aria-checked={menuOpen}
             aria-label={
               common.Header[menuOpen ? 'closeMenuLabel' : 'openMenuLabel']
             }
             onClick={toggleMenu}
-          >
-            <S.MenuIcon />
-          </S.MenuButton>
+          />
+
           <NextLink href={routes.HOME}>
             <a aria-label={accessibleLogoName}>
-              <S.LogoWrapper>
-                {pageTitle && <S.H1>{pageTitle}</S.H1>}
-                <S.ExevoPanLogo
+              <div className="mr-4 hidden shrink-0 cursor-pointer items-center justify-center md:flex">
+                {pageTitle && <h1 className="hidden">{pageTitle}</h1>}
+                <Image
                   unoptimized
                   aria-label={common.Header.logoLabel}
                   alt={accessibleLogoName}
+                  src={Logo}
                 />
-              </S.LogoWrapper>
+              </div>
             </a>
           </NextLink>
-          <S.Ul aria-expanded={menuOpen}>
+
+          <ul
+            className={clsx(
+              menuOpen ? 'left-0' : '-left-full opacity-0',
+              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-4 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
+            )}
+          >
             {NavItems.map(({ title, href, exact, icon }) => (
-              <S.Li key={title}>
-                <Link href={href} exact={exact}>
+              <li key={title}>
+                <Link
+                  className="clickable currentpage:shadow-inner flex items-center rounded-lg py-2 px-4"
+                  href={href}
+                  exact={exact}
+                >
                   <>
-                    {icon}
-                    <h2>{common.Header.nav[title]}</h2>
+                    <HeaderIcon icon={icon} spaced />
+                    <h2 className="text-s text-onPrimary whitespace-nowrap font-normal tracking-wider">
+                      {common.Header.nav[title]}
+                    </h2>
                   </>
                 </Link>
-              </S.Li>
+              </li>
             ))}
-          </S.Ul>
-        </S.Nav>
+          </ul>
+        </nav>
 
-        <S.RightWrapper suppressHydrationWarning>
+        <div className="flex items-center gap-4" suppressHydrationWarning>
           <LanguagePicker
             isOpen={languageOpen}
             setLanguageOpen={setLanguageOpen}
@@ -94,14 +117,20 @@ const Header = ({
             <Switch
               active={theme === 'dark'}
               onClick={toggleTheme}
-              icon={<S.MoonIcon />}
+              icon={<ThemeIcon />}
               aria-label={common.Header.themeSwitch}
             />
           )}
           <CtaButton />
-        </S.RightWrapper>
-      </S.Wrapper>
-      <S.Backdrop
+        </div>
+      </header>
+
+      <button
+        className={clsx(
+          'z-74 bg-backdrop fixed top-0 left-0 h-screen w-screen transition-opacity md:hidden',
+          !menuOpen && 'pointer-events-none opacity-0',
+        )}
+        type="button"
         aria-hidden={!menuOpen}
         aria-label={common.Header.closeMenuLabel}
         onClick={toggleMenu}

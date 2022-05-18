@@ -35,7 +35,7 @@ const setup = (initialIndex = 0) => {
     currentSelected = index
 
     assertCurrentSelected()
-    expect(screen.getByRole('tabpanel')).toHaveTextContent(
+    expect(screen.getAllByRole('tabpanel')[index]).toHaveTextContent(
       `Item ${index} content`,
     )
   }
@@ -142,7 +142,7 @@ describe('<Tabs />', () => {
         )
       })
 
-      expect(screen.getByRole('tabpanel')).toHaveTextContent(
+      expect(screen.getAllByRole('tabpanel')[newActive]).toHaveTextContent(
         `item ${newActive}`,
       )
     }

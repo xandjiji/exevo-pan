@@ -1,0 +1,7 @@
+.hoverable td:first-child > div:first-child > div:first-child {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hoverable:hover td:first-child > div:first-child > div:first-child {
+  transform: translateX(3px);
+}

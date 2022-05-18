@@ -51,9 +51,8 @@ describe('<Listbox />', () => {
     expect(optionA).toMatchInlineSnapshot(`
       <option
         aria-selected="false"
-        class="styles__Option-sc-1q1emy4-0 gHUAlZ"
+        class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
         id="listbox-item-0"
-        role="option"
         value="option A"
       >
         option A
@@ -62,9 +61,8 @@ describe('<Listbox />', () => {
     expect(optionB).toMatchInlineSnapshot(`
       <option
         aria-selected="false"
-        class="styles__Option-sc-1q1emy4-0 gfiWWV"
+        class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-primaryVariant"
         id="listbox-item-1"
-        role="option"
         value="option B"
       >
         option B
@@ -73,9 +71,8 @@ describe('<Listbox />', () => {
     expect(optionC).toMatchInlineSnapshot(`
       <option
         aria-selected="false"
-        class="styles__Option-sc-1q1emy4-0 gHUAlZ"
+        class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
         id="listbox-item-2"
-        role="option"
         value="option C"
       >
         option C
@@ -96,9 +93,8 @@ describe('<Listbox />', () => {
     expect(optionA).toMatchInlineSnapshot(`
       <option
         aria-selected="false"
-        class="styles__Option-sc-1q1emy4-0 gHUAlZ"
+        class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
         id="listbox-item-0"
-        role="option"
         value="option A"
       >
         option A
@@ -107,9 +103,8 @@ describe('<Listbox />', () => {
     expect(optionB).toMatchInlineSnapshot(`
       <option
         aria-selected="false"
-        class="styles__Option-sc-1q1emy4-0 gHUAlZ"
+        class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
         id="listbox-item-1"
-        role="option"
         value="option B"
       >
         option B
@@ -118,9 +113,8 @@ describe('<Listbox />', () => {
     expect(optionC).toMatchInlineSnapshot(`
       <option
         aria-selected="false"
-        class="styles__Option-sc-1q1emy4-0 gfiWWV"
+        class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-primaryVariant"
         id="listbox-item-2"
-        role="option"
         value="option C"
       >
         option C

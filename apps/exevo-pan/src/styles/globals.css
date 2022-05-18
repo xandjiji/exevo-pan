@@ -1,0 +1,195 @@
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .grid-background {
+    background: rgb(var(--primaryVariantHighlight));
+    background-image: linear-gradient(
+        rgb(var(--primaryVariant)) 2px,
+        transparent 2px
+      ),
+      linear-gradient(90deg, rgb(var(--primaryVariant)) 2px, transparent 2px),
+      linear-gradient(rgb(var(--primaryVariant)) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(var(--primaryVariant)) 1px, transparent 1px);
+    background-size: 50px 50px, 50px 50px, 10px 10px, 10px 10px;
+    background-position: -2px -2px, -2px -2px, -1px -1px, -1px -1px;
+    @apply transition-colors;
+  }
+
+  .loading-spinner {
+    @apply before:bg-primary after:bg-background relative h-6 w-6 rounded-full transition-opacity before:absolute before:top-0 before:left-0 before:h-1/2 before:w-1/2 before:rounded-tl-full after:absolute after:top-0 after:left-0 after:bottom-0 after:right-0 after:m-auto after:h-3/4 after:w-3/4 after:rounded-full;
+
+    background: linear-gradient(
+      to right,
+      rgb(var(--primary)) 10%,
+      rgba(255, 255, 255, 0) 42%
+    );
+    animation: spinAnimation 1.4s infinite ease-out;
+  }
+
+  .animated-background {
+    background: linear-gradient(
+      270deg,
+      rgb(var(--primaryVariantHighlight)),
+      rgb(var(--primaryVariant))
+    );
+    background-size: 800% 800%;
+    animation: animatedBg 3s ease-out infinite;
+  }
+
+  .card {
+    @apply bg-surface text-onSurface rounded p-3 text-xs font-normal shadow-md;
+  }
+
+  .code {
+    @apply bg-background text-tsm text-onSurface inline-block cursor-text rounded-md py-1.5 px-3;
+    font-family: monospace;
+  }
+
+  .clickable {
+    @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
+  }
+
+  .container {
+    @apply mx-5 md:mx-10 lg:mx-24 xl:mx-44;
+  }
+
+  .negative-container {
+    @apply -mx-5 md:-mx-10 lg:-mx-24 xl:-mx-44;
+  }
+
+  .inner-container {
+    @apply px-5 md:px-10 lg:px-24 xl:px-44;
+  }
+
+  .inner-padding {
+    @apply px-5 md:px-10;
+  }
+
+  .custom-scrollbar {
+    scrollbar-color: rgb(var(--primaryVariant)) transparent;
+    scrollbar-width: thin;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    @apply h-1.5 w-1.5 rounded-sm bg-transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    @apply bg-primaryVariant rounded-sm;
+  }
+}
+
+@layer utilities {
+  .styled-link a {
+    @apply text-primaryHighlight text-s font-normal;
+  }
+
+  .invisible-caption caption {
+    @apply sr-only;
+  }
+
+  /* @ ToDo: remove these once `brightness` utility is fixed */
+  .highlight-10 {
+    filter: brightness(110%);
+  }
+
+  .highlight-30 {
+    filter: brightness(130%);
+  }
+}
+
+:root {
+  --background: 238 238 238;
+  --surface: 255 255 255;
+  --onSurface: 0 0 0;
+  --separator: 180 180 180;
+  --primary: 63 81 181;
+  --primaryHighlight: 82 105 235;
+  --darkerPrimary: 50 61 142;
+  --onPrimary: 255 255 255;
+  --primaryVariant: 197 202 233;
+  --primaryVariantHighlight: 231 232 238;
+  --green: 55 119 18;
+  --greenHighlight: 71 155 23;
+  --red: 197 19 19;
+  --alert: 249 238 193;
+  --battleGreen: 67 182 0;
+  --battleYellow: 255 221 0;
+  --kwai: 255 119 5;
+  --kwaiSurface: 255 247 240;
+  --kwaiVariant: 255 198 150;
+  --black: 0 0 0;
+}
+
+html[data-theme='dark'] {
+  --background: 32 34 37;
+  --surface: 54 57 63;
+  --onSurface: 255 255 255;
+  --separator: 114 118 125;
+  --primary: 139 99 227;
+  --primaryHighlight: 230 165 255;
+  --darkerPrimary: 88 31 155;
+  --onPrimary: 255 255 255;
+  --primaryVariant: 102 75 128;
+  --primaryVariantHighlight: 120 105 128;
+  --green: 90 153 53;
+  --greenHighlight: 117 199 69;
+  --red: 255 91 91;
+  --alert: 249 238 193;
+  --battleGreen: 67 182 0;
+  --battleYellow: 255 221 0;
+  --kwai: 255 119 5;
+  --kwaiSurface: 69 61 60;
+  --kwaiVariant: 153 95 46;
+  --black: 0 0 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  @apply custom-scrollbar text-onSurface bg-background;
+}
+
+::selection {
+  @apply text-onSurface bg-primaryVariant;
+}
+
+::before,
+::after {
+  --tw-content: '';
+}
+
+main {
+  @apply flex-grow;
+}
+
+svg {
+  @apply transition-colors;
+}
+
+@keyframes spinAnimation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes animatedBg {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

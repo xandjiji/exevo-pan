@@ -14,7 +14,7 @@ export default function Highscores({
   statisticsData,
 }: {
   statisticsData: StatisticsData
-}): JSX.Element {
+}) {
   const { translations } = useTranslations()
 
   return (

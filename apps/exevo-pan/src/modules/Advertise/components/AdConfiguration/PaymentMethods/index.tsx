@@ -3,12 +3,12 @@ import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import MethodButton from './MethodButton'
 import { useForm } from '../../../contexts/Form'
-import * as S from './styles'
+import styles from './styles.module.css'
 
-const PaymentMethods = (): JSX.Element => {
+const PaymentMethods = () => {
   const { paymentMethod, dispatch } = useForm()
   return (
-    <S.Wrapper>
+    <div className={styles.wrapper}>
       <MethodButton
         active={paymentMethod === 'TIBIA_COINS'}
         onClick={() =>
@@ -25,7 +25,7 @@ const PaymentMethods = (): JSX.Element => {
       >
         Pix
       </MethodButton>
-    </S.Wrapper>
+    </div>
   )
 }
 

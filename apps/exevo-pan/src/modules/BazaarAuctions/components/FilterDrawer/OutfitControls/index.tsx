@@ -1,23 +1,30 @@
-import { Checkbox } from 'components/Atoms'
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+import { Switch, Checkbox } from 'components/Atoms'
+import clsx from 'clsx'
 import { useFilters } from '../../../contexts/useFilters'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { OutfitControlsProps } from './types'
 
-const OutfitControls = ({
-  disableAddons = false,
-}: OutfitControlsProps): JSX.Element => {
+const OutfitControls = ({ disableAddons = false }: OutfitControlsProps) => {
   const { filterState, updateFilters, dispatch } = useFilters()
 
   const firstAddonSelected = filterState.addon === 1 || filterState.addon === 3
   const secondAddonSelected = filterState.addon === 2 || filterState.addon === 3
 
   return (
-    <S.Wrapper>
-      <S.SwitchWrapper onClick={() => updateFilters('sex', !filterState.sex)}>
+    <div className="mt-1.5 mb-2 flex w-full flex-wrap items-center gap-3.5">
+      <div
+        onClick={() => updateFilters('sex', !filterState.sex)}
+        className={clsx(
+          'text-tsm mr-4 flex w-full cursor-pointer items-center gap-2',
+          styles.switchWrapper,
+        )}
+      >
         Male
-        <S.Switch active={filterState.sex} />
+        <Switch active={filterState.sex} />
         Female
-      </S.SwitchWrapper>
+      </div>
 
       <Checkbox
         label="Addon 1"
@@ -31,7 +38,7 @@ const OutfitControls = ({
         checked={disableAddons || secondAddonSelected}
         onClick={() => dispatch({ type: 'TOGGLE_ADDON', value: 2 })}
       />
-    </S.Wrapper>
+    </div>
   )
 }
 

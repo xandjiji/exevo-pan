@@ -16,8 +16,8 @@ describe('<FadeImage />', () => {
 
     const imgElement = screen.getByAltText('alt-text')
 
-    expect(imgElement).toHaveStyle('opacity: 0')
+    expect(imgElement).toHaveClass('opacity-0')
     fireEvent.load(imgElement)
-    expect(imgElement).toHaveStyle('opacity: 1')
+    expect(imgElement).not.toHaveClass('opacity-0')
   })
 })

@@ -7,8 +7,9 @@ import {
   isValidElement,
   cloneElement,
 } from 'react'
+import clsx from 'clsx'
 import useIds from './useIds'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { TabsProps, PanelProps } from './types'
 
 const Group = forwardRef(
@@ -17,12 +18,13 @@ const Group = forwardRef(
       activeIndex: indexProp,
       initialActive = 0,
       onChange,
+      className,
       children,
       'aria-label': ariaLabelProp,
       ...props
     }: TabsProps,
     ref,
-  ): JSX.Element => {
+  ) => {
     const [innerIndex, setInnerIndex] = useState(indexProp ?? initialActive)
     const activeIndex = indexProp ?? innerIndex
 
@@ -47,14 +49,25 @@ const Group = forwardRef(
     }, [activeIndex, getTabId])
 
     return (
-      <S.Wrapper {...props} ref={ref as React.RefObject<HTMLDivElement>}>
-        <S.TabWrapper aria-label={ariaLabelProp} role="tablist">
+      <div
+        className={clsx('grid w-full gap-3 overflow-hidden', className)}
+        {...props}
+        ref={ref as React.RefObject<HTMLDivElement>}
+      >
+        <div
+          role="tablist"
+          aria-label={ariaLabelProp}
+          className="bg-surface custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
+          style={{ borderBottom: 'solid 1px rgb(var(--separator))' }}
+        >
           {Children.map(children, (child, childIndex) => {
             if (!isValidElement(child)) return child
             const { label } = child.props as PanelProps
 
+            const isSelected = childIndex === activeIndex
+
             return (
-              <S.Tab
+              <button
                 type="button"
                 role="tab"
                 aria-controls={getPanelId(childIndex)}
@@ -62,12 +75,25 @@ const Group = forwardRef(
                 tabIndex={0}
                 aria-selected={childIndex === activeIndex}
                 onClick={() => handleClick(childIndex)}
+                className={clsx(
+                  styles.iconStyle,
+                  'text-tsm flex cursor-pointer gap-1.5 py-2 px-4 font-bold tracking-wider transition-colors',
+                  isSelected
+                    ? 'text-primaryHighlight child:fill-primaryHighlight'
+                    : 'text-separator hover:bg-primaryVariantHighlight hover:text-onSurface child:fill-separator child:hover:fill-onSurface',
+                )}
+                style={{
+                  borderBottom: 'solid 2px',
+                  borderColor: isSelected
+                    ? 'var(--primaryHighlight)'
+                    : 'transparent',
+                }}
               >
                 {label}
-              </S.Tab>
+              </button>
             )
           })}
-        </S.TabWrapper>
+        </div>
 
         {Children.map(children, (child, childIndex) => {
           if (!isValidElement(child)) return child
@@ -79,15 +105,20 @@ const Group = forwardRef(
             label: undefined,
           })
         })}
-      </S.Wrapper>
+      </div>
     )
   },
 )
 
-const Panel = ({ active, children, ...props }: PanelProps): JSX.Element => (
-  <S.Panel role="tabpanel" data-active={active} {...props}>
+const Panel = ({ active, children, className, ...props }: PanelProps) => (
+  <div
+    role="tabpanel"
+    className={clsx('w-full', !active && 'hidden', className)}
+    data-active={active}
+    {...props}
+  >
     {active && children}
-  </S.Panel>
+  </div>
 )
 
 export default { Group, Panel }

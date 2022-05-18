@@ -1,12 +1,12 @@
 import { useTranslations } from 'contexts/useTranslation'
+import ReceiptIcon from 'assets/svgs/check.svg'
 import { useForm } from '../../contexts/Form'
 import TransactionId from './TransactionId'
 import CoinsPayment from './CoinsPayment'
 import PixPayment from './PixPayment'
 import Summary from '../Summary'
-import * as S from './styles'
 
-const PaymentDetails = (): JSX.Element => {
+const PaymentDetails = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -14,29 +14,39 @@ const PaymentDetails = (): JSX.Element => {
   const { uuid, email, paymentMethod } = useForm()
 
   return (
-    <S.Wrapper>
-      <S.TransactionInformation>
-        <S.Title>
-          <S.ReceiptIcon aria-label={advertise.PaymentDetails.titleIconLabel} />
+    <div className="grid gap-6">
+      <section className="card grid gap-6 p-4">
+        <h2
+          className="border-separator -mb-1 flex items-center border-solid pb-1 text-2xl"
+          style={{ borderWidth: 0, borderBottomWidth: 1 }}
+        >
+          <ReceiptIcon
+            aria-label={advertise.PaymentDetails.titleIconLabel}
+            className="fill-primary mr-1.5"
+          />
           {advertise.PaymentDetails.title}
-        </S.Title>
+        </h2>
         <TransactionId>{uuid}</TransactionId>
 
-        <S.Text>
+        <p className="text-s leading-relaxed">
           {advertise.PaymentDetails.emailText1}{' '}
-          <S.Strong>{email.value}</S.Strong>{' '}
+          <strong className="text-primaryHighlight tracking-wider">
+            {email.value}
+          </strong>{' '}
           {advertise.PaymentDetails.emailText2}{' '}
           <span role="img" aria-label={advertise.PaymentDetails.emojiLabel}>
             😄
           </span>
-        </S.Text>
+        </p>
 
         {paymentMethod === 'TIBIA_COINS' ? <CoinsPayment /> : <PixPayment />}
 
-        <S.Small>{advertise.PaymentDetails.smallDisclaimer}</S.Small>
-      </S.TransactionInformation>
+        <span className="text-xs tracking-wide">
+          {advertise.PaymentDetails.smallDisclaimer}
+        </span>
+      </section>
       <Summary />
-    </S.Wrapper>
+    </div>
   )
 }
 

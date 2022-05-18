@@ -7,12 +7,13 @@ import {
   cloneElement,
   memo,
 } from 'react'
-import * as S from './styles'
+import clsx from 'clsx'
 import { ListboxProps } from './types'
 import { indexToId } from './utils'
 
 const Listbox = (
   {
+    className,
     children,
     highlightedIndex,
     selectedIndex = new Set<number>([]),
@@ -20,16 +21,21 @@ const Listbox = (
     ...props
   }: ListboxProps,
   refProp: Ref<HTMLDivElement>,
-): JSX.Element => {
+) => {
   const currentActiveDescendantId = useMemo(
     () => indexToId(highlightedIndex, props.id),
     [highlightedIndex, props.id],
   )
   return (
-    <S.Wrapper
+    <div
       ref={refProp}
       role="listbox"
       aria-activedescendant={currentActiveDescendantId}
+      tabIndex={-1}
+      className={clsx(
+        'custom-scrollbar bg-surface overflow-y-auto overflow-x-hidden rounded-md shadow-lg',
+        className,
+      )}
       {...props}
     >
       {Children.map(children, (child, index) => {
@@ -43,7 +49,7 @@ const Listbox = (
           onClick: onSelectOption,
         })
       })}
-    </S.Wrapper>
+    </div>
   )
 }
 

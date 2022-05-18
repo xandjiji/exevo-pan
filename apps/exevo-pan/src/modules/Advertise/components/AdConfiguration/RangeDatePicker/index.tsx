@@ -10,9 +10,9 @@ import {
   getMonth,
   partitionByMonths,
 } from './utils'
-import * as S from './styles'
+import * as S from './atoms'
 
-const RangeDatePicker = (): JSX.Element => {
+const RangeDatePicker = () => {
   const {
     translations: { common, advertise },
   } = useTranslations()
@@ -28,11 +28,15 @@ const RangeDatePicker = (): JSX.Element => {
 
   return (
     <>
-      <S.Wrapper>
-        <S.MonthName aria-label={advertise.RangeDatePicker.currentMonthLabel}>
+      <div className="overflow-hidden rounded-xl shadow-md">
+        <p
+          aria-label={advertise.RangeDatePicker.currentMonthLabel}
+          className="bg-primary text-onPrimary py-3 px-2 text-center text-2xl tracking-wider"
+        >
           {common.FullMonth[new Date().getMonth()]}
-        </S.MonthName>
-        <S.CalendarGrid>
+        </p>
+
+        <div className="bg-surface grid grid-cols-7 gap-1.5 p-3 text-center">
           <Weekdays />
 
           <FillDates
@@ -50,7 +54,7 @@ const RangeDatePicker = (): JSX.Element => {
                   key={date}
                   aria-label={date}
                   aria-selected={selectedDates.includes(date)}
-                  data-today={isToday}
+                  today={isToday}
                   onClick={() => dispatch({ type: 'TOGGLE_DATE', date })}
                 >
                   {new Date(date).getDate()}
@@ -67,11 +71,12 @@ const RangeDatePicker = (): JSX.Element => {
               <Fragment key={`month-${currentMonthLastDay}`}>
                 {monthDatesElements}
                 {hasNextMonth && (
-                  <S.MonthRow
+                  <span
                     aria-label={advertise.RangeDatePicker.nextMonthLabel}
+                    className="text-separator col-span-full -mb-1.5 pt-2 pb-1"
                   >
                     {common.FullMonth[(getMonth(monthDates[0]) + 1) % 12]}
-                  </S.MonthRow>
+                  </span>
                 )}
                 {!hasNextMonth && (
                   <FillDates
@@ -86,9 +91,12 @@ const RangeDatePicker = (): JSX.Element => {
               </Fragment>
             )
           })}
-        </S.CalendarGrid>
-      </S.Wrapper>
-      <S.Subtext>{advertise.RangeDatePicker.smallDescription}</S.Subtext>
+        </div>
+      </div>
+
+      <p className="-mt-3 text-xs tracking-wide">
+        {advertise.RangeDatePicker.smallDescription}
+      </p>
     </>
   )
 }

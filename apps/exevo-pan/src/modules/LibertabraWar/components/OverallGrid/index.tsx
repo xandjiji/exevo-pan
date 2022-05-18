@@ -4,18 +4,18 @@ import Scoreboard from './Scoreboard'
 import LastFrags from './LastFrags'
 import ComparisonChart from '../ComparisonChart'
 import { onlineToDataSnapshot } from './utils'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { OverallGridProps } from './types'
 
-const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
+const OverallGrid = ({ warData }: OverallGridProps) => {
   const { translations } = useTranslations()
 
   const { score, onlineCount, lastDeaths } = warData
 
   return (
-    <S.Wrapper>
-      <S.PageTitle>{translations.war.PageTitle}</S.PageTitle>
-      <S.FirstRow>
+    <article className="inner-container custom-scrollbar bg-background relative grid max-h-[calc(100%-44px)] gap-4 overflow-auto py-4 transition-colors">
+      <h2 className="hidden">{translations.war.PageTitle}</h2>
+      <div className={styles.firstRow}>
         <Scoreboard
           guildA={{
             name: 'Libertabra Pune',
@@ -49,9 +49,9 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
           tooltipSuffix={translations.war.OverallGrid.comparisonChartSuffix}
           dateLabelType="Time"
         />
-      </S.FirstRow>
+      </div>
 
-      <S.SecondRow>
+      <div className="child:h-fit grid grid-cols-1 gap-4 md:grid-cols-2">
         <LastFrags
           title={`${translations.war.OverallGrid.recentDeathsTitle} (${lastDeaths.guildA.length}) ⚰️`}
           subtitle="Libertabra Pune"
@@ -62,8 +62,8 @@ const OverallGrid = ({ warData }: OverallGridProps): JSX.Element => {
           subtitle="Bones Alliance"
           fragsList={lastDeaths.guildB}
         />
-      </S.SecondRow>
-    </S.Wrapper>
+      </div>
+    </article>
   )
 }
 

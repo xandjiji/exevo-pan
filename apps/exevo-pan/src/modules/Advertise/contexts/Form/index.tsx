@@ -22,7 +22,7 @@ const defaultState: FormValues = {
 
 const FormContext = createContext<FormValues>(defaultState)
 
-export const FormProvider = ({ children }: FormProviderProps): JSX.Element => {
+export const FormProvider = ({ children }: FormProviderProps) => {
   const [formValues, dispatch] = useReducer(FormReducer, {
     uuid: defaultState.uuid,
     currentStep: defaultState.currentStep,

@@ -1,16 +1,19 @@
-import * as S from './styles'
+import clsx from 'clsx'
 import { LabelGroupProps } from './types'
 
 const LabelGroup = ({
   label,
   htmlFor,
+  className,
   children,
   ...props
-}: LabelGroupProps): JSX.Element => (
-  <S.Wrapper {...props}>
-    <S.Label htmlFor={htmlFor}>{label}</S.Label>
+}: LabelGroupProps) => (
+  <div {...props}>
+    <label htmlFor={htmlFor} className={clsx('mb-2 block', className)}>
+      {label}
+    </label>
     {children}
-  </S.Wrapper>
+  </div>
 )
 
 export default LabelGroup

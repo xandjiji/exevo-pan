@@ -1,68 +1,73 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
+/* eslint-disable jsx-a11y/anchor-has-content */
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
+import UnlicenseIcon from 'assets/svgs/unlicense.svg'
+import GithubIcon from 'assets/svgs/github.svg'
 import { links, routes } from 'Constants'
-import * as S from './styles'
 
-const Footer = (): JSX.Element => {
+const listItems = [
+  { href: routes.HOME, content: 'currentAuctions' },
+  { href: routes.BAZAAR_HISTORY, content: 'bazaarHistory' },
+  { href: routes.STATISTICS, content: 'statistics' },
+  { href: routes.ADVERTISE, content: 'advertise' },
+  { href: routes.BLOG, content: 'blog' },
+  { href: routes.ABOUT, content: 'about' },
+]
+
+const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
+  <a
+    rel={clsx('noopener noreferrer external', rel)}
+    className={clsx('text-onPrimary text-xs tracking-wider', className)}
+    target="_blank"
+    {...props}
+  />
+)
+
+const Footer = () => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
-    <S.Wrapper>
-      <S.Nav>
-        <S.Ul>
-          <S.Li>
-            <NextLink href={routes.HOME}>
-              {common.Header.nav.currentAuctions}
-            </NextLink>
-          </S.Li>
-          <S.Li>
-            <NextLink href={routes.BAZAAR_HISTORY}>
-              {common.Header.nav.bazaarHistory}
-            </NextLink>
-          </S.Li>
-          <S.Li>
-            <NextLink href={routes.STATISTICS}>
-              {common.Header.nav.statistics}
-            </NextLink>
-          </S.Li>
-          <S.Li>
-            <NextLink href={routes.ADVERTISE}>
-              {common.Header.nav.advertise}
-            </NextLink>
-          </S.Li>
-          <S.Li>
-            <NextLink href={routes.BLOG}>{common.Header.nav.blog}</NextLink>
-          </S.Li>
-          <S.Li>
-            <NextLink href={routes.ABOUT}>{common.Header.nav.about}</NextLink>
-          </S.Li>
-        </S.Ul>
-      </S.Nav>
-      <S.Title>
-        <S.UnlicenseIcon aria-label="Unlicensed" />
+    <footer className="bg-primary text-onPrimary inner-container z-71 relative py-6 text-xs tracking-wider transition-colors">
+      <nav className="inner-container">
+        <ul className="flex flex-wrap items-center justify-center gap-3">
+          {listItems.map(({ href, content }) => (
+            <li
+              key={href}
+              className="text-s text-onPrimary/50 after:ml-3 after:content-['|'] last:after:content-['']"
+            >
+              <NextLink href={href}>
+                <a className="text-s text-onPrimary cursor-pointer tracking-wider md:text-base">
+                  {common.Header.nav[content]}
+                </a>
+              </NextLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+
+      <div className="mt-5 flex items-center justify-center">
+        <UnlicenseIcon
+          aria-label="Unlicensed"
+          className="fill-onPrimary mx-1 h-3 w-3"
+        />
         {new Date().getFullYear()} {common.FooterTitle}
-        <a
-          href={links.GITHUB_PROFILE}
-          target="_blank"
-          rel="noopener noreferrer author external"
-          style={{ marginLeft: 3 }}
-        >
+        <Link className="ml-1" href={links.GITHUB_PROFILE} rel="author">
           xandjiji
-        </a>
+        </Link>
         .
-        <a
+        <Link
+          className="ml-2"
           href={links.GITHUB_REPOSITORY}
-          target="_blank"
-          rel="noreferrer noopener external"
           title={common.RepoLinkText}
-          style={{ marginLeft: 8 }}
         >
-          <S.GithubIcon />
-        </a>
-      </S.Title>
-    </S.Wrapper>
+          <GithubIcon className="fill-onPrimary clickable rounded-full" />
+        </Link>
+      </div>
+    </footer>
   )
 }
 

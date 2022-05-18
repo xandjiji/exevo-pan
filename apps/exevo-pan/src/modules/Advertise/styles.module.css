@@ -1,0 +1,24 @@
+.formStepWrapper > * {
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+.formStepWrapper > *:last-child {
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .formStepWrapper > * {
+    margin: unset;
+    height: fit-content;
+    width: calc(50% - 12px);
+  }
+
+  .stepper button {
+    cursor: unset;
+  }
+
+  .stepper button > div {
+    @apply bg-green;
+  }
+}

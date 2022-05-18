@@ -11,11 +11,12 @@ export default {
     'utils.ts',
   ],
   transform: {
-    '^.+\\.(js|jsx|ts|tsx)$': '<rootDir>/node_modules/babel-jest',
+    '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|svg)$':
       '<rootDir>/apps/exevo-pan/__mocks__/fileMock.js',
+    '\\.css$': 'identity-obj-proxy',
   },
   collectCoverage: true,
   collectCoverageFrom: [

@@ -24,7 +24,7 @@ describe('<Image />', () => {
     const wrapperElement = screen.getByRole('figure')
     expect(container.querySelector('.figure-class')).toEqual(wrapperElement)
     expect(container.querySelector('#figure-id')).toEqual(wrapperElement)
-    expect(wrapperElement).toHaveAttribute('data-align', 'center')
+    expect(wrapperElement).toHaveClass('mx-auto')
 
     expect(container.querySelector('figcaption')).toHaveTextContent(
       'This is the caption',
@@ -38,8 +38,8 @@ describe('<Image />', () => {
 
     const imgElement = screen.getByAltText('alt-text')
 
-    expect(imgElement).toHaveStyle('opacity: 0')
+    expect(imgElement).toHaveClass('opacity-0')
     fireEvent.load(imgElement)
-    expect(imgElement).toHaveStyle('opacity: 1')
+    expect(imgElement).not.toHaveClass('opacity-0')
   })
 })

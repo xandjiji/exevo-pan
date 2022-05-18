@@ -1,8 +1,9 @@
 import { Popover } from 'components/Atoms'
+import clsx from 'clsx'
 import { PopoverProps } from 'components/Atoms/Popover/types'
-import * as S from './styles'
 
 const Tooltip = ({
+  className,
   children,
   content,
   placement = 'top',
@@ -10,12 +11,16 @@ const Tooltip = ({
   visible = false,
   offset = [0, 0],
   ...props
-}: PopoverProps): JSX.Element => (
+}: PopoverProps) => (
   <Popover
     content={
-      <S.TooltipWrapper role="tooltip" {...props}>
+      <div
+        role="tooltip"
+        className={clsx('card text-tsm text-center', className)}
+        {...props}
+      >
         {content}
-      </S.TooltipWrapper>
+      </div>
     }
     placement={placement}
     trigger={trigger}

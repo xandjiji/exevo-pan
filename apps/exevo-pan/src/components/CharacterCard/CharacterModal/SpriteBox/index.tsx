@@ -1,11 +1,13 @@
 import { useCallback } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { formatNumberWithCommas } from 'utils'
-import { Checkbox } from 'components/CharacterCard/styles'
+import { Checkbox } from 'components/CharacterCard/atoms'
+import { SpritePortrait, ActiveCount } from 'components/Atoms'
 import { NotifyErrorClient } from 'services'
 import { rareMountSet, testRareOutfit } from '../../Parts/SpecialTags/utils'
 import { addonCheck } from './utils'
-import * as S from './styles'
+import styles from './styles.module.css'
 import { SpriteBoxProps } from './types'
 
 const SpriteBox = ({
@@ -18,7 +20,7 @@ const SpriteBox = ({
   amount = 0,
   checkRareMount = false,
   checkRareOutfit = false,
-}: SpriteBoxProps): JSX.Element => {
+}: SpriteBoxProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -36,39 +38,58 @@ const SpriteBox = ({
   )
 
   return (
-    <S.Wrapper
+    <div
       title={amount > 1 ? `${formatNumberWithCommas(amount)}x ${name}` : name}
-      data-rare={isRare}
-      data-show-addon={showAddon}
+      className={clsx(
+        'relative rounded-md',
+        showAddon && 'pb-2 shadow',
+        isRare ? 'bg-primary' : 'bg-primaryVariant',
+        isRare && styles.highlighted,
+      )}
     >
-      <S.SpritePortrait
+      <SpritePortrait
         offset={offset}
         alt={name}
         src={src}
         width={offset ? 64 : 32}
         height={offset ? 64 : 32}
         onError={notifyError}
+        className="pointer-events-none"
+        style={showAddon ? { boxShadow: 'unset' } : undefined}
       />
 
       {showAddon && (
-        <S.CheckboxWrapper>
+        <div className="flex justify-evenly">
           <Checkbox
             aria-label={
               common.CharacterCard.CharacterModal.SpriteBox.firstAddon
             }
             checked={addonCheck.first(type ?? 0)}
+            greenVariant={isRare}
           />
           <Checkbox
             aria-label={
               common.CharacterCard.CharacterModal.SpriteBox.secondAddon
             }
             checked={addonCheck.second(type ?? 0)}
+            greenVariant={isRare}
           />
-        </S.CheckboxWrapper>
+        </div>
       )}
 
-      {amount > 1 && <S.Count>{amount}</S.Count>}
-    </S.Wrapper>
+      {amount > 1 && (
+        <ActiveCount
+          className="z-1 absolute -top-1.5 -right-1.5 py-0.5 px-1 font-bold after:ml-[1px] after:font-normal after:content-['x']"
+          style={{
+            width: 'unset',
+            height: 'unset',
+            borderRadius: '4px',
+          }}
+        >
+          {amount}
+        </ActiveCount>
+      )}
+    </div>
   )
 }
 

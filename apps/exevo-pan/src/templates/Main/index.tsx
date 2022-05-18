@@ -1,14 +1,12 @@
 import Header from './Header'
 import Footer from './Footer'
-import * as S from './styles'
-import { MainProps } from './types'
 
-const MasterLayout = ({ children, ...props }: MainProps): JSX.Element => (
-  <S.Wrapper {...props}>
+type MainProps = { children: React.ReactNode }
+
+export default ({ children }: MainProps) => (
+  <div className="flex min-h-screen flex-col">
     <Header />
     {children}
     <Footer />
-  </S.Wrapper>
+  </div>
 )
-
-export default MasterLayout
