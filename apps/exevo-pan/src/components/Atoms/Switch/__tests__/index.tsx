@@ -31,7 +31,7 @@ describe('<Switch />', () => {
     expect(mockedOnClick).toBeCalledTimes(1)
     expect(switchElement).toBeChecked()
 
-    userEvent.type(switchElement, '{space}')
+    userEvent.keyboard('{enter}')
     expect(mockedOnClick).toBeCalledTimes(2)
     expect(switchElement).not.toBeChecked()
   })
