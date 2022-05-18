@@ -27,6 +27,7 @@ const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
             aria-current={isCurrent ? 'step' : undefined}
             aria-labelledby={stepDescriptionId}
             className="flex cursor-pointer items-center"
+            data-completed={isCompleted}
           >
             <div
               className={clsx(
