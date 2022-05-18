@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as outfit from 'data-dictionary/dist/dictionaries/outfit'
@@ -16,17 +16,17 @@ describe('<FilterDrawer />', () => {
       .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   })
 
-  test('drawer visibility should be controlled correctly', () => {
+  test('drawer visibility should be controlled correctly', async () => {
     const { rerender } = renderWithProviders(<WrappedFilterDrawer open />)
 
     const drawerElement = screen.getByRole('dialog')
     expect(drawerElement).toBeVisible()
 
     rerender(<WrappedFilterDrawer open={false} />)
-    expect(drawerElement).not.toBeVisible()
+    await waitForElementToBeRemoved(drawerElement)
 
     rerender(<WrappedFilterDrawer open />)
-    expect(drawerElement).toBeVisible()
+    expect(await screen.findByRole('dialog')).toBeVisible()
   })
 
   test('should call onClose', () => {
@@ -116,11 +116,11 @@ describe('<FilterDrawer />', () => {
     const resetFilterButton = screen.getByRole('button', {
       name: 'Reset filters',
     })
-    expect(resetFilterButton).toBeVisible()
+    expect(resetFilterButton).toBeEnabled()
 
     userEvent.click(resetFilterButton)
     expect(knightButton).not.toBeChecked()
-    expect(resetFilterButton).not.toBeVisible()
+    expect(resetFilterButton).toBeDisabled()
 
     userEvent.click(knightButton)
     userEvent.click(
@@ -129,7 +129,7 @@ describe('<FilterDrawer />', () => {
       }),
     )
 
-    expect(resetFilterButton).toBeVisible()
+    expect(resetFilterButton).toBeEnabled()
 
     userEvent.click(resetFilterButton)
     expect(knightButton).not.toBeChecked()
@@ -160,7 +160,7 @@ describe('<FilterDrawer />', () => {
     })
 
     const resetButton = screen.getByRole('button', { name: 'Reset filters' })
-    expect(resetButton).toBeVisible()
+    expect(resetButton).toBeEnabled()
 
     outfit.tokens.forEach((outfitName) => {
       const switchElement = screen.getByTitle(outfitName)
@@ -170,18 +170,18 @@ describe('<FilterDrawer />', () => {
       expect(switchElement).not.toBeChecked()
     })
 
-    expect(resetButton).not.toBeVisible()
+    expect(resetButton).toBeDisabled()
 
     const addonElement = screen.getByRole('checkbox', { name: 'Addon 1' })
     expect(addonElement).toBeChecked()
 
     userEvent.click(addonElement)
     expect(addonElement).not.toBeChecked()
-    expect(resetButton).toBeVisible()
+    expect(resetButton).toBeEnabled()
 
     userEvent.click(resetButton)
     expect(addonElement).toBeChecked()
-    expect(resetButton).not.toBeVisible()
+    expect(resetButton).toBeDisabled()
   })
 
   test('useDebouncedFilter should dispatch filters after a while', () => {
