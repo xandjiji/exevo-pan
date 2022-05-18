@@ -19,9 +19,12 @@ describe('<Lister />', () => {
 
       fullList.forEach((name) => {
         const active = set.has(name)
-        expect(screen.getByText(name)).toHaveStyle(
-          `opacity: ${active ? '1' : '0.5'}`,
-        )
+        const item = screen.getByText(name)
+        if (active) {
+          expect(item).not.toHaveClass('opacity-50')
+        } else {
+          expect(item).toHaveClass('opacity-50')
+        }
       })
     },
   )
@@ -38,9 +41,12 @@ describe('<Lister />', () => {
 
       fullList.forEach((name) => {
         const active = set.has(name)
-        expect(screen.getByText(name)).toHaveStyle(
-          `opacity: ${active ? '1' : '0.5'}`,
-        )
+        const item = screen.getByText(name)
+        if (active) {
+          expect(item).not.toHaveClass('opacity-50')
+        } else {
+          expect(item).toHaveClass('opacity-50')
+        }
       })
     },
   )
@@ -55,9 +61,12 @@ describe('<Lister />', () => {
 
       fullList.forEach((name) => {
         const active = set.has(name)
-        expect(screen.getByText(name)).toHaveStyle(
-          `opacity: ${active ? '1' : '0.5'}`,
-        )
+        const item = screen.getByText(name)
+        if (active) {
+          expect(item).not.toHaveClass('opacity-50')
+        } else {
+          expect(item).toHaveClass('opacity-50')
+        }
       })
     },
   )
