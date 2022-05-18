@@ -142,7 +142,7 @@ describe('<Tabs />', () => {
         )
       })
 
-      expect(screen.getByRole('tabpanel')).toHaveTextContent(
+      expect(screen.getAllByRole('tabpanel')[newActive]).toHaveTextContent(
         `item ${newActive}`,
       )
     }

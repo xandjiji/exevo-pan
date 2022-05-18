@@ -114,6 +114,7 @@ const Panel = ({ active, children, className, ...props }: PanelProps) => (
   <div
     role="tabpanel"
     className={clsx('w-full', !active && 'hidden', className)}
+    data-active={active}
     {...props}
   >
     {active && children}
