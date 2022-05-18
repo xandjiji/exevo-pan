@@ -2,7 +2,7 @@
 
 exports[`<PercentageCard /> should style values correctly 1`] = `
 <span
-  class="styles__Percentage-sc-5s1rht-2 kASbqQ"
+  class="text-[46px] font-bold text-red"
 >
   0
   %
@@ -11,7 +11,7 @@ exports[`<PercentageCard /> should style values correctly 1`] = `
 
 exports[`<PercentageCard /> should style values correctly 2`] = `
 <span
-  class="styles__Percentage-sc-5s1rht-2 hxmePE"
+  class="text-[46px] font-bold text-green"
 >
   50
   %
@@ -20,7 +20,7 @@ exports[`<PercentageCard /> should style values correctly 2`] = `
 
 exports[`<PercentageCard /> should style values correctly 3`] = `
 <span
-  class="styles__Percentage-sc-5s1rht-2 hxmePE"
+  class="text-[46px] font-bold text-green"
 >
   100
   %
@@ -29,7 +29,7 @@ exports[`<PercentageCard /> should style values correctly 3`] = `
 
 exports[`<PercentageCard /> should style values correctly 4`] = `
 <span
-  class="styles__Percentage-sc-5s1rht-2 hxmePE"
+  class="text-[46px] font-bold text-green"
 >
   1000
   %
@@ -38,7 +38,7 @@ exports[`<PercentageCard /> should style values correctly 4`] = `
 
 exports[`<PercentageCard /> should style values correctly 5`] = `
 <span
-  class="styles__Percentage-sc-5s1rht-2 kASbqQ"
+  class="text-[46px] font-bold text-red"
 >
   0.1
   %
@@ -47,7 +47,7 @@ exports[`<PercentageCard /> should style values correctly 5`] = `
 
 exports[`<PercentageCard /> should style values correctly 6`] = `
 <span
-  class="styles__Percentage-sc-5s1rht-2 kASbqQ"
+  class="text-[46px] font-bold text-red"
 >
   49.9999
   %

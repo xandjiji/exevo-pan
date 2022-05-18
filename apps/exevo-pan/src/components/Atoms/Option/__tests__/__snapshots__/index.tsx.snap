@@ -2,8 +2,7 @@
 
 exports[`<Option /> should render with correct name and value 1`] = `
 <option
-  class="styles__Option-sc-1q1emy4-0 gHUAlZ"
-  role="option"
+  class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
   value="actualValue"
 >
   children
@@ -12,8 +11,7 @@ exports[`<Option /> should render with correct name and value 1`] = `
 
 exports[`<Option /> should render with fallback value 1`] = `
 <option
-  class="styles__Option-sc-1q1emy4-0 gHUAlZ"
-  role="option"
+  class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
   value="children"
 >
   children
@@ -22,8 +20,7 @@ exports[`<Option /> should render with fallback value 1`] = `
 
 exports[`<Option /> should render with highlighted style 1`] = `
 <option
-  class="styles__Option-sc-1q1emy4-0 gfiWWV"
-  role="option"
+  class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-primaryVariant"
   value="children"
 >
   children
