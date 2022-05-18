@@ -11,11 +11,11 @@ describe('<SpritePortrait />', () => {
     const imgElement = screen.getByAltText('Red skull')
     const loadingElement = screen.getByRole('alert')
 
-    expect(imgElement).toHaveStyle('opacity: 0')
+    expect(imgElement).toHaveClass('opacity-0')
     expect(loadingElement).toBeVisible()
 
     fireEvent.load(imgElement)
-    expect(imgElement).toHaveStyle('opacity: 1')
+    expect(imgElement).not.toHaveClass('opacity-0')
     expect(loadingElement).not.toBeVisible()
   })
 })
