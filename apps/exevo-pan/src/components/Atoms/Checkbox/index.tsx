@@ -42,7 +42,7 @@ const Checkbox = ({
           className={clsx(
             'border-1 border-separator m-0 h-4 w-4 cursor-pointer appearance-none rounded border-solid transition-all active:shadow-inner',
             greenVariant
-              ? 'checked:bg-greenHighlight checked:border-greenHighlight'
+              ? 'checked:bg-green checked:border-green'
               : 'checked:bg-primary checked:border-primary',
             !enabledStyle && 'disabled:bg-separator disabled:border-separator',
             className,

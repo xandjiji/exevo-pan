@@ -7,6 +7,7 @@ import { SpritePortrait, ActiveCount } from 'components/Atoms'
 import { NotifyErrorClient } from 'services'
 import { rareMountSet, testRareOutfit } from '../../Parts/SpecialTags/utils'
 import { addonCheck } from './utils'
+import styles from './styles.module.css'
 import { SpriteBoxProps } from './types'
 
 const SpriteBox = ({
@@ -42,7 +43,8 @@ const SpriteBox = ({
       className={clsx(
         'relative rounded-md',
         showAddon && 'pb-2 shadow',
-        isRare ? 'bg-primaryHighlight' : 'bg-primaryVariant',
+        isRare ? 'bg-primary' : 'bg-primaryVariant',
+        isRare && styles.highlighted,
       )}
     >
       <SpritePortrait
@@ -52,7 +54,6 @@ const SpriteBox = ({
         width={offset ? 64 : 32}
         height={offset ? 64 : 32}
         onError={notifyError}
-        highlight={isRare}
         className="pointer-events-none"
         style={showAddon ? { boxShadow: 'unset' } : undefined}
       />
