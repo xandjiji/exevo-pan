@@ -21,7 +21,7 @@ const Cursor = ({ className, ...props }: JSX.IntrinsicElements['button']) => (
   <button
     className={clsx(
       'clickable h-8 cursor-pointer rounded',
-      props['aria-disabled'] && 'pointer-events-none',
+      props.disabled && 'pointer-events-none',
       className,
     )}
     type="button"
@@ -91,7 +91,7 @@ const Paginator = ({
       <div className="flex gap-4">
         <Cursor
           aria-label={common.Paginator.FirstLabel}
-          aria-disabled={!hasPrev}
+          disabled={!hasPrev}
           onClick={() => changePage(1)}
         >
           <Icon
@@ -101,7 +101,7 @@ const Paginator = ({
         </Cursor>
         <Cursor
           aria-label={common.Paginator.PreviousLabel}
-          aria-disabled={!hasPrev}
+          disabled={!hasPrev}
           onClick={() => changePage(derivedCurrentPage - 1)}
         >
           <Icon
@@ -112,14 +112,14 @@ const Paginator = ({
 
         <Cursor
           aria-label={common.Paginator.NextLabel}
-          aria-disabled={!hasNext}
+          disabled={!hasNext}
           onClick={() => changePage(derivedCurrentPage + 1)}
         >
           <Icon disabled={!hasNext} icon={<NextIcon />} />
         </Cursor>
         <Cursor
           aria-label={common.Paginator.LastLabel}
-          aria-disabled={!hasNext}
+          disabled={!hasNext}
           onClick={() => changePage(pageCount)}
         >
           <Icon disabled={!hasNext} icon={<LastIcon />} />
