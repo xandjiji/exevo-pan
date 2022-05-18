@@ -52,9 +52,9 @@ describe('<LabelledInput />', () => {
         validationState="neutral"
       />,
     )
-    expect(iconElement).not.toBeVisible()
+    expect(iconElement).toHaveAttribute('aria-hidden', 'true')
 
     rerender(<LabelledInput id="test-id" labelText="Email" />)
-    expect(iconElement).not.toBeVisible()
+    expect(iconElement).toHaveAttribute('aria-hidden', 'true')
   })
 })
