@@ -11,7 +11,7 @@ describe('<MethodButton />', () => {
     )
 
     expect(
-      screen.getByRole('button', { name: 'test button' }),
+      screen.getByRole('radio', { name: 'test button' }),
     ).toBeInTheDocument()
     expect(screen.getByRole('none')).toBeInTheDocument()
   })
@@ -23,15 +23,15 @@ describe('<MethodButton />', () => {
       </MethodButton>,
     )
 
-    const buttonElement = screen.getByRole('button', { name: 'test button' })
+    const buttonElement = screen.getByRole('radio', { name: 'test button' })
 
-    expect(buttonElement).toHaveAttribute('aria-selected', 'true')
+    expect(buttonElement).toBeChecked()
 
     rerender(
       <MethodButton active={false} icon={<div role="none" />}>
         test button
       </MethodButton>,
     )
-    expect(buttonElement).toHaveAttribute('aria-selected', 'false')
+    expect(buttonElement).not.toBeChecked()
   })
 })
