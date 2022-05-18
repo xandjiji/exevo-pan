@@ -4,7 +4,7 @@ export default {
   onSurface: '#FFFFFF',
   separator: '#72767D',
   primary: '#8B63E3',
-  primaryHighlight: '#A488FF',
+  primaryHighlight: '#E6A5FF',
   darkerPrimary: '#581F9B',
   onPrimary: '#FFFFFF',
   primaryVariant: '#664B80',
