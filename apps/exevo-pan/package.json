@@ -60,6 +60,7 @@
     "autoprefixer": "^10.4.4",
     "babel-jest": "^26.6.3",
     "config": "*",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "^26.6.3",
     "jest-axe": "^5.0.1",
     "jest-cli": "^26.6.3",

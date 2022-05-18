@@ -16,6 +16,7 @@ export default {
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|svg)$':
       '<rootDir>/apps/exevo-pan/__mocks__/fileMock.js',
+    '\\.css$': 'identity-obj-proxy',
   },
   collectCoverage: true,
   collectCoverageFrom: [
