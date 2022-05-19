@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { FadeImage, Tag } from 'components/Atoms'
+import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
 import { NewstickerProps } from './types'
@@ -70,6 +70,8 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
           </article>
         ))}
       </div>
+
+      <TibiaBlackjack />
     </aside>
   )
 }
