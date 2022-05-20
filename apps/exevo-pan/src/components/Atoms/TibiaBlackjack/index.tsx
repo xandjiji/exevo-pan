@@ -1,5 +1,5 @@
 const TibiaBlackjack = () => (
-  <div className="card bg-primaryVariant p-1">
+  <div className="card bg-black/40 p-1">
     <img
       className="self-start"
       src="https://i.imgur.com/6pr5S4T.png"
