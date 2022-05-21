@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { memo } from 'react'
 import clsx from 'clsx'
+import Image from 'next/image'
+import logoMdSrc from 'assets/tibiablackjack.png'
 import { links } from 'Constants'
 
 const TibiaBlackjack = ({
@@ -17,10 +19,13 @@ const TibiaBlackjack = ({
     href={links.TIBIA_BLACKJACK}
     {...props}
   >
-    <img
+    <Image
       className="self-start"
-      src="https://i.imgur.com/6pr5S4T.png"
+      src={logoMdSrc}
       alt="Tibia Blackjack"
+      layout="fixed"
+      width={97}
+      height={61}
     />
   </a>
 )
