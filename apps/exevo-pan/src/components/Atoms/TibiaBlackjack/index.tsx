@@ -1,7 +1,12 @@
+/* eslint-disable react/jsx-no-target-blank */
+import { links } from 'Constants'
+
 const TibiaBlackjack = () => (
   <a
     className="card clickable bg-black/40 p-1 transition-all hover:bg-black/30"
-    href="www.google.com"
+    target="_blank"
+    rel="noopener external nofollow"
+    href={links.TIBIA_BLACKJACK}
   >
     <img
       className="self-start"
