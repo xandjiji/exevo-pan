@@ -15,13 +15,14 @@ const EmptyState = ({
     className={clsx('relative rounded-3xl text-center', className)}
     {...props}
   >
-    <FadeImage
-      src={notFoundSrc}
-      objectFit="scale-down"
-      alt={text.content}
-      height={height}
-      className="mix-blend-overlay"
-    />
+    <div style={{ filter: 'grayscale(0.3)', opacity: 0.2 }}>
+      <FadeImage
+        src={notFoundSrc}
+        objectFit="scale-down"
+        alt={text.content}
+        height={height}
+      />
+    </div>
 
     <div
       className="absolute top-1/2 left-1/2 flex flex-col items-center gap-3"
