@@ -72,7 +72,6 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
       </div>
 
       <TibiaBlackjack.Banner className="hidden md:block" />
-      <TibiaBlackjack.FloatingButton className="md:hidden" />
     </aside>
   )
 }

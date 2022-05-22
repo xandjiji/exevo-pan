@@ -4,7 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
-import { Link, Switch, CtaButton } from 'components/Atoms/'
+import { Link, Switch, CtaButton, TibiaBlackjack } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
@@ -122,6 +122,7 @@ const Header = ({
             />
           )}
           <CtaButton />
+          <TibiaBlackjack.FloatingButton className="md:hidden" />
         </div>
       </header>
 
