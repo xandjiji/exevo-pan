@@ -2,6 +2,7 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
+import { FadeImage } from 'components/Atoms'
 import Image from 'next/image'
 import logoMdSrc from 'assets/tibiablackjack.png'
 import logoSmSrc from 'assets/tibiablackjack-24x24.png'
@@ -19,7 +20,7 @@ export const Banner = memo(
       href={links.TIBIA_BLACKJACK}
       {...props}
     >
-      <Image
+      <FadeImage
         className="self-start"
         src={logoMdSrc}
         alt="Tibia Blackjack"
