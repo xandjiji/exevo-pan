@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-no-target-blank */
 import { memo } from 'react'
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import logoMdSrc from 'assets/tibiablackjack.png'
 import logoSmSrc from 'assets/tibiablackjack-24x24.png'
@@ -31,31 +32,37 @@ export const Banner = memo(
 )
 
 export const FloatingButton = memo(
-  ({ className, ...props }: JSX.IntrinsicElements['a']) => (
-    <a
-      className={clsx(
-        'clickable text-tsm bg-primary text-onPrimary hover:highlight-10 fixed bottom-[42px] right-4 z-10 flex items-center rounded-2xl py-2 pr-4 pl-10 tracking-wider shadow-lg transition-all',
-        className,
-      )}
-      target="_blank"
-      rel="noopener external nofollow"
-      href={links.TIBIA_BLACKJACK}
-      {...props}
-    >
-      <div
-        className="absolute top-1/2 left-3 h-6 w-6"
-        style={{ transform: 'translateY(-50%)' }}
+  ({ className, ...props }: JSX.IntrinsicElements['a']) => {
+    const {
+      translations: { common },
+    } = useTranslations()
+
+    return (
+      <a
+        className={clsx(
+          'clickable text-tsm bg-primary text-onPrimary hover:highlight-10 fixed bottom-[42px] right-4 z-10 flex items-center rounded-2xl py-2 pr-4 pl-10 tracking-wider shadow-lg transition-all',
+          className,
+        )}
+        target="_blank"
+        rel="noopener external nofollow"
+        href={links.TIBIA_BLACKJACK}
+        {...props}
       >
-        <Image
-          className="self-start"
-          src={logoSmSrc}
-          alt="Tibia Blackjack"
-          layout="fixed"
-          width={24}
-          height={24}
-        />
-      </div>
-      Play Tibia Blackjack
-    </a>
-  ),
+        <div
+          className="absolute top-1/2 left-3 h-6 w-6"
+          style={{ transform: 'translateY(-50%)' }}
+        >
+          <Image
+            className="self-start"
+            src={logoSmSrc}
+            alt="Tibia Blackjack"
+            layout="fixed"
+            width={24}
+            height={24}
+          />
+        </div>
+        {common.TibiaBlackjackCta.text}
+      </a>
+    )
+  },
 )

@@ -95,6 +95,9 @@ export default {
     text: 'Compra Tibia Coins',
     link: 'https://edgartc.mx',
   },
+  TibiaBlackjackCta: {
+    text: 'Jugar Tibia Blackjack',
+  },
   CloseDrawerLabel: 'Cerrar el menú',
   RepoLinkText: 'Ir a este repositorio',
   MadeBy: 'creado por',
