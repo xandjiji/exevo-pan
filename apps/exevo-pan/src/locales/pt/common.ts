@@ -94,6 +94,9 @@ export default {
     text: 'Comprar Tibia Coins',
     link: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
   },
+  TibiaBlackjackCta: {
+    text: 'Jogar Tibia Blackjack',
+  },
   CloseDrawerLabel: 'Fechar menu',
   RepoLinkText: 'Ir para este repositório',
   MadeBy: 'criado por',

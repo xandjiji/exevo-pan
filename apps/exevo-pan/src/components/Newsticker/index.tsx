@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { FadeImage, Tag } from 'components/Atoms'
+import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
 import { NewstickerProps } from './types'
@@ -14,7 +14,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
   return (
     <aside
       className={clsx(
-        'inner-container bg-darkerPrimary relative flex h-[134px] flex-col gap-3 pt-3 transition-colors md:h-[88px] md:flex-row md:items-center md:gap-6 md:pb-3',
+        'inner-container bg-darkerPrimary lgr:gap-6 relative flex h-[134px] flex-col gap-3 pt-3 transition-colors md:h-[88px] md:flex-row md:items-center md:gap-4 md:pb-3',
         className,
       )}
       {...props}
@@ -23,11 +23,11 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
         className="z-1 from-darkerPrimary pointer-events-none absolute top-0 right-0 w-8 bg-gradient-to-l to-transparent"
         style={{ height: 'calc(100% - 6px)' }}
       />
-      <h2 className="text-onPrimary tracking-wide md:w-min">
+      <h2 className="text-onPrimary tracking-wide md:hidden lg:block lg:w-min">
         {common.Newsticker}
       </h2>
 
-      <div className="negative-container custom-scrollbar flex gap-3 overflow-auto pb-3 before:w-2 before:flex-none after:w-2 after:flex-none md:m-0 md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0 md:before:content-[unset] md:after:content-[unset]">
+      <div className="negative-container custom-scrollbar lgr:gap-6 flex gap-3 overflow-auto pb-3 before:w-2 before:flex-none after:w-2 after:flex-none md:m-0 md:grid md:grid-cols-3 md:gap-4 md:overflow-visible md:pb-0 md:before:content-[unset] md:after:content-[unset]">
         {blogPosts.map(({ slug, title, tags, thumbnail }) => (
           <article
             key={slug}
@@ -70,6 +70,8 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
           </article>
         ))}
       </div>
+
+      <TibiaBlackjack.Banner className="hidden md:block" />
     </aside>
   )
 }
