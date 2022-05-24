@@ -1,6 +1,7 @@
 import { routes } from 'Constants'
 import Market from 'assets/svgs/market.svg'
 import History from 'assets/svgs/history.svg'
+import Calculators from 'assets/svgs/calculator.svg'
 import Statistics from 'assets/svgs/statistics.svg'
 import Advertise from 'assets/svgs/advertise.svg'
 /* import WarIconSvg from 'assets/svgs/war.svg' */
@@ -19,6 +20,12 @@ export const NavItems: NavItem[] = [
     href: routes.BAZAAR_HISTORY,
     icon: <History />,
     title: 'bazaarHistory',
+  },
+  {
+    href: routes.CALCULATORS,
+    icon: <Calculators />,
+    /* @ ToDo: add correct title */
+    title: 'statistics',
   },
   {
     href: routes.STATISTICS,
