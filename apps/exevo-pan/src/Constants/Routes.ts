@@ -3,6 +3,7 @@ export const routes = {
   BAZAAR_HISTORY: '/bazaar-history',
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
+  EXERCISE_WEAPONS: '/calculators/exercise-weapons',
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
   LIBERTABRA_WAR: '/libertabra-war',
