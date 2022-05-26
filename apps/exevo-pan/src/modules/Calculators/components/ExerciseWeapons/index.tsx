@@ -7,14 +7,14 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <p>Current skill</p>
-      <Input allowClear defaultValue="asdsa" />
+      <Input allowClear defaultValue="asdsa" label="Current skill" />
 
-      <p>Desired skill</p>
       <Input
         allowClear
         value={value}
         onChange={(event) => setValue(event.target.value)}
+        label={<p>Desired skill</p>}
+        aria-label="desired skill"
       />
 
       {/* <p>% to next</p>

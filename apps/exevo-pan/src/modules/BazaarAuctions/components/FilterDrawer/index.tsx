@@ -76,12 +76,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
-        <FilterGroup
-          label={homepage.FilterDrawer.labels.searchNickname}
-          htmlFor="search-nickname-input"
-        >
+        <FilterGroup>
           <S.Input
             id="search-nickname-input"
+            label={homepage.FilterDrawer.labels.searchNickname}
             placeholder="Nickname"
             allowClear
             value={nickname}
@@ -215,9 +213,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Server" htmlFor="server-input">
+        <FilterGroup>
           <S.AutocompleteInput
             id="server-input"
+            label="Server"
             aria-controls="server-list"
             placeholder={homepage.FilterDrawer.placeholders.server}
             style={{ marginBottom: 12 }}
@@ -411,10 +410,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           options={storeMountValues}
         />
 
-        <FilterGroup label="Imbuements" htmlFor="imbuements-input">
+        <FilterGroup>
           <S.InputWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
+              label="Imbuements"
               aria-controls="imbuements-list"
               placeholder={homepage.FilterDrawer.placeholders.imbuements}
               itemList={useOptionsSet(
@@ -450,10 +450,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Charms" htmlFor="charms-input">
+        <FilterGroup>
           <S.InputWrapper>
             <S.AutocompleteInput
               id="charms-input"
+              label="Charms"
               aria-controls="charms-list"
               placeholder={homepage.FilterDrawer.placeholders.charms}
               itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
@@ -483,9 +484,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Quests" htmlFor="quest-input">
+        <FilterGroup>
           <S.AutocompleteInput
             id="quest-input"
+            label="Quests"
             aria-controls="quest-list"
             placeholder={homepage.FilterDrawer.placeholders.quests}
             style={{ marginBottom: 12 }}
@@ -507,12 +509,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup
-          label={homepage.FilterDrawer.labels.rareAchievements}
-          htmlFor="achievements-input"
-        >
+        <FilterGroup>
           <S.AutocompleteInput
             id="achievement-input"
+            label={homepage.FilterDrawer.labels.rareAchievements}
             aria-controls="achievement-list"
             placeholder={homepage.FilterDrawer.placeholders.achievements}
             style={{ marginBottom: 12 }}
@@ -538,22 +538,23 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </FilterGroup>
 
         {!historyPage && (
-          <FilterGroup
-            label={homepage.FilterDrawer.labels.rareItems}
-            htmlFor="rare-items-input"
-            labelSuffix={
-              <Tooltip
-                offset={[0, 8]}
-                placement="top"
-                content={homepage.FilterDrawer.tooltips.rareItems}
-              >
-                <Icon.Exclamation />
-              </Tooltip>
-            }
-          >
+          <FilterGroup>
             <S.InputWrapper>
               <S.AutocompleteInput
                 id="rare-items-input"
+                label={
+                  <>
+                    {homepage.FilterDrawer.labels.rareItems}
+                    <Tooltip
+                      offset={[0, 8]}
+                      placement="top"
+                      content={homepage.FilterDrawer.tooltips.rareItems}
+                    >
+                      <Icon.Exclamation />
+                    </Tooltip>
+                  </>
+                }
+                aria-label={homepage.FilterDrawer.labels.rareItems}
                 aria-controls="rare-items-list"
                 placeholder={homepage.FilterDrawer.placeholders.rareItems}
                 itemList={useOptionsSet(

@@ -20,7 +20,6 @@ export const Label = ({
 const FilterGroup = ({
   newSticker = false,
   label,
-  labelSuffix,
   htmlFor,
   children,
   className,
@@ -32,8 +31,8 @@ const FilterGroup = ({
     style={{ borderWidth: 0, borderBottomWidth: 1, ...style }}
     {...props}
   >
-    <div className="relative mb-2 flex items-center">
-      <Label htmlFor={htmlFor}>
+    {label && (
+      <Label htmlFor={htmlFor} className="relative mb-2 block">
         {newSticker && (
           <Sticker
             localStorageKey={label}
@@ -45,8 +44,8 @@ const FilterGroup = ({
         )}
         {label}
       </Label>
-      {labelSuffix}
-    </div>
+    )}
+
     {children}
   </div>
 )
