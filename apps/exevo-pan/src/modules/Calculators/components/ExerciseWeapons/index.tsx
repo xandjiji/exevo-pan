@@ -7,7 +7,33 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <Input allowClear defaultValue="asdsa" label="Current skill" />
+      <Input
+        allowClear
+        defaultValue="asdsa"
+        label="Current skill"
+        stateIcon="invalid"
+      />
+
+      <Input
+        allowClear
+        defaultValue="asdsa"
+        label="Current skill"
+        stateIcon="loading"
+      />
+
+      <Input
+        allowClear
+        defaultValue="asdsa"
+        label="Current skill"
+        stateIcon="neutral"
+      />
+
+      <Input
+        allowClear
+        defaultValue="asdsa"
+        label="Current skill"
+        stateIcon="valid"
+      />
 
       <Input
         allowClear

@@ -15,12 +15,15 @@ export type LabelProps =
       'aria-label': string
     }
 
+export type StateIcon = 'invalid' | 'loading' | 'neutral' | 'valid'
+
 export type CustomProps = {
   allowClear?: boolean
   errorMessage?: string
   value?: InputValue
   defaultValue?: InputValue
   hasAlert?: boolean
+  stateIcon?: StateIcon
 }
 
 export type InputProps = CustomProps & ExtendedProps & LabelProps

@@ -101,6 +101,11 @@ export default {
   RepoLinkText: 'Ir para este repositório',
   MadeBy: 'criado por',
   ClearInputLabel: 'Limpar campo',
+  InputIconLabels: {
+    valid: 'Campo válido',
+    invalid: 'Campo inválido',
+    loading: 'Validando...',
+  },
   WarningLabel: 'Cuidado!',
   Of: 'de',
   Paginator: {

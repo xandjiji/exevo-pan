@@ -5,18 +5,20 @@ import { useState, useRef, memo } from 'react'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
 import ClearIcon from 'assets/svgs/cross.svg'
+import { useStateIcon } from './useStateIcon'
 import { InputProps, InputValue } from './types'
 
 const Input = ({
   className,
   style,
+  id,
   allowClear = false,
   errorMessage,
   value: valueProp,
+  defaultValue,
   onChange,
   hasAlert = true,
-  defaultValue,
-  id,
+  stateIcon = 'neutral',
   ...props
 }: InputProps) => {
   const {
@@ -52,6 +54,8 @@ const Input = ({
 
   const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
     onChange?.(event)
+
+  const StateIcon = useStateIcon(stateIcon)
 
   return (
     <div className={clsx('text-tsm', className)} style={style}>
@@ -100,6 +104,8 @@ const Input = ({
             <ClearIcon className="fill-onSurface h-5 w-5" />
           </button>
         )}
+
+        {StateIcon}
       </div>
       {hasAlert && (
         <span

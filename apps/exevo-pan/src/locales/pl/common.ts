@@ -101,6 +101,11 @@ export default {
   RepoLinkText: 'Idź do tego repozytorium',
   MadeBy: 'Stworzone przez',
   ClearInputLabel: 'Wyczyść input',
+  InputIconLabels: {
+    valid: 'Pole jest prawidłowe',
+    invalid: 'Pole jest nieprawidłowe',
+    loading: 'Podsumowywanie...',
+  },
   WarningLabel: 'Ostrzeżenie!',
   Of: 'z',
   Paginator: {

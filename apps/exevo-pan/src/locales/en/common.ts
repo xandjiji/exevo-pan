@@ -101,6 +101,11 @@ export default {
   RepoLinkText: 'Go to this repository',
   MadeBy: 'made by',
   ClearInputLabel: 'Clear input',
+  InputIconLabels: {
+    valid: 'Field is valid',
+    invalid: 'Field is invalid',
+    loading: 'Validating...',
+  },
   WarningLabel: 'Warning!',
   Of: 'of',
   Paginator: {
