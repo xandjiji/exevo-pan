@@ -15,6 +15,7 @@ const Input = ({
   value: valueProp,
   onChange,
   hasAlert = true,
+  defaultValue,
   ...props
 }: InputProps) => {
   const {
@@ -23,16 +24,17 @@ const Input = ({
 
   const errorId = useUuid()
 
-  const [value, setValue] = useState<InputValue>(valueProp ?? '')
+  const [value, setValue] = useState<InputValue>(
+    valueProp ?? defaultValue ?? '',
+  )
   const derivedValue = valueProp ?? value
   const isClearButtonActive = allowClear && !!derivedValue
   const isInvalid = !!errorMessage
 
   const inputRef = useRef<HTMLInputElement>(null)
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setValue(event.target.value)
-  }
 
   const handleClearClick = () => {
     if (inputRef.current) {
@@ -46,9 +48,8 @@ const Input = ({
     }
   }
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
     onChange?.(event)
-  }
 
   return (
     <div className={clsx('text-tsm', className)} style={style}>
