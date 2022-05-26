@@ -16,12 +16,14 @@ const Input = ({
   onChange,
   hasAlert = true,
   defaultValue,
+  id,
   ...props
 }: InputProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
+  const inputId = id ?? useUuid()
   const errorId = useUuid()
 
   const [value, setValue] = useState<InputValue>(
@@ -53,6 +55,13 @@ const Input = ({
 
   return (
     <div className={clsx('text-tsm', className)} style={style}>
+      <label
+        htmlFor={inputId}
+        aria-label={props['aria-label']}
+        className="text-tsm text-onSurface mb-2 block font-light tracking-wide"
+      >
+        {props.label}
+      </label>
       <div
         className={clsx(
           'border-1 bg-surface flex w-full cursor-text rounded-md border-solid transition-colors',
@@ -64,6 +73,7 @@ const Input = ({
       >
         <input
           ref={inputRef}
+          id={inputId}
           value={derivedValue}
           onChange={handleChange}
           onInput={handleInput}
