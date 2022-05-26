@@ -1,11 +1,16 @@
-import { HTMLAttributes } from 'react'
+import {
+  ExtendedProps,
+  CustomProps,
+  LabelProps,
+} from 'components/Atoms/Input/types'
 
-export interface AutocompleteInputProps
-  extends HTMLAttributes<HTMLInputElement> {
+export type AutocompleteInputProps = {
   itemList?: Option[]
   placeholder?: string
   onItemSelect?: (selectedItem: Option) => void
-}
+} & CustomProps &
+  LabelProps &
+  ExtendedProps
 
 export interface AutocompleteInputState {
   listboxStatus: boolean
