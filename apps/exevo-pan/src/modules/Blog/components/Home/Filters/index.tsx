@@ -58,7 +58,7 @@ const Filters = () => {
         </h2>
       }
     >
-      <section className="grid max-w-[200px] shrink-0 gap-4 pt-2">
+      <section className="grid max-w-[200px] shrink-0 gap-4 pt-4">
         <GroupWrapper>
           <Switch
             className="font-light tracking-wide"
@@ -78,14 +78,9 @@ const Filters = () => {
         </GroupWrapper>
 
         <GroupWrapper>
-          <label
-            htmlFor="query-input"
-            className="text-tsm block font-light tracking-wide"
-          >
-            {blog.Filters.searchLabel}
-          </label>
           <Input
             id="query-input"
+            label={blog.Filters.searchLabel}
             value={query}
             onChange={onQueryChange}
             placeholder={blog.Filters.searchPlaceholder}

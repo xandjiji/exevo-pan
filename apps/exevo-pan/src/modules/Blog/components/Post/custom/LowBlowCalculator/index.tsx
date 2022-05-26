@@ -66,17 +66,15 @@ const LowBlowCalculator = () => {
           </Sprite>
         </S.Group.Title>
 
-        <S.Label>
-          {translations[locale as RegisteredLocale].yourAverageDamage}
-          <Input
-            type="number"
-            step={100}
-            min={0}
-            value={averageDamage}
-            onChange={(event) => setAverageDamage(+event.target.value)}
-            hasAlert={false}
-          />
-        </S.Label>
+        <Input
+          label={translations[locale as RegisteredLocale].yourAverageDamage}
+          type="number"
+          step={100}
+          min={0}
+          value={averageDamage}
+          onChange={(event) => setAverageDamage(+event.target.value)}
+          hasAlert={false}
+        />
 
         <S.Result>
           {translations[locale as RegisteredLocale].finalAverageDamage}:{' '}
@@ -91,17 +89,15 @@ const LowBlowCalculator = () => {
           </Sprite>
         </S.Group.Title>
 
-        <S.Label>
-          {translations[locale as RegisteredLocale].creatureHP}
-          <Input
-            type="number"
-            step={100}
-            min={0}
-            value={creatureHp}
-            onChange={(event) => setCreatureHp(+event.target.value)}
-            hasAlert={false}
-          />
-        </S.Label>
+        <Input
+          label={translations[locale as RegisteredLocale].creatureHP}
+          type="number"
+          step={100}
+          min={0}
+          value={creatureHp}
+          onChange={(event) => setCreatureHp(+event.target.value)}
+          hasAlert={false}
+        />
 
         <Checkbox
           label="Powerful Strike imbuement"

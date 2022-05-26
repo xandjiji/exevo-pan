@@ -7,11 +7,7 @@ export const Group = (args: JSX.IntrinsicElements['div']) => (
 )
 
 Group.Title = (args: JSX.IntrinsicElements['span']) => (
-  <span {...args} className="mb-1 font-normal" />
-)
-
-export const Label = (args: JSX.IntrinsicElements['label']) => (
-  <label {...args} className="text-tsm" />
+  <span {...args} className="mb-3 font-normal" />
 )
 
 export const Result = (args: JSX.IntrinsicElements['p']) => (

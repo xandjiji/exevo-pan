@@ -68,11 +68,9 @@ const Newsletter = ({
       ) : (
         <>
           <div className="grid gap-1.5">
-            <label htmlFor="newsletter-email-input" className="text-tsm">
-              Email
-            </label>
             <Input
               id="newsletter-email-input"
+              label="Email"
               placeholder={blog.Newsletter.emailPlaceholder}
               allowClear
               value={email}

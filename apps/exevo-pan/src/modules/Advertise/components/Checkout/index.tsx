@@ -110,7 +110,7 @@ const Checkout = () => {
       </h2>
       <LabelledInput
         id="email"
-        labelText="Email"
+        label="Email"
         placeholder={advertise.Checkout.emailPlaceholder}
         validationState={email.state}
         errorMessage={
@@ -127,7 +127,7 @@ const Checkout = () => {
           <div role="none" className="mt-2" />
           <LabelledInput
             id="paymentCharacter"
-            labelText={advertise.Checkout.paymentCharacterLabel}
+            label={advertise.Checkout.paymentCharacterLabel}
             placeholder={`e.g, '${randomNickname}'`}
             validationState={paymentCharacter.state}
             errorMessage={

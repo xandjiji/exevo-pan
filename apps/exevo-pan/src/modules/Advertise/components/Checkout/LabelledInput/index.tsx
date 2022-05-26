@@ -8,8 +8,6 @@ import styles from './styles.module.css'
 import { LabelledInputProps, InputStates } from './types'
 
 const LabelledInput = ({
-  id,
-  labelText,
   validationState = 'neutral',
   className,
   ...props
@@ -49,14 +47,9 @@ const LabelledInput = ({
 
   return (
     <div className="relative">
-      <label htmlFor={id} className="text-tsm mb-1.5 block">
-        {labelText}
-      </label>
       <Input
-        id={id}
         className={clsx('', styles.input, isValid && styles.valid, className)}
         {...props}
-        ref={undefined}
       />
       {StateIcon[validationState]}
     </div>

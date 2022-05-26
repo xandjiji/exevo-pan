@@ -182,20 +182,15 @@ const MembersTable = ({
             </Chip>
           </div>
         </LabelGroup>
-        <LabelGroup
+        <Input
+          id="search-nickname-input"
           label={war.SearchGrid.MembersTable.searchLabel}
-          htmlFor="search-nickname-input"
-          className="w-full md:max-w-[300px]"
-        >
-          <Input
-            id="search-nickname-input"
-            aria-controls="members-grid"
-            allowClear
-            placeholder="Nickname"
-            onChange={onSearchChange}
-            hasAlert={false}
-          />
-        </LabelGroup>
+          aria-controls="members-grid"
+          allowClear
+          placeholder="Nickname"
+          onChange={onSearchChange}
+          hasAlert={false}
+        />
         <Paginator
           aria-controls="members-grid"
           pageSize={pageSize}
