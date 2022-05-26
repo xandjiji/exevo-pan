@@ -1,8 +1,8 @@
 export type InputValue = number | string
 
-type ExtendedProps = Omit<
+export type ExtendedProps = Omit<
   JSX.IntrinsicElements['input'],
-  'value' | 'defaultValue' | 'aria-label'
+  'value' | 'defaultValue' | 'aria-label' | 'ref'
 >
 
 export type LabelProps =
@@ -15,10 +15,12 @@ export type LabelProps =
       'aria-label': string
     }
 
-export type InputProps = ExtendedProps & {
+export type CustomProps = {
   allowClear?: boolean
   errorMessage?: string
   value?: InputValue
   defaultValue?: InputValue
   hasAlert?: boolean
-} & LabelProps
+}
+
+export type InputProps = CustomProps & ExtendedProps & LabelProps
