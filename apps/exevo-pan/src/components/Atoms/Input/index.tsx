@@ -57,7 +57,6 @@ const Input = ({
     <div className={clsx('text-tsm', className)} style={style}>
       <label
         htmlFor={inputId}
-        aria-label={props['aria-label']}
         className="text-tsm text-onSurface mb-2 block font-light tracking-wide"
       >
         {props.label}

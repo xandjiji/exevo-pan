@@ -5,11 +5,7 @@ import LabelledInput from '..'
 describe('<LabelledInput />', () => {
   test('should render all props correctly', () => {
     renderWithProviders(
-      <LabelledInput
-        id="test-id"
-        labelText="Email"
-        placeholder="your@email.com"
-      />,
+      <LabelledInput id="test-id" label="Email" placeholder="your@email.com" />,
     )
 
     const inputElement = screen.getByLabelText('Email')
@@ -22,39 +18,27 @@ describe('<LabelledInput />', () => {
 
   test('should change icons according to the validation state', () => {
     const { rerender } = renderWithProviders(
-      <LabelledInput
-        id="test-id"
-        labelText="Email"
-        validationState="loading"
-      />,
+      <LabelledInput id="test-id" label="Email" validationState="loading" />,
     )
     expect(screen.getByLabelText('Validating...')).toBeInTheDocument()
 
     rerender(
-      <LabelledInput id="test-id" labelText="Email" validationState="valid" />,
+      <LabelledInput id="test-id" label="Email" validationState="valid" />,
     )
     expect(screen.getByLabelText('Field is valid')).toBeInTheDocument()
 
     rerender(
-      <LabelledInput
-        id="test-id"
-        labelText="Email"
-        validationState="invalid"
-      />,
+      <LabelledInput id="test-id" label="Email" validationState="invalid" />,
     )
     const iconElement = screen.getByLabelText('Field is invalid')
     expect(iconElement).toBeInTheDocument()
 
     rerender(
-      <LabelledInput
-        id="test-id"
-        labelText="Email"
-        validationState="neutral"
-      />,
+      <LabelledInput id="test-id" label="Email" validationState="neutral" />,
     )
     expect(iconElement).toHaveAttribute('aria-hidden', 'true')
 
-    rerender(<LabelledInput id="test-id" labelText="Email" />)
+    rerender(<LabelledInput id="test-id" label="Email" />)
     expect(iconElement).toHaveAttribute('aria-hidden', 'true')
   })
 })

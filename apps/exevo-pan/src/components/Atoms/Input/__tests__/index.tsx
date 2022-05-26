@@ -7,7 +7,7 @@ const mockedOnChange = jest.fn()
 
 describe('<Input />', () => {
   test('allowClear = TRUE should ENABLE ClearButton and its functionalities', () => {
-    renderWithProviders(<Input allowClear aria-label="input" />)
+    renderWithProviders(<Input allowClear label="input" />)
 
     const inputElement = screen.getByLabelText('input')
     const clearButton = screen.getByLabelText('Clear input')
@@ -41,7 +41,7 @@ describe('<Input />', () => {
   })
 
   test('allowClear = FALSE should DISABLE ClearButton and its functionalities', () => {
-    renderWithProviders(<Input aria-label="input" />)
+    renderWithProviders(<Input label="input" />)
 
     const inputElement = screen.getByLabelText('input')
 
@@ -52,11 +52,9 @@ describe('<Input />', () => {
   })
 
   test('errorMessage should be visible', () => {
-    renderWithProviders(
-      <Input placeholder="Choose a server" errorMessage="invalid field" />,
-    )
+    renderWithProviders(<Input label="Server" errorMessage="invalid field" />)
 
-    const inputElement = screen.getByPlaceholderText('Choose a server')
+    const inputElement = screen.getByLabelText('Server')
     const errorElement = screen.getByRole('alert')
 
     expect(inputElement).toBeInvalid()
@@ -71,7 +69,7 @@ describe('<Input />', () => {
 
   test('errorMessage should NOT visible', () => {
     const { rerender } = renderWithProviders(
-      <Input aria-label="input" errorMessage="field is invalid" />,
+      <Input label="input" errorMessage="field is invalid" />,
     )
 
     const inputElement = screen.getByLabelText('input')
@@ -86,7 +84,7 @@ describe('<Input />', () => {
       errorElement.getAttribute('id'),
     )
 
-    rerender(<Input aria-label="input" />)
+    rerender(<Input label="input" />)
 
     expect(inputElement).not.toBeInvalid()
     expect(errorElement).toHaveClass('opacity-0')
@@ -100,7 +98,7 @@ describe('<Input />', () => {
 
   test('className and Style should be attributed to wrapper and not to input', () => {
     const { container } = renderWithProviders(
-      <Input className="class" style={{ width: 1000 }} aria-label="input" />,
+      <Input className="class" style={{ width: 1000 }} label="input" />,
     )
 
     const inputElement = screen.getByLabelText('input')
@@ -115,13 +113,13 @@ describe('<Input />', () => {
     const { rerender } = renderWithProviders(
       <Input
         allowClear
-        placeholder="Search a nickname"
+        label="Nickname"
         value="Eternal Oblivion"
         onChange={mockedOnChange}
       />,
     )
 
-    const inputElement = screen.getByPlaceholderText('Search a nickname')
+    const inputElement = screen.getByLabelText('Nickname')
     const clearButton = screen.getByLabelText('Clear input')
 
     expect(inputElement).toHaveValue('Eternal Oblivion')
@@ -140,7 +138,7 @@ describe('<Input />', () => {
     rerender(
       <Input
         allowClear
-        placeholder="Search a nickname"
+        label="Nickname"
         value="Cachero"
         onChange={mockedOnChange}
       />,
@@ -149,9 +147,22 @@ describe('<Input />', () => {
     expect(inputElement).toHaveValue('Cachero')
   })
 
+  test('should still be acessible with element label', () => {
+    renderWithProviders(
+      <Input
+        allowClear
+        label={<p>element label</p>}
+        aria-label="input label"
+        value="10"
+      />,
+    )
+
+    expect(screen.getByLabelText('input label')).toHaveValue('10')
+  })
+
   test('a11y', async () => {
     const { container } = renderWithProviders(
-      <Input allowClear aria-label="input label" />,
+      <Input allowClear label="input label" />,
     )
     await assertNoA11yViolations(container)
   })
