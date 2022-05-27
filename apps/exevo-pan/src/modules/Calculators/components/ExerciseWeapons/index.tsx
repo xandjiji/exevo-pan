@@ -9,7 +9,7 @@ export const ExerciseWeapons = () => {
     <div>
       <Input
         allowClear
-        defaultValue="asdsa"
+        defaultValue="asdsa111"
         label="Current skill"
         stateIcon="invalid"
       />
@@ -21,12 +21,7 @@ export const ExerciseWeapons = () => {
         stateIcon="loading"
       />
 
-      <Input
-        allowClear
-        defaultValue="asdsa"
-        label="Current skill"
-        stateIcon="neutral"
-      />
+      <Input allowClear label="Current skill" stateIcon="neutral" />
 
       <Input
         allowClear
@@ -42,7 +37,6 @@ export const ExerciseWeapons = () => {
         label={<p>Desired skill</p>}
         aria-label="desired skill"
         stateIcon={value.includes('0') ? 'invalid' : 'neutral'}
-        /* errorMessage={value.includes('0') ? 'invalid' : ''} */
       />
 
       {/* <p>% to next</p>

@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
-import { forwardRef, Ref, useState, memo } from 'react'
+import { forwardRef, Ref, useState, memo, useEffect } from 'react'
 import clsx from 'clsx'
 import { useUuid, useSharedRef } from 'hooks'
 import ClearIcon from 'assets/svgs/cross.svg'
@@ -55,8 +55,10 @@ const Input = (
     }
   }
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChange?.(event)
+    setValue(event.target.value)
+  }
 
   const StateIcon = useStateIcon(stateIcon)
 
