@@ -1,11 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { Button } from 'components/Atoms'
+import { Input, Button } from 'components/Atoms'
 import { MailCheckoutClient } from 'services'
 import { locales } from 'Constants'
 import { useForm } from '../../contexts/Form'
-import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter, randomCharacter } from './utils'
 
 const { DEFAULT_LOCALE } = locales
@@ -108,11 +107,11 @@ const Checkout = () => {
       <h2 className="bg-primary text-onPrimary -mx-3 mb-4 py-3 px-6 text-2xl font-normal">
         {advertise.Checkout.title}
       </h2>
-      <LabelledInput
+      <Input
         id="email"
         label="Email"
         placeholder={advertise.Checkout.emailPlaceholder}
-        validationState={email.state}
+        stateIcon={email.state}
         errorMessage={
           email.state === 'invalid'
             ? advertise.Checkout.emailInvalidMessage
@@ -125,11 +124,11 @@ const Checkout = () => {
       {paymentMethod === 'TIBIA_COINS' && (
         <>
           <div role="none" className="mt-2" />
-          <LabelledInput
+          <Input
             id="paymentCharacter"
             label={advertise.Checkout.paymentCharacterLabel}
             placeholder={`e.g, '${randomNickname}'`}
-            validationState={paymentCharacter.state}
+            stateIcon={paymentCharacter.state}
             errorMessage={
               paymentCharacter.state === 'invalid'
                 ? advertise.Checkout.paymentCharacterInvalidMessage

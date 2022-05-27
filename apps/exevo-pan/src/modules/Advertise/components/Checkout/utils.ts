@@ -27,7 +27,7 @@ export const randomCharacter = (): string => {
     'Arieswar',
     'Kharsek',
     "Lord'Paulistinha",
-    '‎Mateusz Dragon Wielki',
+    'Mateusz Dragon Wielki',
   ]
 
   return characters[Math.floor(Math.random() * characters.length)]

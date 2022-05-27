@@ -1,10 +1,11 @@
 import { ReactNode } from 'react'
+import { StateIcon } from 'components/Atoms/Input/types'
 
-export type InputStates = 'invalid' | 'loading' | 'neutral' | 'valid'
+export type { StateIcon }
 
 export type InputState = {
   value: string
-  state: InputStates
+  state: StateIcon
 }
 
 export interface FormContextState {
@@ -46,7 +47,7 @@ export type Action =
   | {
       type: 'VALIDATE_INPUT'
       key: keyof Pick<FormContextState, 'email' | 'paymentCharacter'>
-      state: InputStates
+      state: StateIcon
     }
   | {
       type: 'FINISH_FORM'
