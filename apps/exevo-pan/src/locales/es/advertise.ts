@@ -34,11 +34,6 @@ export default {
     paymentCharacterInvalidMessage: 'Personaje no existe',
     checkoutButtonLabel: 'Validar y finalizar compra',
     checkoutButton: 'Finalizar',
-    LabelledInput: {
-      valid: 'Campo valido',
-      invalid: 'Campo inválido',
-      loading: 'Validando...',
-    },
   },
   PaymentDetails: {
     titleIconLabel: 'Completado con éxito',

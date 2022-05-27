@@ -34,11 +34,6 @@ export default {
     paymentCharacterInvalidMessage: 'Postać nie istnieję',
     checkoutButtonLabel: 'Sprawdź i przejdź do podsumowania',
     checkoutButton: 'Podsumowanie',
-    LabelledInput: {
-      valid: 'Pole jest prawidłowe',
-      invalid: 'Pole jest nieprawidłowe',
-      loading: 'Podsumowywanie...',
-    },
   },
   PaymentDetails: {
     titleIconLabel: 'Wszystko się zgadza!',
