@@ -1,29 +1,34 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useRef, memo } from 'react'
+import { forwardRef, Ref, useState, memo } from 'react'
 import clsx from 'clsx'
-import { useUuid } from 'hooks'
+import { useUuid, useSharedRef } from 'hooks'
 import ClearIcon from 'assets/svgs/cross.svg'
 import { useStateIcon } from './useStateIcon'
 import { InputProps, InputValue } from './types'
 
-const Input = ({
-  className,
-  style,
-  id,
-  allowClear = false,
-  errorMessage,
-  value: valueProp,
-  defaultValue,
-  onChange,
-  hasAlert = true,
-  stateIcon = 'neutral',
-  ...props
-}: InputProps) => {
+const Input = (
+  {
+    className,
+    style,
+    id,
+    allowClear = false,
+    errorMessage,
+    value: valueProp,
+    defaultValue,
+    onChange,
+    hasAlert = true,
+    stateIcon = 'neutral',
+    ...props
+  }: InputProps,
+  refProp: Ref<HTMLInputElement>,
+) => {
   const {
     translations: { common },
   } = useTranslations()
+
+  const innerRef = useSharedRef<HTMLInputElement>(refProp)
 
   const inputId = id ?? useUuid()
   const errorId = useUuid()
@@ -35,20 +40,18 @@ const Input = ({
   const isClearButtonActive = allowClear && !!derivedValue
   const isInvalid = !!errorMessage
 
-  const inputRef = useRef<HTMLInputElement>(null)
-
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     setValue(event.target.value)
 
   const handleClearClick = () => {
-    if (inputRef.current) {
+    if (innerRef.current) {
       if (isClearButtonActive) {
         const event = new Event('input', { bubbles: true })
         setValue('')
-        inputRef.current.value = ''
-        inputRef.current.dispatchEvent(event)
+        innerRef.current.value = ''
+        innerRef.current.dispatchEvent(event)
       }
-      inputRef.current.focus()
+      innerRef.current.focus()
     }
   }
 
@@ -72,10 +75,10 @@ const Input = ({
             ? 'border-red'
             : 'border-separator focus-within:border-primary',
         )}
-        onClick={() => inputRef.current?.focus()}
+        onClick={() => innerRef.current?.focus()}
       >
         <input
-          ref={inputRef}
+          ref={innerRef}
           id={inputId}
           value={derivedValue}
           onChange={handleChange}
@@ -125,4 +128,4 @@ const Input = ({
   )
 }
 
-export default memo(Input)
+export default memo(forwardRef(Input))
