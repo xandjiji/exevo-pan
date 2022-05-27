@@ -41,6 +41,8 @@ export const ExerciseWeapons = () => {
         onChange={(event) => setValue(event.target.value)}
         label={<p>Desired skill</p>}
         aria-label="desired skill"
+        stateIcon={value.includes('0') ? 'invalid' : 'neutral'}
+        /* errorMessage={value.includes('0') ? 'invalid' : ''} */
       />
 
       {/* <p>% to next</p>

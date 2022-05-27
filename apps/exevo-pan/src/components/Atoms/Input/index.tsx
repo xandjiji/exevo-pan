@@ -67,7 +67,7 @@ const Input = ({
       </label>
       <div
         className={clsx(
-          'border-1 bg-surface flex w-full cursor-text rounded-md border-solid transition-colors',
+          'border-1 bg-surface flex w-full cursor-text items-center rounded-md border-solid transition-colors',
           isInvalid
             ? 'border-red'
             : 'border-separator focus-within:border-primary',
