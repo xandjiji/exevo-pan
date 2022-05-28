@@ -134,6 +134,38 @@ const higlightedTemplate = ({ nickname, id, days, timestamp }) => `
 </tr>
 `
 
+const calculateTotalOrders = (auctions) => {
+  const BASE_PRICE = 5
+  const BASE_DAY_PRICE = 10
+
+  let totalIncome = 0
+  let dayCount = 0
+  auctions.forEach(({ active, days }) => {
+    const dayAmount = days.length
+    dayCount += dayAmount
+    if (active && dayAmount > 0) {
+      if (dayAmount >= 5) return (totalIncome += dayAmount * BASE_DAY_PRICE)
+      totalIncome += BASE_PRICE + dayAmount * BASE_DAY_PRICE
+    }
+  })
+
+  return { dayCount, totalIncome }
+}
+
+const calculateMonthlyAverage = (value) => {
+  const DAYS_IN_A_MONTH = 30
+  return (value / DAYS_IN_A_MONTH).toFixed(2)
+}
+
+const paintAverages = ({ dayCount, totalIncome }) => {
+  document.getElementById('month-element').innerHTML = `R$ ${totalIncome}`
+  document.getElementById(
+    'average-element',
+  ).innerHTML = `R$ ${calculateMonthlyAverage(totalIncome)}`
+  document.getElementById('days-element').innerHTML =
+    calculateMonthlyAverage(dayCount)
+}
+
 fetch(API).then((response) => {
   response.json().then((data) => {
     highlighted = data
@@ -141,6 +173,8 @@ fetch(API).then((response) => {
       .sort((a, b) => b.timestamp - a.timestamp)
 
     console.log(highlighted)
+
+    paintAverages(calculateTotalOrders(highlighted))
 
     const elements = highlighted.map(higlightedTemplate).join('')
 
