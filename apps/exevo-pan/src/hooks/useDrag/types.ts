@@ -4,12 +4,39 @@ export type MouseTouchEvent =
 
 type MouseOrTouchHandler = (event: MouseTouchEvent) => void
 
-export interface positionObject {
+export interface PositionObject {
   x: number
   y: number
+  percentageX: number
+  percentageY: number
 }
 
-export interface DragObject {
+export interface UseDragProps {
+  clamped?: boolean
+}
+
+export interface UseDragState {
+  isMousePressed: boolean
+  position: PositionObject
+}
+
+export type Action =
+  | {
+      type: 'DRAG_START'
+      event: MouseTouchEvent
+      clamped: boolean
+    }
+  | {
+      type: 'DRAGGING'
+      event: MouseTouchEvent
+      clamped: boolean
+    }
+  | {
+      type: 'DRAG_STOP'
+      event: MouseTouchEvent
+    }
+
+export interface DragObject extends UseDragState {
   binders: {
     onMouseDown: MouseOrTouchHandler
     onTouchStart: MouseOrTouchHandler
@@ -18,7 +45,4 @@ export interface DragObject {
     onMouseUp: MouseOrTouchHandler
     onTouchEnd: MouseOrTouchHandler
   }
-  isMousePressed: boolean
-  position: positionObject
-  setPosition: React.Dispatch<React.SetStateAction<positionObject>>
 }
