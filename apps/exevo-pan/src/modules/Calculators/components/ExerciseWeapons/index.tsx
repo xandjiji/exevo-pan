@@ -17,6 +17,19 @@ export const ExerciseWeapons = () => {
         displayValue
       />
 
+      <div className="my-4" />
+
+      <Slider
+        label="% to next"
+        defaultValue={10}
+        step={0.2}
+        max={20}
+        min={5}
+        showInput
+        displayValue
+        disabled
+      />
+
       {/* <p>% to next</p>
       <SliderInput max={100} min={0} />
 

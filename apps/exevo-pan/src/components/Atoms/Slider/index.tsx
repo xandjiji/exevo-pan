@@ -87,7 +87,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       }
     }, [percentageX, range, step, setValue])
 
-    const handleTrackKeyPress = (event: React.KeyboardEvent): void => {
+    const handleTrackKeyPress = (event: React.KeyboardEvent) => {
       const keyboardIncrement = getKeyboardIncrement(event)
 
       if (keyboardIncrement !== 0) {
@@ -144,8 +144,12 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
           <div className="w-full">
             {/* Rail */}
             <div
-              className="bg-primaryVariant relative flex h-1 w-full items-center pr-4"
-              /* disabled={disabled} */
+              className={clsx(
+                'relative flex h-1 w-full items-center pr-4',
+                disabled
+                  ? 'bg-separator/40 pointer-events-none'
+                  : 'bg-primaryVariant',
+              )}
               tabIndex={disabled ? -1 : 0}
               onKeyDown={disabled ? undefined : handleTrackKeyPress}
               {...binders}
@@ -155,20 +159,24 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
               {/* Track */}
               <div
-                className="bg-primary absolute top-0 left-0 h-full"
-                /* disabled={disabled} */
+                className={clsx(
+                  'absolute top-0 left-0 h-full',
+                  disabled ? 'bg-separator' : 'bg-primary',
+                )}
                 style={{ width: relativeCursorPosition }}
               />
               {/* Cursor */}
               <div
                 title={typeof label === 'string' ? label : undefined}
-                /* disabled={disabled} */
                 role="slider"
                 aria-valuemin={min}
                 aria-valuemax={max}
                 aria-valuenow={value}
                 aria-valuetext={transformedText as string}
-                className="z-1 bg-primaryHighlight h-4 w-4 shrink-0 rounded-full shadow-md"
+                className={clsx(
+                  'z-1 h-4 w-4 shrink-0 rounded-full shadow-md',
+                  disabled ? 'bg-separator' : 'bg-primaryHighlight',
+                )}
                 style={{ marginLeft: relativeCursorPosition }}
               />
             </div>
@@ -180,7 +188,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                   <span
                     key={mark.value}
                     style={{ left: mark.leftOffset }}
-                    onClick={(): void => setValue(mark.value)}
+                    onClick={() => setValue(mark.value)}
                   >
                     {mark.label}
                   </span>
@@ -199,7 +207,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               disabled={disabled}
               value={inputValue}
               onChange={handleInput}
-              onBlur={(): void => setInputValue(value)}
+              onBlur={() => setInputValue(value)}
             />
           )}
         </div>
@@ -211,7 +219,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
           name={nameProp}
           disabled={disabled}
           value={value}
-          onInput={(event): void =>
+          onInput={(event) =>
             onChange?.(event as React.ChangeEvent<HTMLInputElement>)
           }
         />
