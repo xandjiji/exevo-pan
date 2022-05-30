@@ -1,42 +1,19 @@
 import { useState } from 'react'
-import { Switch, Input, SliderInput } from 'components/Atoms'
+import { Switch, Input, Slider } from 'components/Atoms'
 import { AutocompleteInput } from 'components/Organisms'
 
 export const ExerciseWeapons = () => {
   const [value, setValue] = useState('')
 
   return (
-    <div>
-      <Input
-        allowClear
-        defaultValue="asdsa111"
-        label="Current skill"
-        stateIcon="invalid"
-      />
-
-      <Input
-        allowClear
-        defaultValue="asdsa"
-        label="Current skill"
-        stateIcon="loading"
-      />
-
-      <Input allowClear label="Current skill" stateIcon="neutral" />
-
-      <Input
-        allowClear
-        defaultValue="asdsa"
-        label="Current skill"
-        stateIcon="valid"
-      />
-
-      <Input
-        allowClear
-        value={value}
-        onChange={(event) => setValue(event.target.value)}
-        label={<p>Desired skill</p>}
-        aria-label="desired skill"
-        stateIcon={value.includes('0') ? 'invalid' : 'neutral'}
+    <div className="border-1 border-solid border-black">
+      <Slider
+        label="% to next"
+        defaultValue={20}
+        max={100}
+        min={0}
+        showInput
+        displayValue
       />
 
       {/* <p>% to next</p>
