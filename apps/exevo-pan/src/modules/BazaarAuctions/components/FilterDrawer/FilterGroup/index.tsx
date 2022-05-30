@@ -1,21 +1,8 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { memo } from 'react'
 import clsx from 'clsx'
-import { Sticker } from 'components/Atoms'
+import { Sticker, Label } from 'components/Atoms'
 import { FilterGroupProps } from './types'
-
-export const Label = ({
-  className,
-  ...props
-}: JSX.IntrinsicElements['label']) => (
-  <label
-    className={clsx(
-      'text-tsm text-onSurface font-light tracking-wide',
-      className,
-    )}
-    {...props}
-  />
-)
 
 const FilterGroup = ({
   newSticker = false,

@@ -24,6 +24,7 @@ import {
 } from './utils'
 import useControlledValue from './useControlledState'
 import useCalculateMarks from './useCalculateMarks'
+import Label from '../Label'
 import * as S from './atoms'
 import { SliderProps } from './types'
 
@@ -131,14 +132,14 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
     return (
       <div {...props}>
-        <div className="flex items-center justify-between">
+        <div className="mb-2 flex items-center justify-between">
           {/* useUuid? */}
-          <label htmlFor={idProp ?? nameProp}>{label}</label>
+          <Label htmlFor={idProp ?? nameProp}>{label}</Label>
           {displayValue && <span>{transformedText}</span>}
         </div>
 
         {/* RailWrapper */}
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           {/* SliderWrapper */}
           <div className="w-full">
             {/* Rail */}

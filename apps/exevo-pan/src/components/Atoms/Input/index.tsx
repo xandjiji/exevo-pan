@@ -1,10 +1,11 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
-import { forwardRef, Ref, useState, memo, useEffect } from 'react'
+import { forwardRef, Ref, useState, memo } from 'react'
 import clsx from 'clsx'
 import { useUuid, useSharedRef } from 'hooks'
 import ClearIcon from 'assets/svgs/cross.svg'
+import Label from '../Label'
 import { useStateIcon } from './useStateIcon'
 import { InputProps, InputValue } from './types'
 
@@ -64,12 +65,9 @@ const Input = (
 
   return (
     <div className={clsx('text-tsm', className)} style={style}>
-      <label
-        htmlFor={inputId}
-        className="text-tsm text-onSurface mb-2 block font-light tracking-wide"
-      >
+      <Label htmlFor={inputId} className="mb-2">
         {props.label}
-      </label>
+      </Label>
       <div
         className={clsx(
           'border-1 bg-surface flex w-full cursor-text items-center rounded-md border-solid transition-colors',

@@ -7,8 +7,10 @@ export const ExerciseWeapons = () => {
 
   return (
     <div className="border-1 border-solid border-black">
+      <Input label="Name" />
+
       <Slider
-        label="% to next"
+        label="Percentage to next"
         defaultValue={10}
         step={0.2}
         max={20}
@@ -16,8 +18,32 @@ export const ExerciseWeapons = () => {
         showInput
         displayValue
       />
-
       <div className="my-4" />
+      <Slider
+        label="Percentage to next"
+        defaultValue={10}
+        step={0.2}
+        max={20}
+        min={5}
+        showInput
+      />
+      <div className="my-4" />
+      <Slider
+        label="Percentage to next"
+        defaultValue={10}
+        step={0.2}
+        max={20}
+        min={5}
+        displayValue
+      />
+      <div className="my-4" />
+      <Slider
+        label="Percentage to next"
+        defaultValue={10}
+        step={0.2}
+        max={20}
+        min={5}
+      />
 
       <Slider
         label="% to next"
