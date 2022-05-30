@@ -31,7 +31,6 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
   (componentProps: SliderProps, ref: React.Ref<HTMLInputElement>) => {
     const {
       id: idProp,
-      className,
       name: nameProp,
       min,
       max,
@@ -131,7 +130,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     )
 
     return (
-      <div className={clsx('group', className)} {...props}>
+      <div {...props}>
         <div className="flex items-center justify-between">
           {/* useUuid? */}
           <label htmlFor={idProp ?? nameProp}>{label}</label>
@@ -148,7 +147,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                 'relative flex h-1 w-full items-center pr-4',
                 disabled
                   ? 'bg-separator/40 pointer-events-none'
-                  : 'bg-primaryVariant',
+                  : 'bg-primaryVariant cursor-pointer',
               )}
               tabIndex={disabled ? -1 : 0}
               onKeyDown={disabled ? undefined : handleTrackKeyPress}
