@@ -24,6 +24,7 @@ import {
 } from './utils'
 import useControlledValue from './useControlledState'
 import useCalculateMarks from './useCalculateMarks'
+import useInputWidth from './useInputWidth'
 import Label from '../Label'
 import * as S from './atoms'
 import { SliderProps } from './types'
@@ -77,6 +78,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       marks,
       transformDisplayedValues,
     })
+
+    const inputWidth = useInputWidth({ max, step })
 
     const isMounted = useRef(false)
     useLayoutEffect(() => {
@@ -208,6 +211,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               value={inputValue}
               onChange={handleInput}
               onBlur={() => setInputValue(value)}
+              className="reset-spinner border-1 bg-surface text-tsm text-onSurface border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors"
+              style={{ width: inputWidth }}
             />
           )}
         </div>
