@@ -24,9 +24,8 @@ import {
 } from './utils'
 import useControlledValue from './useControlledState'
 import useCalculateMarks from './useCalculateMarks'
+import * as S from './atoms'
 import { SliderProps } from './types'
-
-const EXTENDED_CLICKABLE_AREA = 32
 
 const Slider = forwardRef<HTMLInputElement, SliderProps>(
   (componentProps: SliderProps, ref: React.Ref<HTMLInputElement>) => {
@@ -146,28 +145,13 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
             {/* Rail */}
             <div
               className="bg-primaryVariant relative flex h-1 w-full items-center pr-4"
-              /* @ ToDo: increase clickable area */
               /* disabled={disabled} */
               tabIndex={disabled ? -1 : 0}
               onKeyDown={disabled ? undefined : handleTrackKeyPress}
               {...binders}
             >
-              {/* ClickableArea */}
-              <div
-                role="none"
-                className="absolute top-1/2 left-1/2"
-                style={{
-                  transform: 'translate(-50%, -50%)',
-                  width: `calc(100% + ${EXTENDED_CLICKABLE_AREA}px)`,
-                  height: `calc(100% + ${EXTENDED_CLICKABLE_AREA}px)`,
-                }}
-              />
-
-              {/* FullWindowClickable */}
-              <div
-                role="none"
-                className="z-99 fixed top-0 left-0 hidden h-screen w-screen group-active:block"
-              />
+              <S.ExtendedClickableArea />
+              <S.FullscreenClickable />
 
               {/* Track */}
               <div
@@ -184,7 +168,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                 aria-valuemax={max}
                 aria-valuenow={value}
                 aria-valuetext={transformedText as string}
-                className="z-1 bg-primary h-4 w-4 shrink-0 rounded-full"
+                className="z-1 bg-primaryHighlight h-4 w-4 shrink-0 rounded-full shadow-md"
                 style={{ marginLeft: relativeCursorPosition }}
               />
             </div>

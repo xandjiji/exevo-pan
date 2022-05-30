@@ -9,9 +9,10 @@ export const ExerciseWeapons = () => {
     <div className="border-1 border-solid border-black">
       <Slider
         label="% to next"
-        defaultValue={20}
-        max={100}
-        min={0}
+        defaultValue={10}
+        step={0.2}
+        max={20}
+        min={5}
         showInput
         displayValue
       />
