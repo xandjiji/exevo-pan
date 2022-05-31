@@ -11,7 +11,7 @@ import {
   useRef,
   useLayoutEffect,
 } from 'react'
-import { useSharedRef, useDrag } from 'hooks'
+import { useSharedRef, useDrag, useUuid } from 'hooks'
 import {
   defaultTransform,
   clampValue,
@@ -34,7 +34,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     const {
       id: idProp,
       className,
-      name: nameProp,
+      name,
       min,
       max,
       value: valueProp,
@@ -69,6 +69,9 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       () => clampValue(stateValue, range),
       [stateValue, range],
     )
+
+    const uuid = useUuid()
+    const inputId = idProp ?? uuid
 
     const { binders, position } = useDrag({ clamped: true })
     const { percentageX } = position
@@ -138,8 +141,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     return (
       <div className={clsx(hasMarks && 'pb-5', className)} {...props}>
         <div className="mb-2 flex items-center justify-between gap-1.5">
-          {/* useUuid? */}
-          <Label htmlFor={idProp ?? nameProp}>{label}</Label>
+          <Label htmlFor={inputId}>{label}</Label>
           {displayValue && <span className="text-tsm">{transformedText}</span>}
         </div>
 
@@ -233,8 +235,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
         <input
           hidden
           ref={innerRef}
-          id={idProp}
-          name={nameProp}
+          id={inputId}
+          name={name}
           disabled={disabled}
           value={value}
           onInput={(event) =>
