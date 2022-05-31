@@ -98,7 +98,7 @@ const Input = (
           disabled={disabled}
           {...props}
         />
-        {allowClear && (
+        {allowClear && !disabled && (
           <button
             type="button"
             aria-label={common.ClearInputLabel}

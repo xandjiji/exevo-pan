@@ -7,10 +7,10 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <Input label="Name" placeholder="Choose your fighter" />
+      <Input label="Name" placeholder="Choose your fighter" stateIcon="valid" />
       <Input label="Name" defaultValue="Jackie Chan" />
       <Input label="Name" placeholder="Choose your fighter" disabled />
-      <Input label="Name" defaultValue="Jackie Chan" disabled />
+      <Input label="Name" defaultValue="Jackie Chan" disabled allowClear />
       <input disabled />
       <input placeholder="Choose your fighter" disabled />
       <input defaultValue="Jackie Chan" disabled />

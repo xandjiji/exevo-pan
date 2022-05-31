@@ -147,6 +147,33 @@ describe('<Input />', () => {
     expect(inputElement).toHaveValue('Cachero')
   })
 
+  test('should be disabled', () => {
+    renderWithProviders(
+      <Input label="input" disabled allowClear defaultValue="initial value" />,
+    )
+
+    const inputElement = screen.getByLabelText('input')
+
+    userEvent.type(inputElement, 'my value')
+    expect(inputElement).toHaveValue('initial value')
+
+    expect(screen.queryByLabelText('Clear input')).not.toBeInTheDocument()
+  })
+
+  test('should display state icons', () => {
+    const { rerender } = renderWithProviders(
+      <Input label="input" stateIcon="loading" />,
+    )
+
+    expect(screen.getByLabelText('Validating...')).toBeInTheDocument()
+
+    rerender(<Input label="input" stateIcon="invalid" />)
+    expect(screen.getByLabelText('Field is invalid')).toBeInTheDocument()
+
+    rerender(<Input label="input" stateIcon="valid" />)
+    expect(screen.getByLabelText('Field is valid')).toBeInTheDocument()
+  })
+
   test('should still be acessible with element label', () => {
     renderWithProviders(
       <Input
