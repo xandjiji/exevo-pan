@@ -18,6 +18,7 @@ const Input = (
     errorMessage,
     value: valueProp,
     defaultValue,
+    disabled,
     onChange,
     hasAlert = true,
     stateIcon = 'neutral',
@@ -70,10 +71,11 @@ const Input = (
       </Label>
       <div
         className={clsx(
-          'border-1 bg-surface flex w-full cursor-text items-center rounded-md border-solid transition-colors',
+          'border-1 flex w-full cursor-text items-center rounded-md border-solid transition-colors',
           isInvalid
             ? 'border-red'
             : 'border-separator focus-within:border-primary',
+          disabled ? 'bg-separator' : 'bg-surface',
         )}
         onClick={() => innerRef.current?.focus()}
       >
@@ -86,8 +88,14 @@ const Input = (
           aria-invalid={isInvalid}
           aria-errormessage={isInvalid ? errorId : undefined}
           autoComplete="off"
-          className="text-tsm text-onSurface w-full border-none bg-transparent py-2.5 px-4 outline-none transition-all"
+          className={clsx(
+            'text-tsm text-onSurface w-full border-none bg-transparent py-2.5 px-4 outline-none transition-all',
+            disabled
+              ? 'placeholder:text-onSurface/50'
+              : 'placeholder:text-separator',
+          )}
           style={{ paddingRight: isClearButtonActive ? 0 : undefined }}
+          disabled={disabled}
           {...props}
         />
         {allowClear && (

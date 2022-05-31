@@ -7,7 +7,13 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <Input label="Name" />
+      <Input label="Name" placeholder="Choose your fighter" />
+      <Input label="Name" defaultValue="Jackie Chan" />
+      <Input label="Name" placeholder="Choose your fighter" disabled />
+      <Input label="Name" defaultValue="Jackie Chan" disabled />
+      <input disabled />
+      <input placeholder="Choose your fighter" disabled />
+      <input defaultValue="Jackie Chan" disabled />
 
       <Slider
         label="Percentage to next"
