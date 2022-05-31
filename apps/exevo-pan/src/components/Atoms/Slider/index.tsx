@@ -162,7 +162,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               {/* Track */}
               <div
                 className={clsx(
-                  'absolute top-0 left-0 h-full rounded-3xl',
+                  'absolute top-0 left-0 h-full rounded-3xl transition-all group-active:transition-none',
                   disabled ? 'bg-separator' : 'bg-primary',
                 )}
                 style={{ width: relativeCursorPosition }}
@@ -177,7 +177,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                 aria-valuenow={value}
                 aria-valuetext={transformedText as string}
                 className={clsx(
-                  'z-1 h-4 w-4 shrink-0 rounded-full shadow-md',
+                  'z-1 h-4 w-4 shrink-0 rounded-full shadow-md transition-all group-active:transition-none',
                   disabled ? 'bg-separator' : 'bg-primaryHighlight',
                 )}
                 style={{ marginLeft: relativeCursorPosition }}
