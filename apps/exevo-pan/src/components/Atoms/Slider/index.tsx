@@ -211,7 +211,10 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               value={inputValue}
               onChange={handleInput}
               onBlur={() => setInputValue(value)}
-              className="reset-spinner border-1 bg-surface text-tsm text-onSurface border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors"
+              className={clsx(
+                'reset-spinner border-1 text-tsm text-onSurface border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors',
+                disabled ? 'bg-separator' : 'bg-surface',
+              )}
               style={{ width: inputWidth }}
             />
           )}
