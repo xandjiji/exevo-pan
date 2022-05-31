@@ -6,7 +6,7 @@ export const ExerciseWeapons = () => {
   const [value, setValue] = useState('')
 
   return (
-    <div className="border-1 border-solid border-black">
+    <div>
       <Input label="Name" />
 
       <Slider

@@ -148,7 +148,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
             {/* Rail */}
             <div
               className={clsx(
-                'group relative flex h-1 w-full items-center pr-4',
+                'group relative flex h-1 w-full items-center rounded-3xl pr-4',
                 disabled
                   ? 'bg-separator/40 pointer-events-none'
                   : 'bg-primaryVariant cursor-pointer',
@@ -163,7 +163,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               {/* Track */}
               <div
                 className={clsx(
-                  'absolute top-0 left-0 h-full',
+                  'absolute top-0 left-0 h-full rounded-3xl',
                   disabled ? 'bg-separator' : 'bg-primary',
                 )}
                 style={{ width: relativeCursorPosition }}
