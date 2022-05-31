@@ -33,6 +33,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
   (componentProps: SliderProps, ref: React.Ref<HTMLInputElement>) => {
     const {
       id: idProp,
+      className,
       name: nameProp,
       min,
       max,
@@ -78,6 +79,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       marks,
       transformDisplayedValues,
     })
+    const hasMarks = !!calculatedMarks.length
 
     const inputWidth = useInputWidth({ max, step })
 
@@ -134,18 +136,15 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     )
 
     return (
-      <div {...props}>
-        <div className="mb-2 flex items-center justify-between">
+      <div className={clsx(hasMarks && 'pb-5', className)} {...props}>
+        <div className="mb-2 flex items-center justify-between gap-1.5">
           {/* useUuid? */}
           <Label htmlFor={idProp ?? nameProp}>{label}</Label>
-          {displayValue && <span>{transformedText}</span>}
+          {displayValue && <span className="text-tsm">{transformedText}</span>}
         </div>
 
-        {/* RailWrapper */}
         <div className="flex items-center justify-between gap-4">
-          {/* SliderWrapper */}
-          <div className="w-full">
-            {/* Rail */}
+          <div className="relative w-full">
             <div
               className={clsx(
                 'group relative flex h-1 w-full items-center rounded-3xl pr-4',
@@ -168,6 +167,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                 )}
                 style={{ width: relativeCursorPosition }}
               />
+
               {/* Cursor */}
               <div
                 title={typeof label === 'string' ? label : undefined}
@@ -184,18 +184,28 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               />
             </div>
 
-            {!!calculatedMarks.length && (
-              /* MarkWrapper */
-              <div className="relative mx-auto flex h-2 w-full justify-between">
-                {calculatedMarks.map((mark) => (
-                  <span
-                    key={mark.value}
-                    style={{ left: mark.leftOffset }}
-                    onClick={() => setValue(mark.value)}
-                  >
-                    {mark.label}
-                  </span>
-                ))}
+            {hasMarks && (
+              <div className="absolute top-full left-0 mt-4 h-2 w-full px-2">
+                <div className="relative h-full w-full">
+                  {calculatedMarks.map((mark) => (
+                    <span
+                      key={mark.value}
+                      style={{
+                        left: mark.leftOffset,
+                        transform: 'translateX(-50%)',
+                      }}
+                      onClick={() => setValue(mark.value)}
+                      className={clsx(
+                        'absolute cursor-pointer whitespace-nowrap p-1 text-xs',
+                        value === mark.value
+                          ? 'text-primaryHighlight font-bold'
+                          : 'text-onSurface',
+                      )}
+                    >
+                      {mark.label}
+                    </span>
+                  ))}
+                </div>
               </div>
             )}
           </div>

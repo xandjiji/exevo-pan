@@ -18,11 +18,11 @@ export const ExerciseWeapons = () => {
       <Slider
         label="Percentage to next"
         defaultValue={10}
-        step={0.2}
         max={20}
         min={5}
         showInput
         displayValue
+        marks
       />
       <div className="my-4" />
       <Slider
@@ -50,6 +50,7 @@ export const ExerciseWeapons = () => {
         step={0.2}
         max={20}
         min={5}
+        displayValue
       />
 
       <Slider
