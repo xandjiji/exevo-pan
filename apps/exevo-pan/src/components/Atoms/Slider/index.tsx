@@ -173,7 +173,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
               {/* Cursor */}
               <div
-                title={typeof label === 'string' ? label : undefined}
+                title={ariaLabel}
                 role="slider"
                 aria-valuemin={min}
                 aria-valuemax={max}
