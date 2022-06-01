@@ -2,16 +2,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import clsx from 'clsx'
+import { forwardRef, useState, useMemo, useCallback, useEffect } from 'react'
 import {
-  forwardRef,
-  useState,
-  useMemo,
-  useCallback,
-  useEffect,
-  useRef,
-  useLayoutEffect,
-} from 'react'
-import { useSharedRef, useDrag, useUuid } from 'hooks'
+  useSharedRef,
+  useDrag,
+  useUuid,
+  useIsomorphicLayoutEffect,
+  useIsMounted,
+} from 'hooks'
 import {
   defaultTransform,
   clampValue,
@@ -87,9 +85,9 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
     const inputWidth = useInputWidth({ max, step })
 
-    const isMounted = useRef(false)
-    useLayoutEffect(() => {
-      if (isMounted.current) {
+    const isMounted = useIsMounted()
+    useIsomorphicLayoutEffect(() => {
+      if (isMounted) {
         const denormalizedValue = denormalize(percentageX, range)
         const newValue = calculateClosestStep(denormalizedValue, step, range)
         setValue(newValue)
@@ -120,12 +118,10 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     )
 
     useEffect(() => {
-      if (isMounted.current) {
+      if (isMounted) {
         const event = new Event('input', { bubbles: true })
         innerRef.current?.dispatchEvent?.(event)
         setInputValue(value)
-      } else {
-        isMounted.current = true
       }
     }, [innerRef, value])
 
