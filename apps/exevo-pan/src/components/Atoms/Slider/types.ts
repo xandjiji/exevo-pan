@@ -1,11 +1,25 @@
+export type ExtendedProps = Omit<
+  JSX.IntrinsicElements['input'],
+  'aria-label' | 'ref'
+>
+
 export type Mark = { value: number; label: string | number }
 
 export type Range = [number, number]
 
 export type TransformFunction = (value: number) => string | number
 
+export type LabelProps =
+  | {
+      label: string
+      'aria-label'?: never
+    }
+  | {
+      label: JSX.Element
+      'aria-label': string
+    }
+
 export type CustomProps = {
-  label: React.ReactNode
   min: number
   max: number
   step?: number
@@ -16,5 +30,4 @@ export type CustomProps = {
   disabled?: boolean
 }
 
-export type SliderProps = CustomProps &
-  React.InputHTMLAttributes<HTMLInputElement>
+export type SliderProps = CustomProps & ExtendedProps & LabelProps

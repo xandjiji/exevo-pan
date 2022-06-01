@@ -37,6 +37,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       name,
       min,
       max,
+      'aria-label': ariaLabel,
+      label,
       value: valueProp,
       defaultValue: defaultValueProp,
       step = 1,
@@ -46,7 +48,6 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       transformDisplayedValues = defaultTransform,
       marks,
       disabled = false,
-      label,
       ...props
     } = componentProps
 
@@ -214,7 +215,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
           {showInput && (
             <input
-              aria-label={typeof label === 'string' ? label : undefined}
+              aria-label={ariaLabel}
               type="number"
               min={min}
               max={max}
