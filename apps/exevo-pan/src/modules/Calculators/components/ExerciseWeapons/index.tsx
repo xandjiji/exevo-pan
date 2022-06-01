@@ -16,8 +16,8 @@ export const ExerciseWeapons = () => {
       <input defaultValue="Jackie Chan" disabled />
 
       <Slider
-        label="Percentage to next"
-        defaultValue={10}
+        label="Percentage to nesdsxt"
+        defaultValue={1}
         max={20}
         min={5}
         showInput

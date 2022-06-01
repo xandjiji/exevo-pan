@@ -1,7 +1,4 @@
-export type ExtendedProps = Omit<
-  JSX.IntrinsicElements['input'],
-  'aria-label' | 'ref'
->
+export type ExtendedProps = Omit<JSX.IntrinsicElements['input'], 'aria-label'>
 
 export type Mark = { value: number; label: string | number }
 
