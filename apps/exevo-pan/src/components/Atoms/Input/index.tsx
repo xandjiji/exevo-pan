@@ -14,6 +14,7 @@ const Input = (
     className,
     style,
     id,
+    label,
     allowClear = false,
     errorMessage,
     value: valueProp,
@@ -67,7 +68,7 @@ const Input = (
   return (
     <div className={clsx('text-tsm', className)} style={style}>
       <Label htmlFor={inputId} className="mb-2">
-        {props.label}
+        {label}
       </Label>
       <div
         className={clsx(

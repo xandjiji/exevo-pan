@@ -2,7 +2,7 @@ export type InputValue = number | string
 
 export type ExtendedProps = Omit<
   JSX.IntrinsicElements['input'],
-  'value' | 'defaultValue' | 'aria-label' | 'ref'
+  'value' | 'defaultValue' | 'aria-label'
 >
 
 export type LabelProps =
