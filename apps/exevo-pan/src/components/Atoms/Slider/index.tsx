@@ -193,7 +193,9 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                         left: mark.leftOffset,
                         transform: 'translateX(-50%)',
                       }}
-                      onClick={() => setValue(mark.value)}
+                      onClick={
+                        !disabled ? () => setValue(mark.value) : undefined
+                      }
                       className={clsx(
                         'absolute cursor-pointer whitespace-nowrap p-1 text-xs',
                         value === mark.value
