@@ -9,6 +9,7 @@ export default {
     '<rootDir>/.next',
     'mock.ts',
     'utils.ts',
+    'types.ts',
   ],
   transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
