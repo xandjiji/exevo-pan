@@ -135,6 +135,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       [transformDisplayedValues, value],
     )
 
+    const accessibleLabel = typeof label === 'string' ? label : ariaLabel
+
     return (
       <div className={clsx(hasMarks && 'pb-5', className)} {...props}>
         <div className="mb-2 flex items-center justify-between gap-1.5">
@@ -169,7 +171,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
               {/* Cursor */}
               <div
-                title={ariaLabel}
+                title={accessibleLabel}
                 role="slider"
                 aria-valuemin={min}
                 aria-valuemax={max}
@@ -213,7 +215,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
           {showInput && (
             <input
-              aria-label={typeof label === 'string' ? label : ariaLabel}
+              aria-label={accessibleLabel}
               type="number"
               min={min}
               max={max}
