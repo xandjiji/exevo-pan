@@ -1,315 +1,390 @@
-import { screen } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
-import SliderInput from '..'
+import { KeyboardModifiers, ArrowControls, AssertKeyboardProps } from './types'
+import Slider from '..'
 
-const mockedOnChange = jest.fn()
-
-describe('<SliderInput />', () => {
-  test('should render correctly', () => {
-    renderWithProviders(
-      <SliderInput
-        data-testid="test"
-        aria-label="test-aria-label"
-        aria-labelledby="test-aria-labelledby"
-        min={0}
-        max={100}
-      />,
-    )
-    expect(screen.getByTestId('test')).toBeInTheDocument()
-
-    const cursorElement = screen.getByRole('slider')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
-    expect(cursorElement).toHaveAttribute('aria-valuemin', '0')
-    expect(cursorElement).toHaveAttribute('aria-valuemax', '100')
-    expect(cursorElement).toHaveAttribute('aria-label', 'change value')
-
-    const [displayInput] = screen.getAllByLabelText('test-aria-label')
-    expect(displayInput).toHaveAttribute(
-      'aria-labelledby',
-      'test-aria-labelledby',
-    )
-  })
-
-  test('cursor should be controlled by arrow keys', () => {
-    renderWithProviders(
-      <SliderInput
-        data-testid="test"
-        aria-label="choose a skill level"
-        min={0}
-        max={2000}
-        onChange={mockedOnChange}
-      />,
-    )
-    const [displayInput] = screen.getAllByLabelText('choose a skill level')
-    const cursorElement = screen.getByLabelText('change value')
-
-    expect(displayInput).toHaveValue('0')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
-
+describe('<Slider />', () => {
+  const setupArrowControls = (): ArrowControls => {
     userEvent.tab()
-    userEvent.keyboard('{arrowup}')
-    expect(displayInput).toHaveValue('1')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1')
+    const railElement = document.activeElement as Element
 
-    userEvent.keyboard('{ctrl}{arrowup}')
-    expect(displayInput).toHaveValue('11')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '11')
+    return {
+      inc: (modifiers?: KeyboardModifiers): void => {
+        fireEvent.keyDown(railElement, {
+          key: 'ArrowUp',
+          ...modifiers,
+        })
+      },
+      dec: (modifiers?: KeyboardModifiers): void => {
+        fireEvent.keyDown(railElement, {
+          key: 'ArrowDown',
+          ...modifiers,
+        })
+      },
+    }
+  }
 
-    userEvent.keyboard('{shift}{arrowup}')
-    expect(displayInput).toHaveValue('111')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '111')
+  const assertKeyboardControls = ({
+    min,
+    max,
+    step,
+  }: AssertKeyboardProps): void => {
+    const inputElement = screen.getByLabelText('label')
 
-    userEvent.keyboard('{ctrl}{shift}{arrowup}')
-    expect(displayInput).toHaveValue('1111')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1111')
+    const { inc, dec } = setupArrowControls()
+    const TRIES_OVER_SLIDER_RANGE = 5
 
-    userEvent.keyboard('{arrowdown}')
-    expect(displayInput).toHaveValue('1110')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1110')
+    for (let i = min; i < max + TRIES_OVER_SLIDER_RANGE; i += step) {
+      if (i > max) {
+        expect(inputElement).toHaveValue(max.toString())
+      } else {
+        expect(inputElement).toHaveValue(i.toString())
+      }
+      inc()
+    }
 
-    userEvent.keyboard('{ctrl}{arrowdown}')
-    expect(displayInput).toHaveValue('1100')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1100')
+    for (let i = max; i > min - TRIES_OVER_SLIDER_RANGE; i -= step) {
+      if (i < min) {
+        expect(inputElement).toHaveValue(min.toString())
+      } else {
+        expect(inputElement).toHaveValue(i.toString())
+      }
+      dec()
+    }
+  }
 
-    userEvent.keyboard('{shift}{arrowdown}')
-    expect(displayInput).toHaveValue('1000')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1000')
+  describe('when interacting with a keyboard', () => {
+    test('should respect ranges with default step', () => {
+      const min = -20
+      const max = 20
+      renderWithProviders(
+        <Slider label="label" id="input-id" min={min} max={max} />,
+      )
 
-    userEvent.keyboard('{ctrl}{shift}{arrowdown}')
-    expect(displayInput).toHaveValue('0')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
+      assertKeyboardControls({ min, max, step: 1 })
+    })
 
-    userEvent.keyboard('{arrowright}')
-    expect(displayInput).toHaveValue('1')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1')
+    test('should respect ranges with float step', () => {
+      const min = -20
+      const max = 20
+      const step = 0.5
+      renderWithProviders(
+        <Slider label="label" id="input-id" min={min} max={max} step={step} />,
+      )
 
-    userEvent.keyboard('{ctrl}{arrowright}')
-    expect(displayInput).toHaveValue('11')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '11')
+      assertKeyboardControls({ min, max, step })
+    })
 
-    userEvent.keyboard('{shift}{arrowright}')
-    expect(displayInput).toHaveValue('111')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '111')
+    test('should respect ranges with CTRL and SHIFT modifiers', () => {
+      const min = -1000
+      const max = 1000
+      renderWithProviders(
+        <Slider label="label" id="input-id" min={min} max={max} />,
+      )
 
-    userEvent.keyboard('{ctrl}{shift}{arrowright}')
-    expect(displayInput).toHaveValue('1111')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1111')
+      const inputElement = screen.getByLabelText('label')
 
-    userEvent.keyboard('{arrowleft}')
-    expect(displayInput).toHaveValue('1110')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1110')
+      let currentValue = min
+      const assertCurrentValue = (): void => {
+        expect(inputElement).toHaveValue(currentValue.toString())
+      }
 
-    userEvent.keyboard('{ctrl}{arrowleft}')
-    expect(displayInput).toHaveValue('1100')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1100')
+      const { inc, dec } = setupArrowControls()
+      const CTRL_MODIFIER = 10
+      const SHIFT_MODIFIER = 100
 
-    userEvent.keyboard('{shift}{arrowleft}')
-    expect(displayInput).toHaveValue('1000')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1000')
+      inc({ ctrlKey: true })
+      currentValue += CTRL_MODIFIER
+      assertCurrentValue()
 
-    userEvent.keyboard('{ctrl}{shift}{arrowleft}')
-    expect(displayInput).toHaveValue('0')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
+      inc({ shiftKey: true })
+      currentValue += SHIFT_MODIFIER
+      assertCurrentValue()
+
+      inc({ ctrlKey: true })
+      currentValue += CTRL_MODIFIER
+      assertCurrentValue()
+
+      inc({ shiftKey: true })
+      currentValue += SHIFT_MODIFIER
+      assertCurrentValue()
+
+      inc({ ctrlKey: true, shiftKey: true })
+      currentValue += CTRL_MODIFIER * SHIFT_MODIFIER
+      assertCurrentValue()
+
+      /* should be capped by max value */
+      inc({ ctrlKey: true, shiftKey: true })
+      inc({ ctrlKey: true, shiftKey: true })
+      inc({ ctrlKey: true, shiftKey: true })
+      currentValue = max
+      assertCurrentValue()
+
+      dec({ ctrlKey: true })
+      currentValue -= CTRL_MODIFIER
+      assertCurrentValue()
+
+      dec({ shiftKey: true })
+      currentValue -= SHIFT_MODIFIER
+      assertCurrentValue()
+
+      dec({ ctrlKey: true })
+      currentValue -= CTRL_MODIFIER
+      assertCurrentValue()
+
+      dec({ shiftKey: true })
+      currentValue -= SHIFT_MODIFIER
+      assertCurrentValue()
+
+      dec({ ctrlKey: true, shiftKey: true })
+      currentValue -= CTRL_MODIFIER * SHIFT_MODIFIER
+      assertCurrentValue()
+
+      /* should be capped by min value */
+      dec({ ctrlKey: true, shiftKey: true })
+      dec({ ctrlKey: true, shiftKey: true })
+      dec({ ctrlKey: true, shiftKey: true })
+      currentValue = min
+      assertCurrentValue()
+    })
+
+    test('the disabled slider should NOT respond', () => {
+      const min = -20
+      const max = 20
+      renderWithProviders(
+        <Slider label="label" id="input-id" min={min} max={max} disabled />,
+      )
+      const inputElement = screen.getByLabelText('label')
+
+      const { inc, dec } = setupArrowControls()
+
+      const currentValue = min.toString()
+      expect(inputElement).toHaveValue(currentValue)
+      inc()
+      expect(inputElement).toHaveValue(currentValue)
+      inc()
+      expect(inputElement).toHaveValue(currentValue)
+      dec()
+      expect(inputElement).toHaveValue(currentValue)
+      dec()
+      expect(inputElement).toHaveValue(currentValue)
+    })
   })
 
-  test('display input should be controlled by arrow keys', () => {
+  describe('marks should be rendered and interacted correctly', () => {
+    test('when automatically defined', () => {
+      renderWithProviders(
+        <Slider label="label" min={-2} max={2} marks step={0.5} value={0.1} />,
+      )
+
+      const sliderElement = screen.getByRole('slider')
+
+      ;[-2, -1.5, -1, -0.5, 0, 0.5, 1, 1.5, 2].forEach((mark) => {
+        const stringValue = mark.toString()
+        userEvent.click(screen.getByText(stringValue))
+        expect(sliderElement).toHaveAttribute('aria-valuenow', stringValue)
+      })
+    })
+
+    test('when custom defined', () => {
+      const customMarks = [
+        { label: 'cold', value: -2 },
+        { label: '0', value: 0 },
+        { label: 'R$ 2,00', value: 2 },
+      ]
+
+      renderWithProviders(
+        <Slider
+          label="label"
+          min={-2}
+          max={2}
+          marks={customMarks}
+          step={0.5}
+          value={0.1}
+        />,
+      )
+
+      const sliderElement = screen.getByRole('slider')
+
+      customMarks.forEach(({ label, value }) => {
+        userEvent.click(screen.getByText(label))
+        expect(sliderElement).toHaveAttribute('aria-valuenow', value.toString())
+      })
+    })
+  })
+
+  describe('if input is shown', () => {
+    test('it should control the slider', () => {
+      renderWithProviders(
+        <Slider label="label" min={-2} max={2} step={0.5} showInput />,
+      )
+
+      const sliderElement = screen.getByRole('slider')
+      const inputElement = screen.getByRole('spinbutton')
+
+      userEvent.clear(inputElement)
+      userEvent.type(inputElement, '1')
+      expect(inputElement).toHaveValue(1)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '1')
+
+      userEvent.type(inputElement, '.5')
+      expect(inputElement).toHaveValue(1.5)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '1.5')
+
+      userEvent.clear(inputElement)
+      userEvent.type(inputElement, '-2')
+      expect(inputElement).toHaveValue(-2)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '-2')
+    })
+
+    test('it should NOT control the slider if there are invalid values', () => {
+      renderWithProviders(
+        <Slider label="label" min={-2} max={2} step={0.5} showInput />,
+      )
+
+      const sliderElement = screen.getByRole('slider')
+      const inputElement = screen.getByRole('spinbutton')
+
+      userEvent.clear(inputElement)
+      userEvent.type(inputElement, '1')
+      expect(inputElement).toHaveValue(1)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '1')
+
+      userEvent.type(inputElement, '0')
+      expect(inputElement).toHaveValue(10)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '1')
+
+      userEvent.clear(inputElement)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '1')
+
+      userEvent.type(inputElement, '-')
+      expect(inputElement).toHaveValue(null)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '1')
+
+      userEvent.type(inputElement, '-0')
+      expect(inputElement).toHaveValue(0)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '0')
+
+      userEvent.type(inputElement, '.5')
+      expect(inputElement).toHaveValue(-0.5)
+      expect(sliderElement).toHaveAttribute('aria-valuenow', '-0.5')
+    })
+
+    test('it should be controlled by the slider', () => {
+      const min = -20
+      const max = -20
+      const step = 0.5
+      renderWithProviders(
+        <Slider
+          label="label"
+          id="input-id"
+          min={min}
+          max={max}
+          step={step}
+          showInput
+        />,
+      )
+
+      const [inputElement, spinButton] = screen.getAllByLabelText('label')
+
+      const { inc } = setupArrowControls()
+
+      for (let i = min; i < max; i += step) {
+        expect(spinButton).toHaveValue(i)
+        expect(inputElement).toHaveValue(i.toString())
+        inc()
+      }
+
+      for (let i = max; i > min; i -= step) {
+        expect(spinButton).toHaveValue(i)
+        expect(inputElement).toHaveValue(i.toString())
+        inc()
+      }
+    })
+  })
+
+  describe('its value should be able to be controlled', () => {
+    test('by props', () => {
+      const mockedOnChange = jest.fn()
+      const props = {
+        label: 'label',
+        id: 'input-id',
+        min: -20,
+        max: 20,
+        step: 0.5,
+        showInput: true,
+        onChange: mockedOnChange,
+      }
+
+      let value = 1
+      const { rerender } = renderWithProviders(
+        <Slider {...props} value={value} />,
+      )
+      let [inputElement] = screen.getAllByLabelText('label')
+      expect(inputElement).toHaveValue('1')
+      expect(mockedOnChange).toHaveBeenCalledTimes(0)
+
+      value = -5
+      rerender(<Slider {...props} value={value} />)
+      ;[inputElement] = screen.getAllByLabelText('label')
+      expect(inputElement).toHaveValue('-5')
+      expect(mockedOnChange).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  test('should transform displayed texts correctly', () => {
+    const transformToBrl = (newValue: number): string =>
+      `R$ ${newValue.toFixed(2).replace('.', ',')}`
+
+    const currentValue = -10.57
     renderWithProviders(
-      <SliderInput
-        data-testid="test"
-        aria-label="choose a skill level"
-        min={0}
-        max={2000}
-        onChange={mockedOnChange}
+      <Slider
+        label="label"
+        min={-20}
+        max={20}
+        step={0.5}
+        value={currentValue}
+        transformDisplayedValues={transformToBrl}
       />,
     )
-    const [displayInput] = screen.getAllByLabelText('choose a skill level')
-    const cursorElement = screen.getByLabelText('change value')
 
-    expect(displayInput).toHaveValue('0')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
-
-    userEvent.type(displayInput, '{arrowup}')
-    expect(displayInput).toHaveValue('1')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1')
-
-    userEvent.type(displayInput, '{ctrl}{arrowup}')
-    expect(displayInput).toHaveValue('11')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '11')
-
-    userEvent.type(displayInput, '{shift}{arrowup}')
-    expect(displayInput).toHaveValue('111')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '111')
-
-    userEvent.type(displayInput, '{ctrl}{shift}{arrowup}')
-    expect(displayInput).toHaveValue('1111')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1111')
-
-    userEvent.type(displayInput, '{arrowdown}')
-    expect(displayInput).toHaveValue('1110')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1110')
-
-    userEvent.type(displayInput, '{ctrl}{arrowdown}')
-    expect(displayInput).toHaveValue('1100')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1100')
-
-    userEvent.type(displayInput, '{shift}{arrowdown}')
-    expect(displayInput).toHaveValue('1000')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '1000')
-
-    userEvent.type(displayInput, '{ctrl}{shift}{arrowdown}')
-    expect(displayInput).toHaveValue('0')
-    expect(cursorElement).toHaveAttribute('aria-valuenow', '0')
+    expect(screen.getByText(transformToBrl(currentValue))).toBeInTheDocument()
   })
 
-  test('onChange should be called', () => {
+  test('should be disabled', () => {
     renderWithProviders(
-      <SliderInput
-        data-testid="test"
-        aria-label="choose a skill level"
-        min={0}
-        max={2000}
-        onChange={mockedOnChange}
+      <Slider
+        label="label"
+        id="input-id"
+        min={-2}
+        max={2}
+        step={0.5}
+        showInput
+        disabled
       />,
     )
 
-    mockedOnChange.mockClear()
-
-    userEvent.tab()
-    userEvent.keyboard('{arrowup}')
-    expect(mockedOnChange).toBeCalledTimes(1)
-
-    const [displayInput] = screen.getAllByLabelText('choose a skill level')
-    userEvent.type(displayInput, '101')
-    expect(mockedOnChange).toBeCalledTimes(4)
-
-    userEvent.keyboard('{arrowup}')
-    expect(mockedOnChange).toBeCalledTimes(5)
-    userEvent.type(displayInput, '102')
+    const [spinButton, inputElement] = screen.getAllByLabelText('label')
+    expect(spinButton).toBeDisabled()
+    expect(inputElement).toBeDisabled()
   })
 
-  test('should be invalid', () => {
-    renderWithProviders(<SliderInput data-testid="test" min={0} max={100} />)
+  describe('A11y', () => {
+    test('should not have violations', async () => {
+      const { container } = renderWithProviders(
+        <Slider label="label" id="input-id" min={-2} max={2} step={0.5} />,
+      )
 
-    const displayInput = screen.getAllByDisplayValue(0)[0]
-    const hiddenInput = screen.getByTestId('test')
-
-    userEvent.clear(displayInput)
-    userEvent.type(displayInput, '-50')
-    expect(displayInput).toHaveValue('-50')
-    expect(displayInput).toBeInvalid()
-
-    expect(hiddenInput).not.toHaveValue('-50')
-    expect(hiddenInput).toBeInvalid()
+      await assertNoA11yViolations(container)
+    })
   })
 
-  test('should clamp values between 0 and 100', () => {
+  test('should spread "data-testid" correctly', () => {
     renderWithProviders(
-      <SliderInput
-        data-testid="test"
-        aria-label="choose a skill level"
-        min={0}
-        max={100}
-      />,
+      <Slider data-testid="test-id" label="label" min={0} max={10} />,
     )
 
-    const [displayInput] = screen.getAllByLabelText('choose a skill level')
-    const hiddenInput = screen.getByTestId('test')
-    const cursor = screen.getByRole('slider')
-
-    userEvent.tab()
-    userEvent.keyboard('{shift}{arrowup}{arrowup}')
-    expect(displayInput).toHaveValue('100')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(cursor).toHaveStyle('left: 100%')
-
-    userEvent.keyboard('{shift}{arrowdown}{arrowdown}')
-    expect(displayInput).toHaveValue('0')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(hiddenInput).toHaveValue('0')
-    expect(cursor).toHaveStyle('left: 0%')
-
-    userEvent.clear(displayInput)
-    userEvent.type(displayInput, '5')
-    expect(displayInput).toHaveValue('5')
-    expect(hiddenInput).toHaveValue('5')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(cursor).toHaveStyle('left: 5%')
-
-    userEvent.type(displayInput, '0')
-    expect(displayInput).toHaveValue('50')
-    expect(hiddenInput).toHaveValue('50')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(cursor).toHaveStyle('left: 50%')
-
-    userEvent.type(displayInput, '0')
-    expect(displayInput).toHaveValue('100')
-    expect(hiddenInput).toHaveValue('100')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(cursor).toHaveStyle('left: 100%')
-
-    userEvent.clear(displayInput)
-    userEvent.type(displayInput, '-999')
-    userEvent.tab()
-    expect(displayInput).toHaveValue('0')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(hiddenInput).toHaveValue('0')
-    expect(cursor).toHaveStyle('left: 0%')
-
-    userEvent.type(displayInput, '{shift}{arrowup}{arrowup}')
-    expect(displayInput).toHaveValue('100')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(cursor).toHaveStyle('left: 100%')
-
-    userEvent.type(displayInput, '{shift}{arrowdown}{arrowdown}')
-    expect(displayInput).toHaveValue('0')
-    expect(displayInput).toBeValid()
-    expect(hiddenInput).toBeValid()
-    expect(hiddenInput).toHaveValue('0')
-    expect(cursor).toHaveStyle('left: 0%')
-  })
-
-  test('should work well with negative values', () => {
-    renderWithProviders(<SliderInput min={-200} max={200} />)
-
-    const displayInput = screen.getAllByDisplayValue(-200)[0]
-    userEvent.clear(displayInput)
-    userEvent.type(displayInput, '0')
-
-    expect(screen.getByRole('slider')).toHaveStyle('left: 50%')
-  })
-
-  test('should be controlled', () => {
-    const { rerender } = renderWithProviders(
-      <SliderInput data-testid="test" min={0} max={100} />,
-    )
-
-    const displayInput = screen.getAllByDisplayValue(0)[0]
-    const hiddenInput = screen.getByTestId('test')
-    const cursor = screen.getByRole('slider')
-
-    expect(displayInput).toHaveValue('0')
-    expect(hiddenInput).toHaveValue('0')
-    expect(cursor).toHaveStyle('left: 0%')
-
-    rerender(<SliderInput data-testid="test" min={0} max={100} value={50} />)
-
-    expect(displayInput).toHaveValue('50')
-    expect(hiddenInput).toHaveValue('50')
-    expect(cursor).toHaveStyle('left: 50%')
-  })
-
-  test('a11y', async () => {
-    const { container } = renderWithProviders(
-      <SliderInput aria-label="label" min={0} max={100} />,
-    )
-    await assertNoA11yViolations(container)
+    expect(screen.getByTestId('test-id')).toBeInTheDocument()
   })
 })
