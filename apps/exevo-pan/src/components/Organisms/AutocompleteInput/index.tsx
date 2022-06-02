@@ -2,7 +2,7 @@
 import { useState, useReducer, useCallback, useEffect, memo } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Input } from 'components/Atoms'
-import { useUuid } from 'hooks'
+import { useUuid, useIsMounted } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
@@ -13,17 +13,20 @@ const AutocompleteInput = ({
   style,
   itemList = [],
   onItemSelect,
+  defaultValue,
   ...props
 }: AutocompleteInputProps) => {
   const listboxId = useUuid()
 
-  const [currentList, setCurrentList] = useState<Option[]>(itemList)
   const [{ listboxStatus, highlightedIndex, inputValue }, dispatch] =
     useReducer(AutocompleteInputReducer, {
       listboxStatus: false,
       highlightedIndex: undefined,
-      inputValue: '',
+      inputValue: defaultValue?.toString() ?? '',
     })
+  const [currentList, setCurrentList] = useState<Option[]>(() =>
+    filterByTerm(inputValue, itemList),
+  )
 
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -85,8 +88,9 @@ const AutocompleteInput = ({
     }
   }, [highlightedIndex, listboxId])
 
+  const isMounted = useIsMounted()
   useEffect(() => {
-    setCurrentList(itemList)
+    if (isMounted) setCurrentList(itemList)
   }, [itemList])
 
   const onSelectOption = useCallback(

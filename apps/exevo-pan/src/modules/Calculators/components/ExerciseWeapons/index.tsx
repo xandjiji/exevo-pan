@@ -7,71 +7,18 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <Input label="Name" placeholder="Choose your fighter" stateIcon="valid" />
-      <Input label="Name" defaultValue="Jackie Chan" />
-      <Input label="Name" placeholder="Choose your fighter" disabled />
-      <Input label="Name" defaultValue="Jackie Chan" disabled allowClear />
-      <input disabled />
-      <input placeholder="Choose your fighter" disabled />
-      <input defaultValue="Jackie Chan" disabled />
-
-      <Slider
-        label="Percentage to nesdsxt"
-        defaultValue={9}
-        max={20}
-        min={5}
-        showInput
-        disabled
-        displayValue
-        marks
-      />
-      <div className="my-4" />
-      <Slider
-        label="Percentage to next"
-        defaultValue={10}
-        step={0.2}
-        max={20}
-        min={5}
-        showInput
-      />
-      <div className="my-4" />
-      <Slider
-        label="Percentage to next sem precisao"
-        defaultValue={10}
-        max={20}
-        min={5}
-        displayValue
-        step={1}
-        showInput
-      />
-      <div className="my-4" />
-      <Slider
-        label="Percentage to next"
-        defaultValue={10}
-        step={0.2}
-        max={20}
-        min={5}
-        displayValue
-      />
-
-      <Slider
-        label="Percentage to next"
-        defaultValue={100}
-        step={0.2}
-        max={200}
-        min={5}
-        showInput
-      />
-
-      <Slider
-        label="% to next"
-        defaultValue={10}
-        step={0.2}
-        max={20}
-        min={5}
-        showInput
-        displayValue
-        disabled
+      <AutocompleteInput
+        label="Server"
+        placeholder="Choose a server"
+        itemList={[
+          { name: 'Pacera', value: 'Pacera' },
+          { name: 'Julera', value: 'Julera' },
+          { name: 'Antica', value: 'Antica' },
+          { name: 'Venore', value: 'Venore' },
+          { name: 'Fortera', value: 'Fortera' },
+        ]}
+        onItemSelect={({ name }) => console.log(name)}
+        defaultValue="pace"
       />
 
       {/* <p>% to next</p>

@@ -10,7 +10,7 @@ export type AutocompleteInputProps = {
   onItemSelect?: (selectedItem: Option) => void
 } & CustomProps &
   LabelProps &
-  ExtendedProps
+  Omit<ExtendedProps, 'ref'>
 
 export interface AutocompleteInputState {
   listboxStatus: boolean
