@@ -6,7 +6,7 @@ import {
   DrawerFooter,
   Chip,
   RangeSliderInput,
-  SliderInput,
+  Slider,
   Checkbox,
 } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
@@ -53,6 +53,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [nickname, setNickname] = useDebouncedFilter<string>(
     'nicknameFilter',
     filterState.nicknameFilter,
+  )
+
+  const [minSkill, setMinSkill] = useDebouncedFilter<number>(
+    'minSkill',
+    filterState.minSkill,
   )
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
@@ -323,18 +328,21 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           />
         </FilterGroup>
 
-        <FilterGroup label="Skill" htmlFor="skill-slider">
-          <SliderInput
+        <FilterGroup>
+          <Slider
             id="skill-slider"
+            label="Skill"
+            showInput
             aria-label={homepage.FilterDrawer.labels.minSkill}
             min={10}
             max={130}
-            value={filterState.minSkill}
+            value={minSkill}
             onChange={useCallback(
               (event: React.ChangeEvent<HTMLInputElement>) =>
-                updateFilters('minSkill', parseInt(event.target.value, 10)),
+                setMinSkill(+event.target.value),
               [updateFilters],
             )}
+            className="max-w-[270px]"
             style={{ marginBottom: 16 }}
           />
           <S.ChipWrapper>
