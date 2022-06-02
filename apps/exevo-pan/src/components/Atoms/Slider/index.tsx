@@ -211,7 +211,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
           {showInput && (
             <input
-              aria-label={ariaLabel}
+              aria-label={typeof label === 'string' ? label : ariaLabel}
               type="number"
               min={min}
               max={max}
