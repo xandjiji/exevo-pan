@@ -345,6 +345,7 @@ describe('<Slider />', () => {
         max={20}
         step={0.5}
         value={currentValue}
+        displayValue
         transformDisplayedValues={transformToBrl}
       />,
     )

@@ -17,10 +17,11 @@ export const ExerciseWeapons = () => {
 
       <Slider
         label="Percentage to nesdsxt"
-        defaultValue={1}
+        defaultValue={9}
         max={20}
         min={5}
         showInput
+        disabled
         displayValue
         marks
       />
