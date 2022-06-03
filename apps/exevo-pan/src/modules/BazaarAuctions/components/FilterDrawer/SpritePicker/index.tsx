@@ -1,8 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { memo } from 'react'
-import { Accordion, ActiveCount } from 'components/Atoms'
-import { Label } from '../FilterGroup'
+import { Accordion, Label, ActiveCount } from 'components/Atoms'
 import { useFilters } from '../../../contexts/useFilters'
 import { SpritePickerProps } from './types'
 
