@@ -27,8 +27,6 @@ const AutocompleteInputReducer = (
       }
 
     case 'ARROW_NAVIGATION': {
-      /* @ ToDo: refactor circularArrayIndex<T> */
-      /* @ ToDo: refactor circularArrayIndex simplify logic */
       const { filteredList } = state
       if (!filteredList.length) return state
 
@@ -53,6 +51,7 @@ const AutocompleteInputReducer = (
       return { ...state, listboxStatus: action.value }
 
     case 'REDEFINE_LIST':
+      if (action.itemList === state.itemList) return state
       return {
         ...state,
         itemList: action.itemList,

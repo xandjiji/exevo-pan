@@ -2,7 +2,7 @@
 import { useReducer, useCallback, useEffect, memo } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Input } from 'components/Atoms'
-import { useUuid, useIsMounted } from 'hooks'
+import { useUuid } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
@@ -36,7 +36,7 @@ const AutocompleteInput = ({
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) =>
       dispatch({ type: 'USER_TYPING', value: event.target.value }),
-    [itemList],
+    [],
   )
 
   const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> = (
@@ -81,10 +81,8 @@ const AutocompleteInput = ({
     }
   }, [highlightedIndex, listboxId])
 
-  const isMounted = useIsMounted()
   useEffect(() => {
-    /* @ ToDo: remove isMounted? */
-    if (isMounted) dispatch({ type: 'REDEFINE_LIST', itemList })
+    dispatch({ type: 'REDEFINE_LIST', itemList })
   }, [itemList])
 
   const onSelectOption = useCallback(
