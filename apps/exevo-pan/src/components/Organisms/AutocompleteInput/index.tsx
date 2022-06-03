@@ -8,8 +8,6 @@ import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import AutocompleteInputReducer from './reducer'
 
-/* @ ToDo: add onItemSelect to reducer? */
-
 const AutocompleteInput = ({
   className,
   style,
