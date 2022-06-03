@@ -1561,6 +1561,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Gilded Blessed Shield',
     value: 0,
   },
+  'gilded horned helmet': {
+    name: 'Gilded Horned Helmet',
+    value: 0,
+  },
   'gilded crown': {
     name: 'Gilded Crown',
     value: 0,
