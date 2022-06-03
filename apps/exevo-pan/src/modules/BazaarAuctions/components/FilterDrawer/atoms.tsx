@@ -5,7 +5,7 @@ import { InputProps } from 'components/Atoms/Input/types'
 import { ChipProps } from 'components/Atoms/Chip/types'
 import { AutocompleteInputProps } from 'components/Organisms/AutocompleteInput/types'
 
-export const Input = ({ className, ...props }: InputProps) => (
+export const Input = ({ className, ...props }: Omit<InputProps, 'ref'>) => (
   <BaseInput className={clsx('max-w-[200px]', className)} {...props} />
 )
 

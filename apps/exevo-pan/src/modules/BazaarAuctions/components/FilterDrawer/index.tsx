@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
 import {
