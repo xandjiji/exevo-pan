@@ -13,13 +13,16 @@ export type AutocompleteInputProps = {
   Omit<ExtendedProps, 'ref'>
 
 export interface AutocompleteInputState {
+  itemList: Option[]
+  filteredList: Option[]
   listboxStatus: boolean
   highlightedIndex: number | undefined
   inputValue: string
 }
 
 export type Action =
-  | { type: 'ARROW_NAVIGATION'; value: number; list: Option[] }
+  | { type: 'ARROW_NAVIGATION'; code: 'ArrowUp' | 'ArrowDown' }
   | { type: 'OPTION_SELECTED' }
   | { type: 'SET_LISTBOX_STATUS'; value: boolean }
   | { type: 'USER_TYPING'; value: string }
+  | { type: 'REDEFINE_LIST'; itemList: Option[] }

@@ -1,4 +1,4 @@
-import { circularArrayIndex } from './utils'
+import { filterByTerm, circularArrayIndex } from './utils'
 import { AutocompleteInputState, Action } from './types'
 
 const AutocompleteInputReducer = (
@@ -14,6 +14,7 @@ const AutocompleteInputReducer = (
         inputValue: action.value,
         highlightedIndex: undefined,
         listboxStatus: true,
+        filteredList: filterByTerm(action.value, state.itemList),
       }
 
     case 'OPTION_SELECTED':
@@ -22,28 +23,41 @@ const AutocompleteInputReducer = (
         inputValue: '',
         highlightedIndex: undefined,
         listboxStatus: false,
+        filteredList: state.itemList,
       }
 
     case 'ARROW_NAVIGATION': {
+      /* @ ToDo: refactor circularArrayIndex<T> */
+      /* @ ToDo: refactor circularArrayIndex simplify logic */
+      const { filteredList } = state
+      if (!filteredList.length) return state
+
       let newIndex: number
       if (highlightedIndex === undefined) {
-        newIndex = action.value === 1 ? 0 : action.list.length - 1
+        newIndex = action.code === 'ArrowUp' ? filteredList.length - 1 : 0
       } else {
         newIndex = circularArrayIndex(
-          highlightedIndex + action.value,
-          action.list,
+          highlightedIndex + (action.code === 'ArrowUp' ? -1 : 1),
+          filteredList,
         )
       }
       return {
         ...state,
         listboxStatus: true,
         highlightedIndex: newIndex,
-        inputValue: action.list[newIndex].name,
+        inputValue: filteredList[newIndex].name,
       }
     }
 
     case 'SET_LISTBOX_STATUS':
       return { ...state, listboxStatus: action.value }
+
+    case 'REDEFINE_LIST':
+      return {
+        ...state,
+        itemList: action.itemList,
+        filteredList: filterByTerm(state.inputValue, action.itemList),
+      }
 
     default:
       return { ...state }

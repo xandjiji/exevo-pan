@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useState, useReducer, useCallback, useEffect, memo } from 'react'
+import { useReducer, useCallback, useEffect, memo } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Input } from 'components/Atoms'
 import { useUuid, useIsMounted } from 'hooks'
@@ -7,6 +7,8 @@ import { indexToId } from 'components/Atoms/Listbox/utils'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import AutocompleteInputReducer from './reducer'
+
+/* @ ToDo: add onItemSelect to reducer? */
 
 const AutocompleteInput = ({
   className,
@@ -18,21 +20,22 @@ const AutocompleteInput = ({
 }: AutocompleteInputProps) => {
   const listboxId = useUuid()
 
-  const [{ listboxStatus, highlightedIndex, inputValue }, dispatch] =
-    useReducer(AutocompleteInputReducer, {
-      listboxStatus: false,
-      highlightedIndex: undefined,
-      inputValue: defaultValue?.toString() ?? '',
-    })
-  const [currentList, setCurrentList] = useState<Option[]>(() =>
-    filterByTerm(inputValue, itemList),
-  )
+  const [
+    { filteredList, listboxStatus, highlightedIndex, inputValue },
+    dispatch,
+  ] = useReducer(AutocompleteInputReducer, {
+    itemList,
+    filteredList: defaultValue
+      ? filterByTerm(defaultValue.toString(), itemList)
+      : itemList,
+    listboxStatus: false,
+    highlightedIndex: undefined,
+    inputValue: defaultValue?.toString() ?? '',
+  })
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({ type: 'USER_TYPING', value: event.target.value })
-      setCurrentList(filterByTerm(event.target.value, itemList))
-    },
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch({ type: 'USER_TYPING', value: event.target.value }),
     [itemList],
   )
 
@@ -45,30 +48,20 @@ const AutocompleteInput = ({
         dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
         break
       case 'ArrowUp':
-        if (currentList.length)
-          dispatch({
-            type: 'ARROW_NAVIGATION',
-            value: -1,
-            list: currentList,
-          })
-        event.preventDefault()
-        break
       case 'ArrowDown':
-        if (currentList.length)
-          dispatch({
-            type: 'ARROW_NAVIGATION',
-            value: 1,
-            list: currentList,
-          })
+        dispatch({
+          type: 'ARROW_NAVIGATION',
+          code: event.code,
+        })
         event.preventDefault()
         break
       case 'Enter':
       case 'NumpadEnter':
-        if (currentList.length === 1) {
-          onItemSelect?.(currentList[0])
+        if (filteredList.length === 1) {
+          onItemSelect?.(filteredList[0])
           dispatch({ type: 'OPTION_SELECTED' })
         } else if (highlightedIndex !== undefined) {
-          onItemSelect?.(currentList[highlightedIndex])
+          onItemSelect?.(filteredList[highlightedIndex])
           dispatch({ type: 'OPTION_SELECTED' })
         }
         break
@@ -90,16 +83,16 @@ const AutocompleteInput = ({
 
   const isMounted = useIsMounted()
   useEffect(() => {
-    if (isMounted) setCurrentList(itemList)
+    /* @ ToDo: remove isMounted? */
+    if (isMounted) dispatch({ type: 'REDEFINE_LIST', itemList })
   }, [itemList])
 
   const onSelectOption = useCallback(
     (option: Option) => {
       onItemSelect?.(option)
       dispatch({ type: 'OPTION_SELECTED' })
-      setCurrentList(itemList)
     },
-    [onItemSelect, itemList],
+    [onItemSelect],
   )
 
   return (
@@ -115,7 +108,7 @@ const AutocompleteInput = ({
             onSelectOption={onSelectOption}
             className="max-h-[210px]"
           >
-            {currentList.map((item) => (
+            {filteredList.map((item) => (
               <Option key={item.value} value={item.value}>
                 {item.name}
               </Option>
