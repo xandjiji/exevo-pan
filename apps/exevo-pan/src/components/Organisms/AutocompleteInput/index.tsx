@@ -97,8 +97,9 @@ const AutocompleteInput = ({
     (option: Option) => {
       onItemSelect?.(option)
       dispatch({ type: 'OPTION_SELECTED' })
+      setCurrentList(itemList)
     },
-    [onItemSelect],
+    [onItemSelect, itemList],
   )
 
   return (
