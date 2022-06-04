@@ -31,6 +31,7 @@ export default {
       vocation: 'Vocação',
       serverLocation: 'Localização do servidor',
       storeItems: 'Items da store',
+      price: 'Preço',
       minSkill: 'Skill level mínimo',
       rareAchievements: 'Achievements raros',
       rareItems: 'Items raros',

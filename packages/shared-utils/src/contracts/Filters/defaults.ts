@@ -15,6 +15,8 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   battleye: new Set([]),
   location: new Set([]),
   serverSet: new Set([]),
+  minPrice: 57,
+  maxPrice: 1000000,
   minLevel: 8,
   maxLevel: 2000,
   minSkill: 10,

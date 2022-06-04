@@ -17,6 +17,8 @@ declare type FilterBodyPayload = {
 type FilterOptionsPrimitives = Pick<
   FilterOptions,
   | 'nicknameFilter'
+  | 'minPrice'
+  | 'maxPrice'
   | 'minLevel'
   | 'maxLevel'
   | 'minSkill'

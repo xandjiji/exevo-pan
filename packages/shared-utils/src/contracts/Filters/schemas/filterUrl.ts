@@ -62,6 +62,16 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
+    key: 'minPrice',
+    defaultValue: DEFAULT_FILTER_OPTIONS.minPrice,
+    decode: decodeNumber,
+  },
+  {
+    key: 'maxPrice',
+    defaultValue: DEFAULT_FILTER_OPTIONS.maxPrice,
+    decode: decodeNumber,
+  },
+  {
     key: 'minLevel',
     defaultValue: DEFAULT_FILTER_OPTIONS.minLevel,
     decode: decodeNumber,

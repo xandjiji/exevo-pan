@@ -10,6 +10,8 @@ declare interface FilterOptions {
   battleye: Set<boolean>
   location: Set<LocationOptions>
   serverSet: Set<string>
+  minPrice: number
+  maxPrice: number
   minLevel: number
   maxLevel: number
   minSkill: number
