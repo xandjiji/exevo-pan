@@ -1,25 +1,42 @@
 import { useState } from 'react'
-import { Switch, Input, Slider } from 'components/Atoms'
-import { AutocompleteInput } from 'components/Organisms'
+import { Switch, Input, Slider, Option } from 'components/Atoms'
+import { Select } from 'components/Organisms'
+
+const options = [
+  { name: 'Pacera', value: 'Pacera' },
+  { name: 'Julera', value: 'Julera' },
+  { name: 'Antica', value: 'Antica' },
+  { name: 'Venore', value: 'Venore' },
+  { name: 'Fortera', value: 'Fortera' },
+]
 
 export const ExerciseWeapons = () => {
-  const [value, setValue] = useState('')
+  const [_, setValue] = useState('')
 
   return (
     <div>
-      <AutocompleteInput
-        label="Server"
-        placeholder="Choose a server"
-        itemList={[
-          { name: 'Pacera', value: 'Pacera' },
-          { name: 'Julera', value: 'Julera' },
-          { name: 'Antica', value: 'Antica' },
-          { name: 'Venore', value: 'Venore' },
-          { name: 'Fortera', value: 'Fortera' },
-        ]}
-        onItemSelect={({ name }) => console.log(name)}
-        defaultValue="pace"
-      />
+      <select name="cars">
+        <option value="volvo">Volvo</option>
+        <option value="saab">Saab</option>
+        <option value="opel">Opel</option>
+        <option value="audi">Audi</option>
+      </select>
+
+      <div className="my-4" />
+
+      <Input label="Select a player" />
+
+      <div className="my-4" />
+
+      <Select
+      /* label="Server" */
+      >
+        {options.map(({ name, value }) => (
+          <Option key={value} value={value}>
+            {name}
+          </Option>
+        ))}
+      </Select>
 
       {/* <p>% to next</p>
       <SliderInput max={100} min={0} />
