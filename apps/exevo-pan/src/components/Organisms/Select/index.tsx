@@ -60,6 +60,13 @@ const Select = ({
           /* onFocus={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })} */
           /* onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })} */
           /* onKeyDown={handleKeyboard} */
+          className={clsx(
+            'text-tsm text-onSurface border-1 bg-surface flex w-full cursor-text items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
+            /* isInvalid */ false
+              ? 'border-red'
+              : 'border-separator focus-within:border-primary',
+            /* disabled */ false ? 'bg-separator' : 'bg-surface',
+          )}
           {...props}
         >
           {'<Select />'}
