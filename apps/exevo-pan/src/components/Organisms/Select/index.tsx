@@ -1,21 +1,29 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { useReducer, useCallback, useEffect, memo } from 'react'
 import clsx from 'clsx'
-import { Popover, Listbox } from 'components/Atoms'
+import { Popover, Listbox, Label } from 'components/Atoms'
 import { useUuid } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import { SelectProps } from './types'
 
 const Select = ({
+  id: idProp,
   className,
   style,
+  'aria-label': ariaLabel,
+  label,
   name,
   defaultValue,
   value,
   children,
   ...props
 }: SelectProps) => {
+  const labelId = useUuid()
   const listboxId = useUuid()
+  const uuid = useUuid()
+  const inputId = idProp ?? uuid
+
+  const accessibleLabel = typeof label === 'string' ? label : ariaLabel
 
   /* @ ToDo: abstract to hook */
   /* @ ToDo: use hook in AutocompleteInput (and others?) */
@@ -32,6 +40,9 @@ const Select = ({
 
   return (
     <div className={clsx('child:w-full relative', className)} style={style}>
+      <Label id={labelId} className="mb-2" htmlFor={inputId}>
+        {label}
+      </Label>
       <Popover
         placement="bottom"
         trigger="none"
@@ -49,11 +60,10 @@ const Select = ({
         }
       >
         <div
-          aria-haspopup
+          aria-label={accessibleLabel}
           role="combobox"
-          aria-controls="id"
           aria-expanded="true"
-          /* aria-expanded={listboxStatus} */
+          aria-controls={listboxId}
           aria-owns={listboxId}
           /* value={inputValue} */
           /* onChange={handleChange} */
@@ -72,7 +82,12 @@ const Select = ({
           {'<Select />'}
         </div>
       </Popover>
-      <input name={name} type="hidden" />
+      <input
+        id={inputId}
+        name={name}
+        type="hidden"
+        aria-label={accessibleLabel}
+      />
       <button
         type="button"
         /* onMouseUp={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })} */

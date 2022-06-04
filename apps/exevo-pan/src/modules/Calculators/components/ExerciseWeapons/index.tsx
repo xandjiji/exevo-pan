@@ -28,9 +28,7 @@ export const ExerciseWeapons = () => {
 
       <div className="my-4" />
 
-      <Select
-      /* label="Server" */
-      >
+      <Select label="Server">
         {options.map(({ name, value }) => (
           <Option key={value} value={value}>
             {name}
