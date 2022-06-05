@@ -36,7 +36,7 @@ const Select = ({
       },
       ({ initialValue, initialOptions }) => ({
         value: initialValue,
-        listboxStatus: true,
+        listboxStatus: false,
         highlightedIndex: initialOptions.findIndex(
           (option) => option.value === initialValue,
         ),
@@ -56,6 +56,30 @@ const Select = ({
       })
     }
   }, [highlightedIndex, listboxId]) */
+
+  const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> = (
+    event,
+  ) => {
+    switch (event.code) {
+      case 'Escape':
+        dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
+        break
+      /* case 'ArrowUp':
+      case 'ArrowDown':
+        dispatch({
+          type: 'ARROW_NAVIGATION',
+          code: event.code,
+        })
+        event.preventDefault()
+        break */
+      case 'Enter':
+      case 'NumpadEnter':
+        dispatch({ type: 'SET_LISTBOX_STATUS' })
+        break
+      default:
+        break
+    }
+  }
 
   const displayedValue = useMemo(
     () => options.find((option) => option.value === value)?.name,
@@ -93,13 +117,12 @@ const Select = ({
           aria-expanded="true"
           aria-controls={listboxId}
           aria-owns={listboxId}
-          /* value={inputValue} */
-          /* onChange={handleChange} */
-          /* onFocus={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })} */
-          /* onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })} */
-          /* onKeyDown={handleKeyboard} */
+          tabIndex={0}
+          onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
+          onBlur={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
+          onKeyDown={handleKeyboard}
           className={clsx(
-            'text-tsm text-onSurface border-1 bg-surface flex w-full cursor-text items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
+            'text-tsm text-onSurface border-1 bg-surface flex w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
             /* isInvalid */ false
               ? 'border-red'
               : 'border-separator focus-within:border-primary',

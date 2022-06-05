@@ -4,7 +4,8 @@ import { SelectState, Action } from './types'
 const SelectReducer = (state: SelectState, action: Action): SelectState => {
   switch (action.type) {
     case 'SET_LISTBOX_STATUS':
-      return { ...state, listboxStatus: action.value }
+      if (action.value === state.listboxStatus) return state
+      return { ...state, listboxStatus: action.value ?? !state.listboxStatus }
 
     case 'REDEFINE_OPTIONS':
       return {
