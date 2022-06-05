@@ -1,4 +1,5 @@
-import { filterByTerm, circularArrayIndex } from './utils'
+import { circularArrayIndex } from 'utils'
+import { filterByTerm } from './utils'
 import { AutocompleteInputState, Action } from './types'
 
 const AutocompleteInputReducer = (
