@@ -21,3 +21,17 @@ export type CustomProps = {
 }
 
 export type SelectProps = ExtendedProps & CustomProps & LabelProps
+
+export type SelectState = {
+  value: Value
+  listboxStatus: boolean
+  highlightedIndex: number | undefined
+  options: Option[]
+}
+
+export type Action =
+  /* | { type: 'ARROW_NAVIGATION'; code: 'ArrowUp' | 'ArrowDown' } */
+  /* | { type: 'OPTION_SELECTED' } */
+  | { type: 'SET_LISTBOX_STATUS'; value: boolean }
+  /* | { type: 'USER_TYPING'; value: string } */
+  | { type: 'REDEFINE_OPTIONS'; children: React.ReactNode }

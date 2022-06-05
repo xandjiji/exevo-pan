@@ -1,9 +1,11 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useReducer, useCallback, useEffect, memo } from 'react'
+import { useReducer, useEffect, useMemo, memo } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Label } from 'components/Atoms'
-import { useUuid } from 'hooks'
+import { useUuid, useIsMounted } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
+import SelectReducer from './reducer'
+import { getChildrenOptions } from './utils'
 import { SelectProps } from './types'
 
 const Select = ({
@@ -13,8 +15,8 @@ const Select = ({
   'aria-label': ariaLabel,
   label,
   name,
-  defaultValue,
-  value,
+  defaultValue: defaultValueProp,
+  value: valueProp,
   children,
   ...props
 }: SelectProps) => {
@@ -24,6 +26,23 @@ const Select = ({
   const inputId = idProp ?? uuid
 
   const accessibleLabel = typeof label === 'string' ? label : ariaLabel
+
+  const [{ value, listboxStatus, highlightedIndex, options }, dispatch] =
+    useReducer(
+      SelectReducer,
+      {
+        initialValue: valueProp ?? defaultValueProp ?? '',
+        initialOptions: getChildrenOptions(children),
+      },
+      ({ initialValue, initialOptions }) => ({
+        value: initialValue,
+        listboxStatus: true,
+        highlightedIndex: initialOptions.findIndex(
+          (option) => option.value === initialValue,
+        ),
+        options: initialOptions,
+      }),
+    )
 
   /* @ ToDo: abstract to hook */
   /* @ ToDo: use hook in AutocompleteInput (and others?) */
@@ -38,6 +57,16 @@ const Select = ({
     }
   }, [highlightedIndex, listboxId]) */
 
+  const displayedValue = useMemo(
+    () => options.find((option) => option.value === value)?.name,
+    [options, value],
+  )
+
+  const isMounted = useIsMounted()
+  useEffect(() => {
+    if (isMounted) dispatch({ type: 'REDEFINE_OPTIONS', children })
+  }, [children])
+
   return (
     <div className={clsx('child:w-full relative', className)} style={style}>
       <Label id={labelId} className="mb-2" htmlFor={inputId}>
@@ -46,13 +75,12 @@ const Select = ({
       <Popover
         placement="bottom"
         trigger="none"
-        /* visible={listboxStatus} */
-        visible
+        visible={listboxStatus}
         content={
           <Listbox
             id={listboxId}
-            /* highlightedIndex={highlightedIndex} */
-            onSelectOption={(option) => console.log(option)}
+            highlightedIndex={highlightedIndex}
+            /* onSelectOption={(option) => setValue(option.value)} */
             className="max-h-[210px]"
           >
             {children}
@@ -79,7 +107,7 @@ const Select = ({
           )}
           {...props}
         >
-          {'<Select />'}
+          {displayedValue}
         </div>
       </Popover>
       <input
@@ -87,6 +115,7 @@ const Select = ({
         name={name}
         type="hidden"
         aria-label={accessibleLabel}
+        value={value}
       />
       <button
         type="button"

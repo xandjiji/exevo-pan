@@ -3,11 +3,11 @@ import { Switch, Input, Slider, Option } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 
 const options = [
-  { name: 'Pacera', value: 'Pacera' },
-  { name: 'Julera', value: 'Julera' },
-  { name: 'Antica', value: 'Antica' },
-  { name: 'Venore', value: 'Venore' },
-  { name: 'Fortera', value: 'Fortera' },
+  { name: 'Pacera', value: 'pacera' },
+  { name: 'Julera', value: 'julera' },
+  { name: 'Antica', value: 'antica' },
+  { name: 'Venore', value: 'venore' },
+  { name: 'Fortera', value: 'fortera' },
 ]
 
 export const ExerciseWeapons = () => {
@@ -15,7 +15,7 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <select name="cars">
+      <select name="cars" defaultValue="saab">
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
@@ -28,7 +28,7 @@ export const ExerciseWeapons = () => {
 
       <div className="my-4" />
 
-      <Select label="Server">
+      <Select label="Server" defaultValue="antica">
         {options.map(({ name, value }) => (
           <Option key={value} value={value}>
             {name}
