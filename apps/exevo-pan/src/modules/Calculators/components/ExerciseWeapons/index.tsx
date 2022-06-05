@@ -15,7 +15,7 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <select name="cars" defaultValue="saab">
+      <select name="cars">
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
@@ -28,7 +28,7 @@ export const ExerciseWeapons = () => {
 
       <div className="my-4" />
 
-      <Select label="Server" defaultValue="antica">
+      <Select label="Server">
         {options.map(({ name, value }) => (
           <Option key={value} value={value}>
             {name}

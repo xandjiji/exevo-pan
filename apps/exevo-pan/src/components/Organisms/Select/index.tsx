@@ -64,16 +64,17 @@ const Select = ({
       case 'Escape':
         dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
         break
-      /* case 'ArrowUp':
+      case 'ArrowUp':
       case 'ArrowDown':
         dispatch({
           type: 'ARROW_NAVIGATION',
           code: event.code,
         })
         event.preventDefault()
-        break */
+        break
       case 'Enter':
       case 'NumpadEnter':
+      case 'Space':
         dispatch({ type: 'SET_LISTBOX_STATUS' })
         break
       default:
@@ -104,7 +105,7 @@ const Select = ({
           <Listbox
             id={listboxId}
             highlightedIndex={highlightedIndex}
-            /* onSelectOption={(option) => setValue(option.value)} */
+            onSelectOption={(option) => console.log(option.value)}
             className="max-h-[210px]"
           >
             {children}
@@ -122,7 +123,7 @@ const Select = ({
           onBlur={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
           onKeyDown={handleKeyboard}
           className={clsx(
-            'text-tsm text-onSurface border-1 bg-surface flex w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
+            'text-tsm text-onSurface border-1 bg-surface flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
             /* isInvalid */ false
               ? 'border-red'
               : 'border-separator focus-within:border-primary',
