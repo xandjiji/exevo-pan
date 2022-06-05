@@ -30,7 +30,8 @@ export type SelectState = {
 }
 
 export type Action =
-  | { type: 'ARROW_NAVIGATION'; code: 'ArrowUp' | 'ArrowDown' }
   | { type: 'SET_LISTBOX_STATUS'; value?: boolean }
+  | { type: 'ARROW_NAVIGATION'; code: 'ArrowUp' | 'ArrowDown' }
+  | { type: 'OPTION_SELECTED'; value: Value }
   /* | { type: 'USER_TYPING'; value: string } */
   | { type: 'REDEFINE_OPTIONS'; children: React.ReactNode }

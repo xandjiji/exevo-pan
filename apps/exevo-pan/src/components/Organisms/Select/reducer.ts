@@ -20,6 +20,16 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
       }
     }
 
+    case 'OPTION_SELECTED':
+      return {
+        ...state,
+        listboxStatus: false,
+        value: action.value,
+        highlightedIndex: options.findIndex(
+          ({ value }) => value === action.value,
+        ),
+      }
+
     case 'SET_LISTBOX_STATUS':
       if (action.value === state.listboxStatus) return state
       return { ...state, listboxStatus: action.value ?? !state.listboxStatus }

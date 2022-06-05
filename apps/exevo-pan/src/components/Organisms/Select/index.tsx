@@ -1,5 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useReducer, useEffect, useMemo, memo } from 'react'
+import {
+  useReducer,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  memo,
+} from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Label } from 'components/Atoms'
 import { useUuid, useIsMounted } from 'hooks'
@@ -57,30 +64,30 @@ const Select = ({
     }
   }, [highlightedIndex, listboxId]) */
 
-  const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> = (
-    event,
-  ) => {
-    switch (event.code) {
-      case 'Escape':
-        dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
-        break
-      case 'ArrowUp':
-      case 'ArrowDown':
-        dispatch({
-          type: 'ARROW_NAVIGATION',
-          code: event.code,
-        })
-        event.preventDefault()
-        break
-      case 'Enter':
-      case 'NumpadEnter':
-      case 'Space':
-        dispatch({ type: 'SET_LISTBOX_STATUS' })
-        break
-      default:
-        break
-    }
-  }
+  const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> =
+    useCallback((event) => {
+      switch (event.code) {
+        case 'Escape':
+        case 'Tab':
+          dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
+          break
+        case 'ArrowUp':
+        case 'ArrowDown':
+          dispatch({
+            type: 'ARROW_NAVIGATION',
+            code: event.code,
+          })
+          event.preventDefault()
+          break
+        case 'Enter':
+        case 'NumpadEnter':
+        case 'Space':
+          dispatch({ type: 'SET_LISTBOX_STATUS' })
+          break
+        default:
+          break
+      }
+    }, [])
 
   const displayedValue = useMemo(
     () => options.find((option) => option.value === value)?.name,
@@ -91,6 +98,8 @@ const Select = ({
   useEffect(() => {
     if (isMounted) dispatch({ type: 'REDEFINE_OPTIONS', children })
   }, [children])
+
+  const selectRef = useRef<HTMLDivElement>(null)
 
   return (
     <div className={clsx('child:w-full relative', className)} style={style}>
@@ -105,7 +114,10 @@ const Select = ({
           <Listbox
             id={listboxId}
             highlightedIndex={highlightedIndex}
-            onSelectOption={(option) => console.log(option.value)}
+            onSelectOption={(option) => {
+              dispatch({ type: 'OPTION_SELECTED', value: option.value })
+              selectRef.current?.focus()
+            }}
             className="max-h-[210px]"
           >
             {children}
@@ -113,6 +125,7 @@ const Select = ({
         }
       >
         <div
+          ref={selectRef}
           aria-label={accessibleLabel}
           role="combobox"
           aria-expanded="true"
@@ -120,7 +133,6 @@ const Select = ({
           aria-owns={listboxId}
           tabIndex={0}
           onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
-          onBlur={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
           onKeyDown={handleKeyboard}
           className={clsx(
             'text-tsm text-onSurface border-1 bg-surface flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
@@ -143,9 +155,8 @@ const Select = ({
       />
       <button
         type="button"
-        /* onMouseUp={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })} */
-        /* hidden={!listboxStatus} */
-        hidden
+        onMouseUp={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: false })}
+        hidden={!listboxStatus}
         className="fixed top-0 left-0 h-screen w-screen"
       />
     </div>
