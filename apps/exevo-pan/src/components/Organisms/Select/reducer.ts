@@ -46,7 +46,6 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
       }
 
     case 'SYNC_OPTIONS':
-      console.log('aa')
       return {
         ...state,
         options: getChildrenOptions(action.children),
