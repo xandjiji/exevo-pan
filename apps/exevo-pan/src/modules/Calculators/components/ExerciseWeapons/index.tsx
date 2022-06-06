@@ -11,7 +11,8 @@ const options = [
 ]
 
 export const ExerciseWeapons = () => {
-  const [_, setValue] = useState('')
+  const [stateValue, setValue] = useState('venore')
+  console.log({ stateValue })
 
   return (
     <div>
@@ -28,7 +29,11 @@ export const ExerciseWeapons = () => {
 
       <div className="my-4" />
 
-      <Select label="Server">
+      <Select
+        label="Server"
+        value={stateValue}
+        onChange={(e) => setValue(e.target.value)}
+      >
         {options.map(({ name, value }) => (
           <Option key={value} value={value}>
             {name}
