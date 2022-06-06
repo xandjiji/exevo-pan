@@ -39,12 +39,12 @@ export const ExerciseWeapons = () => {
       />
 
       <div className="my-4" />
-      {/* <Select
+      <Select
         label="Server (uncontrolled)"
         onChange={(e) => console.log(e.target.value)}
         options={options}
-        defaultValue="venore"
-      /> */}
+        /* defaultValue="venore" */
+      />
 
       {/* <p>% to next</p>
       <SliderInput max={100} min={0} />

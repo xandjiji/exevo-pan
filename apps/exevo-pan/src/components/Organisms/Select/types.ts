@@ -27,15 +27,16 @@ export type SelectState = {
   controlledValue?: Value
   innerValue: Value
   listboxStatus: boolean
-  highlightedIndex: number | undefined
-  options: Option[]
   dispatchChangeEvent: (dispatchValue: Value) => void
 }
 
 export type Action =
   | { type: 'SET_LISTBOX_STATUS'; value?: boolean }
-  | { type: 'ARROW_NAVIGATION'; code: 'ArrowUp' | 'ArrowDown' }
+  | {
+      type: 'ARROW_NAVIGATION'
+      code: 'ArrowUp' | 'ArrowDown'
+      options: Option[]
+    }
   | { type: 'OPTION_SELECTED'; selectedValue: Value }
   /* | { type: 'USER_TYPING'; value: string } */
-  | { type: 'SYNC_OPTIONS'; options: Option[] }
   | { type: 'SYNC_CONTROLLED_VALUE'; propValue?: Value }

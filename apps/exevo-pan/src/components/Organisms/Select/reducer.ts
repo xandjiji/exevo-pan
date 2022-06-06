@@ -3,26 +3,26 @@ import { findOptionIndexByValue } from './utils'
 import { SelectState, Action } from './types'
 
 const SelectReducer = (state: SelectState, action: Action): SelectState => {
-  const { controlledValue, highlightedIndex, options, dispatchChangeEvent } =
-    state
+  const { dispatchChangeEvent } = state
 
   switch (action.type) {
     case 'ARROW_NAVIGATION': {
-      const currentHighlightedIndex = controlledValue
-        ? findOptionIndexByValue(options, controlledValue)
-        : highlightedIndex
+      const { options } = action
+      const selectedOptionIndex = findOptionIndexByValue(
+        options,
+        state.controlledValue ?? state.innerValue,
+      )
 
       const newIndex = clampValue(
-        (currentHighlightedIndex ?? -1) + (action.code === 'ArrowUp' ? -1 : 1),
+        selectedOptionIndex + (action.code === 'ArrowUp' ? -1 : 1),
         [0, options.length - 1],
       )
 
-      if (newIndex === highlightedIndex) return state
+      if (newIndex === selectedOptionIndex) return state
       const newValue = options[newIndex].value
       dispatchChangeEvent(newValue)
       return {
         ...state,
-        highlightedIndex: controlledValue ? highlightedIndex : newIndex,
         innerValue: newValue,
       }
     }
@@ -33,9 +33,6 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
         ...state,
         listboxStatus: false,
         innerValue: action.selectedValue,
-        highlightedIndex: controlledValue
-          ? highlightedIndex
-          : findOptionIndexByValue(options, action.selectedValue),
       }
 
     case 'SET_LISTBOX_STATUS':
@@ -45,21 +42,10 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
         listboxStatus: action.value ?? !state.listboxStatus,
       }
 
-    case 'SYNC_OPTIONS':
-      return {
-        ...state,
-        options: action.options,
-        highlightedIndex: findOptionIndexByValue(
-          options,
-          state.controlledValue ?? state.innerValue,
-        ),
-      }
-
     case 'SYNC_CONTROLLED_VALUE':
       return {
         ...state,
         controlledValue: action.propValue,
-        highlightedIndex: findOptionIndexByValue(options, action.propValue),
       }
 
     default:

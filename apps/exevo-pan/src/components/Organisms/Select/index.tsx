@@ -13,6 +13,7 @@ import { Popover, Listbox, Option, Label } from 'components/Atoms'
 import { useSharedRef, useUuid } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import SelectReducer from './reducer'
+import { findOptionIndexByValue } from './utils'
 import { SelectProps, Value } from './types'
 
 /* @ ToDo: useCallback em funçoes que sao estaveis */
@@ -49,23 +50,25 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     const selectRef = useRef<HTMLDivElement>(null)
     const dispatchedValue = useRef(propValue ?? defaultValueProp ?? '')
 
-    const [{ innerValue, listboxStatus, highlightedIndex }, dispatch] =
-      useReducer(SelectReducer, {
+    const [{ innerValue, listboxStatus }, dispatch] = useReducer(
+      SelectReducer,
+      {
         controlledValue: propValue,
         innerValue: dispatchedValue.current,
         listboxStatus: false,
-        highlightedIndex: options.findIndex(
-          (option) => option.value === dispatchedValue.current,
-        ),
-        options,
         dispatchChangeEvent: (dispatchValue: Value) => {
           dispatchedValue.current = dispatchValue
           const event = new Event('input', { bubbles: true })
           innerRef.current?.dispatchEvent?.(event)
         },
-      })
+      },
+    )
 
     const value = propValue ?? innerValue
+    const selectedIndex = useMemo(
+      () => findOptionIndexByValue(options, value),
+      [value, options],
+    )
 
     /* useEffect(() => {
     if (highlightedIndex !== undefined) {
@@ -79,38 +82,33 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
   }, [highlightedIndex, listboxId]) */
 
     const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> =
-      useCallback((event) => {
-        switch (event.code) {
-          case 'Escape':
-          case 'Tab':
-            dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
-            break
-          case 'ArrowUp':
-          case 'ArrowDown':
-            dispatch({
-              type: 'ARROW_NAVIGATION',
-              code: event.code,
-            })
-            event.preventDefault()
-            break
-          case 'Enter':
-          case 'NumpadEnter':
-          case 'Space':
-            dispatch({ type: 'SET_LISTBOX_STATUS' })
-            break
-          default:
-            break
-        }
-      }, [])
-
-    const displayedValue = useMemo(
-      () => options.find((option) => option.value === value)?.name,
-      [options, value],
-    )
-
-    useEffect(() => {
-      dispatch({ type: 'SYNC_OPTIONS', options })
-    }, [options])
+      useCallback(
+        (event) => {
+          switch (event.code) {
+            case 'Escape':
+            case 'Tab':
+              dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
+              break
+            case 'ArrowUp':
+            case 'ArrowDown':
+              dispatch({
+                type: 'ARROW_NAVIGATION',
+                code: event.code,
+                options,
+              })
+              event.preventDefault()
+              break
+            case 'Enter':
+            case 'NumpadEnter':
+            case 'Space':
+              dispatch({ type: 'SET_LISTBOX_STATUS' })
+              break
+            default:
+              break
+          }
+        },
+        [options],
+      )
 
     useEffect(() => {
       dispatch({ type: 'SYNC_CONTROLLED_VALUE', propValue })
@@ -128,7 +126,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
           content={
             <Listbox
               id={listboxId}
-              highlightedIndex={highlightedIndex}
+              highlightedIndex={selectedIndex}
               onSelectOption={(option) => {
                 dispatch({
                   type: 'OPTION_SELECTED',
@@ -167,7 +165,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             )}
             {...props}
           >
-            {displayedValue}
+            {options[selectedIndex]?.name}
           </div>
         </Popover>
         <input
