@@ -16,8 +16,6 @@ import useValueRef from './useValueRef'
 import { findOptionIndexByValue } from './utils'
 import { SelectProps, Value } from './types'
 
-/* @ ToDo: toggle on click */
-/* @ ToDo: remove isMounted with array diff */
 /* @ ToDo: abstract onInput to hook */
 /* @ ToDo: USER_TYPING */
 /* @ ToDo: abstract scroll highlight */
@@ -149,9 +147,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             aria-controls={listboxId}
             aria-owns={listboxId}
             tabIndex={0}
-            onClick={() =>
-              dispatch({ type: 'SET_LISTBOX_STATUS', value: true })
-            }
+            onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS' })}
             onKeyDown={handleKeyboard}
             className={clsx(
               'text-tsm text-onSurface border-1 bg-surface flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
