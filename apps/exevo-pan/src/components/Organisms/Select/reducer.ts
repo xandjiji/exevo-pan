@@ -3,14 +3,14 @@ import { findOptionIndexByValue } from './utils'
 import { SelectState, Action } from './types'
 
 const SelectReducer = (state: SelectState, action: Action): SelectState => {
-  const { dispatchChangeEvent } = state
+  const { isControlled, dispatchChangeEvent } = state
 
   switch (action.type) {
     case 'ARROW_NAVIGATION': {
       const { options } = action
       const selectedOptionIndex = findOptionIndexByValue(
         options,
-        state.controlledValue ?? state.innerValue,
+        action.currentValue,
       )
 
       const newIndex = clampValue(
@@ -21,10 +21,13 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
       if (newIndex === selectedOptionIndex) return state
       const newValue = options[newIndex].value
       dispatchChangeEvent(newValue)
-      return {
-        ...state,
-        innerValue: newValue,
-      }
+
+      return isControlled
+        ? state
+        : {
+            ...state,
+            innerValue: newValue,
+          }
     }
 
     case 'OPTION_SELECTED':
@@ -32,7 +35,7 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
       return {
         ...state,
         listboxStatus: false,
-        innerValue: action.selectedValue,
+        innerValue: isControlled ? state.innerValue : action.selectedValue,
       }
 
     case 'SET_LISTBOX_STATUS':
@@ -40,12 +43,6 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
       return {
         ...state,
         listboxStatus: action.value ?? !state.listboxStatus,
-      }
-
-    case 'SYNC_CONTROLLED_VALUE':
-      return {
-        ...state,
-        controlledValue: action.propValue,
       }
 
     default:

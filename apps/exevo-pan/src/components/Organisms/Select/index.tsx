@@ -2,7 +2,6 @@
 import {
   forwardRef,
   useReducer,
-  useEffect,
   useRef,
   useCallback,
   useMemo,
@@ -13,10 +12,10 @@ import { Popover, Listbox, Option, Label } from 'components/Atoms'
 import { useSharedRef, useUuid } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import SelectReducer from './reducer'
+import useValueRef from './useValueRef'
 import { findOptionIndexByValue } from './utils'
 import { SelectProps, Value } from './types'
 
-/* @ ToDo: useCallback em funçoes que sao estaveis */
 /* @ ToDo: toggle on click */
 /* @ ToDo: remove isMounted with array diff */
 /* @ ToDo: abstract onInput to hook */
@@ -53,7 +52,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     const [{ innerValue, listboxStatus }, dispatch] = useReducer(
       SelectReducer,
       {
-        controlledValue: propValue,
+        isControlled: propValue !== undefined,
         innerValue: dispatchedValue.current,
         listboxStatus: false,
         dispatchChangeEvent: (dispatchValue: Value) => {
@@ -65,6 +64,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     )
 
     const value = propValue ?? innerValue
+    const valueRef = useValueRef(value)
     const selectedIndex = useMemo(
       () => findOptionIndexByValue(options, value),
       [value, options],
@@ -95,6 +95,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
                 type: 'ARROW_NAVIGATION',
                 code: event.code,
                 options,
+                currentValue: valueRef.current,
               })
               event.preventDefault()
               break
@@ -110,10 +111,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
         [options],
       )
 
-    useEffect(() => {
-      dispatch({ type: 'SYNC_CONTROLLED_VALUE', propValue })
-    }, [propValue])
-
     return (
       <div className={clsx('child:w-full relative', className)} style={style}>
         <Label id={labelId} className="mb-2" htmlFor={inputId}>
@@ -127,13 +124,13 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             <Listbox
               id={listboxId}
               highlightedIndex={selectedIndex}
-              onSelectOption={(option) => {
+              onSelectOption={useCallback((option) => {
                 dispatch({
                   type: 'OPTION_SELECTED',
                   selectedValue: option.value,
                 })
                 selectRef.current?.focus()
-              }}
+              }, [])}
               className="max-h-[210px]"
             >
               {options.map((option) => (

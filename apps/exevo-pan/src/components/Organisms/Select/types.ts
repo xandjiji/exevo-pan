@@ -24,7 +24,7 @@ export type CustomProps = {
 export type SelectProps = ExtendedProps & CustomProps & LabelProps
 
 export type SelectState = {
-  controlledValue?: Value
+  isControlled: boolean
   innerValue: Value
   listboxStatus: boolean
   dispatchChangeEvent: (dispatchValue: Value) => void
@@ -36,7 +36,7 @@ export type Action =
       type: 'ARROW_NAVIGATION'
       code: 'ArrowUp' | 'ArrowDown'
       options: Option[]
+      currentValue: Value
     }
   | { type: 'OPTION_SELECTED'; selectedValue: Value }
-  /* | { type: 'USER_TYPING'; value: string } */
-  | { type: 'SYNC_CONTROLLED_VALUE'; propValue?: Value }
+/* | { type: 'USER_TYPING'; value: string } */
