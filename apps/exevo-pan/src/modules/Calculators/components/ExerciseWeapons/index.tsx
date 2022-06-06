@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Switch, Input, Slider, Option } from 'components/Atoms'
+import { Switch, Input, Slider } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 
 const options = [
@@ -30,30 +30,21 @@ export const ExerciseWeapons = () => {
 
       <Select
         label="Server (controlled)"
+        options={options}
         value={stateValue}
         onChange={(e) => {
           console.log(e.target.value)
           setValue(e.target.value)
         }}
-      >
-        {options.map(({ name, value }) => (
-          <Option key={value} value={value}>
-            {name}
-          </Option>
-        ))}
-      </Select>
+      />
+
       <div className="my-4" />
-      <Select
+      {/* <Select
         label="Server (uncontrolled)"
         onChange={(e) => console.log(e.target.value)}
+        options={options}
         defaultValue="venore"
-      >
-        {options.map(({ name, value }) => (
-          <Option key={value} value={value}>
-            {name}
-          </Option>
-        ))}
-      </Select>
+      /> */}
 
       {/* <p>% to next</p>
       <SliderInput max={100} min={0} />

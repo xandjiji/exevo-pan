@@ -9,11 +9,10 @@ import {
   memo,
 } from 'react'
 import clsx from 'clsx'
-import { Popover, Listbox, Label } from 'components/Atoms'
-import { useSharedRef, useUuid, useIsMounted } from 'hooks'
+import { Popover, Listbox, Option, Label } from 'components/Atoms'
+import { useSharedRef, useUuid } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import SelectReducer from './reducer'
-import { getChildrenOptions } from './utils'
 import { SelectProps, Value } from './types'
 
 /* @ ToDo: useCallback em funçoes que sao estaveis */
@@ -36,7 +35,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       defaultValue: defaultValueProp,
       value: propValue,
       onChange,
-      children,
+      options,
       ...props
     } = componentProps
 
@@ -50,28 +49,21 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     const selectRef = useRef<HTMLDivElement>(null)
     const dispatchedValue = useRef(propValue ?? defaultValueProp ?? '')
 
-    const [{ innerValue, listboxStatus, highlightedIndex, options }, dispatch] =
-      useReducer(
-        SelectReducer,
-        {
-          initialValue: dispatchedValue.current,
-          initialOptions: getChildrenOptions(children),
+    const [{ innerValue, listboxStatus, highlightedIndex }, dispatch] =
+      useReducer(SelectReducer, {
+        controlledValue: propValue,
+        innerValue: dispatchedValue.current,
+        listboxStatus: false,
+        highlightedIndex: options.findIndex(
+          (option) => option.value === dispatchedValue.current,
+        ),
+        options,
+        dispatchChangeEvent: (dispatchValue: Value) => {
+          dispatchedValue.current = dispatchValue
+          const event = new Event('input', { bubbles: true })
+          innerRef.current?.dispatchEvent?.(event)
         },
-        ({ initialValue, initialOptions }) => ({
-          controlledValue: propValue,
-          innerValue: initialValue,
-          listboxStatus: false,
-          highlightedIndex: initialOptions.findIndex(
-            (option) => option.value === initialValue,
-          ),
-          options: initialOptions,
-          dispatchChangeEvent: (dispatchValue: Value) => {
-            dispatchedValue.current = dispatchValue
-            const event = new Event('input', { bubbles: true })
-            innerRef.current?.dispatchEvent?.(event)
-          },
-        }),
-      )
+      })
 
     const value = propValue ?? innerValue
 
@@ -116,10 +108,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       [options, value],
     )
 
-    const isMounted = useIsMounted()
     useEffect(() => {
-      if (isMounted) dispatch({ type: 'SYNC_OPTIONS', children })
-    }, [children])
+      dispatch({ type: 'SYNC_OPTIONS', options })
+    }, [options])
 
     useEffect(() => {
       dispatch({ type: 'SYNC_CONTROLLED_VALUE', propValue })
@@ -147,7 +138,11 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
               }}
               className="max-h-[210px]"
             >
-              {children}
+              {options.map((option) => (
+                <Option key={option.value} value={option.value}>
+                  {option.name}
+                </Option>
+              ))}
             </Listbox>
           }
         >

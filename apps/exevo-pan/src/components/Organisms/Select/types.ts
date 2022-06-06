@@ -1,6 +1,6 @@
 export type ExtendedProps = Omit<
   React.InputHTMLAttributes<HTMLInputElement>,
-  'defaultValue' | 'value' | 'aria-label'
+  'children' | 'defaultValue' | 'value' | 'aria-label'
 >
 
 export type Value = number | string
@@ -17,6 +17,7 @@ export type LabelProps =
 
 export type CustomProps = {
   defaultValue?: Value
+  options: Option[]
   value?: Value
 }
 
@@ -36,5 +37,5 @@ export type Action =
   | { type: 'ARROW_NAVIGATION'; code: 'ArrowUp' | 'ArrowDown' }
   | { type: 'OPTION_SELECTED'; selectedValue: Value }
   /* | { type: 'USER_TYPING'; value: string } */
-  | { type: 'SYNC_OPTIONS'; children: React.ReactNode }
+  | { type: 'SYNC_OPTIONS'; options: Option[] }
   | { type: 'SYNC_CONTROLLED_VALUE'; propValue?: Value }

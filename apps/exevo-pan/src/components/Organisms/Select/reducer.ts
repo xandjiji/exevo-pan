@@ -1,5 +1,5 @@
 import { clampValue } from 'utils'
-import { getChildrenOptions, findOptionIndexByValue } from './utils'
+import { findOptionIndexByValue } from './utils'
 import { SelectState, Action } from './types'
 
 const SelectReducer = (state: SelectState, action: Action): SelectState => {
@@ -48,7 +48,11 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
     case 'SYNC_OPTIONS':
       return {
         ...state,
-        options: getChildrenOptions(action.children),
+        options: action.options,
+        highlightedIndex: findOptionIndexByValue(
+          options,
+          state.controlledValue ?? state.innerValue,
+        ),
       }
 
     case 'SYNC_CONTROLLED_VALUE':
