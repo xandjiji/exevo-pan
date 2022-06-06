@@ -1,4 +1,5 @@
 import { ReactNode, Children, isValidElement } from 'react'
+import { Value } from './types'
 
 export const getChildrenOptions = (children: ReactNode): Option[] => {
   const options: Option[] = []
@@ -15,3 +16,6 @@ export const getChildrenOptions = (children: ReactNode): Option[] => {
 
   return options
 }
+
+export const findOptionIndexByValue = (options: Option[], value?: Value) =>
+  options.findIndex((option) => option.value === value)

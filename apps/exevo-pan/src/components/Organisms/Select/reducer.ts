@@ -1,5 +1,5 @@
 import { clampValue } from 'utils'
-import { getChildrenOptions } from './utils'
+import { getChildrenOptions, findOptionIndexByValue } from './utils'
 import { SelectState, Action } from './types'
 
 const SelectReducer = (state: SelectState, action: Action): SelectState => {
@@ -9,7 +9,7 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
   switch (action.type) {
     case 'ARROW_NAVIGATION': {
       const currentHighlightedIndex = controlledValue
-        ? options.findIndex(({ value }) => value === controlledValue)
+        ? findOptionIndexByValue(options, controlledValue)
         : highlightedIndex
 
       const newIndex = clampValue(
@@ -35,7 +35,7 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
         innerValue: action.selectedValue,
         highlightedIndex: controlledValue
           ? highlightedIndex
-          : options.findIndex(({ value }) => value === action.selectedValue),
+          : findOptionIndexByValue(options, action.selectedValue),
       }
 
     case 'SET_LISTBOX_STATUS':
@@ -46,6 +46,7 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
       }
 
     case 'SYNC_OPTIONS':
+      console.log('aa')
       return {
         ...state,
         options: getChildrenOptions(action.children),
@@ -55,6 +56,7 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
       return {
         ...state,
         controlledValue: action.propValue,
+        highlightedIndex: findOptionIndexByValue(options, action.propValue),
       }
 
     default:

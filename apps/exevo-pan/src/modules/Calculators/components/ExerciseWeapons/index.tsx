@@ -31,7 +31,10 @@ export const ExerciseWeapons = () => {
       <Select
         label="Server (controlled)"
         value={stateValue}
-        onChange={(e) => console.log(e.target.value)}
+        onChange={(e) => {
+          console.log(e.target.value)
+          setValue(e.target.value)
+        }}
       >
         {options.map(({ name, value }) => (
           <Option key={value} value={value}>

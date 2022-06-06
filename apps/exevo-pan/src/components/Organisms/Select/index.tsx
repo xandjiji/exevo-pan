@@ -19,6 +19,7 @@ import { SelectProps, Value } from './types'
 /* @ ToDo: useCallback em funçoes que sao estaveis */
 /* @ ToDo: toggle on click */
 /* @ ToDo: remove isMounted with array diff */
+/* @ ToDo: abstract onInput to hook */
 /* @ ToDo: USER_TYPING */
 /* @ ToDo: abstract scroll highlight */
 /* @ ToDo: use hook in AutocompleteInput (and others?) */
