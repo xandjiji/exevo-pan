@@ -3,7 +3,6 @@ import { useReducer, useCallback, useEffect, memo } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Input } from 'components/Atoms'
 import { useUuid } from 'hooks'
-import { indexToId } from 'components/Atoms/Listbox/utils'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import AutocompleteInputReducer from './reducer'
@@ -67,17 +66,6 @@ const AutocompleteInput = ({
         break
     }
   }
-
-  useEffect(() => {
-    if (highlightedIndex !== undefined) {
-      const item = document.getElementById(
-        indexToId(highlightedIndex, listboxId) as string,
-      )
-      item?.scrollIntoView({
-        block: 'nearest',
-      })
-    }
-  }, [highlightedIndex, listboxId])
 
   useEffect(() => {
     dispatch({ type: 'REDEFINE_LIST', itemList })

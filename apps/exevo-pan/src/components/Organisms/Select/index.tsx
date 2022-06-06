@@ -10,16 +10,12 @@ import {
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Label } from 'components/Atoms'
 import { useSharedRef, useUuid } from 'hooks'
-import { indexToId } from 'components/Atoms/Listbox/utils'
 import SelectReducer from './reducer'
 import useValueRef from './useValueRef'
 import { findOptionIndexByValue } from './utils'
 import { SelectProps, Value } from './types'
 
-/* @ ToDo: abstract onInput to hook */
 /* @ ToDo: USER_TYPING */
-/* @ ToDo: abstract scroll highlight */
-/* @ ToDo: use hook in AutocompleteInput (and others?) */
 
 const Select = forwardRef<HTMLInputElement, SelectProps>(
   (componentProps: SelectProps, ref: React.Ref<HTMLInputElement>) => {
@@ -67,17 +63,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       () => findOptionIndexByValue(options, value),
       [value, options],
     )
-
-    /* useEffect(() => {
-    if (highlightedIndex !== undefined) {
-      const item = document.getElementById(
-        indexToId(highlightedIndex, listboxId) as string,
-      )
-      item?.scrollIntoView({
-        block: 'nearest',
-      })
-    }
-  }, [highlightedIndex, listboxId]) */
 
     const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> =
       useCallback(
