@@ -12,11 +12,10 @@ const options = [
 
 export const ExerciseWeapons = () => {
   const [stateValue, setValue] = useState('venore')
-  console.log({ stateValue })
 
   return (
     <div>
-      <select name="cars">
+      <select name="cars" onChange={(event) => console.log(event.target.value)}>
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
@@ -30,9 +29,21 @@ export const ExerciseWeapons = () => {
       <div className="my-4" />
 
       <Select
-        label="Server"
+        label="Server (controlled)"
         value={stateValue}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={(e) => console.log(e.target.value)}
+      >
+        {options.map(({ name, value }) => (
+          <Option key={value} value={value}>
+            {name}
+          </Option>
+        ))}
+      </Select>
+      <div className="my-4" />
+      <Select
+        label="Server (uncontrolled)"
+        onChange={(e) => console.log(e.target.value)}
+        defaultValue="venore"
       >
         {options.map(({ name, value }) => (
           <Option key={value} value={value}>

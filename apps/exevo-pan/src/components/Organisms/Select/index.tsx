@@ -14,7 +14,14 @@ import { useSharedRef, useUuid, useIsMounted } from 'hooks'
 import { indexToId } from 'components/Atoms/Listbox/utils'
 import SelectReducer from './reducer'
 import { getChildrenOptions } from './utils'
-import { SelectProps } from './types'
+import { SelectProps, Value } from './types'
+
+/* @ ToDo: useCallback em funçoes que sao estaveis */
+/* @ ToDo: toggle on click */
+/* @ ToDo: remove isMounted with array diff */
+/* @ ToDo: USER_TYPING */
+/* @ ToDo: abstract scroll highlight */
+/* @ ToDo: use hook in AutocompleteInput (and others?) */
 
 const Select = forwardRef<HTMLInputElement, SelectProps>(
   (componentProps: SelectProps, ref: React.Ref<HTMLInputElement>) => {
@@ -26,41 +33,47 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       label,
       name,
       defaultValue: defaultValueProp,
-      value: valueProp,
+      value: propValue,
       onChange,
       children,
       ...props
     } = componentProps
 
-    const innerRef = useSharedRef<HTMLInputElement>(ref)
-    const selectRef = useRef<HTMLDivElement>(null)
-
     const labelId = useUuid()
     const listboxId = useUuid()
     const uuid = useUuid()
     const inputId = idProp ?? uuid
-
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
 
-    const [{ value, listboxStatus, highlightedIndex, options }, dispatch] =
+    const innerRef = useSharedRef<HTMLInputElement>(ref)
+    const selectRef = useRef<HTMLDivElement>(null)
+    const dispatchedValue = useRef(propValue ?? defaultValueProp ?? '')
+
+    const [{ innerValue, listboxStatus, highlightedIndex, options }, dispatch] =
       useReducer(
         SelectReducer,
         {
-          initialValue: valueProp ?? defaultValueProp ?? '',
+          initialValue: dispatchedValue.current,
           initialOptions: getChildrenOptions(children),
         },
         ({ initialValue, initialOptions }) => ({
-          value: initialValue,
+          controlledValue: propValue,
+          innerValue: initialValue,
           listboxStatus: false,
           highlightedIndex: initialOptions.findIndex(
             (option) => option.value === initialValue,
           ),
           options: initialOptions,
+          dispatchChangeEvent: (dispatchValue: Value) => {
+            dispatchedValue.current = dispatchValue
+            const event = new Event('input', { bubbles: true })
+            innerRef.current?.dispatchEvent?.(event)
+          },
         }),
       )
 
-    /* @ ToDo: abstract to hook */
-    /* @ ToDo: use hook in AutocompleteInput (and others?) */
+    const value = propValue ?? innerValue
+
     /* useEffect(() => {
     if (highlightedIndex !== undefined) {
       const item = document.getElementById(
@@ -104,15 +117,12 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
 
     const isMounted = useIsMounted()
     useEffect(() => {
-      if (isMounted) dispatch({ type: 'REDEFINE_OPTIONS', children })
+      if (isMounted) dispatch({ type: 'SYNC_OPTIONS', children })
     }, [children])
 
     useEffect(() => {
-      if (isMounted) {
-        const event = new Event('input', { bubbles: true })
-        innerRef.current?.dispatchEvent?.(event)
-      }
-    }, [innerRef, value])
+      dispatch({ type: 'SYNC_CONTROLLED_VALUE', propValue })
+    }, [propValue])
 
     return (
       <div className={clsx('child:w-full relative', className)} style={style}>
@@ -128,7 +138,10 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
               id={listboxId}
               highlightedIndex={highlightedIndex}
               onSelectOption={(option) => {
-                dispatch({ type: 'OPTION_SELECTED', value: option.value })
+                dispatch({
+                  type: 'OPTION_SELECTED',
+                  selectedValue: option.value,
+                })
                 selectRef.current?.focus()
               }}
               className="max-h-[210px]"
@@ -168,9 +181,12 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
           type="hidden"
           aria-label={accessibleLabel}
           value={value}
-          onInput={(event) =>
+          onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
+            if (event.target.value === dispatchedValue.current) return
+            // eslint-disable-next-line no-param-reassign
+            event.target.value = dispatchedValue.current.toString()
             onChange?.(event as React.ChangeEvent<HTMLInputElement>)
-          }
+          }}
         />
         <button
           type="button"

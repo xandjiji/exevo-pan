@@ -23,15 +23,18 @@ export type CustomProps = {
 export type SelectProps = ExtendedProps & CustomProps & LabelProps
 
 export type SelectState = {
-  value: Value
+  controlledValue?: Value
+  innerValue: Value
   listboxStatus: boolean
   highlightedIndex: number | undefined
   options: Option[]
+  dispatchChangeEvent: (dispatchValue: Value) => void
 }
 
 export type Action =
   | { type: 'SET_LISTBOX_STATUS'; value?: boolean }
   | { type: 'ARROW_NAVIGATION'; code: 'ArrowUp' | 'ArrowDown' }
-  | { type: 'OPTION_SELECTED'; value: Value }
+  | { type: 'OPTION_SELECTED'; selectedValue: Value }
   /* | { type: 'USER_TYPING'; value: string } */
-  | { type: 'REDEFINE_OPTIONS'; children: React.ReactNode }
+  | { type: 'SYNC_OPTIONS'; children: React.ReactNode }
+  | { type: 'SYNC_CONTROLLED_VALUE'; propValue?: Value }
