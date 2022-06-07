@@ -57,8 +57,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       },
     )
 
-    const value = propValue ?? innerValue
-    const valueRef = useValueRef(value)
+    const { value, valueRef } = useValueRef(propValue ?? innerValue)
     const selectedIndex = useMemo(
       () => findOptionIndexByValue(options, value),
       [value, options],

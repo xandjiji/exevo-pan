@@ -5,7 +5,7 @@ const useValueRef = (value: Value) => {
   const valueRef = useRef(value)
   valueRef.current = value
 
-  return valueRef
+  return { value, valueRef }
 }
 
 export default useValueRef
