@@ -12,14 +12,13 @@ import { Popover, Listbox, Option, Label } from 'components/Atoms'
 import { useSharedRef, useUuid } from 'hooks'
 import SelectReducer from './reducer'
 import useValueRef from './useValueRef'
+import useTypeSearch from './useTypeSearch'
 import { findOptionIndexByValue } from './utils'
 import { SelectProps, Value } from './types'
 
-/* @ ToDo: USER_TYPING */
-
 const Select = forwardRef<HTMLInputElement, SelectProps>(
-  (componentProps: SelectProps, ref: React.Ref<HTMLInputElement>) => {
-    const {
+  (
+    {
       id: idProp,
       className,
       style,
@@ -31,8 +30,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       onChange,
       options,
       ...props
-    } = componentProps
-
+    }: SelectProps,
+    ref: React.Ref<HTMLInputElement>,
+  ) => {
     const labelId = useUuid()
     const listboxId = useUuid()
     const uuid = useUuid()
@@ -63,7 +63,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       [value, options],
     )
 
-    const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> =
+    const handleSearch = useTypeSearch(dispatch, options)
+
+    const handleKeyboard: React.KeyboardEventHandler<HTMLDivElement> =
       useCallback(
         (event) => {
           switch (event.code) {
@@ -133,6 +135,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             tabIndex={0}
             onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS' })}
             onKeyDown={handleKeyboard}
+            onKeyPress={handleSearch}
             className={clsx(
               'text-tsm text-onSurface border-1 bg-surface flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
               /* isInvalid */ false
@@ -152,12 +155,15 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
           type="hidden"
           aria-label={accessibleLabel}
           value={value}
-          onInput={(event: React.ChangeEvent<HTMLInputElement>) => {
-            if (event.target.value === dispatchedValue.current) return
-            // eslint-disable-next-line no-param-reassign
-            event.target.value = dispatchedValue.current.toString()
-            onChange?.(event as React.ChangeEvent<HTMLInputElement>)
-          }}
+          onInput={useCallback(
+            (event: React.ChangeEvent<HTMLInputElement>) => {
+              if (event.target.value === dispatchedValue.current) return
+              // eslint-disable-next-line no-param-reassign
+              event.target.value = dispatchedValue.current.toString()
+              onChange?.(event as React.ChangeEvent<HTMLInputElement>)
+            },
+            [onChange],
+          )}
         />
         <button
           type="button"

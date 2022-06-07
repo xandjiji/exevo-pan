@@ -38,5 +38,5 @@ export type Action =
       options: Option[]
       currentValue: Value
     }
+  | { type: 'USER_TYPING'; term: string; options: Option[] }
   | { type: 'OPTION_SELECTED'; selectedValue: Value }
-/* | { type: 'USER_TYPING'; value: string } */

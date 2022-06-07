@@ -30,6 +30,20 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
           }
     }
 
+    case 'USER_TYPING': {
+      const term = action.term.toLowerCase()
+      const foundOption = action.options.find(
+        ({ name }) => name.slice(0, term.length).toLowerCase() === term,
+      )
+
+      if (foundOption) {
+        dispatchChangeEvent(foundOption.value)
+        if (!isControlled) return { ...state, innerValue: foundOption.value }
+      }
+
+      return state
+    }
+
     case 'OPTION_SELECTED':
       dispatchChangeEvent(action.selectedValue)
       return {
