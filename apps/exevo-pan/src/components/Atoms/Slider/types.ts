@@ -6,16 +6,6 @@ export type Range = [number, number]
 
 export type TransformFunction = (value: number) => string | number
 
-export type LabelProps =
-  | {
-      label: string
-      'aria-label'?: never
-    }
-  | {
-      label: JSX.Element
-      'aria-label': string
-    }
-
 export type CustomProps = {
   min: number
   max: number
@@ -27,4 +17,4 @@ export type CustomProps = {
   disabled?: boolean
 }
 
-export type SliderProps = CustomProps & ExtendedProps & LabelProps
+export type SliderProps = CustomProps & ExtendedProps & AccessibleLabelProps

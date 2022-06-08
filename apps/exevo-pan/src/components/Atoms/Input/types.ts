@@ -5,16 +5,6 @@ export type ExtendedProps = Omit<
   'value' | 'defaultValue' | 'aria-label'
 >
 
-export type LabelProps =
-  | {
-      label: string
-      'aria-label'?: never
-    }
-  | {
-      label: JSX.Element
-      'aria-label': string
-    }
-
 export type StateIcon = 'invalid' | 'loading' | 'neutral' | 'valid'
 
 export type CustomProps = {
@@ -26,4 +16,4 @@ export type CustomProps = {
   stateIcon?: StateIcon
 }
 
-export type InputProps = CustomProps & ExtendedProps & LabelProps
+export type InputProps = CustomProps & ExtendedProps & AccessibleLabelProps

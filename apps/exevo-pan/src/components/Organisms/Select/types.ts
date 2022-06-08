@@ -5,16 +5,6 @@ export type ExtendedProps = Omit<
 
 export type Value = number | string
 
-export type LabelProps =
-  | {
-      label: string
-      'aria-label'?: never
-    }
-  | {
-      label: JSX.Element
-      'aria-label': string
-    }
-
 export type CustomProps = {
   defaultValue?: Value
   options: Option[]
@@ -23,7 +13,7 @@ export type CustomProps = {
   hasAlert?: boolean
 }
 
-export type SelectProps = ExtendedProps & CustomProps & LabelProps
+export type SelectProps = ExtendedProps & CustomProps & AccessibleLabelProps
 
 export type SelectState = {
   isControlled: boolean
