@@ -22,6 +22,8 @@ export const ExerciseWeapons = () => {
         <option value="audi">Audi</option>
       </select>
 
+      <Input label="Server" error="invalid field" />
+
       <div className="my-4" />
 
       <Input

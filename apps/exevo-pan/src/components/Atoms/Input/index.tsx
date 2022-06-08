@@ -123,7 +123,7 @@ const Input = (
           role="alert"
           className={clsx(
             'text-red px-2.5 text-xs transition-opacity',
-            error && 'opacity-0',
+            !error && 'opacity-0',
           )}
           suppressHydrationWarning
         >
