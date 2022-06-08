@@ -19,6 +19,8 @@ export type CustomProps = {
   defaultValue?: Value
   options: Option[]
   value?: Value
+  error?: boolean | string
+  hasAlert?: boolean
 }
 
 export type SelectProps = ExtendedProps & CustomProps & LabelProps

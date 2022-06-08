@@ -30,6 +30,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       value: propValue,
       onChange,
       disabled,
+      error,
+      hasAlert = true,
       options,
       ...props
     }: SelectProps,
@@ -100,7 +102,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     return (
       <div
         className={clsx(
-          'child:w-full relative select-none',
+          'child:w-full text-tsm relative select-none',
           disabled && 'child:cursor-default',
           className,
         )}
@@ -148,7 +150,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             onKeyPress={handleSearch}
             className={clsx(
               'text-tsm text-onSurface border-1 group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
-              /* isInvalid */ false
+              error
                 ? 'border-red'
                 : 'border-separator focus-within:border-primary',
               disabled ? 'bg-separator pointer-events-none' : 'bg-surface',
@@ -161,11 +163,24 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
                 'ml-auto -mr-2 shrink-0 transition-colors',
                 disabled
                   ? 'fill-onSurface/50'
-                  : 'fill-separator group-focus-within:fill-darkerPrimary',
+                  : 'fill-separator group-focus-within:fill-primaryHighlight',
               )}
             />
           </div>
         </Popover>
+        {hasAlert && (
+          <span
+            aria-hidden={!error}
+            role="alert"
+            className={clsx(
+              'text-red inline-block px-2.5 text-xs transition-opacity',
+              !error && 'opacity-0',
+            )}
+            suppressHydrationWarning
+          >
+            {error}
+          </span>
+        )}
         <input
           ref={innerRef}
           id={inputId}
@@ -173,6 +188,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
           type="hidden"
           aria-label={accessibleLabel}
           value={value}
+          disabled={disabled}
           onInput={useCallback(
             (event: React.ChangeEvent<HTMLInputElement>) => {
               if (event.target.value === dispatchedValue.current) return

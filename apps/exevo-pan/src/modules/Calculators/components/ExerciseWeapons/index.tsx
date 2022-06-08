@@ -28,7 +28,11 @@ export const ExerciseWeapons = () => {
 
       <div className="my-4" />
 
-      <Input label="Select a player" disabled defaultValue="Baleia Azul" />
+      <Input
+        label="Select a player"
+        errorMessage={stateValue === 'venore' ? 'Invalid server' : undefined}
+        value={stateValue}
+      />
 
       <div className="my-4" />
 
@@ -36,7 +40,7 @@ export const ExerciseWeapons = () => {
         label="Server (controlled)"
         options={options}
         value={stateValue}
-        disabled
+        error={stateValue === 'venore' ? 'Invalid server' : undefined}
         onChange={(e) => {
           console.log(e.target.value)
           setValue(e.target.value)
