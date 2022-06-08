@@ -119,6 +119,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             <Listbox
               id={listboxId}
               highlightedIndex={selectedIndex}
+              selectedIndex={new Set([selectedIndex])}
               onSelectOption={useCallback((option) => {
                 dispatch({
                   type: 'OPTION_SELECTED',
@@ -161,9 +162,10 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             <ArrowIcon
               className={clsx(
                 'ml-auto -mr-2 shrink-0 transition-colors',
-                disabled
-                  ? 'fill-onSurface/50'
-                  : 'fill-separator group-focus-within:fill-primaryHighlight',
+                disabled ? 'fill-onSurface/50' : 'fill-separator',
+                !disabled && error
+                  ? 'group-focus-within:fill-red'
+                  : 'group-focus-within:fill-primaryHighlight',
               )}
             />
           </div>

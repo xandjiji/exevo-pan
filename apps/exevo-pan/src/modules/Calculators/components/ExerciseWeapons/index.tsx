@@ -15,11 +15,7 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <select
-        name="cars"
-        disabled
-        onChange={(event) => console.log(event.target.value)}
-      >
+      <select name="cars" onChange={(event) => console.log(event.target.value)}>
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
@@ -67,6 +63,8 @@ export const ExerciseWeapons = () => {
         disabled
         /* defaultValue="venore" */
       />
+
+      <div className="h-[1000px]" />
 
       {/* <p>% to next</p>
       <SliderInput max={100} min={0} />
