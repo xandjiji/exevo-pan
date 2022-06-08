@@ -9,6 +9,7 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Label } from 'components/Atoms'
+import ArrowIcon from 'assets/svgs/chevronDown.svg'
 import { useSharedRef, useUuid } from 'hooks'
 import SelectReducer from './reducer'
 import useValueRef from './useValueRef'
@@ -96,7 +97,10 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       )
 
     return (
-      <div className={clsx('child:w-full relative', className)} style={style}>
+      <div
+        className={clsx('child:w-full relative select-none', className)}
+        style={style}
+      >
         <Label id={labelId} className="mb-2" htmlFor={inputId}>
           {label}
         </Label>
@@ -137,7 +141,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             onKeyDown={handleKeyboard}
             onKeyPress={handleSearch}
             className={clsx(
-              'text-tsm text-onSurface border-1 bg-surface flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
+              'text-tsm text-onSurface border-1 bg-surface group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
               /* isInvalid */ false
                 ? 'border-red'
                 : 'border-separator focus-within:border-primary',
@@ -146,6 +150,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             {...props}
           >
             {options[selectedIndex]?.name}
+            <ArrowIcon className="fill-separator group-focus-within:fill-darkerPrimary ml-auto -mr-2 shrink-0 transition-colors" />
           </div>
         </Popover>
         <input

@@ -7,6 +7,8 @@ const SelectReducer = (state: SelectState, action: Action): SelectState => {
 
   switch (action.type) {
     case 'ARROW_NAVIGATION': {
+      if (!state.listboxStatus) return { ...state, listboxStatus: true }
+
       const { options } = action
       const selectedOptionIndex = findOptionIndexByValue(
         options,
