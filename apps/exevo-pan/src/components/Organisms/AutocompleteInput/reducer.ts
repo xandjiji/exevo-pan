@@ -49,6 +49,7 @@ const AutocompleteInputReducer = (
     }
 
     case 'SET_LISTBOX_STATUS':
+      if (state.listboxStatus === action.value) return state
       return { ...state, listboxStatus: action.value }
 
     case 'REDEFINE_LIST':
@@ -60,7 +61,7 @@ const AutocompleteInputReducer = (
       }
 
     default:
-      return { ...state }
+      return state
   }
 }
 
