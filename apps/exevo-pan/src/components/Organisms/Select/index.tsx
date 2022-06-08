@@ -29,6 +29,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       defaultValue: defaultValueProp,
       value: propValue,
       onChange,
+      disabled,
       options,
       ...props
     }: SelectProps,
@@ -98,7 +99,11 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
 
     return (
       <div
-        className={clsx('child:w-full relative select-none', className)}
+        className={clsx(
+          'child:w-full relative select-none',
+          disabled && 'child:cursor-default',
+          className,
+        )}
         style={style}
       >
         <Label id={labelId} className="mb-2" htmlFor={inputId}>
@@ -131,26 +136,34 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
         >
           <div
             ref={selectRef}
+            aria-disabled={disabled}
             aria-label={accessibleLabel}
             role="combobox"
-            aria-expanded="true"
+            aria-expanded={listboxStatus}
             aria-controls={listboxId}
             aria-owns={listboxId}
-            tabIndex={0}
+            tabIndex={disabled ? -1 : 0}
             onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS' })}
             onKeyDown={handleKeyboard}
             onKeyPress={handleSearch}
             className={clsx(
-              'text-tsm text-onSurface border-1 bg-surface group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
+              'text-tsm text-onSurface border-1 group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
               /* isInvalid */ false
                 ? 'border-red'
                 : 'border-separator focus-within:border-primary',
-              /* disabled */ false ? 'bg-separator' : 'bg-surface',
+              disabled ? 'bg-separator pointer-events-none' : 'bg-surface',
             )}
             {...props}
           >
             {options[selectedIndex]?.name}
-            <ArrowIcon className="fill-separator group-focus-within:fill-darkerPrimary ml-auto -mr-2 shrink-0 transition-colors" />
+            <ArrowIcon
+              className={clsx(
+                'ml-auto -mr-2 shrink-0 transition-colors',
+                disabled
+                  ? 'fill-onSurface/50'
+                  : 'fill-separator group-focus-within:fill-darkerPrimary',
+              )}
+            />
           </div>
         </Popover>
         <input

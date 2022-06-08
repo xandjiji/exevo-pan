@@ -15,7 +15,11 @@ export const ExerciseWeapons = () => {
 
   return (
     <div>
-      <select name="cars" onChange={(event) => console.log(event.target.value)}>
+      <select
+        name="cars"
+        disabled
+        onChange={(event) => console.log(event.target.value)}
+      >
         <option value="volvo">Volvo</option>
         <option value="saab">Saab</option>
         <option value="opel">Opel</option>
@@ -24,7 +28,20 @@ export const ExerciseWeapons = () => {
 
       <div className="my-4" />
 
-      <Input label="Select a player" />
+      <Input label="Select a player" disabled defaultValue="Baleia Azul" />
+
+      <div className="my-4" />
+
+      <Select
+        label="Server (controlled)"
+        options={options}
+        value={stateValue}
+        disabled
+        onChange={(e) => {
+          console.log(e.target.value)
+          setValue(e.target.value)
+        }}
+      />
 
       <div className="my-4" />
 
@@ -43,6 +60,7 @@ export const ExerciseWeapons = () => {
         label="Server (uncontrolled)"
         onChange={(e) => console.log(e.target.value)}
         options={options}
+        disabled
         /* defaultValue="venore" */
       />
 
