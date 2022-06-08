@@ -1,12 +1,17 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { Option } from 'components/Atoms'
-import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
+import { renderWithProviders, setup, assertNoA11yViolations } from 'utils/test'
 import Listbox from '..'
 
 const mockedOnSelectOption = jest.fn()
+const mockedScrollIntoView = setup.scrollIntoView()
 
 describe('<Listbox />', () => {
+  beforeEach(() => {
+    mockedScrollIntoView.mockReset()
+  })
+
   test('should render with no highlighted <Option />', () => {
     renderWithProviders(
       <Listbox>
@@ -43,6 +48,7 @@ describe('<Listbox />', () => {
       'aria-activedescendant',
       'listbox-item-1',
     )
+    expect(mockedScrollIntoView).toBeCalledTimes(1)
 
     const [optionA, optionB, optionC] = screen.queryAllByRole('option')
     /* expect(optionA).toHaveStyle('background-color: #FFFFFF')
@@ -86,6 +92,7 @@ describe('<Listbox />', () => {
         <Option>option C</Option>
       </Listbox>,
     )
+    expect(mockedScrollIntoView).toBeCalledTimes(2)
 
     /* expect(optionA).toHaveStyle('background-color: #FFFFFF')
     expect(optionB).toHaveStyle('background-color: #FFFFFF')
