@@ -37,10 +37,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     }: SelectProps,
     ref: React.Ref<HTMLInputElement>,
   ) => {
-    const labelId = useUuid()
     const listboxId = useUuid()
     const uuid = useUuid()
-    const inputId = idProp ?? uuid
+    const selectId = idProp ?? uuid
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
 
     const innerRef = useSharedRef<HTMLInputElement>(ref)
@@ -108,7 +107,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
         )}
         style={style}
       >
-        <Label id={labelId} className="mb-2" htmlFor={inputId}>
+        <Label className="mb-2" htmlFor={selectId}>
           {label}
         </Label>
         <Popover
@@ -139,6 +138,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
         >
           <div
             ref={selectRef}
+            id={selectId}
             aria-disabled={disabled}
             aria-label={accessibleLabel}
             role="combobox"
@@ -185,7 +185,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
         )}
         <input
           ref={innerRef}
-          id={inputId}
           name={name}
           type="hidden"
           aria-label={accessibleLabel}
