@@ -51,8 +51,8 @@ describe('<Input />', () => {
     expect(inputElement).toHaveValue('text')
   })
 
-  test('errorMessage should be visible', () => {
-    renderWithProviders(<Input label="Server" errorMessage="invalid field" />)
+  test('error message should be visible', () => {
+    renderWithProviders(<Input label="Server" error="invalid field" />)
 
     const inputElement = screen.getByLabelText('Server')
     const errorElement = screen.getByRole('alert')
@@ -67,9 +67,9 @@ describe('<Input />', () => {
     )
   })
 
-  test('errorMessage should NOT visible', () => {
+  test('error message should NOT visible', () => {
     const { rerender } = renderWithProviders(
-      <Input label="input" errorMessage="field is invalid" />,
+      <Input label="input" error="field is invalid" />,
     )
 
     const inputElement = screen.getByLabelText('input')

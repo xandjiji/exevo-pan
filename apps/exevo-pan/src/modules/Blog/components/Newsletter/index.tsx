@@ -76,7 +76,7 @@ const Newsletter = ({
               value={email}
               onChange={(event) => setEmail(event.target.value)}
               onKeyDown={onKeyDown}
-              errorMessage={
+              error={
                 request.status === 'ERROR'
                   ? blog.Newsletter.message[request.message as string] ??
                     blog.Newsletter.message.generic

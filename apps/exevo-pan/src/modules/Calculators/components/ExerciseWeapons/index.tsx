@@ -26,7 +26,7 @@ export const ExerciseWeapons = () => {
 
       <Input
         label="Select a player"
-        errorMessage={stateValue === 'venore' ? 'Invalid server' : undefined}
+        error={stateValue === 'venore' ? 'Invalid server' : undefined}
         value={stateValue}
       />
 

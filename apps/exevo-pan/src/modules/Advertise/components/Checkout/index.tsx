@@ -112,7 +112,7 @@ const Checkout = () => {
         label="Email"
         placeholder={advertise.Checkout.emailPlaceholder}
         stateIcon={email.state}
-        errorMessage={
+        error={
           email.state === 'invalid'
             ? advertise.Checkout.emailInvalidMessage
             : undefined
@@ -129,7 +129,7 @@ const Checkout = () => {
             label={advertise.Checkout.paymentCharacterLabel}
             placeholder={`e.g, '${randomNickname}'`}
             stateIcon={paymentCharacter.state}
-            errorMessage={
+            error={
               paymentCharacter.state === 'invalid'
                 ? advertise.Checkout.paymentCharacterInvalidMessage
                 : undefined

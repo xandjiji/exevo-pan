@@ -9,7 +9,7 @@ export type StateIcon = 'invalid' | 'loading' | 'neutral' | 'valid'
 
 export type CustomProps = {
   allowClear?: boolean
-  errorMessage?: string
+  error?: boolean | string
   value?: InputValue
   defaultValue?: InputValue
   hasAlert?: boolean
