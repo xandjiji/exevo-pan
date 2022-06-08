@@ -24,6 +24,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       className,
       style,
       'aria-label': ariaLabel,
+      placeholder,
       label,
       name,
       defaultValue: defaultValueProp,
@@ -158,7 +159,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             )}
             {...props}
           >
-            {options[selectedIndex]?.name}
+            {options[selectedIndex]?.name ?? placeholder}
             <ArrowIcon
               className={clsx(
                 'ml-auto -mr-2 shrink-0 transition-colors',
