@@ -91,6 +91,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             case 'NumpadEnter':
             case 'Space':
               dispatch({ type: 'SET_LISTBOX_STATUS' })
+              event.preventDefault()
               break
             default:
               break

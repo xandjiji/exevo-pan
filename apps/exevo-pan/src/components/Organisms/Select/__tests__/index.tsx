@@ -1,4 +1,4 @@
-import { screen, fireEvent, waitFor } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, setup } from 'utils/test'
 import Select from '..'
@@ -10,6 +10,8 @@ const props: SelectProps = {
   placeholder: 'Select your server',
   options: mockedOptionList,
 }
+
+setup.scrollIntoView()
 
 describe('<Select />', () => {
   const setupTest = (args?: Partial<SelectProps>) => {
@@ -59,7 +61,56 @@ describe('<Select />', () => {
     assertOptions()
   })
 
-  test.todo('listbox state should be managed correctly')
+  describe('listbox state should be managed correctly', () => {
+    test('with pointer', () => {
+      const { combobox, assertOpen } = setupTest()
+
+      const openAndAssert = () => {
+        userEvent.click(combobox)
+        assertOpen()
+      }
+
+      assertOpen(false)
+      openAndAssert()
+      userEvent.click(combobox)
+      assertOpen(false)
+      openAndAssert()
+
+      userEvent.click(screen.getByRole('button'))
+      assertOpen(false)
+      openAndAssert()
+
+      const [firstOption] = screen.getAllByRole('option')
+      userEvent.click(firstOption)
+      assertOpen(false)
+      openAndAssert()
+      expect(combobox).toHaveFocus()
+    })
+
+    test('with keyboard', () => {
+      const { combobox, assertOpen } = setupTest()
+
+      assertOpen(false)
+      userEvent.tab()
+      userEvent.keyboard('{enter}')
+      expect(combobox).toHaveFocus()
+      assertOpen()
+
+      userEvent.keyboard('{enter}')
+      assertOpen(false)
+
+      userEvent.keyboard('{arrowdown}')
+      assertOpen()
+      userEvent.keyboard('{arrowdown}')
+      assertOpen()
+
+      userEvent.keyboard('{escape}')
+      assertOpen(false)
+
+      userEvent.keyboard('{space}')
+      assertOpen()
+    })
+  })
 
   test.todo('controlled/uncontrolled (defaultValue too)')
 
