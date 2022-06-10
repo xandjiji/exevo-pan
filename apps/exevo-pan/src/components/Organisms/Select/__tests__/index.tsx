@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { screen } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, setup } from 'utils/test'
 import Select from '..'
@@ -15,6 +15,10 @@ const props: SelectProps = {
 setup.scrollIntoView()
 
 describe('<Select />', () => {
+  beforeEach(() => {
+    jest.useFakeTimers()
+  })
+
   const setupTest = (args?: Partial<SelectProps>) => {
     const mergedArgs = { ...props, ...args } as SelectProps
 
@@ -30,6 +34,9 @@ describe('<Select />', () => {
         expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
       }
     }
+
+    const assertValue = (name = mergedArgs.placeholder ?? '') =>
+      expect(combobox).toHaveTextContent(name)
 
     return {
       combobox,
@@ -49,15 +56,20 @@ describe('<Select />', () => {
             'aria-selected',
             isSelected ? 'true' : 'false',
           )
+
+          if (isSelected) {
+            assertValue(name)
+          }
         })
       },
+      assertValue,
     }
   }
 
   test('should render everything correctly (including placeholder)', () => {
-    const { combobox, open, assertOptions } = setupTest()
+    const { assertValue, open, assertOptions } = setupTest()
 
-    expect(combobox).toHaveTextContent(props.placeholder ?? '')
+    assertValue()
     open()
     assertOptions()
   })
@@ -118,14 +130,14 @@ describe('<Select />', () => {
     test('uncontrolled', () => {
       const onChange = jest.fn()
       const initialOptionIndex = 5
-      const { combobox, open } = setupTest({
+      const { assertValue, open } = setupTest({
         defaultValue: mockedOptionList[initialOptionIndex].value,
         onChange,
       })
 
       const assertSelectedOption = (optionIndex: number) => {
         const option = mockedOptionList[optionIndex]
-        expect(combobox).toHaveTextContent(option.name)
+        assertValue(option.name)
       }
 
       let changeCalls = 0
@@ -240,7 +252,38 @@ describe('<Select />', () => {
     })
   })
 
-  test.todo('search type')
+  test('typing on element should search for an option', () => {
+    const onChange = jest.fn()
+    const { assertValue, open, assertOptions, combobox } = setupTest({
+      onChange,
+    })
+
+    const fireKey = (key: string) =>
+      fireEvent.keyPress(combobox, { key, charCode: key.charCodeAt(0) })
+
+    assertValue()
+    open()
+
+    fireKey('a')
+    assertOptions('adra')
+    fireKey('s')
+    assertOptions('assombra')
+    fireKey('t')
+    assertOptions('astera')
+    fireKey('z')
+    assertOptions('astera')
+
+    jest.runAllTimers()
+    fireKey('b')
+    assertOptions('belluma')
+    fireKey('be')
+    assertOptions('belluma')
+
+    jest.runAllTimers()
+
+    fireKey('o')
+    assertOptions('belluma')
+  })
 
   test.todo('error')
 

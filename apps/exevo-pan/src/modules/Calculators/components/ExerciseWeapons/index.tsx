@@ -62,7 +62,7 @@ export const ExerciseWeapons = () => {
         label="Server (uncontrolled)"
         onChange={(e) => console.log(e.target.value)}
         options={options}
-        disabled
+        placeholder="PLACEHOLDER"
         /* defaultValue="venore" */
       />
 
