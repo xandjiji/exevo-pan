@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders, setup } from 'utils/test'
+import { renderWithProviders, setup, assertNoA11yViolations } from 'utils/test'
 import Select from '..'
 import { SelectProps } from '../types'
 import { mockedOptionList } from './mock'
@@ -141,9 +141,13 @@ describe('<Select />', () => {
       }
 
       let changeCalls = 0
+      let lastSelectedIndex = -1
       const clickAndAssert = (optionIndex: number) => {
         userEvent.click(screen.getAllByRole('option')[optionIndex])
-        changeCalls += 1
+        if (lastSelectedIndex !== optionIndex) {
+          changeCalls += 1
+        }
+        lastSelectedIndex = optionIndex
         expect(onChange).toHaveBeenCalledTimes(changeCalls)
 
         assertSelectedOption(optionIndex)
@@ -154,6 +158,8 @@ describe('<Select />', () => {
       open()
       clickAndAssert(1)
 
+      open()
+      clickAndAssert(2)
       open()
       clickAndAssert(2)
 
@@ -345,5 +351,9 @@ describe('<Select />', () => {
     expect(onChange).toHaveBeenCalledTimes(0)
   })
 
-  test.todo('a11y (label as jsx too)')
+  test('a11y', async () => {
+    jest.useRealTimers()
+    const { container } = renderWithProviders(<Select {...props} />)
+    await assertNoA11yViolations(container)
+  })
 })

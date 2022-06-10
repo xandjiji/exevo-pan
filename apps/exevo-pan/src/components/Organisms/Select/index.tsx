@@ -148,7 +148,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             role="combobox"
             aria-expanded={listboxStatus}
             aria-controls={listboxId}
-            aria-owns={listboxId}
             tabIndex={disabled ? -1 : 0}
             onClick={
               disabled
@@ -166,7 +165,9 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             )}
             {...props}
           >
-            {options[selectedIndex]?.name ?? placeholder}
+            <div role="textbox" aria-label={accessibleLabel} aria-readonly>
+              {options[selectedIndex]?.name ?? placeholder}
+            </div>
             <ArrowIcon
               className={clsx(
                 'ml-auto -mr-2 shrink-0 transition-colors',
