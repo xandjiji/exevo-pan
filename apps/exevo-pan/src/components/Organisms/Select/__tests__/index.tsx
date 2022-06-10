@@ -261,20 +261,30 @@ describe('<Select />', () => {
     const fireKey = (key: string) =>
       fireEvent.keyPress(combobox, { key, charCode: key.charCodeAt(0) })
 
+    let onChangeCalls = 0
+    const assertOnChangeCall = () => {
+      onChangeCalls += 1
+      expect(onChange).toHaveBeenCalledTimes(onChangeCalls)
+    }
+
     assertValue()
     open()
 
     fireKey('a')
     assertOptions('adra')
+    assertOnChangeCall()
     fireKey('s')
     assertOptions('assombra')
+    assertOnChangeCall()
     fireKey('t')
     assertOptions('astera')
+    assertOnChangeCall()
     fireKey('z')
     assertOptions('astera')
 
     jest.runAllTimers()
     fireKey('b')
+    assertOnChangeCall()
     assertOptions('belluma')
     fireKey('be')
     assertOptions('belluma')
