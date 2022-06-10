@@ -319,7 +319,31 @@ describe('<Select />', () => {
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
   })
 
-  test.todo('disabled')
+  test('should be disabled', () => {
+    const onChange = jest.fn()
+    const { assertOpen, combobox } = setupTest({
+      disabled: true,
+      onChange,
+    })
+
+    userEvent.tab()
+    expect(combobox).not.toHaveFocus()
+
+    assertOpen(false)
+    userEvent.click(combobox)
+    assertOpen(false)
+
+    fireEvent.keyPress(combobox, { key: 'Enter', charCode: 13 })
+    assertOpen(false)
+    fireEvent.keyPress(combobox, { key: 'ArrowDown', charCode: 40 })
+    assertOpen(false)
+    fireEvent.keyPress(combobox, { key: 'ArrowDown', charCode: 40 })
+    assertOpen(false)
+    fireEvent.keyPress(combobox, { key: 'a', charCode: 'a'.charCodeAt(0) })
+    assertOpen(false)
+
+    expect(onChange).toHaveBeenCalledTimes(0)
+  })
 
   test.todo('a11y (label as jsx too)')
 })
