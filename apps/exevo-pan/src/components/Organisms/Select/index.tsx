@@ -43,6 +43,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     const selectId = idProp ?? uuid
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
 
+    const hideAlert = error === true || !error
+
     const innerRef = useSharedRef<HTMLInputElement>(ref)
     const selectRef = useRef<HTMLDivElement>(null)
     const dispatchedValue = useRef(propValue ?? defaultValueProp ?? '')
@@ -174,11 +176,11 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
         </Popover>
         {hasAlert && (
           <span
-            aria-hidden={!error}
+            aria-hidden={hideAlert}
             role="alert"
             className={clsx(
               'text-red inline-block px-2.5 text-xs transition-opacity',
-              !error && 'opacity-0',
+              hideAlert && 'opacity-0',
             )}
             suppressHydrationWarning
           >
