@@ -35,7 +35,7 @@ export const ExerciseWeapons = () => {
       <div className="my-4" />
 
       <Select
-        label="Server (controlled)"
+        label="Server (controlled)a"
         options={options}
         value={stateValue}
         error={stateValue === 'venore' ? 'Invalid server' : undefined}
@@ -67,6 +67,12 @@ export const ExerciseWeapons = () => {
       />
 
       <div className="h-[1000px]" />
+
+      <Select label="Should be normal" options={[]} />
+      <Select label="Should be normal" options={[]} error={undefined} />
+
+      <Select label="Should be red" options={[]} error />
+      <Select label="Should be red and alert" options={[]} error="ALERT" />
 
       {/* <p>% to next</p>
       <SliderInput max={100} min={0} />

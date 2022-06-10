@@ -31,7 +31,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       value: propValue,
       onChange,
       disabled,
-      error,
+      error = false,
       hasAlert = true,
       options,
       ...props
