@@ -295,7 +295,29 @@ describe('<Select />', () => {
     assertOptions('belluma')
   })
 
-  test.todo('error')
+  test('both error border and alert state should be managed correctly', () => {
+    const { rerender } = renderWithProviders(<Select {...props} />)
+
+    const combobox = screen.getByRole('combobox')
+    expect(combobox).not.toHaveClass('border-red')
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+
+    rerender(<Select {...props} error="Invalid server" />)
+    expect(screen.getByRole('alert')).toHaveTextContent('Invalid server')
+    expect(combobox).toHaveClass('border-red')
+
+    rerender(<Select {...props} />)
+    expect(combobox).not.toHaveClass('border-red')
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+
+    rerender(<Select {...props} error />)
+    expect(combobox).toHaveClass('border-red')
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+
+    rerender(<Select {...props} error="" />)
+    expect(combobox).not.toHaveClass('border-red')
+    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+  })
 
   test.todo('disabled')
 
