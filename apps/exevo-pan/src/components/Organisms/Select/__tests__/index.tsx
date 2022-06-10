@@ -356,4 +356,16 @@ describe('<Select />', () => {
     const { container } = renderWithProviders(<Select {...props} />)
     await assertNoA11yViolations(container)
   })
+
+  test('a11y with accessible label', async () => {
+    jest.useRealTimers()
+    const { container } = renderWithProviders(
+      <Select
+        {...props}
+        label={<p>element label</p>}
+        aria-label="Accessible label"
+      />,
+    )
+    await assertNoA11yViolations(container)
+  })
 })
