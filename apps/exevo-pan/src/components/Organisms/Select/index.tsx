@@ -150,9 +150,13 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             aria-controls={listboxId}
             aria-owns={listboxId}
             tabIndex={disabled ? -1 : 0}
-            onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS' })}
-            onKeyDown={handleKeyboard}
-            onKeyPress={handleSearch}
+            onClick={
+              disabled
+                ? undefined
+                : () => dispatch({ type: 'SET_LISTBOX_STATUS' })
+            }
+            onKeyDown={disabled ? undefined : handleKeyboard}
+            onKeyPress={disabled ? undefined : handleSearch}
             className={clsx(
               'text-tsm text-onSurface border-1 group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
               error
