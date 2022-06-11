@@ -23,14 +23,10 @@ export const VOCATION: Record<Vocation, Record<Skill, number>> = {
   },
 }
 
-export const SKILL: Record<Skill, number> = {
-  magic: 1600,
-  melee: 50,
-  distance: 30,
-}
+export const SKILL = 1600
 
-export const SKILL_OFFSET: Record<Skill, number> = {
-  magic: 0,
-  melee: 10,
-  distance: 10,
+export const EXERCISE_WEAPON_POINTS = {
+  regular: 300000,
+  durable: 1080000,
+  lasting: 8640000,
 }

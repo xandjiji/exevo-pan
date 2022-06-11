@@ -35,17 +35,28 @@ const skillOptions: TypedOption<Skill>[] = [
 
 export const ExerciseWeapons = () => {
   const [vocation, setVocation] = useState<Vocation>('knight')
-  const [skill, setSkill] = useState<Skill>('magic')
+  const [skill, setSkill] = useState<Skill>('melee')
+  const [currentSkill, setCurrentSkill] = useState(10)
+  const [targetSkill, setTargetSkill] = useState(50)
 
   const totalPoints = useMemo(
     () =>
       Calculate.totalPoints({
-        currentSkill: 100,
-        vocationConstant: CONSTANTS.VOCATION[vocation][skill],
-        skillConstant: CONSTANTS.SKILL[skill],
-        skillOffset: CONSTANTS.SKILL_OFFSET[skill],
+        currentSkill,
+        vocation,
+        skill,
       }),
-    [vocation, skill],
+    [currentSkill, vocation, skill],
+  )
+
+  const targetTotalPoints = useMemo(
+    () =>
+      Calculate.totalPoints({
+        currentSkill: targetSkill,
+        vocation,
+        skill,
+      }),
+    [targetSkill, vocation, skill],
   )
 
   return (
@@ -64,8 +75,28 @@ export const ExerciseWeapons = () => {
         onChange={(e) => setSkill(e.target.value as Skill)}
       />
 
+      <Input
+        label="Current skill"
+        type="number"
+        value={currentSkill}
+        onChange={(e) => setCurrentSkill(+e.target.value)}
+      />
+
+      <Input
+        label="Target skill"
+        type="number"
+        value={targetSkill}
+        onChange={(e) => setTargetSkill(+e.target.value)}
+      />
+
       <p>
-        Total points: <strong>{totalPoints}</strong>
+        Regular weapons required:{' '}
+        <strong>
+          {Math.ceil(
+            (targetTotalPoints - totalPoints) /
+              CONSTANTS.EXERCISE_WEAPON_POINTS.regular,
+          )}
+        </strong>
       </p>
     </div>
   )

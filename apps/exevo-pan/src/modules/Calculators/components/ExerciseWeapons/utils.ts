@@ -1,13 +1,15 @@
+import * as CONSTANTS from './constants'
 import { TotalPointsArgs } from './types'
 
 export const totalPoints = ({
   currentSkill,
-  vocationConstant,
-  skillConstant,
-  skillOffset,
+  vocation,
+  skill,
 }: TotalPointsArgs): number => {
-  const numerator = vocationConstant ** (currentSkill - skillOffset) - 1
+  const vocationConstant = CONSTANTS.VOCATION[vocation][skill]
+
+  const numerator = vocationConstant ** currentSkill - 1
   const denominator = vocationConstant - 1
 
-  return skillConstant * (numerator / denominator)
+  return CONSTANTS.SKILL * (numerator / denominator)
 }

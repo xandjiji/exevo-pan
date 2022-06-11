@@ -8,7 +8,6 @@ export type Skill = 'magic' | 'melee' | 'distance'
 
 export type TotalPointsArgs = {
   currentSkill: number
-  skillConstant: number
-  vocationConstant: number
-  skillOffset: number
+  vocation: Vocation
+  skill: Skill
 }
