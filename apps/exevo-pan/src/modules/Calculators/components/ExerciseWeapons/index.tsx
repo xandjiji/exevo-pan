@@ -3,7 +3,7 @@ import { Switch, Input, Slider } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import * as CONSTANTS from './constants'
 import * as Calculate from './utils'
-import { Vocation, Skill } from './types'
+import { TypedOption, Vocation, Skill } from './types'
 
 /* 
     @ ToDo:
@@ -20,14 +20,14 @@ import { Vocation, Skill } from './types'
     - weapon charges ???
 */
 
-const vocationOptions: Option[] = [
+const vocationOptions: TypedOption<Vocation>[] = [
   { name: 'Knight', value: 'knight' },
   { name: 'Paladin', value: 'paladin' },
   { name: 'Druid', value: 'druid' },
   { name: 'Sorcerer', value: 'sorcerer' },
 ]
 
-const skillOptions: Option[] = [
+const skillOptions: TypedOption<Skill>[] = [
   { name: 'Magic', value: 'magic' },
   { name: 'Melee', value: 'melee' },
   { name: 'Distance', value: 'distance' },
