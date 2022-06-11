@@ -1,91 +1,60 @@
 import { useState } from 'react'
 import { Switch, Input, Slider } from 'components/Atoms'
 import { Select } from 'components/Organisms'
+import * as CONSTANTS from './constants'
+import { Vocation, Skill } from './types'
 
-const options = [
-  { name: 'Pacera', value: 'pacera' },
-  { name: 'Julera', value: 'julera' },
-  { name: 'Antica', value: 'antica' },
-  { name: 'Venore', value: 'venore' },
-  { name: 'Fortera', value: 'fortera' },
+/* 
+    @ ToDo:
+    - vocation (chip group)
+    - skill (chip group)
+        highlight for vocation
+    - current skill (base + loyalty) (input)
+    - % to next (slider)
+    - desired skill (input)
+    - loyalty (slider)
+    - double event (checkbox)
+    - private dummy (checkbox)
+
+    - weapon charges ???
+*/
+
+const vocationOptions: Option[] = [
+  { name: 'Knight', value: 'knight' },
+  { name: 'Paladin', value: 'paladin' },
+  { name: 'Druid', value: 'druid' },
+  { name: 'Sorcerer', value: 'sorcerer' },
+]
+
+const skillOptions: Option[] = [
+  { name: 'Magic', value: 'magic' },
+  { name: 'Melee', value: 'melee' },
+  { name: 'Distance', value: 'distance' },
 ]
 
 export const ExerciseWeapons = () => {
-  const [stateValue, setValue] = useState('venore')
+  const [vocation, setVocation] = useState<Vocation>('knight')
+  const [skill, setSkill] = useState<Skill>('magic')
 
   return (
     <div>
-      <select name="cars" onChange={(event) => console.log(event.target.value)}>
-        <option value="volvo">Volvo</option>
-        <option value="saab">Saab</option>
-        <option value="opel">Opel</option>
-        <option value="audi">Audi</option>
-      </select>
-
-      <Input label="Server" error="invalid field" />
-
-      <div className="my-4" />
-
-      <Input
-        label="Select a player"
-        error={stateValue === 'venore' ? 'Invalid server' : undefined}
-        value={stateValue}
+      <Select
+        label="Vocation"
+        options={vocationOptions}
+        value={vocation}
+        onChange={(e) => setVocation(e.target.value as Vocation)}
       />
-
-      <div className="my-4" />
 
       <Select
-        label="Server (controlled)a"
-        options={options}
-        value={stateValue}
-        error={stateValue === 'venore' ? 'Invalid server' : undefined}
-        onChange={(e) => {
-          console.log(e.target.value)
-          setValue(e.target.value)
-        }}
+        label="Skill"
+        options={skillOptions}
+        value={skill}
+        onChange={(e) => setSkill(e.target.value as Skill)}
       />
 
-      <div className="my-4" />
-
-      <Select
-        label="Server (controlled)"
-        options={options}
-        value={stateValue}
-        onChange={(e) => {
-          console.log(e.target.value)
-          setValue(e.target.value)
-        }}
-      />
-
-      <div className="my-4" />
-      <Select
-        label="Server (uncontrolled)"
-        onChange={(e) => console.log(e.target.value)}
-        options={options}
-        placeholder="PLACEHOLDER"
-        /* defaultValue="venore" */
-      />
-
-      <div className="h-[1000px]" />
-
-      <Select label="Should be normal" options={[]} />
-      <Select label="Should be normal" options={[]} error={undefined} />
-
-      <Select label="Should be red" options={[]} error />
-      <Select label="Should be red and alert" options={[]} error="ALERT" />
-
-      {/* <p>% to next</p>
-      <SliderInput max={100} min={0} />
-
-      <AutocompleteInput
-        itemList={[
-          { name: 'Knight', value: 'knight' },
-          { name: 'Druid', value: 'druid' },
-        ]}
-      />
-
-      <Switch>Double event</Switch>
-      <Switch>Private dummy</Switch> */}
+      <p>
+        Current constant: <strong>{CONSTANTS.VOCATION[vocation][skill]}</strong>
+      </p>
     </div>
   )
 }
