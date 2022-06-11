@@ -1,7 +1,8 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { Switch, Input, Slider } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import * as CONSTANTS from './constants'
+import * as Calculate from './utils'
 import { Vocation, Skill } from './types'
 
 /* 
@@ -36,6 +37,17 @@ export const ExerciseWeapons = () => {
   const [vocation, setVocation] = useState<Vocation>('knight')
   const [skill, setSkill] = useState<Skill>('magic')
 
+  const totalPoints = useMemo(
+    () =>
+      Calculate.totalPoints({
+        currentSkill: 100,
+        vocationConstant: CONSTANTS.VOCATION[vocation][skill],
+        skillConstant: CONSTANTS.SKILL[skill],
+        skillOffset: CONSTANTS.SKILL_OFFSET[skill],
+      }),
+    [vocation, skill],
+  )
+
   return (
     <div>
       <Select
@@ -53,11 +65,7 @@ export const ExerciseWeapons = () => {
       />
 
       <p>
-        Current vocation constant:{' '}
-        <strong>{CONSTANTS.VOCATION[vocation][skill]}</strong>
-      </p>
-      <p>
-        Current skill constant: <strong>{CONSTANTS.SKILL[skill]}</strong>
+        Total points: <strong>{totalPoints}</strong>
       </p>
     </div>
   )
