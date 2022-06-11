@@ -22,3 +22,9 @@ export const VOCATION: Record<Vocation, Record<Skill, number>> = {
     distance: 2,
   },
 }
+
+export const SKILL: Record<Skill, number> = {
+  magic: 1600,
+  melee: 50,
+  distance: 30,
+}

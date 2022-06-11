@@ -53,7 +53,11 @@ export const ExerciseWeapons = () => {
       />
 
       <p>
-        Current constant: <strong>{CONSTANTS.VOCATION[vocation][skill]}</strong>
+        Current vocation constant:{' '}
+        <strong>{CONSTANTS.VOCATION[vocation][skill]}</strong>
+      </p>
+      <p>
+        Current skill constant: <strong>{CONSTANTS.SKILL[skill]}</strong>
       </p>
     </div>
   )
