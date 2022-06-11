@@ -28,3 +28,9 @@ export const SKILL: Record<Skill, number> = {
   melee: 50,
   distance: 30,
 }
+
+export const SKILL_OFFSET: Record<Skill, number> = {
+  magic: 0,
+  melee: 10,
+  distance: 10,
+}
