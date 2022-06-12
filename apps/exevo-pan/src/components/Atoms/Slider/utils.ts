@@ -50,8 +50,14 @@ export const calculateClosestStep = (
   return toFixedPrecision(calculatedNewValue, step)
 }
 
-export const getLeftOffset = (value: number, range: Range): string =>
-  `${normalize(value, range) * 100}%`
+export const getLeftOffset = (
+  value: number,
+  range: Range,
+  invert: boolean,
+): string => {
+  const offset = normalize(value, range)
+  return `${(invert ? 1 - offset : offset) * 100}%`
+}
 
 export const getKeyboardIncrement = (event: React.KeyboardEvent): number => {
   const sign: number = (

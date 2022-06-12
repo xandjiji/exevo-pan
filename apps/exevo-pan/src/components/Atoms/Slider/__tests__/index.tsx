@@ -371,6 +371,8 @@ describe('<Slider />', () => {
     expect(inputElement).toBeDisabled()
   })
 
+  test.todo('should have its scale inverted')
+
   describe('A11y', () => {
     test('should not have violations', async () => {
       const { container } = renderWithProviders(

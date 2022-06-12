@@ -15,6 +15,7 @@ export type CustomProps = {
   transformDisplayedValues?: TransformFunction
   marks?: boolean | Mark[]
   disabled?: boolean
+  invert?: boolean
 }
 
 export type SliderProps = CustomProps & ExtendedProps & AccessibleLabelProps

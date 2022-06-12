@@ -46,6 +46,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       transformDisplayedValues = defaultTransform,
       marks,
       disabled = false,
+      invert = false,
       ...props
     } = componentProps
 
@@ -73,7 +74,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     const inputId = idProp ?? uuid
 
     const { binders, position } = useDrag({ clamped: true })
-    const { percentageX } = position
+    const percentageX = invert ? 1 - position.percentageX : position.percentageX
 
     const calculatedMarks = useCalculateMarks({
       step,
@@ -99,7 +100,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
       if (keyboardIncrement !== 0) {
         event.nativeEvent.preventDefault()
-        const newValue = value + step * keyboardIncrement
+        const newValue =
+          value + step * (invert ? -keyboardIncrement : keyboardIncrement)
         setValue(toFixedPrecision(newValue, step))
       }
     }
@@ -126,8 +128,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     }, [innerRef, value])
 
     const relativeCursorPosition = useMemo(
-      () => getLeftOffset(value, range),
-      [value, range],
+      () => getLeftOffset(value, range, invert),
+      [value, range, invert],
     )
 
     const transformedText = useMemo(

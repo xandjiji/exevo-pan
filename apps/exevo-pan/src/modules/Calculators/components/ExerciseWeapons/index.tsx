@@ -38,6 +38,7 @@ export const ExerciseWeapons = () => {
   const [skill, setSkill] = useState<Skill>('melee')
   const [currentSkill, setCurrentSkill] = useState(10)
   const [targetSkill, setTargetSkill] = useState(50)
+  const [percentageNext, setPercentageNext] = useState(1)
 
   const totalPoints = useMemo(
     () =>
@@ -81,6 +82,8 @@ export const ExerciseWeapons = () => {
         value={currentSkill}
         onChange={(e) => setCurrentSkill(+e.target.value)}
       />
+
+      <Slider label="% left" min={0} max={100} step={0.01} showInput invert />
 
       <Input
         label="Target skill"
