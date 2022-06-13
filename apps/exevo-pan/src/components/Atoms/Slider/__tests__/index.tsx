@@ -175,7 +175,14 @@ describe('<Slider />', () => {
   describe('marks should be rendered and interacted correctly', () => {
     test('when automatically defined', () => {
       renderWithProviders(
-        <Slider label="label" min={-2} max={2} marks step={0.5} value={0.1} />,
+        <Slider
+          label="label"
+          min={-2}
+          max={2}
+          marks
+          step={0.5}
+          defaultValue={0.1}
+        />,
       )
 
       const sliderElement = screen.getByRole('slider')
@@ -201,7 +208,7 @@ describe('<Slider />', () => {
           max={2}
           marks={customMarks}
           step={0.5}
-          value={0.1}
+          defaultValue={0.1}
         />,
       )
 
@@ -329,7 +336,7 @@ describe('<Slider />', () => {
       rerender(<Slider {...props} value={value} />)
       ;[inputElement] = screen.getAllByLabelText('label')
       expect(inputElement).toHaveValue('-5')
-      expect(mockedOnChange).toHaveBeenCalledTimes(1)
+      expect(mockedOnChange).toHaveBeenCalledTimes(0)
     })
   })
 

@@ -2,7 +2,14 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import clsx from 'clsx'
-import { forwardRef, useState, useMemo, useCallback, useEffect } from 'react'
+import {
+  forwardRef,
+  useReducer,
+  useRef,
+  useMemo,
+  useCallback,
+  useEffect,
+} from 'react'
 import {
   useSharedRef,
   useDrag,
@@ -18,9 +25,8 @@ import {
   getLeftOffset,
   getKeyboardIncrement,
   toFixedPrecision,
-  isInRange,
 } from './utils'
-import useControlledValue from './useControlledState'
+import SliderReducer from './reducer'
 import useCalculateMarks from './useCalculateMarks'
 import useInputWidth from './useInputWidth'
 import Label from '../Label'
@@ -37,7 +43,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       max,
       'aria-label': ariaLabel,
       label,
-      value: valueProp,
+      value: propValue,
       defaultValue: defaultValueProp,
       step = 1,
       onChange,
@@ -50,50 +56,45 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       ...props
     } = componentProps
 
-    const innerRef = useSharedRef<HTMLInputElement>(ref)
-
-    const controlledValue = valueProp ? +valueProp : undefined
-    const defaultValue = defaultValueProp ? +defaultValueProp : min
-    const [stateValue, setValue] = useControlledValue({
-      initialValue: controlledValue ?? defaultValue,
-      controlledValue,
-    })
-
-    const [inputValue, setInputValue] = useState<string | number>(
-      controlledValue ?? defaultValue,
-    )
-
-    const range: [number, number] = useMemo(() => [min, max], [min, max])
-
-    const value = useMemo(
-      () => clampValue(stateValue, range),
-      [stateValue, range],
-    )
-
     const uuid = useUuid()
     const inputId = idProp ?? uuid
+    const accessibleLabel = typeof label === 'string' ? label : ariaLabel
+
+    const innerRef = useSharedRef<HTMLInputElement>(ref)
+    const dispatchedValue = useRef(propValue ?? defaultValueProp ?? min)
+
+    const [{ innerValue, inputValue }, dispatch] = useReducer(SliderReducer, {
+      isControlled: propValue !== undefined,
+      innerValue: dispatchedValue.current,
+      inputValue: dispatchedValue.current,
+      dispatchChangeEvent: (dispatchValue: number) => {
+        dispatchedValue.current = dispatchValue
+        const event = new Event('input', { bubbles: true })
+        innerRef.current?.dispatchEvent?.(event)
+      },
+    })
+
+    const range: [number, number] = useMemo(() => [min, max], [min, max])
+    const value = useMemo(
+      () => clampValue(propValue ?? innerValue, range),
+      [propValue, innerValue, range],
+    )
+
+    useEffect(() => dispatch({ type: 'SET_INPUT', value }), [value])
 
     const { binders, position } = useDrag({ clamped: true })
     const percentageX = invert ? 1 - position.percentageX : position.percentageX
-
-    const calculatedMarks = useCalculateMarks({
-      step,
-      range,
-      marks,
-      transformDisplayedValues,
-    })
-    const hasMarks = !!calculatedMarks.length
-
-    const inputWidth = useInputWidth({ max, step })
 
     const isMounted = useIsMounted()
     useIsomorphicLayoutEffect(() => {
       if (isMounted) {
         const denormalizedValue = denormalize(percentageX, range)
-        const newValue = calculateClosestStep(denormalizedValue, step, range)
-        setValue(newValue)
+        dispatch({
+          type: 'UPDATE_VALUE',
+          value: calculateClosestStep(denormalizedValue, step, range),
+        })
       }
-    }, [percentageX, range, step, setValue])
+    }, [percentageX, range, step])
 
     const handleTrackKeyPress = (event: React.KeyboardEvent) => {
       const keyboardIncrement = getKeyboardIncrement(event)
@@ -102,30 +103,22 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
         event.nativeEvent.preventDefault()
         const newValue =
           value + step * (invert ? -keyboardIncrement : keyboardIncrement)
-        setValue(toFixedPrecision(newValue, step))
+        dispatch({
+          type: 'UPDATE_VALUE',
+          value: clampValue(toFixedPrecision(newValue, step), range),
+        })
       }
     }
 
     const handleInput = useCallback(
-      (event: React.ChangeEvent<HTMLInputElement>) => {
-        const newValue = event.target.value
-        setInputValue(newValue)
-
-        const numberValue = parseFloat(newValue)
-        if (!Number.isNaN(numberValue) && isInRange(numberValue, range)) {
-          setValue(numberValue)
-        }
-      },
-      [range, setValue],
+      (event: React.ChangeEvent<HTMLInputElement>) =>
+        dispatch({
+          type: 'INPUT_TYPING',
+          value: event.target.value,
+          range,
+        }),
+      [range],
     )
-
-    useEffect(() => {
-      if (isMounted) {
-        const event = new Event('input', { bubbles: true })
-        innerRef.current?.dispatchEvent?.(event)
-        setInputValue(value)
-      }
-    }, [innerRef, value])
 
     const relativeCursorPosition = useMemo(
       () => getLeftOffset(value, range, invert),
@@ -137,7 +130,15 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       [transformDisplayedValues, value],
     )
 
-    const accessibleLabel = typeof label === 'string' ? label : ariaLabel
+    const inputWidth = useInputWidth({ max, step })
+
+    const calculatedMarks = useCalculateMarks({
+      step,
+      range,
+      marks,
+      transformDisplayedValues,
+    })
+    const hasMarks = !!calculatedMarks.length
 
     return (
       <div className={clsx(hasMarks && 'pb-5', className)} {...props}>
@@ -198,7 +199,13 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                         transform: 'translateX(-50%)',
                       }}
                       onClick={
-                        !disabled ? () => setValue(mark.value) : undefined
+                        !disabled
+                          ? () =>
+                              dispatch({
+                                type: 'UPDATE_VALUE',
+                                value: mark.value,
+                              })
+                          : undefined
                       }
                       className={clsx(
                         'absolute cursor-pointer whitespace-nowrap p-1 text-xs',
@@ -225,7 +232,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               disabled={disabled}
               value={inputValue}
               onChange={handleInput}
-              onBlur={() => setInputValue(value)}
+              onBlur={() => dispatch({ type: 'SET_INPUT', value })}
               className={clsx(
                 'reset-spinner border-1 text-tsm text-onSurface border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors',
                 disabled ? 'bg-separator' : 'bg-surface',
@@ -242,9 +249,15 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
           name={name}
           disabled={disabled}
           value={value}
-          onInput={(event) =>
-            onChange?.(event as React.ChangeEvent<HTMLInputElement>)
-          }
+          onInput={useCallback(
+            (event: React.ChangeEvent<HTMLInputElement>) => {
+              if (+event.target.value === dispatchedValue.current) return
+              // eslint-disable-next-line no-param-reassign
+              event.target.value = dispatchedValue.current.toString()
+              onChange?.(event as React.ChangeEvent<HTMLInputElement>)
+            },
+            [onChange],
+          )}
         />
       </div>
     )
