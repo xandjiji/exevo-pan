@@ -1,4 +1,3 @@
-import { clampValue } from 'utils'
 import { isInRange } from './utils'
 import { SliderState, Action } from './types'
 
