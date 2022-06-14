@@ -79,7 +79,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       [propValue, innerValue, range],
     )
 
-    useEffect(() => dispatch({ type: 'SET_INPUT', value }), [value])
+    useEffect(() => dispatch({ type: 'SET_VALUE', value }), [value])
 
     const { binders, position } = useDrag({ clamped: true })
     const percentageX = invert ? 1 - position.percentageX : position.percentageX
@@ -231,7 +231,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               disabled={disabled}
               value={inputValue}
               onChange={handleInput}
-              onBlur={() => dispatch({ type: 'SET_INPUT', value })}
+              onBlur={() => dispatch({ type: 'SET_VALUE', value })}
               className={clsx(
                 'reset-spinner border-1 text-tsm text-onSurface border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors',
                 disabled ? 'bg-separator' : 'bg-surface',

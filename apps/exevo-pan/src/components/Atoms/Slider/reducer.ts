@@ -33,9 +33,13 @@ const SliderReducer = (state: SliderState, action: Action): SliderState => {
       }
     }
 
-    case 'SET_INPUT':
+    case 'SET_VALUE':
       if (action.value === state.inputValue) return state
-      return { ...state, inputValue: action.value }
+      return {
+        ...state,
+        innerValue: action.value,
+        inputValue: action.value,
+      }
 
     default:
       return state

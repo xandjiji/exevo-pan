@@ -35,4 +35,4 @@ export type SliderState = {
 export type Action =
   | { type: 'UPDATE_VALUE'; value: number }
   | { type: 'INPUT_TYPING'; value: string; range: Range }
-  | { type: 'SET_INPUT'; value: number }
+  | { type: 'SET_VALUE'; value: number }
