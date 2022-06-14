@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Switch, Input, Slider } from 'components/Atoms'
+import { Input, Slider, Checkbox } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import * as CONSTANTS from './constants'
 import { calculateRequiredPoints } from './utils'
@@ -40,6 +40,8 @@ export const ExerciseWeapons = () => {
   const [targetSkill, setTargetSkill] = useState(121)
   const [loyaltyBonus, setLoyaltyBonus] = useState(50)
   const [percentageLeft, setPercentageLeft] = useState(39.72)
+  const [hasDummy, setHasDummy] = useState(true)
+  const [isDouble, setIsDouble] = useState(false)
 
   const pointsRequired = useMemo(
     () =>
@@ -49,8 +51,18 @@ export const ExerciseWeapons = () => {
         vocation,
         skill,
         percentageLeft,
-      }),
-    [currentSkill, targetSkill, vocation, skill, percentageLeft],
+      }) /
+      (hasDummy ? CONSTANTS.DIVIDER.hasDummy : 1) /
+      (isDouble ? CONSTANTS.DIVIDER.isDouble : 1),
+    [
+      currentSkill,
+      targetSkill,
+      vocation,
+      skill,
+      percentageLeft,
+      hasDummy,
+      isDouble,
+    ],
   )
 
   return (
@@ -124,6 +136,20 @@ export const ExerciseWeapons = () => {
         type="number"
         value={targetSkill}
         onChange={(e) => setTargetSkill(+e.target.value)}
+      />
+
+      <Checkbox
+        label="Exercise dummy"
+        checked={hasDummy}
+        onChange={(e) => setHasDummy(e.target.checked)}
+      />
+      <Checkbox
+        label="Double event"
+        checked={isDouble}
+        onChange={(e) => {
+          console.log(e)
+          setIsDouble(e.target.checked)
+        }}
       />
 
       <p>
