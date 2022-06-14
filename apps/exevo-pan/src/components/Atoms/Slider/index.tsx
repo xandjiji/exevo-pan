@@ -141,7 +141,12 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
 
     return (
       <div className={clsx(hasMarks && 'pb-5', className)} {...props}>
-        <div className="mb-2 flex items-center justify-between gap-1.5">
+        <div
+          className={clsx(
+            'flex items-center justify-between gap-1.5',
+            showInput ? 'mb-2' : 'mb-4',
+          )}
+        >
           <Label htmlFor={inputId}>{label}</Label>
           {displayValue && <span className="text-tsm">{transformedText}</span>}
         </div>
