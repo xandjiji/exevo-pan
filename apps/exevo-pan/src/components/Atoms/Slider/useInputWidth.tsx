@@ -6,7 +6,7 @@ const useInputWidth = ({ max, step = 1 }: Pick<CustomProps, 'max' | 'step'>) =>
     const maxLength = max.toString().length
     const [, decimals] = step.toString().split('.')
 
-    const totalLength = decimals ? maxLength + decimals.length + 1 : maxLength
+    const totalLength = decimals ? maxLength + decimals.length : maxLength
 
     return `${totalLength}ch`
   }, [max, step])
