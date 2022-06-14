@@ -21,7 +21,7 @@ const Input = (
     defaultValue,
     disabled,
     onChange,
-    hasAlert = true,
+    noAlert = false,
     stateIcon = 'neutral',
     ...props
   }: InputProps,
@@ -116,7 +116,7 @@ const Input = (
 
         {StateIcon}
       </div>
-      {hasAlert && (
+      {!noAlert && (
         <span
           id={errorId}
           aria-hidden={!error}

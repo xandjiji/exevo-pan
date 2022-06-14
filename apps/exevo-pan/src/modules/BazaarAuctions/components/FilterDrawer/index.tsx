@@ -88,7 +88,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             allowClear
             value={nickname}
             onChange={(event) => setNickname(event.target.value)}
-            hasAlert={false}
+            noAlert
           />
         </FilterGroup>
 

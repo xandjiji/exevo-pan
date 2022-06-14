@@ -29,7 +29,7 @@ const AuctionSearch = () => {
           allowClear
           value={nickname}
           onChange={(event) => setNickname(event.target.value)}
-          hasAlert={false}
+          noAlert
           className="flex-grow"
         />
         <Paginator

@@ -10,7 +10,7 @@ export type CustomProps = {
   options: Option[]
   value?: Value
   error?: boolean | string
-  hasAlert?: boolean
+  noAlert?: boolean
 }
 
 export type SelectProps = ExtendedProps & CustomProps & AccessibleLabelProps

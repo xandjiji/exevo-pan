@@ -85,7 +85,7 @@ const Filters = () => {
             onChange={onQueryChange}
             placeholder={blog.Filters.searchPlaceholder}
             allowClear
-            hasAlert={false}
+            noAlert
           />
         </GroupWrapper>
 

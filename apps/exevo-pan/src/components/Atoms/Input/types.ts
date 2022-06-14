@@ -12,7 +12,7 @@ export type CustomProps = {
   error?: boolean | string
   value?: InputValue
   defaultValue?: InputValue
-  hasAlert?: boolean
+  noAlert?: boolean
   stateIcon?: StateIcon
 }
 

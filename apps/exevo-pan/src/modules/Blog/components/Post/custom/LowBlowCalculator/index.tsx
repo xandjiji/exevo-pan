@@ -73,7 +73,7 @@ const LowBlowCalculator = () => {
           min={0}
           value={averageDamage}
           onChange={(event) => setAverageDamage(+event.target.value)}
-          hasAlert={false}
+          noAlert
         />
 
         <S.Result>
@@ -96,7 +96,7 @@ const LowBlowCalculator = () => {
           min={0}
           value={creatureHp}
           onChange={(event) => setCreatureHp(+event.target.value)}
-          hasAlert={false}
+          noAlert
         />
 
         <Checkbox

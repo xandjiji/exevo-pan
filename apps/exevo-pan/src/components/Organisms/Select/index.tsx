@@ -32,7 +32,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       onChange,
       disabled,
       error = false,
-      hasAlert = true,
+      noAlert = false,
       options,
       ...props
     }: SelectProps,
@@ -179,7 +179,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             />
           </div>
         </Popover>
-        {hasAlert && (
+        {!noAlert && (
           <span
             aria-hidden={hideAlert}
             role="alert"
