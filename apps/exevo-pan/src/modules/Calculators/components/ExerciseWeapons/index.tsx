@@ -2,7 +2,7 @@ import { useState, useMemo } from 'react'
 import { Switch, Input, Slider } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import * as CONSTANTS from './constants'
-import * as Calculate from './utils'
+import { calculateRequiredPoints } from './utils'
 import { TypedOption, Vocation, Skill } from './types'
 
 /* 
@@ -36,28 +36,21 @@ const skillOptions: TypedOption<Skill>[] = [
 export const ExerciseWeapons = () => {
   const [vocation, setVocation] = useState<Vocation>('knight')
   const [skill, setSkill] = useState<Skill>('melee')
-  const [currentSkill, setCurrentSkill] = useState(10)
-  const [targetSkill, setTargetSkill] = useState(50)
-  const [percentageNext, setPercentageNext] = useState(1)
+  const [currentSkill, setCurrentSkill] = useState(120)
+  const [targetSkill, setTargetSkill] = useState(121)
+  const [loyaltyBonus, setLoyaltyBonus] = useState(50)
+  const [percentageLeft, setPercentageLeft] = useState(39.72)
 
-  const totalPoints = useMemo(
+  const pointsRequired = useMemo(
     () =>
-      Calculate.totalPoints({
+      calculateRequiredPoints({
         currentSkill,
+        targetSkill,
         vocation,
         skill,
+        percentageLeft,
       }),
-    [currentSkill, vocation, skill],
-  )
-
-  const targetTotalPoints = useMemo(
-    () =>
-      Calculate.totalPoints({
-        currentSkill: targetSkill,
-        vocation,
-        skill,
-      }),
-    [targetSkill, vocation, skill],
+    [currentSkill, targetSkill, vocation, skill, percentageLeft],
   )
 
   return (
@@ -83,7 +76,48 @@ export const ExerciseWeapons = () => {
         onChange={(e) => setCurrentSkill(+e.target.value)}
       />
 
-      <Slider label="% left" min={0} max={100} step={0.01} showInput invert />
+      <Slider
+        label="% left"
+        min={0}
+        max={100}
+        step={0.01}
+        showInput
+        invert
+        value={percentageLeft}
+        onChange={(e) => setPercentageLeft(+e.target.value)}
+      />
+
+      <div className="my-4" />
+
+      <Slider
+        label="Loyalty"
+        min={0}
+        max={50}
+        step={5}
+        displayValue
+        transformDisplayedValues={(value) => {
+          if (!value) return 'None'
+
+          return `${value}% bonus`
+        }}
+        marks={[
+          { label: 'None', value: 0 },
+          { label: '5%', value: 5 },
+          { label: '10%', value: 10 },
+          { label: '15%', value: 15 },
+          { label: '20%', value: 20 },
+          { label: '25%', value: 25 },
+          { label: '30%', value: 30 },
+          { label: '35%', value: 35 },
+          { label: '40%', value: 40 },
+          { label: '45%', value: 45 },
+          { label: '50%', value: 50 },
+        ]}
+        value={loyaltyBonus}
+        onChange={(e) => setLoyaltyBonus(+e.target.value)}
+      />
+
+      <div className="my-4" />
 
       <Input
         label="Target skill"
@@ -96,8 +130,9 @@ export const ExerciseWeapons = () => {
         Regular weapons required:{' '}
         <strong>
           {Math.ceil(
-            (targetTotalPoints - totalPoints) /
-              CONSTANTS.EXERCISE_WEAPON_POINTS.regular,
+            pointsRequired /
+              (CONSTANTS.EXERCISE_WEAPON_POINTS.regular *
+                (1 + loyaltyBonus / 100)),
           )}
         </strong>
       </p>
