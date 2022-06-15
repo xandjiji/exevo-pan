@@ -10,7 +10,7 @@ const Option = ({ groupName, name, value, node, ...props }: OptionProps) => {
 
   return (
     <Chip
-      className="gap-1.5"
+      className="relative gap-1.5"
       onClick={handleClick}
       overrideStatus={props.checked}
     >
@@ -20,7 +20,7 @@ const Option = ({ groupName, name, value, node, ...props }: OptionProps) => {
         name={groupName}
         value={value}
         tabIndex={-1}
-        className={clsx('float-right h-0 w-0')}
+        className={clsx('absolute h-0 w-0')}
         {...props}
       />
       {node ?? name}

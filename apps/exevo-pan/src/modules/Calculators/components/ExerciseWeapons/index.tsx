@@ -1,11 +1,12 @@
 import { useState, useMemo } from 'react'
 import clsx from 'clsx'
 import { Input, Slider, Checkbox } from 'components/Atoms'
-import { Select, ChipGroup } from 'components/Organisms'
+import { ChipGroup } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import * as CONSTANTS from './constants'
+import { vocationOptions, skillOptions } from './options'
 import { calculateRequiredPoints } from './utils'
-import { TypedOption, Vocation, Skill } from './types'
+import { Vocation, Skill } from './types'
 
 /* 
     @ ToDo:
@@ -21,19 +22,6 @@ import { TypedOption, Vocation, Skill } from './types'
 
     - weapon charges ???
 */
-
-const vocationOptions: TypedOption<Vocation>[] = [
-  { name: 'Knight', value: 'knight' },
-  { name: 'Paladin', value: 'paladin' },
-  { name: 'Druid', value: 'druid' },
-  { name: 'Sorcerer', value: 'sorcerer' },
-]
-
-const skillOptions: TypedOption<Skill>[] = [
-  { name: 'Magic', value: 'magic' },
-  { name: 'Melee', value: 'melee' },
-  { name: 'Distance', value: 'distance' },
-]
 
 export const ExerciseWeapons = () => {
   const [vocation, setVocation] = useState<Vocation>('knight')
@@ -73,25 +61,17 @@ export const ExerciseWeapons = () => {
     <div>
       <div className="grid gap-4">
         <ChipGroup
-          label="Vocation (controlled)"
-          options={vocationOptions}
-          value={vocation}
-          onChange={(e) => setVocation(e.target.value as Vocation)}
-        />
-        <Select
           label="Vocation"
           options={vocationOptions}
           value={vocation}
           onChange={(e) => setVocation(e.target.value as Vocation)}
-          noAlert
         />
 
-        <Select
+        <ChipGroup
           label="Skill"
           options={skillOptions}
           value={skill}
           onChange={(e) => setSkill(e.target.value as Skill)}
-          noAlert
         />
 
         <div className="flex gap-8">

@@ -1,9 +1,8 @@
 import { InputHTMLAttributes } from 'react'
 
 export type Option = {
-  name: string
+  name: string | React.ReactNode
   value: string
-  node?: React.ReactNode
 }
 
 type CustomProps = {

@@ -1,6 +1,8 @@
+import { Option } from 'components/Organisms/ChipGroup/types'
+
 export type TypedOption<T> = {
   value: T
-} & Pick<Option, 'name'>
+} & Omit<Option, 'value'>
 
 export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer'
 
