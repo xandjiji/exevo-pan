@@ -16,4 +16,4 @@ export type ChipGroupProps = CustomProps & ExtendedProps & AccessibleLabelProps
 export type OptionProps = {
   groupName?: string
 } & Option &
-  Pick<InputHTMLAttributes<HTMLInputElement>, 'checked' | 'defaultChecked'>
+  Pick<InputHTMLAttributes<HTMLInputElement>, 'checked' | 'onChange'>

@@ -59,9 +59,6 @@ const ChipGroup = ({
         role="radiogroup"
         aria-label={accessibleLabel}
         className="flex flex-wrap items-center gap-2"
-        onChange={
-          handleChange as unknown as React.FormEventHandler<HTMLDivElement>
-        }
         {...(props as React.InputHTMLAttributes<HTMLDivElement>)}
       >
         {options.map((option) => (
@@ -69,6 +66,7 @@ const ChipGroup = ({
             key={option.value}
             groupName={groupName}
             checked={derivedValue === option.value}
+            onChange={handleChange}
             {...option}
           />
         ))}
