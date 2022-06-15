@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { Chip, Label } from 'components/Atoms'
 import { ChipGroupProps, OptionProps } from './types'
 
-const Option = ({ groupName, name, value, node, ...props }: OptionProps) => {
+const Option = ({ groupName, name, value, ...props }: OptionProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClick = useCallback(() => inputRef.current?.click(), [])
@@ -23,7 +23,7 @@ const Option = ({ groupName, name, value, node, ...props }: OptionProps) => {
         className={clsx('absolute h-0 w-0')}
         {...props}
       />
-      {node ?? name}
+      {name}
     </Chip>
   )
 }
