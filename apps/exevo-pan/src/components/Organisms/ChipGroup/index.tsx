@@ -1,6 +1,6 @@
 import { useRef, useCallback, useState } from 'react'
 import clsx from 'clsx'
-import { Chip } from 'components/Atoms'
+import { Chip, Label } from 'components/Atoms'
 import { ChipGroupProps, OptionProps } from './types'
 
 const Option = ({ groupName, name, value, node, ...props }: OptionProps) => {
@@ -29,6 +29,8 @@ const Option = ({ groupName, name, value, node, ...props }: OptionProps) => {
 }
 
 const ChipGroup = ({
+  'aria-label': ariaLabel,
+  label,
   name: groupName,
   options,
   onChange,
@@ -37,7 +39,10 @@ const ChipGroup = ({
   className,
   ...props
 }: ChipGroupProps) => {
+  const accessibleLabel = typeof label === 'string' ? label : ariaLabel
+
   const [stateValue, setStateValue] = useState(value ?? defaultValue)
+  const derivedValue = value ?? stateValue
 
   const handleChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (event) => {
@@ -47,25 +52,27 @@ const ChipGroup = ({
     [onChange],
   )
 
-  const derivedValue = value ?? stateValue
-
   return (
-    <div
-      role="radiogroup"
-      className={clsx('flex gap-2', className)}
-      onChange={
-        handleChange as unknown as React.FormEventHandler<HTMLDivElement>
-      }
-      {...(props as React.InputHTMLAttributes<HTMLDivElement>)}
-    >
-      {options.map((option) => (
-        <Option
-          key={option.value}
-          groupName={groupName}
-          checked={derivedValue === option.value}
-          {...option}
-        />
-      ))}
+    <div>
+      <Label className={clsx('mb-2', className)}>{label}</Label>
+      <div
+        role="radiogroup"
+        aria-label={accessibleLabel}
+        className="flex flex-wrap items-center gap-2"
+        onChange={
+          handleChange as unknown as React.FormEventHandler<HTMLDivElement>
+        }
+        {...(props as React.InputHTMLAttributes<HTMLDivElement>)}
+      >
+        {options.map((option) => (
+          <Option
+            key={option.value}
+            groupName={groupName}
+            checked={derivedValue === option.value}
+            {...option}
+          />
+        ))}
+      </div>
     </div>
   )
 }
