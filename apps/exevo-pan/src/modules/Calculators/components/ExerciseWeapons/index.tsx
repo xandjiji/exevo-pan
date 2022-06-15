@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react'
 import clsx from 'clsx'
 import { Input, Slider, Checkbox } from 'components/Atoms'
-import { Select } from 'components/Organisms'
+import { Select, ChipGroup } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import * as CONSTANTS from './constants'
 import { calculateRequiredPoints } from './utils'
@@ -72,6 +72,27 @@ export const ExerciseWeapons = () => {
   return (
     <div>
       <div className="grid gap-4">
+        <ChipGroup
+          label="Vocation (value='sorcerer')"
+          options={vocationOptions}
+          /* value={vocation} */
+          value="sorcerer"
+          onChange={(e) => console.log(e.target.value)}
+        />
+        <ChipGroup
+          label="Vocation (defaultValue='sorcerer')"
+          options={vocationOptions}
+          /* value={vocation} */
+          defaultValue="sorcerer"
+          onChange={(e) => console.log(e.target.value)}
+        />
+        <ChipGroup
+          label="Vocation (controlled)"
+          options={vocationOptions}
+          /* value={vocation} */
+          value={vocation}
+          onChange={(e) => setVocation(e.target.value as Vocation)}
+        />
         <Select
           label="Vocation"
           options={vocationOptions}
