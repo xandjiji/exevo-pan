@@ -8,29 +8,14 @@ import { vocationOptions, skillOptions } from './options'
 import { calculateRequiredPoints } from './utils'
 import { Vocation, Skill } from './types'
 
-/* 
-    @ ToDo:
-    - vocation (chip group)
-    - skill (chip group)
-        highlight for vocation
-    - current skill (base + loyalty) (input)
-    - % to next (slider)
-    - desired skill (input)
-    - loyalty (slider)
-    - double event (checkbox)
-    - private dummy (checkbox)
-
-    - weapon charges ???
-*/
-
 export const ExerciseWeapons = () => {
   const [vocation, setVocation] = useState<Vocation>('knight')
   const [skill, setSkill] = useState<Skill>('melee')
-  const [currentSkill, setCurrentSkill] = useState(120)
-  const [targetSkill, setTargetSkill] = useState(121)
-  const [loyaltyBonus, setLoyaltyBonus] = useState(50)
-  const [percentageLeft, setPercentageLeft] = useState(39.72)
-  const [hasDummy, setHasDummy] = useState(true)
+  const [currentSkill, setCurrentSkill] = useState(10)
+  const [targetSkill, setTargetSkill] = useState(11)
+  const [loyaltyBonus, setLoyaltyBonus] = useState(0)
+  const [percentageLeft, setPercentageLeft] = useState(50)
+  const [hasDummy, setHasDummy] = useState(false)
   const [isDouble, setIsDouble] = useState(false)
 
   const pointsRequired = useMemo(
@@ -104,6 +89,7 @@ export const ExerciseWeapons = () => {
 
           <Slider
             label="% left"
+            title={`You have ${percentageLeft} percent to go`}
             min={0}
             max={100}
             step={0.01}

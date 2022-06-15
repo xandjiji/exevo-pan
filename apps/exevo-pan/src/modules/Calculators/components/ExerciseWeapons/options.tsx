@@ -23,20 +23,20 @@ export const vocationOptions: TypedOption<Vocation>[] = [
   {
     name: (
       <>
-        <Icon.Druid />
-        Druid
-      </>
-    ),
-    value: 'druid',
-  },
-  {
-    name: (
-      <>
         <Icon.Sorcerer />
         Sorcerer
       </>
     ),
     value: 'sorcerer',
+  },
+  {
+    name: (
+      <>
+        <Icon.Druid />
+        Druid
+      </>
+    ),
+    value: 'druid',
   },
 ]
 
@@ -44,8 +44,8 @@ export const skillOptions: TypedOption<Skill>[] = [
   {
     name: (
       <>
-        <Icon.Sorcerer />
-        Melee
+        <Icon.Axe />
+        Axe/Club/Sword
       </>
     ),
     value: 'melee',
@@ -53,7 +53,7 @@ export const skillOptions: TypedOption<Skill>[] = [
   {
     name: (
       <>
-        <Icon.Sorcerer />
+        <Icon.Distance />
         Distance
       </>
     ),
@@ -62,8 +62,8 @@ export const skillOptions: TypedOption<Skill>[] = [
   {
     name: (
       <>
-        <Icon.Sorcerer />
-        Magic
+        <Icon.Magic />
+        Magic level
       </>
     ),
     value: 'magic',
