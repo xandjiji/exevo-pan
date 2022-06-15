@@ -1,5 +1,9 @@
 import { Option } from 'components/Organisms/ChipGroup/types'
 
+export type CharacterConfigProps = {
+  updatePointsRequired: (points: number) => void
+}
+
 export type TypedOption<T> = {
   value: T
 } & Omit<Option, 'value'>
@@ -17,6 +21,7 @@ export type SkillCalcArgs = {
   currentSkill: number
   targetSkill: number
   percentageLeft: number
+  loyaltyBonus: number
 } & BaseCalcArgs
 
 export type PointsCalcArgs = {

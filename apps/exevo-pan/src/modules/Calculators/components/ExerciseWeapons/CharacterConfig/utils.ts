@@ -27,6 +27,7 @@ export const calculateRequiredPoints = ({
   currentSkill,
   targetSkill,
   percentageLeft,
+  loyaltyBonus,
   ...args
 }: SkillCalcArgs): number => {
   const currentPoints = totalPoints({ skillValue: currentSkill, ...args })
@@ -35,10 +36,14 @@ export const calculateRequiredPoints = ({
 
   const requiredPoints = targetPoints - currentPoints
 
+  let totalRequiredPointsPoints = 0
   if (targetSkill - currentSkill === 1) {
-    return requiredPoints * currentCompletedPercentage
+    totalRequiredPointsPoints = requiredPoints * currentCompletedPercentage
+  } else {
+    const pointsToNext = pointsToAdvance({ skillValue: currentSkill, ...args })
+    totalRequiredPointsPoints =
+      requiredPoints - pointsToNext * (1 - currentCompletedPercentage)
   }
 
-  const pointsToNext = pointsToAdvance({ skillValue: currentSkill, ...args })
-  return requiredPoints - pointsToNext * (1 - currentCompletedPercentage)
+  return totalRequiredPointsPoints / (1 + loyaltyBonus / 100)
 }
