@@ -1,10 +1,10 @@
 import { useState, useMemo } from 'react'
 import { Checkbox } from 'components/Atoms'
 import { Select } from 'components/Organisms'
-import { autoRequiredWeapons, customRequiredWeapons } from './utils'
+import { autoRequiredWeaponsCount, customRequiredWeaponsCount } from './utils'
 import { weaponOptions } from './options'
 import * as CONSTANTS from './constants'
-import { SummaryProps, WeaponOption, RequiredWeaponsCount } from './types'
+import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 /* @ ToDo:
 
@@ -20,15 +20,15 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   const [isDouble, setIsDouble] = useState(false)
   const [exerciseWeapon, setExerciseWeapon] = useState<WeaponOption>('auto')
 
-  const weaponsRequired: RequiredWeaponsCount = useMemo(() => {
+  const weaponsRequired: WeaponsObject = useMemo(() => {
     const finalPointsRequired =
       pointsRequired /
       (hasDummy ? CONSTANTS.DIVIDER.hasDummy : 1) /
       (isDouble ? CONSTANTS.DIVIDER.isDouble : 1)
 
     return exerciseWeapon === 'auto'
-      ? autoRequiredWeapons(finalPointsRequired)
-      : customRequiredWeapons(finalPointsRequired, exerciseWeapon)
+      ? autoRequiredWeaponsCount(finalPointsRequired)
+      : customRequiredWeaponsCount(finalPointsRequired, exerciseWeapon)
   }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
 
   console.log(weaponsRequired)

@@ -1,7 +1,7 @@
 import * as CONSTANTS from './constants'
-import { RequiredWeaponsCount, ExerciseWeapon } from './types'
+import { WeaponsObject, ExerciseWeapon } from './types'
 
-const { EXERCISE_WEAPON_POINTS } = CONSTANTS
+const { EXERCISE_WEAPONS } = CONSTANTS
 
 const calculateWeaponCount = (
   pointsRequired: number,
@@ -16,24 +16,24 @@ const calculateWeaponCount = (
   }
 }
 
-export const autoRequiredWeapons = (
+export const autoRequiredWeaponsCount = (
   pointsRequired: number,
-): RequiredWeaponsCount => {
+): WeaponsObject => {
   const lasting = calculateWeaponCount(
     pointsRequired,
-    EXERCISE_WEAPON_POINTS.lasting,
+    EXERCISE_WEAPONS.skillPoints.lasting,
     false,
   )
 
   const durable = calculateWeaponCount(
     lasting.remainingPoints,
-    EXERCISE_WEAPON_POINTS.durable,
+    EXERCISE_WEAPONS.skillPoints.durable,
     false,
   )
 
   const regular = calculateWeaponCount(
     durable.remainingPoints,
-    EXERCISE_WEAPON_POINTS.regular,
+    EXERCISE_WEAPONS.skillPoints.regular,
   )
 
   return {
@@ -43,11 +43,11 @@ export const autoRequiredWeapons = (
   }
 }
 
-export const customRequiredWeapons = (
+export const customRequiredWeaponsCount = (
   pointsRequired: number,
   weapon: ExerciseWeapon,
-): RequiredWeaponsCount => {
-  const weaponsCount: RequiredWeaponsCount = {
+): WeaponsObject => {
+  const weaponsCount: WeaponsObject = {
     lasting: 0,
     durable: 0,
     regular: 0,
@@ -55,7 +55,7 @@ export const customRequiredWeapons = (
 
   weaponsCount[weapon] = calculateWeaponCount(
     pointsRequired,
-    CONSTANTS.EXERCISE_WEAPON_POINTS[weapon],
+    EXERCISE_WEAPONS.skillPoints[weapon],
   ).weaponCount
 
   return weaponsCount
