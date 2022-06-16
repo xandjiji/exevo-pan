@@ -14,7 +14,6 @@ import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 /* @ ToDo:
 
-- Weapons necessárias (lasting, durable, normal, etc)
 - Tempo
 - Equivalente a X tempo offline
 
@@ -85,19 +84,19 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         <S.ChipWrapper>
           {!!weaponsRequired.lasting && (
             <Chip>
-              <S.Weapon /> lasting weapons
+              <S.Weapon.lasting /> lasting weapons
               <S.ActiveCount>{weaponsRequired.lasting}x</S.ActiveCount>
             </Chip>
           )}
           {!!weaponsRequired.durable && (
             <Chip>
-              <S.Weapon /> durable weapons
+              <S.Weapon.durable /> durable weapons
               <S.ActiveCount>{weaponsRequired.durable}x</S.ActiveCount>
             </Chip>
           )}
           {!!weaponsRequired.regular && (
             <Chip>
-              <S.Weapon /> regular weapons
+              <S.Weapon.regular /> regular weapons
               <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
             </Chip>
           )}

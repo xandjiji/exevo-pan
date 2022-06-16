@@ -1,6 +1,8 @@
 import { ActiveCount as BaseActiveCount } from 'components/Atoms'
 import Image from 'next/image'
-import swordSrc from 'assets/exerciseWeapon.gif'
+import lastingSrc from 'assets/lastingSword.gif'
+import durableSrc from 'assets/durableSword.gif'
+import regularSrc from 'assets/regularSword.gif'
 
 export const Group = (args: JSX.IntrinsicElements['div']) => (
   <div className="text-tsm grid gap-2" {...args} />
@@ -21,6 +23,32 @@ export const ActiveCount: typeof BaseActiveCount = (args) => (
   />
 )
 
-export const Weapon = () => (
-  <Image role="none" width={16} height={16} alt="Sword" src={swordSrc} />
-)
+export const Weapon = {
+  lasting: () => (
+    <Image
+      role="none"
+      width={16}
+      height={16}
+      alt="Lasting exercise weapon"
+      src={lastingSrc}
+    />
+  ),
+  durable: () => (
+    <Image
+      role="none"
+      width={16}
+      height={16}
+      alt="Durable exercise weapon"
+      src={durableSrc}
+    />
+  ),
+  regular: () => (
+    <Image
+      role="none"
+      width={16}
+      height={16}
+      alt="Regular exercise weapon"
+      src={regularSrc}
+    />
+  ),
+}
