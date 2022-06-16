@@ -1,16 +1,17 @@
 import { useState, useMemo } from 'react'
 import { Checkbox } from 'components/Atoms'
 import { Select } from 'components/Organisms'
-import { autoRequiredWeaponsCount, customRequiredWeaponsCount } from './utils'
+import {
+  autoRequiredWeaponsCount,
+  customRequiredWeaponsCount,
+  calculateCost,
+} from './utils'
 import { weaponOptions } from './options'
 import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 /* @ ToDo:
 
-- Weapons necessárias (lasting, durable, normal, etc)
-- Custo (GP/TC)
-- Tempo
 - Equivalente a X tempo offline
 
 */
@@ -31,7 +32,10 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
       : customRequiredWeaponsCount(finalPointsRequired, exerciseWeapon)
   }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
 
+  const cost = useMemo(() => calculateCost(weaponsRequired), [weaponsRequired])
+
   console.log(weaponsRequired)
+  console.log(cost)
 
   return (
     <div>

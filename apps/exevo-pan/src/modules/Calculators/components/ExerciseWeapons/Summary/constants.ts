@@ -8,11 +8,35 @@ const skillPoints: WeaponsObject = {
 
 const charges: WeaponsObject = {
   lasting: 14400,
-  regular: 1800,
-  durable: 500,
+  durable: 1800,
+  regular: 500,
 }
 
-export const EXERCISE_WEAPONS = { skillPoints, charges }
+const goldPrice: WeaponsObject = {
+  lasting: 7560000,
+  durable: 945000,
+  regular: 262500,
+}
+
+const tcPrice: WeaponsObject = {
+  lasting: 720,
+  durable: 90,
+  regular: 25,
+}
+
+const seconds: WeaponsObject = {
+  lasting: 28800,
+  durable: 3600,
+  regular: 1000,
+}
+
+export const EXERCISE_WEAPONS = {
+  skillPoints,
+  charges,
+  goldPrice,
+  tcPrice,
+  seconds,
+}
 
 export const DIVIDER = {
   isDouble: 2,
