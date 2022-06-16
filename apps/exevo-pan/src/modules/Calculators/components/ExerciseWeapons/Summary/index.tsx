@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Checkbox } from 'components/Atoms'
+import { Checkbox, Text } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import {
   autoRequiredWeaponsCount,
@@ -12,6 +12,9 @@ import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 /* @ ToDo:
 
+- Weapons necessárias (lasting, durable, normal, etc)
+- Custo (GP/TC)
+- Tempo
 - Equivalente a X tempo offline
 
 */
@@ -58,6 +61,11 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
 
       <p>
         Regular weapons required: <strong>s</strong>
+      </p>
+
+      <p className="flex items-center">
+        <Text.TibiaCoin value={cost.tc} />
+        <Text.GoldCoin value={cost.gold} />
       </p>
     </div>
   )
