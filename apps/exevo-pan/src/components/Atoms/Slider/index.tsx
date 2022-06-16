@@ -140,7 +140,10 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     const hasMarks = !!calculatedMarks.length
 
     return (
-      <div className={clsx(hasMarks && 'pb-5', className)} {...props}>
+      <div
+        className={clsx(hasMarks && 'after:block after:h-8', className)}
+        {...props}
+      >
         <div
           className={clsx(
             'flex items-center justify-between gap-1.5',
