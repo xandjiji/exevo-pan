@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
+import { Card } from '../../layout'
 import { vocationOptions, skillOptions } from './options'
 import { calculateRequiredPoints } from './utils'
 import { CharacterConfigProps, Vocation, Skill } from './types'
@@ -36,7 +37,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
   const invalidSkill = targetSkill <= currentSkill
 
   return (
-    <div className="grid gap-4">
+    <Card>
       <ChipGroup
         label="Vocation"
         options={vocationOptions}
@@ -120,7 +121,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         value={loyaltyBonus}
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
       />
-    </div>
+    </Card>
   )
 }
 

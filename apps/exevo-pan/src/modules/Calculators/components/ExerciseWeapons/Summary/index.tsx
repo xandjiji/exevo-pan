@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select } from 'components/Organisms'
+import { Card } from '../../layout'
 import {
   autoRequiredWeaponsCount,
   customRequiredWeaponsCount,
@@ -41,23 +42,30 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   console.log(cost)
 
   return (
-    <div>
-      <Checkbox
-        label="Exercise dummy"
-        checked={hasDummy}
-        onChange={(e) => setHasDummy(e.target.checked)}
-      />
-      <Checkbox
-        label="Double event"
-        checked={isDouble}
-        onChange={(e) => setIsDouble(e.target.checked)}
-      />
-      <Select
-        label="Weapon charges"
-        options={weaponOptions}
-        value={exerciseWeapon}
-        onChange={(e) => setExerciseWeapon(e.target.value as WeaponOption)}
-      />
+    <Card>
+      <div className="flex items-start justify-between gap-4">
+        <div className="grid gap-4">
+          <Checkbox
+            label="Exercise dummy"
+            checked={hasDummy}
+            onChange={(e) => setHasDummy(e.target.checked)}
+          />
+          <Checkbox
+            label="Double event"
+            checked={isDouble}
+            onChange={(e) => setIsDouble(e.target.checked)}
+          />
+        </div>
+
+        <Select
+          label="Weapon charges"
+          options={weaponOptions}
+          value={exerciseWeapon}
+          onChange={(e) => setExerciseWeapon(e.target.value as WeaponOption)}
+          noAlert
+          className="w-[180px]"
+        />
+      </div>
 
       <p>
         Regular weapons required: <strong>s</strong>
@@ -67,7 +75,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         <Text.TibiaCoin value={cost.tc} />
         <Text.GoldCoin value={cost.gold} />
       </p>
-    </div>
+    </Card>
   )
 }
 
