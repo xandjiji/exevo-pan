@@ -30,7 +30,7 @@ export const ChipWrapper = ({
 export const ActiveCount: typeof BaseActiveCount = (args) => (
   <BaseActiveCount
     {...args}
-    className="absolute right-0 -top-2.5 w-fit !rounded p-1 font-bold tracking-wide"
+    className="z-1 absolute right-0 -top-2.5 w-fit !rounded p-1 font-bold tracking-wide"
     style={{ transform: 'translateX(33%)' }}
   />
 )

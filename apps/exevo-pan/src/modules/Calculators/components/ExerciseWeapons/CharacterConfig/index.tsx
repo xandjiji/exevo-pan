@@ -11,8 +11,8 @@ import { CharacterConfigProps, Vocation, Skill } from './types'
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
   const [vocation, setVocation] = useState<Vocation>('knight')
   const [skill, setSkill] = useState<Skill>('melee')
-  const [currentSkill, setCurrentSkill] = useState(10)
-  const [targetSkill, setTargetSkill] = useState(11)
+  const [currentSkill, setCurrentSkill] = useState(100)
+  const [targetSkill, setTargetSkill] = useState(120)
   const [loyaltyBonus, setLoyaltyBonus] = useState(0)
   const [percentageLeft, setPercentageLeft] = useState(50)
 
