@@ -1,5 +1,5 @@
 import { useState, useMemo } from 'react'
-import { Checkbox, Text } from 'components/Atoms'
+import { Checkbox, Text, Chip } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import { Card } from '../../layout'
 import {
@@ -8,13 +8,13 @@ import {
   calculateCost,
 } from './utils'
 import { weaponOptions } from './options'
+import * as S from './atoms'
 import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 /* @ ToDo:
 
 - Weapons necessárias (lasting, durable, normal, etc)
-- Custo (GP/TC)
 - Tempo
 - Equivalente a X tempo offline
 
@@ -37,9 +37,6 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
 
   const cost = useMemo(() => calculateCost(weaponsRequired), [weaponsRequired])
-
-  console.log(weaponsRequired)
-  console.log(cost)
 
   return (
     <Card>
@@ -67,14 +64,45 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         />
       </div>
 
-      <p>
-        Regular weapons required: <strong>s</strong>
-      </p>
+      <S.Group>
+        <p>
+          <strong>Money cost</strong>
+        </p>
+        <S.ChipWrapper>
+          <Chip>
+            <Text.TibiaCoin value={cost.tc} />
+          </Chip>
+          <Chip>
+            <Text.GoldCoin value={cost.gold} />
+          </Chip>
+        </S.ChipWrapper>
+      </S.Group>
 
-      <p className="flex items-center">
-        <Text.TibiaCoin value={cost.tc} />
-        <Text.GoldCoin value={cost.gold} />
-      </p>
+      <S.Group>
+        <p>
+          <strong>Weapons</strong>
+        </p>
+        <S.ChipWrapper>
+          {!!weaponsRequired.lasting && (
+            <Chip>
+              <S.Weapon /> lasting weapons
+              <S.ActiveCount>{weaponsRequired.lasting}x</S.ActiveCount>
+            </Chip>
+          )}
+          {!!weaponsRequired.durable && (
+            <Chip>
+              <S.Weapon /> durable weapons
+              <S.ActiveCount>{weaponsRequired.durable}x</S.ActiveCount>
+            </Chip>
+          )}
+          {!!weaponsRequired.regular && (
+            <Chip>
+              <S.Weapon /> regular weapons
+              <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
+            </Chip>
+          )}
+        </S.ChipWrapper>
+      </S.Group>
     </Card>
   )
 }
