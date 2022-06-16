@@ -1,17 +1,29 @@
+import clsx from 'clsx'
 import { ActiveCount as BaseActiveCount } from 'components/Atoms'
 import Image from 'next/image'
 import lastingSrc from 'assets/lastingSword.gif'
 import durableSrc from 'assets/durableSword.gif'
 import regularSrc from 'assets/regularSword.gif'
+import { ChipWrapperProps } from './types'
 
 export const Group = (args: JSX.IntrinsicElements['div']) => (
   <div className="text-tsm grid gap-2" {...args} />
 )
 
-export const ChipWrapper = (args: JSX.IntrinsicElements['div']) => (
+export const ChipWrapper = ({
+  className,
+  separator = false,
+  ...props
+}: ChipWrapperProps) => (
   <div
-    className="child:flex child:gap-1.5 child:after:content-['/'] last:child:after:hidden child:after:absolute child:after:-right-2 child:relative flex items-center gap-3"
-    {...args}
+    className={clsx(
+      'child:flex child:gap-1.5 child:relative flex items-center',
+      separator
+        ? 'child:after:content-["/"] last:child:after:hidden child:after:absolute child:after:-right-2.5 gap-4'
+        : 'gap-2',
+      className,
+    )}
+    {...props}
   />
 )
 
