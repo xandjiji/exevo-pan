@@ -1,22 +1,37 @@
 import { useState, useMemo } from 'react'
 import { Checkbox } from 'components/Atoms'
-import * as CONSTANTS from '../constants'
-import { SummaryProps } from './types'
+import { Select } from 'components/Organisms'
+import { autoRequiredWeapons, customRequiredWeapons } from './utils'
+import { weaponOptions } from './options'
+import * as CONSTANTS from './constants'
+import { SummaryProps, WeaponOption, RequiredWeaponsCount } from './types'
+
+/* @ ToDo:
+
+- Weapons necessárias (lasting, durable, normal, etc)
+- Custo (GP/TC)
+- Tempo
+- Equivalente a X tempo offline
+
+*/
 
 const Summary = ({ pointsRequired }: SummaryProps) => {
   const [hasDummy, setHasDummy] = useState(false)
   const [isDouble, setIsDouble] = useState(false)
+  const [exerciseWeapon, setExerciseWeapon] = useState<WeaponOption>('auto')
 
-  const weaponsRequired = useMemo(
-    () =>
-      Math.ceil(
-        pointsRequired /
-          CONSTANTS.EXERCISE_WEAPON_POINTS.regular /
-          (hasDummy ? CONSTANTS.DIVIDER.hasDummy : 1) /
-          (isDouble ? CONSTANTS.DIVIDER.isDouble : 1),
-      ),
-    [pointsRequired, hasDummy, isDouble],
-  )
+  const weaponsRequired: RequiredWeaponsCount = useMemo(() => {
+    const finalPointsRequired =
+      pointsRequired /
+      (hasDummy ? CONSTANTS.DIVIDER.hasDummy : 1) /
+      (isDouble ? CONSTANTS.DIVIDER.isDouble : 1)
+
+    return exerciseWeapon === 'auto'
+      ? autoRequiredWeapons(finalPointsRequired)
+      : customRequiredWeapons(finalPointsRequired, exerciseWeapon)
+  }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
+
+  console.log(weaponsRequired)
 
   return (
     <div>
@@ -30,9 +45,15 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         checked={isDouble}
         onChange={(e) => setIsDouble(e.target.checked)}
       />
+      <Select
+        label="Weapon charges"
+        options={weaponOptions}
+        value={exerciseWeapon}
+        onChange={(e) => setExerciseWeapon(e.target.value as WeaponOption)}
+      />
 
       <p>
-        Regular weapons required: <strong>{weaponsRequired}</strong>
+        Regular weapons required: <strong>s</strong>
       </p>
     </div>
   )
