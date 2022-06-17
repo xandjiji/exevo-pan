@@ -109,7 +109,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         transformDisplayedValues={(value) => {
           if (!value) return 'None'
 
-          return `${value}% bonus`
+          return `${value * 72} points`
         }}
         marks={[
           { label: 'None', value: 0 },
