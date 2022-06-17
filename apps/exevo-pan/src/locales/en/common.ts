@@ -106,7 +106,6 @@ export default {
     invalid: 'Field is invalid',
     loading: 'Validating...',
   },
-  WarningLabel: 'Warning!',
   Of: 'of',
   Paginator: {
     FirstLabel: 'Go to first page',

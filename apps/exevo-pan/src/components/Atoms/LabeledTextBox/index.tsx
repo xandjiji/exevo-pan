@@ -1,9 +1,6 @@
-import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
-import Image from 'next/image'
-import warningSrc from 'assets/warning.png'
-import styles from './styles.module.css'
+import InfoIcon from 'assets/svgs/info.svg'
 import { LabeledTextBoxProps } from './types'
 
 const LabeledTextBox = ({
@@ -13,10 +10,6 @@ const LabeledTextBox = ({
   warning = false,
   ...props
 }: LabeledTextBoxProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
-
   const labelId = useUuid()
 
   return (
@@ -41,14 +34,7 @@ const LabeledTextBox = ({
           style={{ transform: 'translateY(-50%)' }}
         >
           {labelText}
-          {warning && (
-            <Image
-              src={warningSrc}
-              title={common.WarningLabel}
-              unoptimized
-              className={styles.warning}
-            />
-          )}
+          {warning && <InfoIcon className="fill-red ml-0.5 h-3 w-3" />}
         </span>
       )}
       {children}

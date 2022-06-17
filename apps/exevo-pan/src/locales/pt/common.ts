@@ -106,7 +106,6 @@ export default {
     invalid: 'Campo inválido',
     loading: 'Validando...',
   },
-  WarningLabel: 'Cuidado!',
   Of: 'de',
   Paginator: {
     FirstLabel: 'Ir para a primeira página',

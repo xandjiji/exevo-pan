@@ -106,7 +106,6 @@ export default {
     invalid: 'Pole jest nieprawidłowe',
     loading: 'Podsumowywanie...',
   },
-  WarningLabel: 'Ostrzeżenie!',
   Of: 'z',
   Paginator: {
     FirstLabel: 'Idź do pierwszej strony',
