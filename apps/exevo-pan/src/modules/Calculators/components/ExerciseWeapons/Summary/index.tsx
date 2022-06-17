@@ -71,7 +71,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           <Chip>
             <Text.TibiaCoin value={cost.tc} />
           </Chip>
-          <span className="-mx-2.5">or</span>
+          <span className="-mx-2.5 font-light">or</span>
           <Chip>
             <Text.GoldCoin value={cost.gold} />
           </Chip>
@@ -102,6 +102,18 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             </Chip>
           )}
         </S.ChipWrapper>
+      </S.Group>
+
+      <S.Group>
+        <p>
+          <strong>Time required</strong>
+        </p>
+        <div className="grid w-fit auto-cols-fr grid-flow-col gap-4">
+          <S.TimeBubble time={2701}>years</S.TimeBubble>
+          <S.TimeBubble time={16}>days</S.TimeBubble>
+          <S.TimeBubble time={8}>hours</S.TimeBubble>
+          <S.TimeBubble time={3}>minutes</S.TimeBubble>
+        </div>
       </S.Group>
     </Card>
   )
