@@ -1,15 +1,11 @@
-import {
-  ExtendedProps,
-  CustomProps,
-  LabelProps,
-} from 'components/Atoms/Input/types'
+import { ExtendedProps, CustomProps } from 'components/Atoms/Input/types'
 
 export type AutocompleteInputProps = {
   itemList?: Option[]
   placeholder?: string
   onItemSelect?: (selectedItem: Option) => void
 } & CustomProps &
-  LabelProps &
+  AccessibleLabelProps &
   Omit<ExtendedProps, 'ref'>
 
 export interface AutocompleteInputState {
