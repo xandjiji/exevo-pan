@@ -16,7 +16,7 @@ export const ChipWrapper = ({
 }: JSX.IntrinsicElements['div']) => (
   <div
     className={clsx(
-      'child:flex child:relative child:gap-1.5 flex items-center gap-4',
+      'child:flex child:shrink-0 child:relative child:gap-1.5 flex items-center gap-4',
       className,
     )}
     {...props}

@@ -52,7 +52,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         onChange={(e) => setSkill(e.target.value as Skill)}
       />
 
-      <div className="flex gap-8">
+      <div className="grid items-start gap-4 sm:flex sm:gap-8">
         <div className="flex items-end gap-2">
           <Input
             label="Current skill"
@@ -61,11 +61,11 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
             onChange={(e) => setCurrentSkill(+e.target.value)}
             error={invalidSkill}
             noAlert
-            className="w-20"
+            className="w-full sm:w-20"
           />
           <ChevronRight
             className={clsx(
-              'mb-1.5',
+              'mb-1.5 shrink-0',
               invalidSkill ? 'fill-red' : 'fill-onSurface',
             )}
           />
@@ -76,7 +76,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
             onChange={(e) => setTargetSkill(+e.target.value)}
             error={invalidSkill}
             noAlert
-            className="w-20"
+            className="w-full sm:w-20"
           />
         </div>
 

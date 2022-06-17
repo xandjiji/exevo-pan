@@ -77,10 +77,8 @@ export default function Statistics() {
       </Head>
 
       <Main>
-        <main>
-          <div style={{ padding: 80 }}>
-            <ExerciseWeapons />
-          </div>
+        <main className="inner-container">
+          <ExerciseWeapons />
         </main>
       </Main>
     </>

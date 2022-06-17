@@ -14,11 +14,6 @@ import * as S from './atoms'
 import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
-/* @ ToDo:
-- Equivalente a X tempo offline
-
-*/
-
 const Summary = ({ pointsRequired }: SummaryProps) => {
   const [hasDummy, setHasDummy] = useState(false)
   const [isDouble, setIsDouble] = useState(false)
@@ -44,7 +39,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
 
   return (
     <Card>
-      <div className="flex items-start justify-between gap-4">
+      <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
         <div className="grid gap-4">
           <Checkbox
             label="Exercise dummy"
@@ -87,7 +82,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         <p>
           <strong>Weapons</strong>
         </p>
-        <S.ChipWrapper>
+        <S.ChipWrapper className="flex-wrap">
           {!!weaponsRequired.lasting && (
             <Chip>
               <S.Weapon.lasting /> lasting weapons

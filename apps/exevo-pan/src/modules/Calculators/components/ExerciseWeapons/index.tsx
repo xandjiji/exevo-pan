@@ -6,7 +6,7 @@ export const ExerciseWeapons = () => {
   const [pointsRequired, setPointsRequired] = useState(0)
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 lg:grid-cols-2">
       <CharacterConfig updatePointsRequired={setPointsRequired} />
       <Summary pointsRequired={pointsRequired} />
     </div>
