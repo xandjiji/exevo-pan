@@ -71,7 +71,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           <Chip>
             <Text.TibiaCoin value={cost.tc} />
           </Chip>
-          <span className="-mx-1">or</span>
+          <span className="-mx-2.5">or</span>
           <Chip>
             <Text.GoldCoin value={cost.gold} />
           </Chip>
@@ -82,7 +82,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         <p>
           <strong>Weapons</strong>
         </p>
-        <S.ChipWrapper separator>
+        <S.ChipWrapper>
           {!!weaponsRequired.lasting && (
             <Chip>
               <S.Weapon.lasting /> lasting weapons
