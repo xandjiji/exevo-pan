@@ -74,3 +74,13 @@ export const calculateCost = (weaponObject: WeaponsObject) => {
 
   return { gold, tc, seconds }
 }
+
+const SECONDS_IN_A_MINUTE = 60
+const SECONDS_IN_AN_HOUR = 3600
+const SECONDS_IN_A_DAY = 86400
+
+export const secondsToTimeObject = (seconds: number) => ({
+  days: Math.floor(seconds / SECONDS_IN_A_DAY),
+  hours: Math.floor((seconds % SECONDS_IN_A_DAY) / SECONDS_IN_AN_HOUR),
+  minutes: Math.ceil((seconds % SECONDS_IN_AN_HOUR) / SECONDS_IN_A_MINUTE),
+})

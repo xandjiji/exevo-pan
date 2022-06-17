@@ -34,7 +34,7 @@ export const ActiveCount: typeof BaseActiveCount = (args) => (
 export const TimeBubble = ({ time, children }: TimeBubbleProps) => (
   <div className="flex flex-col items-center gap-1 font-light">
     <Chip>{time}</Chip>
-    {children}
+    <small>{children}</small>
   </div>
 )
 

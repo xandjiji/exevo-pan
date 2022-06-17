@@ -6,6 +6,7 @@ import {
   autoRequiredWeaponsCount,
   customRequiredWeaponsCount,
   calculateCost,
+  secondsToTimeObject,
 } from './utils'
 import { weaponOptions } from './options'
 import * as S from './atoms'
@@ -13,8 +14,6 @@ import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 /* @ ToDo:
-
-- Tempo
 - Equivalente a X tempo offline
 
 */
@@ -36,6 +35,11 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
 
   const cost = useMemo(() => calculateCost(weaponsRequired), [weaponsRequired])
+
+  const timeObject = useMemo(
+    () => secondsToTimeObject(cost.seconds),
+    [cost.seconds],
+  )
 
   return (
     <Card>
@@ -71,7 +75,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           <Chip>
             <Text.TibiaCoin value={cost.tc} />
           </Chip>
-          <span className="-mx-2.5 font-light">or</span>
+          <small className="-mx-2.5 font-light">or</small>
           <Chip>
             <Text.GoldCoin value={cost.gold} />
           </Chip>
@@ -101,6 +105,9 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
               <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
             </Chip>
           )}
+          {!Object.values(weaponsRequired).some((amount) => amount > 0) && (
+            <small>None</small>
+          )}
         </S.ChipWrapper>
       </S.Group>
 
@@ -109,10 +116,15 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           <strong>Time required</strong>
         </p>
         <div className="grid w-fit auto-cols-fr grid-flow-col gap-4">
-          <S.TimeBubble time={2701}>years</S.TimeBubble>
-          <S.TimeBubble time={16}>days</S.TimeBubble>
-          <S.TimeBubble time={8}>hours</S.TimeBubble>
-          <S.TimeBubble time={3}>minutes</S.TimeBubble>
+          {!!timeObject && (
+            <S.TimeBubble time={timeObject.days}>days</S.TimeBubble>
+          )}
+          {!!timeObject && (
+            <S.TimeBubble time={timeObject.hours}>hours</S.TimeBubble>
+          )}
+          {!!timeObject && (
+            <S.TimeBubble time={timeObject.minutes}>minutes</S.TimeBubble>
+          )}
         </div>
       </S.Group>
     </Card>
