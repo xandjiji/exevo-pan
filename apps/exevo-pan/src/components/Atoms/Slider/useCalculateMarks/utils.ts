@@ -13,7 +13,7 @@ export const generateAllMarks = (
     marks.push({
       value,
       label: transformDisplayedValues(value),
-      leftOffset: getLeftOffset(value, [min, max]),
+      leftOffset: getLeftOffset(value, [min, max], false),
     })
   }
 

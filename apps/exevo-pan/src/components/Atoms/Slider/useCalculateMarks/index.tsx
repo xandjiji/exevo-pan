@@ -17,7 +17,7 @@ const useCalculateMarks = ({
 
     const calculatedMarks: CalculatedMarks[] = markProps.map((mark) => ({
       ...mark,
-      leftOffset: getLeftOffset(mark.value, range),
+      leftOffset: getLeftOffset(mark.value, range, false),
     }))
     return calculatedMarks
   }, [markProps, step, range, transformDisplayedValues])
