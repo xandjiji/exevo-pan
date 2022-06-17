@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect } from 'react'
 import clsx from 'clsx'
 import { Input, Slider } from 'components/Atoms'
-import { ChipGroup } from 'components/Organisms'
+import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { Card } from '../../layout'
 import { vocationOptions, skillOptions } from './options'
@@ -55,7 +55,13 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
       <div className="grid items-start gap-4 sm:flex sm:gap-8">
         <div className="flex items-end gap-2">
           <Input
-            label="Current skill"
+            label={
+              <span className="flex items-center gap-1 whitespace-nowrap">
+                Current skill
+                <InfoTooltip content="Base + Loyalty" className="h-3 w-3" />
+              </span>
+            }
+            aria-label="Current skill"
             type="number"
             value={currentSkill}
             onChange={(e) => setCurrentSkill(+e.target.value)}

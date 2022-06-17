@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { Checkbox, Text, Chip } from 'components/Atoms'
-import { Select } from 'components/Organisms'
+import { Select, InfoTooltip } from 'components/Organisms'
 import { Card } from '../../layout'
 import {
   autoRequiredWeaponsCount,
@@ -64,10 +64,20 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
       </div>
 
       <S.Group>
-        <p>
+        <div className="flex items-center gap-1">
           <strong>Money cost</strong>
-        </p>
-        <S.ChipWrapper>
+          <InfoTooltip
+            className="h-3 w-3"
+            content={
+              <span className="block w-36 leading-tight">
+                If the TC price is <strong>higher</strong> than{' '}
+                <Text.GoldCoin value={10500} /> gp then you buy exercise weapons
+                using <strong>gold</strong>.
+              </span>
+            }
+          />
+        </div>
+        <S.ChipWrapper className="shrink-0 flex-wrap">
           <Chip>
             <Text.TibiaCoin value={cost.tc} />
           </Chip>
