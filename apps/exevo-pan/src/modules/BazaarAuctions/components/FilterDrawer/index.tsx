@@ -8,7 +8,7 @@ import {
   Slider,
   Checkbox,
 } from 'components/Atoms'
-import { Tooltip } from 'components/Organisms'
+import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
@@ -550,16 +550,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <S.AutocompleteInput
                 id="rare-items-input"
                 label={
-                  <>
+                  <span className="flex items-center gap-1">
                     {homepage.FilterDrawer.labels.rareItems}
-                    <Tooltip
-                      offset={[0, 8]}
-                      placement="top"
+                    <InfoTooltip
+                      className="h-3 w-3"
                       content={homepage.FilterDrawer.tooltips.rareItems}
-                    >
-                      <Icon.Exclamation />
-                    </Tooltip>
-                  </>
+                    />
+                  </span>
                 }
                 aria-label={homepage.FilterDrawer.labels.rareItems}
                 aria-controls="rare-items-list"

@@ -80,7 +80,3 @@ export const Status = ({ color }: StatusStyleProps) => (
     )}
   />
 )
-
-export const Exclamation = () => (
-  <div className="border-separator after:text-tsm after:text-separator m-1 grid h-[17px] w-[17px] place-items-center rounded-full border-2 border-solid after:font-bold after:content-['!']" />
-)
