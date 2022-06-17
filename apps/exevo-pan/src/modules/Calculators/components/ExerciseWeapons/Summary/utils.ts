@@ -84,3 +84,6 @@ export const secondsToTimeObject = (seconds: number) => ({
   hours: Math.floor((seconds % SECONDS_IN_A_DAY) / SECONDS_IN_AN_HOUR),
   minutes: Math.ceil((seconds % SECONDS_IN_AN_HOUR) / SECONDS_IN_A_MINUTE),
 })
+
+export const isObjectEmpty = (object: Record<string, number>): boolean =>
+  !Object.values(object).some((amount) => amount !== 0)

@@ -7,6 +7,7 @@ import {
   customRequiredWeaponsCount,
   calculateCost,
   secondsToTimeObject,
+  isObjectEmpty,
 } from './utils'
 import { weaponOptions } from './options'
 import * as S from './atoms'
@@ -105,9 +106,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
               <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
             </Chip>
           )}
-          {!Object.values(weaponsRequired).some((amount) => amount > 0) && (
-            <small>None</small>
-          )}
+          {isObjectEmpty(weaponsRequired) && <small>None</small>}
         </S.ChipWrapper>
       </S.Group>
 
@@ -116,15 +115,16 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           <strong>Time required</strong>
         </p>
         <div className="grid w-fit auto-cols-fr grid-flow-col gap-4">
-          {!!timeObject && (
+          {!!timeObject.days && (
             <S.TimeBubble time={timeObject.days}>days</S.TimeBubble>
           )}
-          {!!timeObject && (
+          {!!timeObject.hours && (
             <S.TimeBubble time={timeObject.hours}>hours</S.TimeBubble>
           )}
-          {!!timeObject && (
+          {!!timeObject.minutes && (
             <S.TimeBubble time={timeObject.minutes}>minutes</S.TimeBubble>
           )}
+          {isObjectEmpty(timeObject) && <small>None</small>}
         </div>
       </S.Group>
     </Card>
