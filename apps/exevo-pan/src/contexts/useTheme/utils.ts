@@ -1,8 +1,9 @@
 import Themes, { DEFAULT_THEME } from 'styles/themes'
+import { isServer } from 'utils'
 import { localStorageKeys } from 'Constants'
 
 export const getInitialTheme = (): string => {
-  if (typeof window !== 'undefined') {
+  if (!isServer()) {
     const persistedColorPreference = window.localStorage.getItem(
       localStorageKeys.THEME_DATA,
     )
