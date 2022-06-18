@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react'
+import { useMemo } from 'react'
+import { useStoredState } from 'hooks'
 import { Checkbox, Text, Chip } from 'components/Atoms'
 import { Select, InfoTooltip } from 'components/Organisms'
 import { Card } from '../../layout'
@@ -15,9 +16,12 @@ import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 const Summary = ({ pointsRequired }: SummaryProps) => {
-  const [hasDummy, setHasDummy] = useState(false)
-  const [isDouble, setIsDouble] = useState(false)
-  const [exerciseWeapon, setExerciseWeapon] = useState<WeaponOption>('auto')
+  const [hasDummy, setHasDummy] = useStoredState('ew-dummy', false)
+  const [isDouble, setIsDouble] = useStoredState('ew-double', false)
+  const [exerciseWeapon, setExerciseWeapon] = useStoredState<WeaponOption>(
+    'ew-exerciseWeapon',
+    'auto',
+  )
 
   const weaponsRequired: WeaponsObject = useMemo(() => {
     const finalPointsRequired =

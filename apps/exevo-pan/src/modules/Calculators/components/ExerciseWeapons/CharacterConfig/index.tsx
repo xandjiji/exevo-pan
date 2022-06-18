@@ -1,5 +1,6 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useMemo, useEffect } from 'react'
 import clsx from 'clsx'
+import { useStoredState } from 'hooks'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
@@ -9,12 +10,18 @@ import { calculateRequiredPoints } from './utils'
 import { CharacterConfigProps, Vocation, Skill } from './types'
 
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
-  const [vocation, setVocation] = useState<Vocation>('knight')
-  const [skill, setSkill] = useState<Skill>('melee')
-  const [currentSkill, setCurrentSkill] = useState(100)
-  const [targetSkill, setTargetSkill] = useState(120)
-  const [loyaltyBonus, setLoyaltyBonus] = useState(0)
-  const [percentageLeft, setPercentageLeft] = useState(50)
+  const [vocation, setVocation] = useStoredState<Vocation>(
+    'ew-vocation',
+    'knight',
+  )
+  const [skill, setSkill] = useStoredState<Skill>('ew-skill', 'melee')
+  const [currentSkill, setCurrentSkill] = useStoredState('ew-currentSkill', 100)
+  const [targetSkill, setTargetSkill] = useStoredState('ew-targetSkill', 120)
+  const [loyaltyBonus, setLoyaltyBonus] = useStoredState('ew-loyalty', 0)
+  const [percentageLeft, setPercentageLeft] = useStoredState(
+    'ew-percentageLeft',
+    50,
+  )
 
   const pointsRequired = useMemo(
     () =>
