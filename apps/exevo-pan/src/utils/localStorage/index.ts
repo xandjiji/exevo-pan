@@ -7,11 +7,15 @@ export function saveToLocalStorage<T>(key: string, data: T): void {
 
 export function getFromLocalStorage<T>(key: string, fallbackObject: T): T {
   if (typeof window !== 'undefined') {
-    const serializedData = localStorage.getItem(key)
+    try {
+      const serializedData = localStorage.getItem(key)
 
-    if (!serializedData) return fallbackObject
+      if (!serializedData) return fallbackObject
 
-    return JSON.parse(serializedData)
+      return JSON.parse(serializedData)
+    } catch {
+      return fallbackObject
+    }
   }
 
   return fallbackObject
