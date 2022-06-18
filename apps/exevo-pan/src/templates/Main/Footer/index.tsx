@@ -31,7 +31,7 @@ const Footer = () => {
   } = useTranslations()
 
   return (
-    <footer className="bg-primary text-onPrimary inner-container z-71 relative py-6 text-xs tracking-wider transition-colors">
+    <footer className="bg-primary text-onPrimary inner-container z-footer relative py-6 text-xs tracking-wider transition-colors">
       <nav className="inner-container">
         <ul className="flex flex-wrap items-center justify-center gap-3">
           {listItems.map(({ href, content }) => (
