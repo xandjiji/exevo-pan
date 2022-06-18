@@ -16,6 +16,7 @@ import {
   useIsomorphicLayoutEffect,
   useIsMounted,
 } from 'hooks'
+import { isServer } from 'utils'
 import {
   defaultTransform,
   clampValue,
@@ -52,6 +53,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       marks,
       disabled = false,
       invert = false,
+      ssr,
       ...props
     } = componentProps
 
@@ -138,6 +140,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       transformDisplayedValues,
     })
     const hasMarks = !!calculatedMarks.length
+
+    if (ssr && isServer()) return null
 
     return (
       <div
