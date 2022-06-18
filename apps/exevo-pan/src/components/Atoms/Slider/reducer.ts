@@ -34,7 +34,7 @@ const SliderReducer = (state: SliderState, action: Action): SliderState => {
     }
 
     case 'SET_VALUE':
-      if (action.value === state.inputValue) return state
+      if (action.value === parseFloat(state.inputValue.toString())) return state
       return {
         ...state,
         innerValue: action.value,
