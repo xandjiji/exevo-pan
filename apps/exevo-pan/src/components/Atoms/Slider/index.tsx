@@ -158,7 +158,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
           <div className="relative w-full">
             <div
               className={clsx(
-                'group relative flex h-1 w-full items-center rounded-3xl pr-4',
+                'group relative flex h-1 w-full touch-none items-center rounded-3xl pr-4',
                 disabled
                   ? 'bg-separator/40 pointer-events-none'
                   : 'bg-primaryVariant cursor-pointer',

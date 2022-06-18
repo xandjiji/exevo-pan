@@ -152,6 +152,7 @@ const RangeSliderInput = ({
           tabIndex={0}
           onKeyDown={(event) => handleKeyPress(event)}
           isMousePressed={track.isMousePressed}
+          className="touch-none"
           {...track.binders}
         >
           <Cursor
