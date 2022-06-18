@@ -1,8 +1,9 @@
 import { useMemo, useEffect } from 'react'
 import clsx from 'clsx'
 import { useStoredState } from 'hooks'
+import { isServer } from 'utils'
 import { Input, Slider } from 'components/Atoms'
-import { ChipGroup, InfoTooltip } from 'components/Organisms'
+import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { Card } from '../../layout'
 import { vocationOptions, skillOptions } from './options'
@@ -45,19 +46,21 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
 
   return (
     <Card>
-      <ChipGroup
-        label="Vocation"
-        options={vocationOptions}
-        value={vocation}
-        onChange={(e) => setVocation(e.target.value as Vocation)}
-      />
+      <ClientComponent className="grid gap-4">
+        <ChipGroup
+          label="Vocation"
+          options={vocationOptions}
+          value={vocation}
+          onChange={(e) => setVocation(e.target.value as Vocation)}
+        />
 
-      <ChipGroup
-        label="Skill"
-        options={skillOptions}
-        value={skill}
-        onChange={(e) => setSkill(e.target.value as Skill)}
-      />
+        <ChipGroup
+          label="Skill"
+          options={skillOptions}
+          value={skill}
+          onChange={(e) => setSkill(e.target.value as Skill)}
+        />
+      </ClientComponent>
 
       <div className="grid items-start gap-4 sm:flex sm:gap-8">
         <div className="flex items-end gap-2">
@@ -104,6 +107,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
           value={percentageLeft}
           onChange={(e) => setPercentageLeft(+e.target.value)}
           className="flex-grow"
+          ssr
         />
       </div>
 
@@ -133,6 +137,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         ]}
         value={loyaltyBonus}
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
+        ssr
       />
     </Card>
   )

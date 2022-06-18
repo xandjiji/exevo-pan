@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
 import { useStoredState } from 'hooks'
+import { isServer } from 'utils'
 import { Checkbox, Text, Chip } from 'components/Atoms'
-import { Select, InfoTooltip } from 'components/Organisms'
+import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
 import { Card } from '../../layout'
 import {
   autoRequiredWeaponsCount,
@@ -44,7 +45,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   return (
     <Card>
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
-        <div className="grid gap-4">
+        <ClientComponent className="grid gap-4">
           <Checkbox
             label="Exercise dummy"
             checked={hasDummy}
@@ -55,7 +56,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             checked={isDouble}
             onChange={(e) => setIsDouble(e.target.checked)}
           />
-        </div>
+        </ClientComponent>
 
         <Select
           label="Weapon charges"
@@ -75,8 +76,8 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             content={
               <span className="block w-36 leading-tight">
                 If the TC price is <strong>higher</strong> than{' '}
-                <Text.GoldCoin value={10500} /> gp then you buy exercise weapons
-                using <strong>gold</strong>.
+                <Text.GoldCoin value={10500} /> gp then you should buy exercise
+                weapons using <strong>gold</strong>.
               </span>
             }
           />
