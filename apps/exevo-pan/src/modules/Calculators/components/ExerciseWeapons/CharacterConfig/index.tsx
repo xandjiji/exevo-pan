@@ -1,12 +1,12 @@
-import { useMemo, useEffect } from 'react'
+import { useMemo, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
 import { useStoredState } from 'hooks'
-import { isServer } from 'utils'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { Card } from '../../layout'
 import { vocationOptions, skillOptions } from './options'
+import { MARKS } from './constants'
 import { calculateRequiredPoints } from './utils'
 import { CharacterConfigProps, Vocation, Skill } from './types'
 
@@ -117,24 +117,11 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         max={50}
         step={5}
         displayValue
-        transformDisplayedValues={(value) => {
-          if (!value) return 'None'
-
-          return `${value * 72} points`
-        }}
-        marks={[
-          { label: 'None', value: 0 },
-          { label: '5%', value: 5 },
-          { label: '10%', value: 10 },
-          { label: '15%', value: 15 },
-          { label: '20%', value: 20 },
-          { label: '25%', value: 25 },
-          { label: '30%', value: 30 },
-          { label: '35%', value: 35 },
-          { label: '40%', value: 40 },
-          { label: '45%', value: 45 },
-          { label: '50%', value: 50 },
-        ]}
+        transformDisplayedValues={useCallback(
+          (value) => (value ? `${value * 72} points` : 'None'),
+          [],
+        )}
+        marks={MARKS}
         value={loyaltyBonus}
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
         ssr
