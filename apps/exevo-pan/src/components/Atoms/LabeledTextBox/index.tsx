@@ -28,10 +28,10 @@ const LabeledTextBox = ({
           id={labelId}
           suppressHydrationWarning
           className={clsx(
-            'bg-surface absolute top-0 left-2 flex select-none items-center px-1 text-[9px] font-light uppercase tracking-wider',
+            'absolute top-0 left-2 flex select-none items-center px-1 text-[9px] font-light uppercase tracking-wider',
             warning ? 'text-red' : 'text-onSurface',
           )}
-          style={{ transform: 'translateY(-50%)' }}
+          style={{ transform: 'translateY(-50%)', backgroundColor: 'inherit' }}
         >
           {labelText}
           {warning && <InfoIcon className="fill-red ml-0.5 h-3 w-3" />}

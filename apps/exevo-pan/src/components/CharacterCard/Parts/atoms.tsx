@@ -6,7 +6,7 @@ export const LabeledTextBox: typeof BaseLabeledTextBox = ({
   ...props
 }) => (
   <BaseLabeledTextBox
-    className={clsx('text-s flex items-center gap-1', className)}
+    className={clsx('text-s bg-surface flex items-center gap-1', className)}
     {...props}
   />
 )
