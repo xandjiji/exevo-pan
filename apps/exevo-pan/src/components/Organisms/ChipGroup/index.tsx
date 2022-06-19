@@ -20,7 +20,7 @@ const Option = ({ groupName, name, value, ...props }: OptionProps) => {
         name={groupName}
         value={value}
         tabIndex={-1}
-        className={clsx('absolute h-0 w-0')}
+        className={clsx('-z-1 absolute h-0 w-0')}
         {...props}
       />
       {name}
