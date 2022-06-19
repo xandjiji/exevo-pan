@@ -26,7 +26,7 @@ export const ChipWrapper = ({
 export const Chip = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div
     className={clsx(
-      'bg-separator/60 rounded-xl py-1.5 px-3 font-normal',
+      'bg-separator/60 flex items-center rounded-xl py-1.5 px-3 font-normal',
       className,
     )}
     {...props}

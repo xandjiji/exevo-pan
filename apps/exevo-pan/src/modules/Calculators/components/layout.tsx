@@ -1,5 +1,15 @@
 import clsx from 'clsx'
 
+export const Main = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['main']) => (
+  <main
+    className={clsx('inner-container grid place-items-center py-4', className)}
+    {...props}
+  />
+)
+
 export const Card = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div
     className={clsx(

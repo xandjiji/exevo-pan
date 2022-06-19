@@ -77,9 +77,7 @@ export default function Statistics() {
       </Head>
 
       <Main>
-        <main className="inner-container">
-          <ExerciseWeapons />
-        </main>
+        <ExerciseWeapons />
       </Main>
     </>
   )
