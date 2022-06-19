@@ -1,0 +1,3 @@
+.hidden {
+  @apply hidden-accessibility:order-5 hidden-accessibility:opacity-0 hidden-accessibility:select-none;
+}

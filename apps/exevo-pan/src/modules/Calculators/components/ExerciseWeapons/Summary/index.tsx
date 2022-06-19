@@ -2,6 +2,7 @@ import { useMemo } from 'react'
 import { useStoredState } from 'hooks'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
+import { isServer } from 'utils'
 import { Card } from '../../layout'
 import {
   autoRequiredWeaponsCount,
@@ -40,6 +41,8 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
     () => secondsToTimeObject(cost.seconds),
     [cost.seconds],
   )
+
+  const isClient = !isServer()
 
   return (
     <Card>
@@ -96,45 +99,54 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         <p>
           <strong>Weapons</strong>
         </p>
-        <S.ChipWrapper className="flex-wrap">
-          {!!weaponsRequired.lasting && (
-            <S.Chip>
+        <ClientComponent>
+          <S.ChipWrapper className="flex-wrap">
+            <S.Chip aria-hidden={!weaponsRequired.lasting}>
               <S.Weapon.lasting /> lasting weapons
               <S.ActiveCount>{weaponsRequired.lasting}x</S.ActiveCount>
             </S.Chip>
-          )}
-          {!!weaponsRequired.durable && (
-            <S.Chip>
+            <S.Chip aria-hidden={!weaponsRequired.durable}>
               <S.Weapon.durable /> durable weapons
               <S.ActiveCount>{weaponsRequired.durable}x</S.ActiveCount>
             </S.Chip>
-          )}
-          {!!weaponsRequired.regular && (
-            <S.Chip>
+            <S.Chip aria-hidden={!weaponsRequired.regular}>
               <S.Weapon.regular /> regular weapons
               <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
             </S.Chip>
-          )}
-          {isObjectEmpty(weaponsRequired) && <small>None</small>}
-        </S.ChipWrapper>
+            <S.Empty aria-hidden={!isObjectEmpty(weaponsRequired)}>
+              None
+            </S.Empty>
+          </S.ChipWrapper>
+        </ClientComponent>
       </S.Group>
 
       <S.Group>
         <p>
           <strong>Time required</strong>
         </p>
-        <div className="grid w-fit auto-cols-fr grid-flow-col gap-4">
-          {!!timeObject.days && (
-            <S.TimeBubble time={timeObject.days}>days</S.TimeBubble>
-          )}
-          {!!timeObject.hours && (
-            <S.TimeBubble time={timeObject.hours}>hours</S.TimeBubble>
-          )}
-          {!!timeObject.minutes && (
-            <S.TimeBubble time={timeObject.minutes}>minutes</S.TimeBubble>
-          )}
-          {isObjectEmpty(timeObject) && <small>None</small>}
-        </div>
+        <ClientComponent>
+          <S.ChipWrapper>
+            <S.TimeBubble
+              time={timeObject.days}
+              aria-hidden={isClient && !timeObject.days}
+            >
+              days
+            </S.TimeBubble>
+            <S.TimeBubble
+              time={timeObject.hours}
+              aria-hidden={!timeObject.hours}
+            >
+              hours
+            </S.TimeBubble>
+            <S.TimeBubble
+              time={timeObject.minutes}
+              aria-hidden={!timeObject.minutes}
+            >
+              minutes
+            </S.TimeBubble>
+            <S.Empty aria-hidden={!isObjectEmpty(timeObject)}>None</S.Empty>
+          </S.ChipWrapper>
+        </ClientComponent>
       </S.Group>
     </Card>
   )

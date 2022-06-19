@@ -63,7 +63,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
       </ClientComponent>
 
       <div className="grid items-start gap-4 sm:flex sm:gap-8">
-        <div className="flex items-end gap-2">
+        <ClientComponent className="flex items-end gap-2">
           <Input
             label={
               <span className="flex items-center gap-1 whitespace-nowrap">
@@ -94,7 +94,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
             noAlert
             className="w-full sm:w-20"
           />
-        </div>
+        </ClientComponent>
 
         <Slider
           label="% left"

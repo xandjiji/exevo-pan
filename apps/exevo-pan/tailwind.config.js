@@ -174,6 +174,7 @@ module.exports = {
     plugin(function ({ addVariant }) {
       addVariant('hocus', ['&:hover', '&:focus'])
       addVariant('currentpage', "&[aria-current='page']")
+      addVariant('hidden-accessibility', "&[aria-hidden='true']")
       addVariant('child', '& > *')
     }),
   ],

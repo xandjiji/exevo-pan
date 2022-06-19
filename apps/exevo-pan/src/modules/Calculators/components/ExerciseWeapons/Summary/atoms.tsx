@@ -4,6 +4,7 @@ import Image from 'next/image'
 import lastingSrc from 'assets/lastingSword.gif'
 import durableSrc from 'assets/durableSword.gif'
 import regularSrc from 'assets/regularSword.gif'
+import styles from './styles.module.css'
 import { TimeBubbleProps } from './types'
 
 export const Group = (args: JSX.IntrinsicElements['div']) => (
@@ -16,7 +17,7 @@ export const ChipWrapper = ({
 }: JSX.IntrinsicElements['div']) => (
   <div
     className={clsx(
-      'child:flex child:shrink-0 child:relative child:gap-1.5 flex items-center gap-4',
+      'child:flex child:shrink-0 child:relative child:gap-1.5 relative flex items-center gap-4',
       className,
     )}
     {...props}
@@ -26,7 +27,8 @@ export const ChipWrapper = ({
 export const Chip = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div
     className={clsx(
-      'bg-separator/60 flex items-center rounded-xl py-1.5 px-3 font-normal',
+      'bg-separator/60 flex items-center rounded-xl py-1.5 px-3 font-normal transition-colors',
+      styles.hidden,
       className,
     )}
     {...props}
@@ -41,11 +43,33 @@ export const ActiveCount: typeof BaseActiveCount = (args) => (
   />
 )
 
-export const TimeBubble = ({ time, children }: TimeBubbleProps) => (
-  <div className="flex flex-col items-center gap-1 font-light">
+export const TimeBubble = ({
+  time,
+  children,
+  className,
+  ...props
+}: TimeBubbleProps) => (
+  <div
+    className={clsx(
+      'flex flex-col items-center gap-1 font-light',
+      styles.hidden,
+      className,
+    )}
+    {...props}
+  >
     <Chip>{time}</Chip>
     <small>{children}</small>
   </div>
+)
+
+export const Empty = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['small']) => (
+  <small
+    className={clsx('!absolute top-0 left-0', styles.hidden, className)}
+    {...props}
+  />
 )
 
 export const Weapon = {
