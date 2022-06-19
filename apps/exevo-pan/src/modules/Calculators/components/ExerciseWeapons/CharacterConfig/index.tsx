@@ -4,7 +4,7 @@ import { useStoredState } from 'hooks'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
-import { Card } from '../../layout'
+import { LabeledCard } from '../../layout'
 import { vocationOptions, skillOptions } from './options'
 import { MARKS } from './constants'
 import { calculateRequiredPoints } from './utils'
@@ -45,7 +45,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
   const invalidSkill = targetSkill <= currentSkill
 
   return (
-    <Card>
+    <LabeledCard labelText="Character">
       <ClientComponent className="grid gap-4">
         <ChipGroup
           label="Vocation"
@@ -126,7 +126,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
         ssr
       />
-    </Card>
+    </LabeledCard>
   )
 }
 

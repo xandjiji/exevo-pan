@@ -3,7 +3,7 @@ import { useStoredState } from 'hooks'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
 import { isServer } from 'utils'
-import { Card } from '../../layout'
+import { LabeledCard } from '../../layout'
 import {
   autoRequiredWeaponsCount,
   customRequiredWeaponsCount,
@@ -45,7 +45,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   const isClient = !isServer()
 
   return (
-    <Card>
+    <LabeledCard labelText="Extra">
       <div className="flex flex-col items-start justify-between gap-4 sm:flex-row">
         <ClientComponent className="grid gap-4">
           <Checkbox
@@ -148,7 +148,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           </S.ChipWrapper>
         </ClientComponent>
       </S.Group>
-    </Card>
+    </LabeledCard>
   )
 }
 

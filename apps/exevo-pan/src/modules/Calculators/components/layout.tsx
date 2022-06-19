@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { LabeledTextBox } from 'components/Atoms'
 
 export const Main = ({
   className,
@@ -10,12 +11,13 @@ export const Main = ({
   />
 )
 
-export const Card = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
-  <div
+export const LabeledCard: typeof LabeledTextBox = ({ className, ...props }) => (
+  <LabeledTextBox
     className={clsx(
-      'border-separator focus-within:border-primaryVariant border-1 grid gap-4 rounded-md border-solid p-4 px-6 transition-colors',
+      'bg-background focus-within:border-primaryVariant grid gap-4 transition-colors',
       className,
     )}
+    style={{ padding: '16px 24px' }}
     {...props}
   />
 )
