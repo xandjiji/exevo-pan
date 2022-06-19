@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { ActiveCount as BaseActiveCount, Chip } from 'components/Atoms'
+import { ActiveCount as BaseActiveCount } from 'components/Atoms'
 import Image from 'next/image'
 import lastingSrc from 'assets/lastingSword.gif'
 import durableSrc from 'assets/durableSword.gif'
@@ -17,6 +17,16 @@ export const ChipWrapper = ({
   <div
     className={clsx(
       'child:flex child:shrink-0 child:relative child:gap-1.5 flex items-center gap-4',
+      className,
+    )}
+    {...props}
+  />
+)
+
+export const Chip = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
+  <div
+    className={clsx(
+      'bg-separator/60 rounded-xl py-1.5 px-3 font-normal',
       className,
     )}
     {...props}

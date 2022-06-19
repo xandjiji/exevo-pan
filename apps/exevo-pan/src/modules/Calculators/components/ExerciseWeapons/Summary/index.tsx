@@ -1,7 +1,6 @@
 import { useMemo } from 'react'
 import { useStoredState } from 'hooks'
-import { isServer } from 'utils'
-import { Checkbox, Text, Chip } from 'components/Atoms'
+import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
 import { Card } from '../../layout'
 import {
@@ -83,13 +82,13 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           />
         </div>
         <S.ChipWrapper className="shrink-0 flex-wrap">
-          <Chip>
+          <S.Chip>
             <Text.TibiaCoin value={cost.tc} />
-          </Chip>
+          </S.Chip>
           <small className="-mx-2.5 font-light">or</small>
-          <Chip>
+          <S.Chip>
             <Text.GoldCoin value={cost.gold} />
-          </Chip>
+          </S.Chip>
         </S.ChipWrapper>
       </S.Group>
 
@@ -99,22 +98,22 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         </p>
         <S.ChipWrapper className="flex-wrap">
           {!!weaponsRequired.lasting && (
-            <Chip>
+            <S.Chip>
               <S.Weapon.lasting /> lasting weapons
               <S.ActiveCount>{weaponsRequired.lasting}x</S.ActiveCount>
-            </Chip>
+            </S.Chip>
           )}
           {!!weaponsRequired.durable && (
-            <Chip>
+            <S.Chip>
               <S.Weapon.durable /> durable weapons
               <S.ActiveCount>{weaponsRequired.durable}x</S.ActiveCount>
-            </Chip>
+            </S.Chip>
           )}
           {!!weaponsRequired.regular && (
-            <Chip>
+            <S.Chip>
               <S.Weapon.regular /> regular weapons
               <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
-            </Chip>
+            </S.Chip>
           )}
           {isObjectEmpty(weaponsRequired) && <small>None</small>}
         </S.ChipWrapper>
