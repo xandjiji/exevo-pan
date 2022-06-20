@@ -126,9 +126,9 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
           (value) =>
             value
               ? `${value * 72} ${
-                  calculators.ExerciseWeapons.labels.loyalty.points
+                  calculators.ExerciseWeapons.labels.loyaltyPoints
                 }`
-              : calculators.ExerciseWeapons.labels.loyalty.none,
+              : calculators.ExerciseWeapons.labels.none,
           [calculators],
         )}
         marks={MARKS}

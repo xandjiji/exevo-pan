@@ -1,5 +1,6 @@
 import { useMemo } from 'react'
 import { useStoredState } from 'hooks'
+import { useTranslations } from 'contexts/useTranslation'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
 import { isServer } from 'utils'
@@ -17,6 +18,10 @@ import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 const Summary = ({ pointsRequired }: SummaryProps) => {
+  const {
+    translations: { calculators },
+  } = useTranslations()
+
   const [hasDummy, setHasDummy] = useStoredState('ew-dummy', false)
   const [isDouble, setIsDouble] = useStoredState('ew-double', false)
   const [exerciseWeapon, setExerciseWeapon] = useStoredState<WeaponOption>(
@@ -62,7 +67,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
           </ClientComponent>
 
           <Select
-            label="Weapon charges"
+            label={calculators.ExerciseWeapons.labels.weaponCharges}
             options={weaponOptions}
             value={exerciseWeapon}
             onChange={(e) => setExerciseWeapon(e.target.value as WeaponOption)}
@@ -72,17 +77,20 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
         </div>
       </LabeledCard>
 
-      <LabeledCard labelText="Results">
+      <LabeledCard labelText={calculators.ExerciseWeapons.labels.results}>
         <S.Group>
           <div className="flex items-center gap-1">
-            <strong>Money cost</strong>
+            <strong>{calculators.ExerciseWeapons.labels.moneyCost}</strong>
             <InfoTooltip
               className="h-3 w-3"
               content={
                 <span className="block w-36 leading-tight">
-                  If the TC price is <strong>higher</strong> than{' '}
-                  <Text.GoldCoin value={10500} /> gp then you should buy
-                  exercise weapons using <strong>gold</strong>.
+                  {calculators.ExerciseWeapons.moneyTooltip.a}{' '}
+                  <strong>{calculators.ExerciseWeapons.moneyTooltip.b}</strong>{' '}
+                  {calculators.ExerciseWeapons.moneyTooltip.c}{' '}
+                  <Text.GoldCoin value={10500} /> gp{' '}
+                  {calculators.ExerciseWeapons.moneyTooltip.d}{' '}
+                  <strong>{calculators.ExerciseWeapons.moneyTooltip.e}</strong>.
                 </span>
               }
             />
@@ -100,7 +108,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
 
         <S.Group>
           <p>
-            <strong>Weapons</strong>
+            <strong>{calculators.ExerciseWeapons.labels.weapons}</strong>
           </p>
           <ClientComponent>
             <S.ChipWrapper className="flex-wrap">
@@ -117,7 +125,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
                 <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
               </S.Chip>
               <S.Empty aria-hidden={!isObjectEmpty(weaponsRequired)}>
-                None
+                {calculators.ExerciseWeapons.labels.none}
               </S.Empty>
             </S.ChipWrapper>
           </ClientComponent>
@@ -125,7 +133,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
 
         <S.Group>
           <p>
-            <strong>Time required</strong>
+            <strong>{calculators.ExerciseWeapons.labels.time}</strong>
           </p>
           <ClientComponent>
             <S.ChipWrapper>
@@ -147,7 +155,9 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
               >
                 minutes
               </S.TimeBubble>
-              <S.Empty aria-hidden={!isObjectEmpty(timeObject)}>None</S.Empty>
+              <S.Empty aria-hidden={!isObjectEmpty(timeObject)}>
+                {calculators.ExerciseWeapons.labels.none}
+              </S.Empty>
             </S.ChipWrapper>
           </ClientComponent>
         </S.Group>
