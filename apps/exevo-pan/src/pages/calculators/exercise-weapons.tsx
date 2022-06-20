@@ -5,11 +5,11 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common, statistics } from 'locales'
+import { common, calculators } from 'locales'
 
 const pageUrl = buildUrl(routes.EXERCISE_WEAPONS)
 
-export default function Statistics() {
+export default function Calculator() {
   const { translations } = useTranslations()
 
   return (
@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
       common: common[locale as RegisteredLocale],
-      statistics: statistics[locale as RegisteredLocale],
+      calculators: calculators[locale as RegisteredLocale],
     },
   },
 })

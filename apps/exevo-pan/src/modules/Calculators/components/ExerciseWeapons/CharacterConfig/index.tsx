@@ -1,6 +1,7 @@
 import { useMemo, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
 import { useStoredState } from 'hooks'
+import { useTranslations } from 'contexts/useTranslation'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
@@ -11,6 +12,10 @@ import { calculateRequiredPoints } from './utils'
 import { CharacterConfigProps, Vocation, Skill } from './types'
 
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
+  const {
+    translations: { calculators },
+  } = useTranslations()
+
   const [vocation, setVocation] = useStoredState<Vocation>(
     'ew-vocation',
     'knight',
@@ -48,7 +53,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
     <LabeledCard labelText="Character">
       <ClientComponent className="grid gap-4">
         <ChipGroup
-          label="Vocation"
+          label={calculators.ExerciseWeapons.labels.vocation}
           options={vocationOptions}
           value={vocation}
           onChange={(e) => setVocation(e.target.value as Vocation)}
@@ -67,11 +72,11 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
           <Input
             label={
               <span className="flex items-center gap-1 whitespace-nowrap">
-                Current skill
+                {calculators.ExerciseWeapons.labels.currentSkill}
                 <InfoTooltip content="Base + Loyalty" className="h-3 w-3" />
               </span>
             }
-            aria-label="Current skill"
+            aria-label={calculators.ExerciseWeapons.labels.currentSkill}
             type="number"
             value={currentSkill}
             onChange={(e) => setCurrentSkill(+e.target.value)}
@@ -86,7 +91,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
             )}
           />
           <Input
-            label="Target skill"
+            label={calculators.ExerciseWeapons.labels.targetSkill}
             type="number"
             value={targetSkill}
             onChange={(e) => setTargetSkill(+e.target.value)}
@@ -97,7 +102,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         </ClientComponent>
 
         <Slider
-          label="% left"
+          label={calculators.ExerciseWeapons.labels.percentageLeft}
           title={`You have ${percentageLeft} percent to go`}
           min={0}
           max={100}
@@ -118,8 +123,13 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         step={5}
         displayValue
         transformDisplayedValues={useCallback(
-          (value) => (value ? `${value * 72} points` : 'None'),
-          [],
+          (value) =>
+            value
+              ? `${value * 72} ${
+                  calculators.ExerciseWeapons.labels.loyalty.points
+                }`
+              : calculators.ExerciseWeapons.labels.loyalty.none,
+          [calculators],
         )}
         marks={MARKS}
         value={loyaltyBonus}

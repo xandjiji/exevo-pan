@@ -8,7 +8,7 @@ import { common, calculators } from 'locales'
 
 const pageUrl = buildUrl(routes.CALCULATORS)
 
-export default function Statistics() {
+export default function Calculators() {
   const { translations } = useTranslations()
 
   return (

@@ -14,4 +14,16 @@ export default {
     Calculators: 'Calculators',
     ExerciseWeapons: 'Exercise weapons',
   },
+  ExerciseWeapons: {
+    labels: {
+      vocation: 'Vocation',
+      currentSkill: 'Current skill',
+      targetSkill: 'Target skill',
+      percentageLeft: '% left',
+      loyalty: {
+        points: 'points',
+        none: 'None',
+      },
+    },
+  },
 }
