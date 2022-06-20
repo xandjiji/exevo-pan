@@ -1,11 +1,10 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-/* import { Header } from 'modules/Statistics' */
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common, statistics } from 'locales'
+import { common, calculators } from 'locales'
 
 const pageUrl = buildUrl(routes.CALCULATORS)
 
@@ -15,33 +14,31 @@ export default function Statistics() {
   return (
     <>
       <Head>
-        <title>Calculators</title>
-        {/* @ ToDo: update meta tags */}
-        {/* <title>{translations.statistics.Meta.Statistics.title}</title>
+        <title>{translations.calculators.Meta.Calculators.title}</title>
         <meta
           name="title"
-          content={translations.statistics.Meta.Statistics.title}
+          content={translations.calculators.Meta.Calculators.title}
         />
         <meta
           property="og:title"
-          content={translations.statistics.Meta.Statistics.title}
+          content={translations.calculators.Meta.Calculators.title}
         />
         <meta
           property="twitter:title"
-          content={translations.statistics.Meta.Statistics.title}
+          content={translations.calculators.Meta.Calculators.title}
         />
 
         <meta
           name="description"
-          content={translations.statistics.Meta.Statistics.description}
+          content={translations.calculators.Meta.Calculators.description}
         />
         <meta
           property="twitter:description"
-          content={translations.statistics.Meta.Statistics.description}
+          content={translations.calculators.Meta.Calculators.description}
         />
         <meta
           property="og:description"
-          content={translations.statistics.Meta.Statistics.description}
+          content={translations.calculators.Meta.Calculators.description}
         />
         <meta property="og:type" content="website" />
 
@@ -53,17 +50,17 @@ export default function Statistics() {
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.STATISTICS, 'pt')}
+          href={buildUrl(routes.CALCULATORS, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.STATISTICS, 'es')}
+          href={buildUrl(routes.CALCULATORS, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.STATISTICS, 'pl')}
+          href={buildUrl(routes.CALCULATORS, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
@@ -73,11 +70,11 @@ export default function Statistics() {
           dangerouslySetInnerHTML={{
             __html: jsonld.standard,
           }}
-        /> */}
+        />
       </Head>
 
       <Main>
-        <main>{/* <Header /> */}</main>
+        <main>content</main>
       </Main>
     </>
   )
@@ -87,7 +84,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
       common: common[locale as RegisteredLocale],
-      statistics: statistics[locale as RegisteredLocale],
+      calculators: calculators[locale as RegisteredLocale],
     },
   },
 })

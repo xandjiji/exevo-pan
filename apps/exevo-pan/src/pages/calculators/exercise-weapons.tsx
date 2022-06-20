@@ -15,33 +15,31 @@ export default function Statistics() {
   return (
     <>
       <Head>
-        <title>Calculators</title>
-        {/* @ ToDo: update meta tags */}
-        {/* <title>{translations.statistics.Meta.Statistics.title}</title>
+        <title>{translations.calculators.Meta.ExerciseWeapons.title}</title>
         <meta
           name="title"
-          content={translations.statistics.Meta.Statistics.title}
+          content={translations.calculators.Meta.ExerciseWeapons.title}
         />
         <meta
           property="og:title"
-          content={translations.statistics.Meta.Statistics.title}
+          content={translations.calculators.Meta.ExerciseWeapons.title}
         />
         <meta
           property="twitter:title"
-          content={translations.statistics.Meta.Statistics.title}
+          content={translations.calculators.Meta.ExerciseWeapons.title}
         />
 
         <meta
           name="description"
-          content={translations.statistics.Meta.Statistics.description}
+          content={translations.calculators.Meta.ExerciseWeapons.description}
         />
         <meta
           property="twitter:description"
-          content={translations.statistics.Meta.Statistics.description}
+          content={translations.calculators.Meta.ExerciseWeapons.description}
         />
         <meta
           property="og:description"
-          content={translations.statistics.Meta.Statistics.description}
+          content={translations.calculators.Meta.ExerciseWeapons.description}
         />
         <meta property="og:type" content="website" />
 
@@ -53,17 +51,17 @@ export default function Statistics() {
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.STATISTICS, 'pt')}
+          href={buildUrl(routes.EXERCISE_WEAPONS, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.STATISTICS, 'es')}
+          href={buildUrl(routes.EXERCISE_WEAPONS, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.STATISTICS, 'pl')}
+          href={buildUrl(routes.EXERCISE_WEAPONS, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
@@ -73,7 +71,7 @@ export default function Statistics() {
           dangerouslySetInnerHTML={{
             __html: jsonld.standard,
           }}
-        /> */}
+        />
       </Head>
 
       <Main>

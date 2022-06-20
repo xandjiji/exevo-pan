@@ -38,6 +38,11 @@ import warES from './es/war'
 import warPT from './pt/war'
 import warPL from './pl/war'
 
+import calculatorsEN from './en/calculators'
+import calculatorsES from './es/calculators'
+import calculatorsPT from './pt/calculators'
+import calculatorsPL from './pl/calculators'
+
 export const error = {
   en: errorEN,
   es: errorES,
@@ -85,4 +90,10 @@ export const war = {
   es: warES,
   pt: warPT,
   pl: warPL,
+}
+export const calculators = {
+  en: calculatorsEN,
+  es: calculatorsES,
+  pt: calculatorsPT,
+  pl: calculatorsPL,
 }
