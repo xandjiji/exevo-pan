@@ -58,8 +58,6 @@ export default {
       title: 'Podsumowanie',
       auctionedCharacter: 'Wystawiona postać',
       datesTooltipText: 'Twoja postać zostanie podświetlona w te dni:',
-      day: 'dzień',
-      days: 'dni',
       durationText: 'czas reklamy',
       costText: 'Całkowity koszt',
       highlightedDays: 'Podświetlone dni:',

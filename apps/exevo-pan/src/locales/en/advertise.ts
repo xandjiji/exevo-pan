@@ -58,8 +58,6 @@ export default {
       auctionedCharacter: 'Auctioned character',
       datesTooltipText:
         'Your auction will be highlighted during the following days:',
-      day: 'day',
-      days: 'days',
       durationText: 'Advertising duration',
       costText: 'Total cost',
       highlightedDays: 'Highlighted days:',

@@ -21,7 +21,7 @@ const SubText = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
 
 const Summary = () => {
   const {
-    translations: { advertise },
+    translations: { common, advertise },
   } = useTranslations()
 
   const { selectedCharacter, selectedDates, paymentMethod } = useForm()
@@ -84,11 +84,7 @@ const Summary = () => {
               className="border-onSurface inline border-dashed"
               style={{ borderWidth: 0, borderBottomWidth: 1 }}
             >
-              {
-                advertise.PaymentDetails.Summary[
-                  selectedDates.length > 1 ? 'days' : 'day'
-                ]
-              }
+              {common[selectedDates.length > 1 ? 'days' : 'day']}
             </Strong>
           </Tooltip>
         </Strong>

@@ -58,8 +58,6 @@ export default {
       title: 'Resumen',
       auctionedCharacter: 'Personaje subastado',
       datesTooltipText: 'Su subasta se destacará durante los siguientes días:',
-      day: 'día',
-      days: 'dias',
       durationText: 'Duración del anuncio',
       costText: 'Precio total',
       highlightedDays: 'Días destacados:',

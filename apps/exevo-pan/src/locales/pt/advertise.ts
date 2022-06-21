@@ -58,8 +58,6 @@ export default {
       title: 'Resumo',
       auctionedCharacter: 'Personagem leiloado',
       datesTooltipText: 'Seu leilão será destacado durante os seguintes dias:',
-      day: 'dia',
-      days: 'dias',
       durationText: 'Duração do destaque',
       costText: 'Custo total',
       highlightedDays: 'Dias de destaque:',
