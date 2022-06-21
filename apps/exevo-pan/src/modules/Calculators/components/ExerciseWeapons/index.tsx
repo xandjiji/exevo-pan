@@ -13,7 +13,7 @@ export const ExerciseWeapons = () => {
     <Main>
       <div className="grid gap-6 lg:grid-cols-2">
         <CharacterConfig updatePointsRequired={setPointsRequired} />
-        <Summary pointsRequired={pointsRequired} />
+        <Summary pointsRequired={Math.max(pointsRequired, 0)} />
       </div>
     </Main>
   )
