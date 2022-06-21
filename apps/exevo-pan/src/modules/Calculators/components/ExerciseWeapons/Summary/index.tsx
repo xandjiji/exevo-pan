@@ -99,7 +99,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             <S.Chip>
               <Text.TibiaCoin value={cost.tc} />
             </S.Chip>
-            <small className="-mx-2.5 font-light">or</small>
+            <small className="-mx-2.5 font-light">{common.or}</small>
             <S.Chip>
               <Text.GoldCoin value={cost.gold} />
             </S.Chip>
