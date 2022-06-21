@@ -25,8 +25,8 @@ export const VOCATION: Record<Vocation, Record<Skill, number>> = {
 
 export const SKILL = 1600
 
-export const MARKS = [
-  { label: 'None', value: 0 },
+export const generateMarks = (noneText: string) => [
+  { label: noneText, value: 0 },
   { label: '5%', value: 5 },
   { label: '10%', value: 10 },
   { label: '15%', value: 15 },

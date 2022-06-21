@@ -7,7 +7,7 @@ import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { LabeledCard } from '../../layout'
 import { vocationOptions, skillOptions } from './options'
-import { MARKS } from './constants'
+import { generateMarks } from './constants'
 import { calculateRequiredPoints } from './utils'
 import { CharacterConfigProps, Vocation, Skill } from './types'
 
@@ -131,7 +131,10 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
               : calculators.ExerciseWeapons.labels.none,
           [calculators],
         )}
-        marks={MARKS}
+        marks={useMemo(
+          () => generateMarks(calculators.ExerciseWeapons.labels.none),
+          [calculators],
+        )}
         value={loyaltyBonus}
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
         ssr
