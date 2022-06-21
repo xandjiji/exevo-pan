@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { ExerciseWeapons } from 'modules/Calculators'
+import { Header, ExerciseWeapons } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -75,6 +75,7 @@ export default function Calculator() {
       </Head>
 
       <Main>
+        <Header />
         <ExerciseWeapons />
       </Main>
     </>

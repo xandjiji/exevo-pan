@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
+import { Header } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -14,31 +15,28 @@ export default function Calculators() {
   return (
     <>
       <Head>
-        <title>{translations.calculators.Meta.Calculators.title}</title>
-        <meta
-          name="title"
-          content={translations.calculators.Meta.Calculators.title}
-        />
+        <title>{translations.calculators.Meta.Main.title}</title>
+        <meta name="title" content={translations.calculators.Meta.Main.title} />
         <meta
           property="og:title"
-          content={translations.calculators.Meta.Calculators.title}
+          content={translations.calculators.Meta.Main.title}
         />
         <meta
           property="twitter:title"
-          content={translations.calculators.Meta.Calculators.title}
+          content={translations.calculators.Meta.Main.title}
         />
 
         <meta
           name="description"
-          content={translations.calculators.Meta.Calculators.description}
+          content={translations.calculators.Meta.Main.description}
         />
         <meta
           property="twitter:description"
-          content={translations.calculators.Meta.Calculators.description}
+          content={translations.calculators.Meta.Main.description}
         />
         <meta
           property="og:description"
-          content={translations.calculators.Meta.Calculators.description}
+          content={translations.calculators.Meta.Main.description}
         />
         <meta property="og:type" content="website" />
 
@@ -74,6 +72,7 @@ export default function Calculators() {
       </Head>
 
       <Main>
+        <Header />
         <main>content</main>
       </Main>
     </>

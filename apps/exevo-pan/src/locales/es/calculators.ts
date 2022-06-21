@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    Calculators: {
+    Main: {
       title: 'Calculators',
       description: 'All sorts of Tibia calculators to help you out!',
     },
@@ -11,7 +11,7 @@ export default {
     },
   },
   Header: {
-    Calculators: 'Calculators',
+    Main: 'Main',
     ExerciseWeapons: 'Exercise weapons',
   },
   ExerciseWeapons: {
