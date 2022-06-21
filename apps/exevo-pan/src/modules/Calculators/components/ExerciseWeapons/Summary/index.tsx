@@ -19,7 +19,7 @@ import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 const Summary = ({ pointsRequired }: SummaryProps) => {
   const {
-    translations: { calculators },
+    translations: { common, calculators },
   } = useTranslations()
 
   const [hasDummy, setHasDummy] = useStoredState('ew-dummy', false)
@@ -141,19 +141,19 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
                 time={timeObject.days}
                 aria-hidden={isClient && !timeObject.days}
               >
-                days
+                {common[timeObject.days > 1 ? 'days' : 'day']}
               </S.TimeBubble>
               <S.TimeBubble
                 time={timeObject.hours}
                 aria-hidden={!timeObject.hours}
               >
-                hours
+                {common[timeObject.hours > 1 ? 'hours' : 'hour']}
               </S.TimeBubble>
               <S.TimeBubble
                 time={timeObject.minutes}
                 aria-hidden={!timeObject.minutes}
               >
-                minutes
+                {common[timeObject.minutes > 1 ? 'minutes' : 'minute']}
               </S.TimeBubble>
               <S.Empty aria-hidden={!isObjectEmpty(timeObject)}>
                 {calculators.ExerciseWeapons.labels.none}
