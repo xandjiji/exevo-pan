@@ -18,6 +18,7 @@ import { NavItems } from './routes'
 const heading = {
   [routes.HOME]: 'home',
   [routes.BAZAAR_HISTORY]: 'bazaarHistory',
+  [routes.CALCULATORS]: 'calculators',
   [routes.STATISTICS]: 'statistics',
   [routes.HIGHSCORES]: 'highscores',
   [routes.LIBERTABRA_WAR]: 'war',

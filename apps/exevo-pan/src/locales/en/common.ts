@@ -22,6 +22,7 @@ export default {
     nav: {
       currentAuctions: 'Current Auctions',
       bazaarHistory: 'Bazaar History',
+      calculators: 'Calculators',
       statistics: 'Statistics',
       war: 'Libertabra War',
       about: 'About',

@@ -24,8 +24,7 @@ export const NavItems: NavItem[] = [
   {
     href: routes.CALCULATORS,
     icon: <Calculators />,
-    /* @ ToDo: add correct title */
-    title: 'statistics',
+    title: 'calculators',
   },
   {
     href: routes.STATISTICS,

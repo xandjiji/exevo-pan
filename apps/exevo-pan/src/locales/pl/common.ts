@@ -22,6 +22,7 @@ export default {
     nav: {
       currentAuctions: 'Obecne Aukcje',
       bazaarHistory: 'Historia Bazaru',
+      calculators: 'Kalkulatory',
       statistics: 'Statystyki',
       war: 'Wojna na Libertabrze',
       about: 'O nas',
