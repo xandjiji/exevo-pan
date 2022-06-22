@@ -1,6 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
-import asdSrc from 'assets/herofood.png'
+import { SpritePortrait } from 'components/Atoms'
 import { Main } from '../layout'
 import { MainPageEntry } from './types'
 
@@ -11,10 +10,18 @@ import { MainPageEntry } from './types'
 */
 
 const entries: MainPageEntry[] = [
-  { name: 'ExerciseWeapons', thumbnail: asdSrc },
-  { name: 'ExerciseWeapons', thumbnail: asdSrc },
-  { name: 'ExerciseWeapons', thumbnail: asdSrc },
-  { name: 'ExerciseWeapons', thumbnail: asdSrc },
+  {
+    name: 'ExerciseWeapons',
+    thumbnail: 'sprites/store/lasting exercise sword.gif',
+  },
+  {
+    name: 'ExerciseWeapons',
+    thumbnail: 'sprites/store/lasting exercise sword.gif',
+  },
+  {
+    name: 'ExerciseWeapons',
+    thumbnail: 'sprites/store/lasting exercise sword.gif',
+  },
 ]
 
 const MainPage = () => {
@@ -27,19 +34,20 @@ const MainPage = () => {
       <div className="grid gap-4">
         {entries.map(({ name, thumbnail }) => (
           <div key={name} className="card flex items-center gap-4">
-            <div className="shrink-0">
-              <Image
-                src={thumbnail}
-                alt={calculators.Meta[name].title}
-                width={64}
-                height={64}
-                unoptimized
-              />
-            </div>
+            <SpritePortrait
+              src={thumbnail}
+              width={32}
+              height={32}
+              alt={calculators.Meta[name].title}
+            />
 
             <div className="grid gap-1.5">
-              <h3 className="text-2xl">{calculators.Meta[name].title}</h3>
-              <p className="text-tsm">{calculators.Meta[name].description}</p>
+              <h3 className="text-primaryHighlight text-base tracking-wide">
+                {calculators.Meta[name].title}
+              </h3>
+              <p className="text-tsm font-light">
+                {calculators.Meta[name].description}
+              </p>
             </div>
           </div>
         ))}
