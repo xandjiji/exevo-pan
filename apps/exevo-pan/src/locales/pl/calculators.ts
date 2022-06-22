@@ -5,7 +5,7 @@ export default {
       description: 'All sorts of Tibia calculators to help you out!',
     },
     ExerciseWeapons: {
-      title: 'Exercise weapons - Exevo Pan',
+      title: 'Exercise weapons',
       description:
         'Find out how many exercise weapons, time and money would cost to achieve your desired skill',
     },

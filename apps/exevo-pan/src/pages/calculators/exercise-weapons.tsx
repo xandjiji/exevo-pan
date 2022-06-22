@@ -12,22 +12,15 @@ const pageUrl = buildUrl(routes.EXERCISE_WEAPONS)
 export default function Calculator() {
   const { translations } = useTranslations()
 
+  const pageTitle = `${translations.calculators.Meta.ExerciseWeapons.title} - Exevo Pan`
+
   return (
     <>
       <Head>
-        <title>{translations.calculators.Meta.ExerciseWeapons.title}</title>
-        <meta
-          name="title"
-          content={translations.calculators.Meta.ExerciseWeapons.title}
-        />
-        <meta
-          property="og:title"
-          content={translations.calculators.Meta.ExerciseWeapons.title}
-        />
-        <meta
-          property="twitter:title"
-          content={translations.calculators.Meta.ExerciseWeapons.title}
-        />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="twitter:title" content={pageTitle} />
 
         <meta
           name="description"

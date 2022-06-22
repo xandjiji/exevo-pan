@@ -3,7 +3,7 @@ import { Main } from '../layout'
 import CharacterConfig from './CharacterConfig'
 import Summary from './Summary'
 
-export const ExerciseWeapons = () => {
+const ExerciseWeapons = () => {
   const [pointsRequired, setPointsRequired] = useStoredState(
     'ew-pointsRequired',
     0,
@@ -18,3 +18,5 @@ export const ExerciseWeapons = () => {
     </Main>
   )
 }
+
+export default ExerciseWeapons

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { Header } from 'modules/Calculators'
+import { Header, MainPage } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -73,7 +73,7 @@ export default function Calculators() {
 
       <Main>
         <Header />
-        <main>content</main>
+        <MainPage />
       </Main>
     </>
   )
