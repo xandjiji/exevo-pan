@@ -5,7 +5,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
-import { Main } from 'templates'
+import { Main, Hero } from 'templates'
 import { routes, jsonld } from 'Constants'
 import { common, blog } from 'locales'
 
@@ -66,6 +66,7 @@ export default function PostPage({ initialPosts }: Props) {
       </Head>
 
       <Main>
+        <Hero title={TITLE} src="https://i.imgur.com/Jjh4f3q.png" offset />
         <Home
           initialIndex={DEFAULT_PAGINATION_OPTIONS.pageIndex + 1}
           initialPosts={initialPosts}

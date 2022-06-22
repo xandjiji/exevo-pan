@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 import { Link } from 'components/Atoms'
-import HeaderIcon from '../Header/HeaderIcon'
+import HeaderIcon from '../Main/Header/HeaderIcon'
 import { SubHeaderProps } from './types'
 
 const SubHeader = ({ navItems, className, ...props }: SubHeaderProps) => (

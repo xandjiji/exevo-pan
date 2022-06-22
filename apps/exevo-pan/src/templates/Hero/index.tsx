@@ -3,7 +3,14 @@ import { memo } from 'react'
 import Image from 'next/image'
 import { HeroProps } from './types'
 
-const Hero = ({ title, subtitle, src, className, ...props }: HeroProps) => (
+const Hero = ({
+  title,
+  subtitle,
+  src,
+  offset = false,
+  className,
+  ...props
+}: HeroProps) => (
   <div
     className={clsx(
       'inner-container relative flex items-center justify-center py-6 md:py-24',
@@ -12,7 +19,10 @@ const Hero = ({ title, subtitle, src, className, ...props }: HeroProps) => (
     {...props}
   >
     <div
-      className="hero-image absolute top-1/2 left-1/2 mix-blend-overlay"
+      className={clsx(
+        'hero-image absolute top-1/2 left-1/2 mix-blend-overlay',
+        offset && 'md:ml-[-112px]',
+      )}
       style={{ transform: 'translate(-50%, -50%)' }}
     >
       <Image
@@ -27,7 +37,12 @@ const Hero = ({ title, subtitle, src, className, ...props }: HeroProps) => (
     </div>
 
     <div className="z-1 relative grid gap-4">
-      <h1 className="hero-title text-[32px] font-normal tracking-wide md:text-[48px]">
+      <h1
+        className={clsx(
+          'hero-title font-normal tracking-wide',
+          offset ? 'text-[48px] md:text-[64px]' : 'text-[32px] md:text-[48px]',
+        )}
+      >
         {title}
       </h1>
       {!!subtitle && (
