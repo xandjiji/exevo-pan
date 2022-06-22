@@ -1,6 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { SpritePortrait } from 'components/Atoms'
-import { Main } from '../layout'
 import { MainPageEntry } from './types'
 
 /* @ ToDo:
@@ -30,7 +29,7 @@ const MainPage = () => {
   } = useTranslations()
 
   return (
-    <Main>
+    <main className="inner-container pb-4 md:pb-8">
       <div className="grid gap-4">
         {entries.map(({ name, thumbnail }) => (
           <div key={name} className="card flex items-center gap-4">
@@ -52,7 +51,7 @@ const MainPage = () => {
           </div>
         ))}
       </div>
-    </Main>
+    </main>
   )
 }
 

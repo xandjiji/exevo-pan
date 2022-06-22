@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Main } from 'templates'
+import { Main, Hero } from 'templates'
 import { Header, MainPage } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -73,6 +73,11 @@ export default function Calculators() {
 
       <Main>
         <Header />
+        <Hero
+          title={translations.calculators.Meta.Main.title}
+          src="sprites/bricklayer.png"
+          offset
+        />
         <MainPage />
       </Main>
     </>
