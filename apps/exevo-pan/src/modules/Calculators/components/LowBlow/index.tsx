@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Input, Checkbox, LabeledTextBox } from 'components/Atoms'
 import { useRouter } from 'next/router'
+import { Main } from '../layout'
 import Sprite from '../../../Blog/components/Post/custom/Sprite/index'
 import * as S from './atoms'
 
@@ -117,9 +118,11 @@ export const Calculator = () => {
 }
 
 const LowBlow = () => (
-  <div className="child:bg-background my-2 mx-auto grid max-w-fit gap-6">
-    <Calculator />
-  </div>
+  <Main>
+    <div className="child:bg-background grid gap-6 lg:grid-cols-2">
+      <Calculator />
+    </div>
+  </Main>
 )
 
 export default LowBlow
