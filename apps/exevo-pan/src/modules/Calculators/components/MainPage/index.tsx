@@ -13,7 +13,7 @@ const entries: MainPageEntry[] = [
   },
   {
     name: 'LowBlow',
-    thumbnail: 'sprites/store/lasting exercise sword.gif',
+    thumbnail: 'sprites/charms/Low Blow.png',
     href: routes.LOW_BLOW,
   },
 ]

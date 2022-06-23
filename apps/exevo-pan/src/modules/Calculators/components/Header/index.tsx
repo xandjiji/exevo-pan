@@ -4,6 +4,7 @@ import { SubHeader } from 'templates'
 import { routes } from 'Constants'
 import MainIcon from 'assets/svgs/calculator.svg'
 import ExerciseWeaponIcon from 'assets/svgs/weight.svg'
+import LowBlowIcon from 'assets/svgs/charms.svg'
 
 const Header = () => {
   const {
@@ -24,7 +25,7 @@ const Header = () => {
     {
       title: calculators.Header.LowBlow,
       href: routes.LOW_BLOW,
-      icon: <ExerciseWeaponIcon />,
+      icon: <LowBlowIcon />,
     },
   ]
 

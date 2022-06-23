@@ -71,7 +71,7 @@ export default function Calculator() {
         <Header />
         <Hero
           title={translations.calculators.Meta.LowBlow.title}
-          src="exercise-weapons-hero.png"
+          src="low-blow-hero.png"
           offset
         />
         <LowBlow />
