@@ -2,12 +2,6 @@ import { useTranslations } from 'contexts/useTranslation'
 import { SpritePortrait } from 'components/Atoms'
 import { MainPageEntry } from './types'
 
-/* @ ToDo:
-- page title
-- src de cada um (usar sprite portrait?)
-- route click
-*/
-
 const entries: MainPageEntry[] = [
   {
     name: 'ExerciseWeapons',

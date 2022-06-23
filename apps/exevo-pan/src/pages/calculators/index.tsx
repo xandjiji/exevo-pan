@@ -75,7 +75,7 @@ export default function Calculators() {
         <Header />
         <Hero
           title={translations.calculators.Meta.Main.title}
-          src="sprites/bricklayer.png"
+          src="calculators/calculators-hero.png"
           offset
         />
         <MainPage />

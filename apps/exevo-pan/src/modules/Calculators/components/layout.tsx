@@ -6,7 +6,10 @@ export const Main = ({
   ...props
 }: JSX.IntrinsicElements['main']) => (
   <main
-    className={clsx('inner-container grid place-items-center py-4', className)}
+    className={clsx(
+      'inner-container grid place-content-start justify-center py-4 md:pt-0',
+      className,
+    )}
     {...props}
   />
 )

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Main } from 'templates'
+import { Main, Hero } from 'templates'
 import { Header, ExerciseWeapons } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -69,6 +69,11 @@ export default function Calculator() {
 
       <Main>
         <Header />
+        <Hero
+          title={translations.calculators.Meta.ExerciseWeapons.title}
+          src="exercise-weapons-hero.png"
+          offset
+        />
         <ExerciseWeapons />
       </Main>
     </>
