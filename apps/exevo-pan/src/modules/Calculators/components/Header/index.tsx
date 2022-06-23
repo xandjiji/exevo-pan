@@ -21,6 +21,11 @@ const Header = () => {
       href: routes.EXERCISE_WEAPONS,
       icon: <ExerciseWeaponIcon />,
     },
+    {
+      title: calculators.Header.LowBlow,
+      href: routes.LOW_BLOW,
+      icon: <ExerciseWeaponIcon />,
+    },
   ]
 
   return <SubHeader navItems={navItems} />

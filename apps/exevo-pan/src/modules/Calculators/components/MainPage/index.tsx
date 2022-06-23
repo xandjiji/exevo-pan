@@ -12,14 +12,9 @@ const entries: MainPageEntry[] = [
     href: routes.EXERCISE_WEAPONS,
   },
   {
-    name: 'ExerciseWeapons',
+    name: 'LowBlow',
     thumbnail: 'sprites/store/lasting exercise sword.gif',
-    href: routes.EXERCISE_WEAPONS,
-  },
-  {
-    name: 'ExerciseWeapons',
-    thumbnail: 'sprites/store/lasting exercise sword.gif',
-    href: routes.EXERCISE_WEAPONS,
+    href: routes.LOW_BLOW,
   },
 ]
 

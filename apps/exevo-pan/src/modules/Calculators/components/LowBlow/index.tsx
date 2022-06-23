@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Input, Checkbox } from 'components/Atoms'
 import { useRouter } from 'next/router'
-import Sprite from '../Sprite'
+import Sprite from '../../../Blog/components/Post/custom/Sprite/index'
 import * as S from './atoms'
 
 const LOW_BLOW_MULTIPLIER = 1.09
