@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Input, Checkbox } from 'components/Atoms'
+import { Input, Checkbox, LabeledTextBox } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import Sprite from '../../../Blog/components/Post/custom/Sprite/index'
 import * as S from './atoms'
@@ -40,7 +40,7 @@ const translations = {
   },
 }
 
-const LowBlowCalculator = () => {
+export const Calculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
   const finalDamageA = Math.round(averageDamage * LOW_BLOW_MULTIPLIER)
 
@@ -54,9 +54,9 @@ const LowBlowCalculator = () => {
   const { locale } = useRouter()
 
   return (
-    <div className="my-2 mx-auto grid max-w-fit gap-6">
-      <S.Group>
-        <S.Group.Title style={{ marginLeft: -5 }}>
+    <>
+      <LabeledTextBox labelText="Low Blow">
+        <S.Title style={{ marginLeft: -5 }}>
           <Sprite src={`${SPRITE_PATH}/Low Blow.png`} width={32} height={32}>
             Low Blow
           </Sprite>
@@ -64,7 +64,7 @@ const LowBlowCalculator = () => {
           <Sprite src="/sprites/crit.png" width={37} height={30}>
             Powerful Strike
           </Sprite>
-        </S.Group.Title>
+        </S.Title>
 
         <Input
           label={translations[locale as RegisteredLocale].yourAverageDamage}
@@ -80,14 +80,16 @@ const LowBlowCalculator = () => {
           {translations[locale as RegisteredLocale].finalAverageDamage}:{' '}
           <code>{finalDamageA}</code>
         </S.Result>
-      </S.Group>
+      </LabeledTextBox>
 
-      <S.Group>
-        <S.Group.Title style={{ marginLeft: -2 }}>
+      <LabeledTextBox
+        labelText={translations[locale as RegisteredLocale].elementalCharm}
+      >
+        <S.Title style={{ marginLeft: -2 }}>
           <Sprite src={`${SPRITE_PATH}/Charm.png`} width={32} height={32}>
             {translations[locale as RegisteredLocale].elementalCharm}
           </Sprite>
-        </S.Group.Title>
+        </S.Title>
 
         <Input
           label={translations[locale as RegisteredLocale].creatureHP}
@@ -109,9 +111,15 @@ const LowBlowCalculator = () => {
           {translations[locale as RegisteredLocale].finalAverageDamage}:{' '}
           <code>{finalDamageB}</code>
         </S.Result>
-      </S.Group>
-    </div>
+      </LabeledTextBox>
+    </>
   )
 }
 
-export default LowBlowCalculator
+const LowBlow = () => (
+  <div className="child:bg-background my-2 mx-auto grid max-w-fit gap-6">
+    <Calculator />
+  </div>
+)
+
+export default LowBlow
