@@ -119,7 +119,7 @@ export const Calculator = () => {
   )
 }
 
-const LowBlow = () => {
+const CharmDamage = () => {
   const {
     translations: { calculators },
   } = useTranslations()
@@ -129,10 +129,10 @@ const LowBlow = () => {
       <div className="child:bg-background grid gap-6">
         <Calculator />
         <p className="text-tsm mb-4 font-light md:text-center">
-          {calculators.LowBlow.moreInfo}{' '}
+          {calculators.CharmDamage.moreInfo}{' '}
           <NextLink href={`${routes.BLOG}/${ARTICLE_SLUG}`}>
             <a className="text-primaryHighlight font-bold">
-              {calculators.LowBlow.thisArticle}
+              {calculators.CharmDamage.thisArticle}
             </a>
           </NextLink>
           .
@@ -142,4 +142,4 @@ const LowBlow = () => {
   )
 }
 
-export default LowBlow
+export default CharmDamage

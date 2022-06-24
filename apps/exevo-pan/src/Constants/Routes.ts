@@ -4,7 +4,7 @@ export const routes = {
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
   EXERCISE_WEAPONS: '/calculators/exercise-weapons',
-  LOW_BLOW: '/calculators/low-blow',
+  CHARM_DAMAGE: '/calculators/charm-damage',
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
   LIBERTABRA_WAR: '/libertabra-war',

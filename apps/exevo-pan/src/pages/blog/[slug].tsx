@@ -28,7 +28,7 @@ const components = {
     () => import('modules/Blog/components/Post/custom/TranslationAlert'),
   ),
   LowBlowCalculator: dynamic(
-    () => import('modules/Calculators/components/LowBlow/blog'),
+    () => import('modules/Calculators/components/CharmDamage/blog'),
   ),
   ContactSection: dynamic(
     () => import('modules/Blog/components/Post/custom/ContactSection'),

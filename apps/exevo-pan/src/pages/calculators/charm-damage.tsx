@@ -1,18 +1,18 @@
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
-import { Header, LowBlow } from 'modules/Calculators'
+import { Header, CharmDamage } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
-const pageUrl = buildUrl(routes.LOW_BLOW)
+const pageUrl = buildUrl(routes.CHARM_DAMAGE)
 
 export default function Calculator() {
   const { translations } = useTranslations()
 
-  const pageTitle = `${translations.calculators.Meta.LowBlow.title} - Exevo Pan`
+  const pageTitle = `${translations.calculators.Meta.CharmDamage.title} - Exevo Pan`
 
   return (
     <>
@@ -24,15 +24,15 @@ export default function Calculator() {
 
         <meta
           name="description"
-          content={translations.calculators.Meta.LowBlow.description}
+          content={translations.calculators.Meta.CharmDamage.description}
         />
         <meta
           property="twitter:description"
-          content={translations.calculators.Meta.LowBlow.description}
+          content={translations.calculators.Meta.CharmDamage.description}
         />
         <meta
           property="og:description"
-          content={translations.calculators.Meta.LowBlow.description}
+          content={translations.calculators.Meta.CharmDamage.description}
         />
         <meta property="og:type" content="website" />
 
@@ -70,11 +70,11 @@ export default function Calculator() {
       <Main>
         <Header />
         <Hero
-          title={translations.calculators.Meta.LowBlow.title}
-          src={`${routes.CALCULATORS}/low-blow-hero.png`}
+          title={translations.calculators.Meta.CharmDamage.title}
+          src={`${routes.CALCULATORS}/charm-damage-hero.png`}
           offset
         />
-        <LowBlow />
+        <CharmDamage />
       </Main>
     </>
   )

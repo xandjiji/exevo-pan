@@ -12,9 +12,9 @@ const entries: MainPageEntry[] = [
     href: routes.EXERCISE_WEAPONS,
   },
   {
-    name: 'LowBlow',
-    thumbnail: '/sprites/charms/Low Blow.png',
-    href: routes.LOW_BLOW,
+    name: 'CharmDamage',
+    thumbnail: '/sprites/charms/Charm.png',
+    href: routes.CHARM_DAMAGE,
   },
 ]
 

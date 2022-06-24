@@ -9,16 +9,16 @@ export default {
       description:
         'Find out how many exercise weapons, time and money would cost to achieve your desired skill',
     },
-    LowBlow: {
-      title: 'Low Blow',
+    CharmDamage: {
+      title: 'Charm Damage',
       description:
-        'Compare the average damage between using the Low Blow charm and regular elemental charms.',
+        'Compare the average damage between different charms to see which one is best.',
     },
   },
   Header: {
     Main: 'Main',
     ExerciseWeapons: 'Exercise weapons',
-    LowBlow: 'Low Blow',
+    CharmDamage: 'Charm Damage',
   },
   ExerciseWeapons: {
     labels: {
@@ -42,8 +42,8 @@ export default {
       e: 'gold',
     },
   },
-  LowBlow: {
-    moreInfo: 'For more information about Low Blow, check out',
+  CharmDamage: {
+    moreInfo: 'For more information about Charms, check out',
     thisArticle: 'this article',
   },
 }
