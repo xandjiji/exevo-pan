@@ -7,7 +7,7 @@ import { SubHeaderProps } from './types'
 const SubHeader = ({ navItems, className, ...props }: SubHeaderProps) => (
   <nav
     className={clsx(
-      'z-1 inner-container bg-darkerPrimary md:custom-scrollbar sticky top-[60px] overflow-auto shadow-md transition-all',
+      'z-71 inner-container bg-darkerPrimary md:custom-scrollbar sticky top-[60px] overflow-auto shadow-md transition-all',
       className,
     )}
     {...props}
