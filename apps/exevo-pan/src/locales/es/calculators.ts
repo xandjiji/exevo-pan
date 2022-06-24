@@ -42,4 +42,8 @@ export default {
       e: 'gold',
     },
   },
+  LowBlow: {
+    moreInfo: 'For more information about Low Blow, check out',
+    thisArticle: 'this article',
+  },
 }
