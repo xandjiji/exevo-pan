@@ -4,53 +4,17 @@ import { Input, Checkbox, Slider } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { Main, LabeledCard } from '../layout'
 import { Chip, Group } from '../atoms'
-
-const LOW_BLOW_MULTIPLIER = 1.09
-
-const ELEMENTAL_DAMAGE = 0.05
-const ELEMENTAL_PROC_CHANCE = 0.1
-const POWERFUL_MULTIPLIER = 1.05
-
-const translations = {
-  en: {
-    yourAverageDamage: 'Your average damage',
-    finalAverageDamage: 'Final average damage',
-    elementalCharm: 'Elemental charm',
-    creatureHP: 'Creature HP',
-    elementalBonus: 'Elemental damage bonus',
-  },
-  es: {
-    yourAverageDamage: 'Tu daño promedio',
-    finalAverageDamage: 'Daño promedio final',
-    elementalCharm: 'Charm Elemental',
-    creatureHP: 'Vida de la criatura',
-    elementalBonus: 'Bono de daño elemental',
-  },
-  pl: {
-    yourAverageDamage: 'Twoje średnie obrażenia',
-    finalAverageDamage: 'Końcowe średnie obrażenia',
-    elementalCharm: 'Charm ofensywny',
-    creatureHP: 'Punkty zdrowia potwora',
-    elementalBonus: 'Premia do obrażeń od żywiołów',
-  },
-  pt: {
-    yourAverageDamage: 'Seu dano médio',
-    finalAverageDamage: 'Dano médio final',
-    elementalCharm: 'Charm elemental',
-    creatureHP: 'HP da criatura',
-    elementalBonus: 'Dano elemental bônus',
-  },
-}
-
-/* @ ToDo:
-
-- separar utils
-*/
+import {
+  LOW_BLOW_MULTIPLIER,
+  ELEMENTAL_DAMAGE,
+  ELEMENTAL_PROC_CHANCE,
+  POWERFUL_MULTIPLIER,
+  SPRITE_PATH,
+} from './constants'
+import { translations } from './locales'
 
 const transformBonusResistance = (value: number) =>
   `${value > 0 ? '+' : ''}${value}%`
-
-const SPRITE_PATH = '/sprites/charms'
 
 export const Calculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
