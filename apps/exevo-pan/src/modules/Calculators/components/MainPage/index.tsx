@@ -8,12 +8,12 @@ import { MainPageEntry } from './types'
 const entries: MainPageEntry[] = [
   {
     name: 'ExerciseWeapons',
-    thumbnail: 'sprites/store/lasting exercise sword.gif',
+    thumbnail: '/sprites/store/lasting exercise sword.gif',
     href: routes.EXERCISE_WEAPONS,
   },
   {
     name: 'LowBlow',
-    thumbnail: 'sprites/charms/Low Blow.png',
+    thumbnail: '/sprites/charms/Low Blow.png',
     href: routes.LOW_BLOW,
   },
 ]

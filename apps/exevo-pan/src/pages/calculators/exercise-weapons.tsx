@@ -71,7 +71,7 @@ export default function Calculator() {
         <Header />
         <Hero
           title={translations.calculators.Meta.ExerciseWeapons.title}
-          src="exercise-weapons-hero.png"
+          src={`${routes.CALCULATORS}/exercise-weapons-hero.png`}
           offset
         />
         <ExerciseWeapons />
