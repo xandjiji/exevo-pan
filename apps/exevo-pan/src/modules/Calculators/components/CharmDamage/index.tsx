@@ -6,8 +6,8 @@ import { Input, Checkbox, Slider } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { routes } from 'Constants'
-import { Main, LabeledCard } from '../layout'
-import { Chip, Group } from '../atoms'
+import { Main, LabeledCard, Spacer } from '../layout'
+import { Chip } from '../atoms'
 import {
   LOW_BLOW_MULTIPLIER,
   ELEMENTAL_DAMAGE,
@@ -20,6 +20,10 @@ import { translations } from './locales'
 
 const transformBonusResistance = (value: number) =>
   `${value > 0 ? '+' : ''}${value}%`
+
+const Group = (args: JSX.IntrinsicElements['div']) => (
+  <div {...args} className="text-tsm flex items-center justify-between gap-4" />
+)
 
 export const Calculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
@@ -104,6 +108,8 @@ export const Calculator = () => {
           onChange={(e) => setBonusResistance(+e.target.value)}
           className="sm:min-w-[230px]"
         />
+
+        <Spacer />
 
         <Group>
           <strong>{texts.finalAverageDamage}:</strong>

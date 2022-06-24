@@ -30,3 +30,7 @@ export const LabeledCard = ({
     {...props}
   />
 )
+
+export const Spacer = () => (
+  <div role="none" className="bg-separator/40 mt-2 h-[1px] w-full" />
+)
