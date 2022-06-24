@@ -115,7 +115,7 @@ export const Calculator = () => {
 
 const LowBlow = () => (
   <Main>
-    <div className="child:bg-background grid gap-6">
+    <div className="child:bg-background grid min-w-[280px] gap-6">
       <Calculator />
     </div>
   </Main>
