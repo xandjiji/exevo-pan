@@ -4,7 +4,7 @@ import styles from './styles.module.css'
 export const Chip = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div
     className={clsx(
-      'bg-separator/60 flex items-center rounded-xl py-1.5 px-3 font-normal transition-colors',
+      'bg-separator/60 flex h-fit w-fit items-center rounded-xl py-1.5 px-3 font-normal transition-colors',
       styles.hidden,
       className,
     )}

@@ -44,6 +44,9 @@ const translations = {
 /* @ ToDo:
 
 - separate average damage box
+- remover atoms
+- separar utils
+- i18n
 */
 
 const transformBonusResistance = (value: number) =>
@@ -80,17 +83,17 @@ export const Calculator = () => {
 
   return (
     <>
-      <LabeledCard noBackground labelText="Low Blow">
-        <Input
-          label={translations[locale as RegisteredLocale].yourAverageDamage}
-          type="number"
-          step={100}
-          min={0}
-          value={averageDamage}
-          onChange={(e) => setAverageDamage(+e.target.value)}
-          noAlert
-        />
+      <Input
+        label={translations[locale as RegisteredLocale].yourAverageDamage}
+        type="number"
+        step={100}
+        min={0}
+        value={averageDamage}
+        onChange={(e) => setAverageDamage(+e.target.value)}
+        noAlert
+      />
 
+      <LabeledCard noBackground labelText="Low Blow">
         <Checkbox
           label="Powerful Strike imbuement"
           checked={powerfulA}
@@ -109,6 +112,12 @@ export const Calculator = () => {
         noBackground
         labelText={translations[locale as RegisteredLocale].elementalCharm}
       >
+        <Checkbox
+          label="Powerful Strike imbuement"
+          checked={powerfulB}
+          onClick={() => setPowerfulB((prev) => !prev)}
+        />
+
         <Input
           label={translations[locale as RegisteredLocale].creatureHP}
           type="number"
@@ -129,12 +138,6 @@ export const Calculator = () => {
           onChange={(e) => setBonusResistance(+e.target.value)}
         />
 
-        <Checkbox
-          label="Powerful Strike imbuement"
-          checked={powerfulB}
-          onClick={() => setPowerfulB((prev) => !prev)}
-        />
-
         <Group>
           <strong>
             {translations[locale as RegisteredLocale].finalAverageDamage}:
@@ -148,7 +151,7 @@ export const Calculator = () => {
 
 const LowBlow = () => (
   <Main>
-    <div className="child:bg-background grid gap-6 lg:grid-cols-2">
+    <div className="child:bg-background grid gap-6">
       <Calculator />
     </div>
   </Main>
