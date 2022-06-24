@@ -1,7 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useMemo } from 'react'
 import Image from 'next/image'
 import { Input, Checkbox, Slider } from 'components/Atoms'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
+import { routes } from 'Constants'
 import { Main, LabeledCard } from '../layout'
 import { Chip, Group } from '../atoms'
 import {
@@ -10,6 +13,7 @@ import {
   ELEMENTAL_PROC_CHANCE,
   POWERFUL_MULTIPLIER,
   SPRITE_PATH,
+  ARTICLE_SLUG,
 } from './constants'
 import { translations } from './locales'
 
@@ -118,6 +122,13 @@ const LowBlow = () => (
   <Main>
     <div className="child:bg-background grid gap-6">
       <Calculator />
+      <p className="text-tsm mb-4 font-light md:text-center">
+        For more information about Low Blow, check out{' '}
+        <NextLink href={`${routes.BLOG}/${ARTICLE_SLUG}`}>
+          <a className="text-primaryHighlight font-bold">this article</a>
+        </NextLink>
+        .
+      </p>
     </div>
   </Main>
 )
