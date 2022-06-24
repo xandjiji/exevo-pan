@@ -44,13 +44,13 @@ export const Calculator = () => {
     [averageDamage, creatureHp, bonusResistance, powerful],
   )
 
-  const { locale: untypedLocale } = useRouter()
-  const locale = untypedLocale as RegisteredLocale
+  const { locale } = useRouter()
+  const texts = translations[locale as RegisteredLocale]
 
   return (
     <>
       <Input
-        label={translations[locale].yourAverageDamage}
+        label={texts.yourAverageDamage}
         type="number"
         step={100}
         min={0}
@@ -59,9 +59,12 @@ export const Calculator = () => {
         noAlert
       />
 
-      <LabeledCard noBackground labelText="Low Blow + Powerful Strike">
+      <LabeledCard
+        noBackground
+        labelText={`Low Blow + ${texts.criticalChance}`}
+      >
         <Group>
-          <strong>{translations[locale].finalAverageDamage}:</strong>
+          <strong>{texts.finalAverageDamage}:</strong>
           <Chip>
             <Image
               src={`${SPRITE_PATH}/Low Blow.png`}
@@ -74,15 +77,15 @@ export const Calculator = () => {
         </Group>
       </LabeledCard>
 
-      <LabeledCard noBackground labelText={translations[locale].elementalCharm}>
+      <LabeledCard noBackground labelText={texts.elementalCharm}>
         <Checkbox
-          label="Powerful Strike imbuement"
+          label={texts.criticalChance}
           checked={powerful}
           onClick={() => setPowerful((prev) => !prev)}
         />
 
         <Input
-          label={translations[locale].creatureHP}
+          label={texts.creatureHP}
           type="number"
           step={100}
           min={0}
@@ -92,7 +95,7 @@ export const Calculator = () => {
         />
 
         <Slider
-          label={`${translations[locale].elementalBonus}:`}
+          label={`${texts.elementalBonus}:`}
           min={0}
           max={100}
           displayValue
@@ -103,13 +106,13 @@ export const Calculator = () => {
         />
 
         <Group>
-          <strong>{translations[locale].finalAverageDamage}:</strong>
+          <strong>{texts.finalAverageDamage}:</strong>
           <Chip>
             <Image
               src={`${SPRITE_PATH}/Charm.png`}
               width={16}
               height={16}
-              alt={translations[locale].elementalCharm}
+              alt={texts.elementalCharm}
             />
             {elementalAverage}
           </Chip>
