@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { LabeledTextBox } from 'components/Atoms'
+import { LabeledCardProps } from './types'
 
 export const Main = ({
   className,
@@ -14,10 +15,15 @@ export const Main = ({
   />
 )
 
-export const LabeledCard: typeof LabeledTextBox = ({ className, ...props }) => (
+export const LabeledCard = ({
+  className,
+  noBackground = false,
+  ...props
+}: LabeledCardProps) => (
   <LabeledTextBox
     className={clsx(
-      'bg-background focus-within:border-primaryVariant grid gap-4 transition-colors',
+      'focus-within:border-primaryVariant grid gap-4 transition-colors',
+      !noBackground && 'bg-background',
       className,
     )}
     style={{ padding: '16px 24px' }}

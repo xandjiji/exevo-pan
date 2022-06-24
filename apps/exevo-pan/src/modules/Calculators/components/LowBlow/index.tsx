@@ -1,8 +1,7 @@
 import { useState } from 'react'
 import { Input, Checkbox } from 'components/Atoms'
 import { useRouter } from 'next/router'
-import { Main } from '../layout'
-import Sprite from '../../../Blog/components/Post/custom/Sprite/index'
+import { Main, LabeledCard } from '../layout'
 import { Chip, Group } from '../atoms'
 import * as S from './atoms'
 
@@ -12,8 +11,6 @@ const ELEMENTAL_DAMAGE = 0.05
 const ELEMENTAL_PROC_CHANCE = 0.1
 const ELEMENTAL_MULTIPLIER = ELEMENTAL_PROC_CHANCE * ELEMENTAL_DAMAGE
 const POWERFUL_MULTIPLIER = 1.05
-
-const SPRITE_PATH = '/sprites/charms'
 
 const translations = {
   en: {
@@ -42,6 +39,13 @@ const translations = {
   },
 }
 
+/* @ ToDo:
+
+- add powerful strike checkbox to low blow
+- slider % bonus damage (both?)
+- separate average damage box
+*/
+
 export const Calculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
   const finalDamageA = Math.round(averageDamage * LOW_BLOW_MULTIPLIER)
@@ -57,17 +61,7 @@ export const Calculator = () => {
 
   return (
     <>
-      <S.LabeledCard labelText="Low Blow">
-        <S.Title style={{ marginLeft: -5 }}>
-          <Sprite src={`${SPRITE_PATH}/Low Blow.png`} width={32} height={32}>
-            Low Blow
-          </Sprite>
-          {' + '}
-          <Sprite src="/sprites/crit.png" width={37} height={30}>
-            Powerful Strike
-          </Sprite>
-        </S.Title>
-
+      <LabeledCard noBackground labelText="Low Blow">
         <Input
           label={translations[locale as RegisteredLocale].yourAverageDamage}
           type="number"
@@ -78,23 +72,24 @@ export const Calculator = () => {
           noAlert
         />
 
+        <Checkbox
+          label="Powerful Strike imbuement"
+          checked={powerful}
+          onClick={() => setPowerful((prev) => !prev)}
+        />
+
         <Group>
           <strong>
             {translations[locale as RegisteredLocale].finalAverageDamage}:
           </strong>
           <Chip>{finalDamageA}</Chip>
         </Group>
-      </S.LabeledCard>
+      </LabeledCard>
 
-      <S.LabeledCard
+      <LabeledCard
+        noBackground
         labelText={translations[locale as RegisteredLocale].elementalCharm}
       >
-        <S.Title style={{ marginLeft: -2 }}>
-          <Sprite src={`${SPRITE_PATH}/Charm.png`} width={32} height={32}>
-            {translations[locale as RegisteredLocale].elementalCharm}
-          </Sprite>
-        </S.Title>
-
         <Input
           label={translations[locale as RegisteredLocale].creatureHP}
           type="number"
@@ -117,7 +112,7 @@ export const Calculator = () => {
           </strong>
           <Chip>{finalDamageB}</Chip>
         </Group>
-      </S.LabeledCard>
+      </LabeledCard>
     </>
   )
 }
