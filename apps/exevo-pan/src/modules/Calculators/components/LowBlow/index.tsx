@@ -1,14 +1,11 @@
 import { useState, useMemo } from 'react'
+import Image from 'next/image'
 import { Input, Checkbox, Slider } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { Main, LabeledCard } from '../layout'
 import { Chip, Group } from '../atoms'
-import * as S from './atoms'
 
-const LOW_BLOW_MULTIPLIER = {
-  powerful: 1.09,
-  regular: 1.04,
-}
+const LOW_BLOW_MULTIPLIER = 1.09
 
 const ELEMENTAL_DAMAGE = 0.05
 const ELEMENTAL_PROC_CHANCE = 0.1
@@ -43,8 +40,6 @@ const translations = {
 
 /* @ ToDo:
 
-- separate average damage box
-- remover atoms
 - separar utils
 - i18n
 */
@@ -52,16 +47,14 @@ const translations = {
 const transformBonusResistance = (value: number) =>
   `${value > 0 ? '+' : ''}${value}%`
 
+const SPRITE_PATH = '/sprites/charms'
+
 export const Calculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
-  const [powerfulA, setPowerfulA] = useState(true)
 
   const lowBlowAverage = useMemo(
-    () =>
-      Math.round(
-        averageDamage * LOW_BLOW_MULTIPLIER[powerfulA ? 'powerful' : 'regular'],
-      ),
-    [averageDamage, powerfulA],
+    () => Math.round(averageDamage * LOW_BLOW_MULTIPLIER),
+    [averageDamage],
   )
 
   const [creatureHp, setCreatureHp] = useState(2000)
@@ -79,12 +72,13 @@ export const Calculator = () => {
     [averageDamage, creatureHp, bonusResistance, powerfulB],
   )
 
-  const { locale } = useRouter()
+  const { locale: untypedLocale } = useRouter()
+  const locale = untypedLocale as RegisteredLocale
 
   return (
     <>
       <Input
-        label={translations[locale as RegisteredLocale].yourAverageDamage}
+        label={translations[locale].yourAverageDamage}
         type="number"
         step={100}
         min={0}
@@ -93,25 +87,22 @@ export const Calculator = () => {
         noAlert
       />
 
-      <LabeledCard noBackground labelText="Low Blow">
-        <Checkbox
-          label="Powerful Strike imbuement"
-          checked={powerfulA}
-          onClick={() => setPowerfulA((prev) => !prev)}
-        />
-
+      <LabeledCard noBackground labelText="Low Blow + Powerful Strike">
         <Group>
-          <strong>
-            {translations[locale as RegisteredLocale].finalAverageDamage}:
-          </strong>
-          <Chip>{lowBlowAverage}</Chip>
+          <strong>{translations[locale].finalAverageDamage}:</strong>
+          <Chip>
+            <Image
+              src={`${SPRITE_PATH}/Low Blow.png`}
+              width={16}
+              height={16}
+              alt="Low Blow"
+            />
+            {lowBlowAverage}
+          </Chip>
         </Group>
       </LabeledCard>
 
-      <LabeledCard
-        noBackground
-        labelText={translations[locale as RegisteredLocale].elementalCharm}
-      >
+      <LabeledCard noBackground labelText={translations[locale].elementalCharm}>
         <Checkbox
           label="Powerful Strike imbuement"
           checked={powerfulB}
@@ -119,7 +110,7 @@ export const Calculator = () => {
         />
 
         <Input
-          label={translations[locale as RegisteredLocale].creatureHP}
+          label={translations[locale].creatureHP}
           type="number"
           step={100}
           min={0}
@@ -139,10 +130,16 @@ export const Calculator = () => {
         />
 
         <Group>
-          <strong>
-            {translations[locale as RegisteredLocale].finalAverageDamage}:
-          </strong>
-          <Chip>{elementalAverage}</Chip>
+          <strong>{translations[locale].finalAverageDamage}:</strong>
+          <Chip>
+            <Image
+              src={`${SPRITE_PATH}/Charm.png`}
+              width={16}
+              height={16}
+              alt={translations[locale].elementalCharm}
+            />
+            {elementalAverage}
+          </Chip>
         </Group>
       </LabeledCard>
     </>
