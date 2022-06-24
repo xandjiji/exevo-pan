@@ -26,7 +26,7 @@ export const Calculator = () => {
 
   const [creatureHp, setCreatureHp] = useState(2000)
   const [bonusResistance, setBonusResistance] = useState(0)
-  const [powerfulB, setPowerfulB] = useState(false)
+  const [powerful, setPowerful] = useState(false)
 
   const elementalAverage = useMemo(
     () =>
@@ -34,9 +34,9 @@ export const Calculator = () => {
         creatureHp *
           (ELEMENTAL_PROC_CHANCE *
             (ELEMENTAL_DAMAGE * (1 + bonusResistance / 100))) +
-          averageDamage * (powerfulB ? POWERFUL_MULTIPLIER : 1),
+          averageDamage * (powerful ? POWERFUL_MULTIPLIER : 1),
       ),
-    [averageDamage, creatureHp, bonusResistance, powerfulB],
+    [averageDamage, creatureHp, bonusResistance, powerful],
   )
 
   const { locale: untypedLocale } = useRouter()
@@ -72,8 +72,8 @@ export const Calculator = () => {
       <LabeledCard noBackground labelText={translations[locale].elementalCharm}>
         <Checkbox
           label="Powerful Strike imbuement"
-          checked={powerfulB}
-          onClick={() => setPowerfulB((prev) => !prev)}
+          checked={powerful}
+          onClick={() => setPowerful((prev) => !prev)}
         />
 
         <Input
@@ -94,6 +94,7 @@ export const Calculator = () => {
           transformDisplayedValues={transformBonusResistance}
           value={bonusResistance}
           onChange={(e) => setBonusResistance(+e.target.value)}
+          className="sm:min-w-[230px]"
         />
 
         <Group>
@@ -115,7 +116,7 @@ export const Calculator = () => {
 
 const LowBlow = () => (
   <Main>
-    <div className="child:bg-background grid min-w-[280px] gap-6">
+    <div className="child:bg-background grid gap-6">
       <Calculator />
     </div>
   </Main>
