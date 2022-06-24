@@ -15,6 +15,7 @@ const Hero = ({
     className={clsx(
       'inner-container relative flex items-center justify-center py-6 md:py-24',
       className,
+      offset ? 'md:py-20' : 'md:py-24',
     )}
     {...props}
   >
