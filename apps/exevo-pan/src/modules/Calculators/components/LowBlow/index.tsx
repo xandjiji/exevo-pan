@@ -1,5 +1,5 @@
-import { useState } from 'react'
-import { Input, Checkbox } from 'components/Atoms'
+import { useState, useMemo } from 'react'
+import { Input, Checkbox, Slider } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { Main, LabeledCard } from '../layout'
 import { Chip, Group } from '../atoms'
@@ -12,7 +12,6 @@ const LOW_BLOW_MULTIPLIER = {
 
 const ELEMENTAL_DAMAGE = 0.05
 const ELEMENTAL_PROC_CHANCE = 0.1
-const ELEMENTAL_MULTIPLIER = ELEMENTAL_PROC_CHANCE * ELEMENTAL_DAMAGE
 const POWERFUL_MULTIPLIER = 1.05
 
 const translations = {
@@ -44,22 +43,37 @@ const translations = {
 
 /* @ ToDo:
 
-- slider % bonus damage (both?)
 - separate average damage box
 */
+
+const transformBonusResistance = (value: number) =>
+  `${value > 0 ? '+' : ''}${value}%`
 
 export const Calculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
   const [powerfulA, setPowerfulA] = useState(true)
-  const finalDamageA = Math.round(
-    averageDamage * LOW_BLOW_MULTIPLIER[powerfulA ? 'powerful' : 'regular'],
+
+  const lowBlowAverage = useMemo(
+    () =>
+      Math.round(
+        averageDamage * LOW_BLOW_MULTIPLIER[powerfulA ? 'powerful' : 'regular'],
+      ),
+    [averageDamage, powerfulA],
   )
 
   const [creatureHp, setCreatureHp] = useState(2000)
+  const [bonusResistance, setBonusResistance] = useState(0)
   const [powerfulB, setPowerfulB] = useState(false)
-  const finalDamageB = Math.round(
-    creatureHp * ELEMENTAL_MULTIPLIER +
-      averageDamage * (powerfulB ? POWERFUL_MULTIPLIER : 1),
+
+  const elementalAverage = useMemo(
+    () =>
+      Math.round(
+        creatureHp *
+          (ELEMENTAL_PROC_CHANCE *
+            (ELEMENTAL_DAMAGE * (1 + bonusResistance / 100))) +
+          averageDamage * (powerfulB ? POWERFUL_MULTIPLIER : 1),
+      ),
+    [averageDamage, creatureHp, bonusResistance, powerfulB],
   )
 
   const { locale } = useRouter()
@@ -73,7 +87,7 @@ export const Calculator = () => {
           step={100}
           min={0}
           value={averageDamage}
-          onChange={(event) => setAverageDamage(+event.target.value)}
+          onChange={(e) => setAverageDamage(+e.target.value)}
           noAlert
         />
 
@@ -87,7 +101,7 @@ export const Calculator = () => {
           <strong>
             {translations[locale as RegisteredLocale].finalAverageDamage}:
           </strong>
-          <Chip>{finalDamageA}</Chip>
+          <Chip>{lowBlowAverage}</Chip>
         </Group>
       </LabeledCard>
 
@@ -101,8 +115,18 @@ export const Calculator = () => {
           step={100}
           min={0}
           value={creatureHp}
-          onChange={(event) => setCreatureHp(+event.target.value)}
+          onChange={(e) => setCreatureHp(+e.target.value)}
           noAlert
+        />
+
+        <Slider
+          label="Elemental bonus damage:"
+          min={0}
+          max={100}
+          displayValue
+          transformDisplayedValues={transformBonusResistance}
+          value={bonusResistance}
+          onChange={(e) => setBonusResistance(+e.target.value)}
         />
 
         <Checkbox
@@ -115,7 +139,7 @@ export const Calculator = () => {
           <strong>
             {translations[locale as RegisteredLocale].finalAverageDamage}:
           </strong>
-          <Chip>{finalDamageB}</Chip>
+          <Chip>{elementalAverage}</Chip>
         </Group>
       </LabeledCard>
     </>
