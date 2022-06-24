@@ -5,7 +5,10 @@ import { Main, LabeledCard } from '../layout'
 import { Chip, Group } from '../atoms'
 import * as S from './atoms'
 
-const LOW_BLOW_MULTIPLIER = 1.09
+const LOW_BLOW_MULTIPLIER = {
+  powerful: 1.09,
+  regular: 1.04,
+}
 
 const ELEMENTAL_DAMAGE = 0.05
 const ELEMENTAL_PROC_CHANCE = 0.1
@@ -41,20 +44,22 @@ const translations = {
 
 /* @ ToDo:
 
-- add powerful strike checkbox to low blow
 - slider % bonus damage (both?)
 - separate average damage box
 */
 
 export const Calculator = () => {
   const [averageDamage, setAverageDamage] = useState(500)
-  const finalDamageA = Math.round(averageDamage * LOW_BLOW_MULTIPLIER)
+  const [powerfulA, setPowerfulA] = useState(true)
+  const finalDamageA = Math.round(
+    averageDamage * LOW_BLOW_MULTIPLIER[powerfulA ? 'powerful' : 'regular'],
+  )
 
   const [creatureHp, setCreatureHp] = useState(2000)
-  const [powerful, setPowerful] = useState(false)
+  const [powerfulB, setPowerfulB] = useState(false)
   const finalDamageB = Math.round(
     creatureHp * ELEMENTAL_MULTIPLIER +
-      averageDamage * (powerful ? POWERFUL_MULTIPLIER : 1),
+      averageDamage * (powerfulB ? POWERFUL_MULTIPLIER : 1),
   )
 
   const { locale } = useRouter()
@@ -74,8 +79,8 @@ export const Calculator = () => {
 
         <Checkbox
           label="Powerful Strike imbuement"
-          checked={powerful}
-          onClick={() => setPowerful((prev) => !prev)}
+          checked={powerfulA}
+          onClick={() => setPowerfulA((prev) => !prev)}
         />
 
         <Group>
@@ -102,8 +107,8 @@ export const Calculator = () => {
 
         <Checkbox
           label="Powerful Strike imbuement"
-          checked={powerful}
-          onClick={() => setPowerful((prev) => !prev)}
+          checked={powerfulB}
+          onClick={() => setPowerfulB((prev) => !prev)}
         />
 
         <Group>
