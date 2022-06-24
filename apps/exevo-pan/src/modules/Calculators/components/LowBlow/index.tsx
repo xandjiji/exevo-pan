@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { Input, Checkbox, LabeledTextBox } from 'components/Atoms'
+import { Input, Checkbox } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { Main } from '../layout'
 import Sprite from '../../../Blog/components/Post/custom/Sprite/index'
+import { Chip, Group } from '../atoms'
 import * as S from './atoms'
 
 const LOW_BLOW_MULTIPLIER = 1.09
@@ -56,7 +57,7 @@ export const Calculator = () => {
 
   return (
     <>
-      <LabeledTextBox labelText="Low Blow">
+      <S.LabeledCard labelText="Low Blow">
         <S.Title style={{ marginLeft: -5 }}>
           <Sprite src={`${SPRITE_PATH}/Low Blow.png`} width={32} height={32}>
             Low Blow
@@ -77,13 +78,15 @@ export const Calculator = () => {
           noAlert
         />
 
-        <S.Result>
-          {translations[locale as RegisteredLocale].finalAverageDamage}:{' '}
-          <code>{finalDamageA}</code>
-        </S.Result>
-      </LabeledTextBox>
+        <Group>
+          <strong>
+            {translations[locale as RegisteredLocale].finalAverageDamage}:
+          </strong>
+          <Chip>{finalDamageA}</Chip>
+        </Group>
+      </S.LabeledCard>
 
-      <LabeledTextBox
+      <S.LabeledCard
         labelText={translations[locale as RegisteredLocale].elementalCharm}
       >
         <S.Title style={{ marginLeft: -2 }}>
@@ -108,11 +111,13 @@ export const Calculator = () => {
           onClick={() => setPowerful((prev) => !prev)}
         />
 
-        <S.Result>
-          {translations[locale as RegisteredLocale].finalAverageDamage}:{' '}
-          <code>{finalDamageB}</code>
-        </S.Result>
-      </LabeledTextBox>
+        <Group>
+          <strong>
+            {translations[locale as RegisteredLocale].finalAverageDamage}:
+          </strong>
+          <Chip>{finalDamageB}</Chip>
+        </Group>
+      </S.LabeledCard>
     </>
   )
 }

@@ -13,6 +13,7 @@ import {
   isObjectEmpty,
 } from './utils'
 import { weaponOptions } from './options'
+import { Chip, Group } from '../../atoms'
 import * as S from './atoms'
 import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
@@ -78,7 +79,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
       </LabeledCard>
 
       <LabeledCard labelText={calculators.ExerciseWeapons.labels.results}>
-        <S.Group>
+        <Group>
           <div className="flex items-center gap-1">
             <strong>{calculators.ExerciseWeapons.labels.moneyCost}</strong>
             <InfoTooltip
@@ -96,42 +97,42 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             />
           </div>
           <S.ChipWrapper className="shrink-0 flex-wrap">
-            <S.Chip>
+            <Chip>
               <Text.TibiaCoin value={cost.tc} />
-            </S.Chip>
+            </Chip>
             <small className="-mx-2.5 font-light">{common.or}</small>
-            <S.Chip>
+            <Chip>
               <Text.GoldCoin value={cost.gold} />
-            </S.Chip>
+            </Chip>
           </S.ChipWrapper>
-        </S.Group>
+        </Group>
 
-        <S.Group>
+        <Group>
           <p>
             <strong>{calculators.ExerciseWeapons.labels.weapons}</strong>
           </p>
           <ClientComponent>
             <S.ChipWrapper className="flex-wrap">
-              <S.Chip aria-hidden={!weaponsRequired.lasting}>
+              <Chip aria-hidden={!weaponsRequired.lasting}>
                 <S.Weapon.lasting /> lasting weapons
                 <S.ActiveCount>{weaponsRequired.lasting}x</S.ActiveCount>
-              </S.Chip>
-              <S.Chip aria-hidden={!weaponsRequired.durable}>
+              </Chip>
+              <Chip aria-hidden={!weaponsRequired.durable}>
                 <S.Weapon.durable /> durable weapons
                 <S.ActiveCount>{weaponsRequired.durable}x</S.ActiveCount>
-              </S.Chip>
-              <S.Chip aria-hidden={!weaponsRequired.regular}>
+              </Chip>
+              <Chip aria-hidden={!weaponsRequired.regular}>
                 <S.Weapon.regular /> regular weapons
                 <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
-              </S.Chip>
+              </Chip>
               <S.Empty aria-hidden={!isObjectEmpty(weaponsRequired)}>
                 {calculators.ExerciseWeapons.labels.none}
               </S.Empty>
             </S.ChipWrapper>
           </ClientComponent>
-        </S.Group>
+        </Group>
 
-        <S.Group>
+        <Group>
           <p>
             <strong>{calculators.ExerciseWeapons.labels.time}</strong>
           </p>
@@ -160,7 +161,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
               </S.Empty>
             </S.ChipWrapper>
           </ClientComponent>
-        </S.Group>
+        </Group>
       </LabeledCard>
     </div>
   )

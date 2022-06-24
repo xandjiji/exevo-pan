@@ -4,12 +4,9 @@ import Image from 'next/image'
 import lastingSrc from 'assets/lastingSword.gif'
 import durableSrc from 'assets/durableSword.gif'
 import regularSrc from 'assets/regularSword.gif'
-import styles from './styles.module.css'
+import { Chip } from '../../atoms'
+import styles from '../../styles.module.css'
 import { TimeBubbleProps } from './types'
-
-export const Group = (args: JSX.IntrinsicElements['div']) => (
-  <div className="text-tsm grid gap-2" {...args} />
-)
 
 export const ChipWrapper = ({
   className,
@@ -18,17 +15,6 @@ export const ChipWrapper = ({
   <div
     className={clsx(
       'child:flex child:shrink-0 child:relative child:gap-1.5 relative flex items-center gap-4',
-      className,
-    )}
-    {...props}
-  />
-)
-
-export const Chip = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
-  <div
-    className={clsx(
-      'bg-separator/60 flex items-center rounded-xl py-1.5 px-3 font-normal transition-colors',
-      styles.hidden,
       className,
     )}
     {...props}
