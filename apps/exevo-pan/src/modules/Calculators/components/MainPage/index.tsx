@@ -2,26 +2,9 @@
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { SpritePortrait } from 'components/Atoms'
-import { routes } from 'Constants'
-import { MainPageEntry } from './types'
+import { routes } from '../../routes'
 
-const entries: MainPageEntry[] = [
-  {
-    name: 'ExerciseWeapons',
-    thumbnail: '/sprites/store/lasting exercise sword.gif',
-    href: routes.EXERCISE_WEAPONS,
-  },
-  {
-    name: 'CharmDamage',
-    thumbnail: '/sprites/charms/Charm.png',
-    href: routes.CHARM_DAMAGE,
-  },
-  {
-    name: 'Stamina',
-    thumbnail: '/sprites/sleeping.png',
-    href: routes.STAMINA,
-  },
-]
+const [main, ...entries] = routes
 
 const MainPage = () => {
   const {
@@ -31,24 +14,24 @@ const MainPage = () => {
   return (
     <main className="inner-container pb-4 md:pb-8">
       <ul className="grid gap-4">
-        {entries.map(({ name, thumbnail, href }) => (
-          <li key={name}>
+        {entries.map(({ title, href, sprite }) => (
+          <li key={title}>
             <NextLink href={href}>
               <a className="card group flex items-center gap-4">
                 <SpritePortrait
-                  src={thumbnail}
+                  src={sprite}
                   width={32}
                   height={32}
-                  alt={calculators.Meta[name].title}
+                  alt={calculators.Meta[title].title}
                   className="relative left-0 transition-all group-hover:left-[3px]"
                 />
 
                 <div className="grid gap-1.5">
                   <h3 className="text-primaryHighlight text-base tracking-wide">
-                    {calculators.Meta[name].title}
+                    {calculators.Meta[title].title}
                   </h3>
                   <p className="text-tsm font-light">
-                    {calculators.Meta[name].description}
+                    {calculators.Meta[title].description}
                   </p>
                 </div>
               </a>

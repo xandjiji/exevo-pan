@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
-import { Header, CharmDamage } from 'modules/Calculators'
+import { Header, CharmDamage, pages } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -8,6 +8,7 @@ import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
 const pageUrl = buildUrl(routes.STAMINA)
+const { hero } = pages.Stamina
 
 export default function Calculator() {
   const { translations } = useTranslations()
@@ -71,7 +72,7 @@ export default function Calculator() {
         <Header />
         <Hero
           title={translations.calculators.Meta.Stamina.title}
-          src={`${routes.CALCULATORS}/stamina-hero.png`}
+          src={hero}
           offset
         />
         <CharmDamage />

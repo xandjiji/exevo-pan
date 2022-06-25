@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
-import { Header, ExerciseWeapons } from 'modules/Calculators'
+import { Header, ExerciseWeapons, pages } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -8,6 +8,7 @@ import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
 const pageUrl = buildUrl(routes.EXERCISE_WEAPONS)
+const { hero } = pages.ExerciseWeapons
 
 export default function Calculator() {
   const { translations } = useTranslations()
@@ -71,7 +72,7 @@ export default function Calculator() {
         <Header />
         <Hero
           title={translations.calculators.Meta.ExerciseWeapons.title}
-          src={`${routes.CALCULATORS}/exercise-weapons-hero.png`}
+          src={hero}
           offset
         />
         <ExerciseWeapons />
