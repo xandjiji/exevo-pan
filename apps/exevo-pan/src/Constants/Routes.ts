@@ -5,6 +5,7 @@ export const routes = {
   CALCULATORS: '/calculators',
   EXERCISE_WEAPONS: '/calculators/exercise-weapons',
   CHARM_DAMAGE: '/calculators/charm-damage',
+  STAMINA: '/calculators/stamina',
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
   LIBERTABRA_WAR: '/libertabra-war',

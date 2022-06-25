@@ -16,6 +16,11 @@ const entries: MainPageEntry[] = [
     thumbnail: '/sprites/charms/Charm.png',
     href: routes.CHARM_DAMAGE,
   },
+  {
+    name: 'Stamina',
+    thumbnail: '/sprites/sleeping.png',
+    href: routes.STAMINA,
+  },
 ]
 
 const MainPage = () => {

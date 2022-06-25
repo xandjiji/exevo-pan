@@ -5,6 +5,7 @@ import { routes } from 'Constants'
 import MainIcon from 'assets/svgs/calculator.svg'
 import ExerciseWeaponIcon from 'assets/svgs/weight.svg'
 import CharmDamageIcon from 'assets/svgs/charms.svg'
+import StaminaIcon from 'assets/svgs/charge.svg'
 
 const Header = () => {
   const {
@@ -26,6 +27,11 @@ const Header = () => {
       title: calculators.Header.CharmDamage,
       href: routes.CHARM_DAMAGE,
       icon: <CharmDamageIcon />,
+    },
+    {
+      title: calculators.Header.Stamina,
+      href: routes.STAMINA,
+      icon: <StaminaIcon />,
     },
   ]
 

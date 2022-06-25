@@ -14,11 +14,17 @@ export default {
       description:
         'Compare the average damage between different charms to see which one is best.',
     },
+    Stamina: {
+      title: 'Stamina',
+      description:
+        'Calculate how much time will it take to restore your stamina.',
+    },
   },
   Header: {
     Main: 'Main',
     ExerciseWeapons: 'Exercise weapons',
     CharmDamage: 'Charm Damage',
+    Stamina: 'Stamina',
   },
   ExerciseWeapons: {
     labels: {
