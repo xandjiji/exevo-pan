@@ -15,11 +15,5 @@ export type TimeInputProps = CustomProps & ExtendedProps
 export type HasNextValueArgs = {
   min: number
   max: number
-  buffer: string
-}
-
-export type UseTimeInputProps = {
-  min: number
-  max: number
-  tabNext: () => void
+  value: string
 }
