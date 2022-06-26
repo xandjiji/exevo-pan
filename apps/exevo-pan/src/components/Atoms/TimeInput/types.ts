@@ -17,3 +17,9 @@ export type HasNextValueArgs = {
   max: number
   buffer: string
 }
+
+export type UseTimeInputProps = {
+  min: number
+  max: number
+  tabNext: () => void
+}
