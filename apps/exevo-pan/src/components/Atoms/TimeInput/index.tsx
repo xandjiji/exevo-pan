@@ -16,6 +16,18 @@ import { TimeInputProps } from './types'
 
 - hidden input
 - controllable
+
+max: 23
+    -3
+max: 20
+    -3
+
+max: 233
+
+max: 230
+
+max: 200
+
 */
 
 const TimeInput = ({ maxHour = 23 }: TimeInputProps) => {
@@ -26,14 +38,23 @@ const TimeInput = ({ maxHour = 23 }: TimeInputProps) => {
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
 
-  const maxHourDigit = rightMostDigit(maxHour)
-  console.log(maxHourDigit)
+  const tabNext = () => minutesRef.current?.focus()
+
+  const maxHourDigit = +maxHour.toString()[0]
+  const maxLength = maxHour.toString().length
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (isNumber(e.key)) {
       const inputNumber = +e.key
+      if (hourBuffer.length < maxLength) {
+        const bufferValue = hourBuffer + e.key
+        setHourBuffer(bufferValue)
+        setHours(bufferValue.padStart(maxLength, '0'))
+      }
       /* do something */
     }
   }
+
+  console.log(hourBuffer)
 
   const hoursValue = hours || '--'
   const minutesValue = minutes || '--'
@@ -47,6 +68,7 @@ const TimeInput = ({ maxHour = 23 }: TimeInputProps) => {
         onChange={(e) => {
           e.target.value = hoursValue
         }}
+        onBlur={() => setHourBuffer('')}
         className="focus:bg-primaryVariant caret-transparent transition-colors"
       />
 

@@ -6,7 +6,7 @@ export type ExtendedProps = Omit<
 export type CustomProps = {
   defaultValue?: string
   value?: string
-  maxHour: number
+  maxHour?: number
 }
 
 export type TimeInputProps = CustomProps & ExtendedProps
