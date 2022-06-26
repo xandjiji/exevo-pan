@@ -1339,6 +1339,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Kitchen Table',
     value: 100,
   },
+  'knightly chess table': {
+    name: 'Knightly Chess Table',
+    value: 60,
+  },
   'magnificent table': {
     name: 'Magnificent Table',
     value: 60,
