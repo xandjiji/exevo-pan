@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
-import { Header, CharmDamage, pages } from 'modules/Calculators'
+import { Header, pages } from 'modules/Calculators'
+import { TimeInput } from 'components/Atoms'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -75,7 +76,9 @@ export default function Calculator() {
           src={hero}
           offset
         />
-        <CharmDamage />
+        <div className="p-10">
+          <TimeInput />
+        </div>
       </Main>
     </>
   )
