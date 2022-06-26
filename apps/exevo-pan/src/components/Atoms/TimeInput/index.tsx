@@ -1,12 +1,8 @@
 import { useState, useRef } from 'react'
-import { rightMostDigit, isNumber } from './utils'
+import { isNumber, hasNextValue } from './utils'
 import { TimeInputProps } from './types'
 
 /* @ ToDo:
-- preserve focus/select
-- number only
-- infer value on typing (based max/min)
-
 - arrow left/right tab
 - arrow inc/dec
 - arrow inc/dec cycle
@@ -14,23 +10,13 @@ import { TimeInputProps } from './types'
 - seconds?
 - focus next field
 
+- prop pad 0
+
 - hidden input
 - controllable
-
-max: 23
-    -3
-max: 20
-    -3
-
-max: 233
-
-max: 230
-
-max: 200
-
 */
 
-const TimeInput = ({ maxHour = 23 }: TimeInputProps) => {
+const TimeInput = ({ maxHour = 23, minHour = 0 }: TimeInputProps) => {
   const [hours, setHours] = useState('')
   const [hourBuffer, setHourBuffer] = useState('')
   const [minutes, setMinutes] = useState('')
@@ -40,24 +26,21 @@ const TimeInput = ({ maxHour = 23 }: TimeInputProps) => {
 
   const tabNext = () => minutesRef.current?.focus()
 
-  const maxHourDigit = +maxHour.toString()[0]
   const maxLength = maxHour.toString().length
+
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (isNumber(e.key)) {
-      const inputNumber = +e.key
-      if (hourBuffer.length < maxLength) {
-        const bufferValue = hourBuffer + e.key
-        setHourBuffer(bufferValue)
-        setHours(bufferValue.padStart(maxLength, '0'))
+      const bufferValue = hourBuffer + e.key
+      setHourBuffer(bufferValue)
+      setHours(bufferValue)
+      if (!hasNextValue({ min: minHour, max: maxHour, buffer: bufferValue })) {
+        tabNext()
       }
-      /* do something */
     }
   }
 
-  console.log(hourBuffer)
-
-  const hoursValue = hours || '--'
-  const minutesValue = minutes || '--'
+  const hoursValue = hours ? hours.padStart(maxLength, '0') : '--'
+  const minutesValue = minutes ? minutes.padStart(maxLength, '0') : '--'
 
   return (
     <div>
@@ -69,14 +52,16 @@ const TimeInput = ({ maxHour = 23 }: TimeInputProps) => {
           e.target.value = hoursValue
         }}
         onBlur={() => setHourBuffer('')}
-        className="focus:bg-primaryVariant caret-transparent transition-colors"
+        className="focus:bg-primaryVariant caret-transparent transition-colors selection:bg-transparent"
       />
 
       <input
         ref={minutesRef}
         value={minutesValue}
-        className="focus:bg-primaryVariant caret-transparent transition-colors"
-        onChange={(e) => console.log(e.target.value)}
+        className="focus:bg-primaryVariant caret-transparent transition-colors selection:bg-transparent"
+        onChange={(e) => {
+          e.target.value = minutesValue
+        }}
       />
     </div>
   )
