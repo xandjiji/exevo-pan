@@ -14,11 +14,17 @@ const useTimeInput = ({ min, max, onFinish }: UseTimeInputProps) => {
       if (isNumber(e.key)) {
         setState((prev) => {
           const newValue = prev.buffer + e.key
-          return {
-            value: newValue,
-            buffer: newValue,
-          }
+          return { value: newValue, buffer: newValue }
         })
+        return
+      }
+
+      switch (e.key) {
+        case 'Backspace':
+          setState({ value: '', buffer: '' })
+          break
+
+        default:
       }
     },
     [],

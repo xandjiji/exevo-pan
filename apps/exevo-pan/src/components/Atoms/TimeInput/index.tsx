@@ -5,7 +5,7 @@ import { TimeInputProps } from './types'
 /* @ ToDo:
 - style
 
-- arrow left/right tab
+- arrow left/right
 - arrow inc/dec
 - arrow inc/dec cycle
 
@@ -27,8 +27,8 @@ const TimeInput = ({ maxHour = 23, minHour = 0 }: TimeInputProps) => {
   })
 
   const [minute, minuteBinders] = useTimeInput({
-    min: minHour,
-    max: maxHour,
+    min: 0,
+    max: 59,
     onFinish: useCallback(() => minutesRef.current?.blur(), []),
   })
 
