@@ -201,6 +201,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Homely Bed',
     value: 120,
   },
+  'knightly bed': {
+    name: 'Knightly Bed',
+    value: 180,
+  },
   /* DECORATIONS */
   'marble tiles': {
     name: 'Marble Floor',
