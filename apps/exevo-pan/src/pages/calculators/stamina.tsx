@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
 import { Header, pages } from 'modules/Calculators'
-import { TimeInput } from 'components/Atoms'
+import { TimeInput, Input } from 'components/Atoms'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -76,8 +76,9 @@ export default function Calculator() {
           src={hero}
           offset
         />
-        <div className="p-10">
+        <div className="w-96 p-10">
           <TimeInput />
+          <Input label="Server" />
         </div>
       </Main>
     </>
