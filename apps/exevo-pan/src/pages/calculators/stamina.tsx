@@ -79,8 +79,10 @@ export default function Calculator() {
         <div className="grid w-96 gap-4 p-10">
           <TimeInput label="Server save daylight time" />
           <TimeInput label="Server save daylight time" disabled />
+          <TimeInput label="Server save daylight time" error="Invalid time" />
           <Input label="Server" />
           <Input label="Server" disabled />
+          <Input label="Server" error="Invalid server" />
         </div>
       </Main>
     </>

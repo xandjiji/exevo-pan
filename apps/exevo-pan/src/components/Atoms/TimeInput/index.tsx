@@ -6,16 +6,10 @@ import useTimeInput from './useTimeInput'
 import { TimeInputProps } from './types'
 
 /* @ ToDo:
-- style
-    label
-    disabled
-    invalid
-
 - hidden input
 - controllable
 
 - ally
-    label click event
     numeric keyboard
     enter key hint?
 */
@@ -27,6 +21,7 @@ const Input = forwardRef<HTMLInputElement, JSX.IntrinsicElements['input']>(
       {...args}
       className="focus:bg-primaryVariant text-onSurface text-tsm border-none bg-transparent text-center caret-transparent outline-none transition-colors selection:bg-transparent"
       style={{ width: '3ch' }}
+      inputMode="numeric"
     />
   ),
 )
@@ -40,10 +35,15 @@ const TimeInput = ({
   disabled,
   min = 0,
   max = 23,
+  error,
+  noAlert = false,
+  ...props
 }: TimeInputProps) => {
   const uuid = useUuid()
   const inputId = idProp ?? uuid
   const accessibleLabel = typeof label === 'string' ? label : ariaLabel
+
+  const errorId = useUuid()
 
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
@@ -82,7 +82,8 @@ const TimeInput = ({
       </Label>
       <div
         className={clsx(
-          'border-1 border-separator focus-within:border-primary text-tsm child:shrink-0 flex w-fit items-center gap-[1px] rounded-md border-solid py-[9px] px-3 transition-colors',
+          'border-1 text-tsm child:shrink-0 flex w-fit items-center gap-[1px] rounded-md border-solid py-[9px] px-3 transition-colors',
+          error ? 'border-red' : 'border-separator focus-within:border-primary',
           disabled ? 'bg-separator cursor-default' : 'bg-surface cursor-text',
         )}
       >
@@ -90,12 +91,29 @@ const TimeInput = ({
         :
         <Input ref={minutesRef} disabled={disabled} {...minuteBinders} />
       </div>
+      {!noAlert && (
+        <span
+          id={errorId}
+          aria-hidden={!error}
+          role="alert"
+          className={clsx(
+            'text-red px-2.5 text-xs transition-opacity',
+            !error && 'opacity-0',
+          )}
+          suppressHydrationWarning
+        >
+          {error}
+        </span>
+      )}
       <input
         hidden
         id={inputId}
         name={name}
         aria-label={accessibleLabel}
         disabled={disabled}
+        aria-invalid={!!error}
+        aria-errormessage={error ? errorId : undefined}
+        {...props}
       />
     </div>
   )
