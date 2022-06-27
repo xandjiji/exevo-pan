@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { clampValue } from 'utils'
-import { isNumber, hasNextValue } from './utils'
+import { isNumber, hasNextValue, formatValue } from './utils'
 import { UseTimeInputProps, ValueState } from './types'
 
 const useTimeInput = ({
@@ -13,6 +13,8 @@ const useTimeInput = ({
     value: '',
     buffer: '',
   })
+
+  const formattedValue = useMemo(() => formatValue(value, max), [max, value])
 
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = useCallback(
     (e) => {
@@ -51,24 +53,22 @@ const useTimeInput = ({
   /*  This is necessary because we are trying to control an input with Preact */
   const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
-      e.target.value = value
+      e.target.value = formattedValue
     },
-    [value],
+    [formattedValue],
   )
 
   const onBlur = useCallback(
     () => setState((prev) => ({ ...prev, buffer: '' })),
-    [value],
+    [],
   )
 
-  return [
-    value,
-    {
-      onKeyDown,
-      onChange,
-      onBlur,
-    },
-  ] as const
+  return {
+    value: formattedValue,
+    onKeyDown,
+    onChange,
+    onBlur,
+  }
 }
 
 export default useTimeInput

@@ -16,3 +16,6 @@ export const hasNextValue = ({ min, max, value }: HasNextValueArgs) => {
 
   return false
 }
+
+export const formatValue = (value: string, max: number): string =>
+  value ? value.padStart(max.toString().length, '0') : '--'
