@@ -1,9 +1,9 @@
-import { useState, useEffect, useCallback } from 'react'
-import { useIsMounted } from 'hooks'
+import { useState, useCallback } from 'react'
+import { clampValue } from 'utils'
 import { isNumber, hasNextValue } from './utils'
 import { UseTimeInputProps, ValueState } from './types'
 
-const useTimeInput = ({ min, max, onFinish }: UseTimeInputProps) => {
+const useTimeInput = ({ min, max, onInferredValue }: UseTimeInputProps) => {
   const [{ value }, setState] = useState<ValueState>({
     value: '',
     buffer: '',
@@ -14,6 +14,8 @@ const useTimeInput = ({ min, max, onFinish }: UseTimeInputProps) => {
       if (isNumber(e.key)) {
         setState((prev) => {
           const newValue = prev.buffer + e.key
+
+          if (!hasNextValue({ min, max, value: newValue })) onInferredValue()
           return { value: newValue, buffer: newValue }
         })
         return
@@ -24,10 +26,22 @@ const useTimeInput = ({ min, max, onFinish }: UseTimeInputProps) => {
           setState({ value: '', buffer: '' })
           break
 
+        case 'ArrowUp':
+        case 'ArrowDown':
+          setState((prev) => {
+            const modifier = e.key === 'ArrowUp' ? 1 : -1
+            const newValue = clampValue(+prev.value + modifier, [
+              min,
+              max,
+            ]).toString()
+            return { value: newValue, buffer: newValue }
+          })
+          break
+
         default:
       }
     },
-    [],
+    [min, max, onInferredValue],
   )
 
   /*  This is necessary because we are trying to control an input with Preact */
@@ -42,12 +56,6 @@ const useTimeInput = ({ min, max, onFinish }: UseTimeInputProps) => {
     () => setState((prev) => ({ ...prev, buffer: '' })),
     [value],
   )
-
-  const isMounted = useIsMounted()
-  useEffect(() => {
-    if (!isMounted) return
-    if (!hasNextValue({ min, max, value })) onFinish()
-  }, [min, max, value, onFinish])
 
   return [
     value,

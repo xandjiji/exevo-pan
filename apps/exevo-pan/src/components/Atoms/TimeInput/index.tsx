@@ -6,8 +6,6 @@ import { TimeInputProps } from './types'
 - style
 
 - arrow left/right
-- arrow inc/dec
-- arrow inc/dec cycle
 
 - prop pad 0
 - '--' fallback
@@ -23,13 +21,13 @@ const TimeInput = ({ maxHour = 23, minHour = 0 }: TimeInputProps) => {
   const [hour, hourBinders] = useTimeInput({
     min: minHour,
     max: maxHour,
-    onFinish: useCallback(() => minutesRef.current?.focus(), []),
+    onInferredValue: useCallback(() => minutesRef.current?.focus(), []),
   })
 
   const [minute, minuteBinders] = useTimeInput({
     min: 0,
     max: 59,
-    onFinish: useCallback(() => minutesRef.current?.blur(), []),
+    onInferredValue: useCallback(() => minutesRef.current?.blur(), []),
   })
 
   const maxLength = maxHour.toString().length

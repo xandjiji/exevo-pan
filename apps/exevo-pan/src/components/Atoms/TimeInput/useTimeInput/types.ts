@@ -1,7 +1,7 @@
 export type UseTimeInputProps = {
   min: number
   max: number
-  onFinish: () => void
+  onInferredValue: () => void
 }
 
 export type ValueState = {
