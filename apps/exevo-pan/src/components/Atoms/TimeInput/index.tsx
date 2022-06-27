@@ -92,12 +92,13 @@ const TimeInput = ({
         <Input
           ref={hoursRef}
           disabled={disabled}
-          {...hourBinders}
-          onKeyDown={(e) => {
+          /* {...hourBinders} */
+          /* onKeyDown={(e) => {
             console.log(e)
             const { code, key: keys, keyCode, which } = e
             setKey(JSON.stringify({ code, key: keys, keyCode, which }))
-          }}
+          }} */
+          onInput={(e) => setKey((e as any).data ?? 'OpS')}
         />
         :
         <Input ref={minutesRef} disabled={disabled} {...minuteBinders} />
