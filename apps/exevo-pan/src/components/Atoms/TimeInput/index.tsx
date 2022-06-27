@@ -1,14 +1,13 @@
-import { useRef, useCallback } from 'react'
+import { useRef, useCallback, useMemo } from 'react'
 import useTimeInput from './useTimeInput'
 import { TimeInputProps } from './types'
 
 /* @ ToDo:
 - style
 
-- arrow left/right
-
 - prop pad 0
 - '--' fallback
+- min/max props
 
 - hidden input
 - controllable
@@ -22,12 +21,23 @@ const TimeInput = ({ maxHour = 23, minHour = 0 }: TimeInputProps) => {
     min: minHour,
     max: maxHour,
     onInferredValue: useCallback(() => minutesRef.current?.focus(), []),
+    onKey: useMemo(
+      () => ({
+        ArrowRight: () => minutesRef.current?.focus(),
+      }),
+      [],
+    ),
   })
 
   const [minute, minuteBinders] = useTimeInput({
     min: 0,
     max: 59,
-    onInferredValue: useCallback(() => minutesRef.current?.blur(), []),
+    onKey: useMemo(
+      () => ({
+        ArrowLeft: () => hoursRef.current?.focus(),
+      }),
+      [],
+    ),
   })
 
   const maxLength = maxHour.toString().length

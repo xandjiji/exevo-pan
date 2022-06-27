@@ -3,7 +3,12 @@ import { clampValue } from 'utils'
 import { isNumber, hasNextValue } from './utils'
 import { UseTimeInputProps, ValueState } from './types'
 
-const useTimeInput = ({ min, max, onInferredValue }: UseTimeInputProps) => {
+const useTimeInput = ({
+  min,
+  max,
+  onInferredValue,
+  onKey,
+}: UseTimeInputProps) => {
   const [{ value }, setState] = useState<ValueState>({
     value: '',
     buffer: '',
@@ -11,37 +16,36 @@ const useTimeInput = ({ min, max, onInferredValue }: UseTimeInputProps) => {
 
   const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = useCallback(
     (e) => {
+      onKey?.[e.key]?.()
+
       if (isNumber(e.key)) {
         setState((prev) => {
           const newValue = prev.buffer + e.key
+          const inferValue = !hasNextValue({ min, max, value: newValue })
 
-          if (!hasNextValue({ min, max, value: newValue })) onInferredValue()
-          return { value: newValue, buffer: newValue }
+          if (inferValue) onInferredValue?.()
+          return { value: newValue, buffer: inferValue ? '' : newValue }
         })
         return
       }
 
-      switch (e.key) {
-        case 'Backspace':
-          setState({ value: '', buffer: '' })
-          break
+      if (e.key === 'Backspace') {
+        setState({ value: '', buffer: '' })
+        return
+      }
 
-        case 'ArrowUp':
-        case 'ArrowDown':
-          setState((prev) => {
-            const modifier = e.key === 'ArrowUp' ? 1 : -1
-            const newValue = clampValue(+prev.value + modifier, [
-              min,
-              max,
-            ]).toString()
-            return { value: newValue, buffer: newValue }
-          })
-          break
-
-        default:
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        setState((prev) => {
+          const modifier = e.key === 'ArrowUp' ? 1 : -1
+          const newValue = clampValue(+prev.value + modifier, [
+            min,
+            max,
+          ]).toString()
+          return { value: newValue, buffer: '' }
+        })
       }
     },
-    [min, max, onInferredValue],
+    [min, max, onInferredValue, onKey],
   )
 
   /*  This is necessary because we are trying to control an input with Preact */
