@@ -1,4 +1,4 @@
-import { forwardRef, useRef, useCallback, useMemo } from 'react'
+import { forwardRef, useRef, useCallback, useMemo, useState } from 'react'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
 import Label from '../Label'
@@ -48,6 +48,8 @@ const TimeInput = ({
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
 
+  const [key, setKey] = useState('')
+
   const hourBinders = useTimeInput({
     min,
     max,
@@ -87,7 +89,12 @@ const TimeInput = ({
           disabled ? 'bg-separator cursor-default' : 'bg-surface cursor-text',
         )}
       >
-        <Input ref={hoursRef} disabled={disabled} {...hourBinders} />
+        <Input
+          ref={hoursRef}
+          disabled={disabled}
+          {...hourBinders}
+          onKeyDown={(e) => setKey(e.key)}
+        />
         :
         <Input ref={minutesRef} disabled={disabled} {...minuteBinders} />
       </div>
@@ -115,6 +122,7 @@ const TimeInput = ({
         aria-errormessage={error ? errorId : undefined}
         {...props}
       />
+      {key}
     </div>
   )
 }
