@@ -10,4 +10,4 @@ export type CustomProps = {
   max?: number
 }
 
-export type TimeInputProps = CustomProps & ExtendedProps
+export type TimeInputProps = CustomProps & ExtendedProps & AccessibleLabelProps

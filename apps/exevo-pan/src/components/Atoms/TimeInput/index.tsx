@@ -1,4 +1,7 @@
 import { forwardRef, useRef, useCallback, useMemo } from 'react'
+import clsx from 'clsx'
+import { useUuid } from 'hooks'
+import Label from '../Label'
 import useTimeInput from './useTimeInput'
 import { TimeInputProps } from './types'
 
@@ -28,7 +31,20 @@ const Input = forwardRef<HTMLInputElement, JSX.IntrinsicElements['input']>(
   ),
 )
 
-const TimeInput = ({ min = 0, max = 23 }: TimeInputProps) => {
+const TimeInput = ({
+  id: idProp,
+  className,
+  name,
+  label,
+  'aria-label': ariaLabel,
+  disabled,
+  min = 0,
+  max = 23,
+}: TimeInputProps) => {
+  const uuid = useUuid()
+  const inputId = idProp ?? uuid
+  const accessibleLabel = typeof label === 'string' ? label : ariaLabel
+
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
 
@@ -56,12 +72,31 @@ const TimeInput = ({ min = 0, max = 23 }: TimeInputProps) => {
   })
 
   return (
-    <div>
-      <div className="border-1 bg-surface border-separator focus-within:border-primary text-tsm child:shrink-0 flex w-fit cursor-text items-center gap-[1px] rounded-md border-solid py-[9px] px-3 transition-colors">
-        <Input ref={hoursRef} {...hourBinders} />
+    <div className={clsx('text-tsm', className)}>
+      <Label
+        className="mb-2"
+        htmlFor={inputId}
+        onClick={useCallback(() => hoursRef.current?.focus(), [])}
+      >
+        {label}
+      </Label>
+      <div
+        className={clsx(
+          'border-1 border-separator focus-within:border-primary text-tsm child:shrink-0 flex w-fit items-center gap-[1px] rounded-md border-solid py-[9px] px-3 transition-colors',
+          disabled ? 'bg-separator cursor-default' : 'bg-surface cursor-text',
+        )}
+      >
+        <Input ref={hoursRef} disabled={disabled} {...hourBinders} />
         :
-        <Input ref={minutesRef} {...minuteBinders} />
+        <Input ref={minutesRef} disabled={disabled} {...minuteBinders} />
       </div>
+      <input
+        hidden
+        id={inputId}
+        name={name}
+        aria-label={accessibleLabel}
+        disabled={disabled}
+      />
     </div>
   )
 }

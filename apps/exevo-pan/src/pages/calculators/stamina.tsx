@@ -76,9 +76,11 @@ export default function Calculator() {
           src={hero}
           offset
         />
-        <div className="w-96 p-10">
-          <TimeInput />
+        <div className="grid w-96 gap-4 p-10">
+          <TimeInput label="Server save daylight time" />
+          <TimeInput label="Server save daylight time" disabled />
           <Input label="Server" />
+          <Input label="Server" disabled />
         </div>
       </Main>
     </>
