@@ -1,5 +1,5 @@
 .pre code {
-  @apply custom-scrollbar text-s custom-scrollbar w-full overflow-auto py-4 px-6;
+  @apply custom-scrollbar text-s w-full overflow-auto py-4 px-6;
 }
 
 /* changes made here should also be added to `code` component */
