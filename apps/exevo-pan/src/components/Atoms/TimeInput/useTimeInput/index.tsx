@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react'
 import { clampValue as baseClampValue } from 'utils'
-import { isNumber, hasNextValue, formatValue } from './utils'
-import { UseTimeInputProps, ValueState } from './types'
+import { isNumber, canInferValue, formatValue } from './utils'
+import { UseTimeInputProps } from './types'
 
 const useTimeInput = ({
   min,
@@ -9,7 +9,7 @@ const useTimeInput = ({
   onInferredValue,
   onKey,
 }: UseTimeInputProps) => {
-  const [{ value }, setState] = useState<ValueState>({
+  const [{ value }, setState] = useState({
     value: '',
     buffer: '',
   })
@@ -29,7 +29,7 @@ const useTimeInput = ({
       if (isNumber(e.key)) {
         setState((prev) => {
           const newValue = clampValue(prev.buffer + e.key)
-          const inferValue = !hasNextValue({ min, max, value: newValue })
+          const inferValue = canInferValue({ min, max, buffer: newValue })
 
           if (inferValue) onInferredValue?.()
           return { value: newValue, buffer: inferValue ? '' : newValue }

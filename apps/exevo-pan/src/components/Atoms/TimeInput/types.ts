@@ -11,9 +11,3 @@ export type CustomProps = {
 }
 
 export type TimeInputProps = CustomProps & ExtendedProps
-
-export type HasNextValueArgs = {
-  min: number
-  max: number
-  value: string
-}

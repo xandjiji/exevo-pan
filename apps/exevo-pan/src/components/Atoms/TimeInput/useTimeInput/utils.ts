@@ -1,20 +1,20 @@
-import { HasNextValueArgs } from '../types'
+import { CanInferValueArgs } from './types'
 
 const numbers = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 
 export const isNumber = (value: string) => numbers.includes(value)
 
-export const hasNextValue = ({ min, max, value }: HasNextValueArgs) => {
-  if (value.length === max.toString().length) return false
+export const canInferValue = ({ min, max, buffer }: CanInferValueArgs) => {
+  if (buffer.length === max.toString().length) return true
 
   let i = 0
   while (i < numbers.length) {
-    const nextPossibleValue = +(value + numbers[i])
-    if (nextPossibleValue >= min && nextPossibleValue <= max) return true
+    const nextPossibleValue = +(buffer + numbers[i])
+    if (nextPossibleValue >= min && nextPossibleValue <= max) return false
     i += 1
   }
 
-  return false
+  return true
 }
 
 export const formatValue = (value: string, max: number): string =>

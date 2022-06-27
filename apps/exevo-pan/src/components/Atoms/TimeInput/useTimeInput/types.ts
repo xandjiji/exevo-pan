@@ -7,12 +7,7 @@ export type UseTimeInputProps = {
   onKey?: KeyAction
 }
 
-export type ValueState = {
-  value: string
-  buffer: string
-}
-
-export type HasNextValueArgs = {
+export type CanInferValueArgs = {
   min: number
   max: number
   buffer: string
