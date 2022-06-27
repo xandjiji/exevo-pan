@@ -4,21 +4,26 @@ import { TimeInputProps } from './types'
 
 /* @ ToDo:
 - style
-
-- min/max props
-- fix com clamp value
+    label
+    disabled
+    invalid
 
 - hidden input
 - controllable
+
+- ally
+    label click event
+    numeric keyboard
+    enter key hint?
 */
 
-const TimeInput = ({ maxHour = 23, minHour = 0 }: TimeInputProps) => {
+const TimeInput = ({ min = 0, max = 23 }: TimeInputProps) => {
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
 
   const hourBinders = useTimeInput({
-    min: minHour,
-    max: maxHour,
+    min,
+    max,
     onInferredValue: useCallback(() => minutesRef.current?.focus(), []),
     onKey: useMemo(
       () => ({
