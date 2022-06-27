@@ -1,4 +1,4 @@
-import { isInRange } from './utils'
+import { isInRange } from 'utils'
 import { SliderState, Action } from './types'
 
 const SliderReducer = (state: SliderState, action: Action): SliderState => {

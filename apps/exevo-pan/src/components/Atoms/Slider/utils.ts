@@ -1,15 +1,7 @@
+import { normalize } from 'utils'
 import { Range, TransformFunction } from './types'
 
 export const defaultTransform: TransformFunction = (value: number) => value
-
-export const clampValue = (value: number, [min, max]: Range): number => {
-  if (value < min) return min
-  if (value > max) return max
-  return value
-}
-
-export const normalize = (value: number, [min, max]: Range): number =>
-  (value - min) / (max - min)
 
 export const denormalize = (value: number, [min, max]: Range): number =>
   (max - min) * value + min
@@ -74,6 +66,3 @@ export const getKeyboardIncrement = (event: React.KeyboardEvent): number => {
   const { ctrlKey, shiftKey } = event
   return sign * (+!ctrlKey || 10) * (+!shiftKey || 100)
 }
-
-export const isInRange = (value: number, [min, max]: Range): boolean =>
-  value >= min && value <= max

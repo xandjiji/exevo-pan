@@ -16,10 +16,9 @@ import {
   useIsomorphicLayoutEffect,
   useIsMounted,
 } from 'hooks'
-import { isServer } from 'utils'
+import { clampValue, isServer } from 'utils'
 import {
   defaultTransform,
-  clampValue,
   denormalize,
   calculateClosestStep,
   getLeftOffset,
