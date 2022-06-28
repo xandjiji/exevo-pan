@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
 import { Header, pages } from 'modules/Calculators'
@@ -18,6 +18,9 @@ export default function Calculator() {
   const pageTitle = `${translations.calculators.Meta.Stamina.title} - Exevo Pan`
 
   const [value, setValue] = useState('12:36')
+  const ref = useRef<HTMLInputElement>(null)
+
+  console.log(ref.current)
 
   return (
     <>
@@ -89,9 +92,10 @@ export default function Calculator() {
             }}
           />
           <TimeInput
+            ref={ref}
             label="[Uncontrolled] Server save daylight time"
             defaultValue={value}
-            onChange={(e) => console.log(e.target.value)}
+            onChange={(e) => console.log(ref.current)}
           />
           <TimeInput label="Server save daylight time" disabled />
           <TimeInput label="Server save daylight time" error="Invalid time" />
