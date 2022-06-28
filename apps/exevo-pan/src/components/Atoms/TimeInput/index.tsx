@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import { forwardRef, useRef, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
@@ -8,10 +10,6 @@ import { TimeInputProps } from './types'
 /* @ ToDo:
 - hidden input
 - controllable
-
-- ally
-    numeric keyboard
-    enter key hint?
 */
 
 const Input = forwardRef<HTMLInputElement, JSX.IntrinsicElements['input']>(
@@ -48,6 +46,8 @@ const TimeInput = ({
   const hoursRef = useRef<HTMLInputElement>(null)
   const minutesRef = useRef<HTMLInputElement>(null)
 
+  const focusHours = useCallback(() => hoursRef.current?.focus(), [])
+
   const hourBinders = useTimeInput({
     min,
     max,
@@ -65,19 +65,15 @@ const TimeInput = ({
     max: 59,
     onKey: useMemo(
       () => ({
-        ArrowLeft: () => hoursRef.current?.focus(),
+        ArrowLeft: focusHours,
       }),
-      [],
+      [focusHours],
     ),
   })
 
   return (
-    <div className={clsx('text-tsm', className)}>
-      <Label
-        className="mb-2"
-        htmlFor={inputId}
-        onClick={useCallback(() => hoursRef.current?.focus(), [])}
-      >
+    <div className={clsx('text-tsm', className)} onClick={focusHours}>
+      <Label className="mb-2" htmlFor={inputId} onClick={focusHours}>
         {label}
       </Label>
       <div

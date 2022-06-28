@@ -1,6 +1,11 @@
 import { useState, useCallback, useMemo } from 'react'
 import { clampValue as baseClampValue } from 'utils'
-import { isNumber, canInferValue, formatValue } from './utils'
+import {
+  isNumber,
+  canInferValue,
+  formatValue,
+  preventPropagation,
+} from './utils'
 import { UseTimeInputProps } from './types'
 
 const useTimeInput = ({
@@ -72,6 +77,7 @@ const useTimeInput = ({
     onKeyDown,
     onChange,
     onBlur,
+    onClick: preventPropagation,
   }
 }
 
