@@ -12,7 +12,7 @@ const MainPage = () => {
   } = useTranslations()
 
   return (
-    <main className="inner-container pb-4 md:pb-8">
+    <main className="inner-container z-1 pb-4 md:pb-8">
       <ul className="grid gap-4">
         {entries.map(({ title, href, sprite }) => (
           <li key={title}>
