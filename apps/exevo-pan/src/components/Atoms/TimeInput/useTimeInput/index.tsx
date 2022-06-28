@@ -26,17 +26,6 @@ const useTimeInput = ({
     (e) => {
       onKey?.[e.key]?.()
 
-      if (isNumber(e.key)) {
-        setState((prev) => {
-          const newValue = clampValue(prev.buffer + e.key)
-          const inferValue = canInferValue({ min, max, buffer: newValue })
-
-          if (inferValue) onInferredValue?.()
-          return { value: newValue, buffer: inferValue ? '' : newValue }
-        })
-        return
-      }
-
       if (e.key === 'Backspace') {
         setState({ value: '', buffer: '' })
         return
@@ -50,15 +39,27 @@ const useTimeInput = ({
         })
       }
     },
-    [min, max, onInferredValue, onKey],
+    [min, max, onKey],
   )
 
-  /*  This is necessary because we are trying to control an input with Preact */
   const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
+      const { data }: { data?: string } = e as any
+
+      if (data && isNumber(data)) {
+        setState((prev) => {
+          const newValue = clampValue(prev.buffer + data)
+          const inferValue = canInferValue({ min, max, buffer: newValue })
+
+          if (inferValue) onInferredValue?.()
+          return { value: newValue, buffer: inferValue ? '' : newValue }
+        })
+      }
+
+      /*  This is necessary because we are trying to control an input with Preact */
       e.target.value = formattedValue
     },
-    [formattedValue],
+    [min, max, onInferredValue, formattedValue],
   )
 
   const onBlur = useCallback(
