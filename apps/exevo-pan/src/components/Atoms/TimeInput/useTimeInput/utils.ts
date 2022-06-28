@@ -17,8 +17,5 @@ export const canInferValue = ({ min, max, buffer }: CanInferValueArgs) => {
   return true
 }
 
-export const formatValue = (value: string, max: number): string =>
-  value ? value.padStart(max.toString().length, '0') : '--'
-
 export const preventPropagation: React.MouseEventHandler = (e) =>
   e.stopPropagation()

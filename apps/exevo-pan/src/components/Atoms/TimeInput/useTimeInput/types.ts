@@ -1,6 +1,8 @@
 type KeyAction = Record<string, () => void>
 
 export type UseTimeInputProps = {
+  defaultValue: string
+  controlledValue?: string
   min: number
   max: number
   onInferredValue?: () => void

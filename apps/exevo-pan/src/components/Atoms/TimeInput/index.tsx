@@ -1,15 +1,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { forwardRef, useRef, useCallback, useMemo } from 'react'
+import { forwardRef, useRef, useCallback, useMemo, useEffect } from 'react'
 import clsx from 'clsx'
-import { useUuid } from 'hooks'
+import { useUuid, useIsMounted } from 'hooks'
 import Label from '../Label'
 import useTimeInput from './useTimeInput'
+import { EMPTY_VALUE, value2TimeObject, buildTime } from './utils'
 import { TimeInputProps } from './types'
 
 /* @ ToDo:
-- hidden input
-- controllable
+- onTimeChange
+- forwardRef
 */
 
 const Input = forwardRef<HTMLInputElement, JSX.IntrinsicElements['input']>(
@@ -33,6 +34,9 @@ const TimeInput = ({
   disabled,
   min = 0,
   max = 23,
+  value: valueProp,
+  defaultValue = EMPTY_VALUE,
+  onChange,
   error,
   noAlert = false,
   ...props
@@ -48,7 +52,15 @@ const TimeInput = ({
 
   const focusHours = useCallback(() => hoursRef.current?.focus(), [])
 
-  const hourBinders = useTimeInput({
+  const initialValue = useRef(value2TimeObject(valueProp ?? defaultValue))
+  const controlledValue = useMemo(
+    () => (valueProp ? value2TimeObject(valueProp) : undefined),
+    [valueProp],
+  )
+
+  const { nextValue: dispatchedHours, ...hourBinders } = useTimeInput({
+    defaultValue: initialValue.current.hours,
+    controlledValue: controlledValue?.hours,
     min,
     max,
     onInferredValue: useCallback(() => minutesRef.current?.focus(), []),
@@ -60,7 +72,9 @@ const TimeInput = ({
     ),
   })
 
-  const minuteBinders = useTimeInput({
+  const { nextValue: dispatchedMinutes, ...minuteBinders } = useTimeInput({
+    defaultValue: initialValue.current.minutes,
+    controlledValue: controlledValue?.minutes,
     min: 0,
     max: 59,
     onKey: useMemo(
@@ -70,6 +84,22 @@ const TimeInput = ({
       [focusHours],
     ),
   })
+
+  const maxLength = useMemo(() => max.toString().length, [max])
+  const innerRef = useRef<HTMLInputElement>(null)
+  const dispatchedValue = useRef('')
+  const isMounted = useIsMounted()
+  useEffect(() => {
+    if (isMounted) {
+      dispatchedValue.current = buildTime(
+        dispatchedHours,
+        dispatchedMinutes,
+        maxLength,
+      )
+      const event = new Event('input', { bubbles: true })
+      innerRef.current?.dispatchEvent?.(event)
+    }
+  }, [maxLength, dispatchedHours, dispatchedMinutes])
 
   return (
     <div className={clsx('text-tsm', className)}>
@@ -103,6 +133,7 @@ const TimeInput = ({
         </span>
       )}
       <input
+        ref={innerRef}
         hidden
         id={inputId}
         name={name}
@@ -111,6 +142,15 @@ const TimeInput = ({
         aria-invalid={!!error}
         aria-errormessage={error ? errorId : undefined}
         {...props}
+        onInput={useCallback(
+          (event: React.ChangeEvent<HTMLInputElement>) => {
+            if (event.target.value === dispatchedValue.current) return
+            // eslint-disable-next-line no-param-reassign
+            event.target.value = dispatchedValue.current
+            onChange?.(event as React.ChangeEvent<HTMLInputElement>)
+          },
+          [onChange],
+        )}
       />
     </div>
   )

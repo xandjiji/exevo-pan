@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
 import { Header, pages } from 'modules/Calculators'
@@ -15,6 +16,8 @@ export default function Calculator() {
   const { translations } = useTranslations()
 
   const pageTitle = `${translations.calculators.Meta.Stamina.title} - Exevo Pan`
+
+  const [value, setValue] = useState('12:36')
 
   return (
     <>
@@ -77,7 +80,19 @@ export default function Calculator() {
           offset
         />
         <div className="grid w-96 gap-4 p-10">
-          <TimeInput label="Server save daylight time" />
+          <TimeInput
+            label="[Controlled] Server save daylight time"
+            value={value}
+            onChange={(e) => {
+              console.log(e.target.value)
+              setValue(e.target.value)
+            }}
+          />
+          <TimeInput
+            label="[Uncontrolled] Server save daylight time"
+            defaultValue={value}
+            onChange={(e) => console.log(e.target.value)}
+          />
           <TimeInput label="Server save daylight time" disabled />
           <TimeInput label="Server save daylight time" error="Invalid time" />
           <Input label="Server" />

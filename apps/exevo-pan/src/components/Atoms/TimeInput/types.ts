@@ -13,3 +13,9 @@ export type CustomProps = {
 }
 
 export type TimeInputProps = CustomProps & ExtendedProps & AccessibleLabelProps
+
+export type TimeObject = {
+  hours: string
+  minutes: string
+  value: string
+}

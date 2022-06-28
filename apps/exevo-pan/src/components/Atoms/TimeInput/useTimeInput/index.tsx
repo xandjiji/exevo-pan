@@ -1,25 +1,36 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback, useMemo, useEffect } from 'react'
 import { clampValue as baseClampValue } from 'utils'
-import {
-  isNumber,
-  canInferValue,
-  formatValue,
-  preventPropagation,
-} from './utils'
+import { formatValue } from '../utils'
+import { isNumber, canInferValue, preventPropagation } from './utils'
 import { UseTimeInputProps } from './types'
 
 const useTimeInput = ({
+  defaultValue,
+  controlledValue,
   min,
   max,
   onInferredValue,
   onKey,
 }: UseTimeInputProps) => {
-  const [{ value }, setState] = useState({
-    value: '',
+  const [state, setState] = useState({
+    value: defaultValue,
+    nextValue: defaultValue,
     buffer: '',
   })
 
-  const formattedValue = useMemo(() => formatValue(value, max), [max, value])
+  const isControlled = controlledValue !== undefined
+
+  useEffect(() => {
+    if (isControlled) {
+      setState((current) => ({ ...current, value: controlledValue }))
+    }
+  }, [isControlled, controlledValue])
+
+  const maxLength = useMemo(() => max.toString().length, [max])
+  const shownValue = useMemo(
+    () => formatValue(controlledValue ?? state.value, maxLength),
+    [maxLength, controlledValue, state.value],
+  )
 
   const clampValue = useCallback(
     (newValue: string | number): string =>
@@ -32,19 +43,31 @@ const useTimeInput = ({
       onKey?.[e.key]?.()
 
       if (e.key === 'Backspace') {
-        setState({ value: '', buffer: '' })
-        return
+        setState((currentState) => {
+          const nextValue = ''
+
+          return {
+            nextValue,
+            value: isControlled ? currentState.value : nextValue,
+            buffer: '',
+          }
+        })
       }
 
       if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
-        setState((prev) => {
+        setState((currentState) => {
           const modifier = e.key === 'ArrowUp' ? 1 : -1
-          const newValue = clampValue(+prev.value + modifier)
-          return { value: newValue, buffer: '' }
+          const nextValue = clampValue(+currentState.value + modifier)
+
+          return {
+            nextValue,
+            value: isControlled ? currentState.value : nextValue,
+            buffer: '',
+          }
         })
       }
     },
-    [min, max, onKey],
+    [isControlled, min, max, onKey],
   )
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(
@@ -52,19 +75,23 @@ const useTimeInput = ({
       const { data }: { data?: string } = e as any
 
       if (data && isNumber(data)) {
-        setState((prev) => {
-          const newValue = clampValue(prev.buffer + data)
-          const inferValue = canInferValue({ min, max, buffer: newValue })
+        setState((currentState) => {
+          const nextValue = clampValue(currentState.buffer + data)
+          const inferValue = canInferValue({ min, max, buffer: nextValue })
 
           if (inferValue) onInferredValue?.()
-          return { value: newValue, buffer: inferValue ? '' : newValue }
+          return {
+            nextValue,
+            value: isControlled ? currentState.value : nextValue,
+            buffer: inferValue ? '' : nextValue,
+          }
         })
       }
 
       /*  This is necessary because we are trying to control an input with Preact */
-      e.target.value = formattedValue
+      e.target.value = shownValue
     },
-    [min, max, onInferredValue, formattedValue],
+    [min, max, onInferredValue, isControlled, shownValue],
   )
 
   const onBlur = useCallback(
@@ -73,7 +100,8 @@ const useTimeInput = ({
   )
 
   return {
-    value: formattedValue,
+    value: shownValue,
+    nextValue: state.nextValue,
     onKeyDown,
     onChange,
     onBlur,
