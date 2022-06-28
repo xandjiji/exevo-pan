@@ -72,7 +72,7 @@ const TimeInput = ({
   })
 
   return (
-    <div className={clsx('text-tsm', className)} onClick={focusHours}>
+    <div className={clsx('text-tsm', className)}>
       <Label className="mb-2" htmlFor={inputId} onClick={focusHours}>
         {label}
       </Label>
@@ -82,6 +82,7 @@ const TimeInput = ({
           error ? 'border-red' : 'border-separator focus-within:border-primary',
           disabled ? 'bg-separator cursor-default' : 'bg-surface cursor-text',
         )}
+        onClick={focusHours}
       >
         <Input ref={hoursRef} disabled={disabled} {...hourBinders} />
         :
