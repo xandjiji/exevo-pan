@@ -21,10 +21,10 @@ const useTimeInput = ({
   const isControlled = controlledValue !== undefined
 
   useEffect(() => {
-    if (isControlled) {
+    if (controlledValue !== undefined) {
       setState((current) => ({ ...current, value: controlledValue }))
     }
-  }, [isControlled, controlledValue])
+  }, [controlledValue])
 
   const maxLength = useMemo(() => max.toString().length, [max])
   const shownValue = useMemo(
