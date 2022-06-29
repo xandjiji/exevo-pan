@@ -1,8 +1,6 @@
-import { useState, useRef } from 'react'
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
-import { Header, pages } from 'modules/Calculators'
-import { TimeInput, Input } from 'components/Atoms'
+import { pages, Header, Stamina } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl } from 'utils'
@@ -16,11 +14,6 @@ export default function Calculator() {
   const { translations } = useTranslations()
 
   const pageTitle = `${translations.calculators.Meta.Stamina.title} - Exevo Pan`
-
-  const [value, setValue] = useState('12:36')
-  const ref = useRef<HTMLInputElement>(null)
-
-  console.log(ref.current)
 
   return (
     <>
@@ -52,17 +45,17 @@ export default function Calculator() {
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'pt')}
+          href={buildUrl(routes.STAMINA, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'es')}
+          href={buildUrl(routes.STAMINA, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'pl')}
+          href={buildUrl(routes.STAMINA, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
@@ -82,27 +75,7 @@ export default function Calculator() {
           src={hero}
           offset
         />
-        <div className="grid w-96 gap-4 p-10">
-          <TimeInput
-            label="[Controlled] Server save daylight time"
-            value={value}
-            onChange={(e) => {
-              console.log(e.target.value)
-              setValue(e.target.value)
-            }}
-          />
-          <TimeInput
-            ref={ref}
-            label="[Uncontrolled] Server save daylight time"
-            defaultValue={value}
-            onChange={(e) => console.log(ref.current)}
-          />
-          <TimeInput label="Server save daylight time" disabled />
-          <TimeInput label="Server save daylight time" error="Invalid time" />
-          <Input label="Server" />
-          <Input label="Server" disabled />
-          <Input label="Server" error="Invalid server" />
-        </div>
+        <Stamina />
       </Main>
     </>
   )
