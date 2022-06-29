@@ -45,17 +45,17 @@ export default function Calculator() {
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'pt')}
+          href={buildUrl(routes.CHARM_DAMAGE, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'es')}
+          href={buildUrl(routes.CHARM_DAMAGE, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'pl')}
+          href={buildUrl(routes.CHARM_DAMAGE, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
