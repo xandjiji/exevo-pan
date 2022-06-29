@@ -6,8 +6,7 @@ import { Input, Checkbox, Slider } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { routes } from 'Constants'
-import { Main, LabeledCard, Spacer } from '../../components/layout'
-import { Chip } from '../../components/atoms'
+import { Main, LabeledCard, Spacer, Chip } from '../../components'
 import {
   LOW_BLOW_MULTIPLIER,
   ELEMENTAL_DAMAGE,

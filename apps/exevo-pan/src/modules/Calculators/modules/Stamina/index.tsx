@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { TimeInput } from 'components/Atoms'
 import useTime from './useTime'
 import { calculateSecondsToRegenerate } from './utils'
-import { Main, LabeledCard } from '../../components/layout'
+import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
 -results

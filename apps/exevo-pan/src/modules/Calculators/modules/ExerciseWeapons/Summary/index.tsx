@@ -4,15 +4,20 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
 import { isObjectEmpty } from 'utils'
-import { LabeledCard } from '../../../components/layout'
+import {
+  LabeledCard,
+  Chip,
+  ChipWrapper,
+  Group,
+  Empty,
+  TimeBubbles,
+} from '../../../components'
 import {
   autoRequiredWeaponsCount,
   customRequiredWeaponsCount,
   calculateCost,
 } from './utils'
 import { weaponOptions } from './options'
-import { Chip, ChipWrapper, Group, Empty } from '../../../components/atoms'
-import TimeBubbles from '../../../components/TimeBubbles'
 import * as S from './atoms'
 import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
