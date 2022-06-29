@@ -1,5 +1,5 @@
 import { useStoredState } from 'hooks'
-import { Main } from '../layout'
+import { Main } from '../../components/layout'
 import CharacterConfig from './CharacterConfig'
 import Summary from './Summary'
 
