@@ -26,13 +26,13 @@ export default {
     CharmDamage: 'Charm Damage',
     Stamina: 'Stamina',
   },
+  none: 'None',
   ExerciseWeapons: {
     labels: {
       vocation: 'Vocation',
       currentSkill: 'Current skill',
       targetSkill: 'Target skill',
       percentageLeft: '% left',
-      none: 'None',
       loyaltyPoints: 'points',
       weaponCharges: 'Weapon charges',
       results: 'Results',

@@ -12,6 +12,26 @@ export const Chip = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   />
 )
 
+export const ChipWrapper = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div
+    className={clsx('relative flex items-center gap-4', className)}
+    {...props}
+  />
+)
+
+export const Empty = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['small']) => (
+  <small
+    className={clsx('!absolute top-0 left-0', styles.hidden, className)}
+    {...props}
+  />
+)
+
 export const Group = (args: JSX.IntrinsicElements['div']) => (
   <div className="text-tsm grid gap-2" {...args} />
 )

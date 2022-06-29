@@ -10,7 +10,3 @@ export type ExerciseWeapon = 'regular' | 'durable' | 'lasting'
 export type WeaponOption = 'auto' | ExerciseWeapon
 
 export type WeaponsObject = Record<ExerciseWeapon, number>
-
-export type TimeBubbleProps = {
-  time: number | string
-} & JSX.IntrinsicElements['div']

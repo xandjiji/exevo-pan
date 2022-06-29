@@ -5,8 +5,9 @@ import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../layout'
 
 /* @ ToDo:
--calculator
 -results
+    time bubble
+    timestamp
     tooltip +10 min logout
 -i18n
 -stamina bar?

@@ -128,13 +128,10 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
               ? `${value * 72} ${
                   calculators.ExerciseWeapons.labels.loyaltyPoints
                 }`
-              : calculators.ExerciseWeapons.labels.none,
+              : calculators.none,
           [calculators],
         )}
-        marks={useMemo(
-          () => generateMarks(calculators.ExerciseWeapons.labels.none),
-          [calculators],
-        )}
+        marks={useMemo(() => generateMarks(calculators.none), [calculators])}
         value={loyaltyBonus}
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
         ssr

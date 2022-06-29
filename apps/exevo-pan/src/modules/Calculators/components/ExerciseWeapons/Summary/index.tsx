@@ -3,17 +3,16 @@ import { useStoredState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
-import { isServer } from 'utils'
+import { isObjectEmpty } from 'utils'
 import { LabeledCard } from '../../layout'
 import {
   autoRequiredWeaponsCount,
   customRequiredWeaponsCount,
   calculateCost,
-  secondsToTimeObject,
-  isObjectEmpty,
 } from './utils'
 import { weaponOptions } from './options'
-import { Chip, Group } from '../../atoms'
+import { Chip, ChipWrapper, Group, Empty } from '../../atoms'
+import TimeBubbles from '../../TimeBubbles'
 import * as S from './atoms'
 import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
@@ -42,13 +41,6 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
 
   const cost = useMemo(() => calculateCost(weaponsRequired), [weaponsRequired])
-
-  const timeObject = useMemo(
-    () => secondsToTimeObject(cost.seconds),
-    [cost.seconds],
-  )
-
-  const isClient = !isServer()
 
   return (
     <div className="grid gap-6">
@@ -96,7 +88,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
               }
             />
           </div>
-          <S.ChipWrapper className="shrink-0 flex-wrap">
+          <ChipWrapper className="shrink-0 flex-wrap">
             <Chip>
               <Text.TibiaCoin value={cost.tc} />
             </Chip>
@@ -104,7 +96,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             <Chip>
               <Text.GoldCoin value={cost.gold} />
             </Chip>
-          </S.ChipWrapper>
+          </ChipWrapper>
         </Group>
 
         <Group>
@@ -112,7 +104,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             <strong>{calculators.ExerciseWeapons.labels.weapons}</strong>
           </p>
           <ClientComponent>
-            <S.ChipWrapper className="flex-wrap">
+            <ChipWrapper className="flex-wrap">
               <Chip aria-hidden={!weaponsRequired.lasting}>
                 <S.Weapon.lasting /> lasting weapons
                 <S.ActiveCount>{weaponsRequired.lasting}x</S.ActiveCount>
@@ -125,10 +117,10 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
                 <S.Weapon.regular /> regular weapons
                 <S.ActiveCount>{weaponsRequired.regular}x</S.ActiveCount>
               </Chip>
-              <S.Empty aria-hidden={!isObjectEmpty(weaponsRequired)}>
-                {calculators.ExerciseWeapons.labels.none}
-              </S.Empty>
-            </S.ChipWrapper>
+              <Empty aria-hidden={!isObjectEmpty(weaponsRequired)}>
+                {calculators.none}
+              </Empty>
+            </ChipWrapper>
           </ClientComponent>
         </Group>
 
@@ -137,29 +129,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             <strong>{calculators.ExerciseWeapons.labels.time}</strong>
           </p>
           <ClientComponent>
-            <S.ChipWrapper>
-              <S.TimeBubble
-                time={timeObject.days}
-                aria-hidden={isClient && !timeObject.days}
-              >
-                {common[timeObject.days > 1 ? 'days' : 'day']}
-              </S.TimeBubble>
-              <S.TimeBubble
-                time={timeObject.hours}
-                aria-hidden={!timeObject.hours}
-              >
-                {common[timeObject.hours > 1 ? 'hours' : 'hour']}
-              </S.TimeBubble>
-              <S.TimeBubble
-                time={timeObject.minutes}
-                aria-hidden={!timeObject.minutes}
-              >
-                {common[timeObject.minutes > 1 ? 'minutes' : 'minute']}
-              </S.TimeBubble>
-              <S.Empty aria-hidden={!isObjectEmpty(timeObject)}>
-                {calculators.ExerciseWeapons.labels.none}
-              </S.Empty>
-            </S.ChipWrapper>
+            <TimeBubbles seconds={cost.seconds} />
           </ClientComponent>
         </Group>
       </LabeledCard>
