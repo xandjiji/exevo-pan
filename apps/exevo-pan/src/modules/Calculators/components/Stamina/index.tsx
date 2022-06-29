@@ -1,10 +1,13 @@
+import { useMemo } from 'react'
 import { TimeInput } from 'components/Atoms'
 import useTime from './useTime'
+import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../layout'
 
 /* @ ToDo:
 -calculator
 -results
+    tooltip +10 min logout
 -i18n
 -stamina bar?
 */
@@ -14,6 +17,15 @@ const Stamina = () => {
   const [targetStamina, setTargetStamina] = useTime('42:00')
 
   const invalid = currentStamina.seconds > targetStamina.seconds
+
+  const secondsToRegenerate = useMemo(
+    () =>
+      calculateSecondsToRegenerate(
+        currentStamina.seconds,
+        targetStamina.seconds,
+      ),
+    [currentStamina.seconds, targetStamina.seconds],
+  )
 
   return (
     <Main>
