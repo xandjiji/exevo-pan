@@ -1,5 +1,5 @@
 import { TimeInput } from 'components/Atoms'
-import useStamina from './useStamina'
+import useTime from './useTime'
 import { Main, LabeledCard } from '../layout'
 
 /* @ ToDo:
@@ -10,8 +10,8 @@ import { Main, LabeledCard } from '../layout'
 */
 
 const Stamina = () => {
-  const [currentStamina, setCurrentStamina] = useStamina('39:00')
-  const [targetStamina, setTargetStamina] = useStamina('42:00')
+  const [currentStamina, setCurrentStamina] = useTime('39:00')
+  const [targetStamina, setTargetStamina] = useTime('42:00')
 
   return (
     <Main>
@@ -19,7 +19,7 @@ const Stamina = () => {
         <TimeInput
           label="Current stamina"
           max={42}
-          value={currentStamina}
+          value={currentStamina.time}
           onChange={(e) => setCurrentStamina(e.target.value)}
           noAlert
         />
@@ -27,7 +27,7 @@ const Stamina = () => {
         <TimeInput
           label="Desired stamina"
           max={42}
-          value={targetStamina}
+          value={targetStamina.time}
           onChange={(e) => setTargetStamina(e.target.value)}
           noAlert
         />
