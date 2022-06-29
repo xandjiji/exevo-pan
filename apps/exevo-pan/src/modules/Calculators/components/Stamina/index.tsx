@@ -2,6 +2,13 @@ import { TimeInput } from 'components/Atoms'
 import useStamina from './useStamina'
 import { Main, LabeledCard } from '../layout'
 
+/* @ ToDo:
+-calculator
+-results
+-i18n
+-stamina bar?
+*/
+
 const Stamina = () => {
   const [currentStamina, setCurrentStamina] = useStamina('39:00')
   const [targetStamina, setTargetStamina] = useStamina('42:00')

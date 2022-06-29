@@ -1,17 +1,13 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
+import { MILLISECONDS_IN } from 'utils'
 import AuctionTimer from '..'
-import {
-  MILLISECONDS_IN_A_DAY,
-  MILLISECONDS_IN_AN_HOUR,
-  MILLISECONDS_IN_A_MINUTE,
-} from '../utils'
 
 const past = new Date('01/01/1999')
 const future = new Date('3000-01-01T03:00:00.000Z')
-const tomorrow = new Date(Date.now() + MILLISECONDS_IN_A_DAY + 1)
-const nextHour = new Date(Date.now() + MILLISECONDS_IN_AN_HOUR + 1)
-const soon = new Date(Date.now() + MILLISECONDS_IN_A_MINUTE + 1)
+const tomorrow = new Date(Date.now() + MILLISECONDS_IN.DAY + 1)
+const nextHour = new Date(Date.now() + MILLISECONDS_IN.HOUR + 1)
+const soon = new Date(Date.now() + MILLISECONDS_IN.MINUTE + 1)
 
 describe('<AuctionTimer />', () => {
   describe('it renders Auction Ended message', () => {
