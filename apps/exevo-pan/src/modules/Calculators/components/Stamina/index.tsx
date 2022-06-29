@@ -13,6 +13,8 @@ const Stamina = () => {
   const [currentStamina, setCurrentStamina] = useTime('39:00')
   const [targetStamina, setTargetStamina] = useTime('42:00')
 
+  const invalid = currentStamina.seconds > targetStamina.seconds
+
   return (
     <Main>
       <LabeledCard labelText="Stamina">
@@ -21,6 +23,7 @@ const Stamina = () => {
           max={42}
           value={currentStamina.time}
           onChange={(e) => setCurrentStamina(e.target.value)}
+          error={invalid}
           noAlert
         />
 
@@ -29,6 +32,7 @@ const Stamina = () => {
           max={42}
           value={targetStamina.time}
           onChange={(e) => setTargetStamina(e.target.value)}
+          error={invalid}
           noAlert
         />
       </LabeledCard>
