@@ -17,6 +17,7 @@ import {
     timestamp
         phantom space
     tooltip +10 min logout
+-useStorageState
 -i18n
 -stamina bar?
 */
@@ -33,9 +34,12 @@ const Stamina = () => {
 
   const secondsToRegenerate = useMemo(
     () =>
-      calculateSecondsToRegenerate(
-        currentStamina.seconds,
-        targetStamina.seconds,
+      Math.max(
+        calculateSecondsToRegenerate(
+          currentStamina.seconds,
+          targetStamina.seconds,
+        ),
+        0,
       ),
     [currentStamina.seconds, targetStamina.seconds],
   )
