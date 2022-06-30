@@ -107,7 +107,7 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
         </Label>
         <div
           className={clsx(
-            'border-1 text-tsm child:shrink-0 flex w-fit items-center gap-[1px] rounded-md border-solid py-[9px] px-3 transition-colors',
+            'border-1 text-tsm child:shrink-0 flex w-fit items-center justify-center gap-[1px] rounded-md border-solid py-[9px] px-3 transition-colors',
             error
               ? 'border-red'
               : 'border-separator focus-within:border-primary',
