@@ -22,7 +22,10 @@ const StaminaBar = ({ time, mark, className, ...props }: StaminaBarProps) => {
     >
       <span>Stamina</span>
       <span>{time}</span>
-      <div className="border-1 bg-separator/30 relative mt-1 h-1 w-full border-solid border-black">
+      <div
+        className="border-1 bg-separator/30 relative mt-1 h-1 w-full border-solid border-black"
+        title={mark}
+      >
         <div
           className="h-full transition-all"
           style={{

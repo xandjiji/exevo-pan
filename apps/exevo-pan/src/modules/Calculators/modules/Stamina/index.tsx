@@ -12,7 +12,6 @@ import { Main, LabeledCard, Group, TimeBubbles } from '../../components'
 
 /* @ ToDo:
 - track feature
-- mark title
 
 -i18n
 */
@@ -46,7 +45,7 @@ const Stamina = () => {
 
   return (
     <Main>
-      <LabeledCard labelText="Results">
+      <LabeledCard labelText="Stamina">
         <div className="flex items-end gap-2">
           <TimeInput
             label="Current stamina"
