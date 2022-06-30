@@ -12,7 +12,7 @@ const useTracking = () => {
         ...prev,
         {
           key: uuidv4(),
-          name: `Character (${prev.length + 1})`,
+          name: `New character (${prev.length + 1})`,
           currentStamina,
           targetStamina,
           timestamp: +new Date(),
@@ -29,7 +29,13 @@ const useTracking = () => {
     [setList],
   )
 
-  return { list, action: { add, update } }
+  const remove = useCallback(
+    (deleteKey: string) =>
+      setList((prev) => prev.filter(({ key }) => deleteKey !== key)),
+    [setList],
+  )
+
+  return { list, action: { add, update, remove } }
 }
 
 export default useTracking

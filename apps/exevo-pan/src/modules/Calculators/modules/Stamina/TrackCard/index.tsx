@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import RemoveIcon from 'assets/svgs/cross.svg'
 import StaminaBar from '../StaminaBar'
 import TimeLeft from '../TimeLeft'
 import { calculateSecondsToRegenerate } from '../utils'
@@ -10,7 +11,7 @@ import { TrackCardProps } from './types'
 - delete action
 */
 
-const TrackCard = ({ trackedData, update }: TrackCardProps) => {
+const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
 
   const updatedStamina = useMemo(() => {
@@ -35,13 +36,24 @@ const TrackCard = ({ trackedData, update }: TrackCardProps) => {
 
   return (
     <div className="card grid gap-4">
-      <strong
-        contentEditable
-        onBlur={(e) => update({ key, name: e.currentTarget.textContent ?? '' })}
-        className="inline tracking-wide"
-      >
-        {name}
-      </strong>
+      <div className="flex items-center justify-between gap-4">
+        <input
+          aria-label={name}
+          onChange={(e) => update({ key, name: e.target.value })}
+          value={name}
+          className="inline flex-grow border-0 p-0 text-xs font-bold tracking-wide"
+        />
+
+        <button
+          type="button"
+          className="clickable h-4 w-4 shrink-0"
+          /* @ ToDo: i18n */
+          aria-label="Remove this item"
+          onClick={() => remove(key)}
+        >
+          <RemoveIcon className="fill-red h-4 w-4" />
+        </button>
+      </div>
 
       <StaminaBar time={updatedTime} mark={targetStamina.time} />
       {secondsToRegenerate > 0 && (

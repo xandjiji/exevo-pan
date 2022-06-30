@@ -98,6 +98,7 @@ const Stamina = () => {
             key={trackedData.key}
             trackedData={trackedData}
             update={action.update}
+            remove={action.remove}
           />
         ))}
       </div>
