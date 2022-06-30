@@ -46,7 +46,7 @@ const Stamina = () => {
   return (
     <Main>
       <LabeledCard labelText="Stamina">
-        <div className="flex items-end gap-2">
+        <div className="grid grid-cols-[1fr_24px_1fr] items-end gap-2">
           <TimeInput
             label="Current stamina"
             max={42}
