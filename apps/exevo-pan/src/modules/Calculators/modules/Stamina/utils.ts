@@ -1,7 +1,7 @@
 import { SECONDS_IN, dateToDateObject } from 'utils'
 
-const HAPPY_HOUR_STAMINA = SECONDS_IN.HOUR * 39
-const STAMINA_REGEN_RATE = 3
+export const HAPPY_HOUR_STAMINA = SECONDS_IN.HOUR * 39
+export const STAMINA_REGEN_RATE = 3
 
 const normalizeBonusStamina = (stamina: number): number => {
   if (stamina > HAPPY_HOUR_STAMINA) {

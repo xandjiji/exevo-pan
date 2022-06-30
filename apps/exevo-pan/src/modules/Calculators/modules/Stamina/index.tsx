@@ -7,6 +7,7 @@ import ChevronRight from 'assets/svgs/chevronRight.svg'
 import AddIcon from 'assets/svgs/addPost.svg'
 import useTime from './useTime'
 import StaminaBar from './StaminaBar'
+import TrackCard from './TrackCard'
 import useTracking from './useTracking'
 import { calculateSecondsToRegenerate, generateDatetime } from './utils'
 import { Main, LabeledCard, Group, TimeBubbles } from '../../components'
@@ -45,8 +46,6 @@ const Stamina = () => {
   )
 
   const { list, action } = useTracking()
-
-  console.log(list)
 
   return (
     <Main>
@@ -114,6 +113,12 @@ const Stamina = () => {
           </div>
         </Button>
       </LabeledCard>
+
+      <div className="grid gap-4">
+        {list.map((trackedData) => (
+          <TrackCard key={trackedData.key} trackedData={trackedData} />
+        ))}
+      </div>
     </Main>
   )
 }
