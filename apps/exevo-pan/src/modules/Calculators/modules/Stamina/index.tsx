@@ -74,11 +74,11 @@ const Stamina = () => {
         </LabeledCard>
 
         <LabeledCard labelText="Results">
-          <StaminaBar time={currentStamina.time} />
+          <StaminaBar time={currentStamina.time} mark={targetStamina.time} />
 
           <Group>
             <p>
-              <strong>Time required</strong>
+              <strong>Rest time</strong>
             </p>
             <TimeBubbles seconds={secondsToRegenerate} />
           </Group>

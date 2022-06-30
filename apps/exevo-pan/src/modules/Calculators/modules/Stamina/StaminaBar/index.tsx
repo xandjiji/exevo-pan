@@ -3,13 +3,14 @@ import clsx from 'clsx'
 import { time2Minutes, getStaminaPercentage, staminaColor } from './utils'
 import { StaminaBarProps } from './types'
 
-/* @ ToDo:
-- colors
-- mark?
-*/
-
-const StaminaBar = ({ time, className, ...props }: StaminaBarProps) => {
+const StaminaBar = ({ time, mark, className, ...props }: StaminaBarProps) => {
   const staminaMinutes = useMemo(() => time2Minutes(time), [time])
+
+  const markPosition = useMemo(() => {
+    if (!mark) return undefined
+
+    return getStaminaPercentage(time2Minutes(mark))
+  }, [mark])
 
   return (
     <div
@@ -21,7 +22,7 @@ const StaminaBar = ({ time, className, ...props }: StaminaBarProps) => {
     >
       <span>Stamina</span>
       <span>{time}</span>
-      <div className="border-1 bg-separator/30 mt-1 h-1 w-full border-solid border-black">
+      <div className="border-1 bg-separator/30 relative mt-1 h-1 w-full border-solid border-black">
         <div
           className="h-full transition-all"
           style={{
@@ -29,6 +30,13 @@ const StaminaBar = ({ time, className, ...props }: StaminaBarProps) => {
             backgroundColor: staminaColor(staminaMinutes),
           }}
         />
+
+        {markPosition && (
+          <div
+            className="text-primary absolute bottom-[-12px] transition-all after:content-['▴']"
+            style={{ left: markPosition, transform: 'translateX(-50%)' }}
+          />
+        )}
       </div>
     </div>
   )

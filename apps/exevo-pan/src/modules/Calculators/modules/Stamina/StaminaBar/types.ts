@@ -1,1 +1,4 @@
-export type StaminaBarProps = { time: string } & JSX.IntrinsicElements['div']
+export type StaminaBarProps = {
+  time: string
+  mark?: string
+} & JSX.IntrinsicElements['div']
