@@ -74,6 +74,8 @@ const Stamina = () => {
         </LabeledCard>
 
         <LabeledCard labelText="Results">
+          <StaminaBar time={currentStamina.time} />
+
           <Group>
             <p>
               <strong>Time required</strong>
@@ -98,8 +100,6 @@ const Stamina = () => {
               </Empty>
             </div>
           </Group>
-
-          <StaminaBar time={currentStamina.time} />
         </LabeledCard>
       </div>
     </Main>
