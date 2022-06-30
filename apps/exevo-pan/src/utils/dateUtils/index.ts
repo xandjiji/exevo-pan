@@ -1,36 +1,28 @@
 import { DAYS_IN } from './constants'
 
-declare type DateObject = {
-  day: number
-  month: number
-  year: number
-}
-
 export const padStringDate = (dateString: string): string => {
   const [a, b, c] = dateString.split('/')
   return `${a.padStart(2, '0')}/${b.padStart(2, '0')}/${c}`
 }
 
-export const dateToDateObject = (dateValue: Date): DateObject => {
-  const day = dateValue.getDate()
-  const month = dateValue.getMonth() + 1
-  const year = dateValue.getFullYear()
-
-  return {
-    day,
-    month,
-    year,
-  }
-}
+export const dateToDateObject = (dateValue: Date): DateObject => ({
+  seconds: dateValue.getSeconds(),
+  minutes: dateValue.getMinutes(),
+  hours: dateValue.getHours(),
+  day: dateValue.getDate(),
+  month: dateValue.getMonth(),
+  year: dateValue.getFullYear(),
+  weekday: dateValue.getDay(),
+})
 
 export const readableCurrentDate = (): string => {
   const { day, month, year } = dateToDateObject(new Date())
-  return padStringDate(`${day}/${month}/${year}`)
+  return padStringDate(`${day}/${month + 1}/${year}`)
 }
 
 export const standardCurrentDate = (): string => {
   const { day, month, year } = dateToDateObject(new Date())
-  return padStringDate(`${month}/${day}/${year}`)
+  return padStringDate(`${month + 1}/${day}/${year}`)
 }
 
 export const mmddyyyy2ddmmyyy = (stringDate: string): string => {
