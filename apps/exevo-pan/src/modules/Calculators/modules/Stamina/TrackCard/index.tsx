@@ -1,5 +1,7 @@
 import { useMemo } from 'react'
 import StaminaBar from '../StaminaBar'
+import TimeLeft from '../TimeLeft'
+import { calculateSecondsToRegenerate } from '../utils'
 import { regenerateStamina, seconds2Time } from './utils'
 import { TrackCardProps } from './types'
 
@@ -24,9 +26,21 @@ const TrackCard = ({ trackedData }: TrackCardProps) => {
     [updatedStamina],
   )
 
+  const secondsToRegenerate = useMemo(
+    () =>
+      Math.max(
+        calculateSecondsToRegenerate(updatedStamina, targetStamina.seconds),
+        0,
+      ),
+    [updatedStamina, targetStamina.seconds],
+  )
+
   return (
-    <div className="card">
+    <div className="card grid gap-4">
       <StaminaBar time={updatedTime} mark={targetStamina.time} />
+      {secondsToRegenerate > 0 && (
+        <TimeLeft secondsToRegenerate={secondsToRegenerate} />
+      )}
     </div>
   )
 }
