@@ -8,11 +8,9 @@ import { TrackCardProps } from './types'
 /* @ ToDo:
 - rest time left
 - delete action
-- name change
-- force rerender every 3 minutes? retirar memos
 */
 
-const TrackCard = ({ trackedData }: TrackCardProps) => {
+const TrackCard = ({ trackedData, update }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
 
   const updatedStamina = useMemo(() => {
@@ -37,6 +35,14 @@ const TrackCard = ({ trackedData }: TrackCardProps) => {
 
   return (
     <div className="card grid gap-4">
+      <strong
+        contentEditable
+        onBlur={(e) => update({ key, name: e.currentTarget.textContent ?? '' })}
+        className="inline tracking-wide"
+      >
+        {name}
+      </strong>
+
       <StaminaBar time={updatedTime} mark={targetStamina.time} />
       {secondsToRegenerate > 0 && (
         <TimeLeft secondsToRegenerate={secondsToRegenerate} />

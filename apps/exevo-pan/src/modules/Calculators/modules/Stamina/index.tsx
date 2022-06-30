@@ -94,7 +94,11 @@ const Stamina = () => {
 
       <div className="grid gap-4">
         {list.map((trackedData) => (
-          <TrackCard key={trackedData.key} trackedData={trackedData} />
+          <TrackCard
+            key={trackedData.key}
+            trackedData={trackedData}
+            update={action.update}
+          />
         ))}
       </div>
     </Main>

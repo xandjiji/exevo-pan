@@ -12,3 +12,6 @@ export type TrackData = {
 }
 
 export type AddArgs = Pick<TrackData, 'currentStamina' | 'targetStamina'>
+
+export type UpdateArgs = Pick<TrackData, 'key'> &
+  Partial<Omit<TrackData, 'key'>>
