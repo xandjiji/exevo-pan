@@ -6,11 +6,6 @@ import { calculateSecondsToRegenerate } from '../utils'
 import { regenerateStamina, seconds2Time } from './utils'
 import { TrackCardProps } from './types'
 
-/* @ ToDo:
-- rest time left
-- delete action
-*/
-
 const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
 

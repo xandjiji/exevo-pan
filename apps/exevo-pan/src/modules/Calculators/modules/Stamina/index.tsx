@@ -13,9 +13,10 @@ import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
-- track feature
+- layout listagem
+- animations
 
--i18n
+-i18n (nao esquecer do "Remove this item")
 */
 
 const Stamina = () => {
