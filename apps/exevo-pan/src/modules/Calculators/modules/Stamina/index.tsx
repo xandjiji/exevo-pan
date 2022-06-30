@@ -7,6 +7,7 @@ import ChevronRight from 'assets/svgs/chevronRight.svg'
 import AddIcon from 'assets/svgs/addPost.svg'
 import useTime from './useTime'
 import StaminaBar from './StaminaBar'
+import useTracking from './useTracking'
 import { calculateSecondsToRegenerate, generateDatetime } from './utils'
 import { Main, LabeledCard, Group, TimeBubbles } from '../../components'
 
@@ -42,6 +43,10 @@ const Stamina = () => {
     () => generateDatetime(secondsToRegenerate),
     [secondsToRegenerate],
   )
+
+  const { list, action } = useTracking()
+
+  console.log(list)
 
   return (
     <Main>
@@ -94,7 +99,16 @@ const Stamina = () => {
           <TimeBubbles seconds={secondsToRegenerate} />
         </Group>
 
-        <Button type="button" style={{ padding: '5px 16px' }}>
+        <Button
+          type="button"
+          style={{ padding: '5px 16px' }}
+          onClick={() =>
+            action.add({
+              currentStamina,
+              targetStamina,
+            })
+          }
+        >
           <div className="flex items-center justify-center gap-1 text-xs font-bold uppercase tracking-wider">
             <AddIcon class="fill-onPrimary -ml-1 h-4 w-4" /> Track
           </div>
