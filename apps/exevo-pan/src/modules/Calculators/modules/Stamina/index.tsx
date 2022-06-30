@@ -2,15 +2,15 @@ import { useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { TimeInput, Button } from 'components/Atoms'
-import { InfoTooltip } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import AddIcon from 'assets/svgs/addPost.svg'
 import useTime from './useTime'
+import TimeLeft from './TimeLeft'
 import StaminaBar from './StaminaBar'
 import TrackCard from './TrackCard'
 import useTracking from './useTracking'
-import { calculateSecondsToRegenerate, generateDatetime } from './utils'
-import { Main, LabeledCard, Group, TimeBubbles } from '../../components'
+import { calculateSecondsToRegenerate } from './utils'
+import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
 - track feature
@@ -20,7 +20,7 @@ import { Main, LabeledCard, Group, TimeBubbles } from '../../components'
 
 const Stamina = () => {
   const {
-    translations: { common, calculators },
+    translations: { calculators },
   } = useTranslations()
 
   const [currentStamina, setCurrentStamina] = useTime('39:00')
@@ -38,11 +38,6 @@ const Stamina = () => {
         0,
       ),
     [currentStamina.seconds, targetStamina.seconds],
-  )
-
-  const { day, month, weekday, hours, minutes } = useMemo(
-    () => generateDatetime(secondsToRegenerate),
-    [secondsToRegenerate],
   )
 
   const { list, action } = useTracking()
@@ -79,24 +74,7 @@ const Stamina = () => {
 
         <StaminaBar time={currentStamina.time} mark={targetStamina.time} />
 
-        <Group>
-          <div className="flex items-center gap-1">
-            <strong>Rest time</strong>
-            <InfoTooltip
-              className="h-3 w-3"
-              content={
-                <span className="whitespace-nowrap">
-                  {`${common.Month[month]} ${day}, ${hours}:${minutes} (${
-                    typeof weekday === 'number'
-                      ? common.FullWeekdays[weekday]
-                      : common[weekday]
-                  })`}
-                </span>
-              }
-            />
-          </div>
-          <TimeBubbles seconds={secondsToRegenerate} />
-        </Group>
+        <TimeLeft secondsToRegenerate={secondsToRegenerate} />
 
         <Button
           type="button"
@@ -109,7 +87,7 @@ const Stamina = () => {
           }
         >
           <div className="flex items-center justify-center gap-1 text-xs font-bold uppercase tracking-wider">
-            <AddIcon class="fill-onPrimary -ml-1 h-4 w-4" /> Track
+            <AddIcon className="fill-onPrimary -ml-1 h-4 w-4" /> Track
           </div>
         </Button>
       </LabeledCard>
