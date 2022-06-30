@@ -45,6 +45,8 @@ export default {
   hours: 'hours',
   minute: 'minute',
   minutes: 'minutes',
+  today: 'today',
+  tomorrow: 'tomorrow',
   Month: {
     '0': 'Jan',
     '1': 'Feb',

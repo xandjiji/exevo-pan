@@ -46,6 +46,8 @@ export default {
   hours: 'horas',
   minute: 'minuto',
   minutes: 'minutos',
+  today: 'hoy',
+  tomorrow: 'mañana',
   Month: {
     '0': 'Ene',
     '1': 'Feb',

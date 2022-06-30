@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { TimeInput } from 'components/Atoms'
+import { dateToDateObject } from 'utils'
 import useTime from './useTime'
-import { calculateSecondsToRegenerate } from './utils'
+import { calculateSecondsToRegenerate, generateDatetime } from './utils'
 import {
   Main,
   LabeledCard,
@@ -24,7 +25,7 @@ import {
 
 const Stamina = () => {
   const {
-    translations: { calculators },
+    translations: { common, calculators },
   } = useTranslations()
 
   const [currentStamina, setCurrentStamina] = useTime('39:00')
@@ -44,8 +45,8 @@ const Stamina = () => {
     [currentStamina.seconds, targetStamina.seconds],
   )
 
-  const readyOn = useMemo(
-    () => new Date(+new Date() + secondsToRegenerate * 1000).toLocaleString(),
+  const { day, month, weekday, hours, minutes } = useMemo(
+    () => generateDatetime(secondsToRegenerate),
     [secondsToRegenerate],
   )
 
@@ -84,8 +85,14 @@ const Stamina = () => {
             <p>
               <strong>Ready on</strong>
             </p>
-            <div className="relative">
-              <Chip aria-hidden={!secondsToRegenerate}>{readyOn}</Chip>
+            <div className="relative grid gap-2">
+              <Chip aria-hidden={!secondsToRegenerate}>{`${
+                common.Month[month]
+              } ${day}, ${hours}:${minutes} (${
+                typeof weekday === 'number'
+                  ? common.FullWeekdays[weekday]
+                  : common[weekday]
+              })`}</Chip>
               <Empty aria-hidden={!!secondsToRegenerate}>
                 {calculators.none}
               </Empty>
