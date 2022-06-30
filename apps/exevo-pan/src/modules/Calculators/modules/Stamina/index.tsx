@@ -1,15 +1,16 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { TimeInput } from 'components/Atoms'
+import { TimeInput, Button } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
+import AddIcon from 'assets/svgs/addPost.svg'
 import useTime from './useTime'
 import StaminaBar from './StaminaBar'
 import { calculateSecondsToRegenerate, generateDatetime } from './utils'
 import { Main, LabeledCard, Group, TimeBubbles } from '../../components'
 
 /* @ ToDo:
--results
-    rest time tooltip calendar
+- track feature
+
 -i18n
 */
 
@@ -64,6 +65,20 @@ const Stamina = () => {
         </LabeledCard>
 
         <LabeledCard labelText="Results">
+          <Button
+            type="button"
+            className="absolute top-0 right-0"
+            style={{
+              padding: '8px 16px',
+              width: 'fit-content',
+              transform: 'translate(12px, -12px)',
+            }}
+          >
+            <div className="flex items-center justify-center gap-1 text-xs font-bold uppercase tracking-wider">
+              <AddIcon class="fill-onPrimary -ml-1 h-4 w-4" /> Track
+            </div>
+          </Button>
+
           <Group>
             <div className="flex items-center gap-1">
               <strong>Rest time</strong>
