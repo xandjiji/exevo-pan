@@ -1,26 +1,16 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { TimeInput } from 'components/Atoms'
+import { InfoTooltip } from 'components/Organisms'
 import useTime from './useTime'
 import StaminaBar from './StaminaBar'
 import { calculateSecondsToRegenerate, generateDatetime } from './utils'
-import {
-  Main,
-  LabeledCard,
-  Group,
-  Chip,
-  TimeBubbles,
-  Empty,
-} from '../../components'
+import { Main, LabeledCard, Group, TimeBubbles } from '../../components'
 
 /* @ ToDo:
 -results
-    timestamp
-        phantom space
-    tooltip +10 min logout
--useStorageState
+    rest time tooltip calendar
 -i18n
--stamina bar?
 */
 
 const Stamina = () => {
@@ -74,32 +64,26 @@ const Stamina = () => {
         </LabeledCard>
 
         <LabeledCard labelText="Results">
-          <StaminaBar time={currentStamina.time} mark={targetStamina.time} />
-
           <Group>
-            <p>
+            <div className="flex items-center gap-1">
               <strong>Rest time</strong>
-            </p>
+              <InfoTooltip
+                className="h-3 w-3"
+                content={
+                  <span className="whitespace-nowrap">
+                    {`${common.Month[month]} ${day}, ${hours}:${minutes} (${
+                      typeof weekday === 'number'
+                        ? common.FullWeekdays[weekday]
+                        : common[weekday]
+                    })`}
+                  </span>
+                }
+              />
+            </div>
             <TimeBubbles seconds={secondsToRegenerate} />
           </Group>
 
-          <Group>
-            <p>
-              <strong>Ready on</strong>
-            </p>
-            <div className="relative grid gap-2">
-              <Chip aria-hidden={!secondsToRegenerate}>{`${
-                common.Month[month]
-              } ${day}, ${hours}:${minutes} (${
-                typeof weekday === 'number'
-                  ? common.FullWeekdays[weekday]
-                  : common[weekday]
-              })`}</Chip>
-              <Empty aria-hidden={!!secondsToRegenerate}>
-                {calculators.none}
-              </Empty>
-            </div>
-          </Group>
+          <StaminaBar time={currentStamina.time} mark={targetStamina.time} />
         </LabeledCard>
       </div>
     </Main>
