@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { TimeInput } from 'components/Atoms'
-import { dateToDateObject } from 'utils'
 import useTime from './useTime'
+import StaminaBar from './StaminaBar'
 import { calculateSecondsToRegenerate, generateDatetime } from './utils'
 import {
   Main,
@@ -98,6 +98,8 @@ const Stamina = () => {
               </Empty>
             </div>
           </Group>
+
+          <StaminaBar time={currentStamina.time} />
         </LabeledCard>
       </div>
     </Main>

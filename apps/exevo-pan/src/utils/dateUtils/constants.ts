@@ -12,6 +12,12 @@ export const SECONDS_IN = {
   YEAR: 31536000,
 }
 
+export const MINUTES_IN = {
+  HOUR: 60,
+  DAY: 1440,
+  YEAR: 525600,
+}
+
 export const DAYS_IN = {
   WEEK: 7,
   MONTH: 30,
