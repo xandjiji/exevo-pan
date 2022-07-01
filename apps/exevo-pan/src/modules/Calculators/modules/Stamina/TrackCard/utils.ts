@@ -12,8 +12,13 @@ export const regenerateStamina = (
   currentStamina: number,
   secondsPassed: number,
 ): number => {
-  const regeneratedStamina =
-    currentStamina + Math.floor(secondsPassed / STAMINA_REGEN_RATE)
+  const regeneratedSeconds = Math.floor(secondsPassed / STAMINA_REGEN_RATE)
+
+  const regeneratedStamina = currentStamina + regeneratedSeconds
+
+  if (currentStamina > HAPPY_HOUR_STAMINA) {
+    return currentStamina + Math.floor(regeneratedSeconds / 2)
+  }
 
   if (regeneratedStamina > HAPPY_HOUR_STAMINA) {
     const greenSeconds = regeneratedStamina - HAPPY_HOUR_STAMINA
