@@ -12,7 +12,7 @@ const useTracking = () => {
         ...prev,
         {
           key: uuidv4(),
-          name: `New character (${prev.length + 1})`,
+          name: '',
           currentStamina,
           targetStamina,
           timestamp: +new Date(),

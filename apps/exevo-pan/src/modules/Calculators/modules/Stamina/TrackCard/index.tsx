@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react'
+import clsx from 'clsx'
 import RemoveIcon from 'assets/svgs/cross.svg'
 import { MILLISECONDS_IN } from 'utils'
 import StaminaBar from '../StaminaBar'
@@ -7,7 +8,7 @@ import { calculateSecondsToRegenerate, FULL_STAMINA } from '../utils'
 import { getSecondsPassed, regenerateStamina, seconds2Time } from './utils'
 import { TrackCardProps } from './types'
 
-const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
+const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
 
   const [secondsPassed, setSecondsPassed] = useState(() =>
@@ -53,7 +54,12 @@ const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
           aria-label={name}
           onChange={(e) => update({ key, name: e.target.value })}
           value={name}
-          className="decoration-separator text-onSurface inline flex-grow border-0 bg-transparent p-0 text-xs font-bold tracking-wide underline decoration-dashed"
+          className={clsx(
+            'text-primaryHighlight flex-grow border-0 bg-transparent p-0 text-xs font-bold tracking-wider placeholder:font-light',
+            !name && 'decoration-separator underline decoration-dashed',
+          )}
+          /* @ ToDo: i18n */
+          placeholder={`New character (${index})`}
         />
 
         <button

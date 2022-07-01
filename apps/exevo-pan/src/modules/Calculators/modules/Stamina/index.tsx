@@ -15,8 +15,8 @@ import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
-- animations
--i18n (nao esquecer do "Remove this item")
+    - animations
+    -i18n (nao esquecer do "Remove this item" e "New character (0)")
 */
 
 const Stamina = () => {
@@ -94,9 +94,10 @@ const Stamina = () => {
       </LabeledCard>
 
       <ClientComponent className="md:child:w-48 lgr:grid-cols-3 grid gap-4 lg:grid-cols-2">
-        {list.map((trackedData) => (
+        {list.map((trackedData, index) => (
           <TrackCard
             key={trackedData.key}
+            index={index}
             trackedData={trackedData}
             update={action.update}
             remove={action.remove}
