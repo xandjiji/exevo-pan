@@ -3,7 +3,7 @@ import RemoveIcon from 'assets/svgs/cross.svg'
 import { MILLISECONDS_IN } from 'utils'
 import StaminaBar from '../StaminaBar'
 import TimeLeft from '../TimeLeft'
-import { calculateSecondsToRegenerate } from '../utils'
+import { calculateSecondsToRegenerate, FULL_STAMINA } from '../utils'
 import { getSecondsPassed, regenerateStamina, seconds2Time } from './utils'
 import { TrackCardProps } from './types'
 
@@ -15,7 +15,11 @@ const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
   )
 
   const updatedStamina = useMemo(
-    () => regenerateStamina(currentStamina.seconds, secondsPassed),
+    () =>
+      Math.min(
+        regenerateStamina(currentStamina.seconds, secondsPassed),
+        FULL_STAMINA,
+      ),
     [currentStamina.seconds, secondsPassed],
   )
 
