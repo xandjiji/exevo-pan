@@ -36,7 +36,7 @@ const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
           aria-label={name}
           onChange={(e) => update({ key, name: e.target.value })}
           value={name}
-          className="inline flex-grow border-0 p-0 text-xs font-bold tracking-wide"
+          className="decoration-separator inline flex-grow border-0 p-0 text-xs font-bold tracking-wide underline decoration-dashed"
         />
 
         <button
