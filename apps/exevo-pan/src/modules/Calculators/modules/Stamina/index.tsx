@@ -2,6 +2,8 @@ import { useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { TimeInput, Button } from 'components/Atoms'
+import EmptyState from 'components/EmptyState'
+import { ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import AddIcon from 'assets/svgs/addPost.svg'
 import useTime from './useTime'
@@ -13,9 +15,7 @@ import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
-- layout listagem
 - animations
-
 -i18n (nao esquecer do "Remove this item")
 */
 
@@ -93,7 +93,7 @@ const Stamina = () => {
         </Button>
       </LabeledCard>
 
-      <div className="lgr:grid-cols-3 grid gap-4 lg:grid-cols-2">
+      <ClientComponent className="md:child:w-48 lgr:grid-cols-3 grid gap-4 lg:grid-cols-2">
         {list.map((trackedData) => (
           <TrackCard
             key={trackedData.key}
@@ -102,7 +102,16 @@ const Stamina = () => {
             remove={action.remove}
           />
         ))}
-      </div>
+        {list.length === 0 && (
+          <EmptyState
+            className="lgr:left-3/4 relative select-none md:top-1/4 lg:left-1/2"
+            text={{
+              content: '',
+              size: 24,
+            }}
+          />
+        )}
+      </ClientComponent>
     </Main>
   )
 }
