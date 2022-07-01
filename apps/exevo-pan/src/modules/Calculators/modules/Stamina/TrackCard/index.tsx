@@ -1,19 +1,23 @@
-import { useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import RemoveIcon from 'assets/svgs/cross.svg'
+import { MILLISECONDS_IN } from 'utils'
 import StaminaBar from '../StaminaBar'
 import TimeLeft from '../TimeLeft'
 import { calculateSecondsToRegenerate } from '../utils'
-import { regenerateStamina, seconds2Time } from './utils'
+import { getSecondsPassed, regenerateStamina, seconds2Time } from './utils'
 import { TrackCardProps } from './types'
 
 const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
 
-  const updatedStamina = useMemo(() => {
-    const secondsPassed = Math.round((+new Date() - timestamp) / 1000)
+  const [secondsPassed, setSecondsPassed] = useState(() =>
+    getSecondsPassed(timestamp),
+  )
 
-    return regenerateStamina(currentStamina.seconds, secondsPassed)
-  }, [timestamp, currentStamina.seconds])
+  const updatedStamina = useMemo(
+    () => regenerateStamina(currentStamina.seconds, secondsPassed),
+    [currentStamina.seconds, secondsPassed],
+  )
 
   const updatedTime = useMemo(
     () => seconds2Time(updatedStamina),
@@ -28,6 +32,15 @@ const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
       ),
     [updatedStamina, targetStamina.seconds],
   )
+
+  useEffect(() => {
+    const timer = setInterval(
+      () => getSecondsPassed(timestamp),
+      MILLISECONDS_IN.MINUTE,
+    )
+
+    return () => clearInterval(timer)
+  }, [])
 
   return (
     <div className="card grid gap-4">

@@ -1,6 +1,9 @@
 import { SECONDS_IN } from 'utils'
 import { padTime, STAMINA_REGEN_RATE, HAPPY_HOUR_STAMINA } from '../utils'
 
+export const getSecondsPassed = (timestamp: number): number =>
+  Math.round((+new Date() - timestamp) / 1000)
+
 export const seconds2Time = (seconds: number): string => {
   const hours = Math.floor(seconds / SECONDS_IN.HOUR)
   const minutes = Math.floor((seconds % SECONDS_IN.HOUR) / SECONDS_IN.MINUTE)
