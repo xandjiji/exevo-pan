@@ -35,7 +35,7 @@ const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
 
   useEffect(() => {
     const timer = setInterval(
-      () => getSecondsPassed(timestamp),
+      () => setSecondsPassed(getSecondsPassed(timestamp)),
       MILLISECONDS_IN.MINUTE,
     )
 
