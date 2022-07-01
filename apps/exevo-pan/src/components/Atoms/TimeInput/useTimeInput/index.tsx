@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo, useEffect } from 'react'
 import { clampValue as baseClampValue } from 'utils'
-import { formatValue } from '../utils'
+import { formatValue, EMPTY_VALUE } from '../utils'
 import { isNumber, canInferValue, preventPropagation } from './utils'
 import { UseTimeInputProps } from './types'
 
@@ -9,6 +9,7 @@ const useTimeInput = ({
   controlledValue,
   min,
   max,
+  onDoubleBackspace,
   onInferredValue,
   onKey,
 }: UseTimeInputProps) => {
@@ -44,6 +45,9 @@ const useTimeInput = ({
 
       if (e.key === 'Backspace') {
         setState((currentState) => {
+          if (currentState.value === '' || currentState.value === EMPTY_VALUE) {
+            onDoubleBackspace?.()
+          }
           const nextValue = ''
 
           return {
@@ -67,7 +71,7 @@ const useTimeInput = ({
         })
       }
     },
-    [isControlled, min, max, onKey],
+    [isControlled, min, max, onDoubleBackspace, onKey],
   )
 
   const onChange: React.ChangeEventHandler<HTMLInputElement> = useCallback(

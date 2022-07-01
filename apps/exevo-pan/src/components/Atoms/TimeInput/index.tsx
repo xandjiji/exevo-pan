@@ -76,6 +76,7 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
       controlledValue: controlledValue?.minutes,
       min: 0,
       max: 59,
+      onDoubleBackspace: focusHours,
       onKey: useMemo(
         () => ({
           ArrowLeft: focusHours,

@@ -6,6 +6,7 @@ export type UseTimeInputProps = {
   min: number
   max: number
   onInferredValue?: () => void
+  onDoubleBackspace?: () => void
   onKey?: KeyAction
 }
 
