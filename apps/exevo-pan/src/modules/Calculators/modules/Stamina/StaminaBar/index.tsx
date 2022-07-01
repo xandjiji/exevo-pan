@@ -1,9 +1,16 @@
-import { useMemo } from 'react'
+import { useMemo, memo } from 'react'
 import clsx from 'clsx'
 import { time2Minutes, getStaminaPercentage, staminaColor } from './utils'
 import { StaminaBarProps } from './types'
 
-const StaminaBar = ({ time, mark, className, ...props }: StaminaBarProps) => {
+const StaminaBar = ({
+  time,
+  mark,
+  blinking = false,
+  className,
+  ...props
+}: StaminaBarProps) => {
+  const [hours, minutes] = time.split(':')
   const staminaMinutes = useMemo(() => time2Minutes(time), [time])
 
   const markPosition = useMemo(() => {
@@ -21,7 +28,13 @@ const StaminaBar = ({ time, mark, className, ...props }: StaminaBarProps) => {
       {...props}
     >
       <span>Stamina</span>
-      <span>{time}</span>
+      <strong>
+        {hours}
+        <span className={clsx('mx-[1px]', blinking && 'animate-blinking')}>
+          :
+        </span>
+        {minutes}
+      </strong>
       <div
         className="border-1 bg-separator/30 relative mt-1 h-1 w-full border-solid border-black"
         title={mark}
@@ -45,4 +58,4 @@ const StaminaBar = ({ time, mark, className, ...props }: StaminaBarProps) => {
   )
 }
 
-export default StaminaBar
+export default memo(StaminaBar)

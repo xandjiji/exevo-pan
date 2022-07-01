@@ -67,7 +67,7 @@ const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
         </button>
       </div>
 
-      <StaminaBar time={updatedTime} mark={targetStamina.time} />
+      <StaminaBar time={updatedTime} mark={targetStamina.time} blinking />
       {secondsToRegenerate > 0 && (
         <TimeLeft secondsToRegenerate={secondsToRegenerate} />
       )}

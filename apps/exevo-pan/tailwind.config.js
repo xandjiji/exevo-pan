@@ -99,6 +99,7 @@ module.exports = {
         swing: 'swing 1.2s ease-out forwards',
         tilt: 'tilt 1s ease-out forwards',
         letGo: 'letGo 1s ease-out forwards',
+        blinking: 'blinking 1s ease-out infinite',
       },
       keyframes: {
         rollIn: {
@@ -165,6 +166,11 @@ module.exports = {
           '60%': { transform: 'rotate3d(0, 0, 1, 20deg)' },
           '80%': { transform: 'rotate3d(0, 0, 1, -10deg)' },
           '100%': { transform: 'rotate3d(0, 0, 1, 0deg)' },
+        },
+        blinking: {
+          '0%': { opacity: 1 },
+          '50%': { opacity: 0 },
+          '100%': { opacity: 1 },
         },
       },
     },
