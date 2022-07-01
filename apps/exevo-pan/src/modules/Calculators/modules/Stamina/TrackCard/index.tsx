@@ -47,7 +47,7 @@ const TrackCard = ({ trackedData, update, remove }: TrackCardProps) => {
   }, [])
 
   return (
-    <div className="card grid gap-4">
+    <div className="card grid gap-4 lg:place-content-start lg:items-start">
       <div className="flex items-center justify-between gap-4">
         <input
           aria-label={name}

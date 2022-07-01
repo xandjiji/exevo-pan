@@ -44,7 +44,7 @@ const Stamina = () => {
   const { list, action } = useTracking()
 
   return (
-    <Main>
+    <Main className="md:child:shrink-0 items-start gap-6 md:flex">
       <LabeledCard labelText="Stamina">
         <div className="grid grid-cols-[1fr_24px_1fr] items-end gap-2">
           <TimeInput
@@ -93,7 +93,7 @@ const Stamina = () => {
         </Button>
       </LabeledCard>
 
-      <div className="grid gap-4">
+      <div className="lgr:grid-cols-3 grid gap-4 lg:grid-cols-2">
         {list.map((trackedData) => (
           <TrackCard
             key={trackedData.key}
