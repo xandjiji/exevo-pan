@@ -16,6 +16,7 @@ import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
     - animations
+    - invalid state track (disable button)
     -i18n (nao esquecer do "Remove this item" e "New character (0)")
 */
 

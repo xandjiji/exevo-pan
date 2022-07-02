@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect } from 'react'
 import clsx from 'clsx'
-import RemoveIcon from 'assets/svgs/cross.svg'
+import RemoveIcon from 'assets/svgs/trash.svg'
 import { MILLISECONDS_IN } from 'utils'
 import StaminaBar from '../StaminaBar'
 import TimeLeft from '../TimeLeft'
@@ -64,12 +64,12 @@ const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
 
         <button
           type="button"
-          className="clickable h-4 w-4 shrink-0"
+          className="clickable group h-4 w-4 shrink-0 rounded"
           /* @ ToDo: i18n */
           aria-label="Remove this item"
           onClick={() => remove(key)}
         >
-          <RemoveIcon className="fill-red h-4 w-4" />
+          <RemoveIcon className="fill-separator group-hover:fill-red h-4 w-4" />
         </button>
       </div>
 
