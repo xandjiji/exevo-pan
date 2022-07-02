@@ -3,21 +3,21 @@ import { Main } from 'templates'
 import ErrorPage from 'modules/ErrorPage'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
+import { buildPageTitle } from 'utils'
 import { common, error } from 'locales'
 
 export default function Custom404() {
   const { translations } = useTranslations()
 
+  const pageTitle = buildPageTitle(translations.error.Meta.title)
+
   return (
     <>
       <Head>
-        <title>{translations.error.Meta.title}</title>
-        <meta name="title" content={translations.error.Meta.title} />
-        <meta property="og:title" content={translations.error.Meta.title} />
-        <meta
-          property="twitter:title"
-          content={translations.error.Meta.title}
-        />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="twitter:title" content={pageTitle} />
 
         <meta
           name="description"

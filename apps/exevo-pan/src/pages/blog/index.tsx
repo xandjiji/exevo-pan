@@ -2,7 +2,7 @@ import { Home } from 'modules/Blog'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
 import { Main, Hero } from 'templates'
@@ -18,20 +18,25 @@ type Props = {
 export default function PostPage({ initialPosts }: Props) {
   const { translations } = useTranslations()
 
-  const TITLE = translations.blog.Meta.title
-  const DESCRIPTION = translations.blog.Meta.description
+  const pageTitle = buildPageTitle(translations.blog.Meta.title)
 
   return (
     <>
       <Head>
-        <title>{TITLE} - Exevo Pan</title>
-        <meta name="title" content={TITLE} />
-        <meta property="og:title" content={TITLE} />
-        <meta property="twitter:title" content={TITLE} />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="twitter:title" content={pageTitle} />
 
-        <meta name="description" content={DESCRIPTION} />
-        <meta property="twitter:description" content={DESCRIPTION} />
-        <meta property="og:description" content={DESCRIPTION} />
+        <meta name="description" content={translations.blog.Meta.description} />
+        <meta
+          property="twitter:description"
+          content={translations.blog.Meta.description}
+        />
+        <meta
+          property="og:description"
+          content={translations.blog.Meta.description}
+        />
         <meta property="og:type" content="website" />
 
         <link rel="canonical" href={pageUrl} />
@@ -66,7 +71,11 @@ export default function PostPage({ initialPosts }: Props) {
       </Head>
 
       <Main>
-        <Hero title={TITLE} src="https://i.imgur.com/Jjh4f3q.png" offset />
+        <Hero
+          title={translations.blog.Meta.title}
+          src="https://i.imgur.com/Jjh4f3q.png"
+          offset
+        />
         <Home
           initialIndex={DEFAULT_PAGINATION_OPTIONS.pageIndex + 1}
           initialPosts={initialPosts}

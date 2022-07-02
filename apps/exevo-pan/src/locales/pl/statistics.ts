@@ -6,7 +6,7 @@ export default {
         'Statystyki, trendy i codzienna analiza danych z Tibijskiego Bazaru Postaci!',
     },
     Highscores: {
-      title: 'Exevo Pan - Najlepsze wyniki',
+      title: 'Najlepsze wyniki',
       description:
         'Zobacz rankingi z największymi ofertami, najwyższymi levelami i najlepszymi skillami z Tibijskiego Bazaru Postaci!',
     },

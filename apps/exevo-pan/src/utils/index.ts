@@ -1,3 +1,4 @@
+export * from './buildPageTitle'
 export * from './buildUrl'
 export * from './calculateTotalInvestment'
 export * from './capitalizeFirstLetter'

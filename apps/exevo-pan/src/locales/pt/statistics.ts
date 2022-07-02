@@ -6,7 +6,7 @@ export default {
         'Estatísticas, tendências, análise de dados diários e informações históricas do Char Bazaar do Tibia!',
     },
     Highscores: {
-      title: 'Exevo Pan - Rankings',
+      title: 'Rankings',
       description:
         'Veja rankings dos chares mais caros, top levels e maiores skills do Char Bazaar do Tibia!',
     },

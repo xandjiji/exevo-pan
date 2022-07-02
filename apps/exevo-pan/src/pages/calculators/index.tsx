@@ -3,7 +3,7 @@ import { Main, Hero } from 'templates'
 import { Header, MainPage, pages } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
@@ -13,19 +13,15 @@ const { hero } = pages.Main
 export default function Calculators() {
   const { translations } = useTranslations()
 
+  const pageTitle = buildPageTitle(translations.calculators.Meta.Main.title)
+
   return (
     <>
       <Head>
-        <title>{translations.calculators.Meta.Main.title}</title>
-        <meta name="title" content={translations.calculators.Meta.Main.title} />
-        <meta
-          property="og:title"
-          content={translations.calculators.Meta.Main.title}
-        />
-        <meta
-          property="twitter:title"
-          content={translations.calculators.Meta.Main.title}
-        />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="twitter:title" content={pageTitle} />
 
         <meta
           name="description"

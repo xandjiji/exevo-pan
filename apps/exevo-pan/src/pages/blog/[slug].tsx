@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import matter from 'gray-matter'
-import { buildUrl } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
 import { Main } from 'templates'
@@ -79,7 +79,7 @@ export default function PostPage({
   return (
     <>
       <Head>
-        <title>{metaData.title} - Exevo Pan</title>
+        <title>{buildPageTitle(metaData.title)}</title>
         <meta name="title" content={metaData.title} />
         <meta property="og:title" content={metaData.title} />
         <meta property="twitter:title" content={metaData.title} />
