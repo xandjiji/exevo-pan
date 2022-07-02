@@ -1,4 +1,5 @@
-import { useState, useMemo, useEffect, useCallback } from 'react'
+import { useState, useMemo, useEffect, useCallback, memo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import RemoveIcon from 'assets/svgs/trash.svg'
 import { MILLISECONDS_IN } from 'utils'
@@ -12,6 +13,10 @@ const ANIMATION_DELAY = 200
 
 const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
+
+  const {
+    translations: { calculators },
+  } = useTranslations()
 
   const [secondsPassed, setSecondsPassed] = useState(() =>
     getSecondsPassed(timestamp),
@@ -71,15 +76,13 @@ const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
             'text-primaryHighlight flex-grow border-0 bg-transparent p-0 text-xs font-bold tracking-wider placeholder:font-light',
             !name && 'decoration-separator underline decoration-dashed',
           )}
-          /* @ ToDo: i18n */
-          placeholder={`New character (${index})`}
+          placeholder={`${calculators.Stamina.newCharacter} (${index})`}
         />
 
         <button
           type="button"
           className="clickable group h-4 w-4 shrink-0 rounded"
-          /* @ ToDo: i18n */
-          aria-label="Remove this item"
+          aria-label={calculators.Stamina.removeItem}
           onClick={handleDelete}
         >
           <RemoveIcon className="fill-separator group-hover:fill-red h-4 w-4" />
@@ -94,4 +97,4 @@ const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
   )
 }
 
-export default TrackCard
+export default memo(TrackCard)

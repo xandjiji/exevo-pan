@@ -48,6 +48,14 @@ export default {
       e: 'gold',
     },
   },
+  Stamina: {
+    currentStamina: 'Current stamina',
+    desiredStamina: 'Desired stamina',
+    track: 'Track',
+    restTime: 'Rest time',
+    newCharacter: 'New character',
+    removeItem: 'Remove item',
+  },
   CharmDamage: {
     moreInfo: 'For more information about Charms, check out',
     thisArticle: 'this article',

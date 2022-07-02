@@ -14,10 +14,6 @@ import useTracking from './useTracking'
 import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../../components'
 
-/* @ ToDo:
-    -i18n (nao esquecer do "Remove this item" e "New character (0)")
-*/
-
 const Stamina = () => {
   const {
     translations: { calculators },
@@ -47,7 +43,7 @@ const Stamina = () => {
       <LabeledCard labelText="Stamina" className="md:sticky md:top-[130px]">
         <div className="grid grid-cols-[1fr_24px_1fr] items-end gap-2">
           <TimeInput
-            label="Current stamina"
+            label={calculators.Stamina.currentStamina}
             max={42}
             value={currentStamina.time}
             onChange={(e) => setCurrentStamina(e.target.value)}
@@ -62,7 +58,7 @@ const Stamina = () => {
             )}
           />
           <TimeInput
-            label="Desired stamina"
+            label={calculators.Stamina.desiredStamina}
             max={42}
             value={targetStamina.time}
             onChange={(e) => setTargetStamina(e.target.value)}
@@ -91,7 +87,7 @@ const Stamina = () => {
             <AddIcon
               className={clsx('-ml-1 h-4 w-4', !invalid && 'fill-onPrimary')}
             />{' '}
-            Track
+            {calculators.Stamina.track}
           </div>
         </Button>
       </LabeledCard>
@@ -111,7 +107,7 @@ const Stamina = () => {
             className="lgr:left-3/4 relative select-none md:top-1/4 lg:left-1/2"
             text={{
               content: '',
-              size: 24,
+              size: 0,
             }}
           />
         )}

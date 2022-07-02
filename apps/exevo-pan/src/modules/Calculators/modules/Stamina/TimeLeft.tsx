@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { InfoTooltip } from 'components/Organisms'
 import { Group, TimeBubbles } from '../../components'
@@ -6,7 +6,7 @@ import { generateDatetime } from './utils'
 
 const TimeLeft = ({ secondsToRegenerate }: { secondsToRegenerate: number }) => {
   const {
-    translations: { common },
+    translations: { common, calculators },
   } = useTranslations()
 
   const { day, month, weekday, hours, minutes } = useMemo(
@@ -17,7 +17,7 @@ const TimeLeft = ({ secondsToRegenerate }: { secondsToRegenerate: number }) => {
   return (
     <Group>
       <div className="flex items-center gap-1">
-        <strong>Rest time</strong>
+        <strong>{calculators.Stamina.restTime}</strong>
         <InfoTooltip
           className="h-3 w-3"
           content={
@@ -36,4 +36,4 @@ const TimeLeft = ({ secondsToRegenerate }: { secondsToRegenerate: number }) => {
   )
 }
 
-export default TimeLeft
+export default memo(TimeLeft)
