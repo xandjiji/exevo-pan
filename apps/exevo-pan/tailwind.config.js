@@ -100,6 +100,7 @@ module.exports = {
         tilt: 'tilt 1s ease-out forwards',
         letGo: 'letGo 1s ease-out forwards',
         blinking: 'blinking 1s ease-out infinite',
+        implode: 'implode 0.2s ease-out forwards',
       },
       keyframes: {
         rollIn: {
@@ -171,6 +172,10 @@ module.exports = {
           '0%': { opacity: 1 },
           '50%': { opacity: 0 },
           '100%': { opacity: 1 },
+        },
+        implode: {
+          '0%': { opacity: 1, transform: 'scale(1)' },
+          '100%': { opacity: 0, transform: 'scale(0)' },
         },
       },
     },

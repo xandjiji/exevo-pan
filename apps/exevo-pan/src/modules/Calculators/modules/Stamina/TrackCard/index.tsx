@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from 'react'
+import { useState, useMemo, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
 import RemoveIcon from 'assets/svgs/trash.svg'
 import { MILLISECONDS_IN } from 'utils'
@@ -7,6 +7,8 @@ import TimeLeft from '../TimeLeft'
 import { calculateSecondsToRegenerate, FULL_STAMINA } from '../utils'
 import { getSecondsPassed, regenerateStamina, seconds2Time } from './utils'
 import { TrackCardProps } from './types'
+
+const ANIMATION_DELAY = 200
 
 const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
@@ -47,8 +49,19 @@ const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
     return () => clearInterval(timer)
   }, [])
 
+  const [willBeDeleted, setWillBeDeleted] = useState(false)
+  const handleDelete = useCallback(() => {
+    setWillBeDeleted(true)
+    setTimeout(() => remove(key), ANIMATION_DELAY)
+  }, [key])
+
   return (
-    <div className="card grid gap-4 lg:place-content-start lg:items-start">
+    <div
+      className={clsx(
+        'card grid gap-4 lg:place-content-start lg:items-start',
+        willBeDeleted ? 'animate-implode' : 'animate-zoomInAndOut',
+      )}
+    >
       <div className="flex items-center justify-between gap-4">
         <input
           aria-label={name}
@@ -67,7 +80,7 @@ const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
           className="clickable group h-4 w-4 shrink-0 rounded"
           /* @ ToDo: i18n */
           aria-label="Remove this item"
-          onClick={() => remove(key)}
+          onClick={handleDelete}
         >
           <RemoveIcon className="fill-separator group-hover:fill-red h-4 w-4" />
         </button>

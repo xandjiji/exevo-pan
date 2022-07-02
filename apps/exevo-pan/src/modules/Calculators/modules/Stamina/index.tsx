@@ -15,7 +15,6 @@ import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
-    - animations
     - invalid state track (disable button)
     -i18n (nao esquecer do "Remove this item" e "New character (0)")
 */
@@ -94,7 +93,7 @@ const Stamina = () => {
         </Button>
       </LabeledCard>
 
-      <ClientComponent className="md:child:w-48 lgr:grid-cols-3 grid gap-4 lg:grid-cols-2">
+      <ClientComponent className="md:child:w-48 lgr:grid-cols-3 child:transition-all grid gap-4 transition-all lg:grid-cols-2">
         {list.map((trackedData, index) => (
           <TrackCard
             key={trackedData.key}
