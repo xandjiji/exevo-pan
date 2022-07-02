@@ -15,7 +15,6 @@ import { calculateSecondsToRegenerate } from './utils'
 import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
-    - invalid state track (disable button)
     -i18n (nao esquecer do "Remove this item" e "New character (0)")
 */
 
@@ -86,9 +85,13 @@ const Stamina = () => {
               targetStamina,
             })
           }
+          disabled={invalid}
         >
           <div className="flex items-center justify-center gap-1 text-xs font-bold uppercase tracking-wider">
-            <AddIcon className="fill-onPrimary -ml-1 h-4 w-4" /> Track
+            <AddIcon
+              className={clsx('-ml-1 h-4 w-4', !invalid && 'fill-onPrimary')}
+            />{' '}
+            Track
           </div>
         </Button>
       </LabeledCard>
