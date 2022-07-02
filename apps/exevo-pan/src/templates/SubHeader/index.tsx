@@ -18,6 +18,7 @@ const SubHeader = ({ navItems, className, ...props }: SubHeaderProps) => (
           <Link
             href={navItem.href}
             exact
+            scrollOnCurrent
             className="hover:border-onPrimary currentpage:border-onPrimary flex cursor-pointer items-center border-solid border-transparent px-5 pt-[13px] pb-2.5 transition-colors"
             style={{ borderWidth: 0, borderBottomWidth: 3 }}
           >
