@@ -13,11 +13,11 @@ const MainPage = () => {
 
   return (
     <main className="inner-container z-1 pb-4 md:pb-8">
-      <ul className="grid gap-4">
+      <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         {entries.map(({ title, href, sprite }) => (
           <li key={title}>
             <NextLink href={href}>
-              <a className="card group flex items-center gap-4">
+              <a className="card group flex h-full items-center gap-4">
                 <SpritePortrait
                   src={sprite}
                   width={32}
