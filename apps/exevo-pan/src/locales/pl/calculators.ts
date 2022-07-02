@@ -9,15 +9,15 @@ export default {
       description:
         'Find out how many exercise weapons, time and money would cost to achieve your desired skill',
     },
+    Stamina: {
+      title: 'Stamina',
+      description:
+        'Calculate and track how much time it takes to restore your stamina.',
+    },
     CharmDamage: {
       title: 'Charm Damage',
       description:
         'Compare the average damage between different charms to see which one is best.',
-    },
-    Stamina: {
-      title: 'Stamina',
-      description:
-        'Calculate how much time will it take to restore your stamina.',
     },
   },
   Header: {

@@ -21,14 +21,6 @@ export const ExerciseWeapons: CalculatorRoute = {
   sprite: '/sprites/store/lasting exercise sword.gif',
 }
 
-export const CharmDamage: CalculatorRoute = {
-  title: 'CharmDamage',
-  href: ROUTES.CHARM_DAMAGE,
-  icon: <CharmDamageIcon />,
-  hero: `${ROUTES.CALCULATORS}/charm-damage-hero.png`,
-  sprite: '/sprites/charms/Charm.png',
-}
-
 export const Stamina: CalculatorRoute = {
   title: 'Stamina',
   href: ROUTES.STAMINA,
@@ -37,9 +29,17 @@ export const Stamina: CalculatorRoute = {
   sprite: '/sprites/sleeping.png',
 }
 
+export const CharmDamage: CalculatorRoute = {
+  title: 'CharmDamage',
+  href: ROUTES.CHARM_DAMAGE,
+  icon: <CharmDamageIcon />,
+  hero: `${ROUTES.CALCULATORS}/charm-damage-hero.png`,
+  sprite: '/sprites/charms/Charm.png',
+}
+
 export const routes: CalculatorRoute[] = [
   Main,
   ExerciseWeapons,
-  CharmDamage,
   Stamina,
+  CharmDamage,
 ]
