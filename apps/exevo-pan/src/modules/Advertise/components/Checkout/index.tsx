@@ -95,7 +95,7 @@ const Checkout = () => {
   const handleKeypress: React.KeyboardEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    if (event.code === 'Enter' && !isButtonDisabled) {
+    if (event.key === 'Enter' && !isButtonDisabled) {
       validateAndSubmit()
     }
   }
@@ -137,12 +137,13 @@ const Checkout = () => {
             onKeyPress={handleKeypress}
             onChange={handleChange}
             value={paymentCharacter.value}
+            enterKeyHint="send"
           />
         </>
       )}
 
       <Button
-        type="button"
+        type="submit"
         aria-label={advertise.Checkout.checkoutButtonLabel}
         disabled={isButtonDisabled}
         onClick={validateAndSubmit}
