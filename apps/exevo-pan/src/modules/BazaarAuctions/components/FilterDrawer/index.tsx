@@ -9,6 +9,7 @@ import {
   Checkbox,
 } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
+import { blurOnEnter } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
@@ -88,6 +89,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             allowClear
             value={nickname}
             onChange={(event) => setNickname(event.target.value)}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
             noAlert
           />
         </FilterGroup>
@@ -229,6 +232,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               (option: Option) => updateFilters('serverSet', option.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
           />
           <S.ChipWrapper id="server-list">
             {[...filterState.serverSet].map((server) => (
@@ -341,6 +346,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 setMinSkill(+event.target.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
             className="max-w-[270px]"
             style={{ marginBottom: 16 }}
           />
@@ -433,6 +440,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   updateFilters('imbuementsSet', option.value),
                 [updateFilters],
               )}
+              onKeyPress={blurOnEnter}
+              enterKeyHint="done"
             />
             <Chip
               overrideStatus={
@@ -469,6 +478,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 (option: Option) => updateFilters('charmsSet', option.value),
                 [updateFilters],
               )}
+              onKeyPress={blurOnEnter}
+              enterKeyHint="done"
             />
             <Chip
               overrideStatus={
@@ -503,6 +514,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               (option: Option) => updateFilters('questSet', option.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
           />
           <S.ChipWrapper id="quest-list">
             {[...filterState.questSet].map((quest) => (
@@ -531,6 +544,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               (option: Option) => updateFilters('achievementSet', option.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
           />
           <S.ChipWrapper id="achievement-list">
             {[...filterState.achievementSet].map((achievement) => (
@@ -569,6 +584,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   (option: Option) => updateFilters('itemSet', option.value),
                   [updateFilters],
                 )}
+                onKeyPress={blurOnEnter}
+                enterKeyHint="done"
               />
               <Chip
                 overrideStatus={

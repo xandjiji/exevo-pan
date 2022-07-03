@@ -5,6 +5,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
+import { blurOnEnter } from 'utils'
 import { LabeledCard } from '../../../components'
 import { vocationOptions, skillOptions } from './options'
 import { generateMarks } from './constants'
@@ -112,6 +113,8 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
           value={percentageLeft}
           onChange={(e) => setPercentageLeft(+e.target.value)}
           className="flex-grow"
+          onKeyPress={blurOnEnter}
+          enterKeyHint="done"
           ssr
         />
       </div>
