@@ -26,12 +26,9 @@ const Newsletter = ({
   const { request, register } = useNewsletter()
 
   const registerUser = () => register(email, locale ?? DEFAULT_LOCALE)
-  const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
-    const { code } = event
-    if (code === 'Enter' || code === 'NumpadEnter') {
-      if (request.status !== 'LOADING') {
-        registerUser()
-      }
+  const onKeyPress: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if (event.key === 'Enter' && request.status !== 'LOADING') {
+      registerUser()
     }
   }
 
@@ -75,7 +72,8 @@ const Newsletter = ({
               allowClear
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              onKeyDown={onKeyDown}
+              onKeyPress={onKeyPress}
+              enterKeyHint="send"
               error={
                 request.status === 'ERROR'
                   ? blog.Newsletter.message[request.message as string] ??
