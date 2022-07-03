@@ -3,6 +3,7 @@ import { Accordion, Switch, Input, Tag } from 'components/Atoms'
 import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
 import SearchIcon from 'assets/svgs/search.svg'
+import { blurOnEnter } from 'utils'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
 
@@ -86,6 +87,8 @@ const Filters = () => {
             placeholder={blog.Filters.searchPlaceholder}
             allowClear
             noAlert
+            onKeyPress={blurOnEnter}
+            enterKeyHint="search"
           />
         </GroupWrapper>
 
