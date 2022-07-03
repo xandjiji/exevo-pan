@@ -12,12 +12,12 @@ export default {
     Stamina: {
       title: 'Stamina',
       description:
-        'Calcule e acompanhe quanto tempo falta para restaurar sua stamina.',
+        'Calcule e acompanhe quanto tempo falta para restaurar sua stamina',
     },
     CharmDamage: {
       title: 'Charm Damage',
       description:
-        'Compare a média de dano entre diferentes chamrs para descobrir qual é o melhor.',
+        'Compare a média de dano entre diferentes charms para descobrir qual é a melhor',
     },
   },
   Header: {

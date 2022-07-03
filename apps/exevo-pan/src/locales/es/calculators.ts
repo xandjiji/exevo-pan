@@ -12,12 +12,12 @@ export default {
     Stamina: {
       title: 'Stamina',
       description:
-        'Calculate and track how much time it takes to restore your stamina.',
+        'Calculate and track how much time it takes to restore your stamina',
     },
     CharmDamage: {
       title: 'Charm Damage',
       description:
-        'Compare the average damage between different charms to see which one is best.',
+        'Compare the average damage between different charms to see which one is best',
     },
   },
   Header: {
