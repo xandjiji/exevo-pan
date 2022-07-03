@@ -36,6 +36,8 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
       onChange,
       error,
       noAlert = false,
+      enterKeyHint,
+      onKeyPress,
       ...props
     },
     refProp,
@@ -118,7 +120,13 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
         >
           <Input ref={hoursRef} disabled={disabled} {...hourBinders} />
           :
-          <Input ref={minutesRef} disabled={disabled} {...minuteBinders} />
+          <Input
+            ref={minutesRef}
+            disabled={disabled}
+            enterKeyHint={enterKeyHint}
+            onKeyPress={onKeyPress}
+            {...minuteBinders}
+          />
         </div>
         {!noAlert && (
           <span
