@@ -15,7 +15,7 @@ describe('<LabeledTextBox />', () => {
 
   test('should render with children, labelText and warning', () => {
     renderWithProviders(
-      <LabeledTextBox labelText="test label" warning>
+      <LabeledTextBox labelText="test label" title="Warning!" warning>
         children content
       </LabeledTextBox>,
     )
