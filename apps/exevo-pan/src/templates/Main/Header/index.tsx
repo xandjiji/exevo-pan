@@ -136,6 +136,7 @@ const Header = ({
         aria-hidden={!menuOpen}
         aria-label={common.Header.closeMenuLabel}
         onClick={toggleMenu}
+        tabIndex={-1}
       />
     </>
   )
