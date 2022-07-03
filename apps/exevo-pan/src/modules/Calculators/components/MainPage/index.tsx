@@ -27,9 +27,9 @@ const MainPage = () => {
                 />
 
                 <div className="grid gap-1.5">
-                  <h3 className="text-primaryHighlight text-base tracking-wide">
+                  <h2 className="text-primaryHighlight text-base tracking-wide">
                     {calculators.Meta[title].title}
-                  </h3>
+                  </h2>
                   <p className="text-tsm font-light">
                     {calculators.Meta[title].description}
                   </p>
