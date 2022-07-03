@@ -6,6 +6,7 @@ import EmptyState from 'components/EmptyState'
 import { ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import AddIcon from 'assets/svgs/addPost.svg'
+import { blurOnEnter } from 'utils'
 import useTime from './useTime'
 import TimeLeft from './TimeLeft'
 import StaminaBar from './StaminaBar'
@@ -64,6 +65,8 @@ const Stamina = () => {
             max={42}
             value={targetStamina.time}
             onChange={(e) => setTargetStamina(e.target.value)}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
             error={invalid}
             className="child:w-full child:whitespace-nowrap w-full"
             noAlert
