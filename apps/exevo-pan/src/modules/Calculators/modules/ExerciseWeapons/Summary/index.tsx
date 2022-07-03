@@ -86,8 +86,11 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
                   {calculators.ExerciseWeapons.moneyTooltip.a}{' '}
                   <strong>{calculators.ExerciseWeapons.moneyTooltip.b}</strong>{' '}
                   {calculators.ExerciseWeapons.moneyTooltip.c}{' '}
-                  <Text.GoldCoin value={10500} /> gp{' '}
-                  {calculators.ExerciseWeapons.moneyTooltip.d}{' '}
+                  <Text.GoldCoin
+                    value={10500}
+                    style={{ alignItems: 'baseline' }}
+                  />{' '}
+                  gp {calculators.ExerciseWeapons.moneyTooltip.d}{' '}
                   <strong>{calculators.ExerciseWeapons.moneyTooltip.e}</strong>.
                 </span>
               }
