@@ -23,6 +23,8 @@ const Stamina = () => {
   const [targetStamina, setTargetStamina] = useTime('42:00')
 
   const invalid = currentStamina.seconds > targetStamina.seconds
+  const disableTrack =
+    invalid || Number.isNaN(currentStamina.seconds + targetStamina.seconds)
 
   const secondsToRegenerate = useMemo(
     () =>
@@ -81,7 +83,7 @@ const Stamina = () => {
               targetStamina,
             })
           }
-          disabled={invalid}
+          disabled={disableTrack}
         >
           <div className="flex items-center justify-center gap-1 text-xs font-bold uppercase tracking-wider">
             <AddIcon
