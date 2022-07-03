@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { Input, Paginator } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
+import { blurOnEnter } from 'utils'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useForm } from '../../contexts/Form'
 import useDebouncedNickname from './useDebouncedNickname'
@@ -30,6 +31,8 @@ const AuctionSearch = () => {
           value={nickname}
           onChange={(event) => setNickname(event.target.value)}
           noAlert
+          onKeyPress={blurOnEnter}
+          enterKeyHint="search"
           className="flex-grow"
         />
         <Paginator
