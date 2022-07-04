@@ -201,6 +201,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Homely Bed',
     value: 120,
   },
+  'knightly bed': {
+    name: 'Knightly Bed',
+    value: 180,
+  },
   /* DECORATIONS */
   'marble tiles': {
     name: 'Marble Floor',
@@ -437,6 +441,22 @@ export const storeItems: Record<string, StoreItem> = {
   'all-seeing tapestry': {
     name: 'All-seeing tapestry',
     value: 60,
+  },
+  'knightly decorative shield': {
+    name: 'Knightly Decorative Shield',
+    value: 60,
+  },
+  'knightly fire bowl': {
+    name: 'Knightly Fire Bowl',
+    value: 80,
+  },
+  'knightly wall lamp': {
+    name: 'Knightly Wall Lamp',
+    value: 60,
+  },
+  'knightly bench': {
+    name: 'Knightly Bench',
+    value: 140,
   },
   'brocade tapestry': {
     name: 'Brocade Tapestry',
@@ -1339,6 +1359,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Kitchen Table',
     value: 100,
   },
+  'knightly chess table': {
+    name: 'Knightly Chess Table',
+    value: 60,
+  },
   'magnificent table': {
     name: 'Magnificent Table',
     value: 60,
@@ -1559,6 +1583,10 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'gilded blessed shield': {
     name: 'Gilded Blessed Shield',
+    value: 0,
+  },
+  'gilded horned helmet': {
+    name: 'Gilded Horned Helmet',
     value: 0,
   },
   'gilded crown': {
