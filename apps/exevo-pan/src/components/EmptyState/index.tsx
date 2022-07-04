@@ -15,7 +15,10 @@ const EmptyState = ({
     className={clsx('relative rounded-3xl text-center', className)}
     {...props}
   >
-    <div style={{ filter: 'grayscale(0.3)', opacity: 0.2 }}>
+    <div
+      className="pointer-events-none select-none"
+      style={{ filter: 'grayscale(0.3)', opacity: 0.2 }}
+    >
       <FadeImage
         src={notFoundSrc}
         objectFit="scale-down"

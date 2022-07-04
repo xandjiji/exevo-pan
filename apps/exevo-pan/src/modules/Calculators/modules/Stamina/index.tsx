@@ -109,7 +109,7 @@ const Stamina = () => {
         ))}
         {list.length === 0 && (
           <EmptyState
-            className="lgr:left-3/4 relative select-none md:top-1/4 lg:left-1/2"
+            className="lgr:left-3/4 relative md:top-1/4 lg:left-1/2"
             text={{
               content: '',
               size: 0,
