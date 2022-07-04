@@ -450,6 +450,14 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Knightly Fire Bowl',
     value: 80,
   },
+  'knightly wall lamp': {
+    name: 'Knightly Wall Lamp',
+    value: 60,
+  },
+  'knightly bench': {
+    name: 'Knightly Bench',
+    value: 140,
+  },
   'brocade tapestry': {
     name: 'Brocade Tapestry',
     value: 50,
