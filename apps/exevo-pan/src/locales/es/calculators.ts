@@ -1,63 +1,63 @@
 export default {
   Meta: {
     Main: {
-      title: 'Calculators',
-      description: 'All sorts of Tibia calculators to help you out!',
+      title: 'Calculadoras',
+      description:
+        'Todo tipo de calculadoras y herramientas de Tibia para ayudarte!',
     },
     ExerciseWeapons: {
       title: 'Exercise weapons',
       description:
-        'Find out how many exercise weapons, time and money would cost to achieve your desired skill',
+        'Averigua cuantas exercise weapons, tiempo y dinero necesitas para llegar a tu skill deseado',
     },
     Stamina: {
       title: 'Stamina',
-      description:
-        'Calculate and track how much time it takes to restore your stamina',
+      description: 'Calcula cuánto tiempo hace falta para recuperar tu stamina',
     },
     CharmDamage: {
       title: 'Charm Damage',
       description:
-        'Compare the average damage between different charms to see which one is best',
+        'Compara el daño medio entre diferentes charms para ver cual es mejor',
     },
   },
   Header: {
-    Main: 'Main',
+    Main: 'Principal',
     ExerciseWeapons: 'Exercise weapons',
     CharmDamage: 'Charm Damage',
     Stamina: 'Stamina',
   },
-  none: 'None',
+  none: 'Nada',
   ExerciseWeapons: {
     labels: {
-      vocation: 'Vocation',
-      currentSkill: 'Current skill',
-      targetSkill: 'Target skill',
-      percentageLeft: '% left',
-      loyaltyPoints: 'points',
-      weaponCharges: 'Weapon charges',
-      results: 'Results',
-      moneyCost: 'Money cost',
-      weapons: 'Weapons',
-      time: 'Time required',
+      vocation: 'Vocación',
+      currentSkill: 'Skill actual',
+      targetSkill: 'Skill deseado',
+      percentageLeft: '% para subir',
+      loyaltyPoints: 'puntos',
+      weaponCharges: 'Cargas de la varita',
+      results: 'Resultados',
+      moneyCost: 'Coste de dinero',
+      weapons: 'Varitas',
+      time: 'Tiempo necesario',
     },
     moneyTooltip: {
-      a: 'If the TC price is',
-      b: 'higher',
-      c: 'than',
-      d: 'then you should buy exercise weapons using',
+      a: 'Si el precio de las TC es',
+      b: 'mayor',
+      c: 'que',
+      d: 'entonces deberías comprar las varitas usando',
       e: 'gold',
     },
   },
   Stamina: {
-    currentStamina: 'Current stamina',
-    desiredStamina: 'Desired stamina',
-    track: 'Track',
-    restTime: 'Rest time',
-    newCharacter: 'New character',
-    removeItem: 'Remove item',
+    currentStamina: 'Stamina actual',
+    desiredStamina: 'Stamina deseada',
+    track: 'Seguimiento',
+    restTime: 'Tiempo de descanso',
+    newCharacter: 'Nombre del personaje',
+    removeItem: 'Eliminar',
   },
   CharmDamage: {
-    moreInfo: 'For more information about Charms, check out',
-    thisArticle: 'this article',
+    moreInfo: 'Para más información acerca de los charms, revisa',
+    thisArticle: 'este artículo',
   },
 }

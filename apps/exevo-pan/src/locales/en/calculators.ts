@@ -2,7 +2,7 @@ export default {
   Meta: {
     Main: {
       title: 'Calculators',
-      description: 'All sorts of Tibia calculators to help you out!',
+      description: 'All sorts of Tibia tools and calculators to help you out!',
     },
     ExerciseWeapons: {
       title: 'Exercise weapons',

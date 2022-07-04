@@ -2,7 +2,8 @@ export default {
   Meta: {
     Main: {
       title: 'Calculadoras',
-      description: 'Diversas calculadoras de Tibia para de ajudar!',
+      description:
+        'Diversas ferramentas e calculadoras de Tibia para de ajudar!',
     },
     ExerciseWeapons: {
       title: 'Exercise weapons',
