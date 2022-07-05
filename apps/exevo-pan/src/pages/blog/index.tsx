@@ -73,7 +73,7 @@ export default function PostPage({ initialPosts }: Props) {
       <Main>
         <Hero
           title={translations.blog.Meta.title}
-          src="https://i.imgur.com/Jjh4f3q.png"
+          src="/blog/thumbnails/posts.png"
           offset
         />
         <Home
