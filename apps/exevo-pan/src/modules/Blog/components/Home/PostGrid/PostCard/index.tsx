@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { FadeImage, Tag } from 'components/Atoms'
 import NextLink from 'next/link'
+import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import { extractDate } from './utils'
 import { PostCardProps } from './types'
@@ -26,7 +27,7 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
     >
       <div className="grid-background relative grid h-[180px] w-full shrink-0 place-content-center">
         <FadeImage
-          src={thumbnail}
+          src={loadThumbnail(thumbnail)}
           alt={title}
           layout="fixed"
           width={120}
