@@ -17,7 +17,7 @@ const Authors = ({ author, translator }: AuthorsProps) => {
       <CharacterMiniCard
         forceSubtitle={blog.Authors.author}
         characterName={author.name}
-        outfitSrc={author.outfit}
+        outfitSrc={`/blog/authors/${author.name}.png`}
         linkUrl={`https://www.tibia.com/community/?name=${author.name}`}
         style={translator ? { marginBottom: 8 } : undefined}
       />
@@ -25,7 +25,7 @@ const Authors = ({ author, translator }: AuthorsProps) => {
         <CharacterMiniCard
           forceSubtitle={blog.Authors.translator}
           characterName={translator.name}
-          outfitSrc={translator.outfit}
+          outfitSrc={`/blog/authors/${translator.name}.png`}
           linkUrl={`https://www.tibia.com/community/?name=${translator.name}`}
         />
       )}
