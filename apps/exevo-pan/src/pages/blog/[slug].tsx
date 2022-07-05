@@ -96,10 +96,7 @@ export default function PostPage({
         ))}
 
         <meta property="og:type" content="article" />
-        <meta
-          property="article:author"
-          content={metaData.author.name as string}
-        />
+        <meta property="article:author" content={metaData.author as string} />
         <meta
           property="article:published_time"
           content={`${year}-${month}-${day}`}
@@ -156,7 +153,7 @@ export default function PostPage({
               author: {
                 '@context': 'http://schema.org',
                 '@type': 'Person',
-                name: metaData.author.name,
+                name: metaData.author,
               },
               mainEntityOfPage: {
                 '@type': 'WebPage',

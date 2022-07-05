@@ -1,8 +1,3 @@
-declare type BlogPostAuthor = {
-  name: string
-  outfit: string
-}
-
 declare type BlogPost = {
   hidden?: boolean
   title: string
@@ -11,6 +6,6 @@ declare type BlogPost = {
   thumbnail: string
   date: number
   tags: string[]
-  author: BlogPostAuthor
-  translator?: BlogPostAuthor
+  author: string
+  translator?: string
 }

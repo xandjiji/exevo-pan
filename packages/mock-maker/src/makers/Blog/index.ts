@@ -1,12 +1,7 @@
 import * as faker from 'faker'
 
-const generateAuthor = (): BlogPostAuthor => ({
-  name: faker.name.firstName(),
-  outfit: faker.image.imageUrl(),
-})
-
 export const randomBlogPost = (): BlogPost => ({
-  author: generateAuthor(),
+  author: faker.name.firstName(),
   title: faker.lorem.words(faker.datatype.number({ min: 4, max: 10 })),
   description: faker.lorem.words(faker.datatype.number({ min: 15, max: 25 })),
   date: faker.time.recent(),
@@ -29,7 +24,7 @@ export const randomBlogPost = (): BlogPost => ({
     () => faker.lorem.word(),
   ),
   thumbnail: faker.image.imageUrl(),
-  translator: faker.datatype.boolean() ? generateAuthor() : undefined,
+  translator: faker.datatype.boolean() ? faker.name.firstName() : undefined,
   hidden: faker.datatype.boolean() ? true : undefined,
 })
 
