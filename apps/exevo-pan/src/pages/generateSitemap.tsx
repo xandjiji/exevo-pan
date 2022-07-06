@@ -42,6 +42,26 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     date: TODAY,
     changefreq: 'always',
   })}
+  ${XmlTemplate({
+    route: routes.CALCULATORS,
+    date: TODAY,
+    changefreq: 'monthly',
+  })}
+  ${XmlTemplate({
+    route: routes.EXERCISE_WEAPONS,
+    date: TODAY,
+    changefreq: 'monthly',
+  })}
+  ${XmlTemplate({
+    route: routes.STAMINA,
+    date: TODAY,
+    changefreq: 'monthly',
+  })}
+  ${XmlTemplate({
+    route: routes.CHARM_DAMAGE,
+    date: TODAY,
+    changefreq: 'monthly',
+  })}
   
   ${posts
     .map(({ slug, date }) =>

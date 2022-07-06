@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { vocation } from 'shared-utils/dist/vocations'
-import Arrow from 'assets/svgs/next.svg'
+import Arrow from 'assets/svgs/chevronRight.svg'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { useForm } from '../../../contexts/Form'
 import styles from './styles.module.css'

@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import matter from 'gray-matter'
-import { buildUrl } from 'utils'
+import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import Head from 'next/head'
 import { BlogClient } from 'services'
 import { Main } from 'templates'
@@ -28,7 +28,7 @@ const components = {
     () => import('modules/Blog/components/Post/custom/TranslationAlert'),
   ),
   LowBlowCalculator: dynamic(
-    () => import('modules/Blog/components/Post/custom/LowBlowCalculator'),
+    () => import('modules/Calculators/modules/CharmDamage/blog'),
   ),
   ContactSection: dynamic(
     () => import('modules/Blog/components/Post/custom/ContactSection'),
@@ -76,10 +76,13 @@ export default function PostPage({
 
   const [day, month, year] = metaData.date.toString().split('-')
   const tags = metaData.tags as unknown as string[]
+
+  const previewSrc = loadRawSrc(metaData.thumbnail)
+
   return (
     <>
       <Head>
-        <title>{metaData.title} - Exevo Pan</title>
+        <title>{buildPageTitle(metaData.title)}</title>
         <meta name="title" content={metaData.title} />
         <meta property="og:title" content={metaData.title} />
         <meta property="twitter:title" content={metaData.title} />
@@ -96,10 +99,7 @@ export default function PostPage({
         ))}
 
         <meta property="og:type" content="article" />
-        <meta
-          property="article:author"
-          content={metaData.author.name as string}
-        />
+        <meta property="article:author" content={metaData.author as string} />
         <meta
           property="article:published_time"
           content={`${year}-${month}-${day}`}
@@ -109,16 +109,8 @@ export default function PostPage({
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
-        <meta
-          key="preview-1"
-          property="og:image"
-          content={metaData.thumbnail}
-        />
-        <meta
-          key="preview-2"
-          property="twitter:image"
-          content={metaData.thumbnail}
-        />
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(postRoute, 'pt')} />
@@ -134,7 +126,7 @@ export default function PostPage({
               '@context': 'http://schema.org',
               '@type': 'Article',
               url: buildUrl(postRoute, locale),
-              image: metaData.thumbnail,
+              image: previewSrc,
               headline: metaData.title,
               datePublished: `${year}-${month}-${day}`,
               keywords: tags
@@ -156,7 +148,7 @@ export default function PostPage({
               author: {
                 '@context': 'http://schema.org',
                 '@type': 'Person',
-                name: metaData.author.name,
+                name: metaData.author,
               },
               mainEntityOfPage: {
                 '@type': 'WebPage',

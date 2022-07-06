@@ -1,4 +1,5 @@
 import { google } from 'Constants'
+import { isServer } from '../isServer'
 
 const pageView = (url: URL): void => {
   window.gtag('config', google.GTM_ID, {
@@ -14,7 +15,7 @@ type GTagEvent = {
 }
 
 const event = ({ action, category, label, value }: GTagEvent): void => {
-  if (typeof window !== undefined) {
+  if (!isServer()) {
     window.gtag('event', action, {
       event_category: category,
       event_label: label,

@@ -16,17 +16,17 @@ const Authors = ({ author, translator }: AuthorsProps) => {
       </h3>
       <CharacterMiniCard
         forceSubtitle={blog.Authors.author}
-        characterName={author.name}
-        outfitSrc={author.outfit}
-        linkUrl={`https://www.tibia.com/community/?name=${author.name}`}
+        characterName={author}
+        outfitSrc={`/blog/authors/${author}.png`}
+        linkUrl={`https://www.tibia.com/community/?name=${author}`}
         style={translator ? { marginBottom: 8 } : undefined}
       />
       {translator && (
         <CharacterMiniCard
           forceSubtitle={blog.Authors.translator}
-          characterName={translator.name}
-          outfitSrc={translator.outfit}
-          linkUrl={`https://www.tibia.com/community/?name=${translator.name}`}
+          characterName={translator}
+          outfitSrc={`/blog/authors/${translator}.png`}
+          linkUrl={`https://www.tibia.com/community/?name=${translator}`}
         />
       )}
     </footer>

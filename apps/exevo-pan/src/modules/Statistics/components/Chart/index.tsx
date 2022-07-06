@@ -6,13 +6,12 @@ import { memo, useState, useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 import { useTheme } from 'contexts/useTheme'
 import { Chip } from 'components/Atoms'
-import { formatNumberWithCommas, fillArrayUntil } from 'utils'
+import { formatNumberWithCommas, fillArrayUntil, DAYS_IN } from 'utils'
 import Summary from './Summary'
 import styles from './styles.module.css'
 import { ChartProps } from './types'
 
-const DAYS_IN_A_WEEK = 7
-const DAYS_IN_A_MONTH = 28
+const DAYS_IN_A_MONTH = DAYS_IN.WEEK * 4
 
 const Chart = ({
   totalLabel,
@@ -28,7 +27,7 @@ const Chart = ({
 
   const { colors } = useTheme()
 
-  const [dataSize, setDataSize] = useState(DAYS_IN_A_WEEK)
+  const [dataSize, setDataSize] = useState(DAYS_IN.WEEK)
 
   const { current, lastMonth: originalLastMonth } = chartData
   const lastMonth = useMemo(
@@ -151,10 +150,10 @@ const Chart = ({
           {DAYS_IN_A_MONTH} {statistics.Days}
         </Chip>
         <Chip
-          overrideStatus={dataSize === DAYS_IN_A_WEEK}
-          onClick={() => setDataSize(DAYS_IN_A_WEEK)}
+          overrideStatus={dataSize === DAYS_IN.WEEK}
+          onClick={() => setDataSize(DAYS_IN.WEEK)}
         >
-          {DAYS_IN_A_WEEK} {statistics.Days}
+          {DAYS_IN.WEEK} {statistics.Days}
         </Chip>
       </div>
     </section>

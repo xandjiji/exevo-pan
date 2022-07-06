@@ -22,6 +22,7 @@ export default {
     nav: {
       currentAuctions: 'Obecne Aukcje',
       bazaarHistory: 'Historia Bazaru',
+      calculators: 'Kalkulatory',
       statistics: 'Statystyki',
       war: 'Wojna na Libertabrze',
       about: 'O nas',
@@ -36,6 +37,16 @@ export default {
     tutorial: 'Poradnik',
     tips: 'Porady',
   },
+  or: 'lub',
+  and: 'oraz',
+  day: 'dzień',
+  days: 'dni',
+  hour: 'godzina',
+  hours: 'godziny',
+  minute: 'minuta',
+  minutes: 'minuty',
+  today: 'dziś',
+  tomorrow: 'jutro',
   Month: {
     '0': 'Sty',
     '1': 'Lut',
@@ -101,7 +112,11 @@ export default {
   RepoLinkText: 'Idź do tego repozytorium',
   MadeBy: 'Stworzone przez',
   ClearInputLabel: 'Wyczyść input',
-  WarningLabel: 'Ostrzeżenie!',
+  InputIconLabels: {
+    valid: 'Pole jest prawidłowe',
+    invalid: 'Pole jest nieprawidłowe',
+    loading: 'Podsumowywanie...',
+  },
   Of: 'z',
   Paginator: {
     FirstLabel: 'Idź do pierwszej strony',

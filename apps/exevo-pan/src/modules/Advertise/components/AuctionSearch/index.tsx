@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { Input, Paginator } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
+import { blurOnEnter } from 'utils'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useForm } from '../../contexts/Form'
 import useDebouncedNickname from './useDebouncedNickname'
@@ -21,20 +22,19 @@ const AuctionSearch = () => {
   return (
     <section className="card p-4">
       <div className="mb-6 flex flex-wrap gap-4 md:flex-nowrap">
-        <div className="flex-grow">
-          <label htmlFor="search-input" className="text-tsm mb-2 block">
-            {advertise.AuctionSearch.inputLabel}
-          </label>
-          <Input
-            id="search-input"
-            placeholder={advertise.AuctionSearch.placeholder}
-            aria-label={advertise.AuctionSearch.inputAriaLabel}
-            allowClear
-            value={nickname}
-            onChange={(event) => setNickname(event.target.value)}
-            hasAlert={false}
-          />
-        </div>
+        <Input
+          id="search-input"
+          label={advertise.AuctionSearch.inputLabel}
+          placeholder={advertise.AuctionSearch.placeholder}
+          aria-label={advertise.AuctionSearch.inputAriaLabel}
+          allowClear
+          value={nickname}
+          onChange={(event) => setNickname(event.target.value)}
+          noAlert
+          onKeyPress={blurOnEnter}
+          enterKeyHint="search"
+          className="flex-grow"
+        />
         <Paginator
           aria-controls="auction-list"
           pageSize={PAGE_SIZE}

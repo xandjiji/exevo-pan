@@ -1,0 +1,41 @@
+import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
+import { useMemo } from 'react'
+import ValidIcon from 'assets/svgs/valid.svg'
+import InvalidIcon from 'assets/svgs/invalid.svg'
+import styles from './styles.module.css'
+import { StateIcon } from './types'
+
+export const useStateIcon = (state: StateIcon) => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
+  return useMemo(
+    (): Record<StateIcon, React.ReactNode> => ({
+      valid: (
+        <ValidIcon
+          aria-label={common.InputIconLabels.valid}
+          className={clsx('animate-rollIn fill-green', styles.icon)}
+        />
+      ),
+      invalid: (
+        <InvalidIcon
+          aria-label={common.InputIconLabels.invalid}
+          className={clsx('fill-red animate-fadeIn', styles.icon)}
+        />
+      ),
+      neutral: null,
+      loading: (
+        <div
+          aria-label={common.InputIconLabels.loading}
+          className={clsx(
+            'loading-spinner after:bg-surface shrink-0',
+            styles.icon,
+          )}
+        />
+      ),
+    }),
+    [common],
+  )[state]
+}

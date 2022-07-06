@@ -3,6 +3,7 @@ import { Accordion, Switch, Input, Tag } from 'components/Atoms'
 import { useTranslations } from 'contexts/useTranslation'
 import { blogTags } from 'Constants'
 import SearchIcon from 'assets/svgs/search.svg'
+import { blurOnEnter } from 'utils'
 import { useFetchPosts } from '../../../contexts/useFetchPosts'
 import useDebouncedFilter from './useDebouncedFilter'
 
@@ -58,7 +59,7 @@ const Filters = () => {
         </h2>
       }
     >
-      <section className="grid max-w-[200px] shrink-0 gap-4 pt-2">
+      <section className="grid max-w-[200px] shrink-0 gap-4 pt-4">
         <GroupWrapper>
           <Switch
             className="font-light tracking-wide"
@@ -78,19 +79,16 @@ const Filters = () => {
         </GroupWrapper>
 
         <GroupWrapper>
-          <label
-            htmlFor="query-input"
-            className="text-tsm block font-light tracking-wide"
-          >
-            {blog.Filters.searchLabel}
-          </label>
           <Input
             id="query-input"
+            label={blog.Filters.searchLabel}
             value={query}
             onChange={onQueryChange}
             placeholder={blog.Filters.searchPlaceholder}
             allowClear
-            hasAlert={false}
+            noAlert
+            onKeyPress={blurOnEnter}
+            enterKeyHint="search"
           />
         </GroupWrapper>
 

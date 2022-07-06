@@ -34,11 +34,6 @@ export default {
     paymentCharacterInvalidMessage: 'Character does not exist',
     checkoutButtonLabel: 'Validate and submit checkout',
     checkoutButton: 'Checkout',
-    LabelledInput: {
-      valid: 'Field is valid',
-      invalid: 'Field is invalid',
-      loading: 'Validating...',
-    },
   },
   PaymentDetails: {
     titleIconLabel: 'Successful checkout',
@@ -63,8 +58,6 @@ export default {
       auctionedCharacter: 'Auctioned character',
       datesTooltipText:
         'Your auction will be highlighted during the following days:',
-      day: 'day',
-      days: 'days',
       durationText: 'Advertising duration',
       costText: 'Total cost',
       highlightedDays: 'Highlighted days:',

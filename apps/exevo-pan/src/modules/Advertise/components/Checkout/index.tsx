@@ -1,11 +1,10 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { Button } from 'components/Atoms'
+import { Input, Button } from 'components/Atoms'
 import { MailCheckoutClient } from 'services'
 import { locales } from 'Constants'
 import { useForm } from '../../contexts/Form'
-import LabelledInput from './LabelledInput'
 import { validateEmail, validateCharacter, randomCharacter } from './utils'
 
 const { DEFAULT_LOCALE } = locales
@@ -96,7 +95,7 @@ const Checkout = () => {
   const handleKeypress: React.KeyboardEventHandler<HTMLInputElement> = (
     event,
   ) => {
-    if (event.code === 'Enter' && !isButtonDisabled) {
+    if (event.key === 'Enter' && !isButtonDisabled) {
       validateAndSubmit()
     }
   }
@@ -108,12 +107,12 @@ const Checkout = () => {
       <h2 className="bg-primary text-onPrimary -mx-3 mb-4 py-3 px-6 text-2xl font-normal">
         {advertise.Checkout.title}
       </h2>
-      <LabelledInput
+      <Input
         id="email"
-        labelText="Email"
+        label="Email"
         placeholder={advertise.Checkout.emailPlaceholder}
-        validationState={email.state}
-        errorMessage={
+        stateIcon={email.state}
+        error={
           email.state === 'invalid'
             ? advertise.Checkout.emailInvalidMessage
             : undefined
@@ -125,12 +124,12 @@ const Checkout = () => {
       {paymentMethod === 'TIBIA_COINS' && (
         <>
           <div role="none" className="mt-2" />
-          <LabelledInput
+          <Input
             id="paymentCharacter"
-            labelText={advertise.Checkout.paymentCharacterLabel}
+            label={advertise.Checkout.paymentCharacterLabel}
             placeholder={`e.g, '${randomNickname}'`}
-            validationState={paymentCharacter.state}
-            errorMessage={
+            stateIcon={paymentCharacter.state}
+            error={
               paymentCharacter.state === 'invalid'
                 ? advertise.Checkout.paymentCharacterInvalidMessage
                 : undefined
@@ -138,12 +137,13 @@ const Checkout = () => {
             onKeyPress={handleKeypress}
             onChange={handleChange}
             value={paymentCharacter.value}
+            enterKeyHint="send"
           />
         </>
       )}
 
       <Button
-        type="button"
+        type="submit"
         aria-label={advertise.Checkout.checkoutButtonLabel}
         disabled={isButtonDisabled}
         onClick={validateAndSubmit}

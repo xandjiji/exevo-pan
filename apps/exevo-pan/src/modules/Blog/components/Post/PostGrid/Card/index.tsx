@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { FadeImage } from 'components/Atoms'
 import NextLink from 'next/link'
+import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import { CardProps } from './types'
 
@@ -11,7 +12,7 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
   >
     <div className="bg-primaryVariant grid shrink-0 place-content-center rounded-md p-1.5">
       <FadeImage
-        src={thumbnail}
+        src={loadThumbnail(thumbnail, 32)}
         alt={title}
         layout="fixed"
         width={32}

@@ -34,11 +34,6 @@ export default {
     paymentCharacterInvalidMessage: 'Personaje no existe',
     checkoutButtonLabel: 'Validar y finalizar compra',
     checkoutButton: 'Finalizar',
-    LabelledInput: {
-      valid: 'Campo valido',
-      invalid: 'Campo inválido',
-      loading: 'Validando...',
-    },
   },
   PaymentDetails: {
     titleIconLabel: 'Completado con éxito',
@@ -63,8 +58,6 @@ export default {
       title: 'Resumen',
       auctionedCharacter: 'Personaje subastado',
       datesTooltipText: 'Su subasta se destacará durante los siguientes días:',
-      day: 'día',
-      days: 'dias',
       durationText: 'Duración del anuncio',
       costText: 'Precio total',
       highlightedDays: 'Días destacados:',

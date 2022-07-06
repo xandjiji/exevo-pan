@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders, generateBlogPosts } from 'utils/test'
+import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import Newsticker from '..'
 
@@ -21,7 +22,10 @@ describe('<Newsticker />', () => {
 
       const imageElement = post.querySelector('img') as HTMLImageElement
       expect(imageElement).toHaveAccessibleName(sourcePost.title)
-      expect(imageElement).toHaveAttribute('src', sourcePost.thumbnail)
+      expect(imageElement).toHaveAttribute(
+        'src',
+        loadThumbnail(sourcePost.thumbnail, 48),
+      )
 
       const tags = post.querySelectorAll('h3 + div > div')
 

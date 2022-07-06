@@ -1,5 +1,5 @@
 type NativeProps = Omit<
-  React.HTMLAttributes<HTMLInputElement>,
+  React.InputHTMLAttributes<HTMLInputElement>,
   'label' | 'type'
 >
 

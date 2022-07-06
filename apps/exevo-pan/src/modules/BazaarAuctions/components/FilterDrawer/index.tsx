@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/accessible-emoji */
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
 import {
@@ -6,10 +5,11 @@ import {
   DrawerFooter,
   Chip,
   RangeSliderInput,
-  SliderInput,
+  Slider,
   Checkbox,
 } from 'components/Atoms'
-import { Tooltip } from 'components/Organisms'
+import { Tooltip, InfoTooltip } from 'components/Organisms'
+import { blurOnEnter } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
@@ -55,6 +55,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     filterState.nicknameFilter,
   )
 
+  const [minSkill, setMinSkill] = useDebouncedFilter<number>(
+    'minSkill',
+    filterState.minSkill,
+  )
+
   const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
 
@@ -76,17 +81,17 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
-        <FilterGroup
-          label={homepage.FilterDrawer.labels.searchNickname}
-          htmlFor="search-nickname-input"
-        >
+        <FilterGroup>
           <S.Input
             id="search-nickname-input"
+            label={homepage.FilterDrawer.labels.searchNickname}
             placeholder="Nickname"
             allowClear
             value={nickname}
             onChange={(event) => setNickname(event.target.value)}
-            hasAlert={false}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
+            noAlert
           />
         </FilterGroup>
 
@@ -215,9 +220,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Server" htmlFor="server-input">
+        <FilterGroup>
           <S.AutocompleteInput
             id="server-input"
+            label="Server"
             aria-controls="server-list"
             placeholder={homepage.FilterDrawer.placeholders.server}
             style={{ marginBottom: 12 }}
@@ -226,6 +232,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               (option: Option) => updateFilters('serverSet', option.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
           />
           <S.ChipWrapper id="server-list">
             {[...filterState.serverSet].map((server) => (
@@ -324,18 +332,23 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           />
         </FilterGroup>
 
-        <FilterGroup label="Skill" htmlFor="skill-slider">
-          <SliderInput
+        <FilterGroup>
+          <Slider
             id="skill-slider"
+            label="Skill"
+            showInput
             aria-label={homepage.FilterDrawer.labels.minSkill}
             min={10}
             max={130}
-            value={filterState.minSkill}
+            value={minSkill}
             onChange={useCallback(
               (event: React.ChangeEvent<HTMLInputElement>) =>
-                updateFilters('minSkill', parseInt(event.target.value, 10)),
+                setMinSkill(+event.target.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
+            className="max-w-[270px]"
             style={{ marginBottom: 16 }}
           />
           <S.ChipWrapper>
@@ -411,10 +424,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           options={storeMountValues}
         />
 
-        <FilterGroup label="Imbuements" htmlFor="imbuements-input">
+        <FilterGroup>
           <S.InputWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
+              label="Imbuements"
               aria-controls="imbuements-list"
               placeholder={homepage.FilterDrawer.placeholders.imbuements}
               itemList={useOptionsSet(
@@ -426,6 +440,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   updateFilters('imbuementsSet', option.value),
                 [updateFilters],
               )}
+              onKeyPress={blurOnEnter}
+              enterKeyHint="done"
             />
             <Chip
               overrideStatus={
@@ -450,10 +466,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Charms" htmlFor="charms-input">
+        <FilterGroup>
           <S.InputWrapper>
             <S.AutocompleteInput
               id="charms-input"
+              label="Charms"
               aria-controls="charms-list"
               placeholder={homepage.FilterDrawer.placeholders.charms}
               itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
@@ -461,6 +478,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 (option: Option) => updateFilters('charmsSet', option.value),
                 [updateFilters],
               )}
+              onKeyPress={blurOnEnter}
+              enterKeyHint="done"
             />
             <Chip
               overrideStatus={
@@ -483,9 +502,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label="Quests" htmlFor="quest-input">
+        <FilterGroup>
           <S.AutocompleteInput
             id="quest-input"
+            label="Quests"
             aria-controls="quest-list"
             placeholder={homepage.FilterDrawer.placeholders.quests}
             style={{ marginBottom: 12 }}
@@ -494,6 +514,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               (option: Option) => updateFilters('questSet', option.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
           />
           <S.ChipWrapper id="quest-list">
             {[...filterState.questSet].map((quest) => (
@@ -507,12 +529,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup
-          label={homepage.FilterDrawer.labels.rareAchievements}
-          htmlFor="achievements-input"
-        >
+        <FilterGroup>
           <S.AutocompleteInput
             id="achievement-input"
+            label={homepage.FilterDrawer.labels.rareAchievements}
             aria-controls="achievement-list"
             placeholder={homepage.FilterDrawer.placeholders.achievements}
             style={{ marginBottom: 12 }}
@@ -524,6 +544,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               (option: Option) => updateFilters('achievementSet', option.value),
               [updateFilters],
             )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
           />
           <S.ChipWrapper id="achievement-list">
             {[...filterState.achievementSet].map((achievement) => (
@@ -538,22 +560,20 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </FilterGroup>
 
         {!historyPage && (
-          <FilterGroup
-            label={homepage.FilterDrawer.labels.rareItems}
-            htmlFor="rare-items-input"
-            labelSuffix={
-              <Tooltip
-                offset={[0, 8]}
-                placement="top"
-                content={homepage.FilterDrawer.tooltips.rareItems}
-              >
-                <Icon.Exclamation />
-              </Tooltip>
-            }
-          >
+          <FilterGroup>
             <S.InputWrapper>
               <S.AutocompleteInput
                 id="rare-items-input"
+                label={
+                  <span className="flex items-center gap-1">
+                    {homepage.FilterDrawer.labels.rareItems}
+                    <InfoTooltip
+                      className="h-3 w-3"
+                      content={homepage.FilterDrawer.tooltips.rareItems}
+                    />
+                  </span>
+                }
+                aria-label={homepage.FilterDrawer.labels.rareItems}
                 aria-controls="rare-items-list"
                 placeholder={homepage.FilterDrawer.placeholders.rareItems}
                 itemList={useOptionsSet(
@@ -564,6 +584,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   (option: Option) => updateFilters('itemSet', option.value),
                   [updateFilters],
                 )}
+                onKeyPress={blurOnEnter}
+                enterKeyHint="done"
               />
               <Chip
                 overrideStatus={

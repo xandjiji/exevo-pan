@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useState, useReducer, useCallback, useEffect, memo } from 'react'
+import { useReducer, useCallback, useEffect, memo } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Input } from 'components/Atoms'
 import { useUuid } from 'hooks'
-import { indexToId } from 'components/Atoms/Listbox/utils'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import AutocompleteInputReducer from './reducer'
@@ -13,24 +12,28 @@ const AutocompleteInput = ({
   style,
   itemList = [],
   onItemSelect,
+  defaultValue,
   ...props
 }: AutocompleteInputProps) => {
   const listboxId = useUuid()
 
-  const [currentList, setCurrentList] = useState<Option[]>(itemList)
-  const [{ listboxStatus, highlightedIndex, inputValue }, dispatch] =
-    useReducer(AutocompleteInputReducer, {
-      listboxStatus: false,
-      highlightedIndex: undefined,
-      inputValue: '',
-    })
+  const [
+    { filteredList, listboxStatus, highlightedIndex, inputValue },
+    dispatch,
+  ] = useReducer(AutocompleteInputReducer, {
+    itemList,
+    filteredList: defaultValue
+      ? filterByTerm(defaultValue.toString(), itemList)
+      : itemList,
+    listboxStatus: false,
+    highlightedIndex: undefined,
+    inputValue: defaultValue?.toString() ?? '',
+  })
 
   const handleChange = useCallback(
-    (event: React.ChangeEvent<HTMLInputElement>) => {
-      dispatch({ type: 'USER_TYPING', value: event.target.value })
-      setCurrentList(filterByTerm(event.target.value, itemList))
-    },
-    [itemList],
+    (event: React.ChangeEvent<HTMLInputElement>) =>
+      dispatch({ type: 'USER_TYPING', value: event.target.value }),
+    [],
   )
 
   const handleKeyboard: React.KeyboardEventHandler<HTMLInputElement> = (
@@ -42,30 +45,20 @@ const AutocompleteInput = ({
         dispatch({ type: 'SET_LISTBOX_STATUS', value: false })
         break
       case 'ArrowUp':
-        if (currentList.length)
-          dispatch({
-            type: 'ARROW_NAVIGATION',
-            value: -1,
-            list: currentList,
-          })
-        event.preventDefault()
-        break
       case 'ArrowDown':
-        if (currentList.length)
-          dispatch({
-            type: 'ARROW_NAVIGATION',
-            value: 1,
-            list: currentList,
-          })
+        dispatch({
+          type: 'ARROW_NAVIGATION',
+          code: event.code,
+        })
         event.preventDefault()
         break
       case 'Enter':
       case 'NumpadEnter':
-        if (currentList.length === 1) {
-          onItemSelect?.(currentList[0])
+        if (filteredList.length === 1) {
+          onItemSelect?.(filteredList[0])
           dispatch({ type: 'OPTION_SELECTED' })
         } else if (highlightedIndex !== undefined) {
-          onItemSelect?.(currentList[highlightedIndex])
+          onItemSelect?.(filteredList[highlightedIndex])
           dispatch({ type: 'OPTION_SELECTED' })
         }
         break
@@ -75,18 +68,7 @@ const AutocompleteInput = ({
   }
 
   useEffect(() => {
-    if (highlightedIndex !== undefined) {
-      const item = document.getElementById(
-        indexToId(highlightedIndex, listboxId) as string,
-      )
-      item?.scrollIntoView({
-        block: 'nearest',
-      })
-    }
-  }, [highlightedIndex, listboxId])
-
-  useEffect(() => {
-    setCurrentList(itemList)
+    dispatch({ type: 'REDEFINE_LIST', itemList })
   }, [itemList])
 
   const onSelectOption = useCallback(
@@ -110,7 +92,7 @@ const AutocompleteInput = ({
             onSelectOption={onSelectOption}
             className="max-h-[210px]"
           >
-            {currentList.map((item) => (
+            {filteredList.map((item) => (
               <Option key={item.value} value={item.value}>
                 {item.name}
               </Option>
@@ -130,7 +112,7 @@ const AutocompleteInput = ({
           onFocus={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
           onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
           onKeyDown={handleKeyboard}
-          hasAlert={false}
+          noAlert
           {...props}
         />
       </Popover>

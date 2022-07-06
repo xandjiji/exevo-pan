@@ -23,6 +23,7 @@ export default {
     nav: {
       currentAuctions: 'Subastas',
       bazaarHistory: 'Histórico del Bazaar',
+      calculators: 'Calculadoras',
       statistics: 'Estadísticas',
       war: 'Libertabra War',
       about: 'Sobre',
@@ -37,6 +38,16 @@ export default {
     tutorial: 'Tutorial',
     tips: 'Consejos',
   },
+  or: 'o',
+  and: 'y',
+  day: 'día',
+  days: 'días',
+  hour: 'hora',
+  hours: 'horas',
+  minute: 'minuto',
+  minutes: 'minutos',
+  today: 'hoy',
+  tomorrow: 'mañana',
   Month: {
     '0': 'Ene',
     '1': 'Feb',
@@ -102,7 +113,11 @@ export default {
   RepoLinkText: 'Ir a este repositorio',
   MadeBy: 'creado por',
   ClearInputLabel: 'Limpiar el campo',
-  WarningLabel: '¡Cuidado!',
+  InputIconLabels: {
+    valid: 'Campo valido',
+    invalid: 'Campo inválido',
+    loading: 'Validando...',
+  },
   Of: 'de',
   Paginator: {
     FirstLabel: 'Ir a la primera pagina',

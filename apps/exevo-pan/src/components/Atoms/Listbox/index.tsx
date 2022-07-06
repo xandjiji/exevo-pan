@@ -2,6 +2,7 @@ import {
   forwardRef,
   Ref,
   useMemo,
+  useEffect,
   Children,
   isValidElement,
   cloneElement,
@@ -26,6 +27,15 @@ const Listbox = (
     () => indexToId(highlightedIndex, props.id),
     [highlightedIndex, props.id],
   )
+
+  useEffect(() => {
+    if (currentActiveDescendantId) {
+      document.getElementById(currentActiveDescendantId)?.scrollIntoView({
+        block: 'nearest',
+      })
+    }
+  }, [currentActiveDescendantId])
+
   return (
     <div
       ref={refProp}

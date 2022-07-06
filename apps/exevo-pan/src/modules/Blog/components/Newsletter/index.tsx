@@ -26,12 +26,9 @@ const Newsletter = ({
   const { request, register } = useNewsletter()
 
   const registerUser = () => register(email, locale ?? DEFAULT_LOCALE)
-  const onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
-    const { code } = event
-    if (code === 'Enter' || code === 'NumpadEnter') {
-      if (request.status !== 'LOADING') {
-        registerUser()
-      }
+  const onKeyPress: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
+    if (event.key === 'Enter' && request.status !== 'LOADING') {
+      registerUser()
     }
   }
 
@@ -68,17 +65,16 @@ const Newsletter = ({
       ) : (
         <>
           <div className="grid gap-1.5">
-            <label htmlFor="newsletter-email-input" className="text-tsm">
-              Email
-            </label>
             <Input
               id="newsletter-email-input"
+              label="Email"
               placeholder={blog.Newsletter.emailPlaceholder}
               allowClear
               value={email}
               onChange={(event) => setEmail(event.target.value)}
-              onKeyDown={onKeyDown}
-              errorMessage={
+              onKeyPress={onKeyPress}
+              enterKeyHint="send"
+              error={
                 request.status === 'ERROR'
                   ? blog.Newsletter.message[request.message as string] ??
                     blog.Newsletter.message.generic

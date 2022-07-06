@@ -4,7 +4,7 @@ import { Header, OverallGrid } from 'modules/Statistics'
 import { HistoryStatisticsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, statistics } from 'locales'
 
@@ -17,22 +17,17 @@ export default function Statistics({
 }) {
   const { translations } = useTranslations()
 
+  const pageTitle = buildPageTitle(
+    translations.statistics.Meta.Statistics.title,
+  )
+
   return (
     <>
       <Head>
-        <title>{translations.statistics.Meta.Statistics.title}</title>
-        <meta
-          name="title"
-          content={translations.statistics.Meta.Statistics.title}
-        />
-        <meta
-          property="og:title"
-          content={translations.statistics.Meta.Statistics.title}
-        />
-        <meta
-          property="twitter:title"
-          content={translations.statistics.Meta.Statistics.title}
-        />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="twitter:title" content={pageTitle} />
 
         <meta
           name="description"

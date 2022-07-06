@@ -1,2 +1,6 @@
 export { default as AutocompleteInput } from './AutocompleteInput'
+export { default as ChipGroup } from './ChipGroup'
+export { default as InfoTooltip } from './InfoTooltip'
+export { default as Select } from './Select'
 export { default as Tooltip } from './Tooltip'
+export { default as ClientComponent } from './ClientComponent'

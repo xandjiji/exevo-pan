@@ -1,4 +1,1 @@
-export interface AuthorsProps {
-  author: BlogPostAuthor
-  translator?: BlogPostAuthor
-}
+export type AuthorsProps = Pick<BlogPost, 'author' | 'translator'>

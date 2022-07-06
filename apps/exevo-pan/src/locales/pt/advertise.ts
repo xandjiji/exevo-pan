@@ -34,11 +34,6 @@ export default {
     paymentCharacterInvalidMessage: 'Personagem não existe',
     checkoutButtonLabel: 'Validar e finalizar compra',
     checkoutButton: 'Finalizar',
-    LabelledInput: {
-      valid: 'Campo válido',
-      invalid: 'Campo inválido',
-      loading: 'Validando...',
-    },
   },
   PaymentDetails: {
     titleIconLabel: 'Finalizado com sucesso',
@@ -63,8 +58,6 @@ export default {
       title: 'Resumo',
       auctionedCharacter: 'Personagem leiloado',
       datesTooltipText: 'Seu leilão será destacado durante os seguintes dias:',
-      day: 'dia',
-      days: 'dias',
       durationText: 'Duração do destaque',
       costText: 'Custo total',
       highlightedDays: 'Dias de destaque:',

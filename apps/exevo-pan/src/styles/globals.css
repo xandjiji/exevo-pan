@@ -81,6 +81,15 @@
 }
 
 @layer utilities {
+  .reset-spinner::-webkit-inner-spin-button,
+  .reset-spinner::-webkit-outer-spin-button {
+    display: none;
+  }
+
+  .reset-spinner {
+    -moz-appearance: textfield;
+  }
+
   .styled-link a {
     @apply text-primaryHighlight text-s font-normal;
   }

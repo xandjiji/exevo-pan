@@ -1,26 +1,12 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { memo } from 'react'
 import clsx from 'clsx'
-import { Sticker } from 'components/Atoms'
+import { Sticker, Label } from 'components/Atoms'
 import { FilterGroupProps } from './types'
-
-export const Label = ({
-  className,
-  ...props
-}: JSX.IntrinsicElements['label']) => (
-  <label
-    className={clsx(
-      'text-tsm text-onSurface font-light tracking-wide',
-      className,
-    )}
-    {...props}
-  />
-)
 
 const FilterGroup = ({
   newSticker = false,
   label,
-  labelSuffix,
   htmlFor,
   children,
   className,
@@ -32,8 +18,8 @@ const FilterGroup = ({
     style={{ borderWidth: 0, borderBottomWidth: 1, ...style }}
     {...props}
   >
-    <div className="relative mb-2 flex items-center">
-      <Label htmlFor={htmlFor}>
+    {label && (
+      <Label htmlFor={htmlFor} className="relative mb-2 block">
         {newSticker && (
           <Sticker
             localStorageKey={label}
@@ -45,8 +31,8 @@ const FilterGroup = ({
         )}
         {label}
       </Label>
-      {labelSuffix}
-    </div>
+    )}
+
     {children}
   </div>
 )

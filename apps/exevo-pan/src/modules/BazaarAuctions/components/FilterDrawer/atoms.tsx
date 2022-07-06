@@ -5,12 +5,8 @@ import { InputProps } from 'components/Atoms/Input/types'
 import { ChipProps } from 'components/Atoms/Chip/types'
 import { AutocompleteInputProps } from 'components/Organisms/AutocompleteInput/types'
 
-export const Input = ({ className, ...props }: InputProps) => (
-  <BaseInput
-    className={clsx('max-w-[200px]', className)}
-    {...props}
-    ref={undefined}
-  />
+export const Input = ({ className, ...props }: Omit<InputProps, 'ref'>) => (
+  <BaseInput className={clsx('max-w-[200px]', className)} {...props} />
 )
 
 export const ChipWrapper = ({
@@ -28,8 +24,8 @@ export const InputWrapper: typeof ChipWrapper = ({
   style,
   ...props
 }) => (
-  <ChipWrapper
-    className={clsx('mb-3', className)}
+  <div
+    className={clsx('mb-3 flex flex-wrap items-baseline gap-2', className)}
     style={{ gap: 16, ...style }}
     {...props}
   />

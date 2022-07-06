@@ -1,9 +1,6 @@
-import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
-import Image from 'next/image'
-import warningSrc from 'assets/warning.png'
-import styles from './styles.module.css'
+import InfoIcon from 'assets/svgs/info.svg'
 import { LabeledTextBoxProps } from './types'
 
 const LabeledTextBox = ({
@@ -13,10 +10,6 @@ const LabeledTextBox = ({
   warning = false,
   ...props
 }: LabeledTextBoxProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
-
   const labelId = useUuid()
 
   return (
@@ -35,20 +28,13 @@ const LabeledTextBox = ({
           id={labelId}
           suppressHydrationWarning
           className={clsx(
-            'bg-surface absolute top-0 left-2 flex select-none items-center px-1 text-[9px] font-light uppercase tracking-wider',
+            'absolute top-0 left-2 flex select-none items-center px-1 text-[9px] font-light uppercase tracking-wider',
             warning ? 'text-red' : 'text-onSurface',
           )}
-          style={{ transform: 'translateY(-50%)' }}
+          style={{ transform: 'translateY(-50%)', backgroundColor: 'inherit' }}
         >
           {labelText}
-          {warning && (
-            <Image
-              src={warningSrc}
-              title={common.WarningLabel}
-              unoptimized
-              className={styles.warning}
-            />
-          )}
+          {warning && <InfoIcon className="fill-red ml-0.5 h-3 w-3" />}
         </span>
       )}
       {children}

@@ -6,7 +6,7 @@ export default {
         'Statistics, trends and data analytics about daily and historic Tibia Char Bazaar information!',
     },
     Highscores: {
-      title: 'Exevo Pan - Highscores',
+      title: 'Highscores',
       description:
         'See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!',
     },

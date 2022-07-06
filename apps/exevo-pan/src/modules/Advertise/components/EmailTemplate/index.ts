@@ -1,4 +1,4 @@
-import { advertise } from 'locales'
+import { advertise, common } from 'locales'
 import { advertising } from 'Constants'
 import { generateQrCode } from '../PaymentDetails/PixPayment/utils'
 import { calculatePrice, readablePrice } from '../../utils'
@@ -52,6 +52,7 @@ const SummaryCard = ({
   locale,
 }: SummaryProps): string => {
   const dictionary = advertise[locale as keyof typeof advertise]
+  const commonDictionary = common[locale as keyof typeof common]
   const daysCount = selectedDates.length
 
   return T.Card(`
@@ -67,7 +68,7 @@ const SummaryCard = ({
 
     ${T.DetailItem(
       `${daysCount.toString()} ${
-        dictionary.PaymentDetails.Summary[daysCount > 1 ? 'days' : 'day']
+        commonDictionary[daysCount > 1 ? 'days' : 'day']
       }`,
     )}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.durationText)}

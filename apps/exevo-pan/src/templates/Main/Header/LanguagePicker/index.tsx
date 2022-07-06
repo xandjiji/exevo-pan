@@ -3,11 +3,9 @@ import clsx from 'clsx'
 import { memo, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { RadioButton } from 'components/Atoms'
-import { setCookie } from 'utils'
+import { setCookie, SECONDS_IN } from 'utils'
 import LanguageIcon from 'assets/svgs/language.svg'
 import { LanguagePickerProps } from './type'
-
-const SECONDS_IN_A_YEAR = 31536000
 
 const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
   const {
@@ -26,7 +24,7 @@ const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
       { locale: selectedLocale },
     )
     setLanguageOpen(false)
-    setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN_A_YEAR)
+    setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN.YEAR)
   }
 
   const wrapperRef = useRef<HTMLButtonElement>(null)

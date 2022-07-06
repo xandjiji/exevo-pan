@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { dequal } from 'dequal'
+import { isServer } from '..'
 import {
   ParamRegister,
   ParameterObject,
@@ -25,7 +26,7 @@ export function urlParametersState(
   }
 
   const getUrlValues = (): ParameterObject => {
-    if (typeof window === 'undefined') return getDefaultValues()
+    if (isServer()) return getDefaultValues()
 
     const urlParams = getCurrentUrlParams()
 

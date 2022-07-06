@@ -4,7 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, cloneElement, memo } from 'react'
 import clsx from 'clsx'
 import { clampValue, debounce } from 'utils'
-import NextIcon from 'assets/svgs/next.svg'
+import NextIcon from 'assets/svgs/chevronRight.svg'
 import LastIcon from 'assets/svgs/last.svg'
 import usePagination from './usePagination'
 import { IconProps, PaginatorProps } from './types'
@@ -12,7 +12,7 @@ import { IconProps, PaginatorProps } from './types'
 const Icon = ({ icon, disabled }: IconProps) =>
   cloneElement(icon, {
     className: clsx(
-      'w-8 fill-onSurface transition-opacity',
+      'w-8 h-8 fill-onSurface transition-opacity',
       disabled && 'opacity-40',
     ),
   })

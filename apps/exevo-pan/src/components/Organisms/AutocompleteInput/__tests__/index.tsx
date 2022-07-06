@@ -23,6 +23,7 @@ describe('<AutocompleteInput />', () => {
   test('classname, style, props, aria attributes and children should be managed correctly', async () => {
     const { container } = renderWithProviders(
       <AutocompleteInput
+        label="Server"
         className="autocomplete-input-class"
         style={{ width: 999 }}
         itemList={mockedItemList}
@@ -68,6 +69,7 @@ describe('<AutocompleteInput />', () => {
   test('with a KEYBOARD, onItemSelect should be called with an <Option /> object', async () => {
     renderWithProviders(
       <AutocompleteInput
+        label="Server"
         itemList={mockedItemList}
         onItemSelect={mockedOnItemSelect}
       />,
@@ -112,6 +114,7 @@ describe('<AutocompleteInput />', () => {
   test('with a MOUSE, onItemSelect should be called with an <Option /> object', async () => {
     renderWithProviders(
       <AutocompleteInput
+        label="Server"
         itemList={mockedItemList}
         onItemSelect={mockedOnItemSelect}
       />,
@@ -144,6 +147,7 @@ describe('<AutocompleteInput />', () => {
   test('itemList should be updated on re-render', async () => {
     const { rerender } = renderWithProviders(
       <AutocompleteInput
+        label="Server"
         itemList={[...mockedItemList, { name: 'Julera', value: 'Julera' }]}
       />,
     )
@@ -152,11 +156,12 @@ describe('<AutocompleteInput />', () => {
     userEvent.click(inputElement)
     expect(screen.getAllByRole('option')).toHaveLength(104)
 
-    rerender(<AutocompleteInput itemList={mockedItemList} />)
+    rerender(<AutocompleteInput label="Server" itemList={mockedItemList} />)
     expect(screen.getAllByRole('option')).toHaveLength(103)
 
     rerender(
       <AutocompleteInput
+        label="Server"
         itemList={[
           { name: 'Julera', value: 'Julera' },
           { name: 'Nova', value: 'Nova' },
@@ -169,7 +174,9 @@ describe('<AutocompleteInput />', () => {
   })
 
   test('keyboard arrows should navigate items in circular fashion and highlight items correctly', async () => {
-    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+    renderWithProviders(
+      <AutocompleteInput label="Server" itemList={mockedItemList} />,
+    )
 
     userEvent.tab()
     const optionsElement = screen.getAllByRole('option')
@@ -179,6 +186,7 @@ describe('<AutocompleteInput />', () => {
 
     expect(optionsElement).toHaveLength(103)
 
+    expect(mockedScrollIntoView).toBeCalledTimes(0)
     userEvent.keyboard('{arrowup}')
     expect(mockedScrollIntoView).toBeCalledTimes(1)
     /* expect(firstOption).toHaveStyle('background-color: #FFFFFF') */
@@ -219,7 +227,9 @@ describe('<AutocompleteInput />', () => {
   })
 
   test('keyboard navigation should set input value', async () => {
-    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+    renderWithProviders(
+      <AutocompleteInput label="Server" itemList={mockedItemList} />,
+    )
 
     const inputElement = screen.getByRole('combobox')
     expect(inputElement).toHaveValue('')
@@ -246,7 +256,9 @@ describe('<AutocompleteInput />', () => {
   })
 
   test('<Listbox /> visibility should be controlled correctly by KEYBOARD', async () => {
-    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+    renderWithProviders(
+      <AutocompleteInput label="Server" itemList={mockedItemList} />,
+    )
 
     const inputElement = screen.getByRole('combobox')
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
@@ -300,7 +312,9 @@ describe('<AutocompleteInput />', () => {
   })
 
   test('<Listbox /> visibility should be controlled correctly by MOUSE', async () => {
-    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+    renderWithProviders(
+      <AutocompleteInput label="Server" itemList={mockedItemList} />,
+    )
 
     const inputElement = screen.getByRole('combobox')
     expect(screen.queryByRole('listbox')).not.toBeInTheDocument()
@@ -332,7 +346,9 @@ describe('<AutocompleteInput />', () => {
   })
 
   test('typing should filter elements in <Listbox />', async () => {
-    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+    renderWithProviders(
+      <AutocompleteInput label="Server" itemList={mockedItemList} />,
+    )
 
     const inputElement = screen.getByRole('combobox')
 
@@ -393,7 +409,9 @@ describe('<AutocompleteInput />', () => {
   })
 
   test('arrow navigation shouldnt happen if there is an empty <listbox />', async () => {
-    renderWithProviders(<AutocompleteInput itemList={mockedItemList} />)
+    renderWithProviders(
+      <AutocompleteInput label="Server" itemList={mockedItemList} />,
+    )
     const inputElement = screen.getByRole('combobox')
     userEvent.type(inputElement, 'asdsa')
     userEvent.keyboard('{arrowdown}')

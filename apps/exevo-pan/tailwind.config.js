@@ -16,6 +16,7 @@ module.exports = {
   ],
   theme: {
     screens: {
+      sm: '540px',
       md: '768px',
       lg: '1024px',
       lgr: '1200px',
@@ -71,6 +72,7 @@ module.exports = {
       10: '10',
       50: '50',
       51: '51',
+      footer: '70',
       71: '71',
       74: '74',
       75: '75',
@@ -97,6 +99,8 @@ module.exports = {
         swing: 'swing 1.2s ease-out forwards',
         tilt: 'tilt 1s ease-out forwards',
         letGo: 'letGo 1s ease-out forwards',
+        blinking: 'blinking 1s ease-out infinite',
+        implode: 'implode 0.2s ease-out forwards',
       },
       keyframes: {
         rollIn: {
@@ -164,6 +168,15 @@ module.exports = {
           '80%': { transform: 'rotate3d(0, 0, 1, -10deg)' },
           '100%': { transform: 'rotate3d(0, 0, 1, 0deg)' },
         },
+        blinking: {
+          '0%': { opacity: 1 },
+          '50%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+        implode: {
+          '0%': { opacity: 1, transform: 'scale(1)' },
+          '100%': { opacity: 0, transform: 'scale(0)' },
+        },
       },
     },
   },
@@ -172,6 +185,7 @@ module.exports = {
     plugin(function ({ addVariant }) {
       addVariant('hocus', ['&:hover', '&:focus'])
       addVariant('currentpage', "&[aria-current='page']")
+      addVariant('hidden-accessibility', "&[aria-hidden='true']")
       addVariant('child', '& > *')
     }),
   ],

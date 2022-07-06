@@ -10,7 +10,7 @@ import Newsticker from 'components/Newsticker'
 import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import { endpoints, routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
@@ -33,18 +33,17 @@ export default function Home({
 }: HomeStaticProps) {
   const { translations } = useTranslations()
 
+  const pageTitle = buildPageTitle(translations.homepage.Meta.title)
+
   const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
 
   return (
     <>
       <Head>
-        <title>{translations.homepage.Meta.title}</title>
-        <meta name="title" content={translations.homepage.Meta.title} />
-        <meta property="og:title" content={translations.homepage.Meta.title} />
-        <meta
-          property="twitter:title"
-          content={translations.homepage.Meta.title}
-        />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="twitter:title" content={pageTitle} />
 
         <meta
           name="description"

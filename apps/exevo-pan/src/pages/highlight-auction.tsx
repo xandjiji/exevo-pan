@@ -5,7 +5,7 @@ import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
 import { AuctionsClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import { endpoints, routes, jsonld } from 'Constants'
 import { common, advertise } from 'locales'
 
@@ -20,18 +20,17 @@ export default function Advertise({
 }: AdvertiseStaticProps) {
   const { translations } = useTranslations()
 
+  const pageTitle = buildPageTitle(translations.advertise.Meta.title)
+
   const { page, ...pageData } = initialAuctionData
 
   return (
     <>
       <Head>
-        <title>{translations.advertise.Meta.title}</title>
-        <meta name="title" content={translations.advertise.Meta.title} />
-        <meta property="og:title" content={translations.advertise.Meta.title} />
-        <meta
-          property="twitter:title"
-          content={translations.advertise.Meta.title}
-        />
+        <title>{pageTitle}</title>
+        <meta name="title" content={pageTitle} />
+        <meta property="og:title" content={pageTitle} />
+        <meta property="twitter:title" content={pageTitle} />
 
         <meta
           name="description"
