@@ -1,5 +1,6 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders, generateBlogPosts } from 'utils/test'
+import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import Card from '..'
 
@@ -14,7 +15,10 @@ describe('<Card />', () => {
 
     const thumbnailElement = screen.getByRole('img')
     expect(thumbnailElement).toHaveAccessibleName(title)
-    expect(thumbnailElement).toHaveAttribute('src', thumbnail)
+    expect(thumbnailElement).toHaveAttribute(
+      'src',
+      loadThumbnail(thumbnail, 32),
+    )
 
     const linkElement = screen.getByRole('link')
     expect(linkElement).toHaveTextContent(title)
