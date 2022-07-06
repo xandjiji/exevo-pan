@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect, useCallback, memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import RemoveIcon from 'assets/svgs/trash.svg'
-import { MILLISECONDS_IN } from 'utils'
+import { MILLISECONDS_IN, blurOnEnter } from 'utils'
 import StaminaBar from '../StaminaBar'
 import TimeLeft from '../TimeLeft'
 import { calculateSecondsToRegenerate, FULL_STAMINA } from '../utils'
@@ -72,11 +72,13 @@ const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
           aria-label={name}
           onChange={(e) => update({ key, name: e.target.value })}
           value={name}
+          placeholder={`${calculators.Stamina.newCharacter} (${index})`}
+          onKeyPress={blurOnEnter}
+          enterKeyHint="done"
           className={clsx(
             'text-primaryHighlight flex-grow border-0 bg-transparent p-0 text-xs font-bold tracking-wider placeholder:font-light',
             !name && 'decoration-separator underline decoration-dashed',
           )}
-          placeholder={`${calculators.Stamina.newCharacter} (${index})`}
         />
 
         <button
