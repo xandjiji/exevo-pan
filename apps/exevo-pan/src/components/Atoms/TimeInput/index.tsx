@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { forwardRef, useRef, useCallback, useMemo, useEffect } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useUuid, useSharedRef, useIsMounted } from 'hooks'
 import Label from '../Label'
@@ -52,6 +53,10 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
     const minutesRef = useRef<HTMLInputElement>(null)
 
     const focusHours = useCallback(() => hoursRef.current?.focus(), [])
+
+    const {
+      translations: { common },
+    } = useTranslations()
 
     const initialValue = useRef(value2TimeObject(valueProp ?? defaultValue))
     const controlledValue = useMemo(
@@ -121,14 +126,14 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
           <Input
             ref={hoursRef}
             disabled={disabled}
-            aria-label={accessibleLabel}
+            aria-label={common.hours}
             {...hourBinders}
           />
           :
           <Input
             ref={minutesRef}
             disabled={disabled}
-            aria-label={accessibleLabel}
+            aria-label={common.minutes}
             enterKeyHint={enterKeyHint}
             onKeyPress={onKeyPress}
             {...minuteBinders}
