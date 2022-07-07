@@ -118,11 +118,17 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
           )}
           onClick={focusHours}
         >
-          <Input ref={hoursRef} disabled={disabled} {...hourBinders} />
+          <Input
+            ref={hoursRef}
+            disabled={disabled}
+            aria-label={accessibleLabel}
+            {...hourBinders}
+          />
           :
           <Input
             ref={minutesRef}
             disabled={disabled}
+            aria-label={accessibleLabel}
             enterKeyHint={enterKeyHint}
             onKeyPress={onKeyPress}
             {...minuteBinders}
