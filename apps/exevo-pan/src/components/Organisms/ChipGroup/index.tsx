@@ -17,6 +17,7 @@ const Option = ({ groupName, name, value, ...props }: OptionProps) => {
       className="relative gap-1.5"
       onClick={handleClick}
       overrideStatus={props.checked}
+      role="radio"
     >
       <input
         ref={inputRef}
