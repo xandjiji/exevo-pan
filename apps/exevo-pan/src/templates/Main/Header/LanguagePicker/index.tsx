@@ -95,7 +95,7 @@ const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
         aria-label={common.PopoverCloseLabel}
         aria-hidden={!isOpen}
         onClick={() => setLanguageOpen(false)}
-        tabIndex={isOpen ? 1 : -1}
+        tabIndex={isOpen ? 0 : -1}
       />
     </div>
   )

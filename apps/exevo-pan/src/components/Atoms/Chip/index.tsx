@@ -42,7 +42,7 @@ const ChipComponent = ({
     <div
       role={isClickable ? 'switch' : undefined}
       aria-checked={isClickable ? derivedActive : undefined}
-      tabIndex={isClickable ? 1 : undefined}
+      tabIndex={isClickable ? 0 : undefined}
       onClick={handleClick}
       onKeyPress={handleKeypress}
       className={clsx(
