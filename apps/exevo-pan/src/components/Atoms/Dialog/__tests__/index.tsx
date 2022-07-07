@@ -51,6 +51,18 @@ describe('<Dialog />', () => {
     expect(screen.queryByRole('none')).not.toBeInTheDocument()
   })
 
+  test('should not render close button', () => {
+    renderWithProviders(
+      <Dialog isOpen onClose={onCloseMock} noCloseButton>
+        <div role="none" />
+      </Dialog>,
+    )
+
+    expect(
+      screen.queryByRole('button', { name: 'Close dialog' }),
+    ).not.toBeInTheDocument()
+  })
+
   test('a11y', async () => {
     const { container } = renderWithProviders(
       <Dialog isOpen onClose={onCloseMock}>
