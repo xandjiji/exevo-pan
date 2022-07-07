@@ -76,6 +76,7 @@ module.exports = {
       71: '71',
       74: '74',
       75: '75',
+      dialog: '76',
       99: '99',
     },
     boxShadow: {

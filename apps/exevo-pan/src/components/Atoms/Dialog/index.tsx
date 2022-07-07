@@ -30,7 +30,7 @@ const Dialog = ({
     ? createPortal(
         <FocusLock>
           <button
-            className="z-71 animate-fadeIn bg-backdrop fixed top-0 left-0 flex h-full w-full items-center justify-center text-left"
+            className="z-dialog animate-fadeIn bg-backdrop fixed top-0 left-0 flex h-full w-full items-center justify-center text-left"
             type="button"
             aria-hidden={!isOpen}
             onClick={onClose}
@@ -47,7 +47,7 @@ const Dialog = ({
               {...props}
             >
               <button
-                className="clickable float-right grid place-items-center rounded"
+                className="clickable float-right ml-auto grid w-fit place-items-center rounded"
                 type="button"
                 aria-label={common.Dialog.close}
                 onClick={onClose}
