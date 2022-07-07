@@ -1,15 +1,19 @@
 import { useRef, useCallback, useState } from 'react'
 import clsx from 'clsx'
 import { Chip, Label } from 'components/Atoms'
+import { useUuid } from 'hooks'
 import { ChipGroupProps, OptionProps } from './types'
 
 const Option = ({ groupName, name, value, ...props }: OptionProps) => {
+  const id = useUuid()
+
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleClick = useCallback(() => inputRef.current?.click(), [])
 
   return (
     <Chip
+      id={id}
       className="relative gap-1.5"
       onClick={handleClick}
       overrideStatus={props.checked}
@@ -21,6 +25,7 @@ const Option = ({ groupName, name, value, ...props }: OptionProps) => {
         value={value}
         tabIndex={-1}
         className={clsx('-z-1 absolute h-0 w-0')}
+        aria-labelledby={id}
         {...props}
       />
       {name}
