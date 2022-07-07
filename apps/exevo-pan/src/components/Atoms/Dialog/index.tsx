@@ -12,6 +12,7 @@ const Dialog = ({
   className,
   isOpen,
   onClose,
+  noCloseButton = false,
   children,
   ...props
 }: DialogProps) => {
@@ -46,14 +47,16 @@ const Dialog = ({
               className={clsx('card animate-rushIn', className)}
               {...props}
             >
-              <button
-                className="clickable float-right ml-auto grid w-fit place-items-center rounded"
-                type="button"
-                aria-label={common.Dialog.close}
-                onClick={onClose}
-              >
-                <CloseIcon className="fill-onSurface" />
-              </button>
+              {!noCloseButton && (
+                <button
+                  className="clickable float-right ml-auto grid w-fit place-items-center rounded"
+                  type="button"
+                  aria-label={common.Dialog.close}
+                  onClick={onClose}
+                >
+                  <CloseIcon className="fill-onSurface" />
+                </button>
+              )}
               {children}
             </div>
           </button>
