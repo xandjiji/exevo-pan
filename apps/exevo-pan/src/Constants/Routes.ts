@@ -4,6 +4,7 @@ export const routes = {
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
   EXERCISE_WEAPONS: '/calculators/exercise-weapons',
+  IMBUEMENTS_COST: '/calculators/imbuements-cost',
   CHARM_DAMAGE: '/calculators/charm-damage',
   STAMINA: '/calculators/stamina',
   STATISTICS: '/statistics',
