@@ -1,13 +1,12 @@
 import { useState } from 'react'
-import { Input, Tabs } from 'components/Atoms'
+import { Tabs } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import { numberWithCommaSeparator } from 'utils'
-import { LabelWrapper, Panel } from './atoms'
+import { LabelWrapper, Panel, Input } from './atoms'
 import * as Icons from './icons'
 import { Main } from '../../components'
 
 /* @ ToDo:
-- materials fields (com icons)
 - results
     tooltip with 100% shrine chance
 - calculator
@@ -46,7 +45,7 @@ const ImbuementsCost = () => {
         />
       </div>
 
-      <Tabs.Group initialActive={2}>
+      <Tabs.Group>
         <Panel label="Vampirism (Life leech)">
           <Input
             label={
@@ -55,9 +54,6 @@ const ImbuementsCost = () => {
                 Vampire Teeth price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
           <Input
             label={
@@ -66,9 +62,6 @@ const ImbuementsCost = () => {
                 Bloody Pincers price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
           <Input
             label={
@@ -77,9 +70,6 @@ const ImbuementsCost = () => {
                 Piece of Dead Brain price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
         </Panel>
 
@@ -91,9 +81,6 @@ const ImbuementsCost = () => {
                 Rope Belts price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
           <Input
             label={
@@ -102,9 +89,6 @@ const ImbuementsCost = () => {
                 Silencer Claws price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
           <Input
             label={
@@ -113,9 +97,6 @@ const ImbuementsCost = () => {
                 Some Grimeleech Wings price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
         </Panel>
 
@@ -127,9 +108,6 @@ const ImbuementsCost = () => {
                 Protective Charm price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
           <Input
             label={
@@ -138,9 +116,6 @@ const ImbuementsCost = () => {
                 Sabretooth price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
           <Input
             label={
@@ -149,9 +124,6 @@ const ImbuementsCost = () => {
                 Vexclaw Talon price
               </LabelWrapper>
             }
-            inputMode="numeric"
-            placeholder="GP value"
-            noAlert
           />
         </Panel>
       </Tabs.Group>
