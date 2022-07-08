@@ -49,11 +49,7 @@ const ImbuementsCost = () => {
         </div>
       </LabeledCard>
 
-      <LabeledCard
-        labelText="Imbuements"
-        className="mt-6"
-        style={{ padding: '16px 24px 24px 24px' }}
-      >
+      <LabeledCard labelText="Imbuements" className="mt-6">
         <Tabs.Group>
           <Panel label="Vampirism (life leech)">
             <Input

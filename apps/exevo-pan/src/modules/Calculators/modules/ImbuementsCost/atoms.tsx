@@ -7,7 +7,7 @@ export const LabelWrapper = (args: JSX.IntrinsicElements['div']) => (
 )
 
 export const Panel: typeof Tabs.Panel = (args) => (
-  <Tabs.Panel className="grid gap-4 pt-2" {...args} />
+  <Tabs.Panel className="grid gap-4 py-2" {...args} />
 )
 
 export const Input = (args: Omit<InputProps, 'ref'>) => (
