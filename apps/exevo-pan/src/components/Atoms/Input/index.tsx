@@ -1,12 +1,13 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
-import { forwardRef, Ref, useState, memo } from 'react'
+import { forwardRef, Ref, useState, useCallback, memo } from 'react'
 import clsx from 'clsx'
 import { useUuid, useSharedRef } from 'hooks'
 import ClearIcon from 'assets/svgs/cross.svg'
 import Label from '../Label'
 import { useStateIcon } from './useStateIcon'
+import { defaultMask } from './utils'
 import { InputProps, InputValue } from './types'
 
 const Input = (
@@ -23,6 +24,7 @@ const Input = (
     onChange,
     noAlert = false,
     stateIcon = 'neutral',
+    mask = defaultMask,
     ...props
   }: InputProps,
   refProp: Ref<HTMLInputElement>,
@@ -39,13 +41,10 @@ const Input = (
   const [value, setValue] = useState<InputValue>(
     valueProp ?? defaultValue ?? '',
   )
-  const derivedValue = valueProp ?? value
+  const derivedValue = mask(valueProp ?? value)
   const isClearButtonActive = allowClear && !!derivedValue
 
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
-    setValue(event.target.value)
-
-  const handleClearClick = () => {
+  const handleClearClick = useCallback(() => {
     if (innerRef.current) {
       if (isClearButtonActive) {
         const event = new Event('input', { bubbles: true })
@@ -55,12 +54,15 @@ const Input = (
       }
       innerRef.current.focus()
     }
-  }
+  }, [isClearButtonActive])
 
-  const handleInput = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChange?.(event)
-    setValue(event.target.value)
-  }
+  const handleInput = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      onChange?.(e)
+      setValue(e.target.value)
+    },
+    [onChange],
+  )
 
   const StateIcon = useStateIcon(stateIcon)
 
@@ -81,7 +83,6 @@ const Input = (
           ref={innerRef}
           id={inputId}
           value={derivedValue}
-          onChange={handleChange}
           onInput={handleInput}
           aria-invalid={!!error}
           aria-errormessage={error ? errorId : undefined}
