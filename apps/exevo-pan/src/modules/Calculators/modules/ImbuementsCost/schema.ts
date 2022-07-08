@@ -43,7 +43,7 @@ export const RECIPES: Recipe[] = [
     ],
   },
   {
-    name: 'Strike (crit)',
+    name: 'Strike (critical)',
     materials: [
       {
         name: 'Protective Charms',

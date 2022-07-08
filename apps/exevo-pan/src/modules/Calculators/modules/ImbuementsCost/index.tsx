@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import { useState } from 'react'
 import { Tabs } from 'components/Atoms'
 import { Select } from 'components/Organisms'
@@ -52,9 +53,9 @@ const ImbuementsCost = () => {
 
       <LabeledCard labelText="Imbuements" className="mt-6">
         <Tabs.Group>
-          {RECIPES.map((recipe) => (
-            <Panel label={recipe.name}>
-              {recipe.materials.map((material) => (
+          {RECIPES.map(({ name, materials }, index) => (
+            <Panel key={index} label={name}>
+              {materials.map((material) => (
                 <Input
                   label={
                     <LabelWrapper>
