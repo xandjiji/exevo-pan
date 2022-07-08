@@ -12,7 +12,7 @@ import useIds from './useIds'
 import styles from './styles.module.css'
 import { TabsProps, PanelProps } from './types'
 
-const Group = forwardRef(
+const Group = forwardRef<HTMLDivElement, TabsProps>(
   (
     {
       activeIndex: indexProp,
@@ -22,7 +22,7 @@ const Group = forwardRef(
       children,
       'aria-label': ariaLabelProp,
       ...props
-    }: TabsProps,
+    },
     ref,
   ) => {
     const [innerIndex, setInnerIndex] = useState(indexProp ?? initialActive)
@@ -52,12 +52,12 @@ const Group = forwardRef(
       <div
         className={clsx('grid w-full gap-3 overflow-hidden', className)}
         {...props}
-        ref={ref as React.RefObject<HTMLDivElement>}
+        ref={ref}
       >
         <div
           role="tablist"
           aria-label={ariaLabelProp}
-          className="bg-surface custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
+          className="custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
           style={{ borderBottom: 'solid 1px rgb(var(--separator))' }}
         >
           {Children.map(children, (child, childIndex) => {
