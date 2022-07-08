@@ -5,6 +5,7 @@ import { numberWithCommaSeparator } from 'utils'
 import { LabelWrapper, Panel, Input } from './atoms'
 import * as Icons from './icons'
 import { Main, LabeledCard } from '../../components'
+import { RECIPES } from './schema'
 
 /* @ ToDo:
 - results
@@ -51,86 +52,21 @@ const ImbuementsCost = () => {
 
       <LabeledCard labelText="Imbuements" className="mt-6">
         <Tabs.Group>
-          <Panel label="Vampirism (life leech)">
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.VampireTeeth />
-                  Vampire Teeth price
-                </LabelWrapper>
-              }
-            />
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.BloodyPincers />
-                  Bloody Pincers price
-                </LabelWrapper>
-              }
-            />
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.PieceOfDeadBrain />
-                  Piece of Dead Brain price
-                </LabelWrapper>
-              }
-            />
-          </Panel>
-
-          <Panel label="Void (mana leech)">
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.RopeBelt />
-                  Rope Belts price
-                </LabelWrapper>
-              }
-            />
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.SilencerClaws />
-                  Silencer Claws price
-                </LabelWrapper>
-              }
-            />
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.GrimeleechWings />
-                  Some Grimeleech Wings price
-                </LabelWrapper>
-              }
-            />
-          </Panel>
-
-          <Panel label="Strike (critical)">
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.ProtectiveCharm />
-                  Protective Charm price
-                </LabelWrapper>
-              }
-            />
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.Sabretooth />
-                  Sabretooth price
-                </LabelWrapper>
-              }
-            />
-            <Input
-              label={
-                <LabelWrapper>
-                  <Icons.VexclawTalon />
-                  Vexclaw Talon price
-                </LabelWrapper>
-              }
-            />
-          </Panel>
+          {RECIPES.map((recipe) => (
+            <Panel label={recipe.name}>
+              {recipe.materials.map((material) => (
+                <Input
+                  label={
+                    <LabelWrapper>
+                      <material.icon />
+                      {material.name} price
+                    </LabelWrapper>
+                  }
+                  placeholder="GP value"
+                />
+              ))}
+            </Panel>
+          ))}
         </Tabs.Group>
       </LabeledCard>
     </Main>

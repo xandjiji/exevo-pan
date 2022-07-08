@@ -13,7 +13,6 @@ export const Panel: typeof Tabs.Panel = (args) => (
 export const Input = (args: Omit<InputProps, 'ref'>) => (
   <BaseInput
     inputMode="numeric"
-    placeholder="GP value"
     noAlert
     mask={numberWithCommaSeparator}
     {...args}
