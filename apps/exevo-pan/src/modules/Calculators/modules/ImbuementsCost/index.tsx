@@ -46,8 +46,44 @@ const ImbuementsCost = () => {
         />
       </div>
 
-      <Tabs.Group>
+      <Tabs.Group initialActive={2}>
         <Panel label="Vampirism (Life leech)">
+          <Input
+            label={
+              <LabelWrapper>
+                <Icons.VampireTeeth />
+                Vampire Teeth price
+              </LabelWrapper>
+            }
+            inputMode="numeric"
+            placeholder="GP value"
+            noAlert
+          />
+          <Input
+            label={
+              <LabelWrapper>
+                <Icons.BloodyPincers />
+                Bloody Pincers price
+              </LabelWrapper>
+            }
+            inputMode="numeric"
+            placeholder="GP value"
+            noAlert
+          />
+          <Input
+            label={
+              <LabelWrapper>
+                <Icons.PieceOfDeadBrain />
+                Piece of Dead Brain price
+              </LabelWrapper>
+            }
+            inputMode="numeric"
+            placeholder="GP value"
+            noAlert
+          />
+        </Panel>
+
+        <Panel label="Void (Mana leech)">
           <Input
             label={
               <LabelWrapper>
@@ -82,8 +118,42 @@ const ImbuementsCost = () => {
             noAlert
           />
         </Panel>
-        <Panel label="Void (Mana leech)">dasdsa</Panel>
-        <Panel label="Strike (Critical)">dasdsa</Panel>
+
+        <Panel label="Strike (Critical)">
+          <Input
+            label={
+              <LabelWrapper>
+                <Icons.ProtectiveCharm />
+                Protective Charm price
+              </LabelWrapper>
+            }
+            inputMode="numeric"
+            placeholder="GP value"
+            noAlert
+          />
+          <Input
+            label={
+              <LabelWrapper>
+                <Icons.Sabretooth />
+                Sabretooth price
+              </LabelWrapper>
+            }
+            inputMode="numeric"
+            placeholder="GP value"
+            noAlert
+          />
+          <Input
+            label={
+              <LabelWrapper>
+                <Icons.VexclawTalon />
+                Vexclaw Talon price
+              </LabelWrapper>
+            }
+            inputMode="numeric"
+            placeholder="GP value"
+            noAlert
+          />
+        </Panel>
       </Tabs.Group>
     </Main>
   )
