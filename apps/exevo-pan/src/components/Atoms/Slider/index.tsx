@@ -33,8 +33,8 @@ import * as S from './atoms'
 import { SliderProps } from './types'
 
 const Slider = forwardRef<HTMLInputElement, SliderProps>(
-  (componentProps: SliderProps, ref: React.Ref<HTMLInputElement>) => {
-    const {
+  (
+    {
       id: idProp,
       className,
       name,
@@ -56,8 +56,9 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       onKeyPress,
       ssr,
       ...props
-    } = componentProps
-
+    },
+    ref: React.Ref<HTMLInputElement>,
+  ) => {
     const uuid = useUuid()
     const inputId = idProp ?? uuid
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel

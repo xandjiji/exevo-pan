@@ -35,7 +35,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       noAlert = false,
       options,
       ...props
-    }: SelectProps,
+    },
     ref: React.Ref<HTMLInputElement>,
   ) => {
     const listboxId = useUuid()
