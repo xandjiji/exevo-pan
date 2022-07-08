@@ -1,13 +1,9 @@
 import { useState } from 'react'
 import { Input, Tabs } from 'components/Atoms'
 import { Select } from 'components/Organisms'
-import Image from 'next/image'
-import goldTokenSrc from 'assets/goldToken.png'
-import ropebeltSrc from 'assets/ropeBelt.png'
-import silencerclawsSrc from 'assets/silencerClaws.png'
-import grimeleechSrc from 'assets/grimeleech.png'
 import { numberWithCommaSeparator } from 'utils'
 import { LabelWrapper, Panel } from './atoms'
+import * as Icons from './icons'
 import { Main } from '../../components'
 
 /* @ ToDo:
@@ -29,12 +25,7 @@ const ImbuementsCost = () => {
         <Input
           label={
             <LabelWrapper>
-              <Image
-                src={goldTokenSrc}
-                width={12}
-                height={12}
-                alt="Gold Token"
-              />
+              <Icons.GoldToken />
               Gold Token price
             </LabelWrapper>
           }
@@ -60,12 +51,7 @@ const ImbuementsCost = () => {
           <Input
             label={
               <LabelWrapper>
-                <Image
-                  src={ropebeltSrc}
-                  width={11}
-                  height={12}
-                  alt="Rope Belt"
-                />
+                <Icons.RopeBelt />
                 Rope Belts price
               </LabelWrapper>
             }
@@ -76,12 +62,7 @@ const ImbuementsCost = () => {
           <Input
             label={
               <LabelWrapper>
-                <Image
-                  src={silencerclawsSrc}
-                  width={11}
-                  height={12}
-                  alt="Silencer Claws"
-                />
+                <Icons.SilencerClaws />
                 Silencer Claws price
               </LabelWrapper>
             }
@@ -92,12 +73,7 @@ const ImbuementsCost = () => {
           <Input
             label={
               <LabelWrapper>
-                <Image
-                  src={grimeleechSrc}
-                  width={12}
-                  height={12}
-                  alt="Some Grimeleech Wings"
-                />
+                <Icons.GrimeleechWings />
                 Some Grimeleech Wings price
               </LabelWrapper>
             }
