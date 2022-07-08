@@ -27,7 +27,7 @@ export const ImbuementsCost: CalculatorRoute = {
   href: ROUTES.IMBUEMENTS_COST,
   icon: <ImbuementsCostIcon />,
   hero: `${ROUTES.CALCULATORS}/imbuements-cost-hero.png`,
-  sprite: '/sprites/imbuementShrine.gif',
+  sprite: '/sprites/imbuement.png',
 }
 
 export const Stamina: CalculatorRoute = {
