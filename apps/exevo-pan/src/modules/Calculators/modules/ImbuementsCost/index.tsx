@@ -4,7 +4,7 @@ import { Select } from 'components/Organisms'
 import { numberWithCommaSeparator } from 'utils'
 import { LabelWrapper, Panel, Input } from './atoms'
 import * as Icons from './icons'
-import { Main } from '../../components'
+import { Main, LabeledCard } from '../../components'
 
 /* @ ToDo:
 - results
@@ -20,7 +20,7 @@ const ImbuementsCost = () => {
 
   return (
     <Main>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="child:max-w-[50%] child:flex-grow flex items-end gap-4">
         <Input
           label={
             <LabelWrapper>
@@ -32,6 +32,7 @@ const ImbuementsCost = () => {
           placeholder="GP value"
           defaultValue={20000}
           mask={numberWithCommaSeparator}
+          noAlert
         />
 
         <Select
@@ -42,6 +43,7 @@ const ImbuementsCost = () => {
             { name: 'Basic', value: 'basic' },
           ]}
           defaultValue="powerful"
+          noAlert
         />
       </div>
 
