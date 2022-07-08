@@ -19,12 +19,20 @@ export default {
       description:
         'Compara el daño medio entre diferentes charms para ver cual es mejor',
     },
+    /* @ ToDo: */
+    ImbuementsCost: {
+      title: 'Imbuements Cost',
+      description:
+        'Calculate the cheapest way to buy materials for your imbuements',
+    },
   },
   Header: {
     Main: 'Principal',
     ExerciseWeapons: 'Exercise weapons',
     CharmDamage: 'Charm Damage',
     Stamina: 'Stamina',
+    /* @ ToDo: */
+    ImbuementsCost: 'Imbuements Cost',
   },
   none: 'Nada',
   ExerciseWeapons: {

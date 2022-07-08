@@ -19,12 +19,18 @@ export default {
       description:
         'Compare the average damage between different charms to see which one is best',
     },
+    ImbuementsCost: {
+      title: 'Imbuements Cost',
+      description:
+        'Calculate the cheapest way to buy materials for your imbuements',
+    },
   },
   Header: {
     Main: 'Main',
     ExerciseWeapons: 'Exercise weapons',
     CharmDamage: 'Charm Damage',
     Stamina: 'Stamina',
+    ImbuementsCost: 'Imbuements Cost',
   },
   none: 'None',
   ExerciseWeapons: {
