@@ -8,7 +8,6 @@ import { Main, LabeledCard } from '../../components'
 import { RECIPES, RecordKeys, DEFAULT_STATE } from './schema'
 
 /* @ ToDo:
-- consertar Select (typedOption?)
 - results
     tooltip with 100% shrine chance
 - calculator
@@ -46,7 +45,7 @@ const ImbuementsCost = () => {
               { name: 'Intricate', value: '1' },
               { name: 'Basic', value: '0' },
             ]}
-            value={stateRecord[RecordKeys.tier]}
+            value={(stateRecord[RecordKeys.tier] ?? DEFAULT_STATE).toString()}
             onChange={(e) =>
               updateRecord({ [RecordKeys.tier]: +e.target.value })
             }
