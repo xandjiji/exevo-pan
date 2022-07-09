@@ -11,7 +11,10 @@ export type RecipeSchema = {
 
 export type StateRecord = Record<string, number>
 
-export type PriceCalculator = (args: {
+export type CalculatorArgs = {
+  tier: number
   recipeIndex: number
   stateRecord: StateRecord
-}) => number
+}
+
+export type ShoppingList = [boolean, boolean, boolean]

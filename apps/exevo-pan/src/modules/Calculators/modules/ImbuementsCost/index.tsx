@@ -12,6 +12,7 @@ import { RECIPES, RecordKeys } from './schema'
 - results
     tooltip with 100% shrine chance
     tooltip with yana dialog
+    total price (with diff)
 */
 
 const ImbuementsCost = () => {
