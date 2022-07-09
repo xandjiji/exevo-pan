@@ -10,3 +10,8 @@ export type RecipeSchema = {
 }
 
 export type StateRecord = Record<string, number>
+
+export type PriceCalculator = (args: {
+  recipeIndex: number
+  stateRecord: StateRecord
+}) => number

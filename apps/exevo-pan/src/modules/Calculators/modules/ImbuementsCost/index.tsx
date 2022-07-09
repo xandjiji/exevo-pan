@@ -5,12 +5,13 @@ import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
 import * as Icons from './icons'
 import { Main, LabeledCard } from '../../components'
-import { RECIPES, RecordKeys, DEFAULT_STATE } from './schema'
+import { RECIPES, RecordKeys } from './schema'
 
 /* @ ToDo:
+- calculator
 - results
     tooltip with 100% shrine chance
-- calculator
+    tooltip with yana dialog
 */
 
 const ImbuementsCost = () => {
@@ -40,11 +41,11 @@ const ImbuementsCost = () => {
           <Select
             label="Tier"
             options={[
-              { name: 'Powerful', value: '2' },
-              { name: 'Intricate', value: '1' },
-              { name: 'Basic', value: '0' },
+              { name: 'Powerful (III)', value: '3' },
+              { name: 'Intricate (II)', value: '2' },
+              { name: 'Basic (I)', value: '1' },
             ]}
-            value={(stateRecord[RecordKeys.tier] ?? DEFAULT_STATE).toString()}
+            value={stateRecord[RecordKeys.tier].toString()}
             onChange={(e) =>
               updateRecord({ [RecordKeys.tier]: +e.target.value })
             }
