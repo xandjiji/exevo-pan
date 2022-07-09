@@ -1,7 +1,18 @@
 import * as Icons from './icons'
-import { Recipe } from './types'
+import { RecipeSchema } from './types'
 
-export const RECIPES: Recipe[] = [
+// eslint-disable-next-line no-shadow
+export enum RecordKeys {
+  goldToken = 'goldToken',
+  tier = 'tier',
+}
+
+export const DEFAULT_STATE = {
+  [RecordKeys.goldToken]: '20,000',
+  [RecordKeys.tier]: '2',
+}
+
+export const RECIPES: RecipeSchema[] = [
   {
     name: 'Vampirism (life leech)',
     materials: [

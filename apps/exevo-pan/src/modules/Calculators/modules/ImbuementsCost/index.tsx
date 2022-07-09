@@ -1,12 +1,10 @@
-/* eslint-disable react/no-array-index-key */
-import { useState } from 'react'
 import { Tabs } from 'components/Atoms'
-import { Select } from 'components/Organisms'
-import { numberWithCommaSeparator } from 'utils'
-import { LabelWrapper, Panel, Input } from './atoms'
+import { Select, ClientComponent } from 'components/Organisms'
+import { LabelWrapper, Input } from './atoms'
+import useStateRecord from './useStateRecord'
 import * as Icons from './icons'
 import { Main, LabeledCard } from '../../components'
-import { RECIPES } from './schema'
+import { RECIPES, RecordKeys } from './schema'
 
 /* @ ToDo:
 - results
@@ -14,38 +12,43 @@ import { RECIPES } from './schema'
 - calculator
 
 - arrow up/down inc/dec
-- useStorageState
+- validate number 0,123
 */
 
 const ImbuementsCost = () => {
-  const [value, setValue] = useState('')
+  const [stateRecord, updateRecord] = useStateRecord()
 
   return (
     <Main>
       <LabeledCard labelText="Configurations">
         <div className="child:max-w-[50%] child:flex-grow flex items-end gap-4">
-          <Input
-            label={
-              <LabelWrapper>
-                <Icons.GoldToken />
-                Gold Token price
-              </LabelWrapper>
-            }
-            inputMode="numeric"
-            placeholder="GP value"
-            defaultValue={20000}
-            mask={numberWithCommaSeparator}
-            noAlert
-          />
+          <ClientComponent>
+            <Input
+              label={
+                <LabelWrapper>
+                  <Icons.GoldToken />
+                  Gold Token price
+                </LabelWrapper>
+              }
+              placeholder="GP value"
+              value={stateRecord[RecordKeys.goldToken] ?? ''}
+              onChange={(e) =>
+                updateRecord({ [RecordKeys.goldToken]: e.target.value })
+              }
+            />
+          </ClientComponent>
 
           <Select
             label="Tier"
             options={[
-              { name: 'Powerful', value: 'powerful' },
-              { name: 'Intricate', value: 'intricate' },
-              { name: 'Basic', value: 'basic' },
+              { name: 'Powerful', value: '2' },
+              { name: 'Intricate', value: '1' },
+              { name: 'Basic', value: '0' },
             ]}
-            defaultValue="powerful"
+            value={stateRecord[RecordKeys.tier] ?? ''}
+            onChange={(e) =>
+              updateRecord({ [RecordKeys.tier]: e.target.value })
+            }
             noAlert
           />
         </div>
@@ -53,20 +56,27 @@ const ImbuementsCost = () => {
 
       <LabeledCard labelText="Imbuements" className="mt-6">
         <Tabs.Group>
-          {RECIPES.map(({ name, materials }, index) => (
-            <Panel key={index} label={name}>
-              {materials.map((material) => (
-                <Input
-                  label={
-                    <LabelWrapper>
-                      <material.icon />
-                      {material.name} price
-                    </LabelWrapper>
-                  }
-                  placeholder="GP value"
-                />
-              ))}
-            </Panel>
+          {RECIPES.map(({ name, materials }) => (
+            <Tabs.Panel key={name} label={name}>
+              <ClientComponent className="grid gap-4 py-2">
+                {materials.map((material) => (
+                  <Input
+                    key={material.name}
+                    label={
+                      <LabelWrapper>
+                        <material.icon />
+                        {material.name} price
+                      </LabelWrapper>
+                    }
+                    placeholder="GP value"
+                    value={stateRecord[material.name] ?? ''}
+                    onChange={(e) =>
+                      updateRecord({ [material.name]: e.target.value })
+                    }
+                  />
+                ))}
+              </ClientComponent>
+            </Tabs.Panel>
           ))}
         </Tabs.Group>
       </LabeledCard>

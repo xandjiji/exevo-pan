@@ -4,7 +4,9 @@ export type Material = {
   icon: () => JSX.Element
 }
 
-export type Recipe = {
+export type RecipeSchema = {
   name: string
-  materials: [Material, Material, Material]
+  materials: Material[]
 }
+
+export type StateRecord = Record<string, string>
