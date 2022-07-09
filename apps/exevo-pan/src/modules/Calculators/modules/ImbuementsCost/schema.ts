@@ -8,8 +8,8 @@ export enum RecordKeys {
 }
 
 export const DEFAULT_STATE = {
-  [RecordKeys.goldToken]: '20,000',
-  [RecordKeys.tier]: '2',
+  [RecordKeys.goldToken]: 20000,
+  [RecordKeys.tier]: 0,
 }
 
 export const RECIPES: RecipeSchema[] = [

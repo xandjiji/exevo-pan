@@ -9,4 +9,4 @@ export type RecipeSchema = {
   materials: Material[]
 }
 
-export type StateRecord = Record<string, string>
+export type StateRecord = Record<string, number>

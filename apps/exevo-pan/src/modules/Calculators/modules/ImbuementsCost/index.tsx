@@ -1,18 +1,19 @@
 import { Tabs } from 'components/Atoms'
 import { Select, ClientComponent } from 'components/Organisms'
-import { LabelWrapper, Input } from './atoms'
+import { LabelWrapper } from './atoms'
 import useStateRecord from './useStateRecord'
+import NumericInput from './NumericInput'
 import * as Icons from './icons'
 import { Main, LabeledCard } from '../../components'
-import { RECIPES, RecordKeys } from './schema'
+import { RECIPES, RecordKeys, DEFAULT_STATE } from './schema'
 
 /* @ ToDo:
+- consertar Select (typedOption?)
 - results
     tooltip with 100% shrine chance
 - calculator
 
 - arrow up/down inc/dec
-- validate number 0,123
 */
 
 const ImbuementsCost = () => {
@@ -23,17 +24,17 @@ const ImbuementsCost = () => {
       <LabeledCard labelText="Configurations">
         <div className="child:max-w-[50%] child:flex-grow flex items-end gap-4">
           <ClientComponent>
-            <Input
+            <NumericInput
               label={
                 <LabelWrapper>
                   <Icons.GoldToken />
                   Gold Token price
                 </LabelWrapper>
               }
-              placeholder="GP value"
-              value={stateRecord[RecordKeys.goldToken] ?? ''}
-              onChange={(e) =>
-                updateRecord({ [RecordKeys.goldToken]: e.target.value })
+              aria-label="Gold Token price"
+              value={stateRecord[RecordKeys.goldToken]}
+              onChange={(value) =>
+                updateRecord({ [RecordKeys.goldToken]: value })
               }
             />
           </ClientComponent>
@@ -45,9 +46,9 @@ const ImbuementsCost = () => {
               { name: 'Intricate', value: '1' },
               { name: 'Basic', value: '0' },
             ]}
-            value={stateRecord[RecordKeys.tier] ?? ''}
+            value={stateRecord[RecordKeys.tier]}
             onChange={(e) =>
-              updateRecord({ [RecordKeys.tier]: e.target.value })
+              updateRecord({ [RecordKeys.tier]: +e.target.value })
             }
             noAlert
           />
@@ -60,7 +61,7 @@ const ImbuementsCost = () => {
             <Tabs.Panel key={name} label={name}>
               <ClientComponent className="grid gap-4 py-2">
                 {materials.map((material) => (
-                  <Input
+                  <NumericInput
                     key={material.name}
                     label={
                       <LabelWrapper>
@@ -68,10 +69,10 @@ const ImbuementsCost = () => {
                         {material.name} price
                       </LabelWrapper>
                     }
-                    placeholder="GP value"
-                    value={stateRecord[material.name] ?? ''}
-                    onChange={(e) =>
-                      updateRecord({ [material.name]: e.target.value })
+                    aria-label={material.name}
+                    value={stateRecord[material.name]}
+                    onChange={(value) =>
+                      updateRecord({ [material.name]: value })
                     }
                   />
                 ))}
