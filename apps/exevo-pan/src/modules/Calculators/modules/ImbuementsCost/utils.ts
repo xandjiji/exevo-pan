@@ -1,10 +1,10 @@
 import { RecordKeys, RECIPES } from './schema'
-import { CalculatorArgs, ShoppingList } from './types'
+import { CalculatorArgs, TokenBuyList } from './types'
 
 const calculate = {
   tokenPrice: ({ tier, stateRecord }: CalculatorArgs): number => {
     const goldTokenPrice = stateRecord[RecordKeys.goldToken]
-    return goldTokenPrice * 2 * (tier + 1)
+    return goldTokenPrice * 2 * tier
   },
   marketPrice: ({ tier, recipeIndex, stateRecord }: CalculatorArgs): number => {
     const { materials } = RECIPES[recipeIndex]
@@ -18,13 +18,13 @@ const calculate = {
   },
 }
 
-export const calculateShoppingList = ({
+export const calculateTokenBuyList = ({
   tier: maxTier,
   ...rest
-}: CalculatorArgs): ShoppingList => {
-  const shoppingList: ShoppingList = [false, false, false]
+}: CalculatorArgs): TokenBuyList => {
+  const shoppingList: TokenBuyList = [true, true, true]
 
-  for (let tierIteration = maxTier; tierIteration > 1; tierIteration -= 1) {
+  for (let tierIteration = maxTier; tierIteration > 0; tierIteration -= 1) {
     const calcArgs: CalculatorArgs = { tier: tierIteration, ...rest }
     const tokenPrice = calculate.tokenPrice(calcArgs)
     const marketPrice = calculate.marketPrice(calcArgs)
@@ -32,7 +32,7 @@ export const calculateShoppingList = ({
     if (tokenPrice <= marketPrice) {
       break
     } else {
-      shoppingList[tierIteration - 1] = true
+      shoppingList[tierIteration - 1] = false
     }
   }
 

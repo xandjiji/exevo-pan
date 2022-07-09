@@ -1,22 +1,34 @@
+import { useState, useCallback, useMemo } from 'react'
 import { Tabs } from 'components/Atoms'
 import { Select, ClientComponent } from 'components/Organisms'
+import { Main, LabeledCard } from '../../components'
 import { LabelWrapper } from './atoms'
 import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
 import * as Icons from './icons'
-import { Main, LabeledCard } from '../../components'
+import { calculateTokenBuyList } from './utils'
 import { RECIPES, RecordKeys } from './schema'
 
 /* @ ToDo:
-- calculator
 - results
     tooltip with 100% shrine chance
     tooltip with yana dialog
-    total price (with diff)
+    total price (incluir shrine chance tax + base tier price) (with diff)
 */
 
 const ImbuementsCost = () => {
+  const [recipeIndex, setRecipeIndex] = useState(0)
   const [stateRecord, updateRecord] = useStateRecord()
+
+  const tokenBuyList = useMemo(
+    () =>
+      calculateTokenBuyList({
+        recipeIndex,
+        stateRecord,
+        tier: stateRecord[RecordKeys.tier],
+      }),
+    [recipeIndex, stateRecord],
+  )
 
   return (
     <Main>
@@ -56,7 +68,10 @@ const ImbuementsCost = () => {
       </LabeledCard>
 
       <LabeledCard labelText="Imbuements" className="mt-6">
-        <Tabs.Group>
+        <Tabs.Group
+          activeIndex={recipeIndex}
+          onChange={useCallback((index) => setRecipeIndex(index), [])}
+        >
           {RECIPES.map(({ name, materials }) => (
             <Tabs.Panel key={name} label={name}>
               <ClientComponent className="grid gap-4 py-2">
