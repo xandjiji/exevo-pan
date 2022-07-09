@@ -1,6 +1,12 @@
 import * as Icons from './icons'
 import { RecipeSchema } from './types'
 
+export const tierOptions: Option[] = [
+  { name: 'Powerful (III)', value: '3' },
+  { name: 'Intricate (II)', value: '2' },
+  { name: 'Basic (I)', value: '1' },
+]
+
 // eslint-disable-next-line no-shadow
 export enum RecordKeys {
   goldToken = 'goldToken',

@@ -7,7 +7,7 @@ import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
 import * as Icons from './icons'
 import { calculateTokenBuyList } from './utils'
-import { RECIPES, RecordKeys } from './schema'
+import { tierOptions, RECIPES, RecordKeys } from './schema'
 
 /* @ ToDo:
 - results
@@ -53,11 +53,7 @@ const ImbuementsCost = () => {
 
           <Select
             label="Tier"
-            options={[
-              { name: 'Powerful (III)', value: '3' },
-              { name: 'Intricate (II)', value: '2' },
-              { name: 'Basic (I)', value: '1' },
-            ]}
+            options={tierOptions}
             value={stateRecord[RecordKeys.tier].toString()}
             onChange={(e) =>
               updateRecord({ [RecordKeys.tier]: +e.target.value })
