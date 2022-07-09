@@ -11,8 +11,6 @@ import { RECIPES, RecordKeys, DEFAULT_STATE } from './schema'
 - results
     tooltip with 100% shrine chance
 - calculator
-
-- arrow up/down inc/dec
 */
 
 const ImbuementsCost = () => {
@@ -31,6 +29,7 @@ const ImbuementsCost = () => {
                 </LabelWrapper>
               }
               aria-label="Gold Token price"
+              step={1000}
               value={stateRecord[RecordKeys.goldToken]}
               onChange={(value) =>
                 updateRecord({ [RecordKeys.goldToken]: value })
