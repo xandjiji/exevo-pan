@@ -1,9 +1,6 @@
 export type SummaryProps = {
   pointsRequired: number
 }
-export type TypedOption<T> = {
-  value: T
-} & Omit<Option, 'value'>
 
 export type ExerciseWeapon = 'regular' | 'durable' | 'lasting'
 

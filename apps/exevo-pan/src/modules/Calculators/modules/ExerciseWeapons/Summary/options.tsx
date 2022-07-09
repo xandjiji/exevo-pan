@@ -1,4 +1,4 @@
-import { TypedOption, WeaponOption } from './types'
+import { WeaponOption } from './types'
 
 export const weaponOptions: TypedOption<WeaponOption>[] = [
   {
