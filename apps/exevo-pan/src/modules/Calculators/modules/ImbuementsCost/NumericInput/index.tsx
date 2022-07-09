@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 import { useState, useCallback } from 'react'
 import { Input } from 'components/Atoms'
-import { numberWithCommaSeparator, clampValue } from 'utils'
+import { numberWithCommaSeparator } from 'utils'
 import { parseValue } from './utils'
 import { NumericInputProps } from './types'
 
