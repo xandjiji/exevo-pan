@@ -1,4 +1,12 @@
-import * as Icons from './icons'
+import vampireteethSrc from 'assets/vampireTeeth.png'
+import bloodypincersSrc from 'assets/bloodyPincers.png'
+import deadbrainSrc from 'assets/deadBrain.png'
+import ropebeltSrc from 'assets/ropeBelt.png'
+import silencerclawsSrc from 'assets/silencerClaws.png'
+import grimeleechSrc from 'assets/grimeleech.png'
+import protectivecharmSrc from 'assets/protectiveCharm.png'
+import sabretoothSrc from 'assets/sabretooth.png'
+import vexclawtalonSrc from 'assets/vexclawTalon.png'
 import { RecipeSchema } from './types'
 
 export const tierOptions: Option[] = [
@@ -25,17 +33,17 @@ export const RECIPES: RecipeSchema[] = [
       {
         name: 'Vampire Teeth',
         amount: 25,
-        icon: Icons.VampireTeeth,
+        src: vampireteethSrc,
       },
       {
         name: 'Bloody Pincers',
         amount: 15,
-        icon: Icons.BloodyPincers,
+        src: bloodypincersSrc,
       },
       {
         name: 'Piece of Dead Brain',
         amount: 5,
-        icon: Icons.PieceOfDeadBrain,
+        src: deadbrainSrc,
       },
     ],
   },
@@ -45,17 +53,17 @@ export const RECIPES: RecipeSchema[] = [
       {
         name: 'Rope Belts',
         amount: 25,
-        icon: Icons.RopeBelt,
+        src: ropebeltSrc,
       },
       {
         name: 'Silencer Claws',
         amount: 25,
-        icon: Icons.SilencerClaws,
+        src: silencerclawsSrc,
       },
       {
         name: 'Grimeleech Wings',
         amount: 5,
-        icon: Icons.GrimeleechWings,
+        src: grimeleechSrc,
       },
     ],
   },
@@ -65,17 +73,17 @@ export const RECIPES: RecipeSchema[] = [
       {
         name: 'Protective Charms',
         amount: 20,
-        icon: Icons.ProtectiveCharm,
+        src: protectivecharmSrc,
       },
       {
         name: 'Sabretooth',
         amount: 25,
-        icon: Icons.Sabretooth,
+        src: sabretoothSrc,
       },
       {
         name: 'Vexclaw Talons',
         amount: 5,
-        icon: Icons.VexclawTalon,
+        src: vexclawtalonSrc,
       },
     ],
   },

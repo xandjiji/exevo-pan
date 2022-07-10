@@ -1,7 +1,7 @@
 export type Material = {
+  src: StaticImageData
   name: string
   amount: number
-  icon: () => JSX.Element
 }
 
 export type RecipeSchema = {

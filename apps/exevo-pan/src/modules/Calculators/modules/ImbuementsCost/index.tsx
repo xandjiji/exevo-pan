@@ -1,12 +1,7 @@
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { Tabs, Text } from 'components/Atoms'
-import {
-  Select,
-  ClientComponent,
-  Tooltip,
-  InfoTooltip,
-} from 'components/Organisms'
+import { Select, ClientComponent, InfoTooltip } from 'components/Organisms'
 import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
 import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
@@ -86,13 +81,7 @@ const ImbuementsCost = () => {
 
                   return (
                     <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
-                      <Tooltip
-                        content={`${material.amount}x ${material.name}`}
-                        placement="left"
-                        offset={[0, 8]}
-                      >
-                        <material.icon />
-                      </Tooltip>
+                      <Icons.Material {...material} />
                       <NumericInput
                         key={material.name}
                         label={`${material.name} price`}
@@ -101,7 +90,7 @@ const ImbuementsCost = () => {
                         onChange={(value) =>
                           updateRecord({ [material.name]: value })
                         }
-                        className={clsx('flex-grow', styles.numericInput)}
+                        className={clsx('ml-2 flex-grow', styles.numericInput)}
                       />
                       <Icons.Market
                         highlight={usedInCurrentTier && !shouldBuyWithToken}
