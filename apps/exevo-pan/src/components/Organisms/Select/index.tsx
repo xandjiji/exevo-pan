@@ -157,11 +157,13 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             onKeyDown={disabled ? undefined : handleKeyboard}
             onKeyPress={disabled ? undefined : handleSearch}
             className={clsx(
-              'text-tsm text-onSurface border-1 group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
+              'text-tsm border-1 group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
               error
                 ? 'border-red'
                 : 'border-separator focus-within:border-primary',
-              disabled ? 'bg-separator pointer-events-none' : 'bg-surface',
+              disabled
+                ? 'text-onSurface/50 bg-separator/50 pointer-events-none'
+                : 'text-onSurface bg-surface',
             )}
             {...props}
           >

@@ -73,7 +73,7 @@ const Input = (
         className={clsx(
           'border-1 flex w-full cursor-text items-center rounded-md border-solid transition-colors',
           error ? 'border-red' : 'border-separator focus-within:border-primary',
-          disabled ? 'bg-separator' : 'bg-surface',
+          disabled ? 'bg-separator/50' : 'bg-surface',
         )}
         onClick={() => innerRef.current?.focus()}
       >
@@ -86,10 +86,10 @@ const Input = (
           aria-errormessage={error ? errorId : undefined}
           autoComplete="off"
           className={clsx(
-            'text-tsm text-onSurface w-full border-none bg-transparent py-2.5 px-4 outline-none transition-all',
+            'text-tsm w-full border-none bg-transparent py-2.5 px-4 outline-none transition-all',
             disabled
-              ? 'placeholder:text-onSurface/50'
-              : 'placeholder:text-separator',
+              ? 'text-onSurface/50 placeholder:text-onSurface/50'
+              : 'text-onSurface placeholder:text-separator',
           )}
           style={{ paddingRight: isClearButtonActive ? 0 : undefined }}
           disabled={disabled}
