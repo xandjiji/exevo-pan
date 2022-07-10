@@ -6,6 +6,7 @@ import {
   Children,
   isValidElement,
   cloneElement,
+  useRef,
 } from 'react'
 import clsx from 'clsx'
 import useIds from './useIds'
@@ -39,14 +40,14 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
       [onChange],
     )
 
+    const tablistRef = useRef<HTMLDivElement>(null)
     useEffect(() => {
-      const activeTab = document.getElementById(getTabId(activeIndex))
+      const activeTab = tablistRef.current?.children[activeIndex]
 
       if (activeTab) {
-        const { offsetLeft, parentElement } = activeTab
-        parentElement?.scroll({ left: offsetLeft, behavior: 'smooth' })
+        activeTab.scrollIntoView({ behavior: 'smooth' })
       }
-    }, [activeIndex, getTabId])
+    }, [activeIndex])
 
     return (
       <div
@@ -55,6 +56,7 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
         ref={ref}
       >
         <div
+          ref={tablistRef}
           role="tablist"
           aria-label={ariaLabelProp}
           className="custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
