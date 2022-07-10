@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import { useState, useCallback } from 'react'
 import { Input } from 'components/Atoms'
 import { formatNumberWithCommas } from 'utils'

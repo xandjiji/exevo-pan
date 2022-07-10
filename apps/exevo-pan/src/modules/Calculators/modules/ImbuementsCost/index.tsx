@@ -1,4 +1,5 @@
 import { useState, useCallback, useMemo } from 'react'
+import clsx from 'clsx'
 import { Tabs } from 'components/Atoms'
 import { Select, ClientComponent } from 'components/Organisms'
 import { Main, LabeledCard } from '../../components'
@@ -8,6 +9,7 @@ import NumericInput from './NumericInput'
 import * as Icons from './icons'
 import { calculateTokenBuyList } from './utils'
 import { tierOptions, RECIPES, RecordKeys } from './schema'
+import styles from './styles.module.css'
 
 /* @ ToDo:
 - results
@@ -72,20 +74,18 @@ const ImbuementsCost = () => {
             <Tabs.Panel key={name} label={name}>
               <ClientComponent className="grid gap-4 py-2">
                 {materials.map((material) => (
-                  <NumericInput
-                    key={material.name}
-                    label={
-                      <LabelWrapper>
-                        <material.icon />
-                        {material.name} price
-                      </LabelWrapper>
-                    }
-                    aria-label={material.name}
-                    value={stateRecord[material.name]}
-                    onChange={(value) =>
-                      updateRecord({ [material.name]: value })
-                    }
-                  />
+                  <div className="child:shrink-0 flex items-end gap-2">
+                    <material.icon />
+                    <NumericInput
+                      key={material.name}
+                      label={`${material.name} price`}
+                      value={stateRecord[material.name]}
+                      onChange={(value) =>
+                        updateRecord({ [material.name]: value })
+                      }
+                      className={clsx('flex-grow', styles.numericInput)}
+                    />
+                  </div>
                 ))}
               </ClientComponent>
             </Tabs.Panel>

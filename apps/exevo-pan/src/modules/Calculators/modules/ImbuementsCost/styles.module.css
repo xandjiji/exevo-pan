@@ -1,0 +1,7 @@
+.numericInput label {
+  @apply mb-1 text-xs;
+}
+
+.numericInput input {
+  @apply py-2 px-3;
+}

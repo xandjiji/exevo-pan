@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { SpritePortrait } from 'components/Atoms'
 import goldTokenSrc from 'assets/goldToken.png'
 import ropebeltSrc from 'assets/ropeBelt.png'
 import silencerclawsSrc from 'assets/silencerClaws.png'
@@ -15,41 +16,85 @@ export const GoldToken = () => (
 )
 
 export const RopeBelt = () => (
-  <Image src={ropebeltSrc} width={11} height={12} alt="Rope Belt" />
+  <SpritePortrait
+    src={ropebeltSrc}
+    width={32}
+    height={32}
+    title="Rope Belt"
+    alt="Rope Belt"
+  />
 )
 export const SilencerClaws = () => (
-  <Image src={silencerclawsSrc} width={11} height={12} alt="Silencer Claws" />
+  <SpritePortrait
+    src={silencerclawsSrc}
+    width={32}
+    height={32}
+    title="Silencer Claws"
+    alt="Silencer Claws"
+  />
 )
 export const GrimeleechWings = () => (
-  <Image
+  <SpritePortrait
     src={grimeleechSrc}
-    width={12}
-    height={12}
+    width={32}
+    height={32}
+    title="Some Grimeleech Wings"
     alt="Some Grimeleech Wings"
   />
 )
 
 export const VampireTeeth = () => (
-  <Image src={vampireteethSrc} width={12} height={12} alt="Vampire Teeth" />
+  <SpritePortrait
+    src={vampireteethSrc}
+    width={32}
+    height={32}
+    title="Vampire Teeth"
+    alt="Vampire Teeth"
+  />
 )
 export const BloodyPincers = () => (
-  <Image src={bloodypincersSrc} width={12} height={9} alt="Bloody Pincers" />
+  <SpritePortrait
+    src={bloodypincersSrc}
+    width={32}
+    height={32}
+    title="Bloody Pincers"
+    alt="Bloody Pincers"
+  />
 )
 export const PieceOfDeadBrain = () => (
-  <Image src={deadbrainSrc} width={12} height={10} alt="Piece of Dead Brain" />
+  <SpritePortrait
+    src={deadbrainSrc}
+    width={32}
+    height={32}
+    title="Piece of Dead Brain"
+    alt="Piece of Dead Brain"
+  />
 )
 
 export const ProtectiveCharm = () => (
-  <Image
+  <SpritePortrait
     src={protectivecharmSrc}
-    width={6}
-    height={12}
+    width={32}
+    height={32}
+    title="Protective Charm"
     alt="Protective Charm"
   />
 )
 export const Sabretooth = () => (
-  <Image src={sabretoothSrc} width={7} height={12} alt="Sabretooth" />
+  <SpritePortrait
+    src={sabretoothSrc}
+    width={32}
+    height={32}
+    title="Sabretooth"
+    alt="Sabretooth"
+  />
 )
 export const VexclawTalon = () => (
-  <Image src={vexclawtalonSrc} width={11} height={12} alt="Vexclaw Talon" />
+  <SpritePortrait
+    src={vexclawtalonSrc}
+    width={32}
+    height={32}
+    title="Vexclaw Talon"
+    alt="Vexclaw Talon"
+  />
 )
