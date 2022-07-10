@@ -7,10 +7,10 @@ import {
   Tooltip,
   InfoTooltip,
 } from 'components/Organisms'
-import { formatNumberWithCommas } from 'utils'
 import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
 import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
+import CostComparison from './CostComparison'
 import * as Icons from './icons'
 import { calculateShoppingList } from './utils'
 import { tierOptions, RECIPES, RecordKeys } from './schema'
@@ -18,8 +18,8 @@ import styles from './styles.module.css'
 
 /* @ ToDo:
 - results
-    place items flex end
-    componentize diffs
+    diff color
+    add market e token sprite icon?
 - i18n (incluir GP Value) (incluir Market e GoldToken titles)
 */
 
@@ -38,9 +38,6 @@ const ImbuementsCost = () => {
   )
 
   const currentTier = stateRecord[RecordKeys.tier]
-
-  const getPriceDiff = (cost: number) =>
-    `(${formatNumberWithCommas(efficientCost - cost)}gp difference)`
 
   return (
     <Main>
@@ -132,22 +129,28 @@ const ImbuementsCost = () => {
               className="h-3 w-3"
               content={
                 <span className="grid gap-2 whitespace-nowrap">
-                  <div className="grid grid-cols-2 items-center gap-6">
-                    <div className="grid gap-1">
-                      <strong>Tokens only:</strong>
-                      <Text.GoldCoin value={tokenCost} />
-                      <small className="text-red">
-                        {getPriceDiff(tokenCost)}
-                      </small>
-                    </div>
+                  <div className="grid grid-cols-2 gap-8">
+                    <CostComparison
+                      title={
+                        <>
+                          <Icons.LabelGoldToken />
+                          Gold Tokens only:
+                        </>
+                      }
+                      cost={tokenCost}
+                      compareTo={efficientCost}
+                    />
 
-                    <div className="grid gap-1">
-                      <strong>Market only:</strong>
-                      <Text.GoldCoin value={marketCost} />
-                      <small className="text-red">
-                        {getPriceDiff(marketCost)}
-                      </small>
-                    </div>
+                    <CostComparison
+                      title={
+                        <>
+                          <Icons.LabelGoldToken />
+                          Market only:
+                        </>
+                      }
+                      cost={marketCost}
+                      compareTo={efficientCost}
+                    />
                   </div>
 
                   <small className="mt-4">
