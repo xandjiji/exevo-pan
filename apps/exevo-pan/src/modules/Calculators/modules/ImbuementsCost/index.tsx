@@ -12,7 +12,6 @@ import { tierOptions, RECIPES, RecordKeys } from './schema'
 import styles from './styles.module.css'
 
 /* @ ToDo:
-- disable button
 - results
     tooltip 25x recipe
     tooltip buy with
@@ -32,6 +31,8 @@ const ImbuementsCost = () => {
       }),
     [recipeIndex, stateRecord],
   )
+
+  const currentTier = stateRecord[RecordKeys.tier]
 
   return (
     <Main>
@@ -57,7 +58,7 @@ const ImbuementsCost = () => {
           <Select
             label="Tier"
             options={tierOptions}
-            value={stateRecord[RecordKeys.tier].toString()}
+            value={currentTier.toString()}
             onChange={(e) =>
               updateRecord({ [RecordKeys.tier]: +e.target.value })
             }
@@ -79,6 +80,7 @@ const ImbuementsCost = () => {
               <ClientComponent className="grid gap-4 py-2">
                 {materials.map((material, materialIndex) => {
                   const shouldBuyWithToken = tokenBuyList[materialIndex]
+                  const usedInCurrentTier = materialIndex < currentTier
 
                   return (
                     <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
@@ -86,14 +88,19 @@ const ImbuementsCost = () => {
                       <NumericInput
                         key={material.name}
                         label={`${material.name} price`}
+                        disabled={!usedInCurrentTier}
                         value={stateRecord[material.name]}
                         onChange={(value) =>
                           updateRecord({ [material.name]: value })
                         }
                         className={clsx('flex-grow', styles.numericInput)}
                       />
-                      <Icons.Market highlight={!shouldBuyWithToken} />
-                      <Icons.GoldToken highlight={shouldBuyWithToken} />
+                      <Icons.Market
+                        highlight={usedInCurrentTier && !shouldBuyWithToken}
+                      />
+                      <Icons.GoldToken
+                        highlight={usedInCurrentTier && shouldBuyWithToken}
+                      />
                     </div>
                   )
                 })}
