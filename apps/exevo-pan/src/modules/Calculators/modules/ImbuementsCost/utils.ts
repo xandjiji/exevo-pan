@@ -1,5 +1,5 @@
-import { RecordKeys, RECIPES } from './schema'
-import { CalculatorArgs, TokenBuyList } from './types'
+import { RecordKeys, RECIPES, tierBasePrice } from './schema'
+import { CalculatorArgs, ShoppingList, EfficientCostArgs } from './types'
 
 const calculate = {
   tokenPrice: ({ tier, stateRecord }: CalculatorArgs): number => {
@@ -16,13 +16,34 @@ const calculate = {
 
     return cost
   },
+  efficientPrice: ({
+    tier,
+    recipeIndex,
+    stateRecord,
+    tokenBuyList,
+  }: EfficientCostArgs): number => {
+    const { materials } = RECIPES[recipeIndex]
+    const goldTokenPrice = stateRecord[RecordKeys.goldToken]
+
+    let efficientCost = 0
+    tokenBuyList.forEach((tierWillBeBoughtWithTokens, materialIndex) => {
+      if (materialIndex + 1 > tier) return
+
+      const material = materials[materialIndex]
+      efficientCost += tierWillBeBoughtWithTokens
+        ? goldTokenPrice * 2
+        : (stateRecord[material.name] ?? 0) * material.amount
+    })
+
+    return efficientCost
+  },
 }
 
-export const calculateTokenBuyList = ({
+export const calculateShoppingList = ({
   tier: maxTier,
   ...rest
-}: CalculatorArgs): TokenBuyList => {
-  const shoppingList: TokenBuyList = [true, true, true]
+}: CalculatorArgs): ShoppingList => {
+  const tokenBuyList = [true, true, true]
 
   for (let tierIteration = maxTier; tierIteration > 0; tierIteration -= 1) {
     const calcArgs: CalculatorArgs = { tier: tierIteration, ...rest }
@@ -32,9 +53,18 @@ export const calculateTokenBuyList = ({
     if (tokenPrice <= marketPrice) {
       break
     } else {
-      shoppingList[tierIteration - 1] = false
+      tokenBuyList[tierIteration - 1] = false
     }
   }
 
-  return shoppingList
+  const fullCalcArgs = { tier: maxTier, ...rest }
+  const basePrice = tierBasePrice[maxTier]
+
+  return {
+    efficientCost:
+      calculate.efficientPrice({ ...fullCalcArgs, tokenBuyList }) + basePrice,
+    tokenCost: calculate.tokenPrice(fullCalcArgs) + basePrice,
+    marketCost: calculate.marketPrice(fullCalcArgs) + basePrice,
+    tokenBuyList,
+  }
 }

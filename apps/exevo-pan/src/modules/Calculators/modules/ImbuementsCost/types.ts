@@ -17,7 +17,18 @@ export type CalculatorArgs = {
   stateRecord: StateRecord
 }
 
-export type TokenBuyList = boolean[]
+type TokenBuyList = boolean[]
+
+export type EfficientCostArgs = {
+  tokenBuyList: TokenBuyList
+} & CalculatorArgs
+
+export type ShoppingList = {
+  efficientCost: number
+  tokenCost: number
+  marketCost: number
+  tokenBuyList: TokenBuyList
+}
 
 export type BuyIconProps = {
   highlight: boolean

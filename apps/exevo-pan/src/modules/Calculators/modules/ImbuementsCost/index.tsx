@@ -1,30 +1,33 @@
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
-import { Tabs } from 'components/Atoms'
-import { Select, ClientComponent, Tooltip } from 'components/Organisms'
-import { Main, LabeledCard } from '../../components'
-import { LabelWrapper } from './atoms'
+import { Tabs, Text } from 'components/Atoms'
+import {
+  Select,
+  ClientComponent,
+  Tooltip,
+  InfoTooltip,
+} from 'components/Organisms'
+import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
 import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
 import * as Icons from './icons'
-import { calculateTokenBuyList } from './utils'
+import { calculateShoppingList } from './utils'
 import { tierOptions, RECIPES, RecordKeys } from './schema'
 import styles from './styles.module.css'
 
 /* @ ToDo:
 - results
-    tooltip buy with
     total price (incluir shrine chance tax + base tier price) (with diff)
-- i18n (incluir GP Value)
+- i18n (incluir GP Value) (incluir Market e GoldToken titles)
 */
 
 const ImbuementsCost = () => {
   const [recipeIndex, setRecipeIndex] = useState(0)
   const [stateRecord, updateRecord] = useStateRecord()
 
-  const tokenBuyList = useMemo(
+  const { efficientCost, tokenBuyList } = useMemo(
     () =>
-      calculateTokenBuyList({
+      calculateShoppingList({
         recipeIndex,
         stateRecord,
         tier: stateRecord[RecordKeys.tier],
@@ -41,10 +44,10 @@ const ImbuementsCost = () => {
           <ClientComponent className="w-full">
             <NumericInput
               label={
-                <LabelWrapper>
+                <div className="flex items-center gap-1">
                   <Icons.LabelGoldToken />
                   Gold Token price
-                </LabelWrapper>
+                </div>
               }
               aria-label="Gold Token price"
               step={1000}
@@ -114,6 +117,25 @@ const ImbuementsCost = () => {
             </Tabs.Panel>
           ))}
         </Tabs.Group>
+
+        <Spacer />
+
+        <Group>
+          <div className="flex items-center gap-1">
+            <strong>Total cost</strong>
+            <InfoTooltip
+              className="h-3 w-3"
+              content={
+                <span className="whitespace-nowrap">
+                  Includes: base price + 100% success fee
+                </span>
+              }
+            />
+          </div>
+          <Chip>
+            <Text.GoldCoin value={efficientCost} />
+          </Chip>
+        </Group>
       </LabeledCard>
     </Main>
   )

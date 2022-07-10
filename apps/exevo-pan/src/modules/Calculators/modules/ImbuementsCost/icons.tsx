@@ -99,7 +99,6 @@ export const Market = ({ highlight }: BuyIconProps) => (
     src={marketSrc}
     width={32}
     height={32}
-    title="Market"
     alt="Market"
     className={clsx('transition-all', !highlight && 'opacity-25')}
   />
