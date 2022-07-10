@@ -2,6 +2,7 @@ import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { Tabs, Text } from 'components/Atoms'
 import { Select, ClientComponent, InfoTooltip } from 'components/Organisms'
+import { blurOnEnter } from 'utils'
 import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
 import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
@@ -78,6 +79,7 @@ const ImbuementsCost = () => {
                 {materials.map((material, materialIndex) => {
                   const shouldBuyWithToken = tokenBuyList[materialIndex]
                   const usedInCurrentTier = materialIndex < currentTier
+                  const isLastField = materialIndex + 1 === currentTier
 
                   return (
                     <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
@@ -90,6 +92,8 @@ const ImbuementsCost = () => {
                         onChange={(value) =>
                           updateRecord({ [material.name]: value })
                         }
+                        onKeyPress={isLastField ? blurOnEnter : undefined}
+                        enterKeyHint={isLastField ? 'done' : 'next'}
                         className={clsx('ml-2 flex-grow', styles.numericInput)}
                       />
                       <Icons.Market
