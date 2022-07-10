@@ -1,5 +1,9 @@
+.numericInput {
+  @apply shrink;
+}
+
 .numericInput label {
-  @apply mb-1 text-xs;
+  @apply mb-1 whitespace-nowrap text-xs;
 }
 
 .numericInput input {

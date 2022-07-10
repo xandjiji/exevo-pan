@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { SpritePortrait } from 'components/Atoms'
-import goldTokenSrc from 'assets/goldToken.png'
+import smallGoldTokenSrc from 'assets/labelGoldToken.png'
 import ropebeltSrc from 'assets/ropeBelt.png'
 import silencerclawsSrc from 'assets/silencerClaws.png'
 import grimeleechSrc from 'assets/grimeleech.png'
@@ -10,9 +10,11 @@ import deadbrainSrc from 'assets/deadBrain.png'
 import protectivecharmSrc from 'assets/protectiveCharm.png'
 import sabretoothSrc from 'assets/sabretooth.png'
 import vexclawtalonSrc from 'assets/vexclawTalon.png'
+import goldTokenSrc from 'assets/goldToken.png'
+import marketSrc from 'assets/market.png'
 
-export const GoldToken = () => (
-  <Image src={goldTokenSrc} width={12} height={12} alt="Gold Token" />
+export const LabelGoldToken = () => (
+  <Image src={smallGoldTokenSrc} width={12} height={12} alt="Gold Token" />
 )
 
 export const RopeBelt = () => (
@@ -96,5 +98,25 @@ export const VexclawTalon = () => (
     height={32}
     title="Vexclaw Talon"
     alt="Vexclaw Talon"
+  />
+)
+
+export const GoldToken = () => (
+  <SpritePortrait
+    src={goldTokenSrc}
+    width={32}
+    height={32}
+    title="Gold Token"
+    alt="Gold Token"
+  />
+)
+
+export const Market = () => (
+  <SpritePortrait
+    src={marketSrc}
+    width={32}
+    height={32}
+    title="Market"
+    alt="Market"
   />
 )

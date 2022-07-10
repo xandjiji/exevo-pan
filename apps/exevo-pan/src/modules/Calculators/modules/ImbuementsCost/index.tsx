@@ -40,7 +40,7 @@ const ImbuementsCost = () => {
             <NumericInput
               label={
                 <LabelWrapper>
-                  <Icons.GoldToken />
+                  <Icons.LabelGoldToken />
                   Gold Token price
                 </LabelWrapper>
               }
@@ -70,10 +70,14 @@ const ImbuementsCost = () => {
           onChange={useCallback((index) => setRecipeIndex(index), [])}
         >
           {RECIPES.map(({ name, materials }) => (
-            <Tabs.Panel key={name} label={name}>
+            <Tabs.Panel
+              key={name}
+              label={name}
+              className="overflow-auto sm:overflow-visible"
+            >
               <ClientComponent className="grid gap-4 py-2">
                 {materials.map((material) => (
-                  <div className="child:shrink-0 flex items-end gap-2">
+                  <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
                     <material.icon />
                     <NumericInput
                       key={material.name}
@@ -84,6 +88,8 @@ const ImbuementsCost = () => {
                       }
                       className={clsx('flex-grow', styles.numericInput)}
                     />
+                    <Icons.Market />
+                    <Icons.GoldToken />
                   </div>
                 ))}
               </ClientComponent>
