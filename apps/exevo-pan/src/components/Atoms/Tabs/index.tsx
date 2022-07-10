@@ -9,6 +9,7 @@ import {
   useRef,
 } from 'react'
 import clsx from 'clsx'
+import { useIsMounted } from 'hooks'
 import useIds from './useIds'
 import styles from './styles.module.css'
 import { TabsProps, PanelProps } from './types'
@@ -41,7 +42,9 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
     )
 
     const tablistRef = useRef<HTMLDivElement>(null)
+    const isMounted = useIsMounted()
     useEffect(() => {
+      if (!isMounted) return
       const activeTab = tablistRef.current?.children[activeIndex]
 
       if (activeTab) {
