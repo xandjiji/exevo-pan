@@ -17,4 +17,8 @@ export type CalculatorArgs = {
   stateRecord: StateRecord
 }
 
-export type TokenBuyList = [boolean, boolean, boolean]
+export type TokenBuyList = boolean[]
+
+export type BuyIconProps = {
+  highlight: boolean
+}

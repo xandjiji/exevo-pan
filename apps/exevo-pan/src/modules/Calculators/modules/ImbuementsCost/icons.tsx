@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import clsx from 'clsx'
 import { SpritePortrait } from 'components/Atoms'
 import smallGoldTokenSrc from 'assets/labelGoldToken.png'
 import ropebeltSrc from 'assets/ropeBelt.png'
@@ -12,6 +13,7 @@ import sabretoothSrc from 'assets/sabretooth.png'
 import vexclawtalonSrc from 'assets/vexclawTalon.png'
 import goldTokenSrc from 'assets/goldToken.png'
 import marketSrc from 'assets/market.png'
+import { BuyIconProps } from './types'
 
 export const LabelGoldToken = () => (
   <Image src={smallGoldTokenSrc} width={12} height={12} alt="Gold Token" />
@@ -101,22 +103,24 @@ export const VexclawTalon = () => (
   />
 )
 
-export const GoldToken = () => (
+export const GoldToken = ({ highlight }: BuyIconProps) => (
   <SpritePortrait
     src={goldTokenSrc}
     width={32}
     height={32}
     title="Gold Token"
     alt="Gold Token"
+    className={clsx('transition-all', !highlight && 'opacity-25')}
   />
 )
 
-export const Market = () => (
+export const Market = ({ highlight }: BuyIconProps) => (
   <SpritePortrait
     src={marketSrc}
     width={32}
     height={32}
     title="Market"
     alt="Market"
+    className={clsx('transition-all', !highlight && 'opacity-25')}
   />
 )

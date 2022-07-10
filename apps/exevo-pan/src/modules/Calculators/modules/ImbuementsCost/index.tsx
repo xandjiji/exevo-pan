@@ -12,9 +12,10 @@ import { tierOptions, RECIPES, RecordKeys } from './schema'
 import styles from './styles.module.css'
 
 /* @ ToDo:
+- disable button
 - results
-    tooltip with 100% shrine chance
-    tooltip with yana dialog
+    tooltip 25x recipe
+    tooltip buy with
     total price (incluir shrine chance tax + base tier price) (with diff)
 */
 
@@ -76,22 +77,26 @@ const ImbuementsCost = () => {
               className="overflow-auto sm:overflow-visible"
             >
               <ClientComponent className="grid gap-4 py-2">
-                {materials.map((material) => (
-                  <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
-                    <material.icon />
-                    <NumericInput
-                      key={material.name}
-                      label={`${material.name} price`}
-                      value={stateRecord[material.name]}
-                      onChange={(value) =>
-                        updateRecord({ [material.name]: value })
-                      }
-                      className={clsx('flex-grow', styles.numericInput)}
-                    />
-                    <Icons.Market />
-                    <Icons.GoldToken />
-                  </div>
-                ))}
+                {materials.map((material, materialIndex) => {
+                  const shouldBuyWithToken = tokenBuyList[materialIndex]
+
+                  return (
+                    <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
+                      <material.icon />
+                      <NumericInput
+                        key={material.name}
+                        label={`${material.name} price`}
+                        value={stateRecord[material.name]}
+                        onChange={(value) =>
+                          updateRecord({ [material.name]: value })
+                        }
+                        className={clsx('flex-grow', styles.numericInput)}
+                      />
+                      <Icons.Market highlight={!shouldBuyWithToken} />
+                      <Icons.GoldToken highlight={shouldBuyWithToken} />
+                    </div>
+                  )
+                })}
               </ClientComponent>
             </Tabs.Panel>
           ))}
