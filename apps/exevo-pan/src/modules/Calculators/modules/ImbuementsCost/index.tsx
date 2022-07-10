@@ -17,8 +17,6 @@ import { tierOptions, RECIPES, RecordKeys } from './schema'
 import styles from './styles.module.css'
 
 /* @ ToDo:
-- results
-    add market e token sprite icon?
 - i18n (incluir GP Value) (incluir Market e GoldToken titles)
 */
 
@@ -46,7 +44,7 @@ const ImbuementsCost = () => {
             <NumericInput
               label={
                 <div className="flex items-center gap-1">
-                  <Icons.LabelGoldToken />
+                  <Icons.Label.GoldToken />
                   Gold Token price
                 </div>
               }
@@ -132,7 +130,7 @@ const ImbuementsCost = () => {
                     <CostComparison
                       title={
                         <>
-                          <Icons.LabelGoldToken />
+                          <Icons.Label.GoldToken />
                           Gold Tokens only:
                         </>
                       }
@@ -143,7 +141,7 @@ const ImbuementsCost = () => {
                     <CostComparison
                       title={
                         <>
-                          <Icons.LabelGoldToken />
+                          <Icons.Label.Market />
                           Market only:
                         </>
                       }

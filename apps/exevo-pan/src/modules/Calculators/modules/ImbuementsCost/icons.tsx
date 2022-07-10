@@ -2,6 +2,7 @@ import Image from 'next/image'
 import clsx from 'clsx'
 import { SpritePortrait } from 'components/Atoms'
 import smallGoldTokenSrc from 'assets/labelGoldToken.png'
+import smallMarketSrc from 'assets/labelMarket.png'
 import ropebeltSrc from 'assets/ropeBelt.png'
 import silencerclawsSrc from 'assets/silencerClaws.png'
 import grimeleechSrc from 'assets/grimeleech.png'
@@ -15,9 +16,14 @@ import goldTokenSrc from 'assets/goldToken.png'
 import marketSrc from 'assets/market.png'
 import { BuyIconProps } from './types'
 
-export const LabelGoldToken = () => (
-  <Image src={smallGoldTokenSrc} width={12} height={12} alt="Gold Token" />
-)
+export const Label = {
+  GoldToken: () => (
+    <Image src={smallGoldTokenSrc} width={12} height={12} alt="Gold Token" />
+  ),
+  Market: () => (
+    <Image src={smallMarketSrc} width={12} height={12} alt="Market" />
+  ),
+}
 
 export const RopeBelt = () => (
   <SpritePortrait src={ropebeltSrc} width={32} height={32} alt="Rope Belt" />
