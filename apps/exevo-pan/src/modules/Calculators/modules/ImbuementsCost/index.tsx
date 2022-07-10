@@ -34,7 +34,7 @@ const ImbuementsCost = () => {
 
   return (
     <Main>
-      <LabeledCard labelText="Configurations">
+      <LabeledCard labelText="Price configurations">
         <div className="child:max-w-[50%] child:flex-grow flex items-end gap-4">
           <ClientComponent>
             <NumericInput
@@ -63,9 +63,7 @@ const ImbuementsCost = () => {
             noAlert
           />
         </div>
-      </LabeledCard>
 
-      <LabeledCard labelText="Imbuements" className="mt-6">
         <Tabs.Group
           activeIndex={recipeIndex}
           onChange={useCallback((index) => setRecipeIndex(index), [])}
