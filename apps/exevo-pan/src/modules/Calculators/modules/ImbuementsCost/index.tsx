@@ -18,7 +18,6 @@ import styles from './styles.module.css'
 
 /* @ ToDo:
 - results
-    diff color
     add market e token sprite icon?
 - i18n (incluir GP Value) (incluir Market e GoldToken titles)
 */
