@@ -194,7 +194,7 @@ const CharacterModal = ({
             </S.Section>
 
             <Tabs.Group
-              className="min-h-[var(--gridMobileHeight)] md:min-h-[unset]"
+              className="bg-surface min-h-[var(--gridMobileHeight)] overflow-hidden md:min-h-[unset]"
               style={{ display: 'block', overflow: 'unset' }}
               onChange={handleTabChange}
               ref={tabRef}

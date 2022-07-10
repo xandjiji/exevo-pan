@@ -50,7 +50,7 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
 
     return (
       <div
-        className={clsx('grid w-full gap-3 overflow-hidden', className)}
+        className={clsx('grid w-full gap-3', className)}
         {...props}
         ref={ref}
       >
@@ -58,7 +58,10 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
           role="tablist"
           aria-label={ariaLabelProp}
           className="custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
-          style={{ borderBottom: 'solid 1px rgb(var(--separator))' }}
+          style={{
+            borderBottom: 'solid 1px rgb(var(--separator))',
+            background: 'inherit',
+          }}
         >
           {Children.map(children, (child, childIndex) => {
             if (!isValidElement(child)) return child
@@ -83,6 +86,7 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
                     : 'text-separator hover:bg-primaryVariantHighlight hover:text-onSurface child:fill-separator child:hover:fill-onSurface',
                 )}
                 style={{
+                  background: 'inherit',
                   borderBottom: 'solid 2px',
                   borderColor: isSelected
                     ? 'var(--primaryHighlight)'
