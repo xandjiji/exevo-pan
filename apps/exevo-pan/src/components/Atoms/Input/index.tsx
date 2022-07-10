@@ -7,7 +7,6 @@ import { useUuid, useSharedRef } from 'hooks'
 import ClearIcon from 'assets/svgs/cross.svg'
 import Label from '../Label'
 import { useStateIcon } from './useStateIcon'
-import { defaultMask } from './utils'
 import { InputProps, InputValue } from './types'
 
 const Input = (
@@ -24,7 +23,6 @@ const Input = (
     onChange,
     noAlert = false,
     stateIcon = 'neutral',
-    mask = defaultMask,
     ...props
   }: InputProps,
   refProp: Ref<HTMLInputElement>,
@@ -41,7 +39,7 @@ const Input = (
   const [value, setValue] = useState<InputValue>(
     valueProp ?? defaultValue ?? '',
   )
-  const derivedValue = mask(valueProp ?? value)
+  const derivedValue = valueProp ?? value
   const isClearButtonActive = allowClear && !!derivedValue
 
   const handleClearClick = useCallback(() => {

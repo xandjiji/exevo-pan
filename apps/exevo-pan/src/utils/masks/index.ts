@@ -1,6 +1,4 @@
-import { Mask } from '../../components/Atoms/Input/types'
-
-export const numberWithCommaSeparator: Mask = (value) =>
+export const numberWithCommaSeparator = (value: number | string): string =>
   value
     .toString()
     .replace(/,/g, '')
