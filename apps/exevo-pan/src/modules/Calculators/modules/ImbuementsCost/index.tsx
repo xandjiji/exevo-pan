@@ -7,6 +7,7 @@ import {
   Tooltip,
   InfoTooltip,
 } from 'components/Organisms'
+import { formatNumberWithCommas } from 'utils'
 import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
 import useStateRecord from './useStateRecord'
 import NumericInput from './NumericInput'
@@ -17,7 +18,8 @@ import styles from './styles.module.css'
 
 /* @ ToDo:
 - results
-    total price (incluir shrine chance tax + base tier price) (with diff)
+    place items flex end
+    componentize diffs
 - i18n (incluir GP Value) (incluir Market e GoldToken titles)
 */
 
@@ -25,7 +27,7 @@ const ImbuementsCost = () => {
   const [recipeIndex, setRecipeIndex] = useState(0)
   const [stateRecord, updateRecord] = useStateRecord()
 
-  const { efficientCost, tokenBuyList } = useMemo(
+  const { efficientCost, tokenCost, marketCost, tokenBuyList } = useMemo(
     () =>
       calculateShoppingList({
         recipeIndex,
@@ -36,6 +38,9 @@ const ImbuementsCost = () => {
   )
 
   const currentTier = stateRecord[RecordKeys.tier]
+
+  const getPriceDiff = (cost: number) =>
+    `(${formatNumberWithCommas(efficientCost - cost)}gp difference)`
 
   return (
     <Main>
@@ -126,8 +131,28 @@ const ImbuementsCost = () => {
             <InfoTooltip
               className="h-3 w-3"
               content={
-                <span className="whitespace-nowrap">
-                  Includes: base price + 100% success fee
+                <span className="grid gap-2 whitespace-nowrap">
+                  <div className="grid grid-cols-2 items-center gap-6">
+                    <div className="grid gap-1">
+                      <strong>Tokens only:</strong>
+                      <Text.GoldCoin value={tokenCost} />
+                      <small className="text-red">
+                        {getPriceDiff(tokenCost)}
+                      </small>
+                    </div>
+
+                    <div className="grid gap-1">
+                      <strong>Market only:</strong>
+                      <Text.GoldCoin value={marketCost} />
+                      <small className="text-red">
+                        {getPriceDiff(marketCost)}
+                      </small>
+                    </div>
+                  </div>
+
+                  <small className="mt-4">
+                    (Includes: base price + 100% success fee)
+                  </small>
                 </span>
               }
             />
