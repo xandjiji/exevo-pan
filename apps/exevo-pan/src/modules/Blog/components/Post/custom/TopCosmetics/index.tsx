@@ -41,28 +41,15 @@ const TopCosmetics = ({ mounts }: TopCosmeticsProps) => {
           key={name}
           className="text-tsm flex flex-col items-center gap-1.5 whitespace-nowrap"
         >
-          <div title={`${name} - ${percentage}`} className="relative w-min">
-            <ActiveCount
-              className="z-2 absolute -top-1.5 right-0 py-0.5 px-1"
-              style={{
-                borderRadius: 4,
-                width: 'fit-content',
-                height: 'unset',
-                transform: 'translateX(50%)',
-              }}
-            >
-              {percentage}
-            </ActiveCount>
-            <div>
-              <SpritePortrait
-                offset
-                alt={`${name} - ${percentage}`}
-                src={resolver(name)}
-                width={64}
-                height={64}
-              />
-            </div>
-          </div>
+          <SpritePortrait
+            title={`${name} - ${percentage}`}
+            counter={percentage}
+            offset
+            alt={`${name} - ${percentage}`}
+            src={resolver(name)}
+            width={64}
+            height={64}
+          />
 
           <p style={{ marginBottom: -6 }}>{name}</p>
 

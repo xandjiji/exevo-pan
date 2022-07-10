@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { formatNumberWithCommas } from 'utils'
 import { Checkbox } from 'components/CharacterCard/atoms'
-import { SpritePortrait, ActiveCount } from 'components/Atoms'
+import { SpritePortrait } from 'components/Atoms'
 import { NotifyErrorClient } from 'services'
 import { rareMountSet, testRareOutfit } from '../../Parts/SpecialTags/utils'
 import { addonCheck } from './utils'
@@ -49,6 +49,13 @@ const SpriteBox = ({
     >
       <SpritePortrait
         offset={offset}
+        counter={
+          amount > 0 ? (
+            <span className="after:font-thin after:content-['x']">
+              {amount}
+            </span>
+          ) : undefined
+        }
         alt={name}
         src={src}
         width={offset ? 64 : 32}
@@ -75,19 +82,6 @@ const SpriteBox = ({
             greenVariant={isRare}
           />
         </div>
-      )}
-
-      {amount > 1 && (
-        <ActiveCount
-          className="z-1 absolute -top-1.5 -right-1.5 py-0.5 px-1 font-bold after:ml-[1px] after:font-normal after:content-['x']"
-          style={{
-            width: 'unset',
-            height: 'unset',
-            borderRadius: '4px',
-          }}
-        >
-          {amount}
-        </ActiveCount>
       )}
     </div>
   )

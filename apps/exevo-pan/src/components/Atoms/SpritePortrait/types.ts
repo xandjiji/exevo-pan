@@ -1,6 +1,7 @@
 export type SpritePortraitProps = React.HTMLAttributes<HTMLDivElement> & {
   offset?: boolean
   highlight?: boolean
+  counter?: React.ReactNode
   src: string | StaticImageData
   alt?: string
   width: number

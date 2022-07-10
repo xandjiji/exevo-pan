@@ -3,6 +3,8 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import { useOnImageLoad } from 'hooks'
+import { formatNumberWithCommas } from 'utils'
+import ActiveCount from '../ActiveCount'
 import styles from './styles.module.css'
 import { BackgroundProps, SpritePortraitProps } from './types'
 
@@ -26,6 +28,7 @@ export const Background = ({
 const SpritePortrait = ({
   offset = false,
   highlight = false,
+  counter,
   src,
   alt,
   width,
@@ -63,6 +66,11 @@ const SpritePortrait = ({
           )}
           style={{ top: 'calc(50% - 12px)', left: 'calc(50% - 12px)' }}
         />
+      )}
+      {counter !== undefined && (
+        <ActiveCount className="z-1 absolute -top-1.5 -right-1.5">
+          {counter}
+        </ActiveCount>
       )}
     </Background>
   )
