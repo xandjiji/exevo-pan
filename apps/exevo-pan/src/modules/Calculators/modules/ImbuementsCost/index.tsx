@@ -35,8 +35,8 @@ const ImbuementsCost = () => {
   return (
     <Main>
       <LabeledCard labelText="Price configurations">
-        <div className="child:max-w-[50%] child:flex-grow flex items-end gap-4">
-          <ClientComponent>
+        <div className="child:flex-grow flex items-end gap-4">
+          <ClientComponent className="w-full">
             <NumericInput
               label={
                 <LabelWrapper>
@@ -61,6 +61,7 @@ const ImbuementsCost = () => {
               updateRecord({ [RecordKeys.tier]: +e.target.value })
             }
             noAlert
+            className="w-full"
           />
         </div>
 
