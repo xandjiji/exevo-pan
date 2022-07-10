@@ -1,7 +1,7 @@
 /* eslint-disable react/require-default-props */
 import { useState, useCallback } from 'react'
 import { Input } from 'components/Atoms'
-import { numberWithCommaSeparator } from 'utils'
+import { formatNumberWithCommas } from 'utils'
 import { parseValue } from './utils'
 import { NumericInputProps } from './types'
 
@@ -37,7 +37,7 @@ const NumericInput = ({
   )
 
   const isZero = value === 0
-  const displayedValue = isZero ? '' : numberWithCommaSeparator(value)
+  const displayedValue = isZero ? '' : formatNumberWithCommas(value)
 
   return (
     <Input

@@ -1,4 +1,4 @@
-export const numberWithCommaSeparator = (value: number | string): string =>
+export const formatNumberWithCommas = (value: number | string): string =>
   value
     .toString()
     .replace(/,/g, '')
