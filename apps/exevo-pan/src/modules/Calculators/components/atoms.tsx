@@ -32,6 +32,9 @@ export const Empty = ({
   />
 )
 
-export const Group = (args: JSX.IntrinsicElements['div']) => (
-  <div className="text-tsm grid gap-2" {...args} />
+export const Group = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div className={clsx('text-tsm grid gap-2', className)} {...props} />
 )
