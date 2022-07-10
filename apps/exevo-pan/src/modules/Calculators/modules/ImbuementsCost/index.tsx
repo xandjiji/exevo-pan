@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { Tabs } from 'components/Atoms'
-import { Select, ClientComponent } from 'components/Organisms'
+import { Select, ClientComponent, Tooltip } from 'components/Organisms'
 import { Main, LabeledCard } from '../../components'
 import { LabelWrapper } from './atoms'
 import useStateRecord from './useStateRecord'
@@ -13,9 +13,9 @@ import styles from './styles.module.css'
 
 /* @ ToDo:
 - results
-    tooltip 25x recipe
     tooltip buy with
     total price (incluir shrine chance tax + base tier price) (with diff)
+- i18n (incluir GP Value)
 */
 
 const ImbuementsCost = () => {
@@ -84,7 +84,13 @@ const ImbuementsCost = () => {
 
                   return (
                     <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
-                      <material.icon />
+                      <Tooltip
+                        content={`${material.amount}x ${material.name}`}
+                        placement="left"
+                        offset={[0, 8]}
+                      >
+                        <material.icon />
+                      </Tooltip>
                       <NumericInput
                         key={material.name}
                         label={`${material.name} price`}

@@ -20,20 +20,13 @@ export const LabelGoldToken = () => (
 )
 
 export const RopeBelt = () => (
-  <SpritePortrait
-    src={ropebeltSrc}
-    width={32}
-    height={32}
-    title="Rope Belt"
-    alt="Rope Belt"
-  />
+  <SpritePortrait src={ropebeltSrc} width={32} height={32} alt="Rope Belt" />
 )
 export const SilencerClaws = () => (
   <SpritePortrait
     src={silencerclawsSrc}
     width={32}
     height={32}
-    title="Silencer Claws"
     alt="Silencer Claws"
   />
 )
@@ -42,7 +35,6 @@ export const GrimeleechWings = () => (
     src={grimeleechSrc}
     width={32}
     height={32}
-    title="Some Grimeleech Wings"
     alt="Some Grimeleech Wings"
   />
 )
@@ -52,7 +44,6 @@ export const VampireTeeth = () => (
     src={vampireteethSrc}
     width={32}
     height={32}
-    title="Vampire Teeth"
     alt="Vampire Teeth"
   />
 )
@@ -61,7 +52,6 @@ export const BloodyPincers = () => (
     src={bloodypincersSrc}
     width={32}
     height={32}
-    title="Bloody Pincers"
     alt="Bloody Pincers"
   />
 )
@@ -70,7 +60,6 @@ export const PieceOfDeadBrain = () => (
     src={deadbrainSrc}
     width={32}
     height={32}
-    title="Piece of Dead Brain"
     alt="Piece of Dead Brain"
   />
 )
@@ -80,25 +69,17 @@ export const ProtectiveCharm = () => (
     src={protectivecharmSrc}
     width={32}
     height={32}
-    title="Protective Charm"
     alt="Protective Charm"
   />
 )
 export const Sabretooth = () => (
-  <SpritePortrait
-    src={sabretoothSrc}
-    width={32}
-    height={32}
-    title="Sabretooth"
-    alt="Sabretooth"
-  />
+  <SpritePortrait src={sabretoothSrc} width={32} height={32} alt="Sabretooth" />
 )
 export const VexclawTalon = () => (
   <SpritePortrait
     src={vexclawtalonSrc}
     width={32}
     height={32}
-    title="Vexclaw Talon"
     alt="Vexclaw Talon"
   />
 )
@@ -108,7 +89,6 @@ export const GoldToken = ({ highlight }: BuyIconProps) => (
     src={goldTokenSrc}
     width={32}
     height={32}
-    title="Gold Token"
     alt="Gold Token"
     className={clsx('transition-all', !highlight && 'opacity-25')}
   />
