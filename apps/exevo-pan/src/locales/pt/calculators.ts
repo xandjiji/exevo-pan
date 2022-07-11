@@ -67,17 +67,16 @@ export default {
     moreInfo: 'Para mais informações sobre Charms, confira',
     thisArticle: 'este artigo',
   },
-  /* @ ToDo: */
   ImbuementsCost: {
     labels: {
-      configurations: 'Configurations',
-      goldToken: 'Gold Token price',
+      configurations: 'Configurações',
+      goldToken: 'Preço do Gold Token',
     },
-    totalCost: 'Total cost',
-    goldTokenOnly: 'Gold Tokens only',
-    marketOnly: 'Market only',
-    tooltipInfo: '(Includes: base price + 100% success fee)',
-    pricePlaceholder: 'Current price',
-    buyIconTooltip: 'Should be bought using',
+    totalCost: 'Custo total',
+    goldTokenOnly: 'Apenas Gold Tokens',
+    marketOnly: 'Apenas Market',
+    tooltipInfo: '(Inclui: preço base + taxa de 100% de sucesso)',
+    pricePlaceholder: 'Preço atual',
+    buyIconTooltip: 'Deve ser comprado usando',
   },
 }
