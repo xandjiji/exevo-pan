@@ -88,7 +88,10 @@ const ImbuementsCost = () => {
                   const isLastField = materialIndex + 1 === currentTier
 
                   return (
-                    <div className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0">
+                    <div
+                      key={`${name}-${material.name}`}
+                      className="child:shrink-0 mr-1 flex items-end gap-2 sm:mr-0"
+                    >
                       <Icons.Material {...material} />
                       <NumericInput
                         key={material.name}
