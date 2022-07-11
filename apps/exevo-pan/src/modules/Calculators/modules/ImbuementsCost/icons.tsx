@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { SpritePortrait } from 'components/Atoms'
 import smallGoldTokenSrc from 'assets/labelGoldToken.png'
 import smallMarketSrc from 'assets/labelMarket.png'
@@ -16,25 +17,29 @@ export const Label = {
   ),
 }
 
-export const GoldToken = ({ highlight }: BuyIconProps) => (
-  <SpritePortrait
-    src={goldTokenSrc}
-    width={32}
-    height={32}
-    alt="Gold Token"
-    className={clsx('transition-all', !highlight && 'opacity-25')}
-  />
-)
+export const BuyIcon = ({ type, highlight }: BuyIconProps) => {
+  const {
+    translations: { calculators },
+  } = useTranslations()
 
-export const Market = ({ highlight }: BuyIconProps) => (
-  <SpritePortrait
-    src={marketSrc}
-    width={32}
-    height={32}
-    alt="Market"
-    className={clsx('transition-all', !highlight && 'opacity-25')}
-  />
-)
+  const isGoldToken = type === 'goldToken'
+  const name = isGoldToken ? 'Gold Tokens' : 'Market'
+
+  return (
+    <SpritePortrait
+      src={isGoldToken ? goldTokenSrc : marketSrc}
+      width={32}
+      height={32}
+      alt={name}
+      title={
+        highlight
+          ? `${calculators.ImbuementsCost.buyIconTooltip} ${name}`
+          : undefined
+      }
+      className={clsx('transition-all', !highlight && 'opacity-25')}
+    />
+  )
+}
 
 export const Material = ({ src, name, amount }: MaterialProps) => (
   <SpritePortrait

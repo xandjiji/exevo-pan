@@ -1,5 +1,6 @@
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { Tabs, Text } from 'components/Atoms'
 import { Select, ClientComponent, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
@@ -13,10 +14,14 @@ import { tierOptions, RECIPES, RecordKeys } from './schema'
 import styles from './styles.module.css'
 
 /* @ ToDo:
-- i18n (incluir GP Value) (incluir Market e GoldToken titles)
+- i18n (incluir Market e GoldToken titles)
 */
 
 const ImbuementsCost = () => {
+  const {
+    translations: { calculators },
+  } = useTranslations()
+
   const [recipeIndex, setRecipeIndex] = useState(0)
   const [stateRecord, updateRecord] = useStateRecord()
 
@@ -34,17 +39,18 @@ const ImbuementsCost = () => {
 
   return (
     <Main>
-      <LabeledCard labelText="Price configurations">
+      <LabeledCard labelText={calculators.ImbuementsCost.labels.configurations}>
         <div className="child:flex-grow flex items-end gap-4">
           <ClientComponent className="w-full">
             <NumericInput
               label={
                 <div className="flex items-center gap-1">
                   <Icons.Label.GoldToken />
-                  Gold Token price
+                  {calculators.ImbuementsCost.labels.goldToken}
                 </div>
               }
-              aria-label="Gold Token price"
+              aria-label={calculators.ImbuementsCost.labels.goldToken}
+              placeholder={calculators.ImbuementsCost.pricePlaceholder}
               step={1000}
               value={stateRecord[RecordKeys.goldToken]}
               onChange={(value) =>
@@ -86,7 +92,10 @@ const ImbuementsCost = () => {
                       <Icons.Material {...material} />
                       <NumericInput
                         key={material.name}
-                        label={`${material.name} price`}
+                        label={material.name}
+                        placeholder={
+                          calculators.ImbuementsCost.pricePlaceholder
+                        }
                         disabled={!usedInCurrentTier}
                         value={stateRecord[material.name]}
                         onChange={(value) =>
@@ -96,11 +105,13 @@ const ImbuementsCost = () => {
                         enterKeyHint={isLastField ? 'done' : 'next'}
                         className={clsx('ml-2 flex-grow', styles.numericInput)}
                       />
-                      <Icons.Market
+                      <Icons.BuyIcon
                         highlight={usedInCurrentTier && !shouldBuyWithToken}
+                        type="market"
                       />
-                      <Icons.GoldToken
+                      <Icons.BuyIcon
                         highlight={usedInCurrentTier && shouldBuyWithToken}
+                        type="goldToken"
                       />
                     </div>
                   )
@@ -114,7 +125,7 @@ const ImbuementsCost = () => {
 
         <Group>
           <div className="flex items-center gap-1">
-            <strong>Total cost</strong>
+            <strong>{calculators.ImbuementsCost.totalCost}</strong>
             <InfoTooltip
               className="h-3 w-3"
               content={
@@ -124,7 +135,7 @@ const ImbuementsCost = () => {
                       title={
                         <>
                           <Icons.Label.GoldToken />
-                          Gold Tokens only:
+                          {calculators.ImbuementsCost.goldTokenOnly}:
                         </>
                       }
                       cost={tokenCost}
@@ -135,7 +146,7 @@ const ImbuementsCost = () => {
                       title={
                         <>
                           <Icons.Label.Market />
-                          Market only:
+                          {calculators.ImbuementsCost.marketOnly}:
                         </>
                       }
                       cost={marketCost}
@@ -144,7 +155,7 @@ const ImbuementsCost = () => {
                   </div>
 
                   <small className="mt-4">
-                    (Includes: base price + 100% success fee)
+                    {calculators.ImbuementsCost.tooltipInfo}
                   </small>
                 </span>
               }

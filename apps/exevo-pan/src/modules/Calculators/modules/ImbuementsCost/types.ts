@@ -32,4 +32,5 @@ export type ShoppingList = {
 
 export type BuyIconProps = {
   highlight: boolean
+  type: 'market' | 'goldToken'
 }

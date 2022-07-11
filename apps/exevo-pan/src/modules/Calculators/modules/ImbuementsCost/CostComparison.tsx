@@ -26,9 +26,11 @@ const CostComparison = ({ title, cost, compareTo }: CostComparisonProps) => {
             costDiff > 0 && 'text-green',
           )}
         >
+          {costDiff < 0 && '+'}
+          {costDiff > 0 && '-'}
           {formatNumberWithCommas(costDiff)} gp
         </strong>
-        ) difference
+        )
       </small>
     </div>
   )
