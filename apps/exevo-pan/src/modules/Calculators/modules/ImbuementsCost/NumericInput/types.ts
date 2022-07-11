@@ -1,6 +1,6 @@
 type ExtendedProps = Pick<
   JSX.IntrinsicElements['input'],
-  'className' | 'disabled' | 'enterKeyHint' | 'onKeyPress'
+  'className' | 'disabled' | 'placeholder' | 'enterKeyHint' | 'onKeyPress'
 >
 
 export type NumericInputProps = {

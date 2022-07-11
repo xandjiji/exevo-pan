@@ -45,7 +45,6 @@ const NumericInput = ({
       value={displayedValue}
       onChange={handleChange}
       onKeyDown={handleKey}
-      placeholder="GP value"
       error={touched && isZero}
       {...props}
     />
