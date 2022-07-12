@@ -25,6 +25,11 @@ export default {
       description:
         'Calculate the cheapest way to buy materials for your imbuements',
     },
+    /* @ ToDo: */
+    LootSplit: {
+      title: 'Loot Split',
+      description: 'Manage and split your party hunt loots',
+    },
   },
   Header: {
     Main: 'Principal',
@@ -33,6 +38,8 @@ export default {
     Stamina: 'Stamina',
     /* @ ToDo: */
     ImbuementsCost: 'Imbuements Cost',
+    /* @ ToDo: */
+    LootSplit: 'Loot Split',
   },
   none: 'Nada',
   ExerciseWeapons: {

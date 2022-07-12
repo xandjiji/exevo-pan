@@ -7,6 +7,7 @@ export const routes = {
   IMBUEMENTS_COST: '/calculators/imbuements-cost',
   CHARM_DAMAGE: '/calculators/charm-damage',
   STAMINA: '/calculators/stamina',
+  LOOT_SPLIT: '/calculators/loot-split',
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
   LIBERTABRA_WAR: '/libertabra-war',

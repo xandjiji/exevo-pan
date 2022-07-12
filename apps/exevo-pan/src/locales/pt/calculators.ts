@@ -25,6 +25,11 @@ export default {
       description:
         'Calcule qual a forma mais barata de se comprar materiais para imbuements',
     },
+    /* @ ToDo: */
+    LootSplit: {
+      title: 'Loot Split',
+      description: 'Manage and split your party hunt loots',
+    },
   },
   Header: {
     Main: 'Principal',
@@ -32,6 +37,7 @@ export default {
     CharmDamage: 'Charm Damage',
     Stamina: 'Stamina',
     ImbuementsCost: 'Custo de Imbuements',
+    LootSplit: 'Loot Split',
   },
   none: 'Nenhum',
   ExerciseWeapons: {

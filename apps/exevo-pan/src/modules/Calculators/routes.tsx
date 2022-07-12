@@ -4,6 +4,7 @@ import ExerciseWeaponIcon from 'assets/svgs/weight.svg'
 import CharmDamageIcon from 'assets/svgs/charms.svg'
 import StaminaIcon from 'assets/svgs/charge.svg'
 import ImbuementsCostIcon from 'assets/svgs/magic.svg'
+import LootSplitIcon from 'assets/svgs/balance.svg'
 import { CalculatorRoute } from './types'
 
 export const Main: CalculatorRoute = {
@@ -38,6 +39,14 @@ export const Stamina: CalculatorRoute = {
   sprite: '/sprites/sleeping.png',
 }
 
+export const LootSplit: CalculatorRoute = {
+  title: 'LootSplit',
+  href: ROUTES.LOOT_SPLIT,
+  icon: <LootSplitIcon />,
+  hero: `${ROUTES.CALCULATORS}/loot-split-hero.png`,
+  sprite: '/sprites/loot.png',
+}
+
 export const CharmDamage: CalculatorRoute = {
   title: 'CharmDamage',
   href: ROUTES.CHARM_DAMAGE,
@@ -49,7 +58,8 @@ export const CharmDamage: CalculatorRoute = {
 export const routes: CalculatorRoute[] = [
   Main,
   ExerciseWeapons,
-  ImbuementsCost,
+  LootSplit,
   Stamina,
+  ImbuementsCost,
   CharmDamage,
 ]
