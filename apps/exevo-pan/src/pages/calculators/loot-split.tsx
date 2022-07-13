@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
-import { Header, ImbuementsCost, pages } from 'modules/Calculators'
+import { Header, LootSplit, pages } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle } from 'utils'
@@ -77,7 +77,7 @@ export default function Calculator() {
           src={hero}
           offset
         />
-        <ImbuementsCost />
+        <LootSplit />
       </Main>
     </>
   )
