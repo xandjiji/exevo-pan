@@ -1,21 +1,30 @@
-import { PlayerReceipt } from './types'
+import { Receipt } from './types'
+
+const breakLines = (text: string): string[] => text.split('\n')
 
 const sanitizeValueLine = (line: string): number => {
   const [, value] = line.split(':')
   return +value.trim().replace(/,/g, '')
 }
 
-export const getPlayerReceipts = (text: string): PlayerReceipt[] => {
-  const lines = text.split('\n')
-  const playerLines = lines.slice(6)
+export const parseReceipt = ([name, ...valueLines]: string[]): Receipt => {
+  const [loot, supplies, balance] = valueLines.map(sanitizeValueLine)
 
-  const receipts: PlayerReceipt[] = []
-  while (playerLines.length > 0) {
-    const [name, ...valueLines] = playerLines.splice(0, 6)
-    const [loot, supplies, balance] = valueLines.map(sanitizeValueLine)
+  return { name, loot, supplies, balance }
+}
 
-    receipts.push({ name, loot, supplies, balance })
-  }
+export const parse = {
+  TeamReceipt: (text: string): Receipt =>
+    parseReceipt(breakLines(text).slice(2, 6)),
+  PlayerReceipts: (text: string): Receipt[] => {
+    const lines = breakLines(text)
+    const playerLines = lines.slice(6)
 
-  return receipts
+    const receipts: Receipt[] = []
+    while (playerLines.length > 0) {
+      receipts.push(parseReceipt(playerLines.splice(0, 6)))
+    }
+
+    return receipts
+  },
 }

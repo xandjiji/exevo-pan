@@ -1,4 +1,4 @@
-export type PlayerReceipt = {
+export type Receipt = {
   name: string
   loot: number
   supplies: number

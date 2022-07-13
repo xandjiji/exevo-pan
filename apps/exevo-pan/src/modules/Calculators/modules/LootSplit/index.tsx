@@ -1,23 +1,23 @@
 import { useState } from 'react'
 import { Main } from '../../components'
-import { getPlayerReceipts } from './utils'
+import { parse } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
-- get party total
 - get transfers
 */
 
 const LootSplit = () => {
-  const [sessionReceipt, setSessionReceipt] = useState(defaultValue)
+  const [rawSession, setRawSession] = useState(defaultValue)
 
-  console.log(getPlayerReceipts(sessionReceipt))
+  console.log('team', parse.TeamReceipt(rawSession))
+  console.log('players', parse.PlayerReceipts(rawSession))
 
   return (
     <Main>
       <textarea
-        value={sessionReceipt}
-        onChange={(e) => setSessionReceipt(e.target.value)}
+        value={rawSession}
+        onChange={(e) => setRawSession(e.target.value)}
       />
     </Main>
   )
