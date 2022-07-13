@@ -1,9 +1,7 @@
-/* eslint-disable no-continue */
-import { clampValue } from 'utils'
 import { Receipt, Transaction } from './types'
 
 const breakLines = (text: string): string[] => text.split('\n')
-
+const sanitizeName = (name: string) => name.replace(' (Leader)', '')
 const sanitizeValueLine = (line: string): number => {
   const [, value] = line.split(':')
   return +value.trim().replace(/,/g, '')
@@ -12,7 +10,7 @@ const sanitizeValueLine = (line: string): number => {
 export const parseReceipt = ([name, ...valueLines]: string[]): Receipt => {
   const [loot, supplies, balance] = valueLines.map(sanitizeValueLine)
 
-  return { name, loot, supplies, balance }
+  return { name: sanitizeName(name), loot, supplies, balance }
 }
 
 export const parse = {
@@ -87,6 +85,6 @@ export const findTransactionsRequired = (
       }
     }
   }
-
+  console.log(transactions)
   return transactions
 }

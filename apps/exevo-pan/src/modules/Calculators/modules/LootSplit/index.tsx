@@ -4,7 +4,6 @@ import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
-- sanitize (leader)
 - <TextArea />
     igual input
 - display transactions
@@ -15,6 +14,7 @@ import { defaultValue } from './defaultValue'
 - save session
 - invalid state
 - extra expenses (tibiapal)
+- remove players (tibiapal)
 */
 
 const LootSplit = () => {
