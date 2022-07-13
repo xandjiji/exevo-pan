@@ -4,3 +4,9 @@ export type Receipt = {
   supplies: number
   balance: number
 }
+
+export type Transaction<ReferenceType> = {
+  from: ReferenceType
+  to: ReferenceType
+  amount: number
+}

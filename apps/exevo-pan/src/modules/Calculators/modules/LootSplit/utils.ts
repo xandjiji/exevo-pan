@@ -1,4 +1,6 @@
-import { Receipt } from './types'
+/* eslint-disable no-continue */
+import { clampValue } from 'utils'
+import { Receipt, Transaction } from './types'
 
 const breakLines = (text: string): string[] => text.split('\n')
 
@@ -27,4 +29,64 @@ export const parse = {
 
     return receipts
   },
+}
+
+export const findTransactionsRequired = (
+  receipts: Receipt[],
+): Transaction<string>[] => {
+  let teamBalance = 0
+  receipts.forEach(({ balance }) => {
+    teamBalance += balance
+  })
+
+  const teamSize = receipts.length
+  const fairBalance = teamBalance / teamSize
+
+  const playerShould = {
+    transfer: ({ balance }: Receipt): number =>
+      Math.max(0, balance - fairBalance),
+    receive: ({ balance }: Receipt): number =>
+      Math.max(0, fairBalance - balance),
+  }
+
+  const sortedReceipts = receipts.sort((a, b) => b.balance - a.balance)
+
+  const transactions: Transaction<string>[] = []
+  const transfer = ({ from, to, amount: floatAmount }: Transaction<number>) => {
+    const amount = Math.round(floatAmount)
+
+    if (amount) {
+      sortedReceipts[from].balance -= amount
+      sortedReceipts[to].balance += amount
+
+      transactions.push({
+        from: sortedReceipts[from].name,
+        to: sortedReceipts[to].name,
+        amount,
+      })
+    }
+  }
+
+  for (let sendIndex = 0; sendIndex < teamSize; sendIndex += 1) {
+    for (
+      let receiveIndex = sendIndex + 1;
+      receiveIndex < teamSize;
+      receiveIndex += 1
+    ) {
+      const maxTransferAmount = playerShould.transfer(sortedReceipts[sendIndex])
+      const maxReceiveAmount = playerShould.receive(
+        sortedReceipts[receiveIndex],
+      )
+
+      if (maxTransferAmount && maxReceiveAmount) {
+        transfer({
+          from: sendIndex,
+          to: receiveIndex,
+          amount: Math.min(maxTransferAmount, maxReceiveAmount),
+        })
+      }
+    }
+  }
+
+  return transactions
 }
