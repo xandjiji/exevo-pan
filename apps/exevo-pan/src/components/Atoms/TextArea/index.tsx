@@ -15,6 +15,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       defaultValue: defaultValueProp,
       disabled = false,
       error,
+      noResize,
       style,
       ...props
     },
@@ -26,8 +27,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const errorId = useUuid()
 
     return (
-      <div className={clsx('text-tsm', className)} style={style}>
-        <Label htmlFor={textboxId} className="mb-2">
+      <div className={clsx('text-tsm flex flex-col', className)} style={style}>
+        <Label htmlFor={textboxId} className="mb-2 shrink-0">
           {label}
         </Label>
         <textarea
@@ -38,11 +39,13 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           autoComplete="off"
           disabled={disabled}
           className={clsx(
-            'border-1 text-tsm border-separator focus:border-primary custom-scrollbar box-content rounded-md border-solid py-2.5 px-4 leading-tight outline-none transition-colors',
+            'border-1 text-tsm border-separator focus:border-primary custom-scrollbar max-w-full grow rounded-md border-solid py-2.5 px-4 leading-tight outline-none transition-colors',
+            noResize && 'resize-none',
             disabled
               ? 'text-onSurface/50 bg-separator/50'
               : 'text-onSurface bg-surface',
           )}
+          style={{ minWidth: 'inherit' }}
         />
       </div>
     )

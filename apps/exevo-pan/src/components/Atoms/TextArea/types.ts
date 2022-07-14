@@ -5,6 +5,7 @@ export type ExtendedProps = Omit<
 
 export type CustomProps = {
   error?: boolean | string
+  noResize?: boolean
 }
 
 export type TextAreaProps = CustomProps & ExtendedProps & AccessibleLabelProps
