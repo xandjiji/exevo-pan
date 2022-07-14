@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { TextArea, Input } from 'components/Atoms'
 import { Main } from '../../components'
 import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'
@@ -19,6 +20,7 @@ import { defaultValue } from './defaultValue'
 
 const LootSplit = () => {
   const [rawSession, setRawSession] = useState(defaultValue)
+  const [value, setValue] = useState('INITIAL !')
 
   /* console.log('team', parse.TeamReceipt(rawSession))
   console.log('players', parse.PlayerReceipts(rawSession)) */
@@ -29,11 +31,38 @@ const LootSplit = () => {
 
   return (
     <Main>
-      <textarea
+      <TextArea
+        label="(uncontrolled) Party hunt session"
         onChange={(e) => {
+          console.log(e.target.value)
+          findTransactionsRequired(parse.PlayerReceipts(e.target.value))
+          setValue(e.target.value)
+        }}
+        /* onChange={(e) => {
+          console.log(e.target.value)
           findTransactionsRequired(parse.PlayerReceipts(e.target.value))
         }}
+        value="Text" */
+        className="h-52"
       />
+      <TextArea
+        label="(controlled) Party hunt session"
+        onChange={(e) => {
+          setValue(e.target.value)
+        }}
+        value={value}
+        className="h-52"
+      />
+      <TextArea
+        label="(fixed) Party hunt session"
+        onChange={(e) => {
+          setValue(e.target.value)
+        }}
+        value="FIXED"
+        className="h-52"
+      />
+      <Input label="dsadsa" disabled defaultValue="Text !! " />
+      <Input label="dsadsa" value="Text !! " />
     </Main>
   )
 }
