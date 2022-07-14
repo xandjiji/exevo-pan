@@ -181,6 +181,10 @@ svg {
   @apply transition-colors;
 }
 
+textarea {
+  font-family: inherit;
+}
+
 @keyframes spinAnimation {
   0% {
     transform: rotate(0deg);
