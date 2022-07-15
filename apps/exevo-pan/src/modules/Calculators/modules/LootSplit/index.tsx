@@ -48,6 +48,7 @@ const LootSplit = () => {
       <TextArea
         label="(controlled) Party hunt session"
         onChange={(e) => {
+          console.log(e.target.value)
           setValue(e.target.value)
         }}
         value={value}
@@ -56,6 +57,7 @@ const LootSplit = () => {
       <TextArea
         label="(fixed) Party hunt session"
         onChange={(e) => {
+          console.log(e.target.value)
           setValue(e.target.value)
         }}
         value="FIXED"

@@ -1,4 +1,4 @@
-import { forwardRef, useState, useEffect } from 'react'
+import { forwardRef, useState } from 'react'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
 import Label from '../Label'
@@ -9,9 +9,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     {
       id: idProp,
       className,
-      'aria-label': ariaLabel,
       label,
-      value,
+      value: valueProp,
       defaultValue,
       onChange,
       disabled = false,
@@ -25,20 +24,13 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     const textboxId = idProp ?? useUuid()
     const errorId = useUuid()
 
-    const [controlledValue, setControlledValue] = useState(value)
+    const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
+    const derivedValue = valueProp ?? value
 
-    const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const handleInput: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
       onChange?.(e)
-      if (controlledValue !== undefined) {
-        e.target.value = controlledValue as string
-      }
+      setValue(e.target.value)
     }
-
-    useEffect(() => {
-      if (value !== undefined) {
-        setControlledValue(value)
-      }
-    }, [value])
 
     return (
       <div className={clsx('text-tsm flex flex-col', className)} style={style}>
@@ -61,9 +53,10 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
               : 'text-onSurface bg-surface',
           )}
           style={{ minWidth: 'inherit' }}
+          value={derivedValue}
           {...props}
         >
-          {controlledValue ?? defaultValue}
+          {derivedValue}
         </textarea>
       </div>
     )

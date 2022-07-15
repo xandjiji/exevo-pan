@@ -85,6 +85,6 @@ export const findTransactionsRequired = (
       }
     }
   }
-  console.log(transactions)
+
   return transactions
 }
