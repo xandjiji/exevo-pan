@@ -470,6 +470,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Knightly Candelabra',
     value: 60,
   },
+  'knightly guard': {
+    name: 'Knightly Guard',
+    value: 250,
+  },
   'brocade tapestry': {
     name: 'Brocade Tapestry',
     value: 50,
