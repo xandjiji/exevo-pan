@@ -2,6 +2,7 @@ import { forwardRef, useState } from 'react'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
 import Label from '../Label'
+import FormError from '../FormError'
 import { TextAreaProps } from './types'
 
 const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
@@ -15,6 +16,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       onChange,
       disabled = false,
       error,
+      noAlert = false,
       noResize,
       style,
       ...props
@@ -58,6 +60,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         >
           {derivedValue}
         </textarea>
+        {!noAlert && (
+          <FormError id={errorId} error={error} className="shrink-0" />
+        )}
       </div>
     )
   },
