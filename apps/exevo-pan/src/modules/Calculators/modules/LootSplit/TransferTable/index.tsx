@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import clsx from 'clsx'
-import { Text } from 'components/Atoms'
+import { Text, CopyButton } from 'components/Atoms'
 import { TransferTableProps } from './types'
 import styles from './styles.module.css'
 
@@ -26,6 +26,12 @@ const TransferTable = ({
             </div>
           </td>
           <td>{to}</td>
+          <td>
+            <CopyButton
+              className="ml-3"
+              copyString={`transfer ${amount} to ${to}`}
+            />
+          </td>
         </tr>
       ))}
     </tbody>
