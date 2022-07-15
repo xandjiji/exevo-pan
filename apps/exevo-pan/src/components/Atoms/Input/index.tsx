@@ -6,6 +6,7 @@ import clsx from 'clsx'
 import { useUuid, useSharedRef } from 'hooks'
 import ClearIcon from 'assets/svgs/cross.svg'
 import Label from '../Label'
+import FormError from '../FormError'
 import { useStateIcon } from './useStateIcon'
 import { InputProps, InputValue } from './types'
 
@@ -115,20 +116,7 @@ const Input = (
 
         {StateIcon}
       </div>
-      {!noAlert && (
-        <span
-          id={errorId}
-          aria-hidden={!error}
-          role="alert"
-          className={clsx(
-            'text-red px-2.5 text-xs transition-opacity',
-            !error && 'opacity-0',
-          )}
-          suppressHydrationWarning
-        >
-          {error}
-        </span>
-      )}
+      {!noAlert && <FormError id={errorId} error={error} />}
     </div>
   )
 }

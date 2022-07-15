@@ -8,7 +8,7 @@ import {
   memo,
 } from 'react'
 import clsx from 'clsx'
-import { Popover, Listbox, Option, Label } from 'components/Atoms'
+import { Popover, Listbox, Option, Label, FormError } from 'components/Atoms'
 import ArrowIcon from 'assets/svgs/chevronDown.svg'
 import { useSharedRef, useUuid } from 'hooks'
 import SelectReducer from './reducer'
@@ -41,9 +41,8 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     const listboxId = useUuid()
     const uuid = useUuid()
     const selectId = idProp ?? uuid
+    const errorId = useUuid()
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
-
-    const hideAlert = error === true || !error
 
     const innerRef = useSharedRef<HTMLInputElement>(ref)
     const selectRef = useRef<HTMLDivElement>(null)
@@ -182,17 +181,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
           </div>
         </Popover>
         {!noAlert && (
-          <span
-            aria-hidden={hideAlert}
-            role="alert"
-            className={clsx(
-              'text-red inline-block px-2.5 text-xs transition-opacity',
-              hideAlert && 'opacity-0',
-            )}
-            suppressHydrationWarning
-          >
-            {error}
-          </span>
+          <FormError id={errorId} error={error} className="inline-block" />
         )}
         <input
           ref={innerRef}

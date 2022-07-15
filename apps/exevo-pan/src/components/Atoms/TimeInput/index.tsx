@@ -5,6 +5,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useUuid, useSharedRef, useIsMounted } from 'hooks'
 import Label from '../Label'
+import FormError from '../FormError'
 import useTimeInput from './useTimeInput'
 import { EMPTY_VALUE, value2TimeObject, buildTime } from './utils'
 import { TimeInputProps } from './types'
@@ -139,20 +140,7 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
             {...minuteBinders}
           />
         </div>
-        {!noAlert && (
-          <span
-            id={errorId}
-            aria-hidden={!error}
-            role="alert"
-            className={clsx(
-              'text-red px-2.5 text-xs transition-opacity',
-              !error && 'opacity-0',
-            )}
-            suppressHydrationWarning
-          >
-            {error}
-          </span>
-        )}
+        {!noAlert && <FormError id={errorId} error={error} />}
         <input
           ref={innerRef}
           hidden

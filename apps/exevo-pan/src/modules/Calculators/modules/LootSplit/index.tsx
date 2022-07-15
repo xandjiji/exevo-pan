@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { TextArea, Input } from 'components/Atoms'
+import { TextArea } from 'components/Atoms'
 import { Main } from '../../components'
 import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'

@@ -48,8 +48,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           disabled={disabled}
           onInput={handleInput}
           className={clsx(
-            'border-1 text-tsm border-separator focus:border-primary custom-scrollbar max-w-full grow rounded-md border-solid py-2.5 px-4 leading-tight outline-none transition-colors',
+            'border-1 text-tsm custom-scrollbar max-w-full grow rounded-md border-solid py-2.5 px-4 leading-tight outline-none transition-colors',
             noResize && 'resize-none',
+            error ? 'border-red' : 'border-separator focus:border-primary',
             disabled
               ? 'text-onSurface/50 bg-separator/50'
               : 'text-onSurface bg-surface',
