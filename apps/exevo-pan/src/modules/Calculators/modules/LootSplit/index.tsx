@@ -1,12 +1,11 @@
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { TextArea } from 'components/Atoms'
-import { Main } from '../../components'
+import { Main, Group } from '../../components'
+import TransferTable from './TransferTable'
 import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
-- <TextArea />
-    igual input
 - display transactions
     copy to clipboard
     copy all?
@@ -21,12 +20,15 @@ import { defaultValue } from './defaultValue'
 const LootSplit = () => {
   const [rawSession, setRawSession] = useState(defaultValue)
 
-  /* console.log('team', parse.TeamReceipt(rawSession))
-  console.log('players', parse.PlayerReceipts(rawSession)) */
-  /* console.log(
-    parse.PlayerReceipts(rawSession).sort((a, b) => b.balance - a.balance),
-  ) */
-  console.log(findTransactionsRequired(parse.PlayerReceipts(rawSession)))
+  const transactions = useMemo(() => {
+    try {
+      return findTransactionsRequired(parse.PlayerReceipts(rawSession))
+    } catch {
+      return []
+    }
+  }, [rawSession])
+
+  const isInvalid = rawSession && transactions.length === 0
 
   return (
     <Main>
@@ -35,7 +37,13 @@ const LootSplit = () => {
         onChange={(e) => setRawSession(e.target.value)}
         value={rawSession}
         className="h-52"
+        error={isInvalid}
       />
+
+      <Group>
+        <strong>Transfers</strong>
+        <TransferTable transactions={transactions} />
+      </Group>
     </Main>
   )
 }
