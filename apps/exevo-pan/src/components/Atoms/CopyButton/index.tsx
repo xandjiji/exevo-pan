@@ -30,7 +30,7 @@ const CopyButton = ({ className, copyString, ...props }: CopyButtonProps) => {
         clicked ? common.CopyButton.copiedLabel : common.CopyButton.toCopyLabel
       }
       className={clsx(
-        'clickable bg-surface grid place-items-center overflow-hidden rounded',
+        'clickable grid place-items-center overflow-hidden rounded',
         className,
       )}
       {...props}
