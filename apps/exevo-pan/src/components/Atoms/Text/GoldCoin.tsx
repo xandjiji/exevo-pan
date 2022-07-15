@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { memo } from 'react'
 import Image from 'next/image'
 import goldCoinSrc from 'assets/goldcoin.png'
@@ -6,10 +7,11 @@ import * as S from './atoms'
 
 type GoldCoinProps = {
   value: number
+  displaySign?: boolean
 } & React.HTMLAttributes<HTMLSpanElement>
 
-const GoldCoin = ({ value, ...props }: GoldCoinProps) => {
-  const formattedValue = formatNumberWithCommas(value)
+const GoldCoin = ({ value, displaySign = false, ...props }: GoldCoinProps) => {
+  const formattedValue = formatNumberWithCommas(value, displaySign)
 
   return (
     <S.Flex title={`${formattedValue} gp`} {...props}>
