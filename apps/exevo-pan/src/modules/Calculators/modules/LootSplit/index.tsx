@@ -1,40 +1,53 @@
 /* eslint-disable no-shadow */
 import { useState, useMemo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { TextArea, Text } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import TransferTable from './TransferTable'
-import { parse, findTransactionsRequired } from './utils'
+import { parse, findTransactionsRequired, generateDatetime } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
-- session summary
-    date timestamp (session lenght)
-    copy all (transactions too)?
-
-- save session
+- copy all (transactions too)?
 - placeholder
 - none display
+
+- history
+    tab
+    actions: save, delete, raw modal
+
 - extra expenses (tibiapal)
 - remove players (tibiapal)
 */
 
 const LootSplit = () => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const [rawSession, setRawSession] = useState(defaultValue)
 
-  const { session, teamReceipt, playerReceipts, transactions } = useMemo(() => {
-    try {
-      const teamReceipt = parse.TeamReceipt(rawSession)
-      const playerReceipts = parse.PlayerReceipts(rawSession)
-      const transactions = findTransactionsRequired(playerReceipts)
-      const session = parse.Session(rawSession)
+  const { timestamp, teamReceipt, playerReceipts, transactions } =
+    useMemo(() => {
+      try {
+        const teamReceipt = parse.TeamReceipt(rawSession)
+        const playerReceipts = parse.PlayerReceipts(rawSession)
+        const transactions = findTransactionsRequired(playerReceipts)
+        const timestamp = parse.SessionTimestamp(rawSession)
 
-      return { teamReceipt, playerReceipts, transactions, session }
-    } catch {
-      return {}
-    }
-  }, [rawSession])
+        return { teamReceipt, playerReceipts, transactions, timestamp }
+      } catch {
+        return {}
+      }
+    }, [rawSession])
+
+  const sessionDate = useMemo(
+    () =>
+      timestamp ? generateDatetime(timestamp) : generateDatetime(+new Date()),
+    [timestamp],
+  )
 
   const isInvalid = rawSession && !transactions
   const isWaste = teamReceipt && teamReceipt.balance < 0
@@ -68,9 +81,13 @@ const LootSplit = () => {
                 }
               />
             </strong>
-            {session ? (
+            {timestamp ? (
               <span>
-                {session.from} ({session.duration})
+                {`${common.Month[sessionDate.month]} ${sessionDate.day}, ${
+                  sessionDate.year
+                } - ${sessionDate.hours}:${sessionDate.minutes} (${
+                  common.FullWeekdays[sessionDate.weekday]
+                })`}
               </span>
             ) : (
               <span>none</span>

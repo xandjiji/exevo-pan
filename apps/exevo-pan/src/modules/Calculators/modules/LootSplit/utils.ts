@@ -1,4 +1,5 @@
-import { Session, Receipt, Transaction } from './types'
+import { dateToDateObject, padTime } from 'utils'
+import { Receipt, Transaction } from './types'
 
 const breakLines = (text: string): string[] => text.split('\n')
 const sanitizeName = (name: string) => name.replace(' (Leader)', '')
@@ -14,19 +15,13 @@ export const parseReceipt = ([name, ...valueLines]: string[]): Receipt => {
 }
 
 export const parse = {
-  Session: (text: string): Session => {
-    const [rawTimestamps, rawSession] = breakLines(text).slice(0, 2)
+  SessionTimestamp: (text: string) => {
+    const [rawTimestamps] = breakLines(text).slice(0, 2)
 
-    const [dirtyFrom, to] = rawTimestamps.split(' to ')
+    const [dirtyFrom] = rawTimestamps.split(' to ')
     const [, from] = dirtyFrom.split('From ')
 
-    const [, duration] = rawSession.split(': ')
-
-    return {
-      from: +new Date(from),
-      to: +new Date(to),
-      duration,
-    }
+    return +new Date(from)
   },
   TeamReceipt: (text: string): Receipt =>
     parseReceipt(breakLines(text).slice(2, 6)),
@@ -101,4 +96,19 @@ export const findTransactionsRequired = (
   }
 
   return transactions
+}
+
+export const generateDatetime = (timestamp: number) => {
+  const { day, month, year, weekday, hours, minutes } = dateToDateObject(
+    new Date(timestamp),
+  )
+
+  return {
+    day,
+    month,
+    year,
+    hours: padTime(hours),
+    minutes: padTime(minutes),
+    weekday,
+  }
 }
