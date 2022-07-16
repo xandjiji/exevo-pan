@@ -25,7 +25,7 @@ const ImbuementsCost = () => {
   const [recipeIndex, setRecipeIndex] = useState(0)
   const [stateRecord, updateRecord] = useStateRecord()
 
-  const { efficientCost, tokenCost, marketCost, tokenBuyList } = useMemo(
+  const { lowestCost, tokenCost, marketCost, tokenBuyList } = useMemo(
     () =>
       calculateShoppingList({
         recipeIndex,
@@ -142,7 +142,7 @@ const ImbuementsCost = () => {
                         </>
                       }
                       cost={tokenCost}
-                      compareTo={efficientCost}
+                      compareTo={lowestCost}
                     />
 
                     <CostComparison
@@ -153,7 +153,7 @@ const ImbuementsCost = () => {
                         </>
                       }
                       cost={marketCost}
-                      compareTo={efficientCost}
+                      compareTo={lowestCost}
                     />
                   </div>
 
@@ -165,7 +165,7 @@ const ImbuementsCost = () => {
             />
           </div>
           <Chip>
-            <Text.GoldCoin value={efficientCost} />
+            <Text.GoldCoin value={lowestCost} />
           </Chip>
         </Group>
       </LabeledCard>

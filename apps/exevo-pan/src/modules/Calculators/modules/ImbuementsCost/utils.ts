@@ -1,41 +1,40 @@
 import { RecordKeys, RECIPES, tierBasePrice } from './schema'
-import { CalculatorArgs, ShoppingList, EfficientCostArgs } from './types'
+import {
+  TokenBuyList,
+  PossibilityRecord,
+  CalculatorArgs,
+  ShoppingList,
+} from './types'
+
+const tierPossibilities: Record<number, TokenBuyList[]> = {
+  1: [[true], [false]],
+  2: [
+    [true, true],
+    [true, false],
+    [false, false],
+  ],
+  3: [
+    [true, true, true],
+    [true, true, false],
+    [true, false, false],
+    [false, false, false],
+  ],
+}
 
 const calculate = {
-  tokenPrice: ({ tier, stateRecord }: CalculatorArgs): number => {
-    const goldTokenPrice = stateRecord[RecordKeys.goldToken]
-    return goldTokenPrice * 2 * tier
-  },
-  marketPrice: ({ tier, recipeIndex, stateRecord }: CalculatorArgs): number => {
-    const { materials } = RECIPES[recipeIndex]
-
-    let cost = 0
-    materials.slice(0, tier).forEach(({ name, amount }) => {
-      cost += (stateRecord[name] ?? 0) * amount
-    })
-
-    return cost
-  },
-  efficientPrice: ({
+  materialsCost: ({
     tier,
     recipeIndex,
     stateRecord,
-    tokenBuyList,
-  }: EfficientCostArgs): number => {
+  }: CalculatorArgs): number => {
     const { materials } = RECIPES[recipeIndex]
+    const { name, amount } = materials[tier - 1]
+
+    return (stateRecord[name] ?? 0) * amount
+  },
+  tokensCost: ({ tier, stateRecord }: CalculatorArgs): number => {
     const goldTokenPrice = stateRecord[RecordKeys.goldToken]
-
-    let efficientCost = 0
-    tokenBuyList.forEach((tierWillBeBoughtWithTokens, materialIndex) => {
-      if (materialIndex + 1 > tier) return
-
-      const material = materials[materialIndex]
-      efficientCost += tierWillBeBoughtWithTokens
-        ? goldTokenPrice * 2
-        : (stateRecord[material.name] ?? 0) * material.amount
-    })
-
-    return efficientCost
+    return goldTokenPrice * 2 * tier
   },
 }
 
@@ -43,28 +42,32 @@ export const calculateShoppingList = ({
   tier: maxTier,
   ...rest
 }: CalculatorArgs): ShoppingList => {
-  const tokenBuyList = [true, true, true]
-
-  for (let tierIteration = maxTier; tierIteration > 0; tierIteration -= 1) {
-    const calcArgs: CalculatorArgs = { tier: tierIteration, ...rest }
-    const tokenPrice = calculate.tokenPrice(calcArgs)
-    const marketPrice = calculate.marketPrice(calcArgs)
-
-    if (tokenPrice <= marketPrice) {
-      break
-    } else {
-      tokenBuyList[tierIteration - 1] = false
-    }
-  }
-
-  const fullCalcArgs = { tier: maxTier, ...rest }
+  const possibilityRecords: PossibilityRecord[] = []
   const basePrice = tierBasePrice[maxTier]
 
+  tierPossibilities[maxTier].forEach((tokenBuyList) => {
+    let cost = basePrice
+    tokenBuyList.forEach((buyWithTokens, materialTier) => {
+      cost += buyWithTokens
+        ? calculate.tokensCost({ ...rest, tier: 1 })
+        : calculate.materialsCost({ ...rest, tier: materialTier + 1 })
+    })
+
+    possibilityRecords.push({ cost, tokenBuyList })
+  })
+
+  const [lowestCost] = possibilityRecords.sort((a, b) => a.cost - b.cost)
+  const fullTokenCost = possibilityRecords.find(({ tokenBuyList }) =>
+    tokenBuyList.every((buyWithToken) => buyWithToken),
+  ) as PossibilityRecord
+  const fullMarketCost = possibilityRecords.find(({ tokenBuyList }) =>
+    tokenBuyList.every((buyWithToken) => !buyWithToken),
+  ) as PossibilityRecord
+
   return {
-    efficientCost:
-      calculate.efficientPrice({ ...fullCalcArgs, tokenBuyList }) + basePrice,
-    tokenCost: calculate.tokenPrice(fullCalcArgs) + basePrice,
-    marketCost: calculate.marketPrice(fullCalcArgs) + basePrice,
-    tokenBuyList,
+    lowestCost: lowestCost.cost,
+    tokenCost: fullTokenCost.cost,
+    marketCost: fullMarketCost.cost,
+    tokenBuyList: lowestCost.tokenBuyList,
   }
 }
