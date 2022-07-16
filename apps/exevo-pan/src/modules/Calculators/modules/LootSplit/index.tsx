@@ -2,6 +2,7 @@
 import { useState, useMemo } from 'react'
 import clsx from 'clsx'
 import { TextArea, Text } from 'components/Atoms'
+import { InfoTooltip } from 'components/Organisms'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import TransferTable from './TransferTable'
 import { parse, findTransactionsRequired } from './utils'
@@ -14,6 +15,7 @@ import { defaultValue } from './defaultValue'
 
 - save session
 - placeholder
+- none display
 - extra expenses (tibiapal)
 - remove players (tibiapal)
 */
@@ -21,24 +23,21 @@ import { defaultValue } from './defaultValue'
 const LootSplit = () => {
   const [rawSession, setRawSession] = useState(defaultValue)
 
-  const { teamReceipt, playerReceipts, transactions } = useMemo(() => {
+  const { session, teamReceipt, playerReceipts, transactions } = useMemo(() => {
     try {
       const teamReceipt = parse.TeamReceipt(rawSession)
       const playerReceipts = parse.PlayerReceipts(rawSession)
       const transactions = findTransactionsRequired(playerReceipts)
+      const session = parse.Session(rawSession)
 
-      return { teamReceipt, playerReceipts, transactions }
+      return { teamReceipt, playerReceipts, transactions, session }
     } catch {
-      return {
-        teamReceipt: { name: '', balance: 0, loot: 0, supplies: 0 },
-        playerReceipts: [],
-        transactions: [],
-      }
+      return {}
     }
   }, [rawSession])
 
-  const isInvalid = rawSession && transactions.length === 0
-  const isWaste = teamReceipt.balance < 0
+  const isInvalid = rawSession && !transactions
+  const isWaste = teamReceipt && teamReceipt.balance < 0
 
   return (
     <Main>
@@ -50,23 +49,59 @@ const LootSplit = () => {
           error={isInvalid}
         />
 
-        <LabeledCard labelText="Transfers">
+        <LabeledCard labelText="Transfers" className="max-w-[300px]">
+          <Group>
+            <strong className="flex items-center gap-1 whitespace-nowrap">
+              Team session{' '}
+              <InfoTooltip
+                className="h-3 w-3"
+                content={
+                  <ul className="grid gap-1 text-left">
+                    {playerReceipts ? (
+                      playerReceipts.map(({ name }) => (
+                        <li key={name}>{name}</li>
+                      ))
+                    ) : (
+                      <span>none</span>
+                    )}
+                  </ul>
+                }
+              />
+            </strong>
+            {session ? (
+              <span>
+                {session.from} ({session.duration})
+              </span>
+            ) : (
+              <span>none</span>
+            )}
+          </Group>
+
           <Group>
             <strong>Transfers</strong>
-            <TransferTable transactions={transactions} />
+            {transactions ? (
+              <TransferTable transactions={transactions} />
+            ) : (
+              <span>none</span>
+            )}
           </Group>
+
           <Group>
             <strong>Total {isWaste ? 'waste' : 'profit'}</strong>
             <ChipWrapper>
-              <Chip>
-                <Text.GoldCoin
-                  value={Math.floor(
-                    teamReceipt.balance / playerReceipts.length,
-                  )}
-                  displaySign={isWaste}
-                />
-                <span className="-ml-1">each</span>
-              </Chip>
+              {teamReceipt && playerReceipts ? (
+                <Chip>
+                  <Text.GoldCoin
+                    value={Math.floor(
+                      teamReceipt.balance / playerReceipts.length,
+                    )}
+                    displaySign={isWaste}
+                  />
+                  <span className="-ml-1">each</span>
+                </Chip>
+              ) : (
+                <span>none</span>
+              )}
             </ChipWrapper>
           </Group>
         </LabeledCard>

@@ -10,3 +10,9 @@ export type Transaction<ReferenceType> = {
   to: ReferenceType
   amount: number
 }
+
+export type Session = {
+  from: number
+  to: number
+  duration: string
+}
