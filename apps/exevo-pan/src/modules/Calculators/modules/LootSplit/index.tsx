@@ -40,8 +40,8 @@ const LootSplit = () => {
 
   const [rawNewSession, setRawNewSession] = useState(defaultValue)
 
-  const displayedSession =
-    isHistory && selected ? selected.rawData : rawNewSession
+  const historySelected = isHistory && selected
+  const displayedSession = historySelected ? selected.rawData : rawNewSession
 
   const displayTimestamp = useDisplayTimestamp()
 
@@ -81,7 +81,7 @@ const LootSplit = () => {
                 className="h-64"
               />
             </Tabs.Panel>
-            <Tabs.Panel label="History">
+            <Tabs.Panel label={`History (${list.length})`}>
               <div className="custom-scrollbar -mt-1 grid max-h-64 overflow-auto pr-2">
                 {list.map(({ key, timestamp }) => {
                   const isSelected = key === selected?.key
@@ -172,29 +172,33 @@ const LootSplit = () => {
             </ChipWrapper>
           </Group>
 
-          <div className="flex justify-end gap-2">
-            <Button
-              type="button"
-              onClick={
-                selected ? () => action.remove(selected?.key) : undefined
-              }
-              pill
-              hollow
-              disabled={isInvalid}
-            >
-              <RemoveIcon className="-ml-1 h-4 w-4" />
-              Delete
-            </Button>
+          <div className="mt-4 flex justify-end gap-2">
+            {historySelected && (
+              <Button
+                type="button"
+                onClick={
+                  selected ? () => action.remove(selected?.key) : undefined
+                }
+                pill
+                hollow
+                disabled={isInvalid}
+              >
+                <RemoveIcon className="-ml-1 h-4 w-4" />
+                Delete
+              </Button>
+            )}
 
-            <Button
-              type="button"
-              onClick={() => action.add(rawNewSession)}
-              pill
-              disabled={isInvalid}
-            >
-              <AddIcon className={clsx('-ml-1 h-4 w-4')} />
-              Save
-            </Button>
+            {!historySelected && (
+              <Button
+                type="button"
+                onClick={() => action.add(rawNewSession)}
+                pill
+                disabled={isInvalid}
+              >
+                <AddIcon className={clsx('-ml-1 h-4 w-4')} />
+                Save
+              </Button>
+            )}
           </div>
         </LabeledCard>
       </div>
