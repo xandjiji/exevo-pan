@@ -88,7 +88,7 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
                   'text-tsm flex cursor-pointer gap-1.5 py-2 px-4 font-bold tracking-wider transition-colors',
                   isSelected
                     ? 'text-primaryHighlight child:fill-primaryHighlight'
-                    : 'text-separator hover:bg-primaryVariantHighlight hover:text-onSurface child:fill-separator child:hover:fill-onSurface',
+                    : 'text-separator hover:text-onSurface child:fill-separator child:hover:fill-onSurface',
                 )}
                 style={{
                   background: 'inherit',
