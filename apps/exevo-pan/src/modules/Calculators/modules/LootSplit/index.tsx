@@ -16,6 +16,7 @@ import useDisplayTimestamp from './useDisplayTimestamp'
 import TransferTable from './TransferTable'
 import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'
+import { HistoryEntry } from './types'
 
 /* @ ToDo:
 - tooltip clipboard
@@ -41,7 +42,9 @@ const LootSplit = () => {
   const [dialogData, setDialogData] = useState<string>('')
 
   const historySelected = isHistory && selected
-  const displayedSession = historySelected ? selected.rawData : rawNewSession
+  const displayedSession = historySelected
+    ? (selected as HistoryEntry).rawData
+    : rawNewSession
 
   const displayTimestamp = useDisplayTimestamp()
 
