@@ -6,9 +6,11 @@ import { Tabs, TextArea, Text, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
 import AddIcon from 'assets/svgs/addPost.svg'
+import DataIcon from 'assets/svgs/receipt.svg'
 import RemoveIcon from 'assets/svgs/trash.svg'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
+import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'
 import useDisplayTimestamp from './useDisplayTimestamp'
 import TransferTable from './TransferTable'
@@ -16,18 +18,15 @@ import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
-- history
-    style: open dialog
-    modal: raw data disabled
-
 - tooltip clipboard
 - copy all (discord, ts)?
 - placeholder
 - none display
-
 - 'show raw xp'
-- extra expenses (tibiapal)
-- remove players (tibiapal)
+
+- advanced
+    extra expenses (tibiapal)
+    remove players (tibiapal)
 */
 
 const LootSplit = () => {
@@ -39,6 +38,7 @@ const LootSplit = () => {
   const { list, selected, action } = useHistory()
 
   const [rawNewSession, setRawNewSession] = useState(defaultValue)
+  const [dialogData, setDialogData] = useState<string>('')
 
   const historySelected = isHistory && selected
   const displayedSession = historySelected ? selected.rawData : rawNewSession
@@ -79,6 +79,8 @@ const LootSplit = () => {
                 value={rawNewSession}
                 error={isInvalid}
                 className="h-64"
+                noResize
+                noAlert
               />
             </Tabs.Panel>
             <Tabs.Panel label={`History (${list.length})`}>
@@ -174,18 +176,28 @@ const LootSplit = () => {
 
           <div className="mt-4 flex justify-end gap-2">
             {historySelected && (
-              <Button
-                type="button"
-                onClick={
-                  selected ? () => action.remove(selected?.key) : undefined
-                }
-                pill
-                hollow
-                disabled={isInvalid}
-              >
-                <RemoveIcon className="-ml-1 h-4 w-4" />
-                Delete
-              </Button>
+              <>
+                <Button
+                  type="button"
+                  onClick={
+                    selected ? () => action.remove(selected?.key) : undefined
+                  }
+                  pill
+                  hollow
+                >
+                  <RemoveIcon className="-ml-1 h-4 w-4" />
+                  Delete
+                </Button>
+                <Button
+                  type="button"
+                  onClick={() => setDialogData(selected.rawData)}
+                  pill
+                  disabled={isInvalid}
+                >
+                  <DataIcon className={clsx('-ml-1 h-4 w-4')} />
+                  Session data
+                </Button>
+              </>
             )}
 
             {!historySelected && (
@@ -202,6 +214,11 @@ const LootSplit = () => {
           </div>
         </LabeledCard>
       </div>
+
+      <SessionDialog
+        sessionData={dialogData}
+        onClose={() => setDialogData('')}
+      />
     </Main>
   )
 }
