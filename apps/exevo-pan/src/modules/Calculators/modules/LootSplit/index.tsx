@@ -1,8 +1,10 @@
 /* eslint-disable no-shadow */
 import { useState, useCallback, useMemo } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tabs, TextArea, Text, Button } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
+import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import useHistory from './useHistory'
 import useDisplayTimestamp from './useDisplayTimestamp'
@@ -12,7 +14,7 @@ import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
 - history
-    style: list, save, open dialog, delete
+    style: save, open dialog, delete
     modal: raw data disabled
 
 - tooltip clipboard
@@ -76,16 +78,33 @@ const LootSplit = () => {
                 className="h-64"
               />
             </Tabs.Panel>
-            <Tabs.Panel label="History" className="grid gap-2">
-              {list.map(({ key, timestamp }) => (
-                <button
-                  key={key}
-                  type="button"
-                  onClick={() => action.select(key)}
-                >
-                  {displayTimestamp(timestamp)}
-                </button>
-              ))}
+            <Tabs.Panel label="History">
+              <div className="custom-scrollbar -mt-1 grid max-h-64 overflow-auto pr-2">
+                {list.map(({ key, timestamp }) => {
+                  const isSelected = key === selected?.key
+
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => action.select(key)}
+                      className={clsx(
+                        'border-separator/30 text-tsm hover:text-primaryHighlight group flex cursor-pointer items-center justify-between border-0 border-solid px-4 py-2 transition-colors',
+                        isSelected ? 'text-primaryHighlight' : 'text-onSurface',
+                      )}
+                      style={{ borderBottomWidth: 1 }}
+                    >
+                      {displayTimestamp(timestamp)}
+                      <ChevronRight
+                        className={clsx(
+                          'fill-onSurface relative left-0 transition-all group-hover:left-1',
+                          isSelected ? 'left-1' : 'left-0',
+                        )}
+                      />
+                    </button>
+                  )
+                })}
+              </div>
             </Tabs.Panel>
           </Tabs.Group>
         </div>

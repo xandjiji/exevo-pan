@@ -31,11 +31,20 @@ const useHistory = () => {
   const remove = useCallback(
     (deleteKey: string) => {
       let newFirstItem: HistoryEntry | undefined
+      let deletedIndex = 0
 
       setList((prev) => {
-        const updatedList = prev.filter(({ key }) => deleteKey !== key)
+        const updatedList = prev.filter(({ key }, index) => {
+          const wontBeDeleted = deleteKey !== key
 
-        newFirstItem = updatedList[0]
+          if (!wontBeDeleted) deletedIndex = index
+
+          return wontBeDeleted
+        })
+
+        newFirstItem =
+          updatedList[deletedIndex] ?? updatedList[deletedIndex - 1]
+
         return updatedList
       })
 
