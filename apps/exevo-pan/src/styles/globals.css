@@ -3,7 +3,7 @@
 
 @layer components {
   .button-component {
-    @apply bg-primary active:bg-primary rounded-xl py-3 px-6 text-2xl;
+    @apply bg-primary active:bg-primary child:fill-onPrimary rounded-xl py-3 px-6 text-2xl;
   }
 
   .grid-background {

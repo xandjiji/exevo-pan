@@ -3,4 +3,5 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   disabled?: boolean
   loading?: boolean
   pill?: boolean
+  hollow?: boolean
 }

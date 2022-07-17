@@ -88,10 +88,7 @@ const Stamina = () => {
           }
           disabled={disableTrack}
         >
-          <AddIcon
-            className={clsx('-ml-1 h-4 w-4', !invalid && 'fill-onPrimary')}
-          />{' '}
-          {calculators.Stamina.track}
+          <AddIcon className="-ml-1 h-4 w-4" /> {calculators.Stamina.track}
         </Button>
       </LabeledCard>
 

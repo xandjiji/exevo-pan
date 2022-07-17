@@ -5,6 +5,8 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Tabs, TextArea, Text, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
+import AddIcon from 'assets/svgs/addPost.svg'
+import RemoveIcon from 'assets/svgs/trash.svg'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import useHistory from './useHistory'
@@ -15,7 +17,7 @@ import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
 - history
-    style: save, open dialog, delete
+    style: open dialog
     modal: raw data disabled
 
 - tooltip clipboard
@@ -57,7 +59,7 @@ const LootSplit = () => {
       }
     }, [displayedSession])
 
-  const isInvalid = rawNewSession && !transactions
+  const isInvalid = !!rawNewSession && !transactions
   const isWaste = teamReceipt && teamReceipt.balance < 0
 
   return (
@@ -170,16 +172,30 @@ const LootSplit = () => {
             </ChipWrapper>
           </Group>
 
-          <Button type="button" onClick={() => action.add(rawNewSession)} pill>
-            Save
-          </Button>
-          <Button
-            type="button"
-            onClick={selected ? () => action.remove(selected?.key) : undefined}
-            pill
-          >
-            Delete
-          </Button>
+          <div className="flex justify-end gap-2">
+            <Button
+              type="button"
+              onClick={
+                selected ? () => action.remove(selected?.key) : undefined
+              }
+              pill
+              hollow
+              disabled={isInvalid}
+            >
+              <RemoveIcon className="-ml-1 h-4 w-4" />
+              Delete
+            </Button>
+
+            <Button
+              type="button"
+              onClick={() => action.add(rawNewSession)}
+              pill
+              disabled={isInvalid}
+            >
+              <AddIcon className={clsx('-ml-1 h-4 w-4')} />
+              Save
+            </Button>
+          </div>
         </LabeledCard>
       </div>
     </Main>
