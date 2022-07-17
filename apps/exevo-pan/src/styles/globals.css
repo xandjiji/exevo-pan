@@ -2,6 +2,10 @@
 @tailwind utilities;
 
 @layer components {
+  .button-component {
+    @apply bg-primary active:bg-primary rounded-xl py-3 px-6 text-2xl;
+  }
+
   .grid-background {
     background: rgb(var(--primaryVariantHighlight));
     background-image: linear-gradient(

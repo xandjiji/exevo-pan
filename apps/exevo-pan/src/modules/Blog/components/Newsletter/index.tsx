@@ -8,7 +8,6 @@ import { locales } from 'Constants'
 import mailboxSrc from 'assets/mailbox.png'
 import letterSrc from 'assets/letter.png'
 import { useNewsletter } from './useNewsletter'
-import styles from './styles.module.css'
 
 const { DEFAULT_LOCALE } = locales
 
@@ -86,10 +85,7 @@ const Newsletter = ({
             type="submit"
             loading={request.status === 'LOADING'}
             onClick={registerUser}
-            className={clsx(
-              styles.button,
-              'flex min-h-[52px] flex-wrap items-center justify-center gap-4 whitespace-nowrap',
-            )}
+            className="lgr:text-2xl flex min-h-[52px] flex-wrap items-center justify-center gap-4 whitespace-nowrap lg:text-base"
           >
             {blog.Newsletter.buttonText}
             <FadeImage
