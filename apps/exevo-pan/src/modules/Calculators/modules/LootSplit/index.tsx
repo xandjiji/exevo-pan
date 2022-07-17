@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
-import { useState, useMemo } from 'react'
+import { useState, useCallback, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Tabs, TextArea, Text } from 'components/Atoms'
+import { Tabs, TextArea, Text, Button } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import useHistory from './useHistory'
@@ -13,7 +13,7 @@ import { defaultValue } from './defaultValue'
 /* @ ToDo:
 - history
     tab
-    actions: save, delete
+    actions: select, remove
     modal: raw data disabled
 
 - tooltip clipboard
@@ -31,42 +31,49 @@ const LootSplit = () => {
     translations: { common },
   } = useTranslations()
 
-  const [rawSession, setRawSession] = useState(defaultValue)
+  const [isHistory, setIsHistory] = useState(false)
   const { list, action } = useHistory()
   const displayTimestamp = useDisplayTimestamp()
+
+  const [rawNewSession, setRawNewSession] = useState(defaultValue)
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
     useMemo(() => {
       try {
-        const teamReceipt = parse.TeamReceipt(rawSession)
-        const playerReceipts = parse.PlayerReceipts(rawSession)
+        const teamReceipt = parse.TeamReceipt(rawNewSession)
+        const playerReceipts = parse.PlayerReceipts(rawNewSession)
         const transactions = findTransactionsRequired(playerReceipts)
-        const timestamp = parse.SessionTimestamp(rawSession)
+        const timestamp = parse.SessionTimestamp(rawNewSession)
 
         return { teamReceipt, playerReceipts, transactions, timestamp }
       } catch {
         return {}
       }
-    }, [rawSession])
+    }, [rawNewSession])
 
-  const isInvalid = rawSession && !transactions
+  const isInvalid = rawNewSession && !transactions
   const isWaste = teamReceipt && teamReceipt.balance < 0
 
   return (
     <Main>
       <div className="grid gap-6 lg:grid-cols-2">
         <div>
-          <Tabs.Group>
+          <Tabs.Group
+            onChange={useCallback(
+              (tabIndex) => setIsHistory(tabIndex === 1),
+              [],
+            )}
+          >
             <Tabs.Panel label="New session">
               <TextArea
                 label="Paste your party hunt session"
-                onChange={(e) => setRawSession(e.target.value)}
-                value={rawSession}
+                onChange={(e) => setRawNewSession(e.target.value)}
+                value={rawNewSession}
                 error={isInvalid}
                 className="h-64"
               />
             </Tabs.Panel>
-            <Tabs.Panel label="History">
+            <Tabs.Panel label="History" className="grid gap-2">
               {list.map(({ key, timestamp }) => (
                 <span key={key}>{displayTimestamp(timestamp)}</span>
               ))}
@@ -127,6 +134,10 @@ const LootSplit = () => {
               )}
             </ChipWrapper>
           </Group>
+
+          <Button type="button" onClick={() => action.add(rawNewSession)}>
+            Save
+          </Button>
         </LabeledCard>
       </div>
     </Main>

@@ -1,4 +1,4 @@
-import { useCallback } from 'react'
+import { useMemo, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useStoredState } from 'hooks'
 import { parse } from './utils'
@@ -10,8 +10,13 @@ const useHistory = () => {
     [],
   )
 
+  const sortedList = useMemo(
+    () => list.sort((a, b) => b.timestamp - a.timestamp),
+    [list],
+  )
+
   const add = useCallback(
-    (rawData) =>
+    (rawData: string) =>
       setList((prev) => [
         ...prev,
         {
@@ -29,7 +34,7 @@ const useHistory = () => {
     [setList],
   )
 
-  return { list, action: { add, remove } }
+  return { list: sortedList, action: { add, remove } }
 }
 
 export default useHistory
