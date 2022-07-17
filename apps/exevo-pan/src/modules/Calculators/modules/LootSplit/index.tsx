@@ -10,13 +10,14 @@ import { parse, findTransactionsRequired, generateDatetime } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
-- copy all (transactions too)?
+- copy all (discord, ts)?
 - placeholder
-- none display
 
 - history
     tab
     actions: save, delete, raw modal
+
+- none display
 
 - extra expenses (tibiapal)
 - remove players (tibiapal)
