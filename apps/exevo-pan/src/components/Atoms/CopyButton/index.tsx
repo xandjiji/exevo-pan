@@ -37,7 +37,7 @@ const CopyButton = ({ className, copyString, ...props }: CopyButtonProps) => {
       onClick={handleClick}
     >
       {clicked ? (
-        <ValidIcon className="fill-green animate-rollIn h-6 w-6 p-[3px]" />
+        <ValidIcon className="fill-greenHighlight animate-rollIn h-6 w-6 p-[3px]" />
       ) : (
         <CopyIcon className="fill-onSurface h-6 w-6 p-[3px]" />
       )}
