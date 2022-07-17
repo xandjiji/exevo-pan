@@ -170,17 +170,13 @@ const LootSplit = () => {
             </ChipWrapper>
           </Group>
 
-          <Button
-            type="button"
-            onClick={() => action.add(rawNewSession)}
-            className="py-1.5 px-4"
-          >
+          <Button type="button" onClick={() => action.add(rawNewSession)} pill>
             Save
           </Button>
           <Button
             type="button"
             onClick={selected ? () => action.remove(selected?.key) : undefined}
-            className="py-1.5 px-4"
+            pill
           >
             Delete
           </Button>

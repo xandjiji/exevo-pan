@@ -5,6 +5,7 @@ import { ButtonProps } from './types'
 const Button = ({
   className,
   children,
+  pill = false,
   loading = false,
   disabled,
   ...props
@@ -19,10 +20,13 @@ const Button = ({
     <button
       className={clsx(
         'button-component hover:highlight-10 cursor-pointer shadow-md transition-all hover:shadow-lg active:shadow-inner',
+        pill &&
+          'flex items-center justify-center gap-1 py-1.5 px-4 text-xs font-bold uppercase tracking-wider',
         disabled &&
           !loading &&
           'bg-separator cursor-default text-black opacity-60 shadow-none',
         isDisabled ? 'pointer-events-none text-black' : 'text-onPrimary',
+
         className,
       )}
       {...props}

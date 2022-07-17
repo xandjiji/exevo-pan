@@ -79,7 +79,7 @@ const Stamina = () => {
 
         <Button
           type="button"
-          className="py-1.5 px-4 text-xs font-bold uppercase tracking-wider"
+          pill
           onClick={() =>
             action.add({
               currentStamina,
@@ -88,12 +88,10 @@ const Stamina = () => {
           }
           disabled={disableTrack}
         >
-          <div className="flex items-center justify-center gap-1">
-            <AddIcon
-              className={clsx('-ml-1 h-4 w-4', !invalid && 'fill-onPrimary')}
-            />{' '}
-            {calculators.Stamina.track}
-          </div>
+          <AddIcon
+            className={clsx('-ml-1 h-4 w-4', !invalid && 'fill-onPrimary')}
+          />{' '}
+          {calculators.Stamina.track}
         </Button>
       </LabeledCard>
 
