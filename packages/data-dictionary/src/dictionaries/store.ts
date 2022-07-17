@@ -474,6 +474,22 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Knightly Guard',
     value: 250,
   },
+  'knightly cabinet': {
+    name: 'Knightly Cabinet',
+    value: 100,
+  },
+  'knightly chair': {
+    name: 'Knightly Chair',
+    value: 70,
+  },
+  'well-laid knightly table': {
+    name: 'Knightly Table',
+    value: 60,
+  },
+  'knightly table': {
+    name: 'Knightly Table',
+    value: 60,
+  },
   'brocade tapestry': {
     name: 'Brocade Tapestry',
     value: 50,
