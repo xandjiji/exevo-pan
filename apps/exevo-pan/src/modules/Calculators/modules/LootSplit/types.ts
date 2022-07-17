@@ -10,3 +10,9 @@ export type Transaction<ReferenceType> = {
   to: ReferenceType
   amount: number
 }
+
+export type HistoryEntry = {
+  key: string
+  timestamp: number
+  rawData: string
+}

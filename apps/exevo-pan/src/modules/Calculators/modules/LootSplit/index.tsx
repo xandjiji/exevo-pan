@@ -4,6 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Tabs, TextArea, Text } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
+import useHistory from './useHistory'
 import TransferTable from './TransferTable'
 import { parse, findTransactionsRequired, generateDatetime } from './utils'
 import { defaultValue } from './defaultValue'
@@ -11,7 +12,8 @@ import { defaultValue } from './defaultValue'
 /* @ ToDo:
 - history
     tab
-    actions: save, delete, raw modal
+    actions: save, delete
+    modal: raw data disabled
 
 - tooltip clipboard
 - copy all (discord, ts)?
@@ -29,6 +31,7 @@ const LootSplit = () => {
   } = useTranslations()
 
   const [rawSession, setRawSession] = useState(defaultValue)
+  const { list, action } = useHistory()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
     useMemo(() => {
@@ -67,7 +70,11 @@ const LootSplit = () => {
                 className="h-64"
               />
             </Tabs.Panel>
-            <Tabs.Panel label="History">history</Tabs.Panel>
+            <Tabs.Panel label="History">
+              {list.map(({ key, timestamp }) => (
+                <span key={key}>{timestamp}</span>
+              ))}
+            </Tabs.Panel>
           </Tabs.Group>
         </div>
 
