@@ -3,6 +3,7 @@ import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tabs, TextArea, Text, Button } from 'components/Atoms'
+import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
@@ -106,6 +107,12 @@ const LootSplit = () => {
                     </button>
                   )
                 })}
+                {list.length === 0 && (
+                  <EmptyState
+                    text={{ content: 'No sessions', size: 24 }}
+                    className="mx-auto mt-4 w-24"
+                  />
+                )}
               </div>
             </Tabs.Panel>
           </Tabs.Group>
