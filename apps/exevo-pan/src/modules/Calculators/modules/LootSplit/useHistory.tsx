@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import { useState, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useStoredState } from 'hooks'
@@ -28,8 +29,18 @@ const useHistory = () => {
   )
 
   const remove = useCallback(
-    (deleteKey: string) =>
-      setList((prev) => prev.filter(({ key }) => deleteKey !== key)),
+    (deleteKey: string) => {
+      let newFirstItem: HistoryEntry | undefined
+
+      setList((prev) => {
+        const updatedList = prev.filter(({ key }) => deleteKey !== key)
+
+        newFirstItem = updatedList[0]
+        return updatedList
+      })
+
+      setSelected(newFirstItem)
+    },
     [setList],
   )
 

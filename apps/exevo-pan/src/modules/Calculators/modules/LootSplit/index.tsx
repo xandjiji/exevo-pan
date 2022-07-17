@@ -12,8 +12,7 @@ import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
 - history
-    tab
-    actions: remove
+    style: list, save, open dialog, delete
     modal: raw data disabled
 
 - tooltip clipboard
@@ -147,6 +146,12 @@ const LootSplit = () => {
 
           <Button type="button" onClick={() => action.add(rawNewSession)}>
             Save
+          </Button>
+          <Button
+            type="button"
+            onClick={selected ? () => action.remove(selected?.key) : undefined}
+          >
+            Delete
           </Button>
         </LabeledCard>
       </div>
