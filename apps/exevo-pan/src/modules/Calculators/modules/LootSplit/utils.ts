@@ -97,18 +97,3 @@ export const findTransactionsRequired = (
 
   return transactions
 }
-
-export const generateDatetime = (timestamp: number) => {
-  const { day, month, year, weekday, hours, minutes } = dateToDateObject(
-    new Date(timestamp),
-  )
-
-  return {
-    day,
-    month,
-    year,
-    hours: padTime(hours),
-    minutes: padTime(minutes),
-    weekday,
-  }
-}

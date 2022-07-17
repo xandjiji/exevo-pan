@@ -5,8 +5,9 @@ import { Tabs, TextArea, Text } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import useHistory from './useHistory'
+import useDisplayTimestamp from './useDisplayTimestamp'
 import TransferTable from './TransferTable'
-import { parse, findTransactionsRequired, generateDatetime } from './utils'
+import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
@@ -32,6 +33,7 @@ const LootSplit = () => {
 
   const [rawSession, setRawSession] = useState(defaultValue)
   const { list, action } = useHistory()
+  const displayTimestamp = useDisplayTimestamp()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
     useMemo(() => {
@@ -46,12 +48,6 @@ const LootSplit = () => {
         return {}
       }
     }, [rawSession])
-
-  const sessionDate = useMemo(
-    () =>
-      timestamp ? generateDatetime(timestamp) : generateDatetime(+new Date()),
-    [timestamp],
-  )
 
   const isInvalid = rawSession && !transactions
   const isWaste = teamReceipt && teamReceipt.balance < 0
@@ -72,7 +68,7 @@ const LootSplit = () => {
             </Tabs.Panel>
             <Tabs.Panel label="History">
               {list.map(({ key, timestamp }) => (
-                <span key={key}>{timestamp}</span>
+                <span key={key}>{displayTimestamp(timestamp)}</span>
               ))}
             </Tabs.Panel>
           </Tabs.Group>
@@ -98,13 +94,7 @@ const LootSplit = () => {
               />
             </strong>
             {timestamp ? (
-              <span>
-                {`${common.Month[sessionDate.month]} ${sessionDate.day}, ${
-                  sessionDate.year
-                } - ${sessionDate.hours}:${sessionDate.minutes} (${
-                  common.FullWeekdays[sessionDate.weekday]
-                })`}
-              </span>
+              <span>{displayTimestamp(timestamp)}</span>
             ) : (
               <span>none</span>
             )}
