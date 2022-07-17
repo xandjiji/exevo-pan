@@ -13,6 +13,8 @@ import { parse, findTransactionsRequired } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
+button style component tailwind
+
 - history
     style: save, open dialog, delete
     modal: raw data disabled
