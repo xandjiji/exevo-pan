@@ -193,7 +193,9 @@ const LootSplit = () => {
                 </Button>
                 <Button
                   type="button"
-                  onClick={() => setDialogData(selected.rawData)}
+                  onClick={() =>
+                    setDialogData((selected as HistoryEntry).rawData)
+                  }
                   pill
                   disabled={isInvalid}
                 >
