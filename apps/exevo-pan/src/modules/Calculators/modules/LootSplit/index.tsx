@@ -13,7 +13,7 @@ import { defaultValue } from './defaultValue'
 /* @ ToDo:
 - history
     tab
-    actions: select, remove
+    actions: remove
     modal: raw data disabled
 
 - tooltip clipboard
@@ -32,24 +32,28 @@ const LootSplit = () => {
   } = useTranslations()
 
   const [isHistory, setIsHistory] = useState(false)
-  const { list, action } = useHistory()
-  const displayTimestamp = useDisplayTimestamp()
+  const { list, selected, action } = useHistory()
 
   const [rawNewSession, setRawNewSession] = useState(defaultValue)
+
+  const displayedSession =
+    isHistory && selected ? selected.rawData : rawNewSession
+
+  const displayTimestamp = useDisplayTimestamp()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
     useMemo(() => {
       try {
-        const teamReceipt = parse.TeamReceipt(rawNewSession)
-        const playerReceipts = parse.PlayerReceipts(rawNewSession)
+        const teamReceipt = parse.TeamReceipt(displayedSession)
+        const playerReceipts = parse.PlayerReceipts(displayedSession)
         const transactions = findTransactionsRequired(playerReceipts)
-        const timestamp = parse.SessionTimestamp(rawNewSession)
+        const timestamp = parse.SessionTimestamp(displayedSession)
 
         return { teamReceipt, playerReceipts, transactions, timestamp }
       } catch {
         return {}
       }
-    }, [rawNewSession])
+    }, [displayedSession])
 
   const isInvalid = rawNewSession && !transactions
   const isWaste = teamReceipt && teamReceipt.balance < 0
@@ -75,7 +79,13 @@ const LootSplit = () => {
             </Tabs.Panel>
             <Tabs.Panel label="History" className="grid gap-2">
               {list.map(({ key, timestamp }) => (
-                <span key={key}>{displayTimestamp(timestamp)}</span>
+                <button
+                  key={key}
+                  type="button"
+                  onClick={() => action.select(key)}
+                >
+                  {displayTimestamp(timestamp)}
+                </button>
               ))}
             </Tabs.Panel>
           </Tabs.Group>
