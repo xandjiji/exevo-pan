@@ -1,8 +1,7 @@
 /* eslint-disable no-shadow */
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import clsx from 'clsx'
-import { TextArea, Text } from 'components/Atoms'
+import { Tabs, TextArea, Text } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import TransferTable from './TransferTable'
@@ -10,15 +9,16 @@ import { parse, findTransactionsRequired, generateDatetime } from './utils'
 import { defaultValue } from './defaultValue'
 
 /* @ ToDo:
-- copy all (discord, ts)?
-- placeholder
-
 - history
     tab
     actions: save, delete, raw modal
 
+- tooltip clipboard
+- copy all (discord, ts)?
+- placeholder
 - none display
 
+- 'show raw xp'
 - extra expenses (tibiapal)
 - remove players (tibiapal)
 */
@@ -56,12 +56,20 @@ const LootSplit = () => {
   return (
     <Main>
       <div className="grid gap-6 lg:grid-cols-2">
-        <TextArea
-          label="Party hunt session"
-          onChange={(e) => setRawSession(e.target.value)}
-          value={rawSession}
-          error={isInvalid}
-        />
+        <div>
+          <Tabs.Group>
+            <Tabs.Panel label="New session">
+              <TextArea
+                label="Paste your party hunt session"
+                onChange={(e) => setRawSession(e.target.value)}
+                value={rawSession}
+                error={isInvalid}
+                className="h-64"
+              />
+            </Tabs.Panel>
+            <Tabs.Panel label="History">history</Tabs.Panel>
+          </Tabs.Group>
+        </div>
 
         <LabeledCard labelText="Transfers" className="max-w-[300px]">
           <Group>
