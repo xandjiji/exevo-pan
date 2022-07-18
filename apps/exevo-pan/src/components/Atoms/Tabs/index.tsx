@@ -10,6 +10,7 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import { useIsMounted } from 'hooks'
+import { scrollHorizontallyIntoView } from 'utils'
 import useIds from './useIds'
 import styles from './styles.module.css'
 import { TabsProps, PanelProps } from './types'
@@ -47,9 +48,7 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
       if (!isMounted) return
       const activeTab = tablistRef.current?.children[activeIndex]
 
-      if (activeTab) {
-        activeTab.scrollIntoView({ behavior: 'smooth' })
-      }
+      if (activeTab) scrollHorizontallyIntoView(activeTab)
     }, [activeIndex])
 
     return (

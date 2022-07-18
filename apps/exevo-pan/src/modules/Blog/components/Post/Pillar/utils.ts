@@ -1,4 +1,4 @@
-import { debounce } from 'utils'
+import { debounce, scrollHorizontallyIntoView } from 'utils'
 
 const DEBOUNCE_DELAY = 300
 
@@ -10,9 +10,6 @@ export const debouncedScrollIntoView = debounce((title: string) => {
   if (!isDesktop()) {
     const navElement = document.getElementById(generateNavId(title))
 
-    if (navElement) {
-      const { offsetLeft, parentElement } = navElement
-      parentElement?.scroll({ left: offsetLeft, behavior: 'smooth' })
-    }
+    if (navElement) scrollHorizontallyIntoView(navElement)
   }
 }, DEBOUNCE_DELAY)
