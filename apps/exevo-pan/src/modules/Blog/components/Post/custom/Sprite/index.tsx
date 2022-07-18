@@ -19,13 +19,14 @@ const Sprite = ({
     }}
   >
     {children}
-    <div
-      className="absolute top-1/2 bg-no-repeat"
+    <img
+      className="absolute top-1/2 select-none"
+      src={src}
+      alt={children}
       style={{
         left: -(width + SPACE_GAP),
         width,
         height,
-        backgroundImage: `url("${src}")`,
         transform: 'translateY(-50%)',
       }}
     />
