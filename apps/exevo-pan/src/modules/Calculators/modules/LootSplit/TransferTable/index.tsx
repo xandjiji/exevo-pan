@@ -4,16 +4,23 @@ import { Text, CopyButton } from 'components/Atoms'
 import { TransferTableProps } from './types'
 import styles from './styles.module.css'
 
+const Nickname = (args: JSX.IntrinsicElements['td']) => (
+  <td
+    className="max-w-[15vw] overflow-hidden text-ellipsis whitespace-nowrap lg:w-[96px] lg:max-w-[96px]"
+    {...args}
+  />
+)
+
 const TransferTable = ({
   transactions,
   className,
   ...props
 }: TransferTableProps) => (
-  <table className={clsx('border-collapse', className)} {...props}>
+  <table className={clsx('border-collapse lg:max-w-fit', className)} {...props}>
     <tbody>
       {transactions.map(({ from, to, amount }) => (
         <tr key={`${from}-${to}`} className="text-tsm">
-          <td>{from}</td>
+          <Nickname>{from}</Nickname>
           <td>
             <div className="px-3 py-0.5">
               <Text.GoldCoin value={amount} className="pr-2 font-bold" />
@@ -25,7 +32,7 @@ const TransferTable = ({
               />
             </div>
           </td>
-          <td>{to}</td>
+          <Nickname>{to}</Nickname>
           <td>
             <CopyButton
               className="ml-3"
