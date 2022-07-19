@@ -77,10 +77,10 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
 
       <LabeledCard labelText={calculators.ExerciseWeapons.labels.results}>
         <Group>
-          <div className="flex items-center gap-1">
-            <strong>{calculators.ExerciseWeapons.labels.moneyCost}</strong>
+          <InfoTooltip.LabelWrapper className="font-bold">
+            {calculators.ExerciseWeapons.labels.moneyCost}
             <InfoTooltip
-              className="h-3 w-3"
+              labelSize
               content={
                 <span className="block w-36 leading-tight">
                   {calculators.ExerciseWeapons.moneyTooltip.a}{' '}
@@ -95,7 +95,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
                 </span>
               }
             />
-          </div>
+          </InfoTooltip.LabelWrapper>
           <ChipWrapper className="shrink-0 flex-wrap">
             <Chip>
               <Text.TibiaCoin value={cost.tc} />

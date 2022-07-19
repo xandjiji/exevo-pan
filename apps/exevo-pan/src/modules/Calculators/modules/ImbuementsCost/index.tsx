@@ -127,10 +127,10 @@ const ImbuementsCost = () => {
         <Spacer />
 
         <Group>
-          <div className="flex items-center gap-1">
+          <InfoTooltip.LabelWrapper>
             <strong>{calculators.ImbuementsCost.totalCost}</strong>
             <InfoTooltip
-              className="h-3 w-3"
+              labelSize
               content={
                 <span className="grid gap-2 whitespace-nowrap">
                   <div className="grid grid-cols-2 gap-8">
@@ -163,7 +163,7 @@ const ImbuementsCost = () => {
                 </span>
               }
             />
-          </div>
+          </InfoTooltip.LabelWrapper>
           <Chip>
             <Text.GoldCoin value={lowestCost} />
           </Chip>

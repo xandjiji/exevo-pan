@@ -72,10 +72,10 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         <ClientComponent className="flex items-end gap-2">
           <Input
             label={
-              <span className="flex items-center gap-1 whitespace-nowrap">
+              <InfoTooltip.LabelWrapper className="whitespace-nowrap">
                 {calculators.ExerciseWeapons.labels.currentSkill}
-                <InfoTooltip content="Base + Loyalty" className="h-3 w-3" />
-              </span>
+                <InfoTooltip content="Base + Loyalty" labelSize />
+              </InfoTooltip.LabelWrapper>
             }
             aria-label={calculators.ExerciseWeapons.labels.currentSkill}
             type="number"
