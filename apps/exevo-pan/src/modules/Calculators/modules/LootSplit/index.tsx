@@ -3,7 +3,7 @@ import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
-import { Tabs, TextArea, Text, Button } from 'components/Atoms'
+import { Tabs, TextArea, Text, Button, CopyButton } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
 import clipboardSrc from 'assets/clipboard.png'
@@ -11,6 +11,7 @@ import AddIcon from 'assets/svgs/addPost.svg'
 import DataIcon from 'assets/svgs/receipt.svg'
 import RemoveIcon from 'assets/svgs/trash.svg'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
+import { formatNumberWithCommas } from 'utils'
 import { Main, LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'
@@ -29,6 +30,8 @@ import { HistoryEntry } from './types'
     extra expenses (tibiapal)
     remove players (tibiapal)
 */
+
+const NEWLINE = '\n'
 
 const LootSplit = () => {
   const {
@@ -64,6 +67,29 @@ const LootSplit = () => {
 
   const isInvalid = !!rawNewSession && !transactions
   const isWaste = teamReceipt && teamReceipt.balance < 0
+
+  const sharedProfit = Math.floor(teamReceipt.balance / playerReceipts.length)
+
+  const copyText = [
+    `📅 Team session: ${displayTimestamp(timestamp)}`,
+    '',
+    '👥 Party members:',
+    ...(playerReceipts ? playerReceipts.map(({ name }) => `- ${name}`) : ''),
+    '',
+    '🔄 Bank transfers:',
+    ...(transactions
+      ? transactions.map(
+          ({ from, to, amount }) =>
+            `- ${from} should transfer ${formatNumberWithCommas(
+              amount,
+            )} gp to ${to}`,
+        )
+      : ''),
+    '',
+    `💰 Total ${isWaste ? 'waste' : 'profit'}: ${formatNumberWithCommas(
+      teamReceipt.balance,
+    )}gp (${formatNumberWithCommas(sharedProfit)} gp each)`,
+  ].join(NEWLINE)
 
   return (
     <Main>
@@ -139,6 +165,10 @@ const LootSplit = () => {
         </div>
 
         <LabeledCard labelText="Transfers" className="max-w-[300px]">
+          <CopyButton
+            copyString={copyText}
+            className="absolute top-4 right-6"
+          />
           <Group>
             <InfoTooltip.LabelWrapper className="font-bold">
               Team session{' '}
@@ -178,12 +208,7 @@ const LootSplit = () => {
             <ChipWrapper>
               {teamReceipt && playerReceipts ? (
                 <Chip>
-                  <Text.GoldCoin
-                    value={Math.floor(
-                      teamReceipt.balance / playerReceipts.length,
-                    )}
-                    displaySign={isWaste}
-                  />
+                  <Text.GoldCoin value={sharedProfit} displaySign={isWaste} />
                   <span className="-ml-1">each</span>
                 </Chip>
               ) : (
@@ -215,7 +240,7 @@ const LootSplit = () => {
                   disabled={isInvalid}
                 >
                   <DataIcon className={clsx('-ml-1 h-4 w-4')} />
-                  Session data
+                  Raw data
                 </Button>
               </>
             )}
