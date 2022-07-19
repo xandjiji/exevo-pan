@@ -9,15 +9,12 @@ const InfoTooltip = ({
   className,
   ...props
 }: InfoTooltipProps) => (
-  <span className={clsx('shrink-0', className)} {...props}>
+  <span
+    className={clsx('shrink-0', labelSize && 'h-3 w-3', className)}
+    {...props}
+  >
     <Tooltip content={content} offset={[0, 6]}>
-      <InfoIcon
-        className={clsx(
-          'fill-onSurface h-full w-full',
-          labelSize && 'h-3 w-3',
-          className,
-        )}
-      />
+      <InfoIcon className={clsx('fill-onSurface h-full w-full', className)} />
     </Tooltip>
   </span>
 )

@@ -81,6 +81,7 @@ const LootSplit = () => {
                   <InfoTooltip.LabelWrapper>
                     Paste your party hunt session
                     <InfoTooltip
+                      labelSize
                       content={
                         <Image
                           src={clipboardSrc}
@@ -142,6 +143,7 @@ const LootSplit = () => {
             <InfoTooltip.LabelWrapper className="font-bold">
               Team session{' '}
               <InfoTooltip
+                labelSize
                 content={
                   <ul className="grid gap-1 text-left">
                     {playerReceipts ? (
