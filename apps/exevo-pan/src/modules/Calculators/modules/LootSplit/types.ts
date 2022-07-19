@@ -16,3 +16,10 @@ export type HistoryEntry = {
   timestamp: number
   rawData: string
 }
+
+export type HuntData = {
+  timestamp?: number
+  teamReceipt?: Receipt
+  playerReceipts?: Receipt[]
+  transactions?: Transaction<string>[]
+}
