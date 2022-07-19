@@ -1,4 +1,3 @@
-import { dateToDateObject, padTime } from 'utils'
 import { Receipt, Transaction } from './types'
 
 const breakLines = (text: string): string[] => text.split('\n')

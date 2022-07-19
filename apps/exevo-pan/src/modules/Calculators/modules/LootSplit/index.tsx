@@ -22,7 +22,7 @@ import { defaultValue } from './defaultValue'
 import { HistoryEntry } from './types'
 
 /* @ ToDo:
-- placeholder
+- overall layout
 - none display
 
 - advanced
@@ -101,6 +101,7 @@ const LootSplit = () => {
                   </InfoTooltip.LabelWrapper>
                 }
                 aria-label="Paste your party hunt session"
+                placeholder={defaultValue}
                 onChange={(e) => setRawNewSession(e.target.value)}
                 value={rawNewSession}
                 error={isInvalid}
