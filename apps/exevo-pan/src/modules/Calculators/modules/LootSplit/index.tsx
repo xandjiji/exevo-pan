@@ -2,9 +2,11 @@
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
+import Image from 'next/image'
 import { Tabs, TextArea, Text, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
+import clipboardSrc from 'assets/clipboard.png'
 import AddIcon from 'assets/svgs/addPost.svg'
 import DataIcon from 'assets/svgs/receipt.svg'
 import RemoveIcon from 'assets/svgs/trash.svg'
@@ -19,11 +21,9 @@ import { defaultValue } from './defaultValue'
 import { HistoryEntry } from './types'
 
 /* @ ToDo:
-- tooltip clipboard
 - copy all (discord, ts)?
 - placeholder
 - none display
-- 'show raw xp'
 
 - advanced
     extra expenses (tibiapal)
@@ -77,7 +77,21 @@ const LootSplit = () => {
           >
             <Tabs.Panel label="New session">
               <TextArea
-                label="Paste your party hunt session"
+                label={
+                  <InfoTooltip.LabelWrapper>
+                    Paste your party hunt session
+                    <InfoTooltip
+                      content={
+                        <Image
+                          src={clipboardSrc}
+                          alt="Party Hunt session analyser"
+                          unoptimized
+                        />
+                      }
+                    />
+                  </InfoTooltip.LabelWrapper>
+                }
+                aria-label="Paste your party hunt session"
                 onChange={(e) => setRawNewSession(e.target.value)}
                 value={rawNewSession}
                 error={isInvalid}
@@ -125,10 +139,9 @@ const LootSplit = () => {
 
         <LabeledCard labelText="Transfers" className="max-w-[300px]">
           <Group>
-            <strong className="flex items-center gap-1 whitespace-nowrap">
+            <InfoTooltip.LabelWrapper className="font-bold">
               Team session{' '}
               <InfoTooltip
-                className="h-3 w-3"
                 content={
                   <ul className="grid gap-1 text-left">
                     {playerReceipts ? (
@@ -141,7 +154,7 @@ const LootSplit = () => {
                   </ul>
                 }
               />
-            </strong>
+            </InfoTooltip.LabelWrapper>
             {timestamp ? (
               <span>{displayTimestamp(timestamp)}</span>
             ) : (
