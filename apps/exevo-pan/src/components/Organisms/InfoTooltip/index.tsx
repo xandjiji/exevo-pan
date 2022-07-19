@@ -11,4 +11,17 @@ const InfoTooltip = ({ content, className, ...props }: InfoTooltipProps) => (
   </span>
 )
 
+InfoTooltip.LabelWrapper = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['span']) => (
+  <span
+    className={clsx(
+      'child:w-3 child:h-3 flex items-center gap-1 whitespace-nowrap',
+      className,
+    )}
+    {...props}
+  />
+)
+
 export default InfoTooltip
