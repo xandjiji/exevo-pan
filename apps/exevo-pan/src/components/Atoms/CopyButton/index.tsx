@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import clsx from 'clsx'
 import { copyToClipboard } from 'utils'
 import CopyIcon from 'assets/svgs/copy.svg'
@@ -22,6 +22,8 @@ const CopyButton = ({ className, copyString, ...props }: CopyButtonProps) => {
     },
     [copyString],
   )
+
+  useEffect(() => setClicked(false), [copyString])
 
   return (
     <button

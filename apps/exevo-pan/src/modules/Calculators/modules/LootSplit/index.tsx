@@ -22,12 +22,10 @@ import { defaultValue } from './defaultValue'
 import { HistoryEntry } from './types'
 
 /* @ ToDo:
-- none display
-- clipboard state
-
 - advanced
-    extra expenses (tibiapal)
-    remove players (tibiapal)
+    extra expenses
+
+- i18n
 */
 
 const LootSplit = () => {
@@ -162,7 +160,7 @@ const LootSplit = () => {
                   {playerReceipts ? (
                     playerReceipts.map(({ name }) => <li key={name}>{name}</li>)
                   ) : (
-                    <span>none</span>
+                    <span>None</span>
                   )}
                 </ul>
               }
@@ -171,7 +169,7 @@ const LootSplit = () => {
           {timestamp ? (
             <span>{displayTimestamp(timestamp)}</span>
           ) : (
-            <span>none</span>
+            <span>None</span>
           )}
         </Group>
 
@@ -180,7 +178,7 @@ const LootSplit = () => {
           {transactions ? (
             <TransferTable transactions={transactions} />
           ) : (
-            <span>none</span>
+            <span>None</span>
           )}
         </Group>
 
@@ -198,7 +196,7 @@ const LootSplit = () => {
                 <span className="-ml-1">each</span>
               </Chip>
             ) : (
-              <span>none</span>
+              <span>None</span>
             )}
           </ChipWrapper>
         </Group>
