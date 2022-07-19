@@ -21,6 +21,7 @@ const GoldCoin = ({ value, displaySign = false, ...props }: GoldCoinProps) => {
         unoptimized
         width={9}
         height={9}
+        className="select-none"
       />
       {formattedValue}
     </S.Flex>
