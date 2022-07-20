@@ -12,6 +12,7 @@ import DataIcon from 'assets/svgs/receipt.svg'
 import RemoveIcon from 'assets/svgs/trash.svg'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { LabeledCard, Group, Chip, ChipWrapper } from '../../components'
+import AdvancedOptionsDialog from './AdvancedOptionsDialog'
 import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'
 import useDisplayTimestamp from './useDisplayTimestamp'
@@ -38,6 +39,7 @@ const LootSplit = () => {
 
   const [rawNewSession, setRawNewSession] = useState(defaultValue)
   const [dialogData, setDialogData] = useState<string>('')
+  const [openAdvancedOptions, setOpenAdvancedOptions] = useState(false)
 
   const historySelected = isHistory && selected
   const displayedSession = historySelected
@@ -77,7 +79,7 @@ const LootSplit = () => {
         onChange={useCallback((tabIndex) => setIsHistory(tabIndex === 1), [])}
         className="shrink-0 md:w-[256px]"
       >
-        <Tabs.Panel label="New session" className="h-64">
+        <Tabs.Panel label="New session" className="flex h-64 flex-col gap-2">
           <TextArea
             label={
               <InfoTooltip.LabelWrapper>
@@ -101,8 +103,16 @@ const LootSplit = () => {
             error={isInvalid}
             noResize
             noAlert
-            className="h-full"
+            className="grow"
           />
+          <Button
+            type="button"
+            pill
+            disabled={isInvalid}
+            onClick={() => setOpenAdvancedOptions(true)}
+          >
+            Advanced options
+          </Button>
         </Tabs.Panel>
         <Tabs.Panel label={`History (${list.length})`} className="h-64">
           <div className="custom-scrollbar -mt-1 h-full overflow-auto pr-2">
@@ -243,6 +253,11 @@ const LootSplit = () => {
         </div>
       </LabeledCard>
 
+      <AdvancedOptionsDialog
+        isOpen={openAdvancedOptions}
+        playerReceipts={playerReceipts ?? []}
+        onClose={() => setOpenAdvancedOptions(false)}
+      />
       <SessionDialog
         sessionData={dialogData}
         onClose={() => setDialogData('')}
