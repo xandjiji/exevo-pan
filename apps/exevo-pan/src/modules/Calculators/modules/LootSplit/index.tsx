@@ -15,6 +15,7 @@ import { LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import AdvancedOptionsDialog from './AdvancedOptionsDialog'
 import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'
+import useExtraExpenses from './useExtraExpenses'
 import useDisplayTimestamp from './useDisplayTimestamp'
 import useSessionClipboard from './useSessionClipboard'
 import TransferTable from './TransferTable'
@@ -40,6 +41,8 @@ const LootSplit = () => {
   const [rawNewSession, setRawNewSession] = useState(defaultValue)
   const [dialogData, setDialogData] = useState<string>('')
   const [openAdvancedOptions, setOpenAdvancedOptions] = useState(false)
+
+  const [extraExpenses, setExtraExpenses] = useExtraExpenses(rawNewSession)
 
   const historySelected = isHistory && selected
   const displayedSession = historySelected
@@ -256,6 +259,8 @@ const LootSplit = () => {
       <AdvancedOptionsDialog
         isOpen={openAdvancedOptions}
         playerReceipts={playerReceipts ?? []}
+        extraExpenses={extraExpenses}
+        setExtraExpenses={setExtraExpenses}
         onClose={() => setOpenAdvancedOptions(false)}
       />
       <SessionDialog

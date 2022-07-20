@@ -7,7 +7,7 @@ const sanitizeValueLine = (line: string): number => {
   return +value.trim().replace(/,/g, '')
 }
 
-export const parseReceipt = ([name, ...valueLines]: string[]): Receipt => {
+const parseReceipt = ([name, ...valueLines]: string[]): Receipt => {
   const [loot, supplies, balance] = valueLines.map(sanitizeValueLine)
 
   return { name: sanitizeName(name), loot, supplies, balance }

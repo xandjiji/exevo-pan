@@ -23,3 +23,5 @@ export type HuntData = {
   playerReceipts?: Receipt[]
   transactions?: Transaction<string>[]
 }
+
+export type ExtraExpenses = Record<string, number>
