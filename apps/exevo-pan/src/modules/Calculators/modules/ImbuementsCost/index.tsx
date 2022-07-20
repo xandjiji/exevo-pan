@@ -12,10 +12,6 @@ import { calculateShoppingList } from './utils'
 import { tierOptions, RECIPES, RecordKeys } from './schema'
 import styles from './styles.module.css'
 
-/* @ ToDo:
-- i18n (incluir Market e GoldToken titles)
-*/
-
 const ImbuementsCost = () => {
   const {
     translations: { calculators },
