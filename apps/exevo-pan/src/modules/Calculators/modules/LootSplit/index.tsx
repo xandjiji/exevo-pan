@@ -150,7 +150,7 @@ const LootSplit = () => {
 
       <LabeledCard
         labelText="Transfers"
-        className="grow md:max-w-[556px] lg:max-w-[420px]"
+        className="grow md:max-w-[556px] lg:max-w-[360px]"
       >
         {shouldDisplaySessionClipboard && (
           <CopyButton
