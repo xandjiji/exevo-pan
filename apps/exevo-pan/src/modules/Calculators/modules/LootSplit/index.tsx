@@ -22,13 +22,6 @@ import { calculateHuntData } from './utils'
 import { defaultValue } from './defaultValue'
 import { HistoryEntry } from './types'
 
-/* @ ToDo:
-- advanced
-    extra expenses
-
-- i18n
-*/
-
 const LootSplit = () => {
   const {
     translations: { common },
