@@ -16,7 +16,7 @@ const NumericInput = ({
     (e) => {
       setTouched(true)
       const parsed = parseValue(e.target.value)
-      if (Number.isInteger(parsed)) onChange(parsed)
+      if (Number.isInteger(parsed)) onChange?.(parsed)
     },
     [onChange],
   )
@@ -29,7 +29,7 @@ const NumericInput = ({
         const modifier = e.key === 'ArrowUp' ? 1 : -1
         const parsed = parseValue(e.currentTarget.value)
         if (Number.isInteger(parsed))
-          onChange(Math.max(parsed + modifier * step, 0))
+          onChange?.(Math.max(parsed + modifier * step, 0))
       }
     },
     [step, onChange],

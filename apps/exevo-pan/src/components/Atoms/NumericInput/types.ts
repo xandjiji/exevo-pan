@@ -5,7 +5,7 @@ type ExtendedProps = Pick<
 
 export type NumericInputProps = {
   value?: number
-  onChange: (value: number) => void
+  onChange?: (value: number) => void
   step?: number
 } & ExtendedProps &
   AccessibleLabelProps
