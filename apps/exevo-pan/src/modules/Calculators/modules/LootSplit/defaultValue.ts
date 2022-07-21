@@ -3,12 +3,12 @@ import { dateToDateObject } from 'utils'
 const { year, month, day } = dateToDateObject(new Date())
 const date = `${year}-${month + 1}-${day}`
 
-export const defaultValue = `Session data: From ${date}, 15:00:18 to ${date}, 15:56:19
-Session: 00:56h
+export const defaultValue = `Session data: From ${date}, 11:21:07 to ${date}, 13:44:36
+Session: 01:23h
 Loot Type: Market
-Loot: 711,112
-Supplies: 662,148
-Balance: 48,964
+Loot: 624,317
+Supplies: 566,829
+Balance: 57488
 Lord'Paulistinha (Leader)
 	Loot: 349,363
 	Supplies: 98,318

@@ -1,4 +1,3 @@
-/* eslint-disable no-shadow */
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
@@ -19,7 +18,7 @@ import useExtraExpenses from './useExtraExpenses'
 import useDisplayTimestamp from './useDisplayTimestamp'
 import useSessionClipboard from './useSessionClipboard'
 import TransferTable from './TransferTable'
-import { parse, findTransactionsRequired } from './utils'
+import { calculateHuntData } from './utils'
 import { defaultValue } from './defaultValue'
 import { HistoryEntry } from './types'
 
@@ -52,22 +51,15 @@ const LootSplit = () => {
   const displayTimestamp = useDisplayTimestamp()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
-    useMemo(() => {
-      try {
-        const teamReceipt = parse.TeamReceipt(displayedSession)
-        const playerReceipts = parse.PlayerReceipts(displayedSession)
-        const transactions = findTransactionsRequired(playerReceipts)
-        const timestamp = parse.SessionTimestamp(displayedSession)
-
-        return { teamReceipt, playerReceipts, transactions, timestamp }
-      } catch {
-        return {}
-      }
-    }, [displayedSession])
+    calculateHuntData(displayedSession, extraExpenses)
 
   const isInvalid = !!rawNewSession && !transactions
   const shouldDisplaySessionClipboard = historySelected || !isInvalid
   const isWaste = teamReceipt && teamReceipt.balance < 0
+
+  const splittedBalance = Math.floor(
+    (teamReceipt?.balance ?? 0) / (playerReceipts ?? []).length,
+  )
 
   const copyText = useSessionClipboard({
     timestamp,
@@ -119,21 +111,21 @@ const LootSplit = () => {
         </Tabs.Panel>
         <Tabs.Panel label={`History (${list.length})`} className="h-64">
           <div className="custom-scrollbar -mt-1 h-full overflow-auto pr-2">
-            {list.map(({ key, timestamp }) => {
-              const isSelected = key === selected?.key
+            {list.map((item) => {
+              const isSelected = item.key === selected?.key
 
               return (
                 <button
-                  key={key}
+                  key={item.key}
                   type="button"
-                  onClick={() => action.select(key)}
+                  onClick={() => action.select(item.key)}
                   className={clsx(
                     'border-separator/30 text-tsm hover:text-primaryHighlight group flex w-full cursor-pointer items-center justify-between border-0 border-solid px-4 py-2 transition-colors',
                     isSelected ? 'text-primaryHighlight' : 'text-onSurface',
                   )}
                   style={{ borderBottomWidth: 1 }}
                 >
-                  {displayTimestamp(timestamp)}
+                  {displayTimestamp(item.timestamp)}
                   <ChevronRight
                     className={clsx(
                       'fill-onSurface relative left-0 transition-all group-hover:left-1',
@@ -200,12 +192,7 @@ const LootSplit = () => {
           <ChipWrapper>
             {teamReceipt && playerReceipts ? (
               <Chip>
-                <Text.GoldCoin
-                  value={Math.floor(
-                    teamReceipt?.balance ?? 0 / (playerReceipts ?? []).length,
-                  )}
-                  displaySign={isWaste}
-                />
+                <Text.GoldCoin value={splittedBalance} displaySign={isWaste} />
                 <span className="-ml-1">each</span>
               </Chip>
             ) : (

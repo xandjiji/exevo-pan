@@ -1,4 +1,4 @@
-import { Receipt, Transaction } from './types'
+import { Receipt, Transaction, HuntData, ExtraExpenses } from './types'
 
 const breakLines = (text: string): string[] => text.split('\n')
 const sanitizeName = (name: string) => name.replace(' (Leader)', '')
@@ -13,7 +13,7 @@ const parseReceipt = ([name, ...valueLines]: string[]): Receipt => {
   return { name: sanitizeName(name), loot, supplies, balance }
 }
 
-export const parse = {
+const parse = {
   SessionTimestamp: (text: string) => {
     const [rawTimestamps] = breakLines(text).slice(0, 2)
 
@@ -22,8 +22,6 @@ export const parse = {
 
     return +new Date(from)
   },
-  TeamReceipt: (text: string): Receipt =>
-    parseReceipt(breakLines(text).slice(2, 6)),
   PlayerReceipts: (text: string): Receipt[] => {
     const lines = breakLines(text)
     const playerLines = lines.slice(6)
@@ -37,62 +35,92 @@ export const parse = {
   },
 }
 
-export const findTransactionsRequired = (
+const normalizeDustAmount = (value: number): number =>
+  Math.max(0, Math.round(value))
+
+const findTransactionsRequired = (
   receipts: Receipt[],
 ): Transaction<string>[] => {
-  let teamBalance = 0
-  receipts.forEach(({ balance }) => {
-    teamBalance += balance
-  })
+  const sortedReceipts = [...receipts].sort((a, b) => b.balance - a.balance)
 
-  const teamSize = receipts.length
+  const teamBalance = sortedReceipts.reduce(
+    (acc, { balance }) => acc + balance,
+    0,
+  )
+
+  const teamSize = sortedReceipts.length
   const fairBalance = teamBalance / teamSize
 
-  const playerShould = {
-    transfer: ({ balance }: Receipt): number =>
-      Math.max(0, balance - fairBalance),
-    receive: ({ balance }: Receipt): number =>
-      Math.max(0, fairBalance - balance),
-  }
+  const ledger: ExtraExpenses = {}
+  sortedReceipts.forEach(({ name }) => {
+    ledger[name] = 0
+  })
 
-  const sortedReceipts = receipts.sort((a, b) => b.balance - a.balance)
+  const playerShould = {
+    transfer: ({ name, balance }: Receipt): number =>
+      normalizeDustAmount(balance + ledger[name] - fairBalance),
+    receive: ({ name, balance }: Receipt): number =>
+      normalizeDustAmount(fairBalance - (balance + ledger[name])),
+  }
 
   const transactions: Transaction<string>[] = []
-  const transfer = ({ from, to, amount: floatAmount }: Transaction<number>) => {
-    const amount = Math.round(floatAmount)
+  const transfer = ({ from, to, amount }: Transaction<string>) => {
+    ledger[from] -= amount
+    ledger[to] += amount
 
-    if (amount) {
-      sortedReceipts[from].balance -= amount
-      sortedReceipts[to].balance += amount
-
-      transactions.push({
-        from: sortedReceipts[from].name,
-        to: sortedReceipts[to].name,
-        amount,
-      })
-    }
+    transactions.push({ from, to, amount })
   }
 
-  for (let sendIndex = 0; sendIndex < teamSize; sendIndex += 1) {
-    for (
-      let receiveIndex = sendIndex + 1;
-      receiveIndex < teamSize;
-      receiveIndex += 1
-    ) {
-      const maxTransferAmount = playerShould.transfer(sortedReceipts[sendIndex])
-      const maxReceiveAmount = playerShould.receive(
-        sortedReceipts[receiveIndex],
-      )
+  sortedReceipts.forEach((from) => {
+    sortedReceipts.forEach((to) => {
+      if (from.name === to.name) return
 
-      if (maxTransferAmount && maxReceiveAmount) {
+      const maxTransferAmount = playerShould.transfer(from)
+      const maxReceiveAmount = playerShould.receive(to)
+
+      const amount = Math.round(Math.min(maxTransferAmount, maxReceiveAmount))
+      if (amount) {
         transfer({
-          from: sendIndex,
-          to: receiveIndex,
-          amount: Math.min(maxTransferAmount, maxReceiveAmount),
+          from: from.name,
+          to: to.name,
+          amount,
         })
       }
-    }
-  }
+    })
+  })
 
   return transactions
+}
+
+export const calculateHuntData = (
+  session: string,
+  extraExpenses: ExtraExpenses,
+): HuntData => {
+  try {
+    const playerReceipts = parse
+      .PlayerReceipts(session)
+      .map(({ supplies, balance, ...rest }) => {
+        const extraCost = extraExpenses[rest.name] ?? 0
+
+        return {
+          ...rest,
+          supplies: supplies + extraCost,
+          balance: balance - extraCost,
+        }
+      })
+
+    return {
+      teamReceipt: playerReceipts.reduce((acc, player) => ({
+        name: 'Team',
+        loot: acc.loot + player.loot,
+        supplies: acc.supplies + player.supplies,
+        balance: acc.balance + player.balance,
+      })),
+      playerReceipts,
+      transactions: findTransactionsRequired(playerReceipts),
+      timestamp: parse.SessionTimestamp(session),
+    }
+  } catch {
+    return {}
+  }
 }

@@ -40,7 +40,7 @@ const useSessionClipboard = ({
       `💰 Total ${isWaste ? 'waste' : 'profit'}: ${formatNumberWithCommas(
         teamReceipt?.balance ?? 0,
       )}gp (${formatNumberWithCommas(
-        Math.floor(teamReceipt?.balance ?? 0 / (playerReceipts ?? []).length),
+        Math.floor((teamReceipt?.balance ?? 0) / (playerReceipts ?? []).length),
       )} gp each)`,
     ].join(NEWLINE)
   }, [displayTimestamp, timestamp, teamReceipt, playerReceipts, transactions])
