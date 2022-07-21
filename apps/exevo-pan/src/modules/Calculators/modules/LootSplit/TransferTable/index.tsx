@@ -1,4 +1,4 @@
-import { memo } from 'react'
+import { Fragment, memo } from 'react'
 import clsx from 'clsx'
 import { Text, CopyButton } from 'components/Atoms'
 import { TransferTableProps } from './types'
@@ -13,12 +13,15 @@ const TransferTable = ({
   className,
   ...props
 }: TransferTableProps) => (
-  <div className={clsx('lg:w-full', className)} {...props}>
+  <div
+    className={clsx(
+      'text-tsm grid max-w-full grid-cols-[1fr_auto_1fr_24px] gap-y-0.5 gap-x-3 lg:w-full',
+      className,
+    )}
+    {...props}
+  >
     {transactions.map(({ from, to, amount }) => (
-      <div
-        key={`${from}-${to}`}
-        className="text-tsm grid max-w-full grid-cols-[1fr_1fr_1fr_24px] gap-3"
-      >
+      <Fragment key={`${from}-${to}`}>
         <Nickname title={from}>{from}</Nickname>
         <div>
           <Text.GoldCoin value={amount} className="pr-3 font-bold" />
@@ -33,7 +36,7 @@ const TransferTable = ({
         <div>
           <CopyButton copyString={`transfer ${amount} to ${to}`} />
         </div>
-      </div>
+      </Fragment>
     ))}
   </div>
 )
