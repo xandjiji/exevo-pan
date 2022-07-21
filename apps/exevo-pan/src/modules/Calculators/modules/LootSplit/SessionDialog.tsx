@@ -1,10 +1,5 @@
-import {
-  Dialog,
-  TextArea,
-  CopyButton,
-  Button,
-  NumericInput,
-} from 'components/Atoms'
+import { Dialog, TextArea, CopyButton, Button, Text } from 'components/Atoms'
+import { Group, Chip } from '../../components'
 import { ExtraExpenses } from './types'
 
 export type SessionDialogProps = {
@@ -20,7 +15,11 @@ const SessionDialog = ({
   extraExpenses = {},
   onClose,
 }: SessionDialogProps) => (
-  <Dialog isOpen={isOpen} onClose={onClose}>
+  <Dialog
+    isOpen={isOpen}
+    onClose={onClose}
+    className="w-full max-w-[320px] md:max-w-[540px]"
+  >
     <TextArea
       label={
         <span className="flex items-center gap-1.5">
@@ -32,17 +31,21 @@ const SessionDialog = ({
       disabled
       noAlert
       noResize
-      className="mx-auto mt-6 h-96 w-64 md:w-[540px]"
+      className="mx-auto mt-6 h-96"
     />
 
-    {Object.entries(extraExpenses).map(([name, cost]) => (
-      <NumericInput
-        key={`extra-cost-${name}`}
-        label={name}
-        value={cost}
-        disabled
-      />
-    ))}
+    {Object.keys(extraExpenses).length > 0 && (
+      <Group className="mt-6">
+        <strong>Extra expenses</strong>
+        <div className="flex flex-wrap items-center gap-3">
+          {Object.entries(extraExpenses).map(([name, cost]) => (
+            <Chip key={`extra-cost-${name}`}>
+              {name}: <Text.GoldCoin value={cost} />
+            </Chip>
+          ))}
+        </div>
+      </Group>
+    )}
 
     <Button type="button" onClick={onClose} pill className="ml-auto mt-4 block">
       Ok
