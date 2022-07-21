@@ -3,7 +3,7 @@ import { useState, useCallback } from 'react'
 import { v4 as uuidv4 } from 'uuid'
 import { useStoredState } from 'hooks'
 import { parse } from './utils'
-import { HistoryEntry } from './types'
+import { HistoryEntry, ExtraExpenses } from './types'
 
 const useHistory = () => {
   const [list, setList] = useStoredState<HistoryEntry[]>(
@@ -14,7 +14,7 @@ const useHistory = () => {
   const [selected, setSelected] = useState<HistoryEntry | undefined>(list[0])
 
   const add = useCallback(
-    (rawData: string) =>
+    (rawData: string, extraExpenses: ExtraExpenses) =>
       setList((prev) =>
         [
           ...prev,
@@ -22,6 +22,7 @@ const useHistory = () => {
             key: uuidv4(),
             timestamp: parse.SessionTimestamp(rawData),
             rawData,
+            extraExpenses,
           },
         ].sort((a, b) => b.timestamp - a.timestamp),
       ),

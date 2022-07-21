@@ -13,7 +13,7 @@ const parseReceipt = ([name, ...valueLines]: string[]): Receipt => {
   return { name: sanitizeName(name), loot, supplies, balance }
 }
 
-const parse = {
+export const parse = {
   SessionTimestamp: (text: string) => {
     const [rawTimestamps] = breakLines(text).slice(0, 2)
 

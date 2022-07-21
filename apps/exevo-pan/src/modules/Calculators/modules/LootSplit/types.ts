@@ -11,10 +11,13 @@ export type Transaction<ReferenceType> = {
   amount: number
 }
 
+export type ExtraExpenses = Record<string, number>
+
 export type HistoryEntry = {
   key: string
   timestamp: number
   rawData: string
+  extraExpenses: ExtraExpenses
 }
 
 export type HuntData = {
@@ -23,5 +26,3 @@ export type HuntData = {
   playerReceipts?: Receipt[]
   transactions?: Transaction<string>[]
 }
-
-export type ExtraExpenses = Record<string, number>

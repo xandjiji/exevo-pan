@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react'
+import { useState, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
@@ -38,7 +38,7 @@ const LootSplit = () => {
   const { list, selected, action } = useHistory()
 
   const [rawNewSession, setRawNewSession] = useState(defaultValue)
-  const [dialogData, setDialogData] = useState<string>('')
+  const [sessionDialogOpen, setSessionDialog] = useState(false)
   const [openAdvancedOptions, setOpenAdvancedOptions] = useState(false)
 
   const [extraExpenses, setExtraExpenses] = useExtraExpenses(rawNewSession)
@@ -47,11 +47,14 @@ const LootSplit = () => {
   const displayedSession = historySelected
     ? (selected as HistoryEntry).rawData
     : rawNewSession
+  const displayedExtraExpenses = historySelected
+    ? (selected as HistoryEntry).extraExpenses
+    : extraExpenses
 
   const displayTimestamp = useDisplayTimestamp()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
-    calculateHuntData(displayedSession, extraExpenses)
+    calculateHuntData(displayedSession, displayedExtraExpenses)
 
   const isInvalid = !!rawNewSession && !transactions
   const shouldDisplaySessionClipboard = historySelected || !isInvalid
@@ -217,14 +220,12 @@ const LootSplit = () => {
               </Button>
               <Button
                 type="button"
-                onClick={() =>
-                  setDialogData((selected as HistoryEntry).rawData)
-                }
+                onClick={() => setSessionDialog(true)}
                 pill
                 disabled={isInvalid}
               >
                 <DataIcon className={clsx('-ml-1 h-4 w-4')} />
-                Raw data
+                Data
               </Button>
             </>
           )}
@@ -232,7 +233,7 @@ const LootSplit = () => {
           {!historySelected && (
             <Button
               type="button"
-              onClick={() => action.add(rawNewSession)}
+              onClick={() => action.add(rawNewSession, extraExpenses)}
               pill
               disabled={isInvalid}
             >
@@ -251,8 +252,10 @@ const LootSplit = () => {
         onClose={() => setOpenAdvancedOptions(false)}
       />
       <SessionDialog
-        sessionData={dialogData}
-        onClose={() => setDialogData('')}
+        isOpen={sessionDialogOpen}
+        sessionData={selected?.rawData}
+        extraExpenses={selected?.extraExpenses}
+        onClose={() => setSessionDialog(false)}
       />
     </main>
   )
