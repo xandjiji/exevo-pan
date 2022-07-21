@@ -44,7 +44,7 @@ const Dialog = ({
               ref={elementToFocusRef}
               onKeyDown={onKeyDown}
               onClick={(event) => event.stopPropagation()}
-              className={clsx('card animate-rushIn', className)}
+              className={clsx('card animate-rushIn px-6 py-4', className)}
               {...props}
             >
               {!noCloseButton && (
