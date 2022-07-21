@@ -36,7 +36,7 @@ export const parse = {
 }
 
 const normalizeDustAmount = (value: number): number =>
-  Math.max(0, Math.round(value))
+  Math.max(0, Math.floor(value))
 
 const findTransactionsRequired = (
   receipts: Receipt[],
