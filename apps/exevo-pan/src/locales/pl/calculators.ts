@@ -83,4 +83,44 @@ export default {
     pricePlaceholder: 'Current price',
     buyIconTooltip: 'Should be bought using',
   },
+  LootSplit: {
+    tabs: {
+      newSession: 'New session',
+      history: 'History',
+    },
+    labels: {
+      textArea: 'Paste your party hunt session',
+      tooltipClipboard: 'Party Hunt session analyser',
+      summary: 'Summary',
+      teamSession: 'Team session',
+      transfers: 'Transfers',
+      total: {
+        waste: 'Total waste',
+        profit: 'Total profit',
+      },
+    },
+    each: 'each',
+    emptyState: 'No session',
+    actions: {
+      save: 'Save',
+      delete: 'Delete',
+      data: 'Data',
+      done: 'Done',
+    },
+    AdvancedOptionsDialog: {
+      addExtraExpenses: 'Add extra expenses',
+      extraCostPlaceholder: 'Extra gold costs',
+    },
+    SessionDialog: {
+      originalSession: 'Original hunt session',
+      extraExpenses: 'Extra expenses',
+    },
+    Clipboard: {
+      teamSession: 'Team session',
+      partyMembers: 'Party members',
+      bankTransfers: 'Bank transfers',
+      shouldTransfer: 'should transfer',
+      to: 'to',
+    },
+  },
 }

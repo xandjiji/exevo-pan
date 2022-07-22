@@ -42,7 +42,7 @@ const useSessionClipboard = ({
         : ''),
       '',
       `💰 ${
-        calculators.LootSplit.total[isWaste ? 'waste' : 'profit']
+        calculators.LootSplit.labels.total[isWaste ? 'waste' : 'profit']
       }: ${formatNumberWithCommas(
         teamReceipt?.balance ?? 0,
       )}gp (${formatNumberWithCommas(
