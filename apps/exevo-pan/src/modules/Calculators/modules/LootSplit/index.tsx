@@ -24,7 +24,7 @@ import { HistoryEntry } from './types'
 
 const LootSplit = () => {
   const {
-    translations: { common },
+    translations: { common, calculators },
   } = useTranslations()
 
   const [isHistory, setIsHistory] = useState(false)
@@ -70,24 +70,27 @@ const LootSplit = () => {
         onChange={useCallback((tabIndex) => setIsHistory(tabIndex === 1), [])}
         className="shrink-0 md:w-[256px]"
       >
-        <Tabs.Panel label="New session" className="flex h-64 flex-col gap-2">
+        <Tabs.Panel
+          label={calculators.LootSplit.tabs.newSession}
+          className="flex h-64 flex-col gap-2"
+        >
           <TextArea
             label={
               <InfoTooltip.LabelWrapper>
-                Paste your party hunt session
+                {calculators.LootSplit.labels.textArea}
                 <InfoTooltip
                   labelSize
                   content={
                     <Image
                       src={clipboardSrc}
-                      alt="Party Hunt session analyser"
+                      alt={calculators.LootSplit.labels.tooltipClipboard}
                       unoptimized
                     />
                   }
                 />
               </InfoTooltip.LabelWrapper>
             }
-            aria-label="Paste your party hunt session"
+            aria-label={calculators.LootSplit.labels.textArea}
             placeholder={defaultValue}
             onChange={(e) => setRawNewSession(e.target.value)}
             value={rawNewSession}
@@ -105,7 +108,10 @@ const LootSplit = () => {
             Advanced options
           </Button>
         </Tabs.Panel>
-        <Tabs.Panel label={`History (${list.length})`} className="h-64">
+        <Tabs.Panel
+          label={`${calculators.LootSplit.tabs.history} (${list.length})`}
+          className="h-64"
+        >
           <div className="custom-scrollbar -mt-1 h-full overflow-auto pr-2">
             {list.map((item) => {
               const isSelected = item.key === selected?.key
@@ -133,7 +139,7 @@ const LootSplit = () => {
             })}
             {list.length === 0 && (
               <EmptyState
-                text={{ content: 'No sessions', size: 24 }}
+                text={{ content: calculators.LootSplit.emptyState, size: 24 }}
                 className="mx-auto mt-4 h-fit w-24"
               />
             )}
@@ -142,7 +148,7 @@ const LootSplit = () => {
       </Tabs.Group>
 
       <LabeledCard
-        labelText="Transfers"
+        labelText={calculators.LootSplit.labels.summary}
         className="grow md:max-w-[556px] lg:max-w-[360px]"
       >
         {shouldDisplaySessionClipboard && (
@@ -153,7 +159,7 @@ const LootSplit = () => {
         )}
         <Group>
           <InfoTooltip.LabelWrapper className="font-bold">
-            Team session{' '}
+            {calculators.LootSplit.labels.teamSession}{' '}
             <InfoTooltip
               labelSize
               content={
@@ -161,7 +167,7 @@ const LootSplit = () => {
                   {playerReceipts ? (
                     playerReceipts.map(({ name }) => <li key={name}>{name}</li>)
                   ) : (
-                    <span>None</span>
+                    <span>{calculators.none}</span>
                   )}
                 </ul>
               }
@@ -170,29 +176,31 @@ const LootSplit = () => {
           {timestamp ? (
             <span>{displayTimestamp(timestamp)}</span>
           ) : (
-            <span>None</span>
+            <span>{calculators.none}</span>
           )}
         </Group>
 
         <Group>
-          <strong>Transfers</strong>
+          <strong>{calculators.LootSplit.labels.transfers}</strong>
           {transactions ? (
             <TransferTable transactions={transactions} />
           ) : (
-            <span>None</span>
+            <span>{calculators.none}</span>
           )}
         </Group>
 
         <Group>
-          <strong>Total {isWaste ? 'waste' : 'profit'}</strong>
+          <strong>
+            {calculators.LootSplit.labels.total[isWaste ? 'waste' : 'profit']}
+          </strong>
           <ChipWrapper>
             {teamReceipt && playerReceipts ? (
               <Chip>
                 <Text.GoldCoin value={splittedBalance} displaySign={isWaste} />
-                <span className="-ml-1">each</span>
+                <span className="-ml-1">{calculators.LootSplit.each}</span>
               </Chip>
             ) : (
-              <span>None</span>
+              <span>{calculators.none}</span>
             )}
           </ChipWrapper>
         </Group>
@@ -209,7 +217,7 @@ const LootSplit = () => {
                 hollow
               >
                 <RemoveIcon className="-ml-1 h-4 w-4" />
-                Delete
+                {calculators.LootSplit.actions.delete}
               </Button>
               <Button
                 type="button"
@@ -218,7 +226,7 @@ const LootSplit = () => {
                 disabled={isInvalid}
               >
                 <DataIcon className={clsx('-ml-1 h-4 w-4')} />
-                Data
+                {calculators.LootSplit.actions.data}
               </Button>
             </>
           )}
@@ -231,7 +239,7 @@ const LootSplit = () => {
               disabled={isInvalid}
             >
               <AddIcon className={clsx('-ml-1 h-4 w-4')} />
-              Save
+              {calculators.LootSplit.actions.save}
             </Button>
           )}
         </div>

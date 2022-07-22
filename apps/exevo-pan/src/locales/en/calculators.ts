@@ -83,4 +83,28 @@ export default {
     pricePlaceholder: 'Current price',
     buyIconTooltip: 'Should be bought using',
   },
+  LootSplit: {
+    tabs: {
+      newSession: 'New session',
+      history: 'History',
+    },
+    labels: {
+      textArea: 'Paste your party hunt session',
+      tooltipClipboard: 'Party Hunt session analyser',
+      summary: 'Summary',
+      teamSession: 'Team session',
+      transfers: 'Transfers',
+      total: {
+        waste: 'Total waste',
+        profit: 'Total profit',
+      },
+    },
+    each: 'each',
+    emptyState: 'No session',
+    actions: {
+      save: 'Save',
+      delete: 'Delete',
+      data: 'Data',
+    },
+  },
 }
