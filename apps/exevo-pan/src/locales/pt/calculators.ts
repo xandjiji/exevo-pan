@@ -25,10 +25,9 @@ export default {
       description:
         'Calcule qual a forma mais barata de se comprar materiais para imbuements',
     },
-    /* @ ToDo: */
     LootSplit: {
-      title: 'Loot Split',
-      description: 'Manage and split your party hunt loots',
+      title: 'Dividir Loot',
+      description: 'Gerencie e divida o loot das suas hunts em party',
     },
   },
   Header: {
@@ -37,7 +36,7 @@ export default {
     CharmDamage: 'Charm Damage',
     Stamina: 'Stamina',
     ImbuementsCost: 'Custo de Imbuements',
-    LootSplit: 'Loot Split',
+    LootSplit: 'Dividir Loot',
   },
   none: 'Nenhum',
   ExerciseWeapons: {
@@ -85,45 +84,44 @@ export default {
     pricePlaceholder: 'Preço atual',
     buyIconTooltip: 'Deve ser comprado usando',
   },
-  /* @ ToDo: */
   LootSplit: {
     tabs: {
-      newSession: 'New session',
-      history: 'History',
+      newSession: 'Nova sessão',
+      history: 'Histórico',
     },
     labels: {
-      textArea: 'Paste your party hunt session',
-      tooltipClipboard: 'Party Hunt session analyser',
-      summary: 'Summary',
-      teamSession: 'Team session',
-      transfers: 'Transfers',
+      textArea: 'Cole a sessão do seu time',
+      tooltipClipboard: 'Analyser de uma sessão de hunt em time',
+      summary: 'Resumo',
+      teamSession: 'Sessão do time',
+      transfers: 'Transferências',
       total: {
-        waste: 'Total waste',
-        profit: 'Total profit',
+        waste: 'Waste total',
+        profit: 'Profit total',
       },
     },
-    each: 'each',
-    emptyState: 'No session',
+    each: 'cada',
+    emptyState: 'Nenhuma sessão',
     actions: {
-      save: 'Save',
-      delete: 'Delete',
-      data: 'Data',
-      done: 'Done',
+      save: 'Salvar',
+      delete: 'Deletar',
+      data: 'Dados',
+      done: 'Pronto',
     },
     AdvancedOptionsDialog: {
-      addExtraExpenses: 'Add extra expenses',
-      extraCostPlaceholder: 'Extra gold costs',
+      addExtraExpenses: 'Adicionar gastos adicionais',
+      extraCostPlaceholder: 'Gold gasto adicional',
     },
     SessionDialog: {
-      originalSession: 'Original hunt session',
-      extraExpenses: 'Extra expenses',
+      originalSession: 'Sessão original do time',
+      extraExpenses: 'Gastos adicionais',
     },
     Clipboard: {
-      teamSession: 'Team session',
-      partyMembers: 'Party members',
+      teamSession: 'Sessão do time',
+      partyMembers: 'Membros do time',
       bankTransfers: 'Bank transfers',
-      shouldTransfer: 'should transfer',
-      to: 'to',
+      shouldTransfer: 'deve transferir',
+      to: 'para',
     },
   },
 }
