@@ -24,7 +24,7 @@ import { HistoryEntry } from './types'
 
 const LootSplit = () => {
   const {
-    translations: { common, calculators },
+    translations: { calculators },
   } = useTranslations()
 
   const [isHistory, setIsHistory] = useState(false)

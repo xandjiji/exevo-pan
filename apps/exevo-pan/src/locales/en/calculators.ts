@@ -105,6 +105,11 @@ export default {
       save: 'Save',
       delete: 'Delete',
       data: 'Data',
+      done: 'Done',
+    },
+    AdvancedOptionsDialog: {
+      addExtraExpenses: 'Add extra expenses',
+      extraCostPlaceholder: 'Extra gold costs',
     },
   },
 }
