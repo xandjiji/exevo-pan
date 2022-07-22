@@ -111,5 +111,9 @@ export default {
       addExtraExpenses: 'Add extra expenses',
       extraCostPlaceholder: 'Extra gold costs',
     },
+    SessionDialog: {
+      originalSession: 'Original hunt session',
+      extraExpenses: 'Extra expenses',
+    },
   },
 }
