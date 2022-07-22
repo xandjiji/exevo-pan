@@ -13,7 +13,7 @@ const useSessionClipboard = ({
   transactions,
 }: HuntData): string => {
   const {
-    translations: { common },
+    translations: { calculators },
   } = useTranslations()
 
   const displayTimestamp = useDisplayTimestamp()
@@ -22,26 +22,32 @@ const useSessionClipboard = ({
     const isWaste = teamReceipt && teamReceipt.balance < 0
 
     return [
-      `📅 Team session: ${displayTimestamp(timestamp)}`,
+      `📅 ${calculators.LootSplit.Clipboard.teamSession}: ${displayTimestamp(
+        timestamp,
+      )}`,
       '',
-      '👥 Party members:',
+      `👥 ${calculators.LootSplit.Clipboard.partyMembers}:`,
       ...(playerReceipts ? playerReceipts.map(({ name }) => `- ${name}`) : ''),
       '',
-      '🔄 Bank transfers:',
+      `🔄 ${calculators.LootSplit.Clipboard.bankTransfers}:`,
       ...(transactions
         ? transactions.map(
             ({ from, to, amount }) =>
-              `- ${from} should transfer ${formatNumberWithCommas(
-                amount,
-              )} gp to ${to}`,
+              `- ${from} ${
+                calculators.LootSplit.Clipboard.shouldTransfer
+              } ${formatNumberWithCommas(amount)} gp ${
+                calculators.LootSplit.Clipboard.to
+              } ${to}`,
           )
         : ''),
       '',
-      `💰 Total ${isWaste ? 'waste' : 'profit'}: ${formatNumberWithCommas(
+      `💰 ${
+        calculators.LootSplit.total[isWaste ? 'waste' : 'profit']
+      }: ${formatNumberWithCommas(
         teamReceipt?.balance ?? 0,
       )}gp (${formatNumberWithCommas(
         Math.floor((teamReceipt?.balance ?? 0) / (playerReceipts ?? []).length),
-      )} gp each)`,
+      )} gp ${calculators.LootSplit.each})`,
     ].join(NEWLINE)
   }, [displayTimestamp, timestamp, teamReceipt, playerReceipts, transactions])
 }

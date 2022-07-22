@@ -115,5 +115,12 @@ export default {
       originalSession: 'Original hunt session',
       extraExpenses: 'Extra expenses',
     },
+    Clipboard: {
+      teamSession: 'Team session',
+      partyMembers: 'Party members',
+      bankTransfers: 'Bank transfers',
+      shouldTransfer: 'should transfer',
+      to: 'to',
+    },
   },
 }
