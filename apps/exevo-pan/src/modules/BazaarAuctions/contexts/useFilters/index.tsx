@@ -15,7 +15,7 @@ const {
   defaultValues: untypedDefaultValues,
   getUrlValues,
   setUrlValues,
-} = urlParametersState(filterSchema)
+} = urlParametersState<any>(filterSchema)
 const defaultValues = untypedDefaultValues as FilterOptions
 
 const initialFilterState =

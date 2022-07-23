@@ -1,9 +1,9 @@
 /* @ ToDo: fix this typings */
-export interface ParamRegister {
+export interface ParamRegister<Type> {
   key: string
-  defaultValue: any
-  encode?: (value: any) => string
-  decode?: (value: string) => any
+  defaultValue: Type
+  encode?: (value: Type) => string
+  decode?: (value: string) => Type
 }
 
 export type ParameterObject = Record<string, any>

@@ -3,7 +3,7 @@ import { urlParametersState } from 'utils'
 import { ParamRegister } from 'utils/urlParameterState/types'
 
 /* @ ToDo: fix this typings */
-const useUrlParamsState = (registeredParams: ParamRegister[]) => {
+const useUrlParamsState = (registeredParams: ParamRegister<any>[]) => {
   const [{ getUrlValues, setUrlValues }] = useState(() =>
     urlParametersState(registeredParams),
   )
