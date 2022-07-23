@@ -1,40 +1,32 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { urlParametersState } from 'utils'
 import { ParamRegister } from 'utils/urlParameterState/types'
-import { UseUrlParamsGetterSetter } from './types'
 
 /* @ ToDo: fix this typings */
-const useUrlParamsState = (
-  registeredParams: ParamRegister[],
-): UseUrlParamsGetterSetter => {
-  const { getUrlValues, setUrlValues } = useMemo(
-    () => urlParametersState(registeredParams),
-    [registeredParams],
+const useUrlParamsState = (registeredParams: ParamRegister[]) => {
+  const [{ getUrlValues, setUrlValues }] = useState(() =>
+    urlParametersState(registeredParams),
   )
 
   const [currentValues, setCurrentValues] = useState(getUrlValues)
 
-  const setStateAndUrl = useCallback(
-    (
-      newState:
-        | typeof currentValues
-        | ((previousState: typeof currentValues) => typeof currentValues),
-    ) => {
-      if (newState instanceof Function) {
+  const setStateAndUrl: typeof setCurrentValues = useCallback(
+    (stateDispatch) => {
+      if (stateDispatch instanceof Function) {
         setCurrentValues((previousState) => {
-          const returnedNewState = newState(previousState)
+          const returnedNewState = stateDispatch(previousState)
           setUrlValues(returnedNewState)
           return returnedNewState
         })
       } else {
-        setUrlValues(newState)
-        setCurrentValues(newState)
+        setUrlValues(stateDispatch)
+        setCurrentValues(stateDispatch)
       }
     },
     [setUrlValues],
   )
 
-  return [currentValues, setStateAndUrl]
+  return [currentValues, setStateAndUrl] as const
 }
 
 export default useUrlParamsState
