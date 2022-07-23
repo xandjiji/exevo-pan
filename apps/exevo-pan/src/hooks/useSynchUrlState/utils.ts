@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { isServer } from 'utils'
+import { defaultDecode, defaultEncode } from './codecs'
 import { RegisteredParameter } from './types'
 
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
@@ -17,7 +18,7 @@ const getUrlState = <T>({
   if (encodedValue === null) return defaultValue
   return decode
     ? decode(encodedValue)
-    : (decodeURIComponent(encodedValue) as unknown as T)
+    : defaultDecode(encodedValue, defaultValue)
 }
 
 const setUrlState = <T>(
@@ -31,10 +32,7 @@ const setUrlState = <T>(
   if (value === defaultValue) {
     params.delete(key)
   } else {
-    params.set(
-      key,
-      encode ? encode(value) : encodeURIComponent(value as unknown as string),
-    )
+    params.set(key, encode ? encode(value) : defaultEncode(value))
   }
 
   const parametersString = params.toString()
