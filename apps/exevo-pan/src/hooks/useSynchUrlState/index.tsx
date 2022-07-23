@@ -6,11 +6,17 @@ const useSynchUrlState = <T,>(args: RegisteredParameter<T>) => {
   const valueRef = useRef(urlState.get(args))
 
   const subscribe = useCallback((newValue: T) => {
-    if (newValue !== valueRef.current) urlState.set(newValue, args)
+    urlState.set(newValue, args)
     valueRef.current = newValue
   }, [])
 
-  return { initialValue: valueRef.current, subscribe }
+  const isDefault = valueRef.current === args.defaultValue
+
+  return {
+    initialValue: valueRef.current,
+    subscribe,
+    isDefault,
+  }
 }
 
 export default useSynchUrlState
