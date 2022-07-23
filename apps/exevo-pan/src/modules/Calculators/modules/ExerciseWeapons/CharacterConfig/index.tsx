@@ -1,6 +1,6 @@
 import { useMemo, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
-import { useStoredState } from 'hooks'
+import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
@@ -17,18 +17,45 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
     translations: { calculators },
   } = useTranslations()
 
-  const [vocation, setVocation] = useStoredState<Vocation>(
-    'ew-vocation',
-    'knight',
-  )
-  const [skill, setSkill] = useStoredState<Skill>('ew-skill', 'melee')
-  const [currentSkill, setCurrentSkill] = useStoredState('ew-currentSkill', 100)
-  const [targetSkill, setTargetSkill] = useStoredState('ew-targetSkill', 120)
-  const [loyaltyBonus, setLoyaltyBonus] = useStoredState('ew-loyalty', 0)
-  const [percentageLeft, setPercentageLeft] = useStoredState(
-    'ew-percentageLeft',
-    50,
-  )
+  const [vocation, setVocation] = useStoredUrlState<Vocation>({
+    key: 'vocation',
+    storeKey: 'ew-vocation',
+    defaultValue: 'knight',
+  })
+
+  const [skill, setSkill] = useStoredUrlState<Skill>({
+    key: 'skill',
+    storeKey: 'ew-skill',
+    defaultValue: 'melee',
+  })
+
+  const [currentSkill, setCurrentSkill] = useStoredUrlState({
+    key: 'currentSkill',
+    storeKey: 'ew-currentSkill',
+    defaultValue: 100,
+    decode: Number,
+  })
+
+  const [targetSkill, setTargetSkill] = useStoredUrlState({
+    key: 'targetSkill',
+    storeKey: 'ew-targetSkill',
+    defaultValue: 120,
+    decode: Number,
+  })
+
+  const [loyaltyBonus, setLoyaltyBonus] = useStoredUrlState({
+    key: 'loyalty',
+    storeKey: 'ew-loyalty',
+    defaultValue: 0,
+    decode: Number,
+  })
+
+  const [percentageLeft, setPercentageLeft] = useStoredUrlState({
+    key: 'percentageLeft',
+    storeKey: 'ew-percentageLeft',
+    defaultValue: 50,
+    decode: Number,
+  })
 
   const pointsRequired = useMemo(
     () =>

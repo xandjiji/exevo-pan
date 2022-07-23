@@ -1,5 +1,5 @@
 import { useMemo } from 'react'
-import { useStoredState } from 'hooks'
+import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
@@ -27,12 +27,23 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
     translations: { common, calculators },
   } = useTranslations()
 
-  const [hasDummy, setHasDummy] = useStoredState('ew-dummy', false)
-  const [isDouble, setIsDouble] = useStoredState('ew-double', false)
-  const [exerciseWeapon, setExerciseWeapon] = useStoredState<WeaponOption>(
-    'ew-exerciseWeapon',
-    'auto',
-  )
+  const [hasDummy, setHasDummy] = useStoredUrlState({
+    key: 'dummy',
+    storeKey: 'ew-dummy',
+    defaultValue: false,
+  })
+
+  const [isDouble, setIsDouble] = useStoredUrlState({
+    key: 'doubleEvent',
+    storeKey: 'ew-double',
+    defaultValue: false,
+  })
+
+  const [exerciseWeapon, setExerciseWeapon] = useStoredUrlState<WeaponOption>({
+    key: 'weaponType',
+    storeKey: 'ew-exerciseWeapon',
+    defaultValue: 'auto',
+  })
 
   const weaponsRequired: WeaponsObject = useMemo(() => {
     const finalPointsRequired =
