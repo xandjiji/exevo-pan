@@ -1,7 +1,7 @@
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Tabs, Text, NumericInput } from 'components/Atoms'
+import { Tabs, Text, NumericInput, CopyButton } from 'components/Atoms'
 import { Select, ClientComponent, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
 import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
@@ -90,7 +90,13 @@ const ImbuementsCost = () => {
                       <Icons.Material {...material} />
                       <NumericInput
                         key={material.name}
-                        label={material.name}
+                        label={
+                          <div className="flex items-center gap-1.5">
+                            <span>{material.name}</span>
+                            <CopyButton small copyString={material.name} />
+                          </div>
+                        }
+                        aria-label={material.name}
                         placeholder={
                           calculators.ImbuementsCost.pricePlaceholder
                         }
