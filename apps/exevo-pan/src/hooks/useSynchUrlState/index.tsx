@@ -1,22 +1,29 @@
-import { useRef, useCallback } from 'react'
+import { useState, useCallback } from 'react'
 import { urlState } from './utils'
-import { RegisteredParameter } from './types'
+import { UseSynchUrlStateProps } from './types'
 
-const useSynchUrlState = <T,>(args: RegisteredParameter<T>) => {
-  const valueRef = useRef(urlState.get(args))
+const useSynchUrlState = <T,>(args: UseSynchUrlStateProps<T>) => {
+  const [state, setState] = useState(() => {
+    const initialValue = args.value ?? urlState.get(args)
 
-  const subscribe = useCallback((newValue: T) => {
-    urlState.set(newValue, args)
-    valueRef.current = newValue
+    if (args.value !== undefined) {
+      urlState.set(initialValue, args)
+    }
+
+    return initialValue
+  })
+
+  const setStateAndUpdateParam: typeof setState = useCallback((dispatch) => {
+    setState((prev) => {
+      const nextState = dispatch instanceof Function ? dispatch(prev) : dispatch
+      urlState.set(nextState, args)
+      return nextState
+    })
   }, [])
 
-  const isDefault = valueRef.current === args.defaultValue
+  const isDefault = state === args.defaultValue
 
-  return {
-    initialValue: valueRef.current,
-    subscribe,
-    isDefault,
-  }
+  return [state, setStateAndUpdateParam, isDefault] as const
 }
 
 export default useSynchUrlState

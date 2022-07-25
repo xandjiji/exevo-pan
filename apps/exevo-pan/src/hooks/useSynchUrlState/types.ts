@@ -4,3 +4,7 @@ export type RegisteredParameter<Type> = {
   encode?: (value: Type) => string
   decode?: (value: string) => Type
 }
+
+export type UseSynchUrlStateProps<Type> = {
+  value?: Type
+} & RegisteredParameter<Type>
