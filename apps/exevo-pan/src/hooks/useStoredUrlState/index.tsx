@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from 'react'
 import useStoredState from '../useStoredState'
-import useSynchUrlState from '../useSynchUrlState'
-import { urlState } from '../useSynchUrlState/utils'
+import useSyncUrlState from '../useSyncUrlState'
+import { urlState } from '../useSyncUrlState/utils'
 import { UseStoredUrlStateProps } from './types'
 
 const useStoredUrlState = <T,>(args: UseStoredUrlStateProps<T>) => {
@@ -10,7 +10,7 @@ const useStoredUrlState = <T,>(args: UseStoredUrlStateProps<T>) => {
     args.defaultValue,
   )
 
-  const [paramState, setParamState, isDefault] = useSynchUrlState(args)
+  const [paramState, setParamState, isDefault] = useSyncUrlState(args)
 
   const setState: React.Dispatch<React.SetStateAction<T>> = useCallback(
     (dispatch) => {

@@ -5,6 +5,6 @@ export type RegisteredParameter<Type> = {
   decode?: (value: string) => Type
 }
 
-export type UseSynchUrlStateProps<Type> = {
+export type UseSyncUrlState<Type> = {
   value?: Type
 } & RegisteredParameter<Type>

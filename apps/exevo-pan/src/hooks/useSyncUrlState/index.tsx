@@ -1,8 +1,8 @@
 import { useState, useCallback } from 'react'
 import { urlState } from './utils'
-import { UseSynchUrlStateProps } from './types'
+import { UseSyncUrlState } from './types'
 
-const useSynchUrlState = <T,>(args: UseSynchUrlStateProps<T>) => {
+const useSyncUrlState = <T,>(args: UseSyncUrlState<T>) => {
   const [state, setState] = useState(() => {
     const initialValue = args.value ?? urlState.get(args)
 
@@ -26,4 +26,4 @@ const useSynchUrlState = <T,>(args: UseSynchUrlStateProps<T>) => {
   return [state, setStateAndUpdateParam, isDefault] as const
 }
 
-export default useSynchUrlState
+export default useSyncUrlState
