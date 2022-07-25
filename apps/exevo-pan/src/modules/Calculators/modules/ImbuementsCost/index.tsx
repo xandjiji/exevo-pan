@@ -3,13 +3,13 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tabs, Text, NumericInput, CopyButton } from 'components/Atoms'
 import { Select, ClientComponent, InfoTooltip } from 'components/Organisms'
-import { blurOnEnter } from 'utils'
+import { blurOnEnter, isServer } from 'utils'
 import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
 import useStateRecord from './useStateRecord'
 import CostComparison from './CostComparison'
 import * as Icons from './icons'
 import { calculateShoppingList } from './utils'
-import { tierOptions, RECIPES, RecordKeys } from './schema'
+import { tierOptions, RECIPES, RecordKeys, tierName } from './schema'
 import styles from './styles.module.css'
 
 const ImbuementsCost = () => {
@@ -31,6 +31,17 @@ const ImbuementsCost = () => {
   )
 
   const currentTier = stateRecord[RecordKeys.tier]
+
+  const tokenImbuementTier = tokenBuyList.filter(
+    (buyWithTokens) => buyWithTokens,
+  ).length
+
+  const npcDialogue =
+    tokenImbuementTier > 0
+      ? `${RECIPES[recipeIndex].npcName} ${tierName[tokenImbuementTier]} yes`
+      : ''
+
+  const noDialogue = !npcDialogue && !isServer()
 
   return (
     <Main>
@@ -124,6 +135,21 @@ const ImbuementsCost = () => {
             </Tabs.Panel>
           ))}
         </Tabs.Group>
+
+        <ClientComponent
+          className={clsx(
+            'text-primaryHighlight flex items-center justify-end gap-1.5 text-xs font-bold italic transition-all',
+            noDialogue && 'pointer-events-none opacity-0',
+          )}
+        >
+          {npcDialogue}
+          <CopyButton
+            small
+            copyString={npcDialogue}
+            className={clsx(noDialogue && 'pointer-events-none opacity-0')}
+            disabled={noDialogue}
+          />
+        </ClientComponent>
 
         <Spacer />
 

@@ -29,6 +29,7 @@ export const DEFAULT_STATE = {
 export const RECIPES: RecipeSchema[] = [
   {
     name: 'Vampirism (life leech)',
+    npcName: 'vampirism',
     materials: [
       {
         name: 'Vampire Teeth',
@@ -49,6 +50,7 @@ export const RECIPES: RecipeSchema[] = [
   },
   {
     name: 'Void (mana leech)',
+    npcName: 'void',
     materials: [
       {
         name: 'Rope Belts',
@@ -69,6 +71,7 @@ export const RECIPES: RecipeSchema[] = [
   },
   {
     name: 'Strike (critical)',
+    npcName: 'strike',
     materials: [
       {
         name: 'Protective Charms',
@@ -93,4 +96,10 @@ export const tierBasePrice: Record<number, number> = {
   1: 15000,
   2: 55000,
   3: 150000,
+}
+
+export const tierName: Record<number, string> = {
+  1: 'basic',
+  2: 'intricate',
+  3: 'powerful',
 }

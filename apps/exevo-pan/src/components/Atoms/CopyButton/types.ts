@@ -1,5 +1,4 @@
-export interface CopyButtonProps
-  extends React.HTMLAttributes<HTMLButtonElement> {
+export type CopyButtonProps = {
   copyString: string
   small?: boolean
-}
+} & JSX.IntrinsicElements['button']

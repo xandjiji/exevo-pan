@@ -6,6 +6,7 @@ export type Material = {
 
 export type RecipeSchema = {
   name: string
+  npcName: string
   materials: Material[]
 }
 
