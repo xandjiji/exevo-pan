@@ -6,7 +6,12 @@ import CopyIcon from 'assets/svgs/copy.svg'
 import ValidIcon from 'assets/svgs/valid.svg'
 import { CopyButtonProps } from './types'
 
-const CopyButton = ({ className, copyString, ...props }: CopyButtonProps) => {
+const CopyButton = ({
+  className,
+  copyString,
+  small = false,
+  ...props
+}: CopyButtonProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -39,9 +44,19 @@ const CopyButton = ({ className, copyString, ...props }: CopyButtonProps) => {
       onClick={handleClick}
     >
       {clicked ? (
-        <ValidIcon className="fill-greenHighlight animate-rollIn h-6 w-6 p-[3px]" />
+        <ValidIcon
+          className={clsx(
+            'fill-greenHighlight animate-rollIn',
+            small ? 'h-4 w-4 p-[1px]' : 'h-6 w-6 p-[3px]',
+          )}
+        />
       ) : (
-        <CopyIcon className="fill-onSurface h-6 w-6 p-[3px]" />
+        <CopyIcon
+          className={clsx(
+            'fill-onSurface',
+            small ? 'h-4 w-4 p-[1px]' : 'h-6 w-6 p-[3px]',
+          )}
+        />
       )}
     </button>
   )
