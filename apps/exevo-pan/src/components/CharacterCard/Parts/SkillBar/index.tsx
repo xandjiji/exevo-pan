@@ -29,7 +29,7 @@ const SkillBar = ({
       type="button"
       className={clsx(
         'flex items-end',
-        expandable ? 'cursor-pointer' : 'cursor-[unset]',
+        expandable ? 'cursor-pointer' : 'pointer-events-none',
         className,
       )}
       onClick={() => setOpenDialog(true)}
