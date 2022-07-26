@@ -1768,6 +1768,11 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Plushie of a Scissorion',
     value: 0,
   },
+  /* BOSSTIARY */
+  'podium of vigour': {
+    name: 'Podium of Vigour',
+    value: 0,
+  },
 }
 
 export const scrapingTokens = Object.keys(storeItems)
