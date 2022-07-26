@@ -1,12 +1,15 @@
+/* eslint-disable react/require-default-props */
 import clsx from 'clsx'
 import SkillBar from './SkillBar'
 
 interface CharacterSkillsProps extends React.HTMLAttributes<HTMLDivElement> {
   skills: CharacterSkillsObject
+  expandable?: boolean
 }
 
 const CharacterSkills = ({
   skills,
+  expandable = false,
   className,
   ...props
 }: CharacterSkillsProps) => {
@@ -24,6 +27,7 @@ const CharacterSkills = ({
             skillName={skillName}
             skillValue={skillValue}
             highlight={highlightedSkillValue === skillValue}
+            expandable={expandable}
           />
         )
       })}

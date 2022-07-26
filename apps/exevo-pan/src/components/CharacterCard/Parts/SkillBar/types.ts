@@ -1,7 +1,6 @@
-import { HTMLAttributes } from 'react'
-
-export interface SkillBarProps extends HTMLAttributes<HTMLDivElement> {
+export type SkillBarProps = {
   skillName: string
   skillValue: number
   highlight?: boolean
-}
+  expandable?: boolean
+} & JSX.IntrinsicElements['button']

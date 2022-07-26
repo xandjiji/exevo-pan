@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import clsx from 'clsx'
+import { Dialog } from 'components/Atoms'
 import { SkillBarProps } from './types'
 import { getDecimalPart } from './utils'
 
@@ -7,9 +8,12 @@ const SkillBar = ({
   skillName,
   skillValue,
   highlight = false,
+  expandable = false,
   className,
   ...props
 }: SkillBarProps) => {
+  const [openDialog, setOpenDialog] = useState(false)
+
   const [progressPercentage, setProgressPercentage] = useState<string>('0%')
   useEffect(() => {
     const dispatchedAnimation = setTimeout(
@@ -20,15 +24,23 @@ const SkillBar = ({
   }, [skillValue])
 
   return (
-    <div
+    <button
       title={progressPercentage}
-      className={clsx('flex items-end', className)}
+      type="button"
+      className={clsx(
+        'flex items-end',
+        expandable ? 'cursor-pointer' : 'cursor-[unset]',
+        className,
+      )}
+      onClick={() => setOpenDialog(true)}
+      disabled={!expandable}
       {...props}
     >
       <div
         className={clsx(
           'text-s text-onPrimary mr-1.5 w-8 flex-none rounded p-[3px] text-right font-bold tracking-wider transition-colors',
           highlight ? 'bg-green' : 'bg-primary',
+          expandable && 'underline decoration-dashed underline-offset-1',
         )}
       >
         {Math.floor(skillValue)}
@@ -49,7 +61,8 @@ const SkillBar = ({
           }}
         />
       </div>
-    </div>
+      <Dialog isOpen={openDialog} onClose={() => setOpenDialog(false)} />
+    </button>
   )
 }
 

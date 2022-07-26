@@ -130,7 +130,7 @@ const CharacterModal = ({
             <CharacterItems items={items} />
 
             <S.Section border>
-              <CharacterSkills skills={skills} />
+              <CharacterSkills skills={skills} expandable />
             </S.Section>
 
             <S.TooltipSection>
