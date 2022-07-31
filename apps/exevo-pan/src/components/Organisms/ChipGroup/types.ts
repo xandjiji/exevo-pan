@@ -5,6 +5,10 @@ export type Option = {
   value: string
 }
 
+export type TypedOption<T> = {
+  value: T
+} & Omit<Option, 'value'>
+
 type CustomProps = {
   options: Option[]
 }

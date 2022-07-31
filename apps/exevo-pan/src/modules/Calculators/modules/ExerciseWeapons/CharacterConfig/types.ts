@@ -1,12 +1,8 @@
-import { Option } from 'components/Organisms/ChipGroup/types'
+export type { TypedOption } from 'components/Organisms/ChipGroup/types'
 
 export type CharacterConfigProps = {
   updatePointsRequired: (points: number) => void
 }
-
-export type TypedOption<T> = {
-  value: T
-} & Omit<Option, 'value'>
 
 export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer'
 
