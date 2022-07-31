@@ -19,7 +19,7 @@ const useLockBody = (open = true): void => {
     if (open) updateState(true)
 
     return (): void => {
-      if (!open) updateState(false)
+      updateState(false)
     }
   }, [open])
 }

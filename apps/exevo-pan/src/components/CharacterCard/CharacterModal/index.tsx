@@ -1,4 +1,4 @@
-import { useMemo, useRef, useCallback } from 'react'
+import { useState, useMemo, useRef, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, Tabs } from 'components/Atoms'
@@ -28,7 +28,7 @@ import { CharacterModalProps } from './types'
 
 /*
 --lateralMargin: 14px;
---cardFixedHeight: 450px;
+--cardFixedHeight: 461px;
 --cardMaxMobileWidth: 368px;
 --gridMobileHeight: 60vh;
 --scrollbarWidth: 6px;
@@ -71,6 +71,8 @@ const CharacterModal = ({
   const {
     translations: { common },
   } = useTranslations()
+
+  const [expandedSkills, setExpandedSkills] = useState(false)
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
@@ -130,7 +132,15 @@ const CharacterModal = ({
             <CharacterItems items={items} />
 
             <S.Section border>
-              <CharacterSkills skills={skills} />
+              <CharacterSkills skills={skills} style={{ marginBottom: 0 }} />
+              <button
+                type="button"
+                onClick={() => setExpandedSkills(true)}
+                className="text-primaryHighlight ml-auto w-fit cursor-pointer underline"
+              >
+                {/* @ ToDo: i18n */}
+                More informations
+              </button>
             </S.Section>
 
             <S.TooltipSection>
@@ -316,6 +326,9 @@ const CharacterModal = ({
           </S.Spacer>
         </S.Spacer>
       </div>
+      <Dialog isOpen={expandedSkills} onClose={() => setExpandedSkills(false)}>
+        dsaad
+      </Dialog>
     </Dialog>
   )
 }
