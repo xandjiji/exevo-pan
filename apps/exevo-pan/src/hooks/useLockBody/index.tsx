@@ -17,14 +17,14 @@ const getScrollbarWidth = () =>
 export const LockBodyProvider = ({ children }: LockBodyProviderProps) => {
   const [modals, setModals] = useState<Record<string, boolean>>({})
 
+  const isOpen = Object.values(modals).some((state) => state)
+
   useEffect(() => {
     if (document && document.body) {
-      const isOpen = Object.values(modals).some((state) => state)
-
       document.body.style.paddingRight = isOpen ? getScrollbarWidth() : 'unset'
       document.body.style.overflow = isOpen ? 'hidden' : 'unset'
     }
-  }, [modals])
+  }, [isOpen])
 
   const updateModal = useCallback(
     (key: string, status: boolean) =>
