@@ -20,6 +20,7 @@ import OutfitIcon from 'assets/svgs/outfit.svg'
 import MountIcon from 'assets/svgs/horse.svg'
 import StoreIcon from 'assets/svgs/inbox.svg'
 import SpriteBox from './SpriteBox'
+import SkillDialog from './SkillDialog'
 import { checkStore, tabCounter } from './utils'
 import { resolvers } from './resolvers'
 import * as S from './atoms'
@@ -326,9 +327,12 @@ const CharacterModal = ({
           </S.Spacer>
         </S.Spacer>
       </div>
-      <Dialog isOpen={expandedSkills} onClose={() => setExpandedSkills(false)}>
-        dsaad
-      </Dialog>
+      <SkillDialog
+        vocationId={vocationId}
+        skills={skills}
+        isOpen={expandedSkills}
+        onClose={() => setExpandedSkills(false)}
+      />
     </Dialog>
   )
 }
