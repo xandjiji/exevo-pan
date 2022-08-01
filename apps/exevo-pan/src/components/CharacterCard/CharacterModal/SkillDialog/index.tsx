@@ -1,7 +1,9 @@
-import { useState } from 'react'
-import { Dialog } from 'components/Atoms'
+import { useState, useMemo, useCallback } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
+import { Dialog, Slider } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import { useStoredState } from 'hooks'
+import { generateLoyaltyMarks } from 'utils'
 import {
   getInitialSkill,
   calculateMinimumSkillCost,
@@ -17,13 +19,11 @@ import { SkillDialogProps, Skill } from './types'
 - skill minimum cost
     tooltip explaining dummy/event
 
-- loyalty slider
-    storedState
-    skill with loyalty
+- skill with loyalty
 
 - skill link with params (targetSkill, vocation, skill, loyalty, param)
 
-- i18n
+- i18n (SkillDialog)
 */
 
 const SkillDialog = ({
@@ -31,17 +31,26 @@ const SkillDialog = ({
   skills,
   ...dialogProps
 }: SkillDialogProps) => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
+  const [loyaltyBonus, setLoyaltyBonus] = useStoredState('cm-loyalty', 0)
   const [skill, setSkill] = useState<Skill>(() => getInitialSkill(skills))
   const selectedSkillValue = skills[skill]
 
-  const skillCost = calculateMinimumSkillCost({
-    currentSkill: 10,
-    targetSkill: Math.floor(selectedSkillValue),
-    loyaltyBonus: 0,
-    percentageLeft: 100,
-    skill: getSkillType(skill),
-    vocation: getVocationName(vocationId),
-  })
+  const skillCost = useMemo(
+    () =>
+      calculateMinimumSkillCost({
+        currentSkill: 10,
+        targetSkill: Math.floor(selectedSkillValue),
+        loyaltyBonus: 0,
+        percentageLeft: 100,
+        skill: getSkillType(skill),
+        vocation: getVocationName(vocationId),
+      }),
+    [selectedSkillValue, skill, vocationId],
+  )
 
   return (
     <Dialog {...dialogProps}>
@@ -50,6 +59,31 @@ const SkillDialog = ({
         options={skillOptions}
         value={skill}
         onChange={(e) => setSkill(e.target.value as Skill)}
+      />
+      <Slider
+        label="Loyalty"
+        min={0}
+        max={50}
+        step={5}
+        displayValue
+        transformDisplayedValues={useCallback(
+          (value) =>
+            value
+              ? `${value * 72} ${
+                  common.CharacterCard.CharacterModal.SkillDialog.loyaltyPoints
+                }`
+              : common.CharacterCard.CharacterModal.SkillDialog.none,
+          [common],
+        )}
+        marks={useMemo(
+          () =>
+            generateLoyaltyMarks(
+              common.CharacterCard.CharacterModal.SkillDialog.none,
+            ),
+          [common],
+        )}
+        value={loyaltyBonus}
+        onChange={(e) => setLoyaltyBonus(+e.target.value)}
       />
     </Dialog>
   )

@@ -178,6 +178,11 @@ export default {
         firstAddon: 'First addon',
         secondAddon: 'Second addon',
       },
+      SkillDialog: {
+        loyaltyPoints: 'points',
+        moneyCost: 'Money cost',
+        none: 'None',
+      },
     },
   },
   StepperCompletedLabel: 'Step completed',
