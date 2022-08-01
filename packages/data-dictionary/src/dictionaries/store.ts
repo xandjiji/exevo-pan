@@ -470,6 +470,26 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Knightly Candelabra',
     value: 60,
   },
+  'knightly guard': {
+    name: 'Knightly Guard',
+    value: 250,
+  },
+  'knightly cabinet': {
+    name: 'Knightly Cabinet',
+    value: 100,
+  },
+  'knightly chair': {
+    name: 'Knightly Chair',
+    value: 70,
+  },
+  'well-laid knightly table': {
+    name: 'Knightly Table',
+    value: 60,
+  },
+  'knightly table': {
+    name: 'Knightly Table',
+    value: 60,
+  },
   'brocade tapestry': {
     name: 'Brocade Tapestry',
     value: 50,
@@ -1746,6 +1766,11 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'plushie of a scissorion': {
     name: 'Plushie of a Scissorion',
+    value: 0,
+  },
+  /* BOSSTIARY */
+  'podium of vigour': {
+    name: 'Podium of Vigour',
     value: 0,
   },
 }
