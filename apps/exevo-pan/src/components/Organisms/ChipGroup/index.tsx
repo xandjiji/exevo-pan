@@ -59,8 +59,8 @@ const ChipGroup = ({
   )
 
   return (
-    <div>
-      <Label className={clsx('mb-2', className)}>{label}</Label>
+    <div className={className}>
+      <Label className="mb-2">{label}</Label>
       <div
         role="radiogroup"
         aria-label={accessibleLabel}
