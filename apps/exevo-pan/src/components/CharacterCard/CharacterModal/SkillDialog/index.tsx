@@ -1,13 +1,12 @@
+import { useState } from 'react'
 import { Dialog } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
+import { useStoredState } from 'hooks'
+import { getInitialSkill } from './utils'
 import { skillOptions } from './options'
-import { SkillDialogProps } from './types'
+import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
-
-- skill chip
-    storedState
-    automatically select highest
 
 - skill minimum cost
     tooltip explaining dummy/event
@@ -26,11 +25,11 @@ const SkillDialog = ({
   skills,
   ...dialogProps
 }: SkillDialogProps) => {
-  console.log(9)
+  const [skill, setSkill] = useState<Skill>(() => getInitialSkill(skills))
 
   return (
     <Dialog {...dialogProps}>
-      <ChipGroup label="Skill" options={skillOptions} />
+      <ChipGroup label="Skill" options={skillOptions} value={skill} />
     </Dialog>
   )
 }
