@@ -3,7 +3,13 @@ import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
-import { isObjectEmpty } from 'utils'
+import {
+  isObjectEmpty,
+  autoRequiredWeaponsCount,
+  customRequiredWeaponsCount,
+  skillCost,
+  SKILL_CONSTANTS,
+} from 'utils'
 import {
   LabeledCard,
   Chip,
@@ -12,14 +18,8 @@ import {
   Empty,
   TimeBubbles,
 } from '../../../components'
-import {
-  autoRequiredWeaponsCount,
-  customRequiredWeaponsCount,
-  calculateCost,
-} from './utils'
 import { weaponOptions } from './options'
 import * as S from './atoms'
-import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 const Summary = ({ pointsRequired }: SummaryProps) => {
@@ -48,15 +48,15 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
   const weaponsRequired: WeaponsObject = useMemo(() => {
     const finalPointsRequired =
       pointsRequired /
-      (hasDummy ? CONSTANTS.DIVIDER.hasDummy : 1) /
-      (isDouble ? CONSTANTS.DIVIDER.isDouble : 1)
+      (hasDummy ? SKILL_CONSTANTS.DIVIDER.hasDummy : 1) /
+      (isDouble ? SKILL_CONSTANTS.DIVIDER.isDouble : 1)
 
     return exerciseWeapon === 'auto'
       ? autoRequiredWeaponsCount(finalPointsRequired)
       : customRequiredWeaponsCount(finalPointsRequired, exerciseWeapon)
   }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
 
-  const cost = useMemo(() => calculateCost(weaponsRequired), [weaponsRequired])
+  const cost = useMemo(() => skillCost(weaponsRequired), [weaponsRequired])
 
   return (
     <div className="grid gap-6">
