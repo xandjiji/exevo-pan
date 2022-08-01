@@ -23,7 +23,7 @@ const pointsToAdvance = ({
   return CONSTANTS.SKILL * vocationConstant ** skillValue
 }
 
-export const calculateRequiredPoints = ({
+export const requiredSkillPoints = ({
   currentSkill,
   targetSkill,
   percentageLeft,

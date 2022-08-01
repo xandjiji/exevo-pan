@@ -5,11 +5,9 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
-import { blurOnEnter } from 'utils'
+import { blurOnEnter, requiredSkillPoints, generateLoyaltyMarks } from 'utils'
 import { LabeledCard } from '../../../components'
 import { vocationOptions, skillOptions } from './options'
-import { generateMarks } from './constants'
-import { calculateRequiredPoints } from './utils'
 import { CharacterConfigProps, Vocation, Skill } from './types'
 
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
@@ -59,7 +57,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
 
   const pointsRequired = useMemo(
     () =>
-      calculateRequiredPoints({
+      requiredSkillPoints({
         currentSkill,
         targetSkill,
         vocation,
@@ -161,7 +159,10 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
               : calculators.none,
           [calculators],
         )}
-        marks={useMemo(() => generateMarks(calculators.none), [calculators])}
+        marks={useMemo(
+          () => generateLoyaltyMarks(calculators.none),
+          [calculators],
+        )}
         value={loyaltyBonus}
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
         ssr
