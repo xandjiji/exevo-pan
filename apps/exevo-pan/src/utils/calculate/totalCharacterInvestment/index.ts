@@ -6,7 +6,7 @@ const CHARM_EXPANSION_VALUE = 450
 const HUNTING_SLOT_VALUE = 750
 const PREY_SLOT_VALUE = 900
 
-export const calculateTotalInvestment = (
+export const totalCharacterInvestment = (
   character: CharacterObject,
 ): number => {
   const { id, charmInfo, huntingSlot, preySlot, hirelings, storeItems } =
