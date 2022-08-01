@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Dialog, Slider } from 'components/Atoms'
+import { Dialog, Slider, Chip, Text } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks } from 'utils'
@@ -16,11 +16,8 @@ import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
-- skill minimum cost
-    tooltip explaining dummy/event
-
+- tooltip explaining dummy/event
 - skill with loyalty
-
 - skill link with params (targetSkill, vocation, skill, loyalty, param)
 
 - i18n (SkillDialog)
@@ -42,7 +39,7 @@ const SkillDialog = ({
   const skillCost = useMemo(
     () =>
       calculateMinimumSkillCost({
-        currentSkill: 10,
+        currentSkill: skill === 'magic' ? 0 : 10,
         targetSkill: Math.floor(selectedSkillValue),
         loyaltyBonus: 0,
         percentageLeft: 100,
@@ -54,37 +51,58 @@ const SkillDialog = ({
 
   return (
     <Dialog {...dialogProps}>
-      <ChipGroup
-        label="Skill"
-        options={skillOptions}
-        value={skill}
-        onChange={(e) => setSkill(e.target.value as Skill)}
-      />
-      <Slider
-        label="Loyalty"
-        min={0}
-        max={50}
-        step={5}
-        displayValue
-        transformDisplayedValues={useCallback(
-          (value) =>
-            value
-              ? `${value * 72} ${
-                  common.CharacterCard.CharacterModal.SkillDialog.loyaltyPoints
-                }`
-              : common.CharacterCard.CharacterModal.SkillDialog.none,
-          [common],
-        )}
-        marks={useMemo(
-          () =>
-            generateLoyaltyMarks(
-              common.CharacterCard.CharacterModal.SkillDialog.none,
-            ),
-          [common],
-        )}
-        value={loyaltyBonus}
-        onChange={(e) => setLoyaltyBonus(+e.target.value)}
-      />
+      <div className="grid w-full gap-6">
+        <ChipGroup
+          label="Skill"
+          options={skillOptions}
+          value={skill}
+          onChange={(e) => setSkill(e.target.value as Skill)}
+        />
+        <Slider
+          label="Loyalty"
+          min={0}
+          max={50}
+          step={5}
+          displayValue
+          transformDisplayedValues={useCallback(
+            (value) =>
+              value
+                ? `${value * 72} ${
+                    common.CharacterCard.CharacterModal.SkillDialog
+                      .loyaltyPoints
+                  }`
+                : common.CharacterCard.CharacterModal.SkillDialog.none,
+            [common],
+          )}
+          marks={useMemo(
+            () =>
+              generateLoyaltyMarks(
+                common.CharacterCard.CharacterModal.SkillDialog.none,
+              ),
+            [common],
+          )}
+          value={loyaltyBonus}
+          onChange={(e) => setLoyaltyBonus(+e.target.value)}
+        />
+
+        <div
+          className="border-separator text-tsm grid gap-4 border-0 border-solid pt-6"
+          style={{ borderTopWidth: 1 }}
+        >
+          <div className="grid gap-2">
+            <strong>Skill value</strong>
+            <div className="flex items-center gap-2">
+              <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
+                <Text.GoldCoin value={skillCost.gold} />
+              </Chip>
+              or
+              <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
+                <Text.TibiaCoin value={skillCost.tc} />
+              </Chip>
+            </div>
+          </div>
+        </div>
+      </div>
     </Dialog>
   )
 } // ti amamus papai
