@@ -126,7 +126,7 @@ const SkillDialog = ({
           </Group>
 
           <Group className="min-w-fit">
-            <strong className="whitespace-nowrap">
+            <strong className="whitespace-nowrap pr-6">
               Skill with bonus Loyalty
             </strong>
             <SkillBar
