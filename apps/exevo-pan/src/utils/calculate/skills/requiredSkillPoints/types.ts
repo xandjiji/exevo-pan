@@ -1,19 +1,22 @@
-export type Vocation = 'knight' | 'paladin' | 'druid' | 'sorcerer'
+import { Skill, Vocation } from '../types'
 
-export type Skill = 'magic' | 'melee' | 'distance'
-
-type BaseCalcArgs = {
-  vocation: Vocation
+export type SkillToPointsArgs = {
   skill: Skill
+  vocation: Vocation
+  skillValue: number
 }
 
-export type SkillCalcArgs = {
+export type PointsToAdvanceArgs = {
+  skill: Skill
+  vocation: Vocation
+  skillValue: number
+}
+
+export type RequiredSkillPointsArgs = {
+  skill: Skill
+  vocation: Vocation
   currentSkill: number
   targetSkill: number
   percentageLeft: number
   loyaltyBonus: number
-} & BaseCalcArgs
-
-export type PointsCalcArgs = {
-  skillValue: number
-} & BaseCalcArgs
+}

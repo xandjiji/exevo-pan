@@ -1,26 +1,32 @@
-import * as CONSTANTS from './constants'
-import { PointsCalcArgs, SkillCalcArgs } from './types'
+import * as CONSTANTS from '../constants'
+import {
+  SkillToPointsArgs,
+  PointsToAdvanceArgs,
+  RequiredSkillPointsArgs,
+} from './types'
 
-const totalPoints = ({
+const SKILL_CONSTANT = CONSTANTS.SKILLS.magic
+
+const skillToPoints = ({
   skillValue,
   vocation,
   skill,
-}: PointsCalcArgs): number => {
+}: SkillToPointsArgs): number => {
   const vocationConstant = CONSTANTS.VOCATION[vocation][skill]
 
   const numerator = vocationConstant ** skillValue - 1
   const denominator = vocationConstant - 1
 
-  return CONSTANTS.SKILL * (numerator / denominator)
+  return SKILL_CONSTANT * (numerator / denominator)
 }
 
 const pointsToAdvance = ({
   skillValue,
   vocation,
   skill,
-}: PointsCalcArgs): number => {
+}: PointsToAdvanceArgs): number => {
   const vocationConstant = CONSTANTS.VOCATION[vocation][skill]
-  return CONSTANTS.SKILL * vocationConstant ** skillValue
+  return SKILL_CONSTANT * vocationConstant ** skillValue
 }
 
 export const requiredSkillPoints = ({
@@ -29,9 +35,9 @@ export const requiredSkillPoints = ({
   percentageLeft,
   loyaltyBonus,
   ...args
-}: SkillCalcArgs): number => {
-  const currentPoints = totalPoints({ skillValue: currentSkill, ...args })
-  const targetPoints = totalPoints({ skillValue: targetSkill, ...args })
+}: RequiredSkillPointsArgs): number => {
+  const currentPoints = skillToPoints({ skillValue: currentSkill, ...args })
+  const targetPoints = skillToPoints({ skillValue: targetSkill, ...args })
   const currentCompletedPercentage = percentageLeft / 100
 
   const requiredPoints = targetPoints - currentPoints
