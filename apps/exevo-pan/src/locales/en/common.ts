@@ -182,6 +182,8 @@ export default {
         loyaltyPoints: 'points',
         moneyCost: 'Money cost',
         none: 'None',
+        skillValue: 'Skill value',
+        tooltip: 'Required cost to achieve this skill using:',
       },
     },
   },

@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, Slider, Chip, Text } from 'components/Atoms'
-import { ChipGroup } from 'components/Organisms'
+import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks } from 'utils'
 import {
@@ -16,7 +16,6 @@ import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
-- tooltip explaining dummy/event
 - skill with loyalty
 - skill link with params (targetSkill, vocation, skill, loyalty, param)
 
@@ -90,12 +89,25 @@ const SkillDialog = ({
           style={{ borderTopWidth: 1 }}
         >
           <div className="grid gap-2">
-            <strong>Skill value</strong>
+            <InfoTooltip.LabelWrapper className="font-bold">
+              {common.CharacterCard.CharacterModal.SkillDialog.skillValue}
+              <InfoTooltip
+                labelSize
+                content={
+                  <p className="max-w-[180px] leading-relaxed">
+                    {common.CharacterCard.CharacterModal.SkillDialog.tooltip}{' '}
+                    <strong>exercise wands</strong>,{' '}
+                    <strong>exercise dummy</strong> {common.and}{' '}
+                    <strong>double XP/Skill event</strong>.
+                  </p>
+                }
+              />
+            </InfoTooltip.LabelWrapper>
             <div className="flex items-center gap-2">
               <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
                 <Text.GoldCoin value={skillCost.gold} />
               </Chip>
-              or
+              {common.or}
               <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
                 <Text.TibiaCoin value={skillCost.tc} />
               </Chip>
