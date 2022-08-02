@@ -28,11 +28,6 @@ export const getVocationName = (vocationId: number) =>
 export const getSkillType = (skill: Skill): SkillType =>
   ['magic', 'distance'].includes(skill) ? (skill as 'magic') : 'melee'
 
-export const getPercentageLeft = (value: number) => {
-  const [, decimal] = value.toString().split('.')
-  return 100 - Number(decimal ?? 0)
-}
-
 export const calculateMinimumSkillCost = (
   ...args: Parameters<typeof requiredSkillPoints>
 ): ReturnType<typeof skillCost> =>

@@ -1,26 +1,31 @@
 import { useState, useMemo, useCallback } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, Slider, Chip, Text } from 'components/Atoms'
 import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import { useStoredState } from 'hooks'
-import { generateLoyaltyMarks } from 'utils'
+import { generateLoyaltyMarks, skillAfterLoyalty } from 'utils'
+import SkillBar from '../../Parts/SkillBar'
 import {
   getInitialSkill,
   calculateMinimumSkillCost,
   getVocationName,
   getSkillType,
-  getPercentageLeft,
 } from './utils'
 import { skillOptions } from './options'
 import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
-- skill with loyalty
 - skill link with params (targetSkill, vocation, skill, loyalty, param)
+- mobile dimensions
 
 - i18n (SkillDialog)
 */
+
+const Group = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
+  <div className={clsx('grid gap-2', className)} {...props} />
+)
 
 const SkillDialog = ({
   vocationId,
@@ -32,25 +37,31 @@ const SkillDialog = ({
   } = useTranslations()
 
   const [loyaltyBonus, setLoyaltyBonus] = useStoredState('cm-loyalty', 0)
+
   const [skill, setSkill] = useState<Skill>(() => getInitialSkill(skills))
   const selectedSkillValue = skills[skill]
+  const skillType = getSkillType(skill)
+  const vocation = getVocationName(vocationId)
 
-  const skillCost = useMemo(
-    () =>
-      calculateMinimumSkillCost({
-        currentSkill: skill === 'magic' ? 0 : 10,
-        targetSkill: Math.floor(selectedSkillValue),
-        loyaltyBonus: 0,
-        percentageLeft: 100,
-        skill: getSkillType(skill),
-        vocation: getVocationName(vocationId),
-      }),
-    [selectedSkillValue, skill, vocationId],
-  )
+  const skillCost = calculateMinimumSkillCost({
+    currentSkill: skill === 'magic' ? 0 : 10,
+    targetSkill: Math.floor(selectedSkillValue),
+    loyaltyBonus: 0,
+    percentageLeft: 100,
+    skill: skillType,
+    vocation,
+  })
+
+  const skillWithLoyalty = skillAfterLoyalty({
+    skillValue: selectedSkillValue,
+    skill: skillType,
+    vocation,
+    loyaltyBonus,
+  })
 
   return (
-    <Dialog {...dialogProps}>
-      <div className="grid w-full gap-6">
+    <Dialog className="grid" {...dialogProps}>
+      <div className="grid w-fit gap-6">
         <ChipGroup
           label="Skill"
           options={skillOptions}
@@ -85,10 +96,10 @@ const SkillDialog = ({
         />
 
         <div
-          className="border-separator text-tsm grid gap-4 border-0 border-solid pt-6"
+          className="border-separator text-tsm flex justify-between gap-6 border-0 border-solid pt-6"
           style={{ borderTopWidth: 1 }}
         >
-          <div className="grid gap-2">
+          <Group>
             <InfoTooltip.LabelWrapper className="font-bold">
               {common.CharacterCard.CharacterModal.SkillDialog.skillValue}
               <InfoTooltip
@@ -96,7 +107,7 @@ const SkillDialog = ({
                 content={
                   <p className="max-w-[180px] leading-relaxed">
                     {common.CharacterCard.CharacterModal.SkillDialog.tooltip}{' '}
-                    <strong>exercise wands</strong>,{' '}
+                    <strong>exercise weapons</strong>,{' '}
                     <strong>exercise dummy</strong> {common.and}{' '}
                     <strong>double XP/Skill event</strong>.
                   </p>
@@ -107,12 +118,24 @@ const SkillDialog = ({
               <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
                 <Text.GoldCoin value={skillCost.gold} />
               </Chip>
-              {common.or}
+              <small className="font-thin">{common.or}</small>
               <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
                 <Text.TibiaCoin value={skillCost.tc} />
               </Chip>
             </div>
-          </div>
+          </Group>
+
+          <Group className="min-w-fit">
+            <strong className="whitespace-nowrap">
+              Skill with bonus Loyalty
+            </strong>
+            <SkillBar
+              skillName={`${skill} (+${
+                Math.floor(skillWithLoyalty) - Math.floor(selectedSkillValue)
+              })`}
+              skillValue={skillWithLoyalty}
+            />
+          </Group>
         </div>
       </div>
     </Dialog>
