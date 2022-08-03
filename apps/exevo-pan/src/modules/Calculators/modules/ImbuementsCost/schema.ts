@@ -53,7 +53,7 @@ export const RECIPES: RecipeSchema[] = [
     npcName: 'void',
     materials: [
       {
-        name: 'Rope Belts',
+        name: 'Rope Belt',
         amount: 25,
         src: ropebeltSrc,
       },
@@ -74,7 +74,7 @@ export const RECIPES: RecipeSchema[] = [
     npcName: 'strike',
     materials: [
       {
-        name: 'Protective Charms',
+        name: 'Protective Charm',
         amount: 20,
         src: protectivecharmSrc,
       },
@@ -84,7 +84,7 @@ export const RECIPES: RecipeSchema[] = [
         src: sabretoothSrc,
       },
       {
-        name: 'Vexclaw Talons',
+        name: 'Vexclaw Talon',
         amount: 5,
         src: vexclawtalonSrc,
       },
