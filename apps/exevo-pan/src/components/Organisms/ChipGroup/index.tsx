@@ -14,7 +14,7 @@ const Option = ({ groupName, name, value, ...props }: OptionProps) => {
   return (
     <Chip
       id={id}
-      className="relative gap-1.5"
+      className="relative"
       onClick={handleClick}
       overrideStatus={props.checked}
       role="radio"

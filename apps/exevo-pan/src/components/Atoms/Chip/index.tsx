@@ -13,6 +13,7 @@ const ChipComponent = ({
   onClick,
   onClose,
   overrideStatus,
+  gray = false,
   ...props
 }: ChipProps) => {
   const {
@@ -46,7 +47,8 @@ const ChipComponent = ({
       onClick={handleClick}
       onKeyPress={handleKeypress}
       className={clsx(
-        'text-tsm flex items-center rounded-xl border-none py-1.5 px-3 font-normal transition-all',
+        'text-tsm flex shrink-0 items-center gap-1.5 rounded-xl border-none py-1.5 px-3 font-normal transition-all',
+        gray && 'bg-separator/60',
         derivedActive
           ? 'bg-primary text-onPrimary'
           : 'bg-primaryVariant text-onSurface',
@@ -58,7 +60,7 @@ const ChipComponent = ({
       {children}
       {!!onClose && (
         <button
-          className="clickable bg-primary relative ml-2 inline-flex h-4 w-4 items-center justify-center rounded-full border-none opacity-75 transition-opacity"
+          className="clickable bg-primary relative inline-flex h-4 w-4 items-center justify-center rounded-full border-none opacity-75 transition-opacity"
           type="button"
           aria-label={common.RemoveItem}
           onClick={onClose}

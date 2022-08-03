@@ -1,16 +1,15 @@
+import { memo } from 'react'
 import clsx from 'clsx'
+import { Chip as BaseChip } from 'components/Atoms'
 import styles from './styles.module.css'
 
-export const Chip = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
-  <div
-    className={clsx(
-      'bg-separator/60 relative flex h-fit w-fit shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors',
-      styles.hidden,
-      className,
-    )}
+export const Chip: typeof BaseChip = memo(({ className, ...props }) => (
+  <BaseChip
+    className={clsx('relative h-fit w-fit', styles.hidden, className)}
+    gray
     {...props}
   />
-)
+))
 
 export const ChipWrapper = ({
   className,

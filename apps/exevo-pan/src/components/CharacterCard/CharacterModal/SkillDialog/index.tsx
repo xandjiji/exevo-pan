@@ -17,6 +17,7 @@ import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
+- Title
 - skill link with params (targetSkill, vocation, skill, loyalty, param)
 - mobile dimensions
 - fix loyalty calc?
@@ -116,11 +117,11 @@ const SkillDialog = ({
               />
             </InfoTooltip.LabelWrapper>
             <div className="flex items-center gap-2">
-              <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
+              <Chip gray>
                 <Text.GoldCoin value={skillCost.gold} />
               </Chip>
               <small className="font-thin">{common.or}</small>
-              <Chip className="bg-separator/60 flex shrink-0 items-center gap-1.5 rounded-xl py-1.5 px-3 font-normal transition-colors">
+              <Chip gray>
                 <Text.TibiaCoin value={skillCost.tc} />
               </Chip>
             </div>
