@@ -15,6 +15,7 @@ import {
   calculateMinimumSkillCost,
   getVocationName,
   getSkillType,
+  getPercentageLeft,
 } from './utils'
 import { skillOptions } from './options'
 import { SkillDialogProps, Skill } from './types'
@@ -45,12 +46,14 @@ const SkillDialog = ({
 
   const [skill, setSkill] = useState<Skill>(() => getInitialSkill(skills))
   const selectedSkillValue = skills[skill]
+  const integerSelectedSkillValue = Math.floor(selectedSkillValue)
   const skillType = getSkillType(skill)
   const vocation = getVocationName(vocationId)
+  const percentageLeft = getPercentageLeft(selectedSkillValue)
 
   const skillCost = calculateMinimumSkillCost({
     currentSkill: skill === 'magic' ? 0 : 10,
-    targetSkill: Math.floor(selectedSkillValue),
+    targetSkill: integerSelectedSkillValue,
     loyaltyBonus: 0,
     percentageLeft: 100,
     skill: skillType,
@@ -136,7 +139,7 @@ const SkillDialog = ({
             </strong>
             <SkillBar
               skillName={`${skill} (+${
-                Math.floor(skillWithLoyalty) - Math.floor(selectedSkillValue)
+                Math.floor(skillWithLoyalty) - integerSelectedSkillValue
               })`}
               skillValue={skillWithLoyalty}
             />
@@ -144,7 +147,9 @@ const SkillDialog = ({
         </div>
       </div>
 
-      <NextLink href={`${routes.EXERCISE_WEAPONS}?percentageLeft=5`}>
+      <NextLink
+        href={`${routes.EXERCISE_WEAPONS}?targetSkill=${integerSelectedSkillValue}&currentSkill=${integerSelectedSkillValue}&vocation=${vocation}&skill=${skillType}&loyalty=${loyaltyBonus}&percentageLeft=${percentageLeft}`}
+      >
         <a
           className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"
           target="_blank"
