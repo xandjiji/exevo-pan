@@ -1,10 +1,14 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useMemo, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
+import NextLink from 'next/link'
 import { Dialog, Slider, Chip, Text } from 'components/Atoms'
 import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks, skillAfterLoyalty } from 'utils'
+import ExternalIcon from 'assets/svgs/external.svg'
+import { routes } from 'Constants'
 import SkillBar from '../../Parts/SkillBar'
 import {
   getInitialSkill,
@@ -139,6 +143,16 @@ const SkillDialog = ({
           </Group>
         </div>
       </div>
+
+      <NextLink href={`${routes.EXERCISE_WEAPONS}?percentageLeft=5`}>
+        <a
+          className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"
+          target="_blank"
+        >
+          Experiment with this character in our skills calculator{' '}
+          <ExternalIcon className="fill-primaryHighlight h-4 w-4" />
+        </a>
+      </NextLink>
     </Dialog>
   )
 } // ti amamus papai
