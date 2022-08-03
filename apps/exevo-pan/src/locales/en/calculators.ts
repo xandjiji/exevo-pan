@@ -107,6 +107,7 @@ export default {
       data: 'Data',
       done: 'Done',
     },
+    advancedOptions: 'Advanced options',
     AdvancedOptionsDialog: {
       addExtraExpenses: 'Add extra expenses',
       extraCostPlaceholder: 'Extra gold costs',

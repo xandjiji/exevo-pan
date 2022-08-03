@@ -128,7 +128,7 @@ export default {
   ChangeValueLabel: 'alterar valor',
   LoadingLabel: 'Carregando',
   UpdatingDataText: 'Atualizando dados...',
-  PreferredLanguageLabel: 'Selecione seu idioma',
+  PreferredLanguageLabel: 'Mudar idioma',
   CharacterCard: {
     linkLabel: 'Ir para a página do personagem',
     bidLabelText: {

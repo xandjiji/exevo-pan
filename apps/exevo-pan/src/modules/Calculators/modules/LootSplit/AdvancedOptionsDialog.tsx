@@ -31,6 +31,7 @@ const AdvancedOptionsDialog = ({
     <Dialog
       isOpen={isOpen}
       onClose={onClose}
+      heading={calculators.LootSplit.advancedOptions}
       className="w-full max-w-[320px] md:max-w-[540px]"
     >
       <Group className="w-full">

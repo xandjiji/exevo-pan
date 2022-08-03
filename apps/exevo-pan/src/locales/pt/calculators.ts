@@ -108,8 +108,9 @@ export default {
       data: 'Dados',
       done: 'Pronto',
     },
+    advancedOptions: 'Opções avançadas',
     AdvancedOptionsDialog: {
-      addExtraExpenses: 'Adicionar gastos adicionais',
+      addExtraExpenses: 'Gastos adicionais',
       extraCostPlaceholder: 'Gold gasto adicional',
     },
     SessionDialog: {

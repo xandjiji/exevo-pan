@@ -17,7 +17,6 @@ import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
-- Title
 - skill link with params (targetSkill, vocation, skill, loyalty, param)
 - mobile dimensions
 - fix loyalty calc?
@@ -62,7 +61,7 @@ const SkillDialog = ({
   })
 
   return (
-    <Dialog className="grid" {...dialogProps}>
+    <Dialog className="grid" heading="Character skills" {...dialogProps}>
       <div className="grid w-fit gap-6">
         <ChipGroup
           label="Skill"

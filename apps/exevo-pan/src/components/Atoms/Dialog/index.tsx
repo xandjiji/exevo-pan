@@ -51,10 +51,14 @@ const Dialog = ({
               <div
                 className={clsx(
                   'float-right flex items-center justify-between',
-                  heading && 'mb-3',
+                  heading && 'mb-4 w-full',
                 )}
               >
-                {heading && <h5 className="text-2xl">{heading}</h5>}
+                {heading && (
+                  <h5 className="text-onSurface text-2xl transition-colors">
+                    {heading}
+                  </h5>
+                )}
                 {!noCloseButton && (
                   <button
                     className="clickable ml-auto grid w-fit place-items-center rounded"

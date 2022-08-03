@@ -39,6 +39,7 @@ const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
         isOpen={isOpen}
         onClose={() => setLanguageOpen(false)}
         noCloseButton
+        heading={common.PreferredLanguageLabel}
         className="grid gap-2"
       >
         <RadioButton

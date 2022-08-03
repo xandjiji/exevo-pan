@@ -105,7 +105,7 @@ const LootSplit = () => {
             disabled={isInvalid}
             onClick={() => setOpenAdvancedOptions(true)}
           >
-            Advanced options
+            {calculators.LootSplit.advancedOptions}
           </Button>
         </Tabs.Panel>
         <Tabs.Panel
