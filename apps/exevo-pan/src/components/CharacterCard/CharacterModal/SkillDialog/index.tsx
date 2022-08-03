@@ -23,10 +23,10 @@ import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
+- i18n (SkillDialog)
 - mobile dimensions
 - fix loyalty calc?
 
-- i18n (SkillDialog)
 */
 
 const Group = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
@@ -164,7 +164,7 @@ const SkillDialog = ({
           target="_blank"
         >
           Experiment with this character in our skills calculator{' '}
-          <ExternalIcon className="fill-primaryHighlight h-4 w-4" />
+          <ExternalIcon className="fill-onSurface h-4 w-4" />
         </a>
       </NextLink>
     </Dialog>
