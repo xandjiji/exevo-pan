@@ -19,6 +19,7 @@ import { SkillDialogProps, Skill } from './types'
 
 - skill link with params (targetSkill, vocation, skill, loyalty, param)
 - mobile dimensions
+- fix loyalty calc?
 
 - i18n (SkillDialog)
 */
