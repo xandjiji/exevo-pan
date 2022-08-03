@@ -9,6 +9,7 @@ import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks, skillAfterLoyalty } from 'utils'
 import ExternalIcon from 'assets/svgs/external.svg'
 import { routes } from 'Constants'
+import { parameterNames } from 'modules/Calculators/modules/ExerciseWeapons/CharacterConfig/constants'
 import SkillBar from '../../Parts/SkillBar'
 import {
   getInitialSkill,
@@ -22,7 +23,6 @@ import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
-- skill link with params (targetSkill, vocation, skill, loyalty, param)
 - mobile dimensions
 - fix loyalty calc?
 
@@ -150,7 +150,14 @@ const SkillDialog = ({
       </div>
 
       <NextLink
-        href={`${routes.EXERCISE_WEAPONS}?targetSkill=${integerSkillWithLoyalty}&currentSkill=${integerSkillWithLoyalty}&vocation=${vocation}&skill=${skillType}&loyalty=${loyaltyBonus}&percentageLeft=${percentageLeft}`}
+        href={`${routes.EXERCISE_WEAPONS}?${[
+          `${parameterNames.vocation}=${vocation}`,
+          `${parameterNames.skill}=${skillType}`,
+          `${parameterNames.currentSkill}=${integerSkillWithLoyalty}`,
+          `${parameterNames.targetSkill}=${integerSkillWithLoyalty}`,
+          `${parameterNames.percentageLeft}=${percentageLeft}`,
+          `${parameterNames.loyalty}=${loyaltyBonus}`,
+        ].join('&')}`}
       >
         <a
           className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"

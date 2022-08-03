@@ -8,6 +8,7 @@ import ChevronRight from 'assets/svgs/chevronRight.svg'
 import { blurOnEnter, requiredSkillPoints, generateLoyaltyMarks } from 'utils'
 import { LabeledCard } from '../../../components'
 import { vocationOptions, skillOptions } from './options'
+import { parameterNames } from './constants'
 import { CharacterConfigProps, Vocation, Skill } from './types'
 
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
@@ -16,40 +17,40 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
   } = useTranslations()
 
   const [vocation, setVocation] = useStoredUrlState<Vocation>({
-    key: 'vocation',
+    key: parameterNames.vocation,
     storeKey: 'ew-vocation',
     defaultValue: 'knight',
   })
 
   const [skill, setSkill] = useStoredUrlState<Skill>({
-    key: 'skill',
+    key: parameterNames.skill,
     storeKey: 'ew-skill',
     defaultValue: 'melee',
   })
 
   const [currentSkill, setCurrentSkill] = useStoredUrlState({
-    key: 'currentSkill',
+    key: parameterNames.currentSkill,
     storeKey: 'ew-currentSkill',
     defaultValue: 100,
     decode: Number,
   })
 
   const [targetSkill, setTargetSkill] = useStoredUrlState({
-    key: 'targetSkill',
+    key: parameterNames.targetSkill,
     storeKey: 'ew-targetSkill',
     defaultValue: 120,
     decode: Number,
   })
 
   const [loyaltyBonus, setLoyaltyBonus] = useStoredUrlState({
-    key: 'loyalty',
+    key: parameterNames.loyalty,
     storeKey: 'ew-loyalty',
     defaultValue: 0,
     decode: Number,
   })
 
   const [percentageLeft, setPercentageLeft] = useStoredUrlState({
-    key: 'percentageLeft',
+    key: parameterNames.percentageLeft,
     storeKey: 'ew-percentageLeft',
     defaultValue: 50,
     decode: Number,
