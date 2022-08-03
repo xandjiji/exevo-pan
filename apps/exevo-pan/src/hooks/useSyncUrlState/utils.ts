@@ -5,6 +5,9 @@ import { RegisteredParameter } from './types'
 
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
 
+const isUrlStateNull = (key: string): boolean =>
+  isServer() ? true : getCurrentUrlParams().get(key) === null
+
 const getUrlState = <T>({
   key,
   defaultValue,
@@ -48,4 +51,5 @@ const setUrlState = <T>(
 export const urlState = {
   get: getUrlState,
   set: setUrlState,
+  isNull: isUrlStateNull,
 }

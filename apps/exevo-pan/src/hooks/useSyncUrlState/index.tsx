@@ -21,7 +21,7 @@ const useSyncUrlState = <T,>(args: UseSyncUrlState<T>) => {
     })
   }, [])
 
-  const isDefault = state === args.defaultValue
+  const isDefault = urlState.isNull(args.key)
 
   return [state, setStateAndUpdateParam, isDefault] as const
 }
