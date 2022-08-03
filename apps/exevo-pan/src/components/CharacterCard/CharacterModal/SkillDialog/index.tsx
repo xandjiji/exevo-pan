@@ -49,7 +49,6 @@ const SkillDialog = ({
   const integerSelectedSkillValue = Math.floor(selectedSkillValue)
   const skillType = getSkillType(skill)
   const vocation = getVocationName(vocationId)
-  const percentageLeft = getPercentageLeft(selectedSkillValue)
 
   const skillCost = calculateMinimumSkillCost({
     currentSkill: skill === 'magic' ? 0 : 10,
@@ -66,6 +65,9 @@ const SkillDialog = ({
     vocation,
     loyaltyBonus,
   })
+
+  const integerSkillWithLoyalty = Math.floor(skillWithLoyalty)
+  const percentageLeft = getPercentageLeft(skillWithLoyalty)
 
   return (
     <Dialog className="grid" heading="Character skills" {...dialogProps}>
@@ -148,7 +150,7 @@ const SkillDialog = ({
       </div>
 
       <NextLink
-        href={`${routes.EXERCISE_WEAPONS}?targetSkill=${integerSelectedSkillValue}&currentSkill=${integerSelectedSkillValue}&vocation=${vocation}&skill=${skillType}&loyalty=${loyaltyBonus}&percentageLeft=${percentageLeft}`}
+        href={`${routes.EXERCISE_WEAPONS}?targetSkill=${integerSkillWithLoyalty}&currentSkill=${integerSkillWithLoyalty}&vocation=${vocation}&skill=${skillType}&loyalty=${loyaltyBonus}&percentageLeft=${percentageLeft}`}
       >
         <a
           className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"

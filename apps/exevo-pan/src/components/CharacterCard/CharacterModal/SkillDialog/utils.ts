@@ -29,7 +29,7 @@ export const getSkillType = (skill: Skill): SkillType =>
   ['magic', 'distance'].includes(skill) ? (skill as 'magic') : 'melee'
 
 export const getPercentageLeft = (value: number) => {
-  const [, decimal] = value.toString().split('.')
+  const [, decimal] = value.toFixed(2).split('.')
   return 100 - Number(decimal ?? 0)
 }
 
