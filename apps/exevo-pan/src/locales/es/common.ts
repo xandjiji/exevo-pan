@@ -175,6 +175,8 @@ export default {
     },
     expand: 'Expandir para ver todos los detalles de la subasta',
     CharacterModal: {
+      /* @ ToDo: i18n */
+      moreInfo: 'More informations',
       totalInvested: 'Total invertido',
       SpriteBox: {
         firstAddon: 'Primer addon',

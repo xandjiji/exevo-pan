@@ -173,6 +173,7 @@ export default {
     },
     expand: 'Expand for full auction details',
     CharacterModal: {
+      moreInfo: 'More informations',
       totalInvested: 'Total invested',
       SpriteBox: {
         firstAddon: 'First addon',

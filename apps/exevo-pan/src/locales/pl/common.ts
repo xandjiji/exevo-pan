@@ -173,6 +173,8 @@ export default {
     },
     expand: 'Rozwiń aby zobaczyć pełne szczegóły aukcji',
     CharacterModal: {
+      /* @ ToDo: i18n */
+      moreInfo: 'More informations',
       totalInvested: 'łącznie zainwestowano',
       SpriteBox: {
         firstAddon: 'Pierwszy addon',

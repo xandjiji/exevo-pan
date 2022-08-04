@@ -173,6 +173,7 @@ export default {
     },
     expand: 'Expandir todos os detalhes do leilão',
     CharacterModal: {
+      moreInfo: 'Mais informações',
       totalInvested: 'Total investido',
       SpriteBox: {
         firstAddon: 'Primeiro addon',

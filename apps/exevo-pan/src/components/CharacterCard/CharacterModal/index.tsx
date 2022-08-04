@@ -139,8 +139,7 @@ const CharacterModal = ({
                 onClick={() => setExpandedSkills(true)}
                 className="text-primaryHighlight ml-auto w-fit cursor-pointer underline"
               >
-                {/* @ ToDo: i18n */}
-                More informations
+                {common.CharacterCard.CharacterModal.moreInfo}
               </button>
             </S.Section>
 
