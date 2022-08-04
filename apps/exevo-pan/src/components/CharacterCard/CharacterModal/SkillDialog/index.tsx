@@ -21,13 +21,6 @@ import {
 import { skillOptions } from './options'
 import { SkillDialogProps, Skill } from './types'
 
-/* @ ToDo:
-
-- mobile dimensions
-- fix loyalty calc?
-
-*/
-
 const Group = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div className={clsx('grid gap-2', className)} {...props} />
 )
@@ -109,7 +102,7 @@ const SkillDialog = ({
         />
 
         <div
-          className="border-separator text-tsm flex justify-between gap-6 border-0 border-solid pt-6"
+          className="border-separator text-tsm grid justify-between gap-6 border-0 border-solid pt-6 sm:flex"
           style={{ borderTopWidth: 1 }}
         >
           <Group>
@@ -167,7 +160,7 @@ const SkillDialog = ({
           target="_blank"
         >
           {common.CharacterCard.CharacterModal.SkillDialog.externalCalculator}
-          <ExternalIcon className="fill-onSurface h-4 w-4" />
+          <ExternalIcon className="fill-onSurface mb-[1px] h-4 w-4 shrink-0" />
         </a>
       </NextLink>
     </Dialog>
