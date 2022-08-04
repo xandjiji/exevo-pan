@@ -14,6 +14,7 @@ import {
   Achievements,
   Hirelings,
 } from 'components/CharacterCard/Parts'
+import MoreInfoIcon from 'assets/svgs/moreInfo.svg'
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, totalCharacterInvestment } from 'utils'
 import OutfitIcon from 'assets/svgs/outfit.svg'
@@ -29,7 +30,7 @@ import { CharacterModalProps } from './types'
 
 /*
 --lateralMargin: 14px;
---cardFixedHeight: 461px;
+--cardFixedHeight: 470px;
 --cardMaxMobileWidth: 368px;
 --gridMobileHeight: 60vh;
 --scrollbarWidth: 6px;
@@ -137,9 +138,10 @@ const CharacterModal = ({
               <button
                 type="button"
                 onClick={() => setExpandedSkills(true)}
-                className="text-primaryHighlight ml-auto w-fit cursor-pointer underline"
+                className="text-primaryHighlight clickable ml-auto flex w-fit cursor-pointer items-center gap-1.5 rounded px-1 py-0.5"
               >
                 {common.CharacterCard.CharacterModal.moreInfo}
+                <MoreInfoIcon className="fill-onSurface h-4 w-4 shrink-0" />
               </button>
             </S.Section>
 
