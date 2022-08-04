@@ -119,7 +119,7 @@ const SkillDialog = ({
                 labelSize
                 content={
                   <p className="max-w-[180px] leading-relaxed">
-                    {common.CharacterCard.CharacterModal.SkillDialog.tooltip}{' '}
+                    {common.CharacterCard.CharacterModal.SkillDialog.tooltip}:{' '}
                     <strong>exercise weapons</strong>,{' '}
                     <strong>exercise dummy</strong> {common.and}{' '}
                     <strong>double XP/Skill event</strong>.
