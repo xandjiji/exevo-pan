@@ -179,11 +179,15 @@ export default {
         secondAddon: 'Second addon',
       },
       SkillDialog: {
+        heading: 'Character skills',
         loyaltyPoints: 'points',
         moneyCost: 'Money cost',
         none: 'None',
         skillValue: 'Skill value',
         tooltip: 'Required cost to achieve this skill using:',
+        skillWithLoyalty: 'Skill with bonus Loyalty',
+        externalCalculator:
+          'Experiment with this character in our skills calculator',
       },
     },
   },

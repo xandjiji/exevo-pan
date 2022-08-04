@@ -23,7 +23,6 @@ import { SkillDialogProps, Skill } from './types'
 
 /* @ ToDo:
 
-- i18n (SkillDialog)
 - mobile dimensions
 - fix loyalty calc?
 
@@ -70,7 +69,11 @@ const SkillDialog = ({
   const percentageLeft = getPercentageLeft(skillWithLoyalty)
 
   return (
-    <Dialog className="grid" heading="Character skills" {...dialogProps}>
+    <Dialog
+      className="grid"
+      heading={common.CharacterCard.CharacterModal.SkillDialog.heading}
+      {...dialogProps}
+    >
       <div className="grid w-fit gap-6">
         <ChipGroup
           label="Skill"
@@ -137,7 +140,7 @@ const SkillDialog = ({
 
           <Group className="min-w-fit">
             <strong className="whitespace-nowrap pr-6">
-              Skill with bonus Loyalty
+              {common.CharacterCard.CharacterModal.SkillDialog.skillWithLoyalty}
             </strong>
             <SkillBar
               skillName={`${skill} (+${
@@ -163,7 +166,7 @@ const SkillDialog = ({
           className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"
           target="_blank"
         >
-          Experiment with this character in our skills calculator{' '}
+          {common.CharacterCard.CharacterModal.SkillDialog.externalCalculator}
           <ExternalIcon className="fill-onSurface h-4 w-4" />
         </a>
       </NextLink>
