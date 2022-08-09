@@ -6,7 +6,7 @@ const ActiveCount = ({
 }: React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={clsx(
-      'bg-battleYellow flex h-[17px] w-[17px] cursor-default items-center justify-center rounded-full text-[11px] text-black shadow-md transition-opacity',
+      'bg-battleYellow flex cursor-default items-center justify-center rounded py-0.5 px-1 text-[11px] font-bold text-black shadow-md transition-opacity',
       props['aria-hidden'] && 'opacity-0',
       className,
     )}

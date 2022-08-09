@@ -1,0 +1,62 @@
+import * as CONSTANTS from '../constants'
+import { WeaponsObject, ExerciseWeapon } from '../types'
+
+const { EXERCISE_WEAPONS } = CONSTANTS
+
+const calculateWeaponCount = (
+  pointsRequired: number,
+  weaponPoints: number,
+  round = true,
+) => {
+  const weaponCount = pointsRequired / weaponPoints
+
+  return {
+    weaponCount: round ? Math.ceil(weaponCount) : Math.floor(weaponCount),
+    remainingPoints: round ? 0 : pointsRequired % weaponPoints,
+  }
+}
+
+export const autoRequiredWeaponsCount = (
+  pointsRequired: number,
+): WeaponsObject => {
+  const lasting = calculateWeaponCount(
+    pointsRequired,
+    EXERCISE_WEAPONS.skillPoints.lasting,
+    false,
+  )
+
+  const durable = calculateWeaponCount(
+    lasting.remainingPoints,
+    EXERCISE_WEAPONS.skillPoints.durable,
+    false,
+  )
+
+  const regular = calculateWeaponCount(
+    durable.remainingPoints,
+    EXERCISE_WEAPONS.skillPoints.regular,
+  )
+
+  return {
+    lasting: lasting.weaponCount,
+    durable: durable.weaponCount,
+    regular: regular.weaponCount,
+  }
+}
+
+export const customRequiredWeaponsCount = (
+  pointsRequired: number,
+  weapon: ExerciseWeapon,
+): WeaponsObject => {
+  const weaponsCount: WeaponsObject = {
+    lasting: 0,
+    durable: 0,
+    regular: 0,
+  }
+
+  weaponsCount[weapon] = calculateWeaponCount(
+    pointsRequired,
+    EXERCISE_WEAPONS.skillPoints[weapon],
+  ).weaponCount
+
+  return weaponsCount
+}

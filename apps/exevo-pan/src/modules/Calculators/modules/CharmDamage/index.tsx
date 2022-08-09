@@ -111,7 +111,7 @@ export const Calculator = () => {
           className="sm:min-w-[230px]"
         />
 
-        <Spacer />
+        <Spacer className="mt-2" />
 
         <Group>
           <strong>{texts.finalAverageDamage}:</strong>

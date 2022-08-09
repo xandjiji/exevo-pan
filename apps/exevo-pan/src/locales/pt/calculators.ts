@@ -20,12 +20,23 @@ export default {
       description:
         'Compare a média de dano entre diferentes charms para descobrir qual é a melhor',
     },
+    ImbuementsCost: {
+      title: 'Custo de Imbuements',
+      description:
+        'Calcule qual a forma mais barata de se comprar materiais para imbuements',
+    },
+    LootSplit: {
+      title: 'Dividir Loot',
+      description: 'Gerencie e divida o loot das suas hunts em party',
+    },
   },
   Header: {
     Main: 'Principal',
     ExerciseWeapons: 'Exercise weapons',
     CharmDamage: 'Charm Damage',
     Stamina: 'Stamina',
+    ImbuementsCost: 'Custo de Imbuements',
+    LootSplit: 'Dividir Loot',
   },
   none: 'Nenhum',
   ExerciseWeapons: {
@@ -60,5 +71,58 @@ export default {
   CharmDamage: {
     moreInfo: 'Para mais informações sobre Charms, confira',
     thisArticle: 'este artigo',
+  },
+  ImbuementsCost: {
+    labels: {
+      configurations: 'Configurações',
+      goldToken: 'Preço do Gold Token',
+    },
+    totalCost: 'Custo total',
+    goldTokenOnly: 'Apenas Gold Tokens',
+    marketOnly: 'Apenas Market',
+    tooltipInfo: '(Inclui: preço base + taxa de 100% de sucesso)',
+    pricePlaceholder: 'Preço atual',
+    buyIconTooltip: 'Deve ser comprado usando',
+  },
+  LootSplit: {
+    tabs: {
+      newSession: 'Nova sessão',
+      history: 'Histórico',
+    },
+    labels: {
+      textArea: 'Cole a sessão do seu time',
+      tooltipClipboard: 'Analyser de uma sessão de hunt em time',
+      summary: 'Resumo',
+      teamSession: 'Sessão do time',
+      transfers: 'Transferências',
+      total: {
+        waste: 'Waste total',
+        profit: 'Profit total',
+      },
+    },
+    each: 'cada',
+    emptyState: 'Nenhuma sessão',
+    actions: {
+      save: 'Salvar',
+      delete: 'Deletar',
+      data: 'Dados',
+      done: 'Pronto',
+    },
+    advancedOptions: 'Opções avançadas',
+    AdvancedOptionsDialog: {
+      addExtraExpenses: 'Gastos adicionais',
+      extraCostPlaceholder: 'Gold gasto adicional',
+    },
+    SessionDialog: {
+      originalSession: 'Sessão original do time',
+      extraExpenses: 'Gastos adicionais',
+    },
+    Clipboard: {
+      teamSession: 'Sessão do time',
+      partyMembers: 'Membros do time',
+      bankTransfers: 'Bank transfers',
+      shouldTransfer: 'deve transferir',
+      to: 'para',
+    },
   },
 }

@@ -11,8 +11,8 @@ import {
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
 
 /* @ ToDo: fix this typings */
-export function urlParametersState(
-  registeredParams: ParamRegister[],
+export function urlParametersState<T>(
+  registeredParams: ParamRegister<T>[],
 ): urlParameterStateObject {
   const getDefaultValues = (): ParameterObject => {
     const defaultValues = {} as ParameterObject

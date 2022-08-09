@@ -128,7 +128,7 @@ export default {
   ChangeValueLabel: 'alterar valor',
   LoadingLabel: 'Carregando',
   UpdatingDataText: 'Atualizando dados...',
-  PreferredLanguageLabel: 'Selecione seu idioma',
+  PreferredLanguageLabel: 'Mudar idioma',
   CharacterCard: {
     linkLabel: 'Ir para a página do personagem',
     bidLabelText: {
@@ -173,10 +173,21 @@ export default {
     },
     expand: 'Expandir todos os detalhes do leilão',
     CharacterModal: {
+      moreInfo: 'Mais informações',
       totalInvested: 'Total investido',
       SpriteBox: {
         firstAddon: 'Primeiro addon',
         secondAddon: 'Segundo addon',
+      },
+      SkillDialog: {
+        heading: 'Skills do personagem',
+        loyaltyPoints: 'pontos',
+        none: 'Nenhum',
+        skillValue: 'Valor da skill',
+        tooltip: 'Custo necessário para atingir essa skill usando',
+        skillWithLoyalty: 'Skill com bônus de Loyalty',
+        externalCalculator:
+          'Experimente com esse personagem em nossa calculadora de skills',
       },
     },
   },

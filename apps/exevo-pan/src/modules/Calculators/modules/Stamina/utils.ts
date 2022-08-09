@@ -1,4 +1,4 @@
-import { SECONDS_IN, dateToDateObject } from 'utils'
+import { SECONDS_IN, dateToDateObject, padTime } from 'utils'
 
 export const HAPPY_HOUR_STAMINA = SECONDS_IN.HOUR * 39
 export const FULL_STAMINA = SECONDS_IN.HOUR * 42
@@ -21,9 +21,6 @@ export const calculateSecondsToRegenerate = (
 
   return secondsDiff * STAMINA_REGEN_RATE
 }
-
-export const padTime = (time: string | number) =>
-  time.toString().padStart(2, '0')
 
 export const generateDatetime = (secondsToRegenerate: number) => {
   const currentDate = new Date()

@@ -18,4 +18,6 @@ describe('<SpritePortrait />', () => {
     expect(imgElement).not.toHaveClass('opacity-0')
     expect(loadingElement).not.toBeVisible()
   })
+
+  test.todo('test counter')
 })

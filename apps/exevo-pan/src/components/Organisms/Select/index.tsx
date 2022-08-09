@@ -8,7 +8,7 @@ import {
   memo,
 } from 'react'
 import clsx from 'clsx'
-import { Popover, Listbox, Option, Label } from 'components/Atoms'
+import { Popover, Listbox, Option, Label, FormError } from 'components/Atoms'
 import ArrowIcon from 'assets/svgs/chevronDown.svg'
 import { useSharedRef, useUuid } from 'hooks'
 import SelectReducer from './reducer'
@@ -35,15 +35,14 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       noAlert = false,
       options,
       ...props
-    }: SelectProps,
+    },
     ref: React.Ref<HTMLInputElement>,
   ) => {
     const listboxId = useUuid()
     const uuid = useUuid()
     const selectId = idProp ?? uuid
+    const errorId = useUuid()
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
-
-    const hideAlert = error === true || !error
 
     const innerRef = useSharedRef<HTMLInputElement>(ref)
     const selectRef = useRef<HTMLDivElement>(null)
@@ -157,11 +156,13 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             onKeyDown={disabled ? undefined : handleKeyboard}
             onKeyPress={disabled ? undefined : handleSearch}
             className={clsx(
-              'text-tsm text-onSurface border-1 group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
+              'text-tsm border-1 group flex h-9 w-full items-center rounded-md border-solid py-2.5 px-4 outline-none transition-all',
               error
                 ? 'border-red'
                 : 'border-separator focus-within:border-primary',
-              disabled ? 'bg-separator pointer-events-none' : 'bg-surface',
+              disabled
+                ? 'text-onSurface/50 bg-separator/50 pointer-events-none'
+                : 'text-onSurface bg-surface',
             )}
             {...props}
           >
@@ -180,17 +181,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
           </div>
         </Popover>
         {!noAlert && (
-          <span
-            aria-hidden={hideAlert}
-            role="alert"
-            className={clsx(
-              'text-red inline-block px-2.5 text-xs transition-opacity',
-              hideAlert && 'opacity-0',
-            )}
-            suppressHydrationWarning
-          >
-            {error}
-          </span>
+          <FormError id={errorId} error={error} className="inline-block" />
         )}
         <input
           ref={innerRef}

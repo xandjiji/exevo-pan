@@ -6,13 +6,16 @@ import {
   Children,
   isValidElement,
   cloneElement,
+  useRef,
 } from 'react'
 import clsx from 'clsx'
+import { useIsMounted } from 'hooks'
+import { scrollHorizontallyIntoView } from 'utils'
 import useIds from './useIds'
 import styles from './styles.module.css'
 import { TabsProps, PanelProps } from './types'
 
-const Group = forwardRef(
+const Group = forwardRef<HTMLDivElement, TabsProps>(
   (
     {
       activeIndex: indexProp,
@@ -22,7 +25,7 @@ const Group = forwardRef(
       children,
       'aria-label': ariaLabelProp,
       ...props
-    }: TabsProps,
+    },
     ref,
   ) => {
     const [innerIndex, setInnerIndex] = useState(indexProp ?? initialActive)
@@ -39,26 +42,30 @@ const Group = forwardRef(
       [onChange],
     )
 
+    const tablistRef = useRef<HTMLDivElement>(null)
+    const isMounted = useIsMounted()
     useEffect(() => {
-      const activeTab = document.getElementById(getTabId(activeIndex))
+      if (!isMounted) return
+      const activeTab = tablistRef.current?.children[activeIndex]
 
-      if (activeTab) {
-        const { offsetLeft, parentElement } = activeTab
-        parentElement?.scroll({ left: offsetLeft, behavior: 'smooth' })
-      }
-    }, [activeIndex, getTabId])
+      if (activeTab) scrollHorizontallyIntoView(activeTab)
+    }, [activeIndex])
 
     return (
       <div
-        className={clsx('grid w-full gap-3 overflow-hidden', className)}
+        className={clsx('grid w-full gap-3', className)}
         {...props}
-        ref={ref as React.RefObject<HTMLDivElement>}
+        ref={ref}
       >
         <div
+          ref={tablistRef}
           role="tablist"
           aria-label={ariaLabelProp}
-          className="bg-surface custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
-          style={{ borderBottom: 'solid 1px rgb(var(--separator))' }}
+          className="custom-scrollbar flex w-full flex-nowrap overflow-x-auto whitespace-nowrap"
+          style={{
+            borderBottom: 'solid 1px rgb(var(--separator))',
+            background: 'inherit',
+          }}
         >
           {Children.map(children, (child, childIndex) => {
             if (!isValidElement(child)) return child
@@ -80,9 +87,10 @@ const Group = forwardRef(
                   'text-tsm flex cursor-pointer gap-1.5 py-2 px-4 font-bold tracking-wider transition-colors',
                   isSelected
                     ? 'text-primaryHighlight child:fill-primaryHighlight'
-                    : 'text-separator hover:bg-primaryVariantHighlight hover:text-onSurface child:fill-separator child:hover:fill-onSurface',
+                    : 'text-separator hover:text-onSurface child:fill-separator child:hover:fill-onSurface',
                 )}
                 style={{
+                  background: 'inherit',
                   borderBottom: 'solid 2px',
                   borderColor: isSelected
                     ? 'var(--primaryHighlight)'

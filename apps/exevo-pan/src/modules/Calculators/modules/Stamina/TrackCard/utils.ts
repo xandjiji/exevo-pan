@@ -1,5 +1,5 @@
-import { SECONDS_IN } from 'utils'
-import { padTime, STAMINA_REGEN_RATE, HAPPY_HOUR_STAMINA } from '../utils'
+import { SECONDS_IN, padTime } from 'utils'
+import { STAMINA_REGEN_RATE, HAPPY_HOUR_STAMINA } from '../utils'
 
 export const getSecondsPassed = (timestamp: number): number =>
   Math.round((+new Date() - timestamp) / 1000)

@@ -565,13 +565,12 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <S.AutocompleteInput
                 id="rare-items-input"
                 label={
-                  <span className="flex items-center gap-1">
+                  <InfoTooltip.LabelWrapper className="whitespace-nowrap">
                     {homepage.FilterDrawer.labels.rareItems}
                     <InfoTooltip
-                      className="h-3 w-3"
                       content={homepage.FilterDrawer.tooltips.rareItems}
                     />
-                  </span>
+                  </InfoTooltip.LabelWrapper>
                 }
                 aria-label={homepage.FilterDrawer.labels.rareItems}
                 aria-controls="rare-items-list"

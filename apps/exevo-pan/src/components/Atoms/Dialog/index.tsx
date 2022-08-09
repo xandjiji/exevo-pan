@@ -10,6 +10,7 @@ import { DialogProps } from './types'
 
 const Dialog = ({
   className,
+  heading,
   isOpen,
   onClose,
   noCloseButton = false,
@@ -44,19 +45,31 @@ const Dialog = ({
               ref={elementToFocusRef}
               onKeyDown={onKeyDown}
               onClick={(event) => event.stopPropagation()}
-              className={clsx('card animate-rushIn', className)}
+              className={clsx('card animate-rushIn px-6 py-4', className)}
               {...props}
             >
-              {!noCloseButton && (
-                <button
-                  className="clickable float-right ml-auto grid w-fit place-items-center rounded"
-                  type="button"
-                  aria-label={common.Dialog.close}
-                  onClick={onClose}
-                >
-                  <CloseIcon className="fill-onSurface" />
-                </button>
-              )}
+              <div
+                className={clsx(
+                  'float-right flex items-center justify-between',
+                  heading && 'mb-4 w-full',
+                )}
+              >
+                {heading && (
+                  <h5 className="text-onSurface text-2xl transition-colors">
+                    {heading}
+                  </h5>
+                )}
+                {!noCloseButton && (
+                  <button
+                    className="clickable ml-auto grid w-fit place-items-center rounded"
+                    type="button"
+                    aria-label={common.Dialog.close}
+                    onClick={onClose}
+                  >
+                    <CloseIcon className="fill-onSurface" />
+                  </button>
+                )}
+              </div>
               {children}
             </div>
           </button>

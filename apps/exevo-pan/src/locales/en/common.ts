@@ -128,7 +128,7 @@ export default {
   ChangeValueLabel: 'change value',
   LoadingLabel: 'Loading',
   UpdatingDataText: 'Updating data...',
-  PreferredLanguageLabel: 'Select preferred language',
+  PreferredLanguageLabel: 'Change language',
   CharacterCard: {
     linkLabel: 'Go to character page',
     bidLabelText: {
@@ -173,10 +173,21 @@ export default {
     },
     expand: 'Expand for full auction details',
     CharacterModal: {
+      moreInfo: 'More informations',
       totalInvested: 'Total invested',
       SpriteBox: {
         firstAddon: 'First addon',
         secondAddon: 'Second addon',
+      },
+      SkillDialog: {
+        heading: 'Character skills',
+        loyaltyPoints: 'points',
+        none: 'None',
+        skillValue: 'Skill value',
+        tooltip: 'Required cost to achieve this skill using',
+        skillWithLoyalty: 'Skill with bonus Loyalty',
+        externalCalculator:
+          'Experiment with this character in our skills calculator',
       },
     },
   },

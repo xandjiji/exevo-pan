@@ -26,6 +26,11 @@ declare interface CharacterSkillsObject {
   shielding: number
 }
 
+declare type CharacterSkill = {
+  skill: keyof CharacterSkillsObject
+  value: number
+}
+
 declare type Outfit = {
   name: string
   type: number

@@ -35,7 +35,9 @@ export const AuctionsProvider = ({
   const {
     current: { isCurrentlyDefaultValues, getUrlValues, setUrlValues },
   } = useRef(
-    urlParametersState(buildSchema(defaultSortingMode, defaultDescendingOrder)),
+    urlParametersState<any>(
+      buildSchema(defaultSortingMode, defaultDescendingOrder),
+    ),
   )
   const initialUrlState = useRef(getUrlValues())
 

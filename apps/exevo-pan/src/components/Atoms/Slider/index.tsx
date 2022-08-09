@@ -33,8 +33,8 @@ import * as S from './atoms'
 import { SliderProps } from './types'
 
 const Slider = forwardRef<HTMLInputElement, SliderProps>(
-  (componentProps: SliderProps, ref: React.Ref<HTMLInputElement>) => {
-    const {
+  (
+    {
       id: idProp,
       className,
       name,
@@ -56,8 +56,9 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
       onKeyPress,
       ssr,
       ...props
-    } = componentProps
-
+    },
+    ref: React.Ref<HTMLInputElement>,
+  ) => {
     const uuid = useUuid()
     const inputId = idProp ?? uuid
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
@@ -179,7 +180,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               <div
                 className={clsx(
                   'absolute top-0 left-0 h-full rounded-3xl transition-all group-active:transition-none',
-                  disabled ? 'bg-separator' : 'bg-primary',
+                  disabled ? 'bg-separator/80' : 'bg-primary',
                 )}
                 style={{ width: relativeCursorPosition }}
               />
@@ -248,8 +249,10 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               onKeyPress={onKeyPress}
               enterKeyHint={enterKeyHint}
               className={clsx(
-                'reset-spinner border-1 text-tsm text-onSurface border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors',
-                disabled ? 'bg-separator' : 'bg-surface',
+                'reset-spinner border-1 text-tsm border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors',
+                disabled
+                  ? 'text-onSurface/50 bg-separator/50'
+                  : 'text-onSurface bg-surface',
               )}
               style={{ width: inputWidth }}
             />

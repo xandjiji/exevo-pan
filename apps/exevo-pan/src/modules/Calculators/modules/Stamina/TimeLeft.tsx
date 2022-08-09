@@ -16,10 +16,10 @@ const TimeLeft = ({ secondsToRegenerate }: { secondsToRegenerate: number }) => {
 
   return (
     <Group>
-      <div className="flex items-center gap-1">
+      <InfoTooltip.LabelWrapper>
         <strong>{calculators.Stamina.restTime}</strong>
         <InfoTooltip
-          className="h-3 w-3"
+          labelSize
           content={
             <span className="whitespace-nowrap">
               {`${common.Month[month]} ${day}, ${hours}:${minutes} (${
@@ -30,7 +30,7 @@ const TimeLeft = ({ secondsToRegenerate }: { secondsToRegenerate: number }) => {
             </span>
           }
         />
-      </div>
+      </InfoTooltip.LabelWrapper>
       <TimeBubbles seconds={secondsToRegenerate} />
     </Group>
   )

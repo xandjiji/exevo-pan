@@ -31,6 +31,13 @@ export const LabeledCard = ({
   />
 )
 
-export const Spacer = () => (
-  <div role="none" className="bg-separator/40 mt-2 h-[1px] w-full" />
+export const Spacer = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div
+    role="none"
+    className={clsx('bg-separator/40 h-[1px] w-full', className)}
+    {...props}
+  />
 )

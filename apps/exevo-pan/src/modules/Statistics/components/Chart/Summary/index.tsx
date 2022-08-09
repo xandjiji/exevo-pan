@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { memo } from 'react'
-import { formatNumberWithCommas } from 'utils/formatNumberWithCommas'
+import { formatNumberWithCommas } from 'utils'
 import TrendIcon from 'assets/svgs/trending.svg'
 import { SummaryProps } from './types'
 

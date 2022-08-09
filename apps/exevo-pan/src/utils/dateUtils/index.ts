@@ -1,5 +1,8 @@
 import { DAYS_IN } from './constants'
 
+export const padTime = (time: string | number) =>
+  time.toString().padStart(2, '0')
+
 export const padStringDate = (dateString: string): string => {
   const [a, b, c] = dateString.split('/')
   return `${a.padStart(2, '0')}/${b.padStart(2, '0')}/${c}`

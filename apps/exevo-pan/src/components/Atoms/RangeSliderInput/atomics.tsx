@@ -16,15 +16,15 @@ export const Cursor = (args: JSX.IntrinsicElements['div']) => (
   />
 )
 
-export const TrackFill = forwardRef(
-  ({ className, children, isMousePressed, ...props }: TrackFillProps, ref) => (
+export const TrackFill = forwardRef<HTMLDivElement, TrackFillProps>(
+  ({ className, children, isMousePressed, ...props }, ref) => (
     <div
       className={clsx(
         'bg-primaryVariant relative h-1 w-full cursor-pointer shadow',
         className,
       )}
       {...props}
-      ref={ref as React.RefObject<HTMLDivElement>}
+      ref={ref}
     >
       <div
         role="none"

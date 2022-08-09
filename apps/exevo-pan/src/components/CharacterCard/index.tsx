@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo, useState, useRef, useMemo, useCallback } from 'react'
 import {
   formatNumberWithCommas,
-  calculateTotalInvestment,
+  totalCharacterInvestment,
   checkKeyboardTrigger,
 } from 'utils'
 import {
@@ -53,7 +53,7 @@ const CharacterCard = ({
   } = characterData
 
   const tcInvested = useMemo(
-    () => formatNumberWithCommas(calculateTotalInvestment(characterData)),
+    () => formatNumberWithCommas(totalCharacterInvestment(characterData)),
     [characterData],
   )
 

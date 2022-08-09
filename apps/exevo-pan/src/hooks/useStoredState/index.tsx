@@ -3,10 +3,11 @@ import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 
 const useStoredState = <T,>(
   key: string,
-  initialValue: T,
+  defaultValue: T,
+  forceInitial?: T,
 ): [T, React.Dispatch<React.SetStateAction<T>>] => {
-  const [storedValue, setStoredValue] = useState<T>(() =>
-    getFromLocalStorage(key, initialValue),
+  const [storedValue, setStoredValue] = useState<T>(
+    () => forceInitial ?? getFromLocalStorage(key, defaultValue),
   )
 
   const setValueRef = useRef<React.Dispatch<React.SetStateAction<T>>>()

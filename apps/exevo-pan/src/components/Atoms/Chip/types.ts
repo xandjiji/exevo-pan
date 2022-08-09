@@ -5,4 +5,5 @@ export interface ChipProps extends HTMLAttributes<HTMLDivElement> {
   onClick?: (event?: React.MouseEvent) => void
   onClose?: (event?: React.MouseEvent) => void
   overrideStatus?: boolean
+  gray?: boolean
 }

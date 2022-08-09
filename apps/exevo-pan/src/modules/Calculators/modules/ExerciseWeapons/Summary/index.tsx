@@ -1,9 +1,15 @@
 import { useMemo } from 'react'
-import { useStoredState } from 'hooks'
+import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
 import { Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
-import { isObjectEmpty } from 'utils'
+import {
+  isObjectEmpty,
+  autoRequiredWeaponsCount,
+  customRequiredWeaponsCount,
+  skillCost,
+  SKILL_CONSTANTS,
+} from 'utils'
 import {
   LabeledCard,
   Chip,
@@ -12,14 +18,8 @@ import {
   Empty,
   TimeBubbles,
 } from '../../../components'
-import {
-  autoRequiredWeaponsCount,
-  customRequiredWeaponsCount,
-  calculateCost,
-} from './utils'
 import { weaponOptions } from './options'
 import * as S from './atoms'
-import * as CONSTANTS from './constants'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 const Summary = ({ pointsRequired }: SummaryProps) => {
@@ -27,25 +27,36 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
     translations: { common, calculators },
   } = useTranslations()
 
-  const [hasDummy, setHasDummy] = useStoredState('ew-dummy', false)
-  const [isDouble, setIsDouble] = useStoredState('ew-double', false)
-  const [exerciseWeapon, setExerciseWeapon] = useStoredState<WeaponOption>(
-    'ew-exerciseWeapon',
-    'auto',
-  )
+  const [hasDummy, setHasDummy] = useStoredUrlState({
+    key: 'dummy',
+    storeKey: 'ew-dummy',
+    defaultValue: false,
+  })
+
+  const [isDouble, setIsDouble] = useStoredUrlState({
+    key: 'doubleEvent',
+    storeKey: 'ew-double',
+    defaultValue: false,
+  })
+
+  const [exerciseWeapon, setExerciseWeapon] = useStoredUrlState<WeaponOption>({
+    key: 'weaponType',
+    storeKey: 'ew-exerciseWeapon',
+    defaultValue: 'auto',
+  })
 
   const weaponsRequired: WeaponsObject = useMemo(() => {
     const finalPointsRequired =
       pointsRequired /
-      (hasDummy ? CONSTANTS.DIVIDER.hasDummy : 1) /
-      (isDouble ? CONSTANTS.DIVIDER.isDouble : 1)
+      (hasDummy ? SKILL_CONSTANTS.DIVIDER.hasDummy : 1) /
+      (isDouble ? SKILL_CONSTANTS.DIVIDER.isDouble : 1)
 
     return exerciseWeapon === 'auto'
       ? autoRequiredWeaponsCount(finalPointsRequired)
       : customRequiredWeaponsCount(finalPointsRequired, exerciseWeapon)
   }, [pointsRequired, hasDummy, isDouble, exerciseWeapon])
 
-  const cost = useMemo(() => calculateCost(weaponsRequired), [weaponsRequired])
+  const cost = useMemo(() => skillCost(weaponsRequired), [weaponsRequired])
 
   return (
     <div className="grid gap-6">
@@ -77,10 +88,10 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
 
       <LabeledCard labelText={calculators.ExerciseWeapons.labels.results}>
         <Group>
-          <div className="flex items-center gap-1">
-            <strong>{calculators.ExerciseWeapons.labels.moneyCost}</strong>
+          <InfoTooltip.LabelWrapper className="font-bold">
+            {calculators.ExerciseWeapons.labels.moneyCost}
             <InfoTooltip
-              className="h-3 w-3"
+              labelSize
               content={
                 <span className="block w-36 leading-tight">
                   {calculators.ExerciseWeapons.moneyTooltip.a}{' '}
@@ -95,7 +106,7 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
                 </span>
               }
             />
-          </div>
+          </InfoTooltip.LabelWrapper>
           <ChipWrapper className="shrink-0 flex-wrap">
             <Chip>
               <Text.TibiaCoin value={cost.tc} />

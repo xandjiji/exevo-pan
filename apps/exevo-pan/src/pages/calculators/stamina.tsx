@@ -3,7 +3,7 @@ import { Main, Hero } from 'templates'
 import { pages, Header, Stamina } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
@@ -14,6 +14,8 @@ export default function Calculator() {
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(translations.calculators.Meta.Stamina.title)
+
+  const previewSrc = loadRawSrc(hero)
 
   return (
     <>
@@ -36,6 +38,9 @@ export default function Calculator() {
           content={translations.calculators.Meta.Stamina.description}
         />
         <meta property="og:type" content="website" />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />

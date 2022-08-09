@@ -2,6 +2,10 @@
 @tailwind utilities;
 
 @layer components {
+  .button-component {
+    @apply bg-primary active:bg-primary child:fill-onPrimary rounded-xl py-3 px-6 text-2xl;
+  }
+
   .grid-background {
     background: rgb(var(--primaryVariantHighlight));
     background-image: linear-gradient(
@@ -179,6 +183,10 @@ main {
 
 svg {
   @apply transition-colors;
+}
+
+textarea {
+  font-family: inherit;
 }
 
 @keyframes spinAnimation {

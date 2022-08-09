@@ -79,7 +79,7 @@ const Stamina = () => {
 
         <Button
           type="button"
-          style={{ padding: '5px 16px' }}
+          pill
           onClick={() =>
             action.add({
               currentStamina,
@@ -88,12 +88,7 @@ const Stamina = () => {
           }
           disabled={disableTrack}
         >
-          <div className="flex items-center justify-center gap-1 text-xs font-bold uppercase tracking-wider">
-            <AddIcon
-              className={clsx('-ml-1 h-4 w-4', !invalid && 'fill-onPrimary')}
-            />{' '}
-            {calculators.Stamina.track}
-          </div>
+          <AddIcon className="-ml-1 h-4 w-4" /> {calculators.Stamina.track}
         </Button>
       </LabeledCard>
 

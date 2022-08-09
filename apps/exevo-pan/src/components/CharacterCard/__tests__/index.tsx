@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset } from 'utils/test'
-import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
+import { formatNumberWithCommas, totalCharacterInvestment } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
@@ -104,7 +104,7 @@ describe('<CharacterCard />', () => {
     }
 
     const totalInvestment = formatNumberWithCommas(
-      calculateTotalInvestment(character),
+      totalCharacterInvestment(character),
     )
 
     if (totalInvestment === '0') {

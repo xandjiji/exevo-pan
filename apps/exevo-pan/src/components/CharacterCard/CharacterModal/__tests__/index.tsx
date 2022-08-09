@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset, setup } from 'utils/test'
-import { formatNumberWithCommas, calculateTotalInvestment } from 'utils'
+import { formatNumberWithCommas, totalCharacterInvestment } from 'utils'
 import CharacterModal from '..'
 import { tabCounter } from '../utils'
 
@@ -40,7 +40,7 @@ describe('<CharacterModal />', () => {
       )
 
       const totalInvestment = formatNumberWithCommas(
-        calculateTotalInvestment(character),
+        totalCharacterInvestment(character),
       )
 
       if (totalInvestment === '0') {

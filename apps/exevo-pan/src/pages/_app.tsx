@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
+import { LockBodyProvider } from 'hooks/useLockBody'
 import { gtag } from 'utils'
 import { AppProps } from 'next/app'
 import 'styles/globals.css'
@@ -48,7 +49,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
           <ThemeProvider>
-            <Component {...pageProps} />
+            <LockBodyProvider>
+              <Component {...pageProps} />
+            </LockBodyProvider>
           </ThemeProvider>
         </ErrorBoundary>
       </TranslationsProvider>

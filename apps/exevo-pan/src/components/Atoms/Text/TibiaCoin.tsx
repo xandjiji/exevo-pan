@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { memo } from 'react'
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoin.png'
@@ -6,10 +7,15 @@ import * as S from './atoms'
 
 type TibiaCoinProps = {
   value: number
+  displaySign?: boolean
 } & React.HTMLAttributes<HTMLSpanElement>
 
-const TibiaCoin = ({ value, ...props }: TibiaCoinProps) => {
-  const formattedValue = formatNumberWithCommas(value)
+const TibiaCoin = ({
+  value,
+  displaySign = false,
+  ...props
+}: TibiaCoinProps) => {
+  const formattedValue = formatNumberWithCommas(value, displaySign)
 
   return (
     <S.Flex title={`${formattedValue} Tibia Coins`} {...props}>
@@ -19,6 +25,7 @@ const TibiaCoin = ({ value, ...props }: TibiaCoinProps) => {
         unoptimized
         width={12}
         height={12}
+        className="select-none"
       />
       {formattedValue}
     </S.Flex>

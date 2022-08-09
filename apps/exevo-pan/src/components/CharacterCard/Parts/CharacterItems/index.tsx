@@ -2,7 +2,7 @@ import { memo, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { v4 as uuidv4 } from 'uuid'
-import { SpritePortrait, ActiveCount } from 'components/Atoms'
+import { SpritePortrait } from 'components/Atoms'
 import { Background } from 'components/Atoms/SpritePortrait'
 import { CharacterItemsProps } from './types'
 
@@ -25,28 +25,11 @@ const CharacterItems = ({
       {items.map((floatItem, childrenIndex) => {
         const [item, tier] = floatItem.toString().split('.')
         const key = `${childrenIndex}-${item}`
-        if (tier) {
-          return (
-            <div className="relative" key={key}>
-              <SpritePortrait
-                alt={common.CharacterCard.featuredItem}
-                src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
-                width={32}
-                height={32}
-              />
-              <ActiveCount
-                title={`tier ${tier}`}
-                className="z-1 absolute top-0 right-0"
-                style={{ transform: 'translate(50%, -50%)' }}
-              >
-                {tier}
-              </ActiveCount>
-            </div>
-          )
-        }
         return (
           <SpritePortrait
             key={key}
+            counter={tier}
+            title={tier ? `tier ${tier}` : undefined}
             alt={common.CharacterCard.featuredItem}
             src={`https://static.tibia.com/images/charactertrade/objects/${item}.gif`}
             width={32}

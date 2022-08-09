@@ -1,15 +1,14 @@
 import { useMemo, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
-import { useStoredState } from 'hooks'
+import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import ChevronRight from 'assets/svgs/chevronRight.svg'
-import { blurOnEnter } from 'utils'
+import { blurOnEnter, requiredSkillPoints, generateLoyaltyMarks } from 'utils'
 import { LabeledCard } from '../../../components'
 import { vocationOptions, skillOptions } from './options'
-import { generateMarks } from './constants'
-import { calculateRequiredPoints } from './utils'
+import { parameterNames } from './constants'
 import { CharacterConfigProps, Vocation, Skill } from './types'
 
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
@@ -17,22 +16,49 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
     translations: { calculators },
   } = useTranslations()
 
-  const [vocation, setVocation] = useStoredState<Vocation>(
-    'ew-vocation',
-    'knight',
-  )
-  const [skill, setSkill] = useStoredState<Skill>('ew-skill', 'melee')
-  const [currentSkill, setCurrentSkill] = useStoredState('ew-currentSkill', 100)
-  const [targetSkill, setTargetSkill] = useStoredState('ew-targetSkill', 120)
-  const [loyaltyBonus, setLoyaltyBonus] = useStoredState('ew-loyalty', 0)
-  const [percentageLeft, setPercentageLeft] = useStoredState(
-    'ew-percentageLeft',
-    50,
-  )
+  const [vocation, setVocation] = useStoredUrlState<Vocation>({
+    key: parameterNames.vocation,
+    storeKey: 'ew-vocation',
+    defaultValue: 'knight',
+  })
+
+  const [skill, setSkill] = useStoredUrlState<Skill>({
+    key: parameterNames.skill,
+    storeKey: 'ew-skill',
+    defaultValue: 'melee',
+  })
+
+  const [currentSkill, setCurrentSkill] = useStoredUrlState({
+    key: parameterNames.currentSkill,
+    storeKey: 'ew-currentSkill',
+    defaultValue: 100,
+    decode: Number,
+  })
+
+  const [targetSkill, setTargetSkill] = useStoredUrlState({
+    key: parameterNames.targetSkill,
+    storeKey: 'ew-targetSkill',
+    defaultValue: 120,
+    decode: Number,
+  })
+
+  const [loyaltyBonus, setLoyaltyBonus] = useStoredUrlState({
+    key: parameterNames.loyalty,
+    storeKey: 'ew-loyalty',
+    defaultValue: 0,
+    decode: Number,
+  })
+
+  const [percentageLeft, setPercentageLeft] = useStoredUrlState({
+    key: parameterNames.percentageLeft,
+    storeKey: 'ew-percentageLeft',
+    defaultValue: 50,
+    decode: Number,
+  })
 
   const pointsRequired = useMemo(
     () =>
-      calculateRequiredPoints({
+      requiredSkillPoints({
         currentSkill,
         targetSkill,
         vocation,
@@ -72,10 +98,10 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         <ClientComponent className="flex items-end gap-2">
           <Input
             label={
-              <span className="flex items-center gap-1 whitespace-nowrap">
+              <InfoTooltip.LabelWrapper className="whitespace-nowrap">
                 {calculators.ExerciseWeapons.labels.currentSkill}
-                <InfoTooltip content="Base + Loyalty" className="h-3 w-3" />
-              </span>
+                <InfoTooltip content="Base + Loyalty" labelSize />
+              </InfoTooltip.LabelWrapper>
             }
             aria-label={calculators.ExerciseWeapons.labels.currentSkill}
             type="number"
@@ -134,7 +160,10 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
               : calculators.none,
           [calculators],
         )}
-        marks={useMemo(() => generateMarks(calculators.none), [calculators])}
+        marks={useMemo(
+          () => generateLoyaltyMarks(calculators.none),
+          [calculators],
+        )}
         value={loyaltyBonus}
         onChange={(e) => setLoyaltyBonus(+e.target.value)}
         ssr
