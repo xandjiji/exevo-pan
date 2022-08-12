@@ -19,5 +19,17 @@ describe('<SpritePortrait />', () => {
     expect(loadingElement).not.toBeVisible()
   })
 
-  test.todo('test counter')
+  test('should display a counter', () => {
+    renderWithProviders(
+      <SpritePortrait
+        alt="Red skull"
+        width={32}
+        height={32}
+        src="a"
+        counter={<>2x</>}
+      />,
+    )
+
+    expect(screen.getByText('2x')).toBeInTheDocument()
+  })
 })
