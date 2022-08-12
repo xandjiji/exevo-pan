@@ -25,7 +25,7 @@ describe('<TimeInput />', () => {
 
   test.todo('the hour should be capped by `max` and `min` props')
 
-  test('should be controlled (keyboard and arrow keys)', () => {
+  test('should be controlled', () => {
     renderWithProviders(<ControlledComponent label="Time" />)
 
     const inputElement = screen.getByLabelText('Time')
