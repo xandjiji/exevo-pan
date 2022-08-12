@@ -3,9 +3,18 @@ import { renderWithProviders } from 'utils/test'
 import { Banner, FloatingButton } from '..'
 
 describe('<Banner />', () => {
-  test.todo('tests')
+  test('should render correctly', () => {
+    renderWithProviders(<Banner />)
+
+    expect(screen.getByAltText('Tibia Blackjack')).toBeInTheDocument()
+  })
 })
 
 describe('<FloatingButton />', () => {
-  test.todo('tests')
+  test('should render correctly', () => {
+    renderWithProviders(<FloatingButton />)
+
+    expect(screen.getByAltText('Tibia Blackjack')).toBeInTheDocument()
+    expect(screen.getByText('Play Tibia Blackjack')).toBeInTheDocument()
+  })
 })
