@@ -160,7 +160,7 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
             },
             [onChange],
           )}
-          value={dispatchedValue.current}
+          value={`${hourBinders.value}:${minuteBinders.value}`}
         />
       </div>
     )
