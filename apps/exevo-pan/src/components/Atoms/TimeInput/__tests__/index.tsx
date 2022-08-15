@@ -59,6 +59,23 @@ describe('<TimeInput />', () => {
     expect(inputElement).toHaveValue('09:29')
   })
 
+  test('should cap its hours with `max` and `min` props', () => {
+    renderWithProviders(
+      <TimeInput label="Time" max={11} min={9} defaultValue="10:30" />,
+    )
+
+    const inputElement = screen.getByLabelText('Time')
+    const hoursElement = screen.getByLabelText('hours')
+
+    expect(inputElement).toHaveDisplayValue('10:30')
+
+    userEvent.type(hoursElement, '{arrowdown}{arrowdown}{arrowdown}{arrowdown}')
+    expect(inputElement).toHaveValue('09:30')
+
+    userEvent.type(hoursElement, '{arrowup}{arrowup}{arrowup}{arrowup}')
+    expect(inputElement).toHaveValue('11:30')
+  })
+
   test('a11y', async () => {
     const { container } = renderWithProviders(<TimeInput label="Time" />)
     await assertNoA11yViolations(container)
