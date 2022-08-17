@@ -3,5 +3,5 @@ import { renderWithProviders } from 'utils/test'
 import CharacterConfig from '..'
 
 describe('<CharacterConfig />', () => {
-  test.todo('tests')
+  test.todo('should dispatch the correct required skill points')
 })
