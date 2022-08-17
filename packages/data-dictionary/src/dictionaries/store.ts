@@ -1026,8 +1026,8 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Sculpture of a Noblewoman',
     value: 120,
   },
-  'sculpture of a octoputz': {
-    name: 'Sculpture of a Octoputz',
+  'sculpture of an octoputz': {
+    name: 'Sculpture of an Octoputz',
     value: 120,
   },
   "ship's wheel": {
