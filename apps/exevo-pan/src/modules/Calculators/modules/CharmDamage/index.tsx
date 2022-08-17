@@ -68,8 +68,8 @@ export const Calculator = () => {
         labelText={`Low Blow + ${texts.criticalChance}`}
       >
         <Group>
-          <strong>{texts.finalAverageDamage}:</strong>
-          <Chip>
+          <strong id="average-dps">{texts.finalAverageDamage}:</strong>
+          <Chip aria-labelledby="average-dps">
             <Image
               src={`${SPRITE_PATH}/Low Blow.png`}
               width={16}
