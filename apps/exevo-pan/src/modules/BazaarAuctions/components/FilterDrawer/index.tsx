@@ -568,6 +568,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   <InfoTooltip.LabelWrapper className="whitespace-nowrap">
                     {homepage.FilterDrawer.labels.rareItems}
                     <InfoTooltip
+                      labelSize
                       content={homepage.FilterDrawer.tooltips.rareItems}
                     />
                   </InfoTooltip.LabelWrapper>
