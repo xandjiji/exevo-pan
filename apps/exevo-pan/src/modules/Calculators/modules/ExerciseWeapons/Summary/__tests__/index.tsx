@@ -1,8 +1,11 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
-import * as cases from './mock'
+import { renderWithProviders, setup } from 'utils/test'
+import { cases, SummaryData } from './mock'
 import Summary from '..'
+
+setup.scrollIntoView()
+setup.URLSearchParams.get()
 
 const assertWeapon = (
   type: 'regular' | 'durable' | 'lasting',
@@ -30,7 +33,7 @@ const assertSummary = ({
   days,
   hours,
   minutes,
-}: Omit<cases.Case, 'pointsRequired'>) => {
+}: SummaryData) => {
   expect(screen.getByText(cost.tc)).toBeInTheDocument()
   expect(screen.getByText(cost.gold)).toBeInTheDocument()
 
@@ -44,22 +47,22 @@ const assertSummary = ({
 }
 
 describe('<Summary />', () => {
-  test.each(cases.normal)(
+  test.each(cases)(
     'should display the correct summary data',
-    ({ pointsRequired, ...summary }) => {
+    ({ pointsRequired, summaries }) => {
       renderWithProviders(<Summary pointsRequired={pointsRequired} />)
 
-      assertSummary(summary)
-    },
-  )
-
-  test.each(cases.exerciseDummy)(
-    'should display the correct summary data with exercise dummy',
-    ({ pointsRequired, ...summary }) => {
-      renderWithProviders(<Summary pointsRequired={pointsRequired} />)
+      assertSummary(summaries[0])
 
       userEvent.click(screen.getByLabelText('Exercise dummy'))
-      assertSummary(summary)
+      assertSummary(summaries[1])
+
+      userEvent.click(screen.getByLabelText('Double event'))
+      assertSummary(summaries[2])
+
+      userEvent.click(screen.getByText('Auto'))
+      userEvent.click(screen.getByText('Durable (1800 charges)'))
+      assertSummary(summaries[3])
     },
   )
 })
