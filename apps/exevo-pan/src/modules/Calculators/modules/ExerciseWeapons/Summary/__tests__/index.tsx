@@ -16,7 +16,7 @@ type Case = {
   minutes: number
 }
 
-const cases: Case[] = [
+const normalCases: Case[] = [
   {
     pointsRequired: 4248234,
     cost: {
@@ -29,6 +29,32 @@ const cases: Case[] = [
     days: 0,
     hours: 4,
     minutes: 7,
+  },
+  {
+    pointsRequired: 8915,
+    cost: {
+      tc: '25',
+      gold: '262,500',
+    },
+    regular: 1,
+    durable: 0,
+    lasting: 0,
+    days: 0,
+    hours: 0,
+    minutes: 17,
+  },
+  {
+    pointsRequired: 9847465155,
+    cost: {
+      tc: '820,645',
+      gold: '8,616,772,500',
+    },
+    regular: 1,
+    durable: 6,
+    lasting: 1139,
+    days: 379,
+    hours: 22,
+    minutes: 17,
   },
 ]
 
@@ -51,7 +77,7 @@ const assertTime = (type: 'day' | 'hour' | 'minute', amount: number) => {
 }
 
 describe('<Summary />', () => {
-  test.each(cases)(
+  test.each(normalCases)(
     'should display the correct summary data',
     ({
       pointsRequired,
