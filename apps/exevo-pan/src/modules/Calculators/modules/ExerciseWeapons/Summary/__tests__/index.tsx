@@ -25,7 +25,7 @@ const assertTime = (type: 'day' | 'hour' | 'minute', amount: number) => {
   )
 }
 
-const assertSummary = ({
+export const assertSummary = ({
   cost,
   regular,
   durable,
