@@ -49,10 +49,25 @@ describe('<StaminaBar />', () => {
   })
 
   describe('should have the correct color', () => {
-    test.todo('green')
+    test('green', () => {
+      renderWithProviders(<StaminaBar time="39:0" mark="42:00" />)
 
-    test.todo('orange')
+      const [staminaBar] = screen.getByTitle('42:00').children
+      expect(staminaBar).toHaveStyle('background-color: rgb(0, 192, 0)')
+    })
 
-    test.todo('yellow')
+    test('orange', () => {
+      renderWithProviders(<StaminaBar time="14:00" mark="42:00" />)
+
+      const [staminaBar] = screen.getByTitle('42:00').children
+      expect(staminaBar).toHaveStyle('background-color: rgb(198, 97, 0)')
+    })
+
+    test('yellow', () => {
+      renderWithProviders(<StaminaBar time="1:00" mark="42:00" />)
+
+      const [staminaBar] = screen.getByTitle('42:00').children
+      expect(staminaBar).toHaveStyle('background-color: rgb(240, 240, 0)')
+    })
   })
 })
