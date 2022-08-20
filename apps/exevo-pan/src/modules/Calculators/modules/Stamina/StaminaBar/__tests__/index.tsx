@@ -3,7 +3,21 @@ import { renderWithProviders } from 'utils/test'
 import StaminaBar from '..'
 
 describe('<StaminaBar />', () => {
-  test.todo('the stamina bar should have the correct width')
+  test('the stamina bar should have the correct width', () => {
+    const { rerender } = renderWithProviders(
+      <StaminaBar time="32:33" mark="36:30" />,
+    )
+
+    const [staminaBar] = screen.getByTitle('36:30').children
+    expect(staminaBar).toHaveStyle('width: 78%')
+
+    rerender(<StaminaBar time="00:00" />)
+
+    expect(staminaBar).toHaveStyle('width: 0%')
+
+    rerender(<StaminaBar time="42:00" />)
+    expect(staminaBar).toHaveStyle('width: 100%')
+  })
 
   test('the `:` time separator should be blinking', () => {
     renderWithProviders(<StaminaBar time="32:00" blinking />)
