@@ -41,5 +41,17 @@ describe('useTracking()', () => {
     expect(result.current.list[1]).toEqual(previousSecondEntry)
   })
 
-  test.todo('`remove` should remove data for a specific `key`')
+  test('`remove` should remove data for a specific `key`', () => {
+    const { result } = renderHook(() => useTracking())
+
+    result.current.action.add(firstAddition)
+    result.current.action.add(secondAddition)
+    result.current.action.add(firstAddition)
+
+    const [firstEntry, secondEntry, thirdEntry] = result.current.list
+
+    result.current.action.remove(secondEntry.key)
+
+    expect(result.current.list).toEqual([firstEntry, thirdEntry])
+  })
 })
