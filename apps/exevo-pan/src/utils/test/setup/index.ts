@@ -10,6 +10,13 @@ export const setup = {
       .spyOn(window, 'setTimeout')
       .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   },
+  setInterval: (): void => {
+    jest.useFakeTimers()
+
+    jest
+      .spyOn(window, 'setInterval')
+      .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
+  },
   URLSearchParams: {
     get: () =>
       jest
