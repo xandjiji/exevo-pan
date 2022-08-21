@@ -1,6 +1,6 @@
-import { screen } from '@testing-library/react'
-import { renderWithProviders } from 'utils/test'
+import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { renderWithProviders } from 'utils/test'
 import { TrackCardProps } from '../types'
 import TrackCard from '..'
 
@@ -35,17 +35,34 @@ describe('<TrackCard />', () => {
     expect(screen.getByText('48')).toBeInTheDocument()
   })
 
-  test('should allow to customize the character name', () => {
+  test('should call the `update` and `remove` actions', async () => {
+    const mockedUpdate = jest.fn()
+    const mockedRemove = jest.fn()
+
     renderWithProviders(
-      <TrackCard {...props} trackedData={{ ...props.trackedData, name: '' }} />,
+      <TrackCard
+        {...props}
+        trackedData={{ ...props.trackedData, name: '' }}
+        update={mockedUpdate}
+        remove={mockedRemove}
+      />,
     )
 
     const inputElement = screen.getByPlaceholderText('New character (0)')
     expect(inputElement).toHaveDisplayValue('')
 
-    userEvent.type(inputElement, 'my character')
-    expect(inputElement).toHaveDisplayValue('my character')
-  })
+    userEvent.type(inputElement, 'a')
+    expect(mockedUpdate).toHaveBeenCalledTimes(1)
+    expect(mockedUpdate).toHaveBeenLastCalledWith({
+      key: props.trackedData.key,
+      name: 'a',
+    })
 
-  test.todo('should call the `update` and `remove` actions')
+    userEvent.click(screen.getByRole('button', { name: 'Remove item' }))
+
+    await waitFor(() => {
+      expect(mockedRemove).toHaveBeenCalledTimes(1)
+      expect(mockedRemove).toHaveBeenLastCalledWith(props.trackedData.key)
+    })
+  })
 })
