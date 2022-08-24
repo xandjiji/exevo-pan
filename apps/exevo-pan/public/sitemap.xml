@@ -4,7 +4,7 @@
 
     <url>
         <loc>https://exevopan.com/</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>always</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/"/>
@@ -13,7 +13,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/bazaar-history</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>hourly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/bazaar-history"/>
@@ -22,7 +22,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/statistics</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>daily</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics"/>
@@ -31,7 +31,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/statistics/highscores</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>daily</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics/highscores"/>
@@ -40,7 +40,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/blog</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>daily</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog"/>
@@ -49,7 +49,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/highlight-auction</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>always</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/highlight-auction"/>
@@ -58,7 +58,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators"/>
@@ -67,7 +67,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/exercise-weapons</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/exercise-weapons"/>
@@ -76,7 +76,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/stamina</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/stamina"/>
@@ -85,14 +85,50 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/charm-damage</loc>
-        <lastmod>2022-07-02</lastmod>
+        <lastmod>2022-08-24</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/charm-damage"/>
         <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/charm-damage"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/charm-damage"/>
     </url>
+    <url>
+        <loc>https://exevopan.com/calculators/imbuements-cost</loc>
+        <lastmod>2022-08-24</lastmod>
+        <changefreq>monthly</changefreq>
 
+        <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/imbuements-cost"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/imbuements-cost"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/imbuements-cost"/>
+    </url>
+    <url>
+        <loc>https://exevopan.com/calculators/loot-split</loc>
+        <lastmod>2022-08-24</lastmod>
+        <changefreq>monthly</changefreq>
+
+        <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/loot-split"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/calculators/loot-split"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/calculators/loot-split"/>
+    </url>
+
+    <url>
+        <loc>https://exevopan.com/blog/changelog-5</loc>
+        <lastmod>2022-08-10</lastmod>
+        <changefreq>monthly</changefreq>
+
+        <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-5"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-5"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-5"/>
+    </url>
+    <url>
+        <loc>https://exevopan.com/blog/changelog-4</loc>
+        <lastmod>2022-06-06</lastmod>
+        <changefreq>monthly</changefreq>
+
+        <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog/changelog-4"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/blog/changelog-4"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/blog/changelog-4"/>
+    </url>
     <url>
         <loc>https://exevopan.com/blog/store-analysis</loc>
         <lastmod>2022-04-06</lastmod>
