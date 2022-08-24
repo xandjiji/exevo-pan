@@ -159,7 +159,19 @@ describe('<LootSplit />', () => {
     expect(screen.getByText('No session')).toBeInTheDocument()
   })
 
-  test.todo(
-    'if the textarea content is invalid, the save button should be disabled',
-  )
+  test('if the textarea content is invalid, the save button should be disabled', () => {
+    renderWithProviders(<LootSplit />)
+
+    const textAreaElement = screen.getByLabelText(
+      'Paste your party hunt session',
+    )
+    userEvent.clear(textAreaElement)
+    userEvent.type(textAreaElement, 'asd')
+
+    expect(textAreaElement).toBeInvalid()
+    expect(
+      screen.getByRole('button', { name: 'Advanced options' }),
+    ).toBeDisabled()
+    expect(screen.getByRole('button', { name: 'Save' })).toBeDisabled()
+  })
 })
