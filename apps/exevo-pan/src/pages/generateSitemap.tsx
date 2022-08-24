@@ -62,6 +62,16 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     date: TODAY,
     changefreq: 'monthly',
   })}
+  ${XmlTemplate({
+    route: routes.IMBUEMENTS_COST,
+    date: TODAY,
+    changefreq: 'monthly',
+  })}
+  ${XmlTemplate({
+    route: routes.LOOT_SPLIT,
+    date: TODAY,
+    changefreq: 'monthly',
+  })}
   
   ${posts
     .map(({ slug, date }) =>
