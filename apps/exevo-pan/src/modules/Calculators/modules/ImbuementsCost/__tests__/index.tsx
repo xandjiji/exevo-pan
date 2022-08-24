@@ -87,7 +87,21 @@ describe('<ImbuementsCost />', () => {
     })
   })
 
-  test.todo(
-    'navigating between different imbuements should preserve each state',
-  )
+  test('navigating between different imbuements should preserve each state', () => {
+    renderWithProviders(<ImbuementsCost />)
+
+    type(screen.getByRole('textbox', { name: 'Vampire Teeth' }), '9999')
+    userEvent.click(screen.getByRole('tab', { name: 'Void (mana leech)' }))
+    type(screen.getByRole('textbox', { name: 'Rope Belt' }), '1234')
+
+    userEvent.click(screen.getByRole('tab', { name: 'Vampirism (life leech)' }))
+    expect(
+      screen.getByRole('textbox', { name: 'Vampire Teeth' }),
+    ).toHaveDisplayValue('9,999')
+
+    userEvent.click(screen.getByRole('tab', { name: 'Void (mana leech)' }))
+    expect(
+      screen.getByRole('textbox', { name: 'Rope Belt' }),
+    ).toHaveDisplayValue('1,234')
+  })
 })
