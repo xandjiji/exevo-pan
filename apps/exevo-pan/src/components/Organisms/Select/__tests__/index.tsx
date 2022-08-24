@@ -318,7 +318,7 @@ describe('<Select />', () => {
 
     rerender(<Select {...props} error />)
     expect(combobox).toHaveClass('border-red')
-    expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    expect(screen.queryByRole('alert')).toBeInTheDocument()
 
     rerender(<Select {...props} error="" />)
     expect(combobox).not.toHaveClass('border-red')
