@@ -1,13 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
-import {
-  Drawer,
-  DrawerFooter,
-  Chip,
-  RangeSliderInput,
-  Slider,
-  Checkbox,
-} from 'components/Atoms'
+import { Drawer, DrawerFooter, Chip, Slider, Checkbox } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
@@ -15,6 +8,7 @@ import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import FilterGroup from './FilterGroup'
+import LevelInput from './LevelInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
 import { isHistory } from './utils'
@@ -53,6 +47,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [nickname, setNickname] = useDebouncedFilter<string>(
     'nicknameFilter',
     filterState.nicknameFilter,
+  )
+
+  const [minLevel, setMinLevel] = useDebouncedFilter<number>(
+    'minLevel',
+    filterState.minLevel,
+  )
+
+  const [maxLevel, setMaxLevel] = useDebouncedFilter<number>(
+    'maxLevel',
+    filterState.maxLevel,
   )
 
   const [minSkill, setMinSkill] = useDebouncedFilter<number>(
@@ -315,21 +319,32 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </div>
         </FilterGroup>
 
-        {/* @ ToDo: add htmlFor after rangeSlider refactor */}
-        <FilterGroup label="Level">
-          <RangeSliderInput
-            min={8}
-            max={2000}
-            value={[filterState.minLevel, filterState.maxLevel]}
-            onChange={useCallback(
-              (values: [number, number]) => {
-                const [newMin, newMax] = values
-                updateFilters('minLevel', newMin)
-                updateFilters('maxLevel', newMax)
-              },
-              [updateFilters],
-            )}
-          />
+        <FilterGroup>
+          {/* @ ToDo: i18n */}
+          <div className="grid w-48 grid-cols-2 gap-1.5">
+            <LevelInput
+              min={8}
+              max={maxLevel}
+              label="Minimum level"
+              placeholder="8"
+              defaultValue={8}
+              initialValue={minLevel}
+              dispatchValue={setMinLevel}
+              enterKeyHint="next"
+              noAlert
+            />
+
+            <LevelInput
+              min={minLevel}
+              label="Maximum level"
+              placeholder="2000"
+              defaultValue={2000}
+              initialValue={maxLevel}
+              dispatchValue={setMaxLevel}
+              enterKeyHint="next"
+              noAlert
+            />
+          </div>
         </FilterGroup>
 
         <FilterGroup>
