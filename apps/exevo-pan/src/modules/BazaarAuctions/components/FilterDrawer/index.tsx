@@ -1,5 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
+import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { Drawer, DrawerFooter, Chip, Slider, Checkbox } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
@@ -323,11 +324,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           {/* @ ToDo: i18n */}
           <div className="grid w-48 grid-cols-2 gap-1.5">
             <LevelInput
-              min={8}
+              min={DEFAULT_FILTER_OPTIONS.minLevel}
               max={maxLevel}
               label="Minimum level"
-              placeholder="8"
-              defaultValue={8}
+              placeholder={DEFAULT_FILTER_OPTIONS.minLevel.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.minLevel}
               initialValue={minLevel}
               dispatchValue={setMinLevel}
               enterKeyHint="next"
@@ -337,8 +338,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <LevelInput
               min={minLevel}
               label="Maximum level"
-              placeholder="2000"
-              defaultValue={2000}
+              placeholder={DEFAULT_FILTER_OPTIONS.maxLevel.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.maxLevel}
               initialValue={maxLevel}
               dispatchValue={setMaxLevel}
               enterKeyHint="next"
