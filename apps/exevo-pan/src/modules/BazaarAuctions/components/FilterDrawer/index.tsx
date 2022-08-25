@@ -321,12 +321,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </FilterGroup>
 
         <FilterGroup>
-          {/* @ ToDo: i18n */}
-          <div className="grid w-48 grid-cols-2 gap-1.5">
+          <div className="grid w-44 grid-cols-2 gap-1.5">
             <LevelInput
               min={DEFAULT_FILTER_OPTIONS.minLevel}
               max={maxLevel}
-              label="Minimum level"
+              label="Min level"
               placeholder={DEFAULT_FILTER_OPTIONS.minLevel.toString()}
               defaultValue={DEFAULT_FILTER_OPTIONS.minLevel}
               initialValue={minLevel}
@@ -337,7 +336,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
             <LevelInput
               min={minLevel}
-              label="Maximum level"
+              label="Max level"
               placeholder={DEFAULT_FILTER_OPTIONS.maxLevel.toString()}
               defaultValue={DEFAULT_FILTER_OPTIONS.maxLevel}
               initialValue={maxLevel}
