@@ -18,6 +18,7 @@ export const rareMountSet = new Set<string>([
   'Phant',
   'Antelope',
   'Fleeting Knowledge',
+  'Ripptor',
 ])
 
 const rareOutfitTests: RareOutfitTest[] = [
@@ -27,6 +28,7 @@ const rareOutfitTests: RareOutfitTest[] = [
   ({ name, type }) => name === 'Revenant' && type > 0,
   ({ name, type }) => name === 'Battle Mage' && type > 0,
   ({ name, type }) => name === 'Demon Outfit' && type >= 2,
+  ({ name, type }) => name === 'Fire-Fighter' && (type === 1 || type === 3),
   ({ name }) => name === 'Golden Outfit',
   ({ name }) => name === 'Makeshift Warrior',
   ({ name }) => name === 'Royal Costume',
