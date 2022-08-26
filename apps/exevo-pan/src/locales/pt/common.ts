@@ -170,6 +170,8 @@ export default {
       manyStoreCosmetics: 'Muitos cosmeticos comprados 🛍️',
       rareMounts: 'Mounts raras ✨',
       rareOutfits: 'Outfits raras 💎',
+      secondaryEkSkill: 'Skill secundária ⚔️',
+      soulwarAvailable: 'Soul War disponível 💀',
     },
     expand: 'Expandir todos os detalhes do leilão',
     CharacterModal: {
