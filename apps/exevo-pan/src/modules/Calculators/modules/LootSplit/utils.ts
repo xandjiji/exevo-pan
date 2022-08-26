@@ -95,6 +95,7 @@ const findTransactionsRequired = (
 export const calculateHuntData = (
   session: string,
   extraExpenses: ExtraExpenses,
+  removedPlayers: Set<string>,
 ): HuntData => {
   try {
     const playerReceipts = parse
@@ -117,7 +118,9 @@ export const calculateHuntData = (
         balance: acc.balance + player.balance,
       })),
       playerReceipts,
-      transactions: findTransactionsRequired(playerReceipts),
+      transactions: findTransactionsRequired(
+        playerReceipts.filter(({ name }) => !removedPlayers.has(name)),
+      ),
       timestamp: parse.SessionTimestamp(session),
     }
   } catch {

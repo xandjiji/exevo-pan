@@ -14,7 +14,7 @@ const useHistory = () => {
   const [selected, setSelected] = useState<HistoryEntry | undefined>(list[0])
 
   const add = useCallback(
-    (rawData: string, extraExpenses: ExtraExpenses) =>
+    (rawData: string, extraExpenses: ExtraExpenses, removedPlayers: string[]) =>
       setList((prev) =>
         [
           ...prev,
@@ -23,6 +23,7 @@ const useHistory = () => {
             timestamp: parse.SessionTimestamp(rawData),
             rawData,
             extraExpenses,
+            removedPlayers,
           },
         ].sort((a, b) => b.timestamp - a.timestamp),
       ),
