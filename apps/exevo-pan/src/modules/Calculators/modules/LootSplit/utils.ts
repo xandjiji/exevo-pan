@@ -95,6 +95,7 @@ const findTransactionsRequired = (
 export const calculateHuntData = (
   session: string,
   extraExpenses: ExtraExpenses,
+  removedPlayers: Set<string>,
 ): HuntData => {
   try {
     const playerReceipts = parse
@@ -108,6 +109,7 @@ export const calculateHuntData = (
           balance: balance - extraCost,
         }
       })
+      .filter(({ name }) => !removedPlayers.has(name))
 
     return {
       teamReceipt: playerReceipts.reduce((acc, player) => ({

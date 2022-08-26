@@ -15,6 +15,7 @@ import AdvancedOptionsDialog from './AdvancedOptionsDialog'
 import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'
 import useExtraExpenses from './useExtraExpenses'
+import useToggleSet from './useToggleSet'
 import useDisplayTimestamp from './useDisplayTimestamp'
 import useSessionClipboard from './useSessionClipboard'
 import TransferTable from './TransferTable'
@@ -35,6 +36,7 @@ const LootSplit = () => {
   const [openAdvancedOptions, setOpenAdvancedOptions] = useState(false)
 
   const [extraExpenses, setExtraExpenses] = useExtraExpenses(rawNewSession)
+  const [removedPlayers, toggleRemovedPlayers] = useToggleSet(rawNewSession)
 
   const historySelected = isHistory && selected
   const displayedSession = historySelected
@@ -47,7 +49,7 @@ const LootSplit = () => {
   const displayTimestamp = useDisplayTimestamp()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
-    calculateHuntData(displayedSession, displayedExtraExpenses)
+    calculateHuntData(displayedSession, displayedExtraExpenses, removedPlayers)
 
   const isInvalid = !!rawNewSession && !transactions
   const shouldDisplaySessionClipboard = historySelected || !isInvalid
