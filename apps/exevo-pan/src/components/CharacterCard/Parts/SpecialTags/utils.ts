@@ -1,5 +1,9 @@
+import { vocation } from 'shared-utils/dist/vocations'
 import { memoize } from 'utils'
+import { common } from 'locales'
 import { RareOutfitTestParams, RareOutfitTest } from './types'
+
+type SpecialTag = keyof typeof common.en.CharacterCard.SpecialTags
 
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26
@@ -32,11 +36,19 @@ export const testRareOutfit = memoize((params: RareOutfitTestParams): boolean =>
   rareOutfitTests.some((test) => test(params)),
 )
 
-export const getCharacterTags = (character: CharacterObject): string[] => {
+const knightSkills: Array<keyof CharacterSkillsObject> = [
+  'axe',
+  'club',
+  'sword',
+]
+
+const HIGH_SKILL_VALUE = 100
+
+export const getCharacterTags = (character: CharacterObject): SpecialTag[] => {
   const { charms, quests, mounts, outfits, storeMounts, storeOutfits, sex } =
     character
 
-  const tags: string[] = []
+  const tags: SpecialTag[] = []
 
   if (charms.length >= CHARM_CHECK) tags.push('manyCharms')
   if (quests.length >= QUEST_CHECK) tags.push('manyQuests')
@@ -51,6 +63,21 @@ export const getCharacterTags = (character: CharacterObject): string[] => {
 
   if (outfits.some((outfit) => testRareOutfit({ ...outfit, sex }))) {
     tags.push('rareOutfits')
+  }
+
+  if (
+    vocation.getName(character.vocationId) === 'Knight' &&
+    knightSkills.filter((skill) => character.skills[skill] >= HIGH_SKILL_VALUE)
+      .length >= 2
+  ) {
+    tags.push('secondaryEkSkill')
+  }
+
+  if (
+    character.level >= 400 &&
+    !character.outfits.some(({ name }) => name === 'Revenant')
+  ) {
+    tags.push('soulwarAvailable')
   }
 
   return tags
