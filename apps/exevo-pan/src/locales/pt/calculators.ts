@@ -112,10 +112,12 @@ export default {
     AdvancedOptionsDialog: {
       addExtraExpenses: 'Gastos adicionais',
       extraCostPlaceholder: 'Gold gasto adicional',
+      removePlayer: 'Remover jogador',
     },
     SessionDialog: {
       originalSession: 'Sessão original do time',
       extraExpenses: 'Gastos adicionais',
+      removedPlayers: 'Jogadores removidos',
     },
     Clipboard: {
       teamSession: 'Sessão do time',
