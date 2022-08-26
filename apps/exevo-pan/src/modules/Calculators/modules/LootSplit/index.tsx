@@ -45,11 +45,18 @@ const LootSplit = () => {
   const displayedExtraExpenses = historySelected
     ? (selected as HistoryEntry).extraExpenses
     : extraExpenses
+  const displayedRemovedPlayers = historySelected
+    ? new Set((selected as HistoryEntry).removedPlayers)
+    : removedPlayers
 
   const displayTimestamp = useDisplayTimestamp()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
-    calculateHuntData(displayedSession, displayedExtraExpenses, removedPlayers)
+    calculateHuntData(
+      displayedSession,
+      displayedExtraExpenses,
+      displayedRemovedPlayers,
+    )
 
   const isInvalid = !!rawNewSession && !transactions
   const shouldDisplaySessionClipboard = historySelected || !isInvalid
