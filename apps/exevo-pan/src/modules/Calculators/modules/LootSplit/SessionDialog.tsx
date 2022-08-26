@@ -7,6 +7,7 @@ export type SessionDialogProps = {
   isOpen: boolean
   sessionData?: string
   extraExpenses?: ExtraExpenses
+  removedPlayers?: Set<string>
   onClose: () => void
 }
 
@@ -14,6 +15,7 @@ const SessionDialog = ({
   isOpen,
   sessionData = '',
   extraExpenses = {},
+  removedPlayers = new Set([]),
   onClose,
 }: SessionDialogProps) => {
   const {
@@ -51,6 +53,19 @@ const SessionDialog = ({
               </Chip>
             ))}
           </div>
+        </Group>
+      )}
+
+      {removedPlayers.size > 0 && (
+        <Group className="mt-6">
+          <strong>Removed players</strong>
+          <ul>
+            {[...removedPlayers].map((removedPlayer) => (
+              <li>
+                <del>{removedPlayer}</del>
+              </li>
+            ))}
+          </ul>
         </Group>
       )}
 

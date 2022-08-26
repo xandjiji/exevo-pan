@@ -236,7 +236,9 @@ const LootSplit = () => {
           {!historySelected && (
             <Button
               type="button"
-              onClick={() => action.add(rawNewSession, extraExpenses)}
+              onClick={() =>
+                action.add(rawNewSession, extraExpenses, [...removedPlayers])
+              }
               pill
               disabled={isInvalid}
             >
@@ -260,6 +262,7 @@ const LootSplit = () => {
         isOpen={sessionDialogOpen}
         sessionData={selected?.rawData}
         extraExpenses={selected?.extraExpenses}
+        removedPlayers={new Set(selected?.removedPlayers)}
         onClose={() => setSessionDialog(false)}
       />
     </main>
