@@ -58,10 +58,10 @@ const SessionDialog = ({
 
       {removedPlayers.size > 0 && (
         <Group className="mt-6">
-          <strong>Removed players</strong>
+          <strong>{calculators.LootSplit.SessionDialog.removedPlayers}</strong>
           <ul>
             {[...removedPlayers].map((removedPlayer) => (
-              <li>
+              <li key={removedPlayer}>
                 <del>{removedPlayer}</del>
               </li>
             ))}

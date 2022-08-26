@@ -48,9 +48,8 @@ const AdvancedOptionsDialog = ({
             const playerIsRemoved = removedPlayers.has(name)
 
             return (
-              <div className="grid w-full gap-1.5">
+              <div key={`extra-${name}`} className="grid w-full gap-1.5">
                 <NumericInput
-                  key={`extra-${name}`}
                   label={
                     <span className={clsx(playerIsRemoved && 'line-through')}>
                       {name}
@@ -67,8 +66,9 @@ const AdvancedOptionsDialog = ({
                   onKeyPress={closeOnEnter}
                 />
                 <Checkbox
-                  /* @ ToDo: i18n */
-                  label="Remove player"
+                  label={
+                    calculators.LootSplit.AdvancedOptionsDialog.removePlayer
+                  }
                   checked={playerIsRemoved}
                   onClick={() => toggleRemovedPlayers(name)}
                 />
