@@ -109,7 +109,6 @@ export const calculateHuntData = (
           balance: balance - extraCost,
         }
       })
-      .filter(({ name }) => !removedPlayers.has(name))
 
     return {
       teamReceipt: playerReceipts.reduce((acc, player) => ({
@@ -119,7 +118,9 @@ export const calculateHuntData = (
         balance: acc.balance + player.balance,
       })),
       playerReceipts,
-      transactions: findTransactionsRequired(playerReceipts),
+      transactions: findTransactionsRequired(
+        playerReceipts.filter(({ name }) => !removedPlayers.has(name)),
+      ),
       timestamp: parse.SessionTimestamp(session),
     }
   } catch {

@@ -252,6 +252,8 @@ const LootSplit = () => {
         playerReceipts={playerReceipts ?? []}
         extraExpenses={extraExpenses}
         setExtraExpenses={setExtraExpenses}
+        removedPlayers={removedPlayers}
+        toggleRemovedPlayers={toggleRemovedPlayers}
         onClose={() => setOpenAdvancedOptions(false)}
       />
       <SessionDialog
