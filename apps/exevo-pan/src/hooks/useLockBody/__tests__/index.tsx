@@ -1,17 +1,20 @@
 import { renderHook } from '@testing-library/react-hooks'
-import useLockBody from '../index'
+import useLockBody, { LockBodyProvider } from '../index'
+
+const assertLocked = (state = true) => {
+  expect(document.body).toHaveStyle({ overflow: state ? 'hidden' : 'unset' })
+}
 
 describe('useLockBody', () => {
-  test.todo('add tests')
-  /* it('should add overflow style to body element', () => {
-    const { rerender } = renderHook((locked = true) =>
-      useLockBody(locked as boolean),
-    )
+  it('should add overflow style to body element', () => {
+    let state = false
+    const { rerender } = renderHook(() => useLockBody(state), {
+      wrapper: LockBodyProvider,
+    })
 
-    expect(document.body).toHaveStyle({ overflow: 'hidden' })
-
-    rerender(false)
-
-    expect(document.body).toHaveStyle({ overflow: 'unset' })
-  }) */
+    assertLocked(false)
+    state = true
+    rerender()
+    assertLocked(true)
+  })
 })

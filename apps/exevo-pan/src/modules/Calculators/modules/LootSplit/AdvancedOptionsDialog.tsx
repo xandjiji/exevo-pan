@@ -1,6 +1,7 @@
 import { useCallback } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Dialog, NumericInput, Button } from 'components/Atoms'
+import { Dialog, NumericInput, Button, Checkbox } from 'components/Atoms'
 import { Group } from '../../components'
 import { Receipt, ExtraExpenses } from './types'
 
@@ -8,6 +9,8 @@ type AdvancedOptionsDialogProps = {
   playerReceipts: Receipt[]
   extraExpenses: ExtraExpenses
   setExtraExpenses: (newExpenses: ExtraExpenses) => void
+  removedPlayers: Set<string>
+  toggleRemovedPlayers: (name: string) => void
   isOpen: boolean
   onClose: () => void
 }
@@ -16,6 +19,8 @@ const AdvancedOptionsDialog = ({
   playerReceipts,
   extraExpenses,
   setExtraExpenses,
+  removedPlayers,
+  toggleRemovedPlayers,
   isOpen,
   onClose,
 }: AdvancedOptionsDialogProps) => {
@@ -38,20 +43,38 @@ const AdvancedOptionsDialog = ({
         <strong className="mb-2">
           {calculators.LootSplit.AdvancedOptionsDialog.addExtraExpenses}:
         </strong>
-        <div className="grid grid-cols-2 place-items-end gap-4">
-          {playerReceipts?.map(({ name }) => (
-            <NumericInput
-              key={`extra-${name}`}
-              label={name}
-              value={extraExpenses[name]}
-              onChange={(value) => setExtraExpenses({ [name]: value })}
-              placeholder={
-                calculators.LootSplit.AdvancedOptionsDialog.extraCostPlaceholder
-              }
-              onKeyPress={closeOnEnter}
-              className="w-full"
-            />
-          ))}
+        <div className="grid grid-cols-2 place-items-end gap-6">
+          {playerReceipts?.map(({ name }) => {
+            const playerIsRemoved = removedPlayers.has(name)
+
+            return (
+              <div key={`extra-${name}`} className="grid w-full gap-1.5">
+                <NumericInput
+                  label={
+                    <span className={clsx(playerIsRemoved && 'line-through')}>
+                      {name}
+                    </span>
+                  }
+                  aria-label={name}
+                  value={extraExpenses[name]}
+                  onChange={(value) => setExtraExpenses({ [name]: value })}
+                  placeholder={
+                    calculators.LootSplit.AdvancedOptionsDialog
+                      .extraCostPlaceholder
+                  }
+                  disabled={playerIsRemoved}
+                  onKeyPress={closeOnEnter}
+                />
+                <Checkbox
+                  label={
+                    calculators.LootSplit.AdvancedOptionsDialog.removePlayer
+                  }
+                  checked={playerIsRemoved}
+                  onClick={() => toggleRemovedPlayers(name)}
+                />
+              </div>
+            )
+          })}
         </div>
       </Group>
 

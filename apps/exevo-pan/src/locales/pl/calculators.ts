@@ -111,10 +111,12 @@ export default {
     AdvancedOptionsDialog: {
       addExtraExpenses: 'Add extra expenses',
       extraCostPlaceholder: 'Extra gold costs',
+      removePlayer: 'Remove player',
     },
     SessionDialog: {
       originalSession: 'Original hunt session',
       extraExpenses: 'Extra expenses',
+      removedPlayers: 'Removed players',
     },
     Clipboard: {
       teamSession: 'Team session',

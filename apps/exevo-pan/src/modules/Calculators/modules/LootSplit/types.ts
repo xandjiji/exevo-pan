@@ -18,6 +18,7 @@ export type HistoryEntry = {
   timestamp: number
   rawData: string
   extraExpenses: ExtraExpenses
+  removedPlayers: string[]
 }
 
 export type HuntData = {

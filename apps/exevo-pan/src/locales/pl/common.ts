@@ -170,6 +170,9 @@ export default {
       manyStoreCosmetics: 'Duzo przedmiotów z Tibia Store 🛍️',
       rareMounts: 'Rzadkie mountów ✨',
       rareOutfits: 'Rzadkie outfitów 💎',
+      /* @ ToDo: i18n */
+      secondaryEkSkill: 'Secondary skill ⚔️',
+      soulwarAvailable: 'Soul War available 💀',
     },
     expand: 'Rozwiń aby zobaczyć pełne szczegóły aukcji',
     CharacterModal: {

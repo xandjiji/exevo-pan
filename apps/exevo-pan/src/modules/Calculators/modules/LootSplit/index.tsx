@@ -15,6 +15,7 @@ import AdvancedOptionsDialog from './AdvancedOptionsDialog'
 import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'
 import useExtraExpenses from './useExtraExpenses'
+import useToggleSet from './useToggleSet'
 import useDisplayTimestamp from './useDisplayTimestamp'
 import useSessionClipboard from './useSessionClipboard'
 import TransferTable from './TransferTable'
@@ -35,6 +36,7 @@ const LootSplit = () => {
   const [openAdvancedOptions, setOpenAdvancedOptions] = useState(false)
 
   const [extraExpenses, setExtraExpenses] = useExtraExpenses(rawNewSession)
+  const [removedPlayers, toggleRemovedPlayers] = useToggleSet(rawNewSession)
 
   const historySelected = isHistory && selected
   const displayedSession = historySelected
@@ -43,11 +45,18 @@ const LootSplit = () => {
   const displayedExtraExpenses = historySelected
     ? (selected as HistoryEntry).extraExpenses
     : extraExpenses
+  const displayedRemovedPlayers = historySelected
+    ? new Set((selected as HistoryEntry).removedPlayers)
+    : removedPlayers
 
   const displayTimestamp = useDisplayTimestamp()
 
   const { timestamp, teamReceipt, playerReceipts, transactions } =
-    calculateHuntData(displayedSession, displayedExtraExpenses)
+    calculateHuntData(
+      displayedSession,
+      displayedExtraExpenses,
+      displayedRemovedPlayers,
+    )
 
   const isInvalid = !!rawNewSession && !transactions
   const shouldDisplaySessionClipboard = historySelected || !isInvalid
@@ -234,7 +243,9 @@ const LootSplit = () => {
           {!historySelected && (
             <Button
               type="button"
-              onClick={() => action.add(rawNewSession, extraExpenses)}
+              onClick={() =>
+                action.add(rawNewSession, extraExpenses, [...removedPlayers])
+              }
               pill
               disabled={isInvalid}
             >
@@ -250,12 +261,15 @@ const LootSplit = () => {
         playerReceipts={playerReceipts ?? []}
         extraExpenses={extraExpenses}
         setExtraExpenses={setExtraExpenses}
+        removedPlayers={removedPlayers}
+        toggleRemovedPlayers={toggleRemovedPlayers}
         onClose={() => setOpenAdvancedOptions(false)}
       />
       <SessionDialog
         isOpen={sessionDialogOpen}
         sessionData={selected?.rawData}
         extraExpenses={selected?.extraExpenses}
+        removedPlayers={new Set(selected?.removedPlayers)}
         onClose={() => setSessionDialog(false)}
       />
     </main>

@@ -10,6 +10,19 @@ export const setup = {
       .spyOn(window, 'setTimeout')
       .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   },
+  setInterval: (): void => {
+    jest.useFakeTimers()
+
+    jest
+      .spyOn(window, 'setInterval')
+      .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
+  },
+  URLSearchParams: {
+    get: () =>
+      jest
+        .spyOn(URLSearchParams.prototype, 'get')
+        .mockImplementation(() => null),
+  },
   fetch: (): jest.MockedFunction<typeof fetch> => {
     global.fetch = jest.fn()
     return fetch as jest.MockedFunction<typeof fetch>

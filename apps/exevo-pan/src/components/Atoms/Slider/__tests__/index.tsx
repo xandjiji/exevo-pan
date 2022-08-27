@@ -378,7 +378,17 @@ describe('<Slider />', () => {
     expect(inputElement).toBeDisabled()
   })
 
-  test.todo('should have its scale inverted')
+  test('should have its scale inverted', () => {
+    const { rerender } = renderWithProviders(
+      <Slider label="label" min={0} max={100} value={100} invert />,
+    )
+
+    const sliderElement = screen.getByRole('slider')
+    expect(sliderElement).toHaveStyle('margin-left: 0%')
+
+    rerender(<Slider label="label" min={0} max={100} value={0} invert />)
+    expect(sliderElement).toHaveStyle('margin-left: 100%')
+  })
 
   describe('A11y', () => {
     test('should not have violations', async () => {

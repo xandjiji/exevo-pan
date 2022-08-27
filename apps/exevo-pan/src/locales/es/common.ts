@@ -172,6 +172,8 @@ export default {
       manyStoreCosmetics: 'Muchos cosmeticos comprados 🛍️',
       rareMounts: 'Mounts raras ✨',
       rareOutfits: 'Outfits raras 💎',
+      secondaryEkSkill: 'Skill secundaria ⚔️',
+      soulwarAvailable: 'Soul War disponible 💀',
     },
     expand: 'Expandir para ver todos los detalles de la subasta',
     CharacterModal: {

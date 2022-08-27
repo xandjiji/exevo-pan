@@ -170,6 +170,8 @@ export default {
       manyStoreCosmetics: 'Many store cosmetics 🛍️',
       rareMounts: 'Rare mounts ✨',
       rareOutfits: 'Rare outfits 💎',
+      secondaryEkSkill: 'Secondary skill ⚔️',
+      soulwarAvailable: 'Soul War available 💀',
     },
     expand: 'Expand for full auction details',
     CharacterModal: {

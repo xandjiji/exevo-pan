@@ -8,7 +8,9 @@ jest.mock('next/router', () => ({
 }))
 
 jest.mock('utils/localStorage', () => ({
-  getFromLocalStorage: jest.fn(),
+  getFromLocalStorage: jest
+    .fn()
+    .mockImplementation((_, fallbackObject) => fallbackObject),
   saveToLocalStorage: jest.fn(),
 }))
 

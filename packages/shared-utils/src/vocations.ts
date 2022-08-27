@@ -25,7 +25,7 @@ const PROMOTED_VOCATION_TITLE = {
 type VocationNameKey = keyof typeof VOCATION_NAMES
 type VocationId = keyof typeof VOCATION_IDS
 
-const getName = (vocationId: number): string => {
+const getName = (vocationId: number): ValueOf<typeof VOCATION_NAMES> => {
   const key = vocationId as VocationNameKey
   return VOCATION_NAMES[key]
 }
