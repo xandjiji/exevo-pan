@@ -239,6 +239,12 @@ export default class AuctionPage {
     return { count, jobs, outfits }
   }
 
+  bossPoints($: CheerioAPI): number {
+    const bossPointsLabel = $('.LabelV:contains("Boss Points:")')
+    const bossPointsElement = bossPointsLabel.next()
+    return stringToNumber(bossPointsElement.text())
+  }
+
   items($: CheerioAPI): number[] {
     const itemImages = $('.AuctionItemsViewBox > .CVIcon')
 
