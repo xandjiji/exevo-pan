@@ -12,6 +12,7 @@ import {
   filterListTable,
   stringToNumber,
   totalCharacterInvestment,
+  getCharacterTags,
 } from '../utils'
 import {
   getPagedData,
@@ -444,6 +445,7 @@ export default class AuctionPage {
     }
 
     characterObject.tcInvested = totalCharacterInvestment(characterObject)
+    characterObject.tags = getCharacterTags(characterObject)
 
     return characterObject
   }
