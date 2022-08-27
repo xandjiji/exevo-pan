@@ -8,7 +8,11 @@ import {
   rareAchievement as achievementDictionary,
 } from 'data-dictionary/dist/dictionaries'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
-import { filterListTable, stringToNumber } from '../utils'
+import {
+  filterListTable,
+  stringToNumber,
+  totalCharacterInvestment,
+} from '../utils'
 import {
   getPagedData,
   getPageableAuctionData,
@@ -407,7 +411,7 @@ export default class AuctionPage {
 
     exitIfMaintenance(() => this.maintenanceCheck($))
 
-    return {
+    const characterObject: PartialCharacterObject = {
       id: this.id($),
       nickname: this.nickname($),
       auctionEnd: this.auctionEnd($),
@@ -419,6 +423,9 @@ export default class AuctionPage {
       sex: this.sex($),
       level: this.level($),
       achievementPoints: this.achievementPoints($),
+      bossPoints: this.bossPoints($),
+      tcInvested: 0,
+      tags: [],
       skills: this.skills($),
       items: this.items($),
       charms: this.charms($),
@@ -435,6 +442,10 @@ export default class AuctionPage {
         expansion: this.charmExpansion($),
       },
     }
+
+    characterObject.tcInvested = totalCharacterInvestment(characterObject)
+
+    return characterObject
   }
 
   async checkHistoryAuction(content: string): Promise<HistoryCheck> {
