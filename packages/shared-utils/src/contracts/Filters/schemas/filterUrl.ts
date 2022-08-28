@@ -28,6 +28,12 @@ const decodeBoolean = (encodedValue: string): boolean => encodedValue === 'true'
 
 export const filterSchema = [
   {
+    key: 'auctionIds',
+    defaultValue: DEFAULT_FILTER_OPTIONS.auctionIds,
+    encode: encodeSet,
+    decode: decodeNumberSet,
+  },
+  {
     key: 'nicknameFilter',
     defaultValue: DEFAULT_FILTER_OPTIONS.nicknameFilter,
   },
@@ -62,6 +68,12 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
+    key: 'tags',
+    defaultValue: DEFAULT_FILTER_OPTIONS.tags,
+    encode: encodeSet,
+    decode: decodeStringSet,
+  },
+  {
     key: 'minLevel',
     defaultValue: DEFAULT_FILTER_OPTIONS.minLevel,
     decode: decodeNumber,
@@ -79,6 +91,16 @@ export const filterSchema = [
   {
     key: 'maxSkill',
     defaultValue: DEFAULT_FILTER_OPTIONS.maxSkill,
+    decode: decodeNumber,
+  },
+  {
+    key: 'bossPoints',
+    defaultValue: DEFAULT_FILTER_OPTIONS.bossPoints,
+    decode: decodeNumber,
+  },
+  {
+    key: 'tcInvested',
+    defaultValue: DEFAULT_FILTER_OPTIONS.tcInvested,
     decode: decodeNumber,
   },
   {
@@ -210,6 +232,11 @@ export const filterSchema = [
   {
     key: 'transferAvailable',
     defaultValue: DEFAULT_FILTER_OPTIONS.transferAvailable,
+    decode: decodeBoolean,
+  },
+  {
+    key: 'biddedOnly',
+    defaultValue: DEFAULT_FILTER_OPTIONS.biddedOnly,
     decode: decodeBoolean,
   },
 ]

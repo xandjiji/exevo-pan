@@ -7,11 +7,13 @@ export const serializeBody = ({
 }: FilterBodyPayload): string => {
   const serializedFilterState: SerializedFilterOptions = {
     ...filterOptions,
+    auctionIds: [...filterOptions.auctionIds],
     vocation: [...filterOptions.vocation],
     pvp: [...filterOptions.pvp],
     battleye: [...filterOptions.battleye],
     location: [...filterOptions.location],
     serverSet: [...filterOptions.serverSet],
+    tags: [...filterOptions.tags],
     skillKey: [...filterOptions.skillKey],
     imbuementsSet: [...filterOptions.imbuementsSet],
     charmsSet: [...filterOptions.charmsSet],
@@ -32,11 +34,13 @@ export const serializeBody = ({
 }
 
 const deserializeFilterOptions = ({
+  auctionIds,
   vocation,
   pvp,
   battleye,
   location,
   serverSet,
+  tags,
   skillKey,
   imbuementsSet,
   charmsSet,
@@ -50,11 +54,13 @@ const deserializeFilterOptions = ({
   ...primitiveOptions
 }: SerializedFilterOptions): FilterOptions => ({
   ...primitiveOptions,
+  auctionIds: new Set<number>(auctionIds),
   vocation: new Set<VocationOptions>(vocation as VocationOptions[]),
   pvp: new Set<PvpOptions>(pvp as PvpOptions[]),
   battleye: new Set<boolean>(battleye),
   location: new Set<LocationOptions>(location as LocationOptions[]),
   serverSet: new Set<string>(serverSet),
+  tags: new Set<string>(tags),
   skillKey: new Set<SkillOptions>(skillKey as SkillOptions[]),
   imbuementsSet: new Set<string>(imbuementsSet),
   charmsSet: new Set<string>(charmsSet),

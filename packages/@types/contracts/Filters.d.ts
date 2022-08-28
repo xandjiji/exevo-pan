@@ -21,6 +21,8 @@ type FilterOptionsPrimitives = Pick<
   | 'maxLevel'
   | 'minSkill'
   | 'maxSkill'
+  | 'bossPoints'
+  | 'tcInvested'
   | 'rareNick'
   | 'addon'
   | 'sex'
@@ -35,14 +37,17 @@ type FilterOptionsPrimitives = Pick<
   | 'goldPouch'
   | 'hireling'
   | 'transferAvailable'
+  | 'biddedOnly'
 >
 
 declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
+  auctionIds: number[]
   vocation: number[]
   pvp: number[]
   battleye: boolean[]
   location: number[]
   serverSet: string[]
+  tags: string[]
   skillKey: string[]
   imbuementsSet: string[]
   charmsSet: string[]

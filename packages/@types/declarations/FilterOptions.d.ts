@@ -4,6 +4,7 @@ declare type LocationOptions = 0 | 1 | 2
 declare type SkillOptions = 'axe' | 'club' | 'distance' | 'magic' | 'sword'
 
 declare interface FilterOptions {
+  auctionIds: Set<number>
   nicknameFilter: string
   vocation: Set<VocationOptions>
   pvp: Set<PvpOptions>
@@ -14,6 +15,9 @@ declare interface FilterOptions {
   maxLevel: number
   minSkill: number
   maxSkill: number
+  bossPoints: number
+  tcInvested: number
+  tags: Set<string>
   skillKey: Set<SkillOptions>
   imbuementsSet: Set<string>
   charmsSet: Set<string>
@@ -38,4 +42,5 @@ declare interface FilterOptions {
   goldPouch: boolean
   hireling: boolean
   transferAvailable: boolean
+  biddedOnly: boolean
 }
