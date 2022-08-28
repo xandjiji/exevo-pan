@@ -1,11 +1,14 @@
 import { useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
+import {
+  rareMountSet,
+  testRareOutfit,
+} from 'shared-utils/dist/getCharacterTags'
 import { formatNumberWithCommas } from 'utils'
 import { Checkbox } from 'components/CharacterCard/atoms'
 import { SpritePortrait } from 'components/Atoms'
 import { NotifyErrorClient } from 'services'
-import { rareMountSet, testRareOutfit } from '../../Parts/SpecialTags/utils'
 import { addonCheck } from './utils'
 import styles from './styles.module.css'
 import { SpriteBoxProps } from './types'
