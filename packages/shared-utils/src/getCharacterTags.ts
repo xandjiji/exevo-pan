@@ -1,3 +1,4 @@
+import { dictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { vocation } from './vocations'
 
 const CHARM_CHECK = 7
@@ -45,18 +46,7 @@ const knightSkills: Array<keyof CharacterSkillsObject> = [
 
 const HIGH_SKILL_VALUE = 100
 
-export const Tags = {
-  manyCharms: 'manyCharms',
-  manyQuests: 'manyQuests',
-  manyMounts: 'manyMounts',
-  manyStoreCosmetics: 'manyStoreCosmetics',
-  rareMounts: 'rareMounts',
-  rareOutfits: 'rareOutfits',
-  secondaryEkSkill: 'secondaryEkSkill',
-  soulwarAvailable: 'soulwarAvailable',
-}
-
-type Tag = keyof typeof Tags
+type Tag = keyof typeof dictionary
 
 export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
   const { charms, quests, mounts, outfits, storeMounts, storeOutfits, sex } =
