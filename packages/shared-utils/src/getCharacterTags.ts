@@ -1,4 +1,4 @@
-import { vocation } from 'shared-utils/dist/vocations'
+import { vocation } from './vocations'
 
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26

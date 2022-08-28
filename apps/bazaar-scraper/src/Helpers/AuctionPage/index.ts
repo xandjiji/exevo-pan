@@ -2,18 +2,15 @@ import cheerio, { CheerioAPI } from 'cheerio/lib/index'
 import { PostData } from 'Helpers'
 import { sanitizeHtmlString, parseDate, exitIfMaintenance } from 'utils'
 import { ServerData } from 'Data'
+import { totalCharacterInvestment } from 'shared-utils/dist/totalCharacterInvestment'
+import { getCharacterTags } from 'shared-utils/dist/getCharacterTags'
 import {
   quest as questDictionary,
   imbuement as imbuementDictionary,
   rareAchievement as achievementDictionary,
 } from 'data-dictionary/dist/dictionaries'
 import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
-import {
-  filterListTable,
-  stringToNumber,
-  totalCharacterInvestment,
-  getCharacterTags,
-} from '../utils'
+import { filterListTable, stringToNumber } from '../utils'
 import {
   getPagedData,
   getPageableAuctionData,
