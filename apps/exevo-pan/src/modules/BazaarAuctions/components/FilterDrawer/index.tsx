@@ -639,29 +639,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
             </Tooltip>
-            <Tooltip content={homepage.FilterDrawer.tooltips.soulwar}>
-              <Chip
-                overrideStatus={filterState.soulwarAvailable}
-                onClick={() => {
-                  if (filterState.soulwarAvailable) {
-                    updateFilters('minLevel', defaultValues.minLevel as number)
-                    updateFilters('soulwarAvailable', false)
-                  } else {
-                    updateFilters('minLevel', 250)
-                    updateFilters('maxLevel', defaultValues.maxLevel as number)
-                    updateFilters('soulwarAvailable', true)
-                  }
-                }}
-              >
-                {homepage.FilterDrawer.soulwarButton}
-                <S.Emoji
-                  role="img"
-                  aria-label={homepage.FilterDrawer.skullEmoji}
-                >
-                  💀
-                </S.Emoji>
-              </Chip>
-            </Tooltip>
           </S.ChipWrapper>
         </FilterGroup>
       </Drawer.Body>

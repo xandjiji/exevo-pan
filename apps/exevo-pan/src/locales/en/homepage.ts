@@ -50,7 +50,6 @@ export default {
         'If a rare item is not on this list it means that there are no auctions available with it.',
       rareNicknames:
         "Nicknames with special characters (äëïöüÿ'-.,), 2-3 characters length and consecutive uppercase letters (e.g XVI)",
-      soulwar: 'Characters level 250+ with Soul War not completed',
     },
     toggleAll: {
       imbuements: 'All imbuements',
@@ -61,7 +60,6 @@ export default {
     green: 'Green',
     yellow: 'Yellow',
     rareNicknamesButton: 'Rare nicknames',
-    soulwarButton: 'Soulwar available',
     skullEmoji: 'skull',
     SpritePicker: {
       item: 'item is selected',

@@ -50,7 +50,6 @@ export default {
         'Si un artículo raro no está en esta lista, actualmente no hay subasta para él.',
       rareNicknames:
         "Nicknames con caracteres especiales (äëïöüÿ'-.,), tamaño de 2-3 caracteres y letras mayúsculas consecutivas (e.g XVI)",
-      soulwar: 'Personajes con nivel 250+ e sin completar la Soul War',
     },
     toggleAll: {
       imbuements: 'Todos los imbuements',
@@ -61,7 +60,6 @@ export default {
     green: 'Verde',
     yellow: 'Amarillo',
     rareNicknamesButton: 'Nicknames raros',
-    soulwarButton: 'Soulwar disponible',
     skullEmoji: 'cráneo',
     SpritePicker: {
       item: 'item está seleccionado',
