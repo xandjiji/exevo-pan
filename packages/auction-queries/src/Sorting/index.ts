@@ -37,9 +37,6 @@ export const applySort = (
     case 2:
       return data.sort(byPrice)
 
-    case 3:
-      return data.filter((item) => item.hasBeenBidded).sort(byPrice)
-
     default:
       return data
   }
