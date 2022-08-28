@@ -26,7 +26,6 @@ type FilterOptionsPrimitives = Pick<
   | 'rareNick'
   | 'addon'
   | 'sex'
-  | 'soulwarAvailable'
   | 'charmExpansion'
   | 'preySlot'
   | 'huntingSlot'

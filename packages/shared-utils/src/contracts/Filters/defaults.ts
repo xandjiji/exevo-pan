@@ -36,7 +36,6 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   achievementSet: new Set([]),
   storeOutfitSet: new Set([]),
   storeMountSet: new Set([]),
-  soulwarAvailable: false,
   charmExpansion: false,
   preySlot: false,
   huntingSlot: false,

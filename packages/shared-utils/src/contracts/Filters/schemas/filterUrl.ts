@@ -179,11 +179,6 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
-    key: 'soulwarAvailable',
-    defaultValue: DEFAULT_FILTER_OPTIONS.soulwarAvailable,
-    decode: decodeBoolean,
-  },
-  {
     key: 'charmExpansion',
     defaultValue: DEFAULT_FILTER_OPTIONS.charmExpansion,
     decode: decodeBoolean,

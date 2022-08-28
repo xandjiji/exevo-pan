@@ -31,7 +31,6 @@ declare interface FilterOptions {
   mountSet: Set<string>
   storeMountSet: Set<string>
   achievementSet: Set<string>
-  soulwarAvailable: boolean
   charmExpansion: boolean
   preySlot: boolean
   huntingSlot: boolean
