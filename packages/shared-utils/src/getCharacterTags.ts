@@ -45,13 +45,24 @@ const knightSkills: Array<keyof CharacterSkillsObject> = [
 
 const HIGH_SKILL_VALUE = 100
 
-export const getCharacterTags = (
-  character: PartialCharacterObject,
-): string[] => {
+export const Tags = {
+  manyCharms: 'manyCharms',
+  manyQuests: 'manyQuests',
+  manyMounts: 'manyMounts',
+  manyStoreCosmetics: 'manyStoreCosmetics',
+  rareMounts: 'rareMounts',
+  rareOutfits: 'rareOutfits',
+  secondaryEkSkill: 'secondaryEkSkill',
+  soulwarAvailable: 'soulwarAvailable',
+}
+
+type Tag = keyof typeof Tags
+
+export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
   const { charms, quests, mounts, outfits, storeMounts, storeOutfits, sex } =
     character
 
-  const tags: string[] = []
+  const tags: Tag[] = []
 
   if (charms.length >= CHARM_CHECK) tags.push('manyCharms')
   if (quests.length >= QUEST_CHECK) tags.push('manyQuests')

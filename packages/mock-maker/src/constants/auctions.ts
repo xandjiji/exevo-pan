@@ -15,6 +15,14 @@ export default {
     min: 8,
     max: 2000,
   },
+  bossPoints: {
+    min: 0,
+    max: 5000,
+  },
+  tcInvested: {
+    min: 0,
+    max: 30000,
+  },
   skills: {
     min: 10,
     max: 130,
