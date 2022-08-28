@@ -15,7 +15,7 @@ import {
   Hirelings,
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
-import { formatNumberWithCommas, totalCharacterInvestment } from 'utils'
+import { formatNumberWithCommas } from 'utils'
 import MoreInfoIcon from 'assets/svgs/moreInfo.svg'
 import OutfitIcon from 'assets/svgs/outfit.svg'
 import MountIcon from 'assets/svgs/horse.svg'
@@ -78,10 +78,7 @@ const CharacterModal = ({
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
-  const tcInvested = useMemo(
-    () => formatNumberWithCommas(totalCharacterInvestment(characterData)),
-    [characterData],
-  )
+  const tcInvested = formatNumberWithCommas(characterData.tcInvested)
 
   const tabRef = useRef<HTMLDivElement>(null)
   const isDesktop = useIsDesktop()

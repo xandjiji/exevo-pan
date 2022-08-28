@@ -1,10 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useState, useRef, useMemo, useCallback } from 'react'
-import {
-  formatNumberWithCommas,
-  totalCharacterInvestment,
-  checkKeyboardTrigger,
-} from 'utils'
+import { memo, useState, useRef, useCallback } from 'react'
+import { formatNumberWithCommas, checkKeyboardTrigger } from 'utils'
 import {
   Head,
   TagButton,
@@ -52,10 +48,7 @@ const CharacterCard = ({
     preySlot,
   } = characterData
 
-  const tcInvested = useMemo(
-    () => formatNumberWithCommas(totalCharacterInvestment(characterData)),
-    [characterData],
-  )
+  const tcInvested = formatNumberWithCommas(characterData.tcInvested)
 
   const ref = useRef<HTMLDivElement>()
 
