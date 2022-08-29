@@ -11,6 +11,8 @@ const useRareItemSet = (rareItemData: RareItemData) => {
       .map((name) => ({ name, value: name }))
   }, [rareItemData, selectedItemData])
 
+  const allSelected = itemList.length === 0
+
   const toggle = useCallback(
     (item: string) =>
       setSelectedItemData((prev) => {
@@ -26,11 +28,18 @@ const useRareItemSet = (rareItemData: RareItemData) => {
     [rareItemData, selectedItemData],
   )
 
+  const toggleAll = useCallback(
+    () => setSelectedItemData(() => (allSelected ? {} : { ...rareItemData })),
+    [rareItemData, allSelected],
+  )
+
   return {
     itemList,
     selectedItemData,
+    allSelected,
     action: {
       toggle,
+      toggleAll,
     },
   }
 }

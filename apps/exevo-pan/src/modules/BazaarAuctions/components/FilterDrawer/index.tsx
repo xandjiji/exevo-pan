@@ -598,16 +598,12 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 onKeyPress={blurOnEnter}
                 enterKeyHint="done"
               />
-              {/* <Chip
-                overrideStatus={
-                  filterState.auctionIds.size === auctionedItemOptions.length
-                }
-                onClick={() =>
-                  toggleAllOptions('auctionIds', auctionedItemOptions)
-                }
+              <Chip
+                overrideStatus={rareItems.allSelected}
+                onClick={rareItems.action.toggleAll}
               >
                 {homepage.FilterDrawer.toggleAll.items}
-              </Chip> */}
+              </Chip>
             </S.InputWrapper>
             <S.ChipWrapper id="rare-items-list">
               {Object.keys(rareItems.selectedItemData).map((item) => (
