@@ -8,6 +8,7 @@ import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
+import useRareItemSet from './useRareItemSet'
 import FilterGroup from './FilterGroup'
 import LevelInput from './LevelInput'
 import SpritePicker from './SpritePicker'
@@ -26,7 +27,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
   const {
     serverOptions,
-    auctionedItemOptions,
+    rareItemData,
     imbuementOptions,
     charmOptions,
     questOptions,
@@ -38,7 +39,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   } = useDrawerFields()
   const {
     filterState,
-    defaultValues,
     activeFilterCount,
     updateFilters,
     toggleAllOptions,
@@ -64,6 +64,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     'minSkill',
     filterState.minSkill,
   )
+
+  const rareItems = useRareItemSet(rareItemData)
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
@@ -591,31 +593,25 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 aria-label={homepage.FilterDrawer.labels.rareItems}
                 aria-controls="rare-items-list"
                 placeholder={homepage.FilterDrawer.placeholders.rareItems}
-                itemList={useOptionsSet(
-                  auctionedItemOptions,
-                  filterState.itemSet,
-                )}
-                onItemSelect={useCallback(
-                  (option: Option) => updateFilters('itemSet', option.value),
-                  [updateFilters],
-                )}
+                itemList={rareItems.itemList}
+                onItemSelect={({ name }) => rareItems.action.toggle(name)}
                 onKeyPress={blurOnEnter}
                 enterKeyHint="done"
               />
-              <Chip
+              {/* <Chip
                 overrideStatus={
-                  filterState.itemSet.size === auctionedItemOptions.length
+                  filterState.auctionIds.size === auctionedItemOptions.length
                 }
                 onClick={() =>
-                  toggleAllOptions('itemSet', auctionedItemOptions)
+                  toggleAllOptions('auctionIds', auctionedItemOptions)
                 }
               >
                 {homepage.FilterDrawer.toggleAll.items}
-              </Chip>
+              </Chip> */}
             </S.InputWrapper>
             <S.ChipWrapper id="rare-items-list">
-              {[...filterState.itemSet].map((item) => (
-                <Chip key={item} onClose={() => updateFilters('itemSet', item)}>
+              {Object.keys(rareItems.selectedItemData).map((item) => (
+                <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
                   {item}
                 </Chip>
               ))}
