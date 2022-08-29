@@ -50,7 +50,6 @@ declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
   skillKey: string[]
   imbuementsSet: string[]
   charmsSet: string[]
-  itemSet: string[]
   questSet: string[]
   outfitSet: string[]
   storeOutfitSet: string[]
