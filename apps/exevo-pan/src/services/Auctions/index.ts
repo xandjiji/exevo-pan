@@ -83,7 +83,8 @@ export default class AuctionsClient {
         .filter(({ days }) => days.includes(currentDate))
         .filter(({ active }) => active)
         .filter(
-          ({ timestamp }) =>
+          ({ confirmed, timestamp }) =>
+            confirmed ||
             currentTimestamp - timestamp >= MILLISECONDS_IN.MINUTE * 15,
         )
         .map(({ id }) => id)
