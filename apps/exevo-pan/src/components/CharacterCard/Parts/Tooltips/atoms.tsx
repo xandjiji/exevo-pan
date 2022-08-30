@@ -6,6 +6,7 @@ import CharmIcon from 'assets/svgs/charms.svg'
 import BookIcon from 'assets/svgs/book.svg'
 import PeopleIcon from 'assets/svgs/people.svg'
 import StarIcon from 'assets/svgs/star.svg'
+import BossIcon from 'assets/svgs/goblin.svg'
 import { IconProps } from './types'
 
 export const TitleWrapper = ({
@@ -36,4 +37,5 @@ export const Icons: Record<string, React.FC<JSX.IntrinsicElements['svg']>> = {
   Quest: (args) => <Icon icon={<BookIcon />} {...args} />,
   Hireling: (args) => <Icon icon={<PeopleIcon />} {...args} />,
   Achievements: (args) => <Icon icon={<StarIcon />} {...args} />,
+  Boss: (args) => <Icon icon={<BossIcon />} {...args} />,
 }

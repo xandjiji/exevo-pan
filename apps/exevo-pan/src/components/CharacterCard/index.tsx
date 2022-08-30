@@ -10,11 +10,14 @@ import {
   ImbuementsTooltip,
   CharmsTooltip,
   QuestsTooltip,
+  BossPoints,
   SpecialTags,
 } from './Parts'
 import CharacterModal from './CharacterModal'
 import * as S from './atoms'
 import { CharacterCardProps } from './types'
+
+const BOSS_SLOT_POINTS = 500
 
 const CharacterCard = ({
   characterData,
@@ -46,6 +49,7 @@ const CharacterCard = ({
     quests,
     charmInfo,
     preySlot,
+    bossPoints,
   } = characterData
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
@@ -111,6 +115,7 @@ const CharacterCard = ({
               <ImbuementsTooltip items={imbuements} />
               <CharmsTooltip items={charms} />
               <QuestsTooltip items={quests} />
+              <BossPoints bossPoints={bossPoints} />
             </S.FlexColumn>
 
             <S.FlexColumn storeColumn>
@@ -120,6 +125,11 @@ const CharacterCard = ({
               />
 
               <S.Checkbox label="Prey Slot" checked={preySlot} />
+
+              <S.Checkbox
+                label="Boss Slot"
+                checked={bossPoints >= BOSS_SLOT_POINTS}
+              />
 
               {tcInvested !== '0' && (
                 <div

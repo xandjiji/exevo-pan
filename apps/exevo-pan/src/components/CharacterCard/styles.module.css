@@ -7,6 +7,6 @@
 @media (max-width: 767px) {
   .lazy:not(:hover) {
     content-visibility: auto;
-    contain-intrinsic-size: 373px;
+    contain-intrinsic-size: 370px;
   }
 }

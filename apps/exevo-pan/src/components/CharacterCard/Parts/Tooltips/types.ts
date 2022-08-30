@@ -14,6 +14,10 @@ export interface CharacterAchievementsProps
   achievementPoints: number
 }
 
+export interface BossPointsProps extends React.HTMLAttributes<HTMLDivElement> {
+  bossPoints: number
+}
+
 export interface CharacterHirelingsProps
   extends React.HTMLAttributes<HTMLDivElement> {
   hirelingsInfo: HirelingsInfo
