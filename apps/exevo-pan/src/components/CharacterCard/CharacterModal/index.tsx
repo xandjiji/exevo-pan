@@ -11,6 +11,7 @@ import {
   ImbuementsTooltip,
   CharmsTooltip,
   QuestsTooltip,
+  BossPoints,
   Achievements,
   Hirelings,
 } from 'components/CharacterCard/Parts'
@@ -30,7 +31,7 @@ import { CharacterModalProps } from './types'
 
 /*
 --lateralMargin: 14px;
---cardFixedHeight: 470px;
+--cardFixedHeight: 498px;
 --cardMaxMobileWidth: 368px;
 --gridMobileHeight: 60vh;
 --scrollbarWidth: 6px;
@@ -68,6 +69,7 @@ const CharacterModal = ({
     storeOutfits,
     storeMounts,
     achievementPoints,
+    bossPoints,
   } = characterData
 
   const {
@@ -150,6 +152,7 @@ const CharacterModal = ({
                 charmInfo={charmInfo}
               />
               <QuestsTooltip placement="top-start" items={quests} />
+              <BossPoints bossPoints={bossPoints} />
               <Hirelings hirelingsInfo={hirelings} />
               <Achievements achievementPoints={achievementPoints} />
             </S.TooltipSection>
