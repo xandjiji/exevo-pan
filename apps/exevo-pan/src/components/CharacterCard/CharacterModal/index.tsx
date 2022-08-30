@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Dialog, Tabs, Sticker } from 'components/Atoms'
+import { Dialog, Tabs } from 'components/Atoms'
 import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
 import {
   Head,
@@ -135,17 +135,8 @@ const CharacterModal = ({
               <button
                 type="button"
                 onClick={() => setExpandedSkills(true)}
-                /* @ ToDo: remove `relative` */
-                className="text-primaryHighlight clickable relative ml-auto flex w-fit cursor-pointer items-center gap-1 rounded px-1 py-0.5"
+                className="text-primaryHighlight clickable ml-auto flex w-fit cursor-pointer items-center gap-1 rounded px-1 py-0.5"
               >
-                {/* @ ToDo: remove this once its no longer a new feature */}
-                <Sticker
-                  localStorageKey="more-skills-info-32932"
-                  className="absolute -top-2.5 -right-4"
-                  style={{ transform: 'rotate(20deg)' }}
-                >
-                  New
-                </Sticker>
                 <MoreInfoIcon className="fill-onSurface h-4 w-4 shrink-0" />
                 {common.CharacterCard.CharacterModal.moreInfo}
               </button>
