@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
+import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import {
   Drawer,
   DrawerFooter,
@@ -27,7 +28,7 @@ import { FilterDrawerProps } from './types'
 
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
-    translations: { homepage },
+    translations: { common, homepage },
   } = useTranslations()
 
   const { current: historyPage } = useRef(isHistory())
@@ -675,6 +676,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
             </Tooltip>
+
+            {Object.keys(tagsDictionary).map((tag) => (
+              <Chip
+                key={tag}
+                overrideStatus={filterState.tags.has(tag)}
+                onClick={() => updateFilters('tags', tag)}
+              >
+                {common.CharacterCard.SpecialTags[tag] ?? tag}
+              </Chip>
+            ))}
           </S.ChipWrapper>
         </FilterGroup>
       </Drawer.Body>
