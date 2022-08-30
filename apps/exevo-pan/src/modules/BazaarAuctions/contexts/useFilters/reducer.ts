@@ -6,6 +6,15 @@ const updateFiltersReducer = (
   action: Action,
 ): FiltersContextState => {
   switch (action.type) {
+    case 'SET_FILTER':
+      return {
+        ...state,
+        filterState: {
+          ...state.filterState,
+          [action.key]: action.value,
+        },
+      }
+
     case 'UPDATE_FILTER':
       if (state.filterState[action.key] instanceof Set) {
         return {

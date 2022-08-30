@@ -26,6 +26,7 @@ const DEFAULT_STATE: FiltersContextValues = {
   defaultValues,
   activeFilterCount: countActiveFilters(defaultValues, initialFilterState),
   updateFilters: () => {},
+  setFilters: () => {},
   toggleAllOptions: () => {},
   dispatch: () => {},
 }
@@ -47,6 +48,12 @@ export const FiltersProvider = ({
     setUrlValues(state.filterState)
   }, [state.filterState])
 
+  const setFilters = useCallback(
+    (key: keyof FilterOptions, value: any) =>
+      dispatch({ type: 'SET_FILTER', key, value }),
+    [],
+  )
+
   const updateFilters = useCallback(
     (key: keyof FilterOptions, value: any) =>
       dispatch({ type: 'UPDATE_FILTER', key, value }),
@@ -61,7 +68,13 @@ export const FiltersProvider = ({
 
   return (
     <FiltersContext.Provider
-      value={{ ...state, updateFilters, toggleAllOptions, dispatch }}
+      value={{
+        ...state,
+        updateFilters,
+        setFilters,
+        toggleAllOptions,
+        dispatch,
+      }}
     >
       {children}
     </FiltersContext.Provider>

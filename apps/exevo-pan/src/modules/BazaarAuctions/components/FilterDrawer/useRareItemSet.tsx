@@ -1,7 +1,27 @@
 import { useState, useMemo, useCallback } from 'react'
 
-const useRareItemSet = (rareItemData: RareItemData) => {
+const useRareItemSet = (
+  rareItemData: RareItemData,
+  dispatch: (key: keyof FilterOptions, value: any) => void,
+) => {
   const [selectedItemData, setSelectedItemData] = useState<RareItemData>({})
+
+  const setSelectedItemDataAndDispatch: typeof setSelectedItemData =
+    useCallback(
+      (newState) => {
+        setSelectedItemData((prev) => {
+          const nextState =
+            newState instanceof Function ? newState(prev) : newState
+
+          dispatch(
+            'auctionIds',
+            new Set<number>(Object.values(nextState).flat()),
+          )
+          return nextState
+        })
+      },
+      [dispatch],
+    )
 
   const itemList: Option[] = useMemo(() => {
     const selectedItems = new Set(Object.keys(selectedItemData))
@@ -15,7 +35,7 @@ const useRareItemSet = (rareItemData: RareItemData) => {
 
   const toggle = useCallback(
     (item: string) =>
-      setSelectedItemData((prev) => {
+      setSelectedItemDataAndDispatch((prev) => {
         const newItems = { ...prev }
         if (newItems[item]) {
           delete newItems[item]
@@ -25,12 +45,15 @@ const useRareItemSet = (rareItemData: RareItemData) => {
 
         return newItems
       }),
-    [rareItemData, selectedItemData],
+    [setSelectedItemDataAndDispatch, rareItemData, selectedItemData],
   )
 
   const toggleAll = useCallback(
-    () => setSelectedItemData(() => (allSelected ? {} : { ...rareItemData })),
-    [rareItemData, allSelected],
+    () =>
+      setSelectedItemDataAndDispatch(() =>
+        allSelected ? {} : { ...rareItemData },
+      ),
+    [setSelectedItemDataAndDispatch, rareItemData, allSelected],
   )
 
   return {
