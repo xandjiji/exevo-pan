@@ -3,3 +3,9 @@ export interface FetchAuctionPageParameters extends Partial<FilterBodyPayload> {
 }
 
 export type CacheObject = Record<string, PaginatedData<CharacterObject>>
+
+export type RawHighlightedData = {
+  name: string
+  expiration: number
+  metadata: string
+}

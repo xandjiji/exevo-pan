@@ -1,20 +1,26 @@
 /* eslint-disable no-console */
-import { endpoints, paths } from 'Constants'
+import { endpoints } from 'Constants'
 import { serializeBody } from 'shared-utils/dist/contracts/Filters/utils'
 import {
   DEFAULT_PAGINATION_OPTIONS,
   DEFAULT_SORT_OPTIONS,
   DEFAULT_FILTER_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
+import { readableCurrentDate, MILLISECONDS_IN } from 'utils'
 import { buildHeaders } from './utils'
-import { FetchAuctionPageParameters, CacheObject } from './types'
+import {
+  FetchAuctionPageParameters,
+  CacheObject,
+  RawHighlightedData,
+} from './types'
 
 const CACHE_MAX_AGE = 180000
+const MINIMUM_HIGHLIGHTED_AMOUNT = 2
 
 export default class AuctionsClient {
   static cache: CacheObject = {}
 
-  static highlightedAuctionsUrl = `${endpoints.STATIC_DATA}${paths.HIGHLIGHTED_AUCTIONS}`
+  static highlightedAuctionsUrl = `${endpoints.BACKOFFICE_API}`
 
   static getCache(
     key: string,
@@ -64,14 +70,60 @@ export default class AuctionsClient {
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
     try {
       const response = await fetch(this.highlightedAuctionsUrl)
-      const auctions: CharacterObject[] = await response.json()
-
-      const currentTimestamp = +new Date() / 1000
-      const activeAuctions = auctions.filter(
-        (auction) => auction.auctionEnd > currentTimestamp,
+      const dirtyData: RawHighlightedData[] = await response.json()
+      const parsedData: HighlightedAuctionData[] = dirtyData.map(
+        ({ metadata }) => JSON.parse(metadata),
       )
 
-      return activeAuctions
+      const currentTimestamp = +new Date()
+
+      const currentDate = readableCurrentDate()
+
+      const activeHighlightedIds = parsedData
+        .filter(({ days }) => days.includes(currentDate))
+        .filter(({ active }) => active)
+        .filter(
+          ({ timestamp }) =>
+            currentTimestamp - timestamp >= MILLISECONDS_IN.MINUTE * 15,
+        )
+        .map(({ id }) => id)
+
+      const highlightedAuctionIds = new Set<number>(activeHighlightedIds)
+
+      const { page: highlightedAuctions } = await this.fetchAuctionPage({
+        endpoint: endpoints.CURRENT_AUCTIONS,
+        paginationOptions: {
+          ...DEFAULT_PAGINATION_OPTIONS,
+          pageSize: 50,
+        },
+        filterOptions: {
+          ...DEFAULT_FILTER_OPTIONS,
+          auctionIds: highlightedAuctionIds,
+        },
+      })
+
+      if (highlightedAuctions.length >= MINIMUM_HIGHLIGHTED_AMOUNT) {
+        return highlightedAuctions
+      }
+
+      const { page: highestValueAuctions } = await this.fetchAuctionPage({
+        endpoint: endpoints.CURRENT_AUCTIONS,
+        filterOptions: {
+          ...DEFAULT_FILTER_OPTIONS,
+          biddedOnly: true,
+        },
+        sortOptions: {
+          sortingMode: 2,
+          descendingOrder: true,
+        },
+      })
+
+      return [
+        ...highlightedAuctions,
+        ...highestValueAuctions
+          .filter(({ id }) => !highlightedAuctionIds.has(id))
+          .slice(0, MINIMUM_HIGHLIGHTED_AMOUNT - highlightedAuctions.length),
+      ].sort((a, b) => a.auctionEnd - b.auctionEnd)
     } catch (error: unknown) {
       console.log(error)
       return []
