@@ -130,6 +130,16 @@ export default {
   LoadingLabel: 'Cargando',
   UpdatingDataText: 'Actualizando datos...',
   PreferredLanguageLabel: 'Cambiar idioma',
+  SpecialTags: {
+    manyCharms: 'Muchos charms',
+    manyQuests: 'Muchas quests',
+    manyMounts: 'Muchas mounts',
+    manyStoreCosmetics: 'Muchos cosmeticos comprados 🛍️',
+    rareMounts: 'Mounts raras ✨',
+    rareOutfits: 'Outfits raras 💎',
+    secondaryEkSkill: 'Skill secundaria ⚔️',
+    soulwarAvailable: 'Soul War disponible 💀',
+  },
   CharacterCard: {
     linkLabel: 'Ir a la página del personaje',
     bidLabelText: {
@@ -165,16 +175,6 @@ export default {
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
     highlightLabelText: '¡Destaque su subasta!',
-    SpecialTags: {
-      manyCharms: 'Muchos charms',
-      manyQuests: 'Muchas quests',
-      manyMounts: 'Muchas mounts',
-      manyStoreCosmetics: 'Muchos cosmeticos comprados 🛍️',
-      rareMounts: 'Mounts raras ✨',
-      rareOutfits: 'Outfits raras 💎',
-      secondaryEkSkill: 'Skill secundaria ⚔️',
-      soulwarAvailable: 'Soul War disponible 💀',
-    },
     expand: 'Expandir para ver todos los detalles de la subasta',
     CharacterModal: {
       /* @ ToDo: i18n */

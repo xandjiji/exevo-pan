@@ -129,6 +129,16 @@ export default {
   LoadingLabel: 'Carregando',
   UpdatingDataText: 'Atualizando dados...',
   PreferredLanguageLabel: 'Mudar idioma',
+  SpecialTags: {
+    manyCharms: 'Muitos charms',
+    manyQuests: 'Muitas quests',
+    manyMounts: 'Muitas mounts',
+    manyStoreCosmetics: 'Muitos cosmeticos comprados 🛍️',
+    rareMounts: 'Mounts raras ✨',
+    rareOutfits: 'Outfits raras 💎',
+    secondaryEkSkill: 'Skill secundária ⚔️',
+    soulwarAvailable: 'Soul War disponível 💀',
+  },
   CharacterCard: {
     linkLabel: 'Ir para a página do personagem',
     bidLabelText: {
@@ -163,16 +173,6 @@ export default {
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',
     highlightLabelText: 'Destaque seu leilão!',
-    SpecialTags: {
-      manyCharms: 'Muitos charms',
-      manyQuests: 'Muitas quests',
-      manyMounts: 'Muitas mounts',
-      manyStoreCosmetics: 'Muitos cosmeticos comprados 🛍️',
-      rareMounts: 'Mounts raras ✨',
-      rareOutfits: 'Outfits raras 💎',
-      secondaryEkSkill: 'Skill secundária ⚔️',
-      soulwarAvailable: 'Soul War disponível 💀',
-    },
     expand: 'Expandir todos os detalhes do leilão',
     CharacterModal: {
       moreInfo: 'Mais informações',

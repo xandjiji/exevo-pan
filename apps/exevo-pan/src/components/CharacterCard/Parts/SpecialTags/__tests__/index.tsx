@@ -21,9 +21,8 @@ describe('<SpecialTags />', () => {
       tags.forEach((tag) => {
         expect(
           screen.getByText(
-            common.en.CharacterCard.SpecialTags[
-              tag as keyof typeof common.en.CharacterCard.SpecialTags
-            ] ?? tag,
+            common.en.SpecialTags[tag as keyof typeof common.en.SpecialTags] ??
+              tag,
           ),
         ).toBeInTheDocument()
       })

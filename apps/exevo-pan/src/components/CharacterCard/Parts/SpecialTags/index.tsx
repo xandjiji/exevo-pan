@@ -17,7 +17,7 @@ const SpecialTags = ({ character, className, ...props }: SpecialTagsProps) => {
   return (
     <div className={clsx('flex flex-wrap gap-2', className)} {...props}>
       {tags.map((tag) => (
-        <Chip key={tag}>{common.CharacterCard.SpecialTags[tag] ?? tag}</Chip>
+        <Chip key={tag}>{common.SpecialTags[tag] ?? tag}</Chip>
       ))}
     </div>
   )

@@ -683,7 +683,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 overrideStatus={filterState.tags.has(tag)}
                 onClick={() => updateFilters('tags', tag)}
               >
-                {common.CharacterCard.SpecialTags[tag] ?? tag}
+                {common.SpecialTags[tag] ?? tag}
               </Chip>
             ))}
           </S.ChipWrapper>
