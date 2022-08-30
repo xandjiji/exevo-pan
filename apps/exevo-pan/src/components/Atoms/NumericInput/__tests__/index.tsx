@@ -67,4 +67,6 @@ describe('<NumericInput />', () => {
     userEvent.clear(inputElement)
     expect(inputElement).toBeInvalid()
   })
+
+  test.todo('test `alwaysValid` prop')
 })
