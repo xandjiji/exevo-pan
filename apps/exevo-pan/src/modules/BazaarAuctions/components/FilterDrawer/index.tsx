@@ -66,7 +66,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     filterState.minSkill,
   )
 
-  const rareItems = useRareItemSet(rareItemData, setFilters)
+  const rareItems = useRareItemSet({
+    rareItemData,
+    currentFilterSet: filterState.auctionIds,
+    dispatch: setFilters,
+  })
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0

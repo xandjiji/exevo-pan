@@ -1,10 +1,21 @@
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback, useEffect } from 'react'
 
-const useRareItemSet = (
-  rareItemData: RareItemData,
-  dispatch: (key: keyof FilterOptions, value: any) => void,
-) => {
+type UseRareItemSet = {
+  rareItemData: RareItemData
+  dispatch: (key: keyof FilterOptions, value: any) => void
+  currentFilterSet: Set<number>
+}
+
+const useRareItemSet = ({
+  rareItemData,
+  currentFilterSet,
+  dispatch,
+}: UseRareItemSet) => {
   const [selectedItemData, setSelectedItemData] = useState<RareItemData>({})
+
+  useEffect(() => {
+    if (currentFilterSet.size === 0) setSelectedItemData({})
+  }, [currentFilterSet])
 
   const setSelectedItemDataAndDispatch: typeof setSelectedItemData =
     useCallback(
