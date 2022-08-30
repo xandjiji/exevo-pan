@@ -33,6 +33,8 @@ export default {
       serverLocation: 'Server location',
       storeItems: 'Store items',
       minSkill: 'Minimum skill level',
+      tcInvested: 'Tibia Coins invested',
+      biddedOnly: 'Bidded only',
       rareItems: 'Rare items',
       rareAchievements: 'Rare achievements',
       misc: 'Misc',

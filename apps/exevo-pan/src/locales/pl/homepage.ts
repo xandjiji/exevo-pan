@@ -32,6 +32,10 @@ export default {
       serverLocation: 'Serwer',
       storeItems: 'Store items',
       minSkill: 'Minimalny level skilla',
+      /* @ ToDo: i18n */
+      tcInvested: 'Tibia Coins invested',
+      /* @ ToDo: i18n */
+      biddedOnly: 'Bidded only',
       rareItems: 'Rzadkie przedmioty',
       rareAchievements: 'Rzadkie osiągnięcia',
       misc: 'Różne',

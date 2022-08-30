@@ -1,7 +1,14 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { Drawer, DrawerFooter, Chip, Slider, Checkbox } from 'components/Atoms'
+import {
+  Drawer,
+  DrawerFooter,
+  Chip,
+  Slider,
+  Checkbox,
+  NumericInput,
+} from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
@@ -64,6 +71,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [minSkill, setMinSkill] = useDebouncedFilter<number>(
     'minSkill',
     filterState.minSkill,
+  )
+
+  const [bossPoints, setBossPoints] = useDebouncedFilter<number>(
+    'bossPoints',
+    filterState.bossPoints,
+  )
+
+  const [tcInvested, setTcInvested] = useDebouncedFilter<number>(
+    'tcInvested',
+    filterState.tcInvested,
   )
 
   const rareItems = useRareItemSet({
@@ -445,6 +462,28 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           filterKey="storeMountSet"
           options={storeMountValues}
         />
+
+        <FilterGroup>
+          <NumericInput
+            label="Boss points"
+            value={bossPoints}
+            onChange={setBossPoints}
+            placeholder="0"
+            alwaysValid
+            className="w-32"
+          />
+        </FilterGroup>
+
+        <FilterGroup>
+          <NumericInput
+            label={homepage.FilterDrawer.labels.tcInvested}
+            value={tcInvested}
+            onChange={setTcInvested}
+            placeholder="0"
+            alwaysValid
+            className="w-32"
+          />
+        </FilterGroup>
 
         <FilterGroup>
           <S.InputWrapper>
