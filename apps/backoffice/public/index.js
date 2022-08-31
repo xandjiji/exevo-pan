@@ -3,9 +3,23 @@ const API =
     ? 'http://localhost:9696/api'
     : '/api'
 
-let highlighted = []
+const REVALIDATION_ENDPOINT = 'https://exevopan.com/api/revalidate'
 
 const [, authToken] = window.location.search.split('=')
+
+const buildRevalidationRoute = (route) =>
+  `${REVALIDATION_ENDPOINT}?secret=${authToken}${
+    route ? `&route=${route}` : ''
+  }`
+
+let highlighted = []
+
+const dispatchRevalidation = () => {
+  const { value } = document.getElementById('route-input')
+
+  toggleLoadingState()
+  fetch(buildRevalidationRoute(value)).finally(toggleLoadingState)
+}
 
 const today = () => {
   const date = new Date()
