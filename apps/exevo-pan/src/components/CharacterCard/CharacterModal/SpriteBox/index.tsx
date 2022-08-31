@@ -1,4 +1,3 @@
-import { useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import {
@@ -8,13 +7,11 @@ import {
 import { formatNumberWithCommas } from 'utils'
 import { Checkbox } from 'components/CharacterCard/atoms'
 import { SpritePortrait } from 'components/Atoms'
-import { NotifyErrorClient } from 'services'
 import { addonCheck } from './utils'
 import styles from './styles.module.css'
 import { SpriteBoxProps } from './types'
 
 const SpriteBox = ({
-  auctionId,
   offset = false,
   name,
   sex,
@@ -34,11 +31,6 @@ const SpriteBox = ({
 
   const isRare = isRareMount || isRareOutfit
   const showAddon = type !== undefined
-
-  const notifyError = useCallback(
-    () => NotifyErrorClient.setMessage({ auctionId, name, src }),
-    [auctionId, name, src],
-  )
 
   return (
     <div
@@ -63,7 +55,6 @@ const SpriteBox = ({
         src={src}
         width={offset ? 64 : 32}
         height={offset ? 64 : 32}
-        onError={notifyError}
         className="pointer-events-none"
         style={showAddon ? { boxShadow: 'unset' } : undefined}
       />
