@@ -12,6 +12,7 @@ import {
   FetchAuctionPageParameters,
   CacheObject,
   RawHighlightedData,
+  FetchAuctionByIdParameters,
 } from './types'
 
 const CACHE_MAX_AGE = 180000
@@ -129,5 +130,37 @@ export default class AuctionsClient {
       console.log(error)
       return []
     }
+  }
+
+  static async fetchAuctionById({
+    auctionId,
+    endpoint,
+  }: FetchAuctionByIdParameters): Promise<CharacterObject | undefined> {
+    const bodyPayload = serializeBody({
+      paginationOptions: DEFAULT_PAGINATION_OPTIONS,
+      sortOptions: DEFAULT_SORT_OPTIONS,
+      filterOptions: {
+        ...DEFAULT_FILTER_OPTIONS,
+        auctionIds: new Set([auctionId]),
+      },
+    })
+
+    const cachedResult = this.getCache(bodyPayload, endpoint)
+    if (cachedResult) {
+      const [foundAuction] = cachedResult.page
+      return foundAuction
+    }
+
+    const response = await fetch(endpoint, {
+      method: 'POST',
+      headers: buildHeaders(endpoint),
+      body: bodyPayload,
+    })
+
+    const data: FilterResponse = await response.json()
+    this.setCache(bodyPayload, endpoint, data)
+
+    const [foundAuction] = data.page
+    return foundAuction
   }
 }
