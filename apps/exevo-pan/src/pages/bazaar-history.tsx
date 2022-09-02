@@ -90,7 +90,7 @@ export default function BazaarHistory({
       </Head>
 
       <Main>
-        <UrlAuction endpoint={endpoints.HISTORY_AUCTIONS} />
+        <UrlAuction endpoint={endpoints.HISTORY_AUCTIONS} past />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}

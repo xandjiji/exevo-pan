@@ -7,7 +7,7 @@ import { AuctionsClient } from 'services'
 import { urlParameters } from 'Constants'
 import { UrlAuctionProps } from './types'
 
-const UrlAuction = ({ endpoint }: UrlAuctionProps) => {
+const UrlAuction = ({ endpoint, past = false }: UrlAuctionProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -38,7 +38,9 @@ const UrlAuction = ({ endpoint }: UrlAuctionProps) => {
   return (
     <>
       {loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
-      {auction && <CharacterModal characterData={auction} onClose={onClose} />}
+      {auction && (
+        <CharacterModal characterData={auction} onClose={onClose} past={past} />
+      )}
     </>
   )
 }
