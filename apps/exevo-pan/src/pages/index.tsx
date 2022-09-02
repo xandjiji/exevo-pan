@@ -5,6 +5,7 @@ import {
   FiltersProvider,
   AuctionsProvider,
   AuctionsGrid,
+  UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
 import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
@@ -91,6 +92,7 @@ export default function Home({
       </Head>
 
       <Main>
+        <UrlAuction endpoint={endpoints.CURRENT_AUCTIONS} />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}

@@ -5,6 +5,7 @@ import {
   FiltersProvider,
   AuctionsProvider,
   AuctionsGrid,
+  UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
 import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
@@ -89,6 +90,7 @@ export default function BazaarHistory({
       </Head>
 
       <Main>
+        <UrlAuction endpoint={endpoints.HISTORY_AUCTIONS} />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
