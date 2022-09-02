@@ -1,7 +1,8 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { SpritePortrait } from 'components/Atoms'
+import { SpritePortrait, CopyButton } from 'components/Atoms'
 import ExternalIcon from 'assets/svgs/external.svg'
+import ShareIcon from 'assets/svgs/anchor.svg'
 import { CharacterMiniCardProps } from './types'
 
 const DEFAULT_OUTFIT_SRC =
@@ -16,6 +17,7 @@ const CharacterMiniCard = ({
   forceSubtitle,
   linkUrl,
   highlighted = false,
+  permalink,
   className,
   ...props
 }: CharacterMiniCardProps) => {
@@ -45,7 +47,7 @@ const CharacterMiniCard = ({
       <div>
         <p
           className={clsx(
-            'flex items-center text-base font-bold',
+            'flex items-center gap-1 text-base font-bold',
             highlighted ? 'text-greenHighlight' : 'text-primaryHighlight',
           )}
         >
@@ -56,12 +58,13 @@ const CharacterMiniCard = ({
               target="_blank"
               rel="noreferrer noopener external"
               onClick={(event) => event.stopPropagation()}
-              className="text-none ml-1"
+              className="text-none"
             >
-              <ExternalIcon className="clickable fill-onSurface -mt-0.5 h-7 w-7 rounded p-0.5" />
+              <ExternalIcon className="clickable fill-onSurface h-7 w-7 rounded p-0.5" />
               {common.CharacterTooltipLabel}
             </a>
           )}
+          {permalink && <CopyButton linkIcon big copyString={permalink} />}
         </p>
         <span className="text-tsm text-onSurface font-light tracking-wider">
           {forceSubtitle ??
