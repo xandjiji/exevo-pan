@@ -41,6 +41,7 @@ const CharacterModal = ({
   characterData,
   onClose,
   past = false,
+  permalink,
 }: CharacterModalProps) => {
   const {
     id,
@@ -109,6 +110,7 @@ const CharacterModal = ({
         level={level}
         vocationId={vocationId}
         serverName={serverData.serverName}
+        permalink={permalink}
       />
 
       <div className="custom-scrollbar -mx-[var(--lateralMargin)] h-[var(--gridMobileHeight)] overflow-y-auto px-[var(--lateralMargin)] md:h-[var(--cardFixedHeight)]">

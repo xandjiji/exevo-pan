@@ -11,8 +11,9 @@ import Newsticker from 'components/Newsticker'
 import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
+import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle } from 'utils'
-import { routes, endpoints, jsonld } from 'Constants'
+import { routes, endpoints, jsonld, urlParameters } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -31,6 +32,7 @@ export default function BazaarHistory({
   blogPosts,
 }: HistoryStaticProps) {
   const { translations } = useTranslations()
+  const { locale } = useRouter()
 
   const pageTitle = buildPageTitle(translations.bazaarHistory.Meta.title)
 
@@ -105,7 +107,14 @@ export default function BazaarHistory({
               defaultSortingMode={sortingMode}
               defaultDescendingOrder={descendingOrder}
             >
-              <AuctionsGrid past />
+              <AuctionsGrid
+                past
+                permalinkResolver={(auctionId) =>
+                  `${buildUrl('', locale)}?${
+                    urlParameters.AUCTION_ID
+                  }=${auctionId}`
+                }
+              />
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>

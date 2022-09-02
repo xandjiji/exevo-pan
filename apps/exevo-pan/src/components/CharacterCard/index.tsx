@@ -25,6 +25,7 @@ const CharacterCard = ({
   lazyRender = false,
   expandable = false,
   past = false,
+  permalink,
   ...props
 }: CharacterCardProps) => {
   const {
@@ -155,6 +156,7 @@ const CharacterCard = ({
           characterData={characterData}
           onClose={() => setExpanded(false)}
           past={past}
+          permalink={permalink}
         />
       )}
     </>

@@ -6,4 +6,5 @@ export interface HeadProps
   highlighted?: boolean
   serverName: string
   children?: React.ReactNode
+  permalink?: string
 }

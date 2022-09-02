@@ -11,8 +11,9 @@ import Newsticker from 'components/Newsticker'
 import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
+import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle } from 'utils'
-import { endpoints, routes, jsonld } from 'Constants'
+import { endpoints, routes, jsonld, urlParameters } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
@@ -33,6 +34,7 @@ export default function Home({
   blogPosts,
 }: HomeStaticProps) {
   const { translations } = useTranslations()
+  const { locale } = useRouter()
 
   const pageTitle = buildPageTitle(translations.homepage.Meta.title)
 
@@ -107,7 +109,14 @@ export default function Home({
               defaultSortingMode={sortingMode}
               defaultDescendingOrder={descendingOrder}
             >
-              <AuctionsGrid past={false} />
+              <AuctionsGrid
+                past={false}
+                permalinkResolver={(auctionId) =>
+                  `${buildUrl(routes.HOME.slice(0, -1), locale)}?${
+                    urlParameters.AUCTION_ID
+                  }=${auctionId}`
+                }
+              />
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>

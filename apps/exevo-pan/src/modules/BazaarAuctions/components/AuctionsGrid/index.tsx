@@ -15,7 +15,7 @@ import { AuctionGridProps } from './types'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-const AuctionsGrid = ({ past }: AuctionGridProps) => {
+const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -123,6 +123,7 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
                 lazyRender
                 expandable
                 past={past}
+                permalink={permalinkResolver?.(auction.id)}
               />
             ))}
           {page.map((auction) => (
@@ -132,6 +133,7 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
               characterData={auction}
               expandable
               past={past}
+              permalink={permalinkResolver?.(auction.id)}
             />
           ))}
         </div>
