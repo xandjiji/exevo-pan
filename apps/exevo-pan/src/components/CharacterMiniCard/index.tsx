@@ -1,8 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { SpritePortrait, CopyButton } from 'components/Atoms'
+import { SpritePortrait, CopyButton, Sticker } from 'components/Atoms'
 import ExternalIcon from 'assets/svgs/external.svg'
-import ShareIcon from 'assets/svgs/anchor.svg'
 import { CharacterMiniCardProps } from './types'
 
 const DEFAULT_OUTFIT_SRC =
@@ -64,7 +63,23 @@ const CharacterMiniCard = ({
               {common.CharacterTooltipLabel}
             </a>
           )}
-          {permalink && <CopyButton linkIcon big copyString={permalink} />}
+          {/* @ ToDo: remove this element with the sticker */}
+          {permalink && (
+            <div className="relative">
+              {/* @ ToDo: remove this sticker */}
+              <Sticker
+                localStorageKey="permalink-19875422"
+                style={{
+                  position: 'absolute',
+                  top: 5,
+                  right: -32,
+                }}
+              >
+                New
+              </Sticker>
+              <CopyButton linkIcon big copyString={permalink} />
+            </div>
+          )}
         </p>
         <span className="text-tsm text-onSurface font-light tracking-wider">
           {forceSubtitle ??
