@@ -32,8 +32,6 @@ export interface AuctionsContextState {
 export interface AuctionsContextValues extends AuctionsContextState {
   highlightedAuctions: CharacterObject[]
   handlePaginatorFetch: (pageIndex: number) => void
-  auctionFromUrl?: CharacterObject
-  cleanupAuctionFromUrl: () => void
   dispatch: React.Dispatch<Action>
 }
 
