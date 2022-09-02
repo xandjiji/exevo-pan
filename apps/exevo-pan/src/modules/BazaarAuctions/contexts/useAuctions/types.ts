@@ -1,6 +1,7 @@
 export type Action =
   | {
       type: 'SET_LOADING'
+      value: boolean
     }
   | {
       type: 'SET_PAGE_INDEX'
@@ -31,6 +32,7 @@ export interface AuctionsContextState {
 export interface AuctionsContextValues extends AuctionsContextState {
   highlightedAuctions: CharacterObject[]
   handlePaginatorFetch: (pageIndex: number) => void
+  auctionFromUrl?: CharacterObject
   dispatch: React.Dispatch<Action>
 }
 

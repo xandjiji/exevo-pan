@@ -1,6 +1,7 @@
 import {
   createContext,
   useContext,
+  useState,
   useReducer,
   useRef,
   useEffect,
@@ -9,7 +10,7 @@ import {
 import { dequal } from 'dequal'
 import { useTranslations } from 'contexts/useTranslation'
 import { urlParametersState } from 'utils'
-import { useIsMounted } from 'hooks'
+import { useIsMounted, useSyncUrlState } from 'hooks'
 import { AuctionsClient } from 'services'
 import { LoadingAlert } from 'components/Atoms'
 import AuctionsReducer from './reducer'
@@ -60,6 +61,27 @@ export const AuctionsProvider = ({
     descendingOrder,
   } = state
 
+  const [auctionId] = useSyncUrlState<number | undefined>({
+    defaultValue: undefined,
+    key: 'auctionId',
+    decode: Number,
+  })
+
+  const [auctionFromUrl, setAuctionFromUrl] = useState<
+    CharacterObject | undefined
+  >()
+
+  useEffect(() => {
+    if (auctionId) {
+      dispatch({ type: 'SET_LOADING', value: true })
+      AuctionsClient.fetchAuctionById({ auctionId, endpoint })
+        .then((auction) => {
+          setAuctionFromUrl(auction)
+        })
+        .finally(() => dispatch({ type: 'SET_LOADING', value: false }))
+    }
+  }, [])
+
   const { filterState, activeFilterCount } = useFilters()
   const lastFilterState = useRef(filterState)
 
@@ -71,7 +93,7 @@ export const AuctionsProvider = ({
       filterOptions: FilterOptions,
       newFilterCount: number,
     ) => {
-      dispatch({ type: 'SET_LOADING' })
+      dispatch({ type: 'SET_LOADING', value: true })
 
       lastFilterState.current = filterOptions
       const paginationOptions = {
@@ -162,6 +184,7 @@ export const AuctionsProvider = ({
         ...state,
         highlightedAuctions,
         handlePaginatorFetch,
+        auctionFromUrl,
         dispatch,
       }}
     >
