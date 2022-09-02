@@ -1,6 +1,8 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useState, useRef, useCallback } from 'react'
+import { useSyncUrlState } from 'hooks'
 import { formatNumberWithCommas, checkKeyboardTrigger } from 'utils'
+import { urlParameters } from 'Constants'
 import {
   Head,
   TagButton,
@@ -58,8 +60,16 @@ const CharacterCard = ({
   const ref = useRef<HTMLDivElement>()
 
   const [isExpanded, setExpanded] = useState(false)
+  const [, setAuctionIdUrl] = useSyncUrlState<number | undefined>({
+    key: urlParameters.AUCTION_ID,
+    defaultValue: undefined,
+  })
 
-  const expandCard = useCallback(() => setExpanded(true), [])
+  const expandCard = useCallback(() => {
+    if (permalink) setAuctionIdUrl(id)
+    setExpanded(true)
+  }, [id, permalink])
+
   const handleKeyPress = useCallback(
     (event: React.KeyboardEvent) => {
       if (checkKeyboardTrigger(event.code)) expandCard()
@@ -154,7 +164,10 @@ const CharacterCard = ({
       {isExpanded && (
         <CharacterModal
           characterData={characterData}
-          onClose={() => setExpanded(false)}
+          onClose={() => {
+            if (permalink) setAuctionIdUrl(undefined)
+            setExpanded(false)
+          }}
           past={past}
           permalink={permalink}
         />
