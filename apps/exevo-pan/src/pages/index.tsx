@@ -112,7 +112,7 @@ export default function Home({
               <AuctionsGrid
                 past={false}
                 permalinkResolver={(auctionId) =>
-                  `${buildUrl(routes.HOME.slice(0, -1), locale)}?${
+                  `${buildUrl('', locale)}?${
                     urlParameters.AUCTION_ID
                   }=${auctionId}`
                 }

@@ -110,7 +110,7 @@ export default function BazaarHistory({
               <AuctionsGrid
                 past
                 permalinkResolver={(auctionId) =>
-                  `${buildUrl('', locale)}?${
+                  `${buildUrl(routes.BAZAAR_HISTORY, locale)}?${
                     urlParameters.AUCTION_ID
                   }=${auctionId}`
                 }
