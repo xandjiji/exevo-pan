@@ -3,6 +3,7 @@ import { useState, useCallback, useRef, useEffect } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
 import CharacterCard from 'components/CharacterCard'
+import CharacterModal from 'components/CharacterCard/CharacterModal'
 import EmptyState from 'components/EmptyState'
 import FilterIcon from 'assets/svgs/filter.svg'
 import { useAuctions } from '../../contexts/useAuctions'
@@ -26,6 +27,8 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
     handlePaginatorFetch,
     highlightedAuctions,
     shouldDisplayHighlightedAuctions,
+    auctionFromUrl,
+    cleanupAuctionFromUrl,
   } = useAuctions()
   const { activeFilterCount } = useFilters()
 
@@ -149,6 +152,13 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
           />
         )}
       </div>
+      {auctionFromUrl && (
+        <CharacterModal
+          characterData={auctionFromUrl}
+          onClose={cleanupAuctionFromUrl}
+          past={past}
+        />
+      )}
     </main>
   )
 }

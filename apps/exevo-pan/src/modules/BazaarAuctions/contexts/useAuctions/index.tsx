@@ -61,7 +61,7 @@ export const AuctionsProvider = ({
     descendingOrder,
   } = state
 
-  const [auctionId] = useSyncUrlState<number | undefined>({
+  const [auctionId, setAuctionIdUrl] = useSyncUrlState<number | undefined>({
     defaultValue: undefined,
     key: 'auctionId',
     decode: Number,
@@ -70,6 +70,11 @@ export const AuctionsProvider = ({
   const [auctionFromUrl, setAuctionFromUrl] = useState<
     CharacterObject | undefined
   >()
+
+  const cleanupAuctionFromUrl = useCallback(() => {
+    setAuctionIdUrl(undefined)
+    setAuctionFromUrl(undefined)
+  }, [setAuctionIdUrl, setAuctionFromUrl])
 
   useEffect(() => {
     if (auctionId) {
@@ -185,6 +190,7 @@ export const AuctionsProvider = ({
         highlightedAuctions,
         handlePaginatorFetch,
         auctionFromUrl,
+        cleanupAuctionFromUrl,
         dispatch,
       }}
     >
