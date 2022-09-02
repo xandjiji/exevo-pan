@@ -4,6 +4,7 @@ import { useSyncUrlState } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
 import CharacterModal from 'components/CharacterCard/CharacterModal'
 import { AuctionsClient } from 'services'
+import { urlParameters } from 'Constants'
 import { UrlAuctionProps } from './types'
 
 const UrlAuction = ({ endpoint }: UrlAuctionProps) => {
@@ -13,7 +14,7 @@ const UrlAuction = ({ endpoint }: UrlAuctionProps) => {
 
   const [auctionId, setAuctionId] = useSyncUrlState<number | undefined>({
     defaultValue: undefined,
-    key: 'auctionId',
+    key: urlParameters.AUCTION_ID,
     decode: Number,
   })
 
