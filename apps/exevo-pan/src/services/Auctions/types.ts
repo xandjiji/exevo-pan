@@ -8,9 +8,3 @@ export interface FetchAuctionByIdParameters {
 }
 
 export type CacheObject = Record<string, PaginatedData<CharacterObject>>
-
-export type RawHighlightedData = {
-  name: string
-  expiration: number
-  metadata: string
-}

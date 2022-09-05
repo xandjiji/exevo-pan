@@ -3,7 +3,9 @@ import { headers } from './headers'
 
 declare const HIGHLIGHTED: KVNamespace
 declare const AUTH_TOKEN: string
-const SECONDS_IN_A_MONTH = 2592000
+const MILLISECONDS_IN_A_MONTH = 2592000000
+
+const LIST_KEY = 'highlighted-auctions'
 
 addEventListener('fetch', (event) => {
   event.respondWith(handleRequest(event))
@@ -19,16 +21,31 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
   }
 
   if (method === 'POST') {
-    const { authToken, ...newHighlight } = await request.json()
+    const { authToken, ...data } = await request.json()
+    const newHighlight = data as HighlightedAuctionData
     if (authToken !== AUTH_TOKEN) {
       return new Response('invalid credentials')
     }
 
-    const value = JSON.stringify(newHighlight)
+    let highlightedAuctions: HighlightedAuctionData[] = JSON.parse(
+      (await HIGHLIGHTED.get(LIST_KEY)) ?? '[]',
+    )
 
-    await HIGHLIGHTED.put(newHighlight.timestamp.toString(), value, {
-      metadata: value,
-      expirationTtl: SECONDS_IN_A_MONTH,
+    highlightedAuctions = highlightedAuctions.filter(
+      ({ timestamp }) => timestamp !== newHighlight.timestamp,
+    )
+    highlightedAuctions.push(newHighlight)
+
+    highlightedAuctions.sort((a, b) => b.timestamp - a.timestamp)
+
+    const newAuctions = JSON.stringify(
+      highlightedAuctions.filter(
+        ({ timestamp }) => timestamp >= +new Date() - MILLISECONDS_IN_A_MONTH,
+      ),
+    )
+
+    await HIGHLIGHTED.put(LIST_KEY, newAuctions, {
+      metadata: newAuctions,
     })
 
     return new Response(`[${newHighlight.nickname}] was updated successfully`, {
@@ -37,8 +54,8 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
   }
 
   if (method === 'GET') {
-    const values = await HIGHLIGHTED.list<HighlightedAuctionData>()
-    return new Response(JSON.stringify(values.keys), { headers })
+    const values = (await HIGHLIGHTED.get(LIST_KEY)) ?? '[]'
+    return new Response(values, { headers })
   }
 
   if (method === 'DELETE') {
@@ -47,7 +64,18 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
       return new Response('invalid credentials')
     }
 
-    await HIGHLIGHTED.delete(id)
+    const highlightedAuctions: HighlightedAuctionData[] = JSON.parse(
+      (await HIGHLIGHTED.get(LIST_KEY)) ?? '[]',
+    )
+
+    const newAuctions = JSON.stringify(
+      highlightedAuctions.filter(({ timestamp }) => timestamp !== id),
+    )
+
+    await HIGHLIGHTED.put(LIST_KEY, newAuctions, {
+      metadata: newAuctions,
+    })
+
     return new Response(`[${id}] was deleted successfully`, { headers })
   }
 

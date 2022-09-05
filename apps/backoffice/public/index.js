@@ -202,9 +202,7 @@ const paintAverages = ({ dayCount, totalIncome }) => {
 
 fetch(API).then((response) => {
   response.json().then((data) => {
-    highlighted = data
-      .map(({ metadata }) => JSON.parse(metadata))
-      .sort((a, b) => b.timestamp - a.timestamp)
+    highlighted = data.sort((a, b) => b.timestamp - a.timestamp)
 
     console.log(highlighted)
 

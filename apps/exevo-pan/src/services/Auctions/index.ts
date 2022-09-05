@@ -11,7 +11,6 @@ import { buildHeaders } from './utils'
 import {
   FetchAuctionPageParameters,
   CacheObject,
-  RawHighlightedData,
   FetchAuctionByIdParameters,
 } from './types'
 
@@ -71,16 +70,14 @@ export default class AuctionsClient {
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
     try {
       const response = await fetch(this.highlightedAuctionsUrl)
-      const dirtyData: RawHighlightedData[] = await response.json()
-      const parsedData: HighlightedAuctionData[] = dirtyData.map(
-        ({ metadata }) => JSON.parse(metadata),
-      )
+      const highlightedAuctionsData: HighlightedAuctionData[] =
+        await response.json()
 
       const currentTimestamp = +new Date()
 
       const currentDate = readableCurrentDate()
 
-      const activeHighlightedIds = parsedData
+      const activeHighlightedIds = highlightedAuctionsData
         .filter(({ days }) => days.includes(currentDate))
         .filter(({ active }) => active)
         .filter(
