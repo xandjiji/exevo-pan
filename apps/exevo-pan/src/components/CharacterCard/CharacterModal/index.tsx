@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Dialog, Tabs, Sticker } from 'components/Atoms'
+import { Dialog, Tabs } from 'components/Atoms'
 import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
 import {
   Head,
@@ -11,11 +11,12 @@ import {
   ImbuementsTooltip,
   CharmsTooltip,
   QuestsTooltip,
+  BossPoints,
   Achievements,
   Hirelings,
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
-import { formatNumberWithCommas, totalCharacterInvestment } from 'utils'
+import { formatNumberWithCommas } from 'utils'
 import MoreInfoIcon from 'assets/svgs/moreInfo.svg'
 import OutfitIcon from 'assets/svgs/outfit.svg'
 import MountIcon from 'assets/svgs/horse.svg'
@@ -30,7 +31,7 @@ import { CharacterModalProps } from './types'
 
 /*
 --lateralMargin: 14px;
---cardFixedHeight: 470px;
+--cardFixedHeight: 498px;
 --cardMaxMobileWidth: 368px;
 --gridMobileHeight: 60vh;
 --scrollbarWidth: 6px;
@@ -40,6 +41,7 @@ const CharacterModal = ({
   characterData,
   onClose,
   past = false,
+  permalink,
 }: CharacterModalProps) => {
   const {
     id,
@@ -68,6 +70,7 @@ const CharacterModal = ({
     storeOutfits,
     storeMounts,
     achievementPoints,
+    bossPoints,
   } = characterData
 
   const {
@@ -78,10 +81,7 @@ const CharacterModal = ({
 
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
-  const tcInvested = useMemo(
-    () => formatNumberWithCommas(totalCharacterInvestment(characterData)),
-    [characterData],
-  )
+  const tcInvested = formatNumberWithCommas(characterData.tcInvested)
 
   const tabRef = useRef<HTMLDivElement>(null)
   const isDesktop = useIsDesktop()
@@ -110,6 +110,7 @@ const CharacterModal = ({
         level={level}
         vocationId={vocationId}
         serverName={serverData.serverName}
+        permalink={permalink}
       />
 
       <div className="custom-scrollbar -mx-[var(--lateralMargin)] h-[var(--gridMobileHeight)] overflow-y-auto px-[var(--lateralMargin)] md:h-[var(--cardFixedHeight)]">
@@ -138,17 +139,8 @@ const CharacterModal = ({
               <button
                 type="button"
                 onClick={() => setExpandedSkills(true)}
-                /* @ ToDo: remove `relative` */
-                className="text-primaryHighlight clickable relative ml-auto flex w-fit cursor-pointer items-center gap-1 rounded px-1 py-0.5"
+                className="text-primaryHighlight clickable ml-auto flex w-fit cursor-pointer items-center gap-1 rounded px-1 py-0.5"
               >
-                {/* @ ToDo: remove this once its no longer a new feature */}
-                <Sticker
-                  localStorageKey="more-skills-info-32932"
-                  className="absolute -top-2.5 -right-4"
-                  style={{ transform: 'rotate(20deg)' }}
-                >
-                  New
-                </Sticker>
                 <MoreInfoIcon className="fill-onSurface h-4 w-4 shrink-0" />
                 {common.CharacterCard.CharacterModal.moreInfo}
               </button>
@@ -162,6 +154,7 @@ const CharacterModal = ({
                 charmInfo={charmInfo}
               />
               <QuestsTooltip placement="top-start" items={quests} />
+              <BossPoints bossPoints={bossPoints} />
               <Hirelings hirelingsInfo={hirelings} />
               <Achievements achievementPoints={achievementPoints} />
             </S.TooltipSection>
@@ -233,7 +226,6 @@ const CharacterModal = ({
                     <SpriteBox
                       key={name}
                       offset
-                      auctionId={id}
                       name={name}
                       sex={sex}
                       src={resolvers.outfit(name, sex, type)}
@@ -253,7 +245,6 @@ const CharacterModal = ({
                         <SpriteBox
                           key={name}
                           offset
-                          auctionId={id}
                           name={name}
                           sex={sex}
                           src={resolvers.storeOutfit(name, sex, type)}
@@ -278,7 +269,6 @@ const CharacterModal = ({
                       <SpriteBox
                         key={name}
                         offset
-                        auctionId={id}
                         name={name}
                         sex={sex}
                         src={resolvers.mount(name)}
@@ -297,7 +287,6 @@ const CharacterModal = ({
                           <SpriteBox
                             key={name}
                             offset
-                            auctionId={id}
                             name={name}
                             sex={sex}
                             src={resolvers.storeMount(name)}
@@ -323,7 +312,6 @@ const CharacterModal = ({
                       <SpriteBox
                         // eslint-disable-next-line react/no-array-index-key
                         key={`${childIndex}-${name}`}
-                        auctionId={id}
                         name={name}
                         amount={amount}
                         sex={sex}

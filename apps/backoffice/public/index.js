@@ -3,9 +3,23 @@ const API =
     ? 'http://localhost:9696/api'
     : '/api'
 
-let highlighted = []
+const REVALIDATION_ENDPOINT = 'https://exevopan.com/api/revalidate'
 
 const [, authToken] = window.location.search.split('=')
+
+const buildRevalidationRoute = (route) =>
+  `${REVALIDATION_ENDPOINT}?secret=${authToken}${
+    route ? `&route=${route}` : ''
+  }`
+
+let highlighted = []
+
+const dispatchRevalidation = () => {
+  const { value } = document.getElementById('route-input')
+
+  toggleLoadingState()
+  fetch(buildRevalidationRoute(value)).finally(toggleLoadingState)
+}
 
 const today = () => {
   const date = new Date()
@@ -32,6 +46,25 @@ const afterRequest = async (response) => {
   const newResponse = `STATUS: ${status} - MESSAGE: ${responseMessage}\n`
   logElement.value += newResponse
   toggleLoadingState()
+}
+
+/************* 👍 CONFIRM **************/
+
+const confirmAction = (timestamp) => {
+  const auction = getAuction(timestamp)
+
+  toggleLoadingState()
+  fetch(API, {
+    method: 'POST',
+    body: JSON.stringify({ ...auction, confirmed: true, authToken }),
+  }).then(afterRequest)
+}
+
+const confirmButton = (timestamp) => {
+  const auction = getAuction(timestamp)
+  return auction.confirmed
+    ? ''
+    : `<button onclick="confirmAction(${timestamp})">👍</button>`
 }
 
 /************* ⏸️ TOGGLE **************/
@@ -109,6 +142,7 @@ const dateButton = (timestamp) =>
 const actionsTemplate = (timestamp) => {
   let buttons = ''
 
+  buttons += confirmButton(timestamp)
   buttons += dateButton(timestamp)
   buttons += toggleButton(timestamp)
   buttons += deleteButton(timestamp)

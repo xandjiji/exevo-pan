@@ -9,6 +9,7 @@ export const DEFAULT_SORT_OPTIONS: SortOptions = {
 }
 
 export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
+  auctionIds: new Set([]),
   nicknameFilter: '',
   vocation: new Set([]),
   pvp: new Set([]),
@@ -19,10 +20,12 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   maxLevel: 3000,
   minSkill: 10,
   maxSkill: 150,
+  bossPoints: 0,
+  tcInvested: 0,
+  tags: new Set([]),
   skillKey: new Set([]),
   imbuementsSet: new Set([]),
   charmsSet: new Set([]),
-  itemSet: new Set([]),
   rareNick: false,
   addon: 3,
   sex: false,
@@ -32,7 +35,6 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   achievementSet: new Set([]),
   storeOutfitSet: new Set([]),
   storeMountSet: new Set([]),
-  soulwarAvailable: false,
   charmExpansion: false,
   preySlot: false,
   huntingSlot: false,
@@ -43,19 +45,21 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   goldPouch: false,
   hireling: false,
   transferAvailable: false,
+  biddedOnly: false,
 }
 
 export const DEFAULT_SERIALIZED_FILTER_OPTIONS: SerializedFilterOptions = {
   ...DEFAULT_FILTER_OPTIONS,
+  auctionIds: [],
   vocation: [],
   pvp: [],
   battleye: [],
   location: [],
   serverSet: [],
+  tags: [],
   skillKey: [],
   imbuementsSet: [],
   charmsSet: [],
-  itemSet: [],
   questSet: [],
   outfitSet: [],
   mountSet: [],

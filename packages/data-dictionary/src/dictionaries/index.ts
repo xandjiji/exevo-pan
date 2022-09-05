@@ -1,3 +1,4 @@
+export * as tag from './characterTags'
 export * as charm from './charm'
 export * as imbuement from './imbuement'
 export * as quest from './quest'

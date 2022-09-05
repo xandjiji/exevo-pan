@@ -1,10 +1,8 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useState, useRef, useMemo, useCallback } from 'react'
-import {
-  formatNumberWithCommas,
-  totalCharacterInvestment,
-  checkKeyboardTrigger,
-} from 'utils'
+import { memo, useState, useRef, useCallback } from 'react'
+import { useSyncUrlState } from 'hooks'
+import { formatNumberWithCommas, checkKeyboardTrigger } from 'utils'
+import { urlParameters } from 'Constants'
 import {
   Head,
   TagButton,
@@ -14,11 +12,14 @@ import {
   ImbuementsTooltip,
   CharmsTooltip,
   QuestsTooltip,
+  BossPoints,
   SpecialTags,
 } from './Parts'
 import CharacterModal from './CharacterModal'
 import * as S from './atoms'
 import { CharacterCardProps } from './types'
+
+const BOSS_SLOT_POINTS = 500
 
 const CharacterCard = ({
   characterData,
@@ -26,6 +27,7 @@ const CharacterCard = ({
   lazyRender = false,
   expandable = false,
   past = false,
+  permalink,
   ...props
 }: CharacterCardProps) => {
   const {
@@ -50,18 +52,24 @@ const CharacterCard = ({
     quests,
     charmInfo,
     preySlot,
+    bossPoints,
   } = characterData
 
-  const tcInvested = useMemo(
-    () => formatNumberWithCommas(totalCharacterInvestment(characterData)),
-    [characterData],
-  )
+  const tcInvested = formatNumberWithCommas(characterData.tcInvested)
 
   const ref = useRef<HTMLDivElement>()
 
   const [isExpanded, setExpanded] = useState(false)
+  const [, setAuctionIdUrl] = useSyncUrlState<number | undefined>({
+    key: urlParameters.AUCTION_ID,
+    defaultValue: undefined,
+  })
 
-  const expandCard = useCallback(() => setExpanded(true), [])
+  const expandCard = useCallback(() => {
+    if (permalink) setAuctionIdUrl(id)
+    setExpanded(true)
+  }, [id, permalink])
+
   const handleKeyPress = useCallback(
     (event: React.KeyboardEvent) => {
       if (checkKeyboardTrigger(event.code)) expandCard()
@@ -118,6 +126,7 @@ const CharacterCard = ({
               <ImbuementsTooltip items={imbuements} />
               <CharmsTooltip items={charms} />
               <QuestsTooltip items={quests} />
+              <BossPoints bossPoints={bossPoints} />
             </S.FlexColumn>
 
             <S.FlexColumn storeColumn>
@@ -127,6 +136,11 @@ const CharacterCard = ({
               />
 
               <S.Checkbox label="Prey Slot" checked={preySlot} />
+
+              <S.Checkbox
+                label="Boss Slot"
+                checked={bossPoints >= BOSS_SLOT_POINTS}
+              />
 
               {tcInvested !== '0' && (
                 <div
@@ -150,8 +164,12 @@ const CharacterCard = ({
       {isExpanded && (
         <CharacterModal
           characterData={characterData}
-          onClose={() => setExpanded(false)}
+          onClose={() => {
+            if (permalink) setAuctionIdUrl(undefined)
+            setExpanded(false)
+          }}
           past={past}
+          permalink={permalink}
         />
       )}
     </>

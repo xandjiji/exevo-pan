@@ -129,6 +129,17 @@ export default {
   LoadingLabel: 'Wczytuję',
   UpdatingDataText: 'Odświeżam dane',
   PreferredLanguageLabel: 'Zmień język',
+  SpecialTags: {
+    manyCharms: 'Dużo charmów',
+    manyQuests: 'Dużo questów',
+    manyMounts: 'Dużo mountów',
+    manyStoreCosmetics: 'Duzo przedmiotów z Tibia Store 🛍️',
+    rareMounts: 'Rzadkie mountów ✨',
+    rareOutfits: 'Rzadkie outfitów 💎',
+    /* @ ToDo: i18n */
+    secondaryEkSkill: 'Secondary skill ⚔️',
+    soulwarAvailable: 'Soul War available 💀',
+  },
   CharacterCard: {
     linkLabel: 'Idź do strony postaci',
     bidLabelText: {
@@ -163,17 +174,6 @@ export default {
     AuctionStatus: 'Status Aukcji',
     BidStatus: 'Status Oferty',
     highlightLabelText: 'Podświetl swoją aukcje',
-    SpecialTags: {
-      manyCharms: 'Dużo charmów',
-      manyQuests: 'Dużo questów',
-      manyMounts: 'Dużo mountów',
-      manyStoreCosmetics: 'Duzo przedmiotów z Tibia Store 🛍️',
-      rareMounts: 'Rzadkie mountów ✨',
-      rareOutfits: 'Rzadkie outfitów 💎',
-      /* @ ToDo: i18n */
-      secondaryEkSkill: 'Secondary skill ⚔️',
-      soulwarAvailable: 'Soul War available 💀',
-    },
     expand: 'Rozwiń aby zobaczyć pełne szczegóły aukcji',
     CharacterModal: {
       /* @ ToDo: i18n */

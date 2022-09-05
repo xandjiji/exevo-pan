@@ -1,9 +1,8 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
-import { applySort, paginateData } from 'auction-queries'
+import { filterCharacters, applySort, paginateData } from 'auction-queries'
 import { deserializeBody } from 'shared-utils/dist/contracts/Filters/utils'
 import { auctions } from './Data/auctions'
 import { filterOldAuctions } from './utils'
-import { filterCharacters } from './filterWrapper'
 
 export const filterCurrentAuctions = async (
   event: APIGatewayProxyEvent,

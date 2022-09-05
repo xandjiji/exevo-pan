@@ -7,6 +7,7 @@ import { NumericInputProps } from './types'
 const NumericInput = ({
   value = 0,
   step = 100,
+  alwaysValid = false,
   onChange,
   ...props
 }: NumericInputProps) => {
@@ -45,7 +46,7 @@ const NumericInput = ({
       value={displayedValue}
       onChange={handleChange}
       onKeyDown={handleKey}
-      error={touched && isZero}
+      error={!alwaysValid && touched && isZero}
       {...props}
     />
   )

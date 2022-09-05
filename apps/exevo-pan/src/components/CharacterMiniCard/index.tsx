@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { SpritePortrait } from 'components/Atoms'
+import { SpritePortrait, CopyButton, Sticker } from 'components/Atoms'
 import ExternalIcon from 'assets/svgs/external.svg'
 import { CharacterMiniCardProps } from './types'
 
@@ -16,6 +16,7 @@ const CharacterMiniCard = ({
   forceSubtitle,
   linkUrl,
   highlighted = false,
+  permalink,
   className,
   ...props
 }: CharacterMiniCardProps) => {
@@ -45,7 +46,7 @@ const CharacterMiniCard = ({
       <div>
         <p
           className={clsx(
-            'flex items-center text-base font-bold',
+            'flex items-center gap-1 text-base font-bold',
             highlighted ? 'text-greenHighlight' : 'text-primaryHighlight',
           )}
         >
@@ -56,11 +57,28 @@ const CharacterMiniCard = ({
               target="_blank"
               rel="noreferrer noopener external"
               onClick={(event) => event.stopPropagation()}
-              className="text-none ml-1"
+              className="text-none"
             >
-              <ExternalIcon className="clickable fill-onSurface -mt-0.5 h-7 w-7 rounded p-0.5" />
+              <ExternalIcon className="clickable fill-onSurface h-7 w-7 rounded p-0.5" />
               {common.CharacterTooltipLabel}
             </a>
+          )}
+          {/* @ ToDo: remove this element with the sticker */}
+          {permalink && (
+            <div className="relative">
+              {/* @ ToDo: remove this sticker */}
+              <Sticker
+                localStorageKey="permalink-19875422"
+                style={{
+                  position: 'absolute',
+                  top: 5,
+                  right: -32,
+                }}
+              >
+                New
+              </Sticker>
+              <CopyButton linkIcon big copyString={permalink} />
+            </div>
           )}
         </p>
         <span className="text-tsm text-onSurface font-light tracking-wider">

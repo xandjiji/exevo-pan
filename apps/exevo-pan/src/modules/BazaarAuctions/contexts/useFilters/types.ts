@@ -5,6 +5,11 @@ export type Action =
       value: any
     }
   | {
+      type: 'SET_FILTER'
+      key: keyof FilterOptions
+      value: any
+    }
+  | {
       type: 'TOGGLE_ALL_OPTIONS'
       key: keyof FilterOptions
       allOptions: Option[]
@@ -25,6 +30,7 @@ export interface FiltersContextState {
 
 export interface FiltersContextValues extends FiltersContextState {
   updateFilters: (key: keyof FilterOptions, value: any) => void
+  setFilters: (key: keyof FilterOptions, value: any) => void
   toggleAllOptions: (key: keyof FilterOptions, allOptions: Option[]) => void
   dispatch: React.Dispatch<Action>
 }

@@ -1,9 +1,5 @@
-import { vocation } from 'shared-utils/dist/vocations'
-import { memoize } from 'utils'
-import { common } from 'locales'
-import { RareOutfitTestParams, RareOutfitTest } from './types'
-
-type SpecialTag = keyof typeof common.en.CharacterCard.SpecialTags
+import { dictionary } from 'data-dictionary/dist/dictionaries/characterTags'
+import { vocation } from './vocations'
 
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26
@@ -21,22 +17,26 @@ export const rareMountSet = new Set<string>([
   'Ripptor',
 ])
 
-const rareOutfitTests: RareOutfitTest[] = [
-  ({ name, type, sex }) => name === 'Mage' && !sex && type >= 2,
-  ({ name, type, sex }) => name === 'Summoner' && sex && type >= 2,
-  ({ name, type }) => name === 'Elementalist' && type > 0,
-  ({ name, type }) => name === 'Revenant' && type > 0,
-  ({ name, type }) => name === 'Battle Mage' && type > 0,
-  ({ name, type }) => name === 'Demon Outfit' && type >= 2,
-  ({ name, type }) => name === 'Fire-Fighter' && (type === 1 || type === 3),
-  ({ name }) => name === 'Golden Outfit',
-  ({ name }) => name === 'Makeshift Warrior',
-  ({ name }) => name === 'Royal Costume',
-]
+type RareOutfitTestParams = {
+  sex: boolean
+} & Outfit
 
-export const testRareOutfit = memoize((params: RareOutfitTestParams): boolean =>
-  rareOutfitTests.some((test) => test(params)),
-)
+export const testRareOutfit = (params: RareOutfitTestParams): boolean => {
+  const rareOutfitTests: Array<typeof testRareOutfit> = [
+    ({ name, type, sex }) => name === 'Mage' && !sex && type >= 2,
+    ({ name, type, sex }) => name === 'Summoner' && sex && type >= 2,
+    ({ name, type }) => name === 'Elementalist' && type > 0,
+    ({ name, type }) => name === 'Revenant' && type > 0,
+    ({ name, type }) => name === 'Battle Mage' && type > 0,
+    ({ name, type }) => name === 'Demon Outfit' && type >= 2,
+    ({ name, type }) => name === 'Fire-Fighter' && (type === 1 || type === 3),
+    ({ name }) => name === 'Golden Outfit',
+    ({ name }) => name === 'Makeshift Warrior',
+    ({ name }) => name === 'Royal Costume',
+  ]
+
+  return rareOutfitTests.some((test) => test(params))
+}
 
 const knightSkills: Array<keyof CharacterSkillsObject> = [
   'axe',
@@ -46,11 +46,13 @@ const knightSkills: Array<keyof CharacterSkillsObject> = [
 
 const HIGH_SKILL_VALUE = 100
 
-export const getCharacterTags = (character: CharacterObject): SpecialTag[] => {
+type Tag = keyof typeof dictionary
+
+export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
   const { charms, quests, mounts, outfits, storeMounts, storeOutfits, sex } =
     character
 
-  const tags: SpecialTag[] = []
+  const tags: Tag[] = []
 
   if (charms.length >= CHARM_CHECK) tags.push('manyCharms')
   if (quests.length >= QUEST_CHECK) tags.push('manyQuests')

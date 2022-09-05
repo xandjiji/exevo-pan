@@ -1,8 +1,8 @@
+import { getCharacterTags } from 'shared-utils/dist/getCharacterTags'
 import { screen } from '@testing-library/react'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { common } from 'locales'
 import SpecialTags from '..'
-import { getCharacterTags } from '../utils'
 
 const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
@@ -21,9 +21,8 @@ describe('<SpecialTags />', () => {
       tags.forEach((tag) => {
         expect(
           screen.getByText(
-            common.en.CharacterCard.SpecialTags[
-              tag as keyof typeof common.en.CharacterCard.SpecialTags
-            ] ?? tag,
+            common.en.SpecialTags[tag as keyof typeof common.en.SpecialTags] ??
+              tag,
           ),
         ).toBeInTheDocument()
       })

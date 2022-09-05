@@ -7,13 +7,16 @@ import { useAuctions } from '../../../contexts/useAuctions'
 import { Button } from '../atoms'
 import styles from '../styles.module.css'
 
-const sortModes = ['Auction end', 'Level', 'Price', 'Price (bidded only)']
 const sortModesTranslationKey = {
   'Auction end': 'auctionEnd',
   Level: 'level',
   Price: 'price',
-  'Price (bidded only)': 'priceBidded',
-} as Record<string, string>
+}
+const sortModes: Array<keyof typeof sortModesTranslationKey> = [
+  'Auction end',
+  'Level',
+  'Price',
+]
 
 const SortingDialog = () => {
   const {

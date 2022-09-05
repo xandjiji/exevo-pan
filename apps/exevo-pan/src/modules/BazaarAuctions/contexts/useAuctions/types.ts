@@ -1,6 +1,7 @@
 export type Action =
   | {
       type: 'SET_LOADING'
+      value: boolean
     }
   | {
       type: 'SET_PAGE_INDEX'

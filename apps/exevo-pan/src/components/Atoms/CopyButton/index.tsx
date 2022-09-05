@@ -3,6 +3,7 @@ import { useState, useCallback, useEffect } from 'react'
 import clsx from 'clsx'
 import { copyToClipboard } from 'utils'
 import CopyIcon from 'assets/svgs/copy.svg'
+import LinkIcon from 'assets/svgs/anchor.svg'
 import ValidIcon from 'assets/svgs/valid.svg'
 import { CopyButtonProps } from './types'
 
@@ -10,6 +11,8 @@ const CopyButton = ({
   className,
   copyString,
   small = false,
+  big = false,
+  linkIcon = false,
   ...props
 }: CopyButtonProps) => {
   const {
@@ -47,14 +50,33 @@ const CopyButton = ({
         <ValidIcon
           className={clsx(
             'fill-greenHighlight animate-rollIn',
-            small ? 'h-4 w-4 p-[1px]' : 'h-6 w-6 p-[3px]',
+            small
+              ? 'h-4 w-4 p-[1px]'
+              : big
+              ? 'h-7 w-7 p-0.5'
+              : 'h-6 w-6 p-[3px]',
+          )}
+        />
+      ) : linkIcon ? (
+        <LinkIcon
+          className={clsx(
+            'fill-onSurface',
+            small
+              ? 'h-4 w-4 p-[1px]'
+              : big
+              ? 'h-7 w-7 p-0.5'
+              : 'h-6 w-6 p-[3px]',
           )}
         />
       ) : (
         <CopyIcon
           className={clsx(
             'fill-onSurface',
-            small ? 'h-4 w-4 p-[1px]' : 'h-6 w-6 p-[3px]',
+            small
+              ? 'h-4 w-4 p-[1px]'
+              : big
+              ? 'h-7 w-7 p-0.5'
+              : 'h-6 w-6 p-[3px]',
           )}
         />
       )}

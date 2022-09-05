@@ -1,9 +1,5 @@
 import { endpoints, paths } from 'Constants'
-import {
-  buildServerOptions,
-  filterItemData,
-  buildRareItemsOptions,
-} from './utils'
+import { buildServerOptions, filterItemData } from './utils'
 
 export default class DrawerFieldsClient {
   static serverDataUrl = `${endpoints.STATIC_DATA}${paths.SERVER_DATA}`
@@ -19,12 +15,9 @@ export default class DrawerFieldsClient {
     return serverOptions
   }
 
-  static async fetchAuctionedItemOptions(): Promise<Option[]> {
+  static async fetchAuctionedItemOptions(): Promise<RareItemData> {
     const response = await fetch(this.rareItemDataUrl)
     const data = (await response.json()) as RareItemData
-    const rareItemData = filterItemData(data)
-    const auctionedItemOptions = buildRareItemsOptions(rareItemData)
-
-    return auctionedItemOptions
+    return filterItemData(data)
   }
 }

@@ -1,13 +1,23 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useRef, useCallback } from 'react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { Drawer, DrawerFooter, Chip, Slider, Checkbox } from 'components/Atoms'
+import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
+import {
+  Drawer,
+  DrawerFooter,
+  Chip,
+  Slider,
+  Checkbox,
+  NumericInput,
+  Sticker,
+} from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
+import useRareItemSet from './useRareItemSet'
 import FilterGroup from './FilterGroup'
 import LevelInput from './LevelInput'
 import SpritePicker from './SpritePicker'
@@ -19,14 +29,14 @@ import { FilterDrawerProps } from './types'
 
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
-    translations: { homepage },
+    translations: { common, homepage },
   } = useTranslations()
 
   const { current: historyPage } = useRef(isHistory())
 
   const {
     serverOptions,
-    auctionedItemOptions,
+    rareItemData,
     imbuementOptions,
     charmOptions,
     questOptions,
@@ -38,9 +48,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   } = useDrawerFields()
   const {
     filterState,
-    defaultValues,
     activeFilterCount,
     updateFilters,
+    setFilters,
     toggleAllOptions,
     dispatch,
   } = useFilters()
@@ -65,6 +75,22 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     filterState.minSkill,
   )
 
+  const [bossPoints, setBossPoints] = useDebouncedFilter<number>(
+    'bossPoints',
+    filterState.bossPoints,
+  )
+
+  const [tcInvested, setTcInvested] = useDebouncedFilter<number>(
+    'tcInvested',
+    filterState.tcInvested,
+  )
+
+  const rareItems = useRareItemSet({
+    rareItemData,
+    currentFilterSet: filterState.auctionIds,
+    dispatch: setFilters,
+  })
+
   const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
 
@@ -86,6 +112,27 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
+        <FilterGroup>
+          {/* @ ToDo: remove this sticker */}
+          <Sticker
+            localStorageKey="biddedonly-3923"
+            style={{
+              float: 'left',
+              transform: 'rotate(-15deg)',
+              position: 'relative',
+              marginLeft: -32,
+              marginTop: -16,
+            }}
+          >
+            New
+          </Sticker>
+          <Checkbox
+            label={homepage.FilterDrawer.labels.biddedOnly}
+            checked={filterState.biddedOnly}
+            onClick={() => updateFilters('biddedOnly', !filterState.biddedOnly)}
+          />
+        </FilterGroup>
+
         <FilterGroup>
           <S.Input
             id="search-nickname-input"
@@ -440,6 +487,54 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         />
 
         <FilterGroup>
+          {/* @ ToDo: remove this sticker */}
+          <Sticker
+            localStorageKey="bosspoints-3923"
+            style={{
+              float: 'left',
+              transform: 'rotate(-15deg)',
+              position: 'relative',
+              marginLeft: -32,
+              marginTop: -16,
+            }}
+          >
+            New
+          </Sticker>
+          <NumericInput
+            label="Boss points"
+            value={bossPoints}
+            onChange={setBossPoints}
+            placeholder="0"
+            alwaysValid
+            className="w-32"
+          />
+        </FilterGroup>
+
+        <FilterGroup>
+          {/* @ ToDo: remove this sticker */}
+          <Sticker
+            localStorageKey="tcinvested-3923"
+            style={{
+              float: 'left',
+              transform: 'rotate(-15deg)',
+              position: 'relative',
+              marginLeft: -32,
+              marginTop: -16,
+            }}
+          >
+            New
+          </Sticker>
+          <NumericInput
+            label={homepage.FilterDrawer.labels.tcInvested}
+            value={tcInvested}
+            onChange={setTcInvested}
+            placeholder="0"
+            alwaysValid
+            className="w-32"
+          />
+        </FilterGroup>
+
+        <FilterGroup>
           <S.InputWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
@@ -591,31 +686,21 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 aria-label={homepage.FilterDrawer.labels.rareItems}
                 aria-controls="rare-items-list"
                 placeholder={homepage.FilterDrawer.placeholders.rareItems}
-                itemList={useOptionsSet(
-                  auctionedItemOptions,
-                  filterState.itemSet,
-                )}
-                onItemSelect={useCallback(
-                  (option: Option) => updateFilters('itemSet', option.value),
-                  [updateFilters],
-                )}
+                itemList={rareItems.itemList}
+                onItemSelect={({ name }) => rareItems.action.toggle(name)}
                 onKeyPress={blurOnEnter}
                 enterKeyHint="done"
               />
               <Chip
-                overrideStatus={
-                  filterState.itemSet.size === auctionedItemOptions.length
-                }
-                onClick={() =>
-                  toggleAllOptions('itemSet', auctionedItemOptions)
-                }
+                overrideStatus={rareItems.allSelected}
+                onClick={rareItems.action.toggleAll}
               >
                 {homepage.FilterDrawer.toggleAll.items}
               </Chip>
             </S.InputWrapper>
             <S.ChipWrapper id="rare-items-list">
-              {[...filterState.itemSet].map((item) => (
-                <Chip key={item} onClose={() => updateFilters('itemSet', item)}>
+              {Object.keys(rareItems.selectedItemData).map((item) => (
+                <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
                   {item}
                 </Chip>
               ))}
@@ -623,9 +708,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </FilterGroup>
         )}
 
+        {/* @ ToDo: remove this sticker */}
         <FilterGroup
           label={homepage.FilterDrawer.labels.misc}
           style={{ border: 'none' }}
+          newSticker
         >
           <S.ChipWrapper>
             <Tooltip
@@ -639,29 +726,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
             </Tooltip>
-            <Tooltip content={homepage.FilterDrawer.tooltips.soulwar}>
+
+            {Object.keys(tagsDictionary).map((tag) => (
               <Chip
-                overrideStatus={filterState.soulwarAvailable}
-                onClick={() => {
-                  if (filterState.soulwarAvailable) {
-                    updateFilters('minLevel', defaultValues.minLevel as number)
-                    updateFilters('soulwarAvailable', false)
-                  } else {
-                    updateFilters('minLevel', 250)
-                    updateFilters('maxLevel', defaultValues.maxLevel as number)
-                    updateFilters('soulwarAvailable', true)
-                  }
-                }}
+                key={tag}
+                overrideStatus={filterState.tags.has(tag)}
+                onClick={() => updateFilters('tags', tag)}
               >
-                {homepage.FilterDrawer.soulwarButton}
-                <S.Emoji
-                  role="img"
-                  aria-label={homepage.FilterDrawer.skullEmoji}
-                >
-                  💀
-                </S.Emoji>
+                {common.SpecialTags[tag] ?? tag}
               </Chip>
-            </Tooltip>
+            ))}
           </S.ChipWrapper>
         </FilterGroup>
       </Drawer.Body>

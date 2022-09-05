@@ -1,10 +1,6 @@
 import { storeItems } from 'data-dictionary/dist/dictionaries/store'
-import { NotifyErrorClient } from 'services'
 
-const getStoreItemValue = (
-  characterStoreItems: CharacterItem[],
-  auctionId: number,
-): number => {
+const getStoreItemValue = (characterStoreItems: CharacterItem[]): number => {
   let sum = 0
 
   characterStoreItems.forEach(({ name, amount }) => {
@@ -12,7 +8,7 @@ const getStoreItemValue = (
     if (foundItem) {
       sum += foundItem.value * amount
     } else {
-      NotifyErrorClient.setMessage({ name, auctionId })
+      /* @ ToDo: notify */
     }
   })
 

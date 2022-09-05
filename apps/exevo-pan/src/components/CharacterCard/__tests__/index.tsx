@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset } from 'utils/test'
-import { formatNumberWithCommas, totalCharacterInvestment } from 'utils'
+import { formatNumberWithCommas } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
@@ -103,9 +103,7 @@ describe('<CharacterCard />', () => {
       expect(preyCheckbox).not.toBeChecked()
     }
 
-    const totalInvestment = formatNumberWithCommas(
-      totalCharacterInvestment(character),
-    )
+    const totalInvestment = formatNumberWithCommas(character.tcInvested)
 
     if (totalInvestment === '0') {
       expect(screen.queryByText(totalInvestment)).not.toBeInTheDocument()

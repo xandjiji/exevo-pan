@@ -71,7 +71,7 @@ export const AuctionsProvider = ({
       filterOptions: FilterOptions,
       newFilterCount: number,
     ) => {
-      dispatch({ type: 'SET_LOADING' })
+      dispatch({ type: 'SET_LOADING', value: true })
 
       lastFilterState.current = filterOptions
       const paginationOptions = {

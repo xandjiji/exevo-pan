@@ -68,6 +68,7 @@ export default async (
       timestamp: +new Date(),
       days: selectedDates,
       active: true,
+      confirmed: false,
       authToken,
     }),
   ])

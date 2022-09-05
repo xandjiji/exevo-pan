@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { ActiveCount, Paginator } from 'components/Atoms'
+import { ActiveCount, Paginator, Sticker } from 'components/Atoms'
 import CharacterCard from 'components/CharacterCard'
 import EmptyState from 'components/EmptyState'
 import FilterIcon from 'assets/svgs/filter.svg'
@@ -15,7 +15,7 @@ import { AuctionGridProps } from './types'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-const AuctionsGrid = ({ past }: AuctionGridProps) => {
+const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
@@ -64,6 +64,18 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
           onClick={() => setDrawerOpen(true)}
           className="relative"
         >
+          {/* @ ToDo: remove this sticker */}
+          <Sticker
+            localStorageKey="new-filters-19875422"
+            style={{
+              position: 'absolute',
+              top: -10,
+              left: -16,
+              transform: 'rotate(-15deg)',
+            }}
+          >
+            New
+          </Sticker>
           <FilterIcon className={styles.icon} />
           {process.browser && (
             <ActiveCount
@@ -123,6 +135,7 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
                 lazyRender
                 expandable
                 past={past}
+                permalink={permalinkResolver?.(auction.id)}
               />
             ))}
           {page.map((auction) => (
@@ -132,6 +145,7 @@ const AuctionsGrid = ({ past }: AuctionGridProps) => {
               characterData={auction}
               expandable
               past={past}
+              permalink={permalinkResolver?.(auction.id)}
             />
           ))}
         </div>

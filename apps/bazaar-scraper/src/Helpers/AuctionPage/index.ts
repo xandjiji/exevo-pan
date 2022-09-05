@@ -2,6 +2,8 @@ import cheerio, { CheerioAPI } from 'cheerio/lib/index'
 import { PostData } from 'Helpers'
 import { sanitizeHtmlString, parseDate, exitIfMaintenance } from 'utils'
 import { ServerData } from 'Data'
+import { totalCharacterInvestment } from 'shared-utils/dist/totalCharacterInvestment'
+import { getCharacterTags } from 'shared-utils/dist/getCharacterTags'
 import {
   quest as questDictionary,
   imbuement as imbuementDictionary,
@@ -239,6 +241,12 @@ export default class AuctionPage {
     return { count, jobs, outfits }
   }
 
+  bossPoints($: CheerioAPI): number {
+    const bossPointsLabel = $('.LabelV:contains("Boss Points:")')
+    const bossPointsElement = bossPointsLabel.next()
+    return stringToNumber(bossPointsElement.text())
+  }
+
   items($: CheerioAPI): number[] {
     const itemImages = $('.AuctionItemsViewBox > .CVIcon')
 
@@ -401,7 +409,7 @@ export default class AuctionPage {
 
     exitIfMaintenance(() => this.maintenanceCheck($))
 
-    return {
+    const characterObject: PartialCharacterObject = {
       id: this.id($),
       nickname: this.nickname($),
       auctionEnd: this.auctionEnd($),
@@ -413,6 +421,9 @@ export default class AuctionPage {
       sex: this.sex($),
       level: this.level($),
       achievementPoints: this.achievementPoints($),
+      bossPoints: this.bossPoints($),
+      tcInvested: 0,
+      tags: [],
       skills: this.skills($),
       items: this.items($),
       charms: this.charms($),
@@ -429,6 +440,11 @@ export default class AuctionPage {
         expansion: this.charmExpansion($),
       },
     }
+
+    characterObject.tcInvested = totalCharacterInvestment(characterObject)
+    characterObject.tags = getCharacterTags(characterObject)
+
+    return characterObject
   }
 
   async checkHistoryAuction(content: string): Promise<HistoryCheck> {

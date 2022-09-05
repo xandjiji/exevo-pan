@@ -32,6 +32,8 @@ export default {
       serverLocation: 'Localização do servidor',
       storeItems: 'Items da store',
       minSkill: 'Skill level mínimo',
+      tcInvested: 'Tibia Coins investidos',
+      biddedOnly: 'Apenas com lance',
       rareAchievements: 'Achievements raros',
       rareItems: 'Items raros',
       misc: 'Diversos',
@@ -49,7 +51,6 @@ export default {
         'Se um item raro não estiver nesta lista é porque não há nenhum leilão com ele no momento.',
       rareNicknames:
         "Nicknames com caracteres especiais (äëïöüÿ'-.,), comprimento de 2-3 caracteres e letras maiúsculas consecutivas (e.g XVI)",
-      soulwar: 'Personagens com nivel 250+ e com a Soul War não completada',
     },
     toggleAll: {
       imbuements: 'Todos os imbuements',
@@ -60,7 +61,6 @@ export default {
     green: 'Verde',
     yellow: 'Amarelo',
     rareNicknamesButton: 'Nicknames raros',
-    soulwarButton: 'Soulwar disponível',
     skullEmoji: 'caveira',
     SpritePicker: {
       item: 'item está selecionado',

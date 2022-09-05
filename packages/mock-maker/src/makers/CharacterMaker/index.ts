@@ -7,6 +7,7 @@ import {
   mount,
   storeMount,
   store,
+  tag,
 } from 'data-dictionary/dist/dictionaries'
 import { auctions } from '../../constants'
 import {
@@ -99,6 +100,9 @@ export const randomCharacter = (): PartialCharacterObject => {
     imbuements: samplesFrom(imbuement.tokens),
     quests: samplesFrom(quest.tokens),
     rareAchievements: samplesFrom(rareAchievement.tokens),
+    tcInvested: randomRange(auctions.tcInvested),
+    bossPoints: randomRange(auctions.bossPoints),
+    tags: samplesFrom(Object.values(tag) as unknown as string[]),
     mounts: samplesFrom(mount.tokens),
     storeMounts: samplesFrom(storeMount.tokens),
     outfits: randomOutfits(),

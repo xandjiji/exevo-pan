@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset, setup } from 'utils/test'
-import { formatNumberWithCommas, totalCharacterInvestment } from 'utils'
+import { formatNumberWithCommas } from 'utils'
 import CharacterModal from '..'
 import { tabCounter } from '../utils'
 
@@ -39,9 +39,7 @@ describe('<CharacterModal />', () => {
         <CharacterModal characterData={character} onClose={mockOnClose} />,
       )
 
-      const totalInvestment = formatNumberWithCommas(
-        totalCharacterInvestment(character),
-      )
+      const totalInvestment = formatNumberWithCommas(character.tcInvested)
 
       if (totalInvestment === '0') {
         expect(screen.queryByText(totalInvestment)).not.toBeInTheDocument()

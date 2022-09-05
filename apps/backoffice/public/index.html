@@ -13,7 +13,14 @@
 
   <p>Last 30 days: <strong id="month-element">loading...</strong></p>
   <p>Daily average: <strong id="average-element">loading...</strong></p>
-  <p>Average daily highlighted: <strong id="days-element">loading...</strong></p>
+  <p>
+    Average daily highlighted: <strong id="days-element">loading...</strong>
+  </p>
+
+  <div style="margin-bottom: 16px">
+    <input id="route-input" />
+    <button onclick="dispatchRevalidation()">Dispatch revalidation</button>
+  </div>
 
   <body>
     <table>

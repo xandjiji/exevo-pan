@@ -48,6 +48,9 @@ declare interface CharacterObject {
   sex: boolean
   level: number
   achievementPoints: number
+  bossPoints: number
+  tcInvested: number
+  tags: string[]
   imbuements: string[]
   items: number[]
   charms: string[]

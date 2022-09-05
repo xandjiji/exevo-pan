@@ -129,6 +129,16 @@ export default {
   LoadingLabel: 'Loading',
   UpdatingDataText: 'Updating data...',
   PreferredLanguageLabel: 'Change language',
+  SpecialTags: {
+    manyCharms: 'Many charms',
+    manyQuests: 'Many quests',
+    manyMounts: 'Many mounts',
+    manyStoreCosmetics: 'Many store cosmetics 🛍️',
+    rareMounts: 'Rare mounts ✨',
+    rareOutfits: 'Rare outfits 💎',
+    secondaryEkSkill: 'Secondary skill ⚔️',
+    soulwarAvailable: 'Soul War available 💀',
+  },
   CharacterCard: {
     linkLabel: 'Go to character page',
     bidLabelText: {
@@ -163,16 +173,6 @@ export default {
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
     highlightLabelText: 'Highlight your auction!',
-    SpecialTags: {
-      manyCharms: 'Many charms',
-      manyQuests: 'Many quests',
-      manyMounts: 'Many mounts',
-      manyStoreCosmetics: 'Many store cosmetics 🛍️',
-      rareMounts: 'Rare mounts ✨',
-      rareOutfits: 'Rare outfits 💎',
-      secondaryEkSkill: 'Secondary skill ⚔️',
-      soulwarAvailable: 'Soul War available 💀',
-    },
     expand: 'Expand for full auction details',
     CharacterModal: {
       moreInfo: 'More informations',

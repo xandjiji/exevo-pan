@@ -1,11 +1,7 @@
 import { priceMap as mountPrices } from 'data-dictionary/dist/dictionaries/storeMount'
 import { priceMap as outfitPrices } from 'data-dictionary/dist/dictionaries/storeOutfit'
-import { NotifyErrorClient } from 'services'
 
-const getCosmeticsValue = (
-  character: CharacterObject,
-  auctionId: number,
-): number => {
+const getCosmeticsValue = (character: PartialCharacterObject): number => {
   const { storeMounts, storeOutfits } = character
   let sum = 0
 
@@ -14,7 +10,7 @@ const getCosmeticsValue = (
     if (foundPrice) {
       sum += foundPrice
     } else {
-      NotifyErrorClient.setMessage({ mountName, auctionId })
+      /* @ ToDo: notify */
     }
   })
 
@@ -23,7 +19,7 @@ const getCosmeticsValue = (
     if (foundPrice) {
       sum += foundPrice
     } else {
-      NotifyErrorClient.setMessage({ name, auctionId })
+      /* @ ToDo: notify */
     }
   })
 

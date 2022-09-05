@@ -22,6 +22,7 @@ const Head = ({
   level,
   vocationId,
   serverName,
+  permalink,
   children,
 }: HeadProps) => (
   <HeadWrapper>
@@ -36,6 +37,7 @@ const Head = ({
         world: serverName,
       }}
       linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
+      permalink={permalink}
     />
 
     {children}

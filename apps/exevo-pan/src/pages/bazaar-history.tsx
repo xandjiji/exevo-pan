@@ -5,31 +5,34 @@ import {
   FiltersProvider,
   AuctionsProvider,
   AuctionsGrid,
+  UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
 import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
+import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle } from 'utils'
-import { routes, endpoints, jsonld } from 'Constants'
+import { routes, endpoints, jsonld, urlParameters } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
 
 type HistoryStaticProps = {
   serverOptions: Option[]
-  auctionedItemOptions: Option[]
+  rareItemData: RareItemData
   initialAuctionData: PaginatedData<CharacterObject>
   blogPosts: BlogPost[]
 }
 
 export default function BazaarHistory({
   serverOptions,
-  auctionedItemOptions,
+  rareItemData,
   initialAuctionData,
   blogPosts,
 }: HistoryStaticProps) {
   const { translations } = useTranslations()
+  const { locale } = useRouter()
 
   const pageTitle = buildPageTitle(translations.bazaarHistory.Meta.title)
 
@@ -89,10 +92,11 @@ export default function BazaarHistory({
       </Head>
 
       <Main>
+        <UrlAuction endpoint={endpoints.HISTORY_AUCTIONS} past />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
-          auctionedItemOptions={auctionedItemOptions}
+          rareItemData={rareItemData}
         >
           <FiltersProvider>
             <AuctionsProvider
@@ -103,7 +107,14 @@ export default function BazaarHistory({
               defaultSortingMode={sortingMode}
               defaultDescendingOrder={descendingOrder}
             >
-              <AuctionsGrid past />
+              <AuctionsGrid
+                past
+                permalinkResolver={(auctionId) =>
+                  `${buildUrl(routes.BAZAAR_HISTORY, locale)}?${
+                    urlParameters.AUCTION_ID
+                  }=${auctionId}`
+                }
+              />
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>
@@ -115,20 +126,16 @@ export default function BazaarHistory({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const sortOptions = { sortingMode: 0, descendingOrder: true }
 
-  const [
-    serverOptions,
-    auctionedItemOptions,
-    initialAuctionData,
-    localizedBlogPosts,
-  ] = await Promise.all([
-    DrawerFieldsClient.fetchServerOptions(),
-    DrawerFieldsClient.fetchAuctionedItemOptions(),
-    AuctionsClient.fetchAuctionPage({
-      sortOptions,
-      endpoint: endpoints.HISTORY_AUCTIONS,
-    }),
-    await BlogClient.getEveryPostLocale({ pageSize: 3 }),
-  ])
+  const [serverOptions, rareItemData, initialAuctionData, localizedBlogPosts] =
+    await Promise.all([
+      DrawerFieldsClient.fetchServerOptions(),
+      DrawerFieldsClient.fetchAuctionedItemOptions(),
+      AuctionsClient.fetchAuctionPage({
+        sortOptions,
+        endpoint: endpoints.HISTORY_AUCTIONS,
+      }),
+      await BlogClient.getEveryPostLocale({ pageSize: 3 }),
+    ])
 
   return {
     props: {
@@ -138,7 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         bazaarHistory: bazaarHistory[locale as RegisteredLocale],
       },
       serverOptions,
-      auctionedItemOptions,
+      rareItemData,
       initialAuctionData,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
     },

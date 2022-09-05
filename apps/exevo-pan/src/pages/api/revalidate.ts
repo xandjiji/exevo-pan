@@ -12,7 +12,10 @@ export default async (
   request: VercelRequest,
   response: VercelResponse,
 ): Promise<void> => {
-  if (request.query.secret !== process.env.REVALIDATION_AUTH) {
+  const { secret } = request.query
+  const auth = [process.env.REVALIDATION_AUTH, process.env.BACKOFFICE_TOKEN]
+
+  if (!auth.find((key) => key === secret)) {
     response.status(401).json({ message: 'Invalid token' })
     return
   }

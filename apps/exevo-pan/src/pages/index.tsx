@@ -5,20 +5,22 @@ import {
   FiltersProvider,
   AuctionsProvider,
   AuctionsGrid,
+  UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
 import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
+import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle } from 'utils'
-import { endpoints, routes, jsonld } from 'Constants'
+import { endpoints, routes, jsonld, urlParameters } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
 type HomeStaticProps = {
   serverOptions: Option[]
-  auctionedItemOptions: Option[]
+  rareItemData: RareItemData
   initialAuctionData: PaginatedData<CharacterObject>
   highlightedAuctions: CharacterObject[]
   blogPosts: BlogPost[]
@@ -26,12 +28,13 @@ type HomeStaticProps = {
 
 export default function Home({
   serverOptions,
-  auctionedItemOptions,
+  rareItemData,
   initialAuctionData,
   highlightedAuctions,
   blogPosts,
 }: HomeStaticProps) {
   const { translations } = useTranslations()
+  const { locale } = useRouter()
 
   const pageTitle = buildPageTitle(translations.homepage.Meta.title)
 
@@ -91,10 +94,11 @@ export default function Home({
       </Head>
 
       <Main>
+        <UrlAuction endpoint={endpoints.CURRENT_AUCTIONS} />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
-          auctionedItemOptions={auctionedItemOptions}
+          rareItemData={rareItemData}
         >
           <FiltersProvider>
             <AuctionsProvider
@@ -105,7 +109,14 @@ export default function Home({
               defaultSortingMode={sortingMode}
               defaultDescendingOrder={descendingOrder}
             >
-              <AuctionsGrid past={false} />
+              <AuctionsGrid
+                past={false}
+                permalinkResolver={(auctionId) =>
+                  `${buildUrl('', locale)}?${
+                    urlParameters.AUCTION_ID
+                  }=${auctionId}`
+                }
+              />
             </AuctionsProvider>
           </FiltersProvider>
         </DrawerFieldsProvider>
@@ -117,7 +128,7 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [
     serverOptions,
-    auctionedItemOptions,
+    rareItemData,
     initialAuctionData,
     highlightedAuctions,
     localizedBlogPosts,
@@ -138,7 +149,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         homepage: homepage[locale as RegisteredLocale],
       },
       serverOptions,
-      auctionedItemOptions,
+      rareItemData,
       initialAuctionData,
       highlightedAuctions,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],

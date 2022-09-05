@@ -32,6 +32,10 @@ export default {
       serverLocation: 'Serwer',
       storeItems: 'Store items',
       minSkill: 'Minimalny level skilla',
+      /* @ ToDo: i18n */
+      tcInvested: 'Tibia Coins invested',
+      /* @ ToDo: i18n */
+      biddedOnly: 'Bidded only',
       rareItems: 'Rzadkie przedmioty',
       rareAchievements: 'Rzadkie osiągnięcia',
       misc: 'Różne',
@@ -49,8 +53,6 @@ export default {
         'Jeśli rzadkiego przedmioty nie ma na tej liście, oznacza to, że nie ma żadnych aukcji na których się znajduję.',
       rareNicknames:
         "Nazwy ze specjalnymi znakami (äëïöüÿ'-.,), 2-3 literowe nazwy oraz same duże litery (t.j XVI)",
-      soulwar:
-        'Postacie z poziomem 250+ które nie mają ukończonego Soul War questa',
     },
     toggleAll: {
       imbuements: 'Wszystkie Imbuementy',
@@ -61,7 +63,6 @@ export default {
     green: 'Zielony',
     yellow: 'Żółty',
     rareNicknamesButton: 'Rzadkie nazwy postaci',
-    soulwarButton: 'Dostępny Soulwar',
     skullEmoji: 'Czaszka',
     SpritePicker: {
       item: 'Przedmiot jest wybrany',

@@ -17,6 +17,3 @@ export const filterItemData = (initialItemData: RareItemData): RareItemData => {
 
   return filteredItemData
 }
-
-export const buildRareItemsOptions = (itemData: RareItemData): Option[] =>
-  Object.keys(itemData).map((item) => ({ name: item, value: item }))
