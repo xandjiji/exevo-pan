@@ -11,6 +11,12 @@ addEventListener('fetch', (event) => {
   event.respondWith(handleRequest(event))
 })
 
+const getAuctions = async () =>
+  JSON.parse((await HIGHLIGHTED.get(LIST_KEY)) ?? '[]')
+
+const putAuctions = (newAuctions: string) =>
+  HIGHLIGHTED.put(LIST_KEY, newAuctions)
+
 async function handleRequest(event: FetchEvent): Promise<Response> {
   const { request } = event
   const { method, url } = request
@@ -27,9 +33,7 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
       return new Response('invalid credentials')
     }
 
-    let highlightedAuctions: HighlightedAuctionData[] = JSON.parse(
-      (await HIGHLIGHTED.get(LIST_KEY)) ?? '[]',
-    )
+    let highlightedAuctions: HighlightedAuctionData[] = await getAuctions()
 
     highlightedAuctions = highlightedAuctions.filter(
       ({ timestamp }) => timestamp !== newHighlight.timestamp,
@@ -44,9 +48,7 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
       ),
     )
 
-    await HIGHLIGHTED.put(LIST_KEY, newAuctions, {
-      metadata: newAuctions,
-    })
+    await putAuctions(newAuctions)
 
     return new Response(`[${newHighlight.nickname}] was updated successfully`, {
       headers,
@@ -64,17 +66,13 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
       return new Response('invalid credentials')
     }
 
-    const highlightedAuctions: HighlightedAuctionData[] = JSON.parse(
-      (await HIGHLIGHTED.get(LIST_KEY)) ?? '[]',
-    )
+    const highlightedAuctions: HighlightedAuctionData[] = await getAuctions()
 
     const newAuctions = JSON.stringify(
       highlightedAuctions.filter(({ timestamp }) => timestamp !== id),
     )
 
-    await HIGHLIGHTED.put(LIST_KEY, newAuctions, {
-      metadata: newAuctions,
-    })
+    await putAuctions(newAuctions)
 
     return new Response(`[${id}] was deleted successfully`, { headers })
   }
