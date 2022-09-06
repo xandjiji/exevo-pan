@@ -89,7 +89,7 @@ describe('<LootSplit />', () => {
 
     const historyEntries = {
       first: screen.getByRole('button', {
-        name: 'Aug 23, 2022 - 11:21 (Tuesday)',
+        name: /11:21/,
       }),
       second: screen.getByRole('button', {
         name: 'Feb 11, 2019 - 17:33 (Monday)',
@@ -100,9 +100,7 @@ describe('<LootSplit />', () => {
 
     userEvent.click(historyEntries.first)
 
-    expect(screen.getAllByText('Aug 23, 2022 - 11:21 (Tuesday)')).toHaveLength(
-      2,
-    )
+    expect(screen.getAllByText(/11:21/)).toHaveLength(2)
     expect(screen.getAllByTitle("Lord'Paulistinha")).toHaveLength(2)
     expect(screen.getByTitle('Mateusz Dragon Wielki')).toBeInTheDocument()
     expect(screen.getByTitle('Cachero')).toBeInTheDocument()
@@ -139,9 +137,7 @@ describe('<LootSplit />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Delete' }))
 
-    expect(screen.getAllByText('Aug 23, 2022 - 11:21 (Tuesday)')).toHaveLength(
-      2,
-    )
+    expect(screen.getAllByText(/11:21/)).toHaveLength(2)
     expect(screen.getAllByTitle("Lord'Paulistinha")).toHaveLength(2)
     expect(screen.getByTitle('Mateusz Dragon Wielki')).toBeInTheDocument()
     expect(screen.getByTitle('Cachero')).toBeInTheDocument()
