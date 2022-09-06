@@ -77,7 +77,7 @@ const CharacterMiniCard = ({
               >
                 New
               </Sticker>
-              <CopyButton linkIcon big copyString={permalink} />
+              <CopyButton linkIcon variant="big" copyString={permalink} />
             </div>
           )}
         </p>

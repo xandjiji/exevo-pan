@@ -1,6 +1,5 @@
 export type CopyButtonProps = {
   copyString: string
-  small?: boolean
-  big?: boolean
   linkIcon?: boolean
+  variant?: 'big' | 'small' | 'default'
 } & JSX.IntrinsicElements['button']
