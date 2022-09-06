@@ -65,9 +65,7 @@ const Paginator = ({
     const { ctrlKey, shiftKey } = event
     const increment = 1 * (+!ctrlKey || 10) * (+!shiftKey || 100)
     const newPage = {
-      ArrowUp: derivedCurrentPage + increment,
       ArrowRight: derivedCurrentPage + increment,
-      ArrowDown: derivedCurrentPage - increment,
       ArrowLeft: derivedCurrentPage - increment,
     }[event.code]
 
