@@ -204,4 +204,61 @@ describe('<FilterDrawer />', () => {
       }),
     ).toBeInTheDocument()
   })
+
+  test('useDebouncedFilter should dispatch filters after a while', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    const minInput = screen.getByLabelText('Min level')
+    const maxInput = screen.getByLabelText('Max level')
+
+    const assertResetButton = (visible: boolean) => {
+      if (visible) {
+        expect(
+          screen.getByRole('button', {
+            name: 'Reset filters',
+          }),
+        ).toBeInTheDocument()
+      } else {
+        expect(
+          screen.queryByRole('button', {
+            name: 'Reset filters',
+          }),
+        ).not.toBeInTheDocument()
+      }
+    }
+
+    const assertValid = (valid: boolean) => {
+      const validity = valid ? 'false' : 'true'
+      expect(minInput).toHaveAttribute('aria-invalid', validity)
+      expect(maxInput).toHaveAttribute('aria-invalid', validity)
+    }
+
+    assertResetButton(false)
+
+    expect(minInput).toHaveValue(0)
+    userEvent.clear(minInput)
+    expect(minInput).toHaveValue(null)
+    assertResetButton(false)
+
+    userEvent.type(minInput, '2999')
+    assertResetButton(true)
+    expect(minInput).toHaveValue(2999)
+    assertValid(true)
+
+    userEvent.type(minInput, '0')
+    expect(minInput).toHaveValue(29990)
+    assertValid(false)
+    assertResetButton(true)
+
+    userEvent.type(maxInput, '30000')
+    assertValid(true)
+    assertResetButton(true)
+
+    userEvent.clear(maxInput)
+    assertResetButton(true)
+
+    userEvent.clear(minInput)
+    assertValid(true)
+    assertResetButton(false)
+  })
 })

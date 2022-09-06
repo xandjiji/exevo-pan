@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import clsx from 'clsx'
 import { Input } from 'components/Atoms'
 import { InputProps } from 'components/Atoms/Input/types'
 
