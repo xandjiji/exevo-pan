@@ -137,7 +137,7 @@ describe('<CharacterModal />', () => {
     expect(scrollIntoViewMock).toHaveBeenCalledTimes(1)
   })
 
-  /* test('should have a permalink copy button', () => {
+  test('should have a permalink copy button', () => {
     const [character] = characterList
     const { rerender } = renderWithProviders(
       <CharacterModal
@@ -160,5 +160,50 @@ describe('<CharacterModal />', () => {
         name: 'Copy to clipboard',
       }),
     ).not.toBeInTheDocument()
-  }) */
+  })
+
+  test('should have a permalink copy button', () => {
+    const [character] = characterList
+    const { rerender } = renderWithProviders(
+      <CharacterModal
+        characterData={character}
+        onClose={mockOnClose}
+        permalink="permalink"
+      />,
+    )
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Copy to clipboard',
+      }),
+    ).toBeInTheDocument()
+
+    rerender(<CharacterModal characterData={character} onClose={mockOnClose} />)
+
+    expect(
+      screen.queryByRole('button', {
+        name: 'Copy to clipboard',
+      }),
+    ).not.toBeInTheDocument()
+  })
+
+  test('should open and close the skill dialog', () => {
+    const [character] = characterList
+    renderWithProviders(
+      <CharacterModal
+        characterData={{ ...character, vocationId: 1 }}
+        onClose={mockOnClose}
+      />,
+    )
+
+    userEvent.click(screen.getByRole('button', { name: 'More informations' }))
+    expect(
+      screen.getByRole('heading', { name: 'Character skills' }),
+    ).toBeInTheDocument()
+
+    userEvent.click(screen.getAllByRole('button', { name: 'Close dialog' })[1])
+    expect(
+      screen.queryByRole('heading', { name: 'Character skills' }),
+    ).not.toBeInTheDocument()
+  })
 })
