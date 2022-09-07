@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { useFilters } from '../../../contexts/useFilters'
@@ -30,7 +31,7 @@ describe('<AuctionsGrid />', () => {
   })
 
   test('should display empty state if there are no characters', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
 
     expect(
       screen.queryByText('Sorry, no auction was found'),
@@ -41,15 +42,18 @@ describe('<AuctionsGrid />', () => {
       page: [],
     }))
 
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid past={false} />)
 
     expect(
       screen.queryByText('Sorry, no auction was found'),
     ).toBeInTheDocument()
+
+    userEvent.click(screen.getByRole('button', { name: 'Change filters' }))
+    expect(screen.getByText('Filters')).toBeInTheDocument()
   })
 
   test('should display highlighted characters', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
 
     DEFAULT_AUCTIONS_STATE.highlightedAuctions.forEach(({ nickname }) => {
       expect(screen.queryByText(nickname)).not.toBeInTheDocument()
@@ -59,7 +63,7 @@ describe('<AuctionsGrid />', () => {
       ...DEFAULT_AUCTIONS_STATE,
       shouldDisplayHighlightedAuctions: true,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid past={false} />)
 
     DEFAULT_AUCTIONS_STATE.highlightedAuctions.forEach(({ nickname }) => {
       expect(screen.queryByText(nickname)).toBeInTheDocument()
@@ -67,7 +71,7 @@ describe('<AuctionsGrid />', () => {
   })
 
   test('should display active filter count', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
 
     expect(screen.getByLabelText('0 filters are active')).toBeInTheDocument()
 
@@ -75,7 +79,7 @@ describe('<AuctionsGrid />', () => {
       ...DEFAULT_FILTERS_STATE,
       activeFilterCount: 1,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid past={false} />)
 
     expect(screen.getByLabelText('1 filter is active')).toBeInTheDocument()
 
@@ -83,13 +87,13 @@ describe('<AuctionsGrid />', () => {
       ...DEFAULT_FILTERS_STATE,
       activeFilterCount: 5,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid past={false} />)
 
     expect(screen.getByLabelText('5 filters are active')).toBeInTheDocument()
   })
 
   test('paginator should display the correct data', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid />)
+    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
 
     expect(
       screen.getByText(
@@ -107,7 +111,7 @@ describe('<AuctionsGrid />', () => {
       ...DEFAULT_AUCTIONS_STATE,
       pageData: newPageData,
     }))
-    rerender(<AuctionsGrid />)
+    rerender(<AuctionsGrid past={false} />)
 
     expect(
       screen.getByText(
@@ -116,5 +120,23 @@ describe('<AuctionsGrid />', () => {
         }`,
       ),
     ).toBeInTheDocument()
+  })
+
+  test('should call `permalinkResolver`', () => {
+    const mockedResolver = jest.fn()
+    renderWithProviders(
+      <AuctionsGrid past={false} permalinkResolver={mockedResolver} />,
+    )
+
+    DEFAULT_AUCTIONS_STATE.page.forEach(({ id }) =>
+      expect(mockedResolver).toHaveBeenCalledWith(id),
+    )
+  })
+
+  test('should open the filter drawer', () => {
+    renderWithProviders(<AuctionsGrid past />)
+
+    userEvent.click(screen.getByRole('button', { name: 'Open filter drawer' }))
+    expect(screen.getByText('Filters')).toBeInTheDocument()
   })
 })
