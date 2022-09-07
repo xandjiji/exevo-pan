@@ -261,4 +261,38 @@ describe('<FilterDrawer />', () => {
     assertValid(true)
     assertResetButton(false)
   })
+
+  test('autocomplete inputs should work correctly', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+
+    const rareitemsInput = screen.getByLabelText('Rare items')
+    expect(screen.queryByText('Ball Gown')).not.toBeInTheDocument()
+    userEvent.click(rareitemsInput)
+
+    userEvent.click(screen.getByRole('option', { name: 'Ball Gown' }))
+    expect(screen.queryByText('Ball Gown')).toBeInTheDocument()
+
+    userEvent.click(screen.getByLabelText('Remove item'))
+    expect(screen.queryByText('Ball Gown')).not.toBeInTheDocument()
+
+    userEvent.click(rareitemsInput)
+    userEvent.click(screen.getByRole('option', { name: 'Ball Gown' }))
+    expect(screen.queryByText('Ball Gown')).toBeInTheDocument()
+
+    const toggleAllButton = screen.getByRole('switch', {
+      name: 'All items',
+    })
+
+    userEvent.click(toggleAllButton)
+    expect(screen.queryByText('Ball Gown')).toBeInTheDocument()
+    expect(screen.queryByText('Amazon Shield')).toBeInTheDocument()
+
+    userEvent.click(toggleAllButton)
+    expect(screen.queryByText('Ball Gown')).not.toBeInTheDocument()
+    expect(screen.queryByText('Amazon Shield')).not.toBeInTheDocument()
+
+    userEvent.click(toggleAllButton)
+    expect(screen.queryByText('Ball Gown')).toBeInTheDocument()
+    expect(screen.queryByText('Amazon Shield')).toBeInTheDocument()
+  })
 })
