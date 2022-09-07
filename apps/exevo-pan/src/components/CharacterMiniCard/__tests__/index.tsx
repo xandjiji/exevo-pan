@@ -49,4 +49,17 @@ describe('<CharacterMiniCard />', () => {
 
     expect(screen.getByText('This is a forced subtitle')).toBeInTheDocument()
   })
+
+  test('should render with a permalink button', () => {
+    renderWithProviders(
+      <CharacterMiniCard
+        characterData={mockCharacterData}
+        permalink="permalink"
+      />,
+    )
+
+    expect(
+      screen.getByRole('button', { name: 'Copy to clipboard' }),
+    ).toBeInTheDocument()
+  })
 })
