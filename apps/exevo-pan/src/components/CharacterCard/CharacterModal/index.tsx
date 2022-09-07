@@ -94,6 +94,8 @@ const CharacterModal = ({
     }
   }, [isDesktop])
 
+  const notRooker = vocationId > 0
+
   return (
     <Dialog
       isOpen
@@ -136,14 +138,16 @@ const CharacterModal = ({
 
             <S.Section border>
               <CharacterSkills skills={skills} style={{ marginBottom: 0 }} />
-              <button
-                type="button"
-                onClick={() => setExpandedSkills(true)}
-                className="text-primaryHighlight clickable ml-auto flex w-fit cursor-pointer items-center gap-1 rounded px-1 py-0.5"
-              >
-                <MoreInfoIcon className="fill-onSurface h-4 w-4 shrink-0" />
-                {common.CharacterCard.CharacterModal.moreInfo}
-              </button>
+              {notRooker && (
+                <button
+                  type="button"
+                  onClick={() => setExpandedSkills(true)}
+                  className="text-primaryHighlight clickable ml-auto flex w-fit cursor-pointer items-center gap-1 rounded px-1 py-0.5"
+                >
+                  <MoreInfoIcon className="fill-onSurface h-4 w-4 shrink-0" />
+                  {common.CharacterCard.CharacterModal.moreInfo}
+                </button>
+              )}
             </S.Section>
 
             <S.TooltipSection>
@@ -325,12 +329,14 @@ const CharacterModal = ({
           </S.Spacer>
         </S.Spacer>
       </div>
-      <SkillDialog
-        vocationId={vocationId}
-        skills={skills}
-        isOpen={expandedSkills}
-        onClose={() => setExpandedSkills(false)}
-      />
+      {notRooker && (
+        <SkillDialog
+          vocationId={vocationId}
+          skills={skills}
+          isOpen={expandedSkills}
+          onClose={() => setExpandedSkills(false)}
+        />
+      )}
     </Dialog>
   )
 }
