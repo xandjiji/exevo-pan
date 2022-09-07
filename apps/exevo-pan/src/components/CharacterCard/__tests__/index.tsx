@@ -7,7 +7,7 @@ import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
 import { vocation } from 'shared-utils/dist/vocations'
 import { routes } from 'Constants'
-import CharacterCard from '..'
+import CharacterCard, { BOSS_SLOT_POINTS } from '..'
 
 const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
@@ -85,6 +85,12 @@ describe('<CharacterCard />', () => {
       ),
     ).toBeInTheDocument()
 
+    expect(
+      screen.getByText(
+        `Boss points: ${formatNumberWithCommas(character.bossPoints)}`,
+      ),
+    ).toBeInTheDocument()
+
     const charmCheckbox = screen.getByRole('checkbox', {
       name: 'Charm Expansion',
     })
@@ -101,6 +107,15 @@ describe('<CharacterCard />', () => {
       expect(preyCheckbox).toBeChecked()
     } else {
       expect(preyCheckbox).not.toBeChecked()
+    }
+
+    const bossSlotCheckbox = screen.getByRole('checkbox', {
+      name: 'Boss Slot',
+    })
+    if (character.bossPoints >= BOSS_SLOT_POINTS) {
+      expect(bossSlotCheckbox).toBeChecked()
+    } else {
+      expect(bossSlotCheckbox).not.toBeChecked()
     }
 
     const totalInvestment = formatNumberWithCommas(character.tcInvested)
