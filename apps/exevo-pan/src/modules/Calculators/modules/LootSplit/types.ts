@@ -26,4 +26,5 @@ export type HuntData = {
   teamReceipt?: Receipt
   playerReceipts?: Receipt[]
   transactions?: Transaction<string>[]
+  players?: string[]
 }

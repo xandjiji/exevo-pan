@@ -7,7 +7,10 @@ export const WrappedFilterDrawer = ({
   open = true,
   onClose = jest.fn(),
 }: Partial<FilterDrawerProps>) => (
-  <DrawerFieldsProvider auctionedItemOptions={[]} serverOptions={[]}>
+  <DrawerFieldsProvider
+    rareItemData={{ 'Ball Gown': [1], 'Amazon Shield': [2, 3] }}
+    serverOptions={[]}
+  >
     <FiltersProvider>
       <FilterDrawer open={open} onClose={onClose} />
     </FiltersProvider>

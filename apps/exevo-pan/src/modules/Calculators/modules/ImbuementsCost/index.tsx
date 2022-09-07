@@ -104,7 +104,10 @@ const ImbuementsCost = () => {
                         label={
                           <div className="flex items-center gap-1.5">
                             <span>{material.name}</span>
-                            <CopyButton small copyString={material.name} />
+                            <CopyButton
+                              variant="small"
+                              copyString={material.name}
+                            />
                           </div>
                         }
                         aria-label={material.name}
@@ -144,7 +147,7 @@ const ImbuementsCost = () => {
         >
           {npcDialogue}
           <CopyButton
-            small
+            variant="small"
             copyString={npcDialogue}
             className={clsx(noDialogue && 'pointer-events-none opacity-0')}
             disabled={noDialogue}

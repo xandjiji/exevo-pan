@@ -6,7 +6,7 @@ import { Group } from '../../components'
 import { Receipt, ExtraExpenses } from './types'
 
 type AdvancedOptionsDialogProps = {
-  playerReceipts: Receipt[]
+  players: string[]
   extraExpenses: ExtraExpenses
   setExtraExpenses: (newExpenses: ExtraExpenses) => void
   removedPlayers: Set<string>
@@ -16,7 +16,7 @@ type AdvancedOptionsDialogProps = {
 }
 
 const AdvancedOptionsDialog = ({
-  playerReceipts,
+  players,
   extraExpenses,
   setExtraExpenses,
   removedPlayers,
@@ -44,7 +44,7 @@ const AdvancedOptionsDialog = ({
           {calculators.LootSplit.AdvancedOptionsDialog.addExtraExpenses}:
         </strong>
         <div className="grid grid-cols-2 place-items-end gap-6">
-          {playerReceipts?.map(({ name }) => {
+          {players.map((name) => {
             const playerIsRemoved = removedPlayers.has(name)
 
             return (

@@ -45,22 +45,22 @@ describe('<LootSplit />', () => {
     userEvent.type(screen.getByLabelText('Me'), '123456')
     userEvent.type(screen.getByLabelText('You'), '5000')
     userEvent.type(screen.getByLabelText('Buzz'), '999')
+    userEvent.click(screen.getAllByLabelText('Remove player')[3])
+
+    expect(screen.getByLabelText('Guaca')).toBeDisabled()
 
     userEvent.click(screen.getByRole('button', { name: 'Done' }))
 
-    const [firstTransfer, secondTransfer, thirdTransfer] =
-      screen.getAllByTitle('You')
+    const [firstTransfer, secondTransfer] = screen.getAllByTitle('You')
 
-    expect(firstTransfer.nextSibling).toHaveTextContent('4,787')
-    expect(secondTransfer.nextSibling).toHaveTextContent('29,419')
-    expect(thirdTransfer.nextSibling).toHaveTextContent('85,527')
+    expect(firstTransfer.nextSibling).toHaveTextContent('31,015')
+    expect(secondTransfer.nextSibling).toHaveTextContent('87,123')
 
-    expect(firstTransfer.nextSibling?.nextSibling).toHaveTextContent('Guaca')
-    expect(secondTransfer.nextSibling?.nextSibling).toHaveTextContent('Me')
-    expect(thirdTransfer.nextSibling?.nextSibling).toHaveTextContent('Buzz')
+    expect(firstTransfer.nextSibling?.nextSibling).toHaveTextContent('Me')
+    expect(secondTransfer.nextSibling?.nextSibling).toHaveTextContent('Buzz')
 
     expect(screen.getByText('Total waste')).toBeInTheDocument()
-    expect(screen.getByTitle('-42,992 gp')).toBeInTheDocument()
+    expect(screen.getByTitle('-41,396 gp')).toBeInTheDocument()
   })
 
   test('should save, list, display and delete previous hunt sesions', () => {
@@ -89,7 +89,7 @@ describe('<LootSplit />', () => {
 
     const historyEntries = {
       first: screen.getByRole('button', {
-        name: 'Aug 23, 2022 - 11:21 (Tuesday)',
+        name: /11:21/,
       }),
       second: screen.getByRole('button', {
         name: 'Feb 11, 2019 - 17:33 (Monday)',
@@ -100,9 +100,7 @@ describe('<LootSplit />', () => {
 
     userEvent.click(historyEntries.first)
 
-    expect(screen.getAllByText('Aug 23, 2022 - 11:21 (Tuesday)')).toHaveLength(
-      2,
-    )
+    expect(screen.getAllByText(/11:21/)).toHaveLength(2)
     expect(screen.getAllByTitle("Lord'Paulistinha")).toHaveLength(2)
     expect(screen.getByTitle('Mateusz Dragon Wielki')).toBeInTheDocument()
     expect(screen.getByTitle('Cachero')).toBeInTheDocument()
@@ -139,9 +137,7 @@ describe('<LootSplit />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Delete' }))
 
-    expect(screen.getAllByText('Aug 23, 2022 - 11:21 (Tuesday)')).toHaveLength(
-      2,
-    )
+    expect(screen.getAllByText(/11:21/)).toHaveLength(2)
     expect(screen.getAllByTitle("Lord'Paulistinha")).toHaveLength(2)
     expect(screen.getByTitle('Mateusz Dragon Wielki')).toBeInTheDocument()
     expect(screen.getByTitle('Cachero')).toBeInTheDocument()

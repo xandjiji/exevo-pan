@@ -51,7 +51,7 @@ const LootSplit = () => {
 
   const displayTimestamp = useDisplayTimestamp()
 
-  const { timestamp, teamReceipt, playerReceipts, transactions } =
+  const { timestamp, teamReceipt, playerReceipts, transactions, players } =
     calculateHuntData(
       displayedSession,
       displayedExtraExpenses,
@@ -63,7 +63,8 @@ const LootSplit = () => {
   const isWaste = teamReceipt && teamReceipt.balance < 0
 
   const splittedBalance = Math.floor(
-    (teamReceipt?.balance ?? 0) / (playerReceipts ?? []).length,
+    (teamReceipt?.balance ?? 0) /
+      ((playerReceipts ?? []).length - displayedRemovedPlayers.size),
   )
 
   const copyText = useSessionClipboard({
@@ -173,8 +174,8 @@ const LootSplit = () => {
               labelSize
               content={
                 <ul className="grid gap-1 text-left">
-                  {playerReceipts ? (
-                    playerReceipts.map(({ name }) => <li key={name}>{name}</li>)
+                  {players ? (
+                    players.map((name) => <li key={name}>{name}</li>)
                   ) : (
                     <span>{calculators.none}</span>
                   )}
@@ -258,7 +259,7 @@ const LootSplit = () => {
 
       <AdvancedOptionsDialog
         isOpen={openAdvancedOptions}
-        playerReceipts={playerReceipts ?? []}
+        players={players ?? []}
         extraExpenses={extraExpenses}
         setExtraExpenses={setExtraExpenses}
         removedPlayers={removedPlayers}

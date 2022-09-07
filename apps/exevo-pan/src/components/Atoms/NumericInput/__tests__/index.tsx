@@ -68,5 +68,26 @@ describe('<NumericInput />', () => {
     expect(inputElement).toBeInvalid()
   })
 
-  test.todo('test `alwaysValid` prop')
+  test('should always be valid', () => {
+    renderWithProviders(<ControlledNumericInput label="Amount" alwaysValid />)
+    const inputElement = screen.getByLabelText('Amount')
+
+    expect(inputElement).toBeValid()
+    userEvent.type(inputElement, '100')
+    expect(inputElement).toBeValid()
+    userEvent.clear(inputElement)
+    expect(inputElement).toBeValid()
+  })
+
+  test('typing invalid numbers shouldnt have any effect', () => {
+    renderWithProviders(<ControlledNumericInput label="Amount" alwaysValid />)
+    const inputElement = screen.getByLabelText('Amount')
+
+    userEvent.type(inputElement, '100!0')
+    expect(inputElement).toHaveValue('1,000')
+
+    userEvent.clear(inputElement)
+    userEvent.type(inputElement, 'a')
+    expect(inputElement).toHaveValue('')
+  })
 })

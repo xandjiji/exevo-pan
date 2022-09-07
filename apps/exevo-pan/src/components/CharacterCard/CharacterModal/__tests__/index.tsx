@@ -33,6 +33,7 @@ describe('<CharacterModal />', () => {
         charmInfo,
         hirelings,
         achievementPoints,
+        bossPoints,
       } = character
 
       renderWithProviders(
@@ -84,6 +85,12 @@ describe('<CharacterModal />', () => {
       )
 
       expect(
+        screen.getByText(`Boss points: ${formatNumberWithCommas(bossPoints)}`, {
+          exact: false,
+        }),
+      ).toBeInTheDocument()
+
+      expect(
         screen.getByText('Hirelings:', { exact: false }).textContent,
       ).toEqual(
         `Hirelings: ${hirelings.count} (${hirelings.jobs}/4 jobs, ${hirelings.outfits} outfits)`,
@@ -99,31 +106,6 @@ describe('<CharacterModal />', () => {
       ).toBeInTheDocument()
     },
   )
-
-  test('if a sprite is not found, it should call `NotifyErrorClient`', async () => {
-    const [character] = characterList
-
-    const { rerender } = renderWithProviders(
-      <CharacterModal
-        characterData={{ ...character, storeMounts: [] }}
-        onClose={mockOnClose}
-      />,
-    )
-
-    expect(mockedFetch).toHaveBeenCalledTimes(0)
-
-    rerender(
-      <CharacterModal
-        characterData={{
-          ...character,
-          storeMounts: ['weird mount'],
-        }}
-        onClose={mockOnClose}
-      />,
-    )
-
-    await waitFor(() => expect(mockedFetch).toHaveBeenCalledTimes(1))
-  })
 
   test('should call `onClose` handler', () => {
     const [character] = characterList
@@ -153,5 +135,75 @@ describe('<CharacterModal />', () => {
     expect(tab1).toHaveAttribute('aria-selected', 'false')
     expect(tab2).toHaveAttribute('aria-selected', 'true')
     expect(scrollIntoViewMock).toHaveBeenCalledTimes(1)
+  })
+
+  test('should have a permalink copy button', () => {
+    const [character] = characterList
+    const { rerender } = renderWithProviders(
+      <CharacterModal
+        characterData={character}
+        onClose={mockOnClose}
+        permalink="permalink"
+      />,
+    )
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Copy to clipboard',
+      }),
+    ).toBeInTheDocument()
+
+    rerender(<CharacterModal characterData={character} onClose={mockOnClose} />)
+
+    expect(
+      screen.queryByRole('button', {
+        name: 'Copy to clipboard',
+      }),
+    ).not.toBeInTheDocument()
+  })
+
+  test('should have a permalink copy button', () => {
+    const [character] = characterList
+    const { rerender } = renderWithProviders(
+      <CharacterModal
+        characterData={character}
+        onClose={mockOnClose}
+        permalink="permalink"
+      />,
+    )
+
+    expect(
+      screen.getByRole('button', {
+        name: 'Copy to clipboard',
+      }),
+    ).toBeInTheDocument()
+
+    rerender(<CharacterModal characterData={character} onClose={mockOnClose} />)
+
+    expect(
+      screen.queryByRole('button', {
+        name: 'Copy to clipboard',
+      }),
+    ).not.toBeInTheDocument()
+  })
+
+  test('should open and close the skill dialog', () => {
+    const [character] = characterList
+    renderWithProviders(
+      <CharacterModal
+        characterData={{ ...character, vocationId: 1 }}
+        onClose={mockOnClose}
+      />,
+    )
+
+    userEvent.click(screen.getByRole('button', { name: 'More informations' }))
+    expect(
+      screen.getByRole('heading', { name: 'Character skills' }),
+    ).toBeInTheDocument()
+
+    userEvent.click(screen.getAllByRole('button', { name: 'Close dialog' })[1])
+    expect(
+      screen.queryByRole('heading', { name: 'Character skills' }),
+    ).not.toBeInTheDocument()
   })
 })

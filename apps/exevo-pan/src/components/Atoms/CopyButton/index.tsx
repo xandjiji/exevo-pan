@@ -10,9 +10,8 @@ import { CopyButtonProps } from './types'
 const CopyButton = ({
   className,
   copyString,
-  small = false,
-  big = false,
   linkIcon = false,
+  variant = 'default',
   ...props
 }: CopyButtonProps) => {
   const {
@@ -33,6 +32,8 @@ const CopyButton = ({
 
   useEffect(() => setClicked(false), [copyString])
 
+  const Icon = linkIcon ? LinkIcon : CopyIcon
+
   return (
     <button
       type="button"
@@ -50,33 +51,22 @@ const CopyButton = ({
         <ValidIcon
           className={clsx(
             'fill-greenHighlight animate-rollIn',
-            small
-              ? 'h-4 w-4 p-[1px]'
-              : big
-              ? 'h-7 w-7 p-0.5'
-              : 'h-6 w-6 p-[3px]',
-          )}
-        />
-      ) : linkIcon ? (
-        <LinkIcon
-          className={clsx(
-            'fill-onSurface',
-            small
-              ? 'h-4 w-4 p-[1px]'
-              : big
-              ? 'h-7 w-7 p-0.5'
-              : 'h-6 w-6 p-[3px]',
+            {
+              small: 'h-4 w-4 p-[1px]',
+              default: 'h-6 w-6 p-[3px]',
+              big: 'h-7 w-7 p-0.5',
+            }[variant],
           )}
         />
       ) : (
-        <CopyIcon
+        <Icon
           className={clsx(
             'fill-onSurface',
-            small
-              ? 'h-4 w-4 p-[1px]'
-              : big
-              ? 'h-7 w-7 p-0.5'
-              : 'h-6 w-6 p-[3px]',
+            {
+              small: 'h-4 w-4 p-[1px]',
+              default: 'h-6 w-6 p-[3px]',
+              big: 'h-7 w-7 p-0.5',
+            }[variant],
           )}
         />
       )}

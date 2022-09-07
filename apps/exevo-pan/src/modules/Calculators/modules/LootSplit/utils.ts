@@ -110,18 +110,21 @@ export const calculateHuntData = (
         }
       })
 
+    const filteredPlayerReceipts = playerReceipts.filter(
+      ({ name }) => !removedPlayers.has(name),
+    )
+
     return {
-      teamReceipt: playerReceipts.reduce((acc, player) => ({
+      teamReceipt: filteredPlayerReceipts.reduce((acc, player) => ({
         name: 'Team',
         loot: acc.loot + player.loot,
         supplies: acc.supplies + player.supplies,
         balance: acc.balance + player.balance,
       })),
       playerReceipts,
-      transactions: findTransactionsRequired(
-        playerReceipts.filter(({ name }) => !removedPlayers.has(name)),
-      ),
+      transactions: findTransactionsRequired(filteredPlayerReceipts),
       timestamp: parse.SessionTimestamp(session),
+      players: playerReceipts.map(({ name }) => name),
     }
   } catch {
     return {}
