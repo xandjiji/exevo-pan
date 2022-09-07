@@ -12,7 +12,7 @@ const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
 
   return (
     <S.Wrapper {...props}>
-      <HeadWrapper style={{ alignItems: 'center', gap: 0 }}>
+      <HeadWrapper style={{ alignItems: 'center', gap: 0, marginBottom: 22 }}>
         <Skeleton className="h-14 w-14 shrink-0 rounded-md" />
         <div className="mx-4 grid w-full gap-2">
           <Skeleton className="h-3 w-1/2" />
@@ -80,6 +80,10 @@ const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
             <Skeletons.ImbuementsIcon />
             <Skeleton className="h-2.5 w-[100px]" />
           </Skeletons.ImbuementFlex>
+          <Skeletons.ImbuementFlex>
+            <Skeletons.ImbuementsIcon />
+            <Skeleton className="h-2.5 w-[88px]" />
+          </Skeletons.ImbuementFlex>
         </S.FlexColumn>
 
         <S.FlexColumn>
@@ -94,6 +98,10 @@ const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
           <Skeletons.ImbuementFlex>
             <Skeletons.ImbuementsIcon />
             <Skeleton className="h-2.5 w-16" />
+          </Skeletons.ImbuementFlex>
+          <Skeletons.ImbuementFlex>
+            <Skeletons.ImbuementsIcon />
+            <Skeleton className="h-2.5 w-20" />
           </Skeletons.ImbuementFlex>
         </S.FlexColumn>
       </S.FlexFooter>
