@@ -6,8 +6,7 @@ import {
   DEFAULT_SORT_OPTIONS,
   DEFAULT_FILTER_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
-import { readableCurrentDate, MILLISECONDS_IN } from 'utils'
-import { buildHeaders } from './utils'
+import { buildHeaders, filterActiveHighlights } from './utils'
 import {
   FetchAuctionPageParameters,
   CacheObject,
@@ -73,21 +72,9 @@ export default class AuctionsClient {
       const highlightedAuctionsData: HighlightedAuctionData[] =
         await response.json()
 
-      const currentTimestamp = +new Date()
-
-      const currentDate = readableCurrentDate()
-
-      const activeHighlightedIds = highlightedAuctionsData
-        .filter(({ days }) => days.includes(currentDate))
-        .filter(({ active }) => active)
-        .filter(
-          ({ confirmed, timestamp }) =>
-            confirmed ||
-            currentTimestamp - timestamp >= MILLISECONDS_IN.MINUTE * 15,
-        )
-        .map(({ id }) => id)
-
-      const highlightedAuctionIds = new Set<number>(activeHighlightedIds)
+      const highlightedAuctionIds = filterActiveHighlights(
+        highlightedAuctionsData,
+      )
 
       const { page: highlightedAuctions } = await this.fetchAuctionPage({
         endpoint: endpoints.CURRENT_AUCTIONS,
