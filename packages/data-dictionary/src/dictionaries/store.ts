@@ -1,5 +1,3 @@
-import { nameableToScrapingTokens } from '../utils'
-
 export const ignoreList = new Set<string>([
   /* POTIONS */
   'mana potion',
@@ -1631,6 +1629,10 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'gilded magic longsword': {
     name: 'Gilded Magic Longsword',
+    value: 0,
+  },
+  'gilded warlord sword': {
+    name: 'Gilded Warlord Sword',
     value: 0,
   },
   /* HUNTING TASKS */
