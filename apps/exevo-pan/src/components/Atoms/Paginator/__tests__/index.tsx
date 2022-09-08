@@ -88,7 +88,7 @@ describe('<Paginator />', () => {
     expect(goNext).toBeEnabled()
     expect(goLast).toBeEnabled()
 
-    userEvent.keyboard('{arrowup}')
+    userEvent.keyboard('{arrowright}')
     expect(screen.getByText('21 - 30 of 3664')).toBeInTheDocument()
     expect(goFirst).toBeEnabled()
     expect(goPrev).toBeEnabled()
@@ -109,21 +109,21 @@ describe('<Paginator />', () => {
     expect(goNext).toBeEnabled()
     expect(goLast).toBeEnabled()
 
-    userEvent.keyboard('{arrowdown}')
+    userEvent.keyboard('{arrowleft}')
     expect(screen.getByText('11 - 20 of 3664')).toBeInTheDocument()
     expect(goFirst).toBeEnabled()
     expect(goPrev).toBeEnabled()
     expect(goNext).toBeEnabled()
     expect(goLast).toBeEnabled()
 
-    userEvent.keyboard('{shift}{ctrl}{arrowup}')
+    userEvent.keyboard('{shift}{ctrl}{arrowright}')
     expect(screen.getByText('3661 - 3664 of 3664')).toBeInTheDocument()
     expect(goFirst).toBeEnabled()
     expect(goPrev).toBeEnabled()
     expect(goNext).toBeDisabled()
     expect(goLast).toBeDisabled()
 
-    userEvent.keyboard('{shift}{ctrl}{arrowdown}')
+    userEvent.keyboard('{shift}{ctrl}{arrowleft}')
     expect(screen.getByText('1 - 10 of 3664')).toBeInTheDocument()
     expect(goFirst).toBeDisabled()
     expect(goPrev).toBeDisabled()
