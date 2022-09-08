@@ -29,6 +29,4 @@ describe('AuctionsClient()', () => {
 
     expect(result).toHaveLength(characterData.length - filteredOutAuctions)
   })
-
-  test.todo('test other methods')
 })
