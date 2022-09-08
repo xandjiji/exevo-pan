@@ -8,11 +8,13 @@ export default class StaticData {
 
   private missingFiles: Set<string> = new Set([])
 
+  private missingFileAuctions: Record<number, string[]> = {}
+
   private async loadDirectory(directory: string): Promise<string[]> {
     return fs.readdir(`${FILE_PATH}/${directory}`, 'utf-8')
   }
 
-  public addPrefix(prefix: 'male' | 'female', file: string): string {
+  private addPrefix(prefix: 'male' | 'female', file: string): string {
     return `${prefix}-${file}`
   }
 
@@ -38,13 +40,50 @@ export default class StaticData {
     ])
   }
 
-  public checkFile(fileName: string): void {
-    if (!this.staticFileNames.has(fileName)) {
-      this.missingFiles.add(fileName)
+  private addMissingFileAuction(id: number, fileName: string) {
+    if (this.missingFileAuctions[id]) {
+      this.missingFileAuctions[id].push(fileName)
+    } else {
+      this.missingFileAuctions[id] = [fileName]
     }
+  }
+
+  public checkAuction({
+    id,
+    sex,
+    outfits,
+    storeOutfits,
+    mounts,
+    storeMounts,
+    storeItems,
+  }: PartialCharacterObject): void {
+    const checkFile = (fileName: string) => {
+      if (!this.staticFileNames.has(fileName)) {
+        this.missingFiles.add(fileName)
+        this.addMissingFileAuction(id, fileName)
+      }
+    }
+
+    const sexPrefix: 'male' | 'female' = sex ? 'female' : 'male'
+
+    outfits.forEach(({ name, type }) =>
+      checkFile(this.addPrefix(sexPrefix, `${name}_${type}.gif`)),
+    )
+    storeOutfits.forEach(({ name, type }) =>
+      this.addPrefix(sexPrefix, `${name}_${type}.gif`),
+    )
+
+    mounts.forEach((name) => checkFile(`${name}.gif`))
+    storeMounts.forEach((name) => checkFile(`${name}.gif`))
+
+    storeItems.forEach(({ name }) => checkFile(`${name}.gif`))
   }
 
   public getMissingFiles(): Set<string> {
     return this.missingFiles
+  }
+
+  public getMissingFileAuctions(): typeof this.missingFileAuctions {
+    return this.missingFileAuctions
   }
 }
