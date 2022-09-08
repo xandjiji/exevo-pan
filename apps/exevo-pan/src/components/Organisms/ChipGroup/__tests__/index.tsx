@@ -32,7 +32,9 @@ const mockedOnChange = jest.fn()
 describe('<ChipGroup />', () => {
   const setup = () => {
     let onChangeCalls = 0
-    const radioButtons = screen.getAllByRole('radio')
+    const radioButtons = screen
+      .getAllByRole('radio')
+      .filter((element) => element.getAttribute('type') === 'radio')
 
     const assertActive = (activeIndex?: number) => {
       radioButtons.forEach((radio, childIndex) => {

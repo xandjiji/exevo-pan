@@ -18,10 +18,10 @@ export const setup = {
       .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   },
   URLSearchParams: {
-    get: () =>
+    get: (value?: string) =>
       jest
         .spyOn(URLSearchParams.prototype, 'get')
-        .mockImplementation(() => null),
+        .mockImplementation(() => value ?? null),
   },
   fetch: (): jest.MockedFunction<typeof fetch> => {
     global.fetch = jest.fn()

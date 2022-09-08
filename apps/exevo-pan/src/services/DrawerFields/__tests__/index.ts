@@ -43,8 +43,9 @@ describe('DrawerFieldsClient()', () => {
 
     const result = await DrawerFieldsClient.fetchAuctionedItemOptions()
 
-    result.forEach(({ name, value }) => {
-      expect(name === value).toBeTruthy()
+    const keys = Object.keys(result)
+
+    keys.forEach((name) => {
       expect(itemData[name]).not.toHaveLength(0)
     })
 
@@ -52,9 +53,9 @@ describe('DrawerFieldsClient()', () => {
       const auctions = itemData[itemName]
 
       if (auctions.length > 0) {
-        expect(result.some(({ name }) => name === itemName)).toBeTruthy()
+        expect(keys.some((name) => name === itemName)).toBeTruthy()
       } else {
-        expect(result.some(({ name }) => name === itemName)).toBeFalsy()
+        expect(keys.some((name) => name === itemName)).toBeFalsy()
       }
     })
 
@@ -63,6 +64,6 @@ describe('DrawerFieldsClient()', () => {
       0,
     )
 
-    expect(result).toHaveLength(auctionedItemsCount)
+    expect(keys).toHaveLength(auctionedItemsCount)
   })
 })

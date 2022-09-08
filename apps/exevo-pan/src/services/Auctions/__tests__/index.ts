@@ -1,34 +1,16 @@
-import { randomDataset, setup } from 'utils/test'
-import AuctionsClient from '..'
+import { filterActiveHighlights } from '../utils'
+import { activeAuctions, inactiveAuctions } from './mock'
 
-const mockedFetch = setup.fetch()
+describe('filterActiveHighlights()', () => {
+  test('should filter out inactive and repeated auctions', async () => {
+    const result = filterActiveHighlights([
+      ...activeAuctions,
+      ...inactiveAuctions,
+      ...activeAuctions,
+    ])
 
-const { characterData } = randomDataset()
+    const expectedResult = new Set(activeAuctions.map(({ id }) => id))
 
-describe('AuctionsClient()', () => {
-  beforeEach(() => {
-    mockedFetch.mockClear()
+    expect(result).toEqual(expectedResult)
   })
-
-  test('fetchHighlightedAuctions() should build server options correctly', async () => {
-    mockedFetch.mockResolvedValueOnce({
-      json: async () => characterData,
-    } as Response)
-
-    const result = await AuctionsClient.fetchHighlightedAuctions()
-
-    const currentTimestamp = +new Date() / 1000
-    result.forEach(({ auctionEnd }) => {
-      expect(auctionEnd >= currentTimestamp).toBeTruthy()
-    })
-
-    const filteredOutAuctions = characterData.reduce(
-      (acc, { auctionEnd }) => (auctionEnd < currentTimestamp ? acc + 1 : acc),
-      0,
-    )
-
-    expect(result).toHaveLength(characterData.length - filteredOutAuctions)
-  })
-
-  test.todo('test other methods')
 })
