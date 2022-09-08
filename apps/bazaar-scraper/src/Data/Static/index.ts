@@ -1,10 +1,19 @@
 import fs from 'fs/promises'
-import { broadcast, coloredText, coloredDiff } from 'logging'
+import { broadcast } from 'logging'
+import * as DICTIONARIES from 'data-dictionary/dist/dictionaries'
 
 const FILE_PATH = '../exevo-pan/public/sprites'
 
 export default class StaticData {
   private staticFileNames: Set<string> = new Set([])
+
+  private dictionary: Set<string> = new Set([
+    ...DICTIONARIES.store.scrapingTokens,
+    ...DICTIONARIES.outfit.tokens,
+    ...DICTIONARIES.storeOutfit.tokens,
+    ...DICTIONARIES.mount.tokens,
+    ...DICTIONARIES.storeMount.tokens,
+  ])
 
   private missingFiles: Set<string> = new Set([])
 
@@ -22,8 +31,8 @@ export default class StaticData {
     broadcast(`Loading static files from Exevo Pan...`, 'system')
 
     this.staticFileNames = new Set([
-      ...(await this.loadDirectory('mounts')),
       ...(await this.loadDirectory('store')),
+      ...(await this.loadDirectory('mounts')),
       ...(await this.loadDirectory('storemounts')),
       ...(await this.loadDirectory('outfits/female')).map((file) =>
         this.addPrefix('female', file),
@@ -64,19 +73,37 @@ export default class StaticData {
       }
     }
 
+    const checkDictionary = (fileName: string) => {
+      if (!this.dictionary.has(fileName)) {
+        this.missingFiles.add(fileName)
+        this.addMissingFileAuction(id, fileName)
+      }
+    }
+
     const sexPrefix: 'male' | 'female' = sex ? 'female' : 'male'
 
-    outfits.forEach(({ name, type }) =>
-      checkFile(this.addPrefix(sexPrefix, `${name}_${type}.gif`)),
-    )
-    storeOutfits.forEach(({ name, type }) =>
-      this.addPrefix(sexPrefix, `${name}_${type}.gif`),
-    )
+    outfits.forEach(({ name, type }) => {
+      checkFile(this.addPrefix(sexPrefix, `${name}_${type}.gif`))
+      checkDictionary(name)
+    })
+    storeOutfits.forEach(({ name, type }) => {
+      checkFile(this.addPrefix(sexPrefix, `${name}_${type}.gif`))
+      checkDictionary(name)
+    })
 
-    mounts.forEach((name) => checkFile(`${name}.gif`))
-    storeMounts.forEach((name) => checkFile(`${name}.gif`))
+    mounts.forEach((name) => {
+      checkFile(`${name}.gif`)
+      checkDictionary(name)
+    })
+    storeMounts.forEach((name) => {
+      checkFile(`${name}.gif`)
+      checkDictionary(name)
+    })
 
-    storeItems.forEach(({ name }) => checkFile(`${name}.gif`))
+    storeItems.forEach(({ name }) => {
+      checkFile(`${name}.gif`)
+      checkDictionary(name)
+    })
   }
 
   public getMissingFiles(): Set<string> {
