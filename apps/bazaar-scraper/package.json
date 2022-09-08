@@ -13,6 +13,7 @@
     "scrap:history": "NODE_PATH=./src sucrase-node src/Scripts/ScrapHistory/run.ts",
     "scrap:raw": "NODE_PATH=./src sucrase-node src/Scripts/ScrapRawBazaarData/run.ts",
     "update:statistics": "NODE_PATH=./src sucrase-node src/Scripts/UpdateHistoryStatistics/run.ts",
+    "checkup": "NODE_PATH=./src sucrase-node src/Scripts/StaticCheckup/run.ts",
     "revalidate": "NODE_PATH=./src sucrase-node src/Scripts/RevalidatePage/run.ts",
     "dev": "serve -l 5555 Output",
     "staging": "Output/staging/deployStaging.sh"

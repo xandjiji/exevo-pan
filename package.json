@@ -35,7 +35,8 @@
     "start:staging": "turbo run staging",
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",
     "deploy:backoffice": "yarn --cwd apps/backoffice deploy",
-    "scrap:raw": "yarn --cwd apps/bazaar-scraper scrap:raw"
+    "scrap:raw": "yarn --cwd apps/bazaar-scraper scrap:raw",
+    "checkup": "yarn --cwd apps/bazaar-scraper checkup"
   },
   "devDependencies": {
     "husky": "^7.0.4",
