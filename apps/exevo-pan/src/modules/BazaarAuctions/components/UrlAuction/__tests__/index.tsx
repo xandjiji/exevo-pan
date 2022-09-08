@@ -45,7 +45,14 @@ describe('<UrlAuction />', () => {
     )
   })
 
-  test.todo('should fetch and render nothing')
+  test('shouldnt either fetch or render anything', () => {
+    setup.URLSearchParams.get()
 
-  test.todo('shouldnt either fetch or render anything')
+    renderWithProviders(<UrlAuction endpoint="endpoint" />)
+
+    expect(screen.queryByText(/loading/gi)).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('button', { name: 'Close dialog' }),
+    ).not.toBeInTheDocument()
+  })
 })
