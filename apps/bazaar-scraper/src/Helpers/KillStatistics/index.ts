@@ -1,47 +1,53 @@
 import cheerio, { Element } from 'cheerio/lib/index'
 import { exitIfMaintenance } from 'utils'
+import { bossList } from './bossList'
 
 export default class KillStatistics {
-  maintenanceCheck(content: string): boolean {
+  private maintenanceCheck(content: string): boolean {
     const $ = cheerio.load(content)
     const headingElement = $('h1')
     return headingElement.text() === 'Downtime'
   }
 
-  /* name(element: Element): string {
+  private bossName(element: Element): string {
     return cheerio('td:nth-child(1)', element).text()
   }
 
-  location(element: Element): ServerLocation {
-    const locationText = cheerio('td:nth-child(3)', element).text()
-    return buildServerLocation(locationText)
+  private playersKilled(element: Element): number {
+    return +cheerio('td:nth-child(2)', element).text()
   }
 
-  pvpType(element: Element): PvpType {
-    const pvpTypeText = cheerio('td:nth-child(4)', element).text()
-    return buildPvpType(pvpTypeText)
+  private killedByPlayers(element: Element): number {
+    return +cheerio('td:nth-child(3)', element).text()
   }
 
-  battleye(element: Element): boolean {
-    const battleyeImageSrc = cheerio('td:nth-child(5) img', element).attr('src')
+  lastDayBossKills(content: string): Record<string, BossKills> {
+    exitIfMaintenance(() => this.maintenanceCheck(content))
 
-    if (!battleyeImageSrc) {
-      return false
-    }
+    const $ = cheerio.load(content)
 
-    const BATTLEYE_PROTECTED_URL =
-      'https://static.tibia.com/images/global/content/icon_battleyeinitial.gif'
+    const bossKillsEntries: Record<string, BossKills> = {}
+    bossList.forEach((bossName) => {
+      bossKillsEntries[bossName] = {
+        playersKilled: 0,
+        killedByPlayers: 0,
+      }
+    })
 
-    return battleyeImageSrc === BATTLEYE_PROTECTED_URL
+    const bossRows = $('.Odd, .Even')
+    bossRows.each((_, element) => {
+      const bossName = this.bossName(element)
+
+      if (bossList.has(bossName)) {
+        bossKillsEntries[bossName] = {
+          playersKilled: this.playersKilled(element),
+          killedByPlayers: this.killedByPlayers(element),
+        }
+      }
+    })
+
+    return bossKillsEntries
   }
-
-  experimental(element: Element): boolean {
-    const serverInfoText = cheerio('td:nth-child(6)', element)
-      .text()
-      .toLowerCase()
-
-    return serverInfoText.includes('experimental')
-  } */
 
   servers(content: string): string[] {
     exitIfMaintenance(() => this.maintenanceCheck(content))
