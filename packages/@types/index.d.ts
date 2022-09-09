@@ -4,6 +4,7 @@
 
 /// <reference path="declarations/AdvertisePurchase.d.ts" />
 /// <reference path="declarations/BlogPost.d.ts" />
+/// <reference path="declarations/BossKills.d.ts" />
 /// <reference path="declarations/CharacterObject.d.ts" />
 /// <reference path="declarations/Dictionary.d.ts" />
 /// <reference path="declarations/FilterOptions.d.ts" />
