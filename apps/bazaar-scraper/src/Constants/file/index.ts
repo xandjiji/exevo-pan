@@ -1,3 +1,4 @@
+import { BOSS_STATISTICS } from './bossStatistics'
 import { CURRENT_AUCTIONS } from './currentAuctions'
 import { HISTORY_AUCTIONS, SCRAP_HISTORY_DATA } from './historyAuctions'
 import { HISTORY_STATISTICS } from './historyStatistics'
@@ -6,6 +7,7 @@ import { SERVER_DATA } from './serverData'
 import { SCRAP_RAW_DATA, RAW_DATA_FOLDER } from './rawBazaar'
 
 export const file = {
+  BOSS_STATISTICS,
   SERVER_DATA,
   CURRENT_AUCTIONS,
   RARE_ITEM_DATA,
