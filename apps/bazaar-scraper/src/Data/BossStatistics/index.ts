@@ -125,6 +125,7 @@ export default class BossStatisticsData {
         const appeared = playersKilled + killedByPlayers > 0
 
         if (appeared) {
+          /* @ ToDo: add a limit for this? */
           this.bossStatistics.bosses[bossName].appearences.push(
             currentTimestamp,
           )
