@@ -3,11 +3,13 @@ declare type BossAppearences = {
   appearences: number[]
 }
 
+type BossToken = string
+
 declare type BossStatistics = {
   server: string
   latest: {
     hash: string
     timestamp: number
   }
-  bosses: Record<string, BossAppearences>
+  bosses: Record<BossToken, BossAppearences>
 }
