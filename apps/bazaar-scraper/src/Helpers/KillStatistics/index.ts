@@ -1,6 +1,5 @@
 import cheerio, { Element } from 'cheerio/lib/index'
 import { exitIfMaintenance } from 'utils'
-import { bossList } from './bossList'
 
 export default class KillStatistics {
   private maintenanceCheck(content: string): boolean {
@@ -27,22 +26,12 @@ export default class KillStatistics {
     const $ = cheerio.load(content)
 
     const bossKillsEntries: Record<string, BossKills> = {}
-    bossList.forEach((bossName) => {
-      bossKillsEntries[bossName] = {
-        playersKilled: 0,
-        killedByPlayers: 0,
-      }
-    })
 
     const bossRows = $('.Odd, .Even')
     bossRows.each((_, element) => {
-      const bossName = this.bossName(element)
-
-      if (bossList.has(bossName)) {
-        bossKillsEntries[bossName] = {
-          playersKilled: this.playersKilled(element),
-          killedByPlayers: this.killedByPlayers(element),
-        }
+      bossKillsEntries[this.bossName(element)] = {
+        playersKilled: this.playersKilled(element),
+        killedByPlayers: this.killedByPlayers(element),
       }
     })
 
