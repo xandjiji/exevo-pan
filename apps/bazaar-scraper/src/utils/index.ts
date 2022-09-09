@@ -6,6 +6,7 @@ export * from './makeRangeArray'
 export * from './mockRequests'
 export * from './retryWrapper'
 export * from './sanitize'
+export * from './sha256'
 export * from './sleep'
 
 export { default as MemoryWatcher } from './MemoryWatcher'
