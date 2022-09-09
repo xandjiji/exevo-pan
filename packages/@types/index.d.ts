@@ -1,10 +1,9 @@
 /* eslint-disable @typescript-eslint/triple-slash-reference */
 /// <reference path="contracts/BlogFilter.d.ts" />
 /// <reference path="contracts/Filters.d.ts" />
-
 /// <reference path="declarations/AdvertisePurchase.d.ts" />
 /// <reference path="declarations/BlogPost.d.ts" />
-/// <reference path="declarations/BossKills.d.ts" />
+/// <reference path="declarations/BossStatistics.d.ts" />
 /// <reference path="declarations/CharacterObject.d.ts" />
 /// <reference path="declarations/Dictionary.d.ts" />
 /// <reference path="declarations/FilterOptions.d.ts" />
