@@ -82,3 +82,6 @@ export const constTokens = {
   'Zulazza the Corruptor': 'Zulazza the Corruptor',
   Zushuka: 'Zushuka',
 } as const
+
+export type BossToken = keyof typeof constTokens
+export type TrackedBossName = ValueOf<typeof constTokens>

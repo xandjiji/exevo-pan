@@ -1,19 +1,11 @@
 import fs from 'fs/promises'
+import { constTokens as bossDictionary } from 'data-dictionary/dist/dictionaries/bosses'
 import { broadcast, coloredText } from 'logging'
 import { file } from 'Constants'
 import { sha256 } from 'utils'
 
 const { serverResolver } = file.BOSS_STATISTICS
 
-/* @ ToDo: add this to data dictionary */
-const bossDictionary = {
-  Abyssador: 'Abyssador',
-  Ferumbras: 'Ferumbras',
-  Ekatrix: 'Ekatrix',
-  yetis: 'Yeti',
-}
-
-/* @ ToDo: add this to data dictionary */
 const trackedBossTokens = Object.keys(bossDictionary) as Array<
   keyof typeof bossDictionary
 >
