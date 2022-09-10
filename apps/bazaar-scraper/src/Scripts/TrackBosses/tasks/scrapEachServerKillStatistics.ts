@@ -1,9 +1,13 @@
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
 import { HttpClient } from 'services'
 import { KillStatistics } from 'Helpers'
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
-import { retryWrapper, batchPromises } from 'utils'
+import { retryWrapper, sleep } from 'utils'
 import { KILL_STATISTICS_BASE_URL } from '../utils'
+
+const DELAY = 5000
 
 const fetchKillStatisticsPage = retryWrapper((serverName: string) =>
   HttpClient.getHtml(`${KILL_STATISTICS_BASE_URL}&world=${serverName}`),
@@ -18,19 +22,20 @@ export const scrapEachServerKillStatistics = async (
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
 
-  const tasks = serverList.map((serverName) => async () => {
-    const helper = new KillStatistics()
-    const file = new BossStatistics()
+  const helper = new KillStatistics()
+  const file = new BossStatistics()
+
+  for (const server of serverList) {
     taskTracking.incTask()
 
-    await file.load(serverName)
+    await file.load(server)
 
     file.feedData(
-      helper.lastDayBossKills(await fetchKillStatisticsPage(serverName)),
+      helper.lastDayBossKills(await fetchKillStatisticsPage(server)),
     )
-  })
 
-  await batchPromises(tasks)
+    await sleep(DELAY)
+  }
 
   taskTracking.finish()
 }
