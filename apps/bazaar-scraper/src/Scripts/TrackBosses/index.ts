@@ -1,6 +1,4 @@
 import { broadcast } from 'logging'
-import { RevalidateClient } from 'services'
-import { retryWrapper } from 'utils'
 import { fetchServerNames } from './utils'
 import { scrapEachServerKillStatistics } from './tasks'
 

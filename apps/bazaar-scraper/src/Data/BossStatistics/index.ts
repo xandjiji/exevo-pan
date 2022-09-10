@@ -46,8 +46,6 @@ export default class BossStatisticsData {
   async load(serverName: string): Promise<void> {
     const serverFile = this.coloredFileName(serverName)
 
-    broadcast(`Loading ${serverFile}...`, 'system')
-
     try {
       this.bossStatistics = JSON.parse(
         await fs.readFile(serverResolver(serverName), 'utf-8'),
