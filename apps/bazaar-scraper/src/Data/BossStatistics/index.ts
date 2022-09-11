@@ -133,7 +133,6 @@ export default class BossStatisticsData {
         const appeared = playersKilled + killedByPlayers > 0
 
         if (appeared) {
-          /* @ ToDo: add a limit for this? */
           this.bossStatistics.bosses[bossName].appearences.push(
             currentTimestamp,
           )
@@ -145,5 +144,13 @@ export default class BossStatisticsData {
     this.bossStatistics.latest.timestamp = currentTimestamp
 
     await this.save()
+  }
+
+  getBossStatistics(): BossStatistics {
+    if (this.bossStatistics.latest.timestamp === 0) {
+      throw Error('Trying to read boss statistics before loading them')
+    }
+
+    return this.bossStatistics
   }
 }
