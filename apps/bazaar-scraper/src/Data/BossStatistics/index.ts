@@ -4,7 +4,7 @@ import { broadcast, coloredText } from 'logging'
 import { file } from 'Constants'
 import { sha256 } from 'utils'
 
-const { serverResolver } = file.BOSS_STATISTICS
+const { serverResolver, path } = file.BOSS_STATISTICS
 
 const trackedBossTokens = Object.keys(bossDictionary) as Array<
   keyof typeof bossDictionary
@@ -59,6 +59,24 @@ export default class BossStatisticsData {
       this.bossStatistics = { ...this.bossStatistics, server: serverName }
     } finally {
       this.normalizeCurrentBossStatistics()
+    }
+  }
+
+  async readAllServerNames(): Promise<string[]> {
+    try {
+      return (await fs.readdir(path, 'utf-8'))
+        .map((fileName) => {
+          const [serverName] = fileName.split('.')
+          return serverName
+        })
+        .filter(Boolean)
+    } catch {
+      broadcast(
+        `Could not find kill statistics for any server on ${path}`,
+        'fail',
+      )
+
+      return []
     }
   }
 
