@@ -16,9 +16,9 @@ const fetchKillStatisticsPage = retryWrapper((serverName: string) =>
 export const scrapEachServerKillStatistics = async (
   serverList: string[],
 ): Promise<void> => {
-  const batchSize = serverList.length
+  const taskSize = serverList.length
   const taskTracking = new TrackETA(
-    batchSize,
+    taskSize,
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
 
