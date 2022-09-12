@@ -1,6 +1,9 @@
 import { broadcast } from 'logging'
 import { fetchServerNames } from './utils'
-import { scrapEachServerKillStatistics } from './tasks'
+import {
+  scrapEachServerKillStatistics,
+  generateBossDistributions,
+} from './tasks'
 
 const main = async (): Promise<void> => {
   broadcast('Fetching server names...', 'neutral')
@@ -8,6 +11,8 @@ const main = async (): Promise<void> => {
   const serverList = await fetchServerNames()
 
   await scrapEachServerKillStatistics(serverList)
+
+  const bossDistributions = await generateBossDistributions()
 }
 
 export default main

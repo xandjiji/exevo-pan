@@ -34,7 +34,31 @@ const getAppearencesIntervals = (appearences: number[]): number[] => {
   return intervals
 }
 
-export const generateBossDistributions = async (): Promise<void> => {
+const calculateDistribution = (intervals: number[]): Distribution => {
+  const min = Math.min(...intervals)
+  const max = Math.max(...intervals)
+  const dataSize = intervals.length
+
+  const distribution: Distribution = {}
+  for (
+    let currentInterval = min;
+    currentInterval <= max;
+    currentInterval += 1
+  ) {
+    const occurrences = intervals.filter(
+      (interval) => interval === currentInterval,
+    ).length
+
+    const frequency = occurrences / dataSize
+    distribution[currentInterval] = +frequency.toFixed(4)
+  }
+
+  return distribution
+}
+
+export const generateBossDistributions = async (): Promise<
+  Record<string, Distribution>
+> => {
   const file = new BossStatistics()
 
   const serverList = await file.readAllServerNames()
@@ -66,5 +90,11 @@ export const generateBossDistributions = async (): Promise<void> => {
 
   taskTracking.finish()
 
-  console.log(bossIntervals)
+  const bossDistributions: Record<string, Distribution> = {}
+
+  Object.entries(bossIntervals).forEach(([bossName, intervals]) => {
+    bossDistributions[bossName] = calculateDistribution(intervals)
+  })
+
+  return bossDistributions
 }
