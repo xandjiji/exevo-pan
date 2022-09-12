@@ -95,6 +95,18 @@ export default class BossStatisticsData {
     )
   }
 
+  public async saveBossChance(bossChances: BossChances): Promise<void> {
+    const { server } = bossChances
+    await fs.writeFile(
+      file.BOSS_CHANCES.serverResolver(server),
+      JSON.stringify(bossChances),
+    )
+    broadcast(
+      `Current boss chances were saved to ${this.coloredFileName(server)}`,
+      'success',
+    )
+  }
+
   private generateHash(bossKillsData: Record<string, BossKills>): string {
     return sha256(JSON.stringify(bossKillsData))
   }

@@ -3,6 +3,7 @@ import { fetchServerNames } from './utils'
 import {
   scrapEachServerKillStatistics,
   generateBossDistributions,
+  calculateBossChances,
 } from './tasks'
 
 const main = async (): Promise<void> => {
@@ -13,6 +14,8 @@ const main = async (): Promise<void> => {
   await scrapEachServerKillStatistics(serverList)
 
   const bossDistributions = await generateBossDistributions()
+
+  await calculateBossChances(serverList, bossDistributions)
 }
 
 export default main
