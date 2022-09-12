@@ -1,0 +1,1 @@
+cp -R ~/exevo-pan/apps/bazaar-scraper/Output/bossStatistics ~/backups/
