@@ -12,6 +12,7 @@
     "scrap:auctions": "NODE_PATH=./src sucrase-node src/Scripts/UpdateAuctions/run.ts",
     "scrap:history": "NODE_PATH=./src sucrase-node src/Scripts/ScrapHistory/run.ts",
     "scrap:raw": "NODE_PATH=./src sucrase-node src/Scripts/ScrapRawBazaarData/run.ts",
+    "update:servers": "NODE_PATH=./src sucrase-node src/Scripts/ScrapServers/run.ts",
     "update:statistics": "NODE_PATH=./src sucrase-node src/Scripts/UpdateHistoryStatistics/run.ts",
     "update:bosses": "NODE_PATH=./src sucrase-node src/Scripts/TrackBosses/run.ts",
     "checkup": "NODE_PATH=./src sucrase-node src/Scripts/StaticCheckup/run.ts",
