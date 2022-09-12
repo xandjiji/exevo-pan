@@ -3,6 +3,7 @@
 /// <reference path="contracts/Filters.d.ts" />
 /// <reference path="declarations/AdvertisePurchase.d.ts" />
 /// <reference path="declarations/BlogPost.d.ts" />
+/// <reference path="declarations/BossChances.d.ts" />
 /// <reference path="declarations/BossStatistics.d.ts" />
 /// <reference path="declarations/CharacterObject.d.ts" />
 /// <reference path="declarations/Dictionary.d.ts" />
