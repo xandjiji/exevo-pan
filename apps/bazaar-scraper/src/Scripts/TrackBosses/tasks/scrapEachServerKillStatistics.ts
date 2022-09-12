@@ -22,10 +22,10 @@ export const scrapEachServerKillStatistics = async (
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
 
-  const helper = new KillStatistics()
-  const file = new BossStatistics()
-
   for (const server of serverList) {
+    const helper = new KillStatistics()
+    const file = new BossStatistics()
+
     taskTracking.incTask()
 
     await file.load(server)

@@ -1,6 +1,5 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import { KillStatistics } from 'Helpers'
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
@@ -18,10 +17,11 @@ export const calculateBossChances = async (
   )
 
   const lastUpdated = +new Date()
-  const file = new BossStatistics()
 
   for (const server of serverList) {
     taskTracking.incTask()
+
+    const file = new BossStatistics()
 
     await file.load(server)
 
