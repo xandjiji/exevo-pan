@@ -3,4 +3,5 @@
 !.gitignore
 !ServerData.json
 static/ServerData.json
+static/bossChances
 rawData/
