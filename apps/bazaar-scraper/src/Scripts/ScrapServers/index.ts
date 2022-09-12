@@ -1,7 +1,7 @@
 import { ServerList } from 'Helpers'
 import { ServerData } from 'Data'
 import { broadcast } from 'logging'
-import { fetchServerPage } from './utils'
+import { fetchServerPage, fetchActiveServers } from './utils'
 
 const main = async (): Promise<void> => {
   const helper = new ServerList()
@@ -20,6 +20,10 @@ const main = async (): Promise<void> => {
       serverData.registerServer(newServer)
     }
   })
+
+  broadcast('Fetching active server list...', 'neutral')
+  const activeServerList = await fetchActiveServers()
+  await serverData.saveActiveServers(activeServerList)
 }
 
 export default main

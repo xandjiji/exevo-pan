@@ -1,8 +1,15 @@
 import { FileConstant, OUTPUT_PATH } from './types'
 
-const FILENAME = 'ServerData.json'
+const SERVER_DATA_FILENAME = 'ServerData.json'
 
 export const SERVER_DATA: FileConstant = {
-  name: FILENAME,
-  path: `${OUTPUT_PATH}/${FILENAME}`,
+  name: SERVER_DATA_FILENAME,
+  path: `${OUTPUT_PATH}/${SERVER_DATA_FILENAME}`,
+}
+
+const ACTIVE_SERVERS_FILENAME = 'ActiveServers.json'
+
+export const ACTIVE_SERVERS: FileConstant = {
+  name: ACTIVE_SERVERS_FILENAME,
+  path: `${OUTPUT_PATH}/${ACTIVE_SERVERS_FILENAME}`,
 }
