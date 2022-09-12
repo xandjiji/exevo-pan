@@ -2,18 +2,17 @@
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
+import { stripTimeFromTimestamp } from 'utils'
 
 const MILLISECONDS_IN_A_DAY = 86_400_000
-
-const sanitizeTimestamp = (timestamp: number): number =>
-  +new Date(new Date(timestamp).toDateString())
 
 const dayDiffBetween = (
   currentTimestamp: number,
   nextTimestamp: number,
 ): number => {
   const millisecondsDiff =
-    sanitizeTimestamp(nextTimestamp) - sanitizeTimestamp(currentTimestamp)
+    stripTimeFromTimestamp(nextTimestamp) -
+    stripTimeFromTimestamp(currentTimestamp)
 
   return Math.floor(millisecondsDiff / MILLISECONDS_IN_A_DAY)
 }

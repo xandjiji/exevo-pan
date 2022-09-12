@@ -8,5 +8,6 @@ export * from './retryWrapper'
 export * from './sanitize'
 export * from './sha256'
 export * from './sleep'
+export * from './stripTimeFromTimestamp'
 
 export { default as MemoryWatcher } from './MemoryWatcher'
