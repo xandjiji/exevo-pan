@@ -2,20 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
-import { stripTimeFromTimestamp } from 'utils'
-
-const MILLISECONDS_IN_A_DAY = 86_400_000
-
-const dayDiffBetween = (
-  currentTimestamp: number,
-  nextTimestamp: number,
-): number => {
-  const millisecondsDiff =
-    stripTimeFromTimestamp(nextTimestamp) -
-    stripTimeFromTimestamp(currentTimestamp)
-
-  return Math.floor(millisecondsDiff / MILLISECONDS_IN_A_DAY)
-}
+import { dayDiffBetween } from 'utils'
 
 const getAppearencesIntervals = (appearences: number[]): number[] => {
   const intervals: number[] = []
