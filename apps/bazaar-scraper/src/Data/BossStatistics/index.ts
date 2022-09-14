@@ -127,7 +127,7 @@ export default class BossStatisticsData {
 
   public async feedData(
     bossKillsData: Record<string, BossKills>,
-  ): Promise<void> {
+  ): Promise<boolean> {
     const serverName = this.bossStatistics.server
 
     const newestHash = this.generateHash(bossKillsData)
@@ -136,7 +136,7 @@ export default class BossStatisticsData {
 
     if (this.bossStatistics.latest.hash === newestHash) {
       broadcast(`Data for ${serverName} still not updated`, 'neutral')
-      return
+      return false
     }
 
     const trackedBossKills = this.normalizeBossKills(bossKillsData)
@@ -157,6 +157,7 @@ export default class BossStatisticsData {
     this.bossStatistics.latest.timestamp = yesterdayTimestamp
 
     await this.save()
+    return true
   }
 
   getBossStatistics(): BossStatistics {
