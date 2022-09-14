@@ -26,5 +26,11 @@ module.exports = {
       script: 'scrapAuctions.sh',
       restart_delay: MINUTE * 5,
     },
+    {
+      name: 'ScrapBosses',
+      cwd: __dirname,
+      script: 'updateBossChances.sh',
+      restart_delay: HOUR,
+    },
   ],
 }
