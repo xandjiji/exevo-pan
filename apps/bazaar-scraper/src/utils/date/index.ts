@@ -28,5 +28,5 @@ export const dayDiffBetween = (
     stripTimeFromTimestamp(nextTimestamp) -
     stripTimeFromTimestamp(currentTimestamp)
 
-  return Math.floor(millisecondsDiff / MILLISECONDS_IN_A_DAY)
+  return Math.abs(Math.floor(millisecondsDiff / MILLISECONDS_IN_A_DAY))
 }
