@@ -26,8 +26,6 @@ export const scrapEachServerKillStatistics = async (
     const helper = new KillStatistics()
     const file = new BossStatistics()
 
-    taskTracking.incTask()
-
     await file.load(server)
 
     file.feedData(
@@ -35,6 +33,7 @@ export const scrapEachServerKillStatistics = async (
     )
 
     await sleep(DELAY)
+    taskTracking.incTask()
   }
 
   taskTracking.finish()

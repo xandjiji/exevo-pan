@@ -44,7 +44,7 @@ export const calculateBossChances = async (
       })
     }
 
-    file.saveBossChance(bossChances)
+    await file.saveBossChance(bossChances)
     taskTracking.incTask()
   }
 
