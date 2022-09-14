@@ -4,6 +4,8 @@ import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
 
+const RELEVANT_FREQUENCY = 0.01
+
 const getAppearencesIntervals = (appearences: number[]): number[] => {
   const intervals: number[] = []
 
@@ -40,6 +42,19 @@ const calculateDistribution = (intervals: number[]): Distribution => {
   }
 
   return distribution
+}
+
+const denoiseDistribution = (distribution: Distribution): Distribution => {
+  const denoisedDistribution: Distribution = {}
+
+  for (const [interval, frequency] of Object.entries(distribution)) {
+    if (frequency >= RELEVANT_FREQUENCY) {
+      const parsedInterval = +interval
+      denoisedDistribution[parsedInterval] = frequency
+    }
+  }
+
+  return denoisedDistribution
 }
 
 export const generateBossDistributions = async (): Promise<
@@ -79,7 +94,9 @@ export const generateBossDistributions = async (): Promise<
   const bossDistributions: Record<string, Distribution> = {}
 
   Object.entries(bossIntervals).forEach(([bossName, intervals]) => {
-    bossDistributions[bossName] = calculateDistribution(intervals)
+    bossDistributions[bossName] = denoiseDistribution(
+      calculateDistribution(intervals),
+    )
   })
 
   return bossDistributions
