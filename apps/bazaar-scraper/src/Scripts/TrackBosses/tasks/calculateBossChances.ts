@@ -58,7 +58,7 @@ export const calculateBossChances = async (
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
 
-  const lastUpdated = +new Date()
+  const lastUpdated = stripTimeFromTimestamp(+new Date())
 
   for (const server of serverList) {
     const file = new BossStatistics()
