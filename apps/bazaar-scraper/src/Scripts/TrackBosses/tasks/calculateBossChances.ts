@@ -19,8 +19,6 @@ export const calculateBossChances = async (
   const lastUpdated = +new Date()
 
   for (const server of serverList) {
-    taskTracking.incTask()
-
     const file = new BossStatistics()
 
     await file.load(server)
@@ -47,6 +45,7 @@ export const calculateBossChances = async (
     }
 
     file.saveBossChance(bossChances)
+    taskTracking.incTask()
   }
 
   taskTracking.finish()

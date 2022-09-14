@@ -61,8 +61,6 @@ export const generateBossDistributions = async (): Promise<
   const bossIntervals: Record<string, number[]> = {}
 
   for (const server of serverList) {
-    taskTracking.incTask()
-
     await file.load(server)
 
     const bossStatistics = file.getBossStatistics()
@@ -72,6 +70,8 @@ export const generateBossDistributions = async (): Promise<
 
       bossIntervals[name] = [...(bossIntervals[name] ?? []), ...intervals]
     })
+
+    taskTracking.incTask()
   }
 
   taskTracking.finish()
