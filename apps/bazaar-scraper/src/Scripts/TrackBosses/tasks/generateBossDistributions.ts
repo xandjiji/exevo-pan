@@ -57,6 +57,16 @@ const denoiseDistribution = (distribution: Distribution): Distribution => {
   return denoisedDistribution
 }
 
+const apply1DayRule = (distribution: Distribution): Distribution => {
+  if (distribution[1] && !distribution[2]) {
+    const fixedDistribution = { ...distribution }
+    delete fixedDistribution[1]
+    return fixedDistribution
+  }
+
+  return distribution
+}
+
 export const generateBossDistributions = async (): Promise<
   Record<string, Distribution>
 > => {
@@ -94,8 +104,8 @@ export const generateBossDistributions = async (): Promise<
   const bossDistributions: Record<string, Distribution> = {}
 
   Object.entries(bossIntervals).forEach(([bossName, intervals]) => {
-    bossDistributions[bossName] = denoiseDistribution(
-      calculateDistribution(intervals),
+    bossDistributions[bossName] = apply1DayRule(
+      denoiseDistribution(calculateDistribution(intervals)),
     )
   })
 
