@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
-import { dayDiffBetween, stripTimeFromTimestamp } from 'utils'
+import { ceilledDayDiffBetween } from 'utils'
 
 const MAX_APPEARENCES = 5
 
@@ -31,8 +31,8 @@ const calculateChance = (
   lastAppearence: number,
   distribution: Distribution,
 ): number => {
-  const currentTimestamp = stripTimeFromTimestamp(+new Date())
-  const daysSinceThen = dayDiffBetween(currentTimestamp, lastAppearence)
+  const currentTimestamp = +new Date()
+  const daysSinceThen = ceilledDayDiffBetween(currentTimestamp, lastAppearence)
 
   const possibleDistribution: Distribution = {}
   Object.keys(distribution).forEach((key) => {
@@ -58,7 +58,7 @@ export const calculateBossChances = async (
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
 
-  const lastUpdated = stripTimeFromTimestamp(+new Date())
+  const lastUpdated = +new Date()
 
   for (const server of serverList) {
     const file = new BossStatistics()
