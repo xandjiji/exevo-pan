@@ -1,6 +1,7 @@
 export const routes = {
   HOME: '/',
   BAZAAR_HISTORY: '/bazaar-history',
+  BOSS_TRACKER: '/boss-tracker',
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
   EXERCISE_WEAPONS: '/calculators/exercise-weapons',
