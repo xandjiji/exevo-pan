@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
-import { ceilledDayDiffBetween } from 'utils'
+import { dayDiffBetween } from 'utils'
 
 const MAX_APPEARENCES = 5
 
@@ -32,7 +32,9 @@ const calculateChance = (
   distribution: Distribution,
 ): number => {
   const currentTimestamp = +new Date()
-  const daysSinceThen = ceilledDayDiffBetween(currentTimestamp, lastAppearence)
+  const daysSinceThen = Math.round(
+    dayDiffBetween(currentTimestamp, lastAppearence),
+  )
 
   const possibleDistribution: Distribution = {}
   Object.keys(distribution).forEach((key) => {

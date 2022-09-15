@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
-import { ceilledDayDiffBetween } from 'utils'
+import { dayDiffBetween } from 'utils'
 
 const RELEVANT_FREQUENCY = 0.01
 
@@ -16,7 +16,7 @@ const getAppearencesIntervals = (appearences: number[]): number[] => {
 
     if (!nextTimestamp) return
 
-    intervals.push(ceilledDayDiffBetween(currentTimestamp, nextTimestamp))
+    intervals.push(Math.round(dayDiffBetween(currentTimestamp, nextTimestamp)))
   })
 
   return intervals
