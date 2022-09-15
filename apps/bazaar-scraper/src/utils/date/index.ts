@@ -26,8 +26,5 @@ export const dayDiffBetween = (
 ): number => {
   const millisecondsDiff = nextTimestamp - currentTimestamp
 
-  return Math.abs(Math.floor(millisecondsDiff / MILLISECONDS_IN_A_DAY))
+  return Math.abs(millisecondsDiff / MILLISECONDS_IN_A_DAY)
 }
-
-export const ceilledDayDiffBetween: typeof dayDiffBetween = (...args): number =>
-  Math.max(dayDiffBetween(...args), 1)
