@@ -2,11 +2,11 @@ import { endpoints, paths } from 'Constants'
 import { buildServerOptions, filterItemData } from './utils'
 
 export default class DrawerFieldsClient {
-  static activeServersUrl = `${endpoints.STATIC_DATA}${paths.ACTIVE_SERVERS}`
+  private static activeServersUrl = `${endpoints.STATIC_DATA}${paths.ACTIVE_SERVERS}`
 
-  static serverDataUrl = `${endpoints.STATIC_DATA}${paths.SERVER_DATA}`
+  private static serverDataUrl = `${endpoints.STATIC_DATA}${paths.SERVER_DATA}`
 
-  static rareItemDataUrl = `${endpoints.STATIC_DATA}${paths.ITEMS_DATA}`
+  private static rareItemDataUrl = `${endpoints.STATIC_DATA}${paths.ITEMS_DATA}`
 
   static async fetchActiveServers(): Promise<string[]> {
     const response = await fetch(this.activeServersUrl)
