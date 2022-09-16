@@ -2,10 +2,10 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { DrawerFieldsClient, BossesClient } from 'services'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { BossGrid } from 'modules/BossTracker'
+import BossTracker from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle, sortBossesBy, loadBossSrc } from 'utils'
+import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { endpoints, routes, jsonld, urlParameters } from 'Constants'
 import { common } from 'locales'
 
@@ -16,14 +16,15 @@ const pageUrl = buildUrl(routes.BOSS_TRACKER)
 type BossTrackerProps = {
   activeServers: string[]
   bossChances: BossChances
+  recentlyKilled: BossStats[]
 }
 
 /* @ ToDo: i18n */
 
-export default function BossTracker({
-  activeServers,
-  bossChances,
-}: BossTrackerProps) {
+const MAX_RECENTLY_KILLED_TIME_DIFF =
+  MILLISECONDS_IN.DAY + MILLISECONDS_IN.DAY / 2
+
+export default function BossTrackerPage(args: BossTrackerProps) {
   /* const { translations } = useTranslations()
   const { locale } = useRouter() */
 
@@ -84,7 +85,7 @@ export default function BossTracker({
       </Head>
 
       <Main>
-        <BossGrid bosses={bossChances.bosses} />
+        <BossTracker {...args} />
       </Main>
     </>
   )
@@ -105,6 +106,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         ...bossChances,
         bosses: [...bossChances.bosses].sort(sortBossesBy.chance),
       },
+      recentlyKilled: bossChances.bosses
+        .filter(({ lastAppearences }) => {
+          const [lastAppearence] = lastAppearences.slice(-1)
+
+          if (!lastAppearence) return false
+
+          return +new Date() - lastAppearence <= MAX_RECENTLY_KILLED_TIME_DIFF
+        })
+        .sort(sortBossesBy.recentlyKilled),
       translations: {
         common: common[locale as RegisteredLocale],
       },

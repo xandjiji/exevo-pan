@@ -1,1 +1,1 @@
-export { default as BossCard } from './BossCard'
+export { default as BossGrid } from './BossGrid'
