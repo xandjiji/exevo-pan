@@ -4,7 +4,7 @@ import { DrawerFieldsClient, BossesClient } from 'services'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, sortBossesBy } from 'utils'
 import { endpoints, routes, jsonld, urlParameters } from 'Constants'
 import { common } from 'locales'
 
@@ -82,7 +82,14 @@ export default function BossTracker({
         />
       </Head>
 
-      <Main>{bossChances.server}</Main>
+      <Main>
+        {bossChances.bosses.map(({ name, currentChance }) => (
+          <div className="mb-4" key={name}>
+            <h1>{name}</h1>
+            <p>{currentChance ? `${currentChance * 100}%` : 'N/A'}</p>
+          </div>
+        ))}
+      </Main>
     </>
   )
 }
@@ -98,7 +105,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   return {
     props: {
       activeServers,
-      bossChances,
+      bossChances: {
+        ...bossChances,
+        bosses: [...bossChances.bosses].sort(sortBossesBy.chance),
+      },
       translations: {
         common: common[locale as RegisteredLocale],
       },
