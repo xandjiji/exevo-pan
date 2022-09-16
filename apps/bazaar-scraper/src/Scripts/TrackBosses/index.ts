@@ -11,13 +11,11 @@ const main = async (): Promise<void> => {
 
   const serverList = await fetchServerNames()
 
-  const wasUpdated = await scrapEachServerKillStatistics(serverList)
+  await scrapEachServerKillStatistics(serverList)
 
-  if (wasUpdated) {
-    const bossDistributions = await generateBossDistributions()
+  const bossDistributions = await generateBossDistributions()
 
-    await calculateBossChances(serverList, bossDistributions)
-  }
+  await calculateBossChances(serverList, bossDistributions)
 }
 
 export default main

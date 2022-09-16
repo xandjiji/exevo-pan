@@ -1,3 +1,5 @@
+import { links } from 'Constants'
+
 export const loadThumbnail = (src: string, size?: number) => {
   if (!size) return src
 
@@ -5,4 +7,7 @@ export const loadThumbnail = (src: string, size?: number) => {
   return `${path}-${size}.${extension}`
 }
 
-export const loadRawSrc = (src: string) => `https://www.exevopan.com${src}`
+export const loadRawSrc = (src: string) => `${links.CANONICAL}${src}`
+
+export const loadBossSrc = (bossName: string) =>
+  `/sprites/bosses/${encodeURI(bossName)}.gif`
