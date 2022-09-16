@@ -4,8 +4,8 @@ const chance: BossSorter = (a, b) =>
   (b.currentChance ?? 0) - (a.currentChance ?? 0)
 
 const recentlyKilled: BossSorter = (a, b) => {
-  const [aLastAppearence] = a.lastAppearences
-  const [bLastAppearence] = b.lastAppearences
+  const [aLastAppearence] = a.lastAppearences.slice(-1)
+  const [bLastAppearence] = b.lastAppearences.slice(-1)
 
   return (bLastAppearence ?? 0) - (aLastAppearence ?? 0)
 }
