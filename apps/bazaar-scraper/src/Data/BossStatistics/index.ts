@@ -2,7 +2,7 @@ import fs from 'fs/promises'
 import { constTokens as bossDictionary } from 'data-dictionary/dist/dictionaries/bosses'
 import { broadcast, coloredText } from 'logging'
 import { file } from 'Constants'
-import { sha256 } from 'utils'
+import { sha256, MILLISECONDS_IN_A_DAY } from 'utils'
 
 const { serverResolver, path } = file.BOSS_STATISTICS
 
@@ -131,7 +131,7 @@ export default class BossStatisticsData {
     const serverName = this.bossStatistics.server
 
     const newestHash = this.generateHash(bossKillsData)
-    const currentTimestamp = +new Date()
+    const currentTimestamp = +new Date() - MILLISECONDS_IN_A_DAY / 2
 
     if (this.bossStatistics.latest.hash === newestHash) {
       broadcast(`Data for ${serverName} still not updated`, 'neutral')
