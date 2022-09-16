@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { DrawerFieldsClient, BossesClient } from 'services'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { SpritePortrait } from 'components/Atoms'
+import { BossGrid } from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle, sortBossesBy, loadBossSrc } from 'utils'
@@ -84,26 +84,7 @@ export default function BossTracker({
       </Head>
 
       <Main>
-        {bossChances.bosses.map(({ name, currentChance }) => (
-          <div
-            className="inner-container mb-4 flex items-center gap-2"
-            key={name}
-          >
-            <SpritePortrait
-              src={loadBossSrc(name)}
-              alt={name}
-              offset
-              width={64}
-              height={64}
-            />
-            <div>
-              <h1>{name}</h1>
-              <p>
-                {currentChance ? `${(currentChance * 100).toFixed(2)}%` : 'N/A'}
-              </p>
-            </div>
-          </div>
-        ))}
+        <BossGrid bosses={bossChances.bosses} />
       </Main>
     </>
   )
