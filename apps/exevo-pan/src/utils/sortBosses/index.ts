@@ -3,7 +3,7 @@ type BossSorter = (a: BossStats, b: BossStats) => number
 const chance: BossSorter = (a, b) =>
   (b.currentChance ?? 0) - (a.currentChance ?? 0)
 
-const recentlyKilled: BossSorter = (a, b) => {
+const recentlyAppeared: BossSorter = (a, b) => {
   const [aLastAppearence] = a.lastAppearences.slice(-1)
   const [bLastAppearence] = b.lastAppearences.slice(-1)
 
@@ -12,4 +12,4 @@ const recentlyKilled: BossSorter = (a, b) => {
 
 const name: BossSorter = (a, b) => a.name.localeCompare(b.name)
 
-export const sortBossesBy = { chance, recentlyKilled, name }
+export const sortBossesBy = { chance, recentlyAppeared, name }

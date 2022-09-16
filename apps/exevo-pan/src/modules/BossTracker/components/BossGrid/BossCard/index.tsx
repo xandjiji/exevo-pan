@@ -21,7 +21,7 @@ const BossCard = ({ bossStats }: BossCardProps) => {
       />
       <div className="grid gap-1.5">
         <div className="flex items-center gap-1.5">
-          <h1 className="text-base">{name}</h1>
+          <h4 className="text-base">{name}</h4>
           {lastSeenText && <InfoTooltip content={lastSeenText} labelSize />}
         </div>
 

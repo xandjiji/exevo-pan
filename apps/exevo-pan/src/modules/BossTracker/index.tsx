@@ -1,24 +1,24 @@
-import { BossGrid } from './components'
+import { BossGrid, RecentlyAppeared } from './components'
 
 type BossTrackerProps = {
   activeServers: string[]
   bossChances: BossChances
-  recentlyKilled: BossStats[]
+  recentlyAppeared: BossStats[]
 }
 
 const BossTracker = ({
   activeServers,
   bossChances,
-  recentlyKilled,
+  recentlyAppeared,
 }: BossTrackerProps) => {
   console.log(1)
 
   return (
-    <div className="inner-container flex items-start gap-32">
-      <div className="w-fit shrink-0">
-        <BossGrid bosses={recentlyKilled} />
+    <div className="inner-container grid items-start gap-8 md:flex md:flex-row-reverse md:gap-16 lg:gap-8">
+      <div className="shrink-0 md:w-[320px]">
+        <RecentlyAppeared bosses={recentlyAppeared} />
       </div>
-      <BossGrid bosses={bossChances.bosses} className="grow grid-cols-2" />
+      <BossGrid bosses={bossChances.bosses} className="grow" />
     </div>
   )
 }

@@ -16,7 +16,7 @@ const pageUrl = buildUrl(routes.BOSS_TRACKER)
 type BossTrackerProps = {
   activeServers: string[]
   bossChances: BossChances
-  recentlyKilled: BossStats[]
+  recentlyAppeared: BossStats[]
 }
 
 /* @ ToDo: i18n */
@@ -106,7 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         ...bossChances,
         bosses: [...bossChances.bosses].sort(sortBossesBy.chance),
       },
-      recentlyKilled: bossChances.bosses
+      recentlyAppeared: bossChances.bosses
         .filter(({ lastAppearences }) => {
           const [lastAppearence] = lastAppearences.slice(-1)
 
@@ -114,7 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
           return +new Date() - lastAppearence <= MAX_RECENTLY_KILLED_TIME_DIFF
         })
-        .sort(sortBossesBy.recentlyKilled),
+        .sort(sortBossesBy.recentlyAppeared),
       translations: {
         common: common[locale as RegisteredLocale],
       },
