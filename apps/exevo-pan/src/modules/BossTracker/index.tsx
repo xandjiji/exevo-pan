@@ -2,6 +2,8 @@ import { Hero } from 'templates'
 import { loadRawSrc } from 'utils'
 import { BossGrid, RecentlyAppeared } from './components'
 
+const heroSrc = loadRawSrc('/bosses.png')
+
 type BossTrackerProps = {
   activeServers: string[]
   bossChances: BossChances
@@ -17,7 +19,7 @@ const BossTracker = ({
 
   return (
     <main className="inner-container pb-8">
-      <Hero src={loadRawSrc('/bosses.png')} title="Boss Tracker" offset />
+      <Hero src={heroSrc} title="Boss Tracker" offset />
 
       <div className="grid items-start gap-8 md:relative md:flex md:flex-row-reverse md:gap-16 lg:gap-8">
         <div className="shrink-0 md:sticky md:top-20 md:w-[320px]">
