@@ -9,7 +9,6 @@ import {
   Slider,
   Checkbox,
   NumericInput,
-  Sticker,
 } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
@@ -113,19 +112,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
         <FilterGroup>
-          {/* @ ToDo: remove this sticker */}
-          <Sticker
-            localStorageKey="biddedonly-3923"
-            style={{
-              float: 'left',
-              transform: 'rotate(-15deg)',
-              position: 'relative',
-              marginLeft: -32,
-              marginTop: -16,
-            }}
-          >
-            New
-          </Sticker>
           <Checkbox
             label={homepage.FilterDrawer.labels.biddedOnly}
             checked={filterState.biddedOnly}
@@ -487,19 +473,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         />
 
         <FilterGroup>
-          {/* @ ToDo: remove this sticker */}
-          <Sticker
-            localStorageKey="bosspoints-3923"
-            style={{
-              float: 'left',
-              transform: 'rotate(-15deg)',
-              position: 'relative',
-              marginLeft: -32,
-              marginTop: -16,
-            }}
-          >
-            New
-          </Sticker>
           <NumericInput
             label="Boss points"
             value={bossPoints}
@@ -511,19 +484,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </FilterGroup>
 
         <FilterGroup>
-          {/* @ ToDo: remove this sticker */}
-          <Sticker
-            localStorageKey="tcinvested-3923"
-            style={{
-              float: 'left',
-              transform: 'rotate(-15deg)',
-              position: 'relative',
-              marginLeft: -32,
-              marginTop: -16,
-            }}
-          >
-            New
-          </Sticker>
           <NumericInput
             label={homepage.FilterDrawer.labels.tcInvested}
             value={tcInvested}
@@ -708,11 +668,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </FilterGroup>
         )}
 
-        {/* @ ToDo: remove this sticker */}
         <FilterGroup
           label={homepage.FilterDrawer.labels.misc}
           style={{ border: 'none' }}
-          newSticker
         >
           <S.ChipWrapper>
             <Tooltip

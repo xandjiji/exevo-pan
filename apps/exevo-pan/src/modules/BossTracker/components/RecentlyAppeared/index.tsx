@@ -12,7 +12,7 @@ const RecentlyAppeared = ({
 
   return (
     <section className={clsx('grid gap-4', className)} {...props}>
-      <h3 className="text-2xl">Recently appeared</h3>
+      <h3 className="text-2xl font-normal">Recently appeared</h3>
 
       <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2">
         {bosses.map(({ name }) => (
