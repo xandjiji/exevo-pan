@@ -21,6 +21,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
     { name: 'PoI', value: 'POI' },
     { name: 'Vampire Lord Tokens', value: 'vampires' },
     { name: 'Archdemons', value: 'archdemons' },
+    { name: 'Favorites', value: 'pinned' },
   ]
 
   const [pinnedBosses, toggleBoss] = usePinBoss()

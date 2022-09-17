@@ -1,6 +1,6 @@
-import { sortBossesBy } from 'utils'
+import { sortBossesBy, getFromLocalStorage } from 'utils'
 import { constTokens as bosses } from 'data-dictionary/dist/dictionaries/bosses'
-import { BossLister } from './types'
+import { BossLister, PINNED_BOSS_KEY } from './types'
 
 const POISet = new Set<string>([
   bosses['Countess Sorrow'],
@@ -47,6 +47,14 @@ const vampires: BossLister = (list) =>
 const archdemons: BossLister = (list) =>
   list.filter((boss) => archdemonsSet.has(boss.name)).sort(sortBossesBy.chance)
 
+const pinned: BossLister = (list) => {
+  const pinnedSet = new Set(getFromLocalStorage<string[]>(PINNED_BOSS_KEY, []))
+
+  return list
+    .filter((boss) => pinnedSet.has(boss.name))
+    .sort(sortBossesBy.chance)
+}
+
 export const listBy = {
   chance,
   recent,
@@ -54,4 +62,5 @@ export const listBy = {
   POI,
   vampires,
   archdemons,
+  pinned,
 }

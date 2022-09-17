@@ -1,9 +1,10 @@
 import { useCallback } from 'react'
 import { useStoredState } from 'hooks'
+import { PINNED_BOSS_KEY } from './types'
 
 const usePinBoss = () => {
   const [pinnedBosses, setStoredValue] = useStoredState<string[]>(
-    'boss-tracker-favs',
+    PINNED_BOSS_KEY,
     [],
   )
 

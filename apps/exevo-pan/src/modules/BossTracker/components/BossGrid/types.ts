@@ -7,3 +7,5 @@ export type BossGridProps = {
 export type BossLister = (list: BossStats[]) => BossStats[]
 
 export type ListOption = keyof typeof listBy
+
+export const PINNED_BOSS_KEY = 'boss-tracker-favs'
