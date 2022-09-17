@@ -16,11 +16,11 @@ const BossTracker = ({
   console.log(1)
 
   return (
-    <main className="inner-container">
+    <main className="inner-container pb-8">
       <Hero src={loadRawSrc('/bosses.png')} title="Boss Tracker" offset />
 
-      <div className="grid items-start gap-8 md:flex md:flex-row-reverse md:gap-16 lg:gap-8">
-        <div className="shrink-0 md:w-[320px]">
+      <div className="grid items-start gap-8 md:relative md:flex md:flex-row-reverse md:gap-16 lg:gap-8">
+        <div className="shrink-0 md:sticky md:top-20 md:w-[320px]">
           <RecentlyAppeared bosses={recentlyAppeared} />
         </div>
         <BossGrid bosses={bossChances.bosses} className="grow" />
