@@ -1,6 +1,7 @@
 import { useState, useMemo } from 'react'
 import { ChipGroup } from 'components/Organisms'
 import clsx from 'clsx'
+import usePinBoss from './usePinBoss'
 import { listBy } from './utils'
 import BossCard from './BossCard'
 import { BossGridProps, ListOption } from './types'
@@ -22,6 +23,8 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
     { name: 'Archdemons', value: 'archdemons' },
   ]
 
+  const [pinnedBosses, toggleBoss] = usePinBoss()
+
   return (
     <section className={clsx('grid gap-4', className)} {...props}>
       <ChipGroup
@@ -33,7 +36,12 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
 
       <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
         {list.map((bossStats) => (
-          <BossCard key={bossStats.name} bossStats={bossStats} />
+          <BossCard
+            key={bossStats.name}
+            bossStats={bossStats}
+            pinned={pinnedBosses.includes(bossStats.name)}
+            onPìn={toggleBoss}
+          />
         ))}
       </ul>
     </section>
