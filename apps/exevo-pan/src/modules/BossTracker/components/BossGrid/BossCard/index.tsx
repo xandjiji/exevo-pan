@@ -6,6 +6,8 @@ import PinIcon from 'assets/svgs/pin.svg'
 import useTimeAgo from './useTimeAgo'
 import { BossCardProps } from './types'
 
+const HIGH_CHANCE = 0.25
+
 const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
   const { name, currentChance, lastAppearences } = bossStats
   const [lastSeen] = lastAppearences.slice(-1)
@@ -27,7 +29,15 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
           {lastSeenText && <InfoTooltip content={lastSeenText} labelSize />}
         </h4>
 
-        <small title="Chance to spawn" className="text-tsm">
+        <small
+          title="Chance to spawn"
+          className={clsx(
+            'text-tsm',
+            currentChance === undefined
+              ? 'text-separator'
+              : currentChance >= HIGH_CHANCE && 'text-greenHighlight',
+          )}
+        >
           {currentChance ? `${(currentChance * 100).toFixed(2)}%` : 'Unknown'}
         </small>
       </div>
