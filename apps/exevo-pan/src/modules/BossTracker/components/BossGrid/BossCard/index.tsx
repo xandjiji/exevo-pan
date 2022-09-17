@@ -1,4 +1,4 @@
-import { SpritePortrait, Chip } from 'components/Atoms'
+import { SpritePortrait } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
 import { loadBossSrc } from 'utils'
 import useTimeAgo from './useTimeAgo'
@@ -25,9 +25,9 @@ const BossCard = ({ bossStats }: BossCardProps) => {
           {lastSeenText && <InfoTooltip content={lastSeenText} labelSize />}
         </div>
 
-        <Chip className="w-fit text-xs" gray title="Chance to spawn">
+        <small title="Chance to spawn" className="text-tsm">
           {currentChance ? `${(currentChance * 100).toFixed(2)}%` : 'Unknown'}
-        </Chip>
+        </small>
       </div>
     </li>
   )
