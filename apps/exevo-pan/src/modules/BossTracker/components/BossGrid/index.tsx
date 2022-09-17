@@ -33,6 +33,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
         options={listOptions}
         value={listingOption}
         onChange={(e) => setListingOption(e.target.value as ListOption)}
+        className="bg-background z-2 after:bg-background after:-z-1 sticky top-[60px] -mb-3 -mt-6 pb-3 pt-6 after:absolute after:-left-2 after:top-0 after:h-full after:w-[calc(100%_+_16px)]"
       />
 
       <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
