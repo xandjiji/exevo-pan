@@ -30,7 +30,7 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
         </h4>
 
         <small
-          title="Chance to spawn"
+          title="Chance to spawn today"
           className={clsx(
             'text-tsm',
             currentChance === undefined
