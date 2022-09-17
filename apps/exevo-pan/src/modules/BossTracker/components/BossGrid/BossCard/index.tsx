@@ -22,10 +22,10 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
         height={64}
       />
       <div className="grid gap-1.5">
-        <div className="flex items-center gap-1.5">
-          <h4 className="text-base">{name}</h4>
+        <h4 className="text-base">
+          {name}{' '}
           {lastSeenText && <InfoTooltip content={lastSeenText} labelSize />}
-        </div>
+        </h4>
 
         <small title="Chance to spawn" className="text-tsm">
           {currentChance ? `${(currentChance * 100).toFixed(2)}%` : 'Unknown'}
