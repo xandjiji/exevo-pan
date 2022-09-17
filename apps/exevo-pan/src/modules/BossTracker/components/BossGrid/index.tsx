@@ -24,10 +24,8 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
 
   return (
     <section className={clsx('grid gap-4', className)} {...props}>
-      <h3 className="text-2xl">Bosses</h3>
-
       <ChipGroup
-        label="List by"
+        label="List bosses by"
         options={listOptions}
         value={listingOption}
         onChange={(e) => setListingOption(e.target.value as ListOption)}
