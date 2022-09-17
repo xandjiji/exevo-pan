@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { ActiveCount, Paginator, Sticker } from 'components/Atoms'
+import { ActiveCount, Paginator } from 'components/Atoms'
 import CharacterCard from 'components/CharacterCard'
 import EmptyState from 'components/EmptyState'
 import FilterIcon from 'assets/svgs/filter.svg'
@@ -64,18 +64,6 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
           onClick={() => setDrawerOpen(true)}
           className="relative"
         >
-          {/* @ ToDo: remove this sticker */}
-          <Sticker
-            localStorageKey="new-filters-19875422"
-            style={{
-              position: 'absolute',
-              top: -10,
-              left: -16,
-              transform: 'rotate(-15deg)',
-            }}
-          >
-            New
-          </Sticker>
           <FilterIcon className={styles.icon} />
           {process.browser && (
             <ActiveCount
