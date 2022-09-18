@@ -25,6 +25,8 @@ const BossTracker = ({
         <div className="shrink-0 md:sticky md:top-20 md:w-[320px]">
           <RecentlyAppeared bosses={recentlyAppeared} />
         </div>
+
+        <div className="bg-separator h-[1px] w-full md:hidden" role="none" />
         <BossGrid bosses={bossChances.bosses} className="grow" />
       </div>
     </main>
