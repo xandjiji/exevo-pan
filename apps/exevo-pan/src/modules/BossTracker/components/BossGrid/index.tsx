@@ -15,13 +15,13 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
 
   /* @ ToDo: i18n */
   const listOptions: TypedOption<ListOption>[] = [
-    { name: 'Chance', value: 'chance' },
-    { name: 'Name', value: 'name' },
-    { name: 'Last seen', value: 'recent' },
-    { name: 'PoI', value: 'POI' },
-    { name: 'Vampire Lord Tokens', value: 'vampires' },
-    { name: 'Archdemons', value: 'archdemons' },
-    { name: 'Favorites', value: 'pinned' },
+    { name: '🍀 Chance', value: 'chance' },
+    { name: '🔤 Name', value: 'name' },
+    { name: '✓ Last seen', value: 'recent' },
+    { name: '️‍🔥 PoI', value: 'POI' },
+    { name: '🧛🏻 Vampire Lord Tokens', value: 'vampires' },
+    { name: '☠️ Archdemons', value: 'archdemons' },
+    { name: '📌 Favorites', value: 'pinned' },
   ]
 
   const [pinnedBosses, toggleBoss] = usePinBoss()
