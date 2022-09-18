@@ -31,7 +31,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
 
   return (
     <section className={clsx('flex flex-col gap-4', className)} {...props}>
-      <div className="bg-background z-above-tooltip after:bg-background after:-z-1 sticky top-[60px] -mb-3 -mt-6 pb-3 pt-6 after:absolute after:-left-2 after:top-0 after:h-full after:w-[calc(100%_+_16px)]">
+      <div className="bg-background z-above-tooltip after:bg-background after:-z-1 sticky top-[120px] -mb-3 -mt-6 pb-3 pt-6 after:absolute after:-left-2 after:top-0 after:h-full after:w-[calc(100%_+_16px)]">
         <ChipGroup
           label="List bosses by"
           options={listOptions}
