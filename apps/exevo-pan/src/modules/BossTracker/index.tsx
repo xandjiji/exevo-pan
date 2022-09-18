@@ -2,7 +2,7 @@ import { Hero } from 'templates'
 import { loadRawSrc } from 'utils'
 import { ServerNavigation, BossGrid, RecentlyAppeared } from './components'
 
-const heroSrc = loadRawSrc('/bosses.png')
+export const heroSrc = loadRawSrc('/bosses.png')
 
 type BossTrackerProps = {
   activeServers: string[]
