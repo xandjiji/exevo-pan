@@ -2,16 +2,11 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { DrawerFieldsClient, BossesClient } from 'services'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import BossTracker from 'modules/BossTracker'
+import BossTracker, { heroSrc } from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'
-import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
-import { endpoints, routes, jsonld, urlParameters } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common } from 'locales'
-
-/* @ ToDo: remove unused imports */
-
-const pageUrl = buildUrl(routes.BOSS_TRACKER)
 
 type BossTrackerProps = {
   activeServers: string[]
@@ -25,8 +20,11 @@ const MAX_RECENTLY_KILLED_TIME_DIFF =
   MILLISECONDS_IN.DAY + MILLISECONDS_IN.DAY / 2
 
 export default function BossTrackerPage(args: BossTrackerProps) {
-  /* const { translations } = useTranslations()
-  const { locale } = useRouter() */
+  const { bossChances } = args
+  const pagePath = `${routes.BOSS_TRACKER}/${bossChances.server}`
+  const pageUrl = buildUrl(pagePath)
+
+  /* const { translations } = useTranslations() */
 
   /* const pageTitle = buildPageTitle(translations.homepage.Meta.title) */
   const pageTitle = 'Boss Tracker'
@@ -53,26 +51,17 @@ export default function BossTrackerPage(args: BossTrackerProps) {
         />
         <meta property="og:type" content="website" />
 
+        <meta key="preview-1" property="og:image" content={heroSrc} />
+        <meta key="preview-2" property="twitter:image" content={heroSrc} />
+
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
-        <link
-          rel="alternate"
-          hrefLang="pt"
-          href={buildUrl(routes.BOSS_TRACKER, 'pt')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="es"
-          href={buildUrl(routes.BOSS_TRACKER, 'es')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="pl"
-          href={buildUrl(routes.BOSS_TRACKER, 'pl')}
-        />
+        <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
+        <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
+        <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <script

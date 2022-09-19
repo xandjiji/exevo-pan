@@ -76,7 +76,7 @@ export default class AuctionsClient {
         highlightedAuctionsData,
       )
 
-      const { page: highlightedAuctions } = await this.fetchAuctionPage({
+      const { page } = await this.fetchAuctionPage({
         endpoint: endpoints.CURRENT_AUCTIONS,
         paginationOptions: {
           ...DEFAULT_PAGINATION_OPTIONS,
@@ -87,6 +87,10 @@ export default class AuctionsClient {
           auctionIds: highlightedAuctionIds,
         },
       })
+
+      const highlightedAuctions = page.filter(({ id }) =>
+        highlightedAuctionIds.has(id),
+      )
 
       if (highlightedAuctions.length >= MINIMUM_HIGHLIGHTED_AMOUNT) {
         return highlightedAuctions
