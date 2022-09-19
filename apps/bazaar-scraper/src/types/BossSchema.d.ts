@@ -1,8 +1,7 @@
 declare type BossSchema = {
-  fixedDaysFrequency?: {
+  fixedDaysFrequency: {
     min: number
     max: number
   }
   spawnCount?: number
-  forceUnknown: boolean
 }
