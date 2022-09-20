@@ -113,3 +113,60 @@ schema.set('Ferumbras', {
     max: 174,
   },
 })
+
+schema.set('Flamecaller Zazrak', {
+  fixedDaysFrequency: {
+    min: 2,
+    max: 9,
+  },
+})
+
+schema.set('Fleabringer', {
+  fixedDaysFrequency: {
+    min: 1,
+    max: 3,
+  },
+  spawnCount: 3,
+})
+
+schema.set('Foreman Kneebiter', {
+  fixedDaysFrequency: {
+    min: 3,
+    max: 6,
+  },
+})
+
+schema.set('Furyosa', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 28,
+  },
+})
+
+schema.set("Gaz'haragoth", {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 27,
+  },
+})
+
+schema.set('General Murius', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 8,
+  },
+})
+
+schema.set('Ghazbaran', {
+  fixedDaysFrequency: {
+    min: 162,
+    max: 174,
+  },
+})
+
+schema.set('Grand Mother Foulscale', {
+  fixedDaysFrequency: {
+    min: 5,
+    max: 9,
+  },
+})
