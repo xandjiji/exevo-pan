@@ -170,3 +170,96 @@ schema.set('Grand Mother Foulscale', {
     max: 9,
   },
 })
+
+schema.set('Grandfather Tridian', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 8,
+  },
+})
+
+schema.set('Gravelord Oshuran', {
+  fixedDaysFrequency: {
+    min: 7,
+    max: 11,
+  },
+})
+
+schema.set('Hairman the Huge', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 9,
+  },
+})
+
+schema.set('Hatebreeder', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 8,
+  },
+})
+
+schema.set('High Templar Cobrass', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 8,
+  },
+})
+
+schema.set('Hirintror', {
+  fixedDaysFrequency: {
+    min: 15,
+    max: 15,
+  },
+  spawnCount: 2,
+})
+
+schema.set('Man in the Cave', {
+  fixedDaysFrequency: {
+    min: 13,
+    max: 15,
+  },
+})
+
+schema.set('Massacre', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 20,
+  },
+})
+
+schema.set('Midnight Panther', {
+  fixedDaysFrequency: {
+    min: 3,
+    max: 2,
+  },
+  spawnCount: 3,
+})
+
+schema.set('Morgaroth', {
+  fixedDaysFrequency: {
+    min: 168,
+    max: 174,
+  },
+})
+
+schema.set('Morshabaal', {
+  fixedDaysFrequency: {
+    min: 154,
+    max: 174,
+  },
+})
+
+schema.set('Munster', {
+  fixedDaysFrequency: {
+    min: 1,
+    max: 6,
+  },
+})
+
+schema.set('Ocyakao', {
+  fixedDaysFrequency: {
+    min: 16,
+    max: 25,
+  },
+})
