@@ -1,6 +1,7 @@
 export const constTokens = {
   'Apprentice Sheng': 'Apprentice Sheng',
   'Arachir the Ancient One': 'Arachir the Ancient One',
+  'Arthom The Hunter': 'Arthom The Hunter',
   Barbaria: 'Barbaria',
   'Battlemaster Zunzu': 'Battlemaster Zunzu',
   'Big Boss Trolliver': 'Big Boss Trolliver',
