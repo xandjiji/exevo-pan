@@ -16,6 +16,13 @@ schema.set('Arachir the Ancient One', {
   },
 })
 
+schema.set('Arthom The Hunter', {
+  fixedDaysFrequency: {
+    min: 1,
+    max: 4,
+  },
+})
+
 schema.set('Barbaria', {
   fixedDaysFrequency: {
     min: 8,
@@ -46,7 +53,7 @@ schema.set('Captain Jones', {
 
 schema.set('Chizzoron the Distorter', {
   fixedDaysFrequency: {
-    min: 8,
+    min: 7,
     max: 19,
   },
 })
@@ -231,7 +238,7 @@ schema.set('Massacre', {
 schema.set('Midnight Panther', {
   fixedDaysFrequency: {
     min: 3,
-    max: 2,
+    max: 3,
   },
   spawnCount: 3,
 })
@@ -261,5 +268,269 @@ schema.set('Ocyakao', {
   fixedDaysFrequency: {
     min: 16,
     max: 25,
+  },
+})
+
+schema.set('Omrafir', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 27,
+  },
+})
+
+schema.set('Oodok Witchmaster', {
+  fixedDaysFrequency: {
+    min: 1,
+    max: 4,
+  },
+})
+
+schema.set('Orshabaal', {
+  fixedDaysFrequency: {
+    min: 154,
+    max: 174,
+  },
+})
+
+schema.set('Rottie the Rotworm', {
+  fixedDaysFrequency: {
+    min: 2,
+    max: 2,
+  },
+  spawnCount: 2,
+})
+
+schema.set('Rotworm Queen', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 14,
+  },
+  spawnCount: 3,
+})
+
+schema.set('Rukor Zad', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 9,
+  },
+})
+
+schema.set('Rukor Zad', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 9,
+  },
+})
+
+schema.set('Shlorg', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 28,
+  },
+})
+
+schema.set('Sir Valorcrest', {
+  fixedDaysFrequency: {
+    min: 5,
+    max: 8,
+  },
+})
+
+schema.set('Smuggler Baron Silvertoe', {
+  fixedDaysFrequency: {
+    min: 8,
+    max: 14,
+  },
+})
+
+schema.set('Teleskor', {
+  fixedDaysFrequency: {
+    min: 1,
+    max: 3,
+  },
+})
+
+schema.set('The Abomination', {
+  fixedDaysFrequency: {
+    min: 154,
+    max: 174,
+  },
+})
+
+schema.set('The Big Bad One', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 10,
+  },
+})
+
+schema.set('The Blightfather', {
+  fixedDaysFrequency: {
+    min: 5,
+    max: 9,
+  },
+})
+
+schema.set('The Blightfather', {
+  fixedDaysFrequency: {
+    min: 5,
+    max: 9,
+  },
+})
+
+schema.set('The Evil Eye', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 11,
+  },
+})
+
+schema.set('The Frog Prince', {
+  fixedDaysFrequency: {
+    min: 12,
+    max: 12,
+  },
+})
+
+schema.set('The Handmaiden', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 20,
+  },
+})
+
+schema.set('The Old Whopper', {
+  fixedDaysFrequency: {
+    min: 5,
+    max: 9,
+  },
+})
+
+schema.set('The Pale Count', {
+  fixedDaysFrequency: {
+    min: 16,
+    max: 29,
+  },
+})
+
+schema.set('The Plasmother', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 20,
+  },
+})
+
+schema.set('The Voice Of Ruin', {
+  fixedDaysFrequency: {
+    min: 1,
+    max: 9,
+  },
+  spawnCount: 2,
+})
+
+schema.set('The Welter', {
+  fixedDaysFrequency: {
+    min: 16,
+    max: 28,
+  },
+})
+
+schema.set('Tyrn', {
+  fixedDaysFrequency: {
+    min: 15,
+    max: 28,
+  },
+  spawnCount: 2,
+})
+
+schema.set('Tzumrah The Dazzler', {
+  fixedDaysFrequency: {
+    min: 20,
+    max: 28,
+  },
+})
+
+schema.set('Undead Cavebear', {
+  fixedDaysFrequency: {
+    min: 2,
+    max: 3,
+  },
+})
+
+schema.set('Warlord Ruzad', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 8,
+  },
+})
+
+schema.set('White Pale', {
+  fixedDaysFrequency: {
+    min: 15,
+    max: 28,
+  },
+  spawnCount: 3,
+})
+
+schema.set('Willi Wasp', {
+  fixedDaysFrequency: {
+    min: 5,
+    max: 9,
+  },
+})
+
+schema.set('Xenia', {
+  fixedDaysFrequency: {
+    min: 7,
+    max: 13,
+  },
+})
+
+schema.set('Yaga the Crone', {
+  fixedDaysFrequency: {
+    min: 5,
+    max: 7,
+  },
+})
+
+schema.set('Yeti', {
+  fixedDaysFrequency: {
+    min: 18,
+    max: 24,
+  },
+})
+
+schema.set('Zarabustor', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 8,
+  },
+})
+
+schema.set('Zevelon Duskbringer', {
+  fixedDaysFrequency: {
+    min: 6,
+    max: 9,
+  },
+})
+
+schema.set('Zomba', {
+  fixedDaysFrequency: {
+    min: 3,
+    max: 8,
+  },
+})
+
+schema.set('Zulazza the Corruptor', {
+  fixedDaysFrequency: {
+    min: 7,
+    max: 19,
+  },
+})
+
+schema.set('Zushuka', {
+  fixedDaysFrequency: {
+    min: 19,
+    max: 28,
   },
 })
