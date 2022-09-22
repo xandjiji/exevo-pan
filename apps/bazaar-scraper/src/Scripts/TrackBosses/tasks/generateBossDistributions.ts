@@ -27,7 +27,7 @@ const calculateDistribution = (intervals: number[]): Distribution => {
   const max = Math.max(...intervals)
   const dataSize = intervals.length
 
-  const distribution: Distribution = {}
+  const distribution: Distribution = new Map()
   for (
     let currentInterval = min;
     currentInterval <= max;
@@ -38,19 +38,20 @@ const calculateDistribution = (intervals: number[]): Distribution => {
     ).length
 
     const frequency = occurrences / dataSize
-    distribution[currentInterval] = +frequency.toFixed(4)
+
+    distribution.set(currentInterval, +frequency.toFixed(4))
   }
 
   return distribution
 }
 
 const denoiseDistribution = (distribution: Distribution): Distribution => {
-  const denoisedDistribution: Distribution = {}
+  const denoisedDistribution: Distribution = new Map()
 
-  for (const [interval, frequency] of Object.entries(distribution)) {
+  for (const [interval, frequency] of distribution.entries()) {
     if (frequency >= RELEVANT_FREQUENCY) {
       const parsedInterval = +interval
-      denoisedDistribution[parsedInterval] = frequency
+      denoisedDistribution.set(parsedInterval, frequency)
     }
   }
 
@@ -58,10 +59,8 @@ const denoiseDistribution = (distribution: Distribution): Distribution => {
 }
 
 const apply1DayRule = (distribution: Distribution): Distribution => {
-  if (distribution[1] && !distribution[2]) {
-    const fixedDistribution = { ...distribution }
-    delete fixedDistribution[1]
-    return fixedDistribution
+  if (distribution.get(1) && !distribution.get(2)) {
+    distribution.delete(1)
   }
 
   return distribution

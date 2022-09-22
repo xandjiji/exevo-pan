@@ -9,21 +9,13 @@ const MAX_APPEARENCES = 5
 const calculateChance = (
   lastAppearence: number,
   distribution: Distribution,
-): number => {
+): number | undefined => {
   const currentTimestamp = +new Date()
   const daysSinceThen = Math.round(
     dayDiffBetween(currentTimestamp, lastAppearence),
   )
 
-  const possibleDistribution: Distribution = {}
-  Object.keys(distribution).forEach((key) => {
-    const interval = +key
-    if (daysSinceThen <= interval) {
-      possibleDistribution[interval] = distribution[interval]
-    }
-  })
-
-  return possibleDistribution[daysSinceThen]
+  return distribution.get(daysSinceThen)
 }
 
 export const calculateBossChances = async (
@@ -57,9 +49,7 @@ export const calculateBossChances = async (
 
       bossChances.bosses.push({
         name,
-        currentChance: lastAppearence
-          ? calculateChance(lastAppearence, bossDistributions[name])
-          : undefined,
+        currentChance: calculateChance(lastAppearence, bossDistributions[name]),
         lastAppearences,
       })
     }

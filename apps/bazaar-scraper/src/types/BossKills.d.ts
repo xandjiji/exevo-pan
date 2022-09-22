@@ -3,4 +3,4 @@ declare type BossKills = {
   playersKilled: number
 }
 
-declare type Distribution = Record<number, number>
+declare type Distribution = Map<number, number>
