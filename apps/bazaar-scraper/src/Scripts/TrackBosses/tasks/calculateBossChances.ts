@@ -3,6 +3,8 @@
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
+import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
+import { schema } from '../schema'
 
 const MAX_APPEARENCES = 5
 
@@ -47,11 +49,20 @@ export const calculateBossChances = async (
       const lastAppearences = appearences.slice(-MAX_APPEARENCES)
       const [lastAppearence] = appearences.slice(-1)
 
-      bossChances.bosses.push({
-        name,
-        currentChance: calculateChance(lastAppearence, bossDistributions[name]),
-        lastAppearences,
-      })
+      const bossSchema = schema.get(name as TrackedBossName)
+
+      if (!bossSchema) {
+        bossChances.bosses.push({ name, lastAppearences })
+      } else {
+        bossChances.bosses.push({
+          name,
+          currentChance: calculateChance(
+            lastAppearence,
+            bossDistributions[name],
+          ),
+          lastAppearences,
+        })
+      }
     }
 
     await file.saveBossChance(bossChances)
