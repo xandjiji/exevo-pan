@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 
 export const schema = new Map<TrackedBossName, BossSchema>()
@@ -388,7 +389,7 @@ schema.set('The Evil Eye', {
 schema.set('The Frog Prince', {
   fixedDaysFrequency: {
     min: 12,
-    max: 12,
+    max: 18,
   },
 })
 
@@ -534,3 +535,15 @@ schema.set('Zushuka', {
     max: 28,
   },
 })
+
+/* normalizing day range to account for differences between server save updates */
+for (const [bossName, bossSchema] of schema.entries()) {
+  const { min, max } = bossSchema.fixedDaysFrequency
+  schema.set(bossName, {
+    ...bossSchema,
+    fixedDaysFrequency: {
+      min: min - 1,
+      max: max + 1,
+    },
+  })
+}

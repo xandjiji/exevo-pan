@@ -1,7 +1,9 @@
+declare type DaysRange = {
+  min: number
+  max: number
+}
+
 declare type BossSchema = {
-  fixedDaysFrequency: {
-    min: number
-    max: number
-  }
+  fixedDaysFrequency: DaysRange
   spawnCount?: number
 }
