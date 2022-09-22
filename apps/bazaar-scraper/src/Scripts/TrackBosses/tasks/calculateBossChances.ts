@@ -8,14 +8,42 @@ import { schema } from '../schema'
 
 const MAX_APPEARENCES = 5
 
-const calculateChance = (
-  lastAppearence: number,
-  distribution: Distribution,
-): number | undefined => {
+type CalculateChanceArgs = {
+  lastAppearence: number
+  distribution: Distribution
+  bossSchema?: BossSchema
+}
+
+const calculateChance = ({
+  lastAppearence,
+  distribution,
+  bossSchema,
+}: CalculateChanceArgs): number | undefined => {
+  if (!bossSchema) return undefined
+
   const currentTimestamp = +new Date()
   const daysSinceThen = Math.round(
     dayDiffBetween(currentTimestamp, lastAppearence),
   )
+
+  const { fixedDaysFrequency } = bossSchema
+
+  /* before range */
+  if (daysSinceThen < fixedDaysFrequency.min) {
+    /* @ ToDo: expectedIn = diff between daysSinceThen and min */
+    /* @ ToDo: return 0% chance */
+  }
+
+  /* in range */
+  if (daysSinceThen <= fixedDaysFrequency.max) {
+    /* @ ToDo: normalize distribution inside range */
+    /* @ ToDo: return current chance */
+  }
+
+  /* out of range */
+  /* @ ToDo: obtain new possible range multiplying min/max */
+  /* @ ToDo: normalize distribution inside new range */
+  /* @ ToDo: return current chance */
 
   return distribution.get(daysSinceThen)
 }
@@ -49,20 +77,15 @@ export const calculateBossChances = async (
       const lastAppearences = appearences.slice(-MAX_APPEARENCES)
       const [lastAppearence] = appearences.slice(-1)
 
-      const bossSchema = schema.get(name as TrackedBossName)
-
-      if (!bossSchema) {
-        bossChances.bosses.push({ name, lastAppearences })
-      } else {
-        bossChances.bosses.push({
-          name,
-          currentChance: calculateChance(
-            lastAppearence,
-            bossDistributions[name],
-          ),
-          lastAppearences,
-        })
-      }
+      bossChances.bosses.push({
+        name,
+        currentChance: calculateChance({
+          lastAppearence,
+          distribution: bossDistributions[name],
+          bossSchema: schema.get(name as TrackedBossName),
+        }),
+        lastAppearences,
+      })
     }
 
     await file.saveBossChance(bossChances)
