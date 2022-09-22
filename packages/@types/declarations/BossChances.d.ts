@@ -1,7 +1,8 @@
 declare type BossStats = {
   name: string
-  currentChance?: number
   lastAppearences: number[]
+  currentChance?: number
+  expectedIn?: number
 }
 
 declare type BossChances = {

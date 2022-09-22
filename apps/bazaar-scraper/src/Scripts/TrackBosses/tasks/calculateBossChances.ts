@@ -14,12 +14,12 @@ type CalculateChanceArgs = {
   bossSchema?: BossSchema
 }
 
-const calculateChance = ({
+const calculateStats = ({
   lastAppearence,
   distribution,
   bossSchema,
-}: CalculateChanceArgs): number | undefined => {
-  if (!bossSchema) return undefined
+}: CalculateChanceArgs): Pick<BossStats, 'currentChance' | 'expectedIn'> => {
+  if (!bossSchema) return {}
 
   const currentTimestamp = +new Date()
   const daysSinceThen = Math.round(
@@ -30,8 +30,10 @@ const calculateChance = ({
 
   /* before range */
   if (daysSinceThen < fixedDaysFrequency.min) {
-    /* @ ToDo: expectedIn = diff between daysSinceThen and min */
-    /* @ ToDo: return 0% chance */
+    return {
+      currentChance: 0,
+      expectedIn: Math.abs(fixedDaysFrequency.min - daysSinceThen),
+    }
   }
 
   /* in range */
@@ -79,12 +81,12 @@ export const calculateBossChances = async (
 
       bossChances.bosses.push({
         name,
-        currentChance: calculateChance({
+        lastAppearences,
+        ...calculateStats({
           lastAppearence,
           distribution: bossDistributions[name],
           bossSchema: schema.get(name as TrackedBossName),
         }),
-        lastAppearences,
       })
     }
 
