@@ -6,27 +6,6 @@ import { dayDiffBetween } from 'utils'
 
 const MAX_APPEARENCES = 5
 
-const normalizeDistribution = (distribution: Distribution): Distribution => {
-  const normalizedDistribution: Distribution = {}
-
-  const remainingProbabilityCeil = Object.values(distribution).reduce(
-    (acc, probability) => acc + probability,
-    0,
-  )
-
-  Object.keys(distribution).forEach((key) => {
-    const interval = +key
-    const probability = distribution[interval]
-    const normalizedProbability = +(
-      probability / remainingProbabilityCeil
-    ).toFixed(4)
-
-    normalizedDistribution[interval] = normalizedProbability
-  })
-
-  return normalizedDistribution
-}
-
 const calculateChance = (
   lastAppearence: number,
   distribution: Distribution,
@@ -44,10 +23,7 @@ const calculateChance = (
     }
   })
 
-  const normalizedPossibleDistribution =
-    normalizeDistribution(possibleDistribution)
-
-  return normalizedPossibleDistribution[daysSinceThen]
+  return possibleDistribution[daysSinceThen]
 }
 
 export const calculateBossChances = async (
