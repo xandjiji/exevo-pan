@@ -2,11 +2,38 @@
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
 import { coloredText, TrackETA } from 'logging'
-import { dayDiffBetween } from 'utils'
+import { dayDiffBetween, makeRangeArray } from 'utils'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { schema } from '../schema'
 
 const MAX_APPEARENCES = 5
+
+const normalizeDistributionRange = (
+  distribution: Distribution,
+  { min, max }: DaysRange,
+): Distribution => {
+  const newDistribution: Distribution = new Map()
+
+  const intervalsWithinRange = new Set(makeRangeArray(min, max))
+
+  let remainingProbabilityCeil = 0
+  distribution.forEach((chance, interval) => {
+    if (intervalsWithinRange.has(interval)) {
+      remainingProbabilityCeil += chance
+    }
+  })
+
+  distribution.forEach((chance, interval) => {
+    if (intervalsWithinRange.has(interval)) {
+      newDistribution.set(
+        interval,
+        +(chance / remainingProbabilityCeil).toFixed(4),
+      )
+    }
+  })
+
+  return newDistribution
+}
 
 type CalculateChanceArgs = {
   lastAppearence: number
@@ -38,7 +65,13 @@ const calculateStats = ({
 
   /* in range */
   if (daysSinceThen <= fixedDaysFrequency.max) {
-    /* @ ToDo: normalize distribution inside range */
+    const normalizedDistribution = normalizeDistributionRange(
+      distribution,
+      fixedDaysFrequency,
+    )
+    return {
+      currentChance: normalizedDistribution.get(daysSinceThen),
+    }
     /* @ ToDo: return current chance */
   }
 
