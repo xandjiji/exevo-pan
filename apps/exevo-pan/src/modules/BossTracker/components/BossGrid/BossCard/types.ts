@@ -3,3 +3,5 @@ export type BossCardProps = {
   onPìn: (bossName: string) => void
   bossStats: BossStats
 }
+
+export type ChanceClass = 'UNKNOWN' | 'ZERO' | 'POSSIBLE' | 'LIKELY'
