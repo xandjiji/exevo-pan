@@ -96,9 +96,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         bosses: [...bossChances.bosses].sort(sortBossesBy.chance),
       },
       recentlyAppeared: bossChances.bosses
-        .filter(({ lastAppearences }) => {
-          const [lastAppearence] = lastAppearences.slice(-1)
-
+        .filter(({ lastAppearence }) => {
           if (!lastAppearence) return false
 
           return +new Date() - lastAppearence <= MAX_RECENTLY_KILLED_TIME_DIFF
