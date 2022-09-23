@@ -98,7 +98,7 @@ schema.set('Dracola', {
 schema.set('Draptor', {
   fixedDaysFrequency: {
     min: 1,
-    max: 3,
+    max: 9,
   },
 })
 
