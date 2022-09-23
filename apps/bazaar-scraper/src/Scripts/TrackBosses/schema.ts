@@ -259,6 +259,13 @@ schema.set('Morshabaal', {
   },
 })
 
+schema.set('Mr. Punish', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 20,
+  },
+})
+
 schema.set('Munster', {
   fixedDaysFrequency: {
     min: 1,

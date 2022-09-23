@@ -124,8 +124,17 @@ const calculateStats = ({
       distribution,
       fixedDaysFrequency,
     )
+
+    const currentChance = normalizedDistribution.get(daysSinceThen)
+    if (currentChance) {
+      return {
+        currentChance: normalizedDistribution.get(daysSinceThen),
+      }
+    }
+
     return {
-      currentChance: normalizedDistribution.get(daysSinceThen),
+      currentChance: 0,
+      expectedIn: 1,
     }
   }
 
