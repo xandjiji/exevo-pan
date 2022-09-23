@@ -93,8 +93,10 @@ const calculateStats = ({
     return {
       daysLeftForPossibleSpawns: appearences
         .slice(-spawnCount)
-        .map((appearence) =>
-          Math.round(dayDiffBetween(appearence, currentTimestamp, false)),
+        .map(
+          (appearence) =>
+            fixedDaysFrequency.min -
+            Math.round(dayDiffBetween(appearence, currentTimestamp, false)),
         ),
     }
   }
