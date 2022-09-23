@@ -36,6 +36,7 @@ schema.set('Battlemaster Zunzu', {
     min: 1,
     max: 3,
   },
+  spawnCount: 2,
 })
 
 schema.set('Big Boss Trolliver', {
