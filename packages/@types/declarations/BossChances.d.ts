@@ -3,6 +3,7 @@ declare type BossStats = {
   lastAppearence: number
   currentChance?: number
   expectedIn?: number
+  daysLeftForPossibleSpawns?: number[]
 }
 
 declare type BossChances = {

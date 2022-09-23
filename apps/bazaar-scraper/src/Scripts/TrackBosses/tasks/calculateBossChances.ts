@@ -7,8 +7,6 @@ import { dayDiffBetween, makeRangeArray } from 'utils'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { schema } from '../schema'
 
-const MAX_APPEARENCES = 5
-
 const normalizeDistributionRange = (
   distribution: Distribution,
   { min, max }: DaysRange,
@@ -67,24 +65,39 @@ const dilluteDistribution = (distribution: Distribution): Distribution => {
 }
 
 type CalculateChanceArgs = {
-  lastAppearence: number
+  appearences: number[]
   distribution: Distribution
   bossSchema?: BossSchema
 }
 
 const calculateStats = ({
-  lastAppearence,
+  appearences,
   distribution,
   bossSchema,
-}: CalculateChanceArgs): Pick<BossStats, 'currentChance' | 'expectedIn'> => {
+}: CalculateChanceArgs): Pick<
+  BossStats,
+  'currentChance' | 'expectedIn' | 'daysLeftForPossibleSpawns'
+> => {
   if (!bossSchema) return {}
 
   const currentTimestamp = +new Date()
+  const [lastAppearence] = appearences.slice(-1)
   const daysSinceThen = Math.round(
-    dayDiffBetween(currentTimestamp, lastAppearence),
+    dayDiffBetween(lastAppearence, currentTimestamp),
   )
 
-  const { fixedDaysFrequency } = bossSchema
+  const { fixedDaysFrequency, spawnCount } = bossSchema
+
+  /* different stats for bosses with multiple spawns */
+  if (spawnCount) {
+    return {
+      daysLeftForPossibleSpawns: appearences
+        .slice(-spawnCount)
+        .map((appearence) =>
+          Math.round(dayDiffBetween(appearence, currentTimestamp, false)),
+        ),
+    }
+  }
 
   /* before range */
   if (daysSinceThen < fixedDaysFrequency.min) {
@@ -119,7 +132,7 @@ const calculateStats = ({
           normalizeDistributionRange(distribution, fixedDaysFrequency),
         ),
       },
-      lastAppearence,
+      appearences,
       bossSchema: {
         fixedDaysFrequency: nextPossibleRange,
       },
@@ -161,7 +174,7 @@ export const calculateBossChances = async (
         name,
         lastAppearence,
         ...calculateStats({
-          lastAppearence,
+          appearences,
           distribution: bossDistributions[name],
           bossSchema: schema.get(name as TrackedBossName),
         }),
