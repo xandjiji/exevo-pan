@@ -8,7 +8,7 @@ import { formatChance, getChanceClass } from './utils'
 import { BossCardProps } from './types'
 
 const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
-  const { name, currentChance, lastAppearence } = bossStats
+  const { name, currentChance, expectedIn, lastAppearence } = bossStats
 
   const lastSeenText = useTimeAgo(lastAppearence)
 
@@ -24,7 +24,7 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
         width={64}
         height={64}
       />
-      <div className="grid gap-1.5">
+      <div className="grid gap-1">
         <h4 className="text-base">
           {name}{' '}
           {lastSeenText && <InfoTooltip content={lastSeenText} labelSize />}
@@ -51,6 +51,12 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
             }[chanceClass]
           }
         </small>
+
+        {expectedIn && (
+          <small className="text-onSurface text-xs font-light">
+            Expected in: <span className="font-normal">{expectedIn} days</span>
+          </small>
+        )}
       </div>
 
       <button
