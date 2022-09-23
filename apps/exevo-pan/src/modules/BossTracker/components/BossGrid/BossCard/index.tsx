@@ -4,14 +4,16 @@ import { InfoTooltip, ClientComponent } from 'components/Organisms'
 import { loadBossSrc } from 'utils'
 import PinIcon from 'assets/svgs/pin.svg'
 import useTimeAgo from './useTimeAgo'
+import { formatChance, getChanceClass } from './utils'
 import { BossCardProps } from './types'
-
-const HIGH_CHANCE = 0.25
 
 const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
   const { name, currentChance, lastAppearence } = bossStats
 
   const lastSeenText = useTimeAgo(lastAppearence)
+
+  const chancePercent = formatChance(currentChance)
+  const chanceClass = getChanceClass(currentChance)
 
   return (
     <li className="card flex items-center gap-2">
@@ -32,12 +34,22 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
           title="Chance to spawn today"
           className={clsx(
             'text-tsm',
-            currentChance === undefined
-              ? 'text-separator'
-              : currentChance >= HIGH_CHANCE && 'text-greenHighlight',
+            {
+              UNKNOWN: 'text-separator',
+              ZERO: 'text-red',
+              POSSIBLE: 'text-onSurface',
+              LIKELY: 'text-greenHighlight',
+            }[chanceClass],
           )}
         >
-          {currentChance ? `${(currentChance * 100).toFixed(2)}%` : 'Unknown'}
+          {
+            {
+              UNKNOWN: 'Unknown',
+              ZERO: 'No chance',
+              POSSIBLE: chancePercent,
+              LIKELY: chancePercent,
+            }[chanceClass]
+          }
         </small>
       </div>
 

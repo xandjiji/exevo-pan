@@ -401,6 +401,13 @@ schema.set('The Handmaiden', {
   },
 })
 
+schema.set('The Imperor', {
+  fixedDaysFrequency: {
+    min: 14,
+    max: 20,
+  },
+})
+
 schema.set('The Old Whopper', {
   fixedDaysFrequency: {
     min: 5,
