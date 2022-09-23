@@ -155,12 +155,11 @@ export const calculateBossChances = async (
     }
 
     for (const { name, appearences } of Object.values(bosses)) {
-      const lastAppearences = appearences.slice(-MAX_APPEARENCES)
       const [lastAppearence] = appearences.slice(-1)
 
       bossChances.bosses.push({
         name,
-        lastAppearences,
+        lastAppearence,
         ...calculateStats({
           lastAppearence,
           distribution: bossDistributions[name],
