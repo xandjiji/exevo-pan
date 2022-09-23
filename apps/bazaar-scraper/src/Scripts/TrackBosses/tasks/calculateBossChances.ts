@@ -127,11 +127,9 @@ const calculateStats = ({
   /* not passed next range */
   if (daysSinceThen <= nextPossibleRange.max) {
     return calculateStats({
-      distribution: {
-        ...dilluteDistribution(
-          normalizeDistributionRange(distribution, fixedDaysFrequency),
-        ),
-      },
+      distribution: dilluteDistribution(
+        normalizeDistributionRange(distribution, fixedDaysFrequency),
+      ),
       appearences,
       bossSchema: {
         fixedDaysFrequency: nextPossibleRange,
