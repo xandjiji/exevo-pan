@@ -7,6 +7,15 @@ import { dayDiffBetween, makeRangeArray } from 'utils'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { schema } from '../schema'
 
+const offsetDistribution = (offsetBy: number, distribution: Distribution) => {
+  const newDistribution: Distribution = new Map()
+  for (const [interval, chance] of distribution) {
+    newDistribution.set(interval + offsetBy, chance)
+  }
+
+  return newDistribution
+}
+
 const normalizeDistributionRange = (
   distribution: Distribution,
   { min, max }: DaysRange,
@@ -126,17 +135,27 @@ const calculateStats = ({
     max: 2 * fixedDaysFrequency.max,
   }
 
-  /* not passed next range */
+  /* before next range */
+  if (daysSinceThen < nextPossibleRange.min) {
+    return {
+      currentChance: 0,
+      expectedIn: Math.abs(nextPossibleRange.min - daysSinceThen),
+    }
+  }
+
+  /* in next range */
   if (daysSinceThen <= nextPossibleRange.max) {
-    return calculateStats({
-      distribution: dilluteDistribution(
+    const rangeDistance = nextPossibleRange.min - fixedDaysFrequency.min
+    const estimatedNextDistribution = offsetDistribution(
+      rangeDistance,
+      dilluteDistribution(
         normalizeDistributionRange(distribution, fixedDaysFrequency),
       ),
-      appearences,
-      bossSchema: {
-        fixedDaysFrequency: nextPossibleRange,
-      },
-    })
+    )
+
+    return {
+      currentChance: estimatedNextDistribution.get(daysSinceThen),
+    }
   }
 
   return {}
