@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
@@ -33,6 +34,36 @@ const normalizeDistributionRange = (
   })
 
   return newDistribution
+}
+
+const dilluteDistribution = (distribution: Distribution): Distribution => {
+  const intervals = [...distribution.keys()]
+  const distributionLength = intervals.length
+
+  const min = Math.min(...intervals)
+
+  const newDistribution: Distribution = new Map()
+
+  const applyValuesStartingAt = (startingOffset: number) => {
+    let offsetInc = 0
+    for (const chance of distribution.values()) {
+      const offset = startingOffset + offsetInc
+      newDistribution.set(offset, (newDistribution.get(offset) ?? 0) + chance)
+
+      offsetInc += 1
+    }
+  }
+
+  for (let offsetInc = 0; offsetInc < distributionLength; offsetInc += 1) {
+    const offset = min + offsetInc
+
+    applyValuesStartingAt(offset)
+  }
+
+  return normalizeDistributionRange(newDistribution, {
+    min: Math.min(...newDistribution.keys()),
+    max: Math.max(...newDistribution.keys()),
+  })
 }
 
 type CalculateChanceArgs = {
@@ -72,15 +103,30 @@ const calculateStats = ({
     return {
       currentChance: normalizedDistribution.get(daysSinceThen),
     }
-    /* @ ToDo: return current chance */
   }
 
   /* out of range */
-  /* @ ToDo: obtain new possible range multiplying min/max */
-  /* @ ToDo: normalize distribution inside new range */
-  /* @ ToDo: return current chance */
+  const nextPossibleRange = {
+    min: 2 * fixedDaysFrequency.min,
+    max: 2 * fixedDaysFrequency.max,
+  }
 
-  return distribution.get(daysSinceThen)
+  /* not passed next range */
+  if (daysSinceThen <= nextPossibleRange.max) {
+    return calculateStats({
+      distribution: {
+        ...dilluteDistribution(
+          normalizeDistributionRange(distribution, fixedDaysFrequency),
+        ),
+      },
+      lastAppearence,
+      bossSchema: {
+        fixedDaysFrequency: nextPossibleRange,
+      },
+    })
+  }
+
+  return {}
 }
 
 export const calculateBossChances = async (
