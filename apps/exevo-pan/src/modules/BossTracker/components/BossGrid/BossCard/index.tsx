@@ -9,10 +9,9 @@ import { BossCardProps } from './types'
 const HIGH_CHANCE = 0.25
 
 const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
-  const { name, currentChance, lastAppearences } = bossStats
-  const [lastSeen] = lastAppearences.slice(-1)
+  const { name, currentChance, lastAppearence } = bossStats
 
-  const lastSeenText = useTimeAgo(lastSeen)
+  const lastSeenText = useTimeAgo(lastAppearence)
 
   return (
     <li className="card flex items-center gap-2">

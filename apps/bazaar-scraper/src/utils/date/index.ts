@@ -23,8 +23,11 @@ export const stripTimeFromTimestamp = (timestamp: number): number =>
 export const dayDiffBetween = (
   currentTimestamp: number,
   nextTimestamp: number,
+  abs = true,
 ): number => {
   const millisecondsDiff = nextTimestamp - currentTimestamp
 
-  return Math.abs(millisecondsDiff / MILLISECONDS_IN_A_DAY)
+  const dayDiff = millisecondsDiff / MILLISECONDS_IN_A_DAY
+
+  return abs ? Math.abs(dayDiff) : dayDiff
 }
