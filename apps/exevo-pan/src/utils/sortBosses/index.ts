@@ -20,7 +20,7 @@ const priorityValue = ({
     return (
       PRIORITY.MULTIPLE_SPAWNS +
       daysLeftForPossibleSpawns.reduce(
-        (acc, current) => (current >= 0 ? acc + 1 : acc),
+        (acc, current) => (current <= 0 ? acc + 1 : acc),
         0,
       )
     )
