@@ -22,6 +22,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
     { name: '️‍🔥 PoI', value: 'POI' },
     { name: '🧛🏻 Vampire Lord Tokens', value: 'vampires' },
     { name: '☠️ Archdemons', value: 'archdemons' },
+    { name: '🐥 Rookgaard', value: 'rook' },
     { name: '📌 Favorites', value: 'pinned' },
   ]
 
