@@ -101,7 +101,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
           return +new Date() - lastAppearence <= MAX_RECENTLY_KILLED_TIME_DIFF
         })
-        .sort(sortBossesBy.recentlyAppeared),
+        .sort(sortBossesBy.recentlyAppeared)
+        .reverse(),
       translations: {
         common: common[locale as RegisteredLocale],
       },
