@@ -13,4 +13,9 @@ export default {
   ServerNavigation: {
     label: 'Current server:',
   },
+  RecentlyAppeared: {
+    title: 'Recently appeared',
+    /* 'hours ago' */
+    ago: 'ago',
+  },
 }
