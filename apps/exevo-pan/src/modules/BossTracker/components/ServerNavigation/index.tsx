@@ -15,7 +15,7 @@ const ServerNavigation = ({
   activeServers,
 }: ServerNavigationProps) => {
   const {
-    translations: { common },
+    translations: { common, bosses },
   } = useTranslations()
 
   const [isLoading, setIsLoading] = useState(false)
@@ -51,7 +51,7 @@ const ServerNavigation = ({
     <section className="inner-container bg-darkerPrimary z-71 sticky top-[60px] py-3 shadow-md transition-colors">
       {isLoading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       <Select
-        label="Current server:"
+        label={bosses.ServerNavigation.label}
         options={activeServers.map((server) => ({
           name: server,
           value: server,

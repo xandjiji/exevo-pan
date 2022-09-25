@@ -1,4 +1,5 @@
 import { useState, useMemo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
 import clsx from 'clsx'
@@ -8,6 +9,8 @@ import BossCard from './BossCard'
 import { BossGridProps, ListOption } from './types'
 
 const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
+  const { translations } = useTranslations()
+
   const [listingOption, setListingOption] = useState<ListOption>('chance')
   const list = useMemo(
     () => listBy[listingOption](bosses),
@@ -16,14 +19,26 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
 
   /* @ ToDo: i18n */
   const listOptions: TypedOption<ListOption>[] = [
-    { name: '🍀 Chance', value: 'chance' },
-    { name: '🔤 Name', value: 'name' },
-    { name: '✓ Last seen', value: 'recent' },
+    {
+      name: `🍀 ${translations.bosses.BossGrid.listOptions.chance}`,
+      value: 'chance',
+    },
+    {
+      name: `🔤 ${translations.bosses.BossGrid.listOptions.name}`,
+      value: 'name',
+    },
+    {
+      name: `✓ ${translations.bosses.BossGrid.listOptions.lastSeen}`,
+      value: 'recent',
+    },
     { name: '️‍🔥 PoI', value: 'POI' },
     { name: '🧛🏻 Vampire Lord Tokens', value: 'vampires' },
     { name: '☠️ Archdemons', value: 'archdemons' },
     { name: '🐥 Rookgaard', value: 'rook' },
-    { name: '📌 Favorites', value: 'pinned' },
+    {
+      name: `📌 ${translations.bosses.BossGrid.listOptions.favorites}`,
+      value: 'pinned',
+    },
   ]
 
   const [pinnedBosses, toggleBoss] = usePinBoss()
@@ -34,7 +49,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
     <section className={clsx('flex flex-col gap-4', className)} {...props}>
       <div className="bg-background z-above-tooltip after:bg-background after:-z-1 sticky top-[120px] -mb-3 -mt-6 pb-3 pt-6 after:absolute after:-left-2 after:top-0 after:h-full after:w-[calc(100%_+_16px)]">
         <ChipGroup
-          label="List bosses by"
+          label={translations.bosses.BossGrid.listBosses}
           options={listOptions}
           value={listingOption}
           onChange={(e) => setListingOption(e.target.value as ListOption)}
@@ -58,7 +73,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
         </ul>
       ) : (
         <EmptyState
-          text={{ content: 'No bosses', size: 42 }}
+          text={{ content: translations.bosses.BossGrid.EmptyState, size: 42 }}
           className="mx-auto mt-8 w-40 md:mt-32"
         />
       )}

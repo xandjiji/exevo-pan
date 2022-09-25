@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { DrawerFieldsClient, BossesClient } from 'services'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import BossTracker, { heroSrc } from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
@@ -77,8 +77,8 @@ export default function BossTrackerPage(args: BossTrackerProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { server } = params as { server: string }
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const server = 'Antica'
 
   const [activeServers, bossChances] = await Promise.all([
     await DrawerFieldsClient.fetchActiveServers(),
@@ -107,24 +107,5 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       locale,
     },
     revalidate: 60 * 30,
-  }
-}
-
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const activeServers = await DrawerFieldsClient.fetchActiveServers()
-
-  const paths =
-    locales
-      ?.map((locale) =>
-        activeServers.map((server) => ({
-          params: { server },
-          locale,
-        })),
-      )
-      .flat() ?? []
-
-  return {
-    paths,
-    fallback: false,
   }
 }

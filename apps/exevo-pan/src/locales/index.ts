@@ -43,6 +43,11 @@ import calculatorsES from './es/calculators'
 import calculatorsPT from './pt/calculators'
 import calculatorsPL from './pl/calculators'
 
+import bossesEN from './en/bossTracker'
+import bossesES from './es/bossTracker'
+import bossesPT from './pt/bossTracker'
+import bossesPL from './pl/bossTracker'
+
 export const error = {
   en: errorEN,
   es: errorES,
@@ -96,4 +101,10 @@ export const calculators = {
   es: calculatorsES,
   pt: calculatorsPT,
   pl: calculatorsPL,
+}
+export const bosses = {
+  en: bossesEN,
+  es: bossesES,
+  pt: bossesPT,
+  pl: bossesPL,
 }
