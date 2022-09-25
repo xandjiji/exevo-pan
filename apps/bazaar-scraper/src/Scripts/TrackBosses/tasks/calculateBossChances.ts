@@ -59,10 +59,11 @@ const calculateStats = ({
 
   /* in range */
   if (daysSinceThen <= fixedDaysFrequency.max) {
-    const normalizedDistribution = normalizeDistributionRange(
-      distribution,
-      fixedDaysFrequency,
-    )
+    const endOfDistribution = Math.max(...distribution.keys())
+    const normalizedDistribution = normalizeDistributionRange(distribution, {
+      min: daysSinceThen,
+      max: endOfDistribution,
+    })
 
     const currentChance = normalizedDistribution.get(daysSinceThen)
     if (currentChance) {
