@@ -27,8 +27,11 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
   }
 
   if (method === 'POST') {
-    const { authToken, ...data } = await request.json()
-    const newHighlight = data as HighlightedAuctionData
+    const {
+      authToken,
+      ...data
+    }: { authToken: string } & HighlightedAuctionData = await request.json()
+    const newHighlight = data
     if (authToken !== AUTH_TOKEN) {
       return new Response('invalid credentials')
     }
@@ -61,7 +64,8 @@ async function handleRequest(event: FetchEvent): Promise<Response> {
   }
 
   if (method === 'DELETE') {
-    const { id, authToken } = await request.json()
+    const { id, authToken }: { id: number; authToken: string } =
+      await request.json()
     if (authToken !== AUTH_TOKEN) {
       return new Response('invalid credentials')
     }
