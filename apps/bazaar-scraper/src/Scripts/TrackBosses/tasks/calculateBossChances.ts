@@ -110,10 +110,17 @@ const calculateStats = ({
   return {}
 }
 
-export const calculateBossChances = async (
-  serverList: string[],
-  bossDistributions: Record<string, Distribution>,
-): Promise<void> => {
+type CalculateBossChancesArgs = {
+  serverList: string[]
+  bossDistributions: Record<string, Distribution>
+  wasUpdated: boolean
+}
+
+export const calculateBossChances = async ({
+  serverList,
+  bossDistributions,
+  wasUpdated,
+}: CalculateBossChancesArgs): Promise<void> => {
   const taskSize = serverList.length
   const taskTracking = new TrackETA(
     taskSize,
@@ -127,11 +134,11 @@ export const calculateBossChances = async (
 
     await file.load(server)
 
-    const { bosses } = file.getBossStatistics()
+    const { bosses, latest } = file.getBossStatistics()
 
     const bossChances: BossChances = {
       server,
-      lastUpdated,
+      lastUpdated: wasUpdated ? lastUpdated : latest.timestamp,
       bosses: [],
     }
 
