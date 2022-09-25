@@ -6,15 +6,13 @@ import BossTracker, { heroSrc } from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common } from 'locales'
+import { common, bosses } from 'locales'
 
 type BossTrackerProps = {
   activeServers: string[]
   bossChances: BossChances
   recentlyAppeared: BossStats[]
 }
-
-/* @ ToDo: i18n */
 
 const MAX_RECENTLY_KILLED_TIME_DIFF =
   MILLISECONDS_IN.DAY + MILLISECONDS_IN.DAY / 2
@@ -24,10 +22,9 @@ export default function BossTrackerPage(args: BossTrackerProps) {
   const pagePath = `${routes.BOSS_TRACKER}/${bossChances.server}`
   const pageUrl = buildUrl(pagePath)
 
-  /* const { translations } = useTranslations() */
+  const { translations } = useTranslations()
 
-  /* const pageTitle = buildPageTitle(translations.homepage.Meta.title) */
-  const pageTitle = 'Boss Tracker'
+  const pageTitle = buildPageTitle(translations.bosses.Meta.title)
 
   return (
     <>
@@ -39,15 +36,15 @@ export default function BossTrackerPage(args: BossTrackerProps) {
 
         <meta
           name="description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.bosses.Meta.description}
         />
         <meta
           property="twitter:description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.bosses.Meta.description}
         />
         <meta
           property="og:description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.bosses.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -105,6 +102,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         .reverse(),
       translations: {
         common: common[locale as RegisteredLocale],
+        bosses: bosses[locale as RegisteredLocale],
       },
       locale,
     },
