@@ -18,4 +18,14 @@ export default {
     /* 'hours ago' */
     ago: 'ago',
   },
+  BossGrid: {
+    listBosses: 'List bosses by',
+    EmptyState: 'No bosses',
+    listOptions: {
+      chance: 'Chance',
+      name: 'Name',
+      lastSeen: 'Last seen',
+      favorites: 'Favorites',
+    },
+  },
 }
