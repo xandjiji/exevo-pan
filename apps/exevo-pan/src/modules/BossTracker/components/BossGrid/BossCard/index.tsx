@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { SpritePortrait } from 'components/Atoms'
 import { InfoTooltip, Tooltip, ClientComponent } from 'components/Organisms'
 import { loadBossSrc } from 'utils'
@@ -8,6 +9,10 @@ import { formatChance, getChanceClass } from './utils'
 import { BossCardProps } from './types'
 
 const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
+  const {
+    translations: { common, bosses },
+  } = useTranslations()
+
   const {
     name,
     currentChance,
@@ -48,32 +53,33 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
                   content={
                     <div className="grid gap-2">
                       <p>
-                        This creature has{' '}
+                        {bosses.BossGrid.BossCard.thisCreatureHas}{' '}
                         <strong>{daysLeftForPossibleSpawns.length}</strong>{' '}
-                        different spawn locations.
+                        {bosses.BossGrid.BossCard.differentSpawnLocations}
                       </p>
 
                       <p>
                         {isAvailable ? (
                           <>
-                            It is{' '}
-                            <strong className="text-green">possible</strong> to
-                            spawn at this spot.
+                            {bosses.BossGrid.BossCard.itIs}{' '}
+                            <strong className="text-green">
+                              {bosses.BossGrid.BossCard.possible}
+                            </strong>{' '}
+                            {bosses.BossGrid.BossCard.toSpawn}
                           </>
                         ) : (
                           <>
-                            There are{' '}
+                            {bosses.BossGrid.BossCard.thereAre}{' '}
                             <strong className="text-red">
-                              {daysLeft} days left
+                              {daysLeft} {common[daysLeft > 1 ? 'days' : 'day']}{' '}
+                              {bosses.BossGrid.BossCard.left}
                             </strong>{' '}
-                            before it can spawn at this spot.
+                            {bosses.BossGrid.BossCard.before}
                           </>
                         )}
                       </p>
 
-                      <p>
-                        It&apos;s up to you to figure out which spot this is 🕵️‍♂️
-                      </p>
+                      <p>{bosses.BossGrid.BossCard.itsUpToYou} 🕵️‍♂️</p>
                     </div>
                   }
                 >
@@ -85,7 +91,7 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
         ) : (
           <>
             <small
-              title="Chance to spawn today"
+              title={bosses.BossGrid.BossCard.chanceToSpawn}
               className={clsx(
                 'text-tsm',
                 {
@@ -98,8 +104,8 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
             >
               {
                 {
-                  UNKNOWN: 'Unknown',
-                  ZERO: 'No chance',
+                  UNKNOWN: bosses.BossGrid.BossCard.unknown,
+                  ZERO: bosses.BossGrid.BossCard.noChance,
                   POSSIBLE: chancePercent,
                   LIKELY: chancePercent,
                 }[chanceClass]
@@ -108,8 +114,10 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
 
             {expectedIn && (
               <small className="text-onSurface text-xs font-light">
-                Expected in:{' '}
-                <span className="font-normal">{expectedIn} days</span>
+                {bosses.BossGrid.BossCard.expectedIn}:{' '}
+                <span className="font-normal">
+                  {expectedIn} {common[expectedIn > 1 ? 'days' : 'day']}
+                </span>
               </small>
             )}
           </>
