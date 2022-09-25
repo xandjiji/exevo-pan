@@ -31,6 +31,13 @@ const archdemonsSet = new Set<string>([
   bosses['The Abomination'],
 ])
 
+const rookSet = new Set<string>([
+  bosses['Apprentice Sheng'],
+  bosses.Munster,
+  bosses['Rottie the Rotworm'],
+  bosses.Teleskor,
+])
+
 const chance: BossLister = (list) => [...list].sort(sortBossesBy.chance)
 
 const recent: BossLister = (list) =>
@@ -47,6 +54,9 @@ const vampires: BossLister = (list) =>
 const archdemons: BossLister = (list) =>
   list.filter((boss) => archdemonsSet.has(boss.name)).sort(sortBossesBy.chance)
 
+const rook: BossLister = (list) =>
+  list.filter((boss) => rookSet.has(boss.name)).sort(sortBossesBy.chance)
+
 const pinned: BossLister = (list) => {
   const pinnedSet = new Set(getFromLocalStorage<string[]>(PINNED_BOSS_KEY, []))
 
@@ -62,5 +72,6 @@ export const listBy = {
   POI,
   vampires,
   archdemons,
+  rook,
   pinned,
 }

@@ -314,7 +314,7 @@ schema.set('Rotworm Queen', {
     min: 14,
     max: 14,
   },
-  spawnCount: 3,
+  spawnCount: 4,
 })
 
 schema.set('Rukor Zad', {
