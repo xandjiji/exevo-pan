@@ -10,4 +10,7 @@ export default {
       suffix: 'ago',
     },
   },
+  ServerNavigation: {
+    label: 'Current server:',
+  },
 }
