@@ -1,3 +1,5 @@
+import { constTokens } from 'data-dictionary/dist/dictionaries/bosses'
+
 export default {
   Meta: {
     title: 'Boss Tracker',
@@ -45,6 +47,13 @@ export default {
       unknown: 'Unknown',
       noChance: 'No chance',
       expectedIn: 'Expected in',
+    },
+  },
+  BossInfo: {
+    locations: {
+      [constTokens['Apprentice Sheng']]:
+        'Bottom of the Minotaur Hell (Rookgaard)',
+      [constTokens['Arachir the Ancient One']]: 'Drefia (Darashia)',
     },
   },
 }
