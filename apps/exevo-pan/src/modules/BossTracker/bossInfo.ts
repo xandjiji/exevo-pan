@@ -109,6 +109,7 @@ bossInfo.set('Countess Sorrow', {
       description: 'Pits of Inferno',
     },
   ],
+  loot: ['Silver Mace', "Countess Sorrow's Frozen Tear"],
 })
 
 bossInfo.set('Crustacea Gigantica', {
@@ -159,6 +160,7 @@ bossInfo.set('Cublarc the Plunderer', {
       description: 'Zzaion (Farmine)',
     },
   ],
+  loot: ['Disgusting Trophy'],
 })
 
 bossInfo.set('Dharalion', {
@@ -168,31 +170,66 @@ bossInfo.set('Dharalion', {
       description: 'Shadowthorn (Venore)',
     },
   ],
+  loot: ['Cornucopia'],
 })
 
-bossInfo.set('', {
+bossInfo.set('Diblis the Fair', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32008,32793,10:1',
+      description: 'Nargor Undead Cave (Liberty Bay)',
     },
   ],
+  loot: ['Vampire Lord Token'],
 })
 
-bossInfo.set('', {
+bossInfo.set('Dracola', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32838,32307,15:1',
+      description: 'Pits of Inferno',
     },
   ],
+  loot: ["Reaper's Axe", "Dracola's Eye"],
 })
 
-bossInfo.set('', {
+bossInfo.set('Draptor', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33189,31236,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33215,31228,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33234,31186,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33286,31251,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33253,31162,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33291,31158,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33333,31188,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33110,31079,10:1',
+      description: 'Razachai (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33058,31116,10:1',
+      description: 'Razachai (Farmine)',
     },
   ],
 })
