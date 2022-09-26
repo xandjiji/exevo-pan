@@ -56,3 +56,395 @@ bossInfo.set('Battlemaster Zunzu', {
     },
   ],
 })
+
+bossInfo.set('Big Boss Trolliver', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33134,31721,10:1',
+      description: 'Troll Cave (Edron)',
+    },
+  ],
+})
+
+bossInfo.set('Burster', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32449,32416,10:1',
+      description: 'Otherworld (Kazordoon)',
+    },
+  ],
+})
+
+bossInfo.set('Captain Jones', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33321,32183,7:1',
+      description: 'Ghost Ship (Darashia)',
+    },
+  ],
+})
+
+bossInfo.set('Chizzoron the Distorter', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33351,31609,2:1',
+      description: 'Zzaion (Farmine)',
+    },
+  ],
+})
+
+bossInfo.set('Chopper', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33522,31254,8:1',
+      description: 'The Hive (Gray Beach)',
+    },
+  ],
+})
+
+bossInfo.set('Countess Sorrow', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32794,32363,15:1',
+      description: 'Pits of Inferno',
+    },
+  ],
+})
+
+bossInfo.set('Crustacea Gigantica', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32181,32939,9:2',
+      description: 'Treasure Island (Liberty Bay)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32113,32733,12:2',
+      description: 'Calassa (Liberty Bay)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32114,32804,12:2',
+      description: 'Calassa (Liberty Bay)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33517,31804,15:2',
+      description: 'Seacrest Grounds (Oramond)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33471,31654,15:2',
+      description: 'Seacrest Grounds (Oramond)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33507,31635,14:2',
+      description: 'Seacrest Grounds (Oramond)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33534,31658,15:2',
+      description: 'Seacrest Grounds (Oramond)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33555,31788,14:2',
+      description: 'Seacrest Grounds (Oramond)',
+    },
+  ],
+})
+
+bossInfo.set('Cublarc the Plunderer', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33090,31391,7:2',
+      description: 'Zao Steppe (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33327,31472,7:2',
+      description: 'Zzaion (Farmine)',
+    },
+  ],
+})
+
+bossInfo.set('Dharalion', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33040,32177,9:1',
+      description: 'Shadowthorn (Venore)',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
