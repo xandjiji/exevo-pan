@@ -256,7 +256,7 @@ bossInfo.set('Fernfang', {
   locations: [
     {
       src: 'https://tibiamaps.io/map/embed#32854,32333,7:1',
-      description: 'Isle of Mists (Pains of Havoc)',
+      description: 'Isle of Mists (Plains of Havoc)',
     },
   ],
   loot: ['Wooden Whistle'],
@@ -600,5 +600,599 @@ bossInfo.set('Morshabaal', {
     'Green Demon Armor',
     'Green Demon Slippers',
     'Thunder Hammer',
+  ],
+})
+
+bossInfo.set('Mr. Punish', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32775,32233,15:1',
+      description: 'Pits of Inferno',
+    },
+  ],
+  loot: ['Impaler', "Ravager's Axe", "Mr. Punish's Handcuffs"],
+})
+
+bossInfo.set('Munster', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32102,32217,9:1',
+      description: 'Rat Cave (Rookgaard)',
+    },
+  ],
+  loot: ['Cookie', 'Die'],
+})
+
+bossInfo.set('Ocyakao', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32351,31052,7:1',
+      description: 'Nibelor (Svargrond)',
+    },
+  ],
+  loot: ['Eye of the Storm'],
+})
+
+bossInfo.set('Omrafir', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33589,32379,12:1',
+      description: 'Roshamuul Prison (Roshamuul)',
+    },
+  ],
+  loot: [
+    'Dream Warden Mask',
+    'Eye Pod',
+    'Nightmare Horn',
+    'Nightmare Hook',
+    'Psychedelic Tapestry',
+  ],
+})
+
+bossInfo.set('Oodok Witchmaster', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32887,32787,7:1',
+      description: 'Hunter Camp (Port Hope)',
+    },
+  ],
+})
+
+bossInfo.set('Orshabaal', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33118,31700,7:1',
+      description: 'Edron',
+    },
+  ],
+  loot: ["Orshabaal's Brain", 'Teddy Bear', 'Thunder Hammer'],
+})
+
+bossInfo.set('Rotspit', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33450,31228,8:1',
+      description: 'The Hive (Gray Beach)',
+    },
+  ],
+})
+
+bossInfo.set('Rottie the Rotworm', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32180,32149,11:2',
+      description: 'Katana Quest (Rookgaard)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#31975,32066,13:2',
+      description: 'Poison Spider Cave (Rookgaard)',
+    },
+  ],
+})
+
+bossInfo.set('Rotworm Queen', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33046,32373,9:1',
+      description: 'Rotworm Cave (Darashia)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32263,32689,10:1',
+      description: 'Rotworm Cave (Liberty Bay)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33250,31859,9:1',
+      description: 'Rotworm Cave (Edron)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32769,31599,12:1',
+      description: "Hellgate (Ab'Dendriel)",
+    },
+  ],
+})
+
+bossInfo.set('Rukor Zad', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32769,31599,12:1',
+      description: 'Dark Cathedral (Plains of Havoc)',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
+  ],
+})
+
+bossInfo.set('', {
+  locations: [
+    {
+      src: '',
+      description: '',
+    },
   ],
 })
