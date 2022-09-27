@@ -460,110 +460,145 @@ bossInfo.set('Grorlam', {
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Hairman the Huge', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32846,32509,8:1',
+      description: 'Banuta (Port Hope)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Hatebreeder', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33085,31103,14:1',
+      description: 'WOTE (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('High Templar Cobrass', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32957,32850,8:1',
+      description: 'Chor (Port Hope)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Hirintror', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32145,31257,10:4',
+      description: 'Formorgar Mines (Svargrond)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32366,31053,8:4',
+      description: 'Nibelor (Svargrond)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Mahatheb', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33390,31702,13:1',
+      description: 'Forgotten Tomb (Ankrahmun)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Man in the Cave', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32133,31147,2:1',
+      description: 'Svargrond',
+    },
+  ],
+  loot: ['Fur Cap'],
+})
+
+bossInfo.set('Massacre', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32872,32280,15:1',
+      description: 'Pits of Inferno',
+    },
+  ],
+  loot: ['Great Shield', 'Heavy Mace', "Piece of Massacre's Shell"],
+})
+
+bossInfo.set('Maw', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33506,31246,8:1',
+      description: 'The Hive (Gray Beach)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Midnight Panther', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32854,32744,7:1',
+      description: 'Tiquanda (Port hope)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32831,32706,7:1',
+      description: 'Tiquanda (Port hope)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32886,32721,7:1',
+      description: 'Tiquanda (Port hope)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Mindmasher', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33457,31222,8:1',
+      description: 'The Hive (Gray Beach)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Morgaroth', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32061,32615,14:1',
+      description: 'Goroma (Liberty Bay)',
     },
+  ],
+  loot: [
+    "Morgaroth's Heart",
+    'Teddy Bear',
+    'Molten Plate',
+    "Dark Lord's Cape",
+    'Great Shield',
+    'Thunder Hammer',
+    'The Stomper',
+    'The Devileye',
+    'Chain Bolter',
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Morshabaal', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33118,31700,7:1',
+      description: 'Edron',
     },
   ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
+  loot: [
+    "Morshabaal's Brain",
+    "Morshabaal's Extract",
+    "Morshabaal's Mask",
+    'Green Demon Legs',
+    'Green Demon Helmet',
+    'Green Demon Armor',
+    'Green Demon Slippers',
+    'Thunder Hammer',
   ],
 })
