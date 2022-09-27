@@ -234,146 +234,228 @@ bossInfo.set('Draptor', {
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Dreadful Disruptor', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32021,31379,11:2',
+      description: 'Otherworld (Edron)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Dreadmaw', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33270,31164,7:1',
+      description: 'Muggy Plains (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Fernfang', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32854,32333,7:1',
+      description: 'Isle of Mists (Pains of Havoc)',
+    },
+  ],
+  loot: ['Wooden Whistle'],
+})
+
+bossInfo.set('Ferumbras', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32121,32687,4:1',
+      description: "Ferumbras' Citadel (Goroma)",
+    },
+  ],
+  loot: [
+    'Teddy Bear',
+    'Spellbook of Dark Mysteries',
+    'Skullcrusher',
+    'Demonwing Axe',
+    'Great Axe',
+    'Impaler',
+    'Ornamented Axe',
+    'Havoc Blade',
+    'Tempest Shield',
+    'Phoenix Shield',
+    'Great Shield',
+    "Ferumbras' Hat",
+  ],
+})
+
+bossInfo.set('Flamecaller Zazrak', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33180,31220,7:1',
+      description: 'Muggy Plains (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Fleabringer', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33092,31384,8:2',
+      description: 'Zao Steppe (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33112,31457,8:2',
+      description: 'Zao Steppe (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33251,31423,7:2',
+      description: 'Zao Steppe (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Foreman Kneebiter', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32553,31897,14:2',
+      description: 'Dwarf Mines (Kazordoon)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32555,31880,15:1',
+      description: 'Dwarf Mines (Kazordoon)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Furyosa', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33314,31842,15:1',
+      description: 'Fury Gate (Edron)',
+    },
+  ],
+  loot: ['Furious Frock', 'Phoenix Shield'],
+})
+
+bossInfo.set("Gaz'haragoth", {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33630,32372,5:1',
+      description: 'Roshamuul Prison (Roshamuul)',
+    },
+  ],
+  loot: [
+    'Dream Warden Mask',
+    'Dream Warden Claw',
+    'Eye Pod',
+    'Nightmare Beacon',
+    'Nightmare Horn',
+    'Nightmare Hook',
+    'Psychedelic Tapestry',
+    'Umbral Master Spellbook',
+    'Umbral Master Hammer',
+    'Umbral Master Mace',
+    'Umbral Master Crossbow',
+    'Umbral Master Bow',
+    'Umbral Master Slayer',
+    'Umbral Masterblade',
+    'Umbral Master Chopper',
+    'Umbral Master Axe',
+  ],
+})
+
+bossInfo.set('General Murius', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32414,32119,15:1',
+      description: 'Mintwallin (Thais)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Ghazbaran', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32227,31157,15:1',
+      description: 'Formorgar Mines (Svargrond)',
+    },
+  ],
+  loot: [
+    'Blue Tome',
+    'Teddy Bear',
+    'Robe of the Ice Queen',
+    'Golden Boots',
+    'Spellbook of Dark Mysteries',
+    'Havoc Blade',
+    'Ravenwing',
+    'Mythril Axe',
+    'Twin Axe',
+    'Demonbone',
+  ],
+})
+
+bossInfo.set('Grand Mother Foulscale', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33309,31173,7:1',
+      description: 'Muggy Plains (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Grandfather Tridian', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32413,32778,11:1',
+      description: 'Cult Cave (Liberty Bay)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Gravelord Oshuran', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32979,32395,12:1',
+      description: 'Drefia (Darashia)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Groam', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32629,32020,10:1',
+      description: 'Sunken Mines (Kazordoon)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Grorlam', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32380,32078,10:2',
+      description: 'Thais Northern Dungeon (Thais)',
     },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32442,32019,11:2',
+      description: 'Mount Sternum (Thais)',
     },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32422,32000,15:2',
+      description: 'Mount Sternum (Thais)',
     },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32412,31991,13:2',
+      description: 'Mount Sternum (Thais)',
     },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32427,32030,13:2',
+      description: 'Mount Sternum (Thais)',
     },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32425,32022,14:2',
+      description: 'Mount Sternum (Thais)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32429,32003,13:2',
+      description: 'Mount Sternum (Thais)',
     },
   ],
 })
