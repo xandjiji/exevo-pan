@@ -14,8 +14,7 @@ type BossTrackerProps = {
   recentlyAppeared: BossStats[]
 }
 
-const MAX_RECENTLY_KILLED_TIME_DIFF =
-  MILLISECONDS_IN.DAY + MILLISECONDS_IN.DAY / 2
+const MAX_RECENTLY_KILLED_TIME_DIFF = 2 * MILLISECONDS_IN.DAY
 
 export default function BossTrackerPage(args: BossTrackerProps) {
   const { bossChances } = args
