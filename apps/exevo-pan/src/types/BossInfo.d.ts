@@ -1,6 +1,6 @@
 declare type BossLocation = {
   src: string
-  description: string
+  description?: string
 }
 
 declare type BossInfo = {

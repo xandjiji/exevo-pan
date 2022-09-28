@@ -720,229 +720,267 @@ bossInfo.set('Rukor Zad', {
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Shadowstalker', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33480,31233,8:2',
+      description: 'The Hive (Gray Beach)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Shlorg', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33169,31732,9:1',
+      description: 'Earth Elemental Cave (Edron)',
+    },
+  ],
+  loot: ['Glass of Goo', 'Goo Shell'],
+})
+
+bossInfo.set('Sir Valorcrest', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33266,31768,10:1',
+      description: 'Undead Cave (Edron)',
+    },
+  ],
+  loot: ['Vampire Lord Token'],
+})
+
+bossInfo.set('Smuggler Baron Silvertoe', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32541,32648,10:4',
+      description: 'Bandit Caves (Port Hope)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Teleskor', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#31981,32246,10:4',
+      description: 'Premium Area (Rookgaard)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Abomination', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32430,31027,15:1',
+    },
+  ],
+  loot: [
+    'Fiery Horseshoe',
+    "Abomination's Eye",
+    "Abomination's Tongue",
+    "Abomination's Tail",
+  ],
+})
+
+bossInfo.set('The Big Bad One', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33173,31678,7:1',
+      description: 'Edron',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Blightfather', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33306,31154,7:1',
+      description: 'Muggy Plains (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Evil Eye', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32806,31611,14:1',
+      description: "Hellgate Library (Ab'Dendriel)",
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Frog Prince', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32383,32128,7:1',
+      description: 'Alatar Lake (Thais)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Handmaiden', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32786,32294,15:1',
+      description: 'Pits of Inferno',
+    },
+  ],
+  loot: ["The Handmaiden's Protector"],
+})
+
+bossInfo.set('The Hungerer', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32155,32862,9:2',
+      description: 'Hive Outpost (Liberty Bay)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Imperor', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32891,32236,15:1',
+      description: 'Pits of Inferno',
+    },
+  ],
+  loot: ['Tempest Shield', "The Imperor's Trident"],
+})
+
+bossInfo.set('The Manhunter', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32167,32865,9:1',
+      description: 'Hive Outpost (Liberty Bay)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Mean Masher', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32167,32865,9:1',
+      description: 'Hive Outpost (Liberty Bay)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Old Whopper', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33313,31667,11:1',
+      description: 'Cyclopolis (Edron)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Pale Count', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32966,32421,14:1',
+      description: 'Drefia (Darashia)',
+    },
+  ],
+  loot: ['Vampire Lord Token'],
+})
+
+bossInfo.set('The Plasmother', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32846,32341,15:1',
+      description: 'Pits of Inferno',
+    },
+  ],
+  loot: ["The Plasmother's Remains"],
+})
+
+bossInfo.set('The Voice Of Ruin', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33313,31132,9:1',
+      description: 'Corruption Hole (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33280,31087,9:1',
+      description: 'Corruption Hole (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('The Welter', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33027,32658,5:1',
+      description: 'Tiquanda (Port Hope)',
+    },
+  ],
+  loot: ['Triple Bolt Crossbow', 'Shrunken Head Necklace'],
+})
+
+bossInfo.set('Tyrn', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33051,32393,14:1',
+      description: 'Drefia (Darashia)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32442,32851,9:2',
+      description: 'Wyrm Cave (Liberty Bay)',
+    },
+  ],
+  loot: ['Sun Mirror'],
+})
+
+bossInfo.set('Tzumrah The Dazzler', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33326,32657,11:1',
+      description: 'Forbidden Temple (Ankrahmun)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Undead Cavebear', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#31977,32559,10:1',
+      description: 'Lich Hell (Liberty Bay)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#31965,32591,10:1',
+      description: 'Lich Hell (Liberty Bay)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#31913,32560,10:1',
+      description: 'Lich Hell (Liberty Bay)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Warlord Ruzad', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32976,31717,5:1',
+      description: 'Orc Fortress (Kazordoon)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('White Pale', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33268,31872,10:1',
+      description: 'Rotworm Cave (Edron)',
     },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33131,32430,9:1',
+      description: 'Rotworm Cave (Darashia)',
     },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32225,32760,10:1',
+      description: 'Rotworm Cave (Liberty Bay)',
     },
   ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
+  loot: ['Albino Plate', 'Horn (Ring)'],
 })
 
 bossInfo.set('', {
