@@ -34,7 +34,7 @@ const priorityValue = ({
 const chance: BossSorter = (a, b) => priorityValue(b) - priorityValue(a)
 
 const recentlyAppeared: BossSorter = (a, b) =>
-  (a.lastAppearence ?? 0) - (b.lastAppearence ?? 0)
+  (b.lastAppearence ?? 0) - (a.lastAppearence ?? 0)
 
 const name: BossSorter = (a, b) => a.name.localeCompare(b.name)
 

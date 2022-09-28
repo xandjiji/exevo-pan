@@ -131,7 +131,8 @@ export default class BossStatisticsData {
     const serverName = this.bossStatistics.server
 
     const newestHash = this.generateHash(bossKillsData)
-    const currentTimestamp = +new Date() - MILLISECONDS_IN_A_DAY / 2
+    const currentTimestamp = +new Date()
+    const offsettedTimestamp = +new Date() - MILLISECONDS_IN_A_DAY / 2
 
     if (this.bossStatistics.latest.hash === newestHash) {
       broadcast(`Data for ${serverName} still not updated`, 'neutral')
@@ -146,7 +147,7 @@ export default class BossStatisticsData {
 
         if (appeared) {
           this.bossStatistics.bosses[bossName].appearences.push(
-            currentTimestamp,
+            offsettedTimestamp,
           )
         }
       },
