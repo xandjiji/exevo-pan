@@ -1,9 +1,5 @@
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 
-/* @ ToDo:
-    <Description /> -> locales
-*/
-
 export const bossInfo = new Map<TrackedBossName, BossInfo>()
 
 bossInfo.set('Apprentice Sheng', {
@@ -983,254 +979,94 @@ bossInfo.set('White Pale', {
   loot: ['Albino Plate', 'Horn (Ring)'],
 })
 
-bossInfo.set('', {
+bossInfo.set('Willi Wasp', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32345,31704,7:1',
+      description: 'Carlin',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Xenia', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32875,31901,8:4',
+      description: 'Amazon Camp (Venore)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32891,31887,8:1',
+      description: 'Amazon Camp (Venore)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32891,31887,9:1',
+      description: 'Amazon Camp (Venore)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Yaga the Crone', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32712,32011,11:1',
+      description: 'Green Claw Swamp (Venore)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Yeti', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32006,31596,7:1',
+      description: 'Folda (Carlin)',
+    },
+  ],
+  loot: ['Bunnyslippers'],
+})
+
+bossInfo.set('Zarabustor', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32508,31582,14:1',
+      description: "Demona (Ab'Dendriel)",
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Zevelon Duskbringer', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#32761,31570,11:1',
+      description: "Hellgate (Ab'Dendriel)",
+    },
+  ],
+  loot: ['Vampire Lord Token'],
+})
+
+bossInfo.set('Zomba', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33159,32427,7:1',
+      description: 'Darashia',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Zulazza the Corruptor', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#33347,31609,1:1',
+      description: 'Zzaion (Farmine)',
     },
   ],
 })
 
-bossInfo.set('', {
+bossInfo.set('Zushuka', {
   locations: [
     {
-      src: '',
-      description: '',
+      src: 'https://tibiamaps.io/map/embed#31942,31387,9:4',
+      description: 'Ice Witch Temple (Svargrond)',
     },
   ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
-})
-
-bossInfo.set('', {
-  locations: [
-    {
-      src: '',
-      description: '',
-    },
-  ],
+  loot: ['Icy Culottes', 'Trapped Lightning'],
 })
