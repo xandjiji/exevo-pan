@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { Dialog, SpritePortrait } from 'components/Atoms'
 import { loadBossSrc, loadLootSrc } from 'utils'
+import { links } from 'Constants'
 import { bossInfo } from '../../bossInfo'
 import { BossDialogProps } from './types'
 
@@ -55,7 +56,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
           <Section>
             <h3>Locations</h3>
 
-            <ul className="grid gap-4">
+            <ul className="grid gap-5">
               {info.locations.map(({ src, description }) => (
                 <li key={src} className="grid gap-2">
                   <iframe
@@ -69,6 +70,19 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                 </li>
               ))}
             </ul>
+
+            <strong className="text-right" style={{ fontSize: 10 }}>
+              using{' '}
+              <a
+                href={links.TIBIAMAPS}
+                rel="noreferrer external nofollow"
+                target="_blank"
+                className="text-primaryHighlight"
+              >
+                TibiaMaps.io
+              </a>{' '}
+              ❤️
+            </strong>
           </Section>
         )}
       </div>

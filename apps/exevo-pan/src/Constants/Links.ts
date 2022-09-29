@@ -10,6 +10,7 @@ export const links = {
   GITHUB_PROFILE: 'https://github.com/xandjiji',
   GITHUB_REPOSITORY: 'https://github.com/xandjiji/exevo-pan',
   TIBIACLIPS: 'https://www.youtube.com/channel/UC2srmu0R5yNikl3cnfqcomQ',
+  TIBIAMAPS: 'https://tibiamaps.io',
   TIBIA: 'https://www.tibia.com',
   CIPSOFT: 'https://www.cipsoft.com',
   UNLICENSE: 'https://unlicense.org',
