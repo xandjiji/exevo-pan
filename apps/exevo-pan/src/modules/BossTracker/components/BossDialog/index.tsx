@@ -1,9 +1,17 @@
 import { useMemo } from 'react'
+import clsx from 'clsx'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { Dialog, SpritePortrait } from 'components/Atoms'
 import { loadBossSrc, loadLootSrc } from 'utils'
 import { bossInfo } from '../../bossInfo'
 import { BossDialogProps } from './types'
+
+const Section = ({ className, ...props }: JSX.IntrinsicElements['section']) => (
+  <section
+    className={clsx('child:font-normal child:text-base grid gap-2', className)}
+    {...props}
+  />
+)
 
 const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
   const info = useMemo(
@@ -13,7 +21,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
 
   return (
     <Dialog isOpen={!!info} onClose={onClose}>
-      <div className="mb-4 mr-4 flex items-center gap-1.5">
+      <div className="mb-3 mr-4 flex items-center gap-1.5">
         <SpritePortrait
           src={loadBossSrc(bossName ?? '')}
           alt={bossName}
@@ -24,10 +32,10 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
         <h3 className="text-l">{bossName}</h3>
       </div>
 
-      <div className="custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto pt-4 pr-4 sm:w-[70vw] sm:max-w-[606px]">
+      <div className="custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto pt-3 pr-4 sm:w-[70vw] sm:max-w-[606px]">
         {!!info?.loot && (
-          <section className="grid gap-2">
-            <h3 className="text-base">Relevant loot</h3>
+          <Section>
+            <h3>Relevant loot</h3>
 
             <div className="flex flex-wrap gap-1.5">
               {info.loot.map((item) => (
@@ -40,12 +48,12 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                 />
               ))}
             </div>
-          </section>
+          </Section>
         )}
 
         {!!info?.locations && (
-          <section className="grid gap-2">
-            <h3 className="text-base">Locations</h3>
+          <Section>
+            <h3>Locations</h3>
 
             <ul className="grid gap-4">
               {info.locations.map(({ src, description }) => (
@@ -55,11 +63,13 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                     title={description}
                     className="h-80 w-full border-0 shadow"
                   />
-                  {!!description && <caption>{description}</caption>}
+                  {!!description && (
+                    <caption className="text-tsm">{description}</caption>
+                  )}
                 </li>
               ))}
             </ul>
-          </section>
+          </Section>
         )}
       </div>
     </Dialog>
