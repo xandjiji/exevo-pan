@@ -11,3 +11,6 @@ export const loadRawSrc = (src: string) => `${links.CANONICAL}${src}`
 
 export const loadBossSrc = (bossName: string) =>
   `/sprites/bosses/${encodeURI(bossName)}.gif`
+
+export const loadLootSrc = (bossName: string) =>
+  `/sprites/loot/${encodeURI(bossName)}.gif`
