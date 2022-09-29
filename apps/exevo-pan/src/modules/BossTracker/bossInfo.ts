@@ -111,35 +111,35 @@ bossInfo.set('Countess Sorrow', {
 bossInfo.set('Crustacea Gigantica', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32181,32939,9:2',
+      src: 'https://tibiamaps.io/map/embed#32181,32939,9:1',
       description: 'Treasure Island (Liberty Bay)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32113,32733,12:2',
+      src: 'https://tibiamaps.io/map/embed#32113,32733,12:1',
       description: 'Calassa (Liberty Bay)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32114,32804,12:2',
+      src: 'https://tibiamaps.io/map/embed#32114,32804,12:1',
       description: 'Calassa (Liberty Bay)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33517,31804,15:2',
+      src: 'https://tibiamaps.io/map/embed#33517,31804,15:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33471,31654,15:2',
+      src: 'https://tibiamaps.io/map/embed#33471,31654,15:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33507,31635,14:2',
+      src: 'https://tibiamaps.io/map/embed#33507,31635,14:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33534,31658,15:2',
+      src: 'https://tibiamaps.io/map/embed#33534,31658,15:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33555,31788,14:2',
+      src: 'https://tibiamaps.io/map/embed#33555,31788,14:1',
       description: 'Seacrest Grounds (Oramond)',
     },
   ],
@@ -148,11 +148,11 @@ bossInfo.set('Crustacea Gigantica', {
 bossInfo.set('Cublarc the Plunderer', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33090,31391,7:2',
+      src: 'https://tibiamaps.io/map/embed#33090,31391,7:1',
       description: 'Zao Steppe (Farmine)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33327,31472,7:2',
+      src: 'https://tibiamaps.io/map/embed#33327,31472,7:1',
       description: 'Zzaion (Farmine)',
     },
   ],
@@ -233,7 +233,7 @@ bossInfo.set('Draptor', {
 bossInfo.set('Dreadful Disruptor', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32021,31379,11:2',
+      src: 'https://tibiamaps.io/map/embed#32021,31379,11:1',
       description: 'Otherworld (Edron)',
     },
   ],
@@ -293,15 +293,15 @@ bossInfo.set('Flamecaller Zazrak', {
 bossInfo.set('Fleabringer', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33092,31384,8:2',
+      src: 'https://tibiamaps.io/map/embed#33092,31384,8:1',
       description: 'Zao Steppe (Farmine)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33112,31457,8:2',
+      src: 'https://tibiamaps.io/map/embed#33112,31457,8:1',
       description: 'Zao Steppe (Farmine)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33251,31423,7:2',
+      src: 'https://tibiamaps.io/map/embed#33251,31423,7:1',
       description: 'Zao Steppe (Farmine)',
     },
   ],
@@ -310,7 +310,7 @@ bossInfo.set('Fleabringer', {
 bossInfo.set('Foreman Kneebiter', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32553,31897,14:2',
+      src: 'https://tibiamaps.io/map/embed#32553,31897,14:1',
       description: 'Dwarf Mines (Kazordoon)',
     },
     {
@@ -426,31 +426,31 @@ bossInfo.set('Groam', {
 bossInfo.set('Grorlam', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32380,32078,10:2',
+      src: 'https://tibiamaps.io/map/embed#32380,32078,10:1',
       description: 'Thais Northern Dungeon (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32442,32019,11:2',
+      src: 'https://tibiamaps.io/map/embed#32442,32019,11:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32422,32000,15:2',
+      src: 'https://tibiamaps.io/map/embed#32422,32000,15:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32412,31991,13:2',
+      src: 'https://tibiamaps.io/map/embed#32412,31991,13:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32427,32030,13:2',
+      src: 'https://tibiamaps.io/map/embed#32427,32030,13:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32425,32022,14:2',
+      src: 'https://tibiamaps.io/map/embed#32425,32022,14:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32429,32003,13:2',
+      src: 'https://tibiamaps.io/map/embed#32429,32003,13:1',
       description: 'Mount Sternum (Thais)',
     },
   ],
@@ -486,11 +486,11 @@ bossInfo.set('High Templar Cobrass', {
 bossInfo.set('Hirintror', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32145,31257,10:4',
+      src: 'https://tibiamaps.io/map/embed#32145,31257,10:1',
       description: 'Formorgar Mines (Svargrond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32366,31053,8:4',
+      src: 'https://tibiamaps.io/map/embed#32366,31053,8:1',
       description: 'Nibelor (Svargrond)',
     },
   ],
@@ -676,11 +676,11 @@ bossInfo.set('Rotspit', {
 bossInfo.set('Rottie the Rotworm', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32180,32149,11:2',
+      src: 'https://tibiamaps.io/map/embed#32180,32149,11:1',
       description: 'Katana Quest (Rookgaard)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#31975,32066,13:2',
+      src: 'https://tibiamaps.io/map/embed#31975,32066,13:1',
       description: 'Poison Spider Cave (Rookgaard)',
     },
   ],
@@ -719,7 +719,7 @@ bossInfo.set('Rukor Zad', {
 bossInfo.set('Shadowstalker', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33480,31233,8:2',
+      src: 'https://tibiamaps.io/map/embed#33480,31233,8:1',
       description: 'The Hive (Gray Beach)',
     },
   ],
@@ -748,7 +748,7 @@ bossInfo.set('Sir Valorcrest', {
 bossInfo.set('Smuggler Baron Silvertoe', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32541,32648,10:4',
+      src: 'https://tibiamaps.io/map/embed#32541,32648,10:1',
       description: 'Bandit Caves (Port Hope)',
     },
   ],
@@ -757,7 +757,7 @@ bossInfo.set('Smuggler Baron Silvertoe', {
 bossInfo.set('Teleskor', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#31981,32246,10:4',
+      src: 'https://tibiamaps.io/map/embed#31981,32246,10:1',
       description: 'Premium Area (Rookgaard)',
     },
   ],
@@ -826,7 +826,7 @@ bossInfo.set('The Handmaiden', {
 bossInfo.set('The Hungerer', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32155,32862,9:2',
+      src: 'https://tibiamaps.io/map/embed#32155,32862,9:1',
       description: 'Hive Outpost (Liberty Bay)',
     },
   ],
@@ -919,7 +919,7 @@ bossInfo.set('Tyrn', {
       description: 'Drefia (Darashia)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32442,32851,9:2',
+      src: 'https://tibiamaps.io/map/embed#32442,32851,9:1',
       description: 'Wyrm Cave (Liberty Bay)',
     },
   ],
@@ -991,7 +991,7 @@ bossInfo.set('Willi Wasp', {
 bossInfo.set('Xenia', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32875,31901,8:4',
+      src: 'https://tibiamaps.io/map/embed#32875,31901,8:1',
       description: 'Amazon Camp (Venore)',
     },
     {
@@ -1064,7 +1064,7 @@ bossInfo.set('Zulazza the Corruptor', {
 bossInfo.set('Zushuka', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#31942,31387,9:4',
+      src: 'https://tibiamaps.io/map/embed#31942,31387,9:1',
       description: 'Ice Witch Temple (Svargrond)',
     },
   ],
