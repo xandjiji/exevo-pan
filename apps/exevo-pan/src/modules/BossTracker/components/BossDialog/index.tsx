@@ -9,7 +9,7 @@ import { BossDialogProps } from './types'
 
 const Section = ({ className, ...props }: JSX.IntrinsicElements['section']) => (
   <section
-    className={clsx('child:font-normal child:text-base grid gap-2', className)}
+    className={clsx('child:font-normal child:text-tsm grid gap-2', className)}
     {...props}
   />
 )
