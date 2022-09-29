@@ -1,4 +1,4 @@
 export type BossDialogProps = {
-  bossInfo?: BossInfo
+  bossName?: string
   onClose: () => void
 }

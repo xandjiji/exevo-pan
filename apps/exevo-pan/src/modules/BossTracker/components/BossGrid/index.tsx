@@ -1,5 +1,4 @@
 import { useState, useMemo, useCallback } from 'react'
-import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { useTranslations } from 'contexts/useTranslation'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
@@ -48,7 +47,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
 
   const listNotEmpty = list.length > 0
 
-  const [selectedBoss, setSelectedBoss] = useState<BossInfo | undefined>()
+  const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
 
   return (
     <section className={clsx('flex flex-col gap-4', className)} {...props}>
@@ -73,9 +72,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
               bossStats={bossStats}
               pinned={pinnedBosses.includes(bossStats.name)}
               onPìn={toggleBoss}
-              onClick={() =>
-                setSelectedBoss(bossInfo.get(bossStats.name as TrackedBossName))
-              }
+              onClick={() => setSelectedBoss(bossStats.name)}
             />
           ))}
         </ul>
@@ -87,7 +84,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
       )}
 
       <BossDialog
-        bossInfo={selectedBoss}
+        bossName={selectedBoss}
         onClose={useCallback(() => setSelectedBoss(undefined), [])}
       />
     </section>
