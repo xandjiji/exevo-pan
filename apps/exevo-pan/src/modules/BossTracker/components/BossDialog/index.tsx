@@ -22,7 +22,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
 
   return (
     <Dialog isOpen={!!info} onClose={onClose}>
-      <div className="mb-3 mr-4 flex items-center gap-1.5">
+      <div className="mb-3 mr-4 flex items-center gap-3.5">
         <SpritePortrait
           src={loadBossSrc(bossName ?? '')}
           alt={bossName}
@@ -30,7 +30,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
           width={64}
           height={64}
         />
-        <h3 className="text-l">{bossName}</h3>
+        <h3 className="text-l sm:text-xl">{bossName}</h3>
       </div>
 
       <div className="custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto pt-3 pr-4 sm:w-[70vw] sm:max-w-[606px]">
