@@ -1,4 +1,5 @@
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
+import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { useTranslations } from 'contexts/useTranslation'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
@@ -6,6 +7,8 @@ import clsx from 'clsx'
 import usePinBoss from './usePinBoss'
 import { listBy } from './utils'
 import BossCard from './BossCard'
+import BossDialog from '../BossDialog'
+import { bossInfo } from '../../bossInfo'
 import { BossGridProps, ListOption } from './types'
 
 const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
@@ -45,6 +48,8 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
 
   const listNotEmpty = list.length > 0
 
+  const [selectedBoss, setSelectedBoss] = useState<BossInfo | undefined>()
+
   return (
     <section className={clsx('flex flex-col gap-4', className)} {...props}>
       <div className="bg-background z-above-tooltip after:bg-background after:-z-1 sticky top-[120px] -mb-3 -mt-6 pb-3 pt-6 after:absolute after:-left-2 after:top-0 after:h-full after:w-[calc(100%_+_16px)]">
@@ -68,6 +73,9 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
               bossStats={bossStats}
               pinned={pinnedBosses.includes(bossStats.name)}
               onPìn={toggleBoss}
+              onClick={() =>
+                setSelectedBoss(bossInfo.get(bossStats.name as TrackedBossName))
+              }
             />
           ))}
         </ul>
@@ -77,6 +85,11 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
           className="mx-auto mt-8 w-40 md:mt-32"
         />
       )}
+
+      <BossDialog
+        bossInfo={selectedBoss}
+        onClose={useCallback(() => setSelectedBoss(undefined), [])}
+      />
     </section>
   )
 }

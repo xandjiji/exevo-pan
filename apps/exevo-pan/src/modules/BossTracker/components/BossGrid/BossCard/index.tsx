@@ -8,7 +8,13 @@ import useTimeAgo from './useTimeAgo'
 import { formatChance, getChanceClass } from './utils'
 import { BossCardProps } from './types'
 
-const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
+const BossCard = ({
+  bossStats,
+  pinned,
+  onPìn,
+  className,
+  ...props
+}: BossCardProps) => {
   const {
     translations: { common, bosses },
   } = useTranslations()
@@ -26,14 +32,26 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
   const chancePercent = formatChance(currentChance)
   const chanceClass = getChanceClass(currentChance)
 
+  const isClickable = !!props.onClick
+
   return (
-    <li className="card flex items-center gap-2">
+    <li
+      className={clsx(
+        'card group flex items-center gap-2',
+        isClickable && 'clickable',
+        className,
+      )}
+      {...props}
+    >
       <SpritePortrait
         src={loadBossSrc(name)}
         alt={name}
         offset
         width={64}
         height={64}
+        className={clsx(
+          isClickable && 'relative top-0 transition-all group-hover:-top-0.5',
+        )}
       />
       <div className="grid gap-1">
         <h4 className="text-base">
@@ -127,7 +145,10 @@ const BossCard = ({ bossStats, pinned, onPìn }: BossCardProps) => {
       <button
         type="button"
         className="clickable ml-auto grid place-items-center self-start rounded p-1"
-        onClick={() => onPìn(name)}
+        onClick={(e) => {
+          e.stopPropagation()
+          onPìn(name)
+        }}
       >
         <ClientComponent>
           <PinIcon
