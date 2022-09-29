@@ -7,7 +7,6 @@ import usePinBoss from './usePinBoss'
 import { listBy } from './utils'
 import BossCard from './BossCard'
 import BossDialog from '../BossDialog'
-import { bossInfo } from '../../bossInfo'
 import { BossGridProps, ListOption } from './types'
 
 const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
