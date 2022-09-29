@@ -1059,6 +1059,7 @@ bossInfo.set('Zulazza the Corruptor', {
       description: 'Zzaion (Farmine)',
     },
   ],
+  loot: ['Dragon Scale Boots', 'Earthborn Titan Armor'],
 })
 
 bossInfo.set('Zushuka', {
