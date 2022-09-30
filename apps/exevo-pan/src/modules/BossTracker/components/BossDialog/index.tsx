@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import { Dialog, SpritePortrait } from 'components/Atoms'
@@ -15,6 +16,10 @@ const Section = ({ className, ...props }: JSX.IntrinsicElements['section']) => (
 )
 
 const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
+  const {
+    translations: { bosses },
+  } = useTranslations()
+
   const info = useMemo(
     () => bossInfo.get(bossName as TrackedBossName),
     [bossName],
@@ -36,7 +41,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
       <div className="custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto pt-3 pr-4 sm:w-[70vw] sm:max-w-[606px]">
         {!!info?.loot && (
           <Section>
-            <h3>Relevant loot</h3>
+            <h3>{bosses.BossGrid.BossDialog.loot}</h3>
 
             <div className="flex flex-wrap gap-1.5">
               {info.loot.map((item) => (
@@ -54,13 +59,17 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
 
         {!!info?.raidMessages && (
           <Section>
-            <h3>Raid messages</h3>
+            <h3>{bosses.BossGrid.BossDialog.raidMessages}</h3>
 
             <ul className="grid gap-1">
               {info.raidMessages.map(({ style, time, message }) => (
                 <li
                   key={message}
-                  title={style === 'HIGHLIGHT' ? 'Boss will spawn' : undefined}
+                  title={
+                    style === 'HIGHLIGHT'
+                      ? bosses.BossGrid.BossDialog.bossWillSpawn
+                      : undefined
+                  }
                 >
                   <strong className="tracking-wider">{time}:</strong>{' '}
                   <span
@@ -82,7 +91,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
 
         {!!info?.locations && (
           <Section>
-            <h3>Locations</h3>
+            <h3>{bosses.BossGrid.BossDialog.locations}</h3>
 
             <ul className="grid gap-5">
               {info.locations.map(({ src, description }) => (
@@ -100,7 +109,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
             </ul>
 
             <strong className="text-right" style={{ fontSize: 10 }}>
-              using{' '}
+              {bosses.BossGrid.BossDialog.using}{' '}
               <a
                 href={links.TIBIAMAPS}
                 rel="noreferrer external nofollow"

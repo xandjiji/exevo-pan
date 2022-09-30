@@ -18,7 +18,6 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
     [bosses, listingOption],
   )
 
-  /* @ ToDo: i18n */
   const listOptions: TypedOption<ListOption>[] = [
     {
       name: `🍀 ${translations.bosses.BossGrid.listOptions.chance}`,

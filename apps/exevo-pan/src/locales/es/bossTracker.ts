@@ -46,5 +46,13 @@ export default {
       noChance: 'No chance',
       expectedIn: 'Expected in',
     },
+    BossDialog: {
+      loot: 'Relevant loot',
+      raidMessages: 'Raid messages',
+      bossWillSpawn: 'Boss will spawn',
+      locations: 'Locations',
+      /* 'using' TibiaMaps.io ❤️ */
+      using: 'using',
+    },
   },
 }
