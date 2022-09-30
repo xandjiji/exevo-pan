@@ -52,6 +52,34 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
           </Section>
         )}
 
+        {!!info?.raidMessages && (
+          <Section>
+            <h3>Raid messages</h3>
+
+            <ul className="grid gap-1">
+              {info.raidMessages.map(({ style, time, message }) => (
+                <li
+                  key={message}
+                  title={style === 'HIGHLIGHT' ? 'Boss will spawn' : undefined}
+                >
+                  <strong className="tracking-wider">{time}:</strong>{' '}
+                  <span
+                    className={clsx(
+                      {
+                        REGULAR: '',
+                        UNANNOUNCED: 'text-separator',
+                        HIGHLIGHT: 'text-primaryHighlight',
+                      }[style],
+                    )}
+                  >
+                    {message}
+                  </span>
+                </li>
+              ))}
+            </ul>
+          </Section>
+        )}
+
         {!!info?.locations && (
           <Section>
             <h3>Locations</h3>
