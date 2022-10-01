@@ -4,6 +4,7 @@ import {
   scrapEachServerKillStatistics,
   generateBossDistributions,
   calculateBossChances,
+  revalidatePages,
 } from './tasks'
 
 const main = async (): Promise<void> => {
@@ -16,6 +17,10 @@ const main = async (): Promise<void> => {
   const bossDistributions = await generateBossDistributions()
 
   await calculateBossChances({ serverList, bossDistributions, wasUpdated })
+
+  if (wasUpdated) {
+    await revalidatePages(serverList)
+  }
 }
 
 export default main
