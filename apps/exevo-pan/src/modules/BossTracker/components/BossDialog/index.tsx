@@ -91,7 +91,11 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
 
         {!!info?.locations && (
           <Section>
-            <h3>{bosses.BossGrid.BossDialog.locations}</h3>
+            <h3>
+              {info.locations.length > 1
+                ? bosses.BossGrid.BossDialog.locations
+                : bosses.BossGrid.BossDialog.location}
+            </h3>
 
             <ul className="grid gap-5">
               {info.locations.map(({ src, description }) => (
