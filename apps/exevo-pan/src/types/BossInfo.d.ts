@@ -1,3 +1,11 @@
+declare type RaidMessageStyle = 'HIGHLIGHT' | 'UNANNOUNCED' | 'REGULAR'
+
+declare type RaidMessage = {
+  time: string
+  message: string
+  style: RaidMessageStyle
+}
+
 declare type BossLocation = {
   src: string
   description?: string
@@ -6,5 +14,5 @@ declare type BossLocation = {
 declare type BossInfo = {
   locations?: BossLocation[]
   loot?: string[]
-  description?: () => JSX.Element
+  raidMessages?: RaidMessage[]
 }

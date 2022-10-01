@@ -5,11 +5,9 @@ import CharacterModal from 'components/CharacterCard/CharacterModal'
 import { vocation } from 'shared-utils/dist/vocations'
 import { Text } from 'components/Atoms'
 import { table as Table } from '../../Style/Table'
-import rankingData from './ranking.json'
+import ranking from './ranking.json'
 import styles from './styles.module.css'
-import { RankingEntry, TopSpendersProps } from './types'
-
-const ranking = rankingData as RankingEntry[]
+import { TopSpendersProps } from './types'
 
 const TopSpenders = ({
   characterLabel,
@@ -32,7 +30,7 @@ const TopSpenders = ({
         </thead>
 
         <tbody>
-          {ranking.map(({ invested, auction }) => (
+          {(ranking as CharacterObject[]).map((auction) => (
             <tr
               key={auction.id}
               onClick={() => setExpandedCharacter(auction)}
@@ -54,7 +52,7 @@ const TopSpenders = ({
                 />
               </td>
               <td>
-                <Text.TibiaCoin value={invested} />
+                <Text.TibiaCoin value={auction.tcInvested} />
               </td>
               <td align="center">
                 {auction.hasBeenBidded ? (

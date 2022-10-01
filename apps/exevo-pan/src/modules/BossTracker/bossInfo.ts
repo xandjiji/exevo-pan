@@ -87,6 +87,73 @@ bossInfo.set('Chizzoron the Distorter', {
       description: 'Zzaion (Farmine)',
     },
   ],
+  loot: ['Crystal Boots'],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message: 'A massive orc force is gathering at the gates of Zzaion.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:03:00',
+      message:
+        'Orc reinforcements have arrived at the gates of Zzaion! The gates are under heavy attack!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:05:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:07:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:10:00',
+      message:
+        'More orc reinforcements have arrived at the gates of Zzaion! The gates are under heavy attack!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:11:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:13:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:15:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:17:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:19:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:20:00',
+      message:
+        'The gates to Zzaion have been breached! Orcs are invading the city!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:30:00',
+      message:
+        'More orcs have arrived in Zzaion! The city is under attack! Strong lizard leaders have come to defend the city.',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Chopper', {
@@ -111,35 +178,35 @@ bossInfo.set('Countess Sorrow', {
 bossInfo.set('Crustacea Gigantica', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32181,32939,9:2',
+      src: 'https://tibiamaps.io/map/embed#32181,32939,9:1',
       description: 'Treasure Island (Liberty Bay)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32113,32733,12:2',
+      src: 'https://tibiamaps.io/map/embed#32113,32733,12:1',
       description: 'Calassa (Liberty Bay)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32114,32804,12:2',
+      src: 'https://tibiamaps.io/map/embed#32114,32804,12:1',
       description: 'Calassa (Liberty Bay)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33517,31804,15:2',
+      src: 'https://tibiamaps.io/map/embed#33517,31804,15:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33471,31654,15:2',
+      src: 'https://tibiamaps.io/map/embed#33471,31654,15:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33507,31635,14:2',
+      src: 'https://tibiamaps.io/map/embed#33507,31635,14:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33534,31658,15:2',
+      src: 'https://tibiamaps.io/map/embed#33534,31658,15:1',
       description: 'Seacrest Grounds (Oramond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33555,31788,14:2',
+      src: 'https://tibiamaps.io/map/embed#33555,31788,14:1',
       description: 'Seacrest Grounds (Oramond)',
     },
   ],
@@ -148,15 +215,53 @@ bossInfo.set('Crustacea Gigantica', {
 bossInfo.set('Cublarc the Plunderer', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33090,31391,7:2',
+      src: 'https://tibiamaps.io/map/embed#33090,31391,7:1',
       description: 'Zao Steppe (Farmine)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33327,31472,7:2',
+      src: 'https://tibiamaps.io/map/embed#33327,31472,7:1',
       description: 'Zzaion (Farmine)',
     },
   ],
   loot: ['Disgusting Trophy'],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'An orcish horde, ready for murder and plunder, is amassing to begin its travel through the steppes of Zao. Beware!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:05:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
+    },
+    {
+      time: '00:10:00',
+      message: 'The great march of the orcish horde has begun!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:12:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:16:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:18:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
+    },
+    {
+      time: '00:30:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Dharalion', {
@@ -228,12 +333,35 @@ bossInfo.set('Draptor', {
       description: 'Razachai (Farmine)',
     },
   ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'The dragons of the Dragonblaze Mountains have descended to Zao to protect the lizardkin!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:15:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
+    },
+    {
+      time: '00:20:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
+    },
+    {
+      time: '00:25:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Dreadful Disruptor', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32021,31379,11:2',
+      src: 'https://tibiamaps.io/map/embed#32021,31379,11:1',
       description: 'Otherworld (Edron)',
     },
   ],
@@ -279,6 +407,26 @@ bossInfo.set('Ferumbras', {
     'Great Shield',
     "Ferumbras' Hat",
   ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        "The seals on Ferumbras' old citadel are glowing. Prepare for HIS return, mortals.",
+      style: 'REGULAR',
+    },
+    {
+      time: '00:10:00',
+      message:
+        "Ferumbras' return is at hand. The Edron Academy calls for heroes to fight that evil.",
+      style: 'REGULAR',
+    },
+    {
+      time: '00:20:00',
+      message:
+        'Ferumbras has returned to his citadel once more. Stop him before it is too late.',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Flamecaller Zazrak', {
@@ -293,15 +441,15 @@ bossInfo.set('Flamecaller Zazrak', {
 bossInfo.set('Fleabringer', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33092,31384,8:2',
+      src: 'https://tibiamaps.io/map/embed#33092,31384,8:1',
       description: 'Zao Steppe (Farmine)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33112,31457,8:2',
+      src: 'https://tibiamaps.io/map/embed#33112,31457,8:1',
       description: 'Zao Steppe (Farmine)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33251,31423,7:2',
+      src: 'https://tibiamaps.io/map/embed#33251,31423,7:1',
       description: 'Zao Steppe (Farmine)',
     },
   ],
@@ -310,7 +458,7 @@ bossInfo.set('Fleabringer', {
 bossInfo.set('Foreman Kneebiter', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32553,31897,14:2',
+      src: 'https://tibiamaps.io/map/embed#32553,31897,14:1',
       description: 'Dwarf Mines (Kazordoon)',
     },
     {
@@ -355,6 +503,15 @@ bossInfo.set("Gaz'haragoth", {
     'Umbral Master Chopper',
     'Umbral Master Axe',
   ],
+
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        "Gaz'haragoth will shatter your dreams in a barrage of nightmares!",
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('General Murius', {
@@ -385,6 +542,25 @@ bossInfo.set('Ghazbaran', {
     'Twin Axe',
     'Demonbone',
   ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message: 'An ancient evil is awakening in the mines beneath Hrodmir.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:10:00',
+      message:
+        'Demonic entities are entering the mortal realm in the Hrodmir mines.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:20:00',
+      message:
+        'The demonic master has revealed itself in the mines of Hrodmir.',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Grand Mother Foulscale', {
@@ -392,6 +568,29 @@ bossInfo.set('Grand Mother Foulscale', {
     {
       src: 'https://tibiamaps.io/map/embed#33309,31173,7:1',
       description: 'Muggy Plains (Farmine)',
+    },
+  ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'The dragons of the Dragonblaze Mountains have descended to Zao to protect the lizardkin!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:15:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:20:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:25:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
     },
   ],
 })
@@ -426,31 +625,31 @@ bossInfo.set('Groam', {
 bossInfo.set('Grorlam', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32380,32078,10:2',
+      src: 'https://tibiamaps.io/map/embed#32380,32078,10:1',
       description: 'Thais Northern Dungeon (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32442,32019,11:2',
+      src: 'https://tibiamaps.io/map/embed#32442,32019,11:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32422,32000,15:2',
+      src: 'https://tibiamaps.io/map/embed#32422,32000,15:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32412,31991,13:2',
+      src: 'https://tibiamaps.io/map/embed#32412,31991,13:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32427,32030,13:2',
+      src: 'https://tibiamaps.io/map/embed#32427,32030,13:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32425,32022,14:2',
+      src: 'https://tibiamaps.io/map/embed#32425,32022,14:1',
       description: 'Mount Sternum (Thais)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32429,32003,13:2',
+      src: 'https://tibiamaps.io/map/embed#32429,32003,13:1',
       description: 'Mount Sternum (Thais)',
     },
   ],
@@ -486,11 +685,11 @@ bossInfo.set('High Templar Cobrass', {
 bossInfo.set('Hirintror', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32145,31257,10:4',
+      src: 'https://tibiamaps.io/map/embed#32145,31257,10:1',
       description: 'Formorgar Mines (Svargrond)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32366,31053,8:4',
+      src: 'https://tibiamaps.io/map/embed#32366,31053,8:1',
       description: 'Nibelor (Svargrond)',
     },
   ],
@@ -578,6 +777,25 @@ bossInfo.set('Morgaroth', {
     'The Devileye',
     'Chain Bolter',
   ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'The ancient volcano on Goroma slowly becomes active once again.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:06:00',
+      message: 'There is an evil presence at the volcano of Goroma.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:12:00',
+      message:
+        'Evil Cultists have called an ancient evil into the volcano on Goroma. Beware of its power mortals.',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Morshabaal', {
@@ -662,6 +880,26 @@ bossInfo.set('Orshabaal', {
     },
   ],
   loot: ["Orshabaal's Brain", 'Teddy Bear', 'Thunder Hammer'],
+  raidMessages: [
+    {
+      time: '00:05:00',
+      message:
+        "Orshabaal's minions are working on his return to the World. LEAVE Edron at once, mortals.",
+      style: 'REGULAR',
+    },
+    {
+      time: '00:04:00',
+      message:
+        'Orshabaal is about to make his way into the mortal realm. Run for your lives!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:06:40',
+      message:
+        'Orshabaal has been summoned from hell to plague the lands of mortals again.',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Rotspit', {
@@ -676,11 +914,11 @@ bossInfo.set('Rotspit', {
 bossInfo.set('Rottie the Rotworm', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32180,32149,11:2',
+      src: 'https://tibiamaps.io/map/embed#32180,32149,11:1',
       description: 'Katana Quest (Rookgaard)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#31975,32066,13:2',
+      src: 'https://tibiamaps.io/map/embed#31975,32066,13:1',
       description: 'Poison Spider Cave (Rookgaard)',
     },
   ],
@@ -719,7 +957,7 @@ bossInfo.set('Rukor Zad', {
 bossInfo.set('Shadowstalker', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33480,31233,8:2',
+      src: 'https://tibiamaps.io/map/embed#33480,31233,8:1',
       description: 'The Hive (Gray Beach)',
     },
   ],
@@ -748,7 +986,7 @@ bossInfo.set('Sir Valorcrest', {
 bossInfo.set('Smuggler Baron Silvertoe', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32541,32648,10:4',
+      src: 'https://tibiamaps.io/map/embed#32541,32648,10:1',
       description: 'Bandit Caves (Port Hope)',
     },
   ],
@@ -757,7 +995,7 @@ bossInfo.set('Smuggler Baron Silvertoe', {
 bossInfo.set('Teleskor', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#31981,32246,10:4',
+      src: 'https://tibiamaps.io/map/embed#31981,32246,10:1',
       description: 'Premium Area (Rookgaard)',
     },
   ],
@@ -775,6 +1013,14 @@ bossInfo.set('The Abomination', {
     "Abomination's Tongue",
     "Abomination's Tail",
   ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'Something abnominale is rising! Search for its spawns! Gather an army and destroy this threat!',
+      style: 'REGULAR',
+    },
+  ],
 })
 
 bossInfo.set('The Big Bad One', {
@@ -791,6 +1037,19 @@ bossInfo.set('The Blightfather', {
     {
       src: 'https://tibiamaps.io/map/embed#33306,31154,7:1',
       description: 'Muggy Plains (Farmine)',
+    },
+  ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'Like a swarm of locusts the dreaded lancer beetles are pouring over the fertile parts of Zao.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:30:00',
+      message: '(unannounced raid)',
+      style: 'HIGHLIGHT',
     },
   ],
 })
@@ -826,7 +1085,7 @@ bossInfo.set('The Handmaiden', {
 bossInfo.set('The Hungerer', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32155,32862,9:2',
+      src: 'https://tibiamaps.io/map/embed#32155,32862,9:1',
       description: 'Hive Outpost (Liberty Bay)',
     },
   ],
@@ -877,6 +1136,14 @@ bossInfo.set('The Pale Count', {
     },
   ],
   loot: ['Vampire Lord Token'],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'The Pale Count has risen from his crypt deep under Drefia. Blood will flow.',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('The Plasmother', {
@@ -919,7 +1186,7 @@ bossInfo.set('Tyrn', {
       description: 'Drefia (Darashia)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32442,32851,9:2',
+      src: 'https://tibiamaps.io/map/embed#32442,32851,9:1',
       description: 'Wyrm Cave (Liberty Bay)',
     },
   ],
@@ -986,12 +1253,31 @@ bossInfo.set('Willi Wasp', {
       description: 'Carlin',
     },
   ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'Some wasps have been found north of Carlin. There is some loud buzzing in the air.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:04:10',
+      message:
+        "Buzzing madness north of Carlin! Be careful if you're allergic!",
+      style: 'REGULAR',
+    },
+    {
+      time: '00:05:00',
+      message: 'Willi Wasp the Wicked has arrived!',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Xenia', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32875,31901,8:4',
+      src: 'https://tibiamaps.io/map/embed#32875,31901,8:1',
       description: 'Amazon Camp (Venore)',
     },
     {
@@ -1050,6 +1336,26 @@ bossInfo.set('Zomba', {
       description: 'Darashia',
     },
   ],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message:
+        'Hungry lions scout the western Darashian desert. Travellers beware!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:04:10',
+      message:
+        "Packs of hungry lions stalk Darashia's western desert. Be on your guard!",
+      style: 'REGULAR',
+    },
+    {
+      time: '00:05:00',
+      message:
+        'Hear the roar of Zomba, king of the lions, roaming the Darashia desert!',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Zulazza the Corruptor', {
@@ -1059,12 +1365,79 @@ bossInfo.set('Zulazza the Corruptor', {
       description: 'Zzaion (Farmine)',
     },
   ],
+  loot: ['Dragon Scale Boots', 'Earthborn Titan Armor'],
+  raidMessages: [
+    {
+      time: '00:00:00',
+      message: 'A massive orc force is gathering at the gates of Zzaion.',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:03:00',
+      message:
+        'Orc reinforcements have arrived at the gates of Zzaion! The gates are under heavy attack!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:05:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:07:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:10:00',
+      message:
+        'More orc reinforcements have arrived at the gates of Zzaion! The gates are under heavy attack!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:11:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:13:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:15:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:17:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:19:00',
+      message: '(unannounced raid)',
+      style: 'UNANNOUNCED',
+    },
+    {
+      time: '00:20:00',
+      message:
+        'The gates to Zzaion have been breached! Orcs are invading the city!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:30:00',
+      message:
+        'More orcs have arrived in Zzaion! The city is under attack! Strong lizard leaders have come to defend the city.',
+      style: 'HIGHLIGHT',
+    },
+  ],
 })
 
 bossInfo.set('Zushuka', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#31942,31387,9:4',
+      src: 'https://tibiamaps.io/map/embed#31942,31387,9:1',
       description: 'Ice Witch Temple (Svargrond)',
     },
   ],
