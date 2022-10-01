@@ -7,6 +7,7 @@ import Advertise from 'assets/svgs/advertise.svg'
 /* import WarIconSvg from 'assets/svgs/war.svg' */
 import Blog from 'assets/svgs/blog.svg'
 import About from 'assets/svgs/about.svg'
+import Boss from 'assets/svgs/goblin.svg'
 import { NavItem } from './types'
 
 export const NavItems: NavItem[] = [
@@ -20,6 +21,11 @@ export const NavItems: NavItem[] = [
     href: routes.BAZAAR_HISTORY,
     icon: <History />,
     title: 'bazaarHistory',
+  },
+  {
+    href: routes.BOSS_TRACKER,
+    icon: <Boss />,
+    title: 'bossTracker',
   },
   {
     href: routes.CALCULATORS,
