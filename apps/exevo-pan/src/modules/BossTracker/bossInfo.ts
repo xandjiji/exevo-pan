@@ -87,6 +87,7 @@ bossInfo.set('Chizzoron the Distorter', {
       description: 'Zzaion (Farmine)',
     },
   ],
+  loot: ['Crystal Boots'],
   raidMessages: [
     {
       time: '00:00:00',
