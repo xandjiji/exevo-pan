@@ -50,6 +50,7 @@ export default {
       loot: 'Loot relevante',
       raidMessages: 'Mensagens de raid',
       bossWillSpawn: 'Boss irá nascer',
+      location: 'Local',
       locations: 'Locais',
       /* 'using' TibiaMaps.io ❤️ */
       using: 'usando',
