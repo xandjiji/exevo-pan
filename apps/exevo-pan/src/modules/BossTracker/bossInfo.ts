@@ -952,7 +952,7 @@ bossInfo.set('Rotworm Queen', {
 bossInfo.set('Rukor Zad', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32601,32383,10:4',
+      src: 'https://tibiamaps.io/map/embed#32601,32383,10:1',
       description: 'Dark Cathedral (Plains of Havoc)',
     },
   ],
