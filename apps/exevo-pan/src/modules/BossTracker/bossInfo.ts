@@ -219,7 +219,11 @@ bossInfo.set('Cublarc the Plunderer', {
       description: 'Zao Steppe (Farmine)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33327,31472,7:1',
+      src: 'https://tibiamaps.io/map/embed#33229,31428,7:1',
+      description: 'Zao Steppe (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33317,31453,7:1',
       description: 'Zzaion (Farmine)',
     },
   ],
@@ -676,7 +680,7 @@ bossInfo.set('Hatebreeder', {
 bossInfo.set('High Templar Cobrass', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32957,32850,8:1',
+      src: 'https://tibiamaps.io/map/embed#32957,32842,8:1',
       description: 'Chor (Port Hope)',
     },
   ],
@@ -820,7 +824,7 @@ bossInfo.set('Morshabaal', {
 bossInfo.set('Mr. Punish', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32775,32233,15:1',
+      src: 'https://tibiamaps.io/map/embed#32762,32243,15:1',
       description: 'Pits of Inferno',
     },
   ],
@@ -935,11 +939,11 @@ bossInfo.set('Rotworm Queen', {
       description: 'Rotworm Cave (Liberty Bay)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#33250,31859,9:1',
+      src: 'https://tibiamaps.io/map/embed#33238,31840,9:1',
       description: 'Rotworm Cave (Edron)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32769,31599,12:1',
+      src: 'https://tibiamaps.io/map/embed#32779,31604,12:1',
       description: "Hellgate (Ab'Dendriel)",
     },
   ],
@@ -948,7 +952,7 @@ bossInfo.set('Rotworm Queen', {
 bossInfo.set('Rukor Zad', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32769,31599,12:1',
+      src: 'https://tibiamaps.io/map/embed#32601,32383,10:4',
       description: 'Dark Cathedral (Plains of Havoc)',
     },
   ],
@@ -1075,7 +1079,7 @@ bossInfo.set('The Frog Prince', {
 bossInfo.set('The Handmaiden', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32786,32294,15:1',
+      src: 'https://tibiamaps.io/map/embed#32785,32285,15:1',
       description: 'Pits of Inferno',
     },
   ],
@@ -1149,7 +1153,7 @@ bossInfo.set('The Pale Count', {
 bossInfo.set('The Plasmother', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32846,32341,15:1',
+      src: 'https://tibiamaps.io/map/embed#32853,32331,15:1',
       description: 'Pits of Inferno',
     },
   ],
@@ -1182,11 +1186,11 @@ bossInfo.set('The Welter', {
 bossInfo.set('Tyrn', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33051,32393,14:1',
+      src: 'https://tibiamaps.io/map/embed#33048,32377,14:1',
       description: 'Drefia (Darashia)',
     },
     {
-      src: 'https://tibiamaps.io/map/embed#32442,32851,9:1',
+      src: 'https://tibiamaps.io/map/embed#32440,32838,9:1',
       description: 'Wyrm Cave (Liberty Bay)',
     },
   ],
@@ -1231,7 +1235,7 @@ bossInfo.set('Warlord Ruzad', {
 bossInfo.set('White Pale', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#33268,31872,10:1',
+      src: 'https://tibiamaps.io/map/embed#33268,31872,11:1',
       description: 'Rotworm Cave (Edron)',
     },
     {
@@ -1277,10 +1281,6 @@ bossInfo.set('Willi Wasp', {
 bossInfo.set('Xenia', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32875,31901,8:1',
-      description: 'Amazon Camp (Venore)',
-    },
-    {
       src: 'https://tibiamaps.io/map/embed#32891,31887,8:1',
       description: 'Amazon Camp (Venore)',
     },
@@ -1322,7 +1322,7 @@ bossInfo.set('Zarabustor', {
 bossInfo.set('Zevelon Duskbringer', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32761,31570,11:1',
+      src: 'https://tibiamaps.io/map/embed#32769,31581,11:1',
       description: "Hellgate (Ab'Dendriel)",
     },
   ],
