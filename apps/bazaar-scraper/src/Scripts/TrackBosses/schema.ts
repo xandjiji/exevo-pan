@@ -242,7 +242,6 @@ schema.set('Midnight Panther', {
     min: 3,
     max: 3,
   },
-  spawnCount: 3,
 })
 
 schema.set('Morgaroth', {
