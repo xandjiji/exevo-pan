@@ -1,0 +1,23 @@
+{
+  "name": "prisma-database",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Exevo Pan Database using prisma",
+  "license": "Unlicense",
+  "main": "dist",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "deploy": "prisma db push",
+    "postinstall": "prisma generate"
+  },
+  "devDependencies": {
+    "config": "*",
+    "prisma": "^4.4.0"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.4.0"
+  }
+}

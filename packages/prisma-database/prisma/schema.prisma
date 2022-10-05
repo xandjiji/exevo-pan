@@ -1,0 +1,14 @@
+generator client {
+    provider        = "prisma-client-js"
+    previewFeatures = ["referentialIntegrity"]
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model CharacterObject {
+    id       Int    @id
+    nickname String
+}
