@@ -20,7 +20,15 @@ export default async (
 
   try {
     const newEntry = await prisma.characterObject.create({
-      data: { id, nickname },
+      data: {
+        id: 1234,
+        tags: {
+          connectOrCreate: [
+            { create: { name: 'manyQuests' }, where: { name: 'manyQuests' } },
+            { create: { name: 'manyBonus' }, where: { name: 'manyBonus' } },
+          ],
+        },
+      },
     })
 
     response.status(200).json(newEntry)

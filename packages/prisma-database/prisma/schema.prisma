@@ -15,16 +15,12 @@ enum ServerLocation {
     NA
 }
 
-model ServerObject {
-    serverName     String         @id
-    battleye       Boolean
-    experimental   Boolean
-    serverLocation ServerLocation
-    PvpType        String
+model Tag {
+    name       String            @id
+    characters CharacterObject[]
 }
 
 model CharacterObject {
-    id         Int      @id
-    nickname   String
-    auctionEnd DateTime
+    id   Int   @id
+    tags Tag[]
 }

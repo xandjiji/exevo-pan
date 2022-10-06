@@ -20,13 +20,7 @@ export default async (
   }
 
   try {
-    const query: Query = {
-      where: {
-        nickname: { contains: 'h' },
-      },
-    }
-
-    const results = await prisma.characterObject.count()
+    const results = await prisma.characterObject.findMany()
 
     response.status(200).json(results)
     return
