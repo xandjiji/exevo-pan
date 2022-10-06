@@ -4,11 +4,27 @@ generator client {
 }
 
 datasource db {
-    provider = "mysql"
-    url      = env("DATABASE_URL")
+    provider             = "mysql"
+    url                  = env("DATABASE_URL")
+    referentialIntegrity = "prisma"
+}
+
+enum ServerLocation {
+    BR
+    EU
+    NA
+}
+
+model ServerObject {
+    serverName     String         @id
+    battleye       Boolean
+    experimental   Boolean
+    serverLocation ServerLocation
+    PvpType        String
 }
 
 model CharacterObject {
-    id       Int    @id
-    nickname String
+    id         Int      @id
+    nickname   String
+    auctionEnd DateTime
 }

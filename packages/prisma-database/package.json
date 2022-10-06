@@ -10,7 +10,8 @@
   ],
   "scripts": {
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-    "deploy": "prisma db push",
+    "generate": "prisma generate",
+    "push": "prisma db push",
     "postinstall": "prisma generate"
   },
   "devDependencies": {

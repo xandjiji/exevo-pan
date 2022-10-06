@@ -26,14 +26,7 @@ export default async (
       },
     }
 
-    const results = await prisma.$transaction([
-      prisma.characterObject.count(query),
-      prisma.characterObject.findMany({
-        ...query,
-        take: 1,
-        skip: 1,
-      }),
-    ])
+    const results = await prisma.characterObject.count()
 
     response.status(200).json(results)
     return
