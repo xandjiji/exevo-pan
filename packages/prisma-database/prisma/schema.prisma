@@ -15,12 +15,24 @@ enum ServerLocation {
     NA
 }
 
+model ServerObject {
+    serverName      String            @id
+    battleye        Boolean
+    experimental    Boolean
+    serverLocation  ServerLocation
+    PvpType         String
+    active          Boolean
+    CharacterObject CharacterObject[]
+}
+
 model Tag {
     name       String            @id
     characters CharacterObject[]
 }
 
 model CharacterObject {
-    id   Int   @id
-    tags Tag[]
+    id         Int          @id
+    tags       Tag[]
+    serverData ServerObject @relation(fields: [serverId], references: [serverName])
+    serverId   String
 }

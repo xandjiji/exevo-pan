@@ -5,7 +5,20 @@ const prisma = new PrismaClient()
 const main = async () => {
   /* const result = await prisma.characterObject.create({
     data: {
-      id: 1234,
+      id: 456,
+      serverData: {
+        connectOrCreate: {
+          where: { serverName: 'Dolera' },
+          create: {
+            serverName: 'Dolera',
+            active: true,
+            battleye: true,
+            experimental: false,
+            PvpType: 'Hardcore PvP',
+            serverLocation: 'NA',
+          },
+        },
+      },
       tags: {
         connectOrCreate: [
           { create: { name: 'manyQuests' }, where: { name: 'manyQuests' } },
@@ -15,12 +28,21 @@ const main = async () => {
     },
   }) */
 
-  const [result] = await prisma.characterObject.findMany({
+  const result = await prisma.characterObject.findMany({
+    where: {
+      serverData: {
+        serverName: {
+          contains: 'dole',
+        },
+      },
+    },
     include: {
+      serverData: true,
       tags: true,
     },
   })
-  console.log(result.tags)
+  result.forEach((item) => console.log(item))
+  /* console.log(result) */
 }
 
 main()
