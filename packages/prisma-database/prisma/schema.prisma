@@ -9,18 +9,12 @@ datasource db {
     referentialIntegrity = "prisma"
 }
 
-enum ServerLocation {
-    BR
-    EU
-    NA
-}
-
 model ServerObject {
     serverName      String            @id
     battleye        Boolean
     experimental    Boolean
-    serverLocation  ServerLocation
-    PvpType         String
+    serverLocation  String
+    pvpType         String
     active          Boolean
     CharacterObject CharacterObject[]
 }
@@ -30,9 +24,125 @@ model Tag {
     characters CharacterObject[]
 }
 
+model Imbuement {
+    name       String            @id
+    characters CharacterObject[]
+}
+
+model Charm {
+    name       String            @id
+    characters CharacterObject[]
+}
+
+model Item {
+    name       Int               @id
+    characters CharacterObject[]
+}
+
+model Quest {
+    name       String            @id
+    characters CharacterObject[]
+}
+
+model Mount {
+    name       String            @id
+    characters CharacterObject[]
+}
+
+model StoreMount {
+    name       String            @id
+    characters CharacterObject[]
+}
+
+model RareAchievement {
+    name       String            @id
+    characters CharacterObject[]
+}
+
+model StoreItem {
+    name       String            @id
+    amount     Int
+    characters CharacterObject[]
+}
+
+model Outfit {
+    name       String            @id
+    type       Int
+    characters CharacterObject[]
+}
+
+model StoreOutfit {
+    name       String            @id
+    type       Int
+    characters CharacterObject[]
+}
+
+model HirelingsInfo {
+    id              Int               @id @default(autoincrement())
+    count           Int
+    jobs            Int
+    outfits         Int
+    CharacterObject CharacterObject[]
+}
+
+model CharmInfo {
+    id              Int               @id @default(autoincrement())
+    expansion       Boolean
+    total           Int
+    unspent         Int
+    CharacterObject CharacterObject[]
+}
+
 model CharacterObject {
-    id         Int          @id
-    tags       Tag[]
+    id                Int      @id
+    nickname          String
+    auctionEnd        DateTime
+    currentBid        Int
+    hasBeenBidded     Boolean
+    outfitId          String
+    vocationId        Int
+    sex               Boolean
+    level             Int
+    achievementPoints Int
+    bossPoints        Int
+    tcInvested        Int
+    transfer          Boolean
+    preySlot          Boolean
+    huntingSlot       Boolean
+
+    items            Item[]
+    imbuements       Imbuement[]
+    charms           Charm[]
+    tags             Tag[]
+    quests           Quest[]
+    storeItems       StoreItem[]
+    outfits          Outfit[]
+    storeOutfits     StoreOutfit[]
+    mounts           Mount[]
+    storeMounts      StoreMount[]
+    rareAchievements RareAchievement[]
+
+    skills Skills @relation(name: "CharacterObjectSkill", onDelete: Cascade, onUpdate: Cascade, fields: [skillsId], references: [id])
+
+    hirelings   HirelingsInfo @relation(fields: [hirelingsId], references: [id])
+    hirelingsId Int
+    charmInfo   CharmInfo     @relation(fields: [charmInfoId], references: [id])
+    charmInfoId Int
+
     serverData ServerObject @relation(fields: [serverId], references: [serverName])
     serverId   String
+    skillsId   Int
+}
+
+model Skills {
+    id              Int             @id @default(autoincrement())
+    characterObject CharacterObject @relation(name: "CharacterObjectSkill", onDelete: Cascade, onUpdate: Cascade)
+    magic           Int
+    club            Int
+    fist            Int
+    sword           Int
+    fishing         Int
+    axe             Int
+    distance        Int
+    shielding       Int
 }
