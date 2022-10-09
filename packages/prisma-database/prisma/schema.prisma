@@ -110,6 +110,15 @@ model CharacterObject {
     preySlot          Boolean
     huntingSlot       Boolean
 
+    magic     Int
+    club      Int
+    fist      Int
+    sword     Int
+    fishing   Int
+    axe       Int
+    distance  Int
+    shielding Int
+
     items            Item[]
     imbuements       Imbuement[]
     charms           Charm[]
@@ -122,8 +131,6 @@ model CharacterObject {
     storeMounts      StoreMount[]
     rareAchievements RareAchievement[]
 
-    skills Skills @relation(name: "CharacterObjectSkill", onDelete: Cascade, onUpdate: Cascade, fields: [skillsId], references: [id])
-
     hirelings   HirelingsInfo @relation(fields: [hirelingsId], references: [id])
     hirelingsId Int
     charmInfo   CharmInfo     @relation(fields: [charmInfoId], references: [id])
@@ -132,17 +139,4 @@ model CharacterObject {
     serverData ServerObject @relation(fields: [serverId], references: [serverName])
     serverId   String
     skillsId   Int
-}
-
-model Skills {
-    id              Int             @id @default(autoincrement())
-    characterObject CharacterObject @relation(name: "CharacterObjectSkill", onDelete: Cascade, onUpdate: Cascade)
-    magic           Int
-    club            Int
-    fist            Int
-    sword           Int
-    fishing         Int
-    axe             Int
-    distance        Int
-    shielding       Int
 }
