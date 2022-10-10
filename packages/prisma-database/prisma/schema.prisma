@@ -77,22 +77,6 @@ model StoreOutfit {
     characters CharacterObject[]
 }
 
-model HirelingsInfo {
-    id              Int               @id @default(autoincrement())
-    count           Int
-    jobs            Int
-    outfits         Int
-    CharacterObject CharacterObject[]
-}
-
-model CharmInfo {
-    id              Int               @id @default(autoincrement())
-    expansion       Boolean
-    total           Int
-    unspent         Int
-    CharacterObject CharacterObject[]
-}
-
 model CharacterObject {
     id                Int      @id
     nickname          String
@@ -119,6 +103,14 @@ model CharacterObject {
     distance  Int
     shielding Int
 
+    charmExpansion     Boolean
+    charmPoints        Int
+    unspentCharmPoints Int
+
+    hirelingCount   Int
+    hirelingJobs    Int
+    hirelingOutfits Int
+
     items            Item[]
     imbuements       Imbuement[]
     charms           Charm[]
@@ -131,12 +123,6 @@ model CharacterObject {
     storeMounts      StoreMount[]
     rareAchievements RareAchievement[]
 
-    hirelings   HirelingsInfo @relation(fields: [hirelingsId], references: [id])
-    hirelingsId Int
-    charmInfo   CharmInfo     @relation(fields: [charmInfoId], references: [id])
-    charmInfoId Int
-
     serverData ServerObject @relation(fields: [serverId], references: [serverName])
     serverId   String
-    skillsId   Int
 }
