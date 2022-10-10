@@ -9,75 +9,75 @@ datasource db {
     referentialIntegrity = "prisma"
 }
 
-model ServerObject {
-    serverName      String            @id
+model Server {
+    serverName      String    @id
     battleye        Boolean
     experimental    Boolean
     serverLocation  String
     pvpType         String
     active          Boolean
-    CharacterObject CharacterObject[]
+    CharacterObject Auction[]
 }
 
 model Tag {
-    name       String            @id
-    characters CharacterObject[]
+    name       String    @id
+    characters Auction[]
 }
 
 model Imbuement {
-    name       String            @id
-    characters CharacterObject[]
+    name       String    @id
+    characters Auction[]
 }
 
 model Charm {
-    name       String            @id
-    characters CharacterObject[]
+    name       String    @id
+    characters Auction[]
 }
 
 model Item {
-    name       Int               @id
-    characters CharacterObject[]
+    name       Int       @id
+    characters Auction[]
 }
 
 model Quest {
-    name       String            @id
-    characters CharacterObject[]
+    name       String    @id
+    characters Auction[]
 }
 
 model Mount {
-    name       String            @id
-    characters CharacterObject[]
+    name       String    @id
+    characters Auction[]
 }
 
 model StoreMount {
-    name       String            @id
-    characters CharacterObject[]
+    name       String    @id
+    characters Auction[]
 }
 
 model RareAchievement {
-    name       String            @id
-    characters CharacterObject[]
+    name       String    @id
+    characters Auction[]
 }
 
 model StoreItem {
-    name       String            @id
+    name       String    @id
     amount     Int
-    characters CharacterObject[]
+    characters Auction[]
 }
 
 model Outfit {
-    name       String            @id
+    name       String    @id
     type       Int
-    characters CharacterObject[]
+    characters Auction[]
 }
 
 model StoreOutfit {
-    name       String            @id
+    name       String    @id
     type       Int
-    characters CharacterObject[]
+    characters Auction[]
 }
 
-model CharacterObject {
+model Auction {
     id                Int      @id
     nickname          String
     auctionEnd        DateTime
@@ -94,14 +94,14 @@ model CharacterObject {
     preySlot          Boolean
     huntingSlot       Boolean
 
-    magic     Int
-    club      Int
-    fist      Int
-    sword     Int
-    fishing   Int
-    axe       Int
-    distance  Int
-    shielding Int
+    magic     Float
+    club      Float
+    fist      Float
+    sword     Float
+    fishing   Float
+    axe       Float
+    distance  Float
+    shielding Float
 
     charmExpansion     Boolean
     charmPoints        Int
@@ -123,6 +123,6 @@ model CharacterObject {
     storeMounts      StoreMount[]
     rareAchievements RareAchievement[]
 
-    serverData ServerObject @relation(fields: [serverId], references: [serverName])
+    serverData Server @relation(fields: [serverId], references: [serverName])
     serverId   String
 }
