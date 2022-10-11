@@ -4,81 +4,52 @@ generator client {
 }
 
 datasource db {
-    provider             = "mysql"
-    url                  = env("DATABASE_URL")
-    referentialIntegrity = "prisma"
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
 }
 
-model Server {
-    serverName      String    @id
-    battleye        Boolean
-    experimental    Boolean
-    serverLocation  String
-    pvpType         String
-    active          Boolean
-    CharacterObject Auction[]
+type Server {
+    serverName     String
+    battleye       Boolean
+    experimental   Boolean
+    serverLocation String
+    pvpType        String
 }
 
-model Tag {
-    name       String    @id
-    characters Auction[]
+type Skills {
+    club      Float
+    fist      Float
+    sword     Float
+    fishing   Float
+    axe       Float
+    distance  Float
+    shielding Float
 }
 
-model Imbuement {
-    name       String    @id
-    characters Auction[]
+type CharacterItem {
+    name   String
+    amount Int
 }
 
-model Charm {
-    name       String    @id
-    characters Auction[]
+type Outfit {
+    name String
+    type Int
 }
 
-model Item {
-    name       Int       @id
-    characters Auction[]
+type CharmInfo {
+    expansion Boolean
+    total     Int
+    unspent   Int
 }
 
-model Quest {
-    name       String    @id
-    characters Auction[]
-}
-
-model Mount {
-    name       String    @id
-    characters Auction[]
-}
-
-model StoreMount {
-    name       String    @id
-    characters Auction[]
-}
-
-model RareAchievement {
-    name       String    @id
-    characters Auction[]
-}
-
-model StoreItem {
-    name       String    @id
-    amount     Int
-    characters Auction[]
-}
-
-model Outfit {
-    name       String    @id
-    type       Int
-    characters Auction[]
-}
-
-model StoreOutfit {
-    name       String    @id
-    type       Int
-    characters Auction[]
+type HirelingsInfo {
+    count   Int
+    jobs    Int
+    outfits Int
 }
 
 model Auction {
-    id                Int      @id
+    id                Int      @id @map("_id")
     nickname          String
     auctionEnd        DateTime
     currentBid        Int
@@ -94,35 +65,18 @@ model Auction {
     preySlot          Boolean
     huntingSlot       Boolean
 
-    magic     Float
-    club      Float
-    fist      Float
-    sword     Float
-    fishing   Float
-    axe       Float
-    distance  Float
-    shielding Float
+    tags       String[]
+    imbuements String[]
+    items      Int[]
+    charms     String[]
+    quests     String[]
 
-    charmExpansion     Boolean
-    charmPoints        Int
-    unspentCharmPoints Int
+    storeItems   CharacterItem[]
+    outfits      Outfit[]
+    storeOutfits Outfit[]
 
-    hirelingCount   Int
-    hirelingJobs    Int
-    hirelingOutfits Int
-
-    items            Item[]
-    imbuements       Imbuement[]
-    charms           Charm[]
-    tags             Tag[]
-    quests           Quest[]
-    storeItems       StoreItem[]
-    outfits          Outfit[]
-    storeOutfits     StoreOutfit[]
-    mounts           Mount[]
-    storeMounts      StoreMount[]
-    rareAchievements RareAchievement[]
-
-    serverData Server @relation(fields: [serverId], references: [serverName])
-    serverId   String
+    skills     Skills
+    charmInfo  CharmInfo
+    hirelings  HirelingsInfo
+    serverData Server
 }
