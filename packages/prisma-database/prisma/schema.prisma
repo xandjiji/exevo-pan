@@ -1,6 +1,5 @@
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity"]
+    provider = "prisma-client-js"
 }
 
 datasource db {
@@ -8,15 +7,22 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+type ServerEnum {
+    string String
+    type   Int
+}
+
 type Server {
+    serverId       Int
     serverName     String
     battleye       Boolean
     experimental   Boolean
-    serverLocation String
-    pvpType        String
+    serverLocation ServerEnum
+    pvpType        ServerEnum
 }
 
 type Skills {
+    magic     Float
     club      Float
     fist      Float
     sword     Float
@@ -49,9 +55,9 @@ type HirelingsInfo {
 }
 
 model Auction {
-    id                Int      @id @map("_id")
+    id                Int     @id @map("_id")
     nickname          String
-    auctionEnd        DateTime
+    auctionEnd        Int
     currentBid        Int
     hasBeenBidded     Boolean
     outfitId          String
@@ -64,12 +70,16 @@ model Auction {
     transfer          Boolean
     preySlot          Boolean
     huntingSlot       Boolean
+    serverId          Int
 
-    tags       String[]
-    imbuements String[]
-    items      Int[]
-    charms     String[]
-    quests     String[]
+    tags             String[]
+    imbuements       String[]
+    items            Float[]
+    charms           String[]
+    quests           String[]
+    mounts           String[]
+    storeMounts      String[]
+    rareAchievements String[]
 
     storeItems   CharacterItem[]
     outfits      Outfit[]
