@@ -111,7 +111,6 @@ model CurrentAuction {
     transfer          Boolean
     preySlot          Boolean
     huntingSlot       Boolean
-    serverId          Int
 
     tags             String[]
     imbuements       String[]
