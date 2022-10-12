@@ -28,8 +28,10 @@ const main = async () => {
       ],
     },
     orderBy: {
-      level: 'desc',
+      auctionEnd: 'desc',
     },
+    skip: 4320,
+    take: 10,
   })
   const t1 = +new Date()
 

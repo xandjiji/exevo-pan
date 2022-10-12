@@ -89,6 +89,8 @@ model HistoryAuction {
     charmInfo  CharmInfo
     hirelings  HirelingsInfo
     serverData Server
+
+    @@index([auctionEnd, level, currentBid])
 }
 
 model CurrentAuction {
@@ -126,4 +128,6 @@ model CurrentAuction {
     charmInfo  CharmInfo
     hirelings  HirelingsInfo
     serverData Server
+
+    @@index([auctionEnd, level, currentBid])
 }
