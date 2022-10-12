@@ -54,7 +54,44 @@ type HirelingsInfo {
     outfits Int
 }
 
-model Auction {
+model HistoryAuction {
+    id                Int     @id @map("_id")
+    nickname          String
+    auctionEnd        Int
+    currentBid        Int
+    hasBeenBidded     Boolean
+    outfitId          String
+    vocationId        Int
+    sex               Boolean
+    level             Int
+    achievementPoints Int
+    bossPoints        Int
+    tcInvested        Int
+    transfer          Boolean
+    preySlot          Boolean
+    huntingSlot       Boolean
+    serverId          Int
+
+    tags             String[]
+    imbuements       String[]
+    items            Float[]
+    charms           String[]
+    quests           String[]
+    mounts           String[]
+    storeMounts      String[]
+    rareAchievements String[]
+
+    storeItems   CharacterItem[]
+    outfits      Outfit[]
+    storeOutfits Outfit[]
+
+    skills     Skills
+    charmInfo  CharmInfo
+    hirelings  HirelingsInfo
+    serverData Server
+}
+
+model CurrentAuction {
     id                Int     @id @map("_id")
     nickname          String
     auctionEnd        Int
