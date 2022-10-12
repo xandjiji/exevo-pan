@@ -12,13 +12,15 @@ type ServerEnum {
     type   Int
 }
 
-type Server {
-    serverId       Int
-    serverName     String
+model Server {
+    serverName     String           @id @map("_id")
+    active         Boolean
     battleye       Boolean
     experimental   Boolean
     serverLocation ServerEnum
     pvpType        ServerEnum
+    HistoryAuction HistoryAuction[]
+    CurrentAuction CurrentAuction[]
 }
 
 type Skills {
@@ -70,7 +72,6 @@ model HistoryAuction {
     transfer          Boolean
     preySlot          Boolean
     huntingSlot       Boolean
-    serverId          Int
 
     tags             String[]
     imbuements       String[]
@@ -88,7 +89,8 @@ model HistoryAuction {
     skills     Skills
     charmInfo  CharmInfo
     hirelings  HirelingsInfo
-    serverData Server
+    server     Server        @relation(fields: [serverName], references: [serverName])
+    serverName String
 
     @@index([auctionEnd, level, currentBid])
 }
@@ -127,7 +129,8 @@ model CurrentAuction {
     skills     Skills
     charmInfo  CharmInfo
     hirelings  HirelingsInfo
-    serverData Server
+    server     Server        @relation(fields: [serverName], references: [serverName])
+    serverName String
 
     @@index([auctionEnd, level, currentBid])
 }

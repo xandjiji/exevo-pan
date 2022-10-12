@@ -4,7 +4,7 @@ const prisma = new PrismaClient()
 
 const main = async () => {
   const t0 = +new Date()
-  const result = await prisma.historyAuction.count({
+  /* const result = await prisma.historyAuction.count({
     where: {
       charms: { hasEvery: ['Dodge', 'Freeze'] },
       bossPoints: { gte: 0, lte: 1050 },
@@ -32,6 +32,18 @@ const main = async () => {
     },
     skip: 4320,
     take: 10,
+  }) */
+  await prisma.server.update({
+    where: {
+      serverName: 'Gentebra',
+    },
+    data: {
+      active: false,
+    },
+  })
+
+  const result = await prisma.historyAuction.findFirst({
+    include: { server: true },
   })
   const t1 = +new Date()
 
