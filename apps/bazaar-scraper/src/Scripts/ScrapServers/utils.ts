@@ -1,5 +1,5 @@
 import { prisma, HttpClient } from 'services'
-import { ServerList, KillStatistics } from 'Helpers'
+import { ServerList } from 'Helpers'
 import { retryWrapper } from 'utils'
 
 const URL = {
@@ -12,11 +12,6 @@ export const fetchServerPage = retryWrapper(async () => {
   return helper.servers(await HttpClient.getHtml(URL.SERVER_LIST))
 })
 
-export const fetchActiveServers = retryWrapper(async () => {
-  const helper = new KillStatistics()
-  return helper.servers(await HttpClient.getHtml(URL.KILL_STATISTICS))
-})
-
 export const db = {
   getAllServers: retryWrapper(prisma.server.findMany),
   updateInactiveServers: retryWrapper((serverNames: string[]) =>
@@ -24,5 +19,8 @@ export const db = {
       where: { serverName: { in: serverNames } },
       data: { active: false },
     }),
+  ),
+  insertNewServers: retryWrapper((servers: ServerObject[]) =>
+    prisma.server.createMany({ data: servers }),
   ),
 }

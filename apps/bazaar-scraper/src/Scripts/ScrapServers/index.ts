@@ -1,15 +1,9 @@
-import { ServerData } from 'Data'
 import { broadcast, coloredText } from 'logging'
-import { updateInactiveServers } from './tasks'
-import { db, fetchServerPage, fetchActiveServers } from './utils'
+import { updateInactiveServers, insertNewServers } from './tasks'
+import { db, fetchServerPage } from './utils'
 
 const main = async (): Promise<void> => {
-  const serverData = new ServerData()
-
-  await serverData.load()
-  const currentServerNames = serverData.getServerNamesSet()
-
-  broadcast('Synching server data...', 'neutral')
+  broadcast('Synching Tibia servers data...', 'neutral')
   const [storedServers, freshServers] = await Promise.all([
     db.getAllServers(),
     fetchServerPage(),
@@ -30,17 +24,17 @@ const main = async (): Promise<void> => {
     )
   }
 
-  // register new servers
-
-  newServerData.forEach((newServer) => {
-    if (!currentServerNames.has(newServer.serverName)) {
-      serverData.registerServer(newServer)
-    }
+  const newServers = await insertNewServers({
+    storedServers,
+    freshServers,
   })
 
-  broadcast('Fetching active server list...', 'neutral')
-  const activeServerList = await fetchActiveServers()
-  await serverData.saveActiveServers(activeServerList)
+  if (newServers) {
+    broadcast(
+      `New servers (${coloredText(newServers, 'success')}) were added...`,
+      'highlight',
+    )
+  }
 }
 
 export default main
