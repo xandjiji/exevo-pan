@@ -5,7 +5,7 @@ import { retryWrapper, batchPromises } from 'utils'
 
 const AUCTION_LIST_URL = 'https://www.tibia.com/charactertrade'
 
-const fetchAuctionsFromPage = retryWrapper(async (pageIndex) => {
+const scrapAuctionsFromPage = retryWrapper(async (pageIndex) => {
   const helper = new AuctionList()
   const html = await HttpClient.getHtml(
     `${AUCTION_LIST_URL}/?currentpage=${pageIndex}`,
@@ -13,7 +13,7 @@ const fetchAuctionsFromPage = retryWrapper(async (pageIndex) => {
   return helper.auctionBlocks(html)
 })
 
-export const fetchAllAuctionBlocks = async (
+export const scrapAuctionBlocks = async (
   pageIndexes: number[],
 ): Promise<AuctionBlock[]> => {
   const lastIndex = pageIndexes[pageIndexes.length - 1]
@@ -22,15 +22,14 @@ export const fetchAllAuctionBlocks = async (
     coloredText('Scraping auction blocks', 'highlight'),
   )
 
-  const auctionBlocksRequests = pageIndexes.map((currentIndex) => async () => {
+  const tasks = pageIndexes.map((currentIndex) => async () => {
     taskTracking.incTask()
     broadcast(`Scraping auction page ${taskTracking.getProgress()}`, 'neutral')
 
-    const auctionBlock = await fetchAuctionsFromPage(currentIndex)
-    return auctionBlock
+    return scrapAuctionsFromPage(currentIndex)
   })
 
-  const auctionBlocks = await batchPromises(auctionBlocksRequests)
+  const auctionBlocks = await batchPromises(tasks)
   taskTracking.finish()
   return auctionBlocks.flat()
 }

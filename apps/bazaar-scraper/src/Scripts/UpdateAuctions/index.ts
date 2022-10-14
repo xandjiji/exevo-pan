@@ -1,11 +1,13 @@
-import { Auctions, RareItems } from 'Data'
+import { RareItems } from 'Data'
 import { broadcast, coloredText, Timer } from 'logging'
 import ScrapServers from 'Scripts/ScrapServers'
 import ScrapRareItems from 'Scripts/ScrapRareItems'
 import {
-  fetchAuctionPageIndexes,
-  fetchAllAuctionBlocks,
+  scrapAuctionPageIndexes,
+  scrapAuctionBlocks,
   fetchNewAuctions,
+  upsertAuctions,
+  clearInactiveAuctions,
 } from './tasks'
 
 const SCRIPT_NAME = coloredText('UpdateAuctions', 'highlight')
@@ -16,19 +18,19 @@ const main = async (): Promise<void> => {
 
   await ScrapServers()
 
-  const auctionData = new Auctions()
+  const pageIndexes = await scrapAuctionPageIndexes()
+  const auctionBlocks = await scrapAuctionBlocks(pageIndexes)
 
-  const pageIndexes = await fetchAuctionPageIndexes()
-  const auctionBlocks = await fetchAllAuctionBlocks(pageIndexes)
+  await upsertAuctions(auctionBlocks)
 
-  await auctionData.load()
-  await auctionData.updatePreviousAuctions(auctionBlocks)
-
-  const newAuctionIds = auctionData.newAuctionIds(auctionBlocks)
+  const activeAuctionIds = auctionBlocks.map(({ id }) => id)
+  await clearInactiveAuctions(activeAuctionIds)
 
   if (newAuctionIds.length) {
     const newAuctions = await fetchNewAuctions(newAuctionIds)
     await auctionData.appendAuctions(newAuctions)
+
+    // scrap items
     await ScrapRareItems()
   }
 
