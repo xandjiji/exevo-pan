@@ -1,5 +1,4 @@
 export * from './scrapAuctionPageIndexes'
 export * from './scrapAuctionBlocks'
-export * from './fetchNewAuctions'
 export * from './upsertAuctions'
 export * from './clearInactiveAuctions'

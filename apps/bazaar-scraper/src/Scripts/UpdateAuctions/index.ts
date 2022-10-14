@@ -5,7 +5,6 @@ import ScrapRareItems from 'Scripts/ScrapRareItems'
 import {
   scrapAuctionPageIndexes,
   scrapAuctionBlocks,
-  fetchNewAuctions,
   upsertAuctions,
   clearInactiveAuctions,
 } from './tasks'
