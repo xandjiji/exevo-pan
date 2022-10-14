@@ -9,12 +9,12 @@ export const updateInactiveServers = async ({
   storedServers,
   freshServers,
 }: UpdateInactiveServersArgs): Promise<number> => {
-  const storedServerNames = new Set(
-    storedServers.map(({ serverName }) => serverName),
+  const freshServerNames = new Set(
+    freshServers.map(({ serverName }) => serverName),
   )
 
-  const newServers = freshServers.filter(
-    ({ serverName }) => !storedServerNames.has(serverName),
+  const newServers = storedServers.filter(
+    ({ serverName }) => !freshServerNames.has(serverName),
   )
 
   if (newServers.length) {
