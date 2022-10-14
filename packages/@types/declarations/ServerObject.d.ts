@@ -1,22 +1,17 @@
-declare type ServerLocation =
-  | { string: 'BR'; type: 2 }
-  | { string: 'EU'; type: 0 }
-  | { string: 'NA'; type: 1 }
+declare type ServerLocations = 'EU' | 'NA' | 'BR'
 
-declare type PvpType =
-  | { string: 'Hardcore'; type: 3 }
-  | { string: 'Open'; type: 1 }
-  | { string: 'Optional'; type: 0 }
-  | { string: 'Retro Hardcore'; type: 4 }
-  | { string: 'Retro Open'; type: 2 }
+declare type PvpTypes =
+  | 'Optional'
+  | 'Open'
+  | 'Retro Open'
+  | 'Hardcore'
+  | 'Retro Hardcore'
 
 declare interface ServerObject {
+  serverName: string
+  active: boolean
   battleye: boolean
   experimental: boolean
-  serverId: number
-  serverName: string
-  serverLocation: ServerLocation
-  pvpType: PvpType
+  serverLocation: string
+  pvpType: string
 }
-
-declare type PartialServerObject = Omit<ServerObject, 'serverId'>

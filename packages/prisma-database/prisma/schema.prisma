@@ -7,18 +7,13 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
-type ServerEnum {
-    string String
-    type   Int
-}
-
 model Server {
     serverName     String           @id @map("_id")
     active         Boolean
     battleye       Boolean
     experimental   Boolean
-    serverLocation ServerEnum
-    pvpType        ServerEnum
+    serverLocation String
+    pvpType        String
     HistoryAuction HistoryAuction[]
     CurrentAuction CurrentAuction[]
 }
