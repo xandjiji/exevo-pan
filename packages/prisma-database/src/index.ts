@@ -33,17 +33,9 @@ const main = async () => {
     skip: 4320,
     take: 10,
   }) */
-  await prisma.server.update({
-    where: {
-      serverName: 'Gentebra',
-    },
-    data: {
-      active: false,
-    },
-  })
 
-  const result = await prisma.historyAuction.findFirst({
-    include: { server: true },
+  const result = await prisma.server.findMany({
+    where: { active: false },
   })
   const t1 = +new Date()
 
