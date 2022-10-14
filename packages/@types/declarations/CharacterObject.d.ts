@@ -43,6 +43,44 @@ declare interface CharacterObject {
   currentBid: number
   hasBeenBidded: boolean
   outfitId: string
+  vocationId: number
+  sex: boolean
+  level: number
+  achievementPoints: number
+  bossPoints: number
+  tcInvested: number
+  tags: string[]
+  imbuements: string[]
+  items: number[]
+  charms: string[]
+  transfer: boolean
+  quests: string[]
+  storeItems: CharacterItem[]
+  outfits: Outfit[]
+  storeOutfits: Outfit[]
+  mounts: string[]
+  storeMounts: string[]
+  rareAchievements: string[]
+  skills: CharacterSkillsObject
+  hirelings: HirelingsInfo
+  preySlot: boolean
+  huntingSlot: boolean
+  charmInfo: CharmInfo
+  server: ServerObject
+  serverName: string
+}
+
+/* @ ToDo: remove this once its fully deprecated */
+declare type PartialCharacterObject = Omit<CharacterObject, 'serverData'>
+
+/* @ ToDo: remove this once its fully deprecated */
+declare interface OldCharacterObject {
+  id: number
+  nickname: string
+  auctionEnd: number
+  currentBid: number
+  hasBeenBidded: boolean
+  outfitId: string
   serverId: number
   vocationId: number
   sex: boolean
@@ -69,5 +107,3 @@ declare interface CharacterObject {
   huntingSlot: boolean
   charmInfo: CharmInfo
 }
-
-declare type PartialCharacterObject = Omit<CharacterObject, 'serverData'>
