@@ -13,15 +13,15 @@ export const updateInactiveServers = async ({
     freshServers.map(({ serverName }) => serverName),
   )
 
-  const newServers = storedServers.filter(
+  const inactiveServers = storedServers.filter(
     ({ serverName }) => !freshServerNames.has(serverName),
   )
 
-  if (newServers.length) {
+  if (inactiveServers.length) {
     await db.updateInactiveServers(
-      newServers.map(({ serverName }) => serverName),
+      inactiveServers.map(({ serverName }) => serverName),
     )
   }
 
-  return newServers.length
+  return inactiveServers.length
 }
