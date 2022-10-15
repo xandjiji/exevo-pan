@@ -3,6 +3,8 @@ import { prisma, HttpClient } from 'services'
 import { broadcast, tabBroadcast, TrackETA, coloredText } from 'logging'
 import { retryWrapper, batchPromises } from 'utils'
 
+type UpsertResult = { updated: number[]; created: number[] }
+
 const AUCTION_PAGE_URL =
   'https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details'
 
@@ -12,7 +14,7 @@ const fetchAuctionPage = retryWrapper((auctionId: number) =>
 
 export const upsertAuctions = async (
   auctionBlocks: AuctionBlock[],
-): Promise<void> => {
+): Promise<UpsertResult> => {
   const taskTracking = new TrackETA(
     auctionBlocks.length,
     coloredText('Upserting auctions', 'highlight'),
@@ -20,6 +22,11 @@ export const upsertAuctions = async (
 
   const serverData = await prisma.server.findMany()
   const helper = new AuctionPage(serverData)
+
+  const auctions: UpsertResult = {
+    updated: [],
+    created: [],
+  }
 
   const tasks = auctionBlocks
     .map(({ id, hasBeenBidded, currentBid }) => async () => {
@@ -39,6 +46,8 @@ export const upsertAuctions = async (
             currentBid,
           },
         })
+
+        auctions.updated.push(id)
       } catch {
         tabBroadcast(`New auction found! Scraping data...`, 'neutral')
 
@@ -57,6 +66,8 @@ export const upsertAuctions = async (
             },
           },
         })
+
+        auctions.created.push(id)
       }
 
       taskTracking.incTask()
@@ -65,4 +76,6 @@ export const upsertAuctions = async (
 
   await batchPromises(tasks)
   taskTracking.finish()
+
+  return auctions
 }

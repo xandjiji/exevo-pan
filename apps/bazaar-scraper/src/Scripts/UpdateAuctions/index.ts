@@ -20,23 +20,18 @@ const main = async (): Promise<void> => {
   const pageIndexes = await scrapAuctionPageIndexes()
   const auctionBlocks = await scrapAuctionBlocks(pageIndexes)
 
-  await upsertAuctions(auctionBlocks)
+  const upsertedAuctions = await upsertAuctions(auctionBlocks)
 
   const activeAuctionIds = auctionBlocks.map(({ id }) => id)
   await clearInactiveAuctions(activeAuctionIds)
 
-  // detectar se teve novos leiloes
-  // scrapar itens
-  if (newAuctionIds.length) {
-    const newAuctions = await fetchNewAuctions(newAuctionIds)
-    await auctionData.appendAuctions(newAuctions)
-
+  if (upsertedAuctions.created.length) {
     // scrap items
     await ScrapRareItems()
   }
 
   // salvar itens no banco de dados
-  // remover leiloes antigos do banco dos itens
+  // remover leiloes antigos do banco dos itens (casckade)
   const itemsData = new RareItems()
   await itemsData.load()
   await itemsData.filterStaleItems(auctionData.getAllAuctions())
