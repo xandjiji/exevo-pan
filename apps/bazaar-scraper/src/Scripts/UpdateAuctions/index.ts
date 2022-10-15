@@ -25,6 +25,8 @@ const main = async (): Promise<void> => {
   const activeAuctionIds = auctionBlocks.map(({ id }) => id)
   await clearInactiveAuctions(activeAuctionIds)
 
+  // detectar se teve novos leiloes
+  // scrapar itens
   if (newAuctionIds.length) {
     const newAuctions = await fetchNewAuctions(newAuctionIds)
     await auctionData.appendAuctions(newAuctions)
@@ -33,6 +35,8 @@ const main = async (): Promise<void> => {
     await ScrapRareItems()
   }
 
+  // salvar itens no banco de dados
+  // remover leiloes antigos do banco dos itens
   const itemsData = new RareItems()
   await itemsData.load()
   await itemsData.filterStaleItems(auctionData.getAllAuctions())
