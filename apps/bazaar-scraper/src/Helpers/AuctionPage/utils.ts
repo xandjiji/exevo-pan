@@ -27,7 +27,7 @@ const getPostData = retryWrapper((args: PostHtmlProps) => {
 export const getPagedData = async (
   $: CheerioAPI,
 ): Promise<CharacterPostData> => {
-  const helper = new AuctionPage()
+  const helper = new AuctionPage([])
   const postHelper = new PostData()
 
   const auctionId = helper.id($)
@@ -111,7 +111,7 @@ export const getPageableAuctionData = async (
   auctionId: number,
   $: CheerioAPI,
 ): Promise<PageableAuctionData> => {
-  const helper = new AuctionPage()
+  const helper = new AuctionPage([])
 
   const lastIndexes = {
     storeItems: helper.boxSectionLastIndex('StoreItemSummary', $),

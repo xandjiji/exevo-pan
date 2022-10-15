@@ -45,7 +45,7 @@ export default class AuctionPage {
     return errorText === 'Error'
   }
 
-  private id($: CheerioAPI): number {
+  id($: CheerioAPI): number {
     const buttonElement = $('.DisplayOptionsButton a.BigButtonText').first()
     const onClickHandler = buttonElement.attr('onclick')!
     const [, dirtyId] = onClickHandler?.split('auctionid=')
@@ -360,37 +360,37 @@ export default class AuctionPage {
     return [...achievementSet]
   }
 
-  private storeFirstPage($: CheerioAPI): CharacterItem[] {
+  storeFirstPage($: CheerioAPI): CharacterItem[] {
     const firstPage = $('#StoreItemSummary .TableContent tbody .BlockPage')
     const html = firstPage.html()
     return html ? this.postHelper.items(html) : []
   }
 
-  private outfitFirstPage($: CheerioAPI): Outfit[] {
+  outfitFirstPage($: CheerioAPI): Outfit[] {
     const firstPage = $('#Outfits .TableContent tbody .BlockPage')
     const html = firstPage.html()
     return html ? this.postHelper.outfits(html) : []
   }
 
-  private storeOutfitFirstPage($: CheerioAPI): Outfit[] {
+  storeOutfitFirstPage($: CheerioAPI): Outfit[] {
     const firstPage = $('#StoreOutfits .TableContent tbody .BlockPage')
     const html = firstPage.html()
     return html ? this.postHelper.outfits(html) : []
   }
 
-  private mountFirstPage($: CheerioAPI): string[] {
+  mountFirstPage($: CheerioAPI): string[] {
     const firstPage = $('#Mounts .TableContent tbody .BlockPage')
     const html = firstPage.html()
     return html ? this.postHelper.mounts(html) : []
   }
 
-  private storeMountFirstPage($: CheerioAPI): string[] {
+  storeMountFirstPage($: CheerioAPI): string[] {
     const firstPage = $('#StoreMounts .TableContent tbody .BlockPage')
     const html = firstPage.html()
     return html ? this.postHelper.mounts(html) : []
   }
 
-  private boxSectionLastIndex(id: string, $: CheerioAPI): number {
+  boxSectionLastIndex(id: string, $: CheerioAPI): number {
     const lastPageLink = $(`#${id} .TableContent tbody .PageLink:last-child a`)
 
     let lastIndex = 1
