@@ -4,7 +4,7 @@ import { retryWrapper } from 'utils'
 
 export const clearInactiveAuctions = retryWrapper(
   async (currentAuctionIds: number[]): Promise<void> => {
-    broadcast('Checking for inactive auctions...', 'highlight')
+    broadcast('Checking for inactive auctions...', 'control')
 
     const removedAuctions = await prisma.currentAuction.deleteMany({
       where: { id: { notIn: currentAuctionIds } },

@@ -1,6 +1,7 @@
+import { dequal } from 'dequal'
 import { AuctionPage } from 'Helpers'
 import { prisma, HttpClient } from 'services'
-import { broadcast, tabBroadcast, TrackETA, coloredText } from 'logging'
+import { broadcast, TrackETA, coloredText } from 'logging'
 import { retryWrapper, batchPromises } from 'utils'
 
 type UpsertResult = { updated: number[]; created: number[] }
@@ -12,14 +13,29 @@ const fetchAuctionPage = retryWrapper((auctionId: number) =>
   HttpClient.getHtml(`${AUCTION_PAGE_URL}&auctionid=${auctionId}`),
 )
 
+const getDbAuctionBlocks = retryWrapper(async () => {
+  const auctionBlocks = await prisma.currentAuction.findMany({
+    select: {
+      id: true,
+      hasBeenBidded: true,
+      currentBid: true,
+    },
+  })
+
+  const auctionBlockMap = new Map<
+    AuctionBlock['id'],
+    Pick<AuctionBlock, 'currentBid' | 'hasBeenBidded'>
+  >()
+  auctionBlocks.forEach(({ id, ...blockData }) =>
+    auctionBlockMap.set(id, blockData),
+  )
+
+  return auctionBlockMap
+})
+
 export const upsertAuctions = async (
   auctionBlocks: AuctionBlock[],
 ): Promise<UpsertResult> => {
-  const taskTracking = new TrackETA(
-    auctionBlocks.length,
-    coloredText('Upserting auctions', 'highlight'),
-  )
-
   const serverData = await prisma.server.findMany()
   const helper = new AuctionPage(serverData)
 
@@ -28,15 +44,26 @@ export const upsertAuctions = async (
     created: [],
   }
 
-  const tasks = auctionBlocks
+  broadcast('Diffing stored and fresh data...', 'control')
+  const storedAuctionBlockMap = await getDbAuctionBlocks()
+  const differentAuctionBlocks = auctionBlocks.filter(
+    ({ id, ...freshBlockData }) => {
+      const storedBlockData = storedAuctionBlockMap.get(id)
+
+      if (!storedBlockData) return true
+
+      return !dequal(freshBlockData, storedBlockData)
+    },
+  )
+
+  const taskTracking = new TrackETA(
+    differentAuctionBlocks.length,
+    coloredText('Upserting auctions', 'highlight'),
+  )
+
+  const tasks = differentAuctionBlocks
     .map(({ id, hasBeenBidded, currentBid }) => async () => {
-      broadcast(
-        `Upserting auction id: ${coloredText(
-          id,
-          'highlight',
-        )} ${taskTracking.getProgress()}`,
-        'neutral',
-      )
+      taskTracking.incTask()
 
       try {
         await prisma.currentAuction.update({
@@ -48,9 +75,15 @@ export const upsertAuctions = async (
         })
 
         auctions.updated.push(id)
-      } catch {
-        tabBroadcast(`New auction found! Scraping data...`, 'neutral')
 
+        broadcast(
+          `Auction updated (${coloredText(
+            id,
+            'highlight',
+          )}) ${taskTracking.getProgress()}`,
+          'neutral',
+        )
+      } catch {
         const newAuctionHtml = await fetchAuctionPage(id)
         const { serverName, server, ...characterData } =
           await helper.characterObject(newAuctionHtml)
@@ -68,9 +101,15 @@ export const upsertAuctions = async (
         })
 
         auctions.created.push(id)
-      }
 
-      taskTracking.incTask()
+        broadcast(
+          `New auction scraped (${coloredText(
+            id,
+            'highlight',
+          )}) ${taskTracking.getProgress()}`,
+          'neutral',
+        )
+      }
     })
     .map(retryWrapper)
 

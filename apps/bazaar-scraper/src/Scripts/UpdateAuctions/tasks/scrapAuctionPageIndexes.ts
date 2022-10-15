@@ -8,7 +8,7 @@ const FIRST_PAGE_AUCTION_LIST =
 
 export const scrapAuctionPageIndexes = retryWrapper(
   async (): Promise<number[]> => {
-    broadcast('Fetching for all auction pages indexes...', 'neutral')
+    broadcast('Fetching for all auction pages indexes...', 'control')
 
     const helper = new AuctionList()
     const html = await HttpClient.getHtml(FIRST_PAGE_AUCTION_LIST)
