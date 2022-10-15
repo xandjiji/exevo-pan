@@ -1,5 +1,5 @@
 import { AuctionList } from 'Helpers'
-import { HttpClient } from 'services'
+import { HttpClient, prisma } from 'services'
 import { retryWrapper } from 'utils'
 
 const BASE_URL =
@@ -36,4 +36,25 @@ export const buildRareItemCollection = (
   })
 
   return collection
+}
+
+type UpsertRareItem = {
+  name: string
+  id: number
+}
+
+export const db = {
+  upsertRareItem: retryWrapper(({ name, id }: UpsertRareItem) =>
+    prisma.rareItem.upsert({
+      where: { name_currentAuctionId: { name, currentAuctionId: id } },
+      update: {
+        name,
+        auction: { connect: { id } },
+      },
+      create: {
+        name,
+        auction: { connect: { id } },
+      },
+    }),
+  ),
 }
