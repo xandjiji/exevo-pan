@@ -14,7 +14,7 @@ export const updateInactiveServers = async ({
   )
 
   const inactiveServers = storedServers.filter(
-    ({ serverName }) => !freshServerNames.has(serverName),
+    ({ serverName, active }) => active && !freshServerNames.has(serverName),
   )
 
   if (inactiveServers.length) {
