@@ -125,6 +125,20 @@ model CurrentAuction {
     hirelings  HirelingsInfo
     server     Server        @relation(fields: [serverName], references: [serverName])
     serverName String
+    rareItems  RareItem[]
 
     @@index([auctionEnd, level, currentBid])
+}
+
+model RareItem {
+    id               String         @id @default(uuid()) @map("_id")
+    name             String
+    auction          CurrentAuction @relation(fields: [currentAuctionId], references: [id])
+    currentAuctionId Int
+
+    @@unique([name, currentAuctionId])
+}
+
+model CurrentRareItems {
+    name String @id @map("_id")
 }
