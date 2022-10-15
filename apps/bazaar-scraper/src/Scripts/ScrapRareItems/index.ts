@@ -1,7 +1,6 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import { RareItems } from 'Data'
-import { broadcast, coloredText, Timer } from 'logging'
+import { broadcast, tabBroadcast, coloredText, Timer } from 'logging'
 import { fetchAllFirstPages, fetchOtherPages } from './tasks'
 import { db } from './utils'
 
@@ -16,14 +15,20 @@ const main = async (): Promise<void> => {
 
   const rareItemBlocks = Object.values(completeCollection)
 
+  broadcast(`Updating rare items database...`, 'neutral')
   for (const { name, ids } of rareItemBlocks) {
+    tabBroadcast(
+      `Upserting data for ${coloredText(name, 'highlight')} (${coloredText(
+        ids.length,
+        'success',
+      )})`,
+      'control',
+    )
     await Promise.all(ids.map((id) => db.upsertRareItem({ name, id })))
   }
 
-  // transaçao: remover todos os CurrentRareItems e adicionar dnv
-
-  const rareItems = new RareItems()
-  rareItems.saveItemCollection(completeCollection)
+  broadcast(`Updating current rare item optons...`, 'neutral')
+  await db.upsertCurrentRareItemNames(rareItemBlocks.map(({ name }) => name))
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,

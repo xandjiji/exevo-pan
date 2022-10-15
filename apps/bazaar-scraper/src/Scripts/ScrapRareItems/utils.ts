@@ -57,4 +57,12 @@ export const db = {
       },
     }),
   ),
+  upsertCurrentRareItemNames: retryWrapper((itemNames: string[]) =>
+    prisma.$transaction([
+      prisma.currentRareItems.deleteMany(),
+      prisma.currentRareItems.createMany({
+        data: itemNames.map((name) => ({ name })),
+      }),
+    ]),
+  ),
 }
