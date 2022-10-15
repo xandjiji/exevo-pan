@@ -1,8 +1,5 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
-import { broadcast, tabBroadcast, coloredText, Timer } from 'logging'
-import { fetchAllFirstPages, fetchOtherPages } from './tasks'
-import { db } from './utils'
+import { broadcast, coloredText, Timer } from 'logging'
+import { fetchAllFirstPages, fetchOtherPages, updateDatabase } from './tasks'
 
 const SCRIPT_NAME = coloredText('ScrapRareItems', 'highlight')
 
@@ -13,22 +10,7 @@ const main = async (): Promise<void> => {
   const incompleteCollection = await fetchAllFirstPages()
   const completeCollection = await fetchOtherPages(incompleteCollection)
 
-  const rareItemBlocks = Object.values(completeCollection)
-
-  broadcast(`Updating rare items database...`, 'neutral')
-  for (const { name, ids } of rareItemBlocks) {
-    tabBroadcast(
-      `Upserting data for ${coloredText(name, 'highlight')} (${coloredText(
-        ids.length,
-        'success',
-      )})`,
-      'control',
-    )
-    await Promise.all(ids.map((id) => db.upsertRareItem({ name, id })))
-  }
-
-  broadcast(`Updating current rare item optons...`, 'neutral')
-  await db.upsertCurrentRareItemNames(rareItemBlocks.map(({ name }) => name))
+  await updateDatabase(completeCollection)
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,
