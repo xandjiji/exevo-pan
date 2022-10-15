@@ -1,4 +1,3 @@
-import { RareItems } from 'Data'
 import { broadcast, coloredText, Timer } from 'logging'
 import ScrapServers from 'Scripts/ScrapServers'
 import ScrapRareItems from 'Scripts/ScrapRareItems'
@@ -26,15 +25,8 @@ const main = async (): Promise<void> => {
   await clearInactiveAuctions(activeAuctionIds)
 
   if (upsertedAuctions.created.length) {
-    // scrap items
     await ScrapRareItems()
   }
-
-  // salvar itens no banco de dados
-  // remover leiloes antigos do banco dos itens (casckade)
-  const itemsData = new RareItems()
-  await itemsData.load()
-  await itemsData.filterStaleItems(auctionData.getAllAuctions())
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,
