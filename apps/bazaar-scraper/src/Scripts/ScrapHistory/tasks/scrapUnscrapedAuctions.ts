@@ -25,7 +25,7 @@ export const scrapUnscrapedAuctions = async (
   const newHighestAuctionId = await fetchHighestAuctionId()
   const unscrapedIds = makeRangeArray(lastScrapedId + 1, newHighestAuctionId)
 
-  const serverData = await db.getAllServers()
+  const serverData = await db.getServers()
   const helper = new AuctionPage(serverData)
 
   const taskTracking = new TrackETA(

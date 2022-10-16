@@ -7,7 +7,7 @@ import { fetchAuctionPage, db } from '../utils'
 export const scrapMaturedAuctions = async (
   maturedAuctions: UnfinishedAuction[],
 ): Promise<void> => {
-  const serverData = await db.getAllServers()
+  const serverData = await db.getServers()
   const helper = new AuctionPage(serverData)
 
   const taskTracking = new TrackETA(

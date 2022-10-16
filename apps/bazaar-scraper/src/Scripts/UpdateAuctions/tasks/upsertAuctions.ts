@@ -3,6 +3,7 @@ import { AuctionPage } from 'Helpers'
 import { prisma, HttpClient } from 'services'
 import { broadcast, TrackETA, coloredText } from 'logging'
 import { retryWrapper, batchPromises } from 'utils'
+import { db } from '../utils'
 
 const AUCTION_PAGE_URL =
   'https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details'
@@ -11,37 +12,17 @@ const fetchAuctionPage = retryWrapper((auctionId: number) =>
   HttpClient.getHtml(`${AUCTION_PAGE_URL}&auctionid=${auctionId}`),
 )
 
-const getDbAuctionBlocks = retryWrapper(async () => {
-  const auctionBlocks = await prisma.currentAuction.findMany({
-    select: {
-      id: true,
-      hasBeenBidded: true,
-      currentBid: true,
-    },
-  })
-
-  const auctionBlockMap = new Map<
-    AuctionBlock['id'],
-    Pick<AuctionBlock, 'currentBid' | 'hasBeenBidded'>
-  >()
-  auctionBlocks.forEach(({ id, ...blockData }) =>
-    auctionBlockMap.set(id, blockData),
-  )
-
-  return auctionBlockMap
-})
-
 export const upsertAuctions = async (
   auctionBlocks: AuctionBlock[],
 ): Promise<{
   updatedIds: number[]
   createdIds: number[]
 }> => {
-  const serverData = await prisma.server.findMany()
+  const serverData = await db.getServers()
   const helper = new AuctionPage(serverData)
 
   broadcast('Diffing stored and fresh data...', 'control')
-  const storedAuctionBlockMap = await getDbAuctionBlocks()
+  const storedAuctionBlockMap = await db.getDbAuctionBlocks()
 
   const newAuctionBlocks = auctionBlocks.filter(
     (freshAuctionBlock) => !storedAuctionBlockMap.get(freshAuctionBlock.id),
