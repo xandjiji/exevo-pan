@@ -1,3 +1,2 @@
-export * from './fetchHighestAuctionId'
-export * from './fetchMaturedAuctions'
-export * from './fetchUnscrapedAuctions'
+export * from './scrapMaturedAuctions'
+export * from './scrapUnscrapedAuctions'
