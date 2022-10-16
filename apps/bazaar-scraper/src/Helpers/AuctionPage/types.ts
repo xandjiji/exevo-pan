@@ -17,7 +17,7 @@ export const readableTypes: Record<RequestTypes, string> = {
 export type HistoryCheck =
   | { result: 'NOT_FOUND'; data: null }
   | { result: 'NOT_FINISHED'; data: UnfinishedAuction }
-  | { result: 'IS_FINISHED'; data: PartialCharacterObject }
+  | { result: 'IS_FINISHED'; data: CharacterObject }
 
 export type RawCheck =
   | { result: 'NOT_FOUND'; data: null }

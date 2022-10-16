@@ -245,18 +245,7 @@ const main = async () => {
   /* await prisma.currentAuction.delete({ where: { id: 2 } }) */
   const t1 = +new Date()
 
-  await prisma.currentAuction.delete({ where: { id: 1018607 } })
-
-  const result = await prisma.currentAuction.findMany({
-    where: {
-      rareItems: { some: { name: { in: ['Soulcrusher'] } } },
-    },
-    select: {
-      id: true,
-      currentBid: true,
-      hasBeenBidded: true,
-    },
-  })
+  const result = await prisma.currentAuction.findMany()
   console.log(result)
   console.log(`took: ${t1 - t0}ms`)
 }

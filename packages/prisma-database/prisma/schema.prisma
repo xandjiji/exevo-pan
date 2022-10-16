@@ -51,6 +51,11 @@ type HirelingsInfo {
     outfits Int
 }
 
+type RareItemEntry {
+    id   String
+    name String
+}
+
 model HistoryAuction {
     id                Int     @id @map("_id")
     nickname          String
@@ -84,8 +89,9 @@ model HistoryAuction {
     skills     Skills
     charmInfo  CharmInfo
     hirelings  HirelingsInfo
-    server     Server        @relation(fields: [serverName], references: [serverName])
+    server     Server          @relation(fields: [serverName], references: [serverName])
     serverName String
+    rareItems  RareItemEntry[]
 
     @@index([auctionEnd, level, currentBid])
 }
@@ -141,4 +147,14 @@ model RareItem {
 
 model CurrentRareItems {
     name String @id @map("_id")
+}
+
+model LastHistoryScrapedId {
+    id            String @id @default(uuid()) @map("_id")
+    lastScrapedId Int
+}
+
+model UnfinishedAuction {
+    id         Int @id @map("_id")
+    auctionEnd Int
 }

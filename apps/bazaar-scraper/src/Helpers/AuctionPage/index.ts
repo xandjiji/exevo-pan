@@ -449,6 +449,7 @@ export default class AuctionPage {
       },
       server: serverData,
       serverName,
+      rareItems: [],
     }
 
     characterObject.tcInvested = totalCharacterInvestment(characterObject)

@@ -36,6 +36,11 @@ declare type Outfit = {
   type: number
 }
 
+declare type RareItemEntry = {
+  id: string
+  name: string
+}
+
 declare interface CharacterObject {
   id: number
   nickname: string
@@ -68,6 +73,7 @@ declare interface CharacterObject {
   charmInfo: CharmInfo
   server: ServerObject
   serverName: string
+  rareItems: RareItemEntry[]
 }
 
 /* @ ToDo: remove this once its fully deprecated */
