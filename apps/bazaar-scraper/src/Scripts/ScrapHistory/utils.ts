@@ -9,6 +9,7 @@ export const fetchAuctionPage = retryWrapper(async (auctionId: number) =>
 )
 
 export const db = {
+  getAllServers: retryWrapper(prisma.server.findMany),
   getScrapHistoryData: retryWrapper(async () => {
     const { lastScrapedId } =
       (await prisma.lastHistoryScrapedId.findFirst()) ?? {

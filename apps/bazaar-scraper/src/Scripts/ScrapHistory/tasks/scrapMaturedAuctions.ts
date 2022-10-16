@@ -2,13 +2,12 @@
 /* eslint-disable no-restricted-syntax */
 import { AuctionPage } from 'Helpers'
 import { broadcast, coloredText, TrackETA } from 'logging'
-import { prisma } from 'services'
 import { fetchAuctionPage, db } from '../utils'
 
 export const scrapMaturedAuctions = async (
   maturedAuctions: UnfinishedAuction[],
 ): Promise<void> => {
-  const serverData = await prisma.server.findMany()
+  const serverData = await db.getAllServers()
   const helper = new AuctionPage(serverData)
 
   const taskTracking = new TrackETA(

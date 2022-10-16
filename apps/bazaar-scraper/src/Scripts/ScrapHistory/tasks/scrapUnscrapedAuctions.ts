@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { AuctionList, AuctionPage } from 'Helpers'
 import { broadcast, coloredText, TrackETA } from 'logging'
-import { HttpClient, prisma } from 'services'
+import { HttpClient } from 'services'
 import { retryWrapper, makeRangeArray } from 'utils'
 import { fetchAuctionPage, db } from '../utils'
 
@@ -25,7 +25,7 @@ export const scrapUnscrapedAuctions = async (
   const newHighestAuctionId = await fetchHighestAuctionId()
   const unscrapedIds = makeRangeArray(lastScrapedId + 1, newHighestAuctionId)
 
-  const serverData = await prisma.server.findMany()
+  const serverData = await db.getAllServers()
   const helper = new AuctionPage(serverData)
 
   const taskTracking = new TrackETA(
