@@ -1,6 +1,8 @@
 import { HttpClient, prisma } from 'services'
 import { retryWrapper } from 'utils'
 
+export const DELAY = 10000
+
 const AUCTION_PAGE_URL =
   'https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details'
 

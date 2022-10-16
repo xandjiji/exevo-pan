@@ -3,8 +3,8 @@
 import { AuctionList, AuctionPage } from 'Helpers'
 import { broadcast, coloredText, coloredDiff, TrackETA } from 'logging'
 import { HttpClient } from 'services'
-import { retryWrapper, makeRangeArray } from 'utils'
-import { fetchAuctionPage, db } from '../utils'
+import { retryWrapper, makeRangeArray, sleep } from 'utils'
+import { fetchAuctionPage, db, DELAY } from '../utils'
 
 const SORTED_NEWEST_HISTORY_URL =
   'https://www.tibia.com/charactertrade/?subtopic=pastcharactertrades&order_column=103&order_direction=0'
@@ -70,6 +70,8 @@ export const scrapUnscrapedAuctions = async (
       await db.insertHistoryAuction(data, false)
       auctionsCount.finished += 1
     }
+
+    await sleep(DELAY)
   }
 
   taskTracking.finish()

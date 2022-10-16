@@ -2,7 +2,8 @@
 /* eslint-disable no-restricted-syntax */
 import { AuctionPage } from 'Helpers'
 import { broadcast, coloredText, coloredDiff, TrackETA } from 'logging'
-import { fetchAuctionPage, db } from '../utils'
+import { sleep } from 'utils'
+import { fetchAuctionPage, db, DELAY } from '../utils'
 
 export const scrapMaturedAuctions = async (
   maturedAuctions: UnfinishedAuction[],
@@ -40,6 +41,8 @@ export const scrapMaturedAuctions = async (
       )
       await db.insertHistoryAuction(data, true)
     }
+
+    await sleep(DELAY)
   }
 
   taskTracking.finish()
