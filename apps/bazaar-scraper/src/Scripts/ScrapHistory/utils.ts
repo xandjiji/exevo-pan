@@ -17,7 +17,7 @@ export const db = {
         lastScrapedId: 0,
       }
 
-    const currentTimestamp = +new Date() / 1000
+    const currentTimestamp = Math.floor(+new Date() / 1000)
 
     const maturedAuctions = await prisma.unfinishedAuction.findMany({
       where: { auctionEnd: { lte: currentTimestamp } },
