@@ -37,8 +37,29 @@ export const db = {
         }),
       ]),
   ),
-  insertHistoryAuction: retryWrapper(
-    async (auction: CharacterObject, isMaturedAuction: boolean) => {
+  insertFreshHistoryAuction: retryWrapper(async (auction: CharacterObject) => {
+    const { id, serverName, server, ...characterData } = auction
+
+    const rareItems = await prisma.rareItem.findMany({
+      where: { currentAuctionId: id },
+      select: { id: true, name: true },
+    })
+
+    await prisma.$transaction([
+      prisma.historyAuction.create({
+        data: {
+          ...characterData,
+          id,
+          rareItems,
+          server: { connect: { serverName } },
+        },
+      }),
+      prisma.lastHistoryScrapedId.deleteMany(),
+      prisma.lastHistoryScrapedId.create({ data: { lastScrapedId: id } }),
+    ])
+  }),
+  insertMaturedHistoryAuction: retryWrapper(
+    async (auction: CharacterObject) => {
       const { id, serverName, server, ...characterData } = auction
 
       const rareItems = await prisma.rareItem.findMany({
@@ -46,29 +67,17 @@ export const db = {
         select: { id: true, name: true },
       })
 
-      const auctionData = {
-        data: {
-          ...characterData,
-          id,
-          rareItems,
-          server: { connect: { serverName } },
-        },
-      }
-
-      if (isMaturedAuction) {
-        await prisma.$transaction([
-          prisma.historyAuction.create(auctionData),
-          prisma.unfinishedAuction.delete({ where: { id } }),
-          prisma.lastHistoryScrapedId.deleteMany(),
-          prisma.lastHistoryScrapedId.create({ data: { lastScrapedId: id } }),
-        ])
-      } else {
-        await prisma.$transaction([
-          prisma.historyAuction.create(auctionData),
-          prisma.lastHistoryScrapedId.deleteMany(),
-          prisma.lastHistoryScrapedId.create({ data: { lastScrapedId: id } }),
-        ])
-      }
+      await prisma.$transaction([
+        prisma.historyAuction.create({
+          data: {
+            ...characterData,
+            id,
+            rareItems,
+            server: { connect: { serverName } },
+          },
+        }),
+        prisma.unfinishedAuction.delete({ where: { id } }),
+      ])
     },
   ),
 }

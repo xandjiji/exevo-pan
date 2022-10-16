@@ -39,7 +39,7 @@ export const scrapMaturedAuctions = async (
         `Scraping   auction id: ${readableId} ${readableProgress}`,
         'neutral',
       )
-      await db.insertHistoryAuction(data, true)
+      await db.insertMaturedHistoryAuction(data)
     }
 
     await sleep(DELAY)

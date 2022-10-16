@@ -67,7 +67,7 @@ export const scrapUnscrapedAuctions = async (
         `Scraping   auction id: ${readableId} ${readableProgress}`,
         'neutral',
       )
-      await db.insertHistoryAuction(data, false)
+      await db.insertFreshHistoryAuction(data)
       auctionsCount.finished += 1
     }
 
