@@ -58,7 +58,7 @@ export const scrapUnscrapedAuctions = async (
         `Unfinished auction id: ${readableId} ${readableProgress}`,
         'neutral',
       )
-      await db.insertUnfinishedAuction({ data })
+      await db.insertUnfinishedAuction(data)
       auctionsCount.unfinished += 1
     }
 

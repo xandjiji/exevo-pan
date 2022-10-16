@@ -25,7 +25,16 @@ export const db = {
 
     return { lastScrapedId, maturedAuctions }
   }),
-  insertUnfinishedAuction: retryWrapper(prisma.unfinishedAuction.create),
+  insertUnfinishedAuction: retryWrapper(
+    (unfinishedAuction: UnfinishedAuction) =>
+      prisma.$transaction([
+        prisma.unfinishedAuction.create({ data: unfinishedAuction }),
+        prisma.lastHistoryScrapedId.deleteMany(),
+        prisma.lastHistoryScrapedId.create({
+          data: { lastScrapedId: unfinishedAuction.id },
+        }),
+      ]),
+  ),
   insertHistoryAuction: retryWrapper(
     async (auction: CharacterObject, isMaturedAuction: boolean) => {
       const { id, serverName, server, ...characterData } = auction
@@ -48,9 +57,15 @@ export const db = {
         await prisma.$transaction([
           prisma.historyAuction.create(auctionData),
           prisma.unfinishedAuction.delete({ where: { id } }),
+          prisma.lastHistoryScrapedId.deleteMany(),
+          prisma.lastHistoryScrapedId.create({ data: { lastScrapedId: id } }),
         ])
       } else {
-        await prisma.historyAuction.create(auctionData)
+        await prisma.$transaction([
+          prisma.historyAuction.create(auctionData),
+          prisma.lastHistoryScrapedId.deleteMany(),
+          prisma.lastHistoryScrapedId.create({ data: { lastScrapedId: id } }),
+        ])
       }
     },
   ),
