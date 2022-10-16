@@ -24,7 +24,7 @@ const main = async (): Promise<void> => {
   const activeAuctionIds = auctionBlocks.map(({ id }) => id)
   await clearInactiveAuctions(activeAuctionIds)
 
-  if (upsertedAuctions.created.length) {
+  if (upsertedAuctions.createdIds.length) {
     await ScrapRareItems()
   }
 

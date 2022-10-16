@@ -4,8 +4,6 @@ import { prisma, HttpClient } from 'services'
 import { broadcast, TrackETA, coloredText } from 'logging'
 import { retryWrapper, batchPromises } from 'utils'
 
-type UpsertResult = { updated: number[]; created: number[] }
-
 const AUCTION_PAGE_URL =
   'https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details'
 
@@ -35,37 +33,36 @@ const getDbAuctionBlocks = retryWrapper(async () => {
 
 export const upsertAuctions = async (
   auctionBlocks: AuctionBlock[],
-): Promise<UpsertResult> => {
+): Promise<{
+  updatedIds: number[]
+  createdIds: number[]
+}> => {
   const serverData = await prisma.server.findMany()
   const helper = new AuctionPage(serverData)
 
-  const auctions: UpsertResult = {
-    updated: [],
-    created: [],
-  }
-
   broadcast('Diffing stored and fresh data...', 'control')
   const storedAuctionBlockMap = await getDbAuctionBlocks()
-  const differentAuctionBlocks = auctionBlocks.filter(
+
+  const newAuctionBlocks = auctionBlocks.filter(
+    (freshAuctionBlock) => !storedAuctionBlockMap.get(freshAuctionBlock.id),
+  )
+  const biddedAuctionBlocks = auctionBlocks.filter(
     ({ id, ...freshBlockData }) => {
       const storedBlockData = storedAuctionBlockMap.get(id)
-
-      if (!storedBlockData) return true
-
-      return !dequal(freshBlockData, storedBlockData)
+      return storedBlockData && !dequal(freshBlockData, storedBlockData)
     },
   )
 
   const taskTracking = new TrackETA(
-    differentAuctionBlocks.length,
+    newAuctionBlocks.length + biddedAuctionBlocks.length,
     coloredText('Upserting auctions', 'highlight'),
   )
 
-  const tasks = differentAuctionBlocks
-    .map(({ id, hasBeenBidded, currentBid }) => async () => {
-      taskTracking.incTask()
+  const tasks = {
+    updateAuctions: biddedAuctionBlocks
+      .map(({ id, hasBeenBidded, currentBid }) => async () => {
+        taskTracking.incTask()
 
-      try {
         await prisma.currentAuction.update({
           where: { id },
           data: {
@@ -74,8 +71,6 @@ export const upsertAuctions = async (
           },
         })
 
-        auctions.updated.push(id)
-
         broadcast(
           `Auction updated (${coloredText(
             id,
@@ -83,7 +78,12 @@ export const upsertAuctions = async (
           )}) ${taskTracking.getProgress()}`,
           'neutral',
         )
-      } catch {
+      })
+      .map(retryWrapper),
+    scrapNewAuctions: newAuctionBlocks
+      .map(({ id }) => async () => {
+        taskTracking.incTask()
+
         const newAuctionHtml = await fetchAuctionPage(id)
         const { serverName, server, ...characterData } =
           await helper.characterObject(newAuctionHtml)
@@ -100,8 +100,6 @@ export const upsertAuctions = async (
           },
         })
 
-        auctions.created.push(id)
-
         broadcast(
           `New auction scraped (${coloredText(
             id,
@@ -109,12 +107,18 @@ export const upsertAuctions = async (
           )}) ${taskTracking.getProgress()}`,
           'neutral',
         )
-      }
-    })
-    .map(retryWrapper)
+      })
+      .map(retryWrapper),
+  }
 
-  await batchPromises(tasks)
+  await Promise.all([
+    batchPromises(tasks.updateAuctions),
+    batchPromises(tasks.scrapNewAuctions),
+  ])
   taskTracking.finish()
 
-  return auctions
+  return {
+    updatedIds: biddedAuctionBlocks.map(({ id }) => id),
+    createdIds: newAuctionBlocks.map(({ id }) => id),
+  }
 }
