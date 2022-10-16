@@ -15,9 +15,7 @@ const main = async (): Promise<void> => {
 
   await scrapUnscrapedAuctions(lastScrapedId)
 
-  if (maturedAuctions.length) {
-    await scrapMaturedAuctions(maturedAuctions)
-  }
+  await scrapMaturedAuctions(maturedAuctions)
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,

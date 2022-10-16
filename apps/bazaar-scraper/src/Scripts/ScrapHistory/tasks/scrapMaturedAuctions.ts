@@ -1,12 +1,14 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { AuctionPage } from 'Helpers'
-import { broadcast, coloredText, TrackETA } from 'logging'
+import { broadcast, coloredText, coloredDiff, TrackETA } from 'logging'
 import { fetchAuctionPage, db } from '../utils'
 
 export const scrapMaturedAuctions = async (
   maturedAuctions: UnfinishedAuction[],
 ): Promise<void> => {
+  if (!maturedAuctions.length) return
+
   const serverData = await db.getServers()
   const helper = new AuctionPage(serverData)
 
@@ -31,15 +33,6 @@ export const scrapMaturedAuctions = async (
       )
     }
 
-    if (result === 'NOT_FINISHED') {
-      broadcast(
-        `Unfinished auction id: ${readableId} ${readableProgress}`,
-        'neutral',
-      )
-      await db.insertUnfinishedAuction({ data })
-      return
-    }
-
     if (result === 'IS_FINISHED') {
       broadcast(
         `Scraping   auction id: ${readableId} ${readableProgress}`,
@@ -50,4 +43,11 @@ export const scrapMaturedAuctions = async (
   }
 
   taskTracking.finish()
+
+  broadcast(
+    `Matured history auctions (${coloredDiff(
+      maturedAuctions.length,
+    )}) were scraped`,
+    'success',
+  )
 }

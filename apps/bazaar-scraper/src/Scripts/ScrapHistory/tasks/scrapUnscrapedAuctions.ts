@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { AuctionList, AuctionPage } from 'Helpers'
-import { broadcast, coloredText, TrackETA } from 'logging'
+import { broadcast, coloredText, coloredDiff, TrackETA } from 'logging'
 import { HttpClient } from 'services'
 import { retryWrapper, makeRangeArray } from 'utils'
 import { fetchAuctionPage, db } from '../utils'
@@ -33,6 +33,10 @@ export const scrapUnscrapedAuctions = async (
     coloredText('Scraping new history auctions', 'highlight'),
   )
 
+  const auctionsCount = {
+    unfinished: 0,
+    finished: 0,
+  }
   for (const auctionId of unscrapedIds) {
     const readableId = coloredText(auctionId, 'highlight')
 
@@ -55,7 +59,7 @@ export const scrapUnscrapedAuctions = async (
         'neutral',
       )
       await db.insertUnfinishedAuction({ data })
-      return
+      auctionsCount.unfinished += 1
     }
 
     if (result === 'IS_FINISHED') {
@@ -64,8 +68,22 @@ export const scrapUnscrapedAuctions = async (
         'neutral',
       )
       await db.insertHistoryAuction(data, false)
+      auctionsCount.finished += 1
     }
   }
 
   taskTracking.finish()
+
+  broadcast(
+    `Fresh history auctions (${coloredDiff(
+      auctionsCount.finished,
+    )}) were scraped`,
+    'success',
+  )
+  broadcast(
+    `New unfinished auctions (${coloredDiff(
+      auctionsCount.unfinished,
+    )}) were found`,
+    'success',
+  )
 }
