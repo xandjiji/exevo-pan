@@ -8,7 +8,10 @@ import { fetchAuctionPage, db, DELAY } from '../utils'
 export const scrapMaturedAuctions = async (
   maturedAuctions: UnfinishedAuction[],
 ): Promise<void> => {
-  if (!maturedAuctions.length) return
+  if (!maturedAuctions.length) {
+    broadcast('There are no new matured auctions ready yet', 'control')
+    return
+  }
 
   const serverData = await db.getServers()
   const helper = new AuctionPage(serverData)

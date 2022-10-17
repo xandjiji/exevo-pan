@@ -23,6 +23,18 @@ export const scrapUnscrapedAuctions = async (
   lastScrapedId: number,
 ): Promise<void> => {
   const newHighestAuctionId = await fetchHighestAuctionId()
+
+  if (newHighestAuctionId <= lastScrapedId) {
+    broadcast(
+      `Highest auction id found (${coloredText(
+        newHighestAuctionId,
+        'highlight',
+      )}) was already scraped`,
+      'control',
+    )
+    return
+  }
+
   const unscrapedIds = makeRangeArray(lastScrapedId + 1, newHighestAuctionId)
 
   const serverData = await db.getServers()
