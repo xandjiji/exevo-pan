@@ -3,10 +3,10 @@ import { exitIfMaintenance } from 'utils'
 import { stringToNumber } from '../utils'
 
 export default class AuctionList {
-  private maintenanceCheck(content: string) {
+  private errorCheck(content: string): boolean {
     const $ = cheerio.load(content)
-    const headingElement = $('h1')
-    return headingElement.text() === 'Downtime'
+    const filterTitle = $('.Text:contains("Filter Auctions")').html()
+    return !filterTitle
   }
 
   private id(element: Element) {
@@ -36,6 +36,9 @@ export default class AuctionList {
 
   lastPageIndex(content: string): number {
     const $ = cheerio.load(content)
+
+    exitIfMaintenance(() => this.errorCheck(content))
+
     try {
       const lastPageElement = $(
         '.PageNavigation .PageLink:last-child a',
@@ -51,7 +54,7 @@ export default class AuctionList {
   auctionBlocks(content: string): AuctionBlock[] {
     const $ = cheerio.load(content)
 
-    exitIfMaintenance(() => this.maintenanceCheck(content))
+    exitIfMaintenance(() => this.errorCheck(content))
 
     const auctionBlocks = $('.Auction')
     const auctions: AuctionBlock[] = []
