@@ -33,16 +33,14 @@ export default class AuctionPage {
     })
   }
 
-  maintenanceCheck($: CheerioAPI): boolean {
+  private maintenanceCheck($: CheerioAPI): boolean {
     const headingElement = $('h1')
     return headingElement.text() === 'Downtime'
   }
 
-  errorCheck($: CheerioAPI): boolean {
-    const errorText = $(
-      '#currentcharactertrades .Text, #pastcharactertrades .Text',
-    ).text()
-    return errorText === 'Error'
+  private errorCheck($: CheerioAPI): boolean {
+    const title = $('.Text:contains("Auction Details")').html()
+    return !title
   }
 
   id($: CheerioAPI): number {
@@ -408,7 +406,7 @@ export default class AuctionPage {
   ): Promise<CharacterObject> {
     const $ = loadCheerio(content)
 
-    exitIfMaintenance(() => this.maintenanceCheck($))
+    exitIfMaintenance(() => this.errorCheck($))
 
     const serverName = this.serverName($)
 
