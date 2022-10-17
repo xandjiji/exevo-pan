@@ -2,10 +2,10 @@ import cheerio, { Element } from 'cheerio/lib/index'
 import { exitIfMaintenance } from 'utils'
 
 export default class KillStatistics {
-  private maintenanceCheck(content: string): boolean {
+  private errorCheck(content: string): boolean {
     const $ = cheerio.load(content)
-    const headingElement = $('h1')
-    return headingElement.text() === 'Downtime'
+    const title = $('.Text:contains("Kill Statistics")').html()
+    return !title
   }
 
   private bossName(element: Element): string {
@@ -21,7 +21,7 @@ export default class KillStatistics {
   }
 
   lastDayBossKills(content: string): Record<string, BossKills> {
-    exitIfMaintenance(() => this.maintenanceCheck(content))
+    exitIfMaintenance(() => this.errorCheck(content))
 
     const $ = cheerio.load(content)
 
@@ -39,7 +39,7 @@ export default class KillStatistics {
   }
 
   servers(content: string): string[] {
-    exitIfMaintenance(() => this.maintenanceCheck(content))
+    exitIfMaintenance(() => this.errorCheck(content))
 
     const $ = cheerio.load(content)
 
