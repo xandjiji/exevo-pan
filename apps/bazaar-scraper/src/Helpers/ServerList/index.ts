@@ -3,27 +3,27 @@ import { exitIfMaintenance } from 'utils'
 import { parse } from './utils'
 
 export default class ServerList {
-  maintenanceCheck(content: string): boolean {
+  private errorCheck(content: string): boolean {
     const $ = cheerio.load(content)
-    const headingElement = $('h1')
-    return headingElement.text() === 'Downtime'
+    const title = $('.Text:contains("Game World Overview")').html()
+    return !title
   }
 
-  name(element: Element): string {
+  private name(element: Element): string {
     return cheerio('td:nth-child(1)', element).text()
   }
 
-  location(element: Element): string {
+  private location(element: Element): string {
     const locationText = cheerio('td:nth-child(3)', element).text()
     return parse.serverLocation(locationText)
   }
 
-  pvpType(element: Element): string {
+  private pvpType(element: Element): string {
     const pvpTypeText = cheerio('td:nth-child(4)', element).text()
     return parse.pvpType(pvpTypeText)
   }
 
-  battleye(element: Element): boolean {
+  private battleye(element: Element): boolean {
     const battleyeImageSrc = cheerio('td:nth-child(5) img', element).attr('src')
 
     if (!battleyeImageSrc) {
@@ -36,7 +36,7 @@ export default class ServerList {
     return battleyeImageSrc === BATTLEYE_PROTECTED_URL
   }
 
-  experimental(element: Element): boolean {
+  private experimental(element: Element): boolean {
     const serverInfoText = cheerio('td:nth-child(6)', element)
       .text()
       .toLowerCase()
@@ -45,7 +45,7 @@ export default class ServerList {
   }
 
   servers(content: string): ServerObject[] {
-    exitIfMaintenance(() => this.maintenanceCheck(content))
+    exitIfMaintenance(() => this.errorCheck(content))
 
     const $ = cheerio.load(content)
 
