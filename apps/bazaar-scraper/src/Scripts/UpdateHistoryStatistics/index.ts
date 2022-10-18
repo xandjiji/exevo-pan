@@ -1,4 +1,5 @@
-import { History, HistoryStatistics } from 'Data'
+import { HistoryStatistics } from 'Data'
+import { prisma } from 'services'
 import { broadcast, coloredText, Timer } from 'logging'
 import {
   calculateTotalRevenue,
@@ -14,18 +15,25 @@ const main = async (): Promise<void> => {
   const timer = new Timer()
   broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
 
-  const historyData = new History()
-  await historyData.load()
-  const allAuctions = historyData.getEntireHistory()
+  /* const statisticsData = new HistoryStatistics()
+  await statisticsData.load() */
 
-  const statisticsData = new HistoryStatistics()
-  await statisticsData.load()
+  /*   const allAuctions = await prisma.currentAuction.findMany()
+  const successAuctionsBid = await prisma.currentAuction.aggregate({
+    where: { hasBeenBidded: true },
+    _count: true,
+    _sum: {
+      currentBid: true,
+    },
+  }) */
 
-  const successfulAuctions = allAuctions.filter(
+  console.log(await calculateTotalRevenue())
+
+  /* const successfulAuctions = allAuctions.filter(
     ({ hasBeenBidded }) => hasBeenBidded,
-  )
+  ) */
 
-  statisticsData.patchData({
+  /* statisticsData.patchData({
     totalRevenue: calculateTotalRevenue(allAuctions),
     totalTibiaCoins: calculateTotalNegotiated(allAuctions),
     successRate: calculateSuccessRate(allAuctions),
@@ -40,9 +48,9 @@ const main = async (): Promise<void> => {
     top10Distance: calculateTop10.byDistance(successfulAuctions),
     top10Shielding: calculateTop10.byShielding(successfulAuctions),
     vocationPercentage: calculateVocationDistribution(allAuctions),
-  })
+  }) */
 
-  await statisticsData.save()
+  /* await statisticsData.save() */
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,

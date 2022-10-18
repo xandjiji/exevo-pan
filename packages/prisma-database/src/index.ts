@@ -5,8 +5,7 @@ const prisma = new PrismaClient()
 const main = async () => {
   const t0 = +new Date()
 
-  const result = await prisma.historyAuction.count()
-
+  const result = await prisma.currentAuction.count()
   /* const result = await prisma.lastHistoryScrapedId.deleteMany()
   await prisma.historyAuction.deleteMany()
   await prisma.unfinishedAuction.deleteMany() */
