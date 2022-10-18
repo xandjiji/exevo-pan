@@ -1,11 +1,9 @@
-import { HistoryStatistics } from 'Data'
-import { prisma } from 'services'
 import { broadcast, coloredText, Timer } from 'logging'
 import {
   calculateTotalRevenue,
   calculateTotalNegotiated,
   calculateSuccessRate,
-  calculateTop10,
+  getTopTenBy,
   calculateVocationDistribution,
 } from './tasks'
 
@@ -15,45 +13,22 @@ const main = async (): Promise<void> => {
   const timer = new Timer()
   broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
 
-  /* const statisticsData = new HistoryStatistics()
-  await statisticsData.load() */
-
-  /*   const allAuctions = await prisma.currentAuction.findMany()
-  const successAuctionsBid = await prisma.currentAuction.aggregate({
-    where: { hasBeenBidded: true },
-    _count: true,
-    _sum: {
-      currentBid: true,
-    },
-  }) */
-
-  const result = await calculateVocationDistribution()
-
-  /* const successfulAuctions = allAuctions.filter(
-    ({ hasBeenBidded }) => hasBeenBidded,
-  ) */
-
-  /* const data = {
+  const data = {
     totalRevenue: await calculateTotalRevenue(),
     totalTibiaCoins: await calculateTotalNegotiated(),
     successRate: await calculateSuccessRate(),
     vocationPercentage: await calculateVocationDistribution(),
-  } */
-
-  /* statisticsData.patchData({
-    top10Bid: calculateTop10.byBid(successfulAuctions),
-    top10Level: calculateTop10.byLevel(successfulAuctions),
-    top10Magic: calculateTop10.byMagic(successfulAuctions),
-    top10Club: calculateTop10.byClub(successfulAuctions),
-    top10Fist: calculateTop10.byFist(successfulAuctions),
-    top10Sword: calculateTop10.bySword(successfulAuctions),
-    top10Fishing: calculateTop10.byFishing(successfulAuctions),
-    top10Axe: calculateTop10.byAxe(successfulAuctions),
-    top10Distance: calculateTop10.byDistance(successfulAuctions),
-    top10Shielding: calculateTop10.byShielding(successfulAuctions),
-  }) */
-
-  /* await statisticsData.save() */
+    top10Bid: await getTopTenBy.bid(),
+    top10Level: await getTopTenBy.level(),
+    top10Magic: await getTopTenBy.magic(),
+    top10Club: await getTopTenBy.club(),
+    top10Fist: await getTopTenBy.fist(),
+    top10Sword: await getTopTenBy.sword(),
+    top10Fishing: await getTopTenBy.fishing(),
+    top10Axe: await getTopTenBy.axe(),
+    top10Distance: await getTopTenBy.distance(),
+    top10Shielding: await getTopTenBy.shielding(),
+  }
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,
