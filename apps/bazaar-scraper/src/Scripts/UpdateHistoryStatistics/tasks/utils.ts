@@ -1,3 +1,5 @@
+import { coloredText } from 'logging'
+
 const SECOND = 1
 const MINUTE = SECOND * 60
 const HOUR = MINUTE * 60
@@ -28,10 +30,18 @@ export const getLastTimestampsRange = (
   return ranges.reverse()
 }
 
-export const toReadableTimestamp = (timestamp: number): string => {
+const toReadableTimestamp = (timestamp: number): string => {
   const [weekday, month, day, year] = new Date(timestamp * 1000)
     .toDateString()
     .split(' ')
 
   return `${month} ${day}, ${year}`
 }
+
+const toReadableDate = (timestamp: number): string =>
+  coloredText(toReadableTimestamp(timestamp), 'highlight')
+
+export const toReadableRange = ([from, to]: TimestampRange): string =>
+  `${coloredText('[', 'system')}from ${toReadableDate(
+    from,
+  )} to ${toReadableDate(to)}${coloredText(']', 'system')}`

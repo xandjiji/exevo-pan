@@ -27,14 +27,17 @@ const main = async (): Promise<void> => {
     },
   }) */
 
-  console.log(await calculateTotalRevenue())
+  console.log(await calculateTotalNegotiated())
 
   /* const successfulAuctions = allAuctions.filter(
     ({ hasBeenBidded }) => hasBeenBidded,
   ) */
 
+  /* const data = {
+    totalRevenue: await calculateTotalRevenue(),
+  } */
+
   /* statisticsData.patchData({
-    totalRevenue: calculateTotalRevenue(allAuctions),
     totalTibiaCoins: calculateTotalNegotiated(allAuctions),
     successRate: calculateSuccessRate(allAuctions),
     top10Bid: calculateTop10.byBid(successfulAuctions),

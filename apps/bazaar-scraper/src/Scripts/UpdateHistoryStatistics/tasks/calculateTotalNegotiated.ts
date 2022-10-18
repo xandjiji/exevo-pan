@@ -1,40 +1,45 @@
-import { getLastTimestampsRange, filterAuctionsByTimestampRange } from './utils'
+/* eslint-disable no-await-in-loop */
+/* eslint-disable no-restricted-syntax */
+import { broadcast, tabBroadcast } from 'logging'
+import { prisma } from 'services'
+import { getLastTimestampsRange, toReadableRange } from './utils'
 
-const getLastDaysNegotiations = (
-  successAuctions: PartialCharacterObject[],
-): number[] => {
+const getLastDaysNegotiations = async (): Promise<number[]> => {
+  broadcast('Calculating last month TC volume...', 'neutral')
+
   const timestampRanges = getLastTimestampsRange()
   const lastMonth: number[] = []
 
-  timestampRanges.forEach((range) => {
-    const filteredByRange = filterAuctionsByTimestampRange(
-      range,
-      successAuctions,
-    )
+  for (const [from, to] of timestampRanges) {
+    tabBroadcast(`Summarizing ${toReadableRange([from, to])}...`, 'control')
+    const auctionsInCurrentRange = await prisma.currentAuction.findMany({
+      where: {
+        hasBeenBidded: true,
+        auctionEnd: { gte: from, lte: to },
+      },
+    })
 
     let negotiated = 0
-    filteredByRange.forEach(({ currentBid }) => {
+    auctionsInCurrentRange.forEach(({ currentBid }) => {
       negotiated += currentBid
     })
 
     lastMonth.push(negotiated)
-  })
+  }
 
   return lastMonth
 }
 
-export const calculateTotalNegotiated = (
-  history: PartialCharacterObject[],
-): MonthlySummary => {
-  const successAuctions = history.filter(({ hasBeenBidded }) => hasBeenBidded)
+export const calculateTotalNegotiated = async (): Promise<MonthlySummary> => {
+  broadcast('Calculating total TC volume...', 'neutral')
 
-  const totalNegotiated = successAuctions.reduce(
-    (total, { currentBid }) => total + currentBid,
-    0,
-  )
+  const { _sum: totalNegotiated } = await prisma.currentAuction.aggregate({
+    where: { hasBeenBidded: true },
+    _sum: { currentBid: true },
+  })
 
   return {
-    current: totalNegotiated,
-    lastMonth: getLastDaysNegotiations(successAuctions),
+    current: totalNegotiated.currentBid ?? 0,
+    lastMonth: await getLastDaysNegotiations(),
   }
 }

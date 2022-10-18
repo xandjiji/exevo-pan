@@ -1,14 +1,11 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import { broadcast, tabBroadcast, coloredText } from 'logging'
+import { broadcast, tabBroadcast } from 'logging'
 import { prisma } from 'services'
-import { getLastTimestampsRange, toReadableTimestamp } from './utils'
+import { getLastTimestampsRange, toReadableRange } from './utils'
 
 const BASE_AUCTION_FEE = 50
 const AUCTION_TAX = 0.12
-
-const readableTimestamp = (timestamp: number) =>
-  coloredText(toReadableTimestamp(timestamp), 'highlight')
 
 const getLastDaysRevenues = async (): Promise<number[]> => {
   broadcast('Calculating last month revenue...', 'neutral')
@@ -17,12 +14,7 @@ const getLastDaysRevenues = async (): Promise<number[]> => {
   const lastMonth: number[] = []
 
   for (const [from, to] of timestampRanges) {
-    tabBroadcast(
-      `Summarizing ${coloredText('[', 'system')}from ${readableTimestamp(
-        from,
-      )} to ${readableTimestamp(to)}${coloredText(']', 'system')}...`,
-      'control',
-    )
+    tabBroadcast(`Summarizing ${toReadableRange([from, to])}...`, 'control')
     const auctionsInCurrentRange = await prisma.currentAuction.findMany({
       where: { auctionEnd: { gte: from, lte: to } },
     })
