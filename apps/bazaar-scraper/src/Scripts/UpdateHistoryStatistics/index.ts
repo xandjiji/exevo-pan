@@ -27,7 +27,7 @@ const main = async (): Promise<void> => {
     },
   }) */
 
-  const result = await calculateSuccessRate()
+  const result = await calculateVocationDistribution()
 
   /* const successfulAuctions = allAuctions.filter(
     ({ hasBeenBidded }) => hasBeenBidded,
@@ -37,6 +37,7 @@ const main = async (): Promise<void> => {
     totalRevenue: await calculateTotalRevenue(),
     totalTibiaCoins: await calculateTotalNegotiated(),
     successRate: await calculateSuccessRate(),
+    vocationPercentage: await calculateVocationDistribution(),
   } */
 
   /* statisticsData.patchData({
@@ -50,7 +51,6 @@ const main = async (): Promise<void> => {
     top10Axe: calculateTop10.byAxe(successfulAuctions),
     top10Distance: calculateTop10.byDistance(successfulAuctions),
     top10Shielding: calculateTop10.byShielding(successfulAuctions),
-    vocationPercentage: calculateVocationDistribution(allAuctions),
   }) */
 
   /* await statisticsData.save() */
