@@ -11,7 +11,7 @@ const vocationToId = {
 } as const
 
 const getVocationCount = retryWrapper((vocation: keyof typeof vocationToId) =>
-  prisma.currentAuction.count({
+  prisma.historyAuction.count({
     where: { vocationId: vocationToId[vocation] },
   }),
 )
