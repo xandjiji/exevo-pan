@@ -1,4 +1,6 @@
 import { broadcast, coloredText, Timer } from 'logging'
+import { prisma } from 'services'
+import { retryWrapper } from 'utils'
 import {
   calculateTotalRevenue,
   calculateTotalNegotiated,
@@ -9,11 +11,18 @@ import {
 
 const SCRIPT_NAME = coloredText('UpdateHistoryStatistics', 'highlight')
 
+const updateData = retryWrapper((data: string) =>
+  prisma.$transaction([
+    prisma.historyStatistics.deleteMany(),
+    prisma.historyStatistics.create({ data: { jsonData: data } }),
+  ]),
+)
+
 const main = async (): Promise<void> => {
   const timer = new Timer()
   broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
 
-  const data = {
+  const data: StatisticsData = {
     totalRevenue: await calculateTotalRevenue(),
     totalTibiaCoins: await calculateTotalNegotiated(),
     successRate: await calculateSuccessRate(),
@@ -29,6 +38,8 @@ const main = async (): Promise<void> => {
     top10Distance: await getTopTenBy.distance(),
     top10Shielding: await getTopTenBy.shielding(),
   }
+
+  await updateData(JSON.stringify(data))
 
   broadcast(
     `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,

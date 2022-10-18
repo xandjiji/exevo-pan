@@ -158,3 +158,8 @@ model UnfinishedAuction {
     id         Int @id @map("_id")
     auctionEnd Int
 }
+
+model HistoryStatistics {
+    id       String @id @default(uuid()) @map("_id")
+    jsonData String
+}
