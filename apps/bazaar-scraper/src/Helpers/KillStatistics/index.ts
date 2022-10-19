@@ -39,8 +39,6 @@ export default class KillStatistics {
   }
 
   servers(content: string): string[] {
-    exitIfMaintenance(() => this.errorCheck(content))
-
     const $ = cheerio.load(content)
 
     const serverOptions = $('select[name="world"] option')
@@ -49,6 +47,8 @@ export default class KillStatistics {
       const { value } = element.attribs
       if (value) serverNames.push(value)
     })
+
+    exitIfMaintenance(() => serverNames.length === 0)
 
     return serverNames
   }
