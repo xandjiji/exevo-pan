@@ -1,5 +1,3 @@
-/* eslint-disable no-await-in-loop */
-/* eslint-disable no-restricted-syntax */
 import { prisma } from 'services'
 import { KillStatistics } from 'Helpers'
 import { broadcast } from 'logging'
