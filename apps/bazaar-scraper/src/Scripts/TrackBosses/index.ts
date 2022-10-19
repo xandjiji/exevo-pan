@@ -11,9 +11,12 @@ const main = async (): Promise<void> => {
   const wasUpdated = await task.checkForPageUpdates()
 
   if (wasUpdated) {
-    broadcast('Kill statistics page was updated!', 'highlight')
+    broadcast(
+      'Kill statistics page was updated! Fetching server list...',
+      'highlight',
+    )
     const serverList = await fetch.serverNames()
-    /* const wasUpdated = await scrapEachServerKillStatistics(serverList) */
+    await task.upsertBossAppearences(serverList)
 
     const bossDistributions = await task.generateBossDistributions()
 

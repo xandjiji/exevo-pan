@@ -1,4 +1,4 @@
-import { HttpClient } from 'services'
+import { HttpClient, prisma } from 'services'
 import { KillStatistics } from 'Helpers'
 import { retryWrapper, sha256 } from 'utils'
 
@@ -13,6 +13,16 @@ export const fetch = {
   killStatisticsPage: retryWrapper((serverName: string) =>
     HttpClient.getHtml(`${KILL_STATISTICS_BASE_URL}&world=${serverName}`),
   ),
+}
+
+export const db = {
+  getLatestServerHash: retryWrapper(async (server: string) => {
+    const serverHash = await prisma.killStatisticsHash.findFirst({
+      where: { server },
+    })
+
+    return serverHash ? serverHash.hash : ''
+  }),
 }
 
 export const generateHash = (
