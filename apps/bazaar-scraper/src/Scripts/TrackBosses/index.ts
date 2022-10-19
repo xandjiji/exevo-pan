@@ -1,26 +1,35 @@
-import { broadcast } from 'logging'
-import { fetchServerNames } from './utils'
-import {
-  scrapEachServerKillStatistics,
-  generateBossDistributions,
-  calculateBossChances,
-  revalidatePages,
-} from './tasks'
+import { Timer, coloredText, broadcast } from 'logging'
+import { fetch } from './utils'
+import * as task from './tasks'
+
+const SCRIPT_NAME = coloredText('TrackBosses', 'highlight')
 
 const main = async (): Promise<void> => {
-  broadcast('Fetching server names...', 'neutral')
+  const timer = new Timer()
+  broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
 
-  const serverList = await fetchServerNames()
-
-  const wasUpdated = await scrapEachServerKillStatistics(serverList)
-
-  const bossDistributions = await generateBossDistributions()
-
-  await calculateBossChances({ serverList, bossDistributions, wasUpdated })
+  const wasUpdated = await task.checkForPageUpdates()
 
   if (wasUpdated) {
-    await revalidatePages(serverList)
+    broadcast('Kill statistics page was updated!', 'highlight')
+    const serverList = await fetch.serverNames()
+    /* const wasUpdated = await scrapEachServerKillStatistics(serverList) */
+
+    const bossDistributions = await task.generateBossDistributions()
+
+    await task.calculateBossChances({
+      serverList,
+      bossDistributions,
+      wasUpdated,
+    })
+
+    await task.revalidatePages(serverList)
   }
+
+  broadcast(
+    `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,
+    'success',
+  )
 }
 
 export default main
