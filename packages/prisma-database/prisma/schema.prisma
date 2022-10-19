@@ -163,3 +163,18 @@ model HistoryStatistics {
     id       String @id @default(uuid()) @map("_id")
     jsonData String
 }
+
+model KillStatisticsHash {
+    server    String @id @map("_id")
+    hash      String
+    timestamp Int
+}
+
+model BossAppearence {
+    id        String @id @default(uuid()) @map("_id")
+    name      String
+    server    String
+    timestamp Int
+
+    @@unique([name, server, timestamp])
+}
