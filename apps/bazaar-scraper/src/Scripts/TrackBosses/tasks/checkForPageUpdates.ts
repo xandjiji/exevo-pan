@@ -1,18 +1,23 @@
-import { KillStatistics } from 'Helpers'
 import { broadcast } from 'logging'
-import { db, fetch, generateHash } from '../utils'
+import { KillStatistics } from 'Helpers'
+import { BossStatistics } from 'Data'
 
-export const checkForPageUpdates = async (): Promise<boolean> => {
+import { singleSampleFrom } from 'mock-maker/src/utils'
+import { fetch } from '../utils'
+
+export const checkForPageUpdates = async (
+  serverList: string[],
+): Promise<boolean> => {
   broadcast('Checking for kill statistics page update...', 'neutral')
+  const randomServer = singleSampleFrom(serverList)
 
   const helper = new KillStatistics()
-  const randomServer = await db.getRandomServerHash()
+  const data = new BossStatistics()
+  data.load(randomServer)
 
-  const currentBossKillsData = helper.lastDayBossKills(
-    await fetch.killStatisticsPage(randomServer.server),
+  const bossKillsData = helper.lastDayBossKills(
+    await fetch.killStatisticsPage(randomServer),
   )
 
-  const currentHash = generateHash(currentBossKillsData)
-
-  return currentHash !== randomServer.hash
+  return data.isDataFresh(bossKillsData)
 }
