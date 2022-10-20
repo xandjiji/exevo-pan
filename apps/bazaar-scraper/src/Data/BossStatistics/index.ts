@@ -139,7 +139,7 @@ export default class BossStatisticsData {
     const currentTimestamp = +new Date()
     const offsettedTimestamp = +new Date() - MILLISECONDS_IN_A_DAY / 2
 
-    if (this.isDataFresh(bossKillsData)) {
+    if (!this.isDataFresh(bossKillsData)) {
       broadcast(`Data for ${serverName} still not updated`, 'control')
     }
 

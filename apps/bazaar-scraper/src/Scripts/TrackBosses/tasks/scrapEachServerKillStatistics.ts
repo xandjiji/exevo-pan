@@ -3,7 +3,7 @@
 import { HttpClient } from 'services'
 import { KillStatistics } from 'Helpers'
 import { BossStatistics } from 'Data'
-import { coloredText, TrackETA } from 'logging'
+import { tabBroadcast, TrackETA } from 'logging'
 import { retryWrapper, sleep } from 'utils'
 import { requests } from 'Constants'
 import { KILL_STATISTICS_BASE_URL } from '../utils'
@@ -20,10 +20,11 @@ export const scrapEachServerKillStatistics = async (
   const taskSize = serverList.length
   const taskTracking = new TrackETA(
     taskSize,
-    coloredText('Scraping kill statistics for each server', 'highlight'),
+    'Scraping kill statistics for each server',
   )
 
   for (const server of serverList) {
+    tabBroadcast(server, 'control')
     const helper = new KillStatistics()
     const file = new BossStatistics()
 
