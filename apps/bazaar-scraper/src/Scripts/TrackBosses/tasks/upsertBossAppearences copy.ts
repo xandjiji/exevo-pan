@@ -12,16 +12,17 @@ const { DELAY } = requests
 
 const DEFAULT_BOSS_KILLS: BossKills = { playersKilled: 0, killedByPlayers: 0 }
 
-export const upsertBossAppearences = async (
-  serverList: string[],
-): Promise<void> => {
+export const get = async (): Promise<void> => {
+  const serverList = await fetch.serverNames()
+
   const taskSize = serverList.length
   const taskTracking = new TrackETA(
     taskSize,
-    coloredText('Scraping kill statistics for each server', 'highlight'),
+    coloredText('Scraping new kill statistics for each server', 'highlight'),
   )
 
   for (const server of serverList) {
+    tabBroadcast(`Fetching recent kill statistics for ${server}...`, 'neutral')
     const helper = new KillStatistics()
 
     const bossKillsData = helper.lastDayBossKills(
@@ -29,12 +30,6 @@ export const upsertBossAppearences = async (
     )
 
     const currentHash = generateHash(bossKillsData)
-    const latestHash = await db.getLatestServerHash(server)
-    const wasUpdated = currentHash !== latestHash
-
-    if (!wasUpdated) {
-      tabBroadcast(`Data for ${server} still not updated`, 'fail')
-    }
 
     const currentTimestamp = +new Date()
     const offsettedTimestamp = currentTimestamp - MILLISECONDS_IN_A_DAY / 2

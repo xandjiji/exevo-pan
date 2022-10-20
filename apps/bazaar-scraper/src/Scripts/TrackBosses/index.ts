@@ -1,5 +1,4 @@
 import { Timer, coloredText, broadcast } from 'logging'
-import { fetch } from './utils'
 import * as task from './tasks'
 
 const SCRIPT_NAME = coloredText('TrackBosses', 'highlight')
@@ -11,12 +10,8 @@ const main = async (): Promise<void> => {
   const wasUpdated = await task.checkForPageUpdates()
 
   if (wasUpdated) {
-    broadcast(
-      'Kill statistics page was updated! Fetching server list...',
-      'highlight',
-    )
-    const serverList = await fetch.serverNames()
-    await task.upsertBossAppearences(serverList)
+    broadcast('Kill statistics page was updated!', 'highlight')
+    await task.scrapFreshBossApparitions()
 
     const bossDistributions = await task.generateBossDistributions()
 

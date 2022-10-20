@@ -1,3 +1,15 @@
+declare type BossApparition = {
+  server: string
+  name: string
+  timestamp: number
+}
+
+declare type FreshKillStatisticsData = {
+  server: string
+  hash: string
+  bossApparitions: BossApparition[]
+}
+
 declare type BossAppearences = {
   name: string
   appearences: number[]
