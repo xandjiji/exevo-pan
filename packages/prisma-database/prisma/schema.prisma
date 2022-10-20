@@ -170,7 +170,7 @@ model KillStatisticsHash {
     timestamp Int
 }
 
-model BossAppearence {
+model BossApparition {
     id        String @id @default(uuid()) @map("_id")
     name      String
     server    String
