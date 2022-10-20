@@ -34,10 +34,10 @@ export const db = {
   getServerKillStatistics: retryWrapper(() =>
     prisma.killStatisticsHash.findMany(),
   ),
-  getBossAppearencesByServer: retryWrapper((server: string) =>
-    prisma.bossAppearence.findMany({
-      where: { server },
-      select: { name: true, timestamp: true },
+  getBossApparitions: retryWrapper((boss: string) =>
+    prisma.bossApparition.findMany({
+      where: { name: boss },
+      select: { server: true, timestamp: true },
     }),
   ),
 }

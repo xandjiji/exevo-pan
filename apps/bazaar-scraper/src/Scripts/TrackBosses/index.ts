@@ -11,7 +11,7 @@ const main = async (): Promise<void> => {
 
   if (wasUpdated) {
     broadcast('Kill statistics page was updated!', 'highlight')
-    await task.scrapFreshBossApparitions()
+    const freshKillStatisticsData = await task.scrapFreshBossApparitions()
 
     const bossDistributions = await task.generateBossDistributions()
 

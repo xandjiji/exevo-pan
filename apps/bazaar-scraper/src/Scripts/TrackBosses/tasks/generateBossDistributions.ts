@@ -70,11 +70,9 @@ const apply1DayRule = (distribution: Distribution): Distribution => {
 }
 
 export const generateBossDistributions = async (): Promise<
-  Record<string, Distribution>
+  Map<string, Distribution>
 > => {
-  const allServerKillStatistics = await db.getServerKillStatistics()
-
-  const taskSize = allServerKillStatistics.length
+  const taskSize = bossNames.length
   const taskTracking = new TrackETA(
     taskSize,
     coloredText(
@@ -83,48 +81,36 @@ export const generateBossDistributions = async (): Promise<
     ),
   )
 
-  const bossIntervals: Record<string, number[]> = {}
+  const bossDistributions = new Map<string, Distribution>()
 
-  for (const { server, hash, timestamp } of allServerKillStatistics) {
+  for (const bossName of bossNames) {
     tabBroadcast(
-      `Summarizing distributions from ${coloredText(server, 'neutral')}...`,
+      `Summarizing distributions for ${coloredText(bossName, 'neutral')}...`,
       'control',
     )
-    const bossAppearences = await db.getBossAppearencesByServer(server)
+    const bossApparitions = await db.getBossApparitions(bossName)
+    const serverList = [...new Set(bossApparitions.map(({ server }) => server))]
 
-    const bossStatistics: BossStatistics = {
-      server,
-      latest: { hash, timestamp },
-      bosses: {},
-    }
+    const intervals = serverList
+      .map((server) =>
+        getAppearencesIntervals(
+          bossApparitions
+            .filter((apparition) => apparition.server === server)
+            .map(({ timestamp }) => timestamp)
+            .sort((a, b) => a - b),
+        ),
+      )
+      .flat()
 
-    bossNames.forEach((bossName) => {
-      const appearences = bossAppearences
-        .filter(({ name }) => name === bossName)
-        .map((appearence) => appearence.timestamp)
-        .sort((a, b) => a - b)
-
-      bossStatistics.bosses[bossName] = { name: bossName, appearences }
-    })
-
-    Object.values(bossStatistics.bosses).forEach(({ name, appearences }) => {
-      const intervals = getAppearencesIntervals(appearences)
-
-      bossIntervals[name] = [...(bossIntervals[name] ?? []), ...intervals]
-    })
+    bossDistributions.set(
+      bossName,
+      apply1DayRule(denoiseDistribution(calculateDistribution(intervals))),
+    )
 
     taskTracking.incTask()
   }
 
   taskTracking.finish()
-
-  const bossDistributions: Record<string, Distribution> = {}
-
-  Object.entries(bossIntervals).forEach(([bossName, intervals]) => {
-    bossDistributions[bossName] = apply1DayRule(
-      denoiseDistribution(calculateDistribution(intervals)),
-    )
-  })
 
   return bossDistributions
 }
