@@ -23,7 +23,6 @@ const main = async (): Promise<void> => {
     await task.calculateBossChances({
       serverList,
       bossDistributions,
-      wasUpdated,
     })
 
     await task.revalidatePages(serverList)
