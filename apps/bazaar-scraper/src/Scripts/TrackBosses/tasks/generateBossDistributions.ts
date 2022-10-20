@@ -1,8 +1,11 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import { BossStatistics } from 'Data'
-import { coloredText, TrackETA } from 'logging'
+import { constTokens as bossDictionary } from 'data-dictionary/dist/dictionaries/bosses'
+import { tabBroadcast, coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
+import { db } from '../utils'
+
+const bossNames = Object.values(bossDictionary)
 
 const RELEVANT_FREQUENCY = 0.01
 
@@ -69,11 +72,9 @@ const apply1DayRule = (distribution: Distribution): Distribution => {
 export const generateBossDistributions = async (): Promise<
   Record<string, Distribution>
 > => {
-  const file = new BossStatistics()
+  const allServerKillStatistics = await db.getServerKillStatistics()
 
-  const serverList = await file.readAllServerNames()
-
-  const taskSize = serverList.length
+  const taskSize = allServerKillStatistics.length
   const taskTracking = new TrackETA(
     taskSize,
     coloredText(
@@ -84,10 +85,27 @@ export const generateBossDistributions = async (): Promise<
 
   const bossIntervals: Record<string, number[]> = {}
 
-  for (const server of serverList) {
-    await file.load(server)
+  for (const { server, hash, timestamp } of allServerKillStatistics) {
+    tabBroadcast(
+      `Summarizing distributions from ${coloredText(server, 'neutral')}...`,
+      'control',
+    )
+    const bossAppearences = await db.getBossAppearencesByServer(server)
 
-    const bossStatistics = file.getBossStatistics()
+    const bossStatistics: BossStatistics = {
+      server,
+      latest: { hash, timestamp },
+      bosses: {},
+    }
+
+    bossNames.forEach((bossName) => {
+      const appearences = bossAppearences
+        .filter(({ name }) => name === bossName)
+        .map((appearence) => appearence.timestamp)
+        .sort((a, b) => a - b)
+
+      bossStatistics.bosses[bossName] = { name: bossName, appearences }
+    })
 
     Object.values(bossStatistics.bosses).forEach(({ name, appearences }) => {
       const intervals = getAppearencesIntervals(appearences)

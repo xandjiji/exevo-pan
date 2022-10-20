@@ -23,6 +23,15 @@ export const db = {
 
     return serverHash ? serverHash.hash : ''
   }),
+  getServerKillStatistics: retryWrapper(() =>
+    prisma.killStatisticsHash.findMany(),
+  ),
+  getBossAppearencesByServer: retryWrapper((server: string) =>
+    prisma.bossAppearence.findMany({
+      where: { server },
+      select: { name: true, timestamp: true },
+    }),
+  ),
 }
 
 export const generateHash = (
