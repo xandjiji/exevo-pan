@@ -1,6 +1,7 @@
 import { HttpClient, prisma } from 'services'
 import { KillStatistics } from 'Helpers'
 import { retryWrapper, sha256 } from 'utils'
+import { singleSampleFrom } from 'mock-maker/src/utils'
 
 export const KILL_STATISTICS_BASE_URL =
   'https://www.tibia.com/community/?subtopic=killstatistics'
@@ -16,12 +17,19 @@ export const fetch = {
 }
 
 export const db = {
-  getLatestServerHash: retryWrapper(async (server: string) => {
+  getRandomServerHash: retryWrapper(async () => {
+    const randomServer = singleSampleFrom(
+      await prisma.server.findMany({ where: { active: true } }),
+    )
+
     const serverHash = await prisma.killStatisticsHash.findFirst({
-      where: { server },
+      where: { server: randomServer.serverName },
     })
 
-    return serverHash ? serverHash.hash : ''
+    return {
+      server: randomServer.serverName,
+      hash: serverHash ? serverHash.hash : '',
+    }
   }),
   getServerKillStatistics: retryWrapper(() =>
     prisma.killStatisticsHash.findMany(),

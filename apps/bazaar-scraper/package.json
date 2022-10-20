@@ -21,6 +21,7 @@
     "staging": "Output/staging/deployStaging.sh"
   },
   "dependencies": {
+    "mock-maker": "*",
     "@prisma/client": "^4.4.0",
     "@types/cheerio": "^0.22.30",
     "@types/exevo-pan": "*",
