@@ -1,8 +1,20 @@
 import fs from 'fs/promises'
 import { constTokens as bossDictionary } from 'data-dictionary/dist/dictionaries/bosses'
-import { broadcast, coloredText } from 'logging'
+import { broadcast, tabBroadcast, coloredText } from 'logging'
 import { file } from 'Constants'
-import { sha256, MILLISECONDS_IN_A_DAY } from 'utils'
+import { sha256, MILLISECONDS_IN_A_DAY, retryWrapper } from 'utils'
+import { prisma } from 'services'
+
+const db = {
+  upsertBossChances: retryWrapper(
+    ({ server, jsonData }: { server: string; jsonData: string }) =>
+      prisma.bossChance.upsert({
+        where: { server },
+        create: { server, jsonData },
+        update: { jsonData },
+      }),
+  ),
+}
 
 const { serverResolver, path } = file.BOSS_STATISTICS
 
@@ -87,7 +99,7 @@ export default class BossStatisticsData {
       serverResolver(serverName),
       JSON.stringify(this.bossStatistics),
     )
-    broadcast(
+    tabBroadcast(
       `Updated boss statistics and saved to ${this.coloredFileName(
         serverName,
       )}`,
@@ -97,12 +109,16 @@ export default class BossStatisticsData {
 
   public async saveBossChance(bossChances: BossChances): Promise<void> {
     const { server } = bossChances
-    await fs.writeFile(
-      file.BOSS_CHANCES.serverResolver(server),
-      JSON.stringify(bossChances),
-    )
-    broadcast(
-      `Current boss chances were saved to ${this.coloredFileName(server)}`,
+    const jsonData = JSON.stringify(bossChances)
+    await Promise.all([
+      fs.writeFile(file.BOSS_CHANCES.serverResolver(server), jsonData),
+      db.upsertBossChances({ server, jsonData }),
+    ])
+
+    tabBroadcast(
+      `Current boss chances were saved to ${this.coloredFileName(
+        server,
+      )} and to the database`,
       'success',
     )
   }
@@ -127,7 +143,7 @@ export default class BossStatisticsData {
 
   public isDataFresh(bossKillsData: Record<string, BossKills>): boolean {
     const newestHash = this.generateHash(bossKillsData)
-    return this.bossStatistics.latest.hash === newestHash
+    return this.bossStatistics.latest.hash !== newestHash
   }
 
   public async feedData(
@@ -135,13 +151,13 @@ export default class BossStatisticsData {
   ): Promise<void> {
     const serverName = this.bossStatistics.server
 
+    if (!this.isDataFresh(bossKillsData)) {
+      tabBroadcast(`Data for ${serverName} still not updated`, 'control')
+    }
+
     const newestHash = this.generateHash(bossKillsData)
     const currentTimestamp = +new Date()
     const offsettedTimestamp = +new Date() - MILLISECONDS_IN_A_DAY / 2
-
-    if (!this.isDataFresh(bossKillsData)) {
-      broadcast(`Data for ${serverName} still not updated`, 'control')
-    }
 
     const trackedBossKills = this.normalizeBossKills(bossKillsData)
 

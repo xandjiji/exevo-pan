@@ -163,3 +163,8 @@ model HistoryStatistics {
     id       String @id @default(uuid()) @map("_id")
     jsonData String
 }
+
+model BossChance {
+    server   String @id @map("_id")
+    jsonData String
+}
