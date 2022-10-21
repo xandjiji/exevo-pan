@@ -19,7 +19,7 @@ import CharacterModal from './CharacterModal'
 import * as S from './atoms'
 import { CharacterCardProps } from './types'
 
-export const BOSS_SLOT_POINTS = 500
+export const BOSS_SLOT_POINTS = 1500
 
 const CharacterCard = ({
   characterData,
