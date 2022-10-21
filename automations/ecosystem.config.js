@@ -5,20 +5,10 @@ const HOUR = MINUTE * 60
 module.exports = {
   apps: [
     {
-      name: 'Localtunnel',
-      cwd: __dirname,
-      script: 'localtunnel.sh',
-    },
-    {
-      name: 'HistoryServer',
-      cwd: __dirname,
-      script: 'historyServer.sh',
-    },
-    {
       name: 'ScrapHistory',
       cwd: __dirname,
       script: 'scrapHistory.sh',
-      restart_delay: HOUR * 10,
+      restart_delay: HOUR * 4,
     },
     {
       name: 'ScrapAuctions',
@@ -30,7 +20,13 @@ module.exports = {
       name: 'ScrapBosses',
       cwd: __dirname,
       script: 'updateBossChances.sh',
-      restart_delay: HOUR,
+      restart_delay: MINUTE * 10,
+    },
+    {
+      name: 'UpdateStatistics',
+      cwd: __dirname,
+      script: 'updateStatistics.sh',
+      restart_delay: HOUR * 20,
     },
   ],
 }
