@@ -32,8 +32,10 @@ export default class BossStatisticsData {
     bosses: {},
   }
 
-  private coloredFileName = (name: string) =>
-    coloredText(`${name}.json`, 'highlight')
+  private colored = {
+    server: (name: string) => coloredText(name, 'control'),
+    file: (name: string) => coloredText(`${name}.json`, 'highlight'),
+  }
 
   private normalizeCurrentBossStatistics() {
     /* adding new bosses */
@@ -56,7 +58,7 @@ export default class BossStatisticsData {
   }
 
   async load(serverName: string): Promise<void> {
-    const serverFile = this.coloredFileName(serverName)
+    const serverFile = this.colored.file(serverName)
 
     try {
       this.bossStatistics = JSON.parse(
@@ -100,9 +102,7 @@ export default class BossStatisticsData {
       JSON.stringify(this.bossStatistics),
     )
     tabBroadcast(
-      `Updated boss statistics and saved to ${this.coloredFileName(
-        serverName,
-      )}`,
+      `Updated boss statistics were saved to ${this.colored.file(serverName)}`,
       'success',
     )
   }
@@ -110,15 +110,10 @@ export default class BossStatisticsData {
   public async saveBossChance(bossChances: BossChances): Promise<void> {
     const { server } = bossChances
     const jsonData = JSON.stringify(bossChances)
-    await Promise.all([
-      fs.writeFile(file.BOSS_CHANCES.serverResolver(server), jsonData),
-      db.upsertBossChances({ server, jsonData }),
-    ])
+    await db.upsertBossChances({ server, jsonData })
 
     tabBroadcast(
-      `Current boss chances were saved to ${this.coloredFileName(
-        server,
-      )} and to the database`,
+      `Current boss chances for ${this.colored.server(server)} were updated`,
       'success',
     )
   }
@@ -152,7 +147,11 @@ export default class BossStatisticsData {
     const serverName = this.bossStatistics.server
 
     if (!this.isDataFresh(bossKillsData)) {
-      tabBroadcast(`Data for ${serverName} still not updated`, 'control')
+      tabBroadcast(
+        `Data for ${this.colored.server(serverName)} still not updated`,
+        'control',
+      )
+      return
     }
 
     const newestHash = this.generateHash(bossKillsData)

@@ -22,6 +22,8 @@ const main = async (): Promise<void> => {
     })
 
     await task.revalidatePages(serverList)
+  } else {
+    broadcast(`No fresh data was found.`, 'control')
   }
 
   broadcast(

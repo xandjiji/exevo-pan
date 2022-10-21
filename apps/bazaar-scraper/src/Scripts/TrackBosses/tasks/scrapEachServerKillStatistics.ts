@@ -3,7 +3,7 @@
 import { HttpClient } from 'services'
 import { KillStatistics } from 'Helpers'
 import { BossStatistics } from 'Data'
-import { tabBroadcast, TrackETA } from 'logging'
+import { TrackETA } from 'logging'
 import { retryWrapper, sleep } from 'utils'
 import { requests } from 'Constants'
 import { KILL_STATISTICS_BASE_URL } from '../utils'
@@ -24,7 +24,6 @@ export const scrapEachServerKillStatistics = async (
   )
 
   for (const server of serverList) {
-    tabBroadcast(server, 'control')
     const helper = new KillStatistics()
     const file = new BossStatistics()
 
