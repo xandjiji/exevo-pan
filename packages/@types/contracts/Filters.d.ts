@@ -42,9 +42,9 @@ type FilterOptionsPrimitives = Pick<
 declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
   auctionIds: number[]
   vocation: number[]
-  pvp: number[]
+  pvp: string[]
   battleye: boolean[]
-  location: number[]
+  location: string[]
   serverSet: string[]
   tags: string[]
   skillKey: string[]
@@ -56,6 +56,7 @@ declare interface SerializedFilterOptions extends FilterOptionsPrimitives {
   mountSet: string[]
   storeMountSet: string[]
   achievementSet: string[]
+  rareItemSet: string[]
 }
 
 declare interface SerializedFilterBody {

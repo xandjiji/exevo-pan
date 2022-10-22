@@ -46,6 +46,7 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   hireling: false,
   transferAvailable: false,
   biddedOnly: false,
+  rareItemSet: new Set([]),
 }
 
 export const DEFAULT_SERIALIZED_FILTER_OPTIONS: SerializedFilterOptions = {
@@ -66,4 +67,5 @@ export const DEFAULT_SERIALIZED_FILTER_OPTIONS: SerializedFilterOptions = {
   achievementSet: [],
   storeOutfitSet: [],
   storeMountSet: [],
+  rareItemSet: [],
 }

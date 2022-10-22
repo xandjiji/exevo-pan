@@ -47,7 +47,7 @@ export const filterSchema = [
     key: 'pvp',
     defaultValue: DEFAULT_FILTER_OPTIONS.pvp,
     encode: encodeSet,
-    decode: decodeNumberSet,
+    decode: decodeStringSet,
   },
   {
     key: 'battleye',
@@ -59,7 +59,7 @@ export const filterSchema = [
     key: 'location',
     defaultValue: DEFAULT_FILTER_OPTIONS.location,
     encode: encodeSet,
-    decode: decodeNumberSet,
+    decode: decodeStringSet,
   },
   {
     key: 'serverSet',
@@ -227,5 +227,11 @@ export const filterSchema = [
     key: 'biddedOnly',
     defaultValue: DEFAULT_FILTER_OPTIONS.biddedOnly,
     decode: decodeBoolean,
+  },
+  {
+    key: 'rareItemSet',
+    defaultValue: DEFAULT_FILTER_OPTIONS.rareItemSet,
+    encode: encodeSet,
+    decode: decodeStringSet,
   },
 ]

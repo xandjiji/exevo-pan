@@ -1,15 +1,13 @@
 declare type VocationOptions = 0 | 1 | 2 | 3 | 4
-declare type PvpOptions = 0 | 1 | 2 | 3 | 4
-declare type LocationOptions = 0 | 1 | 2
 declare type SkillOptions = 'axe' | 'club' | 'distance' | 'magic' | 'sword'
 
 declare interface FilterOptions {
   auctionIds: Set<number>
   nicknameFilter: string
   vocation: Set<VocationOptions>
-  pvp: Set<PvpOptions>
+  pvp: Set<string>
   battleye: Set<boolean>
-  location: Set<LocationOptions>
+  location: Set<string>
   serverSet: Set<string>
   minLevel: number
   maxLevel: number
@@ -41,4 +39,5 @@ declare interface FilterOptions {
   hireling: boolean
   transferAvailable: boolean
   biddedOnly: boolean
+  rareItemSet: Set<string>
 }
