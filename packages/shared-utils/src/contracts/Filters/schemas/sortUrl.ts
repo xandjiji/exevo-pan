@@ -1,3 +1,5 @@
+/* @ ToDo: remove this file */
+
 export const buildSchema = (
   orderByDefault: number,
   descendingDefault: boolean,

@@ -10,7 +10,7 @@ import {
 
 const getCurrentUrlParams = () => new URLSearchParams(window.location.search)
 
-/* @ ToDo: fix this typings */
+/* @ ToDo: remove this file */
 export function urlParametersState<T>(
   registeredParams: ParamRegister<T>[],
 ): urlParameterStateObject {

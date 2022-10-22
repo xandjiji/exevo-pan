@@ -1,5 +1,7 @@
 import { DEFAULT_FILTER_OPTIONS } from '../defaults'
 
+/* @ ToDo: remove this file */
+
 const encodeSet = (set: Set<boolean | number | string>): string =>
   [...set].join(',')
 const decodeSet = (

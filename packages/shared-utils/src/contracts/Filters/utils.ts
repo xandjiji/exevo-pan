@@ -1,5 +1,7 @@
 import { DEFAULT_SERIALIZED_FILTER_OPTIONS } from './defaults'
 
+/* @ ToDo: remove this file */
+
 export const serializeBody = ({
   paginationOptions,
   sortOptions,
