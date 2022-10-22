@@ -29,3 +29,4 @@ const useUrlParamsState = <T,>(schemaCodec: SchemaCodec<T>) => {
 export default useUrlParamsState
 
 export type { PropertyCodec, SchemaCodec } from './types'
+export * as codecs from './codecs'
