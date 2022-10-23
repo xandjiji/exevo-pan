@@ -9,6 +9,17 @@ export type SchemaCodec<Schema> = {
   [Property in keyof Schema]: PropertyCodec<Schema[Property]>
 }
 
+export type SerializeArgs<T> = {
+  values: Partial<T>
+  schema: SchemaCodec<T>
+  currentParams?: URLSearchParams
+}
+
+export type DeserializeArgs<T> = {
+  schema: SchemaCodec<T>
+  currentParams: URLSearchParams
+}
+
 export type UrlParameterStateMethods<Type> = {
   get: {
     defaultValues: () => Type
