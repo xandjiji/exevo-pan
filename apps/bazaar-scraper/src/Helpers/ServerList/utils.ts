@@ -1,26 +1,30 @@
-const SERVER_LOCATIONS: Record<string, ServerLocations> = {
-  Europe: 'EU',
-  'North America': 'NA',
-  'South America': 'BR',
+import { servers } from 'shared-utils/dist/servers'
+
+const { SERVER_LOCATIONS, PVP_TYPES } = servers
+
+const LOCATIONS: Record<string, string> = {
+  Europe: SERVER_LOCATIONS.EUROPE,
+  'North America': SERVER_LOCATIONS.NORTH_AMERICA,
+  'South America': SERVER_LOCATIONS.SOUTH_AMERICA,
 }
 
-const PVP_TYPES: Record<string, PvpTypes> = {
-  'Optional PvP': 'Optional',
-  'Open PvP': 'Open',
-  'Retro Open PvP': 'Retro Open',
-  'Hardcore PvP': 'Hardcore',
-  'Retro Hardcore PvP': 'Retro Hardcore',
+const PVPS: Record<string, string> = {
+  'Optional PvP': PVP_TYPES.OPTIONAL,
+  'Open PvP': PVP_TYPES.OPEN,
+  'Retro Open PvP': PVP_TYPES.RETRO,
+  'Hardcore PvP': PVP_TYPES.HARDCORE,
+  'Retro Hardcore PvP': PVP_TYPES.RETRO_HARDCORE,
 }
 
 export const parse = {
   serverLocation: (location: string): string => {
-    const parsedLocation = SERVER_LOCATIONS[location]
+    const parsedLocation = LOCATIONS[location]
 
     if (!parsedLocation) throw Error(`Unknown server location: ${location}`)
     return parsedLocation
   },
   pvpType: (pvpType: string): string => {
-    const parsedPvpType = PVP_TYPES[pvpType]
+    const parsedPvpType = PVPS[pvpType]
 
     if (!parsedPvpType) throw Error(`Unknown PvP type: ${pvpType}`)
     return parsedPvpType
