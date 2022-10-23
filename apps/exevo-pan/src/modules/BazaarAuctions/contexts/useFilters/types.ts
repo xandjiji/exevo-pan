@@ -1,23 +1,4 @@
-export type SetFilterOptions = Pick<
-  FilterOptions,
-  | 'auctionIds'
-  | 'vocation'
-  | 'pvp'
-  | 'battleye'
-  | 'location'
-  | 'serverSet'
-  | 'tags'
-  | 'skillKey'
-  | 'imbuementsSet'
-  | 'charmsSet'
-  | 'questSet'
-  | 'outfitSet'
-  | 'storeOutfitSet'
-  | 'mountSet'
-  | 'storeMountSet'
-  | 'achievementSet'
-  | 'rareItemSet'
->
+export type SetFilterOptions = FilterProperties<FilterOptions, Set<any>>
 
 export type ExtractFilterSetByType<Type> = keyof FilterProperties<
   SetFilterOptions,
