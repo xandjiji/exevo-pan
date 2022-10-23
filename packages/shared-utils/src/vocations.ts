@@ -60,4 +60,6 @@ export const vocation = {
   getFullName,
   getId,
   getIdByRegex,
+  VOCATION_IDS,
+  VOCATION_NAMES,
 }
