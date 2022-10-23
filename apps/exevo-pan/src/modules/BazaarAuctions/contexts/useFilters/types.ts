@@ -1,36 +1,55 @@
-export type Action =
+export type SetFilterOptions = Pick<
+  FilterOptions,
+  | 'auctionIds'
+  | 'vocation'
+  | 'pvp'
+  | 'battleye'
+  | 'location'
+  | 'serverSet'
+  | 'tags'
+  | 'skillKey'
+  | 'imbuementsSet'
+  | 'charmsSet'
+  | 'questSet'
+  | 'outfitSet'
+  | 'storeOutfitSet'
+  | 'mountSet'
+  | 'storeMountSet'
+  | 'achievementSet'
+  | 'rareItemSet'
+>
+
+export type ExtractFilterSetByType<Type> = keyof FilterProperties<
+  SetFilterOptions,
+  Set<Type>
+>
+
+export type ToggleFilterSetArgs =
   | {
-      type: 'UPDATE_FILTER'
-      key: keyof FilterOptions
-      value: any
+      key: ExtractFilterSetByType<string>
+      value: string
     }
   | {
-      type: 'SET_FILTER'
-      key: keyof FilterOptions
-      value: any
-    }
-  | {
-      type: 'TOGGLE_ALL_OPTIONS'
-      key: keyof FilterOptions
-      allOptions: Option[]
-    }
-  | {
-      type: 'TOGGLE_ADDON'
+      key: ExtractFilterSetByType<number>
       value: number
     }
   | {
-      type: 'RESET_FILTERS'
+      key: ExtractFilterSetByType<boolean>
+      value: boolean
     }
 
-export interface FiltersContextState {
+export type FiltersContextValues = {
   filterState: FilterOptions
   defaultValues: FilterOptions
   activeFilterCount: number
-}
-
-export interface FiltersContextValues extends FiltersContextState {
-  updateFilters: (key: keyof FilterOptions, value: any) => void
-  setFilters: (key: keyof FilterOptions, value: any) => void
-  toggleAllOptions: (key: keyof FilterOptions, allOptions: Option[]) => void
-  dispatch: React.Dispatch<Action>
+  setFilters: (newValues: Partial<FilterOptions>) => void
+  toggleFilterSet: ({ key, value }: ToggleFilterSetArgs) => void
+  toggleAllFilterSetOptions: <
+    SetKey extends KeysOfType<SetFilterOptions, Set<string>>,
+  >(
+    key: SetKey,
+    allOptions: Option[],
+  ) => void
+  toggleAddon: (value: number) => void
+  resetFilters: () => void
 }

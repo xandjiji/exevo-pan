@@ -1,7 +1,7 @@
 import { dequal } from 'dequal'
 import { gtag } from 'utils'
 
-function toggleSet<T>(set: Set<T>, value: T): Set<T> {
+export const toggleSet = <T>(set: Set<T>, value: T): Set<T> => {
   const newSet = new Set<T>([...set])
   if (newSet.has(value)) {
     newSet.delete(value)
@@ -11,15 +11,6 @@ function toggleSet<T>(set: Set<T>, value: T): Set<T> {
 
   return newSet
 }
-
-export const toggleFilterValue = (
-  currentFilters: FilterOptions,
-  key: keyof FilterOptions,
-  value: any,
-): FilterOptions => ({
-  ...currentFilters,
-  [key]: toggleSet(currentFilters[key] as Set<typeof value>, value),
-})
 
 export const countActiveFilters = (
   defaultFilters: FilterOptions,

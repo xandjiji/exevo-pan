@@ -1,80 +1,75 @@
-import {
-  createContext,
-  useContext,
-  useReducer,
-  useEffect,
-  useCallback,
-} from 'react'
-import { urlParametersState } from 'utils'
+import { createContext, useContext, useCallback, useMemo } from 'react'
 import { useUrlParamsState } from 'hooks'
-import { filterSchema } from 'shared-utils/dist/contracts/Filters/schemas/filterUrl'
-import { countActiveFilters } from './utils'
-import FilterReducer from './reducer'
+import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
+import { countActiveFilters, toggleSet } from './utils'
+import { schema } from './schema'
 import { FiltersContextValues } from './types'
 
-const {
-  defaultValues: untypedDefaultValues,
-  getUrlValues,
-  setUrlValues,
-} = urlParametersState<any>(filterSchema)
-const defaultValues = untypedDefaultValues as FilterOptions
-
-const initialFilterState =
-  (getUrlValues() as FilterOptions | undefined) ?? defaultValues
-
-const DEFAULT_STATE: FiltersContextValues = {
-  filterState: initialFilterState,
-  defaultValues,
-  activeFilterCount: countActiveFilters(defaultValues, initialFilterState),
-  updateFilters: () => {},
-  setFilters: () => {},
-  toggleAllOptions: () => {},
-  dispatch: () => {},
-}
-
-const FiltersContext = createContext<FiltersContextValues>(DEFAULT_STATE)
+const FiltersContext = createContext<FiltersContextValues>(
+  {} as FiltersContextValues,
+)
 
 export const FiltersProvider = ({
   children,
 }: {
   children: React.ReactNode
 }) => {
-  const [state, dispatch] = useReducer(FilterReducer, {
-    filterState: DEFAULT_STATE.filterState,
-    defaultValues: DEFAULT_STATE.defaultValues,
-    activeFilterCount: DEFAULT_STATE.activeFilterCount,
-  })
-
-  useEffect(() => {
-    setUrlValues(state.filterState)
-  }, [state.filterState])
-
-  const setFilters = useCallback(
-    (key: keyof FilterOptions, value: any) =>
-      dispatch({ type: 'SET_FILTER', key, value }),
-    [],
-  )
-
-  const updateFilters = useCallback(
-    (key: keyof FilterOptions, value: any) =>
-      dispatch({ type: 'UPDATE_FILTER', key, value }),
-    [],
-  )
-
-  const toggleAllOptions = useCallback(
-    (key: keyof FilterOptions, allOptions: Option[]) =>
-      dispatch({ type: 'TOGGLE_ALL_OPTIONS', key, allOptions }),
-    [],
-  )
+  const [filterState, setFilterState] = useUrlParamsState(schema)
 
   return (
     <FiltersContext.Provider
       value={{
-        ...state,
-        updateFilters,
-        setFilters,
-        toggleAllOptions,
-        dispatch,
+        filterState,
+        defaultValues: DEFAULT_FILTER_OPTIONS,
+        activeFilterCount: useMemo(
+          () => countActiveFilters(filterState, DEFAULT_FILTER_OPTIONS),
+          [filterState],
+        ),
+        setFilters: useCallback(
+          (newValues) =>
+            setFilterState((currentValues) => ({
+              ...currentValues,
+              ...newValues,
+            })),
+          [],
+        ),
+        toggleFilterSet: useCallback(
+          ({ key, value }) =>
+            setFilterState((currentValues) => ({
+              ...currentValues,
+              key: toggleSet(currentValues[key], value),
+            })),
+          [],
+        ),
+        toggleAllFilterSetOptions: useCallback(
+          (key, allOptions) =>
+            setFilterState((currentValues) => ({
+              ...currentValues,
+              key:
+                currentValues[key].size === allOptions.length
+                  ? new Set([])
+                  : new Set(allOptions.map(({ value }) => value)),
+            })),
+          [],
+        ),
+        toggleAddon: useCallback(
+          (value) =>
+            setFilterState((currentValues) => {
+              const currentAddon = currentValues.addon
+              return {
+                ...currentValues,
+                addon:
+                  currentAddon === 3 || currentAddon === value
+                    ? currentAddon - value
+                    : currentAddon + value,
+              }
+            }),
+          [],
+        ),
+        resetFilters: useCallback(
+          () => setFilterState({ ...DEFAULT_FILTER_OPTIONS }),
+          [],
+        ),
       }}
     >
       {children}
