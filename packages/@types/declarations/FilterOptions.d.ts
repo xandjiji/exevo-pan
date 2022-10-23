@@ -4,7 +4,7 @@ declare type SkillOptions = 'axe' | 'club' | 'distance' | 'magic' | 'sword'
 declare interface FilterOptions {
   auctionIds: Set<number>
   nicknameFilter: string
-  vocation: Set<VocationOptions>
+  vocation: Set<number>
   pvp: Set<string>
   battleye: Set<boolean>
   location: Set<string>
@@ -16,7 +16,7 @@ declare interface FilterOptions {
   bossPoints: number
   tcInvested: number
   tags: Set<string>
-  skillKey: Set<SkillOptions>
+  skillKey: Set<string>
   imbuementsSet: Set<string>
   charmsSet: Set<string>
   rareNick: boolean
