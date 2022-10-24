@@ -2,7 +2,7 @@ import React from 'react'
 
 export interface DrawerFieldsContextData {
   serverOptions: Option[]
-  rareItemData: RareItemData
+  rareItemOptions: Option[]
   imbuementOptions: Option[]
   charmOptions: Option[]
   questOptions: Option[]
@@ -15,7 +15,7 @@ export interface DrawerFieldsContextData {
 
 type ServerSideProps = Pick<
   DrawerFieldsContextData,
-  'serverOptions' | 'rareItemData'
+  'serverOptions' | 'rareItemOptions'
 >
 
 export interface DrawerFieldsProviderProps extends ServerSideProps {
