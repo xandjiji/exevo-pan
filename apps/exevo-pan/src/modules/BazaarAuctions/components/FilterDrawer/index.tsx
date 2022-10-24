@@ -57,6 +57,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     toggleFilterSet,
     setFilters,
     toggleAllFilterSetOptions,
+    resetFilters,
   } = useFilters()
 
   const [nickname, setNickname] = useDebouncedFilter({
@@ -107,7 +108,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             type="button"
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
-            onClick={() => dispatch({ type: 'RESET_FILTERS' })}
+            onClick={resetFilters}
             className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow-md transition-all hover:shadow-lg active:shadow-inner disabled:invisible disabled:opacity-0"
           >
             {homepage.FilterDrawer.resetFilters}
