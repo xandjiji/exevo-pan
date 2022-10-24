@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useRef, useCallback } from 'react'
+import { memo, useCallback } from 'react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { vocation } from 'shared-utils/dist/vocations'
@@ -23,7 +23,6 @@ import FilterGroup from './FilterGroup'
 import LevelInput from './LevelInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
-import { isHistory } from './utils'
 import * as S from './atoms'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
@@ -35,8 +34,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { common, homepage },
   } = useTranslations()
-
-  const { current: historyPage } = useRef(isHistory())
 
   const {
     serverOptions,
@@ -723,60 +720,55 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        {!historyPage && (
-          <FilterGroup>
-            <S.InputWrapper>
-              <S.AutocompleteInput
-                id="rare-items-input"
-                label={
-                  <InfoTooltip.LabelWrapper className="whitespace-nowrap">
-                    {homepage.FilterDrawer.labels.rareItems}
-                    <InfoTooltip
-                      labelSize
-                      content={homepage.FilterDrawer.tooltips.rareItems}
-                    />
-                  </InfoTooltip.LabelWrapper>
-                }
-                aria-label={homepage.FilterDrawer.labels.rareItems}
-                aria-controls="rare-items-list"
-                placeholder={homepage.FilterDrawer.placeholders.rareItems}
-                itemList={useOptionsSet(
-                  rareItemOptions,
-                  filterState.rareItemSet,
-                )}
-                onItemSelect={useCallback(
-                  ({ value }: Option) =>
-                    toggleFilterSet({ key: 'rareItemSet', value }),
-                  [],
-                )}
-                onKeyPress={blurOnEnter}
-                enterKeyHint="done"
-              />
+        <FilterGroup>
+          <S.InputWrapper>
+            <S.AutocompleteInput
+              id="rare-items-input"
+              label={
+                <InfoTooltip.LabelWrapper className="whitespace-nowrap">
+                  {homepage.FilterDrawer.labels.rareItems}
+                  <InfoTooltip
+                    labelSize
+                    content={homepage.FilterDrawer.tooltips.rareItems}
+                  />
+                </InfoTooltip.LabelWrapper>
+              }
+              aria-label={homepage.FilterDrawer.labels.rareItems}
+              aria-controls="rare-items-list"
+              placeholder={homepage.FilterDrawer.placeholders.rareItems}
+              itemList={useOptionsSet(rareItemOptions, filterState.rareItemSet)}
+              onItemSelect={useCallback(
+                ({ value }: Option) =>
+                  toggleFilterSet({ key: 'rareItemSet', value }),
+                [],
+              )}
+              onKeyPress={blurOnEnter}
+              enterKeyHint="done"
+            />
+            <Chip
+              overrideStatus={
+                filterState.rareItemSet.size === rareItemOptions.length
+              }
+              onClick={() =>
+                toggleAllFilterSetOptions('rareItemSet', rareItemOptions)
+              }
+            >
+              {homepage.FilterDrawer.toggleAll.items}
+            </Chip>
+          </S.InputWrapper>
+          <S.ChipWrapper id="rare-items-list">
+            {[...filterState.rareItemSet].map((item) => (
               <Chip
-                overrideStatus={
-                  filterState.rareItemSet.size === rareItemOptions.length
-                }
-                onClick={() =>
-                  toggleAllFilterSetOptions('rareItemSet', rareItemOptions)
+                key={item}
+                onClose={() =>
+                  toggleFilterSet({ key: 'rareItemSet', value: item })
                 }
               >
-                {homepage.FilterDrawer.toggleAll.items}
+                {item}
               </Chip>
-            </S.InputWrapper>
-            <S.ChipWrapper id="rare-items-list">
-              {[...filterState.rareItemSet].map((item) => (
-                <Chip
-                  key={item}
-                  onClose={() =>
-                    toggleFilterSet({ key: 'rareItemSet', value: item })
-                  }
-                >
-                  {item}
-                </Chip>
-              ))}
-            </S.ChipWrapper>
-          </FilterGroup>
-        )}
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
 
         <FilterGroup
           label={homepage.FilterDrawer.labels.misc}
