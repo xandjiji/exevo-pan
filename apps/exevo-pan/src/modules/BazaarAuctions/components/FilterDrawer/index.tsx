@@ -19,7 +19,6 @@ import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useFilters } from '../../contexts/useFilters'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
-import useRareItemSet from './useRareItemSet'
 import FilterGroup from './FilterGroup'
 import LevelInput from './LevelInput'
 import SpritePicker from './SpritePicker'
@@ -41,7 +40,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
   const {
     serverOptions,
-    rareItemData,
+    rareItemOptions,
     imbuementOptions,
     charmOptions,
     questOptions,
@@ -88,12 +87,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [tcInvested, setTcInvested] = useDebouncedFilter({
     key: 'tcInvested',
     controlledValue: filterState.tcInvested,
-  })
-
-  const rareItems = useRareItemSet({
-    rareItemData,
-    currentFilterSet: filterState.auctionIds,
-    dispatch: setFilters,
   })
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
@@ -747,21 +740,37 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 aria-label={homepage.FilterDrawer.labels.rareItems}
                 aria-controls="rare-items-list"
                 placeholder={homepage.FilterDrawer.placeholders.rareItems}
-                itemList={rareItems.itemList}
-                onItemSelect={({ name }) => rareItems.action.toggle(name)}
+                itemList={useOptionsSet(
+                  rareItemOptions,
+                  filterState.rareItemSet,
+                )}
+                onItemSelect={useCallback(
+                  ({ value }: Option) =>
+                    toggleFilterSet({ key: 'rareItemSet', value }),
+                  [],
+                )}
                 onKeyPress={blurOnEnter}
                 enterKeyHint="done"
               />
               <Chip
-                overrideStatus={rareItems.allSelected}
-                onClick={rareItems.action.toggleAll}
+                overrideStatus={
+                  filterState.rareItemSet.size === rareItemOptions.length
+                }
+                onClick={() =>
+                  toggleAllFilterSetOptions('rareItemSet', rareItemOptions)
+                }
               >
                 {homepage.FilterDrawer.toggleAll.items}
               </Chip>
             </S.InputWrapper>
             <S.ChipWrapper id="rare-items-list">
-              {Object.keys(rareItems.selectedItemData).map((item) => (
-                <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
+              {[...filterState.rareItemSet].map((item) => (
+                <Chip
+                  key={item}
+                  onClose={() =>
+                    toggleFilterSet({ key: 'rareItemSet', value: item })
+                  }
+                >
                   {item}
                 </Chip>
               ))}
