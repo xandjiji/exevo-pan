@@ -59,35 +59,35 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     toggleAllFilterSetOptions,
   } = useFilters()
 
-  const [nickname, setNickname] = useDebouncedFilter<string>(
-    'nicknameFilter',
-    filterState.nicknameFilter,
-  )
+  const [nickname, setNickname] = useDebouncedFilter({
+    key: 'nicknameFilter',
+    controlledValue: filterState.nicknameFilter,
+  })
 
-  const [minLevel, setMinLevel] = useDebouncedFilter<number>(
-    'minLevel',
-    filterState.minLevel,
-  )
+  const [minLevel, setMinLevel] = useDebouncedFilter({
+    key: 'minLevel',
+    controlledValue: filterState.minLevel,
+  })
 
-  const [maxLevel, setMaxLevel] = useDebouncedFilter<number>(
-    'maxLevel',
-    filterState.maxLevel,
-  )
+  const [maxLevel, setMaxLevel] = useDebouncedFilter({
+    key: 'maxLevel',
+    controlledValue: filterState.maxLevel,
+  })
 
-  const [minSkill, setMinSkill] = useDebouncedFilter<number>(
-    'minSkill',
-    filterState.minSkill,
-  )
+  const [minSkill, setMinSkill] = useDebouncedFilter({
+    key: 'minSkill',
+    controlledValue: filterState.minSkill,
+  })
 
-  const [bossPoints, setBossPoints] = useDebouncedFilter<number>(
-    'bossPoints',
-    filterState.bossPoints,
-  )
+  const [bossPoints, setBossPoints] = useDebouncedFilter({
+    key: 'bossPoints',
+    controlledValue: filterState.bossPoints,
+  })
 
-  const [tcInvested, setTcInvested] = useDebouncedFilter<number>(
-    'tcInvested',
-    filterState.tcInvested,
-  )
+  const [tcInvested, setTcInvested] = useDebouncedFilter({
+    key: 'tcInvested',
+    controlledValue: filterState.tcInvested,
+  })
 
   const rareItems = useRareItemSet({
     rareItemData,

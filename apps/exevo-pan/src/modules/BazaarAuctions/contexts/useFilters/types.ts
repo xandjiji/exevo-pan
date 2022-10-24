@@ -1,23 +1,23 @@
-export type SetFilterOptions = FilterProperties<FilterOptions, Set<any>>
-
-export type ExtractFilterSetByType<Type> = keyof FilterProperties<
-  SetFilterOptions,
-  Set<Type>
+export type ExtractFilterByType<Type> = keyof FilterProperties<
+  FilterOptions,
+  Type
 >
 
 export type ToggleFilterSetArgs =
   | {
-      key: ExtractFilterSetByType<string>
+      key: ExtractFilterByType<Set<string>>
       value: string
     }
   | {
-      key: ExtractFilterSetByType<number>
+      key: ExtractFilterByType<Set<number>>
       value: number
     }
   | {
-      key: ExtractFilterSetByType<boolean>
+      key: ExtractFilterByType<Set<boolean>>
       value: boolean
     }
+
+type SetFilterOptions = FilterProperties<FilterOptions, Set<any>>
 
 export type FiltersContextValues = {
   filterState: FilterOptions
