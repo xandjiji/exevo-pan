@@ -20,14 +20,14 @@ const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
 
 type HistoryStaticProps = {
   serverOptions: Option[]
-  rareItemData: RareItemData
+  rareItemOptions: Option[]
   initialAuctionData: PaginatedData<CharacterObject>
   blogPosts: BlogPost[]
 }
 
 export default function BazaarHistory({
   serverOptions,
-  rareItemData,
+  rareItemOptions,
   initialAuctionData,
   blogPosts,
 }: HistoryStaticProps) {
@@ -96,7 +96,7 @@ export default function BazaarHistory({
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
-          rareItemData={rareItemData}
+          rareItemOptions={rareItemOptions}
         >
           <FiltersProvider>
             <AuctionsProvider
@@ -126,16 +126,20 @@ export default function BazaarHistory({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const sortOptions = { sortingMode: 0, descendingOrder: true }
 
-  const [serverOptions, rareItemData, initialAuctionData, localizedBlogPosts] =
-    await Promise.all([
-      DrawerFieldsClient.fetchServerOptions(),
-      DrawerFieldsClient.fetchAuctionedItemOptions(),
-      AuctionsClient.fetchAuctionPage({
-        sortOptions,
-        endpoint: endpoints.HISTORY_AUCTIONS,
-      }),
-      await BlogClient.getEveryPostLocale({ pageSize: 3 }),
-    ])
+  const [
+    serverOptions,
+    rareItemOptions,
+    initialAuctionData,
+    localizedBlogPosts,
+  ] = await Promise.all([
+    DrawerFieldsClient.fetchServerOptions(),
+    DrawerFieldsClient.fetchAuctionedItemOptions(),
+    AuctionsClient.fetchAuctionPage({
+      sortOptions,
+      endpoint: endpoints.HISTORY_AUCTIONS,
+    }),
+    await BlogClient.getEveryPostLocale({ pageSize: 3 }),
+  ])
 
   return {
     props: {
@@ -145,7 +149,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         bazaarHistory: bazaarHistory[locale as RegisteredLocale],
       },
       serverOptions,
-      rareItemData,
+      rareItemOptions,
       initialAuctionData,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
     },

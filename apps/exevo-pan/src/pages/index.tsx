@@ -20,7 +20,7 @@ const pageUrl = buildUrl(routes.HOME)
 
 type HomeStaticProps = {
   serverOptions: Option[]
-  rareItemData: RareItemData
+  rareItemOptions: Option[]
   initialAuctionData: PaginatedData<CharacterObject>
   highlightedAuctions: CharacterObject[]
   blogPosts: BlogPost[]
@@ -28,7 +28,7 @@ type HomeStaticProps = {
 
 export default function Home({
   serverOptions,
-  rareItemData,
+  rareItemOptions,
   initialAuctionData,
   highlightedAuctions,
   blogPosts,
@@ -98,7 +98,7 @@ export default function Home({
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
-          rareItemData={rareItemData}
+          rareItemOptions={rareItemOptions}
         >
           <FiltersProvider>
             <AuctionsProvider
@@ -129,7 +129,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [
     activeServers,
     serverOptions,
-    rareItemData,
+    rareItemOptions,
     initialAuctionData,
     highlightedAuctions,
     localizedBlogPosts,
@@ -155,7 +155,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       serverOptions: serverOptions.filter(({ name }) =>
         activeServerSet.has(name),
       ),
-      rareItemData,
+      rareItemOptions,
       initialAuctionData,
       highlightedAuctions,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
