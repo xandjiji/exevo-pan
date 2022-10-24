@@ -1,6 +1,4 @@
 export const paths = {
-  ACTIVE_SERVERS: '/ActiveServers.json',
-  SERVER_DATA: '/ServerData.json',
   BOSS_CHANCES: '/bossChances',
   ITEMS_DATA: '/ItemsData.json',
   OVERALL_STATISTICS: '/HistoryStatistics.json',

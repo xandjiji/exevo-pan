@@ -127,15 +127,13 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [
-    activeServers,
     serverOptions,
     rareItemOptions,
     initialAuctionData,
     highlightedAuctions,
     localizedBlogPosts,
   ] = await Promise.all([
-    DrawerFieldsClient.fetchActiveServers(),
-    DrawerFieldsClient.fetchServerOptions(),
+    DrawerFieldsClient.fetchServerOptions({ active: true }),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
     AuctionsClient.fetchAuctionPage({
       endpoint: endpoints.CURRENT_AUCTIONS,
@@ -144,17 +142,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
   ])
 
-  const activeServerSet = new Set(activeServers)
-
   return {
     props: {
       translations: {
         common: common[locale as RegisteredLocale],
         homepage: homepage[locale as RegisteredLocale],
       },
-      serverOptions: serverOptions.filter(({ name }) =>
-        activeServerSet.has(name),
-      ),
+      serverOptions,
       rareItemOptions,
       initialAuctionData,
       highlightedAuctions,

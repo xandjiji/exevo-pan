@@ -1,26 +1,23 @@
 import { endpoints, paths } from 'Constants'
-import { buildServerOptions, filterItemData } from './utils'
+import { filterItemData } from './utils'
+import { prisma } from '../prisma'
 
 export default class DrawerFieldsClient {
-  private static activeServersUrl = `${endpoints.STATIC_DATA}${paths.ACTIVE_SERVERS}`
-
-  private static serverDataUrl = `${endpoints.STATIC_DATA}${paths.SERVER_DATA}`
-
   private static rareItemDataUrl = `${endpoints.STATIC_DATA}${paths.ITEMS_DATA}`
 
-  static async fetchActiveServers(): Promise<string[]> {
-    const response = await fetch(this.activeServersUrl)
+  static async fetchServerOptions(args?: {
+    active?: boolean
+  }): Promise<Option[]> {
+    const result = await prisma.server.findMany({
+      where: { active: args?.active },
+      select: { serverName: true },
+      orderBy: { serverName: 'asc' },
+    })
 
-    return response.json()
-  }
-
-  static async fetchServerOptions(): Promise<Option[]> {
-    const response = await fetch(this.serverDataUrl)
-    const data: Record<string, ServerObject> = await response.json()
-    const serverArray = Object.values(data)
-    const serverOptions = buildServerOptions(serverArray)
-
-    return serverOptions
+    return result.map(({ serverName }) => ({
+      name: serverName,
+      value: serverName,
+    }))
   }
 
   static async fetchAuctionedItemOptions(): Promise<RareItemData> {
