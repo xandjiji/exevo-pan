@@ -37,7 +37,7 @@ export const FiltersProvider = ({
           ({ key, value }) =>
             setFilterState((currentValues) => ({
               ...currentValues,
-              key: toggleSet(currentValues[key], value),
+              [key]: toggleSet(currentValues[key], value),
             })),
           [],
         ),
@@ -45,7 +45,7 @@ export const FiltersProvider = ({
           (key, allOptions) =>
             setFilterState((currentValues) => ({
               ...currentValues,
-              key:
+              [key]:
                 currentValues[key].size === allOptions.length
                   ? new Set([])
                   : new Set(allOptions.map(({ value }) => value)),
