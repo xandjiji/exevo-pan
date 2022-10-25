@@ -40,7 +40,6 @@ const CharacterCard = ({
     outfitId,
     level,
     vocationId,
-    serverData,
     transfer,
     auctionEnd,
     hasBeenBidded,
@@ -53,6 +52,7 @@ const CharacterCard = ({
     charmInfo,
     preySlot,
     bossPoints,
+    server,
   } = characterData
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
@@ -95,7 +95,7 @@ const CharacterCard = ({
           nickname={nickname}
           level={level}
           vocationId={vocationId}
-          serverName={serverData.serverName}
+          serverName={server.serverName}
           highlighted={highlighted}
         >
           {highlighted && <TagButton />}
@@ -104,11 +104,11 @@ const CharacterCard = ({
         <S.Body lazy={lazyRender}>
           <S.InfoGrid>
             <Textbox.Server
-              serverData={serverData}
+              serverData={server}
               nickname={nickname}
               transfer={transfer}
             />
-            <Textbox.Pvp serverData={serverData} />
+            <Textbox.Pvp serverData={server} />
             <Textbox.AuctionEnd auctionEnd={auctionEnd} past={past} />
             <Textbox.AuctionBid
               hasBeenBidded={hasBeenBidded}
