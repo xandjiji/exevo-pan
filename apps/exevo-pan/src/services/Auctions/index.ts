@@ -6,6 +6,9 @@ import {
   DEFAULT_SORT_OPTIONS,
   DEFAULT_FILTER_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
+import { serializeUrlParams } from 'hooks/useUrlParamsState/utils'
+import { schema as filtersSchema } from 'modules/BazaarAuctions/contexts/useFilters/schema'
+import { schema as auctionsSchema } from 'modules/BazaarAuctions/contexts/useAuctions/schema'
 import { buildHeaders, filterActiveHighlights } from './utils'
 import {
   FetchAuctionPageParameters,
@@ -13,7 +16,6 @@ import {
   FetchAuctionByIdParameters,
 } from './types'
 
-const CACHE_MAX_AGE = 180000
 const MINIMUM_HIGHLIGHTED_AMOUNT = 2
 
 export default class AuctionsClient {
@@ -21,49 +23,39 @@ export default class AuctionsClient {
 
   static highlightedAuctionsUrl = `${endpoints.BACKOFFICE_API}`
 
-  static getCache(
-    key: string,
-    endpoint: string,
-  ): PaginatedData<CharacterObject> | undefined {
-    const cacheKey = `${key}${endpoint}`
-    return this.cache[cacheKey]
-  }
-
-  static setCache(
-    key: string,
-    endpoint: string,
-    data: PaginatedData<CharacterObject>,
-  ): void {
-    const cacheKey = `${key}${endpoint}`
-    this.cache[cacheKey] = data
-    setTimeout(() => delete this.cache[cacheKey], CACHE_MAX_AGE)
-  }
-
   static async fetchAuctionPage({
     paginationOptions = DEFAULT_PAGINATION_OPTIONS,
     sortOptions = DEFAULT_SORT_OPTIONS,
     filterOptions = DEFAULT_FILTER_OPTIONS,
     endpoint,
   }: FetchAuctionPageParameters): Promise<PaginatedData<CharacterObject>> {
-    const bodyPayload = serializeBody({
-      paginationOptions,
-      sortOptions,
-      filterOptions,
+    const serializedFilters = serializeUrlParams({
+      values: { ...filterOptions, ...paginationOptions, ...sortOptions },
+      schema: {
+        ...filtersSchema,
+        ...auctionsSchema.pagination,
+        ...auctionsSchema.buildSortingSchema(DEFAULT_SORT_OPTIONS),
+      },
     })
 
-    const cachedResult = this.getCache(bodyPayload, endpoint)
-    if (cachedResult) return cachedResult
-
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: buildHeaders(endpoint),
-      body: bodyPayload,
-    })
+    /* console.log(`${endpoint}?${serializedFilters}`) */
+    /* const response = await fetch(`${endpoint}${serializedFilters}`)
 
     const data: FilterResponse = await response.json()
-    this.setCache(bodyPayload, endpoint, data)
 
-    return data
+    return data */
+
+    return {
+      descendingOrder: true,
+      endOffset: 0,
+      hasNext: true,
+      hasPrev: true,
+      page: [],
+      pageIndex: 0,
+      sortingMode: 0,
+      startOffset: 0,
+      totalItems: 1,
+    }
   }
 
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
@@ -133,12 +125,6 @@ export default class AuctionsClient {
       },
     })
 
-    const cachedResult = this.getCache(bodyPayload, endpoint)
-    if (cachedResult) {
-      const [foundAuction] = cachedResult.page
-      return foundAuction
-    }
-
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: buildHeaders(endpoint),
@@ -146,7 +132,6 @@ export default class AuctionsClient {
     })
 
     const data: FilterResponse = await response.json()
-    this.setCache(bodyPayload, endpoint, data)
 
     const [foundAuction] = data.page
     return foundAuction
