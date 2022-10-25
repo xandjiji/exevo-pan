@@ -8,13 +8,12 @@ import {
 } from 'react'
 import { dequal } from 'dequal'
 import { useTranslations } from 'contexts/useTranslation'
-import { urlParametersState } from 'utils'
-import { useIsMounted } from 'hooks'
+import { useUrlParamsState, useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services'
 import { LoadingAlert } from 'components/Atoms'
 import AuctionsReducer from './reducer'
 import { useFilters } from '../useFilters'
-import { DEFAULT_STATE, buildSchema, PAGE_SIZE } from './schema'
+import { DEFAULT_STATE, schema, PAGE_SIZE } from './schema'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
@@ -32,24 +31,24 @@ export const AuctionsProvider = ({
     translations: { common },
   } = useTranslations()
 
-  const {
-    current: { isCurrentlyDefaultValues, getUrlValues, setUrlValues },
-  } = useRef(
-    urlParametersState<any>(
-      buildSchema(defaultSortingMode, defaultDescendingOrder),
-    ),
+  const [pagination, setPagination, isPaginationDefault] = useUrlParamsState(
+    schema.pagination,
   )
-  const initialUrlState = useRef(getUrlValues())
+  const [sorting, setSorting, isSortingDefault] = useUrlParamsState(
+    schema.buildSortingSchema({
+      orderBy: defaultSortingMode,
+      descending: defaultDescendingOrder,
+    }),
+  )
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: false,
     page: initialPage,
+    ...sorting,
     pageData: {
       ...initialPageData,
-      pageIndex: initialUrlState.current.currentPage - 1,
+      pageIndex: pagination.currentPage - 1,
     },
-    sortingMode: initialUrlState.current.orderBy,
-    descendingOrder: initialUrlState.current.descending,
     shouldDisplayHighlightedAuctions:
       DEFAULT_STATE.shouldDisplayHighlightedAuctions,
   })
@@ -129,12 +128,11 @@ export const AuctionsProvider = ({
   /* Detecting and fetching new data if there are url parameters */
   useEffect(() => {
     if (!isMounted) {
-      if (!isCurrentlyDefaultValues() || activeFilterCount > 0) {
-        const { currentPage, orderBy, descending } = initialUrlState.current
+      if (!isPaginationDefault || !isSortingDefault || activeFilterCount > 0) {
         fetchData(
-          currentPage - 1,
-          orderBy,
-          descending,
+          pagination.currentPage - 1,
+          sorting.sortingMode,
+          sorting.descendingOrder,
           filterState,
           activeFilterCount,
         )
@@ -142,14 +140,10 @@ export const AuctionsProvider = ({
     }
   }, [])
 
+  useEffect(() => setPagination({ currentPage: pageIndex + 1 }), [pageIndex])
   useEffect(
-    () =>
-      setUrlValues({
-        currentPage: pageIndex + 1,
-        descending: descendingOrder,
-        orderBy: sortingMode,
-      }),
-    [pageIndex, descendingOrder, sortingMode],
+    () => setSorting({ sortingMode, descendingOrder }),
+    [sortingMode, descendingOrder],
   )
 
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {

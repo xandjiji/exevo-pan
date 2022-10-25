@@ -2,9 +2,35 @@ import {
   DEFAULT_SORT_OPTIONS,
   DEFAULT_PAGINATION_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
+import { SchemaCodec, codecs } from 'hooks/useUrlParamsState'
 import { AuctionsContextValues } from './types'
 
-export { buildSchema } from 'shared-utils/dist/contracts/Filters/schemas/sortUrl'
+const pagination: SchemaCodec<{ currentPage: number }> = {
+  currentPage: {
+    urlKey: 'currentPage',
+    defaultValue: 1,
+    decode: codecs.decode.Number,
+  },
+}
+
+export const schema = {
+  buildSortingSchema: (defaults: {
+    orderBy: number
+    descending: boolean
+  }): SchemaCodec<SortOptions> => ({
+    sortingMode: {
+      urlKey: 'orderBy',
+      defaultValue: defaults.orderBy,
+      decode: codecs.decode.Number,
+    },
+    descendingOrder: {
+      urlKey: 'descending',
+      defaultValue: defaults.descending,
+      decode: codecs.decode.Boolean,
+    },
+  }),
+  pagination,
+}
 
 export const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
