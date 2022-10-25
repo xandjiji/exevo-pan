@@ -5,27 +5,29 @@ import {
 import { SchemaCodec, codecs } from 'hooks/useUrlParamsState'
 import { AuctionsContextValues } from './types'
 
-const pagination: SchemaCodec<{ currentPage: number }> = {
-  currentPage: {
+const pagination: SchemaCodec<PaginationOptions> = {
+  pageIndex: {
     urlKey: 'currentPage',
     defaultValue: 1,
+    decode: codecs.decode.Number,
+  },
+  pageSize: {
+    urlKey: 'pageSize',
+    defaultValue: 10,
     decode: codecs.decode.Number,
   },
 }
 
 export const schema = {
-  buildSortingSchema: (defaults: {
-    orderBy: number
-    descending: boolean
-  }): SchemaCodec<SortOptions> => ({
+  buildSortingSchema: (defaults: SortOptions): SchemaCodec<SortOptions> => ({
     sortingMode: {
       urlKey: 'orderBy',
-      defaultValue: defaults.orderBy,
+      defaultValue: defaults.sortingMode,
       decode: codecs.decode.Number,
     },
     descendingOrder: {
       urlKey: 'descending',
-      defaultValue: defaults.descending,
+      defaultValue: defaults.descendingOrder,
       decode: codecs.decode.Boolean,
     },
   }),

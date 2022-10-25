@@ -13,30 +13,35 @@ export default class AuctionsClient {
     return Math.round(+new Date() / 1000)
   }
 
-  static async fetchAuctionPage(
-    args: FetchAuctionPageArgs = {},
-  ): Promise<PaginatedData<CharacterObject>> {
+  static async fetchAuctionPage({
+    filterOptions,
+    paginationOptions: paginationOptionsArgs,
+    sortOptions,
+    history,
+  }: FetchAuctionPageArgs): Promise<PaginatedData<CharacterObject>> {
     const where = {
       ...buildQuery.filters({
         ...DEFAULT_FILTER_OPTIONS,
-        ...args.filterOptions,
+        ...filterOptions,
       }),
       auctionEnd: { gt: this.currentTimestamp() },
     }
 
     const paginationOptions = {
       ...DEFAULT_PAGINATION_OPTIONS,
-      ...args.paginationOptions,
+      ...paginationOptionsArgs,
     }
 
+    const model = history ? 'currentAuction' : 'historyAuction'
+
     const [page, totalItems] = await prisma.$transaction([
-      prisma.currentAuction.findMany({
+      prisma[model].findMany({
         where,
         ...buildQuery.pagination(paginationOptions),
-        ...buildQuery.sorting({ ...DEFAULT_SORT_OPTIONS, ...args.sortOptions }),
+        ...buildQuery.sorting({ ...DEFAULT_SORT_OPTIONS, ...sortOptions }),
         include: { rareItems: true, server: true },
       }),
-      prisma.currentAuction.count({ where }),
+      prisma[model].count({ where }),
     ])
 
     return {

@@ -36,8 +36,8 @@ export const AuctionsProvider = ({
   )
   const [sorting, setSorting, isSortingDefault] = useUrlParamsState(
     schema.buildSortingSchema({
-      orderBy: defaultSortingMode,
-      descending: defaultDescendingOrder,
+      sortingMode: defaultSortingMode,
+      descendingOrder: defaultDescendingOrder,
     }),
   )
 
@@ -47,7 +47,7 @@ export const AuctionsProvider = ({
     ...sorting,
     pageData: {
       ...initialPageData,
-      pageIndex: pagination.currentPage - 1,
+      pageIndex: pagination.pageIndex - 1,
     },
     shouldDisplayHighlightedAuctions:
       DEFAULT_STATE.shouldDisplayHighlightedAuctions,
@@ -130,7 +130,7 @@ export const AuctionsProvider = ({
     if (!isMounted) {
       if (!isPaginationDefault || !isSortingDefault || activeFilterCount > 0) {
         fetchData(
-          pagination.currentPage - 1,
+          pagination.pageIndex - 1,
           sorting.sortingMode,
           sorting.descendingOrder,
           filterState,
@@ -140,7 +140,10 @@ export const AuctionsProvider = ({
     }
   }, [])
 
-  useEffect(() => setPagination({ currentPage: pageIndex + 1 }), [pageIndex])
+  useEffect(
+    () => setPagination({ pageIndex: pageIndex + 1, pageSize: PAGE_SIZE }),
+    [pageIndex],
+  )
   useEffect(
     () => setSorting({ sortingMode, descendingOrder }),
     [sortingMode, descendingOrder],
