@@ -2,7 +2,7 @@
 import { FilterQuery } from 'types/FilterQuery'
 
 const filterQuery: FilterQuery = {
-  filterSkip: ({ auctionIds }): boolean => auctionIds.size === 0,
+  filterSkip: ({ auctionIds }) => auctionIds.size === 0,
   addQuery: ({ auctionIds }, query) => {
     query.id = { in: [...auctionIds] }
 

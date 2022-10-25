@@ -1,61 +1,53 @@
 import {
-  DEFAULT_PAGINATION_OPTIONS,
-  DEFAULT_SORT_OPTIONS,
   DEFAULT_FILTER_OPTIONS,
+  DEFAULT_SORT_OPTIONS,
+  DEFAULT_PAGINATION_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
-import { AuctionQuery } from 'types/FilterQuery'
-import { Prisma } from '@prisma/client'
+import { calculatePageData } from 'shared-utils/dist/calculatePageData'
 import { prisma } from '../../prisma'
-import * as filterQueries from './filters'
-import { SortKeys } from './types'
+import { buildQuery } from './queryBuilder'
+import { FetchAuctionPageArgs } from './types'
 
-const build = {
-  filters: (filterOptions: FilterOptions): AuctionQuery => {
-    const where: AuctionQuery = {}
+export default class AuctionsClient {
+  private static currentTimestamp(): number {
+    return Math.round(+new Date() / 1000)
+  }
 
-    Object.values(filterQueries)
-      /* @ ToDo: is this check necessary? remove if it isnt */
-      .filter((item) => typeof item !== 'boolean')
-      .filter(({ filterSkip }) => !filterSkip(filterOptions))
-      .forEach(({ addQuery }) => addQuery(filterOptions, where))
-
-    return where
-  },
-  sorting: ({
-    sortingMode,
-    descendingOrder,
-  }: SortOptions): Prisma.CurrentAuctionFindManyArgs => {
-    const order = descendingOrder ? 'desc' : 'asc'
-
-    const sortKeys: SortKeys = {
-      0: 'auctionEnd',
-      1: 'level',
-      2: 'currentBid',
+  static async fetchAuctionPage(
+    args: FetchAuctionPageArgs = {},
+  ): Promise<PaginatedData<CharacterObject>> {
+    const where = {
+      ...buildQuery.filters({
+        ...DEFAULT_FILTER_OPTIONS,
+        ...args.filterOptions,
+      }),
+      auctionEnd: { gt: this.currentTimestamp() },
     }
 
-    const sortKey = sortKeys[sortingMode] ?? sortKeys[0]
+    const paginationOptions = {
+      ...DEFAULT_PAGINATION_OPTIONS,
+      ...args.paginationOptions,
+    }
 
-    return { orderBy: { [sortKey]: order } }
-  },
-  pagination: ({
-    pageIndex,
-    pageSize,
-  }: PaginationOptions): Prisma.CurrentAuctionFindManyArgs => ({
-    take: pageSize,
-    skip: pageIndex * pageSize,
-  }),
+    const [page, totalItems] = await prisma.$transaction([
+      prisma.currentAuction.findMany({
+        where,
+        ...buildQuery.pagination(paginationOptions),
+        ...buildQuery.sorting({ ...DEFAULT_SORT_OPTIONS, ...args.sortOptions }),
+        include: { rareItems: true, server: true },
+      }),
+      prisma.currentAuction.count({ where }),
+    ])
+
+    return {
+      ...calculatePageData({ ...paginationOptions, totalItems }),
+      descendingOrder: true,
+      sortingMode: 0,
+      page,
+    }
+  }
+
+  static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
+    return []
+  }
 }
-
-const queryBuilder = ({
-  filterOptions = DEFAULT_FILTER_OPTIONS,
-  sortingOptions = DEFAULT_SORT_OPTIONS,
-  paginationOptions = DEFAULT_PAGINATION_OPTIONS,
-}) => {
-  prisma.currentAuction.findMany({
-    where: build.filters(filterOptions),
-    ...build.pagination(paginationOptions),
-    ...build.sorting(sortingOptions),
-  })
-}
-
-export default { queryBuilder }
