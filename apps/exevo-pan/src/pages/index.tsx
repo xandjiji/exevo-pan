@@ -8,7 +8,8 @@ import {
   UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
-import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
+import { AuctionsClient, BlogClient } from 'services'
+import { DrawerFieldsClient } from 'services/DrawerFields'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'

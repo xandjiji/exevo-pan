@@ -16,6 +16,7 @@
   "dependencies": {
     "@mailchimp/mailchimp_marketing": "^3.0.74",
     "@popperjs/core": "^2.9.2",
+    "@prisma/client": "^4.4.0",
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",
     "data-dictionary": "*",
@@ -26,7 +27,6 @@
     "next-react-svg": "^1.1.3",
     "nodemailer": "^6.6.5",
     "nodemailer-plugin-inline-base64": "^2.1.1",
-    "@prisma/client": "^4.4.0",
     "preact": "^10.6.6",
     "qrcode-pix": "^3.0.3",
     "react": "^17.0.2",

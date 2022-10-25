@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { DrawerFieldsClient, BossesClient } from 'services'
+import { BossesClient } from 'services'
+import { DrawerFieldsClient } from 'services/DrawerFields'
 import { GetStaticProps } from 'next'
 import BossTracker, { heroSrc } from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'
@@ -79,14 +80,15 @@ export default function BossTrackerPage(args: BossTrackerProps) {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const server = 'Antica'
 
-  const [activeServers, bossChances] = await Promise.all([
-    await DrawerFieldsClient.fetchActiveServers(),
+  const [activeServerOptions, bossChances] = await Promise.all([
+    await DrawerFieldsClient.fetchServerOptions({ active: true }),
     await BossesClient.fetchServerBossChances(server),
   ])
 
   return {
     props: {
-      activeServers,
+      /* @ ToDo: refactor this to use Option[] */
+      activeServers: activeServerOptions.map(({ name }) => name),
       bossChances: {
         ...bossChances,
         bosses: [...bossChances.bosses].sort(sortBossesBy.chance),

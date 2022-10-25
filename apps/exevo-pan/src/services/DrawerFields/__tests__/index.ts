@@ -1,5 +1,5 @@
 import { randomDataset, setup } from 'utils/test'
-import DrawerFieldsClient from '..'
+import { DrawerFieldsClient } from '..'
 
 const mockedFetch = setup.fetch()
 
