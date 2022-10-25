@@ -3,7 +3,9 @@ import { urlParametersStateFactory } from './utils'
 import { SchemaCodec } from './types'
 
 const useUrlParamsState = <T,>(schemaCodec: SchemaCodec<T>) => {
-  const [{ get, set }] = useState(() => urlParametersStateFactory(schemaCodec))
+  const [{ get, set, isCurrentlyDefaultValues }] = useState(() =>
+    urlParametersStateFactory(schemaCodec),
+  )
 
   const [currentValues, setCurrentValues] = useState(get.urlValues)
 
@@ -23,7 +25,7 @@ const useUrlParamsState = <T,>(schemaCodec: SchemaCodec<T>) => {
     [set.urlValues],
   )
 
-  return [currentValues, setStateAndUrl] as const
+  return [currentValues, setStateAndUrl, isCurrentlyDefaultValues()] as const
 }
 
 export default useUrlParamsState
