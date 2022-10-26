@@ -14,40 +14,47 @@ export default class AuctionsClient {
   }
 
   static async fetchAuctionPage({
-    filterOptions,
-    paginationOptions: paginationOptionsArgs,
-    sortOptions,
     history,
+    ...args
   }: FetchAuctionPageArgs): Promise<PaginatedData<CharacterObject>> {
     const where = {
       ...buildQuery.filters({
         ...DEFAULT_FILTER_OPTIONS,
-        ...filterOptions,
+        ...args.filterOptions,
       }),
       auctionEnd: { gt: this.currentTimestamp() },
     }
 
-    const paginationOptions = {
-      ...DEFAULT_PAGINATION_OPTIONS,
-      ...paginationOptionsArgs,
+    const sortOptions = {
+      ...DEFAULT_SORT_OPTIONS,
+      ...args.sortOptions,
     }
 
-    const model = history ? 'currentAuction' : 'historyAuction'
+    const paginationOptions = {
+      ...DEFAULT_PAGINATION_OPTIONS,
+      ...args.paginationOptions,
+    }
 
-    const [page, totalItems] = await prisma.$transaction([
-      prisma[model].findMany({
-        where,
-        ...buildQuery.pagination(paginationOptions),
-        ...buildQuery.sorting({ ...DEFAULT_SORT_OPTIONS, ...sortOptions }),
-        include: { rareItems: true, server: true },
-      }),
-      prisma[model].count({ where }),
-    ])
+    const query = {
+      where,
+      ...buildQuery.pagination(paginationOptions),
+      ...buildQuery.sorting(sortOptions),
+      include: { server: true, rareItems: true },
+    }
+
+    const [page, totalItems] = history
+      ? await prisma.$transaction([
+          prisma.historyAuction.findMany(query),
+          prisma.historyAuction.count({ where }),
+        ])
+      : await prisma.$transaction([
+          prisma.currentAuction.findMany(query),
+          prisma.currentAuction.count({ where }),
+        ])
 
     return {
       ...calculatePageData({ ...paginationOptions, totalItems }),
-      descendingOrder: true,
-      sortingMode: 0,
+      ...sortOptions,
       page,
     }
   }

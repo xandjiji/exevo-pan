@@ -1,6 +1,7 @@
 import { Prisma } from '@prisma/client'
 
-export type PrismaAuctionsQuery = Prisma.CurrentAuctionFindManyArgs
+export type PrismaAuctionsQuery = Prisma.CurrentAuctionFindManyArgs &
+  Prisma.HistoryAuctionFindManyArgs
 
 type SortableKeys = keyof FilterProperties<CharacterObject, number>
 
