@@ -2,8 +2,8 @@ const filterSkip: FilterSkip = ({ location }): boolean => location.size === 0
 
 const filterTest: FilterTest =
   ({ location }) =>
-  ({ serverData }): boolean =>
-    location.has(serverData.serverLocation.type)
+  ({ server }): boolean =>
+    location.has(server.serverLocation)
 
 const schema: FilterSchema = {
   filterSkip,

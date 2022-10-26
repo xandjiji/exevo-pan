@@ -2,8 +2,8 @@ const filterSkip: FilterSkip = ({ battleye }): boolean => battleye.size === 0
 
 const filterTest: FilterTest =
   ({ battleye }) =>
-  ({ serverData }): boolean =>
-    battleye.has(serverData.battleye)
+  ({ server }): boolean =>
+    battleye.has(server.battleye)
 
 const schema: FilterSchema = {
   filterSkip,

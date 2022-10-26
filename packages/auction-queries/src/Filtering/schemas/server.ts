@@ -2,8 +2,8 @@ const filterSkip: FilterSkip = ({ serverSet }): boolean => serverSet.size === 0
 
 const filterTest: FilterTest =
   ({ serverSet }) =>
-  ({ serverData }): boolean =>
-    serverSet.has(serverData.serverName)
+  ({ server }): boolean =>
+    serverSet.has(server.serverName)
 
 const schema: FilterSchema = {
   filterSkip,

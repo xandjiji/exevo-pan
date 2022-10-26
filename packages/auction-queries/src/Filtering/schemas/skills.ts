@@ -1,5 +1,7 @@
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 
+type SkillKey = keyof CharacterSkillsObject
+
 const filterSkip: FilterSkip = ({ minSkill, maxSkill, skillKey }): boolean =>
   (minSkill === DEFAULT_FILTER_OPTIONS.minSkill &&
     maxSkill === DEFAULT_FILTER_OPTIONS.maxSkill) ||
@@ -9,7 +11,9 @@ const filterTest: FilterTest = ({ minSkill, maxSkill, skillKey }) => {
   const selectedSkills = [...skillKey]
   return ({ skills }): boolean =>
     selectedSkills.some(
-      (skill) => skills[skill] >= minSkill && skills[skill] <= maxSkill,
+      (skill) =>
+        skills[skill as SkillKey] >= minSkill &&
+        skills[skill as SkillKey] <= maxSkill,
     )
 }
 

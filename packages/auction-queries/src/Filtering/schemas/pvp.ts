@@ -2,8 +2,8 @@ const filterSkip: FilterSkip = ({ pvp }): boolean => pvp.size === 0
 
 const filterTest: FilterTest =
   ({ pvp }) =>
-  ({ serverData }): boolean =>
-    pvp.has(serverData.pvpType.type as PvpOptions)
+  ({ server }): boolean =>
+    pvp.has(server.pvpType)
 
 const schema: FilterSchema = {
   filterSkip,
