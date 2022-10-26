@@ -26,7 +26,6 @@
     "next-mdx-remote": "^3.0.8",
     "nodemailer": "^6.6.5",
     "nodemailer-plugin-inline-base64": "^2.1.1",
-    "preact": "^10.6.6",
     "qrcode-pix": "^3.0.3",
     "react": "^17.0.2",
     "react-chartjs-2": "^2.9.0",

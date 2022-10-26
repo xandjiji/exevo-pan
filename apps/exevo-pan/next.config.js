@@ -1,24 +1,6 @@
 const { i18n } = require('./next-i18next.config')
 
-const withPreact = (next = {}) =>
-  Object.assign({}, next, {
-    webpack(config, options) {
-      Object.assign(config.resolve.alias, {
-        react: 'preact/compat',
-        'react-dom': 'preact/compat',
-        'create-react-class': 'preact-compat/lib/create-react-class',
-        'react-dom-factories': 'preact-compat/lib/react-dom-factories',
-      })
-
-      if (typeof next.webpack === 'function') {
-        return next.webpack(config, options)
-      }
-
-      return config
-    },
-  })
-
-module.exports = withPreact({
+module.exports = {
   i18n,
   reactStrictMode: true,
   images: {
@@ -28,4 +10,4 @@ module.exports = withPreact({
   webpack(config) {
     return config
   },
-})
+}
