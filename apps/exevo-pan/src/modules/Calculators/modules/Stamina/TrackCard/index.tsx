@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useCallback, memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import RemoveIcon from 'assets/svgs/trash.svg'
+import { TrashIcon } from 'assets/svgs'
 import { MILLISECONDS_IN, blurOnEnter } from 'utils'
 import StaminaBar from '../StaminaBar'
 import TimeLeft from '../TimeLeft'
@@ -87,7 +87,7 @@ const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
           aria-label={calculators.Stamina.removeItem}
           onClick={handleDelete}
         >
-          <RemoveIcon className="fill-separator group-hover:fill-red h-4 w-4" />
+          <TrashIcon className="fill-separator group-hover:fill-red h-4 w-4" />
         </button>
       </div>
 

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { vocation } from 'shared-utils/dist/vocations'
-import Arrow from 'assets/svgs/chevronRight.svg'
+import { ChevronRightIcon } from 'assets/svgs'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { useForm } from '../../../contexts/Form'
 import styles from './styles.module.css'
@@ -38,7 +38,7 @@ const AuctionItem = ({
           world: '',
         }}
       />
-      <Arrow className="fill-onSurface w-8" />
+      <ChevronRightIcon className="fill-onSurface w-8" />
     </button>
   )
 }

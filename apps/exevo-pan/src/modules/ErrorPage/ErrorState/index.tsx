@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import ErrorIcon from 'assets/svgs/error.svg'
+import { ErrorIcon } from 'assets/svgs'
 import { ErrorStateProps } from './types'
 
 const Section = ({ className, ...props }: JSX.IntrinsicElements['div']) => (

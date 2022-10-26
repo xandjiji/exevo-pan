@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { memo } from 'react'
 import { formatNumberWithCommas } from 'utils'
-import TrendIcon from 'assets/svgs/trending.svg'
+import { TrendingIcon } from 'assets/svgs'
 import { SummaryProps } from './types'
 
 const Summary = ({
@@ -30,7 +30,7 @@ const Summary = ({
           positive ? 'text-green' : 'text-red',
         )}
       >
-        <TrendIcon
+        <TrendingIcon
           aria-label={
             statistics.Summary[
               positive ? 'positiveTrendLabel' : 'negativeTrendLabel'

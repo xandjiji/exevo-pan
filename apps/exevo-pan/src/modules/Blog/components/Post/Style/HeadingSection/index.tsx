@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useOnScreen } from 'hooks'
-import AnchorIcon from 'assets/svgs/anchor.svg'
+import { AnchorIcon } from 'assets/svgs'
 import { h2 as H2 } from '../Headings/index'
 import { useCurrentSection } from '../../../../contexts/useCurrentSection'
 import { CopyToClipboard } from './utils'

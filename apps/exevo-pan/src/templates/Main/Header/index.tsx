@@ -5,11 +5,12 @@ import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { Link, Switch, CtaButton, TibiaBlackjack } from 'components/Atoms'
+import { ClientComponent } from 'components/Organisms'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
 import Logo from 'assets/logo.png'
-import ThemeIcon from 'assets/svgs/moon.svg'
+import { MoonIcon } from 'assets/svgs'
 import MenuButton from './MenuButton'
 import HeaderIcon from './HeaderIcon'
 import LanguagePicker from './LanguagePicker'
@@ -114,14 +115,14 @@ const Header = ({
             isOpen={languageOpen}
             setLanguageOpen={setLanguageOpen}
           />
-          {process.browser && (
+          <ClientComponent>
             <Switch
               active={theme === 'dark'}
               onClick={toggleTheme}
-              icon={<ThemeIcon />}
+              icon={<MoonIcon />}
               aria-label={common.Header.themeSwitch}
             />
-          )}
+          </ClientComponent>
           <CtaButton />
           <TibiaBlackjack.FloatingButton className="md:hidden" />
         </div>

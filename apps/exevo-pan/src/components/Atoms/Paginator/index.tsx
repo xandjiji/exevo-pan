@@ -4,8 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, cloneElement, memo } from 'react'
 import clsx from 'clsx'
 import { clampValue, debounce } from 'utils'
-import NextIcon from 'assets/svgs/chevronRight.svg'
-import LastIcon from 'assets/svgs/last.svg'
+import { ChevronRightIcon, LastIcon } from 'assets/svgs'
 import usePagination from './usePagination'
 import { IconProps, PaginatorProps } from './types'
 
@@ -104,7 +103,7 @@ const Paginator = ({
         >
           <Icon
             disabled={!hasPrev}
-            icon={<NextIcon style={{ transform: 'rotate(180deg)' }} />}
+            icon={<ChevronRightIcon style={{ transform: 'rotate(180deg)' }} />}
           />
         </Cursor>
 
@@ -113,7 +112,7 @@ const Paginator = ({
           disabled={!hasNext}
           onClick={() => changePage(derivedCurrentPage + 1)}
         >
-          <Icon disabled={!hasNext} icon={<NextIcon />} />
+          <Icon disabled={!hasNext} icon={<ChevronRightIcon />} />
         </Cursor>
         <Cursor
           aria-label={common.Paginator.LastLabel}

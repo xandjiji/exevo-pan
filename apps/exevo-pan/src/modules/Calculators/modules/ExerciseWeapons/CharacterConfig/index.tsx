@@ -4,7 +4,7 @@ import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
 import { Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
-import ChevronRight from 'assets/svgs/chevronRight.svg'
+import { ChevronRightIcon } from 'assets/svgs'
 import { blurOnEnter, requiredSkillPoints, generateLoyaltyMarks } from 'utils'
 import { LabeledCard } from '../../../components'
 import { vocationOptions, skillOptions } from './options'
@@ -111,7 +111,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
             noAlert
             className="w-full sm:w-20"
           />
-          <ChevronRight
+          <ChevronRightIcon
             className={clsx(
               'mb-1.5 shrink-0',
               invalidSkill ? 'fill-red' : 'fill-onSurface',

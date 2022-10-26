@@ -1,6 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import ArrowIcon from 'assets/svgs/arrowBack.svg'
+import { ArrowBackIcon } from 'assets/svgs'
 import { DrawerHeadProps } from './types'
 
 export default ({
@@ -29,7 +29,7 @@ export default ({
           aria-label={common.CloseDrawerLabel}
           onClick={onClose}
         >
-          <ArrowIcon className="fill-onPrimary" />
+          <ArrowBackIcon className="fill-onPrimary" />
         </button>
       )}
       <div className="text-onPrimary w-full text-base tracking-wider">

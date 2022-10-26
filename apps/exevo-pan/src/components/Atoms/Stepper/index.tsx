@@ -1,7 +1,7 @@
 import { cloneElement } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import CompletedIcon from 'assets/svgs/check.svg'
+import { CheckIcon } from 'assets/svgs'
 import { StepperProps } from './types'
 
 const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
@@ -39,7 +39,7 @@ const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
               )}
             >
               {isCompleted ? (
-                <CompletedIcon
+                <CheckIcon
                   aria-label={common.StepperCompletedLabel}
                   className="fill-onPrimary animate-fadeIn transition-all"
                 />

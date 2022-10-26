@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { useRouter } from 'next/router'
 import { RadioButton, Dialog } from 'components/Atoms'
 import { setCookie, SECONDS_IN } from 'utils'
-import LanguageIcon from 'assets/svgs/language.svg'
+import { LanguageIcon } from 'assets/svgs'
 import { LanguagePickerProps } from './type'
 
 const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {

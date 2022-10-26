@@ -1,7 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
-import Server from 'assets/svgs/server.svg'
-import NoServer from 'assets/svgs/noserver.svg'
+import { ServerIcon, NoServerIcon } from 'assets/svgs'
 import { TransferIconProps } from './types'
 
 const TransferIcon = ({ transfer, nickname, placement }: TransferIconProps) => {
@@ -20,7 +19,7 @@ const TransferIcon = ({ transfer, nickname, placement }: TransferIconProps) => {
         </span>
       }
     >
-      <Server
+      <ServerIcon
         className="fill-onSurface mb-[-3px] h-4 w-4"
         aria-label={common.CharacterCard.transferAvailable}
       />
@@ -35,7 +34,7 @@ const TransferIcon = ({ transfer, nickname, placement }: TransferIconProps) => {
         </span>
       }
     >
-      <NoServer
+      <NoServerIcon
         className="fill-onSurface mb-[-3px] h-4 w-4"
         aria-label={common.CharacterCard.transferUnavailable}
       />

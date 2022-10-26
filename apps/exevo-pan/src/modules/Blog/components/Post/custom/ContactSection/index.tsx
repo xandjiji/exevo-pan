@@ -1,8 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import { cloneElement } from 'react'
-import MailIcon from 'assets/svgs/mail.svg'
-import GithubIcon from 'assets/svgs/github.svg'
-import LinkedinIcon from 'assets/svgs/linkedin.svg'
+import { MailIcon, GithubIcon, LinkedinIcon } from 'assets/svgs'
 import { links, email } from 'Constants'
 import { IconProps } from './types'
 

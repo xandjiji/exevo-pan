@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import OfferIcon from 'assets/svgs/offer.svg'
+import { OfferIcon } from 'assets/svgs'
 import { calculatePrice, readablePrice, getDiscountTier } from '../../../utils'
 import * as S from './atoms'
 import { DiscountProps } from './types'

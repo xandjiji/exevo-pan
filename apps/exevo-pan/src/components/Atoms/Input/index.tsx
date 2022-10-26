@@ -4,7 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { forwardRef, Ref, useState, useCallback, memo } from 'react'
 import clsx from 'clsx'
 import { useUuid, useSharedRef } from 'hooks'
-import ClearIcon from 'assets/svgs/cross.svg'
+import { CrossIcon } from 'assets/svgs'
 import Label from '../Label'
 import FormError from '../FormError'
 import { useStateIcon } from './useStateIcon'
@@ -110,7 +110,7 @@ const Input = (
                 : 'pointer-events-none opacity-0',
             )}
           >
-            <ClearIcon className="fill-onSurface h-5 w-5" />
+            <CrossIcon className="fill-onSurface h-5 w-5" />
           </button>
         )}
 

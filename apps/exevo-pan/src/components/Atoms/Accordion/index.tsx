@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback } from 'react'
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
-import ArrowIcon from 'assets/svgs/chevronDown.svg'
+import { ChevronDownIcon } from 'assets/svgs'
 import { AccordionProps } from './types'
 
 const Accordion = ({
@@ -53,7 +53,7 @@ const Accordion = ({
         }}
       >
         {title}
-        <ArrowIcon
+        <ChevronDownIcon
           className="fill-onSurface ml-auto shrink-0 rounded transition-all"
           style={{ transform: clsx(open && 'rotate(180deg)') }}
         />

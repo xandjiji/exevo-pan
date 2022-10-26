@@ -17,10 +17,7 @@ import {
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas } from 'utils'
-import MoreInfoIcon from 'assets/svgs/moreInfo.svg'
-import OutfitIcon from 'assets/svgs/outfit.svg'
-import MountIcon from 'assets/svgs/horse.svg'
-import StoreIcon from 'assets/svgs/inbox.svg'
+import { MoreInfoIcon, OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
 import SpriteBox from './SpriteBox'
 import SkillDialog from './SkillDialog'
 import { checkStore, tabCounter } from './utils'
@@ -50,7 +47,6 @@ const CharacterModal = ({
     nickname,
     level,
     vocationId,
-    serverData,
     transfer,
     auctionEnd,
     hasBeenBidded,
@@ -71,6 +67,7 @@ const CharacterModal = ({
     storeMounts,
     achievementPoints,
     bossPoints,
+    server,
   } = characterData
 
   const {
@@ -111,7 +108,7 @@ const CharacterModal = ({
         nickname={nickname}
         level={level}
         vocationId={vocationId}
-        serverName={serverData.serverName}
+        serverName={server.serverName}
         permalink={permalink}
       />
 
@@ -120,12 +117,12 @@ const CharacterModal = ({
           <S.Spacer className="md:z-4 h-fit pt-1.5 md:sticky md:top-0 md:min-w-[280px] md:max-w-fit md:shrink-0">
             <InfoGrid>
               <Textbox.Server
-                serverData={serverData}
+                serverData={server}
                 nickname={nickname}
                 transfer={transfer}
                 placement="bottom"
               />
-              <Textbox.Pvp serverData={serverData} />
+              <Textbox.Pvp serverData={server} />
               <Textbox.AuctionEnd auctionEnd={auctionEnd} past={past} />
               <Textbox.AuctionBid
                 hasBeenBidded={hasBeenBidded}
@@ -263,7 +260,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <MountIcon />
+                      <HorseIcon />
                       Mounts {tabCounter(mounts.length, storeMounts.length)}
                     </>
                   }
@@ -306,7 +303,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <StoreIcon />
+                      <InboxIcon />
                       Store Items ({storeItems.length})
                     </>
                   }

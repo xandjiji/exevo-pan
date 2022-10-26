@@ -9,7 +9,7 @@ import {
 } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Label, FormError } from 'components/Atoms'
-import ArrowIcon from 'assets/svgs/chevronDown.svg'
+import { ChevronDownIcon } from 'assets/svgs'
 import { useSharedRef, useUuid } from 'hooks'
 import SelectReducer from './reducer'
 import useValueRef from './useValueRef'
@@ -169,7 +169,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             <div role="textbox" aria-label={accessibleLabel} aria-readonly>
               {options[selectedIndex]?.name ?? placeholder}
             </div>
-            <ArrowIcon
+            <ChevronDownIcon
               className={clsx(
                 'ml-auto -mr-2 shrink-0 transition-colors',
                 disabled ? 'fill-onSurface/50' : 'fill-separator',

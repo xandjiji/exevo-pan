@@ -4,7 +4,7 @@ import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
 import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
-import ReceiptIcon from 'assets/svgs/receipt.svg'
+import { ReceiptIcon } from 'assets/svgs'
 import { useForm } from '../../contexts/Form'
 import { calculatePrice, readablePrice } from '../../utils'
 
