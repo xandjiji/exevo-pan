@@ -4,18 +4,17 @@ import { servers } from '../constants'
 
 export const randomServerId = (): number => randomRange(servers.id)
 
-const randomServerLocation = (): ServerLocation =>
-  singleSampleFrom(servers.locations)
+const randomServerLocation = () => singleSampleFrom(servers.locations)
 
-const randomPvpType = (): PvpType => singleSampleFrom(servers.pvpTypes)
+const randomPvpType = () => singleSampleFrom(servers.pvpTypes)
 
 export const randomServer = (): ServerObject => ({
   battleye: faker.datatype.boolean(),
   experimental: faker.datatype.boolean(),
-  serverId: randomServerId(),
   serverName: faker.address.cityName(),
   serverLocation: randomServerLocation(),
   pvpType: randomPvpType(),
+  active: faker.datatype.boolean(),
 })
 
 export const randomServerList = (amount: number): ServerObject[] => {

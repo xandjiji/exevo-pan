@@ -8,6 +8,7 @@ import {
   storeMount,
   store,
   tag,
+  rareItem,
 } from 'data-dictionary/dist/dictionaries'
 import { auctions } from '../../constants'
 import {
@@ -16,7 +17,7 @@ import {
   randomRange,
   randomArrayFrom,
 } from '../../utils'
-import { randomServerId } from '../serverMaker'
+import { randomServer } from '../serverMaker'
 import {
   randomOutfitId,
   randomOutfits,
@@ -70,6 +71,8 @@ const randomHirelingsInfo = (): HirelingsInfo => {
   }
 }
 
+const server = randomServer()
+
 export const randomCharacter = (): PartialCharacterObject => {
   const sex = faker.datatype.boolean()
 
@@ -82,7 +85,6 @@ export const randomCharacter = (): PartialCharacterObject => {
     transfer: faker.datatype.boolean(),
     sex,
     outfitId: randomOutfitId(sex),
-    serverId: randomServerId(),
     vocationId: randomRange(auctions.vocationId),
     level: randomRange(auctions.level),
     skills: {
@@ -113,5 +115,8 @@ export const randomCharacter = (): PartialCharacterObject => {
     huntingSlot: faker.datatype.boolean(),
     charmInfo: randomCharmInfo(),
     hirelings: randomHirelingsInfo(),
+    server,
+    serverName: server.serverName,
+    rareItems: samplesFrom(Object.values(rareItem)),
   }
 }

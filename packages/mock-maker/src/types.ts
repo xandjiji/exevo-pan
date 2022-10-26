@@ -1,7 +1,6 @@
 export type Dataset = {
   rawServerData: Record<string, ServerObject>
   serverData: ServerObject[]
-  partialCharacterData: PartialCharacterObject[]
   characterData: CharacterObject[]
   itemData: RareItemData
   statisticsData: StatisticsData
