@@ -1,4 +1,4 @@
-import { servers } from 'shared-utils/dist/servers'
+import { servers } from 'data-dictionary/dist/dictionaries/servers'
 
 const { SERVER_LOCATIONS, PVP_TYPES } = servers
 
