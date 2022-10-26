@@ -117,12 +117,12 @@ const CharacterModal = ({
           <S.Spacer className="md:z-4 h-fit pt-1.5 md:sticky md:top-0 md:min-w-[280px] md:max-w-fit md:shrink-0">
             <InfoGrid>
               <Textbox.Server
-                serverData={server}
+                server={server}
                 nickname={nickname}
                 transfer={transfer}
                 placement="bottom"
               />
-              <Textbox.Pvp serverData={server} />
+              <Textbox.Pvp server={server} />
               <Textbox.AuctionEnd auctionEnd={auctionEnd} past={past} />
               <Textbox.AuctionBid
                 hasBeenBidded={hasBeenBidded}

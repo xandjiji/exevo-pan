@@ -1,8 +1,6 @@
 import * as faker from 'faker'
-import { singleSampleFrom, randomRange } from '../utils'
+import { singleSampleFrom } from '../utils'
 import { servers } from '../constants'
-
-export const randomServerId = (): number => randomRange(servers.id)
 
 const randomServerLocation = () => singleSampleFrom(servers.locations)
 

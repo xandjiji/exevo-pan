@@ -104,11 +104,11 @@ const CharacterCard = ({
         <S.Body lazy={lazyRender}>
           <S.InfoGrid>
             <Textbox.Server
-              serverData={server}
+              server={server}
               nickname={nickname}
               transfer={transfer}
             />
-            <Textbox.Pvp serverData={server} />
+            <Textbox.Pvp server={server} />
             <Textbox.AuctionEnd auctionEnd={auctionEnd} past={past} />
             <Textbox.AuctionBid
               hasBeenBidded={hasBeenBidded}

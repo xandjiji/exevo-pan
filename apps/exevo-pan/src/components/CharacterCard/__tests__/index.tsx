@@ -28,12 +28,10 @@ describe('<CharacterCard />', () => {
     ).toBeInTheDocument()
 
     expect(
-      screen.getByAltText(character.serverData.serverLocation.string),
+      screen.getByAltText(character.server.serverLocation),
     ).toBeInTheDocument()
 
-    expect(
-      screen.getByText(character.serverData.serverName),
-    ).toBeInTheDocument()
+    expect(screen.getByText(character.server.serverName)).toBeInTheDocument()
 
     expect(
       screen.getByLabelText(
@@ -43,9 +41,7 @@ describe('<CharacterCard />', () => {
       ),
     ).toBeInTheDocument()
 
-    expect(
-      screen.getByText(character.serverData.pvpType.string),
-    ).toBeInTheDocument()
+    expect(screen.getByText(character.server.pvpType)).toBeInTheDocument()
 
     expect(
       screen.getByText(character.hasBeenBidded ? 'Current Bid' : 'Minimum Bid'),
