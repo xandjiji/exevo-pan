@@ -26,7 +26,7 @@ export default class AuctionsClient {
     }
 
     const sortOptions = {
-      ...DEFAULT_SORT_OPTIONS,
+      ...DEFAULT_SORT_OPTIONS[history ? 'history' : 'current'],
       ...args.sortOptions,
     }
 

@@ -126,8 +126,6 @@ export default function BazaarHistory({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const sortOptions = { sortingMode: 0, descendingOrder: true }
-
   const [
     serverOptions,
     rareItemOptions,
@@ -136,7 +134,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   ] = await Promise.all([
     DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
-    AuctionsClient.fetchAuctionPage({ sortOptions, history: true }),
+    AuctionsClient.fetchAuctionPage({ history: true }),
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
   ])
 

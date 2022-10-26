@@ -12,7 +12,7 @@ import Cache from './Data/cache'
 
 export const applySort: typeof baseSort = (
   oldData,
-  sortOptions = DEFAULT_SORT_OPTIONS,
+  sortOptions = DEFAULT_SORT_OPTIONS.current,
 ) => {
   const cachedSort = Cache.getSortCache(sortOptions)
   if (cachedSort) {

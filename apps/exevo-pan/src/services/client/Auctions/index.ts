@@ -22,16 +22,18 @@ export default class AuctionsClient {
       schema: {
         ...filtersSchema,
         ...auctionsSchema.pagination,
-        ...auctionsSchema.buildSortingSchema(DEFAULT_SORT_OPTIONS),
+        ...auctionsSchema.buildSortingSchema(
+          DEFAULT_SORT_OPTIONS[history ? 'history' : 'current'],
+        ),
       },
     })
 
     console.log(serializedFilters)
-    /* const response = await fetch(`${endpoint}${serializedFilters}`)
+    const response = await fetch(
+      `/api/auctions?history=${history}&${serializedFilters}`,
+    )
 
-    const data: FilterResponse = await response.json()
-
-    return data */
+    /* const data: FilterResponse = await response.json() */
 
     return {
       descendingOrder: true,
