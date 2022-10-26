@@ -28,24 +28,13 @@ export default class AuctionsClient {
       },
     })
 
-    console.log(serializedFilters)
     const response = await fetch(
       `/api/auctions?history=${history}&${serializedFilters}`,
     )
 
-    /* const data: FilterResponse = await response.json() */
+    const result: PaginatedData<CharacterObject> = await response.json()
 
-    return {
-      descendingOrder: true,
-      endOffset: 0,
-      hasNext: true,
-      hasPrev: true,
-      page: [],
-      pageIndex: 0,
-      sortingMode: 0,
-      startOffset: 0,
-      totalItems: 1,
-    }
+    return result
   }
 
   /* static async fetchAuctionById({
