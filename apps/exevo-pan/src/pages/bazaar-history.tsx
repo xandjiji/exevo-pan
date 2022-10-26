@@ -8,7 +8,8 @@ import {
   UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
-import { AuctionsClient, BlogClient } from 'services'
+import { BlogClient } from 'services'
+import { AuctionsClient } from 'services/server'
 import { DrawerFieldsClient } from 'services/DrawerFields'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -101,7 +102,7 @@ export default function BazaarHistory({
         >
           <FiltersProvider>
             <AuctionsProvider
-              endpoint={endpoints.HISTORY_AUCTIONS}
+              history
               highlightedAuctions={[]}
               initialPage={page}
               initialPageData={pageData}
@@ -135,10 +136,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   ] = await Promise.all([
     DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
-    AuctionsClient.fetchAuctionPage({
-      sortOptions,
-      endpoint: endpoints.HISTORY_AUCTIONS,
-    }),
+    AuctionsClient.fetchAuctionPage({ sortOptions, history: true }),
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
   ])
 

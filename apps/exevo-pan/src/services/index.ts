@@ -1,4 +1,3 @@
-export { default as AuctionsClient } from './Auctions'
 export { default as BackofficeClient } from './Backoffice'
 export { default as BlogClient } from './Blog'
 export { default as BossesClient } from './Bosses'

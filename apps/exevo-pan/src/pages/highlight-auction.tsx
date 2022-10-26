@@ -2,11 +2,11 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import AdvertiseGrid from 'modules/Advertise'
 import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
-import { AuctionsClient } from 'services'
+import { AuctionsClient } from 'services/client'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle } from 'utils'
-import { endpoints, routes, jsonld } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common, advertise } from 'locales'
 
 const pageUrl = buildUrl(routes.ADVERTISE)
@@ -88,7 +88,7 @@ export default function Advertise({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const initialAuctionData = await AuctionsClient.fetchAuctionPage({
-    endpoint: endpoints.CURRENT_AUCTIONS,
+    history: false,
   })
 
   return {

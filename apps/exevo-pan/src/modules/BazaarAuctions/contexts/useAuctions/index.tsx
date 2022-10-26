@@ -9,7 +9,7 @@ import {
 import { dequal } from 'dequal'
 import { useTranslations } from 'contexts/useTranslation'
 import { useUrlParamsState, useIsMounted } from 'hooks'
-import { AuctionsClient } from 'services'
+import { AuctionsClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
 import AuctionsReducer from './reducer'
 import { useFilters } from '../useFilters'
@@ -19,7 +19,7 @@ import { AuctionsContextValues, AuctionsProviderProps } from './types'
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
 export const AuctionsProvider = ({
-  endpoint,
+  history = false,
   highlightedAuctions,
   initialPage,
   initialPageData,
@@ -86,7 +86,7 @@ export const AuctionsProvider = ({
         paginationOptions,
         sortOptions,
         filterOptions,
-        endpoint,
+        history,
       })
 
       const isDefaultGridState =
@@ -101,7 +101,7 @@ export const AuctionsProvider = ({
         shouldDisplayHighlightedAuctions: isDefaultGridState && noFilterApplied,
       })
     },
-    [endpoint],
+    [history],
   )
 
   const isMounted = useIsMounted()

@@ -104,7 +104,6 @@ export default function Home({
         >
           <FiltersProvider>
             <AuctionsProvider
-              endpoint={endpoints.CURRENT_AUCTIONS}
               highlightedAuctions={highlightedAuctions}
               initialPage={page}
               initialPageData={pageData}
@@ -140,7 +139,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     /* AuctionsClient.fetchAuctionPage({
       endpoint: endpoints.CURRENT_AUCTIONS,
     }), */
-    AuctionsClient.fetchAuctionPage(),
+    AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
   ])
