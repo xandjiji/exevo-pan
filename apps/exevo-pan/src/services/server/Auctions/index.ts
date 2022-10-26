@@ -18,11 +18,11 @@ export default class AuctionsClient {
     ...args
   }: FetchAuctionPageArgs): Promise<PaginatedData<CharacterObject>> {
     const where = {
+      auctionEnd: history ? undefined : { gt: this.currentTimestamp() },
       ...buildQuery.filters({
         ...DEFAULT_FILTER_OPTIONS,
         ...args.filterOptions,
       }),
-      auctionEnd: { gt: this.currentTimestamp() },
     }
 
     const sortOptions = {
