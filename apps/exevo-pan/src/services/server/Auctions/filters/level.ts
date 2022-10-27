@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { FilterQuery } from 'types/FilterQuery'
 

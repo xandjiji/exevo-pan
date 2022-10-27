@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { FilterQuery } from 'types/FilterQuery'
 
 const filterQuery: FilterQuery = {
