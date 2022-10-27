@@ -3,15 +3,11 @@ import * as filterQueries from './filters'
 import { PrismaAuctionsQuery, SortKeys } from './types'
 
 export const buildQuery = {
-  filters: (filterOptions: FilterOptions): AuctionQuery => {
-    const where: AuctionQuery = {}
-
-    Object.values(filterQueries)
+  filters: (filterOptions: FilterOptions): AuctionQuery => ({
+    AND: Object.values(filterQueries)
       .filter(({ filterSkip }) => !filterSkip(filterOptions))
-      .forEach(({ addQuery }) => addQuery(filterOptions, where))
-
-    return where
-  },
+      .map(({ addQuery }) => addQuery(filterOptions)),
+  }),
   sorting: ({
     sortingMode,
     descendingOrder,

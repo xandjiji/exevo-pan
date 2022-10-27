@@ -6,10 +6,7 @@ declare type AuctionQuery = NonNullable<
   Prisma.CurrentAuctionFindManyArgs['where']
 >
 
-type AddQuery = (
-  filterOptions: FilterOptions,
-  query: AuctionQuery,
-) => AuctionQuery
+type AddQuery = (filterOptions: FilterOptions) => AuctionQuery
 
 declare type FilterQuery = {
   filterSkip: FilterSkip

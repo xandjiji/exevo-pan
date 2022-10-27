@@ -6,11 +6,9 @@ const filterQuery: FilterQuery = {
   filterSkip: ({ minLevel, maxLevel }) =>
     minLevel === DEFAULT_FILTER_OPTIONS.minLevel &&
     maxLevel === DEFAULT_FILTER_OPTIONS.maxLevel,
-  addQuery: ({ minLevel, maxLevel }, query) => {
-    query.level = { gte: minLevel, lte: maxLevel }
-
-    return query
-  },
+  addQuery: ({ minLevel, maxLevel }) => ({
+    level: { gte: minLevel, lte: maxLevel },
+  }),
 }
 
 export default filterQuery
