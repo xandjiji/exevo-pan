@@ -7,7 +7,7 @@ import styles from './styles.module.css'
 import { OutfitControlsProps } from './types'
 
 const OutfitControls = ({ disableAddons = false }: OutfitControlsProps) => {
-  const { filterState, updateFilters, dispatch } = useFilters()
+  const { filterState, setFilters, toggleAddon } = useFilters()
 
   const firstAddonSelected = filterState.addon === 1 || filterState.addon === 3
   const secondAddonSelected = filterState.addon === 2 || filterState.addon === 3
@@ -15,7 +15,7 @@ const OutfitControls = ({ disableAddons = false }: OutfitControlsProps) => {
   return (
     <div className="mt-1.5 mb-2 flex w-full flex-wrap items-center gap-3.5">
       <div
-        onClick={() => updateFilters('sex', !filterState.sex)}
+        onClick={() => setFilters({ sex: filterState.sex })}
         className={clsx(
           'text-tsm mr-4 flex w-full cursor-pointer items-center gap-2',
           styles.switchWrapper,
@@ -30,13 +30,13 @@ const OutfitControls = ({ disableAddons = false }: OutfitControlsProps) => {
         label="Addon 1"
         disabled={disableAddons}
         checked={disableAddons || firstAddonSelected}
-        onClick={() => dispatch({ type: 'TOGGLE_ADDON', value: 1 })}
+        onClick={() => toggleAddon(1)}
       />
       <Checkbox
         label="Addon 2"
         disabled={disableAddons}
         checked={disableAddons || secondAddonSelected}
-        onClick={() => dispatch({ type: 'TOGGLE_ADDON', value: 2 })}
+        onClick={() => toggleAddon(2)}
       />
     </div>
   )
