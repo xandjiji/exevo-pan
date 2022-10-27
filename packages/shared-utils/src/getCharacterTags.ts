@@ -46,14 +46,35 @@ const knightSkills: Array<keyof CharacterSkillsObject> = [
 
 const HIGH_SKILL_VALUE = 100
 
+const MINIMUM_RARE_CHARACTER_COUNT = 3
+const specialCharacters = /[äëïöüÿ'-.,]/i
+const twoConsecutiveUppercase = /[A-Z][A-Z]/
+
+const isRareNickname = (nickname: string): boolean => {
+  if (nickname.length <= MINIMUM_RARE_CHARACTER_COUNT) return true
+  if (specialCharacters.test(nickname)) return true
+  if (twoConsecutiveUppercase.test(nickname)) return true
+
+  return false
+}
+
 type Tag = keyof typeof dictionary
 
 export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
-  const { charms, quests, mounts, outfits, storeMounts, storeOutfits, sex } =
-    character
+  const {
+    nickname,
+    charms,
+    quests,
+    mounts,
+    outfits,
+    storeMounts,
+    storeOutfits,
+    sex,
+  } = character
 
   const tags: Tag[] = []
 
+  if (isRareNickname(nickname)) tags.push('rareNickname')
   if (charms.length >= CHARM_CHECK) tags.push('manyCharms')
   if (quests.length >= QUEST_CHECK) tags.push('manyQuests')
   if (mounts.length >= MOUNT_CHECK) tags.push('manyMounts')

@@ -141,6 +141,7 @@ export default {
     rareOutfits: 'Rare outfits 💎',
     secondaryEkSkill: 'Secondary skill ⚔️',
     soulwarAvailable: 'Soul War available 💀',
+    rareNickname: 'Rare nickname',
   },
   CharacterCard: {
     linkLabel: 'Go to character page',

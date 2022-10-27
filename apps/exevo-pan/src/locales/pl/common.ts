@@ -142,6 +142,7 @@ export default {
     /* @ ToDo: i18n */
     secondaryEkSkill: 'Secondary skill ⚔️',
     soulwarAvailable: 'Soul War available 💀',
+    rareNickname: 'Rare nickname',
   },
   CharacterCard: {
     linkLabel: 'Idź do strony postaci',
