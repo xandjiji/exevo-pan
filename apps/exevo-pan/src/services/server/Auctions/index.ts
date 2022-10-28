@@ -4,9 +4,13 @@ import {
   DEFAULT_PAGINATION_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
 import { calculatePageData } from 'shared-utils/dist/calculatePageData'
+import { endpoints } from 'Constants'
 import { prisma } from '../../prisma'
 import { buildQuery } from './queryBuilder'
+import { filterActiveHighlightedIds } from './utils'
 import { FetchAuctionPageArgs } from './types'
+
+const MINIMUM_HIGHLIGHTED_AMOUNT = 2
 
 export default class AuctionsClient {
   private static currentTimestamp(): number {
@@ -60,6 +64,44 @@ export default class AuctionsClient {
   }
 
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
-    return []
+    try {
+      const response = await fetch(endpoints.BACKOFFICE_API)
+      const highlightedAuctionsData: HighlightedAuctionData[] =
+        await response.json()
+
+      const highlightedAuctionIds = filterActiveHighlightedIds(
+        highlightedAuctionsData,
+      )
+
+      const highlightedAuctions = await prisma.currentAuction.findMany({
+        where: {
+          id: { in: highlightedAuctionIds },
+          auctionEnd: { gt: this.currentTimestamp() },
+        },
+        include: { server: true, rareItems: true },
+      })
+
+      if (highlightedAuctions.length >= MINIMUM_HIGHLIGHTED_AMOUNT) {
+        return highlightedAuctions
+      }
+
+      const fillHighlightedAuctions = await prisma.currentAuction.findMany({
+        where: {
+          id: { notIn: highlightedAuctionIds },
+          auctionEnd: { gt: this.currentTimestamp() },
+          hasBeenBidded: true,
+        },
+        orderBy: { currentBid: 'desc' },
+        take: MINIMUM_HIGHLIGHTED_AMOUNT - highlightedAuctions.length,
+        include: { server: true, rareItems: true },
+      })
+
+      return [...highlightedAuctions, ...fillHighlightedAuctions].sort(
+        (a, b) => a.auctionEnd - b.auctionEnd,
+      )
+    } catch (error: unknown) {
+      console.log(error)
+      return []
+    }
   }
 }
