@@ -25,7 +25,9 @@ export default class AuctionsClient {
     })
 
     const response = await fetch(
-      `/api/auctions?history=${history}&${serializedFilters}`,
+      `/api/auctions?history=${history}${
+        serializedFilters ? '&' : ''
+      }${serializedFilters}`,
     )
 
     const result: PaginatedData<CharacterObject> = await response.json()
