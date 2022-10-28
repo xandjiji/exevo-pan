@@ -1,13 +1,9 @@
 import { endpoints } from 'Constants'
-import {
-  DEFAULT_PAGINATION_OPTIONS,
-  DEFAULT_SORT_OPTIONS,
-  DEFAULT_FILTER_OPTIONS,
-} from 'shared-utils/dist/contracts/Filters/defaults'
+import { DEFAULT_SORT_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { serializeUrlParams } from 'hooks/useUrlParamsState/utils'
 import { schema as filtersSchema } from 'modules/BazaarAuctions/contexts/useFilters/schema'
 import { schema as auctionsSchema } from 'modules/BazaarAuctions/contexts/useAuctions/schema'
-import { buildHeaders, filterActiveHighlights } from './utils'
+import { filterActiveHighlights } from './utils'
 import { FetchAuctionPageArgs } from './types'
 
 export default class AuctionsClient {
