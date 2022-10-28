@@ -25,7 +25,7 @@ export default class AuctionsClient {
     })
 
     const response = await fetch(
-      `/api/auctions?history=${history}${
+      `${endpoints.AUCTIONS}?history=${history}${
         serializedFilters ? '&' : ''
       }${serializedFilters}`,
     )
