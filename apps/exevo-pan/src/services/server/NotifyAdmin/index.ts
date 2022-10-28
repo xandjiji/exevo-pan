@@ -1,12 +1,10 @@
 import { endpoints } from 'Constants'
 
 export default class NotifyAdminClient {
-  static fcmSendUrl = `${endpoints.FCM_SEND}`
-
   static async notifyPurchase(): Promise<boolean> {
     try {
       const tokens = (process.env.TELTOKENS ?? '').split(',')
-      await fetch(this.fcmSendUrl, {
+      await fetch(endpoints.FCM_SEND, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

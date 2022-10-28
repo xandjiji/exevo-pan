@@ -3,8 +3,6 @@ import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
 import { endpoints } from 'Constants'
 
 export default class MailCheckoutClient {
-  static mailChekoutUrl = `${endpoints.MAIL_CHECKOUT}`
-
   static async postMail(purchase: AdvertisePurchase): Promise<string> {
     const withFormattedDates: AdvertisePurchase = {
       ...purchase,
@@ -13,7 +11,7 @@ export default class MailCheckoutClient {
         .sort(sortStringDates),
     }
     try {
-      const response = await fetch(this.mailChekoutUrl, {
+      const response = await fetch(endpoints.MAIL_CHECKOUT, {
         method: 'POST',
         headers: {
           Accept: 'application/json',

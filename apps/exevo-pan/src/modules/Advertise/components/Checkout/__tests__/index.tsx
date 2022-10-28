@@ -1,7 +1,7 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
-import { MailCheckoutClient } from 'services'
+import { MailCheckoutClient } from 'services/client'
 import { useForm } from '../../../contexts/Form'
 import { FormValues } from '../../../contexts/Form/types'
 import { validateEmail, validateCharacter } from '../utils'

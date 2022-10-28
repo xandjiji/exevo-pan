@@ -2,12 +2,10 @@ import { endpoints } from 'Constants'
 import { CreateHighlightedAuctionPayload } from './types'
 
 export default class BackofficeClient {
-  private static backofficeEndpoint = `${endpoints.BACKOFFICE_API}`
-
   static async notifyHighlight(
     highlightPayload: CreateHighlightedAuctionPayload,
   ): Promise<void> {
-    await fetch(this.backofficeEndpoint, {
+    await fetch(endpoints.BACKOFFICE_API, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
