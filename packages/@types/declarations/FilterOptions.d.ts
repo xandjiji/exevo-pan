@@ -19,7 +19,6 @@ declare interface FilterOptions {
   skillKey: Set<string>
   imbuementsSet: Set<string>
   charmsSet: Set<string>
-  rareNick: boolean
   questSet: Set<string>
   addon: number
   sex: boolean

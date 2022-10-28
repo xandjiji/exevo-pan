@@ -62,7 +62,6 @@ export default {
     resetFilters: 'Ustaw domyślne',
     green: 'Zielony',
     yellow: 'Żółty',
-    rareNicknamesButton: 'Rzadkie nazwy postaci',
     skullEmoji: 'Czaszka',
     SpritePicker: {
       item: 'Przedmiot jest wybrany',

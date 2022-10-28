@@ -60,7 +60,6 @@ export default {
     resetFilters: 'Resetar filtros',
     green: 'Verde',
     yellow: 'Amarelo',
-    rareNicknamesButton: 'Nicknames raros',
     skullEmoji: 'caveira',
     SpritePicker: {
       item: 'item está selecionado',

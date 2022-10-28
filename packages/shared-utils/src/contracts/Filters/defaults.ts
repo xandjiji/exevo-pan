@@ -32,7 +32,6 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   skillKey: new Set([]),
   imbuementsSet: new Set([]),
   charmsSet: new Set([]),
-  rareNick: false,
   addon: 3,
   sex: false,
   questSet: new Set([]),

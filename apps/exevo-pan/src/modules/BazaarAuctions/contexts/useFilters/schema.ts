@@ -106,11 +106,6 @@ export const schema: SchemaCodec<FilterOptions> = {
     encode: codecs.encode.StringSet,
     decode: codecs.decode.StringSet,
   },
-  rareNick: {
-    urlKey: 'rareNick',
-    defaultValue: DEFAULT_FILTER_OPTIONS.rareNick,
-    decode: codecs.decode.Boolean,
-  },
   questSet: {
     urlKey: 'questSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.questSet,

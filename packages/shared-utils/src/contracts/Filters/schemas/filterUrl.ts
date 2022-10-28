@@ -134,11 +134,6 @@ export const filterSchema = [
     decode: decodeStringSet,
   },
   {
-    key: 'rareNick',
-    defaultValue: DEFAULT_FILTER_OPTIONS.rareNick,
-    decode: decodeBoolean,
-  },
-  {
     key: 'questSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.questSet,
     encode: encodeSet,

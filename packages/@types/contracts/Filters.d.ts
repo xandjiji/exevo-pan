@@ -23,7 +23,6 @@ type FilterOptionsPrimitives = Pick<
   | 'maxSkill'
   | 'bossPoints'
   | 'tcInvested'
-  | 'rareNick'
   | 'addon'
   | 'sex'
   | 'charmExpansion'

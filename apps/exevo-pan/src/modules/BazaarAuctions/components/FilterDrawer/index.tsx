@@ -30,6 +30,8 @@ import { FilterDrawerProps } from './types'
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
 const { PVP_TYPES, SERVER_LOCATIONS } = servers
 
+const excludedTags = new Set([tagsDictionary.rareNickname])
+
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { common, homepage },
@@ -780,22 +782,35 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               content={homepage.FilterDrawer.tooltips.rareNicknames}
             >
               <Chip
-                overrideStatus={filterState.rareNick}
-                onClick={() => setFilters({ rareNick: !filterState.rareNick })}
+                overrideStatus={filterState.tags.has(
+                  tagsDictionary.rareNickname,
+                )}
+                onClick={() =>
+                  toggleFilterSet({
+                    key: 'tags',
+                    value: tagsDictionary.rareNickname,
+                  })
+                }
               >
-                {homepage.FilterDrawer.rareNicknamesButton}
+                {common.SpecialTags[tagsDictionary.rareNickname]}
               </Chip>
             </Tooltip>
 
-            {Object.keys(tagsDictionary).map((tag) => (
-              <Chip
-                key={tag}
-                overrideStatus={filterState.tags.has(tag)}
-                onClick={() => toggleFilterSet({ key: 'tags', value: tag })}
-              >
-                {common.SpecialTags[tag] ?? tag}
-              </Chip>
-            ))}
+            {Object.keys(tagsDictionary).map((tag) => {
+              const readableTag = common.SpecialTags[tag]
+
+              if (excludedTags.has(tag)) return null
+
+              return (
+                <Chip
+                  key={tag}
+                  overrideStatus={filterState.tags.has(tag)}
+                  onClick={() => toggleFilterSet({ key: 'tags', value: tag })}
+                >
+                  {readableTag}
+                </Chip>
+              )
+            })}
           </S.ChipWrapper>
         </FilterGroup>
       </Drawer.Body>
