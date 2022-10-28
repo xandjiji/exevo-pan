@@ -6,10 +6,11 @@ import {
   useCallback,
   useEffect,
 } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { useIsMounted } from 'hooks'
-import { AuctionsClient } from 'services'
+import { AuctionsClient } from 'services/client'
+import { LoadingAlert } from 'components/Atoms'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { endpoints } from 'Constants'
 import AuctionsReducer from './reducer'
 import { DEFAULT_STATE, PAGE_SIZE } from './schema'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
@@ -21,6 +22,10 @@ export const AuctionsProvider = ({
   initialPageData,
   children,
 }: AuctionsProviderProps) => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: DEFAULT_STATE.loading,
     nickname: DEFAULT_STATE.nickname,
@@ -48,7 +53,7 @@ export const AuctionsProvider = ({
           ...DEFAULT_FILTER_OPTIONS,
           nicknameFilter: newNickname,
         },
-        endpoint: endpoints.CURRENT_AUCTIONS,
+        history: false,
       })
 
       previousNickname.current = newNickname
@@ -76,6 +81,7 @@ export const AuctionsProvider = ({
     <AuctionsContext.Provider
       value={{ ...state, handlePaginatorFetch, handleNicknameFetch }}
     >
+      {state.loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       {children}
     </AuctionsContext.Provider>
   )
