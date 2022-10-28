@@ -4,3 +4,8 @@ export type FetchAuctionPageArgs = {
   paginationOptions?: Partial<PaginationOptions>
   history: boolean
 }
+
+export type FetchAuctionByIdParameters = {
+  auctionId: number
+  from?: 'current' | 'history' | 'any'
+}

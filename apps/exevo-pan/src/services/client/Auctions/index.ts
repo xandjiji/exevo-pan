@@ -4,7 +4,7 @@ import { serializeUrlParams } from 'hooks/useUrlParamsState/utils'
 import { schema as filtersSchema } from 'modules/BazaarAuctions/contexts/useFilters/schema'
 import { schema as auctionsSchema } from 'modules/BazaarAuctions/contexts/useAuctions/schema'
 import { filterActiveHighlights } from './utils'
-import { FetchAuctionPageArgs } from './types'
+import { FetchAuctionPageArgs, FetchAuctionByIdParameters } from './types'
 
 export default class AuctionsClient {
   static async fetchAuctionPage({
@@ -35,28 +35,23 @@ export default class AuctionsClient {
     return result
   }
 
-  /* static async fetchAuctionById({
+  static async fetchAuctionById({
     auctionId,
-    endpoint,
+    from = 'any',
   }: FetchAuctionByIdParameters): Promise<CharacterObject | undefined> {
-    const bodyPayload = serializeBody({
-      paginationOptions: DEFAULT_PAGINATION_OPTIONS,
-      sortOptions: DEFAULT_SORT_OPTIONS,
-      filterOptions: {
-        ...DEFAULT_FILTER_OPTIONS,
-        auctionIds: new Set([auctionId]),
-      },
-    })
+    try {
+      const response = await fetch(
+        `${endpoints.AUCTION_BY_ID}/?from=${from}&id=${auctionId}`,
+      )
 
-    const response = await fetch(endpoint, {
-      method: 'POST',
-      headers: buildHeaders(endpoint),
-      body: bodyPayload,
-    })
+      if (response.status === 404) {
+        throw Error(`Auction id ${auctionId} not found`)
+      }
 
-    const data: FilterResponse = await response.json()
-
-    const [foundAuction] = data.page
-    return foundAuction
-  } */
+      const found = await response.json()
+      return found
+    } catch (error) {
+      return undefined
+    }
+  }
 }

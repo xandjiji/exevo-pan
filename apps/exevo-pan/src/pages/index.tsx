@@ -15,7 +15,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle } from 'utils'
-import { endpoints, routes, jsonld, urlParameters } from 'Constants'
+import { routes, jsonld, urlParameters } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
@@ -96,7 +96,7 @@ export default function Home({
       </Head>
 
       <Main>
-        <UrlAuction endpoint={endpoints.CURRENT_AUCTIONS} />
+        <UrlAuction />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}

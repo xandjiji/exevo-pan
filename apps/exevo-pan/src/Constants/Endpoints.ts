@@ -1,5 +1,6 @@
 export const endpoints = {
   AUCTIONS: '/api/auctions',
+  AUCTION_BY_ID: '/api/auction',
   STATIC_DATA: process.env.NEXT_PUBLIC_STATIC_ENDPOINT as string,
   BLOG_QUERY: process.env.NEXT_PUBLIC_BLOG_ENDPOINT as string,
   BLOG_STATIC: process.env.NEXT_PUBLIC_BLOG_STATIC_ENDPOINT as string,
