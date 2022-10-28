@@ -6,6 +6,11 @@ import { schema as filtersSchema } from 'modules/BazaarAuctions/contexts/useFilt
 import { schema as auctionsSchema } from 'modules/BazaarAuctions/contexts/useAuctions/schema'
 import { AuctionsClient } from 'services/server'
 
+const CACHE_AGE = {
+  current: 60,
+  history: 3600,
+}
+
 export default async (
   request: VercelRequest,
   response: VercelResponse,
@@ -47,6 +52,9 @@ export default async (
       paginationOptions,
     })
 
+    const maxAge = CACHE_AGE[history ? 'history' : 'current']
+
+    response.setHeader('Cache-Control', `max-age=${maxAge}, s-maxage=${maxAge}`)
     response.status(200).json(result)
     return
   } catch (error) {
