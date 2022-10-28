@@ -1,7 +1,7 @@
 import { priceMap as mountPrices } from 'data-dictionary/dist/dictionaries/storeMount'
 import { priceMap as outfitPrices } from 'data-dictionary/dist/dictionaries/storeOutfit'
 
-const getCosmeticsValue = (character: PartialCharacterObject): number => {
+const getCosmeticsValue = (character: CharacterObject): number => {
   const { storeMounts, storeOutfits } = character
   let sum = 0
 

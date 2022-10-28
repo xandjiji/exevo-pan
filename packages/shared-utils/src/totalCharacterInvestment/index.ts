@@ -7,7 +7,7 @@ const HUNTING_SLOT_VALUE = 750
 const PREY_SLOT_VALUE = 900
 
 export const totalCharacterInvestment = (
-  character: PartialCharacterObject,
+  character: CharacterObject,
 ): number => {
   const { charmInfo, huntingSlot, preySlot, hirelings, storeItems } = character
 

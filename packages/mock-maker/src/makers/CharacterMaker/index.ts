@@ -73,7 +73,7 @@ const randomHirelingsInfo = (): HirelingsInfo => {
 
 const server = randomServer()
 
-export const randomCharacter = (): PartialCharacterObject => {
+export const randomCharacter = (): CharacterObject => {
   const sex = faker.datatype.boolean()
 
   return {

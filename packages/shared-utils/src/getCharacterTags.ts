@@ -60,7 +60,7 @@ const isRareNickname = (nickname: string): boolean => {
 
 type Tag = keyof typeof dictionary
 
-export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
+export const getCharacterTags = (character: CharacterObject): Tag[] => {
   const {
     nickname,
     charms,

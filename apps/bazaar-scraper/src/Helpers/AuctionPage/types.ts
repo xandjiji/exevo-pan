@@ -1,7 +1,7 @@
 import { RequestTypes } from 'services/httpClient/types'
 
 export type CharacterPostData = Pick<
-  PartialCharacterObject,
+  CharacterObject,
   'storeItems' | 'outfits' | 'storeOutfits' | 'mounts' | 'storeMounts'
 >
 
