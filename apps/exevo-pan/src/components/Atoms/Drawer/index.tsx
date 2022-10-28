@@ -16,7 +16,7 @@ const Drawer = ({
   children,
   className,
   ...props
-}: DrawerProps) => {
+}: DrawerProps): ReturnType<typeof createPortal> | null => {
   const initialDrag = useRef<number | null>(null)
   const [drawerOffset, setDrawerOffset] = useState<number>(0)
   const [shouldBeRendered, setShouldBeRendered] = useState<boolean>(isOpen)
