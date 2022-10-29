@@ -115,14 +115,15 @@ const Header = ({
             isOpen={languageOpen}
             setLanguageOpen={setLanguageOpen}
           />
-          <ClientComponent>
+
+          {process.browser && (
             <Switch
               active={theme === 'dark'}
               onClick={toggleTheme}
               icon={<MoonIcon />}
               aria-label={common.Header.themeSwitch}
             />
-          </ClientComponent>
+          )}
           <CtaButton />
           <TibiaBlackjack.FloatingButton className="md:hidden" />
         </div>
