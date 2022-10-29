@@ -6,8 +6,8 @@ import { ListProps } from './types'
 const List = ({
   title,
   charactersList,
-  displayedDataKey,
-  format,
+  pickFromCharacter,
+  formatCharacterValue,
   ...props
 }: ListProps) => {
   const {
@@ -40,27 +40,31 @@ const List = ({
         </Table.Head>
 
         <Table.Body>
-          {charactersList.map((character, index) => (
-            <Table.Row key={character.id}>
-              <Table.Column className="w-4 text-center align-top text-xs leading-relaxed">
-                {index + 1}
-              </Table.Column>
-              <Table.Column className="w-full px-2 text-left">
-                <a
-                  href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${character.id}&source=overview`}
-                  target="_blank"
-                  rel="noreferrer noopener external"
-                >
-                  {character.nickname}
-                </a>
-              </Table.Column>
-              <Table.Column className="w-fit whitespace-nowrap text-right">
-                {format
-                  ? format(character[displayedDataKey] as never)
-                  : character[displayedDataKey]}
-              </Table.Column>
-            </Table.Row>
-          ))}
+          {charactersList.map((character, index) => {
+            const displayedData = pickFromCharacter(character)
+
+            return (
+              <Table.Row key={character.id}>
+                <Table.Column className="w-4 text-center align-top text-xs leading-relaxed">
+                  {index + 1}
+                </Table.Column>
+                <Table.Column className="w-full px-2 text-left">
+                  <a
+                    href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${character.id}&source=overview`}
+                    target="_blank"
+                    rel="noreferrer noopener external"
+                  >
+                    {character.nickname}
+                  </a>
+                </Table.Column>
+                <Table.Column className="w-fit whitespace-nowrap text-right">
+                  {formatCharacterValue
+                    ? formatCharacterValue(displayedData)
+                    : displayedData}
+                </Table.Column>
+              </Table.Row>
+            )
+          })}
         </Table.Body>
       </Table.Element>
     </Table>

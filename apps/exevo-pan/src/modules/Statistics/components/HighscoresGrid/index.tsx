@@ -1,8 +1,8 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useCallback } from 'react'
-import { formatNumberWithCommas } from 'utils'
+import { memo } from 'react'
 import List from '../List'
+import { pickFromCharacter, format } from './utils'
 import { HighscoresGridProps } from './types'
 
 const HighscoresGrid = ({
@@ -28,57 +28,54 @@ const HighscoresGrid = ({
       <List
         title={statistics.HighscoresGrid.top10BidTitle}
         charactersList={statisticsData.top10Bid}
-        displayedDataKey="currentBid"
-        format={useCallback(
-          (value: number) => `${formatNumberWithCommas(value)} TC`,
-          [],
-        )}
+        pickFromCharacter={pickFromCharacter.currentBid}
+        formatCharacterValue={format.tc}
       />
       <List
         title="Level"
         charactersList={statisticsData.top10Level}
-        displayedDataKey="level"
-        format={formatNumberWithCommas}
+        pickFromCharacter={pickFromCharacter.level}
+        formatCharacterValue={format.numberWithCommas}
       />
       <List
         title="Magic"
         charactersList={statisticsData.top10Magic}
-        displayedDataKey="magic"
+        pickFromCharacter={pickFromCharacter.skills.magic}
       />
       <List
         title="Distance"
         charactersList={statisticsData.top10Distance}
-        displayedDataKey="distance"
+        pickFromCharacter={pickFromCharacter.skills.distance}
       />
       <List
         title="Sword"
         charactersList={statisticsData.top10Sword}
-        displayedDataKey="sword"
+        pickFromCharacter={pickFromCharacter.skills.sword}
       />
       <List
         title="Axe"
         charactersList={statisticsData.top10Axe}
-        displayedDataKey="axe"
+        pickFromCharacter={pickFromCharacter.skills.axe}
       />
       <List
         title="Club"
         charactersList={statisticsData.top10Club}
-        displayedDataKey="club"
+        pickFromCharacter={pickFromCharacter.skills.club}
       />
       <List
         title="Fist"
         charactersList={statisticsData.top10Fist}
-        displayedDataKey="fist"
+        pickFromCharacter={pickFromCharacter.skills.fist}
       />
       <List
         title="Shielding"
         charactersList={statisticsData.top10Shielding}
-        displayedDataKey="shielding"
+        pickFromCharacter={pickFromCharacter.skills.shielding}
       />
       <List
         title="Fishing"
         charactersList={statisticsData.top10Fishing}
-        displayedDataKey="fishing"
+        pickFromCharacter={pickFromCharacter.skills.fishing}
       />
     </div>
   )
