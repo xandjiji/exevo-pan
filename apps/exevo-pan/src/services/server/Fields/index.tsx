@@ -1,6 +1,6 @@
-import { prisma } from '../prisma'
+import { prisma } from '../../prisma'
 
-export class DrawerFieldsClient {
+export default class FieldsClient {
   static async fetchServerOptions(args?: {
     active?: boolean
   }): Promise<Option[]> {

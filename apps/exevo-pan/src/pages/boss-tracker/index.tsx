@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { BossesClient } from 'services'
-import { DrawerFieldsClient } from 'services/DrawerFields'
+import { FieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import BossTracker, { heroSrc } from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'
@@ -81,7 +81,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const server = 'Antica'
 
   const [activeServerOptions, bossChances] = await Promise.all([
-    await DrawerFieldsClient.fetchServerOptions({ active: true }),
+    await FieldsClient.fetchServerOptions({ active: true }),
     await BossesClient.fetchServerBossChances(server),
   ])
 

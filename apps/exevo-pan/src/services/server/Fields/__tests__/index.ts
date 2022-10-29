@@ -1,11 +1,11 @@
 import { randomDataset, setup } from 'utils/test'
-import { DrawerFieldsClient } from '..'
+import FieldsClient from '..'
 
 const mockedFetch = setup.fetch()
 
 const { rawServerData, serverData, itemData } = randomDataset()
 
-describe('DrawerFieldsClient()', () => {
+describe('FieldsClient()', () => {
   beforeEach(() => {
     mockedFetch.mockClear()
   })
@@ -15,7 +15,7 @@ describe('DrawerFieldsClient()', () => {
       json: async () => rawServerData,
     } as Response)
 
-    const result = await DrawerFieldsClient.fetchServerOptions()
+    const result = await FieldsClient.fetchServerOptions()
 
     serverData.forEach(({ serverName }) => {
       expect(
@@ -41,7 +41,7 @@ describe('DrawerFieldsClient()', () => {
       json: async () => itemData,
     } as Response)
 
-    const result = await DrawerFieldsClient.fetchAuctionedItemOptions()
+    const result = await FieldsClient.fetchAuctionedItemOptions()
 
     const keys = Object.keys(result)
 

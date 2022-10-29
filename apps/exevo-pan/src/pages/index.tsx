@@ -9,8 +9,7 @@ import {
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
 import { BlogClient } from 'services'
-import { DrawerFieldsClient } from 'services/DrawerFields'
-import { AuctionsClient } from 'services/server'
+import { AuctionsClient, FieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
@@ -134,8 +133,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     highlightedAuctions,
     localizedBlogPosts,
   ] = await Promise.all([
-    DrawerFieldsClient.fetchServerOptions({ active: true }),
-    DrawerFieldsClient.fetchAuctionedItemOptions(),
+    FieldsClient.fetchServerOptions({ active: true }),
+    FieldsClient.fetchAuctionedItemOptions(),
     AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
