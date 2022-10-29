@@ -13,8 +13,8 @@ import { AuctionsClient, FieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld, urlParameters } from 'Constants'
+import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
+import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
@@ -112,9 +112,7 @@ export default function Home({
               <AuctionsGrid
                 past={false}
                 permalinkResolver={(auctionId) =>
-                  `${buildUrl('', locale)}?${
-                    urlParameters.AUCTION_ID
-                  }=${auctionId}`
+                  permalinkResolver.current({ auctionId, locale })
                 }
               />
             </AuctionsProvider>

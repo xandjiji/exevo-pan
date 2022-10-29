@@ -13,8 +13,8 @@ import { AuctionsClient, FieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld, urlParameters } from 'Constants'
+import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
+import { routes, jsonld } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -111,9 +111,7 @@ export default function BazaarHistory({
               <AuctionsGrid
                 past
                 permalinkResolver={(auctionId) =>
-                  `${buildUrl(routes.BAZAAR_HISTORY, locale)}?${
-                    urlParameters.AUCTION_ID
-                  }=${auctionId}`
+                  permalinkResolver.history({ auctionId, locale })
                 }
               />
             </AuctionsProvider>
