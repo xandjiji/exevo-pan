@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
-import { HistoryStatisticsClient } from 'services'
+import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle } from 'utils'
