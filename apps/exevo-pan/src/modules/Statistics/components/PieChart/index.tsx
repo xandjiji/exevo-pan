@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 import { useMemo, memo } from 'react'
@@ -80,6 +81,7 @@ const PieChart = ({
         {title}
       </h4>
       <div aria-describedby={titleId} className="w-full">
+        {/* @ts-ignore */}
         <Doughnut data={chartData} options={options} />
       </div>
     </section>
