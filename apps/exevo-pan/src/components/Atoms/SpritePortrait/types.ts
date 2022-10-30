@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 export type SpritePortraitProps = React.HTMLAttributes<HTMLDivElement> & {
   offset?: boolean
   highlight?: boolean
