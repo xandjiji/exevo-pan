@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import Head from 'next/head'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
@@ -10,7 +11,7 @@ import { AppProps } from 'next/app'
 import 'styles/globals.css'
 import 'styles/reset.css'
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps }: AppProps<{ translations: any }>) {
   const { translations } = pageProps
   const router = useRouter()
 
@@ -47,9 +48,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         />
       </Head>
       <TranslationsProvider value={{ translations }}>
+        {/* @ts-ignore */}
         <ErrorBoundary>
           <ThemeProvider>
             <LockBodyProvider>
+              {/* @ts-ignore */}
               <Component {...pageProps} />
             </LockBodyProvider>
           </ThemeProvider>
