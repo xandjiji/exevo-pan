@@ -27,7 +27,9 @@ export const serializeUrlParams = <T>({
           urlKey,
           encode
             ? encode(newValue)
-            : encodeURIComponent(newValue as 'boolean' | 'number' | 'string'),
+            : encodeURIComponent(
+                newValue as unknown as 'boolean' | 'number' | 'string',
+              ),
         )
       }
     }
