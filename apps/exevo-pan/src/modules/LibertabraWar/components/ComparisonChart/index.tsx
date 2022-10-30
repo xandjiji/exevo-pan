@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useCallback } from 'react'
@@ -155,6 +156,7 @@ const ComparisonChart = ({
         </div>
       </div>
 
+      {/* @ts-ignore */}
       <Line data={chartDataObject} options={options} />
     </section>
   )
