@@ -1,4 +1,4 @@
-import cheerio from 'cheerio/lib/index'
+import cheerio from 'cheerio'
 import { ignoreList } from 'data-dictionary/dist/dictionaries/store'
 import { stringToNumber } from '../utils'
 

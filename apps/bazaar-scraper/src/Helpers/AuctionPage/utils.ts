@@ -1,5 +1,5 @@
 /* eslint-disable no-await-in-loop */
-import cheerio, { CheerioAPI } from 'cheerio/lib/index'
+import cheerio, { CheerioAPI } from 'cheerio'
 import { AuctionPage, PostData } from 'Helpers'
 import { HttpClient } from 'services'
 import { tabBroadcast, coloredText } from 'logging'

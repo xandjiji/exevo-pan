@@ -1,4 +1,4 @@
-import cheerio, { Element } from 'cheerio/lib/index'
+import cheerio, { Element } from 'cheerio'
 
 const garbageClasses = new Set(['IndicateMoreEntries', 'LabelH'])
 

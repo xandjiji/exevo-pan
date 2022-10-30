@@ -1,4 +1,4 @@
-import cheerio, { CheerioAPI } from 'cheerio/lib/index'
+import cheerio, { CheerioAPI } from 'cheerio'
 import { PostData } from 'Helpers'
 import { sanitizeHtmlString, parseDate, exitIfMaintenance } from 'utils'
 import { totalCharacterInvestment } from 'shared-utils/dist/totalCharacterInvestment'
