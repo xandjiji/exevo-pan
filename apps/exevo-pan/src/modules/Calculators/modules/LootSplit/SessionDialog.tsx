@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, TextArea, CopyButton, Button, Text } from 'components/Atoms'
 import { Group, Chip } from '../../components'
