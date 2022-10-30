@@ -5,6 +5,7 @@ import {
   fetchUnscrapedAuctions,
   fetchMaturedAuctions,
 } from './tasks'
+import { db } from './utils'
 
 const SCRIPT_NAME = coloredText('ScrapRawBazaarData', 'highlight')
 
@@ -15,15 +16,17 @@ const main = async (): Promise<void> => {
   const rawData = new RawBazaar()
   await rawData.load()
 
+  const serverList = await db.getAllServers()
+
   const unscrapedIds = rawData.getUnscrapedIds(await fetchHighestAuctionId())
 
   if (unscrapedIds.length) {
-    await fetchUnscrapedAuctions(unscrapedIds, rawData)
+    await fetchUnscrapedAuctions({ unscrapedIds, rawData, serverList })
   }
 
   const maturedIds = rawData.getMaturedAuctionIds()
   if (maturedIds.length) {
-    await fetchMaturedAuctions(maturedIds, rawData)
+    await fetchMaturedAuctions({ maturedIds, rawData, serverList })
   }
 
   broadcast(

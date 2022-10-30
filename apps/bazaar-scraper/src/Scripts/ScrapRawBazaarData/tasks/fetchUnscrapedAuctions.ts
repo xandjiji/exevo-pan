@@ -6,17 +6,22 @@ import { broadcast, coloredText, TrackETA } from 'logging'
 import { batchPromises, arrayPartitions } from 'utils'
 import { BUFFER_SIZE, fetchAuctionPage } from '../utils'
 
-export const fetchUnscrapedAuctions = async (
-  unscrapedIds: number[],
-  rawData: RawBazaar,
-): Promise<void> => {
+export const fetchUnscrapedAuctions = async ({
+  rawData,
+  serverList,
+  unscrapedIds,
+}: {
+  unscrapedIds: number[]
+  rawData: RawBazaar
+  serverList: ServerObject[]
+}): Promise<void> => {
   const batchSize = unscrapedIds.length
   const taskTracking = new TrackETA(
     batchSize,
     coloredText('Scraping new history auctions', 'highlight'),
   )
 
-  const helper = new AuctionPage()
+  const helper = new AuctionPage(serverList)
 
   const auctionPageRequests = unscrapedIds.map((auctionId) => async () => {
     const readableId = coloredText(auctionId, 'highlight')
