@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterCard/CharacterModal'
-import { vocation } from 'shared-utils/dist/vocations'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { Text } from 'components/Atoms'
 import { table as Table } from '../../Style/Table'
 import ranking from './ranking.json'
@@ -43,11 +43,11 @@ const TopSpenders = ({
                   characterData={{
                     name: auction.nickname,
                     level: auction.level,
-                    vocation: vocation.getFullName(
-                      auction.vocationId,
-                      auction.level,
-                    ),
-                    world: auction.serverData.serverName,
+                    vocation: vocation.getPromotedName({
+                      vocationId: auction.vocationId,
+                      level: auction.level,
+                    }),
+                    world: auction.server.serverName,
                   }}
                 />
               </td>

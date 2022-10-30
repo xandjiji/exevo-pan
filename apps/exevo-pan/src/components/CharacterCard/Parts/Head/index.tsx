@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import clsx from 'clsx'
-import { vocation } from 'shared-utils/dist/vocations'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import CharacterMiniCard from '../../../CharacterMiniCard'
 import { HeadProps } from './types'
 
@@ -33,7 +33,7 @@ const Head = ({
       characterData={{
         name: nickname,
         level,
-        vocation: vocation.getFullName(vocationId, level),
+        vocation: vocation.getPromotedName({ vocationId, level }),
         world: serverName,
       }}
       linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
