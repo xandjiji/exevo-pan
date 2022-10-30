@@ -1,13 +1,7 @@
-import clsx from 'clsx'
-import codeStyles from './Code/styles.module.css'
-
 const ContentWrapper = (args: JSX.IntrinsicElements['main']) => (
   <main
     {...args}
-    className={clsx(
-      codeStyles.contentWrapper,
-      'card inner-padding z-1 text-onSurface relative flex w-full max-w-full shrink-0 flex-col gap-4 py-8 text-base font-light leading-relaxed transition-colors',
-    )}
+    className="card inner-padding z-1 text-onSurface transition-colors' relative flex w-full max-w-full shrink-0 flex-col gap-4 py-8 text-base font-light leading-relaxed"
   />
 )
 

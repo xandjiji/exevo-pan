@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Image from 'next/image'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
@@ -8,7 +9,7 @@ import styles from './styles.module.css'
 const PaymentMethods = () => {
   const { paymentMethod, dispatch } = useForm()
   return (
-    <div className={styles.wrapper}>
+    <div className={clsx('card', styles.wrapper)}>
       <MethodButton
         active={paymentMethod === 'TIBIA_COINS'}
         onClick={() =>

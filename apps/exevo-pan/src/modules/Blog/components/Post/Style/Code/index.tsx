@@ -1,8 +1,5 @@
-import clsx from 'clsx'
-import styles from './styles.module.css'
-
 export const pre = (args: JSX.IntrinsicElements['pre']) => (
-  <pre {...args} className={clsx('m-0', styles.pre)} />
+  <pre {...args} className="pre m-0" />
 )
 
 /* changes made here should also be added to `.contentWrapper` class */

@@ -1,5 +1,5 @@
 .wrapper {
-  @apply card overflow-hidden p-0;
+  @apply overflow-hidden p-0;
 }
 
 .wrapper > *:not(:last-child) {

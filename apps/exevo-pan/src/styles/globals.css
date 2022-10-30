@@ -50,6 +50,10 @@
     font-family: monospace;
   }
 
+  .pre code {
+    @apply custom-scrollbar text-s w-full overflow-auto py-4 px-6;
+  }
+
   .clickable {
     @apply cursor-pointer transition-shadow hover:shadow-md active:shadow-inner;
   }
