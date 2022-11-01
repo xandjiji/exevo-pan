@@ -30,7 +30,11 @@ export const db = {
   insertUnfinishedAuction: retryWrapper(
     (unfinishedAuction: UnfinishedAuction) =>
       prisma.$transaction([
-        prisma.unfinishedAuction.create({ data: unfinishedAuction }),
+        prisma.unfinishedAuction.upsert({
+          where: { id: unfinishedAuction.id },
+          update: unfinishedAuction,
+          create: unfinishedAuction,
+        }),
         prisma.lastHistoryScrapedId.deleteMany(),
         prisma.lastHistoryScrapedId.create({
           data: { lastScrapedId: unfinishedAuction.id },
