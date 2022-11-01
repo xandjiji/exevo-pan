@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import { broadcast } from 'logging'
 import * as DICTIONARIES from 'data-dictionary/dist/dictionaries'
+import { PartialCharacterObject } from 'Data/History/types'
 
 const FILE_PATH = '../exevo-pan/public/sprites'
 

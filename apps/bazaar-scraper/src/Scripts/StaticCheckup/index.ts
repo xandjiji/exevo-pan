@@ -1,5 +1,6 @@
 import { broadcast } from 'logging'
-import { Static, History } from 'Data'
+import { Static } from 'Data'
+import History from 'Data/History'
 
 const main = async (): Promise<void> => {
   const staticData = new Static()
