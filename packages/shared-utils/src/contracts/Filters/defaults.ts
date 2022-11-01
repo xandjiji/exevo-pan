@@ -10,7 +10,7 @@ export const DEFAULT_SORT_OPTIONS = {
   } as SortOptions,
   history: {
     sortingMode: 0,
-    descendingOrder: false,
+    descendingOrder: true,
   } as SortOptions,
 }
 
