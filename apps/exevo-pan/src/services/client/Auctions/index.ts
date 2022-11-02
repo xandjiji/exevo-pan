@@ -3,7 +3,6 @@ import { DEFAULT_SORT_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaul
 import { serializeUrlParams } from 'hooks/useUrlParamsState/utils'
 import { schema as filtersSchema } from 'modules/BazaarAuctions/contexts/useFilters/schema'
 import { schema as auctionsSchema } from 'modules/BazaarAuctions/contexts/useAuctions/schema'
-import { filterActiveHighlights } from './utils'
 import { FetchAuctionPageArgs, FetchAuctionByIdParameters } from './types'
 
 export default class AuctionsClient {

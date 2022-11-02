@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { SpritePortrait, Text, ActiveCount } from 'components/Atoms'
+import { SpritePortrait, Text } from 'components/Atoms'
 import { TopCosmeticsProps, CosmeticEntry } from './types'
 
 const topOutfits: CosmeticEntry[] = [

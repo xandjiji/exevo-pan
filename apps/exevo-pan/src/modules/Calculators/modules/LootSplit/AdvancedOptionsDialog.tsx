@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, NumericInput, Button, Checkbox } from 'components/Atoms'
 import { Group } from '../../components'
-import { Receipt, ExtraExpenses } from './types'
+import { ExtraExpenses } from './types'
 
 type AdvancedOptionsDialogProps = {
   players: string[]
