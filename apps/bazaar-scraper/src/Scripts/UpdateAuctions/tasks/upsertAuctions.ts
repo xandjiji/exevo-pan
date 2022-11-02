@@ -66,7 +66,7 @@ export const upsertAuctions = async (
         taskTracking.incTask()
 
         const newAuctionHtml = await fetchAuctionPage(id)
-        const { serverName, server, ...characterData } =
+        const { serverName, server, rareItems, ...characterData } =
           await helper.characterObject(newAuctionHtml)
 
         await prisma.currentAuction.create({
