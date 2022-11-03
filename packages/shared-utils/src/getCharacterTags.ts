@@ -1,5 +1,5 @@
 import { dictionary } from 'data-dictionary/dist/dictionaries/characterTags'
-import { vocation } from './vocations'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26
@@ -70,7 +70,7 @@ export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
   }
 
   if (
-    vocation.getName(character.vocationId) === 'Knight' &&
+    vocation.getVocationName(character.vocationId) === 'Knight' &&
     knightSkills.filter((skill) => character.skills[skill] >= HIGH_SKILL_VALUE)
       .length >= 2
   ) {

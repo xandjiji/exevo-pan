@@ -5,7 +5,7 @@ import { formatNumberWithCommas } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
-import { vocation } from 'shared-utils/dist/vocations'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { routes } from 'Constants'
 import CharacterCard, { BOSS_SLOT_POINTS } from '..'
 
@@ -20,10 +20,10 @@ describe('<CharacterCard />', () => {
 
     expect(
       screen.getByText(
-        `Level ${character.level} - ${vocation.getFullName(
-          character.vocationId,
-          character.level,
-        )}`,
+        `Level ${character.level} - ${vocation.getPromotedName({
+          vocationId: character.vocationId,
+          level: character.level,
+        })}`,
       ),
     ).toBeInTheDocument()
 

@@ -9,7 +9,7 @@ import {
   imbuement as imbuementDictionary,
   rareAchievement as achievementDictionary,
 } from 'data-dictionary/dist/dictionaries'
-import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
+import { vocation as vocationHelper } from 'data-dictionary/dist/dictionaries/vocations'
 import { filterListTable, stringToNumber } from '../utils'
 import {
   getPagedData,

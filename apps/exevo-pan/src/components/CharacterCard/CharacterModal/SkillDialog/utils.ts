@@ -1,4 +1,4 @@
-import { vocation } from 'shared-utils/dist/vocations'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import {
   getHighestSkill,
   SKILL_CONSTANTS,
@@ -23,7 +23,7 @@ export const getInitialSkill = (skills: CharacterSkillsObject): Skill => {
 }
 
 export const getVocationName = (vocationId: number) =>
-  vocation.getName(vocationId).toLowerCase() as Vocation
+  vocation.getVocationName(vocationId).toLowerCase() as Vocation
 
 export const getSkillType = (skill: Skill): SkillType =>
   ['magic', 'distance'].includes(skill) ? (skill as 'magic') : 'melee'

@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { vocation } from 'shared-utils/dist/vocations'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import Arrow from 'assets/svgs/chevronRight.svg'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { useForm } from '../../../contexts/Form'
@@ -34,7 +34,7 @@ const AuctionItem = ({
         characterData={{
           level,
           name: nickname,
-          vocation: vocation.getFullName(vocationId, level),
+          vocation: vocation.getPromotedName({ vocationId, level }),
           world: '',
         }}
       />
