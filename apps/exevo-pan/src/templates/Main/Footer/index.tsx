@@ -10,10 +10,11 @@ import { links, routes } from 'Constants'
 const listItems = [
   { href: routes.HOME, content: 'currentAuctions' },
   { href: routes.BAZAAR_HISTORY, content: 'bazaarHistory' },
+  { href: routes.BOSS_TRACKER, content: 'bossTracker' },
+  { href: routes.CALCULATORS, content: 'calculators' },
   { href: routes.STATISTICS, content: 'statistics' },
   { href: routes.ADVERTISE, content: 'advertise' },
   { href: routes.BLOG, content: 'blog' },
-  { href: routes.ABOUT, content: 'about' },
 ]
 
 const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
