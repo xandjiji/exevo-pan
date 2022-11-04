@@ -1,6 +1,6 @@
 import cheerio, { Element } from 'cheerio/lib/index'
 import { exitIfMaintenance } from 'utils'
-import { buildServerLocation, buildPvpType } from './utils'
+import { parse } from './utils'
 
 export default class ServerList {
   maintenanceCheck(content: string): boolean {
@@ -15,12 +15,12 @@ export default class ServerList {
 
   location(element: Element): ServerLocation {
     const locationText = cheerio('td:nth-child(3)', element).text()
-    return buildServerLocation(locationText)
+    return parse.serverLocation(locationText)
   }
 
   pvpType(element: Element): PvpType {
     const pvpTypeText = cheerio('td:nth-child(4)', element).text()
-    return buildPvpType(pvpTypeText)
+    return parse.pvpType(pvpTypeText)
   }
 
   battleye(element: Element): boolean {
