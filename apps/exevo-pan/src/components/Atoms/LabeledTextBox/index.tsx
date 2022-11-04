@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useUuid } from 'hooks'
-import InfoIcon from 'assets/svgs/info.svg'
+import { InfoIcon } from 'assets/svgs'
 import { LabeledTextBoxProps } from './types'
 
 const LabeledTextBox = ({

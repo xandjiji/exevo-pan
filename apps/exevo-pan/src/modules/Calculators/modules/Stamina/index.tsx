@@ -4,8 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { TimeInput, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { ClientComponent } from 'components/Organisms'
-import ChevronRight from 'assets/svgs/chevronRight.svg'
-import AddIcon from 'assets/svgs/addPost.svg'
+import { ChevronRightIcon, AddPostIcon } from 'assets/svgs'
 import { blurOnEnter } from 'utils'
 import useTime from './useTime'
 import TimeLeft from './TimeLeft'
@@ -54,7 +53,7 @@ const Stamina = () => {
             className="child:w-full child:whitespace-nowrap w-full"
             noAlert
           />
-          <ChevronRight
+          <ChevronRightIcon
             className={clsx(
               'mb-1.5 shrink-0',
               invalid ? 'fill-red' : 'fill-onSurface',
@@ -88,7 +87,7 @@ const Stamina = () => {
           }
           disabled={disableTrack}
         >
-          <AddIcon className="-ml-1 h-4 w-4" /> {calculators.Stamina.track}
+          <AddPostIcon className="-ml-1 h-4 w-4" /> {calculators.Stamina.track}
         </Button>
       </LabeledCard>
 

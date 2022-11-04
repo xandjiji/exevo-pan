@@ -17,10 +17,7 @@ import {
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas } from 'utils'
-import MoreInfoIcon from 'assets/svgs/moreInfo.svg'
-import OutfitIcon from 'assets/svgs/outfit.svg'
-import MountIcon from 'assets/svgs/horse.svg'
-import StoreIcon from 'assets/svgs/inbox.svg'
+import { MoreInfoIcon, OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
 import SpriteBox from './SpriteBox'
 import SkillDialog from './SkillDialog'
 import { checkStore, tabCounter } from './utils'
@@ -263,7 +260,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <MountIcon />
+                      <HorseIcon />
                       Mounts {tabCounter(mounts.length, storeMounts.length)}
                     </>
                   }
@@ -306,7 +303,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <StoreIcon />
+                      <InboxIcon />
                       Store Items ({storeItems.length})
                     </>
                   }

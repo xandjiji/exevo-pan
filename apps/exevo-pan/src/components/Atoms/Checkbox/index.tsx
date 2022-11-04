@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import clsx from 'clsx'
 import { useState, useCallback } from 'react'
-import TickIcon from 'assets/svgs/check.svg'
+import { CheckIcon } from 'assets/svgs'
 import { CheckboxProps } from './types'
 
 const Checkbox = ({
@@ -54,7 +54,7 @@ const Checkbox = ({
           onChange={handleChange}
           {...props}
         />
-        <TickIcon
+        <CheckIcon
           className={clsx(
             'absolute top-1/2 left-1/2 h-3.5 w-3.5',
             checked ? 'fill-onPrimary' : 'fill-transparent',

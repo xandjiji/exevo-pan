@@ -1,60 +1,56 @@
 import { routes } from 'Constants'
-import Market from 'assets/svgs/market.svg'
-import History from 'assets/svgs/history.svg'
-import Calculators from 'assets/svgs/calculator.svg'
-import Statistics from 'assets/svgs/statistics.svg'
-import Advertise from 'assets/svgs/advertise.svg'
-/* import WarIconSvg from 'assets/svgs/war.svg' */
-import Blog from 'assets/svgs/blog.svg'
-import About from 'assets/svgs/about.svg'
-import Boss from 'assets/svgs/goblin.svg'
+import {
+  MarketIcon,
+  HistoryIcon,
+  CalculatorIcon,
+  StatisticsIcon,
+  AdvertiseIcon,
+  BlogIcon,
+  AboutIcon,
+  GoblinIcon,
+} from 'assets/svgs'
 import { NavItem } from './types'
 
 export const NavItems: NavItem[] = [
   {
     href: routes.HOME,
     exact: true,
-    icon: <Market />,
+    icon: <MarketIcon />,
     title: 'currentAuctions',
   },
   {
     href: routes.BAZAAR_HISTORY,
-    icon: <History />,
+    icon: <HistoryIcon />,
     title: 'bazaarHistory',
   },
   {
     href: routes.BOSS_TRACKER,
-    icon: <Boss />,
+    icon: <GoblinIcon />,
     title: 'bossTracker',
   },
   {
     href: routes.CALCULATORS,
-    icon: <Calculators />,
+    icon: <CalculatorIcon />,
     title: 'calculators',
   },
   {
     href: routes.STATISTICS,
-    icon: <Statistics />,
+    icon: <StatisticsIcon />,
     title: 'statistics',
   },
-  /* {
-      href: routes.LIBERTABRA_WAR,
-      icon: <S.WarIcon />,
-      title: 'Libertabra War',
-    }, */
   {
     href: routes.ADVERTISE,
-    icon: <Advertise />,
+    icon: <AdvertiseIcon />,
     title: 'advertise',
   },
   {
     href: routes.BLOG,
-    icon: <Blog />,
+    icon: <BlogIcon />,
     title: 'blog',
   },
   {
     href: routes.ABOUT,
-    icon: <About />,
+    icon: <AboutIcon />,
     title: 'about',
   },
 ]

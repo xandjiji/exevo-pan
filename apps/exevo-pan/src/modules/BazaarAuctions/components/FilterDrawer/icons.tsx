@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import Image from 'next/image'
-import ResetIcon from 'assets/svgs/reset.svg'
+import { ResetIcon } from 'assets/svgs'
 import rookSrc from 'assets/rook.png'
 import knightSrc from 'assets/knight.png'
 import paladinSrc from 'assets/paladin.png'

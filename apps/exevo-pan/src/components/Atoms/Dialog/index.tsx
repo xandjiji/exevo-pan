@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import FocusLock from 'react-focus-lock'
 import { useEscToClose, useLockBody } from 'hooks'
-import CloseIcon from 'assets/svgs/cross.svg'
+import { CrossIcon } from 'assets/svgs'
 import { DialogProps } from './types'
 
 const Dialog = ({
@@ -68,7 +68,7 @@ const Dialog = ({
                     aria-label={common.Dialog.close}
                     onClick={onClose}
                   >
-                    <CloseIcon className="fill-onSurface" />
+                    <CrossIcon className="fill-onSurface" />
                   </button>
                 )}
               </div>

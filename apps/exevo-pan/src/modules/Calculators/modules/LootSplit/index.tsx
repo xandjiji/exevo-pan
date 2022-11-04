@@ -6,10 +6,12 @@ import { Tabs, TextArea, Text, Button, CopyButton } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
 import clipboardSrc from 'assets/clipboard.png'
-import AddIcon from 'assets/svgs/addPost.svg'
-import DataIcon from 'assets/svgs/receipt.svg'
-import RemoveIcon from 'assets/svgs/trash.svg'
-import ChevronRight from 'assets/svgs/chevronRight.svg'
+import {
+  AddPostIcon,
+  ReceiptIcon,
+  TrashIcon,
+  ChevronRightIcon,
+} from 'assets/svgs'
 import { LabeledCard, Group, Chip, ChipWrapper } from '../../components'
 import AdvancedOptionsDialog from './AdvancedOptionsDialog'
 import SessionDialog from './SessionDialog'
@@ -138,7 +140,7 @@ const LootSplit = () => {
                   style={{ borderBottomWidth: 1 }}
                 >
                   {displayTimestamp(item.timestamp)}
-                  <ChevronRight
+                  <ChevronRightIcon
                     className={clsx(
                       'fill-onSurface relative left-0 transition-all group-hover:left-1',
                       isSelected ? 'left-1' : 'left-0',
@@ -226,7 +228,7 @@ const LootSplit = () => {
                 pill
                 hollow
               >
-                <RemoveIcon className="-ml-1 h-4 w-4" />
+                <TrashIcon className="-ml-1 h-4 w-4" />
                 {calculators.LootSplit.actions.delete}
               </Button>
               <Button
@@ -235,7 +237,7 @@ const LootSplit = () => {
                 pill
                 disabled={isInvalid}
               >
-                <DataIcon className={clsx('-ml-1 h-4 w-4')} />
+                <ReceiptIcon className={clsx('-ml-1 h-4 w-4')} />
                 {calculators.LootSplit.actions.data}
               </Button>
             </>
@@ -250,7 +252,7 @@ const LootSplit = () => {
               pill
               disabled={isInvalid}
             >
-              <AddIcon className={clsx('-ml-1 h-4 w-4')} />
+              <AddPostIcon className={clsx('-ml-1 h-4 w-4')} />
               {calculators.LootSplit.actions.save}
             </Button>
           )}

@@ -3,8 +3,7 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import UnlicenseIcon from 'assets/svgs/unlicense.svg'
-import GithubIcon from 'assets/svgs/github.svg'
+import { UnlicenseIcon, GithubIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 
 const listItems = [
