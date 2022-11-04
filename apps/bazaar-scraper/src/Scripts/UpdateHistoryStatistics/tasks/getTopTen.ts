@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
+import { tabBroadcast, coloredText } from 'logging'
 
 const top10Extractor = (
   auctions: PartialCharacterObject[],
@@ -28,7 +29,7 @@ const top10Extractor = (
   return top10
 }
 
-export const by = {
+const unproxiedBy = {
   bid: (auctions: PartialCharacterObject[]) =>
     top10Extractor(auctions, ({ currentBid }) => currentBid),
   level: (auctions: PartialCharacterObject[]) =>
@@ -50,3 +51,14 @@ export const by = {
   shielding: (auctions: PartialCharacterObject[]) =>
     top10Extractor(auctions, ({ skills: { shielding } }) => shielding),
 }
+
+export const by = new Proxy(unproxiedBy, {
+  get: (obj: typeof unproxiedBy, key: keyof typeof obj) => {
+    tabBroadcast(
+      `Generating top 10 by ${coloredText(key, 'highlight')}`,
+      'neutral',
+    )
+
+    return obj[key]
+  },
+})

@@ -1,3 +1,5 @@
+import { broadcast } from 'logging'
+
 const vocationIdToKey = {
   0: 'rooker',
   1: 'knight',
@@ -15,6 +17,8 @@ const fixedPercentage = (value: number): number =>
 export const calculateVocationDistribution = (
   history: PartialCharacterObject[],
 ): DistributionData => {
+  broadcast('Calculating vocation distributions...', 'neutral')
+
   const totalCount = history.length
 
   if (totalCount === 0) {
