@@ -12,7 +12,7 @@ import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
 import { endpoints, routes, jsonld, urlParameters } from 'Constants'
 import { common, homepage } from 'locales'
 
@@ -112,9 +112,7 @@ export default function Home({
               <AuctionsGrid
                 past={false}
                 permalinkResolver={(auctionId) =>
-                  `${buildUrl('', locale)}?${
-                    urlParameters.AUCTION_ID
-                  }=${auctionId}`
+                  permalinkResolver.current({ auctionId, locale })
                 }
               />
             </AuctionsProvider>
