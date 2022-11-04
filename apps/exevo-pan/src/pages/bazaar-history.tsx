@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
+import { DEFAULT_SORT_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import {
   DrawerFieldsProvider,
   FiltersProvider,
@@ -13,7 +14,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
-import { routes, endpoints, jsonld, urlParameters } from 'Constants'
+import { routes, endpoints, jsonld } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -122,14 +123,12 @@ export default function BazaarHistory({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const sortOptions = { sortingMode: 0, descendingOrder: true }
-
   const [serverOptions, rareItemData, initialAuctionData, localizedBlogPosts] =
     await Promise.all([
       DrawerFieldsClient.fetchServerOptions(),
       DrawerFieldsClient.fetchAuctionedItemOptions(),
       AuctionsClient.fetchAuctionPage({
-        sortOptions,
+        sortOptions: DEFAULT_SORT_OPTIONS.history,
         endpoint: endpoints.HISTORY_AUCTIONS,
       }),
       await BlogClient.getEveryPostLocale({ pageSize: 3 }),

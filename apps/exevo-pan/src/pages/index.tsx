@@ -13,7 +13,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
-import { endpoints, routes, jsonld, urlParameters } from 'Constants'
+import { endpoints, routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)

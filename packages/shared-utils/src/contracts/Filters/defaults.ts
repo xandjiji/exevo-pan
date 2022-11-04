@@ -3,9 +3,15 @@ export const DEFAULT_PAGINATION_OPTIONS: PaginationOptions = {
   pageSize: 10,
 }
 
-export const DEFAULT_SORT_OPTIONS: SortOptions = {
-  sortingMode: 0,
-  descendingOrder: false,
+export const DEFAULT_SORT_OPTIONS = {
+  current: {
+    sortingMode: 0,
+    descendingOrder: false,
+  } as SortOptions,
+  history: {
+    sortingMode: 0,
+    descendingOrder: true,
+  } as SortOptions,
 }
 
 export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
