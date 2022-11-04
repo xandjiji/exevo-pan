@@ -12,7 +12,7 @@ const DEBOUNCE_DELAY = 250
 
 const ServerNavigation = ({
   currentServer,
-  activeServers,
+  serverOptions,
 }: ServerNavigationProps) => {
   const {
     translations: { common, bosses },
@@ -52,10 +52,7 @@ const ServerNavigation = ({
       {isLoading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       <Select
         label={bosses.ServerNavigation.label}
-        options={activeServers.map((server) => ({
-          name: server,
-          value: server,
-        }))}
+        options={serverOptions}
         defaultValue={currentServer}
         onChange={debouncedNav}
         noAlert

@@ -9,7 +9,7 @@ import { routes, jsonld } from 'Constants'
 import { common, bosses } from 'locales'
 
 type BossTrackerProps = {
-  activeServers: string[]
+  serverOptions: Option[]
   bossChances: BossChances
   recentlyAppeared: BossStats[]
 }
@@ -79,14 +79,14 @@ export default function BossTrackerPage(args: BossTrackerProps) {
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { server } = params as { server: string }
 
-  const [activeServers, bossChances] = await Promise.all([
-    await DrawerFieldsClient.fetchActiveServers(),
+  const [serverOptions, bossChances] = await Promise.all([
+    await DrawerFieldsClient.fetchActiveServerOptions(),
     await BossesClient.fetchServerBossChances(server),
   ])
 
   return {
     props: {
-      activeServers,
+      serverOptions,
       bossChances: {
         ...bossChances,
         bosses: [...bossChances.bosses].sort(sortBossesBy.chance),
@@ -109,7 +109,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const activeServers = await DrawerFieldsClient.fetchActiveServers()
+  const activeServerOptions =
+    await DrawerFieldsClient.fetchActiveServerOptions()
+
+  const activeServers = activeServerOptions.map(({ name }) => name)
 
   const paths =
     locales
