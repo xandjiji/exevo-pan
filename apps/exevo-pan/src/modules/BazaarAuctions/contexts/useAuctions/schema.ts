@@ -4,8 +4,6 @@ import {
 } from 'shared-utils/dist/contracts/Filters/defaults'
 import { AuctionsContextValues } from './types'
 
-export { buildSchema } from 'shared-utils/dist/contracts/Filters/schemas/sortUrl'
-
 export const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
   highlightedAuctions: [],

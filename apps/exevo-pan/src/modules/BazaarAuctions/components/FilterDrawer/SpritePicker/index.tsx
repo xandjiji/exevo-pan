@@ -17,7 +17,7 @@ const SpritePicker = ({
     translations: { homepage },
   } = useTranslations()
 
-  const { filterState, updateFilters } = useFilters()
+  const { filterState, toggleFilterSet } = useFilters()
 
   const selectedCount = (filterState[filterKey] as Set<string>).size
 
@@ -54,7 +54,7 @@ const SpritePicker = ({
               role="switch"
               title={name}
               aria-checked={isChecked}
-              onClick={() => updateFilters(filterKey, name)}
+              onClick={() => toggleFilterSet({ key: filterKey, value: name })}
               className={clsx(
                 'clickable relative h-14 w-14 select-none rounded-md p-2 transition-colors',
                 isChecked ? 'bg-primaryHighlight' : 'bg-primaryVariant',

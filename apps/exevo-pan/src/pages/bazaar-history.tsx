@@ -101,6 +101,7 @@ export default function BazaarHistory({
         >
           <FiltersProvider>
             <AuctionsProvider
+              history
               endpoint={endpoints.HISTORY_AUCTIONS}
               highlightedAuctions={[]}
               initialPage={page}

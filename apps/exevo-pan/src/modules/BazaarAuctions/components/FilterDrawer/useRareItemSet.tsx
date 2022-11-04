@@ -1,15 +1,16 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
+import {} from '../../contexts/useFilters/types'
 
 type UseRareItemSet = {
   rareItemData: RareItemData
-  dispatch: (key: keyof FilterOptions, value: any) => void
+  setFilters: (newValues: Partial<FilterOptions>) => void
   currentFilterSet: Set<number>
 }
 
 const useRareItemSet = ({
   rareItemData,
   currentFilterSet,
-  dispatch,
+  setFilters,
 }: UseRareItemSet) => {
   const [selectedItemData, setSelectedItemData] = useState<RareItemData>({})
 
@@ -24,14 +25,13 @@ const useRareItemSet = ({
           const nextState =
             newState instanceof Function ? newState(prev) : newState
 
-          dispatch(
-            'auctionIds',
-            new Set<number>(Object.values(nextState).flat()),
-          )
+          setFilters({
+            auctionIds: new Set<number>(Object.values(nextState).flat()),
+          })
           return nextState
         })
       },
-      [dispatch],
+      [setFilters],
     )
 
   const itemList: Option[] = useMemo(() => {

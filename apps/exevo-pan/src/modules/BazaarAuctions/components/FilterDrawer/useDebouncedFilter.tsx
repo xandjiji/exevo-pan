@@ -1,20 +1,29 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
 import { debounce } from 'utils'
 import { useFilters } from '../../contexts/useFilters'
+import { ExtractFilterByType } from '../../contexts/useFilters/types'
 
 const DEBOUNCE_DELAY = 250
 
-function useDebouncedFilter<T>(
-  key: keyof FilterOptions,
-  controlledValue: T,
-): [value: T, setValue: (newValue: T) => void] {
-  const { updateFilters } = useFilters()
+export type UseDebouncedFilterArgs<Type> = {
+  key: ExtractFilterByType<Type>
+  controlledValue: Type
+}
+
+function useDebouncedFilter<T>({
+  key,
+  controlledValue,
+}: UseDebouncedFilterArgs<T>): [value: T, setValue: (newValue: T) => void] {
+  const { setFilters } = useFilters()
   const [value, setValue] = useState<T>(controlledValue)
 
   const debouncedUpdateFilter = useMemo(
     () =>
-      debounce((newValue: T) => updateFilters(key, newValue), DEBOUNCE_DELAY),
-    [key, updateFilters],
+      debounce(
+        (newValue: T) => setFilters({ [key]: newValue }),
+        DEBOUNCE_DELAY,
+      ),
+    [key, setFilters],
   )
 
   const setValueAndDispatch = useCallback(
