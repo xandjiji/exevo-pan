@@ -1,20 +1,29 @@
-export const buildSchema = (
-  orderByDefault: number,
-  descendingDefault: boolean,
-) => [
-  {
-    key: 'currentPage',
-    defaultValue: 1,
-    decode: (value: string) => Number(decodeURIComponent(value)),
+import { SchemaCodec, codecs, buildFromSchema } from '../../../urlSerializer'
+import { DEFAULT_SORT_OPTIONS } from '../defaults'
+
+type AuctionMode = keyof typeof DEFAULT_SORT_OPTIONS
+
+export const sortSchema = (
+  auctionMode: AuctionMode,
+): SchemaCodec<SortOptions> => ({
+  sortingMode: {
+    urlKey: 'orderBy',
+    defaultValue: DEFAULT_SORT_OPTIONS[auctionMode].sortingMode,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'orderBy',
-    defaultValue: orderByDefault,
-    decode: (value: string) => Number(decodeURIComponent(value)),
+  descendingOrder: {
+    urlKey: 'descending',
+    defaultValue: DEFAULT_SORT_OPTIONS[auctionMode].descendingOrder,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'descending',
-    defaultValue: descendingDefault,
-    decode: (value: string) => decodeURIComponent(value) === 'true',
-  },
-]
+})
+
+export const serializeSort = {
+  history: buildFromSchema.serializer(sortSchema('history')),
+  current: buildFromSchema.serializer(sortSchema('current')),
+}
+
+export const deserializeSort = {
+  history: buildFromSchema.deserializer(sortSchema('history')),
+  current: buildFromSchema.deserializer(sortSchema('current')),
+}
