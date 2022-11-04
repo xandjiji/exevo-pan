@@ -1,7 +1,7 @@
 /* eslint-disable no-shadow */
-export interface ListProps extends React.HTMLAttributes<HTMLDivElement> {
+export type ListProps = {
   title: string
-  charactersList: CharacterInfo[]
-  displayedDataKey: keyof CharacterInfoKey
-  format?: (value: number) => string | ((value: string) => string)
-}
+  charactersList: CharacterObject[]
+  pickFromCharacter: (character: CharacterObject) => number
+  formatCharacterValue?: (value: number) => string
+} & React.HTMLAttributes<HTMLDivElement>
