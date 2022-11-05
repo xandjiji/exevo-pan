@@ -23,6 +23,7 @@
   "devDependencies": {
     "@types/aws-lambda": "^8.10.79",
     "@types/exevo-pan": "*",
+    "@types/node": "^18.11.9",
     "config": "*",
     "serverless-domain-manager": "^6.0.2",
     "serverless-offline": "^8.5.0",

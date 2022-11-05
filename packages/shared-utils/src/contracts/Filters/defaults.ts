@@ -53,23 +53,3 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   transferAvailable: false,
   biddedOnly: false,
 }
-
-export const DEFAULT_SERIALIZED_FILTER_OPTIONS: SerializedFilterOptions = {
-  ...DEFAULT_FILTER_OPTIONS,
-  auctionIds: [],
-  vocation: [],
-  pvp: [],
-  battleye: [],
-  location: [],
-  serverSet: [],
-  tags: [],
-  skillKey: [],
-  imbuementsSet: [],
-  charmsSet: [],
-  questSet: [],
-  outfitSet: [],
-  mountSet: [],
-  achievementSet: [],
-  storeOutfitSet: [],
-  storeMountSet: [],
-}

@@ -14,7 +14,7 @@ functions:
     events:
       - http:
           path: /
-          method: post
+          method: get
           cors: true
 
 plugins:

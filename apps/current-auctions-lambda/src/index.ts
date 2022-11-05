@@ -1,13 +1,19 @@
 import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import { URLSearchParams } from 'url'
 import { filterCharacters, applySort, paginateData } from 'auction-queries'
-import { deserializeBody } from 'shared-utils/dist/contracts/Filters/utils'
+import {
+  deserializeFilter,
+  deserializePagination,
+  deserializeSort,
+} from 'shared-utils/dist/contracts/Filters/schemas'
 import { auctions } from './Data/auctions'
 import { filterOldAuctions } from './utils'
 
-export const filterCurrentAuctions = async (
-  event: APIGatewayProxyEvent,
-): Promise<APIGatewayProxyResult> => {
-  if (!event.body) {
+export const filterCurrentAuctions = async ({
+  httpMethod,
+  queryStringParameters,
+}: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  if (httpMethod !== 'GET') {
     return {
       statusCode: 400,
       headers: {
@@ -22,9 +28,13 @@ export const filterCurrentAuctions = async (
 
   const currentAuctions = filterOldAuctions(auctions)
 
-  const serializedBody: SerializedFilterBody = JSON.parse(event.body as string)
-  const { filterOptions, sortOptions, paginationOptions } =
-    deserializeBody(serializedBody)
+  const currentParams = new URLSearchParams(
+    (queryStringParameters as Record<string, string> | null) ?? {},
+  )
+
+  const filterOptions = deserializeFilter({ currentParams })
+  const sortOptions = deserializeSort.current({ currentParams })
+  const paginationOptions = deserializePagination({ currentParams })
 
   const filteredAuctions = filterCharacters({
     auctions: currentAuctions,

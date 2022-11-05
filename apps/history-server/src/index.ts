@@ -1,6 +1,10 @@
 import express from 'express'
 import cors from 'cors'
-import { deserializeBody } from 'shared-utils/dist/contracts/Filters/utils'
+import {
+  deserializeFilter,
+  deserializePagination,
+  deserializeSort,
+} from 'shared-utils/dist/contracts/Filters/schemas'
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
@@ -16,10 +20,13 @@ const main = async () => {
   app.use(cors())
   app.use(express.json())
 
-  app.post('/', async (request, response) => {
-    const { paginationOptions, sortOptions, filterOptions } = deserializeBody(
-      request.body,
-    )
+  app.get('/', async ({ url }, response) => {
+    const [, searchParams] = (url ?? '').split('?')
+    const currentParams = new URLSearchParams(searchParams)
+
+    const filterOptions = deserializeFilter({ currentParams })
+    const sortOptions = deserializeSort.history({ currentParams })
+    const paginationOptions = deserializePagination({ currentParams })
 
     const sortedAuctions = applySort(auctions, sortOptions)
 
@@ -35,7 +42,7 @@ const main = async () => {
       ...sortOptions,
     }
 
-    broadcast('Server hit', 'success')
+    broadcast(url, 'success')
     response.json(responseBody)
   })
 
