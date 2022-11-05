@@ -7,6 +7,8 @@ export const endpoints = {
   BACKOFFICE_API: process.env.NEXT_PUBLIC_BACKOFFICE_ENDPOINT as string,
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
+  AUCTIONS_ROUTE: '/api/auctions',
+  AUCTION_ROUTE: '/api/auction',
   MAIL_CHECKOUT: '/api/mail-checkout',
   NEWSLETTER: '/api/mailchimp',
   ERROR_REPORT: '/api/error-report',
