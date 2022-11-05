@@ -7,11 +7,9 @@ import {
   useEffect,
 } from 'react'
 import { useIsMounted } from 'hooks'
-import { AuctionsClient } from 'services'
-import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { endpoints } from 'Constants'
+import { AuctionsClient } from 'services/client'
 import AuctionsReducer from './reducer'
-import { DEFAULT_STATE, PAGE_SIZE } from './schema'
+import { DEFAULT_STATE } from './schema'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
@@ -40,15 +38,9 @@ export const AuctionsProvider = ({
 
       const nicknameChanged = previousNickname.current !== newNickname
       const data = await AuctionsClient.fetchAuctionPage({
-        paginationOptions: {
-          pageIndex: nicknameChanged ? 0 : newPageIndex,
-          pageSize: PAGE_SIZE,
-        },
-        filterOptions: {
-          ...DEFAULT_FILTER_OPTIONS,
-          nicknameFilter: newNickname,
-        },
-        endpoint: endpoints.CURRENT_AUCTIONS,
+        paginationOptions: { pageIndex: nicknameChanged ? 0 : newPageIndex },
+        filterOptions: { nicknameFilter: newNickname },
+        history: false,
       })
 
       previousNickname.current = newNickname

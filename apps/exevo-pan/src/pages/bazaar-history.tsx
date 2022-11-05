@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { DEFAULT_SORT_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import {
   DrawerFieldsProvider,
   FiltersProvider,
@@ -94,7 +93,7 @@ export default function BazaarHistory({
       </Head>
 
       <Main>
-        <UrlAuction endpoint={endpoints.HISTORY_AUCTIONS} past />
+        <UrlAuction />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
@@ -103,7 +102,6 @@ export default function BazaarHistory({
           <FiltersProvider>
             <AuctionsProvider
               history
-              endpoint={endpoints.HISTORY_AUCTIONS}
               highlightedAuctions={[]}
               initialPage={page}
               initialPageData={pageData}

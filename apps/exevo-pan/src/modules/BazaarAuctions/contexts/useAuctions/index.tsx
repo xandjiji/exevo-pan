@@ -11,7 +11,7 @@ import { sortSchema } from 'shared-utils/dist/contracts/Filters/schemas/sortUrl'
 import { paginationSchema } from 'shared-utils/dist/contracts/Filters/schemas/paginationUrl'
 import { useTranslations } from 'contexts/useTranslation'
 import { useUrlParamsState, useIsMounted } from 'hooks'
-import { AuctionsClient } from 'services'
+import { AuctionsClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
 import AuctionsReducer from './reducer'
 import { useFilters } from '../useFilters'
@@ -22,7 +22,6 @@ const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
 export const AuctionsProvider = ({
   history = false,
-  endpoint,
   highlightedAuctions,
   initialPage,
   initialPageData,
@@ -85,7 +84,7 @@ export const AuctionsProvider = ({
         paginationOptions,
         sortOptions,
         filterOptions,
-        endpoint,
+        history,
       })
 
       const isDefaultGridState =
@@ -100,7 +99,7 @@ export const AuctionsProvider = ({
         shouldDisplayHighlightedAuctions: isDefaultGridState && noFilterApplied,
       })
     },
-    [endpoint],
+    [history],
   )
 
   const isMounted = useIsMounted()

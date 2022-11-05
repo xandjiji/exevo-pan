@@ -95,7 +95,7 @@ export default function Home({
       </Head>
 
       <Main>
-        <UrlAuction endpoint={endpoints.CURRENT_AUCTIONS} />
+        <UrlAuction />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
@@ -103,7 +103,6 @@ export default function Home({
         >
           <FiltersProvider>
             <AuctionsProvider
-              endpoint={endpoints.CURRENT_AUCTIONS}
               highlightedAuctions={highlightedAuctions}
               initialPage={page}
               initialPageData={pageData}

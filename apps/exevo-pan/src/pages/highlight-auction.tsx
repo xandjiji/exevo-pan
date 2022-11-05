@@ -6,7 +6,7 @@ import { AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle } from 'utils'
-import { endpoints, routes, jsonld } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common, advertise } from 'locales'
 
 const pageUrl = buildUrl(routes.ADVERTISE)
