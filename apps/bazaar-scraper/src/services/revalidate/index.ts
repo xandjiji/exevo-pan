@@ -1,4 +1,4 @@
-import { broadcast } from 'logging/dist'
+import { broadcast } from 'logging'
 import fetch from 'node-fetch'
 import { config } from 'dotenv'
 
