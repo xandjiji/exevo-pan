@@ -44,3 +44,6 @@ export const tabCounter = (regular: number, additional = 0): string => {
 
   return `(${regular})`
 }
+
+export const auctionHasEnded = ({ auctionEnd }: CharacterObject) =>
+  auctionEnd * 1000 <= +new Date()

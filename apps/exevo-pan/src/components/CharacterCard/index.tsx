@@ -165,7 +165,6 @@ const CharacterCard = ({
             if (permalink) setAuctionIdUrl(undefined)
             setExpanded(false)
           }}
-          past={past}
           permalink={permalink}
         />
       )}

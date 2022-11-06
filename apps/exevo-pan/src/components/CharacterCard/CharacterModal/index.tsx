@@ -20,7 +20,7 @@ import { formatNumberWithCommas } from 'utils'
 import { MoreInfoIcon, OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
 import SpriteBox from './SpriteBox'
 import SkillDialog from './SkillDialog'
-import { checkStore, tabCounter } from './utils'
+import { checkStore, tabCounter, auctionHasEnded } from './utils'
 import { resolvers } from './resolvers'
 import * as S from './atoms'
 import styles from './styles.module.css'
@@ -37,7 +37,6 @@ import { CharacterModalProps } from './types'
 const CharacterModal = ({
   characterData,
   onClose,
-  past = false,
   permalink,
 }: CharacterModalProps) => {
   const {
@@ -73,6 +72,8 @@ const CharacterModal = ({
   const {
     translations: { common },
   } = useTranslations()
+
+  const [past] = useState(auctionHasEnded(characterData))
 
   const [expandedSkills, setExpandedSkills] = useState(false)
 

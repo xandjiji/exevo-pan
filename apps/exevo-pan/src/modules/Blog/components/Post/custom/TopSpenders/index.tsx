@@ -68,7 +68,6 @@ const TopSpenders = ({
           <CharacterModal
             characterData={expandedCharacter}
             onClose={() => setExpandedCharacter(undefined)}
-            past
           />
         )}
       </Table>

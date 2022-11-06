@@ -37,13 +37,7 @@ const UrlAuction = () => {
   return (
     <>
       {loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
-      {auction && (
-        <CharacterModal
-          characterData={auction}
-          onClose={onClose}
-          past={auction.auctionEnd * 1000 <= +new Date()}
-        />
-      )}
+      {auction && <CharacterModal characterData={auction} onClose={onClose} />}
     </>
   )
 }
