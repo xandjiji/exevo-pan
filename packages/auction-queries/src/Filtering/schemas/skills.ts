@@ -9,7 +9,9 @@ const filterTest: FilterTest = ({ minSkill, maxSkill, skillKey }) => {
   const selectedSkills = [...skillKey]
   return ({ skills }): boolean =>
     selectedSkills.some(
-      (skill) => skills[skill] >= minSkill && skills[skill] <= maxSkill,
+      (skill) =>
+        skills[skill as keyof CharacterSkillsObject] >= minSkill &&
+        skills[skill as keyof CharacterSkillsObject] <= maxSkill,
     )
 }
 
