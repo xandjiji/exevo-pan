@@ -9,6 +9,7 @@ import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
 import { revalidate } from './revalidate'
+import { Timer } from './timer'
 import { exposeLocalhost } from './localtunnel'
 
 const { PORT, STAGING } = process.env
@@ -21,6 +22,7 @@ const main = async () => {
   app.use(express.json())
 
   app.get('/', async ({ url }, response) => {
+    const timer = new Timer()
     const [, searchParams] = (url ?? '').split('?')
     const currentParams = new URLSearchParams(searchParams)
 
@@ -42,7 +44,7 @@ const main = async () => {
       ...sortOptions,
     }
 
-    broadcast(url, 'success')
+    broadcast(`${url} ${timer.elapsedTime()}`, 'success')
     response.json(responseBody)
   })
 
