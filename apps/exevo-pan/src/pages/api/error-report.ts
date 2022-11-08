@@ -13,3 +13,7 @@ export default async (
 
   response.status(200).end()
 }
+
+export const config = {
+  runtime: 'experimental-edge',
+}
