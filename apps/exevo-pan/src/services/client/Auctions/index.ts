@@ -3,7 +3,7 @@ import {
   serializePagination,
   serializeSort,
 } from 'shared-utils/dist/contracts/Filters/schemas'
-import { endpoints } from 'Constants'
+import { links, endpoints } from 'Constants'
 import { FetchAuctionPageArgs, FetchAuctionByIdArgs } from './types'
 
 export default class AuctionsClient {
@@ -17,7 +17,7 @@ export default class AuctionsClient {
     sortOptions,
     history,
   }: FetchAuctionPageArgs): Promise<PaginatedData<CharacterObject>> {
-    const endpoint = new URL(endpoints.AUCTIONS_ROUTE)
+    const endpoint = new URL(`${links.CANONICAL}${endpoints.AUCTIONS_ROUTE}`)
     const currentParams = new URLSearchParams()
 
     serializeFilter({ values: { ...filterOptions }, currentParams })
