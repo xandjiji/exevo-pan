@@ -8,9 +8,6 @@ const ENDPOINT = 'https://exevopan.com/api/revalidate'
 export const revalidate = async () => {
   config()
   const token = process.env.REVALIDATION_AUTH
-  console.log(token)
-  console.log(token)
-  console.log(token)
 
   if (!token) {
     throw new Error(
