@@ -30,14 +30,14 @@ const main = async () => {
     const sortOptions = deserializeSort.history({ currentParams })
     const paginationOptions = deserializePagination({ currentParams })
 
-    const sortedAuctions = applySort(auctions, sortOptions)
-
     const filteredAuctions = filterCharacters({
-      auctions: sortedAuctions,
+      auctions,
       filters: filterOptions,
     })
 
-    const paginatedData = paginateData(filteredAuctions, paginationOptions)
+    const sortedAuctions = applySort(filteredAuctions, sortOptions)
+
+    const paginatedData = paginateData(sortedAuctions, paginationOptions)
 
     const responseBody = {
       ...paginatedData,
