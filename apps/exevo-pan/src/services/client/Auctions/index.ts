@@ -40,7 +40,7 @@ export default class AuctionsClient {
     from = 'any',
   }: FetchAuctionByIdArgs): Promise<CharacterObject | undefined> {
     try {
-      const endpoint = new URL(endpoints.AUCTION_ROUTE)
+      const endpoint = new URL(`${links.CANONICAL}${endpoints.AUCTION_ROUTE}`)
 
       endpoint.searchParams.set('id', id.toString())
       endpoint.searchParams.set('from', from)
