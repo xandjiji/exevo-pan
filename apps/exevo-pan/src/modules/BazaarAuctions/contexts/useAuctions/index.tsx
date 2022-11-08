@@ -33,8 +33,13 @@ export const AuctionsProvider = ({
     translations: { common },
   } = useTranslations()
 
-  const [pagination, setPagination, isPaginationDefault] =
-    useUrlParamsState(paginationSchema)
+  const [pagination, setPagination, isPaginationDefault] = useUrlParamsState({
+    ...paginationSchema,
+    pageIndex: {
+      ...paginationSchema.pageIndex,
+      defaultValue: 1,
+    },
+  })
   const [sorting, setSorting, isSortingDefault] = useUrlParamsState(
     sortSchema(history ? 'history' : 'current'),
   )
