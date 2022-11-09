@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import clsx from 'clsx'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import MethodButton from './MethodButton'
@@ -8,7 +9,7 @@ import styles from './styles.module.css'
 const PaymentMethods = () => {
   const { paymentMethod, dispatch } = useForm()
   return (
-    <div className={styles.wrapper}>
+    <div className={clsx('card overflow-hidden p-0', styles.wrapper)}>
       <MethodButton
         active={paymentMethod === 'TIBIA_COINS'}
         onClick={() =>
