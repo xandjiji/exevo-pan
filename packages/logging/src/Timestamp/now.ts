@@ -1,13 +1,18 @@
-import { coloredText } from '../utils'
+import { coloredText, brackets } from '../utils'
 import { ColorKey } from '../types'
 
-export const now = (color: ColorKey = 'reset'): string => {
-  const timestamp = new Date().toLocaleTimeString('en-US', {
-    hour12: false,
-    hour: 'numeric',
-    minute: 'numeric',
-    second: 'numeric',
-  })
+const separator = coloredText(':', 'control')
 
-  return coloredText(`[${timestamp}]`, color)
+export const now = (color: ColorKey = 'reset'): string => {
+  const splitTimestamp = new Date()
+    .toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: 'numeric',
+      minute: 'numeric',
+      second: 'numeric',
+    })
+    .split(':')
+    .map((time) => coloredText(time, color))
+
+  return brackets(splitTimestamp.join(separator), 'control')
 }

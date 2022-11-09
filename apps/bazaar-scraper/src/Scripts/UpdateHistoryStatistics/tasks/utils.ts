@@ -1,4 +1,4 @@
-import { coloredText } from 'logging'
+import { coloredText, brackets } from 'logging'
 
 const SECOND = 1
 const MINUTE = SECOND * 60
@@ -48,6 +48,4 @@ const toReadableDate = (timestamp: number): string =>
   coloredText(toReadableTimestamp(timestamp), 'highlight')
 
 export const toReadableRange = ([from, to]: TimestampRange): string =>
-  `${coloredText('[', 'system')}from ${toReadableDate(
-    from,
-  )} to ${toReadableDate(to)}${coloredText(']', 'system')}`
+  brackets(`from ${toReadableDate(from)} to ${toReadableDate(to)}`, 'system')

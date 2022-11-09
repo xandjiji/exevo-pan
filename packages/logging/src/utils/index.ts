@@ -1,3 +1,4 @@
+export * from './brackets'
 export * from './calcTimeObject'
 export * from './coloredBackground'
 export * from './coloredDiff'

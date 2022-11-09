@@ -1,4 +1,4 @@
-import { coloredText } from 'logging'
+import { coloredText, brackets } from 'logging'
 
 const timeColor = (ms: number) => {
   if (ms <= 2000) return 'success'
@@ -15,9 +15,6 @@ export class Timer {
 
   elapsedTime = (): string => {
     const ms = +new Date() - this.startTimestamp
-    return `${coloredText('[', 'control')}${coloredText(
-      ms,
-      timeColor(ms),
-    )}ms${coloredText(']', 'control')}`
+    return brackets(`${coloredText(ms, timeColor(ms))}ms`, 'control')
   }
 }
