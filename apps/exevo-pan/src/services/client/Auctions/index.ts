@@ -47,11 +47,13 @@ export default class AuctionsClient {
 
       const response = await fetch(endpoint)
 
-      if (response.status === 404) {
+      if (response.status === 400) {
         throw Error(`Auction id ${id} not found`)
       }
 
-      return response.json()
+      const result = await response.json()
+
+      return result
     } catch {
       return undefined
     }
