@@ -1,4 +1,5 @@
 import { coloredText } from './coloredText'
+import { brackets } from './brackets'
 import { ColorKey } from '../types'
 
 const MAX_WIDTH = 8
@@ -24,5 +25,5 @@ export const progressBar = (
     }
   }
 
-  return `[${coloredText(bars.join(''), color)}]`
+  return brackets(coloredText(bars.join(''), color), 'reset')
 }
