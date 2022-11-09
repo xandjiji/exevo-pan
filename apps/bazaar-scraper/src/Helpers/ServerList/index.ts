@@ -3,10 +3,10 @@ import { exitIfMaintenance } from 'utils'
 import { parse } from './utils'
 
 export default class ServerList {
-  maintenanceCheck(content: string): boolean {
+  private errorCheck(content: string): boolean {
     const $ = cheerio.load(content)
-    const headingElement = $('h1')
-    return headingElement.text() === 'Downtime'
+    const title = $('.Text:contains("Game World Overview")').html()
+    return !title
   }
 
   name(element: Element): string {
@@ -45,7 +45,7 @@ export default class ServerList {
   }
 
   servers(content: string): PartialServerObject[] {
-    exitIfMaintenance(() => this.maintenanceCheck(content))
+    exitIfMaintenance(() => this.errorCheck(content))
 
     const $ = cheerio.load(content)
 
