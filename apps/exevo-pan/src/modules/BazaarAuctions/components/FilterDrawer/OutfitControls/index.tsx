@@ -15,7 +15,7 @@ const OutfitControls = ({ disableAddons = false }: OutfitControlsProps) => {
   return (
     <div className="mt-1.5 mb-2 flex w-full flex-wrap items-center gap-3.5">
       <div
-        onClick={() => setFilters({ sex: filterState.sex })}
+        onClick={() => setFilters({ sex: !filterState.sex })}
         className={clsx(
           'text-tsm mr-4 flex w-full cursor-pointer items-center gap-2',
           styles.switchWrapper,

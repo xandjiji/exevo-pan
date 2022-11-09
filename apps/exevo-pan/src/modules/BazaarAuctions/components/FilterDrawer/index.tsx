@@ -121,7 +121,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <Checkbox
             label={homepage.FilterDrawer.labels.biddedOnly}
             checked={filterState.biddedOnly}
-            onClick={() => setFilters({ biddedOnly: filterState.biddedOnly })}
+            onClick={() => setFilters({ biddedOnly: !filterState.biddedOnly })}
           />
         </FilterGroup>
 
