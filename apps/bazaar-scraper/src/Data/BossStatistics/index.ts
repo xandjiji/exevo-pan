@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import { constTokens as bossDictionary } from 'data-dictionary/dist/dictionaries/bosses'
-import { broadcast, coloredText } from 'logging'
+import { broadcast, tabBroadcast, coloredText } from 'logging'
 import { file } from 'Constants'
 import { sha256, MILLISECONDS_IN_A_DAY } from 'utils'
 
@@ -20,8 +20,10 @@ export default class BossStatisticsData {
     bosses: {},
   }
 
-  private coloredFileName = (name: string) =>
-    coloredText(`${name}.json`, 'highlight')
+  private colored = {
+    server: (name: string) => coloredText(name, 'control'),
+    file: (name: string) => coloredText(`${name}.json`, 'highlight'),
+  }
 
   private normalizeCurrentBossStatistics() {
     /* adding new bosses */
@@ -44,7 +46,7 @@ export default class BossStatisticsData {
   }
 
   async load(serverName: string): Promise<void> {
-    const serverFile = this.coloredFileName(serverName)
+    const serverFile = this.colored.file(serverName)
 
     try {
       this.bossStatistics = JSON.parse(
@@ -87,10 +89,8 @@ export default class BossStatisticsData {
       serverResolver(serverName),
       JSON.stringify(this.bossStatistics),
     )
-    broadcast(
-      `Updated boss statistics and saved to ${this.coloredFileName(
-        serverName,
-      )}`,
+    tabBroadcast(
+      `Updated boss statistics were saved to ${this.colored.file(serverName)}`,
       'success',
     )
   }
@@ -101,8 +101,8 @@ export default class BossStatisticsData {
       file.BOSS_CHANCES.serverResolver(server),
       JSON.stringify(bossChances),
     )
-    broadcast(
-      `Current boss chances were saved to ${this.coloredFileName(server)}`,
+    tabBroadcast(
+      `Current boss chances for ${this.colored.server(server)} were saved`,
       'success',
     )
   }
@@ -125,19 +125,27 @@ export default class BossStatisticsData {
     return trackedBosses
   }
 
+  public isDataFresh(bossKillsData: Record<string, BossKills>): boolean {
+    const newestHash = this.generateHash(bossKillsData)
+    return this.bossStatistics.latest.hash !== newestHash
+  }
+
   public async feedData(
     bossKillsData: Record<string, BossKills>,
   ): Promise<boolean> {
     const serverName = this.bossStatistics.server
 
+    if (!this.isDataFresh(bossKillsData)) {
+      tabBroadcast(
+        `Data for ${this.colored.server(serverName)} still not updated`,
+        'control',
+      )
+      return false
+    }
+
     const newestHash = this.generateHash(bossKillsData)
     const currentTimestamp = +new Date()
     const offsettedTimestamp = +new Date() - MILLISECONDS_IN_A_DAY / 2
-
-    if (this.bossStatistics.latest.hash === newestHash) {
-      broadcast(`Data for ${serverName} still not updated`, 'neutral')
-      return false
-    }
 
     const trackedBossKills = this.normalizeBossKills(bossKillsData)
 

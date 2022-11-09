@@ -2,7 +2,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
-import { coloredText, TrackETA } from 'logging'
+import { broadcast, coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import {
@@ -126,6 +126,8 @@ export const calculateBossChances = async ({
     taskSize,
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
+
+  broadcast('Calculating fresh boss chances...', 'neutral')
 
   const lastUpdated = +new Date()
 
