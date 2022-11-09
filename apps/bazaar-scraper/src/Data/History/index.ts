@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import { broadcast, coloredDiff } from 'logging'
+import { broadcast, coloredText, coloredDiff } from 'logging'
 import { file } from 'Constants'
 import { makeRangeArray } from 'utils'
 import { readJsonl, writeJsonl } from 'shared-utils/dist/jsonl'
@@ -126,6 +126,17 @@ export default class CurrentAuctionsData {
   }
 
   public getUnscrapedIds(newHighestAuctionId: number): number[] {
+    if (newHighestAuctionId <= this.lastScrapedId) {
+      broadcast(
+        `Highest auction id found (${coloredText(
+          newHighestAuctionId,
+          'highlight',
+        )}) was already scraped`,
+        'control',
+      )
+      return []
+    }
+
     return makeRangeArray(this.lastScrapedId + 1, newHighestAuctionId)
   }
 
