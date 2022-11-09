@@ -7,7 +7,7 @@ import {
   useCallback,
 } from 'react'
 import { useRouter } from 'next/router'
-import { ManageDataClient } from 'services'
+import { ManageDataClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
 import { routes } from 'Constants'
 import DatabaseReducer from './DatabaseReducer'

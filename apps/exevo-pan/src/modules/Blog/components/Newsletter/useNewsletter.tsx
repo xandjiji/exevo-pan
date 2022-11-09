@@ -1,5 +1,5 @@
 import { useState, useCallback } from 'react'
-import { NewsletterClient } from 'services'
+import { NewsletterClient } from 'services/client'
 import { UseNewsletterState, RegisterStatus } from './types'
 
 export const useNewsletter = (): UseNewsletterState => {

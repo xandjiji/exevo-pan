@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { DrawerFieldsClient, BossesClient } from 'services'
+import { DrawerFieldsClient, BossesClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import BossTracker, { heroSrc } from 'modules/BossTracker'
 import { useTranslations } from 'contexts/useTranslation'

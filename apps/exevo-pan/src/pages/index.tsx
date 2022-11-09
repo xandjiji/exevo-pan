@@ -8,13 +8,13 @@ import {
   UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
-import { DrawerFieldsClient, BlogClient } from 'services'
-import { AuctionsClient } from 'services/server'
+import { BlogClient } from 'services'
+import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
-import { endpoints, routes, jsonld } from 'Constants'
+import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
