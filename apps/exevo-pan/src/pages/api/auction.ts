@@ -1,13 +1,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { VercelRequest, VercelResponse } from '@vercel/node'
-import { MILLISECONDS_IN } from 'utils'
+import { SECONDS_IN } from 'utils'
 import { AuctionsClient } from 'services/server'
 import { FetchAuctionPageArgs } from 'services/server/Auctions/types'
 import { from } from 'services/client/Auctions/types'
 
 const CACHE_AGE = {
-  current: MILLISECONDS_IN.MINUTE * 3,
-  history: MILLISECONDS_IN.HOUR * 4,
+  current: SECONDS_IN.MINUTE * 3,
+  history: SECONDS_IN.HOUR * 4,
 }
 
 const checkForAuctionId = (

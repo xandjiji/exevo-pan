@@ -1,19 +1,19 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { VercelRequest, VercelResponse } from '@vercel/node'
 import { endpoints } from 'Constants'
-import { MILLISECONDS_IN } from 'utils'
+import { MILLISECONDS_IN, SECONDS_IN } from 'utils'
 
 const AUCTION_PERIOD = MILLISECONDS_IN.MINUTE * 15
 
 const millisecondsToSeconds = (milliseconds: number) =>
-  Math.floor(milliseconds / MILLISECONDS_IN.MINUTE)
+  Math.floor(milliseconds / MILLISECONDS_IN.SECONDS)
 
 const timeUntilNextCacheBust = () =>
   millisecondsToSeconds(AUCTION_PERIOD - (+new Date() % AUCTION_PERIOD))
 
 const CACHE_AGE = {
   current: timeUntilNextCacheBust,
-  history: millisecondsToSeconds(MILLISECONDS_IN.HOUR * 4),
+  history: SECONDS_IN.HOUR * 4,
 }
 
 export default async (
