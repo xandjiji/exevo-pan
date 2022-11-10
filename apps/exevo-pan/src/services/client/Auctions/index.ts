@@ -30,7 +30,9 @@ export default class AuctionsClient {
     endpoint.search = currentParams.toString()
     if (history) endpoint.searchParams.set('history', 'true')
 
-    const response = await fetch(endpoint as unknown as any)
+    const response = await fetch(
+      `${endpoints.AUCTIONS_ROUTE}${endpoint.search}`,
+    )
 
     return response.json()
   }
@@ -45,7 +47,9 @@ export default class AuctionsClient {
       endpoint.searchParams.set('id', id.toString())
       endpoint.searchParams.set('from', from)
 
-      const response = await fetch(endpoint as unknown as any)
+      const response = await fetch(
+        `${endpoints.AUCTIONS_ROUTE}${endpoint.search}`,
+      )
 
       if (response.status === 400) {
         throw Error(`Auction id ${id} not found`)
