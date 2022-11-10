@@ -45,7 +45,7 @@ export default class AuctionsClient {
       endpoint.searchParams.set('id', id.toString())
       endpoint.searchParams.set('from', from)
 
-      const response = await fetch(endpoint)
+      const response = await fetch(endpoint as unknown as any)
 
       if (response.status === 400) {
         throw Error(`Auction id ${id} not found`)

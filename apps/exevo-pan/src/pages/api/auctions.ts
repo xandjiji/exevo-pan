@@ -38,7 +38,7 @@ export default async (
     currentParams.delete('history')
     endpoint.search = currentParams.toString()
 
-    const result = await fetch(endpoint as unknown as any)
+    const result = await fetch(endpoint.toString())
     const parsedResult = await result.json()
 
     const maxAge = isHistory ? CACHE_AGE.history : CACHE_AGE.current()
