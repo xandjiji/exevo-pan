@@ -787,7 +787,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             >
               <Chip
                 overrideStatus={filterState.rareNick}
-                onClick={() => setFilters({ rareNick: filterState.rareNick })}
+                onClick={() => setFilters({ rareNick: !filterState.rareNick })}
               >
                 {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
