@@ -67,3 +67,7 @@ export default async (
     response.status(400).json(error)
   }
 }
+
+export const config = {
+  runtime: 'experimental-edge',
+}
