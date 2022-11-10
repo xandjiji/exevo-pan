@@ -1,8 +1,10 @@
 import { Timer, coloredText, broadcast } from 'logging'
 import ScrapServers from 'Scripts/ScrapServers'
+import { executeShell } from 'utils'
 import * as task from './tasks'
 
 const SCRIPT_NAME = coloredText('TrackBosses', 'highlight')
+const DEPLOY_SCRIPT = `${__dirname}/deployStatic.sh`
 
 const main = async (): Promise<void> => {
   const { activeServers } = await ScrapServers()
@@ -25,6 +27,10 @@ const main = async (): Promise<void> => {
       wasUpdated,
     })
 
+    await executeShell(DEPLOY_SCRIPT)
+
+    await task.revalidatePages(activeServers)
+
     broadcast(
       `${SCRIPT_NAME} script routine finished in ${timer.elapsedTime()}`,
       'success',
@@ -32,10 +38,6 @@ const main = async (): Promise<void> => {
   } else {
     broadcast(`No fresh data was found.`, 'control')
   }
-
-  /* if (wasUpdated) {
-    await task.revalidatePages(activeServers)
-  } */
 }
 
 export default main
