@@ -14,7 +14,7 @@ const fetchKillStatisticsPage = retryWrapper((serverName: string) =>
 )
 
 export const scrapEachServerKillStatistics = async (
-  serverList: string[],
+  serverList: ServerObject[],
 ): Promise<boolean> => {
   const taskSize = serverList.length
   const taskTracking = new TrackETA(
@@ -23,15 +23,15 @@ export const scrapEachServerKillStatistics = async (
   )
 
   let wasUpdated = false
-  for (const server of serverList) {
-    tabBroadcast(server, 'control')
+  for (const { serverName } of serverList) {
+    tabBroadcast(serverName, 'control')
     const helper = new KillStatistics()
     const file = new BossStatistics()
 
-    await file.load(server)
+    await file.load(serverName)
 
     const newData = await file.feedData(
-      helper.lastDayBossKills(await fetchKillStatisticsPage(server)),
+      helper.lastDayBossKills(await fetchKillStatisticsPage(serverName)),
     )
 
     if (newData) wasUpdated = newData

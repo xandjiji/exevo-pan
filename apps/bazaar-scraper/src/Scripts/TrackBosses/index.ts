@@ -1,20 +1,21 @@
-import { broadcast } from 'logging'
-import { fetchServerNames } from './utils'
+import ScrapServers from 'Scripts/ScrapServers'
 import * as task from './tasks'
 
 const main = async (): Promise<void> => {
-  broadcast('Fetching server names...', 'neutral')
+  const { activeServers } = await ScrapServers()
 
-  const serverList = await fetchServerNames()
-
-  const wasUpdated = await task.scrapEachServerKillStatistics(serverList)
+  const wasUpdated = await task.scrapEachServerKillStatistics(activeServers)
 
   const bossDistributions = await task.generateBossDistributions()
 
-  await task.calculateBossChances({ serverList, bossDistributions, wasUpdated })
+  await task.calculateBossChances({
+    activeServers,
+    bossDistributions,
+    wasUpdated,
+  })
 
   if (wasUpdated) {
-    await task.revalidatePages(serverList)
+    await task.revalidatePages(activeServers)
   }
 }
 
