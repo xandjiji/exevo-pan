@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
+import { OverallData } from 'modules/Statistics/components/OverallGrid/types'
 import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -11,9 +12,9 @@ import { common, statistics } from 'locales'
 const pageUrl = buildUrl(routes.STATISTICS)
 
 export default function Statistics({
-  statisticsData,
+  overallData,
 }: {
-  statisticsData: StatisticsData
+  overallData: OverallData
 }) {
   const { translations } = useTranslations()
 
@@ -77,7 +78,7 @@ export default function Statistics({
       <Main>
         <main>
           <Header />
-          <OverallGrid statisticsData={statisticsData} />
+          <OverallGrid overallData={overallData} />
         </main>
       </Main>
     </>
@@ -85,7 +86,8 @@ export default function Statistics({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const statisticsData = await HistoryStatisticsClient.fetchStatisticsData()
+  const { totalRevenue, totalTibiaCoins, successRate, vocationPercentage } =
+    await HistoryStatisticsClient.fetchStatisticsData()
 
   return {
     props: {
@@ -93,7 +95,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         statistics: statistics[locale as RegisteredLocale],
       },
-      statisticsData,
+      overallData: {
+        totalRevenue,
+        totalTibiaCoins,
+        successRate,
+        vocationPercentage,
+      },
     },
     revalidate: 6000,
   }

@@ -8,7 +8,7 @@ describe('<HighscoresGrid />', () => {
     renderWithProviders(
       <HighscoresGrid
         data-testid="grid-element"
-        statisticsData={mockedStatisticsData}
+        top10Data={mockedStatisticsData}
       />,
     )
 

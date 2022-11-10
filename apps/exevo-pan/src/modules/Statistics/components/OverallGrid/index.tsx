@@ -7,7 +7,7 @@ import PercentageCard from '../PercentageCard'
 import { OverallGridProps } from './types'
 
 const OverallGrid = ({
-  statisticsData,
+  overallData,
   className,
   ...props
 }: OverallGridProps) => {
@@ -29,23 +29,23 @@ const OverallGrid = ({
           totalLabel={statistics.OverallGrid.Chart1.totalLabel}
           yesterdayLabel={statistics.OverallGrid.Chart1.yesterdayLabel}
           tooltipLabel={statistics.OverallGrid.Chart1.tooltipLabel}
-          chartData={statisticsData.totalTibiaCoins}
+          chartData={overallData.totalTibiaCoins}
         />
         <Chart
           totalLabel={statistics.OverallGrid.Chart2.totalLabel}
           yesterdayLabel={statistics.OverallGrid.Chart2.yesterdayLabel}
           tooltipLabel={statistics.OverallGrid.Chart2.tooltipLabel}
-          chartData={statisticsData.totalRevenue}
+          chartData={overallData.totalRevenue}
         />
       </div>
       <div className="grid gap-4 md:grid-cols-[240px_1fr]">
         <PercentageCard
           title={statistics.OverallGrid.PercentageCard1.title}
-          percentage={statisticsData.successRate}
+          percentage={overallData.successRate}
         />
         <PieChart
           title={statistics.OverallGrid.PieChart1.title}
-          pieDataSet={statisticsData.vocationPercentage}
+          pieDataSet={overallData.vocationPercentage}
         />
       </div>
     </div>
