@@ -1,29 +1,50 @@
 import { ServerList } from 'Helpers'
 import { ServerData } from 'Data'
-import { broadcast } from 'logging'
-import { fetchServerPage, fetchActiveServers } from './utils'
+import { broadcast, coloredText } from 'logging'
+import { fetchServerPage } from './utils'
 
-const main = async (): Promise<void> => {
+const main = async (): Promise<{
+  serverList: ServerObject[]
+  activeServers: ServerObject[]
+}> => {
   const helper = new ServerList()
   const serverData = new ServerData()
 
   await serverData.load()
-  const currentServerNames = serverData.getServerNamesSet()
 
-  broadcast('Fetching server data...', 'neutral')
+  broadcast('Synching Tibia servers data...', 'neutral')
   const serverPageHtml = await fetchServerPage()
 
-  const newServerData = helper.servers(serverPageHtml)
+  const freshServerData = helper.servers(serverPageHtml)
+  const savedServerNames = new Set(
+    serverData.getAllServers().map(({ serverName }) => serverName),
+  )
 
-  newServerData.forEach((newServer) => {
-    if (!currentServerNames.has(newServer.serverName)) {
-      serverData.registerServer(newServer)
+  freshServerData.forEach((freshServer) => {
+    if (!savedServerNames.has(freshServer.serverName)) {
+      serverData.registerServer(freshServer)
+      broadcast(
+        `New server (${coloredText(
+          freshServer.serverName,
+          'success',
+        )}) was added...`,
+        'highlight',
+      )
     }
   })
 
-  broadcast('Fetching active server list...', 'neutral')
-  const activeServerList = await fetchActiveServers()
+  const activeServerList = freshServerData.map(({ serverName }) => serverName)
   await serverData.saveActiveServers(activeServerList)
+
+  const activeServerSet = new Set(activeServerList)
+
+  const serverList = serverData.getAllServers()
+  return {
+    serverList,
+    activeServers: serverList.filter(({ serverName }) =>
+      activeServerSet.has(serverName),
+    ),
+  }
 }
 
 export default main
