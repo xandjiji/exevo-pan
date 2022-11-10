@@ -34,7 +34,7 @@ export default class AuctionsClient {
 
     endpoint.search = currentParams.toString()
 
-    const response = await fetch(endpoint)
+    const response = await fetch(endpoint as unknown as any)
 
     return response.json()
   }

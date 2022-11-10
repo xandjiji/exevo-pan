@@ -30,7 +30,7 @@ export default class AuctionsClient {
     endpoint.search = currentParams.toString()
     if (history) endpoint.searchParams.set('history', 'true')
 
-    const response = await fetch(endpoint)
+    const response = await fetch(endpoint as unknown as any)
 
     return response.json()
   }
