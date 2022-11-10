@@ -1,4 +1,3 @@
-import { broadcast } from 'logging'
 import { KillStatistics } from 'Helpers'
 import { BossStatistics } from 'Data'
 
@@ -8,7 +7,6 @@ import { fetch } from '../utils'
 export const checkForPageUpdates = async (
   activeServers: ServerObject[],
 ): Promise<boolean> => {
-  broadcast('Checking for kill statistics page update...', 'neutral')
   const randomServer = singleSampleFrom(activeServers)
 
   const helper = new KillStatistics()
