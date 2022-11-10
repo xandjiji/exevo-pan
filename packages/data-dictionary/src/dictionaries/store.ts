@@ -1473,6 +1473,62 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Wooden Stool',
     value: 50,
   },
+  tendrils: {
+    name: 'Tendrils',
+    value: 50,
+  },
+  'wall leaves': {
+    name: 'Wall Leaves',
+    value: 50,
+  },
+  'wall flowers': {
+    name: 'Wall Flowers',
+    value: 50,
+  },
+  'flowery grass': {
+    name: 'Flowery Grass',
+    value: 30,
+  },
+  'flower bed': {
+    name: 'Flower Bed',
+    value: 150,
+  },
+  'flower chest': {
+    name: 'Flower Chest',
+    value: 60,
+  },
+  'flower cabinet': {
+    name: 'Flower Cabinet',
+    value: 90,
+  },
+  'water nymph': {
+    name: 'Water Nymph',
+    value: 180,
+  },
+  'blooming tendrils': {
+    name: 'Blooming Tendrils',
+    value: 50,
+  },
+  'flowering wall leaves': {
+    name: 'Flowering Wall Leaves',
+    value: 50,
+  },
+  'purple flower lamp': {
+    name: 'Purple Flower Lamp',
+    value: 80,
+  },
+  'turquoise flower lamp': {
+    name: 'Turquoise Flower Lamp',
+    value: 60,
+  },
+  'flower chair': {
+    name: 'Flower Chair',
+    value: 60,
+  },
+  'flower table': {
+    name: 'Flower Table',
+    value: 80,
+  },
   /* RASCACOON */
   'blue shark trophy': {
     name: 'Blue Shark Trophy',

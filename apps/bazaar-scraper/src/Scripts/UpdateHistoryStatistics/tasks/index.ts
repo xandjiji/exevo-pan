@@ -1,5 +1,5 @@
 export * from './calculateSuccessRate'
 export * from './calculateTotalRevenue'
 export * from './calculateTotalNegotiated'
-export * as calculateTop10 from './calculateTop10'
+export { by as getTopTenBy } from './getTopTen'
 export * from './calculateVocationDistribution'

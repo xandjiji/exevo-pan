@@ -1,2 +1,3 @@
 src/Data/*.json
 src/Data/*.jsonl
+.env

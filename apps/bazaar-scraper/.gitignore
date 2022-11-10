@@ -1,2 +1,3 @@
 src/dev.ts
 src/cache.ts
+.env

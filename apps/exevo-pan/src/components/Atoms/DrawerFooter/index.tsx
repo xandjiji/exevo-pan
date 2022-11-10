@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import clsx from 'clsx'
-import GithubIcon from 'assets/svgs/github.svg'
+import { GithubIcon } from 'assets/svgs'
 import { links } from 'Constants'
 
 const DrawerFooter = ({

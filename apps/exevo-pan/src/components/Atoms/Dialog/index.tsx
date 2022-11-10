@@ -5,7 +5,7 @@ import { createPortal } from 'react-dom'
 import clsx from 'clsx'
 import FocusLock from 'react-focus-lock'
 import { useEscToClose, useLockBody } from 'hooks'
-import CloseIcon from 'assets/svgs/cross.svg'
+import { CrossIcon } from 'assets/svgs'
 import { DialogProps } from './types'
 
 const Dialog = ({
@@ -31,12 +31,14 @@ const Dialog = ({
   return isOpen
     ? createPortal(
         <FocusLock>
-          <button
-            className="z-dialog animate-fadeIn bg-backdrop fixed top-0 left-0 flex h-full w-full items-center justify-center text-left"
-            type="button"
-            aria-hidden={!isOpen}
-            onClick={onClose}
-          >
+          <div className="z-dialog animate-fadeIn bg-backdrop fixed top-0 left-0 flex h-full w-full items-center justify-center text-left">
+            <button
+              className="-z-1 absolute top-0 left-0 h-full w-full"
+              type="button"
+              aria-hidden={!isOpen}
+              onClick={onClose}
+              aria-label={common.Dialog.close}
+            />
             <div
               tabIndex={0}
               aria-hidden={!isOpen}
@@ -66,13 +68,13 @@ const Dialog = ({
                     aria-label={common.Dialog.close}
                     onClick={onClose}
                   >
-                    <CloseIcon className="fill-onSurface" />
+                    <CrossIcon className="fill-onSurface" />
                   </button>
                 )}
               </div>
               {children}
             </div>
-          </button>
+          </div>
         </FocusLock>,
         document.body,
       )

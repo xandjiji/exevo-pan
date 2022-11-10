@@ -1,4 +1,4 @@
-import { vocation } from './vocations'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 
 const MINIMUM_MEMBER_LEVEL = 45
 
@@ -12,7 +12,10 @@ export const unminifyGuildData = (
 
     return {
       nickname,
-      vocation: vocation.getFullName(vocationId, MINIMUM_MEMBER_LEVEL),
+      vocation: vocation.getPromotedName({
+        vocationId,
+        level: MINIMUM_MEMBER_LEVEL,
+      }),
       vocationId,
       level,
       deathCount,

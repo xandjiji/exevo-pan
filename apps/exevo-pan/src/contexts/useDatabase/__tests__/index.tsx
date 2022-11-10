@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { renderHook } from '@testing-library/react-hooks'
 import { wrapWithProviders, setup } from 'utils/test'
-import { ManageDataClient } from 'services'
+import { ManageDataClient } from 'services/client'
 import { routes } from 'Constants'
 import { DatabaseProvider, useDatabase } from '../index'
 import { mockedGuildData } from './mock'

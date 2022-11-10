@@ -1,10 +1,6 @@
 import { RawBazaar } from 'Data'
 import { broadcast, coloredText, Timer } from 'logging'
-import {
-  fetchHighestAuctionId,
-  fetchUnscrapedAuctions,
-  fetchMaturedAuctions,
-} from './tasks'
+import * as task from './tasks'
 
 const SCRIPT_NAME = coloredText('ScrapRawBazaarData', 'highlight')
 
@@ -15,15 +11,17 @@ const main = async (): Promise<void> => {
   const rawData = new RawBazaar()
   await rawData.load()
 
-  const unscrapedIds = rawData.getUnscrapedIds(await fetchHighestAuctionId())
+  const unscrapedIds = rawData.getUnscrapedIds(
+    await task.fetchHighestAuctionId(),
+  )
 
   if (unscrapedIds.length) {
-    await fetchUnscrapedAuctions(unscrapedIds, rawData)
+    await task.fetchUnscrapedAuctions(unscrapedIds, rawData)
   }
 
   const maturedIds = rawData.getMaturedAuctionIds()
   if (maturedIds.length) {
-    await fetchMaturedAuctions(maturedIds, rawData)
+    await task.fetchMaturedAuctions(maturedIds, rawData)
   }
 
   broadcast(

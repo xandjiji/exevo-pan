@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import ReceiptIcon from 'assets/svgs/check.svg'
+import { CheckIcon } from 'assets/svgs'
 import { useForm } from '../../contexts/Form'
 import TransactionId from './TransactionId'
 import CoinsPayment from './CoinsPayment'
@@ -20,7 +20,7 @@ const PaymentDetails = () => {
           className="border-separator -mb-1 flex items-center border-solid pb-1 text-2xl"
           style={{ borderWidth: 0, borderBottomWidth: 1 }}
         >
-          <ReceiptIcon
+          <CheckIcon
             aria-label={advertise.PaymentDetails.titleIconLabel}
             className="fill-primary mr-1.5"
           />

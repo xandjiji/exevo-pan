@@ -29,6 +29,7 @@
     "config": "*",
     "data-dictionary": "*",
     "dequal": "^2.0.2",
+    "dotenv": "^16.0.3",
     "form-data": "^4.0.0",
     "logging": "*",
     "node-fetch": "^2.6.1",

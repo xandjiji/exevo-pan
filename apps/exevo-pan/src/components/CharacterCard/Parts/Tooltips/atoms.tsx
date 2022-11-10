@@ -1,12 +1,14 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import { cloneElement } from 'react'
 import clsx from 'clsx'
-import MagicIcon from 'assets/svgs/magic.svg'
-import CharmIcon from 'assets/svgs/charms.svg'
-import BookIcon from 'assets/svgs/book.svg'
-import PeopleIcon from 'assets/svgs/people.svg'
-import StarIcon from 'assets/svgs/star.svg'
-import BossIcon from 'assets/svgs/goblin.svg'
+import {
+  MagicIcon,
+  CharmsIcon,
+  BookIcon,
+  PeopleIcon,
+  StarIcon,
+  GoblinIcon,
+} from 'assets/svgs'
 import { IconProps } from './types'
 
 export const TitleWrapper = ({
@@ -33,9 +35,9 @@ const Icon = ({ icon, className, ...props }: IconProps) =>
 
 export const Icons: Record<string, React.FC<JSX.IntrinsicElements['svg']>> = {
   Imbuement: (args) => <Icon icon={<MagicIcon />} {...args} />,
-  Charm: (args) => <Icon icon={<CharmIcon />} {...args} />,
+  Charm: (args) => <Icon icon={<CharmsIcon />} {...args} />,
   Quest: (args) => <Icon icon={<BookIcon />} {...args} />,
   Hireling: (args) => <Icon icon={<PeopleIcon />} {...args} />,
   Achievements: (args) => <Icon icon={<StarIcon />} {...args} />,
-  Boss: (args) => <Icon icon={<BossIcon />} {...args} />,
+  Boss: (args) => <Icon icon={<GoblinIcon />} {...args} />,
 }

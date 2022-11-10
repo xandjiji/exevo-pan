@@ -20,6 +20,5 @@ declare type HighlightedAuctionData = {
   days: string[]
   timestamp: number
   active: boolean
-  /* @ ToDo: update this attribute once its no longer optional */
-  confirmed?: boolean
+  confirmed: boolean
 }

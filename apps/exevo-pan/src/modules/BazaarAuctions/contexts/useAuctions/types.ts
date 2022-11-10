@@ -36,7 +36,7 @@ export interface AuctionsContextValues extends AuctionsContextState {
 }
 
 export interface AuctionsProviderProps {
-  endpoint: string
+  history?: boolean
   highlightedAuctions: CharacterObject[]
   initialPage: CharacterObject[]
   initialPageData: PageData

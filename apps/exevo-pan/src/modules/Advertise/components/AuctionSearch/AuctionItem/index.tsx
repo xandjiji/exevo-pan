@@ -1,6 +1,6 @@
 import clsx from 'clsx'
-import { vocation } from 'shared-utils/dist/vocations'
-import Arrow from 'assets/svgs/chevronRight.svg'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import { ChevronRightIcon } from 'assets/svgs'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { useForm } from '../../../contexts/Form'
 import styles from './styles.module.css'
@@ -34,11 +34,11 @@ const AuctionItem = ({
         characterData={{
           level,
           name: nickname,
-          vocation: vocation.getFullName(vocationId, level),
+          vocation: vocation.getPromotedName({ vocationId, level }),
           world: '',
         }}
       />
-      <Arrow className="fill-onSurface w-8" />
+      <ChevronRightIcon className="fill-onSurface w-8" />
     </button>
   )
 }

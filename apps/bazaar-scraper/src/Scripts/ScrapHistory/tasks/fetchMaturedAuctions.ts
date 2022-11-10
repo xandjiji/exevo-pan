@@ -11,6 +11,12 @@ export const fetchMaturedAuctions = async (
   historyData: History,
 ): Promise<void> => {
   const batchSize = maturedIds.length
+
+  if (!batchSize) {
+    broadcast('There are no new matured auctions ready yet', 'control')
+    return
+  }
+
   const taskTracking = new TrackETA(
     batchSize,
     coloredText('Scraping matured history auctions', 'highlight'),

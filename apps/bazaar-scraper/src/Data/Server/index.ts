@@ -63,11 +63,6 @@ export default class ServerData {
     return this.serverList
   }
 
-  public getServerNamesSet(): Set<string> {
-    const names = this.serverList.map(({ serverName }) => serverName)
-    return new Set(names)
-  }
-
   public getServerByName(name: string): ServerObject {
     const foundServer = this.serverList.find(
       ({ serverName }) => serverName === name,

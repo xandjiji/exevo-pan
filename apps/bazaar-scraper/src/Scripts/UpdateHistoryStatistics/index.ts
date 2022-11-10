@@ -1,18 +1,20 @@
-import { History, HistoryStatistics } from 'Data'
+import { History, HistoryStatistics, ServerData } from 'Data'
 import { broadcast, coloredText, Timer } from 'logging'
-import {
-  calculateTotalRevenue,
-  calculateTotalNegotiated,
-  calculateSuccessRate,
-  calculateTop10,
-  calculateVocationDistribution,
-} from './tasks'
+import { buildCharacterData as characterDataBuilder } from 'shared-utils/dist/buildCharacterData'
+import * as task from './tasks'
 
 const SCRIPT_NAME = coloredText('UpdateHistoryStatistics', 'highlight')
 
 const main = async (): Promise<void> => {
   const timer = new Timer()
   broadcast(`Starting ${SCRIPT_NAME} script routine`, 'success')
+
+  const serverData = new ServerData()
+  await serverData.load()
+  const allServers = serverData.getAllServers()
+
+  const buildCharacterData = (auctions: PartialCharacterObject[]) =>
+    characterDataBuilder(auctions, allServers)
 
   const historyData = new History()
   await historyData.load()
@@ -26,20 +28,26 @@ const main = async (): Promise<void> => {
   )
 
   statisticsData.patchData({
-    totalRevenue: calculateTotalRevenue(allAuctions),
-    totalTibiaCoins: calculateTotalNegotiated(allAuctions),
-    successRate: calculateSuccessRate(allAuctions),
-    top10Bid: calculateTop10.byBid(successfulAuctions),
-    top10Level: calculateTop10.byLevel(successfulAuctions),
-    top10Magic: calculateTop10.byMagic(successfulAuctions),
-    top10Club: calculateTop10.byClub(successfulAuctions),
-    top10Fist: calculateTop10.byFist(successfulAuctions),
-    top10Sword: calculateTop10.bySword(successfulAuctions),
-    top10Fishing: calculateTop10.byFishing(successfulAuctions),
-    top10Axe: calculateTop10.byAxe(successfulAuctions),
-    top10Distance: calculateTop10.byDistance(successfulAuctions),
-    top10Shielding: calculateTop10.byShielding(successfulAuctions),
-    vocationPercentage: calculateVocationDistribution(allAuctions),
+    totalRevenue: task.calculateTotalRevenue(allAuctions),
+    totalTibiaCoins: task.calculateTotalNegotiated(allAuctions),
+    successRate: task.calculateSuccessRate(allAuctions),
+    top10Bid: buildCharacterData(task.getTopTenBy.bid(successfulAuctions)),
+    top10Level: buildCharacterData(task.getTopTenBy.level(successfulAuctions)),
+    top10Magic: buildCharacterData(task.getTopTenBy.magic(successfulAuctions)),
+    top10Club: buildCharacterData(task.getTopTenBy.club(successfulAuctions)),
+    top10Fist: buildCharacterData(task.getTopTenBy.fist(successfulAuctions)),
+    top10Sword: buildCharacterData(task.getTopTenBy.sword(successfulAuctions)),
+    top10Fishing: buildCharacterData(
+      task.getTopTenBy.fishing(successfulAuctions),
+    ),
+    top10Axe: buildCharacterData(task.getTopTenBy.axe(successfulAuctions)),
+    top10Distance: buildCharacterData(
+      task.getTopTenBy.distance(successfulAuctions),
+    ),
+    top10Shielding: buildCharacterData(
+      task.getTopTenBy.shielding(successfulAuctions),
+    ),
+    vocationPercentage: task.calculateVocationDistribution(allAuctions),
   })
 
   await statisticsData.save()

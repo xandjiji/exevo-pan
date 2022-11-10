@@ -8,12 +8,13 @@ import {
   UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
-import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
+import { BlogClient } from 'services'
+import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle } from 'utils'
-import { endpoints, routes, jsonld, urlParameters } from 'Constants'
+import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
+import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
@@ -94,7 +95,7 @@ export default function Home({
       </Head>
 
       <Main>
-        <UrlAuction endpoint={endpoints.CURRENT_AUCTIONS} />
+        <UrlAuction />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
@@ -102,7 +103,6 @@ export default function Home({
         >
           <FiltersProvider>
             <AuctionsProvider
-              endpoint={endpoints.CURRENT_AUCTIONS}
               highlightedAuctions={highlightedAuctions}
               initialPage={page}
               initialPageData={pageData}
@@ -112,9 +112,7 @@ export default function Home({
               <AuctionsGrid
                 past={false}
                 permalinkResolver={(auctionId) =>
-                  `${buildUrl('', locale)}?${
-                    urlParameters.AUCTION_ID
-                  }=${auctionId}`
+                  permalinkResolver.current({ auctionId, locale })
                 }
               />
             </AuctionsProvider>
@@ -127,24 +125,18 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [
-    activeServers,
     serverOptions,
     rareItemData,
     initialAuctionData,
     highlightedAuctions,
     localizedBlogPosts,
   ] = await Promise.all([
-    DrawerFieldsClient.fetchActiveServers(),
-    DrawerFieldsClient.fetchServerOptions(),
+    DrawerFieldsClient.fetchActiveServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
-    AuctionsClient.fetchAuctionPage({
-      endpoint: endpoints.CURRENT_AUCTIONS,
-    }),
+    AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
   ])
-
-  const activeServerSet = new Set(activeServers)
 
   return {
     props: {
@@ -152,9 +144,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         homepage: homepage[locale as RegisteredLocale],
       },
-      serverOptions: serverOptions.filter(({ name }) =>
-        activeServerSet.has(name),
-      ),
+      serverOptions,
       rareItemData,
       initialAuctionData,
       highlightedAuctions,

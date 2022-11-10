@@ -8,12 +8,13 @@ import {
   UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
-import { DrawerFieldsClient, AuctionsClient, BlogClient } from 'services'
+import { BlogClient } from 'services'
+import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, endpoints, jsonld, urlParameters } from 'Constants'
+import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
+import { routes, jsonld } from 'Constants'
 import { common, homepage, bazaarHistory } from 'locales'
 
 const pageUrl = buildUrl(routes.BAZAAR_HISTORY)
@@ -92,7 +93,7 @@ export default function BazaarHistory({
       </Head>
 
       <Main>
-        <UrlAuction endpoint={endpoints.HISTORY_AUCTIONS} past />
+        <UrlAuction />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           serverOptions={serverOptions}
@@ -100,7 +101,7 @@ export default function BazaarHistory({
         >
           <FiltersProvider>
             <AuctionsProvider
-              endpoint={endpoints.HISTORY_AUCTIONS}
+              history
               highlightedAuctions={[]}
               initialPage={page}
               initialPageData={pageData}
@@ -110,9 +111,7 @@ export default function BazaarHistory({
               <AuctionsGrid
                 past
                 permalinkResolver={(auctionId) =>
-                  `${buildUrl(routes.BAZAAR_HISTORY, locale)}?${
-                    urlParameters.AUCTION_ID
-                  }=${auctionId}`
+                  permalinkResolver.history({ auctionId, locale })
                 }
               />
             </AuctionsProvider>
@@ -124,16 +123,11 @@ export default function BazaarHistory({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const sortOptions = { sortingMode: 0, descendingOrder: true }
-
   const [serverOptions, rareItemData, initialAuctionData, localizedBlogPosts] =
     await Promise.all([
       DrawerFieldsClient.fetchServerOptions(),
       DrawerFieldsClient.fetchAuctionedItemOptions(),
-      AuctionsClient.fetchAuctionPage({
-        sortOptions,
-        endpoint: endpoints.HISTORY_AUCTIONS,
-      }),
+      AuctionsClient.fetchAuctionPage({ history: true }),
       await BlogClient.getEveryPostLocale({ pageSize: 3 }),
     ])
 

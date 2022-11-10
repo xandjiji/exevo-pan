@@ -1,11 +1,7 @@
 import { History } from 'Data'
 import { broadcast, coloredText, Timer } from 'logging'
 import ScrapServers from 'Scripts/ScrapServers'
-import {
-  fetchHighestAuctionId,
-  fetchUnscrapedAuctions,
-  fetchMaturedAuctions,
-} from './tasks'
+import * as task from './tasks'
 
 const SCRIPT_NAME = coloredText('ScrapHistory', 'highlight')
 
@@ -19,16 +15,16 @@ const main = async (): Promise<void> => {
   await historyData.load()
 
   const unscrapedIds = historyData.getUnscrapedIds(
-    await fetchHighestAuctionId(),
+    await task.fetchHighestAuctionId(),
   )
 
   if (unscrapedIds.length) {
-    await fetchUnscrapedAuctions(unscrapedIds, historyData)
+    await task.fetchUnscrapedAuctions(unscrapedIds, historyData)
   }
 
   const maturedIds = historyData.getMaturedAuctionIds()
   if (maturedIds.length) {
-    await fetchMaturedAuctions(maturedIds, historyData)
+    await task.fetchMaturedAuctions(maturedIds, historyData)
   }
 
   broadcast(

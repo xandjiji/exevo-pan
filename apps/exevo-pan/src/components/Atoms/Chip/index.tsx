@@ -4,7 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, memo } from 'react'
 import clsx from 'clsx'
 import { checkKeyboardTrigger } from 'utils'
-import CrossIcon from 'assets/svgs/cross.svg'
+import { CrossIcon } from 'assets/svgs'
 import { ChipProps } from './types'
 
 const ChipComponent = ({

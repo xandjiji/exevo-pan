@@ -1,10 +1,15 @@
 import express from 'express'
 import cors from 'cors'
-import { deserializeBody } from 'shared-utils/dist/contracts/Filters/utils'
+import {
+  deserializeFilter,
+  deserializePagination,
+  deserializeSort,
+} from 'shared-utils/dist/contracts/Filters/schemas'
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
 import { revalidate } from './revalidate'
+import { Timer } from './timer'
 import { exposeLocalhost } from './localtunnel'
 
 const { PORT, STAGING } = process.env
@@ -16,26 +21,30 @@ const main = async () => {
   app.use(cors())
   app.use(express.json())
 
-  app.post('/', async (request, response) => {
-    const { paginationOptions, sortOptions, filterOptions } = deserializeBody(
-      request.body,
-    )
+  app.get('/', async ({ url }, response) => {
+    const timer = new Timer()
+    const [, searchParams] = (url ?? '').split('?')
+    const currentParams = new URLSearchParams(searchParams)
 
-    const sortedAuctions = applySort(auctions, sortOptions)
+    const filterOptions = deserializeFilter({ currentParams })
+    const sortOptions = deserializeSort.history({ currentParams })
+    const paginationOptions = deserializePagination({ currentParams })
 
     const filteredAuctions = filterCharacters({
-      auctions: sortedAuctions,
+      auctions,
       filters: filterOptions,
     })
 
-    const paginatedData = paginateData(filteredAuctions, paginationOptions)
+    const sortedAuctions = applySort(filteredAuctions, sortOptions)
+
+    const paginatedData = paginateData(sortedAuctions, paginationOptions)
 
     const responseBody = {
       ...paginatedData,
       ...sortOptions,
     }
 
-    broadcast('Server hit', 'success')
+    broadcast(`${url} ${timer.elapsedTime()}`, 'success')
     response.json(responseBody)
   })
 

@@ -1,6 +1,7 @@
 export * from './arrayPartitions'
 export * from './batchPromises'
 export * from './date'
+export * from './executeShell'
 export * from './exitIfMaintenance'
 export * from './makeRangeArray'
 export * from './mockRequests'

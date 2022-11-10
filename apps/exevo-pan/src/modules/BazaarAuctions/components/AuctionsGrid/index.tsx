@@ -4,7 +4,7 @@ import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/
 import { ActiveCount, Paginator } from 'components/Atoms'
 import CharacterCard from 'components/CharacterCard'
 import EmptyState from 'components/EmptyState'
-import FilterIcon from 'assets/svgs/filter.svg'
+import { FilterIcon } from 'assets/svgs'
 import { useAuctions } from '../../contexts/useAuctions'
 import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'

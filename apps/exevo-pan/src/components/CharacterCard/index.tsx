@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useState, useRef, useCallback } from 'react'
+import { memo, useState, useCallback } from 'react'
 import { useSyncUrlState } from 'hooks'
 import { formatNumberWithCommas, checkKeyboardTrigger } from 'utils'
 import { urlParameters } from 'Constants'
@@ -57,8 +57,6 @@ const CharacterCard = ({
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
 
-  const ref = useRef<HTMLDivElement>()
-
   const [isExpanded, setExpanded] = useState(false)
   const [, setAuctionIdUrl] = useSyncUrlState<number | undefined>({
     key: urlParameters.AUCTION_ID,
@@ -80,7 +78,6 @@ const CharacterCard = ({
   return (
     <>
       <S.Wrapper
-        ref={ref as React.RefObject<HTMLDivElement>}
         highlighted={highlighted}
         role={expandable ? 'button' : undefined}
         tabIndex={expandable ? 0 : undefined}
@@ -168,7 +165,6 @@ const CharacterCard = ({
             if (permalink) setAuctionIdUrl(undefined)
             setExpanded(false)
           }}
-          past={past}
           permalink={permalink}
         />
       )}

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import ExternalIcon from 'assets/svgs/external.svg'
+import { ExternalIcon } from 'assets/svgs'
 import { GuildSummaryProps } from './types'
 
 const GuildSummary = ({

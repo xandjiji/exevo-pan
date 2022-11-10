@@ -3,9 +3,15 @@ export const DEFAULT_PAGINATION_OPTIONS: PaginationOptions = {
   pageSize: 10,
 }
 
-export const DEFAULT_SORT_OPTIONS: SortOptions = {
-  sortingMode: 0,
-  descendingOrder: false,
+export const DEFAULT_SORT_OPTIONS = {
+  current: {
+    sortingMode: 0,
+    descendingOrder: false,
+  } as SortOptions,
+  history: {
+    sortingMode: 0,
+    descendingOrder: true,
+  } as SortOptions,
 }
 
 export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
@@ -46,24 +52,4 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   hireling: false,
   transferAvailable: false,
   biddedOnly: false,
-}
-
-export const DEFAULT_SERIALIZED_FILTER_OPTIONS: SerializedFilterOptions = {
-  ...DEFAULT_FILTER_OPTIONS,
-  auctionIds: [],
-  vocation: [],
-  pvp: [],
-  battleye: [],
-  location: [],
-  serverSet: [],
-  tags: [],
-  skillKey: [],
-  imbuementsSet: [],
-  charmsSet: [],
-  questSet: [],
-  outfitSet: [],
-  mountSet: [],
-  achievementSet: [],
-  storeOutfitSet: [],
-  storeMountSet: [],
 }

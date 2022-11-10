@@ -8,7 +8,7 @@ describe('<OverallGrid />', () => {
     renderWithProviders(
       <OverallGrid
         data-testid="grid-element"
-        statisticsData={mockedStatisticsData}
+        overallData={mockedStatisticsData}
       />,
     )
 

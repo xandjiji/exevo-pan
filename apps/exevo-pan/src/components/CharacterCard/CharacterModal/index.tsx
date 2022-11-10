@@ -17,13 +17,10 @@ import {
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas } from 'utils'
-import MoreInfoIcon from 'assets/svgs/moreInfo.svg'
-import OutfitIcon from 'assets/svgs/outfit.svg'
-import MountIcon from 'assets/svgs/horse.svg'
-import StoreIcon from 'assets/svgs/inbox.svg'
+import { MoreInfoIcon, OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
 import SpriteBox from './SpriteBox'
 import SkillDialog from './SkillDialog'
-import { checkStore, tabCounter } from './utils'
+import { checkStore, tabCounter, auctionHasEnded } from './utils'
 import { resolvers } from './resolvers'
 import * as S from './atoms'
 import styles from './styles.module.css'
@@ -40,7 +37,6 @@ import { CharacterModalProps } from './types'
 const CharacterModal = ({
   characterData,
   onClose,
-  past = false,
   permalink,
 }: CharacterModalProps) => {
   const {
@@ -76,6 +72,8 @@ const CharacterModal = ({
   const {
     translations: { common },
   } = useTranslations()
+
+  const [past] = useState(auctionHasEnded(characterData))
 
   const [expandedSkills, setExpandedSkills] = useState(false)
 
@@ -263,7 +261,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <MountIcon />
+                      <HorseIcon />
                       Mounts {tabCounter(mounts.length, storeMounts.length)}
                     </>
                   }
@@ -306,7 +304,7 @@ const CharacterModal = ({
                 <Tabs.Panel
                   label={
                     <>
-                      <StoreIcon />
+                      <InboxIcon />
                       Store Items ({storeItems.length})
                     </>
                   }

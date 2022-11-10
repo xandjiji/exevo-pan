@@ -1,12 +1,12 @@
 import cheerio, { Element } from 'cheerio/lib/index'
 import { exitIfMaintenance } from 'utils'
-import { buildServerLocation, buildPvpType } from './utils'
+import { parse } from './utils'
 
 export default class ServerList {
-  maintenanceCheck(content: string): boolean {
+  private errorCheck(content: string): boolean {
     const $ = cheerio.load(content)
-    const headingElement = $('h1')
-    return headingElement.text() === 'Downtime'
+    const title = $('.Text:contains("Game World Overview")').html()
+    return !title
   }
 
   name(element: Element): string {
@@ -15,12 +15,12 @@ export default class ServerList {
 
   location(element: Element): ServerLocation {
     const locationText = cheerio('td:nth-child(3)', element).text()
-    return buildServerLocation(locationText)
+    return parse.serverLocation(locationText)
   }
 
   pvpType(element: Element): PvpType {
     const pvpTypeText = cheerio('td:nth-child(4)', element).text()
-    return buildPvpType(pvpTypeText)
+    return parse.pvpType(pvpTypeText)
   }
 
   battleye(element: Element): boolean {
@@ -45,7 +45,7 @@ export default class ServerList {
   }
 
   servers(content: string): PartialServerObject[] {
-    exitIfMaintenance(() => this.maintenanceCheck(content))
+    exitIfMaintenance(() => this.errorCheck(content))
 
     const $ = cheerio.load(content)
 

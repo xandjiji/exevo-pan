@@ -2,7 +2,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { BossStatistics } from 'Data'
-import { coloredText, TrackETA } from 'logging'
+import { broadcast, coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 import {
@@ -111,33 +111,35 @@ const calculateStats = ({
 }
 
 type CalculateBossChancesArgs = {
-  serverList: string[]
+  activeServers: ServerObject[]
   bossDistributions: Record<string, Distribution>
   wasUpdated: boolean
 }
 
 export const calculateBossChances = async ({
-  serverList,
+  activeServers,
   bossDistributions,
   wasUpdated,
 }: CalculateBossChancesArgs): Promise<void> => {
-  const taskSize = serverList.length
+  const taskSize = activeServers.length
   const taskTracking = new TrackETA(
     taskSize,
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
 
+  broadcast('Calculating fresh boss chances...', 'neutral')
+
   const lastUpdated = +new Date()
 
-  for (const server of serverList) {
+  for (const { serverName } of activeServers) {
     const file = new BossStatistics()
 
-    await file.load(server)
+    await file.load(serverName)
 
     const { bosses, latest } = file.getBossStatistics()
 
     const bossChances: BossChances = {
-      server,
+      server: serverName,
       lastUpdated: wasUpdated ? lastUpdated : latest.timestamp,
       bosses: [],
     }

@@ -1,7 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { SpritePortrait, CopyButton } from 'components/Atoms'
-import ExternalIcon from 'assets/svgs/external.svg'
+import { ExternalIcon } from 'assets/svgs'
 import { CharacterMiniCardProps } from './types'
 
 const DEFAULT_OUTFIT_SRC =

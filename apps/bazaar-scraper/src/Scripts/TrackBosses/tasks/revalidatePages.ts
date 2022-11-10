@@ -5,13 +5,15 @@ import { RevalidateClient } from 'services'
 
 const ROUTE_PATH = 'boss-tracker'
 
-export const revalidatePages = async (serverList: string[]): Promise<void> => {
+export const revalidatePages = async (
+  serverList: ServerObject[],
+): Promise<void> => {
   broadcast('Revalidating pages', 'highlight')
 
   const task = new TrackETA(serverList.length, 'Page revalidation')
-  for (const server of serverList) {
-    tabBroadcast(`revalidating ${server}...`, 'neutral')
-    await RevalidateClient.route(`${ROUTE_PATH}/${server}`)
+  for (const { serverName } of serverList) {
+    tabBroadcast(`revalidating ${serverName}...`, 'neutral')
+    await RevalidateClient.route(`${ROUTE_PATH}/${serverName}`)
     task.incTask()
   }
   task.finish()

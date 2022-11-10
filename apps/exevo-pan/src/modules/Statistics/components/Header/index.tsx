@@ -2,8 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { SubHeader } from 'templates'
 import { routes } from 'Constants'
-import OverallIcon from 'assets/svgs/charts.svg'
-import HighscoresIcon from 'assets/svgs/trophy.svg'
+import { ChartsIcon, TrophyIcon } from 'assets/svgs'
 
 const Header = () => {
   const {
@@ -14,12 +13,12 @@ const Header = () => {
     {
       title: statistics.Header.Overall,
       href: routes.STATISTICS,
-      icon: <OverallIcon />,
+      icon: <ChartsIcon />,
     },
     {
       title: statistics.Header.Highscores,
       href: routes.HIGHSCORES,
-      icon: <HighscoresIcon />,
+      icon: <TrophyIcon />,
     },
   ]
 

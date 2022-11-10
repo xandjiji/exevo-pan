@@ -1,7 +1,8 @@
 import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
-import { HistoryStatisticsClient } from 'services'
+import { Top10Data } from 'modules/Statistics/components/HighscoresGrid/types'
+import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle } from 'utils'
@@ -10,11 +11,7 @@ import { common, statistics } from 'locales'
 
 const pageUrl = buildUrl(routes.HIGHSCORES)
 
-export default function Highscores({
-  statisticsData,
-}: {
-  statisticsData: StatisticsData
-}) {
+export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(
@@ -77,7 +74,7 @@ export default function Highscores({
       <Main>
         <main>
           <Header />
-          <HighscoresGrid statisticsData={statisticsData} />
+          <HighscoresGrid top10Data={top10Data} />
         </main>
       </Main>
     </>
@@ -85,7 +82,18 @@ export default function Highscores({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const statisticsData = await HistoryStatisticsClient.fetchStatisticsData()
+  const {
+    top10Axe,
+    top10Bid,
+    top10Club,
+    top10Distance,
+    top10Fishing,
+    top10Fist,
+    top10Level,
+    top10Magic,
+    top10Shielding,
+    top10Sword,
+  } = await HistoryStatisticsClient.fetchStatisticsData()
 
   return {
     props: {
@@ -93,7 +101,18 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         statistics: statistics[locale as RegisteredLocale],
       },
-      statisticsData,
+      top10Data: {
+        top10Axe,
+        top10Bid,
+        top10Club,
+        top10Distance,
+        top10Fishing,
+        top10Fist,
+        top10Level,
+        top10Magic,
+        top10Shielding,
+        top10Sword,
+      },
     },
     revalidate: 6000,
   }

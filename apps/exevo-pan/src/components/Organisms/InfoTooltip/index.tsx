@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import InfoIcon from 'assets/svgs/info.svg'
+import { InfoIcon } from 'assets/svgs'
 import Tooltip from '../Tooltip'
 import { InfoTooltipProps } from './types'
 

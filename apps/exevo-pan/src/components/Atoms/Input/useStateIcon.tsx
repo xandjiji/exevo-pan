@@ -1,8 +1,7 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
-import ValidIcon from 'assets/svgs/valid.svg'
-import InvalidIcon from 'assets/svgs/invalid.svg'
+import { ValidIcon, InvalidIcon } from 'assets/svgs'
 import styles from './styles.module.css'
 import { StateIcon } from './types'
 

@@ -1,231 +1,209 @@
+import { SchemaCodec, codecs, buildFromSchema } from '../../../urlSerializer'
 import { DEFAULT_FILTER_OPTIONS } from '../defaults'
 
-const encodeSet = (set: Set<boolean | number | string>): string =>
-  [...set].join(',')
-const decodeSet = (
-  encodedValue: string,
-  valueType: 'boolean' | 'number' | 'string',
-): Set<boolean | number | string> =>
-  new Set<boolean | number | string>(
-    decodeURIComponent(encodedValue)
-      .split(',')
-      .map((stringValue) => {
-        if (valueType === 'number') return Number(stringValue)
-        if (valueType === 'boolean') return stringValue === 'true'
-        return stringValue
-      }),
-  )
-
-const decodeBooleanSet = (encodedValue: string): Set<boolean> =>
-  decodeSet(encodedValue, 'boolean') as Set<boolean>
-const decodeNumberSet = (encodedValue: string): Set<number> =>
-  decodeSet(encodedValue, 'number') as Set<number>
-const decodeStringSet = (encodedValue: string): Set<string> =>
-  decodeSet(encodedValue, 'string') as Set<string>
-
-const decodeNumber = (encodedValue: string): number => Number(encodedValue)
-const decodeBoolean = (encodedValue: string): boolean => encodedValue === 'true'
-
-export const filterSchema = [
-  {
-    key: 'auctionIds',
+export const filterSchema: SchemaCodec<FilterOptions> = {
+  auctionIds: {
+    urlKey: 'auctionIds',
     defaultValue: DEFAULT_FILTER_OPTIONS.auctionIds,
-    encode: encodeSet,
-    decode: decodeNumberSet,
+    encode: codecs.encode.NumberSet,
+    decode: codecs.decode.NumberSet,
   },
-  {
-    key: 'nicknameFilter',
+  nicknameFilter: {
+    urlKey: 'nicknameFilter',
     defaultValue: DEFAULT_FILTER_OPTIONS.nicknameFilter,
   },
-  {
-    key: 'vocation',
+  vocation: {
+    urlKey: 'vocation',
     defaultValue: DEFAULT_FILTER_OPTIONS.vocation,
-    encode: encodeSet,
-    decode: decodeNumberSet,
+    encode: codecs.encode.NumberSet,
+    decode: codecs.decode.NumberSet,
   },
-  {
-    key: 'pvp',
+  pvp: {
+    urlKey: 'pvp',
     defaultValue: DEFAULT_FILTER_OPTIONS.pvp,
-    encode: encodeSet,
-    decode: decodeNumberSet,
+    encode: codecs.encode.NumberSet,
+    decode: codecs.decode.NumberSet,
   },
-  {
-    key: 'battleye',
+  battleye: {
+    urlKey: 'battleye',
     defaultValue: DEFAULT_FILTER_OPTIONS.battleye,
-    encode: encodeSet,
-    decode: decodeBooleanSet,
+    encode: codecs.encode.BooleanSet,
+    decode: codecs.decode.BooleanSet,
   },
-  {
-    key: 'location',
+  location: {
+    urlKey: 'location',
     defaultValue: DEFAULT_FILTER_OPTIONS.location,
-    encode: encodeSet,
-    decode: decodeNumberSet,
+    encode: codecs.encode.NumberSet,
+    decode: codecs.decode.NumberSet,
   },
-  {
-    key: 'serverSet',
+  serverSet: {
+    urlKey: 'serverSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.serverSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'tags',
+  tags: {
+    urlKey: 'tags',
     defaultValue: DEFAULT_FILTER_OPTIONS.tags,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'minLevel',
+  minLevel: {
+    urlKey: 'minLevel',
     defaultValue: DEFAULT_FILTER_OPTIONS.minLevel,
-    decode: decodeNumber,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'maxLevel',
+  maxLevel: {
+    urlKey: 'maxLevel',
     defaultValue: DEFAULT_FILTER_OPTIONS.maxLevel,
-    decode: decodeNumber,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'minSkill',
+  minSkill: {
+    urlKey: 'minSkill',
     defaultValue: DEFAULT_FILTER_OPTIONS.minSkill,
-    decode: decodeNumber,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'maxSkill',
+  maxSkill: {
+    urlKey: 'maxSkill',
     defaultValue: DEFAULT_FILTER_OPTIONS.maxSkill,
-    decode: decodeNumber,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'bossPoints',
+  bossPoints: {
+    urlKey: 'bossPoints',
     defaultValue: DEFAULT_FILTER_OPTIONS.bossPoints,
-    decode: decodeNumber,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'tcInvested',
+  tcInvested: {
+    urlKey: 'tcInvested',
     defaultValue: DEFAULT_FILTER_OPTIONS.tcInvested,
-    decode: decodeNumber,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'addon',
+  addon: {
+    urlKey: 'addon',
     defaultValue: DEFAULT_FILTER_OPTIONS.addon,
-    decode: decodeNumber,
+    decode: codecs.decode.Number,
   },
-  {
-    key: 'sex',
+  sex: {
+    urlKey: 'sex',
     defaultValue: DEFAULT_FILTER_OPTIONS.sex,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'skillKey',
+  skillKey: {
+    urlKey: 'skillKey',
     defaultValue: DEFAULT_FILTER_OPTIONS.skillKey,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'imbuementsSet',
+  imbuementsSet: {
+    urlKey: 'imbuementsSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.imbuementsSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'charmsSet',
+  charmsSet: {
+    urlKey: 'charmSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.charmsSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'rareNick',
-    defaultValue: DEFAULT_FILTER_OPTIONS.rareNick,
-    decode: decodeBoolean,
-  },
-  {
-    key: 'questSet',
+  questSet: {
+    urlKey: 'questSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.questSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'outfitSet',
+  outfitSet: {
+    urlKey: 'outfitSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.outfitSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'storeOutfitSet',
+  storeOutfitSet: {
+    urlKey: 'storeOutfitSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.storeOutfitSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'mountSet',
+  mountSet: {
+    urlKey: 'mountSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.mountSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'storeMountSet',
+  storeMountSet: {
+    urlKey: 'storeMountSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.storeMountSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'achievementSet',
+  achievementSet: {
+    urlKey: 'achievementSet',
     defaultValue: DEFAULT_FILTER_OPTIONS.achievementSet,
-    encode: encodeSet,
-    decode: decodeStringSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
   },
-  {
-    key: 'charmExpansion',
+  charmExpansion: {
+    urlKey: 'charmExpansion',
     defaultValue: DEFAULT_FILTER_OPTIONS.charmExpansion,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'preySlot',
+  preySlot: {
+    urlKey: 'preySlot',
     defaultValue: DEFAULT_FILTER_OPTIONS.preySlot,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'huntingSlot',
+  huntingSlot: {
+    urlKey: 'huntingSlot',
     defaultValue: DEFAULT_FILTER_OPTIONS.huntingSlot,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'rewardShrine',
+  rewardShrine: {
+    urlKey: 'rewardShrine',
     defaultValue: DEFAULT_FILTER_OPTIONS.rewardShrine,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'imbuementShrine',
+  imbuementShrine: {
+    urlKey: 'imbuementShrine',
     defaultValue: DEFAULT_FILTER_OPTIONS.imbuementShrine,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'dummy',
+  dummy: {
+    urlKey: 'dummy',
     defaultValue: DEFAULT_FILTER_OPTIONS.dummy,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-
-  {
-    key: 'mailbox',
+  mailbox: {
+    urlKey: 'mailbox',
     defaultValue: DEFAULT_FILTER_OPTIONS.mailbox,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'goldPouch',
+  goldPouch: {
+    urlKey: 'goldPouch',
     defaultValue: DEFAULT_FILTER_OPTIONS.goldPouch,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'hireling',
+  hireling: {
+    urlKey: 'hireling',
     defaultValue: DEFAULT_FILTER_OPTIONS.hireling,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'transferAvailable',
+  transferAvailable: {
+    urlKey: 'transferAvailable',
     defaultValue: DEFAULT_FILTER_OPTIONS.transferAvailable,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-  {
-    key: 'biddedOnly',
+  biddedOnly: {
+    urlKey: 'biddedOnly',
     defaultValue: DEFAULT_FILTER_OPTIONS.biddedOnly,
-    decode: decodeBoolean,
+    decode: codecs.decode.Boolean,
   },
-]
+  rareNick: {
+    urlKey: 'rareNick',
+    defaultValue: DEFAULT_FILTER_OPTIONS.rareNick,
+    decode: codecs.decode.Boolean,
+  },
+}
+
+export const serializeFilter = buildFromSchema.serializer(filterSchema)
+
+export const deserializeFilter = buildFromSchema.deserializer(filterSchema)

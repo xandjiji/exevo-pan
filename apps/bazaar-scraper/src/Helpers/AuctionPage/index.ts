@@ -9,7 +9,7 @@ import {
   imbuement as imbuementDictionary,
   rareAchievement as achievementDictionary,
 } from 'data-dictionary/dist/dictionaries'
-import { vocation as vocationHelper } from 'shared-utils/dist/vocations'
+import { vocation as vocationHelper } from 'data-dictionary/dist/dictionaries/vocations'
 import { filterListTable, stringToNumber } from '../utils'
 import {
   getPagedData,
@@ -28,16 +28,14 @@ export default class AuctionPage {
     await this.serverDataHelper.load()
   }
 
-  maintenanceCheck($: CheerioAPI): boolean {
+  private maintenanceCheck($: CheerioAPI): boolean {
     const headingElement = $('h1')
     return headingElement.text() === 'Downtime'
   }
 
-  errorCheck($: CheerioAPI): boolean {
-    const errorText = $(
-      '#currentcharactertrades .Text, #pastcharactertrades .Text',
-    ).text()
-    return errorText === 'Error'
+  private errorCheck($: CheerioAPI): boolean {
+    const title = $('.Text:contains("Auction Details")').html()
+    return !title
   }
 
   id($: CheerioAPI): number {

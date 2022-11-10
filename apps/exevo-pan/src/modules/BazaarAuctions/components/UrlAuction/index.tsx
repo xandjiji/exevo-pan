@@ -3,11 +3,10 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useSyncUrlState } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
 import CharacterModal from 'components/CharacterCard/CharacterModal'
-import { AuctionsClient } from 'services'
+import { AuctionsClient } from 'services/client'
 import { urlParameters } from 'Constants'
-import { UrlAuctionProps } from './types'
 
-const UrlAuction = ({ endpoint, past = false }: UrlAuctionProps) => {
+const UrlAuction = () => {
   const {
     translations: { common },
   } = useTranslations()
@@ -29,7 +28,7 @@ const UrlAuction = ({ endpoint, past = false }: UrlAuctionProps) => {
   useEffect(() => {
     if (auctionId) {
       setLoading(true)
-      AuctionsClient.fetchAuctionById({ auctionId, endpoint })
+      AuctionsClient.fetchAuctionById({ id: auctionId })
         .then((urlAuction) => setAuction(urlAuction))
         .finally(() => setLoading(false))
     }
@@ -38,9 +37,7 @@ const UrlAuction = ({ endpoint, past = false }: UrlAuctionProps) => {
   return (
     <>
       {loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
-      {auction && (
-        <CharacterModal characterData={auction} onClose={onClose} past={past} />
-      )}
+      {auction && <CharacterModal characterData={auction} onClose={onClose} />}
     </>
   )
 }

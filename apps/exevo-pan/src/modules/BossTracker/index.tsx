@@ -6,13 +6,13 @@ import { ServerNavigation, BossGrid, RecentlyAppeared } from './components'
 export const heroSrc = loadRawSrc('/bosses.png')
 
 type BossTrackerProps = {
-  activeServers: string[]
+  serverOptions: Option[]
   bossChances: BossChances
   recentlyAppeared: BossStats[]
 }
 
 const BossTracker = ({
-  activeServers,
+  serverOptions,
   bossChances,
   recentlyAppeared,
 }: BossTrackerProps) => {
@@ -35,7 +35,7 @@ const BossTracker = ({
     <>
       <ServerNavigation
         currentServer={bossChances.server}
-        activeServers={activeServers}
+        serverOptions={serverOptions}
       />
       <main className="inner-container pb-8">
         <Hero

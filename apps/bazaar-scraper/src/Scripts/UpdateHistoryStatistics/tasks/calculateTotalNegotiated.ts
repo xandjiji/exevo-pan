@@ -1,14 +1,23 @@
-import { getLastTimestampsRange, filterAuctionsByTimestampRange } from './utils'
+import { broadcast, tabBroadcast } from 'logging'
+import {
+  getLastTimestampsRange,
+  filterAuctionsByTimestampRange,
+  toReadableRange,
+} from './utils'
 
 const getLastDaysNegotiations = (
   successAuctions: PartialCharacterObject[],
 ): number[] => {
+  broadcast('Calculating last month TC volume...', 'neutral')
+
   const timestampRanges = getLastTimestampsRange()
   const lastMonth: number[] = []
 
-  timestampRanges.forEach((range) => {
+  timestampRanges.forEach(([from, to]) => {
+    tabBroadcast(`Summarizing ${toReadableRange([from, to])}...`, 'control')
+
     const filteredByRange = filterAuctionsByTimestampRange(
-      range,
+      [from, to],
       successAuctions,
     )
 
@@ -26,6 +35,8 @@ const getLastDaysNegotiations = (
 export const calculateTotalNegotiated = (
   history: PartialCharacterObject[],
 ): MonthlySummary => {
+  broadcast('Calculating total TC volume...', 'neutral')
+
   const successAuctions = history.filter(({ hasBeenBidded }) => hasBeenBidded)
 
   const totalNegotiated = successAuctions.reduce(

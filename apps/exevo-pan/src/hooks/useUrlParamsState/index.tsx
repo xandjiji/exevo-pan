@@ -1,32 +1,33 @@
 import { useState, useCallback } from 'react'
-import { urlParametersState } from 'utils'
-import { ParamRegister } from 'utils/urlParameterState/types'
+import {
+  urlParametersStateFactory,
+  SchemaCodec,
+} from 'shared-utils/dist/urlSerializer'
 
-/* @ ToDo: fix this typings */
-const useUrlParamsState = (registeredParams: ParamRegister<any>[]) => {
-  const [{ getUrlValues, setUrlValues }] = useState(() =>
-    urlParametersState(registeredParams),
+const useUrlParamsState = <T,>(schemaCodec: SchemaCodec<T>) => {
+  const [{ get, set, isCurrentlyDefaultValues }] = useState(() =>
+    urlParametersStateFactory(schemaCodec),
   )
 
-  const [currentValues, setCurrentValues] = useState(getUrlValues)
+  const [currentValues, setCurrentValues] = useState(get.urlValues)
 
   const setStateAndUrl: typeof setCurrentValues = useCallback(
     (stateDispatch) => {
       if (stateDispatch instanceof Function) {
         setCurrentValues((previousState) => {
           const returnedNewState = stateDispatch(previousState)
-          setUrlValues(returnedNewState)
+          set.urlValues(returnedNewState)
           return returnedNewState
         })
       } else {
-        setUrlValues(stateDispatch)
+        set.urlValues(stateDispatch)
         setCurrentValues(stateDispatch)
       }
     },
-    [setUrlValues],
+    [set.urlValues],
   )
 
-  return [currentValues, setStateAndUrl] as const
+  return [currentValues, setStateAndUrl, isCurrentlyDefaultValues()] as const
 }
 
 export default useUrlParamsState

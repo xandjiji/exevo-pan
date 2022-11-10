@@ -2,9 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useEffect } from 'react'
 import clsx from 'clsx'
 import { copyToClipboard } from 'utils'
-import CopyIcon from 'assets/svgs/copy.svg'
-import LinkIcon from 'assets/svgs/anchor.svg'
-import ValidIcon from 'assets/svgs/valid.svg'
+import { CopyIcon, AnchorIcon, ValidIcon } from 'assets/svgs'
 import { CopyButtonProps } from './types'
 
 const CopyButton = ({
@@ -32,7 +30,7 @@ const CopyButton = ({
 
   useEffect(() => setClicked(false), [copyString])
 
-  const Icon = linkIcon ? LinkIcon : CopyIcon
+  const Icon = linkIcon ? AnchorIcon : CopyIcon
 
   return (
     <button

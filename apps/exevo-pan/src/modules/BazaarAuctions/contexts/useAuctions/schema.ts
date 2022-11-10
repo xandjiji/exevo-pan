@@ -4,8 +4,6 @@ import {
 } from 'shared-utils/dist/contracts/Filters/defaults'
 import { AuctionsContextValues } from './types'
 
-export { buildSchema } from 'shared-utils/dist/contracts/Filters/schemas/sortUrl'
-
 export const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
   highlightedAuctions: [],
@@ -18,8 +16,7 @@ export const DEFAULT_STATE: AuctionsContextValues = {
     hasNext: false,
     hasPrev: false,
   },
-  sortingMode: DEFAULT_SORT_OPTIONS.sortingMode,
-  descendingOrder: DEFAULT_SORT_OPTIONS.descendingOrder,
+  ...DEFAULT_SORT_OPTIONS.current,
   shouldDisplayHighlightedAuctions: true,
   handlePaginatorFetch: async () => {},
   dispatch: () => {},
