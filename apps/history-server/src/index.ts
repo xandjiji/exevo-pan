@@ -44,7 +44,7 @@ const main = async () => {
       ...sortOptions,
     }
 
-    broadcast(`${url} ${timer.elapsedTime()}`, 'success')
+    broadcast(`${timer.elapsedTime()} ${url}`, 'success')
     response.json(responseBody)
   })
 
