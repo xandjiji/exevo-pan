@@ -1,17 +1,12 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
-import { HttpClient } from 'services'
 import { KillStatistics } from 'Helpers'
 import { BossStatistics } from 'Data'
 import { tabBroadcast, coloredText, TrackETA } from 'logging'
-import { retryWrapper, sleep } from 'utils'
-import { KILL_STATISTICS_BASE_URL } from '../utils'
+import { sleep } from 'utils'
+import { fetch } from '../utils'
 
 const DELAY = 5000
-
-const fetchKillStatisticsPage = retryWrapper((serverName: string) =>
-  HttpClient.getHtml(`${KILL_STATISTICS_BASE_URL}&world=${serverName}`),
-)
 
 export const scrapEachServerKillStatistics = async (
   serverList: ServerObject[],
@@ -31,7 +26,7 @@ export const scrapEachServerKillStatistics = async (
     await file.load(serverName)
 
     const newData = await file.feedData(
-      helper.lastDayBossKills(await fetchKillStatisticsPage(serverName)),
+      helper.lastDayBossKills(await fetch.killStatisticsPage(serverName)),
     )
 
     if (newData) wasUpdated = newData
