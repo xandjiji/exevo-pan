@@ -48,7 +48,7 @@ export default class AuctionsClient {
       endpoint.searchParams.set('from', from)
 
       const response = await fetch(
-        `${endpoints.AUCTIONS_ROUTE}${endpoint.search}`,
+        `${endpoints.AUCTION_ROUTE}${endpoint.search}`,
       )
 
       if (response.status === 400) {
