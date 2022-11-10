@@ -10,14 +10,13 @@ const DELAY = 5000
 
 export const scrapEachServerKillStatistics = async (
   serverList: ServerObject[],
-): Promise<boolean> => {
+): Promise<void> => {
   const taskSize = serverList.length
   const taskTracking = new TrackETA(
     taskSize,
     coloredText('Scraping kill statistics for each server', 'highlight'),
   )
 
-  let wasUpdated = false
   for (const { serverName } of serverList) {
     tabBroadcast(serverName, 'control')
     const helper = new KillStatistics()
@@ -25,17 +24,13 @@ export const scrapEachServerKillStatistics = async (
 
     await file.load(serverName)
 
-    const newData = await file.feedData(
+    await file.feedData(
       helper.lastDayBossKills(await fetch.killStatisticsPage(serverName)),
     )
-
-    if (newData) wasUpdated = newData
 
     await sleep(DELAY)
     taskTracking.incTask()
   }
 
   taskTracking.finish()
-
-  return wasUpdated
 }

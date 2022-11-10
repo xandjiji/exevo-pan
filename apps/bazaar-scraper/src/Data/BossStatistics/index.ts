@@ -132,7 +132,7 @@ export default class BossStatisticsData {
 
   public async feedData(
     bossKillsData: Record<string, BossKills>,
-  ): Promise<boolean> {
+  ): Promise<void> {
     const serverName = this.bossStatistics.server
 
     if (!this.isDataFresh(bossKillsData)) {
@@ -140,7 +140,7 @@ export default class BossStatisticsData {
         `Data for ${this.colored.server(serverName)} still not updated`,
         'control',
       )
-      return false
+      return
     }
 
     const newestHash = this.generateHash(bossKillsData)
@@ -165,7 +165,6 @@ export default class BossStatisticsData {
     this.bossStatistics.latest.timestamp = currentTimestamp
 
     await this.save()
-    return true
   }
 
   getBossStatistics(): BossStatistics {
