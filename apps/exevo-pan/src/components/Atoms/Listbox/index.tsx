@@ -17,8 +17,8 @@ const Listbox = (
     className,
     children,
     highlightedIndex,
-    selectedIndex = new Set<number>([]),
     onSelectOption,
+    selectedIndex = new Set<number>([]),
     ...props
   }: ListboxProps,
   refProp: Ref<HTMLDivElement>,
