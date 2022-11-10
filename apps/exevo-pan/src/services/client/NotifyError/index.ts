@@ -1,6 +1,6 @@
 import { endpoints } from 'Constants'
 
-const LOAD_MESSAGES_TIME = 3000
+const LOAD_MESSAGES_TIME = 1000
 
 export default class NotifyErrorClient {
   private static errorQueue: any[] = []
