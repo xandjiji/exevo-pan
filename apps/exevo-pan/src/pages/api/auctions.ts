@@ -17,7 +17,7 @@ const CACHE_AGE = {
 
 export default async ({ method, url }: NextRequest) => {
   if (method !== 'GET') {
-    return new Response(JSON.stringify({ error: `${method} not allowed ` }), {
+    return new Response(JSON.stringify({ error: `${method} not allowed` }), {
       status: 400,
       headers: { 'Content-Type': 'application/json' },
     })
