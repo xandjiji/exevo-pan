@@ -75,7 +75,3 @@ export default async (
 
   response.status(200).json({ uuid })
 }
-
-export const config = {
-  runtime: 'experimental-edge',
-}
