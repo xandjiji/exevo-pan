@@ -1,3 +1,5 @@
+import { StaticImageData } from 'next/image'
+
 export type Material = {
   src: StaticImageData
   name: string
