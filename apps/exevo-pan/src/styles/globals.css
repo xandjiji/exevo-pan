@@ -163,7 +163,6 @@ html {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   @apply custom-scrollbar text-onSurface bg-background;
 }

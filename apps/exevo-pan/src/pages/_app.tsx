@@ -7,8 +7,13 @@ import { TranslationsProvider } from 'contexts/useTranslation'
 import { LockBodyProvider } from 'hooks/useLockBody'
 import { gtag } from 'utils'
 import { AppProps } from 'next/app'
+import { Roboto } from '@next/font/google'
 import 'styles/globals.css'
 import 'styles/reset.css'
+
+const roboto = Roboto({
+  weight: ['300', '400', '700'],
+})
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { translations } = pageProps
@@ -30,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.query.slug])
 
   return (
-    <>
+    <body className={roboto.className}>
       <Head>
         <meta name="viewport" content="width=device-width" />
         <meta property="og:site_name" content="Exevo Pan" />
@@ -55,7 +60,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </ThemeProvider>
         </ErrorBoundary>
       </TranslationsProvider>
-    </>
+    </body>
   )
 }
 export default MyApp

@@ -15,23 +15,7 @@ export default function Document() {
           content="#3F51B5"
         />
 
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap"
-          rel="stylesheet"
-        />
-
         <link rel="icon" href="/favicon.ico" />
-
-        <meta
-          name="google-site-verification"
-          content={google.SITE_VERIFICATION}
-        />
 
         <script
           async
@@ -48,17 +32,15 @@ export default function Document() {
           }}
         />
       </Head>
-      <body>
-        <script
-          /* minified version of `public/loadTheme.js` */
-          dangerouslySetInnerHTML={{
-            __html:
-              'function getInitialTheme(){if("undefined"!=typeof window){const e=window.localStorage.getItem("data-theme");if(e)return e;if(window.matchMedia("(prefers-color-scheme: dark)").matches)return"dark"}return"light"}function injectCssVariables(e){const t="light"===e?"#3F51B5":"#8B63E3";document.documentElement.setAttribute("data-theme",e),document.getElementById("address-bar-1")?.setAttribute("content",t),document.getElementById("address-bar-2")?.setAttribute("content",t)}injectCssVariables(getInitialTheme());',
-          }}
-        />
-        <Main />
-        <NextScript />
-      </body>
+      <script
+        /* minified version of `public/loadTheme.js` */
+        dangerouslySetInnerHTML={{
+          __html:
+            'function getInitialTheme(){if("undefined"!=typeof window){const e=window.localStorage.getItem("data-theme");if(e)return e;if(window.matchMedia("(prefers-color-scheme: dark)").matches)return"dark"}return"light"}function injectCssVariables(e){const t="light"===e?"#3F51B5":"#8B63E3";document.documentElement.setAttribute("data-theme",e),document.getElementById("address-bar-1")?.setAttribute("content",t),document.getElementById("address-bar-2")?.setAttribute("content",t)}injectCssVariables(getInitialTheme());',
+        }}
+      />
+      <Main />
+      <NextScript />
     </Html>
   )
 }
