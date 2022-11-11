@@ -6,7 +6,7 @@ import { tabBroadcast, coloredText, TrackETA } from 'logging'
 import { sleep } from 'utils'
 import { fetch } from '../utils'
 
-const DELAY = 5000
+const DELAY = 1000
 
 export const scrapEachServerKillStatistics = async (
   serverList: ServerObject[],
