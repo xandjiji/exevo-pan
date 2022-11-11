@@ -22,9 +22,12 @@ const Link = ({
   }, [scrollOnCurrent, isCurrent])
 
   return (
-    <NextLink href={href}>
-      <a ref={aRef} aria-current={isCurrent ? 'page' : undefined} {...props} />
-    </NextLink>
+    <NextLink
+      ref={aRef as any}
+      href={href}
+      aria-current={isCurrent ? 'page' : undefined}
+      {...props}
+    />
   )
 }
 

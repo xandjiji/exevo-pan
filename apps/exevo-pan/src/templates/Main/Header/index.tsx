@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
@@ -70,18 +69,16 @@ const Header = ({
             onClick={toggleMenu}
           />
 
-          <NextLink href={routes.HOME}>
-            <a aria-label={accessibleLogoName}>
-              <div className="mr-4 hidden shrink-0 cursor-pointer items-center justify-center md:flex">
-                {pageTitle && <h1 className="hidden">{pageTitle}</h1>}
-                <Image
-                  unoptimized
-                  aria-label={common.Header.logoLabel}
-                  alt={accessibleLogoName}
-                  src={Logo}
-                />
-              </div>
-            </a>
+          <NextLink href={routes.HOME} aria-label={accessibleLogoName}>
+            <div className="mr-4 hidden shrink-0 cursor-pointer items-center justify-center md:flex">
+              {pageTitle && <h1 className="hidden">{pageTitle}</h1>}
+              <Image
+                unoptimized
+                aria-label={common.Header.logoLabel}
+                alt={accessibleLogoName}
+                src={Logo}
+              />
+            </div>
           </NextLink>
 
           <ul
@@ -97,12 +94,10 @@ const Header = ({
                   href={href}
                   exact={exact}
                 >
-                  <>
-                    <HeaderIcon icon={icon} spaced />
-                    <h2 className="text-s text-onPrimary whitespace-nowrap font-normal tracking-wider">
-                      {common.Header.nav[title]}
-                    </h2>
-                  </>
+                  <HeaderIcon icon={icon} spaced />
+                  <h2 className="text-s text-onPrimary whitespace-nowrap font-normal tracking-wider">
+                    {common.Header.nav[title]}
+                  </h2>
                 </Link>
               </li>
             ))}

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
@@ -15,12 +14,12 @@ const Breadcrumbs = ({ postTitle, ...props }: BreadcrumbsProps) => {
       className="text-tsm max-w-min overflow-hidden text-ellipsis whitespace-nowrap"
       {...props}
     >
-      <NextLink href={routes.HOME}>
-        <a className="text-primaryHighlight">{blog.Meta.breadcrumbRoot}</a>
+      <NextLink href={routes.HOME} className="text-primaryHighlight">
+        {blog.Meta.breadcrumbRoot}
       </NextLink>
       <Separator />
-      <NextLink href={routes.BLOG}>
-        <a className="text-primaryHighlight">{blog.Meta.title}</a>
+      <NextLink href={routes.BLOG} className="text-primaryHighlight">
+        {blog.Meta.title}
       </NextLink>
       <Separator />
       <span>{postTitle}</span>

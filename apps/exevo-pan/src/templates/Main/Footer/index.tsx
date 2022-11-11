@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/anchor-has-content */
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
@@ -39,10 +38,11 @@ const Footer = () => {
               key={href}
               className="text-s text-onPrimary/50 after:ml-3 after:content-['|'] last:after:content-['']"
             >
-              <NextLink href={href}>
-                <a className="text-s text-onPrimary cursor-pointer tracking-wider md:text-base">
-                  {common.Header.nav[content]}
-                </a>
+              <NextLink
+                href={href}
+                className="text-s text-onPrimary cursor-pointer tracking-wider md:text-base"
+              >
+                {common.Header.nav[content]}
               </NextLink>
             </li>
           ))}
