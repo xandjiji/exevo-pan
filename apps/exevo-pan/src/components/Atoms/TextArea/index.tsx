@@ -58,9 +58,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           style={{ minWidth: 'inherit' }}
           value={derivedValue}
           {...props}
-        >
-          {derivedValue}
-        </textarea>
+        />
         {!noAlert && (
           <FormError id={errorId} error={error} className="shrink-0" />
         )}
