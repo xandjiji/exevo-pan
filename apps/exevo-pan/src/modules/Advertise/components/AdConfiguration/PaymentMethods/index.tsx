@@ -15,14 +15,16 @@ const PaymentMethods = () => {
         onClick={() =>
           dispatch({ type: 'SET_PAYMENT_METHOD', method: 'TIBIA_COINS' })
         }
-        icon={<Image src={TibiaCoinsSrc} width="24" height="24" />}
+        icon={
+          <Image alt="Tibia Coin" src={TibiaCoinsSrc} width="24" height="24" />
+        }
       >
         Tibia Coins
       </MethodButton>
       <MethodButton
         active={paymentMethod === 'PIX'}
         onClick={() => dispatch({ type: 'SET_PAYMENT_METHOD', method: 'PIX' })}
-        icon={<Image src={PixSrc} width="24" height="24" />}
+        icon={<Image alt="Pix" src={PixSrc} width="24" height="24" />}
       >
         Pix
       </MethodButton>

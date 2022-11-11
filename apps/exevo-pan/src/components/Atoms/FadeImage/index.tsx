@@ -3,15 +3,14 @@ import clsx from 'clsx'
 import Image, { ImageProps } from 'next/image'
 import { useOnImageLoad } from 'hooks'
 
-const FadeImage = ({ className, id, ...props }: ImageProps) => {
-  const [loaded, onLoad] = useOnImageLoad()
+const FadeImage = ({ className, ...props }: ImageProps) => {
+  const [loaded, onLoadingComplete] = useOnImageLoad()
 
   return (
     <Image
       className={clsx('transition-opacity', !loaded && 'opacity-0', className)}
-      id={id}
       {...props}
-      onLoad={onLoad}
+      onLoadingComplete={onLoadingComplete}
     />
   )
 }

@@ -19,23 +19,20 @@ const Hero = ({
     )}
     {...props}
   >
-    <div
+    <Image
+      src={src}
+      alt={title}
+      layout="fixed"
+      width={240}
+      height={240}
+      priority
+      unoptimized
       className={clsx(
-        'hero-image pointer-events-none absolute top-1/2 left-1/2 mix-blend-overlay',
+        'pointer-events-none absolute top-1/2 left-1/2 mix-blend-overlay',
         offset && 'md:ml-[-112px]',
       )}
       style={{ transform: 'translate(-50%, -50%)' }}
-    >
-      <Image
-        src={src}
-        alt={title}
-        layout="fixed"
-        width={240}
-        height={240}
-        priority
-        unoptimized
-      />
-    </div>
+    />
 
     <div className="z-1 relative grid gap-4">
       <h1
@@ -49,7 +46,7 @@ const Hero = ({
         {title}
       </h1>
       {!!subtitle && (
-        <span className="hero-subtitle text-s block whitespace-nowrap font-light italic tracking-wide opacity-90 md:text-base">
+        <span className="text-s block whitespace-nowrap font-light italic tracking-wide opacity-90 md:text-base">
           {subtitle}
         </span>
       )}
