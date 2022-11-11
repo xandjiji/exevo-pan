@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import { NextRequest } from 'next/server'
 import { endpoints } from 'Constants'
 import { MILLISECONDS_IN, SECONDS_IN } from 'utils'
 
@@ -16,37 +15,42 @@ const CACHE_AGE = {
   history: SECONDS_IN.HOUR * 4,
 }
 
-export default async (
-  request: VercelRequest,
-  response: VercelResponse,
-): Promise<void> => {
-  const { method, query, url } = request
+export default async ({ method, url }: NextRequest) => {
   if (method !== 'GET') {
-    response.status(400).send(`${method} not allowed `)
-    return
+    return new Response(JSON.stringify({ error: `${method} not allowed ` }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 
+  const { searchParams } = new URL(url)
+
   try {
-    const isHistory = query.history === 'true'
+    const isHistory = searchParams.get('history') === 'true'
 
     const endpoint = new URL(
       endpoints[isHistory ? 'HISTORY_AUCTIONS' : 'CURRENT_AUCTIONS'],
     )
 
-    const [, urlParams] = (url ?? '').split('?')
-    const currentParams = new URLSearchParams(urlParams)
-    currentParams.delete('history')
-    endpoint.search = currentParams.toString()
+    searchParams.delete('history')
+    endpoint.search = searchParams.toString()
 
     const result = await fetch(endpoint.toString())
-    const parsedResult = await result.json()
 
     const maxAge = isHistory ? CACHE_AGE.history : CACHE_AGE.current()
-    response.setHeader('Cache-Control', `max-age=${maxAge}, s-maxage=${maxAge}`)
 
-    response.status(200).json(parsedResult)
+    return new Response(result.body, {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': `max-age=${maxAge}, s-maxage=${maxAge}`,
+      },
+    })
   } catch (error) {
-    response.status(400).json(error)
+    return new Response(JSON.stringify({ error }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
 }
 
