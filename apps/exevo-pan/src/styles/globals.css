@@ -188,6 +188,10 @@ textarea {
   font-family: inherit;
 }
 
+.content-wrapper code {
+  @apply code text-s py-0.5 px-2 tracking-wider;
+}
+
 @keyframes spinAnimation {
   0% {
     transform: rotate(0deg);

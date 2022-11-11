@@ -1,11 +1,10 @@
-import clsx from 'clsx'
-import styles from './styles.module.css'
-
 export const pre = (args: JSX.IntrinsicElements['pre']) => (
-  <pre {...args} className={clsx('m-0', styles.pre)} />
+  <pre
+    {...args}
+    className="child:custom-scrollbar child:text-s child:!m-0 child:w-full child:overflow-auto child:!py-4 child:!px-6"
+  />
 )
 
-/* changes made here should also be added to `.contentWrapper` class */
 export const code = (args: JSX.IntrinsicElements['code']) => (
   <code {...args} className="code text-s py-0.5 px-2 tracking-wider" />
 )
