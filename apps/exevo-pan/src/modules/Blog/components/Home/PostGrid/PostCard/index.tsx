@@ -28,7 +28,6 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
         <FadeImage
           src={loadThumbnail(thumbnail)}
           alt={title}
-          layout="fixed"
           width={120}
           height={120}
           unoptimized

@@ -24,7 +24,6 @@ export const Banner = memo(
         className="self-start"
         src={logoMdSrc}
         alt="Tibia Blackjack"
-        layout="fixed"
         width={97}
         height={61}
       />
@@ -57,7 +56,6 @@ export const FloatingButton = memo(
             className="self-start"
             src={logoSmSrc}
             alt="Tibia Blackjack"
-            layout="fixed"
             width={24}
             height={24}
           />

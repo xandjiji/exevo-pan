@@ -22,7 +22,6 @@ const Hero = ({
     <Image
       src={src}
       alt={title}
-      layout="fixed"
       width={240}
       height={240}
       priority

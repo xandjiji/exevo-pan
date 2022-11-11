@@ -13,7 +13,6 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
       <FadeImage
         src={loadThumbnail(thumbnail, 32)}
         alt={title}
-        layout="fixed"
         width={32}
         height={32}
         unoptimized

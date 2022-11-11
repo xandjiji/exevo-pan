@@ -45,7 +45,6 @@ const SpritePortrait = ({
       <Image
         alt={alt}
         src={src}
-        layout="fixed"
         width={width}
         height={height}
         onLoadingComplete={onLoadingComplete}

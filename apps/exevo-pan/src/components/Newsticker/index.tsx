@@ -36,7 +36,6 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
             <div className="bg-primaryVariant relative top-0 grid shrink-0 place-items-center rounded-md p-2 shadow-md transition-all group-hover:-top-0.5">
               <FadeImage
                 src={loadThumbnail(thumbnail, 48)}
-                layout="fixed"
                 width={48}
                 height={48}
                 alt={title}
