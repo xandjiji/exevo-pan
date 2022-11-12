@@ -32,15 +32,17 @@ export default function Document() {
           }}
         />
       </Head>
-      <script
-        /* minified version of `public/loadTheme.js` */
-        dangerouslySetInnerHTML={{
-          __html:
-            'function getInitialTheme(){if("undefined"!=typeof window){const e=window.localStorage.getItem("data-theme");if(e)return e;if(window.matchMedia("(prefers-color-scheme: dark)").matches)return"dark"}return"light"}function injectCssVariables(e){const t="light"===e?"#3F51B5":"#8B63E3";document.documentElement.setAttribute("data-theme",e),document.getElementById("address-bar-1")?.setAttribute("content",t),document.getElementById("address-bar-2")?.setAttribute("content",t)}injectCssVariables(getInitialTheme());',
-        }}
-      />
-      <Main />
-      <NextScript />
+      <body>
+        <script
+          /* minified version of `public/loadTheme.js` */
+          dangerouslySetInnerHTML={{
+            __html:
+              'function getInitialTheme(){if("undefined"!=typeof window){const e=window.localStorage.getItem("data-theme");if(e)return e;if(window.matchMedia("(prefers-color-scheme: dark)").matches)return"dark"}return"light"}function injectCssVariables(e){const t="light"===e?"#3F51B5":"#8B63E3";document.documentElement.setAttribute("data-theme",e),document.getElementById("address-bar-1")?.setAttribute("content",t),document.getElementById("address-bar-2")?.setAttribute("content",t)}injectCssVariables(getInitialTheme());',
+          }}
+        />
+        <Main />
+        <NextScript />
+      </body>
     </Html>
   )
 }

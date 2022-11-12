@@ -35,7 +35,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [router.query.slug])
 
   return (
-    <body className={roboto.className}>
+    <>
       <Head>
         <meta name="viewport" content="width=device-width" />
         <meta property="og:site_name" content="Exevo Pan" />
@@ -51,6 +51,13 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="https://i.imgur.com/obDJJOI.png"
         />
       </Head>
+
+      <style jsx global>{`
+        html {
+          font-family: ${roboto.style.fontFamily};
+        }
+      `}</style>
+
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
           <ThemeProvider>
@@ -60,7 +67,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           </ThemeProvider>
         </ErrorBoundary>
       </TranslationsProvider>
-    </body>
+    </>
   )
 }
 export default MyApp
