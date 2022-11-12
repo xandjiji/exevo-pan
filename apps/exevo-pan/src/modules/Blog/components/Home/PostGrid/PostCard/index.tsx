@@ -31,7 +31,6 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
           width={120}
           height={120}
           unoptimized
-          objectFit="scale-down"
         />
       </div>
 
