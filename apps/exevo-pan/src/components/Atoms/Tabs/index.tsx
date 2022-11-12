@@ -4,7 +4,6 @@ import {
   useCallback,
   useEffect,
   Children,
-  isValidElement,
   cloneElement,
   useRef,
 } from 'react'
@@ -68,7 +67,6 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
           }}
         >
           {Children.map(children, (child, childIndex) => {
-            if (!isValidElement(child)) return child
             const { label } = child.props as PanelProps
 
             const isSelected = childIndex === activeIndex
@@ -103,16 +101,14 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
           })}
         </div>
 
-        {Children.map(children, (child, childIndex) => {
-          if (!isValidElement(child)) return child
-
-          return cloneElement(child, {
+        {Children.map(children, (child, childIndex) =>
+          cloneElement(child, {
             id: getPanelId(childIndex),
             'aria-labelledby': getTabId(childIndex),
             active: childIndex === activeIndex,
             label: undefined,
-          })
-        })}
+          }),
+        )}
       </div>
     )
   },
