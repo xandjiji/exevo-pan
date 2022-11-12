@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { Analytics } from '@vercel/analytics/react'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
 import ErrorBoundary from 'components/ErrorBoundary'
@@ -62,6 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <ErrorBoundary>
           <ThemeProvider>
             <LockBodyProvider>
+              <Analytics />
               <Component {...pageProps} />
             </LockBodyProvider>
           </ThemeProvider>
