@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react'
 import { Placement } from '@popperjs/core'
 
 export type PopoverProps = {
-  children: React.ReactNode
+  children: JSX.Element
   content: React.ReactElement<{
     'aria-hidden'?: boolean
     disabled?: boolean

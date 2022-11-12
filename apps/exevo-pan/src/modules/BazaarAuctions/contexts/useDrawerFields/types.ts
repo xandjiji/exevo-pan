@@ -19,5 +19,5 @@ type ServerSideProps = Pick<
 >
 
 export interface DrawerFieldsProviderProps extends ServerSideProps {
-  children: React.ReactNode
+  children: JSX.Element
 }

@@ -10,5 +10,5 @@ export interface CurrentSectionContextValues {
 }
 
 export interface CurrentSectionProviderProps {
-  children: React.ReactNode
+  children: JSX.Element | JSX.Element[]
 }

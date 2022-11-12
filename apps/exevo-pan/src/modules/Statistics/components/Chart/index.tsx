@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import clsx from 'clsx'
@@ -139,6 +140,7 @@ const Chart = ({
       </div>
 
       <div className="h-[260px] w-full">
+        {/* @ts-ignore */}
         <Line data={chartDataObject} options={options} />
       </div>
 

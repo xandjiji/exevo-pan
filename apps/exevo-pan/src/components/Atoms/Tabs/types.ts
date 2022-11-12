@@ -2,7 +2,7 @@ export interface TabsProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, 'onChange'> {
   activeIndex?: number
   initialActive?: number
-  children: React.ReactNode
+  children: JSX.Element | JSX.Element[]
   onChange?: (newIndex: number) => void
 }
 

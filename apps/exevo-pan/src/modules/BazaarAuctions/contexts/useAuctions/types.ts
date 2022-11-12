@@ -42,5 +42,5 @@ export interface AuctionsProviderProps {
   initialPageData: PageData
   defaultSortingMode: number
   defaultDescendingOrder: boolean
-  children: React.ReactNode
+  children: JSX.Element
 }

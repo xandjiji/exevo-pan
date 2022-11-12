@@ -21,7 +21,7 @@ export const renderWithProviders = (
 
   return {
     ...renderResult,
-    rerender: (rerenderedUi): void =>
-      renderResult.rerender(wrapWithProviders(rerenderedUi)),
+    rerender: (rerenderedUi) =>
+      renderResult.rerender(wrapWithProviders(rerenderedUi as ReactElement)),
   }
 }

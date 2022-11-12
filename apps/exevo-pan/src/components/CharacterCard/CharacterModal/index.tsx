@@ -257,7 +257,7 @@ const CharacterModal = ({
                 )}
               </Tabs.Panel>
 
-              {mounts.length + storeMounts.length > 0 && (
+              {mounts.length + storeMounts.length > 0 ? (
                 <Tabs.Panel
                   label={
                     <>
@@ -298,9 +298,11 @@ const CharacterModal = ({
                     </>
                   )}
                 </Tabs.Panel>
+              ) : (
+                <></>
               )}
 
-              {storeItems.length > 0 && (
+              {storeItems.length > 0 ? (
                 <Tabs.Panel
                   label={
                     <>
@@ -322,6 +324,8 @@ const CharacterModal = ({
                     ))}
                   </S.SpriteSection>
                 </Tabs.Panel>
+              ) : (
+                <></>
               )}
             </Tabs.Group>
           </S.Spacer>
