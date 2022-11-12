@@ -54,7 +54,6 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
   return (
     <main>
       <div
-        suppressHydrationWarning
         id="grid-header"
         className="z-71 bg-surface inner-container sticky top-0 flex h-[70px] w-full select-none items-end gap-2 py-2 shadow-md md:items-center"
       >

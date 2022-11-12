@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useUuid } from 'hooks'
+import { useId } from 'react'
 import { InfoIcon } from 'assets/svgs'
 import { LabeledTextBoxProps } from './types'
 
@@ -10,7 +10,7 @@ const LabeledTextBox = ({
   warning = false,
   ...props
 }: LabeledTextBoxProps) => {
-  const labelId = useUuid()
+  const labelId = useId()
 
   return (
     <div
@@ -20,13 +20,11 @@ const LabeledTextBox = ({
         className,
       )}
       aria-labelledby={labelText ? labelId : undefined}
-      suppressHydrationWarning
       {...props}
     >
       {labelText && (
         <span
           id={labelId}
-          suppressHydrationWarning
           className={clsx(
             'absolute top-0 left-2 flex select-none items-center px-1 text-[9px] font-light uppercase tracking-wider',
             warning ? 'text-red' : 'text-onSurface',

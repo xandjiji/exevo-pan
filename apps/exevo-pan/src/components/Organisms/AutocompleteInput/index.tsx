@@ -1,8 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useReducer, useCallback, useEffect, memo } from 'react'
+import { useReducer, useCallback, useEffect, useId, memo } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Input } from 'components/Atoms'
-import { useUuid } from 'hooks'
 import { filterByTerm } from './utils'
 import { AutocompleteInputProps } from './types'
 import AutocompleteInputReducer from './reducer'
@@ -15,7 +14,7 @@ const AutocompleteInput = ({
   defaultValue,
   ...props
 }: AutocompleteInputProps) => {
-  const listboxId = useUuid()
+  const listboxId = useId()
 
   const [
     { filteredList, listboxStatus, highlightedIndex, inputValue },

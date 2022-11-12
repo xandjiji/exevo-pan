@@ -1,9 +1,16 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import { forwardRef, useRef, useCallback, useMemo, useEffect } from 'react'
+import {
+  forwardRef,
+  useRef,
+  useCallback,
+  useMemo,
+  useEffect,
+  useId,
+} from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { useUuid, useSharedRef, useIsMounted } from 'hooks'
+import { useSharedRef, useIsMounted } from 'hooks'
 import Label from '../Label'
 import FormError from '../FormError'
 import useTimeInput from './useTimeInput'
@@ -44,11 +51,11 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
     },
     refProp,
   ) => {
-    const uuid = useUuid()
+    const uuid = useId()
     const inputId = idProp ?? uuid
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
 
-    const errorId = useUuid()
+    const errorId = useId()
 
     const hoursRef = useRef<HTMLInputElement>(null)
     const minutesRef = useRef<HTMLInputElement>(null)

@@ -1,5 +1,4 @@
-import { useCallback } from 'react'
-import { useUuid } from 'hooks'
+import { useCallback, useId } from 'react'
 
 type UseIdsObject = {
   getTabId: (index: number) => string
@@ -7,8 +6,8 @@ type UseIdsObject = {
 }
 
 const useIds = (): UseIdsObject => {
-  const tabId = useUuid('tab')
-  const panelId = useUuid('panel')
+  const tabId = `tab-${useId()}`
+  const panelId = `panel-${useId()}`
 
   const getTabId = useCallback((index: number) => `${index}-${tabId}`, [tabId])
 

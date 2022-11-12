@@ -11,7 +11,6 @@ const FormError = ({ error, className, ...props }: FormErrorProps) => (
       !error && 'opacity-0',
       className,
     )}
-    suppressHydrationWarning
     {...props}
   >
     {error}

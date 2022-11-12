@@ -1,11 +1,10 @@
-import { useRef, useCallback, useState } from 'react'
+import { useRef, useCallback, useState, useId } from 'react'
 import clsx from 'clsx'
 import { Chip, Label } from 'components/Atoms'
-import { useUuid } from 'hooks'
 import { ChipGroupProps, OptionProps } from './types'
 
 const Option = ({ groupName, name, value, ...props }: OptionProps) => {
-  const id = useUuid()
+  const id = useId()
 
   const inputRef = useRef<HTMLInputElement>(null)
 

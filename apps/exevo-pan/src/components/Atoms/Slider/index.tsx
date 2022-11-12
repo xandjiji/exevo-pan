@@ -8,11 +8,11 @@ import {
   useMemo,
   useCallback,
   useEffect,
+  useId,
 } from 'react'
 import {
   useSharedRef,
   useDrag,
-  useUuid,
   useIsomorphicLayoutEffect,
   useIsMounted,
 } from 'hooks'
@@ -59,7 +59,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
     },
     ref: React.Ref<HTMLInputElement>,
   ) => {
-    const uuid = useUuid()
+    const uuid = useId()
     const inputId = idProp ?? uuid
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
 

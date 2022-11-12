@@ -42,7 +42,6 @@ const AuctionTimer = ({ endDate, past, ...props }: AuctionTimerProps) => {
     return (
       <>
         <Countdown
-          suppressHydrationWarning
           role="timer"
           aria-label={
             past
@@ -66,7 +65,6 @@ const AuctionTimer = ({ endDate, past, ...props }: AuctionTimerProps) => {
     return (
       <>
         <Countdown
-          suppressHydrationWarning
           role="timer"
           aria-label={common.AuctionTimer.auctionEndsIn}
           endingSoon
@@ -81,7 +79,6 @@ const AuctionTimer = ({ endDate, past, ...props }: AuctionTimerProps) => {
 
   return (
     <Countdown
-      suppressHydrationWarning
       role="timer"
       aria-label={common.AuctionTimer.auctionIsOver}
       endingSoon

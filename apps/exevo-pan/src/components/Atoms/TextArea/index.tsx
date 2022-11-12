@@ -1,6 +1,5 @@
-import { forwardRef, useState } from 'react'
+import { forwardRef, useState, useId } from 'react'
 import clsx from 'clsx'
-import { useUuid } from 'hooks'
 import Label from '../Label'
 import FormError from '../FormError'
 import { TextAreaProps } from './types'
@@ -23,8 +22,8 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     },
     ref,
   ) => {
-    const textboxId = idProp ?? useUuid()
-    const errorId = useUuid()
+    const textboxId = idProp ?? useId()
+    const errorId = useId()
 
     const [value, setValue] = useState(valueProp ?? defaultValue ?? '')
     const derivedValue = valueProp ?? value

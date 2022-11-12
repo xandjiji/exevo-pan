@@ -104,7 +104,7 @@ const Header = ({
           </ul>
         </nav>
 
-        <div className="flex items-center gap-4" suppressHydrationWarning>
+        <div className="flex items-center gap-4">
           <LanguagePicker
             isOpen={languageOpen}
             setLanguageOpen={setLanguageOpen}
