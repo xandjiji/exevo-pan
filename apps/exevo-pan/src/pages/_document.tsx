@@ -1,6 +1,5 @@
 /* eslint-disable react/no-danger */
 import { Html, Head, Main, NextScript } from 'next/document'
-import { google } from 'Constants'
 
 export default function Document() {
   return (
@@ -16,21 +15,6 @@ export default function Document() {
         />
 
         <link rel="icon" href="/favicon.ico" />
-
-        <script
-          async
-          src={`https://www.googletagmanager.com/gtag/js?id=${google.GTM_ID}`}
-        />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', '${google.GTM_ID}', { page_path: window.location.pathname });
-            `,
-          }}
-        />
       </Head>
       <body>
         <script
