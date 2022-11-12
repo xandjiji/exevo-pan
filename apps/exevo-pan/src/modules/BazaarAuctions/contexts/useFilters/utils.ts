@@ -1,5 +1,4 @@
 import { dequal } from 'dequal'
-import { gtag } from 'utils'
 
 export const toggleSet = <T>(set: Set<T>, value: T): Set<T> => {
   const newSet = new Set<T>([...set])
@@ -23,10 +22,7 @@ export const countActiveFilters = (
       currentFilters[filterKey as keyof FilterOptions],
     )
 
-    if (diff) {
-      count += 1
-      gtag.filterUsed(filterKey)
-    }
+    if (diff) count += 1
   })
 
   return count
