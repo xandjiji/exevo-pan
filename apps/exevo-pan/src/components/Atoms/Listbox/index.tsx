@@ -4,6 +4,7 @@ import {
   useMemo,
   useEffect,
   Children,
+  isValidElement,
   cloneElement,
   memo,
 } from 'react'
@@ -47,14 +48,17 @@ const Listbox = (
       )}
       {...props}
     >
-      {Children.map(children, (child, index) =>
-        cloneElement(child, {
+      {Children.map(children, (child, index) => {
+        if (!isValidElement(child)) return child
+        if (typeof child.type === 'string') return child
+
+        return cloneElement(child as any, {
           id: indexToId(index, props.id),
           highlighted: highlightedIndex === index,
           'aria-selected': selectedIndex.has(index),
           onClick: onSelectOption,
-        }),
-      )}
+        })
+      })}
     </div>
   )
 }

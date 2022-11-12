@@ -1,13 +1,7 @@
 import { HTMLAttributes } from 'react'
 
-export type RadioGroupProps = {
+export interface RadioGroupProps
+  extends Omit<HTMLAttributes<HTMLDivElement>, 'onChange'> {
   indexValue?: number
   onChange?: (index: number) => void
-  children: JSX.Element &
-    React.ReactElement<{
-      id?: string
-      highlighted?: boolean
-      'aria-selected'?: boolean
-      onClick?: boolean
-    }>
-} & Omit<HTMLAttributes<HTMLDivElement>, 'onChange'>
+}
