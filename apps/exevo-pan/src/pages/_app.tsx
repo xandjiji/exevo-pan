@@ -1,12 +1,9 @@
 import Head from 'next/head'
 import { Analytics } from '@vercel/analytics/react'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
 import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
 import { LockBodyProvider } from 'hooks/useLockBody'
-import { gtag } from 'utils'
 import { AppProps } from 'next/app'
 import { Roboto } from '@next/font/google'
 import 'styles/globals.css'
@@ -18,22 +15,6 @@ const roboto = Roboto({
 
 function MyApp({ Component, pageProps }: AppProps) {
   const { translations } = pageProps
-  const router = useRouter()
-
-  const handleRouteChange = (url: URL) => gtag.pageView(url)
-
-  useEffect(() => {
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
-
-  useEffect(() => {
-    if (typeof router.query.slug === 'string') {
-      gtag.blogPostView(router.query.slug)
-    }
-  }, [router.query.slug])
 
   return (
     <>
