@@ -9,11 +9,7 @@ const FiltersContext = createContext<FiltersContextValues>(
   {} as FiltersContextValues,
 )
 
-export const FiltersProvider = ({
-  children,
-}: {
-  children: React.ReactNode
-}) => {
+export const FiltersProvider = ({ children }: { children: JSX.Element }) => {
   const [filterState, setFilterState] = useUrlParamsState(filterSchema)
 
   return (

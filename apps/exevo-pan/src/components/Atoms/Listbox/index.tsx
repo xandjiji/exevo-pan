@@ -52,7 +52,7 @@ const Listbox = (
         if (!isValidElement(child)) return child
         if (typeof child.type === 'string') return child
 
-        return cloneElement(child, {
+        return cloneElement(child as any, {
           id: indexToId(index, props.id),
           highlighted: highlightedIndex === index,
           'aria-selected': selectedIndex.has(index),

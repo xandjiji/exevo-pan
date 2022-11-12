@@ -152,7 +152,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
         step={5}
         displayValue
         transformDisplayedValues={useCallback(
-          (value) =>
+          (value: number) =>
             value
               ? `${value * 72} ${
                   calculators.ExerciseWeapons.labels.loyaltyPoints

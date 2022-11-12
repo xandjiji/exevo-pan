@@ -48,7 +48,6 @@ const Newsletter = ({
       <div className="absolute top-4 right-4">
         <FadeImage
           alt="Royal mail"
-          layout="fixed"
           width={64}
           height={64}
           unoptimized
@@ -90,7 +89,6 @@ const Newsletter = ({
             {blog.Newsletter.buttonText}
             <FadeImage
               alt="Stamped letter"
-              layout="fixed"
               width={26}
               height={15}
               src={letterSrc}

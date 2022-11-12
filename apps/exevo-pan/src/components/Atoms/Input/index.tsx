@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
-import { forwardRef, Ref, useState, useCallback, memo } from 'react'
+import { forwardRef, Ref, useState, useCallback, useId, memo } from 'react'
 import clsx from 'clsx'
-import { useUuid, useSharedRef } from 'hooks'
+import { useSharedRef } from 'hooks'
 import { CrossIcon } from 'assets/svgs'
 import Label from '../Label'
 import FormError from '../FormError'
@@ -34,8 +34,8 @@ const Input = (
 
   const innerRef = useSharedRef<HTMLInputElement>(refProp)
 
-  const inputId = id ?? useUuid()
-  const errorId = useUuid()
+  const inputId = id ?? useId()
+  const errorId = useId()
 
   const [value, setValue] = useState<InputValue>(
     valueProp ?? defaultValue ?? '',

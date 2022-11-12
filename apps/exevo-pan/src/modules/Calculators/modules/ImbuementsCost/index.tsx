@@ -79,7 +79,7 @@ const ImbuementsCost = () => {
 
         <Tabs.Group
           activeIndex={recipeIndex}
-          onChange={useCallback((index) => setRecipeIndex(index), [])}
+          onChange={useCallback((index: number) => setRecipeIndex(index), [])}
         >
           {RECIPES.map(({ name, materials }) => (
             <Tabs.Panel

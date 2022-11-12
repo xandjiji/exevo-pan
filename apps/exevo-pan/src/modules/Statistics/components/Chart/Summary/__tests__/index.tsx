@@ -18,7 +18,7 @@ describe('<Summary />', () => {
     expect(screen.getByText(/50\.00%/)).toBeInTheDocument()
   })
 
-  test('should style trend red/green', () => {
+  test('should style trend icon red/green', () => {
     const { rerender } = renderWithProviders(
       <Summary title="Total volume" value={1000} percentage={50} />,
     )
@@ -29,11 +29,23 @@ describe('<Summary />', () => {
     expect(textElement).toMatchSnapshot()
     /* expect(screen.getByLabelText('Upwards trend')).toHaveStyle('fill: #377712') */
     expect(screen.getByLabelText('Upwards trend')).toMatchInlineSnapshot(`
-      <image
+      <svg
         aria-label="Upwards trend"
         class="mr-1 h-4 w-4 fill-green"
+        height="24px"
         style="transform: none;"
-      />
+        viewBox="0 0 24 24"
+        width="24px"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 0h24v24H0z"
+          fill="none"
+        />
+        <path
+          d="M16 6l2.29 2.29-4.88 4.88-4-4L2 16.59 3.41 18l6-6 4 4 6.3-6.29L22 12V6z"
+        />
+      </svg>
     `)
 
     rerender(

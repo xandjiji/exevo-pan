@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { SpriteProps } from './types'
 
 const SPACE_GAP = 3
@@ -19,14 +20,15 @@ const Sprite = ({
     }}
   >
     {children}
-    <img
+    <Image
       className="absolute top-1/2 select-none"
       src={src}
       alt={children}
+      width={width}
+      height={height}
+      unoptimized
       style={{
         left: -(width + SPACE_GAP),
-        width,
-        height,
         transform: 'translateY(-50%)',
       }}
     />

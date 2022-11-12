@@ -1,5 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import { NextRequest } from 'next/server'
 import { SECONDS_IN } from 'utils'
 import { AuctionsClient } from 'services/server'
 import { FetchAuctionPageArgs } from 'services/server/Auctions/types'
@@ -19,25 +18,40 @@ const checkForAuctionId = (
     ),
   )
 
-export default async (
-  request: VercelRequest,
-  response: VercelResponse,
-): Promise<void> => {
-  const { method, query } = request
+export default async ({ method, url }: NextRequest) => {
   if (method !== 'GET') {
-    response.status(400).send(`${method} not allowed `)
-    return
+    return new Response(JSON.stringify({ error: `${method} not allowed` }), {
+      status: 400,
+      headers: { 'Content-Type': 'application/json' },
+    })
   }
+
+  const { searchParams } = new URL(url)
 
   let maxAge = CACHE_AGE.current
 
+  const id = searchParams.get('id')
+  const fromQuery = searchParams.get('from')
+
+  if (!id) {
+    return new Response(
+      JSON.stringify({ error: 'Missing `id` query parameter' }),
+      {
+        status: 400,
+        headers: { 'Content-Type': 'application/json' },
+      },
+    )
+  }
+
   try {
-    const queryArgs = { filterOptions: { auctionIds: new Set([+query.id]) } }
+    const queryArgs = {
+      filterOptions: { auctionIds: new Set([+id]) },
+    }
 
     let result: CharacterObject | null = null
 
-    if (query.from !== from.ANY) {
-      const isHistory = query.from === from.HISTORY
+    if (fromQuery !== from.ANY) {
+      const isHistory = fromQuery === from.HISTORY
 
       const {
         page: [firstResult],
@@ -60,11 +74,21 @@ export default async (
 
     if (!result) throw Error()
 
-    response.setHeader('Cache-Control', `max-age=${maxAge}, s-maxage=${maxAge}`)
-    response.status(200).json(result)
+    return new Response(JSON.stringify(result), {
+      status: 200,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': `max-age=${maxAge}, s-maxage=${maxAge}`,
+      },
+    })
   } catch (error) {
-    response.setHeader('Cache-Control', `max-age=${maxAge}, s-maxage=${maxAge}`)
-    response.status(400).json(error)
+    return new Response(JSON.stringify(error), {
+      status: 400,
+      headers: {
+        'Content-Type': 'application/json',
+        'Cache-Control': `max-age=${maxAge}, s-maxage=${maxAge}`,
+      },
+    })
   }
 }
 

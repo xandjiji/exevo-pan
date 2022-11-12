@@ -7,7 +7,6 @@ export const Button = ({
   <button
     type="button"
     className={clsx('clickable grid place-items-center rounded', className)}
-    suppressHydrationWarning
     {...props}
   />
 )

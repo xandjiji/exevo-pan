@@ -37,7 +37,7 @@ export interface FetchPostsContextValues extends FetchPostsReducerState {
 }
 
 export interface FetchPostsProviderProps {
-  children: React.ReactNode
+  children: JSX.Element | JSX.Element[]
   initialPosts: BlogPost[]
   initialIndex: number
 }

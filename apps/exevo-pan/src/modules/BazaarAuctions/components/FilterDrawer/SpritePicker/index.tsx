@@ -1,6 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { memo } from 'react'
+import Image from 'next/image'
 import { Accordion, Label, ActiveCount } from 'components/Atoms'
 import { useFilters } from '../../../contexts/useFilters'
 import { SpritePickerProps } from './types'
@@ -60,7 +61,7 @@ const SpritePicker = ({
                 isChecked ? 'bg-primaryHighlight' : 'bg-primaryVariant',
               )}
             >
-              <img
+              <Image
                 alt={name}
                 src={`/sprites/${spriteDirectory}/${name}${directorySuffix}.gif`}
                 width="64"

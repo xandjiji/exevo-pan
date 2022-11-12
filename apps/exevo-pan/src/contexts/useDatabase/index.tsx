@@ -38,7 +38,7 @@ const DatabaseDispatchContext = createContext<DatabaseDispatchContextValues>({
 export const DatabaseProvider = ({
   children,
 }: {
-  children: React.ReactNode
+  children: JSX.Element | JSX.Element[]
 }) => {
   const {
     translations: { common },

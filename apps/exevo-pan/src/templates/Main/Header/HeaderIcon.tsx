@@ -2,7 +2,7 @@ import { cloneElement } from 'react'
 import clsx from 'clsx'
 
 type HeaderIconProps = {
-  icon: React.ReactElement
+  icon: JSX.Element & React.ReactElement<React.SVGAttributes<SVGElement>>
   spaced?: boolean
 }
 

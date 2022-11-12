@@ -19,12 +19,7 @@ const EmptyState = ({
       className="pointer-events-none select-none"
       style={{ filter: 'grayscale(0.3)', opacity: 0.2 }}
     >
-      <FadeImage
-        src={notFoundSrc}
-        objectFit="scale-down"
-        alt={text.content}
-        height={height}
-      />
+      <FadeImage src={notFoundSrc} alt={text.content} height={height} />
     </div>
 
     <div

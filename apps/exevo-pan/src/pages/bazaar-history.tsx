@@ -143,6 +143,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       initialAuctionData,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
     },
-    revalidate: 6000,
   }
 }

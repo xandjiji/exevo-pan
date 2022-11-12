@@ -6,6 +6,8 @@ import {
   useCallback,
   useEffect,
 } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
+import { LoadingAlert } from 'components/Atoms'
 import { useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services/client'
 import AuctionsReducer from './reducer'
@@ -19,6 +21,10 @@ export const AuctionsProvider = ({
   initialPageData,
   children,
 }: AuctionsProviderProps) => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: DEFAULT_STATE.loading,
     nickname: DEFAULT_STATE.nickname,
@@ -68,6 +74,7 @@ export const AuctionsProvider = ({
     <AuctionsContext.Provider
       value={{ ...state, handlePaginatorFetch, handleNicknameFetch }}
     >
+      {state.loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       {children}
     </AuctionsContext.Provider>
   )

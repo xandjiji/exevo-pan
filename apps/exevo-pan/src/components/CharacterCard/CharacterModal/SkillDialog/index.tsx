@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useMemo, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
@@ -81,7 +80,7 @@ const SkillDialog = ({
           step={5}
           displayValue
           transformDisplayedValues={useCallback(
-            (value) =>
+            (value: number) =>
               value
                 ? `${value * 72} ${
                     common.CharacterCard.CharacterModal.SkillDialog
@@ -154,14 +153,11 @@ const SkillDialog = ({
           `${parameterNames.percentageLeft}=${percentageLeft}`,
           `${parameterNames.loyalty}=${loyaltyBonus}`,
         ].join('&')}`}
+        className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"
+        target="_blank"
       >
-        <a
-          className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"
-          target="_blank"
-        >
-          {common.CharacterCard.CharacterModal.SkillDialog.externalCalculator}
-          <ExternalIcon className="fill-onSurface mb-[1px] h-4 w-4 shrink-0" />
-        </a>
+        {common.CharacterCard.CharacterModal.SkillDialog.externalCalculator}
+        <ExternalIcon className="fill-onSurface mb-[1px] h-4 w-4 shrink-0" />
       </NextLink>
     </Dialog>
   )

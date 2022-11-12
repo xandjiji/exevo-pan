@@ -1,4 +1,4 @@
-import { screen } from '@testing-library/react'
+import { screen, waitForElementToBeRemoved } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import Dialog from '..'
@@ -29,8 +29,15 @@ describe('<Dialog />', () => {
 
     expect(onCloseMock).toHaveBeenCalledTimes(0)
 
-    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
+    const [invisibleCloseButton, visibleCloseButton] = screen.getAllByRole(
+      'button',
+      { name: 'Close dialog' },
+    )
+    userEvent.click(invisibleCloseButton)
     expect(onCloseMock).toHaveBeenCalledTimes(1)
+
+    userEvent.click(visibleCloseButton)
+    expect(onCloseMock).toHaveBeenCalledTimes(2)
   })
 
   test('should be controlled with `isOpen` prop', () => {
@@ -59,8 +66,8 @@ describe('<Dialog />', () => {
     )
 
     expect(
-      screen.queryByRole('button', { name: 'Close dialog' }),
-    ).not.toBeInTheDocument()
+      screen.queryAllByRole('button', { name: 'Close dialog' }),
+    ).toHaveLength(1)
   })
 
   test('a11y', async () => {

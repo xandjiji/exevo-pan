@@ -1,10 +1,10 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
-import { useMemo, memo } from 'react'
+import { useMemo, useId, memo } from 'react'
 import clsx from 'clsx'
 import { Doughnut } from 'react-chartjs-2'
 import { useTheme } from 'contexts/useTheme'
-import { useUuid } from 'hooks'
 import { capitalizeFirstLetter } from 'utils'
 import { PieChartProps } from './types'
 
@@ -16,7 +16,7 @@ const PieChart = ({
   className,
   ...props
 }: PieChartProps) => {
-  const titleId = useUuid()
+  const titleId = useId()
   const { colors } = useTheme()
 
   const options = useMemo(
@@ -80,6 +80,7 @@ const PieChart = ({
         {title}
       </h4>
       <div aria-describedby={titleId} className="w-full">
+        {/* @ts-ignore */}
         <Doughnut data={chartData} options={options} />
       </div>
     </section>

@@ -25,7 +25,7 @@ const RadioGroup = ({
         if (!isValidElement(child)) return child
         if (typeof child.type === 'string') return child
 
-        return cloneElement(child, {
+        return cloneElement(child as any, {
           id: indexToId(index),
           active: derivedActiveIndex === index,
           onClick: () => {

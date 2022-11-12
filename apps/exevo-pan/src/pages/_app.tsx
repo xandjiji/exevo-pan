@@ -1,33 +1,21 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import { Analytics } from '@vercel/analytics/react'
 import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
 import { LockBodyProvider } from 'hooks/useLockBody'
-import { gtag } from 'utils'
 import { AppProps } from 'next/app'
+import { Roboto } from '@next/font/google'
 import 'styles/globals.css'
 import 'styles/reset.css'
 
+const roboto = Roboto({
+  weight: ['300', '400', '700'],
+})
+
 function MyApp({ Component, pageProps }: AppProps) {
+  const PageComponent = Component as any
   const { translations } = pageProps
-  const router = useRouter()
-
-  const handleRouteChange = (url: URL) => gtag.pageView(url)
-
-  useEffect(() => {
-    router.events.on('routeChangeComplete', handleRouteChange)
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange)
-    }
-  }, [router.events])
-
-  useEffect(() => {
-    if (typeof router.query.slug === 'string') {
-      gtag.blogPostView(router.query.slug)
-    }
-  }, [router.query.slug])
 
   return (
     <>
@@ -46,11 +34,19 @@ function MyApp({ Component, pageProps }: AppProps) {
           content="https://i.imgur.com/obDJJOI.png"
         />
       </Head>
+
+      <style jsx global>{`
+        html {
+          font-family: ${roboto.style.fontFamily};
+        }
+      `}</style>
+
       <TranslationsProvider value={{ translations }}>
         <ErrorBoundary>
           <ThemeProvider>
             <LockBodyProvider>
-              <Component {...pageProps} />
+              <Analytics />
+              <PageComponent {...pageProps} />
             </LockBodyProvider>
           </ThemeProvider>
         </ErrorBoundary>

@@ -115,7 +115,7 @@ describe('<CharacterModal />', () => {
 
     expect(mockOnClose).toHaveBeenCalledTimes(0)
 
-    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
+    userEvent.click(screen.getAllByRole('button', { name: 'Close dialog' })[0])
     expect(mockOnClose).toHaveBeenCalledTimes(1)
   })
 

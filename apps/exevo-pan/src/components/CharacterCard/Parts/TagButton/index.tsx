@@ -3,10 +3,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useId } from 'react'
 import clsx from 'clsx'
 import { TagIcon, AdvertiseIcon } from 'assets/svgs'
-import { useUuid } from 'hooks'
 import { routes } from 'Constants'
 import { HoveredState } from './types'
 
@@ -25,12 +24,11 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
     setHoverState('off')
   }, [])
 
-  const labelId = useUuid()
+  const labelId = useId()
 
   return (
     <NextLink href={routes.ADVERTISE}>
       <div
-        suppressHydrationWarning
         tabIndex={0}
         onMouseOver={handleHover}
         onFocus={handleHover}
@@ -72,7 +70,6 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
         </div>
 
         <p
-          suppressHydrationWarning
           id={labelId}
           className={clsx(
             'text-onSurface absolute bottom-0 left-1/2 text-center text-xs transition-opacity',

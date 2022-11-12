@@ -1,11 +1,10 @@
-import { useRef, useCallback, useState } from 'react'
+import { useRef, useCallback, useState, useId } from 'react'
 import clsx from 'clsx'
 import { Chip, Label } from 'components/Atoms'
-import { useUuid } from 'hooks'
 import { ChipGroupProps, OptionProps } from './types'
 
 const Option = ({ groupName, name, value, ...props }: OptionProps) => {
-  const id = useUuid()
+  const id = useId()
 
   const inputRef = useRef<HTMLInputElement>(null)
 
@@ -19,17 +18,19 @@ const Option = ({ groupName, name, value, ...props }: OptionProps) => {
       overrideStatus={props.checked}
       role="radio"
     >
-      <input
-        ref={inputRef}
-        type="radio"
-        name={groupName}
-        value={value}
-        tabIndex={-1}
-        className={clsx('-z-1 absolute h-0 w-0')}
-        aria-labelledby={id}
-        {...props}
-      />
-      {name}
+      <>
+        <input
+          ref={inputRef}
+          type="radio"
+          name={groupName}
+          value={value}
+          tabIndex={-1}
+          className={clsx('-z-1 absolute h-0 w-0')}
+          aria-labelledby={id}
+          {...props}
+        />
+        {name}
+      </>
     </Chip>
   )
 }

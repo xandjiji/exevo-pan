@@ -21,7 +21,7 @@ export const SlugLink = ({ children, href }: LinkProps) => {
   )
 
   return (
-    <NextLink href={href}>
+    <NextLink href={href} legacyBehavior>
       <A href={routedHref} target="_blank" rel="noreferrer noopener">
         {children}
       </A>
@@ -30,7 +30,7 @@ export const SlugLink = ({ children, href }: LinkProps) => {
 }
 
 export const RouteLink = ({ children, href, ...props }: LinkProps) => (
-  <NextLink href={href} {...props}>
+  <NextLink href={href} legacyBehavior {...props}>
     <A href={href}>{children}</A>
   </NextLink>
 )

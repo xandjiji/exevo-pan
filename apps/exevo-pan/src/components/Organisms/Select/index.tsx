@@ -5,12 +5,13 @@ import {
   useRef,
   useCallback,
   useMemo,
+  useId,
   memo,
 } from 'react'
 import clsx from 'clsx'
 import { Popover, Listbox, Option, Label, FormError } from 'components/Atoms'
 import { ChevronDownIcon } from 'assets/svgs'
-import { useSharedRef, useUuid } from 'hooks'
+import { useSharedRef } from 'hooks'
 import SelectReducer from './reducer'
 import useValueRef from './useValueRef'
 import useTypeSearch from './useTypeSearch'
@@ -38,10 +39,10 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
     },
     ref: React.Ref<HTMLInputElement>,
   ) => {
-    const listboxId = useUuid()
-    const uuid = useUuid()
+    const listboxId = useId()
+    const uuid = useId()
     const selectId = idProp ?? uuid
-    const errorId = useUuid()
+    const errorId = useId()
     const accessibleLabel = typeof label === 'string' ? label : ariaLabel
 
     const innerRef = useSharedRef<HTMLInputElement>(ref)
@@ -122,7 +123,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
               id={listboxId}
               highlightedIndex={selectedIndex}
               selectedIndex={new Set([selectedIndex])}
-              onSelectOption={useCallback((option) => {
+              onSelectOption={useCallback((option: Option) => {
                 dispatch({
                   type: 'OPTION_SELECTED',
                   selectedValue: option.value,

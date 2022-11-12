@@ -1,7 +1,6 @@
+import { useState, useCallback, useId } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback } from 'react'
 import clsx from 'clsx'
-import { useUuid } from 'hooks'
 import { ChevronDownIcon } from 'assets/svgs'
 import { AccordionProps } from './types'
 
@@ -18,8 +17,8 @@ const Accordion = ({
     translations: { common },
   } = useTranslations()
 
-  const buttonId = useUuid()
-  const contentId = useUuid()
+  const buttonId = useId()
+  const contentId = useId()
 
   const [innerOpen, setOpen] = useState(initialValue)
   const open = openProp ?? innerOpen
@@ -41,7 +40,6 @@ const Accordion = ({
         aria-controls={contentId}
         aria-label={common.Accordion[open ? 'close' : 'open']}
         onClick={handleClick}
-        suppressHydrationWarning
         className={clsx(
           'text-onSurface text-tsm flex w-full cursor-pointer items-center justify-between transition-all',
           border && 'border-separator',
@@ -58,7 +56,7 @@ const Accordion = ({
           style={{ transform: clsx(open && 'rotate(180deg)') }}
         />
       </button>
-      <div id={contentId} aria-describedby={buttonId} suppressHydrationWarning>
+      <div id={contentId} aria-describedby={buttonId}>
         {open && children}
       </div>
     </div>

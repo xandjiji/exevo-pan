@@ -99,6 +99,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
       initialAuctionData,
     },
-    revalidate: 60,
   }
 }

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { memo, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
@@ -29,11 +28,9 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
         <FadeImage
           src={loadThumbnail(thumbnail)}
           alt={title}
-          layout="fixed"
           width={120}
           height={120}
           unoptimized
-          objectFit="scale-down"
         />
       </div>
 
@@ -50,10 +47,11 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
           ))}
         </div>
       </div>
-      <NextLink href={`${routes.BLOG}/${slug}`}>
-        <a className="absolute top-0 left-0 h-full w-full text-transparent">
-          {title}
-        </a>
+      <NextLink
+        href={`${routes.BLOG}/${slug}`}
+        className="absolute top-0 left-0 h-full w-full text-transparent"
+      >
+        {title}
       </NextLink>
     </article>
   )

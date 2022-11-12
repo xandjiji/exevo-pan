@@ -6,7 +6,8 @@ type LevelInputProps = {
   dispatchValue: (value: number) => void
   initialValue: number
   defaultValue: number
-} & Omit<InputProps, 'ref'>
+} & Omit<InputProps, 'ref'> &
+  AccessibleLabelProps
 
 const LevelInput = ({
   dispatchValue,

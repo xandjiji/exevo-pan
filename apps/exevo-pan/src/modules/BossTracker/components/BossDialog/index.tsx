@@ -30,7 +30,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
       <div className="mb-3 mr-4 flex items-center gap-3.5">
         <SpritePortrait
           src={loadBossSrc(bossName ?? '')}
-          alt={bossName}
+          alt={bossName ?? ''}
           offset
           width={64}
           height={64}

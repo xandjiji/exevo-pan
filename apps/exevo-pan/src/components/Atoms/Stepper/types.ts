@@ -1,6 +1,6 @@
 export type Step = {
   title: string
-  icon?: React.ReactElement
+  icon?: JSX.Element & React.ReactElement<React.SVGAttributes<SVGElement>>
   onClick?: (index: number) => void
 }
 

@@ -4,7 +4,6 @@ import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import { useOnImageLoad } from 'hooks'
 import ActiveCount from '../ActiveCount'
-import styles from './styles.module.css'
 import { BackgroundProps, SpritePortraitProps } from './types'
 
 export const Background = ({
@@ -16,7 +15,7 @@ export const Background = ({
   <div
     className={clsx(
       'relative select-none rounded-md p-2 shadow transition-colors',
-      offset ? `${styles.offsetImage} h-14 w-14` : 'h-12 w-12',
+      offset ? `h-14 w-14` : 'h-12 w-12',
       highlight ? 'bg-primaryHighlight' : 'bg-primaryVariant',
       className,
     )}
@@ -39,20 +38,23 @@ const SpritePortrait = ({
     translations: { common },
   } = useTranslations()
 
-  const [loaded, onLoad] = useOnImageLoad()
+  const [loaded, onLoadingComplete] = useOnImageLoad()
 
   return (
     <Background offset={offset} highlight={highlight} {...props}>
       <Image
         alt={alt}
         src={src}
-        layout="fixed"
         width={width}
         height={height}
-        onLoad={onLoad}
+        onLoadingComplete={onLoadingComplete}
         onError={onError}
         unoptimized
-        className={clsx('z-1 transition-opacity', !loaded && 'opacity-0')}
+        className={clsx(
+          'z-1 transition-opacity',
+          offset && '!-ml-6 !-mt-6',
+          !loaded && 'opacity-0',
+        )}
       />
       {!loaded && (
         <div

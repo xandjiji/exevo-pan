@@ -163,7 +163,6 @@ html {
 }
 
 body {
-  font-family: 'Roboto', sans-serif;
   font-size: 16px;
   @apply custom-scrollbar text-onSurface bg-background;
 }
@@ -187,6 +186,10 @@ svg {
 
 textarea {
   font-family: inherit;
+}
+
+.content-wrapper code {
+  @apply code text-s py-0.5 px-2 tracking-wider;
 }
 
 @keyframes spinAnimation {

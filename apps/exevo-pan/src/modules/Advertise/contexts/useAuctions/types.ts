@@ -30,5 +30,5 @@ export interface AuctionsContextValues extends AuctionsContextState {
 export interface AuctionsProviderProps {
   initialPage: CharacterObject[]
   initialPageData: PageData
-  children: React.ReactNode
+  children: JSX.Element | JSX.Element[]
 }

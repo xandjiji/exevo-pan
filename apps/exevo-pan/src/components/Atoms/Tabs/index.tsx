@@ -105,8 +105,9 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
 
         {Children.map(children, (child, childIndex) => {
           if (!isValidElement(child)) return child
+          if (typeof child.type === 'string') return child
 
-          return cloneElement(child, {
+          return cloneElement(child as any, {
             id: getPanelId(childIndex),
             'aria-labelledby': getTabId(childIndex),
             active: childIndex === activeIndex,

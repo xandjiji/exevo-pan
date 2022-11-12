@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { FadeImage } from 'components/Atoms'
 import NextLink from 'next/link'
 import { loadThumbnail } from 'utils'
@@ -14,7 +13,6 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
       <FadeImage
         src={loadThumbnail(thumbnail, 32)}
         alt={title}
-        layout="fixed"
         width={32}
         height={32}
         unoptimized
@@ -24,8 +22,11 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
     <div className="grid gap-0.5">
       <h4 className="line-clamp-2 text-base font-normal">{title}</h4>
     </div>
-    <NextLink href={`${routes.BLOG}/${slug}`}>
-      <a className="text-none absolute top-0 left-0 h-full w-full">{title}</a>
+    <NextLink
+      href={`${routes.BLOG}/${slug}`}
+      className="text-none absolute top-0 left-0 h-full w-full"
+    >
+      {title}
     </NextLink>
   </li>
 )

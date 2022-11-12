@@ -6,14 +6,8 @@ export default async (
   request: VercelRequest,
   response: VercelResponse,
 ): Promise<void> => {
-  const { message } = request.body
-
   console.log('error detected')
-  console.log(message)
+  console.log(request.body)
 
   response.status(200).end()
-}
-
-export const config = {
-  runtime: 'experimental-edge',
 }

@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react'
 
-export interface ListboxProps extends HTMLAttributes<HTMLDivElement> {
+export type ListboxProps = {
   highlightedIndex?: number
   selectedIndex?: Set<number>
   onSelectOption?: (option: Option) => void
-}
+} & HTMLAttributes<HTMLDivElement>

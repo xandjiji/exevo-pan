@@ -8,7 +8,11 @@ import { mockData } from './mock'
 describe('<List />', () => {
   test('should render all head content', () => {
     const { container } = renderWithProviders(
-      <List title="Level" charactersList={mockData} displayedDataKey="level" />,
+      <List
+        title="Level"
+        charactersList={mockData}
+        pickFromCharacter={({ level }) => level}
+      />,
     )
 
     expect(screen.getByRole('heading', { name: 'Level' })).toBeInTheDocument()
@@ -25,7 +29,11 @@ describe('<List />', () => {
 
   test('should render every list item', () => {
     const { container } = renderWithProviders(
-      <List title="Level" charactersList={mockData} displayedDataKey="level" />,
+      <List
+        title="Level"
+        charactersList={mockData}
+        pickFromCharacter={({ level }) => level}
+      />,
     )
 
     container.querySelectorAll('table tbody tr').forEach((row, index) => {
@@ -45,8 +53,8 @@ describe('<List />', () => {
       <List
         title="Level"
         charactersList={mockData}
-        displayedDataKey="level"
-        format={formatNumberWithCommas}
+        pickFromCharacter={({ level }) => level}
+        formatCharacterValue={formatNumberWithCommas}
       />,
     )
 

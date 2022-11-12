@@ -1,7 +1,6 @@
 import NextImage from 'next/image'
 import clsx from 'clsx'
 import { useOnImageLoad } from 'hooks'
-import styles from './styles.module.css'
 import { ImageProps } from './types'
 
 const Image = ({
@@ -9,30 +8,37 @@ const Image = ({
   className,
   align = 'left',
   caption,
+  width,
+  height,
   ...props
 }: ImageProps) => {
-  const [loaded, onLoad] = useOnImageLoad()
+  const [loaded, onLoadingComplete] = useOnImageLoad()
 
   return (
-    <figure
-      id={id}
-      className={clsx(
-        'block',
-        align === 'center' && 'mx-auto',
-        align === 'right' && 'ml-auto',
-        className,
-      )}
-    >
-      <div className={clsx('transition-shadow', loaded && styles.wrapper)}>
+    <figure id={id}>
+      <div
+        className={clsx(
+          'relative block',
+          align === 'center' && 'mx-auto',
+          align === 'right' && 'ml-auto',
+          className,
+        )}
+        style={{
+          maxWidth: width,
+          width: '100%',
+          aspectRatio: `${width} / ${height}`,
+        }}
+      >
         <NextImage
           {...props}
-          className={clsx('transition-opacity', !loaded && 'opacity-0')}
-          onLoad={onLoad}
+          className={clsx('transition-all', loaded ? 'shadow' : 'opacity-0')}
+          onLoadingComplete={onLoadingComplete}
           unoptimized
+          fill
         />
       </div>
       {caption && (
-        <figcaption className="text-tsm block text-center">
+        <figcaption className="text-tsm mt-2 block text-center">
           {caption}
         </figcaption>
       )}

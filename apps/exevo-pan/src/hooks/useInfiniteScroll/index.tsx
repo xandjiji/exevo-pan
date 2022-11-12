@@ -4,7 +4,7 @@ const useInfiniteScroll = (fetchNextPage: () => any): ((node: any) => void) => {
   const observer = useRef<IntersectionObserver | null>(null)
 
   const lastFactRef = useCallback(
-    (node) => {
+    (node: Element) => {
       observer.current?.disconnect()
 
       observer.current = new IntersectionObserver((entries) => {

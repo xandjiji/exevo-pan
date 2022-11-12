@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
@@ -141,10 +140,11 @@ const CharmDamage = () => {
         <Calculator />
         <p className="text-tsm mb-4 font-light md:text-center">
           {calculators.CharmDamage.moreInfo}{' '}
-          <NextLink href={`${routes.BLOG}/${ARTICLE_SLUG}`}>
-            <a className="text-primaryHighlight font-bold">
-              {calculators.CharmDamage.thisArticle}
-            </a>
+          <NextLink
+            href={`${routes.BLOG}/${ARTICLE_SLUG}`}
+            className="text-primaryHighlight font-bold"
+          >
+            {calculators.CharmDamage.thisArticle}
           </NextLink>
           .
         </p>

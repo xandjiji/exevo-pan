@@ -5,5 +5,5 @@ export type UseThemeValues = {
 }
 
 export interface ThemeProviderProps {
-  children: React.ReactNode
+  children: JSX.Element | JSX.Element[]
 }

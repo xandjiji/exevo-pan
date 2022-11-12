@@ -1,3 +1,3 @@
 export type IconProps = {
-  icon: React.ReactElement
+  icon: JSX.Element & React.ReactElement<React.SVGAttributes<SVGElement>>
 } & JSX.IntrinsicElements['svg']

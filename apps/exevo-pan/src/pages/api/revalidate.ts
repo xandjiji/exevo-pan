@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable import/no-extraneous-dependencies */
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import { NextApiRequest, NextApiResponse } from 'next'
 import { locales } from 'Constants'
 
 const { ALL_LOCALES, DEFAULT_LOCALE } = locales
@@ -9,8 +7,8 @@ const addLocalePrefix = (locale: RegisteredLocale): string =>
   locale === DEFAULT_LOCALE ? '' : `/${locale}`
 
 export default async (
-  request: VercelRequest,
-  response: VercelResponse,
+  request: NextApiRequest,
+  response: NextApiResponse,
 ): Promise<void> => {
   const { secret } = request.query
   const auth = [process.env.REVALIDATION_AUTH, process.env.BACKOFFICE_TOKEN]
@@ -22,8 +20,7 @@ export default async (
 
   const route = request.query.route ?? ''
   const revalidateRoute = async (locale: RegisteredLocale): Promise<void> =>
-    // @ts-ignore
-    response.unstable_revalidate(`${addLocalePrefix(locale)}/${route}`)
+    response.revalidate(`${addLocalePrefix(locale)}/${route}`)
 
   try {
     await Promise.all(ALL_LOCALES.map(revalidateRoute))

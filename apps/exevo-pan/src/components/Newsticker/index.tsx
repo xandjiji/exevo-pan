@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { FadeImage, Tag, TibiaBlackjack } from 'components/Atoms'
@@ -37,7 +36,6 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
             <div className="bg-primaryVariant relative top-0 grid shrink-0 place-items-center rounded-md p-2 shadow-md transition-all group-hover:-top-0.5">
               <FadeImage
                 src={loadThumbnail(thumbnail, 48)}
-                layout="fixed"
                 width={48}
                 height={48}
                 alt={title}
@@ -63,10 +61,11 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
               </div>
             </div>
 
-            <NextLink href={`${routes.BLOG}/${slug}`}>
-              <a className="absolute top-0 left-0 h-full w-full text-transparent">
-                {title}
-              </a>
+            <NextLink
+              href={`${routes.BLOG}/${slug}`}
+              className="absolute top-0 left-0 h-full w-full text-transparent"
+            >
+              {title}
             </NextLink>
           </article>
         ))}
