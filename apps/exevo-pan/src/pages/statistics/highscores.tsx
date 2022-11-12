@@ -114,6 +114,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         top10Sword,
       },
     },
-    revalidate: 6000,
   }
 }

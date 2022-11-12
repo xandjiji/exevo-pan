@@ -102,6 +102,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         vocationPercentage,
       },
     },
-    revalidate: 6000,
   }
 }
