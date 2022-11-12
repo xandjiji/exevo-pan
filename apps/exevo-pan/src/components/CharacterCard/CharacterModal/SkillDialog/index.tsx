@@ -80,7 +80,7 @@ const SkillDialog = ({
           step={5}
           displayValue
           transformDisplayedValues={useCallback(
-            (value) =>
+            (value: number) =>
               value
                 ? `${value * 72} ${
                     common.CharacterCard.CharacterModal.SkillDialog
