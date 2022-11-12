@@ -1,5 +1,5 @@
 /* eslint-disable */
-import { Component } from 'react'
+import { Component, ErrorInfo } from 'react'
 import ErrorPage from 'modules/ErrorPage'
 import { isDevelopment } from 'utils'
 import { NotifyErrorClient } from 'services/client'
@@ -10,19 +10,19 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
     hasError: false,
   }
 
-  public static getDerivedStateFromError(error: Error): State {
-    NotifyErrorClient.setMessage(error)
-    console.log(error)
+  public static getDerivedStateFromError() {
     return { hasError: true }
   }
 
-  public componentDidCatch(): void {
+  public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if (isDevelopment()) return
+    NotifyErrorClient.setMessage({ error, errorInfo })
+    console.log({ error, errorInfo })
     localStorage.clear()
     setTimeout(() => window.location.reload(), 3000)
   }
 
-  public render(): React.ReactNode {
+  public render() {
     if (this.state.hasError) {
       return (
         <div className="h-screen">
@@ -31,7 +31,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
         </div>
       )
     } else {
-      return this.props.children
+      return this.props.children as any
     }
   }
 }
