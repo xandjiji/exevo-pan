@@ -18,17 +18,19 @@ const Option = ({ groupName, name, value, ...props }: OptionProps) => {
       overrideStatus={props.checked}
       role="radio"
     >
-      <input
-        ref={inputRef}
-        type="radio"
-        name={groupName}
-        value={value}
-        tabIndex={-1}
-        className={clsx('-z-1 absolute h-0 w-0')}
-        aria-labelledby={id}
-        {...props}
-      />
-      {name}
+      <>
+        <input
+          ref={inputRef}
+          type="radio"
+          name={groupName}
+          value={value}
+          tabIndex={-1}
+          className={clsx('-z-1 absolute h-0 w-0')}
+          aria-labelledby={id}
+          {...props}
+        />
+        {name}
+      </>
     </Chip>
   )
 }
