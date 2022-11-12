@@ -14,6 +14,7 @@ const roboto = Roboto({
 })
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const PageComponent = Component as any
   const { translations } = pageProps
 
   return (
@@ -45,7 +46,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ThemeProvider>
             <LockBodyProvider>
               <Analytics />
-              <Component {...pageProps} />
+              <PageComponent {...pageProps} />
             </LockBodyProvider>
           </ThemeProvider>
         </ErrorBoundary>
