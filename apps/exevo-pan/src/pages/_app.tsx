@@ -4,6 +4,7 @@ import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
 import { LockBodyProvider } from 'hooks/useLockBody'
+import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
 import { Roboto } from '@next/font/google'
 import 'styles/globals.css'
@@ -13,7 +14,7 @@ const roboto = Roboto({
   weight: ['300', '400', '700'],
 })
 
-function MyApp({ Component, pageProps }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const PageComponent = Component as any
   const { translations } = pageProps
 
@@ -46,7 +47,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <ThemeProvider>
             <LockBodyProvider>
               <Analytics />
-              <PageComponent {...pageProps} />
+              <SessionProvider session={session}>
+                <PageComponent {...pageProps} />
+              </SessionProvider>
             </LockBodyProvider>
           </ThemeProvider>
         </ErrorBoundary>
