@@ -2,7 +2,7 @@
 /* eslint-disable no-restricted-syntax */
 import { KillStatistics } from 'Helpers'
 import { BossStatistics } from 'Data'
-import { tabBroadcast, coloredText, TrackETA } from 'logging'
+import { coloredText, TrackETA } from 'logging'
 import { sleep } from 'utils'
 import { fetch } from '../utils'
 
@@ -18,7 +18,6 @@ export const scrapEachServerKillStatistics = async (
   )
 
   for (const { serverName } of serverList) {
-    tabBroadcast(serverName, 'control')
     const helper = new KillStatistics()
     const file = new BossStatistics()
 

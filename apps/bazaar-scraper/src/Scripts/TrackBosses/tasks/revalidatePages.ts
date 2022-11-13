@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
-import { broadcast, tabBroadcast, TrackETA } from 'logging'
+import { broadcast, coloredText, tabBroadcast, TrackETA } from 'logging'
 import { RevalidateClient } from 'services'
 import { retryWrapper } from 'utils'
 
@@ -19,12 +19,18 @@ export const revalidatePages = async (
 
   const task = new TrackETA(serverList.length + 1, 'Page revalidation')
 
-  tabBroadcast(`revalidating /boss-tracker...`, 'neutral')
+  tabBroadcast(
+    `revalidating ${coloredText('/boss-tracker', 'neutral')}...`,
+    'neutral',
+  )
   await revalidateServer()
   task.incTask()
 
   for (const { serverName } of serverList) {
-    tabBroadcast(`revalidating ${serverName}...`, 'neutral')
+    tabBroadcast(
+      `revalidating ${coloredText(serverName, 'neutral')}...`,
+      'neutral',
+    )
     await revalidateServer(serverName)
     task.incTask()
   }
