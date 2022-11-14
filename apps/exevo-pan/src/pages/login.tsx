@@ -3,18 +3,19 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { useSession, getProviders, signIn } from 'next-auth/react'
+import { useSession, getProviders } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
-import { Button, Link, FadeImage } from 'components/Atoms'
-import { GoogleIcon, DiscordIcon } from 'assets/svgs'
+import { FadeImage } from 'components/Atoms'
+import SignIn from 'components/SignIn'
 import { routes, jsonld } from 'Constants'
+import { AuthProviders } from 'types/Auth'
 import { common } from 'locales'
 
 const LOGO_SRC = '/logo-120x120.png'
 const pageUrl = buildUrl(routes.LOGIN)
 
 type LoginStaticProps = {
-  providers: Awaited<ReturnType<typeof getProviders>>
+  providers: AuthProviders
 }
 
 // @ ToDo: add meta tags content
@@ -93,53 +94,7 @@ export default function Login({ providers }: LoginStaticProps) {
               unoptimized
             />
 
-            {!session && (
-              <section className="card w-min p-4 px-6">
-                <h3 className="text-s mb-4 text-center font-normal tracking-wider">
-                  Sign in with:
-                </h3>
-
-                <ul className="mx-auto flex w-fit flex-col gap-4">
-                  {providers?.google && (
-                    <li>
-                      <Button
-                        type="button"
-                        onClick={() => signIn(providers.google.id)}
-                        className="flex w-full items-center gap-4"
-                      >
-                        <GoogleIcon className="h-5 w-5" />
-                        Google
-                      </Button>
-                    </li>
-                  )}
-
-                  {providers?.discord && (
-                    <li>
-                      <Button
-                        type="button"
-                        onClick={() => signIn(providers.discord.id)}
-                        className="flex w-full items-center gap-4"
-                      >
-                        <DiscordIcon className="h-5 w-5" />
-                        Discord
-                      </Button>
-                    </li>
-                  )}
-                </ul>
-
-                <small className="mx-auto mt-6 block text-center text-xs leading-relaxed tracking-wide">
-                  By signing in, you agree to our{' '}
-                  <Link href="/" className="text-primaryHighlight">
-                    Terms of Service
-                  </Link>{' '}
-                  and{' '}
-                  <Link href="/" className="text-primaryHighlight">
-                    Privacy Policy
-                  </Link>
-                  .
-                </small>
-              </section>
-            )}
+            <SignIn providers={providers} />
           </div>
         </main>
       </Main>
