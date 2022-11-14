@@ -16,7 +16,7 @@
     "execute": "NODE_PATH=./src sucrase-node src/index.ts"
   },
   "dependencies": {
-    "@prisma/client": "^4.4.0"
+    "@prisma/client": "^4.6.1"
   },
   "devDependencies": {
     "config": "*",
