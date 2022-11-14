@@ -11,11 +11,12 @@ const SignIn = ({
   state: stateProps,
 }: SignInProps) => {
   const [fetchedProviders, setProviders] = useState<AuthProviders | undefined>()
-  const [innerState, setState] = useState<RequestStatus>('IDLE')
+  const [innerState, setState] = useState<RequestStatus>(
+    providersProps ? 'IDLE' : 'LOADING',
+  )
 
   useEffect(() => {
     if (!providersProps) {
-      setState('LOADING')
       getProviders()
         .then((providers) => {
           if (providers) {
