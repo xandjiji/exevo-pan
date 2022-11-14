@@ -5,11 +5,12 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { useSession, getProviders, signIn } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
-import { Button, Link } from 'components/Atoms'
+import { Button, Link, FadeImage } from 'components/Atoms'
 import { GoogleIcon, DiscordIcon } from 'assets/svgs'
 import { routes, jsonld } from 'Constants'
 import { common } from 'locales'
 
+const LOGO_SRC = '/logo-120x120.png'
 const pageUrl = buildUrl(routes.LOGIN)
 
 type LoginStaticProps = {
@@ -82,54 +83,64 @@ export default function Login({ providers }: LoginStaticProps) {
       </Head>
 
       <Main>
-        <main className="inner-container grid place-items-center">
-          {!session && (
-            <section className="card p-4">
-              <h3 className="text-s mb-4 text-center font-normal tracking-wider">
-                Sign in with:
-              </h3>
+        <main className="inner-container grid place-items-center py-4">
+          <div className="grid place-items-center gap-10">
+            <FadeImage
+              src={LOGO_SRC}
+              alt="Exevo Pan"
+              width={120}
+              height={120}
+              unoptimized
+            />
 
-              <ul className="mx-auto flex w-fit flex-col gap-4">
-                {providers?.google && (
-                  <li>
-                    <Button
-                      type="button"
-                      onClick={() => signIn(providers.google.id)}
-                      className="flex w-full items-center gap-4"
-                    >
-                      <GoogleIcon className="h-5 w-5" />
-                      Google
-                    </Button>
-                  </li>
-                )}
+            {!session && (
+              <section className="card w-min p-4 px-6">
+                <h3 className="text-s mb-4 text-center font-normal tracking-wider">
+                  Sign in with:
+                </h3>
 
-                {providers?.discord && (
-                  <li>
-                    <Button
-                      type="button"
-                      onClick={() => signIn(providers.discord.id)}
-                      className="flex w-full items-center gap-4"
-                    >
-                      <DiscordIcon className="h-5 w-5" />
-                      Discord
-                    </Button>
-                  </li>
-                )}
-              </ul>
+                <ul className="mx-auto flex w-fit flex-col gap-4">
+                  {providers?.google && (
+                    <li>
+                      <Button
+                        type="button"
+                        onClick={() => signIn(providers.google.id)}
+                        className="flex w-full items-center gap-4"
+                      >
+                        <GoogleIcon className="h-5 w-5" />
+                        Google
+                      </Button>
+                    </li>
+                  )}
 
-              <small className="mx-auto mt-6 block text-center text-xs leading-relaxed">
-                By signing in, you agree to our{' '}
-                <Link href="/" className="text-primaryHighlight">
-                  Terms of Service
-                </Link>{' '}
-                and{' '}
-                <Link href="/" className="text-primaryHighlight">
-                  Privacy Policy
-                </Link>
-                .
-              </small>
-            </section>
-          )}
+                  {providers?.discord && (
+                    <li>
+                      <Button
+                        type="button"
+                        onClick={() => signIn(providers.discord.id)}
+                        className="flex w-full items-center gap-4"
+                      >
+                        <DiscordIcon className="h-5 w-5" />
+                        Discord
+                      </Button>
+                    </li>
+                  )}
+                </ul>
+
+                <small className="mx-auto mt-6 block text-center text-xs leading-relaxed tracking-wide">
+                  By signing in, you agree to our{' '}
+                  <Link href="/" className="text-primaryHighlight">
+                    Terms of Service
+                  </Link>{' '}
+                  and{' '}
+                  <Link href="/" className="text-primaryHighlight">
+                    Privacy Policy
+                  </Link>
+                  .
+                </small>
+              </section>
+            )}
+          </div>
         </main>
       </Main>
     </>
