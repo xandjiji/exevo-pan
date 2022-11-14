@@ -12,4 +12,7 @@ export default NextAuth({
     }),
   ],
   secret: process.env.JWT_SECRET as string,
+  pages: {
+    signIn: '/login',
+  },
 })
