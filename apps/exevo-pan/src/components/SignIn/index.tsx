@@ -1,14 +1,13 @@
 import { useState, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
+import { useRouter } from 'next/router'
 import { getProviders, signIn } from 'next-auth/react'
 import type { BuiltInProviderType } from 'next-auth/providers'
 import { GoogleIcon, DiscordIcon } from 'assets/svgs'
 import { AuthProviders } from 'types/Auth'
-import { links, routes } from 'Constants'
+import { links, routes, locales } from 'Constants'
 import { Button, Link } from '../Atoms'
 import { SignInProps } from './types'
-
-const signInOptions = { callbackUrl: `${links.CANONICAL}${routes.ACCOUNT}` }
 
 const SignIn = ({
   providers: providersProps,
@@ -38,15 +37,21 @@ const SignIn = ({
   const state = stateProps ?? innerState
   const loading = state === 'LOADING'
 
+  const { locale } = useRouter()
+
   const handleSignIn = useCallback(
     (provider: BuiltInProviderType) =>
       providers
         ? () => {
             setState('LOADING')
-            signIn(provider, signInOptions)
+            signIn(provider, {
+              callbackUrl: `${links.CANONICAL}${
+                locale === locales.DEFAULT_LOCALE ? '' : `/${locale}`
+              }${routes.ACCOUNT}`,
+            })
           }
         : undefined,
-    [providers],
+    [locale, providers],
   )
 
   return (
