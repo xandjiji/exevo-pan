@@ -3,9 +3,10 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { useSession, getProviders, signOut, signIn } from 'next-auth/react'
+import { useSession, getProviders, signIn } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
 import { Button } from 'components/Atoms'
+import { GoogleIcon } from 'assets/svgs'
 import { routes, jsonld } from 'Constants'
 import { common } from 'locales'
 
@@ -81,24 +82,27 @@ export default function Login({ providers }: LoginStaticProps) {
       </Head>
 
       <Main>
-        <main>
-          {session ? (
-            <div>
-              <p>Signed in as {session.user?.email}</p>
-              <Button type="button" onClick={() => signOut()}>
-                Sign out
-              </Button>
-            </div>
-          ) : (
-            <div>
-              {providers?.google && (
-                <Button
-                  type="button"
-                  onClick={() => signIn(providers.google.id)}
-                >
-                  Login with Google
-                </Button>
-              )}
+        <main className="inner-container grid place-items-center">
+          {!session && (
+            <div className="card grid gap-4">
+              <h3 className="text-tsm text-center font-normal tracking-wider">
+                Sign in with
+              </h3>
+
+              <ul>
+                {providers?.google && (
+                  <li>
+                    <Button
+                      type="button"
+                      onClick={() => signIn(providers.google.id)}
+                      className="flex items-center gap-4"
+                    >
+                      <GoogleIcon className="h-5 w-5" />
+                      Google
+                    </Button>
+                  </li>
+                )}
+              </ul>
             </div>
           )}
         </main>
