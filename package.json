@@ -36,7 +36,11 @@
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",
     "deploy:backoffice": "yarn --cwd apps/backoffice deploy",
     "scrap:raw": "yarn --cwd apps/bazaar-scraper scrap:raw",
-    "checkup": "yarn --cwd apps/bazaar-scraper checkup"
+    "checkup": "yarn --cwd apps/bazaar-scraper checkup",
+    "prisma:push": "yarn --cwd packages/prisma-database push",
+    "prisma:generate": "yarn --cwd packages/prisma-database generate",
+    "prisma:run": "scripts/setupDev.sh && yarn --cwd packages/prisma-database execute",
+    "prisma:run:prod": "scripts/forceProd.sh && yarn --cwd packages/prisma-database execute"
   },
   "devDependencies": {
     "husky": "^7.0.4",
