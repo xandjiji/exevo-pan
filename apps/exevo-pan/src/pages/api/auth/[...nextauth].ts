@@ -2,6 +2,7 @@ import NextAuth from 'next-auth/next'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import GoogleProvider from 'next-auth/providers/google'
 import { prisma } from 'lib/prisma'
+import { routes } from 'Constants'
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -13,6 +14,6 @@ export default NextAuth({
   ],
   secret: process.env.JWT_SECRET as string,
   pages: {
-    signIn: '/login',
+    signIn: routes.LOGIN,
   },
 })
