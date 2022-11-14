@@ -54,8 +54,8 @@ const SignIn = ({
         <li>
           <Button
             type="button"
-            onClick={providers ? () => signIn(providers.google.id) : undefined}
-            className="flex w-full items-center gap-4"
+            onClick={providers ? () => signIn('google') : undefined}
+            className="flex w-full items-center gap-3"
           >
             <GoogleIcon className="h-5 w-5" />
             Google
@@ -65,8 +65,8 @@ const SignIn = ({
         <li>
           <Button
             type="button"
-            onClick={providers ? () => signIn(providers.discord.id) : undefined}
-            className="flex w-full items-center gap-4"
+            onClick={providers ? () => signIn('discord') : undefined}
+            className="flex w-full items-center gap-3"
           >
             <DiscordIcon className="h-5 w-5" />
             Discord
