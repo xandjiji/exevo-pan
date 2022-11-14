@@ -5,8 +5,8 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { useSession, getProviders, signIn } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
-import { Button } from 'components/Atoms'
-import { GoogleIcon } from 'assets/svgs'
+import { Button, Link } from 'components/Atoms'
+import { GoogleIcon, DiscordIcon } from 'assets/svgs'
 import { routes, jsonld } from 'Constants'
 import { common } from 'locales'
 
@@ -84,26 +84,51 @@ export default function Login({ providers }: LoginStaticProps) {
       <Main>
         <main className="inner-container grid place-items-center">
           {!session && (
-            <div className="card grid gap-4">
-              <h3 className="text-tsm text-center font-normal tracking-wider">
-                Sign in with
+            <section className="card p-4">
+              <h3 className="text-s mb-4 text-center font-normal tracking-wider">
+                Sign in with:
               </h3>
 
-              <ul>
+              <ul className="mx-auto flex w-fit flex-col gap-4">
                 {providers?.google && (
                   <li>
                     <Button
                       type="button"
                       onClick={() => signIn(providers.google.id)}
-                      className="flex items-center gap-4"
+                      className="flex w-full items-center gap-4"
                     >
                       <GoogleIcon className="h-5 w-5" />
                       Google
                     </Button>
                   </li>
                 )}
+
+                {providers?.discord && (
+                  <li>
+                    <Button
+                      type="button"
+                      onClick={() => signIn(providers.discord.id)}
+                      className="flex w-full items-center gap-4"
+                    >
+                      <DiscordIcon className="h-5 w-5" />
+                      Discord
+                    </Button>
+                  </li>
+                )}
               </ul>
-            </div>
+
+              <small className="mx-auto mt-6 block text-center text-xs leading-relaxed">
+                By signing in, you agree to our{' '}
+                <Link href="/" className="text-primaryHighlight">
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link href="/" className="text-primaryHighlight">
+                  Privacy Policy
+                </Link>
+                .
+              </small>
+            </section>
           )}
         </main>
       </Main>
