@@ -1,10 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
 import { getProviders, signIn } from 'next-auth/react'
+import type { BuiltInProviderType } from 'next-auth/providers'
 import { GoogleIcon, DiscordIcon } from 'assets/svgs'
 import { AuthProviders } from 'types/Auth'
+import { links, routes } from 'Constants'
 import { Button, Link } from '../Atoms'
 import { SignInProps } from './types'
+
+const signInOptions = { callbackUrl: `${links.CANONICAL}${routes.ACCOUNT}` }
 
 const SignIn = ({
   providers: providersProps,
@@ -32,6 +36,18 @@ const SignIn = ({
 
   const providers = providersProps ?? fetchedProviders
   const state = stateProps ?? innerState
+  const loading = state === 'LOADING'
+
+  const handleSignIn = useCallback(
+    (provider: BuiltInProviderType) =>
+      providers
+        ? () => {
+            setState('LOADING')
+            signIn(provider, signInOptions)
+          }
+        : undefined,
+    [providers],
+  )
 
   return (
     <section className="card relative w-min p-4 px-6">
@@ -39,9 +55,8 @@ const SignIn = ({
         role="alert"
         className={clsx(
           'absolute top-0 left-0 grid h-full w-full place-items-center overflow-hidden transition-opacity',
-          state !== 'LOADING' && 'pointer-events-none opacity-0',
+          !loading && 'pointer-events-none opacity-0',
         )}
-        style={{ borderRadius: 'inherit' }}
       >
         <div className="bg-surface absolute top-0 left-0 grid h-full w-full opacity-60" />
         <div className="loading-spinner z-1 after:bg-surface relative h-8 w-8 bg-transparent" />
@@ -55,8 +70,9 @@ const SignIn = ({
         <li>
           <Button
             type="button"
-            onClick={providers ? () => signIn('google') : undefined}
+            onClick={handleSignIn('google')}
             className="flex w-full items-center gap-3"
+            disabled={loading}
           >
             <GoogleIcon className="h-5 w-5" />
             Google
@@ -66,8 +82,9 @@ const SignIn = ({
         <li>
           <Button
             type="button"
-            onClick={providers ? () => signIn('discord') : undefined}
+            onClick={handleSignIn('discord')}
             className="flex w-full items-center gap-3"
+            disabled={loading}
           >
             <DiscordIcon className="h-5 w-5" />
             Discord
