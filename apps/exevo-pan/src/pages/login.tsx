@@ -92,6 +92,7 @@ export default function Login({ providers }: LoginStaticProps) {
               width={120}
               height={120}
               unoptimized
+              priority
             />
 
             <SignIn providers={providers} />

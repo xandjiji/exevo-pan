@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react'
+import clsx from 'clsx'
 import { getProviders, signIn } from 'next-auth/react'
 import { GoogleIcon, DiscordIcon } from 'assets/svgs'
 import { AuthProviders } from 'types/Auth'
 import { Button, Link } from '../Atoms'
 import { SignInProps } from './types'
 
-const SignIn = ({ providers: providersProps }: SignInProps) => {
+const SignIn = ({
+  providers: providersProps,
+  state: stateProps,
+}: SignInProps) => {
   const [fetchedProviders, setProviders] = useState<AuthProviders | undefined>()
-  const [state, setState] = useState<RequestStatus>('IDLE')
+  const [innerState, setState] = useState<RequestStatus>('IDLE')
 
   useEffect(() => {
     if (!providersProps) {
@@ -26,9 +30,22 @@ const SignIn = ({ providers: providersProps }: SignInProps) => {
   }, [providersProps])
 
   const providers = providersProps ?? fetchedProviders
+  const state = stateProps ?? innerState
 
   return (
-    <section className="card w-min p-4 px-6">
+    <section className="card relative w-min p-4 px-6">
+      <div
+        role="alert"
+        className={clsx(
+          'absolute top-0 left-0 grid h-full w-full place-items-center overflow-hidden transition-opacity',
+          state !== 'LOADING' && 'pointer-events-none opacity-0',
+        )}
+        style={{ borderRadius: 'inherit' }}
+      >
+        <div className="bg-surface absolute top-0 left-0 grid h-full w-full opacity-60" />
+        <div className="loading-spinner z-1 after:bg-surface relative h-8 w-8 bg-transparent" />
+      </div>
+
       <h3 className="text-s mb-4 text-center font-normal tracking-wider">
         Sign in with:
       </h3>
