@@ -13,13 +13,13 @@ model Account {
     type              String
     provider          String
     providerAccountId String
-    refreshToken      String? @map("refresh_token") @db.String
-    accessToken       String? @map("access_token") @db.String
-    expiresAt         Int?    @map("expires_at")
-    tokenType         String? @map("token_type")
+    refresh_token     String? @db.String
+    access_token      String? @db.String
+    expires_at        Int?
+    token_type        String?
     scope             String?
-    idToken           String? @map("id_token") @db.String
-    sessionState      String? @map("session_state")
+    id_token          String? @db.String
+    session_state     String?
 
     user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
