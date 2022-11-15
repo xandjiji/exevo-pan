@@ -7,12 +7,32 @@ declare type AuthProviders = Record<
   ClientSafeProvider
 >
 
-declare module 'next-auth' {
-  interface User {
-    id: string
+declare module 'next-auth/jwt' {
+  /* this should match `User` */
+  interface JWT {
+    // token attributes
     name: string
     email: string
-    image: string
+    sub: string
+    picture: string
+    // extended user attributes
+    id: string
+    proStatus: boolean
+    proSince?: string
+    paymentData?: PaymentData
+  }
+}
+
+declare module 'next-auth' {
+  /* this should match `JWT` */
+  interface User {
+    // token attributes
+    name: string
+    email: string
+    sub: string
+    picture: string
+    // extended user attributes
+    id: string
     proStatus: boolean
     proSince?: string
     paymentData?: PaymentData
