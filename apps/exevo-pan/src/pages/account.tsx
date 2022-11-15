@@ -1,8 +1,8 @@
 import Head from 'next/head'
-import { useEffect } from 'react'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
+import { UserCard } from 'modules/Account'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
 import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
@@ -15,20 +15,16 @@ const pageUrl = buildUrl(routes.ACCOUNT)
 // @ ToDo: add meta tags content
 // @ ToDo: build page title from translations
 
-export default function Login() {
+export default function Account() {
   const { translations } = useTranslations()
-  const { locale, push } = useRouter()
+  const { locale } = useRouter()
 
   /* const pageTitle = buildPageTitle(translations.homepage.Meta.title) */
   const pageTitle = buildPageTitle('My Account')
 
   const { data: session, status } = useSession()
 
-  useEffect(() => {
-    if (status === 'unauthenticated') {
-      push(addLocalePrefix({ route: routes.LOGIN, locale }))
-    }
-  }, [status])
+  console.log(session)
 
   return (
     <>
@@ -85,6 +81,7 @@ export default function Login() {
 
       <Main>
         <main className="inner-container grid place-items-center py-4">
+          <UserCard user={session?.user} />
           <Button
             type="button"
             onClick={() =>
