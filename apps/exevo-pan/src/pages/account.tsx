@@ -1,10 +1,11 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
 import { Button } from 'components/Atoms'
 import { routes, jsonld } from 'Constants'
 import { common } from 'locales'
@@ -16,12 +17,18 @@ const pageUrl = buildUrl(routes.ACCOUNT)
 
 export default function Login() {
   const { translations } = useTranslations()
-  const { locale } = useRouter()
+  const { locale, push } = useRouter()
 
   /* const pageTitle = buildPageTitle(translations.homepage.Meta.title) */
   const pageTitle = buildPageTitle('My Account')
 
-  const { data: session } = useSession({ required: true })
+  const { data: session, status } = useSession()
+
+  useEffect(() => {
+    if (status === 'unauthenticated') {
+      push(addLocalePrefix({ route: routes.LOGIN, locale }))
+    }
+  }, [status])
 
   return (
     <>
@@ -78,7 +85,18 @@ export default function Login() {
 
       <Main>
         <main className="inner-container grid place-items-center py-4">
-          <Button type="button" onClick={() => signOut()}>
+          <Button
+            type="button"
+            onClick={() =>
+              signOut({
+                callbackUrl: addLocalePrefix({
+                  route: routes.HOME,
+                  locale,
+                  absolute: true,
+                }),
+              })
+            }
+          >
             Sign out
           </Button>
         </main>
