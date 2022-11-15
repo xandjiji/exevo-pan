@@ -4,8 +4,9 @@ import { useRouter } from 'next/router'
 import { getProviders, signIn } from 'next-auth/react'
 import type { BuiltInProviderType } from 'next-auth/providers'
 import { GoogleIcon, DiscordIcon } from 'assets/svgs'
+import { addLocalePrefix } from 'utils'
 import { AuthProviders } from 'types/Auth'
-import { links, routes, locales } from 'Constants'
+import { routes } from 'Constants'
 import { Button, Link } from '../Atoms'
 import { SignInProps } from './types'
 
@@ -45,9 +46,11 @@ const SignIn = ({
         ? () => {
             setState('LOADING')
             signIn(provider, {
-              callbackUrl: `${links.CANONICAL}${
-                locale === locales.DEFAULT_LOCALE ? '' : `/${locale}`
-              }${routes.ACCOUNT}`,
+              callbackUrl: addLocalePrefix({
+                route: routes.ACCOUNT,
+                locale,
+                absolute: true,
+              }),
             })
           }
         : undefined,

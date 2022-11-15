@@ -21,3 +21,20 @@ export const permalinkResolver = {
   current: ({ auctionId, locale }: PermalinkResolverArgs) =>
     `${buildUrl('', locale)}?${urlParameters.AUCTION_ID}=${auctionId}`,
 }
+
+type AddLocalePrefixArgs = {
+  route: string
+  locale?: string
+  absolute?: boolean
+}
+
+export const addLocalePrefix = ({
+  route,
+  locale = locales.DEFAULT_LOCALE,
+  absolute = false,
+}: AddLocalePrefixArgs) => {
+  const routePrefix = locale === locales.DEFAULT_LOCALE ? '' : `/${locale}`
+  const basePath = absolute ? links.CANONICAL : ''
+
+  return `${basePath}${routePrefix}${route}`
+}
