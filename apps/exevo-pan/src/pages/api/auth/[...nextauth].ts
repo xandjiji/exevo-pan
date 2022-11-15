@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import NextAuth from 'next-auth/next'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import GoogleProvider from 'next-auth/providers/google'
@@ -18,6 +19,13 @@ export default NextAuth({
       authorization: { params: { scope: 'email identify' } },
     }),
   ],
+  callbacks: {
+    session: ({ session, user }) => {
+      session.user = user
+
+      return session
+    },
+  },
   secret: process.env.JWT_SECRET as string,
   pages: {
     signIn: routes.LOGIN,
