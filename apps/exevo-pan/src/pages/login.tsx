@@ -1,10 +1,11 @@
 import Head from 'next/head'
+import { useEffect } from 'react'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { useSession, getProviders } from 'next-auth/react'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
 import { FadeImage } from 'components/Atoms'
 import SignIn from 'components/SignIn'
 import { routes, jsonld } from 'Constants'
@@ -23,12 +24,16 @@ type LoginStaticProps = {
 
 export default function Login({ providers }: LoginStaticProps) {
   const { translations } = useTranslations()
-  const { locale } = useRouter()
+  const { locale, push } = useRouter()
 
   /* const pageTitle = buildPageTitle(translations.homepage.Meta.title) */
   const pageTitle = buildPageTitle('Login')
 
   const { data: session } = useSession()
+
+  useEffect(() => {
+    if (session) push(addLocalePrefix({ route: routes.ACCOUNT, locale }))
+  }, [session])
 
   return (
     <>
@@ -95,7 +100,10 @@ export default function Login({ providers }: LoginStaticProps) {
               priority
             />
 
-            <SignIn providers={providers} />
+            <SignIn
+              providers={providers}
+              state={session ? 'LOADING' : undefined}
+            />
           </div>
         </main>
       </Main>
