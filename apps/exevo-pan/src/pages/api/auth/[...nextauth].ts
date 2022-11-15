@@ -7,6 +7,9 @@ import { prisma } from 'lib/prisma'
 import { routes } from 'Constants'
 
 export default NextAuth({
+  session: {
+    strategy: 'jwt',
+  },
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -26,7 +29,7 @@ export default NextAuth({
       return session
     },
   },
-  secret: process.env.JWT_SECRET as string,
+  secret: process.env.NEXTAUTH_SECRET as string,
   pages: {
     signIn: routes.LOGIN,
   },
