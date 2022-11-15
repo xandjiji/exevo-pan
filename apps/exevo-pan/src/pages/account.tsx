@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { UserCard } from 'modules/Account'
+import { UserCard, UpgradeToPro } from 'modules/Account'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
 import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
@@ -82,6 +82,7 @@ export default function Account() {
       <Main>
         <main className="inner-container grid place-items-center py-4">
           <UserCard user={session?.user} />
+          {session && <UpgradeToPro />}
           <Button
             type="button"
             onClick={() =>
