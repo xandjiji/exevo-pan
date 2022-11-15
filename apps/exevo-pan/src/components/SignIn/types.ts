@@ -1,4 +1,4 @@
-import { AuthProviders } from 'types/Auth'
+import { AuthProviders } from 'types/next-auth'
 
 export type SignInProps = {
   providers?: AuthProviders

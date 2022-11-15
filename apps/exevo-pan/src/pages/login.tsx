@@ -9,7 +9,7 @@ import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
 import { FadeImage } from 'components/Atoms'
 import SignIn from 'components/SignIn'
 import { routes, jsonld } from 'Constants'
-import { AuthProviders } from 'types/Auth'
+import { AuthProviders } from 'types/next-auth'
 import { common } from 'locales'
 
 const LOGO_SRC = '/logo-120x120.png'
