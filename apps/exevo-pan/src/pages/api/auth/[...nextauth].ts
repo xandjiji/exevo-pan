@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import NextAuth from 'next-auth/next'
+import type { BuiltInProviderType } from 'next-auth/providers'
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
 import GoogleProvider from 'next-auth/providers/google'
 import DiscordProvider from 'next-auth/providers/discord'
@@ -27,8 +28,14 @@ export default NextAuth({
       if (!user || !account) return token
 
       const { id, proStatus, proSince, paymentData } = user
-      const { provider } = account
-      return { ...token, id, provider, proStatus, proSince, paymentData }
+      return {
+        ...token,
+        id,
+        provider: account.provider as BuiltInProviderType,
+        proStatus,
+        proSince,
+        paymentData,
+      }
     },
     session: ({ session, token }) => {
       session.user = token
