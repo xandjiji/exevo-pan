@@ -23,10 +23,12 @@ export default NextAuth({
     }),
   ],
   callbacks: {
-    jwt: ({ token, user }) => {
-      if (!user) return token
+    jwt: ({ token, user, account }) => {
+      if (!user || !account) return token
+
       const { id, proStatus, proSince, paymentData } = user
-      return { ...token, id, proStatus, proSince, paymentData }
+      const { provider } = account
+      return { ...token, id, provider, proStatus, proSince, paymentData }
     },
     session: ({ session, token }) => {
       session.user = token

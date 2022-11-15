@@ -17,6 +17,7 @@ declare module 'next-auth/jwt' {
     picture: string
     // extended user attributes
     id: string
+    provider: string
     proStatus: boolean
     proSince?: string
     paymentData?: PaymentData
@@ -33,6 +34,7 @@ declare module 'next-auth' {
     picture: string
     // extended user attributes
     id: string
+    provider: string
     proStatus: boolean
     proSince?: string
     paymentData?: PaymentData
