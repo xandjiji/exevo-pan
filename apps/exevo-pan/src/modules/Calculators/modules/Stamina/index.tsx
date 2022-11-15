@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { TimeInput, Button } from 'components/Atoms'
+import { LabeledCard, TimeInput, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { ClientComponent } from 'components/Organisms'
 import { ChevronRightIcon, AddPostIcon } from 'assets/svgs'
@@ -12,7 +12,7 @@ import StaminaBar from './StaminaBar'
 import TrackCard from './TrackCard'
 import useTracking from './useTracking'
 import { calculateSecondsToRegenerate } from './utils'
-import { Main, LabeledCard } from '../../components'
+import { Main } from '../../components'
 
 const Stamina = () => {
   const {

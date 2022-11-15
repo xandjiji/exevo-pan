@@ -1,12 +1,12 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
-import { Input, Checkbox, Slider } from 'components/Atoms'
+import { LabeledCard, Input, Checkbox, Slider } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { routes } from 'Constants'
 import { blurOnEnter } from 'utils'
-import { Main, LabeledCard, Spacer, Chip } from '../../components'
+import { Main, Spacer, Chip } from '../../components'
 import {
   LOW_BLOW_MULTIPLIER,
   ELEMENTAL_DAMAGE,

@@ -1,10 +1,16 @@
 import { useState, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Tabs, Text, NumericInput, CopyButton } from 'components/Atoms'
+import {
+  LabeledCard,
+  Tabs,
+  Text,
+  NumericInput,
+  CopyButton,
+} from 'components/Atoms'
 import { Select, ClientComponent, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter, isServer } from 'utils'
-import { Main, LabeledCard, Spacer, Group, Chip } from '../../components'
+import { Main, Spacer, Group, Chip } from '../../components'
 import useStateRecord from './useStateRecord'
 import CostComparison from './CostComparison'
 import * as Icons from './icons'

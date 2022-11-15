@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useStoredUrlState } from 'hooks'
 import { useTranslations } from 'contexts/useTranslation'
-import { Checkbox, Text } from 'components/Atoms'
+import { LabeledCard, Checkbox, Text } from 'components/Atoms'
 import { Select, InfoTooltip, ClientComponent } from 'components/Organisms'
 import {
   isObjectEmpty,
@@ -11,7 +11,6 @@ import {
   SKILL_CONSTANTS,
 } from 'utils'
 import {
-  LabeledCard,
   Chip,
   ChipWrapper,
   Group,
