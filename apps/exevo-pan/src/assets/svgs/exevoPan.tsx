@@ -1,5 +1,11 @@
 export const ExevoPanIcon = (args: JSX.IntrinsicElements['svg']) => (
-  <svg viewBox="0 0 6 6" height="36px" width="36px" {...args}>
+  <svg
+    viewBox="0 0 6 6"
+    height="36px"
+    width="36px"
+    aria-label="Exevo Pan"
+    {...args}
+  >
     <rect fill="#000000" x="2" height="1" width="2" />
     <rect fill="#000000" x="1" y="1" height="1" width="1" />
     <rect fill="#000000" x="0" y="2" height="2" width="1" />
