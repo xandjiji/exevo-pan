@@ -42,9 +42,4 @@ export const NavItems: NavItem[] = [
     icon: <BlogIcon />,
     title: 'blog',
   },
-  {
-    href: routes.ABOUT,
-    icon: <AboutIcon />,
-    title: 'about',
-  },
 ]

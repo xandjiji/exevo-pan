@@ -12,6 +12,7 @@ const listItems = [
   { href: routes.STATISTICS, content: 'statistics' },
   { href: routes.ADVERTISE, content: 'advertise' },
   { href: routes.BLOG, content: 'blog' },
+  { href: routes.ABOUT, content: 'about' },
 ]
 
 const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (

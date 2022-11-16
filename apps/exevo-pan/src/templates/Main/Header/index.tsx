@@ -16,11 +16,14 @@ import { NavItems } from './routes'
 
 const heading = {
   [routes.HOME]: 'home',
+  [routes.BOSS_TRACKER]: 'bossTracker',
   [routes.CALCULATORS]: 'calculators',
   [routes.STATISTICS]: 'statistics',
   [routes.HIGHSCORES]: 'highscores',
-  [routes.LIBERTABRA_WAR]: 'war',
   [routes.ADVERTISE]: 'advertise',
+  [routes.LIBERTABRA_WAR]: 'war',
+  [routes.BLOG]: 'blog',
+  [routes.ABOUT]: 'about',
 }
 
 const Header = ({
