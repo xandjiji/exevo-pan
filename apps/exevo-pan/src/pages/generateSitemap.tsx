@@ -18,11 +18,6 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     changefreq: 'always',
   })}
   ${XmlTemplate({
-    route: routes.BAZAAR_HISTORY,
-    date: TODAY,
-    changefreq: 'hourly',
-  })}
-  ${XmlTemplate({
     route: routes.STATISTICS,
     date: TODAY,
     changefreq: 'daily',

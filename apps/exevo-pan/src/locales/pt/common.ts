@@ -7,7 +7,6 @@ export default {
   Header: {
     h1: {
       home: 'Compre e venda de chares de Tibia no Char Bazaar oficial!',
-      bazaarHistory: 'Explore através do histórico do Char Bazaar!',
       statistics:
         'Descubra estatísticas sobre personagens vendidos no Char Bazaar!',
       highscores:
@@ -23,7 +22,6 @@ export default {
     logoLabel: 'Ir para a página inicial',
     nav: {
       currentAuctions: 'Leilões',
-      bazaarHistory: 'Histórico do Bazaar',
       calculators: 'Calculadoras',
       statistics: 'Estatísticas',
       war: 'Libertabra War',

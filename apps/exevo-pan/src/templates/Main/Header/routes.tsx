@@ -19,11 +19,6 @@ export const NavItems: NavItem[] = [
     title: 'currentAuctions',
   },
   {
-    href: routes.BAZAAR_HISTORY,
-    icon: <HistoryIcon />,
-    title: 'bazaarHistory',
-  },
-  {
     href: routes.BOSS_TRACKER,
     icon: <GoblinIcon />,
     title: 'bossTracker',

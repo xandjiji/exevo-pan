@@ -112,7 +112,7 @@ export default function Home({
               <AuctionsGrid
                 past={false}
                 permalinkResolver={(auctionId) =>
-                  permalinkResolver.current({ auctionId, locale })
+                  permalinkResolver({ auctionId, locale })
                 }
               />
             </AuctionsProvider>

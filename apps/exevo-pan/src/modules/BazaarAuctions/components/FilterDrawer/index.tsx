@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useRef, useCallback } from 'react'
+import { memo, useCallback } from 'react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { servers } from 'data-dictionary/dist/dictionaries/servers'
@@ -24,7 +24,6 @@ import FilterGroup from './FilterGroup'
 import LevelInput from './LevelInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
-import { isHistory } from './utils'
 import * as S from './atoms'
 import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
@@ -36,8 +35,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { common, homepage },
   } = useTranslations()
-
-  const { current: historyPage } = useRef(isHistory())
 
   const {
     serverOptions,
@@ -737,44 +734,43 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        {!historyPage && (
-          <FilterGroup>
-            <S.InputWrapper>
-              <S.AutocompleteInput
-                id="rare-items-input"
-                label={
-                  <InfoTooltip.LabelWrapper className="whitespace-nowrap">
-                    {homepage.FilterDrawer.labels.rareItems}
-                    <InfoTooltip
-                      labelSize
-                      content={homepage.FilterDrawer.tooltips.rareItems}
-                    />
-                  </InfoTooltip.LabelWrapper>
-                }
-                aria-label={homepage.FilterDrawer.labels.rareItems}
-                aria-controls="rare-items-list"
-                placeholder={homepage.FilterDrawer.placeholders.rareItems}
-                itemList={rareItems.itemList}
-                onItemSelect={({ name }) => rareItems.action.toggle(name)}
-                onKeyPress={blurOnEnter}
-                enterKeyHint="done"
-              />
-              <Chip
-                overrideStatus={rareItems.allSelected}
-                onClick={rareItems.action.toggleAll}
-              >
-                {homepage.FilterDrawer.toggleAll.items}
+        {/* @ ToDo: display this field only for current auctions */}
+        <FilterGroup>
+          <S.InputWrapper>
+            <S.AutocompleteInput
+              id="rare-items-input"
+              label={
+                <InfoTooltip.LabelWrapper className="whitespace-nowrap">
+                  {homepage.FilterDrawer.labels.rareItems}
+                  <InfoTooltip
+                    labelSize
+                    content={homepage.FilterDrawer.tooltips.rareItems}
+                  />
+                </InfoTooltip.LabelWrapper>
+              }
+              aria-label={homepage.FilterDrawer.labels.rareItems}
+              aria-controls="rare-items-list"
+              placeholder={homepage.FilterDrawer.placeholders.rareItems}
+              itemList={rareItems.itemList}
+              onItemSelect={({ name }) => rareItems.action.toggle(name)}
+              onKeyPress={blurOnEnter}
+              enterKeyHint="done"
+            />
+            <Chip
+              overrideStatus={rareItems.allSelected}
+              onClick={rareItems.action.toggleAll}
+            >
+              {homepage.FilterDrawer.toggleAll.items}
+            </Chip>
+          </S.InputWrapper>
+          <S.ChipWrapper id="rare-items-list">
+            {Object.keys(rareItems.selectedItemData).map((item) => (
+              <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
+                {item}
               </Chip>
-            </S.InputWrapper>
-            <S.ChipWrapper id="rare-items-list">
-              {Object.keys(rareItems.selectedItemData).map((item) => (
-                <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
-                  {item}
-                </Chip>
-              ))}
-            </S.ChipWrapper>
-          </FilterGroup>
-        )}
+            ))}
+          </S.ChipWrapper>
+        </FilterGroup>
 
         <FilterGroup
           label={homepage.FilterDrawer.labels.misc}

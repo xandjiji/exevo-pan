@@ -7,8 +7,6 @@ export default {
   Header: {
     h1: {
       home: 'Kupuj i sprzedawaj postacie na oficjalnym Tibijskim Bazarze Postaci!',
-      bazaarHistory:
-        'Odkrywaj poprzednie aukcję poprzez Tibijski Bazar Postaci!!',
       statistics: 'Znajduj statystyki postaci z Tibijskiego Bazaru Postaci!',
       highscores:
         'Najwyższe levele, najwyższe skille oraz najwyższe bidy na Tibijskim Bazarze Postaci!',
@@ -23,7 +21,6 @@ export default {
     logoLabel: 'Idź do strony głównej',
     nav: {
       currentAuctions: 'Obecne Aukcje',
-      bazaarHistory: 'Historia Bazaru',
       calculators: 'Kalkulatory',
       statistics: 'Statystyki',
       war: 'Wojna na Libertabrze',

@@ -130,18 +130,6 @@ describe('<CharacterCard />', () => {
   })
 
   test.each(characterList)(
-    `should render a different bid label for ${routes.BAZAAR_HISTORY} route`,
-    (character) => {
-      renderWithProviders(<CharacterCard characterData={character} past />)
-      expect(
-        screen.getByText(
-          character.hasBeenBidded ? 'Auction Successful' : 'Auction Failed',
-        ),
-      ).toBeInTheDocument()
-    },
-  )
-
-  test.each(characterList)(
     `should render highlighted card correctly`,
     (character) => {
       renderWithProviders(

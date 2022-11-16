@@ -3,16 +3,10 @@ import { LabeledCard, Input, Button, Text } from 'components/Atoms'
 import { CheckIcon } from 'assets/svgs'
 
 /* 
-explicar o que é exevo pro
-    acesso ilimitado a features exlcusivas
-    preço
-    forever
-read more (link pra landing page)
-
-send 250 TC to Ksu
-From
-Delivery time tooltip
-
+- abstract components
+- <FROM> to Ksu
+- confirm ACTION (loading state, api request, etc)
+- payed state (delivery tooltip)
 */
 
 const Li = ({ className, children, ...props }: JSX.IntrinsicElements['li']) => (
@@ -32,7 +26,7 @@ const UpgradeToPro = () => {
           <p className="flex items-center gap-2">
             Upgrade now to{' '}
             <strong className="text-primaryHighlight text-2xl tracking-wider">
-              Exevo Pro 🧙
+              Exevo Pro 🧙‍♂️
             </strong>
           </p>
           <p>And have access to exclusive features!</p>
@@ -57,7 +51,7 @@ const UpgradeToPro = () => {
         </p>
       </div>
       <LabeledCard labelText="Buy now">
-        <span className="text-tsm mb-1 flex items-center gap-1">
+        <span className="text-tsm flex items-center gap-1">
           Transfer
           <Text.TibiaCoin value={250} /> Tibia Coins to{' '}
           <strong className="text-primaryHighlight">Ksu</strong>
@@ -65,10 +59,10 @@ const UpgradeToPro = () => {
 
         <div className="flex items-end gap-4">
           <Input
+            className="w-full"
             label="Sending coins character"
             placeholder="e.g, 'Bubble'"
             noAlert
-            className="w-full"
           />
           <Button type="button" pill className="mb-[1px] py-3">
             Confirm

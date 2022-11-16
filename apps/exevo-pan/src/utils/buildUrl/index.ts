@@ -1,4 +1,4 @@
-import { links, locales, routes, urlParameters } from 'Constants'
+import { links, locales, urlParameters } from 'Constants'
 
 const { DEFAULT_LOCALE } = locales
 
@@ -13,14 +13,11 @@ type PermalinkResolverArgs = {
   locale?: string
 }
 
-export const permalinkResolver = {
-  history: ({ auctionId, locale }: PermalinkResolverArgs) =>
-    `${buildUrl(routes.BAZAAR_HISTORY, locale)}?${
-      urlParameters.AUCTION_ID
-    }=${auctionId}`,
-  current: ({ auctionId, locale }: PermalinkResolverArgs) =>
-    `${buildUrl('', locale)}?${urlParameters.AUCTION_ID}=${auctionId}`,
-}
+export const permalinkResolver = ({
+  auctionId,
+  locale,
+}: PermalinkResolverArgs) =>
+  `${buildUrl('', locale)}?${urlParameters.AUCTION_ID}=${auctionId}`
 
 type AddLocalePrefixArgs = {
   route: string

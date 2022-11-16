@@ -2,7 +2,6 @@ export const routes = {
   HOME: '/',
   LOGIN: '/login',
   ACCOUNT: '/account',
-  BAZAAR_HISTORY: '/bazaar-history',
   BOSS_TRACKER: '/boss-tracker',
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
