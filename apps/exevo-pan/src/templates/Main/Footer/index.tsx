@@ -6,7 +6,7 @@ import { UnlicenseIcon, GithubIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 
 const listItems = [
-  { href: routes.HOME, content: 'currentAuctions' },
+  { href: routes.HOME, content: 'charBazaar' },
   { href: routes.BOSS_TRACKER, content: 'bossTracker' },
   { href: routes.CALCULATORS, content: 'calculators' },
   { href: routes.STATISTICS, content: 'statistics' },

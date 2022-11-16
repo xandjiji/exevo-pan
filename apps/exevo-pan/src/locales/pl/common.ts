@@ -20,7 +20,7 @@ export default {
     closeMenuLabel: 'Zamknij menu nawigacji',
     logoLabel: 'Idź do strony głównej',
     nav: {
-      currentAuctions: 'Obecne Aukcje',
+      charBazaar: 'Char Bazaar',
       calculators: 'Kalkulatory',
       statistics: 'Statystyki',
       war: 'Wojna na Libertabrze',

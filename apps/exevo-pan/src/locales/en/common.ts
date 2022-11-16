@@ -21,7 +21,7 @@ export default {
     closeMenuLabel: 'Close the navigation menu',
     logoLabel: 'Go to homepage',
     nav: {
-      currentAuctions: 'Current Auctions',
+      charBazaar: 'Char Bazaar',
       calculators: 'Calculators',
       statistics: 'Statistics',
       war: 'Libertabra War',

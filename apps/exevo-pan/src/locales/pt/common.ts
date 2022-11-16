@@ -21,7 +21,7 @@ export default {
     closeMenuLabel: 'Fechar menu',
     logoLabel: 'Ir para a página inicial',
     nav: {
-      currentAuctions: 'Leilões',
+      charBazaar: 'Char Bazaar',
       calculators: 'Calculadoras',
       statistics: 'Estatísticas',
       war: 'Libertabra War',
