@@ -6,13 +6,12 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { useSession, getProviders } from 'next-auth/react'
 import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
-import { FadeImage } from 'components/Atoms'
+import { ExevoPanIcon } from 'assets/svgs'
 import SignIn from 'components/SignIn'
 import { routes, jsonld } from 'Constants'
 import { AuthProviders } from 'types/next-auth'
 import { common } from 'locales'
 
-const LOGO_SRC = '/logo-120x120.png'
 const pageUrl = buildUrl(routes.LOGIN)
 
 type LoginStaticProps = {
@@ -91,14 +90,7 @@ export default function Login({ providers }: LoginStaticProps) {
       <Main>
         <main className="inner-container grid place-items-center py-4">
           <div className="grid place-items-center gap-10">
-            <FadeImage
-              src={LOGO_SRC}
-              alt="Exevo Pan"
-              width={120}
-              height={120}
-              unoptimized
-              priority
-            />
+            <ExevoPanIcon width={120} height={120} />
 
             <SignIn
               providers={providers}

@@ -2,13 +2,11 @@ import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import { Link, Switch, CtaButton, TibiaBlackjack } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
-import Logo from 'assets/logo.png'
-import { MoonIcon } from 'assets/svgs'
+import { ExevoPanIcon, MoonIcon } from 'assets/svgs'
 import MenuButton from './MenuButton'
 import HeaderIcon from './HeaderIcon'
 import LanguagePicker from './LanguagePicker'
@@ -74,11 +72,10 @@ const Header = ({
           <NextLink href={routes.HOME} aria-label={accessibleLogoName}>
             <div className="mr-4 hidden shrink-0 cursor-pointer items-center justify-center md:flex">
               {pageTitle && <h1 className="hidden">{pageTitle}</h1>}
-              <Image
-                unoptimized
+              <ExevoPanIcon
+                width={36}
+                height={36}
                 aria-label={common.Header.logoLabel}
-                alt={accessibleLogoName}
-                src={Logo}
               />
             </div>
           </NextLink>
