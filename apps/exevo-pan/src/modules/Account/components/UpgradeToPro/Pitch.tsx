@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import clsx from 'clsx'
 import { CheckIcon } from 'assets/svgs'
 
@@ -40,4 +41,4 @@ const Pitch = () => (
   </div>
 )
 
-export default Pitch
+export default memo(Pitch)
