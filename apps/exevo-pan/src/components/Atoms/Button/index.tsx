@@ -9,6 +9,7 @@ const Button = ({
   hollow = false,
   loading = false,
   disabled,
+  type = 'button',
   ...props
 }: ButtonProps) => {
   const {
@@ -34,8 +35,9 @@ const Button = ({
 
         className,
       )}
+      // eslint-disable-next-line react/button-has-type
+      type={type}
       {...props}
-      type="button"
       disabled={isDisabled}
     >
       {loading ? (
