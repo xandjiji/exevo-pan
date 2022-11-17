@@ -11,7 +11,6 @@
   "scripts": {
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
     "generate": "prisma generate",
-    "migrate": "prisma migrate",
     "push": "prisma db push",
     "postinstall": "prisma generate",
     "execute": "NODE_PATH=./src sucrase-node src/index.ts"
