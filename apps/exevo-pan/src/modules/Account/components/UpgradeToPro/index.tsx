@@ -6,12 +6,11 @@ import Pitch from './Pitch'
 
 /* 
 - confirm ACTION (loading state, api request, etc)
-- <FROM> to Ksu
 - payed state (delivery tooltip)
 */
 
 const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
-  const [inputValue, setInputValue] = useState(character)
+  const [from, setFrom] = useState(character)
 
   const onSubmit = useCallback(
     (
@@ -34,13 +33,21 @@ const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
       <LabeledCard labelText="Buy now">
         <span className="text-tsm flex items-center gap-1">
           Transfer
-          <Text.TibiaCoin value={250} /> Tibia Coins{' '}
-          {inputValue ? (
+          {from ? (
             <>
-              from <strong>{inputValue}</strong>
+              {' '}
+              from <strong>{from}</strong>
             </>
-          ) : null}{' '}
-          to <strong className="text-primaryHighlight">Ksu</strong>
+          ) : null}
+          <Text.Transfer currency="tc" amount={250} className="mx-1.5" />
+          <a
+            className="text-primaryHighlight font-bold"
+            href="https://www.tibia.com/community/?name=Ksu"
+            target="_blank"
+            rel="noreferrer external"
+          >
+            Ksu
+          </a>
         </span>
 
         <form name="test" onSubmit={onSubmit} className="flex items-end gap-4">
@@ -51,7 +58,7 @@ const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
             placeholder="e.g, 'Bubble'"
             noAlert
             defaultValue={character}
-            onChange={(e) => setInputValue(e.target.value.trim())}
+            onChange={(e) => setFrom(e.target.value.trim())}
             enterKeyHint="send"
           />
           <Button type="submit" pill className="mb-[1px] py-3">
