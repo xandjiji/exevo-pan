@@ -38,6 +38,11 @@ export default NextAuth({
       }
     },
     session: async ({ session, token }) => {
+      if (token.proStatus) {
+        session.user = token
+        return session
+      }
+
       const paymentData = await prisma.paymentData.findFirst({
         where: { userId: token.id },
       })
