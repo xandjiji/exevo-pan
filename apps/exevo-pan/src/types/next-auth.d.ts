@@ -20,7 +20,7 @@ declare module 'next-auth/jwt' {
     provider: BuiltInProviderType
     proStatus: boolean
     proSince?: string
-    paymentData?: PaymentData
+    paymentData?: PaymentData | null
   }
 }
 
@@ -37,7 +37,7 @@ declare module 'next-auth' {
     provider: BuiltInProviderType
     proStatus: boolean
     proSince?: string
-    paymentData?: PaymentData
+    paymentData?: PaymentData | null
   }
 
   interface Session {

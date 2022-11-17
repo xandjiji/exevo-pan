@@ -27,18 +27,22 @@ export default NextAuth({
     jwt: ({ token, user, account }) => {
       if (!user || !account) return token
 
-      const { id, proStatus, proSince, paymentData } = user
+      const { id, proStatus, proSince } = user
+
       return {
         ...token,
         id,
         provider: account.provider as BuiltInProviderType,
         proStatus,
         proSince,
-        paymentData,
       }
     },
-    session: ({ session, token }) => {
-      session.user = token
+    session: async ({ session, token }) => {
+      const paymentData = await prisma.paymentData.findFirst({
+        where: { userId: token.id },
+      })
+
+      session.user = { ...token, paymentData }
 
       return session
     },
