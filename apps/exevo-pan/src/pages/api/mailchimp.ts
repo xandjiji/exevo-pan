@@ -1,7 +1,5 @@
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import mailchimp from '@mailchimp/mailchimp_marketing'
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 const LIST_ID = process.env.MAILCHIMP_LIST as string
 

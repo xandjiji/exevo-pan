@@ -1,11 +1,9 @@
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import * as nodemailer from 'nodemailer'
 import inlineBase64 from 'nodemailer-plugin-inline-base64'
 import { v4 as uuidv4 } from 'uuid'
 import { EmailTemplate } from 'modules/Advertise/components'
 import { BackofficeClient, NotifyAdminClient } from 'services/server'
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { advertise } from 'locales'
 import { email } from 'Constants'
 
