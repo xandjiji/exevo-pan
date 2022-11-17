@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node'
 import { getToken } from 'next-auth/jwt'
+import { prisma } from 'lib/prisma'
 
 /* @ ToDo:
-- prisma request
 - prevent empty
 - POST only
 - try-catch
@@ -11,10 +11,22 @@ import { getToken } from 'next-auth/jwt'
 export default async (request: VercelRequest, response: VercelResponse) => {
   const token = await getToken({ req: request })
   if (token) {
-    const { character } = request.body
-    console.log('JSON Web Token', JSON.stringify(token, null, 2))
-    console.log({ character })
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+    const { character } = JSON.parse(request.body)
+
+    const data = {
+      character,
+      confirmed: false,
+      lastUpdated: new Date().toISOString(),
+    }
+
+    await prisma.user.update({
+      where: { id: token.id },
+      data: {
+        paymentData: {
+          upsert: { create: data, update: data },
+        },
+      },
+    })
     response.send(200)
   } else {
     response.status(401)
