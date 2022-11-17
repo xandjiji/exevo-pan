@@ -1,19 +1,22 @@
+import type { PaymentData } from '@prisma/client'
 import clsx from 'clsx'
 import { useState, useCallback } from 'react'
 import { LabeledCard, Input, Button, Text } from 'components/Atoms'
-import type { PaymentData } from '@prisma/client'
+import { endpoints } from 'Constants'
 import Pitch from './Pitch'
 
 /* 
 - confirm ACTION (loading state, api request, etc)
 - payed state (delivery tooltip)
+- componentizar <BuyNow />
 */
 
 const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
+  const [requestStatus, setRequestStatus] = useState<RequestStatus>('IDLE')
   const [from, setFrom] = useState(character)
 
   const onSubmit = useCallback(
-    (
+    async (
       e: React.FormEvent<
         ExtendedHTMLFormElement<{ character: HTMLInputElement }>
       >,
@@ -21,10 +24,22 @@ const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
       e.preventDefault()
       const { value } = e.currentTarget.elements.character
 
-      console.log(value)
+      setRequestStatus('LOADING')
+      try {
+        await fetch(endpoints.SEND_PAYMENT, {
+          method: 'POST',
+          body: JSON.stringify({ character: value }),
+        })
+
+        setRequestStatus('SUCCESSFUL')
+      } catch (error) {
+        setRequestStatus('ERROR')
+      }
     },
     [],
   )
+
+  const isLoading = requestStatus === 'LOADING'
 
   return (
     <div className="grid gap-8">
@@ -60,8 +75,15 @@ const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
             defaultValue={character}
             onChange={(e) => setFrom(e.target.value.trim())}
             enterKeyHint="send"
+            disabled={isLoading}
           />
-          <Button type="submit" pill className="mb-[1px] py-3">
+          <Button
+            type="submit"
+            pill
+            className="mb-[1px] py-3"
+            loading={isLoading}
+            disabled={!from}
+          >
             Confirm
           </Button>
         </form>
