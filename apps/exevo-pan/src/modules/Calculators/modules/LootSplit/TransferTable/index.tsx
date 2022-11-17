@@ -2,7 +2,6 @@ import { Fragment, memo } from 'react'
 import clsx from 'clsx'
 import { Text, CopyButton } from 'components/Atoms'
 import { TransferTableProps } from './types'
-import styles from './styles.module.css'
 
 const Nickname = (args: JSX.IntrinsicElements['div']) => (
   <div className="overflow-hidden text-ellipsis whitespace-nowrap" {...args} />
@@ -23,15 +22,7 @@ const TransferTable = ({
     {transactions.map(({ from, to, amount }) => (
       <Fragment key={`${from}-${to}`}>
         <Nickname title={from}>{from}</Nickname>
-        <div>
-          <Text.GoldCoin value={amount} className="pr-3 font-bold" />
-          <div
-            className={clsx(
-              'bg-onSurface/25 relative h-[1px] w-full',
-              styles.arrow,
-            )}
-          />
-        </div>
+        <Text.Transfer currency="gold" amount={amount} />
         <Nickname title={to}>{to}</Nickname>
         <div>
           <CopyButton copyString={`transfer ${amount} to ${to}`} />
