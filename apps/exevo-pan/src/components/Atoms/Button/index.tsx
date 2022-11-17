@@ -42,7 +42,10 @@ const Button = ({
     >
       {loading ? (
         <div
-          className="loading-spinner before:bg-primaryVariant after:bg-primary mx-auto"
+          className={clsx(
+            'loading-spinner before:bg-primaryVariant after:bg-primary mx-auto',
+            pill && 'h-3 w-3',
+          )}
           style={{
             background:
               'linear-gradient(to right, rgb(var(--primaryVariant)) 10%, rgba(255, 255, 255, 0) 42%)',
