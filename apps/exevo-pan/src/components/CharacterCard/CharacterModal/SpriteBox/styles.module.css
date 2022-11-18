@@ -5,3 +5,7 @@
 .highlighted > div {
   @apply bg-transparent;
 }
+
+.highlighted [role='alert'] {
+  @apply border-primaryVariant;
+}

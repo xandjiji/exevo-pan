@@ -42,13 +42,9 @@ const Button = ({
       {loading ? (
         <div
           className={clsx(
-            'loading-spinner before:bg-primaryVariant after:bg-primary mx-auto',
+            'loading-spinner border-onPrimary mx-auto block',
             pill && 'h-3 w-3',
           )}
-          style={{
-            background:
-              'linear-gradient(to right, rgb(var(--primaryVariant)) 10%, rgba(255, 255, 255, 0) 42%)',
-          }}
           role="alert"
           aria-label={common.LoadingLabel}
         />
