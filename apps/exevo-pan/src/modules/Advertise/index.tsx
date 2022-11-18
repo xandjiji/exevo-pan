@@ -55,7 +55,7 @@ const Form = () => {
         steps={stepItems}
         currentStep={currentStep}
         className={clsx(
-          'mx-auto mb-[54px] max-w-[420px] px-10 md:max-w-[560px]',
+          'mx-auto mb-[22px] max-w-[420px] px-10 md:max-w-[560px]',
           finished && styles.stepper,
         )}
       />

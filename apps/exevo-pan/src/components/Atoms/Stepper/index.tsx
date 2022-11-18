@@ -10,7 +10,7 @@ const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
   } = useTranslations()
 
   return (
-    <div className={clsx('flex justify-between', className)} {...props}>
+    <div className={clsx('flex justify-between pb-8', className)} {...props}>
       {steps.map((step, index, stepArray) => {
         const isCurrent = index === currentStep
         const isCompleted = index < currentStep
