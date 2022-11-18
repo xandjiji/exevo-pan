@@ -82,9 +82,7 @@ export default function Account() {
       <Main>
         <main className="inner-container grid place-items-center py-4">
           <UserCard user={session?.user} />
-          {session && (
-            <UpgradeToPro character={session.user.paymentData?.character} />
-          )}
+          {session && <UpgradeToPro {...session.user.paymentData} />}
           <Button
             type="button"
             onClick={() =>
