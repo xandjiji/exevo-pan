@@ -1,7 +1,7 @@
 import type { PaymentData } from '@prisma/client'
 import clsx from 'clsx'
 import { useState, useCallback } from 'react'
-import { LabeledCard, Input, Button, Text } from 'components/Atoms'
+import { LabeledCard, Input, Button, Text, CopyButton } from 'components/Atoms'
 import { endpoints } from 'Constants'
 import Pitch from './Pitch'
 
@@ -10,6 +10,8 @@ import Pitch from './Pitch'
 - payed state (delivery tooltip)
 - componentizar <BuyNow />
 */
+
+const BANK_CHARACTER = 'Ksu'
 
 const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
   const [requestStatus, setRequestStatus] = useState<RequestStatus>('IDLE')
@@ -60,8 +62,9 @@ const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
             target="_blank"
             rel="noreferrer external"
           >
-            Ksu
+            {BANK_CHARACTER}
           </a>
+          <CopyButton copyString={BANK_CHARACTER} />
         </span>
 
         <form name="test" onSubmit={onSubmit} className="flex items-end gap-4">
