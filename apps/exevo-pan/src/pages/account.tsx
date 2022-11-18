@@ -4,9 +4,8 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { UserCard, Pitch, PurchaseForm } from 'modules/Account'
 import { useRouter } from 'next/router'
-import { useSession, signOut } from 'next-auth/react'
-import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
-import { Button } from 'components/Atoms'
+import { useSession } from 'next-auth/react'
+import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common } from 'locales'
 
@@ -23,8 +22,6 @@ export default function Account() {
   const pageTitle = buildPageTitle('My Account')
 
   const { data: session, status } = useSession()
-
-  console.log(session)
 
   return (
     <>
@@ -80,30 +77,23 @@ export default function Account() {
       </Head>
 
       <Main>
-        <main className="inner-container grid gap-8 py-8 lg:block">
-          <UserCard user={session?.user} />
-
-          {session && (
-            <section className="grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
-              <Pitch />
-              <PurchaseForm {...session.user.paymentData} />
-            </section>
+        <main className="inner-container relative grid gap-8 py-8 lg:block">
+          {session ? (
+            <>
+              <section className="animate-fadeIn">
+                <UserCard user={session.user} />
+              </section>
+              <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
+                <Pitch />
+                <PurchaseForm {...session.user.paymentData} />
+              </section>
+            </>
+          ) : (
+            <div
+              className="loading-spinner absolute-centered h-8 w-8"
+              role="alert"
+            />
           )}
-
-          {/* <Button
-            type="button"
-            onClick={() =>
-              signOut({
-                callbackUrl: addLocalePrefix({
-                  route: routes.HOME,
-                  locale,
-                  absolute: true,
-                }),
-              })
-            }
-          >
-            Sign out
-          </Button> */}
         </main>
       </Main>
     </>
