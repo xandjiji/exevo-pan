@@ -20,8 +20,6 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   )
   const [from, setFrom] = useState(character)
 
-  console.log({ from, character })
-
   const onSubmit = useCallback(
     async (
       e: React.FormEvent<
@@ -111,12 +109,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
 
               <FromTo from={from} to={BANK_CHARACTER} />
 
-              <Button
-                className="!text-onSurface child:!fill-onSurface mx-auto opacity-50"
-                onClick={resetStep}
-                pill
-                hollow
-              >
+              <Button className="mx-auto" pill hollow onClick={resetStep}>
                 <EditIcon className="h-4 w-4" />
                 Edit your order
               </Button>

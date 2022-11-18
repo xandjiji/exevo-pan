@@ -25,9 +25,8 @@ const Button = ({
         pill &&
           'flex items-center justify-center gap-1 py-1.5 px-4 text-xs font-bold uppercase tracking-wider',
         !hollow && 'shadow-md hover:shadow-lg',
-        disabled && hollow && 'child:fill-onSurface',
         hollow &&
-          'text-primary active:text-primary child:fill-primary disabled:text-onSurface !bg-transparent underline',
+          '!text-onSurface active:text-primary child:fill-onSurface !bg-transparent underline opacity-50 disabled:opacity-25',
         disabled &&
           !loading &&
           'bg-separator child:fill-black cursor-default text-black opacity-60 shadow-none',
