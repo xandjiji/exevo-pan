@@ -24,17 +24,16 @@ const UpgradeToPro = ({ character }: Partial<PaymentData>) => {
       e.preventDefault()
       const { value } = e.currentTarget.elements.character
 
-      setRequestStatus('LOADING')
-      try {
-        await fetch(endpoints.SEND_PAYMENT, {
-          method: 'POST',
-          body: JSON.stringify({ character: value }),
-        })
+      if (!value) return
 
-        setRequestStatus('SUCCESSFUL')
-      } catch (error) {
-        setRequestStatus('ERROR')
-      }
+      setRequestStatus('LOADING')
+      const { status } = await fetch(endpoints.SEND_PAYMENT, {
+        method: 'PUT',
+        body: JSON.stringify({ character: value }),
+      })
+
+      const sucessful = status === 200
+      setRequestStatus(sucessful ? 'SUCCESSFUL' : 'ERROR')
     },
     [],
   )
