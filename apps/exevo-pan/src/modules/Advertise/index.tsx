@@ -52,11 +52,11 @@ const Form = () => {
         </NextLink>
       </h2>
       <Stepper
+        isFinished={finished}
         steps={stepItems}
         currentStep={currentStep}
         className={clsx(
           'mx-auto mb-[22px] max-w-[420px] px-10 md:max-w-[560px]',
-          finished && styles.stepper,
         )}
       />
       <div

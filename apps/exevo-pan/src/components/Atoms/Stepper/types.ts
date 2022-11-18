@@ -5,6 +5,7 @@ export type Step = {
 }
 
 export interface StepperProps extends React.HTMLAttributes<HTMLDivElement> {
+  isFinished?: boolean
   steps: Step[]
   currentStep: number
 }
