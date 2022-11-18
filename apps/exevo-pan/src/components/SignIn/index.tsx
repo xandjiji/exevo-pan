@@ -67,7 +67,7 @@ const SignIn = ({
         )}
       >
         <div className="bg-surface absolute top-0 left-0 grid h-full w-full opacity-60" />
-        <div className="loading-spinner z-1 relative h-8 w-8" />
+        <div className="loading-spinner z-1 relative h-8 w-8" role="alert" />
       </div>
 
       <h3 className="text-s mb-4 text-center font-normal tracking-wider">

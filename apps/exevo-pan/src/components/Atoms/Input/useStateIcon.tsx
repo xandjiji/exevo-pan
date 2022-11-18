@@ -27,6 +27,7 @@ export const useStateIcon = (state: StateIcon) => {
       neutral: null,
       loading: (
         <div
+          role="alert"
           aria-label={common.InputIconLabels.loading}
           className={clsx('loading-spinner shrink-0', styles.icon)}
         />
