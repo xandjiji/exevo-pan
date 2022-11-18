@@ -114,7 +114,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                 will be returned.
               </p>
 
-              <FromTo from={from} to={BANK_CHARACTER} />
+              <FromTo className="mx-auto" from={from} to={BANK_CHARACTER} />
 
               <Button className="mx-auto" pill hollow onClick={resetStep}>
                 <EditIcon className="h-4 w-4" />

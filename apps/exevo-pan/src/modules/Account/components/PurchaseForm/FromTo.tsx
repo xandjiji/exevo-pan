@@ -1,10 +1,11 @@
+import clsx from 'clsx'
 import { Text, CopyButton } from 'components/Atoms'
 
 // eslint-disable-next-line react/require-default-props
-type FromToProps = { from?: string; to: string }
+type FromToProps = { from?: string; to: string } & JSX.IntrinsicElements['span']
 
-const FromTo = ({ from, to }: FromToProps) => (
-  <span className="my-2 flex items-center gap-1">
+const FromTo = ({ from, to, className, ...props }: FromToProps) => (
+  <span className={clsx(className, 'my-2 flex items-center gap-1')} {...props}>
     Transfer
     {from ? (
       <>
