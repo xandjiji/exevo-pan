@@ -80,17 +80,17 @@ export default function Account() {
       </Head>
 
       <Main>
-        <main className="inner-container grid place-items-center py-4">
+        <main className="inner-container grid gap-8 py-8 lg:block">
           <UserCard user={session?.user} />
 
           {session && (
-            <>
+            <section className="grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
               <Pitch />
               <PurchaseForm {...session.user.paymentData} />
-            </>
+            </section>
           )}
 
-          <Button
+          {/* <Button
             type="button"
             onClick={() =>
               signOut({
@@ -103,7 +103,7 @@ export default function Account() {
             }
           >
             Sign out
-          </Button>
+          </Button> */}
         </main>
       </Main>
     </>
