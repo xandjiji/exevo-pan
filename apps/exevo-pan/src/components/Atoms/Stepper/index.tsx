@@ -58,7 +58,7 @@ const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
               <h2
                 id={stepDescriptionId}
                 className={clsx(
-                  'text-onSurface absolute left-1/2 whitespace-nowrap text-base tracking-wider transition-all',
+                  'text-onSurface absolute left-1/2 text-base tracking-wider transition-all',
                   isCurrent ? 'font-bold' : 'font-light',
                 )}
                 style={{
