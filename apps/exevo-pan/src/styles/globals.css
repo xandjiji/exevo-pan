@@ -68,6 +68,11 @@
     @apply px-5 md:px-10;
   }
 
+  .absolute-centered {
+    @apply absolute top-1/2 left-1/2;
+    transform: translate(-50%, -50%);
+  }
+
   .custom-scrollbar {
     scrollbar-color: rgb(var(--primaryVariant)) transparent;
     scrollbar-width: thin;
@@ -107,11 +112,6 @@
 
   .highlight-30 {
     filter: brightness(130%);
-  }
-
-  .absolute-centered {
-    @apply absolute top-1/2 left-1/2;
-    transform: translateX(-50%, -50%);
   }
 }
 

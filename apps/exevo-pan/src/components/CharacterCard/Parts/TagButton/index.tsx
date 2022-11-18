@@ -39,10 +39,7 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
         className="relative h-11 w-7 shrink-0 cursor-pointer self-start"
         {...props}
       >
-        <div
-          className="z-2 absolute top-1/2 left-1/2 h-[72px] w-16"
-          style={{ transform: 'translate(-50%, -50%)' }}
-        />
+        <div className="z-2 absolute-centered h-[72px] w-16" />
         <div
           className={clsx(
             'animate-swing z-1 relative h-full w-full',
