@@ -6,13 +6,6 @@ import { endpoints } from 'Constants'
 import FromTo from './FromTo'
 import { PurchaseFormProps } from './types'
 
-/* 
-    - abstract titled card
-    - aqui
-    - advertise
-    - highscores
-*/
-
 const BANK_CHARACTER = 'Ksu'
 
 const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
