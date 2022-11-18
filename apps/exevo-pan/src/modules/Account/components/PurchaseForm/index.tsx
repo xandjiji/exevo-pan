@@ -55,7 +55,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   const isFinished = currentStep === 1
 
   return (
-    <div className="grid max-w-[360px] gap-8">
+    <div className="grid w-full max-w-[360px] gap-8">
       <Stepper
         className="mx-auto w-full max-w-[240px]"
         isFinished={isFinished}
@@ -102,9 +102,9 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
               </strong>
 
               {txId && (
-                <div className="grid gap-1">
+                <div className="grid gap-2">
                   <p>Transaction ID:</p>
-                  <p className="code mx-auto w-fit">{txId}</p>
+                  <p className="code mx-auto w-fit text-center">{txId}</p>
                 </div>
               )}
 
