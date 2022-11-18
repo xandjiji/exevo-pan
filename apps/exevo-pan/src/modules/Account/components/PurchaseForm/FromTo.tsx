@@ -4,7 +4,7 @@ import { Text, CopyButton } from 'components/Atoms'
 type FromToProps = { from?: string; to: string }
 
 const FromTo = ({ from, to }: FromToProps) => (
-  <span className="my-2 flex items-center justify-center gap-1">
+  <span className="my-2 flex items-center gap-1">
     Transfer
     {from ? (
       <>

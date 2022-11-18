@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import type { PaymentData } from '@prisma/client'
 import { Input, Button, Stepper } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { endpoints } from 'Constants'
@@ -19,6 +20,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',
   )
   const [from, setFrom] = useState(character)
+  const [txId, setTxId] = useState(id)
 
   const onSubmit = useCallback(
     async (
@@ -32,12 +34,15 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
       if (!value) return
 
       setRequestStatus('LOADING')
-      const { status } = await fetch(endpoints.SEND_PAYMENT, {
+      const response = await fetch(endpoints.SEND_PAYMENT, {
         method: 'PUT',
         body: JSON.stringify({ character: value }),
       })
 
-      const sucessful = status === 200
+      const { id: paymentId }: PaymentData = await response.json()
+      setTxId(paymentId)
+
+      const sucessful = response.status === 200
       setRequestStatus(sucessful ? 'SUCCESSFUL' : 'ERROR')
     },
     [],
@@ -96,10 +101,12 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                 Your order was received! 🎉
               </strong>
 
-              <div className="grid gap-1">
-                <p>Transaction ID:</p>
-                <p className="code mx-auto w-fit">{id}</p>
-              </div>
+              {txId && (
+                <div className="grid gap-1">
+                  <p>Transaction ID:</p>
+                  <p className="code mx-auto w-fit">{txId}</p>
+                </div>
+              )}
 
               <p>
                 Your purchase will be delivered right after your payment is
