@@ -2,9 +2,19 @@ import { memo } from 'react'
 import clsx from 'clsx'
 import { CheckIcon } from 'assets/svgs'
 
+const Heading = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
+  <p
+    className={clsx(
+      className,
+      'flex flex-wrap items-center justify-center gap-2',
+    )}
+    {...props}
+  />
+)
+
 const Li = ({ className, children, ...props }: JSX.IntrinsicElements['li']) => (
   <li className={clsx('flex items-center gap-1', className)} {...props}>
-    <CheckIcon className="fill-greenHighlight" />
+    <CheckIcon className="fill-greenHighlight shrink-0" />
     {children}
   </li>
 )
@@ -12,12 +22,12 @@ const Li = ({ className, children, ...props }: JSX.IntrinsicElements['li']) => (
 const Pitch = () => (
   <div className="grid place-items-center gap-8">
     <div className="grid place-items-center gap-2">
-      <p className="flex items-center gap-2">
+      <Heading>
         Upgrade now to{' '}
         <strong className="text-primaryHighlight text-2xl tracking-wider">
           Exevo Pro 🧙‍♂️
         </strong>
-      </p>
+      </Heading>
       <p>And have access to exclusive features!</p>
     </div>
 
@@ -35,9 +45,9 @@ const Pitch = () => (
       <p className="text-right">...and more in the future!</p>
     </div>
 
-    <p className="flex items-center gap-2">
+    <Heading>
       Pay once, yours <strong className="text-2xl">forever 🙌</strong>
-    </p>
+    </Heading>
   </div>
 )
 
