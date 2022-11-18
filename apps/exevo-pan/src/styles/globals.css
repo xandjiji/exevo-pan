@@ -108,6 +108,11 @@
   .highlight-30 {
     filter: brightness(130%);
   }
+
+  .absolute-centered {
+    @apply absolute top-1/2 left-1/2;
+    transform: translateX(-50%, -50%);
+  }
 }
 
 :root {
