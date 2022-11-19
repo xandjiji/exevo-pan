@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import type { PaymentData } from '@prisma/client'
-import { Input, Button, Stepper } from 'components/Atoms'
+import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { randomCharacter } from 'utils'
 import { endpoints } from 'Constants'
@@ -58,11 +58,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
         currentStep={currentStep}
         steps={[{ title: 'Order', onClick: resetStep }, { title: 'Payment' }]}
       />
-      <div className="card overflow-hidden rounded-xl p-0">
-        <h4 className="bg-primary text-onPrimary px-6 py-3 text-2xl font-normal">
-          {currentStep === 0 ? 'Order' : 'Payment'}
-        </h4>
-
+      <TitledCard title={<h4>{currentStep === 0 ? 'Order' : 'Payment'}</h4>}>
         <div className="text-tsm p-3 leading-tight">
           {requestStatus !== 'SUCCESSFUL' ? (
             <div className="grid gap-3">
@@ -119,7 +115,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
             </div>
           )}
         </div>
-      </div>
+      </TitledCard>
     </div>
   )
 }
