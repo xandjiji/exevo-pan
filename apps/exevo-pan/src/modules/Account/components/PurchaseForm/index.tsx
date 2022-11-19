@@ -58,8 +58,11 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
         currentStep={currentStep}
         steps={[{ title: 'Order', onClick: resetStep }, { title: 'Payment' }]}
       />
-      <TitledCard title={<h4>{currentStep === 0 ? 'Order' : 'Payment'}</h4>}>
-        <div className="text-tsm p-3 leading-tight">
+      <TitledCard
+        variant="rounded"
+        title={<h4>{currentStep === 0 ? 'Order' : 'Payment'}</h4>}
+      >
+        <div className="text-tsm leading-tight">
           {requestStatus !== 'SUCCESSFUL' ? (
             <div className="grid gap-3">
               <FromTo from={from} to={BANK_CHARACTER} />
