@@ -1,7 +1,8 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useRef } from 'react'
 import type { PaymentData } from '@prisma/client'
 import { Input, Button, Stepper } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
+import { randomCharacter } from 'utils'
 import { endpoints } from 'Constants'
 import FromTo from './FromTo'
 import { PurchaseFormProps } from './types'
@@ -47,6 +48,8 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   const currentStep = requestStatus !== 'SUCCESSFUL' ? 0 : 1
   const isFinished = currentStep === 1
 
+  const { current: randomNickname } = useRef(randomCharacter())
+
   return (
     <div className="grid w-full max-w-[360px] gap-8">
       <Stepper
@@ -70,7 +73,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                   className="w-full"
                   name="character"
                   label="Sending coins character"
-                  placeholder="e.g, 'Bubble'"
+                  placeholder={`e.g, '${randomNickname}'`}
                   noAlert
                   defaultValue={character}
                   onChange={(e) => setFrom(e.target.value.trim())}

@@ -3,9 +3,10 @@ import { useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { Input, Button } from 'components/Atoms'
 import { MailCheckoutClient } from 'services/client'
+import { randomCharacter } from 'utils'
 import { locales } from 'Constants'
 import { useForm } from '../../contexts/Form'
-import { validateEmail, validateCharacter, randomCharacter } from './utils'
+import { validateEmail, validateCharacter } from './utils'
 
 const { DEFAULT_LOCALE } = locales
 
