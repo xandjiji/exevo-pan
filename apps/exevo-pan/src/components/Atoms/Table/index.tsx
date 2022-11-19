@@ -8,11 +8,7 @@ const Table = ({ title, subtitle, children, ...props }: TableProps) => (
     title={
       <>
         <span className="text-tsm block font-light">{subtitle}</span>
-        {!!title && (
-          <h4 className="text-onPrimary mt-1 text-2xl font-bold tracking-wider">
-            {title}
-          </h4>
-        )}
+        {!!title && <h4 className="mt-1 tracking-wider">{title}</h4>}
       </>
     }
     {...props}
