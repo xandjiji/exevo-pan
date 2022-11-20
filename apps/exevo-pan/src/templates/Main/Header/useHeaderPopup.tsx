@@ -22,9 +22,11 @@ const useHeaderPopup = <T extends Element>(
         isOpen={isOpen}
         onClose={close}
         style={{
+          padding: 0,
           position: 'absolute',
           ...getPostion(),
         }}
+        className="overflow-hidden"
         noCloseButton
       >
         {children}

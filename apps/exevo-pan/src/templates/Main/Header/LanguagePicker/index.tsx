@@ -40,7 +40,7 @@ const LanguagePicker = () => {
         <LanguageIcon className="fill-onPrimary clickable rounded-full" />
       </button>
       <Popup>
-        <div className="grid gap-2">
+        <div className="grid gap-2 p-4">
           <RadioButton
             active={locale === 'en'}
             onClick={() => handleLocaleSelect('en')}
