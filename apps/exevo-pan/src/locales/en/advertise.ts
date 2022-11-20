@@ -45,8 +45,6 @@ export default {
       "If the purchase can't be completed, you will receive a refund.",
     CoinsPayment: {
       instruction: 'Please complete your order sending',
-      from: 'from',
-      to: 'to',
     },
     PixPayment: {
       codeText: 'Please complete your order paying the following Pix code:',

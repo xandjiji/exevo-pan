@@ -10,7 +10,7 @@ const Strong = (args: JSX.IntrinsicElements['strong']) => (
 
 const CoinsPayment = () => {
   const {
-    translations: { advertise },
+    translations: { common, advertise },
   } = useTranslations()
 
   const { selectedDates, paymentCharacter } = useForm()
@@ -19,7 +19,7 @@ const CoinsPayment = () => {
     <p className="text-s">
       {advertise.PaymentDetails.CoinsPayment.instruction}
       {' Tibia Coins '}
-      {advertise.PaymentDetails.CoinsPayment.from}
+      {common.from}
       {': '}
       <div className="flex items-baseline justify-center gap-2">
         <Strong>{paymentCharacter.value}</Strong>{' '}

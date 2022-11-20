@@ -46,8 +46,6 @@ export default {
       'Si la compra no se puede completar, se reembolsará su dinero.',
     CoinsPayment: {
       instruction: 'Por favor complete su pedido enviando',
-      from: 'de',
-      to: 'para',
     },
     PixPayment: {
       codeText: 'Por favor complete su compra pagando el siguiente código Pix:',

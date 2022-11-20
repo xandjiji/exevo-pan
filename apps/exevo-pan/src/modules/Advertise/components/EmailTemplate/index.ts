@@ -13,6 +13,7 @@ const ThankYouCard = async ({
   locale,
 }: ThankYouProps): Promise<string> => {
   const dictionary = advertise[locale as keyof typeof advertise]
+  const commonDictionary = common[locale as keyof typeof common]
   const daysAmount = selectedDates.length
 
   let paymentInfo = ''
@@ -22,8 +23,8 @@ const ThankYouCard = async ({
         `${readablePrice.full.TIBIA_COINS(
           calculatePrice(daysAmount, paymentMethod).totalPrice,
         )}`,
-      )} ${dictionary.PaymentDetails.CoinsPayment.from} ${paymentCharacter} ${
-        dictionary.PaymentDetails.CoinsPayment.to
+      )} ${commonDictionary.from} ${paymentCharacter} ${
+        commonDictionary.to
       } ${T.Strong(advertising.BANK_CHARACTER)}`,
     )
   } else {
