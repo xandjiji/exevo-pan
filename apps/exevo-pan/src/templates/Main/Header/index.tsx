@@ -2,6 +2,7 @@ import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
+import { ClientComponent } from 'components/Organisms'
 import { Link, Switch, CtaButton, TibiaBlackjack } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
@@ -10,6 +11,7 @@ import { ExevoPanIcon, MoonIcon } from 'assets/svgs'
 import MenuButton from './MenuButton'
 import HeaderIcon from './HeaderIcon'
 import LanguagePicker from './LanguagePicker'
+import AccountButton from './AccountButton'
 import { NavItems } from './routes'
 
 const heading = {
@@ -108,15 +110,16 @@ const Header = ({
             isOpen={languageOpen}
             setLanguageOpen={setLanguageOpen}
           />
-          {process.browser && (
+          <ClientComponent>
             <Switch
               active={theme === 'dark'}
               onClick={toggleTheme}
               icon={<MoonIcon />}
               aria-label={common.Header.themeSwitch}
             />
-          )}
+          </ClientComponent>
           <CtaButton />
+          <AccountButton />
           <TibiaBlackjack.FloatingButton className="md:hidden" />
         </div>
       </header>
