@@ -1,4 +1,6 @@
+/* eslint-disable react/no-danger */
 import { memo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { CheckIcon } from 'assets/svgs'
 
@@ -19,36 +21,50 @@ const Li = ({ className, children, ...props }: JSX.IntrinsicElements['li']) => (
   </li>
 )
 
-const Pitch = () => (
-  <div className="grid place-items-center gap-8">
-    <div className="grid place-items-center gap-2">
+const Pitch = () => {
+  const {
+    translations: { account },
+  } = useTranslations()
+
+  return (
+    <div className="grid place-items-center gap-8">
+      <div className="grid place-items-center gap-2">
+        <Heading>
+          {account.Pitch.upgradeNow}{' '}
+          <strong className="text-primaryHighlight text-2xl tracking-wider">
+            Exevo Pro 🧙‍♂️
+          </strong>
+        </Heading>
+        <p>{account.Pitch.exclusiveFeatures}</p>
+      </div>
+
+      <div className="text-tsm grid gap-4">
+        <ul className="grid gap-2">
+          <Li>{account.Pitch.features.tcInvested}</Li>
+          <Li>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: account.Pitch.features.auctionFilters,
+              }}
+            />
+          </Li>
+          <Li>
+            <span
+              dangerouslySetInnerHTML={{
+                __html: account.Pitch.features.bossTracker,
+              }}
+            />
+          </Li>
+        </ul>
+        <p className="text-right">{account.Pitch.more}</p>
+      </div>
+
       <Heading>
-        Upgrade now to{' '}
-        <strong className="text-primaryHighlight text-2xl tracking-wider">
-          Exevo Pro 🧙‍♂️
-        </strong>
+        {account.Pitch.payOnce}{' '}
+        <strong className="text-2xl">{account.Pitch.forever} 🙌</strong>
       </Heading>
-      <p>And have access to exclusive features!</p>
     </div>
-
-    <div className="text-tsm grid gap-4">
-      <ul className="grid gap-2">
-        <Li>Find out how much TC was invested in any Bazaar character</Li>
-        <Li>
-          {' '}
-          Exclusive <strong>auction filters</strong>
-        </Li>
-        <Li>
-          Access to all bosses from <strong>Boss Tracker</strong>
-        </Li>
-      </ul>
-      <p className="text-right">...and more in the future!</p>
-    </div>
-
-    <Heading>
-      Pay once, yours <strong className="text-2xl">forever 🙌</strong>
-    </Heading>
-  </div>
-)
+  )
+}
 
 export default memo(Pitch)

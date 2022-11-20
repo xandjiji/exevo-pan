@@ -7,6 +7,18 @@ export default {
     proSince: 'Pro since',
     freeStatus: 'Free',
   },
+  Pitch: {
+    upgradeNow: 'Upgrade now to',
+    exclusiveFeatures: 'And have access to exclusive features!',
+    features: {
+      tcInvested: 'Find out how much TC was invested in any Bazaar character',
+      auctionFilters: 'Exclusive <strong>auction filters</strong>',
+      bossTracker: 'Access to all bosses from <strong>Boss Tracker</strong>',
+    },
+    more: '...and more in the future!',
+    payOnce: 'Pay once, yours',
+    forever: 'forever',
+  },
   PurchaseForm: {
     order: 'Order',
     payment: 'Payment',
