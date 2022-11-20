@@ -43,6 +43,11 @@ import bossesES from './es/bossTracker'
 import bossesPT from './pt/bossTracker'
 import bossesPL from './pl/bossTracker'
 
+import loginEN from './en/login'
+import loginES from './es/login'
+import loginPT from './pt/login'
+import loginPL from './pl/login'
+
 export const error = {
   en: errorEN,
   es: errorES,
@@ -96,4 +101,10 @@ export const bosses = {
   es: bossesES,
   pt: bossesPT,
   pl: bossesPL,
+}
+export const login = {
+  en: loginEN,
+  es: loginES,
+  pt: loginPT,
+  pl: loginPL,
 }

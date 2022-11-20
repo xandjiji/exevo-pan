@@ -10,7 +10,7 @@ import { ExevoPanIcon } from 'assets/svgs'
 import SignIn from 'components/SignIn'
 import { routes, jsonld } from 'Constants'
 import { AuthProviders } from 'types/next-auth'
-import { common } from 'locales'
+import { common, login } from 'locales'
 
 const pageUrl = buildUrl(routes.LOGIN)
 
@@ -18,15 +18,11 @@ type LoginStaticProps = {
   providers: AuthProviders
 }
 
-// @ ToDo: add meta tags content
-// @ ToDo: build page title from translations
-
 export default function Login({ providers }: LoginStaticProps) {
   const { translations } = useTranslations()
   const { locale, push } = useRouter()
 
-  /* const pageTitle = buildPageTitle(translations.homepage.Meta.title) */
-  const pageTitle = buildPageTitle('Login')
+  const pageTitle = buildPageTitle(translations.login.Meta.title)
 
   const { data: session } = useSession()
 
@@ -44,15 +40,15 @@ export default function Login({ providers }: LoginStaticProps) {
 
         <meta
           name="description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.login.Meta.description}
         />
         <meta
           property="twitter:description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.login.Meta.description}
         />
         <meta
           property="og:description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.login.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -110,6 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       translations: {
         common: common[locale as RegisteredLocale],
+        login: login[locale as RegisteredLocale],
       },
       providers,
     },
