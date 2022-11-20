@@ -1,4 +1,5 @@
 import { useState, useCallback, useRef } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import type { PaymentData } from '@prisma/client'
 import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
@@ -10,6 +11,10 @@ import { PurchaseFormProps } from './types'
 const BANK_CHARACTER = 'Ksu'
 
 const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
+  const {
+    translations: { account },
+  } = useTranslations()
+
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',
   )
@@ -56,11 +61,20 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
         className="mx-auto w-full max-w-[240px]"
         isFinished={isFinished}
         currentStep={currentStep}
-        steps={[{ title: 'Order', onClick: resetStep }, { title: 'Payment' }]}
+        steps={[
+          { title: account.PurchaseForm.order, onClick: resetStep },
+          { title: account.PurchaseForm.payment },
+        ]}
       />
       <TitledCard
         variant="rounded"
-        title={<h4>{currentStep === 0 ? 'Order' : 'Payment'}</h4>}
+        title={
+          <h4>
+            {currentStep === 0
+              ? account.PurchaseForm.order
+              : account.PurchaseForm.payment}
+          </h4>
+        }
       >
         <div className="text-tsm leading-tight">
           {requestStatus !== 'SUCCESSFUL' ? (
@@ -71,7 +85,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                 <Input
                   className="w-full"
                   name="character"
-                  label="Sending coins character"
+                  label={account.PurchaseForm.paymentCharacterLabel}
                   placeholder={`e.g, '${randomNickname}'`}
                   noAlert
                   defaultValue={character}
@@ -86,34 +100,30 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                   loading={isLoading}
                   disabled={!from}
                 >
-                  Confirm
+                  {account.PurchaseForm.confirm}
                 </Button>
               </form>
             </div>
           ) : (
             <div className="grid gap-5">
               <strong className="text-txl tracking-wide">
-                Your order was received! 🎉
+                {account.PurchaseForm.orderReceived} 🎉
               </strong>
 
               {txId && (
                 <div className="grid gap-2">
-                  <p>Transaction ID:</p>
+                  <p>{account.PurchaseForm.transactionId}:</p>
                   <p className="code mx-auto w-fit text-center">{txId}</p>
                 </div>
               )}
 
-              <p>
-                Your purchase will be delivered right after your payment is
-                confirmed. If your order can&apos;t be completed, your coins
-                will be returned.
-              </p>
+              <p>{account.PurchaseForm.notice}</p>
 
               <FromTo className="mx-auto" from={from} to={BANK_CHARACTER} />
 
               <Button className="mx-auto" pill hollow onClick={resetStep}>
                 <EditIcon className="h-4 w-4" />
-                Edit your order
+                {account.PurchaseForm.edit}
               </Button>
             </div>
           )}

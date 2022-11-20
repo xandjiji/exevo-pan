@@ -7,21 +7,16 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common } from 'locales'
+import { common, account } from 'locales'
 
 const pageUrl = buildUrl(routes.ACCOUNT)
 
-// @ ToDo: add meta tags content
-// @ ToDo: build page title from translations
-
 export default function Account() {
   const { translations } = useTranslations()
-  const { locale } = useRouter()
 
-  /* const pageTitle = buildPageTitle(translations.homepage.Meta.title) */
-  const pageTitle = buildPageTitle('My Account')
+  const pageTitle = buildPageTitle(translations.account.Meta.title)
 
-  const { data: session, status } = useSession()
+  const { data: session } = useSession()
 
   return (
     <>
@@ -33,15 +28,15 @@ export default function Account() {
 
         <meta
           name="description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.account.Meta.description}
         />
         <meta
           property="twitter:description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.account.Meta.description}
         />
         <meta
           property="og:description"
-          /* content={translations.homepage.Meta.description} */
+          content={translations.account.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -104,6 +99,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
       common: common[locale as RegisteredLocale],
+      account: account[locale as RegisteredLocale],
     },
   },
 })

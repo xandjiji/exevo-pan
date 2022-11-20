@@ -17,7 +17,7 @@ const providerIcons: Partial<
 
 const UserCard = ({ user }: UserCardProps) => {
   const {
-    translations: { common },
+    translations: { account },
   } = useTranslations()
 
   const { name, picture, provider, proStatus, proSince } = user
@@ -49,7 +49,10 @@ const UserCard = ({ user }: UserCardProps) => {
           {proStatus ? (
             <Tooltip
               content={
-                <>Pro since: {new Date(proSince ?? '').toLocaleString()}</>
+                <>
+                  {account.UserCard.proSince}:{' '}
+                  {new Date(proSince ?? '').toLocaleString()}
+                </>
               }
               offset={[0, 6]}
             >
@@ -58,7 +61,9 @@ const UserCard = ({ user }: UserCardProps) => {
               </strong>
             </Tooltip>
           ) : (
-            <strong className="tracking-wide">Free</strong>
+            <strong className="tracking-wide">
+              {account.UserCard.freeStatus}
+            </strong>
           )}
         </span>
       </div>
