@@ -31,6 +31,7 @@
     "build:exevo-pan": "turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
     "build:history-server": "turbo run build --scope=history-server --include-dependencies --no-deps",
     "build:bazaar-scraper": "turbo run build --scope=bazaar-scraper --include-dependencies --no-deps",
+    "analyze": "ANALYZE=true turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
     "start:front": "NODE_ENV=production turbo run start --scope=exevo-pan",
     "start:staging": "turbo run staging",
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",

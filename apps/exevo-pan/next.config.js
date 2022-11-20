@@ -1,3 +1,6 @@
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 const { i18n } = require('./next-i18next.config')
 
 const withPreact = (next = {}) =>
@@ -18,22 +21,24 @@ const withPreact = (next = {}) =>
     },
   })
 
-module.exports = withPreact({
-  i18n,
-  reactStrictMode: true,
-  images: {
-    domains: [],
-    deviceSizes: [24, 32, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-  },
-  experimental: {
-    fontLoaders: [
-      {
-        loader: '@next/font/google',
-        options: { subsets: ['latin'], weight: ['300', '400', '700'] },
-      },
-    ],
-  },
-  webpack(config) {
-    return config
-  },
-})
+module.exports = withBundleAnalyzer(
+  withPreact({
+    i18n,
+    reactStrictMode: true,
+    images: {
+      domains: [],
+      deviceSizes: [24, 32, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+    },
+    experimental: {
+      fontLoaders: [
+        {
+          loader: '@next/font/google',
+          options: { subsets: ['latin'], weight: ['300', '400', '700'] },
+        },
+      ],
+    },
+    webpack(config) {
+      return config
+    },
+  }),
+)
