@@ -8,7 +8,7 @@ const useHeaderPopup = <T extends Element>(
 
   const getPostion = useCallback(() => {
     if (!ref.current) return { top: 0, left: 0 }
-    const { bottom, right } = ref.current?.getBoundingClientRect()
+    const { bottom, right } = ref.current?.getBoundingClientRect() as DOMRect
     return { top: bottom + 8, right: `calc(100% - ${right}px)` }
   }, [])
 
