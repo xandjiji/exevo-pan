@@ -1,4 +1,5 @@
 import { useRef } from 'react'
+import clsx from 'clsx'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
@@ -34,7 +35,14 @@ const AccountButton = (): JSX.Element => {
             <>
               <Popup>
                 <div className="child:px-6 child:py-3 text-s child:cursor-pointer child:items-center child:flex child:gap-2 child:text-onSurface child:text-left grid">
-                  <span className="!text-primaryHighlight !hover:bg-surface pointer-events-none tracking-wide">
+                  <span
+                    className={clsx(
+                      '!hover:bg-surface pointer-events-none tracking-wide',
+                      data.user.proStatus
+                        ? '!text-primaryHighlight'
+                        : '!text-separator',
+                    )}
+                  >
                     {data.user.name}
                   </span>
 
@@ -78,7 +86,12 @@ const AccountButton = (): JSX.Element => {
                   width={32}
                   height={32}
                   unoptimized
-                  className="clickable animate-fadeIn rounded-full shadow"
+                  className={clsx(
+                    'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
+                    data.user.proStatus
+                      ? 'border-primaryHighlight'
+                      : 'bg-separator',
+                  )}
                 />
               </button>
             </>
