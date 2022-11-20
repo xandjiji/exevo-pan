@@ -12,16 +12,15 @@ const useHeaderPopup = <T extends Element>(
     return { top: bottom + 8, right: `calc(100% - ${right}px)` }
   }, [])
 
-  const openAction = useCallback(() => setIsOpen(true), [])
-  const closeAction = useCallback(() => setIsOpen(false), [])
+  const open = useCallback(() => setIsOpen(true), [])
+  const close = useCallback(() => setIsOpen(false), [])
 
   return {
-    openAction,
-    closeAction,
+    action: { open, close },
     Popup: ({ children }: { children: React.ReactNode }) => (
       <Dialog
         isOpen={isOpen}
-        onClose={closeAction}
+        onClose={close}
         style={{
           position: 'absolute',
           ...getPostion(),

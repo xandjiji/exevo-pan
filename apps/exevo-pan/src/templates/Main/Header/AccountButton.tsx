@@ -10,10 +10,10 @@ const AccountButton = (): JSX.Element => {
   const { status, data } = useSession()
   const ref = useRef<HTMLDivElement>(null)
 
-  const { openAction, Popup } = useHeaderPopup(ref)
+  const { action, Popup } = useHeaderPopup(ref)
 
   return (
-    <div className="h8 grid w-8 place-items-center" ref={ref}>
+    <div className="h8 grid h-8 w-8 place-items-center" ref={ref}>
       {
         {
           loading: null,
@@ -39,7 +39,7 @@ const AccountButton = (): JSX.Element => {
                 />
               </Popup>
               <Image
-                onClick={openAction}
+                onClick={action.open}
                 src={data.user.picture}
                 alt={data.user.name}
                 width={32}

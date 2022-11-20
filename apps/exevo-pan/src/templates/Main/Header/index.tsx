@@ -35,7 +35,6 @@ const Header = ({
   } = useTranslations()
 
   const [menuOpen, setMenuOpen] = useState(false)
-  const [languageOpen, setLanguageOpen] = useState(false)
 
   const { theme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
@@ -46,7 +45,7 @@ const Header = ({
     ? common.Header.h1[heading[pathname]]
     : null
 
-  const shouldMenuOverlap = menuOpen || languageOpen
+  const shouldMenuOverlap = menuOpen
 
   const accessibleLogoName = heading[pathname]
     ? common.Header.h1[heading[pathname]]
@@ -106,10 +105,7 @@ const Header = ({
         </nav>
 
         <div className="flex items-center gap-4">
-          <LanguagePicker
-            isOpen={languageOpen}
-            setLanguageOpen={setLanguageOpen}
-          />
+          <LanguagePicker />
           <ClientComponent>
             <Switch
               active={theme === 'dark'}
