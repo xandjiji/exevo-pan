@@ -213,4 +213,11 @@ export default {
   CharacterTooltipLabel: 'Idź do strony postaci',
   Newsticker: 'Ostatnie artykuły',
   LoadingState: 'Wczytuję...',
+  /* @ ToDo: i18n */
+  SignIn: {
+    title: 'Sign in with',
+    subtext: 'By signing in, you agree to our',
+  },
+  termsOfService: 'Terms of Service',
+  privacyPolicy: 'Privacy Policy',
 }

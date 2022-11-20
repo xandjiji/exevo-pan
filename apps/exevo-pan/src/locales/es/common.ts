@@ -215,4 +215,11 @@ export default {
   CharacterTooltipLabel: 'Ir a la página del personaje',
   Newsticker: 'Artículos recientes',
   LoadingState: 'Cargando...',
+  /* @ ToDo: i18n */
+  SignIn: {
+    title: 'Sign in with',
+    subtext: 'By signing in, you agree to our',
+  },
+  termsOfService: 'Terms of Service',
+  privacyPolicy: 'Privacy Policy',
 }

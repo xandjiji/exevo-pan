@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from 'react'
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { getProviders, signIn } from 'next-auth/react'
 import type { BuiltInProviderType } from 'next-auth/providers'
@@ -14,6 +15,10 @@ const SignIn = ({
   providers: providersProps,
   state: stateProps,
 }: SignInProps) => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const [fetchedProviders, setProviders] = useState<AuthProviders | undefined>()
   const [innerState, setState] = useState<RequestStatus>(
     providersProps ? 'IDLE' : 'LOADING',
@@ -71,7 +76,7 @@ const SignIn = ({
       </div>
 
       <h3 className="text-s mb-4 text-center font-normal tracking-wider">
-        Sign in with:
+        {common.SignIn.title}:
       </h3>
 
       <ul className="mx-auto flex w-fit flex-col gap-4">
@@ -101,13 +106,13 @@ const SignIn = ({
       </ul>
 
       <small className="mx-auto mt-6 block text-center text-xs leading-relaxed tracking-wide">
-        By signing in, you agree to our{' '}
+        {common.SignIn.subtext}{' '}
         <Link href="/" className="text-primaryHighlight">
-          Terms of Service
+          {common.termsOfService}
         </Link>{' '}
-        and{' '}
+        {common.and}{' '}
         <Link href="/" className="text-primaryHighlight">
-          Privacy Policy
+          {common.privacyPolicy}
         </Link>
         .
       </small>

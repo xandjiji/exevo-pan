@@ -211,4 +211,10 @@ export default {
   CharacterTooltipLabel: 'Go to character page',
   Newsticker: 'Recent articles',
   LoadingState: 'Loading...',
+  SignIn: {
+    title: 'Sign in with',
+    subtext: 'By signing in, you agree to our',
+  },
+  termsOfService: 'Terms of Service',
+  privacyPolicy: 'Privacy Policy',
 }

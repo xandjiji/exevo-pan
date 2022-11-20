@@ -211,4 +211,10 @@ export default {
   CharacterTooltipLabel: 'Ir para a página do personagem',
   Newsticker: 'Artigos recentes',
   LoadingState: 'Carregando...',
+  SignIn: {
+    title: 'Entrar com',
+    subtext: 'Ao criar uma conta, você está concordando com os nossos',
+  },
+  termsOfService: 'Termos de Serviço',
+  privacyPolicy: 'Política de Privacidade',
 }
