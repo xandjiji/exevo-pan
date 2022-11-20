@@ -31,6 +31,10 @@ export default {
       bossTracker: 'Boss Tracker',
     },
     themeSwitch: 'Habilitar tema noturno',
+    AccountButton: {
+      settings: 'Configurações',
+      logout: 'Logout',
+    },
   },
   BlogTags: {
     news: 'Notícias',

@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
@@ -10,6 +11,10 @@ import { routes } from 'Constants'
 import useHeaderPopup from './useHeaderPopup'
 
 const AccountButton = (): JSX.Element => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const { status, data } = useSession()
   const ref = useRef<HTMLDivElement>(null)
 
@@ -58,7 +63,7 @@ const AccountButton = (): JSX.Element => {
                     onClick={action.close}
                   >
                     <SettingsIcon className="fill-onSurface h-4 w-4" />
-                    Settings
+                    {common.Header.AccountButton.settings}
                   </NextLink>
                   <button
                     className="hover:bg-primaryVariant"
@@ -75,7 +80,7 @@ const AccountButton = (): JSX.Element => {
                     }}
                   >
                     <LogoutIcon className="fill-onSurface h-4 w-4" />
-                    Logout
+                    {common.Header.AccountButton.logout}
                   </button>
                 </div>
               </Popup>
