@@ -27,7 +27,7 @@ export default NextAuth({
     jwt: ({ token, user, account }) => {
       if (!user || !account) return token
 
-      const { id, proStatus, proSince } = user
+      const { id, proStatus, proSince, role } = user
 
       return {
         ...token,
@@ -35,6 +35,7 @@ export default NextAuth({
         provider: account.provider as BuiltInProviderType,
         proStatus,
         proSince,
+        role,
       }
     },
     session: async ({ session, token }) => {

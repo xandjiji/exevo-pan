@@ -1,6 +1,6 @@
 import type { LiteralUnion, ClientSafeProvider } from 'next-auth/react'
 import type { BuiltInProviderType } from 'next-auth/providers'
-import type { PaymentData } from '@prisma/client'
+import type { PaymentData, Role } from '@prisma/client'
 
 declare type AuthProviders = Record<
   LiteralUnion<BuiltInProviderType, string>,
@@ -17,6 +17,7 @@ declare module 'next-auth/jwt' {
     picture: string
     // extended user attributes
     id: string
+    role: Role
     provider: BuiltInProviderType
     proStatus: boolean
     proSince?: string
@@ -34,6 +35,7 @@ declare module 'next-auth' {
     picture: string
     // extended user attributes
     id: string
+    role: Role
     provider: BuiltInProviderType
     proStatus: boolean
     proSince?: string
