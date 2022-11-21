@@ -1,8 +1,10 @@
+import { useMemo } from 'react'
 import type { BuiltInProviderType } from 'next-auth/providers'
 import { useTranslations } from 'contexts/useTranslation'
 import { FadeImage } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import { GoogleIcon, DiscordIcon } from 'assets/svgs'
+import { dateToDateObject } from 'utils'
 import { UserCardProps } from './types'
 
 const providerIcons: Partial<
@@ -17,10 +19,18 @@ const providerIcons: Partial<
 
 const UserCard = ({ user }: UserCardProps) => {
   const {
-    translations: { account },
+    translations: { common, account },
   } = useTranslations()
 
   const { name, picture, provider, proStatus, proSince } = user
+
+  const readableProSince: string = useMemo(() => {
+    if (!proSince) return ''
+
+    const { month, year } = dateToDateObject(new Date(proSince))
+
+    return `${common.FullMonth[month]} ${year}`
+  }, [common, proSince])
 
   const ProviderIcon = providerIcons[provider]
 
@@ -50,8 +60,7 @@ const UserCard = ({ user }: UserCardProps) => {
             <Tooltip
               content={
                 <>
-                  {account.UserCard.proSince}:{' '}
-                  {new Date(proSince ?? '').toLocaleString()}
+                  {account.UserCard.proSince}: {readableProSince}
                 </>
               }
               offset={[0, 6]}
