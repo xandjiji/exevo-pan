@@ -16,7 +16,7 @@ import {
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
-import { useFilters } from '../../contexts/useFilters'
+import { useAuctions } from '../../contexts/useAuctions'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import useRareItemSet from './useRareItemSet'
@@ -48,14 +48,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     mountValues,
     storeMountValues,
   } = useDrawerFields()
-  const {
-    filterState,
-    activeFilterCount,
-    toggleFilterSet,
-    setFilters,
-    toggleAllFilterSetOptions,
-    resetFilters,
-  } = useFilters()
+  const { filterState, activeFilterCount, isHistory, dispatch } = useAuctions()
 
   const [nickname, setNickname] = useDebouncedFilter({
     key: 'nicknameFilter',
@@ -105,7 +98,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             type="button"
             disabled={isFilterReset}
             aria-hidden={isFilterReset}
-            onClick={resetFilters}
+            onClick={() => dispatch({ type: 'RESET_FILTERS' })}
             className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow-md transition-all hover:shadow-lg active:shadow-inner disabled:invisible disabled:opacity-0"
           >
             {homepage.FilterDrawer.resetFilters}
@@ -118,7 +111,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <Checkbox
             label={homepage.FilterDrawer.labels.biddedOnly}
             checked={filterState.biddedOnly}
-            onClick={() => setFilters({ biddedOnly: !filterState.biddedOnly })}
+            onClick={() =>
+              dispatch({ type: 'TOGGLE_FILTER', key: 'biddedOnly' })
+            }
           />
         </FilterGroup>
 
@@ -141,7 +136,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.NONE)}
               onClick={() =>
-                toggleFilterSet({ key: 'vocation', value: VOCATION_IDS.NONE })
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'vocation',
+                  value: VOCATION_IDS.NONE,
+                })
               }
             >
               <Icon.Rook />
@@ -150,7 +149,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.KNIGHT)}
               onClick={() =>
-                toggleFilterSet({ key: 'vocation', value: VOCATION_IDS.KNIGHT })
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'vocation',
+                  value: VOCATION_IDS.KNIGHT,
+                })
               }
             >
               <Icon.Knight />
@@ -159,7 +162,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.PALADIN)}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'vocation',
                   value: VOCATION_IDS.PALADIN,
                 })
@@ -171,7 +175,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.SORCERER)}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'vocation',
                   value: VOCATION_IDS.SORCERER,
                 })
@@ -183,7 +188,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.DRUID)}
               onClick={() =>
-                toggleFilterSet({ key: 'vocation', value: VOCATION_IDS.DRUID })
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'vocation',
+                  value: VOCATION_IDS.DRUID,
+                })
               }
             >
               <Icon.Druid />
@@ -197,7 +206,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.pvp.has(PVP_TYPES.OPTIONAL.type)}
               onClick={() =>
-                toggleFilterSet({ key: 'pvp', value: PVP_TYPES.OPTIONAL.type })
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'pvp',
+                  value: PVP_TYPES.OPTIONAL.type,
+                })
               }
             >
               <Icon.Dove />
@@ -206,7 +219,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.pvp.has(PVP_TYPES.OPEN.type)}
               onClick={() =>
-                toggleFilterSet({ key: 'pvp', value: PVP_TYPES.OPEN.type })
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'pvp',
+                  value: PVP_TYPES.OPEN.type,
+                })
               }
             >
               <Icon.WhiteSkull />
@@ -215,7 +232,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.pvp.has(PVP_TYPES.RETRO.type)}
               onClick={() =>
-                toggleFilterSet({ key: 'pvp', value: PVP_TYPES.RETRO.type })
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'pvp',
+                  value: PVP_TYPES.RETRO.type,
+                })
               }
             >
               <Icon.OrangeSkull />
@@ -224,7 +245,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.pvp.has(PVP_TYPES.HARDCORE.type)}
               onClick={() =>
-                toggleFilterSet({ key: 'pvp', value: PVP_TYPES.HARDCORE.type })
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'pvp',
+                  value: PVP_TYPES.HARDCORE.type,
+                })
               }
             >
               <Icon.RedSkull />
@@ -235,7 +260,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 PVP_TYPES.RETRO_HARDCORE.type,
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'pvp',
                   value: PVP_TYPES.RETRO_HARDCORE.type,
                 })
@@ -251,14 +277,26 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.battleye.has(true)}
-              onClick={() => toggleFilterSet({ key: 'battleye', value: true })}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'battleye',
+                  value: true,
+                })
+              }
             >
               <Icon.Status color="battleGreen" />
               {homepage.FilterDrawer.green}
             </S.IconChip>
             <S.IconChip
               overrideStatus={filterState.battleye.has(false)}
-              onClick={() => toggleFilterSet({ key: 'battleye', value: false })}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'battleye',
+                  value: false,
+                })
+              }
             >
               <Icon.Status color="battleYellow" />
               {homepage.FilterDrawer.yellow}
@@ -273,7 +311,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 SERVER_LOCATIONS.EUROPE.type,
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'location',
                   value: SERVER_LOCATIONS.EUROPE.type,
                 })
@@ -287,7 +326,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 SERVER_LOCATIONS.NORTH_AMERICA.type,
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'location',
                   value: SERVER_LOCATIONS.NORTH_AMERICA.type,
                 })
@@ -301,7 +341,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 SERVER_LOCATIONS.SOUTH_AMERICA.type,
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'location',
                   value: SERVER_LOCATIONS.SOUTH_AMERICA.type,
                 })
@@ -323,7 +364,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             itemList={useOptionsSet(serverOptions, filterState.serverSet)}
             onItemSelect={useCallback(
               ({ value }: Option) =>
-                toggleFilterSet({ key: 'serverSet', value }),
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'serverSet',
+                  value,
+                }),
               [],
             )}
             onKeyPress={blurOnEnter}
@@ -334,7 +379,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <Chip
                 key={server}
                 onClose={() =>
-                  toggleFilterSet({ key: 'serverSet', value: server })
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'serverSet',
+                    value: server,
+                  })
                 }
               >
                 {server}
@@ -348,63 +397,69 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <Checkbox
               label="Training Dummy"
               checked={filterState.dummy}
-              onClick={() => setFilters({ dummy: !filterState.dummy })}
+              onClick={() => dispatch({ type: 'TOGGLE_FILTER', key: 'dummy' })}
             />
             <Checkbox
               label="Charm Expansion"
               checked={filterState.charmExpansion}
               onClick={() =>
-                setFilters({ charmExpansion: !filterState.charmExpansion })
+                dispatch({ type: 'TOGGLE_FILTER', key: 'charmExpansion' })
               }
             />
             <Checkbox
               label="Imbuement Shrine"
               checked={filterState.imbuementShrine}
               onClick={() =>
-                setFilters({ imbuementShrine: !filterState.imbuementShrine })
+                dispatch({ type: 'TOGGLE_FILTER', key: 'imbuementShrine' })
               }
             />
             <Checkbox
               label="Gold Pouch"
               checked={filterState.goldPouch}
-              onClick={() => setFilters({ goldPouch: !filterState.goldPouch })}
+              onClick={() =>
+                dispatch({ type: 'TOGGLE_FILTER', key: 'goldPouch' })
+              }
             />
             <Checkbox
               label="Prey Slot"
               checked={filterState.preySlot}
-              onClick={() => setFilters({ preySlot: !filterState.preySlot })}
+              onClick={() =>
+                dispatch({ type: 'TOGGLE_FILTER', key: 'preySlot' })
+              }
             />
             <Checkbox
               label="Reward Shrine"
               checked={filterState.rewardShrine}
               onClick={() =>
-                setFilters({ rewardShrine: !filterState.rewardShrine })
+                dispatch({ type: 'TOGGLE_FILTER', key: 'rewardShrine' })
               }
             />
             <Checkbox
               label="Hirelings"
               checked={filterState.hireling}
-              onClick={() => setFilters({ hireling: !filterState.hireling })}
+              onClick={() =>
+                dispatch({ type: 'TOGGLE_FILTER', key: 'hireling' })
+              }
             />
             <Checkbox
               label="Hunting Task Slot"
               checked={filterState.huntingSlot}
               onClick={() =>
-                setFilters({ huntingSlot: !filterState.huntingSlot })
+                dispatch({ type: 'TOGGLE_FILTER', key: 'huntingSlot' })
               }
             />
             <Checkbox
               label="Mailbox"
               checked={filterState.mailbox}
-              onClick={() => setFilters({ mailbox: !filterState.mailbox })}
+              onClick={() =>
+                dispatch({ type: 'TOGGLE_FILTER', key: 'mailbox' })
+              }
             />
             <Checkbox
               label="Regular world transfer"
               checked={filterState.transferAvailable}
               onClick={() =>
-                setFilters({
-                  transferAvailable: !filterState.transferAvailable,
-                })
+                dispatch({ type: 'TOGGLE_FILTER', key: 'transferAvailable' })
               }
             />
           </div>
@@ -462,7 +517,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 skills.getSkillKey('magic'),
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'skillKey',
                   value: skills.getSkillKey('magic'),
                 })
@@ -476,7 +532,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 skills.getSkillKey('distance'),
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'skillKey',
                   value: skills.getSkillKey('distance'),
                 })
@@ -490,7 +547,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 skills.getSkillKey('club'),
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'skillKey',
                   value: skills.getSkillKey('club'),
                 })
@@ -504,7 +562,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 skills.getSkillKey('sword'),
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'skillKey',
                   value: skills.getSkillKey('sword'),
                 })
@@ -518,7 +577,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 skills.getSkillKey('axe'),
               )}
               onClick={() =>
-                toggleFilterSet({
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
                   key: 'skillKey',
                   value: skills.getSkillKey('axe'),
                 })
@@ -599,7 +659,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               )}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
-                  toggleFilterSet({ key: 'imbuementsSet', value }),
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'imbuementsSet',
+                    value,
+                  }),
                 [],
               )}
               onKeyPress={blurOnEnter}
@@ -610,7 +674,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 filterState.imbuementsSet.size === imbuementOptions.length
               }
               onClick={() =>
-                toggleAllFilterSetOptions('imbuementsSet', imbuementOptions)
+                dispatch({
+                  type: 'TOGGLE_ALL_FILTER_SET_OPTION',
+                  key: 'imbuementsSet',
+                  allOptions: imbuementOptions,
+                })
               }
             >
               {homepage.FilterDrawer.toggleAll.imbuements}
@@ -621,7 +689,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <Chip
                 key={imbuement}
                 onClose={() =>
-                  toggleFilterSet({ key: 'imbuementsSet', value: imbuement })
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'imbuementsSet',
+                    value: imbuement,
+                  })
                 }
               >
                 {imbuement}
@@ -640,7 +712,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
-                  toggleFilterSet({ key: 'charmsSet', value }),
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'charmsSet',
+                    value,
+                  }),
                 [],
               )}
               onKeyPress={blurOnEnter}
@@ -651,7 +727,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 filterState.charmsSet.size === charmOptions.length
               }
               onClick={() =>
-                toggleAllFilterSetOptions('charmsSet', charmOptions)
+                dispatch({
+                  type: 'TOGGLE_ALL_FILTER_SET_OPTION',
+                  key: 'charmsSet',
+                  allOptions: charmOptions,
+                })
               }
             >
               {homepage.FilterDrawer.toggleAll.charms}
@@ -662,7 +742,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <Chip
                 key={charm}
                 onClose={() =>
-                  toggleFilterSet({ key: 'charmsSet', value: charm })
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'charmsSet',
+                    value: charm,
+                  })
                 }
               >
                 {charm}
@@ -681,7 +765,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             itemList={useOptionsSet(questOptions, filterState.questSet)}
             onItemSelect={useCallback(
               ({ value }: Option) =>
-                toggleFilterSet({ key: 'questSet', value }),
+                dispatch({ type: 'TOGGLE_FILTER_SET', key: 'questSet', value }),
               [],
             )}
             onKeyPress={blurOnEnter}
@@ -692,7 +776,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <Chip
                 key={quest}
                 onClose={() =>
-                  toggleFilterSet({ key: 'questSet', value: quest })
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'questSet',
+                    value: quest,
+                  })
                 }
               >
                 {quest}
@@ -714,7 +802,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             )}
             onItemSelect={useCallback(
               ({ value }: Option) =>
-                toggleFilterSet({ key: 'achievementSet', value }),
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'achievementSet',
+                  value,
+                }),
               [],
             )}
             onKeyPress={blurOnEnter}
@@ -725,7 +817,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <Chip
                 key={achievement}
                 onClose={() =>
-                  toggleFilterSet({ key: 'achievementSet', value: achievement })
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'achievementSet',
+                    value: achievement,
+                  })
                 }
               >
                 {achievement}
@@ -734,43 +830,44 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        {/* @ ToDo: display this field only for current auctions */}
-        <FilterGroup>
-          <S.InputWrapper>
-            <S.AutocompleteInput
-              id="rare-items-input"
-              label={
-                <InfoTooltip.LabelWrapper className="whitespace-nowrap">
-                  {homepage.FilterDrawer.labels.rareItems}
-                  <InfoTooltip
-                    labelSize
-                    content={homepage.FilterDrawer.tooltips.rareItems}
-                  />
-                </InfoTooltip.LabelWrapper>
-              }
-              aria-label={homepage.FilterDrawer.labels.rareItems}
-              aria-controls="rare-items-list"
-              placeholder={homepage.FilterDrawer.placeholders.rareItems}
-              itemList={rareItems.itemList}
-              onItemSelect={({ name }) => rareItems.action.toggle(name)}
-              onKeyPress={blurOnEnter}
-              enterKeyHint="done"
-            />
-            <Chip
-              overrideStatus={rareItems.allSelected}
-              onClick={rareItems.action.toggleAll}
-            >
-              {homepage.FilterDrawer.toggleAll.items}
-            </Chip>
-          </S.InputWrapper>
-          <S.ChipWrapper id="rare-items-list">
-            {Object.keys(rareItems.selectedItemData).map((item) => (
-              <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
-                {item}
+        {!isHistory && (
+          <FilterGroup>
+            <S.InputWrapper>
+              <S.AutocompleteInput
+                id="rare-items-input"
+                label={
+                  <InfoTooltip.LabelWrapper className="whitespace-nowrap">
+                    {homepage.FilterDrawer.labels.rareItems}
+                    <InfoTooltip
+                      labelSize
+                      content={homepage.FilterDrawer.tooltips.rareItems}
+                    />
+                  </InfoTooltip.LabelWrapper>
+                }
+                aria-label={homepage.FilterDrawer.labels.rareItems}
+                aria-controls="rare-items-list"
+                placeholder={homepage.FilterDrawer.placeholders.rareItems}
+                itemList={rareItems.itemList}
+                onItemSelect={({ name }) => rareItems.action.toggle(name)}
+                onKeyPress={blurOnEnter}
+                enterKeyHint="done"
+              />
+              <Chip
+                overrideStatus={rareItems.allSelected}
+                onClick={rareItems.action.toggleAll}
+              >
+                {homepage.FilterDrawer.toggleAll.items}
               </Chip>
-            ))}
-          </S.ChipWrapper>
-        </FilterGroup>
+            </S.InputWrapper>
+            <S.ChipWrapper id="rare-items-list">
+              {Object.keys(rareItems.selectedItemData).map((item) => (
+                <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
+                  {item}
+                </Chip>
+              ))}
+            </S.ChipWrapper>
+          </FilterGroup>
+        )}
 
         <FilterGroup
           label={homepage.FilterDrawer.labels.misc}
@@ -783,7 +880,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             >
               <Chip
                 overrideStatus={filterState.rareNick}
-                onClick={() => setFilters({ rareNick: !filterState.rareNick })}
+                onClick={() =>
+                  dispatch({ type: 'TOGGLE_FILTER', key: 'rareNick' })
+                }
               >
                 {homepage.FilterDrawer.rareNicknamesButton}
               </Chip>
@@ -793,7 +892,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <Chip
                 key={tag}
                 overrideStatus={filterState.tags.has(tag)}
-                onClick={() => toggleFilterSet({ key: 'tags', value: tag })}
+                onClick={() =>
+                  dispatch({
+                    type: 'TOGGLE_FILTER_SET',
+                    key: 'tags',
+                    value: tag,
+                  })
+                }
               >
                 {common.SpecialTags[tag]}
               </Chip>

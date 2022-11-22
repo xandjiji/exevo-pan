@@ -2,11 +2,11 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
+import { ClientComponent } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
 import { useAuctions } from '../../contexts/useAuctions'
-import { useFilters } from '../../contexts/useFilters'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import * as S from './atoms'
@@ -21,13 +21,12 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
   } = useTranslations()
 
   const {
-    page,
-    pageData,
+    paginatedData,
+    activeFilterCount,
     handlePaginatorFetch,
     highlightedAuctions,
     shouldDisplayHighlightedAuctions,
   } = useAuctions()
-  const { activeFilterCount } = useFilters()
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
@@ -49,7 +48,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
     }
 
     return () => clearTimeout(scrollTimer)
-  }, [page])
+  }, [paginatedData])
 
   return (
     <main>
@@ -86,27 +85,27 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
 
         <SortingDialog />
 
-        {process.browser && (
+        <ClientComponent>
           <Paginator
             aria-controls="character-grid"
             pageSize={PAGE_SIZE}
-            totalItems={pageData.totalItems}
-            currentPage={pageData.pageIndex + 1}
+            totalItems={paginatedData.totalItems}
+            currentPage={paginatedData.pageIndex + 1}
             onChange={handlePaginatorFetch}
             noItemsMessage={homepage.AuctionsGrid.noItemsPagination}
             className="ml-auto"
           />
-        )}
+        </ClientComponent>
       </div>
 
-      {process.browser && (
+      <ClientComponent>
         <FilterDrawer
           id="filter-drawer"
           aria-label={homepage.AuctionsGrid.filterDrawerLabel}
           open={drawerOpen}
           onClose={closeDrawer}
         />
-      )}
+      </ClientComponent>
 
       <div className="flex flex-col items-center">
         <div
@@ -125,7 +124,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
                 permalink={permalinkResolver?.(auction.id)}
               />
             ))}
-          {page.map((auction) => (
+          {paginatedData.page.map((auction) => (
             <CharacterCard
               key={auction.id}
               lazyRender
@@ -136,7 +135,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
             />
           ))}
         </div>
-        {page.length === 0 && (
+        {paginatedData.page.length === 0 && (
           <EmptyState
             className={styles.empty}
             button={{
