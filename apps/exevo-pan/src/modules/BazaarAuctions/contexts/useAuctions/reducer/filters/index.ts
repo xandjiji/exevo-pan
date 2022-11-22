@@ -12,6 +12,15 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
         filterState: { ...state.filterState, ...action.filterOptions },
       }
 
+    case 'TOGGLE_FILTER':
+      return {
+        ...state,
+        filterState: {
+          ...state.filterState,
+          [action.key]: !state.filterState[action.key],
+        },
+      }
+
     case 'TOGGLE_FILTER_SET':
       return {
         ...state,
