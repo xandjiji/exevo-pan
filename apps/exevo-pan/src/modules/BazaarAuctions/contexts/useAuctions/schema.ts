@@ -1,4 +1,5 @@
 import {
+  DEFAULT_FILTER_OPTIONS,
   DEFAULT_SORT_OPTIONS,
   DEFAULT_PAGINATION_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
@@ -6,9 +7,15 @@ import { AuctionsContextValues } from './types'
 
 export const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
+  isHistory: false,
   highlightedAuctions: [],
-  page: [],
-  pageData: {
+  filterState: DEFAULT_FILTER_OPTIONS,
+  activeFilterCount: 0,
+  paginationOptions: DEFAULT_PAGINATION_OPTIONS,
+  sortingOptions: DEFAULT_SORT_OPTIONS.current,
+  paginatedData: {
+    page: [],
+    ...DEFAULT_SORT_OPTIONS.current,
     pageIndex: 0,
     totalItems: 0,
     startOffset: 0,
@@ -16,7 +23,6 @@ export const DEFAULT_STATE: AuctionsContextValues = {
     hasNext: false,
     hasPrev: false,
   },
-  ...DEFAULT_SORT_OPTIONS.current,
   shouldDisplayHighlightedAuctions: true,
   handlePaginatorFetch: async () => {},
   dispatch: () => {},

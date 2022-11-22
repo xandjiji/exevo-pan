@@ -21,12 +21,8 @@ import { AuctionsContextValues, AuctionsProviderProps } from './types'
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
 
 export const AuctionsProvider = ({
-  history = false,
   highlightedAuctions,
-  initialPage,
-  initialPageData,
-  defaultSortingMode,
-  defaultDescendingOrder,
+  initialPaginatedData,
   children,
 }: AuctionsProviderProps) => {
   const {
@@ -41,17 +37,20 @@ export const AuctionsProvider = ({
     },
   })
   const [sorting, setSorting, isSortingDefault] = useUrlParamsState(
-    sortSchema(history ? 'history' : 'current'),
+    sortSchema('current'),
   )
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: false,
-    page: initialPage,
-    ...sorting,
-    pageData: {
-      ...initialPageData,
-      pageIndex: pagination.pageIndex - 1,
+    isHistory: false,
+    filterState: DEFAULT_STATE.filterState,
+    activeFilterCount: DEFAULT_STATE.activeFilterCount,
+    paginationOptions: DEFAULT_STATE.paginationOptions,
+    sortingOptions: {
+      descendingOrder: initialPaginatedData.descendingOrder,
+      sortingMode: initialPaginatedData.sortingMode,
     },
+    paginatedData: initialPaginatedData,
     shouldDisplayHighlightedAuctions:
       DEFAULT_STATE.shouldDisplayHighlightedAuctions,
   })
@@ -89,7 +88,7 @@ export const AuctionsProvider = ({
         paginationOptions,
         sortOptions,
         filterOptions,
-        history,
+        /* history, */
       })
 
       const isDefaultGridState =
@@ -104,7 +103,9 @@ export const AuctionsProvider = ({
         shouldDisplayHighlightedAuctions: isDefaultGridState && noFilterApplied,
       })
     },
-    [history],
+    [
+      /* history */
+    ],
   )
 
   const isMounted = useIsMounted()
