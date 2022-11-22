@@ -19,7 +19,11 @@ export type FilterAction =
       type: 'SET_FILTERS'
       filterOptions: Partial<SortOptions>
     }
-  | {
+  | ({
       type: 'TOGGLE_FILTER_SET'
-      toggleFilter: ToggleFilterSetArgs
+    } & ToggleFilterSetArgs)
+  | {
+      type: 'TOGGLE_ALL_FILTER_SET_OPTION'
+      key: ExtractFilterByType<Set<string>>
+      allOptions: Option[]
     }

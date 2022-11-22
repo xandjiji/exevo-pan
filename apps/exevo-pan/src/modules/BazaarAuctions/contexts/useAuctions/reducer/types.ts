@@ -34,7 +34,7 @@ export interface AuctionsContextState {
   shouldDisplayHighlightedAuctions: boolean
 }
 
-export type Reducer = (
+export type Reducer<ActionTypes> = (
   state: AuctionsContextState,
-  action: Action,
+  action: ActionTypes,
 ) => AuctionsContextState

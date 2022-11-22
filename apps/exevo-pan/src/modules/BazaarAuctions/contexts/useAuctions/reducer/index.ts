@@ -4,15 +4,15 @@ import {
 } from 'shared-utils/dist/contracts/Filters/defaults'
 import { resetPagination } from './utils'
 import FiltersReducer from './filters'
-import { Reducer } from './types'
+import { Reducer, Action } from './types'
 
-const AuctionsReducer: Reducer = (state, action) => {
+const AuctionsReducer: Reducer<Action> = (state, action) => {
   switch (action.type) {
     case 'SET_LOADING':
       return { ...state, loading: action.loading }
 
     case 'TOGGLE_HISTORY': {
-      const nextState: ReturnType<Reducer> = resetPagination({
+      const nextState: ReturnType<typeof AuctionsReducer> = resetPagination({
         ...state,
         isHistory: !state.isHistory,
       })
