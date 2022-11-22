@@ -2,7 +2,7 @@ import {
   DEFAULT_FILTER_OPTIONS,
   DEFAULT_SORT_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
-import { resetPagination } from './utils'
+import { resetPagination, shouldDisplayHighlightedAuctions } from './utils'
 import FiltersReducer from './filters'
 import { Reducer, Action } from './types'
 
@@ -46,12 +46,11 @@ const Reducer: Reducer<Action> = (state, action) => {
       })
 
     case 'SET_PAGINATED_DATA':
-      return {
+      return shouldDisplayHighlightedAuctions({
         ...state,
         loading: false,
         paginatedData: action.paginatedData,
-        shouldDisplayHighlightedAuctions: false, // @ ToDo
-      }
+      })
 
     default:
       return FiltersReducer(state, action)
