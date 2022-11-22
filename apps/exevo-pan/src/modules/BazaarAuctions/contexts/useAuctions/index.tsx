@@ -72,7 +72,7 @@ export const AuctionsProvider = ({
       filterOptions: FilterOptions,
       newFilterCount: number,
     ) => {
-      dispatch({ type: 'SET_LOADING', value: true })
+      dispatch({ type: 'SET_LOADING', loading: true })
 
       lastFilterState.current = filterOptions
       const paginationOptions = {
@@ -98,7 +98,7 @@ export const AuctionsProvider = ({
       const noFilterApplied = newFilterCount === 0
 
       dispatch({
-        type: 'STORE_DATA',
+        type: 'SET_PAGINATED_DATA',
         data,
         shouldDisplayHighlightedAuctions: isDefaultGridState && noFilterApplied,
       })
@@ -154,7 +154,10 @@ export const AuctionsProvider = ({
   )
 
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {
-    dispatch({ type: 'SET_PAGE_INDEX', value: newPageIndex - 1 })
+    dispatch({
+      type: 'SET_PAGINATION',
+      paginationOptions: { pageIndex: newPageIndex - 1 },
+    })
   }, [])
 
   return (

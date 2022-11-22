@@ -5,7 +5,6 @@ export type Action =
     }
   | {
       type: 'TOGGLE_HISTORY'
-      loading: boolean
     }
   | {
       type: 'SET_FILTERS'
@@ -13,11 +12,11 @@ export type Action =
     }
   | {
       type: 'SET_PAGINATION'
-      paginationOptions: PaginationOptions
+      paginationOptions: Partial<PaginationOptions>
     }
   | {
       type: 'SET_SORTING'
-      sortingOptions: SortOptions
+      sortingOptions: Partial<SortOptions>
     }
   | {
       type: 'SET_PAGINATED_DATA'
