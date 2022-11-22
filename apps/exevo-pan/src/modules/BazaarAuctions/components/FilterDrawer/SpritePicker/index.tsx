@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { memo } from 'react'
 import Image from 'next/image'
 import { Accordion, Label, ActiveCount } from 'components/Atoms'
-import { useFilters } from '../../../contexts/useFilters'
+import { useAuctions } from '../../../contexts/useAuctions'
 import { SpritePickerProps } from './types'
 
 const SpritePicker = ({
@@ -18,7 +18,7 @@ const SpritePicker = ({
     translations: { homepage },
   } = useTranslations()
 
-  const { filterState, toggleFilterSet } = useFilters()
+  const { filterState, dispatch } = useAuctions()
 
   const selectedCount = (filterState[filterKey] as Set<string>).size
 
@@ -55,7 +55,13 @@ const SpritePicker = ({
               role="switch"
               title={name}
               aria-checked={isChecked}
-              onClick={() => toggleFilterSet({ key: filterKey, value: name })}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: filterKey,
+                  value: name,
+                })
+              }
               className={clsx(
                 'clickable relative h-14 w-14 select-none rounded-md p-2 transition-colors',
                 isChecked ? 'bg-primaryHighlight' : 'bg-primaryVariant',

@@ -1,4 +1,7 @@
-type ExtractFilterByType<Type> = keyof FilterProperties<FilterOptions, Type>
+export type ExtractFilterByType<Type> = keyof FilterProperties<
+  FilterOptions,
+  Type
+>
 
 type ToggleFilterSetArgs =
   | {
