@@ -1,14 +1,12 @@
-export type Action =
+import { FilterAction } from './filters/types'
+
+export type DefaultAction =
   | {
       type: 'SET_LOADING'
       loading: boolean
     }
   | {
       type: 'TOGGLE_HISTORY'
-    }
-  | {
-      type: 'SET_FILTERS'
-      loading: boolean
     }
   | {
       type: 'SET_PAGINATION'
@@ -23,6 +21,8 @@ export type Action =
       paginatedData: PaginatedData<CharacterObject>
     }
 
+export type Action = DefaultAction | FilterAction
+
 export interface AuctionsContextState {
   loading: boolean
   isHistory: boolean
@@ -33,3 +33,8 @@ export interface AuctionsContextState {
   paginatedData: PaginatedData<CharacterObject>
   shouldDisplayHighlightedAuctions: boolean
 }
+
+export type Reducer = (
+  state: AuctionsContextState,
+  action: Action,
+) => AuctionsContextState
