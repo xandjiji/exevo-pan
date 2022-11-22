@@ -1,13 +1,10 @@
-import {
-  DEFAULT_FILTER_OPTIONS,
-  DEFAULT_SORT_OPTIONS,
-} from 'shared-utils/dist/contracts/Filters/defaults'
+import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { resetPagination } from '../utils'
-import { Reducer, AuctionsContextState } from '../types'
+import { Reducer } from '../types'
 import { FilterAction } from './types'
-import { toggleSet } from './utils'
+import { toggleSet, countActiveFilters } from './utils'
 
-const filterReducer: Reducer<FilterAction> = (state, action) => {
+const FilterReducer: Reducer<FilterAction> = (state, action) => {
   switch (action.type) {
     case 'SET_FILTERS':
       return {
@@ -36,17 +33,38 @@ const filterReducer: Reducer<FilterAction> = (state, action) => {
         },
       }
 
+    case 'TOGGLE_ADDON': {
+      const currentAddon = state.filterState.addon
+
+      return {
+        ...state,
+        filterState: {
+          ...state.filterState,
+          addon:
+            currentAddon === 3 || currentAddon === action.value
+              ? currentAddon - action.value
+              : currentAddon + action.value,
+        },
+      }
+    }
+
+    case 'RESET_FILTERS':
+      return { ...state, filterState: DEFAULT_FILTER_OPTIONS }
+
     default:
       return state
   }
 }
 
 const reducer: Reducer<FilterAction> = (state, action) => {
-  const nextState = filterReducer(state, action)
-  resetPagination(nextState)
-  /* @ ToDo: active filter count */
+  const nextState = FilterReducer(state, action)
 
-  return nextState
+  nextState.activeFilterCount = countActiveFilters(
+    DEFAULT_FILTER_OPTIONS,
+    nextState.filterState,
+  )
+
+  return resetPagination(nextState)
 }
 
 export default reducer

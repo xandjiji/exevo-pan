@@ -27,3 +27,10 @@ export type FilterAction =
       key: ExtractFilterByType<Set<string>>
       allOptions: Option[]
     }
+  | {
+      type: 'TOGGLE_ADDON'
+      value: number
+    }
+  | {
+      type: 'RESET_FILTERS'
+    }
