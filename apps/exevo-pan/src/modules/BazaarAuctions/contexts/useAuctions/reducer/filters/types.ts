@@ -20,7 +20,7 @@ type ToggleFilterSetArgs =
 export type FilterAction =
   | {
       type: 'SET_FILTERS'
-      filterOptions: Partial<SortOptions>
+      filterOptions: Partial<FilterOptions>
     }
   | {
       type: 'TOGGLE_FILTER'

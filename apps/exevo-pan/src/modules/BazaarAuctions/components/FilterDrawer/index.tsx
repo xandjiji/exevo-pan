@@ -83,7 +83,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const rareItems = useRareItemSet({
     rareItemData,
     currentFilterSet: filterState.auctionIds,
-    setFilters,
+    setFilters: useCallback(
+      (filterOptions) => dispatch({ type: 'SET_FILTERS', filterOptions }),
+      [],
+    ),
   })
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
