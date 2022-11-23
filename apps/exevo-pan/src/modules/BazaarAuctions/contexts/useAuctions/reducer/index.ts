@@ -17,8 +17,9 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
         isHistory: !state.isHistory,
       }
 
-      nextState.sortingOptions =
-        DEFAULT_SORT_OPTIONS[nextState.isHistory ? 'history' : 'current']
+      nextState.sortingOptions = {
+        ...DEFAULT_SORT_OPTIONS[nextState.isHistory ? 'history' : 'current'],
+      }
 
       if (nextState.isHistory) {
         nextState.filterState = {
