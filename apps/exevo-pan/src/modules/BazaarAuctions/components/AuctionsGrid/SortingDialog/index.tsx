@@ -23,7 +23,10 @@ const SortingDialog = () => {
     translations: { homepage },
   } = useTranslations()
 
-  const { sortingMode, descendingOrder, dispatch } = useAuctions()
+  const {
+    sortingOptions: { descendingOrder, sortingMode },
+    dispatch,
+  } = useAuctions()
 
   return (
     <Tooltip
@@ -34,7 +37,14 @@ const SortingDialog = () => {
         <div className="grid gap-3">
           <Switch
             active={descendingOrder}
-            onClick={() => dispatch({ type: 'TOGGLE_DESCENDING_ORDER' })}
+            onClick={() =>
+              dispatch({
+                type: 'SET_SORTING',
+                sortingOptions: {
+                  descendingOrder: !descendingOrder,
+                },
+              })
+            }
             aria-label={homepage.AuctionsGrid.descendingSwitchLabel}
             className="mb-1"
           >
@@ -44,7 +54,12 @@ const SortingDialog = () => {
             <RadioButton
               key={mode}
               onClick={() =>
-                dispatch({ type: 'SET_SORTING_MODE', value: index })
+                dispatch({
+                  type: 'SET_SORTING',
+                  sortingOptions: {
+                    sortingMode: index,
+                  },
+                })
               }
               active={sortingMode === index}
             >
