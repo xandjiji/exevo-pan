@@ -12,7 +12,7 @@ import { useUrlParamsState, useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
 import AuctionsReducer from './reducer'
-import { DEFAULT_STATE, PAGE_SIZE } from './schema'
+import { DEFAULT_STATE, PAGE_SIZE } from './defaults'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
