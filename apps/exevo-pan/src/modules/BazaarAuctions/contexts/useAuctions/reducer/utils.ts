@@ -8,7 +8,10 @@ export const resetPagination = (
   state: AuctionsContextState,
 ): AuctionsContextState => {
   // eslint-disable-next-line no-param-reassign
-  state.paginationOptions.pageIndex = DEFAULT_PAGINATION_OPTIONS.pageIndex
+  state.paginationOptions = {
+    ...state.paginationOptions,
+    pageIndex: DEFAULT_PAGINATION_OPTIONS.pageIndex,
+  }
   return state
 }
 
