@@ -53,6 +53,17 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
         paginatedData: action.paginatedData,
       })
 
+    case 'SYNCH_URL_STATE':
+      return {
+        ...state,
+        filterState: action.urlFilters,
+        paginationOptions: {
+          ...action.urlPagination,
+          pageIndex: action.urlPagination.pageIndex - 1,
+        },
+        sortingOptions: action.urlSorting,
+      }
+
     default:
       return FiltersReducer(state, action)
   }

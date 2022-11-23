@@ -20,6 +20,12 @@ export type DefaultAction =
       type: 'SET_PAGINATED_DATA'
       paginatedData: PaginatedData<CharacterObject>
     }
+  | {
+      type: 'SYNCH_URL_STATE'
+      urlSorting: SortOptions
+      urlPagination: PaginationOptions
+      urlFilters: FilterOptions
+    }
 
 export type Action = DefaultAction | FilterAction
 
