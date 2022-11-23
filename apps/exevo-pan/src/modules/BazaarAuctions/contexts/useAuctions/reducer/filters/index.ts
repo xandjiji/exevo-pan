@@ -1,8 +1,8 @@
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { resetPagination } from '../utils'
+import { countActiveFilters, resetPagination } from '../utils'
 import { Reducer } from '../types'
 import { FilterAction } from './types'
-import { toggleSet, countActiveFilters } from './utils'
+import { toggleSet } from './utils'
 
 const FilterReducer: Reducer<FilterAction> = (state, action) => {
   switch (action.type) {

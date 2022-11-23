@@ -1,3 +1,4 @@
+import { dequal } from 'dequal'
 import {
   DEFAULT_PAGINATION_OPTIONS,
   DEFAULT_SORT_OPTIONS,
@@ -32,4 +33,21 @@ export const shouldDisplayHighlightedAuctions = (
     isDefaultGridState && noFilterApplied && !state.isHistory
 
   return state
+}
+
+export const countActiveFilters = (
+  defaultFilters: FilterOptions,
+  currentFilters: FilterOptions,
+): number => {
+  let count = 0
+  Object.keys(defaultFilters).forEach((filterKey) => {
+    const diff = !dequal(
+      defaultFilters[filterKey as keyof FilterOptions],
+      currentFilters[filterKey as keyof FilterOptions],
+    )
+
+    if (diff) count += 1
+  })
+
+  return count
 }

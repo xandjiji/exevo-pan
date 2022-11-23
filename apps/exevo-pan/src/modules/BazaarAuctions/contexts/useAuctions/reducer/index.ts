@@ -2,7 +2,11 @@ import {
   DEFAULT_FILTER_OPTIONS,
   DEFAULT_SORT_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
-import { resetPagination, shouldDisplayHighlightedAuctions } from './utils'
+import {
+  resetPagination,
+  shouldDisplayHighlightedAuctions,
+  countActiveFilters,
+} from './utils'
 import FiltersReducer from './filters'
 import { Reducer, Action } from './types'
 
@@ -62,6 +66,10 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
           pageIndex: action.urlPagination.pageIndex - 1,
         },
         sortingOptions: action.urlSorting,
+        activeFilterCount: countActiveFilters(
+          DEFAULT_FILTER_OPTIONS,
+          action.urlFilters,
+        ),
       }
 
     default:
