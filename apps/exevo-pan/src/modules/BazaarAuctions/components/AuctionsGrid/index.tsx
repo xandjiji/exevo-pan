@@ -85,7 +85,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
 
         <SortingDialog />
 
-        <ClientComponent>
+        <ClientComponent className="ml-auto">
           <Paginator
             aria-controls="character-grid"
             pageSize={PAGE_SIZE}
@@ -93,7 +93,6 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
             currentPage={paginatedData.pageIndex + 1}
             onChange={handlePaginatorFetch}
             noItemsMessage={homepage.AuctionsGrid.noItemsPagination}
-            className="ml-auto"
           />
         </ClientComponent>
       </div>
