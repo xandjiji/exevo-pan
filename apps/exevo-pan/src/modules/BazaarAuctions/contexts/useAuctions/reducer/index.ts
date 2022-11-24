@@ -60,6 +60,7 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
     case 'SYNCH_URL_STATE':
       return {
         ...state,
+        isHistory: action.urlHistory,
         filterState: action.urlFilters,
         paginationOptions: {
           ...action.urlPagination,

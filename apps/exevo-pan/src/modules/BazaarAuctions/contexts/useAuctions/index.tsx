@@ -58,7 +58,13 @@ export const AuctionsProvider = ({
     }
   }, [paginationOptions, sortingOptions, filterState, isHistory])
 
-  useSynchUrlState({ filterState, paginationOptions, sortingOptions, dispatch })
+  useSynchUrlState({
+    isHistory,
+    filterState,
+    paginationOptions,
+    sortingOptions,
+    dispatch,
+  })
 
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {
     dispatch({

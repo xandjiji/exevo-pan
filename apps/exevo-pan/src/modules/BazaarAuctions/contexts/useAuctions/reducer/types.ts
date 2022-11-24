@@ -25,6 +25,7 @@ export type DefaultAction =
       urlSorting: SortOptions
       urlPagination: PaginationOptions
       urlFilters: FilterOptions
+      urlHistory: boolean
     }
 
 export type Action = DefaultAction | FilterAction
