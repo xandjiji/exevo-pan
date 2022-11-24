@@ -17,7 +17,6 @@ const useUrlParamsState = <T,>({
   const isMounted = useIsMounted()
   useEffect(() => {
     if (isMounted) set.urlValues(currentState)
-    console.log(currentState)
   }, [currentState])
 
   return [initialValues, isInitiallyDefault] as const
