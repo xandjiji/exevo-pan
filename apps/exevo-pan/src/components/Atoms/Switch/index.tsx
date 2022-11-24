@@ -40,7 +40,7 @@ const Switch = ({
         <div
           className={clsx(
             'z-1 absolute top-1/2 grid place-items-center rounded-full shadow-lg transition-all',
-            derivedActive ? 'bg-primary' : 'bg-surface',
+            derivedActive ? 'bg-primary' : 'bg-background',
             icon ? 'h-8 w-8' : 'h-4 w-4',
           )}
           style={{
