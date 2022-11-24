@@ -22,6 +22,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
 
   const {
     paginatedData,
+    paginationOptions,
     activeFilterCount,
     handlePaginatorFetch,
     highlightedAuctions,
@@ -90,7 +91,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
             aria-controls="character-grid"
             pageSize={PAGE_SIZE}
             totalItems={paginatedData.totalItems}
-            currentPage={paginatedData.pageIndex + 1}
+            currentPage={paginationOptions.pageIndex + 1}
             onChange={handlePaginatorFetch}
             noItemsMessage={homepage.AuctionsGrid.noItemsPagination}
           />
