@@ -4,16 +4,17 @@ import {
   useReducer,
   useEffect,
   useCallback,
+  useMemo,
 } from 'react'
 import { filterSchema } from 'shared-utils/dist/contracts/Filters/schemas/filterUrl'
 import { sortSchema } from 'shared-utils/dist/contracts/Filters/schemas/sortUrl'
-import { paginationSchema } from 'shared-utils/dist/contracts/Filters/schemas/paginationUrl'
 import { useTranslations } from 'contexts/useTranslation'
-import { useUrlParamsState, useIsMounted } from 'hooks'
+import { useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
+import useSynchUrlParamsState from './useSynchUrlParamsState'
 import AuctionsReducer from './reducer'
-import { DEFAULT_STATE } from './defaults'
+import { DEFAULT_STATE, paginationSchema } from './defaults'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
@@ -60,21 +61,24 @@ export const AuctionsProvider = ({
     }
   }, [paginationOptions, sortingOptions, filterState, isHistory])
 
-  const [urlFilters, setUrlFilters, isFiltersDefault] =
-    useUrlParamsState(filterSchema)
-
-  const [urlPagination, setUrlPagination, isPaginationDefault] =
-    useUrlParamsState({
-      ...paginationSchema,
-      pageIndex: {
-        ...paginationSchema.pageIndex,
-        defaultValue: 1,
-      },
-    })
-  const [urlSorting, setUrlSorting, isSortingDefault] = useUrlParamsState(
-    sortSchema('current'),
-  )
-
+  const [urlFilters, isFiltersDefault] = useSynchUrlParamsState({
+    schemaCodec: filterSchema,
+    currentState: filterState,
+  })
+  const [urlPagination, isPaginationDefault] = useSynchUrlParamsState({
+    schemaCodec: paginationSchema,
+    currentState: useMemo(
+      () => ({
+        ...paginationOptions,
+        pageIndex: paginationOptions.pageIndex + 1,
+      }),
+      [paginationOptions],
+    ),
+  })
+  const [urlSorting, isSortingDefault] = useSynchUrlParamsState({
+    schemaCodec: sortSchema('current'),
+    currentState: sortingOptions,
+  })
   /* synching state with initial url parameters */
   useEffect(() => {
     /* @ ToDo: isHistory */
@@ -87,17 +91,6 @@ export const AuctionsProvider = ({
       })
     }
   }, [])
-
-  useEffect(() => setUrlFilters(filterState), [filterState])
-  useEffect(
-    () =>
-      setUrlPagination({
-        ...paginationOptions,
-        pageIndex: paginationOptions.pageIndex + 1,
-      }),
-    [paginationOptions],
-  )
-  useEffect(() => setUrlSorting(sortingOptions), [sortingOptions])
 
   const handlePaginatorFetch = useCallback((newPageIndex: number) => {
     dispatch({

@@ -3,6 +3,7 @@ import {
   DEFAULT_SORT_OPTIONS,
   DEFAULT_PAGINATION_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
+import { paginationSchema as basePaginationSchema } from 'shared-utils/dist/contracts/Filters/schemas/paginationUrl'
 import { AuctionsContextValues } from './types'
 
 export const DEFAULT_STATE: AuctionsContextValues = {
@@ -28,4 +29,10 @@ export const DEFAULT_STATE: AuctionsContextValues = {
   dispatch: () => {},
 }
 
-export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
+export const paginationSchema = {
+  ...basePaginationSchema,
+  pageIndex: {
+    ...basePaginationSchema.pageIndex,
+    defaultValue: 1,
+  },
+}
