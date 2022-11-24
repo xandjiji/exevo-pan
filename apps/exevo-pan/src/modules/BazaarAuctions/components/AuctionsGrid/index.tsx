@@ -64,9 +64,8 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
           className="relative"
         >
           <FilterIcon className={styles.icon} />
-          {process.browser && (
+          <ClientComponent className="absolute -top-0.5 -right-0.5">
             <ActiveCount
-              className="absolute -top-0.5 -right-0.5"
               role="status"
               aria-label={`${activeFilterCount} ${
                 activeFilterCount === 1
@@ -81,7 +80,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
             >
               {activeFilterCount}
             </ActiveCount>
-          )}
+          </ClientComponent>
         </S.Button>
 
         <SortingDialog />
