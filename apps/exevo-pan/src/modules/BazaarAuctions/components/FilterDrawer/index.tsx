@@ -8,6 +8,7 @@ import { skills } from 'data-dictionary/dist/dictionaries/skills'
 import {
   Drawer,
   DrawerFooter,
+  Switch,
   Chip,
   Slider,
   Checkbox,
@@ -111,11 +112,12 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
         <FilterGroup>
-          <Checkbox
-            label={homepage.FilterDrawer.labels.bazaarHistory}
-            checked={isHistory}
+          <Switch
+            active={isHistory}
             onClick={() => dispatch({ type: 'TOGGLE_HISTORY' })}
-          />
+          >
+            {homepage.FilterDrawer.labels.bazaarHistory}
+          </Switch>
         </FilterGroup>
         <FilterGroup>
           <Checkbox
