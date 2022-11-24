@@ -1,26 +1,28 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
+import { useRouter } from 'next/router'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
+import { permalinkResolver as basePermalinkResolver } from 'utils'
 import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import * as S from './atoms'
 import styles from './styles.module.css'
-import { AuctionGridProps } from './types'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
+const AuctionsGrid = () => {
   const {
     translations: { homepage },
   } = useTranslations()
 
   const {
+    isHistory,
     paginatedData,
     paginationOptions,
     activeFilterCount,
@@ -50,6 +52,13 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
 
     return () => clearTimeout(scrollTimer)
   }, [paginatedData])
+
+  const { locale } = useRouter()
+
+  const permalinkResolver = useCallback(
+    (auctionId: number) => basePermalinkResolver({ auctionId, locale }),
+    [],
+  )
 
   return (
     <main>
@@ -119,7 +128,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
                 highlighted
                 lazyRender
                 expandable
-                past={past}
+                past={isHistory}
                 permalink={permalinkResolver?.(auction.id)}
               />
             ))}
@@ -129,7 +138,7 @@ const AuctionsGrid = ({ past, permalinkResolver }: AuctionGridProps) => {
               lazyRender
               characterData={auction}
               expandable
-              past={past}
+              past={isHistory}
               permalink={permalinkResolver?.(auction.id)}
             />
           ))}

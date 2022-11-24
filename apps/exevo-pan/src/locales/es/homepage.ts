@@ -28,6 +28,7 @@ export default {
   FilterDrawer: {
     title: 'Filtros',
     labels: {
+      bazaarHistory: 'Histórico del Bazaar',
       searchNickname: 'Buscar nickname',
       vocation: 'Vocación',
       serverLocation: 'Ubicación del servidor',

@@ -27,6 +27,7 @@ export default {
   FilterDrawer: {
     title: 'Filtry',
     labels: {
+      bazaarHistory: 'Historia Bazaru',
       searchNickname: 'Szukaj nazwy',
       vocation: 'Klasa postaci',
       serverLocation: 'Serwer',

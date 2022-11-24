@@ -112,6 +112,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
       <Drawer.Body className="grid grid-cols-1 gap-4">
         <FilterGroup>
           <Checkbox
+            label={homepage.FilterDrawer.labels.bazaarHistory}
+            checked={isHistory}
+            onClick={() => dispatch({ type: 'TOGGLE_HISTORY' })}
+          />
+        </FilterGroup>
+        <FilterGroup>
+          <Checkbox
             label={homepage.FilterDrawer.labels.biddedOnly}
             checked={filterState.biddedOnly}
             onClick={() =>

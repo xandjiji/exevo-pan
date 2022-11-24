@@ -11,8 +11,7 @@ import { BlogClient } from 'services'
 import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
@@ -34,7 +33,6 @@ export default function Home({
   blogPosts,
 }: HomeStaticProps) {
   const { translations } = useTranslations()
-  const { locale } = useRouter()
 
   const pageTitle = buildPageTitle(translations.homepage.Meta.title)
 
@@ -102,12 +100,7 @@ export default function Home({
             highlightedAuctions={highlightedAuctions}
             initialPaginatedData={initialPaginatedData}
           >
-            <AuctionsGrid
-              past={false}
-              permalinkResolver={(auctionId) =>
-                permalinkResolver({ auctionId, locale })
-              }
-            />
+            <AuctionsGrid />
           </AuctionsProvider>
         </DrawerFieldsProvider>
       </Main>
