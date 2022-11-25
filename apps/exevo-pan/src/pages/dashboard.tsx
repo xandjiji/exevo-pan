@@ -10,7 +10,7 @@ import { common, dashboard } from 'locales'
 
 const pageUrl = buildUrl(routes.DASHBOARD)
 
-export default function Account() {
+export default function Dashboard() {
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(translations.dashboard.Meta.title)
