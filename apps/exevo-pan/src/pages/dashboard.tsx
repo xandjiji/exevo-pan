@@ -85,10 +85,9 @@ export default function Dashboard() {
               </section>
             </>
           ) : (
-            <div
-              className="loading-spinner absolute-centered h-8 w-8"
-              role="alert"
-            />
+            <div className="absolute-centered">
+              <div className="loading-spinner h-8 w-8" role="alert" />
+            </div>
           )}
         </main>
       </Main>
