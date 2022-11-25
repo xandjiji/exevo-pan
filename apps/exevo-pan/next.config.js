@@ -29,14 +29,6 @@ module.exports = withBundleAnalyzer(
       domains: [],
       deviceSizes: [24, 32, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     },
-    experimental: {
-      fontLoaders: [
-        {
-          loader: '@next/font/google',
-          options: { subsets: ['latin'], weight: ['300', '400', '700'] },
-        },
-      ],
-    },
     /* @ ToDo: remove this redirect in the future */
     async redirects() {
       return [
