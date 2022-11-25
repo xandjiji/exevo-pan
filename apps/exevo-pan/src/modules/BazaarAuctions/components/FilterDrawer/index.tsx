@@ -13,6 +13,7 @@ import {
   Slider,
   Checkbox,
   NumericInput,
+  Sticker,
 } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
@@ -120,7 +121,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
-        <FilterGroup>
+        {/* @ ToDo: remove this class */}
+        <FilterGroup className="relative">
+          {/* @ ToDo: remove this sticker */}
+          <Sticker
+            localStorageKey="251122-history-toggle"
+            className="absolute"
+            style={{ top: -12, left: -32, transform: 'rotate(-30deg)' }}
+          >
+            New
+          </Sticker>
           <Switch
             active={isHistory}
             onClick={() => dispatch({ type: 'TOGGLE_HISTORY' })}
