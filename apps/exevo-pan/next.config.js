@@ -37,6 +37,16 @@ module.exports = withBundleAnalyzer(
         },
       ],
     },
+    /* @ ToDo: remove this redirect in the future */
+    async redirects() {
+      return [
+        {
+          source: '/bazaar-history',
+          destination: '/',
+          permanent: true,
+        },
+      ]
+    },
     webpack(config) {
       return config
     },
