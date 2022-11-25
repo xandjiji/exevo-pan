@@ -10,10 +10,6 @@ import { FetchAuctionPageArgs } from './types'
 const MINIMUM_HIGHLIGHTED_AMOUNT = 2
 
 export default class AuctionsClient {
-  private static getAuctionMode(history: boolean): keyof typeof serializeSort {
-    return history ? 'history' : 'current'
-  }
-
   static async fetchAuctionPage({
     filterOptions,
     paginationOptions,
@@ -27,7 +23,7 @@ export default class AuctionsClient {
 
     serializeFilter({ values: { ...filterOptions }, currentParams })
     serializePagination({ values: { ...paginationOptions }, currentParams })
-    serializeSort[this.getAuctionMode(history)]({
+    serializeSort({
       values: { ...sortOptions },
       currentParams,
     })

@@ -13,10 +13,10 @@ export const DEFAULT_STATE: AuctionsContextValues = {
   filterState: DEFAULT_FILTER_OPTIONS,
   activeFilterCount: 0,
   paginationOptions: DEFAULT_PAGINATION_OPTIONS,
-  sortingOptions: DEFAULT_SORT_OPTIONS.current,
+  sortingOptions: DEFAULT_SORT_OPTIONS,
   paginatedData: {
     page: [],
-    ...DEFAULT_SORT_OPTIONS.current,
+    ...DEFAULT_SORT_OPTIONS,
     pageIndex: 0,
     totalItems: 0,
     startOffset: 0,

@@ -38,7 +38,7 @@ export const useSynchUrlState = ({
     ),
   })
   const [urlSorting, isSortingDefault] = useSynchUrlParamsState({
-    schemaCodec: sortSchema('current'),
+    schemaCodec: sortSchema,
     currentState: sortingOptions,
   })
 

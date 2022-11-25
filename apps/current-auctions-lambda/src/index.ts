@@ -1,4 +1,4 @@
-import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
+import type { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda'
 import { URLSearchParams } from 'url'
 import { filterCharacters, applySort, paginateData } from 'auction-queries'
 import {
@@ -33,7 +33,7 @@ export const filterCurrentAuctions = async ({
   )
 
   const filterOptions = deserializeFilter({ currentParams })
-  const sortOptions = deserializeSort.current({ currentParams })
+  const sortOptions = deserializeSort({ currentParams })
   const paginationOptions = deserializePagination({ currentParams })
 
   const filteredAuctions = filterCharacters({

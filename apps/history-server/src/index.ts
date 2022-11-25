@@ -26,7 +26,7 @@ const main = async () => {
     const currentParams = new URLSearchParams(searchParams)
 
     const filterOptions = deserializeFilter({ currentParams })
-    const sortOptions = deserializeSort.history({ currentParams })
+    const sortOptions = deserializeSort({ currentParams })
     const paginationOptions = deserializePagination({ currentParams })
 
     const filteredAuctions = filterCharacters({

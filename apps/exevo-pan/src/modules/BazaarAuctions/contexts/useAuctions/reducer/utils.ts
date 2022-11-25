@@ -21,10 +21,8 @@ export const shouldDisplayHighlightedAuctions = (
 ): AuctionsContextState => {
   const isDefaultGridState =
     state.paginatedData.pageIndex === 0 &&
-    state.paginatedData.sortingMode ===
-      DEFAULT_SORT_OPTIONS.current.sortingMode &&
-    state.paginatedData.descendingOrder ===
-      DEFAULT_SORT_OPTIONS.current.descendingOrder
+    state.paginatedData.sortingMode === DEFAULT_SORT_OPTIONS.sortingMode &&
+    state.paginatedData.descendingOrder === DEFAULT_SORT_OPTIONS.descendingOrder
 
   const noFilterApplied = state.activeFilterCount === 0
 
