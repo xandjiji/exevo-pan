@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo, useCallback } from 'react'
+import { memo, useMemo, useCallback } from 'react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { servers } from 'data-dictionary/dist/dictionaries/servers'
@@ -38,6 +38,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   } = useTranslations()
 
   const {
+    activeServers,
     serverOptions,
     rareItemData,
     imbuementOptions,
@@ -50,6 +51,14 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     storeMountValues,
   } = useDrawerFields()
   const { filterState, activeFilterCount, isHistory, dispatch } = useAuctions()
+
+  const currentServerOptions = useMemo(
+    () =>
+      isHistory
+        ? serverOptions
+        : serverOptions.filter(({ name }) => activeServers.has(name)),
+    [serverOptions, activeServers, isHistory],
+  )
 
   const [nickname, setNickname] = useDebouncedFilter({
     key: 'nicknameFilter',
@@ -373,7 +382,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             aria-controls="server-list"
             placeholder={homepage.FilterDrawer.placeholders.server}
             style={{ marginBottom: 12 }}
-            itemList={useOptionsSet(serverOptions, filterState.serverSet)}
+            itemList={useOptionsSet(
+              currentServerOptions,
+              filterState.serverSet,
+            )}
             onItemSelect={useCallback(
               ({ value }: Option) =>
                 dispatch({
