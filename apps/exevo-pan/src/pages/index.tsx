@@ -1,8 +1,8 @@
+import { useRef } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
 import {
   DrawerFieldsProvider,
-  FiltersProvider,
   AuctionsProvider,
   AuctionsGrid,
   UrlAuction,
@@ -12,34 +12,33 @@ import { BlogClient } from 'services'
 import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { useRouter } from 'next/router'
-import { buildUrl, buildPageTitle, permalinkResolver } from 'utils'
+import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
 type HomeStaticProps = {
+  activeServers: string[]
   serverOptions: Option[]
   rareItemData: RareItemData
-  initialAuctionData: PaginatedData<CharacterObject>
+  initialPaginatedData: PaginatedData<CharacterObject>
   highlightedAuctions: CharacterObject[]
   blogPosts: BlogPost[]
 }
 
 export default function Home({
+  activeServers,
   serverOptions,
   rareItemData,
-  initialAuctionData,
+  initialPaginatedData,
   highlightedAuctions,
   blogPosts,
 }: HomeStaticProps) {
   const { translations } = useTranslations()
-  const { locale } = useRouter()
 
   const pageTitle = buildPageTitle(translations.homepage.Meta.title)
-
-  const { page, sortingMode, descendingOrder, ...pageData } = initialAuctionData
+  const { current: activeServersSet } = useRef(new Set(activeServers))
 
   return (
     <>
@@ -98,25 +97,16 @@ export default function Home({
         <UrlAuction />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
+          activeServers={activeServersSet}
           serverOptions={serverOptions}
           rareItemData={rareItemData}
         >
-          <FiltersProvider>
-            <AuctionsProvider
-              highlightedAuctions={highlightedAuctions}
-              initialPage={page}
-              initialPageData={pageData}
-              defaultSortingMode={sortingMode}
-              defaultDescendingOrder={descendingOrder}
-            >
-              <AuctionsGrid
-                past={false}
-                permalinkResolver={(auctionId) =>
-                  permalinkResolver.current({ auctionId, locale })
-                }
-              />
-            </AuctionsProvider>
-          </FiltersProvider>
+          <AuctionsProvider
+            highlightedAuctions={highlightedAuctions}
+            initialPaginatedData={initialPaginatedData}
+          >
+            <AuctionsGrid />
+          </AuctionsProvider>
         </DrawerFieldsProvider>
       </Main>
     </>
@@ -125,13 +115,15 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [
+    activeServerOptions,
     serverOptions,
     rareItemData,
-    initialAuctionData,
+    initialPaginatedData,
     highlightedAuctions,
     localizedBlogPosts,
   ] = await Promise.all([
     DrawerFieldsClient.fetchActiveServerOptions(),
+    DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
     AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
@@ -144,9 +136,10 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         homepage: homepage[locale as RegisteredLocale],
       },
+      activeServers: activeServerOptions.map(({ name }) => name),
       serverOptions,
       rareItemData,
-      initialAuctionData,
+      initialPaginatedData,
       highlightedAuctions,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
     },

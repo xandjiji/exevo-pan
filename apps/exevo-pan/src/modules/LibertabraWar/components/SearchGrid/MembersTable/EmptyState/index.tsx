@@ -9,10 +9,7 @@ const EmptyState = () => {
 
   return (
     <div className="relative mt-4 flex w-full justify-center">
-      <p
-        className="z-1 text-onSurface absolute top-1/2 left-1/2 text-center text-[32px]"
-        style={{ transform: 'translate(-50%, -50%)' }}
-      >
+      <p className="z-1 text-onSurface absolute-centered text-center text-[32px]">
         {war.SearchGrid.MembersTable.EmptyState.p}
       </p>
       <Image

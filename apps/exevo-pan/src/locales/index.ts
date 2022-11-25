@@ -18,11 +18,6 @@ import commonES from './es/common'
 import commonPT from './pt/common'
 import commonPL from './pl/common'
 
-import bazaarHistoryEN from './en/bazaarHistory'
-import bazaarHistoryES from './es/bazaarHistory'
-import bazaarHistoryPT from './pt/bazaarHistory'
-import bazaarHistoryPL from './pl/bazaarHistory'
-
 import homepageEN from './en/homepage'
 import homepageES from './es/homepage'
 import homepagePT from './pt/homepage'
@@ -48,6 +43,16 @@ import bossesES from './es/bossTracker'
 import bossesPT from './pt/bossTracker'
 import bossesPL from './pl/bossTracker'
 
+import loginEN from './en/login'
+import loginES from './es/login'
+import loginPT from './pt/login'
+import loginPL from './pl/login'
+
+import accountEN from './en/account'
+import accountES from './es/account'
+import accountPT from './pt/account'
+import accountPL from './pl/account'
+
 export const error = {
   en: errorEN,
   es: errorES,
@@ -65,12 +70,6 @@ export const advertise = {
   es: advertiseES,
   pt: advertisePT,
   pl: advertisePL,
-}
-export const bazaarHistory = {
-  en: bazaarHistoryEN,
-  es: bazaarHistoryES,
-  pt: bazaarHistoryPT,
-  pl: bazaarHistoryPL,
 }
 export const common = {
   en: commonEN,
@@ -107,4 +106,16 @@ export const bosses = {
   es: bossesES,
   pt: bossesPT,
   pl: bossesPL,
+}
+export const login = {
+  en: loginEN,
+  es: loginES,
+  pt: loginPT,
+  pl: loginPL,
+}
+export const account = {
+  en: accountEN,
+  es: accountES,
+  pt: accountPT,
+  pl: accountPL,
 }

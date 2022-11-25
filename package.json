@@ -31,12 +31,16 @@
     "build:exevo-pan": "turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
     "build:history-server": "turbo run build --scope=history-server --include-dependencies --no-deps",
     "build:bazaar-scraper": "turbo run build --scope=bazaar-scraper --include-dependencies --no-deps",
+    "analyze": "ANALYZE=true turbo run build --scope=exevo-pan --include-dependencies --no-deps --force",
     "start:front": "NODE_ENV=production turbo run start --scope=exevo-pan",
     "start:staging": "turbo run staging",
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",
     "deploy:backoffice": "yarn --cwd apps/backoffice deploy",
     "scrap:raw": "yarn --cwd apps/bazaar-scraper scrap:raw",
-    "checkup": "yarn --cwd apps/bazaar-scraper checkup"
+    "checkup": "yarn --cwd apps/bazaar-scraper checkup",
+    "prisma:push": "yarn --cwd packages/prisma-database push",
+    "prisma:generate": "yarn --cwd packages/prisma-database generate",
+    "prisma:run": "scripts/setupDev.sh && yarn --cwd packages/prisma-database execute"
   },
   "devDependencies": {
     "husky": "^7.0.4",

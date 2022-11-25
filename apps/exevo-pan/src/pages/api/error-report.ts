@@ -1,6 +1,4 @@
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 export default async (
   request: VercelRequest,

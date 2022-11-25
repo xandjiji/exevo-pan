@@ -8,7 +8,6 @@ import {
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
-import { revalidate } from './revalidate'
 import { Timer } from './timer'
 import { exposeLocalhost } from './localtunnel'
 
@@ -27,7 +26,7 @@ const main = async () => {
     const currentParams = new URLSearchParams(searchParams)
 
     const filterOptions = deserializeFilter({ currentParams })
-    const sortOptions = deserializeSort.history({ currentParams })
+    const sortOptions = deserializeSort({ currentParams })
     const paginationOptions = deserializePagination({ currentParams })
 
     const filteredAuctions = filterCharacters({
@@ -58,10 +57,6 @@ const main = async () => {
     )
   })
 
-  broadcast(`Revalidating /bazaar-history ...`, 'neutral')
-  revalidate()
-    .catch(() => broadcast(`Pages could not be revalidated!`, 'fail'))
-    .then(() => broadcast(`Pages revalidated!`, 'success'))
   if (STAGING) exposeLocalhost()
 }
 

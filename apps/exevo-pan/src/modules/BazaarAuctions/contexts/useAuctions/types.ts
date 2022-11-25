@@ -1,33 +1,4 @@
-export type Action =
-  | {
-      type: 'SET_LOADING'
-      value: boolean
-    }
-  | {
-      type: 'SET_PAGE_INDEX'
-      value: number
-    }
-  | {
-      type: 'SET_SORTING_MODE'
-      value: number
-    }
-  | {
-      type: 'TOGGLE_DESCENDING_ORDER'
-    }
-  | {
-      type: 'STORE_DATA'
-      data: PaginatedData<CharacterObject>
-      shouldDisplayHighlightedAuctions: boolean
-    }
-
-export interface AuctionsContextState {
-  loading: boolean
-  page: CharacterObject[]
-  pageData: PageData
-  sortingMode: number
-  descendingOrder: boolean
-  shouldDisplayHighlightedAuctions: boolean
-}
+import { AuctionsContextState, Action } from './reducer/types'
 
 export interface AuctionsContextValues extends AuctionsContextState {
   highlightedAuctions: CharacterObject[]
@@ -36,11 +7,7 @@ export interface AuctionsContextValues extends AuctionsContextState {
 }
 
 export interface AuctionsProviderProps {
-  history?: boolean
   highlightedAuctions: CharacterObject[]
-  initialPage: CharacterObject[]
-  initialPageData: PageData
-  defaultSortingMode: number
-  defaultDescendingOrder: boolean
+  initialPaginatedData: PaginatedData<CharacterObject>
   children: JSX.Element
 }

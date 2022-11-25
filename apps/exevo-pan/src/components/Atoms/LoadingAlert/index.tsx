@@ -14,7 +14,7 @@ const LoadingAlert = ({
     style={{ transform: 'translateX(-50%)' }}
     {...props}
   >
-    <div className="loading-spinner bg-alert after:bg-alert mr-2 h-3 w-3" />
+    <div className="loading-spinner mr-2 h-3 w-3" role="alert" />
     {children}
   </div>
 )

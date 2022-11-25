@@ -7,7 +7,6 @@ export default {
   Header: {
     h1: {
       home: '¡Compra y vende caracteres de Tibia en el Char Bazaar oficial!',
-      bazaarHistory: '¡Explora el histórico del Char Bazaar!',
       statistics:
         '¡Descubre estadísticas sobre personajes vendidos en el Char Bazaar!',
       highscores:
@@ -23,8 +22,7 @@ export default {
     closeMenuLabel: 'Cerrar el menú de navegación',
     logoLabel: 'Ir a la pagina principal',
     nav: {
-      currentAuctions: 'Subastas',
-      bazaarHistory: 'Histórico del Bazaar',
+      charBazaar: 'Char Bazaar',
       calculators: 'Calculadoras',
       statistics: 'Estadísticas',
       war: 'Libertabra War',
@@ -34,6 +32,10 @@ export default {
       bossTracker: 'Boss Tracker',
     },
     themeSwitch: 'Habilitar tema nocturno',
+    AccountButton: {
+      settings: 'Settings',
+      logout: 'Logout',
+    },
   },
   BlogTags: {
     news: 'Noticias',
@@ -43,6 +45,9 @@ export default {
   },
   or: 'o',
   and: 'y',
+  transfer: 'transfer',
+  from: 'de',
+  to: 'para',
   day: 'día',
   days: 'días',
   hour: 'hora',
@@ -217,4 +222,11 @@ export default {
   CharacterTooltipLabel: 'Ir a la página del personaje',
   Newsticker: 'Artículos recientes',
   LoadingState: 'Cargando...',
+  /* @ ToDo: i18n */
+  SignIn: {
+    title: 'Sign in with',
+    subtext: 'By signing in, you agree to our',
+  },
+  termsOfService: 'Terms of Service',
+  privacyPolicy: 'Privacy Policy',
 }

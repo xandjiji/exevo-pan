@@ -9,6 +9,7 @@ const Button = ({
   hollow = false,
   loading = false,
   disabled,
+  type = 'button',
   ...props
 }: ButtonProps) => {
   const {
@@ -24,9 +25,8 @@ const Button = ({
         pill &&
           'flex items-center justify-center gap-1 py-1.5 px-4 text-xs font-bold uppercase tracking-wider',
         !hollow && 'shadow-md hover:shadow-lg',
-        disabled && hollow && 'child:fill-onSurface',
         hollow &&
-          'text-primary active:text-primary child:fill-primary disabled:text-onSurface !bg-transparent underline',
+          '!text-onSurface active:text-primary child:fill-onSurface !bg-transparent underline opacity-50 disabled:opacity-25',
         disabled &&
           !loading &&
           'bg-separator child:fill-black cursor-default text-black opacity-60 shadow-none',
@@ -34,17 +34,17 @@ const Button = ({
 
         className,
       )}
+      // eslint-disable-next-line react/button-has-type
+      type={type}
       {...props}
-      type="button"
       disabled={isDisabled}
     >
       {loading ? (
         <div
-          className="loading-spinner before:bg-primaryVariant after:bg-primary mx-auto"
-          style={{
-            background:
-              'linear-gradient(to right, rgb(var(--primaryVariant)) 10%, rgba(255, 255, 255, 0) 42%)',
-          }}
+          className={clsx(
+            'loading-spinner border-onPrimary mx-auto block',
+            pill && 'h-3 w-3',
+          )}
           role="alert"
           aria-label={common.LoadingLabel}
         />

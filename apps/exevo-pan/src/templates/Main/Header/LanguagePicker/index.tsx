@@ -1,17 +1,20 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { memo } from 'react'
+import { useRef, memo } from 'react'
 import { useRouter } from 'next/router'
-import { RadioButton, Dialog } from 'components/Atoms'
+import { RadioButton } from 'components/Atoms'
 import { setCookie, SECONDS_IN } from 'utils'
 import { LanguageIcon } from 'assets/svgs'
-import { LanguagePickerProps } from './type'
+import useHeaderPopup from '../useHeaderPopup'
 
-const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
+const LanguagePicker = () => {
   const {
     translations: { common },
   } = useTranslations()
 
   const { locale, push, pathname, query } = useRouter()
+
+  const ref = useRef<HTMLButtonElement>(null)
+  const { Popup, action } = useHeaderPopup(ref)
 
   const handleLocaleSelect = (selectedLocale: RegisteredLocale) => {
     push(
@@ -22,51 +25,48 @@ const LanguagePicker = ({ isOpen, setLanguageOpen }: LanguagePickerProps) => {
       window.location.search,
       { locale: selectedLocale },
     )
-    setLanguageOpen(false)
+    action.close()
     setCookie('NEXT_LOCALE', selectedLocale, SECONDS_IN.YEAR)
   }
 
   return (
     <div className="h-6">
       <button
+        ref={ref}
         aria-label={common.PreferredLanguageLabel}
         type="button"
-        onClick={() => setLanguageOpen((prev) => !prev)}
+        onClick={action.open}
       >
         <LanguageIcon className="fill-onPrimary clickable rounded-full" />
       </button>
-      <Dialog
-        isOpen={isOpen}
-        onClose={() => setLanguageOpen(false)}
-        noCloseButton
-        heading={common.PreferredLanguageLabel}
-        className="grid gap-2"
-      >
-        <RadioButton
-          active={locale === 'en'}
-          onClick={() => handleLocaleSelect('en')}
-        >
-          English
-        </RadioButton>
-        <RadioButton
-          active={locale === 'es'}
-          onClick={() => handleLocaleSelect('es')}
-        >
-          Español
-        </RadioButton>
-        <RadioButton
-          active={locale === 'pt'}
-          onClick={() => handleLocaleSelect('pt')}
-        >
-          Português
-        </RadioButton>
-        <RadioButton
-          active={locale === 'pl'}
-          onClick={() => handleLocaleSelect('pl')}
-        >
-          Polski
-        </RadioButton>
-      </Dialog>
+      <Popup>
+        <div className="grid gap-2 p-4">
+          <RadioButton
+            active={locale === 'en'}
+            onClick={() => handleLocaleSelect('en')}
+          >
+            English
+          </RadioButton>
+          <RadioButton
+            active={locale === 'es'}
+            onClick={() => handleLocaleSelect('es')}
+          >
+            Español
+          </RadioButton>
+          <RadioButton
+            active={locale === 'pt'}
+            onClick={() => handleLocaleSelect('pt')}
+          >
+            Português
+          </RadioButton>
+          <RadioButton
+            active={locale === 'pl'}
+            onClick={() => handleLocaleSelect('pl')}
+          >
+            Polski
+          </RadioButton>
+        </div>
+      </Popup>
     </div>
   )
 }

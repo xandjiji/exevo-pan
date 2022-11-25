@@ -12,8 +12,8 @@ const SearchGrid = () => {
   if (warGuildData.length === 0) {
     return (
       <div
-        className="loading-spinner z-1 fixed top-1/2 left-1/2"
-        style={{ transform: 'translate(-50%, -50%)' }}
+        role="alert"
+        className="loading-spinner z-1 absolute-centered fixed"
       />
     )
   }

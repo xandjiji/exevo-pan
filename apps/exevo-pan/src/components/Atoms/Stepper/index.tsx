@@ -4,13 +4,19 @@ import clsx from 'clsx'
 import { CheckIcon } from 'assets/svgs'
 import { StepperProps } from './types'
 
-const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
+const Stepper = ({
+  className,
+  isFinished = false,
+  steps,
+  currentStep,
+  ...props
+}: StepperProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
-    <div className={clsx('flex justify-between', className)} {...props}>
+    <div className={clsx('flex justify-between pb-8', className)} {...props}>
       {steps.map((step, index, stepArray) => {
         const isCurrent = index === currentStep
         const isCompleted = index < currentStep
@@ -26,15 +32,21 @@ const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
             type="button"
             aria-current={isCurrent ? 'step' : undefined}
             aria-labelledby={stepDescriptionId}
-            className="flex cursor-pointer items-center"
+            className={clsx(
+              'flex items-center',
+              !isFinished && 'cursor-pointer',
+            )}
             data-completed={isCompleted}
           >
             <div
               className={clsx(
                 'relative grid h-9 w-9 shrink-0 place-items-center rounded-full font-bold transition-colors',
-                isCurrent || isCompleted
-                  ? 'bg-primary text-onPrimary'
-                  : 'bg-separator text-onSurface',
+                isFinished
+                  ? 'bg-green'
+                  : isCurrent || isCompleted
+                  ? 'bg-primary'
+                  : 'bg-separator',
+                isCurrent || isCompleted ? 'text-onPrimary' : 'text-onSurface',
                 isCurrent && 'shadow-md',
               )}
             >
@@ -58,7 +70,7 @@ const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
               <h2
                 id={stepDescriptionId}
                 className={clsx(
-                  'text-onSurface absolute left-1/2 whitespace-nowrap text-base tracking-wider transition-all',
+                  'text-onSurface absolute left-1/2 text-base tracking-wider transition-all',
                   isCurrent ? 'font-bold' : 'font-light',
                 )}
                 style={{
@@ -73,7 +85,11 @@ const Stepper = ({ className, steps, currentStep, ...props }: StepperProps) => {
               <div
                 className={clsx(
                   'mx-4 h-[3px] w-full grow opacity-50 transition-colors',
-                  isCompleted ? 'bg-primary' : 'bg-separator',
+                  isFinished
+                    ? 'bg-green'
+                    : isCompleted
+                    ? 'bg-primary'
+                    : 'bg-separator',
                 )}
               />
             )}

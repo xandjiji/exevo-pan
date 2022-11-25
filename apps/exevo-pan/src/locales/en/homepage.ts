@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Current Auctions',
+    title: 'Char Bazaar',
     description:
       'Filter and search for Tibia characters on the official Char Bazaar!',
   },
@@ -28,6 +28,7 @@ export default {
   FilterDrawer: {
     title: 'Filters',
     labels: {
+      bazaarHistory: 'Bazaar History',
       searchNickname: 'Search nickname',
       vocation: 'Vocation',
       serverLocation: 'Server location',

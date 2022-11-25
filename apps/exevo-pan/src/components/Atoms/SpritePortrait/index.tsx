@@ -61,10 +61,7 @@ const SpritePortrait = ({
           role="alert"
           aria-label={common.LoadingLabel}
           aria-busy="true"
-          className={clsx(
-            'loading-spinner absolute',
-            highlight ? 'after:bg-primaryHighlight' : 'after:bg-primaryVariant',
-          )}
+          className="loading-spinner border-primary absolute"
           style={{ top: 'calc(50% - 12px)', left: 'calc(50% - 12px)' }}
         />
       )}

@@ -1,33 +1,20 @@
-import clsx from 'clsx'
+import TitledCard from '../TitledCard'
 import * as S from './atoms'
 import { TableProps } from './types'
 
-const Table = ({
-  title,
-  subtitle,
-  className,
-  children,
-  ...props
-}: TableProps) => (
-  <section
-    className={clsx(
-      'card custom-scrollbar overflow-auto py-[18px] px-6 transition-colors',
-      className,
-    )}
+const Table = ({ title, subtitle, children, ...props }: TableProps) => (
+  <TitledCard
+    variant="squared"
+    title={
+      <>
+        <span className="text-tsm block font-light">{subtitle}</span>
+        {!!title && <h4 className="mt-1 tracking-wider">{title}</h4>}
+      </>
+    }
     {...props}
   >
-    {subtitle || title ? (
-      <div className="text-tsm bg-primary text-onPrimary -mx-6 mt-[-18px] mb-[18px] py-[18px] px-6 font-light shadow">
-        {subtitle}
-        {!!title && (
-          <h4 className="text-onPrimary mt-1 text-2xl font-bold tracking-wider">
-            {title}
-          </h4>
-        )}
-      </div>
-    ) : null}
     {children}
-  </section>
+  </TitledCard>
 )
 
 Table.Element = S.Table

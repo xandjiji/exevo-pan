@@ -24,10 +24,6 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
       value: 'chance',
     },
     {
-      name: `🔤 ${translations.bosses.BossGrid.listOptions.name}`,
-      value: 'name',
-    },
-    {
       name: `✓ ${translations.bosses.BossGrid.listOptions.lastSeen}`,
       value: 'recent',
     },

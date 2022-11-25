@@ -46,8 +46,6 @@ export default {
       'Jeśli twój zakup nie będzie mógł zostać zrealizowany, zwrócimy ci środki.',
     CoinsPayment: {
       instruction: 'Dokończ swoje zamówienie wysyłając',
-      from: 'od',
-      to: 'do',
     },
     PixPayment: {
       codeText: 'Dokoncz swoje zamówienie płacąc na przedstawiony kod Pix:',

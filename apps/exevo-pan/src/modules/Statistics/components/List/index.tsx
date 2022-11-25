@@ -83,7 +83,7 @@ const List = ({
         <CharacterModal
           characterData={selectedCharacter}
           onClose={() => setSelectedCharacter(undefined)}
-          permalink={permalinkResolver.history({
+          permalink={permalinkResolver({
             auctionId: selectedCharacter.id,
             locale,
           })}

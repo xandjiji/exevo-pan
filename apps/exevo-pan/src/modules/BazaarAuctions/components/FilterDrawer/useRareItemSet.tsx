@@ -1,5 +1,4 @@
 import { useState, useMemo, useCallback, useEffect } from 'react'
-import {} from '../../contexts/useFilters/types'
 
 type UseRareItemSet = {
   rareItemData: RareItemData

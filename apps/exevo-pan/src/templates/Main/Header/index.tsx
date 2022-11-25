@@ -2,26 +2,28 @@ import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
-import Image from 'next/image'
+import { ClientComponent } from 'components/Organisms'
 import { Link, Switch, CtaButton, TibiaBlackjack } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
-import Logo from 'assets/logo.png'
-import { MoonIcon } from 'assets/svgs'
+import { ExevoPanIcon, MoonIcon } from 'assets/svgs'
 import MenuButton from './MenuButton'
 import HeaderIcon from './HeaderIcon'
 import LanguagePicker from './LanguagePicker'
+import AccountButton from './AccountButton'
 import { NavItems } from './routes'
 
 const heading = {
   [routes.HOME]: 'home',
-  [routes.BAZAAR_HISTORY]: 'bazaarHistory',
+  [routes.BOSS_TRACKER]: 'bossTracker',
   [routes.CALCULATORS]: 'calculators',
   [routes.STATISTICS]: 'statistics',
   [routes.HIGHSCORES]: 'highscores',
-  [routes.LIBERTABRA_WAR]: 'war',
   [routes.ADVERTISE]: 'advertise',
+  [routes.LIBERTABRA_WAR]: 'war',
+  [routes.BLOG]: 'blog',
+  [routes.ABOUT]: 'about',
 }
 
 const Header = ({
@@ -33,7 +35,6 @@ const Header = ({
   } = useTranslations()
 
   const [menuOpen, setMenuOpen] = useState(false)
-  const [languageOpen, setLanguageOpen] = useState(false)
 
   const { theme, toggleTheme } = useTheme()
   const { pathname } = useRouter()
@@ -44,7 +45,7 @@ const Header = ({
     ? common.Header.h1[heading[pathname]]
     : null
 
-  const shouldMenuOverlap = menuOpen || languageOpen
+  const shouldMenuOverlap = menuOpen
 
   const accessibleLogoName = heading[pathname]
     ? common.Header.h1[heading[pathname]]
@@ -72,11 +73,10 @@ const Header = ({
           <NextLink href={routes.HOME} aria-label={accessibleLogoName}>
             <div className="mr-4 hidden shrink-0 cursor-pointer items-center justify-center md:flex">
               {pageTitle && <h1 className="hidden">{pageTitle}</h1>}
-              <Image
-                unoptimized
+              <ExevoPanIcon
+                width={36}
+                height={36}
                 aria-label={common.Header.logoLabel}
-                alt={accessibleLogoName}
-                src={Logo}
               />
             </div>
           </NextLink>
@@ -84,13 +84,13 @@ const Header = ({
           <ul
             className={clsx(
               menuOpen ? 'left-0' : '-left-full opacity-0',
-              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-2 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
+              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-1 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
             )}
           >
             {NavItems.map(({ title, href, exact, icon }) => (
               <li key={title}>
                 <Link
-                  className="clickable currentpage:shadow-inner flex items-center rounded-lg py-2 px-4"
+                  className="clickable currentpage:shadow-inner flex items-center rounded-lg py-2 px-3"
                   href={href}
                   exact={exact}
                 >
@@ -105,19 +105,18 @@ const Header = ({
         </nav>
 
         <div className="flex items-center gap-4">
-          <LanguagePicker
-            isOpen={languageOpen}
-            setLanguageOpen={setLanguageOpen}
-          />
-          {process.browser && (
+          <LanguagePicker />
+          <ClientComponent>
             <Switch
               active={theme === 'dark'}
               onClick={toggleTheme}
               icon={<MoonIcon />}
               aria-label={common.Header.themeSwitch}
             />
-          )}
+          </ClientComponent>
           <CtaButton />
+          {/* @ ToDo: re-enable */}
+          {/* <AccountButton /> */}
           <TibiaBlackjack.FloatingButton className="md:hidden" />
         </div>
       </header>

@@ -1,11 +1,12 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
-import { Input, Button } from 'components/Atoms'
+import { TitledCard, Input, Button } from 'components/Atoms'
 import { MailCheckoutClient } from 'services/client'
+import { randomCharacter } from 'utils'
 import { locales } from 'Constants'
 import { useForm } from '../../contexts/Form'
-import { validateEmail, validateCharacter, randomCharacter } from './utils'
+import { validateEmail, validateCharacter } from './utils'
 
 const { DEFAULT_LOCALE } = locales
 
@@ -103,10 +104,10 @@ const Checkout = () => {
   const { current: randomNickname } = useRef(randomCharacter())
 
   return (
-    <section className="card overflow-hidden rounded-xl pt-0">
-      <h2 className="bg-primary text-onPrimary -mx-3 mb-4 py-3 px-6 text-2xl font-normal">
-        {advertise.Checkout.title}
-      </h2>
+    <TitledCard
+      variant="rounded"
+      title={<h2 className="text-2xl">{advertise.Checkout.title}</h2>}
+    >
       <Input
         id="email"
         label="Email"
@@ -152,7 +153,7 @@ const Checkout = () => {
       >
         {advertise.Checkout.checkoutButton}
       </Button>
-    </section>
+    </TitledCard>
   )
 }
 

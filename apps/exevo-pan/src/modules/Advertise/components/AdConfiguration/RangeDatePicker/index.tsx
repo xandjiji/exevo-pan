@@ -1,5 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { Fragment, memo, useMemo } from 'react'
+import { TitledCard } from 'components/Atoms'
 import { useForm } from '../../../contexts/Form'
 import Weekdays from './Weekdays'
 import FillDates from './FillDates'
@@ -28,15 +29,18 @@ const RangeDatePicker = () => {
 
   return (
     <>
-      <div className="overflow-hidden rounded-xl shadow-md">
-        <p
-          aria-label={advertise.RangeDatePicker.currentMonthLabel}
-          className="bg-primary text-onPrimary py-3 px-2 text-center text-2xl tracking-wider"
-        >
-          {common.FullMonth[new Date().getMonth()]}
-        </p>
-
-        <div className="bg-surface grid grid-cols-7 gap-1.5 p-3 text-center">
+      <TitledCard
+        variant="rounded"
+        title={
+          <p
+            aria-label={advertise.RangeDatePicker.currentMonthLabel}
+            className="text-center tracking-wider"
+          >
+            {common.FullMonth[new Date().getMonth()]}
+          </p>
+        }
+      >
+        <div className="text-tsm grid grid-cols-7 gap-1.5 pt-1 text-center">
           <Weekdays />
 
           <FillDates
@@ -73,7 +77,7 @@ const RangeDatePicker = () => {
                 {hasNextMonth && (
                   <span
                     aria-label={advertise.RangeDatePicker.nextMonthLabel}
-                    className="text-separator col-span-full -mb-1.5 pt-2 pb-1"
+                    className="text-separator text-s col-span-full -mb-1.5 pt-2 pb-1"
                   >
                     {common.FullMonth[(getMonth(monthDates[0]) + 1) % 12]}
                   </span>
@@ -92,7 +96,7 @@ const RangeDatePicker = () => {
             )
           })}
         </div>
-      </div>
+      </TitledCard>
 
       <p className="-mt-3 text-xs tracking-wide">
         {advertise.RangeDatePicker.smallDescription}

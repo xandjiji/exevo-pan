@@ -15,7 +15,10 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
   }
 
   public componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    if (isDevelopment()) return
+    if (isDevelopment()) {
+      console.log(error)
+      return
+    }
     NotifyErrorClient.setMessage({ error, errorInfo })
     console.log({ error, errorInfo })
     localStorage.clear()

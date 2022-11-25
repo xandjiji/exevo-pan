@@ -12,5 +12,6 @@ export const endpoints = {
   MAIL_CHECKOUT: '/api/mail-checkout',
   NEWSLETTER: '/api/mailchimp',
   ERROR_REPORT: '/api/error-report',
+  SEND_PAYMENT: '/api/send-payment',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
 }

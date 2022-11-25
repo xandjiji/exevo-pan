@@ -1,7 +1,6 @@
-/* eslint-disable no-console */
-/* eslint-disable import/no-extraneous-dependencies */
 import mailchimp from '@mailchimp/mailchimp_marketing'
-import { VercelRequest, VercelResponse } from '@vercel/node'
+import { isDevelopment } from 'utils'
+import type { VercelRequest, VercelResponse } from '@vercel/node'
 
 const LIST_ID = process.env.MAILCHIMP_LIST as string
 
@@ -21,6 +20,11 @@ export default async (
   response: VercelResponse,
 ): Promise<void> => {
   const { email, locale } = request.body
+
+  if (isDevelopment()) {
+    response.status(200).json({ message: 'success' })
+    return
+  }
 
   try {
     await mailchimp.lists.addListMember(LIST_ID, {

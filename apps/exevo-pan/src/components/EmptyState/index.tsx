@@ -22,10 +22,7 @@ const EmptyState = ({
       <FadeImage src={notFoundSrc} alt={text.content} height={height} />
     </div>
 
-    <div
-      className="absolute top-1/2 left-1/2 flex flex-col items-center gap-3"
-      style={{ transform: 'translate(-50%, -50%)' }}
-    >
+    <div className="absolute-centered flex flex-col items-center gap-3">
       <span
         className="text-onSurface block whitespace-nowrap text-center"
         style={{

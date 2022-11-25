@@ -27,10 +27,9 @@ const Hero = ({
       priority
       unoptimized
       className={clsx(
-        'pointer-events-none absolute top-1/2 left-1/2 mix-blend-overlay',
+        'absolute-centered pointer-events-none mix-blend-overlay',
         offset && 'md:ml-[-112px]',
       )}
-      style={{ transform: 'translate(-50%, -50%)' }}
     />
 
     <div className="z-1 relative grid gap-4">

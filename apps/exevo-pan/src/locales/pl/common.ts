@@ -7,8 +7,6 @@ export default {
   Header: {
     h1: {
       home: 'Kupuj i sprzedawaj postacie na oficjalnym Tibijskim Bazarze Postaci!',
-      bazaarHistory:
-        'Odkrywaj poprzednie aukcję poprzez Tibijski Bazar Postaci!!',
       statistics: 'Znajduj statystyki postaci z Tibijskiego Bazaru Postaci!',
       highscores:
         'Najwyższe levele, najwyższe skille oraz najwyższe bidy na Tibijskim Bazarze Postaci!',
@@ -22,8 +20,7 @@ export default {
     closeMenuLabel: 'Zamknij menu nawigacji',
     logoLabel: 'Idź do strony głównej',
     nav: {
-      currentAuctions: 'Obecne Aukcje',
-      bazaarHistory: 'Historia Bazaru',
+      charBazaar: 'Char Bazaar',
       calculators: 'Kalkulatory',
       statistics: 'Statystyki',
       war: 'Wojna na Libertabrze',
@@ -33,6 +30,10 @@ export default {
       bossTracker: 'Boss Tracker',
     },
     themeSwitch: 'Przełącz na tryb ciemny',
+    AccountButton: {
+      settings: 'Settings',
+      logout: 'Logout',
+    },
   },
   BlogTags: {
     news: 'Aktualności',
@@ -42,6 +43,9 @@ export default {
   },
   or: 'lub',
   and: 'oraz',
+  transfer: 'transfer',
+  from: 'od',
+  to: 'do',
   day: 'dzień',
   days: 'dni',
   hour: 'godzina',
@@ -216,4 +220,11 @@ export default {
   CharacterTooltipLabel: 'Idź do strony postaci',
   Newsticker: 'Ostatnie artykuły',
   LoadingState: 'Wczytuję...',
+  /* @ ToDo: i18n */
+  SignIn: {
+    title: 'Sign in with',
+    subtext: 'By signing in, you agree to our',
+  },
+  termsOfService: 'Terms of Service',
+  privacyPolicy: 'Privacy Policy',
 }

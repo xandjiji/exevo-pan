@@ -1,7 +1,6 @@
 import { routes } from 'Constants'
 import {
   MarketIcon,
-  HistoryIcon,
   CalculatorIcon,
   StatisticsIcon,
   AdvertiseIcon,
@@ -16,12 +15,7 @@ export const NavItems: NavItem[] = [
     href: routes.HOME,
     exact: true,
     icon: <MarketIcon />,
-    title: 'currentAuctions',
-  },
-  {
-    href: routes.BAZAAR_HISTORY,
-    icon: <HistoryIcon />,
-    title: 'bazaarHistory',
+    title: 'charBazaar',
   },
   {
     href: routes.BOSS_TRACKER,
@@ -47,10 +41,5 @@ export const NavItems: NavItem[] = [
     href: routes.BLOG,
     icon: <BlogIcon />,
     title: 'blog',
-  },
-  {
-    href: routes.ABOUT,
-    icon: <AboutIcon />,
-    title: 'about',
   },
 ]

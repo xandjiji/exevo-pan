@@ -2,7 +2,14 @@ import { useState, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
-import { Tabs, TextArea, Text, Button, CopyButton } from 'components/Atoms'
+import {
+  LabeledCard,
+  Tabs,
+  TextArea,
+  Text,
+  Button,
+  CopyButton,
+} from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
 import clipboardSrc from 'assets/clipboard.png'
@@ -12,7 +19,7 @@ import {
   TrashIcon,
   ChevronRightIcon,
 } from 'assets/svgs'
-import { LabeledCard, Group, Chip, ChipWrapper } from '../../components'
+import { Group, Chip, ChipWrapper } from '../../components'
 import AdvancedOptionsDialog from './AdvancedOptionsDialog'
 import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'

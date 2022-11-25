@@ -13,12 +13,4 @@
     height: fit-content;
     width: calc(50% - 12px);
   }
-
-  .stepper button {
-    cursor: unset;
-  }
-
-  .stepper button > div {
-    @apply bg-green;
-  }
 }
