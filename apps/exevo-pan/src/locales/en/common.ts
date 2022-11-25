@@ -32,7 +32,7 @@ export default {
     },
     themeSwitch: 'Toggle dark theme',
     AccountButton: {
-      settings: 'Settings',
+      dashboard: 'Dashboard',
       logout: 'Logout',
     },
   },

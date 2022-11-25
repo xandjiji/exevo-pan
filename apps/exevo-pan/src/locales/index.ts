@@ -48,10 +48,10 @@ import loginES from './es/login'
 import loginPT from './pt/login'
 import loginPL from './pl/login'
 
-import accountEN from './en/account'
-import accountES from './es/account'
-import accountPT from './pt/account'
-import accountPL from './pl/account'
+import dashboardEN from './en/dashboard'
+import dashboardES from './es/dashboard'
+import dashboardPT from './pt/dashboard'
+import dashboardPL from './pl/dashboard'
 
 export const error = {
   en: errorEN,
@@ -113,9 +113,9 @@ export const login = {
   pt: loginPT,
   pl: loginPL,
 }
-export const account = {
-  en: accountEN,
-  es: accountES,
-  pt: accountPT,
-  pl: accountPL,
+export const dashboard = {
+  en: dashboardEN,
+  es: dashboardES,
+  pt: dashboardPT,
+  pl: dashboardPL,
 }

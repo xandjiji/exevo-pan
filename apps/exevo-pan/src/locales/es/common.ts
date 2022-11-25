@@ -33,7 +33,7 @@ export default {
     },
     themeSwitch: 'Habilitar tema nocturno',
     AccountButton: {
-      settings: 'Settings',
+      dashboard: 'Dashboard',
       logout: 'Logout',
     },
   },

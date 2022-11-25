@@ -31,7 +31,7 @@ export default {
     },
     themeSwitch: 'Przełącz na tryb ciemny',
     AccountButton: {
-      settings: 'Settings',
+      dashboard: 'Dashboard',
       logout: 'Logout',
     },
   },

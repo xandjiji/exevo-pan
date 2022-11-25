@@ -19,7 +19,7 @@ const providerIcons: Partial<
 
 const UserCard = ({ user }: UserCardProps) => {
   const {
-    translations: { common, account },
+    translations: { common, dashboard },
   } = useTranslations()
 
   const { name, picture, provider, proStatus, proSince } = user
@@ -60,7 +60,7 @@ const UserCard = ({ user }: UserCardProps) => {
             <Tooltip
               content={
                 <>
-                  {account.UserCard.proSince}: {readableProSince}
+                  {dashboard.UserCard.proSince}: {readableProSince}
                 </>
               }
               offset={[0, 6]}
@@ -71,7 +71,7 @@ const UserCard = ({ user }: UserCardProps) => {
             </Tooltip>
           ) : (
             <strong className="tracking-wide">
-              {account.UserCard.freeStatus}
+              {dashboard.UserCard.freeStatus}
             </strong>
           )}
         </span>

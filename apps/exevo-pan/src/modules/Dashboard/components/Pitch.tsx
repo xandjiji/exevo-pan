@@ -23,45 +23,45 @@ const Li = ({ className, children, ...props }: JSX.IntrinsicElements['li']) => (
 
 const Pitch = () => {
   const {
-    translations: { account },
+    translations: { dashboard },
   } = useTranslations()
 
   return (
     <div className="grid place-items-center gap-8">
       <div className="grid place-items-center gap-2">
         <Heading>
-          {account.Pitch.upgradeNow}{' '}
+          {dashboard.Pitch.upgradeNow}{' '}
           <strong className="text-primaryHighlight text-2xl tracking-wider">
             Exevo Pro 🧙‍♂️
           </strong>
         </Heading>
-        <p>{account.Pitch.exclusiveFeatures}</p>
+        <p>{dashboard.Pitch.exclusiveFeatures}</p>
       </div>
 
       <div className="text-tsm grid gap-4">
         <ul className="grid gap-2">
-          <Li>{account.Pitch.features.tcInvested}</Li>
+          <Li>{dashboard.Pitch.features.tcInvested}</Li>
           <Li>
             <span
               dangerouslySetInnerHTML={{
-                __html: account.Pitch.features.auctionFilters,
+                __html: dashboard.Pitch.features.auctionFilters,
               }}
             />
           </Li>
           <Li>
             <span
               dangerouslySetInnerHTML={{
-                __html: account.Pitch.features.bossTracker,
+                __html: dashboard.Pitch.features.bossTracker,
               }}
             />
           </Li>
         </ul>
-        <p className="text-right">{account.Pitch.more}</p>
+        <p className="text-right">{dashboard.Pitch.more}</p>
       </div>
 
       <Heading>
-        {account.Pitch.payOnce}{' '}
-        <strong className="text-2xl">{account.Pitch.forever} 🙌</strong>
+        {dashboard.Pitch.payOnce}{' '}
+        <strong className="text-2xl">{dashboard.Pitch.forever} 🙌</strong>
       </Heading>
     </div>
   )

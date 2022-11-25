@@ -5,7 +5,7 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
-import { LoginIcon, SettingsIcon, LogoutIcon } from 'assets/svgs'
+import { LoginIcon, DashboardIcon, LogoutIcon } from 'assets/svgs'
 import { addLocalePrefix } from 'utils'
 import { routes } from 'Constants'
 import useHeaderPopup from './useHeaderPopup'
@@ -59,11 +59,11 @@ const AccountButton = (): JSX.Element => {
 
                   <NextLink
                     className="hover:bg-primaryVariant"
-                    href={routes.ACCOUNT}
+                    href={routes.DASHBOARD}
                     onClick={action.close}
                   >
-                    <SettingsIcon className="fill-onSurface h-4 w-4" />
-                    {common.Header.AccountButton.settings}
+                    <DashboardIcon className="fill-onSurface h-4 w-4" />
+                    {common.Header.AccountButton.dashboard}
                   </NextLink>
                   <button
                     className="hover:bg-primaryVariant"

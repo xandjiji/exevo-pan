@@ -2,18 +2,18 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { UserCard, Pitch, PurchaseForm } from 'modules/Account'
+import { UserCard, Pitch, PurchaseForm } from 'modules/Dashboard'
 import { useSession } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common, account } from 'locales'
+import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.ACCOUNT)
+const pageUrl = buildUrl(routes.DASHBOARD)
 
 export default function Account() {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(translations.account.Meta.title)
+  const pageTitle = buildPageTitle(translations.dashboard.Meta.title)
 
   const { data: session } = useSession()
 
@@ -27,15 +27,15 @@ export default function Account() {
 
         <meta
           name="description"
-          content={translations.account.Meta.description}
+          content={translations.dashboard.Meta.description}
         />
         <meta
           property="twitter:description"
-          content={translations.account.Meta.description}
+          content={translations.dashboard.Meta.description}
         />
         <meta
           property="og:description"
-          content={translations.account.Meta.description}
+          content={translations.dashboard.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -98,7 +98,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
       common: common[locale as RegisteredLocale],
-      account: account[locale as RegisteredLocale],
+      dashboard: dashboard[locale as RegisteredLocale],
     },
   },
 })
