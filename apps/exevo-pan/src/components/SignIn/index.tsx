@@ -54,7 +54,7 @@ const SignIn = ({
               callbackUrl: addLocalePrefix({
                 route: routes.ACCOUNT,
                 locale,
-                absolute: true,
+                absolute: false,
               }),
             })
           }

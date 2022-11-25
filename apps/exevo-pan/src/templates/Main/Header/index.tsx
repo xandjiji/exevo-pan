@@ -115,8 +115,7 @@ const Header = ({
             />
           </ClientComponent>
           <CtaButton />
-          {/* @ ToDo: re-enable */}
-          {/* <AccountButton /> */}
+          <AccountButton />
           <TibiaBlackjack.FloatingButton className="md:hidden" />
         </div>
       </header>
