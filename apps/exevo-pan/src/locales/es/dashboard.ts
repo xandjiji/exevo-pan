@@ -8,7 +8,9 @@ export default {
     freeStatus: 'Free',
   },
   Pitch: {
+    thankYou: 'Thank you for being',
     upgradeNow: 'Upgrade now to',
+    enjoyFeatures: 'Enjoy your exclusive features:',
     exclusiveFeatures: 'And have access to exclusive features!',
     features: {
       tcInvested: 'Find out how much TC was invested in any Bazaar character',

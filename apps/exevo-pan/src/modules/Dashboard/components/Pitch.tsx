@@ -14,14 +14,22 @@ const Heading = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
   />
 )
 
-const Li = ({ className, children, ...props }: JSX.IntrinsicElements['li']) => (
+export const Li = ({
+  className,
+  children,
+  ...props
+}: JSX.IntrinsicElements['li']) => (
   <li className={clsx('flex items-center gap-1', className)} {...props}>
     <CheckIcon className="fill-greenHighlight shrink-0" />
     {children}
   </li>
 )
 
-const Pitch = () => {
+type PitchProps = {
+  proStatus: boolean
+}
+
+const Pitch = ({ proStatus }: PitchProps) => {
   const {
     translations: { dashboard },
   } = useTranslations()
@@ -30,12 +38,16 @@ const Pitch = () => {
     <div className="grid place-items-center gap-8">
       <div className="grid place-items-center gap-2">
         <Heading>
-          {dashboard.Pitch.upgradeNow}{' '}
+          {proStatus ? dashboard.Pitch.thankYou : dashboard.Pitch.upgradeNow}{' '}
           <strong className="text-primaryHighlight text-2xl tracking-wider">
             Exevo Pro 🧙‍♂️
           </strong>
         </Heading>
-        <p>{dashboard.Pitch.exclusiveFeatures}</p>
+        <p>
+          {proStatus
+            ? dashboard.Pitch.enjoyFeatures
+            : dashboard.Pitch.exclusiveFeatures}
+        </p>
       </div>
 
       <div className="text-tsm grid gap-4">
@@ -59,10 +71,12 @@ const Pitch = () => {
         <p className="text-right">{dashboard.Pitch.more}</p>
       </div>
 
-      <Heading>
-        {dashboard.Pitch.payOnce}{' '}
-        <strong className="text-2xl">{dashboard.Pitch.forever} 🙌</strong>
-      </Heading>
+      {!proStatus && (
+        <Heading>
+          {dashboard.Pitch.payOnce}{' '}
+          <strong className="text-2xl">{dashboard.Pitch.forever} 🙌</strong>
+        </Heading>
+      )}
     </div>
   )
 }

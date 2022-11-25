@@ -8,7 +8,9 @@ export default {
     freeStatus: 'Grátis',
   },
   Pitch: {
+    thankYou: 'Obrigado por ser',
     upgradeNow: 'Upgrade agora para',
+    enjoyFeatures: 'Aproveite suas features exclusivas:',
     exclusiveFeatures: 'E ganhe acesso a features exclusivas!',
     features: {
       tcInvested:

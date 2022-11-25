@@ -78,8 +78,10 @@ export default function Dashboard() {
                 <UserCard user={session.user} />
               </section>
               <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
-                <Pitch />
-                <PurchaseForm {...session.user.paymentData} />
+                <Pitch proStatus={session.user.proStatus} />
+                {!session.user.proStatus && (
+                  <PurchaseForm {...session.user.paymentData} />
+                )}
               </section>
             </>
           ) : (
