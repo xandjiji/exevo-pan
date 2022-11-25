@@ -3,6 +3,7 @@ import * as options from './options'
 import { DrawerFieldsContextData, DrawerFieldsProviderProps } from './types'
 
 const DEFAULT_STATE: DrawerFieldsContextData = {
+  activeServers: new Set(),
   serverOptions: [],
   rareItemData: {},
   imbuementOptions: [],
@@ -19,13 +20,10 @@ const DrawerFieldsContext =
   createContext<DrawerFieldsContextData>(DEFAULT_STATE)
 
 export const DrawerFieldsProvider = ({
-  serverOptions,
-  rareItemData,
   children,
+  ...serverProps
 }: DrawerFieldsProviderProps) => (
-  <DrawerFieldsContext.Provider
-    value={{ serverOptions, rareItemData, ...options }}
-  >
+  <DrawerFieldsContext.Provider value={{ ...serverProps, ...options }}>
     {children}
   </DrawerFieldsContext.Provider>
 )

@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
 import {
@@ -18,6 +19,7 @@ import { common, homepage } from 'locales'
 const pageUrl = buildUrl(routes.HOME)
 
 type HomeStaticProps = {
+  activeServers: string[]
   serverOptions: Option[]
   rareItemData: RareItemData
   initialPaginatedData: PaginatedData<CharacterObject>
@@ -26,6 +28,7 @@ type HomeStaticProps = {
 }
 
 export default function Home({
+  activeServers,
   serverOptions,
   rareItemData,
   initialPaginatedData,
@@ -35,6 +38,7 @@ export default function Home({
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(translations.homepage.Meta.title)
+  const { current: activeServersSet } = useRef(new Set(activeServers))
 
   return (
     <>
@@ -93,6 +97,7 @@ export default function Home({
         <UrlAuction />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
+          activeServers={activeServersSet}
           serverOptions={serverOptions}
           rareItemData={rareItemData}
         >
@@ -110,6 +115,7 @@ export default function Home({
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [
+    activeServerOptions,
     serverOptions,
     rareItemData,
     initialPaginatedData,
@@ -117,6 +123,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     localizedBlogPosts,
   ] = await Promise.all([
     DrawerFieldsClient.fetchActiveServerOptions(),
+    DrawerFieldsClient.fetchServerOptions(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
     AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
@@ -129,6 +136,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         common: common[locale as RegisteredLocale],
         homepage: homepage[locale as RegisteredLocale],
       },
+      activeServers: activeServerOptions.map(({ name }) => name),
       serverOptions,
       rareItemData,
       initialPaginatedData,
