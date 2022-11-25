@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Text, CopyButton } from 'components/Atoms'
+import { capitalizeFirstLetter } from 'utils'
 
 // eslint-disable-next-line react/require-default-props
 type FromToProps = { from?: string; to: string } & JSX.IntrinsicElements['span']
@@ -11,13 +12,10 @@ const FromTo = ({ from, to, className, ...props }: FromToProps) => {
   } = useTranslations()
   return (
     <span
-      className={clsx(
-        className,
-        'my-2 flex items-center gap-1 text-center capitalize',
-      )}
+      className={clsx(className, 'my-2 flex items-center gap-1 text-center')}
       {...props}
     >
-      {common.transfer}
+      {capitalizeFirstLetter(common.transfer)}
       {from ? (
         <>
           {' '}
