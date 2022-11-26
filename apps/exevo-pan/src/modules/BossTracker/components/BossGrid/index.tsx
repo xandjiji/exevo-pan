@@ -1,9 +1,10 @@
 import clsx from 'clsx'
-import { useState, useMemo, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
+import { endpoints } from 'Constants'
 import usePinBoss from './usePinBoss'
 import { listBy } from './utils'
 import BossCard from './BossCard'
@@ -11,13 +12,26 @@ import BossDialog from '../BossDialog'
 import { fallbackPremiumBosses, premiumBossSet } from './constants'
 import { BossGridProps, ListOption } from './types'
 
-const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
+const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
   const { translations } = useTranslations()
 
   const { data } = useSession()
   const isPro = data?.user.proStatus ?? false
 
-  const [bossList, setBossList] = useState(bosses)
+  const [premiumBosses, setPremiumBosses] = useState<BossStats[]>([])
+  useEffect(() => {
+    if (isPro) {
+      setPremiumBosses([])
+      fetch(`${endpoints.PREMIUM_BOSSES}?server=${server}`)
+        .then((res) => res.json().then(setPremiumBosses))
+        .catch(() => setPremiumBosses(fallbackPremiumBosses))
+    }
+  }, [isPro, server])
+
+  const bossList = useMemo(
+    () => [...premiumBosses, ...bosses],
+    [premiumBosses, bosses],
+  )
 
   const [listingOption, setListingOption] = useState<ListOption>('chance')
   const list: typeof bosses = useMemo(() => {
@@ -76,7 +90,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
         <ul
           className={clsx(
             'grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3',
-            !isPro && 'pt-4',
+            isPro && 'pt-4',
           )}
         >
           {list.map((bossStats) => (

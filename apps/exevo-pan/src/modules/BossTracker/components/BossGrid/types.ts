@@ -1,6 +1,7 @@
 import { listBy } from './utils'
 
 export type BossGridProps = {
+  server: string
   bosses: BossStats[]
 } & JSX.IntrinsicElements['section']
 
