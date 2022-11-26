@@ -46,6 +46,7 @@ module.exports = {
       kwaiSurface: withOpacityValue('--kwaiSurface'),
       kwaiVariant: withOpacityValue('--kwaiVariant'),
       black: withOpacityValue('--black'),
+      rare: withOpacityValue('--rare'),
     },
     fontSize: {
       none: '0', // 0
@@ -87,8 +88,12 @@ module.exports = {
       lg: '2px 2px 4px 2px rgba(0, 0, 0, 0.13)',
       inner: 'inset 2px 2px rgba(0, 0, 0, 0.14)',
       none: '0 0 #0000',
+      rare: 'inset 0px 0px 16px 3px rgb(var(--rare))',
     },
     extend: {
+      borderRadius: {
+        inherit: 'inherit',
+      },
       borderWidth: {
         1: '1px',
       },
