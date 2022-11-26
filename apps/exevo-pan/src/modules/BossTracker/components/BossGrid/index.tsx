@@ -4,21 +4,27 @@ import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
-import { premiumBosses } from 'Constants'
 import usePinBoss from './usePinBoss'
 import { listBy } from './utils'
 import BossCard from './BossCard'
 import BossDialog from '../BossDialog'
+import { fallbackPremiumBosses, premiumBossSet } from './constants'
 import { BossGridProps, ListOption } from './types'
 
 const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
   const { translations } = useTranslations()
 
+  const { data } = useSession()
+  const isPro = data?.user.proStatus ?? false
+
+  const [bossList, setBossList] = useState(bosses)
+
   const [listingOption, setListingOption] = useState<ListOption>('chance')
-  const list = useMemo(
-    () => listBy[listingOption](bosses),
-    [bosses, listingOption],
-  )
+  const list: typeof bosses = useMemo(() => {
+    const sortedBosses = listBy[listingOption](bossList)
+
+    return isPro ? sortedBosses : [...fallbackPremiumBosses, ...sortedBosses]
+  }, [isPro, bossList, listingOption])
 
   const listOptions: TypedOption<ListOption>[] = [
     {
@@ -44,10 +50,6 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
   const listNotEmpty = list.length > 0
 
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
-
-  const { data } = useSession()
-
-  const isPro = data?.user.proStatus ?? false
 
   return (
     <section className={clsx('flex flex-col gap-4', className)} {...props}>
@@ -80,20 +82,10 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
             !isPro && 'pt-4',
           )}
         >
-          {!isPro &&
-            premiumBosses.map((name) => (
-              <BossCard
-                key={`${name}-premium`}
-                premium
-                bossStats={{ name }}
-                pinned={pinnedBosses.includes(name)}
-                onPin={toggleBoss}
-                onClick={() => setSelectedBoss(name)}
-              />
-            ))}
           {list.map((bossStats) => (
             <BossCard
               key={bossStats.name}
+              premium={premiumBossSet.has(bossStats.name)}
               bossStats={bossStats}
               pinned={pinnedBosses.includes(bossStats.name)}
               onPin={toggleBoss}
