@@ -69,10 +69,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
       {!isPro && (
         <p className="text-tsm mt-2">
           {/* @ ToDo: i18n */}
-          Exclusive <strong className="text-primaryHighlight">
-            Exevo Pro
-          </strong>{' '}
-          bosses 🕵️
+          Exclusive <strong className="text-rare">Exevo Pro</strong> bosses 🕵️
         </p>
       )}
       {listNotEmpty ? (
