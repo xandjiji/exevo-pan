@@ -87,7 +87,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
                 premium
                 bossStats={{ name }}
                 pinned={pinnedBosses.includes(name)}
-                onPìn={toggleBoss}
+                onPin={toggleBoss}
                 onClick={() => setSelectedBoss(name)}
               />
             ))}
@@ -96,7 +96,7 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
               key={bossStats.name}
               bossStats={bossStats}
               pinned={pinnedBosses.includes(bossStats.name)}
-              onPìn={toggleBoss}
+              onPin={toggleBoss}
               onClick={() => setSelectedBoss(bossStats.name)}
             />
           ))}

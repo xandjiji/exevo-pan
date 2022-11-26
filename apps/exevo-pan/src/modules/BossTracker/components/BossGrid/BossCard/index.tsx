@@ -12,7 +12,7 @@ const BossCard = ({
   premium = false,
   bossStats,
   pinned,
-  onPìn,
+  onPin,
   className,
   ...props
 }: BossCardProps) => {
@@ -149,7 +149,7 @@ const BossCard = ({
         className="clickable ml-auto grid place-items-center self-start rounded p-1"
         onClick={(e) => {
           e.stopPropagation()
-          onPìn(name)
+          onPin(name)
         }}
       >
         <ClientComponent>
