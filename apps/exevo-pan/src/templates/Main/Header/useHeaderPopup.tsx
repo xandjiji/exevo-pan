@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useId } from 'react'
 import { Dialog } from 'components/Atoms'
 
 const useHeaderPopup = <T extends Element>(
@@ -15,10 +15,22 @@ const useHeaderPopup = <T extends Element>(
   const open = useCallback(() => setIsOpen(true), [])
   const close = useCallback(() => setIsOpen(false), [])
 
+  const toggleId = useId()
+  const dialogId = useId()
+
   return {
+    buttonBinders: {
+      id: toggleId,
+      'aria-expanded': isOpen,
+      'aria-haspopup': true,
+      'aria-controls': isOpen ? dialogId : undefined,
+    },
     action: { open, close },
     Popup: ({ children }: { children: React.ReactNode }) => (
       <Dialog
+        id={dialogId}
+        role="menu"
+        aria-labelledby={toggleId}
         isOpen={isOpen}
         onClose={close}
         style={{

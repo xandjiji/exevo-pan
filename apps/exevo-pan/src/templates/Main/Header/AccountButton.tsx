@@ -18,7 +18,7 @@ const AccountButton = (): JSX.Element => {
   const { status, data } = useSession()
   const ref = useRef<HTMLDivElement>(null)
 
-  const { action, Popup } = useHeaderPopup(ref)
+  const { buttonBinders, action, Popup } = useHeaderPopup(ref)
 
   const { locale } = useRouter()
 
@@ -61,12 +61,14 @@ const AccountButton = (): JSX.Element => {
                     className="hover:bg-primaryVariant"
                     href={routes.DASHBOARD}
                     onClick={action.close}
+                    role="menuitem"
                   >
                     <DashboardIcon className="fill-onSurface h-4 w-4" />
                     {common.Header.AccountButton.dashboard}
                   </NextLink>
                   <button
                     className="hover:bg-primaryVariant"
+                    role="menuitem"
                     type="button"
                     onClick={() => {
                       action.close()
@@ -84,7 +86,12 @@ const AccountButton = (): JSX.Element => {
                   </button>
                 </div>
               </Popup>
-              <button type="button" onClick={action.open}>
+              <button
+                type="button"
+                onClick={action.open}
+                aria-label={common.Header.openUserMenu}
+                {...buttonBinders}
+              >
                 <Image
                   src={data.user.picture}
                   alt={data.user.name}

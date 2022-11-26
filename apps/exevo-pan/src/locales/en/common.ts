@@ -19,6 +19,7 @@ export default {
     },
     openMenuLabel: 'Open the navigation menu',
     closeMenuLabel: 'Close the navigation menu',
+    openUserMenu: 'Open user menu',
     logoLabel: 'Go to homepage',
     nav: {
       charBazaar: 'Char Bazaar',

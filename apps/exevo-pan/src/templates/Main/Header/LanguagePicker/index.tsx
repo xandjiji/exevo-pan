@@ -14,7 +14,7 @@ const LanguagePicker = () => {
   const { locale, push, pathname, query } = useRouter()
 
   const ref = useRef<HTMLButtonElement>(null)
-  const { Popup, action } = useHeaderPopup(ref)
+  const { buttonBinders, Popup, action } = useHeaderPopup(ref)
 
   const handleLocaleSelect = (selectedLocale: RegisteredLocale) => {
     push(
@@ -36,32 +36,37 @@ const LanguagePicker = () => {
         aria-label={common.PreferredLanguageLabel}
         type="button"
         onClick={action.open}
+        {...buttonBinders}
       >
         <LanguageIcon className="fill-onPrimary clickable rounded-full" />
       </button>
       <Popup>
-        <div className="grid gap-2 p-4">
+        <div className="grid gap-2 p-4" role="group">
           <RadioButton
             active={locale === 'en'}
             onClick={() => handleLocaleSelect('en')}
+            role="menuitemradio"
           >
             English
           </RadioButton>
           <RadioButton
             active={locale === 'es'}
             onClick={() => handleLocaleSelect('es')}
+            role="menuitemradio"
           >
             Español
           </RadioButton>
           <RadioButton
             active={locale === 'pt'}
             onClick={() => handleLocaleSelect('pt')}
+            role="menuitemradio"
           >
             Português
           </RadioButton>
           <RadioButton
             active={locale === 'pl'}
             onClick={() => handleLocaleSelect('pl')}
+            role="menuitemradio"
           >
             Polski
           </RadioButton>

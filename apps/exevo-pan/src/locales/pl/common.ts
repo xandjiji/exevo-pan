@@ -18,6 +18,8 @@ export default {
     },
     openMenuLabel: 'Otwórz menu nawigacji',
     closeMenuLabel: 'Zamknij menu nawigacji',
+    /* @ ToDo: i18n */
+    openUserMenu: 'Open user menu',
     logoLabel: 'Idź do strony głównej',
     nav: {
       charBazaar: 'Char Bazaar',
