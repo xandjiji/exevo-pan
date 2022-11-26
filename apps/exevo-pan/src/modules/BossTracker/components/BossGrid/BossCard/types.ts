@@ -1,4 +1,5 @@
 export type BossCardProps = {
+  premium?: boolean
   pinned: boolean
   onPìn: (bossName: string) => void
   bossStats: BossStats

@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { SpritePortrait } from 'components/Atoms'
+import { SpritePortrait, RareFrame } from 'components/Atoms'
 import { InfoTooltip, Tooltip, ClientComponent } from 'components/Organisms'
 import { loadBossSrc } from 'utils'
 import { PinIcon } from 'assets/svgs'
@@ -9,6 +9,7 @@ import { formatChance, getChanceClass } from './utils'
 import { BossCardProps } from './types'
 
 const BossCard = ({
+  premium = false,
   bossStats,
   pinned,
   onPìn,
@@ -37,12 +38,13 @@ const BossCard = ({
   return (
     <li
       className={clsx(
-        'card group flex items-center gap-2',
+        'card group relative flex items-center gap-2',
         isClickable && 'clickable',
         className,
       )}
       {...props}
     >
+      {premium && <RareFrame />}
       <SpritePortrait
         src={loadBossSrc(name)}
         alt={name}
@@ -54,7 +56,7 @@ const BossCard = ({
         )}
       />
       <div className="grid gap-1">
-        <h4 className="text-base">
+        <h4 className={clsx('text-base', premium && 'text-rare')}>
           {name}{' '}
           {lastSeenText && <InfoTooltip content={lastSeenText} labelSize />}
         </h4>
