@@ -1,6 +1,6 @@
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 
-export const premiumBosses: TrackedBossName[] = [
+const names: TrackedBossName[] = [
   'The Pale Count',
   'Shlorg',
   'Man in the Cave',
@@ -8,3 +8,9 @@ export const premiumBosses: TrackedBossName[] = [
   'The Welter',
   'Yeti',
 ]
+
+export const premiumBosses = {
+  names,
+  set: new Set<string>(names),
+  fallbackData: names.map((name) => ({ name })) as BossStats[],
+}

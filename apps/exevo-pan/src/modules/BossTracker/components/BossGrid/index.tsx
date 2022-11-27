@@ -5,12 +5,11 @@ import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
-import { endpoints, routes } from 'Constants'
+import { endpoints, routes, premiumBosses } from 'Constants'
 import usePinBoss from './usePinBoss'
 import { listBy } from './utils'
 import BossCard from './BossCard'
 import BossDialog from '../BossDialog'
-import { fallbackPremiumBosses, premiumBossSet } from './constants'
 import { BossGridProps, ListOption } from './types'
 
 const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
@@ -19,27 +18,31 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
   const { data } = useSession()
   const isPro = data?.user.proStatus ?? false
 
-  const [premiumBosses, setPremiumBosses] = useState<BossStats[]>([])
+  const [premiumBossData, setPremiumBossData] = useState<BossStats[]>([])
+
   useEffect(() => {
     if (isPro) {
-      setPremiumBosses([])
       fetch(`${endpoints.PREMIUM_BOSSES}?server=${server}`)
-        .then((res) => res.json().then(setPremiumBosses))
-        .catch(() => setPremiumBosses(fallbackPremiumBosses))
+        .then((res) => res.json().then(setPremiumBossData))
+        .catch(() => setPremiumBossData([]))
     }
-  }, [isPro, server])
+  }, [isPro, bosses, server])
 
-  const bossList = useMemo(
-    () => [...premiumBosses, ...bosses],
-    [premiumBosses, bosses],
+  const hydratedBossList = useMemo(
+    () =>
+      bosses.map(
+        (freeData) =>
+          premiumBossData.find(({ name }) => name === freeData.name) ??
+          freeData,
+      ),
+    [bosses, premiumBossData],
   )
 
   const [listingOption, setListingOption] = useState<ListOption>('chance')
-  const list: typeof bosses = useMemo(() => {
-    const sortedBosses = listBy[listingOption](bossList)
-
-    return isPro ? sortedBosses : [...fallbackPremiumBosses, ...sortedBosses]
-  }, [isPro, bossList, listingOption])
+  const list: typeof bosses = useMemo(
+    () => listBy[listingOption](hydratedBossList),
+    [hydratedBossList, listingOption],
+  )
 
   const listOptions: TypedOption<ListOption>[] = [
     {
@@ -100,7 +103,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
           {list.map((bossStats) => (
             <BossCard
               key={bossStats.name}
-              premium={premiumBossSet.has(bossStats.name)}
+              premium={premiumBosses.set.has(bossStats.name)}
               bossStats={bossStats}
               pinned={pinnedBosses.includes(bossStats.name)}
               onPin={toggleBoss}
