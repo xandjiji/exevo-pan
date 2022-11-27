@@ -7,7 +7,7 @@ import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
 import { endpoints, routes, premiumBosses } from 'Constants'
 import usePinBoss from './usePinBoss'
-import { listBy } from './utils'
+import { listBy, prioritizePremium } from './utils'
 import BossCard from './BossCard'
 import BossDialog from '../BossDialog'
 import { BossGridProps, ListOption } from './types'
@@ -40,7 +40,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
 
   const [listingOption, setListingOption] = useState<ListOption>('chance')
   const list: typeof bosses = useMemo(
-    () => listBy[listingOption](hydratedBossList),
+    () => prioritizePremium(listBy[listingOption](hydratedBossList)),
     [hydratedBossList, listingOption],
   )
 
