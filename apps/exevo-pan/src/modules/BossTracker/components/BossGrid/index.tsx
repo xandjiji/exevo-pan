@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
@@ -85,11 +85,13 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
       </div>
 
       <p className="text-tsm mt-2">
-        {translations.bosses.BossGrid.exclusiveBosses}{' '}
-        <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
-          Exevo Pro
-        </NextLink>{' '}
-        🕵️
+        {templateMessage(translations.bosses.BossGrid.exclusiveBosses, {
+          exevopro: (
+            <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
+              Exevo Pro
+            </NextLink>
+          ),
+        })}
       </p>
       {listNotEmpty ? (
         <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
