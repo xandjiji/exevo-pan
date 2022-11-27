@@ -83,12 +83,11 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
 
       {!isPro && (
         <p className="text-tsm mt-2">
-          {/* @ ToDo: i18n */}
-          Exclusive{' '}
+          {translations.bosses.BossGrid.exclusiveBosses}{' '}
           <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
             Exevo Pro
           </NextLink>{' '}
-          bosses 🕵️
+          🕵️
         </p>
       )}
       {listNotEmpty ? (
