@@ -2,9 +2,10 @@ import clsx from 'clsx'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
+import NextLink from 'next/link'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
-import { endpoints } from 'Constants'
+import { endpoints, routes } from 'Constants'
 import usePinBoss from './usePinBoss'
 import { listBy } from './utils'
 import BossCard from './BossCard'
@@ -83,7 +84,11 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
       {!isPro && (
         <p className="text-tsm mt-2">
           {/* @ ToDo: i18n */}
-          Exclusive <strong className="text-rare">Exevo Pro</strong> bosses 🕵️
+          Exclusive{' '}
+          <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
+            Exevo Pro
+          </NextLink>{' '}
+          bosses 🕵️
         </p>
       )}
       {listNotEmpty ? (
