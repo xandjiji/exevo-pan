@@ -65,9 +65,7 @@ const UserCard = ({ user }: UserCardProps) => {
               }
               offset={[0, 6]}
             >
-              <strong className="text-primaryHighlight tracking-wide">
-                Exevo Pro
-              </strong>
+              <strong className="text-rare tracking-wide">Exevo Pro</strong>
             </Tooltip>
           ) : (
             <strong className="tracking-wide">

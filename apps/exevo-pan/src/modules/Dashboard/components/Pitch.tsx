@@ -39,7 +39,7 @@ const Pitch = ({ proStatus }: PitchProps) => {
       <div className="grid place-items-center gap-2">
         <Heading>
           {proStatus ? dashboard.Pitch.thankYou : dashboard.Pitch.upgradeNow}{' '}
-          <strong className="text-primaryHighlight text-2xl tracking-wider">
+          <strong className="text-rare text-2xl tracking-wider">
             Exevo Pro 🧙‍♂️
           </strong>
         </Heading>

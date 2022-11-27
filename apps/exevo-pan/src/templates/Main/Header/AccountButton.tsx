@@ -43,9 +43,7 @@ const AccountButton = (): JSX.Element => {
                   <span
                     className={clsx(
                       '!hover:bg-surface pointer-events-none tracking-wide',
-                      data.user.proStatus
-                        ? '!text-primaryHighlight'
-                        : '!text-separator',
+                      data.user.proStatus ? '!text-rare' : '!text-separator',
                     )}
                   >
                     {data.user.name}
@@ -100,9 +98,7 @@ const AccountButton = (): JSX.Element => {
                   unoptimized
                   className={clsx(
                     'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
-                    data.user.proStatus
-                      ? 'border-primaryHighlight'
-                      : 'bg-separator',
+                    data.user.proStatus ? 'border-rare' : 'bg-separator',
                   )}
                 />
               </button>
