@@ -3,8 +3,6 @@ import { BossesClient } from 'services/server'
 import { getToken } from 'next-auth/jwt'
 import { premiumBosses } from 'Constants'
 
-const premiumBossesSet = new Set<string>(premiumBosses)
-
 export default async (request: VercelRequest, response: VercelResponse) => {
   const {
     method,
@@ -33,7 +31,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
         server as string,
       )
       const premiumBossStats: BossStats[] = bosses.filter(({ name }) =>
-        premiumBossesSet.has(name),
+        premiumBosses.set.has(name),
       )
 
       response.status(200).json(premiumBossStats)
