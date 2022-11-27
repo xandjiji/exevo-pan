@@ -84,22 +84,15 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
         />
       </div>
 
-      {!isPro && (
-        <p className="text-tsm mt-2">
-          {translations.bosses.BossGrid.exclusiveBosses}{' '}
-          <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
-            Exevo Pro
-          </NextLink>{' '}
-          🕵️
-        </p>
-      )}
+      <p className="text-tsm mt-2">
+        {translations.bosses.BossGrid.exclusiveBosses}{' '}
+        <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
+          Exevo Pro
+        </NextLink>{' '}
+        🕵️
+      </p>
       {listNotEmpty ? (
-        <ul
-          className={clsx(
-            'grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3',
-            isPro && 'pt-4',
-          )}
-        >
+        <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
           {list.map((bossStats) => (
             <BossCard
               key={bossStats.name}
