@@ -24,7 +24,10 @@ export default class HttpClient {
       )
     }
 
-    return response.text()
+    const buffer = await response.arrayBuffer()
+    const decoder = new TextDecoder('ISO-8859-1')
+
+    return decoder.decode(buffer)
   }
 
   static async getJSON<T>(url: string): Promise<T> {
