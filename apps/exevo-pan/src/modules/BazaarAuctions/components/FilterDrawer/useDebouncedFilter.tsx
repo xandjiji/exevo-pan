@@ -3,7 +3,7 @@ import { debounce } from 'utils'
 import { useAuctions } from '../../contexts/useAuctions'
 import { ExtractFilterByType } from '../../contexts/useAuctions/reducer/filters/types'
 
-const DEBOUNCE_DELAY = 250
+const DEBOUNCE_DELAY = 1000
 
 export type UseDebouncedFilterArgs<Type> = {
   key: ExtractFilterByType<Type>
