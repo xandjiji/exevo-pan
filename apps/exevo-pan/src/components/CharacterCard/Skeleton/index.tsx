@@ -107,9 +107,9 @@ const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
       </S.FlexFooter>
 
       <Skeletons.Flex className="gap-2">
-        <Skeleton className="h-6 w-24 rounded-xl" />
-        <Skeleton className="h-6 w-14 rounded-xl" />
-        <Skeleton className="h-6 w-16 rounded-xl" />
+        <Skeleton className="h-6 w-24 rounded-lg" />
+        <Skeleton className="h-6 w-14 rounded-lg" />
+        <Skeleton className="h-6 w-16 rounded-lg" />
       </Skeletons.Flex>
     </S.Wrapper>
   )

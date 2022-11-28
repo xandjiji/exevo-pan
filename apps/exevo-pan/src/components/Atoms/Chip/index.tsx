@@ -47,7 +47,7 @@ const ChipComponent = ({
       onClick={handleClick}
       onKeyPress={handleKeypress}
       className={clsx(
-        'text-tsm flex shrink-0 items-center gap-1.5 rounded-xl border-none py-1.5 px-3 font-normal transition-all',
+        'text-tsm flex shrink-0 items-center gap-1.5 rounded-lg border-none py-1.5 px-3 font-normal transition-all',
         gray && 'bg-separator/60',
         derivedActive
           ? 'bg-primary text-onPrimary'
