@@ -73,7 +73,7 @@ export const FlexColumn = ({
 }: FlexColumnProps) => (
   <div
     className={clsx(
-      'text-onSurface child:w-fit grid grid-cols-1 gap-2',
+      'text-onSurface child:w-fit flex h-full flex-col gap-2',
       storeColumn && 'child:h-[18px]',
       className,
     )}
@@ -105,10 +105,7 @@ export const Strong = ({
   className,
   ...props
 }: JSX.IntrinsicElements['strong']) => (
-  <strong
-    className={clsx('text-primaryHighlight text-tsm', className)}
-    {...props}
-  />
+  <strong className={clsx('text-rare text-tsm', className)} {...props} />
 )
 
 export const Body = ({ lazy = false, className, ...props }: BodyProps) => (
