@@ -1,13 +1,11 @@
-import { NextRequest } from 'next/server'
-import { SECONDS_IN } from 'utils'
+import type { VercelRequest } from '@vercel/node'
 import { AuctionsClient } from 'services/server'
+import { getToken, JWT } from 'next-auth/jwt'
 import { FetchAuctionPageArgs } from 'services/server/Auctions/types'
 import { from } from 'services/client/Auctions/types'
+import { pluckTCInvested } from 'utils'
 
-const CACHE_AGE = {
-  current: SECONDS_IN.MINUTE * 3,
-  history: SECONDS_IN.HOUR * 4,
-}
+const isPro = (token: JWT | null) => token && token.proStatus
 
 const checkForAuctionId = (
   args: FetchAuctionPageArgs,
@@ -18,7 +16,8 @@ const checkForAuctionId = (
     ),
   )
 
-export default async ({ method, url }: NextRequest) => {
+export default async (request: VercelRequest) => {
+  const { method, url } = request
   if (method !== 'GET') {
     return new Response(JSON.stringify({ error: `${method} not allowed` }), {
       status: 400,
@@ -26,9 +25,7 @@ export default async ({ method, url }: NextRequest) => {
     })
   }
 
-  const { searchParams } = new URL(url)
-
-  let maxAge = CACHE_AGE.current
+  const { searchParams } = new URL(url ?? '')
 
   const id = searchParams.get('id')
   const fromQuery = searchParams.get('from')
@@ -61,32 +58,33 @@ export default async ({ method, url }: NextRequest) => {
       })
 
       result = firstResult
-      maxAge = CACHE_AGE[isHistory ? 'history' : 'current']
     } else {
-      const { auction, isHistory } = await Promise.any([
+      const { auction } = await Promise.any([
         checkForAuctionId({ ...queryArgs, history: false }),
         checkForAuctionId({ ...queryArgs, history: true }),
       ])
 
       result = auction
-      maxAge = CACHE_AGE[isHistory ? 'history' : 'current']
     }
 
     if (!result) throw Error()
 
-    return new Response(JSON.stringify(result), {
-      status: 200,
-      headers: {
-        'Content-Type': 'application/json',
-        'Cache-Control': `max-age=${maxAge}, s-maxage=${maxAge}`,
+    const token = await getToken({ req: request })
+
+    return new Response(
+      JSON.stringify(isPro(token) ? result : pluckTCInvested(result)),
+      {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
       },
-    })
+    )
   } catch (error) {
     return new Response(JSON.stringify(error), {
       status: 400,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': `max-age=${maxAge}, s-maxage=${maxAge}`,
       },
     })
   }
