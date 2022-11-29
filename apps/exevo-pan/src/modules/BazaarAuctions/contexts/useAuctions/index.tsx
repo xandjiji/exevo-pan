@@ -27,7 +27,7 @@ export const AuctionsProvider = ({
     translations: { common },
   } = useTranslations()
 
-  const { data } = useSession()
+  const { data, status } = useSession()
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: false,
@@ -69,7 +69,7 @@ export const AuctionsProvider = ({
   }, [paginationOptions, sortingOptions, filterState, isHistory])
 
   useSynchUrlState({
-    isPro: data?.user.proStatus,
+    isPro: status === 'loading' ? undefined : data?.user.proStatus ?? false,
     isHistory,
     filterState,
     paginationOptions,

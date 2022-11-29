@@ -60,7 +60,7 @@ export const useSynchUrlState = ({
         urlSorting,
         urlHistory,
       })
-    } else {
+    } else if (isPro) {
       dispatch({ type: 'HYDRATE_TC_INVESTED' })
     }
   }, [isPro])
