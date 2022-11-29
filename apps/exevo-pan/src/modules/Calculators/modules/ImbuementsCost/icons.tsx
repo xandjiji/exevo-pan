@@ -49,7 +49,7 @@ export const Material = ({ src, name, amount }: MaterialProps) => (
     alt={name}
     title={name}
     counter={
-      <span className="after:font-thin after:content-['x']">{amount}</span>
+      <span className="after:font-light after:content-['x']">{amount}</span>
     }
   />
 )

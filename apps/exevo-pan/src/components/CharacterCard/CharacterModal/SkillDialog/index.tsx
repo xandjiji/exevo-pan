@@ -123,7 +123,7 @@ const SkillDialog = ({
               <Chip gray>
                 <Text.GoldCoin value={skillCost.gold} />
               </Chip>
-              <small className="font-thin">{common.or}</small>
+              <small className="font-light">{common.or}</small>
               <Chip gray>
                 <Text.TibiaCoin value={skillCost.tc} />
               </Chip>

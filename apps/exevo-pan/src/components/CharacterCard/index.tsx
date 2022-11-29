@@ -164,7 +164,7 @@ const CharacterCard = ({
                       <S.Strong>
                         ??? {common.CharacterCard.tcInvested.invested}{' '}
                       </S.Strong>
-                      <small className="w-full font-thin tracking-wider">
+                      <small className="w-full font-light tracking-wider">
                         Exclusive for{' '}
                         <S.Strong className="whitespace-nowrap">
                           Exevo Pro

@@ -54,7 +54,7 @@ const UserCard = ({ user }: UserCardProps) => {
           )}
         </div>
 
-        <span className="text-tsm font-thin">
+        <span className="text-tsm font-light">
           Status:{' '}
           {proStatus ? (
             <Tooltip

@@ -178,7 +178,7 @@ const CharacterModal = ({
                     ??? {common.CharacterCard.tcInvested.invested}{' '}
                   </strong>
                   {/* @ ToDo: i18n */}
-                  <small className="font-thin tracking-wider">
+                  <small className="font-light tracking-wider">
                     (exclusive for{' '}
                     <strong className="text-rare whitespace-nowrap">
                       Exevo Pro

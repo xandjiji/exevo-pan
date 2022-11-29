@@ -46,7 +46,7 @@ const SpriteBox = ({
         offset={offset}
         counter={
           amount > 0 ? (
-            <span className="after:font-thin after:content-['x']">
+            <span className="after:font-light after:content-['x']">
               {amount}
             </span>
           ) : undefined
