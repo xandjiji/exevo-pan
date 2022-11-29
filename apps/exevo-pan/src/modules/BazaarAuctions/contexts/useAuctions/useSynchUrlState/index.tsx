@@ -7,6 +7,7 @@ import { paginationSchema } from '../defaults'
 import { UseSynchcUrlStateProps } from './types'
 
 export const useSynchUrlState = ({
+  isPro,
   isHistory,
   filterState,
   paginationOptions,
@@ -44,6 +45,8 @@ export const useSynchUrlState = ({
 
   /* synching state with initial url parameters */
   useEffect(() => {
+    if (isPro === undefined) return
+
     if (
       !isHistoryDefault ||
       !isPaginationDefault ||
@@ -57,6 +60,8 @@ export const useSynchUrlState = ({
         urlSorting,
         urlHistory,
       })
+    } else {
+      dispatch({ type: 'HYDRATE_TC_INVESTED' })
     }
-  }, [])
+  }, [isPro])
 }
