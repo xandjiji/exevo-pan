@@ -1,5 +1,6 @@
 import { useState, useMemo, useRef, useCallback } from 'react'
 import clsx from 'clsx'
+import NextLink from 'next/link'
 import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, Tabs } from 'components/Atoms'
 import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
@@ -17,10 +18,12 @@ import {
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas } from 'utils'
+import { routes } from 'Constants'
 import { MoreInfoIcon, OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
 import SpriteBox from './SpriteBox'
 import SkillDialog from './SkillDialog'
 import { checkStore, tabCounter, auctionHasEnded } from './utils'
+import { getTCState } from '../utils'
 import { resolvers } from './resolvers'
 import * as S from './atoms'
 import styles from './styles.module.css'
@@ -80,6 +83,7 @@ const CharacterModal = ({
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
+  const tcState = getTCState(characterData.tcInvested)
 
   const tabRef = useRef<HTMLDivElement>(null)
   const isDesktop = useIsDesktop()
@@ -164,22 +168,40 @@ const CharacterModal = ({
 
           <S.Spacer className="h-fit w-full">
             <S.Section border className="z-3">
-              <div
-                title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
-                className="text-tsm flex items-center gap-[5px]"
-              >
-                <Icons.TibiaCoin />{' '}
-                {common.CharacterCard.CharacterModal.totalInvested}:{' '}
-                <strong
-                  className={clsx(
-                    tcInvested === '0'
-                      ? 'font-normal'
-                      : 'text-primaryHighlight',
-                  )}
+              {tcState === 'HIDDEN' ? (
+                <NextLink
+                  href={routes.DASHBOARD}
+                  className="text-onSurface text-tsm flex items-center gap-1.5"
                 >
-                  {tcInvested} Tibia Coins
-                </strong>
-              </div>
+                  <Icons.TibiaCoin />{' '}
+                  <strong className="text-rare">
+                    ??? {common.CharacterCard.tcInvested.invested}{' '}
+                  </strong>
+                  {/* @ ToDo: i18n */}
+                  <small className="font-thin tracking-wider">
+                    (exclusive for{' '}
+                    <strong className="text-rare whitespace-nowrap">
+                      Exevo Pro
+                    </strong>
+                    )
+                  </small>
+                </NextLink>
+              ) : (
+                <div
+                  title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}
+                  className="text-tsm flex items-center gap-[5px]"
+                >
+                  <Icons.TibiaCoin />{' '}
+                  {common.CharacterCard.CharacterModal.totalInvested}:{' '}
+                  <strong
+                    className={clsx(
+                      tcInvested === '0' ? 'font-normal' : 'text-rare',
+                    )}
+                  >
+                    {tcInvested} Tibia Coins
+                  </strong>
+                </div>
+              )}
 
               <div className="grid grid-flow-col grid-rows-3 gap-2 md:max-w-[400px]">
                 <Checkbox
