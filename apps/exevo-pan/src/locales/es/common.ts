@@ -180,6 +180,8 @@ export default {
       prefix: 'Este personaje ha invertido al menos',
       suffix: 'Tibia Coins en compras de la tienda',
       invested: 'invertido',
+      /* @ ToDo: i18n */
+      exclusive: 'Exclusive for {{exevopro}}',
     },
 
     AuctionStatus: 'Estado de la subasta',
@@ -190,6 +192,8 @@ export default {
       /* @ ToDo: i18n */
       moreInfo: 'More informations',
       totalInvested: 'Total invertido',
+      /* @ ToDo: i18n */
+      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Primer addon',
         secondAddon: 'Segundo addon',

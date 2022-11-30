@@ -1,7 +1,7 @@
 import { useState, useMemo, useRef, useCallback } from 'react'
 import clsx from 'clsx'
 import NextLink from 'next/link'
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { Dialog, Tabs } from 'components/Atoms'
 import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
 import {
@@ -177,13 +177,17 @@ const CharacterModal = ({
                   <strong className="text-rare">
                     ??? {common.CharacterCard.tcInvested.invested}{' '}
                   </strong>
-                  {/* @ ToDo: i18n */}
                   <small className="font-light tracking-wider">
-                    (exclusive for{' '}
-                    <strong className="text-rare whitespace-nowrap">
-                      Exevo Pro 🚀
-                    </strong>
-                    )
+                    {templateMessage(
+                      common.CharacterCard.CharacterModal.exclusive,
+                      {
+                        exevopro: (
+                          <strong className="text-rare whitespace-nowrap">
+                            Exevo Pro 🚀
+                          </strong>
+                        ),
+                      },
+                    )}
                   </small>
                 </NextLink>
               ) : (

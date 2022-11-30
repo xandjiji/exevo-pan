@@ -179,6 +179,8 @@ export default {
       prefix: 'Ta postać zainwestowała co najmniej',
       suffix: 'Tibia Coinów na zakupy w Tibia Store',
       invested: 'zainwestowane',
+      /* @ ToDo: i18n */
+      exclusive: 'Exclusive for {{exevopro}}',
     },
     AuctionStatus: 'Status Aukcji',
     BidStatus: 'Status Oferty',
@@ -188,6 +190,8 @@ export default {
       /* @ ToDo: i18n */
       moreInfo: 'More informations',
       totalInvested: 'łącznie zainwestowano',
+      /* @ ToDo: i18n */
+      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Pierwszy addon',
         secondAddon: 'Drugi Addon',

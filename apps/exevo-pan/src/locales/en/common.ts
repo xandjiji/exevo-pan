@@ -178,6 +178,7 @@ export default {
       prefix: 'This character has invested at least',
       suffix: 'Tibia Coins in store purchases',
       invested: 'invested',
+      exclusive: 'Exclusive for {{exevopro}}',
     },
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
@@ -186,6 +187,7 @@ export default {
     CharacterModal: {
       moreInfo: 'More informations',
       totalInvested: 'Total invested',
+      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'First addon',
         secondAddon: 'Second addon',

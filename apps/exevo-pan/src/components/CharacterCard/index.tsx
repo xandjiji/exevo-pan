@@ -1,4 +1,4 @@
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { memo, useState, useCallback } from 'react'
 import { useSyncUrlState } from 'hooks'
 import NextLink from 'next/link'
@@ -150,7 +150,6 @@ const CharacterCard = ({
                       </S.Strong>
                     </div>
                   ),
-                  /* @ ToDo: i18n */
                   HIDDEN: (
                     <NextLink
                       href={routes.DASHBOARD}
@@ -165,10 +164,21 @@ const CharacterCard = ({
                         ??? {common.CharacterCard.tcInvested.invested}{' '}
                       </S.Strong>
                       <small className="w-full font-light tracking-wider">
-                        Exclusive for{' '}
-                        <S.Strong className="whitespace-nowrap">
-                          Exevo Pro 🚀
-                        </S.Strong>
+                        {templateMessage(
+                          common.CharacterCard.tcInvested.exclusive,
+                          {
+                            exevopro: (
+                              <NextLink
+                                href={routes.DASHBOARD}
+                                className="text-rare font-bold"
+                              >
+                                <S.Strong className="whitespace-nowrap">
+                                  Exevo Pro 🚀
+                                </S.Strong>
+                              </NextLink>
+                            ),
+                          },
+                        )}
                       </small>
                     </NextLink>
                   ),
