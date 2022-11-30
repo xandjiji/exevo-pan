@@ -19,8 +19,8 @@ const Icon = ({ icon, disabled }: IconProps) =>
 const Cursor = ({ className, ...props }: JSX.IntrinsicElements['button']) => (
   <button
     className={clsx(
-      'clickable h-8 cursor-pointer rounded',
-      props.disabled && 'pointer-events-none',
+      'h-8 rounded',
+      props.disabled ? 'cursor-not-allowed' : 'clickable',
       className,
     )}
     type="button"

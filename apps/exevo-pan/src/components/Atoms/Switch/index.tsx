@@ -8,7 +8,7 @@ const Switch = ({
   active,
   onClick,
   icon,
-  disabled,
+  disabled = false,
   ...props
 }: SwitchProps) => {
   const [activeState, setActive] = useState<boolean>(active ?? false)
@@ -27,7 +27,8 @@ const Switch = ({
       disabled={disabled}
       aria-checked={derivedActive}
       className={clsx(
-        'text-s text-onSurface flex cursor-pointer select-none items-center gap-2',
+        'text-s text-onSurface flex select-none items-center gap-2',
+        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         className,
       )}
       {...props}

@@ -166,12 +166,12 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               className={clsx(
                 'group relative flex h-1 w-full touch-none items-center rounded-3xl pr-4',
                 disabled
-                  ? 'bg-separator/40 pointer-events-none'
+                  ? 'bg-separator/40 cursor-not-allowed'
                   : 'bg-primaryVariant cursor-pointer',
               )}
               tabIndex={disabled ? -1 : 0}
               onKeyDown={disabled ? undefined : handleTrackKeyPress}
-              {...binders}
+              {...(disabled ? {} : binders)}
             >
               <S.ExtendedClickableArea />
               <S.FullscreenClickable />
@@ -221,7 +221,8 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
                           : undefined
                       }
                       className={clsx(
-                        'absolute cursor-pointer whitespace-nowrap p-1 text-xs',
+                        'absolute whitespace-nowrap p-1 text-xs',
+                        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
                         value === mark.value
                           ? 'text-primaryHighlight font-bold'
                           : 'text-onSurface',
@@ -251,7 +252,7 @@ const Slider = forwardRef<HTMLInputElement, SliderProps>(
               className={clsx(
                 'reset-spinner border-1 text-tsm border-separator out-of-range:!border-red focus:border-primary box-content rounded-md border-solid py-2.5 px-4 outline-none transition-colors',
                 disabled
-                  ? 'text-onSurface/50 bg-separator/50'
+                  ? 'text-onSurface/50 bg-separator/50 cursor-not-allowed'
                   : 'text-onSurface bg-surface',
               )}
               style={{ width: inputWidth }}
