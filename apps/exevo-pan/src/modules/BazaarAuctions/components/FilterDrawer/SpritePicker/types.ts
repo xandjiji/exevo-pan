@@ -1,6 +1,7 @@
 type ExtractFilterByType<Type> = keyof FilterProperties<FilterOptions, Type>
 
 export type SpritePickerProps = {
+  isPro?: boolean
   title: string
   spriteDirectory: string
   directorySuffix?: string

@@ -7,6 +7,7 @@ import { useAuctions } from '../../../contexts/useAuctions'
 import { SpritePickerProps } from './types'
 
 const SpritePicker = ({
+  isPro = false,
   title,
   spriteDirectory,
   directorySuffix = '',
@@ -55,6 +56,7 @@ const SpritePicker = ({
               role="switch"
               title={name}
               aria-checked={isChecked}
+              disabled={!isPro}
               onClick={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -64,7 +66,11 @@ const SpritePicker = ({
               }
               className={clsx(
                 'clickable relative h-14 w-14 select-none rounded-md p-2 transition-colors',
-                isChecked ? 'bg-primaryHighlight' : 'bg-primaryVariant',
+                isPro
+                  ? isChecked
+                    ? 'bg-primaryHighlight'
+                    : 'bg-primaryVariant'
+                  : 'bg-separator/50',
               )}
             >
               <Image
