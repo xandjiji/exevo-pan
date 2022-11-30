@@ -98,7 +98,9 @@ const AccountButton = (): JSX.Element => {
                   unoptimized
                   className={clsx(
                     'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
-                    data.user.proStatus ? 'border-rare' : 'bg-separator',
+                    data.user.proStatus
+                      ? 'border-rare'
+                      : 'border-primaryVariant',
                   )}
                 />
               </button>
