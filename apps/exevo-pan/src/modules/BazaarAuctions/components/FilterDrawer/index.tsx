@@ -635,8 +635,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           directorySuffix="_3"
           filterKey="storeOutfitSet"
           options={storeOutfitValues}
+          isPro={isPro}
         >
-          <OutfitControls disableAddons />
+          <OutfitControls disableAddons isPro={isPro} />
         </SpritePicker>
 
         <SpritePicker
@@ -644,6 +645,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           spriteDirectory="mounts"
           filterKey="mountSet"
           options={mountValues}
+          isPro={isPro}
         />
 
         <SpritePicker
@@ -651,6 +653,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           spriteDirectory="storemounts"
           filterKey="storeMountSet"
           options={storeMountValues}
+          isPro={isPro}
         />
 
         <FilterGroup>
