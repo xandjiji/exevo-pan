@@ -22,7 +22,7 @@ const Input = forwardRef<HTMLInputElement, JSX.IntrinsicElements['input']>(
     <input
       ref={ref}
       {...args}
-      className="focus:bg-primaryVariant text-onSurface text-tsm border-none bg-transparent text-center caret-transparent outline-none transition-colors selection:bg-transparent"
+      className="focus:bg-primaryVariant text-onSurface text-tsm border-none bg-transparent text-center caret-transparent outline-none transition-colors selection:bg-transparent disabled:cursor-not-allowed"
       style={{ width: '3ch' }}
       inputMode="numeric"
     />
@@ -127,7 +127,9 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
             error
               ? 'border-red'
               : 'border-separator focus-within:border-primary',
-            disabled ? 'bg-separator cursor-default' : 'bg-surface cursor-text',
+            disabled
+              ? 'bg-separator cursor-not-allowed'
+              : 'bg-surface cursor-text',
           )}
           onClick={focusHours}
         >
