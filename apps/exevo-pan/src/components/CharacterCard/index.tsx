@@ -167,7 +167,7 @@ const CharacterCard = ({
                       <small className="w-full font-light tracking-wider">
                         Exclusive for{' '}
                         <S.Strong className="whitespace-nowrap">
-                          Exevo Pro
+                          Exevo Pro 🚀
                         </S.Strong>
                       </small>
                     </NextLink>

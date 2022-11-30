@@ -181,7 +181,7 @@ const CharacterModal = ({
                   <small className="font-light tracking-wider">
                     (exclusive for{' '}
                     <strong className="text-rare whitespace-nowrap">
-                      Exevo Pro
+                      Exevo Pro 🚀
                     </strong>
                     )
                   </small>
