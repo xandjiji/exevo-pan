@@ -1,5 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useCallback } from 'react'
+import { useSession } from 'next-auth/react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { servers } from 'data-dictionary/dist/dictionaries/servers'
@@ -36,6 +37,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { common, homepage },
   } = useTranslations()
+
+  const { data } = useSession()
+  const isPro = data?.user.proStatus ?? false
 
   const {
     activeServers,
@@ -620,8 +624,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           directorySuffix={`_${filterState.addon}`}
           filterKey="outfitSet"
           options={outfitValues}
+          isPro={isPro}
         >
-          <OutfitControls />
+          <OutfitControls isPro={isPro} />
         </SpritePicker>
 
         <SpritePicker
