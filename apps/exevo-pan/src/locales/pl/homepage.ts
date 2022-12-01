@@ -26,6 +26,7 @@ export default {
   },
   FilterDrawer: {
     title: 'Filtry',
+    exevoProExclusive: '(exclusive for {{exevopro}})',
     labels: {
       bazaarHistory: 'Historia Bazaru',
       searchNickname: 'Szukaj nazwy',

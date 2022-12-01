@@ -1,6 +1,9 @@
 import clsx from 'clsx'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import NextLink from 'next/link'
 import { Input as BaseInput, Chip as BaseChip } from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
+import { routes } from 'Constants'
 import { InputProps } from 'components/Atoms/Input/types'
 import { ChipProps } from 'components/Atoms/Chip/types'
 import { AutocompleteInputProps } from 'components/Organisms/AutocompleteInput/types'
@@ -54,3 +57,24 @@ export const Emoji = ({
 }: JSX.IntrinsicElements['span']) => (
   <span role="img" className={clsx('text-tsm ml-1.5', className)} {...props} />
 )
+
+export const ExevoProExclusive = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['p']) => {
+  const {
+    translations: { homepage },
+  } = useTranslations()
+
+  return (
+    <small className={clsx('font-light tracking-wider', className)} {...props}>
+      {templateMessage(homepage.FilterDrawer.exevoProExclusive, {
+        exevopro: (
+          <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
+            <strong className="whitespace-nowrap">Exevo Pro 🚀</strong>
+          </NextLink>
+        ),
+      })}
+    </small>
+  )
+}

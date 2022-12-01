@@ -27,6 +27,7 @@ export default {
   },
   FilterDrawer: {
     title: 'Filtros',
+    exevoProExclusive: '(exclusive for {{exevopro}})',
     labels: {
       bazaarHistory: 'Histórico del Bazaar',
       searchNickname: 'Buscar nickname',
