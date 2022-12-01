@@ -1,4 +1,5 @@
 import { memo, useMemo, useCallback } from 'react'
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
@@ -679,8 +680,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             onChange={setTcInvested}
             placeholder="0"
             alwaysValid
-            className="w-32"
+            disabled={!isPro}
+            className={clsx(
+              'w-32',
+              isPro ? 'child:text-rare child:font-bold' : 'mb-1',
+            )}
           />
+          {isPro ? <></> : <S.ExevoProExclusive />}
         </FilterGroup>
 
         <FilterGroup>
