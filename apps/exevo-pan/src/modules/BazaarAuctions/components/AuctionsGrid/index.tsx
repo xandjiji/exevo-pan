@@ -73,7 +73,7 @@ const AuctionsGrid = () => {
           className="relative"
         >
           <FilterIcon className={styles.icon} />
-          <ClientComponent className="absolute -top-0.5 -right-0.5">
+          <ClientComponent className="pointer-events-none absolute -top-0.5 -right-0.5">
             <ActiveCount
               role="status"
               aria-label={`${activeFilterCount} ${
