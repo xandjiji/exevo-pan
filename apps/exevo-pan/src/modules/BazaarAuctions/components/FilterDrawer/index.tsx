@@ -879,7 +879,12 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <S.AutocompleteInput
                 id="rare-items-input"
                 label={
-                  <InfoTooltip.LabelWrapper className="whitespace-nowrap">
+                  <InfoTooltip.LabelWrapper
+                    className={clsx(
+                      'whitespace-nowrap',
+                      isPro && 'text-rare font-bold',
+                    )}
+                  >
                     {homepage.FilterDrawer.labels.rareItems}
                     <InfoTooltip
                       labelSize
@@ -891,17 +896,33 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 aria-controls="rare-items-list"
                 placeholder={homepage.FilterDrawer.placeholders.rareItems}
                 itemList={rareItems.itemList}
-                onItemSelect={({ name }) => rareItems.action.toggle(name)}
+                disabled={!isPro}
+                onItemSelect={
+                  isPro
+                    ? ({ name }) => rareItems.action.toggle(name)
+                    : undefined
+                }
                 onKeyPress={blurOnEnter}
                 enterKeyHint="done"
               />
               <Chip
                 overrideStatus={rareItems.allSelected}
-                onClick={rareItems.action.toggleAll}
+                onClick={isPro ? rareItems.action.toggleAll : undefined}
+                gray={!isPro}
+                className={clsx(!isPro && 'cursor-not-allowed')}
               >
                 {homepage.FilterDrawer.toggleAll.items}
               </Chip>
             </S.InputWrapper>
+
+            {isPro ? (
+              <></>
+            ) : (
+              <div className="-mt-2">
+                <S.ExevoProExclusive />
+              </div>
+            )}
+
             <S.ChipWrapper id="rare-items-list">
               {Object.keys(rareItems.selectedItemData).map((item) => (
                 <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
