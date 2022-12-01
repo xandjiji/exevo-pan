@@ -4,6 +4,7 @@ import { memo } from 'react'
 import Image from 'next/image'
 import { Accordion, Label, ActiveCount } from 'components/Atoms'
 import { useAuctions } from '../../../contexts/useAuctions'
+import { ExevoProExclusive } from '../atoms'
 import { SpritePickerProps } from './types'
 
 const SpritePicker = ({
@@ -28,19 +29,28 @@ const SpritePicker = ({
       className="border-separator mt-[-9px] border-solid pb-1.5"
       style={{ borderWidth: 0, borderBottomWidth: 1 }}
       title={
-        <Label className="relative flex cursor-pointer items-center gap-1.5 text-left">
+        <Label
+          className={clsx(
+            'relative flex cursor-pointer items-center gap-1.5 text-left',
+            isPro && 'text-rare font-bold',
+          )}
+        >
           {title}
-          <ActiveCount
-            aria-label={`${selectedCount} ${
-              homepage.FilterDrawer.SpritePicker[
-                selectedCount === 1 ? 'item' : 'items'
-              ]
-            }`}
-            aria-hidden={!selectedCount}
-            className="pointer-events-none"
-          >
-            {selectedCount}
-          </ActiveCount>
+          {isPro ? (
+            <ActiveCount
+              aria-label={`${selectedCount} ${
+                homepage.FilterDrawer.SpritePicker[
+                  selectedCount === 1 ? 'item' : 'items'
+                ]
+              }`}
+              aria-hidden={!selectedCount}
+              className="pointer-events-none"
+            >
+              {selectedCount}
+            </ActiveCount>
+          ) : (
+            <ExevoProExclusive />
+          )}
         </Label>
       }
     >
