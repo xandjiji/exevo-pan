@@ -1,5 +1,5 @@
-import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useCallback } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
@@ -32,6 +32,11 @@ import { FilterDrawerProps } from './types'
 
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
 const { PVP_TYPES, SERVER_LOCATIONS } = servers
+
+const proTags = [tagsDictionary.soulwarAvailable]
+const freeTags = Object.keys(tagsDictionary).filter(
+  (tag) => !proTags.includes(tag),
+)
 
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
@@ -906,8 +911,43 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           style={{ border: 'none' }}
         >
           <S.ChipWrapper>
+            {proTags.map((tag) => {
+              const isActive = filterState.tags.has(tag)
+
+              return (
+                <Tooltip
+                  content={<S.ExevoProExclusive />}
+                  visible={isPro ? false : undefined}
+                  trigger={isPro ? 'none' : 'hover'}
+                  offset={[0, 6]}
+                >
+                  <Chip
+                    key={tag}
+                    overrideStatus={isActive}
+                    onClick={() =>
+                      isPro
+                        ? dispatch({
+                            type: 'TOGGLE_FILTER_SET',
+                            key: 'tags',
+                            value: tag,
+                          })
+                        : undefined
+                    }
+                    className={
+                      isActive
+                        ? 'text-surface bg-rare'
+                        : 'bg-rare/50 text-onSurface'
+                    }
+                  >
+                    {common.SpecialTags[tag]}
+                  </Chip>
+                </Tooltip>
+              )
+            })}
+
             <Tooltip
               style={{ width: 280 }}
+              offset={[0, 6]}
               content={homepage.FilterDrawer.tooltips.rareNicknames}
             >
               <Chip
@@ -920,7 +960,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               </Chip>
             </Tooltip>
 
-            {Object.keys(tagsDictionary).map((tag) => (
+            {freeTags.map((tag) => (
               <Chip
                 key={tag}
                 overrideStatus={filterState.tags.has(tag)}
