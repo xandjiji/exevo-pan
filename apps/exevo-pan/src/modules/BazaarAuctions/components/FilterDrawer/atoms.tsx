@@ -58,23 +58,21 @@ export const Emoji = ({
   <span role="img" className={clsx('text-tsm ml-1.5', className)} {...props} />
 )
 
-export const ExevoProExclusive = ({
-  className,
-  ...props
-}: JSX.IntrinsicElements['p']) => {
+export const ExevoProExclusive = () => {
   const {
     translations: { homepage },
   } = useTranslations()
 
   return (
-    <small className={clsx('font-light tracking-wider', className)} {...props}>
+    <NextLink
+      href={routes.DASHBOARD}
+      className="text-onSurface text-xs font-light tracking-wider"
+    >
       {templateMessage(homepage.FilterDrawer.exevoProExclusive, {
         exevopro: (
-          <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
-            <strong className="whitespace-nowrap">Exevo Pro 🚀</strong>
-          </NextLink>
+          <strong className="text-rare whitespace-nowrap">Exevo Pro 🚀</strong>
         ),
       })}
-    </small>
+    </NextLink>
   )
 }
