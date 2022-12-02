@@ -1,37 +1,9 @@
 import type { VercelRequest } from '@vercel/node'
 import { getToken, JWT } from 'next-auth/jwt'
-import { filterSchema } from 'shared-utils/dist/contracts/Filters/schemas'
-import { dictionary as tags } from 'data-dictionary/dist/dictionaries/characterTags'
 import { endpoints } from 'Constants'
-import { pluckTCInvested } from 'utils'
+import { pluckTCInvested, pluckPremiumParameters } from 'utils'
 
 const isPro = (token: JWT | null) => token && token.proStatus
-
-const pluckPremiumParameters = (searchParams: URLSearchParams) => {
-  searchParams.delete(filterSchema.addon.urlKey)
-  searchParams.delete(filterSchema.sex.urlKey)
-
-  searchParams.delete(filterSchema.outfitSet.urlKey)
-  searchParams.delete(filterSchema.storeOutfitSet.urlKey)
-  searchParams.delete(filterSchema.mountSet.urlKey)
-  searchParams.delete(filterSchema.storeMountSet.urlKey)
-
-  searchParams.delete(filterSchema.tcInvested.urlKey)
-  searchParams.delete(filterSchema.auctionIds.urlKey)
-
-  const tagParams = searchParams.get(filterSchema.tags.urlKey)
-  if (tagParams) {
-    const filteredTagParams = tagParams
-      .split(',')
-      .filter((param) => param !== tags.soulwarAvailable)
-
-    if (filteredTagParams.length === 0) {
-      searchParams.delete(filterSchema.tags.urlKey)
-    } else {
-      searchParams.set(filterSchema.tags.urlKey, filteredTagParams.join(','))
-    }
-  }
-}
 
 export default async (request: VercelRequest) => {
   const { method, url } = request
