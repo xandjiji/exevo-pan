@@ -15,8 +15,17 @@ export default {
     features: {
       tcInvested:
         'Descubra quanto TC foi investido em qualquer personagem do Bazaar',
-      auctionFilters: '<strong>Filtros de leilão</strong> exclusivos',
-      bossTracker: 'Acesse todos os bosses do <strong>Boss Tracker</strong>',
+      exclusiveFilters: '{{auctionFilters}} exclusivos',
+      auctionFilters: 'Filtros de leilão',
+      exclusiveBosses: 'Acesso a todos os bosses do {{bossTracker}}',
+      bossTracker: 'Boss Tracker',
+    },
+    filtersTooltip: {
+      filterBy: 'Filtre por:',
+      tc: 'Tibia Coins investidos 💰',
+      store: 'Montarias e outfits da store 🛍️',
+      rareItems: 'Items raros ✨',
+      soulwar: 'Soul War disponível 💀',
     },
     more: '...e mais no futuro!',
     payOnce: 'Pague uma vez, seu',

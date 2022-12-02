@@ -1,7 +1,8 @@
 /* eslint-disable react/no-danger */
 import { memo } from 'react'
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import clsx from 'clsx'
+import { Tooltip } from 'components/Organisms'
 import { CheckIcon } from 'assets/svgs'
 
 const Heading = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
@@ -12,6 +13,12 @@ const Heading = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
     )}
     {...props}
   />
+)
+
+const TooltipUl = ({
+  ...props
+}: Omit<JSX.IntrinsicElements['ul'], 'className'>) => (
+  <ul className="ml-4 grid list-disc justify-items-start gap-1" {...props} />
 )
 
 export const Li = ({
@@ -54,18 +61,47 @@ const Pitch = ({ proStatus }: PitchProps) => {
         <ul className="grid gap-2">
           <Li>{dashboard.Pitch.features.tcInvested}</Li>
           <Li>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: dashboard.Pitch.features.auctionFilters,
-              }}
-            />
+            {templateMessage(dashboard.Pitch.features.exclusiveFilters, {
+              auctionFilters: (
+                <Tooltip
+                  offset={[0, 6]}
+                  content={
+                    <div className="grid place-items-start justify-items-start gap-3">
+                      <p>{dashboard.Pitch.filtersTooltip.filterBy}</p>
+                      <TooltipUl>
+                        <li>{dashboard.Pitch.filtersTooltip.tc}</li>
+                        <li>{dashboard.Pitch.filtersTooltip.store}</li>
+                        <li>{dashboard.Pitch.filtersTooltip.rareItems}</li>
+                        <li>{dashboard.Pitch.filtersTooltip.soulwar}</li>
+                      </TooltipUl>
+                    </div>
+                  }
+                >
+                  <strong>{dashboard.Pitch.features.auctionFilters}</strong>
+                </Tooltip>
+              ),
+            })}
           </Li>
           <Li>
-            <span
-              dangerouslySetInnerHTML={{
-                __html: dashboard.Pitch.features.bossTracker,
-              }}
-            />
+            {templateMessage(dashboard.Pitch.features.exclusiveBosses, {
+              bossTracker: (
+                <Tooltip
+                  offset={[0, 6]}
+                  content={
+                    <TooltipUl>
+                      <li>The Pale Count</li>
+                      <li>Shlorg</li>
+                      <li>Man in the Cave</li>
+                      <li>Ocyakao</li>
+                      <li>The Welter</li>
+                      <li>Yeti</li>
+                    </TooltipUl>
+                  }
+                >
+                  <strong>{dashboard.Pitch.features.bossTracker}</strong>
+                </Tooltip>
+              ),
+            })}
           </Li>
         </ul>
         <p className="text-right">{dashboard.Pitch.more}</p>
