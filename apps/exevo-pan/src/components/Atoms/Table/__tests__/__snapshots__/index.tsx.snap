@@ -2,60 +2,82 @@
 
 exports[`<Table /> head column highlight prop should display asc/desc symbol 1`] = `
 <div>
-  <section
-    class="card custom-scrollbar overflow-auto py-[18px] px-6 transition-colors"
+  <div
+    class="card p-0 rounded"
   >
-    <table
-      class="invisible-caption ml-[-3px] border-collapse"
-      style="width: calc(100% + 3px);"
+    <div
+      class="bg-primary custom-scrollbar text-onPrimary overflow-auto text-2xl shadow transition-colors rounded-t px-6 py-4"
     >
-      <thead>
-        <tr
-          class="styled-link after:bg-separator relative after:absolute after:top-full after:left-0 after:h-[1px] after:w-full after:opacity-30 last:after:content-none"
-        >
-          <th
-            class="text-tsm text-onSurface pb-1.5 font-bold before:relative before:top-[-1px] before:left-[-3px] before:content-['▾']"
+      <span
+        class="text-tsm block font-light"
+      />
+    </div>
+    <div
+      class="px-6 py-4"
+    >
+      <table
+        class="invisible-caption ml-[-3px] border-collapse"
+        style="width: calc(100% + 3px);"
+      >
+        <thead>
+          <tr
+            class="styled-link after:bg-separator relative after:absolute after:top-full after:left-0 after:h-[1px] after:w-full after:opacity-30 last:after:content-none"
           >
-            #
-          </th>
-          <th
-            class="text-tsm text-onSurface pb-1.5 font-bold"
-          >
-            Nickname
-          </th>
-        </tr>
-      </thead>
-    </table>
-  </section>
+            <th
+              class="text-tsm text-onSurface pb-1.5 font-bold before:relative before:top-[-1px] before:left-[-3px] before:content-['▾']"
+            >
+              #
+            </th>
+            <th
+              class="text-tsm text-onSurface pb-1.5 font-bold"
+            >
+              Nickname
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
 </div>
 `;
 
 exports[`<Table /> head column highlight prop should display asc/desc symbol 2`] = `
 <div>
-  <section
-    class="card custom-scrollbar overflow-auto py-[18px] px-6 transition-colors"
+  <div
+    class="card p-0 rounded"
   >
-    <table
-      class="invisible-caption ml-[-3px] border-collapse"
-      style="width: calc(100% + 3px);"
+    <div
+      class="bg-primary custom-scrollbar text-onPrimary overflow-auto text-2xl shadow transition-colors rounded-t px-6 py-4"
     >
-      <thead>
-        <tr
-          class="styled-link after:bg-separator relative after:absolute after:top-full after:left-0 after:h-[1px] after:w-full after:opacity-30 last:after:content-none"
-        >
-          <th
-            class="text-tsm text-onSurface pb-1.5 font-bold before:relative before:top-[-1px] before:left-[-3px] before:content-['▴']"
+      <span
+        class="text-tsm block font-light"
+      />
+    </div>
+    <div
+      class="px-6 py-4"
+    >
+      <table
+        class="invisible-caption ml-[-3px] border-collapse"
+        style="width: calc(100% + 3px);"
+      >
+        <thead>
+          <tr
+            class="styled-link after:bg-separator relative after:absolute after:top-full after:left-0 after:h-[1px] after:w-full after:opacity-30 last:after:content-none"
           >
-            #
-          </th>
-          <th
-            class="text-tsm text-onSurface pb-1.5 font-bold"
-          >
-            Nickname
-          </th>
-        </tr>
-      </thead>
-    </table>
-  </section>
+            <th
+              class="text-tsm text-onSurface pb-1.5 font-bold before:relative before:top-[-1px] before:left-[-3px] before:content-['▴']"
+            >
+              #
+            </th>
+            <th
+              class="text-tsm text-onSurface pb-1.5 font-bold"
+            >
+              Nickname
+            </th>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
 </div>
 `;
