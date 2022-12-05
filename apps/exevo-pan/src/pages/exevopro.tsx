@@ -12,7 +12,7 @@ import { BlogClient } from 'services'
 import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { ExevoPanIcon } from 'assets/svgs'
+import { MiniAuctionGrid } from 'modules/ExevoProLP'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
@@ -27,15 +27,6 @@ type HomeStaticProps = {
   highlightedAuctions: CharacterObject[]
   blogPosts: BlogPost[]
 }
-
-const shadow = {
-  light: '44 48 56',
-  dark: '4 8 16',
-}
-
-const lightShadow = `-70px 70px 65px rgb(${shadow.light} / 7%), -30px 30px 30px rgb(${shadow.light} / 6%), -15px 15px 15px rgb(${shadow.light} / 5%), -10px 10px 8px rgb(${shadow.light} / 4%), -4px 4px 4px rgb(${shadow.light} / 3%), -2px 2px 2px rgb(${shadow.light} / 2%)`
-
-const darkShadow = `-70px 70px 65px rgb(${shadow.dark} / 7%), -30px 30px 30px rgb(${shadow.dark} / 6%), -15px 15px 15px rgb(${shadow.dark} / 5%), -10px 10px 8px rgb(${shadow.dark} / 4%), -4px 4px 4px rgb(${shadow.dark} / 3%), -2px 2px 2px rgb(${shadow.dark} / 2%)`
 
 export default function Home({
   activeServers,
@@ -105,34 +96,7 @@ export default function Home({
 
       <Main>
         <main className="inner-container py-20">
-          <div
-            className="grid w-fit grid-cols-3 gap-4"
-            style={{ transform: 'rotateX(20deg) rotateZ(-20deg) skewX(20deg)' }}
-          >
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((key) => (
-              <div
-                key={key}
-                className="child:rounded-xl child:w-full child:h-full child:bg-surface relative h-40 w-40"
-                style={{ zIndex: key % 3 === 0 ? 1 : key % 3 === 1 ? 3 : 2 }}
-              >
-                <div
-                  className="z-2 absolute grid place-content-center"
-                  style={{
-                    boxShadow: lightShadow,
-                  }}
-                >
-                  <ExevoPanIcon style={{ height: 60, width: 60 }} />
-                </div>
-                <div
-                  className="z-1 absolute"
-                  style={{
-                    boxShadow: lightShadow,
-                    transform: 'matrix(1,0,0,1,-4,4)',
-                  }}
-                />
-              </div>
-            ))}
-          </div>
+          <MiniAuctionGrid />
         </main>
       </Main>
     </>
