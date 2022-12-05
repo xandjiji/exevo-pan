@@ -36,6 +36,7 @@
     "start:staging": "turbo run staging",
     "deploy:posts": "yarn --cwd apps/blog-worker deploy",
     "deploy:backoffice": "yarn --cwd apps/backoffice deploy",
+    "deploy:static": "netlify deploy --dir=static --prod --site=exevopan-static",
     "scrap:raw": "yarn --cwd apps/bazaar-scraper scrap:raw",
     "checkup": "yarn --cwd apps/bazaar-scraper checkup",
     "prisma:push": "yarn --cwd packages/prisma-database push",
@@ -45,6 +46,7 @@
   "devDependencies": {
     "husky": "^7.0.4",
     "lint-staged": "^12.1.7",
+    "netlify-cli": "^12.2.8",
     "prettier": "^2.5.1",
     "turbo": "latest"
   },

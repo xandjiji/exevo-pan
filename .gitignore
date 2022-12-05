@@ -33,3 +33,6 @@ yarn-error.log*
 .turbo
 
 backlog.txt
+
+# Local Netlify folder
+.netlify

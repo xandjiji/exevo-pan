@@ -1,4 +1,6 @@
-cp -R ~/exevo-pan/apps/bazaar-scraper/Output/bossChances/ ~/exevo-pan/apps/bazaar-scraper/Output/static
-sh ~/exevo-pan/apps/bazaar-scraper/Output/static/deployStatic.sh
+cp -R ~/exevo-pan/apps/bazaar-scraper/Output/bossChances/ ~/exevo-pan/static
+
+cd ~/exevo-pan
+yarn deploy:static
 
 sleep 10s
