@@ -23,7 +23,7 @@ export default class BlogClient {
 
   private static blogQueryUrl = `${endpoints.BLOG_QUERY}`
 
-  private static blogStaticUrl = `${endpoints.STATIC_DATA}`
+  private static blogStaticUrl = `${endpoints.BLOG_STATIC}`
 
   private static getCache(
     key: string,
