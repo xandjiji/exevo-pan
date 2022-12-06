@@ -1,17 +1,8 @@
-import { useRef } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
-import {
-  DrawerFieldsProvider,
-  AuctionsProvider,
-  AuctionsGrid,
-  UrlAuction,
-} from 'modules/BazaarAuctions'
-import Newsticker from 'components/Newsticker'
-import { BlogClient } from 'services'
-import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
+import { Button } from 'components/Atoms'
 import { MiniAuctionGrid } from 'modules/ExevoProLP'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -19,27 +10,10 @@ import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
-type HomeStaticProps = {
-  activeServers: string[]
-  serverOptions: Option[]
-  rareItemData: RareItemData
-  initialPaginatedData: PaginatedData<CharacterObject>
-  highlightedAuctions: CharacterObject[]
-  blogPosts: BlogPost[]
-}
-
-export default function Home({
-  activeServers,
-  serverOptions,
-  rareItemData,
-  initialPaginatedData,
-  highlightedAuctions,
-  blogPosts,
-}: HomeStaticProps) {
+export default function Home() {
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(translations.homepage.Meta.title)
-  const { current: activeServersSet } = useRef(new Set(activeServers))
 
   return (
     <>
@@ -96,42 +70,26 @@ export default function Home({
 
       <Main>
         <main className="inner-container py-20">
-          <MiniAuctionGrid />
+          <section className="relative flex flex-col items-center gap-10">
+            <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
+            <h1 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
+              Become{' '}
+              <strong className="text-rare whitespace-nowrap">Exevo Pro</strong>
+            </h1>
+
+            <Button className="w-fit">Start now</Button>
+          </section>
         </main>
       </Main>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const [
-    activeServerOptions,
-    serverOptions,
-    rareItemData,
-    initialPaginatedData,
-    highlightedAuctions,
-    localizedBlogPosts,
-  ] = await Promise.all([
-    DrawerFieldsClient.fetchActiveServerOptions(),
-    DrawerFieldsClient.fetchServerOptions(),
-    DrawerFieldsClient.fetchAuctionedItemOptions(),
-    AuctionsClient.fetchAuctionPage({ history: false }),
-    AuctionsClient.fetchHighlightedAuctions(),
-    await BlogClient.getEveryPostLocale({ pageSize: 3 }),
-  ])
-
-  return {
-    props: {
-      translations: {
-        common: common[locale as RegisteredLocale],
-        homepage: homepage[locale as RegisteredLocale],
-      },
-      activeServers: activeServerOptions.map(({ name }) => name),
-      serverOptions,
-      rareItemData,
-      initialPaginatedData,
-      highlightedAuctions,
-      blogPosts: localizedBlogPosts[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => ({
+  props: {
+    translations: {
+      common: common[locale as RegisteredLocale],
+      homepage: homepage[locale as RegisteredLocale],
     },
-  }
-}
+  },
+})

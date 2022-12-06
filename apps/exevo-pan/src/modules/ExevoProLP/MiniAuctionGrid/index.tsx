@@ -4,17 +4,25 @@ import { useTheme } from 'contexts/useTheme'
 import MiniAuction, { Variant } from './MiniAuction'
 
 const Row = memo(({ className, ...props }: JSX.IntrinsicElements['div']) => (
-  <div className={clsx(className, 'grid w-fit grid-cols-3 gap-4')} {...props} />
+  <div className={clsx(className, 'flex gap-4')} {...props} />
 ))
 
-const MiniAuctionGrid = () => {
+const MiniAuctionGrid = ({
+  className,
+  style,
+  ...props
+}: JSX.IntrinsicElements['div']) => {
   const { theme } = useTheme()
   const variant: Variant = theme === 'light' ? 'light' : 'dark'
 
   return (
     <div
-      className="grid w-fit gap-4"
-      style={{ transform: 'rotateX(20deg) rotateZ(-20deg) skewX(20deg)' }}
+      className={clsx(className, 'flex flex-col gap-4 checked:shrink-0')}
+      style={{
+        transform: 'rotateX(20deg) rotateZ(-20deg) skewX(20deg)',
+        ...style,
+      }}
+      {...props}
     >
       <Row>
         <MiniAuction variant={variant} className="z-3" />
