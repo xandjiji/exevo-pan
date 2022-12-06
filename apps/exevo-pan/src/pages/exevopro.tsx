@@ -3,7 +3,7 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
-import { MiniAuctionGrid } from 'modules/ExevoProLP'
+import { MiniAuctionGrid, MiniBossGrid } from 'modules/ExevoProLP'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
@@ -70,7 +70,7 @@ export default function Home() {
 
       <Main>
         <main className="inner-container py-20">
-          <section className="relative flex flex-col items-center gap-10">
+          <section className="relative mb-56 flex flex-col items-center gap-10">
             <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
             <h1 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
               Become{' '}
@@ -80,6 +80,10 @@ export default function Home() {
             </h1>
 
             <Button className="w-fit">Start now</Button>
+          </section>
+
+          <section>
+            <MiniBossGrid />
           </section>
         </main>
       </Main>
