@@ -45,14 +45,8 @@ const MiniAuction = ({ variant, className, ...props }: MiniAuctionProps) => (
       </div>
 
       <div className="grid grid-cols-2 gap-2">
-        <div
-          className="border-1 border-separator h-3 border-solid"
-          style={{ borderRadius: 4 }}
-        />
-        <div
-          className="border-1 border-separator h-3 border-solid"
-          style={{ borderRadius: 4 }}
-        />
+        <div className="border-1 border-separator h-3 rounded border-solid" />
+        <div className="border-1 border-separator h-3 rounded border-solid" />
       </div>
 
       <div className="flex justify-center gap-2">
@@ -65,10 +59,7 @@ const MiniAuction = ({ variant, className, ...props }: MiniAuctionProps) => (
       <div className="grid grid-cols-2 gap-2">
         {[1, 2, 3, 4].map((key) => (
           <div key={key} className="flex items-center gap-1">
-            <div
-              className="bg-primary h-3 w-4 shrink-0"
-              style={{ borderRadius: 4 }}
-            />
+            <div className="bg-primary h-3 w-4 shrink-0 rounded" />
             <div className="bg-primary/60 mt-1 h-1 w-full rounded-md" />
           </div>
         ))}
