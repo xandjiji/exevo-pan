@@ -23,17 +23,68 @@ const MiniAuction = ({ variant, className, ...props }: MiniAuctionProps) => (
   <div
     className={clsx(
       className,
-      'child:rounded-xl child:w-full child:h-full child:bg-surface relative h-40 w-40',
+      'child:rounded-xl child:w-full child:h-full child:bg-surface relative h-56 w-40',
     )}
     {...props}
   >
     <div
-      className="z-2 absolute grid place-content-center"
+      className="z-2 absolute flex flex-col gap-3 p-4"
       style={{
         boxShadow: getShadow(variant),
       }}
     >
-      <ExevoPanIcon style={{ height: 60, width: 60 }} />
+      <div className="flex gap-2">
+        <div className="bg-primaryVariant grid h-9 w-9 place-items-center rounded-xl">
+          <ExevoPanIcon style={{ height: 18, width: 18 }} />
+        </div>
+
+        <div className="flex flex-col justify-center gap-2">
+          <div className="bg-primaryHighlight h-1 w-10 rounded-md" />
+          <div className="bg-onSurface/50 h-1 w-16 rounded-md" />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div
+          className="border-1 border-separator h-3 border-solid"
+          style={{ borderRadius: 4 }}
+        />
+        <div
+          className="border-1 border-separator h-3 border-solid"
+          style={{ borderRadius: 4 }}
+        />
+      </div>
+
+      <div className="flex justify-center gap-2">
+        <div className="bg-primaryVariant h-6 w-6 rounded-md" />
+        <div className="bg-primaryVariant h-6 w-6 rounded-md" />
+        <div className="bg-primaryVariant h-6 w-6 rounded-md" />
+        <div className="bg-primaryVariant h-6 w-6 rounded-md" />
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        {[1, 2, 3, 4].map((key) => (
+          <div key={key} className="flex items-center gap-1">
+            <div
+              className="bg-primary h-3 w-4 shrink-0"
+              style={{ borderRadius: 4 }}
+            />
+            <div className="bg-primary/60 mt-1 h-1 w-full rounded-md" />
+          </div>
+        ))}
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div className="bg-onSurface/50 h-0.5 w-12" />
+        <div className="bg-onSurface/50 h-0.5 w-14" />
+        <div className="bg-onSurface/50 h-0.5 w-10" />
+        <div className="bg-onSurface/50 h-0.5 w-10" />
+      </div>
+
+      <div className="flex gap-2">
+        <div className="bg-primaryVariant h-3 w-7 rounded-md" />
+        <div className="bg-primaryVariant h-3 w-7 rounded-md" />
+      </div>
     </div>
     <div
       className="z-1 absolute"

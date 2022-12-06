@@ -25,12 +25,6 @@ const MiniAuctionGrid = () => {
       <Row>
         <MiniAuction variant={variant} className="z-3" />
         <MiniAuction variant={variant} className="z-2" />
-        <MiniAuction variant={variant} className="z-1" />
-      </Row>
-
-      <Row>
-        <MiniAuction variant={variant} className="z-3" />
-        <MiniAuction variant={variant} className="z-2" />
       </Row>
     </div>
   )
