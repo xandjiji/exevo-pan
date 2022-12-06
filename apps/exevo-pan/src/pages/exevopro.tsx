@@ -82,7 +82,11 @@ export default function Home() {
             <Button className="w-fit">Start now</Button>
           </section>
 
-          <section>
+          <section className="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-16">
+            <h2 className="max-w-[240px] text-center">
+              Access to all bosses from the{' '}
+              <strong className="text-rare">Boss Tracker</strong>
+            </h2>
             <MiniBossGrid />
           </section>
         </main>

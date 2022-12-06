@@ -35,7 +35,7 @@ const boss: Record<number, string> = {
 }
 
 const MiniBossGrid = () => (
-  <div className="grid w-fit grid-cols-3 gap-2">
+  <div className="grid w-fit grid-cols-2 gap-2">
     {[1, 2, 3, 4, 5, 6].map((key) => (
       <MiniBoss key={key} highlight={key <= 2} boss={boss[key]} />
     ))}
