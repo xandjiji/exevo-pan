@@ -74,7 +74,9 @@ export default function Home() {
             <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
             <h1 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
               Become{' '}
-              <strong className="text-rare whitespace-nowrap">Exevo Pro</strong>
+              <strong className="from-primaryHighlight to-rare whitespace-nowrap bg-gradient-to-r bg-clip-text text-transparent">
+                Exevo Pro
+              </strong>
             </h1>
 
             <Button className="w-fit">Start now</Button>
