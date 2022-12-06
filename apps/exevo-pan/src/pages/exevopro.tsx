@@ -3,7 +3,7 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
-import { MiniAuctionGrid, MiniBossGrid } from 'modules/ExevoProLP'
+import { MiniAuctionGrid, MiniBossGrid, MiniAuction } from 'modules/ExevoProLP'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
@@ -69,8 +69,8 @@ export default function Home() {
       </Head>
 
       <Main>
-        <main className="inner-container py-20">
-          <section className="relative mb-56 flex flex-col items-center gap-10">
+        <main className="inner-container grid gap-24 py-20">
+          <section className="relative mb-28 flex flex-col items-center gap-10">
             <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
             <h1 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
               Become{' '}
@@ -88,6 +88,15 @@ export default function Home() {
               <strong className="text-rare">Boss Tracker</strong>
             </h2>
             <MiniBossGrid />
+          </section>
+
+          <section className="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-16">
+            <MiniAuction />
+            <h2 className="max-w-[240px] text-center">
+              Find out how many{' '}
+              <strong className="text-rare">Tibia Coins</strong> was invested in
+              any Bazaar character
+            </h2>
           </section>
         </main>
       </Main>
