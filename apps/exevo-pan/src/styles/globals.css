@@ -136,7 +136,7 @@
   --kwaiSurface: 255 247 240;
   --kwaiVariant: 255 198 150;
   --black: 0 0 0;
-  --rare: 255 128 0;
+  --rare: 255 90 128;
 }
 
 html[data-theme='dark'] {
