@@ -91,7 +91,7 @@ export default function Home() {
           <FeatureSection>
             <h2 className="max-w-[240px] text-center">
               Access to all bosses from the{' '}
-              <strong className="text-rare whitespace-nowrap">
+              <strong className="text-rare decoration-rare/30 whitespace-nowrap underline decoration-wavy underline-offset-8">
                 Boss Tracker
               </strong>
             </h2>
@@ -114,7 +114,7 @@ export default function Home() {
           <FeatureSection>
             <h2 className="max-w-[240px] text-center">
               Exclusive{' '}
-              <strong className="text-rare whitespace-nowrap">
+              <strong className="text-rare decoration-rare/30 whitespace-nowrap underline decoration-wavy underline-offset-8">
                 auction filters
               </strong>
             </h2>
