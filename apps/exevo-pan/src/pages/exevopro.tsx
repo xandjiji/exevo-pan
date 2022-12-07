@@ -3,7 +3,12 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
-import { MiniAuctionGrid, MiniBossGrid, MiniAuction } from 'modules/ExevoProLP'
+import {
+  MiniAuctionGrid,
+  FeatureSection,
+  MiniBossGrid,
+  MiniAuction,
+} from 'modules/ExevoProLP'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
@@ -82,22 +87,22 @@ export default function Home() {
             <Button className="w-fit">Start now</Button>
           </section>
 
-          <section className="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-16">
+          <FeatureSection>
             <h2 className="max-w-[240px] text-center">
               Access to all bosses from the{' '}
               <strong className="text-rare">Boss Tracker</strong>
             </h2>
             <MiniBossGrid />
-          </section>
+          </FeatureSection>
 
-          <section className="flex flex-col items-center justify-center gap-8 md:flex-row md:gap-16">
+          <FeatureSection>
             <MiniAuction />
             <h2 className="max-w-[240px] text-center">
               Find out how many{' '}
               <strong className="text-rare">Tibia Coins</strong> was invested in
               any Bazaar character
             </h2>
-          </section>
+          </FeatureSection>
         </main>
       </Main>
     </>
