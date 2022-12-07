@@ -9,6 +9,7 @@ import {
   MiniBossGrid,
   MiniAuction,
   MiniFilters,
+  Strong,
 } from 'modules/ExevoProLP'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -16,7 +17,7 @@ import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
 
-export default function Home() {
+export default function ExevoPro() {
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(translations.homepage.Meta.title)
@@ -91,9 +92,7 @@ export default function Home() {
           <FeatureSection>
             <h2 className="max-w-[240px] text-center">
               Access to all bosses from the{' '}
-              <strong className="text-rare decoration-rare/30 whitespace-nowrap underline decoration-wavy underline-offset-8">
-                Boss Tracker
-              </strong>
+              <Strong highlight>Boss Tracker</Strong>
             </h2>
             <MiniBossGrid />
           </FeatureSection>
@@ -103,20 +102,14 @@ export default function Home() {
               <MiniAuction />
             </div>
             <h2 className="max-w-[240px] text-center">
-              Find out how many{' '}
-              <strong className="text-rare whitespace-nowrap">
-                Tibia Coins
-              </strong>{' '}
-              was invested in any Bazaar character
+              Find out how many <Strong>Tibia Coins</Strong> was invested in any
+              Bazaar character
             </h2>
           </FeatureSection>
 
           <FeatureSection>
             <h2 className="max-w-[240px] text-center">
-              Exclusive{' '}
-              <strong className="text-rare decoration-rare/30 whitespace-nowrap underline decoration-wavy underline-offset-8">
-                auction filters
-              </strong>
+              Exclusive <Strong highlight>auction filters</Strong>
             </h2>
             <MiniFilters />
           </FeatureSection>
