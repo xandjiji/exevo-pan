@@ -99,7 +99,9 @@ export default function Home() {
           </FeatureSection>
 
           <FeatureSection>
-            <MiniAuction />
+            <div className="order-last md:-order-none">
+              <MiniAuction />
+            </div>
             <h2 className="max-w-[240px] text-center">
               Find out how many{' '}
               <strong className="text-rare whitespace-nowrap">
