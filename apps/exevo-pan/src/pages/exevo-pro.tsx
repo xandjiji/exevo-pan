@@ -142,6 +142,8 @@ export default function ExevoPro() {
             </h2>
             <MiniFilters />
           </FeatureSection>
+
+          <p className="text-center text-2xl">...and more in the future! 🔮</p>
         </main>
       </Main>
     </>
