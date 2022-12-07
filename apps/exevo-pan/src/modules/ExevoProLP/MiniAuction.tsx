@@ -39,7 +39,7 @@ const MiniAuction = () => (
       <div className="bg-onSurface/60 w-12 opacity-20" />
       <div className="bg-onSurface/60  w-14 opacity-20" />
       <div className="bg-onSurface/60 w-10 opacity-20" />
-      <div className="bg-rare w-10 animate-pulse" />
+      <div className="bg-rare w-10" />
     </div>
 
     <div className="flex gap-2 opacity-40">
