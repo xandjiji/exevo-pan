@@ -3,12 +3,14 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
+import { Tooltip } from 'components/Organisms'
 import {
   MiniAuctionGrid,
   FeatureSection,
   MiniBossGrid,
   MiniAuction,
   MiniFilters,
+  Tooltip as List,
   Strong,
 } from 'modules/ExevoProLP'
 import { buildUrl, buildPageTitle } from 'utils'
@@ -92,7 +94,21 @@ export default function ExevoPro() {
           <FeatureSection>
             <h2 className="max-w-[240px] text-center">
               Access to all bosses from the{' '}
-              <Strong highlight>Boss Tracker</Strong>
+              <Tooltip
+                offset={[0, 6]}
+                content={
+                  <List.Ul>
+                    <List.Li>The Pale Count</List.Li>
+                    <List.Li>Shlorg</List.Li>
+                    <List.Li>Man in the Cave</List.Li>
+                    <List.Li>Ocyakao</List.Li>
+                    <List.Li>The Welter</List.Li>
+                    <List.Li>Yeti</List.Li>
+                  </List.Ul>
+                }
+              >
+                <Strong highlight>Boss Tracker</Strong>
+              </Tooltip>
             </h2>
             <MiniBossGrid />
           </FeatureSection>
@@ -109,7 +125,20 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h2 className="max-w-[240px] text-center">
-              Exclusive <Strong highlight>auction filters</Strong>
+              Exclusive{' '}
+              <Tooltip
+                offset={[0, 6]}
+                content={
+                  <List.Ul>
+                    <List.Li>Tibia Coins invested</List.Li>
+                    <List.Li>Store mounts and outfits</List.Li>
+                    <List.Li>Rare items</List.Li>
+                    <List.Li>Soul War available</List.Li>
+                  </List.Ul>
+                }
+              >
+                <Strong highlight>auction filters</Strong>
+              </Tooltip>
             </h2>
             <MiniFilters />
           </FeatureSection>
