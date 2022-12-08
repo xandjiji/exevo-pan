@@ -1,12 +1,13 @@
+/* eslint-disable react/require-default-props */
 import Header from './Header'
 import Footer from './Footer'
 
-type MainProps = { children: JSX.Element | JSX.Element[] }
+type MainProps = { clean?: boolean; children: JSX.Element | JSX.Element[] }
 
-export default ({ children }: MainProps) => (
+export default ({ clean = false, children }: MainProps) => (
   <div className="flex min-h-screen flex-col">
-    <Header />
+    <Header clean={clean} />
     {children}
-    <Footer />
+    <Footer variant={clean ? 'surface' : 'primary'} />
   </div>
 )

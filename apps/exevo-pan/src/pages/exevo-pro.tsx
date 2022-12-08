@@ -80,8 +80,8 @@ export default function ExevoPro() {
         />
       </Head>
 
-      <Main>
-        <main className="inner-container grid gap-24 py-20">
+      <Main clean>
+        <main className="inner-container grid gap-24 overflow-x-hidden py-20">
           <section className="relative mb-28 flex flex-col items-center gap-10">
             <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
             <h1 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
