@@ -157,7 +157,7 @@ export default function ExevoPro() {
                 <li>No extra fees</li>
               </ul>
 
-              <div className="grid gap-1">
+              <div>
                 <p className="flex flex-nowrap items-center justify-center gap-2 text-xl md:justify-start">
                   Only
                   <Image
