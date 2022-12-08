@@ -12,7 +12,10 @@ import {
   MiniFilters,
   Tooltip as List,
   Strong,
+  Gradient,
 } from 'modules/ExevoProLP'
+import Image from 'next/image'
+import tibiaCoinSrc from 'assets/tibiacoinBig.png'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
@@ -82,10 +85,7 @@ export default function ExevoPro() {
           <section className="relative mb-28 flex flex-col items-center gap-10">
             <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
             <h1 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
-              Become{' '}
-              <strong className="from-primaryHighlight to-rare whitespace-nowrap bg-gradient-to-r bg-clip-text text-transparent">
-                Exevo Pro
-              </strong>
+              Become <Gradient>Exevo Pro</Gradient>
             </h1>
 
             <Button className="w-fit">Start now</Button>
@@ -144,6 +144,44 @@ export default function ExevoPro() {
           </FeatureSection>
 
           <p className="text-center text-2xl">...and more in the future! 🔮</p>
+
+          <section>
+            <h3 className="text-onSurface text-center text-[48px] md:text-[64px]">
+              Upgrade now to <Gradient>Exevo Pro</Gradient>
+            </h3>
+
+            <div className="my-10 grid gap-4 md:my-14 md:flex md:items-center md:justify-center md:gap-40">
+              <ul className="mx-auto grid w-fit list-disc gap-1.5 md:mx-0 md:ml-8">
+                <li>No subscriptions</li>
+                <li>No credit card</li>
+                <li>No extra fees</li>
+              </ul>
+
+              <div className="grid gap-1">
+                <p className="flex flex-nowrap items-center justify-center gap-2 text-xl md:justify-start">
+                  Only
+                  <Image
+                    src={tibiaCoinSrc}
+                    alt="Tibia Coin"
+                    unoptimized
+                    width={24}
+                    height={24}
+                    className="select-none"
+                  />
+                  <strong className="whitespace-nowrap text-[32px]">
+                    250 TC
+                  </strong>
+                </p>
+
+                <p className="text-center text-xl">
+                  Pay once, yours{' '}
+                  <strong className="text-[32px]">forever 🙌</strong>
+                </p>
+              </div>
+            </div>
+
+            <Button className="mx-auto mt-8 block w-fit">Upgrade now</Button>
+          </section>
         </main>
       </Main>
     </>
