@@ -13,7 +13,7 @@ const MiniChip = ({
     className={clsx(
       className,
       'h-2 rounded-md',
-      highlight ? 'bg-rare' : 'bg-primaryVariant opacity-60',
+      highlight ? 'bg-rare' : 'bg-primary opacity-25',
       !className && 'w-7',
     )}
     {...props}
@@ -47,7 +47,7 @@ const MiniSelect = ({ highlight = false }) => (
 
 const MiniFilters = () => (
   <div className="child:w-full w-36 rounded shadow-md">
-    <div className="bg-primary h-5 rounded-t opacity-50" />
+    <div className="bg-primaryVariant h-5 rounded-t opacity-50" />
     <div className="bg-surface grid gap-4 p-3">
       <MiniSelect />
       <MiniSelect highlight />
@@ -62,7 +62,7 @@ const MiniFilters = () => (
         <MiniChip className="w-9" />
       </div>
     </div>
-    <div className="bg-primary h-5 rounded-b opacity-50" />
+    <div className="bg-primaryVariant h-5 rounded-b opacity-50" />
   </div>
 )
 

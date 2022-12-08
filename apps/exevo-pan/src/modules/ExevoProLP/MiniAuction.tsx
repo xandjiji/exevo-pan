@@ -2,7 +2,7 @@ import { memo } from 'react'
 import { ExevoPanIcon } from 'assets/svgs'
 
 const MiniAuction = () => (
-  <div className="bg-surface flex h-56 w-40 flex-col gap-3 rounded-xl p-4 shadow-md">
+  <div className="bg-surface flex h-56 w-40 flex-col gap-3 rounded-md p-4 shadow-md">
     <div className="flex gap-2">
       <div className="bg-primaryVariant grid h-9 w-9 place-items-center rounded-xl opacity-40">
         <ExevoPanIcon style={{ height: 18, width: 18 }} />
