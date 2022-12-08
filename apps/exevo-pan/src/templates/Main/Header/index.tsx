@@ -125,7 +125,7 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
             />
           </ClientComponent>
           {!clean && <CtaButton />}
-          <AccountButton />
+          <AccountButton variant={clean ? 'onSurface' : 'onPrimary'} />
           {!clean && <TibiaBlackjack.FloatingButton className="md:hidden" />}
         </div>
       </header>

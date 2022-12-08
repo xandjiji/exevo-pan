@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { useRef } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
@@ -10,7 +11,13 @@ import { addLocalePrefix } from 'utils'
 import { routes } from 'Constants'
 import useHeaderPopup from './useHeaderPopup'
 
-const AccountButton = (): JSX.Element => {
+type AccountButtonProps = {
+  variant?: 'onPrimary' | 'onSurface'
+}
+
+const AccountButton = ({
+  variant = 'onPrimary',
+}: AccountButtonProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
@@ -30,9 +37,19 @@ const AccountButton = (): JSX.Element => {
           unauthenticated: (
             <NextLink
               href={routes.LOGIN}
-              className="text-onPrimary animate-fadeIn grid place-items-center gap-0.5 whitespace-nowrap text-xs"
+              className={clsx(
+                'animate-fadeIn grid place-items-center gap-0.5 whitespace-nowrap text-xs',
+                variant === 'onPrimary' && 'text-onPrimary',
+                variant === 'onSurface' && 'text-onSurface',
+              )}
             >
-              <LoginIcon className="!fill-onPrimary h-4 w-4" />
+              <LoginIcon
+                className={clsx(
+                  'h-4 w-4',
+                  variant === 'onPrimary' && '!fill-onPrimary',
+                  variant === 'onSurface' && '!fill-onSurface',
+                )}
+              />
               Login
             </NextLink>
           ),
