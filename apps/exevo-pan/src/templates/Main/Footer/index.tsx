@@ -4,6 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { UnlicenseIcon, GithubIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
+import { FooterProps } from './types'
 
 const listItems = [
   { href: routes.HOME, content: 'charBazaar' },
@@ -18,29 +19,43 @@ const listItems = [
 const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
   <a
     rel={clsx('noopener noreferrer external', rel)}
-    className={clsx('text-onPrimary text-xs tracking-wider', className)}
+    className={clsx('text-xs tracking-wider', className)}
     target="_blank"
     {...props}
   />
 )
 
-const Footer = () => {
+const Footer = ({ variant = 'primary' }: FooterProps) => {
   const {
     translations: { common },
   } = useTranslations()
 
   return (
-    <footer className="bg-primary text-onPrimary inner-container z-footer relative py-6 text-xs tracking-wider transition-colors">
+    <footer
+      className={clsx(
+        'inner-container z-footer relative py-6 text-xs tracking-wider transition-colors',
+        variant === 'primary' && 'bg-primary text-onPrimary',
+        variant === 'surface' && 'bg-surface text-onSurface',
+      )}
+    >
       <nav className="inner-container">
         <ul className="flex flex-wrap items-center justify-center gap-3">
           {listItems.map(({ href, content }) => (
             <li
               key={href}
-              className="text-s text-onPrimary/50 after:ml-3 after:content-['|'] last:after:content-['']"
+              className={clsx(
+                "text-s after:ml-3 after:content-['|'] last:after:content-['']",
+                variant === 'primary' && 'text-onPrimary/50',
+                variant === 'surface' && 'text-onSurface/50',
+              )}
             >
               <NextLink
                 href={href}
-                className="text-s text-onPrimary cursor-pointer tracking-wider md:text-base"
+                className={clsx(
+                  'text-s cursor-pointer tracking-wider md:text-base',
+                  variant === 'primary' && 'text-onPrimary',
+                  variant === 'surface' && 'text-onSurface',
+                )}
               >
                 {common.Header.nav[content]}
               </NextLink>
@@ -52,10 +67,22 @@ const Footer = () => {
       <div className="mt-5 flex items-center justify-center">
         <UnlicenseIcon
           aria-label="Unlicensed"
-          className="fill-onPrimary mx-1 h-3 w-3"
+          className={clsx(
+            'mx-1 h-3 w-3',
+            variant === 'primary' && 'fill-onPrimary',
+            variant === 'surface' && 'fill-onSurface',
+          )}
         />
         {new Date().getFullYear()} {common.FooterTitle}
-        <Link className="ml-1" href={links.GITHUB_PROFILE} rel="author">
+        <Link
+          className={clsx(
+            'ml-1',
+            variant === 'primary' && 'text-onPrimary',
+            variant === 'surface' && 'text-onSurface',
+          )}
+          href={links.GITHUB_PROFILE}
+          rel="author"
+        >
           xandjiji
         </Link>
         .
@@ -64,7 +91,13 @@ const Footer = () => {
           href={links.GITHUB_REPOSITORY}
           title={common.RepoLinkText}
         >
-          <GithubIcon className="fill-onPrimary clickable rounded-full" />
+          <GithubIcon
+            className={clsx(
+              'clickable rounded-full',
+              variant === 'primary' && 'fill-onPrimary',
+              variant === 'surface' && 'fill-onSurface',
+            )}
+          />
         </Link>
       </div>
     </footer>
