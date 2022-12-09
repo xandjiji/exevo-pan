@@ -18,4 +18,5 @@ export const routes = {
   LIBERTABRA_WAR_SEARCH: '/libertabra-war/search',
   ABOUT: '/blog/about',
   BLOG: '/blog',
+  EXEVOPRO: '/exevo-pro',
 }
