@@ -55,7 +55,7 @@ const MiniSelect = ({ highlight = false }) => (
 const MiniFilters = () => (
   <div className="child:w-full bg-surface w-[120px] rounded shadow-lg">
     <div className="bg-separator h-5 rounded-t-sm opacity-30" />
-    <div className="grid gap-4 p-3">
+    <div className="grid gap-3 p-3">
       <MiniSelect />
       <MiniSelect highlight />
 
