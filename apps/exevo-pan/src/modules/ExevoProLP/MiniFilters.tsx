@@ -1,6 +1,7 @@
 /* eslint-disable react/require-default-props */
 import { memo } from 'react'
 import clsx from 'clsx'
+import { RareFrame } from 'components/Atoms'
 
 type MiniChipProps = { highlight?: boolean } & JSX.IntrinsicElements['div']
 
@@ -13,11 +14,13 @@ const MiniChip = ({
     className={clsx(
       className,
       'h-2 rounded-md',
-      highlight ? 'bg-rare' : 'bg-primary opacity-25',
+      highlight ? 'relative' : 'bg-separator opacity-30',
       !className && 'w-7',
     )}
     {...props}
-  />
+  >
+    {highlight && <RareFrame />}
+  </div>
 )
 
 const MiniSelect = ({ highlight = false }) => (
@@ -25,16 +28,20 @@ const MiniSelect = ({ highlight = false }) => (
     <div className="grid gap-1">
       <div
         className={clsx(
-          'h-1 w-7 rounded',
-          highlight ? 'bg-rare' : 'bg-separator opacity-60',
+          'h-1 w-5 rounded',
+          highlight ? 'bg-rare' : 'bg-separator opacity-30',
         )}
       />
       <div
         className={clsx(
-          'border-1 h-4 w-16 rounded border-solid',
-          highlight ? 'border-rare' : 'border-separator opacity-60',
+          'h-3.5 w-12 rounded',
+          highlight
+            ? 'relative'
+            : 'border-1 border-separator border-solid opacity-30',
         )}
-      />
+      >
+        {highlight && <RareFrame />}
+      </div>
     </div>
 
     {!highlight && (
@@ -46,9 +53,9 @@ const MiniSelect = ({ highlight = false }) => (
 )
 
 const MiniFilters = () => (
-  <div className="child:w-full w-36 rounded shadow-md">
-    <div className="bg-primaryVariant h-5 rounded-t opacity-50" />
-    <div className="bg-surface grid gap-4 p-3">
+  <div className="child:w-full bg-surface w-[120px] rounded shadow-lg">
+    <div className="bg-separator h-5 rounded-t-sm opacity-30" />
+    <div className="grid gap-4 p-3">
       <MiniSelect />
       <MiniSelect highlight />
 
@@ -62,7 +69,7 @@ const MiniFilters = () => (
         <MiniChip className="w-9" />
       </div>
     </div>
-    <div className="bg-primaryVariant h-5 rounded-b opacity-50" />
+    <div className="bg-separator h-5 rounded-b-sm opacity-30" />
   </div>
 )
 

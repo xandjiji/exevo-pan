@@ -148,7 +148,15 @@ export default function ExevoPro() {
                 <Strong highlight>auction filters</Strong>
               </Tooltip>
             </h2>
-            <MiniFilters />
+            <div className="flex items-center">
+              <MiniFilters />
+              <div className="-z-1 child:!shadow-sm relative -left-6 grid grid-cols-2 gap-2">
+                <MiniAuction />
+                <MiniAuction />
+                <MiniAuction />
+                <MiniAuction />
+              </div>
+            </div>
           </FeatureSection>
 
           <p className="text-center text-2xl">...and more in the future! 🔮</p>
