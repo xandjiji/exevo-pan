@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import NextLink from 'next/link'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -88,7 +89,9 @@ export default function ExevoPro() {
               Become <Gradient>Exevo Pro</Gradient>
             </h1>
 
-            <Button className="w-fit">Start now</Button>
+            <NextLink href={routes.DASHBOARD}>
+              <Button className="w-fit">Start now</Button>
+            </NextLink>
           </section>
 
           <FeatureSection>
@@ -166,7 +169,7 @@ export default function ExevoPro() {
               Upgrade now to <Gradient>Exevo Pro</Gradient>
             </h3>
 
-            <div className="my-10 grid gap-4 md:my-14 md:flex md:items-center md:justify-center md:gap-40">
+            <div className="my-10 grid gap-8 md:my-14 md:flex md:items-center md:justify-center md:gap-40">
               <ul className="mx-auto grid w-fit list-disc gap-1.5 md:mx-0 md:ml-8">
                 <li>No subscriptions</li>
                 <li>No credit card</li>
@@ -196,7 +199,9 @@ export default function ExevoPro() {
               </div>
             </div>
 
-            <Button className="mx-auto mt-8 block w-fit">Upgrade now</Button>
+            <NextLink href={routes.DASHBOARD}>
+              <Button className="mx-auto mt-8 block w-fit">Upgrade now</Button>
+            </NextLink>
           </section>
         </main>
       </Main>
