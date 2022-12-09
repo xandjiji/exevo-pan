@@ -114,8 +114,16 @@ export default function ExevoPro() {
           </FeatureSection>
 
           <FeatureSection>
-            <div className="order-last md:-order-none">
+            <div className="order-last grid grid-cols-3 gap-2 md:-order-none">
+              <MiniAuction highlight />
               <MiniAuction />
+              <MiniAuction />
+              <MiniAuction />
+              <MiniAuction />
+              <MiniAuction highlight />
+              <MiniAuction highlight />
+              <MiniAuction />
+              <MiniAuction highlight />
             </div>
             <h2 className="max-w-[240px] text-center">
               Find out how many <Strong>Tibia Coins</Strong> was invested in any

@@ -1,50 +1,42 @@
 import { memo } from 'react'
+import clsx from 'clsx'
 import { ExevoPanIcon } from 'assets/svgs'
+import { RareFrame } from 'components/Atoms'
 
-const MiniAuction = () => (
-  <div className="bg-surface flex h-56 w-40 flex-col gap-3 rounded-md p-4 shadow-md">
-    <div className="flex gap-2">
-      <div className="bg-primaryVariant grid h-9 w-9 place-items-center rounded-xl opacity-40">
-        <ExevoPanIcon style={{ height: 18, width: 18 }} />
+const MiniAuction = ({ highlight = false }) => (
+  <div className="bg-surface relative flex h-16 w-12 flex-col gap-2 rounded p-1.5 shadow-md">
+    {highlight && <RareFrame />}
+    <div className="flex gap-1 opacity-30">
+      <div className="bg-separator grid h-3 w-3 place-items-center rounded">
+        {highlight && <ExevoPanIcon style={{ width: 6, height: 6 }} />}
       </div>
 
-      <div className="flex flex-col justify-center gap-2 opacity-30">
-        <div className="bg-primaryHighlight h-1 w-10 rounded-md" />
-        <div className="bg-onSurface/50 h-1 w-16 rounded-md" />
+      <div className="flex flex-col justify-center gap-0.5">
+        <div className="bg-separator h-0.5 w-3 rounded-md" />
+        <div className="bg-separator h-0.5 w-4 rounded-md" />
       </div>
     </div>
 
-    <div className="grid grid-cols-2 gap-2 opacity-50">
-      <div className="border-1 border-separator h-3 rounded border-solid" />
-      <div className="border-1 border-separator h-3 rounded border-solid" />
-    </div>
+    <div className="child:h-1 child:rounded-sm child:opacity-30 flex flex-wrap gap-0.5">
+      <div className="bg-separator w-4" />
+      <div className="bg-separator w-4" />
 
-    <div className="flex justify-center gap-2 opacity-40">
-      <div className="bg-primaryVariant h-6 w-6 rounded-md" />
-      <div className="bg-primaryVariant h-6 w-6 rounded-md" />
-      <div className="bg-primaryVariant h-6 w-6 rounded-md" />
-      <div className="bg-primaryVariant h-6 w-6 rounded-md" />
-    </div>
+      <div className="bg-separator w-5" />
+      <div className="bg-separator w-3" />
 
-    <div className="grid grid-cols-2 gap-2 opacity-20">
-      {[1, 2, 3, 4].map((key) => (
-        <div key={key} className="flex items-center gap-1">
-          <div className="bg-primary h-3 w-4 shrink-0 rounded" />
-          <div className="bg-primary/60 mt-1 h-1 w-full rounded-md" />
-        </div>
-      ))}
-    </div>
+      <div className="bg-separator w-4" />
+      <div className="bg-separator w-4" />
 
-    <div className="child:h-1 child:rounded grid grid-cols-2 gap-2">
-      <div className="bg-onSurface/60 w-12 opacity-20" />
-      <div className="bg-onSurface/60  w-14 opacity-20" />
-      <div className="bg-onSurface/60 w-10 opacity-20" />
-      <div className="bg-rare w-10" />
-    </div>
+      <div className="bg-separator w-3" />
+      <div
+        className={clsx(
+          'w-5',
+          highlight ? 'bg-rare !opacity-100' : 'bg-separator',
+        )}
+      />
 
-    <div className="flex gap-2 opacity-40">
-      <div className="bg-primaryVariant h-3 w-7 rounded-md" />
-      <div className="bg-primaryVariant h-3 w-7 rounded-md" />
+      <div className="bg-separator w-5" />
+      <div className="bg-separator w-3" />
     </div>
   </div>
 )
