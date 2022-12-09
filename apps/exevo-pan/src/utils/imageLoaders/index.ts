@@ -11,7 +11,7 @@ const path = isDev
   ? 'http://localhost:3000'
   : (process.env.NEXT_PUBLIC_VERCEL_URL as string)
 
-export const loadRawSrc = (src: string) => `${path}${src}`
+export const loadRawSrc = (src: string) => `https://www.${path}${src}`
 
 export const loadBossSrc = (bossName: string) =>
   `/sprites/bosses/${encodeURI(bossName)}.gif`
