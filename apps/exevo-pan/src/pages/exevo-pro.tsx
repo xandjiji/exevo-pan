@@ -2,6 +2,7 @@ import Head from 'next/head'
 import NextLink from 'next/link'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
@@ -27,6 +28,8 @@ export default function ExevoPro() {
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(translations.exevopro.Meta.title)
+  const { locale } = useRouter()
+  const previewSrc = `/pro-${locale}.png`
 
   return (
     <>
@@ -35,6 +38,9 @@ export default function ExevoPro() {
         <meta name="title" content={pageTitle} />
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <meta
           name="description"
