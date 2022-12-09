@@ -25,7 +25,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
       <Head>
         <meta name="viewport" content="width=device-width" />
         <meta property="og:site_name" content="Exevo Pan" />
-        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta
           key="preview-1"
           property="og:image"

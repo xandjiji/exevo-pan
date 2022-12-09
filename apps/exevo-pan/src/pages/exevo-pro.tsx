@@ -18,7 +18,7 @@ import {
 } from 'modules/ExevoProLP'
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoinBig.png'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, exevopro } from 'locales'
 
@@ -29,7 +29,7 @@ export default function ExevoPro() {
 
   const pageTitle = buildPageTitle(translations.exevopro.Meta.title)
   const { locale } = useRouter()
-  const previewSrc = `/pro-${locale}.png`
+  const previewSrc = loadRawSrc(`/pro-${locale}.png`)
 
   return (
     <>
