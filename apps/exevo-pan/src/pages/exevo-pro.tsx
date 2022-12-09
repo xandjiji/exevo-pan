@@ -2,7 +2,7 @@ import Head from 'next/head'
 import NextLink from 'next/link'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import {
@@ -19,14 +19,14 @@ import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoinBig.png'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common, homepage } from 'locales'
+import { common, exevopro } from 'locales'
 
-const pageUrl = buildUrl(routes.HOME)
+const pageUrl = buildUrl(routes.EXEVOPRO)
 
 export default function ExevoPro() {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(translations.homepage.Meta.title)
+  const pageTitle = buildPageTitle(translations.exevopro.Meta.title)
 
   return (
     <>
@@ -38,15 +38,15 @@ export default function ExevoPro() {
 
         <meta
           name="description"
-          content={translations.homepage.Meta.description}
+          content={translations.exevopro.Meta.description}
         />
         <meta
           property="twitter:description"
-          content={translations.homepage.Meta.description}
+          content={translations.exevopro.Meta.description}
         />
         <meta
           property="og:description"
-          content={translations.homepage.Meta.description}
+          content={translations.exevopro.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -58,17 +58,17 @@ export default function ExevoPro() {
         <link
           rel="alternate"
           hrefLang="pt"
-          href={buildUrl(routes.HOME, 'pt')}
+          href={buildUrl(routes.EXEVOPRO, 'pt')}
         />
         <link
           rel="alternate"
           hrefLang="es"
-          href={buildUrl(routes.HOME, 'es')}
+          href={buildUrl(routes.EXEVOPRO, 'es')}
         />
         <link
           rel="alternate"
           hrefLang="pl"
-          href={buildUrl(routes.HOME, 'pl')}
+          href={buildUrl(routes.EXEVOPRO, 'pl')}
         />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
@@ -85,34 +85,41 @@ export default function ExevoPro() {
         <main className="inner-container grid gap-24 overflow-x-hidden py-20">
           <section className="relative mb-28 flex flex-col items-center gap-10">
             <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
-            <h1 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
-              Become <Gradient>Exevo Pro</Gradient>
-            </h1>
+            <h2 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
+              {templateMessage(translations.exevopro.heading, {
+                exevopro: <Gradient>Exevo Pro</Gradient>,
+              })}
+            </h2>
 
             <NextLink href={routes.DASHBOARD}>
-              <Button className="w-fit">Start now</Button>
+              <Button className="w-fit">{translations.exevopro.heroCTA}</Button>
             </NextLink>
           </section>
 
           <FeatureSection>
-            <h2 className="max-w-[240px] text-center">
-              Access to all bosses from the{' '}
-              <Tooltip
-                offset={[0, 6]}
-                content={
-                  <List.Ul>
-                    <List.Li>The Pale Count</List.Li>
-                    <List.Li>Shlorg</List.Li>
-                    <List.Li>Man in the Cave</List.Li>
-                    <List.Li>Ocyakao</List.Li>
-                    <List.Li>The Welter</List.Li>
-                    <List.Li>Yeti</List.Li>
-                  </List.Ul>
-                }
-              >
-                <Strong highlight>Boss Tracker</Strong>
-              </Tooltip>
-            </h2>
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {templateMessage(translations.exevopro.bossTracker.pitch, {
+                strong: (
+                  <Tooltip
+                    offset={[0, 6]}
+                    content={
+                      <List.Ul>
+                        <List.Li>The Pale Count</List.Li>
+                        <List.Li>Shlorg</List.Li>
+                        <List.Li>Man in the Cave</List.Li>
+                        <List.Li>Ocyakao</List.Li>
+                        <List.Li>The Welter</List.Li>
+                        <List.Li>Yeti</List.Li>
+                      </List.Ul>
+                    }
+                  >
+                    <Strong highlight>
+                      {translations.exevopro.bossTracker.strong}
+                    </Strong>
+                  </Tooltip>
+                ),
+              })}
+            </h3>
             <MiniBossGrid />
           </FeatureSection>
 
@@ -128,29 +135,43 @@ export default function ExevoPro() {
               <MiniAuction />
               <MiniAuction highlight />
             </div>
-            <h2 className="max-w-[240px] text-center">
-              Find out how many <Strong>Tibia Coins</Strong> was invested in any
-              Bazaar character
-            </h2>
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {templateMessage(translations.exevopro.tcInvested.pitch, {
+                strong: <Strong>Tibia Coins</Strong>,
+              })}
+            </h3>
           </FeatureSection>
 
           <FeatureSection>
-            <h2 className="max-w-[240px] text-center">
-              Exclusive{' '}
-              <Tooltip
-                offset={[0, 6]}
-                content={
-                  <List.Ul>
-                    <List.Li>Tibia Coins invested</List.Li>
-                    <List.Li>Store mounts and outfits</List.Li>
-                    <List.Li>Rare items</List.Li>
-                    <List.Li>Soul War available</List.Li>
-                  </List.Ul>
-                }
-              >
-                <Strong highlight>auction filters</Strong>
-              </Tooltip>
-            </h2>
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {templateMessage(translations.exevopro.exclusiveFilters.pitch, {
+                strong: (
+                  <Tooltip
+                    offset={[0, 6]}
+                    content={
+                      <List.Ul>
+                        <List.Li>
+                          {translations.exevopro.exclusiveFilters.tcInvested}
+                        </List.Li>
+                        <List.Li>
+                          {translations.exevopro.exclusiveFilters.storeContent}
+                        </List.Li>
+                        <List.Li>
+                          {translations.exevopro.exclusiveFilters.rareItems}
+                        </List.Li>
+                        <List.Li>
+                          {translations.exevopro.exclusiveFilters.soulwar}
+                        </List.Li>
+                      </List.Ul>
+                    }
+                  >
+                    <Strong highlight>
+                      {translations.exevopro.exclusiveFilters.strong}
+                    </Strong>
+                  </Tooltip>
+                ),
+              })}
+            </h3>
             <div className="flex items-center">
               <MiniFilters />
               <div className="-z-1 child:!shadow-sm relative -left-6 grid grid-cols-2 gap-2">
@@ -162,23 +183,27 @@ export default function ExevoPro() {
             </div>
           </FeatureSection>
 
-          <p className="text-center text-2xl">...and more in the future! 🔮</p>
+          <p className="text-center text-2xl">
+            {translations.exevopro.andMore}
+          </p>
 
           <section>
-            <h3 className="text-onSurface text-center text-[48px] md:text-[64px]">
-              Upgrade now to <Gradient>Exevo Pro</Gradient>
-            </h3>
+            <h2 className="text-onSurface text-center text-[48px] md:text-[64px]">
+              {templateMessage(translations.exevopro.footer, {
+                exevopro: <Gradient>Exevo Pro</Gradient>,
+              })}
+            </h2>
 
             <div className="my-10 grid gap-8 md:my-14 md:flex md:items-center md:justify-center md:gap-40">
               <ul className="mx-auto grid w-fit list-disc gap-1.5 md:mx-0 md:ml-8">
-                <li>No subscriptions</li>
-                <li>No credit card</li>
-                <li>No extra fees</li>
+                <li>{translations.exevopro.no.subscriptions}</li>
+                <li>{translations.exevopro.no.creditCard}</li>
+                <li>{translations.exevopro.no.extraFees}</li>
               </ul>
 
               <div>
                 <p className="flex flex-nowrap items-center justify-center gap-2 text-xl md:justify-start">
-                  Only
+                  {translations.exevopro.only}
                   <Image
                     src={tibiaCoinSrc}
                     alt="Tibia Coin"
@@ -193,14 +218,21 @@ export default function ExevoPro() {
                 </p>
 
                 <p className="text-center text-xl">
-                  Pay once, yours{' '}
-                  <strong className="text-[32px]">forever 🙌</strong>
+                  {templateMessage(translations.exevopro.payOnce, {
+                    forever: (
+                      <strong className="whitespace-nowrap text-[32px]">
+                        {translations.exevopro.forever}
+                      </strong>
+                    ),
+                  })}
                 </p>
               </div>
             </div>
 
             <NextLink href={routes.DASHBOARD}>
-              <Button className="mx-auto mt-8 block w-fit">Upgrade now</Button>
+              <Button className="mx-auto mt-8 block w-fit">
+                {translations.exevopro.footerCTA}
+              </Button>
             </NextLink>
           </section>
         </main>
@@ -213,7 +245,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
       common: common[locale as RegisteredLocale],
-      homepage: homepage[locale as RegisteredLocale],
+      exevopro: exevopro[locale as RegisteredLocale],
     },
   },
 })

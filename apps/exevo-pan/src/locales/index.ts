@@ -53,6 +53,11 @@ import dashboardES from './es/dashboard'
 import dashboardPT from './pt/dashboard'
 import dashboardPL from './pl/dashboard'
 
+import exevoproEN from './en/exevopro'
+import exevoproES from './es/exevopro'
+import exevoproPT from './pt/exevopro'
+import exevoproPL from './pl/exevopro'
+
 export const error = {
   en: errorEN,
   es: errorES,
@@ -118,4 +123,10 @@ export const dashboard = {
   es: dashboardES,
   pt: dashboardPT,
   pl: dashboardPL,
+}
+export const exevopro = {
+  en: exevoproEN,
+  es: exevoproES,
+  pt: exevoproPT,
+  pl: exevoproPL,
 }

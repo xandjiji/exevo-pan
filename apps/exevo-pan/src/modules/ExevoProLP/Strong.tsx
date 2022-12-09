@@ -10,7 +10,7 @@ const Strong = ({ highlight = false, className, ...props }: StrongProps) => (
       className,
       'text-rare whitespace-nowrap',
       highlight &&
-        'decoration-rare/30 underline decoration-wavy underline-offset-8',
+        'decoration-rare/30 underline decoration-wavy underline-offset-4',
     )}
     {...props}
   />
