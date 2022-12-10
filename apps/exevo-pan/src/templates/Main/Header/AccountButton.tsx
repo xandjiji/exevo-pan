@@ -1,12 +1,12 @@
 /* eslint-disable react/require-default-props */
-import { useRef } from 'react'
+import { useState, useRef } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
-import { LoginIcon, DashboardIcon, LogoutIcon } from 'assets/svgs'
+import { LoginIcon, DashboardIcon, LogoutIcon, PersonIcon } from 'assets/svgs'
 import { addLocalePrefix } from 'utils'
 import { routes } from 'Constants'
 import useHeaderPopup from './useHeaderPopup'
@@ -21,6 +21,8 @@ const AccountButton = ({
   const {
     translations: { common },
   } = useTranslations()
+
+  const [fallbackAvatar, setFallbackAvatar] = useState(false)
 
   const { status, data } = useSession()
   const ref = useRef<HTMLDivElement>(null)
@@ -107,19 +109,35 @@ const AccountButton = ({
                 aria-label={common.Header.openUserMenu}
                 {...buttonBinders}
               >
-                <Image
-                  src={data.user.picture}
-                  alt={data.user.name}
-                  width={32}
-                  height={32}
-                  unoptimized
-                  className={clsx(
-                    'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
-                    data.user.proStatus
-                      ? 'border-rare'
-                      : 'border-primaryVariant',
-                  )}
-                />
+                {fallbackAvatar ? (
+                  <PersonIcon
+                    width={32}
+                    height={32}
+                    className={clsx(
+                      'clickable animate-fadeIn rounded-full border-2 border-solid shadow transition-colors',
+                      variant === 'onSurface' && 'fill-onSurface',
+                      variant === 'onPrimary' && 'fill-onPrimary',
+                      data.user.proStatus
+                        ? 'border-rare'
+                        : 'border-primaryVariant',
+                    )}
+                  />
+                ) : (
+                  <Image
+                    src={data.user.picture}
+                    alt={data.user.name}
+                    width={32}
+                    height={32}
+                    unoptimized
+                    onError={() => setFallbackAvatar(true)}
+                    className={clsx(
+                      'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
+                      data.user.proStatus
+                        ? 'border-rare'
+                        : 'border-primaryVariant',
+                    )}
+                  />
+                )}
               </button>
             </>
           ) : null,
