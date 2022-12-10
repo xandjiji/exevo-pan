@@ -18,7 +18,10 @@ const Heading = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
 const TooltipUl = ({
   ...props
 }: Omit<JSX.IntrinsicElements['ul'], 'className'>) => (
-  <ul className="ml-4 grid list-disc justify-items-start gap-1" {...props} />
+  <ul
+    className="marker:text-rare ml-4 grid list-disc justify-items-start gap-1"
+    {...props}
+  />
 )
 
 export const Li = ({
@@ -67,7 +70,6 @@ const Pitch = ({ proStatus }: PitchProps) => {
                   offset={[0, 6]}
                   content={
                     <div className="grid place-items-start justify-items-start gap-3">
-                      <p>{dashboard.Pitch.filtersTooltip.filterBy}</p>
                       <TooltipUl>
                         <li>{dashboard.Pitch.filtersTooltip.tc}</li>
                         <li>{dashboard.Pitch.filtersTooltip.store}</li>
