@@ -30,6 +30,7 @@ export default {
       advertise: 'Anunciar',
       blog: 'Blog',
       bossTracker: 'Boss Tracker',
+      exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Habilitar tema noturno',
     AccountButton: {

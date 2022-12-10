@@ -4,14 +4,15 @@ import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { UnlicenseIcon, GithubIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
-import { FooterProps } from './types'
+import { FooterProps, RouteItem } from './types'
 
-const listItems = [
+const listItems: RouteItem[] = [
   { href: routes.HOME, content: 'charBazaar' },
   { href: routes.BOSS_TRACKER, content: 'bossTracker' },
   { href: routes.CALCULATORS, content: 'calculators' },
   { href: routes.STATISTICS, content: 'statistics' },
   { href: routes.ADVERTISE, content: 'advertise' },
+  { href: routes.EXEVOPRO, content: 'exevopro', gradient: true },
   { href: routes.BLOG, content: 'blog' },
   { href: routes.ABOUT, content: 'about' },
 ]
@@ -40,7 +41,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
     >
       <nav className="inner-container">
         <ul className="flex flex-wrap items-center justify-center gap-3">
-          {listItems.map(({ href, content }) => (
+          {listItems.map(({ href, content, gradient }) => (
             <li
               key={href}
               className={clsx(
@@ -53,6 +54,9 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                 href={href}
                 className={clsx(
                   'text-s cursor-pointer tracking-wider md:text-base',
+                  gradient &&
+                    variant === 'surface' &&
+                    'from-primaryHighlight to-rare whitespace-nowrap bg-gradient-to-r bg-clip-text font-bold text-transparent',
                   variant === 'primary' && 'text-onPrimary',
                   variant === 'surface' && 'text-onSurface',
                 )}

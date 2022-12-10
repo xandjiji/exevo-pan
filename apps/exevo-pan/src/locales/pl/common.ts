@@ -30,6 +30,7 @@ export default {
       advertise: 'Zareklamuj się',
       blog: 'Blog',
       bossTracker: 'Boss Tracker',
+      exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Przełącz na tryb ciemny',
     AccountButton: {
