@@ -7,6 +7,8 @@ export default {
   Header: {
     h1: {
       home: 'Kupuj i sprzedawaj postacie na oficjalnym Tibijskim Bazarze Postaci!',
+      /* @ ToDo: i18n */
+      calculators: 'All sorts of tools and calculators for Tibia',
       statistics: 'Znajduj statystyki postaci z Tibijskiego Bazaru Postaci!',
       highscores:
         'Najwyższe levele, najwyższe skille oraz najwyższe bidy na Tibijskim Bazarze Postaci!',

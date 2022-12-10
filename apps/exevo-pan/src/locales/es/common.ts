@@ -7,6 +7,8 @@ export default {
   Header: {
     h1: {
       home: '¡Compra y vende caracteres de Tibia en el Char Bazaar oficial!',
+      /* @ ToDo: i18n */
+      calculators: 'All sorts of tools and calculators for Tibia',
       statistics:
         '¡Descubre estadísticas sobre personajes vendidos en el Char Bazaar!',
       highscores:

@@ -7,6 +7,7 @@ export default {
   Header: {
     h1: {
       home: 'Buy and sell Tibia characters on the official Char Bazaar!',
+      calculators: 'All sorts of tools and calculators for Tibia',
       statistics: 'Find statistics for Tibia Char Bazaar characters!',
       highscores:
         'Top levels, highest skills and biggests bids on Tibia Char Bazaar!',
