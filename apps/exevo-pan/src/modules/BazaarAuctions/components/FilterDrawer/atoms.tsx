@@ -65,7 +65,7 @@ export const ExevoProExclusive = () => {
 
   return (
     <NextLink
-      href={routes.DASHBOARD}
+      href={routes.EXEVOPRO}
       className="text-onSurface text-xs font-light tracking-wider"
     >
       {templateMessage(homepage.FilterDrawer.exevoProExclusive, {

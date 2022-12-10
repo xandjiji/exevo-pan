@@ -170,7 +170,7 @@ const CharacterModal = ({
             <S.Section border className="z-3">
               {tcState === 'HIDDEN' ? (
                 <NextLink
-                  href={routes.DASHBOARD}
+                  href={routes.EXEVOPRO}
                   className="text-onSurface text-tsm flex items-center gap-1.5"
                 >
                   <Icons.TibiaCoin />{' '}

@@ -87,7 +87,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
       <p className="text-tsm mt-2">
         {templateMessage(translations.bosses.BossGrid.exclusiveBosses, {
           exevopro: (
-            <NextLink href={routes.DASHBOARD} className="text-rare font-bold">
+            <NextLink href={routes.EXEVOPRO} className="text-rare font-bold">
               Exevo Pro
             </NextLink>
           ),

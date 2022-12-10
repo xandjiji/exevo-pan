@@ -152,7 +152,7 @@ const CharacterCard = ({
                   ),
                   HIDDEN: (
                     <NextLink
-                      href={routes.DASHBOARD}
+                      href={routes.EXEVOPRO}
                       onClick={(e: MouseEvent) => e.stopPropagation()}
                       className="text-onSurface text-tsm mt-auto flex flex-wrap items-center gap-1.5"
                       style={{ height: 'unset' }}
@@ -168,14 +168,11 @@ const CharacterCard = ({
                           common.CharacterCard.tcInvested.exclusive,
                           {
                             exevopro: (
-                              <NextLink
-                                href={routes.DASHBOARD}
-                                className="text-rare font-bold"
-                              >
+                              <span className="text-rare font-bold">
                                 <S.Strong className="whitespace-nowrap">
                                   Exevo Pro 🚀
                                 </S.Strong>
-                              </NextLink>
+                              </span>
                             ),
                           },
                         )}
