@@ -1,10 +1,13 @@
 export const PersonIcon = (args: JSX.IntrinsicElements['svg']) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="#000000"
+    height="24px"
     viewBox="0 0 24 24"
+    width="24px"
+    fill="#000000"
     {...args}
   >
-    <path d="M24 20.993V24H0v-2.996A14.977 14.977 0 0112.004 15c4.904 0 9.26 2.354 11.996 5.993zM16.002 8.999a4 4 0 11-8 0 4 4 0 018 0z" />
+    <path d="M0 0h24v24H0V0z" fill="none" />
+    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v1c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-1c0-2.66-5.33-4-8-4z" />
   </svg>
 )

@@ -6,7 +6,12 @@ import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
-import { LoginIcon, DashboardIcon, LogoutIcon, PersonIcon } from 'assets/svgs'
+import {
+  LoginIcon,
+  DashboardIcon,
+  LogoutIcon,
+  PersonRoundedIcon,
+} from 'assets/svgs'
 import { addLocalePrefix } from 'utils'
 import { routes } from 'Constants'
 import useHeaderPopup from './useHeaderPopup'
@@ -110,7 +115,7 @@ const AccountButton = ({
                 {...buttonBinders}
               >
                 {fallbackAvatar ? (
-                  <PersonIcon
+                  <PersonRoundedIcon
                     width={32}
                     height={32}
                     className={clsx(

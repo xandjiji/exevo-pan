@@ -1,9 +1,9 @@
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 import type { BuiltInProviderType } from 'next-auth/providers'
 import { useTranslations } from 'contexts/useTranslation'
 import { FadeImage } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
-import { GoogleIcon, DiscordIcon } from 'assets/svgs'
+import { PersonIcon, GoogleIcon, DiscordIcon } from 'assets/svgs'
 import { dateToDateObject } from 'utils'
 import { UserCardProps } from './types'
 
@@ -22,6 +22,8 @@ const UserCard = ({ user }: UserCardProps) => {
     translations: { common, dashboard },
   } = useTranslations()
 
+  const [fallbackAvatar, setFallbackAvatar] = useState(false)
+
   const { name, picture, provider, proStatus, proSince } = user
 
   const readableProSince: string = useMemo(() => {
@@ -36,14 +38,23 @@ const UserCard = ({ user }: UserCardProps) => {
 
   return (
     <div className="flex items-center gap-4">
-      <FadeImage
-        src={picture}
-        alt={name}
-        width={64}
-        height={64}
-        unoptimized
-        className="bg-surface rounded shadow"
-      />
+      {fallbackAvatar ? (
+        <PersonIcon
+          width={64}
+          height={64}
+          className="bg-surface fill-onSurface rounded shadow"
+        />
+      ) : (
+        <FadeImage
+          src={picture}
+          alt={name}
+          width={64}
+          height={64}
+          unoptimized
+          className="bg-surface rounded shadow"
+          onError={() => setFallbackAvatar(true)}
+        />
+      )}
       <div className="flex flex-col gap-2">
         <div className="flex items-center gap-2">
           <strong>{name}</strong>
