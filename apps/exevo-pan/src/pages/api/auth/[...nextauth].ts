@@ -50,6 +50,10 @@ export default NextAuth({
 
       session.user = { ...token, paymentData }
 
+      if (paymentData?.confirmed) {
+        session.user.proStatus = true
+      }
+
       return session
     },
   },
