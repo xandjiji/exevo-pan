@@ -52,6 +52,8 @@ export default NextAuth({
 
       if (paymentData?.confirmed) {
         session.user.proStatus = true
+        token.proStatus = true
+        token.proSince = new Date().toISOString()
       }
 
       return session
