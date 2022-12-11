@@ -11,12 +11,14 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       if (method === 'GET') {
         const pageSize = query.pageSize ? Number(query.pageSize) : 30
         const pageIndex = query.pageIndex ? Number(query.pageIndex) : 0
+        const nickname = query.nickname ? query.nickname.toString() : undefined
 
         const [page, count] = await Promise.all([
           prisma.user.findMany({
             where: {
               paymentData: {
                 isNot: undefined,
+                character: { contains: nickname },
               },
             },
             orderBy: {
@@ -32,6 +34,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
             where: {
               paymentData: {
                 isNot: undefined,
+                character: { contains: nickname },
               },
             },
           }),

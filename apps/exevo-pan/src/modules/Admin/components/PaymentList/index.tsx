@@ -1,5 +1,6 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import type { User, PaymentData } from '@prisma/client'
+import { debounce } from 'utils'
 import {
   Paginator,
   LoadingAlert,
@@ -15,10 +16,12 @@ type Data = {
 }
 
 const PAGE_SIZE = 30
+const DEBOUNCE_DELAY = 700
 
 const PaymentList = () => {
   const [{ page, count }, setData] = useState<Data>({ page: [], count: 0 })
   const [pageIndex, setPageIndex] = useState(0)
+  const [nickname, setNickname] = useState('')
   const [requestState, setRequestState] = useState<RequestStatus>('IDLE')
 
   useEffect(() => {
@@ -26,7 +29,7 @@ const PaymentList = () => {
       setRequestState('LOADING')
 
       fetch(
-        `${endpoints.ADMIN_PAYMENTS}?pageIndex=${pageIndex}&pageSize=${PAGE_SIZE}`,
+        `${endpoints.ADMIN_PAYMENTS}?pageIndex=${pageIndex}&pageSize=${PAGE_SIZE}&nickname=${nickname}`,
       )
         .then((res) =>
           res.json().then((data) => {
@@ -38,7 +41,7 @@ const PaymentList = () => {
           setRequestState('ERROR')
         })
     }
-  }, [pageIndex, requestState])
+  }, [pageIndex, nickname, requestState])
 
   const confirmPayment = useCallback(
     ({ id, confirmed }: { id: string; confirmed: boolean }) => {
@@ -56,9 +59,11 @@ const PaymentList = () => {
     [],
   )
 
+  const isLoading = requestState === 'LOADING' || requestState === 'IDLE'
+
   return (
     <section>
-      {requestState === 'LOADING' && <LoadingAlert>Loading...</LoadingAlert>}
+      {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
 
       <Table>
         <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row">
@@ -67,6 +72,14 @@ const PaymentList = () => {
             label="Search by character"
             placeholder="e.g. 'Bubble'"
             className="w-full sm:max-w-[200px]"
+            onChange={useMemo(
+              () =>
+                debounce((e: React.ChangeEvent<HTMLInputElement>) => {
+                  setNickname(e.target.value)
+                  setRequestState('IDLE')
+                }, DEBOUNCE_DELAY),
+              [],
+            )}
           />
 
           <Paginator
