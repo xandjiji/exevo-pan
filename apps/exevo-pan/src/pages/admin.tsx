@@ -21,7 +21,7 @@ export default function Admin() {
       <Main>
         <main className="inner-container py-4">
           {isAdmin && (
-            <div className="grid gap-4">
+            <div className="mx-auto grid max-w-3xl gap-4">
               <Revenue />
               <PaymentList />
             </div>

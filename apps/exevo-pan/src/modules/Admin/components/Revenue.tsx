@@ -15,7 +15,7 @@ const Revenue = () => {
   }, [])
 
   return (
-    <section className="card flex flex-col gap-4 sm:flex-row sm:gap-8">
+    <section className="card flex flex-col gap-4 px-6 py-4 sm:flex-row sm:gap-8">
       <div className="grid gap-1">
         <span className="text-base font-light">Current month</span>
         <strong className="text-2xl">{monthly}</strong>
