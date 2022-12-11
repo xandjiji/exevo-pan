@@ -13,6 +13,7 @@ export const endpoints = {
   NEWSLETTER: '/api/mailchimp',
   ERROR_REPORT: '/api/error-report',
   SEND_PAYMENT: '/api/send-payment',
+  ADMIN_PAYMENTS: '/api/admin/payments',
   PREMIUM_BOSSES: '/api/bosses',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
 }

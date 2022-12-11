@@ -9,14 +9,19 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       const { method, query } = request
 
       if (method === 'GET') {
-        const pageSize = query.pageSize ? Number(query.pageSize) : 10
+        const pageSize = query.pageSize ? Number(query.pageSize) : 30
         const pageIndex = query.pageIndex ? Number(query.pageIndex) : 0
 
         const [page, count] = await Promise.all([
           prisma.user.findMany({
             where: {
               paymentData: {
-                confirmed: false,
+                isNot: undefined,
+              },
+            },
+            orderBy: {
+              paymentData: {
+                lastUpdated: 'desc',
               },
             },
             include: { paymentData: true },
@@ -26,7 +31,7 @@ export default async (request: VercelRequest, response: VercelResponse) => {
           prisma.user.count({
             where: {
               paymentData: {
-                confirmed: false,
+                isNot: undefined,
               },
             },
           }),

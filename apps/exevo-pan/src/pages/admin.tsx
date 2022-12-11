@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
+import { PaymentList } from 'modules/Admin'
 import { GetStaticProps } from 'next'
 import { buildPageTitle } from 'utils'
 import { useSession } from 'next-auth/react'
@@ -18,7 +19,9 @@ export default function Admin() {
       </Head>
 
       <Main>
-        <main>{isAdmin && <div>ok</div>}</main>
+        <main className="inner-container py-4">
+          {isAdmin && <PaymentList />}
+        </main>
       </Main>
     </>
   )
