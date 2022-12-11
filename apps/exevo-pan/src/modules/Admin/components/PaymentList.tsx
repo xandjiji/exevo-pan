@@ -29,7 +29,7 @@ const PaymentList = () => {
       setRequestState('LOADING')
 
       fetch(
-        `${endpoints.ADMIN_PAYMENTS}?pageIndex=${pageIndex}&pageSize=${PAGE_SIZE}&nickname=${nickname}`,
+        `${endpoints.ADMIN.PAYMENTS}?pageIndex=${pageIndex}&pageSize=${PAGE_SIZE}&nickname=${nickname}`,
       )
         .then((res) =>
           res.json().then((data) => {
@@ -47,7 +47,7 @@ const PaymentList = () => {
     ({ id, confirmed }: { id: string; confirmed: boolean }) => {
       setRequestState('LOADING')
 
-      fetch(endpoints.ADMIN_PAYMENTS, {
+      fetch(endpoints.ADMIN.PAYMENTS, {
         method: 'PATCH',
         body: JSON.stringify({ id, confirmed }),
       })

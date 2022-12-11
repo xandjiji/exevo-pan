@@ -14,7 +14,9 @@ export const endpoints = {
   ERROR_REPORT: '/api/error-report',
   SEND_PAYMENT: '/api/send-payment',
   PREMIUM_BOSSES: '/api/bosses',
-  ADMIN_PAYMENTS: '/api/admin/payments',
-  ADMIN_REVENUE: '/api/admin/revenue',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
+  ADMIN: {
+    PAYMENTS: '/api/admin/payments',
+    REVENUE: '/api/admin/revenue',
+  },
 }

@@ -11,7 +11,7 @@ const Revenue = () => {
   })
 
   useEffect(() => {
-    fetch(endpoints.ADMIN_REVENUE).then((res) => res.json().then(setRevenue))
+    fetch(endpoints.ADMIN.REVENUE).then((res) => res.json().then(setRevenue))
   }, [])
 
   return (
