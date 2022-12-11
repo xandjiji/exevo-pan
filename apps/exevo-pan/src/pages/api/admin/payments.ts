@@ -39,6 +39,25 @@ export default async (request: VercelRequest, response: VercelResponse) => {
 
         response.status(200).json({ page: page ?? [], count })
       }
+
+      if (method === 'PATCH') {
+        const { id, confirmed } = JSON.parse(request.body)
+
+        const result = await prisma.user.update({
+          where: { id },
+          data: {
+            proStatus: confirmed,
+            proSince: confirmed ? new Date().toISOString() : null,
+            paymentData: {
+              update: {
+                confirmed,
+              },
+            },
+          },
+        })
+
+        response.status(200).json(result)
+      }
     } else {
       response.status(401)
     }

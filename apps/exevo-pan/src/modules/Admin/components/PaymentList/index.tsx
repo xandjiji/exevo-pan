@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import type { User, PaymentData } from '@prisma/client'
 import {
   Paginator,
@@ -22,21 +22,39 @@ const PaymentList = () => {
   const [requestState, setRequestState] = useState<RequestStatus>('IDLE')
 
   useEffect(() => {
-    setRequestState('LOADING')
+    if (requestState === 'IDLE') {
+      setRequestState('LOADING')
 
-    fetch(
-      `${endpoints.ADMIN_PAYMENTS}?pageIndex=${pageIndex}&pageSize=${PAGE_SIZE}`,
-    )
-      .then((res) =>
-        res.json().then((data) => {
-          setData(data)
-          setRequestState('SUCCESSFUL')
-        }),
+      fetch(
+        `${endpoints.ADMIN_PAYMENTS}?pageIndex=${pageIndex}&pageSize=${PAGE_SIZE}`,
       )
-      .catch(() => {
-        setRequestState('ERROR')
+        .then((res) =>
+          res.json().then((data) => {
+            setData(data)
+            setRequestState('SUCCESSFUL')
+          }),
+        )
+        .catch(() => {
+          setRequestState('ERROR')
+        })
+    }
+  }, [pageIndex, requestState])
+
+  const confirmPayment = useCallback(
+    ({ id, confirmed }: { id: string; confirmed: boolean }) => {
+      setRequestState('LOADING')
+
+      fetch(endpoints.ADMIN_PAYMENTS, {
+        method: 'PATCH',
+        body: JSON.stringify({ id, confirmed }),
       })
-  }, [pageIndex])
+        .then(() => setRequestState('IDLE'))
+        .catch(() => {
+          setRequestState('ERROR')
+        })
+    },
+    [],
+  )
 
   return (
     <section>
@@ -55,7 +73,10 @@ const PaymentList = () => {
             pageSize={PAGE_SIZE}
             totalItems={count}
             currentPage={pageIndex + 1}
-            onChange={(newIndex) => setPageIndex(newIndex - 1)}
+            onChange={(newIndex) => {
+              setRequestState('IDLE')
+              setPageIndex(newIndex - 1)
+            }}
             className="ml-auto w-fit"
           />
         </div>
@@ -75,7 +96,12 @@ const PaymentList = () => {
                 <Table.Row key={id}>
                   <Table.Column>
                     <div className="mx-auto w-fit">
-                      <Checkbox checked={confirmed} />
+                      <Checkbox
+                        checked={confirmed}
+                        onClick={() =>
+                          confirmPayment({ id, confirmed: !confirmed })
+                        }
+                      />
                     </div>
                   </Table.Column>
                   <Table.Column>{character}</Table.Column>
