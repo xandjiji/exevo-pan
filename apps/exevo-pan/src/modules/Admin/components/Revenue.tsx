@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { endpoints } from 'Constants'
 
 const INITIAL_VALUE = 'R$ 0,00'
 
@@ -8,6 +9,10 @@ const Revenue = () => {
     total: INITIAL_VALUE,
     average: INITIAL_VALUE,
   })
+
+  useEffect(() => {
+    fetch(endpoints.ADMIN_REVENUE).then((res) => res.json().then(setRevenue))
+  }, [])
 
   return (
     <section className="card flex flex-col gap-4 sm:flex-row sm:gap-8">
