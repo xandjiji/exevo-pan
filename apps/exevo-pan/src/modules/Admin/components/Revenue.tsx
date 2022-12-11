@@ -17,18 +17,18 @@ const Revenue = () => {
   return (
     <section className="card flex flex-col gap-4 sm:flex-row sm:gap-8">
       <div className="grid gap-1">
-        <span className="text-base font-light">Monthly</span>
+        <span className="text-base font-light">Current month</span>
         <strong className="text-2xl">{monthly}</strong>
+      </div>
+
+      <div className="grid gap-1">
+        <span className="text-base font-light">Total monthly average</span>
+        <strong className="text-2xl">{average}</strong>
       </div>
 
       <div className="grid gap-1">
         <span className="text-base font-light">Total</span>
         <strong className="text-2xl">{total}</strong>
-      </div>
-
-      <div className="grid gap-1">
-        <span className="text-base font-light">Monthly average</span>
-        <strong className="text-2xl">{average}</strong>
       </div>
     </section>
   )
