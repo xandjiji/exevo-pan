@@ -86,7 +86,9 @@ const PaymentList = () => {
             <Table.Row>
               <Table.HeadColumn>Confirmed</Table.HeadColumn>
               <Table.HeadColumn>Character</Table.HeadColumn>
-              <Table.HeadColumn>Date</Table.HeadColumn>
+              <Table.HeadColumn highlighted desc>
+                Date
+              </Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
