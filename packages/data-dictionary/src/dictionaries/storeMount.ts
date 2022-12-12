@@ -696,6 +696,21 @@ const mounts: MountToken[] = [
     id: 1580,
     value: 870,
   },
+  {
+    name: 'Tangerine Flecked Koi',
+    id: 1608,
+    value: 750,
+  },
+  {
+    name: 'Brass Speckled Koi',
+    id: 1609,
+    value: 750,
+  },
+  {
+    name: 'Ink Spotted Koi',
+    id: 1610,
+    value: 750,
+  },
 ]
 
 export const priceMap = cosmeticToPriceMap(mounts)

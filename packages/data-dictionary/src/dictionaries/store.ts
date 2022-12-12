@@ -1529,6 +1529,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Flower Table',
     value: 80,
   },
+  'wall fern': {
+    name: 'Wall Fern',
+    value: 50,
+  },
   /* RASCACOON */
   'blue shark trophy': {
     name: 'Blue Shark Trophy',
