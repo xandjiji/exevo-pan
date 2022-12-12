@@ -4,11 +4,11 @@ import type { PaymentData } from '@prisma/client'
 import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { randomCharacter } from 'utils'
-import { endpoints } from 'Constants'
+import { endpoints, advertising } from 'Constants'
 import FromTo from './FromTo'
 import { PurchaseFormProps } from './types'
 
-const BANK_CHARACTER = 'Ksu'
+const { BANK_CHARACTER } = advertising
 
 const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   const {
