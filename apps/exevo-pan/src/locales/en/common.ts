@@ -7,6 +7,7 @@ export default {
   Header: {
     h1: {
       home: 'Buy and sell Tibia characters on the official Char Bazaar!',
+      calculators: 'All sorts of tools and calculators for Tibia',
       statistics: 'Find statistics for Tibia Char Bazaar characters!',
       highscores:
         'Top levels, highest skills and biggests bids on Tibia Char Bazaar!',
@@ -19,6 +20,7 @@ export default {
     },
     openMenuLabel: 'Open the navigation menu',
     closeMenuLabel: 'Close the navigation menu',
+    openUserMenu: 'Open user menu',
     logoLabel: 'Go to homepage',
     nav: {
       charBazaar: 'Char Bazaar',
@@ -29,10 +31,11 @@ export default {
       advertise: 'Advertise',
       blog: 'Blog',
       bossTracker: 'Boss Tracker',
+      exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Toggle dark theme',
     AccountButton: {
-      settings: 'Settings',
+      dashboard: 'Dashboard',
       logout: 'Logout',
     },
   },
@@ -177,6 +180,7 @@ export default {
       prefix: 'This character has invested at least',
       suffix: 'Tibia Coins in store purchases',
       invested: 'invested',
+      exclusive: 'Exclusive for {{exevopro}}',
     },
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
@@ -185,6 +189,7 @@ export default {
     CharacterModal: {
       moreInfo: 'More informations',
       totalInvested: 'Total invested',
+      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'First addon',
         secondAddon: 'Second addon',

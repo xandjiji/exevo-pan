@@ -7,6 +7,8 @@ export default {
   Header: {
     h1: {
       home: 'Kupuj i sprzedawaj postacie na oficjalnym Tibijskim Bazarze Postaci!',
+      /* @ ToDo: i18n */
+      calculators: 'All sorts of tools and calculators for Tibia',
       statistics: 'Znajduj statystyki postaci z Tibijskiego Bazaru Postaci!',
       highscores:
         'Najwyższe levele, najwyższe skille oraz najwyższe bidy na Tibijskim Bazarze Postaci!',
@@ -18,6 +20,8 @@ export default {
     },
     openMenuLabel: 'Otwórz menu nawigacji',
     closeMenuLabel: 'Zamknij menu nawigacji',
+    /* @ ToDo: i18n */
+    openUserMenu: 'Open user menu',
     logoLabel: 'Idź do strony głównej',
     nav: {
       charBazaar: 'Char Bazaar',
@@ -28,10 +32,11 @@ export default {
       advertise: 'Zareklamuj się',
       blog: 'Blog',
       bossTracker: 'Boss Tracker',
+      exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Przełącz na tryb ciemny',
     AccountButton: {
-      settings: 'Settings',
+      dashboard: 'Dashboard',
       logout: 'Logout',
     },
   },
@@ -177,6 +182,8 @@ export default {
       prefix: 'Ta postać zainwestowała co najmniej',
       suffix: 'Tibia Coinów na zakupy w Tibia Store',
       invested: 'zainwestowane',
+      /* @ ToDo: i18n */
+      exclusive: 'Exclusive for {{exevopro}}',
     },
     AuctionStatus: 'Status Aukcji',
     BidStatus: 'Status Oferty',
@@ -186,6 +193,8 @@ export default {
       /* @ ToDo: i18n */
       moreInfo: 'More informations',
       totalInvested: 'łącznie zainwestowano',
+      /* @ ToDo: i18n */
+      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Pierwszy addon',
         secondAddon: 'Drugi Addon',

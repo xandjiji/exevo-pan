@@ -1,6 +1,7 @@
 export type BossCardProps = {
+  premium?: boolean
   pinned: boolean
-  onPìn: (bossName: string) => void
+  onPin: (bossName: string) => void
   bossStats: BossStats
 } & JSX.IntrinsicElements['li']
 

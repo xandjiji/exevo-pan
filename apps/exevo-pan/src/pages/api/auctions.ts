@@ -1,21 +1,13 @@
-import { NextRequest } from 'next/server'
+import type { VercelRequest } from '@vercel/node'
+import { getToken, JWT } from 'next-auth/jwt'
 import { endpoints } from 'Constants'
-import { MILLISECONDS_IN, SECONDS_IN } from 'utils'
+import { pluckTCInvested, pluckPremiumParameters } from 'utils'
 
-const AUCTION_PERIOD = MILLISECONDS_IN.MINUTE * 15
+const isPro = (token: JWT | null) => token && token.proStatus
 
-const millisecondsToSeconds = (milliseconds: number) =>
-  Math.floor(milliseconds / MILLISECONDS_IN.SECONDS)
+export default async (request: VercelRequest) => {
+  const { method, url } = request
 
-const timeUntilNextCacheBust = () =>
-  millisecondsToSeconds(AUCTION_PERIOD - (+new Date() % AUCTION_PERIOD))
-
-const CACHE_AGE = {
-  current: timeUntilNextCacheBust,
-  history: SECONDS_IN.HOUR * 4,
-}
-
-export default async ({ method, url }: NextRequest) => {
   if (method !== 'GET') {
     return new Response(JSON.stringify({ error: `${method} not allowed` }), {
       status: 400,
@@ -23,7 +15,7 @@ export default async ({ method, url }: NextRequest) => {
     })
   }
 
-  const { searchParams } = new URL(url)
+  const { searchParams } = new URL(url ?? '')
 
   try {
     const isHistory = searchParams.get('history') === 'true'
@@ -32,18 +24,31 @@ export default async ({ method, url }: NextRequest) => {
       endpoints[isHistory ? 'HISTORY_AUCTIONS' : 'CURRENT_AUCTIONS'],
     )
 
+    const token = await getToken({ req: request })
+    const userIsPro = isPro(token)
+
     searchParams.delete('history')
+    if (!userIsPro) pluckPremiumParameters(searchParams)
     endpoint.search = searchParams.toString()
 
     const result = await fetch(endpoint.toString())
 
-    const maxAge = isHistory ? CACHE_AGE.history : CACHE_AGE.current()
+    if (userIsPro) {
+      return new Response(result.body, {
+        status: 200,
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+    }
 
-    return new Response(result.body, {
+    const parsedResult: PaginatedData<CharacterObject> = await result.json()
+    parsedResult.page = parsedResult.page.map(pluckTCInvested)
+
+    return new Response(JSON.stringify(parsedResult), {
       status: 200,
       headers: {
         'Content-Type': 'application/json',
-        'Cache-Control': `max-age=${maxAge}, s-maxage=${maxAge}`,
       },
     })
   } catch (error) {

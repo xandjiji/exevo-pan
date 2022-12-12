@@ -1,20 +1,30 @@
 export default {
   Meta: {
-    title: 'Minha conta',
-    description: 'Sua conta Exevo Pan',
+    title: 'Painel',
+    description: 'Seu painel Exevo Pan',
   },
   UserCard: {
     proSince: 'Pro desde',
     freeStatus: 'Grátis',
   },
   Pitch: {
+    thankYou: 'Obrigado por ser',
     upgradeNow: 'Upgrade agora para',
+    enjoyFeatures: 'Aproveite suas features exclusivas:',
     exclusiveFeatures: 'E ganhe acesso a features exclusivas!',
     features: {
       tcInvested:
         'Descubra quanto TC foi investido em qualquer personagem do Bazaar',
-      auctionFilters: '<strong>Filtros de leilão</strong> exclusivos',
-      bossTracker: 'Acesse todos os bosses do <strong>Boss Tracker</strong>',
+      exclusiveFilters: '{{auctionFilters}} exclusivos',
+      auctionFilters: 'Filtros de leilão',
+      exclusiveBosses: 'Acesso a todos os bosses do {{bossTracker}}',
+      bossTracker: 'Boss Tracker',
+    },
+    filtersTooltip: {
+      tc: 'Tibia Coins investidos',
+      store: 'Montarias e outfits da store',
+      rareItems: 'Items raros',
+      soulwar: 'Soul War disponível',
     },
     more: '...e mais no futuro!',
     payOnce: 'Pague uma vez, seu',

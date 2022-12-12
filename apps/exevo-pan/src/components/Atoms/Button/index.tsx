@@ -21,7 +21,10 @@ const Button = ({
   return (
     <button
       className={clsx(
-        'button-component hover:highlight-10 group cursor-pointer transition-all active:shadow-inner',
+        'button-component transition-all active:shadow-inner',
+        disabled
+          ? 'cursor-not-allowed !shadow-none'
+          : 'hover:highlight-10 cursor-pointer',
         pill &&
           'flex items-center justify-center gap-1 py-1.5 px-4 text-xs font-bold uppercase tracking-wider',
         !hollow && 'shadow-md hover:shadow-lg',
@@ -29,8 +32,8 @@ const Button = ({
           '!text-onSurface active:text-primary child:fill-onSurface !bg-transparent underline opacity-50 disabled:opacity-25',
         disabled &&
           !loading &&
-          'bg-separator child:fill-black cursor-default text-black opacity-60 shadow-none',
-        isDisabled ? 'pointer-events-none text-black' : 'text-onPrimary',
+          'bg-separator active:bg-separator child:fill-black cursor-default text-black opacity-60 shadow-none',
+        isDisabled ? 'text-black' : 'text-onPrimary',
 
         className,
       )}

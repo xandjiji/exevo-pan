@@ -19,4 +19,5 @@ export default {
   kwaiSurface: '#FFF7F0',
   kwaiVariant: '#FFC696',
   black: '#000000',
+  rare: '#FF5A80',
 }

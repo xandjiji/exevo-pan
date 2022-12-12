@@ -27,6 +27,9 @@ export type DefaultAction =
       urlFilters: FilterOptions
       urlHistory: boolean
     }
+  | {
+      type: 'HYDRATE_TC_INVESTED'
+    }
 
 export type Action = DefaultAction | FilterAction
 
@@ -39,6 +42,7 @@ export interface AuctionsContextState {
   sortingOptions: SortOptions
   paginatedData: PaginatedData<CharacterObject>
   shouldDisplayHighlightedAuctions: boolean
+  initialTCInvested: number[]
 }
 
 export type Reducer<ActionTypes> = (

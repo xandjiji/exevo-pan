@@ -1,5 +1,6 @@
 import { sortBossesBy, getFromLocalStorage } from 'utils'
 import { constTokens as bosses } from 'data-dictionary/dist/dictionaries/bosses'
+import { premiumBosses } from 'Constants'
 import { BossLister, PINNED_BOSS_KEY } from './types'
 
 const POISet = new Set<string>([
@@ -74,4 +75,19 @@ export const listBy = {
   archdemons,
   rook,
   pinned,
+}
+
+export const prioritizePremium: BossLister = (list) => {
+  const premium: BossStats[] = []
+  const free: BossStats[] = []
+
+  list.forEach((bossStat) => {
+    if (premiumBosses.set.has(bossStat.name)) {
+      premium.push(bossStat)
+    } else {
+      free.push(bossStat)
+    }
+  })
+
+  return premium.concat(free)
 }

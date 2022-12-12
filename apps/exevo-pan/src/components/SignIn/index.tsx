@@ -52,9 +52,9 @@ const SignIn = ({
             setState('LOADING')
             signIn(provider, {
               callbackUrl: addLocalePrefix({
-                route: routes.ACCOUNT,
+                route: routes.DASHBOARD,
                 locale,
-                absolute: true,
+                absolute: false,
               }),
             })
           }

@@ -74,6 +74,18 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
         ),
       }
 
+    case 'HYDRATE_TC_INVESTED':
+      return {
+        ...state,
+        paginatedData: {
+          ...state.paginatedData,
+          page: state.paginatedData.page.map((auction, index) => ({
+            ...auction,
+            tcInvested: state.initialTCInvested[index] ?? 0,
+          })),
+        },
+      }
+
     default:
       return FiltersReducer(state, action)
   }

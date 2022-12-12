@@ -5,10 +5,12 @@ import {
   useEffect,
   useCallback,
 } from 'react'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useIsMounted } from 'hooks'
 import { AuctionsClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
+import { pluckTCInvested } from 'utils'
 import { useSynchUrlState } from './useSynchUrlState'
 import AuctionsReducer from './reducer'
 import { DEFAULT_STATE } from './defaults'
@@ -25,6 +27,8 @@ export const AuctionsProvider = ({
     translations: { common },
   } = useTranslations()
 
+  const { data, status } = useSession()
+
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: false,
     isHistory: false,
@@ -35,9 +39,15 @@ export const AuctionsProvider = ({
       descendingOrder: initialPaginatedData.descendingOrder,
       sortingMode: initialPaginatedData.sortingMode,
     },
-    paginatedData: initialPaginatedData,
+    paginatedData: {
+      ...initialPaginatedData,
+      page: initialPaginatedData.page.map(pluckTCInvested),
+    },
     shouldDisplayHighlightedAuctions:
       DEFAULT_STATE.shouldDisplayHighlightedAuctions,
+    initialTCInvested: initialPaginatedData.page.map(
+      ({ tcInvested }) => tcInvested,
+    ),
   })
 
   const { paginationOptions, sortingOptions, filterState, isHistory } = state
@@ -59,6 +69,7 @@ export const AuctionsProvider = ({
   }, [paginationOptions, sortingOptions, filterState, isHistory])
 
   useSynchUrlState({
+    isPro: status === 'loading' ? undefined : data?.user.proStatus ?? false,
     isHistory,
     filterState,
     paginationOptions,

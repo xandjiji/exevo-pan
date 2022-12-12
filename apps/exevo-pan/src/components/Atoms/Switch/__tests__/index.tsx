@@ -60,6 +60,8 @@ describe('<Switch />', () => {
     expect(switchElement).not.toBeChecked()
   })
 
+  test.todo('disabled state')
+
   test('a11y', async () => {
     const { container } = renderWithProviders(<Switch aria-label="label" />)
     await assertNoA11yViolations(container)

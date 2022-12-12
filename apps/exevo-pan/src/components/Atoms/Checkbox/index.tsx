@@ -29,8 +29,8 @@ const Checkbox = ({
   return (
     <label
       className={clsx(
-        'text-tsm flex cursor-pointer items-center',
-        disabled && 'pointer-events-none',
+        'text-tsm flex items-center',
+        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
       )}
       style={{ lineHeight: 1 }}
     >
@@ -40,7 +40,8 @@ const Checkbox = ({
       >
         <input
           className={clsx(
-            'border-1 border-separator bg-surface m-0 h-4 w-4 cursor-pointer appearance-none rounded border-solid transition-all active:shadow-inner',
+            'border-1 border-separator bg-surface m-0 h-4 w-4 appearance-none rounded border-solid transition-all active:shadow-inner',
+            disabled ? 'cursor-not-allowed' : 'cursor-pointer',
             greenVariant
               ? 'checked:bg-green checked:border-green'
               : 'checked:bg-primary checked:border-primary',

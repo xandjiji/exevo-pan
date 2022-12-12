@@ -20,6 +20,7 @@ export default {
   },
   BossGrid: {
     listBosses: 'Listar bosses por',
+    exclusiveBosses: 'Bosses exclusivos {{exevopro}} 🕵️',
     EmptyState: 'Nenhum boss',
     listOptions: {
       chance: 'Chance',

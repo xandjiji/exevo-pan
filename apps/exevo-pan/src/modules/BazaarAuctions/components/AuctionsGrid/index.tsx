@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { ActiveCount, Paginator, Sticker } from 'components/Atoms'
+import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import EmptyState from 'components/EmptyState'
@@ -72,16 +72,8 @@ const AuctionsGrid = () => {
           onClick={() => setDrawerOpen(true)}
           className="relative"
         >
-          {/* @ ToDo: remove this sticker */}
-          <Sticker
-            localStorageKey="251122-filter"
-            className="absolute"
-            style={{ top: -12, left: -12, transform: 'rotate(-30deg)' }}
-          >
-            New
-          </Sticker>
           <FilterIcon className={styles.icon} />
-          <ClientComponent className="absolute -top-0.5 -right-0.5">
+          <ClientComponent className="pointer-events-none absolute -top-0.5 -right-0.5">
             <ActiveCount
               role="status"
               aria-label={`${activeFilterCount} ${

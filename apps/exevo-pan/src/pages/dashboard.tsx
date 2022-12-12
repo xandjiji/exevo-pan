@@ -2,18 +2,18 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { UserCard, Pitch, PurchaseForm } from 'modules/Account'
+import { UserCard, Pitch, PurchaseForm } from 'modules/Dashboard'
 import { useSession } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common, account } from 'locales'
+import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.ACCOUNT)
+const pageUrl = buildUrl(routes.DASHBOARD)
 
-export default function Account() {
+export default function Dashboard() {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(translations.account.Meta.title)
+  const pageTitle = buildPageTitle(translations.dashboard.Meta.title)
 
   const { data: session } = useSession()
 
@@ -27,15 +27,15 @@ export default function Account() {
 
         <meta
           name="description"
-          content={translations.account.Meta.description}
+          content={translations.dashboard.Meta.description}
         />
         <meta
           property="twitter:description"
-          content={translations.account.Meta.description}
+          content={translations.dashboard.Meta.description}
         />
         <meta
           property="og:description"
-          content={translations.account.Meta.description}
+          content={translations.dashboard.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -78,15 +78,16 @@ export default function Account() {
                 <UserCard user={session.user} />
               </section>
               <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
-                <Pitch />
-                <PurchaseForm {...session.user.paymentData} />
+                <Pitch proStatus={session.user.proStatus} />
+                {!session.user.proStatus && (
+                  <PurchaseForm {...session.user.paymentData} />
+                )}
               </section>
             </>
           ) : (
-            <div
-              className="loading-spinner absolute-centered h-8 w-8"
-              role="alert"
-            />
+            <div className="absolute-centered">
+              <div className="loading-spinner h-8 w-8" role="alert" />
+            </div>
           )}
         </main>
       </Main>
@@ -98,7 +99,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => ({
   props: {
     translations: {
       common: common[locale as RegisteredLocale],
-      account: account[locale as RegisteredLocale],
+      dashboard: dashboard[locale as RegisteredLocale],
     },
   },
 })

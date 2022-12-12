@@ -1,24 +1,38 @@
-import { useRef } from 'react'
+/* eslint-disable react/require-default-props */
+import { useState, useRef } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { useSession, signOut } from 'next-auth/react'
-import { LoginIcon, SettingsIcon, LogoutIcon } from 'assets/svgs'
+import {
+  LoginIcon,
+  DashboardIcon,
+  LogoutIcon,
+  PersonRoundedIcon,
+} from 'assets/svgs'
 import { addLocalePrefix } from 'utils'
 import { routes } from 'Constants'
 import useHeaderPopup from './useHeaderPopup'
 
-const AccountButton = (): JSX.Element => {
+type AccountButtonProps = {
+  variant?: 'onPrimary' | 'onSurface'
+}
+
+const AccountButton = ({
+  variant = 'onPrimary',
+}: AccountButtonProps): JSX.Element => {
   const {
     translations: { common },
   } = useTranslations()
 
+  const [fallbackAvatar, setFallbackAvatar] = useState(false)
+
   const { status, data } = useSession()
   const ref = useRef<HTMLDivElement>(null)
 
-  const { action, Popup } = useHeaderPopup(ref)
+  const { buttonBinders, action, Popup } = useHeaderPopup(ref)
 
   const { locale } = useRouter()
 
@@ -30,9 +44,19 @@ const AccountButton = (): JSX.Element => {
           unauthenticated: (
             <NextLink
               href={routes.LOGIN}
-              className="text-onPrimary animate-fadeIn grid place-items-center gap-0.5 whitespace-nowrap text-xs"
+              className={clsx(
+                'animate-fadeIn grid place-items-center gap-0.5 whitespace-nowrap text-xs',
+                variant === 'onPrimary' && 'text-onPrimary',
+                variant === 'onSurface' && 'text-onSurface',
+              )}
             >
-              <LoginIcon className="!fill-onPrimary h-4 w-4" />
+              <LoginIcon
+                className={clsx(
+                  'h-4 w-4',
+                  variant === 'onPrimary' && '!fill-onPrimary',
+                  variant === 'onSurface' && '!fill-onSurface',
+                )}
+              />
               Login
             </NextLink>
           ),
@@ -43,9 +67,7 @@ const AccountButton = (): JSX.Element => {
                   <span
                     className={clsx(
                       '!hover:bg-surface pointer-events-none tracking-wide',
-                      data.user.proStatus
-                        ? '!text-primaryHighlight'
-                        : '!text-separator',
+                      data.user.proStatus ? '!text-rare' : '!text-separator',
                     )}
                   >
                     {data.user.name}
@@ -59,14 +81,16 @@ const AccountButton = (): JSX.Element => {
 
                   <NextLink
                     className="hover:bg-primaryVariant"
-                    href={routes.ACCOUNT}
+                    href={routes.DASHBOARD}
                     onClick={action.close}
+                    role="menuitem"
                   >
-                    <SettingsIcon className="fill-onSurface h-4 w-4" />
-                    {common.Header.AccountButton.settings}
+                    <DashboardIcon className="fill-onSurface h-4 w-4" />
+                    {common.Header.AccountButton.dashboard}
                   </NextLink>
                   <button
                     className="hover:bg-primaryVariant"
+                    role="menuitem"
                     type="button"
                     onClick={() => {
                       action.close()
@@ -84,20 +108,41 @@ const AccountButton = (): JSX.Element => {
                   </button>
                 </div>
               </Popup>
-              <button type="button" onClick={action.open}>
-                <Image
-                  src={data.user.picture}
-                  alt={data.user.name}
-                  width={32}
-                  height={32}
-                  unoptimized
-                  className={clsx(
-                    'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
-                    data.user.proStatus
-                      ? 'border-primaryHighlight'
-                      : 'bg-separator',
-                  )}
-                />
+              <button
+                type="button"
+                onClick={action.open}
+                aria-label={common.Header.openUserMenu}
+                {...buttonBinders}
+              >
+                {fallbackAvatar ? (
+                  <PersonRoundedIcon
+                    width={32}
+                    height={32}
+                    className={clsx(
+                      'clickable animate-fadeIn rounded-full border-2 border-solid shadow transition-colors',
+                      variant === 'onSurface' && 'fill-onSurface',
+                      variant === 'onPrimary' && 'fill-onPrimary',
+                      data.user.proStatus
+                        ? 'border-rare'
+                        : 'border-primaryVariant',
+                    )}
+                  />
+                ) : (
+                  <Image
+                    src={data.user.picture}
+                    alt={data.user.name}
+                    width={32}
+                    height={32}
+                    unoptimized
+                    onError={() => setFallbackAvatar(true)}
+                    className={clsx(
+                      'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
+                      data.user.proStatus
+                        ? 'border-rare'
+                        : 'border-primaryVariant',
+                    )}
+                  />
+                )}
               </button>
             </>
           ) : null,

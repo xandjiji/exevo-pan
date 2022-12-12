@@ -13,6 +13,7 @@ import HeaderIcon from './HeaderIcon'
 import LanguagePicker from './LanguagePicker'
 import AccountButton from './AccountButton'
 import { NavItems } from './routes'
+import { HeaderProps } from './types'
 
 const heading = {
   [routes.HOME]: 'home',
@@ -26,10 +27,7 @@ const heading = {
   [routes.ABOUT]: 'about',
 }
 
-const Header = ({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement>) => {
+const Header = ({ clean = false, className, ...props }: HeaderProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -55,23 +53,33 @@ const Header = ({
     <>
       <header
         className={clsx(
-          'bg-primary inner-container custom-scrollbar after:z-1 from-primary sticky top-0 flex h-[60px] w-full items-center justify-between overflow-x-auto to-transparent shadow-md transition-colors after:pointer-events-none after:fixed after:top-0 after:right-0 after:hidden after:h-[60px] after:w-8 after:bg-gradient-to-l md:after:block',
+          'inner-container custom-scrollbar from-primary sticky top-0 flex h-[60px] w-full items-center justify-between overflow-x-auto to-transparent shadow-md transition-colors md:after:block',
+          clean
+            ? 'bg-background'
+            : 'bg-primary after:z-1 after:pointer-events-none  after:fixed after:top-0 after:right-0 after:hidden after:h-[60px] after:w-8 after:bg-gradient-to-l',
           className,
         )}
         style={{ zIndex: shouldMenuOverlap ? 75 : 71 }}
         {...props}
       >
         <nav className="mr-6 flex shrink-0 items-center">
-          <MenuButton
-            aria-checked={menuOpen}
-            aria-label={
-              common.Header[menuOpen ? 'closeMenuLabel' : 'openMenuLabel']
-            }
-            onClick={toggleMenu}
-          />
+          {!clean && (
+            <MenuButton
+              aria-checked={menuOpen}
+              aria-label={
+                common.Header[menuOpen ? 'closeMenuLabel' : 'openMenuLabel']
+              }
+              onClick={toggleMenu}
+            />
+          )}
 
           <NextLink href={routes.HOME} aria-label={accessibleLogoName}>
-            <div className="mr-4 hidden shrink-0 cursor-pointer items-center justify-center md:flex">
+            <div
+              className={clsx(
+                'mr-4 shrink-0 cursor-pointer items-center justify-center md:flex',
+                clean ? 'flex' : 'hidden',
+              )}
+            >
               {pageTitle && <h1 className="hidden">{pageTitle}</h1>}
               <ExevoPanIcon
                 width={36}
@@ -81,31 +89,33 @@ const Header = ({
             </div>
           </NextLink>
 
-          <ul
-            className={clsx(
-              menuOpen ? 'left-0' : '-left-full opacity-0',
-              'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-1 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
-            )}
-          >
-            {NavItems.map(({ title, href, exact, icon }) => (
-              <li key={title}>
-                <Link
-                  className="clickable currentpage:shadow-inner flex items-center rounded-lg py-2 px-3"
-                  href={href}
-                  exact={exact}
-                >
-                  <HeaderIcon icon={icon} spaced />
-                  <h2 className="text-s text-onPrimary whitespace-nowrap font-normal tracking-wider">
-                    {common.Header.nav[title]}
-                  </h2>
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {!clean && (
+            <ul
+              className={clsx(
+                menuOpen ? 'left-0' : '-left-full opacity-0',
+                'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-1 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
+              )}
+            >
+              {NavItems.map(({ title, href, exact, icon }) => (
+                <li key={title}>
+                  <Link
+                    className="clickable currentpage:shadow-inner flex items-center rounded-lg py-2 px-3"
+                    href={href}
+                    exact={exact}
+                  >
+                    <HeaderIcon icon={icon} spaced />
+                    <h2 className="text-s text-onPrimary whitespace-nowrap font-normal tracking-wider">
+                      {common.Header.nav[title]}
+                    </h2>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
         </nav>
 
-        <div className="flex items-center gap-4">
-          <LanguagePicker />
+        <div className="ml-auto flex items-center gap-4">
+          <LanguagePicker variant={clean ? 'onSurface' : 'onPrimary'} />
           <ClientComponent>
             <Switch
               active={theme === 'dark'}
@@ -114,10 +124,9 @@ const Header = ({
               aria-label={common.Header.themeSwitch}
             />
           </ClientComponent>
-          <CtaButton />
-          {/* @ ToDo: re-enable */}
-          {/* <AccountButton /> */}
-          <TibiaBlackjack.FloatingButton className="md:hidden" />
+          {!clean && <CtaButton />}
+          <AccountButton variant={clean ? 'onSurface' : 'onPrimary'} />
+          {!clean && <TibiaBlackjack.FloatingButton className="md:hidden" />}
         </div>
       </header>
 

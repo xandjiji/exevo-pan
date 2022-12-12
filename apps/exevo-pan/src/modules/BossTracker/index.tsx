@@ -51,7 +51,11 @@ const BossTracker = ({
           </div>
 
           <div className="bg-separator h-[1px] w-full md:hidden" role="none" />
-          <BossGrid bosses={bossChances.bosses} className="grow" />
+          <BossGrid
+            server={bossChances.server}
+            bosses={bossChances.bosses}
+            className="grow"
+          />
         </div>
       </main>
     </>

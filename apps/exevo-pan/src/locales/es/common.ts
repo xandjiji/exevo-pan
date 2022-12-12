@@ -7,6 +7,8 @@ export default {
   Header: {
     h1: {
       home: '¡Compra y vende caracteres de Tibia en el Char Bazaar oficial!',
+      /* @ ToDo: i18n */
+      calculators: 'All sorts of tools and calculators for Tibia',
       statistics:
         '¡Descubre estadísticas sobre personajes vendidos en el Char Bazaar!',
       highscores:
@@ -20,6 +22,8 @@ export default {
     },
     openMenuLabel: 'Abre el menú de navegación',
     closeMenuLabel: 'Cerrar el menú de navegación',
+    /* @ ToDo: i18n */
+    openUserMenu: 'Open user menu',
     logoLabel: 'Ir a la pagina principal',
     nav: {
       charBazaar: 'Char Bazaar',
@@ -30,10 +34,11 @@ export default {
       advertise: 'Anunciar',
       blog: 'Blog',
       bossTracker: 'Boss Tracker',
+      exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Habilitar tema nocturno',
     AccountButton: {
-      settings: 'Settings',
+      dashboard: 'Dashboard',
       logout: 'Logout',
     },
   },
@@ -178,6 +183,8 @@ export default {
       prefix: 'Este personaje ha invertido al menos',
       suffix: 'Tibia Coins en compras de la tienda',
       invested: 'invertido',
+      /* @ ToDo: i18n */
+      exclusive: 'Exclusive for {{exevopro}}',
     },
 
     AuctionStatus: 'Estado de la subasta',
@@ -188,6 +195,8 @@ export default {
       /* @ ToDo: i18n */
       moreInfo: 'More informations',
       totalInvested: 'Total invertido',
+      /* @ ToDo: i18n */
+      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Primer addon',
         secondAddon: 'Segundo addon',

@@ -1,19 +1,29 @@
 export default {
   Meta: {
-    title: 'My Account',
-    description: 'Your Exevo Pan account',
+    title: 'Dashboard',
+    description: 'Your Exevo Pan dashboard',
   },
   UserCard: {
     proSince: 'Pro since',
     freeStatus: 'Free',
   },
   Pitch: {
+    thankYou: 'Thank you for being',
     upgradeNow: 'Upgrade now to',
+    enjoyFeatures: 'Enjoy your exclusive features:',
     exclusiveFeatures: 'And have access to exclusive features!',
     features: {
       tcInvested: 'Find out how much TC was invested in any Bazaar character',
-      auctionFilters: 'Exclusive <strong>auction filters</strong>',
-      bossTracker: 'Access to all bosses from <strong>Boss Tracker</strong>',
+      exclusiveFilters: 'Exclusive {{auctionFilters}}',
+      auctionFilters: 'auction filters',
+      exclusiveBosses: 'Access to all bosses from {{bossTracker}}',
+      bossTracker: 'Boss Tracker',
+    },
+    filtersTooltip: {
+      tc: 'Tibia Coins invested',
+      store: 'Store mounts and outfits',
+      rareItems: 'Rare items',
+      soulwar: 'Soul War available',
     },
     more: '...and more in the future!',
     payOnce: 'Pay once, yours',

@@ -5,7 +5,7 @@ import { prisma } from 'lib/prisma'
 export default async (request: VercelRequest, response: VercelResponse) => {
   try {
     const token = await getToken({ req: request })
-    if (token) {
+    if (token && !token.proStatus) {
       const { character } = JSON.parse(request.body)
 
       const data = {

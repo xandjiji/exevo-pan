@@ -70,6 +70,11 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   ${XmlTemplate({
     route: routes.BOSS_TRACKER,
     date: TODAY,
+    changefreq: 'daily',
+  })}
+  ${XmlTemplate({
+    route: routes.EXEVOPRO,
+    date: TODAY,
     changefreq: 'monthly',
   })}
   

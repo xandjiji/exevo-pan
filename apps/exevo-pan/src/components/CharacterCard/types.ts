@@ -17,3 +17,5 @@ export type FlexColumnProps = {
 export type BodyProps = {
   lazy?: boolean
 } & JSX.IntrinsicElements['div']
+
+export type TCInvestedState = 'INVESTED' | 'NO_TC' | 'HIDDEN'

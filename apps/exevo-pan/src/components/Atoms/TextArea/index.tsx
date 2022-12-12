@@ -51,7 +51,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
             noResize && 'resize-none',
             error ? 'border-red' : 'border-separator focus:border-primary',
             disabled
-              ? 'text-onSurface/50 bg-separator/50'
+              ? 'text-onSurface/50 bg-separator/50 cursor-not-allowed'
               : 'text-onSurface bg-surface',
           )}
           style={{ minWidth: 'inherit' }}

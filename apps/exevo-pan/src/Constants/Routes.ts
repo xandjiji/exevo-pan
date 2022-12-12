@@ -1,7 +1,7 @@
 export const routes = {
   HOME: '/',
   LOGIN: '/login',
-  ACCOUNT: '/account',
+  DASHBOARD: '/dashboard',
   BOSS_TRACKER: '/boss-tracker',
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
@@ -18,4 +18,5 @@ export const routes = {
   LIBERTABRA_WAR_SEARCH: '/libertabra-war/search',
   ABOUT: '/blog/about',
   BLOG: '/blog',
+  EXEVOPRO: '/exevo-pro',
 }

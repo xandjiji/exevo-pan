@@ -4,9 +4,11 @@ import { memo } from 'react'
 import Image from 'next/image'
 import { Accordion, Label, ActiveCount } from 'components/Atoms'
 import { useAuctions } from '../../../contexts/useAuctions'
+import { ExevoProExclusive } from '../atoms'
 import { SpritePickerProps } from './types'
 
 const SpritePicker = ({
+  isPro = false,
   title,
   spriteDirectory,
   directorySuffix = '',
@@ -27,19 +29,28 @@ const SpritePicker = ({
       className="border-separator mt-[-9px] border-solid pb-1.5"
       style={{ borderWidth: 0, borderBottomWidth: 1 }}
       title={
-        <Label className="relative flex cursor-pointer items-center gap-1.5 text-left">
+        <Label
+          className={clsx(
+            'relative flex cursor-pointer items-center gap-1.5 text-left',
+            isPro && 'text-rare font-bold',
+          )}
+        >
           {title}
-          <ActiveCount
-            aria-label={`${selectedCount} ${
-              homepage.FilterDrawer.SpritePicker[
-                selectedCount === 1 ? 'item' : 'items'
-              ]
-            }`}
-            aria-hidden={!selectedCount}
-            className="pointer-events-none"
-          >
-            {selectedCount}
-          </ActiveCount>
+          {isPro ? (
+            <ActiveCount
+              aria-label={`${selectedCount} ${
+                homepage.FilterDrawer.SpritePicker[
+                  selectedCount === 1 ? 'item' : 'items'
+                ]
+              }`}
+              aria-hidden={!selectedCount}
+              className="pointer-events-none"
+            >
+              {selectedCount}
+            </ActiveCount>
+          ) : (
+            <ExevoProExclusive />
+          )}
         </Label>
       }
     >
@@ -55,6 +66,7 @@ const SpritePicker = ({
               role="switch"
               title={name}
               aria-checked={isChecked}
+              disabled={!isPro}
               onClick={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -63,8 +75,13 @@ const SpritePicker = ({
                 })
               }
               className={clsx(
-                'clickable relative h-14 w-14 select-none rounded-md p-2 transition-colors',
-                isChecked ? 'bg-primaryHighlight' : 'bg-primaryVariant',
+                'relative h-14 w-14 select-none rounded-md p-2 transition-colors',
+                isPro ? 'clickable' : 'cursor-not-allowed',
+                isPro
+                  ? isChecked
+                    ? 'bg-primaryHighlight'
+                    : 'bg-primaryVariant'
+                  : 'bg-separator/50',
               )}
             >
               <Image

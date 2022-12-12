@@ -1,5 +1,7 @@
-import { useTranslations } from 'contexts/useTranslation'
 import { memo, useMemo, useCallback } from 'react'
+import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
+import { useSession } from 'next-auth/react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { servers } from 'data-dictionary/dist/dictionaries/servers'
@@ -13,7 +15,6 @@ import {
   Slider,
   Checkbox,
   NumericInput,
-  Sticker,
 } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter } from 'utils'
@@ -33,10 +34,18 @@ import { FilterDrawerProps } from './types'
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
 const { PVP_TYPES, SERVER_LOCATIONS } = servers
 
+const proTags = [tagsDictionary.soulwarAvailable]
+const freeTags = Object.keys(tagsDictionary).filter(
+  (tag) => !proTags.includes(tag),
+)
+
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { common, homepage },
   } = useTranslations()
+
+  const { data } = useSession()
+  const isPro = data?.user.proStatus ?? false
 
   const {
     activeServers,
@@ -121,16 +130,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
-        {/* @ ToDo: remove this class */}
-        <FilterGroup className="relative">
-          {/* @ ToDo: remove this sticker */}
-          <Sticker
-            localStorageKey="251122-history-toggle"
-            className="absolute"
-            style={{ top: -12, left: -32, transform: 'rotate(-30deg)' }}
-          >
-            New
-          </Sticker>
+        <FilterGroup>
           <Switch
             active={isHistory}
             onClick={() => dispatch({ type: 'TOGGLE_HISTORY' })}
@@ -630,8 +630,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           directorySuffix={`_${filterState.addon}`}
           filterKey="outfitSet"
           options={outfitValues}
+          isPro={isPro}
         >
-          <OutfitControls />
+          <OutfitControls isPro={isPro} />
         </SpritePicker>
 
         <SpritePicker
@@ -640,8 +641,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           directorySuffix="_3"
           filterKey="storeOutfitSet"
           options={storeOutfitValues}
+          isPro={isPro}
         >
-          <OutfitControls disableAddons />
+          <OutfitControls disableAddons isPro={isPro} />
         </SpritePicker>
 
         <SpritePicker
@@ -649,6 +651,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           spriteDirectory="mounts"
           filterKey="mountSet"
           options={mountValues}
+          isPro={isPro}
         />
 
         <SpritePicker
@@ -656,6 +659,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           spriteDirectory="storemounts"
           filterKey="storeMountSet"
           options={storeMountValues}
+          isPro={isPro}
         />
 
         <FilterGroup>
@@ -676,8 +680,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             onChange={setTcInvested}
             placeholder="0"
             alwaysValid
-            className="w-32"
+            disabled={!isPro}
+            className={clsx(
+              'w-32',
+              isPro ? 'child:text-rare child:font-bold' : 'mb-1',
+            )}
           />
+          {isPro ? <></> : <S.ExevoProExclusive />}
         </FilterGroup>
 
         <FilterGroup>
@@ -870,7 +879,12 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <S.AutocompleteInput
                 id="rare-items-input"
                 label={
-                  <InfoTooltip.LabelWrapper className="whitespace-nowrap">
+                  <InfoTooltip.LabelWrapper
+                    className={clsx(
+                      'whitespace-nowrap',
+                      isPro && 'text-rare font-bold',
+                    )}
+                  >
                     {homepage.FilterDrawer.labels.rareItems}
                     <InfoTooltip
                       labelSize
@@ -882,17 +896,33 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 aria-controls="rare-items-list"
                 placeholder={homepage.FilterDrawer.placeholders.rareItems}
                 itemList={rareItems.itemList}
-                onItemSelect={({ name }) => rareItems.action.toggle(name)}
+                disabled={!isPro}
+                onItemSelect={
+                  isPro
+                    ? ({ name }) => rareItems.action.toggle(name)
+                    : undefined
+                }
                 onKeyPress={blurOnEnter}
                 enterKeyHint="done"
               />
               <Chip
                 overrideStatus={rareItems.allSelected}
-                onClick={rareItems.action.toggleAll}
+                onClick={isPro ? rareItems.action.toggleAll : undefined}
+                gray={!isPro}
+                className={clsx(!isPro && 'cursor-not-allowed')}
               >
                 {homepage.FilterDrawer.toggleAll.items}
               </Chip>
             </S.InputWrapper>
+
+            {isPro ? (
+              <></>
+            ) : (
+              <div className="-mt-2">
+                <S.ExevoProExclusive />
+              </div>
+            )}
+
             <S.ChipWrapper id="rare-items-list">
               {Object.keys(rareItems.selectedItemData).map((item) => (
                 <Chip key={item} onClose={() => rareItems.action.toggle(item)}>
@@ -908,8 +938,43 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           style={{ border: 'none' }}
         >
           <S.ChipWrapper>
+            {proTags.map((tag) => {
+              const isActive = filterState.tags.has(tag)
+
+              return (
+                <Tooltip
+                  content={<S.ExevoProExclusive />}
+                  visible={isPro ? false : undefined}
+                  trigger={isPro ? 'none' : 'hover'}
+                  offset={[0, 6]}
+                >
+                  <Chip
+                    key={tag}
+                    overrideStatus={isActive}
+                    onClick={() =>
+                      isPro
+                        ? dispatch({
+                            type: 'TOGGLE_FILTER_SET',
+                            key: 'tags',
+                            value: tag,
+                          })
+                        : undefined
+                    }
+                    className={
+                      isActive
+                        ? 'text-surface bg-rare'
+                        : 'bg-rare/50 text-onSurface'
+                    }
+                  >
+                    {common.SpecialTags[tag]}
+                  </Chip>
+                </Tooltip>
+              )
+            })}
+
             <Tooltip
               style={{ width: 280 }}
+              offset={[0, 6]}
               content={homepage.FilterDrawer.tooltips.rareNicknames}
             >
               <Chip
@@ -922,7 +987,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               </Chip>
             </Tooltip>
 
-            {Object.keys(tagsDictionary).map((tag) => (
+            {freeTags.map((tag) => (
               <Chip
                 key={tag}
                 overrideStatus={filterState.tags.has(tag)}

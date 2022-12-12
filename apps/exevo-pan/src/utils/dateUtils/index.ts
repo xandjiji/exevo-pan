@@ -1,4 +1,4 @@
-import { DAYS_IN } from './constants'
+import { DAYS_IN, MILLISECONDS_IN } from './constants'
 
 export const padTime = (time: string | number) =>
   time.toString().padStart(2, '0')
@@ -44,6 +44,18 @@ export const sortStringDates = (a: string, b: string): number => {
   const bTotalDays = bDay + bMonth * DAYS_IN.MONTH + bYear * DAYS_IN.YEAR
 
   return aTotalDays - bTotalDays
+}
+
+export const timestampDaysDiff = (
+  currentTimestamp: number,
+  nextTimestamp: number,
+  abs = true,
+): number => {
+  const millisecondsDiff = nextTimestamp - currentTimestamp
+
+  const dayDiff = Math.round(millisecondsDiff / MILLISECONDS_IN.DAY)
+
+  return abs ? Math.abs(dayDiff) : dayDiff
 }
 
 export * from './constants'

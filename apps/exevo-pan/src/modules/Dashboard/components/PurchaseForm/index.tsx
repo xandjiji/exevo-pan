@@ -4,15 +4,15 @@ import type { PaymentData } from '@prisma/client'
 import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { randomCharacter } from 'utils'
-import { endpoints } from 'Constants'
+import { endpoints, advertising } from 'Constants'
 import FromTo from './FromTo'
 import { PurchaseFormProps } from './types'
 
-const BANK_CHARACTER = 'Ksu'
+const { BANK_CHARACTER } = advertising
 
 const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   const {
-    translations: { account },
+    translations: { dashboard },
   } = useTranslations()
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
@@ -62,8 +62,8 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
         isFinished={isFinished}
         currentStep={currentStep}
         steps={[
-          { title: account.PurchaseForm.order, onClick: resetStep },
-          { title: account.PurchaseForm.payment },
+          { title: dashboard.PurchaseForm.order, onClick: resetStep },
+          { title: dashboard.PurchaseForm.payment },
         ]}
       />
       <TitledCard
@@ -71,8 +71,8 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
         title={
           <h4>
             {currentStep === 0
-              ? account.PurchaseForm.order
-              : account.PurchaseForm.payment}
+              ? dashboard.PurchaseForm.order
+              : dashboard.PurchaseForm.payment}
           </h4>
         }
       >
@@ -85,7 +85,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                 <Input
                   className="w-full"
                   name="character"
-                  label={account.PurchaseForm.paymentCharacterLabel}
+                  label={dashboard.PurchaseForm.paymentCharacterLabel}
                   placeholder={`e.g, '${randomNickname}'`}
                   noAlert
                   defaultValue={character}
@@ -100,30 +100,30 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                   loading={isLoading}
                   disabled={!from}
                 >
-                  {account.PurchaseForm.confirm}
+                  {dashboard.PurchaseForm.confirm}
                 </Button>
               </form>
             </div>
           ) : (
             <div className="grid gap-5">
               <strong className="text-txl tracking-wide">
-                {account.PurchaseForm.orderReceived} 🎉
+                {dashboard.PurchaseForm.orderReceived} 🎉
               </strong>
 
               {txId && (
                 <div className="grid gap-2">
-                  <p>{account.PurchaseForm.transactionId}:</p>
+                  <p>{dashboard.PurchaseForm.transactionId}:</p>
                   <p className="code mx-auto w-fit text-center">{txId}</p>
                 </div>
               )}
 
-              <p>{account.PurchaseForm.notice}</p>
+              <p>{dashboard.PurchaseForm.notice}</p>
 
               <FromTo className="mx-auto" from={from} to={BANK_CHARACTER} />
 
               <Button className="mx-auto" pill hollow onClick={resetStep}>
                 <EditIcon className="h-4 w-4" />
-                {account.PurchaseForm.edit}
+                {dashboard.PurchaseForm.edit}
               </Button>
             </div>
           )}

@@ -1,6 +1,10 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Text, CopyButton } from 'components/Atoms'
+import { advertising } from 'Constants'
+import { capitalizeFirstLetter } from 'utils'
+
+const { BANK_CHARACTER } = advertising
 
 // eslint-disable-next-line react/require-default-props
 type FromToProps = { from?: string; to: string } & JSX.IntrinsicElements['span']
@@ -11,13 +15,10 @@ const FromTo = ({ from, to, className, ...props }: FromToProps) => {
   } = useTranslations()
   return (
     <span
-      className={clsx(
-        className,
-        'my-2 flex items-center gap-1 text-center capitalize',
-      )}
+      className={clsx(className, 'my-2 flex items-center gap-1 text-center')}
       {...props}
     >
-      {common.transfer}
+      {capitalizeFirstLetter(common.transfer)}
       {from ? (
         <>
           {' '}
@@ -27,7 +28,7 @@ const FromTo = ({ from, to, className, ...props }: FromToProps) => {
       <Text.Transfer currency="tc" amount={250} className="mx-1.5" />
       <a
         className="text-primaryHighlight font-bold"
-        href="https://www.tibia.com/community/?name=Ksu"
+        href={`https://www.tibia.com/community/?name=${BANK_CHARACTER}`}
         target="_blank"
         rel="noreferrer external"
       >

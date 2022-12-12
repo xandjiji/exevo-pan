@@ -3,8 +3,8 @@
 exports[`<SearchGrid /> should render 1`] = `
 <div>
   <div
-    class="loading-spinner z-1 fixed top-1/2 left-1/2"
-    style="transform: translate(-50%, -50%);"
+    class="loading-spinner z-1 absolute-centered fixed"
+    role="alert"
   />
 </div>
 `;

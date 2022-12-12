@@ -1,21 +1,47 @@
-import { useState, useMemo, useCallback } from 'react'
-import { useTranslations } from 'contexts/useTranslation'
+import clsx from 'clsx'
+import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useSession } from 'next-auth/react'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import NextLink from 'next/link'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
-import clsx from 'clsx'
+import { endpoints, routes, premiumBosses } from 'Constants'
 import usePinBoss from './usePinBoss'
-import { listBy } from './utils'
+import { listBy, prioritizePremium } from './utils'
 import BossCard from './BossCard'
 import BossDialog from '../BossDialog'
 import { BossGridProps, ListOption } from './types'
 
-const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
+const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
   const { translations } = useTranslations()
 
+  const { data } = useSession()
+  const isPro = data?.user.proStatus ?? false
+
+  const [premiumBossData, setPremiumBossData] = useState<BossStats[]>([])
+
+  useEffect(() => {
+    if (isPro) {
+      fetch(`${endpoints.PREMIUM_BOSSES}?server=${server}`)
+        .then((res) => res.json().then(setPremiumBossData))
+        .catch(() => setPremiumBossData([]))
+    }
+  }, [isPro, bosses, server])
+
+  const hydratedBossList = useMemo(
+    () =>
+      bosses.map(
+        (freeData) =>
+          premiumBossData.find(({ name }) => name === freeData.name) ??
+          freeData,
+      ),
+    [bosses, premiumBossData],
+  )
+
   const [listingOption, setListingOption] = useState<ListOption>('chance')
-  const list = useMemo(
-    () => listBy[listingOption](bosses),
-    [bosses, listingOption],
+  const list: typeof bosses = useMemo(
+    () => prioritizePremium(listBy[listingOption](hydratedBossList)),
+    [hydratedBossList, listingOption],
   )
 
   const listOptions: TypedOption<ListOption>[] = [
@@ -58,14 +84,24 @@ const BossGrid = ({ bosses, className, ...props }: BossGridProps) => {
         />
       </div>
 
+      <p className="text-tsm mt-2">
+        {templateMessage(translations.bosses.BossGrid.exclusiveBosses, {
+          exevopro: (
+            <NextLink href={routes.EXEVOPRO} className="text-rare font-bold">
+              Exevo Pro
+            </NextLink>
+          ),
+        })}
+      </p>
       {listNotEmpty ? (
-        <ul className="grid gap-4 pt-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
+        <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
           {list.map((bossStats) => (
             <BossCard
               key={bossStats.name}
+              premium={premiumBosses.set.has(bossStats.name)}
               bossStats={bossStats}
               pinned={pinnedBosses.includes(bossStats.name)}
-              onPìn={toggleBoss}
+              onPin={toggleBoss}
               onClick={() => setSelectedBoss(bossStats.name)}
             />
           ))}

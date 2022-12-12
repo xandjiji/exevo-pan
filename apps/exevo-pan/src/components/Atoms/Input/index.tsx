@@ -72,9 +72,11 @@ const Input = (
       </Label>
       <div
         className={clsx(
-          'border-1 flex w-full cursor-text items-center rounded-md border-solid transition-colors',
+          'border-1 flex w-full items-center rounded-md border-solid transition-colors',
           error ? 'border-red' : 'border-separator focus-within:border-primary',
-          disabled ? 'bg-separator/50' : 'bg-surface',
+          disabled
+            ? 'bg-separator/50 cursor-not-allowed'
+            : 'bg-surface cursor-text',
         )}
         onClick={() => innerRef.current?.focus()}
       >
@@ -89,7 +91,7 @@ const Input = (
           className={clsx(
             'text-tsm w-full border-none bg-transparent py-2.5 px-4 outline-none transition-all',
             disabled
-              ? 'text-onSurface/50 placeholder:text-onSurface/50'
+              ? 'text-onSurface/50 placeholder:text-onSurface/50 cursor-not-allowed'
               : 'text-onSurface placeholder:text-separator',
           )}
           style={{ paddingRight: isClearButtonActive ? 0 : undefined }}
