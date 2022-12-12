@@ -4,7 +4,7 @@
 
     <url>
         <loc>https://exevopan.com/</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>always</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/"/>
@@ -12,17 +12,8 @@
         <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/"/>
     </url>
     <url>
-        <loc>https://exevopan.com/bazaar-history</loc>
-        <lastmod>2022-10-03</lastmod>
-        <changefreq>hourly</changefreq>
-
-        <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/bazaar-history"/>
-        <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/bazaar-history"/>
-        <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/bazaar-history"/>
-    </url>
-    <url>
         <loc>https://exevopan.com/statistics</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>daily</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics"/>
@@ -31,7 +22,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/statistics/highscores</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>daily</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/statistics/highscores"/>
@@ -40,7 +31,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/blog</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>daily</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/blog"/>
@@ -49,7 +40,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/highlight-auction</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>always</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/highlight-auction"/>
@@ -58,7 +49,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators"/>
@@ -67,7 +58,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/exercise-weapons</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/exercise-weapons"/>
@@ -76,7 +67,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/stamina</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/stamina"/>
@@ -85,7 +76,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/charm-damage</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/charm-damage"/>
@@ -94,7 +85,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/imbuements-cost</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/imbuements-cost"/>
@@ -103,7 +94,7 @@
     </url>
     <url>
         <loc>https://exevopan.com/calculators/loot-split</loc>
-        <lastmod>2022-10-03</lastmod>
+        <lastmod>2022-12-12</lastmod>
         <changefreq>monthly</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/calculators/loot-split"/>
@@ -112,12 +103,21 @@
     </url>
     <url>
         <loc>https://exevopan.com/boss-tracker</loc>
-        <lastmod>2022-10-03</lastmod>
-        <changefreq>monthly</changefreq>
+        <lastmod>2022-12-12</lastmod>
+        <changefreq>daily</changefreq>
 
         <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/boss-tracker"/>
         <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/boss-tracker"/>
         <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/boss-tracker"/>
+    </url>
+    <url>
+        <loc>https://exevopan.com/exevo-pro</loc>
+        <lastmod>2022-12-12</lastmod>
+        <changefreq>monthly</changefreq>
+
+        <xhtml:link rel="alternate" hreflang="es" href="https://exevopan.com/es/exevo-pro"/>
+        <xhtml:link rel="alternate" hreflang="pl" href="https://exevopan.com/pl/exevo-pro"/>
+        <xhtml:link rel="alternate" hreflang="pt" href="https://exevopan.com/pt/exevo-pro"/>
     </url>
 
     <url>
