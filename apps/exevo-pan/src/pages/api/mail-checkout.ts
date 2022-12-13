@@ -5,6 +5,8 @@ import { EmailTemplate } from 'modules/Advertise/components'
 import { isDevelopment } from 'utils'
 import { BackofficeClient, NotifyAdminClient } from 'services/server'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
+import { getToken } from 'next-auth/jwt'
+import { prisma } from 'lib/prisma'
 import { advertise } from 'locales'
 import { email } from 'Constants'
 
@@ -28,7 +30,8 @@ export default async (
   response: VercelResponse,
 ): Promise<void> => {
   const { method, body } = request
-  const { selectedDates, selectedCharacter } = body as AdvertisePurchase
+  const { selectedDates, selectedCharacter, paymentMethod, paymentCharacter } =
+    body as AdvertisePurchase
 
   if (method !== 'POST') {
     response.status(405).end()
@@ -40,12 +43,31 @@ export default async (
 
   const dictionary = advertise[body.locale as keyof typeof advertise]
 
-  const uuid = uuidv4()
-
   if (isDevelopment()) {
-    response.status(200).json({ uuid })
+    response.status(200).json({ uuid: uuidv4() })
     return
   }
+
+  const token = await getToken({ req: request })
+  const { id: uuid } = await prisma.highlightedAuction.create({
+    data: {
+      auctionId: selectedCharacter.id,
+      nickname: selectedCharacter.nickname,
+      days: selectedDates.join(),
+      email: body.email,
+      paymentMethod,
+      paymentCharacter: (paymentCharacter as string | undefined)
+        ? paymentCharacter
+        : undefined,
+      user: token
+        ? {
+            connect: {
+              id: token.id,
+            },
+          }
+        : undefined,
+    },
+  })
 
   const html = await EmailTemplate({ ...body, uuid })
 
