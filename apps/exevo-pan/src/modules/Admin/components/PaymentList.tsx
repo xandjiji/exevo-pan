@@ -7,6 +7,8 @@ import {
   Table,
   Input,
   Checkbox,
+  Dialog,
+  Button,
 } from 'components/Atoms'
 import { endpoints } from 'Constants'
 
@@ -18,11 +20,24 @@ type Data = {
 const PAGE_SIZE = 30
 const DEBOUNCE_DELAY = 700
 
+const EMPTY_CONFIRMATION = {
+  character: '',
+  id: '',
+  confirmed: false,
+}
+
 const PaymentList = () => {
   const [{ page, count }, setData] = useState<Data>({ page: [], count: 0 })
   const [pageIndex, setPageIndex] = useState(0)
   const [nickname, setNickname] = useState('')
   const [requestState, setRequestState] = useState<RequestStatus>('IDLE')
+
+  const [toConfirm, setToConfirm] = useState(EMPTY_CONFIRMATION)
+
+  const resetConfirmation = useCallback(
+    () => setToConfirm(EMPTY_CONFIRMATION),
+    [],
+  )
 
   useEffect(() => {
     if (requestState === 'IDLE') {
@@ -43,21 +58,22 @@ const PaymentList = () => {
     }
   }, [pageIndex, nickname, requestState])
 
-  const confirmPayment = useCallback(
-    ({ id, confirmed }: { id: string; confirmed: boolean }) => {
-      setRequestState('LOADING')
+  const confirmPayment = useCallback(() => {
+    setRequestState('LOADING')
 
-      fetch(endpoints.ADMIN.PAYMENTS, {
-        method: 'PATCH',
-        body: JSON.stringify({ id, confirmed }),
+    fetch(endpoints.ADMIN.PAYMENTS, {
+      method: 'PATCH',
+      body: JSON.stringify({
+        id: toConfirm.id,
+        confirmed: toConfirm.confirmed,
+      }),
+    })
+      .then(() => setRequestState('IDLE'))
+      .catch(() => {
+        setRequestState('ERROR')
       })
-        .then(() => setRequestState('IDLE'))
-        .catch(() => {
-          setRequestState('ERROR')
-        })
-    },
-    [],
-  )
+      .finally(resetConfirmation)
+  }, [toConfirm.id, toConfirm.confirmed, resetConfirmation])
 
   const isLoading = requestState === 'LOADING' || requestState === 'IDLE'
 
@@ -114,7 +130,7 @@ const PaymentList = () => {
                       <Checkbox
                         checked={confirmed}
                         onClick={() =>
-                          confirmPayment({ id, confirmed: !confirmed })
+                          setToConfirm({ character, id, confirmed: !confirmed })
                         }
                       />
                     </div>
@@ -131,6 +147,34 @@ const PaymentList = () => {
           </Table.Body>
         </Table.Element>
       </Table>
+
+      <Dialog
+        isOpen={!!toConfirm.character}
+        onClose={resetConfirmation}
+        heading="Do you really want to proceed?"
+        noCloseButton
+        className="grid max-w-[90vw] text-base"
+      >
+        <p className="mt-4 mb-6 flex flex-wrap items-center gap-2">
+          <span
+            className={`code ${
+              toConfirm.confirmed ? 'text-greenHighlight' : 'text-red'
+            }`}
+          >
+            {toConfirm.confirmed ? 'Confirm' : 'Unconfirm'}
+          </span>
+          <p className="code w-fit">{toConfirm.character}</p>
+        </p>
+
+        <div className="flex justify-end gap-1">
+          <Button hollow pill onClick={resetConfirmation}>
+            Cancel
+          </Button>
+          <Button pill onClick={confirmPayment}>
+            Confirm
+          </Button>
+        </div>
+      </Dialog>
     </section>
   )
 }
