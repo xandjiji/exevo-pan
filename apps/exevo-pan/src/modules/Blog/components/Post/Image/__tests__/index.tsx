@@ -8,9 +8,8 @@ describe('<Image />', () => {
       <Image
         src="image-src.png"
         alt="alt-text"
-        className="figure-class"
+        className="inner-class"
         id="figure-id"
-        align="center"
         caption={<div>This is the caption</div>}
         width={30}
         height={30}
@@ -22,16 +21,45 @@ describe('<Image />', () => {
     expect(imageElement).toHaveAttribute('src', 'image-src.png')
 
     const wrapperElement = screen.getByRole('figure')
-    expect(container.querySelector('.figure-class')).toEqual(wrapperElement)
     expect(container.querySelector('#figure-id')).toEqual(wrapperElement)
-    expect(wrapperElement).toHaveClass('mx-auto')
 
     expect(container.querySelector('figcaption')).toHaveTextContent(
       'This is the caption',
     )
   })
 
-  test('should fade in on image load', () => {
+  test('should have the correct alignment', () => {
+    const { container, rerender } = renderWithProviders(
+      <Image
+        src="image-src.png"
+        alt="alt-text"
+        className="inner-class"
+        align="center"
+      />,
+    )
+
+    expect(container.querySelector('.inner-class')).toHaveClass('mx-auto')
+
+    rerender(
+      <Image
+        src="image-src.png"
+        alt="alt-text"
+        className="inner-class"
+        align="right"
+      />,
+    )
+
+    expect(container.querySelector('.inner-class')).toHaveClass('ml-auto')
+
+    rerender(
+      <Image src="image-src.png" alt="alt-text" className="inner-class" />,
+    )
+
+    expect(container.querySelector('.inner-class')).not.toHaveClass('ml-auto')
+    expect(container.querySelector('.inner-class')).not.toHaveClass('mx-auto')
+  })
+
+  test.skip('should fade in on image load', () => {
     renderWithProviders(
       <Image src="image-src" alt="alt-text" width={30} height={30} />,
     )
