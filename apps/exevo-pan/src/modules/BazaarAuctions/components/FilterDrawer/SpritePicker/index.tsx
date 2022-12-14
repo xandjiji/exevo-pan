@@ -1,8 +1,8 @@
+import { useState, useMemo, memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import { memo } from 'react'
 import Image from 'next/image'
-import { Accordion, Label, ActiveCount } from 'components/Atoms'
+import { Accordion, Label, ActiveCount, Input } from 'components/Atoms'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { ExevoProExclusive } from '../atoms'
 import { SpritePickerProps } from './types'
@@ -13,12 +13,24 @@ const SpritePicker = ({
   spriteDirectory,
   directorySuffix = '',
   options,
+  searchPlaceholder,
   filterKey,
   children,
 }: SpritePickerProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
+
+  const [search, setSearch] = useState('')
+
+  const filteredOptions = useMemo(() => {
+    if (!search) return options
+
+    const insensitiveTerm = search.toLowerCase()
+    return options.filter((name) =>
+      name.toLowerCase().includes(insensitiveTerm),
+    )
+  }, [search, options])
 
   const { filterState, dispatch } = useAuctions()
 
@@ -54,9 +66,16 @@ const SpritePicker = ({
         </Label>
       }
     >
+      <Input
+        allowClear
+        label="Search by name"
+        className="max-w-[180px]"
+        placeholder={searchPlaceholder}
+        onChange={(e) => setSearch(e.target.value)}
+      />
       <div className="flex flex-wrap gap-2">
         {children}
-        {options.map((name) => {
+        {filteredOptions.map((name) => {
           const isChecked = (filterState[filterKey] as Set<string>).has(name)
 
           return (

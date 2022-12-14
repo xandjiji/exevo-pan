@@ -7,5 +7,6 @@ export type SpritePickerProps = {
   directorySuffix?: string
   filterKey: ExtractFilterByType<Set<string>>
   options: string[]
+  searchPlaceholder?: string
   children?: React.ReactNode
 }

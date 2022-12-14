@@ -626,6 +626,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <SpritePicker
           title="Outfits"
+          searchPlaceholder="e.g, 'Golden Outfit'"
           spriteDirectory={`outfits/${sexDirectory}`}
           directorySuffix={`_${filterState.addon}`}
           filterKey="outfitSet"
@@ -637,6 +638,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <SpritePicker
           title="Store Outfits"
+          searchPlaceholder="e.g, 'Retro Warrior'"
           spriteDirectory={`storeoutfits/${sexDirectory}`}
           directorySuffix="_3"
           filterKey="storeOutfitSet"
@@ -648,6 +650,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <SpritePicker
           title="Mounts"
+          searchPlaceholder="e.g, 'Neon Sparkid'"
           spriteDirectory="mounts"
           filterKey="mountSet"
           options={mountValues}
@@ -656,6 +659,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <SpritePicker
           title="Store Mounts"
+          searchPlaceholder="e.g, 'Gloomwurm'"
           spriteDirectory="storemounts"
           filterKey="storeMountSet"
           options={storeMountValues}
