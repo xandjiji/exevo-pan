@@ -7,13 +7,18 @@ const MONTH = DAYS_IN.MONTH * MILLISECONDS_IN.DAY
 const oneMonthAgo = () => new Date(+new Date() - MONTH).toISOString()
 
 const BRL_PRICE = 40
-const toBrl = (count: number) =>
-  `R$ ${(count * BRL_PRICE).toFixed(2).replace('.', ',')}`
+const toBrl = (count: number) => {
+  const stringValue = (count * BRL_PRICE).toFixed(2).replace('.', ',')
+
+  const [integerPart, decimalPart] = stringValue.split(',')
+
+  return `R$ ${integerPart.replace(/(\d)(\d{3})$/, '$1.$2')},${decimalPart}`
+}
 
 const INITIAL_TIMESTAMP = 1670798862398
 const toMonthlyAverageCount = (count: number): number => {
   const daysSinceStart = timestampDaysDiff(+new Date(), INITIAL_TIMESTAMP)
-  return count / daysSinceStart / DAYS_IN.MONTH
+  return (count / daysSinceStart) * DAYS_IN.MONTH
 }
 
 export default async (request: VercelRequest, response: VercelResponse) => {
