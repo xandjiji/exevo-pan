@@ -72,6 +72,7 @@ const SpritePicker = ({
         className="max-w-[180px]"
         placeholder={searchPlaceholder}
         onChange={(e) => setSearch(e.target.value)}
+        disabled={!isPro}
       />
       <div className="flex flex-wrap gap-2">
         {children}
