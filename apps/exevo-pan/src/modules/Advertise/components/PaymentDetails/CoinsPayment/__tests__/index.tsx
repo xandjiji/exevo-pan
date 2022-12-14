@@ -15,7 +15,7 @@ describe('<CoinsPayment />', () => {
     renderWithProviders(<CoinsPayment />)
 
     expect(
-      screen.getByText(
+      screen.getByTitle(
         readablePrice.full.TIBIA_COINS(
           calculatePrice(DAYS_COUNT, 'TIBIA_COINS').totalPrice,
         ),
