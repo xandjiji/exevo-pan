@@ -2,6 +2,11 @@ import { screen } from '@testing-library/react'
 import { renderWithProviders, setup } from 'utils/test'
 import Link from '..'
 
+jest.mock('next/link', () => (props: JSX.IntrinsicElements['a']) => (
+  // eslint-disable-next-line jsx-a11y/anchor-has-content
+  <a {...props} />
+))
+
 const mockedUseRouter = setup.useRouter()
 
 describe('<Link />', () => {
@@ -15,7 +20,7 @@ describe('<Link />', () => {
       } as any)
 
       renderWithProviders(
-        <Link href="/homepage">
+        <Link href="/homepage" exact>
           <div role="none">homepage</div>
         </Link>,
       )
