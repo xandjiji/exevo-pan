@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Login',
-    description: 'Login to your Exevo Pan account',
+    title: 'Log in',
+    description: 'Log in op je Exevo Pan-account',
   },
 }
