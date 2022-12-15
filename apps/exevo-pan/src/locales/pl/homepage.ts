@@ -67,6 +67,8 @@ export default {
     rareNicknamesButton: 'Rzadkie nazwy postaci',
     skullEmoji: 'Czaszka',
     SpritePicker: {
+      /* @ ToDo: i18n */
+      search: 'Search by name',
       item: 'Przedmiot jest wybrany',
       items: 'Przedmioty są wybrane',
     },

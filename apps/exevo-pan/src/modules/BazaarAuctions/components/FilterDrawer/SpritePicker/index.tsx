@@ -68,7 +68,7 @@ const SpritePicker = ({
     >
       <Input
         allowClear
-        label="Search by name"
+        label={homepage.FilterDrawer.SpritePicker.search}
         className="max-w-[180px]"
         placeholder={searchPlaceholder}
         onChange={(e) => setSearch(e.target.value)}
