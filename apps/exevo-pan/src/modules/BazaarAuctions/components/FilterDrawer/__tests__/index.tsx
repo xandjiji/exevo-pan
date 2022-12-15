@@ -319,7 +319,40 @@ describe('<FilterDrawer />', () => {
     expect(screen.queryByText('Amazon Shield')).toBeInTheDocument()
   })
 
-  test.todo('text-based search sprite picker')
+  test('text-based search sprite picker', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
+
+    userEvent.click(screen.getByText('Outfits'))
+
+    outfit.tokens.forEach((outfitName) => {
+      expect(screen.getByTitle(outfitName)).toBeInTheDocument()
+    })
+
+    const query = 'mage'
+    const searchElement = screen.getByLabelText('Search by name')
+    userEvent.type(searchElement, query)
+
+    const filteredOutfits = new Set(
+      outfit.tokens.filter((outfitName) =>
+        outfitName.toLowerCase().includes(query),
+      ),
+    )
+
+    outfit.tokens.forEach((outfitName) => {
+      if (filteredOutfits.has(outfitName)) {
+        expect(screen.getByTitle(outfitName)).toBeInTheDocument()
+      } else {
+        expect(screen.queryByTitle(outfitName)).not.toBeInTheDocument()
+      }
+    })
+
+    userEvent.clear(searchElement)
+
+    outfit.tokens.forEach((outfitName) => {
+      expect(screen.getByTitle(outfitName)).toBeInTheDocument()
+    })
+  })
 
   test.todo('pro disabled fields')
 })
