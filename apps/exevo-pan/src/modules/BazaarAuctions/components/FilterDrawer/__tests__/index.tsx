@@ -354,5 +354,29 @@ describe('<FilterDrawer />', () => {
     })
   })
 
-  test.todo('pro disabled fields')
+  test('pro disabled fields', () => {
+    setup
+      .useSession()
+      .mockClear()
+      .mockReturnValue({
+        data: {
+          user: {
+            proStatus: false,
+          },
+        } as any,
+        status: 'unauthenticated',
+      })
+
+    renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
+
+    expect(screen.getByLabelText('Rare items')).toBeDisabled()
+    expect(screen.getByLabelText('Tibia Coins invested')).toBeDisabled()
+
+    userEvent.click(screen.getByText('Store Outfits', { exact: false }))
+    expect(screen.getByLabelText('Search by name')).toBeDisabled()
+    expect(screen.getByRole('checkbox', { name: 'Addon 1' })).toBeDisabled()
+    expect(screen.getByRole('checkbox', { name: 'Addon 2' })).toBeDisabled()
+    expect(screen.getByTitle('Entrepreneur')).toBeDisabled()
+  })
 })
