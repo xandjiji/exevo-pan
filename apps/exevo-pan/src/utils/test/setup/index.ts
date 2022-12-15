@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import { useSession } from 'next-auth/react'
 import { getFromLocalStorage, saveToLocalStorage } from 'utils'
 import * as IntersectionObserver from './intersectionObserver'
 
@@ -36,6 +37,8 @@ export const setup = {
   IntersectionObserver,
   useRouter: (): jest.MockedFunction<typeof useRouter> =>
     useRouter as jest.MockedFunction<typeof useRouter>,
+  useSession: (): jest.MockedFunction<typeof useSession> =>
+    useSession as jest.MockedFunction<typeof useSession>,
   getFromLocalStorage: (): jest.MockedFunction<typeof getFromLocalStorage> =>
     getFromLocalStorage as jest.MockedFunction<typeof getFromLocalStorage>,
   saveToLocalStorage: (): jest.MockedFunction<typeof saveToLocalStorage> =>

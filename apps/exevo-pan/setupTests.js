@@ -6,6 +6,7 @@ jest.mock('next/router', () => ({
   __esModule: true,
   useRouter: jest.fn().mockReturnValue({ pathname: '/' }),
 }))
+jest.mock('next-auth/react')
 
 jest.mock('utils/localStorage', () => ({
   getFromLocalStorage: jest
