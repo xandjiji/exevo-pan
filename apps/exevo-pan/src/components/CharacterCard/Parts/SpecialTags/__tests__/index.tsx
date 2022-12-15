@@ -1,4 +1,3 @@
-import { getCharacterTags } from 'shared-utils/dist/getCharacterTags'
 import { screen } from '@testing-library/react'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { common } from 'locales'
@@ -13,9 +12,11 @@ describe('<SpecialTags />', () => {
       <SpecialTags data-testid="wrapper" character={character} />,
     )
 
-    const tags = getCharacterTags(character)
+    const { tags } = character
 
     const wrapperElement = screen.queryByTestId('wrapper')
+
+    expect(wrapperElement?.children.length).toEqual(tags.length)
     if (tags.length) {
       expect(wrapperElement).toBeInTheDocument()
       tags.forEach((tag) => {
