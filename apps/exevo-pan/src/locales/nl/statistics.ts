@@ -1,51 +1,51 @@
 export default {
   Meta: {
     Statistics: {
-      title: 'Overall Statistics',
+      title: 'Algemene statistieken',
       description:
-        'Statistics, trends and data analytics about daily and historic Tibia Char Bazaar information!',
+        'Statistieken, trends, en data-analyses over nieuwe en historische Tibia Char Bazaar-informatie!',
     },
     Highscores: {
       title: 'Highscores',
       description:
-        'See rankings for the highest bids, top levels and best skills on Tibia Char Bazaar!',
+        'Bekijk de hoogste biedingen, de hoogste levels, en de beste skills op de Tibia Char Bazaar!',
     },
   },
   Header: {
-    Overall: 'Overall',
+    Overall: 'Algemeen',
     Highscores: 'Highscores',
   },
   OverallGrid: {
-    title: 'Tibia Bazaar statistics data and analytics',
+    title: 'Tibia Bazaar statistieken, data, en analyse',
     Chart1: {
-      totalLabel: 'Total volume',
-      yesterdayLabel: "Yesterday's volume",
-      tooltipLabel: 'Tibia Coins volume',
+      totalLabel: 'Totaal volume',
+      yesterdayLabel: 'Volume van gisteren',
+      tooltipLabel: 'Volume in Tibia Coins',
     },
     Chart2: {
-      totalLabel: "Cipsoft's total revenue",
-      yesterdayLabel: "Yesterday's revenue",
-      tooltipLabel: 'Cipsoft revenue',
+      totalLabel: 'totale inkomsten voor CipSoft',
+      yesterdayLabel: 'inkomsten van gisteren',
+      tooltipLabel: 'inkomsten voor Cipsoft',
     },
     PercentageCard1: {
-      title: 'Auction success rate',
+      title: 'Veiling succesratio',
     },
     PieChart1: {
-      title: 'Vocation distribution',
+      title: 'Vocation-distributie',
     },
   },
   HighscoresGrid: {
-    title: 'Tibia Bazaar top 10 characters, ranking and highscores',
-    top10BidTitle: 'Bid',
+    title: 'Tibia Bazaar top 10 karakters, ranking, en highscores',
+    top10BidTitle: 'Bod',
   },
-  Days: 'days',
+  Days: 'dagen',
   Summary: {
-    positiveTrendLabel: 'Upwards trend',
-    negativeTrendLabel: 'Downwards trend',
+    positiveTrendLabel: 'Stijgende trend',
+    negativeTrendLabel: 'Dalende trend',
   },
   List: {
     captionTop10: 'Top 10',
-    captionDescription: 'characters ranking',
-    titleLabel: 'Ranking position',
+    captionDescription: 'karakters ranking',
+    titleLabel: 'Ranking-positie',
   },
 }
