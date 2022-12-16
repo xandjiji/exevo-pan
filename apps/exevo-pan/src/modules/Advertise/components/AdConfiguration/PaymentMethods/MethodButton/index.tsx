@@ -20,7 +20,7 @@ const MethodButton = ({
     style={{ borderWidth: 0, borderLeftWidth: 6, ...style }}
     {...props}
   >
-    <RadioButton active={active} tabIndex={-1}>
+    <RadioButton active={active} tabIndex={-1} aria-label={props['aria-label']}>
       <div className="ml-2 flex items-center gap-1.5">
         {icon}
         {children}

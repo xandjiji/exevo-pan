@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import clsx from 'clsx'
-import { formatNumberWithCommas } from 'utils'
-import { formatDiffValue } from './utils'
+import { format } from './utils'
 import GuildSummary from '../../GuildSummary'
 import { ScoreboardProps } from './types'
 
@@ -19,8 +18,8 @@ const Scoreboard = ({
       <GuildSummary
         guildName={guildA.name}
         href={guildA.href}
-        displayValue={formatNumberWithCommas(guildA.kills)}
-        diffText={formatDiffValue(guildA.diff)}
+        displayValue={format.displayValue(guildA.kills)}
+        diffText={format.diffValue(guildA.diff)}
         winning={guildA.kills >= guildB.kills}
         label="Kills"
       />
@@ -28,8 +27,8 @@ const Scoreboard = ({
       <GuildSummary
         guildName={guildB.name}
         href={guildB.href}
-        displayValue={formatNumberWithCommas(guildB.kills)}
-        diffText={formatDiffValue(guildB.diff)}
+        displayValue={format.displayValue(guildB.kills)}
+        diffText={format.diffValue(guildB.diff)}
         winning={guildB.kills >= guildA.kills}
         label="Kills"
       />

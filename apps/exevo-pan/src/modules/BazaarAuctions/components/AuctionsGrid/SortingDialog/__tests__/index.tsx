@@ -29,8 +29,7 @@ describe('<SortingDialog />', () => {
     mockedUseAuctions.mockImplementation(
       () =>
         ({
-          sortingMode: 0,
-          descendingOrder: false,
+          sortingOptions: { sortingMode: 0, descendingOrder: false },
           dispatch: mockedDispatch,
         } as unknown as AuctionsContextValues),
     )

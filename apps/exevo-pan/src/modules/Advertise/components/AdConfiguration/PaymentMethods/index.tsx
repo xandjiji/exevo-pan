@@ -12,6 +12,7 @@ const PaymentMethods = () => {
     <div className={clsx('card overflow-hidden p-0', styles.wrapper)}>
       <MethodButton
         active={paymentMethod === 'TIBIA_COINS'}
+        aria-label="Tibia Coins"
         onClick={() =>
           dispatch({ type: 'SET_PAYMENT_METHOD', method: 'TIBIA_COINS' })
         }
@@ -23,6 +24,7 @@ const PaymentMethods = () => {
       </MethodButton>
       <MethodButton
         active={paymentMethod === 'PIX'}
+        aria-label="Pix"
         onClick={() => dispatch({ type: 'SET_PAYMENT_METHOD', method: 'PIX' })}
         icon={<Image alt="Pix" src={PixSrc} width="24" height="24" />}
       >

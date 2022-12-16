@@ -65,6 +65,7 @@ export default {
     rareNicknamesButton: 'Nicknames raros',
     skullEmoji: 'caveira',
     SpritePicker: {
+      search: 'Procurar por nome',
       item: 'item está selecionado',
       items: 'items estão selecionados',
     },

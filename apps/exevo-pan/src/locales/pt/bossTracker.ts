@@ -55,6 +55,9 @@ export default {
       locations: 'Locais',
       /* 'using' TibiaMaps.io ❤️ */
       using: 'usando',
+      descriptions: {
+        Grorlam: 'Várias localizações dentro de Mount Sternum (Thais)',
+      },
     },
   },
 }

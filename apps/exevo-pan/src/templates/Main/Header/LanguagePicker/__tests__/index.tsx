@@ -1,27 +1,43 @@
 import { screen } from '@testing-library/dom'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import LanguagePicker from '..'
+
+const mockedUseRouter = setup.useRouter()
 
 describe('<LanguagePicker />', () => {
   test('should toggle visibility', () => {
-    const mockToggle = jest.fn()
-    const { rerender } = renderWithProviders(
-      <LanguagePicker isOpen={false} setLanguageOpen={mockToggle} />,
-    )
+    renderWithProviders(<LanguagePicker />)
 
-    const toggleButton = screen.getByRole('button')
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-    expect(mockToggle).toHaveBeenCalledTimes(0)
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument()
 
-    userEvent.click(toggleButton)
-    expect(mockToggle).toHaveBeenCalledTimes(1)
-    rerender(<LanguagePicker isOpen setLanguageOpen={mockToggle} />)
-    expect(screen.getByRole('dialog')).toBeInTheDocument()
+    userEvent.click(screen.getByRole('button', { name: 'Change language' }))
+    expect(screen.getByRole('menu')).toBeInTheDocument()
 
-    userEvent.click(toggleButton)
-    expect(mockToggle).toHaveBeenCalledTimes(2)
-    rerender(<LanguagePicker isOpen={false} setLanguageOpen={mockToggle} />)
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
+    expect(screen.queryByRole('menu')).not.toBeInTheDocument()
+  })
+
+  test('should select a language', () => {
+    const mockedArgs = {
+      locale: 'es',
+      push: jest.fn(),
+      pathname: '',
+      query: {},
+    }
+
+    mockedUseRouter.mockReturnValue(mockedArgs as any)
+
+    renderWithProviders(<LanguagePicker />)
+
+    userEvent.click(screen.getByRole('button', { name: 'Change language' }))
+
+    const [, spanish, portuguese] = screen.getAllByRole('menuitemradio')
+
+    expect(spanish).toBeChecked()
+    expect(mockedArgs.push).toHaveBeenCalledTimes(0)
+
+    userEvent.click(portuguese)
+    expect(mockedArgs.push).toHaveBeenCalledTimes(1)
   })
 })

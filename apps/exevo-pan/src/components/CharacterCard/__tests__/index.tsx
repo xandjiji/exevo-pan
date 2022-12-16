@@ -6,8 +6,7 @@ import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as charm from 'data-dictionary/dist/dictionaries/charm'
 import * as quest from 'data-dictionary/dist/dictionaries/quest'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
-import { routes } from 'Constants'
-import CharacterCard, { BOSS_SLOT_POINTS } from '..'
+import CharacterCard from '..'
 
 const { characterData } = randomDataset()
 const characterList = characterData.slice(0, 10)
@@ -109,15 +108,6 @@ describe('<CharacterCard />', () => {
       expect(preyCheckbox).not.toBeChecked()
     }
 
-    const bossSlotCheckbox = screen.getByRole('checkbox', {
-      name: 'Boss Slot',
-    })
-    if (character.bossPoints >= BOSS_SLOT_POINTS) {
-      expect(bossSlotCheckbox).toBeChecked()
-    } else {
-      expect(bossSlotCheckbox).not.toBeChecked()
-    }
-
     const totalInvestment = formatNumberWithCommas(character.tcInvested)
 
     if (totalInvestment === '0') {
@@ -153,8 +143,20 @@ describe('<CharacterCard />', () => {
     userEvent.click(expandButton)
     expect(screen.getByRole('dialog')).toBeInTheDocument()
 
-    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
+    const [closeDialogButton] = screen.getAllByRole('button', {
+      name: 'Close dialog',
+    })
+    userEvent.click(closeDialogButton)
 
     expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+  })
+
+  test('tc invested should be hidden', () => {
+    const [character] = characterList
+    renderWithProviders(
+      <CharacterCard characterData={{ ...character, tcInvested: -1 }} />,
+    )
+
+    expect(screen.getByText('Exevo Pro', { exact: false })).toBeInTheDocument()
   })
 })

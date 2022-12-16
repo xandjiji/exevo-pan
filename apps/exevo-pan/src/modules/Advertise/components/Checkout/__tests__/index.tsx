@@ -25,7 +25,7 @@ const mockedValidateCharacter = validateCharacter as jest.MockedFunction<
   typeof validateCharacter
 >
 
-jest.mock('services', () => ({
+jest.mock('services/client', () => ({
   MailCheckoutClient: { postMail: jest.fn().mockResolvedValue('new-uuid') },
 }))
 

@@ -96,7 +96,7 @@ const resetPaginationActions: Set<Action['type']> = new Set([
   'TOGGLE_HISTORY',
 ])
 
-const Reducer: Reducer<Action> = (state, action) => {
+const ReducerFunction: Reducer<Action> = (state, action) => {
   const nextState = ActionsReducer(state, action)
 
   if (resetPaginationActions.has(action.type)) resetPagination(nextState)
@@ -104,4 +104,4 @@ const Reducer: Reducer<Action> = (state, action) => {
   return nextState
 }
 
-export default Reducer
+export default ReducerFunction

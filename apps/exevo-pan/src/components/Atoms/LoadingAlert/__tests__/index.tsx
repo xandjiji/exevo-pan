@@ -8,7 +8,9 @@ describe('<LoadingAlert />', () => {
       <LoadingAlert aria-label="Loading data">Updating data...</LoadingAlert>,
     )
 
-    expect(screen.getByRole('alert')).toHaveTextContent('Updating data...')
+    const [alertElement] = screen.getAllByRole('alert')
+
+    expect(alertElement).toHaveTextContent('Updating data...')
     expect(screen.getByLabelText('Loading data')).toBeInTheDocument()
   })
 

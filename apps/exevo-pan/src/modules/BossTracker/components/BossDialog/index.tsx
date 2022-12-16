@@ -106,7 +106,10 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                     className="h-80 w-full border-0 shadow"
                   />
                   {!!description && (
-                    <caption className="text-tsm">{description}</caption>
+                    <caption className="text-tsm">
+                      {bosses.BossGrid.BossDialog.descriptions[description] ??
+                        description}
+                    </caption>
                   )}
                 </li>
               ))}

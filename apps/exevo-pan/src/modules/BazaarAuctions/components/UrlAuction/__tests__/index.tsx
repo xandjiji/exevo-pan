@@ -16,14 +16,10 @@ describe('<UrlAuction />', () => {
     setup.URLSearchParams.get('123456')
 
     mockedFetch.mockResolvedValueOnce({
-      json: async () => ({
-        page: [mockedCharacterData],
-        sortingMode: 0,
-        descendingOrder: false,
-      }),
+      json: async () => mockedCharacterData,
     } as Response)
 
-    renderWithProviders(<UrlAuction endpoint="endpoint" />)
+    renderWithProviders(<UrlAuction />)
 
     await waitFor(() =>
       expect(screen.getByText(/loading/gi)).toBeInTheDocument(),
@@ -37,7 +33,10 @@ describe('<UrlAuction />', () => {
       ).toBeInTheDocument(),
     )
 
-    userEvent.click(screen.getByRole('button', { name: 'Close dialog' }))
+    const [closeButton] = screen.getAllByRole('button', {
+      name: 'Close dialog',
+    })
+    userEvent.click(closeButton)
     await waitFor(() =>
       expect(
         screen.queryByText(mockedCharacterData.nickname),
@@ -48,7 +47,7 @@ describe('<UrlAuction />', () => {
   test('shouldnt either fetch or render anything', () => {
     setup.URLSearchParams.get()
 
-    renderWithProviders(<UrlAuction endpoint="endpoint" />)
+    renderWithProviders(<UrlAuction />)
 
     expect(screen.queryByText(/loading/gi)).not.toBeInTheDocument()
     expect(

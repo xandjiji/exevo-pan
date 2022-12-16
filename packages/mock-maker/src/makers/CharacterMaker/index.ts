@@ -102,7 +102,7 @@ export const randomCharacter = (): PartialCharacterObject => {
     rareAchievements: samplesFrom(rareAchievement.tokens),
     tcInvested: randomRange(auctions.tcInvested),
     bossPoints: randomRange(auctions.bossPoints),
-    tags: samplesFrom(Object.values(tag) as unknown as string[]),
+    tags: samplesFrom(Object.values(tag.dictionary)),
     mounts: samplesFrom(mount.tokens),
     storeMounts: samplesFrom(storeMount.tokens),
     outfits: randomOutfits(),

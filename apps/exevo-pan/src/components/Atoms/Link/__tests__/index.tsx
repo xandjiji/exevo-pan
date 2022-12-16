@@ -15,7 +15,7 @@ describe('<Link />', () => {
       } as any)
 
       renderWithProviders(
-        <Link href="/homepage">
+        <Link href="/homepage" exact>
           <div role="none">homepage</div>
         </Link>,
       )

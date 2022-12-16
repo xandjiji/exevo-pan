@@ -1,11 +1,23 @@
-import { screen, waitForElementToBeRemoved } from '@testing-library/react'
+import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
 import * as outfit from 'data-dictionary/dist/dictionaries/outfit'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import { WrappedFilterDrawer } from './mock'
 
 jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
+
+setup.useSession().mockReturnValue({
+  data: {
+    user: {
+      proStatus: true,
+    },
+  } as any,
+  status: 'unauthenticated',
+})
+setup.fetch().mockResolvedValue({
+  json: async () => null,
+} as Response)
 
 describe('<FilterDrawer />', () => {
   beforeEach(() => {
@@ -16,17 +28,24 @@ describe('<FilterDrawer />', () => {
       .mockImplementationOnce((fn) => fn() as unknown as NodeJS.Timeout)
   })
 
+  const resetFilters = () => {
+    const resetButton = screen.queryByRole('button', {
+      name: 'Reset filters',
+    })
+
+    if (resetButton) userEvent.click(resetButton)
+  }
+
   test('drawer visibility should be controlled correctly', async () => {
     const { rerender } = renderWithProviders(<WrappedFilterDrawer open />)
 
-    const drawerElement = screen.getByRole('dialog')
-    expect(drawerElement).toBeVisible()
+    expect(screen.getByRole('dialog')).toBeVisible()
 
     rerender(<WrappedFilterDrawer open={false} />)
-    await waitForElementToBeRemoved(drawerElement)
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
 
     rerender(<WrappedFilterDrawer open />)
-    expect(await screen.findByRole('dialog')).toBeVisible()
+    expect(screen.getByRole('dialog')).toBeVisible()
   })
 
   test('should call onClose', () => {
@@ -105,6 +124,7 @@ describe('<FilterDrawer />', () => {
 
   test('filter reset button should work correctly', () => {
     renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
 
     expect(
       screen.queryByRole('button', { name: 'Reset filters' }),
@@ -140,6 +160,7 @@ describe('<FilterDrawer />', () => {
 
   test('outfit/mount picker should work correctly', () => {
     renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
 
     outfit.tokens.forEach((outfitName) => {
       expect(screen.queryByTitle(outfitName)).not.toBeInTheDocument()
@@ -186,6 +207,7 @@ describe('<FilterDrawer />', () => {
 
   test('useDebouncedFilter should dispatch filters after a while', () => {
     renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
 
     expect(
       screen.queryByRole('button', {
@@ -207,6 +229,7 @@ describe('<FilterDrawer />', () => {
 
   test('useDebouncedFilter should dispatch filters after a while', () => {
     renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
 
     const minInput = screen.getByLabelText('Min level')
     const maxInput = screen.getByLabelText('Max level')
@@ -294,5 +317,66 @@ describe('<FilterDrawer />', () => {
     userEvent.click(toggleAllButton)
     expect(screen.queryByText('Ball Gown')).toBeInTheDocument()
     expect(screen.queryByText('Amazon Shield')).toBeInTheDocument()
+  })
+
+  test('text-based search sprite picker', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
+
+    userEvent.click(screen.getByText('Outfits'))
+
+    outfit.tokens.forEach((outfitName) => {
+      expect(screen.getByTitle(outfitName)).toBeInTheDocument()
+    })
+
+    const query = 'mage'
+    const searchElement = screen.getByLabelText('Search by name')
+    userEvent.type(searchElement, query)
+
+    const filteredOutfits = new Set(
+      outfit.tokens.filter((outfitName) =>
+        outfitName.toLowerCase().includes(query),
+      ),
+    )
+
+    outfit.tokens.forEach((outfitName) => {
+      if (filteredOutfits.has(outfitName)) {
+        expect(screen.getByTitle(outfitName)).toBeInTheDocument()
+      } else {
+        expect(screen.queryByTitle(outfitName)).not.toBeInTheDocument()
+      }
+    })
+
+    userEvent.clear(searchElement)
+
+    outfit.tokens.forEach((outfitName) => {
+      expect(screen.getByTitle(outfitName)).toBeInTheDocument()
+    })
+  })
+
+  test('pro disabled fields', () => {
+    setup
+      .useSession()
+      .mockClear()
+      .mockReturnValue({
+        data: {
+          user: {
+            proStatus: false,
+          },
+        } as any,
+        status: 'unauthenticated',
+      })
+
+    renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
+
+    expect(screen.getByLabelText('Rare items')).toBeDisabled()
+    expect(screen.getByLabelText('Tibia Coins invested')).toBeDisabled()
+
+    userEvent.click(screen.getByText('Store Outfits', { exact: false }))
+    expect(screen.getByLabelText('Search by name')).toBeDisabled()
+    expect(screen.getByRole('checkbox', { name: 'Addon 1' })).toBeDisabled()
+    expect(screen.getByRole('checkbox', { name: 'Addon 2' })).toBeDisabled()
+    expect(screen.getByTitle('Entrepreneur')).toBeDisabled()
   })
 })

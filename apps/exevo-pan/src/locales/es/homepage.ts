@@ -68,6 +68,8 @@ export default {
     rareNicknamesButton: 'Nicknames raros',
     skullEmoji: 'cráneo',
     SpritePicker: {
+      /* @ ToDo: i18n */
+      search: 'Search by name',
       item: 'item está seleccionado',
       items: 'items estan seleccionados',
     },

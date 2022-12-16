@@ -1,37 +1,38 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import { useAuctions } from '../../../contexts/useAuctions'
-import { useFilters } from '../../../contexts/useFilters'
-import {
-  mockedPageData,
-  DEFAULT_AUCTIONS_STATE,
-  DEFAULT_FILTERS_STATE,
-} from './mock'
+import { mockedPaginatedData, DEFAULT_AUCTIONS_STATE } from './mock'
 import AuctionsGrid from '..'
 
 window.HTMLElement.prototype.scrollTo = jest.fn()
 jest.mock('../../../contexts/useAuctions', () => ({
   useAuctions: jest.fn(),
 }))
-jest.mock('../../../contexts/useFilters', () => ({
-  useFilters: jest.fn(),
-}))
 jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 
+setup.useSession().mockReturnValue({
+  data: {
+    user: {
+      proStatus: true,
+    },
+  } as any,
+  status: 'unauthenticated',
+})
+
 const mockedUseAuctions = useAuctions as jest.MockedFunction<typeof useAuctions>
-const mockedUseFilters = useFilters as jest.MockedFunction<typeof useFilters>
 
 describe('<AuctionsGrid />', () => {
   beforeEach(() => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     process.browser = true
 
     mockedUseAuctions.mockImplementation(() => ({ ...DEFAULT_AUCTIONS_STATE }))
-    mockedUseFilters.mockImplementation(() => ({ ...DEFAULT_FILTERS_STATE }))
   })
 
   test('should display empty state if there are no characters', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
+    const { rerender } = renderWithProviders(<AuctionsGrid />)
 
     expect(
       screen.queryByText('Sorry, no auction was found'),
@@ -39,10 +40,13 @@ describe('<AuctionsGrid />', () => {
 
     mockedUseAuctions.mockImplementation(() => ({
       ...DEFAULT_AUCTIONS_STATE,
-      page: [],
+      paginatedData: {
+        ...DEFAULT_AUCTIONS_STATE.paginatedData,
+        page: [],
+      },
     }))
 
-    rerender(<AuctionsGrid past={false} />)
+    rerender(<AuctionsGrid />)
 
     expect(
       screen.queryByText('Sorry, no auction was found'),
@@ -53,7 +57,7 @@ describe('<AuctionsGrid />', () => {
   })
 
   test('should display highlighted characters', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
+    const { rerender } = renderWithProviders(<AuctionsGrid />)
 
     DEFAULT_AUCTIONS_STATE.highlightedAuctions.forEach(({ nickname }) => {
       expect(screen.queryByText(nickname)).not.toBeInTheDocument()
@@ -63,7 +67,8 @@ describe('<AuctionsGrid />', () => {
       ...DEFAULT_AUCTIONS_STATE,
       shouldDisplayHighlightedAuctions: true,
     }))
-    rerender(<AuctionsGrid past={false} />)
+
+    rerender(<AuctionsGrid />)
 
     DEFAULT_AUCTIONS_STATE.highlightedAuctions.forEach(({ nickname }) => {
       expect(screen.queryByText(nickname)).toBeInTheDocument()
@@ -71,70 +76,59 @@ describe('<AuctionsGrid />', () => {
   })
 
   test('should display active filter count', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
+    const { rerender } = renderWithProviders(<AuctionsGrid />)
 
     expect(screen.getByLabelText('0 filters are active')).toBeInTheDocument()
 
-    mockedUseFilters.mockImplementation(() => ({
-      ...DEFAULT_FILTERS_STATE,
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
       activeFilterCount: 1,
     }))
-    rerender(<AuctionsGrid past={false} />)
+    rerender(<AuctionsGrid />)
 
     expect(screen.getByLabelText('1 filter is active')).toBeInTheDocument()
 
-    mockedUseFilters.mockImplementation(() => ({
-      ...DEFAULT_FILTERS_STATE,
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
       activeFilterCount: 5,
     }))
-    rerender(<AuctionsGrid past={false} />)
+    rerender(<AuctionsGrid />)
 
     expect(screen.getByLabelText('5 filters are active')).toBeInTheDocument()
   })
 
   test('paginator should display the correct data', () => {
-    const { rerender } = renderWithProviders(<AuctionsGrid past={false} />)
+    const { rerender } = renderWithProviders(<AuctionsGrid />)
 
     expect(
       screen.getByText(
-        `${mockedPageData.startOffset + 1} - ${mockedPageData.endOffset} of ${
-          mockedPageData.totalItems
-        }`,
+        `${mockedPaginatedData.startOffset + 1} - ${
+          mockedPaginatedData.endOffset
+        } of ${mockedPaginatedData.totalItems}`,
       ),
     ).toBeInTheDocument()
 
-    const newPageData: typeof mockedPageData = {
-      ...mockedPageData,
+    const newPaginatedData: typeof mockedPaginatedData = {
+      ...mockedPaginatedData,
       totalItems: 66,
     }
     mockedUseAuctions.mockImplementation(() => ({
       ...DEFAULT_AUCTIONS_STATE,
-      pageData: newPageData,
+      paginatedData: newPaginatedData,
     }))
-    rerender(<AuctionsGrid past={false} />)
+    rerender(<AuctionsGrid />)
 
     expect(
       screen.getByText(
-        `${newPageData.startOffset + 1} - ${newPageData.endOffset} of ${
-          newPageData.totalItems
-        }`,
+        `${newPaginatedData.startOffset + 1} - ${
+          newPaginatedData.endOffset
+        } of ${newPaginatedData.totalItems}`,
       ),
     ).toBeInTheDocument()
   })
 
-  test('should call `permalinkResolver`', () => {
-    const mockedResolver = jest.fn()
-    renderWithProviders(
-      <AuctionsGrid past={false} permalinkResolver={mockedResolver} />,
-    )
-
-    DEFAULT_AUCTIONS_STATE.page.forEach(({ id }) =>
-      expect(mockedResolver).toHaveBeenCalledWith(id),
-    )
-  })
-
   test('should open the filter drawer', () => {
-    renderWithProviders(<AuctionsGrid past />)
+    renderWithProviders(<AuctionsGrid />)
 
     userEvent.click(screen.getByRole('button', { name: 'Open filter drawer' }))
     expect(screen.getByText('Filters')).toBeInTheDocument()
