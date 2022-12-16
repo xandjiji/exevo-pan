@@ -55,6 +55,9 @@ export default {
       locations: 'Locations',
       /* 'using' TibiaMaps.io ❤️ */
       using: 'using',
+      descriptions: {
+        Grorlam: 'Several spots inside Mount Sternum (Thais)',
+      },
     },
   },
 }

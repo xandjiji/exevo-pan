@@ -629,32 +629,8 @@ bossInfo.set('Groam', {
 bossInfo.set('Grorlam', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32380,32078,10:1',
-      description: 'Thais Northern Dungeon (Thais)',
-    },
-    {
-      src: 'https://tibiamaps.io/map/embed#32442,32019,11:1',
-      description: 'Mount Sternum (Thais)',
-    },
-    {
-      src: 'https://tibiamaps.io/map/embed#32422,32000,15:1',
-      description: 'Mount Sternum (Thais)',
-    },
-    {
-      src: 'https://tibiamaps.io/map/embed#32412,31991,13:1',
-      description: 'Mount Sternum (Thais)',
-    },
-    {
-      src: 'https://tibiamaps.io/map/embed#32427,32030,13:1',
-      description: 'Mount Sternum (Thais)',
-    },
-    {
-      src: 'https://tibiamaps.io/map/embed#32425,32022,14:1',
-      description: 'Mount Sternum (Thais)',
-    },
-    {
-      src: 'https://tibiamaps.io/map/embed#32429,32003,13:1',
-      description: 'Mount Sternum (Thais)',
+      src: 'https://tibiamaps.io/map/embed#32483,32058,8:1',
+      description: 'Grorlam',
     },
   ],
 })
