@@ -1,8 +1,19 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { AuthProviders } from 'types/next-auth'
-import { renderWithProviders, setup } from 'utils/test'
+import { getProviders, signIn } from 'next-auth/react'
+import { renderWithProviders } from 'utils/test'
 import SignIn from '..'
+
+jest.mock('next-auth/react', () => ({
+  getProviders: jest.fn(),
+  signIn: jest.fn(),
+}))
+
+const mockedGetProviders = getProviders as jest.MockedFunction<
+  typeof getProviders
+>
+const mockedSignIn = signIn as jest.MockedFunction<typeof signIn>
 
 const providerItem: ValueOf<AuthProviders> = {
   name: '',
@@ -24,13 +35,30 @@ const providers = {
 } as AuthProviders
 
 describe('<SignIn />', () => {
+  beforeEach(() => {
+    mockedGetProviders.mockRejectedValue(() => {})
+  })
+
   test('passing `providers` props should prevent from fetching them', () => {
     renderWithProviders(<SignIn providers={providers} />)
 
     expect(screen.queryByRole('alert')).not.toBeInTheDocument()
+    expect(mockedGetProviders).toHaveBeenCalledTimes(0)
   })
 
-  test.todo('should fetch for providers')
+  test('should fetch for providers', async () => {
+    renderWithProviders(<SignIn />)
+
+    expect(screen.getByRole('alert')).toBeInTheDocument()
+
+    const buttons = screen.getAllByRole('button')
+    buttons.forEach((button) => expect(button).toBeDisabled())
+
+    expect(await screen.findByRole('none'))
+    buttons.forEach((button) => expect(button).toBeEnabled())
+
+    expect(mockedGetProviders).toHaveBeenCalledTimes(1)
+  })
 
   test('the `state` prop should control its loading state', () => {
     const { rerender } = renderWithProviders(
