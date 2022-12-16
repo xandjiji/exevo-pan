@@ -1,19 +1,33 @@
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, setup } from 'utils/test'
 import Header from '..'
+
+setup.useSession().mockReturnValue({
+  data: null,
+  status: 'unauthenticated',
+})
 
 describe('<Header />', () => {
   test('aria-current should highlight the current page', () => {
     const { container } = renderWithProviders(<Header />)
 
-    const [logo, currentAuctions, statistics, war, about] =
-      container.querySelectorAll('a')
+    const [
+      logo,
+      currentAuctions,
+      tracker,
+      calculators,
+      statistics,
+      advertise,
+      blog,
+    ] = container.querySelectorAll('a')
 
     expect(logo).not.toHaveAttribute('aria-current', 'page')
     expect(currentAuctions).toHaveAttribute('aria-current', 'page')
+    expect(tracker).not.toHaveAttribute('aria-current', 'page')
+    expect(calculators).not.toHaveAttribute('aria-current', 'page')
     expect(statistics).not.toHaveAttribute('aria-current', 'page')
-    expect(war).not.toHaveAttribute('aria-current', 'page')
-    expect(about).not.toHaveAttribute('aria-current', 'page')
+    expect(advertise).not.toHaveAttribute('aria-current', 'page')
+    expect(blog).not.toHaveAttribute('aria-current', 'page')
   })
 
   test('should toggle menu open/close', () => {
