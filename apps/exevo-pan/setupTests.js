@@ -7,6 +7,10 @@ jest.mock('next/router', () => ({
   useRouter: jest.fn().mockReturnValue({ pathname: '/' }),
 }))
 jest.mock('next-auth/react')
+jest.mock('next/link', () => (props) => (
+  // eslint-disable-next-line jsx-a11y/anchor-has-content
+  <a {...props} />
+))
 
 jest.mock('utils/localStorage', () => ({
   getFromLocalStorage: jest

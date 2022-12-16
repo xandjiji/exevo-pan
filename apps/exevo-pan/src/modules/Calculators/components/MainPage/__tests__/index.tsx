@@ -7,7 +7,7 @@ import MainPage from '..'
 const [main, ...pages] = routes
 
 describe('<MainPage />', () => {
-  test('should render all routes', () => {
+  test('should render all routess', () => {
     renderWithProviders(<MainPage />)
 
     screen.getAllByRole('heading').forEach((element, index) => {
