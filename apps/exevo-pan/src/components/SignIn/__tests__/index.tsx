@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { AuthProviders } from 'types/next-auth'
-import { getProviders, signIn, SignInResponse } from 'next-auth/react'
+import { getProviders, signIn } from 'next-auth/react'
 import { renderWithProviders } from 'utils/test'
 import SignIn from '..'
 
