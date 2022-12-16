@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import type { AuthProviders } from 'types/next-auth'
-import { getProviders, signIn } from 'next-auth/react'
+import { getProviders, signIn, SignInResponse } from 'next-auth/react'
 import { renderWithProviders } from 'utils/test'
 import SignIn from '..'
 
@@ -36,7 +36,7 @@ const providers = {
 
 describe('<SignIn />', () => {
   beforeEach(() => {
-    mockedGetProviders.mockRejectedValue(() => {})
+    mockedGetProviders.mockClear()
   })
 
   test('passing `providers` props should prevent from fetching them', () => {
@@ -47,6 +47,22 @@ describe('<SignIn />', () => {
   })
 
   test('should fetch for providers', async () => {
+    mockedGetProviders.mockResolvedValueOnce(providers)
+    renderWithProviders(<SignIn />)
+
+    expect(screen.getByRole('alert')).toBeInTheDocument()
+
+    const buttons = screen.getAllByRole('button')
+    buttons.forEach((button) => expect(button).toBeDisabled())
+
+    expect(await screen.findByRole('none'))
+    buttons.forEach((button) => expect(button).toBeEnabled())
+
+    expect(mockedGetProviders).toHaveBeenCalledTimes(1)
+  })
+
+  test('should handle error on fetching for providers', async () => {
+    mockedGetProviders.mockRejectedValueOnce(providers)
     renderWithProviders(<SignIn />)
 
     expect(screen.getByRole('alert')).toBeInTheDocument()
@@ -78,5 +94,19 @@ describe('<SignIn />', () => {
       .forEach((button) => expect(button).toBeEnabled())
   })
 
-  test.todo('logging in should try to call `signIn()`')
+  test('logging in should try to call `signIn()`', () => {
+    mockedSignIn.mockResolvedValue({
+      ok: true,
+      error: '',
+      status: 200,
+      url: '',
+    })
+    renderWithProviders(<SignIn providers={providers} />)
+
+    expect(mockedSignIn).toHaveBeenCalledTimes(0)
+
+    userEvent.click(screen.getByRole('button', { name: 'Google' }))
+    expect(screen.getByRole('alert')).toBeInTheDocument()
+    expect(mockedSignIn).toHaveBeenCalledTimes(1)
+  })
 })
