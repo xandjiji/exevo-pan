@@ -65,14 +65,14 @@ const SignIn = ({
   return (
     <section className="card relative w-min p-4 px-6">
       <div
-        role="alert"
+        role={loading ? 'alert' : 'none'}
         className={clsx(
           'absolute top-0 left-0 grid h-full w-full place-items-center overflow-hidden transition-opacity',
           !loading && 'pointer-events-none opacity-0',
         )}
       >
         <div className="bg-surface absolute top-0 left-0 grid h-full w-full opacity-60" />
-        <div className="loading-spinner z-1 relative h-8 w-8" role="alert" />
+        <div className="loading-spinner z-1 relative h-8 w-8" />
       </div>
 
       <h3 className="text-s mb-4 text-center font-normal tracking-wider">
