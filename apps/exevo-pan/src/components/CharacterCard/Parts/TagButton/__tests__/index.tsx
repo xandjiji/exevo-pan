@@ -24,6 +24,7 @@ describe('<TagButton />', () => {
 
     expect(textElement).toHaveClass('opacity-0')
     userEvent.tab()
+    userEvent.tab()
     expect(textElement).not.toHaveClass('opacity-0')
     userEvent.tab()
     expect(textElement).toHaveClass('opacity-0')
