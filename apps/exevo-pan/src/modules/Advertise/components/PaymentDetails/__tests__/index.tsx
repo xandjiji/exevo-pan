@@ -32,13 +32,13 @@ describe('<PaymentDetails />', () => {
     renderWithProviders(<PaymentDetails />)
 
     expect(
-      screen.getAllByText(
+      screen.getByText(
         readablePrice.full.TIBIA_COINS(
           calculatePrice(DAYS_COUNT, 'TIBIA_COINS').totalPrice,
         ),
         { exact: false },
       ),
-    ).toHaveLength(2)
+    ).toBeInTheDocument()
     expect(screen.getByText('Ksu', { exact: false })).toBeInTheDocument()
     expect(screen.getByText('Bubble', { exact: false })).toBeInTheDocument()
   })
