@@ -30,12 +30,14 @@ describe('<BossCard />', () => {
     )
 
     expect(pinProps.onPin).toHaveBeenCalledTimes(0)
-    userEvent.click(screen.getByRole('button'))
+    userEvent.click(screen.getByRole('button', { name: 'Favorite this boss' }))
     expect(pinProps.onPin).toHaveBeenCalledTimes(1)
 
     rerender(<BossCard bossStats={valorcrest} pinned onPin={pinProps.onPin} />)
 
-    userEvent.click(screen.getByRole('button'))
+    userEvent.click(
+      screen.getByRole('button', { name: 'Unfavorite this boss' }),
+    )
     expect(pinProps.onPin).toHaveBeenCalledTimes(2)
   })
 
