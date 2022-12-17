@@ -16,9 +16,39 @@ describe('<BossCard />', () => {
     pinProps.onPin.mockClear()
   })
 
-  test.todo('should display a rare frame')
+  test('should display a rare frame', () => {
+    renderWithProviders(
+      <BossCard premium bossStats={valorcrest} {...pinProps} />,
+    )
 
-  test.todo('should be pinned/unpinned')
+    expect(screen.getByRole('none')).toBeInTheDocument()
+  })
+
+  test('should be pinned/unpinned', () => {
+    const { rerender } = renderWithProviders(
+      <BossCard bossStats={valorcrest} {...pinProps} />,
+    )
+
+    expect(pinProps.onPin).toHaveBeenCalledTimes(0)
+    userEvent.click(screen.getByRole('button'))
+    expect(pinProps.onPin).toHaveBeenCalledTimes(1)
+
+    rerender(<BossCard bossStats={valorcrest} pinned onPin={pinProps.onPin} />)
+
+    userEvent.click(screen.getByRole('button'))
+    expect(pinProps.onPin).toHaveBeenCalledTimes(2)
+  })
+
+  test('should be clickable', () => {
+    const onClickMock = jest.fn()
+    renderWithProviders(
+      <BossCard bossStats={valorcrest} onClick={onClickMock} {...pinProps} />,
+    )
+
+    expect(onClickMock).toHaveBeenCalledTimes(0)
+    userEvent.click(screen.getByRole('heading'))
+    expect(onClickMock).toHaveBeenCalledTimes(1)
+  })
 
   describe('should render all variants correctly', () => {
     test('high chance of spawning', () => {
