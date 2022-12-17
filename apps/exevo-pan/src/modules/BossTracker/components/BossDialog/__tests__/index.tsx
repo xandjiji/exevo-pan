@@ -41,5 +41,23 @@ describe('<BossDialog />', () => {
     )
   })
 
-  test.todo('should toggle open/close actions')
+  test('should toggle open/close actions', () => {
+    const onCloseMock = jest.fn()
+    const { rerender } = renderWithProviders(
+      <BossDialog onClose={onCloseMock} />,
+    )
+
+    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
+
+    rerender(<BossDialog onClose={onCloseMock} bossName={BOSS.name} />)
+
+    const [closeButton] = screen.getAllByRole('button', {
+      name: 'Close dialog',
+    })
+
+    expect(onCloseMock).toHaveBeenCalledTimes(0)
+    userEvent.click(closeButton)
+
+    expect(onCloseMock).toHaveBeenCalledTimes(1)
+  })
 })
