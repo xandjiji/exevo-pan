@@ -1,8 +1,7 @@
-#*/1 * * * * ~/duckdns/duck.sh >/dev/null 2>&1
-
-0 4 * * * ~/exevo-pan/automations/maintenance/flushLogs.sh
-0 4 * * 3 ~/exevo-pan/automations/maintenance/backupHistory.sh
+0 4 1 * * ~/exevo-pan/automations/maintenance/flushLogs.sh
+0 0 * * 3 ~/exevo-pan/automations/maintenance/backupHistory.sh
 0 4 * * 3 ~/exevo-pan/automations/maintenance/backupBosses.sh
-#0 * * * * ~/exevo-pan/automations/maintenance/backupAuctions.sh
 
-0 9 * * * ~/exevo-pan/automations/updateStatistics.sh
+0 2 * * * ~/exevo-pan/automations/scrapHistory.sh
+
+#0 9 * * * ~/exevo-pan/automations/updateStatistics.sh
