@@ -4,7 +4,7 @@ import { RawBazaar } from 'Data'
 import { AuctionPage } from 'Helpers'
 import { broadcast, coloredText, TrackETA } from 'logging'
 import { batchPromises, arrayPartitions } from 'utils'
-import { BUFFER_SIZE, fetchAuctionPage } from '../utils'
+import { BUFFER_SIZE, requestConfig, fetchAuctionPage } from '../utils'
 
 export const fetchUnscrapedAuctions = async (
   unscrapedIds: number[],
@@ -53,7 +53,7 @@ export const fetchUnscrapedAuctions = async (
 
   const requestQueues = arrayPartitions(auctionPageRequests, BUFFER_SIZE)
   for (const queue of requestQueues) {
-    await batchPromises(queue)
+    await batchPromises(queue, requestConfig)
     await rawData.saveBuffers()
   }
 
