@@ -146,6 +146,7 @@ const BossCard = ({
 
       <button
         type="button"
+        aria-label={bosses.BossGrid.BossCard[pinned ? 'unpin' : 'pin']}
         className="clickable ml-auto grid place-items-center self-start rounded p-1"
         onClick={(e) => {
           e.stopPropagation()

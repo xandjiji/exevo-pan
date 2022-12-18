@@ -60,7 +60,19 @@ describe('<Switch />', () => {
     expect(switchElement).not.toBeChecked()
   })
 
-  test.todo('disabled state')
+  test('disabled state should work correctly', () => {
+    renderWithProviders(<Switch disabled onClick={mockedOnClick} />)
+
+    const switchElement = screen.getByRole('switch')
+
+    expect(switchElement).toBeDisabled()
+    expect(switchElement).not.toBeChecked()
+
+    userEvent.click(switchElement)
+
+    expect(mockedOnClick).toHaveBeenCalledTimes(0)
+    expect(switchElement).not.toBeChecked()
+  })
 
   test('a11y', async () => {
     const { container } = renderWithProviders(<Switch aria-label="label" />)
