@@ -112,8 +112,13 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
 
               {txId && (
                 <div className="grid gap-2">
-                  <p>{dashboard.PurchaseForm.transactionId}:</p>
-                  <p className="code mx-auto w-fit text-center">{txId}</p>
+                  <p id="tx-id">{dashboard.PurchaseForm.transactionId}:</p>
+                  <p
+                    aria-labelledby="tx-id"
+                    className="code mx-auto w-fit text-center"
+                  >
+                    {txId}
+                  </p>
                 </div>
               )}
 
