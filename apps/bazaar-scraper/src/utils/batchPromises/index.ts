@@ -4,7 +4,7 @@ import { requests } from 'Constants'
 
 export const batchPromises = async <T>(
   tasks: Array<() => Promise<T>>,
-  config?: Partial<typeof requests>,
+  config?: Partial<RequestsConfig>,
 ): Promise<T[]> => {
   const { MAX_CONCURRENT_REQUESTS, DELAY } = { ...requests, ...config }
   const results: T[] = []
