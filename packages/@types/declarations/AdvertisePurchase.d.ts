@@ -6,6 +6,7 @@ declare type PixObject = {
 }
 
 declare interface AdvertisePurchase {
+  isPro: boolean
   selectedCharacter: CharacterObject
   selectedDates: string[]
   paymentMethod: PaymentMethods

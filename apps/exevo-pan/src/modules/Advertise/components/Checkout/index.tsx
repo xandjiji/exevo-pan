@@ -10,7 +10,11 @@ import { validateEmail, validateCharacter } from './utils'
 
 const { DEFAULT_LOCALE } = locales
 
-const Checkout = () => {
+type CheckoutProps = {
+  isPro: boolean
+}
+
+const Checkout = ({ isPro }: CheckoutProps) => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -54,6 +58,7 @@ const Checkout = () => {
   const submit = async () => {
     setSendingEmail(true)
     const uuid = await MailCheckoutClient.postMail({
+      isPro,
       selectedCharacter: selectedCharacter as CharacterObject,
       selectedDates,
       paymentMethod,

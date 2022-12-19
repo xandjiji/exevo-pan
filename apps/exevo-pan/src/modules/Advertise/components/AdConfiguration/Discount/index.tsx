@@ -4,15 +4,16 @@ import { calculatePrice, readablePrice, getDiscountTier } from '../../../utils'
 import * as S from './atoms'
 import { DiscountProps } from './types'
 
-const Discount = ({ daysCount, paymentMethod }: DiscountProps) => {
+const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
   const {
     translations: { advertise },
   } = useTranslations()
 
-  const { totalPrice, saved, offPercentage } = calculatePrice(
-    daysCount,
+  const { totalPrice, saved, offPercentage } = calculatePrice({
+    days: daysCount,
     paymentMethod,
-  )
+    isPro,
+  })
 
   const readableOffer = readablePrice.short[paymentMethod](totalPrice)
   const readableOriginalPrice = readablePrice.short[paymentMethod](

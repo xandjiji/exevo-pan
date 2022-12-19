@@ -3,12 +3,13 @@ import { Text, CopyButton } from 'components/Atoms'
 import { advertising } from 'Constants'
 import { useForm } from '../../../contexts/Form'
 import { calculatePrice } from '../../../utils'
+import { CoinsPaymentProps } from './types'
 
 const Strong = (args: JSX.IntrinsicElements['strong']) => (
   <strong {...args} className="whitespace-nowrap" />
 )
 
-const CoinsPayment = () => {
+const CoinsPayment = ({ isPro }: CoinsPaymentProps) => {
   const {
     translations: { common, advertise },
   } = useTranslations()
@@ -25,7 +26,11 @@ const CoinsPayment = () => {
         <Strong>{paymentCharacter.value}</Strong>{' '}
         <Text.Transfer
           amount={
-            calculatePrice(selectedDates.length, 'TIBIA_COINS').totalPrice
+            calculatePrice({
+              days: selectedDates.length,
+              paymentMethod: 'TIBIA_COINS',
+              isPro,
+            }).totalPrice
           }
           currency="tc"
         />

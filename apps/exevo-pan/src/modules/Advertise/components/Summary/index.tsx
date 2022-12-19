@@ -7,6 +7,7 @@ import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
 import { ReceiptIcon } from 'assets/svgs'
 import { useForm } from '../../contexts/Form'
 import { calculatePrice, readablePrice } from '../../utils'
+import { SummaryProps } from './types'
 
 const Strong = ({ className, ...props }: JSX.IntrinsicElements['h3']) => (
   <h3
@@ -19,7 +20,7 @@ const SubText = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
   <p className={clsx('text-tsm font-light', className)} {...props} />
 )
 
-const Summary = () => {
+const Summary = ({ isPro }: SummaryProps) => {
   const {
     translations: { common, advertise },
   } = useTranslations()
@@ -94,7 +95,8 @@ const Summary = () => {
       <div>
         <Strong>
           {readablePrice.full[paymentMethod](
-            calculatePrice(selectedDates.length, paymentMethod).totalPrice,
+            calculatePrice({ days: selectedDates.length, paymentMethod, isPro })
+              .totalPrice,
           )}
         </Strong>
         <SubText>{advertise.PaymentDetails.Summary.costText}</SubText>

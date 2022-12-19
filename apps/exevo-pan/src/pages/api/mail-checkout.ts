@@ -69,7 +69,8 @@ export default async (
     },
   })
 
-  const html = await EmailTemplate({ ...body, uuid })
+  const isPro = !!token?.proStatus
+  const html = await EmailTemplate({ ...body, isPro, uuid })
 
   const customerEmail = {
     from: `Exevo Pan <${email.EXEVOPAN_EMAIL}>`,
