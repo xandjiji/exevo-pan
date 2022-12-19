@@ -1,7 +1,7 @@
 import { HttpClient } from 'services'
 import { retryWrapper } from 'utils'
 
-export const BUFFER_SIZE = 500
+export const BUFFER_SIZE = 1500
 
 export const requestConfig: Partial<RequestsConfig> = {
   DELAY: 1250,
