@@ -143,7 +143,9 @@ const AuctionsGrid = () => {
             return (
               <CharacterCard
                 key={auction.id}
-                highlighted={!!highlightedAuction}
+                highlighted={
+                  !!highlightedAuction && !shouldDisplayHighlightedAuctions
+                }
                 lazyRender
                 characterData={characterData}
                 expandable
