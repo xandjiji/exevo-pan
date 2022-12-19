@@ -132,16 +132,28 @@ const AuctionsGrid = () => {
                 permalink={permalinkResolver?.(auction.id)}
               />
             ))}
-          {paginatedData.page.map((auction) => (
-            <CharacterCard
-              key={auction.id}
-              lazyRender
-              characterData={auction}
-              expandable
-              past={isHistory}
-              permalink={permalinkResolver?.(auction.id)}
-            />
-          ))}
+          {paginatedData.page.map((auction) => {
+            const highlightedAuction = highlightedAuctions.find(
+              ({ id }) => id === auction.id,
+            )
+            const characterData: CharacterObject = highlightedAuction
+              ? { ...auction, tcInvested: highlightedAuction.tcInvested }
+              : auction
+
+            return (
+              <CharacterCard
+                key={auction.id}
+                highlighted={
+                  !!highlightedAuction && !shouldDisplayHighlightedAuctions
+                }
+                lazyRender
+                characterData={characterData}
+                expandable
+                past={isHistory}
+                permalink={permalinkResolver?.(auction.id)}
+              />
+            )
+          })}
         </div>
         {paginatedData.page.length === 0 && (
           <EmptyState
