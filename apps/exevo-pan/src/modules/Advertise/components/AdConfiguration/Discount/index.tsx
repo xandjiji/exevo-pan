@@ -1,5 +1,9 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { OfferIcon } from 'assets/svgs'
+import { Checkbox } from 'components/Atoms'
+import NextLink from 'next/link'
+import { advertising, routes } from 'Constants'
 import { calculatePrice, readablePrice, getDiscountTier } from '../../../utils'
 import * as S from './atoms'
 import { DiscountProps } from './types'
@@ -14,6 +18,10 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
     paymentMethod,
     isPro,
   })
+
+  const proDiscount =
+    advertising.unitPrice[paymentMethod === 'PIX' ? 'BRL' : 'TIBIA_COINS']
+  const readableDiscount = readablePrice.short[paymentMethod](proDiscount)
 
   const readableOffer = readablePrice.short[paymentMethod](totalPrice)
   const readableOriginalPrice = readablePrice.short[paymentMethod](
@@ -32,6 +40,35 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
         <OfferIcon className="fill-onSurface mr-1.5 transition-colors" />
         {advertise.Discount.title}
       </h2>
+
+      <NextLink
+        href={routes.EXEVOPRO}
+        className={clsx(
+          'text-onSurface',
+          isPro ? 'pointer-events-none' : 'child:!cursor-pointer',
+        )}
+      >
+        <Checkbox
+          label={
+            isPro ? (
+              <p>
+                <strong className="text-greenHighlight">
+                  -{readableDiscount}
+                </strong>{' '}
+                discount applied! (
+                <strong className="text-rare">Exevo Pro</strong> only)
+              </p>
+            ) : (
+              <p>
+                <strong>-{readableDiscount}</strong> discount not applied (
+                <strong className="text-rare">Exevo Pro</strong> only)
+              </p>
+            )
+          }
+          checked={isPro}
+          disabled
+        />
+      </NextLink>
 
       <S.Group>
         <S.Small>{advertise.Discount.description}</S.Small>
