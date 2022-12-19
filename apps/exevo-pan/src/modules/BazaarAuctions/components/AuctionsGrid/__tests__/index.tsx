@@ -11,15 +11,6 @@ jest.mock('../../../contexts/useAuctions', () => ({
 }))
 jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 
-setup.useSession().mockReturnValue({
-  data: {
-    user: {
-      proStatus: true,
-    },
-  } as any,
-  status: 'unauthenticated',
-})
-
 const mockedUseAuctions = useAuctions as jest.MockedFunction<typeof useAuctions>
 
 describe('<AuctionsGrid />', () => {
@@ -29,6 +20,14 @@ describe('<AuctionsGrid />', () => {
     process.browser = true
 
     mockedUseAuctions.mockImplementation(() => ({ ...DEFAULT_AUCTIONS_STATE }))
+    setup.useSession().mockReturnValue({
+      data: {
+        user: {
+          proStatus: true,
+        },
+      } as any,
+      status: 'unauthenticated',
+    })
   })
 
   test('should display empty state if there are no characters', () => {
@@ -132,5 +131,28 @@ describe('<AuctionsGrid />', () => {
 
     userEvent.click(screen.getByRole('button', { name: 'Open filter drawer' }))
     expect(screen.getByText('Filters')).toBeInTheDocument()
+  })
+
+  test('should display tc invested for highlighted auctions', () => {
+    setup.useSession().mockReturnValue({
+      data: {
+        user: {
+          proStatus: false,
+        },
+      } as any,
+      status: 'unauthenticated',
+    })
+
+    const highlightedAuction: CharacterObject = {
+      ...DEFAULT_AUCTIONS_STATE.paginatedData.page[2],
+      tcInvested: 123456,
+    }
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
+      highlightedAuctions: [highlightedAuction],
+    }))
+    renderWithProviders(<AuctionsGrid />)
+
+    expect(screen.getByText(/123,456 invested/gi)).toBeInTheDocument()
   })
 })
