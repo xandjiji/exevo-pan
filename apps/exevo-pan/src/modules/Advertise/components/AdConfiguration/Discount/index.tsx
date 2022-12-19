@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { OfferIcon } from 'assets/svgs'
 import { Checkbox } from 'components/Atoms'
 import NextLink from 'next/link'
@@ -21,7 +21,7 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
 
   const proDiscount =
     advertising.unitPrice[paymentMethod === 'PIX' ? 'BRL' : 'TIBIA_COINS']
-  const readableDiscount = readablePrice.short[paymentMethod](proDiscount)
+  const readableDiscount = `-${readablePrice.short[paymentMethod](proDiscount)}`
 
   const readableOffer = readablePrice.short[paymentMethod](totalPrice)
   const readableOriginalPrice = readablePrice.short[paymentMethod](
@@ -50,20 +50,19 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
       >
         <Checkbox
           label={
-            isPro ? (
-              <p>
-                <strong className="text-greenHighlight">
-                  -{readableDiscount}
-                </strong>{' '}
-                discount applied! (
-                <strong className="text-rare">Exevo Pro</strong> only)
-              </p>
-            ) : (
-              <p>
-                <strong>-{readableDiscount}</strong> discount not applied (
-                <strong className="text-rare">Exevo Pro</strong> only)
-              </p>
-            )
+            <p>
+              {templateMessage(
+                advertise.Discount[isPro ? 'proDiscount' : 'freeDiscount'],
+                {
+                  discount: (
+                    <strong className={clsx(isPro && 'text-greenHighlight')}>
+                      {readableDiscount}
+                    </strong>
+                  ),
+                  exevopro: <strong className="text-rare">Exevo Pro</strong>,
+                },
+              )}
+            </p>
           }
           checked={isPro}
           disabled
