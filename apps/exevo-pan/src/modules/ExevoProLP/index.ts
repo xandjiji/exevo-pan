@@ -1,4 +1,4 @@
-export { default as MiniAuctionGrid } from './MiniAuctionGrid'
+export { default as ThreeDimensionalMiniAuctionGrid } from './ThreeDimensionalMiniAuctionGrid'
 export { default as FeatureSection } from './FeatureSection'
 export { default as Gradient } from './Gradient'
 export { default as MiniAuction } from './MiniAuction'
