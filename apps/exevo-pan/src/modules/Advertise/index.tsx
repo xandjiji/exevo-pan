@@ -15,11 +15,7 @@ import styles from './styles.module.css'
 
 const FAQ_SLUG = 'how-highlighting-works'
 
-type FormProps = {
-  isPro: boolean
-}
-
-export const Form = ({ isPro }: FormProps) => {
+export const Form = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -39,9 +35,9 @@ export const Form = ({ isPro }: FormProps) => {
 
   const FormSteps = [
     <AuctionSearch />,
-    <AdConfiguration isPro={isPro} />,
-    <Checkout isPro={isPro} />,
-    <PaymentDetails isPro={isPro} />,
+    <AdConfiguration />,
+    <Checkout />,
+    <PaymentDetails />,
   ]
 
   return (

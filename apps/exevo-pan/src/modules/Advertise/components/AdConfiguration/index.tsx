@@ -4,12 +4,8 @@ import Discount from './Discount'
 import Summary from '../Summary'
 import { useForm } from '../../contexts/Form'
 
-type AdConfigurationProps = {
-  isPro: boolean
-}
-
-const AdConfiguration = ({ isPro }: AdConfigurationProps) => {
-  const { selectedDates, paymentMethod } = useForm()
+const AdConfiguration = () => {
+  const { selectedDates, paymentMethod, isPro } = useForm()
 
   const daysCount = selectedDates.length
   return (
@@ -21,7 +17,7 @@ const AdConfiguration = ({ isPro }: AdConfigurationProps) => {
         paymentMethod={paymentMethod}
         isPro={isPro}
       />
-      <Summary isPro={isPro} />
+      <Summary />
     </section>
   )
 }

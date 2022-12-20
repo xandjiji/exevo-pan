@@ -6,16 +6,12 @@ import CoinsPayment from './CoinsPayment'
 import PixPayment from './PixPayment'
 import Summary from '../Summary'
 
-type PaymentDetailsProps = {
-  isPro: boolean
-}
-
-const PaymentDetails = ({ isPro }: PaymentDetailsProps) => {
+const PaymentDetails = () => {
   const {
     translations: { advertise },
   } = useTranslations()
 
-  const { uuid, email, paymentMethod } = useForm()
+  const { isPro, uuid, email, paymentMethod } = useForm()
 
   return (
     <div className="grid gap-6">
@@ -53,7 +49,7 @@ const PaymentDetails = ({ isPro }: PaymentDetailsProps) => {
           {advertise.PaymentDetails.smallDisclaimer}
         </span>
       </section>
-      <Summary isPro={isPro} />
+      <Summary />
     </div>
   )
 }

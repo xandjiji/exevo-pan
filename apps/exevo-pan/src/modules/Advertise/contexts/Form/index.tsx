@@ -9,6 +9,7 @@ const initialInput: InputState = {
 
 const defaultState: FormValues = {
   uuid: '',
+  isPro: false,
   currentStep: 0,
   selectedCharacter: undefined,
   selectedDates: [],
@@ -20,9 +21,9 @@ const defaultState: FormValues = {
   dispatch: () => {},
 }
 
-const FormContext = createContext<FormValues>(defaultState)
+const FormContext = createContext<FormValues & { isPro: boolean }>(defaultState)
 
-export const FormProvider = ({ children }: FormProviderProps) => {
+export const FormProvider = ({ isPro, children }: FormProviderProps) => {
   const [formValues, dispatch] = useReducer(FormReducer, {
     uuid: defaultState.uuid,
     currentStep: defaultState.currentStep,
@@ -41,7 +42,7 @@ export const FormProvider = ({ children }: FormProviderProps) => {
   ]
 
   return (
-    <FormContext.Provider value={{ ...formValues, isValid, dispatch }}>
+    <FormContext.Provider value={{ ...formValues, isValid, isPro, dispatch }}>
       {children}
     </FormContext.Provider>
   )

@@ -10,11 +10,7 @@ import { validateEmail, validateCharacter } from './utils'
 
 const { DEFAULT_LOCALE } = locales
 
-type CheckoutProps = {
-  isPro: boolean
-}
-
-const Checkout = ({ isPro }: CheckoutProps) => {
+const Checkout = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -22,6 +18,7 @@ const Checkout = ({ isPro }: CheckoutProps) => {
   const { locale } = useRouter()
 
   const {
+    isPro,
     selectedCharacter,
     selectedDates,
     paymentMethod,

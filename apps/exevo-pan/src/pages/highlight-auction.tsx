@@ -83,9 +83,9 @@ export default function Advertise({
 
       <Main>
         <AuctionsProvider initialPage={page} initialPageData={pageData}>
-          <FormProvider>
+          <FormProvider isPro={isPro}>
             <main className="inner-container py-4">
-              <Form isPro={isPro} />
+              <Form />
             </main>
           </FormProvider>
         </AuctionsProvider>
