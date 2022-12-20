@@ -12,6 +12,7 @@ import {
   MiniBossGrid,
   MiniAuction,
   MiniFilters,
+  MiniHighlight,
   Tooltip as List,
   Strong,
   Gradient,
@@ -187,6 +188,13 @@ export default function ExevoPro() {
                 <MiniAuction />
               </div>
             </div>
+          </FeatureSection>
+
+          <FeatureSection>
+            <MiniHighlight />
+            <h3 className="max-w-[240px] text-center text-2xl">
+              Discounts for <Strong>auction highlighting</Strong>
+            </h3>
           </FeatureSection>
 
           <p className="text-center text-2xl">
