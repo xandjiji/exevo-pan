@@ -41,7 +41,7 @@ export const Form = ({ isPro }: FormProps) => {
     <AuctionSearch />,
     <AdConfiguration isPro={isPro} />,
     <Checkout isPro={isPro} />,
-    <PaymentDetails />,
+    <PaymentDetails isPro={isPro} />,
   ]
 
   return (

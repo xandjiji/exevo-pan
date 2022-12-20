@@ -6,7 +6,11 @@ import CoinsPayment from './CoinsPayment'
 import PixPayment from './PixPayment'
 import Summary from '../Summary'
 
-const PaymentDetails = () => {
+type PaymentDetailsProps = {
+  isPro: boolean
+}
+
+const PaymentDetails = ({ isPro }: PaymentDetailsProps) => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -39,13 +43,17 @@ const PaymentDetails = () => {
           </span>
         </p>
 
-        {paymentMethod === 'TIBIA_COINS' ? <CoinsPayment /> : <PixPayment />}
+        {paymentMethod === 'TIBIA_COINS' ? (
+          <CoinsPayment isPro={isPro} />
+        ) : (
+          <PixPayment isPro={isPro} />
+        )}
 
         <span className="text-xs tracking-wide">
           {advertise.PaymentDetails.smallDisclaimer}
         </span>
       </section>
-      <Summary />
+      <Summary isPro={isPro} />
     </div>
   )
 }

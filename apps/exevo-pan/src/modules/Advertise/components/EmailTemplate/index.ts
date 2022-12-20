@@ -29,7 +29,7 @@ const ThankYouCard = async ({
       } ${T.Strong(advertising.BANK_CHARACTER)}`,
     )
   } else {
-    const qrCode = await generateQrCode({ txId: auctionId, daysAmount })
+    const qrCode = await generateQrCode({ txId: auctionId, daysAmount, isPro })
     paymentInfo = `
     ${T.Text(dictionary.PaymentDetails.PixPayment.codeText)}
     ${T.Code(qrCode.payload)}
