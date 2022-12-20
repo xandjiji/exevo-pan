@@ -30,7 +30,10 @@ const calculateOffer = ({
   const basePrice = base * days
   const proDiscount = isPro ? base / advertising.PRICE_UNIT_DIVIDER : 0
 
-  const discountedPrice = applyDiscount({ base, days, isPro }) - proDiscount
+  const discountedPrice = Math.max(
+    0,
+    applyDiscount({ base, days, isPro }) - proDiscount,
+  )
 
   const saved = basePrice - discountedPrice
   const offPercentage = Math.round((saved / basePrice) * 100)
