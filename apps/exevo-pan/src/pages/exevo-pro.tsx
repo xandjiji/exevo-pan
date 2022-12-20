@@ -195,7 +195,13 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              Discounts for <Strong>auction highlighting</Strong>
+              {templateMessage(translations.exevopro.highlightDiscount.pitch, {
+                strong: (
+                  <Strong>
+                    {translations.exevopro.highlightDiscount.strong}
+                  </Strong>
+                ),
+              })}
             </h3>
 
             <MiniHighlight />

@@ -23,6 +23,10 @@ export default {
     rareItems: 'Items raros',
     soulwar: 'Soul War disponível',
   },
+  highlightDiscount: {
+    pitch: 'Descontos para {{strong}}',
+    strong: 'destacar leilões',
+  },
   andMore: '...e mais no futuro! 🔮',
   footer: 'Faça upgrade agora para {{exevopro}}',
   no: {
