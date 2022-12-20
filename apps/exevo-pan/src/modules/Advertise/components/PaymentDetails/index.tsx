@@ -11,7 +11,14 @@ const PaymentDetails = () => {
     translations: { advertise },
   } = useTranslations()
 
-  const { isPro, uuid, email, paymentMethod } = useForm()
+  const {
+    isPro,
+    selectedCharacter,
+    selectedDates,
+    uuid,
+    email,
+    paymentMethod,
+  } = useForm()
 
   return (
     <div className="grid gap-6">
@@ -49,7 +56,12 @@ const PaymentDetails = () => {
           {advertise.PaymentDetails.smallDisclaimer}
         </span>
       </section>
-      <Summary />
+      <Summary
+        isPro={isPro}
+        selectedCharacter={selectedCharacter}
+        selectedDates={selectedDates}
+        paymentMethod={paymentMethod}
+      />
     </div>
   )
 }

@@ -5,8 +5,8 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
 import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
 import { ReceiptIcon } from 'assets/svgs'
-import { useForm } from '../../contexts/Form'
 import { calculatePrice, readablePrice } from '../../utils'
+import { SummaryProps } from './types'
 
 const Strong = ({ className, ...props }: JSX.IntrinsicElements['h3']) => (
   <h3
@@ -19,12 +19,15 @@ const SubText = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
   <p className={clsx('text-tsm font-light', className)} {...props} />
 )
 
-const Summary = () => {
+const Summary = ({
+  isPro,
+  selectedCharacter,
+  selectedDates,
+  paymentMethod,
+}: SummaryProps) => {
   const {
     translations: { common, advertise },
   } = useTranslations()
-
-  const { isPro, selectedCharacter, selectedDates, paymentMethod } = useForm()
 
   const formattedDates = useMemo(
     () => selectedDates.map(mmddyyyy2ddmmyyy).sort(sortStringDates),

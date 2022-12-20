@@ -5,7 +5,7 @@ import Summary from '../Summary'
 import { useForm } from '../../contexts/Form'
 
 const AdConfiguration = () => {
-  const { selectedDates, paymentMethod, isPro } = useForm()
+  const { selectedCharacter, selectedDates, paymentMethod, isPro } = useForm()
 
   const daysCount = selectedDates.length
   return (
@@ -13,11 +13,16 @@ const AdConfiguration = () => {
       <RangeDatePicker />
       <PaymentMethods />
       <Discount
+        isPro={isPro}
         daysCount={daysCount}
         paymentMethod={paymentMethod}
-        isPro={isPro}
       />
-      <Summary />
+      <Summary
+        isPro={isPro}
+        selectedCharacter={selectedCharacter}
+        selectedDates={selectedDates}
+        paymentMethod={paymentMethod}
+      />
     </section>
   )
 }
