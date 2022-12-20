@@ -34,7 +34,11 @@ describe('<PaymentDetails />', () => {
     expect(
       screen.getByText(
         readablePrice.full.TIBIA_COINS(
-          calculatePrice(DAYS_COUNT, 'TIBIA_COINS').totalPrice,
+          calculatePrice({
+            days: DAYS_COUNT,
+            paymentMethod: 'TIBIA_COINS',
+            isPro: mockedFormValues.isPro,
+          }).totalPrice,
         ),
         { exact: false },
       ),
