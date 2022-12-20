@@ -127,11 +127,18 @@ export default function ExevoPro() {
                 ),
               })}
             </h3>
+
             <MiniBossGrid />
           </FeatureSection>
 
           <FeatureSection>
-            <div className="order-last grid grid-cols-3 gap-2 md:-order-none">
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {templateMessage(translations.exevopro.tcInvested.pitch, {
+                strong: <Strong>Tibia Coins</Strong>,
+              })}
+            </h3>
+
+            <div className="grid grid-cols-3 gap-2">
               <MiniAuction highlight />
               <MiniAuction />
               <MiniAuction />
@@ -142,11 +149,6 @@ export default function ExevoPro() {
               <MiniAuction />
               <MiniAuction highlight />
             </div>
-            <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.tcInvested.pitch, {
-                strong: <Strong>Tibia Coins</Strong>,
-              })}
-            </h3>
           </FeatureSection>
 
           <FeatureSection>
@@ -179,6 +181,7 @@ export default function ExevoPro() {
                 ),
               })}
             </h3>
+
             <div className="flex items-center">
               <MiniFilters />
               <div className="-z-1 child:!shadow-sm relative -left-6 grid grid-cols-2 gap-2">
@@ -191,10 +194,11 @@ export default function ExevoPro() {
           </FeatureSection>
 
           <FeatureSection>
-            <MiniHighlight />
             <h3 className="max-w-[240px] text-center text-2xl">
               Discounts for <Strong>auction highlighting</Strong>
             </h3>
+
+            <MiniHighlight />
           </FeatureSection>
 
           <p className="text-center text-2xl">
