@@ -12,12 +12,16 @@ const DAYS_COUNT = mockedFormValues.selectedDates.length
 
 describe('<CoinsPayment />', () => {
   test('should render all data correctly', () => {
-    renderWithProviders(<CoinsPayment />)
+    renderWithProviders(<CoinsPayment isPro={false} />)
 
     expect(
       screen.getByTitle(
         readablePrice.full.TIBIA_COINS(
-          calculatePrice(DAYS_COUNT, 'TIBIA_COINS').totalPrice,
+          calculatePrice({
+            days: DAYS_COUNT,
+            paymentMethod: 'TIBIA_COINS',
+            isPro: false,
+          }).totalPrice,
         ),
         { exact: false },
       ),
