@@ -57,6 +57,7 @@ model User {
     proSince            DateTime?
     paymentData         PaymentData?
     highlightedAuctions HighlightedAuction[]
+    transactions        Transaction[]
 }
 
 model PaymentData {
@@ -67,6 +68,8 @@ model PaymentData {
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String @unique
+
+    transaction Transaction?
 
     @@index([userId])
 }
@@ -88,6 +91,7 @@ model HighlightedAuction {
     id               String         @id @default(uuid())
     nickname         String
     auctionId        Int
+    price            Int?
     days             String
     lastUpdated      DateTime       @default(now())
     active           Boolean        @default(true)
@@ -99,5 +103,37 @@ model HighlightedAuction {
     user   User?   @relation(fields: [userId], references: [id])
     userId String?
 
+    transaction Transaction?
+
     @@index([userId])
+}
+
+enum CURRENCY {
+    BRL
+    TIBIA_COINS
+}
+
+enum TRANSACTION_TYPE {
+    EXEVO_PRO
+    AUCTION_HIGHLIGHT
+}
+
+model Transaction {
+    id       String           @id @default(uuid())
+    value    Int
+    currency CURRENCY
+    type     TRANSACTION_TYPE
+    date     DateTime         @default(now())
+
+    highlightedAuction   HighlightedAuction? @relation(fields: [highlightedAuctionId], references: [id])
+    highlightedAuctionId String?             @unique
+
+    exevoProPayment   PaymentData? @relation(fields: [exevoProPaymentId], references: [id])
+    exevoProPaymentId String?      @unique
+
+    user   User   @relation(fields: [userId], references: [id])
+    userId String
+
+    @@index([userId])
+    @@index([highlightedAuctionId])
 }

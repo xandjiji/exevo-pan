@@ -64,16 +64,21 @@ export default async (
       days: selectedDates.join(),
       email: body.email,
       paymentMethod,
-      paymentCharacter: (paymentCharacter as string | undefined)
-        ? paymentCharacter
-        : undefined,
-      user: token
+      price: price.totalPrice,
+      transaction: token
         ? {
-            connect: {
-              id: token.id,
+            create: {
+              value: price.totalPrice,
+              currency: paymentMethod === 'PIX' ? 'BRL' : 'TIBIA_COINS',
+              type: 'AUCTION_HIGHLIGHT',
+              user: { connect: { id: token.id } },
             },
           }
         : undefined,
+      paymentCharacter: (paymentCharacter as string | undefined)
+        ? paymentCharacter
+        : undefined,
+      user: token ? { connect: { id: token.id } } : undefined,
     },
   })
 
