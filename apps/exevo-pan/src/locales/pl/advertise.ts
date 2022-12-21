@@ -25,6 +25,10 @@ export default {
   Discount: {
     title: 'Zniżki',
     description: 'Sprawdź nasze pakiety zniżkowe',
+    /* @ ToDo: i18n */
+    proDiscount: '{{discount}} discount applied! ({{exevopro}} only)',
+    /* @ ToDo: i18n */
+    freeDiscount: '{{discount}} discount not applied ({{exevopro}} only)',
   },
   Checkout: {
     title: 'Twoje informacje',

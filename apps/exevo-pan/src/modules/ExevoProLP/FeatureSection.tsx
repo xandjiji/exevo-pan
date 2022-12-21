@@ -7,7 +7,7 @@ const FeatureSection = ({
   <section
     className={clsx(
       className,
-      'flex flex-col items-center justify-center gap-8 md:flex-row md:gap-16',
+      'flex flex-col items-center justify-center gap-8 md:flex-row md:gap-16 odd:md:flex-row-reverse',
     )}
     {...props}
   />

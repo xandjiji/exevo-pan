@@ -7,7 +7,7 @@ const Row = memo(({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div className={clsx(className, 'flex gap-4')} {...props} />
 ))
 
-const MiniAuctionGrid = ({
+const ThreeDimensionalMiniAuctionGrid = ({
   className,
   style,
   ...props
@@ -38,4 +38,4 @@ const MiniAuctionGrid = ({
   )
 }
 
-export default memo(MiniAuctionGrid)
+export default memo(ThreeDimensionalMiniAuctionGrid)

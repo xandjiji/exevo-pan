@@ -3,8 +3,9 @@ import { useState, useEffect } from 'react'
 import { CopyButton } from 'components/Atoms'
 import { useForm } from '../../../contexts/Form'
 import { generateQrCode } from './utils'
+import { PixPaymentProps } from './types'
 
-const PixPayment = () => {
+const PixPayment = ({ isPro }: PixPaymentProps) => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -19,6 +20,7 @@ const PixPayment = () => {
       const pixObject = await generateQrCode({
         txId: selectedCharacter?.id ?? 0,
         daysAmount: selectedDates.length,
+        isPro,
       })
       setQrCode(pixObject.qrCode)
       setTxKey(pixObject.payload)

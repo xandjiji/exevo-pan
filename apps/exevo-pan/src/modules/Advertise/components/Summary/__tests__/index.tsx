@@ -1,32 +1,35 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, randomDataset } from 'utils/test'
 import { calculatePrice, readablePrice } from '../../../utils'
 import Summary from '..'
-import { mockedFormValues } from './mock'
+import { SummaryProps } from '../types'
 
-jest.mock('../../../contexts/Form', () => ({
-  useForm: () => mockedFormValues,
-}))
+const [randomCharacter] = randomDataset().characterData
 
-const DAYS_COUNT = mockedFormValues.selectedDates.length
+const props: SummaryProps = {
+  isPro: false,
+  selectedCharacter: randomCharacter,
+  paymentMethod: 'PIX',
+  selectedDates: ['10/21/2021', '10/22/2021'],
+}
+
+const DAYS_COUNT = props.selectedDates.length
 
 describe('<Summary />', () => {
   test('should display auction config data', () => {
-    renderWithProviders(<Summary />)
+    renderWithProviders(<Summary {...props} />)
 
     expect(
-      screen.getByText(mockedFormValues.selectedCharacter?.nickname ?? ''),
+      screen.getByText(props.selectedCharacter?.nickname ?? ''),
     ).toBeInTheDocument()
 
     const linkElement = screen.getByRole('link')
     expect(linkElement).toHaveAttribute(
       'href',
-      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${mockedFormValues.selectedCharacter?.id}&source=overview`,
+      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${props.selectedCharacter?.id}&source=overview`,
     )
-    expect(linkElement).toHaveTextContent(
-      `(#${mockedFormValues.selectedCharacter?.id})`,
-    )
+    expect(linkElement).toHaveTextContent(`(#${props.selectedCharacter?.id})`)
 
     expect(screen.getByText('2')).toBeInTheDocument()
     const daysElement = screen.getByText('days')
@@ -38,7 +41,13 @@ describe('<Summary />', () => {
 
     expect(
       screen.getByText(
-        readablePrice.full.PIX(calculatePrice(DAYS_COUNT, 'PIX').totalPrice),
+        readablePrice.full.PIX(
+          calculatePrice({
+            days: DAYS_COUNT,
+            paymentMethod: props.paymentMethod,
+            isPro: props.isPro,
+          }).totalPrice,
+        ),
       ),
     ).toBeInTheDocument()
   })

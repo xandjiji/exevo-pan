@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import AdvertiseGrid from 'modules/Advertise'
+import { FormProvider, Form } from 'modules/Advertise'
 import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
 import { AuctionsClient } from 'services/server'
+import { useSession } from 'next-auth/react'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle } from 'utils'
@@ -23,6 +24,9 @@ export default function Advertise({
   const pageTitle = buildPageTitle(translations.advertise.Meta.title)
 
   const { page, ...pageData } = initialAuctionData
+
+  const { data } = useSession()
+  const isPro = !!data?.user.proStatus
 
   return (
     <>
@@ -79,7 +83,11 @@ export default function Advertise({
 
       <Main>
         <AuctionsProvider initialPage={page} initialPageData={pageData}>
-          <AdvertiseGrid />
+          <FormProvider isPro={isPro}>
+            <main className="inner-container py-4">
+              <Form />
+            </main>
+          </FormProvider>
         </AuctionsProvider>
       </Main>
     </>

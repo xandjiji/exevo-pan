@@ -1,4 +1,5 @@
 export const mockedFormValues = {
+  isPro: false,
   uuid: 'mocked-uuid',
   email: { value: 'you@mail.com' },
   paymentCharacter: {

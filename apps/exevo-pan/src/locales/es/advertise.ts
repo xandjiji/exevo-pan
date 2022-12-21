@@ -25,6 +25,10 @@ export default {
   Discount: {
     title: 'Descuentos',
     description: '¡Aprovecha nuestros descuentos progresivos!',
+    /* @ ToDo: i18n */
+    proDiscount: '{{discount}} discount applied! ({{exevopro}} only)',
+    /* @ ToDo: i18n */
+    freeDiscount: '{{discount}} discount not applied ({{exevopro}} only)',
   },
   Checkout: {
     title: 'Sus datos',

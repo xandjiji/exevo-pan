@@ -46,18 +46,40 @@ export default async (request: VercelRequest, response: VercelResponse) => {
       if (method === 'PATCH') {
         const { id, confirmed } = JSON.parse(request.body)
 
-        const result = await prisma.user.update({
-          where: { id },
-          data: {
-            proStatus: confirmed,
-            proSince: confirmed ? new Date().toISOString() : null,
-            paymentData: {
-              update: {
-                confirmed,
+        const currentDate = new Date().toISOString()
+
+        const payment = await prisma.paymentData.findUnique({
+          where: { userId: id },
+        })
+
+        const result = await prisma.$transaction([
+          prisma.user.update({
+            where: { id },
+            data: {
+              proStatus: confirmed,
+              proSince: confirmed ? currentDate : null,
+              paymentData: {
+                update: {
+                  confirmed,
+                },
               },
             },
-          },
-        })
+          }),
+          confirmed
+            ? prisma.transaction.create({
+                data: {
+                  value: 250,
+                  currency: 'TIBIA_COINS',
+                  type: 'EXEVO_PRO',
+                  date: currentDate,
+                  user: { connect: { id } },
+                  exevoProPayment: { connect: { id: payment?.id } },
+                },
+              })
+            : prisma.transaction.delete({
+                where: { exevoProPaymentId: payment?.id },
+              }),
+        ])
 
         response.status(200).json(result)
       }

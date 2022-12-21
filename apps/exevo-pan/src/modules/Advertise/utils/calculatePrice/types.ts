@@ -7,4 +7,11 @@ export interface AdvertiseOffer {
 export type DiscountParameters = {
   base: number
   days: number
+  isPro: boolean
+}
+
+export type CalculatePriceArgs = {
+  days: number
+  paymentMethod: PaymentMethods
+  isPro: boolean
 }

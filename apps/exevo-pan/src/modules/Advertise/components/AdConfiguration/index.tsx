@@ -5,15 +5,24 @@ import Summary from '../Summary'
 import { useForm } from '../../contexts/Form'
 
 const AdConfiguration = () => {
-  const { selectedDates, paymentMethod } = useForm()
+  const { selectedCharacter, selectedDates, paymentMethod, isPro } = useForm()
 
   const daysCount = selectedDates.length
   return (
     <section className="grid gap-6">
       <RangeDatePicker />
       <PaymentMethods />
-      <Discount daysCount={daysCount} paymentMethod={paymentMethod} />
-      <Summary />
+      <Discount
+        isPro={isPro}
+        daysCount={daysCount}
+        paymentMethod={paymentMethod}
+      />
+      <Summary
+        isPro={isPro}
+        selectedCharacter={selectedCharacter}
+        selectedDates={selectedDates}
+        paymentMethod={paymentMethod}
+      />
     </section>
   )
 }

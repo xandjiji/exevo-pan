@@ -2,6 +2,7 @@ import * as nodemailer from 'nodemailer'
 import inlineBase64 from 'nodemailer-plugin-inline-base64'
 import { v4 as uuidv4 } from 'uuid'
 import { EmailTemplate } from 'modules/Advertise/components'
+import { calculatePrice } from 'modules/Advertise/utils'
 import { isDevelopment } from 'utils'
 import { BackofficeClient, NotifyAdminClient } from 'services/server'
 import type { VercelRequest, VercelResponse } from '@vercel/node'
@@ -49,6 +50,13 @@ export default async (
   }
 
   const token = await getToken({ req: request })
+  const isPro = !!token?.proStatus
+  const price = calculatePrice({
+    days: selectedDates.length,
+    paymentMethod,
+    isPro,
+  })
+
   const { id: uuid } = await prisma.highlightedAuction.create({
     data: {
       auctionId: selectedCharacter.id,
@@ -56,20 +64,25 @@ export default async (
       days: selectedDates.join(),
       email: body.email,
       paymentMethod,
-      paymentCharacter: (paymentCharacter as string | undefined)
-        ? paymentCharacter
-        : undefined,
-      user: token
+      price: price.totalPrice,
+      transaction: token
         ? {
-            connect: {
-              id: token.id,
+            create: {
+              value: price.totalPrice,
+              currency: paymentMethod === 'PIX' ? 'BRL' : 'TIBIA_COINS',
+              type: 'AUCTION_HIGHLIGHT',
+              user: { connect: { id: token.id } },
             },
           }
         : undefined,
+      paymentCharacter: (paymentCharacter as string | undefined)
+        ? paymentCharacter
+        : undefined,
+      user: token ? { connect: { id: token.id } } : undefined,
     },
   })
 
-  const html = await EmailTemplate({ ...body, uuid })
+  const html = await EmailTemplate({ ...body, isPro, uuid })
 
   const customerEmail = {
     from: `Exevo Pan <${email.EXEVOPAN_EMAIL}>`,

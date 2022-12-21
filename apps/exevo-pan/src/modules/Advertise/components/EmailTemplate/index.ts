@@ -6,6 +6,7 @@ import * as T from './components'
 import { EmailTemplateProps, ThankYouProps, SummaryProps } from './types'
 
 const ThankYouCard = async ({
+  isPro,
   auctionId,
   selectedDates,
   paymentMethod,
@@ -21,14 +22,14 @@ const ThankYouCard = async ({
     paymentInfo = T.Text(
       `${dictionary.PaymentDetails.CoinsPayment.instruction} ${T.Strong(
         `${readablePrice.full.TIBIA_COINS(
-          calculatePrice(daysAmount, paymentMethod).totalPrice,
+          calculatePrice({ days: daysAmount, paymentMethod, isPro }).totalPrice,
         )}`,
       )} ${commonDictionary.from} ${paymentCharacter} ${
         commonDictionary.to
       } ${T.Strong(advertising.BANK_CHARACTER)}`,
     )
   } else {
-    const qrCode = await generateQrCode({ txId: auctionId, daysAmount })
+    const qrCode = await generateQrCode({ txId: auctionId, daysAmount, isPro })
     paymentInfo = `
     ${T.Text(dictionary.PaymentDetails.PixPayment.codeText)}
     ${T.Code(qrCode.payload)}
@@ -46,6 +47,7 @@ const ThankYouCard = async ({
 
 const SummaryCard = ({
   uuid,
+  isPro,
   advertisedCharacter,
   auctionId,
   selectedDates,
@@ -76,7 +78,7 @@ const SummaryCard = ({
 
     ${T.DetailItem(
       readablePrice.full[paymentMethod](
-        calculatePrice(daysCount, paymentMethod).totalPrice,
+        calculatePrice({ days: daysCount, paymentMethod, isPro }).totalPrice,
       ),
     )}
     ${T.DetailInfo(dictionary.PaymentDetails.Summary.costText)}
@@ -104,6 +106,7 @@ const BuildEmailHtml = async (
   return `
     <div style="font-family: Helvetica;">
         ${await ThankYouCard({
+          isPro: purchaseData.isPro,
           auctionId: selectedCharacter.id,
           selectedDates,
           paymentMethod,
@@ -112,6 +115,7 @@ const BuildEmailHtml = async (
         })}
         ${SummaryCard({
           uuid,
+          isPro: purchaseData.isPro,
           advertisedCharacter: selectedCharacter.nickname,
           auctionId: selectedCharacter.id,
           selectedDates,

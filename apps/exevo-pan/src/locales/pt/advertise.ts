@@ -25,6 +25,8 @@ export default {
   Discount: {
     title: 'Descontos',
     description: 'Aproveite nossos descontos progressivos!',
+    proDiscount: '{{discount}} desconto aplicado! (exclusivo {{exevopro}})',
+    freeDiscount: '{{discount}} desconto não aplicado (exclusivo {{exevopro}})',
   },
   Checkout: {
     title: 'Seus dados',

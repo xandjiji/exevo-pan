@@ -55,10 +55,12 @@ export type Action =
     }
 
 export interface FormValues extends FormContextState {
+  isPro: boolean
   isValid: boolean
   dispatch: (action: Action) => void
 }
 
 export interface FormProviderProps {
+  isPro: boolean
   children?: ReactNode
 }

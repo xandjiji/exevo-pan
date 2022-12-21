@@ -11,7 +11,14 @@ const PaymentDetails = () => {
     translations: { advertise },
   } = useTranslations()
 
-  const { uuid, email, paymentMethod } = useForm()
+  const {
+    isPro,
+    selectedCharacter,
+    selectedDates,
+    uuid,
+    email,
+    paymentMethod,
+  } = useForm()
 
   return (
     <div className="grid gap-6">
@@ -39,13 +46,22 @@ const PaymentDetails = () => {
           </span>
         </p>
 
-        {paymentMethod === 'TIBIA_COINS' ? <CoinsPayment /> : <PixPayment />}
+        {paymentMethod === 'TIBIA_COINS' ? (
+          <CoinsPayment isPro={isPro} />
+        ) : (
+          <PixPayment isPro={isPro} />
+        )}
 
         <span className="text-xs tracking-wide">
           {advertise.PaymentDetails.smallDisclaimer}
         </span>
       </section>
-      <Summary />
+      <Summary
+        isPro={isPro}
+        selectedCharacter={selectedCharacter}
+        selectedDates={selectedDates}
+        paymentMethod={paymentMethod}
+      />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Stepper } from 'components/Atoms'
 import NextLink from 'next/link'
 import { routes } from 'Constants'
-import { FormProvider, useForm } from './contexts/Form'
+import { useForm } from './contexts/Form'
 import {
   AuctionSearch,
   AdConfiguration,
@@ -15,7 +15,7 @@ import styles from './styles.module.css'
 
 const FAQ_SLUG = 'how-highlighting-works'
 
-const Form = () => {
+export const Form = () => {
   const {
     translations: { advertise },
   } = useTranslations()
@@ -72,12 +72,4 @@ const Form = () => {
   )
 }
 
-const AdvertiseGrid = () => (
-  <FormProvider>
-    <main className="inner-container py-4">
-      <Form />
-    </main>
-  </FormProvider>
-)
-
-export default AdvertiseGrid
+export { FormProvider } from './contexts/Form'

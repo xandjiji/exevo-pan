@@ -9,6 +9,7 @@ describe('<BuildEmailHtml />', () => {
   test('should render all data correctly for PIX', async () => {
     const template = await BuildEmailHtml(mockedPixPurchaseData)
     const { payload, qrCode } = await generateQrCode({
+      isPro: false,
       txId: mockedPixPurchaseData.selectedCharacter.id,
       daysAmount: mockedPixPurchaseData.selectedDates.length,
     })
@@ -35,8 +36,11 @@ describe('<BuildEmailHtml />', () => {
     expect(
       screen.getByText(
         readablePrice.full.PIX(
-          calculatePrice(mockedPixPurchaseData.selectedDates.length, 'PIX')
-            .totalPrice,
+          calculatePrice({
+            isPro: false,
+            days: mockedPixPurchaseData.selectedDates.length,
+            paymentMethod: 'PIX',
+          }).totalPrice,
         ),
       ),
     ).toBeInTheDocument()
@@ -46,7 +50,7 @@ describe('<BuildEmailHtml />', () => {
     })
   })
 
-  test('should render all data correctly for TIBIA_COINS', async () => {
+  test('should render all data correctly for TIBIA_COINS and PRO status', async () => {
     const template = await BuildEmailHtml(mockedTCPurchaseData)
 
     render(<div dangerouslySetInnerHTML={{ __html: template }} />)
@@ -73,10 +77,11 @@ describe('<BuildEmailHtml />', () => {
     expect(
       screen.getAllByText(
         readablePrice.full.TIBIA_COINS(
-          calculatePrice(
-            mockedTCPurchaseData.selectedDates.length,
-            'TIBIA_COINS',
-          ).totalPrice,
+          calculatePrice({
+            isPro: true,
+            days: mockedTCPurchaseData.selectedDates.length,
+            paymentMethod: 'TIBIA_COINS',
+          }).totalPrice,
         ),
       ),
     ).toHaveLength(2)

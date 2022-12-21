@@ -7,6 +7,7 @@ const { characterData } = randomDataset()
 const mockedCharacterData = characterData[0]
 
 export const mockedPixPurchaseData: EmailTemplateProps = {
+  isPro: false,
   uuid: uuidv4(),
   selectedCharacter: mockedCharacterData,
   selectedDates: ['10/21/2021', '10/22/2021', '10/23/2021'],
@@ -16,6 +17,7 @@ export const mockedPixPurchaseData: EmailTemplateProps = {
 }
 
 export const mockedTCPurchaseData: EmailTemplateProps = {
+  isPro: true,
   uuid: uuidv4(),
   selectedCharacter: mockedCharacterData,
   selectedDates: ['10/21/2021'],

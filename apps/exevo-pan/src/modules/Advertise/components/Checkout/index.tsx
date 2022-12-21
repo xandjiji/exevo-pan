@@ -18,6 +18,7 @@ const Checkout = () => {
   const { locale } = useRouter()
 
   const {
+    isPro,
     selectedCharacter,
     selectedDates,
     paymentMethod,
@@ -54,6 +55,7 @@ const Checkout = () => {
   const submit = async () => {
     setSendingEmail(true)
     const uuid = await MailCheckoutClient.postMail({
+      isPro,
       selectedCharacter: selectedCharacter as CharacterObject,
       selectedDates,
       paymentMethod,

@@ -7,11 +7,12 @@ import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import {
-  MiniAuctionGrid,
+  ThreeDimensionalMiniAuctionGrid,
   FeatureSection,
   MiniBossGrid,
   MiniAuction,
   MiniFilters,
+  MiniHighlight,
   Tooltip as List,
   Strong,
   Gradient,
@@ -90,7 +91,7 @@ export default function ExevoPro() {
       <Main clean>
         <main className="inner-container grid gap-24 overflow-x-hidden py-20">
           <section className="relative mb-28 flex flex-col items-center gap-10">
-            <MiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
+            <ThreeDimensionalMiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
             <h2 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
               {templateMessage(translations.exevopro.heading, {
                 exevopro: <Gradient>Exevo Pro</Gradient>,
@@ -126,11 +127,18 @@ export default function ExevoPro() {
                 ),
               })}
             </h3>
+
             <MiniBossGrid />
           </FeatureSection>
 
           <FeatureSection>
-            <div className="order-last grid grid-cols-3 gap-2 md:-order-none">
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {templateMessage(translations.exevopro.tcInvested.pitch, {
+                strong: <Strong>Tibia Coins</Strong>,
+              })}
+            </h3>
+
+            <div className="grid grid-cols-3 gap-2">
               <MiniAuction highlight />
               <MiniAuction />
               <MiniAuction />
@@ -141,11 +149,6 @@ export default function ExevoPro() {
               <MiniAuction />
               <MiniAuction highlight />
             </div>
-            <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.tcInvested.pitch, {
-                strong: <Strong>Tibia Coins</Strong>,
-              })}
-            </h3>
           </FeatureSection>
 
           <FeatureSection>
@@ -178,6 +181,7 @@ export default function ExevoPro() {
                 ),
               })}
             </h3>
+
             <div className="flex items-center">
               <MiniFilters />
               <div className="-z-1 child:!shadow-sm relative -left-6 grid grid-cols-2 gap-2">
@@ -187,6 +191,20 @@ export default function ExevoPro() {
                 <MiniAuction />
               </div>
             </div>
+          </FeatureSection>
+
+          <FeatureSection>
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {templateMessage(translations.exevopro.highlightDiscount.pitch, {
+                strong: (
+                  <Strong>
+                    {translations.exevopro.highlightDiscount.strong}
+                  </Strong>
+                ),
+              })}
+            </h3>
+
+            <MiniHighlight />
           </FeatureSection>
 
           <p className="text-center text-2xl">

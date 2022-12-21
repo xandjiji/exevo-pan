@@ -1,7 +1,5 @@
 import { advertising } from 'Constants'
-import { DiscountParameters, AdvertiseOffer } from './types'
-
-const { TIBIA_COINS_ADVERTISE, BRL_ADVERTISE } = advertising
+import { DiscountParameters, AdvertiseOffer, CalculatePriceArgs } from './types'
 
 export const getDiscountTier = (days: number): number => {
   if (days >= 5) return 3
@@ -11,7 +9,7 @@ export const getDiscountTier = (days: number): number => {
 
 const applyDiscount = ({ base, days }: DiscountParameters): number => {
   const discountTier = getDiscountTier(days)
-  const baseDiscount = base / 3
+  const baseDiscount = base / advertising.PRICE_UNIT_DIVIDER
 
   if (discountTier === 3) {
     return (base - baseDiscount) * days
@@ -24,10 +22,18 @@ const applyDiscount = ({ base, days }: DiscountParameters): number => {
   return base * days
 }
 
-const calculateOffer = ({ base, days }: DiscountParameters): AdvertiseOffer => {
+const calculateOffer = ({
+  base,
+  days,
+  isPro,
+}: DiscountParameters): AdvertiseOffer => {
   const basePrice = base * days
+  const proDiscount = isPro ? base / advertising.PRICE_UNIT_DIVIDER : 0
 
-  const discountedPrice = applyDiscount({ base, days })
+  const discountedPrice = Math.max(
+    0,
+    applyDiscount({ base, days, isPro }) - proDiscount,
+  )
 
   const saved = basePrice - discountedPrice
   const offPercentage = Math.round((saved / basePrice) * 100)
@@ -39,11 +45,16 @@ const calculateOffer = ({ base, days }: DiscountParameters): AdvertiseOffer => {
   }
 }
 
-export const calculatePrice = (
-  days: number,
-  paymentMethod: PaymentMethods,
-): AdvertiseOffer =>
+export const calculatePrice = ({
+  days,
+  paymentMethod,
+  isPro,
+}: CalculatePriceArgs): AdvertiseOffer =>
   calculateOffer({
-    base: paymentMethod === 'PIX' ? BRL_ADVERTISE : TIBIA_COINS_ADVERTISE,
+    base:
+      paymentMethod === 'PIX'
+        ? advertising.basePrice.BRL
+        : advertising.basePrice.TIBIA_COINS,
     days,
+    isPro,
   })

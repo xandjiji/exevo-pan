@@ -20,16 +20,24 @@ const cases: TestCase[] = [
 
 describe('<Discount />', () => {
   test.each(cases)(
-    'all values should be displayed correctly',
+    'all values should be displayed correctly (FREE)',
     ({ daysCount, paymentMethod }) => {
       renderWithProviders(
-        <Discount daysCount={daysCount} paymentMethod={paymentMethod} />,
+        <Discount
+          daysCount={daysCount}
+          paymentMethod={paymentMethod}
+          isPro={false}
+        />,
       )
 
-      const { offPercentage, totalPrice, saved } = calculatePrice(
-        daysCount,
+      const { offPercentage, totalPrice, saved } = calculatePrice({
+        isPro: false,
+        days: daysCount,
         paymentMethod,
-      )
+      })
+
+      expect(screen.getByText(/discount not applied/gi)).toBeInTheDocument()
+
       const tier = getDiscountTier(daysCount)
 
       expect(screen.getByText(`Tier ${tier}`)).toBeInTheDocument()
@@ -50,6 +58,54 @@ describe('<Discount />', () => {
         const [finalPriceElement, originalPriceElement] = screen.getAllByText(
           readablePrice.short[paymentMethod](totalPrice),
         )
+
+        expect(finalPriceElement).not.toHaveClass('opacity-0')
+        expect(originalPriceElement).toHaveClass('opacity-0')
+        expect(tagElement).toHaveClass('opacity-0')
+      }
+    },
+  )
+
+  test.each(cases)(
+    'all values should be displayed correctly (PRO)',
+    ({ daysCount, paymentMethod }) => {
+      renderWithProviders(
+        <Discount daysCount={daysCount} paymentMethod={paymentMethod} isPro />,
+      )
+
+      const { offPercentage, totalPrice, saved } = calculatePrice({
+        isPro: true,
+        days: daysCount,
+        paymentMethod,
+      })
+
+      expect(screen.getByText(/discount applied/gi)).toBeInTheDocument()
+
+      const tier = getDiscountTier(daysCount)
+
+      expect(screen.getByText(`Tier ${tier}`)).toBeInTheDocument()
+
+      const tagElement = screen.getByText(`-${offPercentage}`)
+      if (tier > 1) {
+        expect(
+          screen.getByText(readablePrice.short[paymentMethod](totalPrice)),
+        ).toBeInTheDocument()
+
+        expect(
+          screen.getByText(
+            readablePrice.short[paymentMethod](saved + totalPrice),
+          ),
+        ).toBeInTheDocument()
+        expect(tagElement).toHaveClass('opacity-100')
+      } else {
+        const [finalPriceElement, possibleOriginalPriceElement] =
+          screen.getAllByText(readablePrice.short[paymentMethod](totalPrice))
+
+        const originalPriceElement =
+          possibleOriginalPriceElement ??
+          screen.getByText(
+            readablePrice.short[paymentMethod](saved + totalPrice),
+          )
 
         expect(finalPriceElement).not.toHaveClass('opacity-0')
         expect(originalPriceElement).toHaveClass('opacity-0')
