@@ -19,7 +19,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
       console.log(error)
       return
     }
-    NotifyErrorClient.setMessage({ error, errorInfo })
+    /* NotifyErrorClient.setMessage({ error, errorInfo }) */
     console.log({ error, errorInfo })
     localStorage.clear()
     setTimeout(() => window.location.reload(), 3000)
