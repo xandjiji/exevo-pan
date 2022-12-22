@@ -25,7 +25,6 @@ export default async function handler({ url }: NextRequest) {
           height: '100%',
           display: 'flex',
           flexDirection: 'column',
-          textAlign: 'center',
           justifyContent: 'center',
           padding: 64,
         }}
@@ -38,6 +37,7 @@ export default async function handler({ url }: NextRequest) {
           style={{
             position: 'absolute',
             right: -160,
+            bottom: 0,
             opacity: 0.2,
           }}
         />
@@ -45,6 +45,7 @@ export default async function handler({ url }: NextRequest) {
           style={{
             fontSize: 120,
             color: 'rgb(63,81,181)',
+            marginBottom: 64,
           }}
         >
           {searchParams.get('title')}
