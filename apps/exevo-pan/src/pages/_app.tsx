@@ -7,6 +7,7 @@ import { PreviewImageClient } from 'services'
 import { LockBodyProvider } from 'hooks/useLockBody'
 import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
+import { loadRawSrc } from 'utils'
 import { Roboto } from '@next/font/google'
 import 'styles/globals.css'
 import 'styles/reset.css'
@@ -22,7 +23,8 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const { translations } = pageProps
 
   const previewSrc = PreviewImageClient.getSrc({
-    title: 'Exevo Pan 🍖',
+    title: 'Exevo Pan',
+    imgSrc: loadRawSrc('/default-review.png'),
   })
 
   return (

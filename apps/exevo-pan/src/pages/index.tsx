@@ -12,7 +12,7 @@ import { BlogClient, PreviewImageClient } from 'services'
 import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, homepage } from 'locales'
 
@@ -39,7 +39,8 @@ export default function Home({
 
   const pageName = translations.homepage.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
-    title: `${pageName} 🔎`,
+    title: pageName,
+    imgSrc: loadRawSrc('/default-review.png'),
   })
 
   const pageTitle = buildPageTitle(pageName)
