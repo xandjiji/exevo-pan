@@ -3,6 +3,7 @@ import { Analytics } from '@vercel/analytics/react'
 import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
+import { PreviewImageClient } from 'services'
 import { LockBodyProvider } from 'hooks/useLockBody'
 import { SessionProvider } from 'next-auth/react'
 import { AppProps } from 'next/app'
@@ -20,22 +21,18 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   const PageComponent = Component as any
   const { translations } = pageProps
 
+  const previewSrc = PreviewImageClient.getSrc({
+    title: 'Exevo Pan 🍖',
+  })
+
   return (
     <>
       <Head>
         <meta name="viewport" content="width=device-width" />
         <meta property="og:site_name" content="Exevo Pan" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta
-          key="preview-1"
-          property="og:image"
-          content="https://i.imgur.com/obDJJOI.png"
-        />
-        <meta
-          key="preview-2"
-          property="twitter:image"
-          content="https://i.imgur.com/obDJJOI.png"
-        />
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
       </Head>
 
       <style jsx global>{`
