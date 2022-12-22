@@ -91,7 +91,7 @@ model HighlightedAuction {
     id               String         @id @default(uuid())
     nickname         String
     auctionId        Int
-    price            Int?
+    price            Int
     days             String
     lastUpdated      DateTime       @default(now())
     active           Boolean        @default(true)
