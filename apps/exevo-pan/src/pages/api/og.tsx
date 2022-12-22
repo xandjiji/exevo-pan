@@ -10,13 +10,27 @@ const font = fetch(
   new URL('../../assets/roboto.ttf', import.meta.url) as unknown as RequestInfo,
 ).then((res) => res.arrayBuffer())
 
+const getFontSize = (title: string, fontParam?: string | null): number => {
+  if (fontParam) return +fontParam
+
+  const charCount = title.length
+
+  if (charCount <= 10) return 180
+  if (charCount <= 33) return 120
+  if (charCount <= 51) return 88
+  if (charCount <= 60) return 78
+
+  return 64
+}
+
 export default async function handler({ url }: NextRequest) {
   const fontData = await font
 
   const { searchParams } = new URL(url)
 
+  const title = searchParams.get('title') ?? 'Exevo Pan'
   const imgSrc = searchParams.get('img')
-  const fontSize = +(searchParams.get('fontSize') ?? 120)
+  const fontSize = getFontSize(title, searchParams.get('fontSize'))
 
   return new ImageResponse(
     (
