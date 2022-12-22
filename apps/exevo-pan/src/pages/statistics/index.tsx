@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, OverallGrid } from 'modules/Statistics'
 import { OverallData } from 'modules/Statistics/components/OverallGrid/types'
+import { PreviewImageClient } from 'services'
 import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -18,9 +19,12 @@ export default function Statistics({
 }) {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(
-    translations.statistics.Meta.Statistics.title,
-  )
+  const pageName = translations.statistics.Meta.Statistics.title
+  const previewSrc = PreviewImageClient.getSrc({
+    title: `${pageName} 📊`,
+  })
+
+  const pageTitle = buildPageTitle(pageName)
 
   return (
     <>
@@ -47,6 +51,9 @@ export default function Statistics({
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link

@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
+import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient, BossesClient } from 'services/server'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import BossTracker, { heroSrc } from 'modules/BossTracker'
@@ -23,7 +24,13 @@ export default function BossTrackerPage(args: BossTrackerProps) {
 
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(translations.bosses.Meta.title)
+  const pageName = translations.bosses.Meta.title
+  const previewSrc = PreviewImageClient.getSrc({
+    title: `${pageName} ${bossChances.server}`,
+    imgSrc: heroSrc,
+  })
+
+  const pageTitle = buildPageTitle(pageName)
 
   return (
     <>
@@ -47,8 +54,8 @@ export default function BossTrackerPage(args: BossTrackerProps) {
         />
         <meta property="og:type" content="website" />
 
-        <meta key="preview-1" property="og:image" content={heroSrc} />
-        <meta key="preview-2" property="twitter:image" content={heroSrc} />
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
