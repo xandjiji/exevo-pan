@@ -10,8 +10,10 @@ const font = fetch(new URL('../../assets/roboto.ttf', import.meta.url)).then(
   (res) => res.arrayBuffer(),
 )
 
-export default async function handler(request: NextRequest) {
+export default async function handler({ url }: NextRequest) {
   const fontData = await font
+
+  const { searchParams } = new URL(url)
 
   return new ImageResponse(
     (
@@ -29,7 +31,7 @@ export default async function handler(request: NextRequest) {
         }}
       >
         <img
-          src="http://localhost:3000/blog/thumbnails/bosses.png"
+          src={searchParams.get('img') ?? ''}
           width={240 * 2}
           height={240 * 2}
           alt=""
@@ -41,11 +43,11 @@ export default async function handler(request: NextRequest) {
         />
         <h1
           style={{
-            fontSize: 128,
+            fontSize: 120,
             color: 'rgb(63,81,181)',
           }}
         >
-          Boss Tracker
+          {searchParams.get('title')}
         </h1>
         <div
           style={{
