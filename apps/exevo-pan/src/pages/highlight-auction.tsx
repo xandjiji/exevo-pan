@@ -6,7 +6,7 @@ import { AuctionsClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, pluckTCInvested } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, advertise } from 'locales'
 
@@ -99,13 +99,18 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     history: false,
   })
 
+  const pluckedInitialAuctionData: typeof initialAuctionData = {
+    ...initialAuctionData,
+    page: initialAuctionData.page.map(pluckTCInvested),
+  }
+
   return {
     props: {
       translations: {
         common: common[locale as RegisteredLocale],
         advertise: advertise[locale as RegisteredLocale],
       },
-      initialAuctionData,
+      initialAuctionData: pluckedInitialAuctionData,
     },
   }
 }
