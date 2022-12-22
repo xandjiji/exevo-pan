@@ -6,9 +6,9 @@ export const config = {
   runtime: 'experimental-edge',
 }
 
-const font = fetch(new URL('../../assets/roboto.ttf', import.meta.url)).then(
-  (res) => res.arrayBuffer(),
-)
+const font = fetch(
+  new URL('../../assets/roboto.ttf', import.meta.url) as unknown as RequestInfo,
+).then((res) => res.arrayBuffer())
 
 export default async function handler({ url }: NextRequest) {
   const fontData = await font
