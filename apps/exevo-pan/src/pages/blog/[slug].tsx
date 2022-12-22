@@ -77,7 +77,6 @@ export default function PostPage({
   const previewSrc = PreviewImageClient.getSrc({
     title: metaData.title,
     imgSrc: loadRawSrc(metaData.thumbnail),
-    fontSize: 88,
   })
 
   return (
