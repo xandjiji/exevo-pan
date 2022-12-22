@@ -2,9 +2,9 @@ import { Home } from 'modules/Blog'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/BlogFilters/defaults'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle } from 'utils'
+import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import Head from 'next/head'
-import { BlogClient } from 'services'
+import { BlogClient, PreviewImageClient } from 'services'
 import { Main, Hero } from 'templates'
 import { routes, jsonld } from 'Constants'
 import { common, blog } from 'locales'
@@ -19,6 +19,12 @@ export default function PostPage({ initialPosts }: Props) {
   const { translations } = useTranslations()
 
   const pageTitle = buildPageTitle(translations.blog.Meta.title)
+
+  const heroSrc = '/blog/thumbnails/posts.png'
+  const previewSrc = PreviewImageClient.getSrc({
+    title: 'Blog',
+    imgSrc: loadRawSrc(heroSrc),
+  })
 
   return (
     <>
@@ -42,6 +48,9 @@ export default function PostPage({ initialPosts }: Props) {
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link
@@ -71,11 +80,7 @@ export default function PostPage({ initialPosts }: Props) {
       </Head>
 
       <Main>
-        <Hero
-          title={translations.blog.Meta.title}
-          src="/blog/thumbnails/posts.png"
-          offset
-        />
+        <Hero title={translations.blog.Meta.title} src={heroSrc} offset />
         <Home
           initialIndex={DEFAULT_PAGINATION_OPTIONS.pageIndex + 1}
           initialPosts={initialPosts}

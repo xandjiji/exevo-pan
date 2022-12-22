@@ -7,7 +7,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import matter from 'gray-matter'
 import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import Head from 'next/head'
-import { BlogClient } from 'services'
+import { BlogClient, PreviewImageClient } from 'services'
 import { Main } from 'templates'
 import { routes, links } from 'Constants'
 import { common, blog } from 'locales'
@@ -74,7 +74,11 @@ export default function PostPage({
   const [day, month, year] = metaData.date.toString().split('-')
   const tags = metaData.tags as unknown as string[]
 
-  const previewSrc = loadRawSrc(metaData.thumbnail)
+  const previewSrc = PreviewImageClient.getSrc({
+    title: metaData.title,
+    imgSrc: loadRawSrc(metaData.thumbnail),
+    fontSize: 88,
+  })
 
   return (
     <>

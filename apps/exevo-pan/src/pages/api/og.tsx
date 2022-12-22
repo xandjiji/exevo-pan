@@ -16,6 +16,7 @@ export default async function handler({ url }: NextRequest) {
   const { searchParams } = new URL(url)
 
   const imgSrc = searchParams.get('img')
+  const fontSize = +(searchParams.get('fontSize') ?? 120)
 
   return new ImageResponse(
     (
@@ -47,7 +48,7 @@ export default async function handler({ url }: NextRequest) {
         )}
         <h1
           style={{
-            fontSize: 120,
+            fontSize,
             color: 'rgb(63,81,181)',
             marginBottom: 64,
           }}
