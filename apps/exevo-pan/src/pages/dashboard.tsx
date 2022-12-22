@@ -3,6 +3,7 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { UserCard, Pitch, PurchaseForm } from 'modules/Dashboard'
+import { PreviewImageClient } from 'services'
 import { useSession } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -13,7 +14,12 @@ const pageUrl = buildUrl(routes.DASHBOARD)
 export default function Dashboard() {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(translations.dashboard.Meta.title)
+  const pageName = translations.dashboard.Meta.title
+  const previewSrc = PreviewImageClient.getSrc({
+    title: pageName,
+  })
+
+  const pageTitle = buildPageTitle(pageName)
 
   const { data: session } = useSession()
 
@@ -42,6 +48,9 @@ export default function Dashboard() {
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link

@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { Header, HighscoresGrid } from 'modules/Statistics'
 import { Top10Data } from 'modules/Statistics/components/HighscoresGrid/types'
+import { PreviewImageClient } from 'services'
 import { HistoryStatisticsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -14,9 +15,12 @@ const pageUrl = buildUrl(routes.HIGHSCORES)
 export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(
-    translations.statistics.Meta.Highscores.title,
-  )
+  const pageName = translations.statistics.Meta.Highscores.title
+  const previewSrc = PreviewImageClient.getSrc({
+    title: `${pageName} 📊`,
+  })
+
+  const pageTitle = buildPageTitle(pageName)
 
   return (
     <>
@@ -43,6 +47,9 @@ export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link

@@ -8,7 +8,7 @@ import {
   UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
-import { BlogClient } from 'services'
+import { BlogClient, PreviewImageClient } from 'services'
 import { DrawerFieldsClient, AuctionsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -37,7 +37,13 @@ export default function Home({
 }: HomeStaticProps) {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(translations.homepage.Meta.title)
+  const pageName = translations.homepage.Meta.title
+  const previewSrc = PreviewImageClient.getSrc({
+    title: `${pageName} 🔎`,
+  })
+
+  const pageTitle = buildPageTitle(pageName)
+
   const { current: activeServersSet } = useRef(new Set(activeServers))
 
   return (
@@ -65,6 +71,9 @@ export default function Home({
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link
