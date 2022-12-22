@@ -2,6 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { FormProvider, Form } from 'modules/Advertise'
 import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
+import { PreviewImageClient } from 'services'
 import { AuctionsClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { GetStaticProps } from 'next'
@@ -21,7 +22,12 @@ export default function Advertise({
 }: AdvertiseStaticProps) {
   const { translations } = useTranslations()
 
-  const pageTitle = buildPageTitle(translations.advertise.Meta.title)
+  const pageName = translations.advertise.Meta.title
+  const previewSrc = PreviewImageClient.getSrc({
+    title: `${pageName} ✨`,
+  })
+
+  const pageTitle = buildPageTitle(pageName)
 
   const { page, ...pageData } = initialAuctionData
 
@@ -53,6 +59,9 @@ export default function Advertise({
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
         <meta property="twitter:url" content={pageUrl} />
+
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
         <link
