@@ -14,7 +14,7 @@ import 'styles/reset.css'
 
 const roboto = Roboto({
   adjustFontFallback: true,
-  subsets: ['latin'],
+  subsets: ['latin', 'latin-ext'],
   weight: ['300', '400', '700'],
 })
 
