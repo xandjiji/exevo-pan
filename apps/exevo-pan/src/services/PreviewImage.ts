@@ -8,8 +8,8 @@ type GetSrcProps = {
 
 export default class PreviewImageClient {
   static getSrc({ title, imgSrc, fontSize }: GetSrcProps): string {
-    return `${endpoints.PREVIEW_IMAGES}?title=${title}&img=${imgSrc}&fontSize=${
-      fontSize ?? 120
+    return `${endpoints.PREVIEW_IMAGES}?title=${title}&img=${imgSrc}${
+      fontSize ? `&fontSize=${fontSize}` : ''
     }`
   }
 }
