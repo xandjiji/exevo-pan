@@ -15,6 +15,8 @@ export default async function handler({ url }: NextRequest) {
 
   const { searchParams } = new URL(url)
 
+  const imgSrc = searchParams.get('img')
+
   return new ImageResponse(
     (
       <div
@@ -29,18 +31,20 @@ export default async function handler({ url }: NextRequest) {
           padding: 64,
         }}
       >
-        <img
-          src={searchParams.get('img') ?? ''}
-          width={240 * 2}
-          height={240 * 2}
-          alt=""
-          style={{
-            position: 'absolute',
-            right: -160,
-            bottom: 0,
-            opacity: 0.2,
-          }}
-        />
+        {!!imgSrc && (
+          <img
+            src={imgSrc}
+            width={240 * 2}
+            height={240 * 2}
+            alt=""
+            style={{
+              position: 'absolute',
+              right: -160,
+              bottom: 0,
+              opacity: 0.2,
+            }}
+          />
+        )}
         <h1
           style={{
             fontSize: 120,
