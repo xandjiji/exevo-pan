@@ -19,6 +19,8 @@ export default {
       auctionFilters: 'Filtros de leilão',
       exclusiveBosses: 'Acesso a todos os bosses do {{bossTracker}}',
       bossTracker: 'Boss Tracker',
+      discounts: 'Descontos para {{auctionHighlighting}}',
+      auctionHighlighting: 'destacar leilões',
     },
     filtersTooltip: {
       tc: 'Tibia Coins investidos',

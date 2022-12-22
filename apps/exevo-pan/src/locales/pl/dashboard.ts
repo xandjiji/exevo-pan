@@ -18,6 +18,8 @@ export default {
       auctionFilters: 'auction filters',
       exclusiveBosses: 'Access to all bosses from {{bossTracker}}',
       bossTracker: 'Boss Tracker',
+      discounts: 'Discounts for {{auctionHighlighting}}',
+      auctionHighlighting: 'auction highlighting',
     },
     filtersTooltip: {
       tc: 'Tibia Coins invested',

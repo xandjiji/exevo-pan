@@ -110,6 +110,13 @@ const Pitch = ({ proStatus }: PitchProps) => {
               ),
             })}
           </Li>
+          <Li>
+            {templateMessage(dashboard.Pitch.features.discounts, {
+              auctionHighlighting: (
+                <strong>{dashboard.Pitch.features.auctionHighlighting}</strong>
+              ),
+            })}
+          </Li>
         </ul>
         <p className="text-right">{dashboard.Pitch.more}</p>
       </div>
