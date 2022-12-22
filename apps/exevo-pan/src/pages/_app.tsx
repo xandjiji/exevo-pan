@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
 
   const previewSrc = PreviewImageClient.getSrc({
     title: 'Exevo Pan',
-    imgSrc: loadRawSrc('/default-review.png'),
+    imgSrc: loadRawSrc('/default-preview.png'),
   })
 
   return (

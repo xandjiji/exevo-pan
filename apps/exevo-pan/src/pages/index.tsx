@@ -40,7 +40,7 @@ export default function Home({
   const pageName = translations.homepage.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
-    imgSrc: loadRawSrc('/default-review.png'),
+    imgSrc: loadRawSrc('/default-preview.png'),
   })
 
   const pageTitle = buildPageTitle(pageName)
