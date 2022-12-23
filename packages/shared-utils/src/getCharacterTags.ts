@@ -1,6 +1,6 @@
 import { dictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
-import { constTokens as questTokens } from 'data-dictionary/dist/dictionaries/quest'
+import { constTokens as achievementTokens } from 'data-dictionary/dist/dictionaries/rareAchievement'
 
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26
@@ -84,7 +84,9 @@ export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
       tags.push('soulwarAvailable')
     }
     if (
-      !character.quests.some((quest) => quest === questTokens['Primal Ordeal'])
+      !character.rareAchievements.some(
+        (achievement) => achievement === achievementTokens['Royalty of Hazard'],
+      )
     ) {
       tags.push('primalAvailable')
     }
