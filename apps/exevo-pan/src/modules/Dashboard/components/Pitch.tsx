@@ -80,6 +80,7 @@ const Pitch = ({ proStatus }: PitchProps) => {
                         <li>{dashboard.Pitch.filtersTooltip.store}</li>
                         <li>{dashboard.Pitch.filtersTooltip.rareItems}</li>
                         <li>{dashboard.Pitch.filtersTooltip.soulwar}</li>
+                        <li>{dashboard.Pitch.filtersTooltip.primalOrdeal}</li>
                       </TooltipUl>
                     </div>
                   }

@@ -27,6 +27,7 @@ export default {
       store: 'Montarias e outfits da store',
       rareItems: 'Items raros',
       soulwar: 'Soul War disponível',
+      primalOrdeal: 'Primal Ordeal disponível',
     },
     more: '...e mais no futuro!',
     payOnce: 'Pague uma vez, seu',

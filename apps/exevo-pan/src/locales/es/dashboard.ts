@@ -26,6 +26,7 @@ export default {
       store: 'Store mounts and outfits',
       rareItems: 'Rare items',
       soulwar: 'Soul War available',
+      primalOrdeal: 'Primal Ordeal available',
     },
     more: '...and more in the future!',
     payOnce: 'Pay once, yours',

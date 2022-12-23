@@ -171,6 +171,9 @@ export default function ExevoPro() {
                         <List.Li>
                           {translations.exevopro.exclusiveFilters.soulwar}
                         </List.Li>
+                        <List.Li>
+                          {translations.exevopro.exclusiveFilters.primalOrdeal}
+                        </List.Li>
                       </List.Ul>
                     }
                   >
