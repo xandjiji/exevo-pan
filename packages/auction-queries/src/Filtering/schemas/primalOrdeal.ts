@@ -7,7 +7,7 @@ const PRIMAL_ORDEAL = {
 }
 
 const filterSkip: FilterSkip = ({ tags }): boolean =>
-  !tags.has(tagDictionary.soulwarAvailable)
+  !tags.has(tagDictionary.primalAvailable)
 
 const filterTest: FilterTest =
   () =>
