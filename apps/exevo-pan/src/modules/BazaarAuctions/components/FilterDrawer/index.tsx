@@ -34,7 +34,10 @@ import { FilterDrawerProps } from './types'
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
 const { PVP_TYPES, SERVER_LOCATIONS } = servers
 
-const proTags = [tagsDictionary.soulwarAvailable]
+const proTags = [
+  tagsDictionary.soulwarAvailable,
+  tagsDictionary.primalAvailable,
+]
 const freeTags = Object.keys(tagsDictionary).filter(
   (tag) => !proTags.includes(tag),
 )
