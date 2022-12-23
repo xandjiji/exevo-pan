@@ -152,6 +152,7 @@ export default {
     rareOutfits: 'Outfits raras 💎',
     secondaryEkSkill: 'Skill secundaria ⚔️',
     soulwarAvailable: 'Soul War disponible 💀',
+    primalAvailable: 'Primal Ordeal disponible 🦖',
   },
   CharacterCard: {
     linkLabel: 'Ir a la página del personaje',
