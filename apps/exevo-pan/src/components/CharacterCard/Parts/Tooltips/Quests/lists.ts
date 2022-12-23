@@ -28,6 +28,7 @@ export const access: string[] = [
   constTokens['Dream Catcher'],
   constTokens['Library Liberator'],
   constTokens['Soul War'],
+  constTokens['Royalty of Hazard'],
 ]
 
 export const bosses: string[] = [
