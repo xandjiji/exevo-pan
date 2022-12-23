@@ -151,6 +151,8 @@ export default {
     /* @ ToDo: i18n */
     secondaryEkSkill: 'Secondary skill ⚔️',
     soulwarAvailable: 'Soul War available 💀',
+    /* @ ToDo: i18n */
+    primalAvailable: 'Primal Ordeal available 🦖',
   },
   CharacterCard: {
     linkLabel: 'Idź do strony postaci',

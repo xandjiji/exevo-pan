@@ -17,7 +17,7 @@ import {
   NumericInput,
 } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
-import { blurOnEnter } from 'utils'
+import { blurOnEnter, proTagsSet } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useAuctions } from '../../contexts/useAuctions'
 import useDebouncedFilter from './useDebouncedFilter'
@@ -34,9 +34,9 @@ import { FilterDrawerProps } from './types'
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
 const { PVP_TYPES, SERVER_LOCATIONS } = servers
 
-const proTags = [tagsDictionary.soulwarAvailable]
+const proTags = [...proTagsSet]
 const freeTags = Object.keys(tagsDictionary).filter(
-  (tag) => !proTags.includes(tag),
+  (tag) => !proTagsSet.has(tag),
 )
 
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {

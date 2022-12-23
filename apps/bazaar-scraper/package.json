@@ -15,6 +15,7 @@
     "update:servers": "NODE_PATH=./src sucrase-node src/Scripts/ScrapServers/run.ts",
     "update:statistics": "NODE_PATH=./src sucrase-node src/Scripts/UpdateHistoryStatistics/run.ts",
     "update:bosses": "NODE_PATH=./src sucrase-node src/Scripts/TrackBosses/run.ts",
+    "recompile:history": "NODE_PATH=./src RAW=true sucrase-node src/Scripts/RecompileHistory/run.ts",
     "checkup": "NODE_PATH=./src sucrase-node src/Scripts/StaticCheckup/run.ts",
     "revalidate": "NODE_PATH=./src sucrase-node src/Scripts/RevalidatePage/run.ts",
     "dev": "serve -l 5555 Output",

@@ -22,6 +22,7 @@ export default {
     storeContent: 'Mounts e outfits da store',
     rareItems: 'Items raros',
     soulwar: 'Soul War disponível',
+    primalOrdeal: 'Primal Ordeal disponível',
   },
   highlightDiscount: {
     pitch: 'Descontos para {{strong}}',

@@ -1,5 +1,6 @@
 import { dictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import { constTokens as achievementTokens } from 'data-dictionary/dist/dictionaries/rareAchievement'
 
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26
@@ -33,6 +34,7 @@ export const testRareOutfit = (params: RareOutfitTestParams): boolean => {
     ({ name }) => name === 'Golden Outfit',
     ({ name }) => name === 'Makeshift Warrior',
     ({ name }) => name === 'Royal Costume',
+    ({ name }) => name === 'Falconer',
   ]
 
   return rareOutfitTests.some((test) => test(params))
@@ -48,9 +50,27 @@ const HIGH_SKILL_VALUE = 100
 
 type Tag = keyof typeof dictionary
 
+const UPDATE_TIMESTAMP = {
+  soulwar: +new Date('July 13, 2020'),
+  primalOrdeal: +new Date('July 18, 2022'),
+}
+
+const wasBeforeUpdate = (
+  update: keyof typeof UPDATE_TIMESTAMP,
+  timestamp: number,
+): boolean => timestamp <= UPDATE_TIMESTAMP[update]
+
 export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
-  const { charms, quests, mounts, outfits, storeMounts, storeOutfits, sex } =
-    character
+  const {
+    charms,
+    quests,
+    mounts,
+    outfits,
+    storeMounts,
+    storeOutfits,
+    sex,
+    auctionEnd,
+  } = character
 
   const tags: Tag[] = []
 
@@ -77,11 +97,23 @@ export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
     tags.push('secondaryEkSkill')
   }
 
-  if (
-    character.level >= 400 &&
-    !character.outfits.some(({ name }) => name === 'Revenant')
-  ) {
-    tags.push('soulwarAvailable')
+  if (character.level >= 400) {
+    const auctionTimestamp = auctionEnd * 1000
+
+    if (
+      !character.outfits.some(({ name }) => name === 'Revenant') &&
+      !wasBeforeUpdate('soulwar', auctionTimestamp)
+    ) {
+      tags.push('soulwarAvailable')
+    }
+    if (
+      !character.rareAchievements.some(
+        (achievement) => achievement === achievementTokens['Royalty of Hazard'],
+      ) &&
+      !wasBeforeUpdate('primalOrdeal', auctionTimestamp)
+    ) {
+      tags.push('primalAvailable')
+    }
   }
 
   return tags

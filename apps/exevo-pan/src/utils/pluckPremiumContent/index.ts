@@ -1,6 +1,11 @@
 import { filterSchema } from 'shared-utils/dist/contracts/Filters/schemas'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { dictionary as tags } from 'data-dictionary/dist/dictionaries/characterTags'
+import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
+
+export const proTagsSet = new Set([
+  tagsDictionary.soulwarAvailable,
+  tagsDictionary.primalAvailable,
+])
 
 export const pluckTCInvested = (auction: CharacterObject): CharacterObject =>
   auction.tcInvested > 0 ? { ...auction, tcInvested: -1 } : auction
@@ -15,9 +20,7 @@ export const pluckPremiumFilters = (
   storeOutfitSet: DEFAULT_FILTER_OPTIONS.storeOutfitSet,
   mountSet: DEFAULT_FILTER_OPTIONS.mountSet,
   storeMountSet: DEFAULT_FILTER_OPTIONS.storeMountSet,
-  tags: new Set(
-    [...filterOptions.tags].filter((tag) => tag !== tags.soulwarAvailable),
-  ),
+  tags: new Set([...filterOptions.tags].filter((tag) => !proTagsSet.has(tag))),
   tcInvested: DEFAULT_FILTER_OPTIONS.tcInvested,
   auctionIds: DEFAULT_FILTER_OPTIONS.auctionIds,
 })
@@ -38,7 +41,7 @@ export const pluckPremiumParameters = (searchParams: URLSearchParams) => {
   if (tagParams) {
     const filteredTagParams = tagParams
       .split(',')
-      .filter((param) => param !== tags.soulwarAvailable)
+      .filter((param) => !proTagsSet.has(param))
 
     if (filteredTagParams.length === 0) {
       searchParams.delete(filterSchema.tags.urlKey)

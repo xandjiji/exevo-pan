@@ -12,7 +12,7 @@ const filterTest: FilterTest =
   () =>
   ({ level, outfits }): boolean =>
     level >= SOULWAR.MINIMUM_LEVEL &&
-    !outfits.find(({ name }) => name === SOULWAR.OUTFIT_NAME)
+    !outfits.some(({ name }) => name === SOULWAR.OUTFIT_NAME)
 
 const schema: FilterSchema = {
   filterSkip,

@@ -8,6 +8,7 @@ export const constTokens = {
   'Razing!': 'Razing!',
   'The More the Merrier': 'The More the Merrier',
   'Lucky Devil': 'Lucky Devil',
+  'Royalty of Hazard': 'Royalty of Hazard',
 } as const
 
 export const scrapingTokens = lowerCaseKeys(constTokens)

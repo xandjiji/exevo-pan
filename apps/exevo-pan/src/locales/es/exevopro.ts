@@ -21,6 +21,7 @@ export default {
     storeContent: 'Store mounts and outfits',
     rareItems: 'Rare items',
     soulwar: 'Soul War available',
+    primalOrdeal: 'Primal Ordeal available',
   },
   highlightDiscount: {
     pitch: 'Discounts for {{strong}}',
