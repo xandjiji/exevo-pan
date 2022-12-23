@@ -7,4 +7,5 @@ export const dictionary = {
   rareOutfits: 'rareOutfits',
   secondaryEkSkill: 'secondaryEkSkill',
   soulwarAvailable: 'soulwarAvailable',
+  primalAvailable: 'primalAvailable',
 }

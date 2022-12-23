@@ -41,6 +41,7 @@ export const constTokens = {
   'His Days are Counted': 'Dangerous Depths (Warzone 5)',
   'Duked it Out': 'Dangerous Depths (Warzone 6)',
   'Soul War': 'Soul War',
+  'Primal Ordeal': 'Primal Ordeal',
 } as const
 
 export const scrapingTokens = lowerCaseKeys(constTokens)

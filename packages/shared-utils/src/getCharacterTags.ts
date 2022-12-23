@@ -1,5 +1,6 @@
 import { dictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import { constTokens as questTokens } from 'data-dictionary/dist/dictionaries/quest'
 
 const CHARM_CHECK = 7
 const QUEST_CHECK = 26
@@ -33,6 +34,7 @@ export const testRareOutfit = (params: RareOutfitTestParams): boolean => {
     ({ name }) => name === 'Golden Outfit',
     ({ name }) => name === 'Makeshift Warrior',
     ({ name }) => name === 'Royal Costume',
+    ({ name }) => name === 'Falconer',
   ]
 
   return rareOutfitTests.some((test) => test(params))
@@ -77,11 +79,15 @@ export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
     tags.push('secondaryEkSkill')
   }
 
-  if (
-    character.level >= 400 &&
-    !character.outfits.some(({ name }) => name === 'Revenant')
-  ) {
-    tags.push('soulwarAvailable')
+  if (character.level >= 400) {
+    if (!character.outfits.some(({ name }) => name === 'Revenant')) {
+      tags.push('soulwarAvailable')
+    }
+    if (
+      !character.quests.some((quest) => quest === questTokens['Primal Ordeal'])
+    ) {
+      tags.push('primalAvailable')
+    }
   }
 
   return tags
