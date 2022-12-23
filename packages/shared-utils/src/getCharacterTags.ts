@@ -50,9 +50,27 @@ const HIGH_SKILL_VALUE = 100
 
 type Tag = keyof typeof dictionary
 
+const UPDATE_TIMESTAMP = {
+  soulwar: +new Date('July 13, 2020') / 1000,
+  primalOrdeal: +new Date('July 18, 2022') / 1000,
+}
+
+const wasBeforeUpdate = (
+  update: keyof typeof UPDATE_TIMESTAMP,
+  timestamp: number,
+): boolean => timestamp <= UPDATE_TIMESTAMP[update]
+
 export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
-  const { charms, quests, mounts, outfits, storeMounts, storeOutfits, sex } =
-    character
+  const {
+    charms,
+    quests,
+    mounts,
+    outfits,
+    storeMounts,
+    storeOutfits,
+    sex,
+    auctionEnd,
+  } = character
 
   const tags: Tag[] = []
 
@@ -80,13 +98,17 @@ export const getCharacterTags = (character: PartialCharacterObject): Tag[] => {
   }
 
   if (character.level >= 400) {
-    if (!character.outfits.some(({ name }) => name === 'Revenant')) {
+    if (
+      !character.outfits.some(({ name }) => name === 'Revenant') &&
+      !wasBeforeUpdate('soulwar', auctionEnd)
+    ) {
       tags.push('soulwarAvailable')
     }
     if (
       !character.rareAchievements.some(
         (achievement) => achievement === achievementTokens['Royalty of Hazard'],
-      )
+      ) &&
+      !wasBeforeUpdate('primalOrdeal', auctionEnd)
     ) {
       tags.push('primalAvailable')
     }
