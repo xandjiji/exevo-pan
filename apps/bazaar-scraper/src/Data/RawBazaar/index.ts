@@ -45,7 +45,7 @@ export default class RawBazaarData {
     }
   }
 
-  private async saveRawAuction(rawAuction: RawAuction): Promise<void> {
+  public async saveRawAuction(rawAuction: RawAuction): Promise<void> {
     const { id, html, pageableData } = rawAuction
 
     const fileWriteCalls: Array<() => Promise<void>> = []
