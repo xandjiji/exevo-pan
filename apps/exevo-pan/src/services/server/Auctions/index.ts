@@ -45,11 +45,17 @@ export default class AuctionsClient {
         filterActiveHighlightedIds(highlightedAuctionsData),
       )
 
-      const { page: highlightedAuctions } = await this.fetchAuctionPage({
-        filterOptions: { auctionIds: highlightedAuctionIds },
-        paginationOptions: { pageSize: highlightedAuctionIds.size },
-        history: false,
-      })
+      let highlightedAuctions: CharacterObject[] = []
+
+      if (highlightedAuctionIds.size > 0) {
+        const { page } = await this.fetchAuctionPage({
+          filterOptions: { auctionIds: highlightedAuctionIds },
+          paginationOptions: { pageSize: highlightedAuctionIds.size },
+          history: false,
+        })
+
+        highlightedAuctions = page
+      }
 
       const emptyHighlightedSpots =
         MINIMUM_HIGHLIGHTED_AMOUNT - highlightedAuctions.length
