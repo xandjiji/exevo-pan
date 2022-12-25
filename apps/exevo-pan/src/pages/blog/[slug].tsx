@@ -20,6 +20,7 @@ const components = {
   Image: Post.Image,
   Button: dynamic(() => import('components/Atoms/Button')),
   TibiaCoin: dynamic(() => import('components/Atoms/Text/TibiaCoin')),
+  Sprite: dynamic(() => import('modules/Blog/components/Post/custom/Sprite')),
   Charm: dynamic(() => import('modules/Blog/components/Post/custom/Charm')),
   TranslationAlert: dynamic(
     () => import('modules/Blog/components/Post/custom/TranslationAlert'),

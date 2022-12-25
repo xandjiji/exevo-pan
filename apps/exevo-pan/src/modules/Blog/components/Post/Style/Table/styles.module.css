@@ -7,11 +7,6 @@
   @apply p-2 align-middle;
 }
 
-.table th *,
-.table td * {
-  @apply align-middle;
-}
-
 .table th {
   @apply text-onPrimary bg-primary text-base font-normal;
 }
