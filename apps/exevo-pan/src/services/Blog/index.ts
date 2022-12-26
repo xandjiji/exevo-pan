@@ -105,4 +105,15 @@ export default class BlogClient {
 
     return paginatedData
   }
+
+  static async getPostBySlug(
+    slug: string,
+    locale = DEFAULT_LOCALE as string,
+  ): Promise<BlogPost | undefined> {
+    const allPosts = await this.getEveryPostLocale({})
+
+    return allPosts[locale as RegisteredLocale].find(
+      (post) => post.slug === slug,
+    )
+  }
 }
