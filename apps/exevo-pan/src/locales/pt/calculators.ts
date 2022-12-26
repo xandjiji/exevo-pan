@@ -69,7 +69,6 @@ export default {
     removeItem: 'Remover item',
   },
   CharmDamage: {
-    moreInfo: 'Para mais informações sobre Charms, confira',
     thisArticle: 'este artigo',
   },
   ImbuementsCost: {

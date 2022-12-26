@@ -1,19 +1,15 @@
 import { useState, useMemo } from 'react'
-import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
 import { LabeledCard, Input, Checkbox, Slider } from 'components/Atoms'
-import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { routes } from 'Constants'
 import { blurOnEnter } from 'utils'
-import { Main, Spacer, Chip } from '../../components'
+import { Spacer, Chip } from '../../components'
 import {
   LOW_BLOW_MULTIPLIER,
   ELEMENTAL_DAMAGE,
   ELEMENTAL_PROC_CHANCE,
   POWERFUL_MULTIPLIER,
   SPRITE_PATH,
-  ARTICLE_SLUG,
 } from './constants'
 import { translations } from './locales'
 
@@ -129,28 +125,10 @@ export const Calculator = () => {
   )
 }
 
-const CharmDamage = () => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
-
-  return (
-    <Main>
-      <div className="child:bg-background grid gap-6">
-        <Calculator />
-        <p className="text-tsm mb-4 font-light md:text-center">
-          {calculators.CharmDamage.moreInfo}{' '}
-          <NextLink
-            href={`${routes.BLOG}/${ARTICLE_SLUG}`}
-            className="text-primaryHighlight font-bold"
-          >
-            {calculators.CharmDamage.thisArticle}
-          </NextLink>
-          .
-        </p>
-      </div>
-    </Main>
-  )
-}
+const CharmDamage = () => (
+  <div className="child:bg-background grid gap-6">
+    <Calculator />
+  </div>
+)
 
 export default CharmDamage

@@ -72,7 +72,6 @@ export default {
     removeItem: 'Eliminar',
   },
   CharmDamage: {
-    moreInfo: 'Para más información acerca de los charms, revisa',
     thisArticle: 'este artículo',
   },
   /* @ ToDo: */
