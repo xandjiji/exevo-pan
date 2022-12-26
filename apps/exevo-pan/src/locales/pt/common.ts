@@ -230,4 +230,7 @@ export default {
   },
   termsOfService: 'Termos de Serviço',
   privacyPolicy: 'Política de Privacidade',
+  SuggestedReading: {
+    miniTitle: 'Leitura recomendada:',
+  },
 }

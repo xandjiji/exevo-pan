@@ -230,4 +230,7 @@ export default {
   },
   termsOfService: 'Terms of Service',
   privacyPolicy: 'Privacy Policy',
+  SuggestedReading: {
+    miniTitle: 'Suggested reading:',
+  },
 }

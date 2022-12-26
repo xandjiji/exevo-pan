@@ -239,4 +239,8 @@ export default {
   },
   termsOfService: 'Terms of Service',
   privacyPolicy: 'Privacy Policy',
+  /* @ ToDo: i18n */
+  SuggestedReading: {
+    miniTitle: 'Suggested reading:',
+  },
 }
