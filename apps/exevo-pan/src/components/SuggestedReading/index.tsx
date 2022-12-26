@@ -1,25 +1,24 @@
+import Link from 'next/link'
 import Image from 'next/image'
+import { routes } from 'Constants'
 
-/* type SuggestedReadingProps = {} */
-
-const SuggestedReading = () => (
+const SuggestedReading = ({
+  thumbnail,
+  title,
+  slug,
+}: Pick<BlogPost, 'thumbnail' | 'title' | 'slug'>) => (
   <div>
     <p className="mb-2 text-xs tracking-wide">Suggested reading:</p>
 
-    <div className="card flex items-center gap-2 p-1.5">
-      <div className="bg-primaryVariant rounded-md p-1">
-        <Image
-          src="/blog/thumbnails/charms.png"
-          width={32}
-          height={32}
-          alt="charms"
-        />
-      </div>
+    <Link className="group" href={`${routes.BLOG}/${slug}`}>
+      <div className="card flex items-center gap-2 p-1.5">
+        <div className="bg-primaryVariant relative left-0 rounded-md p-1 transition-all group-hover:left-[3px]">
+          <Image src={thumbnail} width={32} height={32} alt={title} />
+        </div>
 
-      <h5 className="text-base">
-        Which charms are the best for each vocation?
-      </h5>
-    </div>
+        <h5 className="text-base">{title}</h5>
+      </div>
+    </Link>
   </div>
 )
 
