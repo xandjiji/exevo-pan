@@ -3,23 +3,27 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { routes } from 'Constants'
 
+type SuggestedReadingProps = Pick<BlogPost, 'thumbnail' | 'title' | 'slug'> &
+  JSX.IntrinsicElements['div']
+
 const SuggestedReading = ({
   thumbnail,
   title,
   slug,
-}: Pick<BlogPost, 'thumbnail' | 'title' | 'slug'>) => {
+  ...props
+}: SuggestedReadingProps) => {
   const {
     translations: { common },
   } = useTranslations()
   return (
-    <div>
+    <div {...props}>
       <p className="mb-2 text-xs tracking-wide">
         {common.SuggestedReading.miniTitle}
       </p>
 
       <Link className="group" href={`${routes.BLOG}/${slug}`}>
-        <div className="card flex items-center gap-2 p-1.5">
-          <div className="bg-primaryVariant relative left-0 rounded-md p-1 transition-all group-hover:left-[3px]">
+        <div className="card flex items-center gap-2.5 px-2.5 py-2">
+          <div className="bg-primaryVariant relative left-0 rounded-md p-1 transition-all group-hover:left-0.5">
             <Image src={thumbnail} width={32} height={32} alt={title} />
           </div>
 
