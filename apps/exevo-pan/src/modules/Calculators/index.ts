@@ -1,3 +1,3 @@
 export * from './modules'
-export { MainPage, Header } from './components'
+export { MainPage, Header, Main } from './components'
 export * as pages from './routes'
