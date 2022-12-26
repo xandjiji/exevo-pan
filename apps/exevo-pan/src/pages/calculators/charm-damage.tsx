@@ -1,9 +1,15 @@
 import Head from 'next/head'
 import { Main, Hero } from 'templates'
-import { Header, CharmDamage, pages } from 'modules/Calculators'
+import {
+  Main as CalculatorMain,
+  Header,
+  CharmDamage,
+  pages,
+} from 'modules/Calculators'
+import SuggestedReading from 'components/SuggestedReading'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { PreviewImageClient } from 'services'
+import { BlogClient, PreviewImageClient } from 'services'
 import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
@@ -11,7 +17,11 @@ import { common, calculators } from 'locales'
 const pageUrl = buildUrl(routes.CHARM_DAMAGE)
 const { hero } = pages.CharmDamage
 
-export default function Calculator() {
+type CalculatorProps = {
+  suggestedPost: BlogPost
+}
+
+export default function Calculator({ suggestedPost }: CalculatorProps) {
   const { translations } = useTranslations()
 
   const pageName = translations.calculators.Meta.CharmDamage.title
@@ -82,17 +92,31 @@ export default function Calculator() {
       <Main>
         <Header />
         <Hero title={pageName} src={hero} offset />
-        <CharmDamage />
+
+        <CalculatorMain className="child:max-w-fit child:mx-auto gap-8">
+          <CharmDamage />
+
+          <SuggestedReading
+            thumbnail={suggestedPost.thumbnail}
+            title={suggestedPost.title}
+            slug={suggestedPost.slug}
+          />
+        </CalculatorMain>
       </Main>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    translations: {
-      common: common[locale as RegisteredLocale],
-      calculators: calculators[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const suggestedPost = await BlogClient.getPostBySlug('best-charms', locale)
+
+  return {
+    props: {
+      translations: {
+        common: common[locale as RegisteredLocale],
+        calculators: calculators[locale as RegisteredLocale],
+      },
+      suggestedPost,
     },
-  },
-})
+  }
+}
