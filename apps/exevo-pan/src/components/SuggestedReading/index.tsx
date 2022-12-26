@@ -23,7 +23,7 @@ const SuggestedReading = ({
 
       <Link className="group" href={`${routes.BLOG}/${slug}`}>
         <div className="card flex items-center gap-2.5 px-2.5 py-2">
-          <div className="bg-primaryVariant relative left-0 rounded-md p-1 transition-all group-hover:left-0.5">
+          <div className="bg-primaryVariant relative top-0 rounded-md p-1 transition-all group-hover:-top-0.5">
             <Image src={thumbnail} width={32} height={32} alt={title} />
           </div>
 
