@@ -4,7 +4,7 @@
 }
 
 .list li::before {
-  @apply text-primary mr-2 font-normal;
+  @apply text-primaryHighlight mr-2 font-normal;
   content: '•';
 }
 
