@@ -2,7 +2,8 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { FormProvider, Form } from 'modules/Advertise'
 import { AuctionsProvider } from 'modules/Advertise/contexts/useAuctions'
-import { PreviewImageClient } from 'services'
+import SuggestedReading from 'components/SuggestedReading'
+import { BlogClient, PreviewImageClient } from 'services'
 import { AuctionsClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { GetStaticProps } from 'next'
@@ -15,10 +16,12 @@ const pageUrl = buildUrl(routes.ADVERTISE)
 
 type AdvertiseStaticProps = {
   initialAuctionData: PaginatedData<CharacterObject>
+  suggestedPost: BlogPost
 }
 
 export default function Advertise({
   initialAuctionData,
+  suggestedPost,
 }: AdvertiseStaticProps) {
   const { translations } = useTranslations()
 
@@ -94,6 +97,10 @@ export default function Advertise({
         <AuctionsProvider initialPage={page} initialPageData={pageData}>
           <FormProvider isPro={isPro}>
             <main className="inner-container py-4">
+              <SuggestedReading
+                className="mx-auto mb-8 w-fit"
+                {...suggestedPost}
+              />
               <Form />
             </main>
           </FormProvider>
@@ -108,6 +115,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     history: false,
   })
 
+  const suggestedPost = await BlogClient.getPostBySlug(
+    'how-highlighting-works',
+    locale,
+  )
+
   const pluckedInitialAuctionData: typeof initialAuctionData = {
     ...initialAuctionData,
     page: initialAuctionData.page.map(pluckTCInvested),
@@ -120,6 +132,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         advertise: advertise[locale as RegisteredLocale],
       },
       initialAuctionData: pluckedInitialAuctionData,
+      suggestedPost,
     },
   }
 }

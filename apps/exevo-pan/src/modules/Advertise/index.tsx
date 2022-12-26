@@ -1,8 +1,6 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { Stepper } from 'components/Atoms'
-import NextLink from 'next/link'
-import { routes } from 'Constants'
 import { useForm } from './contexts/Form'
 import {
   AuctionSearch,
@@ -12,8 +10,6 @@ import {
   PaymentDetails,
 } from './components'
 import styles from './styles.module.css'
-
-const FAQ_SLUG = 'how-highlighting-works'
 
 export const Form = () => {
   const {
@@ -42,15 +38,6 @@ export const Form = () => {
 
   return (
     <>
-      <h2 className="text-tsm mb-4 font-light md:text-center">
-        {advertise.FAQText}{' '}
-        <NextLink
-          href={`${routes.BLOG}/${FAQ_SLUG}`}
-          className="text-primaryHighlight font-bold"
-        >
-          FAQ
-        </NextLink>
-      </h2>
       <Stepper
         isFinished={finished}
         steps={stepItems}

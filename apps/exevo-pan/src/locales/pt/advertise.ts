@@ -3,7 +3,6 @@ export default {
     title: 'Anunciar',
     description: 'Destaque seu leilão e alcance lances mais altos!',
   },
-  FAQText: 'Não sabe como funcionam os nossos anúncios? Confira nosso',
   StepItems: {
     Select: 'Selecionar',
     Configure: 'Configurar',
