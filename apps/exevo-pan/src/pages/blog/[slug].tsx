@@ -40,6 +40,12 @@ const components = {
   TopCosmetics: dynamic(
     () => import('modules/Blog/components/Post/custom/TopCosmetics'),
   ),
+  GoodAuction: dynamic(
+    () => import('modules/Blog/components/Post/custom/HighlightAuctions/good'),
+  ),
+  BadAuction: dynamic(
+    () => import('modules/Blog/components/Post/custom/HighlightAuctions/bad'),
+  ),
 }
 
 type Props = {

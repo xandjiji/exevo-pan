@@ -1,0 +1,3 @@
+.card * {
+  @apply leading-tight;
+}
