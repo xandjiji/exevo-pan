@@ -1,7 +1,7 @@
 const ContentWrapper = (args: JSX.IntrinsicElements['main']) => (
   <main
     {...args}
-    className="content-wrapper card inner-padding z-1 text-onSurface relative flex w-full max-w-full shrink-0 flex-col gap-4 py-8 text-base font-light leading-relaxed transition-colors"
+    className="content-wrapper card inner-padding z-1 text-onSurface xs:w-full xs:max-w-full xs:mx-0 relative -mx-5 flex w-[calc(100%+40px)] shrink-0 flex-col gap-4 py-8 text-base font-light leading-relaxed transition-colors"
   />
 )
 
