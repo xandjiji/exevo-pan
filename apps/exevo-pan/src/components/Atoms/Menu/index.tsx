@@ -14,10 +14,6 @@ import { MenuProps, ItemProps } from './types'
 - typing autoselect?
 - title element?
 
-- renderizar popover (outro componente)
-- isOpen/onClose
-- focus trap
-- esc/tab close
 - a11y
 - a11y igual headless ui
 
@@ -115,7 +111,10 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
       <button
         type="button"
         onClick={() => dispatch({ type: 'SET_OPEN', open: !open })}
-        className="clickable grid cursor-pointer place-items-center rounded p-0.5"
+        className={clsx(
+          'clickable grid cursor-pointer place-items-center rounded p-0.5',
+          open && 'shadow-inner hover:shadow-inner',
+        )}
       >
         {children}
       </button>
