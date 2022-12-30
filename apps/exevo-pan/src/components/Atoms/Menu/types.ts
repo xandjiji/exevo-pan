@@ -3,6 +3,7 @@ export type Item = {
   highlighted?: boolean
   icon?: (args: JSX.IntrinsicElements['svg']) => JSX.Element
   disabled?: boolean
+  // onSelect
 }
 
 export type ItemProps = {
@@ -12,4 +13,7 @@ export type ItemProps = {
 
 export type MenuProps = {
   items: Item[]
+  // highlightedIndex
+  // open
+  // onClose
 } & JSX.IntrinsicElements['div']

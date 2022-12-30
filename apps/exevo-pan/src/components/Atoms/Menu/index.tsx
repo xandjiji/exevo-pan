@@ -16,7 +16,8 @@ const Item = ({
   <button
     type="button"
     className={clsx(
-      'text-tsm text-onSurface disabled:bg-separator/50 flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
+      'text-tsm text-onSurface disabled:bg-separator/50 flex w-full items-center gap-2.5 px-4 py-2.5 text-left first:rounded-t last:rounded-b',
+      highlighted && 'bg-primaryVariant',
       className,
     )}
     {...props}
@@ -85,15 +86,14 @@ const items: Item[] = [
 */
 
 const Menu = () => {
-  console.log(9)
-
   const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
 
   return (
-    <div className="card w-fit overflow-hidden rounded p-0">
-      {items.map((props) => (
+    <div className="card w-fit rounded p-0">
+      {items.map((props, index) => (
         <Item
           key={props.content?.toString()}
+          highlighted={index === 0}
           onClick={() => console.log(props.content?.toString())}
           noIconPaddings={noIconPaddings}
           {...props}
