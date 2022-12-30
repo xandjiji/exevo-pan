@@ -57,7 +57,28 @@ const items: Item[] = [
   {
     content: 'Close',
   },
+  {
+    content: <div>Element</div>,
+  },
 ]
+
+/* @ ToDo:
+
+- full no icon styling
+- highlight styling
+- highlight reducer
+- item click action
+- a11y label (se content for um elemento, obrigatorio ter label)
+- typing autoselect?
+
+- renderizar popover (outro componente)
+- isOpen/onClose
+- focus trap
+- esc/tab close
+- a11y
+- a11y igual headless ui
+
+*/
 
 const Menu = () => {
   console.log(9)
@@ -65,7 +86,11 @@ const Menu = () => {
   return (
     <div className="card w-fit overflow-hidden rounded p-0">
       {items.map((props) => (
-        <Item key={props.content?.toString()} {...props} />
+        <Item
+          key={props.content?.toString()}
+          onClick={() => console.log(props.content?.toString())}
+          {...props}
+        />
       ))}
     </div>
   )
