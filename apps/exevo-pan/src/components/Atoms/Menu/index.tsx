@@ -1,22 +1,72 @@
 import clsx from 'clsx'
 import { usePopper } from 'react-popper'
 import { Modifier } from '@popperjs/core'
+import { AccountIcon, AddPostIcon, CheckIcon } from 'assets/svgs'
+import { MenuProps, ItemProps, Item } from './types'
 
-const Item = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
-  <div
-    className={clsx('text-tsm hover:bg-primaryVariant px-4 py-2.5', className)}
+const Item = ({
+  className,
+  content,
+  highlighted = false,
+  icon: Icon,
+  ...props
+}: ItemProps) => (
+  <button
+    type="button"
+    className={clsx(
+      'text-tsm text-onSurface disabled:bg-separator/50 flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
+      className,
+    )}
     {...props}
-  />
+  >
+    <div className="h-4 w-4">
+      {!!Icon && (
+        <Icon
+          className={clsx(
+            'h-full w-full',
+            props.disabled
+              ? 'fill-onSurface opacity-50'
+              : highlighted
+              ? 'fill-onSurface'
+              : 'fill-primaryHighlight',
+          )}
+        />
+      )}
+    </div>
+    <div>{content}</div>
+  </button>
 )
+
+const items: Item[] = [
+  {
+    icon: CheckIcon,
+    content: 'Accept',
+  },
+  {
+    content: 'Find similar',
+  },
+  {
+    icon: AccountIcon,
+    content: 'Account',
+  },
+  {
+    icon: AddPostIcon,
+    content: 'Add',
+    disabled: true,
+  },
+  {
+    content: 'Close',
+  },
+]
 
 const Menu = () => {
   console.log(9)
 
   return (
     <div className="card w-fit overflow-hidden rounded p-0">
-      <Item>Notify me</Item>
-      <Item>Favorite</Item>
-      <Item>Find similar</Item>
+      {items.map((props) => (
+        <Item key={props.content?.toString()} {...props} />
+      ))}
     </div>
   )
 }
