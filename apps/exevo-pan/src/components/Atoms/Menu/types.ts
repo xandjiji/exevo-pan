@@ -13,7 +13,5 @@ export type ItemProps = {
 
 export type MenuProps = {
   items: Item[]
-  // highlightedIndex
-  // open
-  // onClose
+  children: JSX.Element
 } & JSX.IntrinsicElements['div']

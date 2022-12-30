@@ -1,9 +1,27 @@
 import clsx from 'clsx'
-import { useMemo } from 'react'
-import { usePopper } from 'react-popper'
-import { Modifier } from '@popperjs/core'
-import { AccountIcon, AddPostIcon, CheckIcon } from 'assets/svgs'
-import { MenuProps, ItemProps, Item } from './types'
+import { useMemo, useReducer } from 'react'
+import { Popover } from 'components/Atoms'
+import { useEscToClose } from 'hooks'
+import Reducer from './reducer'
+import { MenuProps, ItemProps } from './types'
+
+/* @ ToDo:
+
+- highlight styling
+- highlight reducer
+- item click action
+- a11y label (se content for um elemento, obrigatorio ter label)
+- typing autoselect?
+- title element?
+
+- renderizar popover (outro componente)
+- isOpen/onClose
+- focus trap
+- esc/tab close
+- a11y
+- a11y igual headless ui
+
+*/
 
 const Item = ({
   className,
@@ -42,64 +60,58 @@ const Item = ({
   </button>
 )
 
-const items: Item[] = [
-  {
-    icon: CheckIcon,
-    content: 'Accept',
-  },
-  {
-    content: 'Find similar',
-  },
-  {
-    icon: AccountIcon,
-    content: 'Account',
-  },
-  {
-    icon: AddPostIcon,
-    content: 'Add',
-    disabled: true,
-  },
-  {
-    content: 'Close',
-  },
-  {
-    content: <div>Element</div>,
-  },
-]
+const Menu = ({ items, children, ...props }: MenuProps) => {
+  const [{ open, highlightedIndex }, dispatch] = useReducer(Reducer, {
+    highlightedIndex: -1,
+    open: false,
+  })
 
-/* @ ToDo:
-
-- highlight styling
-- highlight reducer
-- item click action
-- a11y label (se content for um elemento, obrigatorio ter label)
-- typing autoselect?
-- title element?
-
-- renderizar popover (outro componente)
-- isOpen/onClose
-- focus trap
-- esc/tab close
-- a11y
-- a11y igual headless ui
-
-*/
-
-const Menu = () => {
   const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
 
+  const { elementToFocusRef, onKeyDown } = useEscToClose({
+    open,
+    onClose: () => dispatch({ type: 'SET_OPEN', open: false }),
+  })
+
   return (
-    <div className="card w-fit rounded p-0">
-      {items.map((props, index) => (
-        <Item
-          key={props.content?.toString()}
-          highlighted={index === 0}
-          onClick={() => console.log(props.content?.toString())}
-          noIconPaddings={noIconPaddings}
+    <Popover
+      content={
+        <div
+          role="menu"
+          tabIndex={0}
+          ref={elementToFocusRef}
+          className="card w-fit rounded p-0"
+          onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
+          onKeyDown={onKeyDown}
           {...props}
-        />
-      ))}
-    </div>
+        >
+          {items.map((itemProps, index) => (
+            <Item
+              key={itemProps.content?.toString()}
+              tabIndex={-1}
+              highlighted={index === highlightedIndex}
+              onMouseEnter={() =>
+                dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
+              }
+              onClick={() => console.log(itemProps.content?.toString())}
+              noIconPaddings={noIconPaddings}
+              {...itemProps}
+            />
+          ))}
+        </div>
+      }
+      placement="left-start"
+      trigger="none"
+      visible={open}
+    >
+      <button
+        type="button"
+        onClick={() => dispatch({ type: 'SET_OPEN', open: !open })}
+        className="clickable grid cursor-pointer place-items-center rounded p-0.5"
+      >
+        {children}
+      </button>
+    </Popover>
   )
 }
 
