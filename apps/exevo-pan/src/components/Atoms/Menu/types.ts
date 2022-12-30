@@ -5,7 +5,10 @@ export type Item = {
   disabled?: boolean
 }
 
-export type ItemProps = Item & JSX.IntrinsicElements['button']
+export type ItemProps = {
+  noIconPaddings?: boolean
+} & Item &
+  JSX.IntrinsicElements['button']
 
 export type MenuProps = {
   items: Item[]

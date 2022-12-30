@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useMemo } from 'react'
 import { usePopper } from 'react-popper'
 import { Modifier } from '@popperjs/core'
 import { AccountIcon, AddPostIcon, CheckIcon } from 'assets/svgs'
@@ -9,6 +10,7 @@ const Item = ({
   content,
   highlighted = false,
   icon: Icon,
+  noIconPaddings = false,
   ...props
 }: ItemProps) => (
   <button
@@ -19,20 +21,22 @@ const Item = ({
     )}
     {...props}
   >
-    <div className="h-4 w-4">
-      {!!Icon && (
-        <Icon
-          className={clsx(
-            'h-full w-full',
-            props.disabled
-              ? 'fill-onSurface opacity-50'
-              : highlighted
-              ? 'fill-onSurface'
-              : 'fill-primaryHighlight',
-          )}
-        />
-      )}
-    </div>
+    {!noIconPaddings && (
+      <div className="h-4 w-4">
+        {!!Icon && (
+          <Icon
+            className={clsx(
+              'h-full w-full',
+              props.disabled
+                ? 'fill-onSurface opacity-50'
+                : highlighted
+                ? 'fill-onSurface'
+                : 'fill-primaryHighlight',
+            )}
+          />
+        )}
+      </div>
+    )}
     <div>{content}</div>
   </button>
 )
@@ -64,12 +68,12 @@ const items: Item[] = [
 
 /* @ ToDo:
 
-- full no icon styling
 - highlight styling
 - highlight reducer
 - item click action
 - a11y label (se content for um elemento, obrigatorio ter label)
 - typing autoselect?
+- title element?
 
 - renderizar popover (outro componente)
 - isOpen/onClose
@@ -83,12 +87,15 @@ const items: Item[] = [
 const Menu = () => {
   console.log(9)
 
+  const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
+
   return (
     <div className="card w-fit overflow-hidden rounded p-0">
       {items.map((props) => (
         <Item
           key={props.content?.toString()}
           onClick={() => console.log(props.content?.toString())}
+          noIconPaddings={noIconPaddings}
           {...props}
         />
       ))}
