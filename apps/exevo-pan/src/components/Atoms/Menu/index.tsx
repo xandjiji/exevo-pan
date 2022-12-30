@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { useMemo, useReducer } from 'react'
+import { useMemo, useReducer, useCallback } from 'react'
 import { Popover } from 'components/Atoms'
-import { useEscToClose } from 'hooks'
+import { useEscToClose, useOnClickOutside, useLockBody } from 'hooks'
 import Reducer from './reducer'
 import { MenuProps, ItemProps } from './types'
 
@@ -66,21 +66,32 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
     open: false,
   })
 
+  const closeAction = useCallback(
+    () => dispatch({ type: 'SET_OPEN', open: false }),
+    [],
+  )
+
   const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
 
   const { elementToFocusRef, onKeyDown } = useEscToClose({
     open,
     onClose: () => dispatch({ type: 'SET_OPEN', open: false }),
   })
+  useOnClickOutside(elementToFocusRef, closeAction)
+  useLockBody(open)
 
   return (
     <Popover
+      offset={[0, 8]}
+      placement="left-start"
+      trigger="none"
+      visible={open}
       content={
         <div
           role="menu"
           tabIndex={0}
           ref={elementToFocusRef}
-          className="card w-fit rounded p-0"
+          className="card animate-rushIn w-fit rounded p-0"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
           onKeyDown={onKeyDown}
           {...props}
@@ -100,9 +111,6 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
           ))}
         </div>
       }
-      placement="left-start"
-      trigger="none"
-      visible={open}
     >
       <button
         type="button"
