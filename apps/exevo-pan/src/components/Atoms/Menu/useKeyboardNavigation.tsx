@@ -28,6 +28,8 @@ const keySet = {
     first: new Set(['Home']),
     last: new Set(['End']),
   },
+  select: new Set(['Enter', 'Space']),
+  close: new Set(['Esc', 'Tab']),
 }
 
 export const useKeyboardNavigation =
@@ -57,5 +59,15 @@ export const useKeyboardNavigation =
           items,
         ),
       })
+    }
+
+    if (keySet.select.has(e.key)) {
+      items[highlightedIndex].onSelect?.()
+      dispatch({ type: 'SET_OPEN', open: false })
+    }
+
+    if (keySet.close.has(e.key)) {
+      e.preventDefault()
+      dispatch({ type: 'SET_OPEN', open: false })
     }
   }

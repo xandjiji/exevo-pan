@@ -3,7 +3,7 @@ export type Item = {
   highlighted?: boolean
   icon?: (args: JSX.IntrinsicElements['svg']) => JSX.Element
   disabled?: boolean
-  // onSelect
+  onSelect?: () => void
 }
 
 export type ItemProps = {

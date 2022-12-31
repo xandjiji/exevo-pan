@@ -8,9 +8,6 @@ import { MenuProps, ItemProps } from './types'
 
 /* @ ToDo:
 
-- highlight styling
-- highlight reducer
-- item click action
 - a11y label (se content for um elemento, obrigatorio ter label)
 - typing autoselect?
 - title element?
@@ -45,8 +42,6 @@ const Item = ({
               'h-full w-full',
               props.disabled
                 ? 'fill-onSurface opacity-50'
-                : highlighted
-                ? 'fill-onSurface'
                 : 'fill-primaryHighlight',
             )}
           />
@@ -103,15 +98,18 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
           }}
           {...props}
         >
-          {items.map((itemProps, index) => (
+          {items.map(({ onSelect, ...itemProps }, index) => (
             <Item
               key={itemProps.content?.toString()}
               tabIndex={-1}
               highlighted={index === highlightedIndex}
-              onMouseEnter={() =>
+              onMouseMove={() =>
                 dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
               }
-              onClick={() => console.log(itemProps.content?.toString())}
+              onClick={() => {
+                onSelect?.()
+                closeAction()
+              }}
               noIconPaddings={noIconPaddings}
               {...itemProps}
             />
