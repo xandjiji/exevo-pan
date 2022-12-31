@@ -1,9 +1,9 @@
-type MenuState = {
+export type MenuState = {
   highlightedIndex: number
   open: boolean
 }
 
-type Action =
+export type Action =
   | {
       type: 'RESET_HIGHLIGHT'
     }

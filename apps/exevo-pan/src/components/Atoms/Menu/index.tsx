@@ -3,6 +3,7 @@ import { useMemo, useReducer, useCallback } from 'react'
 import { Popover } from 'components/Atoms'
 import { useEscToClose, useOnClickOutside, useLockBody } from 'hooks'
 import Reducer from './reducer'
+import { useKeyboardNavigation } from './useKeyboardNavigation'
 import { MenuProps, ItemProps } from './types'
 
 /* @ ToDo:
@@ -71,10 +72,17 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
 
   const { elementToFocusRef, onKeyDown } = useEscToClose({
     open,
-    onClose: () => dispatch({ type: 'SET_OPEN', open: false }),
+    onClose: closeAction,
   })
   useOnClickOutside(elementToFocusRef, closeAction)
   useLockBody(open)
+
+  const handleKeyboardNavigation = useKeyboardNavigation({
+    open,
+    highlightedIndex,
+    items,
+    dispatch,
+  })
 
   return (
     <Popover
@@ -89,7 +97,10 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
           ref={elementToFocusRef}
           className="card animate-rushIn w-fit rounded p-0"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
-          onKeyDown={onKeyDown}
+          onKeyDown={(e) => {
+            handleKeyboardNavigation(e)
+            onKeyDown(e)
+          }}
           {...props}
         >
           {items.map((itemProps, index) => (
