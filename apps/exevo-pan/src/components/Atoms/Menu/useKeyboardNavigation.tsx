@@ -1,3 +1,5 @@
+/* eslint-disable consistent-return */
+import { useState, useCallback, useEffect } from 'react'
 import { MenuState, Action } from './reducer'
 import { Item } from './types'
 
@@ -5,6 +7,10 @@ type UseKeyboardNavigationProps = {
   dispatch: React.Dispatch<Action>
   items: Item[]
 } & MenuState
+
+type KeyboardHandler = (
+  args: UseKeyboardNavigationProps,
+) => (e: React.KeyboardEvent<HTMLDivElement>) => void
 
 const getNextIndex = (
   currentIndex: number,
@@ -32,9 +38,9 @@ const keySet = {
   close: new Set(['Esc', 'Tab']),
 }
 
-export const useKeyboardNavigation =
-  ({ open, highlightedIndex, items, dispatch }: UseKeyboardNavigationProps) =>
-  (e: React.KeyboardEvent<HTMLDivElement>) => {
+export const useKeyboardNavigation: KeyboardHandler =
+  ({ highlightedIndex, items, dispatch }) =>
+  (e) => {
     if (keySet.increment.has(e.key) || keySet.decrement.has(e.key)) {
       dispatch({
         type: 'SET_HIGHLIGHTED_INDEX',
@@ -71,3 +77,30 @@ export const useKeyboardNavigation =
       dispatch({ type: 'SET_OPEN', open: false })
     }
   }
+
+const DELAY = 1000
+const RESET_VALUE = ''
+
+export const useKeyboardSearch: KeyboardHandler = ({ items, dispatch }) => {
+  const [term, setTerm] = useState(RESET_VALUE)
+
+  useEffect(() => {
+    if (term === RESET_VALUE) return
+
+    dispatch({
+      type: 'SET_HIGHLIGHTED_INDEX',
+      index: items.findIndex(
+        ({ label, 'aria-label': ariaLabel }) =>
+          (ariaLabel ?? label).slice(0, term.length).toLowerCase() === term,
+      ),
+    })
+
+    const handler = setTimeout(() => setTerm(RESET_VALUE), DELAY)
+    return () => clearTimeout(handler)
+  }, [term, items])
+
+  return useCallback(
+    ({ key }) => setTerm((prev) => (prev + key).toLowerCase()),
+    [],
+  )
+}

@@ -3,17 +3,20 @@ import { useMemo, useReducer, useCallback } from 'react'
 import { Popover } from 'components/Atoms'
 import { useEscToClose, useOnClickOutside, useLockBody } from 'hooks'
 import Reducer from './reducer'
-import { useKeyboardNavigation } from './useKeyboardNavigation'
+import {
+  useKeyboardNavigation,
+  useKeyboardSearch,
+} from './useKeyboardNavigation'
 import { MenuProps, ItemProps } from './types'
 
 /* @ ToDo:
 
-- a11y label (se content for um elemento, obrigatorio ter label)
-- typing autoselect?
+- onKeypress no botao de abrir/fechar
 - title element?
 
 - a11y
 - a11y igual headless ui
+- mover para organisms
 
 */
 
@@ -63,8 +66,6 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
     [],
   )
 
-  const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
-
   const { elementToFocusRef, onKeyDown } = useEscToClose({
     open,
     onClose: closeAction,
@@ -72,12 +73,11 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
   useOnClickOutside(elementToFocusRef, closeAction)
   useLockBody(open)
 
-  const handleKeyboardNavigation = useKeyboardNavigation({
-    open,
-    highlightedIndex,
-    items,
-    dispatch,
-  })
+  const handlerParams = { open, highlightedIndex, items, dispatch }
+  const handleKeyboardNavigation = useKeyboardNavigation(handlerParams)
+  const handleKeyboardSearch = useKeyboardSearch(handlerParams)
+
+  const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
 
   return (
     <Popover
@@ -92,6 +92,7 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
           ref={elementToFocusRef}
           className="card animate-rushIn w-fit rounded p-0"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
+          onKeyPress={handleKeyboardSearch}
           onKeyDown={(e) => {
             handleKeyboardNavigation(e)
             onKeyDown(e)
