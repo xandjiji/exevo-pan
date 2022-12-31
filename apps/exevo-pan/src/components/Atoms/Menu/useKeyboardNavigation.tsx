@@ -10,7 +10,7 @@ type UseKeyboardNavigationProps = {
 
 type KeyboardHandler = (
   args: UseKeyboardNavigationProps,
-) => (e: React.KeyboardEvent<HTMLDivElement>) => void
+) => (e: React.KeyboardEvent<Element>) => void
 
 const getNextIndex = (
   currentIndex: number,
