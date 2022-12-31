@@ -73,7 +73,7 @@ export const useKeyboardNavigation: KeyboardHandler =
       })
     }
 
-    if (keySet.select.has(e.key)) {
+    if (keySet.select.has(e.key) && highlightedIndex !== -1) {
       items[highlightedIndex].onSelect?.()
       dispatch({ type: 'SET_OPEN', open: false })
     }
@@ -86,6 +86,7 @@ export const useKeyboardNavigation: KeyboardHandler =
 
 const DELAY = 1000
 const RESET_VALUE = ''
+const ignoredKeys = new Set(['Enter'])
 
 export const useKeyboardSearch: KeyboardHandler = ({ items, dispatch }) => {
   const [term, setTerm] = useState(RESET_VALUE)
@@ -105,8 +106,9 @@ export const useKeyboardSearch: KeyboardHandler = ({ items, dispatch }) => {
     return () => clearTimeout(handler)
   }, [term, items])
 
-  return useCallback(
-    ({ key }) => setTerm((prev) => (prev + key).toLowerCase()),
-    [],
-  )
+  return useCallback(({ key }) => {
+    if (!ignoredKeys.has(key)) {
+      setTerm((prev) => (prev + key).toLowerCase())
+    }
+  }, [])
 }

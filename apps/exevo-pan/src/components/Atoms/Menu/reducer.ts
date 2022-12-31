@@ -22,7 +22,7 @@ const Reducer = (state: MenuState, action: Action): MenuState => {
       return { ...state, highlightedIndex: -1 }
 
     case 'SET_HIGHLIGHTED_INDEX':
-      return { ...state, highlightedIndex: action.index }
+      return { ...state, highlightedIndex: action.index, open: true }
 
     case 'SET_OPEN':
       return { ...state, open: action.open, highlightedIndex: -1 }
