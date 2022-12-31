@@ -1,10 +1,9 @@
 export type Item = {
-  content: React.ReactNode
   highlighted?: boolean
   icon?: (args: JSX.IntrinsicElements['svg']) => JSX.Element
   disabled?: boolean
   onSelect?: () => void
-}
+} & AccessibleLabelProps
 
 export type ItemProps = {
   noIconPaddings?: boolean

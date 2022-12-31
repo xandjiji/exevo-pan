@@ -19,7 +19,7 @@ import { MenuProps, ItemProps } from './types'
 
 const Item = ({
   className,
-  content,
+  label,
   highlighted = false,
   icon: Icon,
   noIconPaddings = false,
@@ -48,7 +48,7 @@ const Item = ({
         )}
       </div>
     )}
-    <div>{content}</div>
+    <div>{label}</div>
   </button>
 )
 
@@ -100,7 +100,7 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
         >
           {items.map(({ onSelect, ...itemProps }, index) => (
             <Item
-              key={itemProps.content?.toString()}
+              key={itemProps['aria-label'] ?? itemProps.label}
               tabIndex={-1}
               highlighted={index === highlightedIndex}
               onMouseMove={() =>
