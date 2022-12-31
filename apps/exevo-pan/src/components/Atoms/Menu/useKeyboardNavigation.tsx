@@ -27,6 +27,16 @@ const getNextIndex = (
   return currentIndex + increment
 }
 
+const getBoundaryIndex = (order: 'first' | 'last', items: Item[]): number => {
+  const initialSearchedIndex = order === 'first' ? -1 : items.length
+
+  return getNextIndex(
+    initialSearchedIndex,
+    initialSearchedIndex < 0 ? 1 : -1,
+    items,
+  )
+}
+
 const keySet = {
   increment: new Set(['ArrowDown', 'PageDown']),
   decrement: new Set(['ArrowUp', 'PageUp']),
@@ -42,26 +52,22 @@ export const useKeyboardNavigation: KeyboardHandler =
   ({ highlightedIndex, items, dispatch }) =>
   (e) => {
     if (keySet.increment.has(e.key) || keySet.decrement.has(e.key)) {
+      const noHighlightedIndex = highlightedIndex === -1
+      const isIncrement = keySet.increment.has(e.key)
+
       dispatch({
         type: 'SET_HIGHLIGHTED_INDEX',
-        index: getNextIndex(
-          highlightedIndex,
-          keySet.increment.has(e.key) ? 1 : -1,
-          items,
-        ),
+        index: noHighlightedIndex
+          ? getBoundaryIndex(isIncrement ? 'first' : 'last', items)
+          : getNextIndex(highlightedIndex, isIncrement ? 1 : -1, items),
       })
     }
 
     if (keySet.highlight.first.has(e.key) || keySet.highlight.last.has(e.key)) {
-      const initialSearchedIndex = keySet.highlight.first.has(e.key)
-        ? -1
-        : items.length
-
       dispatch({
         type: 'SET_HIGHLIGHTED_INDEX',
-        index: getNextIndex(
-          initialSearchedIndex,
-          initialSearchedIndex < 0 ? 1 : -1,
+        index: getBoundaryIndex(
+          keySet.highlight.first.has(e.key) ? 'first' : 'last',
           items,
         ),
       })
