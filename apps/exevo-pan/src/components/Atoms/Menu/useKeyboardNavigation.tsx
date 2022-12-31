@@ -44,12 +44,12 @@ const keySet = {
     first: new Set(['Home']),
     last: new Set(['End']),
   },
-  select: new Set(['Enter', 'Space']),
+  select: new Set(['Enter', ' ']),
   close: new Set(['Esc', 'Tab']),
 }
 
 export const useKeyboardNavigation: KeyboardHandler =
-  ({ highlightedIndex, items, dispatch }) =>
+  ({ open, highlightedIndex, items, dispatch }) =>
   (e) => {
     if (keySet.increment.has(e.key) || keySet.decrement.has(e.key)) {
       const noHighlightedIndex = highlightedIndex === -1
@@ -61,6 +61,7 @@ export const useKeyboardNavigation: KeyboardHandler =
           ? getBoundaryIndex(isIncrement ? 'first' : 'last', items)
           : getNextIndex(highlightedIndex, isIncrement ? 1 : -1, items),
       })
+      return e.preventDefault()
     }
 
     if (keySet.highlight.first.has(e.key) || keySet.highlight.last.has(e.key)) {
@@ -71,16 +72,26 @@ export const useKeyboardNavigation: KeyboardHandler =
           items,
         ),
       })
+      return e.preventDefault()
     }
 
-    if (keySet.select.has(e.key) && highlightedIndex !== -1) {
-      items[highlightedIndex].onSelect?.()
-      dispatch({ type: 'SET_OPEN', open: false })
+    if (keySet.select.has(e.key)) {
+      if (open) {
+        items[highlightedIndex].onSelect?.()
+        dispatch({ type: 'SET_OPEN', open: false })
+      } else {
+        dispatch({
+          type: 'SET_OPEN',
+          open: true,
+          highlightedIndex: getBoundaryIndex('first', items),
+        })
+      }
+      return e.preventDefault()
     }
 
     if (keySet.close.has(e.key)) {
-      e.preventDefault()
       dispatch({ type: 'SET_OPEN', open: false })
+      return e.preventDefault()
     }
   }
 

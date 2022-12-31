@@ -11,7 +11,6 @@ import { MenuProps, ItemProps } from './types'
 
 /* @ ToDo:
 
-- onKeypress no botao de abrir/fechar
 - title element?
 
 - a11y
@@ -121,6 +120,7 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
       <button
         type="button"
         onClick={() => dispatch({ type: 'SET_OPEN', open: !open })}
+        onKeyDown={handleKeyboardNavigation}
         className={clsx(
           'clickable grid cursor-pointer place-items-center rounded p-0.5',
           open && 'shadow-inner hover:shadow-inner',

@@ -14,6 +14,7 @@ export type Action =
   | {
       type: 'SET_OPEN'
       open: boolean
+      highlightedIndex?: number
     }
 
 const Reducer = (state: MenuState, action: Action): MenuState => {
@@ -25,7 +26,11 @@ const Reducer = (state: MenuState, action: Action): MenuState => {
       return { ...state, highlightedIndex: action.index, open: true }
 
     case 'SET_OPEN':
-      return { ...state, open: action.open, highlightedIndex: -1 }
+      return {
+        ...state,
+        open: action.open,
+        highlightedIndex: action.highlightedIndex ?? -1,
+      }
 
     default:
       return state
