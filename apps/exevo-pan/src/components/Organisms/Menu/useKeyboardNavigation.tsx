@@ -109,7 +109,9 @@ export const useKeyboardSearch: KeyboardHandler = ({ items, dispatch }) => {
       type: 'SET_HIGHLIGHTED_INDEX',
       index: items.findIndex(
         ({ label, 'aria-label': ariaLabel }) =>
-          (ariaLabel ?? label).slice(0, term.length).toLowerCase() === term,
+          ((ariaLabel ?? label) as string)
+            .slice(0, term.length)
+            .toLowerCase() === term,
       ),
     })
 
