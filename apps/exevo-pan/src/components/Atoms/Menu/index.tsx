@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useMemo, useReducer, useCallback } from 'react'
+import { useMemo, useReducer, useCallback, useId } from 'react'
 import { Popover } from 'components/Atoms'
 import { useEscToClose, useOnClickOutside, useLockBody } from 'hooks'
 import Reducer from './reducer'
@@ -8,13 +8,6 @@ import {
   useKeyboardSearch,
 } from './useKeyboardNavigation'
 import { MenuProps, ItemProps } from './types'
-
-/* @ ToDo:
-
-- a11y
-- mover para organisms
-
-*/
 
 const Item = ({
   className,
@@ -25,6 +18,7 @@ const Item = ({
   ...props
 }: ItemProps) => (
   <button
+    role="menuitem"
     type="button"
     className={clsx(
       'disabled:bg-separator/50 text-onSurface flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
@@ -58,6 +52,10 @@ const Menu = ({
   children,
   ...props
 }: MenuProps) => {
+  const buttonId = useId()
+  const dialogId = useId()
+  const menuItemIdPrefix = useId()
+
   const [{ open, highlightedIndex }, dispatch] = useReducer(Reducer, {
     highlightedIndex: -1,
     open: false,
@@ -82,6 +80,9 @@ const Menu = ({
   const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
   const hasTitle = !!titleElement
 
+  const menuItemId = (index: number) =>
+    index === -1 ? undefined : `${menuItemIdPrefix}-${index}`
+
   return (
     <Popover
       offset={[0, 8]}
@@ -90,9 +91,11 @@ const Menu = ({
       visible={open}
       content={
         <div
-          role="menu"
-          tabIndex={0}
           ref={elementToFocusRef}
+          tabIndex={0}
+          role="menu"
+          aria-labelledby={buttonId}
+          aria-activedescendant={menuItemId(highlightedIndex)}
           className="card animate-rushIn text-tsm text-onSurface w-fit overflow-hidden rounded p-0"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
           onKeyPress={handleKeyboardSearch}
@@ -118,6 +121,7 @@ const Menu = ({
             {items.map(({ onSelect, ...itemProps }, index) => (
               <Item
                 key={itemProps['aria-label'] ?? itemProps.label}
+                id={menuItemId(index)}
                 tabIndex={-1}
                 highlighted={index === highlightedIndex}
                 onMouseMove={() =>
@@ -136,6 +140,10 @@ const Menu = ({
       }
     >
       <button
+        id={buttonId}
+        aria-expanded={open}
+        aria-haspopup="true"
+        aria-controls={open ? dialogId : undefined}
         type="button"
         onClick={() => dispatch({ type: 'SET_OPEN', open: !open })}
         onKeyDown={handleKeyboardNavigation}
