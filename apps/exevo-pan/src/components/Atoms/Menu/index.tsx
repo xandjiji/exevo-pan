@@ -11,10 +11,7 @@ import { MenuProps, ItemProps } from './types'
 
 /* @ ToDo:
 
-- title element?
-
 - a11y
-- a11y igual headless ui
 - mover para organisms
 
 */
@@ -30,7 +27,7 @@ const Item = ({
   <button
     type="button"
     className={clsx(
-      'text-tsm text-onSurface disabled:bg-separator/50 flex w-full items-center gap-2.5 px-4 py-2.5 text-left first:rounded-t last:rounded-b',
+      'disabled:bg-separator/50 text-onSurface flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
       highlighted && 'bg-primaryVariant',
       className,
     )}
@@ -54,7 +51,13 @@ const Item = ({
   </button>
 )
 
-const Menu = ({ items, children, ...props }: MenuProps) => {
+const Menu = ({
+  titleElement,
+  titleElementIconSpacing = true,
+  items,
+  children,
+  ...props
+}: MenuProps) => {
   const [{ open, highlightedIndex }, dispatch] = useReducer(Reducer, {
     highlightedIndex: -1,
     open: false,
@@ -77,6 +80,7 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
   const handleKeyboardSearch = useKeyboardSearch(handlerParams)
 
   const noIconPaddings = useMemo(() => !items.some(({ icon }) => icon), [items])
+  const hasTitle = !!titleElement
 
   return (
     <Popover
@@ -89,7 +93,7 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
           role="menu"
           tabIndex={0}
           ref={elementToFocusRef}
-          className="card animate-rushIn w-fit rounded p-0"
+          className="card animate-rushIn text-tsm text-onSurface w-fit overflow-hidden rounded p-0"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
           onKeyPress={handleKeyboardSearch}
           onKeyDown={(e) => {
@@ -98,22 +102,36 @@ const Menu = ({ items, children, ...props }: MenuProps) => {
           }}
           {...props}
         >
-          {items.map(({ onSelect, ...itemProps }, index) => (
-            <Item
-              key={itemProps['aria-label'] ?? itemProps.label}
-              tabIndex={-1}
-              highlighted={index === highlightedIndex}
-              onMouseMove={() =>
-                dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
-              }
-              onClick={() => {
-                onSelect?.()
-                closeAction()
-              }}
-              noIconPaddings={noIconPaddings}
-              {...itemProps}
-            />
-          ))}
+          {hasTitle && (
+            <div
+              className={clsx(
+                'border-b-separator/50 border-b-1 flex w-full items-center gap-2.5 px-4 py-2.5',
+              )}
+              style={{ borderBottomStyle: 'solid' }}
+            >
+              {titleElementIconSpacing && <div role="none" className="w-4" />}
+              {titleElement}
+            </div>
+          )}
+
+          <div>
+            {items.map(({ onSelect, ...itemProps }, index) => (
+              <Item
+                key={itemProps['aria-label'] ?? itemProps.label}
+                tabIndex={-1}
+                highlighted={index === highlightedIndex}
+                onMouseMove={() =>
+                  dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
+                }
+                onClick={() => {
+                  onSelect?.()
+                  closeAction()
+                }}
+                noIconPaddings={noIconPaddings}
+                {...itemProps}
+              />
+            ))}
+          </div>
         </div>
       }
     >

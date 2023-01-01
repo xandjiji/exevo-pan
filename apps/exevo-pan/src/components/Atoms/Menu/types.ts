@@ -11,6 +11,8 @@ export type ItemProps = {
   JSX.IntrinsicElements['button']
 
 export type MenuProps = {
+  titleElement?: React.ReactNode
+  titleElementIconSpacing?: boolean
   items: Item[]
-  children: JSX.Element
+  children: React.ReactNode
 } & JSX.IntrinsicElements['div']
