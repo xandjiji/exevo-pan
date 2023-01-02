@@ -128,6 +128,7 @@ schema.set('Flamecaller Zazrak', {
     min: 2,
     max: 9,
   },
+  spawnCount: 2,
 })
 
 schema.set('Fleabringer', {
