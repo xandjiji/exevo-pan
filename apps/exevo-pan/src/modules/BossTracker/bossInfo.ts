@@ -439,6 +439,10 @@ bossInfo.set('Flamecaller Zazrak', {
       src: 'https://tibiamaps.io/map/embed#33180,31220,7:1',
       description: 'Muggy Plains (Farmine)',
     },
+	{
+      src: 'https://tibiamaps.io/map/embed#33251,31152,6:1',
+      description: 'Muggy Plains (Farmine)',
+	}
   ],
 })
 
