@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders } from 'utils/test'
+import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
 import { AccountIcon, AddPostIcon, CheckIcon } from 'assets/svgs'
 import Menu from '..'
 import { MenuProps } from '../types'
@@ -8,7 +8,7 @@ import { MenuProps } from '../types'
 const onSelectMock = jest.fn()
 
 const props: MenuProps = {
-  children: <button type="button" aria-label="toggle" />,
+  children: 'toggle',
   items: [
     {
       icon: CheckIcon,
@@ -146,10 +146,58 @@ describe('<Menu />', () => {
       assertHighlighted(getItems().b)
     })
 
-    test.todo('keyboard')
+    test('keyboard', () => {
+      renderWithProviders(
+        <>
+          <Menu {...props} titleElement={<h1>title element</h1>} />
+          <div role="button">outside</div>
+        </>,
+      )
+
+      const { assertOpen, getItems, assertOnSelectCall, assertHighlighted } =
+        setup()
+
+      assertOpen(false)
+      userEvent.tab()
+      userEvent.keyboard('{Enter}')
+      assertOpen()
+      assertHighlighted(getItems().a)
+      userEvent.keyboard('{ArrowDown}')
+      assertHighlighted(getItems().b)
+      userEvent.keyboard('{Enter}')
+      assertOnSelectCall()
+      assertOpen(false)
+
+      userEvent.keyboard('{ArrowUp}')
+      assertOpen()
+      assertHighlighted(getItems().element)
+      userEvent.keyboard('{ArrowUp}')
+      userEvent.keyboard('{PageUp}')
+      assertHighlighted(getItems().c)
+      userEvent.keyboard(' ')
+      assertOnSelectCall()
+      assertOpen(false)
+
+      userEvent.keyboard('{PageDown}')
+      assertOpen()
+      assertHighlighted(getItems().a)
+      userEvent.keyboard('{End}')
+      assertHighlighted(getItems().element)
+      userEvent.keyboard('{ArrowDown}')
+      assertHighlighted(getItems().element)
+      userEvent.keyboard('{Home}')
+      assertHighlighted(getItems().a)
+      userEvent.keyboard('{ArrowUp}')
+      assertHighlighted(getItems().a)
+      userEvent.tab()
+      assertOpen(false)
+      assertOnSelectCall(false)
+    })
   })
 
-  test.todo('typing should highlight items by text')
+  test('a11y', async () => {
+    const { container } = renderWithProviders(<Menu {...props} />)
 
-  test.todo('a11y')
+    await assertNoA11yViolations(container)
+  })
 })
