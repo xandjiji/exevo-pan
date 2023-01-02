@@ -1,3 +1,4 @@
+export { SkillBar } from 'components/Atoms'
 export { default as Head } from './Head'
 export { default as TagButton } from './TagButton'
 export * as Textbox from './Textbox'

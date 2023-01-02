@@ -1,0 +1,11 @@
+.highlighted {
+  filter: brightness(130%) saturate(80%);
+}
+
+.highlighted > div {
+  @apply bg-transparent;
+}
+
+.highlighted [role='alert'] {
+  @apply border-primaryVariant;
+}

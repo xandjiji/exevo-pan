@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import CharacterMiniCard from 'components/CharacterMiniCard'
-import CharacterModal from 'components/CharacterCard/CharacterModal'
+import CharacterModal from 'components/CharacterModal'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { Text } from 'components/Atoms'
 import { table as Table } from '../../Style/Table'

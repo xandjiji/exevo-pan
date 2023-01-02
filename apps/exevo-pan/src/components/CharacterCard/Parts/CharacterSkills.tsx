@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { getHighestSkill } from 'utils'
-import SkillBar from './SkillBar'
+import { SkillBar } from 'components/Atoms'
 
 interface CharacterSkillsProps extends React.HTMLAttributes<HTMLDivElement> {
   skills: CharacterSkillsObject

@@ -1,0 +1,40 @@
+.wrapper {
+  --lateralMargin: 14px;
+  --cardFixedHeight: 498px;
+  --cardMaxMobileWidth: 368px;
+  --gridMobileHeight: 60vh;
+  --scrollbarWidth: 6px;
+}
+
+.wrapper [role='tablist'] {
+  @apply z-2 sticky top-0 pt-[2px];
+  width: calc(100vw - ((2 * var(--lateralMargin)) + var(--scrollbarWidth)));
+  max-width: calc(
+    var(--cardMaxMobileWidth) -
+      ((2 * var(--lateralMargin)) + var(--scrollbarWidth))
+  );
+
+  box-shadow: 0px calc(-1 * var(--lateralMargin)) 0px var(--lateralMargin)
+    rgb(var(--surface));
+}
+
+@media (min-width: 768px) {
+  .wrapper [role='tablist'] {
+    width: unset;
+    max-width: calc(100vw - 440px);
+  }
+}
+
+@media (min-width: 900px) {
+  .wrapper [role='tablist'] {
+    max-width: unset;
+    box-shadow: 0px calc(-1 * var(--lateralMargin)) 0px
+      calc(var(--lateralMargin) - 2px) rgb(var(--surface));
+  }
+}
+
+@media (min-width: 1100px) {
+  .wrapper {
+    width: 1029px;
+  }
+}
