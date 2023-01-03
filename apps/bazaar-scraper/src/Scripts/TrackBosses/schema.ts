@@ -125,8 +125,8 @@ schema.set('Ferumbras', {
 
 schema.set('Flamecaller Zazrak', {
   fixedDaysFrequency: {
-    min: 2,
-    max: 9,
+    min: 7,
+    max: 19,
   },
   spawnCount: 2,
 })
