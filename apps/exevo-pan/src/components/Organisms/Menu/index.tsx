@@ -23,6 +23,7 @@ const Item = ({
     className={clsx(
       'disabled:bg-separator/50 text-onSurface flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
       highlighted && 'bg-primaryVariant',
+      !props.disabled && 'cursor-pointer',
       className,
     )}
     {...props}
@@ -85,8 +86,8 @@ const Menu = ({
 
   return (
     <Popover
-      offset={[0, 8]}
-      placement="left-start"
+      offset={[-8, 8]}
+      placement="bottom-end"
       trigger="none"
       visible={open}
       content={
@@ -96,7 +97,7 @@ const Menu = ({
           role="menu"
           aria-labelledby={buttonId}
           aria-activedescendant={menuItemId(highlightedIndex)}
-          className="card animate-rushIn text-tsm text-onSurface w-fit overflow-hidden rounded p-0"
+          className="card border-1 border-separator/50 animate-rushIn text-tsm text-onSurface w-fit overflow-hidden rounded border-solid p-0 shadow-lg"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
           onKeyPress={handleKeyboardSearch}
           onKeyDown={(e) => {
