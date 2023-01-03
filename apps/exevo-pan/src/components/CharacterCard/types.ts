@@ -3,6 +3,7 @@ export type CharacterCardProps = {
   highlighted?: boolean
   lazyRender?: boolean
   past?: boolean
+  cornerElement?: React.ReactNode
 } & JSX.IntrinsicElements['article']
 
 export type WrapperProps = Pick<CharacterCardProps, 'highlighted'> &

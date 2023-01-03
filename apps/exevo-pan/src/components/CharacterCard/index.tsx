@@ -24,6 +24,7 @@ const CharacterCard = ({
   highlighted = false,
   lazyRender = false,
   past = false,
+  cornerElement,
   ...props
 }: CharacterCardProps) => {
   const {
@@ -66,6 +67,7 @@ const CharacterCard = ({
         highlighted={highlighted}
       >
         {highlighted && <TagButton />}
+        {cornerElement}
       </Head>
 
       <S.Body lazy={lazyRender}>

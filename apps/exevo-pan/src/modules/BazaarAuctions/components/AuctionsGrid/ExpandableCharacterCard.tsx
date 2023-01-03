@@ -1,7 +1,9 @@
 import { useMemo, useState, useCallback } from 'react'
 import { useRouter } from 'next/router'
+import { Menu } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import CharacterModal from 'components/CharacterModal'
+import { MoreIcon, ExpandIcon, SearchIcon } from 'assets/svgs'
 import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
@@ -31,15 +33,36 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
 
   return (
     <>
-      <CharacterCard {...props} onClick={expandCard} />
+      <CharacterCard
+        cornerElement={
+          <Menu
+            /* @ ToDo: i18n */
+            items={[
+              {
+                label: 'Details',
+                icon: ExpandIcon,
+                onSelect: expandCard,
+              },
+              {
+                /* @ ToDo: onSelect action */
+                label: 'Find similar',
+                icon: SearchIcon,
+              },
+            ]}
+          >
+            <MoreIcon className="fill-onSurface" />
+          </Menu>
+        }
+        {...props}
+      />
       {isExpanded && (
         <CharacterModal
+          permalink={permalink}
           characterData={characterData}
           onClose={() => {
             if (permalink) setAuctionIdUrl(undefined)
             setExpanded(false)
           }}
-          permalink={permalink}
         />
       )}
     </>
