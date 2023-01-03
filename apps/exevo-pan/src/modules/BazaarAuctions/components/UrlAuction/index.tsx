@@ -2,7 +2,7 @@ import { useState, useCallback, useEffect } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSyncUrlState } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
-import CharacterModal from 'components/CharacterCard/CharacterModal'
+import CharacterModal from 'components/CharacterModal'
 import { AuctionsClient } from 'services/client'
 import { urlParameters } from 'Constants'
 

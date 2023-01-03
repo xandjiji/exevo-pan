@@ -1,13 +1,11 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
-import { useRouter } from 'next/router'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
-import CharacterCard from 'components/CharacterCard'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
-import { permalinkResolver as basePermalinkResolver } from 'utils'
+import ExpandableCharacterCard from './ExpandableCharacterCard'
 import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
@@ -52,13 +50,6 @@ const AuctionsGrid = () => {
 
     return () => clearTimeout(scrollTimer)
   }, [paginatedData])
-
-  const { locale } = useRouter()
-
-  const permalinkResolver = useCallback(
-    (auctionId: number) => basePermalinkResolver({ auctionId, locale }),
-    [],
-  )
 
   return (
     <main>
@@ -122,14 +113,12 @@ const AuctionsGrid = () => {
         >
           {shouldDisplayHighlightedAuctions &&
             highlightedAuctions.map((auction) => (
-              <CharacterCard
+              <ExpandableCharacterCard
                 key={`${auction.id}-highlighted`}
                 characterData={auction}
                 highlighted
                 lazyRender
-                expandable
                 past={isHistory}
-                permalink={permalinkResolver?.(auction.id)}
               />
             ))}
           {paginatedData.page.map((auction) => {
@@ -141,16 +130,14 @@ const AuctionsGrid = () => {
               : auction
 
             return (
-              <CharacterCard
+              <ExpandableCharacterCard
                 key={auction.id}
                 highlighted={
                   !!highlightedAuction && !shouldDisplayHighlightedAuctions
                 }
                 lazyRender
                 characterData={characterData}
-                expandable
                 past={isHistory}
-                permalink={permalinkResolver?.(auction.id)}
               />
             )
           })}

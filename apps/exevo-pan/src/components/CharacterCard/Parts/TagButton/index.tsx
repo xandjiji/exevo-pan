@@ -35,7 +35,6 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
         onMouseOut={handleUnhover}
         onBlur={handleUnhover}
         aria-describedby={labelId}
-        onClick={(event) => event.stopPropagation()}
         className="relative h-11 w-7 shrink-0 cursor-pointer self-start"
         {...props}
       >
