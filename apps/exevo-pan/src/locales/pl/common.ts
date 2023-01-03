@@ -190,7 +190,6 @@ export default {
     AuctionStatus: 'Status Aukcji',
     BidStatus: 'Status Oferty',
     highlightLabelText: 'Podświetl swoją aukcje',
-    expand: 'Rozwiń aby zobaczyć pełne szczegóły aukcji',
     CharacterModal: {
       /* @ ToDo: i18n */
       moreInfo: 'More informations',

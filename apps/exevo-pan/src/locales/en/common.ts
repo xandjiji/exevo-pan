@@ -186,7 +186,6 @@ export default {
     AuctionStatus: 'Auction status',
     BidStatus: 'Bid status',
     highlightLabelText: 'Highlight your auction!',
-    expand: 'Expand for full auction details',
     CharacterModal: {
       moreInfo: 'More informations',
       totalInvested: 'Total invested',

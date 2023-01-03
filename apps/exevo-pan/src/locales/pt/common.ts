@@ -186,7 +186,6 @@ export default {
     AuctionStatus: 'Status do leilão',
     BidStatus: 'Lance atual',
     highlightLabelText: 'Destaque seu leilão!',
-    expand: 'Expandir todos os detalhes do leilão',
     CharacterModal: {
       moreInfo: 'Mais informações',
       totalInvested: 'Total investido',
