@@ -1,5 +1,7 @@
-import { useMemo, useState, useCallback } from 'react'
+/* eslint-disable react/require-default-props */
+import { useRef, useMemo, useState, useCallback } from 'react'
 import { useRouter } from 'next/router'
+import { CopyButton } from 'components/Atoms'
 import { Menu } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import CharacterModal from 'components/CharacterModal'
@@ -31,6 +33,20 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
     setExpanded(true)
   }, [auctionId, permalink])
 
+  const copyButtonRef = useRef<HTMLButtonElement>(null)
+
+  const CopyButtonIcon = ({ className }: { className?: string }) => (
+    <CopyButton
+      ref={copyButtonRef}
+      copyString={permalink}
+      iconClassname={className}
+    />
+  )
+
+  const copyLinkAction = useCallback(() => {
+    copyButtonRef.current?.click()
+  }, [])
+
   return (
     <>
       <CharacterCard
@@ -42,6 +58,12 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
                 label: 'Details',
                 icon: ExpandIcon,
                 onSelect: expandCard,
+              },
+              {
+                label: 'Copy link',
+                icon: CopyButtonIcon,
+                keepOpenAfterSelection: true,
+                onSelect: copyLinkAction,
               },
               {
                 /* @ ToDo: onSelect action */
@@ -57,7 +79,6 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
       />
       {isExpanded && (
         <CharacterModal
-          permalink={permalink}
           characterData={characterData}
           onClose={() => {
             if (permalink) setAuctionIdUrl(undefined)
