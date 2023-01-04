@@ -1,17 +1,21 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback, useEffect } from 'react'
+import { forwardRef, Ref, useState, useCallback, useEffect } from 'react'
 import clsx from 'clsx'
 import { copyToClipboard } from 'utils'
 import { CopyIcon, AnchorIcon, ValidIcon } from 'assets/svgs'
 import { CopyButtonProps } from './types'
 
-const CopyButton = ({
-  className,
-  copyString,
-  linkIcon = false,
-  variant = 'default',
-  ...props
-}: CopyButtonProps) => {
+const CopyButton = (
+  {
+    className,
+    copyString,
+    linkIcon = false,
+    variant = 'default',
+    iconClassname,
+    ...props
+  }: CopyButtonProps,
+  ref: Ref<HTMLButtonElement>,
+) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -34,12 +38,14 @@ const CopyButton = ({
 
   return (
     <button
+      ref={ref}
       type="button"
       aria-label={
         clicked ? common.CopyButton.copiedLabel : common.CopyButton.toCopyLabel
       }
       className={clsx(
-        'clickable grid place-items-center overflow-hidden rounded',
+        'grid cursor-pointer place-items-center overflow-hidden',
+        !iconClassname && 'clickable rounded',
         className,
       )}
       {...props}
@@ -49,22 +55,24 @@ const CopyButton = ({
         <ValidIcon
           className={clsx(
             'fill-greenHighlight animate-rollIn',
-            {
-              small: 'h-4 w-4 p-[1px]',
-              default: 'h-6 w-6 p-[3px]',
-              big: 'h-7 w-7 p-0.5',
-            }[variant],
+            iconClassname ??
+              {
+                small: 'h-4 w-4 p-[1px]',
+                default: 'h-6 w-6 p-[3px]',
+                big: 'h-7 w-7 p-0.5',
+              }[variant],
           )}
         />
       ) : (
         <Icon
           className={clsx(
             'fill-onSurface',
-            {
-              small: 'h-4 w-4 p-[1px]',
-              default: 'h-6 w-6 p-[3px]',
-              big: 'h-7 w-7 p-0.5',
-            }[variant],
+            iconClassname ??
+              {
+                small: 'h-4 w-4 p-[1px]',
+                default: 'h-6 w-6 p-[3px]',
+                big: 'h-7 w-7 p-0.5',
+              }[variant],
           )}
         />
       )}
@@ -72,4 +80,4 @@ const CopyButton = ({
   )
 }
 
-export default CopyButton
+export default forwardRef(CopyButton)
