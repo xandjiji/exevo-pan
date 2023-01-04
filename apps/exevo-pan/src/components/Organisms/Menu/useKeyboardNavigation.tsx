@@ -77,8 +77,9 @@ export const useKeyboardNavigation: KeyboardHandler =
 
     if (keySet.select.has(e.key)) {
       if (open) {
-        items[highlightedIndex].onSelect?.()
-        dispatch({ type: 'SET_OPEN', open: false })
+        const item = items[highlightedIndex]
+        item.onSelect?.()
+        dispatch({ type: 'SET_OPEN', open: !!item.keepOpenAfterSelection })
       } else {
         dispatch({
           type: 'SET_OPEN',

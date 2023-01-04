@@ -3,6 +3,7 @@ export type Item = {
   icon?: (args: JSX.IntrinsicElements['svg']) => JSX.Element
   disabled?: boolean
   onSelect?: () => void
+  keepOpenAfterSelection?: boolean
 } & AccessibleLabelProps
 
 export type ItemProps = {

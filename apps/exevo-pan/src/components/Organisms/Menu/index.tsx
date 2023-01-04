@@ -97,7 +97,7 @@ const Menu = ({
           role="menu"
           aria-labelledby={buttonId}
           aria-activedescendant={menuItemId(highlightedIndex)}
-          className="card border-1 border-separator/50 animate-rushIn text-tsm text-onSurface w-fit rounded border-solid px-0 py-1.5 shadow-lg"
+          className="card border-1 border-separator/50 animate-rushIn text-tsm text-onSurface w-fit rounded border-solid px-0 py-0.5 shadow-lg"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
           onKeyPress={handleKeyboardSearch}
           onKeyDown={(e) => {
@@ -119,23 +119,25 @@ const Menu = ({
           )}
 
           <div>
-            {items.map(({ onSelect, ...itemProps }, index) => (
-              <Item
-                key={itemProps['aria-label'] ?? itemProps.label}
-                id={menuItemId(index)}
-                tabIndex={-1}
-                highlighted={index === highlightedIndex}
-                onMouseMove={() =>
-                  dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
-                }
-                onClick={() => {
-                  onSelect?.()
-                  closeAction()
-                }}
-                noIconPaddings={noIconPaddings}
-                {...itemProps}
-              />
-            ))}
+            {items.map(
+              ({ onSelect, keepOpenAfterSelection, ...itemProps }, index) => (
+                <Item
+                  key={itemProps['aria-label'] ?? itemProps.label}
+                  id={menuItemId(index)}
+                  tabIndex={-1}
+                  highlighted={index === highlightedIndex}
+                  onMouseMove={() =>
+                    dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
+                  }
+                  onClick={() => {
+                    onSelect?.()
+                    if (!keepOpenAfterSelection) closeAction()
+                  }}
+                  noIconPaddings={noIconPaddings}
+                  {...itemProps}
+                />
+              ),
+            )}
           </div>
         </div>
       }
