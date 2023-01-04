@@ -97,7 +97,7 @@ const Menu = ({
           role="menu"
           aria-labelledby={buttonId}
           aria-activedescendant={menuItemId(highlightedIndex)}
-          className="card border-1 border-separator/50 animate-rushIn text-tsm text-onSurface w-fit overflow-hidden rounded border-solid p-0 shadow-lg"
+          className="card border-1 border-separator/50 animate-rushIn text-tsm text-onSurface w-fit rounded border-solid px-0 py-1.5 shadow-lg"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
           onKeyPress={handleKeyboardSearch}
           onKeyDown={(e) => {
