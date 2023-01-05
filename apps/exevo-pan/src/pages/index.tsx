@@ -20,7 +20,7 @@ const pageUrl = buildUrl(routes.HOME)
 
 type HomeStaticProps = {
   activeServers: string[]
-  serverOptions: Option[]
+  serverData: Record<string, ServerObject>
   rareItemData: RareItemData
   initialPaginatedData: PaginatedData<CharacterObject>
   highlightedAuctions: CharacterObject[]
@@ -29,7 +29,7 @@ type HomeStaticProps = {
 
 export default function Home({
   activeServers,
-  serverOptions,
+  serverData,
   rareItemData,
   initialPaginatedData,
   highlightedAuctions,
@@ -108,7 +108,7 @@ export default function Home({
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           activeServers={activeServersSet}
-          serverOptions={serverOptions}
+          serverData={serverData}
           rareItemData={rareItemData}
         >
           <AuctionsProvider
@@ -126,14 +126,14 @@ export default function Home({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const [
     activeServerOptions,
-    serverOptions,
+    serverData,
     rareItemData,
     initialPaginatedData,
     highlightedAuctions,
     localizedBlogPosts,
   ] = await Promise.all([
     DrawerFieldsClient.fetchActiveServerOptions(),
-    DrawerFieldsClient.fetchServerOptions(),
+    DrawerFieldsClient.fetchServerData(),
     DrawerFieldsClient.fetchAuctionedItemOptions(),
     AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
@@ -147,7 +147,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         homepage: homepage[locale as RegisteredLocale],
       },
       activeServers: activeServerOptions.map(({ name }) => name),
-      serverOptions,
+      serverData,
       rareItemData,
       initialPaginatedData,
       highlightedAuctions,

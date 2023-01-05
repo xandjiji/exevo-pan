@@ -1,4 +1,5 @@
 export interface DrawerFieldsContextData {
+  serverData: Record<string, ServerObject>
   activeServers: Set<string>
   serverOptions: Option[]
   rareItemData: RareItemData
@@ -14,7 +15,7 @@ export interface DrawerFieldsContextData {
 
 type ServerSideProps = Pick<
   DrawerFieldsContextData,
-  'activeServers' | 'serverOptions' | 'rareItemData'
+  'activeServers' | 'serverData' | 'rareItemData'
 >
 
 export interface DrawerFieldsProviderProps extends ServerSideProps {

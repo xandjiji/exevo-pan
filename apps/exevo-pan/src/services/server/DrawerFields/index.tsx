@@ -8,6 +8,13 @@ export default class DrawerFieldsClient {
 
   private static rareItemDataUrl = `${endpoints.STATIC_DATA}${paths.ITEMS_DATA}`
 
+  static async fetchServerData(): Promise<Record<string, ServerObject>> {
+    const response = await fetch(this.serverDataUrl)
+    const serverData: Record<string, ServerObject> = await response.json()
+
+    return serverData
+  }
+
   static async fetchActiveServerOptions(): Promise<Option[]> {
     const response = await fetch(this.activeServersUrl)
 
