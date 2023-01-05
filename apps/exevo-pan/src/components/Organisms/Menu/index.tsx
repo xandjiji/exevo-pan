@@ -151,7 +151,7 @@ const Menu = ({
         onClick={() => dispatch({ type: 'SET_OPEN', open: !open })}
         onKeyDown={handleKeyboardNavigation}
         className={clsx(
-          'clickable grid cursor-pointer place-items-center rounded p-0.5',
+          'clickable relative grid cursor-pointer place-items-center rounded p-0.5',
           open && 'shadow-inner hover:shadow-inner',
         )}
       >
