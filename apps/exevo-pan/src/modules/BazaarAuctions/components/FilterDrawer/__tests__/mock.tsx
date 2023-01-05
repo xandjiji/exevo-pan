@@ -3,7 +3,7 @@ import { AuctionsProvider } from '../../../contexts/useAuctions'
 import FilterDrawer from '..'
 import { FilterDrawerProps } from '../types'
 
-export const activeServers = new Set(['Pacera', 'Belobra', 'Antica'])
+export const activeServers = new Set(['Funera', 'Belobra', 'Antica'])
 
 export const WrappedFilterDrawer = ({
   open = true,
@@ -12,7 +12,50 @@ export const WrappedFilterDrawer = ({
   <DrawerFieldsProvider
     activeServers={activeServers}
     rareItemData={{ 'Ball Gown': [1], 'Amazon Shield': [2, 3] }}
-    serverOptions={[]}
+    serverData={{
+      Antica: {
+        serverId: 1,
+        serverName: 'Antica',
+        serverLocation: {
+          string: 'EU',
+          type: 0,
+        },
+        pvpType: {
+          string: 'Open',
+          type: 1,
+        },
+        battleye: false,
+        experimental: false,
+      },
+      Belobra: {
+        serverId: 5,
+        serverName: 'Belobra',
+        serverLocation: {
+          string: 'BR',
+          type: 2,
+        },
+        pvpType: {
+          string: 'Optional',
+          type: 0,
+        },
+        battleye: false,
+        experimental: false,
+      },
+      Funera: {
+        serverId: 23,
+        serverName: 'Funera',
+        serverLocation: {
+          string: 'NA',
+          type: 1,
+        },
+        pvpType: {
+          string: 'Retro Hardcore',
+          type: 4,
+        },
+        battleye: true,
+        experimental: false,
+      },
+    }}
   >
     <AuctionsProvider
       highlightedAuctions={[]}

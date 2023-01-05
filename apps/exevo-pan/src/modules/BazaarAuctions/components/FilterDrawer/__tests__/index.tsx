@@ -379,4 +379,57 @@ describe('<FilterDrawer />', () => {
     expect(screen.getByRole('checkbox', { name: 'Addon 2' })).toBeDisabled()
     expect(screen.getByTitle('Entrepreneur')).toBeDisabled()
   })
+
+  test('should filter server options according to other server filters', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
+
+    const checkOption = (name: string, available = true) => {
+      const optionElement = screen.queryByRole('option', { name })
+
+      if (available) {
+        expect(optionElement).toBeInTheDocument()
+      } else {
+        expect(optionElement).not.toBeInTheDocument()
+      }
+    }
+
+    const serverInput = screen.getByLabelText('Server')
+    userEvent.click(serverInput)
+    checkOption('Antica')
+    checkOption('Belobra')
+    checkOption('Funera')
+
+    const optionalButton = screen.getByRole('switch', { name: 'Optional' })
+
+    userEvent.click(optionalButton)
+    checkOption('Antica', false)
+    checkOption('Belobra')
+    checkOption('Funera', false)
+
+    userEvent.click(optionalButton)
+    const greenButton = screen.getByRole('switch', { name: 'Green' })
+    userEvent.click(greenButton)
+    checkOption('Antica', false)
+    checkOption('Belobra', false)
+    checkOption('Funera')
+
+    userEvent.click(greenButton)
+    const euButton = screen.getByRole('switch', { name: 'EU' })
+    userEvent.click(euButton)
+    checkOption('Antica')
+    checkOption('Belobra', false)
+    checkOption('Funera', false)
+  })
+
+  test('should disable filter `<Select />` if no option is available', () => {
+    renderWithProviders(<WrappedFilterDrawer />)
+    resetFilters()
+
+    userEvent.click(screen.getByRole('switch', { name: 'Optional' }))
+    userEvent.click(screen.getByRole('switch', { name: 'Green' }))
+    userEvent.click(screen.getByRole('switch', { name: 'EU' }))
+
+    expect(screen.getByLabelText('Server')).toBeDisabled()
+  })
 })
