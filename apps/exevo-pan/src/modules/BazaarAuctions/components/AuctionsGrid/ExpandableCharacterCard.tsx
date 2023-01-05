@@ -10,6 +10,8 @@ import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
+import { useAuctions } from '../../contexts/useAuctions'
+import { getSimilarCharacterFilters } from './utils'
 
 const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
   const { characterData } = props
@@ -21,6 +23,8 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
     () => permalinkResolver({ auctionId, locale }),
     [auctionId, locale],
   )
+
+  const { dispatch } = useAuctions()
 
   const [isExpanded, setExpanded] = useState(false)
   const [, setAuctionIdUrl] = useSyncUrlState<number | undefined>({
@@ -66,9 +70,13 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
                 onSelect: copyLinkAction,
               },
               {
-                /* @ ToDo: onSelect action */
                 label: 'Find similar',
                 icon: SearchIcon,
+                onSelect: () =>
+                  dispatch({
+                    type: 'SET_SIMILAR_FILTERS',
+                    filterOptions: getSimilarCharacterFilters(characterData),
+                  }),
               },
             ]}
           >
