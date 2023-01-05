@@ -6,6 +6,9 @@ type UseFilterServersProps = {
   serverData: Record<string, ServerObject>
 }
 
+const satisfiesSet = <T,>(set: Set<T>, value: T): boolean =>
+  set.size === 0 || set.has(value)
+
 const useFilterServers = ({
   allServerOptions,
   filterState,
@@ -16,23 +19,19 @@ const useFilterServers = ({
       allServerOptions.filter(({ name }) => {
         const serverOptionData = serverData[name]
 
-        if (
-          filterState.battleye.size &&
-          !filterState.battleye.has(serverOptionData.battleye)
-        ) {
+        if (!satisfiesSet(filterState.battleye, serverOptionData.battleye)) {
+          return false
+        }
+
+        if (!satisfiesSet(filterState.pvp, serverOptionData.pvpType.type)) {
           return false
         }
 
         if (
-          filterState.pvp.size &&
-          !filterState.pvp.has(serverOptionData.pvpType.type)
-        ) {
-          return false
-        }
-
-        if (
-          filterState.location.size &&
-          !filterState.location.has(serverOptionData.serverLocation.type)
+          !satisfiesSet(
+            filterState.location,
+            serverOptionData.serverLocation.type,
+          )
         ) {
           return false
         }
