@@ -413,6 +413,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 }),
               [],
             )}
+            disabled={currentServerOptions.length === 0}
             onKeyPress={blurOnEnter}
             enterKeyHint="done"
           />
