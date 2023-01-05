@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo, useState } from 'react'
 import { useRouter } from 'next/router'
 import { Table } from 'components/Atoms'
-import CharacterModal from 'components/CharacterCard/CharacterModal'
+import CharacterModal from 'components/CharacterModal'
 import { permalinkResolver } from 'utils'
 import { ListProps } from './types'
 

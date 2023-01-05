@@ -38,7 +38,7 @@ const useHeaderPopup = <T extends Element>(
           position: 'absolute',
           ...getPostion(),
         }}
-        className="overflow-hidden"
+        className="border-1 border-separator/50 overflow-hidden border-solid"
         noCloseButton
       >
         {children}

@@ -12,6 +12,12 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
         filterState: { ...state.filterState, ...action.filterOptions },
       }
 
+    case 'SET_SIMILAR_FILTERS':
+      return {
+        ...state,
+        filterState: { ...DEFAULT_FILTER_OPTIONS, ...action.filterOptions },
+      }
+
     case 'TOGGLE_FILTER':
       return {
         ...state,

@@ -191,7 +191,6 @@ export default {
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
     highlightLabelText: '¡Destaque su subasta!',
-    expand: 'Expandir para ver todos los detalles de la subasta',
     CharacterModal: {
       /* @ ToDo: i18n */
       moreInfo: 'More informations',

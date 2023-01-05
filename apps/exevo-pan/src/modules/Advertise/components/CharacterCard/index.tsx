@@ -40,7 +40,6 @@ const CharacterCard = () => {
       >
         {selectedCharacter ? (
           <BaseCharacterCard
-            expandable={currentStep === 0}
             key={selectedCharacter.id}
             characterData={selectedCharacter}
             className={clsx(currentStep >= 1 && styles.miniCard)}

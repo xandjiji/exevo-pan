@@ -23,6 +23,11 @@ export default {
     },
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
     changeFilters: 'Mudar filtros',
+    ExpandableCharacterCard: {
+      details: 'Detalhes',
+      copyLink: 'Copiar link',
+      findSimilar: 'Buscar similares',
+    },
   },
   FilterDrawer: {
     title: 'Filtros',

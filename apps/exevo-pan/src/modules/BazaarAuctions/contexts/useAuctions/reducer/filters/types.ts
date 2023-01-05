@@ -23,6 +23,10 @@ export type FilterAction =
       filterOptions: Partial<FilterOptions>
     }
   | {
+      type: 'SET_SIMILAR_FILTERS'
+      filterOptions: Partial<FilterOptions>
+    }
+  | {
       type: 'TOGGLE_FILTER'
       key: ExtractFilterByType<boolean>
     }

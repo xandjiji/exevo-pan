@@ -23,6 +23,7 @@ const Item = ({
     className={clsx(
       'disabled:bg-separator/50 text-onSurface flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
       highlighted && 'bg-primaryVariant',
+      !props.disabled && 'cursor-pointer',
       className,
     )}
     {...props}
@@ -85,8 +86,8 @@ const Menu = ({
 
   return (
     <Popover
-      offset={[0, 8]}
-      placement="left-start"
+      offset={[-8, 8]}
+      placement="bottom-end"
       trigger="none"
       visible={open}
       content={
@@ -96,7 +97,7 @@ const Menu = ({
           role="menu"
           aria-labelledby={buttonId}
           aria-activedescendant={menuItemId(highlightedIndex)}
-          className="card animate-rushIn text-tsm text-onSurface w-fit overflow-hidden rounded p-0"
+          className="card border-1 border-separator/50 animate-rushIn text-tsm text-onSurface w-fit rounded border-solid px-0 py-0.5 shadow-lg"
           onMouseLeave={() => dispatch({ type: 'RESET_HIGHLIGHT' })}
           onKeyPress={handleKeyboardSearch}
           onKeyDown={(e) => {
@@ -118,23 +119,25 @@ const Menu = ({
           )}
 
           <div>
-            {items.map(({ onSelect, ...itemProps }, index) => (
-              <Item
-                key={itemProps['aria-label'] ?? itemProps.label}
-                id={menuItemId(index)}
-                tabIndex={-1}
-                highlighted={index === highlightedIndex}
-                onMouseMove={() =>
-                  dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
-                }
-                onClick={() => {
-                  onSelect?.()
-                  closeAction()
-                }}
-                noIconPaddings={noIconPaddings}
-                {...itemProps}
-              />
-            ))}
+            {items.map(
+              ({ onSelect, keepOpenAfterSelection, ...itemProps }, index) => (
+                <Item
+                  key={itemProps['aria-label'] ?? itemProps.label}
+                  id={menuItemId(index)}
+                  tabIndex={-1}
+                  highlighted={index === highlightedIndex}
+                  onMouseMove={() =>
+                    dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
+                  }
+                  onClick={() => {
+                    onSelect?.()
+                    if (!keepOpenAfterSelection) closeAction()
+                  }}
+                  noIconPaddings={noIconPaddings}
+                  {...itemProps}
+                />
+              ),
+            )}
           </div>
         </div>
       }
@@ -148,7 +151,7 @@ const Menu = ({
         onClick={() => dispatch({ type: 'SET_OPEN', open: !open })}
         onKeyDown={handleKeyboardNavigation}
         className={clsx(
-          'clickable grid cursor-pointer place-items-center rounded p-0.5',
+          'clickable relative grid cursor-pointer place-items-center rounded p-0.5',
           open && 'shadow-inner hover:shadow-inner',
         )}
       >

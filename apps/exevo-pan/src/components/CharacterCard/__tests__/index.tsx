@@ -1,5 +1,4 @@
 import { screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
 import { renderWithProviders, randomDataset } from 'utils/test'
 import { formatNumberWithCommas } from 'utils'
 import * as imbuement from 'data-dictionary/dist/dictionaries/imbuement'
@@ -129,27 +128,6 @@ describe('<CharacterCard />', () => {
       expect(screen.getByText('Highlight your auction!')).toBeInTheDocument()
     },
   )
-
-  test('the character card should be able to be expanded', () => {
-    const [character] = characterList
-    renderWithProviders(<CharacterCard characterData={character} expandable />)
-
-    const expandButton = screen.getByRole('button', {
-      name: 'Expand for full auction details',
-    })
-
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-
-    userEvent.click(expandButton)
-    expect(screen.getByRole('dialog')).toBeInTheDocument()
-
-    const [closeDialogButton] = screen.getAllByRole('button', {
-      name: 'Close dialog',
-    })
-    userEvent.click(closeDialogButton)
-
-    expect(screen.queryByRole('dialog')).not.toBeInTheDocument()
-  })
 
   test('tc invested should be hidden', () => {
     const [character] = characterList

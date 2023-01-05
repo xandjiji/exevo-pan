@@ -23,6 +23,12 @@ export default {
     },
     noAuctionFound: 'Przepraszam, nie znaleziono aukcji',
     changeFilters: 'Zmień filtry',
+    /* @ ToDo: i18n */
+    ExpandableCharacterCard: {
+      details: 'Details',
+      copyLink: 'Copy link',
+      findSimilar: 'Find similar',
+    },
   },
   FilterDrawer: {
     title: 'Filtry',

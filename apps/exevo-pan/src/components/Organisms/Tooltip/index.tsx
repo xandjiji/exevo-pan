@@ -16,7 +16,10 @@ const Tooltip = ({
     content={
       <div
         role="tooltip"
-        className={clsx('card text-tsm text-center', className)}
+        className={clsx(
+          'card border-1 border-separator/50 text-tsm border-solid text-center',
+          className,
+        )}
         {...props}
       >
         {content}

@@ -8,10 +8,7 @@ export const HeadWrapper = ({
   className,
   ...props
 }: JSX.IntrinsicElements['div']) => (
-  <div
-    className={clsx('mb-4 flex items-start gap-1.5', className)}
-    {...props}
-  />
+  <div className={clsx('mb-4 flex items-start gap-3', className)} {...props} />
 )
 
 const Head = ({

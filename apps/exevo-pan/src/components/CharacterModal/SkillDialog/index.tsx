@@ -2,14 +2,13 @@ import { useState, useMemo, useCallback } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import { Dialog, Slider, Chip, Text } from 'components/Atoms'
+import { Dialog, Slider, Chip, Text, SkillBar } from 'components/Atoms'
 import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks, skillAfterLoyalty } from 'utils'
 import { ExternalIcon } from 'assets/svgs'
 import { routes } from 'Constants'
 import { parameterNames } from 'modules/Calculators/modules/ExerciseWeapons/CharacterConfig/constants'
-import SkillBar from '../../Parts/SkillBar'
 import {
   getInitialSkill,
   calculateMinimumSkillCost,
