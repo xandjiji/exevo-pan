@@ -24,6 +24,11 @@ export default {
     },
     noAuctionFound: 'Sorry, no auction was found',
     changeFilters: 'Change filters',
+    ExpandableCharacterCard: {
+      details: 'Details',
+      copyLink: 'Copy link',
+      findSimilar: 'Find similar',
+    },
   },
   FilterDrawer: {
     title: 'Filters',

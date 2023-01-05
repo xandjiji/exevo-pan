@@ -1,5 +1,6 @@
 /* eslint-disable react/require-default-props */
 import { useRef, useMemo, useState, useCallback } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { CopyButton } from 'components/Atoms'
 import { Menu } from 'components/Organisms'
@@ -14,6 +15,10 @@ import { useAuctions } from '../../contexts/useAuctions'
 import { getSimilarCharacterFilters } from './utils'
 
 const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
+  const {
+    translations: { homepage },
+  } = useTranslations()
+
   const { characterData } = props
   const auctionId = characterData.id
 
@@ -56,21 +61,21 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
       <CharacterCard
         cornerElement={
           <Menu
-            /* @ ToDo: i18n */
             items={[
               {
-                label: 'Details',
+                label: homepage.AuctionsGrid.ExpandableCharacterCard.details,
                 icon: ExpandIcon,
                 onSelect: expandCard,
               },
               {
-                label: 'Copy link',
+                label: homepage.AuctionsGrid.ExpandableCharacterCard.copyLink,
                 icon: CopyButtonIcon,
                 keepOpenAfterSelection: true,
                 onSelect: copyLinkAction,
               },
               {
-                label: 'Find similar',
+                label:
+                  homepage.AuctionsGrid.ExpandableCharacterCard.findSimilar,
                 icon: SearchIcon,
                 onSelect: () =>
                   dispatch({

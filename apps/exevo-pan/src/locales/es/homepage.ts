@@ -24,6 +24,12 @@ export default {
     },
     noAuctionFound: 'Disculpa, no se encontró ninguna subasta',
     changeFilters: 'Cambiar filtros',
+    /* @ ToDo: i18n */
+    ExpandableCharacterCard: {
+      details: 'Details',
+      copyLink: 'Copy link',
+      findSimilar: 'Find similar',
+    },
   },
   FilterDrawer: {
     title: 'Filtros',
