@@ -20,6 +20,7 @@ import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter, proTagsSet } from 'utils'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useAuctions } from '../../contexts/useAuctions'
+import useFilterServers from './useFilterServers'
 import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import useRareItemSet from './useRareItemSet'
@@ -50,7 +51,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     activeServers,
     serverData,
-    serverOptions: serverOptionsProp,
+    serverOptions: allServerOptions,
     rareItemData,
     imbuementOptions,
     charmOptions,
@@ -63,36 +64,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   } = useDrawerFields()
   const { filterState, activeFilterCount, isHistory, dispatch } = useAuctions()
 
-  const serverOptions: typeof serverOptionsProp = useMemo(
-    () =>
-      serverOptionsProp.filter(({ name }) => {
-        const serverOptionData = serverData[name]
-
-        if (
-          filterState.battleye.size &&
-          !filterState.battleye.has(serverOptionData.battleye)
-        ) {
-          return false
-        }
-
-        if (
-          filterState.pvp.size &&
-          !filterState.pvp.has(serverOptionData.pvpType.type)
-        ) {
-          return false
-        }
-
-        if (
-          filterState.location.size &&
-          !filterState.location.has(serverOptionData.serverLocation.type)
-        ) {
-          return false
-        }
-
-        return true
-      }),
-    [serverOptionsProp, filterState],
-  )
+  const serverOptions = useFilterServers({
+    allServerOptions,
+    filterState,
+    serverData,
+  })
 
   const currentServerOptions = useMemo(
     () =>
