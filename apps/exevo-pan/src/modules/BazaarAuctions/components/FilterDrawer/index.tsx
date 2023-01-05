@@ -49,7 +49,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
   const {
     activeServers,
-    serverOptions,
+    serverData,
+    serverOptions: serverOptionsProp,
     rareItemData,
     imbuementOptions,
     charmOptions,
@@ -61,6 +62,37 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     storeMountValues,
   } = useDrawerFields()
   const { filterState, activeFilterCount, isHistory, dispatch } = useAuctions()
+
+  const serverOptions: typeof serverOptionsProp = useMemo(
+    () =>
+      serverOptionsProp.filter(({ name }) => {
+        const serverOptionData = serverData[name]
+
+        if (
+          filterState.battleye.size &&
+          !filterState.battleye.has(serverOptionData.battleye)
+        ) {
+          return false
+        }
+
+        if (
+          filterState.pvp.size &&
+          !filterState.pvp.has(serverOptionData.pvpType.type)
+        ) {
+          return false
+        }
+
+        if (
+          filterState.location.size &&
+          !filterState.location.has(serverOptionData.serverLocation.type)
+        ) {
+          return false
+        }
+
+        return true
+      }),
+    [serverOptionsProp, filterState],
+  )
 
   const currentServerOptions = useMemo(
     () =>
