@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import { useMemo, useReducer, useCallback, useId } from 'react'
 import { Popover } from 'components/Atoms'
+import { ChevronDownIcon } from 'assets/svgs'
 import { useEscToClose, useOnClickOutside, useLockBody } from 'hooks'
 import Reducer from './reducer'
 import {
@@ -50,6 +51,9 @@ const Menu = ({
   titleElement,
   titleElementIconSpacing = true,
   items,
+  placement = 'bottom-end',
+  offset = [-8, 8],
+  variant = 'icon',
   children,
   ...props
 }: MenuProps) => {
@@ -86,8 +90,8 @@ const Menu = ({
 
   return (
     <Popover
-      offset={[-8, 8]}
-      placement="bottom-end"
+      offset={offset}
+      placement={placement}
       trigger="none"
       visible={open}
       content={
@@ -151,11 +155,17 @@ const Menu = ({
         onClick={() => dispatch({ type: 'SET_OPEN', open: !open })}
         onKeyDown={handleKeyboardNavigation}
         className={clsx(
-          'clickable relative grid cursor-pointer place-items-center rounded p-0.5',
-          open && 'shadow-inner hover:shadow-inner',
+          variant === 'icon' &&
+            'clickable relative grid cursor-pointer place-items-center rounded p-0.5',
+          variant === 'icon' && open && 'shadow-inner hover:shadow-inner',
+          variant === 'button' &&
+            'clickable bg-primary text-s text-onPrimary relative flex cursor-pointer items-center gap-1.5 rounded-md py-1.5 px-3 font-bold shadow-md',
         )}
       >
         {children}
+        {variant === 'button' && (
+          <ChevronDownIcon className="fill-onPrimary -mr-1.5" />
+        )}
       </button>
     </Popover>
   )
