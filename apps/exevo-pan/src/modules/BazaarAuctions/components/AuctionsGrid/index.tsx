@@ -5,6 +5,7 @@ import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
+import FilterControl from './FilterControl'
 import ExpandableCharacterCard from './ExpandableCharacterCard'
 import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
@@ -106,10 +107,12 @@ const AuctionsGrid = () => {
         />
       </ClientComponent>
 
-      <div className="flex flex-col items-center">
+      <div className="inner-container grid gap-4 py-4">
+        <FilterControl />
+
         <div
           id="character-grid"
-          className="inner-container grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 py-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
+          className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
         >
           {shouldDisplayHighlightedAuctions &&
             highlightedAuctions.map((auction) => (
