@@ -47,13 +47,9 @@ const FilterControl = ({
 
       {notDefault('biddedOnly') && (
         <Chip
-          onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { biddedOnly: false },
-            })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'biddedOnly' })}
         >
+          {/* @ ToDo: i18n */}
           Bidded only
         </Chip>
       )}
@@ -82,11 +78,7 @@ const FilterControl = ({
         return (
           <Chip
             onClose={() =>
-              dispatch({
-                type: 'TOGGLE_FILTER_SET',
-                key: 'pvp',
-                value: type,
-              })
+              dispatch({ type: 'TOGGLE_FILTER_SET', key: 'pvp', value: type })
             }
           >
             {Icons.Pvps[typeName]()}
@@ -98,10 +90,7 @@ const FilterControl = ({
       {[...filterState.battleye].map((value) => (
         <Chip
           onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { battleye: new Set([]) },
-            })
+            dispatch({ type: 'TOGGLE_FILTER_SET', key: 'battleye', value })
           }
         >
           <Icons.Battleye color={value ? 'battleGreen' : 'battleYellow'} />
@@ -143,23 +132,14 @@ const FilterControl = ({
       ))}
 
       {notDefault('dummy') && (
-        <Chip
-          onClose={() =>
-            dispatch({ type: 'SET_FILTERS', filterOptions: { dummy: false } })
-          }
-        >
+        <Chip onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'dummy' })}>
           Training dummy
         </Chip>
       )}
 
       {notDefault('goldPouch') && (
         <Chip
-          onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { goldPouch: false },
-            })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'goldPouch' })}
         >
           Gold pouch
         </Chip>
@@ -167,12 +147,7 @@ const FilterControl = ({
 
       {notDefault('hireling') && (
         <Chip
-          onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { hireling: false },
-            })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'hireling' })}
         >
           Hirelings
         </Chip>
@@ -181,10 +156,7 @@ const FilterControl = ({
       {notDefault('transferAvailable') && (
         <Chip
           onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { transferAvailable: false },
-            })
+            dispatch({ type: 'SET_DEFAULT', key: 'transferAvailable' })
           }
         >
           Regular world transfer
@@ -194,10 +166,7 @@ const FilterControl = ({
       {notDefault('charmExpansion') && (
         <Chip
           onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { charmExpansion: false },
-            })
+            dispatch({ type: 'SET_DEFAULT', key: 'charmExpansion' })
           }
         >
           Charm Expansion
@@ -206,12 +175,7 @@ const FilterControl = ({
 
       {notDefault('preySlot') && (
         <Chip
-          onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { preySlot: false },
-            })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'preySlot' })}
         >
           Prey Slot
         </Chip>
@@ -219,12 +183,7 @@ const FilterControl = ({
 
       {notDefault('huntingSlot') && (
         <Chip
-          onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { huntingSlot: false },
-            })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'huntingSlot' })}
         >
           Hunting Task Slot
         </Chip>
@@ -233,10 +192,7 @@ const FilterControl = ({
       {notDefault('imbuementShrine') && (
         <Chip
           onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { imbuementShrine: false },
-            })
+            dispatch({ type: 'SET_DEFAULT', key: 'imbuementShrine' })
           }
         >
           Imbuement Shrine
@@ -245,35 +201,21 @@ const FilterControl = ({
 
       {notDefault('rewardShrine') && (
         <Chip
-          onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { rewardShrine: false },
-            })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'rewardShrine' })}
         >
           Reward Shrine
         </Chip>
       )}
 
       {notDefault('mailbox') && (
-        <Chip
-          onClose={() =>
-            dispatch({
-              type: 'SET_FILTERS',
-              filterOptions: { mailbox: false },
-            })
-          }
-        >
+        <Chip onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'mailbox' })}>
           Mailbox
         </Chip>
       )}
 
       {notDefault('minLevel') && (
         <Chip
-          onClose={() =>
-            dispatch({ type: 'SET_FILTERS', filterOptions: { minLevel: 0 } })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'minLevel' })}
         >
           Min level:{' '}
           <strong>{formatNumberWithCommas(filterState.minLevel)}</strong>
@@ -282,9 +224,7 @@ const FilterControl = ({
 
       {notDefault('maxLevel') && (
         <Chip
-          onClose={() =>
-            dispatch({ type: 'SET_FILTERS', filterOptions: { maxLevel: 0 } })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'maxLevel' })}
         >
           Max level:{' '}
           <strong>{formatNumberWithCommas(filterState.maxLevel)}</strong>
@@ -312,9 +252,7 @@ const FilterControl = ({
       {notDefault('maxSkill') &&
         [...filterState.skillKey].map((skillKey) => (
           <Chip
-            onClose={() =>
-              dispatch({ type: 'SET_FILTERS', filterOptions: { maxSkill: 0 } })
-            }
+            onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'maxSkill' })}
           >
             {Icons.Skill[skillKey as keyof typeof Icons.Skill]()}
             {capitalizeFirstLetter(skillKey)}:{' '}
@@ -324,9 +262,7 @@ const FilterControl = ({
 
       {notDefault('tcInvested') && (
         <Chip
-          onClose={() =>
-            dispatch({ type: 'SET_FILTERS', filterOptions: { tcInvested: 0 } })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'tcInvested' })}
         >
           {/* @ ToDo: i18n */}
           <Text.TibiaCoin
