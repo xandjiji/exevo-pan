@@ -1,8 +1,9 @@
 import clsx from 'clsx'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { Menu } from 'components/Organisms'
-import { Chip } from 'components/Atoms'
+import { Chip, Text } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
+import { formatNumberWithCommas } from 'utils'
 import { useAuctions } from '../../../contexts/useAuctions'
 import Icons from './icons'
 import { getInfo } from './utils'
@@ -139,6 +140,168 @@ const FilterControl = ({
           {server}
         </Chip>
       ))}
+
+      {filterState.dummy && (
+        <Chip
+          onClose={() =>
+            dispatch({ type: 'SET_FILTERS', filterOptions: { dummy: false } })
+          }
+        >
+          Training dummy
+        </Chip>
+      )}
+
+      {filterState.goldPouch && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { goldPouch: false },
+            })
+          }
+        >
+          Gold pouch
+        </Chip>
+      )}
+
+      {filterState.hireling && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { hireling: false },
+            })
+          }
+        >
+          Hirelings
+        </Chip>
+      )}
+
+      {filterState.transferAvailable && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { transferAvailable: false },
+            })
+          }
+        >
+          Regular world transfer
+        </Chip>
+      )}
+
+      {filterState.charmExpansion && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { charmExpansion: false },
+            })
+          }
+        >
+          Charm Expansion
+        </Chip>
+      )}
+
+      {filterState.preySlot && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { preySlot: false },
+            })
+          }
+        >
+          Prey Slot
+        </Chip>
+      )}
+
+      {filterState.huntingSlot && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { huntingSlot: false },
+            })
+          }
+        >
+          Hunting Task Slot
+        </Chip>
+      )}
+
+      {filterState.imbuementShrine && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { imbuementShrine: false },
+            })
+          }
+        >
+          Imbuement Shrine
+        </Chip>
+      )}
+
+      {filterState.rewardShrine && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { rewardShrine: false },
+            })
+          }
+        >
+          Reward Shrine
+        </Chip>
+      )}
+
+      {filterState.mailbox && (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { mailbox: false },
+            })
+          }
+        >
+          Mailbox
+        </Chip>
+      )}
+
+      {filterState.minLevel > 0 && (
+        <Chip
+          onClose={() =>
+            dispatch({ type: 'SET_FILTERS', filterOptions: { minLevel: 0 } })
+          }
+        >
+          Min level: <strong>{filterState.minLevel}</strong>
+        </Chip>
+      )}
+
+      {filterState.maxLevel > 0 && (
+        <Chip
+          onClose={() =>
+            dispatch({ type: 'SET_FILTERS', filterOptions: { maxLevel: 0 } })
+          }
+        >
+          Max level: <strong>{filterState.maxLevel}</strong>
+        </Chip>
+      )}
+
+      {filterState.tcInvested > 0 && (
+        <Chip
+          onClose={() =>
+            dispatch({ type: 'SET_FILTERS', filterOptions: { tcInvested: 0 } })
+          }
+        >
+          {/* @ ToDo: i18n */}
+          <Text.TibiaCoin
+            className="-mr-0.5"
+            value={filterState.tcInvested}
+          />{' '}
+          invested
+        </Chip>
+      )}
     </section>
   )
 }
