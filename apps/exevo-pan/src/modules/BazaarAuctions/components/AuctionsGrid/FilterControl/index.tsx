@@ -399,6 +399,15 @@ const FilterControl = ({
           {common.SpecialTags[tag]}
         </Chip>
       ))}
+
+      {notDefault('rareNick') && (
+        <Chip
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'rareNick' })}
+        >
+          {/* @ ToDo: i18n */}
+          Rare nickname
+        </Chip>
+      )}
     </section>
   )
 }
