@@ -356,6 +356,20 @@ const FilterControl = ({
         </Chip>
       ))}
 
+      {[...filterState.charmsSet].map((charm) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'charmsSet',
+              value: charm,
+            })
+          }
+        >
+          ♉ {charm}
+        </Chip>
+      ))}
+
       {[...filterState.questSet].map((quest) => (
         <Chip
           onClose={() =>
