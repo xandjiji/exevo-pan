@@ -45,3 +45,7 @@ export type FilterAction =
   | {
       type: 'RESET_FILTERS'
     }
+  | {
+      type: 'SET_DEFAULT'
+      key: keyof FilterOptions
+    }

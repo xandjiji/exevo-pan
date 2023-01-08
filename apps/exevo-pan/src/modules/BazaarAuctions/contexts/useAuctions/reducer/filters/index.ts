@@ -66,6 +66,15 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
     case 'RESET_FILTERS':
       return { ...state, filterState: DEFAULT_FILTER_OPTIONS }
 
+    case 'SET_DEFAULT':
+      return {
+        ...state,
+        filterState: {
+          ...state.filterState,
+          [action.key]: DEFAULT_FILTER_OPTIONS[action.key],
+        },
+      }
+
     default:
       return state
   }

@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
-import { skills } from 'data-dictionary/dist/dictionaries/skills'
 import { Menu } from 'components/Organisms'
 import { Chip, Text } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
@@ -314,11 +313,7 @@ const FilterControl = ({
         [...filterState.skillKey].map((skillKey) => (
           <Chip
             onClose={() =>
-              dispatch({
-                type: 'TOGGLE_FILTER_SET',
-                key: 'skillKey',
-                value: skillKey,
-              })
+              dispatch({ type: 'SET_FILTERS', filterOptions: { maxSkill: 0 } })
             }
           >
             {Icons.Skill[skillKey as keyof typeof Icons.Skill]()}
