@@ -1,10 +1,12 @@
 import clsx from 'clsx'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import { skills } from 'data-dictionary/dist/dictionaries/skills'
 import { Menu } from 'components/Organisms'
 import { Chip, Text } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
-import { formatNumberWithCommas } from 'utils'
+import { formatNumberWithCommas, capitalizeFirstLetter } from 'utils'
 import { useAuctions } from '../../../contexts/useAuctions'
+import { useNotDefault } from './useNotDefault'
 import Icons from './icons'
 import { getInfo } from './utils'
 
@@ -13,6 +15,7 @@ const FilterControl = ({
   ...props
 }: JSX.IntrinsicElements['section']) => {
   const { activeFilterCount, filterState, dispatch } = useAuctions()
+  const notDefault = useNotDefault(filterState)
 
   return (
     <section
@@ -43,7 +46,7 @@ const FilterControl = ({
         </Menu>
       </div>
 
-      {filterState.biddedOnly && (
+      {notDefault('biddedOnly') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -93,20 +96,19 @@ const FilterControl = ({
         )
       })}
 
-      {filterState.battleye.size === 1 &&
-        [...filterState.battleye].map((value) => (
-          <Chip
-            onClose={() =>
-              dispatch({
-                type: 'SET_FILTERS',
-                filterOptions: { battleye: new Set([]) },
-              })
-            }
-          >
-            <Icons.Battleye color={value ? 'battleGreen' : 'battleYellow'} />
-            {value ? 'Green' : 'Yellow'}
-          </Chip>
-        ))}
+      {[...filterState.battleye].map((value) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: { battleye: new Set([]) },
+            })
+          }
+        >
+          <Icons.Battleye color={value ? 'battleGreen' : 'battleYellow'} />
+          {value ? 'Green' : 'Yellow'}
+        </Chip>
+      ))}
 
       {[...filterState.location].map((type) => {
         const typeName = getInfo.location(type)
@@ -141,7 +143,7 @@ const FilterControl = ({
         </Chip>
       ))}
 
-      {filterState.dummy && (
+      {notDefault('dummy') && (
         <Chip
           onClose={() =>
             dispatch({ type: 'SET_FILTERS', filterOptions: { dummy: false } })
@@ -151,7 +153,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.goldPouch && (
+      {notDefault('goldPouch') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -164,7 +166,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.hireling && (
+      {notDefault('hireling') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -177,7 +179,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.transferAvailable && (
+      {notDefault('transferAvailable') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -190,7 +192,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.charmExpansion && (
+      {notDefault('charmExpansion') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -203,7 +205,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.preySlot && (
+      {notDefault('preySlot') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -216,7 +218,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.huntingSlot && (
+      {notDefault('huntingSlot') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -229,7 +231,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.imbuementShrine && (
+      {notDefault('imbuementShrine') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -242,7 +244,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.rewardShrine && (
+      {notDefault('rewardShrine') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -255,7 +257,7 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.mailbox && (
+      {notDefault('mailbox') && (
         <Chip
           onClose={() =>
             dispatch({
@@ -268,27 +270,64 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {filterState.minLevel > 0 && (
+      {notDefault('minLevel') && (
         <Chip
           onClose={() =>
             dispatch({ type: 'SET_FILTERS', filterOptions: { minLevel: 0 } })
           }
         >
-          Min level: <strong>{filterState.minLevel}</strong>
+          Min level:{' '}
+          <strong>{formatNumberWithCommas(filterState.minLevel)}</strong>
         </Chip>
       )}
 
-      {filterState.maxLevel > 0 && (
+      {notDefault('maxLevel') && (
         <Chip
           onClose={() =>
             dispatch({ type: 'SET_FILTERS', filterOptions: { maxLevel: 0 } })
           }
         >
-          Max level: <strong>{filterState.maxLevel}</strong>
+          Max level:{' '}
+          <strong>{formatNumberWithCommas(filterState.maxLevel)}</strong>
         </Chip>
       )}
 
-      {filterState.tcInvested > 0 && (
+      {notDefault('minSkill') &&
+        [...filterState.skillKey].map((skillKey) => (
+          <Chip
+            onClose={() =>
+              dispatch({
+                type: 'TOGGLE_FILTER_SET',
+                key: 'skillKey',
+                value: skillKey,
+              })
+            }
+          >
+            {Icons.Skill[skillKey as keyof typeof Icons.Skill]()}
+            {capitalizeFirstLetter(skillKey)}:{' '}
+            <strong>{filterState.minSkill}</strong>
+            {notDefault('maxSkill') ? '(min)' : null}
+          </Chip>
+        ))}
+
+      {notDefault('maxSkill') &&
+        [...filterState.skillKey].map((skillKey) => (
+          <Chip
+            onClose={() =>
+              dispatch({
+                type: 'TOGGLE_FILTER_SET',
+                key: 'skillKey',
+                value: skillKey,
+              })
+            }
+          >
+            {Icons.Skill[skillKey as keyof typeof Icons.Skill]()}
+            {capitalizeFirstLetter(skillKey)}:{' '}
+            <strong>{filterState.maxSkill}</strong> (max)
+          </Chip>
+        ))}
+
+      {notDefault('tcInvested') && (
         <Chip
           onClose={() =>
             dispatch({ type: 'SET_FILTERS', filterOptions: { tcInvested: 0 } })

@@ -21,4 +21,11 @@ export default {
     NA: icons.NaFlag,
     BR: icons.BrFlag,
   },
+  Skill: {
+    magic: icons.Magic,
+    distance: icons.Distance,
+    club: icons.Club,
+    sword: icons.Sword,
+    axe: icons.Axe,
+  },
 }
