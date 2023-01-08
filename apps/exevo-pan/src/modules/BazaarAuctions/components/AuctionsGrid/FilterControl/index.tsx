@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import { useTranslations } from 'contexts/useTranslation'
 import { Menu } from 'components/Organisms'
 import { Chip, Text } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
@@ -13,6 +14,10 @@ const FilterControl = ({
   className,
   ...props
 }: JSX.IntrinsicElements['section']) => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const { activeFilterCount, filterState, dispatch } = useAuctions()
   const notDefault = useNotDefault(filterState)
 
@@ -217,7 +222,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'minLevel' })}
         >
-          Min level:{' '}
+          📏 Min level:{' '}
           <strong>{formatNumberWithCommas(filterState.minLevel)}</strong>
         </Chip>
       )}
@@ -226,7 +231,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'maxLevel' })}
         >
-          Max level:{' '}
+          📏 Max level:{' '}
           <strong>{formatNumberWithCommas(filterState.maxLevel)}</strong>
         </Chip>
       )}
@@ -259,19 +264,6 @@ const FilterControl = ({
             <strong>{filterState.maxSkill}</strong> (max)
           </Chip>
         ))}
-
-      {notDefault('tcInvested') && (
-        <Chip
-          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'tcInvested' })}
-        >
-          {/* @ ToDo: i18n */}
-          <Text.TibiaCoin
-            className="-mr-0.5"
-            value={filterState.tcInvested}
-          />{' '}
-          invested
-        </Chip>
-      )}
 
       {[...filterState.outfitSet].map((outfit) => (
         <Chip
@@ -326,6 +318,85 @@ const FilterControl = ({
           }
         >
           🐴 {mount}
+        </Chip>
+      ))}
+
+      {notDefault('bossPoints') && (
+        <Chip
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'bossPoints' })}
+        >
+          👺 {formatNumberWithCommas(filterState.bossPoints)} Boss points
+        </Chip>
+      )}
+
+      {notDefault('tcInvested') && (
+        <Chip
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'tcInvested' })}
+        >
+          {/* @ ToDo: i18n */}
+          <Text.TibiaCoin
+            className="-mr-0.5"
+            value={filterState.tcInvested}
+          />{' '}
+          invested
+        </Chip>
+      )}
+
+      {[...filterState.imbuementsSet].map((imbuement) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'imbuementsSet',
+              value: imbuement,
+            })
+          }
+        >
+          🪄 {imbuement}
+        </Chip>
+      ))}
+
+      {[...filterState.questSet].map((quest) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'questSet',
+              value: quest,
+            })
+          }
+        >
+          📖 {quest}
+        </Chip>
+      ))}
+
+      {[...filterState.achievementSet].map((achievement) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'achievementSet',
+              value: achievement,
+            })
+          }
+        >
+          ⭐ {achievement}
+        </Chip>
+      ))}
+
+      {/* @ ToDo: rare items */}
+
+      {[...filterState.tags].map((tag) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'tags',
+              value: tag,
+            })
+          }
+        >
+          {common.SpecialTags[tag]}
         </Chip>
       ))}
     </section>
