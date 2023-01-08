@@ -50,7 +50,7 @@ const FilterControl = ({
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'biddedOnly' })}
         >
           {/* @ ToDo: i18n */}
-          Bidded only
+          ☑️ Bidded only
         </Chip>
       )}
 
@@ -127,13 +127,13 @@ const FilterControl = ({
             })
           }
         >
-          {server}
+          🌐 {server}
         </Chip>
       ))}
 
       {notDefault('dummy') && (
         <Chip onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'dummy' })}>
-          Training dummy
+          🗿 Training dummy
         </Chip>
       )}
 
@@ -141,7 +141,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'goldPouch' })}
         >
-          Gold pouch
+          💰 Gold pouch
         </Chip>
       )}
 
@@ -149,7 +149,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'hireling' })}
         >
-          Hirelings
+          💁 Hirelings
         </Chip>
       )}
 
@@ -159,7 +159,7 @@ const FilterControl = ({
             dispatch({ type: 'SET_DEFAULT', key: 'transferAvailable' })
           }
         >
-          Regular world transfer
+          🌎 Regular world transfer
         </Chip>
       )}
 
@@ -169,7 +169,7 @@ const FilterControl = ({
             dispatch({ type: 'SET_DEFAULT', key: 'charmExpansion' })
           }
         >
-          Charm Expansion
+          🧙‍♂️ Charm Expansion
         </Chip>
       )}
 
@@ -177,7 +177,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'preySlot' })}
         >
-          Prey Slot
+          🎯 Prey Slot
         </Chip>
       )}
 
@@ -185,7 +185,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'huntingSlot' })}
         >
-          Hunting Task Slot
+          🏹 Hunting Task Slot
         </Chip>
       )}
 
@@ -195,7 +195,7 @@ const FilterControl = ({
             dispatch({ type: 'SET_DEFAULT', key: 'imbuementShrine' })
           }
         >
-          Imbuement Shrine
+          ⛲ Imbuement Shrine
         </Chip>
       )}
 
@@ -203,13 +203,13 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'rewardShrine' })}
         >
-          Reward Shrine
+          ⛲ Reward Shrine
         </Chip>
       )}
 
       {notDefault('mailbox') && (
         <Chip onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'mailbox' })}>
-          Mailbox
+          📬 Mailbox
         </Chip>
       )}
 
@@ -272,6 +272,62 @@ const FilterControl = ({
           invested
         </Chip>
       )}
+
+      {[...filterState.outfitSet].map((outfit) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'outfitSet',
+              value: outfit,
+            })
+          }
+        >
+          👕 {outfit}
+        </Chip>
+      ))}
+
+      {[...filterState.storeOutfitSet].map((outfit) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'storeOutfitSet',
+              value: outfit,
+            })
+          }
+        >
+          👕 {outfit}
+        </Chip>
+      ))}
+
+      {[...filterState.mountSet].map((mount) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'mountSet',
+              value: mount,
+            })
+          }
+        >
+          🐴 {mount}
+        </Chip>
+      ))}
+
+      {[...filterState.storeMountSet].map((mount) => (
+        <Chip
+          onClose={() =>
+            dispatch({
+              type: 'TOGGLE_FILTER_SET',
+              key: 'storeMountSet',
+              value: mount,
+            })
+          }
+        >
+          🐴 {mount}
+        </Chip>
+      ))}
     </section>
   )
 }
