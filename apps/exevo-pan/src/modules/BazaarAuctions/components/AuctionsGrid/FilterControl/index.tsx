@@ -4,6 +4,7 @@ import { Menu } from 'components/Organisms'
 import { Chip } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
 import { useAuctions } from '../../../contexts/useAuctions'
+import Icons from './icons'
 import { getInfo } from './utils'
 
 const FilterControl = ({
@@ -17,7 +18,7 @@ const FilterControl = ({
       className={clsx(className, 'flex flex-wrap items-center gap-2')}
       {...props}
     >
-      <div className={clsx(activeFilterCount > 0 && 'mr-1 mb-1')}>
+      <div className={clsx(activeFilterCount > 0 && 'mr-1')}>
         <Menu
           offset={[0, 8]}
           placement="bottom-start"
@@ -54,33 +55,42 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {[...filterState.vocation].map((vocationId) => (
-        <Chip
-          onClose={() =>
-            dispatch({
-              type: 'TOGGLE_FILTER_SET',
-              key: 'vocation',
-              value: vocationId,
-            })
-          }
-        >
-          {vocation.getVocationName(vocationId)}
-        </Chip>
-      ))}
+      {[...filterState.vocation].map((vocationId) => {
+        const vocationName = vocation.getVocationName(vocationId)
 
-      {[...filterState.pvp].map((type) => (
-        <Chip
-          onClose={() =>
-            dispatch({
-              type: 'TOGGLE_FILTER_SET',
-              key: 'pvp',
-              value: type,
-            })
-          }
-        >
-          {getInfo.pvp(type)}
-        </Chip>
-      ))}
+        return (
+          <Chip
+            onClose={() =>
+              dispatch({
+                type: 'TOGGLE_FILTER_SET',
+                key: 'vocation',
+                value: vocationId,
+              })
+            }
+          >
+            {Icons.Vocations[vocationName]()}
+            {vocationName}
+          </Chip>
+        )
+      })}
+
+      {[...filterState.pvp].map((type) => {
+        const typeName = getInfo.pvp(type)
+        return (
+          <Chip
+            onClose={() =>
+              dispatch({
+                type: 'TOGGLE_FILTER_SET',
+                key: 'pvp',
+                value: type,
+              })
+            }
+          >
+            {Icons.Pvps[typeName]()}
+            {typeName}
+          </Chip>
+        )
+      })}
 
       {filterState.battleye.size === 1 &&
         [...filterState.battleye].map((value) => (
@@ -92,23 +102,29 @@ const FilterControl = ({
               })
             }
           >
+            <Icons.Battleye color={value ? 'battleGreen' : 'battleYellow'} />
             {value ? 'Green' : 'Yellow'}
           </Chip>
         ))}
 
-      {[...filterState.location].map((type) => (
-        <Chip
-          onClose={() =>
-            dispatch({
-              type: 'TOGGLE_FILTER_SET',
-              key: 'location',
-              value: type,
-            })
-          }
-        >
-          {getInfo.location(type)}
-        </Chip>
-      ))}
+      {[...filterState.location].map((type) => {
+        const typeName = getInfo.location(type)
+
+        return (
+          <Chip
+            onClose={() =>
+              dispatch({
+                type: 'TOGGLE_FILTER_SET',
+                key: 'location',
+                value: type,
+              })
+            }
+          >
+            {Icons.Location[typeName]()}
+            {typeName}
+          </Chip>
+        )
+      })}
 
       {[...filterState.serverSet].map((server) => (
         <Chip
