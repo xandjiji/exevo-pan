@@ -97,7 +97,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     key: 'minSkill',
     controlledValue: filterState.minSkill,
   })
-  const [maxSkill, setMaxSkill] = useDebouncedFilter({
+  const [, setMaxSkill] = useDebouncedFilter({
     key: 'maxSkill',
     controlledValue: filterState.maxSkill,
   })

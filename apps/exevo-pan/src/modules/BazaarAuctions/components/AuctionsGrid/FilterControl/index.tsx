@@ -21,7 +21,7 @@ const FilterControl = ({
     translations: { common },
   } = useTranslations()
 
-  const { rareItemData, imbuementOptions, charmOptions } = useDrawerFields()
+  const { imbuementOptions, charmOptions } = useDrawerFields()
   const { activeFilterCount, filterState, dispatch } = useAuctions()
   const notDefault = useNotDefault(filterState)
 
