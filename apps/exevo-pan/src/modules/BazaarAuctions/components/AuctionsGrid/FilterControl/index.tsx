@@ -1,8 +1,9 @@
 import clsx from 'clsx'
+import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { useTranslations } from 'contexts/useTranslation'
 import { Menu } from 'components/Organisms'
-import { Chip, Text } from 'components/Atoms'
+import { Chip, Text, Checkbox } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
 import { formatNumberWithCommas, capitalizeFirstLetter } from 'utils'
 import { useAuctions } from '../../../contexts/useAuctions'
@@ -55,7 +56,7 @@ const FilterControl = ({
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'biddedOnly' })}
         >
           {/* @ ToDo: i18n */}
-          ☑️ Bidded only
+          <Checkbox checked disabled /> Bidded only
         </Chip>
       )}
 
@@ -132,7 +133,7 @@ const FilterControl = ({
             })
           }
         >
-          🌐 {server}
+          {server}
         </Chip>
       ))}
 
@@ -218,50 +219,65 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {notDefault('minLevel') && (
+      {(notDefault('minLevel') || notDefault('maxLevel')) && (
         <Chip
-          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'minLevel' })}
+          onClose={() =>
+            dispatch({
+              type: 'SET_FILTERS',
+              filterOptions: {
+                minLevel: DEFAULT_FILTER_OPTIONS.minLevel,
+                maxLevel: DEFAULT_FILTER_OPTIONS.maxLevel,
+              },
+            })
+          }
         >
-          📏 Min level:{' '}
-          <strong>{formatNumberWithCommas(filterState.minLevel)}</strong>
-        </Chip>
-      )}
-
-      {notDefault('maxLevel') && (
-        <Chip
-          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'maxLevel' })}
-        >
-          📏 Max level:{' '}
-          <strong>{formatNumberWithCommas(filterState.maxLevel)}</strong>
+          📏 {notDefault('minLevel') && notDefault('maxLevel') && 'Level'}
+          {notDefault('minLevel') && !notDefault('maxLevel') && 'Min level'}
+          {!notDefault('minLevel') && notDefault('maxLevel') && 'Max level'}:
+          <strong>
+            {notDefault('minLevel') &&
+              notDefault('maxLevel') &&
+              `${formatNumberWithCommas(
+                filterState.minLevel,
+              )}~${formatNumberWithCommas(filterState.maxLevel)}`}
+            {notDefault('minLevel') &&
+              !notDefault('maxLevel') &&
+              formatNumberWithCommas(filterState.minLevel)}
+            {!notDefault('minLevel') &&
+              notDefault('maxLevel') &&
+              formatNumberWithCommas(filterState.maxLevel)}
+          </strong>
         </Chip>
       )}
 
       {notDefault('minSkill') &&
         [...filterState.skillKey].map((skillKey) => (
           <Chip
-            onClose={() =>
-              dispatch({
-                type: 'TOGGLE_FILTER_SET',
-                key: 'skillKey',
-                value: skillKey,
-              })
-            }
+            onClose={() => {
+              if (filterState.skillKey.size === 1) {
+                dispatch({
+                  type: 'SET_FILTERS',
+                  filterOptions: {
+                    skillKey: DEFAULT_FILTER_OPTIONS.skillKey,
+                    minSkill: DEFAULT_FILTER_OPTIONS.minSkill,
+                    maxSkill: DEFAULT_FILTER_OPTIONS.maxSkill,
+                  },
+                })
+              } else {
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'skillKey',
+                  value: skillKey,
+                })
+              }
+            }}
           >
             {Icons.Skill[skillKey as keyof typeof Icons.Skill]()}
             {capitalizeFirstLetter(skillKey)}:{' '}
-            <strong>{filterState.minSkill}</strong>
-            {notDefault('maxSkill') ? '(min)' : null}
-          </Chip>
-        ))}
-
-      {notDefault('maxSkill') &&
-        [...filterState.skillKey].map((skillKey) => (
-          <Chip
-            onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'maxSkill' })}
-          >
-            {Icons.Skill[skillKey as keyof typeof Icons.Skill]()}
-            {capitalizeFirstLetter(skillKey)}:{' '}
-            <strong>{filterState.maxSkill}</strong> (max)
+            <strong>
+              {filterState.minSkill}
+              {notDefault('maxSkill') ? `~${filterState.maxSkill}` : null}
+            </strong>
           </Chip>
         ))}
 
