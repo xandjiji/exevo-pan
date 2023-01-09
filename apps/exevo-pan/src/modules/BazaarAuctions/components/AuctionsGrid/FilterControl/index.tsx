@@ -6,6 +6,7 @@ import { Menu } from 'components/Organisms'
 import { Chip, Text, Checkbox } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
 import { formatNumberWithCommas, capitalizeFirstLetter } from 'utils'
+import { useDrawerFields } from '../../../contexts/useDrawerFields'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { useNotDefault } from './useNotDefault'
 import * as S from './atoms'
@@ -20,6 +21,7 @@ const FilterControl = ({
     translations: { common },
   } = useTranslations()
 
+  const { rareItemData, imbuementOptions, charmOptions } = useDrawerFields()
   const { activeFilterCount, filterState, dispatch } = useAuctions()
   const notDefault = useNotDefault(filterState)
 
@@ -359,33 +361,52 @@ const FilterControl = ({
         </Chip>
       )}
 
-      {[...filterState.imbuementsSet].map((imbuement) => (
+      {imbuementOptions.length === filterState.imbuementsSet.size ? (
         <Chip
           onClose={() =>
-            dispatch({
-              type: 'TOGGLE_FILTER_SET',
-              key: 'imbuementsSet',
-              value: imbuement,
-            })
+            dispatch({ type: 'SET_DEFAULT', key: 'imbuementsSet' })
           }
         >
-          🪄 {imbuement}
+          {/* @ ToDo: i18n */}
+          🪄 All imbuements
         </Chip>
-      ))}
+      ) : (
+        [...filterState.imbuementsSet].map((imbuement) => (
+          <Chip
+            onClose={() =>
+              dispatch({
+                type: 'TOGGLE_FILTER_SET',
+                key: 'imbuementsSet',
+                value: imbuement,
+              })
+            }
+          >
+            🪄 {imbuement}
+          </Chip>
+        ))
+      )}
 
-      {[...filterState.charmsSet].map((charm) => (
+      {charmOptions.length === filterState.charmsSet.size ? (
         <Chip
-          onClose={() =>
-            dispatch({
-              type: 'TOGGLE_FILTER_SET',
-              key: 'charmsSet',
-              value: charm,
-            })
-          }
+          onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'charmsSet' })}
         >
-          ♉ {charm}
+          {/* @ ToDo: i18n */}♉ All charms
         </Chip>
-      ))}
+      ) : (
+        [...filterState.charmsSet].map((charm) => (
+          <Chip
+            onClose={() =>
+              dispatch({
+                type: 'TOGGLE_FILTER_SET',
+                key: 'charmsSet',
+                value: charm,
+              })
+            }
+          >
+            ♉ {charm}
+          </Chip>
+        ))
+      )}
 
       {[...filterState.questSet].map((quest) => (
         <Chip
