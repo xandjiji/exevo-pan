@@ -18,7 +18,7 @@ const FilterControl = ({
   ...props
 }: JSX.IntrinsicElements['section']) => {
   const {
-    translations: { common },
+    translations: { common, homepage },
   } = useTranslations()
 
   const { imbuementOptions, charmOptions } = useDrawerFields()
@@ -58,8 +58,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'biddedOnly' })}
         >
-          {/* @ ToDo: i18n */}
-          <Checkbox checked disabled /> Bidded only
+          <Checkbox checked disabled /> {homepage.FilterControl.biddedOnly}
         </Chip>
       )}
 
@@ -352,12 +351,8 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'tcInvested' })}
         >
-          {/* @ ToDo: i18n */}
-          <Text.TibiaCoin
-            className="-mr-0.5"
-            value={filterState.tcInvested}
-          />{' '}
-          invested
+          <Text.TibiaCoin className="-mr-0.5" value={filterState.tcInvested} />{' '}
+          {homepage.FilterControl.invested}
         </Chip>
       )}
 
@@ -367,8 +362,7 @@ const FilterControl = ({
             dispatch({ type: 'SET_DEFAULT', key: 'imbuementsSet' })
           }
         >
-          {/* @ ToDo: i18n */}
-          🪄 All imbuements
+          🪄 {homepage.FilterControl.allImbuements}
         </Chip>
       ) : (
         [...filterState.imbuementsSet].map((imbuement) => (
@@ -390,7 +384,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'charmsSet' })}
         >
-          {/* @ ToDo: i18n */}♉ All charms
+          ♉ {homepage.FilterControl.allCharms}
         </Chip>
       ) : (
         [...filterState.charmsSet].map((charm) => (
@@ -456,8 +450,7 @@ const FilterControl = ({
         <Chip
           onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'rareNick' })}
         >
-          {/* @ ToDo: i18n */}
-          Rare nickname
+          {homepage.FilterControl.rareNickname}
         </Chip>
       )}
     </section>

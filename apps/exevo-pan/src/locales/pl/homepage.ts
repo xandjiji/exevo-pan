@@ -30,6 +30,17 @@ export default {
       findSimilar: 'Find similar',
     },
   },
+  FilterControl: {
+    /* @ ToDo: i18n */
+    biddedOnly: 'Bidded only',
+    /* @ ToDo: i18n */
+    invested: 'invested',
+    /* @ ToDo: i18n */
+    allImbuements: 'All imbuements',
+    /* @ ToDo: i18n */
+    allCharms: 'All charms',
+    rareNickname: 'Rzadkie nazwa',
+  },
   FilterDrawer: {
     title: 'Filtry',
     exevoProExclusive: '(exclusive for {{exevopro}})',

@@ -30,6 +30,13 @@ export default {
       findSimilar: 'Find similar',
     },
   },
+  FilterControl: {
+    biddedOnly: 'Bidded only',
+    invested: 'invested',
+    allImbuements: 'All imbuements',
+    allCharms: 'All charms',
+    rareNickname: 'Rare nickname',
+  },
   FilterDrawer: {
     title: 'Filters',
     exevoProExclusive: '(exclusive for {{exevopro}})',

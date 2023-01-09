@@ -29,6 +29,13 @@ export default {
       findSimilar: 'Buscar similares',
     },
   },
+  FilterControl: {
+    biddedOnly: 'Apenas com lance',
+    invested: 'investido',
+    allImbuements: 'Todos os imbuements',
+    allCharms: 'Todos os charms',
+    rareNickname: 'Nickname raro',
+  },
   FilterDrawer: {
     title: 'Filtros',
     exevoProExclusive: '(exclusivo {{exevopro}})',
