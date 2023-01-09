@@ -97,6 +97,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     key: 'minSkill',
     controlledValue: filterState.minSkill,
   })
+  const [maxSkill, setMaxSkill] = useDebouncedFilter({
+    key: 'maxSkill',
+    controlledValue: filterState.maxSkill,
+  })
 
   const [bossPoints, setBossPoints] = useDebouncedFilter({
     key: 'bossPoints',
@@ -545,9 +549,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             max={130}
             value={minSkill}
             onChange={useCallback(
-              (event: React.ChangeEvent<HTMLInputElement>) =>
-                setMinSkill(+event.target.value),
-              [setMinSkill],
+              (event: React.ChangeEvent<HTMLInputElement>) => {
+                setMinSkill(+event.target.value)
+                setMaxSkill(DEFAULT_FILTER_OPTIONS.maxSkill)
+              },
+              [setMinSkill, setMaxSkill],
             )}
             onKeyPress={blurOnEnter}
             enterKeyHint="done"
