@@ -8,6 +8,7 @@ import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
 import { formatNumberWithCommas, capitalizeFirstLetter } from 'utils'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { useNotDefault } from './useNotDefault'
+import * as S from './atoms'
 import Icons from './icons'
 import { getInfo } from './utils'
 
@@ -234,7 +235,7 @@ const FilterControl = ({
           📏 {notDefault('minLevel') && notDefault('maxLevel') && 'Level'}
           {notDefault('minLevel') && !notDefault('maxLevel') && 'Min level'}
           {!notDefault('minLevel') && notDefault('maxLevel') && 'Max level'}:
-          <strong>
+          <S.Strong>
             {notDefault('minLevel') &&
               notDefault('maxLevel') &&
               `${formatNumberWithCommas(
@@ -246,7 +247,7 @@ const FilterControl = ({
             {!notDefault('minLevel') &&
               notDefault('maxLevel') &&
               formatNumberWithCommas(filterState.maxLevel)}
-          </strong>
+          </S.Strong>
         </Chip>
       )}
 
@@ -274,10 +275,10 @@ const FilterControl = ({
           >
             {Icons.Skill[skillKey as keyof typeof Icons.Skill]()}
             {capitalizeFirstLetter(skillKey)}:{' '}
-            <strong>
+            <S.Strong>
               {filterState.minSkill}
               {notDefault('maxSkill') ? `~${filterState.maxSkill}` : null}
-            </strong>
+            </S.Strong>
           </Chip>
         ))}
 
