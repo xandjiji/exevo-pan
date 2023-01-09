@@ -1,4 +1,3 @@
-import clsx from 'clsx'
 import Image from 'next/image'
 import { ResetIcon } from 'assets/svgs'
 import rookSrc from 'assets/rook.png'
@@ -19,6 +18,8 @@ import blackSkullSrc from 'assets/blackSkull.png'
 import brFlagSrc from 'assets/br-flag.png'
 import euFlagSrc from 'assets/eu-flag.png'
 import naFlagSrc from 'assets/na-flag.png'
+import yellowSrc from 'assets/yellowbattleye.png'
+import greenSrc from 'assets/greenbattleye.png'
 
 import { StatusStyleProps } from './types'
 
@@ -73,10 +74,9 @@ export const BrFlag = () => (
 )
 
 export const Status = ({ color }: StatusStyleProps) => (
-  <div
-    className={clsx(
-      'border-1 inline-block h-2.5 w-2.5 rounded-full border-solid border-black/30 shadow',
-      color === 'battleGreen' ? 'bg-battleGreen' : 'bg-battleYellow',
-    )}
+  <Image
+    role="none"
+    alt={`${color === 'battleGreen' ? 'Green' : 'Yellow'} BattlEye`}
+    src={color === 'battleGreen' ? greenSrc : yellowSrc}
   />
 )
