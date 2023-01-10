@@ -2,8 +2,8 @@
 import { useRef, useMemo, useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { CopyButton, Sticker } from 'components/Atoms'
-import { Menu, ClientComponent } from 'components/Organisms'
+import { CopyButton } from 'components/Atoms'
+import { Menu } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import CharacterModal from 'components/CharacterModal'
 import { MoreIcon, ExpandIcon, SearchIcon } from 'assets/svgs'
@@ -86,16 +86,6 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
             ]}
           >
             <MoreIcon className="fill-onSurface" />
-            {/* @ ToDo: remove this */}
-            <ClientComponent>
-              <Sticker
-                localStorageKey="05012023"
-                className="animate-swing absolute -top-4 left-4"
-                style={{ rotate: '30deg' }}
-              >
-                New
-              </Sticker>
-            </ClientComponent>
           </Menu>
         }
         {...props}
