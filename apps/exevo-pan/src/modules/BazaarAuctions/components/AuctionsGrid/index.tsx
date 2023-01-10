@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
@@ -21,7 +22,7 @@ const AuctionsGrid = () => {
   } = useTranslations()
 
   const {
-    isHistory,
+    mode,
     paginatedData,
     paginationOptions,
     activeFilterCount,
@@ -52,6 +53,8 @@ const AuctionsGrid = () => {
     return () => clearTimeout(scrollTimer)
   }, [paginatedData])
 
+  const isFavorites = mode === 'both'
+
   return (
     <main>
       <div
@@ -63,24 +66,32 @@ const AuctionsGrid = () => {
           aria-label={homepage.AuctionsGrid.filterButtonLabel}
           onClick={() => setDrawerOpen(true)}
           className="relative"
+          disabled={isFavorites}
         >
-          <FilterIcon className={styles.icon} />
+          <FilterIcon
+            className={clsx(
+              'h-[37px] w-[37px] p-0.5',
+              isFavorites ? 'fill-separator' : 'fill-onSurface',
+            )}
+          />
           <ClientComponent className="pointer-events-none absolute -top-0.5 -right-0.5">
-            <ActiveCount
-              role="status"
-              aria-label={`${activeFilterCount} ${
-                activeFilterCount === 1
-                  ? homepage.AuctionsGrid.filter
-                  : homepage.AuctionsGrid.filters
-              } ${
-                activeFilterCount === 1
-                  ? homepage.AuctionsGrid.is
-                  : homepage.AuctionsGrid.are
-              } ${homepage.AuctionsGrid.active}`}
-              aria-hidden={activeFilterCount === 0}
-            >
-              {activeFilterCount}
-            </ActiveCount>
+            {!isFavorites && (
+              <ActiveCount
+                role="status"
+                aria-label={`${activeFilterCount} ${
+                  activeFilterCount === 1
+                    ? homepage.AuctionsGrid.filter
+                    : homepage.AuctionsGrid.filters
+                } ${
+                  activeFilterCount === 1
+                    ? homepage.AuctionsGrid.is
+                    : homepage.AuctionsGrid.are
+                } ${homepage.AuctionsGrid.active}`}
+                aria-hidden={activeFilterCount === 0}
+              >
+                {activeFilterCount}
+              </ActiveCount>
+            )}
           </ClientComponent>
         </S.Button>
 
@@ -121,7 +132,6 @@ const AuctionsGrid = () => {
                 characterData={auction}
                 highlighted
                 lazyRender
-                past={isHistory}
               />
             ))}
           {paginatedData.page.map((auction) => {
@@ -132,6 +142,10 @@ const AuctionsGrid = () => {
               ? { ...auction, tcInvested: highlightedAuction.tcInvested }
               : auction
 
+            const currentTimestamp = Math.round(+new Date() / 1000)
+            const isPast =
+              mode === 'current' ? false : auction.auctionEnd > currentTimestamp
+
             return (
               <ExpandableCharacterCard
                 key={auction.id}
@@ -140,7 +154,7 @@ const AuctionsGrid = () => {
                 }
                 lazyRender
                 characterData={characterData}
-                past={isHistory}
+                past={isPast}
               />
             )
           })}

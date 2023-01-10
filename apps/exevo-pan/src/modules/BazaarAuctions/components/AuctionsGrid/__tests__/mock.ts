@@ -24,7 +24,7 @@ export const mockedPaginatedData = {
 }
 
 export const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
-  isHistory: false,
+  mode: 'current',
   loading: false,
   activeFilterCount: 0,
   filterState: DEFAULT_FILTER_OPTIONS,

@@ -1,7 +1,3 @@
-.icon {
-  @apply fill-onSurface h-[37px] w-[37px] p-0.5;
-}
-
 .empty span {
   @apply whitespace-normal;
 }

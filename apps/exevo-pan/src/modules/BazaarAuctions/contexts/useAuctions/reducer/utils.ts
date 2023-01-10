@@ -28,7 +28,7 @@ export const shouldDisplayHighlightedAuctions = (
 
   // eslint-disable-next-line no-param-reassign
   state.shouldDisplayHighlightedAuctions =
-    isDefaultGridState && noFilterApplied && !state.isHistory
+    isDefaultGridState && noFilterApplied && state.mode === 'current'
 
   return state
 }

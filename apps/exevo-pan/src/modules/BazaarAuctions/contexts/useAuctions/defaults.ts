@@ -9,7 +9,7 @@ import { AuctionsContextValues } from './types'
 export const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
   initialTCInvested: [],
-  isHistory: false,
+  mode: 'current',
   highlightedAuctions: [],
   filterState: DEFAULT_FILTER_OPTIONS,
   activeFilterCount: 0,
