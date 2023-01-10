@@ -22,7 +22,7 @@ const FilterControl = ({
   } = useTranslations()
 
   const { imbuementOptions, charmOptions } = useDrawerFields()
-  const { activeFilterCount, filterState, dispatch } = useAuctions()
+  const { activeFilterCount, filterState, mode, dispatch } = useAuctions()
   const notDefault = useNotDefault(filterState)
 
   return (
@@ -36,21 +36,26 @@ const FilterControl = ({
           placement="bottom-start"
           items={[
             {
-              label: 'Current auctions',
+              label: homepage.FilterControl.modes.current,
               icon: NewIcon,
+              onSelect: () => dispatch({ type: 'SET_MODE', mode: 'current' }),
             },
             {
-              label: 'Auction history',
+              label: homepage.FilterControl.modes.history,
               icon: PapyrusIcon,
+              onSelect: () => dispatch({ type: 'SET_MODE', mode: 'history' }),
             },
             {
-              label: 'Favorites',
+              label: homepage.FilterControl.modes.favorites,
               icon: StarIcon,
+              onSelect: () => dispatch({ type: 'SET_MODE', mode: 'both' }),
             },
           ]}
           variant="button"
         >
-          Current auctions
+          {mode === 'current' && homepage.FilterControl.modes.current}
+          {mode === 'history' && homepage.FilterControl.modes.history}
+          {mode === 'both' && homepage.FilterControl.modes.favorites}
         </Menu>
       </div>
 

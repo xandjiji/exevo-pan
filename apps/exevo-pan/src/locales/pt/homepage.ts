@@ -30,6 +30,11 @@ export default {
     },
   },
   FilterControl: {
+    modes: {
+      current: 'Leilões atuais',
+      history: 'Histórico do Bazaar',
+      favorites: 'Favoritos',
+    },
     biddedOnly: 'Apenas com lance',
     invested: 'investido',
     allImbuements: 'Todos os imbuements',
@@ -40,7 +45,6 @@ export default {
     title: 'Filtros',
     exevoProExclusive: '(exclusivo {{exevopro}})',
     labels: {
-      bazaarHistory: 'Histórico do Bazaar',
       searchNickname: 'Procurar nickname',
       vocation: 'Vocação',
       serverLocation: 'Localização do servidor',

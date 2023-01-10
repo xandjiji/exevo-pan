@@ -31,7 +31,7 @@ export const AuctionsProvider = ({
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: false,
-    isHistory: false,
+    mode: 'current',
     filterState: DEFAULT_STATE.filterState,
     activeFilterCount: DEFAULT_STATE.activeFilterCount,
     paginationOptions: DEFAULT_STATE.paginationOptions,
@@ -50,7 +50,7 @@ export const AuctionsProvider = ({
     ),
   })
 
-  const { paginationOptions, sortingOptions, filterState, isHistory } = state
+  const { paginationOptions, sortingOptions, filterState, mode } = state
 
   const isMounted = useIsMounted()
   useEffect(() => {
@@ -61,16 +61,16 @@ export const AuctionsProvider = ({
         paginationOptions,
         sortOptions: sortingOptions,
         filterOptions: filterState,
-        history: isHistory,
+        mode,
       }).then((paginatedData) => {
         dispatch({ type: 'SET_PAGINATED_DATA', paginatedData })
       })
     }
-  }, [paginationOptions, sortingOptions, filterState, isHistory])
+  }, [paginationOptions, sortingOptions, filterState, mode])
 
   useSynchUrlState({
     isPro: status === 'loading' ? undefined : data?.user.proStatus ?? false,
-    isHistory,
+    mode,
     filterState,
     paginationOptions,
     sortingOptions,

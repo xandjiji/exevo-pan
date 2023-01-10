@@ -6,7 +6,8 @@ export type DefaultAction =
       loading: boolean
     }
   | {
-      type: 'TOGGLE_HISTORY'
+      type: 'SET_MODE'
+      mode: AuctionQueryMode
     }
   | {
       type: 'SET_PAGINATION'
@@ -25,7 +26,7 @@ export type DefaultAction =
       urlSorting: SortOptions
       urlPagination: PaginationOptions
       urlFilters: FilterOptions
-      urlHistory: boolean
+      mode: AuctionQueryMode
     }
   | {
       type: 'HYDRATE_TC_INVESTED'
@@ -35,7 +36,7 @@ export type Action = DefaultAction | FilterAction
 
 export interface AuctionsContextState {
   loading: boolean
-  isHistory: boolean
+  mode: AuctionQueryMode
   filterState: FilterOptions
   activeFilterCount: number
   paginationOptions: PaginationOptions

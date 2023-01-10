@@ -31,6 +31,11 @@ export default {
     },
   },
   FilterControl: {
+    modes: {
+      current: 'Current auctions',
+      history: 'Bazaar history',
+      favorites: 'Favorites',
+    },
     biddedOnly: 'Bidded only',
     invested: 'invested',
     allImbuements: 'All imbuements',
@@ -41,7 +46,6 @@ export default {
     title: 'Filters',
     exevoProExclusive: '(exclusive for {{exevopro}})',
     labels: {
-      bazaarHistory: 'Bazaar History',
       searchNickname: 'Search nickname',
       vocation: 'Vocation',
       serverLocation: 'Server location',

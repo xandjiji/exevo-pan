@@ -33,6 +33,12 @@ export default {
   },
   FilterControl: {
     /* @ ToDo: i18n */
+    modes: {
+      current: 'Current auctions',
+      history: 'Bazaar history',
+      favorites: 'Favorites',
+    },
+    /* @ ToDo: i18n */
     biddedOnly: 'Bidded only',
     /* @ ToDo: i18n */
     invested: 'invested',
@@ -46,7 +52,6 @@ export default {
     title: 'Filtros',
     exevoProExclusive: '(exclusive for {{exevopro}})',
     labels: {
-      bazaarHistory: 'Histórico del Bazaar',
       searchNickname: 'Buscar nickname',
       vocation: 'Vocación',
       serverLocation: 'Ubicación del servidor',

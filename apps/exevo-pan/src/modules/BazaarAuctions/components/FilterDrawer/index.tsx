@@ -62,7 +62,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     mountValues,
     storeMountValues,
   } = useDrawerFields()
-  const { filterState, activeFilterCount, isHistory, dispatch } = useAuctions()
+  const { filterState, activeFilterCount, mode, dispatch } = useAuctions()
+
+  const isHistory = mode === 'history'
 
   const serverOptions = useFilterServers({
     allServerOptions,
@@ -142,14 +144,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
-        <FilterGroup>
-          <Switch
-            active={isHistory}
-            onClick={() => dispatch({ type: 'TOGGLE_HISTORY' })}
-          >
-            {homepage.FilterDrawer.labels.bazaarHistory}
-          </Switch>
-        </FilterGroup>
         <FilterGroup>
           <Checkbox
             label={homepage.FilterDrawer.labels.biddedOnly}

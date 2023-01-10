@@ -15,18 +15,20 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
     case 'SET_LOADING':
       return { ...state, loading: action.loading }
 
-    case 'TOGGLE_HISTORY': {
+    case 'SET_MODE': {
       const nextState: ReturnType<typeof ActionsReducer> = {
         ...state,
-        isHistory: !state.isHistory,
+        mode: action.mode,
       }
+
+      const isHistory = action.mode === 'history'
 
       nextState.sortingOptions = {
         ...DEFAULT_SORT_OPTIONS,
-        descendingOrder: nextState.isHistory,
+        descendingOrder: isHistory,
       }
 
-      if (nextState.isHistory) {
+      if (isHistory) {
         nextState.filterState = {
           ...nextState.filterState,
           auctionIds: DEFAULT_FILTER_OPTIONS.auctionIds,
@@ -61,7 +63,7 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
     case 'SYNCH_URL_STATE':
       return {
         ...state,
-        isHistory: action.urlHistory,
+        mode: action.mode,
         filterState: action.urlFilters,
         paginationOptions: {
           ...action.urlPagination,
@@ -93,7 +95,7 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
 
 const resetPaginationActions: Set<Action['type']> = new Set([
   'SET_SORTING',
-  'TOGGLE_HISTORY',
+  'SET_MODE',
 ])
 
 const ReducerFunction: Reducer<Action> = (state, action) => {
