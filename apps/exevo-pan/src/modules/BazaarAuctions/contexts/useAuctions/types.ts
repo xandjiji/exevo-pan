@@ -1,10 +1,10 @@
 import { AuctionsContextState, Action } from './reducer/types'
-import { Favorites } from './favorites'
+import { useFavorites } from './useFavorites'
 
 export interface AuctionsContextValues extends AuctionsContextState {
   highlightedAuctions: CharacterObject[]
   handlePaginatorFetch: (pageIndex: number) => void
-  Favorites: typeof Favorites
+  Favorites: ReturnType<typeof useFavorites>
   dispatch: React.Dispatch<Action>
 }
 

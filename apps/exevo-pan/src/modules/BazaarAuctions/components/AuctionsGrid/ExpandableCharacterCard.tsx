@@ -29,7 +29,7 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
     [auctionId, locale],
   )
 
-  const { dispatch } = useAuctions()
+  const { Favorites, dispatch } = useAuctions()
 
   const [isExpanded, setExpanded] = useState(false)
   const [, setAuctionIdUrl] = useSyncUrlState<number | undefined>({
@@ -56,6 +56,8 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
     copyButtonRef.current?.click()
   }, [])
 
+  const isFavorited = Favorites.has(auctionId)
+
   return (
     <>
       <CharacterCard
@@ -75,10 +77,11 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
               },
               {
                 /* @ ToDo: toggle icon and text */
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.favorite,
+                /* label: homepage.AuctionsGrid.ExpandableCharacterCard.favorite, */
+                label: isFavorited ? 'Unfavorite' : 'Favorite',
                 icon: StarIcon,
                 keepOpenAfterSelection: true,
-                /* onSelect: copyLinkAction, */
+                onSelect: () => Favorites.toggle(auctionId),
               },
               {
                 label:

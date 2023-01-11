@@ -4,6 +4,7 @@ import {
   useReducer,
   useEffect,
   useCallback,
+  useRef,
 } from 'react'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
@@ -12,9 +13,9 @@ import { AuctionsClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
 import { pluckTCInvested } from 'utils'
 import { useSynchUrlState } from './useSynchUrlState'
+import { useFavorites } from './useFavorites'
 import AuctionsReducer from './reducer'
 import { DEFAULT_STATE } from './defaults'
-import { Favorites } from './favorites'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
@@ -54,6 +55,10 @@ export const AuctionsProvider = ({
 
   const { paginationOptions, sortingOptions, filterState, mode } = state
 
+  const Favorites = useFavorites()
+  const favoriteRef = useRef(Favorites.list)
+  favoriteRef.current = Favorites.list
+
   const isMounted = useIsMounted()
   useEffect(() => {
     if (isMounted) {
@@ -61,7 +66,7 @@ export const AuctionsProvider = ({
 
       if (mode === 'favorites') {
         AuctionsClient.fetchFavorited({
-          ids: Favorites.getAll(),
+          ids: favoriteRef.current,
           sortOptions: sortingOptions,
         }).then(({ favoritedState, paginatedData }) => {
           dispatch({
