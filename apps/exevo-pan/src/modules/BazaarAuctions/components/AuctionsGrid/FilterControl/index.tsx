@@ -48,18 +48,18 @@ const FilterControl = ({
             {
               label: homepage.FilterControl.modes.favorites,
               icon: StarIcon,
-              onSelect: () => dispatch({ type: 'SET_MODE', mode: 'both' }),
+              onSelect: () => dispatch({ type: 'SET_MODE', mode: 'favorites' }),
             },
           ]}
           variant="button"
         >
           {mode === 'current' && homepage.FilterControl.modes.current}
           {mode === 'history' && homepage.FilterControl.modes.history}
-          {mode === 'both' && homepage.FilterControl.modes.favorites}
+          {mode === 'favorites' && homepage.FilterControl.modes.favorites}
         </Menu>
       </div>
 
-      {mode !== 'both' && (
+      {mode !== 'favorites' && (
         <>
           {notDefault('biddedOnly') && (
             <Chip
