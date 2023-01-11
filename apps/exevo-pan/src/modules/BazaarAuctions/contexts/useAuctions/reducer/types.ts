@@ -22,6 +22,11 @@ export type DefaultAction =
       paginatedData: PaginatedData<CharacterObject>
     }
   | {
+      type: 'SET_FAVORITED_DATA'
+      paginatedData: PaginatedData<CharacterObject>
+      favoritedState: FavoritedState
+    }
+  | {
       type: 'SYNCH_URL_STATE'
       urlSorting: SortOptions
       urlPagination: PaginationOptions

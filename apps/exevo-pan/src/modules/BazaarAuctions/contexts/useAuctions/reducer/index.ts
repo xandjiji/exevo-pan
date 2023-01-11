@@ -60,6 +60,14 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
         paginatedData: action.paginatedData,
       })
 
+    case 'SET_FAVORITED_DATA':
+      return shouldDisplayHighlightedAuctions({
+        ...state,
+        loading: false,
+        paginatedData: action.paginatedData,
+        favoritedState: action.favoritedState,
+      })
+
     case 'SYNCH_URL_STATE':
       return {
         ...state,

@@ -60,7 +60,16 @@ export const AuctionsProvider = ({
       dispatch({ type: 'SET_LOADING', loading: true })
 
       if (mode === 'favorites') {
-        console.log('todo')
+        AuctionsClient.fetchFavorited({
+          ids: Favorites.getAll(),
+          sortOptions: sortingOptions,
+        }).then(({ favoritedState, paginatedData }) => {
+          dispatch({
+            type: 'SET_FAVORITED_DATA',
+            favoritedState,
+            paginatedData,
+          })
+        })
       } else {
         AuctionsClient.fetchAuctionPage({
           paginationOptions,
