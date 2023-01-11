@@ -4,6 +4,7 @@ import {
   DEFAULT_PAGINATION_OPTIONS,
 } from 'shared-utils/dist/contracts/Filters/defaults'
 import { paginationSchema as basePaginationSchema } from 'shared-utils/dist/contracts/Filters/schemas/paginationUrl'
+import { Favorites } from './favorites'
 import { AuctionsContextValues } from './types'
 
 export const DEFAULT_STATE: AuctionsContextValues = {
@@ -25,6 +26,8 @@ export const DEFAULT_STATE: AuctionsContextValues = {
     hasNext: false,
     hasPrev: false,
   },
+  favoritedState: { currentIds: [], historyIds: [], notFoundIds: [] },
+  Favorites,
   shouldDisplayHighlightedAuctions: true,
   handlePaginatorFetch: async () => {},
   dispatch: () => {},

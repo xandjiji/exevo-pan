@@ -42,6 +42,7 @@ export interface AuctionsContextState {
   paginationOptions: PaginationOptions
   sortingOptions: SortOptions
   paginatedData: PaginatedData<CharacterObject>
+  favoritedState: FavoritedState
   shouldDisplayHighlightedAuctions: boolean
   initialTCInvested: number[]
 }

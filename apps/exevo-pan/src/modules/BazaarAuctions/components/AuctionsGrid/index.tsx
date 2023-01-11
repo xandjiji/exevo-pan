@@ -53,7 +53,7 @@ const AuctionsGrid = () => {
     return () => clearTimeout(scrollTimer)
   }, [paginatedData])
 
-  const isFavorites = mode === 'both'
+  const isFavorites = mode === 'favorites'
 
   return (
     <main>

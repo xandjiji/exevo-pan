@@ -44,6 +44,7 @@ export const AuctionsProvider = ({
       ...initialPaginatedData,
       page: initialPaginatedData.page.map(pluckTCInvested),
     },
+    favoritedState: DEFAULT_STATE.favoritedState,
     shouldDisplayHighlightedAuctions:
       DEFAULT_STATE.shouldDisplayHighlightedAuctions,
     initialTCInvested: initialPaginatedData.page.map(
