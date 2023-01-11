@@ -6,7 +6,7 @@ import { CopyButton } from 'components/Atoms'
 import { Menu } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import CharacterModal from 'components/CharacterModal'
-import { MoreIcon, ExpandIcon, SearchIcon } from 'assets/svgs'
+import { MoreIcon, ExpandIcon, SearchIcon, StarIcon } from 'assets/svgs'
 import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
@@ -72,6 +72,13 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
                 icon: CopyButtonIcon,
                 keepOpenAfterSelection: true,
                 onSelect: copyLinkAction,
+              },
+              {
+                /* @ ToDo: toggle icon and text */
+                label: homepage.AuctionsGrid.ExpandableCharacterCard.favorite,
+                icon: StarIcon,
+                keepOpenAfterSelection: true,
+                /* onSelect: copyLinkAction, */
               },
               {
                 label:

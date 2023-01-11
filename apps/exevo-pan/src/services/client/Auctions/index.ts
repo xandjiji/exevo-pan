@@ -11,7 +11,7 @@ export default class AuctionsClient {
     filterOptions,
     paginationOptions,
     sortOptions,
-    mode,
+    history,
   }: FetchAuctionPageArgs): Promise<PaginatedData<CharacterObject>> {
     const endpoint = new URL(`${links.CANONICAL}${endpoints.AUCTIONS_ROUTE}`)
     const currentParams = new URLSearchParams()
@@ -24,7 +24,7 @@ export default class AuctionsClient {
     })
 
     endpoint.search = currentParams.toString()
-    endpoint.searchParams.set('mode', mode)
+    if (history) endpoint.searchParams.set('history', 'true')
 
     const response = await fetch(
       `${endpoints.AUCTIONS_ROUTE}${endpoint.search}`,

@@ -28,6 +28,7 @@ export default {
       details: 'Details',
       copyLink: 'Copy link',
       findSimilar: 'Find similar',
+      favorite: 'Favorite',
     },
   },
   FilterControl: {

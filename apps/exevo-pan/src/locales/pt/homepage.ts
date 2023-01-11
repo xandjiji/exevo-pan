@@ -27,6 +27,7 @@ export default {
       details: 'Detalhes',
       copyLink: 'Copiar link',
       findSimilar: 'Buscar similares',
+      favorite: 'Favoritar',
     },
   },
   FilterControl: {

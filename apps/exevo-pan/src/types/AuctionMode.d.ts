@@ -1,1 +1,1 @@
-declare type AuctionQueryMode = 'current' | 'history' | 'both'
+declare type AuctionQueryMode = 'current' | 'history' | 'favorites'

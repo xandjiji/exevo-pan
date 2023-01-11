@@ -14,6 +14,7 @@ import { pluckTCInvested } from 'utils'
 import { useSynchUrlState } from './useSynchUrlState'
 import AuctionsReducer from './reducer'
 import { DEFAULT_STATE } from './defaults'
+import { Favorites } from './favorites'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
 
 const AuctionsContext = createContext<AuctionsContextValues>(DEFAULT_STATE)
@@ -30,8 +31,8 @@ export const AuctionsProvider = ({
   const { data, status } = useSession()
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
-    loading: false,
-    mode: 'current',
+    loading: DEFAULT_STATE.loading,
+    mode: DEFAULT_STATE.mode,
     filterState: DEFAULT_STATE.filterState,
     activeFilterCount: DEFAULT_STATE.activeFilterCount,
     paginationOptions: DEFAULT_STATE.paginationOptions,
@@ -57,14 +58,18 @@ export const AuctionsProvider = ({
     if (isMounted) {
       dispatch({ type: 'SET_LOADING', loading: true })
 
-      AuctionsClient.fetchAuctionPage({
-        paginationOptions,
-        sortOptions: sortingOptions,
-        filterOptions: filterState,
-        mode,
-      }).then((paginatedData) => {
-        dispatch({ type: 'SET_PAGINATED_DATA', paginatedData })
-      })
+      if (mode === 'favorites') {
+        console.log('todo')
+      } else {
+        AuctionsClient.fetchAuctionPage({
+          paginationOptions,
+          sortOptions: sortingOptions,
+          filterOptions: filterState,
+          history: mode === 'history',
+        }).then((paginatedData) => {
+          dispatch({ type: 'SET_PAGINATED_DATA', paginatedData })
+        })
+      }
     }
   }, [paginationOptions, sortingOptions, filterState, mode])
 
@@ -90,6 +95,7 @@ export const AuctionsProvider = ({
         ...state,
         highlightedAuctions,
         handlePaginatorFetch,
+        Favorites,
         dispatch,
       }}
     >

@@ -2,7 +2,7 @@ export type FetchAuctionPageArgs = {
   filterOptions?: Partial<FilterOptions>
   sortOptions?: Partial<SortOptions>
   paginationOptions?: Partial<PaginationOptions>
-  mode: AuctionQueryMode
+  history: boolean
 }
 
 export type FromTypes = 'current' | 'history' | 'any'
