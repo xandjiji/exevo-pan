@@ -28,7 +28,10 @@ export default {
       details: 'Details',
       copyLink: 'Copy link',
       findSimilar: 'Find similar',
-      favorite: 'Favorite',
+      favorite: {
+        add: 'Add favorite',
+        remove: 'Remove favorite',
+      },
     },
   },
   FilterControl: {

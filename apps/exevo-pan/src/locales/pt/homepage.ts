@@ -27,7 +27,10 @@ export default {
       details: 'Detalhes',
       copyLink: 'Copiar link',
       findSimilar: 'Buscar similares',
-      favorite: 'Favoritar',
+      favorite: {
+        add: 'Favoritar',
+        remove: 'Desfavoritar',
+      },
     },
   },
   FilterControl: {

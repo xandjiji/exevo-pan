@@ -1,4 +1,5 @@
 /* eslint-disable react/require-default-props */
+import clsx from 'clsx'
 import { useRef, useMemo, useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
@@ -6,7 +7,13 @@ import { CopyButton } from 'components/Atoms'
 import { Menu } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import CharacterModal from 'components/CharacterModal'
-import { MoreIcon, ExpandIcon, SearchIcon, StarIcon } from 'assets/svgs'
+import {
+  MoreIcon,
+  ExpandIcon,
+  SearchIcon,
+  OutlineAddIcon,
+  OutlineRemoveIcon,
+} from 'assets/svgs'
 import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
@@ -57,6 +64,23 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
   }, [])
 
   const isFavorited = Favorites.has(auctionId)
+  const shouldAnimateFavIconRef = useRef(false)
+
+  const FavoriteIcon = () => {
+    const Icon = isFavorited ? OutlineRemoveIcon : OutlineAddIcon
+
+    const shouldAnimate = shouldAnimateFavIconRef.current
+    shouldAnimateFavIconRef.current = false
+
+    return (
+      <Icon
+        className={clsx(
+          'fill-primaryHighlight h-full w-full',
+          shouldAnimate && 'animate-rollIn',
+        )}
+      />
+    )
+  }
 
   return (
     <>
@@ -76,12 +100,16 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
                 onSelect: copyLinkAction,
               },
               {
-                /* @ ToDo: toggle icon and text */
-                /* label: homepage.AuctionsGrid.ExpandableCharacterCard.favorite, */
-                label: isFavorited ? 'Unfavorite' : 'Favorite',
-                icon: StarIcon,
+                label:
+                  homepage.AuctionsGrid.ExpandableCharacterCard.favorite[
+                    isFavorited ? 'remove' : 'add'
+                  ],
+                icon: FavoriteIcon,
                 keepOpenAfterSelection: true,
-                onSelect: () => Favorites.toggle(auctionId),
+                onSelect: () => {
+                  Favorites.toggle(auctionId)
+                  shouldAnimateFavIconRef.current = true
+                },
               },
               {
                 label:
