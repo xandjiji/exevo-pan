@@ -8,6 +8,7 @@ import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
 import FilterControl from './FilterControl'
 import ExpandableCharacterCard from './ExpandableCharacterCard'
+import { useSettledMode } from './useSettledMode'
 import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
@@ -22,7 +23,8 @@ const AuctionsGrid = () => {
   } = useTranslations()
 
   const {
-    mode,
+    loading,
+    mode: unsettledMode,
     favoritedState,
     paginatedData,
     paginationOptions,
@@ -31,6 +33,8 @@ const AuctionsGrid = () => {
     highlightedAuctions,
     shouldDisplayHighlightedAuctions,
   } = useAuctions()
+
+  const mode = useSettledMode({ loading, mode: unsettledMode })
 
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
   const closeDrawer = useCallback(() => setDrawerOpen(false), [])
@@ -126,7 +130,7 @@ const AuctionsGrid = () => {
           id="character-grid"
           className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
         >
-          {mode === 'favorites' ? (
+          {isFavorites ? (
             <>
               {favoritedState.currentIds.length > 0 && (
                 <S.GridTextSeparator>
@@ -187,7 +191,7 @@ const AuctionsGrid = () => {
           <EmptyState
             className={styles.empty}
             button={
-              mode === 'favorites'
+              isFavorites
                 ? undefined
                 : {
                     content: homepage.AuctionsGrid.changeFilters,
@@ -195,10 +199,9 @@ const AuctionsGrid = () => {
                   }
             }
             text={{
-              content:
-                mode === 'favorites'
-                  ? homepage.AuctionsGrid.noFavorites
-                  : homepage.AuctionsGrid.noAuctionFound,
+              content: isFavorites
+                ? homepage.AuctionsGrid.noFavorites
+                : homepage.AuctionsGrid.noAuctionFound,
               size: 24,
             }}
           />
