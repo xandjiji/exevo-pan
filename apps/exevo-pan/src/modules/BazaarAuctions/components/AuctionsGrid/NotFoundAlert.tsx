@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Alert } from 'components/Atoms'
+import { officialAuctionUrl } from 'utils'
 
 type NotFoundAlertProps = {
   notFoundIds: number[]
@@ -21,7 +22,7 @@ const NotFoundAlert = ({ notFoundIds }: NotFoundAlertProps) => {
           <a
             target="_blank"
             rel="noreferrer noopener external"
-            href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
+            href={officialAuctionUrl(id)}
             className="text-onAlert font-bold underline underline-offset-2"
           >
             <span className="font-thin">#</span>

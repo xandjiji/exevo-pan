@@ -1,6 +1,7 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import { officialAuctionUrl } from 'utils'
 import CharacterMiniCard from '../../../CharacterMiniCard'
 import { HeadProps } from './types'
 
@@ -33,7 +34,7 @@ const Head = ({
         vocation: vocation.getPromotedName({ vocationId, level }),
         world: serverName,
       }}
-      linkUrl={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
+      linkUrl={officialAuctionUrl(id)}
       permalink={permalink}
     />
 

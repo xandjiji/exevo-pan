@@ -35,3 +35,6 @@ export const addLocalePrefix = ({
 
   return `${basePath}${routePrefix}${route}`
 }
+
+export const officialAuctionUrl = (auctionId: number) =>
+  `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auctionId}`
