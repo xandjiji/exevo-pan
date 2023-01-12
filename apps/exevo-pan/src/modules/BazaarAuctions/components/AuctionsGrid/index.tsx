@@ -186,12 +186,19 @@ const AuctionsGrid = () => {
         {paginatedData.page.length === 0 && (
           <EmptyState
             className={styles.empty}
-            button={{
-              content: homepage.AuctionsGrid.changeFilters,
-              action: () => setDrawerOpen(true),
-            }}
+            button={
+              mode === 'favorites'
+                ? undefined
+                : {
+                    content: homepage.AuctionsGrid.changeFilters,
+                    action: () => setDrawerOpen(true),
+                  }
+            }
             text={{
-              content: homepage.AuctionsGrid.noAuctionFound,
+              content:
+                mode === 'favorites'
+                  ? homepage.AuctionsGrid.noFavorites
+                  : homepage.AuctionsGrid.noAuctionFound,
               size: 24,
             }}
           />

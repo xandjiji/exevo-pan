@@ -28,6 +28,8 @@ export default {
       history: 'Bazaar history',
     },
     noAuctionFound: 'Disculpa, no se encontró ninguna subasta',
+    /* @ ToDo: i18n */
+    noFavorites: 'No favorited auctions',
     changeFilters: 'Cambiar filtros',
     /* @ ToDo: i18n */
     ExpandableCharacterCard: {

@@ -27,6 +27,7 @@ export default {
       history: 'Bazaar history',
     },
     noAuctionFound: 'Sorry, no auction was found',
+    noFavorites: 'No favorited auctions',
     changeFilters: 'Change filters',
     ExpandableCharacterCard: {
       details: 'Details',

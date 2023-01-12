@@ -26,6 +26,7 @@ export default {
       history: 'Histórico do Bazaar',
     },
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
+    noFavorites: 'Nenhum leilão favoritado',
     changeFilters: 'Mudar filtros',
     ExpandableCharacterCard: {
       details: 'Detalhes',
