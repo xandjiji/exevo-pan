@@ -14,12 +14,12 @@ module.exports = {
       cwd: __dirname,
       script: 'historyServer.sh',
     },
-    /* {
+    {
       name: 'ScrapHistory',
       cwd: __dirname,
       script: 'scrapHistory.sh',
-      restart_delay: HOUR * 10,
-    }, */
+      restart_delay: HOUR * 4,
+    },
     {
       name: 'ScrapAuctions',
       cwd: __dirname,

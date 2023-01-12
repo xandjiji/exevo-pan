@@ -2,6 +2,4 @@
 0 0 * * 3 ~/exevo-pan/automations/maintenance/backupHistory.sh
 0 4 * * 3 ~/exevo-pan/automations/maintenance/backupBosses.sh
 
-0 2 * * * ~/exevo-pan/automations/scrapHistory.sh
-
 #0 9 * * * ~/exevo-pan/automations/updateStatistics.sh
