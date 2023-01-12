@@ -37,15 +37,17 @@ const Alert = ({
       style={{ borderWidth: 0, borderLeftWidth: 6 }}
       {...props}
     >
-      <Icon
-        className={clsx(
-          {
-            primary: 'fill-onSurface',
-            alert: 'fill-onAlert',
-          }[variant],
-          'mr-1.5 mb-0.5 h-4 w-4 align-middle',
-        )}
-      />
+      {!noIcon && (
+        <Icon
+          className={clsx(
+            {
+              primary: 'fill-onSurface',
+              alert: 'fill-onAlert',
+            }[variant],
+            'mr-1.5 mb-0.5 h-4 w-4 align-middle',
+          )}
+        />
+      )}
       {children}
     </div>
   )
