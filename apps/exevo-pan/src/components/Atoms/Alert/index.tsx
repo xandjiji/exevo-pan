@@ -28,7 +28,7 @@ const Alert = ({
       role="alert"
       className={clsx(
         className,
-        'text-tsm rounded border-solid py-3 px-4 leading-relaxed tracking-wide transition-colors',
+        'text-tsm rounded border-solid py-3 px-4 leading-relaxed tracking-wide shadow-sm transition-colors',
         {
           primary: 'border-primary text-onSurface bg-separator/50',
           alert: 'border-primaryAlert bg-primaryVariantAlert text-onAlert',
