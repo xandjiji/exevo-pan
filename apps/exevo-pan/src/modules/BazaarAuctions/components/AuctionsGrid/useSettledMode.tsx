@@ -12,9 +12,7 @@ export const useSettledMode = ({
   const [settledMode, setSettledMode] = useState(mode)
 
   useEffect(() => {
-    if (!loading) {
-      setSettledMode(mode)
-    }
+    if (!loading) setSettledMode(mode)
   }, [loading, mode])
 
   return settledMode
