@@ -11,7 +11,9 @@ declare type Theme = {
   primaryVariantHighlight: string
   green: string
   red: string
-  alert: string
+  primaryAlert: string
+  primaryVariantAlert: string
+  onAlert: string
   battleGreen: string
   battleYellow: string
   primaryVariantHighlight: string
