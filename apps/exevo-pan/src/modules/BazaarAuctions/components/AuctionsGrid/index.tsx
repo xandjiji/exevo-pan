@@ -23,6 +23,7 @@ const AuctionsGrid = () => {
 
   const {
     mode,
+    favoritedState,
     paginatedData,
     paginationOptions,
     activeFilterCount,
@@ -126,7 +127,34 @@ const AuctionsGrid = () => {
           className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
         >
           {mode === 'favorites' ? (
-            <></>
+            <>
+              {favoritedState.currentIds.length > 0 && (
+                <S.GridTextSeparator>Current auctions</S.GridTextSeparator>
+              )}
+              {paginatedData.page
+                .filter(({ id }) => favoritedState.currentIds.includes(id))
+                .map((characterData) => (
+                  <ExpandableCharacterCard
+                    key={characterData.id}
+                    highlightedAuctions={highlightedAuctions}
+                    characterData={characterData}
+                  />
+                ))}
+
+              {favoritedState.historyIds.length > 0 && (
+                <S.GridTextSeparator>Auction history</S.GridTextSeparator>
+              )}
+              {paginatedData.page
+                .filter(({ id }) => favoritedState.historyIds.includes(id))
+                .map((characterData) => (
+                  <ExpandableCharacterCard
+                    key={characterData.id}
+                    highlightedAuctions={highlightedAuctions}
+                    characterData={characterData}
+                    past
+                  />
+                ))}
+            </>
           ) : (
             <>
               {shouldDisplayHighlightedAuctions &&
