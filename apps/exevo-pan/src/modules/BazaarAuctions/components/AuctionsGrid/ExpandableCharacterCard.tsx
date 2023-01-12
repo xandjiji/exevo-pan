@@ -21,13 +21,33 @@ import { urlParameters } from 'Constants'
 import { useAuctions } from '../../contexts/useAuctions'
 import { getSimilarCharacterFilters } from './utils'
 
-const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
+type ExpandableCharacterCardProps = {
+  highlightedAuctions: CharacterObject[]
+  forceNoHighlight?: boolean
+} & Omit<CharacterCardProps, 'ref' | 'highlighted'>
+
+const ExpandableCharacterCard = ({
+  highlightedAuctions,
+  forceNoHighlight = false,
+  ...props
+}: ExpandableCharacterCardProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
 
-  const { characterData } = props
-  const auctionId = characterData.id
+  const auctionId = props.characterData.id
+
+  const highlightedAuction = useMemo(
+    () => highlightedAuctions.find(({ id }) => id === auctionId),
+    [auctionId, highlightedAuctions],
+  )
+  const characterData: CharacterObject = useMemo(
+    () =>
+      highlightedAuction
+        ? { ...props.characterData, tcInvested: highlightedAuction.tcInvested }
+        : props.characterData,
+    [props.characterData, highlightedAuction],
+  )
 
   const { locale } = useRouter()
 
@@ -127,6 +147,8 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
           </Menu>
         }
         {...props}
+        lazyRender
+        highlighted={forceNoHighlight ? false : !!highlightedAuction}
       />
       {isExpanded && (
         <CharacterModal

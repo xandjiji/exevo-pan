@@ -125,39 +125,29 @@ const AuctionsGrid = () => {
           id="character-grid"
           className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
         >
-          {shouldDisplayHighlightedAuctions &&
-            highlightedAuctions.map((auction) => (
-              <ExpandableCharacterCard
-                key={`${auction.id}-highlighted`}
-                characterData={auction}
-                highlighted
-                lazyRender
-              />
-            ))}
-          {paginatedData.page.map((auction) => {
-            const highlightedAuction = highlightedAuctions.find(
-              ({ id }) => id === auction.id,
-            )
-            const characterData: CharacterObject = highlightedAuction
-              ? { ...auction, tcInvested: highlightedAuction.tcInvested }
-              : auction
-
-            const currentTimestamp = Math.round(+new Date() / 1000)
-            const isPast =
-              mode === 'current' ? false : auction.auctionEnd > currentTimestamp
-
-            return (
-              <ExpandableCharacterCard
-                key={auction.id}
-                highlighted={
-                  !!highlightedAuction && !shouldDisplayHighlightedAuctions
-                }
-                lazyRender
-                characterData={characterData}
-                past={isPast}
-              />
-            )
-          })}
+          {mode === 'favorites' ? (
+            <></>
+          ) : (
+            <>
+              {shouldDisplayHighlightedAuctions &&
+                highlightedAuctions.map((characterData) => (
+                  <ExpandableCharacterCard
+                    key={`${characterData.id}-highlighted`}
+                    characterData={characterData}
+                    highlightedAuctions={highlightedAuctions}
+                  />
+                ))}
+              {paginatedData.page.map((characterData) => (
+                <ExpandableCharacterCard
+                  key={characterData.id}
+                  forceNoHighlight={shouldDisplayHighlightedAuctions}
+                  highlightedAuctions={highlightedAuctions}
+                  characterData={characterData}
+                  past={mode === 'history'}
+                />
+              ))}
+            </>
+          )}
         </div>
         {paginatedData.page.length === 0 && (
           <EmptyState
