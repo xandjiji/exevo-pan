@@ -91,7 +91,7 @@ export const AuctionsProvider = ({
   useSynchUrlState({
     isPro: status === 'loading' ? undefined : data?.user.proStatus ?? false,
     mode,
-    filterState,
+    filterState: mode === 'favorites' ? DEFAULT_STATE.filterState : filterState,
     paginationOptions,
     sortingOptions,
     dispatch,
