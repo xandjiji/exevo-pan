@@ -2,12 +2,13 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useState, useCallback, useRef, useEffect } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { ActiveCount, Paginator, Alert } from 'components/Atoms'
+import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
 import FilterControl from './FilterControl'
 import ExpandableCharacterCard from './ExpandableCharacterCard'
+import NotFoundAlert from './NotFoundAlert'
 import { useSettledMode } from './useSettledMode'
 import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
@@ -19,7 +20,7 @@ export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
 const AuctionsGrid = () => {
   const {
-    translations: { common, homepage },
+    translations: { homepage },
   } = useTranslations()
 
   const {
@@ -126,28 +127,8 @@ const AuctionsGrid = () => {
       <div className="inner-container grid gap-4 py-4">
         <FilterControl />
 
-        {isFavorites && favoritedState.notFoundIds.length > 0 && (
-          <Alert variant="alert" className="w-fit">
-            The following auctions aren&apos;t available yet on our database:{' '}
-            {favoritedState.notFoundIds.map((id, index) => (
-              <>
-                <a
-                  target="_blank"
-                  rel="noreferrer noopener external"
-                  href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`}
-                  className="text-onAlert font-bold underline underline-offset-2"
-                >
-                  <span className="font-thin">#</span>
-                  {id}
-                </a>
-                {index < favoritedState.notFoundIds.length - 2
-                  ? ', '
-                  : index === favoritedState.notFoundIds.length - 1
-                  ? '.'
-                  : ` ${common.and} `}
-              </>
-            ))}
-          </Alert>
+        {isFavorites && (
+          <NotFoundAlert notFoundIds={favoritedState.notFoundIds} />
         )}
 
         <div

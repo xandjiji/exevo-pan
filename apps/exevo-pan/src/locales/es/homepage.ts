@@ -31,6 +31,8 @@ export default {
     /* @ ToDo: i18n */
     noFavorites: 'No favorited auctions',
     changeFilters: 'Cambiar filtros',
+    NotFoundAlert:
+      "The following auctions aren't available yet on our database:",
     /* @ ToDo: i18n */
     ExpandableCharacterCard: {
       details: 'Details',

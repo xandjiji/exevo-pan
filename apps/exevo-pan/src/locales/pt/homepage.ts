@@ -28,6 +28,8 @@ export default {
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
     noFavorites: 'Nenhum leilão favoritado',
     changeFilters: 'Mudar filtros',
+    NotFoundAlert:
+      'Os seguintes leilões ainda não estão disponíveis em nossa base de dados:',
     ExpandableCharacterCard: {
       details: 'Detalhes',
       copyLink: 'Copiar link',

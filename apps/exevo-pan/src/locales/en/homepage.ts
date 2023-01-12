@@ -29,6 +29,8 @@ export default {
     noAuctionFound: 'Sorry, no auction was found',
     noFavorites: 'No favorited auctions',
     changeFilters: 'Change filters',
+    NotFoundAlert:
+      "The following auctions aren't available yet on our database:",
     ExpandableCharacterCard: {
       details: 'Details',
       copyLink: 'Copy link',
