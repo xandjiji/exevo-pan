@@ -22,6 +22,11 @@ export default {
       price: 'Precio',
       priceBidded: 'Precio (solo con oferta)',
     },
+    separators: {
+      /* @ ToDo: i18n */
+      current: 'Current auctions',
+      history: 'Bazaar history',
+    },
     noAuctionFound: 'Disculpa, no se encontró ninguna subasta',
     changeFilters: 'Cambiar filtros',
     /* @ ToDo: i18n */

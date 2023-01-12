@@ -21,6 +21,10 @@ export default {
       price: 'Preço',
       priceBidded: 'Preço (apenas com lance)',
     },
+    separators: {
+      current: 'Leilões atuais',
+      history: 'Histórico do Bazaar',
+    },
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
     changeFilters: 'Mudar filtros',
     ExpandableCharacterCard: {

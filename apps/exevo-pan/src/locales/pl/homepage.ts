@@ -21,6 +21,11 @@ export default {
       price: 'Cena',
       priceBidded: 'Cena (Tylko ze złożonymi ofertami)',
     },
+    separators: {
+      /* @ ToDo: i18n */
+      current: 'Current auctions',
+      history: 'Bazaar history',
+    },
     noAuctionFound: 'Przepraszam, nie znaleziono aukcji',
     changeFilters: 'Zmień filtry',
     /* @ ToDo: i18n */

@@ -129,7 +129,10 @@ const AuctionsGrid = () => {
           {mode === 'favorites' ? (
             <>
               {favoritedState.currentIds.length > 0 && (
-                <S.GridTextSeparator>Current auctions</S.GridTextSeparator>
+                <S.GridTextSeparator>
+                  {homepage.AuctionsGrid.separators.current} (
+                  {favoritedState.currentIds.length})
+                </S.GridTextSeparator>
               )}
               {paginatedData.page
                 .filter(({ id }) => favoritedState.currentIds.includes(id))
@@ -142,7 +145,10 @@ const AuctionsGrid = () => {
                 ))}
 
               {favoritedState.historyIds.length > 0 && (
-                <S.GridTextSeparator>Auction history</S.GridTextSeparator>
+                <S.GridTextSeparator>
+                  {homepage.AuctionsGrid.separators.history} (
+                  {favoritedState.historyIds.length})
+                </S.GridTextSeparator>
               )}
               {paginatedData.page
                 .filter(({ id }) => favoritedState.historyIds.includes(id))

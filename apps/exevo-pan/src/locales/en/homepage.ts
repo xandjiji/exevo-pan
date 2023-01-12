@@ -22,6 +22,10 @@ export default {
       price: 'Price',
       priceBidded: 'Price (bidded only)',
     },
+    separators: {
+      current: 'Current auctions',
+      history: 'Bazaar history',
+    },
     noAuctionFound: 'Sorry, no auction was found',
     changeFilters: 'Change filters',
     ExpandableCharacterCard: {
