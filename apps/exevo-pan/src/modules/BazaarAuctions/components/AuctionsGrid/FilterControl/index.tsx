@@ -3,7 +3,7 @@ import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defa
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { useTranslations } from 'contexts/useTranslation'
 import { Menu } from 'components/Organisms'
-import { Chip, Text, Checkbox } from 'components/Atoms'
+import { Text, Checkbox } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
 import { formatNumberWithCommas, capitalizeFirstLetter } from 'utils'
 import { useDrawerFields } from '../../../contexts/useDrawerFields'
@@ -62,20 +62,20 @@ const FilterControl = ({
       {mode !== 'favorites' && (
         <>
           {notDefault('biddedOnly') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'biddedOnly' })
               }
             >
               <Checkbox checked disabled /> {homepage.FilterControl.biddedOnly}
-            </Chip>
+            </S.Chip>
           )}
 
           {[...filterState.vocation].map((vocationId) => {
             const vocationName = vocation.getVocationName(vocationId)
 
             return (
-              <Chip
+              <S.Chip
                 onClose={() =>
                   dispatch({
                     type: 'TOGGLE_FILTER_SET',
@@ -86,14 +86,14 @@ const FilterControl = ({
               >
                 {Icons.Vocations[vocationName]()}
                 {vocationName}
-              </Chip>
+              </S.Chip>
             )
           })}
 
           {[...filterState.pvp].map((type) => {
             const typeName = getInfo.pvp(type)
             return (
-              <Chip
+              <S.Chip
                 onClose={() =>
                   dispatch({
                     type: 'TOGGLE_FILTER_SET',
@@ -104,26 +104,26 @@ const FilterControl = ({
               >
                 {Icons.Pvps[typeName]()}
                 {typeName}
-              </Chip>
+              </S.Chip>
             )
           })}
 
           {[...filterState.battleye].map((value) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'TOGGLE_FILTER_SET', key: 'battleye', value })
               }
             >
               <Icons.Battleye color={value ? 'battleGreen' : 'battleYellow'} />
               {value ? 'Green' : 'Yellow'}
-            </Chip>
+            </S.Chip>
           ))}
 
           {[...filterState.location].map((type) => {
             const typeName = getInfo.location(type)
 
             return (
-              <Chip
+              <S.Chip
                 onClose={() =>
                   dispatch({
                     type: 'TOGGLE_FILTER_SET',
@@ -134,12 +134,12 @@ const FilterControl = ({
               >
                 {Icons.Location[typeName]()}
                 {typeName}
-              </Chip>
+              </S.Chip>
             )
           })}
 
           {[...filterState.serverSet].map((server) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -149,103 +149,103 @@ const FilterControl = ({
               }
             >
               {server}
-            </Chip>
+            </S.Chip>
           ))}
 
           {notDefault('dummy') && (
-            <Chip
+            <S.Chip
               onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'dummy' })}
             >
               🗿 Training dummy
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('goldPouch') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'goldPouch' })
               }
             >
               💰 Gold pouch
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('hireling') && (
-            <Chip
+            <S.Chip
               onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'hireling' })}
             >
               💁 Hirelings
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('transferAvailable') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'transferAvailable' })
               }
             >
               🌎 Regular world transfer
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('charmExpansion') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'charmExpansion' })
               }
             >
               🧙‍♂️ Charm Expansion
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('preySlot') && (
-            <Chip
+            <S.Chip
               onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'preySlot' })}
             >
               🎯 Prey Slot
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('huntingSlot') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'huntingSlot' })
               }
             >
               🏹 Hunting Task Slot
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('imbuementShrine') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'imbuementShrine' })
               }
             >
               ⛲ Imbuement Shrine
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('rewardShrine') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'rewardShrine' })
               }
             >
               ⛲ Reward Shrine
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('mailbox') && (
-            <Chip
+            <S.Chip
               onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'mailbox' })}
             >
               📬 Mailbox
-            </Chip>
+            </S.Chip>
           )}
 
           {(notDefault('minLevel') || notDefault('maxLevel')) && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'SET_FILTERS',
@@ -273,12 +273,12 @@ const FilterControl = ({
                   notDefault('maxLevel') &&
                   formatNumberWithCommas(filterState.maxLevel)}
               </S.Strong>
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('minSkill') &&
             [...filterState.skillKey].map((skillKey) => (
-              <Chip
+              <S.Chip
                 onClose={() => {
                   if (filterState.skillKey.size === 1) {
                     dispatch({
@@ -304,11 +304,11 @@ const FilterControl = ({
                   {filterState.minSkill}
                   {notDefault('maxSkill') ? `~${filterState.maxSkill}` : null}
                 </S.Strong>
-              </Chip>
+              </S.Chip>
             ))}
 
           {[...filterState.outfitSet].map((outfit) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -318,11 +318,11 @@ const FilterControl = ({
               }
             >
               👕 {outfit}
-            </Chip>
+            </S.Chip>
           ))}
 
           {[...filterState.storeOutfitSet].map((outfit) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -332,11 +332,11 @@ const FilterControl = ({
               }
             >
               👕 {outfit}
-            </Chip>
+            </S.Chip>
           ))}
 
           {[...filterState.mountSet].map((mount) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -346,11 +346,11 @@ const FilterControl = ({
               }
             >
               🐴 {mount}
-            </Chip>
+            </S.Chip>
           ))}
 
           {[...filterState.storeMountSet].map((mount) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -360,21 +360,21 @@ const FilterControl = ({
               }
             >
               🐴 {mount}
-            </Chip>
+            </S.Chip>
           ))}
 
           {notDefault('bossPoints') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'bossPoints' })
               }
             >
               👺 {formatNumberWithCommas(filterState.bossPoints)} Boss points
-            </Chip>
+            </S.Chip>
           )}
 
           {notDefault('tcInvested') && (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'tcInvested' })
               }
@@ -384,20 +384,20 @@ const FilterControl = ({
                 value={filterState.tcInvested}
               />{' '}
               {homepage.FilterControl.invested}
-            </Chip>
+            </S.Chip>
           )}
 
           {imbuementOptions.length === filterState.imbuementsSet.size ? (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'imbuementsSet' })
               }
             >
               🪄 {homepage.FilterControl.allImbuements}
-            </Chip>
+            </S.Chip>
           ) : (
             [...filterState.imbuementsSet].map((imbuement) => (
-              <Chip
+              <S.Chip
                 onClose={() =>
                   dispatch({
                     type: 'TOGGLE_FILTER_SET',
@@ -407,21 +407,21 @@ const FilterControl = ({
                 }
               >
                 🪄 {imbuement}
-              </Chip>
+              </S.Chip>
             ))
           )}
 
           {charmOptions.length === filterState.charmsSet.size ? (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({ type: 'SET_DEFAULT', key: 'charmsSet' })
               }
             >
               ♉ {homepage.FilterControl.allCharms}
-            </Chip>
+            </S.Chip>
           ) : (
             [...filterState.charmsSet].map((charm) => (
-              <Chip
+              <S.Chip
                 onClose={() =>
                   dispatch({
                     type: 'TOGGLE_FILTER_SET',
@@ -431,12 +431,12 @@ const FilterControl = ({
                 }
               >
                 ♉ {charm}
-              </Chip>
+              </S.Chip>
             ))
           )}
 
           {[...filterState.questSet].map((quest) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -446,11 +446,11 @@ const FilterControl = ({
               }
             >
               📖 {quest}
-            </Chip>
+            </S.Chip>
           ))}
 
           {[...filterState.achievementSet].map((achievement) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -460,11 +460,11 @@ const FilterControl = ({
               }
             >
               ⭐ {achievement}
-            </Chip>
+            </S.Chip>
           ))}
 
           {[...filterState.tags].map((tag) => (
-            <Chip
+            <S.Chip
               onClose={() =>
                 dispatch({
                   type: 'TOGGLE_FILTER_SET',
@@ -474,15 +474,15 @@ const FilterControl = ({
               }
             >
               {common.SpecialTags[tag]}
-            </Chip>
+            </S.Chip>
           ))}
 
           {notDefault('rareNick') && (
-            <Chip
+            <S.Chip
               onClose={() => dispatch({ type: 'SET_DEFAULT', key: 'rareNick' })}
             >
               {homepage.FilterControl.rareNickname}
-            </Chip>
+            </S.Chip>
           )}
         </>
       )}
