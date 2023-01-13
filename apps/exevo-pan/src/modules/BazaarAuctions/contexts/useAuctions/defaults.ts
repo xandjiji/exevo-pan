@@ -9,7 +9,7 @@ import { AuctionsContextValues } from './types'
 export const DEFAULT_STATE: AuctionsContextValues = {
   loading: false,
   initialTCInvested: [],
-  isHistory: false,
+  mode: 'current',
   highlightedAuctions: [],
   filterState: DEFAULT_FILTER_OPTIONS,
   activeFilterCount: 0,
@@ -25,6 +25,8 @@ export const DEFAULT_STATE: AuctionsContextValues = {
     hasNext: false,
     hasPrev: false,
   },
+  favoritedState: { currentIds: [], historyIds: [], notFoundIds: [] },
+  Favorites: { has: () => false, list: [], toggle: () => {} },
   shouldDisplayHighlightedAuctions: true,
   handlePaginatorFetch: async () => {},
   dispatch: () => {},

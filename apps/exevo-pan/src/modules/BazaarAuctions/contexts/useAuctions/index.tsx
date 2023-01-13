@@ -4,6 +4,7 @@ import {
   useReducer,
   useEffect,
   useCallback,
+  useRef,
 } from 'react'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
@@ -12,6 +13,7 @@ import { AuctionsClient } from 'services/client'
 import { LoadingAlert } from 'components/Atoms'
 import { pluckTCInvested } from 'utils'
 import { useSynchUrlState } from './useSynchUrlState'
+import { useFavorites } from './useFavorites'
 import AuctionsReducer from './reducer'
 import { DEFAULT_STATE } from './defaults'
 import { AuctionsContextValues, AuctionsProviderProps } from './types'
@@ -30,8 +32,8 @@ export const AuctionsProvider = ({
   const { data, status } = useSession()
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
-    loading: false,
-    isHistory: false,
+    loading: DEFAULT_STATE.loading,
+    mode: DEFAULT_STATE.mode,
     filterState: DEFAULT_STATE.filterState,
     activeFilterCount: DEFAULT_STATE.activeFilterCount,
     paginationOptions: DEFAULT_STATE.paginationOptions,
@@ -43,6 +45,7 @@ export const AuctionsProvider = ({
       ...initialPaginatedData,
       page: initialPaginatedData.page.map(pluckTCInvested),
     },
+    favoritedState: DEFAULT_STATE.favoritedState,
     shouldDisplayHighlightedAuctions:
       DEFAULT_STATE.shouldDisplayHighlightedAuctions,
     initialTCInvested: initialPaginatedData.page.map(
@@ -50,28 +53,45 @@ export const AuctionsProvider = ({
     ),
   })
 
-  const { paginationOptions, sortingOptions, filterState, isHistory } = state
+  const { paginationOptions, sortingOptions, filterState, mode } = state
+
+  const Favorites = useFavorites()
+  const favoriteRef = useRef(Favorites.list)
+  favoriteRef.current = Favorites.list
 
   const isMounted = useIsMounted()
   useEffect(() => {
     if (isMounted) {
       dispatch({ type: 'SET_LOADING', loading: true })
 
-      AuctionsClient.fetchAuctionPage({
-        paginationOptions,
-        sortOptions: sortingOptions,
-        filterOptions: filterState,
-        history: isHistory,
-      }).then((paginatedData) => {
-        dispatch({ type: 'SET_PAGINATED_DATA', paginatedData })
-      })
+      if (mode === 'favorites') {
+        AuctionsClient.fetchFavorited({
+          ids: favoriteRef.current,
+          sortOptions: sortingOptions,
+        }).then(({ favoritedState, paginatedData }) => {
+          dispatch({
+            type: 'SET_FAVORITED_DATA',
+            favoritedState,
+            paginatedData,
+          })
+        })
+      } else {
+        AuctionsClient.fetchAuctionPage({
+          paginationOptions,
+          sortOptions: sortingOptions,
+          filterOptions: filterState,
+          history: mode === 'history',
+        }).then((paginatedData) => {
+          dispatch({ type: 'SET_PAGINATED_DATA', paginatedData })
+        })
+      }
     }
-  }, [paginationOptions, sortingOptions, filterState, isHistory])
+  }, [paginationOptions, sortingOptions, filterState, mode])
 
   useSynchUrlState({
     isPro: status === 'loading' ? undefined : data?.user.proStatus ?? false,
-    isHistory,
-    filterState,
+    mode,
+    filterState: mode === 'favorites' ? DEFAULT_STATE.filterState : filterState,
     paginationOptions,
     sortingOptions,
     dispatch,
@@ -90,6 +110,7 @@ export const AuctionsProvider = ({
         ...state,
         highlightedAuctions,
         handlePaginatorFetch,
+        Favorites,
         dispatch,
       }}
     >

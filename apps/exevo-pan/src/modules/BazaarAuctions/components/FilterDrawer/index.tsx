@@ -62,7 +62,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     mountValues,
     storeMountValues,
   } = useDrawerFields()
-  const { filterState, activeFilterCount, isHistory, dispatch } = useAuctions()
+  const { filterState, activeFilterCount, mode, dispatch } = useAuctions()
+
+  const isHistory = mode === 'history'
 
   const serverOptions = useFilterServers({
     allServerOptions,
@@ -96,6 +98,10 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [minSkill, setMinSkill] = useDebouncedFilter({
     key: 'minSkill',
     controlledValue: filterState.minSkill,
+  })
+  const [, setMaxSkill] = useDebouncedFilter({
+    key: 'maxSkill',
+    controlledValue: filterState.maxSkill,
   })
 
   const [bossPoints, setBossPoints] = useDebouncedFilter({
@@ -138,14 +144,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
-        <FilterGroup>
-          <Switch
-            active={isHistory}
-            onClick={() => dispatch({ type: 'TOGGLE_HISTORY' })}
-          >
-            {homepage.FilterDrawer.labels.bazaarHistory}
-          </Switch>
-        </FilterGroup>
         <FilterGroup>
           <Checkbox
             label={homepage.FilterDrawer.labels.biddedOnly}
@@ -545,9 +543,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             max={130}
             value={minSkill}
             onChange={useCallback(
-              (event: React.ChangeEvent<HTMLInputElement>) =>
-                setMinSkill(+event.target.value),
-              [setMinSkill],
+              (event: React.ChangeEvent<HTMLInputElement>) => {
+                setMinSkill(+event.target.value)
+                setMaxSkill(DEFAULT_FILTER_OPTIONS.maxSkill)
+              },
+              [setMinSkill, setMaxSkill],
             )}
             onKeyPress={blurOnEnter}
             enterKeyHint="done"

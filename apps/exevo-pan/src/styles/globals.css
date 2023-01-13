@@ -25,7 +25,7 @@
     border-right: 3px solid transparent !important;
     border-left: 3px solid rgb(var(--primary));
     border-bottom: none !important;
-    @apply w-6 h-6 rounded-full inline-block ;
+    @apply inline-block h-6 w-6 rounded-full;
     animation: spinAnimation 1.4s infinite ease-out;
   }
 
@@ -129,7 +129,9 @@
   --green: 55 119 18;
   --greenHighlight: 71 155 23;
   --red: 197 19 19;
-  --alert: 249 238 193;
+  --primaryAlert: 251 191 36;
+  --primaryVariantAlert: 255 237 213;
+  --onAlert: 146 64 14;
   --battleGreen: 67 182 0;
   --battleYellow: 255 221 0;
   --kwai: 255 119 5;
@@ -153,7 +155,9 @@ html[data-theme='dark'] {
   --green: 90 153 53;
   --greenHighlight: 117 199 69;
   --red: 255 91 91;
-  --alert: 249 238 193;
+  --primaryAlert: 251 146 60;
+  --primaryVariantAlert: 254 215 170;
+  --onAlert: 154 52 18;
   --battleGreen: 67 182 0;
   --battleYellow: 255 221 0;
   --kwai: 255 119 5;

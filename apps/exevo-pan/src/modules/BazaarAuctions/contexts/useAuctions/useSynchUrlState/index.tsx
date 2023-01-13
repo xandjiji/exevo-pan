@@ -1,29 +1,29 @@
 import { useEffect, useMemo } from 'react'
 import { filterSchema } from 'shared-utils/dist/contracts/Filters/schemas/filterUrl'
 import { sortSchema } from 'shared-utils/dist/contracts/Filters/schemas/sortUrl'
-import { codecs } from 'shared-utils/dist/urlSerializer'
 import { pluckPremiumFilters } from 'utils'
 import useSynchUrlParamsState from './useSynchUrlParamsState'
 import { paginationSchema } from '../defaults'
 import { UseSynchcUrlStateProps } from './types'
 
+const DEFAULT_MODE: AuctionQueryMode = 'current'
+
 export const useSynchUrlState = ({
   isPro,
-  isHistory,
+  mode: modeProp,
   filterState,
   paginationOptions,
   sortingOptions,
   dispatch,
 }: UseSynchcUrlStateProps) => {
-  const [{ urlHistory }, isHistoryDefault] = useSynchUrlParamsState({
+  const [{ mode }, isHistoryDefault] = useSynchUrlParamsState({
     schemaCodec: {
-      urlHistory: {
-        defaultValue: false,
-        urlKey: 'history',
-        decode: codecs.decode.Boolean,
+      mode: {
+        defaultValue: DEFAULT_MODE,
+        urlKey: 'mode',
       },
     },
-    currentState: useMemo(() => ({ urlHistory: isHistory }), [isHistory]),
+    currentState: useMemo(() => ({ mode: modeProp }), [modeProp]),
   })
   const [urlFilters, isFiltersDefault] = useSynchUrlParamsState({
     schemaCodec: filterSchema,
@@ -59,7 +59,7 @@ export const useSynchUrlState = ({
         urlFilters: isPro ? urlFilters : pluckPremiumFilters(urlFilters),
         urlPagination,
         urlSorting,
-        urlHistory,
+        mode,
       })
     } else if (isPro) {
       dispatch({ type: 'HYDRATE_TC_INVESTED' })

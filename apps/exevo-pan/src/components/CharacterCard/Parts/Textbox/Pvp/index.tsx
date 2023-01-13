@@ -1,14 +1,15 @@
 import { memo } from 'react'
-import clsx from 'clsx'
+import Image from 'next/image'
+import yellowSrc from 'assets/yellowbattleye.png'
+import greenSrc from 'assets/greenbattleye.png'
 import { LabeledTextBox } from '../../atoms'
 
 const Pvp = ({ serverData }: Pick<CharacterObject, 'serverData'>) => (
   <LabeledTextBox labelText="PvP">
-    <div
-      className={clsx(
-        'border-1 h-2.5 w-2.5 rounded-full border-solid border-black/20 shadow-sm',
-        serverData.battleye ? 'bg-battleGreen' : ' bg-battleYellow',
-      )}
+    <Image
+      role="none"
+      alt={`${serverData.battleye ? 'Green' : 'Yellow'} BattlEye`}
+      src={serverData.battleye ? greenSrc : yellowSrc}
     />
     {serverData.pvpType.string}
   </LabeledTextBox>

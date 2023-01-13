@@ -3,7 +3,7 @@ import clsx from 'clsx'
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
-import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
+import { mmddyyyy2ddmmyyy, sortStringDates, officialAuctionUrl } from 'utils'
 import { ReceiptIcon } from 'assets/svgs'
 import { calculatePrice, readablePrice } from '../../utils'
 import { SummaryProps } from './types'
@@ -48,7 +48,9 @@ const Summary = ({
         <Strong>
           {selectedCharacter?.nickname}{' '}
           <a
-            href={`https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${selectedCharacter?.id}&source=overview`}
+            href={officialAuctionUrl(
+              selectedCharacter ? selectedCharacter.id : 0,
+            )}
             target="_blank"
             rel="noreferrer noopener"
             className="text-tsm text-onSurface relative font-light tracking-widest"

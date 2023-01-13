@@ -22,20 +22,49 @@ export default {
       price: 'Precio',
       priceBidded: 'Precio (solo con oferta)',
     },
+    separators: {
+      /* @ ToDo: i18n */
+      current: 'Current auctions',
+      history: 'Bazaar history',
+    },
     noAuctionFound: 'Disculpa, no se encontró ninguna subasta',
+    /* @ ToDo: i18n */
+    noFavorites: 'No favorited auctions',
     changeFilters: 'Cambiar filtros',
+    NotFoundAlert:
+      "The following auctions aren't available yet on our database:",
     /* @ ToDo: i18n */
     ExpandableCharacterCard: {
       details: 'Details',
       copyLink: 'Copy link',
       findSimilar: 'Find similar',
+      favorite: {
+        add: 'Add favorite',
+        remove: 'Remove favorite',
+      },
     },
+  },
+  FilterControl: {
+    /* @ ToDo: i18n */
+    modes: {
+      current: 'Current auctions',
+      history: 'Bazaar history',
+      favorites: 'Favorites',
+    },
+    /* @ ToDo: i18n */
+    biddedOnly: 'Bidded only',
+    /* @ ToDo: i18n */
+    invested: 'invested',
+    /* @ ToDo: i18n */
+    allImbuements: 'All imbuements',
+    /* @ ToDo: i18n */
+    allCharms: 'All charms',
+    rareNickname: 'Nicknames raros',
   },
   FilterDrawer: {
     title: 'Filtros',
     exevoProExclusive: '(exclusive for {{exevopro}})',
     labels: {
-      bazaarHistory: 'Histórico del Bazaar',
       searchNickname: 'Buscar nickname',
       vocation: 'Vocación',
       serverLocation: 'Ubicación del servidor',

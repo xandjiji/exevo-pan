@@ -27,7 +27,7 @@ describe('<Summary />', () => {
     const linkElement = screen.getByRole('link')
     expect(linkElement).toHaveAttribute(
       'href',
-      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${props.selectedCharacter?.id}&source=overview`,
+      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${props.selectedCharacter?.id}`,
     )
     expect(linkElement).toHaveTextContent(`(#${props.selectedCharacter?.id})`)
 

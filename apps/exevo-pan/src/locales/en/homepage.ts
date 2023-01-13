@@ -22,19 +22,41 @@ export default {
       price: 'Price',
       priceBidded: 'Price (bidded only)',
     },
+    separators: {
+      current: 'Current auctions',
+      history: 'Bazaar history',
+    },
     noAuctionFound: 'Sorry, no auction was found',
+    noFavorites: 'No favorited auctions',
     changeFilters: 'Change filters',
+    NotFoundAlert:
+      "The following auctions aren't available yet on our database:",
     ExpandableCharacterCard: {
       details: 'Details',
       copyLink: 'Copy link',
       findSimilar: 'Find similar',
+      favorite: {
+        add: 'Add favorite',
+        remove: 'Remove favorite',
+      },
     },
+  },
+  FilterControl: {
+    modes: {
+      current: 'Current auctions',
+      history: 'Bazaar history',
+      favorites: 'Favorites',
+    },
+    biddedOnly: 'Bidded only',
+    invested: 'invested',
+    allImbuements: 'All imbuements',
+    allCharms: 'All charms',
+    rareNickname: 'Rare nickname',
   },
   FilterDrawer: {
     title: 'Filters',
     exevoProExclusive: '(exclusive for {{exevopro}})',
     labels: {
-      bazaarHistory: 'Bazaar History',
       searchNickname: 'Search nickname',
       vocation: 'Vocation',
       serverLocation: 'Server location',

@@ -40,7 +40,7 @@ const GuildSummary = ({
         {displayValue}
         {!!diffText && (
           <span
-            className="bg-alert text-tsm lg:text-l absolute top-1/2 left-full rounded py-1 px-2 text-black shadow-md lg:ml-4"
+            className="bg-primaryVariantAlert text-tsm lg:text-l text-onAlert absolute top-1/2 left-full rounded py-1 px-2 shadow-md lg:ml-4"
             style={{ transform: 'translateY(-50%)' }}
             title={`${diffText} ${war.GuildSummary.diffTitleSuffix}`}
           >

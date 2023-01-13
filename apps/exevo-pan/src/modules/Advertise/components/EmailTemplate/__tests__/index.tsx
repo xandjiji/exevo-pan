@@ -27,7 +27,7 @@ describe('<BuildEmailHtml />', () => {
     const linkElement = screen.getByRole('link')
     expect(linkElement).toHaveAttribute(
       'href',
-      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}&source=overview`,
+      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`,
     )
     expect(linkElement).toHaveTextContent(`(#${id})`)
 
@@ -68,7 +68,7 @@ describe('<BuildEmailHtml />', () => {
     const linkElement = screen.getByRole('link')
     expect(linkElement).toHaveAttribute(
       'href',
-      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}&source=overview`,
+      `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}`,
     )
     expect(linkElement).toHaveTextContent(`(#${id})`)
 

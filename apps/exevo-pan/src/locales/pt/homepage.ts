@@ -21,19 +21,41 @@ export default {
       price: 'Preço',
       priceBidded: 'Preço (apenas com lance)',
     },
+    separators: {
+      current: 'Leilões atuais',
+      history: 'Histórico do Bazaar',
+    },
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
+    noFavorites: 'Nenhum leilão favoritado',
     changeFilters: 'Mudar filtros',
+    NotFoundAlert:
+      'Os seguintes leilões ainda não estão disponíveis em nossa base de dados:',
     ExpandableCharacterCard: {
       details: 'Detalhes',
       copyLink: 'Copiar link',
       findSimilar: 'Buscar similares',
+      favorite: {
+        add: 'Favoritar',
+        remove: 'Desfavoritar',
+      },
     },
+  },
+  FilterControl: {
+    modes: {
+      current: 'Leilões atuais',
+      history: 'Histórico do Bazaar',
+      favorites: 'Favoritos',
+    },
+    biddedOnly: 'Apenas com lance',
+    invested: 'investido',
+    allImbuements: 'Todos os imbuements',
+    allCharms: 'Todos os charms',
+    rareNickname: 'Nickname raro',
   },
   FilterDrawer: {
     title: 'Filtros',
     exevoProExclusive: '(exclusivo {{exevopro}})',
     labels: {
-      bazaarHistory: 'Histórico do Bazaar',
       searchNickname: 'Procurar nickname',
       vocation: 'Vocação',
       serverLocation: 'Localização do servidor',

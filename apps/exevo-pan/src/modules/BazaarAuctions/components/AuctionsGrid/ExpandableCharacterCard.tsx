@@ -1,12 +1,19 @@
 /* eslint-disable react/require-default-props */
+import clsx from 'clsx'
 import { useRef, useMemo, useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { CopyButton, Sticker } from 'components/Atoms'
-import { Menu, ClientComponent } from 'components/Organisms'
+import { CopyButton } from 'components/Atoms'
+import { Menu } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import CharacterModal from 'components/CharacterModal'
-import { MoreIcon, ExpandIcon, SearchIcon } from 'assets/svgs'
+import {
+  MoreIcon,
+  ExpandIcon,
+  SearchIcon,
+  OutlineAddIcon,
+  OutlineRemoveIcon,
+} from 'assets/svgs'
 import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
@@ -14,13 +21,33 @@ import { urlParameters } from 'Constants'
 import { useAuctions } from '../../contexts/useAuctions'
 import { getSimilarCharacterFilters } from './utils'
 
-const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
+type ExpandableCharacterCardProps = {
+  highlightedAuctions: CharacterObject[]
+  forceNoHighlight?: boolean
+} & Omit<CharacterCardProps, 'ref' | 'highlighted'>
+
+const ExpandableCharacterCard = ({
+  highlightedAuctions,
+  forceNoHighlight = false,
+  ...props
+}: ExpandableCharacterCardProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
 
-  const { characterData } = props
-  const auctionId = characterData.id
+  const auctionId = props.characterData.id
+
+  const highlightedAuction = useMemo(
+    () => highlightedAuctions.find(({ id }) => id === auctionId),
+    [auctionId, highlightedAuctions],
+  )
+  const characterData: CharacterObject = useMemo(
+    () =>
+      highlightedAuction
+        ? { ...props.characterData, tcInvested: highlightedAuction.tcInvested }
+        : props.characterData,
+    [props.characterData, highlightedAuction],
+  )
 
   const { locale } = useRouter()
 
@@ -29,7 +56,7 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
     [auctionId, locale],
   )
 
-  const { dispatch } = useAuctions()
+  const { Favorites, dispatch } = useAuctions()
 
   const [isExpanded, setExpanded] = useState(false)
   const [, setAuctionIdUrl] = useSyncUrlState<number | undefined>({
@@ -56,6 +83,25 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
     copyButtonRef.current?.click()
   }, [])
 
+  const isFavorited = Favorites.has(auctionId)
+  const shouldAnimateFavIconRef = useRef(false)
+
+  const FavoriteIcon = () => {
+    const Icon = isFavorited ? OutlineRemoveIcon : OutlineAddIcon
+
+    const shouldAnimate = shouldAnimateFavIconRef.current
+    shouldAnimateFavIconRef.current = false
+
+    return (
+      <Icon
+        className={clsx(
+          'fill-primaryHighlight h-full w-full',
+          shouldAnimate && 'animate-rollIn',
+        )}
+      />
+    )
+  }
+
   return (
     <>
       <CharacterCard
@@ -75,6 +121,18 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
               },
               {
                 label:
+                  homepage.AuctionsGrid.ExpandableCharacterCard.favorite[
+                    isFavorited ? 'remove' : 'add'
+                  ],
+                icon: FavoriteIcon,
+                keepOpenAfterSelection: true,
+                onSelect: () => {
+                  Favorites.toggle(auctionId)
+                  shouldAnimateFavIconRef.current = true
+                },
+              },
+              {
+                label:
                   homepage.AuctionsGrid.ExpandableCharacterCard.findSimilar,
                 icon: SearchIcon,
                 onSelect: () =>
@@ -86,19 +144,11 @@ const ExpandableCharacterCard = (props: Omit<CharacterCardProps, 'ref'>) => {
             ]}
           >
             <MoreIcon className="fill-onSurface" />
-            {/* @ ToDo: remove this */}
-            <ClientComponent>
-              <Sticker
-                localStorageKey="05012023"
-                className="animate-swing absolute -top-4 left-4"
-                style={{ rotate: '30deg' }}
-              >
-                New
-              </Sticker>
-            </ClientComponent>
           </Menu>
         }
         {...props}
+        lazyRender
+        highlighted={forceNoHighlight ? false : !!highlightedAuction}
       />
       {isExpanded && (
         <CharacterModal

@@ -6,7 +6,7 @@ export type UseSynchcUrlStateProps = {
   filterState: FilterOptions
   sortingOptions: SortOptions
   paginationOptions: PaginationOptions
-  isHistory: boolean
+  mode: AuctionQueryMode
   dispatch: React.Dispatch<Action>
 }
 

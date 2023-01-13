@@ -10,7 +10,7 @@ describe('<AuctionIdLink />', () => {
     expect(linkElement).toHaveTextContent('(#123)')
     expect(linkElement).toHaveAttribute(
       'href',
-      'https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=123&source=overview',
+      'https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=123',
     )
   })
 })

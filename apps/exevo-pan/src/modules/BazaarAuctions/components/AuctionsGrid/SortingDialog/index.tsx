@@ -5,7 +5,6 @@ import { Tooltip } from 'components/Organisms'
 import { SortIcon } from 'assets/svgs'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { Button } from '../atoms'
-import styles from '../styles.module.css'
 
 const sortModesTranslationKey = {
   'Auction end': 'auctionEnd',
@@ -73,7 +72,7 @@ const SortingDialog = () => {
         aria-label={homepage.AuctionsGrid.sortingButtonLabel}
         aria-haspopup="dialog"
       >
-        <SortIcon className={styles.icon} />
+        <SortIcon className="fill-onSurface h-[37px] w-[37px] p-0.5" />
       </Button>
     </Tooltip>
   )
