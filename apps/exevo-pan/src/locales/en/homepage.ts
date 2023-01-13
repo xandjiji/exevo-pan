@@ -36,8 +36,8 @@ export default {
       copyLink: 'Copy link',
       findSimilar: 'Find similar',
       favorite: {
-        add: 'Add favorite',
-        remove: 'Remove favorite',
+        add: 'Favorite',
+        remove: 'Unfavorite',
       },
     },
   },
