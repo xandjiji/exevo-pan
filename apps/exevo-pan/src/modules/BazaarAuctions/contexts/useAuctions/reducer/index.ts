@@ -16,6 +16,8 @@ const ActionsReducer: Reducer<Action> = (state, action) => {
       return { ...state, loading: action.loading }
 
     case 'SET_MODE': {
+      if (action.mode === state.mode) return state
+
       const nextState: ReturnType<typeof ActionsReducer> = {
         ...state,
         loading: true,
