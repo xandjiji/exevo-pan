@@ -90,7 +90,7 @@ export const useKeyboardNavigation: KeyboardHandler =
       return e.preventDefault()
     }
 
-    if (keySet.close.has(e.key)) {
+    if (keySet.close.has(e.key) && open) {
       dispatch({ type: 'SET_OPEN', open: false })
       return e.preventDefault()
     }
