@@ -29,13 +29,14 @@ type ExpandableCharacterCardProps = {
 const ExpandableCharacterCard = ({
   highlightedAuctions,
   forceNoHighlight = false,
+  characterData: characterDataProps,
   ...props
 }: ExpandableCharacterCardProps) => {
   const {
     translations: { homepage },
   } = useTranslations()
 
-  const auctionId = props.characterData.id
+  const auctionId = characterDataProps.id
 
   const highlightedAuction = useMemo(
     () => highlightedAuctions.find(({ id }) => id === auctionId),
@@ -44,9 +45,9 @@ const ExpandableCharacterCard = ({
   const characterData: CharacterObject = useMemo(
     () =>
       highlightedAuction
-        ? { ...props.characterData, tcInvested: highlightedAuction.tcInvested }
-        : props.characterData,
-    [props.characterData, highlightedAuction],
+        ? { ...characterDataProps, tcInvested: highlightedAuction.tcInvested }
+        : characterDataProps,
+    [characterDataProps, highlightedAuction],
   )
 
   const { locale } = useRouter()
@@ -149,6 +150,7 @@ const ExpandableCharacterCard = ({
         {...props}
         lazyRender
         highlighted={forceNoHighlight ? false : !!highlightedAuction}
+        characterData={characterData}
       />
       {isExpanded && (
         <CharacterModal
