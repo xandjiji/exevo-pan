@@ -35,7 +35,6 @@ export const pluckPremiumParameters = (searchParams: URLSearchParams) => {
   searchParams.delete(filterSchema.storeMountSet.urlKey)
 
   searchParams.delete(filterSchema.tcInvested.urlKey)
-  searchParams.delete(filterSchema.auctionIds.urlKey)
 
   const tagParams = searchParams.get(filterSchema.tags.urlKey)
   if (tagParams) {
