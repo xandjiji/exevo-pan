@@ -156,7 +156,30 @@ describe('<AuctionsGrid />', () => {
     expect(screen.getByText(/123,456 invested/gi)).toBeInTheDocument()
   })
 
-  test.todo('filters should appear and be controlled by tags')
+  test('filters should appear and be controlled by tags', () => {
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
+      filterState: {
+        ...DEFAULT_AUCTIONS_STATE.filterState,
+        dummy: true,
+        maxLevel: 2950,
+        skillKey: new Set(['distance']),
+        minSkill: 60,
+        rareNick: true,
+      },
+    }))
+
+    renderWithProviders(<AuctionsGrid />)
+
+    expect(screen.getByText(/training dummy/i)).toBeInTheDocument()
+    expect(screen.getByText(/max level:/i)).toBeInTheDocument()
+    expect(screen.getByText(/distance:/i)).toBeInTheDocument()
+    expect(screen.getByText(/rare nickname/i)).toBeInTheDocument()
+
+    expect(DEFAULT_AUCTIONS_STATE.dispatch).toHaveBeenCalledTimes(0)
+    userEvent.click(screen.getAllByRole('button', { name: 'Remove item' })[0])
+    expect(DEFAULT_AUCTIONS_STATE.dispatch).toHaveBeenCalledTimes(1)
+  })
 
   test.todo('highlighted auctions should not be displayed on favorites mode')
 

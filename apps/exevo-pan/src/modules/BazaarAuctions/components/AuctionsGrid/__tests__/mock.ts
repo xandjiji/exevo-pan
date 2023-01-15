@@ -44,5 +44,5 @@ export const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
   })),
   paginationOptions: DEFAULT_PAGINATION_OPTIONS,
   sortingOptions: DEFAULT_SORT_OPTIONS,
-  dispatch: () => {},
+  dispatch: jest.fn(),
 }
