@@ -181,9 +181,24 @@ describe('<AuctionsGrid />', () => {
     expect(DEFAULT_AUCTIONS_STATE.dispatch).toHaveBeenCalledTimes(1)
   })
 
-  test.todo('highlighted auctions should not be displayed on favorites mode')
+  test('grid mode should be updated', () => {
+    const { rerender } = renderWithProviders(<AuctionsGrid />)
 
-  test.todo('grid mode should only update after it has settled')
+    expect(
+      screen.getByRole('button', { name: 'Current auctions' }),
+    ).toBeInTheDocument()
+
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
+      mode: 'favorites',
+      loading: true,
+    }))
+    rerender(<AuctionsGrid />)
+
+    expect(
+      screen.getByRole('button', { name: 'Favorites' }),
+    ).toBeInTheDocument()
+  })
 
   test.todo('filter button should be disabled if in favorites mode')
 
