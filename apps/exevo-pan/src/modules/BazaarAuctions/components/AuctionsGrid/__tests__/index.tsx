@@ -200,11 +200,64 @@ describe('<AuctionsGrid />', () => {
     ).toBeInTheDocument()
   })
 
-  test.todo('filter button should be disabled if in favorites mode')
+  test('filter button should be disabled if in favorites mode', () => {
+    const { rerender } = renderWithProviders(<AuctionsGrid />)
 
-  test.todo('not found favorite auctions should be displayed in an alert')
+    expect(
+      screen.getByRole('button', { name: 'Open filter drawer' }),
+    ).toBeEnabled()
 
-  test.todo(
-    'in favorite mode, history auctions and current auctions should be separated',
-  )
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
+      mode: 'favorites',
+      loading: false,
+    }))
+
+    rerender(<AuctionsGrid />)
+
+    expect(
+      screen.getByRole('button', { name: 'Open filter drawer' }),
+    ).toBeDisabled()
+  })
+
+  test('not found favorite auctions should be displayed in an alert', () => {
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
+      mode: 'favorites',
+      favoritedState: {
+        ...DEFAULT_AUCTIONS_STATE.favoritedState,
+        notFoundIds: [123, 456],
+      },
+    }))
+
+    renderWithProviders(<AuctionsGrid />)
+
+    expect(screen.getByRole('alert')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /123/g })).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: /456/g })).toBeInTheDocument()
+  })
+
+  test('in favorite mode, history auctions and current auctions should be separated', () => {
+    const [a, b, c, ...rest] = DEFAULT_AUCTIONS_STATE.paginatedData.page.map(
+      ({ id }) => id,
+    )
+    mockedUseAuctions.mockImplementation(() => ({
+      ...DEFAULT_AUCTIONS_STATE,
+      mode: 'favorites',
+      favoritedState: {
+        ...DEFAULT_AUCTIONS_STATE.favoritedState,
+        currentIds: [a, b, c],
+        historyIds: [...rest],
+      },
+    }))
+
+    renderWithProviders(<AuctionsGrid />)
+
+    expect(screen.getByText(/current auctions/i).textContent).toEqual(
+      'Current auctions (3)',
+    )
+    expect(screen.getByText(/bazaar history/i).textContent).toEqual(
+      'Bazaar history (7)',
+    )
+  })
 })
