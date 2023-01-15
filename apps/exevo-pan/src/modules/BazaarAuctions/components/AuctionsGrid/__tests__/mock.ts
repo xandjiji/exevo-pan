@@ -32,6 +32,12 @@ export const DEFAULT_AUCTIONS_STATE: AuctionsContextValues = {
   paginatedData: mockedPaginatedData,
   handlePaginatorFetch: jest.fn(),
   shouldDisplayHighlightedAuctions: false,
+  favoritedState: { currentIds: [], historyIds: [], notFoundIds: [] },
+  Favorites: {
+    list: [],
+    has: jest.fn(),
+    toggle: jest.fn(),
+  },
   highlightedAuctions: characterData.slice(20, 22).map((character, index) => ({
     ...character,
     nickname: `highlighted-character-${index}`,

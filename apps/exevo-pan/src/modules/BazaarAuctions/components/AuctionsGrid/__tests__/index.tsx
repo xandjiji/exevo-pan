@@ -155,4 +155,18 @@ describe('<AuctionsGrid />', () => {
 
     expect(screen.getByText(/123,456 invested/gi)).toBeInTheDocument()
   })
+
+  test.todo('filters should appear and be controlled by tags')
+
+  test.todo('highlighted auctions should not be displayed on favorites mode')
+
+  test.todo('grid mode should only update after it has settled')
+
+  test.todo('filter button should be disabled if in favorites mode')
+
+  test.todo('not found favorite auctions should be displayed in an alert')
+
+  test.todo(
+    'in favorite mode, history auctions and current auctions should be separated',
+  )
 })
