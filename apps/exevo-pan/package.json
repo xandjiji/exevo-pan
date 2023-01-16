@@ -19,6 +19,11 @@
     "@next/font": "^13.0.3",
     "@popperjs/core": "^2.9.2",
     "@prisma/client": "^4.6.1",
+    "@tanstack/react-query": "^4.22.0",
+    "@trpc/client": "^10.9.0",
+    "@trpc/next": "^10.9.0",
+    "@trpc/react-query": "^10.9.0",
+    "@trpc/server": "^10.9.0",
     "@vercel/analytics": "^0.1.4",
     "@vercel/og": "^0.0.20",
     "chart.js": "^2.9.3",
@@ -39,7 +44,8 @@
     "react-focus-lock": "^2.8.1",
     "react-popper": "^2.2.5",
     "shared-utils": "*",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "zod": "^3.20.2"
   },
   "devDependencies": {
     "@next/bundle-analyzer": "^13.0.4",
