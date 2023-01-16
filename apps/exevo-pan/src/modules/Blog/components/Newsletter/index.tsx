@@ -1,13 +1,12 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
 import { memo, useState } from 'react'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { FadeImage, Input, Button } from 'components/Atoms'
+import { trpc } from 'lib/trpc'
 import { useTranslations } from 'contexts/useTranslation'
 import { locales } from 'Constants'
 import mailboxSrc from 'assets/mailbox.png'
 import letterSrc from 'assets/letter.png'
-import { useNewsletter } from './useNewsletter'
 
 const { DEFAULT_LOCALE } = locales
 
@@ -22,11 +21,11 @@ const Newsletter = ({
   const { locale } = useRouter()
 
   const [email, setEmail] = useState('')
-  const { request, register } = useNewsletter()
+  const { mutate, status, data } = trpc.newsletter.useMutation()
 
-  const registerUser = () => register(email, locale ?? DEFAULT_LOCALE)
+  const registerUser = () => mutate({ email, locale: locale ?? DEFAULT_LOCALE })
   const onKeyPress: React.KeyboardEventHandler<HTMLInputElement> = (event) => {
-    if (event.key === 'Enter' && request.status !== 'LOADING') {
+    if (event.key === 'Enter' && status !== 'loading') {
       registerUser()
     }
   }
@@ -56,7 +55,7 @@ const Newsletter = ({
         />
       </div>
 
-      {request.status === 'SUCCESSFUL' ? (
+      {data?.message === 'success' ? (
         <span className="block text-center text-2xl">
           {blog.Newsletter.message.success} 😄
         </span>
@@ -72,18 +71,13 @@ const Newsletter = ({
               onChange={(event) => setEmail(event.target.value)}
               onKeyPress={onKeyPress}
               enterKeyHint="send"
-              error={
-                request.status === 'ERROR'
-                  ? blog.Newsletter.message[request.message as string] ??
-                    blog.Newsletter.message.generic
-                  : undefined
-              }
+              error={data ? blog.Newsletter.message[data.message] : undefined}
             />
           </div>
           <Button
             type="submit"
-            loading={request.status === 'LOADING'}
-            onClick={registerUser}
+            loading={status === 'loading'}
+            onClick={() => mutate({ email, locale: locale ?? DEFAULT_LOCALE })}
             className="lgr:text-2xl flex min-h-[52px] flex-wrap items-center justify-center gap-4 whitespace-nowrap lg:text-base"
           >
             {blog.Newsletter.buttonText}
