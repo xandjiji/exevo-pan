@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState, useEffect, useMemo, useCallback } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { trpc } from 'lib/trpc'
@@ -21,14 +21,14 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
 
   const [premiumBossData, setPremiumBossData] = useState<BossStats[]>([])
 
-  const { data: proBosses } = trpc.proBosses.useQuery(
+  trpc.proBosses.useQuery(
     { server },
-    { enabled: isPro, onError: () => setPremiumBossData([]) },
+    {
+      enabled: isPro,
+      onSuccess: (proBosses) => setPremiumBossData(proBosses),
+      onError: () => setPremiumBossData([]),
+    },
   )
-
-  useEffect(() => {
-    if (proBosses) setPremiumBossData(proBosses)
-  }, [proBosses])
 
   const hydratedBossList = useMemo(
     () =>
