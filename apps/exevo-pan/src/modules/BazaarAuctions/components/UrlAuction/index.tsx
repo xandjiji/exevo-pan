@@ -1,9 +1,9 @@
-import { useState, useCallback, useEffect } from 'react'
+import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSyncUrlState } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
 import CharacterModal from 'components/CharacterModal'
-import { AuctionsClient } from 'services/client'
+import { trpc } from 'lib/trpc'
 import { urlParameters } from 'Constants'
 
 const UrlAuction = () => {
@@ -18,25 +18,23 @@ const UrlAuction = () => {
   })
 
   const [auction, setAuction] = useState<CharacterObject | undefined>()
-  const [loading, setLoading] = useState(false)
 
   const onClose = useCallback(() => {
     setAuction(undefined)
     setAuctionId(undefined)
   }, [setAuctionId])
 
-  useEffect(() => {
-    if (auctionId) {
-      setLoading(true)
-      AuctionsClient.fetchAuctionById({ id: auctionId })
-        .then((urlAuction) => setAuction(urlAuction))
-        .finally(() => setLoading(false))
-    }
-  }, [])
+  const { isFetching } = trpc.getAuctionById.useQuery(
+    { id: auctionId ?? 0 },
+    {
+      enabled: !!auctionId,
+      onSuccess: setAuction,
+    },
+  )
 
   return (
     <>
-      {loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
+      {isFetching && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       {auction && <CharacterModal characterData={auction} onClose={onClose} />}
     </>
   )

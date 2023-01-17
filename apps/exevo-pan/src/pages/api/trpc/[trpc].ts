@@ -5,10 +5,12 @@ import { newsletter } from 'server/newsletter'
 import { proBosses } from 'server/proBosses'
 import { highlightCheckout } from 'server/highlightCheckout'
 import { proPayment } from 'server/proPayment'
+import { getAuctionById } from 'server/getAuctionById'
 
 const appRouter = router({
-  newsletter,
+  getAuctionById,
   proBosses,
+  newsletter,
   highlightCheckout,
   proPayment,
 })
