@@ -7,7 +7,7 @@ import { AdvertisePurchaseSchema } from 'types/zod/AdvertisePurchase'
 import { BackofficeClient, NotifyAdminClient } from 'services/server'
 import { prisma } from 'lib/prisma'
 import { publicProcedure } from 'server/trpc'
-import { isDevelopment } from 'utils'
+import { isDevelopment, mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
 import { advertise } from 'locales'
 import { email as emailConstants } from 'Constants'
 
@@ -38,6 +38,13 @@ export const highlightCheckout = publicProcedure
       return { uuid: uuidv4() }
     }
 
+    const formattedAdvertisePurchase: AdvertisePurchase = {
+      ...input,
+      selectedDates: input.selectedDates
+        .map(mmddyyyy2ddmmyyy)
+        .sort(sortStringDates),
+    }
+
     const {
       selectedDates,
       paymentMethod,
@@ -45,7 +52,7 @@ export const highlightCheckout = publicProcedure
       email,
       paymentCharacter,
       locale,
-    } = input
+    } = formattedAdvertisePurchase
 
     const isPro = !!token?.proStatus
     const price = calculatePrice({
@@ -78,7 +85,11 @@ export const highlightCheckout = publicProcedure
       },
     })
 
-    const html = await EmailTemplate({ ...input, isPro, uuid })
+    const html = await EmailTemplate({
+      ...formattedAdvertisePurchase,
+      isPro,
+      uuid,
+    })
     const { EmailTitle } = advertise[locale as keyof typeof advertise]
 
     const customerEmail = {
