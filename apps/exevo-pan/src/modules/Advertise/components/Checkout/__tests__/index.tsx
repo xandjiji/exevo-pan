@@ -34,7 +34,7 @@ jest.mock('../../../contexts/Form', () => ({
 
 const mockedUseForm = useForm as jest.MockedFunction<typeof useForm>
 
-const mockedFormValues = {
+const mockedFormValues: FormValues = {
   uuid: '',
   isPro: true,
   currentStep: 2,
@@ -46,7 +46,7 @@ const mockedFormValues = {
   isValid: true,
   finished: false,
   dispatch: jest.fn(),
-} as FormValues
+}
 
 describe.skip('<Checkout />', () => {
   beforeEach(() => {
