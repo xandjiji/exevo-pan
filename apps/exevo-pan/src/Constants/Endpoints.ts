@@ -9,7 +9,6 @@ export const endpoints = {
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
   AUCTIONS_ROUTE: '/api/auctions',
   AUCTION_ROUTE: '/api/auction',
-  MAIL_CHECKOUT: '/api/mail-checkout',
   ERROR_REPORT: '/api/error-report',
   SEND_PAYMENT: '/api/send-payment',
   PREVIEW_IMAGES: '/api/og',
