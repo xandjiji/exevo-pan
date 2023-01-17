@@ -2,10 +2,11 @@ import clsx from 'clsx'
 import { useState, useEffect, useMemo, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { trpc } from 'lib/trpc'
 import NextLink from 'next/link'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
-import { endpoints, routes, premiumBosses } from 'Constants'
+import { routes, premiumBosses } from 'Constants'
 import usePinBoss from './usePinBoss'
 import { listBy, prioritizePremium } from './utils'
 import BossCard from './BossCard'
@@ -20,13 +21,14 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
 
   const [premiumBossData, setPremiumBossData] = useState<BossStats[]>([])
 
+  const { data: proBosses } = trpc.proBosses.useQuery(
+    { server },
+    { enabled: isPro, onError: () => setPremiumBossData([]) },
+  )
+
   useEffect(() => {
-    if (isPro) {
-      fetch(`${endpoints.PREMIUM_BOSSES}?server=${server}`)
-        .then((res) => res.json().then(setPremiumBossData))
-        .catch(() => setPremiumBossData([]))
-    }
-  }, [isPro, bosses, server])
+    if (proBosses) setPremiumBossData(proBosses)
+  }, [proBosses])
 
   const hydratedBossList = useMemo(
     () =>
