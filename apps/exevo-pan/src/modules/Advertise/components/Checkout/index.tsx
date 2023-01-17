@@ -1,8 +1,8 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 import { useRouter } from 'next/router'
 import { TitledCard, Input, Button } from 'components/Atoms'
-import { MailCheckoutClient } from 'services/client'
+import { trpc } from 'lib/trpc'
 import { randomCharacter } from 'utils'
 import { locales } from 'Constants'
 import { useForm } from '../../contexts/Form'
@@ -26,7 +26,6 @@ const Checkout = () => {
     paymentCharacter,
     dispatch,
   } = useForm()
-  const [sendingEmail, setSendingEmail] = useState(false)
 
   const needsCharacterInfo = paymentMethod === 'TIBIA_COINS'
 
@@ -52,21 +51,11 @@ const Checkout = () => {
     [dispatch],
   )
 
-  const submit = async () => {
-    setSendingEmail(true)
-    const uuid = await MailCheckoutClient.postMail({
-      isPro,
-      selectedCharacter: selectedCharacter as CharacterObject,
-      selectedDates,
-      paymentMethod,
-      email: email.value,
-      paymentCharacter: paymentCharacter.value,
-      locale: locale ?? DEFAULT_LOCALE,
-    })
-    setSendingEmail(false)
-
-    dispatch({ type: 'FINISH_FORM', uuid })
-  }
+  const { mutate, isLoading } = trpc.highlightCheckout.useMutation({
+    onSuccess: ({ uuid }) => {
+      dispatch({ type: 'FINISH_FORM', uuid })
+    },
+  })
 
   const validateAndSubmit = async () => {
     const isEmailValid = validateEmail(email.value)
@@ -92,7 +81,17 @@ const Checkout = () => {
       if (!isCharacterValid) return
     }
     if (!isEmailValid) return
-    submit()
+    if (!selectedCharacter) return
+
+    mutate({
+      isPro,
+      selectedCharacter,
+      selectedDates,
+      paymentMethod,
+      email: email.value,
+      paymentCharacter: paymentCharacter.value,
+      locale: locale ?? DEFAULT_LOCALE,
+    })
   }
 
   const handleKeypress: React.KeyboardEventHandler<HTMLInputElement> = (
@@ -150,7 +149,7 @@ const Checkout = () => {
         aria-label={advertise.Checkout.checkoutButtonLabel}
         disabled={isButtonDisabled}
         onClick={validateAndSubmit}
-        loading={sendingEmail}
+        loading={isLoading}
         className="mt-4 ml-auto block min-h-[52px] min-w-[150px]"
       >
         {advertise.Checkout.checkoutButton}
