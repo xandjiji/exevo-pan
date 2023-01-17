@@ -25,7 +25,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
     { server },
     {
       enabled: isPro,
-      onSuccess: (proBosses) => setPremiumBossData(proBosses),
+      onSuccess: setPremiumBossData,
       onError: () => setPremiumBossData([]),
     },
   )
