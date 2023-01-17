@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { procedure } from 'server/trpc'
+import { publicProcedure } from 'server/trpc'
 import mailchimp from '@mailchimp/mailchimp_marketing'
 import { isDevelopment } from 'utils'
 
@@ -17,7 +17,7 @@ const STATUS_MAP = {
   DEFAULT: 'generic',
 } as const
 
-export const newsletter = procedure
+export const newsletter = publicProcedure
   .input(
     z.object({
       email: z.string(),
