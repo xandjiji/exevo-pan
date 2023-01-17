@@ -10,7 +10,6 @@ export const endpoints = {
   AUCTIONS_ROUTE: '/api/auctions',
   AUCTION_ROUTE: '/api/auction',
   ERROR_REPORT: '/api/error-report',
-  SEND_PAYMENT: '/api/send-payment',
   PREVIEW_IMAGES: '/api/og',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
   ADMIN: {
