@@ -1,3 +1,4 @@
+/* eslint-disable react/require-default-props */
 import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSyncUrlState } from 'hooks'
@@ -6,7 +7,11 @@ import CharacterModal from 'components/CharacterModal'
 import { trpc } from 'lib/trpc'
 import { urlParameters } from 'Constants'
 
-const UrlAuction = () => {
+type UrlAuctionProps = {
+  highlightedAuctions?: CharacterObject[]
+}
+
+const UrlAuction = ({ highlightedAuctions = [] }: UrlAuctionProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -28,7 +33,23 @@ const UrlAuction = () => {
     { id: auctionId ?? 0 },
     {
       enabled: !!auctionId,
-      onSuccess: setAuction,
+      onSuccess: (characterData) => {
+        if (characterData) {
+          const foundHighlightedData = highlightedAuctions.find(
+            ({ id }) => id === characterData.id,
+          )
+          setAuction(
+            foundHighlightedData
+              ? {
+                  ...characterData,
+                  tcInvested: foundHighlightedData.tcInvested,
+                }
+              : characterData,
+          )
+        } else {
+          setAuction(undefined)
+        }
+      },
     },
   )
 

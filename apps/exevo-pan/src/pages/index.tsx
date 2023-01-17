@@ -104,7 +104,7 @@ export default function Home({
       </Head>
 
       <Main>
-        <UrlAuction />
+        <UrlAuction highlightedAuctions={highlightedAuctions} />
         <Newsticker blogPosts={blogPosts} />
         <DrawerFieldsProvider
           activeServers={activeServersSet}
