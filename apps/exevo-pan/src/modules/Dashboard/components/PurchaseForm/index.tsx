@@ -1,10 +1,10 @@
 import { useState, useCallback, useRef } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import type { PaymentData } from '@prisma/client'
+import { trpc } from 'lib/trpc'
 import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { randomCharacter } from 'utils'
-import { endpoints, advertising } from 'Constants'
+import { advertising } from 'Constants'
 import FromTo from './FromTo'
 import { PurchaseFormProps } from './types'
 
@@ -21,6 +21,23 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   const [from, setFrom] = useState(character)
   const [txId, setTxId] = useState(id)
 
+  const { mutate } = trpc.proPayment.useMutation({
+    onMutate: () => {
+      setRequestStatus('LOADING')
+    },
+    onError: () => {
+      setRequestStatus('ERROR')
+    },
+    onSuccess: ({ paymentData }) => {
+      if (paymentData) {
+        setTxId(paymentData.id)
+        setFrom(paymentData.character)
+      }
+
+      setRequestStatus('SUCCESSFUL')
+    },
+  })
+
   const onSubmit = useCallback(
     async (
       e: React.FormEvent<
@@ -29,22 +46,9 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
     ) => {
       e.preventDefault()
       const { value } = e.currentTarget.elements.character
-
-      if (!value) return
-
-      setRequestStatus('LOADING')
-      const response = await fetch(endpoints.SEND_PAYMENT, {
-        method: 'PUT',
-        body: JSON.stringify({ character: value }),
-      })
-
-      const { id: paymentId }: PaymentData = await response.json()
-      setTxId(paymentId)
-
-      const sucessful = response.status === 200
-      setRequestStatus(sucessful ? 'SUCCESSFUL' : 'ERROR')
+      mutate({ character: value })
     },
-    [],
+    [mutate],
   )
 
   const resetStep = useCallback(() => setRequestStatus('IDLE'), [])
