@@ -7,6 +7,7 @@ import { highlightCheckout } from 'server/highlightCheckout'
 import { proPayment } from 'server/proPayment'
 import { getAuctionById } from 'server/getAuctionById'
 import { listProOrders, updateProOrders } from 'server/admin/proOrders'
+import { proRevenue } from 'server/admin/proRevenue'
 
 const appRouter = router({
   getAuctionById,
@@ -16,6 +17,7 @@ const appRouter = router({
   proPayment,
   listProOrders,
   updateProOrders,
+  proRevenue,
 })
 
 export type AppRouter = typeof appRouter
