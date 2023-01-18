@@ -1,12 +1,11 @@
 import Head from 'next/head'
 import { Template } from 'modules/Admin'
-import { Revenue, PaymentList } from 'modules/Admin/modules/ExevoPro'
 import { GetStaticProps } from 'next'
 import { buildPageTitle } from 'utils'
 import { common } from 'locales'
 
-export default function Admin() {
-  const pageTitle = buildPageTitle('Admin')
+export default function AuctionHighlights() {
+  const pageTitle = buildPageTitle('Auction Highlights')
 
   return (
     <>
@@ -15,10 +14,7 @@ export default function Admin() {
       </Head>
 
       <Template>
-        <div className="mx-auto grid max-w-3xl gap-4">
-          <Revenue />
-          <PaymentList />
-        </div>
+        <div className="mx-auto grid max-w-3xl gap-4">highlights</div>
       </Template>
     </>
   )
