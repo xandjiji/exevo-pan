@@ -1,5 +1,5 @@
-import { useState, useEffect, useMemo, useCallback } from 'react'
-import type { User, PaymentData } from '@prisma/client'
+import { useState, useMemo, useCallback } from 'react'
+import { trpc } from 'lib/trpc'
 import { debounce } from 'utils'
 import {
   Paginator,
@@ -10,12 +10,6 @@ import {
   Dialog,
   Button,
 } from 'components/Atoms'
-import { endpoints } from 'Constants'
-
-type Data = {
-  page: Array<User & { paymentData: PaymentData }>
-  count: number
-}
 
 const PAGE_SIZE = 30
 const DEBOUNCE_DELAY = 700
@@ -27,10 +21,8 @@ const EMPTY_CONFIRMATION = {
 }
 
 const PaymentList = () => {
-  const [{ page, count }, setData] = useState<Data>({ page: [], count: 0 })
   const [pageIndex, setPageIndex] = useState(0)
   const [nickname, setNickname] = useState('')
-  const [requestState, setRequestState] = useState<RequestStatus>('IDLE')
 
   const [toConfirm, setToConfirm] = useState(EMPTY_CONFIRMATION)
 
@@ -39,43 +31,21 @@ const PaymentList = () => {
     [],
   )
 
-  useEffect(() => {
-    if (requestState === 'IDLE') {
-      setRequestState('LOADING')
+  const list = trpc.listProOrders.useQuery(
+    { pageIndex, nickname },
+    {
+      keepPreviousData: true,
+    },
+  )
 
-      fetch(
-        `${endpoints.ADMIN.PAYMENTS}?pageIndex=${pageIndex}&pageSize=${PAGE_SIZE}&nickname=${nickname}`,
-      )
-        .then((res) =>
-          res.json().then((data) => {
-            setData(data)
-            setRequestState('SUCCESSFUL')
-          }),
-        )
-        .catch(() => {
-          setRequestState('ERROR')
-        })
-    }
-  }, [pageIndex, nickname, requestState])
+  const updateProOrders = trpc.updateProOrders.useMutation({
+    onSuccess: () => {
+      list.refetch()
+      resetConfirmation()
+    },
+  })
 
-  const confirmPayment = useCallback(() => {
-    setRequestState('LOADING')
-
-    fetch(endpoints.ADMIN.PAYMENTS, {
-      method: 'PATCH',
-      body: JSON.stringify({
-        id: toConfirm.id,
-        confirmed: toConfirm.confirmed,
-      }),
-    })
-      .then(() => setRequestState('IDLE'))
-      .catch(() => {
-        setRequestState('ERROR')
-      })
-      .finally(resetConfirmation)
-  }, [toConfirm.id, toConfirm.confirmed, resetConfirmation])
-
-  const isLoading = requestState === 'LOADING' || requestState === 'IDLE'
+  const isLoading = list.isFetching || updateProOrders.isLoading
 
   return (
     <section>
@@ -90,22 +60,20 @@ const PaymentList = () => {
             className="w-full sm:max-w-[200px]"
             onChange={useMemo(
               () =>
-                debounce((e: React.ChangeEvent<HTMLInputElement>) => {
-                  setNickname(e.target.value)
-                  setRequestState('IDLE')
-                }, DEBOUNCE_DELAY),
+                debounce(
+                  (e: React.ChangeEvent<HTMLInputElement>) =>
+                    setNickname(e.target.value),
+                  DEBOUNCE_DELAY,
+                ),
               [],
             )}
           />
 
           <Paginator
             pageSize={PAGE_SIZE}
-            totalItems={count}
+            totalItems={list.data?.count ?? 0}
             currentPage={pageIndex + 1}
-            onChange={(newIndex) => {
-              setRequestState('IDLE')
-              setPageIndex(newIndex - 1)
-            }}
+            onChange={(newIndex) => setPageIndex(newIndex - 1)}
             className="ml-auto w-fit"
           />
         </div>
@@ -122,7 +90,7 @@ const PaymentList = () => {
           </Table.Head>
 
           <Table.Body>
-            {page.map(
+            {(list.data?.page ?? []).map(
               ({ id, paymentData: { character, lastUpdated, confirmed } }) => (
                 <Table.Row key={id}>
                   <Table.Column>
@@ -170,7 +138,7 @@ const PaymentList = () => {
           <Button hollow pill onClick={resetConfirmation}>
             Cancel
           </Button>
-          <Button pill onClick={confirmPayment}>
+          <Button pill onClick={() => updateProOrders.mutate(toConfirm)}>
             Confirm
           </Button>
         </div>
