@@ -24,6 +24,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
   trpc.proBosses.useQuery(
     { server },
     {
+      refetchOnWindowFocus: false,
       enabled: isPro,
       onSuccess: setPremiumBossData,
       onError: () => setPremiumBossData([]),
