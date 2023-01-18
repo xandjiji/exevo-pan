@@ -38,3 +38,19 @@ export const premiumProcedure = t.procedure.use(
     })
   }),
 )
+
+export const adminProcedure = t.procedure.use(
+  t.middleware(({ next, ctx }) => {
+    if (ctx.token?.role !== 'ADMIN') {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+      })
+    }
+
+    return next({
+      ctx: {
+        token: ctx.token,
+      },
+    })
+  }),
+)
