@@ -1,3 +1,5 @@
+import type { AppType, AppProps } from 'next/app'
+import { trpc } from 'lib/trpc'
 import Head from 'next/head'
 import { Analytics } from '@vercel/analytics/react'
 import ErrorBoundary from 'components/ErrorBoundary'
@@ -6,7 +8,6 @@ import { TranslationsProvider } from 'contexts/useTranslation'
 import { PreviewImageClient } from 'services'
 import { LockBodyProvider } from 'hooks/useLockBody'
 import { SessionProvider } from 'next-auth/react'
-import { AppProps } from 'next/app'
 import { loadRawSrc } from 'utils'
 import { Roboto } from '@next/font/google'
 import 'styles/globals.css'
@@ -18,7 +19,10 @@ const roboto = Roboto({
   weight: ['300', '400', '700'],
 })
 
-function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
+const MyApp: AppType = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => {
   const PageComponent = Component as any
   const { translations } = pageProps
 
@@ -58,4 +62,4 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
     </>
   )
 }
-export default MyApp
+export default trpc.withTRPC(MyApp)

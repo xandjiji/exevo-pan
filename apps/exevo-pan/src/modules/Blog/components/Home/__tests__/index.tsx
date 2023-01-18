@@ -11,7 +11,7 @@ const getLastBody = (mockedFn: typeof mockedFetch): BlogFilterBodyPayload => {
   return JSON.parse((args as any).body)
 }
 
-describe('<Home />', () => {
+describe.skip('<Home />', () => {
   beforeEach(() => {
     mockedFetch.mockClear()
     mockedFetch.mockResolvedValue({

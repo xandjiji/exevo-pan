@@ -5,11 +5,7 @@ import {
 } from 'shared-utils/dist/contracts/Filters/schemas'
 import { DEFAULT_SORT_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { links, endpoints } from 'Constants'
-import {
-  FetchAuctionPageArgs,
-  FetchFavoritedArgs,
-  FetchAuctionByIdArgs,
-} from './types'
+import { FetchAuctionPageArgs, FetchFavoritedArgs } from './types'
 
 export default class AuctionsClient {
   static async fetchAuctionPage({
@@ -110,32 +106,6 @@ export default class AuctionsClient {
         hasNext: false,
         page: [...currentFavorites, ...historyFavorites],
       },
-    }
-  }
-
-  static async fetchAuctionById({
-    id,
-    from = 'any',
-  }: FetchAuctionByIdArgs): Promise<CharacterObject | undefined> {
-    try {
-      const endpoint = new URL(`${links.CANONICAL}${endpoints.AUCTION_ROUTE}`)
-
-      endpoint.searchParams.set('id', id.toString())
-      endpoint.searchParams.set('from', from)
-
-      const response = await fetch(
-        `${endpoints.AUCTION_ROUTE}${endpoint.search}`,
-      )
-
-      if (response.status === 400) {
-        throw Error(`Auction id ${id} not found`)
-      }
-
-      const result = await response.json()
-
-      return result
-    } catch {
-      return undefined
     }
   }
 }

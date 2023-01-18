@@ -1,6 +1,5 @@
 export default {
   testEnvironment: 'jsdom',
-  preset: 'ts-jest',
   rootDir: '../..',
   setupFilesAfterEnv: ['<rootDir>/apps/exevo-pan/setupTests.js'],
   moduleDirectories: ['node_modules', 'src'],

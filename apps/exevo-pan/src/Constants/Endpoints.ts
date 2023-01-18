@@ -8,16 +8,7 @@ export const endpoints = {
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
   AUCTIONS_ROUTE: '/api/auctions',
-  AUCTION_ROUTE: '/api/auction',
-  MAIL_CHECKOUT: '/api/mail-checkout',
-  NEWSLETTER: '/api/mailchimp',
   ERROR_REPORT: '/api/error-report',
-  SEND_PAYMENT: '/api/send-payment',
-  PREMIUM_BOSSES: '/api/bosses',
   PREVIEW_IMAGES: '/api/og',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
-  ADMIN: {
-    PAYMENTS: '/api/admin/payments',
-    REVENUE: '/api/admin/revenue',
-  },
 }

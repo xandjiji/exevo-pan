@@ -1,12 +1,17 @@
-import { useState, useCallback, useEffect } from 'react'
+/* eslint-disable react/require-default-props */
+import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSyncUrlState } from 'hooks'
 import { LoadingAlert } from 'components/Atoms'
 import CharacterModal from 'components/CharacterModal'
-import { AuctionsClient } from 'services/client'
+import { trpc } from 'lib/trpc'
 import { urlParameters } from 'Constants'
 
-const UrlAuction = () => {
+type UrlAuctionProps = {
+  highlightedAuctions?: CharacterObject[]
+}
+
+const UrlAuction = ({ highlightedAuctions = [] }: UrlAuctionProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -18,25 +23,40 @@ const UrlAuction = () => {
   })
 
   const [auction, setAuction] = useState<CharacterObject | undefined>()
-  const [loading, setLoading] = useState(false)
 
   const onClose = useCallback(() => {
     setAuction(undefined)
     setAuctionId(undefined)
   }, [setAuctionId])
 
-  useEffect(() => {
-    if (auctionId) {
-      setLoading(true)
-      AuctionsClient.fetchAuctionById({ id: auctionId })
-        .then((urlAuction) => setAuction(urlAuction))
-        .finally(() => setLoading(false))
-    }
-  }, [])
+  const { isFetching } = trpc.getAuctionById.useQuery(
+    { id: auctionId ?? 0 },
+    {
+      refetchOnWindowFocus: false,
+      enabled: !!auctionId,
+      onSuccess: (characterData) => {
+        if (characterData) {
+          const foundHighlightedData = highlightedAuctions.find(
+            ({ id }) => id === characterData.id,
+          )
+          setAuction(
+            foundHighlightedData
+              ? {
+                  ...characterData,
+                  tcInvested: foundHighlightedData.tcInvested,
+                }
+              : characterData,
+          )
+        } else {
+          setAuction(undefined)
+        }
+      },
+    },
+  )
 
   return (
     <>
-      {loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
+      {isFetching && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       {auction && <CharacterModal characterData={auction} onClose={onClose} />}
     </>
   )

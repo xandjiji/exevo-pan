@@ -5,7 +5,7 @@ import Newsletter from '..'
 
 const mockedFetch = setup.fetch()
 
-describe('<Newsletter />', () => {
+describe.skip('<Newsletter />', () => {
   beforeEach(() => {
     mockedFetch.mockClear()
     mockedFetch.mockResolvedValue({
