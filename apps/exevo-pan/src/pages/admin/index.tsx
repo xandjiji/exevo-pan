@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { Revenue, PaymentList } from 'modules/Admin'
+import { Header, Revenue, PaymentList } from 'modules/Admin'
 import { GetStaticProps } from 'next'
 import { buildPageTitle } from 'utils'
 import { useSession } from 'next-auth/react'
@@ -19,6 +19,7 @@ export default function Admin() {
       </Head>
 
       <Main>
+        <Header />
         <main className="inner-container py-4">
           {isAdmin && (
             <div className="mx-auto grid max-w-3xl gap-4">

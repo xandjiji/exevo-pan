@@ -19,4 +19,8 @@ export const routes = {
   ABOUT: '/blog/about',
   BLOG: '/blog',
   EXEVOPRO: '/exevo-pro',
+  ADMIN: {
+    PRO_PAYMENTS: '/admin',
+    AUCTION_HIGHLIGHTS: '/admin/auction-highlights',
+  },
 }
