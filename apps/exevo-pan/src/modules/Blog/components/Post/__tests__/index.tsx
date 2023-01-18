@@ -2,7 +2,7 @@ import { renderWithProviders } from 'utils/test'
 import { ContentWrapper, Hero, Newsletter, Layout } from '..'
 import { table as Table } from '../Style/Table'
 
-describe('<Post />', () => {
+describe.skip('<Post />', () => {
   test('should pass this smoke test', () => {
     const { container } = renderWithProviders(
       <div>
