@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { Template } from 'modules/Admin'
+import { Table } from 'modules/Admin/modules/AuctionHighlights'
 import { GetStaticProps } from 'next'
 import { buildPageTitle } from 'utils'
 import { common } from 'locales'
@@ -14,7 +15,9 @@ export default function AuctionHighlights() {
       </Head>
 
       <Template>
-        <div className="mx-auto grid max-w-3xl gap-4">highlights</div>
+        <div className="mx-auto grid max-w-3xl gap-4">
+          <Table />
+        </div>
       </Template>
     </>
   )

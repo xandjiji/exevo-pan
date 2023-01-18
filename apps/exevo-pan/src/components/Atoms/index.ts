@@ -1,6 +1,7 @@
 export { default as Accordion } from './Accordion'
 export { default as ActiveCount } from './ActiveCount'
 export { default as Alert } from './Alert'
+export { default as AuctionLink } from './AuctionLink'
 export { default as AuctionTimer } from './AuctionTimer'
 export { default as Button } from './Button'
 export { default as Checkbox } from './Checkbox'
