@@ -1,16 +1,12 @@
 import Head from 'next/head'
 import { Main } from 'templates'
-import { Header, Revenue, PaymentList } from 'modules/Admin'
+import { AdminOnly, Header, Revenue, PaymentList } from 'modules/Admin'
 import { GetStaticProps } from 'next'
 import { buildPageTitle } from 'utils'
-import { useSession } from 'next-auth/react'
 import { common } from 'locales'
 
 export default function Admin() {
   const pageTitle = buildPageTitle('Admin')
-
-  const { data } = useSession()
-  const isAdmin = data?.user.role === 'ADMIN'
 
   return (
     <>
@@ -21,12 +17,12 @@ export default function Admin() {
       <Main>
         <Header />
         <main className="inner-container py-4">
-          {isAdmin && (
+          <AdminOnly>
             <div className="mx-auto grid max-w-3xl gap-4">
               <Revenue />
               <PaymentList />
             </div>
-          )}
+          </AdminOnly>
         </main>
       </Main>
     </>
