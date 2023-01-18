@@ -11,7 +11,4 @@ export const endpoints = {
   ERROR_REPORT: '/api/error-report',
   PREVIEW_IMAGES: '/api/og',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
-  ADMIN: {
-    REVENUE: '/api/admin/revenue',
-  },
 }
