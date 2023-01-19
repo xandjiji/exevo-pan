@@ -1,1 +1,1 @@
-export type HighlightStatus = 'RUNNING' | 'WAITING' | 'FINISHED' | 'PAUSED'
+export type HighlightStatus = 'RUNNING' | 'SCHEDULED' | 'FINISHED' | 'PAUSED'

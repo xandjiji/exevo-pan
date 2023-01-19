@@ -1,14 +1,7 @@
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
 import { trpc } from 'lib/trpc'
-import {
-  LoadingAlert,
-  Table,
-  AuctionLink,
-  Dialog,
-  Button,
-  Alert,
-} from 'components/Atoms'
+import { LoadingAlert, Table, Dialog, Button, Alert } from 'components/Atoms'
 import {
   MoreHorizontalIcon,
   ThumbsUpIcon,
@@ -24,15 +17,22 @@ import {
 } from 'assets/svgs'
 import { Menu, Tooltip } from 'components/Organisms'
 import { readableCurrentDate } from 'utils'
+import AuctionSummary from './AuctionSummary'
 import { getHighlightStatus, isPastDate } from './utils'
 import { HighlightStatus } from './types'
+
+const EMPTY_DELETION = { id: '', auctionId: 0, nickname: '', lastUpdated: '' }
 
 const PaymentList = () => {
   const [filterStatus, setFilterStatus] = useState<'NONE' | HighlightStatus>(
     'NONE',
   )
 
-  const [updatedCharacter, setUpdatedCharacter] = useState('')
+  const [alertMessage, setAlertMessage] = useState({
+    nickname: '',
+    message: '',
+  })
+  const [toDelete, setToDelete] = useState(EMPTY_DELETION)
 
   const currentDate = useMemo(readableCurrentDate, [])
 
@@ -63,21 +63,31 @@ const PaymentList = () => {
 
   const patch = trpc.patchAuctionHighlights.useMutation({
     onSuccess: ({ nickname }) => {
-      setUpdatedCharacter(nickname)
+      setAlertMessage({ nickname, message: 'was updated' })
       list.refetch()
     },
   })
 
-  const isLoading = list.isFetching || patch.isLoading
+  const remove = trpc.deleteAuctionHighlight.useMutation({
+    onSuccess: ({ nickname }) => {
+      setAlertMessage({ nickname, message: 'was deleted' })
+      setToDelete(EMPTY_DELETION)
+      list.refetch()
+    },
+  })
+
+  const isLoading = list.isFetching || patch.isLoading || remove.isLoading
 
   return (
     <section className="grid gap-2">
       {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
 
-      {!!updatedCharacter && (
+      {!!alertMessage.message && (
         <Alert variant="primary">
-          <strong className="text-primaryHighlight">{updatedCharacter}</strong>{' '}
-          was updated
+          <strong className="text-primaryHighlight">
+            {alertMessage.nickname}
+          </strong>{' '}
+          {alertMessage.message}
         </Alert>
       )}
 
@@ -105,8 +115,8 @@ const PaymentList = () => {
                       icon: NewIcon,
                     },
                     {
-                      label: 'Waiting',
-                      onSelect: () => setFilterStatus('WAITING'),
+                      label: 'Scheduled',
+                      onSelect: () => setFilterStatus('SCHEDULED'),
                       icon: HourglassIcon,
                     },
                     {
@@ -122,7 +132,7 @@ const PaymentList = () => {
                         NONE: 'Filter status',
                         PAUSED: 'Paused',
                         RUNNING: 'Running',
-                        WAITING: 'Waiting',
+                        SCHEDULED: 'Scheduled',
                         FINISHED: 'Finished',
                       }[filterStatus]
                     }
@@ -148,7 +158,10 @@ const PaymentList = () => {
                 lastUpdated,
                 days,
               }) => (
-                <Table.Row key={id}>
+                <Table.Row
+                  key={id}
+                  className={clsx(toDelete.id === id && 'bg-red/20')}
+                >
                   <Table.Column className="text-center">
                     <Tooltip
                       offset={[0, 8]}
@@ -185,10 +198,10 @@ const PaymentList = () => {
                                 Running
                               </>
                             ),
-                            WAITING: (
+                            SCHEDULED: (
                               <>
                                 <HourglassIcon className="fill-primaryAlert" />
-                                Waiting
+                                Scheduled
                               </>
                             ),
                             FINISHED: (
@@ -203,16 +216,11 @@ const PaymentList = () => {
                     </Tooltip>
                   </Table.Column>
                   <Table.Column>
-                    <div className="grid gap-1.5">
-                      <AuctionLink auctionId={auctionId}>
-                        {nickname}
-                      </AuctionLink>
-                      <p>
-                        {new Date(lastUpdated).toLocaleString('pt-BR', {
-                          hour12: false,
-                        })}
-                      </p>
-                    </div>
+                    <AuctionSummary
+                      auctionId={auctionId}
+                      nickname={nickname}
+                      lastUpdated={lastUpdated}
+                    />
                   </Table.Column>
                   <Table.Column>
                     <Menu
@@ -236,6 +244,13 @@ const PaymentList = () => {
                         {
                           label: 'Delete',
                           icon: TrashIcon,
+                          onSelect: () =>
+                            setToDelete({
+                              id,
+                              auctionId,
+                              nickname,
+                              lastUpdated,
+                            }),
                         },
                       ]}
                     >
@@ -249,6 +264,34 @@ const PaymentList = () => {
         </Table.Element>
       </Table>
 
+      <Dialog
+        isOpen={!!toDelete.id}
+        onClose={() => setToDelete(EMPTY_DELETION)}
+        heading="Do you really want to delete this highlight?"
+        className="grid max-w-xs"
+        noCloseButton
+      >
+        <AuctionSummary {...toDelete} className="code mt-2 mb-6" />
+
+        <div className="flex justify-end gap-1">
+          <Button
+            hollow
+            pill
+            onClick={() => setToDelete(EMPTY_DELETION)}
+            disabled={remove.isLoading}
+          >
+            Cancel
+          </Button>
+          <Button
+            pill
+            onClick={() => remove.mutate(toDelete.id)}
+            loading={remove.isLoading}
+            disabled={remove.isLoading}
+          >
+            Confirm
+          </Button>
+        </div>
+      </Dialog>
       {/* <Dialog
         isOpen={!!toConfirm.character}
         onClose={resetConfirmation}

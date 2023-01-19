@@ -34,3 +34,11 @@ export const patchAuctionHighlights = adminProcedure
 
     return result
   })
+
+export const deleteAuctionHighlight = adminProcedure
+  .input(z.string())
+  .mutation(async ({ input: id }) => {
+    const result = await prisma.highlightedAuction.delete({ where: { id } })
+
+    return result
+  })

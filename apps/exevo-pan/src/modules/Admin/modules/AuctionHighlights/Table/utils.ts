@@ -26,5 +26,5 @@ export const getHighlightStatus = (
 
   if (days.includes(readableCurrentDate())) return 'RUNNING'
 
-  return 'WAITING'
+  return 'SCHEDULED'
 }
