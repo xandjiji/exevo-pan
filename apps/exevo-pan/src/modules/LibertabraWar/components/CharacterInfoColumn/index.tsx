@@ -1,5 +1,5 @@
 import { memo } from 'react'
-import { Table } from 'components/Atoms'
+import { Table, CharacterLink } from 'components/Atoms'
 import { CharacterInfoColumnProps } from './types'
 
 const CharacterInfoColumn = ({
@@ -9,15 +9,7 @@ const CharacterInfoColumn = ({
   ...props
 }: CharacterInfoColumnProps) => (
   <Table.Column {...props}>
-    <a
-      href={`https://www.tibia.com/community/?name=${encodeURIComponent(
-        nickname,
-      )}`}
-      target="_blank"
-      rel="noreferrer noopener"
-    >
-      {nickname}
-    </a>
+    <CharacterLink nickname={nickname}>{nickname}</CharacterLink>
     <span className="mt-1.5 block text-xs">{`Level ${level} - ${vocation}`}</span>
   </Table.Column>
 )

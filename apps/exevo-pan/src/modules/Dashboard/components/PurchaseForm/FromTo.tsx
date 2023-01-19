@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Text, CopyButton } from 'components/Atoms'
+import { Text, CopyButton, CharacterLink } from 'components/Atoms'
 import { advertising } from 'Constants'
 import { capitalizeFirstLetter } from 'utils'
 
@@ -26,14 +26,9 @@ const FromTo = ({ from, to, className, ...props }: FromToProps) => {
         </>
       ) : null}
       <Text.Transfer currency="tc" amount={250} className="mx-1.5" />
-      <a
-        className="text-primaryHighlight font-bold"
-        href={`https://www.tibia.com/community/?name=${BANK_CHARACTER}`}
-        target="_blank"
-        rel="noreferrer external"
-      >
+      <CharacterLink nickname={to} className="text-primaryHighlight font-bold">
         {to}
-      </a>
+      </CharacterLink>
       <CopyButton copyString={to} />
     </span>
   )
