@@ -10,6 +10,7 @@ import {
   Checkbox,
   Dialog,
   Button,
+  CharacterLink,
 } from 'components/Atoms'
 
 const PAGE_SIZE = 30
@@ -113,7 +114,14 @@ const PaymentList = () => {
                       />
                     </div>
                   </Table.Column>
-                  <Table.Column>{character}</Table.Column>
+                  <Table.Column>
+                    <CharacterLink
+                      nickname={character}
+                      className="text-primaryHighlight"
+                    >
+                      {character}
+                    </CharacterLink>
+                  </Table.Column>
                   <Table.Column>
                     {new Date(lastUpdated).toLocaleString('pt-BR', {
                       hour12: false,
