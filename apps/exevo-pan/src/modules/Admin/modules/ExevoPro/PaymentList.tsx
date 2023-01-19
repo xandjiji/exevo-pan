@@ -100,6 +100,7 @@ const PaymentList = () => {
                       (toConfirm.confirmed
                         ? 'bg-greenHighlight/20'
                         : 'bg-red/20'),
+                    'hover:bg-background',
                   )}
                 >
                   <Table.Column>

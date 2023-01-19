@@ -160,7 +160,10 @@ const PaymentList = () => {
               }) => (
                 <Table.Row
                   key={id}
-                  className={clsx(toDelete.id === id && 'bg-red/20')}
+                  className={clsx(
+                    toDelete.id === id && 'bg-red/20',
+                    'hover:bg-background group',
+                  )}
                 >
                   <Table.Column className="text-center">
                     <Tooltip
@@ -183,7 +186,7 @@ const PaymentList = () => {
                         </div>
                       }
                     >
-                      <p className="code child:shrink-0 child:w-4 child:h-4 flex cursor-pointer items-center gap-1.5">
+                      <p className="code group-hover:bg-separator/50 child:shrink-0 child:w-4 child:h-4 flex cursor-pointer items-center gap-1.5">
                         {
                           {
                             PAUSED: (
