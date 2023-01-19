@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { trpc } from 'lib/trpc'
 import {
   LoadingAlert,
@@ -16,10 +16,14 @@ import {
   PauseIcon,
   PlayIcon,
   TrashIcon,
+  HourglassIcon,
+  ViewedIcon,
+  NewIcon,
 } from 'assets/svgs'
 import { Menu, Tooltip } from 'components/Organisms'
 import { readableCurrentDate } from 'utils'
 import { getHighlightStatus, isPastDate } from './utils'
+import { HighlightStatus } from './types'
 
 const PaymentList = () => {
   const currentDate = useMemo(readableCurrentDate, [])
@@ -41,6 +45,20 @@ const PaymentList = () => {
 
   const isLoading = list.isFetching
 
+  const [filterStatus, setFilterStatus] = useState<'NONE' | HighlightStatus>(
+    'NONE',
+  )
+
+  const renderedList = useMemo(
+    () =>
+      list.data
+        ? filterStatus === 'NONE'
+          ? list.data
+          : list.data.filter(({ status }) => status === filterStatus)
+        : [],
+    [list, filterStatus],
+  )
+
   return (
     <section>
       {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
@@ -48,17 +66,59 @@ const PaymentList = () => {
       <Table>
         <Table.Element className="text-center">
           <Table.Head>
-            <Table.Row>
+            <Table.Row className="child:align-bottom">
+              <Table.HeadColumn>
+                <Menu
+                  offset={[0, 8]}
+                  placement="bottom-start"
+                  items={[
+                    {
+                      label: 'None',
+                      onSelect: () => setFilterStatus('NONE'),
+                    },
+                    {
+                      label: 'Paused',
+                      onSelect: () => setFilterStatus('PAUSED'),
+                      icon: PauseIcon,
+                    },
+                    {
+                      label: 'Running',
+                      onSelect: () => setFilterStatus('RUNNING'),
+                      icon: NewIcon,
+                    },
+                    {
+                      label: 'Waiting',
+                      onSelect: () => setFilterStatus('WAITING'),
+                      icon: HourglassIcon,
+                    },
+                    {
+                      label: 'Finished',
+                      onSelect: () => setFilterStatus('FINISHED'),
+                      icon: ViewedIcon,
+                    },
+                  ]}
+                  variant="button"
+                >
+                  {
+                    {
+                      NONE: 'Filter status',
+                      PAUSED: 'Paused',
+                      RUNNING: 'Running',
+                      WAITING: 'Waiting',
+                      FINISHED: 'Finished',
+                    }[filterStatus]
+                  }
+                </Menu>
+              </Table.HeadColumn>
               <Table.HeadColumn highlighted desc>
                 Date
               </Table.HeadColumn>
-              <Table.HeadColumn>Status</Table.HeadColumn>
               <Table.HeadColumn>Auction</Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
           <Table.Body>
-            {(list.data ?? []).map(
+            {renderedList.map(
               ({
                 id,
                 status,
@@ -70,11 +130,6 @@ const PaymentList = () => {
                 days,
               }) => (
                 <Table.Row key={id}>
-                  <Table.Column>
-                    {new Date(lastUpdated).toLocaleString('pt-BR', {
-                      hour12: false,
-                    })}
-                  </Table.Column>
                   <Table.Column>
                     <Tooltip
                       offset={[0, 8]}
@@ -95,29 +150,42 @@ const PaymentList = () => {
                         </div>
                       }
                     >
-                      <p className="code cursor-pointer">
+                      <p className="code child:shrink-0 child:w-4 child:h-4 flex cursor-pointer items-center gap-1.5">
                         {
                           {
                             PAUSED: (
-                              <span className="text-red font-bold">Paused</span>
+                              <>
+                                <PauseIcon className="fill-red" />
+                                Paused
+                              </>
                             ),
                             RUNNING: (
-                              <span className="text-greenHighlight font-bold">
+                              <>
+                                <NewIcon className="fill-greenHighlight" />
                                 Running
-                              </span>
+                              </>
                             ),
                             WAITING: (
-                              <span className="text-primaryAlert font-bold">
+                              <>
+                                <HourglassIcon className="fill-primaryAlert" />
                                 Waiting
-                              </span>
+                              </>
                             ),
                             FINISHED: (
-                              <span className="text-separator">Finished</span>
+                              <>
+                                <ViewedIcon className="fill-separator" />
+                                Finished
+                              </>
                             ),
                           }[status]
                         }
                       </p>
                     </Tooltip>
+                  </Table.Column>
+                  <Table.Column>
+                    {new Date(lastUpdated).toLocaleString('pt-BR', {
+                      hour12: false,
+                    })}
                   </Table.Column>
                   <Table.Column>
                     <AuctionLink auctionId={auctionId}>{nickname}</AuctionLink>
