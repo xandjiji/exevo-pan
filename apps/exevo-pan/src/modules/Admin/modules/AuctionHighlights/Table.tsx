@@ -1,3 +1,5 @@
+import clsx from 'clsx'
+import { useMemo } from 'react'
 import { trpc } from 'lib/trpc'
 import {
   LoadingAlert,
@@ -6,11 +8,30 @@ import {
   Dialog,
   Button,
 } from 'components/Atoms'
+import {
+  MoreHorizontalIcon,
+  ThumbsUpIcon,
+  ThumbsDownIcon,
+  CalendarDaysIcon,
+  PauseIcon,
+  PlayIcon,
+  TrashIcon,
+} from 'assets/svgs'
+import { Menu } from 'components/Organisms'
+import { readableCurrentDate } from 'utils'
 
 const PaymentList = () => {
-  const list = trpc.listAuctionHighlights.useQuery()
+  const list = trpc.listAuctionHighlights.useQuery(undefined, {
+    refetchOnWindowFocus: false,
+    select: (data) =>
+      data.map(({ days, ...rest }) => ({
+        ...rest,
+        days: days.split(','),
+      })),
+  })
 
   const isLoading = list.isFetching
+  const currentDate = useMemo(readableCurrentDate, [])
 
   return (
     <section>
@@ -20,7 +41,6 @@ const PaymentList = () => {
         <Table.Element className="text-center">
           <Table.Head>
             <Table.Row>
-              <Table.HeadColumn>Action</Table.HeadColumn>
               <Table.HeadColumn highlighted desc>
                 Date
               </Table.HeadColumn>
@@ -42,12 +62,9 @@ const PaymentList = () => {
               }) => (
                 <Table.Row key={id}>
                   <Table.Column>
-                    <Button pill>👍 Confirm</Button>
-                    <Button pill>📅 Update date</Button>
-                    <Button pill>⏸️☑️ Pause</Button>
-                    <Button pill>❌ Delete</Button>
-                  </Table.Column>
-                  <Table.Column>
+                    {!active && (
+                      <PauseIcon className="fill-primaryAlert mr-1 align-middle" />
+                    )}
                     {new Date(lastUpdated).toLocaleString('pt-BR', {
                       hour12: false,
                     })}
@@ -55,7 +72,46 @@ const PaymentList = () => {
                   <Table.Column>
                     <AuctionLink auctionId={auctionId}>{nickname}</AuctionLink>
                   </Table.Column>
-                  <Table.Column>days</Table.Column>
+                  <Table.Column>
+                    <div className="grid gap-2">
+                      {days.map((day) => (
+                        <p
+                          className={clsx(
+                            day === currentDate &&
+                              'code text-greenHighlight font-bold',
+                          )}
+                        >
+                          {day}
+                        </p>
+                      ))}
+                    </div>
+                  </Table.Column>
+                  <Table.Column>
+                    <Menu
+                      offset={[0, 8]}
+                      items={[
+                        {
+                          label: confirmed ? 'Unconfirm' : 'Confirm',
+                          icon: confirmed ? ThumbsDownIcon : ThumbsUpIcon,
+                          disabled: confirmed,
+                        },
+                        {
+                          label: 'Pause',
+                          icon: active ? PauseIcon : PlayIcon,
+                        },
+                        {
+                          label: 'Update dates',
+                          icon: CalendarDaysIcon,
+                        },
+                        {
+                          label: 'Delete',
+                          icon: TrashIcon,
+                        },
+                      ]}
+                    >
+                      <MoreHorizontalIcon className="fill-onSurface" />
+                    </Menu>
+                  </Table.Column>
                 </Table.Row>
               ),
             )}
