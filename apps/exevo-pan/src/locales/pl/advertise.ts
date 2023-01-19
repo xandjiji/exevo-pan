@@ -9,11 +9,6 @@ export default {
     Checkout: 'Podsumowanie',
   },
   NextButton: 'Następny',
-  RangeDatePicker: {
-    currentMonthLabel: 'Obecny miesiąc',
-    nextMonthLabel: 'Następny miesiąc',
-    smallDescription: 'Wybierz dni, w których chcesz promować swoją aukcję.',
-  },
   AuctionSearch: {
     inputLabel: 'Szukaj po nazwie',
     placeholder: 'Nazwa',
@@ -65,4 +60,5 @@ export default {
     },
   },
   EmailTitle: 'Dziękujemy za złożenie zamówienia!',
+  calendarDescription: 'Wybierz dni, w których chcesz promować swoją aukcję.',
 }

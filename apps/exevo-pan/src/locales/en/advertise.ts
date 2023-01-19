@@ -9,11 +9,6 @@ export default {
     Checkout: 'Checkout',
   },
   NextButton: 'Next',
-  RangeDatePicker: {
-    currentMonthLabel: 'Current month',
-    nextMonthLabel: 'Next month',
-    smallDescription: 'Choose the days you want to highlight your auction.',
-  },
   AuctionSearch: {
     inputLabel: 'Search by nickname',
     placeholder: 'Nickname',
@@ -63,4 +58,5 @@ export default {
     },
   },
   EmailTitle: 'Thank you for your order!',
+  calendarDescription: 'Choose the days you want to highlight your auction.',
 }

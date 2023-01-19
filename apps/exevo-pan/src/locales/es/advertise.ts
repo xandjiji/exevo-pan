@@ -9,11 +9,6 @@ export default {
     Checkout: 'Finalizar',
   },
   NextButton: 'Siguiente',
-  RangeDatePicker: {
-    currentMonthLabel: 'Mes actual',
-    nextMonthLabel: 'Proximo mes',
-    smallDescription: 'Elija los días en los que desea destacar su subasta.',
-  },
   AuctionSearch: {
     inputLabel: 'Buscar por nickname',
     placeholder: 'Nickname',
@@ -65,4 +60,5 @@ export default {
     },
   },
   EmailTitle: 'Gracias por su pedido!',
+  calendarDescription: 'Elija los días en los que desea destacar su subasta.',
 }
