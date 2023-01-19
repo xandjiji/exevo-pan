@@ -1,15 +1,11 @@
-import {
-  readableCurrentDate,
-  standardCurrentDate,
-  ddmmyyy2mmddyyyy,
-} from 'utils'
+import { readableCurrentDate, ddmmyyy2mmddyyyy, sanitizeDateTime } from 'utils'
 import { HighlightStatus } from './types'
 
 export const isPastDate = (readableDate: string): boolean => {
-  const currentTimestamp = +new Date(standardCurrentDate())
-  const checkingTimestamp = +new Date(ddmmyyy2mmddyyyy(readableDate))
+  const currentDate = sanitizeDateTime(new Date())
+  const checkingDate = new Date(ddmmyyy2mmddyyyy(readableDate))
 
-  return checkingTimestamp < currentTimestamp
+  return checkingDate < currentDate
 }
 
 export const getHighlightStatus = (

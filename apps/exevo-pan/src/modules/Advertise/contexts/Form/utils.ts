@@ -1,4 +1,4 @@
-import { dateToReadableStringDate } from 'utils'
+import { dateToStandardStringDate } from 'utils'
 import { getDatesUntilEnd } from 'components/Organisms/FutureRangeDatePicker/utils'
 
 const getLastItems = <T>(array: T[], amount: number): T[] =>
@@ -6,5 +6,5 @@ const getLastItems = <T>(array: T[], amount: number): T[] =>
 
 export const getRecommendedDays = (endDate: number): string[] =>
   getLastItems(getDatesUntilEnd(new Date(endDate * 1000)), 2).map(
-    dateToReadableStringDate,
+    dateToStandardStringDate,
   )

@@ -25,7 +25,7 @@ export const dateToStandardStringDate = (date: Date) => {
 
 export const dateToReadableStringDate = (date: Date) => {
   const { day, month, year } = dateToDateObject(date)
-  return padStringDate(`${month + 1}/${day}/${year}`)
+  return padStringDate(`${day}/${month + 1}/${year}`)
 }
 
 export const readableCurrentDate = (): string =>
