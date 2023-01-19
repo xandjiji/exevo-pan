@@ -3,9 +3,9 @@ import { proBosses } from './proBosses'
 import { highlightCheckout } from './highlightCheckout'
 import { proPayment } from './proPayment'
 import { getAuctionById } from './getAuctionById'
-import { listProOrders, updateProOrders } from './admin/proOrders'
-import { proRevenue } from './admin/proRevenue'
-import { listAuctionHighlights } from './admin/auctionHighlights'
+import * as proOrders from './admin/proOrders'
+import * as proRevenue from './admin/proRevenue'
+import * as auctionHighlights from './admin/auctionHighlights'
 
 export const routes = {
   getAuctionById,
@@ -13,8 +13,7 @@ export const routes = {
   newsletter,
   highlightCheckout,
   proPayment,
-  listProOrders,
-  updateProOrders,
-  proRevenue,
-  listAuctionHighlights,
+  ...proOrders,
+  ...proRevenue,
+  ...auctionHighlights,
 }

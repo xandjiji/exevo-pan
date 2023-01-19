@@ -7,6 +7,7 @@ import {
   AuctionLink,
   Dialog,
   Button,
+  Alert,
 } from 'components/Atoms'
 import {
   MoreHorizontalIcon,
@@ -27,6 +28,12 @@ import { getHighlightStatus, isPastDate } from './utils'
 import { HighlightStatus } from './types'
 
 const PaymentList = () => {
+  const [filterStatus, setFilterStatus] = useState<'NONE' | HighlightStatus>(
+    'NONE',
+  )
+
+  const [updatedCharacter, setUpdatedCharacter] = useState('')
+
   const currentDate = useMemo(readableCurrentDate, [])
 
   const list = trpc.listAuctionHighlights.useQuery(undefined, {
@@ -44,12 +51,6 @@ const PaymentList = () => {
       }),
   })
 
-  const isLoading = list.isFetching
-
-  const [filterStatus, setFilterStatus] = useState<'NONE' | HighlightStatus>(
-    'NONE',
-  )
-
   const renderedList = useMemo(
     () =>
       list.data
@@ -60,9 +61,25 @@ const PaymentList = () => {
     [list, filterStatus],
   )
 
+  const patch = trpc.patchAuctionHighlights.useMutation({
+    onSuccess: ({ nickname }) => {
+      setUpdatedCharacter(nickname)
+      list.refetch()
+    },
+  })
+
+  const isLoading = list.isFetching || patch.isLoading
+
   return (
-    <section>
+    <section className="grid gap-2">
       {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
+
+      {!!updatedCharacter && (
+        <Alert variant="primary">
+          <strong className="text-primaryHighlight">{updatedCharacter}</strong>{' '}
+          was updated
+        </Alert>
+      )}
 
       <Table>
         <Table.Element>
@@ -70,7 +87,7 @@ const PaymentList = () => {
             <Table.Row>
               <Table.HeadColumn>
                 <Menu
-                  offset={[0, 8]}
+                  offset={[0, 0]}
                   placement="bottom-start"
                   items={[
                     {
@@ -99,7 +116,7 @@ const PaymentList = () => {
                     },
                   ]}
                 >
-                  <div className="text-onSurface flex items-center gap-1.5">
+                  <div className="text-onSurface flex items-center gap-1.5 p-1 px-2">
                     {
                       {
                         NONE: 'Filter status',
@@ -176,7 +193,7 @@ const PaymentList = () => {
                             ),
                             FINISHED: (
                               <>
-                                <ViewedIcon className="fill-separator" />
+                                <ViewedIcon className="fill-primary" />
                                 Finished
                               </>
                             ),
@@ -204,11 +221,13 @@ const PaymentList = () => {
                         {
                           label: confirmed ? 'Unconfirm' : 'Confirm',
                           icon: confirmed ? ThumbsDownIcon : ThumbsUpIcon,
-                          disabled: confirmed,
+                          onSelect: () =>
+                            patch.mutate({ id, confirmed: !confirmed }),
                         },
                         {
-                          label: 'Pause',
+                          label: active ? 'Pause' : 'Resume',
                           icon: active ? PauseIcon : PlayIcon,
+                          onSelect: () => patch.mutate({ id, active: !active }),
                         },
                         {
                           label: 'Update dates',
