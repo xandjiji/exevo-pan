@@ -33,6 +33,11 @@ export const mmddyyyy2ddmmyyy = (stringDate: string): string => {
   return padStringDate(`${day}/${month}/${year}`)
 }
 
+export const ddmmyyy2mmddyyyy = (stringDate: string): string => {
+  const [month, day, year] = stringDate.split('/')
+  return padStringDate(`${day}/${month}/${year}`)
+}
+
 const dateStringToNumeric = (dateString: string): number[] =>
   dateString.split('/').map((value) => +value)
 

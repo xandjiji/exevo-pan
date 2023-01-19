@@ -17,21 +17,29 @@ import {
   PlayIcon,
   TrashIcon,
 } from 'assets/svgs'
-import { Menu } from 'components/Organisms'
+import { Menu, Tooltip } from 'components/Organisms'
 import { readableCurrentDate } from 'utils'
+import { getHighlightStatus, isPastDate } from './utils'
 
 const PaymentList = () => {
+  const currentDate = useMemo(readableCurrentDate, [])
+
   const list = trpc.listAuctionHighlights.useQuery(undefined, {
     refetchOnWindowFocus: false,
     select: (data) =>
-      data.map(({ days, ...rest }) => ({
-        ...rest,
-        days: days.split(','),
-      })),
+      data.map(({ days, active, ...rest }) => {
+        const splittedDays = days.split(',')
+
+        return {
+          ...rest,
+          active,
+          days: splittedDays,
+          status: getHighlightStatus(active, splittedDays),
+        }
+      }),
   })
 
   const isLoading = list.isFetching
-  const currentDate = useMemo(readableCurrentDate, [])
 
   return (
     <section>
@@ -44,8 +52,8 @@ const PaymentList = () => {
               <Table.HeadColumn highlighted desc>
                 Date
               </Table.HeadColumn>
+              <Table.HeadColumn>Status</Table.HeadColumn>
               <Table.HeadColumn>Auction</Table.HeadColumn>
-              <Table.HeadColumn>Days</Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
@@ -53,6 +61,7 @@ const PaymentList = () => {
             {(list.data ?? []).map(
               ({
                 id,
+                status,
                 confirmed,
                 active,
                 auctionId,
@@ -62,29 +71,56 @@ const PaymentList = () => {
               }) => (
                 <Table.Row key={id}>
                   <Table.Column>
-                    {!active && (
-                      <PauseIcon className="fill-primaryAlert mr-1 align-middle" />
-                    )}
                     {new Date(lastUpdated).toLocaleString('pt-BR', {
                       hour12: false,
                     })}
                   </Table.Column>
                   <Table.Column>
-                    <AuctionLink auctionId={auctionId}>{nickname}</AuctionLink>
+                    <Tooltip
+                      offset={[0, 8]}
+                      content={
+                        <div className="grid gap-2">
+                          {days.map((day) => (
+                            <p
+                              className={clsx(
+                                isPastDate(day) &&
+                                  'text-separator line-through',
+                                day === currentDate &&
+                                  'text-greenHighlight font-bold',
+                              )}
+                            >
+                              {day}
+                            </p>
+                          ))}
+                        </div>
+                      }
+                    >
+                      <p className="code cursor-pointer">
+                        {
+                          {
+                            PAUSED: (
+                              <span className="text-red font-bold">Paused</span>
+                            ),
+                            RUNNING: (
+                              <span className="text-greenHighlight font-bold">
+                                Running
+                              </span>
+                            ),
+                            WAITING: (
+                              <span className="text-primaryAlert font-bold">
+                                Waiting
+                              </span>
+                            ),
+                            FINISHED: (
+                              <span className="text-separator">Finished</span>
+                            ),
+                          }[status]
+                        }
+                      </p>
+                    </Tooltip>
                   </Table.Column>
                   <Table.Column>
-                    <div className="grid gap-2">
-                      {days.map((day) => (
-                        <p
-                          className={clsx(
-                            day === currentDate &&
-                              'code text-greenHighlight font-bold',
-                          )}
-                        >
-                          {day}
-                        </p>
-                      ))}
-                    </div>
+                    <AuctionLink auctionId={auctionId}>{nickname}</AuctionLink>
                   </Table.Column>
                   <Table.Column>
                     <Menu
