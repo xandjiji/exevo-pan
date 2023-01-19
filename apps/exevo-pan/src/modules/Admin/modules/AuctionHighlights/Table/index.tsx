@@ -19,6 +19,7 @@ import {
   HourglassIcon,
   ViewedIcon,
   NewIcon,
+  ChevronDownIcon,
 } from 'assets/svgs'
 import { Menu, Tooltip } from 'components/Organisms'
 import { readableCurrentDate } from 'utils'
@@ -64,9 +65,9 @@ const PaymentList = () => {
       {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
 
       <Table>
-        <Table.Element className="text-center">
+        <Table.Element>
           <Table.Head>
-            <Table.Row className="child:align-bottom">
+            <Table.Row>
               <Table.HeadColumn>
                 <Menu
                   offset={[0, 8]}
@@ -97,23 +98,24 @@ const PaymentList = () => {
                       icon: ViewedIcon,
                     },
                   ]}
-                  variant="button"
                 >
-                  {
+                  <div className="text-onSurface flex items-center gap-1.5">
                     {
-                      NONE: 'Filter status',
-                      PAUSED: 'Paused',
-                      RUNNING: 'Running',
-                      WAITING: 'Waiting',
-                      FINISHED: 'Finished',
-                    }[filterStatus]
-                  }
+                      {
+                        NONE: 'Filter status',
+                        PAUSED: 'Paused',
+                        RUNNING: 'Running',
+                        WAITING: 'Waiting',
+                        FINISHED: 'Finished',
+                      }[filterStatus]
+                    }
+                    <ChevronDownIcon className="fill-onSurface h-4 w-4" />
+                  </div>
                 </Menu>
               </Table.HeadColumn>
-              <Table.HeadColumn highlighted desc>
-                Date
+              <Table.HeadColumn highlighted desc className="text-left">
+                Order
               </Table.HeadColumn>
-              <Table.HeadColumn>Auction</Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
@@ -130,9 +132,10 @@ const PaymentList = () => {
                 days,
               }) => (
                 <Table.Row key={id}>
-                  <Table.Column>
+                  <Table.Column className="text-center">
                     <Tooltip
                       offset={[0, 8]}
+                      placement="right"
                       content={
                         <div className="grid gap-2">
                           {days.map((day) => (
@@ -183,12 +186,16 @@ const PaymentList = () => {
                     </Tooltip>
                   </Table.Column>
                   <Table.Column>
-                    {new Date(lastUpdated).toLocaleString('pt-BR', {
-                      hour12: false,
-                    })}
-                  </Table.Column>
-                  <Table.Column>
-                    <AuctionLink auctionId={auctionId}>{nickname}</AuctionLink>
+                    <div className="grid gap-1.5">
+                      <AuctionLink auctionId={auctionId}>
+                        {nickname}
+                      </AuctionLink>
+                      <p>
+                        {new Date(lastUpdated).toLocaleString('pt-BR', {
+                          hour12: false,
+                        })}
+                      </p>
+                    </div>
                   </Table.Column>
                   <Table.Column>
                     <Menu

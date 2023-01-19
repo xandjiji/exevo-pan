@@ -15,7 +15,7 @@ export default function AuctionHighlights() {
       </Head>
 
       <Template>
-        <div className="mx-auto grid max-w-3xl gap-4">
+        <div className="mx-auto grid max-w-xl gap-4">
           <Table />
         </div>
       </Template>
