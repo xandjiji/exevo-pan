@@ -20,11 +20,7 @@ export const getHighlightStatus = (
     return 'FINISHED'
   }
 
-  if (!active) {
-    return 'PAUSED'
-  }
-
+  if (!active) return 'PAUSED'
   if (days.includes(readableCurrentDate())) return 'RUNNING'
-
   return 'SCHEDULED'
 }
