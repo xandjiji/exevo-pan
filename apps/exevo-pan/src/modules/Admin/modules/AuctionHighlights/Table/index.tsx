@@ -182,6 +182,7 @@ const PaymentList = () => {
                   key={id}
                   className={clsx(
                     toDelete.id === id && 'bg-red/20',
+                    toToggleDate.id === id && 'bg-green/20',
                     'hover:bg-background group',
                   )}
                 >
