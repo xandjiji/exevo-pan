@@ -1,5 +1,5 @@
 import { dateToStandardStringDate } from 'utils'
-import { getDatesUntilEnd } from 'components/Organisms/FutureRangeDatePicker/utils'
+import { getDatesUntilEnd } from 'components/Organisms/RangeDatePicker/utils'
 
 const getLastItems = <T>(array: T[], amount: number): T[] =>
   array.slice(Math.max(array.length - amount, 0))

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { renderWithProviders } from 'utils/test'
-import FutureRangeDatePicker from '..'
+import RangeDatePicker from '..'
 
 import { mockedSelectedCharacter, currentMonth, nextMonth } from './mock'
 
@@ -14,9 +14,9 @@ type DateState = {
 
 /* @ ToDo: write tests */
 
-/* describe('<FutureRangeDatePicker />', () => {
+/* describe('<RangeDatePicker />', () => {
   test('should display current and next month correctly', () => {
-    renderWithProviders(<FutureRangeDatePicker />)
+    renderWithProviders(<RangeDatePicker />)
 
     expect(screen.getByLabelText('Current month')).toHaveTextContent(
       currentMonth,
@@ -25,7 +25,7 @@ type DateState = {
   })
 
   test('should toggle dates correctly', () => {
-    renderWithProviders(<FutureRangeDatePicker />)
+    renderWithProviders(<RangeDatePicker />)
 
     const dateButtons = screen.getAllByRole('button')
     const dateStates: DateState[] = dateButtons

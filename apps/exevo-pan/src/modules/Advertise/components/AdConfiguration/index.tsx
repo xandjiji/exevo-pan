@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { FutureRangeDatePicker } from 'components/Organisms'
+import { RangeDatePicker } from 'components/Organisms'
 import { dateToStandardStringDate } from 'utils'
 import PaymentMethods from './PaymentMethods'
 import Discount from './Discount'
@@ -17,7 +17,7 @@ const AdConfiguration = () => {
   const daysCount = selectedDates.length
   return (
     <section className="grid gap-6">
-      <FutureRangeDatePicker
+      <RangeDatePicker
         endDate={new Date((selectedCharacter?.auctionEnd ?? 0) * 1000)}
         selectedDates={selectedDates.map((date) => new Date(date))}
         onDateSelect={(selectedDate) =>

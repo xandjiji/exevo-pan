@@ -232,7 +232,7 @@ export default {
   SuggestedReading: {
     miniTitle: 'Leitura recomendada:',
   },
-  FutureRangeDatePicker: {
+  RangeDatePicker: {
     currentMonthLabel: 'Mês atual',
     nextMonthLabel: 'Próximo mês',
   },

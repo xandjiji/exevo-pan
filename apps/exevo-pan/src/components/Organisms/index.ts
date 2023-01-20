@@ -1,6 +1,6 @@
 export { default as AutocompleteInput } from './AutocompleteInput'
 export { default as ChipGroup } from './ChipGroup'
-export { default as FutureRangeDatePicker } from './FutureRangeDatePicker'
+export { default as RangeDatePicker } from './RangeDatePicker'
 export { default as InfoTooltip } from './InfoTooltip'
 export { default as Menu } from './Menu'
 export { default as Select } from './Select'

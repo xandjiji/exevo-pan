@@ -15,21 +15,14 @@ import {
   NewIcon,
   ChevronDownIcon,
 } from 'assets/svgs'
-import { Menu, Tooltip, FutureRangeDatePicker } from 'components/Organisms'
-import { readableCurrentDate, ddmmyyy2mmddyyyy } from 'utils'
+import { Menu, Tooltip, RangeDatePicker } from 'components/Organisms'
+import { readableCurrentDate } from 'utils'
 import AuctionSummary from './AuctionSummary'
 import { useRangeDatePicker } from './useRangeDatePicker'
-import {
-  getHighlightStatus,
-  isPastDate,
-  SEPARATOR,
-  toggleJoinedDateString,
-  forwardOneMonth,
-} from './utils'
+import { getHighlightStatus, isPastDate } from './utils'
 import { HighlightStatus } from './types'
 
 const EMPTY_DELETION = { id: '', auctionId: 0, nickname: '', lastUpdated: '' }
-const EMPTY_TOGGLE_DATE = { ...EMPTY_DELETION, joinedReadableDate: '' }
 
 const PaymentList = () => {
   const [filterStatus, setFilterStatus] = useState<'NONE' | HighlightStatus>(
@@ -296,7 +289,7 @@ const PaymentList = () => {
       >
         <AuctionSummary {...toToggleDate} className="code -mt-4" />
 
-        <FutureRangeDatePicker {...rageDatePickerProps} />
+        <RangeDatePicker {...rageDatePickerProps} />
 
         <div className="flex justify-end gap-1">
           <Button hollow pill onClick={resetDates} disabled={remove.isLoading}>

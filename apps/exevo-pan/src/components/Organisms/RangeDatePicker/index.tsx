@@ -6,13 +6,13 @@ import FillDates from './FillDates'
 import FillColumns from './FillColumns'
 import { getDatesUntilEnd, partitionByMonths } from './utils'
 import * as S from './atoms'
-import { FutureRangeDatePickerProps } from './types'
+import { RangeDatePickerProps } from './types'
 
-const FutureRangeDatePicker = ({
+const RangeDatePicker = ({
   endDate,
   selectedDates,
   onDateSelect,
-}: FutureRangeDatePickerProps) => {
+}: RangeDatePickerProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -30,7 +30,7 @@ const FutureRangeDatePicker = ({
       variant="rounded"
       title={
         <p
-          aria-label={common.FutureRangeDatePicker.currentMonthLabel}
+          aria-label={common.RangeDatePicker.currentMonthLabel}
           className="text-center tracking-wider"
         >
           {common.FullMonth[new Date().getMonth()]}
@@ -70,7 +70,7 @@ const FutureRangeDatePicker = ({
               {monthDatesElements}
               {hasNextMonth && (
                 <span
-                  aria-label={common.FutureRangeDatePicker.nextMonthLabel}
+                  aria-label={common.RangeDatePicker.nextMonthLabel}
                   className="text-separator text-s col-span-full -mb-1.5 pt-2 pb-1"
                 >
                   {common.FullMonth[(monthDates[0].getMonth() + 1) % 12]}
@@ -94,4 +94,4 @@ const FutureRangeDatePicker = ({
   )
 }
 
-export default memo(FutureRangeDatePicker)
+export default memo(RangeDatePicker)
