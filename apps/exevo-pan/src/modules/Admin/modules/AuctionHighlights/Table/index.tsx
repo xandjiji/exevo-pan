@@ -15,13 +15,21 @@ import {
   NewIcon,
   ChevronDownIcon,
 } from 'assets/svgs'
-import { Menu, Tooltip } from 'components/Organisms'
-import { readableCurrentDate } from 'utils'
+import { Menu, Tooltip, FutureRangeDatePicker } from 'components/Organisms'
+import { readableCurrentDate, ddmmyyy2mmddyyyy } from 'utils'
 import AuctionSummary from './AuctionSummary'
-import { getHighlightStatus, isPastDate } from './utils'
+import { useRangeDatePicker } from './useRangeDatePicker'
+import {
+  getHighlightStatus,
+  isPastDate,
+  SEPARATOR,
+  toggleJoinedDateString,
+  forwardOneMonth,
+} from './utils'
 import { HighlightStatus } from './types'
 
 const EMPTY_DELETION = { id: '', auctionId: 0, nickname: '', lastUpdated: '' }
+const EMPTY_TOGGLE_DATE = { ...EMPTY_DELETION, joinedReadableDate: '' }
 
 const PaymentList = () => {
   const [filterStatus, setFilterStatus] = useState<'NONE' | HighlightStatus>(
@@ -33,6 +41,8 @@ const PaymentList = () => {
     message: '',
   })
   const [toDelete, setToDelete] = useState(EMPTY_DELETION)
+  const { toToggleDate, setToToggleDate, resetDates, ...rageDatePickerProps } =
+    useRangeDatePicker()
 
   const currentDate = useMemo(readableCurrentDate, [])
 
@@ -45,6 +55,7 @@ const PaymentList = () => {
         return {
           ...rest,
           active,
+          joinedReadableDate: days,
           days: splittedDays,
           status: getHighlightStatus(active, splittedDays),
         }
@@ -157,6 +168,7 @@ const PaymentList = () => {
                 nickname,
                 lastUpdated,
                 days,
+                joinedReadableDate,
               }) => (
                 <Table.Row
                   key={id}
@@ -243,6 +255,14 @@ const PaymentList = () => {
                         {
                           label: 'Update dates',
                           icon: CalendarDaysIcon,
+                          onSelect: () =>
+                            setToToggleDate({
+                              id,
+                              auctionId,
+                              nickname,
+                              lastUpdated,
+                              joinedReadableDate,
+                            }),
                         },
                         {
                           label: 'Delete',
@@ -266,6 +286,32 @@ const PaymentList = () => {
           </Table.Body>
         </Table.Element>
       </Table>
+
+      <Dialog
+        isOpen={!!toToggleDate.id}
+        onClose={resetDates}
+        heading="Update highlighted dates:"
+        className="xs:w-[420px] grid gap-6"
+        noCloseButton
+      >
+        <AuctionSummary {...toToggleDate} className="code -mt-4" />
+
+        <FutureRangeDatePicker {...rageDatePickerProps} />
+
+        <div className="flex justify-end gap-1">
+          <Button hollow pill onClick={resetDates} disabled={remove.isLoading}>
+            Cancel
+          </Button>
+          <Button
+            pill
+            /* onClick={() => remove.mutate(toDelete.id)} */
+            loading={remove.isLoading}
+            disabled={remove.isLoading}
+          >
+            Confirm
+          </Button>
+        </div>
+      </Dialog>
 
       <Dialog
         isOpen={!!toDelete.id}
@@ -295,33 +341,6 @@ const PaymentList = () => {
           </Button>
         </div>
       </Dialog>
-      {/* <Dialog
-        isOpen={!!toConfirm.character}
-        onClose={resetConfirmation}
-        heading="Do you really want to proceed?"
-        noCloseButton
-        className="grid max-w-[90vw] text-base"
-      >
-        <p className="mt-4 mb-6 flex flex-wrap items-center gap-2">
-          <span
-            className={`code ${
-              toConfirm.confirmed ? 'text-greenHighlight' : 'text-red'
-            }`}
-          >
-            {toConfirm.confirmed ? 'Confirm' : 'Unconfirm'}
-          </span>
-          <p className="code w-fit">{toConfirm.character}</p>
-        </p>
-
-        <div className="flex justify-end gap-1">
-          <Button hollow pill onClick={resetConfirmation}>
-            Cancel
-          </Button>
-          <Button pill onClick={() => updateProOrders.mutate(toConfirm)}>
-            Confirm
-          </Button>
-        </div>
-      </Dialog> */}
     </section>
   )
 }
