@@ -38,3 +38,6 @@ export const addLocalePrefix = ({
 
 export const officialAuctionUrl = (auctionId: number) =>
   `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auctionId}`
+
+export const officialCharacterUrl = (nickname: string) =>
+  `https://www.tibia.com/community/?name=${nickname}`

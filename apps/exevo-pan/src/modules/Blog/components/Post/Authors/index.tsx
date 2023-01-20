@@ -1,5 +1,6 @@
 import { useTranslations } from 'contexts/useTranslation'
 import CharacterMiniCard from 'components/CharacterMiniCard'
+import { officialCharacterUrl } from 'utils'
 import { AuthorsProps } from './types'
 
 const Authors = ({ author, translator }: AuthorsProps) => {
@@ -18,7 +19,7 @@ const Authors = ({ author, translator }: AuthorsProps) => {
         forceSubtitle={blog.Authors.author}
         characterName={author}
         outfitSrc={`/blog/authors/${author}.png`}
-        linkUrl={`https://www.tibia.com/community/?name=${author}`}
+        linkUrl={officialCharacterUrl(author)}
         style={translator ? { marginBottom: 8 } : undefined}
       />
       {translator && (
@@ -26,7 +27,7 @@ const Authors = ({ author, translator }: AuthorsProps) => {
           forceSubtitle={blog.Authors.translator}
           characterName={translator}
           outfitSrc={`/blog/authors/${translator}.png`}
-          linkUrl={`https://www.tibia.com/community/?name=${translator}`}
+          linkUrl={officialCharacterUrl(translator)}
         />
       )}
     </footer>

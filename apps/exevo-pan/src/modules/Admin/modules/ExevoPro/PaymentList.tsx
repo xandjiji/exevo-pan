@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useState, useMemo, useCallback } from 'react'
 import { trpc } from 'lib/trpc'
 import { debounce } from 'utils'
@@ -9,6 +10,7 @@ import {
   Checkbox,
   Dialog,
   Button,
+  CharacterLink,
 } from 'components/Atoms'
 
 const PAGE_SIZE = 30
@@ -92,7 +94,16 @@ const PaymentList = () => {
           <Table.Body>
             {(list.data?.page ?? []).map(
               ({ id, paymentData: { character, lastUpdated, confirmed } }) => (
-                <Table.Row key={id}>
+                <Table.Row
+                  key={id}
+                  className={clsx(
+                    toConfirm.id === id &&
+                      (toConfirm.confirmed
+                        ? 'bg-greenHighlight/20'
+                        : 'bg-red/20'),
+                    'hover:bg-background',
+                  )}
+                >
                   <Table.Column>
                     <div className="mx-auto w-fit">
                       <Checkbox
@@ -103,7 +114,14 @@ const PaymentList = () => {
                       />
                     </div>
                   </Table.Column>
-                  <Table.Column>{character}</Table.Column>
+                  <Table.Column>
+                    <CharacterLink
+                      nickname={character}
+                      className="text-primaryHighlight"
+                    >
+                      {character}
+                    </CharacterLink>
+                  </Table.Column>
                   <Table.Column>
                     {new Date(lastUpdated).toLocaleString('pt-BR', {
                       hour12: false,
@@ -135,10 +153,20 @@ const PaymentList = () => {
         </p>
 
         <div className="flex justify-end gap-1">
-          <Button hollow pill onClick={resetConfirmation}>
+          <Button
+            hollow
+            pill
+            onClick={resetConfirmation}
+            disabled={updateProOrders.isLoading}
+          >
             Cancel
           </Button>
-          <Button pill onClick={() => updateProOrders.mutate(toConfirm)}>
+          <Button
+            pill
+            onClick={() => updateProOrders.mutate(toConfirm)}
+            loading={updateProOrders.isLoading}
+            disabled={updateProOrders.isLoading}
+          >
             Confirm
           </Button>
         </div>

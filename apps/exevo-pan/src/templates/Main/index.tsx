@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import Header from './Header'
 import Footer from './Footer'
 

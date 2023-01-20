@@ -1,5 +1,5 @@
 import { useTranslations } from 'contexts/useTranslation'
-import { Text, CopyButton } from 'components/Atoms'
+import { Text, CopyButton, CharacterLink } from 'components/Atoms'
 import { advertising } from 'Constants'
 import { useForm } from '../../../contexts/Form'
 import { calculatePrice } from '../../../utils'
@@ -34,14 +34,12 @@ const CoinsPayment = ({ isPro }: CoinsPaymentProps) => {
           }
           currency="tc"
         />
-        <a
-          href={`https://www.tibia.com/community/?name=${advertising.BANK_CHARACTER}`}
-          target="_blank"
-          rel="noreferrer noopener external"
+        <CharacterLink
+          nickname={advertising.BANK_CHARACTER}
           className="text-primaryHighlight font-bold tracking-wide"
         >
           {advertising.BANK_CHARACTER}
-        </a>
+        </CharacterLink>
         <CopyButton
           copyString={advertising.BANK_CHARACTER}
           className="relative top-1.5 ml-[1px] !inline-grid"

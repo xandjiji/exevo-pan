@@ -18,17 +18,28 @@ export const dateToDateObject = (dateValue: Date): DateObject => ({
   weekday: dateValue.getDay(),
 })
 
-export const readableCurrentDate = (): string => {
-  const { day, month, year } = dateToDateObject(new Date())
-  return padStringDate(`${day}/${month + 1}/${year}`)
-}
-
-export const standardCurrentDate = (): string => {
-  const { day, month, year } = dateToDateObject(new Date())
+export const dateToStandardStringDate = (date: Date) => {
+  const { day, month, year } = dateToDateObject(date)
   return padStringDate(`${month + 1}/${day}/${year}`)
 }
 
+export const dateToReadableStringDate = (date: Date) => {
+  const { day, month, year } = dateToDateObject(date)
+  return padStringDate(`${day}/${month + 1}/${year}`)
+}
+
+export const readableCurrentDate = (): string =>
+  dateToReadableStringDate(new Date())
+
+export const standardCurrentDate = (): string =>
+  dateToStandardStringDate(new Date())
+
 export const mmddyyyy2ddmmyyy = (stringDate: string): string => {
+  const [month, day, year] = stringDate.split('/')
+  return padStringDate(`${day}/${month}/${year}`)
+}
+
+export const ddmmyyy2mmddyyyy = (stringDate: string): string => {
   const [month, day, year] = stringDate.split('/')
   return padStringDate(`${day}/${month}/${year}`)
 }
@@ -57,5 +68,8 @@ export const timestampDaysDiff = (
 
   return abs ? Math.abs(dayDiff) : dayDiff
 }
+
+export const sanitizeDateTime = (date: Date): Date =>
+  new Date(date.toDateString())
 
 export * from './constants'

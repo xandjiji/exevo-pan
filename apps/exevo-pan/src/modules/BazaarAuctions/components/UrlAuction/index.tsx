@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import { useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSyncUrlState } from 'hooks'

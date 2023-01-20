@@ -9,11 +9,6 @@ export default {
     Checkout: 'Finalizar',
   },
   NextButton: 'Próximo',
-  RangeDatePicker: {
-    currentMonthLabel: 'Mês atual',
-    nextMonthLabel: 'Próximo mês',
-    smallDescription: 'Escolha os dias que você quer destacar seu leilão.',
-  },
   AuctionSearch: {
     inputLabel: 'Procurar por nickname',
     placeholder: 'Nickname',
@@ -63,4 +58,5 @@ export default {
     },
   },
   EmailTitle: 'Obrigado pelo seu pedido!',
+  calendarDescription: 'Escolha os dias que você quer destacar seu leilão.',
 }

@@ -2,8 +2,9 @@
 import clsx from 'clsx'
 import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import { AuctionLink } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
-import { mmddyyyy2ddmmyyy, sortStringDates, officialAuctionUrl } from 'utils'
+import { mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
 import { ReceiptIcon } from 'assets/svgs'
 import { calculatePrice, readablePrice } from '../../utils'
 import { SummaryProps } from './types'
@@ -47,16 +48,12 @@ const Summary = ({
       <div>
         <Strong>
           {selectedCharacter?.nickname}{' '}
-          <a
-            href={officialAuctionUrl(
-              selectedCharacter ? selectedCharacter.id : 0,
-            )}
-            target="_blank"
-            rel="noreferrer noopener"
+          <AuctionLink
+            auctionId={selectedCharacter ? selectedCharacter.id : 0}
             className="text-tsm text-onSurface relative font-light tracking-widest"
           >
             (#{selectedCharacter?.id})
-          </a>
+          </AuctionLink>
         </Strong>
         <SubText>{advertise.PaymentDetails.Summary.auctionedCharacter}</SubText>
       </div>

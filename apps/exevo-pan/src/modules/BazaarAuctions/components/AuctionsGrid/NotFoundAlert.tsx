@@ -1,6 +1,6 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Alert } from 'components/Atoms'
+import { Alert, AuctionLink } from 'components/Atoms'
 import { officialAuctionUrl } from 'utils'
 
 type NotFoundAlertProps = {
@@ -19,15 +19,13 @@ const NotFoundAlert = ({ notFoundIds }: NotFoundAlertProps) => {
       {homepage.AuctionsGrid.NotFoundAlert}{' '}
       {notFoundIds.map((id, index) => (
         <>
-          <a
-            target="_blank"
-            rel="noreferrer noopener external"
-            href={officialAuctionUrl(id)}
+          <AuctionLink
+            auctionId={id}
             className="text-onAlert font-bold underline underline-offset-2"
           >
             <span className="font-thin">#</span>
             {id}
-          </a>
+          </AuctionLink>
           {index < notFoundIds.length - 2
             ? ', '
             : index === notFoundIds.length - 1

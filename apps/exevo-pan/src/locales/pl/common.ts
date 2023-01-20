@@ -241,4 +241,8 @@ export default {
   SuggestedReading: {
     miniTitle: 'Suggested reading:',
   },
+  RangeDatePicker: {
+    currentMonthLabel: 'Obecny miesiąc',
+    nextMonthLabel: 'Następny miesiąc',
+  },
 }
