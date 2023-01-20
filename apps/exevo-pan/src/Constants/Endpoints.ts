@@ -9,5 +9,6 @@ export const endpoints = {
   AUCTIONS_ROUTE: '/api/auctions',
   ERROR_REPORT: '/api/error-report',
   PREVIEW_IMAGES: '/api/og',
+  REVALIDATE_PAGE: '/api/revalidate',
   FCM_SEND: 'https://fcm.googleapis.com/fcm/send',
 }

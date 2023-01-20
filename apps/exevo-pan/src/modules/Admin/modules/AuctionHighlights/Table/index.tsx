@@ -71,10 +71,13 @@ const PaymentList = () => {
     [list, filterStatus],
   )
 
+  const revalidate = trpc.revalidatePage.useMutation()
+
   const patch = trpc.patchAuctionHighlights.useMutation({
     onSuccess: ({ nickname }) => {
       setAlertMessage({ nickname, message: 'was updated' })
       resetDates()
+      revalidate.mutateAsync()
       list.refetch()
     },
   })
@@ -83,11 +86,16 @@ const PaymentList = () => {
     onSuccess: ({ nickname }) => {
       setAlertMessage({ nickname, message: 'was deleted' })
       setToDelete(EMPTY_DELETION)
+      revalidate.mutateAsync()
       list.refetch()
     },
   })
 
-  const isLoading = list.isFetching || patch.isLoading || remove.isLoading
+  const isLoading =
+    list.isFetching ||
+    patch.isLoading ||
+    remove.isLoading ||
+    revalidate.isLoading
 
   return (
     <section className="grid gap-2">
