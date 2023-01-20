@@ -13,6 +13,7 @@ const RangeDatePicker = ({
   endDate,
   selectedDates,
   onDateSelect,
+  ...props
 }: RangeDatePickerProps) => {
   const {
     translations: { common },
@@ -40,6 +41,7 @@ const RangeDatePicker = ({
           {common.FullMonth[new Date().getMonth()]}
         </p>
       }
+      {...props}
     >
       <div className="text-tsm grid grid-cols-7 gap-1.5 pt-1 text-center">
         <Weekdays />

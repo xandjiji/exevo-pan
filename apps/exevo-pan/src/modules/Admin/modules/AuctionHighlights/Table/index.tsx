@@ -295,7 +295,10 @@ const PaymentList = () => {
       >
         <AuctionSummary {...toToggleDate} className="code -mt-4" />
 
-        <RangeDatePicker {...rageDatePickerProps} />
+        <RangeDatePicker
+          {...rageDatePickerProps}
+          className="border-1 border-separator/50 border-solid shadow-none"
+        />
 
         <div className="grid gap-4">
           {dateDiff.added.length > 0 && (

@@ -7,4 +7,4 @@ export type RangeDatePickerProps = {
   endDate: Date
   selectedDates: Date[]
   onDateSelect: (selectedDate: Date) => void
-}
+} & JSX.IntrinsicElements['div']
