@@ -18,6 +18,7 @@ import {
 import { Menu, Tooltip, RangeDatePicker } from 'components/Organisms'
 import { readableCurrentDate } from 'utils'
 import AuctionSummary from './AuctionSummary'
+import DateDiffGrid from './DateDiffGrid'
 import { useRangeDatePicker } from './useRangeDatePicker'
 import { getHighlightStatus, isPastDate } from './utils'
 import { HighlightStatus } from './types'
@@ -34,8 +35,13 @@ const PaymentList = () => {
     message: '',
   })
   const [toDelete, setToDelete] = useState(EMPTY_DELETION)
-  const { toToggleDate, setToToggleDate, resetDates, ...rageDatePickerProps } =
-    useRangeDatePicker()
+  const {
+    toToggleDate,
+    setToToggleDate,
+    dateDiff,
+    resetDates,
+    ...rageDatePickerProps
+  } = useRangeDatePicker()
 
   const currentDate = useMemo(readableCurrentDate, [])
 
@@ -291,6 +297,26 @@ const PaymentList = () => {
 
         <RangeDatePicker {...rageDatePickerProps} />
 
+        <div className="grid gap-4">
+          {dateDiff.added.length > 0 && (
+            <DateDiffGrid
+              title="Adding:"
+              variant="adding"
+              dates={dateDiff.added}
+              onDateSelect={rageDatePickerProps.onDateSelect}
+            />
+          )}
+
+          {dateDiff.removed.length > 0 && (
+            <DateDiffGrid
+              title="Removing:"
+              variant="removing"
+              dates={dateDiff.removed}
+              onDateSelect={rageDatePickerProps.onDateSelect}
+            />
+          )}
+        </div>
+
         <div className="flex justify-end gap-1">
           <Button hollow pill onClick={resetDates} disabled={remove.isLoading}>
             Cancel
@@ -299,7 +325,7 @@ const PaymentList = () => {
             pill
             /* onClick={() => remove.mutate(toDelete.id)} */
             loading={remove.isLoading}
-            disabled={remove.isLoading}
+            disabled={dateDiff.noChange || remove.isLoading}
           >
             Confirm
           </Button>
