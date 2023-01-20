@@ -4,6 +4,7 @@ import {
   serializeSort,
 } from 'shared-utils/dist/contracts/Filters/schemas'
 import { endpoints } from 'Constants'
+import { caller } from 'pages/api/trpc/[trpc]'
 import { filterActiveHighlightedIds } from './utils'
 import { FetchAuctionPageArgs } from './types'
 
@@ -37,9 +38,18 @@ export default class AuctionsClient {
 
   static async fetchHighlightedAuctions(): Promise<CharacterObject[]> {
     try {
-      const response = await fetch(endpoints.BACKOFFICE_API)
-      const highlightedAuctionsData: HighlightedAuctionData[] =
-        await response.json()
+      const response = await caller.listAuctionHighlights()
+
+      const highlightedAuctionsData: HighlightedAuctionData[] = response.map(
+        ({ auctionId, nickname, days, lastUpdated, active, confirmed }) => ({
+          id: auctionId,
+          nickname,
+          days: days.split(','),
+          timestamp: +lastUpdated,
+          active,
+          confirmed,
+        }),
+      )
 
       const highlightedAuctionIds = new Set(
         filterActiveHighlightedIds(highlightedAuctionsData),

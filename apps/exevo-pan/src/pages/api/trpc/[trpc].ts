@@ -11,3 +11,16 @@ export default trpcNext.createNextApiHandler({
   router: appRouter,
   createContext,
 })
+
+export const caller = appRouter.createCaller({
+  token: {
+    id: '',
+    role: 'ADMIN',
+    provider: 'google',
+    email: '',
+    name: '',
+    picture: '',
+    proStatus: true,
+    sub: '',
+  },
+})

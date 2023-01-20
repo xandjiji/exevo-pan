@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { calculatePrice } from 'modules/Advertise/utils'
 import { EmailTemplate } from 'modules/Advertise/components'
 import { AdvertisePurchaseSchema } from 'types/zod/AdvertisePurchase'
-import { BackofficeClient, NotifyAdminClient } from 'services/server'
+import { NotifyAdminClient } from 'services/server'
 import { prisma } from 'lib/prisma'
 import { publicProcedure } from 'server/trpc'
 import { isDevelopment, mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
@@ -109,15 +109,6 @@ export const highlightCheckout = publicProcedure
       mailer.sendMail(customerEmail),
       mailer.sendMail(myEmail),
       NotifyAdminClient.notifyPurchase(),
-      BackofficeClient.notifyHighlight({
-        id: selectedCharacter.id,
-        nickname: selectedCharacter.nickname,
-        timestamp: +new Date(),
-        days: selectedDates,
-        active: true,
-        confirmed: false,
-        authToken,
-      }),
     ])
 
     return { uuid }
