@@ -15,6 +15,11 @@ export const useRangeDatePicker = () => {
   const [toToggleDate, setToToggleDate] = useState(EMPTY_TOGGLE_DATE)
   const [originalDates, setOriginalDates] = useState('')
 
+  const splittedDates = useMemo(
+    () => toToggleDate.joinedReadableDate.split(SEPARATOR).filter(Boolean),
+    [toToggleDate.joinedReadableDate],
+  )
+
   return {
     toToggleDate,
     setToToggleDate: useCallback((args: typeof EMPTY_TOGGLE_DATE) => {
@@ -31,10 +36,10 @@ export const useRangeDatePicker = () => {
     endDate,
     selectedDates: useMemo(
       () =>
-        toToggleDate.joinedReadableDate
-          .split(SEPARATOR)
-          .map((stringDate) => new Date(ddmmyyy2mmddyyyy(stringDate))),
-      [toToggleDate],
+        splittedDates.map(
+          (stringDate) => new Date(ddmmyyy2mmddyyyy(stringDate)),
+        ),
+      [splittedDates],
     ),
     onDateSelect: (toggleDate: Date) =>
       setToToggleDate((prev) => ({
@@ -50,9 +55,7 @@ export const useRangeDatePicker = () => {
     }, []),
     dateDiff: useMemo(() => {
       const originalSet = new Set(originalDates.split(SEPARATOR))
-      const changeSet = new Set(
-        toToggleDate.joinedReadableDate.split(SEPARATOR),
-      )
+      const changeSet = new Set(splittedDates)
 
       const added = [...changeSet].filter(
         (currentChange) => !originalSet.has(currentChange),
@@ -62,6 +65,6 @@ export const useRangeDatePicker = () => {
       )
 
       return { added, removed, noChange: added.length + removed.length === 0 }
-    }, [toToggleDate.joinedReadableDate, originalDates]),
+    }, [splittedDates, originalDates]),
   }
 }
