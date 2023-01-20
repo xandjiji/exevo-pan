@@ -74,6 +74,7 @@ const PaymentList = () => {
   const patch = trpc.patchAuctionHighlights.useMutation({
     onSuccess: ({ nickname }) => {
       setAlertMessage({ nickname, message: 'was updated' })
+      resetDates()
       list.refetch()
     },
   })
@@ -321,14 +322,19 @@ const PaymentList = () => {
         </div>
 
         <div className="flex justify-end gap-1">
-          <Button hollow pill onClick={resetDates} disabled={remove.isLoading}>
+          <Button hollow pill onClick={resetDates} disabled={patch.isLoading}>
             Cancel
           </Button>
           <Button
             pill
-            /* onClick={() => remove.mutate(toDelete.id)} */
-            loading={remove.isLoading}
-            disabled={dateDiff.noChange || remove.isLoading}
+            onClick={() =>
+              patch.mutate({
+                id: toToggleDate.id,
+                days: toToggleDate.joinedReadableDate,
+              })
+            }
+            loading={patch.isLoading}
+            disabled={dateDiff.noChange || patch.isLoading}
           >
             Confirm
           </Button>
