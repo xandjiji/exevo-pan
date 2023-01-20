@@ -3,6 +3,7 @@ export type DayProps = {
 } & JSX.IntrinsicElements['button']
 
 export type RangeDatePickerProps = {
+  startDate?: Date
   endDate: Date
   selectedDates: Date[]
   onDateSelect: (selectedDate: Date) => void

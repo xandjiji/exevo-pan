@@ -9,6 +9,7 @@ import * as S from './atoms'
 import { RangeDatePickerProps } from './types'
 
 const RangeDatePicker = ({
+  startDate,
   endDate,
   selectedDates,
   onDateSelect,
@@ -17,7 +18,10 @@ const RangeDatePicker = ({
     translations: { common },
   } = useTranslations()
 
-  const days = useMemo(() => getDatesUntilEnd(endDate), [endDate])
+  const days = useMemo(
+    () => getDatesUntilEnd(endDate, startDate),
+    [endDate, startDate],
+  )
   const partitionedDates = useMemo(() => partitionByMonths(days), [days])
   const [firstDay] = days
   const selectedStringDates = useMemo(

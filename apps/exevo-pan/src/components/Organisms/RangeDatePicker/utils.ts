@@ -1,12 +1,13 @@
 import { sanitizeDateTime } from 'utils'
 
-const getSanitizedCurrentDate = () => sanitizeDateTime(new Date())
-
-export const getDatesUntilEnd = (unsanitizedEndingDate: Date): Date[] => {
+export const getDatesUntilEnd = (
+  unsanitizedEndingDate: Date,
+  startingDate?: Date,
+): Date[] => {
   const endingDate = sanitizeDateTime(unsanitizedEndingDate)
 
-  const stepDate = getSanitizedCurrentDate()
-  const datesInRange = [getSanitizedCurrentDate()]
+  const stepDate = sanitizeDateTime(startingDate ?? new Date())
+  const datesInRange = [new Date(stepDate)]
 
   while (stepDate < endingDate) {
     stepDate.setDate(stepDate.getDate() + 1)
