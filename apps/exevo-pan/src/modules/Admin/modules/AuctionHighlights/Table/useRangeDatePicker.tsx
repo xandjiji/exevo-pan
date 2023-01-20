@@ -1,6 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
-import { ddmmyyy2mmddyyyy } from 'utils'
-import { SEPARATOR, toggleJoinedDateString, forwardOneMonth } from './utils'
+import {
+  ddmmyyy2mmddyyyy,
+  dateToReadableStringDate,
+  DAYS_IN,
+  MILLISECONDS_IN,
+} from 'utils'
 
 const EMPTY_TOGGLE_DATE = {
   id: '',
@@ -8,6 +12,29 @@ const EMPTY_TOGGLE_DATE = {
   nickname: '',
   lastUpdated: '',
   joinedReadableDate: '',
+}
+
+const MONTH = DAYS_IN.MONTH * MILLISECONDS_IN.DAY
+const forwardOneMonth = () => new Date(+new Date() + MONTH)
+
+const SEPARATOR = ','
+const toggleJoinedDateString = ({
+  toggleDate,
+  joinedDateString,
+}: {
+  toggleDate: Date
+  joinedDateString: string
+}): string => {
+  const readableDateSet = new Set(joinedDateString.split(SEPARATOR))
+  const toggleDateString = dateToReadableStringDate(toggleDate)
+
+  if (readableDateSet.has(toggleDateString)) {
+    readableDateSet.delete(toggleDateString)
+  } else {
+    readableDateSet.add(toggleDateString)
+  }
+
+  return [...readableDateSet].join(SEPARATOR)
 }
 
 export const useRangeDatePicker = () => {
