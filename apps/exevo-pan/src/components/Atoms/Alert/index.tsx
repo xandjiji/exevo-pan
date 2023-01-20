@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import clsx from 'clsx'
 import { ErrorOutlineIcon, InfoIcon } from 'assets/svgs'
 

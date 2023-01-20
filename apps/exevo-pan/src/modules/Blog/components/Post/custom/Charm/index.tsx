@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import Sprite from '../Sprite'
 
 type CharmProps = {

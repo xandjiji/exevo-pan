@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import clsx from 'clsx'
 import { useRef, useMemo, useState, useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'

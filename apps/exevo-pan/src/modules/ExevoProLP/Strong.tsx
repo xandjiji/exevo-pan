@@ -1,4 +1,3 @@
-/* eslint-disable react/require-default-props */
 import { memo } from 'react'
 import clsx from 'clsx'
 
