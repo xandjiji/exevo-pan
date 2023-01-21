@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { Template } from 'modules/Admin'
-import { Revenue, PaymentList } from 'modules/Admin/modules/ExevoPro'
+import { RevenueSummary, PaymentList } from 'modules/Admin/modules/ExevoPro'
 import { GetStaticProps } from 'next'
 import { buildPageTitle } from 'utils'
 import { common } from 'locales'
@@ -16,7 +16,7 @@ export default function Admin() {
 
       <Template>
         <div className="mx-auto grid max-w-3xl gap-4">
-          <Revenue />
+          <RevenueSummary />
           <PaymentList />
         </div>
       </Template>
