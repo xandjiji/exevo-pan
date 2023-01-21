@@ -25,6 +25,19 @@ import { HighlightStatus } from './types'
 
 const EMPTY_DELETION = { id: '', auctionId: 0, nickname: '', lastUpdated: '' }
 
+const ScrollableContainer = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div
+    className={clsx(
+      className,
+      'custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto py-2 pr-4',
+    )}
+    {...props}
+  />
+)
+
 const PaymentList = () => {
   const [filterStatus, setFilterStatus] = useState<'NONE' | HighlightStatus>(
     'NONE',
@@ -300,35 +313,37 @@ const PaymentList = () => {
         isOpen={!!toToggleDate.id}
         onClose={resetDates}
         heading="Update highlighted dates:"
-        className="xs:w-[420px] grid gap-6"
+        className="xs:w-[420px]"
         noCloseButton
       >
-        <AuctionSummary {...toToggleDate} className="code -mt-4" />
+        <ScrollableContainer>
+          <AuctionSummary {...toToggleDate} className="code" />
 
-        <RangeDatePicker
-          {...rageDatePickerProps}
-          className="border-1 border-separator/50 border-solid shadow-none"
-        />
+          <RangeDatePicker
+            {...rageDatePickerProps}
+            className="border-1 border-separator/50 border-solid shadow-none"
+          />
 
-        <div className="grid gap-4">
-          {dateDiff.added.length > 0 && (
-            <DateDiffGrid
-              title="Adding:"
-              variant="adding"
-              dates={dateDiff.added}
-              onDateSelect={rageDatePickerProps.onDateSelect}
-            />
-          )}
+          <div className="grid gap-4">
+            {dateDiff.added.length > 0 && (
+              <DateDiffGrid
+                title="Adding:"
+                variant="adding"
+                dates={dateDiff.added}
+                onDateSelect={rageDatePickerProps.onDateSelect}
+              />
+            )}
 
-          {dateDiff.removed.length > 0 && (
-            <DateDiffGrid
-              title="Removing:"
-              variant="removing"
-              dates={dateDiff.removed}
-              onDateSelect={rageDatePickerProps.onDateSelect}
-            />
-          )}
-        </div>
+            {dateDiff.removed.length > 0 && (
+              <DateDiffGrid
+                title="Removing:"
+                variant="removing"
+                dates={dateDiff.removed}
+                onDateSelect={rageDatePickerProps.onDateSelect}
+              />
+            )}
+          </div>
+        </ScrollableContainer>
 
         <div className="flex justify-end gap-1">
           <Button hollow pill onClick={resetDates} disabled={patch.isLoading}>
