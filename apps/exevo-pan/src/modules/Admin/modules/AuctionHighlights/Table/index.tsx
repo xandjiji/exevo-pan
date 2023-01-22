@@ -20,7 +20,11 @@ import { readableCurrentDate } from 'utils'
 import AuctionSummary from './AuctionSummary'
 import DateDiffGrid from './DateDiffGrid'
 import { useRangeDatePicker } from './useRangeDatePicker'
-import { getHighlightStatus, isPastDate } from './utils'
+import {
+  getHighlightStatus,
+  isPastDate,
+  toReadableLocalizedDate,
+} from './utils'
 import { HighlightStatus } from './types'
 
 const EMPTY_DELETION = { id: '', auctionId: 0, nickname: '', lastUpdated: '' }
@@ -61,7 +65,7 @@ const PaymentList = () => {
   const list = trpc.listAuctionHighlights.useQuery(undefined, {
     refetchOnWindowFocus: false,
     select: (data) =>
-      data.map(({ days, active, ...rest }) => {
+      data.map(({ days, active, timezoneOffsetMinutes, ...rest }) => {
         const splittedDays = days.split(',')
 
         return {
@@ -69,7 +73,12 @@ const PaymentList = () => {
           active,
           joinedReadableDate: days,
           days: splittedDays,
-          status: getHighlightStatus(active, splittedDays),
+          timezoneOffsetMinutes,
+          status: getHighlightStatus({
+            active,
+            days: splittedDays,
+            timezoneOffsetMinutes,
+          }),
         }
       }),
   })
@@ -190,6 +199,7 @@ const PaymentList = () => {
                 lastUpdated,
                 days,
                 joinedReadableDate,
+                timezoneOffsetMinutes,
               }) => (
                 <Table.Row
                   key={id}
@@ -205,16 +215,24 @@ const PaymentList = () => {
                       placement="right"
                       content={
                         <div className="grid gap-2">
+                          <p className="mb-2">
+                            Current localized date:{' '}
+                            <strong>
+                              {toReadableLocalizedDate(timezoneOffsetMinutes)}
+                            </strong>
+                          </p>
+
                           {days.map((day) => (
                             <p
                               className={clsx(
-                                isPastDate(day) &&
+                                'text-left',
+                                isPastDate(day, timezoneOffsetMinutes) &&
                                   'text-separator line-through',
                                 day === currentDate &&
                                   'text-greenHighlight font-bold',
                               )}
                             >
-                              {day}
+                              <span className="text-separator">-</span> {day}
                             </p>
                           ))}
                         </div>
