@@ -14,4 +14,5 @@ export const AdvertisePurchaseSchema: z.ZodType<AdvertisePurchase> = z.object({
   email: z.string(),
   paymentCharacter: z.string(),
   locale: z.string(),
+  timezoneOffsetMinutes: z.number(),
 })

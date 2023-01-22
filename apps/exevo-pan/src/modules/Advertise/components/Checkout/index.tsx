@@ -91,6 +91,7 @@ const Checkout = () => {
       email: email.value,
       paymentCharacter: paymentCharacter.value,
       locale: locale ?? DEFAULT_LOCALE,
+      timezoneOffsetMinutes: new Date().getTimezoneOffset(),
     })
   }
 

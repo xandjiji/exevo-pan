@@ -13,6 +13,7 @@ declare interface AdvertisePurchase {
   email: string
   paymentCharacter: string
   locale: string
+  timezoneOffsetMinutes: number
 }
 
 declare type HighlightedAuctionData = {
