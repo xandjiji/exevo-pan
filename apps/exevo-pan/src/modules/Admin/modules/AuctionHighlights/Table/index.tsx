@@ -200,6 +200,7 @@ const PaymentList = () => {
                 days,
                 joinedReadableDate,
                 timezoneOffsetMinutes,
+                auctionEnd,
               }) => (
                 <Table.Row
                   key={id}
@@ -302,6 +303,7 @@ const PaymentList = () => {
                               nickname,
                               lastUpdated,
                               joinedReadableDate,
+                              endDate: new Date(auctionEnd),
                             }),
                         },
                         {
