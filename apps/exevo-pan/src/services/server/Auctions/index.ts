@@ -41,13 +41,24 @@ export default class AuctionsClient {
       const response = await caller.listAuctionHighlights()
 
       const highlightedAuctionsData: HighlightedAuctionData[] = response.map(
-        ({ auctionId, nickname, days, lastUpdated, active, confirmed }) => ({
+        ({
+          auctionId,
+          nickname,
+          days,
+          lastUpdated,
+          active,
+          confirmed,
+          timezoneOffsetMinutes,
+          auctionEnd,
+        }) => ({
           id: auctionId,
           nickname,
+          auctionEnd: +auctionEnd,
           days: days.split(','),
           timestamp: +lastUpdated,
           active,
           confirmed,
+          timezoneOffsetMinutes,
         }),
       )
 
