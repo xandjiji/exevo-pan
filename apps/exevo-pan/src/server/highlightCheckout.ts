@@ -23,8 +23,6 @@ const mailCredentials = {
   },
 }
 
-const authToken = process.env.BACKOFFICE_TOKEN as string
-
 const mailer = nodemailer.createTransport(mailCredentials)
 mailer.use('compile', inlineBase64())
 
@@ -65,6 +63,8 @@ export const highlightCheckout = publicProcedure
       data: {
         auctionId: selectedCharacter.id,
         nickname: selectedCharacter.nickname,
+        auctionEnd: new Date(selectedCharacter.auctionEnd * 1000).toISOString(),
+        timezoneOffsetMinutes: input.timezoneOffsetMinutes,
         days: selectedDates.join(),
         email,
         paymentMethod,

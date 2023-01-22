@@ -13,13 +13,16 @@ declare interface AdvertisePurchase {
   email: string
   paymentCharacter: string
   locale: string
+  timezoneOffsetMinutes: number
 }
 
 declare type HighlightedAuctionData = {
   nickname: string
   id: number
+  auctionEnd: number
   days: string[]
   timestamp: number
   active: boolean
   confirmed: boolean
+  timezoneOffsetMinutes: number
 }

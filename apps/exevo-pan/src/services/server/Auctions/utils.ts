@@ -1,15 +1,14 @@
-import { readableCurrentDate, MILLISECONDS_IN } from 'utils'
+import { shouldDisplayHighlightedAuction, MILLISECONDS_IN } from 'utils'
 
 export const filterActiveHighlightedIds = (
   highlightedData: HighlightedAuctionData[],
 ): number[] => {
   const currentTimestamp = +new Date()
-  const currentDate = readableCurrentDate()
 
   return [
     ...new Set(
       highlightedData
-        .filter(({ days }) => days.includes(currentDate))
+        .filter(shouldDisplayHighlightedAuction)
         .filter(({ active }) => active)
         .filter(
           ({ confirmed, timestamp }) =>

@@ -88,17 +88,19 @@ enum PAYMENT_METHOD {
 }
 
 model HighlightedAuction {
-    id               String         @id @default(uuid())
-    nickname         String
-    auctionId        Int
-    price            Int
-    days             String
-    lastUpdated      DateTime       @default(now())
-    active           Boolean        @default(true)
-    confirmed        Boolean        @default(false)
-    paymentMethod    PAYMENT_METHOD
-    paymentCharacter String?
-    email            String
+    id                    String         @id @default(uuid())
+    nickname              String
+    auctionId             Int
+    auctionEnd            DateTime       @default(now())
+    price                 Int
+    days                  String
+    lastUpdated           DateTime       @default(now())
+    active                Boolean        @default(true)
+    confirmed             Boolean        @default(false)
+    paymentMethod         PAYMENT_METHOD
+    paymentCharacter      String?
+    email                 String
+    timezoneOffsetMinutes Int            @default(0)
 
     user   User?   @relation(fields: [userId], references: [id])
     userId String?
