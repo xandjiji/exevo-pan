@@ -62,12 +62,13 @@ model User {
 }
 
 model NotificationDevice {
-    auth     String @id
-    endpoint String
-    p256dh   String
+    auth        String   @id
+    endpoint    String
+    p256dh      String
+    lastUpdated DateTime @default(now())
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String @unique
+    userId String
 
     @@index([userId])
 }
