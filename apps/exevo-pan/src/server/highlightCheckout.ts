@@ -111,6 +111,7 @@ export const highlightCheckout = publicProcedure
       caller.notifyAdmin({
         title: 'Auction highlight',
         body: input.selectedCharacter.nickname,
+        url: 'https://www.exevopan.com/admin/auction-highlights',
       }),
     ])
 

@@ -33,6 +33,7 @@ export const proPayment = authedProcedure
       await caller.notifyAdmin({
         title: 'Exevo Pro order',
         body: character,
+        url: 'https://www.exevopan.com/admin',
       })
 
       return { paymentData }

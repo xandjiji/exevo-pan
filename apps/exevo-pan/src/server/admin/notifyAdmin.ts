@@ -4,7 +4,13 @@ import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
 
 export const notifyAdmin = adminProcedure
-  .input(z.object({ title: z.string(), body: z.string() }))
+  .input(
+    z.object({
+      title: z.string(),
+      body: z.string(),
+      url: z.string().optional(),
+    }),
+  )
   .mutation(async ({ input }) => {
     const devices = await prisma.notificationDevice.findMany({
       where: { user: { role: 'ADMIN' } },
