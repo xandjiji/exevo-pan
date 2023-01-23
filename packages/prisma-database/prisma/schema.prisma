@@ -58,6 +58,19 @@ model User {
     paymentData         PaymentData?
     highlightedAuctions HighlightedAuction[]
     transactions        Transaction[]
+    NotificationDevice  NotificationDevice[]
+}
+
+model NotificationDevice {
+    id       String @id @default(uuid())
+    endpoint String
+    p256dh   String
+    auth     String
+
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String @unique
+
+    @@index([userId])
 }
 
 model PaymentData {
