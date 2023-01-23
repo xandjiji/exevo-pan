@@ -4,7 +4,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { calculatePrice } from 'modules/Advertise/utils'
 import { EmailTemplate } from 'modules/Advertise/components'
 import { AdvertisePurchaseSchema } from 'types/zod/AdvertisePurchase'
-import { NotifyAdminClient } from 'services/server'
+import { caller } from 'pages/api/trpc/[trpc]'
 import { prisma } from 'lib/prisma'
 import { publicProcedure } from 'server/trpc'
 import { isDevelopment, mmddyyyy2ddmmyyy, sortStringDates } from 'utils'
@@ -108,7 +108,11 @@ export const highlightCheckout = publicProcedure
     await Promise.all([
       mailer.sendMail(customerEmail),
       mailer.sendMail(myEmail),
-      NotifyAdminClient.notifyPurchase(),
+      caller.notifyAdmin({
+        title: 'Auction Highlight',
+        body: input.selectedCharacter.nickname,
+        url: 'https://www.exevopan.com/admin/auction-highlights',
+      }),
     ])
 
     return { uuid }
