@@ -62,10 +62,9 @@ model User {
 }
 
 model NotificationDevice {
-    id       String @id @default(uuid())
+    auth     String @id
     endpoint String
     p256dh   String
-    auth     String
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String @unique

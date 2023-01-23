@@ -8,8 +8,10 @@ import * as proRevenue from './admin/proRevenue'
 import * as highlightRevenue from './admin/highlightRevenue'
 import * as auctionHighlights from './admin/auctionHighlights'
 import { revalidatePage } from './admin/revalidatePage'
+import { registerNotificationDevice } from './registerNotificationDevice'
 
 export const routes = {
+  registerNotificationDevice,
   getAuctionById,
   proBosses,
   newsletter,
