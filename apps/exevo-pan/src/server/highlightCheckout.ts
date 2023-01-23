@@ -109,9 +109,8 @@ export const highlightCheckout = publicProcedure
       mailer.sendMail(customerEmail),
       mailer.sendMail(myEmail),
       caller.notifyAdmin({
-        title: 'Auction Highlight',
+        title: 'Auction highlight',
         body: input.selectedCharacter.nickname,
-        url: 'https://www.exevopan.com/admin/auction-highlights',
       }),
     ])
 
