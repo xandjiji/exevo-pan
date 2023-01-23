@@ -23,6 +23,7 @@ import {
   getHighlightStatus,
   isPastDate,
   toReadableLocalizedDate,
+  getTimezoneDiff,
 } from './utils'
 import { HighlightStatus } from './types'
 
@@ -220,7 +221,10 @@ const PaymentList = () => {
                           <div className="grid gap-2">
                             <p className="mb-2">
                               Current localized date:{' '}
-                              <strong>{currentLocalizedDate}</strong>
+                              <strong>
+                                {currentLocalizedDate} (
+                                {getTimezoneDiff(timezoneOffsetMinutes)})
+                              </strong>
                             </p>
 
                             {days.map((day) => (

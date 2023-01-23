@@ -1,10 +1,11 @@
 import {
-  readableCurrentDate,
   ddmmyyy2mmddyyyy,
   sanitizeDateTime,
   getLocalizedDate,
   dateToReadableStringDate,
   shouldDisplayHighlightedAuction,
+  MINUTES_IN,
+  getNumberSign,
 } from 'utils'
 import { HighlightStatus } from './types'
 
@@ -38,3 +39,10 @@ export const getHighlightStatus = ({
 
 export const toReadableLocalizedDate = (timezoneOffsetMinutes: number) =>
   dateToReadableStringDate(getLocalizedDate(timezoneOffsetMinutes))
+
+export const getTimezoneDiff = (timezoneOffsetMinutes: number) => {
+  const hoursDiff =
+    (new Date().getTimezoneOffset() - timezoneOffsetMinutes) / MINUTES_IN.HOUR
+
+  return `${getNumberSign(hoursDiff)}${hoursDiff}h`
+}
