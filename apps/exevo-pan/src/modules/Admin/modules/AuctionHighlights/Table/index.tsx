@@ -16,7 +16,6 @@ import {
   ChevronDownIcon,
 } from 'assets/svgs'
 import { Menu, Tooltip, RangeDatePicker } from 'components/Organisms'
-import { readableCurrentDate } from 'utils'
 import AuctionSummary from './AuctionSummary'
 import DateDiffGrid from './DateDiffGrid'
 import { useRangeDatePicker } from './useRangeDatePicker'
@@ -59,8 +58,6 @@ const PaymentList = () => {
     resetDates,
     ...rageDatePickerProps
   } = useRangeDatePicker()
-
-  const currentDate = useMemo(readableCurrentDate, [])
 
   const list = trpc.listAuctionHighlights.useQuery(undefined, {
     refetchOnWindowFocus: false,
@@ -201,129 +198,134 @@ const PaymentList = () => {
                 joinedReadableDate,
                 timezoneOffsetMinutes,
                 auctionEnd,
-              }) => (
-                <Table.Row
-                  key={id}
-                  className={clsx(
-                    toDelete.id === id && 'bg-red/20',
-                    toToggleDate.id === id && 'bg-green/20',
-                    'hover:bg-background group',
-                  )}
-                >
-                  <Table.Column className="text-center">
-                    <Tooltip
-                      offset={[0, 8]}
-                      placement="right"
-                      content={
-                        <div className="grid gap-2">
-                          <p className="mb-2">
-                            Current localized date:{' '}
-                            <strong>
-                              {toReadableLocalizedDate(timezoneOffsetMinutes)}
-                            </strong>
-                          </p>
+              }) => {
+                const currentLocalizedDate = toReadableLocalizedDate(
+                  timezoneOffsetMinutes,
+                )
 
-                          {days.map((day) => (
-                            <p
-                              className={clsx(
-                                'text-left',
-                                isPastDate(day, timezoneOffsetMinutes) &&
-                                  'text-separator line-through',
-                                day === currentDate &&
-                                  'text-greenHighlight font-bold',
-                              )}
-                            >
-                              <span className="text-separator">-</span> {day}
+                return (
+                  <Table.Row
+                    key={id}
+                    className={clsx(
+                      toDelete.id === id && 'bg-red/20',
+                      toToggleDate.id === id && 'bg-green/20',
+                      'hover:bg-background group',
+                    )}
+                  >
+                    <Table.Column className="text-center">
+                      <Tooltip
+                        offset={[0, 8]}
+                        placement="right"
+                        content={
+                          <div className="grid gap-2">
+                            <p className="mb-2">
+                              Current localized date:{' '}
+                              <strong>{currentLocalizedDate}</strong>
                             </p>
-                          ))}
-                        </div>
-                      }
-                    >
-                      <p className="code group-hover:bg-separator/50 child:shrink-0 child:w-4 child:h-4 flex cursor-pointer items-center gap-1.5">
-                        {
-                          {
-                            PAUSED: (
-                              <>
-                                <PauseIcon className="fill-red" />
-                                Paused
-                              </>
-                            ),
-                            RUNNING: (
-                              <>
-                                <NewIcon className="fill-greenHighlight" />
-                                Running
-                              </>
-                            ),
-                            SCHEDULED: (
-                              <>
-                                <HourglassIcon className="fill-primaryAlert" />
-                                Scheduled
-                              </>
-                            ),
-                            FINISHED: (
-                              <>
-                                <ViewedIcon className="fill-primary" />
-                                Finished
-                              </>
-                            ),
-                          }[status]
+
+                            {days.map((day) => (
+                              <p
+                                className={clsx(
+                                  'text-left',
+                                  isPastDate(day, timezoneOffsetMinutes) &&
+                                    'text-separator line-through',
+                                  day === currentLocalizedDate &&
+                                    'text-greenHighlight font-bold',
+                                )}
+                              >
+                                <span className="text-separator">-</span> {day}
+                              </p>
+                            ))}
+                          </div>
                         }
-                      </p>
-                    </Tooltip>
-                  </Table.Column>
-                  <Table.Column>
-                    <AuctionSummary
-                      auctionId={auctionId}
-                      nickname={nickname}
-                      lastUpdated={lastUpdated}
-                    />
-                  </Table.Column>
-                  <Table.Column>
-                    <Menu
-                      offset={[0, 8]}
-                      items={[
-                        {
-                          label: confirmed ? 'Unconfirm' : 'Confirm',
-                          icon: confirmed ? ThumbsDownIcon : ThumbsUpIcon,
-                          onSelect: () =>
-                            patch.mutate({ id, confirmed: !confirmed }),
-                        },
-                        {
-                          label: active ? 'Pause' : 'Resume',
-                          icon: active ? PauseIcon : PlayIcon,
-                          onSelect: () => patch.mutate({ id, active: !active }),
-                        },
-                        {
-                          label: 'Update dates',
-                          icon: CalendarDaysIcon,
-                          onSelect: () =>
-                            setToToggleDate({
-                              id,
-                              auctionId,
-                              nickname,
-                              lastUpdated,
-                              joinedReadableDate,
-                              endDate: new Date(auctionEnd),
-                            }),
-                        },
-                        {
-                          label: 'Delete',
-                          icon: TrashIcon,
-                          onSelect: () =>
-                            setToDelete({
-                              id,
-                              auctionId,
-                              nickname,
-                              lastUpdated,
-                            }),
-                        },
-                      ]}
-                    >
-                      <MoreHorizontalIcon className="fill-onSurface" />
-                    </Menu>
-                  </Table.Column>
-                </Table.Row>
-              ),
+                      >
+                        <p className="code group-hover:bg-separator/50 child:shrink-0 child:w-4 child:h-4 flex cursor-pointer items-center gap-1.5">
+                          {
+                            {
+                              PAUSED: (
+                                <>
+                                  <PauseIcon className="fill-red" />
+                                  Paused
+                                </>
+                              ),
+                              RUNNING: (
+                                <>
+                                  <NewIcon className="fill-greenHighlight" />
+                                  Running
+                                </>
+                              ),
+                              SCHEDULED: (
+                                <>
+                                  <HourglassIcon className="fill-primaryAlert" />
+                                  Scheduled
+                                </>
+                              ),
+                              FINISHED: (
+                                <>
+                                  <ViewedIcon className="fill-primary" />
+                                  Finished
+                                </>
+                              ),
+                            }[status]
+                          }
+                        </p>
+                      </Tooltip>
+                    </Table.Column>
+                    <Table.Column>
+                      <AuctionSummary
+                        auctionId={auctionId}
+                        nickname={nickname}
+                        lastUpdated={lastUpdated}
+                      />
+                    </Table.Column>
+                    <Table.Column>
+                      <Menu
+                        offset={[0, 8]}
+                        items={[
+                          {
+                            label: confirmed ? 'Unconfirm' : 'Confirm',
+                            icon: confirmed ? ThumbsDownIcon : ThumbsUpIcon,
+                            onSelect: () =>
+                              patch.mutate({ id, confirmed: !confirmed }),
+                          },
+                          {
+                            label: active ? 'Pause' : 'Resume',
+                            icon: active ? PauseIcon : PlayIcon,
+                            onSelect: () =>
+                              patch.mutate({ id, active: !active }),
+                          },
+                          {
+                            label: 'Update dates',
+                            icon: CalendarDaysIcon,
+                            onSelect: () =>
+                              setToToggleDate({
+                                id,
+                                auctionId,
+                                nickname,
+                                lastUpdated,
+                                joinedReadableDate,
+                                endDate: new Date(auctionEnd),
+                              }),
+                          },
+                          {
+                            label: 'Delete',
+                            icon: TrashIcon,
+                            onSelect: () =>
+                              setToDelete({
+                                id,
+                                auctionId,
+                                nickname,
+                                lastUpdated,
+                              }),
+                          },
+                        ]}
+                      >
+                        <MoreHorizontalIcon className="fill-onSurface" />
+                      </Menu>
+                    </Table.Column>
+                  </Table.Row>
+                )
+              },
             )}
           </Table.Body>
         </Table.Element>
