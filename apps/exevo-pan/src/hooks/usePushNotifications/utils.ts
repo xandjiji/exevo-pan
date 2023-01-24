@@ -10,7 +10,7 @@ export const getWorkerStatus = (): WorkerStatus => ({
 })
 
 export const registerServiceWorker = () =>
-  navigator.serviceWorker.register(`${links.CANONICAL}/notificationWorker.js`, {
+  navigator.serviceWorker.register(`/notificationWorker.js`, {
     scope: '/',
   })
 
