@@ -23,11 +23,15 @@ export const getHighlightStatus = ({
   active,
   days,
   timezoneOffsetMinutes,
+  auctionEnd,
 }: Pick<
   HighlightedAuctionData,
-  'active' | 'days' | 'timezoneOffsetMinutes'
+  'active' | 'days' | 'timezoneOffsetMinutes' | 'auctionEnd'
 >): HighlightStatus => {
-  if (days.every((day) => isPastDate(day, timezoneOffsetMinutes))) {
+  if (
+    days.every((day) => isPastDate(day, timezoneOffsetMinutes)) ||
+    auctionEnd <= +new Date()
+  ) {
     return 'FINISHED'
   }
 
