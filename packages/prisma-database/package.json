@@ -13,7 +13,8 @@
     "generate": "prisma generate",
     "push": "prisma db push",
     "postinstall": "prisma generate",
-    "execute": "NODE_PATH=./src sucrase-node src/index.ts"
+    "execute": "NODE_PATH=./src sucrase-node src/index.ts",
+    "studio": "npx prisma studio"
   },
   "dependencies": {
     "@prisma/client": "^4.6.1"
