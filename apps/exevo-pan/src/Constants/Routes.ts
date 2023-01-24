@@ -22,5 +22,6 @@ export const routes = {
   ADMIN: {
     PRO_PAYMENTS: '/admin',
     AUCTION_HIGHLIGHTS: '/admin/auction-highlights',
+    NOTIFICATIONS: '/admin/notifications',
   },
 }
