@@ -63,7 +63,7 @@ model User {
 
 model NotificationDevice {
     auth        String   @id
-    endpoint    String
+    endpoint    String   @db.VarChar(512)
     p256dh      String
     lastUpdated DateTime @default(now())
 
