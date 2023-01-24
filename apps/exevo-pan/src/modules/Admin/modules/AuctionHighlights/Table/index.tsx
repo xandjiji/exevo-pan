@@ -63,22 +63,26 @@ const PaymentList = () => {
   const list = trpc.listAuctionHighlights.useQuery(undefined, {
     refetchOnWindowFocus: false,
     select: (data) =>
-      data.map(({ days, active, timezoneOffsetMinutes, ...rest }) => {
-        const splittedDays = days.split(',')
+      data.map(
+        ({ days, active, timezoneOffsetMinutes, auctionEnd, ...rest }) => {
+          const splittedDays = days.split(',')
 
-        return {
-          ...rest,
-          active,
-          joinedReadableDate: days,
-          days: splittedDays,
-          timezoneOffsetMinutes,
-          status: getHighlightStatus({
+          return {
+            ...rest,
             active,
+            joinedReadableDate: days,
             days: splittedDays,
             timezoneOffsetMinutes,
-          }),
-        }
-      }),
+            auctionEnd,
+            status: getHighlightStatus({
+              active,
+              days: splittedDays,
+              timezoneOffsetMinutes,
+              auctionEnd: +new Date(auctionEnd),
+            }),
+          }
+        },
+      ),
   })
 
   const renderedList = useMemo(
