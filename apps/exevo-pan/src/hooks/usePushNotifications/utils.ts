@@ -1,4 +1,3 @@
-import { links } from 'Constants'
 import { WorkerStatus } from './types'
 
 const isPushNotificationSupported = () =>
