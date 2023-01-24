@@ -41,7 +41,8 @@
     "checkup": "yarn --cwd apps/bazaar-scraper checkup",
     "prisma:push": "yarn --cwd packages/prisma-database push",
     "prisma:generate": "yarn --cwd packages/prisma-database generate",
-    "prisma:run": "scripts/setupDev.sh && yarn --cwd packages/prisma-database execute"
+    "prisma:run": "scripts/setupDev.sh && yarn --cwd packages/prisma-database execute",
+    "prisma:studio": "yarn --cwd packages/prisma-database studio"
   },
   "devDependencies": {
     "husky": "^7.0.4",

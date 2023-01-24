@@ -8,8 +8,11 @@ import * as proRevenue from './admin/proRevenue'
 import * as highlightRevenue from './admin/highlightRevenue'
 import * as auctionHighlights from './admin/auctionHighlights'
 import { revalidatePage } from './admin/revalidatePage'
+import * as notifyAdmin from './admin/notifyAdmin'
+import { registerNotificationDevice } from './registerNotificationDevice'
 
 export const routes = {
+  registerNotificationDevice,
   getAuctionById,
   proBosses,
   newsletter,
@@ -20,4 +23,5 @@ export const routes = {
   ...proRevenue,
   ...auctionHighlights,
   ...highlightRevenue,
+  ...notifyAdmin,
 }
