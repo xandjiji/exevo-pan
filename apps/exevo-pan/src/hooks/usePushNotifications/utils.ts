@@ -10,7 +10,9 @@ export const getWorkerStatus = (): WorkerStatus => ({
 })
 
 export const registerServiceWorker = () =>
-  navigator.serviceWorker.register(`${links.CANONICAL}/notificationWorker.js`)
+  navigator.serviceWorker.register(`${links.CANONICAL}/notificationWorker.js`, {
+    scope: '/',
+  })
 
 export const createSubscription = async () => {
   const worker = await navigator.serviceWorker.ready
