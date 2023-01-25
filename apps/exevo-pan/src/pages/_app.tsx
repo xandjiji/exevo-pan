@@ -63,3 +63,5 @@ const MyApp: AppType = ({
   )
 }
 export default trpc.withTRPC(MyApp)
+
+export { reportWebVitals } from 'next-axiom'

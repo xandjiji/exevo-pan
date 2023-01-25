@@ -2,6 +2,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 const { i18n } = require('./next-i18next.config')
+const { withAxiom } = require('next-axiom')
 
 const withPreact = (next = {}) =>
   Object.assign({}, next, {
@@ -21,26 +22,28 @@ const withPreact = (next = {}) =>
     },
   })
 
-module.exports = withBundleAnalyzer(
-  withPreact({
-    i18n,
-    reactStrictMode: true,
-    images: {
-      domains: [],
-      deviceSizes: [24, 32, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
-    },
-    /* @ ToDo: remove this redirect in the future */
-    async redirects() {
-      return [
-        {
-          source: '/bazaar-history',
-          destination: '/',
-          permanent: true,
-        },
-      ]
-    },
-    webpack(config) {
-      return config
-    },
-  }),
+module.exports = withAxiom(
+  withBundleAnalyzer(
+    withPreact({
+      i18n,
+      reactStrictMode: true,
+      images: {
+        domains: [],
+        deviceSizes: [24, 32, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+      },
+      /* @ ToDo: remove this redirect in the future */
+      async redirects() {
+        return [
+          {
+            source: '/bazaar-history',
+            destination: '/',
+            permanent: true,
+          },
+        ]
+      },
+      webpack(config) {
+        return config
+      },
+    }),
+  ),
 )
