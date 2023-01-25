@@ -16,7 +16,7 @@ describe('<CharacterInfoColumn />', () => {
     expect(linkElement).toHaveTextContent('Master Ksu')
     expect(linkElement).toHaveAttribute(
       'href',
-      'https://www.tibia.com/community/?name=Master%20Ksu',
+      'https://www.tibia.com/community/?name=Master Ksu',
     )
     expect(screen.getByText('Level 400 - Master Sorcerer')).toBeInTheDocument()
   })
