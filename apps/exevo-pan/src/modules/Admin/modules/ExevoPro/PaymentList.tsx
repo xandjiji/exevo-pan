@@ -109,7 +109,12 @@ const PaymentList = () => {
                       <Checkbox
                         checked={confirmed}
                         onClick={() =>
-                          setToConfirm({ character, id, confirmed: !confirmed })
+                          setToConfirm({
+                            character:
+                              character !== '' ? character : 'undefined',
+                            id,
+                            confirmed: !confirmed,
+                          })
                         }
                       />
                     </div>
