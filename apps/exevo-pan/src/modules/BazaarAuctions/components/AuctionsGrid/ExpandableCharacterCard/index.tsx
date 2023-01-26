@@ -19,6 +19,7 @@ import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { getSimilarCharacterFilters } from '../utils'
+import { useAuctionNotifications } from './useAuctionNotifications'
 import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
@@ -98,6 +99,8 @@ const ExpandableCharacterCard = ({
     )
   }
 
+  const auctionNotification = useAuctionNotifications(characterData)
+
   return (
     <>
       <CharacterCard
@@ -131,7 +134,7 @@ const ExpandableCharacterCard = ({
                 /* @ ToDo: i18n */
                 label: 'Notify',
                 icon: AlertIcon,
-                onSelect: () => {},
+                onSelect: auctionNotification.toggleOpen,
               },
               {
                 label:
@@ -162,6 +165,7 @@ const ExpandableCharacterCard = ({
           }}
         />
       )}
+      {auctionNotification.DialogElement}
     </>
   )
 }
