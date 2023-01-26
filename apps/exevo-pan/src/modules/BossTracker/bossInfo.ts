@@ -374,6 +374,10 @@ bossInfo.set('Dreadful Disruptor', {
 bossInfo.set('Dreadmaw', {
   locations: [
     {
+      src: 'https://tibiamaps.io/map/embed#33182,31238,7:1',
+      description: 'Muggy Plains (Farmine)',
+    },
+    {
       src: 'https://tibiamaps.io/map/embed#33270,31164,7:1',
       description: 'Muggy Plains (Farmine)',
     },
