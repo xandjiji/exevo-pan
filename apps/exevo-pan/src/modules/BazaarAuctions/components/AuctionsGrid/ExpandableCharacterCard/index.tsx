@@ -14,17 +14,12 @@ import {
   OutlineRemoveIcon,
   AlertIcon,
 } from 'assets/svgs'
-import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
-import { useAuctions } from '../../contexts/useAuctions'
-import { getSimilarCharacterFilters } from './utils'
-
-type ExpandableCharacterCardProps = {
-  highlightedAuctions: CharacterObject[]
-  forceNoHighlight?: boolean
-} & Omit<CharacterCardProps, 'ref' | 'highlighted'>
+import { useAuctions } from '../../../contexts/useAuctions'
+import { getSimilarCharacterFilters } from '../utils'
+import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
   highlightedAuctions,
