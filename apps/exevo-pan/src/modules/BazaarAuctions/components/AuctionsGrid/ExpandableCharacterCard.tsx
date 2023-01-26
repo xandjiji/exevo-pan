@@ -12,6 +12,7 @@ import {
   SearchIcon,
   OutlineAddIcon,
   OutlineRemoveIcon,
+  AlertIcon,
 } from 'assets/svgs'
 import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
@@ -130,6 +131,12 @@ const ExpandableCharacterCard = ({
                   Favorites.toggle(auctionId)
                   shouldAnimateFavIconRef.current = true
                 },
+              },
+              {
+                /* @ ToDo: i18n */
+                label: 'Notify',
+                icon: AlertIcon,
+                onSelect: () => {},
               },
               {
                 label:
