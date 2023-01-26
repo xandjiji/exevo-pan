@@ -33,8 +33,8 @@ schema.set('Barbaria', {
 
 schema.set('Battlemaster Zunzu', {
   fixedDaysFrequency: {
-    min: 7,
-    max: 14,
+    min: 6,
+    max: 8,
   },
   spawnCount: 2,
 })
