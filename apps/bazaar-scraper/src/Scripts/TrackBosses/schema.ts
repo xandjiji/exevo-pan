@@ -33,8 +33,8 @@ schema.set('Barbaria', {
 
 schema.set('Battlemaster Zunzu', {
   fixedDaysFrequency: {
-    min: 1,
-    max: 3,
+    min: 7,
+    max: 14,
   },
   spawnCount: 2,
 })
@@ -104,9 +104,10 @@ schema.set('Draptor', {
 
 schema.set('Dreadmaw', {
   fixedDaysFrequency: {
-    min: 1,
-    max: 16,
+    min: 12,
+    max: 24,
   },
+  spawnCount: 2,
 })
 
 schema.set('Fernfang', {
@@ -218,8 +219,8 @@ schema.set('High Templar Cobrass', {
 
 schema.set('Hirintror', {
   fixedDaysFrequency: {
-    min: 15,
-    max: 15,
+    min: 10,
+    max: 29,
   },
   spawnCount: 2,
 })
@@ -311,8 +312,8 @@ schema.set('Rottie the Rotworm', {
 
 schema.set('Rotworm Queen', {
   fixedDaysFrequency: {
-    min: 14,
-    max: 14,
+    min: 12,
+    max: 15,
   },
   spawnCount: 4,
 })
