@@ -1,9 +1,12 @@
+import clsx from 'clsx'
 import { useState, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
+import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
-import { Dialog } from 'components/Atoms'
+import { Dialog, Alert, Button } from 'components/Atoms'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import CharacterMiniCard from 'components/CharacterMiniCard'
+import { routes } from 'Constants'
 
 /* @ ToDo:
 
@@ -36,7 +39,7 @@ export const useAuctionNotifications = ({
     DialogElement: isOpen ? (
       /* @ ToDo: i18n */
       <Dialog isOpen onClose={toggleOpen} heading="Set auction notification">
-        <div className="">
+        <div className="text-s grid gap-4">
           <CharacterMiniCard
             outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
             characterData={{
@@ -47,7 +50,17 @@ export const useAuctionNotifications = ({
             }}
           />
           {!isAuthed ? (
-            <div>login redirect</div>
+            <Alert variant="alert">
+              {/* @ ToDo: i18n */}
+              You must{' '}
+              <NextLink
+                href={routes.LOGIN}
+                className="text-onAlert font-bold underline underline-offset-2"
+              >
+                log in
+              </NextLink>{' '}
+              to set up auction notifications!
+            </Alert>
           ) : permission !== 'granted' ? (
             <div>enable notifications</div>
           ) : (
