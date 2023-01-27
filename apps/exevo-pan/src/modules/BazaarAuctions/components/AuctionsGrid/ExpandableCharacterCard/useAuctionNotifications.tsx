@@ -3,15 +3,13 @@ import { useState, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
-import { Dialog, Alert, Button } from 'components/Atoms'
+import { Dialog, Alert, LoadingAlert, Button } from 'components/Atoms'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { routes } from 'Constants'
 
 /* @ ToDo:
 
-- not authed state
-- enable notifications state
 - time option
 - bid option
 - close/success state (Snackbar?)
@@ -29,9 +27,16 @@ export const useAuctionNotifications = ({
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = useCallback(() => setIsOpen((prev) => !prev), [])
 
-  const { isSupported, permission } = usePushNotifications()
+  const {
+    isSupported,
+    permission,
+    subscribeDevice,
+    isLoading: loadingDeviceSubscription,
+  } = usePushNotifications()
   const { data } = useSession()
   const isAuthed = !!data
+
+  const isLoading = loadingDeviceSubscription
 
   return {
     isSupported,
@@ -39,6 +44,8 @@ export const useAuctionNotifications = ({
     DialogElement: isOpen ? (
       /* @ ToDo: i18n */
       <Dialog isOpen onClose={toggleOpen} heading="Set auction notification">
+        {/* @ ToDo: i18n */}
+        {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
         <div className="text-s grid gap-4">
           <CharacterMiniCard
             outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
@@ -59,10 +66,21 @@ export const useAuctionNotifications = ({
               >
                 log in
               </NextLink>{' '}
-              to set up auction notifications!
+              to set up auction notifications
             </Alert>
           ) : permission !== 'granted' ? (
-            <div>enable notifications</div>
+            <Alert variant="primary">
+              {/* @ ToDo: i18n */}
+              Please{' '}
+              <button
+                type="button"
+                className="text-primaryHighlight cursor-pointer font-bold underline underline-offset-2"
+                onClick={subscribeDevice}
+              >
+                enable notifications
+              </button>{' '}
+              on this device
+            </Alert>
           ) : (
             <div>options</div>
           )}
