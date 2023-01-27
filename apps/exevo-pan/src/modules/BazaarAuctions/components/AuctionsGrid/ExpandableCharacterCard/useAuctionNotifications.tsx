@@ -36,7 +36,7 @@ export const useAuctionNotifications = ({
     DialogElement: isOpen ? (
       /* @ ToDo: i18n */
       <Dialog isOpen onClose={toggleOpen} heading="Set auction notification">
-        <div className="text-s grid w-full gap-4">
+        <div className="">
           <CharacterMiniCard
             outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
             characterData={{
