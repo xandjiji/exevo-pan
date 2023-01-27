@@ -13,6 +13,8 @@ import { routes } from 'Constants'
 - time option
 - bid option
 - close/success state (Snackbar?)
+- test notifications?
+
 */
 
 export const useAuctionNotifications = ({
