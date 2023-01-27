@@ -106,7 +106,7 @@ const AuctionsGrid = () => {
         <ClientComponent className="ml-auto">
           <Paginator
             aria-controls="character-grid"
-            pageSize={PAGE_SIZE}
+            pageSize={isFavorites ? paginatedData.totalItems : PAGE_SIZE}
             totalItems={paginatedData.totalItems}
             currentPage={paginationOptions.pageIndex + 1}
             onChange={handlePaginatorFetch}
