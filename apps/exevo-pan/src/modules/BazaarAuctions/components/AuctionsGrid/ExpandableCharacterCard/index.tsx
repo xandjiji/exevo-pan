@@ -135,6 +135,7 @@ const ExpandableCharacterCard = ({
                 label: 'Notify',
                 icon: AlertIcon,
                 onSelect: auctionNotification.toggleOpen,
+                disabled: !auctionNotification.isSupported,
               },
               {
                 label:
