@@ -1,19 +1,28 @@
-import clsx from 'clsx'
 import { useState, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
-import { Dialog, Alert, LoadingAlert, Button } from 'components/Atoms'
-import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import {
+  Dialog,
+  Alert,
+  LoadingAlert,
+  Input,
+  Checkbox,
+  Button,
+} from 'components/Atoms'
+import { Select } from 'components/Organisms'
+import AuctionEnd from 'components/CharacterCard/Parts/Textbox/AuctionEnd'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { routes } from 'Constants'
 
 /* @ ToDo:
 
-- time option
-- bid option
-- close/success state (Snackbar?)
+- config
+    manage state (disables, values, step, max/min, pro, error)
+- loading/close/success state (Snackbar?)
 - test notifications?
+- disable on history/fav
+- i18n
 
 */
 
@@ -21,10 +30,7 @@ export const useAuctionNotifications = ({
   id,
   outfitId,
   nickname,
-  level,
-  serverData: { serverName },
   auctionEnd,
-  vocationId,
 }: CharacterObject) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpen = useCallback(() => setIsOpen((prev) => !prev), [])
@@ -48,16 +54,18 @@ export const useAuctionNotifications = ({
       <Dialog isOpen onClose={toggleOpen} heading="Set auction notification">
         {/* @ ToDo: i18n */}
         {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
-        <div className="text-s grid gap-4">
-          <CharacterMiniCard
-            outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
-            characterData={{
-              name: nickname,
-              level,
-              vocation: vocation.getPromotedName({ vocationId, level }),
-              world: serverName,
-            }}
-          />
+        <div className="text-s grid gap-6">
+          <div className="xs:flex xs:items-center xs:justify-between xs:gap-4 grid gap-[18px]">
+            <CharacterMiniCard
+              className="xs:max-w-min"
+              outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+              characterName={nickname}
+              forceSubtitle=""
+            />
+            <div className="xs:mx-0 mx-auto w-fit shrink-0">
+              <AuctionEnd auctionEnd={auctionEnd} />
+            </div>
+          </div>
           {!isAuthed ? (
             <Alert variant="alert">
               {/* @ ToDo: i18n */}
@@ -84,7 +92,45 @@ export const useAuctionNotifications = ({
               on this device
             </Alert>
           ) : (
-            <div>options</div>
+            <>
+              <div className="grid gap-3">
+                <Checkbox label="Notify me when bidded" />
+
+                <div>
+                  <Checkbox label="Notify me before auction end:" />
+                  <div className="child:shrink-0 flex w-full gap-2">
+                    <Input
+                      label=""
+                      type="number"
+                      defaultValue="15"
+                      step={15}
+                      min={0}
+                      max={60}
+                      disabled
+                      noAlert
+                    />
+                    <Select
+                      className="grow"
+                      label=""
+                      defaultValue="minutes"
+                      options={[
+                        { name: 'Minutes left', value: 'minutes' },
+                        { name: 'Hours left', value: 'hours' },
+                      ]}
+                      disabled
+                      noAlert
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="flex justify-end gap-2">
+                <Button pill hollow>
+                  Cancel
+                </Button>
+                <Button pill>Confirm</Button>
+              </div>
+            </>
           )}
         </div>
       </Dialog>
