@@ -41,7 +41,13 @@ const usePushNotifications = () => {
     }
   }, [])
 
-  return { isSupported, permission, subscribeDevice, sendClientNotification }
+  return {
+    isSupported,
+    permission,
+    subscribeDevice,
+    sendClientNotification,
+    isLoading: notificationDevice.isLoading,
+  }
 }
 
 export default usePushNotifications
