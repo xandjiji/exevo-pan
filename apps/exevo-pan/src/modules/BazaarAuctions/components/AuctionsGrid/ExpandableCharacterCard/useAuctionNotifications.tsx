@@ -1,5 +1,7 @@
 import { useState, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
+import { trpc } from 'lib/trpc'
+import type { RegisterAuctionNotificationInput } from 'server/registerAuctionNotification'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
 import {
@@ -18,7 +20,7 @@ import { routes } from 'Constants'
 /* @ ToDo:
 
 - config
-    manage state (disables, values, step, max/min, pro, error)
+    manage state (pro only)
 - loading/close/success state (Snackbar?)
 - test notifications?
 - disable on history/fav
@@ -43,8 +45,25 @@ export const useAuctionNotifications = ({
   } = usePushNotifications()
   const { data } = useSession()
   const isAuthed = !!data
+  const isPro = !!data?.user.proStatus
 
-  const isLoading = loadingDeviceSubscription
+  const register = trpc.registerAuctionNotification.useMutation()
+  const [formState, setFormState] = useState<RegisterAuctionNotificationInput>({
+    auctionId: id,
+    auctionEnd,
+    nickname,
+    notifyOnBid: false,
+    notifyAt: true,
+    timeMode: 'minutes',
+    timeValue: 15,
+  })
+
+  const disableTimeConfig = !formState.notifyAt
+  const isLoading = loadingDeviceSubscription || register.isLoading
+
+  const invalidTime = formState.notifyAt && formState.timeValue < 0
+  const noNotification = !formState.notifyAt && !formState.notifyOnBid
+  const isInvalid = invalidTime || noNotification
 
   return {
     isSupported,
@@ -94,30 +113,64 @@ export const useAuctionNotifications = ({
           ) : (
             <>
               <div className="grid gap-3">
-                <Checkbox label="Notify me when bidded" />
+                <Checkbox
+                  label="Notify me when bidded"
+                  disabled={!isPro}
+                  checked={formState.notifyOnBid}
+                  onChange={() =>
+                    setFormState((prev) => ({
+                      ...prev,
+                      notifyOnBid: !prev.notifyOnBid,
+                    }))
+                  }
+                />
 
                 <div>
-                  <Checkbox label="Notify me before auction end:" />
+                  <Checkbox
+                    label="Notify me before auction end:"
+                    checked={formState.notifyAt}
+                    onChange={() =>
+                      setFormState((prev) => ({
+                        ...prev,
+                        notifyAt: !prev.notifyAt,
+                      }))
+                    }
+                  />
                   <div className="child:shrink-0 flex w-full gap-2">
                     <Input
                       label=""
                       type="number"
-                      defaultValue="15"
-                      step={15}
+                      step={formState.timeMode === 'minutes' ? 15 : 1}
                       min={0}
-                      max={60}
-                      disabled
+                      max={formState.timeMode === 'minutes' ? 60 : 24}
+                      value={formState.timeValue}
+                      onChange={(e) =>
+                        setFormState((prev) => ({
+                          ...prev,
+                          timeValue: Math.round(+e.target.value),
+                        }))
+                      }
+                      disabled={disableTimeConfig}
+                      error={invalidTime}
                       noAlert
                     />
                     <Select
                       className="grow"
                       label=""
-                      defaultValue="minutes"
                       options={[
                         { name: 'Minutes left', value: 'minutes' },
                         { name: 'Hours left', value: 'hours' },
                       ]}
-                      disabled
+                      value={formState.timeMode}
+                      onChange={(e) =>
+                        setFormState((prev) => ({
+                          ...prev,
+                          timeMode: e.target
+                            .value as RegisterAuctionNotificationInput['timeMode'],
+                        }))
+                      }
+                      disabled={disableTimeConfig}
+                      error={invalidTime}
                       noAlert
                     />
                   </div>
@@ -128,7 +181,9 @@ export const useAuctionNotifications = ({
                 <Button pill hollow>
                   Cancel
                 </Button>
-                <Button pill>Confirm</Button>
+                <Button pill disabled={isInvalid || isLoading}>
+                  Confirm
+                </Button>
               </div>
             </>
           )}
