@@ -1,37 +1,54 @@
 import { z } from 'zod'
 import { TRPCError } from '@trpc/server'
 import { authedProcedure } from 'server/trpc'
-import type { AuctionNotification } from '@prisma/client'
 import { prisma } from 'lib/prisma'
+import { MILLISECONDS_IN } from 'utils'
 
-const AuctionNotificationSchema: z.ZodType<
-  Omit<AuctionNotification, 'id' | 'lastUpdated' | 'userId'>
-> = z.object({
-  auctionId: z.number(),
+const Input = z.object({
+  auctionId: z.number().min(0),
   nickname: z.string(),
-  auctionEnd: z.date(),
-  notifyAt: z.date().nullable(),
+  auctionEnd: z.number().min(0),
+  notifyAt: z.boolean(),
   notifyOnBid: z.boolean(),
+  timeMode: z.union([z.literal('minutes'), z.literal('hours')]),
+  timeValue: z.number().min(0),
 })
 
+export type RegisterAuctionNotificationInput = z.infer<typeof Input>
+
 export const registerAuctionNotification = authedProcedure
-  .input(AuctionNotificationSchema)
+  .input(Input)
   .mutation(
     async ({
       ctx: {
         token: { id, proStatus },
       },
-      input: { notifyOnBid, auctionEnd, notifyAt, ...rest },
+      input: {
+        notifyAt,
+        auctionEnd,
+        timeMode,
+        timeValue,
+        notifyOnBid,
+        ...rest
+      },
     }) => {
-      if (notifyAt && auctionEnd < notifyAt) {
+      const auctionEndDate = new Date(auctionEnd * 1000)
+      const notifyAtDate = new Date(
+        +auctionEndDate -
+          (timeMode === 'minutes'
+            ? MILLISECONDS_IN.MINUTE
+            : MILLISECONDS_IN.HOUR * timeValue),
+      )
+
+      if (notifyAt && auctionEndDate < notifyAtDate) {
         throw new TRPCError({ code: 'BAD_REQUEST' })
       }
 
       const result = await prisma.auctionNotification.create({
         data: {
           ...rest,
-          auctionEnd,
-          notifyAt,
+          auctionEnd: auctionEndDate,
+          notifyAt: notifyAt ? notifyAtDate : undefined,
           notifyOnBid: proStatus ? notifyOnBid : false,
           user: { connect: { id } },
         },
