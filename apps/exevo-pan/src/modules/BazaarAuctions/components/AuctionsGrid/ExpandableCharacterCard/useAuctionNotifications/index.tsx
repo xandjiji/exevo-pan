@@ -15,6 +15,7 @@ import {
 import { Select } from 'components/Organisms'
 import AuctionEnd from 'components/CharacterCard/Parts/Textbox/AuctionEnd'
 import CharacterMiniCard from 'components/CharacterMiniCard'
+import { loadOutfitSrc } from 'utils'
 import { routes } from 'Constants'
 import { isNotificationDateValid } from './utils'
 
@@ -82,7 +83,7 @@ export const useAuctionNotifications = ({
           <div className="xs:flex xs:items-center xs:justify-between xs:gap-4 grid gap-[18px]">
             <CharacterMiniCard
               className="xs:max-w-min"
-              outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+              outfitSrc={loadOutfitSrc(outfitId)}
               characterName={nickname}
               forceSubtitle=""
             />

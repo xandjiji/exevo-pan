@@ -4,6 +4,7 @@ import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterModal'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { Text } from 'components/Atoms'
+import { loadOutfitSrc } from 'utils'
 import { table as Table } from '../../Style/Table'
 import ranking from './ranking.json'
 import styles from './styles.module.css'
@@ -39,7 +40,7 @@ const TopSpenders = ({
               <td>
                 <CharacterMiniCard
                   className="transition-transform"
-                  outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${auction.outfitId}.gif`}
+                  outfitSrc={loadOutfitSrc(auction.outfitId)}
                   characterData={{
                     name: auction.nickname,
                     level: auction.level,

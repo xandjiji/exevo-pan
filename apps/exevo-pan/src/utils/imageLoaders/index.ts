@@ -20,3 +20,6 @@ export const loadBossSrc = (bossName: string) =>
 
 export const loadLootSrc = (bossName: string) =>
   `/sprites/loot/${encodeURI(bossName)}.gif`
+
+export const loadOutfitSrc = (outfitId: string) =>
+  `https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`

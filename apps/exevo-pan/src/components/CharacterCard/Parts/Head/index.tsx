@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
-import { officialAuctionUrl } from 'utils'
+import { officialAuctionUrl, loadOutfitSrc } from 'utils'
 import CharacterMiniCard from '../../../CharacterMiniCard'
 import { HeadProps } from './types'
 
@@ -27,7 +27,7 @@ const Head = ({
     <CharacterMiniCard
       className="mr-auto"
       highlighted={highlighted}
-      outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+      outfitSrc={loadOutfitSrc(outfitId)}
       characterData={{
         name: nickname,
         level,
