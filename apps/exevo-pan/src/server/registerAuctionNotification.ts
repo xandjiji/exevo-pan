@@ -9,19 +9,31 @@ import {
 const Input = z
   .object({
     auctionId: z.number().min(0),
-    nickname: z.string(),
+    nickname: z.string().min(1),
     auctionEnd: z.number().min(0),
     notifyAt: z.boolean(),
     notifyOnBid: z.boolean(),
     timeMode: z.union([z.literal('minutes'), z.literal('hours')]),
     timeValue: z.number().min(0),
   })
-  .refine(
-    ({ notifyAt, auctionEnd, timeMode, timeValue }) =>
-      notifyAt
-        ? isNotificationDateValid({ auctionEnd, timeMode, timeValue })
-        : true,
-    { message: 'INVALID_DATE' },
+  .superRefine(
+    ({ notifyOnBid, notifyAt, auctionEnd, timeMode, timeValue }, ctx) => {
+      if (
+        notifyAt &&
+        !isNotificationDateValid({ auctionEnd, timeMode, timeValue })
+      ) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.invalid_date,
+        })
+      }
+
+      if (!notifyOnBid && !notifyAt) {
+        ctx.addIssue({
+          code: z.ZodIssueCode.custom,
+          message: 'NO_NOTIFICATIONS',
+        })
+      }
+    },
   )
 
 export type RegisterAuctionNotificationInput = z.infer<typeof Input>
