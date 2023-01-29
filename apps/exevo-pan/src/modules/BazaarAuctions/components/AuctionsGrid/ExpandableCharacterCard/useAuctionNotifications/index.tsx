@@ -20,10 +20,8 @@ import { isNotificationDateValid } from './utils'
 
 /* @ ToDo:
 
-- config
-    manage state (pro only)
-- loading/close/success state (Snackbar?)
-- test notifications?
+- mutate: loading/close/success state
+    (Snackbar?)
 - disable on history/fav
 - i18n
 
@@ -121,7 +119,20 @@ export const useAuctionNotifications = ({
             <>
               <div className="grid gap-3">
                 <Checkbox
-                  label="Notify me when bidded"
+                  label={
+                    <span>
+                      Notify me when bidded{' '}
+                      {!isPro && (
+                        <NextLink
+                          href={routes.EXEVOPRO}
+                          className="text-onSurface"
+                        >
+                          (exclusive for{' '}
+                          <strong className="text-rare">Exevo Pro 🧞‍♀️</strong>)
+                        </NextLink>
+                      )}
+                    </span>
+                  }
                   disabled={!isPro}
                   checked={formState.notifyOnBid}
                   onChange={() =>
