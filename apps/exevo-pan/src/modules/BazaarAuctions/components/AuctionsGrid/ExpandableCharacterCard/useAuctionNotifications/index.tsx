@@ -21,8 +21,8 @@ import { isNotificationDateValid } from './utils'
 
 /* @ ToDo:
 
-- mutate: loading/close/success state
-    (Snackbar?)
+- move this hook to grid
+- (Snackbar (error/success))
 - disable on history/fav
 - i18n
 
@@ -47,7 +47,9 @@ export const useAuctionNotifications = ({
   const isAuthed = !!data
   const isPro = !!data?.user.proStatus
 
-  const register = trpc.registerAuctionNotification.useMutation()
+  const register = trpc.registerAuctionNotification.useMutation({
+    onSuccess: toggleOpen,
+  })
   const [formState, setFormState] = useState<RegisterAuctionNotificationInput>({
     auctionId: id,
     auctionEnd,
@@ -196,11 +198,20 @@ export const useAuctionNotifications = ({
                 </div>
               </div>
 
+              {register.isError && (
+                <Alert variant="alert">Oops! Something went wrong 💩</Alert>
+              )}
+
               <div className="flex justify-end gap-2">
                 <Button pill hollow>
                   Cancel
                 </Button>
-                <Button pill disabled={isInvalid || isLoading}>
+                <Button
+                  pill
+                  disabled={isInvalid || isLoading}
+                  loading={isLoading}
+                  onClick={() => register.mutate(formState)}
+                >
                   Confirm
                 </Button>
               </div>
