@@ -16,7 +16,7 @@ import { Select } from 'components/Organisms'
 import AuctionEnd from 'components/CharacterCard/Parts/Textbox/AuctionEnd'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { routes } from 'Constants'
-import { MILLISECONDS_IN } from 'utils'
+import { isNotificationDateValid } from './utils'
 
 /* @ ToDo:
 
@@ -28,36 +28,6 @@ import { MILLISECONDS_IN } from 'utils'
 - i18n
 
 */
-
-type NotificationDateArgs = {
-  auctionEnd: number
-  timeMode: 'minutes' | 'hours'
-  timeValue: number
-}
-
-export const calculateDate = ({
-  auctionEnd,
-  timeMode,
-  timeValue,
-}: NotificationDateArgs) => {
-  const auctionEndDate = new Date(auctionEnd * 1000)
-  const millisecondsBeforeEnd =
-    (timeMode === 'minutes' ? MILLISECONDS_IN.MINUTE : MILLISECONDS_IN.HOUR) *
-    timeValue
-
-  const notifyAtDate = new Date(+auctionEndDate - millisecondsBeforeEnd)
-
-  return { auctionEndDate, notifyAtDate }
-}
-
-export const isNotificationDateValid = (args: NotificationDateArgs) => {
-  if (args.timeValue < 0) return false
-
-  const currentDate = new Date()
-  const { auctionEndDate, notifyAtDate } = calculateDate(args)
-
-  return notifyAtDate >= currentDate && notifyAtDate <= auctionEndDate
-}
 
 export const useAuctionNotifications = ({
   id,

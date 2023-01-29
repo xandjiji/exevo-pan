@@ -19,7 +19,7 @@ import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { getSimilarCharacterFilters } from '../utils'
-import { useAuctionNotifications } from './useAuctionNotifications'
+import { useAuctionNotifications } from './useAuctionNotifications/useAuctionNotifications'
 import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
