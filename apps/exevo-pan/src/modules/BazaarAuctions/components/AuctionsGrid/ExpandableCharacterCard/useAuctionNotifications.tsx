@@ -16,6 +16,7 @@ import { Select } from 'components/Organisms'
 import AuctionEnd from 'components/CharacterCard/Parts/Textbox/AuctionEnd'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import { routes } from 'Constants'
+import { MILLISECONDS_IN } from 'utils'
 
 /* @ ToDo:
 
@@ -27,6 +28,36 @@ import { routes } from 'Constants'
 - i18n
 
 */
+
+type NotificationDateArgs = {
+  auctionEnd: number
+  timeMode: 'minutes' | 'hours'
+  timeValue: number
+}
+
+export const calculateDate = ({
+  auctionEnd,
+  timeMode,
+  timeValue,
+}: NotificationDateArgs) => {
+  const auctionEndDate = new Date(auctionEnd * 1000)
+  const millisecondsBeforeEnd =
+    (timeMode === 'minutes' ? MILLISECONDS_IN.MINUTE : MILLISECONDS_IN.HOUR) *
+    timeValue
+
+  const notifyAtDate = new Date(+auctionEndDate - millisecondsBeforeEnd)
+
+  return { auctionEndDate, notifyAtDate }
+}
+
+export const isNotificationDateValid = (args: NotificationDateArgs) => {
+  if (args.timeValue < 0) return false
+
+  const currentDate = new Date()
+  const { auctionEndDate, notifyAtDate } = calculateDate(args)
+
+  return notifyAtDate >= currentDate && notifyAtDate <= auctionEndDate
+}
 
 export const useAuctionNotifications = ({
   id,
@@ -61,7 +92,13 @@ export const useAuctionNotifications = ({
   const disableTimeConfig = !formState.notifyAt
   const isLoading = loadingDeviceSubscription || register.isLoading
 
-  const invalidTime = formState.notifyAt && formState.timeValue < 0
+  const invalidTime =
+    formState.notifyAt &&
+    !isNotificationDateValid({
+      auctionEnd,
+      timeMode: formState.timeMode,
+      timeValue: formState.timeValue,
+    })
   const noNotification = !formState.notifyAt && !formState.notifyOnBid
   const isInvalid = invalidTime || noNotification
 

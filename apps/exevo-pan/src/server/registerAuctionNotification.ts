@@ -1,18 +1,28 @@
 import { z } from 'zod'
-import { TRPCError } from '@trpc/server'
 import { authedProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
-import { MILLISECONDS_IN } from 'utils'
+import {
+  calculateDate,
+  isNotificationDateValid,
+} from 'modules/BazaarAuctions/components/AuctionsGrid/ExpandableCharacterCard/useAuctionNotifications'
 
-const Input = z.object({
-  auctionId: z.number().min(0),
-  nickname: z.string(),
-  auctionEnd: z.number().min(0),
-  notifyAt: z.boolean(),
-  notifyOnBid: z.boolean(),
-  timeMode: z.union([z.literal('minutes'), z.literal('hours')]),
-  timeValue: z.number().min(0),
-})
+const Input = z
+  .object({
+    auctionId: z.number().min(0),
+    nickname: z.string(),
+    auctionEnd: z.number().min(0),
+    notifyAt: z.boolean(),
+    notifyOnBid: z.boolean(),
+    timeMode: z.union([z.literal('minutes'), z.literal('hours')]),
+    timeValue: z.number().min(0),
+  })
+  .refine(
+    ({ notifyAt, auctionEnd, timeMode, timeValue }) =>
+      notifyAt
+        ? isNotificationDateValid({ auctionEnd, timeMode, timeValue })
+        : true,
+    { message: 'INVALID_DATE' },
+  )
 
 export type RegisterAuctionNotificationInput = z.infer<typeof Input>
 
@@ -32,17 +42,11 @@ export const registerAuctionNotification = authedProcedure
         ...rest
       },
     }) => {
-      const auctionEndDate = new Date(auctionEnd * 1000)
-      const notifyAtDate = new Date(
-        +auctionEndDate -
-          (timeMode === 'minutes'
-            ? MILLISECONDS_IN.MINUTE
-            : MILLISECONDS_IN.HOUR * timeValue),
-      )
-
-      if (notifyAt && auctionEndDate < notifyAtDate) {
-        throw new TRPCError({ code: 'BAD_REQUEST' })
-      }
+      const { auctionEndDate, notifyAtDate } = calculateDate({
+        auctionEnd,
+        timeMode,
+        timeValue,
+      })
 
       const result = await prisma.auctionNotification.create({
         data: {
