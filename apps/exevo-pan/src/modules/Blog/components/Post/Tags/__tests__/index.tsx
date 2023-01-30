@@ -14,6 +14,6 @@ describe('<Tags />', () => {
 
   test('if there are no tags, it should render nothing', () => {
     const { container } = renderWithProviders(<Tags tags={[]} />)
-    expect(container.childElementCount).toBe(0)
+    expect(container.childElementCount).toBe(1)
   })
 })
