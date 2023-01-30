@@ -32,6 +32,7 @@ export default {
     paymentCharacterInvalidMessage: 'Postać nie istnieję',
     checkoutButtonLabel: 'Sprawdź i przejdź do podsumowania',
     checkoutButton: 'Podsumowanie',
+    success: 'Twoje zamówienie zostało złożone!',
   },
   PaymentDetails: {
     titleIconLabel: 'Wszystko się zgadza!',
