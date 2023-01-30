@@ -1,6 +1,7 @@
 import { createContext, useContext, useState, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { trpc } from 'lib/trpc'
+import { toast } from 'react-hot-toast'
 import type { RegisterAuctionNotificationInput } from 'server/registerAuctionNotification'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
@@ -26,7 +27,6 @@ import {
 
 /* @ ToDo:
 
-- (Snackbar (error/success))
 - i18n
 
 */
@@ -39,11 +39,14 @@ const DEFAULT_STATE: AuctionNotificationsContextData = {
 const NotificationsContext =
   createContext<AuctionNotificationsContextData>(DEFAULT_STATE)
 
-const EMPTY_CONFIG: AuctionConfigProps = {
+const INITIAL_FORM_VALUES: RegisterAuctionNotificationInput = {
   auctionId: -1,
   auctionEnd: 0,
   nickname: '',
-  outfitId: '',
+  notifyOnBid: false,
+  notifyAt: true,
+  timeMode: 'minutes',
+  timeValue: 15,
 }
 
 export const AuctionNotificationsProvider = ({
@@ -61,28 +64,31 @@ export const AuctionNotificationsProvider = ({
 
   const [outfitId, setOutfitId] = useState('')
 
-  const [formState, setFormState] = useState<RegisterAuctionNotificationInput>({
-    auctionId: -1,
-    auctionEnd: 0,
-    nickname: '',
-    notifyOnBid: false,
-    notifyAt: true,
-    timeMode: 'minutes',
-    timeValue: 15,
-  })
+  const [formState, setFormState] =
+    useState<RegisterAuctionNotificationInput>(INITIAL_FORM_VALUES)
 
   const closeNotificationsDialog = useCallback(
-    () => setFormState((prev) => ({ ...prev, ...EMPTY_CONFIG })),
+    () =>
+      setFormState((prev) => ({
+        ...prev,
+        auctionId: -1,
+        auctionEnd: 0,
+        nickname: '',
+      })),
     [],
   )
 
   const openNotificationsDialog = useCallback((config: AuctionConfigProps) => {
-    setFormState((prev) => ({ ...prev, ...config }))
+    setFormState({ ...INITIAL_FORM_VALUES, ...config })
     setOutfitId(config.outfitId)
   }, [])
 
   const register = trpc.registerAuctionNotification.useMutation({
-    onSuccess: closeNotificationsDialog,
+    onSuccess: () => {
+      toast.success('Notification was set!')
+      closeNotificationsDialog()
+    },
+    onError: () => toast.error('Oops! Something went wrong'),
   })
 
   const disableTimeConfig = !formState.notifyAt
@@ -111,7 +117,7 @@ export const AuctionNotificationsProvider = ({
           heading="Set auction notification"
         >
           {/* @ ToDo: i18n */}
-          {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
+          {loadingDeviceSubscription && <LoadingAlert>Loading...</LoadingAlert>}
           <div className="text-s grid gap-6">
             <div className="xs:flex xs:items-center xs:justify-between xs:gap-4 grid gap-[18px]">
               <CharacterMiniCard
@@ -229,12 +235,8 @@ export const AuctionNotificationsProvider = ({
                   </div>
                 </div>
 
-                {register.isError && (
-                  <Alert variant="alert">Oops! Something went wrong 💩</Alert>
-                )}
-
                 <div className="flex justify-end gap-2">
-                  <Button pill hollow>
+                  <Button pill hollow onClick={closeNotificationsDialog}>
                     Cancel
                   </Button>
                   <Button
