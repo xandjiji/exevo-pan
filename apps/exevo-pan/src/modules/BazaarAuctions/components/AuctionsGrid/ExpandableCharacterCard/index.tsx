@@ -141,7 +141,7 @@ const ExpandableCharacterCard = ({
                     nickname: characterData.nickname,
                     outfitId: characterData.outfitId,
                   }),
-                disabled: !auctionNotification.isSupported,
+                disabled: !auctionNotification.isSupported || props.past,
               },
               {
                 label:

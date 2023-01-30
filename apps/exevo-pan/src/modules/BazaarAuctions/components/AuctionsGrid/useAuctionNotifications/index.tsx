@@ -27,7 +27,6 @@ import {
 /* @ ToDo:
 
 - (Snackbar (error/success))
-- disable on history/fav
 - i18n
 
 */
