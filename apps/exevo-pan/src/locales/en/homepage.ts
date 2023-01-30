@@ -38,6 +38,8 @@ export default {
       favorite: {
         add: 'Favorite',
         remove: 'Unfavorite',
+        added: 'Added to favorites',
+        removed: 'Removed from favorites',
       },
     },
   },

@@ -37,6 +37,8 @@ export default {
       favorite: {
         add: 'Favoritar',
         remove: 'Desfavoritar',
+        added: 'Adicionado aos favoritos',
+        removed: 'Removido dos favoritos',
       },
     },
   },
