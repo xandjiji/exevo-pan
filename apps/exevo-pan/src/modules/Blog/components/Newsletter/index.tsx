@@ -1,6 +1,7 @@
 import { memo, useState } from 'react'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
+import { toast } from 'react-hot-toast'
 import { FadeImage, Input, Button } from 'components/Atoms'
 import { trpc } from 'lib/trpc'
 import { useTranslations } from 'contexts/useTranslation'
@@ -15,13 +16,16 @@ const Newsletter = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
   const {
-    translations: { blog },
+    translations: { common, blog },
   } = useTranslations()
 
   const { locale } = useRouter()
 
   const [email, setEmail] = useState('')
-  const { mutate, status, data } = trpc.newsletter.useMutation()
+  const { mutate, status, data } = trpc.newsletter.useMutation({
+    onSuccess: () => toast.success(blog.Newsletter.message.toastSuccess),
+    onError: () => toast.error(common.genericError),
+  })
 
   const registerUser = () => mutate({ email, locale: locale ?? DEFAULT_LOCALE })
   const onKeyPress: React.KeyboardEventHandler<HTMLInputElement> = (event) => {

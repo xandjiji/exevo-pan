@@ -27,6 +27,7 @@ export default {
       alreadyRegistered: 'Este email já está registrado',
       success: 'Obrigado',
       generic: 'Algo deu errado',
+      toastSuccess: 'Inscrito com sucesso',
     },
   },
   Authors: {
