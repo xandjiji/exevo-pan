@@ -106,6 +106,7 @@ const PaymentList = () => {
       list.refetch()
       toast.success(`${nickname} was updated`)
     },
+    onError: () => toast.error('Oops! Something went wrong'),
   })
 
   const remove = trpc.deleteAuctionHighlight.useMutation({
@@ -116,6 +117,7 @@ const PaymentList = () => {
       list.refetch()
       toast.success(`${nickname} was removed`)
     },
+    onError: () => toast.error('Oops! Something went wrong'),
   })
 
   const isLoading =
