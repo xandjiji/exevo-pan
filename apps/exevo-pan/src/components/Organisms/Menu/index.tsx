@@ -131,7 +131,11 @@ const Menu = ({
                   tabIndex={-1}
                   highlighted={index === highlightedIndex}
                   onPointerMove={() =>
-                    dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
+                    dispatch(
+                      itemProps.disabled
+                        ? { type: 'RESET_HIGHLIGHT' }
+                        : { type: 'SET_HIGHLIGHTED_INDEX', index },
+                    )
                   }
                   onClick={() => {
                     onSelect?.()
