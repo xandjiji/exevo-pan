@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { LoadingAlert, Table, Dialog, Button, Alert } from 'components/Atoms'
 import {
@@ -103,6 +104,7 @@ const PaymentList = () => {
       resetDates()
       revalidate.mutateAsync()
       list.refetch()
+      toast.success(`${nickname} was updated`)
     },
   })
 
@@ -112,6 +114,7 @@ const PaymentList = () => {
       setToDelete(EMPTY_DELETION)
       revalidate.mutateAsync()
       list.refetch()
+      toast.success(`${nickname} was removed`)
     },
   })
 
