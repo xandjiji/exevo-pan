@@ -6,6 +6,7 @@ import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
+import { AuctionNotificationsProvider } from './useAuctionNotifications'
 import FilterControl from './FilterControl'
 import ExpandableCharacterCard from './ExpandableCharacterCard'
 import NotFoundAlert from './NotFoundAlert'
@@ -131,67 +132,69 @@ const AuctionsGrid = () => {
           <NotFoundAlert notFoundIds={favoritedState.notFoundIds} />
         )}
 
-        <div
-          id="character-grid"
-          className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
-        >
-          {isFavorites ? (
-            <>
-              {favoritedState.currentIds.length > 0 && (
-                <S.GridTextSeparator>
-                  {homepage.AuctionsGrid.separators.current} (
-                  {favoritedState.currentIds.length})
-                </S.GridTextSeparator>
-              )}
-              {paginatedData.page
-                .filter(({ id }) => favoritedState.currentIds.includes(id))
-                .map((characterData) => (
-                  <ExpandableCharacterCard
-                    key={characterData.id}
-                    highlightedAuctions={highlightedAuctions}
-                    characterData={characterData}
-                  />
-                ))}
+        <AuctionNotificationsProvider>
+          <div
+            id="character-grid"
+            className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
+          >
+            {isFavorites ? (
+              <>
+                {favoritedState.currentIds.length > 0 && (
+                  <S.GridTextSeparator>
+                    {homepage.AuctionsGrid.separators.current} (
+                    {favoritedState.currentIds.length})
+                  </S.GridTextSeparator>
+                )}
+                {paginatedData.page
+                  .filter(({ id }) => favoritedState.currentIds.includes(id))
+                  .map((characterData) => (
+                    <ExpandableCharacterCard
+                      key={characterData.id}
+                      highlightedAuctions={highlightedAuctions}
+                      characterData={characterData}
+                    />
+                  ))}
 
-              {favoritedState.historyIds.length > 0 && (
-                <S.GridTextSeparator>
-                  {homepage.AuctionsGrid.separators.history} (
-                  {favoritedState.historyIds.length})
-                </S.GridTextSeparator>
-              )}
-              {paginatedData.page
-                .filter(({ id }) => favoritedState.historyIds.includes(id))
-                .map((characterData) => (
+                {favoritedState.historyIds.length > 0 && (
+                  <S.GridTextSeparator>
+                    {homepage.AuctionsGrid.separators.history} (
+                    {favoritedState.historyIds.length})
+                  </S.GridTextSeparator>
+                )}
+                {paginatedData.page
+                  .filter(({ id }) => favoritedState.historyIds.includes(id))
+                  .map((characterData) => (
+                    <ExpandableCharacterCard
+                      key={characterData.id}
+                      highlightedAuctions={highlightedAuctions}
+                      characterData={characterData}
+                      past
+                    />
+                  ))}
+              </>
+            ) : (
+              <>
+                {shouldDisplayHighlightedAuctions &&
+                  highlightedAuctions.map((characterData) => (
+                    <ExpandableCharacterCard
+                      key={`${characterData.id}-highlighted`}
+                      characterData={characterData}
+                      highlightedAuctions={highlightedAuctions}
+                    />
+                  ))}
+                {paginatedData.page.map((characterData) => (
                   <ExpandableCharacterCard
                     key={characterData.id}
+                    forceNoHighlight={shouldDisplayHighlightedAuctions}
                     highlightedAuctions={highlightedAuctions}
                     characterData={characterData}
-                    past
+                    past={mode === 'history'}
                   />
                 ))}
-            </>
-          ) : (
-            <>
-              {shouldDisplayHighlightedAuctions &&
-                highlightedAuctions.map((characterData) => (
-                  <ExpandableCharacterCard
-                    key={`${characterData.id}-highlighted`}
-                    characterData={characterData}
-                    highlightedAuctions={highlightedAuctions}
-                  />
-                ))}
-              {paginatedData.page.map((characterData) => (
-                <ExpandableCharacterCard
-                  key={characterData.id}
-                  forceNoHighlight={shouldDisplayHighlightedAuctions}
-                  highlightedAuctions={highlightedAuctions}
-                  characterData={characterData}
-                  past={mode === 'history'}
-                />
-              ))}
-            </>
-          )}
-        </div>
+              </>
+            )}
+          </div>
+        </AuctionNotificationsProvider>
         {paginatedData.page.length === 0 && (
           <EmptyState
             className={styles.empty}

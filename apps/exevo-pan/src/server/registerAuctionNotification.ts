@@ -4,7 +4,7 @@ import { prisma } from 'lib/prisma'
 import {
   calculateDate,
   isNotificationDateValid,
-} from 'modules/BazaarAuctions/components/AuctionsGrid/ExpandableCharacterCard/useAuctionNotifications/utils'
+} from 'modules/BazaarAuctions/components/AuctionsGrid/useAuctionNotifications/utils'
 
 const Input = z
   .object({

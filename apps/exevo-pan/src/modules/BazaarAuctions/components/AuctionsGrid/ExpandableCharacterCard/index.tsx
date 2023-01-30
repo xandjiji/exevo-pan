@@ -19,7 +19,7 @@ import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { getSimilarCharacterFilters } from '../utils'
-import { useAuctionNotifications } from './useAuctionNotifications'
+import { useAuctionNotifications } from '../useAuctionNotifications'
 import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
@@ -99,7 +99,7 @@ const ExpandableCharacterCard = ({
     )
   }
 
-  const auctionNotification = useAuctionNotifications(characterData)
+  const auctionNotification = useAuctionNotifications()
 
   return (
     <>
@@ -134,7 +134,13 @@ const ExpandableCharacterCard = ({
                 /* @ ToDo: i18n */
                 label: 'Notify',
                 icon: AlertIcon,
-                onSelect: auctionNotification.toggleOpen,
+                onSelect: () =>
+                  auctionNotification.openNotificationsDialog({
+                    auctionId: characterData.id,
+                    auctionEnd: characterData.auctionEnd,
+                    nickname: characterData.nickname,
+                    outfitId: characterData.outfitId,
+                  }),
                 disabled: !auctionNotification.isSupported,
               },
               {
@@ -166,7 +172,6 @@ const ExpandableCharacterCard = ({
           }}
         />
       )}
-      {auctionNotification.DialogElement}
     </>
   )
 }
