@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
@@ -12,7 +13,7 @@ const { BANK_CHARACTER } = advertising
 
 const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   const {
-    translations: { dashboard },
+    translations: { common, dashboard },
   } = useTranslations()
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
@@ -27,6 +28,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
     },
     onError: () => {
       setRequestStatus('ERROR')
+      toast.error(common.genericError)
     },
     onSuccess: ({ paymentData }) => {
       if (paymentData) {
@@ -35,6 +37,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
       }
 
       setRequestStatus('SUCCESSFUL')
+      toast.success(dashboard.PurchaseForm.orderReceived)
     },
   })
 
