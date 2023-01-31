@@ -1,7 +1,6 @@
-import { memo, useState, useEffect, useMemo } from 'react'
+import { memo, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { LoadingAlert } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import { debounce } from 'utils'
 import { routes } from 'Constants'
@@ -15,27 +14,10 @@ const ServerNavigation = ({
   serverOptions,
 }: ServerNavigationProps) => {
   const {
-    translations: { common, bosses },
+    translations: { bosses },
   } = useTranslations()
 
-  const [isLoading, setIsLoading] = useState(false)
-
-  const { push, events } = useRouter()
-
-  useEffect(() => {
-    const setLoading = () => setIsLoading(true)
-    const setLoaded = () => setIsLoading(false)
-
-    events.on('routeChangeStart', setLoading)
-    events.on('routeChangeComplete', setLoaded)
-    events.on('routeChangeError', setLoaded)
-
-    return () => {
-      events.off('routeChangeStart', setLoading)
-      events.off('routeChangeComplete', setLoaded)
-      events.off('routeChangeError', setLoaded)
-    }
-  }, [events])
+  const { push } = useRouter()
 
   const debouncedNav = useMemo(
     () =>
@@ -49,7 +31,6 @@ const ServerNavigation = ({
 
   return (
     <section className="inner-container bg-darkerPrimary z-71 sticky top-[60px] py-3 shadow-md transition-colors">
-      {isLoading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
       <Select
         label={bosses.ServerNavigation.label}
         options={serverOptions}
