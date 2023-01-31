@@ -1,4 +1,4 @@
-import webpush from 'web-push'
+import webpush, { WebPushError } from 'web-push'
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
@@ -33,9 +33,11 @@ export const notifyUser = adminProcedure
             },
             JSON.stringify(data),
           )
-          .catch((e) => {
-            console.log(e)
-          }),
+          .catch((e: WebPushError) =>
+            prisma.notificationDevice.deleteMany({
+              where: { endpoint: e.endpoint },
+            }),
+          ),
       ),
     )
 
