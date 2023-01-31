@@ -75,8 +75,8 @@ export default class CurrentAuctionsData {
 
         if (wasUpdated) {
           updatedAuctions.push({
-            auctionId: auction.id,
-            currentBid: auction.currentBid,
+            auctionId: freshAuctionBlock.id,
+            currentBid: freshAuctionBlock.currentBid,
           })
         }
 
