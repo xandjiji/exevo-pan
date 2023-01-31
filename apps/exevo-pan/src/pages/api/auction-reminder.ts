@@ -22,8 +22,8 @@ export default async (
     const notifyList = await prisma.auctionNotification.findMany({
       where: {
         notifyAt: {
-          gte: offsetCurrentDateByMinutes(-10),
           lte: offsetCurrentDateByMinutes(2),
+          gte: offsetCurrentDateByMinutes(-10),
         },
         scheduleCompleted: false,
       },
