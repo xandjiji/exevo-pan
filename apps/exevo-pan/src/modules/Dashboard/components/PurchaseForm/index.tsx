@@ -95,17 +95,21 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                   label={dashboard.PurchaseForm.paymentCharacterLabel}
                   placeholder={`e.g, '${randomNickname}'`}
                   noAlert
-                  defaultValue={character}
-                  onChange={(e) => setFrom(e.target.value.trim())}
+                  defaultValue={character ?? from}
+                  onChange={(e) => {
+                    setFrom(e.target.value.trim())
+                    setRequestStatus('IDLE')
+                  }}
                   enterKeyHint="send"
                   disabled={isLoading}
+                  error={requestStatus === 'ERROR'}
                 />
                 <Button
                   type="submit"
                   pill
                   className="mb-[1px] py-3"
                   loading={isLoading}
-                  disabled={!from}
+                  disabled={!from || from.length < 2}
                 >
                   {dashboard.PurchaseForm.confirm}
                 </Button>
