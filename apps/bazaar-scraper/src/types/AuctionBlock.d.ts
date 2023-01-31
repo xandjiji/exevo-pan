@@ -8,3 +8,8 @@ declare type UnfinishedAuction = {
   id: number
   auctionEnd: number
 }
+
+declare type BiddedAuctions = {
+  auctionId: number
+  currentBid: number
+}

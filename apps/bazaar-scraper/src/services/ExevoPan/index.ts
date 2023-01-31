@@ -32,9 +32,15 @@ export default class ExevoPanClient {
     }
   }
 
-  static async notifyAuctionBid(auctionId: number): Promise<void> {
+  static async notifyAuctionBid({
+    auctionId,
+    currentBid,
+  }: {
+    auctionId: number
+    currentBid: number
+  }): Promise<void> {
     const { status } = await fetch(
-      `${BASE_URL}/auction-bidded?secret=${getAuthToken()}&auctionId${auctionId}`,
+      `${BASE_URL}/auction-bidded?secret=${getAuthToken()}&auctionId=${auctionId}&currentBid=${currentBid}`,
       { timeout: REQUEST_TIMEOUT },
     )
 
