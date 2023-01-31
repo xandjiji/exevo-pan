@@ -34,6 +34,7 @@
     "next": "13.0.2",
     "next-auth": "^4.16.4",
     "next-mdx-remote": "^3.0.8",
+    "nextjs-progressbar": "^0.0.16",
     "nodemailer": "^6.6.5",
     "nodemailer-plugin-inline-base64": "^2.1.1",
     "preact": "10.11.2",

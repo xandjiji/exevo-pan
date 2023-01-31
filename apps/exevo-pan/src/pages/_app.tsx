@@ -5,7 +5,7 @@ import { Analytics } from '@vercel/analytics/react'
 import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
-import { Toaster } from 'templates'
+import { NavigationProgress, Toaster } from 'templates'
 import { PreviewImageClient } from 'services'
 import { LockBodyProvider } from 'hooks/useLockBody'
 import { SessionProvider } from 'next-auth/react'
@@ -54,6 +54,7 @@ const MyApp: AppType = ({
             <LockBodyProvider>
               <Analytics />
               <SessionProvider session={session}>
+                <NavigationProgress />
                 <Toaster />
                 <PageComponent {...pageProps} />
               </SessionProvider>
