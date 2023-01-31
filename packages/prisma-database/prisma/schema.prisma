@@ -102,13 +102,14 @@ enum PAYMENT_METHOD {
 }
 
 model AuctionNotification {
-    id          String    @id @default(uuid())
-    auctionId   Int
-    nickname    String
-    auctionEnd  DateTime
-    lastUpdated DateTime  @default(now())
-    notifyAt    DateTime?
-    notifyOnBid Boolean
+    id                String    @id @default(uuid())
+    auctionId         Int
+    nickname          String
+    auctionEnd        DateTime
+    lastUpdated       DateTime  @default(now())
+    notifyAt          DateTime?
+    notifyOnBid       Boolean
+    scheduleCompleted Boolean   @default(false)
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String

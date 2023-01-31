@@ -66,6 +66,7 @@ export const registerAuctionNotification = authedProcedure
           auctionEnd: auctionEndDate,
           notifyAt: notifyAt ? notifyAtDate : undefined,
           notifyOnBid: proStatus ? notifyOnBid : false,
+          scheduleCompleted: !notifyAt,
           user: { connect: { id } },
         },
       })
