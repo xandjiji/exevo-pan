@@ -11,10 +11,12 @@ import { revalidatePage } from './admin/revalidatePage'
 import * as notifyAdmin from './admin/notifyAdmin'
 import { registerNotificationDevice } from './registerNotificationDevice'
 import { registerAuctionNotification } from './registerAuctionNotification'
+import { notifyUser } from './notifyUser'
 
 export const routes = {
   registerNotificationDevice,
   registerAuctionNotification,
+  notifyUser,
   getAuctionById,
   proBosses,
   newsletter,

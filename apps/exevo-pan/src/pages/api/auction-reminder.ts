@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 import { prisma } from 'lib/prisma'
 import { caller } from 'pages/api/trpc/[trpc]'
-import { MILLISECONDS_IN } from 'utils'
+import { MILLISECONDS_IN, officialAuctionUrl } from 'utils'
 
 const offsetCurrentDateByMinutes = (minutesOffset: number) =>
   new Date(+new Date() + MILLISECONDS_IN.MINUTE * minutesOffset)
@@ -29,7 +29,16 @@ export default async (
       },
     })
 
-    /* @ ToDo: notify */
+    await Promise.all(
+      notifyList.map(({ userId, nickname, auctionId }) =>
+        caller.notifyUser({
+          userId,
+          title: 'Auction reminder',
+          body: nickname,
+          url: officialAuctionUrl(auctionId),
+        }),
+      ),
+    )
 
     await prisma.auctionNotification.updateMany({
       where: { id: { in: notifyList.map(({ id }) => id) } },
