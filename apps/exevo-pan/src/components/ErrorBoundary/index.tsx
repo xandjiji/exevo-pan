@@ -2,7 +2,6 @@
 import { Component, ErrorInfo } from 'react'
 import ErrorPage from 'modules/ErrorPage'
 import { isDevelopment } from 'utils'
-import { log } from 'next-axiom'
 import { ErrorBoundaryProps, State } from './types'
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
@@ -19,8 +18,8 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, State> {
       console.log(error)
       return
     }
-    log.error('clientError', { error, errorInfo })
-    localStorage.clear()
+    /* log.error('clientError', { error, errorInfo })
+    localStorage.clear() */
     setTimeout(() => window.location.reload(), 3000)
   }
 
