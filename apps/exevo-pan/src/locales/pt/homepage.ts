@@ -34,6 +34,7 @@ export default {
       details: 'Detalhes',
       copyLink: 'Copiar link',
       findSimilar: 'Buscar similares',
+      notify: 'Notificar',
       favorite: {
         add: 'Favoritar',
         remove: 'Desfavoritar',

@@ -131,8 +131,7 @@ const ExpandableCharacterCard = ({
                 },
               },
               {
-                /* @ ToDo: i18n */
-                label: 'Notify',
+                label: homepage.AuctionsGrid.ExpandableCharacterCard.notify,
                 icon: AlertIcon,
                 onSelect: () =>
                   auctionNotification.openNotificationsDialog({
