@@ -5,29 +5,41 @@ import { config } from 'dotenv'
 const REQUEST_TIMEOUT = 15000
 const BASE_URL = 'https://exevopan.com/api'
 
-const buildRoute = (route?: string): string => {
+const getAuthToken = () => {
   config()
   const token = process.env.REVALIDATION_AUTH
-
   if (!token) {
     throw new Error(
       'Invalid token! Add `export REVALIDATION_AUTH="cf943cab-a1d2-4447-a0c5-bd910aaac4d2"` to `.env`',
     )
   }
 
-  return `${BASE_URL}/revalidate?secret=${token}${
-    route ? `&route=${route}` : ''
-  }`
+  return token
 }
 
 export default class ExevoPanClient {
   static async revalidate(route?: string): Promise<void> {
-    const { status } = await fetch(buildRoute(route), {
-      timeout: REQUEST_TIMEOUT,
-    })
+    const { status } = await fetch(
+      `${BASE_URL}/revalidate?secret=${getAuthToken()}${
+        route ? `&route=${route}` : ''
+      }`,
+      { timeout: REQUEST_TIMEOUT },
+    )
 
     if (status === 401) {
-      broadcast('Unauthorized revalidation token', 'fail')
+      broadcast('Unauthorized token', 'fail')
+      throw new Error()
+    }
+  }
+
+  static async notifyAuctionBid(auctionId: number): Promise<void> {
+    const { status } = await fetch(
+      `${BASE_URL}/auction-bidded?secret=${getAuthToken()}&auctionId${auctionId}`,
+      { timeout: REQUEST_TIMEOUT },
+    )
+
+    if (status === 401) {
+      broadcast('Unauthorized token', 'fail')
       throw new Error()
     }
   }
