@@ -1,13 +1,13 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-await-in-loop */
 import { broadcast, coloredText, tabBroadcast, TrackETA } from 'logging'
-import { RevalidateClient } from 'services'
+import { ExevoPanClient } from 'services'
 import { retryWrapper } from 'utils'
 
 const ROUTE_PATH = 'boss-tracker'
 
 const revalidateServer = retryWrapper((serverName?: string) =>
-  RevalidateClient.route(
+  ExevoPanClient.revalidate(
     `${ROUTE_PATH}${serverName ? '/' : ''}${serverName ?? ''}`,
   ),
 )

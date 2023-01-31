@@ -3,8 +3,7 @@ import fetch from 'node-fetch'
 import { config } from 'dotenv'
 
 const REQUEST_TIMEOUT = 15000
-
-const ENDPOINT = 'https://exevopan.com/api/revalidate'
+const BASE_URL = 'https://exevopan.com/api'
 
 const buildRoute = (route?: string): string => {
   config()
@@ -16,11 +15,13 @@ const buildRoute = (route?: string): string => {
     )
   }
 
-  return `${ENDPOINT}?secret=${token}${route ? `&route=${route}` : ''}`
+  return `${BASE_URL}/revalidate?secret=${token}${
+    route ? `&route=${route}` : ''
+  }`
 }
 
-export default class RevalidateClient {
-  static async route(route?: string): Promise<void> {
+export default class ExevoPanClient {
+  static async revalidate(route?: string): Promise<void> {
     const { status } = await fetch(buildRoute(route), {
       timeout: REQUEST_TIMEOUT,
     })
