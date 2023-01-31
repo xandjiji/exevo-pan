@@ -115,6 +115,7 @@ model AuctionNotification {
     userId String
 
     @@index([userId])
+    @@index([notifyAt])
 }
 
 model HighlightedAuction {
