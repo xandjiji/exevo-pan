@@ -9,9 +9,9 @@ import * as highlightRevenue from './admin/highlightRevenue'
 import * as auctionHighlights from './admin/auctionHighlights'
 import { revalidatePage } from './admin/revalidatePage'
 import * as notifyAdmin from './admin/notifyAdmin'
+import { notifyUser } from './admin/notifyUser'
 import { registerNotificationDevice } from './registerNotificationDevice'
 import { registerAuctionNotification } from './registerAuctionNotification'
-import { notifyUser } from './notifyUser'
 
 export const routes = {
   registerNotificationDevice,
