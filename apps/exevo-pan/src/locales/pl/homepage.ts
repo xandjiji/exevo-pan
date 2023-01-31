@@ -45,6 +45,22 @@ export default {
         removed: 'Removed from favorites',
       },
     },
+    /* @ ToDo: i18n */
+    useAuctionNotifications: {
+      heading: 'Set auction notification',
+      logIn: 'log in',
+      notAuthed: 'You must {{logIn}} to set up auction notifications',
+      enableNotifications: 'enable notifications',
+      permission: 'Please {{enableNotifications}} on this device',
+      bidNotification: 'Notify me when bidded',
+      proExclusive: '(exclusive for {{exevopro}})',
+      timeNotification: 'Notify me before auction end:',
+      minutesLeft: 'Minutes left',
+      hoursLeft: 'Hours left',
+      cancelButton: 'Cancel',
+      confirmButton: 'Confirm',
+      success: 'Notification was set!',
+    },
   },
   FilterControl: {
     /* @ ToDo: i18n */

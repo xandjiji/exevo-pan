@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useCallback } from 'react'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
@@ -25,12 +26,6 @@ import {
   AuctionConfigProps,
 } from './types'
 
-/* @ ToDo:
-
-- i18n
-
-*/
-
 const DEFAULT_STATE: AuctionNotificationsContextData = {
   isSupported: false,
   openNotificationsDialog: () => {},
@@ -52,6 +47,10 @@ const INITIAL_FORM_VALUES: RegisterAuctionNotificationInput = {
 export const AuctionNotificationsProvider = ({
   children,
 }: AuctionNotificationsProviderProps) => {
+  const {
+    translations: { common, homepage },
+  } = useTranslations()
+
   const {
     isSupported,
     permission,
@@ -85,10 +84,10 @@ export const AuctionNotificationsProvider = ({
 
   const register = trpc.registerAuctionNotification.useMutation({
     onSuccess: () => {
-      toast.success('Notification was set!')
+      toast.success(homepage.AuctionsGrid.useAuctionNotifications.success)
       closeNotificationsDialog()
     },
-    onError: () => toast.error('Oops! Something went wrong'),
+    onError: () => toast.error(common.genericError),
   })
 
   const disableTimeConfig = !formState.notifyAt
@@ -103,21 +102,22 @@ export const AuctionNotificationsProvider = ({
     })
   const noNotification = !formState.notifyAt && !formState.notifyOnBid
   const isInvalid = invalidTime || noNotification
+  const isOpen = formState.auctionEnd > 0
 
   return (
     <NotificationsContext.Provider
       value={{ isSupported, openNotificationsDialog }}
     >
       {children}
-      {formState.auctionEnd > 0 ? (
-        /* @ ToDo: i18n */
+      {isOpen ? (
         <Dialog
           isOpen
           onClose={closeNotificationsDialog}
-          heading="Set auction notification"
+          heading={homepage.AuctionsGrid.useAuctionNotifications.heading}
         >
-          {/* @ ToDo: i18n */}
-          {loadingDeviceSubscription && <LoadingAlert>Loading...</LoadingAlert>}
+          {loadingDeviceSubscription && (
+            <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
+          )}
           <div className="text-s grid gap-6">
             <div className="xs:flex xs:items-center xs:justify-between xs:gap-4 grid gap-[18px]">
               <CharacterMiniCard
@@ -132,28 +132,39 @@ export const AuctionNotificationsProvider = ({
             </div>
             {!isAuthed ? (
               <Alert variant="alert">
-                {/* @ ToDo: i18n */}
-                You must{' '}
-                <NextLink
-                  href={routes.LOGIN}
-                  className="text-onAlert font-bold underline underline-offset-2"
-                >
-                  log in
-                </NextLink>{' '}
-                to set up auction notifications
+                {templateMessage(
+                  homepage.AuctionsGrid.useAuctionNotifications.notAuthed,
+                  {
+                    logIn: (
+                      <NextLink
+                        href={routes.LOGIN}
+                        className="text-onAlert font-bold underline underline-offset-2"
+                      >
+                        {homepage.AuctionsGrid.useAuctionNotifications.logIn}
+                      </NextLink>
+                    ),
+                  },
+                )}
               </Alert>
             ) : permission !== 'granted' ? (
               <Alert variant="primary">
-                {/* @ ToDo: i18n */}
-                Please{' '}
-                <button
-                  type="button"
-                  className="text-primaryHighlight cursor-pointer font-bold underline underline-offset-2"
-                  onClick={subscribeDevice}
-                >
-                  enable notifications
-                </button>{' '}
-                on this device
+                {templateMessage(
+                  homepage.AuctionsGrid.useAuctionNotifications.permission,
+                  {
+                    enableNotifications: (
+                      <button
+                        type="button"
+                        className="text-primaryHighlight cursor-pointer font-bold underline underline-offset-2"
+                        onClick={subscribeDevice}
+                      >
+                        {
+                          homepage.AuctionsGrid.useAuctionNotifications
+                            .enableNotifications
+                        }
+                      </button>
+                    ),
+                  },
+                )}
               </Alert>
             ) : (
               <>
@@ -161,14 +172,26 @@ export const AuctionNotificationsProvider = ({
                   <Checkbox
                     label={
                       <span>
-                        Notify me when bidded{' '}
+                        {
+                          homepage.AuctionsGrid.useAuctionNotifications
+                            .bidNotification
+                        }{' '}
                         {!isPro && (
                           <NextLink
                             href={routes.EXEVOPRO}
                             className="text-onSurface"
                           >
-                            (exclusive for{' '}
-                            <strong className="text-rare">Exevo Pro 🧞‍♀️</strong>)
+                            {templateMessage(
+                              homepage.AuctionsGrid.useAuctionNotifications
+                                .proExclusive,
+                              {
+                                exevopro: (
+                                  <strong className="text-rare">
+                                    Exevo Pro 🧞‍♀️
+                                  </strong>
+                                ),
+                              },
+                            )}
                           </NextLink>
                         )}
                       </span>
@@ -185,7 +208,10 @@ export const AuctionNotificationsProvider = ({
 
                   <div>
                     <Checkbox
-                      label="Notify me before auction end:"
+                      label={
+                        homepage.AuctionsGrid.useAuctionNotifications
+                          .timeNotification
+                      }
                       checked={formState.notifyAt}
                       onChange={() =>
                         setFormState((prev) => ({
@@ -216,8 +242,16 @@ export const AuctionNotificationsProvider = ({
                         className="grow"
                         label=""
                         options={[
-                          { name: 'Minutes left', value: 'minutes' },
-                          { name: 'Hours left', value: 'hours' },
+                          {
+                            name: homepage.AuctionsGrid.useAuctionNotifications
+                              .minutesLeft,
+                            value: 'minutes',
+                          },
+                          {
+                            name: homepage.AuctionsGrid.useAuctionNotifications
+                              .hoursLeft,
+                            value: 'hours',
+                          },
                         ]}
                         value={formState.timeMode}
                         onChange={(e) =>
@@ -237,7 +271,7 @@ export const AuctionNotificationsProvider = ({
 
                 <div className="flex justify-end gap-2">
                   <Button pill hollow onClick={closeNotificationsDialog}>
-                    Cancel
+                    {homepage.AuctionsGrid.useAuctionNotifications.cancelButton}
                   </Button>
                   <Button
                     pill
@@ -245,7 +279,10 @@ export const AuctionNotificationsProvider = ({
                     loading={isLoading}
                     onClick={() => register.mutate(formState)}
                   >
-                    Confirm
+                    {
+                      homepage.AuctionsGrid.useAuctionNotifications
+                        .confirmButton
+                    }
                   </Button>
                 </div>
               </>
