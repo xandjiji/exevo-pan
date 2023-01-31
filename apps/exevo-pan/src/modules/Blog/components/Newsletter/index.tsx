@@ -23,7 +23,13 @@ const Newsletter = ({
 
   const [email, setEmail] = useState('')
   const { mutate, status, data } = trpc.newsletter.useMutation({
-    onSuccess: () => toast.success(blog.Newsletter.message.toastSuccess),
+    onSuccess: ({ message }) => {
+      if (message === 'success') {
+        toast.success(blog.Newsletter.message.toastSuccess)
+      } else {
+        toast.error(common.genericError)
+      }
+    },
     onError: () => toast.error(common.genericError),
   })
 
