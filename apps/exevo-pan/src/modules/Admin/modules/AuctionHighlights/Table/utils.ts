@@ -48,5 +48,5 @@ export const getTimezoneDiff = (timezoneOffsetMinutes: number) => {
   const hoursDiff =
     (new Date().getTimezoneOffset() - timezoneOffsetMinutes) / MINUTES_IN.HOUR
 
-  return `${getNumberSign(hoursDiff)}${hoursDiff}h`
+  return `${getNumberSign(hoursDiff)}${Math.abs(hoursDiff)}h`
 }
