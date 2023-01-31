@@ -20,6 +20,12 @@ export default async (
     return
   }
 
+  if (typeof request.query.currentBid !== 'string') {
+    response.status(401).json({ message: '`currentBid` is required' })
+    return
+  }
+
+  const { currentBid } = request.query
   const auctionId = +request.query.auctionId
 
   try {
@@ -31,8 +37,8 @@ export default async (
       notifyList.map(({ userId, nickname }) =>
         caller.notifyUser({
           userId,
-          title: 'Auction bidded',
-          body: nickname,
+          title: nickname,
+          body: `Current bid: ${currentBid}`,
           url: officialAuctionUrl(auctionId),
         }),
       ),
