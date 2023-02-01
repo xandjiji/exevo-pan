@@ -13,6 +13,8 @@ import {
   MiniAuction,
   MiniFilters,
   MiniHighlight,
+  Phone,
+  Notebook,
   Tooltip as List,
   Strong,
   Gradient,
@@ -208,6 +210,27 @@ export default function ExevoPro() {
             </h3>
 
             <MiniHighlight />
+          </FeatureSection>
+
+          <FeatureSection>
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {/* {templateMessage(translations.exevopro.highlightDiscount.pitch, {
+                strong: (
+                  <Strong>
+                    {translations.exevopro.highlightDiscount.strong}
+                  </Strong>
+                ),
+              })} */}
+              Track auctions receiving <Strong>notifications</Strong> when they
+              are bidded
+            </h3>
+
+            <div className="flex items-center">
+              <div className="z-1 relative -mr-5">
+                <Phone />
+              </div>
+              <Notebook />
+            </div>
           </FeatureSection>
 
           <p className="text-center text-2xl">
