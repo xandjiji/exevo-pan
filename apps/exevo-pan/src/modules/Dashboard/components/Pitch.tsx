@@ -118,6 +118,13 @@ const Pitch = ({ proStatus }: PitchProps) => {
               ),
             })}
           </Li>
+          <Li>
+            {templateMessage(dashboard.Pitch.features.bidNotifications, {
+              notifications: (
+                <strong>{dashboard.Pitch.features.notifications}</strong>
+              ),
+            })}
+          </Li>
         </ul>
         <p className="text-right">{dashboard.Pitch.more}</p>
       </div>
