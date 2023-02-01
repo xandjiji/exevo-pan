@@ -27,6 +27,10 @@ export default {
     pitch: 'Discounts for {{strong}}',
     strong: 'auction highlighting',
   },
+  notifications: {
+    pitch: 'Track auctions receiving {{strong}} when they are bidded',
+    strong: 'notifications',
+  },
   andMore: '...and more in the future! 🔮',
   footer: 'Upgrade now to {{exevopro}}',
   no: {

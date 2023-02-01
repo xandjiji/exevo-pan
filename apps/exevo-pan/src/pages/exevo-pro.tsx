@@ -214,15 +214,11 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              {/* {templateMessage(translations.exevopro.highlightDiscount.pitch, {
+              {templateMessage(translations.exevopro.notifications.pitch, {
                 strong: (
-                  <Strong>
-                    {translations.exevopro.highlightDiscount.strong}
-                  </Strong>
+                  <Strong>{translations.exevopro.notifications.strong}</Strong>
                 ),
-              })} */}
-              Track auctions receiving <Strong>notifications</Strong> when they
-              are bidded
+              })}
             </h3>
 
             <div className="flex items-center">
