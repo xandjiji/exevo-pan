@@ -245,4 +245,5 @@ export default {
     currentMonthLabel: 'Obecny miesiąc',
     nextMonthLabel: 'Następny miesiąc',
   },
+  genericError: 'Ups! Coś poszło nie tak',
 }

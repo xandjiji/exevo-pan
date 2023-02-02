@@ -52,8 +52,9 @@ const Dialog = ({
             >
               <div
                 className={clsx(
-                  'float-right flex items-center justify-between',
+                  'flex items-center justify-between gap-2',
                   heading && 'mb-4 w-full',
+                  !heading && !noCloseButton && 'float-right',
                 )}
               >
                 {heading && (

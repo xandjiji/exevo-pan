@@ -5,6 +5,7 @@ import { TitledCard, Input, Button } from 'components/Atoms'
 import { trpc } from 'lib/trpc'
 import { randomCharacter } from 'utils'
 import { locales } from 'Constants'
+import { toast } from 'react-hot-toast'
 import { useForm } from '../../contexts/Form'
 import { validateEmail, validateCharacter } from './utils'
 
@@ -12,7 +13,7 @@ const { DEFAULT_LOCALE } = locales
 
 const Checkout = () => {
   const {
-    translations: { advertise },
+    translations: { common, advertise },
   } = useTranslations()
 
   const { locale } = useRouter()
@@ -54,7 +55,9 @@ const Checkout = () => {
   const { mutate, isLoading } = trpc.highlightCheckout.useMutation({
     onSuccess: ({ uuid }) => {
       dispatch({ type: 'FINISH_FORM', uuid })
+      toast.success(advertise.Checkout.success)
     },
+    onError: () => toast.error(common.genericError),
   })
 
   const validateAndSubmit = async () => {

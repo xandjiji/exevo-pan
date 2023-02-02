@@ -45,20 +45,21 @@ enum Role {
 }
 
 model User {
-    id                  String               @id @default(uuid())
-    role                Role                 @default(USER)
+    id                  String                @id @default(uuid())
+    role                Role                  @default(USER)
     name                String?
-    email               String?              @unique
+    email               String?               @unique
     emailVerified       DateTime?
     image               String?
     accounts            Account[]
     sessions            Session[]
-    proStatus           Boolean              @default(false)
+    proStatus           Boolean               @default(false)
     proSince            DateTime?
     paymentData         PaymentData?
     highlightedAuctions HighlightedAuction[]
     transactions        Transaction[]
     NotificationDevice  NotificationDevice[]
+    auctionNotification AuctionNotification[]
 }
 
 model NotificationDevice {
@@ -98,6 +99,23 @@ model VerificationToken {
 enum PAYMENT_METHOD {
     PIX
     TIBIA_COINS
+}
+
+model AuctionNotification {
+    id                String    @id @default(uuid())
+    auctionId         Int
+    nickname          String
+    auctionEnd        DateTime
+    lastUpdated       DateTime  @default(now())
+    notifyAt          DateTime?
+    notifyOnBid       Boolean
+    scheduleCompleted Boolean   @default(false)
+
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId String
+
+    @@index([userId])
+    @@index([notifyAt])
 }
 
 model HighlightedAuction {

@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useMemo, useState } from 'react'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { LoadingAlert, Table, Dialog, Button, Alert } from 'components/Atoms'
 import {
@@ -23,6 +24,7 @@ import {
   getHighlightStatus,
   isPastDate,
   toReadableLocalizedDate,
+  offsettedCurrentISODate,
   getTimezoneDiff,
 } from './utils'
 import { HighlightStatus } from './types'
@@ -103,7 +105,9 @@ const PaymentList = () => {
       resetDates()
       revalidate.mutateAsync()
       list.refetch()
+      toast.success(`${nickname} was updated`)
     },
+    onError: () => toast.error('Oops! Something went wrong'),
   })
 
   const remove = trpc.deleteAuctionHighlight.useMutation({
@@ -112,7 +116,9 @@ const PaymentList = () => {
       setToDelete(EMPTY_DELETION)
       revalidate.mutateAsync()
       list.refetch()
+      toast.success(`${nickname} was removed`)
     },
+    onError: () => toast.error('Oops! Something went wrong'),
   })
 
   const isLoading =
@@ -203,137 +209,134 @@ const PaymentList = () => {
                 joinedReadableDate,
                 timezoneOffsetMinutes,
                 auctionEnd,
-              }) => {
-                const currentLocalizedDate = toReadableLocalizedDate(
-                  timezoneOffsetMinutes,
-                )
+              }) => (
+                <Table.Row
+                  key={id}
+                  className={clsx(
+                    toDelete.id === id && 'bg-red/20',
+                    toToggleDate.id === id && 'bg-green/20',
+                    'hover:bg-background group',
+                  )}
+                >
+                  <Table.Column className="text-center">
+                    <Tooltip
+                      offset={[0, 8]}
+                      placement="right"
+                      content={
+                        <div className="grid gap-2">
+                          <p className="mb-2">
+                            Localized date:{' '}
+                            <strong>
+                              {offsettedCurrentISODate(timezoneOffsetMinutes)}{' '}
+                              <span className="text-primaryHighlight">
+                                ({getTimezoneDiff(timezoneOffsetMinutes)})
+                              </span>
+                            </strong>
+                          </p>
 
-                return (
-                  <Table.Row
-                    key={id}
-                    className={clsx(
-                      toDelete.id === id && 'bg-red/20',
-                      toToggleDate.id === id && 'bg-green/20',
-                      'hover:bg-background group',
-                    )}
-                  >
-                    <Table.Column className="text-center">
-                      <Tooltip
-                        offset={[0, 8]}
-                        placement="right"
-                        content={
-                          <div className="grid gap-2">
-                            <p className="mb-2">
-                              Current localized date:{' '}
-                              <strong>
-                                {currentLocalizedDate} (
-                                {getTimezoneDiff(timezoneOffsetMinutes)})
-                              </strong>
+                          {days.map((day) => (
+                            <p
+                              className={clsx(
+                                'text-left',
+                                isPastDate(day, timezoneOffsetMinutes) &&
+                                  'text-separator line-through',
+                                day ===
+                                  toReadableLocalizedDate(
+                                    timezoneOffsetMinutes,
+                                  ) && 'text-greenHighlight font-bold',
+                              )}
+                            >
+                              <span className="text-separator">-</span> {day}
                             </p>
-
-                            {days.map((day) => (
-                              <p
-                                className={clsx(
-                                  'text-left',
-                                  isPastDate(day, timezoneOffsetMinutes) &&
-                                    'text-separator line-through',
-                                  day === currentLocalizedDate &&
-                                    'text-greenHighlight font-bold',
-                                )}
-                              >
-                                <span className="text-separator">-</span> {day}
-                              </p>
-                            ))}
-                          </div>
+                          ))}
+                        </div>
+                      }
+                    >
+                      <p className="code group-hover:bg-separator/50 child:shrink-0 child:w-4 child:h-4 flex cursor-pointer items-center gap-1.5">
+                        {
+                          {
+                            PAUSED: (
+                              <>
+                                <PauseIcon className="fill-red" />
+                                Paused
+                              </>
+                            ),
+                            RUNNING: (
+                              <>
+                                <NewIcon className="fill-greenHighlight" />
+                                Running
+                              </>
+                            ),
+                            SCHEDULED: (
+                              <>
+                                <HourglassIcon className="fill-primaryAlert" />
+                                Scheduled
+                              </>
+                            ),
+                            FINISHED: (
+                              <>
+                                <ViewedIcon className="fill-primary" />
+                                Finished
+                              </>
+                            ),
+                          }[status]
                         }
-                      >
-                        <p className="code group-hover:bg-separator/50 child:shrink-0 child:w-4 child:h-4 flex cursor-pointer items-center gap-1.5">
-                          {
-                            {
-                              PAUSED: (
-                                <>
-                                  <PauseIcon className="fill-red" />
-                                  Paused
-                                </>
-                              ),
-                              RUNNING: (
-                                <>
-                                  <NewIcon className="fill-greenHighlight" />
-                                  Running
-                                </>
-                              ),
-                              SCHEDULED: (
-                                <>
-                                  <HourglassIcon className="fill-primaryAlert" />
-                                  Scheduled
-                                </>
-                              ),
-                              FINISHED: (
-                                <>
-                                  <ViewedIcon className="fill-primary" />
-                                  Finished
-                                </>
-                              ),
-                            }[status]
-                          }
-                        </p>
-                      </Tooltip>
-                    </Table.Column>
-                    <Table.Column>
-                      <AuctionSummary
-                        auctionId={auctionId}
-                        nickname={nickname}
-                        lastUpdated={lastUpdated}
-                      />
-                    </Table.Column>
-                    <Table.Column>
-                      <Menu
-                        offset={[0, 8]}
-                        items={[
-                          {
-                            label: confirmed ? 'Unconfirm' : 'Confirm',
-                            icon: confirmed ? ThumbsDownIcon : ThumbsUpIcon,
-                            onSelect: () =>
-                              patch.mutate({ id, confirmed: !confirmed }),
-                          },
-                          {
-                            label: active ? 'Pause' : 'Resume',
-                            icon: active ? PauseIcon : PlayIcon,
-                            onSelect: () =>
-                              patch.mutate({ id, active: !active }),
-                          },
-                          {
-                            label: 'Update dates',
-                            icon: CalendarDaysIcon,
-                            onSelect: () =>
-                              setToToggleDate({
-                                id,
-                                auctionId,
-                                nickname,
-                                lastUpdated,
-                                joinedReadableDate,
-                                endDate: new Date(auctionEnd),
-                              }),
-                          },
-                          {
-                            label: 'Delete',
-                            icon: TrashIcon,
-                            onSelect: () =>
-                              setToDelete({
-                                id,
-                                auctionId,
-                                nickname,
-                                lastUpdated,
-                              }),
-                          },
-                        ]}
-                      >
-                        <MoreHorizontalIcon className="fill-onSurface" />
-                      </Menu>
-                    </Table.Column>
-                  </Table.Row>
-                )
-              },
+                      </p>
+                    </Tooltip>
+                  </Table.Column>
+                  <Table.Column>
+                    <AuctionSummary
+                      auctionId={auctionId}
+                      nickname={nickname}
+                      lastUpdated={lastUpdated}
+                    />
+                  </Table.Column>
+                  <Table.Column>
+                    <Menu
+                      offset={[0, 8]}
+                      items={[
+                        {
+                          label: confirmed ? 'Unconfirm' : 'Confirm',
+                          icon: confirmed ? ThumbsDownIcon : ThumbsUpIcon,
+                          onSelect: () =>
+                            patch.mutate({ id, confirmed: !confirmed }),
+                        },
+                        {
+                          label: active ? 'Pause' : 'Resume',
+                          icon: active ? PauseIcon : PlayIcon,
+                          onSelect: () => patch.mutate({ id, active: !active }),
+                        },
+                        {
+                          label: 'Update dates',
+                          icon: CalendarDaysIcon,
+                          onSelect: () =>
+                            setToToggleDate({
+                              id,
+                              auctionId,
+                              nickname,
+                              lastUpdated,
+                              joinedReadableDate,
+                              endDate: new Date(auctionEnd),
+                            }),
+                        },
+                        {
+                          label: 'Delete',
+                          icon: TrashIcon,
+                          onSelect: () =>
+                            setToDelete({
+                              id,
+                              auctionId,
+                              nickname,
+                              lastUpdated,
+                            }),
+                        },
+                      ]}
+                    >
+                      <MoreHorizontalIcon className="fill-onSurface" />
+                    </Menu>
+                  </Table.Column>
+                </Table.Row>
+              ),
             )}
           </Table.Body>
         </Table.Element>

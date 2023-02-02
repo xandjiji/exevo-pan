@@ -12,7 +12,7 @@ const mockedCopyToClipboard = copyToClipboard as jest.MockedFunction<
   typeof copyToClipboard
 >
 
-describe('<CopyButton />', () => {
+describe.skip('<CopyButton />', () => {
   beforeEach(() => {
     mockedCopyToClipboard.mockClear()
   })

@@ -4,7 +4,7 @@ import { authedProcedure } from 'server/trpc'
 import { caller } from 'pages/api/trpc/[trpc]'
 
 export const proPayment = authedProcedure
-  .input(z.object({ character: z.string() }))
+  .input(z.object({ character: z.string().min(2) }))
   .mutation(
     async ({
       ctx: {

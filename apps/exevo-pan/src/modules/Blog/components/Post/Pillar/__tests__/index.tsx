@@ -35,7 +35,7 @@ describe('<Pillar />', () => {
       wrapper: CurrentSectionProvider as React.ComponentType,
     })
 
-    expect(container.childElementCount).toEqual(0)
+    expect(container.childElementCount).toEqual(1)
   })
 
   test('should render every title correctly', () => {

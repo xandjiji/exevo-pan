@@ -48,10 +48,13 @@ export default class CurrentAuctionsData {
     return this.currentAuctions
   }
 
-  async updatePreviousAuctions(auctionBlocks: AuctionBlock[]): Promise<void> {
+  async updatePreviousAuctions(
+    auctionBlocks: AuctionBlock[],
+  ): Promise<BiddedAuctions[]> {
     const auctionBlockIds = new Set(auctionBlocks.map(({ id }) => id))
     let removedCount = 0
-    let updatedCount = 0
+
+    const updatedAuctions: BiddedAuctions[] = []
 
     const newCurrentAuctions = this.currentAuctions
       .filter(({ id }) => {
@@ -70,7 +73,12 @@ export default class CurrentAuctionsData {
           auction.currentBid !== freshAuctionBlock.currentBid ||
           auction.hasBeenBidded !== freshAuctionBlock.hasBeenBidded
 
-        if (wasUpdated) updatedCount += 1
+        if (wasUpdated) {
+          updatedAuctions.push({
+            auctionId: freshAuctionBlock.id,
+            currentBid: freshAuctionBlock.currentBid,
+          })
+        }
 
         return {
           ...auction,
@@ -91,9 +99,11 @@ export default class CurrentAuctionsData {
     broadcast(
       `${FILE_NAME} entries were updated (${coloredDiff(
         -removedCount,
-      )} removed and ${coloredDiff(updatedCount)} updated)`,
+      )} removed and ${coloredDiff(updatedAuctions.length)} updated)`,
       'success',
     )
+
+    return updatedAuctions
   }
 
   newAuctionIds(auctionBlocks: AuctionBlock[]): number[] {

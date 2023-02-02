@@ -20,6 +20,9 @@ export default {
       bossTracker: 'Boss Tracker',
       discounts: 'Discounts for {{auctionHighlighting}}',
       auctionHighlighting: 'auction highlighting',
+      bidNotifications:
+        'Track auctions receiving {{notifications}} when they are bidded',
+      notifications: 'notifications',
     },
     filtersTooltip: {
       tc: 'Tibia Coins invested',

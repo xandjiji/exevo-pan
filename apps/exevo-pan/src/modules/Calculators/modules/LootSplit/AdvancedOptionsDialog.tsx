@@ -40,7 +40,7 @@ const AdvancedOptionsDialog = ({
       heading={calculators.LootSplit.advancedOptions}
       className="w-full max-w-[320px] md:max-w-[540px]"
     >
-      <Group className="w-full">
+      <Group>
         <strong className="mb-2">
           {calculators.LootSplit.AdvancedOptionsDialog.addExtraExpenses}:
         </strong>

@@ -85,7 +85,9 @@ const Pitch = ({ proStatus }: PitchProps) => {
                     </div>
                   }
                 >
-                  <strong>{dashboard.Pitch.features.auctionFilters}</strong>
+                  <strong className="underline decoration-dashed underline-offset-4">
+                    {dashboard.Pitch.features.auctionFilters}
+                  </strong>
                 </Tooltip>
               ),
             })}
@@ -106,7 +108,9 @@ const Pitch = ({ proStatus }: PitchProps) => {
                     </TooltipUl>
                   }
                 >
-                  <strong>{dashboard.Pitch.features.bossTracker}</strong>
+                  <strong className="underline decoration-dashed underline-offset-4">
+                    {dashboard.Pitch.features.bossTracker}
+                  </strong>
                 </Tooltip>
               ),
             })}
@@ -115,6 +119,13 @@ const Pitch = ({ proStatus }: PitchProps) => {
             {templateMessage(dashboard.Pitch.features.discounts, {
               auctionHighlighting: (
                 <strong>{dashboard.Pitch.features.auctionHighlighting}</strong>
+              ),
+            })}
+          </Li>
+          <Li>
+            {templateMessage(dashboard.Pitch.features.bidNotifications, {
+              notifications: (
+                <strong>{dashboard.Pitch.features.notifications}</strong>
               ),
             })}
           </Li>

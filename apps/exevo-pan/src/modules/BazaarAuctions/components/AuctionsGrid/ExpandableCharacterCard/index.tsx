@@ -12,18 +12,15 @@ import {
   SearchIcon,
   OutlineAddIcon,
   OutlineRemoveIcon,
+  AlertIcon,
 } from 'assets/svgs'
-import { CharacterCardProps } from 'components/CharacterCard/types'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
-import { useAuctions } from '../../contexts/useAuctions'
-import { getSimilarCharacterFilters } from './utils'
-
-type ExpandableCharacterCardProps = {
-  highlightedAuctions: CharacterObject[]
-  forceNoHighlight?: boolean
-} & Omit<CharacterCardProps, 'ref' | 'highlighted'>
+import { useAuctions } from '../../../contexts/useAuctions'
+import { getSimilarCharacterFilters } from '../utils'
+import { useAuctionNotifications } from '../useAuctionNotifications'
+import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
   highlightedAuctions,
@@ -102,6 +99,8 @@ const ExpandableCharacterCard = ({
     )
   }
 
+  const auctionNotification = useAuctionNotifications()
+
   return (
     <>
       <CharacterCard
@@ -130,6 +129,18 @@ const ExpandableCharacterCard = ({
                   Favorites.toggle(auctionId)
                   shouldAnimateFavIconRef.current = true
                 },
+              },
+              {
+                label: homepage.AuctionsGrid.ExpandableCharacterCard.notify,
+                icon: AlertIcon,
+                onSelect: () =>
+                  auctionNotification.openNotificationsDialog({
+                    auctionId: characterData.id,
+                    auctionEnd: characterData.auctionEnd,
+                    nickname: characterData.nickname,
+                    outfitId: characterData.outfitId,
+                  }),
+                disabled: !auctionNotification.isSupported || props.past,
               },
               {
                 label:

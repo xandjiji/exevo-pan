@@ -30,6 +30,7 @@ export default {
     paymentCharacterInvalidMessage: 'Character does not exist',
     checkoutButtonLabel: 'Validate and submit checkout',
     checkoutButton: 'Checkout',
+    success: 'Your order was placed!',
   },
   PaymentDetails: {
     titleIconLabel: 'Successful checkout',

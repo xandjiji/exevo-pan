@@ -125,5 +125,9 @@ export default {
       shouldTransfer: 'deve transferir',
       to: 'para',
     },
+    toast: {
+      added: 'Sessão salva',
+      removed: 'Sessão removida',
+    },
   },
 }

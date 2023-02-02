@@ -1,5 +1,6 @@
 import { useState, useCallback, useRef } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
@@ -12,7 +13,7 @@ const { BANK_CHARACTER } = advertising
 
 const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
   const {
-    translations: { dashboard },
+    translations: { common, dashboard },
   } = useTranslations()
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
@@ -27,6 +28,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
     },
     onError: () => {
       setRequestStatus('ERROR')
+      toast.error(common.genericError)
     },
     onSuccess: ({ paymentData }) => {
       if (paymentData) {
@@ -35,6 +37,7 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
       }
 
       setRequestStatus('SUCCESSFUL')
+      toast.success(dashboard.PurchaseForm.orderReceived)
     },
   })
 
@@ -92,17 +95,21 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                   label={dashboard.PurchaseForm.paymentCharacterLabel}
                   placeholder={`e.g, '${randomNickname}'`}
                   noAlert
-                  defaultValue={character}
-                  onChange={(e) => setFrom(e.target.value.trim())}
+                  defaultValue={character ?? from}
+                  onChange={(e) => {
+                    setFrom(e.target.value.trim())
+                    setRequestStatus('IDLE')
+                  }}
                   enterKeyHint="send"
                   disabled={isLoading}
+                  error={requestStatus === 'ERROR'}
                 />
                 <Button
                   type="submit"
                   pill
                   className="mb-[1px] py-3"
                   loading={isLoading}
-                  disabled={!from}
+                  disabled={!from || from.length < 2}
                 >
                   {dashboard.PurchaseForm.confirm}
                 </Button>

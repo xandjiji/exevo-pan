@@ -236,4 +236,5 @@ export default {
     currentMonthLabel: 'Mês atual',
     nextMonthLabel: 'Próximo mês',
   },
+  genericError: 'Ops! Algo deu errado',
 }

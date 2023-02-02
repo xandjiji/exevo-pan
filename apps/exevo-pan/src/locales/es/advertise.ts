@@ -32,6 +32,7 @@ export default {
     paymentCharacterInvalidMessage: 'Personaje no existe',
     checkoutButtonLabel: 'Validar y finalizar compra',
     checkoutButton: 'Finalizar',
+    success: '¡Tu compra ha sido enviada!',
   },
   PaymentDetails: {
     titleIconLabel: 'Completado con éxito',

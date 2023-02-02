@@ -1,8 +1,8 @@
 import { broadcast } from 'logging'
-import { RevalidateClient } from 'services'
+import { ExevoPanClient } from 'services'
 import { retryWrapper } from 'utils'
 
-const dispatchRevalidate = retryWrapper(RevalidateClient.route)
+const dispatchRevalidate = retryWrapper(ExevoPanClient.revalidate)
 
 const main = async (): Promise<void> => {
   const [, , route] = process.argv

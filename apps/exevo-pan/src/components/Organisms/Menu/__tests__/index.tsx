@@ -143,7 +143,7 @@ describe('<Menu />', () => {
       assertHighlighted(getItems().b)
 
       userEvent.hover(getItems().disabled)
-      assertHighlighted(getItems().b)
+      assertHighlighted()
     })
 
     test('keyboard', () => {

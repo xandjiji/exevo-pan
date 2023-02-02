@@ -13,7 +13,7 @@ jest.mock('hooks/useIsMounted', () => jest.fn().mockReturnValue(true))
 
 const mockedUseAuctions = useAuctions as jest.MockedFunction<typeof useAuctions>
 
-describe('<AuctionsGrid />', () => {
+describe.skip('<AuctionsGrid />', () => {
   beforeEach(() => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore

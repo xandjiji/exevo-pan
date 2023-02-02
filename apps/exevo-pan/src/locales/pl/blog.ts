@@ -27,6 +27,8 @@ export default {
       alreadyRegistered: 'Ten email jest już zarejestrowany',
       success: 'Dziękuję',
       generic: 'Coś poszło nie tak',
+      /* @ ToDo: i18n */
+      toastSuccess: 'Successfuly subscribed',
     },
   },
   Authors: {

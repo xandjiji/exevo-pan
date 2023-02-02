@@ -18,7 +18,8 @@ const main = async (): Promise<void> => {
   const auctionBlocks = await task.fetchAllAuctionBlocks(pageIndexes)
 
   await auctionData.load()
-  await auctionData.updatePreviousAuctions(auctionBlocks)
+  const biddedAuctions = await auctionData.updatePreviousAuctions(auctionBlocks)
+  await task.notifyBiddedAuctions(biddedAuctions)
 
   const newAuctionIds = auctionData.newAuctionIds(auctionBlocks)
 

@@ -2,6 +2,7 @@ import clsx from 'clsx'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { ChevronRightIcon } from 'assets/svgs'
 import CharacterMiniCard from 'components/CharacterMiniCard'
+import { loadOutfitSrc } from 'utils'
 import { useForm } from '../../../contexts/Form'
 import styles from './styles.module.css'
 import { AuctionItemProps } from './types'
@@ -30,7 +31,7 @@ const AuctionItem = ({
       {...props}
     >
       <CharacterMiniCard
-        outfitSrc={`https://static.tibia.com/images/charactertrade/outfits/${outfitId}.gif`}
+        outfitSrc={loadOutfitSrc(outfitId)}
         characterData={{
           level,
           name: nickname,

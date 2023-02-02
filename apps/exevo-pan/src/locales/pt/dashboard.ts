@@ -21,6 +21,9 @@ export default {
       bossTracker: 'Boss Tracker',
       discounts: 'Descontos para {{auctionHighlighting}}',
       auctionHighlighting: 'destacar leilões',
+      bidNotifications:
+        'Marque um leilão e receba {{notifications}} quando ele receber lances',
+      notifications: 'notificações',
     },
     filtersTooltip: {
       tc: 'Tibia Coins investidos',

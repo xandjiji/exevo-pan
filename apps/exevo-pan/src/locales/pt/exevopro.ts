@@ -28,6 +28,10 @@ export default {
     pitch: 'Descontos para {{strong}}',
     strong: 'destacar leilões',
   },
+  notifications: {
+    pitch: 'Marque um leilão e receba {{strong}} quando ele receber lances',
+    strong: 'notificações',
+  },
   andMore: '...e mais no futuro! 🔮',
   footer: 'Faça upgrade agora para {{exevopro}}',
   no: {

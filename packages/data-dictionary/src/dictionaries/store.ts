@@ -203,6 +203,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Knightly Bed',
     value: 180,
   },
+  'seafarer bed': {
+    name: 'Seafarer Bed',
+    value: 180,
+  },
   /* DECORATIONS */
   'marble tiles': {
     name: 'Marble Floor',
@@ -1532,6 +1536,18 @@ export const storeItems: Record<string, StoreItem> = {
   'wall fern': {
     name: 'Wall Fern',
     value: 50,
+  },
+  'Captain Crab': {
+    name: 'Captain Crab',
+    value: 180,
+  },
+  'seashell lamp': {
+    name: 'Seashell Lamp',
+    value: 80,
+  },
+  'sea-devil wall lamp': {
+    name: 'Sea-devil Wall Lamp',
+    value: 60,
   },
   /* RASCACOON */
   'blue shark trophy': {

@@ -95,6 +95,6 @@ describe('<CharacterCard />', () => {
 
     const { container } = renderWithProviders(<CharacterCard />)
 
-    expect(container.childElementCount).toEqual(0)
+    expect(container.childElementCount).toEqual(1)
   })
 })

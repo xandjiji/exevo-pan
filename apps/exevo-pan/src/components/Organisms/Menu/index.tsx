@@ -22,9 +22,9 @@ const Item = ({
     role="menuitem"
     type="button"
     className={clsx(
-      'disabled:bg-separator/50 text-onSurface flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
+      'disabled:bg-separator/25 text-onSurface flex w-full items-center gap-2.5 px-4 py-2.5 text-left',
       highlighted && 'bg-primaryVariant',
-      !props.disabled && 'cursor-pointer',
+      props.disabled ? 'cursor-not-allowed' : 'cursor-pointer',
       className,
     )}
     {...props}
@@ -130,8 +130,12 @@ const Menu = ({
                   id={menuItemId(index)}
                   tabIndex={-1}
                   highlighted={index === highlightedIndex}
-                  onMouseMove={() =>
-                    dispatch({ type: 'SET_HIGHLIGHTED_INDEX', index })
+                  onPointerMove={() =>
+                    dispatch(
+                      itemProps.disabled
+                        ? { type: 'RESET_HIGHLIGHT' }
+                        : { type: 'SET_HIGHLIGHTED_INDEX', index },
+                    )
                   }
                   onClick={() => {
                     onSelect?.()

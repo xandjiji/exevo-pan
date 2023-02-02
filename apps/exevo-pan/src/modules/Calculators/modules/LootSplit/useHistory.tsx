@@ -1,11 +1,17 @@
 /* eslint-disable prefer-destructuring */
 import { useState, useCallback } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { v4 as uuidv4 } from 'uuid'
+import { toast } from 'react-hot-toast'
 import { useStoredState } from 'hooks'
 import { parse } from './utils'
 import { HistoryEntry, ExtraExpenses } from './types'
 
 const useHistory = () => {
+  const {
+    translations: { calculators },
+  } = useTranslations()
+
   const [list, setList] = useStoredState<HistoryEntry[]>(
     'loot-split-history',
     [],
@@ -14,7 +20,11 @@ const useHistory = () => {
   const [selected, setSelected] = useState<HistoryEntry | undefined>(list[0])
 
   const add = useCallback(
-    (rawData: string, extraExpenses: ExtraExpenses, removedPlayers: string[]) =>
+    (
+      rawData: string,
+      extraExpenses: ExtraExpenses,
+      removedPlayers: string[],
+    ) => {
       setList((prev) =>
         [
           ...prev,
@@ -26,7 +36,10 @@ const useHistory = () => {
             removedPlayers,
           },
         ].sort((a, b) => b.timestamp - a.timestamp),
-      ),
+      )
+
+      toast.success(calculators.LootSplit.toast.added)
+    },
     [setList],
   )
 
@@ -51,6 +64,7 @@ const useHistory = () => {
       })
 
       setSelected(newFirstItem)
+      toast.success(calculators.LootSplit.toast.removed)
     },
     [setList],
   )

@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState, useMemo, useCallback } from 'react'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { debounce } from 'utils'
 import {
@@ -44,14 +45,14 @@ const PaymentList = () => {
     onSuccess: () => {
       list.refetch()
       resetConfirmation()
+      toast.success('User was updated')
     },
+    onError: () => toast.error('Oops! Something went wrong'),
   })
-
-  const isLoading = list.isFetching || updateProOrders.isLoading
 
   return (
     <section>
-      {isLoading && <LoadingAlert>Loading...</LoadingAlert>}
+      {list.isFetching && <LoadingAlert>Loading...</LoadingAlert>}
 
       <Table>
         <div className="mb-4 flex flex-col justify-between gap-2 sm:flex-row">

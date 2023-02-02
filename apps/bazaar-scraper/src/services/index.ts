@@ -1,2 +1,2 @@
 export { default as HttpClient } from './httpClient'
-export { default as RevalidateClient } from './revalidate'
+export { default as ExevoPanClient } from './ExevoPan'
