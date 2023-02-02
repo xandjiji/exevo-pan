@@ -46,6 +46,9 @@ const components = {
   BadAuction: dynamic(
     () => import('modules/Blog/components/Post/custom/HighlightAuctions/bad'),
   ),
+  SampleToast: dynamic(
+    () => import('modules/Blog/components/Post/custom/SampleToast'),
+  ),
 }
 
 type Props = {
