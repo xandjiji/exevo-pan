@@ -11,7 +11,7 @@ export default async (
   response: NextApiResponse,
 ): Promise<void> => {
   const { secret } = request.query
-  const auth = [process.env.REVALIDATION_AUTH, process.env.BACKOFFICE_TOKEN]
+  const auth = [process.env.REVALIDATION_AUTH]
 
   if (!auth.find((key) => key === secret)) {
     response.status(401).json({ message: 'Invalid token' })
