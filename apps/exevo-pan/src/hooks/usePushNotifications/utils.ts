@@ -1,10 +1,18 @@
 import { WorkerStatus } from './types'
 
 const isPushNotificationSupported = () =>
-  'serviceWorker' in navigator && 'PushManager' in window
+  'Notification' in window &&
+  'serviceWorker' in navigator &&
+  'PushManager' in window
+
+const getPermission = (): typeof Notification.permission => {
+  if (isPushNotificationSupported()) return Notification.permission
+
+  return 'default'
+}
 
 export const getWorkerStatus = (): WorkerStatus => ({
-  permission: Notification.permission,
+  permission: getPermission(),
   isSupported: isPushNotificationSupported(),
 })
 
@@ -32,11 +40,14 @@ export const sendClientNotification = async ({
   text: string
   actionUrl?: string
 }) => {
-  if (Notification.permission !== 'granted') return null
-  const worker = await navigator.serviceWorker.ready
-  return worker.showNotification(title, {
-    body: text,
-    icon: iconUrl,
-    data: { url: actionUrl },
-  })
+  if (getPermission() === 'granted') {
+    const worker = await navigator.serviceWorker.ready
+    return worker.showNotification(title, {
+      body: text,
+      icon: iconUrl,
+      data: { url: actionUrl },
+    })
+  }
+
+  return null
 }
