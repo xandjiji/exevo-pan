@@ -60,6 +60,7 @@ model User {
     transactions        Transaction[]
     NotificationDevice  NotificationDevice[]
     auctionNotification AuctionNotification[]
+    GuildMember         GuildMember[]
 }
 
 model NotificationDevice {
@@ -169,4 +170,32 @@ model Transaction {
 
     @@index([userId])
     @@index([highlightedAuctionId])
+}
+
+model Guild {
+    id      String  @id @default(uuid())
+    name    String
+    private Boolean @default(false)
+
+    guildMembers GuildMember[]
+}
+
+enum GUILD_MEMBER_ROLE {
+    ADMIN
+    MODERATOR
+    USER
+}
+
+model GuildMember {
+    id   String            @id @default(uuid())
+    role GUILD_MEMBER_ROLE
+
+    guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId String
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId  String
+
+    @@unique([guildId, userId])
+    @@index([guildId])
+    @@index([userId])
 }
