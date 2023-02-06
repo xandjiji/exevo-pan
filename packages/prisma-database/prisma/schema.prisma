@@ -60,7 +60,7 @@ model User {
     transactions        Transaction[]
     NotificationDevice  NotificationDevice[]
     auctionNotification AuctionNotification[]
-    GuildMember         GuildMember[]
+    guildMembership     GuildMember[]
 }
 
 model NotificationDevice {
@@ -178,6 +178,7 @@ model Guild {
     private Boolean @default(false)
 
     guildMembers GuildMember[]
+    guildInvites GuildInvite[]
 }
 
 enum GUILD_MEMBER_ROLE {
@@ -187,15 +188,31 @@ enum GUILD_MEMBER_ROLE {
 }
 
 model GuildMember {
-    id   String            @id @default(uuid())
-    role GUILD_MEMBER_ROLE
+    id       String            @id @default(uuid())
+    role     GUILD_MEMBER_ROLE
+    joinDate DateTime          @default(now())
 
-    guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId String
-    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId  String
+    guild       Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId     String
+    user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId      String
+    guildInvite GuildInvite?
 
     @@unique([guildId, userId])
     @@index([guildId])
     @@index([userId])
+}
+
+model GuildInvite {
+    id        String   @id @default(uuid())
+    expiresAt DateTime
+
+    guild         Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId       String
+    usedBy        GuildMember? @relation(fields: [guildMemberId], references: [id], onDelete: Cascade)
+    guildMemberId String?      @unique
+
+    @@unique([guildId, guildMemberId])
+    @@index([guildMemberId])
+    @@index([guildId])
 }
