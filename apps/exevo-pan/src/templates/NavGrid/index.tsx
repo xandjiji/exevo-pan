@@ -16,7 +16,7 @@ type NavGridProps = {
 const NavGrid = ({ navItems }: NavGridProps) => (
   <main className="inner-container z-1 pb-4 md:pb-8">
     <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-      {navItems.map(({ title, href, sprite }) => (
+      {navItems.map(({ title, description, href, sprite }) => (
         <li key={title}>
           <NextLink
             href={href}
@@ -34,7 +34,7 @@ const NavGrid = ({ navItems }: NavGridProps) => (
               <h2 className="text-primaryHighlight text-base tracking-wide">
                 {title}
               </h2>
-              <p className="text-tsm font-light">{title}</p>
+              <p className="text-tsm font-light">{description}</p>
             </div>
           </NextLink>
         </li>

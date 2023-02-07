@@ -1,7 +1,7 @@
 import Header from './Header'
 import Footer from './Footer'
 
-type MainProps = { clean?: boolean; children: JSX.Element | JSX.Element[] }
+type MainProps = { clean?: boolean; children: React.ReactNode }
 
 export default ({ clean = false, children }: MainProps) => (
   <div className="flex min-h-screen flex-col">
