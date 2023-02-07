@@ -2,7 +2,7 @@ import { useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import type { NavItem } from 'templates'
 import { routes as ROUTES } from 'Constants'
-import { WeightIcon } from 'assets/svgs'
+import { GpsIcon, GroupIcon } from 'assets/svgs'
 
 type BossRoute = NavItem & { hero: string }
 
@@ -13,15 +13,15 @@ export const useRoutes = (): BossRoute[] =>
 
     return [
       {
-        title: 'Tracker',
+        title: 'Boss Tracker',
         href: ROUTES.BOSSES.TRACKER,
-        icon: <WeightIcon />,
+        icon: <GpsIcon />,
         hero: `${ROUTES.CALCULATORS}/exercise-weapons-hero.png`,
       },
       {
-        title: 'Guilds',
+        title: 'Hunting Groups',
         href: ROUTES.BOSSES.GUILDS,
-        icon: <WeightIcon />,
+        icon: <GroupIcon />,
         hero: `${ROUTES.CALCULATORS}/exercise-weapons-hero.png`,
       },
     ]
