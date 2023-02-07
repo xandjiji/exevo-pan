@@ -5,6 +5,6 @@ export type HeaderProps = {
 export type NavItem = {
   href: string
   exact?: boolean
-  icon: React.ReactElement
+  icon: JSX.Element
   title: string
 }
