@@ -176,6 +176,7 @@ model Transaction {
 model Guild {
     id      String  @id @default(uuid())
     name    String
+    server  String
     private Boolean @default(false)
 
     guildMembers      GuildMember[]
@@ -191,6 +192,7 @@ enum GUILD_MEMBER_ROLE {
 
 model GuildMember {
     id       String            @id @default(uuid())
+    name     String
     role     GUILD_MEMBER_ROLE
     joinedAt DateTime          @default(now())
 
