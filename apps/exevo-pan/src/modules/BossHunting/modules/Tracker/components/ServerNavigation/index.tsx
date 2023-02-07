@@ -23,7 +23,7 @@ const ServerNavigation = ({
     () =>
       debounce(
         (e: React.ChangeEvent<HTMLInputElement>) =>
-          push(`${routes.BOSS_TRACKER}/${e.target.value}`),
+          push(`${routes.BOSSES.TRACKER}/${e.target.value}`),
         DEBOUNCE_DELAY,
       ),
     [],

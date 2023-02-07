@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient, BossesClient } from 'services/server'
-import { GetStaticPaths, GetStaticProps } from 'next'
+import { GetStaticProps } from 'next'
 import { Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
@@ -21,14 +21,14 @@ const MAX_RECENTLY_KILLED_TIME_DIFF = 2 * MILLISECONDS_IN.DAY
 
 export default function BossTrackerPage(args: BossTrackerProps) {
   const { bossChances } = args
-  const pagePath = `${routes.BOSS_TRACKER}/${bossChances.server}`
+  const pagePath = `${routes.BOSSES.TRACKER}/${bossChances.server}`
   const pageUrl = buildUrl(pagePath)
 
   const { translations } = useTranslations()
 
   const pageName = translations.bosses.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
-    title: `${pageName} ${bossChances.server}`,
+    title: pageName,
     imgSrc: heroSrc,
   })
 
@@ -85,8 +85,8 @@ export default function BossTrackerPage(args: BossTrackerProps) {
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { server } = params as { server: string }
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const server = 'Antica'
 
   const [serverOptions, bossChances] = await Promise.all([
     await DrawerFieldsClient.fetchActiveServerOptions(),
@@ -118,27 +118,5 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       },
       locale,
     },
-  }
-}
-
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-  const activeServerOptions =
-    await DrawerFieldsClient.fetchActiveServerOptions()
-
-  const activeServers = activeServerOptions.map(({ name }) => name)
-
-  const paths =
-    locales
-      ?.map((locale) =>
-        activeServers.map((server) => ({
-          params: { server },
-          locale,
-        })),
-      )
-      .flat() ?? []
-
-  return {
-    paths,
-    fallback: false,
   }
 }
