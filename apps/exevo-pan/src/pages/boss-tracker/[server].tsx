@@ -3,7 +3,7 @@ import { Main } from 'templates'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient, BossesClient } from 'services/server'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import BossTracker, { heroSrc } from 'modules/BossTracker'
+import { Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { routes, jsonld, premiumBosses } from 'Constants'
@@ -14,6 +14,8 @@ type BossTrackerProps = {
   bossChances: BossChances
   recentlyAppeared: BossStats[]
 }
+
+const { heroSrc } = Tracker
 
 const MAX_RECENTLY_KILLED_TIME_DIFF = 2 * MILLISECONDS_IN.DAY
 
@@ -77,7 +79,7 @@ export default function BossTrackerPage(args: BossTrackerProps) {
       </Head>
 
       <Main>
-        <BossTracker {...args} />
+        <Tracker {...args} />
       </Main>
     </>
   )

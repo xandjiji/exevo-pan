@@ -3,7 +3,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { loadRawSrc, MILLISECONDS_IN } from 'utils'
 import { ServerNavigation, BossGrid, RecentlyAppeared } from './components'
 
-export const heroSrc = loadRawSrc('/bosses.png')
+const heroSrc = loadRawSrc('/bosses.png')
 
 type BossTrackerProps = {
   serverOptions: Option[]
@@ -11,7 +11,7 @@ type BossTrackerProps = {
   recentlyAppeared: BossStats[]
 }
 
-const BossTracker = ({
+const Tracker = ({
   serverOptions,
   bossChances,
   recentlyAppeared,
@@ -62,4 +62,6 @@ const BossTracker = ({
   )
 }
 
-export default BossTracker
+Tracker.heroSrc = heroSrc
+
+export default Tracker
