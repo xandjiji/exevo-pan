@@ -56,6 +56,7 @@ const Tracker = ({
         title={bosses.Meta.title}
         offset
         subtitle={subtitle}
+        className="md:-mb-16"
       />
 
       <Select
@@ -64,11 +65,11 @@ const Tracker = ({
         defaultValue={bossChances.server}
         onChange={debouncedNav}
         noAlert
-        className="md:max-w-[160px]"
+        className="z-[53] md:max-w-[160px]"
       />
 
       <div className="grid items-start gap-8 md:relative md:flex md:flex-row-reverse md:gap-16 lg:gap-8">
-        <div className="shrink-0 md:sticky md:top-[134px] md:w-[320px]">
+        <div className="shrink-0 pt-4 md:sticky md:top-[104px] md:w-[320px]">
           <RecentlyAppeared bosses={recentlyAppeared} />
         </div>
 

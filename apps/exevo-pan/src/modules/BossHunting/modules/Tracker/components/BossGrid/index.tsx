@@ -74,7 +74,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
 
   return (
     <section className={clsx('flex flex-col gap-4', className)} {...props}>
-      <div className="bg-background z-above-tooltip after:bg-background after:-z-1 sticky top-[120px] -mb-3 -mt-6 pb-3 pt-6 after:absolute after:-left-2 after:top-0 after:h-full after:w-[calc(100%_+_16px)]">
+      <div className="bg-background z-above-tooltip sticky top-[104px] py-3 md:pt-5">
         <ChipGroup
           label={translations.bosses.BossGrid.listBosses}
           options={listOptions}
@@ -83,11 +83,15 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
         />
         <div
           role="none"
-          className="z-2 from-background pointer-events-none absolute -bottom-4 -left-2 h-6 w-[calc(100%_+_16px)] bg-gradient-to-b to-transparent"
+          className="z-2 from-background pointer-events-none absolute top-full -left-2 h-6 w-[calc(100%_+_16px)] bg-gradient-to-b to-transparent"
+        />
+        <div
+          role="none"
+          className="-z-1 bg-background absolute top-0 -left-2 h-full w-[calc(100%_+_16px)]"
         />
       </div>
 
-      <p className="text-tsm mt-2">
+      <p className="text-tsm">
         {templateMessage(translations.bosses.BossGrid.exclusiveBosses, {
           exevopro: (
             <NextLink href={routes.EXEVOPRO} className="text-rare font-bold">
