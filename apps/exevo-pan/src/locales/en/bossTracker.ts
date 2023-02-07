@@ -19,7 +19,7 @@ export default {
     ago: 'ago',
   },
   BossGrid: {
-    listBosses: 'List bosses by',
+    listBosses: 'List bosses by:',
     exclusiveBosses: 'Exclusive {{exevopro}} bosses 🕵️',
     EmptyState: 'No bosses',
     listOptions: {
