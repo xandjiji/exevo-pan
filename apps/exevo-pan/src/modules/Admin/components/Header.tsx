@@ -2,7 +2,6 @@ import { memo } from 'react'
 import { SubHeader } from 'templates'
 import { routes } from 'Constants'
 import { ApproveUserIcon, AdvertiseIcon, BlogIcon } from 'assets/svgs'
-import * as S from 'assets/svgs'
 
 const navItems = [
   {
