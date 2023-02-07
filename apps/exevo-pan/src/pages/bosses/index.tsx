@@ -1,45 +1,37 @@
 import Head from 'next/head'
 import { PreviewImageClient } from 'services'
+import { DrawerFieldsClient, BossesClient } from 'services/server'
 import { GetStaticProps } from 'next'
-import { Template } from 'modules/BossHunting'
-import { Hero, NavGrid } from 'templates'
-import type { NavGridItem } from 'templates'
+import { Template, Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
-import { jsonld, routes } from 'Constants'
+import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
+import { routes, jsonld, premiumBosses } from 'Constants'
 import { common, bosses } from 'locales'
 
-const pagePath = routes.BOSSES.MAIN
-const heroSrc = loadRawSrc('/bosses.png')
+type BossTrackerProps = {
+  serverOptions: Option[]
+  bossChances: BossChances
+  recentlyAppeared: BossStats[]
+}
 
-export default function BossHunting() {
+const { heroSrc } = Tracker
+
+const MAX_RECENTLY_KILLED_TIME_DIFF = 2 * MILLISECONDS_IN.DAY
+
+export default function BossTrackerPage(args: BossTrackerProps) {
+  const { bossChances } = args
+  const pagePath = `${routes.BOSSES.TRACKER}/${bossChances.server}`
   const pageUrl = buildUrl(pagePath)
 
   const { translations } = useTranslations()
 
-  /* const pageName = translations.bosses.Meta.title */
-  const pageName = 'Boss Hunting'
-  /* const previewSrc = PreviewImageClient.getSrc({
+  const pageName = translations.bosses.Meta.title
+  const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
     imgSrc: heroSrc,
-  }) */
+  })
 
   const pageTitle = buildPageTitle(pageName)
-
-  const navItems: NavGridItem[] = [
-    {
-      href: routes.BOSSES.TRACKER,
-      sprite: '/sprites/store/lasting exercise sword.gif',
-      title: 'Tracker',
-      description: 'Tracker description',
-    },
-    {
-      href: routes.BOSSES.GUILDS,
-      sprite: '/sprites/store/lasting exercise sword.gif',
-      title: 'Guilds',
-      description: 'Guilds description',
-    },
-  ]
 
   return (
     <>
@@ -49,7 +41,7 @@ export default function BossHunting() {
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        {/* <meta
+        <meta
           name="description"
           content={translations.bosses.Meta.description}
         />
@@ -60,11 +52,11 @@ export default function BossHunting() {
         <meta
           property="og:description"
           content={translations.bosses.Meta.description}
-        /> */}
+        />
         <meta property="og:type" content="website" />
 
-        {/* <meta key="preview-1" property="og:image" content={previewSrc} />
-        <meta key="preview-2" property="twitter:image" content={previewSrc} /> */}
+        <meta key="preview-1" property="og:image" content={previewSrc} />
+        <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
         <link rel="canonical" href={pageUrl} />
         <meta property="og:url" content={pageUrl} />
@@ -86,19 +78,44 @@ export default function BossHunting() {
       </Head>
 
       <Template>
-        <Hero offset title="Boss Hunting" src={heroSrc} />
-        <NavGrid navItems={navItems} />
+        <Tracker {...args} />
       </Template>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    translations: {
-      common: common[locale as RegisteredLocale],
-      bosses: bosses[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const server = 'Antica'
+
+  const [serverOptions, bossChances] = await Promise.all([
+    await DrawerFieldsClient.fetchActiveServerOptions(),
+    await BossesClient.fetchServerBossChances(server),
+  ])
+
+  const freeBossChances: BossChances = {
+    ...bossChances,
+    bosses: [
+      ...premiumBosses.fallbackData,
+      ...bossChances.bosses.filter(({ name }) => !premiumBosses.set.has(name)),
+    ].sort(sortBossesBy.chance),
+  }
+
+  return {
+    props: {
+      serverOptions,
+      bossChances: freeBossChances,
+      recentlyAppeared: bossChances.bosses
+        .filter(({ lastAppearence }) => {
+          if (!lastAppearence) return false
+
+          return +new Date() - lastAppearence <= MAX_RECENTLY_KILLED_TIME_DIFF
+        })
+        .sort(sortBossesBy.recentlyAppeared),
+      translations: {
+        common: common[locale as RegisteredLocale],
+        bosses: bosses[locale as RegisteredLocale],
+      },
+      locale,
     },
-    locale,
-  },
-})
+  }
+}

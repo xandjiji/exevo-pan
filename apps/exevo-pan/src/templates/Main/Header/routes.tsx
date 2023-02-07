@@ -17,7 +17,7 @@ export const NavItems: NavItem[] = [
     title: 'charBazaar',
   },
   {
-    href: routes.BOSSES.MAIN,
+    href: routes.BOSSES.TRACKER,
     icon: <GoblinIcon />,
     title: 'bossTracker',
   },

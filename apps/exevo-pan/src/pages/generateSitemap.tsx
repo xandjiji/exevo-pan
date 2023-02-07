@@ -68,11 +68,6 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     changefreq: 'monthly',
   })}
   ${XmlTemplate({
-    route: routes.BOSSES.MAIN,
-    date: TODAY,
-    changefreq: 'monthly',
-  })}
-  ${XmlTemplate({
     route: routes.BOSSES.TRACKER,
     date: TODAY,
     changefreq: 'daily',

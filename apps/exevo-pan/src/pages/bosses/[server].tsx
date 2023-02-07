@@ -1,9 +1,8 @@
 import Head from 'next/head'
-import { Main } from 'templates'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient, BossesClient } from 'services/server'
 import { GetStaticPaths, GetStaticProps } from 'next'
-import { Tracker } from 'modules/BossHunting'
+import { Template, Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { routes, jsonld, premiumBosses } from 'Constants'
@@ -78,9 +77,9 @@ export default function BossTrackerPage(args: BossTrackerProps) {
         />
       </Head>
 
-      <Main>
+      <Template>
         <Tracker {...args} />
-      </Main>
+      </Template>
     </>
   )
 }
