@@ -84,7 +84,7 @@ const LootSplit = () => {
   })
 
   return (
-    <main className="inner-container mx-auto flex w-full flex-col justify-center gap-6 py-14 sm:max-w-[474px] md:max-w-[unset] md:flex-row md:items-start md:pt-0">
+    <div className="mx-auto flex w-full flex-col justify-center gap-6 py-10 sm:max-w-[474px] md:max-w-[unset] md:flex-row md:items-start md:pt-0">
       <Tabs.Group
         onChange={useCallback(
           (tabIndex: number) => setIsHistory(tabIndex === 1),
@@ -285,7 +285,7 @@ const LootSplit = () => {
         removedPlayers={new Set(selected?.removedPlayers)}
         onClose={() => setSessionDialog(false)}
       />
-    </main>
+    </div>
   )
 }
 

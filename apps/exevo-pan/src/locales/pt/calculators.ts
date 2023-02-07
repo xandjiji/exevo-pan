@@ -30,14 +30,6 @@ export default {
       description: 'Gerencie e divida o loot das suas hunts em party',
     },
   },
-  Header: {
-    Main: 'Principal',
-    ExerciseWeapons: 'Exercise weapons',
-    CharmDamage: 'Charm Damage',
-    Stamina: 'Stamina',
-    ImbuementsCost: 'Custo de Imbuements',
-    LootSplit: 'Dividir Loot',
-  },
   none: 'Nenhum',
   ExerciseWeapons: {
     labels: {

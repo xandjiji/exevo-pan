@@ -29,14 +29,6 @@ export default {
       description: 'Manage and split your party hunt loots',
     },
   },
-  Header: {
-    Main: 'Main',
-    ExerciseWeapons: 'Exercise weapons',
-    CharmDamage: 'Charm Damage',
-    Stamina: 'Stamina',
-    ImbuementsCost: 'Imbuements Cost',
-    LootSplit: 'Loot Split',
-  },
   none: 'None',
   ExerciseWeapons: {
     labels: {

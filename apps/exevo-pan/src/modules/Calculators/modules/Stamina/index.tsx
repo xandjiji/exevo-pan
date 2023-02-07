@@ -12,7 +12,6 @@ import StaminaBar from './StaminaBar'
 import TrackCard from './TrackCard'
 import useTracking from './useTracking'
 import { calculateSecondsToRegenerate } from './utils'
-import { Main } from '../../components'
 
 const Stamina = () => {
   const {
@@ -41,7 +40,7 @@ const Stamina = () => {
   const { list, action } = useTracking()
 
   return (
-    <Main className="md:child:shrink-0 items-start gap-6 md:flex">
+    <>
       <LabeledCard labelText="Stamina" className="md:sticky md:top-[130px]">
         <div className="grid grid-cols-[1fr_24px_1fr] items-end gap-2">
           <TimeInput
@@ -111,7 +110,7 @@ const Stamina = () => {
           />
         )}
       </ClientComponent>
-    </Main>
+    </>
   )
 }
 

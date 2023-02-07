@@ -1,11 +1,5 @@
 import Head from 'next/head'
-import { Main, Hero } from 'templates'
-import {
-  Main as CalculatorMain,
-  Header,
-  CharmDamage,
-  pages,
-} from 'modules/Calculators'
+import { Template, CharmDamage, useRoutes } from 'modules/Calculators'
 import SuggestedReading from 'components/SuggestedReading'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -14,8 +8,8 @@ import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
-const pageUrl = buildUrl(routes.CHARM_DAMAGE)
-const { hero } = pages.CharmDamage
+const pageRoute = routes.CHARM_DAMAGE
+const pageUrl = buildUrl(pageRoute)
 
 type CalculatorProps = {
   suggestedPost: BlogPost
@@ -28,9 +22,12 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
 
   const pageTitle = buildPageTitle(pageName)
 
+  const { getRoute } = useRoutes()
+  const routeData = getRoute(pageRoute)
+
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
-    imgSrc: loadRawSrc(hero),
+    imgSrc: routeData ? loadRawSrc(routeData.hero) : undefined,
   })
 
   return (
@@ -63,21 +60,9 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
         <meta property="twitter:url" content={pageUrl} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
-        <link
-          rel="alternate"
-          hrefLang="pt"
-          href={buildUrl(routes.CHARM_DAMAGE, 'pt')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="es"
-          href={buildUrl(routes.CHARM_DAMAGE, 'es')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="pl"
-          href={buildUrl(routes.CHARM_DAMAGE, 'pl')}
-        />
+        <link rel="alternate" hrefLang="pt" href={buildUrl(pageRoute, 'pt')} />
+        <link rel="alternate" hrefLang="es" href={buildUrl(pageRoute, 'es')} />
+        <link rel="alternate" hrefLang="pl" href={buildUrl(pageRoute, 'pl')} />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <script
@@ -89,20 +74,18 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
         />
       </Head>
 
-      <Main>
-        <Header />
-        <Hero title={pageName} src={hero} offset />
+      <Template
+        currentRoute={pageRoute}
+        className="child:max-w-fit child:mx-auto gap-8"
+      >
+        <CharmDamage />
 
-        <CalculatorMain className="child:max-w-fit child:mx-auto gap-8">
-          <CharmDamage />
-
-          <SuggestedReading
-            thumbnail={suggestedPost.thumbnail}
-            title={suggestedPost.title}
-            slug={suggestedPost.slug}
-          />
-        </CalculatorMain>
-      </Main>
+        <SuggestedReading
+          thumbnail={suggestedPost.thumbnail}
+          title={suggestedPost.title}
+          slug={suggestedPost.slug}
+        />
+      </Template>
     </>
   )
 }
