@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Boss Tracker',
+    title: 'Bosses',
     description: 'Descubra onde e quando bosses irão nascer!',
   },
   updated: {

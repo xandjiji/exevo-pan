@@ -33,7 +33,7 @@ export default {
       about: 'Sobre',
       advertise: 'Anunciar',
       blog: 'Blog',
-      bossTracker: 'Boss Tracker',
+      bossTracker: 'Bosses',
       exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Habilitar tema nocturno',

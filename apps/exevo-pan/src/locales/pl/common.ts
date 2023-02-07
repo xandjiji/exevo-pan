@@ -31,7 +31,7 @@ export default {
       about: 'O nas',
       advertise: 'Zareklamuj się',
       blog: 'Blog',
-      bossTracker: 'Boss Tracker',
+      bossTracker: 'Bosses',
       exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Przełącz na tryb ciemny',
