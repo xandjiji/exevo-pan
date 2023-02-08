@@ -181,6 +181,8 @@ model Guild {
     description  String?  @db.Text
     messageBoard String?  @db.Text
     createdAt    DateTime @default(now())
+    avatarId     Int
+    avatarDegree Int
 
     guildMembers      GuildMember[]
     guildInvites      GuildInvite[]
