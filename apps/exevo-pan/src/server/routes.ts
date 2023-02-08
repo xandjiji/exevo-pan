@@ -10,6 +10,7 @@ import * as auctionHighlights from './admin/auctionHighlights'
 import { revalidatePage } from './admin/revalidatePage'
 import * as notifyAdmin from './admin/notifyAdmin'
 import { notifyUser } from './admin/notifyUser'
+import * as guildCrud from './guild/crud'
 import { registerNotificationDevice } from './registerNotificationDevice'
 import { registerAuctionNotification } from './registerAuctionNotification'
 
@@ -28,4 +29,5 @@ export const routes = {
   ...auctionHighlights,
   ...highlightRevenue,
   ...notifyAdmin,
+  ...guildCrud,
 }

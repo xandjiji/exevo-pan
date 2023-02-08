@@ -1,5 +1,6 @@
 export * from './about'
 export * from './account'
+export * from './add'
 export * from './addPost'
 export * from './advertise'
 export * from './alert'

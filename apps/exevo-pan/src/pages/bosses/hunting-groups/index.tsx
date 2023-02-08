@@ -1,9 +1,13 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { Hero } from 'templates'
 import { Template } from 'modules/BossHunting'
+import { Button } from 'components/Atoms'
+import { CreateGuildDialog } from 'modules/BossHunting/modules/HuntingGroups'
+import { AddIcon } from 'assets/svgs'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -25,6 +29,8 @@ export default function HuntingGroupsPage() {
   })
 
   const pageTitle = buildPageTitle(pageName)
+
+  const [isOpen, setOpen] = useState(false)
 
   return (
     <>
@@ -73,6 +79,17 @@ export default function HuntingGroupsPage() {
 
       <Template>
         <Hero offset src={heroSrc} title={pageName} />
+
+        <div className="inner-container">
+          <Button
+            onClick={() => setOpen(true)}
+            className="flex items-center gap-1.5"
+          >
+            <AddIcon className="-ml-2.5" />
+            Create group
+          </Button>
+          {isOpen && <CreateGuildDialog onClose={() => setOpen(false)} />}
+        </div>
       </Template>
     </>
   )
