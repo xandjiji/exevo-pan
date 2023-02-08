@@ -6,7 +6,7 @@ import { Template, Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
 import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { routes, jsonld, premiumBosses } from 'Constants'
-import { common, bosses } from 'locales'
+import { common, bosses, bossTracker } from 'locales'
 
 type BossTrackerProps = {
   serverOptions: Option[]
@@ -25,7 +25,7 @@ export default function BossTrackerPage(args: BossTrackerProps) {
 
   const { translations } = useTranslations()
 
-  const pageName = translations.bosses.Meta.title
+  const pageName = translations.bossTracker.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
     imgSrc: heroSrc,
@@ -43,15 +43,15 @@ export default function BossTrackerPage(args: BossTrackerProps) {
 
         <meta
           name="description"
-          content={translations.bosses.Meta.description}
+          content={translations.bossTracker.Meta.description}
         />
         <meta
           property="twitter:description"
-          content={translations.bosses.Meta.description}
+          content={translations.bossTracker.Meta.description}
         />
         <meta
           property="og:description"
-          content={translations.bosses.Meta.description}
+          content={translations.bossTracker.Meta.description}
         />
         <meta property="og:type" content="website" />
 
@@ -114,6 +114,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],
+        bossTracker: bossTracker[locale as RegisteredLocale],
       },
       locale,
     },

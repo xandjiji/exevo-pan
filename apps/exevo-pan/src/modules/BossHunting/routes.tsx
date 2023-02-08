@@ -6,23 +6,26 @@ import { GpsIcon, GroupIcon } from 'assets/svgs'
 
 type BossRoute = NavItem & { hero: string }
 
-export const useRoutes = (): BossRoute[] =>
-  useMemo(() => {
-    /* const {} = useTranslations() */
-    console.log(9)
+export const useRoutes = (): BossRoute[] => {
+  const {
+    translations: { bosses },
+  } = useTranslations()
 
-    return [
+  return useMemo(
+    () => [
       {
-        title: 'Boss Tracker',
+        title: bosses.Header.bossTracker,
         href: ROUTES.BOSSES.TRACKER,
         icon: <GpsIcon />,
         hero: `${ROUTES.CALCULATORS}/exercise-weapons-hero.png`,
       },
       {
-        title: 'Hunting Groups',
+        title: bosses.Header.huntingGroups,
         href: ROUTES.BOSSES.GUILDS,
         icon: <GroupIcon />,
         hero: `${ROUTES.CALCULATORS}/exercise-weapons-hero.png`,
       },
-    ]
-  }, [])
+    ],
+    [bosses],
+  )
+}

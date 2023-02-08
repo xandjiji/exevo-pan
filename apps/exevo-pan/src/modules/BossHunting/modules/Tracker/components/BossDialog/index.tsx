@@ -17,7 +17,7 @@ const Section = ({ className, ...props }: JSX.IntrinsicElements['section']) => (
 
 const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
   const {
-    translations: { bosses },
+    translations: { bossTracker },
   } = useTranslations()
 
   const info = useMemo(
@@ -41,7 +41,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
       <div className="custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto pt-3 pr-4 sm:w-[70vw] sm:max-w-[606px]">
         {!!info?.loot && (
           <Section>
-            <h3>{bosses.BossGrid.BossDialog.loot}</h3>
+            <h3>{bossTracker.BossGrid.BossDialog.loot}</h3>
 
             <div className="flex flex-wrap gap-1.5">
               {info.loot.map((item) => (
@@ -59,7 +59,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
 
         {!!info?.raidMessages && (
           <Section>
-            <h3>{bosses.BossGrid.BossDialog.raidMessages}</h3>
+            <h3>{bossTracker.BossGrid.BossDialog.raidMessages}</h3>
 
             <ul className="grid gap-1">
               {info.raidMessages.map(({ style, time, message }) => (
@@ -67,7 +67,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                   key={message}
                   title={
                     style === 'HIGHLIGHT'
-                      ? bosses.BossGrid.BossDialog.bossWillSpawn
+                      ? bossTracker.BossGrid.BossDialog.bossWillSpawn
                       : undefined
                   }
                 >
@@ -93,8 +93,8 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
           <Section>
             <h3>
               {info.locations.length > 1
-                ? bosses.BossGrid.BossDialog.locations
-                : bosses.BossGrid.BossDialog.location}
+                ? bossTracker.BossGrid.BossDialog.locations
+                : bossTracker.BossGrid.BossDialog.location}
             </h3>
 
             <ul className="grid gap-5">
@@ -107,8 +107,9 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                   />
                   {!!description && (
                     <caption className="text-tsm">
-                      {bosses.BossGrid.BossDialog.descriptions[description] ??
-                        description}
+                      {bossTracker.BossGrid.BossDialog.descriptions[
+                        description
+                      ] ?? description}
                     </caption>
                   )}
                 </li>
@@ -116,7 +117,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
             </ul>
 
             <strong className="text-right" style={{ fontSize: 10 }}>
-              {bosses.BossGrid.BossDialog.using}{' '}
+              {bossTracker.BossGrid.BossDialog.using}{' '}
               <a
                 href={links.TIBIAMAPS}
                 rel="noreferrer external nofollow"

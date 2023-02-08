@@ -17,7 +17,7 @@ const RecentlyAppeared = ({
   return (
     <section className={clsx('grid gap-4', className)} {...props}>
       <h3 className="text-2xl font-normal">
-        {translations.bosses.RecentlyAppeared.title}
+        {translations.bossTracker.RecentlyAppeared.title}
       </h3>
 
       <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-2">
@@ -30,7 +30,7 @@ const RecentlyAppeared = ({
                 hoursSinceItAppeared > 1
                   ? translations.common.hours
                   : translations.common.hour
-              } ${translations.bosses.RecentlyAppeared.ago}`}
+              } ${translations.bossTracker.RecentlyAppeared.ago}`}
               className={clsx(
                 'flex items-center gap-2',
                 hoursSinceItAppeared >= OLDER_THRESHOLD && 'opacity-40',

@@ -17,7 +17,7 @@ const BossCard = ({
   ...props
 }: BossCardProps) => {
   const {
-    translations: { common, bosses },
+    translations: { common, bossTracker },
   } = useTranslations()
 
   const {
@@ -73,33 +73,33 @@ const BossCard = ({
                   content={
                     <div className="grid gap-2">
                       <p>
-                        {bosses.BossGrid.BossCard.thisCreatureHas}{' '}
+                        {bossTracker.BossGrid.BossCard.thisCreatureHas}{' '}
                         <strong>{daysLeftForPossibleSpawns.length}</strong>{' '}
-                        {bosses.BossGrid.BossCard.differentSpawnLocations}
+                        {bossTracker.BossGrid.BossCard.differentSpawnLocations}
                       </p>
 
                       <p>
                         {isAvailable ? (
                           <>
-                            {bosses.BossGrid.BossCard.itIs}{' '}
+                            {bossTracker.BossGrid.BossCard.itIs}{' '}
                             <strong className="text-green">
-                              {bosses.BossGrid.BossCard.possible}
+                              {bossTracker.BossGrid.BossCard.possible}
                             </strong>{' '}
-                            {bosses.BossGrid.BossCard.toSpawn}
+                            {bossTracker.BossGrid.BossCard.toSpawn}
                           </>
                         ) : (
                           <>
-                            {bosses.BossGrid.BossCard.thereAre}{' '}
+                            {bossTracker.BossGrid.BossCard.thereAre}{' '}
                             <strong className="text-red">
                               {daysLeft} {common[daysLeft > 1 ? 'days' : 'day']}{' '}
-                              {bosses.BossGrid.BossCard.left}
+                              {bossTracker.BossGrid.BossCard.left}
                             </strong>{' '}
-                            {bosses.BossGrid.BossCard.before}
+                            {bossTracker.BossGrid.BossCard.before}
                           </>
                         )}
                       </p>
 
-                      <p>{bosses.BossGrid.BossCard.itsUpToYou} 🕵️‍♂️</p>
+                      <p>{bossTracker.BossGrid.BossCard.itsUpToYou} 🕵️‍♂️</p>
                     </div>
                   }
                 >
@@ -111,7 +111,7 @@ const BossCard = ({
         ) : (
           <>
             <small
-              title={bosses.BossGrid.BossCard.chanceToSpawn}
+              title={bossTracker.BossGrid.BossCard.chanceToSpawn}
               className={clsx(
                 'text-tsm',
                 {
@@ -124,8 +124,8 @@ const BossCard = ({
             >
               {
                 {
-                  UNKNOWN: bosses.BossGrid.BossCard.unknown,
-                  ZERO: bosses.BossGrid.BossCard.noChance,
+                  UNKNOWN: bossTracker.BossGrid.BossCard.unknown,
+                  ZERO: bossTracker.BossGrid.BossCard.noChance,
                   POSSIBLE: chancePercent,
                   LIKELY: chancePercent,
                 }[chanceClass]
@@ -134,7 +134,7 @@ const BossCard = ({
 
             {expectedIn && (
               <small className="text-onSurface text-xs font-light">
-                {bosses.BossGrid.BossCard.expectedIn}:{' '}
+                {bossTracker.BossGrid.BossCard.expectedIn}:{' '}
                 <span className="font-normal">
                   {expectedIn} {common[expectedIn > 1 ? 'days' : 'day']}
                 </span>
@@ -146,7 +146,7 @@ const BossCard = ({
 
       <button
         type="button"
-        aria-label={bosses.BossGrid.BossCard[pinned ? 'unpin' : 'pin']}
+        aria-label={bossTracker.BossGrid.BossCard[pinned ? 'unpin' : 'pin']}
         className="clickable ml-auto grid place-items-center self-start rounded p-1"
         onClick={(e) => {
           e.stopPropagation()

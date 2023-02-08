@@ -38,10 +38,15 @@ import calculatorsES from './es/calculators'
 import calculatorsPT from './pt/calculators'
 import calculatorsPL from './pl/calculators'
 
-import bossesEN from './en/bossTracker'
-import bossesES from './es/bossTracker'
-import bossesPT from './pt/bossTracker'
-import bossesPL from './pl/bossTracker'
+import bossesEN from './en/bosses'
+import bossesES from './es/bosses'
+import bossesPT from './pt/bosses'
+import bossesPL from './pl/bosses'
+
+import bossTrackerEN from './en/bossTracker'
+import bossTrackerES from './es/bossTracker'
+import bossTrackerPT from './pt/bossTracker'
+import bossTrackerPL from './pl/bossTracker'
 
 import loginEN from './en/login'
 import loginES from './es/login'
@@ -111,6 +116,12 @@ export const bosses = {
   es: bossesES,
   pt: bossesPT,
   pl: bossesPL,
+}
+export const bossTracker = {
+  en: bossTrackerEN,
+  es: bossTrackerES,
+  pt: bossTrackerPT,
+  pl: bossTrackerPL,
 }
 export const login = {
   en: loginEN,

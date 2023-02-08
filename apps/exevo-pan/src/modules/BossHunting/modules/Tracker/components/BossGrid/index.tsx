@@ -49,11 +49,11 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
 
   const listOptions: TypedOption<ListOption>[] = [
     {
-      name: `🍀 ${translations.bosses.BossGrid.listOptions.chance}`,
+      name: `🍀 ${translations.bossTracker.BossGrid.listOptions.chance}`,
       value: 'chance',
     },
     {
-      name: `✓ ${translations.bosses.BossGrid.listOptions.lastSeen}`,
+      name: `✓ ${translations.bossTracker.BossGrid.listOptions.lastSeen}`,
       value: 'recent',
     },
     { name: '️‍🔥 PoI', value: 'POI' },
@@ -61,7 +61,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
     { name: '☠️ Archdemons', value: 'archdemons' },
     { name: '🐥 Rookgaard', value: 'rook' },
     {
-      name: `📌 ${translations.bosses.BossGrid.listOptions.favorites}`,
+      name: `📌 ${translations.bossTracker.BossGrid.listOptions.favorites}`,
       value: 'pinned',
     },
   ]
@@ -76,7 +76,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
     <section className={clsx('flex flex-col gap-4', className)} {...props}>
       <div className="bg-background z-above-tooltip sticky top-[104px] py-3 md:pt-5">
         <ChipGroup
-          label={translations.bosses.BossGrid.listBosses}
+          label={translations.bossTracker.BossGrid.listBosses}
           options={listOptions}
           value={listingOption}
           onChange={(e) => setListingOption(e.target.value as ListOption)}
@@ -92,7 +92,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
       </div>
 
       <p className="text-tsm">
-        {templateMessage(translations.bosses.BossGrid.exclusiveBosses, {
+        {templateMessage(translations.bossTracker.BossGrid.exclusiveBosses, {
           exevopro: (
             <NextLink href={routes.EXEVOPRO} className="text-rare font-bold">
               Exevo Pro
@@ -115,7 +115,10 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
         </ul>
       ) : (
         <EmptyState
-          text={{ content: translations.bosses.BossGrid.EmptyState, size: 42 }}
+          text={{
+            content: translations.bossTracker.BossGrid.EmptyState,
+            size: 42,
+          }}
           className="mx-auto mt-8 w-40 md:mt-32"
         />
       )}

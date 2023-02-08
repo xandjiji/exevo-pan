@@ -7,7 +7,7 @@ import { Select } from 'components/Organisms'
 import { routes } from 'Constants'
 import { BossGrid, RecentlyAppeared } from './components'
 
-const heroSrc = loadRawSrc('/bosses.png')
+const heroSrc = loadRawSrc('/bossTracker.png')
 
 type BossTrackerProps = {
   serverOptions: Option[]
@@ -23,7 +23,7 @@ const Tracker = ({
   recentlyAppeared,
 }: BossTrackerProps) => {
   const {
-    translations: { common, bosses },
+    translations: { common, bossTracker },
   } = useTranslations()
 
   const hoursSinceLastUpdate = Math.round(
@@ -32,10 +32,10 @@ const Tracker = ({
 
   const subtitle =
     hoursSinceLastUpdate === 0
-      ? bosses.updated.recently
-      : `${bosses.updated.hoursAgo.prefix} ${hoursSinceLastUpdate} ${
+      ? bossTracker.updated.recently
+      : `${bossTracker.updated.hoursAgo.prefix} ${hoursSinceLastUpdate} ${
           hoursSinceLastUpdate > 1 ? common.hours : common.hour
-        } ${bosses.updated.hoursAgo.suffix}`
+        } ${bossTracker.updated.hoursAgo.suffix}`
 
   const { push } = useRouter()
 
@@ -53,14 +53,14 @@ const Tracker = ({
     <div className="inner-container pb-8">
       <Hero
         src={heroSrc}
-        title={bosses.Meta.title}
+        title={bossTracker.Meta.title}
         offset
         subtitle={subtitle}
         className="md:-mb-16"
       />
 
       <Select
-        label={bosses.ServerNavigation.label}
+        label={bossTracker.ServerNavigation.label}
         options={serverOptions}
         defaultValue={bossChances.server}
         onChange={debouncedNav}
