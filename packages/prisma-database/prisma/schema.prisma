@@ -174,12 +174,13 @@ model Transaction {
 }
 
 model Guild {
-    id          String   @id @default(uuid())
-    name        String   @unique
-    server      String
-    private     Boolean  @default(false)
-    description String?  @db.Text
-    createdAt   DateTime @default(now())
+    id           String   @id @default(uuid())
+    name         String   @unique
+    server       String
+    private      Boolean  @default(false)
+    description  String?  @db.Text
+    messageBoard String?  @db.Text
+    createdAt    DateTime @default(now())
 
     guildMembers      GuildMember[]
     guildInvites      GuildInvite[]
