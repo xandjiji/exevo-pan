@@ -49,8 +49,6 @@ const Tracker = ({
     [],
   )
 
-  console.log(heroSrc)
-
   return (
     <div className="inner-container pb-8">
       <Hero
