@@ -7,7 +7,7 @@ import { Select } from 'components/Organisms'
 import { routes } from 'Constants'
 import { BossGrid, RecentlyAppeared } from './components'
 
-const heroSrc = loadRawSrc('/bossTracker.png')
+const heroSrc = loadRawSrc('/bosses.png')
 
 type BossTrackerProps = {
   serverOptions: Option[]
@@ -49,11 +49,13 @@ const Tracker = ({
     [],
   )
 
+  console.log(heroSrc)
+
   return (
     <div className="inner-container pb-8">
       <Hero
         src={heroSrc}
-        title={bossTracker.Meta.title}
+        title="Boss Tracker"
         offset
         subtitle={subtitle}
         className="md:-mb-16"
