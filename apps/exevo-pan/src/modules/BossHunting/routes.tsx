@@ -18,7 +18,7 @@ export const useRoutes = (): NavItem[] => {
       },
       {
         title: bosses.Header.huntingGroups,
-        href: ROUTES.BOSSES.GUILDS,
+        href: ROUTES.BOSSES.HUNTING_GROUPS,
         icon: <GroupIcon />,
       },
     ],

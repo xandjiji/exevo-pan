@@ -4,7 +4,7 @@ export const routes = {
   DASHBOARD: '/dashboard',
   BOSSES: {
     TRACKER: '/bosses',
-    GUILDS: '/bosses/guilds',
+    HUNTING_GROUPS: '/bosses/hunting-groups',
   },
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
