@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { Dialog } from 'components/Atoms'
+import { Dialog, Button } from 'components/Atoms'
+import { Avatar } from 'components/Organisms'
 import { trpc } from 'lib/trpc'
 import { avatar } from 'utils'
 import type { GuildCreationInput } from 'server/guild/crud'
@@ -29,7 +30,23 @@ const CreateGuildDialog = ({ onClose }: CreateGuildDialogProps) => {
 
   return (
     <Dialog isOpen onClose={onClose}>
-      ds
+      <Avatar
+        alt={formState.name}
+        avatarId={formState.avatarId}
+        avatarDegree={formState.avatarDegree}
+      />
+
+      <Button
+        onClick={() =>
+          setFormState((prev) => ({
+            ...prev,
+            avatarId: avatar.getRandom.id(),
+            avatarDegree: avatar.getRandom.degree(),
+          }))
+        }
+      >
+        Re-roll
+      </Button>
     </Dialog>
   )
 }

@@ -1,4 +1,5 @@
 export { default as AutocompleteInput } from './AutocompleteInput'
+export { default as Avatar } from './Avatar'
 export { default as ChipGroup } from './ChipGroup'
 export { default as RangeDatePicker } from './RangeDatePicker'
 export { default as InfoTooltip } from './InfoTooltip'

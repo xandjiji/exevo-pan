@@ -32,6 +32,7 @@ const SpritePortrait = ({
   width,
   height,
   onError,
+  imgStyle,
   ...props
 }: SpritePortraitProps) => {
   const {
@@ -55,6 +56,7 @@ const SpritePortrait = ({
           offset && '!-ml-6 !-mt-6',
           !loaded && 'opacity-0',
         )}
+        style={imgStyle}
       />
       {!loaded && (
         <div

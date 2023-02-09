@@ -9,6 +9,7 @@ export type SpritePortraitProps = React.HTMLAttributes<HTMLDivElement> & {
   width: number
   height: number
   onError?: () => void
+  imgStyle?: JSX.IntrinsicElements['img']['style']
 }
 
 export type BackgroundProps = Pick<
