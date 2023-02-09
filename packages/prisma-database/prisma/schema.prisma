@@ -177,7 +177,6 @@ model Guild {
     id           String   @id @default(uuid())
     name         String   @unique
     server       String
-    private      Boolean  @default(false)
     description  String?  @db.Text
     messageBoard String?  @db.Text
     createdAt    DateTime @default(now())
@@ -201,29 +200,14 @@ model GuildMember {
     role     GUILD_MEMBER_ROLE
     joinedAt DateTime          @default(now())
 
-    guild       Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId     String
-    user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId      String
-    guildInvite GuildInvite?
+    guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId String
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId  String
 
     @@unique([guildId, userId])
     @@index([guildId])
     @@index([userId])
-}
-
-model GuildInvite {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-
-    guild         Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId       String
-    usedBy        GuildMember? @relation(fields: [guildMemberId], references: [id], onDelete: Cascade)
-    guildMemberId String?      @unique
-
-    @@unique([guildId, guildMemberId])
-    @@index([guildMemberId])
-    @@index([guildId])
 }
 
 model GuildApplication {
