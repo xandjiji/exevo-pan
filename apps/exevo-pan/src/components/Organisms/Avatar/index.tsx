@@ -24,7 +24,10 @@ const Avatar = ({ avatarId, avatarDegree, ...props }: AvatarProps) => {
       width={isLarge ? DIMENSIONS.LARGE : DIMENSIONS.SMALL}
       height={isLarge ? DIMENSIONS.LARGE : DIMENSIONS.SMALL}
       src={avatarHelper.loadSrc(avatarId)}
-      imgStyle={{ filter: `hue-rotate(${avatarDegree}deg)` }}
+      imgStyle={{
+        filter: `hue-rotate(${avatarDegree}deg)`,
+        transition: 'ease-out 0.2s all',
+      }}
       {...props}
     />
   )
