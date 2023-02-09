@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Dialog } from 'components/Atoms'
 import { trpc } from 'lib/trpc'
+import { avatar } from 'utils'
 import type { GuildCreationInput } from 'server/guild/crud'
 
 /* @ ToDo:
@@ -9,7 +10,6 @@ import type { GuildCreationInput } from 'server/guild/crud'
 - name
 - server
 - description (optional)
-- private
 
 */
 
@@ -23,9 +23,8 @@ const CreateGuildDialog = ({ onClose }: CreateGuildDialogProps) => {
     server: '',
     private: false,
     description: '',
-    /* @ ToDo: random numbers */
-    avatarId: 0,
-    avatarDegree: 0,
+    avatarId: avatar.getRandom.id(),
+    avatarDegree: avatar.getRandom.degree(),
   })
 
   return (

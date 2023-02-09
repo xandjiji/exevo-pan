@@ -1,15 +1,15 @@
 import { z } from 'zod'
 import { authedProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
+import { avatar } from 'Constants'
 
 const CreationSchema = z.object({
   name: z.string().min(2),
   server: z.string().min(1),
   private: z.boolean(),
   description: z.string().max(300).nullable(),
-  /* @ ToDo: update avatarId max */
-  avatarId: z.number().min(0).max(300),
-  avatarDegree: z.number().min(0).max(360),
+  avatarId: z.number().min(avatar.id.min).max(avatar.id.max),
+  avatarDegree: z.number().min(avatar.degree.min).max(avatar.degree.max),
 })
 
 export type GuildCreationInput = z.infer<typeof CreationSchema>
