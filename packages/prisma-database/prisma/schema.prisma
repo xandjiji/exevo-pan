@@ -184,7 +184,6 @@ model Guild {
     avatarDegree Int
 
     guildMembers      GuildMember[]
-    guildInvites      GuildInvite[]
     guildApplications GuildApplication[]
 }
 
