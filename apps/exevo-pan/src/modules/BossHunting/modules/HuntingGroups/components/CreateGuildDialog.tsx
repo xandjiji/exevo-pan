@@ -1,11 +1,13 @@
 import { useState } from 'react'
-import { Dialog, Button } from 'components/Atoms'
+import clsx from 'clsx'
+import { Dialog, Button, Input } from 'components/Atoms'
 import { Avatar } from 'components/Organisms'
 import { trpc } from 'lib/trpc'
 import { avatar } from 'utils'
 import { DiceIcon } from 'assets/svgs'
 import { avatar as AVATAR } from 'Constants'
 import type { GuildCreationInput } from 'server/guild/crud'
+import styles from './styles.module.css'
 
 /* @ ToDo:
 
@@ -13,6 +15,10 @@ import type { GuildCreationInput } from 'server/guild/crud'
 - name
 - server
 - description (optional)
+
+- error states
+
+- i18n
 
 */
 
@@ -45,27 +51,37 @@ const CreateGuildDialog = ({ onClose }: CreateGuildDialogProps) => {
         ))}
       </div> */}
 
-      <div className="flex w-fit flex-col items-center gap-2">
-        <Avatar
-          alt={formState.name}
-          avatarId={formState.avatarId}
-          avatarDegree={formState.avatarDegree}
-          className="grid !h-14 !w-full place-items-center transition-all"
+      <div className="flex gap-4">
+        <Input
+          label="Group name"
+          className={clsx(
+            'relative flex h-14 grow flex-col justify-between',
+            styles.nameInput,
+          )}
         />
-        <Button
-          onClick={() =>
-            setFormState((prev) => ({
-              ...prev,
-              avatarId: avatar.getRandom.id(),
-              avatarDegree: avatar.getRandom.degree(),
-            }))
-          }
-          pill
-          className="text-xs"
-        >
-          <DiceIcon className="fill-onPrimary h-4 w-4 shrink-0" />
-          Roll
-        </Button>
+
+        <div className="flex w-fit flex-col items-center gap-2">
+          <Avatar
+            alt={formState.name}
+            avatarId={formState.avatarId}
+            avatarDegree={formState.avatarDegree}
+            className="grid !h-14 !w-full place-items-center transition-all"
+          />
+          <Button
+            onClick={() =>
+              setFormState((prev) => ({
+                ...prev,
+                avatarId: avatar.getRandom.id(),
+                avatarDegree: avatar.getRandom.degree(),
+              }))
+            }
+            pill
+            className="text-xs"
+          >
+            <DiceIcon className="fill-onPrimary h-4 w-4 shrink-0" />
+            Roll
+          </Button>
+        </div>
       </div>
     </Dialog>
   )
