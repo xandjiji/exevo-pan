@@ -7,5 +7,5 @@ export const avatar = {
     min: 30,
     max: 330,
   },
-  itemsBaseIndex: 247,
+  itemsBaseIndex: 248,
 }
