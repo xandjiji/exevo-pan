@@ -34,7 +34,6 @@ const LevelInput = ({
       }}
       error={value !== '' && isInvalid}
       enterKeyHint="next"
-      noAlert
       {...props}
     />
   )

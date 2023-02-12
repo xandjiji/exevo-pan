@@ -30,7 +30,6 @@ const AuctionSearch = () => {
           allowClear
           value={nickname}
           onChange={(event) => setNickname(event.target.value)}
-          noAlert
           onKeyPress={blurOnEnter}
           enterKeyHint="search"
           className="flex-grow"

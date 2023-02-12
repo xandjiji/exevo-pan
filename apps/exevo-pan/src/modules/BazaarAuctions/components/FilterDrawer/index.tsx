@@ -164,7 +164,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             onChange={(event) => setNickname(event.target.value)}
             onKeyPress={blurOnEnter}
             enterKeyHint="done"
-            noAlert
           />
         </FilterGroup>
 
@@ -517,7 +516,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               initialValue={minLevel}
               dispatchValue={setMinLevel}
               enterKeyHint="next"
-              noAlert
             />
 
             <LevelInput
@@ -528,7 +526,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               initialValue={maxLevel}
               dispatchValue={setMaxLevel}
               enterKeyHint="next"
-              noAlert
             />
           </div>
         </FilterGroup>
