@@ -44,7 +44,6 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
       defaultValue = EMPTY_VALUE,
       onChange,
       error,
-      noAlert = false,
       enterKeyHint,
       onKeyPress,
       ...props
@@ -117,7 +116,7 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
     }, [maxLength, dispatchedHours, dispatchedMinutes])
 
     return (
-      <div className={clsx('text-tsm', className)}>
+      <div className={clsx('text-tsm relative', className)}>
         <Label className="mb-2" htmlFor={inputId} onClick={focusHours}>
           {label}
         </Label>
@@ -149,7 +148,11 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
             {...minuteBinders}
           />
         </div>
-        {!noAlert && <FormError id={errorId} error={error} />}
+        <FormError
+          id={errorId}
+          error={error}
+          className="absolute top-[calc(100%+4px)] left-0"
+        />
         <input
           ref={innerRef}
           hidden

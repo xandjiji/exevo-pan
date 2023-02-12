@@ -50,7 +50,6 @@ const Stamina = () => {
             onChange={(e) => setCurrentStamina(e.target.value)}
             error={invalid}
             className="child:w-full child:whitespace-nowrap w-full"
-            noAlert
           />
           <ChevronRightIcon
             className={clsx(
@@ -67,7 +66,6 @@ const Stamina = () => {
             enterKeyHint="done"
             error={invalid}
             className="child:w-full child:whitespace-nowrap w-full"
-            noAlert
           />
         </div>
 
