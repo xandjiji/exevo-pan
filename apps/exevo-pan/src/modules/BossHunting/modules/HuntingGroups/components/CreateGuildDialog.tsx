@@ -59,7 +59,7 @@ const CreateGuildDialog = ({
 
             <button
               type="button"
-              className="absolute top-[calc(100%+8px)] flex w-full cursor-pointer items-center justify-center gap-1.5 text-xs"
+              className="absolute top-[calc(100%+8px)] flex w-full cursor-pointer items-center justify-center gap-1 text-xs"
               onClick={() =>
                 setFormState((prev) => ({
                   ...prev,
@@ -70,7 +70,7 @@ const CreateGuildDialog = ({
             >
               <DiceIcon className="fill-onSurface h-3 w-3" />{' '}
               <span className="text-onSurface underline underline-offset-2">
-                Reroll
+                Roll
               </span>
             </button>
           </div>
