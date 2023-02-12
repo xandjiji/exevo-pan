@@ -60,12 +60,11 @@ const CreateGuildDialog = ({ onClose }: CreateGuildDialogProps) => {
           )}
         />
 
-        <div className="flex w-fit flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-2">
           <Avatar
             alt={formState.name}
             avatarId={formState.avatarId}
             avatarDegree={formState.avatarDegree}
-            className="grid !h-14 !w-full place-items-center transition-all"
           />
           <Button
             onClick={() =>
