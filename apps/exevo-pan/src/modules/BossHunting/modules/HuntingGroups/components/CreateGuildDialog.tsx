@@ -10,6 +10,8 @@ import type { GuildCreationInput } from 'server/guild/crud'
 import styles from './styles.module.css'
 
 /* @ ToDo:
+
+- submit/cancel button (+ layout spacing)
 - error states
 
 - i18n
@@ -36,20 +38,7 @@ const CreateGuildDialog = ({
 
   return (
     <Dialog isOpen onClose={onClose} heading="Create new hunting group">
-      {/*       <div className="custom-scrollbar flex max-h-[80vh] max-w-5xl flex-wrap items-center gap-6 overflow-auto">
-        {Array.from({ length: AVATAR.id.max + 1 }, (_, index) => (
-          <div>
-            [{index}]
-            <Avatar
-              alt={formState.name}
-              avatarId={index}
-              avatarDegree={formState.avatarDegree}
-            />
-          </div>
-        ))}
-      </div> */}
-
-      <div className="flex flex-col gap-8">
+      <div className="my-8 flex flex-col gap-8">
         <div className="flex items-end gap-8">
           <Input
             label="Group name"
@@ -61,29 +50,30 @@ const CreateGuildDialog = ({
             className="grow"
           />
 
-          <button
-            type="button"
-            className="group relative cursor-pointer transition-opacity"
-            onClick={() =>
-              setFormState((prev) => ({
-                ...prev,
-                avatarId: avatar.getRandom.id(),
-                avatarDegree: avatar.getRandom.degree(),
-              }))
-            }
-          >
+          <div className="relative">
             <Avatar
               alt={formState.name}
               avatarId={formState.avatarId}
               avatarDegree={formState.avatarDegree}
-              className="group-hover:opacity-30"
             />
 
-            <span className="text-onSurface absolute-centered font-bold opacity-0 transition-opacity group-hover:opacity-100">
-              <DiceIcon className="fill-onSurface" />
-              Roll
-            </span>
-          </button>
+            <button
+              type="button"
+              className="absolute top-[calc(100%+8px)] flex w-full cursor-pointer items-center justify-center gap-1.5 text-xs"
+              onClick={() =>
+                setFormState((prev) => ({
+                  ...prev,
+                  avatarId: avatar.getRandom.id(),
+                  avatarDegree: avatar.getRandom.degree(),
+                }))
+              }
+            >
+              <DiceIcon className="fill-onSurface h-3 w-3" />{' '}
+              <span className="text-onSurface underline underline-offset-2">
+                Reroll
+              </span>
+            </button>
+          </div>
         </div>
 
         <Select
