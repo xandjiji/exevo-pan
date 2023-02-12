@@ -64,7 +64,6 @@ const Tracker = ({
         options={serverOptions}
         defaultValue={bossChances.server}
         onChange={debouncedNav}
-        noAlert
         className="z-[53] md:max-w-[160px]"
       />
 

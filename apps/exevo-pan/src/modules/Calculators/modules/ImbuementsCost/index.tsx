@@ -75,7 +75,6 @@ const ImbuementsCost = () => {
           options={tierOptions}
           value={currentTier.toString()}
           onChange={(e) => updateRecord({ [RecordKeys.tier]: +e.target.value })}
-          noAlert
           className="w-full"
         />
       </div>

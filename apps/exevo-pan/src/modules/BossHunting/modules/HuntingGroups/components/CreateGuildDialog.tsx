@@ -93,7 +93,6 @@ const CreateGuildDialog = ({
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, server: e.target.value }))
           }
-          noAlert
         />
       </div>
     </Dialog>
