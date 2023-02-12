@@ -38,7 +38,6 @@ const SessionDialog = ({
         aria-label={calculators.LootSplit.SessionDialog.originalSession}
         value={sessionData}
         disabled
-        noAlert
         noResize
         className="mx-auto mt-6 h-96"
       />

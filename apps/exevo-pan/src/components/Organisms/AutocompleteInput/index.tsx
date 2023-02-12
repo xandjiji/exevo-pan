@@ -111,7 +111,6 @@ const AutocompleteInput = ({
           onFocus={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
           onClick={() => dispatch({ type: 'SET_LISTBOX_STATUS', value: true })}
           onKeyDown={handleKeyboard}
-          noAlert
           {...props}
         />
       </Popover>

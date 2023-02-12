@@ -118,7 +118,6 @@ const LootSplit = () => {
             value={rawNewSession}
             error={isInvalid}
             noResize
-            noAlert
             className="grow"
           />
           <Button

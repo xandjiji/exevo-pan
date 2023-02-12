@@ -15,7 +15,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       onChange,
       disabled = false,
       error,
-      noAlert = false,
       noResize,
       style,
       ...props
@@ -34,7 +33,10 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
     }
 
     return (
-      <div className={clsx('text-tsm flex flex-col', className)} style={style}>
+      <div
+        className={clsx('text-tsm relative flex flex-col', className)}
+        style={style}
+      >
         <Label htmlFor={textboxId} className="mb-2 shrink-0">
           {label}
         </Label>
@@ -58,9 +60,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           value={derivedValue}
           {...props}
         />
-        {!noAlert && (
-          <FormError id={errorId} error={error} className="shrink-0" />
-        )}
+        <FormError
+          id={errorId}
+          error={error}
+          className="absolute top-[calc(100%+4px)] left-0 shrink-0"
+        />
       </div>
     )
   },
