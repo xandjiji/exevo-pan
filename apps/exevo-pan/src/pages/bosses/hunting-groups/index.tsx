@@ -13,11 +13,17 @@ import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, bosses } from 'locales'
 
+type HuntingGroupsProps = {
+  serverOptions: Option[]
+}
+
 const heroSrc = loadRawSrc('/huntingGroups.png')
 const pagePath = routes.BOSSES.HUNTING_GROUPS
 const pageUrl = buildUrl(pagePath)
 
-export default function HuntingGroupsPage() {
+export default function HuntingGroupsPage({
+  serverOptions,
+}: HuntingGroupsProps) {
   const { translations } = useTranslations()
 
   /* @ ToDo: add title */
@@ -88,19 +94,29 @@ export default function HuntingGroupsPage() {
             <AddIcon className="-ml-2.5" />
             Create group
           </Button>
-          {isOpen && <CreateGuildDialog onClose={() => setOpen(false)} />}
+          {isOpen && (
+            <CreateGuildDialog
+              serverOptions={serverOptions}
+              onClose={() => setOpen(false)}
+            />
+          )}
         </div>
       </Template>
     </>
   )
 }
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => ({
-  props: {
-    translations: {
-      common: common[locale as RegisteredLocale],
-      bosses: bosses[locale as RegisteredLocale],
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const serverOptions = await DrawerFieldsClient.fetchActiveServerOptions()
+
+  return {
+    props: {
+      serverOptions,
+      translations: {
+        common: common[locale as RegisteredLocale],
+        bosses: bosses[locale as RegisteredLocale],
+      },
+      locale,
     },
-    locale,
-  },
-})
+  }
+}
