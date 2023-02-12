@@ -70,7 +70,7 @@ export default function Calculator() {
         />
       </Head>
 
-      <Template currentRoute={pageRoute}>
+      <Template currentRoute={pageRoute} className="!flex">
         <LootSplit />
       </Template>
     </>
