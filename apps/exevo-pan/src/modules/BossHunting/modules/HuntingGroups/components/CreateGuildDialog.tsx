@@ -51,20 +51,15 @@ const CreateGuildDialog = ({ onClose }: CreateGuildDialogProps) => {
         ))}
       </div> */}
 
-      <div className="flex gap-4">
-        <Input
-          label="Group name"
-          className={clsx(
-            'relative flex h-14 grow flex-col justify-between',
-            styles.nameInput,
-          )}
-        />
+      <div className="flex gap-16">
+        <Input label="Group name" className="grow" />
 
         <div className="flex flex-col items-center gap-2">
           <Avatar
             alt={formState.name}
             avatarId={formState.avatarId}
             avatarDegree={formState.avatarDegree}
+            noBackground
           />
           <Button
             onClick={() =>

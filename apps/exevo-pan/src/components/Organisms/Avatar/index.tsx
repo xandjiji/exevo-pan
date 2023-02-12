@@ -8,6 +8,7 @@ type AvatarProps = {
   alt: string
   avatarId: number
   avatarDegree: number
+  noBackground?: boolean
   className?: string
 }
 
@@ -19,6 +20,7 @@ const DIMENSIONS = {
 const Avatar = ({
   avatarId,
   avatarDegree,
+  noBackground = false,
   className,
   ...props
 }: AvatarProps) => {
@@ -36,7 +38,11 @@ const Avatar = ({
         marginLeft: isLarge ? undefined : 4,
         marginTop: isLarge ? undefined : 4,
       }}
-      className={clsx(className, 'h-14 w-14')}
+      className={clsx(
+        className,
+        noBackground && '!bg-transparent !shadow-none',
+        'h-14 w-14',
+      )}
       {...props}
     />
   )
