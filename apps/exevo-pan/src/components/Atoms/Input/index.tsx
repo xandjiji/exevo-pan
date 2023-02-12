@@ -22,7 +22,6 @@ const Input = (
     defaultValue,
     disabled,
     onChange,
-    noAlert = false,
     stateIcon = 'neutral',
     ...props
   }: InputProps,
@@ -66,7 +65,7 @@ const Input = (
   const StateIcon = useStateIcon(stateIcon)
 
   return (
-    <div className={clsx('text-tsm', className)} style={style}>
+    <div className={clsx('text-tsm relative', className)} style={style}>
       <Label htmlFor={inputId} className="mb-2">
         {label}
       </Label>
@@ -118,7 +117,11 @@ const Input = (
 
         {StateIcon}
       </div>
-      {!noAlert && <FormError id={errorId} error={error} />}
+      <FormError
+        id={errorId}
+        error={error}
+        className="absolute top-[calc(100%+4px)] left-0"
+      />
     </div>
   )
 }

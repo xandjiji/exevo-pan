@@ -94,7 +94,6 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
                   name="character"
                   label={dashboard.PurchaseForm.paymentCharacterLabel}
                   placeholder={`e.g, '${randomNickname}'`}
-                  noAlert
                   defaultValue={character ?? from}
                   onChange={(e) => {
                     setFrom(e.target.value.trim())

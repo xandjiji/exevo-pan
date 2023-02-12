@@ -236,7 +236,6 @@ export const AuctionNotificationsProvider = ({
                         }
                         disabled={disableTimeConfig}
                         error={invalidTime}
-                        noAlert
                       />
                       <Select
                         className="grow"

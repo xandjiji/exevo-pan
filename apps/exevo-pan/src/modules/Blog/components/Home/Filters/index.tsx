@@ -86,7 +86,6 @@ const Filters = () => {
             onChange={onQueryChange}
             placeholder={blog.Filters.searchPlaceholder}
             allowClear
-            noAlert
             onKeyPress={blurOnEnter}
             enterKeyHint="search"
           />
