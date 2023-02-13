@@ -51,12 +51,14 @@ const GuildList = ({ list }: GuildListProps) => (
           <p className="text-tsm flex items-center justify-end gap-1">
             {memberCount} members{' '}
             {isPrivate && (
-              <Tooltip
-                content={<span>This is a private hunting group</span>}
-                offset={[0, 8]}
-              >
-                <LockIcon className="fill-onSurface h-3 w-3" />
-              </Tooltip>
+              <div className="h-3 w-3">
+                <Tooltip
+                  content={<span>This is a private hunting group</span>}
+                  offset={[0, 8]}
+                >
+                  <LockIcon className="fill-onSurface h-3 w-3" />
+                </Tooltip>
+              </div>
             )}
           </p>
         </li>
