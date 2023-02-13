@@ -1,5 +1,5 @@
 import { z } from 'zod'
-import { authedProcedure } from 'server/trpc'
+import { authedProcedure, publicProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
 import { avatar } from 'Constants'
 
@@ -35,3 +35,43 @@ export const createGuild = authedProcedure.input(CreationSchema).mutation(
       },
     }),
 )
+
+export const listGuilds = publicProcedure
+  .input(
+    z.object({
+      pageSize: z.number().optional().default(30),
+      pageIndex: z.number().optional().default(0),
+      server: z.string().optional(),
+      name: z.string().optional(),
+    }),
+  )
+  .query(async ({ input: { pageIndex, pageSize, server, name } }) => {
+    const where = {
+      name: { contains: name },
+      server: { contains: server },
+    }
+
+    const [page, count] = await Promise.all([
+      prisma.guild.findMany({
+        where,
+        include: {
+          _count: {
+            select: { guildMembers: true },
+          },
+        },
+        take: pageSize,
+        skip: pageIndex * pageSize,
+      }),
+      prisma.guild.count({
+        where,
+      }),
+    ])
+
+    return {
+      page: page.map(({ _count: { guildMembers }, ...data }) => ({
+        ...data,
+        memberCount: guildMembers,
+      })),
+      count,
+    }
+  })
