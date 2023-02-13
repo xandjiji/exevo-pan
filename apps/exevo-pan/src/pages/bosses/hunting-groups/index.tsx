@@ -6,14 +6,26 @@ import { GetStaticProps } from 'next'
 import { Hero } from 'templates'
 import { Template } from 'modules/BossHunting'
 import { Button } from 'components/Atoms'
-import { CreateGuildDialog } from 'modules/BossHunting/modules/HuntingGroups'
+import {
+  CreateGuildDialog,
+  GuildList,
+} from 'modules/BossHunting/modules/HuntingGroups'
 import { AddIcon } from 'assets/svgs'
 import { useTranslations } from 'contexts/useTranslation'
+import { caller } from 'pages/api/trpc/[trpc]'
 import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, bosses } from 'locales'
 
+type SerializablePublicHuntingGroup = Omit<PublicHuntingGroup, 'createdAt'> & {
+  createdAt: number
+}
+
 type HuntingGroupsProps = {
+  serializableInitialGuildList: {
+    page: SerializablePublicHuntingGroup[]
+    count: number
+  }
   serverOptions: Option[]
 }
 
@@ -22,6 +34,7 @@ const pagePath = routes.BOSSES.HUNTING_GROUPS
 const pageUrl = buildUrl(pagePath)
 
 export default function HuntingGroupsPage({
+  serializableInitialGuildList,
   serverOptions,
 }: HuntingGroupsProps) {
   const { translations } = useTranslations()
@@ -37,6 +50,9 @@ export default function HuntingGroupsPage({
   const pageTitle = buildPageTitle(pageName)
 
   const [isOpen, setOpen] = useState(false)
+  const guildList = serializableInitialGuildList.page.map(
+    ({ createdAt, ...data }) => ({ ...data, createdAt: new Date(createdAt) }),
+  )
 
   return (
     <>
@@ -100,6 +116,8 @@ export default function HuntingGroupsPage({
               onClose={() => setOpen(false)}
             />
           )}
+
+          <GuildList list={guildList} />
         </div>
       </Template>
     </>
@@ -107,10 +125,22 @@ export default function HuntingGroupsPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const serverOptions = await DrawerFieldsClient.fetchActiveServerOptions()
+  const [unserializableGuildList, serverOptions] = await Promise.all([
+    caller.listGuilds({}),
+    DrawerFieldsClient.fetchActiveServerOptions(),
+  ])
+
+  const serializableInitialGuildList = {
+    ...unserializableGuildList,
+    page: unserializableGuildList.page.map(({ createdAt, ...data }) => ({
+      ...data,
+      createdAt: +createdAt,
+    })),
+  }
 
   return {
     props: {
+      serializableInitialGuildList,
       serverOptions,
       translations: {
         common: common[locale as RegisteredLocale],

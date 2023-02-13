@@ -68,7 +68,7 @@ export const listGuilds = publicProcedure
     ])
 
     return {
-      page: page.map(({ _count: { guildMembers }, ...data }) => ({
+      page: page.map(({ _count: { guildMembers }, messageBoard, ...data }) => ({
         ...data,
         memberCount: guildMembers,
       })),
