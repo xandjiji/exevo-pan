@@ -33,7 +33,7 @@ const Avatar = ({
       height={isLarge ? DIMENSIONS.LARGE : DIMENSIONS.SMALL}
       src={avatarHelper.loadSrc(avatarId)}
       imgStyle={{
-        filter: `hue-rotate(${avatarDegree}deg)`,
+        filter: `hue-rotate(${avatarDegree}deg) brightness(1.2)`,
         transition: 'ease-out 0.2s all',
         marginLeft: isLarge ? undefined : 4,
         marginTop: isLarge ? undefined : 4,
