@@ -1,3 +1,3 @@
 export * from './modules'
-export { Template, MainPage, Main } from './components'
+export { Template } from './components'
 export { useRoutes } from './routes'
