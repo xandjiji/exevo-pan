@@ -176,6 +176,7 @@ model Transaction {
 model Guild {
     id           String   @id @default(uuid())
     name         String   @unique
+    private      Boolean
     server       String
     description  String?  @db.Text
     messageBoard String?  @db.Text

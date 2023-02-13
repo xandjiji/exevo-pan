@@ -1,7 +1,7 @@
 import { useState } from 'react'
-import { Dialog, Button, Input, Alert } from 'components/Atoms'
+import { Dialog, Button, Input, Checkbox, Alert } from 'components/Atoms'
 import { toast } from 'react-hot-toast'
-import { Avatar, Select } from 'components/Organisms'
+import { Avatar, Select, InfoTooltip } from 'components/Organisms'
 import { useSession } from 'next-auth/react'
 import NextLink from 'next/link'
 import { trpc } from 'lib/trpc'
@@ -12,6 +12,7 @@ import type { GuildCreationInput } from 'server/guild/crud'
 
 /* @ ToDo:
 
+- redirect to guild page after successful creation
 - i18n
 
 */
@@ -25,11 +26,13 @@ const CreateGuildDialog = ({
   serverOptions,
   onClose,
 }: CreateGuildDialogProps) => {
-  const { status } = useSession()
-  const notAuthed = status !== 'authenticated'
+  const { data } = useSession()
+  const notAuthed = !data?.user
+  const isPro = !!data?.user.proStatus
 
   const [formState, setFormState] = useState<GuildCreationInput>({
     name: '',
+    private: false,
     server: 'Antica',
     description: '',
     avatarId: avatar.getRandom.id(),
@@ -56,8 +59,8 @@ const CreateGuildDialog = ({
   return (
     <Dialog isOpen onClose={onClose} heading="Create new hunting group">
       <div className="my-8 grid gap-6">
-        <div className="flex flex-col gap-8">
-          <div className="flex items-end gap-8">
+        <div className="flex flex-col gap-4">
+          <div className="mb-4 flex items-end gap-8">
             <Input
               label="Group name"
               value={formState.name}
@@ -103,6 +106,41 @@ const CreateGuildDialog = ({
             onChange={(e) =>
               setFormState((prev) => ({ ...prev, server: e.target.value }))
             }
+          />
+
+          <Checkbox
+            label={
+              <span className="flex items-center gap-1.5">
+                Private group{' '}
+                <InfoTooltip
+                  labelSize
+                  content={
+                    <div>
+                      <p>
+                        A private group can be found, but its members will be
+                        hidden
+                      </p>
+
+                      {!isPro && (
+                        <NextLink
+                          href={routes.EXEVOPRO}
+                          className="text-onSurface mt-4 block"
+                        >
+                          <strong className="text-rare">Exevo Pro 🕵️</strong>{' '}
+                          exclusive
+                        </NextLink>
+                      )}
+                    </div>
+                  }
+                />
+              </span>
+            }
+            aria-label="Private group"
+            checked={formState.private}
+            onChange={() =>
+              setFormState((prev) => ({ ...prev, private: !formState.private }))
+            }
+            disabled={!isPro}
           />
         </div>
 

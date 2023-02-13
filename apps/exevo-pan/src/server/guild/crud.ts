@@ -5,6 +5,7 @@ import { avatar } from 'Constants'
 
 const CreationSchema = z.object({
   name: z.string().min(2),
+  private: z.boolean(),
   server: z.string().min(1),
   description: z.string().max(300).nullable(),
   avatarId: z.number().min(avatar.id.min).max(avatar.id.max),
@@ -16,13 +17,14 @@ export type GuildCreationInput = z.infer<typeof CreationSchema>
 export const createGuild = authedProcedure.input(CreationSchema).mutation(
   async ({
     ctx: {
-      token: { id, name },
+      token: { id, name, proStatus },
     },
     input,
   }) =>
     prisma.guild.create({
       data: {
         ...input,
+        private: proStatus ? input.private : false,
         guildMembers: {
           create: {
             userId: id,
