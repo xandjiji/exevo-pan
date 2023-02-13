@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Dialog, Button, Input, Alert } from 'components/Atoms'
+import { toast } from 'react-hot-toast'
 import { Avatar, Select } from 'components/Organisms'
 import { useSession } from 'next-auth/react'
 import NextLink from 'next/link'
@@ -10,9 +11,6 @@ import { routes } from 'Constants'
 import type { GuildCreationInput } from 'server/guild/crud'
 
 /* @ ToDo:
-
-- request
-- error states
 
 - i18n
 
@@ -33,13 +31,27 @@ const CreateGuildDialog = ({
   const [formState, setFormState] = useState<GuildCreationInput>({
     name: '',
     server: 'Antica',
-    private: false,
     description: '',
     avatarId: avatar.getRandom.id(),
     avatarDegree: avatar.getRandom.degree(),
   })
 
+  const [errorMessage, setErrorMessage] = useState('')
+
+  const { mutate, isLoading } = trpc.createGuild.useMutation({
+    onSuccess: () => {
+      onClose()
+      toast.success('Hunting group created!')
+    },
+    onError: () => {
+      setErrorMessage(`'${formState.name}' already exists`)
+      toast.error('Something went wrong!')
+    },
+  })
+
   const invalidName = formState.name.length < 2
+
+  const disableSubmit = notAuthed || invalidName || isLoading || !!errorMessage
 
   return (
     <Dialog isOpen onClose={onClose} heading="Create new hunting group">
@@ -49,9 +61,11 @@ const CreateGuildDialog = ({
             <Input
               label="Group name"
               value={formState.name}
-              onChange={(e) =>
+              onChange={(e) => {
+                setErrorMessage('')
                 setFormState((prev) => ({ ...prev, name: e.target.value }))
-              }
+              }}
+              error={errorMessage}
               placeholder="Choose a group name"
               className="grow"
             />
@@ -110,7 +124,12 @@ const CreateGuildDialog = ({
         <Button onClick={onClose} hollow pill>
           Cancel
         </Button>
-        <Button pill disabled={notAuthed || invalidName}>
+        <Button
+          pill
+          disabled={disableSubmit}
+          loading={isLoading}
+          onClick={() => mutate(formState)}
+        >
           Create
         </Button>
       </div>
