@@ -5,7 +5,8 @@ import { DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { Hero } from 'templates'
 import { Template } from 'modules/BossHunting'
-import { Button } from 'components/Atoms'
+import { Button, Tabs, Input, Paginator } from 'components/Atoms'
+import { Select } from 'components/Organisms'
 import {
   CreateGuildDialog,
   GuildList,
@@ -53,6 +54,11 @@ export default function HuntingGroupsPage({
   const guildList = serializableInitialGuildList.page.map(
     ({ createdAt, ...data }) => ({ ...data, createdAt: new Date(createdAt) }),
   )
+
+  const serverFilterOptions: typeof serverOptions = [
+    { name: '(any)', value: '' },
+    ...serverOptions,
+  ]
 
   return (
     <>
@@ -102,10 +108,10 @@ export default function HuntingGroupsPage({
       <Template>
         <Hero offset src={heroSrc} title={pageName} />
 
-        <div className="inner-container grid gap-4">
+        <div className="inner-container grid gap-8 md:-mt-12">
           <Button
             onClick={() => setOpen(true)}
-            className="ml-auto flex w-fit items-center gap-1.5"
+            className="z-1 ml-auto flex w-fit items-center gap-1.5"
           >
             <AddIcon className="-ml-2.5" />
             Create group
@@ -117,7 +123,36 @@ export default function HuntingGroupsPage({
             />
           )}
 
-          <GuildList list={guildList} onApply={() => {}} />
+          <section className="grid gap-4">
+            <div className="flex flex-col items-center gap-4 sm:flex-row">
+              <div className="grid w-full grid-cols-2 gap-4 sm:max-w-[380px]">
+                <Input
+                  label="Search by name"
+                  placeholder="Hunting group name"
+                  allowClear
+                />
+                <Select
+                  label="Search by server"
+                  options={serverFilterOptions}
+                  defaultValue=""
+                />
+              </div>
+
+              <Paginator
+                className="ml-auto w-fit"
+                totalItems={serializableInitialGuildList.count}
+                pageSize={20}
+              />
+            </div>
+            <Tabs.Group>
+              <Tabs.Panel label="Find groups">
+                <GuildList list={guildList} onApply={() => {}} />
+              </Tabs.Panel>
+              <Tabs.Panel label="My groups">
+                <GuildList list={guildList} />
+              </Tabs.Panel>
+            </Tabs.Group>
+          </section>
         </div>
       </Template>
     </>

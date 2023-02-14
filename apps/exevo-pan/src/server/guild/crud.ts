@@ -39,7 +39,7 @@ export const createGuild = authedProcedure.input(CreationSchema).mutation(
 export const listGuilds = publicProcedure
   .input(
     z.object({
-      pageSize: z.number().optional().default(30),
+      pageSize: z.number().optional().default(20),
       pageIndex: z.number().optional().default(0),
       server: z.string().optional(),
       name: z.string().optional(),
