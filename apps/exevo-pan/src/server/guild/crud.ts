@@ -7,7 +7,7 @@ const CreationSchema = z.object({
   name: z.string().min(2),
   private: z.boolean(),
   server: z.string().min(1),
-  description: z.string().max(300).nullable(),
+  description: z.string().max(160).nullable(),
   avatarId: z.number().min(avatar.id.min).max(avatar.id.max),
   avatarDegree: z.number().min(avatar.degree.min).max(avatar.degree.max),
 })

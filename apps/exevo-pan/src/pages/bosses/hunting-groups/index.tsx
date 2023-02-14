@@ -102,10 +102,10 @@ export default function HuntingGroupsPage({
       <Template>
         <Hero offset src={heroSrc} title={pageName} />
 
-        <div className="inner-container">
+        <div className="inner-container grid gap-4">
           <Button
             onClick={() => setOpen(true)}
-            className="flex items-center gap-1.5"
+            className="ml-auto flex w-fit items-center gap-1.5"
           >
             <AddIcon className="-ml-2.5" />
             Create group
@@ -117,7 +117,7 @@ export default function HuntingGroupsPage({
             />
           )}
 
-          <GuildList list={guildList} />
+          <GuildList list={guildList} onApply={() => {}} />
         </div>
       </Template>
     </>
