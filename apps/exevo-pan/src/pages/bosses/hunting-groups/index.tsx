@@ -1,11 +1,11 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { Hero } from 'templates'
 import { Template } from 'modules/BossHunting'
-import { Button, Tabs, Input, Paginator } from 'components/Atoms'
+import { Button, Tabs, Input, Paginator, LoadingAlert } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import {
   CreateGuildDialog,
@@ -13,8 +13,10 @@ import {
 } from 'modules/BossHunting/modules/HuntingGroups'
 import { AddIcon } from 'assets/svgs'
 import { useTranslations } from 'contexts/useTranslation'
+import { trpc } from 'lib/trpc'
 import { caller } from 'pages/api/trpc/[trpc]'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
+import { useIsMounted } from 'hooks'
+import { buildUrl, buildPageTitle, loadRawSrc, debounce } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, bosses } from 'locales'
 
@@ -28,15 +30,21 @@ type HuntingGroupsProps = {
     count: number
   }
   serverOptions: Option[]
+  initialDataUpdatedAt: number
 }
 
 const heroSrc = loadRawSrc('/huntingGroups.png')
 const pagePath = routes.BOSSES.HUNTING_GROUPS
 const pageUrl = buildUrl(pagePath)
 
+export const PAGE_SIZE = 20
+const DEBOUNCE_DELAY = 700
+export const DEFAULT_SERVER: Option = { name: '(any)', value: '' }
+
 export default function HuntingGroupsPage({
   serializableInitialGuildList,
   serverOptions,
+  initialDataUpdatedAt,
 }: HuntingGroupsProps) {
   const { translations } = useTranslations()
 
@@ -50,15 +58,32 @@ export default function HuntingGroupsPage({
 
   const pageTitle = buildPageTitle(pageName)
 
-  const [isOpen, setOpen] = useState(false)
-  const guildList = serializableInitialGuildList.page.map(
-    ({ createdAt, ...data }) => ({ ...data, createdAt: new Date(createdAt) }),
-  )
+  const [query, setQuery] = useState({
+    pageIndex: 0,
+    pageSize: PAGE_SIZE,
+    name: '',
+    server: DEFAULT_SERVER.value,
+  })
 
-  const serverFilterOptions: typeof serverOptions = [
-    { name: '(any)', value: '' },
-    ...serverOptions,
-  ]
+  const [isOpen, setOpen] = useState(false)
+  const isMounted = useIsMounted()
+
+  const guildList = trpc.listGuilds.useQuery(query, {
+    enabled: isMounted,
+    staleTime: 5000,
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+    placeholderData: serializableInitialGuildList,
+    refetchOnMount: false,
+    initialDataUpdatedAt,
+    select: (result) => ({
+      ...result,
+      page: result.page.map(({ createdAt, ...rest }) => ({
+        ...rest,
+        createdAt: new Date(createdAt),
+      })),
+    }),
+  })
 
   return (
     <>
@@ -130,28 +155,57 @@ export default function HuntingGroupsPage({
                   label="Search by name"
                   placeholder="Hunting group name"
                   allowClear
+                  onChange={useMemo(
+                    () =>
+                      debounce(
+                        (e: React.ChangeEvent<HTMLInputElement>) =>
+                          setQuery((prev) => ({
+                            ...prev,
+                            pageIndex: 0,
+                            name: e.target.value,
+                          })),
+                        DEBOUNCE_DELAY,
+                      ),
+                    [],
+                  )}
                 />
                 <Select
                   label="Search by server"
-                  options={serverFilterOptions}
-                  defaultValue=""
+                  options={serverOptions}
+                  defaultValue={DEFAULT_SERVER.value}
+                  onChange={useMemo(
+                    () =>
+                      debounce(
+                        (e: React.ChangeEvent<HTMLInputElement>) =>
+                          setQuery((prev) => ({
+                            ...prev,
+                            pageIndex: 0,
+                            server: e.target.value,
+                          })),
+                        DEBOUNCE_DELAY,
+                      ),
+                    [],
+                  )}
                 />
               </div>
 
               <Paginator
                 className="ml-auto w-fit"
-                totalItems={serializableInitialGuildList.count}
-                pageSize={20}
+                pageSize={PAGE_SIZE}
+                totalItems={guildList.data?.count ?? 0}
+                currentPage={query.pageIndex + 1}
+                onChange={(newIndex) =>
+                  setQuery((prev) => ({ ...prev, pageIndex: newIndex - 1 }))
+                }
               />
             </div>
-            <Tabs.Group>
-              <Tabs.Panel label="Find groups">
-                <GuildList list={guildList} onApply={() => {}} />
-              </Tabs.Panel>
-              <Tabs.Panel label="My groups">
-                <GuildList list={guildList} />
-              </Tabs.Panel>
+            <Tabs.Group className="-mb-2">
+              <Tabs.Panel label="Find groups" />
+              <Tabs.Panel label="My groups" />
             </Tabs.Group>
+            <GuildList list={guildList.data?.page ?? []} onApply={() => {}} />
+
+            {guildList.isFetching && <LoadingAlert>Loading...</LoadingAlert>}
           </section>
         </div>
       </Template>
@@ -160,10 +214,15 @@ export default function HuntingGroupsPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const [unserializableGuildList, serverOptions] = await Promise.all([
+  const [unserializableGuildList, partialServerOptions] = await Promise.all([
     caller.listGuilds({}),
     DrawerFieldsClient.fetchActiveServerOptions(),
   ])
+
+  const serverOptions: typeof partialServerOptions = [
+    DEFAULT_SERVER,
+    ...partialServerOptions,
+  ]
 
   const serializableInitialGuildList = {
     ...unserializableGuildList,
@@ -177,6 +236,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       serializableInitialGuildList,
       serverOptions,
+      initialDataUpdatedAt: +new Date(),
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],
