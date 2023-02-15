@@ -4,13 +4,19 @@ import { Select } from 'components/Organisms'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
 import { trpc } from 'lib/trpc'
-import { useIsMounted } from 'hooks'
 import { debounce } from 'utils'
 import GuildList from './GuildList'
 import { GuildGridProps } from './types'
 
 export const PAGE_SIZE = 20
 const DEBOUNCE_DELAY = 700
+
+const INITIAL_QUERY = {
+  pageIndex: 0,
+  pageSize: PAGE_SIZE,
+  name: '',
+  server: '',
+}
 
 /* @ ToDo: i18n */
 
@@ -21,27 +27,17 @@ const GuildGrid = ({
   const { status } = useSession()
   const isAuthed = status === 'authenticated'
 
-  const [DEFAULT_SERVER] = serverOptions
-
-  const [query, setQuery] = useState({
-    pageIndex: 0,
-    pageSize: PAGE_SIZE,
-    name: '',
-    server: DEFAULT_SERVER.value,
-  })
+  const [query, setQuery] = useState(INITIAL_QUERY)
 
   const [tabIndex, setTabIndex] = useState(0)
-
   const displayingMyGroups = tabIndex === 1
-  const isMounted = useIsMounted()
 
   const guildList = trpc.listGuilds.useQuery(query, {
-    enabled: isMounted,
+    enabled: query !== INITIAL_QUERY,
     staleTime: 5000,
     keepPreviousData: true,
     refetchOnWindowFocus: false,
     placeholderData: serializableInitialGuildList,
-    refetchOnMount: false,
     select: (result) => ({
       ...result,
       page: result.page.map(({ createdAt, ...rest }) => ({
@@ -76,7 +72,6 @@ const GuildGrid = ({
           <Select
             label="Search by server"
             options={serverOptions}
-            defaultValue={DEFAULT_SERVER.value}
             onChange={useMemo(
               () =>
                 debounce(
