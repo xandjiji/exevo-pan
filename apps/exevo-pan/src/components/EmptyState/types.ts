@@ -1,15 +1,11 @@
-type Text = {
-  content: string
-  size: number
-}
-
 type Button = {
   content: string
   action: () => void
 }
 
 export interface EmptyStateProps extends React.HTMLAttributes<HTMLDivElement> {
-  height?: number
-  text: Text
+  variant: 'small' | 'medium' | 'large'
+  text: string
   button?: Button
+  nowrap?: boolean
 }

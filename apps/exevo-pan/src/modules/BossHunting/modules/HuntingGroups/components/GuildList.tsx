@@ -81,7 +81,8 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
   ) : (
     <div>
       <EmptyState
-        text={{ content: 'No hunting groups', size: 42 }}
+        variant="large"
+        text="No hunting groups"
         className="mx-auto mt-8"
       />
     </div>

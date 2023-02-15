@@ -160,8 +160,9 @@ const LootSplit = () => {
             })}
             {list.length === 0 && (
               <EmptyState
-                text={{ content: calculators.LootSplit.emptyState, size: 24 }}
                 className="mx-auto mt-4 h-fit w-24"
+                variant="small"
+                text={calculators.LootSplit.emptyState}
               />
             )}
           </div>

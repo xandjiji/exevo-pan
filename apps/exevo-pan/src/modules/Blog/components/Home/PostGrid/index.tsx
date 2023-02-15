@@ -28,12 +28,7 @@ const PostGridView = ({
         <PostCard key={postData.slug} postData={postData} />
       ))}
       {noResults && (
-        <EmptyState
-          text={{
-            content: blog.PostGrid.emptyMessage,
-            size: 32,
-          }}
-        />
+        <EmptyState variant="large" text={blog.PostGrid.emptyMessage} />
       )}
       {observerRef && (
         <div

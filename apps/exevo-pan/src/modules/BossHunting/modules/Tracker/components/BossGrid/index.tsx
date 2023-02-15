@@ -115,11 +115,10 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
         </ul>
       ) : (
         <EmptyState
-          text={{
-            content: translations.bossTracker.BossGrid.EmptyState,
-            size: 42,
-          }}
           className="mx-auto mt-8 w-40 md:mt-32"
+          variant="large"
+          nowrap
+          text={translations.bossTracker.BossGrid.EmptyState}
         />
       )}
 

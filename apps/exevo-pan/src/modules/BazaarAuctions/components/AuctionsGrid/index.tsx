@@ -15,7 +15,6 @@ import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
 import * as S from './atoms'
-import styles from './styles.module.css'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
@@ -197,7 +196,8 @@ const AuctionsGrid = () => {
         </AuctionNotificationsProvider>
         {paginatedData.page.length === 0 && (
           <EmptyState
-            className={styles.empty}
+            className="md:mt-[calc(25vh-60px)]"
+            variant="large"
             button={
               isFavorites
                 ? undefined
@@ -206,12 +206,11 @@ const AuctionsGrid = () => {
                     action: () => setDrawerOpen(true),
                   }
             }
-            text={{
-              content: isFavorites
+            text={
+              isFavorites
                 ? homepage.AuctionsGrid.noFavorites
-                : homepage.AuctionsGrid.noAuctionFound,
-              size: 24,
-            }}
+                : homepage.AuctionsGrid.noAuctionFound
+            }
           />
         )}
       </div>
