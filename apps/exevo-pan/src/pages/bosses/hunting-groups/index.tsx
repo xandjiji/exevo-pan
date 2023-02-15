@@ -1,10 +1,13 @@
 import Head from 'next/head'
+import { useState } from 'react'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { Hero } from 'templates'
-import { Template, GuildGrid } from 'modules/BossHunting'
+import { Template, CreateGuildDialog, GuildGrid } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
+import { Button } from 'components/Atoms'
+import { AddIcon } from 'assets/svgs'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -43,6 +46,8 @@ export default function HuntingGroupsPage({
   })
 
   const pageTitle = buildPageTitle(pageName)
+
+  const [openCreateGuild, setOpenCreateGuild] = useState(false)
 
   return (
     <>
@@ -91,10 +96,27 @@ export default function HuntingGroupsPage({
 
       <Template>
         <Hero offset src={heroSrc} title={pageName} />
-        <GuildGrid
-          serializableInitialGuildList={serializableInitialGuildList}
-          serverOptions={serverOptions}
-        />
+
+        <div className="inner-container grid gap-8 md:-mt-12">
+          <Button
+            onClick={() => setOpenCreateGuild(true)}
+            className="z-1 ml-auto flex w-fit items-center gap-1.5"
+          >
+            <AddIcon className="-ml-2.5" />
+            Create group
+          </Button>
+          {openCreateGuild && (
+            <CreateGuildDialog
+              serverOptions={serverOptions}
+              onClose={() => setOpenCreateGuild(false)}
+            />
+          )}
+
+          <GuildGrid
+            serializableInitialGuildList={serializableInitialGuildList}
+            serverOptions={serverOptions}
+          />
+        </div>
       </Template>
     </>
   )
