@@ -2,6 +2,7 @@ import { useState, useMemo } from 'react'
 import { Button, Tabs, Input, Paginator, LoadingAlert } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import { AddIcon } from 'assets/svgs'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
 import { trpc } from 'lib/trpc'
 import { useIsMounted } from 'hooks'
@@ -17,6 +18,9 @@ const GuildGrid = ({
   serializableInitialGuildList,
   serverOptions,
 }: GuildGridProps) => {
+  const { status } = useSession()
+  const isAuthed = status === 'authenticated'
+
   const [DEFAULT_SERVER] = serverOptions
 
   const [query, setQuery] = useState({
@@ -27,6 +31,9 @@ const GuildGrid = ({
   })
 
   const [isOpen, setOpen] = useState(false)
+  const [tabIndex, setTabIndex] = useState(0)
+
+  const displayingMyGroups = tabIndex === 1
   const isMounted = useIsMounted()
 
   const guildList = trpc.listGuilds.useQuery(query, {
@@ -112,11 +119,17 @@ const GuildGrid = ({
             }
           />
         </div>
-        <Tabs.Group className="-mb-2">
+        <Tabs.Group
+          className="-mb-2"
+          onChange={(newIndex) => setTabIndex(newIndex)}
+        >
           <Tabs.Panel label="Find groups" />
-          <Tabs.Panel label="My groups" />
+          {isAuthed && <Tabs.Panel label="My groups" />}
         </Tabs.Group>
-        <GuildList list={guildList.data?.page ?? []} onApply={() => {}} />
+        <GuildList
+          list={guildList.data?.page ?? []}
+          onApply={displayingMyGroups ? undefined : () => {}}
+        />
 
         {guildList.isFetching && <LoadingAlert>Loading...</LoadingAlert>}
       </section>
