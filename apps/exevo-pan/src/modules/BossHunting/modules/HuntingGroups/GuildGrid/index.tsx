@@ -16,6 +16,7 @@ const INITIAL_QUERY = {
   pageSize: PAGE_SIZE,
   name: '',
   server: '',
+  myGuilds: false,
 }
 
 /* @ ToDo: i18n */
@@ -29,9 +30,6 @@ const GuildGrid = ({
 
   const [query, setQuery] = useState(INITIAL_QUERY)
 
-  const [tabIndex, setTabIndex] = useState(0)
-  const displayingMyGroups = tabIndex === 1
-
   const guildList = trpc.listGuilds.useQuery(query, {
     enabled: query !== INITIAL_QUERY,
     staleTime: 5000,
@@ -44,6 +42,7 @@ const GuildGrid = ({
         ...rest,
         createdAt: new Date(createdAt),
       })),
+      displayApplyButton: !query.myGuilds,
     }),
   })
 
@@ -100,14 +99,16 @@ const GuildGrid = ({
       </div>
       <Tabs.Group
         className="-mb-2"
-        onChange={(newIndex) => setTabIndex(newIndex)}
+        onChange={(newIndex) => {
+          setQuery((prev) => ({ ...prev, myGuilds: newIndex === 1 }))
+        }}
       >
         <Tabs.Panel label="Find groups" />
         {isAuthed && <Tabs.Panel label="My groups" />}
       </Tabs.Group>
       <GuildList
         list={guildList.data?.page ?? []}
-        onApply={displayingMyGroups ? undefined : () => {}}
+        onApply={guildList.data?.displayApplyButton ? () => {} : undefined}
       />
 
       {guildList.isFetching && <LoadingAlert>Loading...</LoadingAlert>}

@@ -43,35 +43,44 @@ export const listGuilds = publicProcedure
       pageIndex: z.number().optional().default(0),
       server: z.string().optional(),
       name: z.string().optional(),
+      myGuilds: z.boolean().optional().default(false),
     }),
   )
-  .query(async ({ input: { pageIndex, pageSize, server, name } }) => {
-    const where = {
-      name: { contains: name },
-      server: { contains: server },
-    }
+  .query(
+    async ({ ctx, input: { pageIndex, pageSize, server, name, myGuilds } }) => {
+      const where = {
+        name: myGuilds ? undefined : { contains: name },
+        server: myGuilds ? undefined : { contains: server },
+        guildMembers:
+          myGuilds && ctx.token
+            ? { some: { userId: ctx.token.id } }
+            : undefined,
+      }
 
-    const [page, count] = await Promise.all([
-      prisma.guild.findMany({
-        where,
-        include: {
-          _count: {
-            select: { guildMembers: true },
+      const [page, count] = await Promise.all([
+        prisma.guild.findMany({
+          where,
+          include: {
+            _count: {
+              select: { guildMembers: true },
+            },
           },
-        },
-        take: pageSize,
-        skip: pageIndex * pageSize,
-      }),
-      prisma.guild.count({
-        where,
-      }),
-    ])
+          take: pageSize,
+          skip: pageIndex * pageSize,
+        }),
+        prisma.guild.count({
+          where,
+        }),
+      ])
 
-    return {
-      page: page.map(({ _count: { guildMembers }, messageBoard, ...data }) => ({
-        ...data,
-        memberCount: guildMembers,
-      })),
-      count,
-    }
-  })
+      return {
+        page: page.map(
+          ({ _count: { guildMembers }, messageBoard, ...data }) => ({
+            ...data,
+            memberCount: guildMembers,
+          }),
+        ),
+        count,
+      }
+    },
+  )
