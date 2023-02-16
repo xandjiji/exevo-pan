@@ -4,12 +4,11 @@ import { useState } from 'react'
 import { stringify, parse } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
-import { Hero } from 'templates'
-import { Template } from 'modules/BossHunting'
+import { Template, GuildHero } from 'modules/BossHunting'
 import { prisma } from 'lib/prisma'
 import type { GuildMember, Guild } from '@prisma/client'
-import { buildPageTitle, avatar } from 'utils'
-import { routes, avatar as AVATAR } from 'Constants'
+import { buildPageTitle } from 'utils'
+import { routes } from 'Constants'
 import { common, bosses } from 'locales'
 
 type GuildPageProps = {
@@ -81,13 +80,7 @@ export default function GuildPage({ serialized, isMember }: GuildPageProps) {
       </Head>
 
       <Template>
-        <Hero
-          offset
-          title={guild.name}
-          src={avatar.loadSrc(guild.avatarId)}
-          hueRotation={guild.avatarDegree}
-          dimension={guild.avatarId >= AVATAR.itemsBaseIndex ? 192 : undefined}
-        />
+        <GuildHero {...guild} />
 
         <div className="inner-container grid gap-8 md:-mt-12">a</div>
       </Template>
