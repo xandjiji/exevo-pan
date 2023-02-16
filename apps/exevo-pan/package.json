@@ -30,6 +30,7 @@
     "clsx": "^1.1.1",
     "data-dictionary": "*",
     "dequal": "^2.0.2",
+    "devalue": "^4.3.0",
     "gray-matter": "^4.0.3",
     "next": "13.0.2",
     "next-auth": "^4.16.4",
