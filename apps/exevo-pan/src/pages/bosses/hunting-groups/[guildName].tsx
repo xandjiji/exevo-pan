@@ -14,9 +14,14 @@ import { common, bosses } from 'locales'
 type GuildPageProps = {
   serialized: string
   isMember: boolean
+  memberCount: number
 }
 
-export default function GuildPage({ serialized, isMember }: GuildPageProps) {
+export default function GuildPage({
+  serialized,
+  memberCount,
+  isMember,
+}: GuildPageProps) {
   const { translations } = useTranslations()
 
   const [{ guildMembers, guild }] = useState<{
@@ -80,7 +85,7 @@ export default function GuildPage({ serialized, isMember }: GuildPageProps) {
       </Head>
 
       <Template>
-        <GuildHero {...guild} />
+        <GuildHero {...guild} memberCount={memberCount} />
 
         <div className="inner-container grid gap-8 md:-mt-12">a</div>
       </Template>
@@ -124,7 +129,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           : guild,
       }),
       isMember: !notMember,
-
+      memberCount: guildMembers.length,
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],

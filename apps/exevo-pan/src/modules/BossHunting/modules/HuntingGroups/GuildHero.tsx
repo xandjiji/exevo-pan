@@ -4,13 +4,21 @@ import { avatar } from 'utils'
 import { avatar as AVATAR } from 'Constants'
 import type { Guild } from '@prisma/client'
 
-const GuildHero = ({ name, avatarId, avatarDegree }: Guild) => (
+/* @ ToDo: i18n */
+
+const GuildHero = ({
+  name,
+  avatarId,
+  avatarDegree,
+  memberCount,
+}: Guild & { memberCount: number }) => (
   <Hero
     offset
     title={name}
     src={avatar.loadSrc(avatarId)}
     hueRotation={avatarDegree}
     dimension={avatarId >= AVATAR.itemsBaseIndex ? 192 : undefined}
+    subtitle={`${memberCount} members`}
   />
 )
 
