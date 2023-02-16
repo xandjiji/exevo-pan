@@ -1,8 +1,10 @@
 import { memo } from 'react'
 import clsx from 'clsx'
+import NextLink from 'next/link'
 import { Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { Avatar, Tooltip } from 'components/Organisms'
+import { getGuildPermalink } from 'utils'
 import { LockIcon } from 'assets/svgs'
 
 /* @ ToDo:
@@ -46,7 +48,12 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
               />
 
               <div className="grid gap-1.5">
-                <h5 className="text-primaryHighlight text-base">{name}</h5>
+                <NextLink
+                  className="text-primaryHighlight text-base font-bold"
+                  href={getGuildPermalink(name)}
+                >
+                  {name}
+                </NextLink>
                 <span className="text-tsm flex items-center gap-1">
                   {server} - {memberCount} members{' '}
                   {isPrivate && (

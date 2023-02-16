@@ -1,18 +1,18 @@
 import { useState } from 'react'
 import { Dialog, Button, Input, Checkbox, Alert } from 'components/Atoms'
+import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
 import { Avatar, Select, InfoTooltip } from 'components/Organisms'
 import { useSession } from 'next-auth/react'
 import NextLink from 'next/link'
 import { trpc } from 'lib/trpc'
-import { avatar } from 'utils'
+import { avatar, getGuildPermalink } from 'utils'
 import { DiceIcon } from 'assets/svgs'
 import { routes } from 'Constants'
 import type { GuildCreationInput } from 'server/guild/crud'
 
 /* @ ToDo:
 
-- redirect to guild page after successful creation
 - i18n
 
 */
@@ -41,10 +41,13 @@ const CreateGuildDialog = ({
 
   const [errorMessage, setErrorMessage] = useState('')
 
+  const router = useRouter()
+
   const { mutate, isLoading } = trpc.createGuild.useMutation({
-    onSuccess: () => {
+    onSuccess: ({ name }) => {
       onClose()
       toast.success('Hunting group created!')
+      router.push(getGuildPermalink(name))
     },
     onError: () => {
       setErrorMessage(`'${formState.name}' already exists`)
