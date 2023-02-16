@@ -4,34 +4,32 @@ import { useState } from 'react'
 import { stringify, parse } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
-import { Template, GuildHero, GuildDescription } from 'modules/BossHunting'
+import {
+  GuildDataProvider,
+  ServerSideGuildDataProps,
+  Template,
+  GuildHero,
+  GuildDescription,
+} from 'modules/BossHunting'
 import { prisma } from 'lib/prisma'
-import type { GuildMember, Guild } from '@prisma/client'
 import { buildPageTitle } from 'utils'
 import { routes } from 'Constants'
 import { common, bosses } from 'locales'
 
 type GuildPageProps = {
-  serialized: string
-  isMember: boolean
-  memberCount: number
+  serializedGuildData: string
 }
 
-export default function GuildPage({
-  serialized,
-  memberCount,
-  isMember,
-}: GuildPageProps) {
+export default function GuildPage({ serializedGuildData }: GuildPageProps) {
   const { translations } = useTranslations()
 
-  const [{ guildMembers, guild }] = useState<{
-    guildMembers: GuildMember[]
-    guild: Guild
-  }>(parse(serialized))
+  const [guildDataProps] = useState<ServerSideGuildDataProps>(
+    parse(serializedGuildData),
+  )
 
   /* @ ToDo: add title */
   /* const pageName = translations.bossTracker.Meta.title */
-  const pageName = guild.name
+  const pageName = guildDataProps.guild.name
   /* const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
     imgSrc: heroSrc,
@@ -84,12 +82,14 @@ export default function GuildPage({
         /> */}
       </Head>
 
-      <Template>
-        <GuildHero {...guild} memberCount={memberCount} />
-        <div className="inner-container z-1 relative grid gap-8">
-          <GuildDescription {...guild} isEditable={false} />
-        </div>
-      </Template>
+      <GuildDataProvider {...guildDataProps}>
+        <Template>
+          <GuildHero />
+          <div className="inner-container z-1 relative grid gap-8">
+            <GuildDescription />
+          </div>
+        </Template>
+      </GuildDataProvider>
     </>
   )
 }
@@ -116,21 +116,21 @@ export const getServerSideProps: GetServerSideProps = async ({
     }),
     prisma.guild.findUnique({ where: { name: guildName } }),
   ])
-  const notMember =
-    !token || !guildMembers.some(({ userId }) => userId === token.id)
+
+  const currentMember = guildMembers.find(({ userId }) => userId === token?.id)
 
   if (!guild) return redirect
 
   return {
     props: {
-      serialized: stringify({
-        guildMembers: guild.private && notMember ? [] : guildMembers,
-        guild: notMember
-          ? ({ ...guild, messageBoard: null } as typeof guild)
-          : guild,
+      serializedGuildData: stringify({
+        currentMember,
+        guildMembers: guild.private && currentMember ? guildMembers : [],
+        guild: currentMember
+          ? guild
+          : ({ ...guild, messageBoard: null } as typeof guild),
+        memberCount: guildMembers.length,
       }),
-      isMember: !notMember,
-      memberCount: guildMembers.length,
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],

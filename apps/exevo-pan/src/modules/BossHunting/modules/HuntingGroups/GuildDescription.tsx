@@ -1,15 +1,13 @@
 import { Alert } from 'components/Atoms'
-import type { Guild } from '@prisma/client'
+import { useGuildData } from './contexts/useGuildData'
 
-const GuildDescription = ({
-  id,
-  description,
-  isEditable,
-}: Guild & { isEditable: boolean }) => {
-  if (description) {
+const GuildDescription = () => {
+  const { guild } = useGuildData()
+
+  if (guild.description) {
     return (
       <Alert variant="primary" noIcon className="mx-auto max-w-full sm:w-96">
-        {description}
+        {guild.description}
       </Alert>
     )
   }
