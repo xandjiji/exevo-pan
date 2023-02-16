@@ -4,8 +4,7 @@ import { useState } from 'react'
 import { stringify, parse } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
-import { Alert } from 'components/Atoms'
-import { Template, GuildHero } from 'modules/BossHunting'
+import { Template, GuildHero, GuildDescription } from 'modules/BossHunting'
 import { prisma } from 'lib/prisma'
 import type { GuildMember, Guild } from '@prisma/client'
 import { buildPageTitle } from 'utils'
@@ -88,15 +87,7 @@ export default function GuildPage({
       <Template>
         <GuildHero {...guild} memberCount={memberCount} />
         <div className="inner-container z-1 relative grid gap-8">
-          {!!guild.description && (
-            <Alert
-              variant="primary"
-              noIcon
-              className="mx-auto max-w-full sm:w-96"
-            >
-              {guild.description}
-            </Alert>
-          )}
+          <GuildDescription {...guild} isEditable={false} />
         </div>
       </Template>
     </>
