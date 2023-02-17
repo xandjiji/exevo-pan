@@ -6,7 +6,6 @@ import { useGuildData } from './contexts/useGuildData'
 /* @ ToDo:
 
 - add/edit description dialog
-    - consertar caret
     - length counter
     - max length (using pie)
     - submit action
@@ -81,6 +80,7 @@ const GuildDescription = () => {
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, description: e.target.value }))
           }
+          maxLength={100}
         />
 
         <div className="mt-4 flex items-center justify-end gap-4">

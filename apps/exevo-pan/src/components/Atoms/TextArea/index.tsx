@@ -1,4 +1,4 @@
-import { forwardRef, useState, useId } from 'react'
+import { forwardRef, useState, useMemo, useId } from 'react'
 import clsx from 'clsx'
 import Label from '../Label'
 import FormError from '../FormError'
@@ -17,6 +17,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       error,
       noResize,
       style,
+      maxLength,
       ...props
     },
     ref,
@@ -33,6 +34,11 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
         setValue(e.target.value)
       }
     }
+
+    const charCount = useMemo(
+      () => derivedValue.toString().length,
+      [derivedValue],
+    )
 
     return (
       <div
@@ -62,6 +68,16 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           value={derivedValue}
           {...props}
         />
+        {maxLength !== undefined && (
+          <span
+            className={clsx(
+              'mt-2 text-right text-xs tracking-wider',
+              charCount > maxLength && 'text-red',
+            )}
+          >
+            {charCount}/{maxLength}
+          </span>
+        )}
         <FormError
           id={errorId}
           error={error}
