@@ -72,6 +72,7 @@ const CreateGuildDialog = ({
                 setFormState((prev) => ({ ...prev, name: e.target.value }))
               }}
               error={errorMessage}
+              maxLength={32}
               placeholder="Choose a group name"
               className="grow"
             />
