@@ -110,16 +110,16 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (typeof guildName !== 'string') return redirect
 
-  const [guildMembers, guild] = await Promise.all([
-    prisma.guildMember.findMany({
-      where: { guild: { name: guildName } },
-    }),
-    prisma.guild.findUnique({ where: { name: guildName } }),
-  ])
-
-  const currentMember = guildMembers.find(({ userId }) => userId === token?.id)
+  const guild = await prisma.guild.findUnique({
+    where: { name: guildName },
+    include: { guildMembers: true },
+  })
 
   if (!guild) return redirect
+
+  const { guildMembers } = guild
+
+  const currentMember = guildMembers.find(({ userId }) => userId === token?.id)
 
   return {
     props: {
