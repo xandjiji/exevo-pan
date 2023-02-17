@@ -158,7 +158,7 @@ const PaymentList = () => {
           <p className="code w-fit">{toConfirm.character}</p>
         </p>
 
-        <div className="flex justify-end gap-1">
+        <div className="flex justify-end gap-4">
           <Button
             hollow
             pill

@@ -15,6 +15,7 @@ type UseGuildDataProps = ServerSideGuildDataProps & {
 type GuildDataValues = {
   isMember: boolean
   isEditor: boolean
+  isAdmin: boolean
 } & Omit<UseGuildDataProps, 'children'>
 
 const GuildDataContext = createContext<GuildDataValues>({} as GuildDataValues)
@@ -27,6 +28,7 @@ export const GuildDataProvider = ({
   ...propData
 }: UseGuildDataProps) => {
   const [inferredData] = useState({
+    isAdmin: currentMember ? currentMember.role === 'ADMIN' : false,
     isMember: !!currentMember,
     isEditor: currentMember ? editorRoles.has(currentMember.role) : false,
   })

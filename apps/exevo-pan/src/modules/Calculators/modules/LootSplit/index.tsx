@@ -227,7 +227,7 @@ const LootSplit = () => {
           </ChipWrapper>
         </Group>
 
-        <div className="mt-2 flex justify-end gap-2">
+        <div className="mt-2 flex justify-end gap-4">
           {historySelected && (
             <>
               <Button

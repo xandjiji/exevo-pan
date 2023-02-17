@@ -161,7 +161,7 @@ const CreateGuildDialog = ({
         )}
       </div>
 
-      <div className="flex items-center justify-end">
+      <div className="flex items-center justify-end gap-4">
         <Button onClick={onClose} hollow pill>
           Cancel
         </Button>

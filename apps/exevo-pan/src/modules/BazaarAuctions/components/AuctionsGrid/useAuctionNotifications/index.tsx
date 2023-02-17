@@ -267,7 +267,7 @@ export const AuctionNotificationsProvider = ({
                   </div>
                 </div>
 
-                <div className="flex justify-end gap-2">
+                <div className="flex justify-end gap-4">
                   <Button pill hollow onClick={closeNotificationsDialog}>
                     {homepage.AuctionsGrid.useAuctionNotifications.cancelButton}
                   </Button>
