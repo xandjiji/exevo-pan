@@ -1,5 +1,6 @@
 import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
+import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
 import { avatar } from 'Constants'
 
@@ -35,6 +36,68 @@ export const createGuild = authedProcedure.input(CreationSchema).mutation(
       },
     }),
 )
+
+const EditSchema = z.object({
+  guildId: z.string(),
+  name: z.string().min(2).max(32).optional(),
+  private: z.boolean().optional(),
+  server: z.string().min(1).max(32).optional(),
+  description: z.string().max(600).optional(),
+  messageBoard: z.string().max(2048).optional(),
+  avatarId: z.number().min(avatar.id.min).max(avatar.id.max).optional(),
+  avatarDegree: z
+    .number()
+    .min(avatar.degree.min)
+    .max(avatar.degree.max)
+    .optional(),
+})
+
+export type GuildEditInput = z.infer<typeof EditSchema>
+
+export const updateGuild = authedProcedure
+  .input(EditSchema)
+  .mutation(async ({ ctx: { token }, input }) => {
+    const { guildId, ...guildDataPatch } = input
+
+    const guild = await prisma.guild.findUnique({
+      where: { id: guildId },
+      include: { guildMembers: { include: { user: true } } },
+    })
+
+    if (!guild) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Guild [${guildId}] not found`,
+      })
+    }
+
+    const requesterMember = guild.guildMembers.find(
+      ({ userId }) => userId === token.id,
+    )
+
+    if (!requesterMember) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+      })
+    }
+
+    const hasProMember = guild.guildMembers.some(
+      ({ user: { proStatus } }) => proStatus,
+    )
+
+    if (guildDataPatch.private !== undefined && !hasProMember) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+      })
+    }
+
+    const result = prisma.guild.update({
+      where: { id: guildId },
+      data: guildDataPatch,
+    })
+
+    return result
+  })
 
 export const listGuilds = publicProcedure
   .input(
