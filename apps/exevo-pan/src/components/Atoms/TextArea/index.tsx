@@ -29,7 +29,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const handleInput: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
       onChange?.(e)
-      setValue(e.target.value)
+      if (valueProp === undefined) {
+        setValue(e.target.value)
+      }
     }
 
     return (

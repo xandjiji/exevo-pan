@@ -42,24 +42,33 @@ const Input = (
   const derivedValue = valueProp ?? value
   const isClearButtonActive = allowClear && !!derivedValue
 
-  const handleClearClick = useCallback(() => {
-    if (innerRef.current) {
-      if (isClearButtonActive) {
-        const event = new Event('input', { bubbles: true })
-        setValue('')
-        innerRef.current.value = ''
-        innerRef.current.dispatchEvent(event)
+  const handleClearClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement>) => {
+      if (innerRef.current) {
+        if (isClearButtonActive) {
+          if (valueProp === undefined) setValue('')
+
+          const syntheticTarget = { ...innerRef.current }
+          syntheticTarget.value = ''
+          const syntheticChangeEvent: React.ChangeEvent<HTMLInputElement> = {
+            ...event,
+            target: syntheticTarget,
+            currentTarget: syntheticTarget,
+          }
+          onChange?.(syntheticChangeEvent)
+        }
+        innerRef.current.focus()
       }
-      innerRef.current.focus()
-    }
-  }, [isClearButtonActive])
+    },
+    [valueProp, isClearButtonActive],
+  )
 
   const handleInput = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
       onChange?.(e)
-      setValue(e.target.value)
+      if (valueProp === undefined) setValue(e.target.value)
     },
-    [onChange],
+    [valueProp, onChange],
   )
 
   const StateIcon = useStateIcon(stateIcon)
