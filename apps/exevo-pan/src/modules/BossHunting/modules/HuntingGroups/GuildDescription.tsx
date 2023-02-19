@@ -1,10 +1,13 @@
 import { useState, useCallback } from 'react'
 import { Alert, Button, Dialog, TextArea } from 'components/Atoms'
+import { trpc } from 'lib/trpc'
 import { EditIcon } from 'assets/svgs'
+import type { GuildEditInput } from 'server/guild/crud'
 import { useGuildData } from './contexts/useGuildData'
 
 /* @ ToDo:
 
+- verificar role de editar guilda (fazer procedure?)
 - add/edit description dialog
     - submit action
     - after submit

@@ -2,7 +2,45 @@ import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
-import { avatar } from 'Constants'
+import { avatar, guildEditorRoles } from 'Constants'
+
+const throwIfForbiddenGuildRequest = async ({
+  guildId,
+  requesterId,
+}: {
+  guildId: string
+  requesterId: string
+}) => {
+  const guild = await prisma.guild.findUnique({
+    where: { id: guildId },
+    include: { guildMembers: { include: { user: true } } },
+  })
+
+  if (!guild) {
+    throw new TRPCError({
+      code: 'BAD_REQUEST',
+      message: `Guild [${guildId}] not found`,
+    })
+  }
+
+  const requesterMember = guild.guildMembers.find(
+    ({ userId }) => userId === requesterId,
+  )
+
+  if (!requesterMember) {
+    throw new TRPCError({
+      code: 'UNAUTHORIZED',
+    })
+  }
+
+  const hasProMember = guild.guildMembers.some(
+    ({ user: { proStatus } }) => proStatus,
+  )
+
+  const isEditor = guildEditorRoles.has(requesterMember.role)
+
+  return { guild, requesterMember, hasProMember, isEditor }
+}
 
 const CreationSchema = z.object({
   name: z.string().min(2).max(32),
@@ -59,31 +97,16 @@ export const updateGuild = authedProcedure
   .mutation(async ({ ctx: { token }, input }) => {
     const { guildId, ...guildDataPatch } = input
 
-    const guild = await prisma.guild.findUnique({
-      where: { id: guildId },
-      include: { guildMembers: { include: { user: true } } },
+    const { hasProMember, isEditor } = await throwIfForbiddenGuildRequest({
+      guildId,
+      requesterId: token.id,
     })
 
-    if (!guild) {
+    if (!isEditor) {
       throw new TRPCError({
-        code: 'BAD_REQUEST',
-        message: `Guild [${guildId}] not found`,
+        code: 'FORBIDDEN',
       })
     }
-
-    const requesterMember = guild.guildMembers.find(
-      ({ userId }) => userId === token.id,
-    )
-
-    if (!requesterMember) {
-      throw new TRPCError({
-        code: 'UNAUTHORIZED',
-      })
-    }
-
-    const hasProMember = guild.guildMembers.some(
-      ({ user: { proStatus } }) => proStatus,
-    )
 
     if (guildDataPatch.private !== undefined && !hasProMember) {
       throw new TRPCError({

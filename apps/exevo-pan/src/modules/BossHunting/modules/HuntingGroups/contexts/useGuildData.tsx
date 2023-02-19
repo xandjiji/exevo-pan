@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from 'react'
-import type { GuildMember, Guild, GUILD_MEMBER_ROLE } from '@prisma/client'
+import type { GuildMember, Guild } from '@prisma/client'
+import { guildEditorRoles } from 'Constants'
 
 export type ServerSideGuildDataProps = {
   currentMember?: GuildMember
@@ -20,8 +21,6 @@ type GuildDataValues = {
 
 const GuildDataContext = createContext<GuildDataValues>({} as GuildDataValues)
 
-const editorRoles = new Set<GUILD_MEMBER_ROLE>(['ADMIN', 'MODERATOR'])
-
 export const GuildDataProvider = ({
   currentMember,
   children,
@@ -30,7 +29,7 @@ export const GuildDataProvider = ({
   const [inferredData] = useState({
     isAdmin: currentMember ? currentMember.role === 'ADMIN' : false,
     isMember: !!currentMember,
-    isEditor: currentMember ? editorRoles.has(currentMember.role) : false,
+    isEditor: currentMember ? guildEditorRoles.has(currentMember.role) : false,
   })
 
   return (
