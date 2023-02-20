@@ -1,15 +1,15 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Dialog, Button, Input, Checkbox, Alert } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
-import { Avatar, Select, InfoTooltip } from 'components/Organisms'
+import { Select, InfoTooltip } from 'components/Organisms'
 import { useSession } from 'next-auth/react'
 import NextLink from 'next/link'
 import { trpc } from 'lib/trpc'
 import { avatar, getGuildPermalink } from 'utils'
-import { DiceIcon } from 'assets/svgs'
 import { routes } from 'Constants'
 import type { GuildCreationInput } from 'server/guild/crud'
+import { RollAvatar } from './components'
 
 /* @ ToDo:
 
@@ -77,30 +77,15 @@ const CreateGuildDialog = ({
               className="grow"
             />
 
-            <div className="relative">
-              <Avatar
-                alt={formState.name}
-                avatarId={formState.avatarId}
-                avatarDegree={formState.avatarDegree}
-              />
-
-              <button
-                type="button"
-                className="absolute top-[calc(100%+8px)] flex w-full cursor-pointer items-center justify-center gap-1 text-xs"
-                onClick={() =>
-                  setFormState((prev) => ({
-                    ...prev,
-                    avatarId: avatar.getRandom.id(),
-                    avatarDegree: avatar.getRandom.degree(),
-                  }))
-                }
-              >
-                <DiceIcon className="fill-onSurface h-3 w-3" />{' '}
-                <span className="text-onSurface underline underline-offset-2">
-                  Roll
-                </span>
-              </button>
-            </div>
+            <RollAvatar
+              avatarId={formState.avatarId}
+              avatarDegree={formState.avatarDegree}
+              onChange={useCallback(
+                (newAvatar) =>
+                  setFormState((prev) => ({ ...prev, ...newAvatar })),
+                [],
+              )}
+            />
           </div>
 
           <Select
