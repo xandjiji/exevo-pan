@@ -19,8 +19,7 @@ import { RollAvatar } from './components'
 
 /* @ ToDo:
 
-- validate fields (disable submit)
-- caracteres especiais, etc?
+- caracteres especiais, emoji, xss, etc?
 
 - i18n
 
@@ -29,6 +28,16 @@ import { RollAvatar } from './components'
 type EditGuildDialogProps = {
   onClose: () => void
 }
+
+const isFormInvalid = ({
+  name = '',
+  description = '',
+  messageBoard = '',
+}: GuildEditInput): boolean =>
+  name.length < guildValidationRules.name.MIN ||
+  name.length > guildValidationRules.name.MAX ||
+  description.length > guildValidationRules.description.MAX ||
+  messageBoard.length > guildValidationRules.description.MAX
 
 const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   const { guild } = useGuildData()
@@ -62,6 +71,8 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
 
   const groupPrivacyError = updateGuild.error?.message === 'PRO_REQUIRED'
 
+  const invalidForm = isFormInvalid(formState)
+
   return (
     <Dialog
       heading="Edit hunting group"
@@ -73,7 +84,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         <Input
           label="Guild name"
           placeholder="New group name"
-          maxLength={32}
+          maxLength={guildValidationRules.name.MAX}
           value={formState.name}
           error={
             errors.has('name') || !!updateGuild.error?.data?.prisma
@@ -99,7 +110,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
       <TextArea
         label="Description"
         placeholder="Add group description"
-        maxLength={600}
+        maxLength={guildValidationRules.description.MAX}
         value={formState.description}
         className="min-h-[120px]"
         onChange={(e) =>
@@ -111,7 +122,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
       <TextArea
         label="Message board (only seen by members)"
         placeholder="Add a message to the board"
-        maxLength={2048}
+        maxLength={guildValidationRules.messageBoard.MAX}
         value={formState.messageBoard}
         className="min-h-[120px]"
         onChange={(e) =>
@@ -150,7 +161,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         <Button
           pill
           loading={updateGuild.isLoading}
-          disabled={updateGuild.isLoading}
+          disabled={updateGuild.isLoading || invalidForm}
           onClick={() => updateGuild.mutate(formState)}
         >
           Save
