@@ -2,7 +2,7 @@ import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
-import { avatar, guildEditorRoles } from 'Constants'
+import { avatar, guildValidationRules, guildEditorRoles } from 'Constants'
 
 const throwIfForbiddenGuildRequest = async ({
   guildId,
@@ -43,10 +43,16 @@ const throwIfForbiddenGuildRequest = async ({
 }
 
 const CreationSchema = z.object({
-  name: z.string().min(2).max(32),
+  name: z
+    .string()
+    .min(guildValidationRules.name.MIN)
+    .max(guildValidationRules.name.MAX),
   private: z.boolean(),
-  server: z.string().min(1).max(32),
-  description: z.string().max(600).nullable(),
+  server: z
+    .string()
+    .min(guildValidationRules.server.MIN)
+    .max(guildValidationRules.server.MAX),
+  description: z.string().max(guildValidationRules.description.MAX).nullable(),
   avatarId: z.number().min(avatar.id.min).max(avatar.id.max),
   avatarDegree: z.number().min(avatar.degree.min).max(avatar.degree.max),
 })
@@ -77,11 +83,22 @@ export const createGuild = authedProcedure.input(CreationSchema).mutation(
 
 const EditSchema = z.object({
   guildId: z.string(),
-  name: z.string().min(2).max(32).optional(),
+  name: z
+    .string()
+    .min(guildValidationRules.name.MIN)
+    .max(guildValidationRules.name.MAX)
+    .optional(),
   private: z.boolean().optional(),
-  server: z.string().min(1).max(32).optional(),
-  description: z.string().max(600).optional(),
-  messageBoard: z.string().max(2048).optional(),
+  server: z
+    .string()
+    .min(guildValidationRules.server.MIN)
+    .max(guildValidationRules.server.MAX)
+    .optional(),
+  description: z.string().max(guildValidationRules.description.MAX).optional(),
+  messageBoard: z
+    .string()
+    .max(guildValidationRules.messageBoard.MAX)
+    .optional(),
   avatarId: z.number().min(avatar.id.min).max(avatar.id.max).optional(),
   avatarDegree: z
     .number()
@@ -97,10 +114,11 @@ export const updateGuild = authedProcedure
   .mutation(async ({ ctx: { token }, input }) => {
     const { guildId, ...guildDataPatch } = input
 
-    const { hasProMember, isEditor } = await throwIfForbiddenGuildRequest({
-      guildId,
-      requesterId: token.id,
-    })
+    const { guild, hasProMember, isEditor } =
+      await throwIfForbiddenGuildRequest({
+        guildId,
+        requesterId: token.id,
+      })
 
     if (!isEditor) {
       throw new TRPCError({
@@ -108,9 +126,11 @@ export const updateGuild = authedProcedure
       })
     }
 
-    if (guildDataPatch.private !== undefined && !hasProMember) {
+    const isUpdatingGuildPrivacy = guildDataPatch.private !== guild.private
+    if (isUpdatingGuildPrivacy && guildDataPatch.private && !hasProMember) {
       throw new TRPCError({
         code: 'FORBIDDEN',
+        message: 'PRO_REQUIRED',
       })
     }
 
