@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { stringify, parse } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
@@ -9,6 +9,7 @@ import {
   ServerSideGuildDataProps,
   Template,
   GuildHero,
+  EditGuildDialog,
   GuildDescription,
 } from 'modules/BossHunting'
 import { prisma } from 'lib/prisma'
@@ -26,6 +27,9 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
   const [guildDataProps] = useState<ServerSideGuildDataProps>(
     parse(serializedGuildData),
   )
+
+  const [isEditOpen, setIsEditOpen] = useState(false)
+  const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
   /* @ ToDo: add title */
   /* const pageName = translations.bossTracker.Meta.title */
@@ -86,7 +90,8 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
         <Template>
           <GuildHero />
           <div className="inner-container z-1 relative grid gap-8">
-            <GuildDescription />
+            {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
+            <GuildDescription onEdit={toggleEditDialog} />
           </div>
         </Template>
       </GuildDataProvider>
