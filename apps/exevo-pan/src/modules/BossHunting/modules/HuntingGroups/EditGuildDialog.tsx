@@ -1,7 +1,16 @@
 import { useState, useCallback } from 'react'
-import { Dialog, Input, Checkbox, TextArea, Button } from 'components/Atoms'
+import {
+  Dialog,
+  Input,
+  Checkbox,
+  TextArea,
+  Button,
+  Alert,
+} from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
+import { guildValidationRules } from 'Constants'
 import type { GuildEditInput } from 'server/guild/crud'
 import { useGuildData } from './contexts/useGuildData'
 import { RollAvatar } from './components'
@@ -10,8 +19,7 @@ import { RollAvatar } from './components'
 
 - validate fields (disable submit)
 
-- submit action
-- after submit (router push formState.name) (field errors)
+- after submit (router push formState.name)
 - caracteres especiais, etc?
 
 - i18n
@@ -35,6 +43,20 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
     avatarDegree: guild.avatarDegree,
   })
 
+  const updateGuild = trpc.updateGuild.useMutation({
+    onSuccess: () => {
+      toast.success('Guild was updated successfuly!')
+      /* @ ToDo: redirect to new guild name */
+    },
+    onError: () => toast.error('Oops! Something went wrong'),
+  })
+
+  const errors = new Set<string>(
+    Object.keys(updateGuild.error?.data?.zodError?.fieldErrors ?? []),
+  )
+
+  const groupPrivacyError = updateGuild.error?.message === 'PRO_REQUIRED'
+
   return (
     <Dialog
       heading="Edit hunting group"
@@ -48,6 +70,11 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
           placeholder="New group name"
           maxLength={32}
           value={formState.name}
+          error={
+            errors.has('name') || !!updateGuild.error?.data?.prisma
+              ? `Must be a unique name between ${guildValidationRules.name.MIN}-${guildValidationRules.name.MAX} characters`
+              : undefined
+          }
           onChange={(e) =>
             setFormState((prev) => ({ ...prev, name: e.target.value }))
           }
@@ -73,17 +100,19 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         onChange={(e) =>
           setFormState((prev) => ({ ...prev, description: e.target.value }))
         }
+        error={errors.has('description')}
       />
 
       <TextArea
         label="Message board (only seen by members)"
         placeholder="Add a message to the board"
+        maxLength={2048}
         value={formState.messageBoard}
         className="min-h-[120px]"
         onChange={(e) =>
           setFormState((prev) => ({ ...prev, messageBoard: e.target.value }))
         }
-        maxLength={2048}
+        error={errors.has('messageBoard')}
       />
 
       <Checkbox
@@ -103,11 +132,24 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         }
       />
 
+      {groupPrivacyError && (
+        <Alert variant="alert" className="mt-1">
+          At least one Exevo Pro group member is required to set a private group
+        </Alert>
+      )}
+
       <div className="mt-4 flex items-center justify-end gap-4">
         <Button pill hollow onClick={onClose}>
           Cancel
         </Button>
-        <Button pill>Save</Button>
+        <Button
+          pill
+          loading={updateGuild.isLoading}
+          disabled={updateGuild.isLoading}
+          onClick={() => updateGuild.mutate(formState)}
+        >
+          Save
+        </Button>
       </div>
     </Dialog>
   )
