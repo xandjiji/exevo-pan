@@ -8,8 +8,10 @@ import {
   Alert,
 } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
+import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
+import { addLocalePrefix, getGuildPermalink } from 'utils'
 import { guildValidationRules } from 'Constants'
 import type { GuildEditInput } from 'server/guild/crud'
 import { useGuildData } from './contexts/useGuildData'
@@ -18,8 +20,6 @@ import { RollAvatar } from './components'
 /* @ ToDo:
 
 - validate fields (disable submit)
-
-- after submit (router push formState.name)
 - caracteres especiais, etc?
 
 - i18n
@@ -32,6 +32,8 @@ type EditGuildDialogProps = {
 
 const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   const { guild } = useGuildData()
+
+  const router = useRouter()
 
   const [formState, setFormState] = useState<GuildEditInput>({
     guildId: guild.id,
@@ -46,7 +48,10 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   const updateGuild = trpc.updateGuild.useMutation({
     onSuccess: () => {
       toast.success('Guild was updated successfuly!')
-      /* @ ToDo: redirect to new guild name */
+      window.location.pathname = addLocalePrefix({
+        route: getGuildPermalink(formState.name ?? guild.name),
+        locale: router.locale,
+      })
     },
     onError: () => toast.error('Oops! Something went wrong'),
   })
