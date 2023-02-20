@@ -1,13 +1,12 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Dialog, Input, Checkbox, TextArea, Button } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
 import { trpc } from 'lib/trpc'
 import type { GuildEditInput } from 'server/guild/crud'
 import { useGuildData } from './contexts/useGuildData'
+import { RollAvatar } from './components'
 
 /* @ ToDo:
-
-avatar
 
 - validate fields (disable submit)
 
@@ -41,28 +40,44 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
       heading="Edit hunting group"
       isOpen
       onClose={onClose}
-      className="grid gap-4 sm:min-w-[420px]"
+      className="grid gap-2 sm:min-w-[420px]"
     >
-      <Input
-        label="Guild name"
-        value={formState.name}
-        onChange={(e) =>
-          setFormState((prev) => ({ ...prev, name: e.target.value }))
-        }
-      />
+      <div className="mb-4 flex items-end gap-8">
+        <Input
+          label="Guild name"
+          placeholder="New group name"
+          maxLength={32}
+          value={formState.name}
+          onChange={(e) =>
+            setFormState((prev) => ({ ...prev, name: e.target.value }))
+          }
+          className="grow"
+        />
+
+        <RollAvatar
+          avatarId={formState.avatarId ?? 0}
+          avatarDegree={formState.avatarDegree ?? 0}
+          onChange={useCallback(
+            (newAvatar) => setFormState((prev) => ({ ...prev, ...newAvatar })),
+            [],
+          )}
+        />
+      </div>
 
       <TextArea
         label="Description"
+        placeholder="Add group description"
+        maxLength={600}
         value={formState.description}
         className="min-h-[120px]"
         onChange={(e) =>
           setFormState((prev) => ({ ...prev, description: e.target.value }))
         }
-        maxLength={600}
       />
 
       <TextArea
         label="Message board (only seen by members)"
+        placeholder="Add a message to the board"
         value={formState.messageBoard}
         className="min-h-[120px]"
         onChange={(e) =>
