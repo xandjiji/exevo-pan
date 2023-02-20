@@ -7,7 +7,6 @@ import { useGuildData } from './contexts/useGuildData'
 
 /* @ ToDo:
 
-- verificar role de editar guilda (fazer procedure?)
 - add/edit description dialog
     - submit action
     - after submit
