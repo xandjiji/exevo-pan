@@ -34,7 +34,9 @@ export const GuildDataProvider = ({
   })
 
   return (
-    <GuildDataContext.Provider value={{ ...propData, ...inferredData }}>
+    <GuildDataContext.Provider
+      value={{ ...propData, ...inferredData, currentMember }}
+    >
       {children}
     </GuildDataContext.Provider>
   )

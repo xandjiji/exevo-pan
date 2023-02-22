@@ -2,6 +2,7 @@ import { memo } from 'react'
 import { Table } from 'components/Atoms'
 import { LockIcon } from 'assets/svgs'
 import type { GuildMember } from '@prisma/client'
+import { ManageUser } from './ManageUser'
 
 type MemberListProps = {
   title: string
@@ -11,13 +12,6 @@ type MemberListProps = {
 } & JSX.IntrinsicElements['div']
 
 /* @ ToDo: i18n */
-
-/* @ ToDo:
-
-    - empty state (private)
-    - edit dropdown
-
-*/
 
 const MemberList = ({
   title,
@@ -39,19 +33,25 @@ const MemberList = ({
         </Table.Head>
 
         <Table.Body>
-          {members.map(({ id, name, role }) => (
-            <Table.Row key={id}>
+          {members.map((member) => (
+            <Table.Row key={member.id}>
               <Table.Column className="text-center">
-                {role !== 'USER' && (
+                {member.role !== 'USER' && (
                   <span className="bg-primary text-onPrimary rounded p-1 text-xs font-bold uppercase tracking-wider">
-                    {role === 'ADMIN' && '👑 Admin'}
-                    {role === 'MODERATOR' && 'Moderator'}
+                    {member.role === 'ADMIN' && '👑 Admin'}
+                    {member.role === 'MODERATOR' && 'Moderator'}
                   </span>
                 )}
               </Table.Column>
               <Table.Column className="flex items-center gap-2">
-                {name}
+                {member.name}
               </Table.Column>
+
+              {isEditor && (
+                <Table.Column className="w-6 text-center">
+                  <ManageUser {...member} />
+                </Table.Column>
+              )}
             </Table.Row>
           ))}
         </Table.Body>
