@@ -12,7 +12,7 @@ const Template = ({ children }: ComponentProps) => {
   return (
     <Main>
       <SubHeader navItems={routes} />
-      <main>{children}</main>
+      <main className="pb-6">{children}</main>
     </Main>
   )
 }

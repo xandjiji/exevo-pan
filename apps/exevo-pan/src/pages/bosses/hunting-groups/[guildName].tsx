@@ -122,12 +122,7 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                     <MemberList
                       title="Members"
                       guildName={guild.name}
-                      members={[
-                        ...guild.guildMembers,
-                        ...guild.guildMembers,
-                        ...guild.guildMembers,
-                        ...guild.guildMembers,
-                      ]}
+                      members={guild.guildMembers}
                       isEditor={isEditor}
                     />
                   </div>
