@@ -94,7 +94,7 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
             {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
             <GuildDataConsumer>
               {({ isEditor, guild: { description, messageBoard } }) => (
-                <>
+                <div className="mx-auto grid max-w-full gap-6 sm:w-96 md:w-[540px]">
                   {/* @ ToDo: i18n */}
                   <MessageBoard
                     title="Description"
@@ -113,7 +113,7 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                     editText="Edit message"
                     onEdit={toggleEditDialog}
                   />
-                </>
+                </div>
               )}
             </GuildDataConsumer>
           </div>

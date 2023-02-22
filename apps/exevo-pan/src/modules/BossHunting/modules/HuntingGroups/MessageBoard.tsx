@@ -21,7 +21,7 @@ const MessageBoard = ({
   if (!description && !isEditor) return null
 
   return (
-    <div className="mx-auto grid max-w-full gap-2 sm:w-96">
+    <div className="grid gap-2">
       <h4 className="text-tsm text-onSurface font-normal">{title}</h4>
       {description ? (
         <Alert variant="primary" noIcon className="whitespace-pre-line">
@@ -40,7 +40,7 @@ const MessageBoard = ({
           )}
         </Alert>
       ) : (
-        <div className="border-1 border-separator mx-auto grid max-w-full place-items-center rounded-md border-dashed py-2 px-4 sm:w-96">
+        <div className="border-1 border-separator mx-auto grid w-full place-items-center rounded-md border-dashed py-2 px-4">
           <Button hollow pill className="mx-auto text-base" onClick={onEdit}>
             <EditIcon className="h-4 w-4" />
             {addText}
