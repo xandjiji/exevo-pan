@@ -70,7 +70,11 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
               </div>
             </div>
 
-            {!!description && <p className="text-s">{description}</p>}
+            {!!description && (
+              <p className="text-s line-clamp-2 whitespace-pre-wrap">
+                {description}
+              </p>
+            )}
 
             {!!onApply && (
               <Button

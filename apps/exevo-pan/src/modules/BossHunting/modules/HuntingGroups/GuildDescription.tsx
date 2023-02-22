@@ -18,7 +18,11 @@ const GuildDescription = ({ onEdit }: GuildDescriptionProps) => {
   if (!guild.description && !isEditor) return null
 
   return guild.description ? (
-    <Alert variant="primary" noIcon className="mx-auto max-w-full sm:w-96">
+    <Alert
+      variant="primary"
+      noIcon
+      className="mx-auto max-w-full whitespace-pre-wrap sm:w-96"
+    >
       {guild.description}
 
       {isEditor && (

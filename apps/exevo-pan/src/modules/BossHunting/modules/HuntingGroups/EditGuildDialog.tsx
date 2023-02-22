@@ -19,8 +19,6 @@ import { RollAvatar } from './components'
 
 /* @ ToDo:
 
-- caracteres especiais, emoji, xss, etc?
-
 - i18n
 
 */
