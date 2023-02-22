@@ -91,7 +91,13 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
           <GuildHero />
           <div className="inner-container z-1 relative grid gap-8">
             {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-            <MessageBoard onEdit={toggleEditDialog} />
+            {/* @ ToDo: i18n */}
+            <MessageBoard
+              title="Description"
+              addText="Add description"
+              editText="Edit description"
+              onEdit={toggleEditDialog}
+            />
           </div>
         </Template>
       </GuildDataProvider>
