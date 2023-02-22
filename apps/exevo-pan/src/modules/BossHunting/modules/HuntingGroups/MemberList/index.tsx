@@ -9,6 +9,7 @@ type MemberListProps = {
   guildName: string
   members: GuildMember[]
   isEditor: boolean
+  currentMember?: GuildMember
 } & JSX.IntrinsicElements['div']
 
 /* @ ToDo: i18n */
@@ -17,6 +18,7 @@ const MemberList = ({
   title,
   guildName,
   members,
+  currentMember,
   isEditor,
   ...props
 }: MemberListProps) => (
@@ -33,27 +35,32 @@ const MemberList = ({
         </Table.Head>
 
         <Table.Body>
-          {members.map((member) => (
-            <Table.Row key={member.id}>
-              <Table.Column className="text-center">
-                {member.role !== 'USER' && (
-                  <span className="bg-primary text-onPrimary rounded p-1 text-xs font-bold uppercase tracking-wider">
-                    {member.role === 'ADMIN' && '👑 Admin'}
-                    {member.role === 'MODERATOR' && 'Moderator'}
-                  </span>
-                )}
-              </Table.Column>
-              <Table.Column className="flex items-center gap-2">
-                {member.name}
-              </Table.Column>
+          {members.map((member) => {
+            const { role } = member
+            const isSelf = member.id === currentMember?.id
 
-              {isEditor && (
-                <Table.Column className="w-6 text-center">
-                  <ManageUser {...member} />
+            return (
+              <Table.Row key={member.id}>
+                <Table.Column className="text-center">
+                  {role !== 'USER' && (
+                    <span className="bg-primary text-onPrimary rounded p-1 text-xs font-bold uppercase tracking-wider">
+                      {role === 'ADMIN' && '👑 Admin'}
+                      {role === 'MODERATOR' && 'Moderator'}
+                    </span>
+                  )}
                 </Table.Column>
-              )}
-            </Table.Row>
-          ))}
+                <Table.Column className="flex items-center gap-2">
+                  {member.name}
+                </Table.Column>
+
+                {(isEditor || isSelf) && (
+                  <Table.Column className="w-6 text-center">
+                    <ManageUser {...member} />
+                  </Table.Column>
+                )}
+              </Table.Row>
+            )
+          })}
         </Table.Body>
       </Table.Element>
     ) : (

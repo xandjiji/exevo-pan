@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import clsx from 'clsx'
-import { Menu } from 'components/Organisms'
+import { Menu, useMenuItems } from 'components/Organisms'
 import {
   MoreHorizontalIcon,
   TrashIcon,
@@ -35,28 +35,21 @@ export const ManageUser = (managedUser: GuildMember) => {
   return (
     <Menu
       offset={[0, 8]}
-      items={[
-        ...(isSelfManaging
-          ? [
-              {
-                label: 'Change name',
-                icon: EditIcon,
-              },
-            ]
-          : []),
-        ...(isAdmin && !isSelfManaging
-          ? [
-              {
-                label: 'Add role',
-                icon: OutlineAddIcon,
-              },
-            ]
-          : []),
+      items={useMenuItems([
+        isSelfManaging && {
+          label: 'Change name',
+          icon: EditIcon,
+        },
+        isAdmin &&
+          !isSelfManaging && {
+            label: 'Add role',
+            icon: OutlineAddIcon,
+          },
         {
           label: isSelfManaging ? 'Leave group' : 'Remove member',
           icon: RemoveMemberIcon,
         },
-      ]}
+      ])}
     >
       <MoreHorizontalIcon className="fill-onSurface h-4 w-4" />
     </Menu>
