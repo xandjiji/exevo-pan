@@ -12,6 +12,7 @@ import {
   GuildHero,
   EditGuildDialog,
   MessageBoard,
+  MemberList,
 } from 'modules/BossHunting'
 import { prisma } from 'lib/prisma'
 import { buildPageTitle } from 'utils'
@@ -93,9 +94,11 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
             {({ isEditor, guild, memberCount }) => (
               <>
                 <GuildHero guild={guild} memberCount={memberCount} />
+
                 <div className="inner-container z-1 relative grid gap-8">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-                  <div className="mx-auto grid max-w-full gap-6 sm:w-96 md:w-[540px]">
+
+                  <div className="mx-auto grid max-w-full gap-8 sm:w-96 md:w-[540px]">
                     {/* @ ToDo: i18n */}
                     <MessageBoard
                       title="Description"
@@ -105,6 +108,7 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                       editText="Edit description"
                       onEdit={toggleEditDialog}
                     />
+
                     {/* @ ToDo: i18n */}
                     <MessageBoard
                       title="Internal message board"
@@ -113,6 +117,18 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                       addText="Add message"
                       editText="Edit message"
                       onEdit={toggleEditDialog}
+                    />
+
+                    <MemberList
+                      title="Members"
+                      guildName={guild.name}
+                      members={[
+                        ...guild.guildMembers,
+                        ...guild.guildMembers,
+                        ...guild.guildMembers,
+                        ...guild.guildMembers,
+                      ]}
+                      isEditor={isEditor}
                     />
                   </div>
                 </div>

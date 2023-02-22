@@ -4,8 +4,7 @@ import { guildEditorRoles } from 'Constants'
 
 export type ServerSideGuildDataProps = {
   currentMember?: GuildMember
-  guildMembers: GuildMember[]
-  guild: Guild
+  guild: Guild & { guildMembers: GuildMember[] }
   memberCount: number
 }
 
