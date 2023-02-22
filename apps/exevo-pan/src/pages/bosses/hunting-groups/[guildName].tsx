@@ -89,34 +89,36 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
 
       <GuildDataProvider {...guildDataProps}>
         <Template>
-          <GuildHero />
-          <div className="inner-container z-1 relative grid gap-8">
-            {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-            <GuildDataConsumer>
-              {({ isEditor, guild: { description, messageBoard } }) => (
-                <div className="mx-auto grid max-w-full gap-6 sm:w-96 md:w-[540px]">
-                  {/* @ ToDo: i18n */}
-                  <MessageBoard
-                    title="Description"
-                    description={description}
-                    isEditor={isEditor}
-                    addText="Add description"
-                    editText="Edit description"
-                    onEdit={toggleEditDialog}
-                  />
-                  {/* @ ToDo: i18n */}
-                  <MessageBoard
-                    title="Internal message board"
-                    description={messageBoard}
-                    isEditor={isEditor}
-                    addText="Add message"
-                    editText="Edit message"
-                    onEdit={toggleEditDialog}
-                  />
+          <GuildDataConsumer>
+            {({ isEditor, guild, memberCount }) => (
+              <>
+                <GuildHero guild={guild} memberCount={memberCount} />
+                <div className="inner-container z-1 relative grid gap-8">
+                  {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
+                  <div className="mx-auto grid max-w-full gap-6 sm:w-96 md:w-[540px]">
+                    {/* @ ToDo: i18n */}
+                    <MessageBoard
+                      title="Description"
+                      description={guild.description}
+                      isEditor={isEditor}
+                      addText="Add description"
+                      editText="Edit description"
+                      onEdit={toggleEditDialog}
+                    />
+                    {/* @ ToDo: i18n */}
+                    <MessageBoard
+                      title="Internal message board"
+                      description={guild.messageBoard}
+                      isEditor={isEditor}
+                      addText="Add message"
+                      editText="Edit message"
+                      onEdit={toggleEditDialog}
+                    />
+                  </div>
                 </div>
-              )}
-            </GuildDataConsumer>
-          </div>
+              </>
+            )}
+          </GuildDataConsumer>
         </Template>
       </GuildDataProvider>
     </>

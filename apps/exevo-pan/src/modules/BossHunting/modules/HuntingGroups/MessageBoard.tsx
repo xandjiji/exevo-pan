@@ -1,3 +1,4 @@
+import { memo } from 'react'
 import { Alert, Button } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 
@@ -51,4 +52,4 @@ const MessageBoard = ({
   )
 }
 
-export default MessageBoard
+export default memo(MessageBoard)
