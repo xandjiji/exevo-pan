@@ -53,10 +53,10 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   })
 
   const updateGuild = trpc.updateGuild.useMutation({
-    onSuccess: () => {
+    onSuccess: ({ name }) => {
       toast.success('Guild was updated successfuly!')
       window.location.pathname = addLocalePrefix({
-        route: getGuildPermalink(formState.name ?? guild.name),
+        route: getGuildPermalink(name),
         locale: router.locale,
       })
     },

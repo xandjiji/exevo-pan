@@ -64,12 +64,15 @@ export const createGuild = authedProcedure.input(CreationSchema).mutation(
     ctx: {
       token: { id, name, proStatus },
     },
-    input,
+    input: { name: guildName, description, server, ...guildData },
   }) =>
     prisma.guild.create({
       data: {
-        ...input,
-        private: proStatus ? input.private : false,
+        ...guildData,
+        name: guildName.trim(),
+        description: description?.trim(),
+        server: server.trim(),
+        private: proStatus ? guildData.private : false,
         guildMembers: {
           create: {
             userId: id,
@@ -112,7 +115,8 @@ export type GuildEditInput = z.infer<typeof EditSchema>
 export const updateGuild = authedProcedure
   .input(EditSchema)
   .mutation(async ({ ctx: { token }, input }) => {
-    const { guildId, ...guildDataPatch } = input
+    const { guildId, name, description, messageBoard, server, ...guildData } =
+      input
 
     const { guild, hasProMember, isEditor } =
       await throwIfForbiddenGuildRequest({
@@ -126,8 +130,8 @@ export const updateGuild = authedProcedure
       })
     }
 
-    const isUpdatingGuildPrivacy = guildDataPatch.private !== guild.private
-    if (isUpdatingGuildPrivacy && guildDataPatch.private && !hasProMember) {
+    const isUpdatingGuildPrivacy = guildData.private !== guild.private
+    if (isUpdatingGuildPrivacy && guildData.private && !hasProMember) {
       throw new TRPCError({
         code: 'FORBIDDEN',
         message: 'PRO_REQUIRED',
@@ -136,7 +140,13 @@ export const updateGuild = authedProcedure
 
     const result = prisma.guild.update({
       where: { id: guildId },
-      data: guildDataPatch,
+      data: {
+        ...guildData,
+        name: name?.trim(),
+        description: description?.trim(),
+        messageBoard: messageBoard?.trim(),
+        server: server?.trim(),
+      },
     })
 
     return result
