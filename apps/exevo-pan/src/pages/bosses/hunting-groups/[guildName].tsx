@@ -10,7 +10,7 @@ import {
   Template,
   GuildHero,
   EditGuildDialog,
-  GuildDescription,
+  MessageBoard,
 } from 'modules/BossHunting'
 import { prisma } from 'lib/prisma'
 import { buildPageTitle } from 'utils'
@@ -91,7 +91,7 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
           <GuildHero />
           <div className="inner-container z-1 relative grid gap-8">
             {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-            <GuildDescription onEdit={toggleEditDialog} />
+            <MessageBoard onEdit={toggleEditDialog} />
           </div>
         </Template>
       </GuildDataProvider>

@@ -8,11 +8,11 @@ import { useGuildData } from './contexts/useGuildData'
 
 */
 
-type GuildDescriptionProps = {
+type MessageBoardProps = {
   onEdit: () => void
 }
 
-const GuildDescription = ({ onEdit }: GuildDescriptionProps) => {
+const MessageBoard = ({ onEdit }: MessageBoardProps) => {
   const { guild, isEditor } = useGuildData()
 
   if (!guild.description && !isEditor) return null
@@ -42,4 +42,4 @@ const GuildDescription = ({ onEdit }: GuildDescriptionProps) => {
   )
 }
 
-export default GuildDescription
+export default MessageBoard
