@@ -21,6 +21,8 @@ type GuildDataValues = {
 
 const GuildDataContext = createContext<GuildDataValues>({} as GuildDataValues)
 
+export const GuildDataConsumer = GuildDataContext.Consumer
+
 export const GuildDataProvider = ({
   currentMember,
   children,

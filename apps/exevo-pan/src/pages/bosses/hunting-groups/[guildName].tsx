@@ -6,6 +6,7 @@ import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
 import {
   GuildDataProvider,
+  GuildDataConsumer,
   ServerSideGuildDataProps,
   Template,
   GuildHero,
@@ -91,13 +92,30 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
           <GuildHero />
           <div className="inner-container z-1 relative grid gap-8">
             {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-            {/* @ ToDo: i18n */}
-            <MessageBoard
-              title="Description"
-              addText="Add description"
-              editText="Edit description"
-              onEdit={toggleEditDialog}
-            />
+            <GuildDataConsumer>
+              {({ isEditor, guild: { description, messageBoard } }) => (
+                <>
+                  {/* @ ToDo: i18n */}
+                  <MessageBoard
+                    title="Description"
+                    description={description}
+                    isEditor={isEditor}
+                    addText="Add description"
+                    editText="Edit description"
+                    onEdit={toggleEditDialog}
+                  />
+                  {/* @ ToDo: i18n */}
+                  <MessageBoard
+                    title="Internal message board"
+                    description={messageBoard}
+                    isEditor={isEditor}
+                    addText="Add message"
+                    editText="Edit message"
+                    onEdit={toggleEditDialog}
+                  />
+                </>
+              )}
+            </GuildDataConsumer>
           </div>
         </Template>
       </GuildDataProvider>

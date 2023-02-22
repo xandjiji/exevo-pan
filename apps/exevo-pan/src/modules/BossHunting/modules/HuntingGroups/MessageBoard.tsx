@@ -1,15 +1,10 @@
 import { Alert, Button } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
-import { useGuildData } from './contexts/useGuildData'
-
-/* @ ToDo:
-
-- i18n
-
-*/
 
 type MessageBoardProps = {
   title?: React.ReactNode
+  description?: string | null
+  isEditor: boolean
   editText: string
   addText: string
   onEdit: () => void
@@ -17,20 +12,20 @@ type MessageBoardProps = {
 
 const MessageBoard = ({
   title,
+  description,
+  isEditor,
   editText,
   addText,
   onEdit,
 }: MessageBoardProps) => {
-  const { guild, isEditor } = useGuildData()
-
-  if (!guild.description && !isEditor) return null
+  if (!description && !isEditor) return null
 
   return (
     <div className="mx-auto grid max-w-full gap-2 sm:w-96">
       <h4 className="text-tsm text-onSurface font-normal">{title}</h4>
-      {guild.description ? (
-        <Alert variant="primary" noIcon className="whitespace-pre-wrap">
-          {guild.description}
+      {description ? (
+        <Alert variant="primary" noIcon className="whitespace-pre-line">
+          <div style={{ wordBreak: 'break-word' }}>{description}</div>
 
           {isEditor && (
             <Button
