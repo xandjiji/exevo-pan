@@ -172,10 +172,11 @@ export const getServerSideProps: GetServerSideProps = async ({
     props: {
       serializedGuildData: stringify({
         currentMember,
-        guildMembers: guild.private && currentMember ? guildMembers : [],
-        guild: currentMember
-          ? guild
-          : ({ ...guild, messageBoard: null } as typeof guild),
+        guild: {
+          ...guild,
+          guildMembers: !guild.private || currentMember ? guildMembers : [],
+          messageBoard: currentMember ? guild.messageBoard : null,
+        } as typeof guild,
         memberCount: guildMembers.length,
       }),
       translations: {
