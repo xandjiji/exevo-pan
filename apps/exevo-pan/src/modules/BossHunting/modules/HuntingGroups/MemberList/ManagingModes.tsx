@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable react/destructuring-assignment */
 import { useState } from 'react'
 import { Dialog, Button } from 'components/Atoms'
@@ -9,6 +10,8 @@ import type { GuildMember, GUILD_MEMBER_ROLE } from '@prisma/client'
 /* @ ToDo: i18n */
 /* @ ToDo: testar todas as interaçoes */
 
+const reloadPage = () => location.reload()
+
 type ModeProps = {
   managedUser: GuildMember
   onClose: () => void
@@ -17,9 +20,9 @@ type ModeProps = {
 export const Role = ({ managedUser, onClose }: ModeProps) => {
   const manage = trpc.manageGuildMemberRole.useMutation({
     onSuccess: () => {
-      /* @ ToDo: update page props */
       toast.success(`${managedUser.name} was successfully updated!`)
       onClose()
+      reloadPage()
     },
     onError: () => {
       toast.error('Oops! Something went wrong')

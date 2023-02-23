@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import { useState, useCallback, memo } from 'react'
+import { useState, useCallback } from 'react'
 import clsx from 'clsx'
 import { Menu, useMenuItems } from 'components/Organisms'
 import {
