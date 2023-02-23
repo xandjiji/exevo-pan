@@ -278,7 +278,7 @@ export const excludeGuildMember = authedProcedure
     }
 
     const allMembers = await prisma.guildMember.findMany({
-      where: { guildId: excludedMember.id },
+      where: { guildId: excludedMember.guildId },
       orderBy: { joinedAt: 'asc' },
     })
 
@@ -296,7 +296,7 @@ export const excludeGuildMember = authedProcedure
       const guildWillDisband = allMembers.length === 1
 
       if (guildWillDisband) {
-        await prisma.guild.delete({ where: { id: excludedMember.id } })
+        await prisma.guild.delete({ where: { id: excludedMember.guildId } })
 
         return excludedMember
       }

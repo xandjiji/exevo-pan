@@ -23,7 +23,6 @@ const RemoveMemberIcon = ({
 
 /* @ ToDo:
 
-- kick/leave user action
 - change name action
 
 */
