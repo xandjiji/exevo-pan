@@ -6,6 +6,7 @@ import { Select } from 'components/Organisms'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import type { GuildMember, GUILD_MEMBER_ROLE } from '@prisma/client'
+import { useGuildData } from '../contexts/useGuildData'
 
 /* @ ToDo: i18n */
 /* @ ToDo: testar todas as interaçoes */
@@ -60,7 +61,62 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
           loading={manage.isLoading}
           disabled={manage.isLoading || managedUser.role === selectedRole}
         >
-          Submit
+          Confirm
+        </Button>
+      </div>
+    </Dialog>
+  )
+}
+
+export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
+  const { currentMember, guild } = useGuildData()
+  const isSelfExcluding = currentMember?.id === managedUser.id
+
+  const manage = trpc.excludeGuildMember.useMutation({
+    onSuccess: () => {
+      toast.success(`${managedUser.name} has left the party`)
+      onClose()
+      reloadPage()
+    },
+    onError: () => {
+      toast.error('Oops! Something went wrong')
+    },
+  })
+
+  return (
+    <Dialog
+      heading={
+        isSelfExcluding ? 'Leave hunting group' : 'Kick hunting group member'
+      }
+      isOpen
+      onClose={onClose}
+    >
+      <h4 className="child:font-bold my-8 text-base font-light">
+        {isSelfExcluding ? (
+          <>
+            Are you sure you want to leave <strong>{guild.name}</strong>?
+          </>
+        ) : (
+          <>
+            Are you sure you want to kick <strong>{managedUser.name}</strong>?
+          </>
+        )}
+      </h4>
+
+      <div className="mt-6 flex items-center justify-end gap-4">
+        <Button pill hollow onClick={onClose}>
+          Cancel
+        </Button>
+        <Button
+          pill
+          onClick={() =>
+            manage.mutate({ excludedGuildMemberId: managedUser.id })
+          }
+          loading={manage.isLoading}
+          disabled={manage.isLoading}
+          className="bg-red"
+        >
+          {isSelfExcluding ? 'Leave' : 'Kick'}
         </Button>
       </div>
     </Dialog>

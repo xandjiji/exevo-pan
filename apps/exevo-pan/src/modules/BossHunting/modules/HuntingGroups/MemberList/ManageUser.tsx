@@ -29,7 +29,7 @@ const RemoveMemberIcon = ({
 */
 
 export const ManageUser = (managedUser: GuildMember) => {
-  const [managingMode, setManagingMode] = useState<'ROLE'>()
+  const [managingMode, setManagingMode] = useState<'ROLE' | 'EXCLUSION'>()
   const resetManagingMode = useCallback(() => setManagingMode(undefined), [])
 
   const { isAdmin, currentMember } = useGuildData()
@@ -54,6 +54,7 @@ export const ManageUser = (managedUser: GuildMember) => {
           {
             label: isSelfManaging ? 'Leave group' : 'Kick member',
             icon: RemoveMemberIcon,
+            onSelect: () => setManagingMode('EXCLUSION'),
           },
         ])}
       >
@@ -62,6 +63,13 @@ export const ManageUser = (managedUser: GuildMember) => {
 
       {managingMode === 'ROLE' && (
         <ManagingMode.Role
+          managedUser={managedUser}
+          onClose={resetManagingMode}
+        />
+      )}
+
+      {managingMode === 'EXCLUSION' && (
+        <ManagingMode.Exclusion
           managedUser={managedUser}
           onClose={resetManagingMode}
         />
