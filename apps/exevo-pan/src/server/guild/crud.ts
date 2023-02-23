@@ -253,3 +253,95 @@ export const manageGuildMemberRole = authedProcedure
 
     return result
   })
+
+const EXCLUDABLE_MEMBER_ROLES = new Set(GUILD_MEMBER_ROLES.USER)
+const ALLOWED_ROLES_TO_EXCLUDE_MEMBERS = new Set([
+  GUILD_MEMBER_ROLES.MODERATOR,
+  GUILD_MEMBER_ROLES.ADMIN,
+])
+
+export const excludeGuildMember = authedProcedure
+  .input(
+    z.object({
+      excludedGuildMemberId: z.string(),
+    }),
+  )
+  .mutation(async ({ ctx: { token }, input: { excludedGuildMemberId } }) => {
+    const excludedMember = await prisma.guildMember.findUnique({
+      where: { id: excludedGuildMemberId },
+    })
+
+    if (!excludedMember) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+      })
+    }
+
+    const allMembers = await prisma.guildMember.findMany({
+      where: { guildId: excludedMember.id },
+      orderBy: { joinedAt: 'asc' },
+    })
+
+    const requesterMember = allMembers.find(({ userId }) => userId === token.id)
+
+    if (!requesterMember) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+      })
+    }
+
+    const isSelfExcluding = requesterMember.id === excludedMember.id
+
+    if (isSelfExcluding) {
+      const guildWillDisband = allMembers.length === 1
+
+      if (guildWillDisband) {
+        await prisma.guild.delete({ where: { id: excludedMember.id } })
+
+        return excludedMember
+      }
+
+      if (excludedMember.role === 'ADMIN') {
+        const [newElectedAdmin] = allMembers.filter(
+          ({ id }) => id !== excludedMember.id,
+        )
+
+        await prisma.$transaction([
+          prisma.guildMember.delete({ where: { id: excludedMember.id } }),
+          prisma.guildMember.update({
+            where: { id: newElectedAdmin.id },
+            data: { role: 'ADMIN' },
+          }),
+        ])
+
+        return excludedMember
+      }
+
+      const result = await prisma.guildMember.delete({
+        where: { id: excludedMember.id },
+      })
+
+      return result
+    }
+
+    if (!EXCLUDABLE_MEMBER_ROLES.has(excludedMember.role)) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+      })
+    }
+
+    if (
+      !requesterMember ||
+      !ALLOWED_ROLES_TO_EXCLUDE_MEMBERS.has(requesterMember.role)
+    ) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+      })
+    }
+
+    const result = await prisma.guildMember.delete({
+      where: { id: excludedMember.id },
+    })
+
+    return result
+  })
