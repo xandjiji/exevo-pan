@@ -3,6 +3,7 @@ import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
 import { avatar, guildValidationRules, guildEditorRoles } from 'Constants'
+import type { GUILD_MEMBER_ROLE } from '@prisma/client'
 
 const throwIfForbiddenGuildRequest = async ({
   guildId,
@@ -200,3 +201,55 @@ export const listGuilds = publicProcedure
       }
     },
   )
+
+const GUILD_MEMBER_ROLES: Record<GUILD_MEMBER_ROLE, GUILD_MEMBER_ROLE> = {
+  ADMIN: 'ADMIN',
+  MODERATOR: 'MODERATOR',
+  USER: 'USER',
+}
+
+export const manageGuildMemberRole = authedProcedure
+  .input(
+    z.object({
+      managedGuildMemberId: z.string(),
+      role: z.union([
+        z.literal(GUILD_MEMBER_ROLES.MODERATOR),
+        z.literal(GUILD_MEMBER_ROLES.USER),
+      ]),
+    }),
+  )
+  .mutation(async ({ ctx: { token }, input }) => {
+    const { managedGuildMemberId, role } = input
+
+    const managedMember = await prisma.guildMember.findUnique({
+      where: { id: managedGuildMemberId },
+    })
+
+    if (!managedMember) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+      })
+    }
+
+    const requesterMember = await prisma.guildMember.findUnique({
+      where: {
+        guildId_userId: {
+          guildId: managedMember.guildId,
+          userId: token.id,
+        },
+      },
+    })
+
+    if (!requesterMember || requesterMember.role !== 'ADMIN') {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+      })
+    }
+
+    const result = prisma.guildMember.update({
+      where: { id: managedMember.id },
+      data: { role },
+    })
+
+    return result
+  })
