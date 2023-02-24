@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import { useState } from 'react'
+import { stringify, parse } from 'devalue'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
@@ -13,15 +14,8 @@ import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, bosses } from 'locales'
 
-type SerializablePublicHuntingGroup = Omit<PublicHuntingGroup, 'createdAt'> & {
-  createdAt: number
-}
-
 type HuntingGroupsProps = {
-  serializableInitialGuildList: {
-    page: SerializablePublicHuntingGroup[]
-    count: number
-  }
+  serializedData: string
   serverOptions: Option[]
 }
 
@@ -32,10 +26,15 @@ const pageUrl = buildUrl(pagePath)
 const DEFAULT_SERVER: Option = { name: '(any)', value: '' }
 
 export default function HuntingGroupsPage({
-  serializableInitialGuildList,
+  serializedData,
   serverOptions,
 }: HuntingGroupsProps) {
   const { translations } = useTranslations()
+
+  const [initialGuildList] = useState<{
+    page: PublicHuntingGroup[]
+    count: number
+  }>(parse(serializedData))
 
   /* @ ToDo: add title */
   /* const pageName = translations.bossTracker.Meta.title */
@@ -113,7 +112,7 @@ export default function HuntingGroupsPage({
           )}
 
           <GuildGrid
-            serializableInitialGuildList={serializableInitialGuildList}
+            initialGuildList={initialGuildList}
             serverOptions={serverOptions}
           />
         </div>
@@ -123,7 +122,7 @@ export default function HuntingGroupsPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const [unserializableGuildList, partialServerOptions] = await Promise.all([
+  const [guildList, partialServerOptions] = await Promise.all([
     caller.listGuilds({}),
     DrawerFieldsClient.fetchActiveServerOptions(),
   ])
@@ -133,17 +132,9 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     ...partialServerOptions,
   ]
 
-  const serializableInitialGuildList = {
-    ...unserializableGuildList,
-    page: unserializableGuildList.page.map(({ createdAt, ...data }) => ({
-      ...data,
-      createdAt: +createdAt,
-    })),
-  }
-
   return {
     props: {
-      serializableInitialGuildList,
+      serializedData: stringify(guildList),
       serverOptions,
       translations: {
         common: common[locale as RegisteredLocale],

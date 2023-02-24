@@ -1,13 +1,6 @@
-export type SerializablePublicHuntingGroup = Omit<
-  PublicHuntingGroup,
-  'createdAt'
-> & {
-  createdAt: number
-}
-
 export type GuildGridProps = {
-  serializableInitialGuildList: {
-    page: SerializablePublicHuntingGroup[]
+  initialGuildList: {
+    page: PublicHuntingGroup[]
     count: number
   }
   serverOptions: Option[]

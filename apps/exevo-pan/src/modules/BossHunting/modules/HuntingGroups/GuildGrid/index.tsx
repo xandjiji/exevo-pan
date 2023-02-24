@@ -21,10 +21,7 @@ const INITIAL_QUERY = {
 
 /* @ ToDo: i18n */
 
-const GuildGrid = ({
-  serializableInitialGuildList,
-  serverOptions,
-}: GuildGridProps) => {
+const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
   const { status } = useSession()
   const isAuthed = status === 'authenticated'
 
@@ -35,7 +32,7 @@ const GuildGrid = ({
     staleTime: 5000,
     keepPreviousData: true,
     refetchOnWindowFocus: false,
-    placeholderData: serializableInitialGuildList,
+    placeholderData: initialGuildList,
     select: (result) => ({
       ...result,
       page: result.page.map(({ createdAt, ...rest }) => ({
