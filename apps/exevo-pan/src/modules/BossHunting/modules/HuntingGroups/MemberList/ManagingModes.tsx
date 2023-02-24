@@ -166,6 +166,7 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
             ? `Name length must be between ${guildValidationRules.name.MIN}-${guildValidationRules.name.MAX} characters`
             : undefined
         }
+        enterKeyHint="send"
       />
 
       <div className="mt-6 flex items-center justify-end gap-4">
