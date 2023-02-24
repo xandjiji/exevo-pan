@@ -213,6 +213,8 @@ model GuildMember {
 model GuildApplication {
     id        String   @id @default(uuid())
     createdAt DateTime @default(now())
+    applyAs   String
+    message   String?
 
     guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
     guildId String
