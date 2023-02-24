@@ -3,8 +3,34 @@ import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
 import { avatar, guildValidationRules } from 'Constants'
-import type { GUILD_MEMBER_ROLE } from '@prisma/client'
+import type { GUILD_MEMBER_ROLE, GuildMember } from '@prisma/client'
 import { can } from './permissions'
+
+type UniqueMemberArgs =
+  | { id: string; guildId?: never; userId?: never }
+  | { id?: never; guildId: string; userId: string }
+
+const findGuildMember = async ({
+  id,
+  guildId,
+  userId,
+}: UniqueMemberArgs): Promise<GuildMember> => {
+  const member = await prisma.guildMember.findUnique({
+    where: {
+      id,
+      guildId_userId: guildId ? { guildId, userId } : undefined,
+    },
+  })
+
+  if (!member) {
+    throw new TRPCError({
+      code: 'NOT_FOUND',
+      message: 'Guild member not found',
+    })
+  }
+
+  return member
+}
 
 const throwIfForbiddenGuildRequest = async ({
   guildId,
@@ -20,7 +46,7 @@ const throwIfForbiddenGuildRequest = async ({
 
   if (!guild) {
     throw new TRPCError({
-      code: 'BAD_REQUEST',
+      code: 'NOT_FOUND',
       message: `Guild [${guildId}] not found`,
     })
   }
@@ -32,6 +58,8 @@ const throwIfForbiddenGuildRequest = async ({
   if (!requesterMember) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
+      message:
+        "You don't have the necessary privileges to edit information from this guild",
     })
   }
 
@@ -129,6 +157,8 @@ export const updateGuild = authedProcedure
     if (!isEditor) {
       throw new TRPCError({
         code: 'FORBIDDEN',
+        message:
+          "You don't have the necessary privileges to edit information from this guild",
       })
     }
 
@@ -216,28 +246,18 @@ export const manageGuildMemberRole = authedProcedure
   .mutation(async ({ ctx: { token }, input }) => {
     const { managedGuildMemberId, role } = input
 
-    const managedMember = await prisma.guildMember.findUnique({
-      where: { id: managedGuildMemberId },
+    const managedMember = await findGuildMember({ id: managedGuildMemberId })
+
+    const requesterMember = await findGuildMember({
+      guildId: managedMember.guildId,
+      userId: token.id,
     })
 
-    if (!managedMember) {
-      throw new TRPCError({
-        code: 'NOT_FOUND',
-      })
-    }
-
-    const requesterMember = await prisma.guildMember.findUnique({
-      where: {
-        guildId_userId: {
-          guildId: managedMember.guildId,
-          userId: token.id,
-        },
-      },
-    })
-
-    if (!requesterMember || requesterMember.role !== 'ADMIN') {
+    if (requesterMember.role !== 'ADMIN') {
       throw new TRPCError({
         code: 'FORBIDDEN',
+        message:
+          "You don't have the necessary privileges change a member role from this guild",
       })
     }
 
@@ -256,15 +276,7 @@ export const excludeGuildMember = authedProcedure
     }),
   )
   .mutation(async ({ ctx: { token }, input: { excludedGuildMemberId } }) => {
-    const excludedMember = await prisma.guildMember.findUnique({
-      where: { id: excludedGuildMemberId },
-    })
-
-    if (!excludedMember) {
-      throw new TRPCError({
-        code: 'NOT_FOUND',
-      })
-    }
+    const excludedMember = await findGuildMember({ id: excludedGuildMemberId })
 
     const allMembers = await prisma.guildMember.findMany({
       where: { guildId: excludedMember.guildId },
@@ -276,6 +288,8 @@ export const excludeGuildMember = authedProcedure
     if (!requesterMember) {
       throw new TRPCError({
         code: 'FORBIDDEN',
+        message:
+          'You are not allowed to leave/kick from a guild you are not member of',
       })
     }
 
@@ -313,15 +327,10 @@ export const excludeGuildMember = authedProcedure
       return result
     }
 
-    if (!requesterMember) {
-      throw new TRPCError({
-        code: 'FORBIDDEN',
-      })
-    }
-
     if (!can[requesterMember.role].exclude(excludedMember.role)) {
       throw new TRPCError({
         code: 'FORBIDDEN',
+        message: `The role [${requesterMember.role}] doesn't have the necessary privileges to exclude a guild member with the role [${excludedMember.role}]`,
       })
     }
 
@@ -343,19 +352,13 @@ export const changeGuildMemberName = authedProcedure
     }),
   )
   .mutation(async ({ ctx: { token }, input: { guildMemberId, name } }) => {
-    const managedGuildMember = await prisma.guildMember.findUnique({
-      where: { id: guildMemberId },
-    })
-
-    if (!managedGuildMember) {
-      throw new TRPCError({
-        code: 'NOT_FOUND',
-      })
-    }
+    const managedGuildMember = await findGuildMember({ id: guildMemberId })
 
     if (managedGuildMember.userId !== token.id) {
       throw new TRPCError({
         code: 'FORBIDDEN',
+        message:
+          'You are not allowed to change the name of other guild members',
       })
     }
 
