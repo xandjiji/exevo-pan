@@ -2,8 +2,9 @@ import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
-import { avatar, guildValidationRules, guildEditorRoles } from 'Constants'
+import { avatar, guildValidationRules } from 'Constants'
 import type { GUILD_MEMBER_ROLE } from '@prisma/client'
+import { can } from './permissions'
 
 const throwIfForbiddenGuildRequest = async ({
   guildId,
@@ -38,7 +39,7 @@ const throwIfForbiddenGuildRequest = async ({
     ({ user: { proStatus } }) => proStatus,
   )
 
-  const isEditor = guildEditorRoles.has(requesterMember.role)
+  const isEditor = can[requesterMember.role].editGuild
 
   return { guild, requesterMember, hasProMember, isEditor }
 }
@@ -202,19 +203,13 @@ export const listGuilds = publicProcedure
     },
   )
 
-const GUILD_MEMBER_ROLES: Record<GUILD_MEMBER_ROLE, GUILD_MEMBER_ROLE> = {
-  ADMIN: 'ADMIN',
-  MODERATOR: 'MODERATOR',
-  USER: 'USER',
-}
-
 export const manageGuildMemberRole = authedProcedure
   .input(
     z.object({
       managedGuildMemberId: z.string(),
       role: z.union([
-        z.literal(GUILD_MEMBER_ROLES.MODERATOR),
-        z.literal(GUILD_MEMBER_ROLES.USER),
+        z.literal<GUILD_MEMBER_ROLE>('MODERATOR'),
+        z.literal<GUILD_MEMBER_ROLE>('USER'),
       ]),
     }),
   )
@@ -253,21 +248,6 @@ export const manageGuildMemberRole = authedProcedure
 
     return result
   })
-
-const EXCLUDABLE_MEMBER_ROLES = new Set(GUILD_MEMBER_ROLES.USER)
-const can: Record<
-  GUILD_MEMBER_ROLE,
-  { exclude: (role: GUILD_MEMBER_ROLE) => boolean }
-> = {
-  ADMIN: {
-    exclude: (role) =>
-      new Set<GUILD_MEMBER_ROLE>(['MODERATOR', 'USER']).has(role),
-  },
-  MODERATOR: {
-    exclude: (role) => new Set<GUILD_MEMBER_ROLE>(['USER']).has(role),
-  },
-  USER: { exclude: (role) => new Set<GUILD_MEMBER_ROLE>([]).has(role) },
-}
 
 export const excludeGuildMember = authedProcedure
   .input(
@@ -331,12 +311,6 @@ export const excludeGuildMember = authedProcedure
       })
 
       return result
-    }
-
-    if (!EXCLUDABLE_MEMBER_ROLES.has(excludedMember.role)) {
-      throw new TRPCError({
-        code: 'FORBIDDEN',
-      })
     }
 
     if (!requesterMember) {
