@@ -7,6 +7,9 @@ export const guildValidationRules = {
     MIN: 1,
     MAX: 32,
   },
+  applyMessage: {
+    MAX: 180,
+  },
   description: {
     MAX: 600,
   },

@@ -369,3 +369,37 @@ export const changeGuildMemberName = authedProcedure
 
     return result
   })
+
+export const applyToGuild = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+      applyAs: z
+        .string()
+        .min(guildValidationRules.name.MIN)
+        .max(guildValidationRules.name.MAX),
+      message: z.string().max(guildValidationRules.applyMessage.MAX).optional(),
+    }),
+  )
+  .mutation(
+    async ({ ctx: { token }, input: { guildId, applyAs, message } }) => {
+      const userId = token.id
+
+      const isMemberAlready = !!(await prisma.guildMember.findUnique({
+        where: { guildId_userId: { guildId, userId } },
+      }))
+
+      if (isMemberAlready) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: 'You are already a member of this guild',
+        })
+      }
+
+      const result = await prisma.guildApplication.create({
+        data: { userId, guildId, applyAs, message },
+      })
+
+      return result
+    },
+  )
