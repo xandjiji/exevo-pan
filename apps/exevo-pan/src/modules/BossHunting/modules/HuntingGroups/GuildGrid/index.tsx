@@ -1,10 +1,12 @@
 import { useState, useMemo } from 'react'
 import { Tabs, Input, Paginator, LoadingAlert } from 'components/Atoms'
 import { Select } from 'components/Organisms'
+import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
 import { trpc } from 'lib/trpc'
 import { debounce } from 'utils'
+import { routes } from 'Constants'
 import GuildList from './GuildList'
 import { GuildGridProps } from './types'
 
@@ -21,7 +23,13 @@ const INITIAL_QUERY = {
 
 /* @ ToDo: i18n */
 
+/* 
+- apply action
+*/
+
 const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
+  const router = useRouter()
+
   const { status } = useSession()
   const isAuthed = status === 'authenticated'
 
@@ -105,7 +113,13 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
       </Tabs.Group>
       <GuildList
         list={guildList.data?.page ?? []}
-        onApply={guildList.data?.displayApplyButton ? () => {} : undefined}
+        onApply={
+          guildList.data?.displayApplyButton
+            ? isAuthed
+              ? () => {} // apply dialog
+              : () => router.push(routes.LOGIN)
+            : undefined
+        }
       />
 
       {guildList.isFetching && <LoadingAlert>Loading...</LoadingAlert>}

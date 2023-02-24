@@ -9,7 +9,6 @@ import { LockIcon } from 'assets/svgs'
 
 /* @ ToDo:
 
-- guild link click page
 - i18n (nao esquecer do empty state)
 
 */
