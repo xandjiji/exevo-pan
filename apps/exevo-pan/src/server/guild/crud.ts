@@ -255,10 +255,19 @@ export const manageGuildMemberRole = authedProcedure
   })
 
 const EXCLUDABLE_MEMBER_ROLES = new Set(GUILD_MEMBER_ROLES.USER)
-const ALLOWED_ROLES_TO_EXCLUDE_MEMBERS = new Set([
-  GUILD_MEMBER_ROLES.MODERATOR,
-  GUILD_MEMBER_ROLES.ADMIN,
-])
+const can: Record<
+  GUILD_MEMBER_ROLE,
+  { exclude: (role: GUILD_MEMBER_ROLE) => boolean }
+> = {
+  ADMIN: {
+    exclude: (role) =>
+      new Set<GUILD_MEMBER_ROLE>(['MODERATOR', 'USER']).has(role),
+  },
+  MODERATOR: {
+    exclude: (role) => new Set<GUILD_MEMBER_ROLE>(['USER']).has(role),
+  },
+  USER: { exclude: (role) => new Set<GUILD_MEMBER_ROLE>([]).has(role) },
+}
 
 export const excludeGuildMember = authedProcedure
   .input(
@@ -330,10 +339,13 @@ export const excludeGuildMember = authedProcedure
       })
     }
 
-    if (
-      !requesterMember ||
-      !ALLOWED_ROLES_TO_EXCLUDE_MEMBERS.has(requesterMember.role)
-    ) {
+    if (!requesterMember) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+      })
+    }
+
+    if (!can[requesterMember.role].exclude(excludedMember.role)) {
       throw new TRPCError({
         code: 'FORBIDDEN',
       })
