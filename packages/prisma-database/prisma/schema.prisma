@@ -215,6 +215,7 @@ model GuildApplication {
     createdAt DateTime @default(now())
     applyAs   String
     message   String?
+    accepted  Boolean  @default(false)
 
     guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
     guildId String

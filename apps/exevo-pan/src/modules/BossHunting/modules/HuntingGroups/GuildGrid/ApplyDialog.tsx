@@ -21,7 +21,7 @@ const ApplyDialog = ({
 }: ApplyDialogProps) => {
   const [applyAs, setApplyAs] = useState(defaultUserName)
   const [message, setMessage] = useState('')
-  const [alreadyApplied, setAlreadyApplied] = useState(false)
+  const [alreadyJoined, setAlreadyJoined] = useState(false)
 
   const applyAction = trpc.applyToGuild.useMutation({
     onSuccess: () => {
@@ -29,8 +29,8 @@ const ApplyDialog = ({
       onClose()
     },
     onError: () => {
-      toast.error('You already applied to this guild!')
-      setAlreadyApplied(true)
+      toast.error('You already joined this guild!')
+      setAlreadyJoined(true)
     },
   })
 
@@ -82,7 +82,7 @@ const ApplyDialog = ({
               applyAction.isLoading ||
               !isValid.name ||
               !isValid.message ||
-              alreadyApplied
+              alreadyJoined
             }
           >
             Submit

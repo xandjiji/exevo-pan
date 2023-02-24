@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
@@ -381,25 +382,26 @@ export const applyToGuild = authedProcedure
       message: z.string().max(guildValidationRules.applyMessage.MAX).optional(),
     }),
   )
-  .mutation(
-    async ({ ctx: { token }, input: { guildId, applyAs, message } }) => {
-      const userId = token.id
+  .mutation(async ({ ctx: { token }, input: { guildId, ...applyData } }) => {
+    const userId = token.id
+    const guildId_userId = { guildId, userId }
 
-      const isMemberAlready = !!(await prisma.guildMember.findUnique({
-        where: { guildId_userId: { guildId, userId } },
-      }))
+    const isMemberAlready = !!(await prisma.guildMember.findUnique({
+      where: { guildId_userId },
+    }))
 
-      if (isMemberAlready) {
-        throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: 'You are already a member of this guild',
-        })
-      }
-
-      const result = await prisma.guildApplication.create({
-        data: { userId, guildId, applyAs, message },
+    if (isMemberAlready) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: 'You are already a member of this guild',
       })
+    }
 
-      return result
-    },
-  )
+    const result = await prisma.guildApplication.upsert({
+      where: { guildId_userId },
+      create: { ...applyData, ...guildId_userId },
+      update: { ...applyData, createdAt: new Date() },
+    })
+
+    return result
+  })
