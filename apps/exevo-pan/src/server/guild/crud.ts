@@ -331,3 +331,38 @@ export const excludeGuildMember = authedProcedure
 
     return result
   })
+
+export const changeGuildMemberName = authedProcedure
+  .input(
+    z.object({
+      guildMemberId: z.string(),
+      name: z
+        .string()
+        .min(guildValidationRules.name.MIN)
+        .max(guildValidationRules.name.MAX),
+    }),
+  )
+  .mutation(async ({ ctx: { token }, input: { guildMemberId, name } }) => {
+    const managedGuildMember = await prisma.guildMember.findUnique({
+      where: { id: guildMemberId },
+    })
+
+    if (!managedGuildMember) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+      })
+    }
+
+    if (managedGuildMember.userId !== token.id) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+      })
+    }
+
+    const result = await prisma.guildMember.update({
+      where: { id: guildMemberId },
+      data: { name },
+    })
+
+    return result
+  })

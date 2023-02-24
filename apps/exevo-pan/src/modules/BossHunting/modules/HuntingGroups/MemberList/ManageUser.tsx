@@ -21,14 +21,10 @@ const RemoveMemberIcon = ({
 
 /* @ ToDo: i18n */
 
-/* @ ToDo:
-
-- change name action
-
-*/
-
 export const ManageUser = (managedUser: GuildMember) => {
-  const [managingMode, setManagingMode] = useState<'ROLE' | 'EXCLUSION'>()
+  const [managingMode, setManagingMode] = useState<
+    'ROLE' | 'EXCLUSION' | 'CHANGE_NAME'
+  >()
   const resetManagingMode = useCallback(() => setManagingMode(undefined), [])
 
   const { isAdmin, currentMember } = useGuildData()
@@ -43,6 +39,7 @@ export const ManageUser = (managedUser: GuildMember) => {
           isSelfManaging && {
             label: 'Change name',
             icon: EditIcon,
+            onSelect: () => setManagingMode('CHANGE_NAME'),
           },
           isAdmin &&
             !isSelfManaging && {
@@ -69,6 +66,13 @@ export const ManageUser = (managedUser: GuildMember) => {
 
       {managingMode === 'EXCLUSION' && (
         <ManagingMode.Exclusion
+          managedUser={managedUser}
+          onClose={resetManagingMode}
+        />
+      )}
+
+      {managingMode === 'CHANGE_NAME' && (
+        <ManagingMode.ChangeName
           managedUser={managedUser}
           onClose={resetManagingMode}
         />

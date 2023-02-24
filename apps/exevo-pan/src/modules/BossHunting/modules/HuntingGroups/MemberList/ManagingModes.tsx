@@ -1,10 +1,11 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react/destructuring-assignment */
 import { useState } from 'react'
-import { Dialog, Button } from 'components/Atoms'
+import { Dialog, Button, Input } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
+import { guildValidationRules } from 'Constants'
 import type { GuildMember, GUILD_MEMBER_ROLE } from '@prisma/client'
 import { useGuildData } from '../contexts/useGuildData'
 
@@ -117,6 +118,67 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
           className="bg-red"
         >
           {isSelfExcluding ? 'Leave' : 'Kick'}
+        </Button>
+      </div>
+    </Dialog>
+  )
+}
+
+export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
+  const [name, setName] = useState(managedUser.name)
+
+  const manage = trpc.changeGuildMemberName.useMutation({
+    onSuccess: () => {
+      toast.success('Your name was updated successfully!')
+      onClose()
+      reloadPage()
+    },
+    onError: () => {
+      toast.error('Oops! Something went wrong')
+    },
+  })
+
+  const isInvalid =
+    name.length < guildValidationRules.name.MIN ||
+    name.length > guildValidationRules.name.MAX
+
+  const noChange = name === managedUser.name
+
+  const submit = () => {
+    if (isInvalid || manage.isLoading || noChange) return
+
+    manage.mutate({ guildMemberId: managedUser.id, name })
+  }
+
+  return (
+    <Dialog heading="Change your name" isOpen onClose={onClose}>
+      <Input
+        label="New name"
+        placeholder={managedUser.name}
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === 'Enter') submit()
+        }}
+        maxLength={guildValidationRules.name.MAX}
+        error={
+          isInvalid
+            ? `Name length must be between ${guildValidationRules.name.MIN}-${guildValidationRules.name.MAX} characters`
+            : undefined
+        }
+      />
+
+      <div className="mt-6 flex items-center justify-end gap-4">
+        <Button pill hollow onClick={onClose}>
+          Cancel
+        </Button>
+        <Button
+          pill
+          onClick={submit}
+          loading={manage.isLoading}
+          disabled={manage.isLoading || isInvalid || noChange}
+        >
+          Confirm
         </Button>
       </div>
     </Dialog>
