@@ -8,6 +8,7 @@ import { trpc } from 'lib/trpc'
 import { debounce } from 'utils'
 import { routes } from 'Constants'
 import GuildList from './GuildList'
+import ApplyDialog from './ApplyDialog'
 import { GuildGridProps } from './types'
 
 export const PAGE_SIZE = 20
@@ -23,14 +24,12 @@ const INITIAL_QUERY = {
 
 /* @ ToDo: i18n */
 
-/* 
-- apply action
-*/
+const EMPTY_GUILD_APPLICATION = { guildId: '', guildName: '' }
 
 const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
   const router = useRouter()
 
-  const { status } = useSession()
+  const { status, data } = useSession()
   const isAuthed = status === 'authenticated'
 
   const [query, setQuery] = useState(INITIAL_QUERY)
@@ -50,6 +49,10 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
       displayApplyButton: !query.myGuilds,
     }),
   })
+
+  const [applyGuildProps, setApplyGuildProps] = useState(
+    EMPTY_GUILD_APPLICATION,
+  )
 
   return (
     <section className="grid gap-4">
@@ -116,11 +119,23 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
         onApply={
           guildList.data?.displayApplyButton
             ? isAuthed
-              ? () => {} // apply dialog
+              ? (guild) =>
+                  setApplyGuildProps({
+                    guildId: guild.id,
+                    guildName: guild.name,
+                  })
               : () => router.push(routes.LOGIN)
             : undefined
         }
       />
+
+      {applyGuildProps.guildId.length > 0 && (
+        <ApplyDialog
+          {...applyGuildProps}
+          defaultUserName={data?.user.name ?? ''}
+          onClose={() => setApplyGuildProps(EMPTY_GUILD_APPLICATION)}
+        />
+      )}
 
       {guildList.isFetching && <LoadingAlert>Loading...</LoadingAlert>}
     </section>
