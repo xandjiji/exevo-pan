@@ -154,7 +154,13 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const guild = await prisma.guild.findUnique({
     where: { name: guildName },
-    include: { guildMembers: true },
+    include: {
+      guildMembers: { orderBy: { joinedAt: 'asc' } },
+      guildApplications: {
+        where: { accepted: false },
+        orderBy: { createdAt: 'desc' },
+      },
+    },
   })
 
   if (!guild) return redirect
@@ -171,6 +177,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           ...guild,
           guildMembers: !guild.private || currentMember ? guildMembers : [],
           messageBoard: currentMember ? guild.messageBoard : null,
+          guildApplications: currentMember ? guild.guildApplications : [],
         } as typeof guild,
         memberCount: guildMembers.length,
       }),

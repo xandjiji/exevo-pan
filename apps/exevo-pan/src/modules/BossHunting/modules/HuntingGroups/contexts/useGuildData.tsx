@@ -1,10 +1,13 @@
 import { createContext, useContext, useState } from 'react'
-import type { GuildMember, Guild } from '@prisma/client'
+import type { GuildMember, Guild, GuildApplication } from '@prisma/client'
 import { can } from 'server/guild/permissions'
 
 export type ServerSideGuildDataProps = {
   currentMember?: GuildMember
-  guild: Guild & { guildMembers: GuildMember[] }
+  guild: Guild & {
+    guildMembers: GuildMember[]
+    guildApplications: GuildApplication[]
+  }
   memberCount: number
 }
 
