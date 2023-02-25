@@ -4,6 +4,7 @@ import { useState, useCallback } from 'react'
 import { stringify, parse } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
+import { Tabs } from 'components/Atoms'
 import {
   GuildDataProvider,
   GuildDataConsumer,
@@ -13,6 +14,7 @@ import {
   EditGuildDialog,
   MessageBoard,
   MemberList,
+  ApplyList,
 } from 'modules/BossHunting'
 import { prisma } from 'lib/prisma'
 import { buildPageTitle } from 'utils'
@@ -91,41 +93,50 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
       <GuildDataProvider {...guildDataProps}>
         <Template>
           <GuildDataConsumer>
-            {({ isEditor, guild, memberCount }) => (
+            {({ isEditor, guild, memberCount, isMember }) => (
               <>
                 <GuildHero guild={guild} memberCount={memberCount} />
 
-                <div className="inner-container z-1 relative grid gap-8">
+                <div className="inner-container z-1 relative mx-auto grid max-w-full gap-8 sm:w-96 sm:px-0 md:w-[540px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
 
-                  <div className="mx-auto grid max-w-full gap-8 sm:w-96 md:w-[540px]">
-                    {/* @ ToDo: i18n */}
-                    <MessageBoard
-                      title="Description"
-                      description={guild.description}
-                      isEditor={isEditor}
-                      addText="Add description"
-                      editText="Edit description"
-                      onEdit={toggleEditDialog}
-                    />
+                  {/* @ ToDo: i18n */}
+                  <MessageBoard
+                    title="Description"
+                    description={guild.description}
+                    isEditor={isEditor}
+                    addText="Add description"
+                    editText="Edit description"
+                    onEdit={toggleEditDialog}
+                  />
 
-                    {/* @ ToDo: i18n */}
-                    <MessageBoard
-                      title="Internal message board"
-                      description={guild.messageBoard}
-                      isEditor={isEditor}
-                      addText="Add message"
-                      editText="Edit message"
-                      onEdit={toggleEditDialog}
-                    />
+                  {/* @ ToDo: i18n */}
+                  <MessageBoard
+                    title="Internal message board"
+                    description={guild.messageBoard}
+                    isEditor={isEditor}
+                    addText="Add message"
+                    editText="Edit message"
+                    onEdit={toggleEditDialog}
+                  />
 
-                    <MemberList
-                      title="Members"
-                      guildName={guild.name}
-                      members={guild.guildMembers}
-                      isEditor={isEditor}
-                    />
-                  </div>
+                  {/* @ ToDo: i18n */}
+                  <MemberList
+                    title="Members"
+                    guildName={guild.name}
+                    members={guild.guildMembers}
+                    isEditor={isEditor}
+                  />
+
+                  {/* @ ToDo: i18n */}
+                  {isMember && (
+                    <Tabs.Group>
+                      <Tabs.Panel label="Group applications">
+                        <ApplyList list={guild.guildApplications} />
+                      </Tabs.Panel>
+                      <Tabs.Panel label="Log history">das</Tabs.Panel>
+                    </Tabs.Group>
+                  )}
                 </div>
               </>
             )}
