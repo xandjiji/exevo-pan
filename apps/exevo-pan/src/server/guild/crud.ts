@@ -405,23 +405,3 @@ export const applyToGuild = authedProcedure
 
     return result
   })
-
-export const listGuildApplications = authedProcedure
-  .input(
-    z.object({
-      guildId: z.string(),
-    }),
-  )
-  .query(async ({ ctx: { token }, input: { guildId } }) => {
-    const [requesterMember, applications] = await Promise.all([
-      prisma.guildMember.findUnique({
-        where: { guildId_userId: { guildId, userId: token.id } },
-      }),
-      prisma.guildApplication.findMany({
-        where: { guildId, accepted: false },
-        orderBy: { createdAt: 'desc' },
-      }),
-    ])
-
-    return requesterMember ? applications : []
-  })
