@@ -22,7 +22,7 @@ const ApplyList = ({ list }: ApplyListProps) => (
         {list.map(({ id, applyAs, createdAt, message }) => (
           <Table.Row>
             <Table.Column>
-              <div className="child:whitespace-nowrap grid w-min justify-center gap-1.5 text-center">
+              <div className="xs:child:whitespace-nowrap grid w-min justify-center gap-1.5 text-center">
                 <span
                   className="text-primaryHighlight overflow-hidden text-ellipsis text-base"
                   title={applyAs}
