@@ -19,6 +19,7 @@ type GuildDataValues = {
   isMember: boolean
   isEditor: boolean
   isAdmin: boolean
+  canManageApplications: boolean
   setGuildData: React.Dispatch<React.SetStateAction<ServerSideGuildDataProps>>
 } & Omit<UseGuildDataProps, 'children'>
 
@@ -39,6 +40,9 @@ export const GuildDataProvider = ({
     isMember: !!guildData.currentMember,
     isEditor: guildData.currentMember
       ? can[guildData.currentMember.role].editGuild
+      : false,
+    canManageApplications: guildData.currentMember
+      ? can[guildData.currentMember.role].manageApplications
       : false,
   })
 

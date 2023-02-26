@@ -4,7 +4,11 @@ import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
 import { avatar, guildValidationRules } from 'Constants'
-import type { GUILD_MEMBER_ROLE, GuildMember } from '@prisma/client'
+import type {
+  GUILD_MEMBER_ROLE,
+  GuildMember,
+  GuildApplication,
+} from '@prisma/client'
 import { can } from './permissions'
 
 type UniqueMemberArgs =
@@ -414,41 +418,55 @@ export const manageGuildApplication = authedProcedure
       accept: z.boolean(),
     }),
   )
-  .mutation(async ({ ctx: { token }, input: { applicationId, accept } }) => {
-    const guildApplication = await prisma.guildApplication.findUnique({
-      where: { id: applicationId },
-    })
-
-    if (!guildApplication) {
-      throw new TRPCError({
-        code: 'NOT_FOUND',
-        message: 'Guild application not found',
-      })
-    }
-
-    const { applyAs, guildId, userId } = guildApplication
-
-    const { requesterMember, canManageApplications } =
-      await throwIfForbiddenGuildRequest({
-        guildId,
-        requesterId: token.id,
+  .mutation(
+    async ({
+      ctx: { token },
+      input: { applicationId, accept },
+    }): Promise<{
+      newMember?: GuildMember
+      application: GuildApplication
+    }> => {
+      const guildApplication = await prisma.guildApplication.findUnique({
+        where: { id: applicationId },
       })
 
-    if (!canManageApplications) {
-      throw new TRPCError({
-        code: 'FORBIDDEN',
-        message: `The role [${requesterMember.role}] has insufficient privileges to manage guild applications`,
+      if (!guildApplication) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Guild application not found',
+        })
+      }
+
+      const { applyAs, guildId, userId } = guildApplication
+
+      const { requesterMember, canManageApplications } =
+        await throwIfForbiddenGuildRequest({
+          guildId,
+          requesterId: token.id,
+        })
+
+      if (!canManageApplications) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message: `The role [${requesterMember.role}] has insufficient privileges to manage guild applications`,
+        })
+      }
+
+      if (accept) {
+        const [application, newMember] = await prisma.$transaction([
+          prisma.guildApplication.delete({ where: { id: applicationId } }),
+          prisma.guildMember.create({
+            data: { name: applyAs, role: 'USER', guildId, userId },
+          }),
+        ])
+
+        return { newMember, application }
+      }
+
+      const application = await prisma.guildApplication.delete({
+        where: { id: applicationId },
       })
-    }
 
-    if (accept) {
-      return prisma.$transaction([
-        prisma.guildApplication.delete({ where: { id: applicationId } }),
-        prisma.guildMember.create({
-          data: { name: applyAs, role: 'USER', guildId, userId },
-        }),
-      ])
-    }
-
-    return prisma.guildApplication.delete({ where: { id: applicationId } })
-  })
+      return { application }
+    },
+  )

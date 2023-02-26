@@ -93,7 +93,14 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
       <GuildDataProvider {...guildDataProps}>
         <Template>
           <GuildDataConsumer>
-            {({ isEditor, guild, memberCount, isMember }) => (
+            {({
+              isEditor,
+              guild,
+              memberCount,
+              isMember,
+              canManageApplications,
+              setGuildData,
+            }) => (
               <>
                 <GuildHero guild={guild} memberCount={memberCount} />
 
@@ -132,7 +139,25 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                   {isMember && (
                     <Tabs.Group>
                       <Tabs.Panel label="Group applications">
-                        <ApplyList list={guild.guildApplications} />
+                        <ApplyList
+                          list={guild.guildApplications}
+                          allowAction={canManageApplications}
+                          onAction={({ application, newMember }) =>
+                            setGuildData((prev) => ({
+                              ...prev,
+                              guild: {
+                                ...prev.guild,
+                                guildApplications:
+                                  prev.guild.guildApplications.filter(
+                                    ({ id }) => id !== application.id,
+                                  ),
+                                guildMembers: newMember
+                                  ? [...prev.guild.guildMembers, newMember]
+                                  : prev.guild.guildMembers,
+                              },
+                            }))
+                          }
+                        />
                       </Tabs.Panel>
                       <Tabs.Panel label="Log history">das</Tabs.Panel>
                     </Tabs.Group>
