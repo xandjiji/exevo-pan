@@ -168,7 +168,6 @@ export const getServerSideProps: GetServerSideProps = async ({
     include: {
       guildMembers: { orderBy: { joinedAt: 'asc' } },
       guildApplications: {
-        where: { accepted: false },
         orderBy: { createdAt: 'desc' },
       },
     },
