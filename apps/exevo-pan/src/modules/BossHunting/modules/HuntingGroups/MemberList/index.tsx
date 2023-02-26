@@ -49,8 +49,8 @@ const MemberList = ({
                     </span>
                   )}
                 </Table.Column>
-                <Table.Column className="flex items-center gap-2">
-                  {member.name}
+                <Table.Column>
+                  <span className="flex items-center gap-2">{member.name}</span>
                 </Table.Column>
 
                 {(isEditor || isSelf) && (
