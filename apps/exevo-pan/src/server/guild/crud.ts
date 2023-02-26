@@ -59,8 +59,7 @@ const throwIfForbiddenGuildRequest = async ({
   if (!requesterMember) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
-      message:
-        "You don't have the necessary privileges to edit information from this guild",
+      message: 'Insufficient privileges to edit information from this guild',
     })
   }
 
@@ -68,9 +67,13 @@ const throwIfForbiddenGuildRequest = async ({
     ({ user: { proStatus } }) => proStatus,
   )
 
-  const isEditor = can[requesterMember.role].editGuild
-
-  return { guild, requesterMember, hasProMember, isEditor }
+  return {
+    guild,
+    requesterMember,
+    hasProMember,
+    isEditor: can[requesterMember.role].editGuild,
+    canManageApplications: can[requesterMember.role].manageApplications,
+  }
 }
 
 const CreationSchema = z.object({
@@ -158,8 +161,7 @@ export const updateGuild = authedProcedure
     if (!isEditor) {
       throw new TRPCError({
         code: 'FORBIDDEN',
-        message:
-          "You don't have the necessary privileges to edit information from this guild",
+        message: 'Insufficient privileges to edit information from this guild',
       })
     }
 
@@ -257,8 +259,7 @@ export const manageGuildMemberRole = authedProcedure
     if (requesterMember.role !== 'ADMIN') {
       throw new TRPCError({
         code: 'FORBIDDEN',
-        message:
-          "You don't have the necessary privileges change a member role from this guild",
+        message: 'Insufficient privileges change a member role from this guild',
       })
     }
 
@@ -331,7 +332,7 @@ export const excludeGuildMember = authedProcedure
     if (!can[requesterMember.role].exclude(excludedMember.role)) {
       throw new TRPCError({
         code: 'FORBIDDEN',
-        message: `The role [${requesterMember.role}] doesn't have the necessary privileges to exclude a guild member with the role [${excludedMember.role}]`,
+        message: `The role [${requesterMember.role}] has insufficient privileges to exclude a guild member with the role [${excludedMember.role}]`,
       })
     }
 
@@ -404,4 +405,50 @@ export const applyToGuild = authedProcedure
     })
 
     return result
+  })
+
+export const manageGuildApplication = authedProcedure
+  .input(
+    z.object({
+      applicationId: z.string(),
+      accept: z.boolean(),
+    }),
+  )
+  .mutation(async ({ ctx: { token }, input: { applicationId, accept } }) => {
+    const guildApplication = await prisma.guildApplication.findUnique({
+      where: { id: applicationId },
+    })
+
+    if (!guildApplication) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Guild application not found',
+      })
+    }
+
+    const { applyAs, guildId, userId } = guildApplication
+
+    const { requesterMember, canManageApplications } =
+      await throwIfForbiddenGuildRequest({
+        guildId,
+        requesterId: token.id,
+      })
+
+    if (!canManageApplications) {
+      throw new TRPCError({
+        code: 'FORBIDDEN',
+        message: `The role [${requesterMember.role}] has insufficient privileges to manage guild applications`,
+      })
+    }
+
+    if (accept) {
+      return prisma.$transaction([
+        prisma.guildApplication.delete({ where: { id: applicationId } }),
+        prisma.guildMember.create({
+          data: { name: applyAs, role: 'USER', guildId, userId },
+        }),
+      ])
+    }
+
+    return prisma.guildApplication.delete({ where: { id: applicationId } })
   })
