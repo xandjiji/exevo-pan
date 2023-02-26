@@ -94,10 +94,11 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
         <Template>
           <GuildDataConsumer>
             {({
-              isEditor,
+              currentMember,
               guild,
               memberCount,
               isMember,
+              isEditor,
               canManageApplications,
               setGuildData,
             }) => (
@@ -133,6 +134,7 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                     guildName={guild.name}
                     members={guild.guildMembers}
                     isEditor={isEditor}
+                    currentMember={currentMember}
                   />
 
                   {/* @ ToDo: i18n */}
@@ -145,6 +147,9 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                           onAction={({ application, newMember }) =>
                             setGuildData((prev) => ({
                               ...prev,
+                              memberCount: newMember
+                                ? prev.memberCount + 1
+                                : prev.memberCount,
                               guild: {
                                 ...prev.guild,
                                 guildApplications:

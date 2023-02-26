@@ -3,16 +3,15 @@
 import { useState } from 'react'
 import { Dialog, Button, Input } from 'components/Atoms'
 import { Select } from 'components/Organisms'
+import { useRouter } from 'next/router'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
-import { guildValidationRules } from 'Constants'
+import { guildValidationRules, routes } from 'Constants'
 import type { GuildMember, GUILD_MEMBER_ROLE } from '@prisma/client'
 import { useGuildData } from '../contexts/useGuildData'
 
 /* @ ToDo: i18n */
 /* @ ToDo: testar todas as interaçoes */
-
-const reloadPage = () => location.reload()
 
 type ModeProps = {
   managedUser: GuildMember
@@ -20,11 +19,24 @@ type ModeProps = {
 }
 
 export const Role = ({ managedUser, onClose }: ModeProps) => {
+  const { setGuildData } = useGuildData()
+
   const manage = trpc.manageGuildMemberRole.useMutation({
-    onSuccess: () => {
+    onSuccess: (updatedMember) => {
+      setGuildData((prev) => ({
+        ...prev,
+        guild: {
+          ...prev.guild,
+          guildMembers: prev.guild.guildMembers.map((guildMember) =>
+            guildMember.id === updatedMember.id
+              ? { ...guildMember, role: updatedMember.role }
+              : guildMember,
+          ),
+        },
+      }))
+
       toast.success(`${managedUser.name} was successfully updated!`)
       onClose()
-      reloadPage()
     },
     onError: () => {
       toast.error('Oops! Something went wrong')
@@ -70,14 +82,55 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
 }
 
 export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
-  const { currentMember, guild } = useGuildData()
+  const { currentMember, guild, setGuildData } = useGuildData()
   const isSelfExcluding = currentMember?.id === managedUser.id
 
+  const router = useRouter()
+
   const manage = trpc.excludeGuildMember.useMutation({
-    onSuccess: () => {
+    onSuccess: (removedMember) => {
+      const willDisband = guild.guildMembers.length === 1
+
+      if (willDisband) {
+        toast.success(`${managedUser.name} has left the party`)
+        toast.success('Hunting group was disbanded')
+        router.push(routes.BOSSES.HUNTING_GROUPS)
+        onClose()
+        return
+      }
+
+      const adminWillChange = removedMember.role === 'ADMIN'
+
+      setGuildData((prev) => {
+        const newMemberList = prev.guild.guildMembers.filter(
+          ({ id }) => id !== removedMember.id,
+        )
+
+        const [newAdmin] = newMemberList
+
+        if (adminWillChange) {
+          toast.success(`${newAdmin.name} is the new group admin`)
+        }
+
+        return {
+          ...prev,
+          currentMember: isSelfExcluding ? undefined : prev.currentMember,
+          memberCount: prev.memberCount - 1,
+          guild: {
+            ...prev.guild,
+            guildMembers: adminWillChange
+              ? newMemberList.map((member) =>
+                  member.id === newAdmin.id
+                    ? { ...member, role: removedMember.role }
+                    : member,
+                )
+              : newMemberList,
+          },
+        }
+      })
+
       toast.success(`${managedUser.name} has left the party`)
       onClose()
-      reloadPage()
     },
     onError: () => {
       toast.error('Oops! Something went wrong')
@@ -125,13 +178,26 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
 }
 
 export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
+  const { setGuildData } = useGuildData()
+
   const [name, setName] = useState(managedUser.name)
 
   const manage = trpc.changeGuildMemberName.useMutation({
-    onSuccess: () => {
+    onSuccess: (updatedMember) => {
+      setGuildData((prev) => ({
+        ...prev,
+        guild: {
+          ...prev.guild,
+          guildMembers: prev.guild.guildMembers.map((guildMember) =>
+            guildMember.id === updatedMember.id
+              ? { ...guildMember, name: updatedMember.name }
+              : guildMember,
+          ),
+        },
+      }))
+
       toast.success('Your name was updated successfully!')
       onClose()
-      reloadPage()
     },
     onError: () => {
       toast.error('Oops! Something went wrong')
