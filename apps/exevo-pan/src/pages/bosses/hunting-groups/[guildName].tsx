@@ -8,7 +8,7 @@ import { Tabs } from 'components/Atoms'
 import {
   GuildDataProvider,
   GuildDataConsumer,
-  ServerSideGuildDataProps,
+  GuildData,
   Template,
   GuildHero,
   EditGuildDialog,
@@ -19,18 +19,22 @@ import {
 import { prisma } from 'lib/prisma'
 import { buildPageTitle } from 'utils'
 import { routes } from 'Constants'
+import type { JWT } from 'next-auth/jwt'
 import { common, bosses } from 'locales'
 
 type GuildPageProps = {
   serializedGuildData: string
+  serializedToken: string
 }
 
-export default function GuildPage({ serializedGuildData }: GuildPageProps) {
+export default function GuildPage({
+  serializedGuildData,
+  serializedToken,
+}: GuildPageProps) {
   const { translations } = useTranslations()
 
-  const [guildDataProps] = useState<ServerSideGuildDataProps>(
-    parse(serializedGuildData),
-  )
+  const [guildDataProps] = useState<GuildData>(parse(serializedGuildData))
+  const [token] = useState<JWT | null>(parse(serializedToken))
 
   const [isEditOpen, setIsEditOpen] = useState(false)
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
@@ -90,20 +94,21 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
         /> */}
       </Head>
 
-      <GuildDataProvider {...guildDataProps}>
+      <GuildDataProvider {...guildDataProps} token={token}>
         <Template>
           <GuildDataConsumer>
             {({
-              currentMember,
               guild,
-              memberCount,
+              members,
+              applications,
+              currentMember,
               isMember,
               isEditor,
-              canManageApplications,
+              isApprover,
               setGuildData,
             }) => (
               <>
-                <GuildHero guild={guild} memberCount={memberCount} />
+                <GuildHero guild={guild} memberCount={members.length} />
 
                 <div className="inner-container z-1 relative mx-auto grid max-w-full gap-8 sm:w-96 sm:px-0 md:w-[540px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
@@ -119,22 +124,25 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                   />
 
                   {/* @ ToDo: i18n */}
-                  <MessageBoard
-                    title="Internal message board"
-                    description={guild.messageBoard}
-                    isEditor={isEditor}
-                    addText="Add message"
-                    editText="Edit message"
-                    onEdit={toggleEditDialog}
-                  />
+                  {isMember && (
+                    <MessageBoard
+                      title="Internal message board"
+                      description={guild.messageBoard}
+                      isEditor={isEditor}
+                      addText="Add message"
+                      editText="Edit message"
+                      onEdit={toggleEditDialog}
+                    />
+                  )}
 
                   {/* @ ToDo: i18n */}
                   <MemberList
                     title="Members"
                     guildName={guild.name}
-                    members={guild.guildMembers}
+                    members={members}
                     isEditor={isEditor}
                     currentMember={currentMember}
+                    isPrivate={guild.private}
                   />
 
                   {/* @ ToDo: i18n */}
@@ -142,24 +150,16 @@ export default function GuildPage({ serializedGuildData }: GuildPageProps) {
                     <Tabs.Group>
                       <Tabs.Panel label="Group applications">
                         <ApplyList
-                          list={guild.guildApplications}
-                          allowAction={canManageApplications}
+                          list={applications}
+                          allowAction={isApprover}
                           onAction={({ application, newMember }) =>
                             setGuildData((prev) => ({
-                              ...prev,
-                              memberCount: newMember
-                                ? prev.memberCount + 1
-                                : prev.memberCount,
-                              guild: {
-                                ...prev.guild,
-                                guildApplications:
-                                  prev.guild.guildApplications.filter(
-                                    ({ id }) => id !== application.id,
-                                  ),
-                                guildMembers: newMember
-                                  ? [...prev.guild.guildMembers, newMember]
-                                  : prev.guild.guildMembers,
-                              },
+                              applications: prev.applications.filter(
+                                ({ id }) => id !== application.id,
+                              ),
+                              members: newMember
+                                ? [...prev.members, newMember]
+                                : prev.members,
                             }))
                           }
                         />
@@ -205,22 +205,30 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   if (!guild) return redirect
 
-  const { guildMembers } = guild
+  const { guildMembers, guildApplications, messageBoard, ...rest } = guild
 
-  const currentMember = guildMembers.find(({ userId }) => userId === token?.id)
+  const isMember = guildMembers.some(({ userId }) => userId === token?.id)
+
+  const guildData: GuildData = {
+    guild: { ...rest, messageBoard: isMember ? messageBoard : null },
+    members:
+      guild.private && !isMember
+        ? guildMembers.map(() => ({
+            id: '',
+            guildId: '',
+            userId: '',
+            joinedAt: new Date(),
+            name: '',
+            role: 'USER',
+          }))
+        : guildMembers,
+    applications: isMember ? guildApplications : [],
+  }
 
   return {
     props: {
-      serializedGuildData: stringify({
-        currentMember,
-        guild: {
-          ...guild,
-          guildMembers: !guild.private || currentMember ? guildMembers : [],
-          messageBoard: currentMember ? guild.messageBoard : null,
-          guildApplications: currentMember ? guild.guildApplications : [],
-        } as typeof guild,
-        memberCount: guildMembers.length,
-      }),
+      serializedGuildData: stringify(guildData),
+      serializedToken: stringify(token),
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],

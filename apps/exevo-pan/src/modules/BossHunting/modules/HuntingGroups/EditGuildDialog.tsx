@@ -8,10 +8,8 @@ import {
   Alert,
 } from 'components/Atoms'
 import { InfoTooltip } from 'components/Organisms'
-import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { addLocalePrefix, getGuildPermalink } from 'utils'
 import { guildValidationRules } from 'Constants'
 import type { GuildEditInput } from 'server/guild/crud'
 import { useGuildData } from './contexts/useGuildData'
@@ -38,9 +36,7 @@ const isFormInvalid = ({
   messageBoard.length > guildValidationRules.description.MAX
 
 const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
-  const { guild } = useGuildData()
-
-  const router = useRouter()
+  const { guild, setGuildData } = useGuildData()
 
   const [formState, setFormState] = useState<GuildEditInput>({
     guildId: guild.id,
@@ -53,12 +49,11 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   })
 
   const updateGuild = trpc.updateGuild.useMutation({
-    onSuccess: ({ name }) => {
-      toast.success('Guild was updated successfuly!')
-      window.location.pathname = addLocalePrefix({
-        route: getGuildPermalink(name),
-        locale: router.locale,
+    onSuccess: ({ createdAt, ...updatedGuild }) => {
+      setGuildData({
+        guild: { ...updatedGuild, createdAt: new Date(createdAt) },
       })
+      toast.success('Guild was updated successfuly!')
     },
     onError: () => toast.error('Oops! Something went wrong'),
   })

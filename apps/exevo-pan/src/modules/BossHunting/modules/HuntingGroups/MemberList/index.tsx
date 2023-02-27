@@ -10,6 +10,7 @@ type MemberListProps = {
   members: GuildMember[]
   isEditor: boolean
   currentMember?: GuildMember
+  isPrivate: boolean
 } & JSX.IntrinsicElements['div']
 
 /* @ ToDo: i18n */
@@ -20,10 +21,16 @@ const MemberList = ({
   members,
   currentMember,
   isEditor,
+  isPrivate,
   ...props
 }: MemberListProps) => (
   <Table title={title} subtitle={guildName} {...props}>
-    {members.length ? (
+    {isPrivate && !currentMember ? (
+      <div className="flex flex-col items-center gap-4">
+        <LockIcon className="fill-separator h-28 w-28" />
+        <h4 className="text-center text-2xl">This is a private group</h4>
+      </div>
+    ) : (
       <Table.Element>
         <Table.Head>
           <Table.Row>
@@ -63,11 +70,6 @@ const MemberList = ({
           })}
         </Table.Body>
       </Table.Element>
-    ) : (
-      <div className="flex flex-col items-center gap-4">
-        <LockIcon className="fill-separator h-28 w-28" />
-        <h4 className="text-center text-2xl">This is a private group</h4>
-      </div>
     )}
   </Table>
 )

@@ -23,16 +23,12 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
 
   const manage = trpc.manageGuildMemberRole.useMutation({
     onSuccess: (updatedMember) => {
-      setGuildData((prev) => ({
-        ...prev,
-        guild: {
-          ...prev.guild,
-          guildMembers: prev.guild.guildMembers.map((guildMember) =>
-            guildMember.id === updatedMember.id
-              ? { ...guildMember, role: updatedMember.role }
-              : guildMember,
-          ),
-        },
+      setGuildData(({ members }) => ({
+        members: members.map((guildMember) =>
+          guildMember.id === updatedMember.id
+            ? { ...guildMember, role: updatedMember.role }
+            : guildMember,
+        ),
       }))
 
       toast.success(`${managedUser.name} was successfully updated!`)
@@ -82,14 +78,14 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
 }
 
 export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
-  const { currentMember, guild, setGuildData } = useGuildData()
+  const { currentMember, guild, members, setGuildData } = useGuildData()
   const isSelfExcluding = currentMember?.id === managedUser.id
 
   const router = useRouter()
 
   const manage = trpc.excludeGuildMember.useMutation({
     onSuccess: (removedMember) => {
-      const willDisband = guild.guildMembers.length === 1
+      const willDisband = members.length === 1
 
       if (willDisband) {
         toast.success(`${managedUser.name} has left the party`)
@@ -100,36 +96,23 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
       }
 
       const adminWillChange = removedMember.role === 'ADMIN'
+      const newMemberList = members.filter(({ id }) => id !== removedMember.id)
+      const [newAdmin] = newMemberList
 
-      setGuildData((prev) => {
-        const newMemberList = prev.guild.guildMembers.filter(
-          ({ id }) => id !== removedMember.id,
-        )
-
-        const [newAdmin] = newMemberList
-
-        if (adminWillChange) {
-          toast.success(`${newAdmin.name} is the new group admin`)
-        }
-
-        return {
-          ...prev,
-          currentMember: isSelfExcluding ? undefined : prev.currentMember,
-          memberCount: prev.memberCount - 1,
-          guild: {
-            ...prev.guild,
-            guildMembers: adminWillChange
-              ? newMemberList.map((member) =>
-                  member.id === newAdmin.id
-                    ? { ...member, role: removedMember.role }
-                    : member,
-                )
-              : newMemberList,
-          },
-        }
+      setGuildData({
+        members: adminWillChange
+          ? newMemberList.map((member) =>
+              member.id === newAdmin.id
+                ? { ...member, role: removedMember.role }
+                : member,
+            )
+          : newMemberList,
       })
 
       toast.success(`${managedUser.name} has left the party`)
+      if (adminWillChange) {
+        toast.success(`${newAdmin.name} is the new group admin`)
+      }
       onClose()
     },
     onError: () => {
@@ -185,15 +168,11 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
   const manage = trpc.changeGuildMemberName.useMutation({
     onSuccess: (updatedMember) => {
       setGuildData((prev) => ({
-        ...prev,
-        guild: {
-          ...prev.guild,
-          guildMembers: prev.guild.guildMembers.map((guildMember) =>
-            guildMember.id === updatedMember.id
-              ? { ...guildMember, name: updatedMember.name }
-              : guildMember,
-          ),
-        },
+        members: prev.members.map((member) =>
+          member.id === updatedMember.id
+            ? { ...member, name: updatedMember.name }
+            : member,
+        ),
       }))
 
       toast.success('Your name was updated successfully!')
