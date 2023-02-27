@@ -143,7 +143,7 @@ export default function GuildPage({
                     members={members}
                     isEditor={isEditor || EXEVO_PAN_ADMIN}
                     currentMember={currentMember}
-                    isPrivate={guild.private}
+                    isPrivate={guild.private && !EXEVO_PAN_ADMIN}
                   />
 
                   {/* @ ToDo: i18n */}
