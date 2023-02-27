@@ -57,7 +57,10 @@ const MemberList = ({
                   )}
                 </Table.Column>
                 <Table.Column>
-                  <span className="flex items-center gap-2">{member.name}</span>
+                  <span className="flex items-center gap-2">
+                    {member.name}{' '}
+                    {isSelf && <i className="text-xs opacity-75">(you)</i>}
+                  </span>
                 </Table.Column>
 
                 {(isEditor || isSelf) && (
