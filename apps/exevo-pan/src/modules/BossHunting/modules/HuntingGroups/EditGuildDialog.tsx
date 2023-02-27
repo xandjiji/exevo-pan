@@ -54,6 +54,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         guild: { ...updatedGuild, createdAt: new Date(createdAt) },
       })
       toast.success('Guild was updated successfuly!')
+      onClose()
     },
     onError: () => toast.error('Oops! Something went wrong'),
   })
