@@ -3,7 +3,8 @@ import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
-import { avatar, guildValidationRules } from 'Constants'
+import { PageRevalidationClient } from 'services/server'
+import { avatar, guildValidationRules, routes } from 'Constants'
 import type {
   GUILD_MEMBER_ROLE,
   GuildMember,
@@ -103,23 +104,29 @@ export const createGuild = authedProcedure.input(CreationSchema).mutation(
       token: { id, name, proStatus },
     },
     input: { name: guildName, description, server, ...guildData },
-  }) =>
-    prisma.guild.create({
-      data: {
-        ...guildData,
-        name: guildName.trim(),
-        description: description?.trim(),
-        server: server.trim(),
-        private: proStatus ? guildData.private : false,
-        guildMembers: {
-          create: {
-            userId: id,
-            name,
-            role: 'ADMIN',
+  }) => {
+    const [result] = await Promise.all([
+      prisma.guild.create({
+        data: {
+          ...guildData,
+          name: guildName.trim(),
+          description: description?.trim(),
+          server: server.trim(),
+          private: proStatus ? guildData.private : false,
+          guildMembers: {
+            create: {
+              userId: id,
+              name,
+              role: 'ADMIN',
+            },
           },
         },
-      },
-    }),
+      }),
+      PageRevalidationClient.revalidatePage(routes.BOSSES.HUNTING_GROUPS),
+    ])
+
+    return result
+  },
 )
 
 const EditSchema = z.object({
