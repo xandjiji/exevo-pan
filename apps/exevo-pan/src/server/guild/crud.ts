@@ -241,6 +241,7 @@ export const listGuilds = publicProcedure
               select: { guildMembers: true },
             },
           },
+          orderBy: { createdAt: 'desc' },
           take: pageSize,
           skip: pageIndex * pageSize,
         }),
