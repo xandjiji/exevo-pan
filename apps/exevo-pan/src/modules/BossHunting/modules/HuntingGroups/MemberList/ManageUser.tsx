@@ -9,6 +9,7 @@ import {
   OutlineAddIcon,
 } from 'assets/svgs'
 import type { GuildMember } from '@prisma/client'
+import { can } from 'server/guild/permissions'
 import { useGuildData } from '../contexts/useGuildData'
 import * as ManagingMode from './ManagingModes'
 
@@ -30,30 +31,34 @@ export const ManageUser = (managedUser: GuildMember) => {
   const { isAdmin, currentMember } = useGuildData()
 
   const isSelfManaging = currentMember?.id === managedUser.id
+  const canExclude = can[currentMember?.role ?? 'USER'].exclude(
+    managedUser.role,
+  )
+
+  const menuItems = useMenuItems([
+    isSelfManaging && {
+      label: 'Change name',
+      icon: EditIcon,
+      onSelect: () => setManagingMode('CHANGE_NAME'),
+    },
+    isAdmin &&
+      !isSelfManaging && {
+        label: 'Add role',
+        icon: OutlineAddIcon,
+        onSelect: () => setManagingMode('ROLE'),
+      },
+    (canExclude || isSelfManaging) && {
+      label: isSelfManaging ? 'Leave group' : 'Kick member',
+      icon: RemoveMemberIcon,
+      onSelect: () => setManagingMode('EXCLUSION'),
+    },
+  ])
+
+  if (menuItems.length === 0) return null
 
   return (
     <>
-      <Menu
-        offset={[0, 8]}
-        items={useMenuItems([
-          isSelfManaging && {
-            label: 'Change name',
-            icon: EditIcon,
-            onSelect: () => setManagingMode('CHANGE_NAME'),
-          },
-          isAdmin &&
-            !isSelfManaging && {
-              label: 'Add role',
-              icon: OutlineAddIcon,
-              onSelect: () => setManagingMode('ROLE'),
-            },
-          {
-            label: isSelfManaging ? 'Leave group' : 'Kick member',
-            icon: RemoveMemberIcon,
-            onSelect: () => setManagingMode('EXCLUSION'),
-          },
-        ])}
-      >
+      <Menu offset={[0, 8]} items={menuItems}>
         <MoreHorizontalIcon className="fill-onSurface h-4 w-4" />
       </Menu>
 
