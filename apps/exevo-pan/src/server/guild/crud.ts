@@ -260,7 +260,7 @@ export const manageGuildMemberRole = authedProcedure
       userId: token.id,
     })
 
-    if (requesterMember.role !== 'ADMIN') {
+    if (!can[requesterMember.role].manageRoles) {
       throw new TRPCError({
         code: 'FORBIDDEN',
         message: 'Insufficient privileges change a member role from this guild',

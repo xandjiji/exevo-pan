@@ -28,9 +28,10 @@ export const ManageUser = (managedUser: GuildMember) => {
   >()
   const resetManagingMode = useCallback(() => setManagingMode(undefined), [])
 
-  const { isAdmin, currentMember } = useGuildData()
+  const { currentMember } = useGuildData()
 
   const isSelfManaging = currentMember?.id === managedUser.id
+  const canManageRoles = can[currentMember?.role ?? 'USER'].manageRoles
   const canExclude = can[currentMember?.role ?? 'USER'].exclude(
     managedUser.role,
   )
@@ -41,7 +42,7 @@ export const ManageUser = (managedUser: GuildMember) => {
       icon: EditIcon,
       onSelect: () => setManagingMode('CHANGE_NAME'),
     },
-    isAdmin &&
+    canManageRoles &&
       !isSelfManaging && {
         label: 'Add role',
         icon: OutlineAddIcon,
