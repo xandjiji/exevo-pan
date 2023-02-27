@@ -13,6 +13,7 @@ export type InferredValues = {
   isAdmin: boolean
   isEditor: boolean
   isApprover: boolean
+  EXEVO_PAN_ADMIN: boolean
 }
 
 export type GuildDataValues = {

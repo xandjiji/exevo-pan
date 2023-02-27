@@ -12,9 +12,10 @@ import type {
 } from '@prisma/client'
 import { can } from './permissions'
 
-type UniqueMemberArgs =
+type UniqueMemberArgs = (
   | { id: string; guildId?: never; userId?: never }
   | { id?: never; guildId: string; userId: string }
+) & { EXEVO_PAN_ADMIN?: boolean }
 
 const findGuildMember = async ({
   id,
@@ -41,9 +42,11 @@ const findGuildMember = async ({
 const throwIfForbiddenGuildRequest = async ({
   guildId,
   requesterId,
+  EXEVO_PAN_ADMIN = false,
 }: {
   guildId: string
   requesterId: string
+  EXEVO_PAN_ADMIN?: boolean
 }) => {
   const guild = await prisma.guild.findUnique({
     where: { id: guildId },
@@ -61,7 +64,7 @@ const throwIfForbiddenGuildRequest = async ({
     ({ userId }) => userId === requesterId,
   )
 
-  if (!requesterMember) {
+  if (!requesterMember && !EXEVO_PAN_ADMIN) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
       message: 'Insufficient privileges to edit information from this guild',
@@ -76,8 +79,12 @@ const throwIfForbiddenGuildRequest = async ({
     guild,
     requesterMember,
     hasProMember,
-    isEditor: can[requesterMember.role].editGuild,
-    canManageApplications: can[requesterMember.role].manageApplications,
+    isEditor: requesterMember
+      ? can[requesterMember.role].editGuild
+      : EXEVO_PAN_ADMIN,
+    canManageApplications: requesterMember
+      ? can[requesterMember.role].manageApplications
+      : EXEVO_PAN_ADMIN,
   }
 }
 
@@ -160,6 +167,7 @@ export type GuildEditInput = z.infer<typeof EditSchema>
 export const updateGuild = authedProcedure
   .input(EditSchema)
   .mutation(async ({ ctx: { token }, input }) => {
+    const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const { guildId, name, description, messageBoard, server, ...guildData } =
       input
 
@@ -167,9 +175,10 @@ export const updateGuild = authedProcedure
       await throwIfForbiddenGuildRequest({
         guildId,
         requesterId: token.id,
+        EXEVO_PAN_ADMIN,
       })
 
-    if (!isEditor) {
+    if (!isEditor && !EXEVO_PAN_ADMIN) {
       throw new TRPCError({
         code: 'FORBIDDEN',
         message: 'Insufficient privileges to edit information from this guild',
@@ -177,7 +186,12 @@ export const updateGuild = authedProcedure
     }
 
     const isUpdatingGuildPrivacy = guildData.private !== guild.private
-    if (isUpdatingGuildPrivacy && guildData.private && !hasProMember) {
+    if (
+      isUpdatingGuildPrivacy &&
+      guildData.private &&
+      !hasProMember &&
+      !EXEVO_PAN_ADMIN
+    ) {
       throw new TRPCError({
         code: 'FORBIDDEN',
         message: 'PRO_REQUIRED',
@@ -259,19 +273,22 @@ export const manageGuildMemberRole = authedProcedure
   )
   .mutation(async ({ ctx: { token }, input }) => {
     const { managedGuildMemberId, role } = input
-
+    const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const managedMember = await findGuildMember({ id: managedGuildMemberId })
 
-    const requesterMember = await findGuildMember({
-      guildId: managedMember.guildId,
-      userId: token.id,
-    })
-
-    if (!can[requesterMember.role].manageRoles) {
-      throw new TRPCError({
-        code: 'FORBIDDEN',
-        message: 'Insufficient privileges change a member role from this guild',
+    if (!EXEVO_PAN_ADMIN) {
+      const requesterMember = await findGuildMember({
+        guildId: managedMember.guildId,
+        userId: token.id,
       })
+
+      if (!can[requesterMember.role].manageRoles) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message:
+            'Insufficient privileges change a member role from this guild',
+        })
+      }
     }
 
     const result = prisma.guildMember.update({
@@ -289,6 +306,8 @@ export const excludeGuildMember = authedProcedure
     }),
   )
   .mutation(async ({ ctx: { token }, input: { excludedGuildMemberId } }) => {
+    const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+
     const excludedMember = await findGuildMember({ id: excludedGuildMemberId })
 
     const allMembers = await prisma.guildMember.findMany({
@@ -298,7 +317,7 @@ export const excludeGuildMember = authedProcedure
 
     const requesterMember = allMembers.find(({ userId }) => userId === token.id)
 
-    if (!requesterMember) {
+    if (!requesterMember && !EXEVO_PAN_ADMIN) {
       throw new TRPCError({
         code: 'FORBIDDEN',
         message:
@@ -306,11 +325,13 @@ export const excludeGuildMember = authedProcedure
       })
     }
 
-    const isSelfExcluding = requesterMember.id === excludedMember.id
+    const isSelfExcluding = requesterMember?.id === excludedMember.id
+    const guildWillDisband = allMembers.length === 1
+    const [newElectedAdmin] = allMembers.filter(
+      ({ id }) => id !== excludedMember.id,
+    )
 
-    if (isSelfExcluding) {
-      const guildWillDisband = allMembers.length === 1
-
+    if (isSelfExcluding || EXEVO_PAN_ADMIN) {
       if (guildWillDisband) {
         await prisma.guild.delete({ where: { id: excludedMember.guildId } })
 
@@ -318,10 +339,6 @@ export const excludeGuildMember = authedProcedure
       }
 
       if (excludedMember.role === 'ADMIN') {
-        const [newElectedAdmin] = allMembers.filter(
-          ({ id }) => id !== excludedMember.id,
-        )
-
         await prisma.$transaction([
           prisma.guildMember.delete({ where: { id: excludedMember.id } }),
           prisma.guildMember.update({
@@ -340,10 +357,14 @@ export const excludeGuildMember = authedProcedure
       return result
     }
 
-    if (!can[requesterMember.role].exclude(excludedMember.role)) {
+    if (!can[requesterMember?.role ?? 'USER'].exclude(excludedMember.role)) {
       throw new TRPCError({
         code: 'FORBIDDEN',
-        message: `The role [${requesterMember.role}] has insufficient privileges to exclude a guild member with the role [${excludedMember.role}]`,
+        message: `The role [${
+          requesterMember?.role ?? 'USER'
+        }] has insufficient privileges to exclude a guild member with the role [${
+          excludedMember.role
+        }]`,
       })
     }
 
@@ -365,9 +386,10 @@ export const changeGuildMemberName = authedProcedure
     }),
   )
   .mutation(async ({ ctx: { token }, input: { guildMemberId, name } }) => {
+    const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const managedGuildMember = await findGuildMember({ id: guildMemberId })
 
-    if (managedGuildMember.userId !== token.id) {
+    if (managedGuildMember.userId !== token.id && !EXEVO_PAN_ADMIN) {
       throw new TRPCError({
         code: 'FORBIDDEN',
         message:
@@ -433,6 +455,8 @@ export const manageGuildApplication = authedProcedure
       newMember?: GuildMember
       application: GuildApplication
     }> => {
+      const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+
       const guildApplication = await prisma.guildApplication.findUnique({
         where: { id: applicationId },
       })
@@ -445,18 +469,21 @@ export const manageGuildApplication = authedProcedure
       }
 
       const { applyAs, guildId, userId } = guildApplication
+      if (!EXEVO_PAN_ADMIN) {
+        const { requesterMember, canManageApplications } =
+          await throwIfForbiddenGuildRequest({
+            guildId,
+            requesterId: token.id,
+          })
 
-      const { requesterMember, canManageApplications } =
-        await throwIfForbiddenGuildRequest({
-          guildId,
-          requesterId: token.id,
-        })
-
-      if (!canManageApplications) {
-        throw new TRPCError({
-          code: 'FORBIDDEN',
-          message: `The role [${requesterMember.role}] has insufficient privileges to manage guild applications`,
-        })
+        if (!canManageApplications) {
+          throw new TRPCError({
+            code: 'FORBIDDEN',
+            message: `The role [${
+              requesterMember?.role ?? 'USER'
+            }] has insufficient privileges to manage guild applications`,
+          })
+        }
       }
 
       if (accept) {

@@ -98,6 +98,7 @@ export default function GuildPage({
         <Template>
           <GuildDataConsumer>
             {({
+              EXEVO_PAN_ADMIN,
               guild,
               members,
               applications,
@@ -117,18 +118,18 @@ export default function GuildPage({
                   <MessageBoard
                     title="Description"
                     description={guild.description}
-                    isEditor={isEditor}
+                    isEditor={isEditor || EXEVO_PAN_ADMIN}
                     addText="Add description"
                     editText="Edit description"
                     onEdit={toggleEditDialog}
                   />
 
                   {/* @ ToDo: i18n */}
-                  {isMember && (
+                  {(isMember || EXEVO_PAN_ADMIN) && (
                     <MessageBoard
                       title="Internal message board"
                       description={guild.messageBoard}
-                      isEditor={isEditor}
+                      isEditor={isEditor || EXEVO_PAN_ADMIN}
                       addText="Add message"
                       editText="Edit message"
                       onEdit={toggleEditDialog}
@@ -140,18 +141,18 @@ export default function GuildPage({
                     title="Members"
                     guildName={guild.name}
                     members={members}
-                    isEditor={isEditor}
+                    isEditor={isEditor || EXEVO_PAN_ADMIN}
                     currentMember={currentMember}
                     isPrivate={guild.private}
                   />
 
                   {/* @ ToDo: i18n */}
-                  {isMember && (
+                  {(isMember || EXEVO_PAN_ADMIN) && (
                     <Tabs.Group>
                       <Tabs.Panel label="Group applications">
                         <ApplyList
                           list={applications}
-                          allowAction={isApprover}
+                          allowAction={isApprover || EXEVO_PAN_ADMIN}
                           onAction={({ application, newMember }) =>
                             setGuildData((prev) => ({
                               applications: prev.applications.filter(
@@ -190,6 +191,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   locale,
 }) => {
   const token = await getToken({ req })
+  const EXEVO_PAN_ADMIN = token?.role === 'ADMIN'
 
   if (typeof guildName !== 'string') return redirect
 
@@ -210,9 +212,12 @@ export const getServerSideProps: GetServerSideProps = async ({
   const isMember = guildMembers.some(({ userId }) => userId === token?.id)
 
   const guildData: GuildData = {
-    guild: { ...rest, messageBoard: isMember ? messageBoard : null },
+    guild: {
+      ...rest,
+      messageBoard: isMember || EXEVO_PAN_ADMIN ? messageBoard : null,
+    },
     members:
-      guild.private && !isMember
+      guild.private && !isMember && !EXEVO_PAN_ADMIN
         ? guildMembers.map(() => ({
             id: '',
             guildId: '',
@@ -222,7 +227,7 @@ export const getServerSideProps: GetServerSideProps = async ({
             role: 'USER',
           }))
         : guildMembers,
-    applications: isMember ? guildApplications : [],
+    applications: isMember || EXEVO_PAN_ADMIN ? guildApplications : [],
   }
 
   return {

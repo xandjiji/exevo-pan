@@ -36,6 +36,7 @@ export const GuildDataProvider = ({
             isAdmin: currentMember?.role === 'ADMIN',
             isEditor: can[currentMember?.role ?? 'USER'].editGuild,
             isApprover: can[currentMember?.role ?? 'USER'].manageApplications,
+            EXEVO_PAN_ADMIN: token?.role === 'ADMIN',
           }
         }, [token, guildData]),
         setGuildData: useCallback((update) => {

@@ -28,7 +28,7 @@ export const ManageUser = (managedUser: GuildMember) => {
   >()
   const resetManagingMode = useCallback(() => setManagingMode(undefined), [])
 
-  const { currentMember } = useGuildData()
+  const { currentMember, EXEVO_PAN_ADMIN } = useGuildData()
 
   const isSelfManaging = currentMember?.id === managedUser.id
   const canManageRoles = can[currentMember?.role ?? 'USER'].manageRoles
@@ -37,18 +37,18 @@ export const ManageUser = (managedUser: GuildMember) => {
   )
 
   const menuItems = useMenuItems([
-    isSelfManaging && {
+    (isSelfManaging || EXEVO_PAN_ADMIN) && {
       label: 'Change name',
       icon: EditIcon,
       onSelect: () => setManagingMode('CHANGE_NAME'),
     },
-    canManageRoles &&
-      !isSelfManaging && {
-        label: 'Add role',
-        icon: OutlineAddIcon,
-        onSelect: () => setManagingMode('ROLE'),
-      },
-    (canExclude || isSelfManaging) && {
+    ((canManageRoles && !isSelfManaging) ||
+      (EXEVO_PAN_ADMIN && managedUser.role !== 'ADMIN')) && {
+      label: 'Add role',
+      icon: OutlineAddIcon,
+      onSelect: () => setManagingMode('ROLE'),
+    },
+    (canExclude || isSelfManaging || EXEVO_PAN_ADMIN) && {
       label: isSelfManaging ? 'Leave group' : 'Kick member',
       icon: RemoveMemberIcon,
       onSelect: () => setManagingMode('EXCLUSION'),
