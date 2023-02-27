@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { useRouter } from 'next/router'
 import {
   Dialog,
   Input,
@@ -37,6 +38,7 @@ const isFormInvalid = ({
 
 const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   const { guild, setGuildData } = useGuildData()
+  const router = useRouter()
 
   const [formState, setFormState] = useState<GuildEditInput>({
     guildId: guild.id,
@@ -54,6 +56,12 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         guild: { ...updatedGuild, createdAt: new Date(createdAt) },
       })
       toast.success('Guild was updated successfuly!')
+
+      if (guild.name !== updatedGuild.name) {
+        const newName = updatedGuild.name
+        router.push({ query: { guildName: newName } })
+      }
+
       onClose()
     },
     onError: () => toast.error('Oops! Something went wrong'),
