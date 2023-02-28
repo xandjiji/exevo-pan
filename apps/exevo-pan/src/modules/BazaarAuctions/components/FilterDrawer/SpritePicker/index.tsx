@@ -95,7 +95,7 @@ const SpritePicker = ({
                 })
               }
               className={clsx(
-                'relative h-14 w-14 select-none rounded-md p-2 transition-colors',
+                'focus:border-primaryHighlight relative h-14 w-14 select-none rounded-md border-2 border-solid border-transparent p-2 outline-none transition-colors',
                 isPro ? 'clickable' : 'cursor-not-allowed',
                 isPro
                   ? isChecked

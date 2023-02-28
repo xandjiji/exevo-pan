@@ -22,7 +22,7 @@ const AuctionItem = ({
     <button
       type="button"
       className={clsx(
-        'relative left-0 flex w-full cursor-pointer items-center justify-between text-left transition-all hover:left-1.5',
+        'group relative left-0 flex w-full cursor-pointer items-center justify-between text-left outline-none transition-all hover:left-1.5 focus:left-1.5',
         isSelected && 'left-1.5',
         isSelected && styles.highlight,
         styles.button,
@@ -39,7 +39,7 @@ const AuctionItem = ({
           world: '',
         }}
       />
-      <ChevronRightIcon className="fill-onSurface w-8" />
+      <ChevronRightIcon className="fill-onSurface group-focus:fill-primaryHighlight w-8" />
     </button>
   )
 }
