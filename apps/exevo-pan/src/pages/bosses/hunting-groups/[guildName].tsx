@@ -17,7 +17,7 @@ import {
   MemberList,
   ApplyList,
 } from 'modules/BossHunting'
-import { PersonAddIcon } from 'assets/svgs'
+import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
@@ -131,7 +131,21 @@ export default function GuildPage({
                     />
                   )}
 
-                  <div className="flex items-center justify-end gap-2">
+                  <div className="flex flex-wrap items-center  justify-end gap-4">
+                    {isMember && (
+                      <Button hollow pill className="flex items-center gap-2">
+                        <SettingsIcon className="h-4 w-4" />
+                        Settings
+                      </Button>
+                    )}
+
+                    {isMember && (
+                      <Button className="flex items-center gap-2">
+                        <BlogIcon className="-ml-1" />
+                        Notificate
+                      </Button>
+                    )}
+
                     {!isMember && (
                       <Button
                         className="flex items-center gap-2"
