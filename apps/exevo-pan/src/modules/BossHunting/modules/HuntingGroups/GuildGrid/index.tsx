@@ -8,7 +8,7 @@ import { trpc } from 'lib/trpc'
 import { debounce } from 'utils'
 import { routes } from 'Constants'
 import GuildList from './GuildList'
-import ApplyDialog from './ApplyDialog'
+import { ApplyDialog } from '../components'
 import { GuildGridProps } from './types'
 
 export const PAGE_SIZE = 20
