@@ -85,16 +85,18 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
                 onClick={() => setSelectedBoss(isSelected ? '' : boss)}
                 className="clickable group rounded-md outline-none"
               >
-                <SpritePortrait
-                  src={loadBossSrc(boss)}
-                  alt={boss}
-                  offset
-                  width={64}
-                  height={64}
-                  highlight={isSelected}
-                  className="pointer-events-none group-focus:outline"
-                  tabIndex={-1}
-                />
+                <div className="rounded-lg group-focus:outline">
+                  <SpritePortrait
+                    src={loadBossSrc(boss)}
+                    alt={boss}
+                    offset
+                    width={64}
+                    height={64}
+                    highlight={isSelected}
+                    className="pointer-events-none"
+                    tabIndex={-1}
+                  />
+                </div>
               </button>
             )
           })}
