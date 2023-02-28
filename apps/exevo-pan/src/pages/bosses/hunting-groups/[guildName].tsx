@@ -4,18 +4,22 @@ import { useState, useCallback } from 'react'
 import { stringify, parse } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
-import { Tabs } from 'components/Atoms'
+import { Tabs, Button } from 'components/Atoms'
 import {
   GuildDataProvider,
   GuildDataConsumer,
   GuildData,
   Template,
   GuildHero,
+  ApplyDialog,
   EditGuildDialog,
   MessageBoard,
   MemberList,
   ApplyList,
 } from 'modules/BossHunting'
+import { PersonAddIcon } from 'assets/svgs'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
 import { buildPageTitle } from 'utils'
 import { routes } from 'Constants'
@@ -32,11 +36,16 @@ export default function GuildPage({
   serializedToken,
 }: GuildPageProps) {
   const { translations } = useTranslations()
+  const session = useSession()
+  const isAuthed = !!session.data
+
+  const router = useRouter()
 
   const [guildDataProps] = useState<GuildData>(parse(serializedGuildData))
   const [token] = useState<JWT | null>(parse(serializedToken))
 
   const [isEditOpen, setIsEditOpen] = useState(false)
+  const [isApplyOpen, setIsApplyOpen] = useState(false)
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
   /* @ ToDo: add title */
@@ -113,6 +122,30 @@ export default function GuildPage({
 
                 <div className="inner-container z-1 relative mx-auto grid max-w-full gap-8 sm:w-96 sm:px-0 md:w-[540px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
+                  {isApplyOpen && isAuthed && (
+                    <ApplyDialog
+                      defaultUserName={session.data.user.name}
+                      guildId={guild.id}
+                      guildName={guild.name}
+                      onClose={() => setIsApplyOpen(false)}
+                    />
+                  )}
+
+                  <div className="flex items-center justify-end gap-2">
+                    {!isMember && (
+                      <Button
+                        className="flex items-center gap-2"
+                        onClick={
+                          isAuthed
+                            ? () => setIsApplyOpen(true)
+                            : () => router.push(routes.LOGIN)
+                        }
+                      >
+                        <PersonAddIcon className="-ml-1" />
+                        Apply
+                      </Button>
+                    )}
+                  </div>
 
                   {/* @ ToDo: i18n */}
                   <MessageBoard
