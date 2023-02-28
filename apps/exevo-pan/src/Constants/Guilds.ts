@@ -16,4 +16,7 @@ export const guildValidationRules = {
   messageBoard: {
     MAX: 2048,
   },
+  notificationMessage: {
+    MAX: 180,
+  },
 }

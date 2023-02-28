@@ -16,6 +16,7 @@ import {
   MessageBoard,
   MemberList,
   ApplyList,
+  NotificationDialog,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { useSession } from 'next-auth/react'
@@ -46,6 +47,8 @@ export default function GuildPage({
 
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isApplyOpen, setIsApplyOpen] = useState(false)
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false)
+
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
   /* @ ToDo: add title */
@@ -122,15 +125,6 @@ export default function GuildPage({
 
                 <div className="inner-container z-1 relative mx-auto grid max-w-full gap-8 sm:w-96 sm:px-0 md:w-[540px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-                  {isApplyOpen && isAuthed && (
-                    <ApplyDialog
-                      defaultUserName={session.data.user.name}
-                      guildId={guild.id}
-                      guildName={guild.name}
-                      onClose={() => setIsApplyOpen(false)}
-                    />
-                  )}
-
                   <div className="flex flex-wrap items-center  justify-end gap-4">
                     {isMember && (
                       <Button hollow pill className="flex items-center gap-2">
@@ -140,24 +134,45 @@ export default function GuildPage({
                     )}
 
                     {isMember && (
-                      <Button className="flex items-center gap-2">
-                        <BlogIcon className="-ml-1" />
-                        Notificate
-                      </Button>
+                      <>
+                        <Button
+                          className="flex items-center gap-2"
+                          onClick={() => setIsNotificationOpen(true)}
+                        >
+                          <BlogIcon className="-ml-1" />
+                          Notificate
+                        </Button>
+                        {isNotificationOpen && (
+                          <NotificationDialog
+                            guildId={guild.id}
+                            onClose={() => setIsNotificationOpen(false)}
+                          />
+                        )}
+                      </>
                     )}
 
                     {!isMember && (
-                      <Button
-                        className="flex items-center gap-2"
-                        onClick={
-                          isAuthed
-                            ? () => setIsApplyOpen(true)
-                            : () => router.push(routes.LOGIN)
-                        }
-                      >
-                        <PersonAddIcon className="-ml-1" />
-                        Apply
-                      </Button>
+                      <>
+                        <Button
+                          className="flex items-center gap-2"
+                          onClick={
+                            isAuthed
+                              ? () => setIsApplyOpen(true)
+                              : () => router.push(routes.LOGIN)
+                          }
+                        >
+                          <PersonAddIcon className="-ml-1" />
+                          Apply
+                        </Button>
+                        {isApplyOpen && isAuthed && (
+                          <ApplyDialog
+                            defaultUserName={session.data.user.name}
+                            guildId={guild.id}
+                            guildName={guild.name}
+                            onClose={() => setIsApplyOpen(false)}
+                          />
+                        )}
+                      </>
                     )}
                   </div>
 
