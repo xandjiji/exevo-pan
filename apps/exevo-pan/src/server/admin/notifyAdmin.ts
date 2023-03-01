@@ -1,7 +1,8 @@
-import webpush from 'web-push'
+import type { WebPushError } from 'web-push'
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
+import { DeviceNotificationClient } from 'services/server'
 
 export const notifyAdmin = adminProcedure
   .input(
@@ -11,32 +12,20 @@ export const notifyAdmin = adminProcedure
       url: z.string().optional(),
     }),
   )
-  .mutation(async ({ input }) => {
+  .mutation(async ({ input: notification }) => {
     const devices = await prisma.notificationDevice.findMany({
       where: { user: { role: 'ADMIN' } },
     })
 
-    webpush.setVapidDetails(
-      'https://www.exevopan.com/',
-      process.env.NEXT_PUBLIC_VAPID_KEY as string,
-      process.env.PRIVATE_VAPID_KEY as string,
-    )
-
     const result = await Promise.all(
-      devices.map(({ auth, endpoint, p256dh }) =>
-        webpush
-          .sendNotification(
-            {
-              endpoint,
-              keys: { auth, p256dh },
-            },
-            JSON.stringify(input),
-          )
-          .catch(async (e) => {
+      devices.map((device) =>
+        DeviceNotificationClient.notify({ device, notification }).catch(
+          async (e: WebPushError) => {
             await prisma.notificationDevice.deleteMany({
               where: { user: { role: 'ADMIN' }, endpoint: e.endpoint },
             })
-          }),
+          },
+        ),
       ),
     )
 
