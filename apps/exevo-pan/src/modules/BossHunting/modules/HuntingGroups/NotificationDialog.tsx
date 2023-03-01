@@ -30,16 +30,15 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
   const emptyBossList = bossList.length === 0
   const noBoss = selectedBoss.length === 0
 
-  /* const applyAction = trpc.applyToGuild.useMutation({
+  const notify = trpc.notifyGuildMembers.useMutation({
     onSuccess: () => {
-      toast.success('Application sent!')
+      toast.success('Notification was sent!')
       onClose()
     },
     onError: () => {
-      toast.error('You already joined this guild!')
-      setAlreadyJoined(true)
+      toast.error('Oops! Something went wrong')
     },
-  }) */
+  })
 
   return (
     <Dialog
@@ -108,10 +107,9 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
           </Button>
           <Button
             pill
-            /* onClick={() => applyAction.mutate({ guildId, applyAs, message })}
-            loading={applyAction.isLoading}
-            */
-            disabled={noBoss}
+            onClick={() => notify.mutate({ guildId, boss: selectedBoss })}
+            loading={notify.isLoading}
+            disabled={noBoss || notify.isLoading}
           >
             Send notification
           </Button>

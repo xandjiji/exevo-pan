@@ -510,7 +510,7 @@ export const manageGuildApplication = authedProcedure
     },
   )
 
-export const notifyMembers = authedProcedure
+export const notifyGuildMembers = authedProcedure
   .input(
     z.object({
       guildId: z.string(),
