@@ -17,6 +17,7 @@ import {
   MemberList,
   ApplyList,
   NotificationDialog,
+  SettingsDialog,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { useSession } from 'next-auth/react'
@@ -48,6 +49,7 @@ export default function GuildPage({
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isApplyOpen, setIsApplyOpen] = useState(false)
   const [isNotificationOpen, setIsNotificationOpen] = useState(false)
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
@@ -125,12 +127,24 @@ export default function GuildPage({
 
                 <div className="inner-container z-1 relative mx-auto grid max-w-full gap-8 sm:w-96 sm:px-0 md:w-[540px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-                  <div className="flex flex-wrap items-center  justify-end gap-4">
+                  <div className="flex flex-wrap items-center  justify-end gap-6">
                     {isMember && (
-                      <Button hollow pill className="flex items-center gap-2">
-                        <SettingsIcon className="h-4 w-4" />
-                        Settings
-                      </Button>
+                      <>
+                        <Button
+                          hollow
+                          pill
+                          className="flex items-center gap-2"
+                          onClick={() => setIsSettingsOpen(true)}
+                        >
+                          <SettingsIcon className="h-4 w-4" />
+                          Settings
+                        </Button>
+                        {isSettingsOpen && (
+                          <SettingsDialog
+                            onClose={() => setIsSettingsOpen(false)}
+                          />
+                        )}
+                      </>
                     )}
 
                     {isMember && (
