@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
 import { z } from 'zod'
-import type { WebPushError } from 'web-push'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
@@ -543,11 +542,7 @@ export const notifyMembers = authedProcedure
             body: guild.name,
             url: getGuildPermalink(guild.name, true),
           },
-        }).catch((e: WebPushError) =>
-          prisma.notificationDevice.deleteMany({
-            where: { endpoint: e.endpoint },
-          }),
-        ),
+        }),
       ),
     )
 

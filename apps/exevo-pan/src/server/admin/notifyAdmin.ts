@@ -1,4 +1,3 @@
-import type { WebPushError } from 'web-push'
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
@@ -19,13 +18,7 @@ export const notifyAdmin = adminProcedure
 
     const result = await Promise.all(
       devices.map((device) =>
-        DeviceNotificationClient.notify({ device, notification }).catch(
-          async (e: WebPushError) => {
-            await prisma.notificationDevice.deleteMany({
-              where: { user: { role: 'ADMIN' }, endpoint: e.endpoint },
-            })
-          },
-        ),
+        DeviceNotificationClient.notify({ device, notification }),
       ),
     )
 
