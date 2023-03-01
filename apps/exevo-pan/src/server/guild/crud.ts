@@ -1,9 +1,14 @@
 /* eslint-disable camelcase */
 import { z } from 'zod'
+import type { WebPushError } from 'web-push'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
-import { PageRevalidationClient } from 'services/server'
+import {
+  PageRevalidationClient,
+  DeviceNotificationClient,
+} from 'services/server'
+import { getGuildPermalink } from 'utils'
 import { avatar, guildValidationRules, routes } from 'Constants'
 import type {
   GUILD_MEMBER_ROLE,
@@ -67,7 +72,7 @@ const throwIfForbiddenGuildRequest = async ({
   if (!requesterMember && !EXEVO_PAN_ADMIN) {
     throw new TRPCError({
       code: 'UNAUTHORIZED',
-      message: 'Insufficient privileges to edit information from this guild',
+      message: 'Insufficient privileges in this guild',
     })
   }
 
@@ -505,3 +510,46 @@ export const manageGuildApplication = authedProcedure
       return { application }
     },
   )
+
+export const notifyMembers = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+      boss: z.string(),
+    }),
+  )
+  .mutation(async ({ ctx: { token }, input: { guildId, boss } }) => {
+    const requesterId = token.id
+
+    const { guild } = await throwIfForbiddenGuildRequest({
+      requesterId,
+      guildId,
+    })
+
+    const devices = await prisma.notificationDevice.findMany({
+      where: {
+        user: {
+          guildMembership: { some: { guildId } },
+        },
+      },
+    })
+
+    const result = await Promise.all(
+      devices.map((device) =>
+        DeviceNotificationClient.notify({
+          device,
+          notification: {
+            title: boss,
+            body: guild.name,
+            url: getGuildPermalink(guild.name, true),
+          },
+        }).catch((e: WebPushError) =>
+          prisma.notificationDevice.deleteMany({
+            where: { endpoint: e.endpoint },
+          }),
+        ),
+      ),
+    )
+
+    return result
+  })

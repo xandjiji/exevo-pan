@@ -36,8 +36,10 @@ export const addLocalePrefix = ({
   return `${basePath}${routePrefix}${route}`
 }
 
-export const getGuildPermalink = (guildName: string) =>
-  `${routes.BOSSES.HUNTING_GROUPS}/${guildName}`
+export const getGuildPermalink = (guildName: string, absolute = false) =>
+  `${absolute ? links.CANONICAL : ''}${
+    routes.BOSSES.HUNTING_GROUPS
+  }/${guildName}`
 
 export const officialAuctionUrl = (auctionId: number) =>
   `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auctionId}`
