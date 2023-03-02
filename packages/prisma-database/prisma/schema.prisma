@@ -205,6 +205,9 @@ model GuildMember {
     user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId  String
 
+    disabledNotifications Boolean @default(false)
+    blacklistedBosses    String? @db.Text
+
     @@unique([guildId, userId])
     @@index([guildId])
     @@index([userId])

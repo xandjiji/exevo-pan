@@ -301,6 +301,8 @@ export const getServerSideProps: GetServerSideProps = async ({
             joinedAt: new Date(),
             name: '',
             role: 'USER',
+            disabledNotifications: false,
+            blacklistedBosses: '',
           }))
         : guildMembers,
     applications: isMember || EXEVO_PAN_ADMIN ? guildApplications : [],
