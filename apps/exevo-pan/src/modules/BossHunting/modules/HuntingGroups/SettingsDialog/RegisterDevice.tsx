@@ -3,6 +3,8 @@ import { Alert, LoadingAlert } from 'components/Atoms'
 import { usePushNotifications } from 'hooks'
 import { toast } from 'react-hot-toast'
 
+/* @ ToDo: i18n */
+
 const AlertButton = ({
   className,
   ...props

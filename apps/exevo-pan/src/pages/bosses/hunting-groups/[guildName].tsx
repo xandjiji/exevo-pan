@@ -139,9 +139,10 @@ export default function GuildPage({
                           <SettingsIcon className="h-4 w-4" />
                           Settings
                         </Button>
-                        {isSettingsOpen && (
+                        {isSettingsOpen && !!currentMember && (
                           <SettingsDialog
                             onClose={() => setIsSettingsOpen(false)}
+                            currentMember={currentMember}
                           />
                         )}
                       </>
