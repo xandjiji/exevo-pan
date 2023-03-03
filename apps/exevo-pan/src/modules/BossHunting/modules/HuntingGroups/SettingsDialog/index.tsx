@@ -49,6 +49,8 @@ const SettingsDialog = ({
     isLoading: loadingDeviceSubscription,
   } = usePushNotifications()
 
+  const [allowSaveButton, setAllowSaveButton] = useState(false)
+
   const registeredDevice = permission === 'granted'
 
   const [disabledNotifications, setDisabledNotifications] = useState(
@@ -103,11 +105,12 @@ const SettingsDialog = ({
                 <AlertButton
                   onClick={() =>
                     subscribeDevice()
-                      .then(() =>
+                      .then(() => {
+                        setAllowSaveButton(true)
                         toast.success(
                           'This device was registered successfully!',
-                        ),
-                      )
+                        )
+                      })
                       .catch(() => toast.error('Oops! Something went wrong'))
                   }
                 >
@@ -162,7 +165,9 @@ const SettingsDialog = ({
             })
           }
           loading={updatePreferences.isLoading}
-          disabled={noChanges || updatePreferences.isLoading}
+          disabled={
+            !allowSaveButton && (noChanges || updatePreferences.isLoading)
+          }
         >
           Save
         </Button>
