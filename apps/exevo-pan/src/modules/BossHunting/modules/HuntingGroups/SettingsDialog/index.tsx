@@ -17,6 +17,7 @@ import { useBlacklist, bossNames } from './useBlacklist'
 
 /* 
 
+- endpoint
 - trpc + button state
 
 */

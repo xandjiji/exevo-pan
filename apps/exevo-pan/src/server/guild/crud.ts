@@ -14,6 +14,7 @@ import type {
   GuildMember,
   GuildApplication,
 } from '@prisma/client'
+import { utils as blacklistUtils } from '../../modules/BossHunting/modules/HuntingGroups/SettingsDialog/useBlacklist'
 import { can } from './permissions'
 
 type UniqueMemberArgs = (
@@ -525,25 +526,30 @@ export const notifyGuildMembers = authedProcedure
       guildId,
     })
 
-    const devices = await prisma.notificationDevice.findMany({
-      where: {
-        user: {
-          guildMembership: { some: { guildId } },
-        },
-      },
+    const members = await prisma.guildMember.findMany({
+      where: { guildId, disabledNotifications: false },
+      include: { user: { select: { NotificationDevice: true } } },
     })
 
     const result = await Promise.all(
-      devices.map((device) =>
-        DeviceNotificationClient.notify({
-          device,
-          notification: {
-            title: boss,
-            body: guild.name,
-            url: getGuildPermalink(guild.name, true),
-          },
-        }),
-      ),
+      members
+        .filter(
+          ({ disabledNotifications, blacklistedBosses }) =>
+            !disabledNotifications &&
+            !blacklistUtils.split(blacklistedBosses ?? '').has(boss),
+        )
+        .map(({ user: { NotificationDevice } }) => NotificationDevice)
+        .flat()
+        .map((device) =>
+          DeviceNotificationClient.notify({
+            device,
+            notification: {
+              title: boss,
+              body: guild.name,
+              url: getGuildPermalink(guild.name, true),
+            },
+          }),
+        ),
     )
 
     return result
