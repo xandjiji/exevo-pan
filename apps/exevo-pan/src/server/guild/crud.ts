@@ -14,7 +14,10 @@ import type {
   GuildMember,
   GuildApplication,
 } from '@prisma/client'
-import { utils as blacklistUtils } from '../../modules/BossHunting/modules/HuntingGroups/SettingsDialog/useBlacklist'
+import {
+  utils as blacklistUtils,
+  bossSet,
+} from '../../modules/BossHunting/modules/HuntingGroups/SettingsDialog/useBlacklist'
 import { can } from './permissions'
 
 type UniqueMemberArgs = (
@@ -410,6 +413,48 @@ export const changeGuildMemberName = authedProcedure
 
     return result
   })
+
+export const changeGuildMemberPreferences = authedProcedure
+  .input(
+    z.object({
+      guildMemberId: z.string(),
+      disabledNotifications: z.boolean(),
+      blacklistedBosses: z.string(),
+    }),
+  )
+  .mutation(
+    async ({
+      ctx: { token },
+      input: { guildMemberId, disabledNotifications, blacklistedBosses },
+    }) => {
+      const managedGuildMember = await findGuildMember({ id: guildMemberId })
+
+      if (managedGuildMember.userId !== token.id) {
+        throw new TRPCError({
+          code: 'FORBIDDEN',
+          message:
+            'You are not allowed to change preferences of other guild members',
+        })
+      }
+
+      const blacklistedBossesSet = blacklistUtils.split(blacklistedBosses)
+      blacklistedBossesSet.forEach((boss) => {
+        if (!bossSet.has(boss)) {
+          throw new TRPCError({
+            code: 'BAD_REQUEST',
+            message: `Unexpected '${boss}' boss blacklist entry`,
+          })
+        }
+      })
+
+      const result = await prisma.guildMember.update({
+        where: { id: guildMemberId },
+        data: { disabledNotifications, blacklistedBosses },
+      })
+
+      return result
+    },
+  )
 
 export const applyToGuild = authedProcedure
   .input(

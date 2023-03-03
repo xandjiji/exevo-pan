@@ -9,22 +9,17 @@ import {
   Checkbox,
 } from 'components/Atoms'
 import { usePushNotifications } from 'hooks'
+import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import type { GuildMember } from '@prisma/client'
 import { useBlacklist, bossNames } from './useBlacklist'
 
 /* @ ToDo: i18n */
 
-/* 
-
-- endpoint
-- trpc + button state
-
-*/
-
 type SettingsDialogProps = {
   onClose: () => void
   currentMember: GuildMember
+  onMemberUpdate: (updatedMember: GuildMember) => void
 }
 
 const AlertButton = ({
@@ -41,7 +36,11 @@ const AlertButton = ({
   />
 )
 
-const SettingsDialog = ({ onClose, currentMember }: SettingsDialogProps) => {
+const SettingsDialog = ({
+  onClose,
+  currentMember,
+  onMemberUpdate,
+}: SettingsDialogProps) => {
   const {
     isSupported,
     permission,
@@ -56,6 +55,22 @@ const SettingsDialog = ({ onClose, currentMember }: SettingsDialogProps) => {
     currentMember.disabledNotifications,
   )
   const blacklist = useBlacklist(currentMember.blacklistedBosses)
+
+  const updatePreferences = trpc.changeGuildMemberPreferences.useMutation({
+    onSuccess: (updatedCurrentMember) => {
+      onMemberUpdate({
+        ...updatedCurrentMember,
+        joinedAt: new Date(updatedCurrentMember.joinedAt),
+      })
+      toast.success('Preferences saved!')
+      onClose()
+    },
+    onError: () => toast.error('Oops! Something went wrong'),
+  })
+
+  const noChanges =
+    blacklist.value.string === currentMember.blacklistedBosses &&
+    disabledNotifications === currentMember.disabledNotifications
 
   return (
     <Dialog heading="Settings" isOpen onClose={onClose}>
@@ -137,8 +152,19 @@ const SettingsDialog = ({ onClose, currentMember }: SettingsDialogProps) => {
         <Button hollow pill onClick={onClose}>
           Cancel
         </Button>
-        <Button pill onClick={onClose}>
-          Done
+        <Button
+          pill
+          onClick={() =>
+            updatePreferences.mutate({
+              guildMemberId: currentMember.id,
+              disabledNotifications,
+              blacklistedBosses: blacklist.value.string,
+            })
+          }
+          loading={updatePreferences.isLoading}
+          disabled={noChanges || updatePreferences.isLoading}
+        >
+          Save
         </Button>
       </div>
     </Dialog>

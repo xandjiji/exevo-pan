@@ -28,3 +28,4 @@ export const useBlacklist = (initialValue: string | null) => {
 }
 
 export const bossNames = Object.values(bossTokens)
+export const bossSet = new Set<string>(bossNames)

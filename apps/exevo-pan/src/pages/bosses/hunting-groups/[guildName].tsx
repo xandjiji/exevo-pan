@@ -143,6 +143,15 @@ export default function GuildPage({
                           <SettingsDialog
                             onClose={() => setIsSettingsOpen(false)}
                             currentMember={currentMember}
+                            onMemberUpdate={(updatedCurrentMember) =>
+                              setGuildData({
+                                members: members.map((member) =>
+                                  member.id === updatedCurrentMember.id
+                                    ? updatedCurrentMember
+                                    : member,
+                                ),
+                              })
+                            }
                           />
                         )}
                       </>
