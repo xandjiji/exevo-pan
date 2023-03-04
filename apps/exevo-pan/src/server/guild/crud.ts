@@ -542,13 +542,14 @@ export const manageGuildApplication = authedProcedure
       }
 
       const { applyAs, guildId, userId } = guildApplication
-      if (!EXEVO_PAN_ADMIN) {
-        const { requesterMember, canManageApplications } =
-          await throwIfForbiddenGuildRequest({
-            guildId,
-            requesterId: token.id,
-          })
+      const { requesterMember, canManageApplications } =
+        await throwIfForbiddenGuildRequest({
+          guildId,
+          requesterId: token.id,
+          EXEVO_PAN_ADMIN,
+        })
 
+      if (!EXEVO_PAN_ADMIN) {
         if (!canManageApplications) {
           throw new TRPCError({
             code: 'FORBIDDEN',
@@ -563,16 +564,36 @@ export const manageGuildApplication = authedProcedure
         const [application, newMember] = await prisma.$transaction([
           prisma.guildApplication.delete({ where: { id: applicationId } }),
           prisma.guildMember.create({
-            data: { name: applyAs, role: 'USER', guildId, userId },
+            data: {
+              name: applyAs,
+              role: 'USER',
+              guildId,
+              userId,
+              targetedLogEntry: {
+                create: {
+                  type: 'ACCEPT_MEMBER',
+                  guildId,
+                  actionGuildMemberId: requesterMember?.id,
+                },
+              },
+            },
           }),
         ])
 
         return { newMember, application }
       }
 
-      const application = await prisma.guildApplication.delete({
-        where: { id: applicationId },
-      })
+      const [application] = await prisma.$transaction([
+        prisma.guildApplication.delete({ where: { id: applicationId } }),
+        prisma.guildLogEntry.create({
+          data: {
+            type: 'REJECT_MEMBER',
+            guildId,
+            actionGuildMemberId: requesterMember?.id,
+            metadata: applyAs,
+          },
+        }),
+      ])
 
       return { application }
     },
