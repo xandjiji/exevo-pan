@@ -566,7 +566,7 @@ export const notifyGuildMembers = authedProcedure
   .mutation(async ({ ctx: { token }, input: { guildId, boss } }) => {
     const requesterId = token.id
 
-    const { guild } = await throwIfForbiddenGuildRequest({
+    const { guild, requesterMember } = await throwIfForbiddenGuildRequest({
       requesterId,
       guildId,
     })
@@ -575,6 +575,17 @@ export const notifyGuildMembers = authedProcedure
       where: { guildId, disabledNotifications: false },
       include: { user: { select: { NotificationDevice: true } } },
     })
+
+    if (requesterMember) {
+      await prisma.guildLogEntry.create({
+        data: {
+          type: 'NOTIFICATION',
+          guildId,
+          actionGuildMemberId: requesterMember.id,
+          metadata: boss,
+        },
+      })
+    }
 
     const result = await Promise.all(
       members
