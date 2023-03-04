@@ -248,9 +248,9 @@ model GuildLogEntry {
     guild               Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
     guildId             String
     actionGuildMember   GuildMember? @relation(name: "actor", fields: [actionGuildMemberId], references: [id], onDelete: Cascade)
-    actionGuildMemberId String
+    actionGuildMemberId String?
     targetGuildMember   GuildMember? @relation(name: "target", fields: [targetGuildMemberId], references: [id], onDelete: Cascade)
-    targetGuildMemberId String
+    targetGuildMemberId String?
 
     metadata String?
 
