@@ -18,6 +18,7 @@ import {
   ApplyList,
   NotificationDialog,
   SettingsDialog,
+  LogHistory,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { useSession } from 'next-auth/react'
@@ -251,7 +252,9 @@ export default function GuildPage({
                           }
                         />
                       </Tabs.Panel>
-                      <Tabs.Panel label="Log history">das</Tabs.Panel>
+                      <Tabs.Panel label="Log history">
+                        <LogHistory guildId={guild.id} />
+                      </Tabs.Panel>
                     </Tabs.Group>
                   )}
                 </div>
