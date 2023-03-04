@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Table } from 'components/Atoms'
+import { Table, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
 import {
@@ -7,16 +7,12 @@ import {
   PersonRemoveIcon,
   BlogIcon,
   OutlineRemoveIcon,
+  ChevronDownIcon,
 } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { LOG_ENTRY_TYPE } from '@prisma/client'
 
 /* @ ToDo: i18n */
-
-/*
-    - loading state (initial tambem)
-    - load more button
-*/
 
 type LogHistoryProps = {
   guildId: string
@@ -24,25 +20,38 @@ type LogHistoryProps = {
 
 type LogEntryElement = Record<LOG_ENTRY_TYPE, React.ReactNode>
 
+const pageSize = 10
+
 const LogHistory = ({ guildId }: LogHistoryProps) => {
   const [pageIndex, setPageIndex] = useState(0)
   const [list, setList] = useState<TRPCRouteOutputs['listGuildLog']>([])
+  const [{ initiallyFetched, exhausted }, setQueryStatus] = useState({
+    initiallyFetched: false,
+    exhausted: false,
+  })
 
   const query = trpc.listGuildLog.useQuery(
     {
       guildId,
       pageIndex,
+      pageSize,
     },
     {
       refetchOnWindowFocus: false,
       keepPreviousData: true,
-      onSuccess: (data) => setList((prev) => [...prev, ...data]),
+      onSuccess: (data) => {
+        const queryExhausted = data.length === 0 || data.length < pageSize
+        setQueryStatus({ initiallyFetched: true, exhausted: queryExhausted })
+        setList((prev) => [...prev, ...data])
+      },
     },
   )
 
+  const isLoading = query.isFetching
+
   return (
     <Table>
-      {list.length > 0 ? (
+      {list.length > 0 && (
         <Table.Element>
           <Table.Head>
             <Table.Row>
@@ -143,8 +152,32 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
             )}
           </Table.Body>
         </Table.Element>
-      ) : (
+      )}
+
+      {initiallyFetched && list.length === 0 && (
         <EmptyState text="No log history" variant="medium" className="my-4" />
+      )}
+
+      {!exhausted && (
+        <Button
+          hollow
+          pill
+          className="mx-auto"
+          disabled={isLoading}
+          onClick={() => setPageIndex((prev) => prev + 1)}
+        >
+          {isLoading ? (
+            <div
+              role="alert"
+              className="loading-spinner fill-onPrimary h-6 w-6"
+            />
+          ) : (
+            <>
+              <ChevronDownIcon />
+              Load more
+            </>
+          )}
+        </Button>
       )}
     </Table>
   )
