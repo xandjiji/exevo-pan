@@ -354,14 +354,28 @@ export const excludeGuildMember = authedProcedure
             where: { id: newElectedAdmin.id },
             data: { role: 'ADMIN' },
           }),
+          prisma.guildLogEntry.create({
+            data: {
+              type: 'LEAVE_MEMBER',
+              guildId: excludedMember.guildId,
+              metadata: excludedMember.name,
+            },
+          }),
         ])
 
         return excludedMember
       }
 
-      const result = await prisma.guildMember.delete({
-        where: { id: excludedMember.id },
-      })
+      const [result] = await prisma.$transaction([
+        prisma.guildMember.delete({ where: { id: excludedMember.id } }),
+        prisma.guildLogEntry.create({
+          data: {
+            type: 'LEAVE_MEMBER',
+            guildId: excludedMember.guildId,
+            metadata: excludedMember.name,
+          },
+        }),
+      ])
 
       return result
     }
@@ -377,9 +391,17 @@ export const excludeGuildMember = authedProcedure
       })
     }
 
-    const result = await prisma.guildMember.delete({
-      where: { id: excludedMember.id },
-    })
+    const [result] = await prisma.$transaction([
+      prisma.guildMember.delete({ where: { id: excludedMember.id } }),
+      prisma.guildLogEntry.create({
+        data: {
+          type: 'KICK_MEMBER',
+          guildId: excludedMember.guildId,
+          actionGuildMemberId: requesterMember?.id,
+          metadata: excludedMember.name,
+        },
+      }),
+    ])
 
     return result
   })
