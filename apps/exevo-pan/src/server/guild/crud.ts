@@ -653,3 +653,32 @@ export const notifyGuildMembers = authedProcedure
 
     return result
   })
+
+export const listGuildLog = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+      pageSize: z.number().optional().default(20),
+      pageIndex: z.number().optional().default(0),
+    }),
+  )
+  .query(
+    async ({ ctx: { token }, input: { guildId, pageIndex, pageSize } }) => {
+      const userId = token.id
+
+      await findGuildMember({ guildId, userId })
+
+      const result = await prisma.guildLogEntry.findMany({
+        where: { guildId },
+        include: {
+          actionGuildMember: { select: { name: true } },
+          targetGuildMember: { select: { name: true } },
+        },
+        orderBy: { createdAt: 'desc' },
+        take: pageSize,
+        skip: pageIndex * pageSize,
+      })
+
+      return result
+    },
+  )
