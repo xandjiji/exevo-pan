@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useState } from 'react'
 import { Table, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
@@ -70,7 +71,14 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                 targetGuildMember,
                 metadata,
               }) => (
-                <Table.Row key={id}>
+                <Table.Row
+                  key={id}
+                  className={clsx(
+                    !!query.data?.find(
+                      (lastFetchedItem) => lastFetchedItem.id === id,
+                    ) && 'animate-fadeIn',
+                  )}
+                >
                   <Table.Column className="child:w-6 child:h-6 child:align-middle child:opacity-70 w-6 px-3">
                     {
                       (
