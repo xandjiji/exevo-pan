@@ -665,8 +665,11 @@ export const listGuildLog = authedProcedure
   .query(
     async ({ ctx: { token }, input: { guildId, pageIndex, pageSize } }) => {
       const userId = token.id
+      const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
 
-      await findGuildMember({ guildId, userId })
+      if (!EXEVO_PAN_ADMIN) {
+        await findGuildMember({ guildId, userId })
+      }
 
       const result = await prisma.guildLogEntry.findMany({
         where: { guildId },
