@@ -186,6 +186,7 @@ model Guild {
 
     guildMembers      GuildMember[]
     guildApplications GuildApplication[]
+    guildLogEntry     GuildLogEntry[]
 }
 
 enum GUILD_MEMBER_ROLE {
@@ -205,8 +206,10 @@ model GuildMember {
     user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId  String
 
-    disabledNotifications Boolean @default(false)
-    blacklistedBosses    String? @db.Text
+    disabledNotifications Boolean         @default(false)
+    blacklistedBosses     String?         @db.Text
+    actionLogEntry        GuildLogEntry[] @relation("actor")
+    targetedLogEntry      GuildLogEntry[] @relation("target")
 
     @@unique([guildId, userId])
     @@index([guildId])
@@ -227,4 +230,31 @@ model GuildApplication {
     @@unique([guildId, userId])
     @@index([userId])
     @@index([guildId])
+}
+
+enum LOG_ENTRY_TYPE {
+    LEAVE_MEMBER
+    KICK_MEMBER
+    ACCEPT_MEMBER
+    REJECT_MEMBER
+    NOTIFICATION
+}
+
+model GuildLogEntry {
+    id        String         @id @default(uuid())
+    createdAt DateTime       @default(now())
+    type      LOG_ENTRY_TYPE
+
+    guild               Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId             String
+    actionGuildMember   GuildMember? @relation(name: "actor", fields: [actionGuildMemberId], references: [id], onDelete: Cascade)
+    actionGuildMemberId String
+    targetGuildMember   GuildMember? @relation(name: "target", fields: [targetGuildMemberId], references: [id], onDelete: Cascade)
+    targetGuildMemberId String
+
+    metadata String?
+
+    @@index([guildId])
+    @@index([actionGuildMemberId])
+    @@index([targetGuildMemberId])
 }
