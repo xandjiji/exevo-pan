@@ -8,7 +8,7 @@ import NextLink from 'next/link'
 import { trpc } from 'lib/trpc'
 import { avatar, getGuildPermalink } from 'utils'
 import { routes } from 'Constants'
-import type { GuildCreationInput } from 'server/guild/crud'
+import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { RollAvatar } from './components'
 
 /* @ ToDo:
@@ -30,7 +30,7 @@ const CreateGuildDialog = ({
   const notAuthed = !data?.user
   const isPro = !!data?.user.proStatus
 
-  const [formState, setFormState] = useState<GuildCreationInput>({
+  const [formState, setFormState] = useState<TRPCRouteInputs['createGuild']>({
     name: '',
     private: false,
     server: 'Antica',

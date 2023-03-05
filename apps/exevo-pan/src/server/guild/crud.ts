@@ -96,84 +96,88 @@ const throwIfForbiddenGuildRequest = async ({
   }
 }
 
-const CreationSchema = z.object({
-  name: z
-    .string()
-    .min(guildValidationRules.name.MIN)
-    .max(guildValidationRules.name.MAX),
-  private: z.boolean(),
-  server: z
-    .string()
-    .min(guildValidationRules.server.MIN)
-    .max(guildValidationRules.server.MAX),
-  description: z.string().max(guildValidationRules.description.MAX).nullable(),
-  avatarId: z.number().min(avatar.id.min).max(avatar.id.max),
-  avatarDegree: z.number().min(avatar.degree.min).max(avatar.degree.max),
-})
-
-export type GuildCreationInput = z.infer<typeof CreationSchema>
-
-export const createGuild = authedProcedure.input(CreationSchema).mutation(
-  async ({
-    ctx: {
-      token: { id, name, proStatus },
-    },
-    input: { name: guildName, description, server, ...guildData },
-  }) => {
-    const [result] = await Promise.all([
-      prisma.guild.create({
-        data: {
-          ...guildData,
-          name: guildName.trim(),
-          description: description?.trim(),
-          server: server.trim(),
-          private: proStatus ? guildData.private : false,
-          guildMembers: {
-            create: {
-              userId: id,
-              name,
-              role: 'ADMIN',
+export const createGuild = authedProcedure
+  .input(
+    z.object({
+      name: z
+        .string()
+        .min(guildValidationRules.name.MIN)
+        .max(guildValidationRules.name.MAX),
+      private: z.boolean(),
+      server: z
+        .string()
+        .min(guildValidationRules.server.MIN)
+        .max(guildValidationRules.server.MAX),
+      description: z
+        .string()
+        .max(guildValidationRules.description.MAX)
+        .nullable(),
+      avatarId: z.number().min(avatar.id.min).max(avatar.id.max),
+      avatarDegree: z.number().min(avatar.degree.min).max(avatar.degree.max),
+    }),
+  )
+  .mutation(
+    async ({
+      ctx: {
+        token: { id, name, proStatus },
+      },
+      input: { name: guildName, description, server, ...guildData },
+    }) => {
+      const [result] = await Promise.all([
+        prisma.guild.create({
+          data: {
+            ...guildData,
+            name: guildName.trim(),
+            description: description?.trim(),
+            server: server.trim(),
+            private: proStatus ? guildData.private : false,
+            guildMembers: {
+              create: {
+                userId: id,
+                name,
+                role: 'ADMIN',
+              },
             },
           },
-        },
-      }),
-      PageRevalidationClient.revalidatePage(routes.BOSSES.HUNTING_GROUPS),
-    ])
+        }),
+        PageRevalidationClient.revalidatePage(routes.BOSSES.HUNTING_GROUPS),
+      ])
 
-    return result
-  },
-)
-
-const EditSchema = z.object({
-  guildId: z.string(),
-  name: z
-    .string()
-    .min(guildValidationRules.name.MIN)
-    .max(guildValidationRules.name.MAX)
-    .optional(),
-  private: z.boolean().optional(),
-  server: z
-    .string()
-    .min(guildValidationRules.server.MIN)
-    .max(guildValidationRules.server.MAX)
-    .optional(),
-  description: z.string().max(guildValidationRules.description.MAX).optional(),
-  messageBoard: z
-    .string()
-    .max(guildValidationRules.messageBoard.MAX)
-    .optional(),
-  avatarId: z.number().min(avatar.id.min).max(avatar.id.max).optional(),
-  avatarDegree: z
-    .number()
-    .min(avatar.degree.min)
-    .max(avatar.degree.max)
-    .optional(),
-})
-
-export type GuildEditInput = z.infer<typeof EditSchema>
+      return result
+    },
+  )
 
 export const updateGuild = authedProcedure
-  .input(EditSchema)
+  .input(
+    z.object({
+      guildId: z.string(),
+      name: z
+        .string()
+        .min(guildValidationRules.name.MIN)
+        .max(guildValidationRules.name.MAX)
+        .optional(),
+      private: z.boolean().optional(),
+      server: z
+        .string()
+        .min(guildValidationRules.server.MIN)
+        .max(guildValidationRules.server.MAX)
+        .optional(),
+      description: z
+        .string()
+        .max(guildValidationRules.description.MAX)
+        .optional(),
+      messageBoard: z
+        .string()
+        .max(guildValidationRules.messageBoard.MAX)
+        .optional(),
+      avatarId: z.number().min(avatar.id.min).max(avatar.id.max).optional(),
+      avatarDegree: z
+        .number()
+        .min(avatar.degree.min)
+        .max(avatar.degree.max)
+        .optional(),
+    }),
+  )
   .mutation(async ({ ctx: { token }, input }) => {
     const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const { guildId, name, description, messageBoard, server, ...guildData } =

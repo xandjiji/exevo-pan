@@ -12,7 +12,7 @@ import { InfoTooltip } from 'components/Organisms'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { guildValidationRules } from 'Constants'
-import type { GuildEditInput } from 'server/guild/crud'
+import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { useGuildData } from './contexts/useGuildData'
 import { RollAvatar } from './components'
 
@@ -25,6 +25,8 @@ import { RollAvatar } from './components'
 type EditGuildDialogProps = {
   onClose: () => void
 }
+
+type GuildEditInput = TRPCRouteInputs['updateGuild']
 
 const isFormInvalid = ({
   name = '',

@@ -3,7 +3,7 @@ import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
-import type { RegisterAuctionNotificationInput } from 'server/registerAuctionNotification'
+import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
 import {
@@ -25,6 +25,9 @@ import {
   AuctionNotificationsProviderProps,
   AuctionConfigProps,
 } from './types'
+
+type RegisterAuctionNotificationInput =
+  TRPCRouteInputs['registerAuctionNotification']
 
 const DEFAULT_STATE: AuctionNotificationsContextData = {
   isSupported: false,

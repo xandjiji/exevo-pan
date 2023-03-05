@@ -1,7 +1,7 @@
-import type { RegisterAuctionNotificationInput } from 'server/registerAuctionNotification'
+import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 
 export type AuctionConfigProps = Pick<
-  RegisterAuctionNotificationInput,
+  TRPCRouteInputs['registerAuctionNotification'],
   'auctionId' | 'auctionEnd' | 'nickname'
 > & { outfitId: string }
 
