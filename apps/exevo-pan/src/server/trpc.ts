@@ -2,8 +2,10 @@ import { initTRPC, TRPCError } from '@trpc/server'
 import { ZodError } from 'zod'
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
 import { Context } from './context'
+import { transformer } from './utils'
 
 const t = initTRPC.context<Context>().create({
+  transformer,
   errorFormatter: ({ shape, error }) => ({
     ...shape,
     data: {

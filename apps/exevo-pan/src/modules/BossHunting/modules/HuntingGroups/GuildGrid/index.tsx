@@ -42,10 +42,6 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
     placeholderData: initialGuildList,
     select: (result) => ({
       ...result,
-      page: result.page.map(({ createdAt, ...rest }) => ({
-        ...rest,
-        createdAt: new Date(createdAt),
-      })),
       displayApplyButton: !query.myGuilds,
     }),
   })

@@ -60,10 +60,7 @@ const SettingsDialog = ({
 
   const updatePreferences = trpc.changeGuildMemberPreferences.useMutation({
     onSuccess: (updatedCurrentMember) => {
-      onMemberUpdate({
-        ...updatedCurrentMember,
-        joinedAt: new Date(updatedCurrentMember.joinedAt),
-      })
+      onMemberUpdate(updatedCurrentMember)
       toast.success('Preferences saved!')
       onClose()
     },

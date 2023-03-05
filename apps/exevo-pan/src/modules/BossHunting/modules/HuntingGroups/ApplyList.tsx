@@ -20,16 +20,7 @@ type ApplyListProps = {
 
 const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
   const manageApplication = trpc.manageGuildApplication.useMutation({
-    onSuccess: ({ newMember, application }) =>
-      onAction({
-        application: {
-          ...application,
-          createdAt: new Date(application.createdAt),
-        },
-        newMember: newMember
-          ? { ...newMember, joinedAt: new Date(newMember.joinedAt) }
-          : undefined,
-      }),
+    onSuccess: onAction,
   })
 
   return (

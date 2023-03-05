@@ -149,7 +149,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                       </span>
 
                       <span className="text-tsm font-light opacity-60">
-                        {new Date(createdAt).toLocaleString('pt-BR', {
+                        {createdAt.toLocaleString('pt-BR', {
                           hour12: false,
                         })}
                       </span>

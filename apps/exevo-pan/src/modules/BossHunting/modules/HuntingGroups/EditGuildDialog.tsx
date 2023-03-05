@@ -51,10 +51,8 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   })
 
   const updateGuild = trpc.updateGuild.useMutation({
-    onSuccess: ({ createdAt, ...updatedGuild }) => {
-      setGuildData({
-        guild: { ...updatedGuild, createdAt: new Date(createdAt) },
-      })
+    onSuccess: (updatedGuild) => {
+      setGuildData({ guild: updatedGuild })
       toast.success('Guild was updated successfuly!')
 
       if (guild.name !== updatedGuild.name) {
