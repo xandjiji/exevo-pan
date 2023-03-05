@@ -129,7 +129,7 @@ const PaymentList = () => {
                     </CharacterLink>
                   </Table.Column>
                   <Table.Column>
-                    {new Date(lastUpdated).toLocaleString('pt-BR', {
+                    {lastUpdated.toLocaleString('pt-BR', {
                       hour12: false,
                     })}
                   </Table.Column>

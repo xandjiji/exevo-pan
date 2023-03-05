@@ -3,7 +3,7 @@ import { AuctionLink } from 'components/Atoms'
 
 type AuctionSummaryProps = {
   auctionId: number
-  lastUpdated: string
+  lastUpdated: Date
   nickname: string
 } & JSX.IntrinsicElements['div']
 
@@ -19,7 +19,7 @@ const AuctionSummary = ({
       {nickname}
     </AuctionLink>
     <p>
-      {new Date(lastUpdated).toLocaleString('pt-BR', {
+      {lastUpdated.toLocaleString('pt-BR', {
         hour12: false,
       })}
     </p>
