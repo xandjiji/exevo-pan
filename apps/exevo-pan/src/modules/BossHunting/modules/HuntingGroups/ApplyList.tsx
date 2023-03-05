@@ -45,7 +45,7 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
 
           <Table.Body>
             {list.map(({ id, applyAs, createdAt, message }) => (
-              <Table.Row>
+              <Table.Row key={id}>
                 <Table.Column>
                   <div className="xs:child:whitespace-nowrap grid w-min justify-center gap-1.5 text-center">
                     <span

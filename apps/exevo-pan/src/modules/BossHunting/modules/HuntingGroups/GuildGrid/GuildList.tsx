@@ -23,6 +23,7 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
     <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       {list.map((guild) => {
         const {
+          id,
           name,
           description,
           private: isPrivate,
@@ -34,6 +35,7 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
 
         return (
           <li
+            key={id}
             className={clsx(
               'card flex flex-col',
               description ? 'gap-4' : 'gap-2',
