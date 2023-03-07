@@ -1,5 +1,6 @@
 import { memo } from 'react'
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
@@ -7,19 +8,18 @@ import { Avatar, Tooltip } from 'components/Organisms'
 import { getGuildPermalink } from 'utils'
 import { LockIcon } from 'assets/svgs'
 
-/* @ ToDo:
-
-- i18n (nao esquecer do empty state)
-
-*/
-
 type GuildListProps = {
   list: PublicHuntingGroup[]
   onApply?: (huntingGroup: PublicHuntingGroup) => void
 }
 
-const GuildList = ({ list, onApply }: GuildListProps) =>
-  list.length > 0 ? (
+const GuildList = ({ list, onApply }: GuildListProps) => {
+  const {
+    translations: { huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.GuildGrid.GuildList
+
+  return list.length > 0 ? (
     <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
       {list.map((guild) => {
         const {
@@ -56,11 +56,12 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
                   {name}
                 </NextLink>
                 <span className="text-tsm flex items-center gap-1">
-                  {server} - {memberCount} members{' '}
+                  {server} - {memberCount}{' '}
+                  {memberCount > 1 ? i18n.members : i18n.member}{' '}
                   {isPrivate && (
                     <div className="h-3 w-3">
                       <Tooltip
-                        content={<span>This is a private hunting group</span>}
+                        content={<span>{i18n.privateTooltip}</span>}
                         offset={[0, 8]}
                       >
                         <LockIcon className="fill-onSurface h-3 w-3" />
@@ -83,7 +84,7 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
                 className="ml-auto mt-auto"
                 onClick={() => onApply(guild)}
               >
-                Apply
+                {i18n.apply}
               </Button>
             )}
           </li>
@@ -94,10 +95,11 @@ const GuildList = ({ list, onApply }: GuildListProps) =>
     <div>
       <EmptyState
         variant="large"
-        text="No hunting groups"
+        text={i18n.emptyState}
         className="mx-auto mt-8"
       />
     </div>
   )
+}
 
 export default memo(GuildList)

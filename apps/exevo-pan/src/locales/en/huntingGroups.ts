@@ -23,4 +23,18 @@ export default {
     cancel: 'Cancel',
     create: 'Create',
   },
+  GuildGrid: {
+    searchName: 'Search by name',
+    searchPlaceholder: 'Hunting group name',
+    server: 'Search by server',
+    findGroups: 'Find groups',
+    myGroups: 'My groups',
+    GuildList: {
+      member: 'member',
+      members: 'members',
+      privateTooltip: 'This is a private hunting group',
+      apply: 'Apply',
+      emptyState: 'No hunting groups',
+    },
+  },
 }

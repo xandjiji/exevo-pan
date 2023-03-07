@@ -22,11 +22,14 @@ const INITIAL_QUERY = {
   myGuilds: false,
 }
 
-/* @ ToDo: i18n */
-
 const EMPTY_GUILD_APPLICATION = { guildId: '', guildName: '' }
 
 const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.GuildGrid
+
   const router = useRouter()
 
   const { status, data } = useSession()
@@ -55,8 +58,8 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
       <div className="flex flex-col items-center gap-4 sm:flex-row">
         <div className="grid w-full grid-cols-2 gap-4 sm:max-w-[380px]">
           <Input
-            label="Search by name"
-            placeholder="Hunting group name"
+            label={i18n.searchName}
+            placeholder={i18n.searchPlaceholder}
             allowClear
             onChange={useMemo(
               () =>
@@ -73,7 +76,7 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
             )}
           />
           <Select
-            label="Search by server"
+            label={i18n.server}
             options={serverOptions}
             onChange={useMemo(
               () =>
@@ -107,8 +110,8 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
           setQuery((prev) => ({ ...prev, myGuilds: newIndex === 1 }))
         }}
       >
-        <Tabs.Panel label="Find groups" />
-        {isAuthed && <Tabs.Panel label="My groups" />}
+        <Tabs.Panel label={i18n.findGroups} />
+        {isAuthed && <Tabs.Panel label={i18n.myGroups} />}
       </Tabs.Group>
       <GuildList
         list={guildList.data?.page ?? []}
@@ -133,7 +136,9 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
         />
       )}
 
-      {guildList.isFetching && <LoadingAlert>Loading...</LoadingAlert>}
+      {guildList.isFetching && (
+        <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
+      )}
     </section>
   )
 }
