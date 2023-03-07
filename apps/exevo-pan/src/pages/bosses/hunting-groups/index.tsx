@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import { stringify, parse } from 'devalue'
 import { PreviewImageClient } from 'services'
 import { DrawerFieldsClient } from 'services/server'
@@ -12,33 +12,37 @@ import { AddIcon } from 'assets/svgs'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
-import { common, bosses } from 'locales'
+import { common, bosses, huntingGroups } from 'locales'
 
 type HuntingGroupsProps = {
   serializedData: string
-  serverOptions: Option[]
+  baseServerOptions: Option[]
 }
 
 const heroSrc = loadRawSrc('/huntingGroups.png')
 const pagePath = routes.BOSSES.HUNTING_GROUPS
 const pageUrl = buildUrl(pagePath)
 
-const DEFAULT_SERVER: Option = { name: '(any)', value: '' }
-
 export default function HuntingGroupsPage({
   serializedData,
-  serverOptions,
+  baseServerOptions,
 }: HuntingGroupsProps) {
   const { translations } = useTranslations()
+
+  const serverOptions: typeof baseServerOptions = useMemo(
+    () => [
+      { name: translations.huntingGroups.defaultServer, value: '' },
+      ...baseServerOptions,
+    ],
+    [translations.huntingGroups.defaultServer, baseServerOptions],
+  )
 
   const [initialGuildList] = useState<{
     page: PublicHuntingGroup[]
     count: number
   }>(parse(serializedData))
 
-  /* @ ToDo: add title */
-  /* const pageName = translations.bossTracker.Meta.title */
-  const pageName = 'Hunting Groups'
+  const pageName = translations.huntingGroups.Meta.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
     imgSrc: heroSrc,
@@ -56,19 +60,18 @@ export default function HuntingGroupsPage({
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        {/* @ ToDo: add meta tags */}
-        {/* <meta
+        <meta
           name="description"
-          content={translations.bossTracker.Meta.description}
+          content={translations.huntingGroups.Meta.description}
         />
         <meta
           property="twitter:description"
-          content={translations.bossTracker.Meta.description}
+          content={translations.huntingGroups.Meta.description}
         />
         <meta
           property="og:description"
-          content={translations.bossTracker.Meta.description}
-        /> */}
+          content={translations.huntingGroups.Meta.description}
+        />
         <meta property="og:type" content="website" />
 
         <meta key="preview-1" property="og:image" content={previewSrc} />
@@ -102,7 +105,7 @@ export default function HuntingGroupsPage({
             className="z-1 ml-auto flex w-fit items-center gap-1.5"
           >
             <AddIcon className="-ml-2.5" />
-            Create group
+            {translations.huntingGroups.createGroup}
           </Button>
           {openCreateGuild && (
             <CreateGuildDialog
@@ -122,23 +125,19 @@ export default function HuntingGroupsPage({
 }
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const [guildList, partialServerOptions] = await Promise.all([
+  const [guildList, baseServerOptions] = await Promise.all([
     caller.listGuilds({}),
     DrawerFieldsClient.fetchActiveServerOptions(),
   ])
 
-  const serverOptions: typeof partialServerOptions = [
-    DEFAULT_SERVER,
-    ...partialServerOptions,
-  ]
-
   return {
     props: {
       serializedData: stringify(guildList),
-      serverOptions,
+      baseServerOptions,
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],
+        huntingGroups: huntingGroups[locale as RegisteredLocale],
       },
       locale,
     },

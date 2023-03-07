@@ -48,6 +48,11 @@ import bossTrackerES from './es/bossTracker'
 import bossTrackerPT from './pt/bossTracker'
 import bossTrackerPL from './pl/bossTracker'
 
+import huntingGroupsEN from './en/huntingGroups'
+import huntingGroupsES from './es/huntingGroups'
+import huntingGroupsPT from './pt/huntingGroups'
+import huntingGroupsPL from './pl/huntingGroups'
+
 import loginEN from './en/login'
 import loginES from './es/login'
 import loginPT from './pt/login'
@@ -122,6 +127,12 @@ export const bossTracker = {
   es: bossTrackerES,
   pt: bossTrackerPT,
   pl: bossTrackerPL,
+}
+export const huntingGroups = {
+  en: huntingGroupsEN,
+  es: huntingGroupsES,
+  pt: huntingGroupsPT,
+  pl: huntingGroupsPL,
 }
 export const login = {
   en: loginEN,
