@@ -3,6 +3,11 @@ import { Dialog, Button, Input, Checkbox, Alert } from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
 import { Select, InfoTooltip } from 'components/Organisms'
+import {
+  useTranslations,
+  templateString,
+  templateMessage,
+} from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import NextLink from 'next/link'
 import { trpc } from 'lib/trpc'
@@ -10,12 +15,6 @@ import { avatar, getGuildPermalink } from 'utils'
 import { routes } from 'Constants'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { RollAvatar } from './components'
-
-/* @ ToDo:
-
-- i18n
-
-*/
 
 type CreateGuildDialogProps = {
   serverOptions: Option[]
@@ -26,6 +25,11 @@ const CreateGuildDialog = ({
   serverOptions,
   onClose,
 }: CreateGuildDialogProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.CreateGuildDialog
+
   const { data } = useSession()
   const notAuthed = !data?.user
   const isPro = !!data?.user.proStatus
@@ -46,12 +50,14 @@ const CreateGuildDialog = ({
   const { mutate, isLoading } = trpc.createGuild.useMutation({
     onSuccess: ({ name }) => {
       onClose()
-      toast.success('Hunting group created!')
+      toast.success(i18n.successToast)
       router.push(getGuildPermalink(name))
     },
     onError: () => {
-      setErrorMessage(`'${formState.name}' already exists`)
-      toast.error('Something went wrong!')
+      setErrorMessage(
+        templateString(i18n.errorMessage, { name: formState.name }),
+      )
+      toast.error(common.genericError)
     },
   })
 
@@ -65,7 +71,7 @@ const CreateGuildDialog = ({
         <div className="flex flex-col gap-4">
           <div className="mb-4 flex items-end gap-8">
             <Input
-              label="Group name"
+              label={i18n.groupName}
               value={formState.name}
               onChange={(e) => {
                 setErrorMessage('')
@@ -73,7 +79,7 @@ const CreateGuildDialog = ({
               }}
               error={errorMessage}
               maxLength={32}
-              placeholder="Choose a group name"
+              placeholder={i18n.namePlaceholder}
               className="grow"
             />
 
@@ -100,23 +106,25 @@ const CreateGuildDialog = ({
           <Checkbox
             label={
               <span className="flex items-center gap-1.5">
-                Private group{' '}
+                {i18n.privateGroup}{' '}
                 <InfoTooltip
                   labelSize
                   content={
                     <div>
-                      <p>
-                        A private group can be found, but its members will be
-                        hidden
-                      </p>
+                      <p>{i18n.privateTooltip}</p>
 
                       {!isPro && (
                         <NextLink
                           href={routes.EXEVOPRO}
                           className="text-onSurface mt-4 block"
                         >
-                          <strong className="text-rare">Exevo Pro 🕵️</strong>{' '}
-                          exclusive
+                          {templateMessage(i18n.exevoProExclusive, {
+                            exevopro: (
+                              <strong className="text-rare">
+                                Exevo Pro 🕵️
+                              </strong>
+                            ),
+                          })}
                         </NextLink>
                       )}
                     </div>
@@ -124,7 +132,7 @@ const CreateGuildDialog = ({
                 />
               </span>
             }
-            aria-label="Private group"
+            aria-label={i18n.privateGroup}
             checked={formState.private}
             onChange={() =>
               setFormState((prev) => ({ ...prev, private: !formState.private }))
@@ -135,21 +143,23 @@ const CreateGuildDialog = ({
 
         {notAuthed && (
           <Alert variant="alert">
-            You must{' '}
-            <NextLink
-              href={routes.LOGIN}
-              className="text-onAlert font-bold underline underline-offset-2"
-            >
-              log in
-            </NextLink>{' '}
-            to create a hunting group
+            {templateMessage(i18n.unauthedAlert, {
+              login: (
+                <NextLink
+                  href={routes.LOGIN}
+                  className="text-onAlert font-bold underline underline-offset-2"
+                >
+                  {i18n.login}
+                </NextLink>
+              ),
+            })}
           </Alert>
         )}
       </div>
 
       <div className="flex items-center justify-end gap-4">
         <Button onClick={onClose} hollow pill>
-          Cancel
+          {i18n.cancel}
         </Button>
         <Button
           pill
@@ -157,7 +167,7 @@ const CreateGuildDialog = ({
           loading={isLoading}
           onClick={() => mutate(formState)}
         >
-          Create
+          {i18n.create}
         </Button>
       </div>
     </Dialog>
