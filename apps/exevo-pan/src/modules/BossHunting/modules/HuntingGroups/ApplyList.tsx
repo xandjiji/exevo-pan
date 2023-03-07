@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { Table, Chip } from 'components/Atoms'
 import { Menu } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
@@ -6,8 +7,6 @@ import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { MoreHorizontalIcon, CheckIcon, CrossIcon } from 'assets/svgs'
 import type { GuildApplication, GuildMember } from '@prisma/client'
-
-/* @ ToDo: i18n */
 
 type ApplyListProps = {
   list: GuildApplication[]
@@ -19,6 +18,11 @@ type ApplyListProps = {
 }
 
 const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.ApplyList
+
   const manageApplication = trpc.manageGuildApplication.useMutation({
     onSuccess: onAction,
   })
@@ -29,8 +33,8 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
         <Table.Element>
           <Table.Head>
             <Table.Row>
-              <Table.HeadColumn>Name</Table.HeadColumn>
-              <Table.HeadColumn>Message</Table.HeadColumn>
+              <Table.HeadColumn>{i18n.name}</Table.HeadColumn>
+              <Table.HeadColumn>{i18n.message}</Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
@@ -65,7 +69,7 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
                       offset={[0, 8]}
                       items={[
                         {
-                          label: 'Accept',
+                          label: i18n.accept,
                           icon: ({ className, ...props }) => (
                             <CheckIcon
                               className={clsx('!fill-green', className)}
@@ -80,13 +84,13 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
                               }),
                               {
                                 success: `${applyAs} has joined the party`,
-                                error: 'Oops! Something went wrong!',
-                                loading: 'Loading...',
+                                error: common.genericError,
+                                loading: i18n.loading,
                               },
                             ),
                         },
                         {
-                          label: 'Reject',
+                          label: i18n.reject,
                           icon: ({ className, ...props }) => (
                             <CrossIcon
                               className={clsx('!fill-red', className)}
@@ -100,9 +104,9 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
                                 accept: false,
                               }),
                               {
-                                success: 'Application rejected successfully!',
-                                error: 'Oops! Something went wrong!',
-                                loading: 'Loading...',
+                                success: i18n.rejectToast,
+                                error: common.genericError,
+                                loading: i18n.loading,
                               },
                             ),
                         },

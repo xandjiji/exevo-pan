@@ -138,4 +138,12 @@ export default {
     save: 'Save',
     successToast: 'Preferences saved!',
   },
+  ApplyList: {
+    name: 'Name',
+    message: 'Message',
+    accept: 'Accept',
+    reject: 'Reject',
+    rejectToast: 'Application rejected successfully!',
+    loading: 'Loading...',
+  },
 }
