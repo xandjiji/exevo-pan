@@ -145,6 +145,7 @@ export default {
     reject: 'Reject',
     rejectToast: 'Application rejected successfully!',
     loading: 'Loading...',
+    emptyState: 'No applications',
   },
   EditGuildDialog: {
     heading: 'Edit hunting group',

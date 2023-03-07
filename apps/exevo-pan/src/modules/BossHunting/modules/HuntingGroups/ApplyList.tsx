@@ -121,7 +121,7 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
           </Table.Body>
         </Table.Element>
       ) : (
-        <EmptyState text="No applications" variant="medium" className="my-4" />
+        <EmptyState text={i18n.emptyState} variant="medium" className="my-4" />
       )}
     </Table>
   )
