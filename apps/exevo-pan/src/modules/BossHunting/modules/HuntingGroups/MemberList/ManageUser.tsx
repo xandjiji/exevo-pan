@@ -1,6 +1,7 @@
 /* eslint-disable react/destructuring-assignment */
 import { useState, useCallback } from 'react'
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { Menu, useMenuItems } from 'components/Organisms'
 import {
   MoreHorizontalIcon,
@@ -20,9 +21,12 @@ const RemoveMemberIcon = ({
   <TrashIcon className={clsx(className, '!fill-red')} {...props} />
 )
 
-/* @ ToDo: i18n */
-
 export const ManageUser = (managedUser: GuildMember) => {
+  const {
+    translations: { huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.MemberList.ManageUser
+
   const [managingMode, setManagingMode] = useState<
     'ROLE' | 'EXCLUSION' | 'CHANGE_NAME'
   >()
@@ -38,18 +42,18 @@ export const ManageUser = (managedUser: GuildMember) => {
 
   const menuItems = useMenuItems([
     (isSelfManaging || EXEVO_PAN_ADMIN) && {
-      label: 'Change name',
+      label: i18n.changeName,
       icon: EditIcon,
       onSelect: () => setManagingMode('CHANGE_NAME'),
     },
     ((canManageRoles && !isSelfManaging) ||
       (EXEVO_PAN_ADMIN && managedUser.role !== 'ADMIN')) && {
-      label: 'Add role',
+      label: i18n.addRole,
       icon: OutlineAddIcon,
       onSelect: () => setManagingMode('ROLE'),
     },
     (canExclude || isSelfManaging || EXEVO_PAN_ADMIN) && {
-      label: isSelfManaging ? 'Leave group' : 'Kick member',
+      label: isSelfManaging ? i18n.leaveGroup : i18n.kickMember,
       icon: RemoveMemberIcon,
       onSelect: () => setManagingMode('EXCLUSION'),
     },

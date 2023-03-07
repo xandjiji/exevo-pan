@@ -70,4 +70,53 @@ export default {
       error: 'You already joined this guild!',
     },
   },
+  MemberList: {
+    private: 'This is a private group',
+    role: 'Role',
+    name: 'Name',
+    admin: 'Admin',
+    moderator: 'Moderator',
+    self: '(you)',
+    ManageUser: {
+      changeName: 'Change name',
+      addRole: 'Add role',
+      leaveGroup: 'Leave group',
+      kickMember: 'Kick member',
+    },
+    ManagingModes: {
+      Role: {
+        heading: 'Change member role',
+        cancel: 'Cancel',
+        confirm: 'Confirm',
+        successToast: '{{name}} was successfully updated!',
+        options: {
+          moderator: 'Moderator',
+          member: 'Member',
+        },
+      },
+      Exclusion: {
+        heading: {
+          leave: 'Leave hunting group',
+          kick: 'Kick hunting group member',
+        },
+        confirmMessage: {
+          leave: 'Are you sure you want to leave {{name}}?',
+          kick: 'Are you sure you want to kick {{name}}?',
+        },
+        cancel: 'Cancel',
+        leave: 'Leave',
+        kick: 'Kick',
+        groupDisbanded: 'Hunting group was disbanded',
+        newAdmin: '{{name}} is the new group admin',
+      },
+      ChangeName: {
+        heading: 'Change your name',
+        nameInput: 'New name',
+        nameError: 'Name length must be between {{min}}-{{max}} characters',
+        cancel: 'Cancel',
+        confirm: 'Confirm',
+        successToast: 'Your name was updated successfully!',
+      },
+    },
+  },
 }

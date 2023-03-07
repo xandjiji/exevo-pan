@@ -1,6 +1,11 @@
 /* eslint-disable no-restricted-globals */
 /* eslint-disable react/destructuring-assignment */
 import { useState } from 'react'
+import {
+  useTranslations,
+  templateString,
+  templateMessage,
+} from 'contexts/useTranslation'
 import { Dialog, Button, Input } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import { useRouter } from 'next/router'
@@ -10,15 +15,17 @@ import { guildValidationRules, routes } from 'Constants'
 import type { GuildMember, GUILD_MEMBER_ROLE } from '@prisma/client'
 import { useGuildData } from '../contexts/useGuildData'
 
-/* @ ToDo: i18n */
-/* @ ToDo: testar todas as interaçoes */
-
 type ModeProps = {
   managedUser: GuildMember
   onClose: () => void
 }
 
 export const Role = ({ managedUser, onClose }: ModeProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.MemberList.ManagingModes.Role
+
   const { setGuildData } = useGuildData()
 
   const manage = trpc.manageGuildMemberRole.useMutation({
@@ -31,23 +38,23 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
         ),
       }))
 
-      toast.success(`${managedUser.name} was successfully updated!`)
+      toast.success(
+        templateString(i18n.soccessToast, { name: managedUser.name }),
+      )
       onClose()
     },
-    onError: () => {
-      toast.error('Oops! Something went wrong')
-    },
+    onError: () => toast.error(common.genericError),
   })
 
   const roleOptions: TypedOption<GUILD_MEMBER_ROLE>[] = [
-    { name: 'Moderator', value: 'MODERATOR' },
-    { name: 'Member', value: 'USER' },
+    { name: i18n.options.moderator, value: 'MODERATOR' },
+    { name: i18n.options.member, value: 'USER' },
   ]
 
   const [selectedRole, setSelectedRole] = useState(managedUser.role)
 
   return (
-    <Dialog heading="Change member role" isOpen onClose={onClose}>
+    <Dialog heading={i18n.heading} isOpen onClose={onClose}>
       <Select
         label={managedUser.name}
         options={roleOptions}
@@ -57,7 +64,7 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
 
       <div className="mt-6 flex items-center justify-end gap-4">
         <Button pill hollow onClick={onClose}>
-          Cancel
+          {i18n.cancel}
         </Button>
         <Button
           pill
@@ -70,7 +77,7 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
           loading={manage.isLoading}
           disabled={manage.isLoading || managedUser.role === selectedRole}
         >
-          Confirm
+          {i18n.confirm}
         </Button>
       </div>
     </Dialog>
@@ -78,6 +85,11 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
 }
 
 export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.MemberList.ManagingModes.Exclusion
+
   const { currentMember, guild, members, setGuildData } = useGuildData()
   const isSelfExcluding = currentMember?.id === managedUser.id
 
@@ -89,7 +101,7 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
 
       if (willDisband) {
         toast.success(`${managedUser.name} has left the party`)
-        toast.success('Hunting group was disbanded')
+        toast.success(i18n.groupDisbanded)
         router.push(routes.BOSSES.HUNTING_GROUPS)
         onClose()
         return
@@ -111,38 +123,32 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
 
       toast.success(`${managedUser.name} has left the party`)
       if (adminWillChange) {
-        toast.success(`${newAdmin.name} is the new group admin`)
+        toast.success(templateString(i18n.newAdmin, { name: newAdmin.name }))
       }
       onClose()
     },
-    onError: () => {
-      toast.error('Oops! Something went wrong')
-    },
+    onError: () => toast.error(common.genericError),
   })
 
   return (
     <Dialog
-      heading={
-        isSelfExcluding ? 'Leave hunting group' : 'Kick hunting group member'
-      }
+      heading={isSelfExcluding ? i18n.heading.leave : i18n.heading.kick}
       isOpen
       onClose={onClose}
     >
       <h4 className="child:font-bold my-8 text-base font-light">
-        {isSelfExcluding ? (
-          <>
-            Are you sure you want to leave <strong>{guild.name}</strong>?
-          </>
-        ) : (
-          <>
-            Are you sure you want to kick <strong>{managedUser.name}</strong>?
-          </>
-        )}
+        {isSelfExcluding
+          ? templateMessage(i18n.confirmMessage.leave, {
+              name: <strong>{guild.name}</strong>,
+            })
+          : templateMessage(i18n.confirmMessage.kick, {
+              name: <strong>{managedUser.name}</strong>,
+            })}
       </h4>
 
       <div className="mt-6 flex items-center justify-end gap-4">
         <Button pill hollow onClick={onClose}>
-          Cancel
+          {i18n.cancel}
         </Button>
         <Button
           pill
@@ -153,7 +159,7 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
           disabled={manage.isLoading}
           className="bg-red"
         >
-          {isSelfExcluding ? 'Leave' : 'Kick'}
+          {isSelfExcluding ? i18n.leave : i18n.kick}
         </Button>
       </div>
     </Dialog>
@@ -161,6 +167,11 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
 }
 
 export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.MemberList.ManagingModes.ChangeName
+
   const { setGuildData } = useGuildData()
 
   const [name, setName] = useState(managedUser.name)
@@ -175,12 +186,10 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
         ),
       }))
 
-      toast.success('Your name was updated successfully!')
+      toast.success(i18n.successToast)
       onClose()
     },
-    onError: () => {
-      toast.error('Oops! Something went wrong')
-    },
+    onError: () => toast.error(common.genericError),
   })
 
   const isInvalid =
@@ -196,9 +205,9 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
   }
 
   return (
-    <Dialog heading="Change your name" isOpen onClose={onClose}>
+    <Dialog heading={i18n.heading} isOpen onClose={onClose}>
       <Input
-        label="New name"
+        label={i18n.nameInput}
         placeholder={managedUser.name}
         value={name}
         onChange={(e) => setName(e.target.value)}
@@ -208,7 +217,10 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
         maxLength={guildValidationRules.name.MAX}
         error={
           isInvalid
-            ? `Name length must be between ${guildValidationRules.name.MIN}-${guildValidationRules.name.MAX} characters`
+            ? templateString(i18n.nameError, {
+                min: guildValidationRules.name.MIN,
+                max: guildValidationRules.name.MAX,
+              })
             : undefined
         }
         enterKeyHint="send"
@@ -216,7 +228,7 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
 
       <div className="mt-6 flex items-center justify-end gap-4">
         <Button pill hollow onClick={onClose}>
-          Cancel
+          {i18n.cancel}
         </Button>
         <Button
           pill
@@ -224,7 +236,7 @@ export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
           loading={manage.isLoading}
           disabled={manage.isLoading || isInvalid || noChange}
         >
-          Confirm
+          {i18n.confirm}
         </Button>
       </div>
     </Dialog>
