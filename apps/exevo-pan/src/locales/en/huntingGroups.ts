@@ -174,4 +174,12 @@ export default {
     emptyState: 'No log history',
     loadMore: 'Load more',
   },
+  NotificationDialog: {
+    heading: 'Notificate group',
+    search: 'Search boss',
+    emptyState: 'No bosses',
+    cancel: 'Cancel',
+    send: 'Send notification',
+    successToast: 'Notification was sent!',
+  },
 }

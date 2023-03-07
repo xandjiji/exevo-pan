@@ -1,13 +1,12 @@
 import clsx from 'clsx'
 import { useState, useMemo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, SpritePortrait, Input, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { loadBossSrc } from 'utils'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
-
-/* @ ToDo: i18n */
 
 type NotificationDialogProps = {
   guildId: string
@@ -17,6 +16,11 @@ type NotificationDialogProps = {
 const bossNames = Object.values(bossTokens)
 
 const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.NotificationDialog
+
   const [bossQuery, setBossQuery] = useState('')
   const [selectedBoss, setSelectedBoss] = useState('')
 
@@ -32,24 +36,22 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
 
   const notify = trpc.notifyGuildMembers.useMutation({
     onSuccess: () => {
-      toast.success('Notification was sent!')
+      toast.success(i18n.successToast)
       onClose()
     },
-    onError: () => {
-      toast.error('Oops! Something went wrong')
-    },
+    onError: () => toast.error(common.genericError),
   })
 
   return (
     <Dialog
-      heading="Notificate group"
+      heading={i18n.heading}
       isOpen
       onClose={onClose}
       className="w-full max-w-sm !px-8 md:max-w-3xl"
     >
       <div className="grid h-full gap-4">
         <Input
-          label="Search boss"
+          label={i18n.search}
           allowClear
           value={bossQuery}
           onChange={(e) => setBossQuery(e.target.value.toLowerCase())}
@@ -69,7 +71,9 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
               : 'grid-cols-[repeat(auto-fill,56px)] grid-rows-[repeat(auto-fill,56px)] justify-between pr-2 pb-1.5 pl-4 md:pt-4',
           )}
         >
-          {emptyBossList && <EmptyState text="No bosses" variant="medium" />}
+          {emptyBossList && (
+            <EmptyState text={i18n.emptyState} variant="medium" />
+          )}
 
           {bossList.map((boss) => {
             const isSelected = selectedBoss === boss
@@ -103,7 +107,7 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
 
         <div className="flex items-center justify-end gap-4">
           <Button hollow pill onClick={onClose}>
-            Cancel
+            {i18n.cancel}
           </Button>
           <Button
             pill
@@ -111,7 +115,7 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
             loading={notify.isLoading}
             disabled={noBoss || notify.isLoading}
           >
-            Send notification
+            {i18n.send}
           </Button>
         </div>
       </div>
