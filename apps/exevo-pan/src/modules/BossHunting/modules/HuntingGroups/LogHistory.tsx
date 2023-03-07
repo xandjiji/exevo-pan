@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState } from 'react'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { Table, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
@@ -13,8 +14,6 @@ import {
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { LOG_ENTRY_TYPE } from '@prisma/client'
 
-/* @ ToDo: i18n */
-
 type LogHistoryProps = {
   guildId: string
 }
@@ -24,6 +23,11 @@ type LogEntryElement = Record<LOG_ENTRY_TYPE, React.ReactNode>
 const pageSize = 10
 
 const LogHistory = ({ guildId }: LogHistoryProps) => {
+  const {
+    translations: { huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.LogHistory
+
   const [pageIndex, setPageIndex] = useState(0)
   const [list, setList] = useState<TRPCRouteOutputs['listGuildLog']>([])
   const [{ initiallyFetched, exhausted }, setQueryStatus] = useState({
@@ -57,7 +61,9 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
           <Table.Head>
             <Table.Row>
               <Table.HeadColumn />
-              <Table.HeadColumn className="text-left">Event</Table.HeadColumn>
+              <Table.HeadColumn className="text-left">
+                {i18n.event}
+              </Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
@@ -108,41 +114,39 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                         {
                           (
                             {
-                              LEAVE_MEMBER: (
-                                <>
-                                  <strong>{metadata}</strong> left the group
-                                </>
-                              ),
-                              REJECT_MEMBER: (
-                                <>
-                                  <strong>{actionGuildMember?.name}</strong>{' '}
-                                  rejected <strong>{metadata}</strong>{' '}
-                                  application
-                                </>
-                              ),
-                              KICK_MEMBER: (
-                                <>
-                                  <strong>{actionGuildMember?.name}</strong>{' '}
-                                  kicked <strong>{metadata}</strong>
-                                </>
-                              ),
-                              ACCEPT_MEMBER: (
-                                <>
-                                  <strong>{actionGuildMember?.name}</strong>{' '}
-                                  approved{' '}
-                                  <strong>{targetGuildMember?.name}</strong>{' '}
-                                  application
-                                </>
-                              ),
-                              NOTIFICATION: (
-                                <>
-                                  <strong>{actionGuildMember?.name}</strong>{' '}
-                                  sighted a{' '}
+                              LEAVE_MEMBER: templateMessage(i18n.leave, {
+                                name: <strong>{metadata}</strong>,
+                              }),
+                              REJECT_MEMBER: templateMessage(i18n.reject, {
+                                actor: (
+                                  <strong>{actionGuildMember?.name}</strong>
+                                ),
+                                target: <strong>{metadata}</strong>,
+                              }),
+                              KICK_MEMBER: templateMessage(i18n.kick, {
+                                actor: (
+                                  <strong>{actionGuildMember?.name}</strong>
+                                ),
+                                target: <strong>{metadata}</strong>,
+                              }),
+                              ACCEPT_MEMBER: templateMessage(i18n.accept, {
+                                actor: (
+                                  <strong>{actionGuildMember?.name}</strong>
+                                ),
+                                target: (
+                                  <strong>{targetGuildMember?.name}</strong>
+                                ),
+                              }),
+                              NOTIFICATION: templateMessage(i18n.notification, {
+                                actor: (
+                                  <strong>{actionGuildMember?.name}</strong>
+                                ),
+                                boss: (
                                   <strong className="text-primaryHighlight">
                                     {metadata}
                                   </strong>
-                                </>
-                              ),
+                                ),
+                              }),
                             } as LogEntryElement
                           )[type]
                         }
@@ -163,7 +167,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
       )}
 
       {initiallyFetched && list.length === 0 && (
-        <EmptyState text="No log history" variant="medium" className="my-4" />
+        <EmptyState text={i18n.emptyState} variant="medium" className="my-4" />
       )}
 
       {!exhausted && (
@@ -182,7 +186,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
           ) : (
             <>
               <ChevronDownIcon />
-              Load more
+              {i18n.loadMore}
             </>
           )}
         </Button>

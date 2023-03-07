@@ -164,4 +164,14 @@ export default {
     save: 'Save',
     successToast: 'Guild was updated successfully!',
   },
+  LogHistory: {
+    event: 'Event',
+    leave: '{{name}} left the group',
+    reject: '{{actor}} rejected {{target}} application',
+    kick: '{{actor}} kicked {{target}}',
+    accept: '{{actor}} approved {{target}} application',
+    notification: '{{actor}} sighted a {{boss}}',
+    emptyState: 'No log history',
+    loadMore: 'Load more',
+  },
 }
