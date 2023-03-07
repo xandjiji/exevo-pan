@@ -1,4 +1,5 @@
 import { useState, useCallback } from 'react'
+import { useTranslations, templateString } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import {
   Dialog,
@@ -15,12 +16,6 @@ import { guildValidationRules } from 'Constants'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { useGuildData } from './contexts/useGuildData'
 import { RollAvatar } from './components'
-
-/* @ ToDo:
-
-- i18n
-
-*/
 
 type EditGuildDialogProps = {
   onClose: () => void
@@ -39,6 +34,11 @@ const isFormInvalid = ({
   messageBoard.length > guildValidationRules.description.MAX
 
 const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.EditGuildDialog
+
   const { guild, setGuildData } = useGuildData()
   const router = useRouter()
 
@@ -55,7 +55,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   const updateGuild = trpc.updateGuild.useMutation({
     onSuccess: (updatedGuild) => {
       setGuildData({ guild: updatedGuild })
-      toast.success('Guild was updated successfuly!')
+      toast.success(i18n.successToast)
 
       if (guild.name !== updatedGuild.name) {
         const newName = updatedGuild.name
@@ -64,7 +64,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
 
       onClose()
     },
-    onError: () => toast.error('Oops! Something went wrong'),
+    onError: () => toast.error(common.genericError),
   })
 
   const errors = new Set<string>(
@@ -77,20 +77,23 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
 
   return (
     <Dialog
-      heading="Edit hunting group"
+      heading={i18n.heading}
       isOpen
       onClose={onClose}
       className="grid gap-2 sm:min-w-[420px]"
     >
       <div className="mb-4 flex items-end gap-8">
         <Input
-          label="Guild name"
-          placeholder="New group name"
+          label={i18n.guildName}
+          placeholder={i18n.guildNamePlaceholder}
           maxLength={guildValidationRules.name.MAX}
           value={formState.name}
           error={
             errors.has('name') || !!updateGuild.error?.data?.prisma
-              ? `Must be a unique name between ${guildValidationRules.name.MIN}-${guildValidationRules.name.MAX} characters`
+              ? templateString(i18n.nameError, {
+                  min: guildValidationRules.name.MIN,
+                  max: guildValidationRules.name.MAX,
+                })
               : undefined
           }
           onChange={(e) =>
@@ -110,8 +113,8 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
       </div>
 
       <TextArea
-        label="Description"
-        placeholder="Add group description"
+        label={i18n.description}
+        placeholder={i18n.descriptionPlaceholder}
         maxLength={guildValidationRules.description.MAX}
         value={formState.description}
         className="min-h-[120px]"
@@ -122,8 +125,8 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
       />
 
       <TextArea
-        label="Message board (only seen by members)"
-        placeholder="Add a message to the board"
+        label={i18n.messageBoard}
+        placeholder={i18n.messageBoardPlaceholder}
         maxLength={guildValidationRules.messageBoard.MAX}
         value={formState.messageBoard}
         className="min-h-[120px]"
@@ -136,14 +139,11 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
       <Checkbox
         label={
           <span className="flex items-center gap-1.5">
-            Private group{' '}
-            <InfoTooltip
-              labelSize
-              content="A private group can be found, but its members will be hidden"
-            />
+            {i18n.privateGroup}{' '}
+            <InfoTooltip labelSize content={i18n.privateTooltip} />
           </span>
         }
-        aria-label="Private group"
+        aria-label={i18n.privateGroup}
         checked={formState.private}
         onChange={() =>
           setFormState((prev) => ({ ...prev, private: !formState.private }))
@@ -152,13 +152,13 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
 
       {groupPrivacyError && (
         <Alert variant="alert" className="mt-1">
-          At least one Exevo Pro group member is required to set a private group
+          {i18n.exevoProRequired}
         </Alert>
       )}
 
       <div className="mt-4 flex items-center justify-end gap-4">
         <Button pill hollow onClick={onClose}>
-          Cancel
+          {i18n.cancel}
         </Button>
         <Button
           pill
@@ -166,7 +166,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
           disabled={updateGuild.isLoading || invalidForm}
           onClick={() => updateGuild.mutate(formState)}
         >
-          Save
+          {i18n.save}
         </Button>
       </div>
     </Dialog>

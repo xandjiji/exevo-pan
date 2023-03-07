@@ -146,4 +146,22 @@ export default {
     rejectToast: 'Application rejected successfully!',
     loading: 'Loading...',
   },
+  EditGuildDialog: {
+    heading: 'Edit hunting group',
+    guildName: 'Guild name',
+    guildNamePlaceholder: 'New group name',
+    nameError: 'Must be a unique name between {{min}}-{{max}} characters',
+    description: 'Description',
+    descriptionPlaceholder: 'Add group description',
+    messageBoard: 'Message board (only seen by members)',
+    messageBoardPlaceholder: 'Add a message to the board',
+    privateGroup: 'Private group',
+    privateTooltip:
+      'A private group can be found, but its members will be hidden',
+    exevoProRequired:
+      'At least one Exevo Pro group member is required to set a private group',
+    cancel: 'Cancel',
+    save: 'Save',
+    successToast: 'Guild was updated successfully!',
+  },
 }
