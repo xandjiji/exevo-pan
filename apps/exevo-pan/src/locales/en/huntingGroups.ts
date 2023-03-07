@@ -5,6 +5,22 @@ export default {
   },
   defaultServer: '(any)',
   createGroup: 'Create group',
+  settings: 'Settings',
+  notificate: 'Notificate',
+  apply: 'Apply',
+  publicBoard: {
+    title: 'Description',
+    add: 'Add description',
+    edit: 'Edit description',
+  },
+  privateBoard: {
+    title: 'Internal message board',
+    add: 'Add message',
+    edit: 'Edit message',
+  },
+  members: 'Members',
+  groupApplications: 'Group applications',
+  logHistory: 'Log history',
   RollAvatar: {
     avatarAlt: 'New guild avatar',
     roll: 'Roll',

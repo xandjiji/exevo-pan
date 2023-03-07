@@ -21,13 +21,16 @@ import {
   LogHistory,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
+import { PreviewImageClient } from 'services'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
-import { buildPageTitle } from 'utils'
-import { routes } from 'Constants'
+import { buildPageTitle, loadRawSrc, getGuildPermalink, buildUrl } from 'utils'
+import { routes, jsonld } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
-import { common, bosses } from 'locales'
+import { common, bosses, huntingGroups } from 'locales'
+
+const previewImageSrc = loadRawSrc('/huntingGroups.png')
 
 type GuildPageProps = {
   serializedGuildData: string
@@ -39,6 +42,7 @@ export default function GuildPage({
   serializedToken,
 }: GuildPageProps) {
   const { translations } = useTranslations()
+  const i18n = translations.huntingGroups
   const session = useSession()
   const isAuthed = !!session.data
 
@@ -54,15 +58,20 @@ export default function GuildPage({
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
-  /* @ ToDo: add title */
-  /* const pageName = translations.bossTracker.Meta.title */
   const pageName = guildDataProps.guild.name
-  /* const previewSrc = PreviewImageClient.getSrc({
+  const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
-    imgSrc: heroSrc,
-  }) */
+    imgSrc: previewImageSrc,
+  })
 
   const pageTitle = buildPageTitle(pageName)
+
+  const metaDescription = guildDataProps.guild.description
+    ? guildDataProps.guild.description
+    : translations.huntingGroups.Meta.description
+
+  const absolutePageUrl = getGuildPermalink(guildDataProps.guild.name, true)
+  const pagePath = getGuildPermalink(guildDataProps.guild.name)
 
   return (
     <>
@@ -72,33 +81,23 @@ export default function GuildPage({
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        {/* @ ToDo: add meta tags */}
-        {/* <meta
-      name="description"
-      content={translations.bossTracker.Meta.description}
-    />
-    <meta
-      property="twitter:description"
-      content={translations.bossTracker.Meta.description}
-    />
-    <meta
-      property="og:description"
-      content={translations.bossTracker.Meta.description}
-    /> */}
-        {/* <meta property="og:type" content="website" />
+        <meta name="description" content={metaDescription} />
+        <meta property="twitter:description" content={metaDescription} />
+        <meta property="og:description" content={metaDescription} />
+        <meta property="og:type" content="website" />
 
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <link rel="canonical" href={pageUrl} />
-        <meta property="og:url" content={pageUrl} />
-        <meta property="twitter:url" content={pageUrl} />
+        <link rel="canonical" href={absolutePageUrl} />
+        <meta property="og:url" content={absolutePageUrl} />
+        <meta property="twitter:url" content={absolutePageUrl} />
 
-        <link rel="alternate" hrefLang="en" href={pageUrl} />
+        <link rel="alternate" hrefLang="en" href={absolutePageUrl} />
         <link rel="alternate" hrefLang="pt" href={buildUrl(pagePath, 'pt')} />
         <link rel="alternate" hrefLang="es" href={buildUrl(pagePath, 'es')} />
         <link rel="alternate" hrefLang="pl" href={buildUrl(pagePath, 'pl')} />
-        <link rel="alternate" hrefLang="x-default" href={pageUrl} />
+        <link rel="alternate" hrefLang="x-default" href={absolutePageUrl} />
 
         <script
           type="application/ld+json"
@@ -106,7 +105,7 @@ export default function GuildPage({
           dangerouslySetInnerHTML={{
             __html: jsonld.standard,
           }}
-        /> */}
+        />
       </Head>
 
       <GuildDataProvider {...guildDataProps} token={token}>
@@ -138,7 +137,7 @@ export default function GuildPage({
                           onClick={() => setIsSettingsOpen(true)}
                         >
                           <SettingsIcon className="h-4 w-4" />
-                          Settings
+                          {i18n.settings}
                         </Button>
                         {isSettingsOpen && !!currentMember && (
                           <SettingsDialog
@@ -165,7 +164,7 @@ export default function GuildPage({
                           onClick={() => setIsNotificationOpen(true)}
                         >
                           <BlogIcon className="-ml-1" />
-                          Notificate
+                          {i18n.notificate}
                         </Button>
                         {isNotificationOpen && (
                           <NotificationDialog
@@ -187,7 +186,7 @@ export default function GuildPage({
                           }
                         >
                           <PersonAddIcon className="-ml-1" />
-                          Apply
+                          {i18n.apply}
                         </Button>
                         {isApplyOpen && isAuthed && (
                           <ApplyDialog
@@ -201,31 +200,28 @@ export default function GuildPage({
                     )}
                   </div>
 
-                  {/* @ ToDo: i18n */}
                   <MessageBoard
-                    title="Description"
+                    title={i18n.publicBoard.title}
                     description={guild.description}
                     isEditor={isEditor || EXEVO_PAN_ADMIN}
-                    addText="Add description"
-                    editText="Edit description"
+                    addText={i18n.publicBoard.add}
+                    editText={i18n.publicBoard.edit}
                     onEdit={toggleEditDialog}
                   />
 
-                  {/* @ ToDo: i18n */}
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <MessageBoard
-                      title="Internal message board"
+                      title={i18n.privateBoard.title}
                       description={guild.messageBoard}
                       isEditor={isEditor || EXEVO_PAN_ADMIN}
-                      addText="Add message"
-                      editText="Edit message"
+                      addText={i18n.privateBoard.add}
+                      editText={i18n.privateBoard.edit}
                       onEdit={toggleEditDialog}
                     />
                   )}
 
-                  {/* @ ToDo: i18n */}
                   <MemberList
-                    title="Members"
+                    title={i18n.members}
                     guildName={guild.name}
                     members={members}
                     isEditor={isEditor || EXEVO_PAN_ADMIN}
@@ -233,10 +229,9 @@ export default function GuildPage({
                     isPrivate={guild.private && !EXEVO_PAN_ADMIN}
                   />
 
-                  {/* @ ToDo: i18n */}
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <Tabs.Group>
-                      <Tabs.Panel label="Group applications">
+                      <Tabs.Panel label={i18n.groupApplications}>
                         <ApplyList
                           list={applications}
                           allowAction={isApprover || EXEVO_PAN_ADMIN}
@@ -252,7 +247,7 @@ export default function GuildPage({
                           }
                         />
                       </Tabs.Panel>
-                      <Tabs.Panel label="Log history">
+                      <Tabs.Panel label={i18n.logHistory}>
                         <LogHistory guildId={guild.id} />
                       </Tabs.Panel>
                     </Tabs.Group>
@@ -328,7 +323,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],
-        /* bossTracker: bossTracker[locale as RegisteredLocale], */
+        huntingGroups: huntingGroups[locale as RegisteredLocale],
       },
       locale,
     },
