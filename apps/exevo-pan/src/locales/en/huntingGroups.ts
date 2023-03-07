@@ -53,4 +53,21 @@ export default {
       emptyState: 'No hunting groups',
     },
   },
+  GuildHero: {
+    member: 'member',
+    members: 'members',
+  },
+  ApplyDialog: {
+    heading: 'Apply to {{guildName}}',
+    applyAs: 'Apply as',
+    nameError: 'Name length must be between {{min}}-{{max}} characters',
+    message: 'Message (optional)',
+    messagePlaceholder: "I won't SD any Yeties I swear",
+    cancel: 'Cancel',
+    submit: 'Submit',
+    toast: {
+      success: 'Application sent!',
+      error: 'You already joined this guild!',
+    },
+  },
 }

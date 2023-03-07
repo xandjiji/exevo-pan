@@ -31,10 +31,10 @@ export const templateMessage = (
 
 export const templateString = (
   message: string,
-  template: Record<string, string>,
+  template: Record<string, string | number>,
 ): string => {
   let messageTail = message
-  const templatedStrings: string[] = []
+  const templatedStrings: Array<string | number> = []
 
   Object.entries(template).forEach(([key, string]) => {
     const [prefix, tail] = messageTail.split(`{{${key}}}`)
