@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState } from 'react'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import {
   Dialog,
   Alert,
@@ -13,8 +14,6 @@ import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import type { GuildMember } from '@prisma/client'
 import { useBlacklist, bossNames } from './useBlacklist'
-
-/* @ ToDo: i18n */
 
 type SettingsDialogProps = {
   onClose: () => void
@@ -42,6 +41,11 @@ const SettingsDialog = ({
   onMemberUpdate,
 }: SettingsDialogProps) => {
   const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.SettingsDialog
+
+  const {
     isSupported,
     permission,
     subscribeDevice,
@@ -61,10 +65,10 @@ const SettingsDialog = ({
   const updatePreferences = trpc.changeGuildMemberPreferences.useMutation({
     onSuccess: (updatedCurrentMember) => {
       onMemberUpdate(updatedCurrentMember)
-      toast.success('Preferences saved!')
+      toast.success(i18n.successToast)
       onClose()
     },
-    onError: () => toast.error('Oops! Something went wrong'),
+    onError: () => toast.error(common.genericError),
   })
 
   const noChanges =
@@ -72,55 +76,55 @@ const SettingsDialog = ({
     disabledNotifications === currentMember.disabledNotifications
 
   return (
-    <Dialog heading="Settings" isOpen onClose={onClose}>
-      {loadingDeviceSubscription && <LoadingAlert>Loading...</LoadingAlert>}
+    <Dialog heading={i18n.heading} isOpen onClose={onClose}>
+      {loadingDeviceSubscription && (
+        <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
+      )}
 
       <div className="grid gap-6">
         {isSupported ? (
           <Alert variant="primary" noIcon>
             {registeredDevice ? (
               <>
-                <p>This device is registered!</p>
+                <p>{i18n.registeredDevice}</p>
                 <p>
-                  How about trying a{' '}
-                  <AlertButton
-                    onClick={() =>
-                      sendClientNotification({
-                        title: 'Hey there 👋',
-                        text: 'Everything looking good!',
-                      })
-                    }
-                  >
-                    test
-                  </AlertButton>{' '}
-                  notification? 🔔
+                  {templateMessage(i18n.testNotification, {
+                    button: (
+                      <AlertButton
+                        onClick={() =>
+                          sendClientNotification({
+                            title: i18n.sampleNotification.title,
+                            text: i18n.sampleNotification.text,
+                          })
+                        }
+                      >
+                        {i18n.test}
+                      </AlertButton>
+                    ),
+                  })}
                 </p>
               </>
             ) : (
-              <>
-                Please{' '}
-                <AlertButton
-                  onClick={() =>
-                    subscribeDevice()
-                      .then(() => {
-                        setAllowSaveButton(true)
-                        toast.success(
-                          'This device was registered successfully!',
-                        )
-                      })
-                      .catch(() => toast.error('Oops! Something went wrong'))
-                  }
-                >
-                  enable notifications
-                </AlertButton>{' '}
-                on this device
-              </>
+              templateMessage(i18n.enableNotifications, {
+                button: (
+                  <AlertButton
+                    onClick={() =>
+                      subscribeDevice()
+                        .then(() => {
+                          setAllowSaveButton(true)
+                          toast.success(i18n.registerSuccess)
+                        })
+                        .catch(() => toast.error(common.genericError))
+                    }
+                  >
+                    {i18n.enableButton}
+                  </AlertButton>
+                ),
+              })
             )}
           </Alert>
         ) : (
-          <Alert variant="alert">
-            Web Push Notifications not supported by this device
-          </Alert>
+          <Alert variant="alert">{i18n.notSupported}</Alert>
         )}
 
         <Switch
@@ -128,11 +132,11 @@ const SettingsDialog = ({
           onClick={() => setDisabledNotifications((prev) => !prev)}
           disabled={!registeredDevice}
         >
-          Receive notifications from this group
+          {i18n.enableGroupNotifications}
         </Switch>
 
         <div className="grid gap-2">
-          <h5 className="text-s">Receive notifications for:</h5>
+          <h5 className="text-s">{i18n.receiveNotificationsFor}</h5>
 
           <div className="custom-scrollbar grid max-h-40 grid-cols-2 gap-x-4 gap-y-2 overflow-auto sm:grid-cols-3 md:max-h-60">
             {bossNames.map((boss) => (
@@ -150,7 +154,7 @@ const SettingsDialog = ({
 
       <div className="mt-4 flex items-center justify-end gap-4">
         <Button hollow pill onClick={onClose}>
-          Cancel
+          {i18n.cancel}
         </Button>
         <Button
           pill
@@ -166,7 +170,7 @@ const SettingsDialog = ({
             !allowSaveButton && (noChanges || updatePreferences.isLoading)
           }
         >
-          Save
+          {i18n.save}
         </Button>
       </div>
     </Dialog>

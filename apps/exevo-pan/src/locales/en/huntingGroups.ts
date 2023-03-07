@@ -119,4 +119,23 @@ export default {
       },
     },
   },
+  SettingsDialog: {
+    heading: 'Settings',
+    registeredDevice: 'This device is registered!',
+    testNotification: 'How about trying a {{button}} notification? 🔔',
+    test: 'test',
+    sampleNotification: {
+      title: 'Hey there 👋',
+      text: 'Everything looking good!',
+    },
+    enableNotifications: 'Please {{button}} on this device',
+    enableButton: 'enable notifications',
+    registerSuccess: 'This device was registered successfully!',
+    notSupported: 'Web Push Notifications not supported by this device',
+    enableGroupNotifications: 'Receive notifications from this group',
+    receiveNotificationsFor: 'Receive notifications for:',
+    cancel: 'Cancel',
+    save: 'Save',
+    successToast: 'Preferences saved!',
+  },
 }
