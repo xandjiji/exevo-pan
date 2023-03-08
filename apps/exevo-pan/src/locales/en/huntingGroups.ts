@@ -22,7 +22,7 @@ export default {
   groupApplications: 'Group applications',
   logHistory: 'Log history',
   RollAvatar: {
-    avatarAlt: 'New guild avatar',
+    avatarAlt: 'New group avatar',
     roll: 'Roll',
   },
   CreateGuildDialog: {
@@ -67,7 +67,7 @@ export default {
     submit: 'Submit',
     toast: {
       success: 'Application sent!',
-      error: 'You already joined this guild!',
+      error: 'You already joined this group!',
     },
   },
   MemberList: {
@@ -149,7 +149,7 @@ export default {
   },
   EditGuildDialog: {
     heading: 'Edit hunting group',
-    guildName: 'Guild name',
+    guildName: 'Group name',
     guildNamePlaceholder: 'New group name',
     nameError: 'Must be a unique name between {{min}}-{{max}} characters',
     description: 'Description',
@@ -163,7 +163,7 @@ export default {
       'At least one Exevo Pro group member is required to set a private group',
     cancel: 'Cancel',
     save: 'Save',
-    successToast: 'Guild was updated successfully!',
+    successToast: 'Group was updated successfully!',
   },
   LogHistory: {
     event: 'Event',
