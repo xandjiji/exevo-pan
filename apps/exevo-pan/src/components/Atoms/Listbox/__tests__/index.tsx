@@ -55,34 +55,37 @@ describe('<Listbox />', () => {
     expect(optionB).toHaveStyle('background-color: #C5CAE9')
     expect(optionC).toHaveStyle('background-color: #FFFFFF') */
     expect(optionA).toMatchInlineSnapshot(`
-      <option
+      <div
         aria-selected="false"
         class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
+        data-value="option A"
         id="listbox-item-0"
-        value="option A"
+        role="option"
       >
         option A
-      </option>
+      </div>
     `)
     expect(optionB).toMatchInlineSnapshot(`
-      <option
+      <div
         aria-selected="false"
         class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-primaryVariant"
+        data-value="option B"
         id="listbox-item-1"
-        value="option B"
+        role="option"
       >
         option B
-      </option>
+      </div>
     `)
     expect(optionC).toMatchInlineSnapshot(`
-      <option
+      <div
         aria-selected="false"
         class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
+        data-value="option C"
         id="listbox-item-2"
-        value="option C"
+        role="option"
       >
         option C
-      </option>
+      </div>
     `)
 
     rerender(
@@ -98,34 +101,37 @@ describe('<Listbox />', () => {
     expect(optionB).toHaveStyle('background-color: #FFFFFF')
     expect(optionC).toHaveStyle('background-color: #C5CAE9') */
     expect(optionA).toMatchInlineSnapshot(`
-      <option
+      <div
         aria-selected="false"
         class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
+        data-value="option A"
         id="listbox-item-0"
-        value="option A"
+        role="option"
       >
         option A
-      </option>
+      </div>
     `)
     expect(optionB).toMatchInlineSnapshot(`
-      <option
+      <div
         aria-selected="false"
         class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
+        data-value="option B"
         id="listbox-item-1"
-        value="option B"
+        role="option"
       >
         option B
-      </option>
+      </div>
     `)
     expect(optionC).toMatchInlineSnapshot(`
-      <option
+      <div
         aria-selected="false"
         class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-primaryVariant"
+        data-value="option C"
         id="listbox-item-2"
-        value="option C"
+        role="option"
       >
         option C
-      </option>
+      </div>
     `)
   })
 

@@ -14,7 +14,7 @@ describe('<Option />', () => {
     renderWithProviders(<Option value="actualValue">children</Option>)
 
     const optionElement = screen.getByRole('option')
-    expect(optionElement).toHaveValue('actualValue')
+    expect(optionElement).toHaveAttribute('data-value', 'actualValue')
     expect(screen.getByText('children')).toBeInTheDocument()
     /* expect(optionElement).toHaveStyle('background-color: #FFFFFF') */
     expect(optionElement).toMatchSnapshot()
@@ -24,7 +24,7 @@ describe('<Option />', () => {
     renderWithProviders(<Option>children</Option>)
 
     const optionElement = screen.getByRole('option')
-    expect(optionElement).toHaveValue('children')
+    expect(optionElement).toHaveAttribute('data-value', 'children')
     expect(screen.getByText('children')).toBeInTheDocument()
     /* expect(optionElement).toHaveStyle('background-color: #FFFFFF') */
     expect(optionElement).toMatchSnapshot()
