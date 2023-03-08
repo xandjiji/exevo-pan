@@ -31,6 +31,10 @@ export default {
     pitch: 'Track auctions receiving {{strong}} when they are bidded',
     strong: 'notifications',
   },
+  huntingGroups: {
+    pitch: 'Create {{strong}} boss hunting groups',
+    strong: 'private',
+  },
   andMore: '...and more in the future! 🔮',
   footer: 'Upgrade now to {{exevopro}}',
   no: {
