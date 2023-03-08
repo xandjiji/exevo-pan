@@ -110,7 +110,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                   </Table.Column>
                   <Table.Column>
                     <div className="grid gap-1 py-0.5">
-                      <span>
+                      <span className="leading-tight">
                         {
                           (
                             {
