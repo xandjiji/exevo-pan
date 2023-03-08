@@ -44,12 +44,12 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
                 <Table.Column>
                   <div className="xs:child:whitespace-nowrap grid w-min justify-center gap-1.5 text-center">
                     <span
-                      className="text-primaryHighlight overflow-hidden text-ellipsis text-base"
+                      className="text-primaryHighlight text-tsm xs:text-base overflow-hidden text-ellipsis"
                       title={applyAs}
                     >
                       {applyAs}
                     </span>
-                    <span className="text-tsm font-light">
+                    <span className="xs:text-tsm text-xs font-light">
                       {createdAt.toLocaleString('pt-BR', {
                         hour12: false,
                       })}
