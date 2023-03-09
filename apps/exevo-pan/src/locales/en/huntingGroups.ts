@@ -62,7 +62,7 @@ export default {
     applyAs: 'Apply as',
     nameError: 'Name length must be between {{min}}-{{max}} characters',
     message: 'Message (optional)',
-    messagePlaceholder: "I won't SD any Yeties I swear",
+    messagePlaceholder: "I won't SD any Yetis I swear",
     cancel: 'Cancel',
     submit: 'Submit',
     toast: {
