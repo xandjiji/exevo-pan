@@ -73,6 +73,11 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
     changefreq: 'daily',
   })}
   ${XmlTemplate({
+    route: routes.BOSSES.HUNTING_GROUPS,
+    date: TODAY,
+    changefreq: 'daily',
+  })}
+  ${XmlTemplate({
     route: routes.EXEVOPRO,
     date: TODAY,
     changefreq: 'monthly',
