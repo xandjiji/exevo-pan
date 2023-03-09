@@ -37,6 +37,16 @@ module.exports = withBundleAnalyzer(
           destination: '/',
           permanent: true,
         },
+        {
+          source: '/boss-tracker',
+          destination: '/bosses',
+          permanent: true,
+        },
+        {
+          source: '/boss-tracker/:server',
+          destination: '/bosses/:server',
+          permanent: true,
+        },
       ]
     },
     webpack(config) {
