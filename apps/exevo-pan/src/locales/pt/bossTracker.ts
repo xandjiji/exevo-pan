@@ -1,6 +1,6 @@
 export default {
   Meta: {
-    title: 'Boss Tracker',
+    title: 'Bosses',
     description: 'Descubra onde e quando bosses irão nascer!',
   },
   updated: {
@@ -19,7 +19,7 @@ export default {
     ago: 'atrás',
   },
   BossGrid: {
-    listBosses: 'Listar bosses por',
+    listBosses: 'Listar bosses por:',
     exclusiveBosses: 'Bosses exclusivos {{exevopro}} 🕵️',
     EmptyState: 'Nenhum boss',
     listOptions: {

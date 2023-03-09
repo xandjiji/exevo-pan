@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { Main, Hero } from 'templates'
-import { Header, ExerciseWeapons, pages } from 'modules/Calculators'
+import { Template, ExerciseWeapons, useRoutes } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { PreviewImageClient } from 'services'
@@ -8,8 +7,8 @@ import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
-const pageUrl = buildUrl(routes.EXERCISE_WEAPONS)
-const { hero } = pages.ExerciseWeapons
+const pageRoute = routes.EXERCISE_WEAPONS
+const pageUrl = buildUrl(pageRoute)
 
 export default function Calculator() {
   const { translations } = useTranslations()
@@ -18,9 +17,12 @@ export default function Calculator() {
 
   const pageTitle = buildPageTitle(pageName)
 
+  const { getRoute } = useRoutes()
+  const routeData = getRoute(pageRoute)
+
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
-    imgSrc: loadRawSrc(hero),
+    imgSrc: routeData ? loadRawSrc(routeData.hero) : undefined,
   })
 
   return (
@@ -53,21 +55,9 @@ export default function Calculator() {
         <meta property="twitter:url" content={pageUrl} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
-        <link
-          rel="alternate"
-          hrefLang="pt"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'pt')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="es"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'es')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="pl"
-          href={buildUrl(routes.EXERCISE_WEAPONS, 'pl')}
-        />
+        <link rel="alternate" hrefLang="pt" href={buildUrl(pageRoute, 'pt')} />
+        <link rel="alternate" hrefLang="es" href={buildUrl(pageRoute, 'es')} />
+        <link rel="alternate" hrefLang="pl" href={buildUrl(pageRoute, 'pl')} />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <script
@@ -79,11 +69,9 @@ export default function Calculator() {
         />
       </Head>
 
-      <Main>
-        <Header />
-        <Hero title={pageName} src={hero} offset />
+      <Template currentRoute={pageRoute}>
         <ExerciseWeapons />
-      </Main>
+      </Template>
     </>
   )
 }

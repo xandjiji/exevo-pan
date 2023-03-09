@@ -79,7 +79,6 @@ const Summary = ({ pointsRequired }: SummaryProps) => {
             options={weaponOptions}
             value={exerciseWeapon}
             onChange={(e) => setExerciseWeapon(e.target.value as WeaponOption)}
-            noAlert
             className="w-[180px]"
           />
         </div>

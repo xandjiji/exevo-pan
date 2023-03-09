@@ -33,7 +33,6 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
       onChange,
       disabled,
       error = false,
-      noAlert = false,
       options,
       ...props
     },
@@ -181,9 +180,11 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             />
           </div>
         </Popover>
-        {!noAlert && (
-          <FormError id={errorId} error={error} className="inline-block" />
-        )}
+        <FormError
+          id={errorId}
+          error={error}
+          className="absolute top-[calc(100%+4px)] left-0"
+        />
         <input
           ref={innerRef}
           name={name}

@@ -5,7 +5,6 @@ export type ExtendedProps = Omit<
 
 export type CustomProps = {
   error?: boolean | string
-  noAlert?: boolean
   noResize?: boolean
 }
 

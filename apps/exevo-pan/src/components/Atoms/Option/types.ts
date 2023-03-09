@@ -1,7 +1,7 @@
 import { HTMLAttributes } from 'react'
 
 type ExtendedOptionProps = Omit<
-  HTMLAttributes<HTMLOptionElement>,
+  HTMLAttributes<HTMLDivElement>,
   'children' | 'onClick'
 >
 

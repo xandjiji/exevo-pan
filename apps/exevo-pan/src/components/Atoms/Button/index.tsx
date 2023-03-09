@@ -29,7 +29,7 @@ const Button = ({
           'flex items-center justify-center gap-1 py-1.5 px-4 text-xs font-bold uppercase tracking-wider',
         !hollow && 'shadow-md hover:shadow-lg',
         hollow &&
-          '!text-onSurface active:text-primary child:fill-onSurface !bg-transparent underline opacity-50 disabled:opacity-25',
+          '!text-onSurface active:text-primary child:fill-onSurface !bg-transparent !px-0 underline opacity-50 active:shadow-none disabled:opacity-25',
         disabled &&
           !loading &&
           'bg-separator active:bg-separator child:fill-black cursor-default text-black opacity-60 shadow-none',

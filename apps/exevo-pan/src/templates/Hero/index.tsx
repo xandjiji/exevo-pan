@@ -8,6 +8,8 @@ const Hero = ({
   subtitle,
   src,
   offset = false,
+  hueRotation,
+  dimension = 240,
   className,
   ...props
 }: HeroProps) => (
@@ -22,14 +24,21 @@ const Hero = ({
     <Image
       src={src}
       alt={title}
-      width={240}
-      height={240}
+      width={dimension}
+      height={dimension}
       priority
       unoptimized
       className={clsx(
         'absolute-centered pointer-events-none mix-blend-overlay',
         offset && 'md:ml-[-112px]',
       )}
+      style={{
+        filter:
+          hueRotation === undefined
+            ? undefined
+            : `hue-rotate(${hueRotation}deg)`,
+        imageRendering: 'pixelated',
+      }}
     />
 
     <div className="z-1 relative grid gap-4">

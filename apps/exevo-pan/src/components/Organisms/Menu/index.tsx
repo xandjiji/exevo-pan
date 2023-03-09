@@ -10,6 +10,8 @@ import {
 } from './useKeyboardNavigation'
 import { MenuProps, ItemProps } from './types'
 
+export { useMenuItems } from './useMenuItems'
+
 const Item = ({
   className,
   label,

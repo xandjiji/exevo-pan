@@ -8,7 +8,7 @@ import { FooterProps, RouteItem } from './types'
 
 const listItems: RouteItem[] = [
   { href: routes.HOME, content: 'charBazaar' },
-  { href: routes.BOSS_TRACKER, content: 'bossTracker' },
+  { href: routes.BOSSES.TRACKER, content: 'bossTracker' },
   { href: routes.CALCULATORS, content: 'calculators' },
   { href: routes.STATISTICS, content: 'statistics' },
   { href: routes.ADVERTISE, content: 'advertise' },

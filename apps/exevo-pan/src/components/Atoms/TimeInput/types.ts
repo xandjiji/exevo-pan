@@ -9,7 +9,6 @@ export type CustomProps = {
   min?: number
   max?: number
   error?: boolean | string
-  noAlert?: boolean
 }
 
 export type TimeInputProps = CustomProps & ExtendedProps & AccessibleLabelProps

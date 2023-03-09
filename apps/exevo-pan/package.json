@@ -30,6 +30,7 @@
     "clsx": "^1.1.1",
     "data-dictionary": "*",
     "dequal": "^2.0.2",
+    "devalue": "^4.3.0",
     "gray-matter": "^4.0.3",
     "next": "13.0.2",
     "next-auth": "^4.16.4",
@@ -46,6 +47,7 @@
     "react-hot-toast": "^2.4.0",
     "react-popper": "^2.2.5",
     "shared-utils": "*",
+    "superjson": "^1.12.2",
     "uuid": "^8.3.2",
     "web-push": "^3.5.0",
     "zod": "^3.20.2"

@@ -31,13 +31,16 @@ const usePushNotifications = () => {
 
       const { keys } = pushDataKeys.toJSON()
 
-      notificationDevice.mutate({
+      const result = await notificationDevice.mutateAsync({
         endpoint: pushDataKeys.endpoint,
         auth: keys?.auth ?? '',
         p256dh: keys?.p256dh ?? '',
       })
-    } catch {
+
+      return result
+    } catch (e) {
       setWorkerStatus(getWorkerStatus())
+      throw e
     }
   }, [])
 

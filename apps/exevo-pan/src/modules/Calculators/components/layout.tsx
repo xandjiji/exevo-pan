@@ -1,18 +1,5 @@
 import clsx from 'clsx'
 
-export const Main = ({
-  className,
-  ...props
-}: JSX.IntrinsicElements['main']) => (
-  <main
-    className={clsx(
-      'inner-container grid place-content-start justify-center py-4 md:pt-0',
-      className,
-    )}
-    {...props}
-  />
-)
-
 export const Spacer = ({
   className,
   ...props

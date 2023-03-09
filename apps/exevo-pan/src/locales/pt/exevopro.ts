@@ -32,6 +32,10 @@ export default {
     pitch: 'Marque um leilão e receba {{strong}} quando ele receber lances',
     strong: 'notificações',
   },
+  huntingGroups: {
+    pitch: 'Crie grupos {{strong}} de boss hunting',
+    strong: 'privados',
+  },
   andMore: '...e mais no futuro! 🔮',
   footer: 'Faça upgrade agora para {{exevopro}}',
   no: {

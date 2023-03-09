@@ -129,7 +129,7 @@ const Checkout = () => {
       />
       {paymentMethod === 'TIBIA_COINS' && (
         <>
-          <div role="none" className="mt-2" />
+          <div role="none" className="mt-6" />
           <Input
             id="paymentCharacter"
             label={advertise.Checkout.paymentCharacterLabel}

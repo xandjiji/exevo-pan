@@ -1,12 +1,17 @@
-import { cloneElement } from 'react'
 import clsx from 'clsx'
 
 type HeaderIconProps = {
-  icon: JSX.Element & React.ReactElement<React.SVGAttributes<SVGElement>>
+  icon: JSX.Element
   spaced?: boolean
 }
 
-export default ({ icon, spaced = false }: HeaderIconProps) =>
-  cloneElement(icon, {
-    className: clsx('w-[18px] h-[18px] fill-onPrimary', spaced && 'mr-1.5'),
-  })
+export default ({ icon, spaced = false }: HeaderIconProps) => (
+  <div
+    className={clsx(
+      'child:fill-onPrimary child:w-full child:h-full h-[18px] w-[18px]',
+      spaced && 'mr-1.5',
+    )}
+  >
+    {icon}
+  </div>
+)

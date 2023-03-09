@@ -60,6 +60,8 @@ model User {
     transactions        Transaction[]
     NotificationDevice  NotificationDevice[]
     auctionNotification AuctionNotification[]
+    guildMembership     GuildMember[]
+    guildApplications   GuildApplication[]
 }
 
 model NotificationDevice {
@@ -169,4 +171,90 @@ model Transaction {
 
     @@index([userId])
     @@index([highlightedAuctionId])
+}
+
+model Guild {
+    id           String   @id @default(uuid())
+    name         String   @unique
+    private      Boolean
+    server       String
+    description  String?  @db.Text
+    messageBoard String?  @db.Text
+    createdAt    DateTime @default(now())
+    avatarId     Int
+    avatarDegree Int
+
+    guildMembers      GuildMember[]
+    guildApplications GuildApplication[]
+    guildLogEntry     GuildLogEntry[]
+}
+
+enum GUILD_MEMBER_ROLE {
+    ADMIN
+    MODERATOR
+    USER
+}
+
+model GuildMember {
+    id       String            @id @default(uuid())
+    name     String
+    role     GUILD_MEMBER_ROLE
+    joinedAt DateTime          @default(now())
+
+    guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId String
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId  String
+
+    disabledNotifications Boolean         @default(false)
+    blacklistedBosses     String?         @db.Text
+    actionLogEntry        GuildLogEntry[] @relation("actor")
+    targetedLogEntry      GuildLogEntry[] @relation("target")
+
+    @@unique([guildId, userId])
+    @@index([guildId])
+    @@index([userId])
+}
+
+model GuildApplication {
+    id        String   @id @default(uuid())
+    createdAt DateTime @default(now())
+    applyAs   String
+    message   String?
+
+    guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId String
+    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+    userId  String
+
+    @@unique([guildId, userId])
+    @@index([userId])
+    @@index([guildId])
+}
+
+enum LOG_ENTRY_TYPE {
+    LEAVE_MEMBER
+    KICK_MEMBER
+    ACCEPT_MEMBER
+    REJECT_MEMBER
+    NOTIFICATION
+}
+
+model GuildLogEntry {
+    id        String         @id @default(uuid())
+    createdAt DateTime       @default(now())
+    type      LOG_ENTRY_TYPE
+
+    guild               Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId             String
+    actionGuildMember   GuildMember? @relation(name: "actor", fields: [actionGuildMemberId], references: [id], onDelete: Cascade)
+    actionGuildMemberId String?
+    targetGuildMember   GuildMember? @relation(name: "target", fields: [targetGuildMemberId], references: [id], onDelete: Cascade)
+    targetGuildMemberId String?
+
+    metadata String?
+
+    @@index([guildId])
+    @@index([actionGuildMemberId])
+    @@index([targetGuildMemberId])
 }

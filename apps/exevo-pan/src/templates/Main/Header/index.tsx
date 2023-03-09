@@ -17,7 +17,7 @@ import { HeaderProps } from './types'
 
 const heading = {
   [routes.HOME]: 'home',
-  [routes.BOSS_TRACKER]: 'bossTracker',
+  [routes.BOSSES.TRACKER]: 'bossTracker',
   [routes.CALCULATORS]: 'calculators',
   [routes.STATISTICS]: 'statistics',
   [routes.HIGHSCORES]: 'highscores',

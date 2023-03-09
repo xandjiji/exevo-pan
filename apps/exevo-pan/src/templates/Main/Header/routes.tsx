@@ -5,7 +5,6 @@ import {
   StatisticsIcon,
   AdvertiseIcon,
   BlogIcon,
-  AboutIcon,
   GoblinIcon,
 } from 'assets/svgs'
 import { NavItem } from './types'
@@ -18,7 +17,7 @@ export const NavItems: NavItem[] = [
     title: 'charBazaar',
   },
   {
-    href: routes.BOSS_TRACKER,
+    href: routes.BOSSES.TRACKER,
     icon: <GoblinIcon />,
     title: 'bossTracker',
   },

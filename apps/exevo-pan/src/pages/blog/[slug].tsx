@@ -49,6 +49,7 @@ const components = {
   SampleToast: dynamic(
     () => import('modules/Blog/components/Post/custom/SampleToast'),
   ),
+  Pro: dynamic(() => import('modules/Blog/components/Post/custom/Pro')),
 }
 
 type Props = {

@@ -53,7 +53,7 @@ describe('<AutocompleteInput />', () => {
     expect(optionsElement).toHaveLength(mockedItemList.length)
     optionsElement.forEach((option, index) => {
       expect(option).toHaveTextContent(mockedItemList[index].name)
-      expect(option).toHaveValue(mockedItemList[index].value)
+      expect(option).toHaveAttribute('data-value', mockedItemList[index].value)
     })
 
     userEvent.type(inputElement, '{esc}')
@@ -356,20 +356,20 @@ describe('<AutocompleteInput />', () => {
 
     screen.getAllByRole('option').forEach((option, index) => {
       expect(option).toHaveTextContent(mockedItemList[index].name)
-      expect(option).toHaveValue(mockedItemList[index].value)
+      expect(option).toHaveAttribute('data-value', mockedItemList[index].value)
     })
 
     userEvent.type(inputElement, 'bel')
     const currentBELOptions = screen.getAllByRole('option')
     expect(currentBELOptions).toHaveLength(2)
-    expect(currentBELOptions[0]).toHaveValue('Belluma')
+    expect(currentBELOptions[0]).toHaveAttribute('data-value', 'Belluma')
     expect(currentBELOptions[0]).toHaveTextContent('Belluma')
-    expect(currentBELOptions[1]).toHaveValue('Belobra')
+    expect(currentBELOptions[1]).toHaveAttribute('data-value', 'Belobra')
     expect(currentBELOptions[1]).toHaveTextContent('Belobra')
 
     userEvent.type(inputElement, 'l')
     const bellumaOption = screen.getByRole('option')
-    expect(bellumaOption).toHaveValue('Belluma')
+    expect(bellumaOption).toHaveAttribute('data-value', 'Belluma')
     expect(bellumaOption).toHaveTextContent('Belluma')
 
     userEvent.type(inputElement, 'o')
@@ -378,7 +378,7 @@ describe('<AutocompleteInput />', () => {
     userEvent.click(screen.getByLabelText('Clear input'))
     screen.getAllByRole('option').forEach((option, index) => {
       expect(option).toHaveTextContent(mockedItemList[index].name)
-      expect(option).toHaveValue(mockedItemList[index].value)
+      expect(option).toHaveAttribute('data-value', mockedItemList[index].value)
     })
 
     userEvent.type(inputElement, 'e')

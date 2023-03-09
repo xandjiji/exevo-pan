@@ -42,7 +42,6 @@ const NumericInput = ({
   return (
     <Input
       inputMode="numeric"
-      noAlert
       value={displayedValue}
       onChange={handleChange}
       onKeyDown={handleKey}

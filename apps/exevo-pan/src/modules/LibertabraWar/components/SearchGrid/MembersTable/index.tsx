@@ -189,7 +189,6 @@ const MembersTable = ({
           allowClear
           placeholder="Nickname"
           onChange={onSearchChange}
-          noAlert
         />
         <Paginator
           aria-controls="members-grid"

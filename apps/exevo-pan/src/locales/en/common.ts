@@ -30,7 +30,7 @@ export default {
       about: 'About',
       advertise: 'Advertise',
       blog: 'Blog',
-      bossTracker: 'Boss Tracker',
+      bossTracker: 'Bosses',
       exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Toggle dark theme',

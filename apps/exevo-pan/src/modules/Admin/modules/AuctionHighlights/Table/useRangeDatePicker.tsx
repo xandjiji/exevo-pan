@@ -5,7 +5,7 @@ const EMPTY_TOGGLE_DATE = {
   id: '',
   auctionId: 0,
   nickname: '',
-  lastUpdated: '',
+  lastUpdated: new Date(),
   joinedReadableDate: '',
   endDate: new Date(),
 }
@@ -46,10 +46,7 @@ export const useRangeDatePicker = () => {
       setOriginalDates(args.joinedReadableDate)
     }, []),
     startDate: useMemo(
-      () =>
-        toToggleDate.lastUpdated
-          ? new Date(toToggleDate.lastUpdated)
-          : new Date(),
+      () => toToggleDate.lastUpdated ?? new Date(),
       [toToggleDate.lastUpdated],
     ),
     endDate: toToggleDate.endDate,

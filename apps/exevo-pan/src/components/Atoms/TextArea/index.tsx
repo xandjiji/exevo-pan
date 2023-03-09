@@ -1,4 +1,4 @@
-import { forwardRef, useState, useId } from 'react'
+import { forwardRef, useState, useMemo, useId } from 'react'
 import clsx from 'clsx'
 import Label from '../Label'
 import FormError from '../FormError'
@@ -15,9 +15,9 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
       onChange,
       disabled = false,
       error,
-      noAlert = false,
       noResize,
       style,
+      maxLength,
       ...props
     },
     ref,
@@ -30,11 +30,21 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
     const handleInput: React.ChangeEventHandler<HTMLTextAreaElement> = (e) => {
       onChange?.(e)
-      setValue(e.target.value)
+      if (valueProp === undefined) {
+        setValue(e.target.value)
+      }
     }
 
+    const charCount = useMemo(
+      () => derivedValue.toString().length,
+      [derivedValue],
+    )
+
     return (
-      <div className={clsx('text-tsm flex flex-col', className)} style={style}>
+      <div
+        className={clsx('text-tsm relative flex flex-col', className)}
+        style={style}
+      >
         <Label htmlFor={textboxId} className="mb-2 shrink-0">
           {label}
         </Label>
@@ -58,9 +68,21 @@ const TextArea = forwardRef<HTMLTextAreaElement, TextAreaProps>(
           value={derivedValue}
           {...props}
         />
-        {!noAlert && (
-          <FormError id={errorId} error={error} className="shrink-0" />
+        {maxLength !== undefined && (
+          <span
+            className={clsx(
+              'mt-2 text-right text-xs tracking-wider',
+              charCount > maxLength && 'text-red',
+            )}
+          >
+            {charCount}/{maxLength}
+          </span>
         )}
+        <FormError
+          id={errorId}
+          error={error}
+          className="absolute top-[calc(100%+4px)] left-0 shrink-0"
+        />
       </div>
     )
   },

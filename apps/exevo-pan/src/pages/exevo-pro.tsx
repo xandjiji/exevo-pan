@@ -15,6 +15,7 @@ import {
   MiniHighlight,
   Phone,
   Notebook,
+  HuntingGroupGrid,
   Tooltip as List,
   Strong,
   Gradient,
@@ -227,6 +228,18 @@ export default function ExevoPro() {
               </div>
               <Notebook />
             </div>
+          </FeatureSection>
+
+          <FeatureSection>
+            <h3 className="max-w-[240px] text-center text-2xl">
+              {templateMessage(translations.exevopro.huntingGroups.pitch, {
+                strong: (
+                  <Strong>{translations.exevopro.huntingGroups.strong}</Strong>
+                ),
+              })}
+            </h3>
+
+            <HuntingGroupGrid />
           </FeatureSection>
 
           <p className="text-center text-2xl">

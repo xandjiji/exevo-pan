@@ -30,7 +30,6 @@ const AuctionSearch = () => {
           allowClear
           value={nickname}
           onChange={(event) => setNickname(event.target.value)}
-          noAlert
           onKeyPress={blurOnEnter}
           enterKeyHint="search"
           className="flex-grow"
@@ -62,12 +61,9 @@ const AuctionSearch = () => {
         ))}
         {page.length === 0 && (
           <EmptyState
-            style={{ marginTop: 16 }}
-            height={96}
-            text={{
-              content: advertise.AuctionSearch.emptyStateText,
-              size: 24,
-            }}
+            className="md:mt-4"
+            variant="small"
+            text={advertise.AuctionSearch.emptyStateText}
           />
         )}
       </div>

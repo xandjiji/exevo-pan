@@ -1,6 +1,6 @@
 import Head from 'next/head'
-import { Main, Hero } from 'templates'
-import { Header, MainPage, pages } from 'modules/Calculators'
+import { NavGrid } from 'templates'
+import { Template, useRoutes } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { PreviewImageClient } from 'services'
@@ -8,8 +8,8 @@ import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
-const pageUrl = buildUrl(routes.CALCULATORS)
-const { hero } = pages.Main
+const pageRoute = routes.CALCULATORS
+const pageUrl = buildUrl(pageRoute)
 
 export default function Calculators() {
   const { translations } = useTranslations()
@@ -18,9 +18,13 @@ export default function Calculators() {
 
   const pageTitle = buildPageTitle(pageName)
 
+  const { list, getRoute } = useRoutes()
+  const [, ...navItens] = list
+  const routeData = getRoute(pageRoute)
+
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
-    imgSrc: loadRawSrc(hero),
+    imgSrc: routeData ? loadRawSrc(routeData.hero) : undefined,
   })
 
   return (
@@ -53,21 +57,9 @@ export default function Calculators() {
         <meta property="twitter:url" content={pageUrl} />
 
         <link rel="alternate" hrefLang="en" href={pageUrl} />
-        <link
-          rel="alternate"
-          hrefLang="pt"
-          href={buildUrl(routes.CALCULATORS, 'pt')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="es"
-          href={buildUrl(routes.CALCULATORS, 'es')}
-        />
-        <link
-          rel="alternate"
-          hrefLang="pl"
-          href={buildUrl(routes.CALCULATORS, 'pl')}
-        />
+        <link rel="alternate" hrefLang="pt" href={buildUrl(pageRoute, 'pt')} />
+        <link rel="alternate" hrefLang="es" href={buildUrl(pageRoute, 'es')} />
+        <link rel="alternate" hrefLang="pl" href={buildUrl(pageRoute, 'pl')} />
         <link rel="alternate" hrefLang="x-default" href={pageUrl} />
 
         <script
@@ -79,11 +71,9 @@ export default function Calculators() {
         />
       </Head>
 
-      <Main>
-        <Header />
-        <Hero title={pageName} src={hero} offset />
-        <MainPage />
-      </Main>
+      <Template mainPage currentRoute={pageRoute}>
+        <NavGrid navItems={navItens} />
+      </Template>
     </>
   )
 }

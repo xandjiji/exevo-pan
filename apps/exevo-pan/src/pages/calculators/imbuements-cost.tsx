@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import { Main, Hero } from 'templates'
-import { Header, ImbuementsCost, pages } from 'modules/Calculators'
+import { Template, ImbuementsCost, useRoutes } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { PreviewImageClient } from 'services'
@@ -8,8 +7,8 @@ import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
-const pageUrl = buildUrl(routes.IMBUEMENTS_COST)
-const { hero } = pages.ImbuementsCost
+const pageRoute = routes.EXERCISE_WEAPONS
+const pageUrl = buildUrl(pageRoute)
 
 export default function Calculator() {
   const { translations } = useTranslations()
@@ -18,9 +17,12 @@ export default function Calculator() {
 
   const pageTitle = buildPageTitle(pageName)
 
+  const { getRoute } = useRoutes()
+  const routeData = getRoute(pageRoute)
+
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
-    imgSrc: loadRawSrc(hero),
+    imgSrc: routeData ? loadRawSrc(routeData.hero) : undefined,
   })
 
   return (
@@ -79,11 +81,9 @@ export default function Calculator() {
         />
       </Head>
 
-      <Main>
-        <Header />
-        <Hero title={pageName} src={hero} offset />
+      <Template currentRoute={pageRoute}>
         <ImbuementsCost />
-      </Main>
+      </Template>
     </>
   )
 }

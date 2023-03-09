@@ -1,34 +1,37 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Listbox /> should render with no highlighted <Option /> 1`] = `
-<option
+<div
   aria-selected="false"
   class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
+  data-value="option A"
   id="listbox-item-0"
-  value="option A"
+  role="option"
 >
   option A
-</option>
+</div>
 `;
 
 exports[`<Listbox /> should render with no highlighted <Option /> 2`] = `
-<option
+<div
   aria-selected="false"
   class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
+  data-value="option B"
   id="listbox-item-1"
-  value="option B"
+  role="option"
 >
   option B
-</option>
+</div>
 `;
 
 exports[`<Listbox /> should render with no highlighted <Option /> 3`] = `
-<option
+<div
   aria-selected="false"
   class="text-tsm text-onSurface hover:bg-primaryVariant w-full cursor-pointer py-2 px-3 font-light transition-colors bg-surface"
+  data-value="option C"
   id="listbox-item-2"
-  value="option C"
+  role="option"
 >
   option C
-</option>
+</div>
 `;

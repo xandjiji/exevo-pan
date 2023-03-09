@@ -12,7 +12,6 @@ import StaminaBar from './StaminaBar'
 import TrackCard from './TrackCard'
 import useTracking from './useTracking'
 import { calculateSecondsToRegenerate } from './utils'
-import { Main } from '../../components'
 
 const Stamina = () => {
   const {
@@ -41,7 +40,7 @@ const Stamina = () => {
   const { list, action } = useTracking()
 
   return (
-    <Main className="md:child:shrink-0 items-start gap-6 md:flex">
+    <>
       <LabeledCard labelText="Stamina" className="md:sticky md:top-[130px]">
         <div className="grid grid-cols-[1fr_24px_1fr] items-end gap-2">
           <TimeInput
@@ -51,7 +50,6 @@ const Stamina = () => {
             onChange={(e) => setCurrentStamina(e.target.value)}
             error={invalid}
             className="child:w-full child:whitespace-nowrap w-full"
-            noAlert
           />
           <ChevronRightIcon
             className={clsx(
@@ -68,7 +66,6 @@ const Stamina = () => {
             enterKeyHint="done"
             error={invalid}
             className="child:w-full child:whitespace-nowrap w-full"
-            noAlert
           />
         </div>
 
@@ -104,14 +101,12 @@ const Stamina = () => {
         {list.length === 0 && (
           <EmptyState
             className="lgr:left-3/4 relative md:top-1/4 lg:left-1/2"
-            text={{
-              content: '',
-              size: 0,
-            }}
+            variant="large"
+            text=""
           />
         )}
       </ClientComponent>
-    </Main>
+    </>
   )
 }
 

@@ -49,7 +49,7 @@ describe('<Select />', () => {
       assertOptions: (selectedValue?: string) => {
         mockedOptionList.forEach(({ name, value }) => {
           const option = screen.getByRole('option', { name })
-          expect(option).toHaveValue(value)
+          expect(option).toHaveAttribute('data-value', value)
 
           const isSelected = value === selectedValue
           expect(option).toHaveAttribute(

@@ -29,7 +29,12 @@ import {
 } from './utils'
 import { HighlightStatus } from './types'
 
-const EMPTY_DELETION = { id: '', auctionId: 0, nickname: '', lastUpdated: '' }
+const EMPTY_DELETION = {
+  id: '',
+  auctionId: 0,
+  nickname: '',
+  lastUpdated: new Date(),
+}
 
 const ScrollableContainer = ({
   className,
@@ -80,7 +85,7 @@ const PaymentList = () => {
               active,
               days: splittedDays,
               timezoneOffsetMinutes,
-              auctionEnd: +new Date(auctionEnd),
+              auctionEnd: +auctionEnd,
             }),
           }
         },
@@ -316,7 +321,7 @@ const PaymentList = () => {
                               nickname,
                               lastUpdated,
                               joinedReadableDate,
-                              endDate: new Date(auctionEnd),
+                              endDate: auctionEnd,
                             }),
                         },
                         {
@@ -378,7 +383,7 @@ const PaymentList = () => {
           </div>
         </ScrollableContainer>
 
-        <div className="flex justify-end gap-1">
+        <div className="flex justify-end gap-4">
           <Button hollow pill onClick={resetDates} disabled={patch.isLoading}>
             Cancel
           </Button>

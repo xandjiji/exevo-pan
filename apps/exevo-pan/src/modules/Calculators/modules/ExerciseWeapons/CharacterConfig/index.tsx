@@ -107,7 +107,6 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
             value={currentSkill}
             onChange={(e) => setCurrentSkill(+e.target.value)}
             error={invalidSkill}
-            noAlert
             className="w-full sm:w-20"
           />
           <ChevronRightIcon
@@ -122,7 +121,6 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
             value={targetSkill}
             onChange={(e) => setTargetSkill(+e.target.value)}
             error={invalidSkill}
-            noAlert
             className="w-full sm:w-20"
           />
         </ClientComponent>

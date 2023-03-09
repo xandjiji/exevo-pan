@@ -167,6 +167,10 @@ html[data-theme='dark'] {
   --rare: 255 179 0;
 }
 
+* {
+  @apply outline-primaryHighlight;
+}
+
 html {
   scroll-behavior: smooth;
 }

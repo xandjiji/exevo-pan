@@ -28,3 +28,22 @@ export const templateMessage = (
 
   return <>{templatedElements}</>
 }
+
+export const templateString = (
+  message: string,
+  template: Record<string, string | number>,
+): string => {
+  let messageTail = message
+  const templatedStrings: Array<string | number> = []
+
+  Object.entries(template).forEach(([key, string]) => {
+    const [prefix, tail] = messageTail.split(`{{${key}}}`)
+    templatedStrings.push(prefix)
+    templatedStrings.push(string)
+    messageTail = tail
+  })
+
+  if (messageTail) templatedStrings.push(messageTail)
+
+  return templatedStrings.join('')
+}

@@ -1,7 +1,24 @@
 import { initTRPC, TRPCError } from '@trpc/server'
+import { ZodError } from 'zod'
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime'
 import { Context } from './context'
+import { transformer } from './utils'
 
-const t = initTRPC.context<Context>().create()
+const t = initTRPC.context<Context>().create({
+  transformer,
+  errorFormatter: ({ shape, error }) => ({
+    ...shape,
+    data: {
+      ...shape.data,
+      prisma:
+        error.cause instanceof PrismaClientKnownRequestError ? error : null,
+      zodError:
+        error.code === 'BAD_REQUEST' && error.cause instanceof ZodError
+          ? error.cause.flatten()
+          : null,
+    },
+  }),
+})
 
 export const { middleware, router } = t
 

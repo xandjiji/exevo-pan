@@ -55,7 +55,6 @@ export const Calculator = () => {
         min={0}
         value={averageDamage}
         onChange={(e) => setAverageDamage(+e.target.value)}
-        noAlert
       />
 
       <LabeledCard
@@ -90,7 +89,6 @@ export const Calculator = () => {
           min={0}
           value={creatureHp}
           onChange={(e) => setCreatureHp(+e.target.value)}
-          noAlert
           onKeyPress={blurOnEnter}
           enterKeyHint="done"
         />

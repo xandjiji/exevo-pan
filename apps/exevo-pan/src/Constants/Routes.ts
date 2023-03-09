@@ -2,7 +2,10 @@ export const routes = {
   HOME: '/',
   LOGIN: '/login',
   DASHBOARD: '/dashboard',
-  BOSS_TRACKER: '/boss-tracker',
+  BOSSES: {
+    TRACKER: '/bosses',
+    HUNTING_GROUPS: '/bosses/hunting-groups',
+  },
   ADVERTISE: '/highlight-auction',
   CALCULATORS: '/calculators',
   EXERCISE_WEAPONS: '/calculators/exercise-weapons',
