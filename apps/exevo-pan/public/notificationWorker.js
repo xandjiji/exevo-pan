@@ -4,7 +4,9 @@ self.addEventListener('push', (e) => {
     body,
     icon: 'https://www.exevopan.com/notification-icon.png',
     data: { url },
+    vibrate: [200, 100],
   })
+  self.registration.update()
 })
 
 self.addEventListener('notificationclick', (event) => {
