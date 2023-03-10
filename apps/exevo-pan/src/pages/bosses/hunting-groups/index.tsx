@@ -10,7 +10,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import { AddIcon } from 'assets/svgs'
 import { caller } from 'pages/api/trpc/[trpc]'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
+import { buildUrl, buildPageTitle, loadRawSrc, SECONDS_IN } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, bosses, huntingGroups } from 'locales'
 
@@ -141,5 +141,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
       locale,
     },
+    revalidate: SECONDS_IN.HOUR / 2,
   }
 }
