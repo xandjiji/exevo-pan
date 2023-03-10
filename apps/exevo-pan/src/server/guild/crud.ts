@@ -123,25 +123,26 @@ export const createGuild = authedProcedure
       },
       input: { name: guildName, description, server, ...guildData },
     }) => {
-      const [result] = await Promise.all([
-        prisma.guild.create({
-          data: {
-            ...guildData,
-            name: guildName.trim(),
-            description: description?.trim(),
-            server: server.trim(),
-            private: proStatus ? guildData.private : false,
-            guildMembers: {
-              create: {
-                userId: id,
-                name,
-                role: 'ADMIN',
-              },
+      const result = await prisma.guild.create({
+        data: {
+          ...guildData,
+          name: guildName.trim(),
+          description: description?.trim(),
+          server: server.trim(),
+          private: proStatus ? guildData.private : false,
+          guildMembers: {
+            create: {
+              userId: id,
+              name,
+              role: 'ADMIN',
             },
           },
-        }),
-        PageRevalidationClient.revalidatePage(routes.BOSSES.HUNTING_GROUPS),
-      ])
+        },
+      })
+
+      await PageRevalidationClient.revalidatePage(
+        routes.BOSSES.HUNTING_GROUPS,
+      ).catch(console.log)
 
       return result
     },
