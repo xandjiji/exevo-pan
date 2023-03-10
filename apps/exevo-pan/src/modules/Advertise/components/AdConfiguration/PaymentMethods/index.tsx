@@ -17,7 +17,13 @@ const PaymentMethods = () => {
           dispatch({ type: 'SET_PAYMENT_METHOD', method: 'TIBIA_COINS' })
         }
         icon={
-          <Image alt="Tibia Coin" src={TibiaCoinsSrc} width="24" height="24" />
+          <Image
+            alt="Tibia Coin"
+            src={TibiaCoinsSrc}
+            width="24"
+            height="24"
+            className="pixelated"
+          />
         }
       >
         Tibia Coins
@@ -26,7 +32,15 @@ const PaymentMethods = () => {
         active={paymentMethod === 'PIX'}
         aria-label="Pix"
         onClick={() => dispatch({ type: 'SET_PAYMENT_METHOD', method: 'PIX' })}
-        icon={<Image alt="Pix" src={PixSrc} width="24" height="24" />}
+        icon={
+          <Image
+            alt="Pix"
+            src={PixSrc}
+            width="24"
+            height="24"
+            className="pixelated"
+          />
+        }
       >
         Pix
       </MethodButton>

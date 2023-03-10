@@ -21,7 +21,7 @@ const Sprite = ({
   >
     {children}
     <Image
-      className="absolute top-1/2 select-none"
+      className="pixelated absolute top-1/2 select-none"
       src={src}
       alt={children}
       width={width}

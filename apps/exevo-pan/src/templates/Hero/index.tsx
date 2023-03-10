@@ -29,7 +29,7 @@ const Hero = ({
       priority
       unoptimized
       className={clsx(
-        'absolute-centered pointer-events-none mix-blend-overlay',
+        'absolute-centered pixelated pointer-events-none mix-blend-overlay',
         offset && 'md:ml-[-112px]',
       )}
       style={{
@@ -37,7 +37,6 @@ const Hero = ({
           hueRotation === undefined
             ? undefined
             : `hue-rotate(${hueRotation}deg)`,
-        imageRendering: 'pixelated',
       }}
     />
 

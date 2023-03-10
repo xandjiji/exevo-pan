@@ -15,7 +15,7 @@ const EmptyState = () => {
       <Image
         alt={war.SearchGrid.MembersTable.EmptyState.alt}
         src={notFoundSrc}
-        className="opacity-20 grayscale-[50%]"
+        className="pixelated opacity-20 grayscale-[50%]"
       />
     </div>
   )

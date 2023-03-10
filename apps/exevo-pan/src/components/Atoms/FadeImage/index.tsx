@@ -8,7 +8,11 @@ const FadeImage = ({ className, ...props }: ImageProps) => {
 
   return (
     <Image
-      className={clsx('transition-opacity', !loaded && 'opacity-0', className)}
+      className={clsx(
+        'pixelated transition-opacity',
+        !loaded && 'opacity-0',
+        className,
+      )}
       {...props}
       onLoadingComplete={onLoadingComplete}
     />

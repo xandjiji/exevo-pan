@@ -109,7 +109,7 @@ const SpritePicker = ({
                 src={`/sprites/${spriteDirectory}/${name}${directorySuffix}.gif`}
                 width="64"
                 height="64"
-                className="pointer-events-none -ml-6 -mt-6"
+                className="pixelated pointer-events-none -ml-6 -mt-6"
               />
             </button>
           )

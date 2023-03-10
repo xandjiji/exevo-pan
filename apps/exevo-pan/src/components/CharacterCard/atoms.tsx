@@ -33,6 +33,7 @@ export const Icons = {
       unoptimized
       width={12}
       height={12}
+      className="pixelated"
     />
   ),
 }

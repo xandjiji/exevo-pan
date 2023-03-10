@@ -38,7 +38,7 @@ const Server = ({
         src={flags[serverData.serverLocation.type] ?? fallbackFlag}
         width={16}
         height={10}
-        className="shadow-sm"
+        className="pixelated shadow-sm"
       />
       <span className="text-s mr-auto">{serverData.serverName}</span>
       <TransferIcon

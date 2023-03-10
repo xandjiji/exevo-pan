@@ -24,7 +24,7 @@ const TibiaCoin = ({
         unoptimized
         width={12}
         height={12}
-        className="select-none"
+        className="pixelated select-none"
       />
       {formattedValue}
     </S.Flex>

@@ -10,6 +10,7 @@ const Pvp = ({ serverData }: Pick<CharacterObject, 'serverData'>) => (
       role="none"
       alt={`${serverData.battleye ? 'Green' : 'Yellow'} BattlEye`}
       src={serverData.battleye ? greenSrc : yellowSrc}
+      className="pixelated"
     />
     {serverData.pvpType.string}
   </LabeledTextBox>

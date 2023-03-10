@@ -52,7 +52,7 @@ const SpritePortrait = ({
         onError={onError}
         unoptimized
         className={clsx(
-          'z-1 transition-opacity',
+          'z-1 pixelated transition-opacity',
           offset && '!-ml-6 !-mt-6',
           !loaded && 'opacity-0',
         )}

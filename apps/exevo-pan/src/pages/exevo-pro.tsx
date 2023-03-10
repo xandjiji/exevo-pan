@@ -269,7 +269,7 @@ export default function ExevoPro() {
                     unoptimized
                     width={24}
                     height={24}
-                    className="select-none"
+                    className="pixelated select-none"
                   />
                   <strong className="whitespace-nowrap text-[32px]">
                     250 TC

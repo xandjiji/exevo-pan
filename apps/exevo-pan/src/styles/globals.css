@@ -88,6 +88,10 @@
 }
 
 @layer utilities {
+  .pixelated {
+    image-rendering: pixelated;
+  }
+
   .reset-spinner::-webkit-inner-spin-button,
   .reset-spinner::-webkit-outer-spin-button {
     display: none;
