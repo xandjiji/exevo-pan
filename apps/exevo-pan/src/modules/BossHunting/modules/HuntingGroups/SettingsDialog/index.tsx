@@ -49,7 +49,6 @@ const SettingsDialog = ({
     isSupported,
     permission,
     subscribeDevice,
-    sendClientNotification,
     isLoading: loadingDeviceSubscription,
   } = usePushNotifications()
 
@@ -81,6 +80,8 @@ const SettingsDialog = ({
     onError: () => toast.error(common.genericError),
   })
 
+  const testMyNotification = trpc.testMyNotification.useMutation()
+
   const noChanges =
     blacklist.value.string === currentMember.blacklistedBosses &&
     disabledNotifications === currentMember.disabledNotifications
@@ -101,7 +102,7 @@ const SettingsDialog = ({
                     button: (
                       <AlertButton
                         onClick={() =>
-                          sendClientNotification({
+                          testMyNotification.mutate({
                             title: i18n.sampleNotification.title,
                             text: i18n.sampleNotification.text,
                           })

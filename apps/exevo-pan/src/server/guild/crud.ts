@@ -652,7 +652,8 @@ export const notifyGuildMembers = authedProcedure
               body: guild.name,
               url: getGuildPermalink(guild.name, true),
             },
-          }),
+            deleteInvalidDevices: false,
+          }).catch(console.log),
         ),
     )
 
