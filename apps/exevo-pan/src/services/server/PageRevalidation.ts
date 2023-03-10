@@ -16,7 +16,10 @@ export default class PageRevalidation {
 
     const currentParams = new URLSearchParams()
     currentParams.set('secret', process.env.REVALIDATION_AUTH ?? '')
-    currentParams.set('route', route)
+    currentParams.set(
+      'route',
+      route.charAt(0) === '/' ? route.substring(1) : route,
+    )
 
     endpoint.search = currentParams.toString()
 
