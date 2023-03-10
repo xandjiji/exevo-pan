@@ -141,6 +141,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
       locale,
     },
-    revalidate: SECONDS_IN.HOUR / 2,
+    revalidate: SECONDS_IN.MINUTE,
   }
 }

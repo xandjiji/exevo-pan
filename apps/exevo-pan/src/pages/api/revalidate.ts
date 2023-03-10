@@ -25,7 +25,6 @@ export default async (
       '/',
     )
 
-    console.log(routeToRevalidate)
     response.revalidate(routeToRevalidate)
   }
 
