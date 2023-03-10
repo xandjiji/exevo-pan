@@ -13,6 +13,7 @@ import { notifyUser } from './admin/notifyUser'
 import * as guildCrud from './guild/crud'
 import { registerNotificationDevice } from './registerNotificationDevice'
 import { registerAuctionNotification } from './registerAuctionNotification'
+import { testMyNotification } from './testMyNotification'
 
 export const routes = {
   registerNotificationDevice,
@@ -24,6 +25,7 @@ export const routes = {
   highlightCheckout,
   proPayment,
   revalidatePage,
+  testMyNotification,
   ...proOrders,
   ...proRevenue,
   ...auctionHighlights,
