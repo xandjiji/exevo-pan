@@ -19,8 +19,15 @@ export default async (
   }
 
   const route = request.query.route ?? ''
-  const revalidateRoute = async (locale: RegisteredLocale): Promise<void> =>
-    response.revalidate(`${addLocalePrefix(locale)}/${route}`)
+  const revalidateRoute = async (locale: RegisteredLocale): Promise<void> => {
+    const routeToRevalidate = `${addLocalePrefix(locale)}/${route}`.replaceAll(
+      '//',
+      '/',
+    )
+
+    console.log(routeToRevalidate)
+    response.revalidate(routeToRevalidate)
+  }
 
   try {
     await Promise.all(ALL_LOCALES.map(revalidateRoute))
