@@ -25,13 +25,7 @@ import { PreviewImageClient } from 'services'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
-import {
-  buildPageTitle,
-  loadRawSrc,
-  getGuildPermalink,
-  buildUrl,
-  SECONDS_IN,
-} from 'utils'
+import { buildPageTitle, loadRawSrc, getGuildPermalink, buildUrl } from 'utils'
 import { routes, jsonld } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
 import { common, bosses, huntingGroups } from 'locales'
@@ -333,6 +327,5 @@ export const getServerSideProps: GetServerSideProps = async ({
       },
       locale,
     },
-    revalidate: SECONDS_IN.HOUR / 2,
   }
 }
