@@ -92,7 +92,7 @@ const SettingsDialog = ({
       )}
       <div className="grid gap-6">
         {isSupported ? (
-          <Alert variant="primary" noIcon>
+          <Alert variant={registeredDevice ? 'primary' : 'alert'} noIcon>
             {registeredDevice ? (
               <>
                 <p>{i18n.registeredDevice}</p>
