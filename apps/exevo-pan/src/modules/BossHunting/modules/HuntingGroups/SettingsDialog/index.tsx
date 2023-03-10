@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import {
   Dialog,
@@ -54,6 +54,16 @@ const SettingsDialog = ({
   } = usePushNotifications()
 
   const [allowSaveButton, setAllowSaveButton] = useState(false)
+  const registerDevice = useCallback(
+    () =>
+      subscribeDevice()
+        .then(() => {
+          setAllowSaveButton(true)
+          toast.success(i18n.registerSuccess)
+        })
+        .catch(() => toast.error(common.genericError)),
+    [i18n, subscribeDevice],
+  )
 
   const registeredDevice = permission === 'granted'
 
@@ -80,14 +90,13 @@ const SettingsDialog = ({
       {loadingDeviceSubscription && (
         <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
       )}
-
       <div className="grid gap-6">
         {isSupported ? (
           <Alert variant="primary" noIcon>
             {registeredDevice ? (
               <>
                 <p>{i18n.registeredDevice}</p>
-                <p>
+                <p className="mb-2">
                   {templateMessage(i18n.testNotification, {
                     button: (
                       <AlertButton
@@ -103,20 +112,20 @@ const SettingsDialog = ({
                     ),
                   })}
                 </p>
+                <p>
+                  {templateMessage(i18n.retryRegistration, {
+                    button: (
+                      <AlertButton onClick={registerDevice}>
+                        {i18n.retry}
+                      </AlertButton>
+                    ),
+                  })}
+                </p>
               </>
             ) : (
               templateMessage(i18n.enableNotifications, {
                 button: (
-                  <AlertButton
-                    onClick={() =>
-                      subscribeDevice()
-                        .then(() => {
-                          setAllowSaveButton(true)
-                          toast.success(i18n.registerSuccess)
-                        })
-                        .catch(() => toast.error(common.genericError))
-                    }
-                  >
+                  <AlertButton onClick={registerDevice}>
                     {i18n.enableButton}
                   </AlertButton>
                 ),

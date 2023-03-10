@@ -131,6 +131,9 @@ export default {
     enableNotifications: 'Por favor {{button}} neste dispositivo',
     enableButton: 'habilite notificações',
     registerSuccess: 'Este dispositivo foi registrado com sucesso!',
+    retryRegistration:
+      'Caso precise, você pode {{button}} o registro deste dispositivo',
+    retry: 'refazer',
     notSupported: 'Este dispositivo não suporta Web Push Notifications',
     enableGroupNotifications: 'Receber notificações deste grupo',
     receiveNotificationsFor: 'Receber notificações para:',
