@@ -176,7 +176,7 @@ export default {
     loadMore: 'Mostrar mais',
   },
   NotificationDialog: {
-    heading: 'Notificar mais',
+    heading: 'Notificar grupo',
     search: 'Procurar boss',
     emptyState: 'Nenhum boss',
     cancel: 'Cancelar',
