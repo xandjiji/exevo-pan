@@ -5,6 +5,7 @@ export type GuildData = {
   guild: Guild
   members: GuildMember[]
   applications: GuildApplication[]
+  checkedBosses: CheckedBoss[]
 }
 
 export type InferredValues = {

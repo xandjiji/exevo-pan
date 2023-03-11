@@ -22,6 +22,7 @@ import {
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
+import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
@@ -295,6 +296,14 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const isMember = guildMembers.some(({ userId }) => userId === token?.id)
 
+  const checkedBosses: CheckedBoss[] = isMember
+    ? await BossesClient.fetchCheckedBosses({
+        isPro: token?.proStatus ?? false,
+        guildId: guild.id,
+        server: guild.server,
+      })
+    : []
+
   const guildData: GuildData = {
     guild: {
       ...rest,
@@ -314,6 +323,7 @@ export const getServerSideProps: GetServerSideProps = async ({
           }))
         : guildMembers,
     applications: isMember || EXEVO_PAN_ADMIN ? guildApplications : [],
+    checkedBosses,
   }
 
   return {
