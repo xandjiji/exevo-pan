@@ -2,12 +2,16 @@ import { useMemo } from 'react'
 import BossCard from 'components/BossCard'
 import { sortBossesBy } from 'utils'
 import { ViewedIcon } from 'assets/svgs'
+import { premiumBosses } from 'Constants'
 
 /* @ ToDo:
 
 - Last checked
 - action
 - sort
+- search
+- premium
+- testes <BossCard />
 
 - i18n
 */
@@ -31,6 +35,7 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
           <BossCard
             key={boss.name}
             bossStats={boss}
+            premium={premiumBosses.set.has(boss.name)}
             actionLabel="Mark as checked"
             action={() => {}}
             actionIcon={

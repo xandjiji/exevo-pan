@@ -128,9 +128,9 @@ export default function GuildPage({
               <>
                 <GuildHero guild={guild} memberCount={members.length} />
 
-                <div className="inner-container z-1 relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px]">
+                <div className="z-1 relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 md:w-[540px] lg:w-[768px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-                  <div className="flex flex-wrap items-center  justify-end gap-6">
+                  <div className="flex flex-wrap items-center justify-end gap-6">
                     {isMember && (
                       <>
                         <Button
