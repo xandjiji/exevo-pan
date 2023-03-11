@@ -439,7 +439,7 @@ schema.set('The Plasmother', {
 
 schema.set('The Voice Of Ruin', {
   fixedDaysFrequency: {
-    min: 1,
+    min: 6,
     max: 9,
   },
   spawnCount: 2,
