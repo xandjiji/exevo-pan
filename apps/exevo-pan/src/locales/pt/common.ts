@@ -256,7 +256,5 @@ export default {
     unknown: 'Desconhecido',
     noChance: 'Sem chance',
     expectedIn: 'Aparecerá em',
-    pin: 'Favoritar este boss',
-    unpin: 'Desfavoritar este boss',
   },
 }

@@ -3,7 +3,6 @@ import { useTranslations } from 'contexts/useTranslation'
 import { SpritePortrait, RareFrame } from 'components/Atoms'
 import { InfoTooltip, Tooltip, ClientComponent } from 'components/Organisms'
 import { loadBossSrc } from 'utils'
-import { PinIcon } from 'assets/svgs'
 import useTimeAgo from './useTimeAgo'
 import { formatChance, getChanceClass } from './utils'
 import { BossCardProps } from './types'
@@ -11,8 +10,9 @@ import { BossCardProps } from './types'
 const BossCard = ({
   premium = false,
   bossStats,
-  pinned,
-  onPin,
+  actionIcon,
+  action,
+  actionLabel,
   className,
   ...props
 }: BossCardProps) => {
@@ -147,22 +147,14 @@ const BossCard = ({
 
       <button
         type="button"
-        aria-label={i18n[pinned ? 'unpin' : 'pin']}
+        aria-label={actionLabel}
         className="clickable ml-auto grid place-items-center self-start rounded p-1"
         onClick={(e) => {
           e.stopPropagation()
-          onPin(name)
+          action(name)
         }}
       >
-        <ClientComponent>
-          <PinIcon
-            className={clsx(
-              'h-4 w-4 transition-all',
-              pinned ? 'fill-primaryHighlight' : 'fill-separator',
-            )}
-            style={{ rotate: pinned ? 'unset' : '45deg' }}
-          />
-        </ClientComponent>
+        <ClientComponent>{actionIcon}</ClientComponent>
       </button>
     </li>
   )

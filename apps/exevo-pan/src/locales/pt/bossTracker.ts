@@ -19,6 +19,8 @@ export default {
     ago: 'atrás',
   },
   BossGrid: {
+    pin: 'Favoritar este boss',
+    unpin: 'Desfavoritar este boss',
     listBosses: 'Listar bosses por:',
     exclusiveBosses: 'Bosses exclusivos {{exevopro}} 🕵️',
     EmptyState: 'Nenhum boss',

@@ -7,6 +7,7 @@ import NextLink from 'next/link'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup } from 'components/Organisms'
 import BossCard from 'components/BossCard'
+import { PinIcon } from 'assets/svgs'
 import { routes, premiumBosses } from 'Constants'
 import usePinBoss from './usePinBoss'
 import { listBy, prioritizePremium } from './utils'
@@ -102,16 +103,31 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
       </p>
       {listNotEmpty ? (
         <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
-          {list.map((bossStats) => (
-            <BossCard
-              key={bossStats.name}
-              premium={premiumBosses.set.has(bossStats.name)}
-              bossStats={bossStats}
-              pinned={pinnedBosses.includes(bossStats.name)}
-              onPin={toggleBoss}
-              onClick={() => setSelectedBoss(bossStats.name)}
-            />
-          ))}
+          {list.map((bossStats) => {
+            const isPinned = pinnedBosses.includes(bossStats.name)
+
+            return (
+              <BossCard
+                key={bossStats.name}
+                premium={premiumBosses.set.has(bossStats.name)}
+                bossStats={bossStats}
+                actionLabel={
+                  translations.bossTracker.BossGrid[isPinned ? 'unpin' : 'pin']
+                }
+                actionIcon={
+                  <PinIcon
+                    className={clsx(
+                      'h-4 w-4 transition-all',
+                      isPinned ? 'fill-primaryHighlight' : 'fill-separator',
+                    )}
+                    style={{ rotate: isPinned ? 'unset' : '45deg' }}
+                  />
+                }
+                action={toggleBoss}
+                onClick={() => setSelectedBoss(bossStats.name)}
+              />
+            )
+          })}
         </ul>
       ) : (
         <EmptyState
