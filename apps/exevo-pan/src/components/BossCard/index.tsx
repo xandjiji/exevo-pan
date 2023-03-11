@@ -148,6 +148,7 @@ const BossCard = ({
       {!!action && (
         <button
           type="button"
+          title={actionLabel}
           aria-label={actionLabel}
           className="clickable ml-auto grid place-items-center self-start rounded p-1"
           onClick={(e) => {

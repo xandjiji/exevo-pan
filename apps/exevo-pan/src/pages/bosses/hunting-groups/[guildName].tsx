@@ -19,6 +19,7 @@ import {
   NotificationDialog,
   SettingsDialog,
   LogHistory,
+  CheckedBosses,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
@@ -122,6 +123,7 @@ export default function GuildPage({
               isEditor,
               isApprover,
               setGuildData,
+              checkedBosses,
             }) => (
               <>
                 <GuildHero guild={guild} memberCount={members.length} />
@@ -231,6 +233,10 @@ export default function GuildPage({
                   />
 
                   {(isMember || EXEVO_PAN_ADMIN) && (
+                    <CheckedBosses checkedBosses={checkedBosses} />
+                  )}
+
+                  {(isMember || EXEVO_PAN_ADMIN) && (
                     <Tabs.Group>
                       <Tabs.Panel label={i18n.groupApplications}>
                         <ApplyList
@@ -295,8 +301,9 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { guildMembers, guildApplications, messageBoard, ...rest } = guild
 
   const isMember = guildMembers.some(({ userId }) => userId === token?.id)
+  const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
 
-  const checkedBosses: CheckedBoss[] = isMember
+  const checkedBosses: CheckedBoss[] = hasMemberPrivilege
     ? await BossesClient.fetchCheckedBosses({
         isPro: token?.proStatus ?? false,
         guildId: guild.id,
@@ -307,7 +314,7 @@ export const getServerSideProps: GetServerSideProps = async ({
   const guildData: GuildData = {
     guild: {
       ...rest,
-      messageBoard: isMember || EXEVO_PAN_ADMIN ? messageBoard : null,
+      messageBoard: hasMemberPrivilege ? messageBoard : null,
     },
     members:
       guild.private && !isMember && !EXEVO_PAN_ADMIN
@@ -322,7 +329,7 @@ export const getServerSideProps: GetServerSideProps = async ({
             blacklistedBosses: '',
           }))
         : guildMembers,
-    applications: isMember || EXEVO_PAN_ADMIN ? guildApplications : [],
+    applications: hasMemberPrivilege ? guildApplications : [],
     checkedBosses,
   }
 
