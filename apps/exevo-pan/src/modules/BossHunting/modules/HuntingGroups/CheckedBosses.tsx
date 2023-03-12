@@ -1,12 +1,13 @@
 import { useMemo } from 'react'
-import BossCard from 'components/BossCard'
 import { sortBossesBy } from 'utils'
 import { ViewedIcon } from 'assets/svgs'
 import { premiumBosses } from 'Constants'
+import { BossCard } from '../../components'
 
 /* @ ToDo:
 
 - Last checked
+- boss dialog
 - action
 - sort
 - search

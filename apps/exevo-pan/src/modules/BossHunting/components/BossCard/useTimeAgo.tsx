@@ -4,9 +4,9 @@ import { dateToDateObject, MILLISECONDS_IN } from 'utils'
 
 const useTimeAgo = (pastTimestamp?: number): string | undefined => {
   const {
-    translations: { common },
+    translations: { common, bosses },
   } = useTranslations()
-  const i18n = common.BossCard
+  const i18n = bosses.BossCard
 
   return useMemo(() => {
     if (pastTimestamp === undefined) return undefined
