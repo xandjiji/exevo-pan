@@ -29,7 +29,7 @@ const AlertButton = ({
     type="button"
     className={clsx(
       className,
-      'text-primaryHighlight cursor-pointer font-bold underline underline-offset-2',
+      'text-onAlert cursor-pointer font-bold underline underline-offset-2',
     )}
     {...props}
   />
