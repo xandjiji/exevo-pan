@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState, useMemo, useCallback } from 'react'
+import { Input, Checkbox } from 'components/Atoms'
 import { sortBossesBy } from 'utils'
 import { Menu } from 'components/Organisms'
 import { MoreIcon, ExpandIcon, ViewedIcon, BlogIcon } from 'assets/svgs'
@@ -12,7 +13,7 @@ import { BossCard, BossDialog } from '../../../components'
 
 /* @ ToDo:
 
-- search + hide (no chance/recently checked/my ignored bosses)
+- hide (recently checked/my ignored bosses)
 - accordion?
 - testes <BossCard />
 
@@ -33,10 +34,33 @@ const CheckedBosses = ({
   onNotify,
 }: CheckedBossesProps) => {
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
+  const [bossQuery, setBossQuery] = useState('')
+  const [hideNoChance, setHideNoChance] = useState(false)
 
   const bossList = useMemo(
-    () => [...checkedBosses].sort(sortBossesBy.chance),
-    [checkedBosses],
+    () =>
+      [...checkedBosses]
+        .filter(({ name, currentChance, daysLeftForPossibleSpawns }) => {
+          if (bossQuery && !name.toLowerCase().includes(bossQuery)) {
+            return false
+          }
+
+          if (hideNoChance) {
+            if (daysLeftForPossibleSpawns) {
+              if (
+                !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
+              ) {
+                return false
+              }
+            } else if (!currentChance) {
+              return false
+            }
+          }
+
+          return true
+        })
+        .sort(sortBossesBy.chance),
+    [checkedBosses, bossQuery, hideNoChance],
   )
 
   const checkedTimeAgo = useTimeAgo()
@@ -46,7 +70,27 @@ const CheckedBosses = ({
 
   return (
     <section>
-      <h4 className="mb-4">Checked bosses</h4>
+      <h4>Checked bosses</h4>
+
+      <div className="my-4 flex flex-col gap-2 md:flex-row md:items-end md:gap-6">
+        <Input
+          allowClear
+          label="Search"
+          placeholder="e.g. 'Yeti', 'Mr. Punish'"
+          className="md:max-w-[200px]"
+          onChange={(e) => setBossQuery(e.target.value.toLowerCase())}
+        />
+
+        <div className="flex flex-col gap-2 md:mb-3 md:flex-row md:gap-4">
+          <Checkbox
+            label="Hide no chance"
+            checked={hideNoChance}
+            onClick={() => setHideNoChance((prev) => !prev)}
+          />
+          <Checkbox label="Hide recently checked" />
+          <Checkbox label="Hide my ignored bosses" />
+        </div>
+      </div>
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
         {bossList.map((boss) => {
