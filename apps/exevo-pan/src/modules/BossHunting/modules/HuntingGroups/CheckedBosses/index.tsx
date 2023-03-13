@@ -99,7 +99,7 @@ const CheckedBosses = ({
                     title={`Last time checked (by ${boss.checkedBy})`}
                   >
                     <ViewedIcon className="fill-primaryHighlight mr-0.5 h-4 w-4" />
-                    <span>{lastChecked}</span>
+                    <span>{lastChecked.readable}</span>
                   </p>
                 ) : undefined
               }

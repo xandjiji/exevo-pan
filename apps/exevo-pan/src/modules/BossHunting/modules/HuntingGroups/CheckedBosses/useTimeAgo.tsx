@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import { useCallback } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { MILLISECONDS_IN } from 'utils'
@@ -13,25 +14,32 @@ export const useTimeAgo = () => {
   } = useTranslations()
 
   return useCallback(
-    (pastDate?: Date): string => {
-      if (!pastDate) return ''
+    (pastDate?: Date): { readable: string; recent: boolean } | undefined => {
+      if (!pastDate) return
 
       const millisecondsDiff = Math.abs(+new Date() - +pastDate)
 
       if (millisecondsDiff < MILLISECONDS_IN.MINUTE * 2) {
-        return 'just checked'
+        return { readable: 'just checked', recent: true }
       }
 
       if (millisecondsDiff <= MILLISECONDS_IN.HOUR) {
-        return `${extractTimeUnits(millisecondsDiff, 'MINUTE')} minutes ago`
+        return {
+          readable: `${extractTimeUnits(
+            millisecondsDiff,
+            'MINUTE',
+          )} minutes ago`,
+          recent: true,
+        }
       }
 
       if (millisecondsDiff < MILLISECONDS_IN.DAY) {
         const hoursSince = extractTimeUnits(millisecondsDiff, 'HOUR')
-        return `${hoursSince} ${hoursSince > 1 ? 'hours' : 'hour'} ago`
+        return {
+          readable: `${hoursSince} ${hoursSince > 1 ? 'hours' : 'hour'} ago`,
+          recent: false,
+        }
       }
-
-      return ''
     },
     [common],
   )
