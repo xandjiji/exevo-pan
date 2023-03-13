@@ -240,10 +240,11 @@ export default function GuildPage({
                     isPrivate={guild.private && !EXEVO_PAN_ADMIN}
                   />
 
-                  {(isMember || EXEVO_PAN_ADMIN) && (
+                  {(isMember || EXEVO_PAN_ADMIN) && !!currentMember && (
                     <CheckedBosses
                       guildId={guild.id}
                       checkedBosses={checkedBosses}
+                      currentMember={currentMember}
                       onNotify={(defaultBoss) =>
                         setIsNotificationOpen({ isOpen: true, defaultBoss })
                       }

@@ -8,12 +8,13 @@ import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { premiumBosses } from 'Constants'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
+import type { GuildMember } from '@prisma/client'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
+import { utils } from '../../../blacklist'
 
 /* @ ToDo:
 
-- hide (my ignored bosses)
 - accordion?
 - testes <BossCard />
 
@@ -23,6 +24,7 @@ import { BossCard, BossDialog } from '../../../components'
 type CheckedBossesProps = {
   guildId: string
   checkedBosses: CheckedBoss[]
+  currentMember: GuildMember
   onCheck?: (checkData: TRPCRouteOutputs['markCheckedBoss']) => void
   onNotify?: (boss: string) => void
 }
@@ -30,6 +32,7 @@ type CheckedBossesProps = {
 const CheckedBosses = ({
   guildId,
   checkedBosses,
+  currentMember,
   onCheck,
   onNotify,
 }: CheckedBossesProps) => {
@@ -37,6 +40,7 @@ const CheckedBosses = ({
   const [bossQuery, setBossQuery] = useState('')
   const [hideNoChance, setHideNoChance] = useState(false)
   const [hideRecentlyChecked, setHideRecentlyChecked] = useState(false)
+  const [hideBlacklisted, setHideBlacklisted] = useState(false)
 
   const checkedTimeAgo = useTimeAgo()
 
@@ -47,6 +51,11 @@ const CheckedBosses = ({
         lastChecked: checkedTimeAgo(item.checkedAt),
       })),
     [checkedBosses, checkedTimeAgo],
+  )
+
+  const blacklist = useMemo(
+    () => utils.split(currentMember.blacklistedBosses ?? ''),
+    [currentMember],
   )
 
   const bossList = useMemo(
@@ -74,11 +83,22 @@ const CheckedBosses = ({
               return false
             }
 
+            if (hideBlacklisted && blacklist.has(name)) {
+              return false
+            }
+
             return true
           },
         )
         .sort(sortBossesBy.chance),
-    [transformedList, bossQuery, hideNoChance, hideRecentlyChecked],
+    [
+      transformedList,
+      bossQuery,
+      hideNoChance,
+      hideRecentlyChecked,
+      hideBlacklisted,
+      blacklist,
+    ],
   )
 
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
@@ -109,7 +129,11 @@ const CheckedBosses = ({
             checked={hideRecentlyChecked}
             onClick={() => setHideRecentlyChecked((prev) => !prev)}
           />
-          <Checkbox label="Hide my ignored bosses" />
+          <Checkbox
+            label="Hide my ignored bosses"
+            checked={hideBlacklisted}
+            onClick={() => setHideBlacklisted((prev) => !prev)}
+          />
         </div>
       </div>
 
