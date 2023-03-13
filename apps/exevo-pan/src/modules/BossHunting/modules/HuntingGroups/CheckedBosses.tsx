@@ -1,14 +1,13 @@
-import { useMemo } from 'react'
+import { useState, useMemo, useCallback } from 'react'
 import { sortBossesBy } from 'utils'
 import { Menu } from 'components/Organisms'
 import { MoreIcon, ExpandIcon, ViewedIcon } from 'assets/svgs'
 import { premiumBosses } from 'Constants'
-import { BossCard } from '../../components'
+import { BossCard, BossDialog } from '../../components'
 
 /* @ ToDo:
 
 - Last checked
-- boss dialog
 - action
 - sort
 - search
@@ -24,6 +23,8 @@ type CheckedBossesProps = {
 }
 
 const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
+  const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
+
   const bossList = useMemo(
     () => [...checkedBosses].sort(sortBossesBy.chance),
     [checkedBosses],
@@ -46,6 +47,7 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
                     {
                       label: 'Details',
                       icon: ExpandIcon,
+                      onSelect: () => setSelectedBoss(boss.name),
                     },
                   ]}
                 >
@@ -56,6 +58,11 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
           />
         ))}
       </div>
+
+      <BossDialog
+        bossName={selectedBoss}
+        onClose={useCallback(() => setSelectedBoss(undefined), [])}
+      />
     </section>
   )
 }
