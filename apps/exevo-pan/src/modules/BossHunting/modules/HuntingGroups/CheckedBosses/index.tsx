@@ -1,9 +1,10 @@
 import { useState, useMemo, useCallback } from 'react'
-import { sortBossesBy } from 'utils'
+import { sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { Menu } from 'components/Organisms'
 import { MoreIcon, ExpandIcon, ViewedIcon, BlogIcon } from 'assets/svgs'
 import { premiumBosses } from 'Constants'
-import { BossCard, BossDialog } from '../../components'
+import { useTimeAgo } from './useTimeAgo'
+import { BossCard, BossDialog } from '../../../components'
 
 /* @ ToDo:
 
@@ -31,9 +32,16 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
     [checkedBosses],
   )
 
+  const checkedTimeAgo = useTimeAgo()
+  console.log(checkedTimeAgo(new Date(+new Date() - MILLISECONDS_IN.HOUR * 2)))
+
   return (
     <section>
       <h4 className="mb-4">Checked bosses</h4>
+
+      <h4>
+        {/* {checkedTimeAgo(new Date(+new Date() - MILLISECONDS_IN.HOUR * 2))} */}
+      </h4>
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
         {bossList.map((boss) => (
