@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useTranslations, templateString } from 'contexts/useTranslation'
 import { useState, useMemo, useCallback } from 'react'
 import { Input, Checkbox, Accordion } from 'components/Atoms'
 import { sortBossesBy } from 'utils'
@@ -28,6 +29,11 @@ const CheckedBosses = ({
   onCheck,
   onNotify,
 }: CheckedBossesProps) => {
+  const {
+    translations: { common, huntingGroups },
+  } = useTranslations()
+  const i18n = huntingGroups.CheckedBosses
+
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
   const [bossQuery, setBossQuery] = useState('')
   const [hideNoChance, setHideNoChance] = useState(false)
@@ -99,11 +105,14 @@ const CheckedBosses = ({
 
   return (
     <section>
-      <Accordion title={<h4 className="text-s">Checked bosses</h4>} border>
+      <Accordion
+        title={<h4 className="text-s">{i18n.checkedBosses}</h4>}
+        border
+      >
         <div className="my-4 flex flex-col gap-2 md:flex-row md:items-end md:gap-6">
           <Input
             allowClear
-            label="Search"
+            label={i18n.search}
             placeholder="e.g. 'Yeti', 'Mr. Punish'"
             className="md:max-w-[200px]"
             onChange={(e) => setBossQuery(e.target.value.toLowerCase())}
@@ -111,17 +120,17 @@ const CheckedBosses = ({
 
           <div className="flex flex-col gap-2 md:mb-3 md:flex-row md:gap-4">
             <Checkbox
-              label="Hide no chance"
+              label={i18n.hideNoChance}
               checked={hideNoChance}
               onClick={() => setHideNoChance((prev) => !prev)}
             />
             <Checkbox
-              label="Hide recently checked"
+              label={i18n.hideRecentlyChecked}
               checked={hideRecentlyChecked}
               onClick={() => setHideRecentlyChecked((prev) => !prev)}
             />
             <Checkbox
-              label="Hide my ignored bosses"
+              label={i18n.hideBlacklisted}
               checked={hideBlacklisted}
               onClick={() => setHideBlacklisted((prev) => !prev)}
             />
@@ -140,17 +149,17 @@ const CheckedBosses = ({
                     offset={[0, 8]}
                     items={[
                       {
-                        label: 'Details',
+                        label: i18n.details,
                         icon: ExpandIcon,
                         onSelect: () => setSelectedBoss(boss.name),
                       },
                       {
-                        label: 'Notify group',
+                        label: i18n.notifyGroup,
                         icon: BlogIcon,
                         onSelect: () => onNotify?.(boss.name),
                       },
                       {
-                        label: 'Mark as checked',
+                        label: i18n.markAsChecked,
                         icon: ViewedIcon,
                         onSelect: () =>
                           toast.promise(
@@ -159,9 +168,11 @@ const CheckedBosses = ({
                               guildId,
                             }),
                             {
-                              success: `${boss.name} was marked as checked!`,
-                              error: 'Oops! Something went wrong',
-                              loading: 'Loading',
+                              success: templateString(i18n.bossWasMarked, {
+                                boss: boss.name,
+                              }),
+                              error: common.genericError,
+                              loading: i18n.loading,
                             },
                           ),
                       },
@@ -175,7 +186,9 @@ const CheckedBosses = ({
                 boss.lastChecked ? (
                   <p
                     className="flex items-center gap-1"
-                    title={`Last time checked (by ${boss.checkedBy})`}
+                    title={templateString(i18n.lastTimeChecked, {
+                      member: boss.checkedBy ?? '',
+                    })}
                   >
                     <ViewedIcon
                       className={clsx(

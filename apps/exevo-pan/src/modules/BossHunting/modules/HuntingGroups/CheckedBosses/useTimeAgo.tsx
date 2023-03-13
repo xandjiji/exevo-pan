@@ -10,8 +10,9 @@ const extractTimeUnits = (
 
 export const useTimeAgo = () => {
   const {
-    translations: { common },
+    translations: { common, huntingGroups },
   } = useTranslations()
+  const i18n = huntingGroups.CheckedBosses
 
   return useCallback(
     (pastDate?: Date): { readable: string; recent: boolean } | undefined => {
@@ -20,15 +21,14 @@ export const useTimeAgo = () => {
       const millisecondsDiff = Math.abs(+new Date() - +pastDate)
 
       if (millisecondsDiff < MILLISECONDS_IN.MINUTE * 2) {
-        return { readable: 'just checked', recent: true }
+        return { readable: i18n.justChecked, recent: true }
       }
 
       if (millisecondsDiff <= MILLISECONDS_IN.HOUR) {
         return {
-          readable: `${extractTimeUnits(
-            millisecondsDiff,
-            'MINUTE',
-          )} minutes ago`,
+          readable: `${extractTimeUnits(millisecondsDiff, 'MINUTE')} ${
+            i18n.minutesAgo
+          }`,
           recent: true,
         }
       }
@@ -36,7 +36,9 @@ export const useTimeAgo = () => {
       if (millisecondsDiff < MILLISECONDS_IN.DAY) {
         const hoursSince = extractTimeUnits(millisecondsDiff, 'HOUR')
         return {
-          readable: `${hoursSince} ${hoursSince > 1 ? 'hours' : 'hour'} ago`,
+          readable: `${hoursSince} ${
+            hoursSince > 1 ? i18n.hoursAgo : i18n.hourAgo
+          }`,
           recent: false,
         }
       }
