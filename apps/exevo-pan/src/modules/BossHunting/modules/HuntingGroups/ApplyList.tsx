@@ -44,7 +44,7 @@ const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
                 <Table.Column>
                   <div className="xs:child:whitespace-nowrap grid w-min justify-center gap-1.5 text-center">
                     <span
-                      className="text-primaryHighlight text-tsm xs:text-base overflow-hidden text-ellipsis"
+                      className="text-primaryHighlight text-tsm xs:text-base overflow-hidden text-ellipsis md:overflow-visible"
                       title={applyAs}
                     >
                       {applyAs}

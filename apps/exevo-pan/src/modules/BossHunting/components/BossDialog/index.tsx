@@ -17,8 +17,9 @@ const Section = ({ className, ...props }: JSX.IntrinsicElements['section']) => (
 
 const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
   const {
-    translations: { bossTracker },
+    translations: { bosses },
   } = useTranslations()
+  const i18n = bosses.BossDialog
 
   const info = useMemo(
     () => bossInfo.get(bossName as TrackedBossName),
@@ -41,7 +42,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
       <div className="custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto pt-3 pr-4 sm:w-[70vw] sm:max-w-[606px]">
         {!!info?.loot && (
           <Section>
-            <h3>{bossTracker.BossGrid.BossDialog.loot}</h3>
+            <h3>{i18n.loot}</h3>
 
             <div className="flex flex-wrap gap-1.5">
               {info.loot.map((item) => (
@@ -59,17 +60,13 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
 
         {!!info?.raidMessages && (
           <Section>
-            <h3>{bossTracker.BossGrid.BossDialog.raidMessages}</h3>
+            <h3>{i18n.raidMessages}</h3>
 
             <ul className="grid gap-1">
               {info.raidMessages.map(({ style, time, message }) => (
                 <li
                   key={message}
-                  title={
-                    style === 'HIGHLIGHT'
-                      ? bossTracker.BossGrid.BossDialog.bossWillSpawn
-                      : undefined
-                  }
+                  title={style === 'HIGHLIGHT' ? i18n.bossWillSpawn : undefined}
                 >
                   <strong className="tracking-wider">{time}:</strong>{' '}
                   <span
@@ -92,9 +89,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
         {!!info?.locations && (
           <Section>
             <h3>
-              {info.locations.length > 1
-                ? bossTracker.BossGrid.BossDialog.locations
-                : bossTracker.BossGrid.BossDialog.location}
+              {info.locations.length > 1 ? i18n.locations : i18n.location}
             </h3>
 
             <ul className="grid gap-5">
@@ -107,9 +102,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                   />
                   {!!description && (
                     <caption className="text-tsm">
-                      {bossTracker.BossGrid.BossDialog.descriptions[
-                        description
-                      ] ?? description}
+                      {i18n.descriptions[description] ?? description}
                     </caption>
                   )}
                 </li>
@@ -117,7 +110,7 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
             </ul>
 
             <strong className="text-right" style={{ fontSize: 10 }}>
-              {bossTracker.BossGrid.BossDialog.using}{' '}
+              {i18n.using}{' '}
               <a
                 href={links.TIBIAMAPS}
                 rel="noreferrer external nofollow"

@@ -19,6 +19,8 @@ export default {
     ago: 'atrás',
   },
   BossGrid: {
+    pin: 'Favoritar este boss',
+    unpin: 'Desfavoritar este boss',
     listBosses: 'Listar bosses por:',
     exclusiveBosses: 'Bosses exclusivos {{exevopro}} 🕵️',
     EmptyState: 'Nenhum boss',
@@ -27,39 +29,6 @@ export default {
       name: 'Nome',
       lastSeen: 'Última vez visto',
       favorites: 'Favoritos',
-    },
-    BossCard: {
-      lastSeen: 'Última vez visto',
-      /* 'hours ago' */
-      ago: 'atrás',
-      thisCreatureHas: 'Essa criatura tem',
-      differentSpawnLocations: 'locais diferentes de spawn.',
-      itIs: 'É',
-      possible: 'possível',
-      toSpawn: 'nascer neste local.',
-      thereAre: 'Faltam',
-      /* days left */
-      left: '',
-      before: 'antes que ele possa nascer nesse local.',
-      itsUpToYou: 'Cabe a você descobrir qual dos locais é este',
-      chanceToSpawn: 'Chance de nascer hoje',
-      unknown: 'Desconhecido',
-      noChance: 'Sem chance',
-      expectedIn: 'Aparecerá em',
-      pin: 'Favoritar este boss',
-      unpin: 'Desfavoritar este boss',
-    },
-    BossDialog: {
-      loot: 'Loot relevante',
-      raidMessages: 'Mensagens de raid',
-      bossWillSpawn: 'Boss irá nascer',
-      location: 'Local',
-      locations: 'Locais',
-      /* 'using' TibiaMaps.io ❤️ */
-      using: 'usando',
-      descriptions: {
-        Grorlam: 'Várias localizações dentro de Mount Sternum (Thais)',
-      },
     },
   },
 }

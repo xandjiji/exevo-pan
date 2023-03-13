@@ -1,8 +1,9 @@
 export type BossCardProps = {
   premium?: boolean
-  pinned: boolean
-  onPin: (bossName: string) => void
   bossStats: BossStats
+  checkedAt?: Date
+  cornerElement?: JSX.Element
+  bottomElement?: JSX.Element
 } & JSX.IntrinsicElements['li']
 
 export type ChanceClass = 'UNKNOWN' | 'ZERO' | 'POSSIBLE' | 'LIKELY'
