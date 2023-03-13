@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useState, useMemo, useCallback } from 'react'
-import { Input, Checkbox } from 'components/Atoms'
+import { Input, Checkbox, Accordion } from 'components/Atoms'
 import { sortBossesBy } from 'utils'
 import { Menu } from 'components/Organisms'
 import { MoreIcon, ExpandIcon, ViewedIcon, BlogIcon } from 'assets/svgs'
@@ -15,7 +15,6 @@ import { utils } from '../../../blacklist'
 
 /* @ ToDo:
 
-- accordion?
 - testes <BossCard />
 
 - i18n
@@ -107,98 +106,98 @@ const CheckedBosses = ({
 
   return (
     <section>
-      <h4>Checked bosses</h4>
+      <Accordion title={<h4 className="text-s">Checked bosses</h4>} border>
+        <div className="my-4 flex flex-col gap-2 md:flex-row md:items-end md:gap-6">
+          <Input
+            allowClear
+            label="Search"
+            placeholder="e.g. 'Yeti', 'Mr. Punish'"
+            className="md:max-w-[200px]"
+            onChange={(e) => setBossQuery(e.target.value.toLowerCase())}
+          />
 
-      <div className="my-4 flex flex-col gap-2 md:flex-row md:items-end md:gap-6">
-        <Input
-          allowClear
-          label="Search"
-          placeholder="e.g. 'Yeti', 'Mr. Punish'"
-          className="md:max-w-[200px]"
-          onChange={(e) => setBossQuery(e.target.value.toLowerCase())}
-        />
-
-        <div className="flex flex-col gap-2 md:mb-3 md:flex-row md:gap-4">
-          <Checkbox
-            label="Hide no chance"
-            checked={hideNoChance}
-            onClick={() => setHideNoChance((prev) => !prev)}
-          />
-          <Checkbox
-            label="Hide recently checked"
-            checked={hideRecentlyChecked}
-            onClick={() => setHideRecentlyChecked((prev) => !prev)}
-          />
-          <Checkbox
-            label="Hide my ignored bosses"
-            checked={hideBlacklisted}
-            onClick={() => setHideBlacklisted((prev) => !prev)}
-          />
+          <div className="flex flex-col gap-2 md:mb-3 md:flex-row md:gap-4">
+            <Checkbox
+              label="Hide no chance"
+              checked={hideNoChance}
+              onClick={() => setHideNoChance((prev) => !prev)}
+            />
+            <Checkbox
+              label="Hide recently checked"
+              checked={hideRecentlyChecked}
+              onClick={() => setHideRecentlyChecked((prev) => !prev)}
+            />
+            <Checkbox
+              label="Hide my ignored bosses"
+              checked={hideBlacklisted}
+              onClick={() => setHideBlacklisted((prev) => !prev)}
+            />
+          </div>
         </div>
-      </div>
 
-      <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
-        {bossList.map((boss) => (
-          <BossCard
-            key={boss.name}
-            bossStats={boss}
-            premium={premiumBosses.set.has(boss.name)}
-            cornerElement={
-              <div className="ml-auto self-start">
-                <Menu
-                  offset={[0, 8]}
-                  items={[
-                    {
-                      label: 'Details',
-                      icon: ExpandIcon,
-                      onSelect: () => setSelectedBoss(boss.name),
-                    },
-                    {
-                      label: 'Notify group',
-                      icon: BlogIcon,
-                      onSelect: () => onNotify?.(boss.name),
-                    },
-                    {
-                      label: 'Mark as checked',
-                      icon: ViewedIcon,
-                      onSelect: () =>
-                        toast.promise(
-                          markCheckedBoss.mutateAsync({
-                            boss: boss.name,
-                            guildId,
-                          }),
-                          {
-                            success: `${boss.name} was marked as checked!`,
-                            error: 'Oops! Something went wrong',
-                            loading: 'Loading',
-                          },
-                        ),
-                    },
-                  ]}
-                >
-                  <MoreIcon className="fill-onSurface h-4 w-4" />
-                </Menu>
-              </div>
-            }
-            bottomElement={
-              boss.lastChecked ? (
-                <p
-                  className="flex items-center gap-1"
-                  title={`Last time checked (by ${boss.checkedBy})`}
-                >
-                  <ViewedIcon
-                    className={clsx(
-                      'mr-0.5 h-4 w-4',
-                      boss.lastChecked.recent ? 'fill-separator' : 'fill-red',
-                    )}
-                  />
-                  <span>{boss.lastChecked.readable}</span>
-                </p>
-              ) : undefined
-            }
-          />
-        ))}
-      </div>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
+          {bossList.map((boss) => (
+            <BossCard
+              key={boss.name}
+              bossStats={boss}
+              premium={premiumBosses.set.has(boss.name)}
+              cornerElement={
+                <div className="ml-auto self-start">
+                  <Menu
+                    offset={[0, 8]}
+                    items={[
+                      {
+                        label: 'Details',
+                        icon: ExpandIcon,
+                        onSelect: () => setSelectedBoss(boss.name),
+                      },
+                      {
+                        label: 'Notify group',
+                        icon: BlogIcon,
+                        onSelect: () => onNotify?.(boss.name),
+                      },
+                      {
+                        label: 'Mark as checked',
+                        icon: ViewedIcon,
+                        onSelect: () =>
+                          toast.promise(
+                            markCheckedBoss.mutateAsync({
+                              boss: boss.name,
+                              guildId,
+                            }),
+                            {
+                              success: `${boss.name} was marked as checked!`,
+                              error: 'Oops! Something went wrong',
+                              loading: 'Loading',
+                            },
+                          ),
+                      },
+                    ]}
+                  >
+                    <MoreIcon className="fill-onSurface h-4 w-4" />
+                  </Menu>
+                </div>
+              }
+              bottomElement={
+                boss.lastChecked ? (
+                  <p
+                    className="flex items-center gap-1"
+                    title={`Last time checked (by ${boss.checkedBy})`}
+                  >
+                    <ViewedIcon
+                      className={clsx(
+                        'mr-0.5 h-4 w-4',
+                        boss.lastChecked.recent ? 'fill-separator' : 'fill-red',
+                      )}
+                    />
+                    <span>{boss.lastChecked.readable}</span>
+                  </p>
+                ) : undefined
+              }
+            />
+          ))}
+        </div>
+      </Accordion>
 
       <BossDialog
         bossName={selectedBoss}
