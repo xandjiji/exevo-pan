@@ -12,7 +12,6 @@ import { BossCard, BossDialog } from '../../../components'
 
 /* @ ToDo:
 
-- notify
 - search + hide (no chance/recently checked/my ignored bosses)
 - accordion?
 - testes <BossCard />
@@ -23,13 +22,15 @@ import { BossCard, BossDialog } from '../../../components'
 type CheckedBossesProps = {
   guildId: string
   checkedBosses: CheckedBoss[]
-  onCheck: (checkData: TRPCRouteOutputs['markCheckedBoss']) => void
+  onCheck?: (checkData: TRPCRouteOutputs['markCheckedBoss']) => void
+  onNotify?: (boss: string) => void
 }
 
 const CheckedBosses = ({
   guildId,
   checkedBosses,
   onCheck,
+  onNotify,
 }: CheckedBossesProps) => {
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
 
@@ -69,6 +70,7 @@ const CheckedBosses = ({
                       {
                         label: 'Notify group',
                         icon: BlogIcon,
+                        onSelect: () => onNotify?.(boss.name),
                       },
                       {
                         label: 'Mark as checked',

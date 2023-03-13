@@ -10,25 +10,31 @@ import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bos
 
 type NotificationDialogProps = {
   guildId: string
+  defaultBoss?: string
   onClose: () => void
 }
 
 const bossNames = Object.values(bossTokens)
 
-const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
+const NotificationDialog = ({
+  guildId,
+  onClose,
+  defaultBoss = '',
+}: NotificationDialogProps) => {
   const {
     translations: { common, huntingGroups },
   } = useTranslations()
   const i18n = huntingGroups.NotificationDialog
 
-  const [bossQuery, setBossQuery] = useState('')
-  const [selectedBoss, setSelectedBoss] = useState('')
+  const [bossQuery, setBossQuery] = useState(defaultBoss)
+  const [selectedBoss, setSelectedBoss] = useState(defaultBoss)
 
-  const bossList = useMemo(
-    () =>
-      bossNames.filter((boss) => boss.toLocaleLowerCase().includes(bossQuery)),
-    [bossQuery],
-  )
+  const bossList = useMemo(() => {
+    const lowerCaseQuery = bossQuery.toLowerCase()
+    return bossNames.filter((boss) =>
+      boss.toLocaleLowerCase().includes(lowerCaseQuery),
+    )
+  }, [bossQuery])
 
   const queryMatch = bossList.length === 1
   const emptyBossList = bossList.length === 0
@@ -54,7 +60,10 @@ const NotificationDialog = ({ guildId, onClose }: NotificationDialogProps) => {
           label={i18n.search}
           allowClear
           value={bossQuery}
-          onChange={(e) => setBossQuery(e.target.value.toLowerCase())}
+          onChange={(e) => {
+            setSelectedBoss('')
+            setBossQuery(e.target.value)
+          }}
           placeholder="e.g. 'Yeti', 'Mr. Punish'"
           onKeyPress={(e) => {
             if (e.code === 'Enter' && queryMatch) {

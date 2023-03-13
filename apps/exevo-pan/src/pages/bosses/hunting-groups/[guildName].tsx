@@ -55,7 +55,10 @@ export default function GuildPage({
 
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isApplyOpen, setIsApplyOpen] = useState(false)
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false)
+  const [isNotificationOpen, setIsNotificationOpen] = useState<{
+    isOpen: boolean
+    defaultBoss?: string
+  }>({ isOpen: false })
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
@@ -164,15 +167,20 @@ export default function GuildPage({
                       <>
                         <Button
                           className="flex items-center gap-2"
-                          onClick={() => setIsNotificationOpen(true)}
+                          onClick={() =>
+                            setIsNotificationOpen({ isOpen: true })
+                          }
                         >
                           <BlogIcon className="-ml-1" />
                           {i18n.notificate}
                         </Button>
-                        {isNotificationOpen && (
+                        {isNotificationOpen.isOpen && (
                           <NotificationDialog
                             guildId={guild.id}
-                            onClose={() => setIsNotificationOpen(false)}
+                            defaultBoss={isNotificationOpen.defaultBoss}
+                            onClose={() =>
+                              setIsNotificationOpen({ isOpen: false })
+                            }
                           />
                         )}
                       </>
@@ -236,6 +244,9 @@ export default function GuildPage({
                     <CheckedBosses
                       guildId={guild.id}
                       checkedBosses={checkedBosses}
+                      onNotify={(defaultBoss) =>
+                        setIsNotificationOpen({ isOpen: true, defaultBoss })
+                      }
                       onCheck={(checkData) =>
                         setGuildData((prev) => ({
                           checkedBosses: prev.checkedBosses.map((boss) =>
