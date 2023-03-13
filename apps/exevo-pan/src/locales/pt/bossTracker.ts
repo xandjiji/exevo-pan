@@ -30,17 +30,5 @@ export default {
       lastSeen: 'Última vez visto',
       favorites: 'Favoritos',
     },
-    BossDialog: {
-      loot: 'Loot relevante',
-      raidMessages: 'Mensagens de raid',
-      bossWillSpawn: 'Boss irá nascer',
-      location: 'Local',
-      locations: 'Locais',
-      /* 'using' TibiaMaps.io ❤️ */
-      using: 'usando',
-      descriptions: {
-        Grorlam: 'Várias localizações dentro de Mount Sternum (Thais)',
-      },
-    },
   },
 }

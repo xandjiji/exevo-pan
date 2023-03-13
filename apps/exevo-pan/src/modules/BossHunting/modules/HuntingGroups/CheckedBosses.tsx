@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { sortBossesBy } from 'utils'
 import { Menu } from 'components/Organisms'
-import { MoreIcon, ViewedIcon } from 'assets/svgs'
+import { MoreIcon, ExpandIcon, ViewedIcon } from 'assets/svgs'
 import { premiumBosses } from 'Constants'
 import { BossCard } from '../../components'
 
@@ -13,6 +13,7 @@ import { BossCard } from '../../components'
 - sort
 - search
 - premium
+- accordion?
 - testes <BossCard />
 
 - i18n
@@ -40,7 +41,14 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
             premium={premiumBosses.set.has(boss.name)}
             cornerElement={
               <div className="ml-auto self-start">
-                <Menu items={[]}>
+                <Menu
+                  items={[
+                    {
+                      label: 'Details',
+                      icon: ExpandIcon,
+                    },
+                  ]}
+                >
                   <MoreIcon className="fill-onSurface h-4 w-4" />
                 </Menu>
               </div>

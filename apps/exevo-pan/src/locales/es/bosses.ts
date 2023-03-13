@@ -22,4 +22,16 @@ export default {
     noChance: 'No chance',
     expectedIn: 'Expected in',
   },
+  BossDialog: {
+    loot: 'Relevant loot',
+    raidMessages: 'Raid messages',
+    bossWillSpawn: 'Boss will spawn',
+    location: 'Location',
+    locations: 'Locations',
+    /* 'using' TibiaMaps.io ❤️ */
+    using: 'using',
+    descriptions: {
+      Grorlam: 'Several spots inside Mount Sternum (Thais)',
+    },
+  },
 }

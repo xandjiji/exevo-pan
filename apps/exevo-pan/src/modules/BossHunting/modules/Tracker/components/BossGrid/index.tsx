@@ -8,10 +8,9 @@ import EmptyState from 'components/EmptyState'
 import { ChipGroup, ClientComponent } from 'components/Organisms'
 import { PinIcon } from 'assets/svgs'
 import { routes, premiumBosses } from 'Constants'
-import { BossCard } from '../../../../components'
+import { BossCard, BossDialog } from '../../../../components'
 import usePinBoss from './usePinBoss'
 import { listBy, prioritizePremium } from './utils'
-import BossDialog from '../BossDialog'
 import { BossGridProps, ListOption } from './types'
 
 const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
