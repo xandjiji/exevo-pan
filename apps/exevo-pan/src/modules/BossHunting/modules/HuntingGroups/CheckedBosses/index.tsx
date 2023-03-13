@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useState, useMemo, useCallback } from 'react'
 import { sortBossesBy } from 'utils'
 import { Menu } from 'components/Organisms'
@@ -12,8 +13,7 @@ import { BossCard, BossDialog } from '../../../components'
 /* @ ToDo:
 
 - notify
-- sort
-- search
+- search + hide (no chance/recently checked/my ignored bosses)
 - accordion?
 - testes <BossCard />
 
@@ -98,7 +98,12 @@ const CheckedBosses = ({
                     className="flex items-center gap-1"
                     title={`Last time checked (by ${boss.checkedBy})`}
                   >
-                    <ViewedIcon className="fill-primaryHighlight mr-0.5 h-4 w-4" />
+                    <ViewedIcon
+                      className={clsx(
+                        'mr-0.5 h-4 w-4',
+                        lastChecked.recent ? 'fill-separator' : 'fill-red',
+                      )}
+                    />
                     <span>{lastChecked.readable}</span>
                   </p>
                 ) : undefined
