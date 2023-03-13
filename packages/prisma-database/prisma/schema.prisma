@@ -187,6 +187,7 @@ model Guild {
     guildMembers      GuildMember[]
     guildApplications GuildApplication[]
     guildLogEntry     GuildLogEntry[]
+    bossChecks        BossCheck[]
 }
 
 enum GUILD_MEMBER_ROLE {
@@ -210,6 +211,7 @@ model GuildMember {
     blacklistedBosses     String?         @db.Text
     actionLogEntry        GuildLogEntry[] @relation("actor")
     targetedLogEntry      GuildLogEntry[] @relation("target")
+    bossChecks            BossCheck[]
 
     @@unique([guildId, userId])
     @@index([guildId])
@@ -257,4 +259,18 @@ model GuildLogEntry {
     @@index([guildId])
     @@index([actionGuildMemberId])
     @@index([targetGuildMemberId])
+}
+
+model BossCheck {
+    checkedAt DateTime @updatedAt
+
+    boss      String
+    guild     Guild       @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId   String
+    checkedBy GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    memberId  String
+
+    @@unique([boss, guildId])
+    @@index([guildId])
+    @@index([memberId])
 }

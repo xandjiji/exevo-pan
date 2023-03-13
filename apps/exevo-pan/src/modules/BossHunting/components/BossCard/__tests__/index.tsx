@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
 import userEvent from '@testing-library/user-event'
-import { bossesMock } from '../../__tests__/mock'
+import { bossesMock } from './mock'
 import BossCard from '..'
 
 const [, valorcrest, apprentice, rotworm, zomba, masher] = bossesMock
@@ -22,23 +22,6 @@ describe('<BossCard />', () => {
     )
 
     expect(screen.getByRole('none')).toBeInTheDocument()
-  })
-
-  test('should be pinned/unpinned', () => {
-    const { rerender } = renderWithProviders(
-      <BossCard bossStats={valorcrest} {...pinProps} />,
-    )
-
-    expect(pinProps.onPin).toHaveBeenCalledTimes(0)
-    userEvent.click(screen.getByRole('button', { name: 'Favorite this boss' }))
-    expect(pinProps.onPin).toHaveBeenCalledTimes(1)
-
-    rerender(<BossCard bossStats={valorcrest} pinned onPin={pinProps.onPin} />)
-
-    userEvent.click(
-      screen.getByRole('button', { name: 'Unfavorite this boss' }),
-    )
-    expect(pinProps.onPin).toHaveBeenCalledTimes(2)
   })
 
   test('should be clickable', () => {

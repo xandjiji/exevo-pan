@@ -1,6 +1,7 @@
 import { filterSchema } from 'shared-utils/dist/contracts/Filters/schemas'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
+import { premiumBosses } from 'Constants'
 
 export const proTagsSet = new Set([
   tagsDictionary.soulwarAvailable,
@@ -49,3 +50,13 @@ export const pluckPremiumParameters = (searchParams: URLSearchParams) => {
     }
   }
 }
+
+export const pluckPremiumBossData = (
+  bossChances: BossChances,
+): BossChances => ({
+  ...bossChances,
+  bosses: [
+    ...premiumBosses.fallbackData,
+    ...bossChances.bosses.filter(({ name }) => !premiumBosses.set.has(name)),
+  ],
+})

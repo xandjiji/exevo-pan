@@ -19,9 +19,11 @@ import {
   NotificationDialog,
   SettingsDialog,
   LogHistory,
+  CheckedBosses,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
+import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
@@ -53,7 +55,10 @@ export default function GuildPage({
 
   const [isEditOpen, setIsEditOpen] = useState(false)
   const [isApplyOpen, setIsApplyOpen] = useState(false)
-  const [isNotificationOpen, setIsNotificationOpen] = useState(false)
+  const [isNotificationOpen, setIsNotificationOpen] = useState<{
+    isOpen: boolean
+    defaultBoss?: string
+  }>({ isOpen: false })
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
@@ -121,13 +126,14 @@ export default function GuildPage({
               isEditor,
               isApprover,
               setGuildData,
+              checkedBosses,
             }) => (
               <>
                 <GuildHero guild={guild} memberCount={members.length} />
 
-                <div className="inner-container z-1 relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px]">
+                <div className="z-1 inner-container relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px] lg:w-[768px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-                  <div className="flex flex-wrap items-center  justify-end gap-6">
+                  <div className="flex flex-wrap items-center justify-end gap-6">
                     {isMember && (
                       <>
                         <Button
@@ -161,15 +167,20 @@ export default function GuildPage({
                       <>
                         <Button
                           className="flex items-center gap-2"
-                          onClick={() => setIsNotificationOpen(true)}
+                          onClick={() =>
+                            setIsNotificationOpen({ isOpen: true })
+                          }
                         >
                           <BlogIcon className="-ml-1" />
                           {i18n.notificate}
                         </Button>
-                        {isNotificationOpen && (
+                        {isNotificationOpen.isOpen && (
                           <NotificationDialog
                             guildId={guild.id}
-                            onClose={() => setIsNotificationOpen(false)}
+                            defaultBoss={isNotificationOpen.defaultBoss}
+                            onClose={() =>
+                              setIsNotificationOpen({ isOpen: false })
+                            }
                           />
                         )}
                       </>
@@ -228,6 +239,30 @@ export default function GuildPage({
                     currentMember={currentMember}
                     isPrivate={guild.private && !EXEVO_PAN_ADMIN}
                   />
+
+                  {(isMember || EXEVO_PAN_ADMIN) && !!currentMember && (
+                    <CheckedBosses
+                      guildId={guild.id}
+                      checkedBosses={checkedBosses}
+                      currentMember={currentMember}
+                      onNotify={(defaultBoss) =>
+                        setIsNotificationOpen({ isOpen: true, defaultBoss })
+                      }
+                      onCheck={(checkData) =>
+                        setGuildData((prev) => ({
+                          checkedBosses: prev.checkedBosses.map((boss) =>
+                            boss.name === checkData.boss
+                              ? {
+                                  ...boss,
+                                  checkedBy: checkData.checkedBy.name,
+                                  checkedAt: checkData.checkedAt,
+                                }
+                              : boss,
+                          ),
+                        }))
+                      }
+                    />
+                  )}
 
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <Tabs.Group>
@@ -294,11 +329,20 @@ export const getServerSideProps: GetServerSideProps = async ({
   const { guildMembers, guildApplications, messageBoard, ...rest } = guild
 
   const isMember = guildMembers.some(({ userId }) => userId === token?.id)
+  const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
+
+  const checkedBosses: CheckedBoss[] = hasMemberPrivilege
+    ? await BossesClient.fetchCheckedBosses({
+        isPro: token?.proStatus ?? false,
+        guildId: guild.id,
+        server: guild.server,
+      })
+    : []
 
   const guildData: GuildData = {
     guild: {
       ...rest,
-      messageBoard: isMember || EXEVO_PAN_ADMIN ? messageBoard : null,
+      messageBoard: hasMemberPrivilege ? messageBoard : null,
     },
     members:
       guild.private && !isMember && !EXEVO_PAN_ADMIN
@@ -313,7 +357,8 @@ export const getServerSideProps: GetServerSideProps = async ({
             blacklistedBosses: '',
           }))
         : guildMembers,
-    applications: isMember || EXEVO_PAN_ADMIN ? guildApplications : [],
+    applications: hasMemberPrivilege ? guildApplications : [],
+    checkedBosses,
   }
 
   return {
