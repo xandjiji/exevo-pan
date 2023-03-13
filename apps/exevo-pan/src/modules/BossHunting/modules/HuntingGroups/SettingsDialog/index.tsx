@@ -29,7 +29,7 @@ const AlertButton = ({
     type="button"
     className={clsx(
       className,
-      'text-onAlert cursor-pointer font-bold underline underline-offset-2',
+      'cursor-pointer font-bold underline underline-offset-2',
     )}
     {...props}
   />
@@ -101,6 +101,7 @@ const SettingsDialog = ({
                   {templateMessage(i18n.testNotification, {
                     button: (
                       <AlertButton
+                        className="text-primaryHighlight"
                         onClick={() =>
                           testMyNotification.mutate({
                             title: i18n.sampleNotification.title,
@@ -116,7 +117,10 @@ const SettingsDialog = ({
                 <p>
                   {templateMessage(i18n.retryRegistration, {
                     button: (
-                      <AlertButton onClick={registerDevice}>
+                      <AlertButton
+                        onClick={registerDevice}
+                        className="text-primaryHighlight"
+                      >
                         {i18n.retry}
                       </AlertButton>
                     ),
@@ -126,7 +130,10 @@ const SettingsDialog = ({
             ) : (
               templateMessage(i18n.enableNotifications, {
                 button: (
-                  <AlertButton onClick={registerDevice}>
+                  <AlertButton
+                    onClick={registerDevice}
+                    className="text-onAlert"
+                  >
                     {i18n.enableButton}
                   </AlertButton>
                 ),
