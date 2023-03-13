@@ -691,3 +691,32 @@ export const listGuildLog = authedProcedure
       return result
     },
   )
+
+export const markCheckedBoss = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+      boss: z.string(),
+    }),
+  )
+  .mutation(async ({ ctx: { token }, input: { guildId, boss } }) => {
+    const userId = token.id
+
+    if (!bossSet.has(boss)) {
+      throw new TRPCError({
+        code: 'BAD_REQUEST',
+        message: `Unexpected '${boss}' as a checked boss`,
+      })
+    }
+
+    const requesterMember = await findGuildMember({ guildId, userId })
+
+    const result = await prisma.bossCheck.upsert({
+      where: { boss_guildId: { boss, guildId } },
+      create: { guildId, memberId: requesterMember.id, boss },
+      update: { memberId: requesterMember.id },
+      include: { checkedBy: { select: { name: true } } },
+    })
+
+    return result
+  })
