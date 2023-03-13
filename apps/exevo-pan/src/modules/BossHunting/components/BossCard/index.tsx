@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { SpritePortrait, RareFrame } from 'components/Atoms'
-import { InfoTooltip, Tooltip, ClientComponent } from 'components/Organisms'
+import { InfoTooltip, Tooltip } from 'components/Organisms'
 import { loadBossSrc } from 'utils'
 import useTimeAgo from './useTimeAgo'
 import { formatChance, getChanceClass } from './utils'
@@ -10,9 +10,7 @@ import { BossCardProps } from './types'
 const BossCard = ({
   premium = false,
   bossStats,
-  actionIcon,
-  action,
-  actionLabel,
+  cornerElement,
   className,
   ...props
 }: BossCardProps) => {
@@ -145,20 +143,7 @@ const BossCard = ({
         )}
       </div>
 
-      {!!action && (
-        <button
-          type="button"
-          title={actionLabel}
-          aria-label={actionLabel}
-          className="clickable ml-auto grid place-items-center self-start rounded p-1"
-          onClick={(e) => {
-            e.stopPropagation()
-            action(name)
-          }}
-        >
-          <ClientComponent>{actionIcon}</ClientComponent>
-        </button>
-      )}
+      {cornerElement}
     </li>
   )
 }

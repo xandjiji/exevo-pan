@@ -5,7 +5,7 @@ import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { trpc } from 'lib/trpc'
 import NextLink from 'next/link'
 import EmptyState from 'components/EmptyState'
-import { ChipGroup } from 'components/Organisms'
+import { ChipGroup, ClientComponent } from 'components/Organisms'
 import { PinIcon } from 'assets/svgs'
 import { routes, premiumBosses } from 'Constants'
 import { BossCard } from '../../../../components'
@@ -105,25 +105,36 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
         <ul className="grid gap-4 sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2 2xl:grid-cols-3">
           {list.map((bossStats) => {
             const isPinned = pinnedBosses.includes(bossStats.name)
+            const pinLabel =
+              translations.bossTracker.BossGrid[isPinned ? 'unpin' : 'pin']
 
             return (
               <BossCard
                 key={bossStats.name}
                 premium={premiumBosses.set.has(bossStats.name)}
                 bossStats={bossStats}
-                actionLabel={
-                  translations.bossTracker.BossGrid[isPinned ? 'unpin' : 'pin']
+                cornerElement={
+                  <button
+                    type="button"
+                    title={pinLabel}
+                    aria-label={pinLabel}
+                    className="clickable ml-auto grid place-items-center self-start rounded p-1"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      toggleBoss(bossStats.name)
+                    }}
+                  >
+                    <ClientComponent>
+                      <PinIcon
+                        className={clsx(
+                          'h-4 w-4 transition-all',
+                          isPinned ? 'fill-primaryHighlight' : 'fill-separator',
+                        )}
+                        style={{ rotate: isPinned ? 'unset' : '45deg' }}
+                      />
+                    </ClientComponent>
+                  </button>
                 }
-                actionIcon={
-                  <PinIcon
-                    className={clsx(
-                      'h-4 w-4 transition-all',
-                      isPinned ? 'fill-primaryHighlight' : 'fill-separator',
-                    )}
-                    style={{ rotate: isPinned ? 'unset' : '45deg' }}
-                  />
-                }
-                action={toggleBoss}
                 onClick={() => setSelectedBoss(bossStats.name)}
               />
             )

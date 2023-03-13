@@ -37,11 +37,6 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
             key={boss.name}
             bossStats={boss}
             premium={premiumBosses.set.has(boss.name)}
-            actionLabel="Mark as checked"
-            action={() => {}}
-            actionIcon={
-              <ViewedIcon className="fill-primaryHighlight h-5 w-5" />
-            }
           />
         ))}
       </div>
