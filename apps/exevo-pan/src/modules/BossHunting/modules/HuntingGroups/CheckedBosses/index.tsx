@@ -33,15 +33,10 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
   )
 
   const checkedTimeAgo = useTimeAgo()
-  console.log(checkedTimeAgo(new Date(+new Date() - MILLISECONDS_IN.HOUR * 2)))
 
   return (
     <section>
       <h4 className="mb-4">Checked bosses</h4>
-
-      <h4>
-        {/* {checkedTimeAgo(new Date(+new Date() - MILLISECONDS_IN.HOUR * 2))} */}
-      </h4>
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
         {bossList.map((boss) => (
