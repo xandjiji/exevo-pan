@@ -13,7 +13,9 @@ export const useTimeAgo = () => {
   } = useTranslations()
 
   return useCallback(
-    (pastDate: Date): string => {
+    (pastDate?: Date): string => {
+      if (!pastDate) return ''
+
       const millisecondsDiff = Math.abs(+new Date() - +pastDate)
 
       if (millisecondsDiff < MILLISECONDS_IN.MINUTE * 2) {

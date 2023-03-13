@@ -11,6 +11,7 @@ const BossCard = ({
   premium = false,
   bossStats,
   cornerElement,
+  bottomElement,
   className,
   ...props
 }: BossCardProps) => {
@@ -141,6 +142,8 @@ const BossCard = ({
             )}
           </>
         )}
+
+        {bottomElement}
       </div>
 
       {cornerElement}
