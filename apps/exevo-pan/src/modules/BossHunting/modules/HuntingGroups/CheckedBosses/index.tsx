@@ -13,7 +13,7 @@ import { BossCard, BossDialog } from '../../../components'
 
 /* @ ToDo:
 
-- hide (recently checked/my ignored bosses)
+- hide (my ignored bosses)
 - accordion?
 - testes <BossCard />
 
@@ -36,34 +36,51 @@ const CheckedBosses = ({
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
   const [bossQuery, setBossQuery] = useState('')
   const [hideNoChance, setHideNoChance] = useState(false)
+  const [hideRecentlyChecked, setHideRecentlyChecked] = useState(false)
+
+  const checkedTimeAgo = useTimeAgo()
+
+  const transformedList = useMemo(
+    () =>
+      checkedBosses.map((item) => ({
+        ...item,
+        lastChecked: checkedTimeAgo(item.checkedAt),
+      })),
+    [checkedBosses, checkedTimeAgo],
+  )
 
   const bossList = useMemo(
     () =>
-      [...checkedBosses]
-        .filter(({ name, currentChance, daysLeftForPossibleSpawns }) => {
-          if (bossQuery && !name.toLowerCase().includes(bossQuery)) {
-            return false
-          }
-
-          if (hideNoChance) {
-            if (daysLeftForPossibleSpawns) {
-              if (
-                !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
-              ) {
-                return false
-              }
-            } else if (!currentChance) {
+      [...transformedList]
+        .filter(
+          ({ name, currentChance, daysLeftForPossibleSpawns, lastChecked }) => {
+            if (bossQuery && !name.toLowerCase().includes(bossQuery)) {
               return false
             }
-          }
 
-          return true
-        })
+            if (hideNoChance) {
+              if (daysLeftForPossibleSpawns) {
+                if (
+                  !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
+                ) {
+                  return false
+                }
+              } else if (!currentChance) {
+                return false
+              }
+            }
+
+            if (hideRecentlyChecked && lastChecked?.recent) {
+              return false
+            }
+
+            return true
+          },
+        )
         .sort(sortBossesBy.chance),
-    [checkedBosses, bossQuery, hideNoChance],
+    [transformedList, bossQuery, hideNoChance, hideRecentlyChecked],
   )
 
-  const checkedTimeAgo = useTimeAgo()
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
     onSuccess: onCheck,
   })
@@ -87,76 +104,76 @@ const CheckedBosses = ({
             checked={hideNoChance}
             onClick={() => setHideNoChance((prev) => !prev)}
           />
-          <Checkbox label="Hide recently checked" />
+          <Checkbox
+            label="Hide recently checked"
+            checked={hideRecentlyChecked}
+            onClick={() => setHideRecentlyChecked((prev) => !prev)}
+          />
           <Checkbox label="Hide my ignored bosses" />
         </div>
       </div>
 
       <div className="grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
-        {bossList.map((boss) => {
-          const lastChecked = checkedTimeAgo(boss.checkedAt)
-
-          return (
-            <BossCard
-              key={boss.name}
-              bossStats={boss}
-              premium={premiumBosses.set.has(boss.name)}
-              cornerElement={
-                <div className="ml-auto self-start">
-                  <Menu
-                    offset={[0, 8]}
-                    items={[
-                      {
-                        label: 'Details',
-                        icon: ExpandIcon,
-                        onSelect: () => setSelectedBoss(boss.name),
-                      },
-                      {
-                        label: 'Notify group',
-                        icon: BlogIcon,
-                        onSelect: () => onNotify?.(boss.name),
-                      },
-                      {
-                        label: 'Mark as checked',
-                        icon: ViewedIcon,
-                        onSelect: () =>
-                          toast.promise(
-                            markCheckedBoss.mutateAsync({
-                              boss: boss.name,
-                              guildId,
-                            }),
-                            {
-                              success: `${boss.name} was marked as checked!`,
-                              error: 'Oops! Something went wrong',
-                              loading: 'Loading',
-                            },
-                          ),
-                      },
-                    ]}
-                  >
-                    <MoreIcon className="fill-onSurface h-4 w-4" />
-                  </Menu>
-                </div>
-              }
-              bottomElement={
-                lastChecked ? (
-                  <p
-                    className="flex items-center gap-1"
-                    title={`Last time checked (by ${boss.checkedBy})`}
-                  >
-                    <ViewedIcon
-                      className={clsx(
-                        'mr-0.5 h-4 w-4',
-                        lastChecked.recent ? 'fill-separator' : 'fill-red',
-                      )}
-                    />
-                    <span>{lastChecked.readable}</span>
-                  </p>
-                ) : undefined
-              }
-            />
-          )
-        })}
+        {bossList.map((boss) => (
+          <BossCard
+            key={boss.name}
+            bossStats={boss}
+            premium={premiumBosses.set.has(boss.name)}
+            cornerElement={
+              <div className="ml-auto self-start">
+                <Menu
+                  offset={[0, 8]}
+                  items={[
+                    {
+                      label: 'Details',
+                      icon: ExpandIcon,
+                      onSelect: () => setSelectedBoss(boss.name),
+                    },
+                    {
+                      label: 'Notify group',
+                      icon: BlogIcon,
+                      onSelect: () => onNotify?.(boss.name),
+                    },
+                    {
+                      label: 'Mark as checked',
+                      icon: ViewedIcon,
+                      onSelect: () =>
+                        toast.promise(
+                          markCheckedBoss.mutateAsync({
+                            boss: boss.name,
+                            guildId,
+                          }),
+                          {
+                            success: `${boss.name} was marked as checked!`,
+                            error: 'Oops! Something went wrong',
+                            loading: 'Loading',
+                          },
+                        ),
+                    },
+                  ]}
+                >
+                  <MoreIcon className="fill-onSurface h-4 w-4" />
+                </Menu>
+              </div>
+            }
+            bottomElement={
+              boss.lastChecked ? (
+                <p
+                  className="flex items-center gap-1"
+                  title={`Last time checked (by ${boss.checkedBy})`}
+                >
+                  <ViewedIcon
+                    className={clsx(
+                      'mr-0.5 h-4 w-4',
+                      boss.lastChecked.recent ? 'fill-separator' : 'fill-red',
+                    )}
+                  />
+                  <span>{boss.lastChecked.readable}</span>
+                </p>
+              ) : undefined
+            }
+          />
+        ))}
       </div>
 
       <BossDialog
