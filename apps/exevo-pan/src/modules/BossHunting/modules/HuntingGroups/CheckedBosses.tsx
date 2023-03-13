@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react'
 import { sortBossesBy } from 'utils'
 import { Menu } from 'components/Organisms'
-import { MoreIcon, ExpandIcon, ViewedIcon } from 'assets/svgs'
+import { MoreIcon, ExpandIcon, ViewedIcon, BlogIcon } from 'assets/svgs'
 import { premiumBosses } from 'Constants'
 import { BossCard, BossDialog } from '../../components'
 
@@ -9,6 +9,7 @@ import { BossCard, BossDialog } from '../../components'
 
 - Last checked
 - action
+- notify
 - sort
 - search
 - premium
@@ -43,11 +44,20 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
             cornerElement={
               <div className="ml-auto self-start">
                 <Menu
+                  offset={[0, 8]}
                   items={[
                     {
                       label: 'Details',
                       icon: ExpandIcon,
                       onSelect: () => setSelectedBoss(boss.name),
+                    },
+                    {
+                      label: 'Notify group',
+                      icon: BlogIcon,
+                    },
+                    {
+                      label: 'Mark as checked',
+                      icon: ViewedIcon,
                     },
                   ]}
                 >
