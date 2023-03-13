@@ -13,13 +13,6 @@ import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
 
-/* @ ToDo:
-
-- testes <BossCard />
-
-- i18n
-*/
-
 type CheckedBossesProps = {
   guildId: string
   checkedBosses: CheckedBoss[]
