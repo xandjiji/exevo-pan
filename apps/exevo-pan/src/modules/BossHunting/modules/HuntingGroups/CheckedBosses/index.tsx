@@ -2,17 +2,18 @@ import { useState, useMemo, useCallback } from 'react'
 import { sortBossesBy } from 'utils'
 import { Menu } from 'components/Organisms'
 import { MoreIcon, ExpandIcon, ViewedIcon, BlogIcon } from 'assets/svgs'
+import { trpc } from 'lib/trpc'
+import { toast } from 'react-hot-toast'
 import { premiumBosses } from 'Constants'
+import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 
 /* @ ToDo:
 
-- action
 - notify
 - sort
 - search
-- premium
 - accordion?
 - testes <BossCard />
 
@@ -20,10 +21,16 @@ import { BossCard, BossDialog } from '../../../components'
 */
 
 type CheckedBossesProps = {
+  guildId: string
   checkedBosses: CheckedBoss[]
+  onCheck: (checkData: TRPCRouteOutputs['markCheckedBoss']) => void
 }
 
-const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
+const CheckedBosses = ({
+  guildId,
+  checkedBosses,
+  onCheck,
+}: CheckedBossesProps) => {
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
 
   const bossList = useMemo(
@@ -32,6 +39,9 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
   )
 
   const checkedTimeAgo = useTimeAgo()
+  const markCheckedBoss = trpc.markCheckedBoss.useMutation({
+    onSuccess: onCheck,
+  })
 
   return (
     <section>
@@ -63,6 +73,18 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
                       {
                         label: 'Mark as checked',
                         icon: ViewedIcon,
+                        onSelect: () =>
+                          toast.promise(
+                            markCheckedBoss.mutateAsync({
+                              boss: boss.name,
+                              guildId,
+                            }),
+                            {
+                              success: `${boss.name} was marked as checked!`,
+                              error: 'Oops! Something went wrong',
+                              loading: 'Loading',
+                            },
+                          ),
                       },
                     ]}
                   >
@@ -74,10 +96,10 @@ const CheckedBosses = ({ checkedBosses }: CheckedBossesProps) => {
                 lastChecked ? (
                   <p
                     className="flex items-center gap-1"
-                    title="Last time checked"
+                    title={`Last time checked (by ${boss.checkedBy})`}
                   >
                     <ViewedIcon className="fill-primaryHighlight mr-0.5 h-4 w-4" />
-                    <span>3 minutes ago</span>
+                    <span>{lastChecked}</span>
                   </p>
                 ) : undefined
               }

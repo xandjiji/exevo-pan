@@ -233,7 +233,23 @@ export default function GuildPage({
                   />
 
                   {(isMember || EXEVO_PAN_ADMIN) && (
-                    <CheckedBosses checkedBosses={checkedBosses} />
+                    <CheckedBosses
+                      guildId={guild.id}
+                      checkedBosses={checkedBosses}
+                      onCheck={(checkData) =>
+                        setGuildData((prev) => ({
+                          checkedBosses: prev.checkedBosses.map((boss) =>
+                            boss.name === checkData.boss
+                              ? {
+                                  ...boss,
+                                  checkedBy: checkData.checkedBy.name,
+                                  checkedAt: checkData.checkedAt,
+                                }
+                              : boss,
+                          ),
+                        }))
+                      }
+                    />
                   )}
 
                   {(isMember || EXEVO_PAN_ADMIN) && (
