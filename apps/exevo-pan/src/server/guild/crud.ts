@@ -17,7 +17,7 @@ import type {
 import {
   utils as blacklistUtils,
   bossSet,
-} from '../../modules/BossHunting/modules/HuntingGroups/SettingsDialog/useBlacklist'
+} from '../../modules/BossHunting/blacklist'
 import { can } from './permissions'
 
 type UniqueMemberArgs = (
