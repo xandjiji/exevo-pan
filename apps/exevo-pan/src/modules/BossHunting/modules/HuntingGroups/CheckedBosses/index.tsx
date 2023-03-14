@@ -17,7 +17,7 @@ import { utils } from '../../../blacklist'
 type CheckedBossesProps = {
   guildId: string
   checkedBosses: CheckedBoss[]
-  currentMember: GuildMember
+  currentMember?: GuildMember
   onCheck?: (checkData: TRPCRouteOutputs['markCheckedBoss']) => void
   onNotify?: (boss: string) => void
 }
@@ -52,7 +52,7 @@ const CheckedBosses = ({
   )
 
   const blacklist = useMemo(
-    () => utils.split(currentMember.blacklistedBosses ?? ''),
+    () => utils.split(currentMember?.blacklistedBosses ?? ''),
     [currentMember],
   )
 
