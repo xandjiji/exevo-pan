@@ -7,7 +7,7 @@ export const revalidatePage = adminProcedure
   .mutation(async ({ input }) => {
     const endpoint = new URL(`${links.CANONICAL}${endpoints.REVALIDATE_PAGE}`)
     endpoint.search = new URLSearchParams().toString()
-    endpoint.searchParams.set('route', input ?? '')
+    endpoint.searchParams.set('route', input ?? '/')
     endpoint.searchParams.set('secret', process.env.REVALIDATION_AUTH as string)
 
     try {

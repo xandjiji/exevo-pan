@@ -1,7 +1,7 @@
 import { endpoints } from 'Constants'
 
 export default class PageRevalidation {
-  static async revalidatePage(route = ''): Promise<null> {
+  static async revalidatePage(route = '/'): Promise<null> {
     const isDev =
       process.env.NODE_ENV === 'development' &&
       !process.env.NEXT_PUBLIC_FRONT_DEV

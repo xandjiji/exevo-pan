@@ -18,13 +18,17 @@ export default async (
     return
   }
 
-  const route = request.query.route ?? ''
+  const route = request.query.route ?? '/'
   const revalidateRoute = async (locale: RegisteredLocale): Promise<void> => {
-    const routeToRevalidate = `${addLocalePrefix(locale)}/${route}`.replaceAll(
+    let routeToRevalidate = `${addLocalePrefix(locale)}/${route}`.replaceAll(
       '//',
       '/',
     )
 
+    const lastCharacter = routeToRevalidate.slice(-1)
+    if (lastCharacter === '/' && routeToRevalidate.length > 1) {
+      routeToRevalidate = routeToRevalidate.slice(0, -1)
+    }
     response.revalidate(routeToRevalidate)
   }
 
