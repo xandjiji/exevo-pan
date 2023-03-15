@@ -105,10 +105,10 @@ const PaymentList = () => {
   const revalidate = trpc.revalidatePage.useMutation()
 
   const patch = trpc.patchAuctionHighlights.useMutation({
-    onSuccess: ({ nickname }) => {
+    onSuccess: async ({ nickname }) => {
       setAlertMessage({ nickname, message: 'was updated' })
       resetDates()
-      revalidate.mutateAsync()
+      await revalidate.mutateAsync()
       list.refetch()
       toast.success(`${nickname} was updated`)
     },
@@ -116,10 +116,10 @@ const PaymentList = () => {
   })
 
   const remove = trpc.deleteAuctionHighlight.useMutation({
-    onSuccess: ({ nickname }) => {
+    onSuccess: async ({ nickname }) => {
       setAlertMessage({ nickname, message: 'was deleted' })
       setToDelete(EMPTY_DELETION)
-      revalidate.mutateAsync()
+      await revalidate.mutateAsync()
       list.refetch()
       toast.success(`${nickname} was removed`)
     },
