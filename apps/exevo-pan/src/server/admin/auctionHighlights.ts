@@ -1,8 +1,13 @@
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
+import { PageRevalidationClient } from 'services/server'
+import { routes } from 'Constants'
 import type { HighlightedAuction } from '@prisma/client'
 import { prisma } from 'lib/prisma'
 import { oneMonthAgo } from './utils'
+
+const revalidateHomepage = () =>
+  PageRevalidationClient.revalidatePage(routes.HOME).catch(console.log)
 
 export const listAuctionHighlights = adminProcedure.query(async () => {
   const result = await prisma.highlightedAuction.findMany({
@@ -31,6 +36,7 @@ export const patchAuctionHighlights = adminProcedure
       where: { id },
       data,
     })
+    await revalidateHomepage()
 
     return result
   })
@@ -39,6 +45,7 @@ export const deleteAuctionHighlight = adminProcedure
   .input(z.string())
   .mutation(async ({ input: id }) => {
     const result = await prisma.highlightedAuction.delete({ where: { id } })
+    await revalidateHomepage()
 
     return result
   })
