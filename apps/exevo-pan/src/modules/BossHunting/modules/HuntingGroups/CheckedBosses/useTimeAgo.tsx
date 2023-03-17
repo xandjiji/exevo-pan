@@ -29,7 +29,7 @@ export const useTimeAgo = () => {
           readable: `${extractTimeUnits(millisecondsDiff, 'MINUTE')} ${
             i18n.minutesAgo
           }`,
-          recent: true,
+          recent: millisecondsDiff <= MILLISECONDS_IN.HOUR / 2,
         }
       }
 
