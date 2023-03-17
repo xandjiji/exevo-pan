@@ -231,15 +231,6 @@ export default function GuildPage({
                     />
                   )}
 
-                  <MemberList
-                    title={i18n.members}
-                    guildName={guild.name}
-                    members={members}
-                    isEditor={isEditor || EXEVO_PAN_ADMIN}
-                    currentMember={currentMember}
-                    isPrivate={guild.private && !EXEVO_PAN_ADMIN}
-                  />
-
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <CheckedBosses
                       guildId={guild.id}
@@ -250,6 +241,15 @@ export default function GuildPage({
                       }
                     />
                   )}
+
+                  <MemberList
+                    title={i18n.members}
+                    guildName={guild.name}
+                    members={members}
+                    isEditor={isEditor || EXEVO_PAN_ADMIN}
+                    currentMember={currentMember}
+                    isPrivate={guild.private && !EXEVO_PAN_ADMIN}
+                  />
 
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <Tabs.Group>
