@@ -202,5 +202,6 @@ export default {
     minutesAgo: 'minutos atrás',
     hourAgo: 'hora atrás',
     hoursAgo: 'horas atrás',
+    showMore: 'Mostrar mais',
   },
 }

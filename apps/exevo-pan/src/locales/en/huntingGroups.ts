@@ -175,7 +175,7 @@ export default {
     accept: '{{actor}} approved {{target}} application',
     notification: '{{actor}} sighted a {{boss}}',
     emptyState: 'No log history',
-    loadMore: 'Load more',
+    loadMore: 'Show more',
   },
   NotificationDialog: {
     heading: 'Notificate group',
@@ -201,5 +201,6 @@ export default {
     minutesAgo: 'minutes ago',
     hourAgo: 'hour ago',
     hoursAgo: 'hours ago',
+    showMore: 'Show more',
   },
 }
