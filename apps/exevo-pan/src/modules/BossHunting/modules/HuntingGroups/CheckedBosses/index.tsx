@@ -15,6 +15,7 @@ import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { premiumBosses } from 'Constants'
 import type { GuildMember } from '@prisma/client'
+import { useRecentlyUpdated } from './useRecentlyUpdated'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
@@ -48,12 +49,15 @@ const CheckedBosses = ({
   const [hideBlacklisted, setHideBlacklisted] = useState(false)
 
   const checkedTimeAgo = useTimeAgo()
+  const { recentlyUpdatedBosses, onFreshData } =
+    useRecentlyUpdated(initialCheckedBosses)
 
   const checkedBosses = trpc.listCheckedBosses.useQuery(
     { guildId },
     {
       initialData: initialCheckedBosses,
       refetchInterval: MILLISECONDS_IN.MINUTE,
+      onSuccess: onFreshData,
     },
   )
 
@@ -165,6 +169,9 @@ const CheckedBosses = ({
             key={boss.name}
             bossStats={boss}
             premium={premiumBosses.set.has(boss.name)}
+            className={clsx(
+              recentlyUpdatedBosses.has(boss.name) && 'animate-zoomInAndOut',
+            )}
             cornerElement={
               <div className="ml-auto self-start">
                 <Menu
