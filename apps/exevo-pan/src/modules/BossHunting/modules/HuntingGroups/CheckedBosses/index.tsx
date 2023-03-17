@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useTranslations, templateString } from 'contexts/useTranslation'
 import { useState, useMemo, useCallback } from 'react'
 import { Input, Checkbox, Button } from 'components/Atoms'
-import { sortBossesBy } from 'utils'
+import { sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { Menu } from 'components/Organisms'
 import {
   MoreIcon,
@@ -14,7 +14,6 @@ import {
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { premiumBosses } from 'Constants'
-import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { GuildMember } from '@prisma/client'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
@@ -24,17 +23,15 @@ const INITIAL_DISPLAYED_COUNT = 4
 
 type CheckedBossesProps = {
   guildId: string
-  checkedBosses: CheckedBoss[]
+  initialCheckedBosses: CheckedBoss[]
   currentMember?: GuildMember
-  onCheck?: (checkData: TRPCRouteOutputs['markCheckedBoss']) => void
   onNotify?: (boss: string) => void
 }
 
 const CheckedBosses = ({
   guildId,
-  checkedBosses,
+  initialCheckedBosses,
   currentMember,
-  onCheck,
   onNotify,
 }: CheckedBossesProps) => {
   const {
@@ -52,13 +49,23 @@ const CheckedBosses = ({
 
   const checkedTimeAgo = useTimeAgo()
 
+  const checkedBosses = trpc.listCheckedBosses.useQuery(
+    { guildId },
+    {
+      initialData: initialCheckedBosses,
+      refetchInterval: MILLISECONDS_IN.MINUTE,
+    },
+  )
+
+  const checkedList = checkedBosses.data
+
   const transformedList = useMemo(
     () =>
-      checkedBosses.map((item) => ({
+      checkedList.map((item) => ({
         ...item,
         lastChecked: checkedTimeAgo(item.checkedAt),
       })),
-    [checkedBosses, checkedTimeAgo],
+    [checkedList, checkedTimeAgo],
   )
 
   const blacklist = useMemo(
@@ -112,12 +119,17 @@ const CheckedBosses = ({
   )
 
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
-    onSuccess: onCheck,
+    onSuccess: () => checkedBosses.refetch(),
   })
 
   return (
     <section>
-      <h4 className="mb-4 text-xl">{i18n.checkedBosses}</h4>
+      <h4 className="mb-4 text-xl">
+        {i18n.checkedBosses}{' '}
+        {checkedBosses.isFetching && (
+          <div role="alert" className="loading-spinner ml-2 h-4 w-4" />
+        )}
+      </h4>
 
       <div className="my-4 flex flex-col gap-2 md:flex-row md:items-end md:gap-6">
         <Input

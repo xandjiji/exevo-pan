@@ -243,23 +243,10 @@ export default function GuildPage({
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <CheckedBosses
                       guildId={guild.id}
-                      checkedBosses={checkedBosses}
+                      initialCheckedBosses={checkedBosses}
                       currentMember={currentMember}
                       onNotify={(defaultBoss) =>
                         setIsNotificationOpen({ isOpen: true, defaultBoss })
-                      }
-                      onCheck={(checkData) =>
-                        setGuildData((prev) => ({
-                          checkedBosses: prev.checkedBosses.map((boss) =>
-                            boss.name === checkData.boss
-                              ? {
-                                  ...boss,
-                                  checkedBy: checkData.checkedBy.name,
-                                  checkedAt: checkData.checkedAt,
-                                }
-                              : boss,
-                          ),
-                        }))
                       }
                     />
                   )}

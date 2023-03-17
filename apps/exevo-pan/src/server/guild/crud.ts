@@ -6,6 +6,7 @@ import { prisma } from 'lib/prisma'
 import {
   PageRevalidationClient,
   DeviceNotificationClient,
+  BossesClient,
 } from 'services/server'
 import { getGuildPermalink } from 'utils'
 import { avatar, guildValidationRules, routes } from 'Constants'
@@ -716,6 +717,32 @@ export const markCheckedBoss = authedProcedure
       create: { guildId, memberId: requesterMember.id, boss },
       update: { memberId: requesterMember.id },
       include: { checkedBy: { select: { name: true } } },
+    })
+
+    return result
+  })
+
+export const listCheckedBosses = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+    }),
+  )
+  .query(async ({ ctx: { token }, input: { guildId } }) => {
+    const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+    const requesterId = token.id
+    const isPro = token.proStatus
+
+    const { guild } = await throwIfForbiddenGuildRequest({
+      guildId,
+      requesterId,
+      EXEVO_PAN_ADMIN,
+    })
+
+    const result = await BossesClient.fetchCheckedBosses({
+      guildId,
+      isPro,
+      server: guild.server,
     })
 
     return result
