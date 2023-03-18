@@ -20,6 +20,7 @@ import { useRecentlyUpdated } from './useRecentlyUpdated'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
+import { isFromSameServerSave } from './utils'
 
 const INITIAL_DISPLAYED_COUNT = 4
 
@@ -66,10 +67,17 @@ const CheckedBosses = ({
 
   const transformedList = useMemo(
     () =>
-      checkedList.map((item) => ({
-        ...item,
-        lastChecked: checkedTimeAgo(item.checkedAt),
-      })),
+      checkedList.map((item) => {
+        const manuallyMarkedAsNoChance = item.lastSpawned
+          ? isFromSameServerSave(item.lastSpawned)
+          : false
+
+        return {
+          ...item,
+          lastChecked: checkedTimeAgo(item.checkedAt),
+          currentChance: manuallyMarkedAsNoChance ? 0 : item.currentChance,
+        }
+      }),
     [checkedList, checkedTimeAgo],
   )
 

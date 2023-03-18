@@ -43,6 +43,7 @@ export default class BossesClient {
               ...boss,
               checkedAt: lastCheck.checkedAt,
               checkedBy: lastCheck.checkedBy.name,
+              lastSpawned: lastCheck.lastSpawned ?? undefined,
             }
           : boss
       },
