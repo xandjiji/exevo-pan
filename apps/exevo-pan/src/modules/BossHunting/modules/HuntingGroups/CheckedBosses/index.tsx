@@ -250,7 +250,19 @@ const CheckedBosses = ({
               </div>
             }
             bottomElement={
-              boss.lastChecked ? (
+              boss.manuallyMarkedAsNoChance ? (
+                <p
+                  className="flex items-center gap-1"
+                  title={templateString(i18n.lastTimeChecked, {
+                    member: boss.checkedBy ?? '',
+                  })}
+                >
+                  <OutlineRemoveIcon className="fill-red mr-0.5 h-4 w-4" />
+                  {!!boss.lastChecked && (
+                    <span>{boss.lastChecked.readable}</span>
+                  )}
+                </p>
+              ) : boss.lastChecked ? (
                 <p
                   className="flex items-center gap-1"
                   title={templateString(i18n.lastTimeChecked, {
