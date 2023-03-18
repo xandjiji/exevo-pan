@@ -710,7 +710,7 @@ export const markCheckedBoss = authedProcedure
     z.object({
       guildId: z.string(),
       boss: z.string(),
-      lastSpawned: z.date().optional(),
+      lastSpawned: z.date().nullish(),
     }),
   )
   .mutation(

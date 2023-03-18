@@ -195,6 +195,7 @@ export default {
     notifyGroup: 'Notify group',
     markAsChecked: 'Mark as checked',
     markAsNoChance: 'Mark as no chance',
+    unmarkAsNoChance: 'Unmark as no chance',
     bossWasMarked: '{{boss}} was marked!',
     loading: 'Loading...',
     lastTimeChecked: 'Last time checked (by {{member}})',

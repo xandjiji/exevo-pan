@@ -10,12 +10,14 @@ import {
   ViewedIcon,
   OutlineRemoveIcon,
   BlogIcon,
+  UndoIcon,
   ChevronDownIcon,
 } from 'assets/svgs'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { premiumBosses } from 'Constants'
 import type { GuildMember } from '@prisma/client'
+import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { useRecentlyUpdated } from './useRecentlyUpdated'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
@@ -76,6 +78,7 @@ const CheckedBosses = ({
           ...item,
           lastChecked: checkedTimeAgo(item.checkedAt),
           currentChance: manuallyMarkedAsNoChance ? 0 : item.currentChance,
+          manuallyMarkedAsNoChance,
         }
       }),
     [checkedList, checkedTimeAgo],
@@ -136,12 +139,15 @@ const CheckedBosses = ({
   })
 
   const markBoss = useCallback(
-    (boss: string, noChance = false) =>
+    ({
+      boss,
+      lastSpawned = null,
+    }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) =>
       toast.promise(
         markCheckedBoss.mutateAsync({
           boss,
           guildId,
-          lastSpawned: noChance ? new Date() : undefined,
+          lastSpawned,
         }),
         {
           success: templateString(i18n.bossWasMarked, {
@@ -214,16 +220,28 @@ const CheckedBosses = ({
                       label: i18n.notifyGroup,
                       icon: BlogIcon,
                       onSelect: () => onNotify?.(boss.name),
+                      disabled: boss.manuallyMarkedAsNoChance,
                     },
                     {
-                      label: i18n.markAsNoChance,
-                      icon: OutlineRemoveIcon,
-                      onSelect: () => markBoss(boss.name, true),
+                      label: boss.manuallyMarkedAsNoChance
+                        ? i18n.unmarkAsNoChance
+                        : i18n.markAsNoChance,
+                      icon: boss.manuallyMarkedAsNoChance
+                        ? UndoIcon
+                        : OutlineRemoveIcon,
+                      onSelect: () =>
+                        markBoss({
+                          boss: boss.name,
+                          lastSpawned: boss.manuallyMarkedAsNoChance
+                            ? null
+                            : new Date(),
+                        }),
                     },
                     {
                       label: i18n.markAsChecked,
                       icon: ViewedIcon,
-                      onSelect: () => markBoss(boss.name),
+                      onSelect: () => markBoss({ boss: boss.name }),
+                      disabled: boss.manuallyMarkedAsNoChance,
                     },
                   ]}
                 >
