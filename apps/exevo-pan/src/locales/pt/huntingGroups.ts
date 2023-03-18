@@ -195,6 +195,7 @@ export default {
     details: 'Detalhes',
     notifyGroup: 'Notificar grupo',
     markAsChecked: 'Marcar como checado',
+    markAsNoChance: 'Marcar como sem chance',
     bossWasMarked: '{{boss}} foi marcado!',
     loading: 'Carregando...',
     lastTimeChecked: 'Última vez checado (por {{member}})',

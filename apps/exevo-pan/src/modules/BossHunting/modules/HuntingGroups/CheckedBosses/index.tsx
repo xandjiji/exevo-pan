@@ -208,7 +208,7 @@ const CheckedBosses = ({
                       onSelect: () => onNotify?.(boss.name),
                     },
                     {
-                      label: 'Mark as no chance',
+                      label: i18n.markAsNoChance,
                       icon: OutlineRemoveIcon,
                       onSelect: () => markBoss(boss.name, true),
                     },
