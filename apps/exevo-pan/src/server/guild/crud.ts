@@ -626,14 +626,26 @@ export const notifyGuildMembers = authedProcedure
     })
 
     if (requesterMember) {
-      await prisma.guildLogEntry.create({
-        data: {
-          type: 'NOTIFICATION',
-          guildId,
-          actionGuildMemberId: requesterMember.id,
-          metadata: boss,
-        },
-      })
+      await prisma.$transaction([
+        prisma.guildLogEntry.create({
+          data: {
+            type: 'NOTIFICATION',
+            guildId,
+            actionGuildMemberId: requesterMember.id,
+            metadata: boss,
+          },
+        }),
+        prisma.bossCheck.upsert({
+          where: { boss_guildId: { boss, guildId } },
+          create: {
+            guildId,
+            memberId: requesterMember.id,
+            boss,
+            lastSpawned: new Date(),
+          },
+          update: { memberId: requesterMember.id, lastSpawned: new Date() },
+        }),
+      ])
     }
 
     const result = await Promise.all(
@@ -698,29 +710,32 @@ export const markCheckedBoss = authedProcedure
     z.object({
       guildId: z.string(),
       boss: z.string(),
+      lastSpawned: z.date().optional(),
     }),
   )
-  .mutation(async ({ ctx: { token }, input: { guildId, boss } }) => {
-    const userId = token.id
+  .mutation(
+    async ({ ctx: { token }, input: { guildId, boss, lastSpawned } }) => {
+      const userId = token.id
 
-    if (!bossSet.has(boss)) {
-      throw new TRPCError({
-        code: 'BAD_REQUEST',
-        message: `Unexpected '${boss}' as a checked boss`,
+      if (!bossSet.has(boss)) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: `Unexpected '${boss}' as a checked boss`,
+        })
+      }
+
+      const requesterMember = await findGuildMember({ guildId, userId })
+
+      const result = await prisma.bossCheck.upsert({
+        where: { boss_guildId: { boss, guildId } },
+        create: { guildId, memberId: requesterMember.id, boss, lastSpawned },
+        update: { memberId: requesterMember.id, lastSpawned },
+        include: { checkedBy: { select: { name: true } } },
       })
-    }
 
-    const requesterMember = await findGuildMember({ guildId, userId })
-
-    const result = await prisma.bossCheck.upsert({
-      where: { boss_guildId: { boss, guildId } },
-      create: { guildId, memberId: requesterMember.id, boss },
-      update: { memberId: requesterMember.id },
-      include: { checkedBy: { select: { name: true } } },
-    })
-
-    return result
-  })
+      return result
+    },
+  )
 
 export const listCheckedBosses = authedProcedure
   .input(

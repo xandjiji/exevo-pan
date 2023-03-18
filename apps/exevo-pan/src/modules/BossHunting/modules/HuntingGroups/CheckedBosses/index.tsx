@@ -8,6 +8,7 @@ import {
   MoreIcon,
   ExpandIcon,
   ViewedIcon,
+  OutlineRemoveIcon,
   BlogIcon,
   ChevronDownIcon,
 } from 'assets/svgs'
@@ -126,6 +127,25 @@ const CheckedBosses = ({
     onSuccess: () => checkedBosses.refetch(),
   })
 
+  const markBoss = useCallback(
+    (boss: string, noChance = false) =>
+      toast.promise(
+        markCheckedBoss.mutateAsync({
+          boss,
+          guildId,
+          lastSpawned: noChance ? new Date() : undefined,
+        }),
+        {
+          success: templateString(i18n.bossWasMarked, {
+            boss,
+          }),
+          error: common.genericError,
+          loading: i18n.loading,
+        },
+      ),
+    [common, i18n, markCheckedBoss],
+  )
+
   return (
     <section>
       <h4 className="mb-4 text-xl">
@@ -188,22 +208,14 @@ const CheckedBosses = ({
                       onSelect: () => onNotify?.(boss.name),
                     },
                     {
+                      label: 'Mark as no chance',
+                      icon: OutlineRemoveIcon,
+                      onSelect: () => markBoss(boss.name, true),
+                    },
+                    {
                       label: i18n.markAsChecked,
                       icon: ViewedIcon,
-                      onSelect: () =>
-                        toast.promise(
-                          markCheckedBoss.mutateAsync({
-                            boss: boss.name,
-                            guildId,
-                          }),
-                          {
-                            success: templateString(i18n.bossWasMarked, {
-                              boss: boss.name,
-                            }),
-                            error: common.genericError,
-                            loading: i18n.loading,
-                          },
-                        ),
+                      onSelect: () => markBoss(boss.name),
                     },
                   ]}
                 >

@@ -194,7 +194,7 @@ export default {
     details: 'Details',
     notifyGroup: 'Notify group',
     markAsChecked: 'Mark as checked',
-    bossWasMarked: '{{boss}} was marked as checked!',
+    bossWasMarked: '{{boss}} was marked!',
     loading: 'Loading...',
     lastTimeChecked: 'Last time checked (by {{member}})',
     justChecked: 'just checked',

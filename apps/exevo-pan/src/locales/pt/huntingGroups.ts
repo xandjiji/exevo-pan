@@ -195,7 +195,7 @@ export default {
     details: 'Detalhes',
     notifyGroup: 'Notificar grupo',
     markAsChecked: 'Marcar como checado',
-    bossWasMarked: '{{boss}} foi marcado como checado!',
+    bossWasMarked: '{{boss}} foi marcado!',
     loading: 'Carregando...',
     lastTimeChecked: 'Última vez checado (por {{member}})',
     justChecked: 'recém checado',
