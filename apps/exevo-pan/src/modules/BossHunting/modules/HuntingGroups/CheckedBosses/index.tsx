@@ -204,7 +204,8 @@ const CheckedBosses = ({
             bossStats={boss}
             premium={premiumBosses.set.has(boss.name)}
             className={clsx(
-              recentlyUpdatedBosses.has(boss.name) && 'animate-zoomInAndOut',
+              recentlyUpdatedBosses.has(boss.name) &&
+                'animate-zoomInAndOut z-2 relative',
             )}
             cornerElement={
               <div className="ml-auto self-start">
@@ -285,7 +286,7 @@ const CheckedBosses = ({
         {!expanded && (
           <div
             role="none"
-            className="to-background absolute -bottom-2 -left-1 h-24 w-[calc(100%+16px)] bg-gradient-to-b from-transparent"
+            className="to-background z-1 absolute -bottom-2 -left-1 h-24 w-[calc(100%+16px)] bg-gradient-to-b from-transparent"
           />
         )}
       </div>
