@@ -24,6 +24,8 @@ export default {
       bidNotifications:
         'Marque um leilão e receba {{notifications}} quando ele receber lances',
       notifications: 'notificações',
+      privateGroups: 'Crie grupos {{private}} de boss hunting',
+      private: 'privados',
     },
     filtersTooltip: {
       tc: 'Tibia Coins investidos',

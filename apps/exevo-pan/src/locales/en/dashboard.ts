@@ -23,6 +23,8 @@ export default {
       bidNotifications:
         'Track auctions receiving {{notifications}} when they are bidded',
       notifications: 'notifications',
+      privateGroups: 'Create {{private}} boss hunting groups',
+      private: 'private',
     },
     filtersTooltip: {
       tc: 'Tibia Coins invested',

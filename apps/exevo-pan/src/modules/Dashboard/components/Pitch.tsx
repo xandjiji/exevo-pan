@@ -129,6 +129,11 @@ const Pitch = ({ proStatus }: PitchProps) => {
               ),
             })}
           </Li>
+          <Li>
+            {templateMessage(dashboard.Pitch.features.privateGroups, {
+              private: <strong>{dashboard.Pitch.features.private}</strong>,
+            })}
+          </Li>
         </ul>
         <p className="text-right">{dashboard.Pitch.more}</p>
       </div>
