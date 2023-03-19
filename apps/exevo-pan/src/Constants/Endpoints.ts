@@ -10,4 +10,5 @@ export const endpoints = {
   ERROR_REPORT: '/api/error-report',
   PREVIEW_IMAGES: '/api/og',
   REVALIDATE_PAGE: '/api/revalidate',
+  REDIRECT_REVALIDATE: 'https://redirect-revalidate.exevopan.workers.dev/',
 }
