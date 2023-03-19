@@ -20,9 +20,8 @@ export default async (
 
   const route = request.query.route ?? '/'
   const revalidateRoute = async (locale: RegisteredLocale): Promise<void> => {
-    let routeToRevalidate = `${addLocalePrefix(locale)}/${route}`.replaceAll(
-      '//',
-      '/',
+    let routeToRevalidate = decodeURIComponent(
+      `${addLocalePrefix(locale)}/${route}`.replaceAll('//', '/'),
     )
 
     const lastCharacter = routeToRevalidate.slice(-1)
