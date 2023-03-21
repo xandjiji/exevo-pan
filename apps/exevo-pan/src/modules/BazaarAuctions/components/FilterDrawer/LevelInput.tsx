@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Input } from 'components/Atoms'
 import { InputProps } from 'components/Atoms/Input/types'
 
@@ -16,6 +16,10 @@ const LevelInput = ({
   ...props
 }: LevelInputProps) => {
   const [value, setValue] = useState<string | number>(initialValue)
+
+  useEffect(() => {
+    if (defaultValue === initialValue) setValue(initialValue)
+  }, [initialValue, defaultValue])
 
   const isInvalid =
     (props.max !== undefined && +value > +props.max) ||
