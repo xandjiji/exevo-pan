@@ -384,6 +384,15 @@ bossInfo.set('Dreadmaw', {
   ],
 })
 
+bossInfo.set('Elvira Hammerthrust', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32531,31926,11:1',
+      description: 'Dwarf Mines (Kazordoon)',
+    },
+  ],
+})
+
 bossInfo.set('Fernfang', {
   locations: [
     {
@@ -392,6 +401,16 @@ bossInfo.set('Fernfang', {
     },
   ],
   loot: ['Wooden Whistle'],
+})
+
+bossInfo.set('Feroxa', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33298,31722,7:1',
+      description: 'Grimvale (Edron)',
+    },
+  ],
+  loot: ['Werewolf Helmet', 'Wolf Backpack'],
 })
 
 bossInfo.set('Ferumbras', {
@@ -683,6 +702,15 @@ bossInfo.set('Hirintror', {
   ],
 })
 
+bossInfo.set('Jesse the Wicked', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32372,32221,11:1',
+      description: 'Ancient Temple (Thais)',
+    },
+  ],
+})
+
 bossInfo.set('Mahatheb', {
   locations: [
     {
@@ -782,6 +810,15 @@ bossInfo.set('Morgaroth', {
       message:
         'Evil Cultists have called an ancient evil into the volcano on Goroma. Beware of its power mortals.',
       style: 'HIGHLIGHT',
+    },
+  ],
+})
+
+bossInfo.set('Mornenion', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33087,32157,7:1',
+      description: 'Shadowthorn (Venore)',
     },
   ],
 })
@@ -886,6 +923,15 @@ bossInfo.set('Orshabaal', {
       message:
         'Orshabaal has been summoned from hell to plague the lands of mortals again.',
       style: 'HIGHLIGHT',
+    },
+  ],
+})
+
+bossInfo.set('Robby the Reckless', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32198,31809,9:1',
+      description: 'Ghostlands (Carlin)',
     },
   ],
 })
@@ -1280,6 +1326,15 @@ bossInfo.set('Yaga the Crone', {
     {
       src: 'https://tibiamaps.io/map/embed#32712,32011,11:1',
       description: 'Green Claw Swamp (Venore)',
+    },
+  ],
+})
+
+bossInfo.set('Yakchal', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#32205,31003,14:1',
+      description: 'Formorgar Mines (Svargrond)',
     },
   ],
 })
