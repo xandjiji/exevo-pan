@@ -16,7 +16,6 @@ export const proPayment = authedProcedure
 
       const data = {
         character,
-        confirmed: false,
         lastUpdated: new Date().toISOString(),
       }
 
@@ -24,7 +23,7 @@ export const proPayment = authedProcedure
         where: { id },
         data: {
           paymentData: {
-            upsert: { create: data, update: data },
+            upsert: { create: { ...data, confirmed: false }, update: data },
           },
         },
         include: { paymentData: true },
