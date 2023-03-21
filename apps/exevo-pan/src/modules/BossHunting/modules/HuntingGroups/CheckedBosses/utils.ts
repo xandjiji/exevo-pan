@@ -1,15 +1,5 @@
 import { MILLISECONDS_IN } from 'utils'
-import { SS_UTC_HOUR } from 'Constants'
-
-const RADIX = 10
-
-const getDateRelativeToSS = (date: Date) => {
-  const utcHour = date.getUTCHours()
-
-  const [utcDateString] = date.toISOString().split('T')
-  const [, , day] = utcDateString.split('-')
-  return parseInt(day, RADIX) + (utcHour < SS_UTC_HOUR ? -1 : 0)
-}
+import { getDateRelativeToSS } from 'shared-utils/dist/time'
 
 export const isFromSameServerSave = (
   a = new Date(),
