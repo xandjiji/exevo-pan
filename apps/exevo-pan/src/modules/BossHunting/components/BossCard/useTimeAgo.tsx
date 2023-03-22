@@ -18,7 +18,7 @@ const useTimeAgo = (pastTimestamp?: number): string | undefined => {
     const textPrefix = `${i18n.lastSeen}: ${common.Month[month]} ${day}`
 
     if (timeDiff < MILLISECONDS_IN.DAY) {
-      return `${textPrefix} ${i18n.thisSS}`
+      return i18n.thisSS
     }
 
     const daysAgo = Math.round(timeDiff / MILLISECONDS_IN.DAY)
