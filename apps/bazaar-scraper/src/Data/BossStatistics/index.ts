@@ -160,13 +160,13 @@ export default class BossStatisticsData {
         if (appeared) {
           const bossSchema = schema.get(bossName as TrackedBossName)
 
-          const spawnCount = bossSchema?.spawnCount ?? 1
+          const appearencesCount = bossSchema?.spawnCount ? killedByPlayers : 1
 
           doTimes(() => {
             this.bossStatistics.bosses[bossName].appearences.push(
               currentSSTimestamp,
             )
-          }, spawnCount)
+          }, appearencesCount)
         }
       },
     )
