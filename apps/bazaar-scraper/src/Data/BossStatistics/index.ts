@@ -11,7 +11,7 @@ const trackedBossTokens = Object.keys(bossDictionary) as Array<
 >
 
 export default class BossStatisticsData {
-  private bossStatistics: BossStatistics = {
+  public bossStatistics: BossStatistics = {
     server: '',
     latest: {
       hash: '',
