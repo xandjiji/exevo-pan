@@ -5,6 +5,7 @@ import { BossStatistics } from 'Data'
 import { broadcast, coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
+import { getDateRelativeToSS } from 'shared-utils/dist/time'
 import {
   dilluteDistribution,
   normalizeDistributionRange,
@@ -28,10 +29,13 @@ const calculateStats = ({
 > => {
   if (!bossSchema) return {}
 
-  const currentTimestamp = +new Date()
+  const tomorrow = getDateRelativeToSS()
+  tomorrow.setDate(tomorrow.getDate() + 1)
+  const tomorrowTimestamp = +tomorrow
+
   const [lastAppearence] = appearences.slice(-1)
   const daysSinceThen = Math.round(
-    dayDiffBetween(lastAppearence, currentTimestamp),
+    dayDiffBetween(lastAppearence, tomorrowTimestamp),
   )
 
   const { fixedDaysFrequency, spawnCount } = bossSchema
@@ -44,7 +48,7 @@ const calculateStats = ({
         .map(
           (appearence) =>
             fixedDaysFrequency.min -
-            Math.round(dayDiffBetween(appearence, currentTimestamp, false)),
+            Math.round(dayDiffBetween(appearence, tomorrowTimestamp, false)),
         ),
     }
   }
