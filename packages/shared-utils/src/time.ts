@@ -24,7 +24,7 @@ export const DAYS_IN = {
   YEAR: 365,
 }
 
-export const SS_UTC_HOUR = 8
+export const SS_UTC_HOUR = 7
 
 export const stripTime = (date = new Date()): Date =>
   new Date(date.getFullYear(), date.getMonth(), date.getDate())
