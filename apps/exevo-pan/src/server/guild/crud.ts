@@ -664,6 +664,7 @@ export const notifyGuildMembers = authedProcedure
               title: boss,
               body: guild.name,
               url: getGuildPermalink(guild.name, true),
+              badge: 'boss',
             },
             deleteInvalidDevices: false,
           }).catch(console.log),

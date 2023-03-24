@@ -1,8 +1,9 @@
 self.addEventListener('push', (e) => {
-  const { title, body, url } = e.data.json()
+  const { title, body, url, badge } = e.data.json()
   self.registration.showNotification(title, {
     body,
     icon: 'https://www.exevopan.com/notification-icon.png',
+    badge,
     data: { url },
     vibrate: [200, 100],
   })
