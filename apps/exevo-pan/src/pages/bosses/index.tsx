@@ -22,7 +22,7 @@ type BossTrackerProps = {
 
 const { heroSrc } = Tracker
 
-const MAX_RECENTLY_KILLED_TIME_DIFF = 2 * MILLISECONDS_IN.DAY
+const MAX_RECENTLY_KILLED_TIME_DIFF = 4 * MILLISECONDS_IN.DAY
 
 export default function BossTrackerPage(args: BossTrackerProps) {
   const { bossChances } = args

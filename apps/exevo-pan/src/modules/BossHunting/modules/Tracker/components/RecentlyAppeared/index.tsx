@@ -5,7 +5,8 @@ import { loadBossSrc } from 'utils'
 import { hoursAgo } from './utils'
 import { RecentlyAppearedProps } from './types'
 
-const OLDER_THRESHOLD = 36
+const HOURS_IN_A_DAY = 24
+const OLDER_THRESHOLD = HOURS_IN_A_DAY * 1.5
 
 const RecentlyAppeared = ({
   bosses,
