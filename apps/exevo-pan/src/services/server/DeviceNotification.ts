@@ -17,7 +17,7 @@ type NotifyDeviceArgs = {
 
 const BADGES: Record<Required<Notification>['badge'], string> = {
   boss: '/badges/bosses.png',
-  default: '/badges/deefault.png',
+  default: '/badges/default.png',
 }
 
 export default class DeviceNotificationClient {
