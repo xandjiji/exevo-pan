@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { getDateRelativeToSS } from 'shared-utils/dist/time'
 import { useTranslations } from 'contexts/useTranslation'
 import { dateToDateObject, MILLISECONDS_IN } from 'utils'
 
@@ -11,16 +12,13 @@ const useTimeAgo = (pastTimestamp?: number): string | undefined => {
   return useMemo(() => {
     if (pastTimestamp === undefined) return undefined
 
-    const timeDiff = Math.abs(+new Date() - pastTimestamp)
+    const timeDiff = Math.abs(+getDateRelativeToSS() - pastTimestamp)
     const { day, month } = dateToDateObject(new Date(pastTimestamp))
 
     const textPrefix = `${i18n.lastSeen}: ${common.Month[month]} ${day}`
 
     if (timeDiff < MILLISECONDS_IN.DAY) {
-      const hoursAgo = Math.round(timeDiff / MILLISECONDS_IN.HOUR)
-      return `${textPrefix} (${hoursAgo} ${
-        common[hoursAgo > 1 ? 'hours' : 'hour']
-      } ${i18n.ago})`
+      return i18n.thisSS
     }
 
     const daysAgo = Math.round(timeDiff / MILLISECONDS_IN.DAY)

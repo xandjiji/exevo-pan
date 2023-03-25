@@ -1,8 +1,13 @@
 import fs from 'fs/promises'
-import { constTokens as bossDictionary } from 'data-dictionary/dist/dictionaries/bosses'
+import {
+  constTokens as bossDictionary,
+  TrackedBossName,
+} from 'data-dictionary/dist/dictionaries/bosses'
+import { getDateRelativeToSS } from 'shared-utils/dist/time'
 import { broadcast, tabBroadcast, coloredText } from 'logging'
 import { file } from 'Constants'
-import { sha256, MILLISECONDS_IN_A_DAY } from 'utils'
+import { sha256, doTimes } from 'utils'
+import { schema } from '../../Scripts/TrackBosses/schema'
 
 const { serverResolver, path } = file.BOSS_STATISTICS
 
@@ -11,7 +16,7 @@ const trackedBossTokens = Object.keys(bossDictionary) as Array<
 >
 
 export default class BossStatisticsData {
-  private bossStatistics: BossStatistics = {
+  public bossStatistics: BossStatistics = {
     server: '',
     latest: {
       hash: '',
@@ -144,8 +149,7 @@ export default class BossStatisticsData {
     }
 
     const newestHash = this.generateHash(bossKillsData)
-    const currentTimestamp = +new Date()
-    const offsettedTimestamp = +new Date() - MILLISECONDS_IN_A_DAY / 2
+    const currentSSTimestamp = +getDateRelativeToSS()
 
     const trackedBossKills = this.normalizeBossKills(bossKillsData)
 
@@ -154,15 +158,23 @@ export default class BossStatisticsData {
         const appeared = playersKilled + killedByPlayers > 0
 
         if (appeared) {
-          this.bossStatistics.bosses[bossName].appearences.push(
-            offsettedTimestamp,
-          )
+          const bossSchema = schema.get(bossName as TrackedBossName)
+
+          const appearencesCount = bossSchema?.spawnCount
+            ? Math.max(killedByPlayers, 1)
+            : 1
+
+          doTimes(() => {
+            this.bossStatistics.bosses[bossName].appearences.push(
+              currentSSTimestamp,
+            )
+          }, appearencesCount)
         }
       },
     )
 
     this.bossStatistics.latest.hash = newestHash
-    this.bossStatistics.latest.timestamp = currentTimestamp
+    this.bossStatistics.latest.timestamp = currentSSTimestamp
 
     await this.save()
   }

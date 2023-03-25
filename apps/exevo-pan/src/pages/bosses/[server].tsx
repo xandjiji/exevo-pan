@@ -9,6 +9,7 @@ import {
   buildPageTitle,
   sortBossesBy,
   MILLISECONDS_IN,
+  SECONDS_IN,
   pluckPremiumBossData,
 } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -119,6 +120,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       },
       locale,
     },
+    revalidate: SECONDS_IN.MINUTE,
   }
 }
 

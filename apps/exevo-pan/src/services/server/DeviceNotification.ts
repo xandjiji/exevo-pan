@@ -6,12 +6,18 @@ type Notification = {
   title: string
   body: string
   url?: string
+  badge?: 'default' | 'boss'
 }
 
 type NotifyDeviceArgs = {
   device: NotificationDevice
   notification: Notification
   deleteInvalidDevices?: boolean
+}
+
+const BADGES: Record<Required<Notification>['badge'], string> = {
+  boss: '/badges/bosses.png',
+  default: '/badges/deefault.png',
 }
 
 export default class DeviceNotificationClient {
@@ -33,7 +39,10 @@ export default class DeviceNotificationClient {
             endpoint,
             keys: { auth, p256dh },
           },
-          JSON.stringify(notification),
+          JSON.stringify({
+            ...notification,
+            badge: BADGES[notification.badge ?? 'default'],
+          }),
         )
         .catch(async (e: WebPushError) => {
           await prisma.notificationDevice.deleteMany({
