@@ -15,5 +15,6 @@ export const links = {
   CIPSOFT: 'https://www.cipsoft.com',
   UNLICENSE: 'https://unlicense.org',
   TIBIA_BLACKJACK: 'https://tibiablackjack.com/r/xand',
+  PERSONAL_WEBSITE: 'https://xandjiji.com',
   I18N: 'https://docs.google.com/spreadsheets/d/1t0fEtS2DqumaL9r_m8FeYnZ9Szh0Ay2R-jhbBHo-SlM/edit?usp=sharing',
 }

@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import { cloneElement } from 'react'
-import { MailIcon, GithubIcon, LinkedinIcon } from 'assets/svgs'
+import { ServerIcon, MailIcon, GithubIcon, LinkedinIcon } from 'assets/svgs'
 import { links, email } from 'Constants'
 import { IconProps } from './types'
 
@@ -26,6 +26,16 @@ const Icon = ({ icon, ...props }: IconProps) =>
 
 const ContactSection = () => (
   <ul className="grid w-fit list-none gap-2">
+    <ButtonLi>
+      <Icon icon={<ServerIcon />} />
+      <Link
+        href={links.PERSONAL_WEBSITE}
+        target="_blank"
+        rel="noopener noreferrer external author"
+      >
+        {links.PERSONAL_WEBSITE}
+      </Link>
+    </ButtonLi>
     <ButtonLi>
       <Icon icon={<MailIcon />} />
       <Link href={links.EMAIL} target="_blank" rel="noopener noreferrer">
