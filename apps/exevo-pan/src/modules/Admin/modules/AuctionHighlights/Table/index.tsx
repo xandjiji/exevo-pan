@@ -216,6 +216,7 @@ const PaymentList = () => {
                 auctionEnd,
                 paymentMethod,
                 price,
+                email,
               }) => (
                 <Table.Row
                   key={id}
@@ -297,7 +298,7 @@ const PaymentList = () => {
                       nickname={nickname}
                       lastUpdated={lastUpdated}
                     />
-                    <Chip gray>
+                    <Chip gray title={email}>
                       {paymentMethod === 'TIBIA_COINS' && (
                         <Text.TibiaCoin value={price} />
                       )}
