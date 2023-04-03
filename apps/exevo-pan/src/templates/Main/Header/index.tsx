@@ -3,7 +3,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { ClientComponent } from 'components/Organisms'
-import { Link, Switch, CtaButton, TibiaBlackjack } from 'components/Atoms'
+import { Link, Switch, CtaButton } from 'components/Atoms'
 import NextLink from 'next/link'
 import { useTheme } from 'contexts/useTheme'
 import { routes } from 'Constants'
@@ -43,8 +43,6 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
     ? common.Header.h1[heading[pathname]]
     : null
 
-  const shouldMenuOverlap = menuOpen
-
   const accessibleLogoName = heading[pathname]
     ? common.Header.h1[heading[pathname]]
     : 'Exevo Pan'
@@ -53,13 +51,12 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
     <>
       <header
         className={clsx(
-          'inner-container custom-scrollbar from-primary sticky top-0 flex h-[60px] w-full items-center justify-between overflow-x-auto to-transparent shadow-md transition-colors md:after:block',
+          'z-75 inner-container custom-scrollbar from-primary sticky top-0 flex h-[60px] w-full items-center justify-between to-transparent shadow-md transition-colors md:overflow-x-auto md:after:block',
           clean
             ? 'bg-background'
-            : 'bg-primary after:z-1 after:pointer-events-none  after:fixed after:top-0 after:right-0 after:hidden after:h-[60px] after:w-8 after:bg-gradient-to-l',
+            : 'bg-primary after:z-1 after:pointer-events-none after:fixed after:top-0 after:right-0 after:hidden after:h-[60px] after:w-8 after:bg-gradient-to-l',
           className,
         )}
-        style={{ zIndex: shouldMenuOverlap ? 75 : 71 }}
         {...props}
       >
         <nav className="mr-6 flex shrink-0 items-center">
@@ -93,7 +90,7 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
             <ul
               className={clsx(
                 menuOpen ? 'left-0' : '-left-full opacity-0',
-                'bg-darkerPrimary fixed top-[60px] left-0 grid auto-cols-min gap-1 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
+                'bg-darkerPrimary absolute top-full left-0 grid auto-cols-min gap-1 rounded-br-md p-5 shadow-md transition-all md:static md:flex md:items-center md:rounded-none md:bg-transparent md:p-0 md:opacity-100 md:shadow-none',
               )}
             >
               {NavItems.map(({ title, href, exact, icon }) => (
@@ -126,7 +123,6 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
           </ClientComponent>
           {!clean && <CtaButton />}
           <AccountButton variant={clean ? 'onSurface' : 'onPrimary'} />
-          {!clean && <TibiaBlackjack.FloatingButton className="md:hidden" />}
         </div>
       </header>
 

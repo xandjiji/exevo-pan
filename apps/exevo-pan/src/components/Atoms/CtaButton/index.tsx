@@ -13,7 +13,7 @@ const CtaButton = ({ ...props }: React.HTMLAttributes<HTMLAnchorElement>) => {
       href={common.TibiaCoinsCta.link}
       target="_blank"
       rel="noopener external nofollow"
-      className="clickable text-tsm bg-primary text-onPrimary md:text-onSurface md:z-1 hover:highlight-10 md:animated-background fixed bottom-[84px] right-4 z-10 ml-2 flex items-end whitespace-nowrap rounded-2xl py-2 pr-4 pl-10 tracking-wider shadow-lg transition-all md:relative md:bottom-0 md:right-0 md:shadow-md"
+      className="clickable text-tsm text-onSurface md:z-1 hover:highlight-10 animated-background relative z-10 ml-2 hidden items-end whitespace-nowrap rounded-2xl py-2 pr-4 pl-10 tracking-wider shadow-md transition-all md:flex"
       {...props}
     >
       <Image
