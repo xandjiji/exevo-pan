@@ -2,7 +2,15 @@ import clsx from 'clsx'
 import { useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { LoadingAlert, Table, Dialog, Button, Alert } from 'components/Atoms'
+import {
+  LoadingAlert,
+  Table,
+  Dialog,
+  Button,
+  Alert,
+  Chip,
+  Text,
+} from 'components/Atoms'
 import {
   MoreHorizontalIcon,
   ThumbsUpIcon,
@@ -206,6 +214,8 @@ const PaymentList = () => {
                 joinedReadableDate,
                 timezoneOffsetMinutes,
                 auctionEnd,
+                paymentMethod,
+                price,
               }) => (
                 <Table.Row
                   key={id}
@@ -281,12 +291,19 @@ const PaymentList = () => {
                       </p>
                     </Tooltip>
                   </Table.Column>
-                  <Table.Column>
+                  <Table.Column className="flex items-center gap-4">
                     <AuctionSummary
                       auctionId={auctionId}
                       nickname={nickname}
                       lastUpdated={lastUpdated}
                     />
+                    <Chip gray>
+                      {paymentMethod === 'TIBIA_COINS' && (
+                        <Text.TibiaCoin value={price} />
+                      )}
+                      {paymentMethod === 'PIX' &&
+                        `R$ ${price.toFixed(2).replace('.', ',')}`}
+                    </Chip>
                   </Table.Column>
                   <Table.Column>
                     <Menu
