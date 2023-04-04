@@ -51,12 +51,13 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
     <>
       <header
         className={clsx(
-          'z-75 inner-container custom-scrollbar from-primary sticky top-0 flex h-[60px] w-full items-center justify-between to-transparent shadow-md transition-colors md:overflow-x-auto md:after:block',
+          'inner-container custom-scrollbar from-primary sticky top-0 flex h-[60px] w-full items-center justify-between to-transparent shadow-md transition-colors md:overflow-x-auto md:after:block',
           clean
             ? 'bg-background'
             : 'bg-primary after:z-1 after:pointer-events-none after:fixed after:top-0 after:right-0 after:hidden after:h-[60px] after:w-8 after:bg-gradient-to-l',
           className,
         )}
+        style={{ zIndex: menuOpen ? 75 : 71 }}
         {...props}
       >
         <nav className="mr-6 flex shrink-0 items-center">
