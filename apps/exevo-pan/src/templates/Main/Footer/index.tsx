@@ -48,7 +48,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       {variant === 'primary' && (
         <div className="mb-6 flex flex-col-reverse flex-wrap justify-center gap-6 md:flex-row lg:gap-24">
           <div className="flex flex-wrap items-center justify-center gap-6">
-            <Link
+            <NextLink
               href={routes.EXEVOPRO}
               className="clickable bg-surface/75 card flex items-center gap-3 py-2"
             >
@@ -63,7 +63,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   ),
                 })}
               </span>
-            </Link>
+            </NextLink>
 
             <a
               href={links.TIBIA_REFERRAL}
