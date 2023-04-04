@@ -23,7 +23,7 @@ export const ExevoProCTA = () => {
       <Shine animationIterationCount="infinite" width={60} />
       {templateMessage(common.exevoProCTA, {
         exevoPro: (
-          <strong className="from-primaryHighlight to-rare ml-[1px] bg-gradient-to-r bg-clip-text tracking-wide text-transparent">
+          <strong className="rare-gradient-text ml-[1px] tracking-wide">
             Exevo Pro
           </strong>
         ),

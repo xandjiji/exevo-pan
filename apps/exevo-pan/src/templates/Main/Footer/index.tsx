@@ -56,7 +56,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   'text-s cursor-pointer tracking-wider md:text-base',
                   gradient &&
                     variant === 'surface' &&
-                    'from-primaryHighlight to-rare whitespace-nowrap bg-gradient-to-r bg-clip-text font-bold text-transparent',
+                    'rare-gradient-text whitespace-nowrap font-bold',
                   variant === 'primary' && 'text-onPrimary',
                   variant === 'surface' && 'text-onSurface',
                 )}

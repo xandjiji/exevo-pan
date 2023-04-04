@@ -88,6 +88,10 @@
 }
 
 @layer utilities {
+  .rare-gradient-text {
+    @apply from-primaryHighlight to-rare bg-gradient-to-r bg-clip-text text-transparent;
+  }
+
   .pixelated {
     image-rendering: pixelated;
   }
