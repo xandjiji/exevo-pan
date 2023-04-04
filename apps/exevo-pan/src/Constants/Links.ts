@@ -15,6 +15,8 @@ export const links = {
   CIPSOFT: 'https://www.cipsoft.com',
   UNLICENSE: 'https://unlicense.org',
   TIBIA_BLACKJACK: 'https://tibiablackjack.com/r/xand',
+  EDGAR_TC: 'https://edgartc.mx/',
+  REI_DOS_COINS: 'https://www.reidoscoins.com.br/?tracking=60b8120a1ab43',
   PERSONAL_WEBSITE: 'https://xandjiji.com',
   I18N: 'https://docs.google.com/spreadsheets/d/1t0fEtS2DqumaL9r_m8FeYnZ9Szh0Ay2R-jhbBHo-SlM/edit?usp=sharing',
 }
