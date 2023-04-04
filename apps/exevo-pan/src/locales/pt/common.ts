@@ -237,4 +237,5 @@ export default {
     nextMonthLabel: 'Próximo mês',
   },
   genericError: 'Ops! Algo deu errado',
+  exevoProCTA: 'Seja {{exevoPro}}',
 }

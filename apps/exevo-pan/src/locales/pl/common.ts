@@ -246,4 +246,5 @@ export default {
     nextMonthLabel: 'Następny miesiąc',
   },
   genericError: 'Ups! Coś poszło nie tak',
+  exevoProCTA: 'Become {{exevoPro}}',
 }
