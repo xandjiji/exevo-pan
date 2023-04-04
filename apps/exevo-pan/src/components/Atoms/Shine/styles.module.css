@@ -1,0 +1,19 @@
+.animation {
+  animation: shine 8s forwards;
+}
+
+@keyframes shine {
+  0% {
+    left: 0;
+    transform: translateX(-100%);
+  }
+  4% {
+    left: 20%;
+    transform: translateX(-60%);
+  }
+  12%,
+  100% {
+    left: 100%;
+    transform: translateX(100%);
+  }
+}
