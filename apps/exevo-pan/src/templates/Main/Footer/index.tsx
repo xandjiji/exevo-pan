@@ -5,11 +5,11 @@ import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import Image from 'next/image'
 import { UnlicenseIcon, GithubIcon, ExevoPanIcon } from 'assets/svgs'
+import { loadRawSrc } from 'utils'
 import { links, routes } from 'Constants'
 import edgarSrc from 'assets/edgartc.png'
 import reiDosCoinsSrc from 'assets/reidoscoins.png'
 import tbjSrc from 'assets/tibiablackjack.png'
-import tibiaSrc from 'assets/tibialogo.png'
 import { FooterProps, RouteItem } from './types'
 
 const listItems: RouteItem[] = [
@@ -32,6 +32,13 @@ const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
   />
 )
 
+const LeftCard = (args: JSX.IntrinsicElements['div']) => (
+  <div
+    {...args}
+    className="clickable bg-surface/75 card flex items-center gap-3 py-2"
+  />
+)
+
 const Footer = ({ variant = 'primary' }: FooterProps) => {
   const {
     translations: { common },
@@ -46,23 +53,22 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       )}
     >
       {variant === 'primary' && (
-        <div className="mb-6 flex flex-col-reverse flex-wrap justify-center gap-6 md:flex-row lg:gap-24">
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <NextLink
-              href={routes.EXEVOPRO}
-              className="clickable bg-surface/75 card flex items-center gap-3 py-2"
-            >
-              <ExevoPanIcon width={36} height={36} />
+        <div className="mb-6 flex flex-col-reverse flex-wrap items-center justify-center gap-6 md:flex-row lg:gap-24">
+          <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
+            <NextLink href={routes.EXEVOPRO}>
+              <LeftCard>
+                <ExevoPanIcon width={36} height={36} />
 
-              <span className="text-xs">
-                {templateMessage(common.exevoProCTA, {
-                  exevoPro: (
-                    <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
-                      Exevo Pro
-                    </strong>
-                  ),
-                })}
-              </span>
+                <span>
+                  {templateMessage(common.exevoProCTA, {
+                    exevoPro: (
+                      <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
+                        Exevo Pro
+                      </strong>
+                    ),
+                  })}
+                </span>
+              </LeftCard>
             </NextLink>
 
             <a
@@ -71,12 +77,24 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
               rel="noopener external nofollow"
               aria-label="Play Tibia for free"
             >
-              <Image
-                src={tibiaSrc}
-                width={147}
-                height={49}
-                alt="Play Tibia for free"
-              />
+              <LeftCard>
+                <div className="py-0.5">
+                  <Image
+                    src="/tibialogo.png"
+                    width={32}
+                    height={32}
+                    alt="Play Tibia for free"
+                    className="pixelated"
+                  />
+                </div>
+
+                <span>
+                  Play
+                  <strong className="text-primaryHighlight block text-base tracking-wide">
+                    Tibia.com
+                  </strong>
+                </span>
+              </LeftCard>
             </a>
           </div>
 
