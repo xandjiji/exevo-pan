@@ -238,4 +238,5 @@ export default {
   },
   genericError: 'Oops! Something went wrong',
   exevoProCTA: 'Become {{exevoPro}}',
+  play: 'Play',
 }

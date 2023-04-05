@@ -247,4 +247,5 @@ export default {
   },
   genericError: 'Ups! Coś poszło nie tak',
   exevoProCTA: 'Become {{exevoPro}}',
+  play: 'Grać',
 }

@@ -248,4 +248,5 @@ export default {
   },
   genericError: '¡Ups! Algo salió mal',
   exevoProCTA: 'Become {{exevoPro}}',
+  play: 'Jugar',
 }

@@ -95,7 +95,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                   </div>
 
                   <span>
-                    Play
+                    {common.play}
                     <strong className="text-primaryHighlight block text-base tracking-wide">
                       Tibia.com
                     </strong>

@@ -238,4 +238,5 @@ export default {
   },
   genericError: 'Ops! Algo deu errado',
   exevoProCTA: 'Seja {{exevoPro}}',
+  play: 'Jogue',
 }
