@@ -57,168 +57,170 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
         variant === 'surface' && 'bg-surface text-onSurface',
       )}
     >
-      {variant === 'primary' && (
-        <div className="mb-6 flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row lg:gap-24">
-          <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
-            <NextLink href={routes.EXEVOPRO}>
-              <Card>
-                <ExevoPanIcon width={36} height={36} />
+      <div className="mx-auto grid w-fit gap-8">
+        {variant === 'primary' && (
+          <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row lg:justify-between">
+            <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
+              <NextLink href={routes.EXEVOPRO}>
+                <Card>
+                  <ExevoPanIcon width={36} height={36} />
 
-                <span>
-                  {templateMessage(common.exevoProCTA, {
-                    exevoPro: (
-                      <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
-                        Exevo Pro
-                      </strong>
-                    ),
-                  })}
-                </span>
-              </Card>
-            </NextLink>
-
-            <a
-              href={links.TIBIA_REFERRAL}
-              target="_blank"
-              rel="noopener external nofollow"
-              aria-label="Play Tibia for free"
-            >
-              <Card>
-                <div className="py-0.5">
-                  <Image
-                    src="/tibialogo.png"
-                    width={32}
-                    height={32}
-                    alt="Play Tibia for free"
-                    className="pixelated"
-                  />
-                </div>
-
-                <span>
-                  Play
-                  <strong className="text-primaryHighlight block text-base tracking-wide">
-                    Tibia.com
-                  </strong>
-                </span>
-              </Card>
-            </a>
-          </div>
-
-          <div>
-            <div className="flex flex-wrap items-center justify-center gap-6">
-              <a
-                target="_blank"
-                rel="noopener external nofollow"
-                href={links.TIBIA_BLACKJACK}
-              >
-                <Card variant="secondary">
-                  <Image
-                    src={tbjSrc}
-                    width={97}
-                    height={61}
-                    alt="Tibia Blackjack"
-                  />
+                  <span>
+                    {templateMessage(common.exevoProCTA, {
+                      exevoPro: (
+                        <strong className="rare-gradient-text block whitespace-nowrap text-base tracking-wide">
+                          Exevo Pro
+                        </strong>
+                      ),
+                    })}
+                  </span>
                 </Card>
-              </a>
+              </NextLink>
 
               <a
-                href={links.EDGAR_TC}
+                href={links.TIBIA_REFERRAL}
                 target="_blank"
                 rel="noopener external nofollow"
+                aria-label="Play Tibia for free"
               >
-                <Card variant="secondary">
-                  <Image
-                    src="/edgartc.png"
-                    width={117}
-                    height={61}
-                    alt="Edgar Tc"
-                  />
-                </Card>
-              </a>
+                <Card>
+                  <div className="py-0.5">
+                    <Image
+                      src="/tibialogo.png"
+                      width={32}
+                      height={32}
+                      alt="Play Tibia for free"
+                      className="pixelated"
+                    />
+                  </div>
 
-              <a
-                href={links.REI_DOS_COINS}
-                target="_blank"
-                rel="noopener external nofollow"
-              >
-                <Card variant="secondary">
-                  <Image
-                    src="/reidoscoins.png"
-                    width={51}
-                    height={61}
-                    alt="Rei dos Coins"
-                  />
+                  <span>
+                    Play
+                    <strong className="text-primaryHighlight block text-base tracking-wide">
+                      Tibia.com
+                    </strong>
+                  </span>
                 </Card>
               </a>
             </div>
-          </div>
-        </div>
-      )}
 
-      <div>
-        <nav>
-          <ul className="flex flex-wrap items-center justify-center gap-3">
-            {listItems.map(({ href, content, gradient }) => (
-              <li
-                key={href}
-                className={clsx(
-                  "text-s after:ml-3 after:content-['|'] last:after:content-['']",
-                  variant === 'primary' && 'text-onPrimary/50',
-                  variant === 'surface' && 'text-onSurface/50',
-                )}
-              >
-                <NextLink
-                  href={href}
+            <div>
+              <div className="flex flex-wrap items-center justify-center gap-6">
+                <a
+                  target="_blank"
+                  rel="noopener external nofollow"
+                  href={links.TIBIA_BLACKJACK}
+                >
+                  <Card variant="secondary">
+                    <Image
+                      src={tbjSrc}
+                      width={97}
+                      height={61}
+                      alt="Tibia Blackjack"
+                    />
+                  </Card>
+                </a>
+
+                <a
+                  href={links.EDGAR_TC}
+                  target="_blank"
+                  rel="noopener external nofollow"
+                >
+                  <Card variant="secondary">
+                    <Image
+                      src="/edgartc.png"
+                      width={117}
+                      height={61}
+                      alt="Edgar Tc"
+                    />
+                  </Card>
+                </a>
+
+                <a
+                  href={links.REI_DOS_COINS}
+                  target="_blank"
+                  rel="noopener external nofollow"
+                >
+                  <Card variant="secondary">
+                    <Image
+                      src="/reidoscoins.png"
+                      width={51}
+                      height={61}
+                      alt="Rei dos Coins"
+                    />
+                  </Card>
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="grid gap-5">
+          <nav>
+            <ul className="flex flex-wrap items-center justify-center gap-3">
+              {listItems.map(({ href, content, gradient }) => (
+                <li
+                  key={href}
                   className={clsx(
-                    'text-s cursor-pointer tracking-wider md:text-base',
-                    gradient &&
-                      variant === 'surface' &&
-                      'rare-gradient-text whitespace-nowrap font-bold',
-                    variant === 'primary' && 'text-onPrimary',
-                    variant === 'surface' && 'text-onSurface',
+                    "text-s after:ml-3 after:content-['|'] last:after:ml-0 last:after:content-['']",
+                    variant === 'primary' && 'text-onPrimary/50',
+                    variant === 'surface' && 'text-onSurface/50',
                   )}
                 >
-                  {common.Header.nav[content]}
-                </NextLink>
-              </li>
-            ))}
-          </ul>
-        </nav>
+                  <NextLink
+                    href={href}
+                    className={clsx(
+                      'text-s cursor-pointer tracking-wider md:text-base',
+                      gradient &&
+                        variant === 'surface' &&
+                        'rare-gradient-text whitespace-nowrap font-bold',
+                      variant === 'primary' && 'text-onPrimary',
+                      variant === 'surface' && 'text-onSurface',
+                    )}
+                  >
+                    {common.Header.nav[content]}
+                  </NextLink>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <div className="mt-5 flex items-center justify-center">
-          <UnlicenseIcon
-            aria-label="Unlicensed"
-            className={clsx(
-              'mx-1 h-3 w-3',
-              variant === 'primary' && 'fill-onPrimary',
-              variant === 'surface' && 'fill-onSurface',
-            )}
-          />
-          {new Date().getFullYear()} {common.FooterTitle}
-          <Link
-            className={clsx(
-              'ml-1',
-              variant === 'primary' && 'text-onPrimary',
-              variant === 'surface' && 'text-onSurface',
-            )}
-            href={links.GITHUB_PROFILE}
-            rel="author"
-          >
-            xandjiji
-          </Link>
-          .
-          <Link
-            className="ml-2"
-            href={links.GITHUB_REPOSITORY}
-            title={common.RepoLinkText}
-          >
-            <GithubIcon
+          <div className="flex items-center justify-center">
+            <UnlicenseIcon
+              aria-label="Unlicensed"
               className={clsx(
-                'clickable rounded-full',
+                'mx-1 h-3 w-3',
                 variant === 'primary' && 'fill-onPrimary',
                 variant === 'surface' && 'fill-onSurface',
               )}
             />
-          </Link>
+            {new Date().getFullYear()} {common.FooterTitle}
+            <Link
+              className={clsx(
+                'ml-1',
+                variant === 'primary' && 'text-onPrimary',
+                variant === 'surface' && 'text-onSurface',
+              )}
+              href={links.GITHUB_PROFILE}
+              rel="author"
+            >
+              xandjiji
+            </Link>
+            .
+            <Link
+              className="ml-2"
+              href={links.GITHUB_REPOSITORY}
+              title={common.RepoLinkText}
+            >
+              <GithubIcon
+                className={clsx(
+                  'clickable rounded-full',
+                  variant === 'primary' && 'fill-onPrimary',
+                  variant === 'surface' && 'fill-onSurface',
+                )}
+              />
+            </Link>
+          </div>
         </div>
       </div>
     </footer>
