@@ -5,10 +5,7 @@ import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import Image from 'next/image'
 import { UnlicenseIcon, GithubIcon, ExevoPanIcon } from 'assets/svgs'
-import { loadRawSrc } from 'utils'
 import { links, routes } from 'Constants'
-import edgarSrc from 'assets/edgartc.png'
-import reiDosCoinsSrc from 'assets/reidoscoins.png'
 import tbjSrc from 'assets/tibiablackjack.png'
 import { FooterProps, RouteItem } from './types'
 
@@ -32,10 +29,18 @@ const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
   />
 )
 
-const LeftCard = (args: JSX.IntrinsicElements['div']) => (
+const Card = ({
+  variant = 'primary',
+  ...props
+}: { variant?: 'primary' | 'secondary' } & JSX.IntrinsicElements['div']) => (
   <div
-    {...args}
-    className="clickable bg-surface/75 card flex items-center gap-3 py-2"
+    {...props}
+    className={clsx(
+      variant === 'primary'
+        ? 'bg-surface/75 flex items-center gap-3 py-2'
+        : 'bg-black/40',
+      'card clickable py-2',
+    )}
   />
 )
 
@@ -53,10 +58,10 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       )}
     >
       {variant === 'primary' && (
-        <div className="mb-6 flex flex-col-reverse flex-wrap items-center justify-center gap-6 md:flex-row lg:gap-24">
+        <div className="mb-6 flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row lg:gap-24">
           <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
             <NextLink href={routes.EXEVOPRO}>
-              <LeftCard>
+              <Card>
                 <ExevoPanIcon width={36} height={36} />
 
                 <span>
@@ -68,7 +73,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                     ),
                   })}
                 </span>
-              </LeftCard>
+              </Card>
             </NextLink>
 
             <a
@@ -77,7 +82,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
               rel="noopener external nofollow"
               aria-label="Play Tibia for free"
             >
-              <LeftCard>
+              <Card>
                 <div className="py-0.5">
                   <Image
                     src="/tibialogo.png"
@@ -94,24 +99,25 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                     Tibia.com
                   </strong>
                 </span>
-              </LeftCard>
+              </Card>
             </a>
           </div>
 
           <div>
             <div className="flex flex-wrap items-center justify-center gap-6">
               <a
-                className="card bg-black/40 p-2"
                 target="_blank"
                 rel="noopener external nofollow"
                 href={links.TIBIA_BLACKJACK}
               >
-                <Image
-                  src={tbjSrc}
-                  width={97}
-                  height={61}
-                  alt="Tibia Blackjack"
-                />
+                <Card variant="secondary">
+                  <Image
+                    src={tbjSrc}
+                    width={97}
+                    height={61}
+                    alt="Tibia Blackjack"
+                  />
+                </Card>
               </a>
 
               <a
@@ -119,7 +125,14 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                 target="_blank"
                 rel="noopener external nofollow"
               >
-                <Image src={edgarSrc} width={62} height={100} alt="Edgar Tc" />
+                <Card variant="secondary">
+                  <Image
+                    src="/edgartc.png"
+                    width={117}
+                    height={61}
+                    alt="Edgar Tc"
+                  />
+                </Card>
               </a>
 
               <a
@@ -127,12 +140,14 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                 target="_blank"
                 rel="noopener external nofollow"
               >
-                <Image
-                  src={reiDosCoinsSrc}
-                  width={86}
-                  height={100}
-                  alt="Rei dos Coins"
-                />
+                <Card variant="secondary">
+                  <Image
+                    src="/reidoscoins.png"
+                    width={51}
+                    height={61}
+                    alt="Rei dos Coins"
+                  />
+                </Card>
               </a>
             </div>
           </div>
