@@ -37,7 +37,7 @@ const Card = ({
     {...props}
     className={clsx(
       variant === 'primary'
-        ? 'bg-surface/75 flex items-center gap-3 py-2'
+        ? 'bg-surface/75 flex items-center gap-2 py-2'
         : 'bg-black/40',
       'card clickable py-2',
     )}
