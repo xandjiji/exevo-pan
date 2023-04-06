@@ -110,7 +110,7 @@ const CheckedBosses = ({
                 ) {
                   return false
                 }
-              } else if (!currentChance) {
+              } else if (currentChance === 0) {
                 return false
               }
             }
