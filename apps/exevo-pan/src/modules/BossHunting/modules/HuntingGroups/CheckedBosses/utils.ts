@@ -7,8 +7,15 @@ export const isFromSameServerSave = (a = new Date(), b = new Date()): boolean =>
 
 const raidBossExceptions: Set<TrackedBossName> = new Set(['Draptor'])
 
-export const bossFilter = {
+export const checkIfBoss = {
   appearOnlyOnRaids: ({ name }: CheckedBoss): boolean =>
     !!bossInfo.get(name as TrackedBossName)?.raidMessages?.length &&
     !raidBossExceptions.has(name as TrackedBossName),
+  hasNoChance: ({
+    daysLeftForPossibleSpawns,
+    currentChance,
+  }: CheckedBoss): boolean =>
+    daysLeftForPossibleSpawns
+      ? daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
+      : currentChance === 0,
 }

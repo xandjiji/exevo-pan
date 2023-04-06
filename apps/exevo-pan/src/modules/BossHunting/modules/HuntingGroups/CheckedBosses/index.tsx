@@ -22,7 +22,7 @@ import { useRecentlyUpdated } from './useRecentlyUpdated'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
-import { isFromSameServerSave, bossFilter } from './utils'
+import { isFromSameServerSave, checkIfBoss } from './utils'
 
 const INITIAL_DISPLAYED_COUNT = 4
 
@@ -99,38 +99,23 @@ const CheckedBosses = ({
     () =>
       [...transformedList]
         .filter((boss) => {
-          const {
-            name,
-            currentChance,
-            daysLeftForPossibleSpawns,
-            lastChecked,
-          } = boss
-
-          if (bossQuery && !name.toLowerCase().includes(bossQuery)) {
+          if (bossQuery && !boss.name.toLowerCase().includes(bossQuery)) {
             return false
           }
 
-          if (hideRaidBosses && bossFilter.appearOnlyOnRaids(boss)) {
+          if (hideRaidBosses && checkIfBoss.appearOnlyOnRaids(boss)) {
             return false
           }
 
-          if (hideNoChance) {
-            if (daysLeftForPossibleSpawns) {
-              if (
-                !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
-              ) {
-                return false
-              }
-            } else if (currentChance === 0) {
-              return false
-            }
-          }
-
-          if (hideRecentlyChecked && lastChecked?.recent) {
+          if (hideNoChance && checkIfBoss.hasNoChance(boss)) {
             return false
           }
 
-          if (hideBlacklisted && blacklist.has(name)) {
+          if (hideRecentlyChecked && boss.lastChecked?.recent) {
+            return false
+          }
+
+          if (hideBlacklisted && blacklist.has(boss.name)) {
             return false
           }
 
