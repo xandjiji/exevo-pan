@@ -29,15 +29,17 @@ const DrawerFooter = ({
         <GithubIcon className="fill-onPrimary clickable mr-4 rounded-full p-0" />
         {common.RepoLinkText}
       </a>
-      {common.MadeBy}
-      <a
-        className="text-s text-onPrimary ml-[3px] font-normal tracking-wider"
-        href={links.GITHUB_PROFILE}
-        target="_blank"
-        rel="noopener noreferrer author external"
-      >
-        xandjiji
-      </a>
+      <span>
+        {common.MadeBy}{' '}
+        <a
+          className="text-s text-onPrimary font-normal tracking-wider"
+          href={links.GITHUB_PROFILE}
+          target="_blank"
+          rel="noopener noreferrer author external"
+        >
+          xandjiji
+        </a>
+      </span>
     </footer>
   )
 }

@@ -194,19 +194,20 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                 variant === 'surface' && 'fill-onSurface',
               )}
             />
-            {new Date().getFullYear()} {common.FooterTitle}
-            <Link
-              className={clsx(
-                'ml-1',
-                variant === 'primary' && 'text-onPrimary',
-                variant === 'surface' && 'text-onSurface',
-              )}
-              href={links.GITHUB_PROFILE}
-              rel="author"
-            >
-              xandjiji
-            </Link>
-            .
+            <span>
+              {new Date().getFullYear()} {common.FooterTitle}{' '}
+              <Link
+                className={clsx(
+                  variant === 'primary' && 'text-onPrimary',
+                  variant === 'surface' && 'text-onSurface',
+                )}
+                href={links.GITHUB_PROFILE}
+                rel="author"
+              >
+                xandjiji
+              </Link>
+              .
+            </span>
             <Link
               className="ml-2"
               href={links.GITHUB_REPOSITORY}
