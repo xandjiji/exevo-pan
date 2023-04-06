@@ -265,7 +265,7 @@ const CheckedBosses = ({
                 <p
                   className="flex items-center gap-1"
                   title={templateString(i18n.lastTimeChecked, {
-                    member: boss.checkedBy ?? '',
+                    member: '??',
                   })}
                 >
                   <ViewedIcon className="fill-primaryHighlight mr-0.5 h-4 w-4" />
