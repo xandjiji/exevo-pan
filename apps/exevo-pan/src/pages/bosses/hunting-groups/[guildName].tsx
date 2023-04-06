@@ -210,7 +210,6 @@ export default function GuildPage({
                       </>
                     )}
                   </div>
-
                   <MessageBoard
                     title={i18n.publicBoard.title}
                     description={guild.description}
@@ -219,7 +218,6 @@ export default function GuildPage({
                     editText={i18n.publicBoard.edit}
                     onEdit={toggleEditDialog}
                   />
-
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <MessageBoard
                       title={i18n.privateBoard.title}
@@ -230,18 +228,14 @@ export default function GuildPage({
                       onEdit={toggleEditDialog}
                     />
                   )}
-
-                  {(isMember || EXEVO_PAN_ADMIN) && (
-                    <CheckedBosses
-                      guildId={guild.id}
-                      initialCheckedBosses={checkedBosses}
-                      currentMember={currentMember}
-                      onNotify={(defaultBoss) =>
-                        setIsNotificationOpen({ isOpen: true, defaultBoss })
-                      }
-                    />
-                  )}
-
+                  <CheckedBosses
+                    guildId={guild.id}
+                    initialCheckedBosses={checkedBosses}
+                    currentMember={currentMember}
+                    onNotify={(defaultBoss) =>
+                      setIsNotificationOpen({ isOpen: true, defaultBoss })
+                    }
+                  />
                   <MemberList
                     title={i18n.members}
                     guildName={guild.name}
@@ -250,7 +244,6 @@ export default function GuildPage({
                     currentMember={currentMember}
                     isPrivate={guild.private && !EXEVO_PAN_ADMIN}
                   />
-
                   {(isMember || EXEVO_PAN_ADMIN) && (
                     <Tabs.Group>
                       <Tabs.Panel label={i18n.groupApplications}>

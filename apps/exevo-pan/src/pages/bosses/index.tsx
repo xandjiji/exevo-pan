@@ -4,13 +4,7 @@ import { DrawerFieldsClient, BossesClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { Template, Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
-import {
-  buildUrl,
-  buildPageTitle,
-  sortBossesBy,
-  MILLISECONDS_IN,
-  pluckPremiumBossData,
-} from 'utils'
+import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, bosses, bossTracker } from 'locales'
 
@@ -95,16 +89,15 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const [serverOptions, bossChances] = await Promise.all([
     await DrawerFieldsClient.fetchActiveServerOptions(),
-    await BossesClient.fetchServerBossChances(server),
+    await BossesClient.fetchServerBossChances({ server, isPro: false }),
   ])
 
-  const freeBossChances: BossChances = pluckPremiumBossData(bossChances)
-  freeBossChances.bosses.sort(sortBossesBy.chance)
+  bossChances.bosses.sort(sortBossesBy.chance)
 
   return {
     props: {
       serverOptions,
-      bossChances: freeBossChances,
+      bossChances,
       recentlyAppeared: bossChances.bosses
         .filter(({ lastAppearence }) => {
           if (!lastAppearence) return false

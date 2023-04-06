@@ -36,10 +36,14 @@ export default class BossesClient {
     }
   }
 
-  static async fetchServerBossChances(
-    serverName: string,
-  ): Promise<BossChances> {
-    const response = await fetch(`${this.bossChancesUrl}/${serverName}.json`)
+  static async fetchServerBossChances({
+    server,
+    isPro,
+  }: {
+    server: string
+    isPro: boolean
+  }): Promise<BossChances> {
+    const response = await fetch(`${this.bossChancesUrl}/${server}.json`)
     const bossChances: BossChances = await response.json()
 
     bossChances.bosses = bossChances.bosses.map((chance) =>
@@ -48,7 +52,7 @@ export default class BossesClient {
         : chance,
     )
 
-    return bossChances
+    return isPro ? bossChances : pluckPremiumBossData(bossChances)
   }
 
   static async fetchCheckedBosses({
@@ -65,7 +69,7 @@ export default class BossesClient {
         where: { guildId },
         include: { checkedBy: { select: { name: true } } },
       }),
-      this.fetchServerBossChances(server),
+      this.fetchServerBossChances({ server, isPro }),
     ])
 
     const bossChances: typeof allBossChances = isPro
