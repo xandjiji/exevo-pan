@@ -5,6 +5,7 @@ import { stringify, parse } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tabs, Button } from 'components/Atoms'
+import { ConditionalClientComponent } from 'components/Organisms'
 import {
   GuildDataProvider,
   GuildDataConsumer,
@@ -228,15 +229,19 @@ export default function GuildPage({
                       onEdit={toggleEditDialog}
                     />
                   )}
-                  <CheckedBosses
-                    guildId={guild.id}
-                    initialCheckedBosses={checkedBosses}
-                    currentMember={currentMember}
-                    isAdmin={EXEVO_PAN_ADMIN}
-                    onNotify={(defaultBoss) =>
-                      setIsNotificationOpen({ isOpen: true, defaultBoss })
-                    }
-                  />
+                  <ConditionalClientComponent
+                    ssr={!EXEVO_PAN_ADMIN && !currentMember}
+                  >
+                    <CheckedBosses
+                      guildId={guild.id}
+                      initialCheckedBosses={checkedBosses}
+                      currentMember={currentMember}
+                      isAdmin={EXEVO_PAN_ADMIN}
+                      onNotify={(defaultBoss) =>
+                        setIsNotificationOpen({ isOpen: true, defaultBoss })
+                      }
+                    />
+                  </ConditionalClientComponent>
                   <MemberList
                     title={i18n.members}
                     guildName={guild.name}

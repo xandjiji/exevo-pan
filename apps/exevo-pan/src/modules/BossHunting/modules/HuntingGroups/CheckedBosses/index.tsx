@@ -58,18 +58,22 @@ const CheckedBosses = ({
   const [hideNoChance, setHideNoChance] = useStoredState(
     prefixedLSKey('no-chance'),
     false,
+    isMember ? undefined : false,
   )
   const [hideRecentlyChecked, setHideRecentlyChecked] = useStoredState(
     prefixedLSKey('recently-checked'),
     false,
+    isMember ? undefined : false,
   )
   const [hideBlacklisted, setHideBlacklisted] = useStoredState(
     prefixedLSKey('blacklisted'),
     false,
+    isMember ? undefined : false,
   )
   const [hideRaidBosses, setHideRaidBosses] = useStoredState(
     prefixedLSKey('raid-bosses'),
     false,
+    isMember ? undefined : false,
   )
 
   const checkedTimeAgo = useTimeAgo()
