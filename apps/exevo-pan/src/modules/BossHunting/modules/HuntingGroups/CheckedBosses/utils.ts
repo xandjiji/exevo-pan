@@ -1,19 +1,29 @@
 import { getDateRelativeToSS } from 'shared-utils/dist/time'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
-import { bossInfo } from '../../../bossInfo'
 
 export const isFromSameServerSave = (a = new Date(), b = new Date()): boolean =>
   getDateRelativeToSS(a).toISOString() === getDateRelativeToSS(b).toISOString()
 
-const raidBossExceptions: Set<TrackedBossName> = new Set(['Draptor'])
-const raidBosses: Set<string> = new Set(
-  Array.from(bossInfo)
-    .filter(
-      ([boss, info]) =>
-        !!info.raidMessages?.length && !raidBossExceptions.has(boss),
-    )
-    .map(([boss]) => boss),
-)
+const raidBossesNames: TrackedBossName[] = [
+  'Chizzoron the Distorter',
+  'Cublarc the Plunderer',
+  'Feroxa',
+  'Ferumbras',
+  "Gaz'haragoth",
+  'Ghazbaran',
+  'Grand Mother Foulscale',
+  'Morgaroth',
+  'Morshabaal',
+  'Orshabaal',
+  'The Abomination',
+  'The Blightfather',
+  'The Pale Count',
+  'Willi Wasp',
+  'Zomba',
+  'Zulazza the Corruptor',
+]
+
+const raidBosses: Set<string> = new Set(raidBossesNames)
 
 export const checkIfBoss = {
   appearOnlyOnRaids: ({ name }: CheckedBoss): boolean => raidBosses.has(name),
