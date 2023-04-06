@@ -16,6 +16,6 @@ export const checkIfBoss = {
     currentChance,
   }: CheckedBoss): boolean =>
     daysLeftForPossibleSpawns
-      ? daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
+      ? !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
       : currentChance === 0,
 }
