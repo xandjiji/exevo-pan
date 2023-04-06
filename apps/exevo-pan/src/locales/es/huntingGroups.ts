@@ -191,6 +191,7 @@ export default {
     hideNoChance: 'Hide no chance',
     hideRecentlyChecked: 'Hide recently checked',
     hideBlacklisted: 'Hide my ignored bosses',
+    hideRaid: 'Hide raid bosses',
     details: 'Details',
     notifyGroup: 'Notify group',
     markAsChecked: 'Mark as checked',

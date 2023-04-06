@@ -192,6 +192,7 @@ export default {
     hideNoChance: 'Esconder sem chances',
     hideRecentlyChecked: 'Esconder recém checados',
     hideBlacklisted: 'Esconder bosses ignorados',
+    hideRaid: 'Esconder bosses de raid',
     details: 'Detalhes',
     notifyGroup: 'Notificar grupo',
     markAsChecked: 'Marcar como checado',

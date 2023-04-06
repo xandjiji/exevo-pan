@@ -22,7 +22,7 @@ import { useRecentlyUpdated } from './useRecentlyUpdated'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
-import { isFromSameServerSave } from './utils'
+import { isFromSameServerSave, bossFilter } from './utils'
 
 const INITIAL_DISPLAYED_COUNT = 4
 
@@ -55,6 +55,7 @@ const CheckedBosses = ({
   const [hideNoChance, setHideNoChance] = useState(false)
   const [hideRecentlyChecked, setHideRecentlyChecked] = useState(false)
   const [hideBlacklisted, setHideBlacklisted] = useState(false)
+  const [hideRaidBosses, setHideRaidBosses] = useState(false)
 
   const checkedTimeAgo = useTimeAgo()
   const { recentlyUpdatedBosses, onFreshData } =
@@ -97,35 +98,44 @@ const CheckedBosses = ({
   const bossList = useMemo(
     () =>
       [...transformedList]
-        .filter(
-          ({ name, currentChance, daysLeftForPossibleSpawns, lastChecked }) => {
-            if (bossQuery && !name.toLowerCase().includes(bossQuery)) {
-              return false
-            }
+        .filter((boss) => {
+          const {
+            name,
+            currentChance,
+            daysLeftForPossibleSpawns,
+            lastChecked,
+          } = boss
 
-            if (hideNoChance) {
-              if (daysLeftForPossibleSpawns) {
-                if (
-                  !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
-                ) {
-                  return false
-                }
-              } else if (currentChance === 0) {
+          if (bossQuery && !name.toLowerCase().includes(bossQuery)) {
+            return false
+          }
+
+          if (hideRaidBosses && bossFilter.appearOnlyOnRaids(boss)) {
+            return false
+          }
+
+          if (hideNoChance) {
+            if (daysLeftForPossibleSpawns) {
+              if (
+                !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
+              ) {
                 return false
               }
-            }
-
-            if (hideRecentlyChecked && lastChecked?.recent) {
+            } else if (currentChance === 0) {
               return false
             }
+          }
 
-            if (hideBlacklisted && blacklist.has(name)) {
-              return false
-            }
+          if (hideRecentlyChecked && lastChecked?.recent) {
+            return false
+          }
 
-            return true
-          },
-        )
+          if (hideBlacklisted && blacklist.has(name)) {
+            return false
+          }
+
+          return true
+        })
         .sort(sortBossesBy.chance)
         .slice(0, expanded ? transformedList.length : INITIAL_DISPLAYED_COUNT),
     [
@@ -134,6 +144,7 @@ const CheckedBosses = ({
       hideNoChance,
       hideRecentlyChecked,
       hideBlacklisted,
+      hideRaidBosses,
       blacklist,
       expanded,
     ],
@@ -184,11 +195,17 @@ const CheckedBosses = ({
           disabled={!isMember}
         />
 
-        <div className="flex flex-col gap-2 md:mb-3 md:flex-row md:gap-4">
+        <div className="flex flex-col gap-2 md:grid md:grid-cols-2">
           <Checkbox
             label={i18n.hideNoChance}
             checked={hideNoChance}
             onClick={() => setHideNoChance((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={i18n.hideRaid}
+            checked={hideRaidBosses}
+            onClick={() => setHideRaidBosses((prev) => !prev)}
             disabled={!isMember}
           />
           <Checkbox
