@@ -24,7 +24,7 @@ const GuildHero = ({ guild, memberCount }: GuildHeroProps) => {
       src={avatar.loadSrc(guild.avatarId)}
       hueRotation={guild.avatarDegree}
       dimension={guild.avatarId >= AVATAR.itemsBaseIndex ? 192 : undefined}
-      subtitle={`${memberCount} ${
+      subtitle={`${guild.server}, ${memberCount} ${
         memberCount > 1 ? i18n.members : i18n.member
       }`}
     />
