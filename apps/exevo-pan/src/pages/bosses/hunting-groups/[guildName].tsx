@@ -310,14 +310,18 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   const isMember = guildMembers.some(({ userId }) => userId === token?.id)
   const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
+  const isPro = token?.proStatus ?? false
 
   const checkedBosses: CheckedBoss[] = hasMemberPrivilege
     ? await BossesClient.fetchCheckedBosses({
-        isPro: token?.proStatus ?? false,
+        isPro,
         guildId: guild.id,
         server: guild.server,
       })
-    : []
+    : await BossesClient.fetchServerBossChances({
+        server: guild.server,
+        isPro,
+      }).then((bossChances) => bossChances.bosses)
 
   const guildData: GuildData = {
     guild: {
