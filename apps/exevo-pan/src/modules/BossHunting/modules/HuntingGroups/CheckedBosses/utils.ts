@@ -15,8 +15,6 @@ const raidBosses: Set<string> = new Set(
     .map(([boss]) => boss),
 )
 
-console.log(raidBosses)
-
 export const checkIfBoss = {
   appearOnlyOnRaids: ({ name }: CheckedBoss): boolean => raidBosses.has(name),
   hasNoChance: ({
