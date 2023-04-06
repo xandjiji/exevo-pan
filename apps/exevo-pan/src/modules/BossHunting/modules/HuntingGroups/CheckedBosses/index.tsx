@@ -30,6 +30,7 @@ type CheckedBossesProps = {
   guildId: string
   initialCheckedBosses: CheckedBoss[]
   currentMember?: GuildMember
+  isAdmin?: boolean
   onNotify?: (boss: string) => void
 }
 
@@ -37,6 +38,7 @@ const CheckedBosses = ({
   guildId,
   initialCheckedBosses,
   currentMember,
+  isAdmin = false,
   onNotify,
 }: CheckedBossesProps) => {
   const {
@@ -44,7 +46,7 @@ const CheckedBosses = ({
   } = useTranslations()
   const i18n = huntingGroups.CheckedBosses
 
-  const isMember = !!currentMember
+  const isMember = isAdmin || !!currentMember
 
   const [expanded, setExpanded] = useState(false)
 
@@ -259,7 +261,17 @@ const CheckedBosses = ({
               </div>
             }
             bottomElement={
-              boss.manuallyMarkedAsNoChance ? (
+              !isMember ? (
+                <p
+                  className="flex items-center gap-1"
+                  title={templateString(i18n.lastTimeChecked, {
+                    member: boss.checkedBy ?? '',
+                  })}
+                >
+                  <ViewedIcon className="fill-primaryHighlight mr-0.5 h-4 w-4" />
+                  <span>?? {i18n.minutesAgo}</span>
+                </p>
+              ) : boss.manuallyMarkedAsNoChance ? (
                 <p
                   className="flex items-center gap-1"
                   title={templateString(i18n.lastTimeChecked, {
@@ -307,7 +319,7 @@ const CheckedBosses = ({
           onClick={() => setExpanded(true)}
           disabled={!isMember}
         >
-          <ChevronDownIcon />
+          <ChevronDownIcon className={clsx(!isMember && '!fill-separator')} />
           {i18n.showMore}
         </Button>
       )}

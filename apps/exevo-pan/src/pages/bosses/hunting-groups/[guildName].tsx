@@ -232,6 +232,7 @@ export default function GuildPage({
                     guildId={guild.id}
                     initialCheckedBosses={checkedBosses}
                     currentMember={currentMember}
+                    isAdmin={EXEVO_PAN_ADMIN}
                     onNotify={(defaultBoss) =>
                       setIsNotificationOpen({ isOpen: true, defaultBoss })
                     }
