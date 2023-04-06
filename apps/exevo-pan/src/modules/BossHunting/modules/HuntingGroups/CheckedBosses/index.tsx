@@ -44,6 +44,8 @@ const CheckedBosses = ({
   } = useTranslations()
   const i18n = huntingGroups.CheckedBosses
 
+  const isMember = !!currentMember
+
   const [expanded, setExpanded] = useState(false)
 
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
@@ -59,6 +61,7 @@ const CheckedBosses = ({
   const checkedBosses = trpc.listCheckedBosses.useQuery(
     { guildId },
     {
+      enabled: isMember,
       initialData: initialCheckedBosses,
       refetchInterval: MILLISECONDS_IN.MINUTE,
       onSuccess: onFreshData,
@@ -176,6 +179,7 @@ const CheckedBosses = ({
           placeholder="e.g. 'Yeti', 'Mr. Punish'"
           className="md:max-w-[200px]"
           onChange={(e) => setBossQuery(e.target.value.toLowerCase())}
+          disabled={!isMember}
         />
 
         <div className="flex flex-col gap-2 md:mb-3 md:flex-row md:gap-4">
@@ -183,16 +187,19 @@ const CheckedBosses = ({
             label={i18n.hideNoChance}
             checked={hideNoChance}
             onClick={() => setHideNoChance((prev) => !prev)}
+            disabled={!isMember}
           />
           <Checkbox
             label={i18n.hideRecentlyChecked}
             checked={hideRecentlyChecked}
             onClick={() => setHideRecentlyChecked((prev) => !prev)}
+            disabled={!isMember}
           />
           <Checkbox
             label={i18n.hideBlacklisted}
             checked={hideBlacklisted}
             onClick={() => setHideBlacklisted((prev) => !prev)}
+            disabled={!isMember}
           />
         </div>
       </div>
@@ -221,7 +228,7 @@ const CheckedBosses = ({
                       label: i18n.notifyGroup,
                       icon: BlogIcon,
                       onSelect: () => onNotify?.(boss.name),
-                      disabled: boss.manuallyMarkedAsNoChance,
+                      disabled: boss.manuallyMarkedAsNoChance || !isMember,
                     },
                     {
                       label: boss.manuallyMarkedAsNoChance
@@ -237,12 +244,13 @@ const CheckedBosses = ({
                             ? null
                             : new Date(),
                         }),
+                      disabled: !isMember,
                     },
                     {
                       label: i18n.markAsChecked,
                       icon: ViewedIcon,
                       onSelect: () => markBoss({ boss: boss.name }),
-                      disabled: boss.manuallyMarkedAsNoChance,
+                      disabled: boss.manuallyMarkedAsNoChance || !isMember,
                     },
                   ]}
                 >
@@ -297,6 +305,7 @@ const CheckedBosses = ({
           pill
           className="mx-auto mt-4"
           onClick={() => setExpanded(true)}
+          disabled={!isMember}
         >
           <ChevronDownIcon />
           {i18n.showMore}
