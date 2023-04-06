@@ -6,11 +6,19 @@ export const isFromSameServerSave = (a = new Date(), b = new Date()): boolean =>
   getDateRelativeToSS(a).toISOString() === getDateRelativeToSS(b).toISOString()
 
 const raidBossExceptions: Set<TrackedBossName> = new Set(['Draptor'])
+const raidBosses: Set<string> = new Set(
+  Array.from(bossInfo)
+    .filter(
+      ([boss, info]) =>
+        !!info.raidMessages?.length && !raidBossExceptions.has(boss),
+    )
+    .map(([boss]) => boss),
+)
+
+console.log(raidBosses)
 
 export const checkIfBoss = {
-  appearOnlyOnRaids: ({ name }: CheckedBoss): boolean =>
-    !!bossInfo.get(name as TrackedBossName)?.raidMessages?.length &&
-    !raidBossExceptions.has(name as TrackedBossName),
+  appearOnlyOnRaids: ({ name }: CheckedBoss): boolean => raidBosses.has(name),
   hasNoChance: ({
     daysLeftForPossibleSpawns,
     currentChance,
