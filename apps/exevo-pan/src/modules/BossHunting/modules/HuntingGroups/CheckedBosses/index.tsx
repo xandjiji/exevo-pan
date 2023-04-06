@@ -13,6 +13,7 @@ import {
   UndoIcon,
   ChevronDownIcon,
 } from 'assets/svgs'
+import { useStoredState } from 'hooks'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { premiumBosses } from 'Constants'
@@ -34,6 +35,8 @@ type CheckedBossesProps = {
   onNotify?: (boss: string) => void
 }
 
+const prefixedLSKey = (key: string) => `boss-group-filter-${key}`
+
 const CheckedBosses = ({
   guildId,
   initialCheckedBosses,
@@ -52,10 +55,22 @@ const CheckedBosses = ({
 
   const [selectedBoss, setSelectedBoss] = useState<string | undefined>()
   const [bossQuery, setBossQuery] = useState('')
-  const [hideNoChance, setHideNoChance] = useState(false)
-  const [hideRecentlyChecked, setHideRecentlyChecked] = useState(false)
-  const [hideBlacklisted, setHideBlacklisted] = useState(false)
-  const [hideRaidBosses, setHideRaidBosses] = useState(false)
+  const [hideNoChance, setHideNoChance] = useStoredState(
+    prefixedLSKey('no-chance'),
+    false,
+  )
+  const [hideRecentlyChecked, setHideRecentlyChecked] = useStoredState(
+    prefixedLSKey('recently-checked'),
+    false,
+  )
+  const [hideBlacklisted, setHideBlacklisted] = useStoredState(
+    prefixedLSKey('blacklisted'),
+    false,
+  )
+  const [hideRaidBosses, setHideRaidBosses] = useStoredState(
+    prefixedLSKey('raid-bosses'),
+    false,
+  )
 
   const checkedTimeAgo = useTimeAgo()
   const { recentlyUpdatedBosses, onFreshData } =
