@@ -3,6 +3,7 @@ import { getDateRelativeToSS, MILLISECONDS_IN } from 'shared-utils/dist/time'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
 import { pluckPremiumBossData } from 'utils'
 import { endpoints, paths } from 'Constants'
+import { multipleSpawnLocationBosses } from '../../../modules/BossHunting/bossInfo'
 
 export default class BossesClient {
   private static bossChancesUrl = `${endpoints.STATIC_DATA}${paths.BOSS_CHANCES}`
@@ -72,11 +73,31 @@ export default class BossesClient {
       this.fetchServerBossChances({ server, isPro }),
     ])
 
-    const bossChances: typeof allBossChances = isPro
+    const serverBossData: typeof allBossChances = isPro
       ? allBossChances
       : pluckPremiumBossData(allBossChances)
 
-    const checkedBosses: CheckedBoss[] = bossChances.bosses.map(
+    const bossChances: BossStats[] = []
+    serverBossData.bosses.forEach((bossChance) => {
+      const multipleLocationBoss = multipleSpawnLocationBosses.entries.find(
+        ({ name }) => bossChance.name === name,
+      )
+      if (!multipleLocationBoss) {
+        bossChances.push(bossChance)
+      } else {
+        multipleLocationBoss.locations.forEach((location) => {
+          bossChances.push({
+            ...bossChance,
+            name: multipleSpawnLocationBosses.displayName({
+              name: bossChance.name,
+              location,
+            }),
+          })
+        })
+      }
+    })
+
+    const checkedBosses: CheckedBoss[] = bossChances.map(
       (boss): CheckedBoss => {
         const lastCheck = bossChecks.find((check) => boss.name === check.boss)
 
