@@ -268,6 +268,7 @@ const CheckedBosses = ({
                       onSelect: () =>
                         markBoss({
                           boss: boss.name,
+                          location: boss.location,
                           lastSpawned: boss.manuallyMarkedAsNoChance
                             ? null
                             : new Date(),
@@ -277,7 +278,8 @@ const CheckedBosses = ({
                     {
                       label: i18n.markAsChecked,
                       icon: ViewedIcon,
-                      onSelect: () => markBoss({ boss: boss.name }),
+                      onSelect: () =>
+                        markBoss({ boss: boss.name, location: boss.location }),
                       disabled: boss.manuallyMarkedAsNoChance || !isMember,
                     },
                   ]}
