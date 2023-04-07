@@ -1491,7 +1491,7 @@ const spawnLocations: { name: string; locations: string[] }[] = [
   { name: bossTokens['Battlemaster Zunzu'], locations: ['West', 'East'] },
   {
     name: bossTokens.Dreadmaw,
-    locations: ['North', 'South'],
+    locations: ['West', 'East'],
   },
   {
     name: bossTokens['Flamecaller Zazrak'],
