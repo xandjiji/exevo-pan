@@ -21,7 +21,7 @@ const NotificationDialog = ({
   guildId,
   onClose,
   defaultBoss = '',
-  location,
+  location = '',
 }: NotificationDialogProps) => {
   const {
     translations: { common, huntingGroups },

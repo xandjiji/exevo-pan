@@ -270,9 +270,9 @@ model BossCheck {
     checkedBy   GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
     memberId    String
     lastSpawned DateTime?
-    location    String?
+    location    String
 
-    @@unique([boss, guildId])
+    @@unique([boss, guildId, location])
     @@index([guildId])
     @@index([memberId])
 }

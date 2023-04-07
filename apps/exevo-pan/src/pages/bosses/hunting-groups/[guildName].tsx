@@ -333,7 +333,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     : await BossesClient.fetchServerBossChances({
         server: guild.server,
         isPro,
-      }).then((bossChances) => bossChances.bosses)
+      }).then((bossChances) =>
+        bossChances.bosses.map((stats) => ({ ...stats, location: '' })),
+      )
 
   const guildData: GuildData = {
     guild: {

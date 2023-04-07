@@ -1,5 +1,5 @@
 declare type CheckedBoss = {
-  location?: string
+  location: string
   checkedAt?: Date
   checkedBy?: string
   lastSpawned?: Date

@@ -611,7 +611,7 @@ export const notifyGuildMembers = authedProcedure
     z.object({
       guildId: z.string(),
       boss: z.string(),
-      location: z.string().optional(),
+      location: z.string(),
     }),
   )
   .mutation(async ({ ctx: { token }, input: { guildId, boss, location } }) => {
@@ -655,7 +655,7 @@ export const notifyGuildMembers = authedProcedure
           },
         }),
         prisma.bossCheck.upsert({
-          where: { boss_guildId: { boss, guildId } },
+          where: { boss_guildId_location: { boss, guildId, location } },
           create: {
             guildId,
             memberId: requesterMember.id,
@@ -737,7 +737,7 @@ export const markCheckedBoss = authedProcedure
   .mutation(
     async ({
       ctx: { token },
-      input: { guildId, boss, location, lastSpawned },
+      input: { guildId, boss, location = '', lastSpawned },
     }) => {
       const userId = token.id
 
@@ -756,7 +756,7 @@ export const markCheckedBoss = authedProcedure
       const requesterMember = await findGuildMember({ guildId, userId })
 
       const result = await prisma.bossCheck.upsert({
-        where: { boss_guildId: { boss, guildId } },
+        where: { boss_guildId_location: { boss, guildId, location } },
         create: {
           guildId,
           memberId: requesterMember.id,

@@ -83,7 +83,7 @@ export default class BossesClient {
         ({ name }) => bossChance.name === name,
       )
       if (!multipleLocationBoss) {
-        bossChances.push(bossChance)
+        bossChances.push({ ...bossChance, location: '' })
       } else {
         multipleLocationBoss.locations.forEach((location) => {
           bossChances.push({ ...bossChance, location })
