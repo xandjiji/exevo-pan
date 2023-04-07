@@ -614,88 +614,84 @@ export const notifyGuildMembers = authedProcedure
       location: z.string().optional(),
     }),
   )
-  .mutation(
-    async ({
-      ctx: { token },
-      input: { guildId, boss: bossName, location },
-    }) => {
-      const requesterId = token.id
+  .mutation(async ({ ctx: { token }, input: { guildId, boss, location } }) => {
+    const requesterId = token.id
 
-      const { guild, requesterMember } = await throwIfForbiddenGuildRequest({
-        requesterId,
-        guildId,
-      })
+    const { guild, requesterMember } = await throwIfForbiddenGuildRequest({
+      requesterId,
+      guildId,
+    })
 
-      if (
-        !multipleSpawnLocationBosses.isNameAndLocationValid({
-          name: bossName,
-          location,
-        })
-      ) {
-        throw new TRPCError({
-          code: 'UNAUTHORIZED',
-          message: 'Insufficient privileges in this guild',
-        })
-      }
-
-      const boss = multipleSpawnLocationBosses.displayName({
-        name: bossName,
+    if (
+      !multipleSpawnLocationBosses.isNameAndLocationValid({
+        name: boss,
         location,
       })
-
-      const members = await prisma.guildMember.findMany({
-        where: { guildId, disabledNotifications: false },
-        include: { user: { select: { NotificationDevice: true } } },
+    ) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Insufficient privileges in this guild',
       })
+    }
 
-      if (requesterMember) {
-        await prisma.$transaction([
-          prisma.guildLogEntry.create({
-            data: {
-              type: 'NOTIFICATION',
-              guildId,
-              actionGuildMemberId: requesterMember.id,
-              metadata: boss,
+    const displayedName = multipleSpawnLocationBosses.displayName({
+      name: boss,
+      location,
+    })
+
+    const members = await prisma.guildMember.findMany({
+      where: { guildId, disabledNotifications: false },
+      include: { user: { select: { NotificationDevice: true } } },
+    })
+
+    if (requesterMember) {
+      await prisma.$transaction([
+        prisma.guildLogEntry.create({
+          data: {
+            type: 'NOTIFICATION',
+            guildId,
+            actionGuildMemberId: requesterMember.id,
+            metadata: displayedName,
+          },
+        }),
+        prisma.bossCheck.upsert({
+          where: { boss_guildId: { boss, guildId } },
+          create: {
+            guildId,
+            memberId: requesterMember.id,
+            boss,
+            location,
+            lastSpawned: new Date(),
+          },
+          update: { memberId: requesterMember.id, lastSpawned: new Date() },
+        }),
+      ])
+    }
+
+    const result = await Promise.all(
+      members
+        .filter(
+          ({ disabledNotifications, blacklistedBosses }) =>
+            !disabledNotifications &&
+            !blacklistUtils.split(blacklistedBosses ?? '').has(boss),
+        )
+        .map(({ user: { NotificationDevice } }) => NotificationDevice)
+        .flat()
+        .map((device) =>
+          DeviceNotificationClient.notify({
+            device,
+            notification: {
+              title: boss,
+              body: guild.name,
+              url: getGuildPermalink(guild.name, true),
             },
-          }),
-          prisma.bossCheck.upsert({
-            where: { boss_guildId: { boss, guildId } },
-            create: {
-              guildId,
-              memberId: requesterMember.id,
-              boss,
-              lastSpawned: new Date(),
-            },
-            update: { memberId: requesterMember.id, lastSpawned: new Date() },
-          }),
-        ])
-      }
+            deleteInvalidDevices: false,
+          }).catch(console.log),
+        ),
+    )
 
-      const result = await Promise.all(
-        members
-          .filter(
-            ({ disabledNotifications, blacklistedBosses }) =>
-              !disabledNotifications &&
-              !blacklistUtils.split(blacklistedBosses ?? '').has(bossName),
-          )
-          .map(({ user: { NotificationDevice } }) => NotificationDevice)
-          .flat()
-          .map((device) =>
-            DeviceNotificationClient.notify({
-              device,
-              notification: {
-                title: boss,
-                body: guild.name,
-                url: getGuildPermalink(guild.name, true),
-              },
-              deleteInvalidDevices: false,
-            }).catch(console.log),
-          ),
-      )
-
-      return result
-    },
-  )
+    return result
+  })
 
 export const listGuildLog = authedProcedure
   .input(
@@ -741,18 +737,13 @@ export const markCheckedBoss = authedProcedure
   .mutation(
     async ({
       ctx: { token },
-      input: { guildId, boss: bossName, location, lastSpawned },
+      input: { guildId, boss, location, lastSpawned },
     }) => {
       const userId = token.id
 
-      const boss = multipleSpawnLocationBosses.displayName({
-        name: bossName,
-        location,
-      })
-
       if (
         !multipleSpawnLocationBosses.isNameAndLocationValid({
-          name: bossName,
+          name: boss,
           location,
         })
       ) {
@@ -766,7 +757,13 @@ export const markCheckedBoss = authedProcedure
 
       const result = await prisma.bossCheck.upsert({
         where: { boss_guildId: { boss, guildId } },
-        create: { guildId, memberId: requesterMember.id, boss, lastSpawned },
+        create: {
+          guildId,
+          memberId: requesterMember.id,
+          boss,
+          lastSpawned,
+          location,
+        },
         update: { memberId: requesterMember.id, lastSpawned },
         include: { checkedBy: { select: { name: true } } },
       })
