@@ -161,12 +161,14 @@ const CheckedBosses = ({
   const markBoss = useCallback(
     ({
       boss,
+      location,
       lastSpawned = null,
     }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) =>
       toast.promise(
         markCheckedBoss.mutateAsync({
           boss,
           guildId,
+          location,
           lastSpawned,
         }),
         {
