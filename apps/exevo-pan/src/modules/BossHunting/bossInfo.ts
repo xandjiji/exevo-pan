@@ -2,6 +2,7 @@ import {
   TrackedBossName,
   constTokens as bossTokens,
 } from 'data-dictionary/dist/dictionaries/bosses'
+import { bossSet } from './blacklist'
 
 export const bossInfo = new Map<TrackedBossName, BossInfo>()
 
@@ -1522,21 +1523,17 @@ const spawnLocations: { name: string; locations: string[] }[] = [
   },
 ]
 
+type NameLocationArgs = { name: string; location?: string }
+
 export const multipleSpawnLocationBosses = {
   names: new Set(spawnLocations.map(({ name }) => name)),
   entries: spawnLocations,
-  displayName: ({ name, location }: { name: string; location: string }) =>
-    `${name} (${location})`,
-  isNameAndLocationValid: ({
-    name,
-    location,
-  }: {
-    name: string
-    location?: string
-  }): boolean =>
+  displayName: ({ name, location }: NameLocationArgs) =>
+    location ? `${name} (${location})` : name,
+  isNameAndLocationValid: ({ name, location }: NameLocationArgs): boolean =>
     location
       ? !!spawnLocations
           .find((boss) => boss.name === name)
           ?.locations.find((bossLocation) => location === bossLocation)
-      : true,
+      : bossSet.has(name),
 }
