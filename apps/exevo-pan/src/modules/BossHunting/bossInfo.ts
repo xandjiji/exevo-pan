@@ -1495,7 +1495,11 @@ const spawnLocations: { name: string; locations: string[] }[] = [
   },
   {
     name: bossTokens['Flamecaller Zazrak'],
-    locations: ['+0', '+1'],
+    locations: ['Surface', '+1 North'],
+  },
+  {
+    name: bossTokens.Fleabringer,
+    locations: ['-1 North', '-1 South', 'Surface'],
   },
   {
     name: bossTokens.Hirintror,
