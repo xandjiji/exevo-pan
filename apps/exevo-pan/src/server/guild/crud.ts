@@ -15,7 +15,6 @@ import type {
   GuildMember,
   GuildApplication,
 } from '@prisma/client'
-import { multipleSpawnLocationBosses } from '../../modules/BossHunting/bossInfo'
 import {
   utils as blacklistUtils,
   bossSet,
@@ -611,91 +610,68 @@ export const notifyGuildMembers = authedProcedure
     z.object({
       guildId: z.string(),
       boss: z.string(),
-      location: z.string().optional(),
     }),
   )
-  .mutation(
-    async ({
-      ctx: { token },
-      input: { guildId, boss: bossName, location },
-    }) => {
-      const requesterId = token.id
+  .mutation(async ({ ctx: { token }, input: { guildId, boss } }) => {
+    const requesterId = token.id
 
-      const { guild, requesterMember } = await throwIfForbiddenGuildRequest({
-        requesterId,
-        guildId,
-      })
+    const { guild, requesterMember } = await throwIfForbiddenGuildRequest({
+      requesterId,
+      guildId,
+    })
 
-      const members = await prisma.guildMember.findMany({
-        where: { guildId, disabledNotifications: false },
-        include: { user: { select: { NotificationDevice: true } } },
-      })
+    const members = await prisma.guildMember.findMany({
+      where: { guildId, disabledNotifications: false },
+      include: { user: { select: { NotificationDevice: true } } },
+    })
 
-      const boss = multipleSpawnLocationBosses.displayName({
-        name: bossName,
-        location,
-      })
+    if (requesterMember) {
+      await prisma.$transaction([
+        prisma.guildLogEntry.create({
+          data: {
+            type: 'NOTIFICATION',
+            guildId,
+            actionGuildMemberId: requesterMember.id,
+            metadata: boss,
+          },
+        }),
+        prisma.bossCheck.upsert({
+          where: { boss_guildId: { boss, guildId } },
+          create: {
+            guildId,
+            memberId: requesterMember.id,
+            boss,
+            lastSpawned: new Date(),
+          },
+          update: { memberId: requesterMember.id, lastSpawned: new Date() },
+        }),
+      ])
+    }
 
-      if (
-        !multipleSpawnLocationBosses.isNameAndLocationValid({
-          name: bossName,
-          location,
-        })
-      ) {
-        throw new TRPCError({
-          code: 'BAD_REQUEST',
-          message: `${boss} is not a valid boss`,
-        })
-      }
-
-      if (requesterMember) {
-        await prisma.$transaction([
-          prisma.guildLogEntry.create({
-            data: {
-              type: 'NOTIFICATION',
-              guildId,
-              actionGuildMemberId: requesterMember.id,
-              metadata: boss,
+    const result = await Promise.all(
+      members
+        .filter(
+          ({ disabledNotifications, blacklistedBosses }) =>
+            !disabledNotifications &&
+            !blacklistUtils.split(blacklistedBosses ?? '').has(boss),
+        )
+        .map(({ user: { NotificationDevice } }) => NotificationDevice)
+        .flat()
+        .map((device) =>
+          DeviceNotificationClient.notify({
+            device,
+            notification: {
+              title: boss,
+              body: guild.name,
+              url: getGuildPermalink(guild.name, true),
             },
-          }),
-          prisma.bossCheck.upsert({
-            where: { boss_guildId: { boss, guildId } },
-            create: {
-              guildId,
-              memberId: requesterMember.id,
-              boss,
-              lastSpawned: new Date(),
-            },
-            update: { memberId: requesterMember.id, lastSpawned: new Date() },
-          }),
-        ])
-      }
+            deleteInvalidDevices: false,
+          }).catch(console.log),
+        ),
+    )
 
-      const result = await Promise.all(
-        members
-          .filter(
-            ({ disabledNotifications, blacklistedBosses }) =>
-              !disabledNotifications &&
-              !blacklistUtils.split(blacklistedBosses ?? '').has(bossName),
-          )
-          .map(({ user: { NotificationDevice } }) => NotificationDevice)
-          .flat()
-          .map((device) =>
-            DeviceNotificationClient.notify({
-              device,
-              notification: {
-                title: boss,
-                body: guild.name,
-                url: getGuildPermalink(guild.name, true),
-              },
-              deleteInvalidDevices: false,
-            }).catch(console.log),
-          ),
-      )
-
-      return result
-    },
-  )
+    return result
+  })
 
 export const listGuildLog = authedProcedure
   .input(
@@ -734,27 +710,14 @@ export const markCheckedBoss = authedProcedure
     z.object({
       guildId: z.string(),
       boss: z.string(),
-      location: z.string().optional(),
       lastSpawned: z.date().nullish(),
     }),
   )
   .mutation(
-    async ({
-      ctx: { token },
-      input: { guildId, boss: bossName, location, lastSpawned },
-    }) => {
+    async ({ ctx: { token }, input: { guildId, boss, lastSpawned } }) => {
       const userId = token.id
 
-      const boss = multipleSpawnLocationBosses.displayName({
-        name: bossName,
-        location,
-      })
-      if (
-        !multipleSpawnLocationBosses.isNameAndLocationValid({
-          name: bossName,
-          location,
-        })
-      ) {
+      if (!bossSet.has(boss)) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
           message: `Unexpected '${boss}' as a checked boss`,
