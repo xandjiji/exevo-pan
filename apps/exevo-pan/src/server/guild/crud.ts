@@ -60,7 +60,7 @@ const throwIfForbiddenGuildRequest = async ({
 }) => {
   const guild = await prisma.guild.findUnique({
     where: { id: guildId },
-    include: { guildMembers: true },
+    include: { guildMembers: { include: { user: true } } },
   })
 
   if (!guild) {
@@ -81,10 +81,9 @@ const throwIfForbiddenGuildRequest = async ({
     })
   }
 
-  /* const hasProMember = guild.guildMembers.some(
+  const hasProMember = guild.guildMembers.some(
     ({ user: { proStatus } }) => proStatus,
-  ) */
-  const hasProMember = true
+  )
 
   return {
     guild,
