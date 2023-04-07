@@ -93,7 +93,10 @@ export default class BossesClient {
 
     const checkedBosses: CheckedBoss[] = bossChances.map(
       (boss): CheckedBoss => {
-        const lastCheck = bossChecks.find((check) => boss.name === check.boss)
+        const lastCheck = bossChecks.find(
+          (check) =>
+            boss.name === check.boss && boss.location === check.location,
+        )
 
         return lastCheck
           ? {
