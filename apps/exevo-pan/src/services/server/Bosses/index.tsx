@@ -77,7 +77,7 @@ export default class BossesClient {
       ? allBossChances
       : pluckPremiumBossData(allBossChances)
 
-    const bossChances: BossStats[] = []
+    const bossChances: CheckedBoss[] = []
     serverBossData.bosses.forEach((bossChance) => {
       const multipleLocationBoss = multipleSpawnLocationBosses.entries.find(
         ({ name }) => bossChance.name === name,
@@ -86,13 +86,7 @@ export default class BossesClient {
         bossChances.push(bossChance)
       } else {
         multipleLocationBoss.locations.forEach((location) => {
-          bossChances.push({
-            ...bossChance,
-            name: multipleSpawnLocationBosses.displayName({
-              name: bossChance.name,
-              location,
-            }),
-          })
+          bossChances.push({ ...bossChance, location })
         })
       }
     })
