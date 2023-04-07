@@ -237,8 +237,11 @@ const CheckedBosses = ({
             location={boss.location}
             premium={premiumBosses.set.has(boss.name)}
             className={clsx(
-              recentlyUpdatedBosses.has(boss.name) &&
-                'animate-zoomInAndOut z-2 relative',
+              recentlyUpdatedBosses.find(
+                (updatedBoss) =>
+                  updatedBoss.name === boss.name &&
+                  updatedBoss.location === boss.location,
+              ) && 'animate-zoomInAndOut z-2 relative',
             )}
             cornerElement={
               <div className="ml-auto self-start">
