@@ -10,6 +10,7 @@ import { BossCardProps } from './types'
 const BossCard = ({
   premium = false,
   bossStats,
+  location,
   cornerElement,
   bottomElement,
   className,
@@ -60,6 +61,9 @@ const BossCard = ({
           {name}{' '}
           {lastSeenText && <InfoTooltip content={lastSeenText} labelSize />}
         </h4>
+        {!!location && (
+          <p className="text-xs font-light tracking-wide">{location}</p>
+        )}
 
         {daysLeftForPossibleSpawns ? (
           <div className="flex flex-wrap items-center gap-2">

@@ -1,6 +1,7 @@
 export type BossCardProps = {
   premium?: boolean
   bossStats: BossStats
+  location?: string
   checkedAt?: Date
   cornerElement?: JSX.Element
   bottomElement?: JSX.Element

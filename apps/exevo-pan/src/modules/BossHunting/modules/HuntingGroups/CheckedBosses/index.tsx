@@ -232,6 +232,7 @@ const CheckedBosses = ({
           <BossCard
             key={boss.name}
             bossStats={boss}
+            location={boss.location}
             premium={premiumBosses.set.has(boss.name)}
             className={clsx(
               recentlyUpdatedBosses.has(boss.name) &&
