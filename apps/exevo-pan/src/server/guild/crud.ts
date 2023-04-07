@@ -681,7 +681,7 @@ export const notifyGuildMembers = authedProcedure
           DeviceNotificationClient.notify({
             device,
             notification: {
-              title: boss,
+              title: displayedName,
               body: guild.name,
               url: getGuildPermalink(guild.name, true),
             },
