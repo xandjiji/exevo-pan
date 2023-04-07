@@ -230,111 +230,114 @@ const CheckedBosses = ({
       </div>
 
       <div className="relative grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
-        {bossList.map((boss) => (
-          <BossCard
-            key={boss.name}
-            bossStats={boss}
-            location={boss.location}
-            premium={premiumBosses.set.has(boss.name)}
-            className={clsx(
-              recentlyUpdatedBosses.find(
-                (updatedBoss) =>
-                  updatedBoss.name === boss.name &&
-                  updatedBoss.location === boss.location,
-              ) && 'animate-zoomInAndOut z-2 relative',
-            )}
-            cornerElement={
-              <div className="ml-auto self-start">
-                <Menu
-                  offset={[0, 8]}
-                  items={[
-                    {
-                      label: i18n.details,
-                      icon: ExpandIcon,
-                      onSelect: () => setSelectedBoss(boss.name),
-                    },
-                    {
-                      label: i18n.notifyGroup,
-                      icon: BlogIcon,
-                      onSelect: () =>
-                        onNotify?.({
-                          boss: boss.name,
-                          location: boss.location,
-                        }),
-                      disabled: boss.manuallyMarkedAsNoChance || !isMember,
-                    },
-                    {
-                      label: boss.manuallyMarkedAsNoChance
-                        ? i18n.unmarkAsNoChance
-                        : i18n.markAsNoChance,
-                      icon: boss.manuallyMarkedAsNoChance
-                        ? UndoIcon
-                        : OutlineRemoveIcon,
-                      onSelect: () =>
-                        markBoss({
-                          boss: boss.name,
-                          location: boss.location,
-                          lastSpawned: boss.manuallyMarkedAsNoChance
-                            ? null
-                            : new Date(),
-                        }),
-                      disabled: !isMember,
-                    },
-                    {
-                      label: i18n.markAsChecked,
-                      icon: ViewedIcon,
-                      onSelect: () =>
-                        markBoss({ boss: boss.name, location: boss.location }),
-                      disabled: boss.manuallyMarkedAsNoChance || !isMember,
-                    },
-                  ]}
-                >
-                  <MoreIcon className="fill-onSurface h-4 w-4" />
-                </Menu>
-              </div>
-            }
-            bottomElement={
-              !isMember ? (
-                <p
-                  className="flex items-center gap-1"
-                  title={templateString(i18n.lastTimeChecked, {
-                    member: '??',
-                  })}
-                >
-                  <ViewedIcon className="fill-primaryHighlight mr-0.5 h-4 w-4" />
-                  <span>?? {i18n.minutesAgo}</span>
-                </p>
-              ) : boss.manuallyMarkedAsNoChance ? (
-                <p
-                  className="flex items-center gap-1"
-                  title={templateString(i18n.lastTimeChecked, {
-                    member: boss.checkedBy ?? '',
-                  })}
-                >
-                  <OutlineRemoveIcon className="fill-red mr-0.5 h-4 w-4" />
-                  {!!boss.lastChecked && (
-                    <span>{boss.lastChecked.readable}</span>
-                  )}
-                </p>
-              ) : boss.lastChecked ? (
-                <p
-                  className="flex items-center gap-1"
-                  title={templateString(i18n.lastTimeChecked, {
-                    member: boss.checkedBy ?? '',
-                  })}
-                >
-                  <ViewedIcon
-                    className={clsx(
-                      'mr-0.5 h-4 w-4',
-                      boss.lastChecked.recent ? 'fill-separator' : 'fill-red',
-                    )}
-                  />
-                  <span>{boss.lastChecked.readable}</span>
-                </p>
-              ) : undefined
-            }
-          />
-        ))}
+        {bossList.map((boss) => {
+          const {
+            name,
+            location,
+            manuallyMarkedAsNoChance,
+            lastChecked,
+            checkedBy,
+          } = boss
+
+          return (
+            <BossCard
+              key={name}
+              bossStats={boss}
+              location={location}
+              premium={premiumBosses.set.has(name)}
+              className={clsx(
+                recentlyUpdatedBosses.find(
+                  (updatedBoss) =>
+                    updatedBoss.name === name &&
+                    updatedBoss.location === location,
+                ) && 'animate-zoomInAndOut z-2 relative',
+              )}
+              cornerElement={
+                <div className="ml-auto self-start">
+                  <Menu
+                    offset={[0, 8]}
+                    items={[
+                      {
+                        label: i18n.details,
+                        icon: ExpandIcon,
+                        onSelect: () => setSelectedBoss(name),
+                      },
+                      {
+                        label: i18n.notifyGroup,
+                        icon: BlogIcon,
+                        onSelect: () => onNotify?.({ boss: name, location }),
+                        disabled: manuallyMarkedAsNoChance || !isMember,
+                      },
+                      {
+                        label: manuallyMarkedAsNoChance
+                          ? i18n.unmarkAsNoChance
+                          : i18n.markAsNoChance,
+                        icon: manuallyMarkedAsNoChance
+                          ? UndoIcon
+                          : OutlineRemoveIcon,
+                        onSelect: () =>
+                          markBoss({
+                            boss: name,
+                            location,
+                            lastSpawned: manuallyMarkedAsNoChance
+                              ? null
+                              : new Date(),
+                          }),
+                        disabled: !isMember,
+                      },
+                      {
+                        label: i18n.markAsChecked,
+                        icon: ViewedIcon,
+                        onSelect: () => markBoss({ boss: name, location }),
+                        disabled: manuallyMarkedAsNoChance || !isMember,
+                      },
+                    ]}
+                  >
+                    <MoreIcon className="fill-onSurface h-4 w-4" />
+                  </Menu>
+                </div>
+              }
+              bottomElement={
+                !isMember ? (
+                  <p
+                    className="flex items-center gap-1"
+                    title={templateString(i18n.lastTimeChecked, {
+                      member: '??',
+                    })}
+                  >
+                    <ViewedIcon className="fill-primaryHighlight mr-0.5 h-4 w-4" />
+                    <span>?? {i18n.minutesAgo}</span>
+                  </p>
+                ) : manuallyMarkedAsNoChance ? (
+                  <p
+                    className="flex items-center gap-1"
+                    title={templateString(i18n.lastTimeChecked, {
+                      member: checkedBy ?? '',
+                    })}
+                  >
+                    <OutlineRemoveIcon className="fill-red mr-0.5 h-4 w-4" />
+                    {!!lastChecked && <span>{lastChecked.readable}</span>}
+                  </p>
+                ) : lastChecked ? (
+                  <p
+                    className="flex items-center gap-1"
+                    title={templateString(i18n.lastTimeChecked, {
+                      member: checkedBy ?? '',
+                    })}
+                  >
+                    <ViewedIcon
+                      className={clsx(
+                        'mr-0.5 h-4 w-4',
+                        lastChecked.recent ? 'fill-separator' : 'fill-red',
+                      )}
+                    />
+                    <span>{lastChecked.readable}</span>
+                  </p>
+                ) : undefined
+              }
+            />
+          )
+        })}
 
         {!expanded && (
           <div
