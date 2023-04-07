@@ -734,14 +734,28 @@ export const markCheckedBoss = authedProcedure
     z.object({
       guildId: z.string(),
       boss: z.string(),
+      location: z.string().optional(),
       lastSpawned: z.date().nullish(),
     }),
   )
   .mutation(
-    async ({ ctx: { token }, input: { guildId, boss, lastSpawned } }) => {
+    async ({
+      ctx: { token },
+      input: { guildId, boss: bossName, location, lastSpawned },
+    }) => {
       const userId = token.id
 
-      if (!bossSet.has(boss)) {
+      const boss = multipleSpawnLocationBosses.displayName({
+        name: bossName,
+        location,
+      })
+
+      if (
+        !multipleSpawnLocationBosses.isNameAndLocationValid({
+          name: bossName,
+          location,
+        })
+      ) {
         throw new TRPCError({
           code: 'BAD_REQUEST',
           message: `Unexpected '${boss}' as a checked boss`,
