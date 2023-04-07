@@ -675,7 +675,7 @@ export const notifyGuildMembers = authedProcedure
           .filter(
             ({ disabledNotifications, blacklistedBosses }) =>
               !disabledNotifications &&
-              !blacklistUtils.split(blacklistedBosses ?? '').has(boss),
+              !blacklistUtils.split(blacklistedBosses ?? '').has(bossName),
           )
           .map(({ user: { NotificationDevice } }) => NotificationDevice)
           .flat()
