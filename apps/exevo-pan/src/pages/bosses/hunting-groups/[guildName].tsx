@@ -59,6 +59,7 @@ export default function GuildPage({
   const [isNotificationOpen, setIsNotificationOpen] = useState<{
     isOpen: boolean
     defaultBoss?: string
+    location?: string
   }>({ isOpen: false })
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
@@ -179,6 +180,7 @@ export default function GuildPage({
                           <NotificationDialog
                             guildId={guild.id}
                             defaultBoss={isNotificationOpen.defaultBoss}
+                            location={isNotificationOpen.location}
                             onClose={() =>
                               setIsNotificationOpen({ isOpen: false })
                             }
@@ -237,8 +239,12 @@ export default function GuildPage({
                       initialCheckedBosses={checkedBosses}
                       currentMember={currentMember}
                       isAdmin={EXEVO_PAN_ADMIN}
-                      onNotify={(defaultBoss) =>
-                        setIsNotificationOpen({ isOpen: true, defaultBoss })
+                      onNotify={({ boss, location }) =>
+                        setIsNotificationOpen({
+                          isOpen: true,
+                          defaultBoss: boss,
+                          location,
+                        })
                       }
                     />
                   </ConditionalClientComponent>

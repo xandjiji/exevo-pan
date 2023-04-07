@@ -11,6 +11,7 @@ import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bos
 type NotificationDialogProps = {
   guildId: string
   defaultBoss?: string
+  location?: string
   onClose: () => void
 }
 
@@ -20,6 +21,7 @@ const NotificationDialog = ({
   guildId,
   onClose,
   defaultBoss = '',
+  location,
 }: NotificationDialogProps) => {
   const {
     translations: { common, huntingGroups },
@@ -120,7 +122,9 @@ const NotificationDialog = ({
           </Button>
           <Button
             pill
-            onClick={() => notify.mutate({ guildId, boss: selectedBoss })}
+            onClick={() =>
+              notify.mutate({ guildId, boss: selectedBoss, location })
+            }
             loading={notify.isLoading}
             disabled={noBoss || notify.isLoading}
           >

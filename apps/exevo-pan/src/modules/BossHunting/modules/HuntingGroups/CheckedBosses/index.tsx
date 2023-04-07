@@ -32,7 +32,7 @@ type CheckedBossesProps = {
   initialCheckedBosses: CheckedBoss[]
   currentMember?: GuildMember
   isAdmin?: boolean
-  onNotify?: (boss: string) => void
+  onNotify?: (args: { boss: string; location?: string }) => void
 }
 
 const prefixedLSKey = (key: string) => `boss-group-filter-${key}`
@@ -250,7 +250,11 @@ const CheckedBosses = ({
                     {
                       label: i18n.notifyGroup,
                       icon: BlogIcon,
-                      onSelect: () => onNotify?.(boss.name),
+                      onSelect: () =>
+                        onNotify?.({
+                          boss: boss.name,
+                          location: boss.location,
+                        }),
                       disabled: boss.manuallyMarkedAsNoChance || !isMember,
                     },
                     {
