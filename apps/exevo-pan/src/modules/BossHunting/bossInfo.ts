@@ -1,4 +1,7 @@
-import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
+import {
+  TrackedBossName,
+  constTokens as bossTokens,
+} from 'data-dictionary/dist/dictionaries/bosses'
 
 export const bossInfo = new Map<TrackedBossName, BossInfo>()
 
@@ -1482,3 +1485,58 @@ bossInfo.set('Zushuka', {
   ],
   loot: ['Icy Culottes', 'Trapped Lightning'],
 })
+
+const spawnLocations: { name: string; locations: string[] }[] = [
+  { name: bossTokens['Battlemaster Zunzu'], locations: ['West', 'East'] },
+  {
+    name: bossTokens.Dreadmaw,
+    locations: ['North', 'South'],
+  },
+  {
+    name: bossTokens['Flamecaller Zazrak'],
+    locations: ['+0', '+1'],
+  },
+  {
+    name: bossTokens.Hirintror,
+    locations: ['Formorgar Mines', 'Nibelor'],
+  },
+  {
+    name: bossTokens['Rottie the Rotworm'],
+    locations: ['Katana Quest', 'Poison Spider Cave'],
+  },
+  {
+    name: bossTokens['Rotworm Queens'],
+    locations: ['Edron', 'Darashia', 'Liberty Bay', "Ab'Dendriel"],
+  },
+  {
+    name: bossTokens['The Voice Of Ruin'],
+    locations: ['Ghastly Dragons', 'Lizard Chosens'],
+  },
+  {
+    name: bossTokens.Tyrn,
+    locations: ['Drefia', 'Liberty Bay'],
+  },
+  {
+    name: bossTokens['White Pale'],
+    locations: ['Edron', 'Darashia', 'Liberty Bay'],
+  },
+]
+
+export const multipleSpawnLocationBosses = {
+  names: new Set(spawnLocations.map(({ name }) => name)),
+  entries: spawnLocations,
+  displayName: ({ name, location }: { name: string; location: string }) =>
+    `${name} (${location})`,
+  isNameAndLocationValid: ({
+    name,
+    location,
+  }: {
+    name: string
+    location?: string
+  }): boolean =>
+    location
+      ? !!spawnLocations
+          .find((boss) => boss.name === name)
+          ?.locations.find((bossLocation) => location === bossLocation)
+      : true,
+}
