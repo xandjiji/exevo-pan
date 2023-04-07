@@ -15,6 +15,7 @@ import type {
   GuildMember,
   GuildApplication,
 } from '@prisma/client'
+import { multipleSpawnLocationBosses } from '../../modules/BossHunting/bossInfo'
 import {
   utils as blacklistUtils,
   bossSet,
@@ -610,68 +611,91 @@ export const notifyGuildMembers = authedProcedure
     z.object({
       guildId: z.string(),
       boss: z.string(),
+      location: z.string().optional(),
     }),
   )
-  .mutation(async ({ ctx: { token }, input: { guildId, boss } }) => {
-    const requesterId = token.id
+  .mutation(
+    async ({
+      ctx: { token },
+      input: { guildId, boss: bossName, location },
+    }) => {
+      const requesterId = token.id
 
-    const { guild, requesterMember } = await throwIfForbiddenGuildRequest({
-      requesterId,
-      guildId,
-    })
+      const { guild, requesterMember } = await throwIfForbiddenGuildRequest({
+        requesterId,
+        guildId,
+      })
 
-    const members = await prisma.guildMember.findMany({
-      where: { guildId, disabledNotifications: false },
-      include: { user: { select: { NotificationDevice: true } } },
-    })
+      if (
+        !multipleSpawnLocationBosses.isNameAndLocationValid({
+          name: bossName,
+          location,
+        })
+      ) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'Insufficient privileges in this guild',
+        })
+      }
 
-    if (requesterMember) {
-      await prisma.$transaction([
-        prisma.guildLogEntry.create({
-          data: {
-            type: 'NOTIFICATION',
-            guildId,
-            actionGuildMemberId: requesterMember.id,
-            metadata: boss,
-          },
-        }),
-        prisma.bossCheck.upsert({
-          where: { boss_guildId: { boss, guildId } },
-          create: {
-            guildId,
-            memberId: requesterMember.id,
-            boss,
-            lastSpawned: new Date(),
-          },
-          update: { memberId: requesterMember.id, lastSpawned: new Date() },
-        }),
-      ])
-    }
+      const boss = multipleSpawnLocationBosses.displayName({
+        name: bossName,
+        location,
+      })
 
-    const result = await Promise.all(
-      members
-        .filter(
-          ({ disabledNotifications, blacklistedBosses }) =>
-            !disabledNotifications &&
-            !blacklistUtils.split(blacklistedBosses ?? '').has(boss),
-        )
-        .map(({ user: { NotificationDevice } }) => NotificationDevice)
-        .flat()
-        .map((device) =>
-          DeviceNotificationClient.notify({
-            device,
-            notification: {
-              title: boss,
-              body: guild.name,
-              url: getGuildPermalink(guild.name, true),
+      const members = await prisma.guildMember.findMany({
+        where: { guildId, disabledNotifications: false },
+        include: { user: { select: { NotificationDevice: true } } },
+      })
+
+      if (requesterMember) {
+        await prisma.$transaction([
+          prisma.guildLogEntry.create({
+            data: {
+              type: 'NOTIFICATION',
+              guildId,
+              actionGuildMemberId: requesterMember.id,
+              metadata: boss,
             },
-            deleteInvalidDevices: false,
-          }).catch(console.log),
-        ),
-    )
+          }),
+          prisma.bossCheck.upsert({
+            where: { boss_guildId: { boss, guildId } },
+            create: {
+              guildId,
+              memberId: requesterMember.id,
+              boss,
+              lastSpawned: new Date(),
+            },
+            update: { memberId: requesterMember.id, lastSpawned: new Date() },
+          }),
+        ])
+      }
 
-    return result
-  })
+      const result = await Promise.all(
+        members
+          .filter(
+            ({ disabledNotifications, blacklistedBosses }) =>
+              !disabledNotifications &&
+              !blacklistUtils.split(blacklistedBosses ?? '').has(bossName),
+          )
+          .map(({ user: { NotificationDevice } }) => NotificationDevice)
+          .flat()
+          .map((device) =>
+            DeviceNotificationClient.notify({
+              device,
+              notification: {
+                title: boss,
+                body: guild.name,
+                url: getGuildPermalink(guild.name, true),
+              },
+              deleteInvalidDevices: false,
+            }).catch(console.log),
+          ),
+      )
+
+      return result
+    },
+  )
 
 export const listGuildLog = authedProcedure
   .input(
