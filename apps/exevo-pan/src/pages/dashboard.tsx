@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { UserCard, Pitch, PurchaseForm } from 'modules/Dashboard'
+import { Layout, Pitch, PurchaseForm } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
 import { useSession } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
@@ -80,25 +80,16 @@ export default function Dashboard() {
       </Head>
 
       <Main>
-        <main className="inner-container relative grid gap-8 py-8 lg:block">
-          {session ? (
-            <>
-              <section className="animate-fadeIn">
-                <UserCard user={session.user} />
-              </section>
-              <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
-                <Pitch proStatus={session.user.proStatus} />
-                {!session.user.proStatus && (
-                  <PurchaseForm {...session.user.paymentData} />
-                )}
-              </section>
-            </>
-          ) : (
-            <div className="absolute-centered">
-              <div className="loading-spinner h-8 w-8" role="alert" />
-            </div>
+        <Layout>
+          {session && (
+            <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
+              <Pitch proStatus={session.user.proStatus} />
+              {!session.user.proStatus && (
+                <PurchaseForm {...session.user.paymentData} />
+              )}
+            </section>
           )}
-        </main>
+        </Layout>
       </Main>
     </>
   )
