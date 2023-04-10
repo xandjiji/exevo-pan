@@ -9,7 +9,7 @@ import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.DASHBOARD)
+const pageUrl = buildUrl(routes.DASHBOARD.ROOT)
 
 export default function Dashboard() {
   const { translations } = useTranslations()

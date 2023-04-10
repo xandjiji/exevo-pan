@@ -101,7 +101,7 @@ export default function ExevoPro() {
               })}
             </h2>
 
-            <NextLink href={routes.DASHBOARD}>
+            <NextLink href={routes.DASHBOARD.ROOT}>
               <Button className="w-fit">{translations.exevopro.heroCTA}</Button>
             </NextLink>
           </section>
@@ -288,7 +288,7 @@ export default function ExevoPro() {
               </div>
             </div>
 
-            <NextLink href={routes.DASHBOARD}>
+            <NextLink href={routes.DASHBOARD.ROOT}>
               <Button className="mx-auto mt-8 block w-fit">
                 {translations.exevopro.footerCTA}
               </Button>
