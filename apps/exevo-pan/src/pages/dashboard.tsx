@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { Layout, Pitch, PurchaseForm } from 'modules/Dashboard'
+import { Layout, Root } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
 import { useSession } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
@@ -83,9 +83,9 @@ export default function Dashboard() {
         <Layout>
           {session && (
             <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
-              <Pitch proStatus={session.user.proStatus} />
+              <Root.Pitch proStatus={session.user.proStatus} />
               {!session.user.proStatus && (
-                <PurchaseForm {...session.user.paymentData} />
+                <Root.PurchaseForm {...session.user.paymentData} />
               )}
             </section>
           )}
