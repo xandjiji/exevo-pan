@@ -4,7 +4,6 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout, TransactionHistory } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
-import { useSession } from 'next-auth/react'
 import { trpc } from 'lib/trpc'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -81,7 +80,7 @@ export default function Page() {
       </Head>
 
       <Main>
-        <Layout>
+        <Layout isLoading={list.isFetching}>
           {list.data && <TransactionHistory.List list={list.data} />}
         </Layout>
       </Main>

@@ -6,9 +6,10 @@ import UserCard from './UserCard'
 
 type LayoutProps = {
   children: React.ReactNode
+  isLoading?: boolean
 }
 
-const Layout = ({ children }: LayoutProps) => {
+const Layout = ({ isLoading = false, children }: LayoutProps) => {
   const { data: session } = useSession()
 
   return (
@@ -39,7 +40,7 @@ const Layout = ({ children }: LayoutProps) => {
         ]}
       />
       <main className="inner-container relative grid gap-8 py-8 lg:block">
-        {session ? (
+        {session && !isLoading ? (
           <>
             <section className="animate-fadeIn">
               <UserCard user={session.user} />
