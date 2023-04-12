@@ -42,7 +42,7 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
       <main className="inner-container relative grid gap-8 py-8 lg:block">
         {session && !isLoading ? (
           <>
-            <section className="animate-fadeIn">
+            <section className="animate-fadeIn lg:mb-8">
               <UserCard user={session.user} />
             </section>
 
