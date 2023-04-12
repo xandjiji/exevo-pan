@@ -3,6 +3,7 @@ import { useState, useMemo } from 'react'
 import { Table, Chip, CopyButton, Text, Paginator } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
+import { officialAuctionUrl, officialCharacterUrl } from 'utils'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 
 type TransactionHistoryProps = {
@@ -26,7 +27,7 @@ const Summary = ({
 }: { heading: string } & JSX.IntrinsicElements['div']) => (
   <div className={clsx(className, '')} {...props}>
     <p className="text-xs font-light">{heading}</p>
-    <strong className="text-base font-bold">{children}</strong>
+    <p className="text-base font-bold">{children}</p>
   </div>
 )
 
@@ -92,9 +93,16 @@ export const List = ({ list }: TransactionHistoryProps) => {
                           {exevoProPayment && (
                             <>
                               <Summary heading="Payment character">
-                                <span className="text-primaryHighlight">
+                                <a
+                                  href={officialCharacterUrl(
+                                    exevoProPayment.character,
+                                  )}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-primaryHighlight"
+                                >
                                   {exevoProPayment.character}
-                                </span>
+                                </a>
                               </Summary>
 
                               <Summary heading="Status">
@@ -108,6 +116,35 @@ export const List = ({ list }: TransactionHistoryProps) => {
                                     ? 'Confirmed'
                                     : 'Processing'}
                                 </span>
+                              </Summary>
+                            </>
+                          )}
+
+                          {highlightedAuction && (
+                            <>
+                              <Summary heading="Auction">
+                                <a
+                                  href={officialAuctionUrl(
+                                    highlightedAuction.auctionId,
+                                  )}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="text-primaryHighlight"
+                                >
+                                  {highlightedAuction.nickname}
+                                </a>
+                              </Summary>
+
+                              <Summary heading="Highlighted days">
+                                <ul className="grid gap-1 pt-1">
+                                  {highlightedAuction.days
+                                    .split(',')
+                                    .map((day) => (
+                                      <li key={day} className="text-tsm">
+                                        {day}
+                                      </li>
+                                    ))}
+                                </ul>
                               </Summary>
                             </>
                           )}
@@ -126,7 +163,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
                         </p>
 
                         <p className="mt-1 text-xs font-light">
-                          {date.toLocaleString(undefined, { hour12: false })}
+                          {date.toLocaleString('pt-BR', { hour12: false })}
                         </p>
                       </>
                     </Tooltip>
