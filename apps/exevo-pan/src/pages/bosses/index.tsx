@@ -89,7 +89,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   const [serverOptions, bossChances] = await Promise.all([
     await DrawerFieldsClient.fetchActiveServerOptions(),
-    await BossesClient.fetchServerBossChances({ server, isPro: false }),
+    await BossesClient.fetchServerBossChances({
+      server,
+      isPro: false,
+      getNextDayFeroxa: true,
+    }),
   ])
 
   bossChances.bosses.sort(sortBossesBy.chance)
