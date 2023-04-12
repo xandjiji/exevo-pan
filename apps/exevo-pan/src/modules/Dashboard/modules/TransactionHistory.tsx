@@ -1,5 +1,6 @@
 import clsx from 'clsx'
-import { Table, Chip, CopyButton, Text } from 'components/Atoms'
+import { useState, useMemo } from 'react'
+import { Table, Chip, CopyButton, Text, Paginator } from 'components/Atoms'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 
 type TransactionHistoryProps = {
@@ -10,27 +11,42 @@ type TransactionHistoryProps = {
 
 - highlighted auction data (tooltip)
 - other currencies (formatter)
-- paginate
+- empty state
+- mobile
 - i18n
 
 */
+const PAGE_SIZE = 10
 
 export const List = ({ list }: TransactionHistoryProps) => {
-  console.log(list)
+  const [index, setIndex] = useState(1)
+
+  const page = useMemo(
+    () => list.slice((index - 1) * PAGE_SIZE, index * PAGE_SIZE),
+    [index, list],
+  )
 
   return (
     <Table className="mx-auto w-fit" title="Transaction History">
+      <Paginator
+        totalItems={list.length}
+        currentPage={index}
+        pageSize={PAGE_SIZE}
+        onChange={setIndex}
+        className="ml-auto mb-8 w-fit"
+      />
+
       <Table.Element>
         <Table.Head>
           <Table.Row>
-            <Table.HeadColumn />
+            <Table.HeadColumn>ID</Table.HeadColumn>
             <Table.HeadColumn className="px-8">Description</Table.HeadColumn>
             <Table.HeadColumn>Price</Table.HeadColumn>
           </Table.Row>
         </Table.Head>
 
         <Table.Body>
-          {list.map(({ id, date, type, value, currency }) => (
+          {page.map(({ id, date, type, value, currency }) => (
             <Table.Row key={id} className="text-center">
               <Table.Column className="grid w-fit gap-2 py-2">
                 <span className="code flex w-min items-center gap-2 text-justify text-xs">
