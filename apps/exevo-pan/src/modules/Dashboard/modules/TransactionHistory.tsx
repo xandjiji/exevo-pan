@@ -12,7 +12,6 @@ type TransactionHistoryProps = {
 
 /* @ ToDo:
 
-- highlighted auction data (tooltip)
 - other currencies (formatter)
 - mobile
 - i18n
@@ -154,8 +153,8 @@ export const List = ({ list }: TransactionHistoryProps) => {
                       <>
                         <p
                           className={clsx(
-                            'font-bold',
-                            type === 'EXEVO_PRO' && 'rare-gradient-text',
+                            type === 'EXEVO_PRO' &&
+                              'rare-gradient-text font-bold',
                           )}
                         >
                           {type === 'AUCTION_HIGHLIGHT' && 'Auction Highlight'}
