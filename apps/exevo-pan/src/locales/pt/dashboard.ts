@@ -9,6 +9,14 @@ export default {
       description: 'Meu histórico de transações no Exevo Pan',
     },
   },
+  Layout: {
+    nav: {
+      root: 'Minha conta',
+      transactions: 'Histórico de transações',
+      notifications: 'Notificações de leilões',
+      devices: 'Notificações em dispositivos',
+    },
+  },
   UserCard: {
     proSince: 'Pro desde',
     freeStatus: 'Grátis',

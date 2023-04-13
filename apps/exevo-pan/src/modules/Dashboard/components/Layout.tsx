@@ -1,3 +1,4 @@
+import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { SubHeader } from 'templates'
 import { PersonIcon, PapyrusIcon, BlogIcon, AlertIcon } from 'assets/svgs'
@@ -10,36 +11,40 @@ type LayoutProps = {
 }
 
 const Layout = ({ isLoading = false, children }: LayoutProps) => {
+  const {
+    translations: { dashboard },
+  } = useTranslations()
+  const i18n = dashboard.Layout
+
   const { data: session } = useSession()
 
   return (
     <>
-      {/* @ ToDo: i18n */}
       <SubHeader
         navItems={[
           {
-            title: 'My account',
+            title: i18n.nav.root,
             href: routes.DASHBOARD.ROOT,
             icon: <PersonIcon />,
           },
           {
-            title: 'Transaction history',
+            title: i18n.nav.transactions,
             href: routes.DASHBOARD.TRANSACTIONS,
             icon: <PapyrusIcon />,
           },
           {
-            title: 'Notification devices',
-            href: routes.DASHBOARD.DEVICES,
-            icon: <BlogIcon />,
-          },
-          {
-            title: 'Auction notifications',
+            title: i18n.nav.notifications,
             href: routes.DASHBOARD.AUCTION_NOTIFICATIONS,
             icon: <AlertIcon />,
           },
+          {
+            title: i18n.nav.devices,
+            href: routes.DASHBOARD.DEVICES,
+            icon: <BlogIcon />,
+          },
         ]}
       />
-      <main className="inner-container relative grid gap-8 py-8 lg:block">
+      <main className="inner-container child:animate-fadeIn relative grid gap-8 py-8 lg:block">
         {session && !isLoading ? (
           <>
             <section className="animate-fadeIn lg:mb-8">

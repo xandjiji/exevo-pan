@@ -9,6 +9,14 @@ export default {
       description: 'My Exevo Pan transaction history',
     },
   },
+  Layout: {
+    nav: {
+      root: 'My account',
+      transactions: 'Transaction history',
+      notifications: 'Auction notifications',
+      devices: 'Notification devices',
+    },
+  },
   UserCard: {
     proSince: 'Pro since',
     freeStatus: 'Free',
