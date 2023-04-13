@@ -11,11 +11,7 @@ type TransactionHistoryProps = {
   list: TRPCRouteOutputs['listMyTransactions']
 }
 
-/* @ ToDo:
-
-- mobile
-
-*/
+const PAGE_SIZE = 10
 
 const formatCurrency = ({
   value,
@@ -42,8 +38,6 @@ const Summary = ({
   </div>
 )
 
-const PAGE_SIZE = 10
-
 export const List = ({ list }: TransactionHistoryProps) => {
   const {
     translations: { dashboard },
@@ -58,6 +52,8 @@ export const List = ({ list }: TransactionHistoryProps) => {
     [index, list],
   )
 
+  const isEmpty = page.length === 0
+
   return (
     <Table className="mx-auto w-fit" title={i18n.title}>
       <Paginator
@@ -68,7 +64,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
         className="ml-auto mb-6 w-fit"
       />
 
-      {list.length > 0 ? (
+      {!isEmpty ? (
         <Table.Element>
           <Table.Head>
             <Table.Row>
@@ -92,9 +88,12 @@ export const List = ({ list }: TransactionHistoryProps) => {
                 highlightedAuction,
               }) => (
                 <Table.Row key={id} className="text-center">
-                  <Table.Column className="grid w-fit gap-2 py-2">
-                    <span className="code flex w-min items-center gap-2 text-justify text-xs">
-                      <span className="after:text-[8px] after:tracking-tighter after:content-['...']">
+                  <Table.Column className="w-fit py-2">
+                    <span className="code flex w-min flex-col items-center gap-2 px-2 text-center text-xs sm:flex-row sm:px-3 sm:text-justify">
+                      <span
+                        className="after:whitespace-nowrap after:text-[8px] after:tracking-tighter after:content-['...'] sm:whitespace-nowrap"
+                        style={{ wordBreak: 'break-word' }}
+                      >
                         {id.slice(0, 6)}
                       </span>
                       <CopyButton
@@ -105,7 +104,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
                     </span>
                   </Table.Column>
 
-                  <Table.Column className="px-8">
+                  <Table.Column className="px-3 sm:px-8">
                     <Tooltip
                       content={
                         <div className="grid gap-3 text-left">
@@ -204,7 +203,11 @@ export const List = ({ list }: TransactionHistoryProps) => {
           </Table.Body>
         </Table.Element>
       ) : (
-        <EmptyState text="No transactions" variant="medium" className="mb-2" />
+        <EmptyState
+          text="No transactions"
+          variant="medium"
+          className="mt-10 mb-2"
+        />
       )}
     </Table>
   )
