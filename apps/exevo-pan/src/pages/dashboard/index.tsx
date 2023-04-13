@@ -14,7 +14,9 @@ const pageUrl = buildUrl(routes.DASHBOARD.ROOT)
 export default function Dashboard() {
   const { translations } = useTranslations()
 
-  const pageName = translations.dashboard.Meta.title
+  const i18n = translations.dashboard
+
+  const pageName = i18n.Meta.root.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
   })
@@ -31,18 +33,12 @@ export default function Dashboard() {
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        <meta
-          name="description"
-          content={translations.dashboard.Meta.description}
-        />
+        <meta name="description" content={i18n.Meta.root.description} />
         <meta
           property="twitter:description"
-          content={translations.dashboard.Meta.description}
+          content={i18n.Meta.root.description}
         />
-        <meta
-          property="og:description"
-          content={translations.dashboard.Meta.description}
-        />
+        <meta property="og:description" content={i18n.Meta.root.description} />
         <meta property="og:type" content="website" />
 
         <link rel="canonical" href={pageUrl} />

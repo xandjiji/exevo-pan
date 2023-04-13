@@ -10,6 +10,7 @@ export const listMyTransactions = authedProcedure.query(
   }) =>
     prisma.transaction.findMany({
       where: { user: { id } },
+      include: { highlightedAuction: true, exevoProPayment: true },
       orderBy: { date: 'desc' },
     }),
 )

@@ -1,7 +1,13 @@
 export default {
   Meta: {
-    title: 'Painel',
-    description: 'Seu painel Exevo Pan',
+    root: {
+      title: 'Painel',
+      description: 'Meu painel no Exevo Pan',
+    },
+    transactions: {
+      title: 'Histórico de Transações',
+      description: 'Meu histórico de transações no Exevo Pan',
+    },
   },
   UserCard: {
     proSince: 'Pro desde',

@@ -1,7 +1,13 @@
 export default {
   Meta: {
-    title: 'Dashboard',
-    description: 'Your Exevo Pan dashboard',
+    root: {
+      title: 'Dashboard',
+      description: 'My Exevo Pan dashboard',
+    },
+    transactions: {
+      title: 'Transaction History',
+      description: 'My Exevo Pan transaction history',
+    },
   },
   UserCard: {
     proSince: 'Pro since',
