@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useState, useMemo } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { Table, Chip, CopyButton, Text, Paginator } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
@@ -13,7 +14,6 @@ type TransactionHistoryProps = {
 /* @ ToDo:
 
 - mobile
-- i18n
 
 */
 
@@ -45,6 +45,12 @@ const Summary = ({
 const PAGE_SIZE = 10
 
 export const List = ({ list }: TransactionHistoryProps) => {
+  const {
+    translations: { dashboard },
+  } = useTranslations()
+
+  const i18n = dashboard.TransactionHistory
+
   const [index, setIndex] = useState(1)
 
   const page = useMemo(
@@ -53,7 +59,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
   )
 
   return (
-    <Table className="mx-auto w-fit" title="Transaction History">
+    <Table className="mx-auto w-fit" title={i18n.title}>
       <Paginator
         totalItems={list.length}
         currentPage={index}
@@ -67,8 +73,10 @@ export const List = ({ list }: TransactionHistoryProps) => {
           <Table.Head>
             <Table.Row>
               <Table.HeadColumn>ID</Table.HeadColumn>
-              <Table.HeadColumn className="px-8">Description</Table.HeadColumn>
-              <Table.HeadColumn>Price</Table.HeadColumn>
+              <Table.HeadColumn className="px-8">
+                {i18n.description}
+              </Table.HeadColumn>
+              <Table.HeadColumn>{i18n.price}</Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
@@ -103,7 +111,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
                         <div className="grid gap-3 text-left">
                           {exevoProPayment && (
                             <>
-                              <Summary heading="Payment character">
+                              <Summary heading={i18n.paymentCharacter}>
                                 <a
                                   href={officialCharacterUrl(
                                     exevoProPayment.character,
@@ -116,7 +124,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
                                 </a>
                               </Summary>
 
-                              <Summary heading="Status">
+                              <Summary heading={i18n.status}>
                                 <span
                                   className={clsx(
                                     exevoProPayment.confirmed &&
@@ -124,8 +132,8 @@ export const List = ({ list }: TransactionHistoryProps) => {
                                   )}
                                 >
                                   {exevoProPayment.confirmed
-                                    ? 'Confirmed'
-                                    : 'Processing'}
+                                    ? i18n.confirmed
+                                    : i18n.processing}
                                 </span>
                               </Summary>
                             </>
@@ -133,7 +141,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
 
                           {highlightedAuction && (
                             <>
-                              <Summary heading="Auction">
+                              <Summary heading={i18n.auction}>
                                 <a
                                   href={officialAuctionUrl(
                                     highlightedAuction.auctionId,
@@ -146,7 +154,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
                                 </a>
                               </Summary>
 
-                              <Summary heading="Highlighted days">
+                              <Summary heading={i18n.highlightedDays}>
                                 <ul className="grid gap-1 pt-1">
                                   {highlightedAuction.days
                                     .split(',')
@@ -169,7 +177,8 @@ export const List = ({ list }: TransactionHistoryProps) => {
                               'rare-gradient-text font-bold',
                           )}
                         >
-                          {type === 'AUCTION_HIGHLIGHT' && 'Auction Highlight'}
+                          {type === 'AUCTION_HIGHLIGHT' &&
+                            i18n.auctionHighlight}
                           {type === 'EXEVO_PRO' && 'Exevo Pro'}
                         </p>
 

@@ -54,4 +54,16 @@ export default {
       "Your purchase will be delivered right after your payment is confirmed. If your order can't be completed, your coins will be returned.",
     edit: 'Edit your order',
   },
+  TransactionHistory: {
+    title: 'Transaction History',
+    description: 'Description',
+    price: 'Price',
+    paymentCharacter: 'Payment character',
+    status: 'Status',
+    confirmed: 'Confirmed',
+    processing: 'Processing',
+    auction: 'Auction',
+    highlightedDays: 'Highlighted days',
+    auctionHighlight: 'Auction Highlight',
+  },
 }

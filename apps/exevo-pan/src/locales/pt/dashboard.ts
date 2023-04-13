@@ -55,4 +55,16 @@ export default {
       'Seu pedido será entregue logo após confirmarmos o seu pagamento. Se o seu pedido não puder ser completado, suas coins serão devolvidas.',
     edit: 'Editar pedido',
   },
+  TransactionHistory: {
+    title: 'Histórico de Transações',
+    description: 'Descrição',
+    price: 'Preço',
+    paymentCharacter: 'Personagem de pagamento',
+    status: 'Status',
+    confirmed: 'Confirmado',
+    processing: 'Processando',
+    auction: 'Leilão',
+    highlightedDays: 'Dias destacados',
+    auctionHighlight: 'Destaque de leilão',
+  },
 }
