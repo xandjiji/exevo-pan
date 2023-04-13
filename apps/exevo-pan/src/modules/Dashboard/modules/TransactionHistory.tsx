@@ -12,11 +12,23 @@ type TransactionHistoryProps = {
 
 /* @ ToDo:
 
-- other currencies (formatter)
 - mobile
 - i18n
 
 */
+
+const formatCurrency = ({
+  value,
+  currency,
+}: {
+  value: number
+  currency: string
+}) =>
+  new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    minimumFractionDigits: 2,
+    currency,
+  }).format(value)
 
 const Summary = ({
   heading,
@@ -47,7 +59,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
         currentPage={index}
         pageSize={PAGE_SIZE}
         onChange={setIndex}
-        className="ml-auto mb-8 w-fit"
+        className="ml-auto mb-6 w-fit"
       />
 
       {list.length > 0 ? (
@@ -170,8 +182,10 @@ export const List = ({ list }: TransactionHistoryProps) => {
 
                   <Table.Column>
                     <Chip gray className="justify-center">
-                      {currency === 'TIBIA_COINS' && (
+                      {currency === 'TIBIA_COINS' ? (
                         <Text.TibiaCoin value={value} />
+                      ) : (
+                        <>{formatCurrency({ value, currency })}</>
                       )}
                     </Chip>
                   </Table.Column>
