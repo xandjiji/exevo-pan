@@ -44,14 +44,14 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
           }, */
         ]}
       />
-      <main className="inner-container child:animate-fadeIn relative grid gap-8 py-8 lg:block">
+      <main className="inner-container child:animate-fadeIn relative flex flex-col gap-8 py-8">
         {session && !isLoading ? (
           <>
             <section className="animate-fadeIn lg:mb-8">
               <UserCard user={session.user} />
             </section>
 
-            {children}
+            <div>{children}</div>
           </>
         ) : (
           <div className="absolute-centered">

@@ -78,7 +78,7 @@ export default function Dashboard() {
       <Main>
         <Layout>
           {session && (
-            <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
+            <section className="grid place-items-center gap-8 lg:flex lg:items-center lg:justify-center lg:gap-16">
               <Root.Pitch proStatus={session.user.proStatus} />
               {!session.user.proStatus && (
                 <Root.PurchaseForm {...session.user.paymentData} />
