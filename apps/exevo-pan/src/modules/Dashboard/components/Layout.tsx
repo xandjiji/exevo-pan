@@ -32,11 +32,12 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
             href: routes.DASHBOARD.TRANSACTIONS,
             icon: <PapyrusIcon />,
           },
-          /* {
+          {
             title: i18n.nav.notifications,
             href: routes.DASHBOARD.AUCTION_NOTIFICATIONS,
             icon: <AlertIcon />,
           },
+          /*
           {
             title: i18n.nav.devices,
             href: routes.DASHBOARD.DEVICES,
