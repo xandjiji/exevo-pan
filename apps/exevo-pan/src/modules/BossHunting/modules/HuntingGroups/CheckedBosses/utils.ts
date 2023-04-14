@@ -28,10 +28,18 @@ const raidBosses: Set<string> = new Set(raidBossesNames)
 export const checkIfBoss = {
   appearOnlyOnRaids: ({ name }: CheckedBoss): boolean => raidBosses.has(name),
   hasNoChance: ({
+    lastSpawned,
     daysLeftForPossibleSpawns,
     currentChance,
-  }: CheckedBoss): boolean =>
-    daysLeftForPossibleSpawns
-      ? !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
-      : currentChance === 0,
+  }: CheckedBoss): boolean => {
+    if (lastSpawned && isFromSameServerSave(lastSpawned)) {
+      return true
+    }
+
+    if (daysLeftForPossibleSpawns) {
+      return !daysLeftForPossibleSpawns.some((daysLeft) => daysLeft <= 0)
+    }
+
+    return currentChance === 0
+  },
 }
