@@ -32,7 +32,7 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
             href: routes.DASHBOARD.TRANSACTIONS,
             icon: <PapyrusIcon />,
           },
-          {
+          /* {
             title: i18n.nav.notifications,
             href: routes.DASHBOARD.AUCTION_NOTIFICATIONS,
             icon: <AlertIcon />,
@@ -41,7 +41,7 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
             title: i18n.nav.devices,
             href: routes.DASHBOARD.DEVICES,
             icon: <BlogIcon />,
-          },
+          }, */
         ]}
       />
       <main className="inner-container child:animate-fadeIn relative grid gap-8 py-8 lg:block">
