@@ -30,7 +30,7 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
   const isEmpty = page.length === 0
 
   return (
-    <Table className="mx-auto w-fit">
+    <Table className="mx-auto w-fit" title="Auction Notifications">
       <Paginator
         totalItems={list.length}
         currentPage={index}
