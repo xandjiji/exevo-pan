@@ -2,19 +2,21 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { UserCard, Pitch, PurchaseForm } from 'modules/Dashboard'
+import { Layout, Root } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
 import { useSession } from 'next-auth/react'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.DASHBOARD)
+const pageUrl = buildUrl(routes.DASHBOARD.ROOT)
 
 export default function Dashboard() {
   const { translations } = useTranslations()
 
-  const pageName = translations.dashboard.Meta.title
+  const i18n = translations.dashboard
+
+  const pageName = i18n.Meta.root.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
   })
@@ -31,18 +33,12 @@ export default function Dashboard() {
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        <meta
-          name="description"
-          content={translations.dashboard.Meta.description}
-        />
+        <meta name="description" content={i18n.Meta.root.description} />
         <meta
           property="twitter:description"
-          content={translations.dashboard.Meta.description}
+          content={i18n.Meta.root.description}
         />
-        <meta
-          property="og:description"
-          content={translations.dashboard.Meta.description}
-        />
+        <meta property="og:description" content={i18n.Meta.root.description} />
         <meta property="og:type" content="website" />
 
         <link rel="canonical" href={pageUrl} />
@@ -80,25 +76,16 @@ export default function Dashboard() {
       </Head>
 
       <Main>
-        <main className="inner-container relative grid gap-8 py-8 lg:block">
-          {session ? (
-            <>
-              <section className="animate-fadeIn">
-                <UserCard user={session.user} />
-              </section>
-              <section className="animate-fadeIn grid place-items-center gap-8 lg:mt-24 lg:flex lg:items-center lg:justify-center lg:gap-16">
-                <Pitch proStatus={session.user.proStatus} />
-                {!session.user.proStatus && (
-                  <PurchaseForm {...session.user.paymentData} />
-                )}
-              </section>
-            </>
-          ) : (
-            <div className="absolute-centered">
-              <div className="loading-spinner h-8 w-8" role="alert" />
-            </div>
+        <Layout>
+          {session && (
+            <section className="grid place-items-center gap-8 lg:flex lg:items-center lg:justify-center lg:gap-16">
+              <Root.Pitch proStatus={session.user.proStatus} />
+              {!session.user.proStatus && (
+                <Root.PurchaseForm {...session.user.paymentData} />
+              )}
+            </section>
           )}
-        </main>
+        </Layout>
       </Main>
     </>
   )

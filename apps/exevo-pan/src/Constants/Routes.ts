@@ -1,7 +1,12 @@
 export const routes = {
   HOME: '/',
   LOGIN: '/login',
-  DASHBOARD: '/dashboard',
+  DASHBOARD: {
+    ROOT: '/dashboard',
+    TRANSACTIONS: '/dashboard/transaction-history',
+    AUCTION_NOTIFICATIONS: '/dashboard/auction-notifications',
+    DEVICES: '/dashboard/devices',
+  },
   BOSSES: {
     TRACKER: '/bosses',
     HUNTING_GROUPS: '/bosses/hunting-groups',

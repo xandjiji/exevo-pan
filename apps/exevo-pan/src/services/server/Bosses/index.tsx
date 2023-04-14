@@ -8,21 +8,22 @@ import { multipleSpawnLocationBosses } from '../../../modules/BossHunting/bossIn
 export default class BossesClient {
   private static bossChancesUrl = `${endpoints.STATIC_DATA}${paths.BOSS_CHANCES}`
 
-  private static getFeroxaStats(): Pick<
-    BossStats,
-    'currentChance' | 'expectedIn'
-  > {
+  private static getFeroxaStats(
+    getNextDayFeroxa: boolean,
+  ): Pick<BossStats, 'currentChance' | 'expectedIn'> {
     const SPAWN_DATE = 13
-    const tomorrow = getDateRelativeToSS()
-    tomorrow.setDate(tomorrow.getDate() + 1)
-    const tomorrowSSDay = tomorrow.getDate()
+    const SSDate = getDateRelativeToSS()
+    if (getNextDayFeroxa) {
+      SSDate.setDate(SSDate.getDate() + 1)
+    }
+    const checkingDate = SSDate.getDate()
 
-    if (tomorrowSSDay === SPAWN_DATE) {
+    if (checkingDate === SPAWN_DATE) {
       return { currentChance: 1 }
     }
 
-    if (tomorrowSSDay < SPAWN_DATE) {
-      return { currentChance: 0, expectedIn: SPAWN_DATE - tomorrowSSDay }
+    if (checkingDate < SPAWN_DATE) {
+      return { currentChance: 0, expectedIn: SPAWN_DATE - checkingDate }
     }
 
     const nextFeroxaSpawn = getDateRelativeToSS()
@@ -40,16 +41,18 @@ export default class BossesClient {
   static async fetchServerBossChances({
     server,
     isPro,
+    getNextDayFeroxa = false,
   }: {
     server: string
     isPro: boolean
+    getNextDayFeroxa?: boolean
   }): Promise<BossChances> {
     const response = await fetch(`${this.bossChancesUrl}/${server}.json`)
     const bossChances: BossChances = await response.json()
 
     bossChances.bosses = bossChances.bosses.map((chance) =>
       chance.name === bossTokens.Feroxa
-        ? { ...chance, ...this.getFeroxaStats() }
+        ? { ...chance, ...this.getFeroxaStats(getNextDayFeroxa) }
         : chance,
     )
 

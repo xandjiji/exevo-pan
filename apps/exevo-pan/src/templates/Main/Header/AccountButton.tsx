@@ -80,7 +80,7 @@ const AccountButton = ({
 
                   <NextLink
                     className="hover:bg-primaryVariant"
-                    href={routes.DASHBOARD}
+                    href={routes.DASHBOARD.ROOT}
                     onClick={action.close}
                     role="menuitem"
                   >

@@ -27,7 +27,7 @@ export default function Login({ providers }: LoginStaticProps) {
   const { data: session } = useSession()
 
   useEffect(() => {
-    if (session) push(addLocalePrefix({ route: routes.DASHBOARD, locale }))
+    if (session) push(addLocalePrefix({ route: routes.DASHBOARD.ROOT, locale }))
   }, [session])
 
   return (

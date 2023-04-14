@@ -1,7 +1,21 @@
 export default {
   Meta: {
-    title: 'Painel',
-    description: 'Seu painel Exevo Pan',
+    root: {
+      title: 'Painel',
+      description: 'Meu painel no Exevo Pan',
+    },
+    transactions: {
+      title: 'Histórico de Transações',
+      description: 'Meu histórico de transações no Exevo Pan',
+    },
+  },
+  Layout: {
+    nav: {
+      root: 'Minha conta',
+      transactions: 'Histórico de transações',
+      notifications: 'Notificações de leilões',
+      devices: 'Notificações em dispositivos',
+    },
   },
   UserCard: {
     proSince: 'Pro desde',
@@ -48,5 +62,17 @@ export default {
     notice:
       'Seu pedido será entregue logo após confirmarmos o seu pagamento. Se o seu pedido não puder ser completado, suas coins serão devolvidas.',
     edit: 'Editar pedido',
+  },
+  TransactionHistory: {
+    title: 'Histórico de Transações',
+    description: 'Descrição',
+    price: 'Preço',
+    paymentCharacter: 'Personagem de pagamento',
+    status: 'Status',
+    confirmed: 'Confirmado',
+    processing: 'Processando',
+    auction: 'Leilão',
+    highlightedDays: 'Dias destacados',
+    auctionHighlight: 'Destaque de leilão',
   },
 }

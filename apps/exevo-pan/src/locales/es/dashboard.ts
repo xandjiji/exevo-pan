@@ -1,7 +1,21 @@
 export default {
   Meta: {
-    title: 'Dashboard',
-    description: 'Your Exevo Pan dashboard',
+    root: {
+      title: 'Dashboard',
+      description: 'My Exevo Pan dashboard',
+    },
+    transactions: {
+      title: 'Transaction History',
+      description: 'My Exevo Pan transaction history',
+    },
+  },
+  Layout: {
+    nav: {
+      root: 'My account',
+      transactions: 'Transaction history',
+      notifications: 'Auction notifications',
+      devices: 'Notification devices',
+    },
   },
   UserCard: {
     proSince: 'Pro since',
@@ -47,5 +61,17 @@ export default {
     notice:
       "Your purchase will be delivered right after your payment is confirmed. If your order can't be completed, your coins will be returned.",
     edit: 'Edit your order',
+  },
+  TransactionHistory: {
+    title: 'Transaction History',
+    description: 'Description',
+    price: 'Price',
+    paymentCharacter: 'Payment character',
+    status: 'Status',
+    confirmed: 'Confirmed',
+    processing: 'Processing',
+    auction: 'Auction',
+    highlightedDays: 'Highlighted days',
+    auctionHighlight: 'Auction Highlight',
   },
 }

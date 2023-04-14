@@ -14,6 +14,7 @@ import * as guildCrud from './guild/crud'
 import { registerNotificationDevice } from './registerNotificationDevice'
 import { registerAuctionNotification } from './registerAuctionNotification'
 import { testMyNotification } from './testMyNotification'
+import * as dashboard from './dashboard'
 
 export const routes = {
   registerNotificationDevice,
@@ -32,4 +33,5 @@ export const routes = {
   ...highlightRevenue,
   ...notifyAdmin,
   ...guildCrud,
+  ...dashboard,
 }
