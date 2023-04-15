@@ -81,7 +81,7 @@ export default function Page() {
       </Head>
 
       <Main>
-        <Layout isLoading={list.isFetching}>
+        <Layout isLoading={list.isLoading}>
           {list.data && <TransactionHistory.List list={list.data} />}
         </Layout>
       </Main>

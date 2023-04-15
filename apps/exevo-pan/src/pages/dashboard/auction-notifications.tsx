@@ -3,6 +3,7 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout, AuctionNotifications } from 'modules/Dashboard'
+import { toast } from 'react-hot-toast'
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
 import { buildUrl, buildPageTitle } from 'utils'
@@ -25,7 +26,18 @@ export default function Page() {
 
   const list = trpc.listMyAuctionNotifications.useQuery(undefined, {
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
   })
+
+  const remove = trpc.deleteMyAuctionNotification.useMutation()
+  const onDelete = (id: string) =>
+    toast
+      .promise(remove.mutateAsync(id), {
+        success: 'Auction notification was deleted successfully',
+        error: 'Generic error',
+        loading: 'loading...',
+      })
+      .then(() => list.refetch())
 
   return (
     <>
@@ -81,8 +93,10 @@ export default function Page() {
       </Head>
 
       <Main>
-        <Layout isLoading={list.isFetching}>
-          {list.data && <AuctionNotifications.List list={list.data} />}
+        <Layout isLoading={list.isLoading}>
+          {list.data && (
+            <AuctionNotifications.List list={list.data} onDelete={onDelete} />
+          )}
         </Layout>
       </Main>
     </>
