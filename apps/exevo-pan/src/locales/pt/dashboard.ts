@@ -8,6 +8,10 @@ export default {
       title: 'Histórico de Transações',
       description: 'Meu histórico de transações no Exevo Pan',
     },
+    auctionNotifications: {
+      title: 'Notificações de Leilão',
+      description: 'Minhas notificações de leilão',
+    },
   },
   Layout: {
     nav: {
@@ -83,5 +87,6 @@ export default {
     notifyAt: 'Notificar em',
     deleteLabel: 'Remover notificação de leilão',
     emptyState: 'Sem notificações',
+    successMessage: 'Notificação de leilão foi removida',
   },
 }

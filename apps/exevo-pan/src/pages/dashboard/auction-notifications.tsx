@@ -17,7 +17,7 @@ export default function Page() {
 
   const i18n = translations.dashboard
 
-  const pageName = i18n.Meta.transactions.title
+  const pageName = i18n.Meta.auctionNotifications.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
   })
@@ -33,9 +33,9 @@ export default function Page() {
   const onDelete = (id: string) =>
     toast
       .promise(remove.mutateAsync(id), {
-        success: 'Auction notification was deleted successfully',
-        error: 'Generic error',
-        loading: 'loading...',
+        success: i18n.AuctionNotifications.successMessage,
+        error: translations.common.genericError,
+        loading: translations.common.LoadingLabel,
       })
       .then(() => list.refetch())
 
@@ -47,14 +47,17 @@ export default function Page() {
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        <meta name="description" content={i18n.Meta.transactions.description} />
+        <meta
+          name="description"
+          content={i18n.Meta.auctionNotifications.description}
+        />
         <meta
           property="twitter:description"
-          content={i18n.Meta.transactions.description}
+          content={i18n.Meta.auctionNotifications.description}
         />
         <meta
           property="og:description"
-          content={i18n.Meta.transactions.description}
+          content={i18n.Meta.auctionNotifications.description}
         />
         <meta property="og:type" content="website" />
 
