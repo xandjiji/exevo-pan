@@ -75,4 +75,12 @@ export default {
     auctionHighlight: 'Auction Highlight',
     emptyState: 'No transactions',
   },
+  AuctionNotifications: {
+    title: 'Auction notifications',
+    auction: 'Auction',
+    notifyOnBid: 'Notify on bid',
+    notifyAt: 'Notify at',
+    deleteLabel: 'Remove this auction notification',
+    emptyState: 'No notifications',
+  },
 }

@@ -18,7 +18,7 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
     translations: { dashboard },
   } = useTranslations()
 
-  // const i18n = dashboard.TransactionHistory
+  const i18n = dashboard.AuctionNotifications
 
   const [index, setIndex] = useState(1)
 
@@ -30,7 +30,7 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
   const isEmpty = page.length === 0
 
   return (
-    <Table className="mx-auto w-fit" title="Auction Notifications">
+    <Table className="mx-auto w-fit" title={i18n.title}>
       <Paginator
         totalItems={list.length}
         currentPage={index}
@@ -43,10 +43,11 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
         <Table.Element>
           <Table.Head>
             <Table.Row className="child:pr-2">
-              <Table.HeadColumn>Auction</Table.HeadColumn>
-              <Table.HeadColumn>Notify on bid</Table.HeadColumn>
-              <Table.HeadColumn>Notify at</Table.HeadColumn>
-              <Table.HeadColumn className="!pr-0">Remove</Table.HeadColumn>
+              <Table.HeadColumn>{i18n.auction}</Table.HeadColumn>
+              <Table.HeadColumn>{i18n.notifyOnBid}</Table.HeadColumn>
+              <Table.HeadColumn className="!pr-0">
+                {i18n.notifyAt}
+              </Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
@@ -105,6 +106,8 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
                         <button
                           className="clickable mx-auto grid place-items-center rounded-sm p-0.5"
                           type="button"
+                          title={i18n.deleteLabel}
+                          aria-label={i18n.deleteLabel}
                           onClick={() => onDelete?.(id)}
                         >
                           <TrashIcon className="fill-red h-4 w-4" />
@@ -119,7 +122,7 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
         </Table.Element>
       ) : (
         <EmptyState
-          text="No notifications"
+          text={i18n.emptyState}
           variant="medium"
           className="mt-10 mb-2"
         />

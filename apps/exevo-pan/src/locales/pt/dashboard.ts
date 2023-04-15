@@ -76,4 +76,12 @@ export default {
     auctionHighlight: 'Destaque de leilão',
     emptyState: 'Sem transações',
   },
+  AuctionNotifications: {
+    title: 'Notificações de leilão',
+    auction: 'Leilão',
+    notifyOnBid: 'Notificar lances',
+    notifyAt: 'Notificar em',
+    deleteLabel: 'Remover notificação de leilão',
+    emptyState: 'Sem notificações',
+  },
 }
