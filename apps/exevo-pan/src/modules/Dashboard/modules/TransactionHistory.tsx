@@ -204,7 +204,7 @@ export const List = ({ list }: TransactionHistoryProps) => {
         </Table.Element>
       ) : (
         <EmptyState
-          text="No transactions"
+          text={i18n.emptyState}
           variant="medium"
           className="mt-10 mb-2"
         />

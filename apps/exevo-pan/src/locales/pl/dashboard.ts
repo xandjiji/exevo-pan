@@ -8,6 +8,10 @@ export default {
       title: 'Transaction History',
       description: 'My Exevo Pan transaction history',
     },
+    auctionNotifications: {
+      title: 'Auction Notifications',
+      description: 'My auction notifications',
+    },
   },
   Layout: {
     nav: {
@@ -73,5 +77,15 @@ export default {
     auction: 'Auction',
     highlightedDays: 'Highlighted days',
     auctionHighlight: 'Auction Highlight',
+    emptyState: 'No transactions',
+  },
+  AuctionNotifications: {
+    title: 'Auction notifications',
+    auction: 'Auction',
+    notifyOnBid: 'Notify on bid',
+    notifyAt: 'Notify at',
+    deleteLabel: 'Remove this auction notification',
+    emptyState: 'No notifications',
+    successMessage: 'Auction notification was removed',
   },
 }

@@ -2,30 +2,42 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { Layout, TransactionHistory } from 'modules/Dashboard'
+import { Layout, AuctionNotifications } from 'modules/Dashboard'
+import { toast } from 'react-hot-toast'
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.DASHBOARD.TRANSACTIONS)
+const pageUrl = buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS)
 
 export default function Page() {
   const { translations } = useTranslations()
 
   const i18n = translations.dashboard
 
-  const pageName = i18n.Meta.transactions.title
+  const pageName = i18n.Meta.auctionNotifications.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
   })
 
   const pageTitle = buildPageTitle(pageName)
 
-  const list = trpc.listMyTransactions.useQuery(undefined, {
+  const list = trpc.listMyAuctionNotifications.useQuery(undefined, {
     refetchOnWindowFocus: false,
+    keepPreviousData: true,
   })
+
+  const remove = trpc.deleteMyAuctionNotification.useMutation()
+  const onDelete = (id: string) =>
+    toast
+      .promise(remove.mutateAsync(id), {
+        success: i18n.AuctionNotifications.successMessage,
+        error: translations.common.genericError,
+        loading: translations.common.LoadingLabel,
+      })
+      .then(() => list.refetch())
 
   return (
     <>
@@ -35,14 +47,17 @@ export default function Page() {
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        <meta name="description" content={i18n.Meta.transactions.description} />
+        <meta
+          name="description"
+          content={i18n.Meta.auctionNotifications.description}
+        />
         <meta
           property="twitter:description"
-          content={i18n.Meta.transactions.description}
+          content={i18n.Meta.auctionNotifications.description}
         />
         <meta
           property="og:description"
-          content={i18n.Meta.transactions.description}
+          content={i18n.Meta.auctionNotifications.description}
         />
         <meta property="og:type" content="website" />
 
@@ -82,7 +97,9 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading}>
-          {list.data && <TransactionHistory.List list={list.data} />}
+          {list.data && (
+            <AuctionNotifications.List list={list.data} onDelete={onDelete} />
+          )}
         </Layout>
       </Main>
     </>
