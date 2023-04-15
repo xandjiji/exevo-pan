@@ -74,5 +74,6 @@ export default {
     auction: 'Leilão',
     highlightedDays: 'Dias destacados',
     auctionHighlight: 'Destaque de leilão',
+    emptyState: 'Sem transações',
   },
 }

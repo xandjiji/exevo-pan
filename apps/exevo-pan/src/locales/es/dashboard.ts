@@ -73,5 +73,6 @@ export default {
     auction: 'Auction',
     highlightedDays: 'Highlighted days',
     auctionHighlight: 'Auction Highlight',
+    emptyState: 'No transactions',
   },
 }
