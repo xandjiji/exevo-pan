@@ -51,3 +51,6 @@ export const sendClientNotification = async ({
 
   return null
 }
+
+export const getDeviceDescription = () =>
+  isPushNotificationSupported() ? navigator.userAgent : ''

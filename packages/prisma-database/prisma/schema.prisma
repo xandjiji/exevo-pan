@@ -69,6 +69,7 @@ model NotificationDevice {
     endpoint    String   @db.Text
     p256dh      String
     lastUpdated DateTime @default(now())
+    metadata    String?
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String
