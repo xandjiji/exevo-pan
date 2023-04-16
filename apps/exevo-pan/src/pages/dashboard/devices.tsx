@@ -3,6 +3,7 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout, Devices } from 'modules/Dashboard'
+import SetupNotifications from 'components/SetupNotifications'
 import { PreviewImageClient } from 'services'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
@@ -94,6 +95,7 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading}>
+          <SetupNotifications />
           {list.data && <Devices.List list={list.data} onDelete={onDelete} />}
         </Layout>
       </Main>

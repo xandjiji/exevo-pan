@@ -8,9 +8,16 @@ import { usePushNotifications } from 'hooks'
 import { Alert } from 'components/Atoms'
 import { routes } from 'Constants'
 
-const Action = ({ className, ...props }: JSX.IntrinsicElements['span']) => (
-  <span
-    className={clsx(className, 'font-bold underline underline-offset-2')}
+const ActionButton = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['button']) => (
+  <button
+    type="button"
+    className={clsx(
+      className,
+      'cursor-pointer font-bold underline underline-offset-2',
+    )}
     {...props}
   />
 )
@@ -22,8 +29,13 @@ const SetupNotifications = () => {
 
   const session = useSession()
   const isAuthed = !!session.data
-  const { isSupported, permission, subscribeDevice, isLoading } =
-    usePushNotifications()
+  const {
+    isSupported,
+    permission,
+    subscribeDevice,
+    isLoading,
+    sendClientNotification,
+  } = usePushNotifications()
 
   if (!isSupported) {
     return (
@@ -76,7 +88,22 @@ const SetupNotifications = () => {
     )
   }
 
-  return <Alert variant="primary">test you notifications</Alert>
+  return (
+    <Alert variant="primary" noIcon>
+      This device is receiving{' '}
+      <ActionButton
+        onClick={() =>
+          sendClientNotification({
+            title: 'Hey there!',
+            text: 'How are you doing?',
+          })
+        }
+      >
+        notifications
+      </ActionButton>
+      !
+    </Alert>
+  )
 }
 
 export default SetupNotifications
