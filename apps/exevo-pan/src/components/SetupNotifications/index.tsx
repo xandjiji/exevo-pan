@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { trpc } from 'lib/trpc'
@@ -6,6 +7,13 @@ import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
 import { Alert } from 'components/Atoms'
 import { routes } from 'Constants'
+
+const Action = ({ className, ...props }: JSX.IntrinsicElements['span']) => (
+  <span
+    className={clsx(className, 'font-bold underline underline-offset-2')}
+    {...props}
+  />
+)
 
 const SetupNotifications = () => {
   const {
@@ -32,9 +40,10 @@ const SetupNotifications = () => {
             logIn: (
               <NextLink
                 href={routes.LOGIN}
-                className="text-onAlert font-bold underline underline-offset-2"
               >
-                {homepage.AuctionsGrid.useAuctionNotifications.logIn}
+              <Action className="text-onAlert">
+              {homepage.AuctionsGrid.useAuctionNotifications.logIn}
+              </Action>
               </NextLink>
             ),
           },
