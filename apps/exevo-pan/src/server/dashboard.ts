@@ -52,3 +52,15 @@ export const deleteMyAuctionNotification = authedProcedure
       where: { id: auctionNotificationId },
     })
   })
+
+export const listMyDevices = authedProcedure.query(
+  async ({
+    ctx: {
+      token: { id },
+    },
+  }) =>
+    prisma.notificationDevice.findMany({
+      where: { userId: id },
+      orderBy: { lastUpdated: 'desc' },
+    }),
+)
