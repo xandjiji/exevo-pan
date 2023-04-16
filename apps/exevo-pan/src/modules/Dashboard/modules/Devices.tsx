@@ -1,16 +1,18 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Table, Paginator } from 'components/Atoms'
+import { TrashIcon } from 'assets/svgs'
 import EmptyState from 'components/EmptyState'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 
 type TransactionHistoryProps = {
   list: TRPCRouteOutputs['listMyDevices']
+  onDelete?: (id: string) => void
 }
 
 const PAGE_SIZE = 10
 
-export const List = ({ list }: TransactionHistoryProps) => {
+export const List = ({ list, onDelete }: TransactionHistoryProps) => {
   const {
     translations: { dashboard },
   } = useTranslations()
@@ -46,17 +48,36 @@ export const List = ({ list }: TransactionHistoryProps) => {
           </Table.Head>
 
           <Table.Body>
-            {page.map(({ auth, lastUpdated }) => (
+            {page.map(({ auth, lastUpdated, metadata }) => (
               <Table.Row key={auth} className="text-center">
                 <Table.Column className="w-fit py-2">
-                  (Description)
+                  {metadata ? (
+                    <span
+                      className="code max-w-[120px] truncate"
+                      title={metadata}
+                    >
+                      {metadata}
+                    </span>
+                  ) : (
+                    '--'
+                  )}
                 </Table.Column>
 
-                <Table.Column className="px-3 sm:px-8">
+                <Table.Column className="!text-tsm px-3 sm:px-8">
                   {lastUpdated.toLocaleString('pt-BR', { hour12: false })}
                 </Table.Column>
 
-                <Table.Column>Delete button</Table.Column>
+                <Table.Column>
+                  <button
+                    className="clickable mx-auto grid place-items-center rounded-sm p-0.5"
+                    type="button"
+                    title={i18n.deleteLabel}
+                    aria-label={i18n.deleteLabel}
+                    onClick={() => onDelete?.(auth)}
+                  >
+                    <TrashIcon className="fill-red h-4 w-4" />
+                  </button>
+                </Table.Column>
               </Table.Row>
             ))}
           </Table.Body>
