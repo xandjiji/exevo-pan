@@ -64,3 +64,28 @@ export const listMyDevices = authedProcedure.query(
       orderBy: { lastUpdated: 'desc' },
     }),
 )
+
+export const deleteMyDevice = authedProcedure
+  .input(z.string())
+  .mutation(async ({ ctx: { token }, input: auth }) => {
+    const deviceToBeDeleted = await prisma.notificationDevice.findUnique({
+      where: { auth },
+    })
+
+    if (!deviceToBeDeleted) {
+      throw new TRPCError({
+        code: 'NOT_FOUND',
+        message: 'Device not found',
+      })
+    }
+    if (token.role !== 'ADMIN' && deviceToBeDeleted.userId !== token.id) {
+      throw new TRPCError({
+        code: 'UNAUTHORIZED',
+        message: 'Insufficient privileges to delete this device',
+      })
+    }
+
+    return prisma.notificationDevice.delete({
+      where: { auth },
+    })
+  })

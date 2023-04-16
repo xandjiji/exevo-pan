@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout, Devices } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
@@ -26,6 +27,17 @@ export default function Page() {
   const list = trpc.listMyDevices.useQuery(undefined, {
     refetchOnWindowFocus: false,
   })
+
+  const remove = trpc.deleteMyDevice.useMutation()
+  const onDelete = (id: string) =>
+    toast
+      .promise(remove.mutateAsync(id), {
+        /* @ ToDo: i18n */
+        success: 'Sucesso!',
+        error: translations.common.genericError,
+        loading: translations.common.LoadingLabel,
+      })
+      .then(() => list.refetch())
 
   return (
     <>
@@ -82,7 +94,7 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading}>
-          {list.data && <Devices.List list={list.data} />}
+          {list.data && <Devices.List list={list.data} onDelete={onDelete} />}
         </Layout>
       </Main>
     </>
