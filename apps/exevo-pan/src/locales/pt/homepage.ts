@@ -44,10 +44,6 @@ export default {
     },
     useAuctionNotifications: {
       heading: 'Configurar notificação',
-      logIn: 'logado',
-      notAuthed: 'Você deve estar {{logIn}} para usar notificações',
-      enableNotifications: 'habilite notificações',
-      permission: 'Por favor {{enableNotifications}} neste dispositivo',
       bidNotification: 'Notificar quando houver bid',
       proExclusive: '(apenas para {{exevopro}})',
       timeNotification: 'Notificar antes do leilão encerrar:',

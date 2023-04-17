@@ -6,17 +6,11 @@ import { toast } from 'react-hot-toast'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
-import {
-  Dialog,
-  Alert,
-  LoadingAlert,
-  Input,
-  Checkbox,
-  Button,
-} from 'components/Atoms'
+import { Dialog, LoadingAlert, Input, Checkbox, Button } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import AuctionEnd from 'components/CharacterCard/Parts/Textbox/AuctionEnd'
 import CharacterMiniCard from 'components/CharacterMiniCard'
+import SetupNotifications from 'components/SetupNotifications'
 import { loadOutfitSrc } from 'utils'
 import { routes } from 'Constants'
 import { isNotificationDateValid } from './utils'
@@ -54,17 +48,12 @@ export const AuctionNotificationsProvider = ({
     translations: { common, homepage },
   } = useTranslations()
 
-  const {
-    isSupported,
-    permission,
-    subscribeDevice,
-    isLoading: loadingDeviceSubscription,
-  } = usePushNotifications()
+  const { isSupported, permission } = usePushNotifications()
   const { data } = useSession()
-  const isAuthed = !!data
   const isPro = !!data?.user.proStatus
 
   const [outfitId, setOutfitId] = useState('')
+  const [permissionGranted, setPermissionGranted] = useState(false)
 
   const [formState, setFormState] =
     useState<RegisterAuctionNotificationInput>(INITIAL_FORM_VALUES)
@@ -94,7 +83,7 @@ export const AuctionNotificationsProvider = ({
   })
 
   const disableTimeConfig = !formState.notifyAt
-  const isLoading = loadingDeviceSubscription || register.isLoading
+  const { isLoading } = register
 
   const invalidTime =
     formState.notifyAt &&
@@ -107,6 +96,8 @@ export const AuctionNotificationsProvider = ({
   const isInvalid = invalidTime || noNotification
   const isOpen = formState.auctionEnd > 0
 
+  const enabledNotifications = permission === 'granted' || permissionGranted
+
   return (
     <NotificationsContext.Provider
       value={{ isSupported, openNotificationsDialog }}
@@ -118,9 +109,7 @@ export const AuctionNotificationsProvider = ({
           onClose={closeNotificationsDialog}
           heading={homepage.AuctionsGrid.useAuctionNotifications.heading}
         >
-          {loadingDeviceSubscription && (
-            <LoadingAlert>{common.genericLoading}</LoadingAlert>
-          )}
+          {isLoading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
           <div className="text-s grid gap-6">
             <div className="xs:flex xs:items-center xs:justify-between xs:gap-4 grid gap-[18px]">
               <CharacterMiniCard
@@ -133,43 +122,8 @@ export const AuctionNotificationsProvider = ({
                 <AuctionEnd auctionEnd={formState.auctionEnd} />
               </div>
             </div>
-            {!isAuthed ? (
-              <Alert variant="alert">
-                {templateMessage(
-                  homepage.AuctionsGrid.useAuctionNotifications.notAuthed,
-                  {
-                    logIn: (
-                      <NextLink
-                        href={routes.LOGIN}
-                        className="text-onAlert font-bold underline underline-offset-2"
-                      >
-                        {homepage.AuctionsGrid.useAuctionNotifications.logIn}
-                      </NextLink>
-                    ),
-                  },
-                )}
-              </Alert>
-            ) : permission !== 'granted' ? (
-              <Alert variant="primary">
-                {templateMessage(
-                  homepage.AuctionsGrid.useAuctionNotifications.permission,
-                  {
-                    enableNotifications: (
-                      <button
-                        type="button"
-                        className="text-primaryHighlight cursor-pointer font-bold underline underline-offset-2"
-                        onClick={subscribeDevice}
-                      >
-                        {
-                          homepage.AuctionsGrid.useAuctionNotifications
-                            .enableNotifications
-                        }
-                      </button>
-                    ),
-                  },
-                )}
-              </Alert>
-            ) : (
+
+            {enabledNotifications ? (
               <>
                 <div className="grid gap-3">
                   <Checkbox
@@ -287,6 +241,10 @@ export const AuctionNotificationsProvider = ({
                   </Button>
                 </div>
               </>
+            ) : (
+              <SetupNotifications
+                onRegister={() => setPermissionGranted(true)}
+              />
             )}
           </div>
         </Dialog>

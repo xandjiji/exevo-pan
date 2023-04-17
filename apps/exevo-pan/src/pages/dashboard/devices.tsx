@@ -95,7 +95,7 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading}>
-          <SetupNotifications />
+          <SetupNotifications onRegister={list.refetch} />
           {list.data && <Devices.List list={list.data} onDelete={onDelete} />}
         </Layout>
       </Main>
