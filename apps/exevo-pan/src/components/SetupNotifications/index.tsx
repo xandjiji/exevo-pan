@@ -26,6 +26,7 @@ const SetupNotifications = () => {
   const {
     translations: { common },
   } = useTranslations()
+  const i18n = common.SetupNotifications
 
   const session = useSession()
   const isAuthed = !!session.data
@@ -46,20 +47,13 @@ const SetupNotifications = () => {
   if (!isAuthed) {
     return (
       <Alert variant="alert">
-        {/* {templateMessage(
-          homepage.AuctionsGrid.useAuctionNotifications.notAuthed,
-          {
-            logIn: (
-              <NextLink
-                href={routes.LOGIN}
-              >
-              <Action className="text-onAlert">
-              {homepage.AuctionsGrid.useAuctionNotifications.logIn}
-              </Action>
-              </NextLink>
-            ),
-          },
-        )} */}
+        {templateMessage(i18n.notAuthed, {
+          logIn: (
+            <NextLink href={routes.LOGIN}>
+              <ActionButton className="text-onAlert">{i18n.logIn}</ActionButton>
+            </NextLink>
+          ),
+        })}
       </Alert>
     )
   }
@@ -67,41 +61,38 @@ const SetupNotifications = () => {
   if (permission !== 'granted') {
     return (
       <Alert variant="primary">
-        {/* {templateMessage(
-          homepage.AuctionsGrid.useAuctionNotifications.permission,
-          {
-            enableNotifications: (
-              <button
-                type="button"
-                className="text-primaryHighlight cursor-pointer font-bold underline underline-offset-2"
-                onClick={subscribeDevice}
-              >
-                {
-                  homepage.AuctionsGrid.useAuctionNotifications
-                    .enableNotifications
-                }
-              </button>
-            ),
-          },
-        )} */}
+        {templateMessage(i18n.permission, {
+          enableNotifications: (
+            <ActionButton
+              type="button"
+              className="text-primaryHighlight"
+              onClick={subscribeDevice}
+            >
+              {i18n.enableNotifications}
+            </ActionButton>
+          ),
+        })}
       </Alert>
     )
   }
 
   return (
     <Alert variant="primary" noIcon>
-      This device is receiving{' '}
-      <ActionButton
-        onClick={() =>
-          sendClientNotification({
-            title: 'Hey there!',
-            text: 'How are you doing?',
-          })
-        }
-      >
-        notifications
-      </ActionButton>
-      !
+      {templateMessage(i18n.deviceReady, {
+        notifications: (
+          <ActionButton
+            className="text-primaryHighlight"
+            onClick={() =>
+              sendClientNotification({
+                title: i18n.testTitle,
+                text: i18n.testText,
+              })
+            }
+          >
+            {i18n.notifications}
+          </ActionButton>
+        ),
+      })}
     </Alert>
   )
 }

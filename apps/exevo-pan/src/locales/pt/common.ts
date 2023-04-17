@@ -239,4 +239,14 @@ export default {
   genericError: 'Ops! Algo deu errado',
   exevoProCTA: 'Seja {{exevoPro}}',
   play: 'Jogue',
+  SetupNotifications: {
+    notAuthed: 'Você deve {{logIn}} para usar notificações',
+    logIn: 'logar',
+    permission: 'Por favor {{enableNotifications}} neste dispositivo',
+    enableNotifications: 'habilite notificações',
+    deviceReady: 'Este dispositivo está recebendo {{notifications}}!',
+    notifications: 'notificações',
+    testTitle: 'Olá 👋',
+    testText: 'Como vai você?',
+  },
 }

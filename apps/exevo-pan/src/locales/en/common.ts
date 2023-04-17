@@ -239,4 +239,14 @@ export default {
   genericError: 'Oops! Something went wrong',
   exevoProCTA: 'Become {{exevoPro}}',
   play: 'Play',
+  SetupNotifications: {
+    notAuthed: 'You must {{logIn}} to set up auction notifications',
+    logIn: 'log in',
+    permission: 'Please {{enableNotifications}} on this device',
+    enableNotifications: 'enable notifications',
+    deviceReady: 'This device is receiving {{notifications}}!',
+    notifications: 'notifications',
+    testTitle: 'Hey there 👋',
+    testText: 'How are you doing?',
+  },
 }
