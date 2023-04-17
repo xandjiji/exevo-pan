@@ -137,7 +137,7 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
       )}
 
       {guildList.isFetching && (
-        <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
+        <LoadingAlert>{common.genericLoading}</LoadingAlert>
       )}
     </section>
   )

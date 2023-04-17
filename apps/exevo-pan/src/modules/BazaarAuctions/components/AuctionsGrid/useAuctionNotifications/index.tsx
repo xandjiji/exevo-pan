@@ -119,7 +119,7 @@ export const AuctionNotificationsProvider = ({
           heading={homepage.AuctionsGrid.useAuctionNotifications.heading}
         >
           {loadingDeviceSubscription && (
-            <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
+            <LoadingAlert>{common.genericLoading}</LoadingAlert>
           )}
           <div className="text-s grid gap-6">
             <div className="xs:flex xs:items-center xs:justify-between xs:gap-4 grid gap-[18px]">

@@ -140,7 +140,6 @@ export default {
   },
   PopoverCloseLabel: 'Haga clic aquí para cerrar',
   ChangeValueLabel: 'cambiar valor',
-  LoadingLabel: 'Cargando',
   UpdatingDataText: 'Actualizando datos...',
   PreferredLanguageLabel: 'Cambiar idioma',
   SpecialTags: {
@@ -230,7 +229,6 @@ export default {
   AnchorIconLabel: 'Copiar link',
   CharacterTooltipLabel: 'Ir a la página del personaje',
   Newsticker: 'Artículos recientes',
-  LoadingState: 'Cargando...',
   /* @ ToDo: i18n */
   SignIn: {
     title: 'Sign in with',

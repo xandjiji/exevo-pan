@@ -89,7 +89,7 @@ const SettingsDialog = ({
   return (
     <Dialog heading={i18n.heading} isOpen onClose={onClose}>
       {loadingDeviceSubscription && (
-        <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
+        <LoadingAlert>{common.genericLoading}</LoadingAlert>
       )}
       <div className="grid gap-6">
         {isSupported ? (

@@ -114,7 +114,7 @@ export const AuctionsProvider = ({
         dispatch,
       }}
     >
-      {state.loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
+      {state.loading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
       {children}
     </AuctionsContext.Provider>
   )

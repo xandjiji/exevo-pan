@@ -55,7 +55,7 @@ const UrlAuction = ({ highlightedAuctions = [] }: UrlAuctionProps) => {
 
   return (
     <>
-      {isFetching && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
+      {isFetching && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
       {auction && <CharacterModal characterData={auction} onClose={onClose} />}
     </>
   )

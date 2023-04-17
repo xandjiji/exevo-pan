@@ -138,7 +138,6 @@ export default {
   },
   PopoverCloseLabel: 'Kliknij tu aby zamknąć',
   ChangeValueLabel: 'Zmień wartość',
-  LoadingLabel: 'Wczytuję',
   UpdatingDataText: 'Odświeżam dane',
   PreferredLanguageLabel: 'Zmień język',
   SpecialTags: {
@@ -229,7 +228,6 @@ export default {
   AnchorIconLabel: 'Skopiuj link',
   CharacterTooltipLabel: 'Idź do strony postaci',
   Newsticker: 'Ostatnie artykuły',
-  LoadingState: 'Wczytuję...',
   /* @ ToDo: i18n */
   SignIn: {
     title: 'Sign in with',

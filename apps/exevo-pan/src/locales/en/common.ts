@@ -137,7 +137,6 @@ export default {
   },
   PopoverCloseLabel: 'Click here to close',
   ChangeValueLabel: 'change value',
-  LoadingLabel: 'Loading',
   UpdatingDataText: 'Updating data...',
   PreferredLanguageLabel: 'Change language',
   SpecialTags: {
@@ -222,7 +221,6 @@ export default {
   AnchorIconLabel: 'Copy link',
   CharacterTooltipLabel: 'Go to character page',
   Newsticker: 'Recent articles',
-  LoadingState: 'Loading...',
   SignIn: {
     title: 'Sign in with',
     subtext: 'By signing in, you agree to our',

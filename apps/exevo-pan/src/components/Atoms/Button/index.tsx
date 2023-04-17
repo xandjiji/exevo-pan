@@ -49,7 +49,7 @@ const Button = ({
             pill && 'h-3 w-3',
           )}
           role="alert"
-          aria-label={common.LoadingLabel}
+          aria-label={common.genericLoading}
         />
       ) : (
         children

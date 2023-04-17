@@ -137,7 +137,6 @@ export default {
   },
   PopoverCloseLabel: 'Clique aqui para fechar',
   ChangeValueLabel: 'alterar valor',
-  LoadingLabel: 'Carregando',
   UpdatingDataText: 'Atualizando dados...',
   PreferredLanguageLabel: 'Mudar idioma',
   SpecialTags: {
@@ -222,7 +221,6 @@ export default {
   AnchorIconLabel: 'Copiar link',
   CharacterTooltipLabel: 'Ir para a página do personagem',
   Newsticker: 'Artigos recentes',
-  LoadingState: 'Carregando...',
   SignIn: {
     title: 'Entrar com',
     subtext: 'Ao criar uma conta, você está concordando com os nossos',

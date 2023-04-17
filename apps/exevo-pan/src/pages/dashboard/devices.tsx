@@ -36,7 +36,7 @@ export default function Page() {
         /* @ ToDo: i18n */
         success: 'Sucesso!',
         error: translations.common.genericError,
-        loading: translations.common.LoadingLabel,
+        loading: translations.common.genericLoading,
       })
       .then(() => list.refetch())
 

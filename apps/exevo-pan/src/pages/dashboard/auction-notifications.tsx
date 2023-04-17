@@ -35,7 +35,7 @@ export default function Page() {
       .promise(remove.mutateAsync(id), {
         success: i18n.AuctionNotifications.successMessage,
         error: translations.common.genericError,
-        loading: translations.common.LoadingLabel,
+        loading: translations.common.genericLoading,
       })
       .then(() => list.refetch())
 
