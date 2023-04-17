@@ -1,7 +1,7 @@
 import clsx from 'clsx'
+import { useCallback } from 'react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
-import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
@@ -22,7 +22,14 @@ const ActionButton = ({
   />
 )
 
-const SetupNotifications = () => {
+type SetupNotificationsProps = {
+  onRegister?: () => void
+} & JSX.IntrinsicElements['div']
+
+const SetupNotifications = ({
+  onRegister,
+  ...props
+}: SetupNotificationsProps) => {
   const {
     translations: { common },
   } = useTranslations()
@@ -30,23 +37,30 @@ const SetupNotifications = () => {
 
   const session = useSession()
   const isAuthed = !!session.data
-  const {
-    isSupported,
-    permission,
-    subscribeDevice,
-    isLoading,
-    sendClientNotification,
-  } = usePushNotifications()
+  const { isSupported, permission, subscribeDevice, sendClientNotification } =
+    usePushNotifications()
+
+  const handleSubscribe = useCallback(
+    () =>
+      toast.promise(subscribeDevice().then(onRegister), {
+        error: common.genericError,
+        loading: common.genericLoading,
+        success: i18n.successMessage,
+      }),
+    [common, i18n, subscribeDevice],
+  )
 
   if (!isSupported) {
     return (
-      <Alert variant="alert">Your device does not support notifications</Alert>
+      <Alert variant="alert" {...props}>
+        Your device does not support notifications
+      </Alert>
     )
   }
 
   if (!isAuthed) {
     return (
-      <Alert variant="alert">
+      <Alert variant="alert" {...props}>
         {templateMessage(i18n.notAuthed, {
           logIn: (
             <NextLink href={routes.LOGIN}>
@@ -60,13 +74,13 @@ const SetupNotifications = () => {
 
   if (permission !== 'granted') {
     return (
-      <Alert variant="primary">
+      <Alert variant="primary" {...props}>
         {templateMessage(i18n.permission, {
           enableNotifications: (
             <ActionButton
               type="button"
               className="text-primaryHighlight"
-              onClick={subscribeDevice}
+              onClick={handleSubscribe}
             >
               {i18n.enableNotifications}
             </ActionButton>
@@ -77,7 +91,7 @@ const SetupNotifications = () => {
   }
 
   return (
-    <Alert variant="primary" noIcon>
+    <Alert variant="primary" noIcon {...props}>
       {templateMessage(i18n.deviceReady, {
         notifications: (
           <ActionButton

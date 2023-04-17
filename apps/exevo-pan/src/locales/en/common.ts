@@ -237,6 +237,7 @@ export default {
     nextMonthLabel: 'Next month',
   },
   genericError: 'Oops! Something went wrong',
+  genericLoading: 'Loading...',
   exevoProCTA: 'Become {{exevoPro}}',
   play: 'Play',
   SetupNotifications: {
@@ -248,5 +249,6 @@ export default {
     notifications: 'notifications',
     testTitle: 'Hey there 👋',
     testText: 'How are you doing?',
+    successMessage: 'Device registered!',
   },
 }
