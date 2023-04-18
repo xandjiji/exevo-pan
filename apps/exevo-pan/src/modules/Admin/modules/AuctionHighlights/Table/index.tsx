@@ -220,11 +220,15 @@ const PaymentList = () => {
               }) => (
                 <Table.Row
                   key={id}
-                  className={clsx(
-                    toDelete.id === id && 'bg-red/20',
-                    toToggleDate.id === id && 'bg-green/20',
-                    'hover:bg-background group',
-                  )}
+                  hoverHighlight
+                  highlight={
+                    toDelete.id === id
+                      ? 'red'
+                      : toToggleDate.id === id
+                      ? 'green'
+                      : undefined
+                  }
+                  className="group"
                 >
                   <Table.Column className="text-center">
                     <Tooltip

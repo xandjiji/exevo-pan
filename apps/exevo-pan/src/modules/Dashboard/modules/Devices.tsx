@@ -75,7 +75,11 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
 
           <Table.Body>
             {page.map(({ auth, lastUpdated, metadata }) => (
-              <Table.Row key={auth} className="text-center">
+              <Table.Row
+                key={auth}
+                className="text-center"
+                highlight={toRemove === auth ? 'red' : undefined}
+              >
                 <Table.Column className="w-fit py-2">
                   {metadata ? (
                     <span

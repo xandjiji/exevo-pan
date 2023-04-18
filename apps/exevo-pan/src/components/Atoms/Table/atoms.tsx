@@ -12,9 +12,20 @@ export const Table = ({
   />
 )
 
-export const Row = ({ className, ...props }: JSX.IntrinsicElements['tr']) => (
+export const Row = ({
+  highlight,
+  hoverHighlight = false,
+  className,
+  ...props
+}: {
+  highlight?: 'green' | 'red'
+  hoverHighlight?: boolean
+} & JSX.IntrinsicElements['tr']) => (
   <tr
     className={clsx(
+      hoverHighlight && 'hover:bg-background',
+      highlight === 'green' && 'bg-greenHighlight/20',
+      highlight === 'red' && 'bg-red/20',
       'styled-link after:bg-separator relative after:absolute after:top-full after:left-0 after:h-[1px] after:w-full after:opacity-30 last:after:content-none',
       className,
     )}
