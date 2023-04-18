@@ -17,7 +17,7 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
     translations: { dashboard },
   } = useTranslations()
 
-  const i18n = dashboard.TransactionHistory
+  const i18n = dashboard.Devices
 
   const [index, setIndex] = useState(1)
 
@@ -43,13 +43,13 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
       <Dialog
         isOpen={!!toRemove}
         onClose={() => setToRemove('')}
-        heading="Remove this device"
+        heading={i18n.dialogHeading}
       >
-        <p className="text-s my-6">Are sure you want to remove this device?</p>
+        <p className="text-s my-6">{i18n.dialogText}</p>
 
         <div className="flex items-center justify-end gap-3">
           <Button pill hollow onClick={() => setToRemove('')}>
-            Cancel
+            {i18n.cancel}
           </Button>
           <Button
             pill
@@ -59,7 +59,7 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
               onDelete?.(toRemove)
             }}
           >
-            Confirm
+            {i18n.confirm}
           </Button>
         </div>
       </Dialog>
@@ -68,8 +68,8 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
         <Table.Element>
           <Table.Head>
             <Table.Row>
-              <Table.HeadColumn>Device</Table.HeadColumn>
-              <Table.HeadColumn className="px-8">Date</Table.HeadColumn>
+              <Table.HeadColumn>{i18n.device}</Table.HeadColumn>
+              <Table.HeadColumn className="px-8">{i18n.date}</Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 

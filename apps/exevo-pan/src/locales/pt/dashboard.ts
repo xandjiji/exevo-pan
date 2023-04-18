@@ -99,5 +99,12 @@ export default {
   },
   Devices: {
     successMessage: 'Dispositivo foi removido',
+    dialogHeading: 'Meus dispositivos',
+    dialogText: 'Você tem certeza de que deseja remover este dispositivo?',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
+    device: 'Dispositivo',
+    date: 'Data',
+    emptyState: 'Nenhum dispositivo',
   },
 }
