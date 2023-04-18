@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Table, Paginator } from 'components/Atoms'
+import { Table, Paginator, Dialog, Button } from 'components/Atoms'
 import { TrashIcon } from 'assets/svgs'
 import EmptyState from 'components/EmptyState'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
@@ -26,6 +26,8 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
     [index, list],
   )
 
+  const [toRemove, setToRemove] = useState('')
+
   const isEmpty = page.length === 0
 
   return (
@@ -37,6 +39,30 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
         onChange={setIndex}
         className="ml-auto mb-6 w-fit"
       />
+
+      <Dialog
+        isOpen={!!toRemove}
+        onClose={() => setToRemove('')}
+        heading="Remove this device"
+      >
+        <p className="text-s my-6">Are sure you want to remove this device?</p>
+
+        <div className="flex items-center justify-end gap-3">
+          <Button pill hollow onClick={() => setToRemove('')}>
+            Cancel
+          </Button>
+          <Button
+            pill
+            className="bg-red"
+            onClick={() => {
+              setToRemove('')
+              onDelete?.(toRemove)
+            }}
+          >
+            Confirm
+          </Button>
+        </div>
+      </Dialog>
 
       {!isEmpty ? (
         <Table.Element>
@@ -73,7 +99,7 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
                     type="button"
                     title={i18n.deleteLabel}
                     aria-label={i18n.deleteLabel}
-                    onClick={() => onDelete?.(auth)}
+                    onClick={() => setToRemove(auth)}
                   >
                     <TrashIcon className="fill-red h-4 w-4" />
                   </button>
