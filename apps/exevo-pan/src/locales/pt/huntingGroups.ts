@@ -121,20 +121,6 @@ export default {
   },
   SettingsDialog: {
     heading: 'Configurações',
-    registeredDevice: 'Este dispositivo está registrado!',
-    testNotification: 'Que tal experimentar uma notificação de {{button}}? 🔔',
-    test: 'teste',
-    sampleNotification: {
-      title: 'Olá 👋',
-      text: 'Parece que está tudo funcionando!',
-    },
-    enableNotifications: 'Por favor {{button}} neste dispositivo',
-    enableButton: 'habilite notificações',
-    registerSuccess: 'Este dispositivo foi registrado com sucesso!',
-    retryRegistration:
-      'Caso precise, você pode {{button}} o registro deste dispositivo',
-    retry: 'refazer',
-    notSupported: 'Este dispositivo não suporta Web Push Notifications',
     enableGroupNotifications: 'Receber notificações deste grupo',
     receiveNotificationsFor: 'Receber notificações para:',
     cancel: 'Cancelar',
