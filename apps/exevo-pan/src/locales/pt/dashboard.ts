@@ -88,5 +88,9 @@ export default {
     deleteLabel: 'Remover notificação de leilão',
     emptyState: 'Sem notificações',
     successMessage: 'Notificação de leilão foi removida',
+    dialogHeading: 'Remover notificação',
+    dialogText: 'Você tem certeza de que deseja remover esta notificação?',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
   },
 }

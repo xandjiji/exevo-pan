@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Table, Paginator, Checkbox } from 'components/Atoms'
+import { Table, Paginator, Checkbox, Dialog, Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { TrashIcon } from 'assets/svgs'
 import { officialAuctionUrl } from 'utils'
@@ -27,6 +27,8 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
     [index, list],
   )
 
+  const [toRemove, setToRemove] = useState('')
+
   const isEmpty = page.length === 0
 
   return (
@@ -38,6 +40,30 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
         onChange={setIndex}
         className="ml-auto mb-6 w-fit"
       />
+
+      <Dialog
+        isOpen={!!toRemove}
+        onClose={() => setToRemove('')}
+        heading={i18n.dialogHeading}
+      >
+        <p className="text-s my-6">{i18n.dialogText}</p>
+
+        <div className="flex items-center justify-end gap-3">
+          <Button pill hollow onClick={() => setToRemove('')}>
+            {i18n.cancel}
+          </Button>
+          <Button
+            pill
+            className="bg-red"
+            onClick={() => {
+              setToRemove('')
+              onDelete?.(toRemove)
+            }}
+          >
+            {i18n.confirm}
+          </Button>
+        </div>
+      </Dialog>
 
       {!isEmpty ? (
         <Table.Element>
@@ -108,7 +134,7 @@ export const List = ({ list, onDelete }: AuctionNotificationProps) => {
                           type="button"
                           title={i18n.deleteLabel}
                           aria-label={i18n.deleteLabel}
-                          onClick={() => onDelete?.(id)}
+                          onClick={() => setToRemove(id)}
                         >
                           <TrashIcon className="fill-red h-4 w-4" />
                         </button>

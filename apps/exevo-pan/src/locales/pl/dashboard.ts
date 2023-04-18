@@ -87,5 +87,9 @@ export default {
     deleteLabel: 'Remove this auction notification',
     emptyState: 'No notifications',
     successMessage: 'Auction notification was removed',
+    dialogHeading: 'Remove notification',
+    dialogText: 'Are you sure you want to remove this notification?',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
   },
 }
