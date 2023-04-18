@@ -61,7 +61,7 @@ const SpritePortrait = ({
       {!loaded && (
         <div
           role="alert"
-          aria-label={common.LoadingLabel}
+          aria-label={common.genericLoading}
           aria-busy="true"
           className="loading-spinner border-primary absolute"
           style={{ top: 'calc(50% - 12px)', left: 'calc(50% - 12px)' }}

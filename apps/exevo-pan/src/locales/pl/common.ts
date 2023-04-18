@@ -138,7 +138,6 @@ export default {
   },
   PopoverCloseLabel: 'Kliknij tu aby zamknąć',
   ChangeValueLabel: 'Zmień wartość',
-  LoadingLabel: 'Wczytuję',
   UpdatingDataText: 'Odświeżam dane',
   PreferredLanguageLabel: 'Zmień język',
   SpecialTags: {
@@ -229,7 +228,6 @@ export default {
   AnchorIconLabel: 'Skopiuj link',
   CharacterTooltipLabel: 'Idź do strony postaci',
   Newsticker: 'Ostatnie artykuły',
-  LoadingState: 'Wczytuję...',
   /* @ ToDo: i18n */
   SignIn: {
     title: 'Sign in with',
@@ -246,6 +244,18 @@ export default {
     nextMonthLabel: 'Następny miesiąc',
   },
   genericError: 'Ups! Coś poszło nie tak',
+  genericLoading: 'Wczytuję...',
   exevoProCTA: 'Become {{exevoPro}}',
   play: 'Grać',
+  SetupNotifications: {
+    notAuthed: 'You must {{logIn}} to set up auction notifications',
+    logIn: 'log in',
+    permission: 'Please {{enableNotifications}} on this device',
+    enableNotifications: 'enable notifications',
+    deviceReady: 'This device is receiving {{notifications}}!',
+    notifications: 'notifications',
+    testTitle: 'Hey there 👋',
+    testText: 'How are you doing?',
+    successMessage: 'Device registered!',
+  },
 }

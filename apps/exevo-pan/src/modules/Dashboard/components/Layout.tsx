@@ -37,12 +37,11 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
             href: routes.DASHBOARD.AUCTION_NOTIFICATIONS,
             icon: <AlertIcon />,
           },
-          /*
           {
             title: i18n.nav.devices,
             href: routes.DASHBOARD.DEVICES,
             icon: <BlogIcon />,
-          }, */
+          },
         ]}
       />
       <main className="inner-container child:animate-fadeIn relative flex flex-col gap-8 py-8">

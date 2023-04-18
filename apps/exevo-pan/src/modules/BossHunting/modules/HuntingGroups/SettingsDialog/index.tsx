@@ -1,14 +1,7 @@
-import clsx from 'clsx'
-import { useState, useCallback } from 'react'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import {
-  Dialog,
-  Alert,
-  LoadingAlert,
-  Button,
-  Switch,
-  Checkbox,
-} from 'components/Atoms'
+import { useState } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
+import { Dialog, Button, Switch, Checkbox } from 'components/Atoms'
+import SetupNotifications from 'components/SetupNotifications'
 import { usePushNotifications } from 'hooks'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
@@ -21,20 +14,6 @@ type SettingsDialogProps = {
   onMemberUpdate: (updatedMember: GuildMember) => void
 }
 
-const AlertButton = ({
-  className,
-  ...props
-}: JSX.IntrinsicElements['button']) => (
-  <button
-    type="button"
-    className={clsx(
-      className,
-      'cursor-pointer font-bold underline underline-offset-2',
-    )}
-    {...props}
-  />
-)
-
 const SettingsDialog = ({
   onClose,
   currentMember,
@@ -45,26 +24,9 @@ const SettingsDialog = ({
   } = useTranslations()
   const i18n = huntingGroups.SettingsDialog
 
-  const {
-    isSupported,
-    permission,
-    subscribeDevice,
-    isLoading: loadingDeviceSubscription,
-  } = usePushNotifications()
-
-  const [allowSaveButton, setAllowSaveButton] = useState(false)
-  const registerDevice = useCallback(
-    () =>
-      subscribeDevice()
-        .then(() => {
-          setAllowSaveButton(true)
-          toast.success(i18n.registerSuccess)
-        })
-        .catch(() => toast.error(common.genericError)),
-    [i18n, subscribeDevice],
-  )
-
-  const registeredDevice = permission === 'granted'
+  const { permission } = usePushNotifications()
+  const [justRegistered, setJustRegistered] = useState(false)
+  const registeredDevice = permission === 'granted' || justRegistered
 
   const [disabledNotifications, setDisabledNotifications] = useState(
     currentMember.disabledNotifications,
@@ -80,69 +42,14 @@ const SettingsDialog = ({
     onError: () => toast.error(common.genericError),
   })
 
-  const testMyNotification = trpc.testMyNotification.useMutation()
-
   const noChanges =
     blacklist.value.string === currentMember.blacklistedBosses &&
     disabledNotifications === currentMember.disabledNotifications
 
   return (
     <Dialog heading={i18n.heading} isOpen onClose={onClose}>
-      {loadingDeviceSubscription && (
-        <LoadingAlert>{common.LoadingLabel}</LoadingAlert>
-      )}
       <div className="grid gap-6">
-        {isSupported ? (
-          <Alert variant={registeredDevice ? 'primary' : 'alert'} noIcon>
-            {registeredDevice ? (
-              <>
-                <p>{i18n.registeredDevice}</p>
-                <p className="mb-2">
-                  {templateMessage(i18n.testNotification, {
-                    button: (
-                      <AlertButton
-                        className="text-primaryHighlight"
-                        onClick={() =>
-                          testMyNotification.mutate({
-                            title: i18n.sampleNotification.title,
-                            text: i18n.sampleNotification.text,
-                          })
-                        }
-                      >
-                        {i18n.test}
-                      </AlertButton>
-                    ),
-                  })}
-                </p>
-                <p>
-                  {templateMessage(i18n.retryRegistration, {
-                    button: (
-                      <AlertButton
-                        onClick={registerDevice}
-                        className="text-primaryHighlight"
-                      >
-                        {i18n.retry}
-                      </AlertButton>
-                    ),
-                  })}
-                </p>
-              </>
-            ) : (
-              templateMessage(i18n.enableNotifications, {
-                button: (
-                  <AlertButton
-                    onClick={registerDevice}
-                    className="text-onAlert"
-                  >
-                    {i18n.enableButton}
-                  </AlertButton>
-                ),
-              })
-            )}
-          </Alert>
-        ) : (
-          <Alert variant="alert">{i18n.notSupported}</Alert>
-        )}
+        <SetupNotifications onRegister={() => setJustRegistered(true)} />
 
         <Switch
           active={!disabledNotifications}
@@ -184,7 +91,7 @@ const SettingsDialog = ({
           }
           loading={updatePreferences.isLoading}
           disabled={
-            !allowSaveButton && (noChanges || updatePreferences.isLoading)
+            !justRegistered && (noChanges || updatePreferences.isLoading)
           }
         >
           {i18n.save}

@@ -2,38 +2,38 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { Layout, AuctionNotifications } from 'modules/Dashboard'
-import { toast } from 'react-hot-toast'
+import { Layout, Devices } from 'modules/Dashboard'
+import SetupNotifications from 'components/SetupNotifications'
 import { PreviewImageClient } from 'services'
+import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { buildUrl, buildPageTitle } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, dashboard } from 'locales'
 
-const pageUrl = buildUrl(routes.DASHBOARD.AUCTION_NOTIFICATIONS)
+const pageUrl = buildUrl(routes.DASHBOARD.DEVICES)
 
 export default function Page() {
   const { translations } = useTranslations()
 
   const i18n = translations.dashboard
 
-  const pageName = i18n.Meta.auctionNotifications.title
+  const pageName = i18n.Meta.devices.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
   })
 
   const pageTitle = buildPageTitle(pageName)
 
-  const list = trpc.listMyAuctionNotifications.useQuery(undefined, {
+  const list = trpc.listMyDevices.useQuery(undefined, {
     refetchOnWindowFocus: false,
-    keepPreviousData: true,
   })
 
-  const remove = trpc.deleteMyAuctionNotification.useMutation()
+  const remove = trpc.deleteMyDevice.useMutation()
   const onDelete = (id: string) =>
     toast
       .promise(remove.mutateAsync(id), {
-        success: i18n.AuctionNotifications.successMessage,
+        success: i18n.Devices.successMessage,
         error: translations.common.genericError,
         loading: translations.common.genericLoading,
       })
@@ -47,17 +47,14 @@ export default function Page() {
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        <meta
-          name="description"
-          content={i18n.Meta.auctionNotifications.description}
-        />
+        <meta name="description" content={i18n.Meta.devices.description} />
         <meta
           property="twitter:description"
-          content={i18n.Meta.auctionNotifications.description}
+          content={i18n.Meta.devices.description}
         />
         <meta
           property="og:description"
-          content={i18n.Meta.auctionNotifications.description}
+          content={i18n.Meta.devices.description}
         />
         <meta property="og:type" content="website" />
 
@@ -97,9 +94,10 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading}>
-          {list.data && (
-            <AuctionNotifications.List list={list.data} onDelete={onDelete} />
-          )}
+          <div className="mx-auto grid w-fit gap-4">
+            <SetupNotifications onRegister={list.refetch} />
+            {list.data && <Devices.List list={list.data} onDelete={onDelete} />}
+          </div>
         </Layout>
       </Main>
     </>

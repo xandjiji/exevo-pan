@@ -8,6 +8,7 @@ export const registerNotificationDevice = authedProcedure
       endpoint: z.string(),
       p256dh: z.string().min(1),
       auth: z.string().min(1),
+      metadata: z.string().optional(),
     }),
   )
   .mutation(

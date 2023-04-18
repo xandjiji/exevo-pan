@@ -74,7 +74,7 @@ export const AuctionsProvider = ({
     <AuctionsContext.Provider
       value={{ ...state, handlePaginatorFetch, handleNicknameFetch }}
     >
-      {state.loading && <LoadingAlert>{common.LoadingState}</LoadingAlert>}
+      {state.loading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
       {children}
     </AuctionsContext.Provider>
   )

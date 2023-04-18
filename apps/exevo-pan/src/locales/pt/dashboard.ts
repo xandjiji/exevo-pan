@@ -12,6 +12,10 @@ export default {
       title: 'Notificações de Leilão',
       description: 'Minhas notificações de leilão',
     },
+    devices: {
+      title: 'Notificações em Dispositivos',
+      description: 'Meus dispositivos de notificação',
+    },
   },
   Layout: {
     nav: {
@@ -88,5 +92,19 @@ export default {
     deleteLabel: 'Remover notificação de leilão',
     emptyState: 'Sem notificações',
     successMessage: 'Notificação de leilão foi removida',
+    dialogHeading: 'Remover notificação',
+    dialogText: 'Você tem certeza de que deseja remover esta notificação?',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
+  },
+  Devices: {
+    successMessage: 'Dispositivo foi removido',
+    dialogHeading: 'Meus dispositivos',
+    dialogText: 'Você tem certeza de que deseja remover este dispositivo?',
+    cancel: 'Cancelar',
+    confirm: 'Confirmar',
+    device: 'Dispositivo',
+    date: 'Data',
+    emptyState: 'Nenhum dispositivo',
   },
 }

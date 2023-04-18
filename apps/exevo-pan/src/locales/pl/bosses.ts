@@ -5,7 +5,7 @@ export default {
   },
   BossCard: {
     lastSeen: 'Last seen',
-    thisSS: 'this server save',
+    thisSS: 'This server save',
     /* 'hours ago' */
     ago: 'ago',
     thisCreatureHas: 'This creature has',

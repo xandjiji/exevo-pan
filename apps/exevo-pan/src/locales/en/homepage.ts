@@ -45,10 +45,6 @@ export default {
     },
     useAuctionNotifications: {
       heading: 'Set auction notification',
-      logIn: 'log in',
-      notAuthed: 'You must {{logIn}} to set up auction notifications',
-      enableNotifications: 'enable notifications',
-      permission: 'Please {{enableNotifications}} on this device',
       bidNotification: 'Notify me when bidded',
       proExclusive: '(exclusive for {{exevopro}})',
       timeNotification: 'Notify me before auction end:',

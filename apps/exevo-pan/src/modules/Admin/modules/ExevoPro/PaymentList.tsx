@@ -97,13 +97,14 @@ const PaymentList = () => {
               ({ id, paymentData: { character, lastUpdated, confirmed } }) => (
                 <Table.Row
                   key={id}
-                  className={clsx(
-                    toConfirm.id === id &&
-                      (toConfirm.confirmed
-                        ? 'bg-greenHighlight/20'
-                        : 'bg-red/20'),
-                    'hover:bg-background',
-                  )}
+                  highlight={
+                    toConfirm.id
+                      ? toConfirm.confirmed
+                        ? 'green'
+                        : 'red'
+                      : undefined
+                  }
+                  hoverHighlight
                 >
                   <Table.Column>
                     <div className="mx-auto w-fit">

@@ -6,6 +6,7 @@ import {
   registerServiceWorker,
   createSubscription,
   sendClientNotification,
+  getDeviceDescription,
 } from './utils'
 import { WorkerStatus } from './types'
 
@@ -35,6 +36,7 @@ const usePushNotifications = () => {
         endpoint: pushDataKeys.endpoint,
         auth: keys?.auth ?? '',
         p256dh: keys?.p256dh ?? '',
+        metadata: getDeviceDescription(),
       })
 
       return result

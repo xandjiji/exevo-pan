@@ -137,7 +137,6 @@ export default {
   },
   PopoverCloseLabel: 'Clique aqui para fechar',
   ChangeValueLabel: 'alterar valor',
-  LoadingLabel: 'Carregando',
   UpdatingDataText: 'Atualizando dados...',
   PreferredLanguageLabel: 'Mudar idioma',
   SpecialTags: {
@@ -222,7 +221,6 @@ export default {
   AnchorIconLabel: 'Copiar link',
   CharacterTooltipLabel: 'Ir para a página do personagem',
   Newsticker: 'Artigos recentes',
-  LoadingState: 'Carregando...',
   SignIn: {
     title: 'Entrar com',
     subtext: 'Ao criar uma conta, você está concordando com os nossos',
@@ -237,6 +235,18 @@ export default {
     nextMonthLabel: 'Próximo mês',
   },
   genericError: 'Ops! Algo deu errado',
+  genericLoading: 'Carregando...',
   exevoProCTA: 'Seja {{exevoPro}}',
   play: 'Jogue',
+  SetupNotifications: {
+    notAuthed: 'Você deve {{logIn}} para usar notificações',
+    logIn: 'logar',
+    permission: 'Por favor {{enableNotifications}} neste dispositivo',
+    enableNotifications: 'habilite notificações',
+    deviceReady: 'Este dispositivo está recebendo {{notifications}}!',
+    notifications: 'notificações',
+    testTitle: 'Olá 👋',
+    testText: 'Como vai você?',
+    successMessage: 'Dispositivo registrado!',
+  },
 }

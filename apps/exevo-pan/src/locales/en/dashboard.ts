@@ -12,6 +12,10 @@ export default {
       title: 'Auction Notifications',
       description: 'My auction notifications',
     },
+    devices: {
+      title: 'Notification Devices',
+      description: 'My notification devices',
+    },
   },
   Layout: {
     nav: {
@@ -87,5 +91,19 @@ export default {
     deleteLabel: 'Remove this auction notification',
     emptyState: 'No notifications',
     successMessage: 'Auction notification was removed',
+    dialogHeading: 'Remove notification',
+    dialogText: 'Are you sure you want to remove this notification?',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+  },
+  Devices: {
+    successMessage: 'Device was removed',
+    dialogHeading: 'My devices',
+    dialogText: 'Are you sure you want to remove this device?',
+    cancel: 'Cancel',
+    confirm: 'Confirm',
+    device: 'Device',
+    date: 'Date',
+    emptyState: 'No devices',
   },
 }
