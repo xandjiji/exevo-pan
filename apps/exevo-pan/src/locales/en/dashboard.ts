@@ -98,7 +98,8 @@ export default {
   },
   Devices: {
     successMessage: 'Device was removed',
-    dialogHeading: 'My devices',
+    title: 'My devices',
+    dialogHeading: 'Remove device',
     dialogText: 'Are you sure you want to remove this device?',
     cancel: 'Cancel',
     confirm: 'Confirm',
