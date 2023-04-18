@@ -95,8 +95,10 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading}>
-          <SetupNotifications onRegister={list.refetch} />
-          {list.data && <Devices.List list={list.data} onDelete={onDelete} />}
+          <div className="mx-auto grid w-fit gap-4">
+            <SetupNotifications onRegister={list.refetch} />
+            {list.data && <Devices.List list={list.data} onDelete={onDelete} />}
+          </div>
         </Layout>
       </Main>
     </>
