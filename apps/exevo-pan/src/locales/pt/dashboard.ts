@@ -12,6 +12,10 @@ export default {
       title: 'Notificações de Leilão',
       description: 'Minhas notificações de leilão',
     },
+    devices: {
+      title: 'Notificações em Dispositivos',
+      description: 'Meus dispositivos de notificação',
+    },
   },
   Layout: {
     nav: {
@@ -92,5 +96,8 @@ export default {
     dialogText: 'Você tem certeza de que deseja remover esta notificação?',
     cancel: 'Cancelar',
     confirm: 'Confirmar',
+  },
+  Devices: {
+    successMessage: 'Dispositivo foi removido',
   },
 }
