@@ -80,7 +80,7 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
                 className="text-center"
                 highlight={toRemove === auth ? 'red' : undefined}
               >
-                <Table.Column className="w-fit py-2">
+                <Table.Column className="flex w-fit items-center py-2">
                   {metadata ? (
                     <span
                       className="code max-w-[120px] truncate"
