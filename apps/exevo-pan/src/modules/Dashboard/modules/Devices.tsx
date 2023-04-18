@@ -31,7 +31,7 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
   const isEmpty = page.length === 0
 
   return (
-    <Table className="mx-auto w-fit" title={i18n.title}>
+    <Table className="mx-auto w-full" title={i18n.title}>
       <Paginator
         totalItems={list.length}
         currentPage={index}
