@@ -35,6 +35,7 @@ export const testRareOutfit = (params: RareOutfitTestParams): boolean => {
     ({ name }) => name === 'Makeshift Warrior',
     ({ name }) => name === 'Royal Costume',
     ({ name }) => name === 'Falconer',
+    ({ name }) => name === 'Lion of War',
   ]
 
   return rareOutfitTests.some((test) => test(params))
