@@ -711,6 +711,21 @@ const mounts: MountToken[] = [
     id: 1610,
     value: 750,
   },
+  {
+    name: 'Frostbringer',
+    id: 1615,
+    value: 750,
+  },
+  {
+    name: 'Winterstride',
+    id: 1616,
+    value: 750,
+  },
+  {
+    name: 'Icebreacher',
+    id: 1617,
+    value: 750,
+  },
 ]
 
 export const priceMap = cosmeticToPriceMap(mounts)

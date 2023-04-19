@@ -1549,6 +1549,94 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Sea-devil Wall Lamp',
     value: 60,
   },
+  'pile of wooden planks': {
+    name: 'Pile of Wooden Planks',
+    value: 25,
+  },
+  'pile of riches': {
+    name: 'Pile of Riches',
+    value: 90,
+  },
+  'djinn lamp': {
+    name: 'Djinn Lamp',
+    value: 180,
+  },
+  'podium of tenacity': {
+    name: 'Podium of Tenacity',
+    value: 375,
+  },
+  'opulent kline': {
+    name: 'Opulent Kline',
+    value: 120,
+  },
+  'opulent table': {
+    name: 'Opulent Table',
+    value: 70,
+  },
+  'opulent chair': {
+    name: 'Opulent Chair',
+    value: 60,
+  },
+  'rolled-up opulent carpet': {
+    name: 'Opulent Carpet',
+    value: 30,
+  },
+  'merchant portrait': {
+    name: 'Merchant Portrait',
+    value: 100,
+  },
+  'loose opulent floor intarsia': {
+    name: 'Opulent Floor Intarsia',
+    value: 30,
+  },
+  'opulent book case': {
+    name: 'Opulent Book Case',
+    value: 100,
+  },
+  'opulent chest': {
+    name: 'Opulent Chest',
+    value: 60,
+  },
+  'seafarer cabinet': {
+    name: 'Seafarer Cabinet',
+    value: 100,
+  },
+  'life buoy': {
+    name: 'Life Buoy',
+    value: 50,
+  },
+  'seafarer chair': {
+    name: 'Seafarer Chair',
+    value: 60,
+  },
+  'seafarer chest': {
+    name: 'Seafarer Chest',
+    value: 60,
+  },
+  'seafarer table': {
+    name: 'Seafarer Table',
+    value: 70,
+  },
+  'fish hook board': {
+    name: 'Fish Hook Board',
+    value: 50,
+  },
+  'ship bell': {
+    name: 'Ship Bell',
+    value: 50,
+  },
+  'tentacle lamp': {
+    name: 'Tentacle Lamp',
+    value: 80,
+  },
+  'opulent wood floor planks': {
+    name: 'Opulent Wooden Floor',
+    value: 30,
+  },
+  'seafood bucket': {
+    name: 'Seafood Bucket',
+    value: 60,
+  },
   /* RASCACOON */
   'blue shark trophy': {
     name: 'Blue Shark Trophy',

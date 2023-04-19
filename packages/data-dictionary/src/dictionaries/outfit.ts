@@ -453,6 +453,14 @@ export const outfits: OutfitToken[] = [
     },
     value: 0,
   },
+  {
+    name: 'Lion of War',
+    id: {
+      male: 1652,
+      female: 1653,
+    },
+    value: 0,
+  },
 ]
 
 export const scrapingTokens = lowerCaseKeys(nameableToScrapingTokens(outfits))
