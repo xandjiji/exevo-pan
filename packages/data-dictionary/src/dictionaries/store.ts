@@ -1705,47 +1705,47 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'sublime tournament carpet': {
     name: 'Sublime Tournament Carpet',
-    value: 0,
+    value: 30,
   },
   'tournament carpet': {
     name: 'Tournament Carpet',
-    value: 0,
+    value: 30,
   },
   'carved table': {
     name: 'Carved Table',
-    value: 0,
+    value: 60,
   },
   'carved table centre': {
     name: 'Carved Table Centre',
-    value: 0,
+    value: 60,
   },
   'carved table corner': {
     name: 'Carved Table Corner',
-    value: 0,
+    value: 60,
   },
   'cozy couch': {
     name: 'Cozy Couch',
-    value: 0,
+    value: 60,
   },
   'cozy couch round': {
     name: 'Cozy Couch Round',
-    value: 0,
+    value: 60,
   },
   'cozy couch corner': {
     name: 'Cozy Couch Corner',
-    value: 0,
+    value: 60,
   },
   'cozy couch left end': {
     name: 'Cozy Couch Left End',
-    value: 0,
+    value: 60,
   },
   'cozy couch right end': {
     name: 'Cozy Couch Right End',
-    value: 0,
+    value: 60,
   },
   'baby brain squid': {
     name: 'Baby Brain Squid',
-    value: 0,
+    value: 180,
   },
   'cerberus champion puppy': {
     name: 'Cerberus Champion Puppy',
@@ -1761,11 +1761,11 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'baby vulcongra': {
     name: 'Baby Vulcongra',
-    value: 0,
+    value: 180,
   },
   'guzzlemaw grub': {
     name: 'Guzzlemaw Grub',
-    value: 0,
+    value: 180,
   },
   'vexclaw doll': {
     name: 'Vexclaw Doll',
@@ -1781,23 +1781,23 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'gilded blessed shield': {
     name: 'Gilded Blessed Shield',
-    value: 0,
+    value: 250,
   },
   'gilded horned helmet': {
     name: 'Gilded Horned Helmet',
-    value: 0,
+    value: 250,
   },
   'gilded crown': {
     name: 'Gilded Crown',
-    value: 0,
+    value: 250,
   },
   'gilded magic longsword': {
     name: 'Gilded Magic Longsword',
-    value: 0,
+    value: 250,
   },
   'gilded warlord sword': {
     name: 'Gilded Warlord Sword',
-    value: 0,
+    value: 250,
   },
   /* HUNTING TASKS */
   'bronze hunter trophy': {

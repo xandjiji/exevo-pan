@@ -479,12 +479,12 @@ const mounts: MountToken[] = [
   {
     name: 'Jousting Eagle',
     id: 1208,
-    value: 0,
+    value: 750,
   },
   {
     name: 'Cerberus Champion',
     id: 1209,
-    value: 0,
+    value: 750,
   },
   {
     name: 'Battle Badger',
