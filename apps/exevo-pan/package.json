@@ -24,7 +24,6 @@
     "@trpc/next": "^10.9.0",
     "@trpc/react-query": "^10.9.0",
     "@trpc/server": "^10.9.0",
-    "@vercel/analytics": "^0.1.4",
     "@vercel/og": "^0.0.20",
     "chart.js": "^2.9.3",
     "clsx": "^1.1.1",

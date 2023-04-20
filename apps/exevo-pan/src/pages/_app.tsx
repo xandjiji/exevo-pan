@@ -1,7 +1,6 @@
 import type { AppType, AppProps } from 'next/app'
 import { trpc } from 'lib/trpc'
 import Head from 'next/head'
-import { Analytics } from '@vercel/analytics/react'
 import ErrorBoundary from 'components/ErrorBoundary'
 import { ThemeProvider } from 'contexts/useTheme'
 import { TranslationsProvider } from 'contexts/useTranslation'
@@ -52,7 +51,6 @@ const MyApp: AppType = ({
         <ErrorBoundary>
           <ThemeProvider>
             <LockBodyProvider>
-              <Analytics />
               <SessionProvider session={session}>
                 <NavigationProgress />
                 <Toaster />
