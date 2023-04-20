@@ -98,7 +98,7 @@ const PaymentList = () => {
                 <Table.Row
                   key={id}
                   highlight={
-                    toConfirm.id
+                    toConfirm.id === id
                       ? toConfirm.confirmed
                         ? 'green'
                         : 'red'
