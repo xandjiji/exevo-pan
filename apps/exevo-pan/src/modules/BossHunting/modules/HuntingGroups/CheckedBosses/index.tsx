@@ -1,9 +1,13 @@
 import clsx from 'clsx'
-import { useTranslations, templateString } from 'contexts/useTranslation'
+import {
+  useTranslations,
+  templateString,
+  templateMessage,
+} from 'contexts/useTranslation'
 import { useState, useMemo, useCallback } from 'react'
 import { Input, Checkbox, Button } from 'components/Atoms'
 import { sortBossesBy, MILLISECONDS_IN } from 'utils'
-import { Menu } from 'components/Organisms'
+import { Menu, Tooltip } from 'components/Organisms'
 import {
   MoreIcon,
   ExpandIcon,
@@ -23,7 +27,13 @@ import { useRecentlyUpdated } from './useRecentlyUpdated'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
-import { isFromSameServerSave, checkIfBoss } from './utils'
+import { BossTooltipContent, TooltipList } from './atoms'
+import {
+  isFromSameServerSave,
+  checkIfBoss,
+  forcedSpawnBossesNames,
+  raidBossesNames,
+} from './utils'
 
 const INITIAL_DISPLAYED_COUNT = 4
 
@@ -222,7 +232,17 @@ const CheckedBosses = ({
             disabled={!isMember}
           />
           <Checkbox
-            label={i18n.hideRaid}
+            label={
+              <div>
+                {templateMessage(i18n.hideRaid, {
+                  bosses: (
+                    <Tooltip content={<TooltipList list={raidBossesNames} />}>
+                      <BossTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
             checked={hideRaidBosses}
             onClick={() => setHideRaidBosses((prev) => !prev)}
             disabled={!isMember}
@@ -240,7 +260,19 @@ const CheckedBosses = ({
             disabled={!isMember}
           />
           <Checkbox
-            label={<>Hide forced bosses</>}
+            label={
+              <div>
+                {templateMessage(i18n.hideSharedSpawn, {
+                  bosses: (
+                    <Tooltip
+                      content={<TooltipList list={forcedSpawnBossesNames} />}
+                    >
+                      <BossTooltipContent />
+                    </Tooltip>
+                  ),
+                })}
+              </div>
+            }
             checked={hideForcedBosses}
             onClick={() => setHideForcedBosses((prev) => !prev)}
             disabled={!isMember}

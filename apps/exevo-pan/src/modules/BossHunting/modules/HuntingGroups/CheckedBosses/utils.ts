@@ -27,7 +27,6 @@ const raidBosses: Set<string> = new Set(raidBossesNames)
 
 export const forcedSpawnBossesNames: TrackedBossName[] = [
   'Burster',
-  'Crustacea Gigantica',
   'Dreadful Disruptor',
   'Mahatheb',
   'The Hungerer',
