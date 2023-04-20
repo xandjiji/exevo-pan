@@ -31,7 +31,7 @@ import { BossTooltipContent, TooltipList } from './atoms'
 import {
   isFromSameServerSave,
   checkIfBoss,
-  forcedSpawnBossesNames,
+  sharedSpawnBossesNames,
   raidBossesNames,
 } from './utils'
 
@@ -137,7 +137,7 @@ const CheckedBosses = ({
             return false
           }
 
-          if (hideForcedBosses && checkIfBoss.canBeForced(boss)) {
+          if (hideForcedBosses && checkIfBoss.isSharedSpawn(boss)) {
             return false
           }
           if (hideRaidBosses && checkIfBoss.appearOnlyOnRaids(boss)) {
@@ -265,7 +265,7 @@ const CheckedBosses = ({
                 {templateMessage(i18n.hideSharedSpawn, {
                   bosses: (
                     <Tooltip
-                      content={<TooltipList list={forcedSpawnBossesNames} />}
+                      content={<TooltipList list={sharedSpawnBossesNames} />}
                     >
                       <BossTooltipContent />
                     </Tooltip>

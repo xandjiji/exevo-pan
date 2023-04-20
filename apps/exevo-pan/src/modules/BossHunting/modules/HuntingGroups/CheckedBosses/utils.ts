@@ -25,7 +25,7 @@ export const raidBossesNames: TrackedBossName[] = [
 
 const raidBosses: Set<string> = new Set(raidBossesNames)
 
-export const forcedSpawnBossesNames: TrackedBossName[] = [
+export const sharedSpawnBossesNames: TrackedBossName[] = [
   'Burster',
   'Dreadful Disruptor',
   'Mahatheb',
@@ -34,10 +34,11 @@ export const forcedSpawnBossesNames: TrackedBossName[] = [
   'The Mean Masher',
 ]
 
-const forcedSpawnBosses: Set<string> = new Set(forcedSpawnBossesNames)
+const sharedSpawnBosses: Set<string> = new Set(sharedSpawnBossesNames)
 
 export const checkIfBoss = {
-  canBeForced: ({ name }: CheckedBoss): boolean => forcedSpawnBosses.has(name),
+  isSharedSpawn: ({ name }: CheckedBoss): boolean =>
+    sharedSpawnBosses.has(name),
   appearOnlyOnRaids: ({ name }: CheckedBoss): boolean => raidBosses.has(name),
   hasNoChance: ({
     lastSpawned,
