@@ -4,7 +4,7 @@ import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 export const isFromSameServerSave = (a = new Date(), b = new Date()): boolean =>
   getDateRelativeToSS(a).toISOString() === getDateRelativeToSS(b).toISOString()
 
-const raidBossesNames: TrackedBossName[] = [
+export const raidBossesNames: TrackedBossName[] = [
   'Chizzoron the Distorter',
   'Cublarc the Plunderer',
   'Feroxa',
@@ -25,7 +25,20 @@ const raidBossesNames: TrackedBossName[] = [
 
 const raidBosses: Set<string> = new Set(raidBossesNames)
 
+export const forcedSpawnBossesNames: TrackedBossName[] = [
+  'Burster',
+  'Crustacea Gigantica',
+  'Dreadful Disruptor',
+  'Mahatheb',
+  'The Hungerer',
+  'The Manhunter',
+  'The Mean Masher',
+]
+
+const forcedSpawnBosses: Set<string> = new Set(forcedSpawnBossesNames)
+
 export const checkIfBoss = {
+  canBeForced: ({ name }: CheckedBoss): boolean => forcedSpawnBosses.has(name),
   appearOnlyOnRaids: ({ name }: CheckedBoss): boolean => raidBosses.has(name),
   hasNoChance: ({
     lastSpawned,
