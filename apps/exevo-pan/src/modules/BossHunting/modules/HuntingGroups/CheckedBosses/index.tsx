@@ -236,7 +236,10 @@ const CheckedBosses = ({
               <div>
                 {templateMessage(i18n.hideRaid, {
                   bosses: (
-                    <Tooltip content={<TooltipList list={raidBossesNames} />}>
+                    <Tooltip
+                      content={<TooltipList list={raidBossesNames} />}
+                      offset={[0, 8]}
+                    >
                       <BossTooltipContent />
                     </Tooltip>
                   ),
@@ -254,6 +257,7 @@ const CheckedBosses = ({
                   bosses: (
                     <Tooltip
                       content={<TooltipList list={sharedSpawnBossesNames} />}
+                      offset={[0, 8]}
                     >
                       <BossTooltipContent />
                     </Tooltip>
