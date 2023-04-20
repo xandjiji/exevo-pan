@@ -154,8 +154,10 @@ const CheckedBosses = ({
     ],
   )
 
+  const [loadingBossCheck, setLoadingBossCheck] = useState('')
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
     onSuccess: () => checkedBosses.refetch(),
+    onSettled: () => setLoadingBossCheck(''),
   })
 
   const markBoss = useCallback(
@@ -163,7 +165,8 @@ const CheckedBosses = ({
       boss,
       location,
       lastSpawned = null,
-    }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) =>
+    }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) => {
+      setLoadingBossCheck(boss)
       toast.promise(
         markCheckedBoss.mutateAsync({
           boss,
@@ -178,7 +181,8 @@ const CheckedBosses = ({
           error: common.genericError,
           loading: i18n.loading,
         },
-      ),
+      )
+    },
     [common, i18n, markCheckedBoss],
   )
 
@@ -239,6 +243,11 @@ const CheckedBosses = ({
             checkedBy,
           } = boss
 
+          const checkAction = () => markBoss({ boss: name, location })
+          const checkIsLoading = name === loadingBossCheck
+          const disableCheck =
+            manuallyMarkedAsNoChance || !isMember || checkIsLoading
+
           return (
             <BossCard
               key={name}
@@ -253,7 +262,7 @@ const CheckedBosses = ({
                 ) && 'animate-zoomInAndOut z-2 relative',
               )}
               cornerElement={
-                <div className="ml-auto self-start">
+                <div className="ml-auto flex h-full flex-col items-end justify-between self-start">
                   <Menu
                     offset={[0, 8]}
                     items={[
@@ -288,13 +297,23 @@ const CheckedBosses = ({
                       {
                         label: i18n.markAsChecked,
                         icon: ViewedIcon,
-                        onSelect: () => markBoss({ boss: name, location }),
-                        disabled: manuallyMarkedAsNoChance || !isMember,
+                        onSelect: checkAction,
+                        disabled: disableCheck,
                       },
                     ]}
                   >
                     <MoreIcon className="fill-onSurface h-4 w-4" />
                   </Menu>
+
+                  <Button
+                    pill
+                    onClick={checkAction}
+                    disabled={disableCheck}
+                    loading={checkIsLoading}
+                    aria-label={i18n.markAsChecked}
+                  >
+                    Check
+                  </Button>
                 </div>
               }
               bottomElement={
