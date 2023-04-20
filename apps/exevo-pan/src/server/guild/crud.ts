@@ -755,6 +755,13 @@ export const markCheckedBoss = authedProcedure
 
       const requesterMember = await findGuildMember({ guildId, userId })
 
+      if (lastSpawned && !can[token.role].markAsNoChance) {
+        throw new TRPCError({
+          code: 'UNAUTHORIZED',
+          message: 'Insufficient privileges to mark boss as no chance',
+        })
+      }
+
       const result = await prisma.bossCheck.upsert({
         where: { boss_guildId_location: { boss, guildId, location } },
         create: {

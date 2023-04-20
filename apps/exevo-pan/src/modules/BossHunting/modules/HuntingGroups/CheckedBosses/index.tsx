@@ -27,6 +27,7 @@ import { useRecentlyUpdated } from './useRecentlyUpdated'
 import { useTimeAgo } from './useTimeAgo'
 import { BossCard, BossDialog } from '../../../components'
 import { utils } from '../../../blacklist'
+import { can } from '../../../../../server/guild/permissions'
 import { BossTooltipContent, TooltipList } from './atoms'
 import {
   isFromSameServerSave,
@@ -343,7 +344,9 @@ const CheckedBosses = ({
                               ? null
                               : new Date(),
                           }),
-                        disabled: !isMember,
+                        disabled:
+                          !currentMember ||
+                          !can[currentMember.role].markAsNoChance,
                       },
                       {
                         label: i18n.markAsChecked,
