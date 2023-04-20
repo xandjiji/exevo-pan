@@ -75,6 +75,11 @@ const CheckedBosses = ({
     false,
     isMember ? undefined : false,
   )
+  const [hideForcedBosses, setHideForcedBosses] = useStoredState(
+    prefixedLSKey('forced-bosses'),
+    false,
+    isMember ? undefined : false,
+  )
 
   const checkedTimeAgo = useTimeAgo()
   const { recentlyUpdatedBosses, onFreshData } =
@@ -122,6 +127,9 @@ const CheckedBosses = ({
             return false
           }
 
+          if (hideForcedBosses && checkIfBoss.canBeForced(boss)) {
+            return false
+          }
           if (hideRaidBosses && checkIfBoss.appearOnlyOnRaids(boss)) {
             return false
           }
@@ -148,6 +156,7 @@ const CheckedBosses = ({
       hideNoChance,
       hideRecentlyChecked,
       hideBlacklisted,
+      hideForcedBosses,
       hideRaidBosses,
       blacklist,
       expanded,
@@ -195,7 +204,7 @@ const CheckedBosses = ({
         )}
       </h4>
 
-      <div className="my-4 flex flex-col gap-2 md:flex-row md:items-end md:gap-6">
+      <div className="my-4 flex flex-col gap-2 md:flex-row md:items-start md:gap-6 lg:items-end">
         <Input
           allowClear
           label={i18n.search}
@@ -205,7 +214,7 @@ const CheckedBosses = ({
           disabled={!isMember}
         />
 
-        <div className="flex flex-col gap-2 md:grid md:grid-cols-2">
+        <div className="flex flex-col gap-2 md:grid md:grid-cols-2 md:gap-x-3 lg:grid-cols-3 lg:gap-x-4">
           <Checkbox
             label={i18n.hideNoChance}
             checked={hideNoChance}
@@ -228,6 +237,12 @@ const CheckedBosses = ({
             label={i18n.hideBlacklisted}
             checked={hideBlacklisted}
             onClick={() => setHideBlacklisted((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={<>Hide forced bosses</>}
+            checked={hideForcedBosses}
+            onClick={() => setHideForcedBosses((prev) => !prev)}
             disabled={!isMember}
           />
         </div>
