@@ -248,18 +248,6 @@ const CheckedBosses = ({
             disabled={!isMember}
           />
           <Checkbox
-            label={i18n.hideRecentlyChecked}
-            checked={hideRecentlyChecked}
-            onClick={() => setHideRecentlyChecked((prev) => !prev)}
-            disabled={!isMember}
-          />
-          <Checkbox
-            label={i18n.hideBlacklisted}
-            checked={hideBlacklisted}
-            onClick={() => setHideBlacklisted((prev) => !prev)}
-            disabled={!isMember}
-          />
-          <Checkbox
             label={
               <div>
                 {templateMessage(i18n.hideSharedSpawn, {
@@ -275,6 +263,18 @@ const CheckedBosses = ({
             }
             checked={hideForcedBosses}
             onClick={() => setHideForcedBosses((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={i18n.hideBlacklisted}
+            checked={hideBlacklisted}
+            onClick={() => setHideBlacklisted((prev) => !prev)}
+            disabled={!isMember}
+          />
+          <Checkbox
+            label={i18n.hideRecentlyChecked}
+            checked={hideRecentlyChecked}
+            onClick={() => setHideRecentlyChecked((prev) => !prev)}
             disabled={!isMember}
           />
         </div>
