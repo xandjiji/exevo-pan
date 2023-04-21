@@ -39,7 +39,7 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
       }))
 
       toast.success(
-        templateString(i18n.soccessToast, { name: managedUser.name }),
+        templateString(i18n.successToast, { name: managedUser.name }),
       )
       onClose()
     },
