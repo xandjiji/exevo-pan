@@ -755,7 +755,7 @@ export const markCheckedBoss = authedProcedure
 
       const requesterMember = await findGuildMember({ guildId, userId })
 
-      if (lastSpawned && !can[token.role].markAsNoChance) {
+      if (lastSpawned && !can[requesterMember.role].markAsNoChance) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'Insufficient privileges to mark boss as no chance',
