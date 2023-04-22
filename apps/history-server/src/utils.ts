@@ -18,3 +18,18 @@ export class Timer {
     return brackets(`${coloredText(ms, timeColor(ms))}ms`, 'control')
   }
 }
+
+export const getMedian = (array: number[]): number => {
+  if (array.length === 0) return -1
+  if (array.length === 1) return array[0]
+
+  const sortedArray = [...array].sort((a, b) => a - b)
+  const even = !(array.length % 2)
+  const middleIdx = Math.ceil(sortedArray.length / 2) - 1
+
+  if (even) {
+    return Math.round((sortedArray[middleIdx] + sortedArray[middleIdx + 1]) / 2)
+  }
+
+  return sortedArray[middleIdx]
+}

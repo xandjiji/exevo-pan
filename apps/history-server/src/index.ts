@@ -8,7 +8,7 @@ import {
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
-import { Timer } from './timer'
+import { Timer, getMedian } from './utils'
 import { exposeLocalhost } from './localtunnel'
 
 const { PORT, STAGING } = process.env
@@ -35,12 +35,42 @@ const main = async () => {
     })
 
     const sortedAuctions = applySort(filteredAuctions, sortOptions)
-
     const paginatedData = paginateData(sortedAuctions, paginationOptions)
 
-    const responseBody = {
+    const responseBody: FilterResponse = {
       ...paginatedData,
       ...sortOptions,
+    }
+
+    broadcast(`${timer.elapsedTime()} ${url}`, 'success')
+    response.json(responseBody)
+  })
+
+  app.get('/estimate', async ({ url }, response) => {
+    const timer = new Timer()
+    const [, searchParams] = (url ?? '').split('?')
+    const currentParams = new URLSearchParams(searchParams)
+
+    const filterOptions = deserializeFilter({ currentParams })
+    const sortOptions = deserializeSort({ currentParams })
+    const paginationOptions = deserializePagination({ currentParams })
+
+    const filteredAuctions = filterCharacters({
+      auctions,
+      filters: filterOptions,
+    })
+
+    const estimatedValue = getMedian(
+      filteredAuctions.map(({ currentBid }) => currentBid),
+    )
+
+    const sortedAuctions = applySort(filteredAuctions, sortOptions)
+    const paginatedData = paginateData(sortedAuctions, paginationOptions)
+
+    const responseBody: EstimatedValueResponse = {
+      ...paginatedData,
+      ...sortOptions,
+      estimatedValue,
     }
 
     broadcast(`${timer.elapsedTime()} ${url}`, 'success')

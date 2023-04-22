@@ -9,3 +9,7 @@ declare type SortOptions = {
 }
 
 declare type FilterResponse = PaginatedData<CharacterObject>
+
+declare type EstimatedValueResponse = PaginatedData<CharacterObject> & {
+  estimatedValue: number
+}
