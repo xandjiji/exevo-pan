@@ -11,6 +11,8 @@ declare interface FilterOptions {
   minSkill: number
   maxSkill: number
   bossPoints: number
+  minCharmPoints: number
+  maxCharmPoints: number
   tcInvested: number
   tags: Set<string>
   skillKey: Set<string>
