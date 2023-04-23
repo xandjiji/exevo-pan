@@ -8,13 +8,14 @@ import {
 import { applySort, filterCharacters, paginateData } from 'auction-queries'
 import { broadcast, coloredText } from 'logging'
 import { loadAuctions } from './Data/historyAuctions'
-import { Timer, getMedian } from './utils'
+import { Timer, getMedian, canBeUsedForEstimations } from './utils'
 import { exposeLocalhost } from './localtunnel'
 
 const { PORT, STAGING } = process.env
 
 const main = async () => {
   const auctions = await loadAuctions()
+  const estimationAuctions = auctions.filter(canBeUsedForEstimations())
 
   const app = express()
   app.use(cors())
@@ -56,7 +57,7 @@ const main = async () => {
     const paginationOptions = deserializePagination({ currentParams })
 
     const filteredAuctions = filterCharacters({
-      auctions,
+      auctions: estimationAuctions,
       filters: filterOptions,
     })
 

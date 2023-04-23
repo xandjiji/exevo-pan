@@ -33,3 +33,11 @@ export const getMedian = (array: number[]): number => {
 
   return sortedArray[middleIdx]
 }
+
+const SECONDS_IN_A_YEAR = 31536000
+
+export const canBeUsedForEstimations = () => {
+  const currentTimestamp = Math.round(+new Date() / 1000)
+  return ({ hasBeenBidded, auctionEnd }: CharacterObject) =>
+    hasBeenBidded && currentTimestamp - auctionEnd < SECONDS_IN_A_YEAR
+}
