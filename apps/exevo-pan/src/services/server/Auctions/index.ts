@@ -106,7 +106,7 @@ export default class AuctionsClient {
     paginationOptions,
     sortOptions,
   }: EstimateAuctionPriceArgs): Promise<EstimatedValueResponse> {
-    const endpoint = new URL(endpoints.CURRENT_AUCTIONS)
+    const endpoint = new URL(endpoints.PRICE_ESTIMATION)
     const currentParams = new URLSearchParams()
 
     serializeFilter({ values: { ...filterOptions }, currentParams })
