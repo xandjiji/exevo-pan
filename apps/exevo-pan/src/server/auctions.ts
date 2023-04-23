@@ -10,13 +10,13 @@ import {
   SortOptionsSchema,
 } from 'types/zod/FilterOptions'
 
-const estimateAuctionPriceInput: z.ZodType<EstimateAuctionPriceArgs> = z.object(
-  {
-    filterOptions: z.optional(FilterOptionsSchema),
-    paginationOptions: z.optional(PaginationOptionsSchema),
-    sortOptions: z.optional(SortOptionsSchema),
-  },
-)
+const estimateAuctionPriceInput: z.ZodType<EstimateAuctionPriceArgs> = z
+  .object({
+    filterOptions: FilterOptionsSchema,
+    paginationOptions: PaginationOptionsSchema,
+    sortOptions: SortOptionsSchema,
+  })
+  .partial()
 
 export const estimateAuctionPrice = publicProcedure
   .input(estimateAuctionPriceInput)

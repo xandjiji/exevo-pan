@@ -1,4 +1,3 @@
-import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { skills as skillsUtil } from 'data-dictionary/dist/dictionaries/skills'
 import { getHighestSkill } from 'utils'
@@ -39,7 +38,7 @@ const getApproximate = {
   charmPoints: (
     charmPoints: number,
   ): Pick<FilterOptions, 'minCharmPoints' | 'maxCharmPoints'> => ({
-    minCharmPoints: charmPoints - SIMILAR_RANGE.CHARM_POINTS,
+    minCharmPoints: Math.max(charmPoints - SIMILAR_RANGE.CHARM_POINTS, 0),
     maxCharmPoints: charmPoints + SIMILAR_RANGE.CHARM_POINTS,
   }),
 }
@@ -80,7 +79,6 @@ export const getSimilarCharacterFilters = ({
   }
 
   return {
-    ...DEFAULT_FILTER_OPTIONS,
     ...filters,
     ...getApproximate.skill(Math.round(getHighestSkill(skills).value)),
     pvp: new Set([pvpType.type]),
