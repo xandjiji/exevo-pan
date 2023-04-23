@@ -38,6 +38,11 @@ const SECONDS_IN_A_YEAR = 31536000
 
 export const canBeUsedForEstimations = () => {
   const currentTimestamp = Math.round(+new Date() / 1000)
-  return ({ hasBeenBidded, auctionEnd }: CharacterObject) =>
-    hasBeenBidded && currentTimestamp - auctionEnd < SECONDS_IN_A_YEAR
+  return ({ serverData, hasBeenBidded, auctionEnd }: CharacterObject) => {
+    if (!hasBeenBidded) return false
+    if (currentTimestamp - auctionEnd > SECONDS_IN_A_YEAR) return false
+    if (serverData.experimental) return false
+
+    return true
+  }
 }
