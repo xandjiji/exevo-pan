@@ -72,6 +72,7 @@ const main = async () => {
       ...paginatedData,
       ...sortOptions,
       estimatedValue,
+      similarCount: filteredAuctions.length,
     }
 
     broadcast(`${timer.elapsedTime()} ${url}`, 'success')
