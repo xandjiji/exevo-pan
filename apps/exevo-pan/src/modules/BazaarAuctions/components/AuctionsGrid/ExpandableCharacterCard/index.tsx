@@ -33,6 +33,7 @@ const ExpandableCharacterCard = ({
   const {
     translations: { homepage },
   } = useTranslations()
+  const i18n = homepage.AuctionsGrid.ExpandableCharacterCard
 
   const auctionId = characterDataProps.id
 
@@ -112,21 +113,18 @@ const ExpandableCharacterCard = ({
           <Menu
             items={[
               {
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.details,
+                label: i18n.details,
                 icon: ExpandIcon,
                 onSelect: expandCard,
               },
               {
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.copyLink,
+                label: i18n.copyLink,
                 icon: CopyButtonIcon,
                 keepOpenAfterSelection: true,
                 onSelect: copyLinkAction,
               },
               {
-                label:
-                  homepage.AuctionsGrid.ExpandableCharacterCard.favorite[
-                    isFavorited ? 'remove' : 'add'
-                  ],
+                label: i18n.favorite[isFavorited ? 'remove' : 'add'],
                 icon: FavoriteIcon,
                 keepOpenAfterSelection: true,
                 onSelect: () => {
@@ -135,7 +133,7 @@ const ExpandableCharacterCard = ({
                 },
               },
               {
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.notify,
+                label: i18n.notify,
                 icon: AlertIcon,
                 onSelect: () =>
                   auctionNotification.openNotificationsDialog({
@@ -147,8 +145,7 @@ const ExpandableCharacterCard = ({
                 disabled: !auctionNotification.isSupported || props.past,
               },
               {
-                label:
-                  homepage.AuctionsGrid.ExpandableCharacterCard.findSimilar,
+                label: i18n.findSimilar,
                 icon: SearchIcon,
                 onSelect: () =>
                   dispatch({
@@ -157,7 +154,7 @@ const ExpandableCharacterCard = ({
                   }),
               },
               {
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.estimate,
+                label: i18n.estimate,
                 icon: CalculatorIcon,
                 onSelect: () => setOpenEstimated(true),
               },
