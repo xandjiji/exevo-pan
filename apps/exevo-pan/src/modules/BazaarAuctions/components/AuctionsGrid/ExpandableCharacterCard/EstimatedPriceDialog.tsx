@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { Dialog } from 'components/Atoms'
+import { Dialog, LabeledTextBox, Text } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
-import AuctionBid from 'components/CharacterCard/Parts/Textbox/AuctionBid'
 import { getSimilarCharacterFilters, loadOutfitSrc } from 'utils'
 import { trpc } from 'lib/trpc'
 
@@ -23,12 +22,14 @@ export const EstimatedPriceDialog = ({
   onClose,
   characterData,
 }: EstimatedPriceDialogProps) => {
-  const [estimationFilters, setEstimationFilters] = useState(
+  const [estimationFilters] = useState(
     getSimilarCharacterFilters(characterData),
   )
   const estimatedAuction = trpc.estimateAuctionPrice.useQuery({
     filterOptions: estimationFilters,
   })
+
+  const failedEstimation = estimatedAuction.data?.similarCount === 0
 
   return (
     <Dialog isOpen onClose={onClose} heading="Estimated auction price">
@@ -41,10 +42,27 @@ export const EstimatedPriceDialog = ({
         />
 
         <div className="xs:mx-0 mx-auto min-w-[120px] shrink-0">
-          <AuctionBid
-            label="Estmated price"
-            currentBid={estimatedAuction.data?.estimatedValue ?? '??'}
-          />
+          <LabeledTextBox
+            labelText="Estmated price"
+            className="text-s bg-surface flex items-center gap-1"
+            warning={failedEstimation}
+          >
+            {estimatedAuction.data ? (
+              estimatedAuction.data.estimatedValue ? (
+                <Text.TibiaCoin
+                  value={estimatedAuction.data.estimatedValue}
+                  className="animate-fadeIn"
+                />
+              ) : (
+                '???'
+              )
+            ) : (
+              <div
+                role="alert"
+                className="loading-spinner mx-auto my-0.5 h-3 w-3"
+              />
+            )}
+          </LabeledTextBox>
         </div>
       </div>
     </Dialog>
