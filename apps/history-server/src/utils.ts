@@ -19,8 +19,8 @@ export class Timer {
   }
 }
 
-export const getMedian = (array: number[]): number => {
-  if (array.length === 0) return -1
+export const getMedian = (array: number[]): number | undefined => {
+  if (array.length === 0) return undefined
   if (array.length === 1) return array[0]
 
   const sortedArray = [...array].sort((a, b) => a - b)
