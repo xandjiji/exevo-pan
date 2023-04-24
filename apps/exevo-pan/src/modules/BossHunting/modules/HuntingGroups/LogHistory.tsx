@@ -42,7 +42,6 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
       pageSize,
     },
     {
-      refetchOnWindowFocus: false,
       keepPreviousData: true,
       onSuccess: (data) => {
         const queryExhausted = data.length === 0 || data.length < pageSize

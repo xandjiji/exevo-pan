@@ -41,7 +41,6 @@ const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
     enabled: query !== INITIAL_QUERY,
     staleTime: 5000,
     keepPreviousData: true,
-    refetchOnWindowFocus: false,
     placeholderData: initialGuildList,
     select: (result) => ({
       ...result,

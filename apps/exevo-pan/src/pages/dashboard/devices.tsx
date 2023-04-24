@@ -25,9 +25,7 @@ export default function Page() {
 
   const pageTitle = buildPageTitle(pageName)
 
-  const list = trpc.listMyDevices.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-  })
+  const list = trpc.listMyDevices.useQuery()
 
   const remove = trpc.deleteMyDevice.useMutation()
   const onDelete = (id: string) =>

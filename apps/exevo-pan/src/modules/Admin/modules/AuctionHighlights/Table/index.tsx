@@ -76,7 +76,7 @@ const PaymentList = () => {
   } = useRangeDatePicker()
 
   const list = trpc.listAuctionHighlights.useQuery(undefined, {
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     select: (data) =>
       data.map(
         ({ days, active, timezoneOffsetMinutes, auctionEnd, ...rest }) => {

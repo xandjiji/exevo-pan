@@ -31,7 +31,6 @@ const UrlAuction = ({ highlightedAuctions = [] }: UrlAuctionProps) => {
   const { isFetching } = trpc.getAuctionById.useQuery(
     { id: auctionId ?? 0 },
     {
-      refetchOnWindowFocus: false,
       enabled: !!auctionId,
       onSuccess: (characterData) => {
         if (characterData) {
