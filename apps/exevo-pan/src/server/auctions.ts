@@ -3,6 +3,7 @@ import { publicProcedure } from 'server/trpc'
 import { AuctionsClient } from 'services/server'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { pluckPremiumFilters, pluckTCInvested } from 'utils'
+import { auctionEstimations } from 'Constants'
 import { EstimateAuctionPriceArgs } from 'services/server/Auctions/types'
 import {
   FilterOptionsSchema,
@@ -37,5 +38,12 @@ export const estimateAuctionPrice = publicProcedure
 
     return isPro
       ? result
-      : { ...result, page: result.page.map(pluckTCInvested) }
+      : {
+          ...result,
+          page: result.page.map(pluckTCInvested),
+          estimatedValue:
+            (result.estimatedValue ?? 0) > auctionEstimations.MAX_FREE_VALUE
+              ? -1
+              : result.estimatedValue,
+        }
   })

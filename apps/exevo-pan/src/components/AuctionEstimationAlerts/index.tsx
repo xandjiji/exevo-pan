@@ -1,4 +1,5 @@
-import { Alert } from 'components/Atoms'
+import { Alert, Text } from 'components/Atoms'
+import { auctionEstimations } from 'Constants'
 
 /* @ ToDo: i18n */
 
@@ -26,4 +27,17 @@ const Failed = (args: AlertProps) => (
   </Alert>
 )
 
-export default { Disclaimer, Failed }
+const ProOnly = (args: AlertProps) => (
+  <Alert variant="primary" noIcon {...args}>
+    Auctions estimated above{' '}
+    <Text.TibiaCoin
+      value={auctionEstimations.MAX_FREE_VALUE}
+      className="child:self-center items-baseline"
+    />{' '}
+    are only available for{' '}
+    <strong className="rare-gradient-text whitespace-nowrap">Exevo Pro</strong>{' '}
+    members
+  </Alert>
+)
+
+export default { Disclaimer, Failed, ProOnly }
