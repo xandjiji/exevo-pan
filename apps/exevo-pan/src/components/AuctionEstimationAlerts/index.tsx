@@ -30,11 +30,8 @@ const Failed = (args: AlertProps) => (
 const ProOnly = (args: AlertProps) => (
   <Alert variant="primary" noIcon {...args}>
     Auctions estimated above{' '}
-    <Text.TibiaCoin
-      value={auctionEstimations.MAX_FREE_VALUE}
-      className="child:self-center items-baseline"
-    />{' '}
-    are only available for{' '}
+    <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} /> are only
+    available for{' '}
     <strong className="rare-gradient-text whitespace-nowrap">Exevo Pro</strong>{' '}
     members
   </Alert>

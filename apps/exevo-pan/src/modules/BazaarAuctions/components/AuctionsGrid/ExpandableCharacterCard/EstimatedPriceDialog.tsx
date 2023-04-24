@@ -73,6 +73,7 @@ export const EstimatedPriceDialog = ({
           </div>
         </div>
 
+        <AuctionEstimationAlerts.ProOnly />
         {failedEstimation ? (
           <AuctionEstimationAlerts.Failed />
         ) : (

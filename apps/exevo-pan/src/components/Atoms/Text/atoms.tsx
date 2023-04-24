@@ -6,7 +6,7 @@ export const Flex = ({
 }: JSX.IntrinsicElements['span']) => (
   <span
     className={clsx(
-      'child:shrink-0 inline-flex items-center justify-center gap-1 whitespace-nowrap',
+      'child:shrink-0 inline-flex items-baseline justify-center gap-1 whitespace-nowrap',
       className,
     )}
     {...props}
