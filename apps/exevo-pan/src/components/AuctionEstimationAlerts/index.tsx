@@ -1,5 +1,6 @@
 import { Alert, Text } from 'components/Atoms'
-import { auctionEstimations } from 'Constants'
+import Link from 'next/link'
+import { auctionEstimations, routes } from 'Constants'
 
 /* @ ToDo: i18n */
 
@@ -32,7 +33,12 @@ const ProOnly = (args: AlertProps) => (
     Auctions estimated above{' '}
     <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} /> are only
     available for{' '}
-    <strong className="rare-gradient-text whitespace-nowrap">Exevo Pro</strong>{' '}
+    <Link
+      href={routes.EXEVOPRO}
+      className="rare-gradient-text whitespace-nowrap font-bold"
+    >
+      Exevo Pro
+    </Link>{' '}
     members
   </Alert>
 )

@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useState } from 'react'
 import { Dialog, LabeledTextBox, Text } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
@@ -11,7 +12,6 @@ type EstimatedPriceDialogProps = {
 }
 
 /* @ ToDo:
-- disclaimer (abstracted component)
 - link do calculator
 - i18n
 */
@@ -28,6 +28,7 @@ export const EstimatedPriceDialog = ({
   })
 
   const failedEstimation = estimatedAuction.data?.similarCount === 0
+  const notPro = estimatedAuction.data?.estimatedValue === -1
 
   return (
     <Dialog
@@ -55,13 +56,20 @@ export const EstimatedPriceDialog = ({
               } similar auctions were found`}
             >
               {estimatedAuction.data ? (
-                estimatedAuction.data.estimatedValue ? (
+                estimatedAuction.data.estimatedValue && !notPro ? (
                   <Text.TibiaCoin
                     value={estimatedAuction.data.estimatedValue}
                     className="animate-fadeIn"
                   />
                 ) : (
-                  '???'
+                  <span
+                    className={clsx(
+                      'mx-auto tracking-wider',
+                      notPro && 'text-rare font-bold',
+                    )}
+                  >
+                    ?????
+                  </span>
                 )
               ) : (
                 <div
@@ -73,12 +81,11 @@ export const EstimatedPriceDialog = ({
           </div>
         </div>
 
-        <AuctionEstimationAlerts.ProOnly />
-        {failedEstimation ? (
-          <AuctionEstimationAlerts.Failed />
-        ) : (
-          <AuctionEstimationAlerts.Disclaimer />
-        )}
+        {notPro && <AuctionEstimationAlerts.ProOnly />}
+
+        {failedEstimation && <AuctionEstimationAlerts.Failed />}
+
+        <AuctionEstimationAlerts.Disclaimer />
       </div>
     </Dialog>
   )
