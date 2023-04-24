@@ -42,6 +42,7 @@ export default {
         added: 'Added to favorites',
         removed: 'Removed from favorites',
       },
+      estimate: 'Estimate price',
     },
     useAuctionNotifications: {
       heading: 'Set auction notification',
@@ -53,6 +54,11 @@ export default {
       cancelButton: 'Cancel',
       confirmButton: 'Confirm',
       success: 'Notification was set!',
+    },
+    EstimatedPriceDialog: {
+      heading: 'Estimated auction price',
+      label: 'Estimated price',
+      similarFound: '{{count}} similar auctions were found',
     },
   },
   FilterControl: {

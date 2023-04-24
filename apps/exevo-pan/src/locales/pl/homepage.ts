@@ -44,6 +44,7 @@ export default {
         added: 'Added to favorites',
         removed: 'Removed from favorites',
       },
+      estimate: 'Estimate price',
     },
     /* @ ToDo: i18n */
     useAuctionNotifications: {
@@ -56,6 +57,11 @@ export default {
       cancelButton: 'Cancel',
       confirmButton: 'Confirm',
       success: 'Notification was set!',
+    },
+    EstimatedPriceDialog: {
+      heading: 'Estimated auction price',
+      label: 'Estimated price',
+      similarFound: '{{count}} similar auctions were found',
     },
   },
   FilterControl: {

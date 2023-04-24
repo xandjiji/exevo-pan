@@ -157,8 +157,7 @@ const ExpandableCharacterCard = ({
                   }),
               },
               {
-                // @ ToDo: i18n
-                label: 'Estimate price',
+                label: homepage.AuctionsGrid.ExpandableCharacterCard.estimate,
                 icon: CalculatorIcon,
                 onSelect: () => setOpenEstimated(true),
               },

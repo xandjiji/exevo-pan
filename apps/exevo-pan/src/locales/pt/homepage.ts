@@ -41,6 +41,7 @@ export default {
         added: 'Adicionado aos favoritos',
         removed: 'Removido dos favoritos',
       },
+      estimate: 'Estimar preço',
     },
     useAuctionNotifications: {
       heading: 'Configurar notificação',
@@ -52,6 +53,11 @@ export default {
       cancelButton: 'Cancelar',
       confirmButton: 'Confirmar',
       success: 'Notificação foi agendada!',
+    },
+    EstimatedPriceDialog: {
+      heading: 'Preço estimado de leilão',
+      label: 'Preço estimado',
+      similarFound: '{{count}} leilões similares foram encontrados',
     },
   },
   FilterControl: {
