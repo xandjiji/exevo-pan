@@ -13,6 +13,7 @@ import {
   OutlineAddIcon,
   OutlineRemoveIcon,
   AlertIcon,
+  CalculatorIcon,
 } from 'assets/svgs'
 import { permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
@@ -20,6 +21,7 @@ import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { getSimilarCharacterFilters } from '../utils'
 import { useAuctionNotifications } from '../useAuctionNotifications'
+import { EstimatedPriceDialog } from './EstimatedPriceDialog'
 import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
@@ -101,6 +103,8 @@ const ExpandableCharacterCard = ({
 
   const auctionNotification = useAuctionNotifications()
 
+  const [openEstimated, setOpenEstimated] = useState(false)
+
   return (
     <>
       <CharacterCard
@@ -152,6 +156,12 @@ const ExpandableCharacterCard = ({
                     filterOptions: getSimilarCharacterFilters(characterData),
                   }),
               },
+              {
+                // @ ToDo: i18n
+                label: 'Estimate price',
+                icon: CalculatorIcon,
+                onSelect: () => setOpenEstimated(true),
+              },
             ]}
           >
             <MoreIcon className="fill-onSurface" />
@@ -162,6 +172,7 @@ const ExpandableCharacterCard = ({
         highlighted={forceNoHighlight ? false : !!highlightedAuction}
         characterData={characterData}
       />
+
       {isExpanded && (
         <CharacterModal
           characterData={characterData}
@@ -169,6 +180,13 @@ const ExpandableCharacterCard = ({
             if (permalink) setAuctionIdUrl(undefined)
             setExpanded(false)
           }}
+        />
+      )}
+
+      {openEstimated && (
+        <EstimatedPriceDialog
+          onClose={() => setOpenEstimated(false)}
+          characterData={characterData}
         />
       )}
     </>
