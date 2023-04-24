@@ -29,6 +29,10 @@ export default {
       title: 'Dividir Loot',
       description: 'Gerencie e divida o loot das suas hunts em party',
     },
+    AuctionEstimation: {
+      title: 'Estimar preço de leilões',
+      description: 'Estimate the price of any character on the Char Bazaar',
+    },
   },
   none: 'Nenhum',
   ExerciseWeapons: {

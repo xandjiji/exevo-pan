@@ -18,6 +18,7 @@ export const routes = {
   CHARM_DAMAGE: '/calculators/charm-damage',
   STAMINA: '/calculators/stamina',
   LOOT_SPLIT: '/calculators/loot-split',
+  AUCTION_ESTIMATION: '/calculators/auction-estimations',
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
   LIBERTABRA_WAR: '/libertabra-war',

@@ -30,6 +30,10 @@ export default {
       title: 'Loot Split',
       description: 'Manage and split your party hunt loots',
     },
+    AuctionEstimation: {
+      title: 'Auction price estimations',
+      description: 'Estimate the price of any character on the Char Bazaar',
+    },
   },
   none: 'Nada',
   ExerciseWeapons: {

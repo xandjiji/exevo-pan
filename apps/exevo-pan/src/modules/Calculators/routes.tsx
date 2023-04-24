@@ -9,6 +9,7 @@ import {
   ChargeIcon,
   MagicIcon,
   BalanceIcon,
+  MoneyIcon,
 } from 'assets/svgs'
 
 type CalculatorRoute = NavItem & NavGridItem & { hero: string }
@@ -43,6 +44,14 @@ export const useRoutes = () => {
         hero: `${routes.CALCULATORS}/loot-split-hero.png`,
         sprite: '/sprites/loot.png',
         description: calculators.Meta.LootSplit.description,
+      },
+      {
+        title: calculators.Meta.AuctionEstimation.title,
+        href: routes.AUCTION_ESTIMATION,
+        icon: <MoneyIcon />,
+        hero: `${routes.CALCULATORS}/estimator.png`,
+        sprite: '/sprites/estimator.png',
+        description: calculators.Meta.AuctionEstimation.description,
       },
       {
         title: calculators.Meta.Stamina.title,
