@@ -50,6 +50,9 @@ export const EstimatedPriceDialog = ({
               labelText="Estmated price"
               className="text-s bg-surface flex items-center gap-1"
               warning={failedEstimation}
+              title={`${
+                estimatedAuction.data?.similarCount ?? 0
+              } similar auctions were found`}
             >
               {estimatedAuction.data ? (
                 estimatedAuction.data.estimatedValue ? (
