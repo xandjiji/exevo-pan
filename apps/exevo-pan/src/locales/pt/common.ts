@@ -249,4 +249,22 @@ export default {
     testText: 'Como vai você?',
     successMessage: 'Dispositivo registrado!',
   },
+  AuctionEstimationAlerts: {
+    Disclaimer: {
+      first: 'Valor é sempre {{subjective}}!',
+      subjective: 'subjetivo',
+      second: 'Esta estimativa considera apenas:',
+      server: 'Tipo de servidor',
+      character: 'Skills, level e vocação',
+      charmPoints: 'Charm points',
+    },
+    Failed: {
+      message:
+        'Não foram encontrados muitos leilões similares em nossa base de dados',
+    },
+    ProOnly: {
+      message:
+        'Leilões com estimativas acima de {{freeCap}} estão disponíveis apenas para membros {{exevoPro}}',
+    },
+  },
 }

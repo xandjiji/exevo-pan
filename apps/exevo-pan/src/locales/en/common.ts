@@ -249,4 +249,21 @@ export default {
     testText: 'How are you doing?',
     successMessage: 'Device registered!',
   },
+  AuctionEstimationAlerts: {
+    Disclaimer: {
+      first: 'Value is always {{subjective}}!',
+      subjective: 'subjective',
+      second: 'This estimation only considers:',
+      server: 'Server type',
+      character: 'Skills, level and vocation',
+      charmPoints: 'Charm points',
+    },
+    Failed: {
+      message: 'Not many similar characters were found in our database',
+    },
+    ProOnly: {
+      message:
+        'Auctions estimated above {{freeCap}} are only available for {{exevoPro}} members',
+    },
+  },
 }
