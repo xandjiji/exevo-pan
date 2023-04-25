@@ -7,8 +7,7 @@ const { getSkillKey } = skillsUtil
 const SIMILAR_RANGE = {
   LEVEL: 100,
   LOW_SKILL: 10,
-  HIGH_SKILL: 5,
-  CHARM_POINTS: 800,
+  HIGH_SKILL: 4,
 }
 
 const getApproximate = {

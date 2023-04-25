@@ -15,11 +15,10 @@ import {
   AlertIcon,
   CalculatorIcon,
 } from 'assets/svgs'
-import { permalinkResolver } from 'utils'
+import { permalinkResolver, getSimilarCharacterFilters } from 'utils'
 import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
-import { getSimilarCharacterFilters } from '../utils'
 import { useAuctionNotifications } from '../useAuctionNotifications'
 import { EstimatedPriceDialog } from './EstimatedPriceDialog'
 import { ExpandableCharacterCardProps } from './types'
