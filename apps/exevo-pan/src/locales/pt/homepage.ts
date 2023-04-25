@@ -57,7 +57,8 @@ export default {
     EstimatedPriceDialog: {
       heading: 'Preço estimado de leilão',
       label: 'Preço estimado',
-      similarFound: '{{count}} leilões similares foram encontrados',
+      similarFound: '{{count}} leilão similar',
+      similarFoundPlural: '{{count}} leilões similares',
     },
   },
   FilterControl: {

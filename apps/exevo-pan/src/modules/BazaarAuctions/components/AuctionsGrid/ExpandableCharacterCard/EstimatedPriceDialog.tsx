@@ -38,6 +38,7 @@ export const EstimatedPriceDialog = ({
   const failedEstimation =
     emptyCharacter || estimatedAuction.data?.similarCount === 0
   const notPro = estimatedAuction.data?.estimatedValue === -1
+  const finishedLoading = failedEstimation || estimatedAuction.isFetched
 
   return (
     <Dialog
@@ -60,9 +61,6 @@ export const EstimatedPriceDialog = ({
               labelText={i18n.label}
               className="text-s bg-surface flex items-center gap-1"
               warning={failedEstimation}
-              title={templateString(i18n.similarFound, {
-                count: estimatedAuction.data?.similarCount ?? 0,
-              })}
             >
               {estimatedAuction.data ? (
                 estimatedAuction.data.estimatedValue && !notPro ? (
@@ -84,6 +82,23 @@ export const EstimatedPriceDialog = ({
                 <Skeleton className="h-4 w-full animate-pulse" />
               )}
             </LabeledTextBox>
+
+            <span
+              className={clsx(
+                'xs:-mb-2 mt-1 block w-full text-right text-xs',
+                finishedLoading ? 'animate-fadeIn' : 'opacity-0',
+              )}
+              role={finishedLoading ? undefined : 'none'}
+            >
+              {templateString(
+                estimatedAuction.data?.similarCount === 1
+                  ? i18n.similarFound
+                  : i18n.similarFoundPlural,
+                {
+                  count: estimatedAuction.data?.similarCount ?? 0,
+                },
+              )}
+            </span>
           </div>
         </div>
 
