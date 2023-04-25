@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useTranslations, templateString } from 'contexts/useTranslation'
 import { useState } from 'react'
 import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
-import { Dialog, LabeledTextBox, Text } from 'components/Atoms'
+import { Dialog, LabeledTextBox, Text, Skeleton } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import { getSimilarCharacterFilters, loadOutfitSrc } from 'utils'
@@ -81,10 +81,7 @@ export const EstimatedPriceDialog = ({
                   </span>
                 )
               ) : (
-                <div
-                  role="alert"
-                  className="loading-spinner mx-auto my-0.5 h-3 w-3"
-                />
+                <Skeleton className="h-4 w-full animate-pulse" />
               )}
             </LabeledTextBox>
           </div>
