@@ -256,7 +256,6 @@ export default {
       second: 'Esta estimativa considera apenas:',
       server: 'Tipo de servidor',
       character: 'Skills, level e vocação',
-      charmPoints: 'Charm points',
     },
     Failed: {
       message:

@@ -35,24 +35,16 @@ const getApproximate = {
       maxSkill: skillLevel + range,
     }
   },
-  charmPoints: (
-    charmPoints: number,
-  ): Pick<FilterOptions, 'minCharmPoints' | 'maxCharmPoints'> => ({
-    minCharmPoints: Math.max(charmPoints - SIMILAR_RANGE.CHARM_POINTS, 0),
-    maxCharmPoints: charmPoints + SIMILAR_RANGE.CHARM_POINTS,
-  }),
 }
 
 export const getSimilarCharacterFilters = ({
   level,
   vocationId,
   skills,
-  charmInfo,
   serverData: { serverLocation, battleye, pvpType },
 }: CharacterObject): Partial<FilterOptions> => {
   const filters: ReturnType<typeof getSimilarCharacterFilters> = {
     ...getApproximate.level(level),
-    ...getApproximate.charmPoints(charmInfo.total),
     vocation: new Set([vocationId]),
     battleye: new Set([battleye]),
     location: new Set([serverLocation.type]),

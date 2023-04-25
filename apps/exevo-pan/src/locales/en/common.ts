@@ -256,7 +256,6 @@ export default {
       second: 'This estimation only considers:',
       server: 'Server type',
       character: 'Skills, level and vocation',
-      charmPoints: 'Charm points',
     },
     Failed: {
       message: 'Not many similar characters were found in our database',

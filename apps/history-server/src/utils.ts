@@ -35,12 +35,13 @@ export const getMedian = (array: number[]): number | undefined => {
 }
 
 const SECONDS_IN_A_YEAR = 31536000
+const RECENT_THRESHOLD = Math.round(SECONDS_IN_A_YEAR * 1.5)
 
 export const canBeUsedForEstimations = () => {
   const currentTimestamp = Math.round(+new Date() / 1000)
   return ({ serverData, hasBeenBidded, auctionEnd }: CharacterObject) => {
     if (!hasBeenBidded) return false
-    if (currentTimestamp - auctionEnd > SECONDS_IN_A_YEAR) return false
+    if (currentTimestamp - auctionEnd > RECENT_THRESHOLD) return false
     if (serverData.experimental) return false
 
     return true

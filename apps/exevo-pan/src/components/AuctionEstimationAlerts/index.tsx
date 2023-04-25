@@ -24,7 +24,6 @@ const Disclaimer = (args: AlertProps) => {
       <ul className="marker:text-primaryHighlight grid list-inside list-disc">
         <li>{i18n.server}</li>
         <li>{i18n.character}</li>
-        <li>{i18n.charmPoints}</li>
       </ul>
     </Alert>
   )
