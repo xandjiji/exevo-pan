@@ -69,3 +69,50 @@ export const skillOptions: TypedOption<Skill>[] = [
     value: 'magic',
   },
 ]
+
+export const pvpOptions: TypedOption<string>[] = [
+  {
+    name: (
+      <>
+        <TibiaIcons.Dove />
+        Optional
+      </>
+    ),
+    value: '0',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.WhiteSkull />
+        Open
+      </>
+    ),
+    value: '1',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.OrangeSkull />
+        Retro Open
+      </>
+    ),
+    value: '2',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.RedSkull />
+        Hardcore
+      </>
+    ),
+    value: '3',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.BlackSkull /> Retro Hardcore
+      </>
+    ),
+    value: '4',
+  },
+]
