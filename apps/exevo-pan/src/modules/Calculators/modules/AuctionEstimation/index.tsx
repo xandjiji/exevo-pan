@@ -4,6 +4,24 @@ import { ChipGroup } from 'components/Organisms'
 import { vocationOptions, skillOptions } from '../../options'
 import { Vocation, Skill } from '../../types'
 
+/* @ ToDo:
+
+- pvp
+- battleye
+- server location?
+- charm points?
+- min tc invested?
+
+- result states
+    loading
+    success
+    failed
+
+- reset button
+- similar results
+
+*/
+
 const AuctionEstimation = () => {
   const [vocation, setVocation] = useState<string>()
   const [skill, setSkill] = useState<string>()
