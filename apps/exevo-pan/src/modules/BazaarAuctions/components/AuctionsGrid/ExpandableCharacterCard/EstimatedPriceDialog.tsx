@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useTranslations, templateString } from 'contexts/useTranslation'
 import { useState } from 'react'
 import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
-import { Dialog, LabeledTextBox, Text, Skeleton } from 'components/Atoms'
+import { Dialog, LabeledTextBox, Text, Skeleton, Shine } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import { getSimilarCharacterFilters, loadOutfitSrc } from 'utils'
@@ -62,8 +62,9 @@ export const EstimatedPriceDialog = ({
               className="text-s bg-surface flex items-center gap-1"
               warning={failedEstimation}
             >
-              {estimatedAuction.data ? (
-                estimatedAuction.data.estimatedValue && !notPro ? (
+              {finishedLoading ? (
+                estimatedAuction.data?.estimatedValue !== undefined &&
+                !notPro ? (
                   <Text.TibiaCoin
                     value={estimatedAuction.data.estimatedValue}
                     className="animate-fadeIn"
@@ -79,7 +80,9 @@ export const EstimatedPriceDialog = ({
                   </span>
                 )
               ) : (
-                <Skeleton className="h-4 w-full animate-pulse" />
+                <Skeleton className="h-4 w-full animate-pulse">
+                  <Shine animationIterationCount="infinite" width={60} />
+                </Skeleton>
               )}
             </LabeledTextBox>
 
@@ -102,11 +105,13 @@ export const EstimatedPriceDialog = ({
           </div>
         </div>
 
-        {notPro && <AuctionEstimationAlerts.ProOnly />}
-
-        {failedEstimation && <AuctionEstimationAlerts.Failed />}
-
-        <AuctionEstimationAlerts.Disclaimer />
+        {notPro ? (
+          <AuctionEstimationAlerts.ProOnly />
+        ) : failedEstimation ? (
+          <AuctionEstimationAlerts.Failed />
+        ) : (
+          <AuctionEstimationAlerts.Disclaimer />
+        )}
       </div>
     </Dialog>
   )
