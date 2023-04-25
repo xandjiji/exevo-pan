@@ -6,7 +6,14 @@ import { toast } from 'react-hot-toast'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
-import { Dialog, LoadingAlert, Input, Checkbox, Button } from 'components/Atoms'
+import {
+  Dialog,
+  LoadingAlert,
+  Input,
+  Checkbox,
+  Button,
+  ExevoProLink,
+} from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import AuctionEnd from 'components/CharacterCard/Parts/Textbox/AuctionEnd'
 import CharacterMiniCard from 'components/CharacterMiniCard'
@@ -142,11 +149,7 @@ export const AuctionNotificationsProvider = ({
                               homepage.AuctionsGrid.useAuctionNotifications
                                 .proExclusive,
                               {
-                                exevopro: (
-                                  <strong className="text-rare">
-                                    Exevo Pro 🧞‍♀️
-                                  </strong>
-                                ),
+                                exevopro: <ExevoProLink>🧞‍♀️</ExevoProLink>,
                               },
                             )}
                           </NextLink>

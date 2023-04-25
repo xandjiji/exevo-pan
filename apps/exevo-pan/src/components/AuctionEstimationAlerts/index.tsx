@@ -1,7 +1,6 @@
-import { Alert, Text } from 'components/Atoms'
+import { Alert, Text, ExevoProLink } from 'components/Atoms'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import Link from 'next/link'
-import { auctionEstimations, routes } from 'Constants'
+import { auctionEstimations } from 'Constants'
 
 type AlertProps = JSX.IntrinsicElements['div']
 
@@ -52,14 +51,7 @@ const ProOnly = (args: AlertProps) => {
     <Alert variant="primary" noIcon {...args}>
       {templateMessage(i18n.message, {
         freeCap: <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} />,
-        exevoPro: (
-          <Link
-            href={routes.EXEVOPRO}
-            className="rare-gradient-text whitespace-nowrap font-bold"
-          >
-            Exevo Pro
-          </Link>
-        ),
+        exevoPro: <ExevoProLink />,
       })}
     </Alert>
   )

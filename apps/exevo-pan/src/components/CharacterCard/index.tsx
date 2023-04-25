@@ -135,11 +135,10 @@ const CharacterCard = ({
                         common.CharacterCard.tcInvested.exclusive,
                         {
                           exevopro: (
-                            <span className="text-rare font-bold">
-                              <S.Strong className="whitespace-nowrap">
-                                Exevo Pro 🚀
-                              </S.Strong>
-                            </span>
+                            <strong className="rare-gradient-text font-bold">
+                              Exevo Pro{' '}
+                              <span className="text-onSurface">🚀</span>
+                            </strong>
                           ),
                         },
                       )}

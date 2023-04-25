@@ -2,10 +2,9 @@
 import { memo } from 'react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import clsx from 'clsx'
-import NextLink from 'next/link'
 import { Tooltip } from 'components/Organisms'
-import { routes } from 'Constants'
 import { CheckIcon } from 'assets/svgs'
+import { ExevoProLink } from 'components/Atoms'
 
 const Heading = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
   <p
@@ -51,12 +50,7 @@ const Pitch = ({ proStatus }: PitchProps) => {
       <div className="grid place-items-center gap-2">
         <Heading>
           {proStatus ? dashboard.Pitch.thankYou : dashboard.Pitch.upgradeNow}{' '}
-          <NextLink
-            href={routes.EXEVOPRO}
-            className="text-rare text-2xl font-bold tracking-wider"
-          >
-            Exevo Pro 🧙‍♂️
-          </NextLink>
+          <ExevoProLink className="text-2xl tracking-wide">🧙‍♂️</ExevoProLink>
         </Heading>
         <p>
           {proStatus

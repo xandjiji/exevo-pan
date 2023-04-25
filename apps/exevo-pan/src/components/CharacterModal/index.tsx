@@ -181,8 +181,8 @@ const CharacterModal = ({
                       common.CharacterCard.CharacterModal.exclusive,
                       {
                         exevopro: (
-                          <strong className="text-rare whitespace-nowrap">
-                            Exevo Pro 🚀
+                          <strong className="rare-gradient-text text-rare whitespace-nowrap">
+                            Exevo Pro <span className="text-onSurface">🚀</span>
                           </strong>
                         ),
                       },
