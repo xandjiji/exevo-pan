@@ -44,7 +44,7 @@ const SpritePicker = ({
         <Label
           className={clsx(
             'relative flex cursor-pointer items-center gap-1.5 text-left',
-            isPro && 'text-rare font-bold',
+            isPro && 'text-rare !font-bold',
           )}
         >
           {title}
