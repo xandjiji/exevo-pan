@@ -10,7 +10,6 @@ import { skills } from 'data-dictionary/dist/dictionaries/skills'
 import {
   Drawer,
   DrawerFooter,
-  Switch,
   Chip,
   Slider,
   Checkbox,
@@ -18,6 +17,7 @@ import {
 } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter, proTagsSet } from 'utils'
+import { TibiaIcons } from 'assets/svgs'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useAuctions } from '../../contexts/useAuctions'
 import useFilterServers from './useFilterServers'
@@ -29,7 +29,6 @@ import LevelInput from './LevelInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
 import * as S from './atoms'
-import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
@@ -139,7 +138,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow-md transition-all hover:shadow-lg active:shadow-inner disabled:invisible disabled:opacity-0"
           >
             {homepage.FilterDrawer.resetFilters}
-            <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
+            <TibiaIcons.Reset style={{ marginLeft: 8, marginRight: -4 }} />
           </button>
         </div>
       </Drawer.Head>
@@ -179,7 +178,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Rook />
+              <TibiaIcons.Rook />
               {VOCATION_NAMES[VOCATION_IDS.NONE]}
             </S.IconChip>
             <S.IconChip
@@ -192,7 +191,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Knight />
+              <TibiaIcons.Knight />
               {VOCATION_NAMES[VOCATION_IDS.KNIGHT]}
             </S.IconChip>
             <S.IconChip
@@ -205,7 +204,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Paladin />
+              <TibiaIcons.Paladin />
               {VOCATION_NAMES[VOCATION_IDS.PALADIN]}
             </S.IconChip>
             <S.IconChip
@@ -218,7 +217,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Sorcerer />
+              <TibiaIcons.Sorcerer />
               {VOCATION_NAMES[VOCATION_IDS.SORCERER]}
             </S.IconChip>
             <S.IconChip
@@ -231,7 +230,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Druid />
+              <TibiaIcons.Druid />
               {VOCATION_NAMES[VOCATION_IDS.DRUID]}
             </S.IconChip>
           </S.ChipWrapper>
@@ -249,7 +248,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Dove />
+              <TibiaIcons.Dove />
               {PVP_TYPES.OPTIONAL.string}
             </S.IconChip>
             <S.IconChip
@@ -262,7 +261,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.WhiteSkull />
+              <TibiaIcons.WhiteSkull />
               {PVP_TYPES.OPEN.string}
             </S.IconChip>
             <S.IconChip
@@ -275,7 +274,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.OrangeSkull />
+              <TibiaIcons.OrangeSkull />
               {PVP_TYPES.RETRO.string}
             </S.IconChip>
             <S.IconChip
@@ -288,7 +287,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.RedSkull />
+              <TibiaIcons.RedSkull />
               {PVP_TYPES.HARDCORE.string}
             </S.IconChip>
             <S.IconChip
@@ -303,7 +302,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.BlackSkull />
+              <TibiaIcons.BlackSkull />
               {PVP_TYPES.RETRO_HARDCORE.string}
             </S.IconChip>
           </S.ChipWrapper>
@@ -321,7 +320,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Status color="battleGreen" />
+              <TibiaIcons.BattlEye color="battleGreen" />
               {homepage.FilterDrawer.green}
             </S.IconChip>
             <S.IconChip
@@ -334,7 +333,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Status color="battleYellow" />
+              <TibiaIcons.BattlEye color="battleYellow" />
               {homepage.FilterDrawer.yellow}
             </S.IconChip>
           </S.ChipWrapper>
@@ -354,7 +353,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.EuFlag />
+              <TibiaIcons.EuFlag />
               {SERVER_LOCATIONS.EUROPE.string}
             </S.IconChip>
             <S.IconChip
@@ -369,7 +368,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.NaFlag />
+              <TibiaIcons.NaFlag />
               {SERVER_LOCATIONS.NORTH_AMERICA.string}
             </S.IconChip>
             <S.IconChip
@@ -384,7 +383,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.BrFlag />
+              <TibiaIcons.BrFlag />
               {SERVER_LOCATIONS.SOUTH_AMERICA.string}
             </S.IconChip>
           </S.ChipWrapper>
@@ -564,7 +563,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Magic />
+              <TibiaIcons.Magic />
               Magic
             </S.IconChip>
             <S.IconChip
@@ -579,7 +578,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Distance />
+              <TibiaIcons.Distance />
               Distance
             </S.IconChip>
             <S.IconChip
@@ -594,7 +593,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Club />
+              <TibiaIcons.Club />
               Club
             </S.IconChip>
             <S.IconChip
@@ -609,7 +608,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Sword />
+              <TibiaIcons.Sword />
               Sword
             </S.IconChip>
             <S.IconChip
@@ -624,7 +623,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Axe />
+              <TibiaIcons.Axe />
               Axe
             </S.IconChip>
           </S.ChipWrapper>

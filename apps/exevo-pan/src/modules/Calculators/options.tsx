@@ -1,11 +1,11 @@
-import * as Icon from './icons'
+import { TibiaIcons } from 'assets/svgs'
 import { TypedOption, Vocation, Skill } from './types'
 
 export const vocationOptions: TypedOption<Vocation>[] = [
   {
     name: (
       <>
-        <Icon.Knight />
+        <TibiaIcons.Knight />
         Knight
       </>
     ),
@@ -14,7 +14,7 @@ export const vocationOptions: TypedOption<Vocation>[] = [
   {
     name: (
       <>
-        <Icon.Paladin />
+        <TibiaIcons.Paladin />
         Paladin
       </>
     ),
@@ -23,7 +23,7 @@ export const vocationOptions: TypedOption<Vocation>[] = [
   {
     name: (
       <>
-        <Icon.Sorcerer />
+        <TibiaIcons.Sorcerer />
         Sorcerer
       </>
     ),
@@ -32,7 +32,7 @@ export const vocationOptions: TypedOption<Vocation>[] = [
   {
     name: (
       <>
-        <Icon.Druid />
+        <TibiaIcons.Druid />
         Druid
       </>
     ),
@@ -44,7 +44,7 @@ export const skillOptions: TypedOption<Skill>[] = [
   {
     name: (
       <>
-        <Icon.Axe />
+        <TibiaIcons.Axe />
         Axe/Club/Sword
       </>
     ),
@@ -53,7 +53,7 @@ export const skillOptions: TypedOption<Skill>[] = [
   {
     name: (
       <>
-        <Icon.Distance />
+        <TibiaIcons.Distance />
         Distance
       </>
     ),
@@ -62,7 +62,7 @@ export const skillOptions: TypedOption<Skill>[] = [
   {
     name: (
       <>
-        <Icon.Magic />
+        <TibiaIcons.Magic />
         Magic level
       </>
     ),
