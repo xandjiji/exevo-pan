@@ -1,4 +1,5 @@
 import { coloredText, brackets } from 'logging'
+import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
 
 const timeColor = (ms: number) => {
   if (ms <= 2000) return 'success'
@@ -39,10 +40,17 @@ const RECENT_THRESHOLD = Math.round(SECONDS_IN_A_YEAR * 1.5)
 
 export const canBeUsedForEstimations = () => {
   const currentTimestamp = Math.round(+new Date() / 1000)
-  return ({ serverData, hasBeenBidded, auctionEnd }: CharacterObject) => {
+  return ({
+    serverData,
+    hasBeenBidded,
+    auctionEnd,
+    level,
+    skills,
+  }: CharacterObject) => {
     if (!hasBeenBidded) return false
     if (currentTimestamp - auctionEnd > RECENT_THRESHOLD) return false
     if (serverData.experimental) return false
+    if (isEmptyCharacter({ level, skills })) return false
 
     return true
   }

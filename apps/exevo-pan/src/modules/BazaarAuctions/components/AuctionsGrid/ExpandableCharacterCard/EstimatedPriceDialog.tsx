@@ -1,10 +1,7 @@
 import clsx from 'clsx'
-import {
-  useTranslations,
-  templateMessage,
-  templateString,
-} from 'contexts/useTranslation'
+import { useTranslations, templateString } from 'contexts/useTranslation'
 import { useState } from 'react'
+import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
 import { Dialog, LabeledTextBox, Text } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
@@ -28,15 +25,18 @@ export const EstimatedPriceDialog = ({
     translations: { homepage },
   } = useTranslations()
   const i18n = homepage.AuctionsGrid.EstimatedPriceDialog
+  const emptyCharacter = isEmptyCharacter(characterData)
 
   const [estimationFilters] = useState(
     getSimilarCharacterFilters(characterData),
   )
-  const estimatedAuction = trpc.estimateAuctionPrice.useQuery({
-    filterOptions: estimationFilters,
-  })
+  const estimatedAuction = trpc.estimateAuctionPrice.useQuery(
+    { filterOptions: estimationFilters },
+    { enabled: !emptyCharacter },
+  )
 
-  const failedEstimation = estimatedAuction.data?.similarCount === 0
+  const failedEstimation =
+    emptyCharacter || estimatedAuction.data?.similarCount === 0
   const notPro = estimatedAuction.data?.estimatedValue === -1
 
   return (
