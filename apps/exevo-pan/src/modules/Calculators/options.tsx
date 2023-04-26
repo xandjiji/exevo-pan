@@ -140,6 +140,6 @@ export const locationOptions: TypedOption<string>[] = [
         <TibiaIcons.BrFlag /> BR
       </>
     ),
-    value: '3',
+    value: '2',
   },
 ]

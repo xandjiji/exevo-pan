@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { LabeledCard, Button, NumericInput, Text } from 'components/Atoms'
+import { LabeledCard, Button, NumericInput } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
+import EstimatedPriceBox from 'components/EstimatedPriceBox'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
 import { TibiaIcons } from 'assets/svgs'
@@ -69,6 +70,8 @@ const AuctionEstimation = () => {
     },
     { enabled: false, keepPreviousData: true },
   )
+
+  const isLoading = estimation.isFetching
 
   return (
     <div className="grid gap-8">
@@ -173,8 +176,8 @@ const AuctionEstimation = () => {
         </div>
         <Button
           onClick={() => estimation.refetch()}
-          loading={estimation.isFetching}
-          disabled={estimation.isFetching}
+          loading={isLoading}
+          disabled={isLoading}
           pill
           className="ml-auto mt-2 h-[23px] w-fit"
         >
@@ -182,14 +185,21 @@ const AuctionEstimation = () => {
         </Button>
       </LabeledCard>
 
-      <LabeledCard labelText="Results" className="grid gap-3">
+      <div className="grid gap-3">
+        <EstimatedPriceBox
+          estimatedValue={estimation.data?.estimatedValue}
+          similarCount={estimation.data?.similarCount}
+          loading={isLoading || !estimation.data}
+          className="child:bg-background max-w-[120px]"
+        />
+
         {estimation.data?.estimatedValue === -1 && (
           <AuctionEstimationAlerts.ProOnly />
         )}
         {estimation.data && estimation.data.estimatedValue === undefined && (
           <AuctionEstimationAlerts.Failed />
         )}
-      </LabeledCard>
+      </div>
     </div>
   )
 }

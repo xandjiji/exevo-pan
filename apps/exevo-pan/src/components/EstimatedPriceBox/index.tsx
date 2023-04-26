@@ -25,7 +25,7 @@ const EstimatedPriceBox = ({
     <div {...props}>
       <LabeledTextBox
         labelText={label ?? i18n.label}
-        warning={similarCount === 0}
+        warning={similarCount === 0 && !loading}
         className="text-s bg-surface flex items-center gap-1"
       >
         {loading ? (
@@ -53,7 +53,7 @@ const EstimatedPriceBox = ({
         {templateString(
           similarCount === 1 ? i18n.similarFound : i18n.similarFoundPlural,
           {
-            count: similarCount,
+            count: similarCount ?? 0,
           },
         )}
       </span>
