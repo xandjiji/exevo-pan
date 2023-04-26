@@ -40,16 +40,9 @@ const RECENT_THRESHOLD = Math.round(SECONDS_IN_A_YEAR * 1.5)
 
 export const canBeUsedForEstimations = () => {
   const currentTimestamp = Math.round(+new Date() / 1000)
-  return ({
-    serverData,
-    hasBeenBidded,
-    auctionEnd,
-    level,
-    skills,
-  }: CharacterObject) => {
+  return ({ hasBeenBidded, auctionEnd, level, skills }: CharacterObject) => {
     if (!hasBeenBidded) return false
     if (currentTimestamp - auctionEnd > RECENT_THRESHOLD) return false
-    if (serverData.experimental) return false
     if (isEmptyCharacter({ level, skills })) return false
 
     return true
