@@ -36,14 +36,14 @@ export const estimateAuctionPrice = publicProcedure
           },
     )
 
+    const aboveFreeTreshold =
+      (result.estimatedValue ?? 0) > auctionEstimations.MAX_FREE_VALUE
+
     return isPro
       ? result
       : {
           ...result,
-          page: result.page.map(pluckTCInvested),
-          estimatedValue:
-            (result.estimatedValue ?? 0) > auctionEstimations.MAX_FREE_VALUE
-              ? -1
-              : result.estimatedValue,
+          page: aboveFreeTreshold ? [] : result.page.map(pluckTCInvested),
+          estimatedValue: aboveFreeTreshold ? -1 : result.estimatedValue,
         }
   })
