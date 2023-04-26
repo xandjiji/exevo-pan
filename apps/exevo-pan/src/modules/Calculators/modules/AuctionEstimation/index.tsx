@@ -1,11 +1,14 @@
 import { useCallback, useState } from 'react'
-import { LabeledCard, Button, NumericInput } from 'components/Atoms'
+import { LabeledCard, Button, NumericInput, Paginator } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import EstimatedPriceBox from 'components/EstimatedPriceBox'
+import CharacterMiniCard from 'components/CharacterMiniCard'
+import CharacterModal from 'components/CharacterModal'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
 import { TibiaIcons, SearchIcon } from 'assets/svgs'
+import { loadOutfitSrc } from 'utils'
 import {
   vocationOptions,
   skillOptions,
@@ -43,6 +46,8 @@ const AuctionEstimation = () => {
   const [minLevel, setMinLevel] = useState<number>()
   const [maxLevel, setMaxLevel] = useState<number>()
 
+  const [characterDetails, setCharacterDetails] = useState<CharacterObject>()
+
   const estimation = trpc.estimateAuctionPrice.useQuery(
     {
       filterOptions: {
@@ -74,7 +79,7 @@ const AuctionEstimation = () => {
 
   return (
     <div className="grid gap-8">
-      <LabeledCard labelText="Character" className="grid gap-8">
+      <LabeledCard labelText="Character" className="grid !gap-6">
         <div className="grid gap-3">
           <ChipGroup
             label="PvP"
@@ -206,21 +211,68 @@ const AuctionEstimation = () => {
         </div>
       </LabeledCard>
 
-      <div className="grid gap-3">
-        <EstimatedPriceBox
-          estimatedValue={estimation.data?.estimatedValue}
-          similarCount={estimation.data?.similarCount}
-          loading={isLoading || !estimation.data}
-          className="child:bg-background max-w-[120px]"
-        />
+      <div className="grid gap-6">
+        <div className="flex items-end justify-between gap-3">
+          <EstimatedPriceBox
+            estimatedValue={estimation.data?.estimatedValue}
+            similarCount={estimation.data?.similarCount}
+            loading={isLoading || !estimation.data}
+            hideSimilarCount
+            className="child:bg-background w-[120px]"
+          />
 
-        {estimation.data?.estimatedValue === -1 && (
-          <AuctionEstimationAlerts.ProOnly />
-        )}
-        {estimation.data && estimation.data.estimatedValue === undefined && (
-          <AuctionEstimationAlerts.Failed />
-        )}
+          {estimation.data?.estimatedValue === -1 && (
+            <AuctionEstimationAlerts.ProOnly />
+          )}
+          {estimation.data && estimation.data.estimatedValue === undefined && (
+            <AuctionEstimationAlerts.Failed />
+          )}
+          <Paginator totalItems={estimation.data?.similarCount ?? 0} />
+        </div>
+
+        <div className="grid grid-cols-2 gap-3">
+          {(estimation.data?.page ?? []).map((auction) => {
+            const {
+              id,
+              nickname,
+              level,
+              vocationId,
+              serverData: { serverName },
+              outfitId,
+            } = auction
+
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setCharacterDetails(auction)}
+                className="cursor-pointer text-left leading-tight"
+              >
+                <CharacterMiniCard
+                  isCard
+                  characterData={{
+                    name: nickname,
+                    level,
+                    world: serverName,
+                    vocation: vocationUtils.getPromotedName({
+                      vocationId,
+                      level,
+                    }),
+                  }}
+                  outfitSrc={loadOutfitSrc(outfitId)}
+                />
+              </button>
+            )
+          })}
+        </div>
       </div>
+
+      {characterDetails && (
+        <CharacterModal
+          characterData={characterDetails}
+          onClose={() => setCharacterDetails(undefined)}
+        />
+      )}
     </div>
   )
 }

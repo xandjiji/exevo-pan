@@ -7,6 +7,7 @@ export type EstimatedPriceBoxProps = {
   loading?: boolean
   estimatedValue?: number
   similarCount?: number
+  hideSimilarCount?: boolean
 } & JSX.IntrinsicElements['div']
 
 const EstimatedPriceBox = ({
@@ -14,6 +15,7 @@ const EstimatedPriceBox = ({
   loading = false,
   similarCount = 0,
   estimatedValue,
+  hideSimilarCount = false,
   ...props
 }: EstimatedPriceBoxProps) => {
   const {
@@ -43,20 +45,22 @@ const EstimatedPriceBox = ({
         )}
       </LabeledTextBox>
 
-      <span
-        className={clsx(
-          'xs:-mb-2 mt-1 block w-full text-right text-xs',
-          loading ? 'opacity-0' : 'animate-fadeIn',
-        )}
-        role={loading ? 'none' : undefined}
-      >
-        {templateString(
-          similarCount === 1 ? i18n.similarFound : i18n.similarFoundPlural,
-          {
-            count: similarCount ?? 0,
-          },
-        )}
-      </span>
+      {!hideSimilarCount && (
+        <span
+          className={clsx(
+            'xs:-mb-2 mt-1 block w-full text-right text-xs',
+            loading ? 'opacity-0' : 'animate-fadeIn',
+          )}
+          role={loading ? 'none' : undefined}
+        >
+          {templateString(
+            similarCount === 1 ? i18n.similarFound : i18n.similarFoundPlural,
+            {
+              count: similarCount ?? 0,
+            },
+          )}
+        </span>
+      )}
     </div>
   )
 }
