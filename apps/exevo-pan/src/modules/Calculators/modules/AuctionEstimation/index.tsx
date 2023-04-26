@@ -5,6 +5,8 @@ import {
   Button,
   NumericInput,
   LabeledTextBox,
+  Skeleton,
+  RareFrame,
 } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
@@ -14,7 +16,7 @@ import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterModal'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
-import { TibiaIcons, SearchIcon } from 'assets/svgs'
+import { TibiaIcons, SearchIcon, ExevoPanIcon } from 'assets/svgs'
 import { loadOutfitSrc } from 'utils'
 import {
   vocationOptions,
@@ -32,6 +34,8 @@ import { Skill } from '../../types'
 
 - max width / mobile
 - enter/next/mobile interactions
+
+- i18n
 
 */
 
@@ -87,7 +91,7 @@ const AuctionEstimation = () => {
   const isLoading = estimation.isFetching
   const list = isReset ? [] : estimation.data?.page ?? []
   const similarCount = estimation.data?.similarCount ?? 0
-  const notPro = estimation.data?.estimatedValue === -1
+  const notPro = !isReset && estimation.data?.estimatedValue === -1
   const isEmpty = list.length === 0
 
   return (
@@ -223,12 +227,32 @@ const AuctionEstimation = () => {
         labelText="Some similar auctions"
         className={clsx(
           'bg-background grid !px-6',
-          isEmpty ? 'place-items-center !py-6' : 'grid-cols-2 gap-3 !py-4',
+          isEmpty && !notPro
+            ? 'place-items-center !py-6'
+            : 'grid-cols-2 gap-3 !py-4',
         )}
       >
         {isEmpty && !notPro && (
           <EmptyState text="No auctions" variant="medium" />
         )}
+
+        {notPro &&
+          Array.from({ length: 4 }, (_, idx) => (
+            <div
+              key={idx}
+              className="card relative flex items-center gap-4 opacity-50"
+            >
+              <RareFrame />
+              <Skeleton className="grid h-14 w-14 place-content-center rounded-md">
+                <ExevoPanIcon className="h-6 w-6" />
+              </Skeleton>
+
+              <div className="grid gap-1.5">
+                <Skeleton className="h-3 w-24" />
+                <Skeleton className="h-3 w-36" />
+              </div>
+            </div>
+          ))}
 
         {list.map((auction) => {
           const {
@@ -267,7 +291,7 @@ const AuctionEstimation = () => {
 
       <div className="mb-3 grid gap-6">
         <div className="flex items-center justify-between gap-6">
-          {notPro && !isReset && <AuctionEstimationAlerts.ProOnly />}
+          {notPro && <AuctionEstimationAlerts.ProOnly />}
           {estimation.data &&
             estimation.data.estimatedValue === undefined &&
             !isReset && <AuctionEstimationAlerts.Failed />}
