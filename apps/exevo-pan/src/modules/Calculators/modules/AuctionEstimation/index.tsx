@@ -1,11 +1,11 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { LabeledCard, Button, NumericInput } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import EstimatedPriceBox from 'components/EstimatedPriceBox'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
-import { TibiaIcons } from 'assets/svgs'
+import { TibiaIcons, SearchIcon } from 'assets/svgs'
 import {
   vocationOptions,
   skillOptions,
@@ -25,7 +25,6 @@ import { Skill } from '../../types'
     failed
     pro
 
-- reset button
 - similar results
 
 */
@@ -174,15 +173,37 @@ const AuctionEstimation = () => {
             </div>
           </div>
         </div>
-        <Button
-          onClick={() => estimation.refetch()}
-          loading={isLoading}
-          disabled={isLoading}
-          pill
-          className="ml-auto mt-2 h-[23px] w-fit"
-        >
-          Search
-        </Button>
+
+        <div className="ml-auto flex items-center gap-4">
+          <Button
+            hollow
+            pill
+            onClick={useCallback(() => {
+              setPvp('')
+              setLocation('')
+              setBattleye('')
+              setVocation('')
+              setSkill('')
+              setMinSkill(undefined)
+              setMaxSkill(undefined)
+              setMinLevel(undefined)
+              setMaxLevel(undefined)
+            }, [])}
+          >
+            Reset
+          </Button>
+
+          <Button
+            onClick={() => estimation.refetch()}
+            loading={isLoading}
+            disabled={isLoading}
+            pill
+            className="ml-auto w-fit"
+          >
+            <SearchIcon className="h-3 w-3" />
+            Search
+          </Button>
+        </div>
       </LabeledCard>
 
       <div className="grid gap-3">
