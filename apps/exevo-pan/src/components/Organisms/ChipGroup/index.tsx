@@ -1,9 +1,14 @@
 import { useRef, useCallback, useState, useId } from 'react'
-import clsx from 'clsx'
 import { Chip, Label } from 'components/Atoms'
 import { ChipGroupProps, OptionProps } from './types'
 
-const Option = ({ groupName, name, value, ...props }: OptionProps) => {
+const Option = ({
+  groupName,
+  name,
+  value,
+  toggleable,
+  ...props
+}: OptionProps) => {
   const id = useId()
 
   const inputRef = useRef<HTMLInputElement>(null)
@@ -25,8 +30,15 @@ const Option = ({ groupName, name, value, ...props }: OptionProps) => {
           name={groupName}
           value={value}
           tabIndex={-1}
-          className={clsx('-z-1 absolute h-0 w-0')}
+          className="-z-1 absolute h-0 w-0"
           aria-labelledby={id}
+          onClick={() => {
+            if (props.checked && inputRef.current && toggleable) {
+              const event = new Event('change', { bubbles: true })
+              inputRef.current.value = ''
+              inputRef.current.dispatchEvent(event)
+            }
+          }}
           {...props}
         />
         {name}
@@ -40,6 +52,7 @@ const ChipGroup = ({
   label,
   name: groupName,
   options,
+  toggleable = false,
   onChange,
   value,
   defaultValue,
@@ -74,6 +87,7 @@ const ChipGroup = ({
             groupName={groupName}
             checked={derivedValue === option.value}
             onChange={handleChange}
+            toggleable={toggleable}
             {...option}
           />
         ))}

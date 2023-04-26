@@ -35,6 +35,7 @@ const AuctionEstimation = () => {
           options={pvpOptions}
           value={pvp}
           onChange={(e) => setPvp(e.target.value)}
+          toggleable
         />
       </div>
 
