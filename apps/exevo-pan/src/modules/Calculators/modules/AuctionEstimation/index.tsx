@@ -30,8 +30,9 @@ import { Skill } from '../../types'
 - charm points?
 - min tc invested?
 
-- empty state
 - max width / mobile
+- enter/next/mobile interactions
+
 */
 
 const parseNumber = (value: string) => parseInt(value, 10)
@@ -86,6 +87,7 @@ const AuctionEstimation = () => {
   const isLoading = estimation.isFetching
   const list = isReset ? [] : estimation.data?.page ?? []
   const similarCount = estimation.data?.similarCount ?? 0
+  const notPro = estimation.data?.estimatedValue === -1
   const isEmpty = list.length === 0
 
   return (
@@ -224,7 +226,9 @@ const AuctionEstimation = () => {
           isEmpty ? 'place-items-center !py-6' : 'grid-cols-2 gap-3 !py-4',
         )}
       >
-        {isEmpty && <EmptyState text="No auctions" variant="medium" />}
+        {isEmpty && !notPro && (
+          <EmptyState text="No auctions" variant="medium" />
+        )}
 
         {list.map((auction) => {
           const {
@@ -262,10 +266,8 @@ const AuctionEstimation = () => {
       </LabeledTextBox>
 
       <div className="mb-3 grid gap-6">
-        <div className="flex items-end justify-between gap-6">
-          {estimation.data?.estimatedValue === -1 && !isReset && (
-            <AuctionEstimationAlerts.ProOnly />
-          )}
+        <div className="flex items-center justify-between gap-6">
+          {notPro && !isReset && <AuctionEstimationAlerts.ProOnly />}
           {estimation.data &&
             estimation.data.estimatedValue === undefined &&
             !isReset && <AuctionEstimationAlerts.Failed />}
@@ -274,7 +276,7 @@ const AuctionEstimation = () => {
             estimatedValue={estimation.data?.estimatedValue}
             similarCount={similarCount}
             loading={isLoading || !estimation.data || isReset}
-            className="child:bg-background child:justify-center ml-auto w-[120px]"
+            className="child:bg-background child:justify-center ml-auto w-[120px] shrink-0"
           />
         </div>
       </div>
