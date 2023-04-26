@@ -274,4 +274,9 @@ export default {
         'Auctions estimated above {{freeCap}} are only available for {{exevoPro}} members',
     },
   },
+  EstimatedPriceBox: {
+    label: 'Estimated price',
+    similarFound: '{{count}} similar auction',
+    similarFoundPlural: '{{count}} similar auctions',
+  },
 }

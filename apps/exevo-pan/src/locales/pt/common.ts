@@ -266,4 +266,9 @@ export default {
         'Leilões com estimativas acima de {{freeCap}} estão disponíveis apenas para membros {{exevoPro}}',
     },
   },
+  EstimatedPriceBox: {
+    label: 'Estimated price',
+    similarFound: '{{count}} leilão similar',
+    similarFoundPlural: '{{count}} leilões similares',
+  },
 }

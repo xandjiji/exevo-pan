@@ -1,9 +1,9 @@
-import clsx from 'clsx'
-import { useTranslations, templateString } from 'contexts/useTranslation'
+import { useTranslations } from 'contexts/useTranslation'
 import { useState } from 'react'
 import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
-import { Dialog, LabeledTextBox, Text, Skeleton, Shine } from 'components/Atoms'
+import { Dialog } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
+import EstimatedPriceBox from 'components/EstimatedPriceBox'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import { getSimilarCharacterFilters, loadOutfitSrc } from 'utils'
 import { trpc } from 'lib/trpc'
@@ -56,53 +56,12 @@ export const EstimatedPriceDialog = ({
             forceSubtitle=""
           />
 
-          <div className="xs:mx-0 mx-auto min-w-[120px] shrink-0">
-            <LabeledTextBox
-              labelText={i18n.label}
-              className="text-s bg-surface flex items-center gap-1"
-              warning={failedEstimation}
-            >
-              {finishedLoading ? (
-                estimatedAuction.data?.estimatedValue !== undefined &&
-                !notPro ? (
-                  <Text.TibiaCoin
-                    value={estimatedAuction.data.estimatedValue}
-                    className="animate-fadeIn"
-                  />
-                ) : (
-                  <span
-                    className={clsx(
-                      'mx-auto tracking-wider',
-                      notPro && 'text-rare font-bold',
-                    )}
-                  >
-                    ?????
-                  </span>
-                )
-              ) : (
-                <Skeleton className="h-4 w-full animate-pulse">
-                  <Shine animationIterationCount="infinite" width={60} />
-                </Skeleton>
-              )}
-            </LabeledTextBox>
-
-            <span
-              className={clsx(
-                'xs:-mb-2 mt-1 block w-full text-right text-xs',
-                finishedLoading ? 'animate-fadeIn' : 'opacity-0',
-              )}
-              role={finishedLoading ? undefined : 'none'}
-            >
-              {templateString(
-                estimatedAuction.data?.similarCount === 1
-                  ? i18n.similarFound
-                  : i18n.similarFoundPlural,
-                {
-                  count: estimatedAuction.data?.similarCount ?? 0,
-                },
-              )}
-            </span>
-          </div>
+          <EstimatedPriceBox
+            className="xs:mx-0 mx-auto min-w-[120px] shrink-0"
+            loading={!finishedLoading}
+            similarCount={estimatedAuction.data?.similarCount}
+            estimatedValue={estimatedAuction.data?.estimatedValue}
+          />
         </div>
 
         {notPro ? (

@@ -60,9 +60,6 @@ export default {
     },
     EstimatedPriceDialog: {
       heading: 'Estimated auction price',
-      label: 'Estimated price',
-      similarFound: '{{count}} similar auction',
-      similarFoundPlural: '{{count}} similar auctions',
     },
   },
   FilterControl: {
