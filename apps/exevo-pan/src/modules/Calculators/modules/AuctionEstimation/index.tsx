@@ -1,17 +1,17 @@
 import { useState } from 'react'
-import { Button, NumericInput } from 'components/Atoms'
+import { LabeledCard, Button, NumericInput, Text } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
+import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
 import { TibiaIcons } from 'assets/svgs'
-import { auctionEstimations } from 'Constants'
 import {
   vocationOptions,
   skillOptions,
   pvpOptions,
   locationOptions,
 } from '../../options'
-import { Skill, Vocation } from '../../types'
+import { Skill } from '../../types'
 
 /* @ ToDo:
 
@@ -20,7 +20,6 @@ import { Skill, Vocation } from '../../types'
 - min tc invested?
 
 - result states
-    loading
     success
     failed
     pro
@@ -72,8 +71,8 @@ const AuctionEstimation = () => {
   )
 
   return (
-    <div className="flex flex-col gap-8 md:flex-row">
-      <div className="grid gap-8">
+    <div className="grid gap-8">
+      <LabeledCard labelText="Character" className="grid gap-8">
         <div className="grid gap-3">
           <ChipGroup
             label="PvP"
@@ -175,12 +174,22 @@ const AuctionEstimation = () => {
         <Button
           onClick={() => estimation.refetch()}
           loading={estimation.isFetching}
+          disabled={estimation.isFetching}
+          pill
+          className="ml-auto mt-2 h-[23px] w-fit"
         >
-          Go
+          Search
         </Button>
-      </div>
+      </LabeledCard>
 
-      <div>{estimation.data?.estimatedValue}</div>
+      <LabeledCard labelText="Results" className="grid gap-3">
+        {estimation.data?.estimatedValue === -1 && (
+          <AuctionEstimationAlerts.ProOnly />
+        )}
+        {estimation.data && estimation.data.estimatedValue === undefined && (
+          <AuctionEstimationAlerts.Failed />
+        )}
+      </LabeledCard>
     </div>
   )
 }
