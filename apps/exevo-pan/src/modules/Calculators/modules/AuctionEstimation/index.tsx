@@ -47,6 +47,13 @@ const AuctionEstimation = () => {
           onChange={(e) => setPvp(e.target.value)}
         />
         <ChipGroup
+          label="Localização do servidor"
+          toggleable
+          options={locationOptions}
+          value={location}
+          onChange={(e) => setLocation(e.target.value)}
+        />
+        <ChipGroup
           label="BattlEye"
           toggleable
           options={[
@@ -70,13 +77,6 @@ const AuctionEstimation = () => {
           ]}
           value={battleye}
           onChange={(e) => setBattleye(e.target.value)}
-        />
-        <ChipGroup
-          label="Localização do servidor"
-          toggleable
-          options={locationOptions}
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
         />
       </div>
 
