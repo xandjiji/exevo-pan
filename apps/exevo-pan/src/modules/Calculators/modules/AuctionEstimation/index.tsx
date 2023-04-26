@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useCallback, useState } from 'react'
 import {
   LabeledCard,
@@ -6,6 +7,7 @@ import {
   LabeledTextBox,
 } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
+import EmptyState from 'components/EmptyState'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import EstimatedPriceBox from 'components/EstimatedPriceBox'
 import CharacterMiniCard from 'components/CharacterMiniCard'
@@ -84,6 +86,7 @@ const AuctionEstimation = () => {
   const isLoading = estimation.isFetching
   const list = isReset ? [] : estimation.data?.page ?? []
   const similarCount = estimation.data?.similarCount ?? 0
+  const isEmpty = list.length === 0
 
   return (
     <div className="grid gap-6">
@@ -215,9 +218,14 @@ const AuctionEstimation = () => {
       </LabeledCard>
 
       <LabeledTextBox
-        labelText="Similar auctions"
-        className="bg-background grid grid-cols-2 gap-3 !px-6 !py-4"
+        labelText="Some similar auctions"
+        className={clsx(
+          'bg-background grid !px-6',
+          isEmpty ? 'place-items-center !py-6' : 'grid-cols-2 gap-3 !py-4',
+        )}
       >
+        {isEmpty && <EmptyState text="No auctions" variant="medium" />}
+
         {list.map((auction) => {
           const {
             id,
