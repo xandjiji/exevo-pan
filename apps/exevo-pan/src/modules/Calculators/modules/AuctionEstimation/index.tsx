@@ -1,5 +1,10 @@
 import { useCallback, useState } from 'react'
-import { LabeledCard, Button, NumericInput, Paginator } from 'components/Atoms'
+import {
+  LabeledCard,
+  Button,
+  NumericInput,
+  LabeledTextBox,
+} from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import EstimatedPriceBox from 'components/EstimatedPriceBox'
@@ -23,13 +28,8 @@ import { Skill } from '../../types'
 - charm points?
 - min tc invested?
 
-- result states
-    success
-    failed
-    pro
-
-- similar results
-
+- empty state
+- max width / mobile
 */
 
 const parseNumber = (value: string) => parseInt(value, 10)
@@ -47,6 +47,7 @@ const AuctionEstimation = () => {
   const [maxLevel, setMaxLevel] = useState<number>()
 
   const [characterDetails, setCharacterDetails] = useState<CharacterObject>()
+  const [isReset, setIsReset] = useState(true)
 
   const estimation = trpc.estimateAuctionPrice.useQuery(
     {
@@ -71,14 +72,21 @@ const AuctionEstimation = () => {
         minLevel,
         maxLevel,
       },
+      sortOptions: { descendingOrder: true },
     },
-    { enabled: false, keepPreviousData: true },
+    {
+      enabled: false,
+      keepPreviousData: true,
+      onSettled: () => setIsReset(false),
+    },
   )
 
   const isLoading = estimation.isFetching
+  const list = isReset ? [] : estimation.data?.page ?? []
+  const similarCount = estimation.data?.similarCount ?? 0
 
   return (
-    <div className="grid gap-8">
+    <div className="grid gap-6">
       <LabeledCard labelText="Character" className="grid !gap-6">
         <div className="grid gap-3">
           <ChipGroup
@@ -193,77 +201,73 @@ const AuctionEstimation = () => {
               setMaxSkill(undefined)
               setMinLevel(undefined)
               setMaxLevel(undefined)
+              setIsReset(true)
             }, [])}
           >
             Reset
           </Button>
 
-          <Button
-            onClick={() => estimation.refetch()}
-            loading={isLoading}
-            disabled={isLoading}
-            pill
-            className="ml-auto w-fit"
-          >
+          <Button onClick={() => estimation.refetch()} pill>
             <SearchIcon className="h-3 w-3" />
             Search
           </Button>
         </div>
       </LabeledCard>
 
-      <div className="grid gap-6">
-        <div className="flex items-end justify-between gap-3">
-          <EstimatedPriceBox
-            estimatedValue={estimation.data?.estimatedValue}
-            similarCount={estimation.data?.similarCount}
-            loading={isLoading || !estimation.data}
-            hideSimilarCount
-            className="child:bg-background w-[120px]"
-          />
+      <LabeledTextBox
+        labelText="Similar auctions"
+        className="bg-background grid grid-cols-2 gap-3 !px-6 !py-4"
+      >
+        {list.map((auction) => {
+          const {
+            id,
+            nickname,
+            level,
+            vocationId,
+            serverData: { serverName },
+            outfitId,
+          } = auction
 
-          {estimation.data?.estimatedValue === -1 && (
+          return (
+            <button
+              key={id}
+              type="button"
+              onClick={() => setCharacterDetails(auction)}
+              className="cursor-pointer text-left leading-tight"
+            >
+              <CharacterMiniCard
+                isCard
+                characterData={{
+                  name: nickname,
+                  level,
+                  world: serverName,
+                  vocation: vocationUtils.getPromotedName({
+                    vocationId,
+                    level,
+                  }),
+                }}
+                outfitSrc={loadOutfitSrc(outfitId)}
+              />
+            </button>
+          )
+        })}
+      </LabeledTextBox>
+
+      <div className="mb-3 grid gap-6">
+        <div className="flex items-end justify-between gap-6">
+          {estimation.data?.estimatedValue === -1 && !isReset && (
             <AuctionEstimationAlerts.ProOnly />
           )}
-          {estimation.data && estimation.data.estimatedValue === undefined && (
-            <AuctionEstimationAlerts.Failed />
-          )}
-          <Paginator totalItems={estimation.data?.similarCount ?? 0} />
-        </div>
+          {estimation.data &&
+            estimation.data.estimatedValue === undefined &&
+            !isReset && <AuctionEstimationAlerts.Failed />}
 
-        <div className="grid grid-cols-2 gap-3">
-          {(estimation.data?.page ?? []).map((auction) => {
-            const {
-              id,
-              nickname,
-              level,
-              vocationId,
-              serverData: { serverName },
-              outfitId,
-            } = auction
-
-            return (
-              <button
-                key={id}
-                type="button"
-                onClick={() => setCharacterDetails(auction)}
-                className="cursor-pointer text-left leading-tight"
-              >
-                <CharacterMiniCard
-                  isCard
-                  characterData={{
-                    name: nickname,
-                    level,
-                    world: serverName,
-                    vocation: vocationUtils.getPromotedName({
-                      vocationId,
-                      level,
-                    }),
-                  }}
-                  outfitSrc={loadOutfitSrc(outfitId)}
-                />
-              </button>
-            )
-          })}
+          <EstimatedPriceBox
+            estimatedValue={estimation.data?.estimatedValue}
+            similarCount={similarCount}
+            loading={isLoading || !estimation.data || isReset}
+            className="child:bg-background child:justify-center ml-auto w-[120px]"
+          />
         </div>
       </div>
 

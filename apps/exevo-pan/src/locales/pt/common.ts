@@ -267,7 +267,7 @@ export default {
     },
   },
   EstimatedPriceBox: {
-    label: 'Estimated price',
+    label: 'Preço estimado',
     similarFound: '{{count}} leilão similar',
     similarFoundPlural: '{{count}} leilões similares',
   },
