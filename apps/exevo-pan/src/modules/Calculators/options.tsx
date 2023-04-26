@@ -116,3 +116,30 @@ export const pvpOptions: TypedOption<string>[] = [
     value: '4',
   },
 ]
+
+export const locationOptions: TypedOption<string>[] = [
+  {
+    name: (
+      <>
+        <TibiaIcons.EuFlag /> EU
+      </>
+    ),
+    value: '0',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.NaFlag /> NA
+      </>
+    ),
+    value: '1',
+  },
+  {
+    name: (
+      <>
+        <TibiaIcons.BrFlag /> BR
+      </>
+    ),
+    value: '3',
+  },
+]
