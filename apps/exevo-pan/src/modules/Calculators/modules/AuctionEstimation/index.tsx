@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { useCallback, useState } from 'react'
 import {
   LabeledCard,
@@ -7,6 +8,7 @@ import {
   LabeledTextBox,
   Skeleton,
   RareFrame,
+  LoadingAlert,
 } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
@@ -42,6 +44,10 @@ import { Skill } from '../../types'
 const parseNumber = (value: string) => parseInt(value, 10)
 
 const AuctionEstimation = () => {
+  const {
+    translations: { common },
+  } = useTranslations()
+
   const [pvp, setPvp] = useState<string>()
   const [location, setLocation] = useState<string>()
   const [battleye, setBattleye] = useState<string>()
@@ -96,6 +102,8 @@ const AuctionEstimation = () => {
 
   return (
     <div className="grid gap-6">
+      {isLoading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
+
       <LabeledCard labelText="Character" className="grid !gap-6">
         <div className="grid gap-3">
           <ChipGroup
@@ -227,7 +235,7 @@ const AuctionEstimation = () => {
         labelText="Some similar auctions"
         className="bg-background !px-6 !py-4"
       >
-        <div className="mb-6 grid gap-6">
+        <div className={clsx('grid gap-6', isEmpty ? 'mb-3' : 'mb-6')}>
           <div className="flex items-center justify-between gap-6">
             {notPro && <AuctionEstimationAlerts.ProOnly />}
             {estimation.data &&
