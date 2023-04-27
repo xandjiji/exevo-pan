@@ -9,7 +9,6 @@ import {
   LabeledTextBox,
   Skeleton,
   RareFrame,
-  LoadingAlert,
 } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
@@ -33,7 +32,7 @@ const parseNumber = (value: string) => parseInt(value, 10)
 
 const AuctionEstimation = () => {
   const {
-    translations: { common, calculators },
+    translations: { calculators },
   } = useTranslations()
   const i18n = calculators.AuctionEstimation
 
@@ -228,8 +227,16 @@ const AuctionEstimation = () => {
             Reset
           </Button>
 
-          <Button onClick={() => estimation.refetch()} pill>
-            <SearchIcon className="h-3 w-3" />
+          <Button
+            onClick={() => estimation.refetch()}
+            pill
+            disabled={isLoading}
+          >
+            {isLoading ? (
+              <div role="alert" className="loading-spinner h-3 w-3" />
+            ) : (
+              <SearchIcon className="h-3 w-3" />
+            )}
             {i18n.search}
           </Button>
         </div>
@@ -239,8 +246,6 @@ const AuctionEstimation = () => {
         labelText={i18n.similarAuctions}
         className="bg-background !px-6 !py-4"
       >
-        {isLoading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
-
         <div className={clsx('grid gap-6', isEmpty ? 'mb-4' : 'mb-6')}>
           <div className="flex flex-col-reverse gap-6 md:flex-row md:items-center md:justify-between">
             {notPro && <AuctionEstimationAlerts.ProOnly />}
