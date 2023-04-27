@@ -7,8 +7,6 @@ import {
   Button,
   NumericInput,
   LabeledTextBox,
-  Skeleton,
-  RareFrame,
 } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
@@ -18,7 +16,7 @@ import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterModal'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
-import { TibiaIcons, SearchIcon, ExevoPanIcon } from 'assets/svgs'
+import { TibiaIcons, SearchIcon } from 'assets/svgs'
 import { loadOutfitSrc } from 'utils'
 import {
   vocationOptions,
@@ -27,6 +25,7 @@ import {
   locationOptions,
 } from '../../options'
 import { Skill } from '../../types'
+import { ProCardSkeleton } from './ProCardSkeleton'
 
 const parseNumber = (value: string) => parseInt(value, 10)
 
@@ -277,20 +276,7 @@ const AuctionEstimation = () => {
 
           {notPro &&
             Array.from({ length: 4 }, (_, idx) => (
-              <div
-                key={idx}
-                className="card relative flex items-center gap-4 opacity-50"
-              >
-                <RareFrame />
-                <Skeleton className="grid h-14 w-14 place-content-center rounded-md">
-                  <ExevoPanIcon className="h-6 w-6" />
-                </Skeleton>
-
-                <div className="grid gap-1.5">
-                  <Skeleton className="h-3 w-24" />
-                  <Skeleton className="h-3 w-36" />
-                </div>
-              </div>
+              <ProCardSkeleton key={idx} />
             ))}
 
           {list.map((auction) => {
