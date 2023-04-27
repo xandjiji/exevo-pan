@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useCallback, useState } from 'react'
@@ -29,12 +30,6 @@ import {
 import { Skill } from '../../types'
 
 /* @ ToDo:
-
-- break club/axe/sword?
-- charm points?
-- min tc invested?
-
-- enter/next/mobile interactions
 
 - i18n
 
@@ -161,7 +156,12 @@ const AuctionEstimation = () => {
             onChange={(e) => setSkill(e.target.value)}
           />
 
-          <div className="xs:flex-row xs:gap-8 flex flex-col gap-3">
+          <div
+            className="xs:flex-row xs:gap-8 flex flex-col gap-3"
+            onKeyPress={(e) => {
+              if (e.key === 'Enter') estimation.refetch()
+            }}
+          >
             <div className="flex items-center gap-3">
               <NumericInput
                 label="Min skill"
@@ -170,6 +170,7 @@ const AuctionEstimation = () => {
                 value={minSkill}
                 onChange={setMinSkill}
                 className="max-w-[64px]"
+                enterKeyHint="next"
               />
               <NumericInput
                 label="Max skill"
@@ -178,6 +179,7 @@ const AuctionEstimation = () => {
                 value={maxSkill}
                 onChange={setMaxSkill}
                 className="max-w-[64px]"
+                enterKeyHint="next"
               />
             </div>
             <div className="flex gap-3">
@@ -188,6 +190,7 @@ const AuctionEstimation = () => {
                 value={minLevel}
                 onChange={setMinLevel}
                 className="max-w-[64px]"
+                enterKeyHint="next"
               />
               <NumericInput
                 label="Max level"
@@ -196,6 +199,7 @@ const AuctionEstimation = () => {
                 value={maxLevel}
                 onChange={setMaxLevel}
                 className="max-w-[64px]"
+                enterKeyHint="search"
               />
             </div>
           </div>
