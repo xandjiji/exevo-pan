@@ -225,85 +225,87 @@ const AuctionEstimation = () => {
 
       <LabeledTextBox
         labelText="Some similar auctions"
-        className={clsx(
-          'bg-background grid !px-6',
-          isEmpty && !notPro
-            ? 'place-items-center !py-6'
-            : 'grid-cols-2 gap-3 !py-4',
-        )}
+        className="bg-background !px-6 !py-4"
       >
-        {isEmpty && !notPro && (
-          <EmptyState text="No auctions" variant="medium" />
-        )}
+        <div className="mb-6 grid gap-6">
+          <div className="flex items-center justify-between gap-6">
+            {notPro && <AuctionEstimationAlerts.ProOnly />}
+            {estimation.data &&
+              estimation.data.estimatedValue === undefined &&
+              !isReset && <AuctionEstimationAlerts.Failed />}
 
-        {notPro &&
-          Array.from({ length: 4 }, (_, idx) => (
-            <div
-              key={idx}
-              className="card relative flex items-center gap-4 opacity-50"
-            >
-              <RareFrame />
-              <Skeleton className="grid h-14 w-14 place-content-center rounded-md">
-                <ExevoPanIcon className="h-6 w-6" />
-              </Skeleton>
-
-              <div className="grid gap-1.5">
-                <Skeleton className="h-3 w-24" />
-                <Skeleton className="h-3 w-36" />
-              </div>
-            </div>
-          ))}
-
-        {list.map((auction) => {
-          const {
-            id,
-            nickname,
-            level,
-            vocationId,
-            serverData: { serverName },
-            outfitId,
-          } = auction
-
-          return (
-            <button
-              key={id}
-              type="button"
-              onClick={() => setCharacterDetails(auction)}
-              className="cursor-pointer text-left leading-tight"
-            >
-              <CharacterMiniCard
-                isCard
-                characterData={{
-                  name: nickname,
-                  level,
-                  world: serverName,
-                  vocation: vocationUtils.getPromotedName({
-                    vocationId,
-                    level,
-                  }),
-                }}
-                outfitSrc={loadOutfitSrc(outfitId)}
-              />
-            </button>
-          )
-        })}
-      </LabeledTextBox>
-
-      <div className="mb-3 grid gap-6">
-        <div className="flex items-center justify-between gap-6">
-          {notPro && <AuctionEstimationAlerts.ProOnly />}
-          {estimation.data &&
-            estimation.data.estimatedValue === undefined &&
-            !isReset && <AuctionEstimationAlerts.Failed />}
-
-          <EstimatedPriceBox
-            estimatedValue={estimation.data?.estimatedValue}
-            similarCount={similarCount}
-            loading={isLoading || !estimation.data || isReset}
-            className="child:bg-background child:justify-center ml-auto w-[120px] shrink-0"
-          />
+            <EstimatedPriceBox
+              estimatedValue={estimation.data?.estimatedValue}
+              similarCount={similarCount}
+              loading={isLoading || !estimation.data || isReset}
+              className="child:bg-background child:justify-center ml-auto w-[120px] shrink-0"
+            />
+          </div>
         </div>
-      </div>
+
+        <div
+          className={clsx(
+            'grid',
+            isEmpty && !notPro ? 'place-items-center' : 'grid-cols-2 gap-3',
+          )}
+        >
+          {isEmpty && !notPro && (
+            <EmptyState text="No auctions" variant="medium" />
+          )}
+
+          {notPro &&
+            Array.from({ length: 4 }, (_, idx) => (
+              <div
+                key={idx}
+                className="card relative flex items-center gap-4 opacity-50"
+              >
+                <RareFrame />
+                <Skeleton className="grid h-14 w-14 place-content-center rounded-md">
+                  <ExevoPanIcon className="h-6 w-6" />
+                </Skeleton>
+
+                <div className="grid gap-1.5">
+                  <Skeleton className="h-3 w-24" />
+                  <Skeleton className="h-3 w-36" />
+                </div>
+              </div>
+            ))}
+
+          {list.map((auction) => {
+            const {
+              id,
+              nickname,
+              level,
+              vocationId,
+              serverData: { serverName },
+              outfitId,
+            } = auction
+
+            return (
+              <button
+                key={id}
+                type="button"
+                onClick={() => setCharacterDetails(auction)}
+                className="cursor-pointer text-left leading-tight"
+              >
+                <CharacterMiniCard
+                  isCard
+                  characterData={{
+                    name: nickname,
+                    level,
+                    world: serverName,
+                    vocation: vocationUtils.getPromotedName({
+                      vocationId,
+                      level,
+                    }),
+                  }}
+                  outfitSrc={loadOutfitSrc(outfitId)}
+                />
+              </button>
+            )
+          })}
+        </div>
+      </LabeledTextBox>
 
       {characterDetails && (
         <CharacterModal
