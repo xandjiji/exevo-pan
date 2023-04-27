@@ -27,8 +27,9 @@ const Template = ({
       )}
       <main
         className={clsx(
-          !mainPage &&
-            'inner-container grid place-content-start justify-center py-4 md:pt-0',
+          mainPage
+            ? 'z-1'
+            : 'inner-container z-1 grid place-content-start justify-center py-4 md:pt-0',
           className,
         )}
       >

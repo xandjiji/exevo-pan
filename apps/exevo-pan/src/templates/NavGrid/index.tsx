@@ -14,7 +14,7 @@ type NavGridProps = {
 }
 
 const NavGrid = ({ navItems }: NavGridProps) => (
-  <main className="inner-container z-1 pb-4 md:pb-8">
+  <div className="inner-container z-1 pb-4 md:pb-8">
     <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {navItems.map(({ title, description, href, sprite }) => (
         <li key={title}>
@@ -40,7 +40,7 @@ const NavGrid = ({ navItems }: NavGridProps) => (
         </li>
       ))}
     </ul>
-  </main>
+  </div>
 )
 
 export default memo(NavGrid)
