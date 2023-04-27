@@ -73,6 +73,7 @@ const AuctionEstimation = () => {
         maxLevel,
       },
       sortOptions: { descendingOrder: true },
+      paginationOptions: { pageSize: 8 },
     },
     {
       enabled: false,
@@ -88,7 +89,12 @@ const AuctionEstimation = () => {
   const isEmpty = list.length === 0
 
   return (
-    <div className="md:child:w-[684px] grid w-full gap-6">
+    <div
+      className={clsx(
+        'mx-auto grid w-full items-start gap-6 md:max-w-[1000px] md:grid-cols-[400px_1fr]',
+        !isEmpty && 'lgr:items-stretch',
+      )}
+    >
       <LabeledCard labelText="Character" className="grid !gap-6">
         <div className="grid gap-3">
           <ChipGroup
@@ -249,7 +255,7 @@ const AuctionEstimation = () => {
         className="bg-background !px-6 !py-4"
       >
         <div className={clsx('grid gap-6', isEmpty ? 'mb-4' : 'mb-6')}>
-          <div className="flex flex-col-reverse gap-6 md:flex-row md:items-center md:justify-between">
+          <div className="flex flex-col-reverse gap-6 md:items-center md:justify-between lg:flex-row">
             {notPro && <AuctionEstimationAlerts.ProOnly />}
             {estimation.data &&
               estimation.data.estimatedValue === undefined &&
@@ -267,7 +273,7 @@ const AuctionEstimation = () => {
         <div
           className={clsx(
             'grid',
-            isEmpty && !notPro ? 'place-items-center' : 'gap-3 md:grid-cols-2',
+            isEmpty && !notPro ? 'place-items-center' : 'lgr:grid-cols-2 gap-3',
           )}
         >
           {isEmpty && !notPro && (
