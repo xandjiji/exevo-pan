@@ -31,7 +31,7 @@ export default {
     },
     AuctionEstimation: {
       title: 'Estimar preço de leilões',
-      description: 'Estimate the price of any character on the Char Bazaar',
+      description: 'Estime o preço de qualquer personagem no Char Bazaar',
     },
   },
   none: 'Nenhum',

@@ -158,9 +158,9 @@ const AuctionEstimation = () => {
 
           <div
             className="xs:flex-row xs:gap-8 flex flex-col gap-3"
-            onKeyPress={(e) => {
+            /* onKeyPress={(e) => {
               if (e.key === 'Enter') estimation.refetch()
-            }}
+            }} */
           >
             <div className="flex items-center gap-3">
               <NumericInput
@@ -170,7 +170,6 @@ const AuctionEstimation = () => {
                 value={minSkill}
                 onChange={setMinSkill}
                 className="max-w-[64px]"
-                enterKeyHint="next"
               />
               <NumericInput
                 label="Max skill"
@@ -179,7 +178,6 @@ const AuctionEstimation = () => {
                 value={maxSkill}
                 onChange={setMaxSkill}
                 className="max-w-[64px]"
-                enterKeyHint="next"
               />
             </div>
             <div className="flex gap-3">
@@ -190,7 +188,6 @@ const AuctionEstimation = () => {
                 value={minLevel}
                 onChange={setMinLevel}
                 className="max-w-[64px]"
-                enterKeyHint="next"
               />
               <NumericInput
                 label="Max level"
