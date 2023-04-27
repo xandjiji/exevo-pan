@@ -233,7 +233,10 @@ const AuctionEstimation = () => {
             disabled={isLoading}
           >
             {isLoading ? (
-              <div role="alert" className="loading-spinner h-3 w-3" />
+              <div
+                role="alert"
+                className="loading-spinner highlight-30 h-3 w-3"
+              />
             ) : (
               <SearchIcon className="h-3 w-3" />
             )}
