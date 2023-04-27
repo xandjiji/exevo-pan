@@ -156,12 +156,7 @@ const AuctionEstimation = () => {
             onChange={(e) => setSkill(e.target.value)}
           />
 
-          <div
-            className="xs:flex-row xs:gap-8 flex flex-col gap-3"
-            /* onKeyPress={(e) => {
-              if (e.key === 'Enter') estimation.refetch()
-            }} */
-          >
+          <div className="xs:flex-row xs:gap-8 flex flex-col gap-3">
             <div className="flex items-center gap-3">
               <NumericInput
                 label="Min skill"
@@ -169,6 +164,9 @@ const AuctionEstimation = () => {
                 step={5}
                 value={minSkill}
                 onChange={setMinSkill}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && e.code) estimation.refetch()
+                }}
                 className="max-w-[64px]"
               />
               <NumericInput
@@ -177,6 +175,9 @@ const AuctionEstimation = () => {
                 step={5}
                 value={maxSkill}
                 onChange={setMaxSkill}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && e.code) estimation.refetch()
+                }}
                 className="max-w-[64px]"
               />
             </div>
@@ -187,6 +188,9 @@ const AuctionEstimation = () => {
                 step={50}
                 value={minLevel}
                 onChange={setMinLevel}
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter' && e.code) estimation.refetch()
+                }}
                 className="max-w-[64px]"
               />
               <NumericInput
@@ -195,8 +199,14 @@ const AuctionEstimation = () => {
                 step={50}
                 value={maxLevel}
                 onChange={setMaxLevel}
-                className="max-w-[64px]"
                 enterKeyHint="search"
+                onKeyPress={(e) => {
+                  if (e.key === 'Enter') {
+                    estimation.refetch()
+                    if (!e.code) e.currentTarget.blur()
+                  }
+                }}
+                className="max-w-[64px]"
               />
             </div>
           </div>
