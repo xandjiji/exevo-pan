@@ -2,6 +2,7 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useCallback, useState } from 'react'
+import Link from 'next/link'
 import {
   LabeledCard,
   Button,
@@ -18,6 +19,7 @@ import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
 import { TibiaIcons, SearchIcon } from 'assets/svgs'
 import { loadOutfitSrc } from 'utils'
+import { routes } from 'Constants'
 import {
   vocationOptions,
   skillOptions,
@@ -252,9 +254,9 @@ const AuctionEstimation = () => {
 
       <LabeledTextBox
         labelText={i18n.similarAuctions}
-        className="bg-background !px-6 !py-4"
+        className="bg-background flex flex-col justify-between gap-2 !px-6 !py-4"
       >
-        <div className={clsx('grid gap-6', isEmpty ? 'mb-4' : 'mb-6')}>
+        <div className={clsx('grid gap-6', isEmpty ? 'mb-2' : 'mb-4')}>
           <div className="flex flex-col-reverse gap-6 md:items-center md:justify-between lg:flex-row">
             {notPro && <AuctionEstimationAlerts.ProOnly />}
             {estimation.data &&
@@ -319,6 +321,18 @@ const AuctionEstimation = () => {
             )
           })}
         </div>
+
+        {!isEmpty && (
+          <p className="text-tsm text-right">
+            Explore more past auctions in our{' '}
+            <Link
+              href={`${routes.HOME}?mode=history&descending=true`}
+              className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
+            >
+              Char Bazaar History
+            </Link>
+          </p>
+        )}
       </LabeledTextBox>
 
       {characterDetails && (
