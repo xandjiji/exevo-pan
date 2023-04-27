@@ -28,7 +28,7 @@ const EstimatedPriceBox = ({
       <LabeledTextBox
         labelText={label ?? i18n.label}
         warning={similarCount === 0 && !loading}
-        className="text-s bg-surface flex items-center gap-1"
+        className="text-s bg-surface flex items-center justify-center gap-1"
       >
         {loading ? (
           <Skeleton className="h-4 w-full animate-pulse">

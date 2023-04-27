@@ -260,7 +260,7 @@ const AuctionEstimation = () => {
               estimatedValue={estimation.data?.estimatedValue}
               similarCount={similarCount}
               loading={isLoading || !estimation.data || isReset}
-              className="child:bg-background child:justify-center ml-auto w-[120px] shrink-0"
+              className="child:bg-background ml-auto w-[120px] shrink-0"
             />
           </div>
         </div>
