@@ -125,4 +125,15 @@ export default {
       removed: 'Session was removed',
     },
   },
+  AuctionEstimation: {
+    location: 'Server location',
+    battleye: {
+      green: 'Green',
+      yellow: 'Yellow',
+    },
+    vocation: 'Vocation',
+    search: 'Search',
+    similarAuctions: 'Similar auctions',
+    emptyState: 'No auctions',
+  },
 }

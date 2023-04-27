@@ -29,18 +29,13 @@ import {
 } from '../../options'
 import { Skill } from '../../types'
 
-/* @ ToDo:
-
-- i18n
-
-*/
-
 const parseNumber = (value: string) => parseInt(value, 10)
 
 const AuctionEstimation = () => {
   const {
-    translations: { common },
+    translations: { common, calculators },
   } = useTranslations()
+  const i18n = calculators.AuctionEstimation
 
   const [pvp, setPvp] = useState<string>()
   const [location, setLocation] = useState<string>()
@@ -106,7 +101,7 @@ const AuctionEstimation = () => {
             onChange={(e) => setPvp(e.target.value)}
           />
           <ChipGroup
-            label="Localização do servidor"
+            label={i18n.location}
             toggleable
             options={locationOptions}
             value={location}
@@ -117,10 +112,10 @@ const AuctionEstimation = () => {
             toggleable
             options={[
               {
-                /* @ ToDo: i18n */
                 name: (
                   <>
-                    <TibiaIcons.BattlEye color="battleGreen" /> Verde
+                    <TibiaIcons.BattlEye color="battleGreen" />{' '}
+                    {i18n.battleye.green}
                   </>
                 ),
                 value: 'true',
@@ -128,7 +123,8 @@ const AuctionEstimation = () => {
               {
                 name: (
                   <>
-                    <TibiaIcons.BattlEye color="battleYellow" /> Amarelo
+                    <TibiaIcons.BattlEye color="battleYellow" />{' '}
+                    {i18n.battleye.yellow}
                   </>
                 ),
                 value: 'false',
@@ -141,7 +137,7 @@ const AuctionEstimation = () => {
 
         <div className="grid gap-3">
           <ChipGroup
-            label="Vocation"
+            label={i18n.vocation}
             toggleable
             options={vocationOptions}
             value={vocation}
@@ -234,13 +230,13 @@ const AuctionEstimation = () => {
 
           <Button onClick={() => estimation.refetch()} pill>
             <SearchIcon className="h-3 w-3" />
-            Search
+            {i18n.search}
           </Button>
         </div>
       </LabeledCard>
 
       <LabeledTextBox
-        labelText="Some similar auctions"
+        labelText={i18n.similarAuctions}
         className="bg-background !px-6 !py-4"
       >
         {isLoading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
@@ -268,7 +264,7 @@ const AuctionEstimation = () => {
           )}
         >
           {isEmpty && !notPro && (
-            <EmptyState text="No auctions" variant="medium" />
+            <EmptyState text={i18n.emptyState} variant="medium" />
           )}
 
           {notPro &&
