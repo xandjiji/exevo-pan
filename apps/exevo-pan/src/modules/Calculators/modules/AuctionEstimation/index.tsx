@@ -34,7 +34,6 @@ import { Skill } from '../../types'
 - charm points?
 - min tc invested?
 
-- max width / mobile
 - enter/next/mobile interactions
 
 - i18n
@@ -101,9 +100,7 @@ const AuctionEstimation = () => {
   const isEmpty = list.length === 0
 
   return (
-    <div className="grid gap-6">
-      {isLoading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
-
+    <div className="md:child:w-[684px] grid w-full gap-6">
       <LabeledCard labelText="Character" className="grid !gap-6">
         <div className="grid gap-3">
           <ChipGroup
@@ -235,8 +232,10 @@ const AuctionEstimation = () => {
         labelText="Some similar auctions"
         className="bg-background !px-6 !py-4"
       >
-        <div className={clsx('grid gap-6', isEmpty ? 'mb-3' : 'mb-6')}>
-          <div className="flex items-center justify-between gap-6">
+        {isLoading && <LoadingAlert>{common.genericLoading}</LoadingAlert>}
+
+        <div className={clsx('grid gap-6', isEmpty ? 'mb-4' : 'mb-6')}>
+          <div className="flex flex-col-reverse gap-6 md:flex-row md:items-center md:justify-between">
             {notPro && <AuctionEstimationAlerts.ProOnly />}
             {estimation.data &&
               estimation.data.estimatedValue === undefined &&
@@ -254,7 +253,7 @@ const AuctionEstimation = () => {
         <div
           className={clsx(
             'grid',
-            isEmpty && !notPro ? 'place-items-center' : 'grid-cols-2 gap-3',
+            isEmpty && !notPro ? 'place-items-center' : 'gap-3 md:grid-cols-2',
           )}
         >
           {isEmpty && !notPro && (
