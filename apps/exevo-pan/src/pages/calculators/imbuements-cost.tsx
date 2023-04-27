@@ -81,7 +81,10 @@ export default function Calculator() {
         />
       </Head>
 
-      <Template currentRoute={pageRoute}>
+      <Template
+        currentRoute={pageRoute}
+        className="grid items-start justify-center"
+      >
         <ImbuementsCost />
       </Template>
     </>

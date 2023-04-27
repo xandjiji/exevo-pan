@@ -71,7 +71,7 @@ export default function Calculator() {
 
       <Template
         currentRoute={pageRoute}
-        className="md:child:shrink-0 items-start gap-6 md:flex"
+        className="md:child:shrink-0 grid items-start justify-center gap-6 md:flex"
       >
         <Stamina />
       </Template>
