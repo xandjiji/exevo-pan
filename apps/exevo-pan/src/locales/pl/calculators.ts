@@ -135,5 +135,7 @@ export default {
     search: 'Search',
     similarAuctions: 'Similar auctions',
     emptyState: 'No auctions',
+    goToHistory: 'Explore more past auctions using our {{history}}',
+    history: 'Char Bazaar History',
   },
 }

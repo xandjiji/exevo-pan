@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 import clsx from 'clsx'
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { useCallback, useState } from 'react'
 import Link from 'next/link'
 import {
@@ -324,13 +324,16 @@ const AuctionEstimation = () => {
 
         {!isEmpty && (
           <p className="text-tsm text-right">
-            Explore more past auctions in our{' '}
-            <Link
-              href={`${routes.HOME}?mode=history&descending=true`}
-              className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
-            >
-              Char Bazaar History
-            </Link>
+            {templateMessage(i18n.goToHistory, {
+              history: (
+                <Link
+                  href={`${routes.HOME}?mode=history&descending=true`}
+                  className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
+                >
+                  {i18n.history}
+                </Link>
+              ),
+            })}
           </p>
         )}
       </LabeledTextBox>

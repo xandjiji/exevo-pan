@@ -136,5 +136,7 @@ export default {
     search: 'Buscar',
     similarAuctions: 'Leilões similares',
     emptyState: 'Nenhum leilão',
+    goToHistory: 'Explore mais leilões passados em nosso {{history}}',
+    history: 'Histórico do Char Bazaar',
   },
 }
