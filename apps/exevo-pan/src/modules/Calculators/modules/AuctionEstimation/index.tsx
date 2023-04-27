@@ -15,6 +15,7 @@ import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import EstimatedPriceBox from 'components/EstimatedPriceBox'
 import CharacterMiniCard from 'components/CharacterMiniCard'
 import CharacterModal from 'components/CharacterModal'
+import { sortSchema } from 'shared-utils/dist/contracts/Filters/schemas'
 import { trpc } from 'lib/trpc'
 import { vocation as vocationUtils } from 'data-dictionary/dist/dictionaries/vocations'
 import { TibiaIcons, SearchIcon } from 'assets/svgs'
@@ -30,6 +31,9 @@ import { Skill } from '../../types'
 import { ProCardSkeleton } from './ProCardSkeleton'
 
 const parseNumber = (value: string) => parseInt(value, 10)
+
+const historyMode: AuctionQueryMode = 'history'
+const { urlKey: descendingUrlKey } = sortSchema.descendingOrder
 
 const AuctionEstimation = () => {
   const {
@@ -327,7 +331,7 @@ const AuctionEstimation = () => {
             {templateMessage(i18n.goToHistory, {
               history: (
                 <Link
-                  href={`${routes.HOME}?mode=history&descending=true`}
+                  href={`${routes.HOME}?mode=${historyMode}&${descendingUrlKey}=true`}
                   className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
                 >
                   {i18n.history}
