@@ -56,6 +56,8 @@ export default {
     },
     EstimatedPriceDialog: {
       heading: 'Preço estimado de leilão',
+      goToCalculator: 'Avalie mais personagens com a nossa {{calculatorPage}}',
+      calculatorPage: 'calculadora de preços',
     },
   },
   FilterControl: {

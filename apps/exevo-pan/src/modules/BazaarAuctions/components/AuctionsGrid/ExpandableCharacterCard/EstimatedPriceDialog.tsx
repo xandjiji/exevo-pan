@@ -1,5 +1,6 @@
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { useState } from 'react'
+import Link from 'next/link'
 import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
 import { Dialog } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
@@ -7,15 +8,12 @@ import EstimatedPriceBox from 'components/EstimatedPriceBox'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
 import { getSimilarCharacterFilters, loadOutfitSrc } from 'utils'
 import { trpc } from 'lib/trpc'
+import { routes } from 'Constants'
 
 type EstimatedPriceDialogProps = {
   onClose: () => void
   characterData: CharacterObject
 }
-
-/* @ ToDo:
-- link do calculator
-*/
 
 export const EstimatedPriceDialog = ({
   onClose,
@@ -71,6 +69,19 @@ export const EstimatedPriceDialog = ({
         ) : (
           <AuctionEstimationAlerts.Disclaimer />
         )}
+
+        <p className="text-tsm text-right">
+          {templateMessage(i18n.goToCalculator, {
+            calculatorPage: (
+              <Link
+                href={routes.AUCTION_ESTIMATION}
+                className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
+              >
+                {i18n.calculatorPage}
+              </Link>
+            ),
+          })}
+        </p>
       </div>
     </Dialog>
   )

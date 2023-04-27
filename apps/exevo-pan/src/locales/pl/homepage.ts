@@ -60,6 +60,8 @@ export default {
     },
     EstimatedPriceDialog: {
       heading: 'Estimated auction price',
+      goToCalculator: 'Estimate more prices with our {{calculatorPage}}',
+      calculatorPage: 'auction price calculator',
     },
   },
   FilterControl: {
