@@ -3,12 +3,7 @@ import clsx from 'clsx'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { useCallback, useState } from 'react'
 import Link from 'next/link'
-import {
-  LabeledCard,
-  Button,
-  NumericInput,
-  LabeledTextBox,
-} from 'components/Atoms'
+import { LabeledCard, Button, Input, LabeledTextBox } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import AuctionEstimationAlerts from 'components/AuctionEstimationAlerts'
@@ -94,6 +89,11 @@ const AuctionEstimation = () => {
   const notPro = !isReset && estimation.data?.estimatedValue === -1
   const isEmpty = list.length === 0
 
+  const invalidSkill =
+    minSkill !== undefined && maxSkill !== undefined && minSkill > maxSkill
+  const invalidLevel =
+    minLevel !== undefined && maxLevel !== undefined && minLevel > maxLevel
+
   return (
     <div
       className={clsx(
@@ -162,49 +162,64 @@ const AuctionEstimation = () => {
             onChange={(e) => setSkill(e.target.value)}
           />
 
-          <div className="xs:flex-row xs:gap-8 flex flex-col gap-3">
+          <div className="flex flex-col gap-3 sm:flex-row sm:gap-8">
             <div className="flex items-center gap-3">
-              <NumericInput
+              <Input
                 label="Min skill"
-                alwaysValid
+                type="number"
                 step={5}
-                value={minSkill}
-                onChange={setMinSkill}
+                min={0}
+                max={maxSkill}
+                placeholder="0"
+                value={minSkill ?? ''}
+                error={invalidSkill}
+                onChange={(e) => setMinSkill(+e.target.value)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && e.code) estimation.refetch()
                 }}
-                className="max-w-[64px]"
+                className="max-w-[72px]"
               />
-              <NumericInput
+              <Input
                 label="Max skill"
-                alwaysValid
+                type="number"
                 step={5}
-                value={maxSkill}
-                onChange={setMaxSkill}
+                min={minSkill}
+                placeholder="150"
+                value={maxSkill ?? ''}
+                error={invalidSkill}
+                onChange={(e) => setMaxSkill(+e.target.value)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && e.code) estimation.refetch()
                 }}
-                className="max-w-[64px]"
+                className="max-w-[72px]"
               />
             </div>
+
             <div className="flex gap-3">
-              <NumericInput
+              <Input
                 label="Min level"
-                alwaysValid
+                type="number"
                 step={50}
-                value={minLevel}
-                onChange={setMinLevel}
+                min={0}
+                max={maxLevel}
+                placeholder="0"
+                value={minLevel ?? ''}
+                error={invalidLevel}
+                onChange={(e) => setMinLevel(+e.target.value)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && e.code) estimation.refetch()
                 }}
-                className="max-w-[64px]"
+                className="max-w-[80px]"
               />
-              <NumericInput
+              <Input
                 label="Max level"
-                alwaysValid
+                type="number"
                 step={50}
-                value={maxLevel}
-                onChange={setMaxLevel}
+                min={minLevel}
+                placeholder="3000"
+                value={maxLevel ?? ''}
+                error={invalidLevel}
+                onChange={(e) => setMaxLevel(+e.target.value)}
                 enterKeyHint="search"
                 onKeyPress={(e) => {
                   if (e.key === 'Enter') {
@@ -212,7 +227,7 @@ const AuctionEstimation = () => {
                     if (!e.code) e.currentTarget.blur()
                   }
                 }}
-                className="max-w-[64px]"
+                className="max-w-[80px]"
               />
             </div>
           </div>
