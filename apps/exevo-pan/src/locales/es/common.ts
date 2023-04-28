@@ -200,17 +200,6 @@ export default {
         firstAddon: 'Primer addon',
         secondAddon: 'Segundo addon',
       },
-      /* @ ToDo: i18n */
-      SkillDialog: {
-        heading: 'Character skills',
-        loyaltyPoints: 'points',
-        none: 'None',
-        skillValue: 'Skill value',
-        tooltip: 'Required cost to achieve this skill using',
-        skillWithLoyalty: 'Skill with bonus Loyalty',
-        externalCalculator:
-          'Experiment with this character in our skills calculator',
-      },
     },
   },
   StepperCompletedLabel: 'Paso completado',

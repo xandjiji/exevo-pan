@@ -193,16 +193,6 @@ export default {
         firstAddon: 'Primeiro addon',
         secondAddon: 'Segundo addon',
       },
-      SkillDialog: {
-        heading: 'Skills do personagem',
-        loyaltyPoints: 'pontos',
-        none: 'Nenhum',
-        skillValue: 'Valor da skill',
-        tooltip: 'Custo necessário para atingir essa skill usando',
-        skillWithLoyalty: 'Skill com bônus de Loyalty',
-        externalCalculator:
-          'Experimente com esse personagem em nossa calculadora de skills',
-      },
     },
   },
   StepperCompletedLabel: 'Passo completado',

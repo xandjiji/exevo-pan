@@ -44,7 +44,8 @@ export default {
         added: 'Added to favorites',
         removed: 'Removed from favorites',
       },
-      estimate: 'Estimate price',
+      estimatePrice: 'Estimate price',
+      estimateSkills: 'Estimate skills',
     },
     /* @ ToDo: i18n */
     useAuctionNotifications: {
@@ -62,6 +63,16 @@ export default {
       heading: 'Estimated auction price',
       goToCalculator: 'Estimate more prices with our {{calculatorPage}}',
       calculatorPage: 'auction price calculator',
+    },
+    SkillDialog: {
+      heading: 'Character skills',
+      loyaltyPoints: 'points',
+      none: 'None',
+      skillValue: 'Skill value',
+      tooltip: 'Required cost to achieve this skill using',
+      skillWithLoyalty: 'Skill with bonus Loyalty',
+      externalCalculator:
+        'Experiment with this character in our skills calculator',
     },
   },
   FilterControl: {

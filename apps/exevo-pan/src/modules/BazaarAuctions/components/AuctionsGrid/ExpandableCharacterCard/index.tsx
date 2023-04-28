@@ -13,6 +13,7 @@ import {
   OutlineAddIcon,
   OutlineRemoveIcon,
   AlertIcon,
+  WeightIcon,
   CalculatorIcon,
 } from 'assets/svgs'
 import { permalinkResolver, getSimilarCharacterFilters } from 'utils'
@@ -21,6 +22,7 @@ import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { useAuctionNotifications } from '../useAuctionNotifications'
 import { EstimatedPriceDialog } from './EstimatedPriceDialog'
+import SkillDialog from './SkillDialog'
 import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
@@ -103,7 +105,8 @@ const ExpandableCharacterCard = ({
 
   const auctionNotification = useAuctionNotifications()
 
-  const [openEstimated, setOpenEstimated] = useState(false)
+  const [openEstimatePrice, setOpenEstimatePrice] = useState(false)
+  const [openEstimateSkills, setOpenEstimateSkills] = useState(false)
 
   return (
     <>
@@ -153,9 +156,14 @@ const ExpandableCharacterCard = ({
                   }),
               },
               {
-                label: i18n.estimate,
+                label: i18n.estimateSkills,
+                icon: WeightIcon,
+                onSelect: () => setOpenEstimateSkills(true),
+              },
+              {
+                label: i18n.estimatePrice,
                 icon: CalculatorIcon,
-                onSelect: () => setOpenEstimated(true),
+                onSelect: () => setOpenEstimatePrice(true),
               },
             ]}
           >
@@ -178,9 +186,18 @@ const ExpandableCharacterCard = ({
         />
       )}
 
-      {openEstimated && (
+      {openEstimateSkills && (
+        <SkillDialog
+          onClose={() => setOpenEstimateSkills(false)}
+          isOpen
+          vocationId={characterData.vocationId}
+          skills={characterData.skills}
+        />
+      )}
+
+      {openEstimatePrice && (
         <EstimatedPriceDialog
-          onClose={() => setOpenEstimated(false)}
+          onClose={() => setOpenEstimatePrice(false)}
           characterData={characterData}
         />
       )}

@@ -41,7 +41,8 @@ export default {
         added: 'Adicionado aos favoritos',
         removed: 'Removido dos favoritos',
       },
-      estimate: 'Estimar preço',
+      estimatePrice: 'Estimar preço',
+      estimateSkills: 'Estimar skills',
     },
     useAuctionNotifications: {
       heading: 'Configurar notificação',
@@ -58,6 +59,16 @@ export default {
       heading: 'Preço estimado de leilão',
       goToCalculator: 'Avalie mais personagens com a nossa {{calculatorPage}}',
       calculatorPage: 'calculadora de preços',
+    },
+    SkillDialog: {
+      heading: 'Skills do personagem',
+      loyaltyPoints: 'pontos',
+      none: 'Nenhum',
+      skillValue: 'Valor da skill',
+      tooltip: 'Custo necessário para atingir essa skill usando',
+      skillWithLoyalty: 'Skill com bônus de Loyalty',
+      externalCalculator:
+        'Experimente com esse personagem em nossa calculadora de skills',
     },
   },
   FilterControl: {
