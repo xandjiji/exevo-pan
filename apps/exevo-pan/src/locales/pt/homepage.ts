@@ -85,6 +85,8 @@ export default {
       rareAchievements: 'Achievements raros',
       rareItems: 'Items raros',
       misc: 'Diversos',
+      minCharmPoints: 'Min pontos de charm',
+      maxCharmPoints: 'Max pontos de charm',
     },
     placeholders: {
       server: 'Escolha um servidor',

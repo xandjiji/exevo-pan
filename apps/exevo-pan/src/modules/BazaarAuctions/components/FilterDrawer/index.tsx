@@ -112,6 +112,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     controlledValue: filterState.tcInvested,
   })
 
+  const [minCharmPoints, setMinCharmPoints] = useDebouncedFilter({
+    key: 'minCharmPoints',
+    controlledValue: filterState.minCharmPoints,
+  })
+
+  const [maxCharmPoints, setMaxCharmPoints] = useDebouncedFilter({
+    key: 'maxCharmPoints',
+    controlledValue: filterState.maxCharmPoints,
+  })
+
   const rareItems = useRareItemSet({
     rareItemData,
     currentFilterSet: filterState.auctionIds,
@@ -758,8 +768,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup>
-          <S.InputWrapper>
+        <FilterGroup className="grid gap-4">
+          <S.InputWrapper style={{ marginBottom: 0 }}>
             <S.AutocompleteInput
               id="charms-input"
               label="Charms"
@@ -793,22 +803,51 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               {homepage.FilterDrawer.toggleAll.charms}
             </Chip>
           </S.InputWrapper>
-          <S.ChipWrapper id="charms-list">
-            {[...filterState.charmsSet].map((charm) => (
-              <Chip
-                key={charm}
-                onClose={() =>
-                  dispatch({
-                    type: 'TOGGLE_FILTER_SET',
-                    key: 'charmsSet',
-                    value: charm,
-                  })
-                }
-              >
-                {charm}
-              </Chip>
-            ))}
-          </S.ChipWrapper>
+
+          <>
+            {filterState.charmsSet.size > 0 && (
+              <S.ChipWrapper id="charms-list">
+                {[...filterState.charmsSet].map((charm) => (
+                  <Chip
+                    key={charm}
+                    onClose={() =>
+                      dispatch({
+                        type: 'TOGGLE_FILTER_SET',
+                        key: 'charmsSet',
+                        value: charm,
+                      })
+                    }
+                  >
+                    {charm}
+                  </Chip>
+                ))}
+              </S.ChipWrapper>
+            )}
+          </>
+
+          <S.DoubleColumnInput className="!w-64">
+            <NumberInput
+              min={0}
+              max={maxCharmPoints}
+              label={homepage.FilterDrawer.labels.minCharmPoints}
+              placeholder={DEFAULT_FILTER_OPTIONS.minCharmPoints.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.minCharmPoints}
+              initialValue={minCharmPoints}
+              dispatchValue={setMinCharmPoints}
+              enterKeyHint="next"
+              step={500}
+            />
+            <NumberInput
+              min={maxCharmPoints}
+              max={DEFAULT_FILTER_OPTIONS.maxCharmPoints}
+              label={homepage.FilterDrawer.labels.maxCharmPoints}
+              defaultValue={DEFAULT_FILTER_OPTIONS.maxCharmPoints}
+              initialValue={maxCharmPoints}
+              dispatchValue={setMaxCharmPoints}
+              enterKeyHint="next"
+              step={500}
+            />
+          </S.DoubleColumnInput>
         </FilterGroup>
 
         <FilterGroup>
