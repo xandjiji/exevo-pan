@@ -42,6 +42,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { common, homepage },
   } = useTranslations()
+  const i18n = homepage.FilterDrawer
 
   const { data } = useSession()
   const isPro = data?.user.proStatus ?? false
@@ -138,7 +139,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>
         <div className="flex w-full flex-grow items-center justify-between">
-          {homepage.FilterDrawer.title}
+          {i18n.title}
           <button
             type="button"
             disabled={isFilterReset}
@@ -146,7 +147,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             onClick={() => dispatch({ type: 'RESET_FILTERS' })}
             className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow-md transition-all hover:shadow-lg active:shadow-inner disabled:invisible disabled:opacity-0"
           >
-            {homepage.FilterDrawer.resetFilters}
+            {i18n.resetFilters}
             <TibiaIcons.Reset style={{ marginLeft: 8, marginRight: -4 }} />
           </button>
         </div>
@@ -154,7 +155,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
       <Drawer.Body className="grid grid-cols-1 gap-4">
         <FilterGroup>
           <Checkbox
-            label={homepage.FilterDrawer.labels.biddedOnly}
+            label={i18n.labels.biddedOnly}
             checked={filterState.biddedOnly}
             onClick={() =>
               dispatch({ type: 'TOGGLE_FILTER', key: 'biddedOnly' })
@@ -165,7 +166,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         <FilterGroup>
           <S.Input
             id="search-nickname-input"
-            label={homepage.FilterDrawer.labels.searchNickname}
+            label={i18n.labels.searchNickname}
             placeholder="Nickname"
             allowClear
             value={nickname}
@@ -175,7 +176,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           />
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
+        <FilterGroup label={i18n.labels.vocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.NONE)}
@@ -330,7 +331,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               }
             >
               <TibiaIcons.BattlEye color="battleGreen" />
-              {homepage.FilterDrawer.green}
+              {i18n.green}
             </S.IconChip>
             <S.IconChip
               overrideStatus={filterState.battleye.has(false)}
@@ -343,12 +344,12 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               }
             >
               <TibiaIcons.BattlEye color="battleYellow" />
-              {homepage.FilterDrawer.yellow}
+              {i18n.yellow}
             </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.labels.serverLocation}>
+        <FilterGroup label={i18n.labels.serverLocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.location.has(
@@ -403,7 +404,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             id="server-input"
             label="Server"
             aria-controls="server-list"
-            placeholder={homepage.FilterDrawer.placeholders.server}
+            placeholder={i18n.placeholders.server}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(
               currentServerOptions,
@@ -440,7 +441,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.labels.storeItems}>
+        <FilterGroup label={i18n.labels.storeItems}>
           <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="Training Dummy"
@@ -698,7 +699,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label={homepage.FilterDrawer.labels.tcInvested}
+            label={i18n.labels.tcInvested}
             value={tcInvested}
             onChange={setTcInvested}
             placeholder="0"
@@ -718,7 +719,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               id="imbuements-input"
               label="Imbuements"
               aria-controls="imbuements-list"
-              placeholder={homepage.FilterDrawer.placeholders.imbuements}
+              placeholder={i18n.placeholders.imbuements}
               itemList={useOptionsSet(
                 imbuementOptions,
                 filterState.imbuementsSet,
@@ -747,7 +748,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              {homepage.FilterDrawer.toggleAll.imbuements}
+              {i18n.toggleAll.imbuements}
             </Chip>
           </S.InputWrapper>
           <S.ChipWrapper id="imbuements-list">
@@ -774,7 +775,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               id="charms-input"
               label="Charms"
               aria-controls="charms-list"
-              placeholder={homepage.FilterDrawer.placeholders.charms}
+              placeholder={i18n.placeholders.charms}
               itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
@@ -800,7 +801,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              {homepage.FilterDrawer.toggleAll.charms}
+              {i18n.toggleAll.charms}
             </Chip>
           </S.InputWrapper>
 
@@ -829,7 +830,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <NumberInput
               min={0}
               max={maxCharmPoints}
-              label={homepage.FilterDrawer.labels.minCharmPoints}
+              label={i18n.labels.minCharmPoints}
               placeholder={DEFAULT_FILTER_OPTIONS.minCharmPoints.toString()}
               defaultValue={DEFAULT_FILTER_OPTIONS.minCharmPoints}
               initialValue={minCharmPoints}
@@ -840,7 +841,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <NumberInput
               min={maxCharmPoints}
               max={DEFAULT_FILTER_OPTIONS.maxCharmPoints}
-              label={homepage.FilterDrawer.labels.maxCharmPoints}
+              label={i18n.labels.maxCharmPoints}
+              placeholder={DEFAULT_FILTER_OPTIONS.maxCharmPoints.toString()}
               defaultValue={DEFAULT_FILTER_OPTIONS.maxCharmPoints}
               initialValue={maxCharmPoints}
               dispatchValue={setMaxCharmPoints}
@@ -855,7 +857,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             id="quest-input"
             label="Quests"
             aria-controls="quest-list"
-            placeholder={homepage.FilterDrawer.placeholders.quests}
+            placeholder={i18n.placeholders.quests}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(questOptions, filterState.questSet)}
             onItemSelect={useCallback(
@@ -887,9 +889,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         <FilterGroup>
           <S.AutocompleteInput
             id="achievement-input"
-            label={homepage.FilterDrawer.labels.rareAchievements}
+            label={i18n.labels.rareAchievements}
             aria-controls="achievement-list"
-            placeholder={homepage.FilterDrawer.placeholders.achievements}
+            placeholder={i18n.placeholders.achievements}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(
               achievementOptions,
@@ -937,16 +939,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                       isPro && 'text-rare font-bold',
                     )}
                   >
-                    {homepage.FilterDrawer.labels.rareItems}
-                    <InfoTooltip
-                      labelSize
-                      content={homepage.FilterDrawer.tooltips.rareItems}
-                    />
+                    {i18n.labels.rareItems}
+                    <InfoTooltip labelSize content={i18n.tooltips.rareItems} />
                   </InfoTooltip.LabelWrapper>
                 }
-                aria-label={homepage.FilterDrawer.labels.rareItems}
+                aria-label={i18n.labels.rareItems}
                 aria-controls="rare-items-list"
-                placeholder={homepage.FilterDrawer.placeholders.rareItems}
+                placeholder={i18n.placeholders.rareItems}
                 itemList={rareItems.itemList}
                 disabled={!isPro}
                 onItemSelect={
@@ -963,7 +962,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 gray={!isPro}
                 className={clsx(!isPro && 'cursor-not-allowed')}
               >
-                {homepage.FilterDrawer.toggleAll.items}
+                {i18n.toggleAll.items}
               </Chip>
             </S.InputWrapper>
 
@@ -985,10 +984,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </FilterGroup>
         )}
 
-        <FilterGroup
-          label={homepage.FilterDrawer.labels.misc}
-          style={{ border: 'none' }}
-        >
+        <FilterGroup label={i18n.labels.misc} style={{ border: 'none' }}>
           <S.ChipWrapper>
             {proTags.map((tag) => {
               const isActive = filterState.tags.has(tag)
@@ -1027,7 +1023,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <Tooltip
               style={{ width: 280 }}
               offset={[0, 6]}
-              content={homepage.FilterDrawer.tooltips.rareNicknames}
+              content={i18n.tooltips.rareNicknames}
             >
               <Chip
                 overrideStatus={filterState.rareNick}
@@ -1035,7 +1031,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   dispatch({ type: 'TOGGLE_FILTER', key: 'rareNick' })
                 }
               >
-                {homepage.FilterDrawer.rareNicknamesButton}
+                {i18n.rareNicknamesButton}
               </Chip>
             </Tooltip>
 
