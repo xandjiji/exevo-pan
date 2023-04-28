@@ -24,7 +24,7 @@ import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import useRareItemSet from './useRareItemSet'
 import FilterGroup from './FilterGroup'
-import LevelInput from './LevelInput'
+import NumberInput from './NumberInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
 import * as S from './atoms'
@@ -505,7 +505,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <S.DoubleColumnInput>
-            <LevelInput
+            <NumberInput
               min={DEFAULT_FILTER_OPTIONS.minLevel}
               max={maxLevel}
               label="Min level"
@@ -516,7 +516,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               enterKeyHint="next"
             />
 
-            <LevelInput
+            <NumberInput
               min={minLevel}
               label="Max level"
               placeholder={DEFAULT_FILTER_OPTIONS.maxLevel.toString()}
@@ -530,7 +530,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <S.DoubleColumnInput className="mb-4">
-            <LevelInput
+            <NumberInput
               min={0}
               max={maxSkill}
               label="Min skill"
@@ -539,8 +539,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               initialValue={minSkill}
               dispatchValue={setMinSkill}
               enterKeyHint="next"
+              step={10}
             />
-            <LevelInput
+            <NumberInput
               min={minSkill}
               max={DEFAULT_FILTER_OPTIONS.maxSkill}
               label="Max skill"
@@ -549,6 +550,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               initialValue={maxSkill}
               dispatchValue={setMaxSkill}
               enterKeyHint="next"
+              step={10}
             />
           </S.DoubleColumnInput>
 

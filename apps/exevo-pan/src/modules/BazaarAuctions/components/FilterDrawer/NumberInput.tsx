@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react'
 import { Input } from 'components/Atoms'
 import { InputProps } from 'components/Atoms/Input/types'
 
-type LevelInputProps = {
+type NumberInputProps = {
   dispatchValue: (value: number) => void
   initialValue: number
   defaultValue: number
 } & Omit<InputProps, 'ref'> &
   AccessibleLabelProps
 
-const LevelInput = ({
+const NumberInput = ({
   dispatchValue,
   initialValue,
   defaultValue,
   ...props
-}: LevelInputProps) => {
+}: NumberInputProps) => {
   const [value, setValue] = useState<string | number>(initialValue)
 
   useEffect(() => {
@@ -43,4 +43,4 @@ const LevelInput = ({
   )
 }
 
-export default LevelInput
+export default NumberInput
