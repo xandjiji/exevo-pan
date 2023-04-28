@@ -177,7 +177,7 @@ const AuctionEstimation = () => {
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && e.code) estimation.refetch()
                 }}
-                className="max-w-[72px]"
+                className="max-w-[74px]"
               />
               <Input
                 label="Max skill"
@@ -191,7 +191,7 @@ const AuctionEstimation = () => {
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && e.code) estimation.refetch()
                 }}
-                className="max-w-[72px]"
+                className="max-w-[74px]"
               />
             </div>
 
