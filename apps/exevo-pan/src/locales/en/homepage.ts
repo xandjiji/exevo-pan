@@ -81,7 +81,6 @@ export default {
       vocation: 'Vocation',
       serverLocation: 'Server location',
       storeItems: 'Store items',
-      minSkill: 'Minimum skill level',
       tcInvested: 'Tibia Coins invested',
       biddedOnly: 'Bidded only',
       rareItems: 'Rare items',

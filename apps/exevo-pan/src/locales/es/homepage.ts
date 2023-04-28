@@ -90,7 +90,6 @@ export default {
       vocation: 'Vocación',
       serverLocation: 'Ubicación del servidor',
       storeItems: 'Store items',
-      minSkill: 'Skill level mínimo',
       /* @ ToDo: i18n */
       tcInvested: 'Tibia Coins invested',
       /* @ ToDo: i18n */

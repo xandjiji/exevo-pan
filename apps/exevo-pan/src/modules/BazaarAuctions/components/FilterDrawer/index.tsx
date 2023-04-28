@@ -11,7 +11,6 @@ import {
   Drawer,
   DrawerFooter,
   Chip,
-  Slider,
   Checkbox,
   NumericInput,
 } from 'components/Atoms'
@@ -98,7 +97,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     key: 'minSkill',
     controlledValue: filterState.minSkill,
   })
-  const [, setMaxSkill] = useDebouncedFilter({
+  const [maxSkill, setMaxSkill] = useDebouncedFilter({
     key: 'maxSkill',
     controlledValue: filterState.maxSkill,
   })
@@ -505,7 +504,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </FilterGroup>
 
         <FilterGroup>
-          <div className="grid w-44 grid-cols-2 gap-1.5">
+          <S.DoubleColumnInput>
             <LevelInput
               min={DEFAULT_FILTER_OPTIONS.minLevel}
               max={maxLevel}
@@ -526,30 +525,33 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               dispatchValue={setMaxLevel}
               enterKeyHint="next"
             />
-          </div>
+          </S.DoubleColumnInput>
         </FilterGroup>
 
         <FilterGroup>
-          <Slider
-            id="skill-slider"
-            label="Skill"
-            showInput
-            aria-label={homepage.FilterDrawer.labels.minSkill}
-            min={10}
-            max={130}
-            value={minSkill}
-            onChange={useCallback(
-              (event: React.ChangeEvent<HTMLInputElement>) => {
-                setMinSkill(+event.target.value)
-                setMaxSkill(DEFAULT_FILTER_OPTIONS.maxSkill)
-              },
-              [setMinSkill, setMaxSkill],
-            )}
-            onKeyPress={blurOnEnter}
-            enterKeyHint="done"
-            className="max-w-[270px]"
-            style={{ marginBottom: 16 }}
-          />
+          <S.DoubleColumnInput className="mb-4">
+            <LevelInput
+              min={0}
+              max={maxSkill}
+              label="Min skill"
+              placeholder={DEFAULT_FILTER_OPTIONS.minSkill.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.minSkill}
+              initialValue={minSkill}
+              dispatchValue={setMinSkill}
+              enterKeyHint="next"
+            />
+            <LevelInput
+              min={minSkill}
+              max={DEFAULT_FILTER_OPTIONS.maxSkill}
+              label="Max skill"
+              placeholder={DEFAULT_FILTER_OPTIONS.maxSkill.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.maxSkill}
+              initialValue={maxSkill}
+              dispatchValue={setMaxSkill}
+              enterKeyHint="next"
+            />
+          </S.DoubleColumnInput>
+
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.skillKey.has(

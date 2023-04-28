@@ -78,3 +78,13 @@ export const ExevoProExclusive = () => {
     </NextLink>
   )
 }
+
+export const DoubleColumnInput = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div
+    className={clsx(className, 'grid w-44 grid-cols-2 gap-1.5')}
+    {...props}
+  />
+)

@@ -80,7 +80,6 @@ export default {
       vocation: 'Vocação',
       serverLocation: 'Localização do servidor',
       storeItems: 'Items da store',
-      minSkill: 'Skill level mínimo',
       tcInvested: 'Tibia Coins investidos',
       biddedOnly: 'Apenas com lance',
       rareAchievements: 'Achievements raros',
