@@ -17,21 +17,21 @@ import {
   getPercentageLeft,
 } from './utils'
 import { skillOptions } from './options'
-import { SkillDialogProps, Skill } from './types'
+import { EstimatedSkillDialogProps, Skill } from './types'
 
 const Group = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div className={clsx('grid gap-2', className)} {...props} />
 )
 
-const SkillDialog = ({
+export const EstimatedSkillDialog = ({
   vocationId,
   skills,
   ...dialogProps
-}: SkillDialogProps) => {
+}: EstimatedSkillDialogProps) => {
   const {
     translations: { common, homepage },
   } = useTranslations()
-  const i18n = homepage.AuctionsGrid.SkillDialog
+  const i18n = homepage.AuctionsGrid.EstimatedSkillDialog
 
   const [loyaltyBonus, setLoyaltyBonus] = useStoredState('cm-loyalty', 0)
 
@@ -146,5 +146,3 @@ const SkillDialog = ({
     </Dialog>
   )
 } // ti amamus papai
-
-export default SkillDialog

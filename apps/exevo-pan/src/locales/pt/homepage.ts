@@ -60,7 +60,7 @@ export default {
       goToCalculator: 'Avalie mais personagens com a nossa {{calculatorPage}}',
       calculatorPage: 'calculadora de preços',
     },
-    SkillDialog: {
+    EstimatedSkillDialog: {
       heading: 'Skills do personagem',
       loyaltyPoints: 'pontos',
       none: 'Nenhum',

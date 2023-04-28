@@ -1,6 +1,6 @@
 import { TypedOption } from 'components/Organisms/ChipGroup/types'
 
-export type SkillDialogProps = {
+export type EstimatedSkillDialogProps = {
   vocationId: number
   skills: CharacterSkillsObject
   isOpen: boolean

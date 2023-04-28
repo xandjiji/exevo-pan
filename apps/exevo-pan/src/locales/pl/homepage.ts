@@ -64,7 +64,7 @@ export default {
       goToCalculator: 'Estimate more prices with our {{calculatorPage}}',
       calculatorPage: 'auction price calculator',
     },
-    SkillDialog: {
+    EstimatedSkillDialog: {
       heading: 'Character skills',
       loyaltyPoints: 'points',
       none: 'None',

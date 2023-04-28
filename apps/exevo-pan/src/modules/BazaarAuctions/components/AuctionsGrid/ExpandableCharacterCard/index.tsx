@@ -22,7 +22,7 @@ import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { useAuctionNotifications } from '../useAuctionNotifications'
 import { EstimatedPriceDialog } from './EstimatedPriceDialog'
-import SkillDialog from './SkillDialog'
+import { EstimatedSkillDialog } from './EstimatedSkillDialog'
 import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
@@ -187,7 +187,7 @@ const ExpandableCharacterCard = ({
       )}
 
       {openEstimateSkills && (
-        <SkillDialog
+        <EstimatedSkillDialog
           onClose={() => setOpenEstimateSkills(false)}
           isOpen
           vocationId={characterData.vocationId}
