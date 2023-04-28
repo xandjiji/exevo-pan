@@ -71,8 +71,9 @@ export default {
       skillValue: 'Skill value',
       tooltip: 'Required cost to achieve this skill using',
       skillWithLoyalty: 'Skill with bonus Loyalty',
-      externalCalculator:
-        'Experiment with this character in our skills calculator',
+      goToCalculator:
+        'Experiment with this character in our {{calculatorPage}}',
+      calculatorPage: 'skills calculator',
     },
   },
   FilterControl: {

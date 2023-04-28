@@ -67,8 +67,9 @@ export default {
       skillValue: 'Valor da skill',
       tooltip: 'Custo necessário para atingir essa skill usando',
       skillWithLoyalty: 'Skill com bônus de Loyalty',
-      externalCalculator:
-        'Experimente com esse personagem em nossa calculadora de skills',
+      goToCalculator:
+        'Experimente com esse personagem em nossa {{calculatorPage}}',
+      calculatorPage: 'calculadora de skills',
     },
   },
   FilterControl: {
