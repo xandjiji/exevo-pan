@@ -97,7 +97,7 @@ const AuctionEstimation = () => {
   return (
     <div
       className={clsx(
-        'mx-auto grid w-full items-start gap-6 md:max-w-[1000px] md:grid-cols-[400px_1fr]',
+        'mx-auto grid w-full items-start gap-6 md:max-w-[1000px] md:grid-cols-[412px_1fr]',
         !isEmpty && 'lgr:items-stretch',
       )}
     >
@@ -162,8 +162,8 @@ const AuctionEstimation = () => {
             onChange={(e) => setSkill(e.target.value)}
           />
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:gap-8">
-            <div className="flex items-center gap-3">
+          <div className="child:shrink-0 flex flex-col gap-3 sm:flex-row sm:gap-8">
+            <div className="flex shrink-0 items-center gap-3">
               <Input
                 label="Min skill"
                 type="number"
@@ -177,7 +177,7 @@ const AuctionEstimation = () => {
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && e.code) estimation.refetch()
                 }}
-                className="max-w-[74px]"
+                className="max-w-[72px]"
               />
               <Input
                 label="Max skill"
@@ -191,7 +191,7 @@ const AuctionEstimation = () => {
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' && e.code) estimation.refetch()
                 }}
-                className="max-w-[74px]"
+                className="max-w-[72px]"
               />
             </div>
 
