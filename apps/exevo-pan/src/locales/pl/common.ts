@@ -191,7 +191,6 @@ export default {
     highlightLabelText: 'Podświetl swoją aukcje',
     CharacterModal: {
       /* @ ToDo: i18n */
-      moreInfo: 'More informations',
       totalInvested: 'łącznie zainwestowano',
       /* @ ToDo: i18n */
       exclusive: '(exclusive for {{exevopro}})',

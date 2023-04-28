@@ -186,7 +186,6 @@ export default {
     BidStatus: 'Lance atual',
     highlightLabelText: 'Destaque seu leilão!',
     CharacterModal: {
-      moreInfo: 'Mais informações',
       totalInvested: 'Total investido',
       exclusive: '(exclusivo {{exevopro}})',
       SpriteBox: {

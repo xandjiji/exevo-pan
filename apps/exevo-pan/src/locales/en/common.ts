@@ -186,7 +186,6 @@ export default {
     BidStatus: 'Bid status',
     highlightLabelText: 'Highlight your auction!',
     CharacterModal: {
-      moreInfo: 'More informations',
       totalInvested: 'Total invested',
       exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {

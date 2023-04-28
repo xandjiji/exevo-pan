@@ -190,24 +190,4 @@ describe('<CharacterModal />', () => {
       }),
     ).not.toBeInTheDocument()
   })
-
-  test.skip('should open and close the skill dialog', () => {
-    const [character] = characterList
-    renderWithProviders(
-      <CharacterModal
-        characterData={{ ...character, vocationId: 1 }}
-        onClose={mockOnClose}
-      />,
-    )
-
-    userEvent.click(screen.getByRole('button', { name: 'More informations' }))
-    expect(
-      screen.getByRole('heading', { name: 'Character skills' }),
-    ).toBeInTheDocument()
-
-    userEvent.click(screen.getAllByRole('button', { name: 'Close dialog' })[1])
-    expect(
-      screen.queryByRole('heading', { name: 'Character skills' }),
-    ).not.toBeInTheDocument()
-  })
 })
