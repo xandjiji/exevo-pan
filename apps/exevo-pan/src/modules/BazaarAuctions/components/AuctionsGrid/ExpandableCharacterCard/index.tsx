@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useRef, useMemo, useState, useCallback } from 'react'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { CopyButton } from 'components/Atoms'
@@ -159,7 +160,8 @@ const ExpandableCharacterCard = ({
                 label: i18n.estimateSkills,
                 icon: WeightIcon,
                 onSelect: () => setOpenEstimateSkills(true),
-                disabled: characterData.vocationId === 0,
+                disabled:
+                  characterData.vocationId === vocation.VOCATION_IDS.NONE,
               },
               {
                 label: i18n.estimatePrice,
