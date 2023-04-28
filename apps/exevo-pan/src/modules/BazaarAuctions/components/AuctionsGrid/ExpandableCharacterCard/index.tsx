@@ -159,6 +159,7 @@ const ExpandableCharacterCard = ({
                 label: i18n.estimateSkills,
                 icon: WeightIcon,
                 onSelect: () => setOpenEstimateSkills(true),
+                disabled: characterData.vocationId === 0,
               },
               {
                 label: i18n.estimatePrice,
