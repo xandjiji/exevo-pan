@@ -61,7 +61,7 @@ export const EstimatedSkillDialog = ({
   const percentageLeft = getPercentageLeft(skillWithLoyalty)
 
   return (
-    <Dialog className="grid" heading={i18n.heading} {...dialogProps}>
+    <Dialog className="grid" isOpen heading={i18n.heading} {...dialogProps}>
       <div className="grid w-fit gap-6">
         <ChipGroup
           label="Skill"

@@ -3,7 +3,6 @@ import { TypedOption } from 'components/Organisms/ChipGroup/types'
 export type EstimatedSkillDialogProps = {
   vocationId: number
   skills: CharacterSkillsObject
-  isOpen: boolean
   onClose: () => void
 }
 

@@ -189,7 +189,6 @@ const ExpandableCharacterCard = ({
       {openEstimateSkills && (
         <EstimatedSkillDialog
           onClose={() => setOpenEstimateSkills(false)}
-          isOpen
           vocationId={characterData.vocationId}
           skills={characterData.skills}
         />
