@@ -29,6 +29,10 @@ export default {
       title: 'Dividir Loot',
       description: 'Gerencie e divida o loot das suas hunts em party',
     },
+    AuctionEstimation: {
+      title: 'Estimar preço de leilões',
+      description: 'Estime o preço de qualquer personagem no Char Bazaar',
+    },
   },
   none: 'Nenhum',
   ExerciseWeapons: {
@@ -121,5 +125,18 @@ export default {
       added: 'Sessão salva',
       removed: 'Sessão removida',
     },
+  },
+  AuctionEstimation: {
+    location: 'Localização do servidor',
+    battleye: {
+      green: 'Verde',
+      yellow: 'Amarelo',
+    },
+    vocation: 'Vocação',
+    search: 'Buscar',
+    similarAuctions: 'Leilões similares',
+    emptyState: 'Nenhum leilão',
+    goToHistory: 'Explore mais leilões passados em nosso {{history}}',
+    history: 'Histórico do Char Bazaar',
   },
 }

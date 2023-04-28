@@ -7,7 +7,7 @@ const { getSkillKey } = skillsUtil
 const SIMILAR_RANGE = {
   LEVEL: 100,
   LOW_SKILL: 10,
-  HIGH_SKILL: 5,
+  HIGH_SKILL: 4,
 }
 
 const getApproximate = {
@@ -40,13 +40,12 @@ export const getSimilarCharacterFilters = ({
   level,
   vocationId,
   skills,
-  serverData: { serverLocation, battleye, pvpType },
+  serverData: { battleye, pvpType },
 }: CharacterObject): Partial<FilterOptions> => {
   const filters: ReturnType<typeof getSimilarCharacterFilters> = {
     ...getApproximate.level(level),
     vocation: new Set([vocationId]),
     battleye: new Set([battleye]),
-    location: new Set([serverLocation.type]),
   }
 
   const vocationName = vocation.getVocationName(vocationId)

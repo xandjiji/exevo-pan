@@ -84,7 +84,7 @@ const LootSplit = () => {
   })
 
   return (
-    <div className="mx-auto flex w-full flex-col justify-center gap-6 py-10 sm:max-w-[474px] md:max-w-[unset] md:flex-row md:items-start md:pt-0">
+    <div className="mx-auto flex w-full flex-col justify-center gap-6 pt-10 sm:max-w-[474px] md:max-w-[unset] md:flex-row md:items-start md:pt-0">
       <Tabs.Group
         onChange={useCallback(
           (tabIndex: number) => setIsHistory(tabIndex === 1),

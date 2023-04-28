@@ -1,31 +1,31 @@
-import * as icons from '../../FilterDrawer/icons'
+import { TibiaIcons } from 'assets/svgs'
 
 export default {
   Vocations: {
-    None: icons.Rook,
-    Knight: icons.Knight,
-    Paladin: icons.Paladin,
-    Sorcerer: icons.Sorcerer,
-    Druid: icons.Druid,
+    None: TibiaIcons.Rook,
+    Knight: TibiaIcons.Knight,
+    Paladin: TibiaIcons.Paladin,
+    Sorcerer: TibiaIcons.Sorcerer,
+    Druid: TibiaIcons.Druid,
   },
   Pvps: {
-    Optional: icons.Dove,
-    Open: icons.WhiteSkull,
-    'Retro Open': icons.OrangeSkull,
-    Hardcore: icons.RedSkull,
-    'Retro Hardcore': icons.BlackSkull,
+    Optional: TibiaIcons.Dove,
+    Open: TibiaIcons.WhiteSkull,
+    'Retro Open': TibiaIcons.OrangeSkull,
+    Hardcore: TibiaIcons.RedSkull,
+    'Retro Hardcore': TibiaIcons.BlackSkull,
   },
-  Battleye: icons.Status,
+  Battleye: TibiaIcons.BattlEye,
   Location: {
-    EU: icons.EuFlag,
-    NA: icons.NaFlag,
-    BR: icons.BrFlag,
+    EU: TibiaIcons.EuFlag,
+    NA: TibiaIcons.NaFlag,
+    BR: TibiaIcons.BrFlag,
   },
   Skill: {
-    magic: icons.Magic,
-    distance: icons.Distance,
-    club: icons.Club,
-    sword: icons.Sword,
-    axe: icons.Axe,
+    magic: TibiaIcons.Magic,
+    distance: TibiaIcons.Distance,
+    club: TibiaIcons.Club,
+    sword: TibiaIcons.Sword,
+    axe: TibiaIcons.Axe,
   },
 }

@@ -186,22 +186,11 @@ export default {
     BidStatus: 'Lance atual',
     highlightLabelText: 'Destaque seu leilão!',
     CharacterModal: {
-      moreInfo: 'Mais informações',
       totalInvested: 'Total investido',
       exclusive: '(exclusivo {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Primeiro addon',
         secondAddon: 'Segundo addon',
-      },
-      SkillDialog: {
-        heading: 'Skills do personagem',
-        loyaltyPoints: 'pontos',
-        none: 'Nenhum',
-        skillValue: 'Valor da skill',
-        tooltip: 'Custo necessário para atingir essa skill usando',
-        skillWithLoyalty: 'Skill com bônus de Loyalty',
-        externalCalculator:
-          'Experimente com esse personagem em nossa calculadora de skills',
       },
     },
   },
@@ -248,5 +237,27 @@ export default {
     testTitle: 'Olá 👋',
     testText: 'Como vai você?',
     successMessage: 'Dispositivo registrado!',
+  },
+  AuctionEstimationAlerts: {
+    Disclaimer: {
+      first: 'Valor é sempre {{subjective}}!',
+      subjective: 'subjetivo',
+      second: 'Esta estimativa considera apenas:',
+      server: 'Tipo de servidor',
+      character: 'Skills, level e vocação',
+    },
+    Failed: {
+      message:
+        'Não foram encontrados muitos leilões similares em nossa base de dados',
+    },
+    ProOnly: {
+      message:
+        'Leilões com estimativas acima de {{freeCap}} estão disponíveis apenas para membros {{exevoPro}}',
+    },
+  },
+  EstimatedPriceBox: {
+    label: 'Preço estimado',
+    similarFound: '{{count}} leilão similar',
+    similarFoundPlural: '{{count}} leilões similares',
   },
 }

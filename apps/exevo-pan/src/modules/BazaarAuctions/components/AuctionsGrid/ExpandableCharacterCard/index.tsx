@@ -1,5 +1,6 @@
 import clsx from 'clsx'
 import { useRef, useMemo, useState, useCallback } from 'react'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import { CopyButton } from 'components/Atoms'
@@ -13,13 +14,16 @@ import {
   OutlineAddIcon,
   OutlineRemoveIcon,
   AlertIcon,
+  WeightIcon,
+  CalculatorIcon,
 } from 'assets/svgs'
-import { permalinkResolver } from 'utils'
+import { permalinkResolver, getSimilarCharacterFilters } from 'utils'
 import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'
-import { getSimilarCharacterFilters } from '../utils'
 import { useAuctionNotifications } from '../useAuctionNotifications'
+import { EstimatedPriceDialog } from './EstimatedPriceDialog'
+import { EstimatedSkillDialog } from './EstimatedSkillDialog'
 import { ExpandableCharacterCardProps } from './types'
 
 const ExpandableCharacterCard = ({
@@ -31,6 +35,7 @@ const ExpandableCharacterCard = ({
   const {
     translations: { homepage },
   } = useTranslations()
+  const i18n = homepage.AuctionsGrid.ExpandableCharacterCard
 
   const auctionId = characterDataProps.id
 
@@ -101,6 +106,9 @@ const ExpandableCharacterCard = ({
 
   const auctionNotification = useAuctionNotifications()
 
+  const [openEstimatePrice, setOpenEstimatePrice] = useState(false)
+  const [openEstimateSkills, setOpenEstimateSkills] = useState(false)
+
   return (
     <>
       <CharacterCard
@@ -108,21 +116,18 @@ const ExpandableCharacterCard = ({
           <Menu
             items={[
               {
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.details,
+                label: i18n.details,
                 icon: ExpandIcon,
                 onSelect: expandCard,
               },
               {
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.copyLink,
+                label: i18n.copyLink,
                 icon: CopyButtonIcon,
                 keepOpenAfterSelection: true,
                 onSelect: copyLinkAction,
               },
               {
-                label:
-                  homepage.AuctionsGrid.ExpandableCharacterCard.favorite[
-                    isFavorited ? 'remove' : 'add'
-                  ],
+                label: i18n.favorite[isFavorited ? 'remove' : 'add'],
                 icon: FavoriteIcon,
                 keepOpenAfterSelection: true,
                 onSelect: () => {
@@ -131,7 +136,7 @@ const ExpandableCharacterCard = ({
                 },
               },
               {
-                label: homepage.AuctionsGrid.ExpandableCharacterCard.notify,
+                label: i18n.notify,
                 icon: AlertIcon,
                 onSelect: () =>
                   auctionNotification.openNotificationsDialog({
@@ -143,14 +148,25 @@ const ExpandableCharacterCard = ({
                 disabled: !auctionNotification.isSupported || props.past,
               },
               {
-                label:
-                  homepage.AuctionsGrid.ExpandableCharacterCard.findSimilar,
+                label: i18n.findSimilar,
                 icon: SearchIcon,
                 onSelect: () =>
                   dispatch({
                     type: 'SET_SIMILAR_FILTERS',
                     filterOptions: getSimilarCharacterFilters(characterData),
                   }),
+              },
+              {
+                label: i18n.estimateSkills,
+                icon: WeightIcon,
+                onSelect: () => setOpenEstimateSkills(true),
+                disabled:
+                  characterData.vocationId === vocation.VOCATION_IDS.NONE,
+              },
+              {
+                label: i18n.estimatePrice,
+                icon: CalculatorIcon,
+                onSelect: () => setOpenEstimatePrice(true),
               },
             ]}
           >
@@ -162,6 +178,7 @@ const ExpandableCharacterCard = ({
         highlighted={forceNoHighlight ? false : !!highlightedAuction}
         characterData={characterData}
       />
+
       {isExpanded && (
         <CharacterModal
           characterData={characterData}
@@ -169,6 +186,21 @@ const ExpandableCharacterCard = ({
             if (permalink) setAuctionIdUrl(undefined)
             setExpanded(false)
           }}
+        />
+      )}
+
+      {openEstimateSkills && (
+        <EstimatedSkillDialog
+          onClose={() => setOpenEstimateSkills(false)}
+          vocationId={characterData.vocationId}
+          skills={characterData.skills}
+        />
+      )}
+
+      {openEstimatePrice && (
+        <EstimatedPriceDialog
+          onClose={() => setOpenEstimatePrice(false)}
+          characterData={characterData}
         />
       )}
     </>

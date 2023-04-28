@@ -1,12 +1,11 @@
 import { useState, useMemo, useCallback } from 'react'
 import clsx from 'clsx'
-import { useTranslations } from 'contexts/useTranslation'
+import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import { Dialog, Slider, Chip, Text, SkillBar } from 'components/Atoms'
 import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import { useStoredState } from 'hooks'
 import { generateLoyaltyMarks, skillAfterLoyalty } from 'utils'
-import { ExternalIcon } from 'assets/svgs'
 import { routes } from 'Constants'
 import { parameterNames } from 'modules/Calculators/modules/ExerciseWeapons/CharacterConfig/constants'
 import {
@@ -17,20 +16,21 @@ import {
   getPercentageLeft,
 } from './utils'
 import { skillOptions } from './options'
-import { SkillDialogProps, Skill } from './types'
+import { EstimatedSkillDialogProps, Skill } from './types'
 
 const Group = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
   <div className={clsx('grid gap-2', className)} {...props} />
 )
 
-const SkillDialog = ({
+export const EstimatedSkillDialog = ({
   vocationId,
   skills,
   ...dialogProps
-}: SkillDialogProps) => {
+}: EstimatedSkillDialogProps) => {
   const {
-    translations: { common },
+    translations: { common, homepage },
   } = useTranslations()
+  const i18n = homepage.AuctionsGrid.EstimatedSkillDialog
 
   const [loyaltyBonus, setLoyaltyBonus] = useStoredState('cm-loyalty', 0)
 
@@ -60,11 +60,7 @@ const SkillDialog = ({
   const percentageLeft = getPercentageLeft(skillWithLoyalty)
 
   return (
-    <Dialog
-      className="grid"
-      heading={common.CharacterCard.CharacterModal.SkillDialog.heading}
-      {...dialogProps}
-    >
+    <Dialog className="grid" isOpen heading={i18n.heading} {...dialogProps}>
       <div className="grid w-fit gap-6">
         <ChipGroup
           label="Skill"
@@ -80,21 +76,10 @@ const SkillDialog = ({
           displayValue
           transformDisplayedValues={useCallback(
             (value: number) =>
-              value
-                ? `${value * 72} ${
-                    common.CharacterCard.CharacterModal.SkillDialog
-                      .loyaltyPoints
-                  }`
-                : common.CharacterCard.CharacterModal.SkillDialog.none,
-            [common],
+              value ? `${value * 72} ${i18n.loyaltyPoints}` : i18n.none,
+            [i18n],
           )}
-          marks={useMemo(
-            () =>
-              generateLoyaltyMarks(
-                common.CharacterCard.CharacterModal.SkillDialog.none,
-              ),
-            [common],
-          )}
+          marks={useMemo(() => generateLoyaltyMarks(i18n.none), [i18n])}
           value={loyaltyBonus}
           onChange={(e) => setLoyaltyBonus(+e.target.value)}
         />
@@ -105,13 +90,12 @@ const SkillDialog = ({
         >
           <Group>
             <InfoTooltip.LabelWrapper className="font-bold">
-              {common.CharacterCard.CharacterModal.SkillDialog.skillValue}
+              {i18n.skillValue}
               <InfoTooltip
                 labelSize
                 content={
                   <p className="max-w-[180px] leading-relaxed">
-                    {common.CharacterCard.CharacterModal.SkillDialog.tooltip}:{' '}
-                    <strong>exercise weapons</strong>,{' '}
+                    {i18n.tooltip}: <strong>exercise weapons</strong>,{' '}
                     <strong>exercise dummy</strong> {common.and}{' '}
                     <strong>double XP/Skill event</strong>.
                   </p>
@@ -131,7 +115,7 @@ const SkillDialog = ({
 
           <Group className="min-w-fit">
             <strong className="whitespace-nowrap pr-6">
-              {common.CharacterCard.CharacterModal.SkillDialog.skillWithLoyalty}
+              {i18n.skillWithLoyalty}
             </strong>
             <SkillBar
               skillName={`${skill} (+${
@@ -143,23 +127,25 @@ const SkillDialog = ({
         </div>
       </div>
 
-      <NextLink
-        href={`${routes.EXERCISE_WEAPONS}?${[
-          `${parameterNames.vocation}=${vocation}`,
-          `${parameterNames.skill}=${skillType}`,
-          `${parameterNames.currentSkill}=${integerSkillWithLoyalty}`,
-          `${parameterNames.targetSkill}=${integerSkillWithLoyalty}`,
-          `${parameterNames.percentageLeft}=${percentageLeft}`,
-          `${parameterNames.loyalty}=${loyaltyBonus}`,
-        ].join('&')}`}
-        className="text-primaryHighlight clickable mt-8 ml-auto flex items-center gap-1.5 rounded px-1 py-0.5"
-        target="_blank"
-      >
-        {common.CharacterCard.CharacterModal.SkillDialog.externalCalculator}
-        <ExternalIcon className="fill-onSurface mb-[1px] h-4 w-4 shrink-0" />
-      </NextLink>
+      <p className="text-tsm mt-6 text-right">
+        {templateMessage(i18n.goToCalculator, {
+          calculatorPage: (
+            <NextLink
+              href={`${routes.EXERCISE_WEAPONS}?${[
+                `${parameterNames.vocation}=${vocation}`,
+                `${parameterNames.skill}=${skillType}`,
+                `${parameterNames.currentSkill}=${integerSkillWithLoyalty}`,
+                `${parameterNames.targetSkill}=${integerSkillWithLoyalty}`,
+                `${parameterNames.percentageLeft}=${percentageLeft}`,
+                `${parameterNames.loyalty}=${loyaltyBonus}`,
+              ].join('&')}`}
+              className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
+            >
+              {i18n.calculatorPage}
+            </NextLink>
+          ),
+        })}
+      </p>
     </Dialog>
   )
 } // ti amamus papai
-
-export default SkillDialog

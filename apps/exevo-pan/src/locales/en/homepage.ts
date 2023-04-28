@@ -42,6 +42,8 @@ export default {
         added: 'Added to favorites',
         removed: 'Removed from favorites',
       },
+      estimatePrice: 'Estimate price',
+      estimateSkills: 'Estimate skills',
     },
     useAuctionNotifications: {
       heading: 'Set auction notification',
@@ -53,6 +55,22 @@ export default {
       cancelButton: 'Cancel',
       confirmButton: 'Confirm',
       success: 'Notification was set!',
+    },
+    EstimatedPriceDialog: {
+      heading: 'Estimated auction price',
+      goToCalculator: 'Estimate more prices with our {{calculatorPage}}',
+      calculatorPage: 'auction price calculator',
+    },
+    EstimatedSkillDialog: {
+      heading: 'Character skills',
+      loyaltyPoints: 'points',
+      none: 'None',
+      skillValue: 'Skill value',
+      tooltip: 'Required cost to achieve this skill using',
+      skillWithLoyalty: 'Skill with bonus Loyalty',
+      goToCalculator:
+        'Experiment with this character in our {{calculatorPage}}',
+      calculatorPage: 'skills calculator',
     },
   },
   FilterControl: {
@@ -75,12 +93,13 @@ export default {
       vocation: 'Vocation',
       serverLocation: 'Server location',
       storeItems: 'Store items',
-      minSkill: 'Minimum skill level',
       tcInvested: 'Tibia Coins invested',
       biddedOnly: 'Bidded only',
       rareItems: 'Rare items',
       rareAchievements: 'Rare achievements',
       misc: 'Misc',
+      minCharmPoints: 'Min charm points',
+      maxCharmPoints: 'Max charm points',
     },
     placeholders: {
       server: 'Choose a server',

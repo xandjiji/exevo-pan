@@ -76,7 +76,7 @@ export default function Calculator({ suggestedPost }: CalculatorProps) {
 
       <Template
         currentRoute={pageRoute}
-        className="child:max-w-fit child:mx-auto gap-8"
+        className="child:max-w-fit child:mx-auto grid gap-8"
       >
         <CharmDamage />
 

@@ -10,14 +10,13 @@ import { skills } from 'data-dictionary/dist/dictionaries/skills'
 import {
   Drawer,
   DrawerFooter,
-  Switch,
   Chip,
-  Slider,
   Checkbox,
   NumericInput,
 } from 'components/Atoms'
 import { Tooltip, InfoTooltip } from 'components/Organisms'
 import { blurOnEnter, proTagsSet } from 'utils'
+import { TibiaIcons } from 'assets/svgs'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useAuctions } from '../../contexts/useAuctions'
 import useFilterServers from './useFilterServers'
@@ -25,11 +24,10 @@ import useDebouncedFilter from './useDebouncedFilter'
 import useOptionsSet from './useOptionsSet'
 import useRareItemSet from './useRareItemSet'
 import FilterGroup from './FilterGroup'
-import LevelInput from './LevelInput'
+import NumberInput from './NumberInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
 import * as S from './atoms'
-import * as Icon from './icons'
 import { FilterDrawerProps } from './types'
 
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
@@ -44,6 +42,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const {
     translations: { common, homepage },
   } = useTranslations()
+  const i18n = homepage.FilterDrawer
 
   const { data } = useSession()
   const isPro = data?.user.proStatus ?? false
@@ -99,7 +98,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     key: 'minSkill',
     controlledValue: filterState.minSkill,
   })
-  const [, setMaxSkill] = useDebouncedFilter({
+  const [maxSkill, setMaxSkill] = useDebouncedFilter({
     key: 'maxSkill',
     controlledValue: filterState.maxSkill,
   })
@@ -112,6 +111,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [tcInvested, setTcInvested] = useDebouncedFilter({
     key: 'tcInvested',
     controlledValue: filterState.tcInvested,
+  })
+
+  const [minCharmPoints, setMinCharmPoints] = useDebouncedFilter({
+    key: 'minCharmPoints',
+    controlledValue: filterState.minCharmPoints,
+  })
+
+  const [maxCharmPoints, setMaxCharmPoints] = useDebouncedFilter({
+    key: 'maxCharmPoints',
+    controlledValue: filterState.maxCharmPoints,
   })
 
   const rareItems = useRareItemSet({
@@ -130,7 +139,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     <Drawer isOpen={open} onClose={onClose} {...props}>
       <Drawer.Head onClose={onClose}>
         <div className="flex w-full flex-grow items-center justify-between">
-          {homepage.FilterDrawer.title}
+          {i18n.title}
           <button
             type="button"
             disabled={isFilterReset}
@@ -138,15 +147,15 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             onClick={() => dispatch({ type: 'RESET_FILTERS' })}
             className="text-onPrimary flex cursor-pointer items-center rounded py-1 px-3 text-[9px] font-bold uppercase tracking-wider shadow-md transition-all hover:shadow-lg active:shadow-inner disabled:invisible disabled:opacity-0"
           >
-            {homepage.FilterDrawer.resetFilters}
-            <Icon.Reset style={{ marginLeft: 8, marginRight: -4 }} />
+            {i18n.resetFilters}
+            <TibiaIcons.Reset style={{ marginLeft: 8, marginRight: -4 }} />
           </button>
         </div>
       </Drawer.Head>
       <Drawer.Body className="grid grid-cols-1 gap-4">
         <FilterGroup>
           <Checkbox
-            label={homepage.FilterDrawer.labels.biddedOnly}
+            label={i18n.labels.biddedOnly}
             checked={filterState.biddedOnly}
             onClick={() =>
               dispatch({ type: 'TOGGLE_FILTER', key: 'biddedOnly' })
@@ -157,7 +166,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         <FilterGroup>
           <S.Input
             id="search-nickname-input"
-            label={homepage.FilterDrawer.labels.searchNickname}
+            label={i18n.labels.searchNickname}
             placeholder="Nickname"
             allowClear
             value={nickname}
@@ -167,7 +176,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           />
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.labels.vocation}>
+        <FilterGroup label={i18n.labels.vocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.NONE)}
@@ -179,7 +188,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Rook />
+              <TibiaIcons.Rook />
               {VOCATION_NAMES[VOCATION_IDS.NONE]}
             </S.IconChip>
             <S.IconChip
@@ -192,7 +201,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Knight />
+              <TibiaIcons.Knight />
               {VOCATION_NAMES[VOCATION_IDS.KNIGHT]}
             </S.IconChip>
             <S.IconChip
@@ -205,7 +214,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Paladin />
+              <TibiaIcons.Paladin />
               {VOCATION_NAMES[VOCATION_IDS.PALADIN]}
             </S.IconChip>
             <S.IconChip
@@ -218,7 +227,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Sorcerer />
+              <TibiaIcons.Sorcerer />
               {VOCATION_NAMES[VOCATION_IDS.SORCERER]}
             </S.IconChip>
             <S.IconChip
@@ -231,7 +240,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Druid />
+              <TibiaIcons.Druid />
               {VOCATION_NAMES[VOCATION_IDS.DRUID]}
             </S.IconChip>
           </S.ChipWrapper>
@@ -249,7 +258,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Dove />
+              <TibiaIcons.Dove />
               {PVP_TYPES.OPTIONAL.string}
             </S.IconChip>
             <S.IconChip
@@ -262,7 +271,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.WhiteSkull />
+              <TibiaIcons.WhiteSkull />
               {PVP_TYPES.OPEN.string}
             </S.IconChip>
             <S.IconChip
@@ -275,7 +284,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.OrangeSkull />
+              <TibiaIcons.OrangeSkull />
               {PVP_TYPES.RETRO.string}
             </S.IconChip>
             <S.IconChip
@@ -288,7 +297,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.RedSkull />
+              <TibiaIcons.RedSkull />
               {PVP_TYPES.HARDCORE.string}
             </S.IconChip>
             <S.IconChip
@@ -303,7 +312,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.BlackSkull />
+              <TibiaIcons.BlackSkull />
               {PVP_TYPES.RETRO_HARDCORE.string}
             </S.IconChip>
           </S.ChipWrapper>
@@ -321,8 +330,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Status color="battleGreen" />
-              {homepage.FilterDrawer.green}
+              <TibiaIcons.BattlEye color="battleGreen" />
+              {i18n.green}
             </S.IconChip>
             <S.IconChip
               overrideStatus={filterState.battleye.has(false)}
@@ -334,13 +343,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Status color="battleYellow" />
-              {homepage.FilterDrawer.yellow}
+              <TibiaIcons.BattlEye color="battleYellow" />
+              {i18n.yellow}
             </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.labels.serverLocation}>
+        <FilterGroup label={i18n.labels.serverLocation}>
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.location.has(
@@ -354,7 +363,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.EuFlag />
+              <TibiaIcons.EuFlag />
               {SERVER_LOCATIONS.EUROPE.string}
             </S.IconChip>
             <S.IconChip
@@ -369,7 +378,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.NaFlag />
+              <TibiaIcons.NaFlag />
               {SERVER_LOCATIONS.NORTH_AMERICA.string}
             </S.IconChip>
             <S.IconChip
@@ -384,7 +393,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.BrFlag />
+              <TibiaIcons.BrFlag />
               {SERVER_LOCATIONS.SOUTH_AMERICA.string}
             </S.IconChip>
           </S.ChipWrapper>
@@ -395,7 +404,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             id="server-input"
             label="Server"
             aria-controls="server-list"
-            placeholder={homepage.FilterDrawer.placeholders.server}
+            placeholder={i18n.placeholders.server}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(
               currentServerOptions,
@@ -432,7 +441,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup label={homepage.FilterDrawer.labels.storeItems}>
+        <FilterGroup label={i18n.labels.storeItems}>
           <div className="grid grid-cols-3 gap-2">
             <Checkbox
               label="Training Dummy"
@@ -506,8 +515,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         </FilterGroup>
 
         <FilterGroup>
-          <div className="grid w-44 grid-cols-2 gap-1.5">
-            <LevelInput
+          <S.DoubleColumnInput>
+            <NumberInput
               min={DEFAULT_FILTER_OPTIONS.minLevel}
               max={maxLevel}
               label="Min level"
@@ -518,7 +527,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               enterKeyHint="next"
             />
 
-            <LevelInput
+            <NumberInput
               min={minLevel}
               label="Max level"
               placeholder={DEFAULT_FILTER_OPTIONS.maxLevel.toString()}
@@ -527,30 +536,35 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               dispatchValue={setMaxLevel}
               enterKeyHint="next"
             />
-          </div>
+          </S.DoubleColumnInput>
         </FilterGroup>
 
         <FilterGroup>
-          <Slider
-            id="skill-slider"
-            label="Skill"
-            showInput
-            aria-label={homepage.FilterDrawer.labels.minSkill}
-            min={10}
-            max={130}
-            value={minSkill}
-            onChange={useCallback(
-              (event: React.ChangeEvent<HTMLInputElement>) => {
-                setMinSkill(+event.target.value)
-                setMaxSkill(DEFAULT_FILTER_OPTIONS.maxSkill)
-              },
-              [setMinSkill, setMaxSkill],
-            )}
-            onKeyPress={blurOnEnter}
-            enterKeyHint="done"
-            className="max-w-[270px]"
-            style={{ marginBottom: 16 }}
-          />
+          <S.DoubleColumnInput className="mb-4">
+            <NumberInput
+              min={0}
+              max={maxSkill}
+              label="Min skill"
+              placeholder={DEFAULT_FILTER_OPTIONS.minSkill.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.minSkill}
+              initialValue={minSkill}
+              dispatchValue={setMinSkill}
+              enterKeyHint="next"
+              step={10}
+            />
+            <NumberInput
+              min={minSkill}
+              max={DEFAULT_FILTER_OPTIONS.maxSkill}
+              label="Max skill"
+              placeholder={DEFAULT_FILTER_OPTIONS.maxSkill.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.maxSkill}
+              initialValue={maxSkill}
+              dispatchValue={setMaxSkill}
+              enterKeyHint="next"
+              step={10}
+            />
+          </S.DoubleColumnInput>
+
           <S.ChipWrapper>
             <S.IconChip
               overrideStatus={filterState.skillKey.has(
@@ -564,7 +578,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Magic />
+              <TibiaIcons.Magic />
               Magic
             </S.IconChip>
             <S.IconChip
@@ -579,7 +593,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Distance />
+              <TibiaIcons.Distance />
               Distance
             </S.IconChip>
             <S.IconChip
@@ -594,7 +608,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Club />
+              <TibiaIcons.Club />
               Club
             </S.IconChip>
             <S.IconChip
@@ -609,7 +623,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Sword />
+              <TibiaIcons.Sword />
               Sword
             </S.IconChip>
             <S.IconChip
@@ -624,7 +638,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              <Icon.Axe />
+              <TibiaIcons.Axe />
               Axe
             </S.IconChip>
           </S.ChipWrapper>
@@ -685,7 +699,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label={homepage.FilterDrawer.labels.tcInvested}
+            label={i18n.labels.tcInvested}
             value={tcInvested}
             onChange={setTcInvested}
             placeholder="0"
@@ -705,7 +719,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               id="imbuements-input"
               label="Imbuements"
               aria-controls="imbuements-list"
-              placeholder={homepage.FilterDrawer.placeholders.imbuements}
+              placeholder={i18n.placeholders.imbuements}
               itemList={useOptionsSet(
                 imbuementOptions,
                 filterState.imbuementsSet,
@@ -734,7 +748,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              {homepage.FilterDrawer.toggleAll.imbuements}
+              {i18n.toggleAll.imbuements}
             </Chip>
           </S.InputWrapper>
           <S.ChipWrapper id="imbuements-list">
@@ -755,13 +769,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.ChipWrapper>
         </FilterGroup>
 
-        <FilterGroup>
-          <S.InputWrapper>
+        <FilterGroup className="grid gap-4">
+          <S.InputWrapper style={{ marginBottom: 0 }}>
             <S.AutocompleteInput
               id="charms-input"
               label="Charms"
               aria-controls="charms-list"
-              placeholder={homepage.FilterDrawer.placeholders.charms}
+              placeholder={i18n.placeholders.charms}
               itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
@@ -787,25 +801,55 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 })
               }
             >
-              {homepage.FilterDrawer.toggleAll.charms}
+              {i18n.toggleAll.charms}
             </Chip>
           </S.InputWrapper>
-          <S.ChipWrapper id="charms-list">
-            {[...filterState.charmsSet].map((charm) => (
-              <Chip
-                key={charm}
-                onClose={() =>
-                  dispatch({
-                    type: 'TOGGLE_FILTER_SET',
-                    key: 'charmsSet',
-                    value: charm,
-                  })
-                }
-              >
-                {charm}
-              </Chip>
-            ))}
-          </S.ChipWrapper>
+
+          <>
+            {filterState.charmsSet.size > 0 && (
+              <S.ChipWrapper id="charms-list">
+                {[...filterState.charmsSet].map((charm) => (
+                  <Chip
+                    key={charm}
+                    onClose={() =>
+                      dispatch({
+                        type: 'TOGGLE_FILTER_SET',
+                        key: 'charmsSet',
+                        value: charm,
+                      })
+                    }
+                  >
+                    {charm}
+                  </Chip>
+                ))}
+              </S.ChipWrapper>
+            )}
+          </>
+
+          <S.DoubleColumnInput className="!w-64">
+            <NumberInput
+              min={0}
+              max={maxCharmPoints}
+              label={i18n.labels.minCharmPoints}
+              placeholder={DEFAULT_FILTER_OPTIONS.minCharmPoints.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.minCharmPoints}
+              initialValue={minCharmPoints}
+              dispatchValue={setMinCharmPoints}
+              enterKeyHint="next"
+              step={500}
+            />
+            <NumberInput
+              min={maxCharmPoints}
+              max={DEFAULT_FILTER_OPTIONS.maxCharmPoints}
+              label={i18n.labels.maxCharmPoints}
+              placeholder={DEFAULT_FILTER_OPTIONS.maxCharmPoints.toString()}
+              defaultValue={DEFAULT_FILTER_OPTIONS.maxCharmPoints}
+              initialValue={maxCharmPoints}
+              dispatchValue={setMaxCharmPoints}
+              enterKeyHint="next"
+              step={500}
+            />
+          </S.DoubleColumnInput>
         </FilterGroup>
 
         <FilterGroup>
@@ -813,7 +857,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             id="quest-input"
             label="Quests"
             aria-controls="quest-list"
-            placeholder={homepage.FilterDrawer.placeholders.quests}
+            placeholder={i18n.placeholders.quests}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(questOptions, filterState.questSet)}
             onItemSelect={useCallback(
@@ -845,9 +889,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         <FilterGroup>
           <S.AutocompleteInput
             id="achievement-input"
-            label={homepage.FilterDrawer.labels.rareAchievements}
+            label={i18n.labels.rareAchievements}
             aria-controls="achievement-list"
-            placeholder={homepage.FilterDrawer.placeholders.achievements}
+            placeholder={i18n.placeholders.achievements}
             style={{ marginBottom: 12 }}
             itemList={useOptionsSet(
               achievementOptions,
@@ -895,16 +939,13 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                       isPro && 'text-rare font-bold',
                     )}
                   >
-                    {homepage.FilterDrawer.labels.rareItems}
-                    <InfoTooltip
-                      labelSize
-                      content={homepage.FilterDrawer.tooltips.rareItems}
-                    />
+                    {i18n.labels.rareItems}
+                    <InfoTooltip labelSize content={i18n.tooltips.rareItems} />
                   </InfoTooltip.LabelWrapper>
                 }
-                aria-label={homepage.FilterDrawer.labels.rareItems}
+                aria-label={i18n.labels.rareItems}
                 aria-controls="rare-items-list"
-                placeholder={homepage.FilterDrawer.placeholders.rareItems}
+                placeholder={i18n.placeholders.rareItems}
                 itemList={rareItems.itemList}
                 disabled={!isPro}
                 onItemSelect={
@@ -921,7 +962,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 gray={!isPro}
                 className={clsx(!isPro && 'cursor-not-allowed')}
               >
-                {homepage.FilterDrawer.toggleAll.items}
+                {i18n.toggleAll.items}
               </Chip>
             </S.InputWrapper>
 
@@ -943,10 +984,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </FilterGroup>
         )}
 
-        <FilterGroup
-          label={homepage.FilterDrawer.labels.misc}
-          style={{ border: 'none' }}
-        >
+        <FilterGroup label={i18n.labels.misc} style={{ border: 'none' }}>
           <S.ChipWrapper>
             {proTags.map((tag) => {
               const isActive = filterState.tags.has(tag)
@@ -985,7 +1023,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <Tooltip
               style={{ width: 280 }}
               offset={[0, 6]}
-              content={homepage.FilterDrawer.tooltips.rareNicknames}
+              content={i18n.tooltips.rareNicknames}
             >
               <Chip
                 overrideStatus={filterState.rareNick}
@@ -993,7 +1031,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   dispatch({ type: 'TOGGLE_FILTER', key: 'rareNick' })
                 }
               >
-                {homepage.FilterDrawer.rareNicknamesButton}
+                {i18n.rareNicknamesButton}
               </Chip>
             </Tooltip>
 

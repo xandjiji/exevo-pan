@@ -196,7 +196,7 @@ const AuctionsGrid = () => {
         </AuctionNotificationsProvider>
         {paginatedData.page.length === 0 && (
           <EmptyState
-            className="md:mt-[calc(25vh-60px)]"
+            className="md:mt-[calc(30vh-200px)]"
             variant="large"
             button={
               isFavorites

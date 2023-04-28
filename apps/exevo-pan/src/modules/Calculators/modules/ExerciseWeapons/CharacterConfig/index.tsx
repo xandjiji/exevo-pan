@@ -6,9 +6,10 @@ import { LabeledCard, Input, Slider } from 'components/Atoms'
 import { ChipGroup, InfoTooltip, ClientComponent } from 'components/Organisms'
 import { ChevronRightIcon } from 'assets/svgs'
 import { blurOnEnter, requiredSkillPoints, generateLoyaltyMarks } from 'utils'
-import { vocationOptions, skillOptions } from './options'
 import { parameterNames } from './constants'
-import { CharacterConfigProps, Vocation, Skill } from './types'
+import { vocationOptions, skillOptions } from '../../../options'
+import { Vocation, Skill } from '../../../types'
+import { CharacterConfigProps } from './types'
 
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
   const {

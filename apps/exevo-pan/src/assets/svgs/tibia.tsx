@@ -21,8 +21,6 @@ import naFlagSrc from 'assets/na-flag.png'
 import yellowSrc from 'assets/yellowbattleye.png'
 import greenSrc from 'assets/greenbattleye.png'
 
-import { StatusStyleProps } from './types'
-
 export const Reset = (args: JSX.IntrinsicElements['svg']) => (
   <ResetIcon {...args} className="fill-onPrimary transition-colors" />
 )
@@ -73,7 +71,11 @@ export const BrFlag = () => (
   <Image role="none" alt="South America" src={brFlagSrc} />
 )
 
-export const Status = ({ color }: StatusStyleProps) => (
+export const BattlEye = ({
+  color,
+}: {
+  color: 'battleGreen' | 'battleYellow'
+}) => (
   <Image
     role="none"
     alt={`${color === 'battleGreen' ? 'Green' : 'Yellow'} BattlEye`}

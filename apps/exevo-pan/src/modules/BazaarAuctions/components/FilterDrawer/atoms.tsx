@@ -1,7 +1,11 @@
 import clsx from 'clsx'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import { Input as BaseInput, Chip as BaseChip } from 'components/Atoms'
+import {
+  Input as BaseInput,
+  Chip as BaseChip,
+  ExevoProLink,
+} from 'components/Atoms'
 import { AutocompleteInput as BaseAutocompleteInput } from 'components/Organisms'
 import { routes } from 'Constants'
 import { InputProps } from 'components/Atoms/Input/types'
@@ -69,10 +73,18 @@ export const ExevoProExclusive = () => {
       className="text-onSurface text-xs font-light tracking-wider"
     >
       {templateMessage(homepage.FilterDrawer.exevoProExclusive, {
-        exevopro: (
-          <strong className="text-rare whitespace-nowrap">Exevo Pro 🚀</strong>
-        ),
+        exevopro: <ExevoProLink>🚀</ExevoProLink>,
       })}
     </NextLink>
   )
 }
+
+export const DoubleColumnInput = ({
+  className,
+  ...props
+}: JSX.IntrinsicElements['div']) => (
+  <div
+    className={clsx(className, 'grid w-44 grid-cols-2 gap-1.5')}
+    {...props}
+  />
+)

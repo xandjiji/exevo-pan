@@ -59,7 +59,9 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
                       {readableDiscount}
                     </strong>
                   ),
-                  exevopro: <strong className="text-rare">Exevo Pro</strong>,
+                  exevopro: (
+                    <strong className="rare-gradient-text">Exevo Pro</strong>
+                  ),
                 },
               )}
             </p>

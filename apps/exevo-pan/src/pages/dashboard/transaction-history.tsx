@@ -23,9 +23,7 @@ export default function Page() {
 
   const pageTitle = buildPageTitle(pageName)
 
-  const list = trpc.listMyTransactions.useQuery(undefined, {
-    refetchOnWindowFocus: false,
-  })
+  const list = trpc.listMyTransactions.useQuery()
 
   return (
     <>

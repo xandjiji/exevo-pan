@@ -37,6 +37,7 @@ const PaymentList = () => {
   const list = trpc.listProOrders.useQuery(
     { pageIndex, nickname },
     {
+      refetchOnWindowFocus: true,
       keepPreviousData: true,
     },
   )

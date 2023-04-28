@@ -1,11 +1,11 @@
-import * as Icon from './icons'
+import { TibiaIcons } from 'assets/svgs'
 import { SkillOptions } from './types'
 
 export const skillOptions: SkillOptions[] = [
   {
     name: (
       <>
-        <Icon.Magic />
+        <TibiaIcons.Magic />
         Magic level
       </>
     ),
@@ -14,7 +14,7 @@ export const skillOptions: SkillOptions[] = [
   {
     name: (
       <>
-        <Icon.Distance />
+        <TibiaIcons.Distance />
         Distance
       </>
     ),
@@ -23,7 +23,7 @@ export const skillOptions: SkillOptions[] = [
   {
     name: (
       <>
-        <Icon.Club />
+        <TibiaIcons.Club />
         Club
       </>
     ),
@@ -32,7 +32,7 @@ export const skillOptions: SkillOptions[] = [
   {
     name: (
       <>
-        <Icon.Sword />
+        <TibiaIcons.Sword />
         Sword
       </>
     ),
@@ -41,7 +41,7 @@ export const skillOptions: SkillOptions[] = [
   {
     name: (
       <>
-        <Icon.Axe />
+        <TibiaIcons.Axe />
         Axe
       </>
     ),

@@ -1,5 +1,12 @@
 import { useState, useCallback } from 'react'
-import { Dialog, Button, Input, Checkbox, Alert } from 'components/Atoms'
+import {
+  Dialog,
+  Button,
+  Input,
+  Checkbox,
+  Alert,
+  ExevoProLink,
+} from 'components/Atoms'
 import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
 import { Select, InfoTooltip } from 'components/Organisms'
@@ -119,11 +126,7 @@ const CreateGuildDialog = ({
                           className="text-onSurface mt-4 block"
                         >
                           {templateMessage(i18n.exevoProExclusive, {
-                            exevopro: (
-                              <strong className="text-rare">
-                                Exevo Pro 🕵️
-                              </strong>
-                            ),
+                            exevopro: <ExevoProLink>🕵️</ExevoProLink>,
                           })}
                         </NextLink>
                       )}

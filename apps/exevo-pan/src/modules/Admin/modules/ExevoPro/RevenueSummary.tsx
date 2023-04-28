@@ -3,7 +3,7 @@ import { trpc } from 'lib/trpc'
 
 export default () => {
   const { data } = trpc.proRevenue.useQuery(undefined, {
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   })
 
   return <RevenueSummary {...data} />

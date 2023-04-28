@@ -3,7 +3,7 @@
 exports[`<Table /> head column highlight prop should display asc/desc symbol 1`] = `
 <div>
   <div
-    style="position: fixed; z-index: 9999; top: 16px; left: 16px; right: 16px; bottom: 16px; pointer-events: none;"
+    style="position: fixed; z-index: 9999; top: 16px; left: 16px; right: 16px; bottom: 64px; pointer-events: none;"
   />
   <div
     class="card p-0 rounded"
@@ -47,7 +47,7 @@ exports[`<Table /> head column highlight prop should display asc/desc symbol 1`]
 exports[`<Table /> head column highlight prop should display asc/desc symbol 2`] = `
 <div>
   <div
-    style="position: fixed; z-index: 9999; top: 16px; left: 16px; right: 16px; bottom: 16px; pointer-events: none;"
+    style="position: fixed; z-index: 9999; top: 16px; left: 16px; right: 16px; bottom: 64px; pointer-events: none;"
   />
   <div
     class="card p-0 rounded"

@@ -19,9 +19,8 @@ import {
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, getTCState } from 'utils'
 import { routes } from 'Constants'
-import { MoreInfoIcon, OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
+import { OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
 import SpriteBox from './SpriteBox'
-import SkillDialog from './SkillDialog'
 import { checkStore, tabCounter, auctionHasEnded } from './utils'
 import { resolvers } from './resolvers'
 import * as S from './atoms'
@@ -30,7 +29,7 @@ import { CharacterModalProps } from './types'
 
 /*
 --lateralMargin: 14px;
---cardFixedHeight: 498px;
+--cardFixedHeight: 478px;
 --cardMaxMobileWidth: 368px;
 --gridMobileHeight: 60vh;
 --scrollbarWidth: 6px;
@@ -77,8 +76,6 @@ const CharacterModal = ({
 
   const [past] = useState(auctionHasEnded(characterData))
 
-  const [expandedSkills, setExpandedSkills] = useState(false)
-
   const checkboxRecords = useMemo(() => checkStore(storeItems), [])
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
@@ -94,8 +91,6 @@ const CharacterModal = ({
       })
     }
   }, [isDesktop])
-
-  const notRooker = vocationId > 0
 
   return (
     <Dialog
@@ -139,16 +134,6 @@ const CharacterModal = ({
 
             <S.Section border>
               <CharacterSkills skills={skills} style={{ marginBottom: 0 }} />
-              {notRooker && (
-                <button
-                  type="button"
-                  onClick={() => setExpandedSkills(true)}
-                  className="text-primaryHighlight clickable ml-auto flex w-fit cursor-pointer items-center gap-1 rounded px-1 py-0.5"
-                >
-                  <MoreInfoIcon className="fill-onSurface h-4 w-4 shrink-0" />
-                  {common.CharacterCard.CharacterModal.moreInfo}
-                </button>
-              )}
             </S.Section>
 
             <S.TooltipSection>
@@ -181,8 +166,8 @@ const CharacterModal = ({
                       common.CharacterCard.CharacterModal.exclusive,
                       {
                         exevopro: (
-                          <strong className="text-rare whitespace-nowrap">
-                            Exevo Pro 🚀
+                          <strong className="rare-gradient-text text-rare whitespace-nowrap">
+                            Exevo Pro <span className="text-onSurface">🚀</span>
                           </strong>
                         ),
                       },
@@ -356,14 +341,6 @@ const CharacterModal = ({
           </S.Spacer>
         </S.Spacer>
       </div>
-      {notRooker && (
-        <SkillDialog
-          vocationId={vocationId}
-          skills={skills}
-          isOpen={expandedSkills}
-          onClose={() => setExpandedSkills(false)}
-        />
-      )}
     </Dialog>
   )
 }

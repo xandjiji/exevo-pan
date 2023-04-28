@@ -192,24 +192,12 @@ export default {
     highlightLabelText: '¡Destaque su subasta!',
     CharacterModal: {
       /* @ ToDo: i18n */
-      moreInfo: 'More informations',
       totalInvested: 'Total invertido',
       /* @ ToDo: i18n */
       exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Primer addon',
         secondAddon: 'Segundo addon',
-      },
-      /* @ ToDo: i18n */
-      SkillDialog: {
-        heading: 'Character skills',
-        loyaltyPoints: 'points',
-        none: 'None',
-        skillValue: 'Skill value',
-        tooltip: 'Required cost to achieve this skill using',
-        skillWithLoyalty: 'Skill with bonus Loyalty',
-        externalCalculator:
-          'Experiment with this character in our skills calculator',
       },
     },
   },
@@ -258,5 +246,26 @@ export default {
     testTitle: 'Hey there 👋',
     testText: 'How are you doing?',
     successMessage: 'Device registered!',
+  },
+  AuctionEstimationAlerts: {
+    Disclaimer: {
+      first: 'Value is always {{subjective}}!',
+      subjective: 'subjective',
+      second: 'This estimation only considers:',
+      server: 'Server type',
+      character: 'Skills, level and vocation',
+    },
+    Failed: {
+      message: 'Not many similar characters were found in our database',
+    },
+    ProOnly: {
+      message:
+        'Auctions estimated above {{freeCap}} are only available for {{exevoPro}} members',
+    },
+  },
+  EstimatedPriceBox: {
+    label: 'Estimated price',
+    similarFound: '{{count}} similar auction',
+    similarFoundPlural: '{{count}} similar auctions',
   },
 }

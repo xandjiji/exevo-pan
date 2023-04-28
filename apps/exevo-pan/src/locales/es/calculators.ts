@@ -30,6 +30,10 @@ export default {
       title: 'Loot Split',
       description: 'Manage and split your party hunt loots',
     },
+    AuctionEstimation: {
+      title: 'Auction price estimations',
+      description: 'Estimate the price of any character on the Char Bazaar',
+    },
   },
   none: 'Nada',
   ExerciseWeapons: {
@@ -124,5 +128,18 @@ export default {
       added: 'Session was saved',
       removed: 'Session was removed',
     },
+  },
+  AuctionEstimation: {
+    location: 'Server location',
+    battleye: {
+      green: 'Green',
+      yellow: 'Yellow',
+    },
+    vocation: 'Vocation',
+    search: 'Search',
+    similarAuctions: 'Similar auctions',
+    emptyState: 'No auctions',
+    goToHistory: 'Explore more past auctions using our {{history}}',
+    history: 'Char Bazaar History',
   },
 }

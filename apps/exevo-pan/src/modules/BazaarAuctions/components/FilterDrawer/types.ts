@@ -3,7 +3,3 @@ export interface FilterDrawerProps
   open: boolean
   onClose: () => void
 }
-
-export interface StatusStyleProps {
-  color: 'battleGreen' | 'battleYellow'
-}

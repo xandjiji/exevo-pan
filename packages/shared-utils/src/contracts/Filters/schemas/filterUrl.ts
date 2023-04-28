@@ -73,6 +73,16 @@ export const filterSchema: SchemaCodec<FilterOptions> = {
     defaultValue: DEFAULT_FILTER_OPTIONS.bossPoints,
     decode: codecs.decode.Number,
   },
+  minCharmPoints: {
+    urlKey: 'minCharmPoints',
+    defaultValue: DEFAULT_FILTER_OPTIONS.minCharmPoints,
+    decode: codecs.decode.Number,
+  },
+  maxCharmPoints: {
+    urlKey: 'maxCharmPoints',
+    defaultValue: DEFAULT_FILTER_OPTIONS.maxCharmPoints,
+    decode: codecs.decode.Number,
+  },
   tcInvested: {
     urlKey: 'tcInvested',
     defaultValue: DEFAULT_FILTER_OPTIONS.tcInvested,

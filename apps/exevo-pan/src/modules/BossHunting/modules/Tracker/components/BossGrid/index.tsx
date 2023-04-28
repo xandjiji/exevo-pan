@@ -3,11 +3,11 @@ import { useState, useMemo, useCallback } from 'react'
 import { useSession } from 'next-auth/react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { trpc } from 'lib/trpc'
-import NextLink from 'next/link'
+import { ExevoProLink } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { ChipGroup, ClientComponent } from 'components/Organisms'
 import { PinIcon } from 'assets/svgs'
-import { routes, premiumBosses } from 'Constants'
+import { premiumBosses } from 'Constants'
 import { BossCard, BossDialog } from '../../../../components'
 import usePinBoss from './usePinBoss'
 import { listBy, prioritizePremium } from './utils'
@@ -24,7 +24,6 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
   trpc.proBosses.useQuery(
     { server },
     {
-      refetchOnWindowFocus: false,
       enabled: isPro,
       onSuccess: setPremiumBossData,
       onError: () => setPremiumBossData([]),
@@ -93,11 +92,7 @@ const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
 
       <p className="text-tsm">
         {templateMessage(translations.bossTracker.BossGrid.exclusiveBosses, {
-          exevopro: (
-            <NextLink href={routes.EXEVOPRO} className="text-rare font-bold">
-              Exevo Pro
-            </NextLink>
-          ),
+          exevopro: <ExevoProLink />,
         })}
       </p>
       {listNotEmpty ? (

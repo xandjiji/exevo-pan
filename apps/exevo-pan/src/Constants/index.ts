@@ -1,4 +1,5 @@
 export * from './Advertising'
+export * from './AuctionEstimations'
 export * from './Avatars'
 export * from './BlogTags'
 export * from './Email'

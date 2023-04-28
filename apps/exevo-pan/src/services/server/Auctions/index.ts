@@ -6,7 +6,7 @@ import {
 import { endpoints } from 'Constants'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { filterActiveHighlightedIds } from './utils'
-import { FetchAuctionPageArgs } from './types'
+import { FetchAuctionPageArgs, EstimateAuctionPriceArgs } from './types'
 
 const MINIMUM_HIGHLIGHTED_AMOUNT = 2
 
@@ -99,5 +99,27 @@ export default class AuctionsClient {
       console.log(error)
       return []
     }
+  }
+
+  static async estimateAuctionPrice({
+    filterOptions,
+    paginationOptions,
+    sortOptions,
+  }: EstimateAuctionPriceArgs): Promise<EstimatedValueResponse> {
+    const endpoint = new URL(endpoints.PRICE_ESTIMATION)
+    const currentParams = new URLSearchParams()
+
+    serializeFilter({ values: { ...filterOptions }, currentParams })
+    serializePagination({ values: { ...paginationOptions }, currentParams })
+    serializeSort({
+      values: { ...sortOptions },
+      currentParams,
+    })
+
+    endpoint.search = currentParams.toString()
+
+    const response = await fetch(endpoint.toString())
+
+    return response.json()
   }
 }

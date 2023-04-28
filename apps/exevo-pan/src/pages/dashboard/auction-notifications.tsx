@@ -25,7 +25,6 @@ export default function Page() {
   const pageTitle = buildPageTitle(pageName)
 
   const list = trpc.listMyAuctionNotifications.useQuery(undefined, {
-    refetchOnWindowFocus: false,
     keepPreviousData: true,
   })
 

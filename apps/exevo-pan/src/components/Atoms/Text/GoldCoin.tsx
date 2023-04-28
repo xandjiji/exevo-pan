@@ -20,7 +20,7 @@ const GoldCoin = ({ value, displaySign = false, ...props }: GoldCoinProps) => {
         unoptimized
         width={9}
         height={9}
-        className="pixelated select-none"
+        className="pixelated select-none self-center"
       />
       {formattedValue}
     </S.Flex>
