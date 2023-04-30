@@ -7,6 +7,7 @@ import {
   PageRevalidationClient,
   DeviceNotificationClient,
   BossesClient,
+  BossNotificationEvent,
 } from 'services/server'
 import { getGuildPermalink } from 'utils'
 import { avatar, guildValidationRules, routes } from 'Constants'
@@ -666,6 +667,17 @@ export const notifyGuildMembers = authedProcedure
           update: { memberId: requesterMember.id, lastSpawned: new Date() },
         }),
       ])
+
+      if (guild.eventEndpoint) {
+        await BossNotificationEvent.postEvent({
+          bossName: boss,
+          displayedBossName: displayedName,
+          guildName: guild.name,
+          notifiedBy: requesterMember.name,
+          server: guild.server,
+          url: guild.eventEndpoint,
+        })
+      }
     }
 
     const result = await Promise.all(
