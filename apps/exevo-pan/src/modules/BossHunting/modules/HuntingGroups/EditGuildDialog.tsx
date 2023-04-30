@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
 import { useTranslations, templateString } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
@@ -50,6 +51,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
     messageBoard: guild.messageBoard ?? undefined,
     avatarId: guild.avatarId,
     avatarDegree: guild.avatarDegree,
+    eventEndpoint: guild.eventEndpoint ?? undefined,
   })
 
   const updateGuild = trpc.updateGuild.useMutation({
@@ -135,6 +137,35 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         }
         error={errors.has('messageBoard')}
       />
+
+      <div className="mb-3 grid gap-2">
+        <Input
+          label="Notification Webhook"
+          placeholder="https://discord.com/api/webhooks/1101156871835540426/MQK9bYFHByzD4-c7aqJGoTVjF_0K8nupFZogMm6cLtQJKl4vxpiW74wGFcPyNZUF1JHF"
+          value={formState.eventEndpoint}
+          onChange={(e) =>
+            setFormState((prev) => ({ ...prev, eventEndpoint: e.target.value }))
+          }
+        />
+
+        <div className="flex items-center justify-between gap-2">
+          <p className="font-light">
+            Check out the{' '}
+            <a href="#" className="text-primaryHighlight font-bold">
+              documentation
+            </a>
+          </p>
+
+          {!!formState.eventEndpoint && (
+            <button
+              type="button"
+              className="text-primaryHighlight cursor-pointer font-bold"
+            >
+              test webhook ☎️
+            </button>
+          )}
+        </div>
+      </div>
 
       <Checkbox
         label={
