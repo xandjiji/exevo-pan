@@ -1,4 +1,4 @@
-import { loadBossSrc } from 'utils'
+import { loadBossSrc, resolveGuildUrl } from 'utils'
 import { links } from 'Constants'
 
 type PostEventArgs = {
@@ -30,6 +30,10 @@ export default class BossNotificationEvent {
             author: {
               name: bossName,
               icon_url: resolveBossImageSrc(bossName),
+              url: resolveGuildUrl(guildName),
+            },
+            footer: {
+              text: guildName,
             },
           },
         ],

@@ -46,3 +46,6 @@ export const officialAuctionUrl = (auctionId: number) =>
 
 export const officialCharacterUrl = (nickname: string) =>
   `https://www.tibia.com/community/?name=${nickname}`
+
+export const resolveGuildUrl = (guildName: string) =>
+  `${links.CANONICAL}${routes.BOSSES.HUNTING_GROUPS}/${guildName}`
