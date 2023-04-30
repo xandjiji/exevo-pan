@@ -1,4 +1,5 @@
 import { loadBossSrc, resolveGuildUrl } from 'utils'
+import { links } from 'Constants'
 
 type PostEventArgs = {
   guildName: string
@@ -28,12 +29,12 @@ export default class BossNotificationEvent {
         content: `Boss found by ${notifiedBy}! @everyone`,
         embeds: [
           {
-            color: 4149685,
             author: {
               name: displayedBossName,
-              icon_url: loadBossSrc(bossName),
+              icon_url: `${links.CANONICAL}${loadBossSrc(bossName)}`,
               url: resolveGuildUrl(guildName),
             },
+            color: 4149685,
             footer: {
               text: `${guildName} (${server})`,
             },
@@ -43,7 +44,11 @@ export default class BossNotificationEvent {
         ...data,
       })
 
-      await fetch(url, { body, method: 'POST' })
+      await fetch(url, {
+        body,
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+      })
       return true
     } catch {
       return false

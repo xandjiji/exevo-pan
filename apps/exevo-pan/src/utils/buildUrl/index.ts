@@ -48,4 +48,6 @@ export const officialCharacterUrl = (nickname: string) =>
   `https://www.tibia.com/community/?name=${nickname}`
 
 export const resolveGuildUrl = (guildName: string) =>
-  `${links.CANONICAL}${routes.BOSSES.HUNTING_GROUPS}/${guildName}`
+  `${links.CANONICAL}${routes.BOSSES.HUNTING_GROUPS}/${encodeURIComponent(
+    guildName,
+  )}`
