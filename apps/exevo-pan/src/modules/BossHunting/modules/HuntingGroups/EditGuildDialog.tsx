@@ -1,6 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
-import { useTranslations, templateString } from 'contexts/useTranslation'
+import {
+  useTranslations,
+  templateString,
+  templateMessage,
+} from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import {
   Dialog,
@@ -151,14 +155,17 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
 
         <div className="flex items-center justify-between gap-2 font-light">
           <p>
-            Check out the{' '}
-            <a
-              href="#"
-              target="_blank"
-              className="text-primaryHighlight font-bold"
-            >
-              documentation
-            </a>
+            {templateMessage(i18n.goToDocs, {
+              documentation: (
+                <a
+                  href="#"
+                  target="_blank"
+                  className="text-primaryHighlight font-bold"
+                >
+                  {i18n.documentation}
+                </a>
+              ),
+            })}
           </p>
 
           {!!formState.eventEndpoint && (
@@ -178,12 +185,12 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
                   {
                     error: common.genericError,
                     loading: common.genericLoading,
-                    success: 'Notification event was posted!',
+                    success: i18n.notificationPosted,
                   },
                 )
               }
             >
-              Test webhook 🧑‍🔬
+              {i18n.testWebhook}
             </button>
           )}
         </div>

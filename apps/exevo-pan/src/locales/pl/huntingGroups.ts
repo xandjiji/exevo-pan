@@ -150,6 +150,10 @@ export default {
       'A private group can be found, but its members will be hidden',
     exevoProRequired:
       'At least one Exevo Pro group member is required to set a private group',
+    goToDocs: 'Check out the {{documentation}}',
+    documentation: 'documentation',
+    testWebhook: 'Test webhook 🧑‍🔬',
+    notificationPosted: 'Notification event was posted!',
     cancel: 'Cancel',
     save: 'Save',
     successToast: 'Group was updated successfully!',
