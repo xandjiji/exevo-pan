@@ -14,6 +14,7 @@ import { InfoTooltip } from 'components/Organisms'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { guildValidationRules } from 'Constants'
+import { BossNotificationEvent } from 'services'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { useGuildData } from './contexts/useGuildData'
 import { RollAvatar } from './components'
@@ -40,7 +41,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   } = useTranslations()
   const i18n = huntingGroups.EditGuildDialog
 
-  const { guild, setGuildData } = useGuildData()
+  const { guild, setGuildData, currentMember } = useGuildData()
   const router = useRouter()
 
   const [formState, setFormState] = useState<GuildEditInput>({
@@ -148,10 +149,14 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
           }
         />
 
-        <div className="flex items-center justify-between gap-2">
-          <p className="font-light">
+        <div className="flex items-center justify-between gap-2 font-light">
+          <p>
             Check out the{' '}
-            <a href="#" className="text-primaryHighlight font-bold">
+            <a
+              href="#"
+              target="_blank"
+              className="text-primaryHighlight font-bold"
+            >
               documentation
             </a>
           </p>
@@ -159,9 +164,26 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
           {!!formState.eventEndpoint && (
             <button
               type="button"
-              className="text-primaryHighlight cursor-pointer font-bold"
+              className="decoration-separator text-onSurface cursor-pointer whitespace-nowrap underline decoration-dashed underline-offset-4"
+              onClick={() =>
+                toast.promise(
+                  BossNotificationEvent.postEvent({
+                    bossName: 'Yeti',
+                    displayedBossName: 'Test Boss',
+                    guildName: formState.name ?? 'Group',
+                    notifiedBy: currentMember?.name ?? 'member',
+                    server: guild.server,
+                    url: formState.eventEndpoint ?? '',
+                  }),
+                  {
+                    error: common.genericError,
+                    loading: common.genericLoading,
+                    success: 'Notification event was posted!',
+                  },
+                )
+              }
             >
-              test webhook ☎️
+              Test webhook 🧑‍🔬
             </button>
           )}
         </div>
