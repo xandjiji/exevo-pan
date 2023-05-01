@@ -30,7 +30,7 @@ Then, go to the **Integrations** tab to create a **New Webhook** and copy its We
 The webhook URL should look something like this:
 `https://discord.com/api/webhooks/1101156871835540426/MQK9bYFHByzD4-c7aqJGoTVjF_0K8nupFZogMm6cLtQJKl4vxpiW74wGFcPyNZUF1JHF`
 
-And finally, paste the Webhook URL in your hunting group configurations and hit `Save`
+Finally, paste the Webhook URL in your hunting group configurations and hit `Save`
 
 <p align="center">
     <img alt="Setting a webhook for hunting groups" src="https://i.imgur.com/9T1wmCR.png">
@@ -61,4 +61,6 @@ You can consume this webhook event in any other way you'd like. The webhook will
 }
 ```
 
-In the feature, we will create some simple integration recipes for other popular apps (like Telegram, Whatsapp, etc). If you have any suggestions, feel free to send them to: [xandjiji@gmail.com](mailto:xandjiji@gmail.com)
+In the feature, we will create some simple integration recipes for other popular apps (like Telegram, Whatsapp, etc).
+
+If you have any suggestions, feel free to send them to: [xandjiji@gmail.com](mailto:xandjiji@gmail.com)
