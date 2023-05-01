@@ -33,8 +33,9 @@ export const getDateRelativeToSS = (date = new Date()): Date => {
   const utcHour = date.getUTCHours()
 
   const relativeDate = new Date(date)
-  if (utcHour < SS_UTC_HOUR)
+  if (utcHour < SS_UTC_HOUR) {
     relativeDate.setUTCDate(relativeDate.getUTCDate() - 1)
+  }
 
   return stripTime(relativeDate)
 }
