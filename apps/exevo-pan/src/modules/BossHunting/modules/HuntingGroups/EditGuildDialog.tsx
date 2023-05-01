@@ -1,5 +1,10 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import { useState, useCallback } from 'react'
-import { useTranslations, templateString } from 'contexts/useTranslation'
+import {
+  useTranslations,
+  templateString,
+  templateMessage,
+} from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
 import {
   Dialog,
@@ -12,7 +17,8 @@ import {
 import { InfoTooltip } from 'components/Organisms'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { guildValidationRules } from 'Constants'
+import { guildValidationRules, links } from 'Constants'
+import { BossNotificationEvent } from 'services'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { useGuildData } from './contexts/useGuildData'
 import { RollAvatar } from './components'
@@ -39,7 +45,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   } = useTranslations()
   const i18n = huntingGroups.EditGuildDialog
 
-  const { guild, setGuildData } = useGuildData()
+  const { guild, setGuildData, currentMember } = useGuildData()
   const router = useRouter()
 
   const [formState, setFormState] = useState<GuildEditInput>({
@@ -50,6 +56,7 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
     messageBoard: guild.messageBoard ?? undefined,
     avatarId: guild.avatarId,
     avatarDegree: guild.avatarDegree,
+    eventEndpoint: guild.eventEndpoint ?? undefined,
   })
 
   const updateGuild = trpc.updateGuild.useMutation({
@@ -135,6 +142,60 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
         }
         error={errors.has('messageBoard')}
       />
+
+      <div className="mb-3 grid gap-2">
+        <Input
+          label="Notification Webhook"
+          placeholder="https://discord.com/api/webhooks/1101156871835540426/MQK9bYFHByzD4-c7aqJGoTVjF_0K8nupFZogMm6cLtQJKl4vxpiW74wGFcPyNZUF1JHF"
+          value={formState.eventEndpoint}
+          onChange={(e) =>
+            setFormState((prev) => ({ ...prev, eventEndpoint: e.target.value }))
+          }
+        />
+
+        <div className="flex items-center justify-between gap-2 font-light">
+          <p>
+            {templateMessage(i18n.goToDocs, {
+              documentation: (
+                <a
+                  href={links.WEBHOOK_DOCS}
+                  rel="noreferrer"
+                  target="_blank"
+                  className="text-primaryHighlight font-bold"
+                >
+                  {i18n.documentation}
+                </a>
+              ),
+            })}
+          </p>
+
+          {!!formState.eventEndpoint && (
+            <button
+              type="button"
+              className="decoration-separator text-onSurface cursor-pointer whitespace-nowrap underline decoration-dashed underline-offset-4"
+              onClick={() =>
+                toast.promise(
+                  BossNotificationEvent.postEvent({
+                    bossName: 'Yeti',
+                    displayedBossName: 'Test Boss',
+                    guildName: formState.name ?? 'Group',
+                    notifiedBy: currentMember?.name ?? 'member',
+                    server: guild.server,
+                    url: formState.eventEndpoint ?? '',
+                  }),
+                  {
+                    error: common.genericError,
+                    loading: common.genericLoading,
+                    success: i18n.notificationPosted,
+                  },
+                )
+              }
+            >
+              {i18n.testWebhook}
+            </button>
+          )}
+        </div>
+      </div>
 
       <Checkbox
         label={

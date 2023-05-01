@@ -8,6 +8,7 @@ import {
   DeviceNotificationClient,
   BossesClient,
 } from 'services/server'
+import { BossNotificationEvent } from 'services'
 import { getGuildPermalink } from 'utils'
 import { avatar, guildValidationRules, routes } from 'Constants'
 import type {
@@ -179,6 +180,7 @@ export const updateGuild = authedProcedure
         .min(avatar.degree.min)
         .max(avatar.degree.max)
         .optional(),
+      eventEndpoint: z.string().optional(),
     }),
   )
   .mutation(async ({ ctx: { token }, input }) => {
@@ -666,6 +668,17 @@ export const notifyGuildMembers = authedProcedure
           update: { memberId: requesterMember.id, lastSpawned: new Date() },
         }),
       ])
+
+      if (guild.eventEndpoint) {
+        await BossNotificationEvent.postEvent({
+          bossName: boss,
+          displayedBossName: displayedName,
+          guildName: guild.name,
+          notifiedBy: requesterMember.name,
+          server: guild.server,
+          url: guild.eventEndpoint,
+        })
+      }
     }
 
     const result = await Promise.all(

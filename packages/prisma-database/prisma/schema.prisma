@@ -175,15 +175,16 @@ model Transaction {
 }
 
 model Guild {
-    id           String   @id @default(uuid())
-    name         String   @unique
-    private      Boolean
-    server       String
-    description  String?  @db.Text
-    messageBoard String?  @db.Text
-    createdAt    DateTime @default(now())
-    avatarId     Int
-    avatarDegree Int
+    id            String   @id @default(uuid())
+    name          String   @unique
+    private       Boolean
+    server        String
+    description   String?  @db.Text
+    messageBoard  String?  @db.Text
+    createdAt     DateTime @default(now())
+    avatarId      Int
+    avatarDegree  Int
+    eventEndpoint String?  @db.Text
 
     guildMembers      GuildMember[]
     guildApplications GuildApplication[]

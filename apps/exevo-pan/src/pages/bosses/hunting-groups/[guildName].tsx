@@ -22,7 +22,7 @@ import {
   LogHistory,
   CheckedBosses,
 } from 'modules/BossHunting'
-import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
+import { EditIcon, SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
 import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
@@ -135,7 +135,20 @@ export default function GuildPage({
 
                 <div className="z-1 inner-container relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px] lg:w-[768px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
-                  <div className="flex flex-wrap items-center justify-end gap-6">
+
+                  <div className="child:ml-auto md:child:ml-0 grid items-center gap-4 md:flex md:justify-end md:gap-6">
+                    {(isEditor || EXEVO_PAN_ADMIN) && (
+                      <Button
+                        hollow
+                        pill
+                        className="flex items-center gap-2"
+                        onClick={toggleEditDialog}
+                      >
+                        <SettingsIcon className="h-4 w-4" />
+                        {i18n.groupSettings}
+                      </Button>
+                    )}
+
                     {isMember && (
                       <>
                         <Button
@@ -145,7 +158,7 @@ export default function GuildPage({
                           onClick={() => setIsSettingsOpen(true)}
                         >
                           <SettingsIcon className="h-4 w-4" />
-                          {i18n.settings}
+                          {i18n.mySettings}
                         </Button>
                         {isSettingsOpen && !!currentMember && (
                           <SettingsDialog
