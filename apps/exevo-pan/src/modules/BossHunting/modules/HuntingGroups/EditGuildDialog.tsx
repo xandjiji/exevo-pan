@@ -17,7 +17,7 @@ import {
 import { InfoTooltip } from 'components/Organisms'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { guildValidationRules } from 'Constants'
+import { guildValidationRules, links } from 'Constants'
 import { BossNotificationEvent } from 'services'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
 import { useGuildData } from './contexts/useGuildData'
@@ -158,7 +158,8 @@ const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
             {templateMessage(i18n.goToDocs, {
               documentation: (
                 <a
-                  href="#"
+                  href={links.WEBHOOK_DOCS}
+                  rel="noreferrer"
                   target="_blank"
                   className="text-primaryHighlight font-bold"
                 >

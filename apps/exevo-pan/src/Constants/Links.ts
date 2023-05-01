@@ -21,4 +21,6 @@ export const links = {
     'https://www.tibia.com/mmorpg/free-multiplayer-online-role-playing-game.php?taftoken=8b6dfcab-6353-4f07-b895-bf8716d007e1',
   PERSONAL_WEBSITE: 'https://xandjiji.com',
   I18N: 'https://docs.google.com/spreadsheets/d/1t0fEtS2DqumaL9r_m8FeYnZ9Szh0Ay2R-jhbBHo-SlM/edit?usp=sharing',
+  WEBHOOK_DOCS:
+    'https://github.com/xandjiji/exevo-pan/tree/master/apps/exevo-pan/src/modules/BossHunting/modules/HuntingGroups/webhooks.md',
 }
