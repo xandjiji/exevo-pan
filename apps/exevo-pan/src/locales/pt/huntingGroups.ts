@@ -5,7 +5,8 @@ export default {
   },
   defaultServer: '(todos)',
   createGroup: 'Criar grupo',
-  settings: 'Configurações',
+  groupSettings: 'Configurar grupo',
+  mySettings: 'Minhas preferências',
   notificate: 'Notificar',
   apply: 'Apply',
   publicBoard: {
