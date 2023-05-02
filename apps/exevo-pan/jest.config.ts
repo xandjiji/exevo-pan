@@ -6,6 +6,7 @@ export default {
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
     '<rootDir>/.next',
+    '<rootDir>/packages/',
     'mock.ts',
     'utils.ts',
     'types.ts',

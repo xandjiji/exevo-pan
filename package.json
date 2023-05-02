@@ -19,7 +19,8 @@
     "lint": "turbo run lint",
     "format": "turbo run format",
     "clean": "turbo run clean && rm -rf node_modules",
-    "test": "turbo run test:all",
+    "test": "turbo run test",
+    "test:all": "turbo run test:all",
     "dev": "scripts/setupDev.sh && turbo run dev --parallel",
     "dev:scraper": "yarn --cwd apps/bazaar-scraper dev:scraper",
     "dev:mock": "yarn --cwd packages/mock-maker dev:mock",
@@ -65,6 +66,11 @@
           "^build:packages"
         ],
         "cache": false
+      },
+      "test": {
+        "outputs": [
+          "coverage/**"
+        ]
       },
       "test:all": {
         "outputs": [
