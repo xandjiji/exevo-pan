@@ -24,10 +24,10 @@ export const DAYS_IN = {
   YEAR: 365,
 }
 
-export const SS_UTC_HOUR = 7
+export const SS_UTC_HOUR = 8
 
 export const stripTime = (date = new Date()): Date =>
-  new Date(date.getFullYear(), date.getMonth(), date.getDate())
+  new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
 
 export const getDateRelativeToSS = (date = new Date()): Date => {
   const utcHour = date.getUTCHours()
