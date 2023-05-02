@@ -1,7 +1,7 @@
 import fs from 'fs/promises'
 import {
   constTokens as bossDictionary,
-  TrackedBossName,
+  BossToken,
 } from 'data-dictionary/dist/dictionaries/bosses'
 import { getDateRelativeToSS } from 'shared-utils/dist/time'
 import { broadcast, tabBroadcast, coloredText } from 'logging'
@@ -158,7 +158,7 @@ export default class BossStatisticsData {
         const appeared = playersKilled + killedByPlayers > 0
 
         if (appeared) {
-          const bossSchema = schema.get(bossName as TrackedBossName)
+          const bossSchema = schema.get(bossDictionary[bossName as BossToken])
 
           const appearencesCount = bossSchema?.spawnCount
             ? Math.max(killedByPlayers, 1)
