@@ -17,12 +17,14 @@ type CalculateChanceArgs = {
   appearences: number[]
   distribution: Distribution
   bossSchema?: BossSchema
+  isTomorrow?: boolean
 }
 
 const calculateStats = ({
   appearences,
   distribution,
   bossSchema,
+  isTomorrow = true,
 }: CalculateChanceArgs): Pick<
   BossStats,
   'currentChance' | 'expectedIn' | 'daysLeftForPossibleSpawns'
@@ -30,7 +32,9 @@ const calculateStats = ({
   if (!bossSchema) return {}
 
   const tomorrow = getDateRelativeToSS()
-  tomorrow.setDate(tomorrow.getDate() + 1)
+  if (isTomorrow) {
+    tomorrow.setDate(tomorrow.getDate() + 1)
+  }
   const tomorrowTimestamp = +tomorrow
 
   const [lastAppearence] = appearences.slice(-1)
@@ -118,12 +122,14 @@ type CalculateBossChancesArgs = {
   activeServers: ServerObject[]
   bossDistributions: Record<string, Distribution>
   wasUpdated: boolean
+  isTomorrow?: boolean
 }
 
 export const calculateBossChances = async ({
   activeServers,
   bossDistributions,
   wasUpdated,
+  isTomorrow = true,
 }: CalculateBossChancesArgs): Promise<void> => {
   const taskSize = activeServers.length
   const taskTracking = new TrackETA(
@@ -158,6 +164,7 @@ export const calculateBossChances = async ({
           appearences,
           distribution: bossDistributions[name],
           bossSchema: schema.get(name as TrackedBossName),
+          isTomorrow,
         }),
       })
     }

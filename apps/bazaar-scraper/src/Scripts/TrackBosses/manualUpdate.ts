@@ -17,6 +17,7 @@ const main = async (): Promise<void> => {
     activeServers,
     bossDistributions,
     wasUpdated: false,
+    isTomorrow: false,
   })
 
   await executeShell(DEPLOY_SCRIPT)
