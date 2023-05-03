@@ -4,7 +4,8 @@ import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { Tooltip } from 'components/Organisms'
 import { CheckIcon } from 'assets/svgs'
-import { ExevoProLink } from 'components/Atoms'
+import { ExevoProLink, Text } from 'components/Atoms'
+import { auctionEstimations } from 'Constants'
 
 const Heading = ({ className, ...props }: JSX.IntrinsicElements['p']) => (
   <p
@@ -126,6 +127,13 @@ const Pitch = ({ proStatus }: PitchProps) => {
           <Li>
             {templateMessage(dashboard.Pitch.features.privateGroups, {
               private: <strong>{dashboard.Pitch.features.private}</strong>,
+            })}
+          </Li>
+          <Li>
+            {templateMessage(dashboard.Pitch.features.estimate, {
+              maxEstimation: (
+                <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} />
+              ),
             })}
           </Li>
         </ul>

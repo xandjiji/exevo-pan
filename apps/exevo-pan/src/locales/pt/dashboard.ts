@@ -48,6 +48,7 @@ export default {
       notifications: 'notificações',
       privateGroups: 'Crie grupos {{private}} de boss hunting',
       private: 'privados',
+      estimate: 'Estime preços de leilões acima de {{maxEstimation}}',
     },
     filtersTooltip: {
       tc: 'Tibia Coins investidos',

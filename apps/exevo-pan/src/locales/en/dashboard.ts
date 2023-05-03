@@ -47,6 +47,7 @@ export default {
       notifications: 'notifications',
       privateGroups: 'Create {{private}} boss hunting groups',
       private: 'private',
+      estimate: 'Estimate auction prices above {{maxEstimation}}',
     },
     filtersTooltip: {
       tc: 'Tibia Coins invested',
