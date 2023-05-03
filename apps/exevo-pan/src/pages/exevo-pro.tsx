@@ -19,6 +19,7 @@ import {
   Tooltip as List,
   Strong,
   Gradient,
+  ComparisonTable,
 } from 'modules/ExevoProLP'
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoinBig.png'
@@ -105,6 +106,8 @@ export default function ExevoPro() {
               <Button className="w-fit">{translations.exevopro.heroCTA}</Button>
             </NextLink>
           </section>
+
+          <ComparisonTable />
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">

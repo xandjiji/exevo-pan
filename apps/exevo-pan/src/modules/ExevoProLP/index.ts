@@ -1,3 +1,4 @@
+export { default as ComparisonTable } from './ComparisonTable'
 export { default as ThreeDimensionalMiniAuctionGrid } from './ThreeDimensionalMiniAuctionGrid'
 export { default as FeatureSection } from './FeatureSection'
 export { default as Gradient } from './Gradient'
