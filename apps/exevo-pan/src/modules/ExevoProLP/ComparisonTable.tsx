@@ -6,11 +6,11 @@ import { auctionEstimations } from 'Constants'
 import Strong from './Strong'
 
 const TitleRow = ({ className, ...props }: React.ComponentProps<'td'>) => (
-  <tr className="after:bg-separator/50 relative after:absolute after:bottom-1 after:left-0 after:h-[1px] after:w-full">
+  <tr>
     <td
       className={clsx(
         className,
-        'text-onSurface py-4 text-left text-2xl font-bold',
+        'text-onSurface pt-6 pb-2 text-left text-2xl font-bold',
       )}
       {...props}
     />
@@ -21,7 +21,7 @@ const Row = ({ className, ...props }: React.ComponentProps<'tr'>) => (
   <tr
     className={clsx(
       className,
-      'even:after:bg-separator/10 text-s child:py-3 child:px-4 after:-z-1 relative after:absolute after:top-0 after:left-0 after:h-full after:w-full',
+      'even:bg-separator/10 odd:bg-separator/5 text-s child:py-3 child:px-4',
     )}
     {...props}
   />
@@ -52,7 +52,7 @@ const ComparisonTable = () => {
         <th className="rare-gradient-text whitespace-nowrap">Exevo Pro</th>
       </tr>
 
-      <TitleRow className="pt-0">Auctions</TitleRow>
+      <TitleRow className="!pt-0">Auctions</TitleRow>
 
       <Row>
         <td>Auction filters</td>
