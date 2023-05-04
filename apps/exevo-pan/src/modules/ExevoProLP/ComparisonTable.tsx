@@ -52,7 +52,7 @@ const ComparisonTable = () => {
         <th className="rare-gradient-text whitespace-nowrap">Exevo Pro</th>
       </tr>
 
-      <TitleRow>Auctions</TitleRow>
+      <TitleRow className="pt-0">Auctions</TitleRow>
 
       <Row>
         <td>Auction filters</td>
