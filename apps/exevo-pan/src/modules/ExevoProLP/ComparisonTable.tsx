@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import { Text } from 'components/Atoms'
 import { CheckBoxIcon, EmptyCheckBoxIcon } from 'assets/svgs'
 import { auctionEstimations } from 'Constants'
+import Strong from './Strong'
 
 const TitleRow = ({ className, ...props }: React.ComponentProps<'td'>) => (
   <tr className="after:bg-separator/50 relative after:absolute after:bottom-1 after:left-0 after:h-[1px] after:w-full">
@@ -16,90 +17,103 @@ const TitleRow = ({ className, ...props }: React.ComponentProps<'td'>) => (
   </tr>
 )
 
+const Row = ({ className, ...props }: React.ComponentProps<'tr'>) => (
+  <tr
+    className={clsx(
+      className,
+      'even:after:bg-separator/10 text-s child:py-3 child:px-4 after:-z-1 relative after:absolute after:top-0 after:left-0 after:h-full after:w-full',
+    )}
+    {...props}
+  />
+)
+
 const Feature = ({ className, ...props }: React.ComponentProps<'td'>) => (
-  <td className={clsx(className, 'text-s w-24 font-light')} {...props} />
+  <td className={clsx(className, 'font-light')} {...props} />
 )
 
 const Check = ({ empty = false }) => (
-  <td className="child:align-middle">
+  <Feature>
     {empty ? (
       <EmptyCheckBoxIcon className="fill-separator" />
     ) : (
       <CheckBoxIcon className="fill-primaryHighlight" />
     )}
-  </td>
-)
-
-const Strong = ({ className, ...props }: React.ComponentProps<'strong'>) => (
-  <strong className={clsx(className, 'text-rare')} {...props} />
+  </Feature>
 )
 
 const ComparisonTable = () => {
   console.log(9)
 
   return (
-    <table
-      className="mx-auto w-fit text-center"
-      style={{ borderSpacing: '32px 8px' }}
-    >
+    <table className="mx-auto text-center">
       <tr className="text-[32px]">
         <th style={{ width: 160 }} />
         <th>Free</th>
-        <th className="rare-gradient-text">Exevo Pro</th>
+        <th className="rare-gradient-text whitespace-nowrap">Exevo Pro</th>
       </tr>
 
       <TitleRow>Auctions</TitleRow>
 
-      <tr>
+      <Row>
         <td>Auction filters</td>
         <Feature>Regular filters</Feature>
         <Feature>
-          <Strong>Premium</Strong> filters
+          <Strong highlight>Premium filters</Strong>
         </Feature>
-      </tr>
-      <tr>
-        <td>Auction notifications</td>
-        <Feature>Schedule notifications</Feature>
-        <Feature>
-          <p className="text-center">Schedule notifications</p> <p>+</p>{' '}
-          <p>
-            <Strong>notifications on bid</Strong>
-          </p>
-        </Feature>
-      </tr>
-      <tr>
+      </Row>
+      <Row>
+        <td>Char Bazaar history</td>
+        <Check />
+        <Check />
+      </Row>
+      <Row>
+        <td>Schedule auction notifications</td>
+        <Check />
+        <Check />
+      </Row>
+      <Row>
+        <td>Auction bid notifications</td>
+        <Check empty />
+        <Check />
+      </Row>
+      <Row>
         <td>Highlight auction discounts</td>
         <Check empty />
         <Check />
-      </tr>
-      <tr>
+      </Row>
+      <Row>
         <td>Tibia Coins invested on each character</td>
         <Check empty />
         <Check />
-      </tr>
-      <tr>
+      </Row>
+      <Row>
         <td>Auction price estimations</td>
-        <Feature>
+        <Feature style={{ maxWidth: 144 }}>
           Up to <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} />{' '}
           auction value
         </Feature>
         <Check />
-      </tr>
+      </Row>
 
       <TitleRow>Bosses</TitleRow>
 
-      <tr>
+      <Row>
         <td>Boss spawn chances</td>
         <Feature>Regular bosses</Feature>
         <Feature>
-          <Strong>Premium</Strong> bosses
+          <Strong highlight>Premium bosses</Strong>
         </Feature>
-      </tr>
-      <tr>
+      </Row>
+      <Row>
+        <td>Hunting groups check and notification system</td>
+        <Check />
+        <Check />
+      </Row>
+      <Row>
         <td>Private hunting groups</td>
         <Check empty />
         <Check />
-      </tr>
+      </Row>
     </table>
   )
 }
