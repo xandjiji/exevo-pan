@@ -27,7 +27,7 @@ export default {
   },
   UserCard: {
     proSince: 'Pro since',
-    freeStatus: 'Free',
+    freeStatus: 'Basic',
   },
   Pitch: {
     thankYou: 'Thank you for being',

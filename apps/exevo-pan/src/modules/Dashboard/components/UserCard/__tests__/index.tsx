@@ -37,7 +37,7 @@ describe('<UserCard />', () => {
 
     expect(screen.getByText(user.name)).toBeInTheDocument()
     expect(screen.getByAltText('Ksu')).toHaveAttribute('src', 'image.png')
-    expect(screen.getByText('Free')).toBeInTheDocument()
+    expect(screen.getByText('Basic')).toBeInTheDocument()
   })
 
   test('should display a fallback avatar', () => {
