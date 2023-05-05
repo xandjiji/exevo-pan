@@ -4,6 +4,7 @@ import { Text } from 'components/Atoms'
 import { CheckBoxIcon, EmptyCheckBoxIcon } from 'assets/svgs'
 import { auctionEstimations } from 'Constants'
 import Strong from './Strong'
+import { PremiumBossesList, PremiumFiltersList } from './Tooltip'
 
 const TitleRow = ({ className, ...props }: React.ComponentProps<'td'>) => (
   <tr>
@@ -58,7 +59,9 @@ const ComparisonTable = () => {
         <td>Auction filters</td>
         <Feature>Regular filters</Feature>
         <Feature>
-          <Strong highlight>Premium filters</Strong>
+          <PremiumFiltersList>
+            <Strong highlight>Premium filters</Strong>
+          </PremiumFiltersList>
         </Feature>
       </Row>
       <Row>
@@ -101,7 +104,9 @@ const ComparisonTable = () => {
         <td>Boss spawn chances</td>
         <Feature>Regular bosses</Feature>
         <Feature>
-          <Strong highlight>Premium bosses</Strong>
+          <PremiumBossesList>
+            <Strong highlight>Premium bosses</Strong>
+          </PremiumBossesList>
         </Feature>
       </Row>
       <Row>

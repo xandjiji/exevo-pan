@@ -5,7 +5,6 @@ import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
-import { Tooltip } from 'components/Organisms'
 import {
   ThreeDimensionalMiniAuctionGrid,
   FeatureSection,
@@ -16,7 +15,8 @@ import {
   Phone,
   Notebook,
   HuntingGroupGrid,
-  Tooltip as List,
+  PremiumBossesList,
+  PremiumFiltersList,
   Strong,
   Gradient,
   ComparisonTable,
@@ -113,23 +113,11 @@ export default function ExevoPro() {
             <h3 className="max-w-[240px] text-center text-2xl">
               {templateMessage(translations.exevopro.bossTracker.pitch, {
                 strong: (
-                  <Tooltip
-                    offset={[0, 6]}
-                    content={
-                      <List.Ul>
-                        <List.Li>The Pale Count</List.Li>
-                        <List.Li>Shlorg</List.Li>
-                        <List.Li>Man in the Cave</List.Li>
-                        <List.Li>Ocyakao</List.Li>
-                        <List.Li>The Welter</List.Li>
-                        <List.Li>Yeti</List.Li>
-                      </List.Ul>
-                    }
-                  >
+                  <PremiumBossesList>
                     <Strong highlight>
                       {translations.exevopro.bossTracker.strong}
                     </Strong>
-                  </Tooltip>
+                  </PremiumBossesList>
                 ),
               })}
             </h3>
@@ -161,32 +149,11 @@ export default function ExevoPro() {
             <h3 className="max-w-[240px] text-center text-2xl">
               {templateMessage(translations.exevopro.exclusiveFilters.pitch, {
                 strong: (
-                  <Tooltip
-                    offset={[0, 6]}
-                    content={
-                      <List.Ul>
-                        <List.Li>
-                          {translations.exevopro.exclusiveFilters.tcInvested}
-                        </List.Li>
-                        <List.Li>
-                          {translations.exevopro.exclusiveFilters.storeContent}
-                        </List.Li>
-                        <List.Li>
-                          {translations.exevopro.exclusiveFilters.rareItems}
-                        </List.Li>
-                        <List.Li>
-                          {translations.exevopro.exclusiveFilters.soulwar}
-                        </List.Li>
-                        <List.Li>
-                          {translations.exevopro.exclusiveFilters.primalOrdeal}
-                        </List.Li>
-                      </List.Ul>
-                    }
-                  >
+                  <PremiumFiltersList>
                     <Strong highlight>
                       {translations.exevopro.exclusiveFilters.strong}
                     </Strong>
-                  </Tooltip>
+                  </PremiumFiltersList>
                 ),
               })}
             </h3>
