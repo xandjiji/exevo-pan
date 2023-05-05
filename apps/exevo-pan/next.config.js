@@ -47,6 +47,11 @@ module.exports = withBundleAnalyzer(
           destination: '/bosses/:server',
           permanent: true,
         },
+        {
+          source: '/exevopro',
+          destination: '/exevo-pro',
+          permanent: true,
+        },
       ]
     },
     webpack(config) {
