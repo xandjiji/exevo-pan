@@ -31,8 +31,9 @@ const pageUrl = buildUrl(routes.EXEVOPRO)
 
 export default function ExevoPro() {
   const { translations } = useTranslations()
+  const i18n = translations.exevopro
 
-  const pageTitle = buildPageTitle(translations.exevopro.Meta.title)
+  const pageTitle = buildPageTitle(i18n.Meta.title)
   const { locale } = useRouter()
   const previewSrc = loadRawSrc(`/pro-${locale}.png`)
 
@@ -47,18 +48,9 @@ export default function ExevoPro() {
         <meta key="preview-1" property="og:image" content={previewSrc} />
         <meta key="preview-2" property="twitter:image" content={previewSrc} />
 
-        <meta
-          name="description"
-          content={translations.exevopro.Meta.description}
-        />
-        <meta
-          property="twitter:description"
-          content={translations.exevopro.Meta.description}
-        />
-        <meta
-          property="og:description"
-          content={translations.exevopro.Meta.description}
-        />
+        <meta name="description" content={i18n.Meta.description} />
+        <meta property="twitter:description" content={i18n.Meta.description} />
+        <meta property="og:description" content={i18n.Meta.description} />
         <meta property="og:type" content="website" />
 
         <link rel="canonical" href={pageUrl} />
@@ -97,24 +89,22 @@ export default function ExevoPro() {
           <section className="relative mb-28 flex flex-col items-center gap-10">
             <ThreeDimensionalMiniAuctionGrid className="-z-1 absolute -top-28 -left-28 opacity-20 sm:-top-16 sm:-left-16 sm:opacity-25 md:-top-12 md:-left-12" />
             <h2 className="lgr:mt-16 text-onSurface lgr:w-fit w-min text-[64px] sm:text-[80px] md:text-[112px]">
-              {templateMessage(translations.exevopro.heading, {
+              {templateMessage(i18n.heading, {
                 exevopro: <Gradient>Exevo Pro</Gradient>,
               })}
             </h2>
 
             <NextLink href={routes.DASHBOARD.ROOT}>
-              <Button className="w-fit">{translations.exevopro.heroCTA}</Button>
+              <Button className="w-fit">{i18n.heroCTA}</Button>
             </NextLink>
           </section>
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.bossTracker.pitch, {
+              {templateMessage(i18n.bossTracker.pitch, {
                 strong: (
                   <PremiumBossesList>
-                    <Strong highlight>
-                      {translations.exevopro.bossTracker.strong}
-                    </Strong>
+                    <Strong highlight>{i18n.bossTracker.strong}</Strong>
                   </PremiumBossesList>
                 ),
               })}
@@ -125,7 +115,7 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.tcInvested.pitch, {
+              {templateMessage(i18n.tcInvested.pitch, {
                 strong: <Strong>Tibia Coins</Strong>,
               })}
             </h3>
@@ -145,12 +135,10 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.exclusiveFilters.pitch, {
+              {templateMessage(i18n.exclusiveFilters.pitch, {
                 strong: (
                   <PremiumFiltersList>
-                    <Strong highlight>
-                      {translations.exevopro.exclusiveFilters.strong}
-                    </Strong>
+                    <Strong highlight>{i18n.exclusiveFilters.strong}</Strong>
                   </PremiumFiltersList>
                 ),
               })}
@@ -169,12 +157,8 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.highlightDiscount.pitch, {
-                strong: (
-                  <Strong>
-                    {translations.exevopro.highlightDiscount.strong}
-                  </Strong>
-                ),
+              {templateMessage(i18n.highlightDiscount.pitch, {
+                strong: <Strong>{i18n.highlightDiscount.strong}</Strong>,
               })}
             </h3>
 
@@ -183,10 +167,8 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.notifications.pitch, {
-                strong: (
-                  <Strong>{translations.exevopro.notifications.strong}</Strong>
-                ),
+              {templateMessage(i18n.notifications.pitch, {
+                strong: <Strong>{i18n.notifications.strong}</Strong>,
               })}
             </h3>
 
@@ -200,39 +182,35 @@ export default function ExevoPro() {
 
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
-              {templateMessage(translations.exevopro.huntingGroups.pitch, {
-                strong: (
-                  <Strong>{translations.exevopro.huntingGroups.strong}</Strong>
-                ),
+              {templateMessage(i18n.huntingGroups.pitch, {
+                strong: <Strong>{i18n.huntingGroups.strong}</Strong>,
               })}
             </h3>
 
             <HuntingGroupGrid />
           </FeatureSection>
 
-          <p className="mb-8 text-center text-2xl">
-            {translations.exevopro.andMore}
-          </p>
+          <p className="mb-8 text-center text-2xl">{i18n.andMore}</p>
 
           <ComparisonTable />
 
           <section>
             <h2 className="text-onSurface text-center text-[48px] md:text-[64px]">
-              {templateMessage(translations.exevopro.footer, {
+              {templateMessage(i18n.footer, {
                 exevopro: <Gradient>Exevo Pro</Gradient>,
               })}
             </h2>
 
             <div className="my-10 grid gap-8 md:my-14 md:flex md:items-center md:justify-center md:gap-40">
               <ul className="mx-auto grid w-fit list-disc gap-1.5 md:mx-0 md:ml-8">
-                <li>{translations.exevopro.no.subscriptions}</li>
-                <li>{translations.exevopro.no.creditCard}</li>
-                <li>{translations.exevopro.no.extraFees}</li>
+                <li>{i18n.no.subscriptions}</li>
+                <li>{i18n.no.creditCard}</li>
+                <li>{i18n.no.extraFees}</li>
               </ul>
 
               <div>
                 <p className="flex flex-nowrap items-center justify-center gap-2 text-xl md:justify-start">
-                  {translations.exevopro.only}
+                  {i18n.only}
                   <Image
                     src={tibiaCoinSrc}
                     alt="Tibia Coin"
@@ -247,10 +225,10 @@ export default function ExevoPro() {
                 </p>
 
                 <p className="text-center text-xl">
-                  {templateMessage(translations.exevopro.payOnce, {
+                  {templateMessage(i18n.payOnce, {
                     forever: (
                       <strong className="whitespace-nowrap text-[32px]">
-                        {translations.exevopro.forever}
+                        {i18n.forever}
                       </strong>
                     ),
                   })}
@@ -260,7 +238,7 @@ export default function ExevoPro() {
 
             <NextLink href={routes.DASHBOARD.ROOT}>
               <Button className="mx-auto mt-8 block w-fit">
-                {translations.exevopro.footerCTA}
+                {i18n.footerCTA}
               </Button>
             </NextLink>
           </section>
