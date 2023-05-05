@@ -1,8 +1,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import clsx from 'clsx'
-import { Text } from 'components/Atoms'
+import { Text, Button } from 'components/Atoms'
 import { CheckBoxIcon, EmptyCheckBoxIcon } from 'assets/svgs'
-import { auctionEstimations } from 'Constants'
+import Link from 'next/link'
+import { routes, auctionEstimations } from 'Constants'
 import Strong from './Strong'
 import { PremiumBossesList, PremiumFiltersList } from './Tooltip'
 
@@ -119,6 +120,16 @@ const ComparisonTable = () => {
         <Check empty />
         <Check />
       </Row>
+
+      <tr>
+        <td />
+        <td />
+        <td className="pt-6">
+          <Link href={routes.DASHBOARD.ROOT}>
+            <Button>Start</Button>
+          </Link>
+        </td>
+      </tr>
     </table>
   )
 }
