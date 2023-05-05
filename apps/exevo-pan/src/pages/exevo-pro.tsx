@@ -107,8 +107,6 @@ export default function ExevoPro() {
             </NextLink>
           </section>
 
-          <ComparisonTable />
-
           <FeatureSection>
             <h3 className="max-w-[240px] text-center text-2xl">
               {templateMessage(translations.exevopro.bossTracker.pitch, {
@@ -212,9 +210,11 @@ export default function ExevoPro() {
             <HuntingGroupGrid />
           </FeatureSection>
 
-          <p className="text-center text-2xl">
+          <p className="mb-8 text-center text-2xl">
             {translations.exevopro.andMore}
           </p>
+
+          <ComparisonTable />
 
           <section>
             <h2 className="text-onSurface text-center text-[48px] md:text-[64px]">
