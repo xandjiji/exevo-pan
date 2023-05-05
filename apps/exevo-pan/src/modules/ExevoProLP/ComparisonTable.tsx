@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import clsx from 'clsx'
-import { Text, Button } from 'components/Atoms'
+import { Text } from 'components/Atoms'
 import { CheckBoxIcon, EmptyCheckBoxIcon } from 'assets/svgs'
-import Link from 'next/link'
-import { routes, auctionEstimations } from 'Constants'
+import { auctionEstimations } from 'Constants'
 import Strong from './Strong'
 import { PremiumBossesList, PremiumFiltersList } from './Tooltip'
 
@@ -47,90 +46,82 @@ const ComparisonTable = () => {
   console.log(9)
 
   return (
-    <table className="mx-auto text-center">
-      <tr className="text-[32px]">
-        <th style={{ width: 160 }} />
-        <th>Free</th>
-        <th className="rare-gradient-text whitespace-nowrap">Exevo Pro</th>
-      </tr>
+    <section className="custom-scrollbar max-w-full overflow-auto pb-2 sm:pb-0">
+      <table className="mx-auto text-center">
+        <tr className="text-[32px]">
+          <th style={{ width: 160 }} />
+          <th>Free</th>
+          <th className="rare-gradient-text whitespace-nowrap">Exevo Pro</th>
+        </tr>
 
-      <TitleRow className="!pt-0">Auctions</TitleRow>
+        <TitleRow className="!pt-0">Auctions</TitleRow>
 
-      <Row>
-        <td>Auction filters</td>
-        <Feature>Regular filters</Feature>
-        <Feature>
-          <PremiumFiltersList>
-            <Strong highlight>Premium filters</Strong>
-          </PremiumFiltersList>
-        </Feature>
-      </Row>
-      <Row>
-        <td>Char Bazaar history</td>
-        <Check />
-        <Check />
-      </Row>
-      <Row>
-        <td>Schedule auction notifications</td>
-        <Check />
-        <Check />
-      </Row>
-      <Row>
-        <td>Auction bid notifications</td>
-        <Check empty />
-        <Check />
-      </Row>
-      <Row>
-        <td>Highlight auction discounts</td>
-        <Check empty />
-        <Check />
-      </Row>
-      <Row>
-        <td>Tibia Coins invested on each character</td>
-        <Check empty />
-        <Check />
-      </Row>
-      <Row>
-        <td>Auction price estimations</td>
-        <Feature style={{ maxWidth: 144 }}>
-          Up to <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} />{' '}
-          auction value
-        </Feature>
-        <Check />
-      </Row>
+        <Row>
+          <td>Auction filters</td>
+          <Feature>Regular filters</Feature>
+          <Feature>
+            <PremiumFiltersList>
+              <Strong highlight>Premium filters</Strong>
+            </PremiumFiltersList>
+          </Feature>
+        </Row>
+        <Row>
+          <td>Char Bazaar history</td>
+          <Check />
+          <Check />
+        </Row>
+        <Row>
+          <td>Schedule auction notifications</td>
+          <Check />
+          <Check />
+        </Row>
+        <Row>
+          <td>Auction bid notifications</td>
+          <Check empty />
+          <Check />
+        </Row>
+        <Row>
+          <td>Highlight auction discounts</td>
+          <Check empty />
+          <Check />
+        </Row>
+        <Row>
+          <td>Tibia Coins invested on each character</td>
+          <Check empty />
+          <Check />
+        </Row>
+        <Row>
+          <td>Auction price estimations</td>
+          <Feature style={{ maxWidth: 144 }}>
+            Up to <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} />{' '}
+            auction value
+          </Feature>
+          <Check />
+        </Row>
 
-      <TitleRow>Bosses</TitleRow>
+        <TitleRow>Bosses</TitleRow>
 
-      <Row>
-        <td>Boss spawn chances</td>
-        <Feature>Regular bosses</Feature>
-        <Feature>
-          <PremiumBossesList>
-            <Strong highlight>Premium bosses</Strong>
-          </PremiumBossesList>
-        </Feature>
-      </Row>
-      <Row>
-        <td>Hunting groups check and notification system</td>
-        <Check />
-        <Check />
-      </Row>
-      <Row>
-        <td>Private hunting groups</td>
-        <Check empty />
-        <Check />
-      </Row>
-
-      <tr>
-        <td />
-        <td />
-        <td className="pt-6">
-          <Link href={routes.DASHBOARD.ROOT}>
-            <Button>Start</Button>
-          </Link>
-        </td>
-      </tr>
-    </table>
+        <Row>
+          <td>Boss spawn chances</td>
+          <Feature>Regular bosses</Feature>
+          <Feature>
+            <PremiumBossesList>
+              <Strong highlight>Premium bosses</Strong>
+            </PremiumBossesList>
+          </Feature>
+        </Row>
+        <Row>
+          <td>Hunting groups check and notification system</td>
+          <Check />
+          <Check />
+        </Row>
+        <Row>
+          <td>Private hunting groups</td>
+          <Check empty />
+          <Check />
+        </Row>
+      </table>
+    </section>
   )
 }
 
