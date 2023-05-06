@@ -1,5 +1,5 @@
 import { google } from 'Constants'
-import { isServer } from '../isServer'
+import { isServer } from './isServer'
 
 const pageView = (url: URL): void => {
   window.gtag('config', google.GTM_ID, {

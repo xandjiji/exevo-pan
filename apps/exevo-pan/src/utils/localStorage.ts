@@ -1,4 +1,4 @@
-import { isServer } from '../isServer'
+import { isServer } from './isServer'
 
 export function saveToLocalStorage<T>(key: string, data: T): void {
   if (!isServer()) {

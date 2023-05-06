@@ -1,4 +1,4 @@
-import { getNumberSign } from '../getNumberSign'
+import { getNumberSign } from './getNumberSign'
 
 export const formatNumberWithCommas = (
   value: number | string,

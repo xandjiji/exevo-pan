@@ -1,5 +1,5 @@
 import { avatar as AVATAR } from 'Constants'
-import { randomIntFromRange } from '../random'
+import { randomIntFromRange } from './random'
 
 export const avatar = {
   getRandom: {
