@@ -36,7 +36,7 @@ import {
   raidBossesNames,
 } from './utils'
 
-const INITIAL_DISPLAYED_COUNT = 4
+const INITIAL_DISPLAYED_COUNT = 6
 
 type CheckedBossesProps = {
   guildId: string
@@ -286,8 +286,8 @@ const CheckedBosses = ({
         </div>
       </div>
 
-      <div className="relative grid grid-cols-[repeat(auto-fit,minmax(220px,1fr))] gap-3 md:grid-cols-2">
-        {bossList.map((boss) => {
+      <div className="lgr:grid-cols-3 relative grid gap-3 md:grid-cols-2">
+        {bossList.map((boss, idx) => {
           const {
             name,
             location,
@@ -308,6 +308,7 @@ const CheckedBosses = ({
               location={location}
               premium={premiumBosses.set.has(name)}
               className={clsx(
+                !expanded && idx > 3 && 'lgr:flex hidden',
                 recentlyUpdatedBosses.find(
                   (updatedBoss) =>
                     updatedBoss.name === name &&
