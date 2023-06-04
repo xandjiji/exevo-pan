@@ -271,37 +271,46 @@ export default function GuildPage({
                       }
                     />
                   </ConditionalClientComponent>
-                  <MemberList
-                    title={i18n.members}
-                    guildName={guild.name}
-                    members={members}
-                    isEditor={isEditor || EXEVO_PAN_ADMIN}
-                    currentMember={currentMember}
-                    isPrivate={guild.private && !EXEVO_PAN_ADMIN}
-                  />
-                  {(isMember || EXEVO_PAN_ADMIN) && (
-                    <Tabs.Group>
-                      <Tabs.Panel label={i18n.groupApplications}>
-                        <ApplyList
-                          list={applications}
-                          allowAction={isApprover || EXEVO_PAN_ADMIN}
-                          onAction={({ application, newMember }) =>
-                            setGuildData((prev) => ({
-                              applications: prev.applications.filter(
-                                ({ id }) => id !== application.id,
-                              ),
-                              members: newMember
-                                ? [...prev.members, newMember]
-                                : prev.members,
-                            }))
-                          }
-                        />
-                      </Tabs.Panel>
-                      <Tabs.Panel label={i18n.logHistory}>
-                        <LogHistory guildId={guild.id} />
-                      </Tabs.Panel>
-                    </Tabs.Group>
-                  )}
+
+                  <div
+                    className={clsx(
+                      'mx-auto grid w-full gap-8',
+                      (isMember || EXEVO_PAN_ADMIN) &&
+                        'lg:grid-cols-2 lg:items-start',
+                    )}
+                  >
+                    <MemberList
+                      title={i18n.members}
+                      guildName={guild.name}
+                      members={members}
+                      isEditor={isEditor || EXEVO_PAN_ADMIN}
+                      currentMember={currentMember}
+                      isPrivate={guild.private && !EXEVO_PAN_ADMIN}
+                    />
+                    {(isMember || EXEVO_PAN_ADMIN) && (
+                      <Tabs.Group>
+                        <Tabs.Panel label={i18n.groupApplications}>
+                          <ApplyList
+                            list={applications}
+                            allowAction={isApprover || EXEVO_PAN_ADMIN}
+                            onAction={({ application, newMember }) =>
+                              setGuildData((prev) => ({
+                                applications: prev.applications.filter(
+                                  ({ id }) => id !== application.id,
+                                ),
+                                members: newMember
+                                  ? [...prev.members, newMember]
+                                  : prev.members,
+                              }))
+                            }
+                          />
+                        </Tabs.Panel>
+                        <Tabs.Panel label={i18n.logHistory}>
+                          <LogHistory guildId={guild.id} />
+                        </Tabs.Panel>
+                      </Tabs.Group>
+                    )}
+                  </div>
                 </div>
               </>
             )}
