@@ -22,10 +22,14 @@ const MessageBoard = ({
   if (!description && !isEditor) return null
 
   return (
-    <div className="grid gap-2">
+    <div className="flex flex-col gap-2">
       <h4 className="text-tsm text-onSurface font-normal">{title}</h4>
       {description ? (
-        <Alert variant="primary" noIcon className="whitespace-pre-line">
+        <Alert
+          variant="primary"
+          noIcon
+          className="flex grow flex-col justify-between whitespace-pre-line"
+        >
           <div style={{ wordBreak: 'break-word' }}>{description}</div>
 
           {isEditor && (
@@ -41,7 +45,7 @@ const MessageBoard = ({
           )}
         </Alert>
       ) : (
-        <div className="border-1 border-separator mx-auto grid w-full place-items-center rounded-md border-dashed py-2 px-4">
+        <div className="border-1 border-separator mx-auto grid w-full grow place-items-center rounded-md border-dashed py-2 px-4">
           <Button hollow pill className="mx-auto text-base" onClick={onEdit}>
             <EditIcon className="h-4 w-4" />
             {addText}

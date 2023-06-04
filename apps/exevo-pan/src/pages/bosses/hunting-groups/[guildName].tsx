@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
 import { useState, useCallback } from 'react'
@@ -22,7 +23,7 @@ import {
   LogHistory,
   CheckedBosses,
 } from 'modules/BossHunting'
-import { EditIcon, SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
+import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
 import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
@@ -133,7 +134,7 @@ export default function GuildPage({
               <>
                 <GuildHero guild={guild} memberCount={members.length} />
 
-                <div className="z-1 inner-container relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px] lg:w-[768px]">
+                <div className="z-1 inner-container lgr:w-[1024px] relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px] lg:w-[768px]">
                   {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
 
                   <div className="child:ml-auto md:child:ml-0 grid items-center gap-4 md:flex md:justify-end md:gap-6">
@@ -226,24 +227,33 @@ export default function GuildPage({
                       </>
                     )}
                   </div>
-                  <MessageBoard
-                    title={i18n.publicBoard.title}
-                    description={guild.description}
-                    isEditor={isEditor || EXEVO_PAN_ADMIN}
-                    addText={i18n.publicBoard.add}
-                    editText={i18n.publicBoard.edit}
-                    onEdit={toggleEditDialog}
-                  />
-                  {(isMember || EXEVO_PAN_ADMIN) && (
+
+                  <div
+                    className={clsx(
+                      'grid gap-8',
+                      (isMember || EXEVO_PAN_ADMIN) && 'lgr:grid-cols-2',
+                    )}
+                  >
                     <MessageBoard
-                      title={i18n.privateBoard.title}
-                      description={guild.messageBoard}
+                      title={i18n.publicBoard.title}
+                      description={guild.description}
                       isEditor={isEditor || EXEVO_PAN_ADMIN}
-                      addText={i18n.privateBoard.add}
-                      editText={i18n.privateBoard.edit}
+                      addText={i18n.publicBoard.add}
+                      editText={i18n.publicBoard.edit}
                       onEdit={toggleEditDialog}
                     />
-                  )}
+                    {(isMember || EXEVO_PAN_ADMIN) && (
+                      <MessageBoard
+                        title={i18n.privateBoard.title}
+                        description={guild.messageBoard}
+                        isEditor={isEditor || EXEVO_PAN_ADMIN}
+                        addText={i18n.privateBoard.add}
+                        editText={i18n.privateBoard.edit}
+                        onEdit={toggleEditDialog}
+                      />
+                    )}
+                  </div>
+
                   <ConditionalClientComponent
                     ssr={!EXEVO_PAN_ADMIN && !currentMember}
                   >
