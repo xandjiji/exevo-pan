@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from 'react'
 import * as options from './options'
-import { buildOption } from './utils'
+import { buildOption, sortOptions } from './utils'
 import { DrawerFieldsContextData, DrawerFieldsProviderProps } from './types'
 
 const DEFAULT_STATE: DrawerFieldsContextData = {
@@ -26,8 +26,9 @@ export const DrawerFieldsProvider = ({
   ...serverProps
 }: DrawerFieldsProviderProps) => {
   const [serverOptions] = useState<Option[]>(() =>
-    Object.keys(serverProps.serverData).map(buildOption),
+    Object.keys(serverProps.serverData).map(buildOption).sort(sortOptions),
   )
+
   return (
     <DrawerFieldsContext.Provider
       value={{ ...serverProps, ...options, serverOptions }}
