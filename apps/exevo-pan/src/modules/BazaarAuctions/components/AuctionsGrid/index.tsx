@@ -65,7 +65,7 @@ const AuctionsGrid = () => {
     <main>
       <div
         id="grid-header"
-        className="z-71 bg-surface inner-container sticky top-0 flex h-[70px] w-full select-none items-end gap-2 py-2 shadow-md md:items-center"
+        className="z-51 bg-surface inner-container sticky top-0 flex h-[70px] w-full select-none items-end gap-2 py-2 shadow-md md:items-center"
       >
         <S.Button
           tabIndex={0}
