@@ -8,7 +8,7 @@
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
-    "dev": "PORT=4000 sucrase-node src",
+    "dev": "PORT=4000 NODE_OPTIONS=--max_old_space_size=10000 sucrase-node src",
     "build": "rm -rf dist && sucrase ./src -d ./dist --transforms typescript,imports && cp ./src/Data/*.json ./dist/Data && cp ./src/Data/*.jsonl ./dist/Data",
     "start": "PORT=4000 node --max_old_space_size=10000 ./dist",
     "staging": "yarn build && STAGING=true PORT=4546 node ./dist"
