@@ -60,7 +60,13 @@ const SortingDialog = () => {
               }
               active={sortingMode === index}
             >
-              {homepage.AuctionsGrid.sortModes[sortModesTranslationKey[mode]]}
+              {
+                homepage.AuctionsGrid.sortModes[
+                  sortModesTranslationKey[
+                    mode
+                  ] as keyof typeof homepage.AuctionsGrid.sortModes
+                ]
+              }
             </RadioButton>
           ))}
         </div>
