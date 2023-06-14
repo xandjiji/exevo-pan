@@ -6,9 +6,7 @@ import { BreadcrumbsProps } from './types'
 const Separator = () => <span className="mx-1 font-light after:content-['>']" />
 
 const Breadcrumbs = ({ postTitle, ...props }: BreadcrumbsProps) => {
-  const {
-    translations: { blog },
-  } = useTranslations()
+  const { blog } = useTranslations()
   return (
     <div
       className="text-tsm max-w-min overflow-hidden text-ellipsis whitespace-nowrap"

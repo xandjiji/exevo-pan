@@ -12,9 +12,7 @@ import { PurchaseFormProps } from './types'
 const { BANK_CHARACTER } = advertising
 
 const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
-  const {
-    translations: { common, dashboard },
-  } = useTranslations()
+  const { common, dashboard } = useTranslations()
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',

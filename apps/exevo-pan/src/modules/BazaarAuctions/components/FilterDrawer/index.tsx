@@ -39,9 +39,7 @@ const freeTags = Object.keys(tagsDictionary).filter(
 )
 
 const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
-  const {
-    translations: { common, homepage },
-  } = useTranslations()
+  const { common, homepage } = useTranslations()
   const i18n = homepage.FilterDrawer
 
   const { data } = useSession()
@@ -1014,7 +1012,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                         : 'bg-rare/50 text-onSurface'
                     }
                   >
-                    {common.SpecialTags[tag]}
+                    {common.SpecialTags[tag as keyof typeof common.SpecialTags]}
                   </Chip>
                 </Tooltip>
               )
@@ -1023,7 +1021,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <Tooltip
               style={{ width: 280 }}
               offset={[0, 6]}
-              content={i18n.tooltips.rareNicknames}
+              content={<>{i18n.tooltips.rareNicknames}</>}
             >
               <Chip
                 overrideStatus={filterState.rareNick}
@@ -1047,7 +1045,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                   })
                 }
               >
-                {common.SpecialTags[tag]}
+                {common.SpecialTags[tag as keyof typeof common.SpecialTags]}
               </Chip>
             ))}
           </S.ChipWrapper>

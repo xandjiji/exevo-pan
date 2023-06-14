@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/bosses'
+
+export default defaultComposer(defaultTranslations, {
   Header: {
     bossTracker: 'Boss Tracker',
     huntingGroups: 'Grupos de caça',
@@ -15,7 +18,7 @@ export default {
     toSpawn: 'nascer neste local.',
     thereAre: 'Faltam',
     /* days left */
-    left: '',
+    left: ' ',
     before: 'antes que ele possa nascer nesse local.',
     itsUpToYou: 'Cabe a você descobrir qual dos locais é este',
     chanceToSpawn: 'Chance de nascer hoje',
@@ -35,4 +38,4 @@ export default {
       Grorlam: 'Várias localizações dentro de Mount Sternum (Thais)',
     },
   },
-}
+})

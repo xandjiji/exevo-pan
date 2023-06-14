@@ -16,9 +16,7 @@ const Section = ({ className, ...props }: JSX.IntrinsicElements['section']) => (
 )
 
 const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
-  const {
-    translations: { bosses },
-  } = useTranslations()
+  const { bosses } = useTranslations()
   const i18n = bosses.BossDialog
 
   const info = useMemo(
@@ -102,7 +100,9 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
                   />
                   {!!description && (
                     <caption className="text-tsm">
-                      {i18n.descriptions[description] ?? description}
+                      {i18n.descriptions[
+                        description as keyof typeof i18n.descriptions
+                      ] ?? description}
                     </caption>
                   )}
                 </li>

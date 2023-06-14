@@ -1,4 +1,9 @@
-export default {
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/calculators'
+/* @ ToDo: i18n-es */
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     Main: {
       title: 'Calculadoras',
@@ -18,21 +23,6 @@ export default {
       title: 'Charm Damage',
       description:
         'Compara el daño medio entre diferentes charms para ver cual es mejor',
-    },
-    /* @ ToDo: */
-    ImbuementsCost: {
-      title: 'Imbuements Cost',
-      description:
-        'Calculate the cheapest way to buy materials for your imbuements',
-    },
-    /* @ ToDo: */
-    LootSplit: {
-      title: 'Loot Split',
-      description: 'Manage and split your party hunt loots',
-    },
-    AuctionEstimation: {
-      title: 'Auction price estimations',
-      description: 'Estimate the price of any character on the Char Bazaar',
     },
   },
   none: 'Nada',
@@ -68,78 +58,7 @@ export default {
   CharmDamage: {
     thisArticle: 'este artículo',
   },
-  /* @ ToDo: */
-  ImbuementsCost: {
-    labels: {
-      configurations: 'Configurations',
-      goldToken: 'Gold Token price',
-    },
-    totalCost: 'Total cost',
-    goldTokenOnly: 'Gold Tokens only',
-    marketOnly: 'Market only',
-    tooltipInfo: '(Includes: base price + 100% success fee)',
-    pricePlaceholder: 'Current price',
-    buyIconTooltip: 'Should be bought using',
-  },
-  /* @ ToDo: */
-  LootSplit: {
-    tabs: {
-      newSession: 'New session',
-      history: 'History',
-    },
-    labels: {
-      textArea: 'Paste your party hunt session',
-      tooltipClipboard: 'Party Hunt session analyser',
-      summary: 'Summary',
-      teamSession: 'Team session',
-      transfers: 'Transfers',
-      total: {
-        waste: 'Total waste',
-        profit: 'Total profit',
-      },
-    },
-    each: 'each',
-    emptyState: 'No session',
-    actions: {
-      save: 'Save',
-      delete: 'Delete',
-      data: 'Data',
-      done: 'Done',
-    },
-    advancedOptions: 'Advanced options',
-    AdvancedOptionsDialog: {
-      addExtraExpenses: 'Add extra expenses',
-      extraCostPlaceholder: 'Extra gold costs',
-      removePlayer: 'Remove player',
-    },
-    SessionDialog: {
-      originalSession: 'Original hunt session',
-      extraExpenses: 'Extra expenses',
-      removedPlayers: 'Removed players',
-    },
-    Clipboard: {
-      teamSession: 'Team session',
-      partyMembers: 'Party members',
-      bankTransfers: 'Bank transfers',
-      shouldTransfer: 'should transfer',
-      to: 'to',
-    },
-    toast: {
-      added: 'Session was saved',
-      removed: 'Session was removed',
-    },
-  },
-  AuctionEstimation: {
-    location: 'Server location',
-    battleye: {
-      green: 'Green',
-      yellow: 'Yellow',
-    },
-    vocation: 'Vocation',
-    search: 'Search',
-    similarAuctions: 'Similar auctions',
-    emptyState: 'No auctions',
-    goToHistory: 'Explore more past auctions using our {{history}}',
-    history: 'Char Bazaar History',
-  },
-}
+  AuctionEstimation: {},
+  ImbuementsCost: {},
+  LootSplit: {},
+})

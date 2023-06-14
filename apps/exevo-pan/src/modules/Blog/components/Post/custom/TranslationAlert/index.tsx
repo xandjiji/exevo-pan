@@ -4,9 +4,7 @@ import { blockquote as Blockquote } from '../../Style/Blockquote'
 import { ExternalLink } from '../Links'
 
 const TranslationAlert = () => {
-  const {
-    translations: { blog },
-  } = useTranslations()
+  const { blog } = useTranslations()
 
   return (
     <Blockquote>

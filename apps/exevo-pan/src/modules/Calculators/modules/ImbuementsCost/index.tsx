@@ -19,9 +19,7 @@ import { tierOptions, RECIPES, RecordKeys, tierName } from './schema'
 import styles from './styles.module.css'
 
 const ImbuementsCost = () => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const [recipeIndex, setRecipeIndex] = useState(0)
   const [stateRecord, updateRecord] = useStateRecord()

@@ -63,9 +63,7 @@ export const Emoji = ({
 )
 
 export const ExevoProExclusive = () => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
 
   return (
     <NextLink

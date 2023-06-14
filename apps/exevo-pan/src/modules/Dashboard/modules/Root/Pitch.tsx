@@ -42,9 +42,7 @@ type PitchProps = {
 }
 
 const Pitch = ({ proStatus }: PitchProps) => {
-  const {
-    translations: { dashboard },
-  } = useTranslations()
+  const { dashboard } = useTranslations()
   const i18n = dashboard.Pitch
 
   return (

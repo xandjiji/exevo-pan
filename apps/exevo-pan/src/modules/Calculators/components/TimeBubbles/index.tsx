@@ -22,9 +22,7 @@ const Bubble = ({ time, children, className, ...props }: BubbleProps) => (
 )
 
 const TimeBubbles = ({ seconds, className, ...props }: TimeBubblesProps) => {
-  const {
-    translations: { common, calculators },
-  } = useTranslations()
+  const { common, calculators } = useTranslations()
 
   const timeObject = useMemo(() => secondsToTimeObject(seconds), [seconds])
 

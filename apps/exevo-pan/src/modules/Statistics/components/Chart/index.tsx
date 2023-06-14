@@ -22,9 +22,7 @@ const Chart = ({
   className,
   ...props
 }: ChartProps) => {
-  const {
-    translations: { statistics, common },
-  } = useTranslations()
+  const { statistics, common } = useTranslations()
 
   const { colors } = useTheme()
 
@@ -99,7 +97,9 @@ const Chart = ({
           const date = new Date()
           date.setDate(date.getDate() - index)
           return `${date.getDate()}/${date.getMonth() + 1}, ${
-            common.Weekdays[date.getDay()]
+            common.Weekdays[
+              date.getDay() as unknown as keyof typeof common.Weekdays
+            ]
           }`
         })
         .reverse(),

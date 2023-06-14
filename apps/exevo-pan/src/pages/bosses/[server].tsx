@@ -29,7 +29,7 @@ export default function BossTrackerPage(args: BossTrackerProps) {
   const pagePath = `${routes.BOSSES.TRACKER}/${bossChances.server}`
   const pageUrl = buildUrl(pagePath)
 
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.bossTracker.Meta.title
   const previewSrc = PreviewImageClient.getSrc({

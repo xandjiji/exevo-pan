@@ -22,9 +22,7 @@ export default { Ul, Li }
 type ListContentProps = { children: JSX.Element }
 
 export const PremiumFiltersList = ({ children }: ListContentProps) => {
-  const {
-    translations: { exevopro },
-  } = useTranslations()
+  const { exevopro } = useTranslations()
   const i18n = exevopro
 
   return (

@@ -6,9 +6,7 @@ import { ExevoPanIcon } from 'assets/svgs'
 import { routes } from 'Constants'
 
 export const ExevoProCTA = () => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   const { status, data } = useSession()
 
   const displayCTA = status !== 'loading' && !data?.user.proStatus

@@ -1,4 +1,9 @@
-export default {
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/common'
+/* @ ToDo: i18n-es */
+
+export default defaultComposer(defaultTranslations, {
   error: {
     P1: '¡oops!',
     P2: '¡página no encontrada!',
@@ -7,8 +12,6 @@ export default {
   Header: {
     h1: {
       home: '¡Compra y vende caracteres de Tibia en el Char Bazaar oficial!',
-      /* @ ToDo: i18n */
-      calculators: 'All sorts of tools and calculators for Tibia',
       statistics:
         '¡Descubre estadísticas sobre personajes vendidos en el Char Bazaar!',
       highscores:
@@ -22,8 +25,6 @@ export default {
     },
     openMenuLabel: 'Abre el menú de navegación',
     closeMenuLabel: 'Cerrar el menú de navegación',
-    /* @ ToDo: i18n */
-    openUserMenu: 'Open user menu',
     logoLabel: 'Ir a la pagina principal',
     nav: {
       charBazaar: 'Char Bazaar',
@@ -39,7 +40,6 @@ export default {
     themeSwitch: 'Habilitar tema nocturno',
     AccountButton: {
       dashboard: 'Dashboard',
-      logout: 'Logout',
     },
   },
   BlogTags: {
@@ -183,18 +183,13 @@ export default {
       prefix: 'Este personaje ha invertido al menos',
       suffix: 'Tibia Coins en compras de la tienda',
       invested: 'invertido',
-      /* @ ToDo: i18n */
-      exclusive: 'Exclusive for {{exevopro}}',
     },
 
     AuctionStatus: 'Estado de la subasta',
     BidStatus: 'Oferta actual',
     highlightLabelText: '¡Destaque su subasta!',
     CharacterModal: {
-      /* @ ToDo: i18n */
       totalInvested: 'Total invertido',
-      /* @ ToDo: i18n */
-      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Primer addon',
         secondAddon: 'Segundo addon',
@@ -217,55 +212,19 @@ export default {
   AnchorIconLabel: 'Copiar link',
   CharacterTooltipLabel: 'Ir a la página del personaje',
   Newsticker: 'Artículos recientes',
-  /* @ ToDo: i18n */
-  SignIn: {
-    title: 'Sign in with',
-    subtext: 'By signing in, you agree to our',
-  },
+  SignIn: {},
   termsOfService: 'Terms of Service',
   privacyPolicy: 'Privacy Policy',
-  /* @ ToDo: i18n */
-  SuggestedReading: {
-    miniTitle: 'Suggested reading:',
-  },
+  SuggestedReading: {},
   RangeDatePicker: {
     currentMonthLabel: 'Mes actual',
     nextMonthLabel: 'Proximo mes',
   },
   genericError: '¡Ups! Algo salió mal',
   genericLoading: 'Cargando...',
-  exevoProCTA: 'Become {{exevoPro}}',
+  exevoProCTA: null,
   play: 'Jugar',
-  SetupNotifications: {
-    notAuthed: 'You must {{logIn}} to set up auction notifications',
-    logIn: 'log in',
-    permission: 'Please {{enableNotifications}} on this device',
-    enableNotifications: 'enable notifications',
-    deviceReady: 'This device is receiving {{notifications}}!',
-    notifications: 'notifications',
-    testTitle: 'Hey there 👋',
-    testText: 'How are you doing?',
-    successMessage: 'Device registered!',
-  },
-  AuctionEstimationAlerts: {
-    Disclaimer: {
-      first: 'Value is always {{subjective}}!',
-      subjective: 'subjective',
-      second: 'This estimation only considers:',
-      server: 'Server type',
-      character: 'Skills, level and vocation',
-    },
-    Failed: {
-      message: 'Not many similar characters were found in our database',
-    },
-    ProOnly: {
-      message:
-        'Auctions estimated above {{freeCap}} are only available for {{exevoPro}} members',
-    },
-  },
-  EstimatedPriceBox: {
-    label: 'Estimated price',
-    similarFound: '{{count}} similar auction',
-    similarFoundPlural: '{{count}} similar auctions',
-  },
-}
+  SetupNotifications: {},
+  AuctionEstimationAlerts: {},
+  EstimatedPriceBox: {},
+})

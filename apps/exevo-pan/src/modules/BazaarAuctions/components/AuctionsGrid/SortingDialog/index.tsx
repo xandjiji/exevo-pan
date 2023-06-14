@@ -18,9 +18,7 @@ const sortModes: Array<keyof typeof sortModesTranslationKey> = [
 ]
 
 const SortingDialog = () => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
 
   const {
     sortingOptions: { descendingOrder, sortingMode },
@@ -62,7 +60,13 @@ const SortingDialog = () => {
               }
               active={sortingMode === index}
             >
-              {homepage.AuctionsGrid.sortModes[sortModesTranslationKey[mode]]}
+              {
+                homepage.AuctionsGrid.sortModes[
+                  sortModesTranslationKey[
+                    mode
+                  ] as keyof typeof homepage.AuctionsGrid.sortModes
+                ]
+              }
             </RadioButton>
           ))}
         </div>

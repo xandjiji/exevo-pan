@@ -1,4 +1,9 @@
-export default {
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/blog'
+/* @ ToDo: i18n-es */
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Blog',
     description:
@@ -27,8 +32,6 @@ export default {
       alreadyRegistered: 'Este email ya está registrado',
       success: 'Gracias',
       generic: 'Algo salió mal',
-      /* @ ToDo: i18n */
-      toastSuccess: 'Successfuly subscribed',
     },
   },
   Authors: {
@@ -45,4 +48,4 @@ export default {
       '¡Esta publicación aún no está disponible en español! Puedes ayudarnos a traducir este contenido',
     link: 'aquí',
   },
-}
+})

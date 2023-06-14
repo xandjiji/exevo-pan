@@ -13,9 +13,7 @@ type TransactionHistoryProps = {
 const PAGE_SIZE = 10
 
 export const List = ({ list, onDelete }: TransactionHistoryProps) => {
-  const {
-    translations: { dashboard },
-  } = useTranslations()
+  const { dashboard } = useTranslations()
 
   const i18n = dashboard.Devices
 
@@ -101,8 +99,8 @@ export const List = ({ list, onDelete }: TransactionHistoryProps) => {
                   <button
                     className="clickable mx-auto grid place-items-center rounded-sm p-0.5"
                     type="button"
-                    title={i18n.deleteLabel}
-                    aria-label={i18n.deleteLabel}
+                    title={i18n.dialogHeading}
+                    aria-label={i18n.dialogHeading}
                     onClick={() => setToRemove(auth)}
                   >
                     <TrashIcon className="fill-red h-4 w-4" />

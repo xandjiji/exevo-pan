@@ -17,9 +17,7 @@ const FilterControl = ({
   className,
   ...props
 }: JSX.IntrinsicElements['section']) => {
-  const {
-    translations: { common, homepage },
-  } = useTranslations()
+  const { common, homepage } = useTranslations()
 
   const { imbuementOptions, charmOptions } = useDrawerFields()
   const { activeFilterCount, filterState, mode, dispatch } = useAuctions()
@@ -473,7 +471,7 @@ const FilterControl = ({
                 })
               }
             >
-              {common.SpecialTags[tag]}
+              {common.SpecialTags[tag as keyof typeof common.SpecialTags]}
             </S.Chip>
           ))}
 

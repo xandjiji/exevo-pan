@@ -1,9 +1,7 @@
 import { useTranslations } from 'contexts/useTranslation'
 
 const TransactionId = ({ children }: { children: React.ReactNode }) => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
 
   return (
     <div>

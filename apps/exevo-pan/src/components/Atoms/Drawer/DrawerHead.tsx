@@ -9,9 +9,7 @@ export default ({
   className,
   ...props
 }: DrawerHeadProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <div

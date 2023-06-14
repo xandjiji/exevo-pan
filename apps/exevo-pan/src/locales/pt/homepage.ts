@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/homepage'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Leilões',
     description: 'Filtre e explore chares de Tibia no Char Bazaar oficial!',
@@ -130,4 +133,4 @@ export default {
       items: 'items estão selecionados',
     },
   },
-}
+})

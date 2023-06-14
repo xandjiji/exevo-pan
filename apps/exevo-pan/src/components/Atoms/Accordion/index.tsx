@@ -13,9 +13,7 @@ const Accordion = ({
   children,
   ...props
 }: AccordionProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const buttonId = useId()
   const contentId = useId()

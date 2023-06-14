@@ -7,9 +7,7 @@ import { routes } from 'Constants'
 import { NewstickerProps } from './types'
 
 const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <aside

@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/exevopro'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Exevo PRO',
     description:
@@ -67,4 +70,4 @@ export default {
     huntingGroups: 'Sistema de checagem em grupo',
     privateGroups: 'Grupos privados de bosses',
   },
-}
+})

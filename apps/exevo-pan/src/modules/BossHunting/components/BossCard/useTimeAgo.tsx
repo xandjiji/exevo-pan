@@ -4,9 +4,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { dateToDateObject, MILLISECONDS_IN } from 'utils'
 
 const useTimeAgo = (pastTimestamp?: number): string | undefined => {
-  const {
-    translations: { common, bosses },
-  } = useTranslations()
+  const { common, bosses } = useTranslations()
   const i18n = bosses.BossCard
 
   return useMemo(() => {
@@ -15,7 +13,9 @@ const useTimeAgo = (pastTimestamp?: number): string | undefined => {
     const timeDiff = Math.abs(+getDateRelativeToSS() - pastTimestamp)
     const { day, month } = dateToDateObject(new Date(pastTimestamp))
 
-    const textPrefix = `${i18n.lastSeen}: ${common.Month[month]} ${day}`
+    const textPrefix = `${i18n.lastSeen}: ${
+      common.Month[month as unknown as keyof typeof common.Month]
+    } ${day}`
 
     if (timeDiff < MILLISECONDS_IN.DAY) {
       return i18n.thisSS

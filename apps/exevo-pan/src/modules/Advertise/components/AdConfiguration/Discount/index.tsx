@@ -9,9 +9,7 @@ import * as S from './atoms'
 import { DiscountProps } from './types'
 
 const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
 
   const { totalPrice, saved, offPercentage } = calculatePrice({
     days: daysCount,

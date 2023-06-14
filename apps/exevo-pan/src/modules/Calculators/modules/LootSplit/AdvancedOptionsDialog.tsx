@@ -24,9 +24,7 @@ const AdvancedOptionsDialog = ({
   isOpen,
   onClose,
 }: AdvancedOptionsDialogProps) => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const closeOnEnter: React.KeyboardEventHandler<HTMLInputElement> =
     useCallback((e) => {

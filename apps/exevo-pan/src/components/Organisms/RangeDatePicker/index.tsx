@@ -15,9 +15,7 @@ const RangeDatePicker = ({
   onDateSelect,
   ...props
 }: RangeDatePickerProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const days = useMemo(
     () => getDatesUntilEnd(endDate, startDate),
@@ -38,7 +36,11 @@ const RangeDatePicker = ({
           aria-label={common.RangeDatePicker.currentMonthLabel}
           className="text-center tracking-wider"
         >
-          {common.FullMonth[new Date().getMonth()]}
+          {
+            common.FullMonth[
+              new Date().getMonth() as unknown as keyof typeof common.FullMonth
+            ]
+          }
         </p>
       }
       {...props}
@@ -79,7 +81,12 @@ const RangeDatePicker = ({
                   aria-label={common.RangeDatePicker.nextMonthLabel}
                   className="text-separator text-s col-span-full -mb-1.5 pt-2 pb-1"
                 >
-                  {common.FullMonth[(monthDates[0].getMonth() + 1) % 12]}
+                  {
+                    common.FullMonth[
+                      ((monthDates[0].getMonth() + 1) %
+                        12) as unknown as keyof typeof common.FullMonth
+                    ]
+                  }
                 </span>
               )}
               {!hasNextMonth && (

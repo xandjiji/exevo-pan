@@ -7,9 +7,7 @@ import PixPayment from './PixPayment'
 import Summary from '../Summary'
 
 const PaymentDetails = () => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
 
   const {
     isPro,

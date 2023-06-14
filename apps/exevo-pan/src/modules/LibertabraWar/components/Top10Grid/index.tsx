@@ -4,9 +4,7 @@ import styles from './styles.module.css'
 import { Top10GridProps } from './types'
 
 const Top10Grid = ({ warData }: Top10GridProps) => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   return (
     <article

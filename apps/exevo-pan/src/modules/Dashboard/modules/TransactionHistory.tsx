@@ -39,9 +39,7 @@ const Summary = ({
 )
 
 export const List = ({ list }: TransactionHistoryProps) => {
-  const {
-    translations: { dashboard },
-  } = useTranslations()
+  const { dashboard } = useTranslations()
 
   const i18n = dashboard.TransactionHistory
 

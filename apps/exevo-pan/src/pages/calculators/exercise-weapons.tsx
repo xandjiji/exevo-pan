@@ -11,7 +11,7 @@ const pageRoute = routes.EXERCISE_WEAPONS
 const pageUrl = buildUrl(pageRoute)
 
 export default function Calculator() {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.calculators.Meta.ExerciseWeapons.title
 

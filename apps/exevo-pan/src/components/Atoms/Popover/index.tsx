@@ -22,9 +22,7 @@ const Popover = ({
   offset = [0, 0],
   ...props
 }: PopoverProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [isVisible, setVisible] = useState<boolean>(visible ?? false)
   const derivedVisibility =

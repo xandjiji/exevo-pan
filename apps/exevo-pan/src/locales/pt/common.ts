@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/common'
+
+export default defaultComposer(defaultTranslations, {
   error: {
     P1: 'oops!',
     P2: 'página não encontrada!',
@@ -260,4 +263,4 @@ export default {
     similarFound: '{{count}} leilão similar',
     similarFoundPlural: '{{count}} leilões similares',
   },
-}
+})

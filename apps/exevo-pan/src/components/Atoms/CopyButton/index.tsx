@@ -16,9 +16,7 @@ const CopyButton = (
   }: CopyButtonProps,
   ref: Ref<HTMLButtonElement>,
 ) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [clicked, setClicked] = useState(false)
 

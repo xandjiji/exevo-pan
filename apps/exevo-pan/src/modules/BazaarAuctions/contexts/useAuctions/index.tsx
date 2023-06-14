@@ -25,9 +25,7 @@ export const AuctionsProvider = ({
   initialPaginatedData,
   children,
 }: AuctionsProviderProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const { data, status } = useSession()
 

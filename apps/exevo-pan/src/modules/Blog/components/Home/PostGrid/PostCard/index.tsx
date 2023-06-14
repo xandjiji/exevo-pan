@@ -9,9 +9,7 @@ import { extractDate } from './utils'
 import { PostCardProps } from './types'
 
 const PostCard = ({ postData, className, ...props }: PostCardProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const { thumbnail, title, date, slug, description, tags } = postData
   const dateObject = useMemo(() => extractDate(date), [date])
@@ -37,8 +35,12 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
       <div className="flex flex-grow flex-col py-4 px-6">
         <h3 className="text-primaryHighlight text-[32px]">{title}</h3>
         <p className="text-tsm font-light tracking-wide">
-          {common.FullMonth[dateObject.month]} {dateObject.day},{' '}
-          {dateObject.year}
+          {
+            common.FullMonth[
+              dateObject.month as unknown as keyof typeof common.FullMonth
+            ]
+          }{' '}
+          {dateObject.day}, {dateObject.year}
         </p>
         <p className="text-tsm my-4 flex-grow">{description}</p>
         <div className="flex flex-wrap gap-2">

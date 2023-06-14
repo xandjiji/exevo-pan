@@ -23,9 +23,7 @@ const EndTime = ({ className, ...props }: JSX.IntrinsicElements['span']) => (
 )
 
 const AuctionTimer = ({ endDate, past, ...props }: AuctionTimerProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const { days, hours, minutes, seconds } = useCountdownTick(+endDate)
 
@@ -36,7 +34,7 @@ const AuctionTimer = ({ endDate, past, ...props }: AuctionTimerProps) => {
 
   if (days > 0 || past) {
     const endDateString = `${endDate.getDate()} ${
-      common.Month[endDate.getMonth()]
+      common.Month[endDate.getMonth() as unknown as keyof typeof common.Month]
     }${past ? ` ${endDate.getFullYear()}` : ''}`
 
     return (

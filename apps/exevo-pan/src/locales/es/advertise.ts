@@ -1,4 +1,9 @@
-export default {
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/advertise'
+/* @ ToDo: i18n-es */
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Anunciar',
     description: '¡Destaque su propia subasta y obtenga ofertas más altas!',
@@ -19,10 +24,6 @@ export default {
   Discount: {
     title: 'Descuentos',
     description: '¡Aprovecha nuestros descuentos progresivos!',
-    /* @ ToDo: i18n */
-    proDiscount: '{{discount}} discount applied! ({{exevopro}} only)',
-    /* @ ToDo: i18n */
-    freeDiscount: '{{discount}} discount not applied ({{exevopro}} only)',
   },
   Checkout: {
     title: 'Sus datos',
@@ -62,4 +63,4 @@ export default {
   },
   EmailTitle: 'Gracias por su pedido!',
   calendarDescription: 'Elija los días en los que desea destacar su subasta.',
-}
+})

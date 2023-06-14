@@ -22,9 +22,7 @@ const MembersTable = ({
   className,
   ...props
 }: MembersTableProps) => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   const [currentPage, setCurrentPage] = useState(1)
   const [searchTerm, setSearchTerm] = useState('')

@@ -9,9 +9,7 @@ import { LastFragsProps } from './types'
 const PAGE_SIZE = 20
 
 const LastFrags = ({ fragsList, ...props }: LastFragsProps) => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   const [currentIndex, setCurrentIndex] = useState(0)
   const maxIndex = Math.ceil(fragsList.length / PAGE_SIZE) - 1

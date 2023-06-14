@@ -5,9 +5,7 @@ import { toast } from 'react-hot-toast'
 import { localStorageKeys } from 'Constants'
 
 export const useFavorites = () => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
 
   const [favorites, setFavorites] = useStoredState<number[]>(
     localStorageKeys.FAVORITES,

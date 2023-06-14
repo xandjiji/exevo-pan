@@ -11,9 +11,7 @@ const HighscoresGrid = ({
   style,
   ...props
 }: HighscoresGridProps) => {
-  const {
-    translations: { statistics },
-  } = useTranslations()
+  const { statistics } = useTranslations()
 
   return (
     <div

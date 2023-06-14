@@ -1,9 +1,13 @@
 import { createContext, useContext } from 'react'
-import { TranslationsContextValues } from './types'
+import * as translationFiles from 'locales'
 
-const TranslationsContext = createContext<TranslationsContextValues>({
-  translations: {},
-})
+type TranslationsContextValues = {
+  [File in keyof typeof translationFiles]: typeof translationFiles[File]['en']
+}
+
+const TranslationsContext = createContext<TranslationsContextValues>(
+  {} as TranslationsContextValues,
+)
 
 export const TranslationsProvider = TranslationsContext.Provider
 

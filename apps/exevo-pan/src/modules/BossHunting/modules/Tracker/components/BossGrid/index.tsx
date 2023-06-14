@@ -14,7 +14,7 @@ import { listBy, prioritizePremium } from './utils'
 import { BossGridProps, ListOption } from './types'
 
 const BossGrid = ({ bosses, server, className, ...props }: BossGridProps) => {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const { data } = useSession()
   const isPro = data?.user.proStatus ?? false

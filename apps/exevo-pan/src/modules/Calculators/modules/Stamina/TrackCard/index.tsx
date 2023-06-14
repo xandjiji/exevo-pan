@@ -14,9 +14,7 @@ const ANIMATION_DELAY = 200
 const TrackCard = ({ index, trackedData, update, remove }: TrackCardProps) => {
   const { key, name, currentStamina, targetStamina, timestamp } = trackedData
 
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const [secondsPassed, setSecondsPassed] = useState(() =>
     getSecondsPassed(timestamp),

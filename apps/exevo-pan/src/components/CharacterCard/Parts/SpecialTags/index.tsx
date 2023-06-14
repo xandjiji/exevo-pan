@@ -8,16 +8,16 @@ const SpecialTags = ({
   className,
   ...props
 }: SpecialTagsProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   if (tags.length === 0) return null
 
   return (
     <div className={clsx('flex flex-wrap gap-2', className)} {...props}>
       {tags.map((tag) => (
-        <Chip key={tag}>{common.SpecialTags[tag] ?? tag}</Chip>
+        <Chip key={tag}>
+          {common.SpecialTags[tag as keyof typeof common.SpecialTags] ?? tag}
+        </Chip>
       ))}
     </div>
   )

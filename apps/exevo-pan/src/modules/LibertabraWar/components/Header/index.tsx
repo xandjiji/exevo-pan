@@ -4,9 +4,7 @@ import { routes } from 'Constants'
 import { ChartsIcon, TrophyIcon, GroupIcon, SearchIcon } from 'assets/svgs'
 
 const Header = () => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   const navItems = [
     {

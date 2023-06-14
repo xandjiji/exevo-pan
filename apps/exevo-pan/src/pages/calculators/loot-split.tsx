@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { Main, Hero } from 'templates'
 import { Template, LootSplit, useRoutes } from 'modules/Calculators'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -12,7 +11,7 @@ const pageRoute = routes.LOOT_SPLIT
 const pageUrl = buildUrl(pageRoute)
 
 export default function Calculator() {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.calculators.Meta.LootSplit.title
 

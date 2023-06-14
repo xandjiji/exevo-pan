@@ -45,7 +45,7 @@ export default function GuildPage({
   serializedGuildData,
   serializedToken,
 }: GuildPageProps) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
   const i18n = translations.huntingGroups
   const session = useSession()
   const isAuthed = !!session.data

@@ -18,9 +18,7 @@ const providerIcons: Partial<
 }
 
 const UserCard = ({ user }: UserCardProps) => {
-  const {
-    translations: { common, dashboard },
-  } = useTranslations()
+  const { common, dashboard } = useTranslations()
 
   const [fallbackAvatar, setFallbackAvatar] = useState(false)
 
@@ -31,7 +29,9 @@ const UserCard = ({ user }: UserCardProps) => {
 
     const { month, year } = dateToDateObject(new Date(proSince))
 
-    return `${common.FullMonth[month]} ${year}`
+    return `${
+      common.FullMonth[month as unknown as keyof typeof common.FullMonth]
+    } ${year}`
   }, [common, proSince])
 
   const ProviderIcon = providerIcons[provider]

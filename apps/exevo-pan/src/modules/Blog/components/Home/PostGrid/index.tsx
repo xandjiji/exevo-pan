@@ -11,9 +11,7 @@ const PostGridView = ({
   requestStatus,
   observerRef,
 }: PostGridViewProps) => {
-  const {
-    translations: { blog },
-  } = useTranslations()
+  const { blog } = useTranslations()
 
   const noResults = requestStatus !== 'LOADING' && !postList.length
 

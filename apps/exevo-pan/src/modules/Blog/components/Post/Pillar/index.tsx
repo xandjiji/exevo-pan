@@ -14,9 +14,7 @@ const Cloudy = () => (
 )
 
 const Pillar = ({ titles, className, ...props }: PillarProps) => {
-  const {
-    translations: { blog },
-  } = useTranslations()
+  const { blog } = useTranslations()
 
   const { currentSection } = useCurrentSection()
 

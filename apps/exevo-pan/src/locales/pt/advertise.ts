@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/advertise'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Anunciar',
     description: 'Destaque seu leilão e alcance lances mais altos!',
@@ -60,4 +63,4 @@ export default {
   },
   EmailTitle: 'Obrigado pelo seu pedido!',
   calendarDescription: 'Escolha os dias que você quer destacar seu leilão.',
-}
+})

@@ -22,9 +22,7 @@ import * as S from './atoms'
 import { SummaryProps, WeaponOption, WeaponsObject } from './types'
 
 const Summary = ({ pointsRequired }: SummaryProps) => {
-  const {
-    translations: { common, calculators },
-  } = useTranslations()
+  const { common, calculators } = useTranslations()
 
   const [hasDummy, setHasDummy] = useStoredUrlState({
     key: 'dummy',

@@ -16,7 +16,7 @@ type CalculatorProps = {
 }
 
 export default function Calculator({ suggestedPost }: CalculatorProps) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.calculators.Meta.CharmDamage.title
 

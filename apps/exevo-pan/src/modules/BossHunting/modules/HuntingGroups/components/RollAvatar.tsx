@@ -10,9 +10,7 @@ type RollAvatarProps = {
 }
 
 const RollAvatar = ({ avatarId, avatarDegree, onChange }: RollAvatarProps) => {
-  const {
-    translations: { huntingGroups },
-  } = useTranslations()
+  const { huntingGroups } = useTranslations()
 
   const i18n = huntingGroups.RollAvatar
 

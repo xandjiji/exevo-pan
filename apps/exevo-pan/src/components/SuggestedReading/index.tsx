@@ -12,9 +12,7 @@ const SuggestedReading = ({
   slug,
   ...props
 }: SuggestedReadingProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   return (
     <div {...props}>
       <p className="mb-2 text-xs tracking-wide">

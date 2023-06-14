@@ -22,9 +22,7 @@ const Tracker = ({
   bossChances,
   recentlyAppeared,
 }: BossTrackerProps) => {
-  const {
-    translations: { common, bossTracker },
-  } = useTranslations()
+  const { common, bossTracker } = useTranslations()
 
   const hoursSinceLastUpdate = Math.round(
     (+new Date() - bossChances.lastUpdated) / MILLISECONDS_IN.HOUR,

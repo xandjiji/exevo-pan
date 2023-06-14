@@ -6,9 +6,7 @@ import { xpToDataSnapshot } from './utils'
 import { GuildXPGridProps } from './types'
 
 const GuildXPGrid = ({ warData }: GuildXPGridProps) => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   const {
     xpStats: { todayDiff, dailyXPDiff, currentXP },

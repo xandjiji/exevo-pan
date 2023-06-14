@@ -1,16 +1,13 @@
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Alert, AuctionLink } from 'components/Atoms'
-import { officialAuctionUrl } from 'utils'
 
 type NotFoundAlertProps = {
   notFoundIds: number[]
 }
 
 const NotFoundAlert = ({ notFoundIds }: NotFoundAlertProps) => {
-  const {
-    translations: { common, homepage },
-  } = useTranslations()
+  const { common, homepage } = useTranslations()
 
   if (notFoundIds.length === 0) return null
 

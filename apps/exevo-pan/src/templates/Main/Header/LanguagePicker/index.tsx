@@ -9,9 +9,7 @@ import useHeaderPopup from '../useHeaderPopup'
 import { LanguagePickerProps } from './types'
 
 const LanguagePicker = ({ variant = 'onPrimary' }: LanguagePickerProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const { locale, push, pathname, query } = useRouter()
 

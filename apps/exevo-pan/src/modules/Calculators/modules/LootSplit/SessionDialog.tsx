@@ -18,9 +18,7 @@ const SessionDialog = ({
   removedPlayers = new Set([]),
   onClose,
 }: SessionDialogProps) => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   return (
     <Dialog

@@ -11,9 +11,7 @@ const AuctionBid = ({
   currentBid,
   past,
 }: AuctionBidProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const bidLabelText = useMemo(() => {
     if (label !== undefined) return label

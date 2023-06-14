@@ -17,20 +17,23 @@ const Tag = ({
   children,
   ...props
 }: TagProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const colors = useMemo(
     () =>
       tagColor
         ? generateTagColors(tagColor)
-        : tagById[tagId as string] ?? fallbackColor,
+        : tagById[tagId as keyof typeof common.BlogTags] ?? fallbackColor,
     [tagColor, tagId],
   )
 
   const content =
-    children ?? common.BlogTags[tagById[tagId as string]?.id] ?? tagId
+    children ??
+    common.BlogTags[
+      tagById[tagId as keyof typeof tagById]?.id as keyof typeof common.BlogTags
+    ] ??
+    tagId ??
+    tagId
 
   if (clickable)
     return (

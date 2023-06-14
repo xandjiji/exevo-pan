@@ -28,9 +28,7 @@ const heading = {
 }
 
 const Header = ({ clean = false, className, ...props }: HeaderProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -40,11 +38,11 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
   const toggleMenu = useCallback(() => setMenuOpen((prev) => !prev), [])
 
   const pageTitle = heading[pathname]
-    ? common.Header.h1[heading[pathname]]
+    ? common.Header.h1[heading[pathname] as keyof typeof common.Header.h1]
     : null
 
   const accessibleLogoName = heading[pathname]
-    ? common.Header.h1[heading[pathname]]
+    ? common.Header.h1[heading[pathname] as keyof typeof common.Header.h1]
     : 'Exevo Pan'
 
   return (
@@ -103,7 +101,11 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
                   >
                     <HeaderIcon icon={icon} spaced />
                     <h2 className="text-s text-onPrimary whitespace-nowrap font-normal tracking-wider">
-                      {common.Header.nav[title]}
+                      {
+                        common.Header.nav[
+                          title as keyof typeof common.Header.nav
+                        ]
+                      }
                     </h2>
                   </Link>
                 </li>

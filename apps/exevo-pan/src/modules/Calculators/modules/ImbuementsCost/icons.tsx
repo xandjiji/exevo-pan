@@ -18,9 +18,7 @@ export const Label = {
 }
 
 export const BuyIcon = ({ type, highlight }: BuyIconProps) => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const isGoldToken = type === 'goldToken'
   const name = isGoldToken ? 'Gold Tokens' : 'Market'

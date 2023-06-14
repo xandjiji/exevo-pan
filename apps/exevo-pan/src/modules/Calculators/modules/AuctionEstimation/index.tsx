@@ -31,9 +31,7 @@ const historyMode: AuctionQueryMode = 'history'
 const { urlKey: descendingUrlKey } = sortSchema.descendingOrder
 
 const AuctionEstimation = () => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
   const i18n = calculators.AuctionEstimation
 
   const [pvp, setPvp] = useState<string>()

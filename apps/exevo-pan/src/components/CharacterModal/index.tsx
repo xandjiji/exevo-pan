@@ -70,9 +70,7 @@ const CharacterModal = ({
     bossPoints,
   } = characterData
 
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [past] = useState(auctionHasEnded(characterData))
 

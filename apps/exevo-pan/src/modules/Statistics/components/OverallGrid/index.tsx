@@ -11,9 +11,7 @@ const OverallGrid = ({
   className,
   ...props
 }: OverallGridProps) => {
-  const {
-    translations: { statistics },
-  } = useTranslations()
+  const { statistics } = useTranslations()
 
   return (
     <div

@@ -11,9 +11,7 @@ type GuildHeroProps = {
 }
 
 const GuildHero = ({ guild, memberCount }: GuildHeroProps) => {
-  const {
-    translations: { huntingGroups },
-  } = useTranslations()
+  const { huntingGroups } = useTranslations()
 
   const i18n = huntingGroups.GuildHero
 

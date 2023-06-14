@@ -12,7 +12,7 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.ROOT)
 
 export default function Dashboard() {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const i18n = translations.dashboard
 

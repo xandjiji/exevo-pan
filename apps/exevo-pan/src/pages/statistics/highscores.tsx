@@ -13,7 +13,7 @@ import { common, statistics } from 'locales'
 const pageUrl = buildUrl(routes.HIGHSCORES)
 
 export default function Highscores({ top10Data }: { top10Data: Top10Data }) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.statistics.Meta.Highscores.title
   const previewSrc = PreviewImageClient.getSrc({

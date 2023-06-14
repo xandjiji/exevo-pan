@@ -1,4 +1,9 @@
-export default {
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/war'
+/* @ ToDo: i18n-pl */
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     Overall: {
       title: 'Wojna na Libertabrze',
@@ -85,4 +90,4 @@ export default {
       },
     },
   },
-}
+})

@@ -30,9 +30,7 @@ const SetupNotifications = ({
   onRegister,
   ...props
 }: SetupNotificationsProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   const i18n = common.SetupNotifications
 
   const session = useSession()

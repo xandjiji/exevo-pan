@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/calculators'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     Main: {
       title: 'Calculadoras',
@@ -139,4 +142,4 @@ export default {
     goToHistory: 'Explore mais leilões passados em nosso {{history}}',
     history: 'Histórico do Char Bazaar',
   },
-}
+})

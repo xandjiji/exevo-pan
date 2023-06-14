@@ -12,9 +12,7 @@ const Button = ({
   type = 'button',
   ...props
 }: ButtonProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const isDisabled = loading || disabled
 

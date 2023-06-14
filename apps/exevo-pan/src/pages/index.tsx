@@ -35,7 +35,7 @@ export default function Home({
   highlightedAuctions,
   blogPosts,
 }: HomeStaticProps) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.homepage.Meta.title
   const previewSrc = PreviewImageClient.getSrc({

@@ -14,9 +14,7 @@ import useTracking from './useTracking'
 import { calculateSecondsToRegenerate } from './utils'
 
 const Stamina = () => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const [currentStamina, setCurrentStamina] = useTime('39:00')
   const [targetStamina, setTargetStamina] = useTime('42:00')

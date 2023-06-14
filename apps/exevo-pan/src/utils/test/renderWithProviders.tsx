@@ -3,15 +3,16 @@ import { ReactElement } from 'react'
 import { render, RenderResult, RenderOptions } from '@testing-library/react'
 import { TranslationsProvider } from 'contexts/useTranslation'
 import { Toaster } from 'templates'
-import * as Locales from 'locales'
+import * as translationFiles from 'locales'
 
-const translations = {} as Record<string, any>
-Object.keys(Locales).forEach((locale) => {
-  translations[locale] = Locales[locale as keyof typeof Locales].en
+const translations = {} as any
+Object.keys(translationFiles).forEach((file) => {
+  translations[file] =
+    translationFiles[file as keyof typeof translationFiles].en
 })
 
 export const wrapWithProviders = (ui: ReactElement): ReactElement => (
-  <TranslationsProvider value={{ translations }}>
+  <TranslationsProvider value={translations}>
     <Toaster />
     {ui}
   </TranslationsProvider>

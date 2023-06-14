@@ -32,9 +32,7 @@ const CreateGuildDialog = ({
   serverOptions,
   onClose,
 }: CreateGuildDialogProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.CreateGuildDialog
 
   const { data } = useSession()

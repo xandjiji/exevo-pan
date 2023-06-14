@@ -23,7 +23,7 @@ export default function Advertise({
   initialAuctionData,
   suggestedPost,
 }: AdvertiseStaticProps) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.advertise.Meta.title
   const previewSrc = PreviewImageClient.getSrc({

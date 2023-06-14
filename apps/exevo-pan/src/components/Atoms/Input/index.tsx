@@ -27,9 +27,7 @@ const Input = (
   }: InputProps,
   refProp: Ref<HTMLInputElement>,
 ) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const innerRef = useSharedRef<HTMLInputElement>(refProp)
 

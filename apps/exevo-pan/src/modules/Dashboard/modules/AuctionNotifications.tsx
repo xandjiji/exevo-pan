@@ -14,9 +14,7 @@ type AuctionNotificationProps = {
 const PAGE_SIZE = 10
 
 export const List = ({ list, onDelete }: AuctionNotificationProps) => {
-  const {
-    translations: { dashboard },
-  } = useTranslations()
+  const { dashboard } = useTranslations()
 
   const i18n = dashboard.AuctionNotifications
 

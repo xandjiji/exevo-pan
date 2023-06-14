@@ -18,9 +18,7 @@ type ApplyListProps = {
 }
 
 const ApplyList = ({ list, onAction, allowAction }: ApplyListProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.ApplyList
 
   const manageApplication = trpc.manageGuildApplication.useMutation({

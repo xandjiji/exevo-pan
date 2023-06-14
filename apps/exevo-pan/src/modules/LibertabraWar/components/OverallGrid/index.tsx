@@ -8,7 +8,7 @@ import styles from './styles.module.css'
 import { OverallGridProps } from './types'
 
 const OverallGrid = ({ warData }: OverallGridProps) => {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const { score, onlineCount, lastDeaths } = warData
 

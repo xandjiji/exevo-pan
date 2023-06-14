@@ -5,9 +5,7 @@ import { routes as ROUTES } from 'Constants'
 import { GpsIcon, GroupIcon } from 'assets/svgs'
 
 export const useRoutes = (): NavItem[] => {
-  const {
-    translations: { bosses },
-  } = useTranslations()
+  const { bosses } = useTranslations()
 
   return useMemo(
     () => [

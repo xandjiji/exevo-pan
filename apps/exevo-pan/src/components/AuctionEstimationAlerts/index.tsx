@@ -5,9 +5,7 @@ import { auctionEstimations } from 'Constants'
 type AlertProps = JSX.IntrinsicElements['div']
 
 const Disclaimer = (args: AlertProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   const i18n = common.AuctionEstimationAlerts.Disclaimer
 
   return (
@@ -29,9 +27,7 @@ const Disclaimer = (args: AlertProps) => {
 }
 
 const Failed = (args: AlertProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   const i18n = common.AuctionEstimationAlerts.Failed
 
   return (
@@ -42,9 +38,7 @@ const Failed = (args: AlertProps) => {
 }
 
 const ProOnly = (args: AlertProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   const i18n = common.AuctionEstimationAlerts.ProOnly
 
   return (

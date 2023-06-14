@@ -12,9 +12,7 @@ const ScoreboardXP = ({
   className,
   ...props
 }: ScoreboardXPProps) => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   return (
     <section

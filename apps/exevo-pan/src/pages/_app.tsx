@@ -47,7 +47,7 @@ const MyApp: AppType = ({
         }
       `}</style>
 
-      <TranslationsProvider value={{ translations }}>
+      <TranslationsProvider value={translations}>
         <ErrorBoundary>
           <ThemeProvider>
             <LockBodyProvider>
