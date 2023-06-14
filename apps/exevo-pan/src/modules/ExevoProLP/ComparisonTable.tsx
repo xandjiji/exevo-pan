@@ -44,7 +44,7 @@ const Check = ({ empty = false }) => (
 )
 
 const ComparisonTable = () => {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
   const i18n = translations.exevopro.ComparisonTable
 
   return (
