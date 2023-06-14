@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
 import { defaultComposer } from 'default-composer'
 import defaultTranslations from '../en/advertise'
 /* @ ToDo: i18n-es */
