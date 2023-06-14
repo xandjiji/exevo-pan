@@ -13,7 +13,7 @@ const RecentlyAppeared = ({
   className,
   ...props
 }: RecentlyAppearedProps) => {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   return (
     <section className={clsx('grid gap-4', className)} {...props}>
