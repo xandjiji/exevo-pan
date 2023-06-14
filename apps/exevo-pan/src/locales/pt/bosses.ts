@@ -18,7 +18,7 @@ export default defaultComposer(defaultTranslations, {
     toSpawn: 'nascer neste local.',
     thereAre: 'Faltam',
     /* days left */
-    left: '',
+    left: ' ',
     before: 'antes que ele possa nascer nesse local.',
     itsUpToYou: 'Cabe a você descobrir qual dos locais é este',
     chanceToSpawn: 'Chance de nascer hoje',
