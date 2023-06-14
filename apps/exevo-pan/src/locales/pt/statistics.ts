@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/statistics'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     Statistics: {
       title: 'Estatísticas gerais',
@@ -48,4 +51,4 @@ export default {
     captionDescription: 'Ranking de personagens',
     titleLabel: 'Posição no ranking',
   },
-}
+})

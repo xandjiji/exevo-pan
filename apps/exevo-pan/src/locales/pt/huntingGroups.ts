@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/huntingGroups'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Grupos de Caça',
     description: 'Junte seus amigos para procurar bosses raros!',
@@ -199,4 +202,4 @@ export default {
     hoursAgo: 'horas atrás',
     showMore: 'Mostrar mais',
   },
-}
+})

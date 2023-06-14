@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/dashboard'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     root: {
       title: 'Painel',
@@ -109,4 +112,4 @@ export default {
     date: 'Data',
     emptyState: 'Nenhum dispositivo',
   },
-}
+})

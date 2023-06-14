@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/bossTracker'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Bosses',
     description: 'Descubra onde e quando bosses irão nascer!',
@@ -31,4 +34,4 @@ export default {
       favorites: 'Favoritos',
     },
   },
-}
+})

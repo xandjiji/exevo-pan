@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/bosses'
+
+export default defaultComposer(defaultTranslations, {
   Header: {
     bossTracker: 'Boss Tracker',
     huntingGroups: 'Grupos de caça',
@@ -35,4 +38,4 @@ export default {
       Grorlam: 'Várias localizações dentro de Mount Sternum (Thais)',
     },
   },
-}
+})

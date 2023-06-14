@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/war'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     Overall: {
       title: 'Libertabra War',
@@ -84,4 +87,4 @@ export default {
       },
     },
   },
-}
+})

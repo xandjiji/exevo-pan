@@ -1,4 +1,7 @@
-export default {
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/blog'
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Blog',
     description:
@@ -44,4 +47,4 @@ export default {
       'Esse post ainda não está disponível em Português! Você pode nos ajudar a traduizr esse conteúdo',
     link: 'aqui',
   },
-}
+})
