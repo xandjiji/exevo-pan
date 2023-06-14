@@ -1,4 +1,10 @@
-export default {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/blog'
+/* @ ToDo: i18n-pl */
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Blog',
     description:
@@ -27,22 +33,17 @@ export default {
       alreadyRegistered: 'Ten email jest już zarejestrowany',
       success: 'Dziękuję',
       generic: 'Coś poszło nie tak',
-      /* @ ToDo: i18n */
-      toastSuccess: 'Successfuly subscribed',
     },
   },
   Authors: {
     headline1: 'Podobała Ci się zawartość?',
     headline2: 'Wesprzyj autorów dając im Tibia Coiny',
     author: 'Autor',
-    translator: 'Translator',
   },
-  Pillar: {
-    title: 'Contents',
-  },
+  Pillar: {},
   TranslationAlert: {
     content:
       'Ten post nie jest jeszcze dostępny w języku polskim! Możesz nam pomóc przetłumaczyć tę treść',
     link: 'tutaj',
   },
-}
+})

@@ -1,4 +1,10 @@
-export default {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/common'
+/* @ ToDo: i18n-pl */
+
+export default defaultComposer(defaultTranslations, {
   error: {
     P1: 'Ojej!',
     P2: 'Nie znaleziono strony!',
@@ -7,8 +13,6 @@ export default {
   Header: {
     h1: {
       home: 'Kupuj i sprzedawaj postacie na oficjalnym Tibijskim Bazarze Postaci!',
-      /* @ ToDo: i18n */
-      calculators: 'All sorts of tools and calculators for Tibia',
       statistics: 'Znajduj statystyki postaci z Tibijskiego Bazaru Postaci!',
       highscores:
         'Najwyższe levele, najwyższe skille oraz najwyższe bidy na Tibijskim Bazarze Postaci!',
@@ -20,8 +24,7 @@ export default {
     },
     openMenuLabel: 'Otwórz menu nawigacji',
     closeMenuLabel: 'Zamknij menu nawigacji',
-    /* @ ToDo: i18n */
-    openUserMenu: 'Open user menu',
+    openUserMenu: null,
     logoLabel: 'Idź do strony głównej',
     nav: {
       charBazaar: 'Char Bazaar',
@@ -35,10 +38,7 @@ export default {
       exevopro: 'Exevo Pro',
     },
     themeSwitch: 'Przełącz na tryb ciemny',
-    AccountButton: {
-      dashboard: 'Dashboard',
-      logout: 'Logout',
-    },
+    AccountButton: {},
   },
   BlogTags: {
     news: 'Aktualności',
@@ -147,11 +147,6 @@ export default {
     manyStoreCosmetics: 'Duzo przedmiotów z Tibia Store 🛍️',
     rareMounts: 'Rzadkie mountów ✨',
     rareOutfits: 'Rzadkie outfitów 💎',
-    /* @ ToDo: i18n */
-    secondaryEkSkill: 'Secondary skill ⚔️',
-    soulwarAvailable: 'Soul War available 💀',
-    /* @ ToDo: i18n */
-    primalAvailable: 'Primal Ordeal available 🦖',
   },
   CharacterCard: {
     linkLabel: 'Idź do strony postaci',
@@ -183,17 +178,12 @@ export default {
       prefix: 'Ta postać zainwestowała co najmniej',
       suffix: 'Tibia Coinów na zakupy w Tibia Store',
       invested: 'zainwestowane',
-      /* @ ToDo: i18n */
-      exclusive: 'Exclusive for {{exevopro}}',
     },
     AuctionStatus: 'Status Aukcji',
     BidStatus: 'Status Oferty',
     highlightLabelText: 'Podświetl swoją aukcje',
     CharacterModal: {
-      /* @ ToDo: i18n */
       totalInvested: 'łącznie zainwestowano',
-      /* @ ToDo: i18n */
-      exclusive: '(exclusive for {{exevopro}})',
       SpriteBox: {
         firstAddon: 'Pierwszy addon',
         secondAddon: 'Drugi Addon',
@@ -216,17 +206,10 @@ export default {
   AnchorIconLabel: 'Skopiuj link',
   CharacterTooltipLabel: 'Idź do strony postaci',
   Newsticker: 'Ostatnie artykuły',
-  /* @ ToDo: i18n */
-  SignIn: {
-    title: 'Sign in with',
-    subtext: 'By signing in, you agree to our',
-  },
-  termsOfService: 'Terms of Service',
-  privacyPolicy: 'Privacy Policy',
-  /* @ ToDo: i18n */
-  SuggestedReading: {
-    miniTitle: 'Suggested reading:',
-  },
+  SignIn: {},
+  termsOfService: null,
+  privacyPolicy: null,
+  SuggestedReading: {},
   RangeDatePicker: {
     currentMonthLabel: 'Obecny miesiąc',
     nextMonthLabel: 'Następny miesiąc',
@@ -235,36 +218,7 @@ export default {
   genericLoading: 'Wczytuję...',
   exevoProCTA: 'Become {{exevoPro}}',
   play: 'Grać',
-  SetupNotifications: {
-    notAuthed: 'You must {{logIn}} to set up auction notifications',
-    logIn: 'log in',
-    permission: 'Please {{enableNotifications}} on this device',
-    enableNotifications: 'enable notifications',
-    deviceReady: 'This device is receiving {{notifications}}!',
-    notifications: 'notifications',
-    testTitle: 'Hey there 👋',
-    testText: 'How are you doing?',
-    successMessage: 'Device registered!',
-  },
-  AuctionEstimationAlerts: {
-    Disclaimer: {
-      first: 'Value is always {{subjective}}!',
-      subjective: 'subjective',
-      second: 'This estimation only considers:',
-      server: 'Server type',
-      character: 'Skills, level and vocation',
-    },
-    Failed: {
-      message: 'Not many similar characters were found in our database',
-    },
-    ProOnly: {
-      message:
-        'Auctions estimated above {{freeCap}} are only available for {{exevoPro}} members',
-    },
-  },
-  EstimatedPriceBox: {
-    label: 'Estimated price',
-    similarFound: '{{count}} similar auction',
-    similarFoundPlural: '{{count}} similar auctions',
-  },
-}
+  SetupNotifications: {},
+  AuctionEstimationAlerts: {},
+  EstimatedPriceBox: {},
+})

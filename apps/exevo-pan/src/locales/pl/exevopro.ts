@@ -1,69 +1,7 @@
-export default {
-  Meta: {
-    title: 'Exevo PRO',
-    description:
-      'Upgrade now to Exevo PRO and have full access to all exclusive features!',
-  },
-  heading: 'Become {{exevopro}}',
-  heroCTA: 'Start now',
-  bossTracker: {
-    pitch: 'Access to all bosses from the {{strong}}',
-    strong: 'Boss Tracker',
-  },
-  tcInvested: {
-    pitch: 'Find out how many {{strong}} was invested in any Bazaar character',
-    strong: 'Tibia Coins',
-  },
-  exclusiveFilters: {
-    pitch: 'Full access to exclusive {{strong}}',
-    strong: 'auction filters',
-    tcInvested: 'Tibia Coins invested',
-    storeContent: 'Store mounts and outfits',
-    rareItems: 'Rare items',
-    soulwar: 'Soul War available',
-    primalOrdeal: 'Primal Ordeal available',
-  },
-  highlightDiscount: {
-    pitch: 'Discounts for {{strong}}',
-    strong: 'auction highlighting',
-  },
-  notifications: {
-    pitch: 'Track auctions receiving {{strong}} when they are bidded',
-    strong: 'notifications',
-  },
-  huntingGroups: {
-    pitch: 'Create {{strong}} boss hunting groups',
-    strong: 'private',
-  },
-  andMore: '...and more in the future! 🔮',
-  footer: 'Upgrade now to {{exevopro}}',
-  no: {
-    subscriptions: 'No subscriptions',
-    creditCard: 'No credit card',
-    extraFees: 'No extra fees',
-  },
-  only: 'Only',
-  payOnce: 'Pay once, yours {{forever}}',
-  forever: 'forever 🙌',
-  footerCTA: 'Upgrade now',
-  ComparisonTable: {
-    free: 'Basic',
-    auctions: 'Auctions',
-    auctionFilters: 'Auction filters',
-    regularFilters: 'Regular filters',
-    premiumFilters: 'Premium filters',
-    history: 'Char Bazaar History',
-    scheduleNotifications: 'Schedule auction notifications',
-    bidNotifications: 'Auction bid notifications',
-    highlightDiscounts: 'Highlight auction discounts',
-    tibiaCoinsInvested: 'Check Tibia Coins invested on characters',
-    auctionPriceEstimations: 'Auction price estimations',
-    estimationFree: 'Up to {{maxValue}} auction value',
-    bosses: 'Bosses',
-    bossSpawnChances: 'Boss spawn chances',
-    regularBosses: 'Regular bosses',
-    premiumBosses: 'Premium bosses',
-    huntingGroups: 'Hunting groups checking system',
-    privateGroups: 'Private hunting groups',
-  },
-}
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/exevopro'
+/* @ ToDo: i18n-pl */
+
+export default defaultComposer(defaultTranslations, {})

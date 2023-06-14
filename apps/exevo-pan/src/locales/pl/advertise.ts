@@ -1,4 +1,10 @@
-export default {
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-nocheck
+import { defaultComposer } from 'default-composer'
+import defaultTranslations from '../en/advertise'
+/* @ ToDo: i18n-pl */
+
+export default defaultComposer(defaultTranslations, {
   Meta: {
     title: 'Reklama',
     description: 'Podświetl swoją aukcję, aby uzyskać lepszą cenę!',
@@ -19,10 +25,6 @@ export default {
   Discount: {
     title: 'Zniżki',
     description: 'Sprawdź nasze pakiety zniżkowe',
-    /* @ ToDo: i18n */
-    proDiscount: '{{discount}} discount applied! ({{exevopro}} only)',
-    /* @ ToDo: i18n */
-    freeDiscount: '{{discount}} discount not applied ({{exevopro}} only)',
   },
   Checkout: {
     title: 'Twoje informacje',
@@ -62,4 +64,4 @@ export default {
   },
   EmailTitle: 'Dziękujemy za złożenie zamówienia!',
   calendarDescription: 'Wybierz dni, w których chcesz promować swoją aukcję.',
-}
+})
