@@ -23,9 +23,7 @@ const MemberList = ({
   isPrivate,
   ...props
 }: MemberListProps) => {
-  const {
-    translations: { huntingGroups },
-  } = useTranslations()
+  const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.MemberList
 
   return (

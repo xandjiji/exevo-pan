@@ -25,9 +25,7 @@ const INITIAL_QUERY = {
 const EMPTY_GUILD_APPLICATION = { guildId: '', guildName: '' }
 
 const GuildGrid = ({ initialGuildList, serverOptions }: GuildGridProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.GuildGrid
 
   const router = useRouter()

@@ -23,9 +23,7 @@ type LogEntryElement = Record<LOG_ENTRY_TYPE, React.ReactNode>
 const pageSize = 10
 
 const LogHistory = ({ guildId }: LogHistoryProps) => {
-  const {
-    translations: { huntingGroups },
-  } = useTranslations()
+  const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.LogHistory
 
   const [pageIndex, setPageIndex] = useState(0)

@@ -55,9 +55,7 @@ const CheckedBosses = ({
   isAdmin = false,
   onNotify,
 }: CheckedBossesProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.CheckedBosses
 
   const isMember = isAdmin || !!currentMember

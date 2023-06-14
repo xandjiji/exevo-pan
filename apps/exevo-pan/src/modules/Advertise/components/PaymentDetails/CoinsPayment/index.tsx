@@ -10,9 +10,7 @@ const Strong = (args: JSX.IntrinsicElements['strong']) => (
 )
 
 const CoinsPayment = ({ isPro }: CoinsPaymentProps) => {
-  const {
-    translations: { common, advertise },
-  } = useTranslations()
+  const { common, advertise } = useTranslations()
 
   const { selectedDates, paymentCharacter } = useForm()
 

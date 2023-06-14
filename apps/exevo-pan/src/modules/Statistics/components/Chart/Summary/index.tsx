@@ -12,9 +12,7 @@ const Summary = ({
   positive = true,
   ...props
 }: SummaryProps) => {
-  const {
-    translations: { statistics },
-  } = useTranslations()
+  const { statistics } = useTranslations()
 
   return (
     <div {...props}>

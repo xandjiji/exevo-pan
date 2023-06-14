@@ -6,9 +6,7 @@ import { capitalizeFirstLetter } from 'utils'
 type FromToProps = { from?: string; to: string } & JSX.IntrinsicElements['span']
 
 const FromTo = ({ from, to, className, ...props }: FromToProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   return (
     <span
       className={clsx(className, 'my-2 flex items-center gap-1 text-center')}

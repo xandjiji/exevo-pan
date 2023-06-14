@@ -19,9 +19,7 @@ const SettingsDialog = ({
   currentMember,
   onMemberUpdate,
 }: SettingsDialogProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.SettingsDialog
 
   const { permission } = usePushNotifications()

@@ -6,9 +6,7 @@ import tbjSrc from 'assets/tibiablackjack-24x24.png'
 import tcSrc from 'assets/tibiaCoins.gif'
 
 const MobileTopCTA = () => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <ul className="grid h-8 grid-cols-2 text-center text-xs tracking-widest md:hidden">

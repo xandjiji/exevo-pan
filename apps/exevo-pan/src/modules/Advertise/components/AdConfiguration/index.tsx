@@ -7,9 +7,7 @@ import Summary from '../Summary'
 import { useForm } from '../../contexts/Form'
 
 const AdConfiguration = () => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
 
   const { selectedCharacter, selectedDates, paymentMethod, isPro, dispatch } =
     useForm()

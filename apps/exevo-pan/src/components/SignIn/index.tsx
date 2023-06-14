@@ -15,9 +15,7 @@ const SignIn = ({
   providers: providersProps,
   state: stateProps,
 }: SignInProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [fetchedProviders, setProviders] = useState<AuthProviders | undefined>()
   const [innerState, setState] = useState<RequestStatus>(

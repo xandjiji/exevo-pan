@@ -9,9 +9,7 @@ import { TooltipProps } from './types'
 const MAX_LINES = 12
 
 const CharacterImbuements = ({ items, placement, ...props }: TooltipProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <Tooltip

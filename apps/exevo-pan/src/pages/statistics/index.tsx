@@ -17,7 +17,7 @@ export default function Statistics({
 }: {
   overallData: OverallData
 }) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.statistics.Meta.Statistics.title
   const previewSrc = PreviewImageClient.getSrc({

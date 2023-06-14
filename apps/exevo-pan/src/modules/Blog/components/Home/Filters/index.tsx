@@ -12,9 +12,7 @@ const GroupWrapper = (args: JSX.IntrinsicElements['div']) => (
 )
 
 const Filters = () => {
-  const {
-    translations: { blog },
-  } = useTranslations()
+  const { blog } = useTranslations()
   const { filterOptions, sortOptions, dispatchFetchPosts } = useFetchPosts()
 
   const [query, setQuery] = useDebouncedFilter(

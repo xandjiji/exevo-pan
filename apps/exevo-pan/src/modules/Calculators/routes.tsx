@@ -15,9 +15,7 @@ import {
 type CalculatorRoute = NavItem & NavGridItem & { hero: string }
 
 export const useRoutes = () => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const list: CalculatorRoute[] = useMemo(
     () => [

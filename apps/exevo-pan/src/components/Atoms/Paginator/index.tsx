@@ -37,9 +37,7 @@ const Paginator = ({
   noItemsMessage = 'No items',
   ...props
 }: PaginatorProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [currentPage, setCurrentPage] = useState<number>(currentPageProp ?? 1)
   const derivedCurrentPage = currentPageProp ?? currentPage

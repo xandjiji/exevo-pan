@@ -7,7 +7,7 @@ import { buildPageTitle } from 'utils'
 import { common, error } from 'locales'
 
 export default function Custom404() {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageTitle = buildPageTitle(translations.error.Meta.title)
 

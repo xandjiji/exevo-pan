@@ -27,9 +27,7 @@ const ComparisonChart = ({
   className,
   ...props
 }: ComparisonChartProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const { colors } = useTheme()
 
@@ -49,7 +47,9 @@ const ComparisonChart = ({
           const month = currentDate.getMonth() + 1
           const weekday = currentDate.getDay()
 
-          return `${day}/${month}, ${common.Weekdays[weekday]}`
+          return `${day}/${month}, ${
+            common.Weekdays[weekday as unknown as keyof typeof common.Weekdays]
+          }`
         }
 
         default:

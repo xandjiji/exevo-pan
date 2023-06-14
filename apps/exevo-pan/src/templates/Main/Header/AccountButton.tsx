@@ -22,9 +22,7 @@ type AccountButtonProps = {
 const AccountButton = ({
   variant = 'onPrimary',
 }: AccountButtonProps): JSX.Element => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [fallbackAvatar, setFallbackAvatar] = useState(false)
 

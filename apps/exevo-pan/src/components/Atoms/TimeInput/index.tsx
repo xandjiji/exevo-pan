@@ -61,9 +61,7 @@ const TimeInput = forwardRef<HTMLInputElement, TimeInputProps>(
 
     const focusHours = useCallback(() => hoursRef.current?.focus(), [])
 
-    const {
-      translations: { common },
-    } = useTranslations()
+    const { common } = useTranslations()
 
     const initialValue = useRef(value2TimeObject(valueProp ?? defaultValue))
     const controlledValue = useMemo(

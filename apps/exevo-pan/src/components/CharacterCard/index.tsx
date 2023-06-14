@@ -27,9 +27,7 @@ const CharacterCard = ({
   cornerElement,
   ...props
 }: CharacterCardProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const {
     id,

@@ -17,9 +17,7 @@ const Title = (args: JSX.IntrinsicElements['h5']) => (
 )
 
 const CharacterQuests = ({ items, placement, ...props }: TooltipProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <Tooltip

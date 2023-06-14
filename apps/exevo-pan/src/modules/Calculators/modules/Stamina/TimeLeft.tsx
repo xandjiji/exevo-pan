@@ -5,9 +5,7 @@ import { Group, TimeBubbles } from '../../components'
 import { generateDatetime } from './utils'
 
 const TimeLeft = ({ secondsToRegenerate }: { secondsToRegenerate: number }) => {
-  const {
-    translations: { common, calculators },
-  } = useTranslations()
+  const { common, calculators } = useTranslations()
 
   const { day, month, weekday, hours, minutes } = useMemo(
     () => generateDatetime(secondsToRegenerate),
@@ -22,10 +20,14 @@ const TimeLeft = ({ secondsToRegenerate }: { secondsToRegenerate: number }) => {
           labelSize
           content={
             <span className="whitespace-nowrap">
-              {`${common.Month[month]} ${day}, ${hours}:${minutes} (${
+              {`${
+                common.Month[month as unknown as keyof typeof common.Month]
+              } ${day}, ${hours}:${minutes} (${
                 typeof weekday === 'number'
-                  ? common.FullWeekdays[weekday]
-                  : common[weekday]
+                  ? common.FullWeekdays[
+                      weekday as unknown as keyof typeof common.FullWeekdays
+                    ]
+                  : common[weekday as keyof typeof common]
               })`}
             </span>
           }

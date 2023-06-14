@@ -32,9 +32,7 @@ const ExpandableCharacterCard = ({
   characterData: characterDataProps,
   ...props
 }: ExpandableCharacterCardProps) => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
   const i18n = homepage.AuctionsGrid.ExpandableCharacterCard
 
   const auctionId = characterDataProps.id

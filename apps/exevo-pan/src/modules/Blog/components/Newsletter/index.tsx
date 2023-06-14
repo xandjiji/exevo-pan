@@ -15,9 +15,7 @@ const Newsletter = ({
   className,
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) => {
-  const {
-    translations: { common, blog },
-  } = useTranslations()
+  const { common, blog } = useTranslations()
 
   const { locale } = useRouter()
 

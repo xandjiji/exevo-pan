@@ -3,9 +3,7 @@ import { useWarGuildData } from 'contexts/useDatabase'
 import MembersTable from './MembersTable'
 
 const SearchGrid = () => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   const { warGuildData } = useWarGuildData()
 

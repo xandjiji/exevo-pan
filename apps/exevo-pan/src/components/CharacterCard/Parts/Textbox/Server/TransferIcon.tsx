@@ -4,9 +4,7 @@ import { ServerIcon, NoServerIcon } from 'assets/svgs'
 import { TransferIconProps } from './types'
 
 const TransferIcon = ({ transfer, nickname, placement }: TransferIconProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return transfer ? (
     <Tooltip

@@ -20,9 +20,7 @@ const CharacterMiniCard = ({
   className,
   ...props
 }: CharacterMiniCardProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const name = characterName ?? (characterData as SingleCharacterData).name
 

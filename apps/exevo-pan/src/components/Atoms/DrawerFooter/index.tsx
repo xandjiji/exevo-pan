@@ -8,9 +8,7 @@ const DrawerFooter = ({
   className,
   ...props
 }: JSX.IntrinsicElements['footer']) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <footer

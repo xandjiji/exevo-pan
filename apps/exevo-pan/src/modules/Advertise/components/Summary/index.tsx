@@ -26,9 +26,7 @@ const Summary = ({
   selectedDates,
   paymentMethod,
 }: SummaryProps) => {
-  const {
-    translations: { common, advertise },
-  } = useTranslations()
+  const { common, advertise } = useTranslations()
 
   const formattedDates = useMemo(
     () => selectedDates.map(mmddyyyy2ddmmyyy).sort(sortStringDates),

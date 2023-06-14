@@ -30,7 +30,7 @@ import { common, exevopro } from 'locales'
 const pageUrl = buildUrl(routes.EXEVOPRO)
 
 export default function ExevoPro() {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
   const i18n = translations.exevopro
 
   const pageTitle = buildPageTitle(i18n.Meta.title)

@@ -8,9 +8,7 @@ import { parse } from './utils'
 import { HistoryEntry, ExtraExpenses } from './types'
 
 const useHistory = () => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const [list, setList] = useStoredState<HistoryEntry[]>(
     'loot-split-history',

@@ -12,7 +12,7 @@ const pageRoute = routes.CALCULATORS
 const pageUrl = buildUrl(pageRoute)
 
 export default function Calculators() {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageName = translations.calculators.Meta.Main.title
 

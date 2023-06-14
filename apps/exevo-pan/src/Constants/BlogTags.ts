@@ -1,6 +1,7 @@
 import { generateTagColors } from 'utils/generateTagColor'
+import common from 'locales/en/common'
 
-export const tagById: Record<string, BlogTag> = {
+export const tagById: Record<keyof typeof common.BlogTags, BlogTag> = {
   news: {
     id: 'news',
     color: 210,

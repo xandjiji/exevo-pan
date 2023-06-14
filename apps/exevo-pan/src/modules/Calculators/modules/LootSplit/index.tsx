@@ -33,9 +33,7 @@ import { defaultValue } from './defaultValue'
 import { HistoryEntry } from './types'
 
 const LootSplit = () => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const [isHistory, setIsHistory] = useState(false)
   const { list, selected, action } = useHistory()

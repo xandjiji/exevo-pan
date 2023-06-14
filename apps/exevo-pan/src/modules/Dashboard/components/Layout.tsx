@@ -11,9 +11,7 @@ type LayoutProps = {
 }
 
 const Layout = ({ isLoading = false, children }: LayoutProps) => {
-  const {
-    translations: { dashboard },
-  } = useTranslations()
+  const { dashboard } = useTranslations()
   const i18n = dashboard.Layout
 
   const { data: session } = useSession()

@@ -12,9 +12,7 @@ import {
 import styles from './styles.module.css'
 
 export const Form = () => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
 
   const { currentStep, finished, dispatch } = useForm()
 

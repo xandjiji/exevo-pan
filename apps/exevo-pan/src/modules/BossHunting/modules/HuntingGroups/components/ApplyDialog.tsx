@@ -18,9 +18,7 @@ const ApplyDialog = ({
   defaultUserName,
   onClose,
 }: ApplyDialogProps) => {
-  const {
-    translations: { huntingGroups },
-  } = useTranslations()
+  const { huntingGroups } = useTranslations()
 
   const i18n = huntingGroups.ApplyDialog
 

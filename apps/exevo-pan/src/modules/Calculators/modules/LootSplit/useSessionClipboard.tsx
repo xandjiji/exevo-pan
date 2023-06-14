@@ -12,9 +12,7 @@ const useSessionClipboard = ({
   playerReceipts,
   transactions,
 }: HuntData): string => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const displayTimestamp = useDisplayTimestamp()
 

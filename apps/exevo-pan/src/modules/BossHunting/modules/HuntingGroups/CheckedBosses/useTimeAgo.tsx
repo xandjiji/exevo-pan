@@ -9,9 +9,7 @@ const extractTimeUnits = (
 ): number => Math.floor(milliseconds / MILLISECONDS_IN[unit])
 
 export const useTimeAgo = () => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.CheckedBosses
 
   return useCallback(

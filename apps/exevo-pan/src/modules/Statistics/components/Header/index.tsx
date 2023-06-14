@@ -5,9 +5,7 @@ import { routes } from 'Constants'
 import { ChartsIcon, TrophyIcon } from 'assets/svgs'
 
 const Header = () => {
-  const {
-    translations: { statistics },
-  } = useTranslations()
+  const { statistics } = useTranslations()
 
   const navItems = [
     {

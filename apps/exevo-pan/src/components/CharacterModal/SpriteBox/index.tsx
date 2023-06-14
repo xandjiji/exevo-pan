@@ -21,9 +21,7 @@ const SpriteBox = ({
   checkRareMount = false,
   checkRareOutfit = false,
 }: SpriteBoxProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const isRareMount = checkRareMount ? rareMountSet.has(name) : false
   const isRareOutfit =

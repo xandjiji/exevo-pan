@@ -73,7 +73,7 @@ export default function PostPage({
   recentPosts,
   locale,
 }: Props) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const postRoute = `${routes.BLOG}/${metaData.slug}`
   const pageUrl = buildUrl(postRoute)
@@ -105,7 +105,11 @@ export default function PostPage({
           <meta
             key={tag}
             property="article:tag"
-            content={translations.common.BlogTags[tag]}
+            content={
+              translations.common.BlogTags[
+                tag as keyof typeof translations.common.BlogTags
+              ]
+            }
           />
         ))}
 
@@ -141,7 +145,12 @@ export default function PostPage({
               headline: metaData.title,
               datePublished: `${year}-${month}-${day}`,
               keywords: tags
-                .map((tag) => translations.common.BlogTags[tag])
+                .map(
+                  (tag) =>
+                    translations.common.BlogTags[
+                      tag as keyof typeof translations.common.BlogTags
+                    ],
+                )
                 .join(', '),
               description: metaData.description,
               publisher: {
@@ -186,7 +195,10 @@ export default function PostPage({
           <Post.Hero
             title={metaData.title}
             subtitle={`${
-              translations.common.FullMonth[+month - 1]
+              translations.common.FullMonth[
+                (+month -
+                  1) as unknown as keyof typeof translations.common.FullMonth
+              ]
             } ${day}, ${year}`}
             src={metaData.thumbnail}
           />

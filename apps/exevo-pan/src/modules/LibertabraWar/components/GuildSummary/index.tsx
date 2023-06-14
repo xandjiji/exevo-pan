@@ -12,9 +12,7 @@ const GuildSummary = ({
   winning,
   ...props
 }: GuildSummaryProps) => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   return (
     <div {...props}>

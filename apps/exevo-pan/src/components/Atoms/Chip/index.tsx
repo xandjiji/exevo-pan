@@ -16,9 +16,7 @@ const ChipComponent = ({
   gray = false,
   ...props
 }: ChipProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [active, setActive] = useState<boolean>(false)
   const derivedActive = overrideStatus ?? active

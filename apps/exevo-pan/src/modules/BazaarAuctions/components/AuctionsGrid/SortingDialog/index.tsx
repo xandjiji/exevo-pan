@@ -18,9 +18,7 @@ const sortModes: Array<keyof typeof sortModesTranslationKey> = [
 ]
 
 const SortingDialog = () => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
 
   const {
     sortingOptions: { descendingOrder, sortingMode },

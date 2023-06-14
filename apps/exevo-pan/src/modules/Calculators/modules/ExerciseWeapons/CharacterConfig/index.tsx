@@ -12,9 +12,7 @@ import { Vocation, Skill } from '../../../types'
 import { CharacterConfigProps } from './types'
 
 const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
-  const {
-    translations: { calculators },
-  } = useTranslations()
+  const { calculators } = useTranslations()
 
   const [vocation, setVocation] = useStoredUrlState<Vocation>({
     key: parameterNames.vocation,

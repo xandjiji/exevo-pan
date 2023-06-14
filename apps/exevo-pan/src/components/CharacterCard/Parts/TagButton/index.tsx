@@ -10,9 +10,7 @@ import { routes } from 'Constants'
 import { HoveredState } from './types'
 
 const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [hoverState, setHoverState] = useState<HoveredState>('initial')
 

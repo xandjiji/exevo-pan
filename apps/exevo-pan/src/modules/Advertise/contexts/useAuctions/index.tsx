@@ -21,9 +21,7 @@ export const AuctionsProvider = ({
   initialPageData,
   children,
 }: AuctionsProviderProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [state, dispatch] = useReducer(AuctionsReducer, {
     loading: DEFAULT_STATE.loading,

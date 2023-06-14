@@ -8,9 +8,7 @@ const Section = ({ className, ...props }: JSX.IntrinsicElements['div']) => (
 )
 
 const ErrorState = ({ title, paragraphs }: ErrorStateProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <main className="flex flex-grow flex-col transition-colors">

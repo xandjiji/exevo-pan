@@ -12,9 +12,7 @@ import { validateEmail, validateCharacter } from './utils'
 const { DEFAULT_LOCALE } = locales
 
 const Checkout = () => {
-  const {
-    translations: { common, advertise },
-  } = useTranslations()
+  const { common, advertise } = useTranslations()
 
   const { locale } = useRouter()
 

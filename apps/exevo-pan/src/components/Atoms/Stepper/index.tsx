@@ -11,9 +11,7 @@ const Stepper = ({
   currentStep,
   ...props
 }: StepperProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <div className={clsx('flex justify-between pb-8', className)} {...props}>

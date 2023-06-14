@@ -16,9 +16,7 @@ const BossCard = ({
   className,
   ...props
 }: BossCardProps) => {
-  const {
-    translations: { common, bosses },
-  } = useTranslations()
+  const { common, bosses } = useTranslations()
   const i18n = bosses.BossCard
 
   const {

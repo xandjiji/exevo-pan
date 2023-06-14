@@ -51,9 +51,7 @@ const INITIAL_FORM_VALUES: RegisterAuctionNotificationInput = {
 export const AuctionNotificationsProvider = ({
   children,
 }: AuctionNotificationsProviderProps) => {
-  const {
-    translations: { common, homepage },
-  } = useTranslations()
+  const { common, homepage } = useTranslations()
 
   const { isSupported, permission } = usePushNotifications()
   const { data } = useSession()

@@ -16,7 +16,7 @@ type Props = {
 }
 
 export default function PostPage({ initialPosts }: Props) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const pageTitle = buildPageTitle(translations.blog.Meta.title)
 

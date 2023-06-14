@@ -18,9 +18,7 @@ const EstimatedPriceBox = ({
   hideSimilarCount = false,
   ...props
 }: EstimatedPriceBoxProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
   const i18n = common.EstimatedPriceBox
 
   return (

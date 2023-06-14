@@ -16,9 +16,7 @@ const Server = ({
   nickname,
   placement,
 }: ServerInfoProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [fallbackFlag] = flags
 

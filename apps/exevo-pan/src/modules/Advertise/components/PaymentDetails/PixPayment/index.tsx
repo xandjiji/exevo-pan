@@ -6,9 +6,7 @@ import { generateQrCode } from './utils'
 import { PixPaymentProps } from './types'
 
 const PixPayment = ({ isPro }: PixPaymentProps) => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
 
   const { selectedCharacter, selectedDates } = useForm()
 

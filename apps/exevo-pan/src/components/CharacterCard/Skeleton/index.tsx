@@ -6,9 +6,7 @@ import * as S from '../atoms'
 import * as Skeletons from './atoms'
 
 const CardSkeleton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <S.Wrapper {...props}>

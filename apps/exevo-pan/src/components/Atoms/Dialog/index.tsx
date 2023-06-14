@@ -17,9 +17,7 @@ const Dialog = ({
   children,
   ...props
 }: DialogProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const { elementToFocusRef, onKeyDown } = useEscToClose({
     open: isOpen,

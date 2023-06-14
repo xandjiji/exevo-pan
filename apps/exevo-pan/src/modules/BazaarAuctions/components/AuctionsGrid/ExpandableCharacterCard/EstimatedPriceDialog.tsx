@@ -19,9 +19,7 @@ export const EstimatedPriceDialog = ({
   onClose,
   characterData,
 }: EstimatedPriceDialogProps) => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
   const i18n = homepage.AuctionsGrid.EstimatedPriceDialog
   const emptyCharacter = isEmptyCharacter(characterData)
 

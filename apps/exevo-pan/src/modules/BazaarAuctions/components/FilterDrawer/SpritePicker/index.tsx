@@ -17,9 +17,7 @@ const SpritePicker = ({
   filterKey,
   children,
 }: SpritePickerProps) => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
 
   const [search, setSearch] = useState('')
 

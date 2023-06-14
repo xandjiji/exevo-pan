@@ -40,9 +40,7 @@ const isFormInvalid = ({
   messageBoard.length > guildValidationRules.description.MAX
 
 const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.EditGuildDialog
 
   const { guild, setGuildData, currentMember } = useGuildData()

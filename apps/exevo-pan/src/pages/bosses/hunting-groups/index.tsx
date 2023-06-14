@@ -27,7 +27,7 @@ export default function HuntingGroupsPage({
   serializedData,
   baseServerOptions,
 }: HuntingGroupsProps) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
 
   const serverOptions: typeof baseServerOptions = useMemo(
     () => [

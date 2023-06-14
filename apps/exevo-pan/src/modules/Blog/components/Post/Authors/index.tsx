@@ -4,9 +4,7 @@ import { officialCharacterUrl } from 'utils'
 import { AuthorsProps } from './types'
 
 const Authors = ({ author, translator }: AuthorsProps) => {
-  const {
-    translations: { blog },
-  } = useTranslations()
+  const { blog } = useTranslations()
 
   return (
     <footer>

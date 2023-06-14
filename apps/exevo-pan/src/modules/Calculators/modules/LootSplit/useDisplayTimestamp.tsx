@@ -18,9 +18,7 @@ const generateDatetime = (timestamp: number) => {
 }
 
 const useDisplayTimestamp = () => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return useCallback(
     (timestamp?: number) => {
@@ -28,7 +26,13 @@ const useDisplayTimestamp = () => {
         ? generateDatetime(timestamp)
         : generateDatetime(+new Date())
 
-      return `${common.Month[month]} ${day}, ${year} - ${hours}:${minutes} (${common.FullWeekdays[weekday]})`
+      return `${
+        common.Month[month as unknown as keyof typeof common.Month]
+      } ${day}, ${year} - ${hours}:${minutes} (${
+        common.FullWeekdays[
+          weekday as unknown as keyof typeof common.FullWeekdays
+        ]
+      })`
     },
     [common],
   )

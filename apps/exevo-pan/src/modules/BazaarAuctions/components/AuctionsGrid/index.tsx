@@ -19,9 +19,7 @@ import * as S from './atoms'
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
 const AuctionsGrid = () => {
-  const {
-    translations: { homepage },
-  } = useTranslations()
+  const { homepage } = useTranslations()
 
   const {
     loading,

@@ -35,9 +35,7 @@ const SpritePortrait = ({
   imgStyle,
   ...props
 }: SpritePortraitProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [loaded, onLoadingComplete] = useOnImageLoad()
 

@@ -19,7 +19,7 @@ type LoginStaticProps = {
 }
 
 export default function Login({ providers }: LoginStaticProps) {
-  const { translations } = useTranslations()
+  const translations = useTranslations()
   const { locale, push } = useRouter()
 
   const pageTitle = buildPageTitle(translations.login.Meta.title)

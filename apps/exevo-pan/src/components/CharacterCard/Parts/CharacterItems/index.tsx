@@ -14,9 +14,7 @@ const CharacterItems = ({
   className,
   ...props
 }: CharacterItemsProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const emptyItems = useMemo(() => fillItems(4 - items.length), [items.length])
 

@@ -15,9 +15,7 @@ const CharacterCharms = ({
   placement,
   ...props
 }: CharacterCharmsProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <Tooltip

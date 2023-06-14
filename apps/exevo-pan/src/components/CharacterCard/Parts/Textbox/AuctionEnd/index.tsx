@@ -5,9 +5,7 @@ import { LabeledTextBox } from '../../atoms'
 import { AuctionEndProps } from './types'
 
 const AuctionEnd = ({ auctionEnd, past }: AuctionEndProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <LabeledTextBox

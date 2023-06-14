@@ -10,9 +10,7 @@ import AuctionItem from './AuctionItem'
 export const PAGE_SIZE = 10
 
 const AuctionSearch = () => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
 
   const { page, pageData, handlePaginatorFetch } = useAuctions()
   const { dispatch } = useForm()
@@ -24,7 +22,7 @@ const AuctionSearch = () => {
       <div className="mb-6 flex flex-wrap gap-4 md:flex-nowrap">
         <Input
           id="search-input"
-          label={advertise.AuctionSearch.inputLabel}
+          label={<>{advertise.AuctionSearch.inputLabel}</>}
           placeholder={advertise.AuctionSearch.placeholder}
           aria-label={advertise.AuctionSearch.inputAriaLabel}
           allowClear

@@ -27,9 +27,7 @@ export const EstimatedSkillDialog = ({
   skills,
   ...dialogProps
 }: EstimatedSkillDialogProps) => {
-  const {
-    translations: { common, homepage },
-  } = useTranslations()
+  const { common, homepage } = useTranslations()
   const i18n = homepage.AuctionsGrid.EstimatedSkillDialog
 
   const [loyaltyBonus, setLoyaltyBonus] = useStoredState('cm-loyalty', 0)

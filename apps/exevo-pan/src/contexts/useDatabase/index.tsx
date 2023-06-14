@@ -40,9 +40,7 @@ export const DatabaseProvider = ({
 }: {
   children: JSX.Element | JSX.Element[]
 }) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [{ warGuildData }, dispatch] = useReducer(DatabaseReducer, {
     warGuildData: defaultDatabaseState.warGuildData,

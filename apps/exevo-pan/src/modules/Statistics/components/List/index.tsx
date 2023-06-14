@@ -13,9 +13,7 @@ const List = ({
   formatCharacterValue,
   ...props
 }: ListProps) => {
-  const {
-    translations: { statistics },
-  } = useTranslations()
+  const { statistics } = useTranslations()
 
   const { locale } = useRouter()
 

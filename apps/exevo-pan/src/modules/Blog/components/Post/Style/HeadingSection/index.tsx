@@ -11,9 +11,7 @@ const HeadingSection = ({
   children,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement>) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [anchorId] = useState(generateSectionId(children as string))
 

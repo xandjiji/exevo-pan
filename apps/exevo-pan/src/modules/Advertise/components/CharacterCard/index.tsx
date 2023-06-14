@@ -10,9 +10,7 @@ const HEADER_OFFSET = 60
 const MAX_WIDTH = 768
 
 const CharacterCard = () => {
-  const {
-    translations: { advertise },
-  } = useTranslations()
+  const { advertise } = useTranslations()
   const { selectedCharacter, currentStep, finished, isValid, dispatch } =
     useForm()
 

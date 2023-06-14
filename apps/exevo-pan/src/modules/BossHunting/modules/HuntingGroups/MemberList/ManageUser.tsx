@@ -22,9 +22,7 @@ const RemoveMemberIcon = ({
 )
 
 export const ManageUser = (managedUser: GuildMember) => {
-  const {
-    translations: { huntingGroups },
-  } = useTranslations()
+  const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.MemberList.ManageUser
 
   const [managingMode, setManagingMode] = useState<

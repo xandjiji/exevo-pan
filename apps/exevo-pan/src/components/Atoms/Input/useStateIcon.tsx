@@ -6,9 +6,7 @@ import styles from './styles.module.css'
 import { StateIcon } from './types'
 
 export const useStateIcon = (state: StateIcon) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return useMemo(
     (): Record<StateIcon, React.ReactNode> => ({

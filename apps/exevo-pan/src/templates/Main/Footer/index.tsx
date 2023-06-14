@@ -45,9 +45,7 @@ const Card = ({
 )
 
 const Footer = ({ variant = 'primary' }: FooterProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   return (
     <footer
@@ -178,7 +176,11 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                       variant === 'surface' && 'text-onSurface',
                     )}
                   >
-                    {common.Header.nav[content]}
+                    {
+                      common.Header.nav[
+                        content as keyof typeof common.Header.nav
+                      ]
+                    }
                   </NextLink>
                 </li>
               ))}

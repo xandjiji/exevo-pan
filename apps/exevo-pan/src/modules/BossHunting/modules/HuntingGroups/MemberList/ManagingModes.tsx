@@ -21,9 +21,7 @@ type ModeProps = {
 }
 
 export const Role = ({ managedUser, onClose }: ModeProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.MemberList.ManagingModes.Role
 
   const { setGuildData } = useGuildData()
@@ -85,9 +83,7 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
 }
 
 export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.MemberList.ManagingModes.Exclusion
 
   const { currentMember, guild, members, setGuildData } = useGuildData()
@@ -167,9 +163,7 @@ export const Exclusion = ({ managedUser, onClose }: ModeProps) => {
 }
 
 export const ChangeName = ({ managedUser, onClose }: ModeProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.MemberList.ManagingModes.ChangeName
 
   const { setGuildData } = useGuildData()

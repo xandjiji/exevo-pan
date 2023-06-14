@@ -23,9 +23,7 @@ const NotificationDialog = ({
   defaultBoss = '',
   location = '',
 }: NotificationDialogProps) => {
-  const {
-    translations: { common, huntingGroups },
-  } = useTranslations()
+  const { common, huntingGroups } = useTranslations()
   const i18n = huntingGroups.NotificationDialog
 
   const [bossQuery, setBossQuery] = useState(defaultBoss)

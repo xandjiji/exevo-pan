@@ -8,9 +8,7 @@ const CharacterTable = ({
   caption,
   ...props
 }: CharacterTableProps) => {
-  const {
-    translations: { war },
-  } = useTranslations()
+  const { war } = useTranslations()
 
   return (
     <Table {...props}>

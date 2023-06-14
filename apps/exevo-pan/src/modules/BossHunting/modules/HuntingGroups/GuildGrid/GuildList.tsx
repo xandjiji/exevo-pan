@@ -14,9 +14,7 @@ type GuildListProps = {
 }
 
 const GuildList = ({ list, onApply }: GuildListProps) => {
-  const {
-    translations: { huntingGroups },
-  } = useTranslations()
+  const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.GuildGrid.GuildList
 
   return list.length > 0 ? (

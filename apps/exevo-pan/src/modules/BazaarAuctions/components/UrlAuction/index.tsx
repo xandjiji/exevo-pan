@@ -11,9 +11,7 @@ type UrlAuctionProps = {
 }
 
 const UrlAuction = ({ highlightedAuctions = [] }: UrlAuctionProps) => {
-  const {
-    translations: { common },
-  } = useTranslations()
+  const { common } = useTranslations()
 
   const [auctionId, setAuctionId] = useSyncUrlState<number | undefined>({
     defaultValue: undefined,
