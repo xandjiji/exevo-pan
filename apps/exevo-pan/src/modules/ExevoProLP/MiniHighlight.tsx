@@ -21,8 +21,11 @@ const MiniHighlight = () => (
             <div className="bg-separator h-2 w-full opacity-30" />
 
             <div className="grid w-full grid-cols-3 place-items-center gap-0.5 p-1">
-              {Array.from({ length: 9 }).map(() => (
-                <div className="bg-separator h-1.5 w-2 rounded-sm opacity-30" />
+              {Array.from({ length: 9 }).map((_, idx) => (
+                <div
+                  key={idx}
+                  className="bg-separator h-1.5 w-2 rounded-sm opacity-30"
+                />
               ))}
             </div>
           </div>
