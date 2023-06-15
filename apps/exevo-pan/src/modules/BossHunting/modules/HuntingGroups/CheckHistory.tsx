@@ -6,7 +6,7 @@ import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
 import { ViewedIcon, ChevronDownIcon } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
-import { TableIconWrapper } from './components'
+import { TableIconWrapper, EventTimestamp } from './components'
 import { multipleSpawnLocationBosses } from '../../bossInfo'
 
 type CheckHistoryProps = {
@@ -86,12 +86,7 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
                       </strong>
                     </span>
 
-                    {/* @ ToDo: abstract into a component */}
-                    <span className="text-tsm font-light opacity-60">
-                      {checkedAt.toLocaleString('pt-BR', {
-                        hour12: false,
-                      })}
-                    </span>
+                    <EventTimestamp date={checkedAt} />
                   </div>
                 </Table.Column>
               </Table.Row>

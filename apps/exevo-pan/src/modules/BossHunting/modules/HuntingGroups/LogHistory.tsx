@@ -13,7 +13,7 @@ import {
 } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { LOG_ENTRY_TYPE } from '@prisma/client'
-import { TableIconWrapper } from './components'
+import { TableIconWrapper, EventTimestamp } from './components'
 
 type LogHistoryProps = {
   guildId: string
@@ -152,11 +152,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                         }
                       </span>
 
-                      <span className="text-tsm font-light opacity-60">
-                        {createdAt.toLocaleString('pt-BR', {
-                          hour12: false,
-                        })}
-                      </span>
+                      <EventTimestamp date={createdAt} />
                     </div>
                   </Table.Column>
                 </Table.Row>
