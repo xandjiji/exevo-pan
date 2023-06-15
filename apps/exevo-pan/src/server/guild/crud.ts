@@ -738,6 +738,37 @@ export const listGuildLog = authedProcedure
     },
   )
 
+export const listGuildChecks = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+      pageSize: z.number().optional().default(20),
+      pageIndex: z.number().optional().default(0),
+    }),
+  )
+  .query(
+    async ({ ctx: { token }, input: { guildId, pageIndex, pageSize } }) => {
+      const userId = token.id
+      const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+
+      if (!EXEVO_PAN_ADMIN) {
+        await findGuildMember({ guildId, userId })
+      }
+
+      const result = await prisma.bossCheckLog.findMany({
+        where: { guildId },
+        include: {
+          member: { select: { name: true } },
+        },
+        orderBy: { checkedAt: 'desc' },
+        take: pageSize,
+        skip: pageIndex * pageSize,
+      })
+
+      return result
+    },
+  )
+
 export const markCheckedBoss = authedProcedure
   .input(
     z.object({
