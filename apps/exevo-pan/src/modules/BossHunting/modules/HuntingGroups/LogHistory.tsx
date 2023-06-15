@@ -13,6 +13,7 @@ import {
 } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { LOG_ENTRY_TYPE } from '@prisma/client'
+import { TableIconWrapper } from './components'
 
 type LogHistoryProps = {
   guildId: string
@@ -82,28 +83,30 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                     ) && 'animate-fadeIn',
                   )}
                 >
-                  <Table.Column className="child:w-6 child:h-6 child:align-middle child:opacity-70 w-6 px-3">
-                    {
-                      (
-                        {
-                          LEAVE_MEMBER: (
-                            <PersonRemoveIcon className="fill-red" />
-                          ),
-                          REJECT_MEMBER: (
-                            <OutlineRemoveIcon className="fill-red" />
-                          ),
-                          KICK_MEMBER: (
-                            <PersonRemoveIcon className="fill-red" />
-                          ),
-                          ACCEPT_MEMBER: (
-                            <PersonAddAltIcon className="fill-greenHighlight" />
-                          ),
-                          NOTIFICATION: (
-                            <BlogIcon className="fill-primaryHighlight" />
-                          ),
-                        } as LogEntryElement
-                      )[type]
-                    }
+                  <Table.Column className="w-6 px-3">
+                    <TableIconWrapper>
+                      {
+                        (
+                          {
+                            LEAVE_MEMBER: (
+                              <PersonRemoveIcon className="fill-red" />
+                            ),
+                            REJECT_MEMBER: (
+                              <OutlineRemoveIcon className="fill-red" />
+                            ),
+                            KICK_MEMBER: (
+                              <PersonRemoveIcon className="fill-red" />
+                            ),
+                            ACCEPT_MEMBER: (
+                              <PersonAddAltIcon className="fill-greenHighlight" />
+                            ),
+                            NOTIFICATION: (
+                              <BlogIcon className="fill-primaryHighlight" />
+                            ),
+                          } as LogEntryElement
+                        )[type]
+                      }
+                    </TableIconWrapper>
                   </Table.Column>
                   <Table.Column>
                     <div className="grid gap-1 py-0.5">
