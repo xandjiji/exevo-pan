@@ -775,18 +775,28 @@ export const markCheckedBoss = authedProcedure
         })
       }
 
-      const result = await prisma.bossCheck.upsert({
-        where: { boss_guildId_location: { boss, guildId, location } },
-        create: {
-          guildId,
-          memberId: requesterMember.id,
-          boss,
-          lastSpawned,
-          location,
-        },
-        update: { memberId: requesterMember.id, lastSpawned },
-        include: { checkedBy: { select: { name: true } } },
-      })
+      const result = await prisma.$transaction([
+        prisma.bossCheck.upsert({
+          where: { boss_guildId_location: { boss, guildId, location } },
+          create: {
+            guildId,
+            memberId: requesterMember.id,
+            boss,
+            lastSpawned,
+            location,
+          },
+          update: { memberId: requesterMember.id, lastSpawned },
+          include: { checkedBy: { select: { name: true } } },
+        }),
+        prisma.bossCheckLog.create({
+          data: {
+            guildId,
+            memberId: requesterMember.id,
+            boss,
+            location,
+          },
+        }),
+      ])
 
       return result
     },

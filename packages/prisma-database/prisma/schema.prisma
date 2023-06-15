@@ -286,6 +286,7 @@ model BossCheckLog {
 
     checkedAt DateTime    @default(now())
     boss      String
+    location  String
     guild     Guild       @relation(fields: [guildId], references: [id], onDelete: Cascade)
     guildId   String
     member    GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
