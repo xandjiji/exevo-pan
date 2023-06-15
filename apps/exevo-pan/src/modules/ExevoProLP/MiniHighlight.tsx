@@ -1,3 +1,5 @@
+/* eslint-disable react/no-array-index-key */
+import { Fragment } from 'react'
 import { RareFrame } from 'components/Atoms'
 import MiniAuction from './MiniAuction'
 
@@ -5,10 +7,10 @@ const MiniHighlight = () => (
   <div className="grid gap-2">
     <div className="flex items-center justify-center gap-1 opacity-30">
       {Array.from({ length: 3 }).map((_, index) => (
-        <>
+        <Fragment key={index}>
           <div className="bg-separator h-2 w-2 rounded-full" />
           {index !== 2 && <div className="bg-separator h-0.5 w-3 rounded-sm" />}
-        </>
+        </Fragment>
       ))}
     </div>
 
