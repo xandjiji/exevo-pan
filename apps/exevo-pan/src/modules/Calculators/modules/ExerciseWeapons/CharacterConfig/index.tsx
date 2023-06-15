@@ -110,7 +110,7 @@ const CharacterConfig = ({ updatePointsRequired }: CharacterConfigProps) => {
           />
           <ChevronRightIcon
             className={clsx(
-              'mb-1.5 shrink-0',
+              'mb-1.5 h-6 w-6 shrink-0',
               invalidSkill ? 'fill-red' : 'fill-onSurface',
             )}
           />

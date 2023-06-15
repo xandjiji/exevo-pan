@@ -36,9 +36,9 @@ const Feature = ({ className, ...props }: React.ComponentProps<'td'>) => (
 const Check = ({ empty = false }) => (
   <Feature>
     {empty ? (
-      <EmptyCheckBoxIcon className="fill-separator" />
+      <EmptyCheckBoxIcon className="fill-separator h-6 w-6" />
     ) : (
-      <CheckBoxIcon className="fill-primaryHighlight" />
+      <CheckBoxIcon className="fill-primaryHighlight h-6 w-6" />
     )}
   </Feature>
 )

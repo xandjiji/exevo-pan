@@ -428,7 +428,9 @@ const CheckedBosses = ({
           onClick={() => setExpanded(true)}
           disabled={!isMember}
         >
-          <ChevronDownIcon className={clsx(!isMember && '!fill-separator')} />
+          <ChevronDownIcon
+            className={clsx('h-6 w-6', !isMember && '!fill-separator')}
+          />
           {i18n.showMore}
         </Button>
       )}

@@ -35,7 +35,7 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
         className="border-separator -mb-1 flex items-center border-solid pb-1 text-2xl"
         style={{ borderWidth: 0, borderBottomWidth: 1 }}
       >
-        <OfferIcon className="fill-onSurface mr-1.5 transition-colors" />
+        <OfferIcon className="fill-onSurface mr-1.5 h-6 w-6 transition-colors" />
         {advertise.Discount.title}
       </h2>
 

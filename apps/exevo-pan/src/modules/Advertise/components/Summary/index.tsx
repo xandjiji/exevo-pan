@@ -39,7 +39,7 @@ const Summary = ({
         className="border-separator -mb-1 flex items-center border-solid pb-1 text-2xl"
         style={{ borderWidth: 0, borderBottomWidth: 1 }}
       >
-        <ReceiptIcon className="fill-onSurface mr-1.5" />
+        <ReceiptIcon className="fill-onSurface mr-1.5 h-6 w-6" />
         {advertise.PaymentDetails.Summary.title}
       </h2>
 

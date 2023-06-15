@@ -168,7 +168,7 @@ const ExpandableCharacterCard = ({
               },
             ]}
           >
-            <MoreIcon className="fill-onSurface" />
+            <MoreIcon className="fill-onSurface h-6 w-6" />
           </Menu>
         }
         {...props}

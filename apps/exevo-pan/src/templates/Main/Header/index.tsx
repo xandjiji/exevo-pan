@@ -120,7 +120,7 @@ const Header = ({ clean = false, className, ...props }: HeaderProps) => {
             <Switch
               active={theme === 'dark'}
               onClick={toggleTheme}
-              icon={<MoonIcon />}
+              icon={<MoonIcon height={24} width={24} />}
               aria-label={common.Header.themeSwitch}
             />
           </ClientComponent>

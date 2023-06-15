@@ -22,7 +22,7 @@ import yellowSrc from 'assets/yellowbattleye.png'
 import greenSrc from 'assets/greenbattleye.png'
 
 export const Reset = (args: JSX.IntrinsicElements['svg']) => (
-  <ResetIcon {...args} className="fill-onPrimary transition-colors" />
+  <ResetIcon {...args} className="fill-onPrimary h-6 w-6 transition-colors" />
 )
 
 export const Rook = () => <Image role="none" alt="None" src={rookSrc} />

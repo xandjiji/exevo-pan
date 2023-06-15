@@ -187,7 +187,7 @@ export default function GuildPage({
                             setIsNotificationOpen({ isOpen: true })
                           }
                         >
-                          <BlogIcon className="-ml-1" />
+                          <BlogIcon className="-ml-1 h-6 w-6" />
                           {i18n.notificate}
                         </Button>
                         {isNotificationOpen.isOpen && (
@@ -213,7 +213,7 @@ export default function GuildPage({
                               : () => router.push(routes.LOGIN)
                           }
                         >
-                          <PersonAddIcon className="-ml-1" />
+                          <PersonAddIcon className="-ml-1 h-6 w-6" />
                           {i18n.apply}
                         </Button>
                         {isApplyOpen && isAuthed && (

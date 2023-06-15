@@ -27,7 +27,7 @@ const PaymentDetails = () => {
         >
           <CheckIcon
             aria-label={advertise.PaymentDetails.titleIconLabel}
-            className="fill-primary mr-1.5"
+            className="fill-primary mr-1.5 h-6 w-6"
           />
           {advertise.PaymentDetails.title}
         </h2>

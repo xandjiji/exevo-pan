@@ -1,12 +1,5 @@
 export const UnlicenseIcon = (args: JSX.IntrinsicElements['svg']) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1em"
-    height="1em"
-    preserveAspectRatio="xMidYMid meet"
-    viewBox="0 0 32 32"
-    {...args}
-  >
+  <svg viewBox="0 0 32 32" {...args}>
     <path d="M23.627 14.143a7.763 7.763 0 0 0-.807-2.034l-2.034 2.034z" />
     <path d="M11.714 16A4.286 4.286 0 0 1 16 11.714a4.225 4.225 0 0 1 1.174.184l2.717-2.718A7.849 7.849 0 0 0 9.18 19.891l2.72-2.717A4.225 4.225 0 0 1 11.714 16z" />
     <path d="M16 20.286a4.225 4.225 0 0 1-1.174-.184l-2.717 2.718a7.844 7.844 0 0 0 11.555-5.106h-3.74A4.283 4.283 0 0 1 16 20.286z" />

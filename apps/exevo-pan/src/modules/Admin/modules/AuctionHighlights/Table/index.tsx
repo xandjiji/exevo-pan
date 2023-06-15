@@ -351,7 +351,7 @@ const PaymentList = () => {
                         },
                       ]}
                     >
-                      <MoreHorizontalIcon className="fill-onSurface" />
+                      <MoreHorizontalIcon className="fill-onSurface h-6 w-6" />
                     </Menu>
                   </Table.Column>
                 </Table.Row>

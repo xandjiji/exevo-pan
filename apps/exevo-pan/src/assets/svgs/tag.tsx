@@ -1,23 +1,9 @@
 export const TagIcon = (args: JSX.IntrinsicElements['svg']) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 14 22"
-    width="14"
-    height="22"
-    fill="#000000"
-    {...args}
-  >
-    <defs>
-      <linearGradient id="gradientFill" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%" stopColor="#4C9B1E" />
-        <stop offset="100%" stopColor="#2D6010" />
-      </linearGradient>
-    </defs>
-    <path
-      transform="rotate(46 12 12)"
-      fill="none"
-      d="m0,0l24,0l0,24l-24,0l0,-24z"
-    />
+  <svg viewBox="0 0 14 22" {...args}>
+    <linearGradient id="gradientFill">
+      <stop offset="0%" stopColor="#4C9B1E" />
+      <stop offset="100%" stopColor="#2D6010" />
+    </linearGradient>
     <path
       transform="rotate(45 6.99998 13.4766)"
       fill="url(#gradientFill)"

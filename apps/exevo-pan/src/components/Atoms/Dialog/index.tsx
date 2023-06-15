@@ -67,7 +67,7 @@ const Dialog = ({
                     aria-label={common.Dialog.close}
                     onClick={onClose}
                   >
-                    <CrossIcon className="fill-onSurface" />
+                    <CrossIcon className="fill-onSurface h-6 w-6" />
                   </button>
                 )}
               </div>

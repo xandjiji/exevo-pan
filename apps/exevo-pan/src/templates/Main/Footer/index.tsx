@@ -217,7 +217,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
             >
               <GithubIcon
                 className={clsx(
-                  'clickable rounded-full',
+                  'clickable h-6 w-6 rounded-full',
                   variant === 'primary' && 'fill-onPrimary',
                   variant === 'surface' && 'fill-onSurface',
                 )}

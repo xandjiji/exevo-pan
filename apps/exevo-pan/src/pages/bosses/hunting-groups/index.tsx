@@ -104,7 +104,7 @@ export default function HuntingGroupsPage({
             onClick={() => setOpenCreateGuild(true)}
             className="z-1 ml-auto flex w-fit items-center gap-1.5"
           >
-            <AddIcon className="-ml-2.5" />
+            <AddIcon className="-ml-2.5 h-6 w-6" />
             {translations.huntingGroups.createGroup}
           </Button>
           {openCreateGuild && (
