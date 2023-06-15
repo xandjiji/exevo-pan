@@ -50,7 +50,7 @@ const Accordion = ({
       >
         {title}
         <ChevronDownIcon
-          className="fill-onSurface ml-auto shrink-0 rounded transition-all"
+          className="fill-onSurface ml-auto h-6 w-6 shrink-0 rounded transition-all"
           style={{ transform: clsx(open && 'rotate(180deg)') }}
         />
       </button>

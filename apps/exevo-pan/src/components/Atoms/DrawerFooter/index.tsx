@@ -24,7 +24,7 @@ const DrawerFooter = ({
         target="_blank"
         rel="noreferrer noopener external"
       >
-        <GithubIcon className="fill-onPrimary clickable mr-4 rounded-full p-0" />
+        <GithubIcon className="fill-onPrimary clickable mr-4 h-6 w-6 rounded-full p-0" />
         {common.RepoLinkText}
       </a>
       <span>

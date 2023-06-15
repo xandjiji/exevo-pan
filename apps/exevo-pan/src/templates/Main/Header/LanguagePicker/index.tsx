@@ -40,7 +40,7 @@ const LanguagePicker = ({ variant = 'onPrimary' }: LanguagePickerProps) => {
       >
         <LanguageIcon
           className={clsx(
-            'clickable rounded-full',
+            'clickable h-6 w-6 rounded-full',
             variant === 'onPrimary' && 'fill-onPrimary',
             variant === 'onSurface' && 'fill-onSurface',
           )}

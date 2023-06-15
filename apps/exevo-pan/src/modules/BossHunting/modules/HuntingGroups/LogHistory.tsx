@@ -182,7 +182,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
             />
           ) : (
             <>
-              <ChevronDownIcon />
+              <ChevronDownIcon className="h-6 w-6" />
               {i18n.loadMore}
             </>
           )}

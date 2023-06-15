@@ -171,7 +171,7 @@ const Select = forwardRef<HTMLInputElement, SelectProps>(
             </div>
             <ChevronDownIcon
               className={clsx(
-                'ml-auto -mr-2 shrink-0 transition-colors',
+                'ml-auto -mr-2 h-6 w-6 shrink-0 transition-colors',
                 disabled ? 'fill-onSurface/50' : 'fill-separator',
                 !disabled && error
                   ? 'group-focus-within:fill-red'

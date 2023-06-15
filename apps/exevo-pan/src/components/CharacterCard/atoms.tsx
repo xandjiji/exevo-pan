@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import { Checkbox as BaseCheckbox } from 'components/Atoms'
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoin.png'
-import { ExpandIcon } from 'assets/svgs'
 import styles from './styles.module.css'
 import { WrapperProps, FlexColumnProps, BodyProps } from './types'
 
@@ -25,7 +24,6 @@ export const Wrapper = ({
 )
 
 export const Icons = {
-  Expand: () => <ExpandIcon className="fill-onSurface transition-colors" />,
   TibiaCoin: () => (
     <Image
       src={tibiaCoinSrc}

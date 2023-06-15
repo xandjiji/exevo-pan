@@ -39,7 +39,7 @@ const AuctionItem = ({
           world: '',
         }}
       />
-      <ChevronRightIcon className="fill-onSurface group-focus:fill-primaryHighlight w-8" />
+      <ChevronRightIcon className="fill-onSurface group-focus:fill-primaryHighlight h-6 w-8" />
     </button>
   )
 }

@@ -32,7 +32,7 @@ export const Li = ({
   ...props
 }: JSX.IntrinsicElements['li']) => (
   <li className={clsx('flex items-center gap-1', className)} {...props}>
-    <CheckIcon className="fill-greenHighlight shrink-0" />
+    <CheckIcon className="fill-greenHighlight h-6 w-6 shrink-0" />
     {children}
   </li>
 )

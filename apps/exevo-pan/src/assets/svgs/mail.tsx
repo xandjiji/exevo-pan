@@ -1,13 +1,5 @@
 export const MailIcon = (args: JSX.IntrinsicElements['svg']) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    height="24px"
-    viewBox="2 2 20 20"
-    width="24px"
-    fill="#000000"
-    {...args}
-  >
-    <path d="M0 0h24v24H0V0z" fill="none" />
+  <svg viewBox="2 2 20 20" {...args}>
     <path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z" />
   </svg>
 )

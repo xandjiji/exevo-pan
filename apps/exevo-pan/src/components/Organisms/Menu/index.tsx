@@ -171,7 +171,7 @@ const Menu = ({
       >
         {children}
         {variant === 'button' && (
-          <ChevronDownIcon className="fill-onPrimary -mr-1.5" />
+          <ChevronDownIcon className="fill-onPrimary -mr-1.5 h-6 w-6" />
         )}
       </button>
     </Popover>

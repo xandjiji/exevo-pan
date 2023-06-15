@@ -51,7 +51,7 @@ const Stepper = ({
               {isCompleted ? (
                 <CheckIcon
                   aria-label={common.StepperCompletedLabel}
-                  className="fill-onPrimary animate-fadeIn transition-all"
+                  className="fill-onPrimary animate-fadeIn h-6 w-6 transition-all"
                 />
               ) : step.icon ? (
                 cloneElement(step.icon, {

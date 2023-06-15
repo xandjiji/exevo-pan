@@ -149,7 +149,7 @@ const LootSplit = () => {
                   {displayTimestamp(item.timestamp)}
                   <ChevronRightIcon
                     className={clsx(
-                      'fill-onSurface relative left-0 transition-all group-hover:left-1',
+                      'fill-onSurface relative left-0 h-6 w-6 transition-all group-hover:left-1',
                       isSelected ? 'left-1' : 'left-0',
                     )}
                   />
@@ -245,7 +245,7 @@ const LootSplit = () => {
                 pill
                 disabled={isInvalid}
               >
-                <ReceiptIcon className={clsx('-ml-1 h-4 w-4')} />
+                <ReceiptIcon className="-ml-1 h-4 w-4" />
                 {calculators.LootSplit.actions.data}
               </Button>
             </>
@@ -260,7 +260,7 @@ const LootSplit = () => {
               pill
               disabled={isInvalid}
             >
-              <AddPostIcon className={clsx('-ml-1 h-4 w-4')} />
+              <AddPostIcon className="-ml-1 h-4 w-4" />
               {calculators.LootSplit.actions.save}
             </Button>
           )}
