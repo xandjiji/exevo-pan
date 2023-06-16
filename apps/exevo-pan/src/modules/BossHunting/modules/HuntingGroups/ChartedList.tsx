@@ -1,8 +1,8 @@
-import { Table } from 'components/Atoms'
+import clsx from 'clsx'
+import { Table, SpritePortrait } from 'components/Atoms'
 
 /* @ ToDo:
     - shrink state
-    - boss sprite?
     - empty state
     - non member state
     - i18n
@@ -12,9 +12,15 @@ type ChartedListProps = {
   heading: string
   subtitle: string
   list: HuntingGroupsStatisticsEntry[]
+  iconSrcResolver?: (name: string) => string
 } & React.ComponentProps<'div'>
 
-const ChartedList = ({ heading, subtitle, list }: ChartedListProps) => {
+const ChartedList = ({
+  heading,
+  subtitle,
+  list,
+  iconSrcResolver,
+}: ChartedListProps) => {
   const [topEntry] = list
   const maxCount = topEntry ? topEntry.count : 0
 
@@ -23,21 +29,46 @@ const ChartedList = ({ heading, subtitle, list }: ChartedListProps) => {
       <Table.Element className="-mt-2">
         <Table.Body>
           {list.map(({ name, count, percentage }) => {
-            const width = `${Math.ceil((count / maxCount) * 100)}%`
+            const width = `${Math.max(Math.ceil((count / maxCount) * 100), 1)}%`
 
             return (
               <Table.Row key={name}>
-                <div className="py-2">
-                  <strong className="text-tsm mb-1 block">{name}</strong>
-
-                  <div className="flex items-center gap-1.5">
-                    <div
-                      className="bg-primaryVariant border-separator border-1 h-3 rounded-sm border-solid shadow"
-                      title={`${percentage}%`}
-                      style={{ width }}
+                <div
+                  className={clsx(
+                    'py-2',
+                    !!iconSrcResolver && 'flex items-center gap-4',
+                  )}
+                >
+                  {!!iconSrcResolver && (
+                    <SpritePortrait
+                      alt={name}
+                      src={iconSrcResolver(name)}
+                      offset
+                      width={64}
+                      height={64}
+                      className="shrink-0"
                     />
+                  )}
 
-                    <span>{count}</span>
+                  <div className="w-full">
+                    <strong
+                      className={clsx(
+                        'text-tsm block',
+                        iconSrcResolver ? 'text-s mb-2' : 'text-tsm mb-1',
+                      )}
+                    >
+                      {name}
+                    </strong>
+
+                    <div className={clsx('flex items-center gap-1.5')}>
+                      <div
+                        className="bg-greenHighlight h-3 rounded-sm opacity-50 shadow-md"
+                        title={`${percentage}%`}
+                        style={{ width }}
+                      />
+
+                      <span>{count}</span>
+                    </div>
                   </div>
                 </div>
               </Table.Row>

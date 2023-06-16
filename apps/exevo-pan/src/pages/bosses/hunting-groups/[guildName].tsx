@@ -33,7 +33,13 @@ import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
-import { buildPageTitle, loadRawSrc, getGuildPermalink, buildUrl } from 'utils'
+import {
+  buildPageTitle,
+  loadRawSrc,
+  getGuildPermalink,
+  buildUrl,
+  loadBossSrc,
+} from 'utils'
 import { routes, jsonld } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
 import { common, bosses, huntingGroups } from 'locales'
@@ -291,6 +297,11 @@ export default function GuildPage({
                         heading="Bosses"
                         subtitle="Checks by"
                         list={checkStatistics.currentMonth.boss}
+                        iconSrcResolver={(displayName) => {
+                          const [bossName] = displayName.split(' (')
+
+                          return loadBossSrc(bossName)
+                        }}
                       />
                       <ChartedList
                         heading="Members"
