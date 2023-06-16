@@ -15,11 +15,9 @@ type CheckHistoryProps = {
 
 const pageSize = 10
 
-/* @ ToDo: i18n */
-
 const CheckHistory = ({ guildId }: CheckHistoryProps) => {
   const { huntingGroups } = useTranslations()
-  const i18n = huntingGroups.LogHistory
+  const i18n = huntingGroups.CheckHistory
 
   const [pageIndex, setPageIndex] = useState(0)
   const [list, setList] = useState<TRPCRouteOutputs['listGuildChecks']>([])
@@ -77,13 +75,17 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
                 <Table.Column>
                   <div className="grid gap-1 py-0.5">
                     <span className="leading-tight">
-                      <strong>{member.name}</strong> checked{' '}
-                      <strong className="text-primaryHighlight">
-                        {multipleSpawnLocationBosses.displayName({
-                          name: boss,
-                          location,
-                        })}
-                      </strong>
+                      {templateMessage(i18n.checkEntry, {
+                        member: <strong>{member.name}</strong>,
+                        boss: (
+                          <strong className="text-primaryHighlight">
+                            {multipleSpawnLocationBosses.displayName({
+                              name: boss,
+                              location,
+                            })}
+                          </strong>
+                        ),
+                      })}
                     </span>
 
                     <EventTimestamp date={checkedAt} />

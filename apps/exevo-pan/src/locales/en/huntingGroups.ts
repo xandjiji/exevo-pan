@@ -21,6 +21,7 @@ export default {
   },
   members: 'Members',
   groupApplications: 'Group applications',
+  checkHistory: 'Check history',
   logHistory: 'Log history',
   RollAvatar: {
     avatarAlt: 'New group avatar',
@@ -167,6 +168,12 @@ export default {
     accept: '{{actor}} approved {{target}} application',
     notification: '{{actor}} sighted a {{boss}}',
     emptyState: 'No log history',
+    loadMore: 'Show more',
+  },
+  CheckHistory: {
+    event: 'Event',
+    checkEntry: '{{member}} checked {{boss}}',
+    emptyState: 'No checks',
     loadMore: 'Show more',
   },
   NotificationDialog: {

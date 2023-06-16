@@ -306,8 +306,7 @@ export default function GuildPage({
                             }
                           />
                         </Tabs.Panel>
-                        {/* @ ToDo: i18n */}
-                        <Tabs.Panel label="Check history">
+                        <Tabs.Panel label={i18n.checkHistory}>
                           <CheckHistory guildId={guild.id} />
                         </Tabs.Panel>
                         <Tabs.Panel label={i18n.logHistory}>
