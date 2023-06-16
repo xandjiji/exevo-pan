@@ -8,7 +8,7 @@ import {
 import { can } from 'server/guild/permissions'
 import { GuildDataValues, UseGuildDataProps } from './types'
 
-export type { GuildData } from './types'
+export type { GuildData, HuntingGroupStatistics } from './types'
 
 const GuildDataContext = createContext<GuildDataValues>({} as GuildDataValues)
 

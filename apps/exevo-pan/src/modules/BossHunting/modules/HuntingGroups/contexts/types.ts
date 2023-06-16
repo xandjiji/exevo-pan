@@ -1,11 +1,17 @@
 import type { GuildMember, Guild, GuildApplication } from '@prisma/client'
 import type { JWT } from 'next-auth/jwt'
 
+export type HuntingGroupStatistics = {
+  currentMonth: HuntingGroupsStatisticsSet
+  pastMonth: HuntingGroupsStatisticsSet
+}
+
 export type GuildData = {
   guild: Guild
   members: GuildMember[]
   applications: GuildApplication[]
   checkedBosses: CheckedBoss[]
+  checkStatistics: HuntingGroupStatistics
 }
 
 export type InferredValues = {

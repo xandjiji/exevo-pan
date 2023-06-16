@@ -11,6 +11,7 @@ import {
   GuildDataProvider,
   GuildDataConsumer,
   GuildData,
+  HuntingGroupStatistics,
   Template,
   GuildHero,
   ApplyDialog,
@@ -26,6 +27,7 @@ import {
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
+import { caller } from 'pages/api/trpc/[trpc]'
 import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
@@ -332,6 +334,44 @@ const redirect: GetServerSidePropsResult<any> = {
   },
 }
 
+const getCheckedBosses = async ({
+  hasMemberPrivilege,
+  isPro,
+  guildId,
+  server,
+}: {
+  hasMemberPrivilege: boolean
+  isPro: boolean
+  guildId: string
+  server: string
+}): Promise<CheckedBoss[]> =>
+  hasMemberPrivilege
+    ? BossesClient.fetchCheckedBosses({
+        isPro,
+        guildId,
+        server,
+      })
+    : BossesClient.fetchServerBossChances({
+        server,
+        isPro,
+      }).then((bossChances) =>
+        bossChances.bosses.map((stats) => ({ ...stats, location: '' })),
+      )
+
+const getCheckStatistics = async ({
+  guildId,
+  hasMemberPrivilege,
+}: {
+  hasMemberPrivilege: boolean
+  guildId: string
+}): Promise<HuntingGroupStatistics> =>
+  hasMemberPrivilege
+    ? caller.getCheckStats({ guildId })
+    : {
+        currentMonth: { boss: [], members: [] },
+        pastMonth: { boss: [], members: [] },
+      }
+
 export const getServerSideProps: GetServerSideProps = async ({
   req,
   query: { guildName },
@@ -360,18 +400,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
   const isPro = token?.proStatus ?? false
 
-  const checkedBosses: CheckedBoss[] = hasMemberPrivilege
-    ? await BossesClient.fetchCheckedBosses({
-        isPro,
-        guildId: guild.id,
-        server: guild.server,
-      })
-    : await BossesClient.fetchServerBossChances({
-        server: guild.server,
-        isPro,
-      }).then((bossChances) =>
-        bossChances.bosses.map((stats) => ({ ...stats, location: '' })),
-      )
+  const [checkedBosses, checkStatistics] = await Promise.all([
+    getCheckedBosses({
+      hasMemberPrivilege,
+      isPro,
+      guildId: guild.id,
+      server: guild.server,
+    }),
+    getCheckStatistics({ hasMemberPrivilege, guildId: guild.id }),
+  ])
 
   const guildData: GuildData = {
     guild: {
@@ -379,7 +416,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       messageBoard: hasMemberPrivilege ? messageBoard : null,
     },
     members:
-      guild.private && !isMember && !EXEVO_PAN_ADMIN
+      guild.private && !hasMemberPrivilege
         ? guildMembers.map(() => ({
             id: '',
             guildId: '',
@@ -393,6 +430,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         : guildMembers,
     applications: hasMemberPrivilege ? guildApplications : [],
     checkedBosses,
+    checkStatistics,
   }
 
   return {

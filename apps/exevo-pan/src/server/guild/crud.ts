@@ -22,6 +22,7 @@ import {
   utils as blacklistUtils,
   bossSet,
 } from '../../modules/BossHunting/blacklist'
+import { HuntingGroupStatistics } from '../../modules/BossHunting/modules/HuntingGroups/contexts/types'
 import { can } from './permissions'
 
 type UniqueMemberArgs = (
@@ -963,20 +964,25 @@ export const getCheckStats = authedProcedure
       guildId: z.string(),
     }),
   )
-  .query(async ({ ctx: { token }, input: { guildId } }) => {
-    const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
-    const requesterId = token.id
+  .query(
+    async ({
+      ctx: { token },
+      input: { guildId },
+    }): Promise<HuntingGroupStatistics> => {
+      const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+      const requesterId = token.id
 
-    await throwIfForbiddenGuildRequest({
-      guildId,
-      requesterId,
-      EXEVO_PAN_ADMIN,
-    })
+      await throwIfForbiddenGuildRequest({
+        guildId,
+        requesterId,
+        EXEVO_PAN_ADMIN,
+      })
 
-    const [currentMonth, pastMonth] = await Promise.all([
-      getBossCheckStatistics({ guildId, month: 'current' }),
-      getBossCheckStatistics({ guildId, month: 'past' }),
-    ])
+      const [currentMonth, pastMonth] = await Promise.all([
+        getBossCheckStatistics({ guildId, month: 'current' }),
+        getBossCheckStatistics({ guildId, month: 'past' }),
+      ])
 
-    return { currentMonth, pastMonth }
-  })
+      return { currentMonth, pastMonth }
+    },
+  )
