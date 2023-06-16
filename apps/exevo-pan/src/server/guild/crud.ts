@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { stripTime } from 'shared-utils/dist/time'
 import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
@@ -867,24 +868,50 @@ const calculateStatisticsEntriesPercentages = (
   return entries.map(({ name, count }) => ({
     name,
     count,
-    percentage: Math.round((count / totalCheckCount) * 100),
+    percentage: Math.ceil((count / totalCheckCount) * 100),
   }))
 }
 
-const getCheckCountBy = {
+type Range = 'past' | 'current'
+
+const getMonthRange = (whichRange: Range): { gte: Date; lte: Date } => {
+  const currentMonthStart = stripTime()
+  currentMonthStart.setUTCDate(1)
+
+  const monthLimitRange = new Date(currentMonthStart)
+
+  if (whichRange === 'current') {
+    monthLimitRange.setUTCMonth(monthLimitRange.getUTCMonth() + 1)
+
+    return { gte: currentMonthStart, lte: monthLimitRange }
+  }
+
+  monthLimitRange.setUTCMonth(monthLimitRange.getUTCMonth() - 1)
+
+  return { gte: monthLimitRange, lte: currentMonthStart }
+}
+
+type BossCheckStatsArgs = {
+  guildId: string
+  month: Range
+}
+
+const getCheckStatsBy = {
   members: async ({
     guildId,
-  }: {
-    guildId: string
-  }): Promise<HuntingGroupsStatisticsEntry[]> =>
+    month,
+  }: BossCheckStatsArgs): Promise<HuntingGroupsStatisticsEntry[]> =>
     prisma.guildMember
       .findMany({
         where: { guildId },
         select: {
           name: true,
           _count: {
-            /* @ ToDo: filter by month */
-            select: { bossCheckLog: true },
+            select: {
+              bossCheckLog: {
+                where: { checkedAt: getMonthRange(month) },
+              },
+            },
           },
         },
         orderBy: { bossCheckLog: { _count: 'desc' } },
@@ -899,13 +926,11 @@ const getCheckCountBy = {
       .then(calculateStatisticsEntriesPercentages),
   boss: async ({
     guildId,
-  }: {
-    guildId: string
-  }): Promise<HuntingGroupsStatisticsEntry[]> =>
+    month,
+  }: BossCheckStatsArgs): Promise<HuntingGroupsStatisticsEntry[]> =>
     prisma.bossCheckLog
       .groupBy({
-        /* @ ToDo: filter by month */
-        where: { guildId },
+        where: { guildId, checkedAt: getMonthRange(month) },
         by: ['boss', 'location'],
         _count: true,
         orderBy: { _count: { boss: 'desc' } },
@@ -923,10 +948,10 @@ const getCheckCountBy = {
       .then(calculateStatisticsEntriesPercentages),
 }
 
-const getBossCheckStatistics = async ({ guildId }: { guildId: string }) => {
+const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
   const [boss, members] = await Promise.all([
-    getCheckCountBy.boss({ guildId }),
-    getCheckCountBy.members({ guildId }),
+    getCheckStatsBy.boss(args),
+    getCheckStatsBy.members(args),
   ])
 
   return { boss, members }
@@ -949,8 +974,8 @@ export const getCheckStats = authedProcedure
     })
 
     const [currentMonth, pastMonth] = await Promise.all([
-      getBossCheckStatistics({ guildId }),
-      getBossCheckStatistics({ guildId }),
+      getBossCheckStatistics({ guildId, month: 'current' }),
+      getBossCheckStatistics({ guildId, month: 'past' }),
     ])
 
     return { currentMonth, pastMonth }
