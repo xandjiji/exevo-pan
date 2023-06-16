@@ -454,7 +454,7 @@ schema.set('The Welter', {
 
 schema.set('Tyrn', {
   fixedDaysFrequency: {
-    min: 15,
+    min: 12,
     max: 28,
   },
   spawnCount: 2,
