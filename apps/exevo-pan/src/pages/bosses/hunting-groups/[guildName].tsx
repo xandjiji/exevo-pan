@@ -24,6 +24,7 @@ import {
   CheckHistory,
   LogHistory,
   CheckedBosses,
+  ChartedList,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
@@ -133,6 +134,7 @@ export default function GuildPage({
               isApprover,
               setGuildData,
               checkedBosses,
+              checkStatistics,
             }) => (
               <>
                 <GuildHero guild={guild} memberCount={members.length} />
@@ -275,6 +277,28 @@ export default function GuildPage({
                     />
                   </ConditionalClientComponent>
 
+                  <section className="mx-auto w-full">
+                    {/* @ ToDo: i18n */}
+                    <h4 className="mb-4 text-xl">Group statistics</h4>
+
+                    <Tabs.Group>
+                      {/* @ ToDo: tab interactions */}
+                      <Tabs.Panel label="Current month (June)" />
+                      <Tabs.Panel label="Past month (May)" />
+                    </Tabs.Group>
+                    <div className="grid w-full gap-8 lg:grid-cols-2 lg:items-start">
+                      <ChartedList
+                        heading="Bosses"
+                        subtitle="Checks by"
+                        list={checkStatistics.currentMonth.boss}
+                      />
+                      <ChartedList
+                        heading="Members"
+                        subtitle="Checks by"
+                        list={checkStatistics.currentMonth.members}
+                      />
+                    </div>
+                  </section>
                   <div
                     className={clsx(
                       'mx-auto grid w-full gap-8',
