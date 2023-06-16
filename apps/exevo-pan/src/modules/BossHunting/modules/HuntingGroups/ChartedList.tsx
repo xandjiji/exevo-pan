@@ -62,7 +62,7 @@ const ChartedList = ({
 
                     <div className={clsx('flex items-center gap-1.5')}>
                       <div
-                        className="bg-greenHighlight h-3 rounded-sm opacity-50 shadow-md"
+                        className="bg-separator h-3 rounded-sm shadow"
                         title={`${percentage}%`}
                         style={{ width }}
                       />
