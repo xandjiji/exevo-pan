@@ -173,10 +173,11 @@ const CheckedBosses = ({
     ],
   )
 
-  const [loadingBossCheck, setLoadingBossCheck] = useState('')
+  const [loadingBossCheck, setLoadingBossCheck] =
+    useState<{ boss: string; location: string }>()
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
     onSuccess: () => checkedBosses.refetch(),
-    onSettled: () => setLoadingBossCheck(''),
+    onSettled: () => setLoadingBossCheck(undefined),
   })
 
   const markBoss = useCallback(
@@ -185,7 +186,7 @@ const CheckedBosses = ({
       location,
       lastSpawned = null,
     }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) => {
-      setLoadingBossCheck(boss)
+      setLoadingBossCheck({ boss, location: location ?? '' })
       toast.promise(
         markCheckedBoss.mutateAsync({
           boss,
@@ -295,7 +296,10 @@ const CheckedBosses = ({
           } = boss
 
           const checkAction = () => markBoss({ boss: name, location })
-          const checkIsLoading = name === loadingBossCheck
+          const checkIsLoading = loadingBossCheck
+            ? loadingBossCheck.boss === name &&
+              loadingBossCheck.location === location
+            : false
           const disableCheck =
             manuallyMarkedAsNoChance || !isMember || checkIsLoading
 

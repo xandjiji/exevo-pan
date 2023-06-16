@@ -20,6 +20,7 @@ import {
   ApplyList,
   NotificationDialog,
   SettingsDialog,
+  CheckHistory,
   LogHistory,
   CheckedBosses,
 } from 'modules/BossHunting'
@@ -304,6 +305,9 @@ export default function GuildPage({
                               }))
                             }
                           />
+                        </Tabs.Panel>
+                        <Tabs.Panel label={i18n.checkHistory}>
+                          <CheckHistory guildId={guild.id} />
                         </Tabs.Panel>
                         <Tabs.Panel label={i18n.logHistory}>
                           <LogHistory guildId={guild.id} />

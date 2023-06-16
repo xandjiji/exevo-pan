@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import { Table, Button } from 'components/Atoms'
+import { Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
 import {
@@ -9,10 +9,10 @@ import {
   PersonRemoveIcon,
   BlogIcon,
   OutlineRemoveIcon,
-  ChevronDownIcon,
 } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { LOG_ENTRY_TYPE } from '@prisma/client'
+import { TableIconWrapper, EventTimestamp, ListButton } from './components'
 
 type LogHistoryProps = {
   guildId: string
@@ -82,28 +82,30 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                     ) && 'animate-fadeIn',
                   )}
                 >
-                  <Table.Column className="child:w-6 child:h-6 child:align-middle child:opacity-70 w-6 px-3">
-                    {
-                      (
-                        {
-                          LEAVE_MEMBER: (
-                            <PersonRemoveIcon className="fill-red" />
-                          ),
-                          REJECT_MEMBER: (
-                            <OutlineRemoveIcon className="fill-red" />
-                          ),
-                          KICK_MEMBER: (
-                            <PersonRemoveIcon className="fill-red" />
-                          ),
-                          ACCEPT_MEMBER: (
-                            <PersonAddAltIcon className="fill-greenHighlight" />
-                          ),
-                          NOTIFICATION: (
-                            <BlogIcon className="fill-primaryHighlight" />
-                          ),
-                        } as LogEntryElement
-                      )[type]
-                    }
+                  <Table.Column className="w-6 px-3">
+                    <TableIconWrapper>
+                      {
+                        (
+                          {
+                            LEAVE_MEMBER: (
+                              <PersonRemoveIcon className="fill-red" />
+                            ),
+                            REJECT_MEMBER: (
+                              <OutlineRemoveIcon className="fill-red" />
+                            ),
+                            KICK_MEMBER: (
+                              <PersonRemoveIcon className="fill-red" />
+                            ),
+                            ACCEPT_MEMBER: (
+                              <PersonAddAltIcon className="fill-greenHighlight" />
+                            ),
+                            NOTIFICATION: (
+                              <BlogIcon className="fill-primaryHighlight" />
+                            ),
+                          } as LogEntryElement
+                        )[type]
+                      }
+                    </TableIconWrapper>
                   </Table.Column>
                   <Table.Column>
                     <div className="grid gap-1 py-0.5">
@@ -149,11 +151,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                         }
                       </span>
 
-                      <span className="text-tsm font-light opacity-60">
-                        {createdAt.toLocaleString('pt-BR', {
-                          hour12: false,
-                        })}
-                      </span>
+                      <EventTimestamp date={createdAt} />
                     </div>
                   </Table.Column>
                 </Table.Row>
@@ -168,25 +166,13 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
       )}
 
       {!exhausted && (
-        <Button
-          hollow
-          pill
+        <ListButton
           className="mx-auto"
-          disabled={isLoading}
+          isLoading={isLoading}
           onClick={() => setPageIndex((prev) => prev + 1)}
         >
-          {isLoading ? (
-            <div
-              role="alert"
-              className="loading-spinner fill-onPrimary h-6 w-6"
-            />
-          ) : (
-            <>
-              <ChevronDownIcon className="h-6 w-6" />
-              {i18n.loadMore}
-            </>
-          )}
-        </Button>
+          {i18n.loadMore}
+        </ListButton>
       )}
     </Table>
   )

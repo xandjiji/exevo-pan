@@ -190,6 +190,7 @@ model Guild {
     guildApplications GuildApplication[]
     guildLogEntry     GuildLogEntry[]
     bossChecks        BossCheck[]
+    bossCheckLog      BossCheckLog[]
 }
 
 enum GUILD_MEMBER_ROLE {
@@ -214,6 +215,7 @@ model GuildMember {
     actionLogEntry        GuildLogEntry[] @relation("actor")
     targetedLogEntry      GuildLogEntry[] @relation("target")
     bossChecks            BossCheck[]
+    bossCheckLog          BossCheckLog[]
 
     @@unique([guildId, userId])
     @@index([guildId])
@@ -275,6 +277,21 @@ model BossCheck {
     location    String
 
     @@unique([boss, guildId, location])
+    @@index([guildId])
+    @@index([memberId])
+}
+
+model BossCheckLog {
+    id String @id @default(uuid())
+
+    checkedAt DateTime    @default(now())
+    boss      String
+    location  String
+    guild     Guild       @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId   String
+    member    GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+    memberId  String
+
     @@index([guildId])
     @@index([memberId])
 }

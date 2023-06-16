@@ -24,6 +24,7 @@ export default defaultComposer(defaultTranslations, {
   },
   members: 'Membros',
   groupApplications: 'Novas solicitações',
+  checkHistory: 'Histórico de checks',
   logHistory: 'Histórico do grupo',
   RollAvatar: {
     avatarAlt: 'Novo avatar do grupo',
@@ -170,6 +171,12 @@ export default defaultComposer(defaultTranslations, {
     accept: '{{actor}} aprovou a solicitação de {{target}}',
     notification: '{{actor}} encontrou {{boss}}',
     emptyState: 'Nenhum evento',
+    loadMore: 'Mostrar mais',
+  },
+  CheckHistory: {
+    event: 'Evento',
+    checkEntry: '{{member}} checou {{boss}}',
+    emptyState: 'Nenhuma checagem',
     loadMore: 'Mostrar mais',
   },
   NotificationDialog: {
