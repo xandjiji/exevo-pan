@@ -36,7 +36,7 @@ const ChartedList = ({
                 <div
                   className={clsx(
                     'py-2',
-                    !!iconSrcResolver && 'flex items-center gap-4',
+                    !!iconSrcResolver && 'flex items-center gap-2.5',
                   )}
                 >
                   {!!iconSrcResolver && (
@@ -54,7 +54,7 @@ const ChartedList = ({
                     <strong
                       className={clsx(
                         'text-tsm block',
-                        iconSrcResolver ? 'text-s mb-2' : 'text-tsm mb-1',
+                        iconSrcResolver ? 'mb-1 text-base' : 'text-tsm mb-1',
                       )}
                     >
                       {name}
