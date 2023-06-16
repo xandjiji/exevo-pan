@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import { Table, Button } from 'components/Atoms'
+import { Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
 import {
@@ -9,11 +9,10 @@ import {
   PersonRemoveIcon,
   BlogIcon,
   OutlineRemoveIcon,
-  ChevronDownIcon,
 } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { LOG_ENTRY_TYPE } from '@prisma/client'
-import { TableIconWrapper, EventTimestamp } from './components'
+import { TableIconWrapper, EventTimestamp, ListButton } from './components'
 
 type LogHistoryProps = {
   guildId: string
@@ -167,25 +166,13 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
       )}
 
       {!exhausted && (
-        <Button
-          hollow
-          pill
+        <ListButton
           className="mx-auto"
-          disabled={isLoading}
+          isLoading={isLoading}
           onClick={() => setPageIndex((prev) => prev + 1)}
         >
-          {isLoading ? (
-            <div
-              role="alert"
-              className="loading-spinner fill-onPrimary h-6 w-6"
-            />
-          ) : (
-            <>
-              <ChevronDownIcon className="h-6 w-6" />
-              {i18n.loadMore}
-            </>
-          )}
-        </Button>
+          {i18n.loadMore}
+        </ListButton>
       )}
     </Table>
   )

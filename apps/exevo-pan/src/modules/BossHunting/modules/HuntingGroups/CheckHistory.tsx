@@ -1,12 +1,12 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import { Table, Button } from 'components/Atoms'
+import { Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
-import { ViewedIcon, ChevronDownIcon } from 'assets/svgs'
+import { ViewedIcon } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
-import { TableIconWrapper, EventTimestamp } from './components'
+import { TableIconWrapper, EventTimestamp, ListButton } from './components'
 import { multipleSpawnLocationBosses } from '../../bossInfo'
 
 type CheckHistoryProps = {
@@ -99,27 +99,14 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
         <EmptyState text={i18n.emptyState} variant="medium" className="my-4" />
       )}
 
-      {/* @ ToDo: abstract into a component */}
       {!exhausted && (
-        <Button
-          hollow
-          pill
-          className="mx-auto"
-          disabled={isLoading}
+        <ListButton
+          isLoading={isLoading}
           onClick={() => setPageIndex((prev) => prev + 1)}
+          className="mx-auto"
         >
-          {isLoading ? (
-            <div
-              role="alert"
-              className="loading-spinner fill-onPrimary h-6 w-6"
-            />
-          ) : (
-            <>
-              <ChevronDownIcon className="h-6 w-6" />
-              {i18n.loadMore}
-            </>
-          )}
-        </Button>
+          {i18n.loadMore}
+        </ListButton>
       )}
     </Table>
   )
