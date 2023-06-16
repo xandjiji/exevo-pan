@@ -38,7 +38,7 @@ import {
   loadRawSrc,
   getGuildPermalink,
   buildUrl,
-  loadBossSrc,
+  loadDisplayNameBossSrc,
 } from 'utils'
 import { routes, jsonld } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
@@ -297,11 +297,7 @@ export default function GuildPage({
                         heading="Bosses"
                         subtitle="Checks by"
                         list={checkStatistics.currentMonth.boss}
-                        iconSrcResolver={(displayName) => {
-                          const [bossName] = displayName.split(' (')
-
-                          return loadBossSrc(bossName)
-                        }}
+                        iconSrcResolver={loadDisplayNameBossSrc}
                       />
                       <ChartedList
                         heading="Members"
