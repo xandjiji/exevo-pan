@@ -858,3 +858,100 @@ export const listCheckedBosses = authedProcedure
 
     return result
   })
+
+const calculateStatisticsEntriesPercentages = (
+  entries: HuntingGroupsStatisticsEntry[],
+): HuntingGroupsStatisticsEntry[] => {
+  const totalCheckCount = entries.reduce((acc, { count }) => acc + count, 0)
+
+  return entries.map(({ name, count }) => ({
+    name,
+    count,
+    percentage: Math.round((count / totalCheckCount) * 100),
+  }))
+}
+
+const getCheckCountBy = {
+  members: async ({
+    guildId,
+  }: {
+    guildId: string
+  }): Promise<HuntingGroupsStatisticsEntry[]> =>
+    prisma.guildMember
+      .findMany({
+        where: { guildId },
+        select: {
+          name: true,
+          _count: {
+            /* @ ToDo: filter by month */
+            select: { bossCheckLog: true },
+          },
+        },
+        orderBy: { bossCheckLog: { _count: 'desc' } },
+      })
+      .then((entries) =>
+        entries.map(({ name, _count: { bossCheckLog } }) => ({
+          name,
+          count: bossCheckLog,
+          percentage: 0,
+        })),
+      )
+      .then(calculateStatisticsEntriesPercentages),
+  boss: async ({
+    guildId,
+  }: {
+    guildId: string
+  }): Promise<HuntingGroupsStatisticsEntry[]> =>
+    prisma.bossCheckLog
+      .groupBy({
+        /* @ ToDo: filter by month */
+        where: { guildId },
+        by: ['boss', 'location'],
+        _count: true,
+        orderBy: { _count: { boss: 'desc' } },
+      })
+      .then((entries) =>
+        entries.map(({ boss, location, _count }) => ({
+          name: multipleSpawnLocationBosses.displayName({
+            name: boss,
+            location,
+          }),
+          count: _count,
+          percentage: 0,
+        })),
+      )
+      .then(calculateStatisticsEntriesPercentages),
+}
+
+const getBossCheckStatistics = async ({ guildId }: { guildId: string }) => {
+  const [boss, members] = await Promise.all([
+    getCheckCountBy.boss({ guildId }),
+    getCheckCountBy.members({ guildId }),
+  ])
+
+  return { boss, members }
+}
+
+export const getCheckStats = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+    }),
+  )
+  .query(async ({ ctx: { token }, input: { guildId } }) => {
+    const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+    const requesterId = token.id
+
+    await throwIfForbiddenGuildRequest({
+      guildId,
+      requesterId,
+      EXEVO_PAN_ADMIN,
+    })
+
+    const [currentMonth, pastMonth] = await Promise.all([
+      getBossCheckStatistics({ guildId }),
+      getBossCheckStatistics({ guildId }),
+    ])
+
+    return { currentMonth, pastMonth }
+  })
