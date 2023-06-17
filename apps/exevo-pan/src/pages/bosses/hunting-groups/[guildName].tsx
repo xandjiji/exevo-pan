@@ -298,11 +298,13 @@ export default function GuildPage({
                         subtitle="Checks by"
                         list={checkStatistics.currentMonth.boss}
                         iconSrcResolver={loadDisplayNameBossSrc}
+                        emptyMessage="No boss checks"
                       />
                       <ChartedList
                         heading="Members"
                         subtitle="Checks by"
                         list={checkStatistics.currentMonth.members}
+                        emptyMessage="No member checks"
                       />
                     </div>
                   </section>
