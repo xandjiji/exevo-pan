@@ -86,7 +86,7 @@ const ChartedList = ({
 
                   <div className={clsx('flex items-center gap-1.5')}>
                     <div
-                      className="bg-primary/70 h-3 rounded-sm shadow"
+                      className="bg-primary/70 h-1.5 rounded-sm shadow"
                       title={mock ? undefined : `${percentage}%`}
                       style={{ width }}
                     />
