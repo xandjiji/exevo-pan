@@ -2,9 +2,9 @@ import clsx from 'clsx'
 import { useMemo } from 'react'
 import { Table, SpritePortrait } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
+import { LockIcon } from 'assets/svgs'
 
 /* @ ToDo:
-    - non member state
     - i18n
 */
 
@@ -14,6 +14,7 @@ type ChartedListProps = {
   list: HuntingGroupsStatisticsEntry[]
   iconSrcResolver?: (name: string) => string
   emptyMessage: string
+  mock?: boolean
 } & React.ComponentProps<'div'>
 
 const ChartedList = ({
@@ -22,6 +23,7 @@ const ChartedList = ({
   list,
   iconSrcResolver,
   emptyMessage,
+  mock = false,
 }: ChartedListProps) => {
   const [topEntry] = list
   const isEmpty = useMemo(
@@ -37,10 +39,19 @@ const ChartedList = ({
       ) : (
         <div
           className={clsx(
-            'custom-scrollbar -mx-6 grid max-h-[336px] overflow-y-auto px-6 lg:max-h-[600px]',
+            'custom-scrollbar -my-4 -mx-6 grid max-h-[336px] overflow-y-auto py-4 px-6 lg:max-h-[600px]',
             iconSrcResolver ? 'gap-3' : 'gap-2',
+            mock && 'relative',
           )}
         >
+          {mock && (
+            <div className="absolute-centered bg-surface/70 z-1 flex h-full w-full flex-col items-center justify-center gap-2">
+              <LockIcon className="fill-separator h-28 w-28" />
+              <strong className="text-onSurface text-center text-2xl">
+                Members only
+              </strong>
+            </div>
+          )}
           {list.map(({ name, count, percentage }) => {
             const width = `${Math.max(Math.ceil((count / maxCount) * 100), 1)}%`
 
@@ -49,6 +60,7 @@ const ChartedList = ({
                 key={name}
                 className={clsx(
                   !!iconSrcResolver && 'flex items-center gap-2.5',
+                  mock && 'opacity-70',
                 )}
               >
                 {!!iconSrcResolver && (
@@ -66,6 +78,7 @@ const ChartedList = ({
                     className={clsx(
                       'text-tsm block',
                       iconSrcResolver ? 'mb-1 text-base' : 'text-tsm mb-1',
+                      mock && 'opacity-60',
                     )}
                   >
                     {name}
@@ -74,11 +87,11 @@ const ChartedList = ({
                   <div className={clsx('flex items-center gap-1.5')}>
                     <div
                       className="bg-primary/70 h-3 rounded-sm shadow"
-                      title={`${percentage}%`}
+                      title={mock ? undefined : `${percentage}%`}
                       style={{ width }}
                     />
 
-                    <span>{count}</span>
+                    {!mock && <span>{count}</span>}
                   </div>
                 </div>
               </div>

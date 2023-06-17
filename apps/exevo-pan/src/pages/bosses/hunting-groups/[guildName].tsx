@@ -292,19 +292,26 @@ export default function GuildPage({
                       <Tabs.Panel label="Current month (June)" />
                       <Tabs.Panel label="Past month (May)" />
                     </Tabs.Group>
-                    <div className="grid w-full gap-8 lg:grid-cols-2 lg:items-start">
+                    <div
+                      className={clsx(
+                        'grid w-full gap-8 lg:grid-cols-2',
+                        (isMember || EXEVO_PAN_ADMIN) && 'lg:items-start',
+                      )}
+                    >
                       <ChartedList
                         heading="Bosses"
                         subtitle="Checks by"
                         list={checkStatistics.currentMonth.boss}
                         iconSrcResolver={loadDisplayNameBossSrc}
                         emptyMessage="No boss checks"
+                        mock={!isMember && !EXEVO_PAN_ADMIN}
                       />
                       <ChartedList
                         heading="Members"
                         subtitle="Checks by"
                         list={checkStatistics.currentMonth.members}
                         emptyMessage="No member checks"
+                        mock={!isMember && !EXEVO_PAN_ADMIN}
                       />
                     </div>
                   </section>
@@ -391,6 +398,39 @@ const getCheckedBosses = async ({
         bossChances.bosses.map((stats) => ({ ...stats, location: '' })),
       )
 
+const mockedBosses: HuntingGroupsStatisticsEntry[] = [
+  {
+    name: 'Ocyakao',
+    count: 100,
+    percentage: 50,
+  },
+  {
+    name: 'The Welter',
+    count: 67,
+    percentage: 50,
+  },
+  {
+    name: 'Man in the Cave',
+    count: 25,
+    percentage: 50,
+  },
+  {
+    name: 'Yeti',
+    count: 15,
+    percentage: 50,
+  },
+]
+
+const mockedMembers: HuntingGroupsStatisticsEntry[] = [
+  { name: '??????? ????????', count: 100, percentage: 50 },
+  { name: '????? ?????', count: 67, percentage: 50 },
+  { name: '???????', count: 35, percentage: 50 },
+  { name: '?? ???????', count: 30, percentage: 50 },
+  { name: '???', count: 17, percentage: 50 },
+  { name: '?????', count: 14, percentage: 50 },
+  { name: '???????', count: 5, percentage: 50 },
+]
+
 const getCheckStatistics = async ({
   guildId,
   hasMemberPrivilege,
@@ -401,8 +441,8 @@ const getCheckStatistics = async ({
   hasMemberPrivilege
     ? caller.getCheckStats({ guildId })
     : {
-        currentMonth: { boss: [], members: [] },
-        pastMonth: { boss: [], members: [] },
+        currentMonth: { boss: mockedBosses, members: mockedMembers },
+        pastMonth: { boss: mockedBosses, members: mockedMembers },
       }
 
 export const getServerSideProps: GetServerSideProps = async ({
