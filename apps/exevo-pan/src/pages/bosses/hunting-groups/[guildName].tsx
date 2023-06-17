@@ -76,6 +76,8 @@ export default function GuildPage({
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
+  const [currentStatistics, setCurrentStatistics] = useState(true)
+
   const pageName = guildDataProps.guild.name
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
@@ -290,8 +292,11 @@ export default function GuildPage({
                       {/* @ ToDo: i18n */}
                       <h4 className="mb-4 text-xl">Group statistics</h4>
 
-                      <Tabs.Group>
-                        {/* @ ToDo: tab interactions */}
+                      <Tabs.Group
+                        onChange={(newIndex) =>
+                          setCurrentStatistics(newIndex === 0)
+                        }
+                      >
                         <Tabs.Panel label="Current month (June)" />
                         <Tabs.Panel label="Past month (May)" />
                       </Tabs.Group>
@@ -304,7 +309,11 @@ export default function GuildPage({
                         <ChartedList
                           heading="Bosses"
                           subtitle="Checks by"
-                          list={checkStatistics.currentMonth.boss}
+                          list={
+                            checkStatistics[
+                              currentStatistics ? 'currentMonth' : 'pastMonth'
+                            ].boss
+                          }
                           iconSrcResolver={loadDisplayNameBossSrc}
                           emptyMessage="No boss checks"
                           mock={!hasMemberPrivilege}
@@ -312,7 +321,11 @@ export default function GuildPage({
                         <ChartedList
                           heading="Members"
                           subtitle="Checks by"
-                          list={checkStatistics.currentMonth.members}
+                          list={
+                            checkStatistics[
+                              currentStatistics ? 'currentMonth' : 'pastMonth'
+                            ].members
+                          }
                           emptyMessage="No member checks"
                           mock={!hasMemberPrivilege}
                         />
