@@ -2,7 +2,6 @@ import clsx from 'clsx'
 import { Table, SpritePortrait } from 'components/Atoms'
 
 /* @ ToDo:
-    - shrink state
     - empty state
     - non member state
     - i18n
@@ -26,56 +25,54 @@ const ChartedList = ({
 
   return (
     <Table title={heading} subtitle={subtitle}>
-      <Table.Element className="-mt-2">
-        <Table.Body>
-          {list.map(({ name, count, percentage }) => {
-            const width = `${Math.max(Math.ceil((count / maxCount) * 100), 1)}%`
+      <div
+        className={clsx(
+          'custom-scrollbar -mx-6 grid max-h-[336px] overflow-y-auto px-6 lg:max-h-[600px]',
+          iconSrcResolver ? 'gap-3' : 'gap-2',
+        )}
+      >
+        {list.map(({ name, count, percentage }) => {
+          const width = `${Math.max(Math.ceil((count / maxCount) * 100), 1)}%`
 
-            return (
-              <Table.Row key={name}>
-                <div
+          return (
+            <div
+              key={name}
+              className={clsx(!!iconSrcResolver && 'flex items-center gap-2.5')}
+            >
+              {!!iconSrcResolver && (
+                <SpritePortrait
+                  alt={name}
+                  src={iconSrcResolver(name)}
+                  offset
+                  width={64}
+                  height={64}
+                  className="shrink-0"
+                />
+              )}
+              <div className="w-full">
+                <strong
                   className={clsx(
-                    'py-2',
-                    !!iconSrcResolver && 'flex items-center gap-2.5',
+                    'text-tsm block',
+                    iconSrcResolver ? 'mb-1 text-base' : 'text-tsm mb-1',
                   )}
                 >
-                  {!!iconSrcResolver && (
-                    <SpritePortrait
-                      alt={name}
-                      src={iconSrcResolver(name)}
-                      offset
-                      width={64}
-                      height={64}
-                      className="shrink-0"
-                    />
-                  )}
+                  {name}
+                </strong>
 
-                  <div className="w-full">
-                    <strong
-                      className={clsx(
-                        'text-tsm block',
-                        iconSrcResolver ? 'mb-1 text-base' : 'text-tsm mb-1',
-                      )}
-                    >
-                      {name}
-                    </strong>
+                <div className={clsx('flex items-center gap-1.5')}>
+                  <div
+                    className="bg-primary/70 h-3 rounded-sm shadow"
+                    title={`${percentage}%`}
+                    style={{ width }}
+                  />
 
-                    <div className={clsx('flex items-center gap-1.5')}>
-                      <div
-                        className="bg-separator h-3 rounded-sm shadow"
-                        title={`${percentage}%`}
-                        style={{ width }}
-                      />
-
-                      <span>{count}</span>
-                    </div>
-                  </div>
+                  <span>{count}</span>
                 </div>
-              </Table.Row>
-            )
-          })}
-        </Table.Body>
-      </Table.Element>
+              </div>
+            </div>
+          )
+        })}
+      </div>
     </Table>
   )
 }
