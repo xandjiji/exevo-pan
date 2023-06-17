@@ -1,12 +1,9 @@
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
 import { Table, SpritePortrait } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { LockIcon } from 'assets/svgs'
-
-/* @ ToDo:
-    - i18n
-*/
 
 type ChartedListProps = {
   heading: string
@@ -25,6 +22,9 @@ const ChartedList = ({
   emptyMessage,
   mock = false,
 }: ChartedListProps) => {
+  const { huntingGroups } = useTranslations()
+  const i18n = huntingGroups.GroupStatistics
+
   const [topEntry] = list
   const isEmpty = useMemo(
     () => list.filter(({ count }) => count > 0).length === 0,
@@ -48,7 +48,7 @@ const ChartedList = ({
             <div className="absolute-centered bg-surface/70 z-1 flex h-full w-full flex-col items-center justify-center gap-2">
               <LockIcon className="fill-separator h-28 w-28" />
               <strong className="text-onSurface text-center text-2xl">
-                Members only
+                {i18n.membersOnly}
               </strong>
             </div>
           )}

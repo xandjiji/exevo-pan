@@ -51,6 +51,16 @@ type GuildPageProps = {
   serializedToken: string
 }
 
+const getMonthNumber = (past: boolean) => {
+  const currentDate = new Date()
+
+  if (past) {
+    currentDate.setMonth(currentDate.getMonth() - 1)
+  }
+
+  return currentDate.getMonth()
+}
+
 export default function GuildPage({
   serializedGuildData,
   serializedToken,
@@ -289,16 +299,33 @@ export default function GuildPage({
                     </ConditionalClientComponent>
 
                     <section className="mx-auto w-full">
-                      {/* @ ToDo: i18n */}
-                      <h4 className="mb-4 text-xl">Group statistics</h4>
+                      <h4 className="mb-4 text-xl">
+                        {i18n.GroupStatistics.heading}
+                      </h4>
 
                       <Tabs.Group
                         onChange={(newIndex) =>
                           setCurrentStatistics(newIndex === 0)
                         }
                       >
-                        <Tabs.Panel label="Current month (June)" />
-                        <Tabs.Panel label="Past month (May)" />
+                        <Tabs.Panel
+                          label={`${i18n.GroupStatistics.currentMonth} (${
+                            translations.common.FullMonth[
+                              getMonthNumber(
+                                false,
+                              ) as unknown as keyof typeof translations.common.FullMonth
+                            ]
+                          })`}
+                        />
+                        <Tabs.Panel
+                          label={`${i18n.GroupStatistics.pastMonth} (${
+                            translations.common.FullMonth[
+                              getMonthNumber(
+                                true,
+                              ) as unknown as keyof typeof translations.common.FullMonth
+                            ]
+                          })`}
+                        />
                       </Tabs.Group>
                       <div
                         className={clsx(
@@ -307,26 +334,26 @@ export default function GuildPage({
                         )}
                       >
                         <ChartedList
-                          heading="Bosses"
-                          subtitle="Checks by"
+                          heading={i18n.GroupStatistics.bosses}
+                          subtitle={i18n.GroupStatistics.checksBy}
                           list={
                             checkStatistics[
                               currentStatistics ? 'currentMonth' : 'pastMonth'
                             ].boss
                           }
                           iconSrcResolver={loadDisplayNameBossSrc}
-                          emptyMessage="No boss checks"
+                          emptyMessage={i18n.GroupStatistics.emptyState.bosses}
                           mock={!hasMemberPrivilege}
                         />
                         <ChartedList
-                          heading="Members"
-                          subtitle="Checks by"
+                          heading={i18n.GroupStatistics.members}
+                          subtitle={i18n.GroupStatistics.checksBy}
                           list={
                             checkStatistics[
                               currentStatistics ? 'currentMonth' : 'pastMonth'
                             ].members
                           }
-                          emptyMessage="No member checks"
+                          emptyMessage={i18n.GroupStatistics.emptyState.members}
                           mock={!hasMemberPrivilege}
                         />
                       </div>
