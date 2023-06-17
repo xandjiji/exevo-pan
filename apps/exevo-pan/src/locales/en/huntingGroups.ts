@@ -206,4 +206,17 @@ export default {
     hoursAgo: 'hours ago',
     showMore: 'Show more',
   },
+  GroupStatistics: {
+    heading: 'Group statistics',
+    currentMonth: 'Current month',
+    pastMonth: 'Past month',
+    bosses: 'Bosses',
+    members: 'Members',
+    checksBy: 'Checks by', // 'checks by bosses/members'
+    emptyState: {
+      bosses: 'No boss checks',
+      members: 'No member checks',
+    },
+    membersOnly: 'Members only',
+  },
 }

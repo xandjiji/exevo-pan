@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+import { stripTime } from 'shared-utils/dist/time'
 import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
@@ -21,6 +22,7 @@ import {
   utils as blacklistUtils,
   bossSet,
 } from '../../modules/BossHunting/blacklist'
+import { HuntingGroupStatistics } from '../../modules/BossHunting/modules/HuntingGroups/contexts/types'
 import { can } from './permissions'
 
 type UniqueMemberArgs = (
@@ -858,3 +860,129 @@ export const listCheckedBosses = authedProcedure
 
     return result
   })
+
+const calculateStatisticsEntriesPercentages = (
+  entries: HuntingGroupsStatisticsEntry[],
+): HuntingGroupsStatisticsEntry[] => {
+  const totalCheckCount = entries.reduce((acc, { count }) => acc + count, 0)
+
+  return entries.map(({ name, count }) => ({
+    name,
+    count,
+    percentage: Math.ceil((count / totalCheckCount) * 100),
+  }))
+}
+
+type Range = 'past' | 'current'
+
+const getMonthRange = (whichRange: Range): { gte: Date; lte: Date } => {
+  const currentMonthStart = stripTime()
+  currentMonthStart.setUTCDate(1)
+
+  const monthLimitRange = new Date(currentMonthStart)
+
+  if (whichRange === 'current') {
+    monthLimitRange.setUTCMonth(monthLimitRange.getUTCMonth() + 1)
+
+    return { gte: currentMonthStart, lte: monthLimitRange }
+  }
+
+  monthLimitRange.setUTCMonth(monthLimitRange.getUTCMonth() - 1)
+
+  return { gte: monthLimitRange, lte: currentMonthStart }
+}
+
+type BossCheckStatsArgs = {
+  guildId: string
+  month: Range
+}
+
+const getCheckStatsBy = {
+  members: async ({
+    guildId,
+    month,
+  }: BossCheckStatsArgs): Promise<HuntingGroupsStatisticsEntry[]> =>
+    prisma.guildMember
+      .findMany({
+        where: { guildId },
+        select: {
+          name: true,
+          _count: {
+            select: {
+              bossCheckLog: {
+                where: { checkedAt: getMonthRange(month) },
+              },
+            },
+          },
+        },
+        orderBy: { bossCheckLog: { _count: 'desc' } },
+      })
+      .then((entries) =>
+        entries.map(({ name, _count: { bossCheckLog } }) => ({
+          name,
+          count: bossCheckLog,
+          percentage: 0,
+        })),
+      )
+      .then(calculateStatisticsEntriesPercentages),
+  boss: async ({
+    guildId,
+    month,
+  }: BossCheckStatsArgs): Promise<HuntingGroupsStatisticsEntry[]> =>
+    prisma.bossCheckLog
+      .groupBy({
+        where: { guildId, checkedAt: getMonthRange(month) },
+        by: ['boss', 'location'],
+        _count: true,
+        orderBy: { _count: { boss: 'desc' } },
+      })
+      .then((entries) =>
+        entries.map(({ boss, location, _count }) => ({
+          name: multipleSpawnLocationBosses.displayName({
+            name: boss,
+            location,
+          }),
+          count: _count,
+          percentage: 0,
+        })),
+      )
+      .then(calculateStatisticsEntriesPercentages),
+}
+
+const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
+  const [boss, members] = await Promise.all([
+    getCheckStatsBy.boss(args),
+    getCheckStatsBy.members(args),
+  ])
+
+  return { boss, members }
+}
+
+export const getCheckStats = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+    }),
+  )
+  .query(
+    async ({
+      ctx: { token },
+      input: { guildId },
+    }): Promise<HuntingGroupStatistics> => {
+      const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+      const requesterId = token.id
+
+      await throwIfForbiddenGuildRequest({
+        guildId,
+        requesterId,
+        EXEVO_PAN_ADMIN,
+      })
+
+      const [currentMonth, pastMonth] = await Promise.all([
+        getBossCheckStatistics({ guildId, month: 'current' }),
+        getBossCheckStatistics({ guildId, month: 'past' }),
+      ])
+
+      return { currentMonth, pastMonth }
+    },
+  )

@@ -11,6 +11,7 @@ import {
   GuildDataProvider,
   GuildDataConsumer,
   GuildData,
+  HuntingGroupStatistics,
   Template,
   GuildHero,
   ApplyDialog,
@@ -23,14 +24,22 @@ import {
   CheckHistory,
   LogHistory,
   CheckedBosses,
+  ChartedList,
 } from 'modules/BossHunting'
 import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
+import { caller } from 'pages/api/trpc/[trpc]'
 import { BossesClient } from 'services/server'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
-import { buildPageTitle, loadRawSrc, getGuildPermalink, buildUrl } from 'utils'
+import {
+  buildPageTitle,
+  loadRawSrc,
+  getGuildPermalink,
+  buildUrl,
+  loadDisplayNameBossSrc,
+} from 'utils'
 import { routes, jsonld } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
 import { common, bosses, huntingGroups } from 'locales'
@@ -40,6 +49,16 @@ const previewImageSrc = loadRawSrc('/huntingGroups.png')
 type GuildPageProps = {
   serializedGuildData: string
   serializedToken: string
+}
+
+const getMonthNumber = (past: boolean) => {
+  const currentDate = new Date()
+
+  if (past) {
+    currentDate.setMonth(currentDate.getMonth() - 1)
+  }
+
+  return currentDate.getMonth()
 }
 
 export default function GuildPage({
@@ -66,6 +85,8 @@ export default function GuildPage({
   const [isSettingsOpen, setIsSettingsOpen] = useState(false)
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
+
+  const [currentStatistics, setCurrentStatistics] = useState(true)
 
   const pageName = guildDataProps.guild.name
   const previewSrc = PreviewImageClient.getSrc({
@@ -131,193 +152,257 @@ export default function GuildPage({
               isApprover,
               setGuildData,
               checkedBosses,
-            }) => (
-              <>
-                <GuildHero guild={guild} memberCount={members.length} />
+              checkStatistics,
+            }) => {
+              const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
 
-                <div className="z-1 inner-container lgr:w-[1024px] relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px] lg:w-[768px]">
-                  {isEditOpen && <EditGuildDialog onClose={toggleEditDialog} />}
+              return (
+                <>
+                  <GuildHero guild={guild} memberCount={members.length} />
 
-                  <div className="child:ml-auto md:child:ml-0 grid items-center gap-4 md:flex md:justify-end md:gap-6">
-                    {(isEditor || EXEVO_PAN_ADMIN) && (
-                      <Button
-                        hollow
-                        pill
-                        className="flex items-center gap-2"
-                        onClick={toggleEditDialog}
-                      >
-                        <SettingsIcon className="h-4 w-4" />
-                        {i18n.groupSettings}
-                      </Button>
+                  <div className="z-1 inner-container lgr:w-[1024px] relative mx-auto grid max-w-full gap-8 pb-8 sm:w-96 sm:px-0 md:w-[540px] lg:w-[768px]">
+                    {isEditOpen && (
+                      <EditGuildDialog onClose={toggleEditDialog} />
                     )}
 
-                    {isMember && (
-                      <>
+                    <div className="child:ml-auto md:child:ml-0 grid items-center gap-4 md:flex md:justify-end md:gap-6">
+                      {(isEditor || EXEVO_PAN_ADMIN) && (
                         <Button
                           hollow
                           pill
                           className="flex items-center gap-2"
-                          onClick={() => setIsSettingsOpen(true)}
+                          onClick={toggleEditDialog}
                         >
                           <SettingsIcon className="h-4 w-4" />
-                          {i18n.mySettings}
+                          {i18n.groupSettings}
                         </Button>
-                        {isSettingsOpen && !!currentMember && (
-                          <SettingsDialog
-                            onClose={() => setIsSettingsOpen(false)}
-                            currentMember={currentMember}
-                            onMemberUpdate={(updatedCurrentMember) =>
-                              setGuildData({
-                                members: members.map((member) =>
-                                  member.id === updatedCurrentMember.id
-                                    ? updatedCurrentMember
-                                    : member,
-                                ),
-                              })
+                      )}
+
+                      {isMember && (
+                        <>
+                          <Button
+                            hollow
+                            pill
+                            className="flex items-center gap-2"
+                            onClick={() => setIsSettingsOpen(true)}
+                          >
+                            <SettingsIcon className="h-4 w-4" />
+                            {i18n.mySettings}
+                          </Button>
+                          {isSettingsOpen && !!currentMember && (
+                            <SettingsDialog
+                              onClose={() => setIsSettingsOpen(false)}
+                              currentMember={currentMember}
+                              onMemberUpdate={(updatedCurrentMember) =>
+                                setGuildData({
+                                  members: members.map((member) =>
+                                    member.id === updatedCurrentMember.id
+                                      ? updatedCurrentMember
+                                      : member,
+                                  ),
+                                })
+                              }
+                            />
+                          )}
+                        </>
+                      )}
+
+                      {isMember && (
+                        <>
+                          <Button
+                            className="flex items-center gap-2"
+                            onClick={() =>
+                              setIsNotificationOpen({ isOpen: true })
                             }
-                          />
-                        )}
-                      </>
-                    )}
+                          >
+                            <BlogIcon className="-ml-1 h-6 w-6" />
+                            {i18n.notificate}
+                          </Button>
+                          {isNotificationOpen.isOpen && (
+                            <NotificationDialog
+                              guildId={guild.id}
+                              defaultBoss={isNotificationOpen.defaultBoss}
+                              location={isNotificationOpen.location}
+                              onClose={() =>
+                                setIsNotificationOpen({ isOpen: false })
+                              }
+                            />
+                          )}
+                        </>
+                      )}
 
-                    {isMember && (
-                      <>
-                        <Button
-                          className="flex items-center gap-2"
-                          onClick={() =>
-                            setIsNotificationOpen({ isOpen: true })
-                          }
-                        >
-                          <BlogIcon className="-ml-1 h-6 w-6" />
-                          {i18n.notificate}
-                        </Button>
-                        {isNotificationOpen.isOpen && (
-                          <NotificationDialog
-                            guildId={guild.id}
-                            defaultBoss={isNotificationOpen.defaultBoss}
-                            location={isNotificationOpen.location}
-                            onClose={() =>
-                              setIsNotificationOpen({ isOpen: false })
+                      {!isMember && (
+                        <>
+                          <Button
+                            className="flex items-center gap-2"
+                            onClick={
+                              isAuthed
+                                ? () => setIsApplyOpen(true)
+                                : () => router.push(routes.LOGIN)
                             }
-                          />
-                        )}
-                      </>
-                    )}
+                          >
+                            <PersonAddIcon className="-ml-1 h-6 w-6" />
+                            {i18n.apply}
+                          </Button>
+                          {isApplyOpen && isAuthed && (
+                            <ApplyDialog
+                              defaultUserName={session.data.user.name}
+                              guildId={guild.id}
+                              guildName={guild.name}
+                              onClose={() => setIsApplyOpen(false)}
+                            />
+                          )}
+                        </>
+                      )}
+                    </div>
 
-                    {!isMember && (
-                      <>
-                        <Button
-                          className="flex items-center gap-2"
-                          onClick={
-                            isAuthed
-                              ? () => setIsApplyOpen(true)
-                              : () => router.push(routes.LOGIN)
-                          }
-                        >
-                          <PersonAddIcon className="-ml-1 h-6 w-6" />
-                          {i18n.apply}
-                        </Button>
-                        {isApplyOpen && isAuthed && (
-                          <ApplyDialog
-                            defaultUserName={session.data.user.name}
-                            guildId={guild.id}
-                            guildName={guild.name}
-                            onClose={() => setIsApplyOpen(false)}
-                          />
-                        )}
-                      </>
-                    )}
-                  </div>
-
-                  <div
-                    className={clsx(
-                      'grid gap-8',
-                      (isMember || EXEVO_PAN_ADMIN) && 'lgr:grid-cols-2',
-                    )}
-                  >
-                    <MessageBoard
-                      title={i18n.publicBoard.title}
-                      description={guild.description}
-                      isEditor={isEditor || EXEVO_PAN_ADMIN}
-                      addText={i18n.publicBoard.add}
-                      editText={i18n.publicBoard.edit}
-                      onEdit={toggleEditDialog}
-                    />
-                    {(isMember || EXEVO_PAN_ADMIN) && (
+                    <div
+                      className={clsx(
+                        'grid gap-8',
+                        hasMemberPrivilege && 'lgr:grid-cols-2',
+                      )}
+                    >
                       <MessageBoard
-                        title={i18n.privateBoard.title}
-                        description={guild.messageBoard}
+                        title={i18n.publicBoard.title}
+                        description={guild.description}
                         isEditor={isEditor || EXEVO_PAN_ADMIN}
-                        addText={i18n.privateBoard.add}
-                        editText={i18n.privateBoard.edit}
+                        addText={i18n.publicBoard.add}
+                        editText={i18n.publicBoard.edit}
                         onEdit={toggleEditDialog}
                       />
-                    )}
-                  </div>
+                      {hasMemberPrivilege && (
+                        <MessageBoard
+                          title={i18n.privateBoard.title}
+                          description={guild.messageBoard}
+                          isEditor={isEditor || EXEVO_PAN_ADMIN}
+                          addText={i18n.privateBoard.add}
+                          editText={i18n.privateBoard.edit}
+                          onEdit={toggleEditDialog}
+                        />
+                      )}
+                    </div>
 
-                  <ConditionalClientComponent
-                    ssr={!EXEVO_PAN_ADMIN && !currentMember}
-                  >
-                    <CheckedBosses
-                      guildId={guild.id}
-                      initialCheckedBosses={checkedBosses}
-                      currentMember={currentMember}
-                      isAdmin={EXEVO_PAN_ADMIN}
-                      onNotify={({ boss, location }) =>
-                        setIsNotificationOpen({
-                          isOpen: true,
-                          defaultBoss: boss,
-                          location,
-                        })
-                      }
-                    />
-                  </ConditionalClientComponent>
+                    <ConditionalClientComponent ssr={!hasMemberPrivilege}>
+                      <CheckedBosses
+                        guildId={guild.id}
+                        initialCheckedBosses={checkedBosses}
+                        currentMember={currentMember}
+                        isAdmin={EXEVO_PAN_ADMIN}
+                        onNotify={({ boss, location }) =>
+                          setIsNotificationOpen({
+                            isOpen: true,
+                            defaultBoss: boss,
+                            location,
+                          })
+                        }
+                      />
+                    </ConditionalClientComponent>
 
-                  <div
-                    className={clsx(
-                      'mx-auto grid w-full gap-8',
-                      (isMember || EXEVO_PAN_ADMIN) &&
-                        'lg:grid-cols-2 lg:items-start',
-                    )}
-                  >
-                    <MemberList
-                      title={i18n.members}
-                      guildName={guild.name}
-                      members={members}
-                      isEditor={isEditor || EXEVO_PAN_ADMIN}
-                      currentMember={currentMember}
-                      isPrivate={guild.private && !EXEVO_PAN_ADMIN}
-                    />
-                    {(isMember || EXEVO_PAN_ADMIN) && (
-                      <Tabs.Group>
-                        <Tabs.Panel label={i18n.groupApplications}>
-                          <ApplyList
-                            list={applications}
-                            allowAction={isApprover || EXEVO_PAN_ADMIN}
-                            onAction={({ application, newMember }) =>
-                              setGuildData((prev) => ({
-                                applications: prev.applications.filter(
-                                  ({ id }) => id !== application.id,
-                                ),
-                                members: newMember
-                                  ? [...prev.members, newMember]
-                                  : prev.members,
-                              }))
-                            }
-                          />
-                        </Tabs.Panel>
-                        <Tabs.Panel label={i18n.checkHistory}>
-                          <CheckHistory guildId={guild.id} />
-                        </Tabs.Panel>
-                        <Tabs.Panel label={i18n.logHistory}>
-                          <LogHistory guildId={guild.id} />
-                        </Tabs.Panel>
+                    <section className="mx-auto w-full">
+                      <h4 className="mb-4 text-xl">
+                        {i18n.GroupStatistics.heading}
+                      </h4>
+
+                      <Tabs.Group
+                        onChange={(newIndex) =>
+                          setCurrentStatistics(newIndex === 0)
+                        }
+                      >
+                        <Tabs.Panel
+                          label={`${i18n.GroupStatistics.currentMonth} (${
+                            translations.common.FullMonth[
+                              getMonthNumber(
+                                false,
+                              ) as unknown as keyof typeof translations.common.FullMonth
+                            ]
+                          })`}
+                        />
+                        <Tabs.Panel
+                          label={`${i18n.GroupStatistics.pastMonth} (${
+                            translations.common.FullMonth[
+                              getMonthNumber(
+                                true,
+                              ) as unknown as keyof typeof translations.common.FullMonth
+                            ]
+                          })`}
+                        />
                       </Tabs.Group>
-                    )}
+                      <div
+                        className={clsx(
+                          'grid w-full gap-8 lg:grid-cols-2',
+                          hasMemberPrivilege && 'lg:items-start',
+                        )}
+                      >
+                        <ChartedList
+                          heading={i18n.GroupStatistics.bosses}
+                          subtitle={i18n.GroupStatistics.checksBy}
+                          list={
+                            checkStatistics[
+                              currentStatistics ? 'currentMonth' : 'pastMonth'
+                            ].boss
+                          }
+                          iconSrcResolver={loadDisplayNameBossSrc}
+                          emptyMessage={i18n.GroupStatistics.emptyState.bosses}
+                          mock={!hasMemberPrivilege}
+                        />
+                        <ChartedList
+                          heading={i18n.GroupStatistics.members}
+                          subtitle={i18n.GroupStatistics.checksBy}
+                          list={
+                            checkStatistics[
+                              currentStatistics ? 'currentMonth' : 'pastMonth'
+                            ].members
+                          }
+                          emptyMessage={i18n.GroupStatistics.emptyState.members}
+                          mock={!hasMemberPrivilege}
+                        />
+                      </div>
+                    </section>
+                    <div
+                      className={clsx(
+                        'mx-auto grid w-full gap-8',
+                        hasMemberPrivilege && 'lg:grid-cols-2 lg:items-start',
+                      )}
+                    >
+                      <MemberList
+                        title={i18n.members}
+                        guildName={guild.name}
+                        members={members}
+                        isEditor={isEditor || EXEVO_PAN_ADMIN}
+                        currentMember={currentMember}
+                        isPrivate={guild.private && !EXEVO_PAN_ADMIN}
+                      />
+                      {hasMemberPrivilege && (
+                        <Tabs.Group>
+                          <Tabs.Panel label={i18n.groupApplications}>
+                            <ApplyList
+                              list={applications}
+                              allowAction={isApprover || EXEVO_PAN_ADMIN}
+                              onAction={({ application, newMember }) =>
+                                setGuildData((prev) => ({
+                                  applications: prev.applications.filter(
+                                    ({ id }) => id !== application.id,
+                                  ),
+                                  members: newMember
+                                    ? [...prev.members, newMember]
+                                    : prev.members,
+                                }))
+                              }
+                            />
+                          </Tabs.Panel>
+                          <Tabs.Panel label={i18n.checkHistory}>
+                            <CheckHistory guildId={guild.id} />
+                          </Tabs.Panel>
+                          <Tabs.Panel label={i18n.logHistory}>
+                            <LogHistory guildId={guild.id} />
+                          </Tabs.Panel>
+                        </Tabs.Group>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </>
-            )}
+                </>
+              )
+            }}
           </GuildDataConsumer>
         </Template>
       </GuildDataProvider>
@@ -331,6 +416,77 @@ const redirect: GetServerSidePropsResult<any> = {
     permanent: false,
   },
 }
+
+const getCheckedBosses = async ({
+  hasMemberPrivilege,
+  isPro,
+  guildId,
+  server,
+}: {
+  hasMemberPrivilege: boolean
+  isPro: boolean
+  guildId: string
+  server: string
+}): Promise<CheckedBoss[]> =>
+  hasMemberPrivilege
+    ? BossesClient.fetchCheckedBosses({
+        isPro,
+        guildId,
+        server,
+      })
+    : BossesClient.fetchServerBossChances({
+        server,
+        isPro,
+      }).then((bossChances) =>
+        bossChances.bosses.map((stats) => ({ ...stats, location: '' })),
+      )
+
+const mockedBosses: HuntingGroupsStatisticsEntry[] = [
+  {
+    name: 'Ocyakao',
+    count: 100,
+    percentage: 50,
+  },
+  {
+    name: 'The Welter',
+    count: 67,
+    percentage: 50,
+  },
+  {
+    name: 'Man in the Cave',
+    count: 25,
+    percentage: 50,
+  },
+  {
+    name: 'Yeti',
+    count: 15,
+    percentage: 50,
+  },
+]
+
+const mockedMembers: HuntingGroupsStatisticsEntry[] = [
+  { name: '??????? ????????', count: 100, percentage: 50 },
+  { name: '????? ?????', count: 67, percentage: 50 },
+  { name: '???????', count: 35, percentage: 50 },
+  { name: '?? ???????', count: 30, percentage: 50 },
+  { name: '???', count: 17, percentage: 50 },
+  { name: '?????', count: 14, percentage: 50 },
+  { name: '???????', count: 5, percentage: 50 },
+]
+
+const getCheckStatistics = async ({
+  guildId,
+  hasMemberPrivilege,
+}: {
+  hasMemberPrivilege: boolean
+  guildId: string
+}): Promise<HuntingGroupStatistics> =>
+  hasMemberPrivilege
+    ? caller.getCheckStats({ guildId })
+    : {
+        currentMonth: { boss: mockedBosses, members: mockedMembers },
+        pastMonth: { boss: mockedBosses, members: mockedMembers },
+      }
 
 export const getServerSideProps: GetServerSideProps = async ({
   req,
@@ -360,18 +516,15 @@ export const getServerSideProps: GetServerSideProps = async ({
   const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
   const isPro = token?.proStatus ?? false
 
-  const checkedBosses: CheckedBoss[] = hasMemberPrivilege
-    ? await BossesClient.fetchCheckedBosses({
-        isPro,
-        guildId: guild.id,
-        server: guild.server,
-      })
-    : await BossesClient.fetchServerBossChances({
-        server: guild.server,
-        isPro,
-      }).then((bossChances) =>
-        bossChances.bosses.map((stats) => ({ ...stats, location: '' })),
-      )
+  const [checkedBosses, checkStatistics] = await Promise.all([
+    getCheckedBosses({
+      hasMemberPrivilege,
+      isPro,
+      guildId: guild.id,
+      server: guild.server,
+    }),
+    getCheckStatistics({ hasMemberPrivilege, guildId: guild.id }),
+  ])
 
   const guildData: GuildData = {
     guild: {
@@ -379,7 +532,7 @@ export const getServerSideProps: GetServerSideProps = async ({
       messageBoard: hasMemberPrivilege ? messageBoard : null,
     },
     members:
-      guild.private && !isMember && !EXEVO_PAN_ADMIN
+      guild.private && !hasMemberPrivilege
         ? guildMembers.map(() => ({
             id: '',
             guildId: '',
@@ -393,6 +546,7 @@ export const getServerSideProps: GetServerSideProps = async ({
         : guildMembers,
     applications: hasMemberPrivilege ? guildApplications : [],
     checkedBosses,
+    checkStatistics,
   }
 
   return {

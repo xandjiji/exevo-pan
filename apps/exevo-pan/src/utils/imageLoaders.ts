@@ -18,6 +18,11 @@ export const loadRawSrc = (src: string) =>
 export const loadBossSrc = (bossName: string) =>
   `/sprites/bosses/${encodeURI(bossName)}.gif`
 
+export const loadDisplayNameBossSrc = (displayName: string) => {
+  const [bossName] = displayName.split(' (')
+  return loadBossSrc(bossName)
+}
+
 export const loadLootSrc = (bossName: string) =>
   `/sprites/loot/${encodeURI(bossName)}.gif`
 

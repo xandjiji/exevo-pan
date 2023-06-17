@@ -209,4 +209,17 @@ export default defaultComposer(defaultTranslations, {
     hoursAgo: 'horas atrás',
     showMore: 'Mostrar mais',
   },
+  GroupStatistics: {
+    heading: 'Estatísticas do grupo',
+    currentMonth: 'Mês atual',
+    pastMonth: 'Mês passado',
+    bosses: 'Bosses',
+    members: 'Membros',
+    checksBy: 'Checks por', // 'checks by bosses/members'
+    emptyState: {
+      bosses: 'Nenhum check',
+      members: 'Nenhum check',
+    },
+    membersOnly: 'Apenas membros',
+  },
 })

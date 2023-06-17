@@ -29,7 +29,7 @@ const MemberList = ({
   return (
     <Table title={title} subtitle={guildName} {...props}>
       {isPrivate && !currentMember ? (
-        <div className="flex flex-col items-center gap-4">
+        <div className="flex flex-col items-center gap-2">
           <LockIcon className="fill-separator h-28 w-28" />
           <h4 className="text-center text-2xl">{i18n.private}</h4>
         </div>
