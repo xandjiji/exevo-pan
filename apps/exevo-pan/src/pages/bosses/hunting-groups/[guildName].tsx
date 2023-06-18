@@ -472,6 +472,7 @@ const mockedMembers: HuntingGroupsStatisticsEntry[] = [
   { name: '???', count: 17, percentage: 50 },
   { name: '?????', count: 14, percentage: 50 },
   { name: '???????', count: 5, percentage: 50 },
+  { name: '?????', count: 5, percentage: 50 },
 ]
 
 const getCheckStatistics = async ({
