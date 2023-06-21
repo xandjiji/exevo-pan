@@ -136,7 +136,7 @@ model HighlightedAuction {
     email                 String
     timezoneOffsetMinutes Int            @default(0)
 
-    user   User?   @relation(fields: [userId], references: [id])
+    user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String?
 
     transaction Transaction?
@@ -161,13 +161,13 @@ model Transaction {
     type     TRANSACTION_TYPE
     date     DateTime         @default(now())
 
-    highlightedAuction   HighlightedAuction? @relation(fields: [highlightedAuctionId], references: [id])
+    highlightedAuction   HighlightedAuction? @relation(fields: [highlightedAuctionId], references: [id], onDelete: Cascade)
     highlightedAuctionId String?             @unique
 
-    exevoProPayment   PaymentData? @relation(fields: [exevoProPaymentId], references: [id])
+    exevoProPayment   PaymentData? @relation(fields: [exevoProPaymentId], references: [id], onDelete: Cascade)
     exevoProPaymentId String?      @unique
 
-    user   User   @relation(fields: [userId], references: [id])
+    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String
 
     @@index([userId])
