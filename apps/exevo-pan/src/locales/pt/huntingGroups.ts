@@ -221,5 +221,6 @@ export default defaultComposer(defaultTranslations, {
       members: 'Nenhum check',
     },
     membersOnly: 'Apenas membros',
+    periodicUpdate: 'As estatísticas são atualizadas periodicamente',
   },
 })

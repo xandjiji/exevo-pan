@@ -218,5 +218,6 @@ export default {
       members: 'No member checks',
     },
     membersOnly: 'Members only',
+    periodicUpdate: 'Statistics are updated periodically',
   },
 }
