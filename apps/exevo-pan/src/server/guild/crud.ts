@@ -11,7 +11,12 @@ import {
 } from 'services/server'
 import { BossNotificationEvent } from 'services'
 import { getGuildPermalink } from 'utils'
-import { avatar, guildValidationRules, routes } from 'Constants'
+import {
+  avatar,
+  guildValidationRules,
+  routes,
+  BOSS_CHECK_STATISTICS_CACHE,
+} from 'Constants'
 import type {
   GUILD_MEMBER_ROLE,
   GuildMember,
@@ -958,6 +963,16 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
   return { boss, members }
 }
 
+const countEntries = (entries: HuntingGroupsStatisticsEntry[]) => {
+  let count = 0
+
+  entries.forEach((entry) => {
+    count += entry.count
+  })
+
+  return count
+}
+
 export const getCheckStats = authedProcedure
   .input(
     z.object({
@@ -978,10 +993,39 @@ export const getCheckStats = authedProcedure
         EXEVO_PAN_ADMIN,
       })
 
+      const cachedData = await prisma.cachedBossCheckStatistics.findUnique({
+        where: { guildId },
+      })
+
+      const { version, MAX_AGE, MINIMUM_CACHE_ENTRIES } =
+        BOSS_CHECK_STATISTICS_CACHE
+
+      if (cachedData) {
+        const cacheAge = +new Date() - +cachedData.lastUpdated
+
+        if (cachedData.version === version && cacheAge < MAX_AGE) {
+          return JSON.parse(cachedData.cachedResponse)
+        }
+      }
+
       const [currentMonth, pastMonth] = await Promise.all([
         getBossCheckStatistics({ guildId, month: 'current' }),
         getBossCheckStatistics({ guildId, month: 'past' }),
       ])
+
+      const cachedEntries =
+        countEntries(currentMonth.members) + countEntries(pastMonth.members)
+
+      if (cachedEntries >= MINIMUM_CACHE_ENTRIES) {
+        const freshData = JSON.stringify({ currentMonth, pastMonth })
+
+        const data = { guildId, version, cachedResponse: freshData }
+        await prisma.cachedBossCheckStatistics.upsert({
+          where: { guildId },
+          update: data,
+          create: data,
+        })
+      }
 
       return { currentMonth, pastMonth }
     },

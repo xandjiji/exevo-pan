@@ -97,6 +97,10 @@ const ChartedList = ({
               </div>
             )
           })}
+
+          {!mock && (
+            <p className="mt-1.5 text-right text-xs">{i18n.periodicUpdate}</p>
+          )}
         </div>
       )}
     </Table>

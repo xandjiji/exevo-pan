@@ -1,6 +1,7 @@
 export * from './Advertising'
 export * from './AuctionEstimations'
 export * from './Avatars'
+export * from './BossCheckStatisticsCache'
 export * from './BlogTags'
 export * from './Email'
 export * from './Endpoints'
