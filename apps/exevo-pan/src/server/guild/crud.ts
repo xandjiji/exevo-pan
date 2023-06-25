@@ -866,10 +866,13 @@ export const listCheckedBosses = authedProcedure
     return result
   })
 
+const countEntries = (entries: HuntingGroupsStatisticsEntry[]): number =>
+  entries.reduce((acc, { count }) => acc + count, 0)
+
 const calculateStatisticsEntriesPercentages = (
   entries: HuntingGroupsStatisticsEntry[],
 ): HuntingGroupsStatisticsEntry[] => {
-  const totalCheckCount = entries.reduce((acc, { count }) => acc + count, 0)
+  const totalCheckCount = countEntries(entries)
 
   return entries.map(({ name, count }) => ({
     name,
@@ -963,16 +966,6 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
   return { boss, members }
 }
 
-const countEntries = (entries: HuntingGroupsStatisticsEntry[]) => {
-  let count = 0
-
-  entries.forEach((entry) => {
-    count += entry.count
-  })
-
-  return count
-}
-
 export const getCheckStats = authedProcedure
   .input(
     z.object({
@@ -1013,10 +1006,10 @@ export const getCheckStats = authedProcedure
         getBossCheckStatistics({ guildId, month: 'past' }),
       ])
 
-      const cachedEntries =
+      const entryCount =
         countEntries(currentMonth.members) + countEntries(pastMonth.members)
 
-      if (cachedEntries >= MINIMUM_CACHE_ENTRIES) {
+      if (entryCount >= MINIMUM_CACHE_ENTRIES) {
         const freshData = JSON.stringify({ currentMonth, pastMonth })
 
         const data = { guildId, version, cachedResponse: freshData }
