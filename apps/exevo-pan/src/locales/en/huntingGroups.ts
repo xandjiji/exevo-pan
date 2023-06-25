@@ -214,8 +214,10 @@ export default {
     members: 'Members',
     checksBy: 'Checks by', // 'checks by bosses/members'
     emptyState: {
-      bosses: 'No boss checks',
-      members: 'No member checks',
+      /* bosses: 'No boss checks',
+      members: 'No member checks', */
+      bosses: 'Temporarily disabled',
+      members: 'Temporarily disabled',
     },
     membersOnly: 'Members only',
   },

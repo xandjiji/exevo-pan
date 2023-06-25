@@ -483,7 +483,11 @@ const getCheckStatistics = async ({
   guildId: string
 }): Promise<HuntingGroupStatistics> =>
   hasMemberPrivilege
-    ? caller.getCheckStats({ guildId })
+    ? // caller.getCheckStats({ guildId })
+      {
+        currentMonth: { boss: [], members: [] },
+        pastMonth: { boss: [], members: [] },
+      }
     : {
         currentMonth: { boss: mockedBosses, members: mockedMembers },
         pastMonth: { boss: mockedBosses, members: mockedMembers },
