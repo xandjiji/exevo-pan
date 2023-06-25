@@ -217,10 +217,8 @@ export default defaultComposer(defaultTranslations, {
     members: 'Membros',
     checksBy: 'Checks por', // 'checks by bosses/members'
     emptyState: {
-      /* bosses: 'Nenhum check',
-      members: 'Nenhum check', */
-      bosses: 'Temporariamente desabilitado',
-      members: 'Temporariamente desabilitado',
+      bosses: 'Nenhum check',
+      members: 'Nenhum check',
     },
     membersOnly: 'Apenas membros',
   },
