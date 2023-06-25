@@ -295,3 +295,11 @@ model BossCheckLog {
     @@index([guildId])
     @@index([memberId])
 }
+
+model CachedBossCheckStatistics {
+    guildId String @id
+
+    version        Int
+    cachedResponse String   @db.Text
+    lastUpdated    DateTime @updatedAt
+}
