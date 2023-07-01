@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
-import { Table, SpritePortrait } from 'components/Atoms'
+import { SpritePortrait, Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { LockIcon } from 'assets/svgs'
 
@@ -25,7 +25,11 @@ const ChartedList = ({
   const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.GroupStatistics
 
-  const [topEntry] = list
+  const sortedList = useMemo(
+    () => [...list].sort((a, b) => b.count - a.count),
+    [list],
+  )
+  const [topEntry] = sortedList
   const isEmpty = useMemo(
     () => list.filter(({ count }) => count > 0).length === 0,
     [list],
@@ -52,7 +56,7 @@ const ChartedList = ({
               </strong>
             </div>
           )}
-          {list.map(({ name, count, percentage }) => {
+          {sortedList.map(({ name, count, percentage }) => {
             const width = `${Math.max(Math.ceil((count / maxCount) * 100), 1)}%`
 
             return (
