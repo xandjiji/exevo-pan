@@ -3,7 +3,7 @@ import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
 import { tokens } from 'data-dictionary/dist/dictionaries/quest'
-import { utilitary, access, bosses, others } from './lists'
+import { access, bosses, others, utilitary } from './lists'
 import Lister from '../Lister'
 import * as S from '../atoms'
 import { TooltipProps } from '../types'
@@ -12,8 +12,8 @@ const Group = (args: JSX.IntrinsicElements['div']) => (
   <div className="text-tsm shrink-0" {...args} />
 )
 
-const Title = (args: JSX.IntrinsicElements['h5']) => (
-  <h5 className="text-s text-primaryHighlight mb-2 text-center" {...args} />
+const Title = (args: JSX.IntrinsicElements['strong']) => (
+  <strong className="text-s text-primaryHighlight mb-2 text-center" {...args} />
 )
 
 const CharacterQuests = ({ items, placement, ...props }: TooltipProps) => {

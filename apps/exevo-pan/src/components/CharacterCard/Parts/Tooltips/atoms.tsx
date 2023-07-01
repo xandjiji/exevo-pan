@@ -2,20 +2,20 @@
 import { cloneElement } from 'react'
 import clsx from 'clsx'
 import {
-  MagicIcon,
-  CharmsIcon,
   BookIcon,
+  CharmsIcon,
+  GoblinIcon,
+  MagicIcon,
   PeopleIcon,
   StarIcon,
-  GoblinIcon,
 } from 'assets/svgs'
 import { IconProps } from './types'
 
 export const TitleWrapper = ({
   className,
   ...props
-}: JSX.IntrinsicElements['h5']) => (
-  <h5
+}: JSX.IntrinsicElements['strong']) => (
+  <strong
     className={clsx(
       'text-tsm flex flex-nowrap items-center font-normal',
       className,
