@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { useRef, useMemo, useState, useCallback } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
@@ -8,16 +8,16 @@ import { Menu } from 'components/Organisms'
 import CharacterCard from 'components/CharacterCard'
 import CharacterModal from 'components/CharacterModal'
 import {
-  MoreIcon,
+  AlertIcon,
+  CalculatorIcon,
   ExpandIcon,
-  SearchIcon,
+  MoreIcon,
   OutlineAddIcon,
   OutlineRemoveIcon,
-  AlertIcon,
+  SearchIcon,
   WeightIcon,
-  CalculatorIcon,
 } from 'assets/svgs'
-import { permalinkResolver, getSimilarCharacterFilters } from 'utils'
+import { getSimilarCharacterFilters, permalinkResolver } from 'utils'
 import { useSyncUrlState } from 'hooks'
 import { urlParameters } from 'Constants'
 import { useAuctions } from '../../../contexts/useAuctions'

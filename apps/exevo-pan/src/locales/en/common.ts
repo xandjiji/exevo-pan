@@ -259,4 +259,7 @@ export default {
     similarFound: '{{count}} similar auction',
     similarFoundPlural: '{{count}} similar auctions',
   },
+  Menu: {
+    buttonLabel: 'Toggle menu',
+  },
 }

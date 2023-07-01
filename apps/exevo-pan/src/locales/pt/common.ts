@@ -263,4 +263,7 @@ export default defaultComposer(defaultTranslations, {
     similarFound: '{{count}} leilão similar',
     similarFoundPlural: '{{count}} leilões similares',
   },
+  Menu: {
+    buttonLabel: 'Alternar menu',
+  },
 })

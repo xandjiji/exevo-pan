@@ -1,14 +1,15 @@
 import clsx from 'clsx'
-import { useMemo, useReducer, useCallback, useId } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
+import { useCallback, useId, useMemo, useReducer } from 'react'
 import { Popover } from 'components/Atoms'
 import { ChevronDownIcon } from 'assets/svgs'
-import { useEscToClose, useOnClickOutside, useLockBody } from 'hooks'
+import { useEscToClose, useLockBody, useOnClickOutside } from 'hooks'
 import Reducer from './reducer'
 import {
   useKeyboardNavigation,
   useKeyboardSearch,
 } from './useKeyboardNavigation'
-import { MenuProps, ItemProps } from './types'
+import { ItemProps, MenuProps } from './types'
 
 export { useMenuItems } from './useMenuItems'
 
@@ -56,9 +57,13 @@ const Menu = ({
   placement = 'bottom-end',
   offset = [-8, 8],
   variant = 'icon',
+  'aria-label': ariaLabel,
   children,
   ...props
 }: MenuProps) => {
+  const { common } = useTranslations()
+  const i18n = common.Menu
+
   const buttonId = useId()
   const dialogId = useId()
   const menuItemIdPrefix = useId()
@@ -154,6 +159,7 @@ const Menu = ({
     >
       <button
         id={buttonId}
+        aria-label={ariaLabel ?? i18n.buttonLabel}
         aria-expanded={open}
         aria-haspopup="true"
         aria-controls={open ? dialogId : undefined}
