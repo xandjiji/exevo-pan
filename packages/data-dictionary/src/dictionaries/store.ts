@@ -1597,6 +1597,74 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Opulent Chest',
     value: 60,
   },
+  'opulent wood floor planks': {
+    name: 'Opulent Wooden Floor',
+    value: 30,
+  },
+  'opulent item stand': {
+    name: 'Opulent Item Stand',
+    value: 50,
+  },
+  'opulent floor lamp': {
+    name: 'Opulent Floor Lamp',
+    value: 60,
+  },
+  'witchcraft scroll': {
+    name: 'Witchcraft Scroll',
+    value: 50,
+  },
+  'witchcraft cage': {
+    name: 'Witchcraft Cage',
+    value: 80,
+  },
+  'witchcraft bookstand': {
+    name: 'Witchcraft Bookstand',
+    value: 50,
+  },
+  'witchcraft fireplace': {
+    name: 'Witchcraft Fireplace',
+    value: 80,
+  },
+  'witchcraft portal': {
+    name: 'Witchcraft Portal',
+    value: 120,
+  },
+  'witchcraft cabinet': {
+    name: 'Witchcraft Cabinet',
+    value: 90,
+  },
+  'chest full of witchcraft': {
+    name: 'Witchcraft Chest',
+    value: 50,
+  },
+  table: {
+    name: 'Witchcraft Table',
+    value: 100,
+  },
+  cauldron: {
+    name: 'Witchcraft Cauldron',
+    value: 180,
+  },
+  'witchcraft bed': {
+    name: 'Witchcraft Bed',
+    value: 150,
+  },
+  'witchcraft sweet herbs': {
+    name: 'Witchcraft Sweet Herbs',
+    value: 50,
+  },
+  'witchcraft forest herbs': {
+    name: 'Witchcraft Forest Herbs',
+    value: 50,
+  },
+  'witchcraft summoning circle': {
+    name: 'Witchcraft Summoning Circle',
+    value: 80,
+  },
+  'witchcraft cupboard': {
+    name: 'Witchcraft Cupboard',
+    value: 50,
+  },
   'seafarer cabinet': {
     name: 'Seafarer Cabinet',
     value: 100,
@@ -1628,10 +1696,6 @@ export const storeItems: Record<string, StoreItem> = {
   'tentacle lamp': {
     name: 'Tentacle Lamp',
     value: 80,
-  },
-  'opulent wood floor planks': {
-    name: 'Opulent Wooden Floor',
-    value: 30,
   },
   'seafood bucket': {
     name: 'Seafood Bucket',
@@ -1773,10 +1837,6 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'retching horror doll': {
     name: 'Retching Horror Doll',
-    value: 0,
-  },
-  'ogre rowdy doll': {
-    name: 'Ogre Rowdy Doll',
     value: 0,
   },
   'gilded blessed shield': {
@@ -1936,6 +1996,10 @@ export const storeItems: Record<string, StoreItem> = {
   },
   'plushie of a scissorion': {
     name: 'Plushie of a Scissorion',
+    value: 0,
+  },
+  'ogre rowdy doll': {
+    name: 'Ogre Rowdy Doll',
     value: 0,
   },
   /* BOSSTIARY */
