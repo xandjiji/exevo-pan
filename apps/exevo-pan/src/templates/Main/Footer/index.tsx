@@ -233,7 +233,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       </div>
 
       <ClientComponent>
-        {!isPro && (
+        {!isPro && variant === 'primary' && (
           <script
             data-cfasync="false"
             type="text/javascript"
