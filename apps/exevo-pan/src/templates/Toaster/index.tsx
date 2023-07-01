@@ -1,11 +1,11 @@
 import clsx from 'clsx'
-import { Toaster, ToastIcon, resolveValue } from 'react-hot-toast'
+import { resolveValue, Toaster, ToastIcon } from 'react-hot-toast'
 
 const CustomToaster = () => (
   <Toaster
     position="bottom-right"
     toastOptions={{ duration: 4000 }}
-    containerStyle={{ bottom: 64 }}
+    containerStyle={{ bottom: 124 }}
   >
     {(t) => (
       <div
