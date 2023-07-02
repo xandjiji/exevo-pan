@@ -49,7 +49,7 @@ const Card = ({
 const Footer = ({ variant = 'primary' }: FooterProps) => {
   const { common } = useTranslations()
 
-  const { data } = useSession()
+  const { data, status } = useSession()
   const isPro = !!data?.user.proStatus
 
   return (
@@ -233,7 +233,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
       </div>
 
       <ClientComponent>
-        {!isPro && variant === 'primary' && (
+        {!isPro && status === 'unauthenticated' && variant === 'primary' && (
           <script
             data-cfasync="false"
             type="text/javascript"
