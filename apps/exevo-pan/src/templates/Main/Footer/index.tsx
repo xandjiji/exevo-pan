@@ -4,6 +4,8 @@ import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import Image from 'next/image'
+import { useSession } from 'next-auth/react'
+import { ClientComponent } from 'components/Organisms'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 import tbjSrc from 'assets/tibiablackjack.png'
@@ -46,6 +48,9 @@ const Card = ({
 
 const Footer = ({ variant = 'primary' }: FooterProps) => {
   const { common } = useTranslations()
+
+  const { data, status } = useSession()
+  const isPro = !!data?.user.proStatus
 
   return (
     <footer
@@ -226,6 +231,21 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
           </div>
         </div>
       </div>
+
+      <ClientComponent>
+        {((!isPro && status === 'authenticated') ||
+          status === 'unauthenticated') &&
+          variant === 'primary' && (
+            <script
+              data-cfasync="false"
+              type="text/javascript"
+              id="clever-core"
+              dangerouslySetInnerHTML={{
+                __html: `/* <![CDATA[ */(function (document, window) {var a, c = document.createElement("script"), f = window.frameElement;c.id = "CleverCoreLoader70802";c.src = "https://scripts.cleverwebserver.com/766d56588bb3504688e266dcc4c359cd.js";c.async = !0;c.type = "text/javascript";c.setAttribute("data-target", window.name || (f && f.getAttribute("id")));c.setAttribute("data-callback", "put-your-callback-function-here");c.setAttribute("data-callback-url-click", "put-your-click-macro-here");c.setAttribute("data-callback-url-view", "put-your-view-macro-here");try {a = parent.document.getElementsByTagName("script")[0] || document.getElementsByTagName("script")[0];} catch (e) {a = !1;}a || (a = document.getElementsByTagName("head")[0] || document.getElementsByTagName("body")[0]);a.parentNode.insertBefore(c, a);})(document, window);/* ]]> */`,
+              }}
+            />
+          )}
+      </ClientComponent>
     </footer>
   )
 }
