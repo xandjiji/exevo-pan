@@ -5,7 +5,7 @@ const CustomToaster = () => (
   <Toaster
     position="bottom-right"
     toastOptions={{ duration: 4000 }}
-    containerStyle={{ bottom: 124 }}
+    containerStyle={{ bottom: 68 }}
   >
     {(t) => (
       <div
