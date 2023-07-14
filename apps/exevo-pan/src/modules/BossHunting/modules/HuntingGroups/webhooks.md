@@ -188,7 +188,7 @@ In the line `31` you can now overwrite any attribute you want. In our example,
 we changed the default `@everyone` mention to a custom boss group mention, like
 `@Yeti`
 
-- Once you are done with your customizations, hit `Save and deploy`
+- Once you are done with your customizations, hit the `Save and deploy` button
 - Save your new custom endpoint in your Hunting Group configurations, using your
   cloudflare worker URL from the previous step:
 
