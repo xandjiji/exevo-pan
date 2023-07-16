@@ -7,7 +7,7 @@ import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
 import { routes, jsonld } from 'Constants'
 import { common, calculators } from 'locales'
 
-const pageRoute = routes.EXERCISE_WEAPONS
+const pageRoute = routes.IMBUEMENTS_COST
 const pageUrl = buildUrl(pageRoute)
 
 export default function Calculator() {
