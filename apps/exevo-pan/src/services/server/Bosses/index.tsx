@@ -5,6 +5,8 @@ import { pluckPremiumBossData } from 'utils'
 import { endpoints, paths } from 'Constants'
 import { multipleSpawnLocationBosses } from '../../../modules/BossHunting/bossInfo'
 
+const MAX_RECENTLY_APPEARED_TIME_DIFF = 4 * MILLISECONDS_IN.DAY
+
 export default class BossesClient {
   private static bossChancesUrl = `${endpoints.STATIC_DATA}${paths.BOSS_CHANCES}`
 
@@ -113,5 +115,26 @@ export default class BossesClient {
     )
 
     return checkedBosses
+  }
+
+  static async fetchRecentlyAppearedBosses(
+    server: string,
+  ): Promise<BossStats[]> {
+    const data = await this.fetchServerBossChances({ server, isPro: true })
+
+    const pluckedPremiumData: BossStats[] = []
+    data.bosses.forEach((bossStat) => {
+      const { name, lastAppearence } = bossStat
+      if (
+        +new Date() - (lastAppearence ?? 0) >
+        MAX_RECENTLY_APPEARED_TIME_DIFF
+      ) {
+        return
+      }
+
+      pluckedPremiumData.push({ name, lastAppearence })
+    })
+
+    return pluckedPremiumData
   }
 }
