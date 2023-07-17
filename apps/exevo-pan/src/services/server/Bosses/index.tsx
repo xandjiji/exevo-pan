@@ -1,7 +1,7 @@
 import { prisma } from 'lib/prisma'
 import { getDateRelativeToSS, MILLISECONDS_IN } from 'shared-utils/dist/time'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
-import { pluckPremiumBossData } from 'utils'
+import { pluckPremiumBossData, sortBossesBy } from 'utils'
 import { endpoints, paths } from 'Constants'
 import { multipleSpawnLocationBosses } from '../../../modules/BossHunting/bossInfo'
 
@@ -134,6 +134,8 @@ export default class BossesClient {
 
       pluckedPremiumData.push({ name, lastAppearence })
     })
+
+    pluckedPremiumData.sort(sortBossesBy.recentlyAppeared)
 
     return pluckedPremiumData
   }

@@ -1,12 +1,12 @@
 import Head from 'next/head'
 import { PreviewImageClient } from 'services'
-import { DrawerFieldsClient, BossesClient } from 'services/server'
+import { BossesClient, DrawerFieldsClient } from 'services/server'
 import { GetStaticProps } from 'next'
 import { Template, Tracker } from 'modules/BossHunting'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle, sortBossesBy, MILLISECONDS_IN } from 'utils'
-import { routes, jsonld } from 'Constants'
-import { common, bosses, bossTracker } from 'locales'
+import { buildPageTitle, buildUrl, sortBossesBy } from 'utils'
+import { jsonld, routes } from 'Constants'
+import { bosses, bossTracker, common } from 'locales'
 
 type BossTrackerProps = {
   serverOptions: Option[]
@@ -15,8 +15,6 @@ type BossTrackerProps = {
 }
 
 const { heroSrc } = Tracker
-
-const MAX_RECENTLY_KILLED_TIME_DIFF = 4 * MILLISECONDS_IN.DAY
 
 export default function BossTrackerPage(args: BossTrackerProps) {
   const { bossChances } = args
@@ -87,13 +85,14 @@ export default function BossTrackerPage(args: BossTrackerProps) {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   const server = 'Antica'
 
-  const [serverOptions, bossChances] = await Promise.all([
+  const [serverOptions, bossChances, recentlyAppeared] = await Promise.all([
     await DrawerFieldsClient.fetchActiveServerOptions(),
     await BossesClient.fetchServerBossChances({
       server,
       isPro: false,
       getNextDayFeroxa: true,
     }),
+    await BossesClient.fetchRecentlyAppearedBosses(server),
   ])
 
   bossChances.bosses.sort(sortBossesBy.chance)
@@ -102,13 +101,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     props: {
       serverOptions,
       bossChances,
-      recentlyAppeared: bossChances.bosses
-        .filter(({ lastAppearence }) => {
-          if (!lastAppearence) return false
-
-          return +new Date() - lastAppearence <= MAX_RECENTLY_KILLED_TIME_DIFF
-        })
-        .sort(sortBossesBy.recentlyAppeared),
+      recentlyAppeared,
       translations: {
         common: common[locale as RegisteredLocale],
         bosses: bosses[locale as RegisteredLocale],
