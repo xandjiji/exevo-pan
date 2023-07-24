@@ -1,6 +1,7 @@
 # Exevo Pan 🍎
 
-[Exevo Pan](https://www.exevopan.com/) is an official [Tibia](https://www.tibia.com/) supported fansite focused on improving your Char Bazaar experience.
+[Exevo Pan](https://www.exevopan.com/) is an open-source web app with tons of
+features and utilities for the game Tibia
 
 <p align="center">
     <img alt="Exevo Pan preview" src="https://i.imgur.com/CPRxn00.png">
@@ -18,7 +19,8 @@
 ## Built using
 
 - typescript
-- My own design system, based on React.js + Tailwind
-- My own simple i18n library
 - Next.js
-- Jest
+- My own design system, based on React.js + Tailwind
+- TRPC
+- NextAuth.js
+- prisma
