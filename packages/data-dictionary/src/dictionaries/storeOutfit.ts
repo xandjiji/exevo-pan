@@ -1,8 +1,8 @@
 import {
   cosmeticToPriceMap,
+  dictionaryFactory,
   lowerCaseKeys,
   nameableToScrapingTokens,
-  dictionaryFactory,
 } from '../utils'
 
 export const outfits: OutfitToken[] = [
@@ -437,6 +437,22 @@ export const outfits: OutfitToken[] = [
       female: 1643,
     },
     value: 750,
+  },
+  {
+    name: 'Darklight Evoker',
+    id: {
+      male: 1675,
+      female: 1676,
+    },
+    value: 500,
+  },
+  {
+    name: 'Flamefury Mage',
+    id: {
+      male: 1680,
+      female: 1681,
+    },
+    value: 800,
   },
 ]
 

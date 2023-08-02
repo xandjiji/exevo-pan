@@ -1,7 +1,7 @@
 import {
-  nameableToScrapingTokens,
-  lowerCaseKeys,
   dictionaryFactory,
+  lowerCaseKeys,
+  nameableToScrapingTokens,
 } from '../utils'
 
 const mounts: MountToken[] = [
@@ -343,6 +343,16 @@ const mounts: MountToken[] = [
   {
     name: 'Mutated Abomination',
     id: 1599,
+    value: 0,
+  },
+  {
+    name: 'Foxmouse',
+    id: 1632,
+    value: 0,
+  },
+  {
+    name: 'Spirit of Purity',
+    id: 1682,
     value: 0,
   },
 ]

@@ -1633,11 +1633,19 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Witchcraft Cabinet',
     value: 90,
   },
+  'witchcraft chair': {
+    name: 'Witchcraft Chair',
+    value: 50,
+  },
   'chest full of witchcraft': {
     name: 'Witchcraft Chest',
     value: 50,
   },
   table: {
+    name: 'Witchcraft Table',
+    value: 100,
+  },
+  'table with burning candles': {
     name: 'Witchcraft Table',
     value: 100,
   },
@@ -1806,6 +1814,10 @@ export const storeItems: Record<string, StoreItem> = {
   'cozy couch right end': {
     name: 'Cozy Couch Right End',
     value: 60,
+  },
+  'mask of the defiler': {
+    name: 'Mask of the Defiler',
+    value: 500,
   },
   'baby brain squid': {
     name: 'Baby Brain Squid',

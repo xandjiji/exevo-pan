@@ -1,8 +1,8 @@
 import {
   cosmeticToPriceMap,
-  nameableToScrapingTokens,
-  lowerCaseKeys,
   dictionaryFactory,
+  lowerCaseKeys,
+  nameableToScrapingTokens,
 } from '../utils'
 
 const mounts: MountToken[] = [
@@ -725,6 +725,26 @@ const mounts: MountToken[] = [
     name: 'Icebreacher',
     id: 1617,
     value: 750,
+  },
+  {
+    name: 'Boisterous Bull',
+    id: 1672,
+    value: 690,
+  },
+  {
+    name: 'Surly Steer',
+    id: 1673,
+    value: 690,
+  },
+  {
+    name: 'Obstinate Ox',
+    id: 1674,
+    value: 690,
+  },
+  {
+    name: 'Darkfire Devourer',
+    id: 1677,
+    value: 500,
   },
 ]
 

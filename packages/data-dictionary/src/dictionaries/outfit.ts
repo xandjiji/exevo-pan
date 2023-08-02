@@ -1,7 +1,7 @@
 import {
+  dictionaryFactory,
   lowerCaseKeys,
   nameableToScrapingTokens,
-  dictionaryFactory,
 } from '../utils'
 
 export const outfits: OutfitToken[] = [
@@ -458,6 +458,14 @@ export const outfits: OutfitToken[] = [
     id: {
       male: 1652,
       female: 1653,
+    },
+    value: 0,
+  },
+  {
+    name: 'Decaying Defender',
+    id: {
+      male: 1662,
+      female: 1663,
     },
     value: 0,
   },
