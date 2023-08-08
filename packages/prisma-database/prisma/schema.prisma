@@ -303,3 +303,12 @@ model CachedBossCheckStatistics {
     cachedResponse String   @db.Text
     lastUpdated    DateTime @updatedAt
 }
+
+model PastCachedBossCheckStatistics {
+    date_guildId   String @id
+
+    version        Int
+    cachedResponse String   @db.Text
+
+    @@index([date_guildId])
+}
