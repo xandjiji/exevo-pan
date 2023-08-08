@@ -5,27 +5,27 @@ import { authedProcedure, publicProcedure } from 'server/trpc'
 import { TRPCError } from '@trpc/server'
 import { prisma } from 'lib/prisma'
 import {
-  PageRevalidationClient,
-  DeviceNotificationClient,
   BossesClient,
+  DeviceNotificationClient,
+  PageRevalidationClient,
 } from 'services/server'
 import { BossNotificationEvent } from 'services'
 import { getGuildPermalink } from 'utils'
 import {
   avatar,
+  BOSS_CHECK_STATISTICS_CACHE,
   guildValidationRules,
   routes,
-  BOSS_CHECK_STATISTICS_CACHE,
 } from 'Constants'
 import type {
   GUILD_MEMBER_ROLE,
-  GuildMember,
   GuildApplication,
+  GuildMember,
 } from '@prisma/client'
 import { multipleSpawnLocationBosses } from '../../modules/BossHunting/bossInfo'
 import {
-  utils as blacklistUtils,
   bossSet,
+  utils as blacklistUtils,
 } from '../../modules/BossHunting/blacklist'
 import { HuntingGroupStatistics } from '../../modules/BossHunting/modules/HuntingGroups/contexts/types'
 import { can } from './permissions'
@@ -957,13 +957,68 @@ const getCheckStatsBy = {
       .then(calculateStatisticsEntriesPercentages),
 }
 
+const pastCachedBossCheckStatisticsId = {
+  encode: ({ guildId, date }: { guildId: string; date: Date }) =>
+    `${+date}@${guildId}`,
+  decode: (id: string) => {
+    const [timestamp, guildId] = id.split('@')
+
+    return { guildId, date: new Date(+timestamp) }
+  },
+}
+
 const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
+  const { month, guildId } = args
+  const { lte } = getMonthRange(month)
+
+  const shouldBeCached = month === 'past'
+  const date_guildId = pastCachedBossCheckStatisticsId.encode({
+    guildId,
+    date: lte,
+  })
+
+  if (shouldBeCached) {
+    const cachedData = await prisma.pastCachedBossCheckStatistics.findUnique({
+      where: { date_guildId },
+    })
+
+    if (
+      cachedData &&
+      cachedData.version === BOSS_CHECK_STATISTICS_CACHE.version
+    ) {
+      return JSON.parse(cachedData.cachedResponse)
+    }
+  }
+
   const [boss, members] = await Promise.all([
     getCheckStatsBy.boss(args),
     getCheckStatsBy.members(args),
   ])
 
-  return { boss, members }
+  const result = { boss, members }
+
+  if (shouldBeCached) {
+    const cachedResponse = JSON.stringify(result)
+    await prisma.pastCachedBossCheckStatistics.upsert({
+      where: { date_guildId },
+      create: {
+        date_guildId,
+        cachedResponse,
+        version: BOSS_CHECK_STATISTICS_CACHE.version,
+      },
+      update: {
+        date_guildId,
+        cachedResponse,
+        version: BOSS_CHECK_STATISTICS_CACHE.version,
+      },
+    })
+
+    await prisma.bossCheckLog.deleteMany({
+      where: { guildId, checkedAt: { lte } },
+    })
+  }
+
+  return result
 }
 
 export const getCheckStats = authedProcedure
