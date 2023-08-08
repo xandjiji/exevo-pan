@@ -1,21 +1,21 @@
 import clsx from 'clsx'
 import {
-  useTranslations,
-  templateString,
   templateMessage,
+  templateString,
+  useTranslations,
 } from 'contexts/useTranslation'
-import { useState, useMemo, useCallback } from 'react'
-import { Input, Checkbox, Button } from 'components/Atoms'
-import { sortBossesBy, MILLISECONDS_IN } from 'utils'
+import { useCallback, useMemo, useState } from 'react'
+import { Button, Checkbox, Input } from 'components/Atoms'
+import { MILLISECONDS_IN, sortBossesBy } from 'utils'
 import { Menu, Tooltip } from 'components/Organisms'
 import {
-  MoreIcon,
-  ExpandIcon,
-  ViewedIcon,
-  OutlineRemoveIcon,
   BlogIcon,
-  UndoIcon,
   ChevronDownIcon,
+  ExpandIcon,
+  MoreIcon,
+  OutlineRemoveIcon,
+  UndoIcon,
+  ViewedIcon,
 } from 'assets/svgs'
 import { useStoredState } from 'hooks'
 import { trpc } from 'lib/trpc'
@@ -30,10 +30,10 @@ import { utils } from '../../../blacklist'
 import { can } from '../../../../../server/guild/permissions'
 import { BossTooltipContent, TooltipList } from './atoms'
 import {
-  isFromSameServerSave,
   checkIfBoss,
-  sharedSpawnBossesNames,
+  isFromSameServerSave,
   raidBossesNames,
+  sharedSpawnBossesNames,
 } from './utils'
 
 const INITIAL_DISPLAYED_COUNT = 6
@@ -293,6 +293,7 @@ const CheckedBosses = ({
             manuallyMarkedAsNoChance,
             lastChecked,
             checkedBy,
+            checkedAt,
           } = boss
 
           const checkAction = () => markBoss({ boss: name, location })
@@ -398,7 +399,10 @@ const CheckedBosses = ({
                 ) : lastChecked ? (
                   <p
                     className="flex items-center gap-1"
-                    title={templateString(i18n.lastTimeChecked, {
+                    title={templateString(i18n.fullLastTimeChecked, {
+                      time: checkedAt
+                        ? checkedAt.toLocaleString('pt-BR', { hour12: false })
+                        : lastChecked.readable,
                       member: checkedBy ?? '',
                     })}
                   >

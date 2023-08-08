@@ -203,6 +203,7 @@ export default defaultComposer(defaultTranslations, {
     bossWasMarked: '{{boss}} foi marcado!',
     loading: 'Carregando...',
     lastTimeChecked: 'Última vez checado (por {{member}})',
+    fullLastTimeChecked: '{{time}} (por {{member}})',
     justChecked: 'recém checado',
     minutesAgo: 'minutos atrás',
     hourAgo: 'hora atrás',

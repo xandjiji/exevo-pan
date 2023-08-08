@@ -200,6 +200,7 @@ export default {
     bossWasMarked: '{{boss}} was marked!',
     loading: 'Loading...',
     lastTimeChecked: 'Last time checked (by {{member}})',
+    fullLastTimeChecked: '{{time}} (by {{member}})',
     justChecked: 'just checked',
     minutesAgo: 'minutes ago',
     hourAgo: 'hour ago',
