@@ -10,7 +10,7 @@ import {
   PageRevalidationClient,
 } from 'services/server'
 import { BossNotificationEvent } from 'services'
-import { getGuildPermalink } from 'utils'
+import { getGuildPermalink, isDevelopment } from 'utils'
 import {
   avatar,
   BOSS_CHECK_STATISTICS_CACHE,
@@ -971,7 +971,7 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
   const { month, guildId } = args
   const { lte } = getMonthRange(month)
 
-  const shouldBeCached = month === 'past'
+  const shouldBeCached = month === 'past' && !isDevelopment()
   const date_guildId = pastCachedBossCheckStatisticsId.encode({
     guildId,
     date: lte,
@@ -1048,7 +1048,9 @@ export const getCheckStats = authedProcedure
       const { version, MAX_AGE, MINIMUM_CACHE_ENTRIES } =
         BOSS_CHECK_STATISTICS_CACHE
 
-      if (cachedData) {
+      const isDev = isDevelopment()
+
+      if (cachedData && !isDev) {
         const cacheAge = +new Date() - +cachedData.lastUpdated
 
         if (cachedData.version === version && cacheAge < MAX_AGE) {
@@ -1064,7 +1066,7 @@ export const getCheckStats = authedProcedure
       const entryCount =
         countEntries(currentMonth.members) + countEntries(pastMonth.members)
 
-      if (entryCount >= MINIMUM_CACHE_ENTRIES) {
+      if (entryCount >= MINIMUM_CACHE_ENTRIES && !isDev) {
         const freshData = JSON.stringify({ currentMonth, pastMonth })
 
         const data = { guildId, version, cachedResponse: freshData }
