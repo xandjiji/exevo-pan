@@ -1,7 +1,7 @@
 import { prisma } from 'lib/prisma'
-import { getDateRelativeToSS, MILLISECONDS_IN } from 'shared-utils/dist/time'
+import { MILLISECONDS_IN } from 'shared-utils/dist/time'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
-import { pluckPremiumBossData, sortBossesBy } from 'utils'
+import { getFeroxaStats, pluckPremiumBossData, sortBossesBy } from 'utils'
 import { endpoints, paths } from 'Constants'
 import { multipleSpawnLocationBosses } from '../../../modules/BossHunting/bossInfo'
 
@@ -9,36 +9,6 @@ const MAX_RECENTLY_APPEARED_TIME_DIFF = 4 * MILLISECONDS_IN.DAY
 
 export default class BossesClient {
   private static bossChancesUrl = `${endpoints.STATIC_DATA}${paths.BOSS_CHANCES}`
-
-  private static getFeroxaStats(
-    getNextDayFeroxa: boolean,
-  ): Pick<BossStats, 'currentChance' | 'expectedIn'> {
-    const SPAWN_DATE = 13
-    const SSDate = getDateRelativeToSS()
-    if (getNextDayFeroxa) {
-      SSDate.setDate(SSDate.getDate() + 1)
-    }
-    const checkingDate = SSDate.getDate()
-
-    if (checkingDate === SPAWN_DATE) {
-      return { currentChance: 1 }
-    }
-
-    if (checkingDate < SPAWN_DATE) {
-      return { currentChance: 0, expectedIn: SPAWN_DATE - checkingDate }
-    }
-
-    const nextFeroxaSpawn = getDateRelativeToSS()
-    nextFeroxaSpawn.setMonth(nextFeroxaSpawn.getMonth() + 1)
-    nextFeroxaSpawn.setDate(SPAWN_DATE)
-
-    return {
-      currentChance: 0,
-      expectedIn: Math.round(
-        (+nextFeroxaSpawn - +getDateRelativeToSS()) / MILLISECONDS_IN.DAY,
-      ),
-    }
-  }
 
   static async fetchServerBossChances({
     server,
@@ -54,7 +24,7 @@ export default class BossesClient {
 
     bossChances.bosses = bossChances.bosses.map((chance) =>
       chance.name === bossTokens.Feroxa
-        ? { ...chance, ...this.getFeroxaStats(getNextDayFeroxa) }
+        ? { ...chance, ...getFeroxaStats(getNextDayFeroxa) }
         : chance,
     )
 

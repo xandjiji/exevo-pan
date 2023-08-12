@@ -1,8 +1,9 @@
 import { useMemo } from 'react'
+import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
 import { Hero } from 'templates'
 import { useRouter } from 'next/router'
 import { useTranslations } from 'contexts/useTranslation'
-import { loadRawSrc, MILLISECONDS_IN, debounce } from 'utils'
+import { debounce, getFeroxaStats, loadRawSrc, MILLISECONDS_IN } from 'utils'
 import { Select } from 'components/Organisms'
 import { routes } from 'Constants'
 import { BossGrid, RecentlyAppeared } from './components'
@@ -19,10 +20,22 @@ const DEBOUNCE_DELAY = 250
 
 const Tracker = ({
   serverOptions,
-  bossChances,
+  bossChances: initialBossChances,
   recentlyAppeared,
 }: BossTrackerProps) => {
   const { common, bossTracker } = useTranslations()
+
+  const bossChances: typeof initialBossChances = useMemo(
+    () => ({
+      ...initialBossChances,
+      bosses: initialBossChances.bosses.map((boss) =>
+        boss.name === bossTokens.Feroxa
+          ? { ...boss, ...getFeroxaStats() }
+          : boss,
+      ),
+    }),
+    [initialBossChances],
+  )
 
   const hoursSinceLastUpdate = Math.round(
     (+new Date() - bossChances.lastUpdated) / MILLISECONDS_IN.HOUR,
