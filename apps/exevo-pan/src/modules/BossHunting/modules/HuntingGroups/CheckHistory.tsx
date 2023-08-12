@@ -1,12 +1,13 @@
 import clsx from 'clsx'
 import { useState } from 'react'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import { Table } from 'components/Atoms'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
+import { Input, Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
+import { useDebounce } from 'hooks'
 import { trpc } from 'lib/trpc'
 import { ViewedIcon } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
-import { TableIconWrapper, EventTimestamp, ListButton } from './components'
+import { EventTimestamp, ListButton, TableIconWrapper } from './components'
 import { multipleSpawnLocationBosses } from '../../bossInfo'
 
 type CheckHistoryProps = {
@@ -15,9 +16,18 @@ type CheckHistoryProps = {
 
 const pageSize = 10
 
+// @ ToDo:
+// query itself
+// debounce query
+// loading state
+// styling
+
 const CheckHistory = ({ guildId }: CheckHistoryProps) => {
   const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.CheckHistory
+
+  const [term, setTerm] = useState('')
+  const debouncedTerm = useDebounce(term)
 
   const [pageIndex, setPageIndex] = useState(0)
   const [list, setList] = useState<TRPCRouteOutputs['listGuildChecks']>([])
@@ -46,6 +56,13 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
 
   return (
     <Table>
+      <Input
+        className="mb-6"
+        label="Search"
+        placeholder="Search for bosses or members"
+        onChange={(e) => setTerm(e.target.value)}
+      />
+
       {list.length > 0 && (
         <Table.Element>
           <Table.Head>
