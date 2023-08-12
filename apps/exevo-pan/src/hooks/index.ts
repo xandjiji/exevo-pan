@@ -1,3 +1,4 @@
+export { default as useDebounce } from './useDebounce'
 export { default as useDrag } from './useDrag'
 export { default as useEscToClose } from './useEscToClose'
 export { default as useInfiniteScroll } from './useInfiniteScroll'
