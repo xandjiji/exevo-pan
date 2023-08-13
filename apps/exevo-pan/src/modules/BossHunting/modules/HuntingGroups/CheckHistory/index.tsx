@@ -16,7 +16,6 @@ type CheckHistoryProps = {
 
 // @ ToDo:
 // autocomplete input with bosses and users?
-// styling
 // i18n
 
 const CheckHistory = ({ guildId }: CheckHistoryProps) => {
@@ -60,11 +59,12 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
   return (
     <Table>
       <Input
-        className="mb-6 max-w-[120px]"
+        className="mb-6"
         label="Search"
         placeholder="Search for bosses or members"
         onChange={(e) => setSearchText(e.target.value)}
         allowClear
+        stateIcon={isLoading && term && pageIndex === 0 ? 'loading' : 'neutral'}
       />
 
       {list.length > 0 && (
