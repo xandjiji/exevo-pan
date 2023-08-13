@@ -1,9 +1,8 @@
 import clsx from 'clsx'
 import { useState } from 'react'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import { Input, Table } from 'components/Atoms'
+import { Button, Input, Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
-import { useDebounce } from 'hooks'
 import { trpc } from 'lib/trpc'
 import { ViewedIcon } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
@@ -17,17 +16,17 @@ type CheckHistoryProps = {
 const pageSize = 10
 
 // @ ToDo:
-// query itself
-// debounce query
-// loading state
+// enter action
+// clear action?
 // styling
+// i18n
 
 const CheckHistory = ({ guildId }: CheckHistoryProps) => {
   const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.CheckHistory
 
   const [term, setTerm] = useState('')
-  const debouncedTerm = useDebounce(term)
+  const [queryTerm, setQueryTerm] = useState(term)
 
   const [pageIndex, setPageIndex] = useState(0)
   const [list, setList] = useState<TRPCRouteOutputs['listGuildChecks']>([])
@@ -41,6 +40,7 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
       guildId,
       pageIndex,
       pageSize,
+      term: queryTerm,
     },
     {
       keepPreviousData: true,
@@ -56,12 +56,24 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
 
   return (
     <Table>
-      <Input
-        className="mb-6"
-        label="Search"
-        placeholder="Search for bosses or members"
-        onChange={(e) => setTerm(e.target.value)}
-      />
+      <div className="flex items-center gap-2">
+        <Input
+          className="mb-6"
+          label="Search"
+          placeholder="Search for bosses or members"
+          onChange={(e) => setTerm(e.target.value)}
+          stateIcon={isLoading && queryTerm ? 'loading' : 'neutral'}
+        />
+        <Button
+          onClick={() => {
+            setList([])
+            setQueryTerm(term)
+            setPageIndex(0)
+          }}
+        >
+          Go
+        </Button>
+      </div>
 
       {list.length > 0 && (
         <Table.Element>
