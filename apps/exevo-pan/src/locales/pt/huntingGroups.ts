@@ -174,6 +174,8 @@ export default defaultComposer(defaultTranslations, {
     loadMore: 'Mostrar mais',
   },
   CheckHistory: {
+    searchLabel: 'Buscar',
+    searchPlaceholder: 'Buscar por bosses ou membros',
     event: 'Evento',
     checkEntry: '{{member}} checou {{boss}}',
     emptyState: 'Nenhuma checagem',

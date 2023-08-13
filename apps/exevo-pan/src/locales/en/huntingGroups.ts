@@ -171,6 +171,8 @@ export default {
     loadMore: 'Show more',
   },
   CheckHistory: {
+    searchLabel: 'Search',
+    searchPlaceholder: 'Search for bosses or members',
     event: 'Event',
     checkEntry: '{{member}} checked {{boss}}',
     emptyState: 'No checks',

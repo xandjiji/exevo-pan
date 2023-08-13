@@ -14,10 +14,6 @@ type CheckHistoryProps = {
   guildId: string
 }
 
-// @ ToDo:
-// autocomplete input with bosses and users?
-// i18n
-
 const CheckHistory = ({ guildId }: CheckHistoryProps) => {
   const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.CheckHistory
@@ -60,8 +56,8 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
     <Table>
       <Input
         className="mb-6"
-        label="Search"
-        placeholder="Search for bosses or members"
+        label={i18n.searchLabel}
+        placeholder={i18n.searchPlaceholder}
         onChange={(e) => setSearchText(e.target.value)}
         allowClear
         stateIcon={isLoading && term && pageIndex === 0 ? 'loading' : 'neutral'}
