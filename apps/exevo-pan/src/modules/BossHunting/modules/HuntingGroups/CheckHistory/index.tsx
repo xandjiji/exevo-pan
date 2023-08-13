@@ -2,12 +2,12 @@ import clsx from 'clsx'
 import { useState } from 'react'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { Button, Input, Table } from 'components/Atoms'
+import { SearchIcon, ViewedIcon } from 'assets/svgs'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
-import { ViewedIcon } from 'assets/svgs'
 import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
-import { EventTimestamp, ListButton, TableIconWrapper } from './components'
-import { multipleSpawnLocationBosses } from '../../bossInfo'
+import { EventTimestamp, ListButton, TableIconWrapper } from '../components'
+import { multipleSpawnLocationBosses } from '../../../bossInfo'
 
 type CheckHistoryProps = {
   guildId: string
@@ -53,25 +53,39 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
   )
 
   const isLoading = query.isFetching
+  const isButtonDisabled = isLoading || !term
+
+  const handleSubmit = () => {
+    if (isButtonDisabled) return
+
+    setQueryTerm(term)
+    setPageIndex(0)
+  }
 
   return (
     <Table>
-      <div className="flex items-center gap-2">
+      <div className="flex items-center gap-4">
         <Input
-          className="mb-6"
+          className="mb-6 w-full grow"
           label="Search"
           placeholder="Search for bosses or members"
-          onChange={(e) => setTerm(e.target.value)}
+          onChange={(e) => {
+            const { value } = e.target
+            setTerm(value)
+            if (!value) handleSubmit()
+          }}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter') handleSubmit()
+          }}
           stateIcon={isLoading && queryTerm ? 'loading' : 'neutral'}
+          allowClear
         />
         <Button
-          onClick={() => {
-            setList([])
-            setQueryTerm(term)
-            setPageIndex(0)
-          }}
+          className="h-9 w-10 shrink-0 p-0"
+          disabled={isButtonDisabled}
+          onClick={handleSubmit}
         >
-          Go
+          <SearchIcon className="h-4 w-4" />
         </Button>
       </div>
 
