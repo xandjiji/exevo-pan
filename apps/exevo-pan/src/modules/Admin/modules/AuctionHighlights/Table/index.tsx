@@ -3,37 +3,38 @@ import { useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import {
+  Alert,
+  Button,
+  CharacterLink,
+  Chip,
+  Dialog,
   LoadingAlert,
   Table,
-  Dialog,
-  Button,
-  Alert,
-  Chip,
   Text,
 } from 'components/Atoms'
 import {
-  MoreHorizontalIcon,
-  ThumbsUpIcon,
-  ThumbsDownIcon,
   CalendarDaysIcon,
+  ChevronDownIcon,
+  HourglassIcon,
+  MoreHorizontalIcon,
+  NewIcon,
   PauseIcon,
   PlayIcon,
+  ThumbsDownIcon,
+  ThumbsUpIcon,
   TrashIcon,
-  HourglassIcon,
   ViewedIcon,
-  NewIcon,
-  ChevronDownIcon,
 } from 'assets/svgs'
-import { Menu, Tooltip, RangeDatePicker } from 'components/Organisms'
+import { Menu, RangeDatePicker, Tooltip } from 'components/Organisms'
 import AuctionSummary from './AuctionSummary'
 import DateDiffGrid from './DateDiffGrid'
 import { useRangeDatePicker } from './useRangeDatePicker'
 import {
   getHighlightStatus,
-  isPastDate,
-  toReadableLocalizedDate,
-  offsettedCurrentISODate,
   getTimezoneDiff,
+  isPastDate,
+  offsettedCurrentISODate,
+  toReadableLocalizedDate,
 } from './utils'
 import { HighlightStatus } from './types'
 
@@ -215,6 +216,7 @@ const PaymentList = () => {
                 timezoneOffsetMinutes,
                 auctionEnd,
                 paymentMethod,
+                paymentCharacter,
                 price,
                 email,
               }) => (
@@ -302,13 +304,28 @@ const PaymentList = () => {
                       nickname={nickname}
                       lastUpdated={lastUpdated}
                     />
-                    <Chip gray title={email}>
-                      {paymentMethod === 'TIBIA_COINS' && (
-                        <Text.TibiaCoin value={price} />
-                      )}
-                      {paymentMethod === 'PIX' &&
-                        `R$ ${price.toFixed(2).replace('.', ',')}`}
-                    </Chip>
+                    <Tooltip
+                      offset={[0, 8]}
+                      placement="top"
+                      content={
+                        <div className="flex flex-col items-start gap-2">
+                          {!!paymentCharacter && (
+                            <CharacterLink nickname={paymentCharacter}>
+                              {paymentCharacter}
+                            </CharacterLink>
+                          )}
+                          <p>{email}</p>
+                        </div>
+                      }
+                    >
+                      <Chip gray>
+                        {paymentMethod === 'TIBIA_COINS' && (
+                          <Text.TibiaCoin value={price} />
+                        )}
+                        {paymentMethod === 'PIX' &&
+                          `R$ ${price.toFixed(2).replace('.', ',')}`}
+                      </Chip>
+                    </Tooltip>
                   </Table.Column>
                   <Table.Column>
                     <Menu
