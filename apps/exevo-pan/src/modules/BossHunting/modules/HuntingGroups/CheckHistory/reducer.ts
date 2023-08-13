@@ -1,8 +1,9 @@
 import type { TRPCRouteInputs, TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 
 export type QueryState = Required<TRPCRouteInputs['listGuildChecks']> & {
-  lastTerm: string
   list: TRPCRouteOutputs['listGuildChecks']
+  initiallyFetched: boolean
+  exhausted: boolean
 }
 
 export type Action =
@@ -10,7 +11,9 @@ export type Action =
   | { type: 'QUERY_TERM'; term: string }
   | { type: 'UPDATE_LIST'; list: QueryState['list'] }
 
-export const QueryReducer = (state: QueryState, action: Action): QueryState => {
+export const pageSize = 12
+
+export const queryReducer = (state: QueryState, action: Action): QueryState => {
   switch (action.type) {
     case 'NEXT_PAGE':
       return { ...state, pageIndex: state.pageIndex + 1 }
@@ -19,11 +22,12 @@ export const QueryReducer = (state: QueryState, action: Action): QueryState => {
       return { ...state, term: action.term, pageIndex: 0 }
 
     case 'UPDATE_LIST': {
-      const sameTerm = state.lastTerm === state.term
+      const resetList = state.pageIndex === 0
       return {
         ...state,
-        list: sameTerm ? [...state.list, ...action.list] : action.list,
-        lastTerm: state.term,
+        list: resetList ? action.list : [...state.list, ...action.list],
+        initiallyFetched: true,
+        exhausted: action.list.length < pageSize,
       }
     }
 

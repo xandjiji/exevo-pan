@@ -1,23 +1,21 @@
 import clsx from 'clsx'
-import { useState } from 'react'
+import { useEffect, useReducer, useState } from 'react'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import { Button, Input, Table } from 'components/Atoms'
-import { SearchIcon, ViewedIcon } from 'assets/svgs'
+import { Input, Table } from 'components/Atoms'
+import { ViewedIcon } from 'assets/svgs'
 import EmptyState from 'components/EmptyState'
+import { useDebounce } from 'hooks'
 import { trpc } from 'lib/trpc'
-import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import { EventTimestamp, ListButton, TableIconWrapper } from '../components'
 import { multipleSpawnLocationBosses } from '../../../bossInfo'
+import { pageSize, queryReducer } from './reducer'
 
 type CheckHistoryProps = {
   guildId: string
 }
 
-const pageSize = 10
-
 // @ ToDo:
-// enter action
-// clear action?
+// autocomplete input with bosses and users?
 // styling
 // i18n
 
@@ -25,69 +23,49 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
   const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.CheckHistory
 
-  const [term, setTerm] = useState('')
-  const [queryTerm, setQueryTerm] = useState(term)
+  const [{ pageIndex, term, list, exhausted, initiallyFetched }, dispatch] =
+    useReducer(queryReducer, {
+      guildId,
+      pageIndex: 0,
+      pageSize,
+      term: '',
+      list: [],
+      initiallyFetched: false,
+      exhausted: false,
+    })
 
-  const [pageIndex, setPageIndex] = useState(0)
-  const [list, setList] = useState<TRPCRouteOutputs['listGuildChecks']>([])
-  const [{ initiallyFetched, exhausted }, setQueryStatus] = useState({
-    initiallyFetched: false,
-    exhausted: false,
-  })
+  const [searchText, setSearchText] = useState(term)
+  const debouncedTerm = useDebounce(searchText)
+
+  useEffect(
+    () => dispatch({ type: 'QUERY_TERM', term: debouncedTerm }),
+    [debouncedTerm],
+  )
 
   const query = trpc.listGuildChecks.useQuery(
     {
       guildId,
       pageIndex,
       pageSize,
-      term: queryTerm,
+      term,
     },
     {
       keepPreviousData: true,
-      onSuccess: (data) => {
-        const queryExhausted = data.length === 0 || data.length < pageSize
-        setQueryStatus({ initiallyFetched: true, exhausted: queryExhausted })
-        setList((prev) => [...prev, ...data])
-      },
+      onSuccess: (data) => dispatch({ type: 'UPDATE_LIST', list: data }),
     },
   )
 
   const isLoading = query.isFetching
-  const isButtonDisabled = isLoading || !term
-
-  const handleSubmit = () => {
-    if (isButtonDisabled) return
-
-    setQueryTerm(term)
-    setPageIndex(0)
-  }
 
   return (
     <Table>
-      <div className="flex items-center gap-4">
-        <Input
-          className="mb-6 w-full grow"
-          label="Search"
-          placeholder="Search for bosses or members"
-          onChange={(e) => {
-            const { value } = e.target
-            setTerm(value)
-            if (!value) handleSubmit()
-          }}
-          onKeyPress={(e) => {
-            if (e.key === 'Enter') handleSubmit()
-          }}
-          stateIcon={isLoading && queryTerm ? 'loading' : 'neutral'}
-          allowClear
-        />
-        <Button
-          className="h-9 w-10 shrink-0 p-0"
-          disabled={isButtonDisabled}
-          onClick={handleSubmit}
-        >
-          <SearchIcon className="h-4 w-4" />
-        </Button>
-      </div>
+      <Input
+        className="mb-6 max-w-[120px]"
+        label="Search"
+        placeholder="Search for bosses or members"
+        onChange={(e) => setSearchText(e.target.value)}
+        allowClear
+      />
 
       {list.length > 0 && (
         <Table.Element>
@@ -147,7 +125,7 @@ const CheckHistory = ({ guildId }: CheckHistoryProps) => {
       {!exhausted && (
         <ListButton
           isLoading={isLoading}
-          onClick={() => setPageIndex((prev) => prev + 1)}
+          onClick={() => dispatch({ type: 'NEXT_PAGE' })}
           className="mx-auto"
         >
           {i18n.loadMore}
