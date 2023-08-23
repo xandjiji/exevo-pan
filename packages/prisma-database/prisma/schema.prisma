@@ -294,6 +294,8 @@ model BossCheckLog {
 
     @@index([guildId])
     @@index([memberId])
+    @@index([checkedAt])
+    @@index([guildId, checkedAt])
 }
 
 model CachedBossCheckStatistics {
