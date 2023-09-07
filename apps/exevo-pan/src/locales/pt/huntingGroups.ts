@@ -164,6 +164,8 @@ export default defaultComposer(defaultTranslations, {
     successToast: 'Grupo foi atualizado com sucesso!',
   },
   LogHistory: {
+    searchLabel: 'Buscar',
+    searchPlaceholder: 'Buscar por bosses ou membros',
     event: 'Evento',
     leave: '{{name}} saiu do grupo',
     reject: '{{actor}} rejeitou a solicitação de {{target}}',
