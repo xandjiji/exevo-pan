@@ -717,12 +717,16 @@ export const listGuildLog = authedProcedure
   .input(
     z.object({
       guildId: z.string(),
+      term: z.string(),
       pageSize: z.number().optional().default(20),
       pageIndex: z.number().optional().default(0),
     }),
   )
   .query(
-    async ({ ctx: { token }, input: { guildId, pageIndex, pageSize } }) => {
+    async ({
+      ctx: { token },
+      input: { guildId, term, pageIndex, pageSize },
+    }) => {
       const userId = token.id
       const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
 
@@ -730,8 +734,21 @@ export const listGuildLog = authedProcedure
         await findGuildMember({ guildId, userId })
       }
 
+      const queryTerm = term ? { contains: term } : undefined
+
       const result = await prisma.guildLogEntry.findMany({
-        where: { guildId },
+        where: {
+          guildId,
+          AND: {
+            OR: [
+              { metadata: queryTerm },
+              {
+                targetGuildMember: { name: queryTerm },
+              },
+              { actionGuildMember: { name: queryTerm } },
+            ],
+          },
+        },
         include: {
           actionGuildMember: { select: { name: true } },
           targetGuildMember: { select: { name: true } },
@@ -767,7 +784,6 @@ export const listGuildChecks = authedProcedure
       }
 
       const queryTerm = term ? { contains: term } : undefined
-      console.log({ term, queryTerm })
 
       const result = await prisma.bossCheckLog.findMany({
         where: {

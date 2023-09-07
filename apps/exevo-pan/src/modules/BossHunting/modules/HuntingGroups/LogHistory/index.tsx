@@ -1,18 +1,19 @@
 import clsx from 'clsx'
-import { useState } from 'react'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
-import { Table } from 'components/Atoms'
+import { useEffect, useReducer, useState } from 'react'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
+import { Input, Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
+import { useDebounce } from 'hooks'
 import { trpc } from 'lib/trpc'
 import {
-  PersonAddAltIcon,
-  PersonRemoveIcon,
   BlogIcon,
   OutlineRemoveIcon,
+  PersonAddAltIcon,
+  PersonRemoveIcon,
 } from 'assets/svgs'
-import type { TRPCRouteOutputs } from 'pages/api/trpc/[trpc]'
 import type { LOG_ENTRY_TYPE } from '@prisma/client'
-import { TableIconWrapper, EventTimestamp, ListButton } from './components'
+import { pageSize, queryReducer } from './reducer'
+import { EventTimestamp, ListButton, TableIconWrapper } from '../components'
 
 type LogHistoryProps = {
   guildId: string
@@ -20,32 +21,39 @@ type LogHistoryProps = {
 
 type LogEntryElement = Record<LOG_ENTRY_TYPE, React.ReactNode>
 
-const pageSize = 10
-
 const LogHistory = ({ guildId }: LogHistoryProps) => {
   const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.LogHistory
 
-  const [pageIndex, setPageIndex] = useState(0)
-  const [list, setList] = useState<TRPCRouteOutputs['listGuildLog']>([])
-  const [{ initiallyFetched, exhausted }, setQueryStatus] = useState({
-    initiallyFetched: false,
-    exhausted: false,
-  })
+  const [{ pageIndex, term, list, exhausted, initiallyFetched }, dispatch] =
+    useReducer(queryReducer, {
+      guildId,
+      pageIndex: 0,
+      pageSize,
+      term: '',
+      list: [],
+      initiallyFetched: false,
+      exhausted: false,
+    })
+
+  const [searchText, setSearchText] = useState(term)
+  const debouncedTerm = useDebounce(searchText)
+
+  useEffect(
+    () => dispatch({ type: 'QUERY_TERM', term: debouncedTerm }),
+    [debouncedTerm],
+  )
 
   const query = trpc.listGuildLog.useQuery(
     {
       guildId,
       pageIndex,
       pageSize,
+      term,
     },
     {
       keepPreviousData: true,
-      onSuccess: (data) => {
-        const queryExhausted = data.length === 0 || data.length < pageSize
-        setQueryStatus({ initiallyFetched: true, exhausted: queryExhausted })
-        setList((prev) => [...prev, ...data])
-      },
+      onSuccess: (data) => dispatch({ type: 'UPDATE_LIST', list: data }),
     },
   )
 
@@ -53,6 +61,15 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
 
   return (
     <Table>
+      <Input
+        className="mb-6"
+        label={i18n.searchLabel}
+        placeholder={i18n.searchPlaceholder}
+        onChange={(e) => setSearchText(e.target.value)}
+        allowClear
+        stateIcon={isLoading && term && pageIndex === 0 ? 'loading' : 'neutral'}
+      />
+
       {list.length > 0 && (
         <Table.Element>
           <Table.Head>
@@ -167,9 +184,9 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
 
       {!exhausted && (
         <ListButton
-          className="mx-auto"
           isLoading={isLoading}
-          onClick={() => setPageIndex((prev) => prev + 1)}
+          onClick={() => dispatch({ type: 'NEXT_PAGE' })}
+          className="mx-auto"
         >
           {i18n.loadMore}
         </ListButton>

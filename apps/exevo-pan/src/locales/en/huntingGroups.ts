@@ -161,6 +161,8 @@ export default {
     successToast: 'Group was updated successfully!',
   },
   LogHistory: {
+    searchLabel: 'Search',
+    searchPlaceholder: 'Search for bosses or members',
     event: 'Event',
     leave: '{{name}} left the group',
     reject: '{{actor}} rejected {{target}} application',
