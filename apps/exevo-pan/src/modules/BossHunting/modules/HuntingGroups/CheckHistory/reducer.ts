@@ -11,7 +11,7 @@ export type Action =
   | { type: 'QUERY_TERM'; term: string }
   | { type: 'UPDATE_LIST'; list: QueryState['list'] }
 
-export const pageSize = 12
+export const pageSize = 10
 
 export const queryReducer = (state: QueryState, action: Action): QueryState => {
   switch (action.type) {
