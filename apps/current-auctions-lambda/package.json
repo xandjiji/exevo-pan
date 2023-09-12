@@ -21,14 +21,14 @@
     "shared-utils": "*"
   },
   "devDependencies": {
-    "@types/aws-lambda": "^8.10.101",
+    "@types/aws-lambda": "^8.10.79",
     "@types/exevo-pan": "*",
     "@types/node": "^18.11.9",
     "config": "*",
     "serverless-domain-manager": "^6.0.2",
-    "serverless-offline": "^9.1.0",
+    "serverless-offline": "^8.5.0",
     "serverless-plugin-optimize": "^4.2.1-rc.1",
-    "serverless-plugin-typescript": "^2.1.2",
+    "serverless-plugin-typescript": "^1.1.9",
     "typescript": "^4.3.2"
   }
 }
