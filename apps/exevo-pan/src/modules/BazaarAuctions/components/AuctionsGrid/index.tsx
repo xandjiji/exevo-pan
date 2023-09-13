@@ -124,7 +124,8 @@ const AuctionsGrid = () => {
 
       <div className="inner-container grid gap-4 py-4">
         <div className="mb-2 grid gap-2">
-          <p className="text-tsm font-ligh">
+          <p className="text-tsm font-light">
+            Featured on{' '}
             <a
               target="_blank"
               href="https://tibiatrade.gg/"
@@ -132,8 +133,8 @@ const AuctionsGrid = () => {
               className="text-primaryHighlight font-bold tracking-wide"
             >
               TibiaTrade
-            </a>{' '}
-            featured:
+            </a>
+            :
           </p>
 
           <div className="custom-scrollbar -mb-2 flex w-full gap-4 overflow-auto pb-2">
