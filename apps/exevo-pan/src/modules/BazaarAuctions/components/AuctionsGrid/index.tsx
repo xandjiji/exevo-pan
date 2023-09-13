@@ -123,6 +123,26 @@ const AuctionsGrid = () => {
       </ClientComponent>
 
       <div className="inner-container grid gap-4 py-4">
+        <div className="mb-2 grid gap-2">
+          <p className="text-tsm font-ligh">
+            <a
+              target="_blank"
+              href="https://tibiatrade.gg/"
+              rel="noreferrer"
+              className="text-primaryHighlight font-bold tracking-wide"
+            >
+              TibiaTrade
+            </a>{' '}
+            featured:
+          </p>
+
+          <div className="custom-scrollbar -mb-2 flex w-full gap-4 overflow-auto pb-2">
+            <TibiaTrade.ItemAd />
+            <TibiaTrade.ItemAd />
+            <TibiaTrade.ItemAd />
+          </div>
+        </div>
+
         <FilterControl />
 
         {isFavorites && (
@@ -132,7 +152,7 @@ const AuctionsGrid = () => {
         <AuctionNotificationsProvider>
           <div
             id="character-grid"
-            className="lgr:grid-cols-3 grid w-full justify-center gap-4 md:grid-cols-2 md:after:order-last md:after:col-span-full 2xl:grid-cols-4"
+            className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
           >
             {isFavorites ? (
               <>
@@ -171,36 +191,21 @@ const AuctionsGrid = () => {
               </>
             ) : (
               <>
-                <div className="lgr:order-[11] custom-scrollbar order-[16] col-span-full -mb-2 flex w-full gap-4 overflow-auto pb-2 2xl:order-[16]">
-                  <TibiaTrade.ItemAd />
-                  <TibiaTrade.ItemAd />
-                  <TibiaTrade.ItemAd />
-                </div>
-
                 {shouldDisplayHighlightedAuctions &&
-                  highlightedAuctions.map((characterData, idx) => (
+                  highlightedAuctions.map((characterData) => (
                     <ExpandableCharacterCard
                       key={`${characterData.id}-highlighted`}
                       characterData={characterData}
                       highlightedAuctions={highlightedAuctions}
-                      style={{ order: idx * 5 }}
                     />
                   ))}
-                {paginatedData.page.map((characterData, idx) => (
+                {paginatedData.page.map((characterData) => (
                   <ExpandableCharacterCard
                     key={characterData.id}
                     forceNoHighlight={shouldDisplayHighlightedAuctions}
                     highlightedAuctions={highlightedAuctions}
                     characterData={characterData}
                     past={mode === 'history'}
-                    style={{
-                      order:
-                        (idx +
-                          (shouldDisplayHighlightedAuctions
-                            ? highlightedAuctions.length
-                            : 0)) *
-                        5,
-                    }}
                   />
                 ))}
               </>

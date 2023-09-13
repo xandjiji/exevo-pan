@@ -33,12 +33,10 @@ const item = {
   is_guildhall: false,
 }
 
-// @ ToDo: first & last selector should be removed
-
 export const ItemAd = () => (
   <a
     href="https://tibiatrade.gg/trade/Sanguine-Bow-21661"
-    className="card flex items-center gap-4 first:ml-auto last:mr-auto"
+    className="card flex items-center gap-4"
     target="_blank"
     rel="noreferrer"
   >
