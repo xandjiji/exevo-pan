@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { ActiveCount, Paginator, TibiaTrade } from 'components/Atoms'
+import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
@@ -14,6 +14,7 @@ import { useSettledMode } from './useSettledMode'
 import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
+import { TibiaTradeBanner } from './TibiaTradeBanner'
 import * as S from './atoms'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
@@ -123,26 +124,7 @@ const AuctionsGrid = () => {
       </ClientComponent>
 
       <div className="inner-container grid gap-4 py-4">
-        <div className="mb-2 grid gap-2">
-          <p className="text-tsm font-light">
-            Featured on{' '}
-            <a
-              target="_blank"
-              href="https://tibiatrade.gg/"
-              rel="noreferrer"
-              className="text-primaryHighlight font-bold tracking-wide"
-            >
-              TibiaTrade
-            </a>
-            :
-          </p>
-
-          <div className="custom-scrollbar -mb-2 flex w-full gap-4 overflow-auto pb-2">
-            <TibiaTrade.ItemAd />
-            <TibiaTrade.ItemAd />
-            <TibiaTrade.ItemAd />
-          </div>
-        </div>
+        <TibiaTradeBanner className="mb-2" items={[]} />
 
         <FilterControl />
 
