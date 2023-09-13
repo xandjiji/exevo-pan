@@ -1,55 +1,48 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
+import { links } from 'Constants'
 import { Chip, SpritePortrait, Text } from 'components/Atoms'
 import yellowSrc from 'assets/yellowbattleye.png'
 import greenSrc from 'assets/greenbattleye.png'
 
 // @ ToDo:
 // i18n
-// link constants
-// <Item /> resolve url
 
 type TibiaTradeBannerProps = {
-  items: number[]
+  items: TibiaTradeHighlightedItem[]
 } & React.ComponentPropsWithoutRef<'section'>
 
-const item = {
-  id: 21661,
-  item_name: 'Sanguine Bow',
-  item_amount: 1,
-  item_id: 5124,
-  house_id: null,
-  item_tier: 0,
-  item_look:
-    'You see a sanguine bow (Range:6, Atk+9, Hit%+6, distance fighting +4, critical hit chance 10%, critical extra damage +12%, protection earth +6%).\nAugments: (Divine Caldera -> Strong Impact).\nImbuement Slots: 3.\nClassification: 4 Tier: item_tier.\nIt can only be wielded properly by paladins of level 600 or higher.\nIt weighs 47.00 oz.',
-  username: 'fendall',
-  user_id: 428,
-  price: '24000',
-  currency_type: 1,
-  type: 0,
-  world_id: 74,
-  world_name: 'Utobra',
-  world_pvp_type: 'Open PvP',
-  world_battleye_color: 'green',
-  created_at: '2023-09-13T12:21:21.359Z',
-  is_closed: 0,
-  is_rookgaard: false,
-  is_user_verified: true,
-  likes: 0,
-  highlighted_until: '2023-09-13T14:06:39.838Z',
-  is_guildhall: false,
+const TIBIA_TRADE_BASE_URL = links.TIBIA_TRADE
+
+const resolve = {
+  link: (item: TibiaTradeHighlightedItem) => {
+    const base = `${TIBIA_TRADE_BASE_URL}/trade`
+    if (item.house_id === null) {
+      return `${base}/${item.item_name.replaceAll(' ', '-')}-${item.id}`
+    }
+
+    return `${base}/${item.house_name.replaceAll(' ', '-')}-${item.id}`
+  },
+  imgSrc: (item: TibiaTradeHighlightedItem) => {
+    const base = `${TIBIA_TRADE_BASE_URL}/images`
+    if (item.house_id === null) {
+      return `${base}/item/${item.item_name.replaceAll(' ', '_')}.gif`
+    }
+
+    return `${base}/house/location/${item.tibia_id}`
+  },
 }
 
-export const Item = () => (
+export const Item = ({ item }: { item: TibiaTradeHighlightedItem }) => (
   <a
-    href="https://tibiatrade.gg/trade/Sanguine-Bow-21661"
     className="card flex items-center gap-4"
+    href={resolve.link(item)}
     target="_blank"
-    rel="noreferrer"
+    rel="noopener external nofollow noreferrer"
   >
     <SpritePortrait
-      src="https://tibiatrade.gg/images/item/Sanguine_Bow.gif"
+      src={resolve.imgSrc(item)}
       alt="Sanguine Bow"
       width={32}
       height={32}
@@ -100,9 +93,10 @@ export const TibiaTradeBanner = ({
       </p>
 
       <div className="custom-scrollbar -mb-2 flex w-full gap-4 overflow-auto pb-2">
-        <Item />
-        <Item />
-        <Item />
+        {items.map((item, idx) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <Item key={idx} item={item} />
+        ))}
       </div>
     </section>
   )

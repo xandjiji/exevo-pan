@@ -19,7 +19,11 @@ import * as S from './atoms'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-const AuctionsGrid = () => {
+type AuctionsGridProps = {
+  tibiaTradeItems: TibiaTradeHighlightedItem[]
+}
+
+const AuctionsGrid = ({ tibiaTradeItems }: AuctionsGridProps) => {
   const { homepage } = useTranslations()
 
   const {
@@ -124,7 +128,9 @@ const AuctionsGrid = () => {
       </ClientComponent>
 
       <div className="inner-container grid gap-4 py-4">
-        <TibiaTradeBanner className="mb-2" items={[]} />
+        {tibiaTradeItems.length > 0 && (
+          <TibiaTradeBanner className="mb-2" items={tibiaTradeItems} />
+        )}
 
         <FilterControl />
 

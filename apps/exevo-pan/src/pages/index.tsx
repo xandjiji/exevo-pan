@@ -2,18 +2,22 @@ import { useRef } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
 import {
-  DrawerFieldsProvider,
-  AuctionsProvider,
   AuctionsGrid,
+  AuctionsProvider,
+  DrawerFieldsProvider,
   UrlAuction,
 } from 'modules/BazaarAuctions'
 import Newsticker from 'components/Newsticker'
 import { BlogClient, PreviewImageClient } from 'services'
-import { DrawerFieldsClient, AuctionsClient } from 'services/server'
+import {
+  AuctionsClient,
+  DrawerFieldsClient,
+  TibiaTradeClient,
+} from 'services/server'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, homepage } from 'locales'
 
 const pageUrl = buildUrl(routes.HOME)
@@ -25,6 +29,7 @@ type HomeStaticProps = {
   initialPaginatedData: PaginatedData<CharacterObject>
   highlightedAuctions: CharacterObject[]
   blogPosts: BlogPost[]
+  tibiaTradeItems: TibiaTradeHighlightedItem[]
 }
 
 export default function Home({
@@ -34,6 +39,7 @@ export default function Home({
   initialPaginatedData,
   highlightedAuctions,
   blogPosts,
+  tibiaTradeItems,
 }: HomeStaticProps) {
   const translations = useTranslations()
 
@@ -115,7 +121,7 @@ export default function Home({
             highlightedAuctions={highlightedAuctions}
             initialPaginatedData={initialPaginatedData}
           >
-            <AuctionsGrid />
+            <AuctionsGrid tibiaTradeItems={tibiaTradeItems} />
           </AuctionsProvider>
         </DrawerFieldsProvider>
       </Main>
@@ -131,6 +137,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     initialPaginatedData,
     highlightedAuctions,
     localizedBlogPosts,
+    tibiaTradeItems,
   ] = await Promise.all([
     DrawerFieldsClient.fetchActiveServerOptions(),
     DrawerFieldsClient.fetchServerData(),
@@ -138,6 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     AuctionsClient.fetchAuctionPage({ history: false }),
     AuctionsClient.fetchHighlightedAuctions(),
     await BlogClient.getEveryPostLocale({ pageSize: 3 }),
+    await TibiaTradeClient.getHighlightedItems(),
   ])
 
   return {
@@ -152,6 +160,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       initialPaginatedData,
       highlightedAuctions,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
+      tibiaTradeItems,
     },
   }
 }
