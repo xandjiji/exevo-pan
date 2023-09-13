@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
@@ -132,7 +132,7 @@ const AuctionsGrid = () => {
         <AuctionNotificationsProvider>
           <div
             id="character-grid"
-            className="grid w-full grid-cols-[minmax(0,440px)] justify-center gap-4 md:grid-cols-[repeat(auto-fit,minmax(320px,1fr))] md:after:col-span-full"
+            className="lgr:grid-cols-3 grid w-full justify-center gap-4 md:grid-cols-2 md:after:order-last md:after:col-span-full 2xl:grid-cols-4"
           >
             {isFavorites ? (
               <>
@@ -171,21 +171,50 @@ const AuctionsGrid = () => {
               </>
             ) : (
               <>
+                {/* small */}
+                <div
+                  className="bg-red lgr:hidden col-span-full h-16 2xl:block"
+                  style={{ order: 16 }}
+                />
+                <div
+                  className="bg-red lgr:hidden col-span-full h-16 2xl:block"
+                  style={{ order: 36 }}
+                />
+
+                {/* lgr */}
+                <div
+                  className="bg-red lgr:block col-span-full hidden h-16 2xl:hidden"
+                  style={{ order: 11 }}
+                />
+                <div
+                  className="bg-red lgr:block col-span-full hidden h-16 2xl:hidden"
+                  style={{ order: 26 }}
+                />
+
                 {shouldDisplayHighlightedAuctions &&
-                  highlightedAuctions.map((characterData) => (
+                  highlightedAuctions.map((characterData, idx) => (
                     <ExpandableCharacterCard
                       key={`${characterData.id}-highlighted`}
                       characterData={characterData}
                       highlightedAuctions={highlightedAuctions}
+                      style={{ order: idx * 5 }}
                     />
                   ))}
-                {paginatedData.page.map((characterData) => (
+                {paginatedData.page.map((characterData, idx) => (
                   <ExpandableCharacterCard
                     key={characterData.id}
                     forceNoHighlight={shouldDisplayHighlightedAuctions}
                     highlightedAuctions={highlightedAuctions}
                     characterData={characterData}
                     past={mode === 'history'}
+                    style={{
+                      order:
+                        (idx +
+                          (shouldDisplayHighlightedAuctions
+                            ? highlightedAuctions.length
+                            : 0)) *
+                        5,
+                    }}
                   />
                 ))}
               </>
