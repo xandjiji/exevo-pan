@@ -2,7 +2,7 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import { ActiveCount, Paginator } from 'components/Atoms'
+import { ActiveCount, Paginator, TibiaTrade } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { FilterIcon } from 'assets/svgs'
@@ -171,25 +171,11 @@ const AuctionsGrid = () => {
               </>
             ) : (
               <>
-                {/* small */}
-                <div
-                  className="bg-red lgr:hidden col-span-full h-16 2xl:block"
-                  style={{ order: 16 }}
-                />
-                <div
-                  className="bg-red lgr:hidden col-span-full h-16 2xl:block"
-                  style={{ order: 36 }}
-                />
-
-                {/* lgr */}
-                <div
-                  className="bg-red lgr:block col-span-full hidden h-16 2xl:hidden"
-                  style={{ order: 11 }}
-                />
-                <div
-                  className="bg-red lgr:block col-span-full hidden h-16 2xl:hidden"
-                  style={{ order: 26 }}
-                />
+                <div className="lgr:order-[11] custom-scrollbar order-[16] col-span-full -mb-2 flex w-full gap-4 overflow-auto pb-2 2xl:order-[16]">
+                  <TibiaTrade.ItemAd />
+                  <TibiaTrade.ItemAd />
+                  <TibiaTrade.ItemAd />
+                </div>
 
                 {shouldDisplayHighlightedAuctions &&
                   highlightedAuctions.map((characterData, idx) => (
