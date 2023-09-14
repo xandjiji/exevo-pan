@@ -4,11 +4,11 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { useRouter } from 'next/router'
-import { useSession, getProviders } from 'next-auth/react'
-import { buildUrl, buildPageTitle, addLocalePrefix } from 'utils'
+import { getProviders, useSession } from 'next-auth/react'
+import { addLocalePrefix, buildPageTitle, buildUrl } from 'utils'
 import { ExevoPanIcon } from 'assets/svgs'
 import SignIn from 'components/SignIn'
-import { routes, jsonld } from 'Constants'
+import { jsonld, routes } from 'Constants'
 import { AuthProviders } from 'types/next-auth'
 import { common, login } from 'locales'
 
@@ -27,7 +27,9 @@ export default function Login({ providers }: LoginStaticProps) {
   const { data: session } = useSession()
 
   useEffect(() => {
-    if (session) push(addLocalePrefix({ route: routes.DASHBOARD.ROOT, locale }))
+    if (session) {
+      push(addLocalePrefix({ route: routes.DASHBOARD.ROOT, locale }))
+    }
   }, [session])
 
   return (
@@ -84,8 +86,8 @@ export default function Login({ providers }: LoginStaticProps) {
       </Head>
 
       <Main>
-        <main className="inner-container grid place-items-center py-4">
-          <div className="grid place-items-center gap-10">
+        <main className="inner-container flex justify-center py-4">
+          <div className="flex flex-col items-center justify-center gap-10">
             <ExevoPanIcon width={120} height={120} />
 
             <SignIn
