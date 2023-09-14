@@ -295,6 +295,9 @@ model BossCheckLog {
     @@index([guildId])
     @@index([memberId])
     @@index([checkedAt])
+    @@index([location])
+    @@index([boss])
+    @@index([boss, location])
     @@index([guildId, checkedAt])
 }
 
