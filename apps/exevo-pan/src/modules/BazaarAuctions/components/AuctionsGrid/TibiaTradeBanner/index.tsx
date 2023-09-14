@@ -28,6 +28,7 @@ export const Item = ({ item }: { item: TibiaTradeHighlightedItem }) => {
         alt={item.name}
         width={32}
         height={32}
+        counter={item.tier > 0 ? item.tier : undefined}
         className="relative top-0 transition-all group-hover:-top-0.5"
       />
 

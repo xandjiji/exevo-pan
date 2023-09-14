@@ -74,4 +74,5 @@ declare type TibiaTradeHighlightedItem = {
     price: number
     currency: 'tc' | 'gp'
   } | null
+  tier: number
 }

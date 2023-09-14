@@ -41,6 +41,7 @@ const tryTransform = (
             },
       serverName: item.world_name,
       greenBattleye: item.world_battleye_color === 'green',
+      tier: item.item_tier,
     }
 
     return transformed
