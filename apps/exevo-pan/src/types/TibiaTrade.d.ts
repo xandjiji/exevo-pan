@@ -36,25 +36,41 @@ type HouseAttributes = {
   item_look?: never
 }
 
+declare type TibiaTradeApiResponse = {
+  ads: Array<
+    {
+      id: number
+      item_amount: number
+      item_id: number
+      item_tier: number
+      username: string
+      user_id: number
+      price: number // 0 -> offers
+      currency_type: number // 0 -> gold // 1 -> TC // 2 -> both
+      type: number // 0 -> sell // 1 -> buy
+      world_id: number
+      world_name: string
+      world_pvp_type: string
+      world_battleye_color: string // green | yellow
+      created_at: string
+      is_closed: number
+      is_rookgaard: boolean
+      is_user_verified: boolean
+      likes: number
+      highlighted_until: string
+      is_guildhall: boolean
+    } & (ItemAttributes | HouseAttributes)
+  >
+}
+
 declare type TibiaTradeHighlightedItem = {
-  id: number
-  item_amount: number
-  item_id: number
-  item_tier: number
-  username: string
-  user_id: number
-  price: number // 0 -> offers
-  currency_type: number // 0 -> gold // 1 -> TC // 2 -> both
-  type: number // 0 -> sell // 1 -> buy
-  world_id: number
-  world_name: string
-  world_pvp_type: string
-  world_battleye_color: string // green | yellow
-  created_at: string
-  is_closed: number
-  is_rookgaard: boolean
-  is_user_verified: boolean
-  likes: number
-  highlighted_until: string
-  is_guildhall: boolean
-} & (ItemAttributes | HouseAttributes)
+  url: string
+  imgSrc: string
+  offer: 'buy' | 'sell'
+  greenBattleye: boolean
+  serverName: string
+  value?: {
+    price: number
+    currency: 'tc' | 'gp'
+  }
+}

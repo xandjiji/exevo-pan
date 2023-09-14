@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import Image from 'next/image'
-import { links } from 'Constants'
 import { Chip, SpritePortrait, Text } from 'components/Atoms'
 import yellowSrc from 'assets/yellowbattleye.png'
 import greenSrc from 'assets/greenbattleye.png'
@@ -12,27 +11,6 @@ import greenSrc from 'assets/greenbattleye.png'
 type TibiaTradeBannerProps = {
   items: TibiaTradeHighlightedItem[]
 } & React.ComponentPropsWithoutRef<'section'>
-
-const TIBIA_TRADE_BASE_URL = links.TIBIA_TRADE
-
-const resolve = {
-  link: (item: TibiaTradeHighlightedItem) => {
-    const base = `${TIBIA_TRADE_BASE_URL}/trade`
-    if (item.house_id === null) {
-      return `${base}/${item.item_name.replaceAll(' ', '-')}-${item.id}`
-    }
-
-    return `${base}/${item.house_name.replaceAll(' ', '-')}-${item.id}`
-  },
-  imgSrc: (item: TibiaTradeHighlightedItem) => {
-    const base = `${TIBIA_TRADE_BASE_URL}/images`
-    if (item.house_id === null) {
-      return `${base}/item/${item.item_name.replaceAll(' ', '_')}.gif`
-    }
-
-    return `${base}/house/location/${item.tibia_id}`
-  },
-}
 
 export const Item = ({ item }: { item: TibiaTradeHighlightedItem }) => (
   <a
