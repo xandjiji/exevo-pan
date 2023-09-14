@@ -18,7 +18,7 @@ export const Item = ({ item }: { item: TibiaTradeHighlightedItem }) => {
 
   return (
     <a
-      className="card flex items-center gap-4"
+      className="card group flex items-center gap-4"
       href={item.url}
       target="_blank"
       rel="noopener external nofollow noreferrer"
@@ -28,6 +28,7 @@ export const Item = ({ item }: { item: TibiaTradeHighlightedItem }) => {
         alt={item.name}
         width={32}
         height={32}
+        className="relative top-0 transition-all group-hover:-top-0.5"
       />
 
       <div className="grid gap-2">
