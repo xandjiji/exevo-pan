@@ -163,7 +163,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       initialPaginatedData,
       highlightedAuctions,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
-      tibiaTradeItems: tibiaTradeResponse.items,
+      tibiaTradeItems: tibiaTradeResponse.items.slice(0, 4),
       badTibiaTradeIds: tibiaTradeResponse.badIds.join(','),
     },
   }
