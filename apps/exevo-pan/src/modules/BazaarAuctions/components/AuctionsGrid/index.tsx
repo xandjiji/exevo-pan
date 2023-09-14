@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { useState, useCallback, useRef, useEffect } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { DEFAULT_PAGINATION_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { ActiveCount, Paginator } from 'components/Atoms'
 import { ClientComponent } from 'components/Organisms'
@@ -14,11 +14,16 @@ import { useSettledMode } from './useSettledMode'
 import { useAuctions } from '../../contexts/useAuctions'
 import FilterDrawer from '../FilterDrawer'
 import SortingDialog from './SortingDialog'
+import { TibiaTradeBanner } from './TibiaTradeBanner'
 import * as S from './atoms'
 
 export const PAGE_SIZE = DEFAULT_PAGINATION_OPTIONS.pageSize
 
-const AuctionsGrid = () => {
+type AuctionsGridProps = {
+  tibiaTradeItems: TibiaTradeHighlightedItem[]
+}
+
+const AuctionsGrid = ({ tibiaTradeItems }: AuctionsGridProps) => {
   const { homepage } = useTranslations()
 
   const {
@@ -123,6 +128,10 @@ const AuctionsGrid = () => {
       </ClientComponent>
 
       <div className="inner-container grid gap-4 py-4">
+        {tibiaTradeItems.length > 0 && (
+          <TibiaTradeBanner className="mb-2" items={tibiaTradeItems} />
+        )}
+
         <FilterControl />
 
         {isFavorites && (

@@ -14,4 +14,5 @@ export const endpoints = {
   PREVIEW_IMAGES: '/api/og',
   REVALIDATE_PAGE: '/api/revalidate',
   REDIRECT_REVALIDATE: 'https://redirect-revalidate.exevopan.workers.dev/',
+  TIBIA_TRADE: 'https://tibiatrade.gg/api/trade/exevopan',
 }

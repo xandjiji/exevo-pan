@@ -22,6 +22,11 @@ export default {
       price: 'Price',
       priceBidded: 'Price (bidded only)',
     },
+    TibiaTradeBanner: {
+      heading: 'Featured on {{link}}:',
+      selling: 'Selling',
+      buying: 'Buying',
+    },
     separators: {
       current: 'Current auctions',
       history: 'Bazaar history',

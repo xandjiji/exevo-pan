@@ -23,4 +23,5 @@ export const links = {
   I18N: 'https://docs.google.com/spreadsheets/d/1t0fEtS2DqumaL9r_m8FeYnZ9Szh0Ay2R-jhbBHo-SlM/edit?usp=sharing',
   WEBHOOK_DOCS:
     'https://github.com/xandjiji/exevo-pan/tree/master/apps/exevo-pan/src/modules/BossHunting/modules/HuntingGroups/webhooks.md',
+  TIBIA_TRADE: 'https://tibiatrade.gg',
 }

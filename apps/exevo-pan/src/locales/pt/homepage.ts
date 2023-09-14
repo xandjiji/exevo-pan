@@ -28,6 +28,11 @@ export default defaultComposer(defaultTranslations, {
       current: 'Leilões atuais',
       history: 'Histórico do Bazaar',
     },
+    TibiaTradeBanner: {
+      heading: 'Encontre no {{link}}:',
+      selling: 'Vendendo',
+      buying: 'Comprando',
+    },
     noAuctionFound: 'Desculpe, nenhum leilão foi encontrado',
     noFavorites: 'Nenhum leilão favoritado',
     changeFilters: 'Mudar filtros',
