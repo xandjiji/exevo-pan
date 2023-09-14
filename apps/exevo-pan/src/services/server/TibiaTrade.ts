@@ -40,7 +40,7 @@ const tryTransform = (
               currency: item.currency_type === 0 ? 'gp' : 'tc',
             },
       serverName: item.world_name,
-      greenBattleye: item.world_pvp_type === 'green',
+      greenBattleye: item.world_battleye_color === 'green',
     }
 
     return transformed
