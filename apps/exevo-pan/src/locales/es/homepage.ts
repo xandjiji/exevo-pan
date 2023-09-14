@@ -27,6 +27,11 @@ export default defaultComposer(defaultTranslations, {
       price: 'Precio',
       priceBidded: 'Precio (solo con oferta)',
     },
+    TibiaTradeBanner: {
+      heading: 'Presentado en {{link}}:',
+      selling: 'Selling',
+      buying: 'Buying',
+    },
     separators: {},
     noAuctionFound: 'Disculpa, no se encontró ninguna subasta',
     noFavorites: null,
