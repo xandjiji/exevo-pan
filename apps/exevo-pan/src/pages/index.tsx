@@ -30,6 +30,7 @@ type HomeStaticProps = {
   highlightedAuctions: CharacterObject[]
   blogPosts: BlogPost[]
   tibiaTradeItems: TibiaTradeHighlightedItem[]
+  badTibiaTradeIds: string
 }
 
 export default function Home({
@@ -40,6 +41,7 @@ export default function Home({
   highlightedAuctions,
   blogPosts,
   tibiaTradeItems,
+  badTibiaTradeIds,
 }: HomeStaticProps) {
   const translations = useTranslations()
 
@@ -57,6 +59,7 @@ export default function Home({
     <>
       <Head>
         <title>{pageTitle}</title>
+        <meta name="tibia-trade-bad-ids" content={badTibiaTradeIds} />
         <meta name="title" content={pageTitle} />
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
@@ -137,7 +140,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     initialPaginatedData,
     highlightedAuctions,
     localizedBlogPosts,
-    tibiaTradeItems,
+    tibiaTradeResponse,
   ] = await Promise.all([
     DrawerFieldsClient.fetchActiveServerOptions(),
     DrawerFieldsClient.fetchServerData(),
@@ -160,7 +163,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       initialPaginatedData,
       highlightedAuctions,
       blogPosts: localizedBlogPosts[locale as RegisteredLocale],
-      tibiaTradeItems,
+      tibiaTradeItems: tibiaTradeResponse.items,
+      badTibiaTradeIds: tibiaTradeResponse.badIds.join(','),
     },
   }
 }

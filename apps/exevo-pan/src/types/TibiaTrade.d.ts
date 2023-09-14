@@ -64,13 +64,14 @@ declare type TibiaTradeApiResponse = {
 }
 
 declare type TibiaTradeHighlightedItem = {
+  name: string
   url: string
   imgSrc: string
   offer: 'buy' | 'sell'
   greenBattleye: boolean
   serverName: string
-  value?: {
+  value: {
     price: number
     currency: 'tc' | 'gp'
-  }
+  } | null
 }
