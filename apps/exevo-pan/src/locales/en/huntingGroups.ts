@@ -88,10 +88,12 @@ export default {
     ManagingModes: {
       Role: {
         heading: 'Change member role',
+        adminMessage: '⚠️ After this operation you will lose Admin status',
         cancel: 'Cancel',
         confirm: 'Confirm',
         successToast: '{{name}} was successfully updated!',
         options: {
+          admin: 'Admin',
           moderator: 'Moderator',
           member: 'Member',
         },

@@ -291,6 +291,7 @@ export const manageGuildMemberRole = authedProcedure
     z.object({
       managedGuildMemberId: z.string(),
       role: z.union([
+        z.literal<GUILD_MEMBER_ROLE>('ADMIN'),
         z.literal<GUILD_MEMBER_ROLE>('MODERATOR'),
         z.literal<GUILD_MEMBER_ROLE>('USER'),
       ]),
@@ -301,8 +302,9 @@ export const manageGuildMemberRole = authedProcedure
     const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const managedMember = await findGuildMember({ id: managedGuildMemberId })
 
+    let requesterMember: GuildMember | null = null
     if (!EXEVO_PAN_ADMIN) {
-      const requesterMember = await findGuildMember({
+      requesterMember = await findGuildMember({
         guildId: managedMember.guildId,
         userId: token.id,
       })
@@ -316,12 +318,31 @@ export const manageGuildMemberRole = authedProcedure
       }
     }
 
-    const result = prisma.guildMember.update({
-      where: { id: managedMember.id },
-      data: { role },
-    })
+    let updatedMembers: GuildMember[] = []
 
-    return result
+    if (role === 'ADMIN' && requesterMember !== null) {
+      const result = await prisma.$transaction([
+        prisma.guildMember.update({
+          where: { id: managedMember.id },
+          data: { role },
+        }),
+        prisma.guildMember.update({
+          where: { id: requesterMember.id },
+          data: { role: 'MODERATOR' },
+        }),
+      ])
+
+      updatedMembers = [...updatedMembers, ...result]
+    } else {
+      const result = await prisma.guildMember.update({
+        where: { id: managedMember.id },
+        data: { role },
+      })
+
+      updatedMembers.push(result)
+    }
+
+    return updatedMembers
   })
 
 export const excludeGuildMember = authedProcedure

@@ -91,10 +91,12 @@ export default defaultComposer(defaultTranslations, {
     ManagingModes: {
       Role: {
         heading: 'Alteração de role',
+        adminMessage: '⚠️ Depois desta operação você não será mais Admin',
         cancel: 'Cancelar',
         confirm: 'Confirmar',
         successToast: '{{name}} foi atualizado com sucesso!',
         options: {
+          admin: 'Admin',
           moderator: 'Moderador',
           member: 'Membro',
         },

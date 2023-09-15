@@ -2,17 +2,17 @@
 /* eslint-disable react/destructuring-assignment */
 import { useState } from 'react'
 import {
-  useTranslations,
-  templateString,
   templateMessage,
+  templateString,
+  useTranslations,
 } from 'contexts/useTranslation'
-import { Dialog, Button, Input } from 'components/Atoms'
+import { Button, Dialog, Input } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import { useRouter } from 'next/router'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import { guildValidationRules, routes } from 'Constants'
-import type { GuildMember, GUILD_MEMBER_ROLE } from '@prisma/client'
+import type { GUILD_MEMBER_ROLE, GuildMember } from '@prisma/client'
 import { useGuildData } from '../contexts/useGuildData'
 
 type ModeProps = {
@@ -27,13 +27,17 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
   const { setGuildData } = useGuildData()
 
   const manage = trpc.manageGuildMemberRole.useMutation({
-    onSuccess: (updatedMember) => {
+    onSuccess: (updatedMembers) => {
       setGuildData(({ members }) => ({
-        members: members.map((guildMember) =>
-          guildMember.id === updatedMember.id
-            ? { ...guildMember, role: updatedMember.role }
-            : guildMember,
-        ),
+        members: members.map((guildMember) => {
+          const thisMember = updatedMembers.find(
+            ({ id }) => id === guildMember.id,
+          )
+
+          return thisMember
+            ? { ...guildMember, role: thisMember.role }
+            : guildMember
+        }),
       }))
 
       toast.success(
@@ -45,6 +49,7 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
   })
 
   const roleOptions: TypedOption<GUILD_MEMBER_ROLE>[] = [
+    { name: i18n.options.admin, value: 'ADMIN' },
     { name: i18n.options.moderator, value: 'MODERATOR' },
     { name: i18n.options.member, value: 'USER' },
   ]
@@ -59,6 +64,9 @@ export const Role = ({ managedUser, onClose }: ModeProps) => {
         value={selectedRole}
         onChange={(e) => setSelectedRole(e.target.value as GUILD_MEMBER_ROLE)}
       />
+      {selectedRole === 'ADMIN' && (
+        <strong className="mt-2 block px-1 text-xs">{i18n.adminMessage}</strong>
+      )}
 
       <div className="mt-6 flex items-center justify-end gap-4">
         <Button pill hollow onClick={onClose}>
