@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+/* eslint-disable no-param-reassign */
 import { stripTime } from 'shared-utils/dist/time'
 import { z } from 'zod'
 import { authedProcedure, publicProcedure } from 'server/trpc'
@@ -923,18 +924,6 @@ export const listCheckedBosses = authedProcedure
 const countEntries = (entries: HuntingGroupsStatisticsEntry[]): number =>
   entries.reduce((acc, { count }) => acc + count, 0)
 
-const calculateStatisticsEntriesPercentages = (
-  entries: HuntingGroupsStatisticsEntry[],
-): HuntingGroupsStatisticsEntry[] => {
-  const totalCheckCount = countEntries(entries)
-
-  return entries.map(({ name, count }) => ({
-    name,
-    count,
-    percentage: Math.ceil((count / totalCheckCount) * 100),
-  }))
-}
-
 type Range = 'past' | 'current'
 
 const getMonthRange = (whichRange: Range): { gte: Date; lte: Date } => {
@@ -959,56 +948,81 @@ type BossCheckStatsArgs = {
   month: Range
 }
 
-const getCheckStatsBy = {
-  members: async ({
-    guildId,
-    month,
-  }: BossCheckStatsArgs): Promise<HuntingGroupsStatisticsEntry[]> =>
-    prisma.guildMember
-      .findMany({
-        where: { guildId },
-        select: {
-          name: true,
-          _count: {
-            select: {
-              bossCheckLog: {
-                where: { checkedAt: getMonthRange(month) },
-              },
-            },
-          },
-        },
-        orderBy: { bossCheckLog: { _count: 'desc' } },
+const mapToStats = (
+  map: Map<string, HuntingGroupsStatisticsEntry>,
+): HuntingGroupsStatisticsEntry[] => {
+  const stats: HuntingGroupsStatisticsEntry[] = []
+  let totalCount = 0
+
+  map.forEach((entry) => {
+    stats.push(entry)
+    totalCount += entry.count
+  })
+
+  stats.forEach((stat) => {
+    stat.percentage = Math.ceil((stat.count / totalCount) * 100)
+  })
+
+  stats.sort((a, b) => b.count - a.count)
+
+  return stats
+}
+
+const getBossAndMemberStats = async ({
+  guildId,
+  month,
+}: BossCheckStatsArgs) => {
+  const bossMap = new Map<string, HuntingGroupsStatisticsEntry>()
+  const memberMap = new Map<string, HuntingGroupsStatisticsEntry>()
+
+  const [bossChecks, members] = await Promise.all([
+    prisma.bossCheckLog.findMany({
+      where: { guildId, checkedAt: getMonthRange(month) },
+      select: {
+        member: { select: { name: true } },
+        boss: true,
+        location: true,
+      },
+    }),
+    prisma.guildMember.findMany({
+      where: { guildId },
+      select: { name: true },
+    }),
+  ])
+
+  members.forEach(({ name }) =>
+    memberMap.set(name, { name, count: 0, percentage: 0 }),
+  )
+
+  bossChecks.forEach(({ member, boss, location }) => {
+    const bossName = multipleSpawnLocationBosses.displayName({
+      name: boss,
+      location,
+    })
+
+    const thisBossEntry = bossMap.get(bossName)
+    if (thisBossEntry) {
+      thisBossEntry.count += 1
+    } else {
+      bossMap.set(bossName, { name: bossName, count: 1, percentage: 0 })
+    }
+
+    const thisMemberEntry = memberMap.get(member.name)
+    if (thisMemberEntry) {
+      thisMemberEntry.count += 1
+    } else {
+      memberMap.set(member.name, {
+        name: member.name,
+        count: 1,
+        percentage: 0,
       })
-      .then((entries) =>
-        entries.map(({ name, _count: { bossCheckLog } }) => ({
-          name,
-          count: bossCheckLog,
-          percentage: 0,
-        })),
-      )
-      .then(calculateStatisticsEntriesPercentages),
-  boss: async ({
-    guildId,
-    month,
-  }: BossCheckStatsArgs): Promise<HuntingGroupsStatisticsEntry[]> =>
-    prisma.bossCheckLog
-      .groupBy({
-        where: { guildId, checkedAt: getMonthRange(month) },
-        by: ['boss', 'location'],
-        _count: true,
-        orderBy: { _count: { boss: 'desc' } },
-      })
-      .then((entries) =>
-        entries.map(({ boss, location, _count }) => ({
-          name: multipleSpawnLocationBosses.displayName({
-            name: boss,
-            location,
-          }),
-          count: _count,
-          percentage: 0,
-        })),
-      )
-      .then(calculateStatisticsEntriesPercentages),
+    }
+  })
+
+  return {
+    boss: mapToStats(bossMap),
+    members: mapToStats(memberMap),
+  }
 }
 
 const pastCachedBossCheckStatisticsId = {
@@ -1044,12 +1058,7 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
     }
   }
 
-  const [boss, members] = await Promise.all([
-    getCheckStatsBy.boss(args),
-    getCheckStatsBy.members(args),
-  ])
-
-  const result = { boss, members }
+  const result = await getBossAndMemberStats(args)
 
   if (shouldBeCached) {
     const cachedResponse = JSON.stringify(result)
