@@ -4,6 +4,7 @@ import { memo } from 'react'
 import Chart from '../Chart'
 import PieChart from '../PieChart'
 import PercentageCard from '../PercentageCard'
+import { Revenue } from './Revenue'
 import { OverallGridProps } from './types'
 
 const OverallGrid = ({
@@ -22,6 +23,9 @@ const OverallGrid = ({
       {...props}
     >
       <h2 className="hidden">{statistics.OverallGrid.title}</h2>
+
+      <Revenue />
+
       <div className="grid gap-4 md:grid-cols-2">
         <Chart
           totalLabel={statistics.OverallGrid.Chart1.totalLabel}
