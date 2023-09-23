@@ -10,8 +10,6 @@ type ExportDataDialogProps = {
   frozenEntries: GuildData['frozenBossCheckLogEntries']
 }
 
-// @ ToDo: scroll
-
 const ExportDataDialog = ({
   frozenEntries,
   onClose,
@@ -39,46 +37,48 @@ const ExportDataDialog = ({
 
   return (
     <Dialog heading={i18n.heading} isOpen onClose={onClose}>
-      <Table.Element>
-        <Table.Head>
-          <Table.Row>
-            <Table.HeadColumn className="text-center">
-              {i18n.date}
-            </Table.HeadColumn>
-            <Table.HeadColumn />
-          </Table.Row>
-        </Table.Head>
+      <div className="custom-scrollbar -mr-4 max-h-[216px] overflow-auto pr-4">
+        <Table.Element>
+          <Table.Head>
+            <Table.Row>
+              <Table.HeadColumn className="text-center">
+                {i18n.date}
+              </Table.HeadColumn>
+              <Table.HeadColumn />
+            </Table.Row>
+          </Table.Head>
 
-        <Table.Body>
-          {frozenEntries.map(({ id, frozenAt }) => {
-            const wasExported = exportedIds.includes(id)
+          <Table.Body>
+            {frozenEntries.map(({ id, frozenAt }) => {
+              const wasExported = exportedIds.includes(id)
 
-            return (
-              <Table.Row key={id} hoverHighlight>
-                <Table.Column className="text-center">
-                  {frozenAt.toLocaleString('pt-BR', { hour12: false })}
-                </Table.Column>
-                <Table.Column>
-                  <button
-                    type="button"
-                    className="text-primaryHighlight mx-auto flex cursor-pointer items-center gap-2 disabled:pointer-events-none disabled:opacity-40"
-                    disabled={wasExported}
-                    onClick={() => setSelectedDataId(id)}
-                  >
-                    {fetchFrozenData.isFetching && selectedDataId === id ? (
-                      <div role="none" className="loading-spinner h-3 w-3" />
-                    ) : (
-                      <DownloadIcon className="fill-primaryHighlight h-3 w-3" />
-                    )}
+              return (
+                <Table.Row key={id} hoverHighlight>
+                  <Table.Column className="text-center">
+                    {frozenAt.toLocaleString('pt-BR', { hour12: false })}
+                  </Table.Column>
+                  <Table.Column>
+                    <button
+                      type="button"
+                      className="text-primaryHighlight mx-auto flex cursor-pointer items-center gap-2 disabled:pointer-events-none disabled:opacity-40"
+                      disabled={wasExported}
+                      onClick={() => setSelectedDataId(id)}
+                    >
+                      {fetchFrozenData.isFetching && selectedDataId === id ? (
+                        <div role="none" className="loading-spinner h-3 w-3" />
+                      ) : (
+                        <DownloadIcon className="fill-primaryHighlight h-3 w-3" />
+                      )}
 
-                    {wasExported ? i18n.exported : i18n.export}
-                  </button>
-                </Table.Column>
-              </Table.Row>
-            )
-          })}
-        </Table.Body>
-      </Table.Element>
+                      {wasExported ? i18n.exported : i18n.export}
+                    </button>
+                  </Table.Column>
+                </Table.Row>
+              )
+            })}
+          </Table.Body>
+        </Table.Element>
+      </div>
     </Dialog>
   )
 }
