@@ -27,3 +27,10 @@ declare type HuntingGroupsStatisticsSet = {
   boss: HuntingGroupsStatisticsEntry[]
   members: HuntingGroupsStatisticsEntry[]
 }
+
+declare type FrozenBossCheckLogData = {
+  boss: string
+  member: string
+  checkedAt: number
+  location?: string
+}
