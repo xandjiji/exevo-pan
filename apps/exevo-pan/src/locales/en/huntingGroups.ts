@@ -228,4 +228,10 @@ export default {
     membersOnly: 'Members only',
     periodicUpdate: 'Statistics are updated periodically',
   },
+  ExportDataDialog: {
+    heading: 'Export monthly check logs',
+    date: 'Date',
+    export: 'Export',
+    exported: 'Exported',
+  },
 }

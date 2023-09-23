@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useTranslations } from 'contexts/useTranslation'
 import { Dialog, Table } from 'components/Atoms'
 import { DownloadIcon } from 'assets/svgs'
 import { trpc } from 'lib/trpc'
@@ -9,12 +10,15 @@ type ExportDataDialogProps = {
   frozenEntries: GuildData['frozenBossCheckLogEntries']
 }
 
-// @ ToDo: i18n
+// @ ToDo: scroll
 
 const ExportDataDialog = ({
   frozenEntries,
   onClose,
 }: ExportDataDialogProps) => {
+  const { huntingGroups } = useTranslations()
+  const i18n = huntingGroups.ExportDataDialog
+
   const [selectedDataId, setSelectedDataId] = useState('')
   const [exportedIds, setExportedIds] = useState<string[]>([])
 
@@ -34,11 +38,13 @@ const ExportDataDialog = ({
   })
 
   return (
-    <Dialog heading="Export monthly check logs" isOpen onClose={onClose}>
+    <Dialog heading={i18n.heading} isOpen onClose={onClose}>
       <Table.Element>
         <Table.Head>
           <Table.Row>
-            <Table.HeadColumn className="text-center">Date</Table.HeadColumn>
+            <Table.HeadColumn className="text-center">
+              {i18n.date}
+            </Table.HeadColumn>
             <Table.HeadColumn />
           </Table.Row>
         </Table.Head>
@@ -65,7 +71,7 @@ const ExportDataDialog = ({
                       <DownloadIcon className="fill-primaryHighlight h-3 w-3" />
                     )}
 
-                    {wasExported ? 'Exported' : 'Export'}
+                    {wasExported ? i18n.exported : i18n.export}
                   </button>
                 </Table.Column>
               </Table.Row>

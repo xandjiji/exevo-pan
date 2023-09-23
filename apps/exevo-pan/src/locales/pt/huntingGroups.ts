@@ -231,4 +231,10 @@ export default defaultComposer(defaultTranslations, {
     membersOnly: 'Apenas membros',
     periodicUpdate: 'As estatísticas são atualizadas periodicamente',
   },
+  ExportDataDialog: {
+    heading: 'Exportar logs de check mensais',
+    date: 'Data',
+    export: 'Exportar',
+    exported: 'Exportado',
+  },
 })
