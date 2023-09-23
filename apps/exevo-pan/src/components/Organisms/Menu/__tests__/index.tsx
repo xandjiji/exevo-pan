@@ -1,6 +1,6 @@
 import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
+import { assertNoA11yViolations, renderWithProviders } from 'utils/test'
 import { AccountIcon, AddPostIcon, CheckIcon } from 'assets/svgs'
 import Menu from '..'
 import { MenuProps } from '../types'
@@ -44,7 +44,7 @@ const props: MenuProps = {
 
 describe('<Menu />', () => {
   const setup = () => {
-    const toggleElement = screen.getByRole('button', { name: 'toggle' })
+    const toggleElement = screen.getByRole('button', { name: 'Toggle menu' })
 
     const assertOpen = (isOpen = true) => {
       if (isOpen) {
