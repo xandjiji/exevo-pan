@@ -87,6 +87,24 @@ export default class BossesClient {
     return checkedBosses
   }
 
+  static async fetchAllFrozenBossCheckLogEntries({
+    guildId,
+    hasMemberPrivilege,
+  }: {
+    guildId: string
+    hasMemberPrivilege: boolean
+  }): Promise<{ id: string; frozenAt: Date }[]> {
+    if (!hasMemberPrivilege) return []
+
+    const entries = await prisma.frozenBossCheckLog.findMany({
+      where: { guildId },
+      select: { id: true, frozenAt: true },
+      orderBy: { frozenAt: 'desc' },
+    })
+
+    return entries
+  }
+
   static async fetchRecentlyAppearedBosses(
     server: string,
   ): Promise<BossStats[]> {

@@ -1,32 +1,32 @@
 import clsx from 'clsx'
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
-import { useState, useCallback } from 'react'
-import { stringify, parse } from 'devalue'
+import { useCallback, useState } from 'react'
+import { parse, stringify } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
-import { Tabs, Button } from 'components/Atoms'
+import { Button, Tabs } from 'components/Atoms'
 import { ConditionalClientComponent } from 'components/Organisms'
 import {
-  GuildDataProvider,
-  GuildDataConsumer,
-  GuildData,
-  HuntingGroupStatistics,
-  Template,
-  GuildHero,
   ApplyDialog,
-  EditGuildDialog,
-  MessageBoard,
-  MemberList,
   ApplyList,
+  ChartedList,
+  CheckedBosses,
+  CheckHistory,
+  EditGuildDialog,
+  GuildData,
+  GuildDataConsumer,
+  GuildDataProvider,
+  GuildHero,
+  HuntingGroupStatistics,
+  LogHistory,
+  MemberList,
+  MessageBoard,
   NotificationDialog,
   SettingsDialog,
-  CheckHistory,
-  LogHistory,
-  CheckedBosses,
-  ChartedList,
+  Template,
 } from 'modules/BossHunting'
-import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
+import { BlogIcon, PersonAddIcon, SettingsIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { BossesClient } from 'services/server'
@@ -35,14 +35,14 @@ import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
 import {
   buildPageTitle,
-  loadRawSrc,
-  getGuildPermalink,
   buildUrl,
+  getGuildPermalink,
   loadDisplayNameBossSrc,
+  loadRawSrc,
 } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { jsonld, routes } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
-import { common, bosses, huntingGroups } from 'locales'
+import { bosses, common, huntingGroups } from 'locales'
 
 const previewImageSrc = loadRawSrc('/huntingGroups.png')
 
@@ -517,15 +517,20 @@ export const getServerSideProps: GetServerSideProps = async ({
   const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
   const isPro = token?.proStatus ?? false
 
-  const [checkedBosses, checkStatistics] = await Promise.all([
-    getCheckedBosses({
-      hasMemberPrivilege,
-      isPro,
-      guildId: guild.id,
-      server: guild.server,
-    }),
-    getCheckStatistics({ hasMemberPrivilege, guildId: guild.id }),
-  ])
+  const [checkedBosses, checkStatistics, frozenBossCheckLogEntries] =
+    await Promise.all([
+      getCheckedBosses({
+        hasMemberPrivilege,
+        isPro,
+        guildId: guild.id,
+        server: guild.server,
+      }),
+      getCheckStatistics({ hasMemberPrivilege, guildId: guild.id }),
+      BossesClient.fetchAllFrozenBossCheckLogEntries({
+        guildId: guild.id,
+        hasMemberPrivilege,
+      }),
+    ])
 
   const guildData: GuildData = {
     guild: {
@@ -548,6 +553,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     applications: hasMemberPrivilege ? guildApplications : [],
     checkedBosses,
     checkStatistics,
+    frozenBossCheckLogEntries,
   }
 
   return {
