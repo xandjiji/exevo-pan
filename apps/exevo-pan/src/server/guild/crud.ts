@@ -1173,3 +1173,37 @@ export const getCheckStats = authedProcedure
       return { currentMonth, pastMonth }
     },
   )
+
+export const getFrozenBossCheckLogs = authedProcedure
+  .input(z.string())
+  .query(
+    async ({
+      ctx: { token },
+      input: frozenDataId,
+    }): Promise<{ date: Date; data: FrozenBossCheckLogData[] }> => {
+      const queriedData = await prisma.frozenBossCheckLog.findUnique({
+        where: { id: frozenDataId },
+      })
+
+      if (!queriedData) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: `Frozen data [${frozenDataId}] not found`,
+        })
+      }
+
+      const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
+      const requesterId = token.id
+
+      await throwIfForbiddenGuildRequest({
+        guildId: queriedData.guildId,
+        requesterId,
+        EXEVO_PAN_ADMIN,
+      })
+
+      return {
+        date: queriedData.frozenAt,
+        data: JSON.parse(queriedData.data),
+      }
+    },
+  )
