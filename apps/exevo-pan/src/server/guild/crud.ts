@@ -1180,7 +1180,7 @@ export const getFrozenBossCheckLogs = authedProcedure
     async ({
       ctx: { token },
       input: frozenDataId,
-    }): Promise<{ date: Date; data: FrozenBossCheckLogData[] }> => {
+    }): Promise<{ date: Date; data: string }> => {
       const queriedData = await prisma.frozenBossCheckLog.findUnique({
         where: { id: frozenDataId },
       })
@@ -1203,7 +1203,7 @@ export const getFrozenBossCheckLogs = authedProcedure
 
       return {
         date: queriedData.frozenAt,
-        data: JSON.parse(queriedData.data),
+        data: queriedData.data,
       }
     },
   )
