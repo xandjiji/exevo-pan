@@ -232,7 +232,7 @@ export default defaultComposer(defaultTranslations, {
     periodicUpdate: 'As estatísticas são atualizadas periodicamente',
   },
   ExportDataDialog: {
-    heading: 'Exportar logs de check mensais',
+    heading: 'Logs de check mensais',
     date: 'Data',
     export: 'Exportar',
     exported: 'Exportado',

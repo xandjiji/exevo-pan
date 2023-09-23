@@ -229,7 +229,7 @@ export default {
     periodicUpdate: 'Statistics are updated periodically',
   },
   ExportDataDialog: {
-    heading: 'Export monthly check logs',
+    heading: 'Monthly check logs',
     date: 'Date',
     export: 'Export',
     exported: 'Exported',
