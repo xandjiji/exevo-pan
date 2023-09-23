@@ -26,7 +26,7 @@ import {
   SettingsDialog,
   Template,
 } from 'modules/BossHunting'
-import { BlogIcon, PersonAddIcon, SettingsIcon } from 'assets/svgs'
+import { BlogIcon, PersonAddIcon, SettingsIcon, UploadIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { BossesClient } from 'services/server'
@@ -304,9 +304,11 @@ export default function GuildPage({
                       </h4>
 
                       <Tabs.Group
-                        onChange={(newIndex) =>
+                        activeIndex={currentStatistics ? 0 : 1}
+                        onChange={(newIndex) => {
+                          if (newIndex > 1) return
                           setCurrentStatistics(newIndex === 0)
-                        }
+                        }}
                       >
                         <Tabs.Panel
                           label={`${i18n.GroupStatistics.currentMonth} (${
@@ -326,6 +328,17 @@ export default function GuildPage({
                             ]
                           })`}
                         />
+
+                        {guildDataProps.frozenBossCheckLogEntries.length >
+                          0 && (
+                          <Tabs.Panel
+                            label={
+                              <>
+                                <UploadIcon /> {i18n.GroupStatistics.exportData}
+                              </>
+                            }
+                          />
+                        )}
                       </Tabs.Group>
                       <div
                         className={clsx(

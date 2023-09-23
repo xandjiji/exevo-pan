@@ -220,6 +220,7 @@ export default defaultComposer(defaultTranslations, {
     heading: 'Estatísticas do grupo',
     currentMonth: 'Mês atual',
     pastMonth: 'Mês passado',
+    exportData: 'Exportar dados',
     bosses: 'Bosses',
     members: 'Membros',
     checksBy: 'Checks por', // 'checks by bosses/members'
