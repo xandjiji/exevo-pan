@@ -14,6 +14,7 @@ import {
   CheckedBosses,
   CheckHistory,
   EditGuildDialog,
+  ExportDataDialog,
   GuildData,
   GuildDataConsumer,
   GuildDataProvider,
@@ -86,7 +87,9 @@ export default function GuildPage({
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
-  const [currentStatistics, setCurrentStatistics] = useState(true)
+  const [statisticsTabIndex, setStatisticsTabIndex] = useState(0)
+  const currentStatistics = statisticsTabIndex !== 1
+  const isExportDataOpen = statisticsTabIndex === 2
 
   const pageName = guildDataProps.guild.name
   const previewSrc = PreviewImageClient.getSrc({
@@ -304,11 +307,8 @@ export default function GuildPage({
                       </h4>
 
                       <Tabs.Group
-                        activeIndex={currentStatistics ? 0 : 1}
-                        onChange={(newIndex) => {
-                          if (newIndex > 1) return
-                          setCurrentStatistics(newIndex === 0)
-                        }}
+                        activeIndex={statisticsTabIndex}
+                        onChange={setStatisticsTabIndex}
                       >
                         <Tabs.Panel
                           label={`${i18n.GroupStatistics.currentMonth} (${
@@ -340,6 +340,16 @@ export default function GuildPage({
                           />
                         )}
                       </Tabs.Group>
+
+                      {isExportDataOpen && (
+                        <ExportDataDialog
+                          frozenEntries={
+                            guildDataProps.frozenBossCheckLogEntries
+                          }
+                          onClose={() => setStatisticsTabIndex(0)}
+                        />
+                      )}
+
                       <div
                         className={clsx(
                           'grid w-full gap-8 lg:grid-cols-2',
