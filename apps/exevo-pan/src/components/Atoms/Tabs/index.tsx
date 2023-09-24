@@ -1,19 +1,19 @@
 import {
+  Children,
+  cloneElement,
   forwardRef,
-  useState,
+  isValidElement,
   useCallback,
   useEffect,
-  Children,
-  isValidElement,
-  cloneElement,
   useRef,
+  useState,
 } from 'react'
 import clsx from 'clsx'
 import { useIsMounted } from 'hooks'
 import { scrollHorizontallyIntoView } from 'utils'
 import useIds from './useIds'
 import styles from './styles.module.css'
-import { TabsProps, PanelProps } from './types'
+import { PanelProps, TabsProps } from './types'
 
 const Group = forwardRef<HTMLDivElement, TabsProps>(
   (
@@ -34,12 +34,19 @@ const Group = forwardRef<HTMLDivElement, TabsProps>(
     const { getTabId, getPanelId } = useIds()
 
     const handleClick = useCallback(
-      (newIndex: number) =>
-        setInnerIndex((prevIndex) => {
-          if (prevIndex !== newIndex) onChange?.(newIndex)
-          return newIndex
-        }),
-      [onChange],
+      (newIndex: number) => {
+        const isControlled = indexProp !== undefined
+
+        if (isControlled) {
+          if (indexProp !== newIndex) onChange?.(newIndex)
+        } else {
+          setInnerIndex((prevIndex) => {
+            if (prevIndex !== newIndex) onChange?.(newIndex)
+            return newIndex
+          })
+        }
+      },
+      [indexProp, onChange],
     )
 
     const tablistRef = useRef<HTMLDivElement>(null)

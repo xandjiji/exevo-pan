@@ -1,5 +1,5 @@
 import { screen } from '@testing-library/react'
-import { renderWithProviders, assertNoA11yViolations } from 'utils/test'
+import { assertNoA11yViolations, renderWithProviders } from 'utils/test'
 import Table from '..'
 
 describe('<Table />', () => {
@@ -93,7 +93,7 @@ describe('<Table />', () => {
       </Table>,
     )
 
-    expect(container).toMatchSnapshot()
+    expect(container.children[1]).toMatchSnapshot()
 
     rerender(
       <Table>
@@ -110,7 +110,7 @@ describe('<Table />', () => {
       </Table>,
     )
 
-    expect(container).toMatchSnapshot()
+    expect(container.children[1]).toMatchSnapshot()
   })
 
   test('a11y', async () => {

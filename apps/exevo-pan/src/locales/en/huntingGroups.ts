@@ -216,7 +216,8 @@ export default {
   GroupStatistics: {
     heading: 'Group statistics',
     currentMonth: 'Current month',
-    pastMonth: 'Past month',
+    pastMonth: 'Last month',
+    exportData: 'Export data',
     bosses: 'Bosses',
     members: 'Members',
     checksBy: 'Checks by', // 'checks by bosses/members'
@@ -226,5 +227,11 @@ export default {
     },
     membersOnly: 'Members only',
     periodicUpdate: 'Statistics are updated periodically',
+  },
+  ExportDataDialog: {
+    heading: 'Monthly check logs',
+    date: 'Date',
+    export: 'Export',
+    exported: 'Exported',
   },
 }

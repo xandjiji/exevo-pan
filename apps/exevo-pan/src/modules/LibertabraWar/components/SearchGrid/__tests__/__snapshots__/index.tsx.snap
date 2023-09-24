@@ -3,7 +3,7 @@
 exports[`<SearchGrid /> should render 1`] = `
 <div>
   <div
-    style="position: fixed; z-index: 9999; top: 16px; left: 16px; right: 16px; bottom: 64px; pointer-events: none;"
+    style="position: fixed; z-index: 9999; top: 16px; left: 16px; right: 16px; bottom: 68px; pointer-events: none;"
   />
   <div
     class="loading-spinner z-1 absolute-centered fixed"
