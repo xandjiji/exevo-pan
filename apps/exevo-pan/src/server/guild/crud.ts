@@ -1078,13 +1078,14 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
 
     const pastMonthCheckLogs = await prisma.bossCheckLog.findMany({
       where: { guildId, checkedAt: { lte } },
-      include: { member: { select: { name: true } } },
+      include: { member: { select: { id: true, name: true } } },
     })
 
     const freezeData: FrozenBossCheckLogData[] = pastMonthCheckLogs.map(
       ({ boss, location, checkedAt, member }) => {
         const entry: FrozenBossCheckLogData = {
           boss,
+          memberId: member.id,
           member: member.name,
           checkedAt: +checkedAt,
         }
