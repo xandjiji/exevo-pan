@@ -9,10 +9,10 @@ cp ~/exevo-pan/apps/bazaar-scraper/Output/ItemsData.json ~/exevo-pan/static
 cd ~/exevo-pan
 yarn deploy:static
 
-cp ~/exevo-pan/apps/bazaar-scraper/Output/CurrentAuctions.json ~/exevo-pan/apps/current-auctions-lambda/src/Data
-cp ~/exevo-pan/apps/bazaar-scraper/Output/ServerData.json ~/exevo-pan/apps/current-auctions-lambda/src/Data
+cp ~/exevo-pan/apps/bazaar-scraper/Output/CurrentAuctions.json ~/exevo-pan/apps/current-auctions-worker/src/Data
+cp ~/exevo-pan/apps/bazaar-scraper/Output/ServerData.json ~/exevo-pan/apps/current-auctions-worker/src/Data
 
-cd ~/exevo-pan/apps/current-auctions-lambda
+cd ~/exevo-pan/apps/current-auctions-worker
 yarn deploy:fast
 
 sleep 10s
