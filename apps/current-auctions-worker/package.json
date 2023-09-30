@@ -1,0 +1,24 @@
+{
+  "name": "current-auctions-worker",
+  "version": "0.0.0",
+  "author": "xandjiji <xandjiji@gmail.com>",
+  "description": "Exevo Pan Current Auctions Cloudflare Worker",
+  "license": "Unlicense",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist",
+    "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "dependencies": {
+    "auction-queries": "*",
+    "shared-utils": "*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20230419.0",
+    "config": "*",
+    "typescript": "^5.0.4",
+    "wrangler": "^3.0.0"
+  }
+}
