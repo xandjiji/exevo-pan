@@ -1,10 +1,8 @@
 name = "blog"
-type = "javascript"
+main = "src/index.ts"
 
 account_id = "49352e8d5379bd6e7b57ad393d3bc2b9"
 workers_dev = true
-route = ""
-zone_id = ""
 compatibility_date = "2021-11-06"
 
 [env.development]
@@ -12,5 +10,3 @@ name = "blog-development"
 
 [build]
 command = "yarn build"
-[build.upload]
-format = "service-worker"
