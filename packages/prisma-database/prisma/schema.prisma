@@ -186,11 +186,12 @@ model Guild {
     avatarDegree  Int
     eventEndpoint String?  @db.Text
 
-    guildMembers      GuildMember[]
-    guildApplications GuildApplication[]
-    guildLogEntry     GuildLogEntry[]
-    bossChecks        BossCheck[]
-    bossCheckLog      BossCheckLog[]
+    guildMembers       GuildMember[]
+    guildApplications  GuildApplication[]
+    guildLogEntry      GuildLogEntry[]
+    bossChecks         BossCheck[]
+    bossCheckLog       BossCheckLog[]
+    frozenBossCheckLog FrozenBossCheckLog[]
 }
 
 enum GUILD_MEMBER_ROLE {
@@ -301,6 +302,17 @@ model BossCheckLog {
     @@index([guildId, checkedAt])
 }
 
+model FrozenBossCheckLog {
+    id String @id @default(uuid())
+
+    frozenAt DateTime @default(now())
+    data     String   @db.MediumText
+    guild    Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+    guildId  String
+
+    @@index([guildId])
+}
+
 model CachedBossCheckStatistics {
     guildId String @id
 
@@ -310,10 +322,10 @@ model CachedBossCheckStatistics {
 }
 
 model PastCachedBossCheckStatistics {
-    date_guildId   String @id
+    date_guildId String @id
 
     version        Int
-    cachedResponse String   @db.Text
+    cachedResponse String @db.Text
 
     @@index([date_guildId])
 }

@@ -1,32 +1,33 @@
 import clsx from 'clsx'
 import Head from 'next/head'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
-import { useState, useCallback } from 'react'
-import { stringify, parse } from 'devalue'
+import { useCallback, useState } from 'react'
+import { parse, stringify } from 'devalue'
 import { getToken } from 'next-auth/jwt'
 import { useTranslations } from 'contexts/useTranslation'
-import { Tabs, Button } from 'components/Atoms'
+import { Button, Tabs } from 'components/Atoms'
 import { ConditionalClientComponent } from 'components/Organisms'
 import {
-  GuildDataProvider,
-  GuildDataConsumer,
-  GuildData,
-  HuntingGroupStatistics,
-  Template,
-  GuildHero,
   ApplyDialog,
-  EditGuildDialog,
-  MessageBoard,
-  MemberList,
   ApplyList,
+  ChartedList,
+  CheckedBosses,
+  CheckHistory,
+  EditGuildDialog,
+  ExportDataDialog,
+  GuildData,
+  GuildDataConsumer,
+  GuildDataProvider,
+  GuildHero,
+  HuntingGroupStatistics,
+  LogHistory,
+  MemberList,
+  MessageBoard,
   NotificationDialog,
   SettingsDialog,
-  CheckHistory,
-  LogHistory,
-  CheckedBosses,
-  ChartedList,
+  Template,
 } from 'modules/BossHunting'
-import { SettingsIcon, BlogIcon, PersonAddIcon } from 'assets/svgs'
+import { BlogIcon, PersonAddIcon, SettingsIcon, UploadIcon } from 'assets/svgs'
 import { PreviewImageClient } from 'services'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { BossesClient } from 'services/server'
@@ -35,14 +36,14 @@ import { useRouter } from 'next/router'
 import { prisma } from 'lib/prisma'
 import {
   buildPageTitle,
-  loadRawSrc,
-  getGuildPermalink,
   buildUrl,
+  getGuildPermalink,
   loadDisplayNameBossSrc,
+  loadRawSrc,
 } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { jsonld, routes } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
-import { common, bosses, huntingGroups } from 'locales'
+import { bosses, common, huntingGroups } from 'locales'
 
 const previewImageSrc = loadRawSrc('/huntingGroups.png')
 
@@ -86,7 +87,9 @@ export default function GuildPage({
 
   const toggleEditDialog = useCallback(() => setIsEditOpen((prev) => !prev), [])
 
-  const [currentStatistics, setCurrentStatistics] = useState(true)
+  const [statisticsTabIndex, setStatisticsTabIndex] = useState(0)
+  const currentStatistics = statisticsTabIndex !== 1
+  const isExportDataOpen = statisticsTabIndex === 2
 
   const pageName = guildDataProps.guild.name
   const previewSrc = PreviewImageClient.getSrc({
@@ -304,9 +307,8 @@ export default function GuildPage({
                       </h4>
 
                       <Tabs.Group
-                        onChange={(newIndex) =>
-                          setCurrentStatistics(newIndex === 0)
-                        }
+                        activeIndex={statisticsTabIndex}
+                        onChange={setStatisticsTabIndex}
                       >
                         <Tabs.Panel
                           label={`${i18n.GroupStatistics.currentMonth} (${
@@ -326,7 +328,28 @@ export default function GuildPage({
                             ]
                           })`}
                         />
+
+                        {guildDataProps.frozenBossCheckLogEntries.length >
+                          0 && (
+                          <Tabs.Panel
+                            label={
+                              <>
+                                <UploadIcon /> {i18n.GroupStatistics.exportData}
+                              </>
+                            }
+                          />
+                        )}
                       </Tabs.Group>
+
+                      {isExportDataOpen && (
+                        <ExportDataDialog
+                          frozenEntries={
+                            guildDataProps.frozenBossCheckLogEntries
+                          }
+                          onClose={() => setStatisticsTabIndex(0)}
+                        />
+                      )}
+
                       <div
                         className={clsx(
                           'grid w-full gap-8 lg:grid-cols-2',
@@ -517,15 +540,20 @@ export const getServerSideProps: GetServerSideProps = async ({
   const hasMemberPrivilege = isMember || EXEVO_PAN_ADMIN
   const isPro = token?.proStatus ?? false
 
-  const [checkedBosses, checkStatistics] = await Promise.all([
-    getCheckedBosses({
-      hasMemberPrivilege,
-      isPro,
-      guildId: guild.id,
-      server: guild.server,
-    }),
-    getCheckStatistics({ hasMemberPrivilege, guildId: guild.id }),
-  ])
+  const [checkedBosses, checkStatistics, frozenBossCheckLogEntries] =
+    await Promise.all([
+      getCheckedBosses({
+        hasMemberPrivilege,
+        isPro,
+        guildId: guild.id,
+        server: guild.server,
+      }),
+      getCheckStatistics({ hasMemberPrivilege, guildId: guild.id }),
+      BossesClient.fetchAllFrozenBossCheckLogEntries({
+        guildId: guild.id,
+        hasMemberPrivilege,
+      }),
+    ])
 
   const guildData: GuildData = {
     guild: {
@@ -548,6 +576,7 @@ export const getServerSideProps: GetServerSideProps = async ({
     applications: hasMemberPrivilege ? guildApplications : [],
     checkedBosses,
     checkStatistics,
+    frozenBossCheckLogEntries,
   }
 
   return {

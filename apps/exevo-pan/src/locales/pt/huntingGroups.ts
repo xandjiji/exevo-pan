@@ -220,6 +220,7 @@ export default defaultComposer(defaultTranslations, {
     heading: 'Estatísticas do grupo',
     currentMonth: 'Mês atual',
     pastMonth: 'Mês passado',
+    exportData: 'Exportar dados',
     bosses: 'Bosses',
     members: 'Membros',
     checksBy: 'Checks por', // 'checks by bosses/members'
@@ -229,5 +230,11 @@ export default defaultComposer(defaultTranslations, {
     },
     membersOnly: 'Apenas membros',
     periodicUpdate: 'As estatísticas são atualizadas periodicamente',
+  },
+  ExportDataDialog: {
+    heading: 'Logs de check mensais',
+    date: 'Data',
+    export: 'Exportar',
+    exported: 'Exportado',
   },
 })
