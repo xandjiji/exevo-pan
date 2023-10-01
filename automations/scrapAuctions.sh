@@ -13,7 +13,7 @@ cp ~/exevo-pan/apps/bazaar-scraper/Output/CurrentAuctions.json ~/exevo-pan/apps/
 cp ~/exevo-pan/apps/bazaar-scraper/Output/ServerData.json ~/exevo-pan/apps/current-auctions-worker/src/Data
 
 cd ~/exevo-pan/apps/current-auctions-worker
-yarn deploy:fast
+yarn deploy
 
 sleep 10s
 cd ~/exevo-pan/apps/bazaar-scraper/
