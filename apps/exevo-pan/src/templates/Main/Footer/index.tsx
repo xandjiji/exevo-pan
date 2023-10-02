@@ -24,7 +24,7 @@ const listItems: RouteItem[] = [
 
 const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
   <a
-    rel={clsx('noopener noreferrer external', rel)}
+    rel={clsx('noopener external', rel)}
     className={clsx('text-xs tracking-wider', className)}
     target="_blank"
     {...props}
