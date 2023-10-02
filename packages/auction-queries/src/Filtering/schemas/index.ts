@@ -1,3 +1,4 @@
+export { default as achievementPoints } from './achievementPoints'
 export { default as achievements } from './achievements'
 export { default as auctionIds } from './auctionIds'
 export { default as battleye } from './battleye'
