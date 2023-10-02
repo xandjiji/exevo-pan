@@ -1,4 +1,4 @@
-import { memo, useMemo, useCallback } from 'react'
+import { memo, useCallback, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
@@ -8,13 +8,13 @@ import { servers } from 'data-dictionary/dist/dictionaries/servers'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { skills } from 'data-dictionary/dist/dictionaries/skills'
 import {
+  Checkbox,
+  Chip,
   Drawer,
   DrawerFooter,
-  Chip,
-  Checkbox,
   NumericInput,
 } from 'components/Atoms'
-import { Tooltip, InfoTooltip } from 'components/Organisms'
+import { InfoTooltip, Tooltip } from 'components/Organisms'
 import { blurOnEnter, proTagsSet } from 'utils'
 import { TibiaIcons } from 'assets/svgs'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
@@ -119,6 +119,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
   const [maxCharmPoints, setMaxCharmPoints] = useDebouncedFilter({
     key: 'maxCharmPoints',
     controlledValue: filterState.maxCharmPoints,
+  })
+
+  const [achievementPoints, setAchievementPoints] = useDebouncedFilter({
+    key: 'achievementPoints',
+    controlledValue: filterState.achievementPoints,
   })
 
   const rareItems = useRareItemSet({
@@ -882,6 +887,17 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               </Chip>
             ))}
           </S.ChipWrapper>
+        </FilterGroup>
+
+        <FilterGroup>
+          <NumericInput
+            label="Achievement points"
+            value={achievementPoints}
+            onChange={setAchievementPoints}
+            placeholder="0"
+            alwaysValid
+            className="w-32"
+          />
         </FilterGroup>
 
         <FilterGroup>
