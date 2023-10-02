@@ -78,7 +78,7 @@ export const TibiaTradeBanner = ({
             <a
               href={TIBIA_TRADE_URL}
               target="_blank"
-              rel="noreferrer"
+              rel="noopener external nofollow noreferrer"
               className="text-primaryHighlight font-bold tracking-wide"
             >
               TibiaTrade

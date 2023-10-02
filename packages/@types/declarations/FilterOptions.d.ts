@@ -10,6 +10,7 @@ declare interface FilterOptions {
   maxLevel: number
   minSkill: number
   maxSkill: number
+  achievementPoints: number
   bossPoints: number
   minCharmPoints: number
   maxCharmPoints: number
