@@ -1,4 +1,4 @@
-import { SchemaCodec, codecs, buildFromSchema } from '../../../urlSerializer'
+import { buildFromSchema, codecs, SchemaCodec } from '../../../urlSerializer'
 import { DEFAULT_FILTER_OPTIONS } from '../defaults'
 
 export const filterSchema: SchemaCodec<FilterOptions> = {
@@ -66,6 +66,11 @@ export const filterSchema: SchemaCodec<FilterOptions> = {
   maxSkill: {
     urlKey: 'maxSkill',
     defaultValue: DEFAULT_FILTER_OPTIONS.maxSkill,
+    decode: codecs.decode.Number,
+  },
+  achievementPoints: {
+    urlKey: 'achievementPoints',
+    defaultValue: DEFAULT_FILTER_OPTIONS.achievementPoints,
     decode: codecs.decode.Number,
   },
   bossPoints: {

@@ -21,6 +21,7 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   minSkill: 10,
   maxSkill: 150,
   bossPoints: 0,
+  achievementPoints: 0,
   minCharmPoints: 0,
   maxCharmPoints: 50000,
   tcInvested: 0,
