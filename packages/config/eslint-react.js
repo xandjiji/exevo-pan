@@ -33,6 +33,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
+    'react/no-target-blank': 'off',
     'react/jsx-filename-extension': [
       1,
       {

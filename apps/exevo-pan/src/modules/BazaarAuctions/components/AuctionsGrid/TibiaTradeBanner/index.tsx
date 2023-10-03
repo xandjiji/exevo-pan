@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import clsx from 'clsx'
 import { links } from 'Constants'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
