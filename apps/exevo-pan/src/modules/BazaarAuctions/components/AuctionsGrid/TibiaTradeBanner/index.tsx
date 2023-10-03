@@ -21,7 +21,7 @@ export const Item = ({ item }: { item: TibiaTradeHighlightedItem }) => {
       className="card group flex items-center gap-4"
       href={item.url}
       target="_blank"
-      rel="noopener external nofollow noreferrer"
+      rel="noopener external nofollow"
     >
       <SpritePortrait
         src={item.imgSrc}
@@ -78,7 +78,7 @@ export const TibiaTradeBanner = ({
             <a
               href={TIBIA_TRADE_URL}
               target="_blank"
-              rel="noopener external nofollow noreferrer"
+              rel="noopener external nofollow"
               className="text-primaryHighlight font-bold tracking-wide"
             >
               TibiaTrade
