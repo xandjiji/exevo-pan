@@ -1,4 +1,5 @@
 export const constTokens = {
+  'albino dragons': 'Albino Dragon',
   'Apprentice Sheng': 'Apprentice Sheng',
   'Arachir the Ancient One': 'Arachir the Ancient One',
   'Arthom The Hunter': 'Arthom The Hunter',

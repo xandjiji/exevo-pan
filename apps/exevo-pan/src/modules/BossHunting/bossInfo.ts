@@ -1,10 +1,14 @@
 import {
-  TrackedBossName,
   constTokens as bossTokens,
+  TrackedBossName,
 } from 'data-dictionary/dist/dictionaries/bosses'
 import { bossSet } from './blacklist'
 
 export const bossInfo = new Map<TrackedBossName, BossInfo>()
+
+bossInfo.set('Albino Dragon', {
+  loot: ['Albino Dragon Leather'],
+})
 
 bossInfo.set('Apprentice Sheng', {
   locations: [

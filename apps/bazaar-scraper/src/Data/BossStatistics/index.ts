@@ -1,12 +1,12 @@
 import fs from 'fs/promises'
 import {
-  constTokens as bossDictionary,
   BossToken,
+  constTokens as bossDictionary,
 } from 'data-dictionary/dist/dictionaries/bosses'
 import { getDateRelativeToSS } from 'shared-utils/dist/time'
-import { broadcast, tabBroadcast, coloredText } from 'logging'
+import { broadcast, coloredText, tabBroadcast } from 'logging'
 import { file } from 'Constants'
-import { sha256, doTimes } from 'utils'
+import { doTimes, sha256 } from 'utils'
 import { schema } from '../../Scripts/TrackBosses/schema'
 
 const { serverResolver, path } = file.BOSS_STATISTICS
@@ -160,9 +160,11 @@ export default class BossStatisticsData {
         if (appeared) {
           const bossSchema = schema.get(bossDictionary[bossName as BossToken])
 
-          const appearencesCount = bossSchema?.spawnCount
-            ? Math.max(killedByPlayers, 1)
-            : 1
+          const appearencesCount =
+            // @ ToDo: remove albino dragon temporary code. If it indeed works as a boss with multiple spawn locations, add the spawn count to the boss schema
+            bossSchema?.spawnCount || bossName === 'albino dragons'
+              ? Math.max(killedByPlayers, 1)
+              : 1
 
           doTimes(() => {
             this.bossStatistics.bosses[bossName].appearences.push(
