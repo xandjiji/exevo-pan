@@ -76,18 +76,21 @@ export const ignoreList = new Set<string>([
   'exercise sword',
   'exercise rod',
   'exercise wand',
+  'exercise shield',
   'durable exercise axe',
   'durable exercise bow',
   'durable exercise club',
   'durable exercise sword',
   'durable exercise rod',
   'durable exercise wand',
+  'durable exercise shield',
   'lasting exercise axe',
   'lasting exercise bow',
   'lasting exercise club',
   'lasting exercise sword',
   'lasting exercise rod',
   'lasting exercise wand',
+  'lasting exercise shield',
   /* CONSUMABLE */
   'gold converter',
   'magic gold converter',
@@ -1708,6 +1711,34 @@ export const storeItems: Record<string, StoreItem> = {
   'seafood bucket': {
     name: 'Seafood Bucket',
     value: 60,
+  },
+  'opulent spice rack': {
+    name: 'Opulent Spice Rack',
+    value: 100,
+  },
+  skelaptor: {
+    name: 'Skelaptor',
+    value: 180,
+  },
+  'cave bed': {
+    name: 'Cave Bed',
+    value: 120,
+  },
+  'cave fireplace': {
+    name: 'Cave Fireplace',
+    value: 100,
+  },
+  'cave panel border': {
+    name: 'Cave Panel Border',
+    value: 25,
+  },
+  'scales wall lamp': {
+    name: 'Scales Wall Lamp',
+    value: 60,
+  },
+  'cave chest': {
+    name: 'Cave Chest',
+    value: 70,
   },
   /* RASCACOON */
   'blue shark trophy': {
