@@ -4,6 +4,8 @@ import * as DICTIONARIES from 'data-dictionary/dist/dictionaries'
 
 const FILE_PATH = '../exevo-pan/public/sprites'
 
+const ignoredFiles = new Set(['Rented Horse'])
+
 export default class StaticData {
   private staticFileNames: Set<string> = new Set([])
 
@@ -50,6 +52,8 @@ export default class StaticData {
   }
 
   private addMissingFileAuction(id: number, fileName: string) {
+    if (ignoredFiles.has(fileName)) return
+
     if (this.missingFileAuctions[id]) {
       this.missingFileAuctions[id].push(fileName)
     } else {
