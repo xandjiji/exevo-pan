@@ -1,4 +1,4 @@
-import { links, locales, urlParameters, routes } from 'Constants'
+import { links, locales, routes, urlParameters } from 'Constants'
 
 const { DEFAULT_LOCALE } = locales
 
@@ -39,7 +39,7 @@ export const addLocalePrefix = ({
 export const getGuildPermalink = (guildName: string, absolute = false) =>
   `${absolute ? links.CANONICAL : ''}${
     routes.BOSSES.HUNTING_GROUPS
-  }/${guildName}`
+  }/${encodeURIComponent(guildName)}`
 
 export const officialAuctionUrl = (auctionId: number) =>
   `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${auctionId}`
