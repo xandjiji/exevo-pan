@@ -119,6 +119,9 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                             NOTIFICATION: (
                               <BlogIcon className="fill-primaryHighlight" />
                             ),
+                            SET_AS_NO_CHANCE: (
+                              <OutlineRemoveIcon className="fill-red" />
+                            ),
                           } as LogEntryElement
                         )[type]
                       }
@@ -163,6 +166,19 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
                                   </strong>
                                 ),
                               }),
+                              SET_AS_NO_CHANCE: templateMessage(
+                                i18n.setAsNoChance,
+                                {
+                                  actor: (
+                                    <strong>{actionGuildMember?.name}</strong>
+                                  ),
+                                  boss: (
+                                    <strong className="text-primaryHighlight">
+                                      {metadata}
+                                    </strong>
+                                  ),
+                                },
+                              ),
                             } as LogEntryElement
                           )[type]
                         }

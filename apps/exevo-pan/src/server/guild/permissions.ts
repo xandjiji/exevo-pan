@@ -29,6 +29,6 @@ export const can: Record<GUILD_MEMBER_ROLE, PermissionSet> = {
     editGuild: false,
     manageApplications: false,
     manageRoles: false,
-    markAsNoChance: false,
+    markAsNoChance: true,
   },
 }

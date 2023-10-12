@@ -875,7 +875,20 @@ export const markCheckedBoss = authedProcedure
       }
 
       if (lastSpawned) {
-        const result = await prisma.bossCheck.upsert(upsertData)
+        const result = await prisma.$transaction([
+          prisma.bossCheck.upsert(upsertData),
+          prisma.guildLogEntry.create({
+            data: {
+              guildId,
+              type: 'SET_AS_NO_CHANCE',
+              actionGuildMemberId: requesterMember.id,
+              metadata: multipleSpawnLocationBosses.displayName({
+                name: boss,
+                location,
+              }),
+            },
+          }),
+        ])
 
         return result
       }

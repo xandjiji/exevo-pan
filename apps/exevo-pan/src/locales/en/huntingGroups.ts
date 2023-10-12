@@ -171,6 +171,7 @@ export default {
     kick: '{{actor}} kicked {{target}}',
     accept: '{{actor}} approved {{target}} application',
     notification: '{{actor}} sighted a {{boss}}',
+    setAsNoChance: '{{actor}} marked {{boss}} as no chance',
     emptyState: 'No log history',
     loadMore: 'Show more',
   },

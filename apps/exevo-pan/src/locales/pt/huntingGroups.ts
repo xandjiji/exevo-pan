@@ -174,6 +174,7 @@ export default defaultComposer(defaultTranslations, {
     kick: '{{actor}} kickou {{target}}',
     accept: '{{actor}} aprovou a solicitação de {{target}}',
     notification: '{{actor}} encontrou {{boss}}',
+    setAsNoChance: '{{actor}} marcou {{boss}} como sem chance',
     emptyState: 'Nenhum evento',
     loadMore: 'Mostrar mais',
   },

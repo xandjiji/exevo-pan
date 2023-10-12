@@ -245,6 +245,7 @@ enum LOG_ENTRY_TYPE {
     ACCEPT_MEMBER
     REJECT_MEMBER
     NOTIFICATION
+    SET_AS_NO_CHANCE
 }
 
 model GuildLogEntry {
