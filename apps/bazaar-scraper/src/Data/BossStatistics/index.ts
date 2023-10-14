@@ -160,11 +160,9 @@ export default class BossStatisticsData {
         if (appeared) {
           const bossSchema = schema.get(bossDictionary[bossName as BossToken])
 
-          const appearencesCount =
-            // @ ToDo: remove albino dragon temporary code. If it indeed works as a boss with multiple spawn locations, add the spawn count to the boss schema
-            bossSchema?.spawnCount || bossName === 'albino dragons'
-              ? Math.max(killedByPlayers, 1)
-              : 1
+          const appearencesCount = bossSchema?.spawnCount
+            ? Math.max(killedByPlayers, 1)
+            : 1
 
           doTimes(() => {
             this.bossStatistics.bosses[bossName].appearences.push(
