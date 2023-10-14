@@ -7,6 +7,28 @@ import { bossSet } from './blacklist'
 export const bossInfo = new Map<TrackedBossName, BossInfo>()
 
 bossInfo.set('Albino Dragon', {
+  locations: [
+    {
+      src: 'https://tibiamaps.io/map/embed#33090,32594,5:1',
+      description: 'Dragon Lair (Ankrahmun)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#33156,31270,5:1',
+      description: 'Dragon Lair (Farmine)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32592,31383,15:1',
+      description: 'Dragon Lair (Fenrock)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32086,32566,14:1',
+      description: 'Dragon Lair (Goroma)',
+    },
+    {
+      src: 'https://tibiamaps.io/map/embed#32770,32311,12:1',
+      description: 'Pits of Inferno',
+    },
+  ],
   loot: ['Albino Dragon Leather'],
 })
 
