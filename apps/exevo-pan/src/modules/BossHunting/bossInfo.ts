@@ -1514,6 +1514,10 @@ bossInfo.set('Zushuka', {
 })
 
 const spawnLocations: { name: string; locations: string[] }[] = [
+  {
+    name: bossTokens['albino dragons'],
+    locations: ['Ankrahmun', 'Farmine', 'Fenrock', 'Goroma', 'PoI'],
+  },
   { name: bossTokens['Battlemaster Zunzu'], locations: ['West', 'East'] },
   {
     name: bossTokens.Dreadmaw,

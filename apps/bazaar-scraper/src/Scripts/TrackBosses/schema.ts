@@ -3,6 +3,14 @@ import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
 
 export const schema = new Map<TrackedBossName, BossSchema>()
 
+schema.set('Albino Dragon', {
+  fixedDaysFrequency: {
+    min: 1,
+    max: 1,
+  },
+  spawnCount: 5,
+})
+
 schema.set('Apprentice Sheng', {
   fixedDaysFrequency: {
     min: 1,
