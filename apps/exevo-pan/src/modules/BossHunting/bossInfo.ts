@@ -937,15 +937,15 @@ bossInfo.set('Orshabaal', {
   loot: ["Orshabaal's Brain", 'Teddy Bear', 'Thunder Hammer'],
   raidMessages: [
     {
-      time: '00:05:00',
-      message:
-        "Orshabaal's minions are working on his return to the World. LEAVE Edron at once, mortals.",
-      style: 'REGULAR',
-    },
-    {
       time: '00:04:00',
       message:
         'Orshabaal is about to make his way into the mortal realm. Run for your lives!',
+      style: 'REGULAR',
+    },
+    {
+      time: '00:05:00',
+      message:
+        "Orshabaal's minions are working on his return to the World. LEAVE Edron at once, mortals.",
       style: 'REGULAR',
     },
     {
