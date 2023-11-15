@@ -23,7 +23,7 @@ export const queryReducer = (state: QueryState, action: Action): QueryState => {
       return { ...state, term: action.term, pageIndex: 0 }
 
     case 'TOGGLE_NO_CHANCE':
-      return { ...state, showNoChance: !state.showNoChance }
+      return { ...state, showNoChance: !state.showNoChance, pageIndex: 0 }
 
     case 'UPDATE_LIST': {
       const resetList = state.pageIndex === 0
