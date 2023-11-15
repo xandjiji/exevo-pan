@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useEffect, useReducer, useState } from 'react'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import { Input, Table } from 'components/Atoms'
+import { Checkbox, Input, Table } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { useDebounce } from 'hooks'
 import { trpc } from 'lib/trpc'
@@ -25,16 +25,19 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
   const { huntingGroups } = useTranslations()
   const i18n = huntingGroups.LogHistory
 
-  const [{ pageIndex, term, list, exhausted, initiallyFetched }, dispatch] =
-    useReducer(queryReducer, {
-      guildId,
-      pageIndex: 0,
-      pageSize,
-      term: '',
-      list: [],
-      initiallyFetched: false,
-      exhausted: false,
-    })
+  const [
+    { pageIndex, term, showNoChance, list, exhausted, initiallyFetched },
+    dispatch,
+  ] = useReducer(queryReducer, {
+    guildId,
+    pageIndex: 0,
+    pageSize,
+    term: '',
+    showNoChance: false,
+    list: [],
+    initiallyFetched: false,
+    exhausted: false,
+  })
 
   const [searchText, setSearchText] = useState(term)
   const debouncedTerm = useDebounce(searchText)
@@ -50,6 +53,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
       pageIndex,
       pageSize,
       term,
+      showNoChance,
     },
     {
       keepPreviousData: true,
@@ -61,14 +65,23 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
 
   return (
     <Table>
-      <Input
-        className="mb-6"
-        label={i18n.searchLabel}
-        placeholder={i18n.searchPlaceholder}
-        onChange={(e) => setSearchText(e.target.value)}
-        allowClear
-        stateIcon={isLoading && term && pageIndex === 0 ? 'loading' : 'neutral'}
-      />
+      <div className="mb-6 flex flex-col gap-4">
+        <Input
+          label={i18n.searchLabel}
+          placeholder={i18n.searchPlaceholder}
+          onChange={(e) => setSearchText(e.target.value)}
+          allowClear
+          stateIcon={
+            isLoading && term && pageIndex === 0 ? 'loading' : 'neutral'
+          }
+        />
+
+        <Checkbox
+          label="Show boss check actions"
+          checked={showNoChance}
+          onClick={() => dispatch({ type: 'TOGGLE_NO_CHANCE' })}
+        />
+      </div>
 
       {list.length > 0 && (
         <Table.Element>
@@ -193,11 +206,9 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
           </Table.Body>
         </Table.Element>
       )}
-
       {initiallyFetched && list.length === 0 && (
         <EmptyState text={i18n.emptyState} variant="medium" className="my-4" />
       )}
-
       {!exhausted && (
         <ListButton
           isLoading={isLoading}

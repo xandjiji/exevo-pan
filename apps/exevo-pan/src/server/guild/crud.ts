@@ -22,6 +22,7 @@ import type {
   GUILD_MEMBER_ROLE,
   GuildApplication,
   GuildMember,
+  LOG_ENTRY_TYPE,
 } from '@prisma/client'
 import { multipleSpawnLocationBosses } from '../../modules/BossHunting/bossInfo'
 import {
@@ -740,6 +741,7 @@ export const listGuildLog = authedProcedure
     z.object({
       guildId: z.string(),
       term: z.string(),
+      showNoChance: z.boolean(),
       pageSize: z.number().optional().default(20),
       pageIndex: z.number().optional().default(0),
     }),
@@ -747,7 +749,7 @@ export const listGuildLog = authedProcedure
   .query(
     async ({
       ctx: { token },
-      input: { guildId, term, pageIndex, pageSize },
+      input: { guildId, term, showNoChance, pageIndex, pageSize },
     }) => {
       const userId = token.id
       const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
@@ -758,9 +760,13 @@ export const listGuildLog = authedProcedure
 
       const queryTerm = term ? { contains: term } : undefined
 
+      const noChanceAction: LOG_ENTRY_TYPE = 'SET_AS_NO_CHANCE'
+      const type = showNoChance ? undefined : { not: noChanceAction }
+
       const result = await prisma.guildLogEntry.findMany({
         where: {
           guildId,
+          type,
           AND: {
             OR: [
               { metadata: queryTerm },

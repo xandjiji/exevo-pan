@@ -9,6 +9,7 @@ export type QueryState = Required<TRPCRouteInputs['listGuildLog']> & {
 export type Action =
   | { type: 'NEXT_PAGE' }
   | { type: 'QUERY_TERM'; term: string }
+  | { type: 'TOGGLE_NO_CHANCE' }
   | { type: 'UPDATE_LIST'; list: QueryState['list'] }
 
 export const pageSize = 10
@@ -20,6 +21,9 @@ export const queryReducer = (state: QueryState, action: Action): QueryState => {
 
     case 'QUERY_TERM':
       return { ...state, term: action.term, pageIndex: 0 }
+
+    case 'TOGGLE_NO_CHANCE':
+      return { ...state, showNoChance: !state.showNoChance }
 
     case 'UPDATE_LIST': {
       const resetList = state.pageIndex === 0
