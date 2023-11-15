@@ -165,6 +165,7 @@ export default {
   LogHistory: {
     searchLabel: 'Search',
     searchPlaceholder: 'Search for bosses or members',
+    noChanceLabel: 'Show boss check actions',
     event: 'Event',
     leave: '{{name}} left the group',
     reject: '{{actor}} rejected {{target}} application',

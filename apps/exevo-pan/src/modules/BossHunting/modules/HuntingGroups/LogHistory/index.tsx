@@ -77,7 +77,7 @@ const LogHistory = ({ guildId }: LogHistoryProps) => {
         />
 
         <Checkbox
-          label="Show boss check actions"
+          label={i18n.noChanceLabel}
           checked={showNoChance}
           onClick={() => dispatch({ type: 'TOGGLE_NO_CHANCE' })}
         />

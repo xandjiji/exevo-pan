@@ -168,6 +168,7 @@ export default defaultComposer(defaultTranslations, {
   LogHistory: {
     searchLabel: 'Buscar',
     searchPlaceholder: 'Buscar por bosses ou membros',
+    noChanceLabel: 'Mostrar ações de boss check',
     event: 'Evento',
     leave: '{{name}} saiu do grupo',
     reject: '{{actor}} rejeitou a solicitação de {{target}}',
