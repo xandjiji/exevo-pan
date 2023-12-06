@@ -307,7 +307,7 @@ model FrozenBossCheckLog {
     id String @id @default(uuid())
 
     frozenAt DateTime @default(now())
-    data     String   @db.MediumText
+    data     String   @db.LongText
     guild    Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
     guildId  String
 
