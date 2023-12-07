@@ -1095,8 +1095,9 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
       },
     })
 
+    const whereFreeze = { guildId, checkedAt: { lte } }
     const pastMonthCheckLogs = await prisma.bossCheckLog.findMany({
-      where: { guildId, checkedAt: { lte } },
+      where: whereFreeze,
       include: { member: { select: { id: true, name: true } } },
     })
 
@@ -1117,18 +1118,20 @@ const getBossCheckStatistics = async (args: BossCheckStatsArgs) => {
       },
     )
 
-    await prisma.$transaction([
-      prisma.bossCheckLog.deleteMany({
-        where: { guildId, checkedAt: { lte } },
-      }),
-      prisma.frozenBossCheckLog.create({
-        data: {
-          guildId,
-          frozenAt: lte,
-          data: JSON.stringify(freezeData),
-        },
-      }),
-    ])
+    await prisma
+      .$transaction([
+        prisma.bossCheckLog.deleteMany({
+          where: whereFreeze,
+        }),
+        prisma.frozenBossCheckLog.create({
+          data: {
+            guildId,
+            frozenAt: lte,
+            data: JSON.stringify(freezeData),
+          },
+        }),
+      ])
+      .catch(() => {})
   }
 
   return result
