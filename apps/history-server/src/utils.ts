@@ -36,7 +36,7 @@ export const getMedian = (array: number[]): number | undefined => {
 }
 
 const SECONDS_IN_A_YEAR = 31536000
-const RECENT_THRESHOLD = Math.round(SECONDS_IN_A_YEAR * 1.5)
+const RECENT_THRESHOLD = Math.round(SECONDS_IN_A_YEAR)
 
 export const canBeUsedForEstimations = () => {
   const currentTimestamp = Math.round(+new Date() / 1000)
