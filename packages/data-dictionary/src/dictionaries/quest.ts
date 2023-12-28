@@ -1,4 +1,4 @@
-import { lowerCaseKeys, dictionaryFactory } from '../utils'
+import { dictionaryFactory, lowerCaseKeys } from '../utils'
 
 export const constTokens = {
   'The Postman Missions': 'The Postman Missions',
@@ -42,6 +42,7 @@ export const constTokens = {
   'Duked it Out': 'Dangerous Depths (Warzone 6)',
   'Soul War': 'Soul War',
   'Primal Ordeal': 'Primal Ordeal',
+  'Rotten Blood': 'Rotten Blood',
 } as const
 
 export const scrapingTokens = lowerCaseKeys(constTokens)

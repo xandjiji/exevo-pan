@@ -1,21 +1,21 @@
 import cheerio, { CheerioAPI } from 'cheerio/lib/index'
 import { PostData } from 'Helpers'
-import { sanitizeHtmlString, parseDate, exitIfMaintenance } from 'utils'
+import { exitIfMaintenance, parseDate, sanitizeHtmlString } from 'utils'
 import { ServerData } from 'Data'
 import { totalCharacterInvestment } from 'shared-utils/dist/totalCharacterInvestment'
 import { getCharacterTags } from 'shared-utils/dist/getCharacterTags'
 import {
-  quest as questDictionary,
   imbuement as imbuementDictionary,
+  quest as questDictionary,
   rareAchievement as achievementDictionary,
 } from 'data-dictionary/dist/dictionaries'
 import { vocation as vocationHelper } from 'data-dictionary/dist/dictionaries/vocations'
 import { filterListTable, stringToNumber } from '../utils'
 import {
-  getPagedData,
-  getPageableAuctionData,
-  loadCheerio,
   findNumber,
+  getPageableAuctionData,
+  getPagedData,
+  loadCheerio,
 } from './utils'
 import { HistoryCheck, RawCheck } from './types'
 
@@ -441,6 +441,13 @@ export default class AuctionPage {
 
     characterObject.tcInvested = totalCharacterInvestment(characterObject)
     characterObject.tags = getCharacterTags(characterObject)
+
+    // @ ToDo: abstract this to a function if checking for outfits become more frequent to find completed quests
+    if (
+      characterObject.outfits.find(({ name }) => name === 'Decaying Defender')
+    ) {
+      characterObject.quests.push(questDictionary.constTokens['Rotten Blood'])
+    }
 
     return characterObject
   }

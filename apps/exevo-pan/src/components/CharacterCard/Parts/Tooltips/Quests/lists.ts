@@ -29,6 +29,7 @@ export const access: string[] = [
   constTokens['Library Liberator'],
   constTokens['Soul War'],
   constTokens['Primal Ordeal'],
+  constTokens['Rotten Blood'],
 ]
 
 export const bosses: string[] = [
