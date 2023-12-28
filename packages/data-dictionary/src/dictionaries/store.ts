@@ -1648,6 +1648,10 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Witchcraft Table',
     value: 100,
   },
+  'table with candles': {
+    name: 'Witchcraft Table',
+    value: 100,
+  },
   'table with burning candles': {
     name: 'Witchcraft Table',
     value: 100,
@@ -1739,6 +1743,102 @@ export const storeItems: Record<string, StoreItem> = {
   'cave chest': {
     name: 'Cave Chest',
     value: 70,
+  },
+  'crystal bed': {
+    name: 'Crystal Bed',
+    value: 150,
+  },
+  'crystal cabinet': {
+    name: 'Crystal Cabinet',
+    value: 100,
+  },
+  'gnome baby': {
+    name: 'Gnome Baby',
+    value: 150,
+  },
+  'cave rampart': {
+    name: 'Cave Rampart',
+    value: 60,
+  },
+  'crystal chair': {
+    name: 'Crystal Chair',
+    value: 50,
+  },
+  'crystal table': {
+    name: 'Crystal Table',
+    value: 80,
+  },
+  'crystal chest': {
+    name: 'Crystal Chest',
+    value: 60,
+  },
+  'crystal floor lamp': {
+    name: 'Crystal Floor Lamp',
+    value: 120,
+  },
+  'cave floor lamp': {
+    name: 'Cave Floor Lamp',
+    value: 80,
+  },
+  'cave rampart border': {
+    name: 'Cave Rampart Border',
+    value: 25,
+  },
+  'cave wall panel': {
+    name: 'Cave Wall Panel',
+    value: 50,
+  },
+  'cave wall border': {
+    name: 'Cave Wall Border',
+    value: 25,
+  },
+  'cave fence': {
+    name: 'Cave Fence',
+    value: 60,
+  },
+  'gathered cave floor earth': {
+    name: 'Cave Floor Earth',
+    value: 25,
+  },
+  'cave firewood': {
+    name: 'Cave Firewood',
+    value: 60,
+  },
+  'cave remains': {
+    name: 'Cave Remains',
+    value: 50,
+  },
+  'cave bones': {
+    name: 'Cave Bones',
+    value: 50,
+  },
+  'cave bench': {
+    name: 'Cave Bench',
+    value: 120,
+  },
+  'cave wall lamp': {
+    name: 'Cave Wall Lamp',
+    value: 60,
+  },
+  'cave weapon display': {
+    name: 'Cave Weapon Display',
+    value: 60,
+  },
+  'low cave panel': {
+    name: 'Low Cave Panel',
+    value: 60,
+  },
+  'cave mural': {
+    name: 'Cave Mural',
+    value: 60,
+  },
+  'low cave mural': {
+    name: 'Low Cave Mural',
+    value: 60,
+  },
+  'low cave fence': {
+    name: 'Low Cave Fence',
+    value: 60,
   },
   /* RASCACOON */
   'blue shark trophy': {
