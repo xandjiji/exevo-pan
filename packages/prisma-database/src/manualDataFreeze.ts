@@ -18,13 +18,10 @@ type FrozenBossCheckLogData = {
 export const stripTime = (date = new Date()): Date =>
   new Date(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate())
 
-const getMonthLte = (date: Date) => {
-  const thisMonth = stripTime(date)
-  thisMonth.setUTCDate(0)
-  thisMonth.setUTCMonth(thisMonth.getUTCMonth() + 1)
-  thisMonth.setUTCDate(thisMonth.getUTCDate() - 1)
-
-  return thisMonth
+const getMonthLte = () => {
+  const date = new Date()
+  date.setUTCDate(0)
+  return stripTime(date)
 }
 
 const freezeDataFromAGuild = async () => {
@@ -37,7 +34,8 @@ const freezeDataFromAGuild = async () => {
   })
 
   if (!randomCheckLog) return 'FINISH'
-  const lte = getMonthLte(randomCheckLog.checkedAt)
+  console.log(randomCheckLog)
+  const lte = getMonthLte()
 
   if (lte.getUTCMonth() === new Date().getUTCMonth()) {
     console.log('found current month data! exiting...')
