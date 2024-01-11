@@ -110,6 +110,19 @@ export default {
       ...data
     } = json
 
+    /*
+        type PostEventArgs = {
+            guildName: string
+            server: string
+            bossName: string
+            displayedBossName: string
+            lastSpawned?: number // a Unix timestamp of the last time it was manually marked as no chance
+            lastCheckedAt?: number // a Unix timestamp of the last time it was checked by a member
+            notifiedBy: string
+            url: string
+        }
+    */
+
     const body = JSON.stringify({
       /* Discord webhook payload */
       ...data,
