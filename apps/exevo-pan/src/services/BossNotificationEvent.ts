@@ -6,6 +6,8 @@ type PostEventArgs = {
   server: string
   bossName: string
   displayedBossName: string
+  lastSpawned?: number
+  lastCheckedAt?: number
   notifiedBy: string
   url: string
 }

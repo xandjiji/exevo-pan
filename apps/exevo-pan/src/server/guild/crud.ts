@@ -671,10 +671,15 @@ export const notifyGuildMembers = authedProcedure
       location,
     })
 
-    const members = await prisma.guildMember.findMany({
-      where: { guildId, disabledNotifications: false },
-      include: { user: { select: { NotificationDevice: true } } },
-    })
+    const [members, lastCheck] = await prisma.$transaction([
+      prisma.guildMember.findMany({
+        where: { guildId, disabledNotifications: false },
+        include: { user: { select: { NotificationDevice: true } } },
+      }),
+      prisma.bossCheck.findUnique({
+        where: { boss_guildId_location: { boss, guildId, location } },
+      }),
+    ])
 
     if (requesterMember) {
       await prisma.$transaction([
@@ -707,6 +712,12 @@ export const notifyGuildMembers = authedProcedure
           notifiedBy: requesterMember.name,
           server: guild.server,
           url: guild.eventEndpoint,
+          lastSpawned: lastCheck?.lastSpawned
+            ? +lastCheck.lastSpawned
+            : undefined,
+          lastCheckedAt: lastCheck?.checkedAt
+            ? +lastCheck.checkedAt
+            : undefined,
         })
       }
     }
