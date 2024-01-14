@@ -84,8 +84,12 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                 rel="noopener external nofollow"
                 aria-label="Play Ravendawn for free"
               >
-                <Card className="bg-surface/60">
-                  <Image src={ravendawnSrc} alt="Play Ravendawn for free" />
+                <Card>
+                  <Image
+                    src={ravendawnSrc}
+                    alt="Play Ravendawn for free"
+                    style={{ filter: 'drop-shadow(0 0 1px black)' }}
+                  />
                 </Card>
               </a>
             </div>
