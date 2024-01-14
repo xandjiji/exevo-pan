@@ -120,7 +120,7 @@ export default {
     text: 'Play Tibia Blackjack',
   },
   Ravendawn: {
-    link: 'https://ravendawn.online/en/',
+    link: 'https://ravendawn.online/en/?ref=exevopan',
     text: 'Play Ravendawn',
   },
   CloseDrawerLabel: 'Close drawer',

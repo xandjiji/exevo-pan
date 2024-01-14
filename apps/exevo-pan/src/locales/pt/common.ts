@@ -123,7 +123,7 @@ export default defaultComposer(defaultTranslations, {
     text: 'Jogar Tibia Blackjack',
   },
   Ravendawn: {
-    link: 'https://ravendawn.online/pt/',
+    link: 'https://ravendawn.online/pt/?ref=exevopan',
     text: 'Jogar Ravendawn',
   },
   CloseDrawerLabel: 'Fechar menu',
