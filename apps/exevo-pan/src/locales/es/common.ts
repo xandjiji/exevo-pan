@@ -122,6 +122,10 @@ export default defaultComposer(defaultTranslations, {
   TibiaBlackjackCta: {
     text: 'Jugar Tibia Blackjack',
   },
+  Ravendawn: {
+    link: 'https://ravendawn.online/en/',
+    text: 'Jugar Ravendawn',
+  },
   CloseDrawerLabel: 'Cerrar el menú',
   RepoLinkText: 'Ir a este repositorio',
   MadeBy: 'creado por',
