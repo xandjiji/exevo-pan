@@ -4,11 +4,10 @@ import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
 import Image from 'next/image'
-import { useSession } from 'next-auth/react'
-import { ClientComponent } from 'components/Organisms'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
 import tbjSrc from 'assets/tibiablackjack.png'
+import ravendawnSrc from 'assets/ravendawn-logo.png'
 import { FooterProps, RouteItem } from './types'
 
 const listItems: RouteItem[] = [
@@ -33,6 +32,7 @@ const Link = ({ className, rel, ...props }: JSX.IntrinsicElements['a']) => (
 
 const Card = ({
   variant = 'primary',
+  className,
   ...props
 }: { variant?: 'primary' | 'secondary' } & JSX.IntrinsicElements['div']) => (
   <div
@@ -42,6 +42,7 @@ const Card = ({
         ? 'bg-surface/75 flex items-center gap-2 py-2'
         : 'bg-black/40',
       'card clickable py-2',
+      className,
     )}
   />
 )
@@ -78,28 +79,13 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
               </NextLink>
 
               <a
-                href={links.TIBIA_REFERRAL}
+                href={common.Ravendawn.link}
                 target="_blank"
                 rel="noopener external nofollow"
-                aria-label="Play Tibia for free"
+                aria-label="Play Ravendawn for free"
               >
-                <Card>
-                  <div className="py-0.5">
-                    <Image
-                      src="/tibialogo.png"
-                      width={32}
-                      height={32}
-                      alt="Play Tibia for free"
-                      className="pixelated"
-                    />
-                  </div>
-
-                  <span>
-                    {common.play}
-                    <strong className="text-primaryHighlight block text-base tracking-wide">
-                      Tibia.com
-                    </strong>
-                  </span>
+                <Card className="bg-surface/60">
+                  <Image src={ravendawnSrc} alt="Play Ravendawn for free" />
                 </Card>
               </a>
             </div>
