@@ -40,7 +40,7 @@ const MobileTopCTA = () => {
           className="bg-darkerPrimary flex h-full w-full items-center justify-center gap-2 px-2 font-bold text-[#fbc321]"
           target="_blank"
           rel="noopener external nofollow"
-          href={common.TibiaCoinsCta.link}
+          href={common.Ravendawn.link}
         >
           <Image src={ravenSrc} alt="Ravendawn" width={16} height={16} />
           {common.Ravendawn.text}
