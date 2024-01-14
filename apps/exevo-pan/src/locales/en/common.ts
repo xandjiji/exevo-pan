@@ -119,6 +119,10 @@ export default {
   TibiaBlackjackCta: {
     text: 'Play Tibia Blackjack',
   },
+  Ravendawn: {
+    link: 'https://ravendawn.online/en/',
+    text: 'Play Ravendawn',
+  },
   CloseDrawerLabel: 'Close drawer',
   RepoLinkText: 'Go to this repository',
   MadeBy: 'made by',
