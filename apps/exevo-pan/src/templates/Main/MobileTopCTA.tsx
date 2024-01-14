@@ -19,7 +19,9 @@ const MobileTopCTA = () => {
           href={links.TIBIA_BLACKJACK}
         >
           <Image src={tbjSrc} alt="Tibia Blackjack" width={24} height={24} />
-          {common.TibiaBlackjackCta.text}
+          <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
+            {common.TibiaBlackjackCta.text}
+          </span>
         </Link>
       </li>
 
@@ -31,7 +33,9 @@ const MobileTopCTA = () => {
           href={common.TibiaCoinsCta.link}
         >
           <Image src={tcSrc} alt="Tibia Coins" width={24} height={24} />
-          {common.TibiaCoinsCta.text}
+          <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
+            {common.TibiaCoinsCta.text}
+          </span>
         </Link>
       </li>
 
@@ -42,8 +46,16 @@ const MobileTopCTA = () => {
           rel="noopener external nofollow"
           href={common.Ravendawn.link}
         >
-          <Image src={ravenSrc} alt="Ravendawn" width={16} height={16} />
-          {common.Ravendawn.text}
+          <Image
+            src={ravenSrc}
+            alt="Ravendawn"
+            width={16}
+            height={16}
+            style={{ filter: 'drop-shadow(0 0 1px black)' }}
+          />
+          <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
+            {common.Ravendawn.text}
+          </span>
         </Link>
       </li>
     </ul>
