@@ -60,7 +60,22 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
     >
       <div className="mx-auto grid w-fit gap-8">
         {variant === 'primary' && (
-          <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row lg:justify-between">
+          <div className="flex flex-col flex-wrap items-center justify-center gap-6 md:flex-row">
+            <a
+              href={common.Ravendawn.link}
+              target="_blank"
+              rel="noopener external nofollow"
+              aria-label="Play Ravendawn for free"
+              className="negative-container w-[320px] overflow-hidden md:mx-0"
+            >
+              <Image
+                src="/ravenbanner.gif"
+                alt="Play ravendawn for free"
+                width={320}
+                height={100}
+              />
+            </a>
+
             <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
               <NextLink href={routes.EXEVOPRO}>
                 <Card>
