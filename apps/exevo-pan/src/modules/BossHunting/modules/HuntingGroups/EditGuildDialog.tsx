@@ -37,7 +37,7 @@ const isFormInvalid = ({
   name.length < guildValidationRules.name.MIN ||
   name.length > guildValidationRules.name.MAX ||
   description.length > guildValidationRules.description.MAX ||
-  messageBoard.length > guildValidationRules.description.MAX
+  messageBoard.length > guildValidationRules.messageBoard.MAX
 
 const EditGuildDialog = ({ onClose }: EditGuildDialogProps) => {
   const { common, huntingGroups } = useTranslations()
