@@ -5,8 +5,8 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Layout, Root } from 'modules/Dashboard'
 import { PreviewImageClient } from 'services'
 import { useSession } from 'next-auth/react'
-import { buildUrl, buildPageTitle } from 'utils'
-import { routes, jsonld } from 'Constants'
+import { buildPageTitle, buildUrl } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
 const pageUrl = buildUrl(routes.DASHBOARD.ROOT)
@@ -78,10 +78,15 @@ export default function Dashboard() {
       <Main>
         <Layout>
           {session && (
-            <section className="grid place-items-center gap-8 lg:flex lg:items-center lg:justify-center lg:gap-16">
+            <section className="grid place-items-center gap-8 lg:flex lg:items-start lg:justify-center lg:gap-16">
               <Root.Pitch proStatus={session.user.proStatus} />
               {!session.user.proStatus && (
-                <Root.PurchaseForm {...session.user.paymentData} />
+                <Root.PurchaseForm
+                  email={session.user.email}
+                  initialTxId={session.user.paymentData?.id}
+                  initialCharacter={session.user.paymentData?.character}
+                  confirmed={session.user.paymentData?.confirmed}
+                />
               )}
             </section>
           )}
