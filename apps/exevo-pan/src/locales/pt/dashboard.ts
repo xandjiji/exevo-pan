@@ -68,6 +68,8 @@ export default defaultComposer(defaultTranslations, {
     order: 'Pedido',
     payment: 'Pagamento',
     paymentCharacterLabel: 'Personagem que enviará as coins',
+    total: 'Total:',
+    qrCodeText: 'ou use o QR Code:',
     confirm: 'Confirmar',
     orderReceived: 'Seu pedido foi enviado!',
     transactionId: 'ID da transação',

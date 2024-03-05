@@ -168,7 +168,7 @@ const PurchaseForm = ({
                 {pixMode ? (
                   <p className="self-center text-base font-bold">
                     <span className="text-tsm font-light tracking-wide">
-                      Total:
+                      {dashboard.PurchaseForm.total}
                     </span>{' '}
                     R$ 45,00
                   </p>
@@ -245,7 +245,7 @@ const PurchaseForm = ({
                     />
                   </span>
                   <p className="text-s mb-1.5 mt-[22px] text-center">
-                    or using the following QR Code:
+                    {dashboard.PurchaseForm.qrCodeText}
                   </p>
                   <img
                     className="mx-auto block"

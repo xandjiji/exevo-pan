@@ -64,6 +64,8 @@ export default {
     order: 'Order',
     payment: 'Payment',
     paymentCharacterLabel: 'Sending coins character',
+    total: 'Total:',
+    qrCodeText: 'or using the following QR Code:',
     confirm: 'Confirm',
     orderReceived: 'Your order was received!',
     transactionId: 'Transaction ID',
