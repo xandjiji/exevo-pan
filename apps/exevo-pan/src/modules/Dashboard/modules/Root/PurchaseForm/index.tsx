@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
@@ -32,7 +32,7 @@ const PurchaseForm = ({
   email,
   initialTxId,
   initialCharacter,
-  confirmed = false,
+  confirmed,
 }: PurchaseFormProps) => {
   const { common, dashboard } = useTranslations()
 
@@ -48,6 +48,16 @@ const PurchaseForm = ({
     pixUrl?: string | null
     qrCode?: string
   }>({ txId: initialTxId, character: initialCharacter })
+
+  useLayoutEffect(() => {
+    if (initialCharacter) return
+    if (confirmed === false) {
+      generateQrCode(email).then(({ qrCode, payload }) => {
+        setPixMode(true)
+        setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
+      })
+    }
+  }, [])
 
   const orderAction = trpc.proPayment.useMutation({
     onMutate: () => {
