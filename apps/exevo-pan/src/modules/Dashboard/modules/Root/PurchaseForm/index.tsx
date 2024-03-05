@@ -5,6 +5,7 @@ import { trpc } from 'lib/trpc'
 import Image from 'next/image'
 import {
   Button,
+  CopyButton,
   Input,
   OptionButton,
   Stepper,
@@ -225,7 +226,24 @@ const PurchaseForm = ({
               <p>{dashboard.PurchaseForm.notice}</p>
 
               {pixMode ? (
-                <div />
+                <div>
+                  <span className="code flex items-center gap-1.5 break-all text-xs">
+                    {formState.pixUrl}
+                    <CopyButton
+                      copyString={formState.pixUrl as string}
+                      className="!bg-primary child:fill-onPrimary shrink-0"
+                    />
+                  </span>
+                  <p className="text-s mb-1.5 mt-[22px] text-center">
+                    or using the following QR Code:
+                  </p>
+                  <img
+                    className="mx-auto block"
+                    alt="QR Code"
+                    src={formState.qrCode}
+                    style={{ zoom: 1 / 2, imageRendering: 'pixelated' }}
+                  />
+                </div>
               ) : (
                 <FromTo
                   className="mx-auto"
