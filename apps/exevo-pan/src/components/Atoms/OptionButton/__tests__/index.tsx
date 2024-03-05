@@ -1,13 +1,13 @@
 import { screen } from '@testing-library/react'
 import { renderWithProviders } from 'utils/test'
-import MethodButton from '..'
+import { OptionButton } from '..'
 
-describe('<MethodButton />', () => {
+describe('<OptionButton />', () => {
   test('should render its content correctly', () => {
     renderWithProviders(
-      <MethodButton active icon={<div role="none" />}>
+      <OptionButton active icon={<div role="none" />}>
         test button
-      </MethodButton>,
+      </OptionButton>,
     )
 
     expect(
@@ -18,9 +18,9 @@ describe('<MethodButton />', () => {
 
   test('should control its state correctly', () => {
     const { rerender } = renderWithProviders(
-      <MethodButton active icon={<div role="none" />}>
+      <OptionButton active icon={<div role="none" />}>
         test button
-      </MethodButton>,
+      </OptionButton>,
     )
 
     const buttonElement = screen.getByRole('radio', { name: 'test button' })
@@ -28,9 +28,9 @@ describe('<MethodButton />', () => {
     expect(buttonElement).toBeChecked()
 
     rerender(
-      <MethodButton active={false} icon={<div role="none" />}>
+      <OptionButton active={false} icon={<div role="none" />}>
         test button
-      </MethodButton>,
+      </OptionButton>,
     )
     expect(buttonElement).not.toBeChecked()
   })

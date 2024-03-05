@@ -3,11 +3,16 @@ import { useTranslations } from 'contexts/useTranslation'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import Image from 'next/image'
-import { Button, Input, Stepper, TitledCard } from 'components/Atoms'
+import {
+  Button,
+  Input,
+  OptionButton,
+  Stepper,
+  TitledCard,
+} from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { randomCharacter } from 'utils'
 import { advertising } from 'Constants'
-import MethodButton from 'modules/Advertise/components/AdConfiguration/PaymentMethods/MethodButton'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import FromTo from './FromTo'
@@ -105,7 +110,7 @@ const PurchaseForm = ({
           {requestStatus !== 'SUCCESSFUL' && (
             <div>
               <div className="-mx-3">
-                <MethodButton
+                <OptionButton
                   active={!pixMode}
                   aria-label="Tibia Coins"
                   onClick={() => setPixMode(false)}
@@ -120,8 +125,8 @@ const PurchaseForm = ({
                   }
                 >
                   Tibia Coins
-                </MethodButton>
-                <MethodButton
+                </OptionButton>
+                <OptionButton
                   active={pixMode}
                   aria-label="Pix"
                   onClick={() => setPixMode(true)}
@@ -136,7 +141,7 @@ const PurchaseForm = ({
                   }
                 >
                   Pix
-                </MethodButton>
+                </OptionButton>
               </div>
 
               <div
