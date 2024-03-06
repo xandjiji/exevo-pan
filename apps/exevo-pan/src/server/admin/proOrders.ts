@@ -1,42 +1,37 @@
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
-import type { User, PaymentData } from '@prisma/client'
+import type { PaymentData, User } from '@prisma/client'
 
 export const listProOrders = adminProcedure
   .input(
     z.object({
       pageSize: z.number().optional().default(30),
       pageIndex: z.number().optional().default(0),
-      nickname: z.string().optional(),
+      term: z.string().optional(),
     }),
   )
-  .query(async ({ input: { pageSize, pageIndex, nickname } }) => {
+  .query(async ({ input: { pageSize, pageIndex, term } }) => {
+    const textQuery = term ? { contains: term } : undefined
+
+    const where = {
+      OR: [
+        { email: textQuery, paymentData: { isNot: null } },
+        {
+          paymentData: { character: textQuery },
+        },
+      ],
+    }
+
     const [page, count] = await Promise.all([
       prisma.user.findMany({
-        where: {
-          paymentData: {
-            isNot: undefined,
-            character: { contains: nickname },
-          },
-        },
-        orderBy: {
-          paymentData: {
-            lastUpdated: 'desc',
-          },
-        },
+        where,
+        orderBy: { paymentData: { lastUpdated: 'desc' } },
         include: { paymentData: true },
         take: pageSize,
         skip: pageIndex * pageSize,
       }),
-      prisma.user.count({
-        where: {
-          paymentData: {
-            isNot: undefined,
-            character: { contains: nickname },
-          },
-        },
-      }),
+      prisma.user.count({ where }),
     ])
 
     return {
@@ -59,6 +54,8 @@ export const updateProOrders = adminProcedure
       where: { userId: id },
     })
 
+    const isPix = !payment?.character
+
     const [user, transaction] = await prisma.$transaction([
       prisma.user.update({
         where: { id },
@@ -75,8 +72,8 @@ export const updateProOrders = adminProcedure
       confirmed
         ? prisma.transaction.create({
             data: {
-              value: 250,
-              currency: 'TIBIA_COINS',
+              value: isPix ? 45 : 250,
+              currency: isPix ? 'BRL' : 'TIBIA_COINS',
               type: 'EXEVO_PRO',
               date: currentDate,
               user: { connect: { id } },

@@ -1,31 +1,30 @@
-import clsx from 'clsx'
-import { useState, useMemo, useCallback } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { debounce } from 'utils'
 import {
-  Paginator,
-  LoadingAlert,
-  Table,
-  Input,
-  Checkbox,
-  Dialog,
   Button,
   CharacterLink,
+  Checkbox,
+  Dialog,
+  Input,
+  LoadingAlert,
+  Paginator,
+  Table,
 } from 'components/Atoms'
 
 const PAGE_SIZE = 30
 const DEBOUNCE_DELAY = 700
 
 const EMPTY_CONFIRMATION = {
-  character: '',
   id: '',
+  displayName: '',
   confirmed: false,
 }
 
 const PaymentList = () => {
   const [pageIndex, setPageIndex] = useState(0)
-  const [nickname, setNickname] = useState('')
+  const [term, setTerm] = useState('')
 
   const [toConfirm, setToConfirm] = useState(EMPTY_CONFIRMATION)
 
@@ -35,7 +34,7 @@ const PaymentList = () => {
   )
 
   const list = trpc.listProOrders.useQuery(
-    { pageIndex, nickname },
+    { pageIndex, term },
     {
       refetchOnWindowFocus: true,
       keepPreviousData: true,
@@ -66,7 +65,7 @@ const PaymentList = () => {
               () =>
                 debounce(
                   (e: React.ChangeEvent<HTMLInputElement>) =>
-                    setNickname(e.target.value),
+                    setTerm(e.target.value),
                   DEBOUNCE_DELAY,
                 ),
               [],
@@ -95,7 +94,11 @@ const PaymentList = () => {
 
           <Table.Body>
             {(list.data?.page ?? []).map(
-              ({ id, paymentData: { character, lastUpdated, confirmed } }) => (
+              ({
+                id,
+                email,
+                paymentData: { character, lastUpdated, confirmed },
+              }) => (
                 <Table.Row
                   key={id}
                   highlight={
@@ -113,8 +116,7 @@ const PaymentList = () => {
                         checked={confirmed}
                         onClick={() =>
                           setToConfirm({
-                            character:
-                              character !== '' ? character : 'undefined',
+                            displayName: (character || email) ?? 'NULL',
                             id,
                             confirmed: !confirmed,
                           })
@@ -123,12 +125,16 @@ const PaymentList = () => {
                     </div>
                   </Table.Column>
                   <Table.Column>
-                    <CharacterLink
-                      nickname={character}
-                      className="text-primaryHighlight"
-                    >
-                      {character}
-                    </CharacterLink>
+                    {character ? (
+                      <CharacterLink
+                        nickname={character}
+                        className="text-primaryHighlight"
+                      >
+                        {character}
+                      </CharacterLink>
+                    ) : (
+                      email
+                    )}
                   </Table.Column>
                   <Table.Column>
                     {lastUpdated.toLocaleString('pt-BR', {
@@ -143,7 +149,7 @@ const PaymentList = () => {
       </Table>
 
       <Dialog
-        isOpen={!!toConfirm.character}
+        isOpen={!!toConfirm.displayName}
         onClose={resetConfirmation}
         heading="Do you really want to proceed?"
         noCloseButton
@@ -157,7 +163,7 @@ const PaymentList = () => {
           >
             {toConfirm.confirmed ? 'Confirm' : 'Unconfirm'}
           </span>
-          <p className="code w-fit">{toConfirm.character}</p>
+          <p className="code w-fit">{toConfirm.displayName}</p>
         </p>
 
         <div className="flex justify-end gap-4">
