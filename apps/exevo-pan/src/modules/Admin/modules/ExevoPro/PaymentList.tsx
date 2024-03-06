@@ -126,7 +126,7 @@ const PaymentList = () => {
                       />
                     </div>
                   </Table.Column>
-                  <Table.Column>
+                  <Table.Column title={email ?? undefined}>
                     {character ? (
                       <CharacterLink
                         nickname={character}
