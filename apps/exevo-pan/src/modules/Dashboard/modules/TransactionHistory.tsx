@@ -1,7 +1,7 @@
 import clsx from 'clsx'
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
-import { Table, Chip, CopyButton, Text, Paginator } from 'components/Atoms'
+import { Chip, CopyButton, Paginator, Table, Text } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
 import { officialAuctionUrl, officialCharacterUrl } from 'utils'
@@ -108,18 +108,20 @@ export const List = ({ list }: TransactionHistoryProps) => {
                         <div className="grid gap-3 text-left">
                           {exevoProPayment && (
                             <>
-                              <Summary heading={i18n.paymentCharacter}>
-                                <a
-                                  href={officialCharacterUrl(
-                                    exevoProPayment.character,
-                                  )}
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  className="text-primaryHighlight"
-                                >
-                                  {exevoProPayment.character}
-                                </a>
-                              </Summary>
+                              {!!exevoProPayment.character && (
+                                <Summary heading={i18n.paymentCharacter}>
+                                  <a
+                                    href={officialCharacterUrl(
+                                      exevoProPayment.character,
+                                    )}
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="text-primaryHighlight"
+                                  >
+                                    {exevoProPayment.character}
+                                  </a>
+                                </Summary>
+                              )}
 
                               <Summary heading={i18n.status}>
                                 <span
