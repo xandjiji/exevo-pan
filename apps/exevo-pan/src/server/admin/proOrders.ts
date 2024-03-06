@@ -45,9 +45,10 @@ export const updateProOrders = adminProcedure
     z.object({
       id: z.string(),
       confirmed: z.boolean(),
+      noBill: z.boolean(),
     }),
   )
-  .mutation(async ({ input: { id, confirmed } }) => {
+  .mutation(async ({ input: { id, confirmed, noBill } }) => {
     const currentDate = new Date().toISOString()
 
     const payment = await prisma.paymentData.findUnique({
@@ -63,9 +64,7 @@ export const updateProOrders = adminProcedure
           proStatus: confirmed,
           proSince: confirmed ? currentDate : null,
           paymentData: {
-            update: {
-              confirmed,
-            },
+            update: { confirmed, noBill },
           },
         },
       }),

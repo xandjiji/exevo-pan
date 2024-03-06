@@ -20,6 +20,7 @@ const EMPTY_CONFIRMATION = {
   id: '',
   displayName: '',
   confirmed: false,
+  noBill: false,
 }
 
 const PaymentList = () => {
@@ -119,6 +120,7 @@ const PaymentList = () => {
                             displayName: (character || email) ?? 'NULL',
                             id,
                             confirmed: !confirmed,
+                            noBill: false,
                           })
                         }
                       />
@@ -165,6 +167,16 @@ const PaymentList = () => {
           </span>
           <p className="code w-fit">{toConfirm.displayName}</p>
         </p>
+
+        {toConfirm.confirmed && (
+          <Checkbox
+            label="No billing"
+            checked={toConfirm.noBill}
+            onClick={() =>
+              setToConfirm((prev) => ({ ...prev, noBill: !prev.noBill }))
+            }
+          />
+        )}
 
         <div className="flex justify-end gap-4">
           <Button

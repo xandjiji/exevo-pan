@@ -82,6 +82,7 @@ model PaymentData {
     lastUpdated DateTime
     character   String?
     confirmed   Boolean
+    noBill      Boolean  @default(false)
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String @unique
