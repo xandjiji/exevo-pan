@@ -135,7 +135,7 @@ const PaymentList = () => {
                         {character}
                       </CharacterLink>
                     ) : (
-                      email
+                      <span style={{ lineBreak: 'anywhere' }}>{email}</span>
                     )}
                   </Table.Column>
                   <Table.Column>
