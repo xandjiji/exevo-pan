@@ -47,6 +47,7 @@ export default defaultComposer(defaultTranslations, {
     extraFees: 'Sem taxas adicionais',
   },
   only: 'Apenas',
+  or: 'ou',
   payOnce: 'Pague uma vez, seu {{forever}}',
   forever: 'para sempre 🙌',
   footerCTA: 'Fazer upgrade',

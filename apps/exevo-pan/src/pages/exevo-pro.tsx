@@ -3,28 +3,29 @@ import NextLink from 'next/link'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { Button } from 'components/Atoms'
 import {
-  ThreeDimensionalMiniAuctionGrid,
+  ComparisonTable,
   FeatureSection,
-  MiniBossGrid,
+  Gradient,
+  HuntingGroupGrid,
   MiniAuction,
+  MiniBossGrid,
   MiniFilters,
   MiniHighlight,
-  Phone,
   Notebook,
-  HuntingGroupGrid,
+  Phone,
   PremiumBossesList,
   PremiumFiltersList,
   Strong,
-  Gradient,
-  ComparisonTable,
+  ThreeDimensionalMiniAuctionGrid,
 } from 'modules/ExevoProLP'
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoinBig.png'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
-import { routes, jsonld } from 'Constants'
+import pixSrc from 'assets/pix.png'
+import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
+import { jsonld, routes } from 'Constants'
 import { common, exevopro } from 'locales'
 
 const pageUrl = buildUrl(routes.EXEVOPRO)
@@ -201,7 +202,7 @@ export default function ExevoPro() {
               })}
             </h2>
 
-            <div className="my-10 grid gap-8 md:my-14 md:flex md:items-center md:justify-center md:gap-40">
+            <div className="lgr:gap-40 lgr:justify-center my-10 grid gap-8 md:my-14 md:flex md:items-center md:justify-around md:gap-8">
               <ul className="mx-auto grid w-fit list-disc gap-1.5 md:mx-0 md:ml-8">
                 <li>{i18n.no.subscriptions}</li>
                 <li>{i18n.no.creditCard}</li>
@@ -209,20 +210,38 @@ export default function ExevoPro() {
               </ul>
 
               <div>
-                <p className="flex flex-nowrap items-center justify-center gap-2 text-xl md:justify-start">
-                  {i18n.only}
-                  <Image
-                    src={tibiaCoinSrc}
-                    alt="Tibia Coin"
-                    unoptimized
-                    width={24}
-                    height={24}
-                    className="pixelated select-none"
-                  />
-                  <strong className="whitespace-nowrap text-[32px]">
-                    250 TC
-                  </strong>
-                </p>
+                <div className="mb-2 flex flex-col items-center gap-1 md:mb-0 md:flex-row md:gap-3">
+                  <p className="flex flex-nowrap items-center justify-center gap-2 text-xl md:justify-start">
+                    {i18n.only}
+                    <Image
+                      src={tibiaCoinSrc}
+                      alt="Tibia Coin"
+                      unoptimized
+                      width={24}
+                      height={24}
+                      className="pixelated select-none"
+                    />
+                    <strong className="whitespace-nowrap text-[32px]">
+                      250 TC
+                    </strong>
+                  </p>
+
+                  <p className="text-tsm flex flex-nowrap items-center justify-center opacity-75 md:justify-start">
+                    ({i18n.or}
+                    <Image
+                      src={pixSrc}
+                      alt="Pix"
+                      unoptimized
+                      width={16}
+                      height={16}
+                      className="mx-1 select-none"
+                    />
+                    <strong className="whitespace-nowrap text-base">
+                      R$ 45,00
+                    </strong>
+                    )
+                  </p>
+                </div>
 
                 <p className="text-center text-xl">
                   {templateMessage(i18n.payOnce, {
