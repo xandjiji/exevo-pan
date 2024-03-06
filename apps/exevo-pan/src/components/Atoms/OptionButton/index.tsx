@@ -1,15 +1,19 @@
 import clsx from 'clsx'
 import { RadioButton } from 'components/Atoms'
-import { MethodButtonProps } from './types'
 
-const MethodButton = ({
+type OptionButtonProps = {
+  icon: React.ReactNode
+  active: boolean
+} & React.HTMLAttributes<HTMLButtonElement>
+
+export const OptionButton = ({
   active,
   icon,
   children,
   className,
   style,
   ...props
-}: MethodButtonProps) => (
+}: OptionButtonProps) => (
   <button
     type="button"
     className={clsx(
@@ -28,5 +32,3 @@ const MethodButton = ({
     </RadioButton>
   </button>
 )
-
-export default MethodButton

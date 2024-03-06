@@ -1,10 +1,10 @@
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
 import {
-  oneMonthAgo,
   exevoProOrdersToBrl,
-  toMonthlyAverage,
   INITIAL_TIMESTAMP,
+  oneMonthAgo,
+  toMonthlyAverage,
 } from './utils'
 
 export const proRevenue = adminProcedure.query(async () => {
@@ -14,16 +14,12 @@ export const proRevenue = adminProcedure.query(async () => {
         proSince: {
           gt: oneMonthAgo(),
         },
-        paymentData: {
-          confirmed: true,
-        },
+        paymentData: { confirmed: true, noBill: false },
       },
     }),
     prisma.user.count({
       where: {
-        paymentData: {
-          confirmed: true,
-        },
+        paymentData: { confirmed: true, noBill: false },
       },
     }),
   ])

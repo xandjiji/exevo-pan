@@ -43,6 +43,7 @@ export default {
     extraFees: 'No extra fees',
   },
   only: 'Only',
+  or: 'or',
   payOnce: 'Pay once, yours {{forever}}',
   forever: 'forever 🙌',
   footerCTA: 'Upgrade now',

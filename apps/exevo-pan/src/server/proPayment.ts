@@ -4,7 +4,11 @@ import { authedProcedure } from 'server/trpc'
 import { caller } from 'pages/api/trpc/[trpc]'
 
 export const proPayment = authedProcedure
-  .input(z.object({ character: z.string().min(2) }))
+  .input(
+    z.object({
+      character: z.string().min(2).optional(),
+    }),
+  )
   .mutation(
     async ({
       ctx: {
@@ -15,11 +19,11 @@ export const proPayment = authedProcedure
       if (proStatus) return { paymentData: null }
 
       const data = {
-        character,
+        character: character ?? null,
         lastUpdated: new Date().toISOString(),
       }
 
-      const { paymentData } = await prisma.user.update({
+      const user = await prisma.user.update({
         where: { id },
         data: {
           paymentData: {
@@ -29,9 +33,11 @@ export const proPayment = authedProcedure
         include: { paymentData: true },
       })
 
+      const { email, paymentData } = user
+
       await caller.notifyAdmin({
         title: 'Exevo Pro order',
-        body: character,
+        body: character ?? email ?? user.id,
         url: 'https://www.exevopan.com/admin',
       })
 

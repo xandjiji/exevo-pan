@@ -64,11 +64,13 @@ export default {
     order: 'Order',
     payment: 'Payment',
     paymentCharacterLabel: 'Sending coins character',
+    total: 'Total:',
+    qrCodeText: 'or using the following QR Code:',
     confirm: 'Confirm',
     orderReceived: 'Your order was received!',
     transactionId: 'Transaction ID',
     notice:
-      "Your purchase will be delivered right after your payment is confirmed. If your order can't be completed, your coins will be returned.",
+      "Your purchase will be delivered right after your payment is confirmed. If your order can't be completed, your money will be returned.",
     edit: 'Edit your order',
   },
   TransactionHistory: {

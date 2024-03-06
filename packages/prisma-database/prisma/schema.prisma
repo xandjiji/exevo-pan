@@ -80,8 +80,9 @@ model NotificationDevice {
 model PaymentData {
     id          String   @id @default(uuid())
     lastUpdated DateTime
-    character   String
+    character   String?
     confirmed   Boolean
+    noBill      Boolean  @default(false)
 
     user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId String @unique

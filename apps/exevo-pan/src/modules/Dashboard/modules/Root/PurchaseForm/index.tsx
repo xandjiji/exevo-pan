@@ -1,26 +1,65 @@
-import { useState, useCallback, useRef } from 'react'
+import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { Input, Button, Stepper, TitledCard } from 'components/Atoms'
+import Image from 'next/image'
+import {
+  Button,
+  CopyButton,
+  Input,
+  OptionButton,
+  Stepper,
+  TitledCard,
+} from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { randomCharacter } from 'utils'
 import { advertising } from 'Constants'
+import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
+import PixSrc from 'assets/pix.png'
 import FromTo from './FromTo'
-import { PurchaseFormProps } from './types'
+import { generateQrCode } from './utils'
 
 const { BANK_CHARACTER } = advertising
 
-const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
+type PurchaseFormProps = {
+  email: string
+  initialTxId?: string | null
+  initialCharacter?: string | null
+  confirmed?: boolean
+}
+
+const PurchaseForm = ({
+  email,
+  initialTxId,
+  initialCharacter,
+  confirmed,
+}: PurchaseFormProps) => {
   const { common, dashboard } = useTranslations()
+
+  const [pixMode, setPixMode] = useState(false)
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',
   )
-  const [from, setFrom] = useState(character)
-  const [txId, setTxId] = useState(id)
 
-  const { mutate } = trpc.proPayment.useMutation({
+  const [formState, setFormState] = useState<{
+    txId?: string | null
+    character?: string | null
+    pixUrl?: string | null
+    qrCode?: string
+  }>({ txId: initialTxId, character: initialCharacter })
+
+  useLayoutEffect(() => {
+    if (initialCharacter) return
+    if (confirmed === false) {
+      generateQrCode(email).then(({ qrCode, payload }) => {
+        setPixMode(true)
+        setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
+      })
+    }
+  }, [])
+
+  const orderAction = trpc.proPayment.useMutation({
     onMutate: () => {
       setRequestStatus('LOADING')
     },
@@ -28,29 +67,26 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
       setRequestStatus('ERROR')
       toast.error(common.genericError)
     },
-    onSuccess: ({ paymentData }) => {
+    onSuccess: async ({ paymentData }) => {
       if (paymentData) {
-        setTxId(paymentData.id)
-        setFrom(paymentData.character)
+        const data: typeof formState = {}
+        data.txId = paymentData.id
+
+        if (paymentData.character) {
+          data.character = paymentData.character
+        } else {
+          const { qrCode, payload } = await generateQrCode(email)
+          data.qrCode = qrCode
+          data.pixUrl = payload
+        }
+
+        setFormState(data)
       }
 
       setRequestStatus('SUCCESSFUL')
       toast.success(dashboard.PurchaseForm.orderReceived)
     },
   })
-
-  const onSubmit = useCallback(
-    async (
-      e: React.FormEvent<
-        ExtendedHTMLFormElement<{ character: HTMLInputElement }>
-      >,
-    ) => {
-      e.preventDefault()
-      const { value } = e.currentTarget.elements.character
-      mutate({ character: value })
-    },
-    [mutate],
-  )
 
   const resetStep = useCallback(() => setRequestStatus('IDLE'), [])
 
@@ -82,57 +118,149 @@ const PurchaseForm = ({ id, character, confirmed }: PurchaseFormProps) => {
         }
       >
         <div className="text-tsm leading-tight">
-          {requestStatus !== 'SUCCESSFUL' ? (
-            <div className="grid gap-3">
-              <FromTo from={from} to={BANK_CHARACTER} />
+          {requestStatus !== 'SUCCESSFUL' && (
+            <div>
+              <div className="-mx-3">
+                <OptionButton
+                  active={!pixMode}
+                  aria-label="Tibia Coins"
+                  onClick={() => setPixMode(false)}
+                  icon={
+                    <Image
+                      alt="Tibia Coin"
+                      src={TibiaCoinsSrc}
+                      width="24"
+                      height="24"
+                      className="pixelated"
+                    />
+                  }
+                >
+                  Tibia Coins
+                </OptionButton>
+                <OptionButton
+                  active={pixMode}
+                  aria-label="Pix"
+                  onClick={() => setPixMode(true)}
+                  icon={
+                    <Image
+                      alt="Pix"
+                      src={PixSrc}
+                      width="24"
+                      height="24"
+                      className="pixelated"
+                    />
+                  }
+                >
+                  Pix
+                </OptionButton>
+              </div>
 
-              <form onSubmit={onSubmit} className="flex items-end gap-4">
-                <Input
-                  className="w-full"
-                  name="character"
-                  label={dashboard.PurchaseForm.paymentCharacterLabel}
-                  placeholder={`e.g, '${randomNickname}'`}
-                  defaultValue={character ?? from}
-                  onChange={(e) => {
-                    setFrom(e.target.value.trim())
-                    setRequestStatus('IDLE')
-                  }}
-                  enterKeyHint="send"
-                  disabled={isLoading}
-                  error={requestStatus === 'ERROR'}
-                />
+              <div
+                role="none"
+                className="bg-separator mt-1 mb-3 h-[1px] w-full opacity-50"
+              />
+
+              {!pixMode && (
+                <FromTo from={formState.character ?? ''} to={BANK_CHARACTER} />
+              )}
+
+              <div className="mt-1 flex items-end gap-4">
+                {pixMode ? (
+                  <p className="self-center text-base font-bold">
+                    <span className="text-tsm font-light tracking-wide">
+                      {dashboard.PurchaseForm.total}
+                    </span>{' '}
+                    R$ 45,00
+                  </p>
+                ) : (
+                  <Input
+                    className="w-full"
+                    name="character"
+                    label={dashboard.PurchaseForm.paymentCharacterLabel}
+                    placeholder={`e.g, '${randomNickname}'`}
+                    value={formState.character ?? ''}
+                    onChange={(e) => {
+                      setFormState((prev) => ({
+                        ...prev,
+                        character: e.target.value,
+                      }))
+                      setRequestStatus('IDLE')
+                    }}
+                    enterKeyHint="send"
+                    disabled={isLoading}
+                    error={requestStatus === 'ERROR'}
+                  />
+                )}
+
                 <Button
                   type="submit"
                   pill
-                  className="mb-[1px] py-3"
+                  className="ml-auto mb-[1px] py-3"
                   loading={isLoading}
-                  disabled={!from || from.length < 2}
+                  disabled={
+                    !pixMode &&
+                    (!formState.character || formState.character.length < 2)
+                  }
+                  onClick={() =>
+                    orderAction.mutate(
+                      pixMode
+                        ? {}
+                        : { character: formState.character as string },
+                    )
+                  }
                 >
                   {dashboard.PurchaseForm.confirm}
                 </Button>
-              </form>
+              </div>
             </div>
-          ) : (
+          )}
+
+          {requestStatus === 'SUCCESSFUL' && (
             <div className="grid gap-5">
               <strong className="text-txl tracking-wide">
                 {dashboard.PurchaseForm.orderReceived} 🎉
               </strong>
 
-              {txId && (
+              {!!formState.txId && (
                 <div className="grid gap-2">
                   <p id="tx-id">{dashboard.PurchaseForm.transactionId}:</p>
                   <p
                     aria-labelledby="tx-id"
                     className="code mx-auto w-fit text-center"
                   >
-                    {txId}
+                    {formState.txId}
                   </p>
                 </div>
               )}
 
               <p>{dashboard.PurchaseForm.notice}</p>
 
-              <FromTo className="mx-auto" from={from} to={BANK_CHARACTER} />
+              {pixMode ? (
+                <div>
+                  <span className="code flex items-center gap-1.5 break-all text-xs">
+                    {formState.pixUrl}
+                    <CopyButton
+                      copyString={formState.pixUrl as string}
+                      className="!bg-primary child:fill-onPrimary shrink-0"
+                    />
+                  </span>
+                  <p className="text-s mb-1.5 mt-[22px] text-center">
+                    {dashboard.PurchaseForm.qrCodeText}
+                  </p>
+                  <img
+                    className="mx-auto block"
+                    alt="QR Code"
+                    src={formState.qrCode}
+                    style={{ zoom: 1 / 2, imageRendering: 'pixelated' }}
+                  />
+                </div>
+              ) : (
+                <FromTo
+                  className="mx-auto"
+                  from={formState.character ?? ''}
+                  to={BANK_CHARACTER}
+                />
+              )}
 
               <Button className="mx-auto" pill hollow onClick={resetStep}>
                 <EditIcon className="h-4 w-4" />

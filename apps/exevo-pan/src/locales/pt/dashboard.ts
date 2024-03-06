@@ -68,11 +68,13 @@ export default defaultComposer(defaultTranslations, {
     order: 'Pedido',
     payment: 'Pagamento',
     paymentCharacterLabel: 'Personagem que enviará as coins',
+    total: 'Total:',
+    qrCodeText: 'ou use o QR Code:',
     confirm: 'Confirmar',
     orderReceived: 'Seu pedido foi enviado!',
     transactionId: 'ID da transação',
     notice:
-      'Seu pedido será entregue logo após confirmarmos o seu pagamento. Se o seu pedido não puder ser completado, suas coins serão devolvidas.',
+      'Seu pedido será entregue logo após confirmarmos o seu pagamento. Se o seu pedido não puder ser completado, seu dinheiro será devolvido.',
     edit: 'Editar pedido',
   },
   TransactionHistory: {
