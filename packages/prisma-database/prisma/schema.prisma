@@ -95,8 +95,8 @@ model PaymentData {
 
 model ReferralTag {
   id  String @id
-  in  Int    @default(0)
-  out Int    @default(0)
+  tcIn  Int    @default(0)
+  tcOut Int    @default(0)
 
   withdrawCharacter String  @default("")
   withdrawing       Boolean @default(false)

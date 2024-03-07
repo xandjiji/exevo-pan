@@ -10,12 +10,14 @@ import * as auctionHighlights from './admin/auctionHighlights'
 import { revalidatePage } from './admin/revalidatePage'
 import * as notifyAdmin from './admin/notifyAdmin'
 import { notifyUser } from './admin/notifyUser'
+import * as manageReferrals from './admin/manageReferrals'
 import * as guildCrud from './guild/crud'
 import { registerNotificationDevice } from './registerNotificationDevice'
 import { registerAuctionNotification } from './registerAuctionNotification'
 import { testMyNotification } from './testMyNotification'
 import * as dashboard from './dashboard'
 import * as auctions from './auctions'
+import * as referrals from './referrals'
 
 export const routes = {
   registerNotificationDevice,
@@ -36,4 +38,6 @@ export const routes = {
   ...guildCrud,
   ...dashboard,
   ...auctions,
+  ...referrals,
+  ...manageReferrals,
 }
