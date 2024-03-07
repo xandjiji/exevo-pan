@@ -2,7 +2,8 @@ import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
-import { AuctionNotifications, Layout } from 'modules/Dashboard'
+import { Layout } from 'modules/Dashboard'
+import { ReferralTagForm } from 'modules/Dashboard/modules/Referrals'
 import { toast } from 'react-hot-toast'
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
@@ -11,6 +12,14 @@ import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
+
+// @ ToDo:
+// create tag form
+// media kit
+// referral balance
+// withdraw
+// only for pro members (add free state)
+// meta tags, page title, etc
 
 export default function Page() {
   const translations = useTranslations()
@@ -96,9 +105,9 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading}>
-          {list.data && (
-            <AuctionNotifications.List list={list.data} onDelete={onDelete} />
-          )}
+          <div className="grid grid-cols-[1fr_320px] gap-4">
+            <div /> <ReferralTagForm />
+          </div>
         </Layout>
       </Main>
     </>
