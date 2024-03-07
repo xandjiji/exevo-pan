@@ -9,6 +9,7 @@ import { Button, Input, TitledCard } from 'components/Atoms'
 // save request
 // download endpoint?
 // copy button (and about blank)
+// gringo influencers
 
 const couponExample = () => {
   const samples = [
