@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import clsx from 'clsx'
+import { links, routes } from 'Constants'
 import { ExevoPanIcon } from 'assets/svgs'
 import { Button, Input, TitledCard } from 'components/Atoms'
 
@@ -7,7 +8,7 @@ import { Button, Input, TitledCard } from 'components/Atoms'
 // manage state
 // save request
 // download endpoint?
-// copy button
+// copy button (and about blank)
 
 const couponExample = () => {
   const samples = [
@@ -26,6 +27,10 @@ const couponExample = () => {
 
 export const ReferralTagForm = () => {
   const [coupon, setCoupon] = useState('')
+
+  const refLink = `https://exevopan.com${routes.EXEVOPRO}?ref=${
+    coupon || 'COUPON'
+  }`
 
   return (
     <TitledCard variant="rounded" title="My coupon">
@@ -67,6 +72,16 @@ export const ReferralTagForm = () => {
             </span>
           </div>
         </div>
+      </div>
+
+      <div className="mt-3">
+        <p className="mb-0.5 text-xs tracking-wide">Referral link:</p>
+        <a
+          href={refLink}
+          className="text-primaryHighlight text-tsm font-bold underline underline-offset-2"
+        >
+          {refLink}
+        </a>
       </div>
     </TitledCard>
   )
