@@ -1,7 +1,13 @@
 import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { SubHeader } from 'templates'
-import { PersonIcon, PapyrusIcon, BlogIcon, AlertIcon } from 'assets/svgs'
+import {
+  AlertIcon,
+  BlogIcon,
+  MoneyIcon,
+  PapyrusIcon,
+  PersonIcon,
+} from 'assets/svgs'
 import { routes } from 'Constants'
 import UserCard from './UserCard'
 
@@ -39,6 +45,11 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
             title: i18n.nav.devices,
             href: routes.DASHBOARD.DEVICES,
             icon: <BlogIcon />,
+          },
+          {
+            title: i18n.nav.referrals,
+            href: routes.DASHBOARD.REFERRALS,
+            icon: <MoneyIcon />,
           },
         ]}
       />

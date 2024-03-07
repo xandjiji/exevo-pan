@@ -26,6 +26,7 @@ export default defaultComposer(defaultTranslations, {
       transactions: 'Histórico de transações',
       notifications: 'Notificações de leilões',
       devices: 'Notificações em dispositivos',
+      referrals: 'Indicações',
     },
   },
   UserCard: {

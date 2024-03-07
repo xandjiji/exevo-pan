@@ -23,6 +23,7 @@ export default {
       transactions: 'Transaction history',
       notifications: 'Auction notifications',
       devices: 'Notification devices',
+      referrals: 'Referrals',
     },
   },
   UserCard: {
