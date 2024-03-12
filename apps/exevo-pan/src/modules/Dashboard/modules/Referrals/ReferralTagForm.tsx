@@ -1,15 +1,19 @@
-import { useState } from 'react'
 import clsx from 'clsx'
-import { links, routes } from 'Constants'
+import { routes } from 'Constants'
 import { ExevoPanIcon } from 'assets/svgs'
 import { Button, Input, TitledCard } from 'components/Atoms'
 
 // @ ToDo:
-// manage state
-// save request
 // download endpoint?
 // copy button (and about blank)
 // gringo influencers
+// enter submit, enter submit for exevo pro
+
+type ReferralTagFormProps = {
+  couponValue: string
+  onCouponValueChange: (value: string) => void
+  onSubmit: () => void
+}
 
 const couponExample = () => {
   const samples = [
@@ -26,11 +30,13 @@ const couponExample = () => {
   return samples[Math.floor(Math.random() * samples.length)]
 }
 
-export const ReferralTagForm = () => {
-  const [coupon, setCoupon] = useState('')
-
+export const ReferralTagForm = ({
+  couponValue,
+  onCouponValueChange,
+  onSubmit,
+}: ReferralTagFormProps) => {
   const refLink = `https://exevopan.com${routes.EXEVOPRO}?ref=${
-    coupon || 'COUPON'
+    couponValue || 'COUPON'
   }`
 
   return (
@@ -42,11 +48,11 @@ export const ReferralTagForm = () => {
           maxLength={16}
           allowClear
           className="grow"
-          value={coupon}
-          onChange={(e) => setCoupon(e.target.value.toUpperCase())}
+          value={couponValue}
+          onChange={(e) => onCouponValueChange(e.target.value.toUpperCase())}
         />
 
-        <Button pill className="mb-[1px] py-3">
+        <Button pill className="mb-[1px] py-3" onClick={onSubmit}>
           Save
         </Button>
       </div>
@@ -65,11 +71,13 @@ export const ReferralTagForm = () => {
           </strong>
 
           <div className="flex items-center justify-center gap-1.5">
-            <span className={clsx('text-xs', coupon.length < 12 && '-ml-4')}>
+            <span
+              className={clsx('text-xs', couponValue.length < 12 && '-ml-4')}
+            >
               Using:
             </span>
             <span className="bg-primaryVariantHighlight/40 border-1 border-primaryHighlight/60 text-tsm text-onSurface rounded border-dashed px-2 py-1 font-bold">
-              {coupon || 'COUPON'}
+              {couponValue || 'COUPON'}
             </span>
           </div>
         </div>

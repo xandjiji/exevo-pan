@@ -1,10 +1,11 @@
+import { useState } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
 import { ReferralTagForm } from 'modules/Dashboard/modules/Referrals'
-import { toast } from 'react-hot-toast'
+
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
 import { buildPageTitle, buildUrl } from 'utils'
@@ -37,15 +38,15 @@ export default function Page() {
     keepPreviousData: true,
   })
 
-  const remove = trpc.deleteMyAuctionNotification.useMutation()
-  const onDelete = (id: string) =>
-    toast
-      .promise(remove.mutateAsync(id), {
-        success: i18n.AuctionNotifications.successMessage,
-        error: translations.common.genericError,
-        loading: translations.common.genericLoading,
-      })
-      .then(() => list.refetch())
+  const [couponValue, setCouponValue] = useState('')
+
+  const referralTag = trpc.getReferralTag.useQuery(undefined, {
+    onSuccess: (data) => {
+      if (data) setCouponValue(data.id)
+    },
+  })
+
+  const updateCouponAction = trpc.editCoupon.useMutation()
 
   return (
     <>
@@ -104,9 +105,13 @@ export default function Page() {
       </Head>
 
       <Main>
-        <Layout isLoading={list.isLoading}>
+        <Layout isLoading={list.isLoading && referralTag.isLoading}>
           <div className="grid grid-cols-[1fr_320px] gap-4">
-            <div /> <ReferralTagForm />
+            <ReferralTagForm
+              couponValue={couponValue}
+              onCouponValueChange={setCouponValue}
+              onSubmit={() => updateCouponAction.mutate(couponValue)}
+            />
           </div>
         </Layout>
       </Main>
