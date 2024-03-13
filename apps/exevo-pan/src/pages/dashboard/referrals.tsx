@@ -21,6 +21,7 @@ const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 // only for pro members (add free state)
 // meta tags, page title, etc
 // i18n
+// test conflicting ids
 
 export default function Page() {
   const translations = useTranslations()
