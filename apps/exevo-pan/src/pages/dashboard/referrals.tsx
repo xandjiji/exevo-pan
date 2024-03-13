@@ -5,6 +5,7 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
 import { ReferralTagForm } from 'modules/Dashboard/modules/Referrals'
+import { toast } from 'react-hot-toast'
 
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
@@ -15,12 +16,11 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// create tag form
-// media kit
 // referral balance
 // withdraw
 // only for pro members (add free state)
 // meta tags, page title, etc
+// i18n
 
 export default function Page() {
   const translations = useTranslations()
@@ -46,7 +46,10 @@ export default function Page() {
     },
   })
 
-  const updateCouponAction = trpc.editCoupon.useMutation()
+  const updateCouponAction = trpc.editCoupon.useMutation({
+    onSuccess: () => toast.success('Your coupon was updated!'),
+    onError: () => toast.error('Oops! Something went wrong'),
+  })
 
   return (
     <>
@@ -111,6 +114,7 @@ export default function Page() {
               couponValue={couponValue}
               onCouponValueChange={setCouponValue}
               onSubmit={() => updateCouponAction.mutate(couponValue)}
+              isLoading={updateCouponAction.isLoading}
             />
           </div>
         </Layout>

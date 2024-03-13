@@ -13,6 +13,7 @@ type ReferralTagFormProps = {
   couponValue: string
   onCouponValueChange: (value: string) => void
   onSubmit: () => void
+  isLoading: boolean
 }
 
 const couponExample = () => {
@@ -34,10 +35,13 @@ export const ReferralTagForm = ({
   couponValue,
   onCouponValueChange,
   onSubmit,
+  isLoading,
 }: ReferralTagFormProps) => {
   const refLink = `https://exevopan.com${routes.EXEVOPRO}?ref=${
     couponValue || 'COUPON'
   }`
+
+  const isInvalid = couponValue.length < 3 || couponValue.length > 16
 
   return (
     <TitledCard variant="rounded" title="My coupon">
@@ -50,9 +54,16 @@ export const ReferralTagForm = ({
           className="grow"
           value={couponValue}
           onChange={(e) => onCouponValueChange(e.target.value.toUpperCase())}
+          disabled={isLoading}
         />
 
-        <Button pill className="mb-[1px] py-3" onClick={onSubmit}>
+        <Button
+          pill
+          className="mb-[1px] py-3"
+          onClick={onSubmit}
+          loading={isLoading}
+          disabled={isInvalid}
+        >
           Save
         </Button>
       </div>
