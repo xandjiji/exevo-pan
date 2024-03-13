@@ -1,11 +1,10 @@
 import clsx from 'clsx'
 import { routes } from 'Constants'
 import { ExevoPanIcon } from 'assets/svgs'
-import { Button, Input, TitledCard } from 'components/Atoms'
+import { Button, CopyButton, Input, TitledCard } from 'components/Atoms'
 
 // @ ToDo:
 // download endpoint?
-// copy button (and about blank)
 // gringo influencers
 
 type ReferralTagFormProps = {
@@ -100,12 +99,15 @@ export const ReferralTagForm = ({
 
       <div className="mt-3">
         <p className="mb-0.5 text-xs tracking-wide">Referral link:</p>
-        <a
-          href={refLink}
-          className="text-primaryHighlight text-tsm font-bold underline underline-offset-2"
-        >
-          {refLink}
-        </a>
+        <div className="flex items-center gap-2">
+          <a
+            href={refLink}
+            className="text-primaryHighlight text-tsm font-bold underline underline-offset-2"
+          >
+            {refLink}
+          </a>
+          {!isInvalid && <CopyButton copyString={refLink} variant="small" />}
+        </div>
       </div>
     </TitledCard>
   )
