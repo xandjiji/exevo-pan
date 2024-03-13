@@ -7,7 +7,6 @@ import { Button, Input, TitledCard } from 'components/Atoms'
 // download endpoint?
 // copy button (and about blank)
 // gringo influencers
-// enter submit, enter submit for exevo pro
 
 type ReferralTagFormProps = {
   couponValue: string
@@ -55,6 +54,11 @@ export const ReferralTagForm = ({
           value={couponValue}
           onChange={(e) => onCouponValueChange(e.target.value.toUpperCase())}
           disabled={isLoading}
+          onKeyPress={(e) => {
+            if (e.key === 'Enter' && !isLoading && !isInvalid) {
+              onSubmit()
+            }
+          }}
         />
 
         <Button
