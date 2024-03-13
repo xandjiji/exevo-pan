@@ -4,7 +4,6 @@ import { ExevoPanIcon } from 'assets/svgs'
 import { Button, CopyButton, Input, TitledCard } from 'components/Atoms'
 
 // @ ToDo:
-// download endpoint?
 // gringo influencers
 
 type ReferralTagFormProps = {
