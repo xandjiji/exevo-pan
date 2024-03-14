@@ -45,24 +45,25 @@ enum Role {
 }
 
 model User {
-  id                  String                @id @default(uuid())
-  role                Role                  @default(USER)
-  name                String?
-  email               String?               @unique
-  emailVerified       DateTime?
-  image               String?
-  accounts            Account[]
-  sessions            Session[]
-  proStatus           Boolean               @default(false)
-  proSince            DateTime?
-  paymentData         PaymentData?
-  highlightedAuctions HighlightedAuction[]
-  transactions        Transaction[]
-  NotificationDevice  NotificationDevice[]
-  auctionNotification AuctionNotification[]
-  guildMembership     GuildMember[]
-  guildApplications   GuildApplication[]
-  referralTag         ReferralTag?
+  id                   String                 @id @default(uuid())
+  role                 Role                   @default(USER)
+  name                 String?
+  email                String?                @unique
+  emailVerified        DateTime?
+  image                String?
+  accounts             Account[]
+  sessions             Session[]
+  proStatus            Boolean                @default(false)
+  proSince             DateTime?
+  paymentData          PaymentData?
+  highlightedAuctions  HighlightedAuction[]
+  transactions         Transaction[]
+  NotificationDevice   NotificationDevice[]
+  auctionNotification  AuctionNotification[]
+  guildMembership      GuildMember[]
+  guildApplications    GuildApplication[]
+  referralTag          ReferralTag?
+  referralHistoryEntry ReferralHistoryEntry[]
 }
 
 model NotificationDevice {
@@ -94,11 +95,28 @@ model PaymentData {
 }
 
 model ReferralTag {
-  id  String @id
+  id    String @id
   tcIn  Int    @default(0)
   tcOut Int    @default(0)
 
-  withdrawCharacter String  @default("")
+  withdrawCharacter String @default("")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  @@index([userId])
+}
+
+enum REFERRAL_HISTORY_TYPE {
+  COMISSION
+  WITHDRAW
+}
+
+model ReferralHistoryEntry {
+  id        String                @id @default(uuid())
+  createdAt DateTime              @default(now())
+  type      REFERRAL_HISTORY_TYPE
+  value     Int
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique

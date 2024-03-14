@@ -25,6 +25,7 @@ const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 // meta tags, page title, etc
 // i18n
 // test conflicting ids
+// purchase form coupon and procedures
 
 export default function Page() {
   const translations = useTranslations()
