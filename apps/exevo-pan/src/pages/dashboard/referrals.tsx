@@ -6,6 +6,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
 import { ReferralTagForm } from 'modules/Dashboard/modules/Referrals'
 import { Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
+import { EditIcon } from 'assets/svgs'
 import { toast } from 'react-hot-toast'
 
 import { PreviewImageClient } from 'services'
@@ -17,8 +18,9 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// withdraw action, withdrawn state
+// remove withdraw boolean from prisma schema (remove it from code and change variable names?)
 // history
+// add overall rules and informtion
 // only for pro members (add free state)
 // meta tags, page title, etc
 // i18n
@@ -42,6 +44,7 @@ export default function Page() {
 
   const [couponValue, setCouponValue] = useState('')
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
+  const [editableWithdraw, setEditableWithdraw] = useState(false)
 
   const referralTag = trpc.getReferralTag.useQuery(undefined, {
     onSuccess: (data) => {
@@ -49,11 +52,20 @@ export default function Page() {
 
       setCouponValue(data.id)
       setWithdrawCharacter(data.withdrawCharacter)
+      setEditableWithdraw(!!data.withdrawCharacter)
     },
   })
 
   const updateCouponAction = trpc.editCoupon.useMutation({
     onSuccess: () => toast.success('Your coupon was updated!'),
+    onError: () => toast.error('Oops! Something went wrong'),
+  })
+
+  const withdrawnAction = trpc.requestWithdraw.useMutation({
+    onSuccess: () => {
+      toast.success('Withdraw character was saved!')
+      setEditableWithdraw(true)
+    },
     onError: () => toast.error('Oops! Something went wrong'),
   })
 
@@ -140,17 +152,26 @@ export default function Page() {
                     className="grow"
                     value={withdrawCharacter}
                     onChange={(e) => setWithdrawCharacter(e.target.value)}
-                    // disabled={isLoading}
+                    disabled={withdrawnAction.isLoading || editableWithdraw}
                   />
 
                   <Button
                     pill
+                    hollow={editableWithdraw}
                     className="mb-[1px] py-3"
-                    // onClick={onSubmit}
-                    // loading={isLoading}
-                    // disabled={isInvalid}
+                    onClick={() => {
+                      if (editableWithdraw) {
+                        setEditableWithdraw(false)
+                        return
+                      }
+
+                      withdrawnAction.mutate(withdrawCharacter)
+                    }}
+                    loading={withdrawnAction.isLoading}
+                    disabled={withdrawCharacter.length < 2}
                   >
-                    Withdraw
+                    {editableWithdraw && <EditIcon className="h-4 w-4" />}
+                    {editableWithdraw ? 'Edit' : 'Withdraw'}
                   </Button>
                 </div>
               </div>

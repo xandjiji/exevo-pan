@@ -14,32 +14,16 @@ export const editCoupon = premiumProcedure
     return result
   })
 
-export const patchReferralTag = premiumProcedure
-  .input(
-    z.object({
-      withdrawCharacter: z.string().min(2).max(32).optional(),
-      withdrawing: z.boolean().optional(),
-    }),
-  )
-  .mutation(async ({ ctx: { token }, input }) => {
+export const requestWithdraw = premiumProcedure
+  .input(z.string().min(2))
+  .mutation(async ({ ctx: { token }, input: withdrawCharacter }) => {
     const result = await prisma.referralTag.update({
       where: { userId: token.id },
-      data: input,
+      data: { withdrawing: true, withdrawCharacter },
     })
 
     return result
   })
-
-export const requestWithdraw = premiumProcedure.mutation(
-  async ({ ctx: { token } }) => {
-    const result = await prisma.referralTag.update({
-      where: { userId: token.id },
-      data: { withdrawing: true },
-    })
-
-    return result
-  },
-)
 
 export const getReferralTag = premiumProcedure.query(
   async ({ ctx: { token } }) => {
