@@ -18,14 +18,14 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// history
+// purchase form coupon and procedures
 // add overall rules and informtion
 // only for pro members (add free state)
 // overall layout
 // meta tags, page title, etc
 // i18n
 // test conflicting ids
-// purchase form coupon and procedures
+// history
 
 export default function Page() {
   const translations = useTranslations()

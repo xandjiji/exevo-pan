@@ -3,10 +3,13 @@ import { prisma } from 'lib/prisma'
 import { authedProcedure } from 'server/trpc'
 import { caller } from 'pages/api/trpc/[trpc]'
 
+// @ ToDo: validate coupon (return perc discount)
+
 export const proPayment = authedProcedure
   .input(
     z.object({
       character: z.string().min(2).optional(),
+      coupon: z.string().optional(),
     }),
   )
   .mutation(
@@ -14,7 +17,7 @@ export const proPayment = authedProcedure
       ctx: {
         token: { id, proStatus },
       },
-      input: { character },
+      input: { character, coupon },
     }) => {
       if (proStatus) return { paymentData: null }
 
@@ -23,11 +26,32 @@ export const proPayment = authedProcedure
         lastUpdated: new Date().toISOString(),
       }
 
+      let discountPercent = 0
+      let referralUserId = ''
+      if (coupon) {
+        const referralTag = await prisma.referralTag.findUnique({
+          where: { id: coupon },
+        })
+
+        if (referralTag) {
+          discountPercent = referralTag.discountPercent
+          referralUserId = referralTag.userId
+        }
+      }
+
       const user = await prisma.user.update({
         where: { id },
         data: {
           paymentData: {
-            upsert: { create: { ...data, confirmed: false }, update: data },
+            upsert: {
+              create: {
+                ...data,
+                referralUserId,
+                discountPercent,
+                confirmed: false,
+              },
+              update: { ...data, referralUserId, discountPercent },
+            },
           },
         },
         include: { paymentData: true },

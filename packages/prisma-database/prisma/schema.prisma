@@ -80,12 +80,13 @@ model NotificationDevice {
 }
 
 model PaymentData {
-  id          String   @id @default(uuid())
-  lastUpdated DateTime
-  character   String?
-  confirmed   Boolean
-  noBill      Boolean  @default(false)
-  coupon      String   @default("")
+  id              String   @id @default(uuid())
+  lastUpdated     DateTime
+  character       String?
+  confirmed       Boolean
+  noBill          Boolean  @default(false)
+  referralUserId  String?
+  discountPercent Int?
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
@@ -96,9 +97,10 @@ model PaymentData {
 }
 
 model ReferralTag {
-  id    String @id
-  tcIn  Int    @default(0)
-  tcOut Int    @default(0)
+  id              String @id
+  tcIn            Int    @default(0)
+  tcOut           Int    @default(0)
+  discountPercent Int    @default(10)
 
   withdrawCharacter String @default("")
 
