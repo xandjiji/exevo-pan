@@ -3,7 +3,15 @@ import { prisma } from 'lib/prisma'
 import { authedProcedure } from 'server/trpc'
 import { caller } from 'pages/api/trpc/[trpc]'
 
-// @ ToDo: validate coupon (return perc discount)
+export const checkProCoupon = authedProcedure
+  .input(z.string())
+  .query(async ({ input }) => {
+    const referralTag = await prisma.referralTag.findUnique({
+      where: { id: input },
+    })
+
+    return referralTag ? referralTag.discountPercent : 0
+  })
 
 export const proPayment = authedProcedure
   .input(
