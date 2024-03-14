@@ -5,19 +5,20 @@ import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
 import { ReferralTagForm } from 'modules/Dashboard/modules/Referrals'
+import { Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
 import { toast } from 'react-hot-toast'
 
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
-import { buildPageTitle, buildUrl } from 'utils'
+import { buildPageTitle, buildUrl, randomCharacter } from 'utils'
 import { jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// referral balance
-// withdraw
+// withdraw action, withdrawn state
+// history
 // only for pro members (add free state)
 // meta tags, page title, etc
 // i18n
@@ -40,10 +41,14 @@ export default function Page() {
   })
 
   const [couponValue, setCouponValue] = useState('')
+  const [withdrawCharacter, setWithdrawCharacter] = useState('')
 
   const referralTag = trpc.getReferralTag.useQuery(undefined, {
     onSuccess: (data) => {
-      if (data) setCouponValue(data.id)
+      if (!data) return
+
+      setCouponValue(data.id)
+      setWithdrawCharacter(data.withdrawCharacter)
     },
   })
 
@@ -111,6 +116,46 @@ export default function Page() {
       <Main>
         <Layout isLoading={list.isLoading && referralTag.isLoading}>
           <div className="grid grid-cols-[1fr_320px] gap-4">
+            <TitledCard variant="rounded" title="Summary">
+              <div className="flex flex-col gap-4">
+                <span>
+                  Current balance:{' '}
+                  <Chip gray className="mt-1 w-fit">
+                    <Text.TibiaCoin value={referralTag.data?.tcIn ?? 0} />
+                  </Chip>
+                </span>
+
+                <span>
+                  Total withdrawn:{' '}
+                  <Chip gray className="mt-1 w-fit">
+                    <Text.TibiaCoin value={referralTag.data?.tcOut ?? 0} />
+                  </Chip>
+                </span>
+
+                <div className="flex items-end gap-2">
+                  <Input
+                    label="Withdraw coins to"
+                    placeholder={`e.g, '${randomCharacter()}'`}
+                    allowClear
+                    className="grow"
+                    value={withdrawCharacter}
+                    onChange={(e) => setWithdrawCharacter(e.target.value)}
+                    // disabled={isLoading}
+                  />
+
+                  <Button
+                    pill
+                    className="mb-[1px] py-3"
+                    // onClick={onSubmit}
+                    // loading={isLoading}
+                    // disabled={isInvalid}
+                  >
+                    Withdraw
+                  </Button>
+                </div>
+              </div>
+            </TitledCard>
+
             <ReferralTagForm
               couponValue={couponValue}
               onCouponValueChange={setCouponValue}
