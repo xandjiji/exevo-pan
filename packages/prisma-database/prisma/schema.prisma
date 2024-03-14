@@ -85,6 +85,7 @@ model PaymentData {
   character   String?
   confirmed   Boolean
   noBill      Boolean  @default(false)
+  coupon      String   @default("")
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique

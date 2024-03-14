@@ -34,3 +34,19 @@ export const getReferralTag = premiumProcedure.query(
     return result
   },
 )
+
+export const listMyReferralHistoryEntries = premiumProcedure
+  .input(
+    z.object({
+      pageSize: z.number().optional().default(10),
+      pageIndex: z.number().optional().default(0),
+    }),
+  )
+  .query(({ ctx: { token }, input: { pageSize, pageIndex } }) =>
+    prisma.referralHistoryEntry.findMany({
+      where: { userId: token.id },
+      orderBy: { createdAt: 'desc' },
+      take: pageSize,
+      skip: pageIndex * pageSize,
+    }),
+  )
