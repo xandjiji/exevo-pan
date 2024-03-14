@@ -18,10 +18,10 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// remove withdraw boolean from prisma schema (remove it from code and change variable names?)
 // history
 // add overall rules and informtion
 // only for pro members (add free state)
+// overall layout
 // meta tags, page title, etc
 // i18n
 // test conflicting ids
@@ -61,7 +61,7 @@ export default function Page() {
     onError: () => toast.error('Oops! Something went wrong'),
   })
 
-  const withdrawnAction = trpc.requestWithdraw.useMutation({
+  const withdrawCharacterAction = trpc.setWithdrawCharacter.useMutation({
     onSuccess: () => {
       toast.success('Withdraw character was saved!')
       setEditableWithdraw(true)
@@ -152,7 +152,9 @@ export default function Page() {
                     className="grow"
                     value={withdrawCharacter}
                     onChange={(e) => setWithdrawCharacter(e.target.value)}
-                    disabled={withdrawnAction.isLoading || editableWithdraw}
+                    disabled={
+                      withdrawCharacterAction.isLoading || editableWithdraw
+                    }
                   />
 
                   <Button
@@ -165,9 +167,9 @@ export default function Page() {
                         return
                       }
 
-                      withdrawnAction.mutate(withdrawCharacter)
+                      withdrawCharacterAction.mutate(withdrawCharacter)
                     }}
-                    loading={withdrawnAction.isLoading}
+                    loading={withdrawCharacterAction.isLoading}
                     disabled={withdrawCharacter.length < 2}
                   >
                     {editableWithdraw && <EditIcon className="h-4 w-4" />}

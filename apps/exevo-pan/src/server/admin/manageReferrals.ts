@@ -3,7 +3,9 @@ import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
 
 export const getAllWithdrawRequests = adminProcedure.query(() =>
-  prisma.referralTag.findMany({ where: { withdrawing: true } }),
+  prisma.referralTag.findMany({
+    where: { tcIn: { gt: 0 }, withdrawCharacter: { not: '' } },
+  }),
 )
 
 export const sendWithdraw = adminProcedure
@@ -17,7 +19,6 @@ export const sendWithdraw = adminProcedure
     const result = await prisma.referralTag.update({
       where: { id: tagId },
       data: {
-        withdrawing: false,
         tcOut: { increment: tcOut },
         tcIn: { decrement: tcOut },
       },

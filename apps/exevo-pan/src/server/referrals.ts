@@ -14,12 +14,12 @@ export const editCoupon = premiumProcedure
     return result
   })
 
-export const requestWithdraw = premiumProcedure
+export const setWithdrawCharacter = premiumProcedure
   .input(z.string().min(2))
   .mutation(async ({ ctx: { token }, input: withdrawCharacter }) => {
     const result = await prisma.referralTag.update({
       where: { userId: token.id },
-      data: { withdrawing: true, withdrawCharacter },
+      data: { withdrawCharacter },
     })
 
     return result
