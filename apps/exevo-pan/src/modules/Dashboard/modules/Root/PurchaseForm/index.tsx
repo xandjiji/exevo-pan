@@ -195,7 +195,7 @@ const PurchaseForm = ({
                 <Button
                   type="submit"
                   pill
-                  className="ml-auto mb-[1px] py-3"
+                  className="ml-auto mb-[1px] !py-3"
                   loading={isLoading}
                   disabled={
                     !pixMode &&

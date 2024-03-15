@@ -61,7 +61,7 @@ export const ReferralTagForm = ({
 
         <Button
           pill
-          className="mb-[1px] py-3"
+          className="mb-[1px] !py-3"
           onClick={onSubmit}
           loading={isLoading}
           disabled={isInvalid}

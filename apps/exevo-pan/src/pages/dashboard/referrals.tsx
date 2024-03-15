@@ -49,6 +49,9 @@ export default function Page() {
   const [coupon, setCoupon] = useState('')
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
   const [editableWithdraw, setEditableWithdraw] = useState(false)
+  const [loading, setLoading] = useState<'coupon' | 'withdrawCharacter' | null>(
+    null,
+  )
 
   const referralTag = trpc.getReferralTag.useQuery(undefined, {
     onSuccess: (data) => {
@@ -61,6 +64,9 @@ export default function Page() {
   })
 
   const editReferralAction = trpc.editReferralTag.useMutation({
+    onMutate: (data) => {
+      setLoading(data.coupon ? 'coupon' : 'withdrawCharacter')
+    },
     onSuccess: (data) => {
       if (data.success) {
         toast.success(
@@ -68,15 +74,20 @@ export default function Page() {
             ? 'Your coupon was updated!'
             : 'Withdraw character was saved!',
         )
-      } else {
-        toast.error(
-          data.coupon
-            ? 'This coupon is already taken'
-            : 'Oops! Something went wrong',
-        )
+
+        if (data.withdrawCharacter) setEditableWithdraw(true)
+
+        return
       }
+
+      toast.error(
+        data.coupon
+          ? 'This coupon is already taken'
+          : 'Oops! Something went wrong',
+      )
     },
     onError: () => toast.error('This coupon is already taken'),
+    onSettled: () => setLoading(null),
   })
 
   return (
@@ -168,7 +179,7 @@ export default function Page() {
                   <Button
                     pill
                     hollow={editableWithdraw}
-                    className="mb-[1px] py-3"
+                    className="mb-[1px] !py-3"
                     onClick={() => {
                       if (editableWithdraw) {
                         setEditableWithdraw(false)
@@ -177,7 +188,7 @@ export default function Page() {
 
                       editReferralAction.mutate({ withdrawCharacter })
                     }}
-                    loading={editReferralAction.isLoading}
+                    loading={loading === 'withdrawCharacter'}
                     disabled={withdrawCharacter.length < 2}
                   >
                     {editableWithdraw && <EditIcon className="h-4 w-4" />}
@@ -191,7 +202,7 @@ export default function Page() {
               couponValue={coupon}
               onCouponValueChange={setCoupon}
               onSubmit={() => editReferralAction.mutate({ coupon })}
-              isLoading={editReferralAction.isLoading}
+              isLoading={loading === 'coupon'}
             />
           </div>
         </Layout>
