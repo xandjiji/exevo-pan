@@ -19,6 +19,9 @@ const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
 // purchase form coupon and procedures
+// admin dash: display discount
+// admin dash: calculate estimatives with discount and tc price change
+
 // add overall rules and informtion
 // only for pro members (add free state)
 // overall layout
@@ -43,7 +46,7 @@ export default function Page() {
     keepPreviousData: true,
   })
 
-  const [couponValue, setCouponValue] = useState('')
+  const [coupon, setCoupon] = useState('')
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
   const [editableWithdraw, setEditableWithdraw] = useState(false)
 
@@ -51,23 +54,29 @@ export default function Page() {
     onSuccess: (data) => {
       if (!data) return
 
-      setCouponValue(data.id)
+      setCoupon(data.coupon)
       setWithdrawCharacter(data.withdrawCharacter)
       setEditableWithdraw(!!data.withdrawCharacter)
     },
   })
 
-  const updateCouponAction = trpc.editCoupon.useMutation({
-    onSuccess: () => toast.success('Your coupon was updated!'),
-    onError: () => toast.error('Oops! Something went wrong'),
-  })
-
-  const withdrawCharacterAction = trpc.setWithdrawCharacter.useMutation({
-    onSuccess: () => {
-      toast.success('Withdraw character was saved!')
-      setEditableWithdraw(true)
+  const editReferralAction = trpc.editReferralTag.useMutation({
+    onSuccess: (data) => {
+      if (data.success) {
+        toast.success(
+          data.coupon
+            ? 'Your coupon was updated!'
+            : 'Withdraw character was saved!',
+        )
+      } else {
+        toast.error(
+          data.coupon
+            ? 'This coupon is already taken'
+            : 'Oops! Something went wrong',
+        )
+      }
     },
-    onError: () => toast.error('Oops! Something went wrong'),
+    onError: () => toast.error('This coupon is already taken'),
   })
 
   return (
@@ -153,9 +162,7 @@ export default function Page() {
                     className="grow"
                     value={withdrawCharacter}
                     onChange={(e) => setWithdrawCharacter(e.target.value)}
-                    disabled={
-                      withdrawCharacterAction.isLoading || editableWithdraw
-                    }
+                    disabled={editReferralAction.isLoading || editableWithdraw}
                   />
 
                   <Button
@@ -168,9 +175,9 @@ export default function Page() {
                         return
                       }
 
-                      withdrawCharacterAction.mutate(withdrawCharacter)
+                      editReferralAction.mutate({ withdrawCharacter })
                     }}
-                    loading={withdrawCharacterAction.isLoading}
+                    loading={editReferralAction.isLoading}
                     disabled={withdrawCharacter.length < 2}
                   >
                     {editableWithdraw && <EditIcon className="h-4 w-4" />}
@@ -181,10 +188,10 @@ export default function Page() {
             </TitledCard>
 
             <ReferralTagForm
-              couponValue={couponValue}
-              onCouponValueChange={setCouponValue}
-              onSubmit={() => updateCouponAction.mutate(couponValue)}
-              isLoading={updateCouponAction.isLoading}
+              couponValue={coupon}
+              onCouponValueChange={setCoupon}
+              onSubmit={() => editReferralAction.mutate({ coupon })}
+              isLoading={editReferralAction.isLoading}
             />
           </div>
         </Layout>

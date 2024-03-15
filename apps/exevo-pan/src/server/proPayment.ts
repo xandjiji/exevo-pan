@@ -4,10 +4,10 @@ import { authedProcedure } from 'server/trpc'
 import { caller } from 'pages/api/trpc/[trpc]'
 
 export const checkProCoupon = authedProcedure
-  .input(z.string())
+  .input(z.string().min(3))
   .query(async ({ input }) => {
     const referralTag = await prisma.referralTag.findUnique({
-      where: { id: input },
+      where: { coupon: input },
     })
 
     return referralTag ? referralTag.discountPercent : 0
@@ -17,7 +17,7 @@ export const proPayment = authedProcedure
   .input(
     z.object({
       character: z.string().min(2).optional(),
-      coupon: z.string().optional(),
+      coupon: z.string().min(3).optional(),
     }),
   )
   .mutation(
@@ -38,7 +38,7 @@ export const proPayment = authedProcedure
       let referralUserId = ''
       if (coupon) {
         const referralTag = await prisma.referralTag.findUnique({
-          where: { id: coupon },
+          where: { coupon },
         })
 
         if (referralTag) {

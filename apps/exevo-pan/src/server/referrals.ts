@@ -2,27 +2,25 @@ import { z } from 'zod'
 import { premiumProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
 
-export const editCoupon = premiumProcedure
-  .input(z.string().min(3).max(16))
+export const editReferralTag = premiumProcedure
+  .input(
+    z.object({
+      coupon: z.string().min(3).max(16).optional(),
+      withdrawCharacter: z.string().optional(),
+    }),
+  )
   .mutation(async ({ ctx: { token }, input }) => {
-    const result = await prisma.referralTag.upsert({
-      where: { userId: token.id },
-      create: { id: input, userId: token.id },
-      update: { id: input },
-    })
+    try {
+      await prisma.referralTag.upsert({
+        where: { userId: token.id },
+        create: { userId: token.id, ...input },
+        update: { ...input },
+      })
 
-    return result
-  })
-
-export const setWithdrawCharacter = premiumProcedure
-  .input(z.string().min(2))
-  .mutation(async ({ ctx: { token }, input: withdrawCharacter }) => {
-    const result = await prisma.referralTag.update({
-      where: { userId: token.id },
-      data: { withdrawCharacter },
-    })
-
-    return result
+      return { success: true, ...input }
+    } catch {
+      return { success: false, ...input }
+    }
   })
 
 export const getReferralTag = premiumProcedure.query(

@@ -97,17 +97,18 @@ model PaymentData {
 }
 
 model ReferralTag {
-  id              String @id
-  tcIn            Int    @default(0)
-  tcOut           Int    @default(0)
-  discountPercent Int    @default(10)
-
+  id                String @id @default(uuid())
+  tcIn              Int    @default(0)
+  tcOut             Int    @default(0)
+  discountPercent   Int    @default(10)
   withdrawCharacter String @default("")
+  coupon            String @unique @default("")
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
 
   @@index([userId])
+  @@index([coupon])
 }
 
 enum REFERRAL_HISTORY_TYPE {
