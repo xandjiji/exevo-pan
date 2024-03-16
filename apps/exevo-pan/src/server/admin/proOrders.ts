@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
+import { calculateDiscountedExevoProPrice } from 'utils'
 import { exevoPro } from 'Constants'
 import type { PaymentData, User } from '@prisma/client'
 
@@ -58,11 +59,10 @@ export const updateProOrders = adminProcedure
 
     const isPix = !payment?.character
 
-    // remove default percent prisma
-    // constatns for exevo pro
-    // @ ToDo: add discount value
-    // add referral entry history
-    // add tc in to referral
+    const value = calculateDiscountedExevoProPrice(
+      payment?.discountPercent ?? 0,
+      isPix ? 'PIX' : 'TIBIA_COINS',
+    )
 
     const [user, transaction] = await prisma.$transaction([
       prisma.user.update({
@@ -78,7 +78,7 @@ export const updateProOrders = adminProcedure
       confirmed
         ? prisma.transaction.create({
             data: {
-              value: isPix ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS,
+              value,
               currency: isPix ? 'BRL' : 'TIBIA_COINS',
               type: 'EXEVO_PRO',
               date: currentDate,
@@ -89,6 +89,31 @@ export const updateProOrders = adminProcedure
         : prisma.transaction.delete({
             where: { exevoProPaymentId: payment?.id },
           }),
+
+      ...(payment?.referralUserId
+        ? [
+            confirmed
+              ? prisma.referralHistoryEntry.create({
+                  data: {
+                    userId: payment.referralUserId,
+                    referredUserId: payment.userId,
+                    value: exevoPro.referral.tcCommission,
+                    type: 'COMISSION',
+                  },
+                })
+              : prisma.referralHistoryEntry.delete({
+                  where: { referredUserId: payment.userId },
+                }),
+            prisma.referralTag.update({
+              where: { userId: payment.referralUserId },
+              data: {
+                tcIn: confirmed
+                  ? { increment: exevoPro.referral.tcCommission }
+                  : { decrement: exevoPro.referral.tcCommission },
+              },
+            }),
+          ]
+        : []),
     ])
 
     return { user, transaction }
