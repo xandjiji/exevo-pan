@@ -87,6 +87,7 @@ model PaymentData {
   noBill          Boolean  @default(false)
   referralUserId  String?
   discountPercent Int?
+  coupon          String?
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique

@@ -7,7 +7,7 @@ export const checkProCoupon = authedProcedure
   .input(z.string().min(3))
   .query(async ({ input }) => {
     const referralTag = await prisma.referralTag.findUnique({
-      where: { coupon: input },
+      where: { coupon: input.toUpperCase() },
     })
 
     return referralTag ? referralTag.discountPercent : 0
@@ -57,8 +57,9 @@ export const proPayment = authedProcedure
                 referralUserId,
                 discountPercent,
                 confirmed: false,
+                coupon,
               },
-              update: { ...data, referralUserId, discountPercent },
+              update: { ...data, referralUserId, discountPercent, coupon },
             },
           },
         },

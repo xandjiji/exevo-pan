@@ -2,6 +2,7 @@ import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
+import { useDebounce } from 'hooks'
 import Image from 'next/image'
 import {
   Button,
@@ -12,8 +13,12 @@ import {
   TitledCard,
 } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
-import { randomCharacter } from 'utils'
-import { advertising, exevoPro } from 'Constants'
+import {
+  calculateDiscountedExevoProPrice,
+  randomCharacter,
+  referralTracker,
+} from 'utils'
+import { advertising } from 'Constants'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import FromTo from './FromTo'
@@ -26,6 +31,8 @@ type PurchaseFormProps = {
   initialTxId?: string | null
   initialCharacter?: string | null
   confirmed?: boolean
+  initialCoupon?: string | null
+  initialDiscountPercent?: number | null
 }
 
 const PurchaseForm = ({
@@ -33,6 +40,8 @@ const PurchaseForm = ({
   initialTxId,
   initialCharacter,
   confirmed,
+  initialCoupon,
+  initialDiscountPercent,
 }: PurchaseFormProps) => {
   const { common, dashboard } = useTranslations()
 
@@ -47,7 +56,14 @@ const PurchaseForm = ({
     character?: string | null
     pixUrl?: string | null
     qrCode?: string
-  }>({ txId: initialTxId, character: initialCharacter })
+    coupon: string
+    discountPercent: number
+  }>({
+    txId: initialTxId,
+    character: initialCharacter,
+    coupon: initialCoupon ?? '',
+    discountPercent: initialDiscountPercent ?? 0,
+  })
 
   useLayoutEffect(() => {
     if (initialCharacter) return
@@ -57,6 +73,26 @@ const PurchaseForm = ({
         setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
       })
     }
+  }, [])
+
+  const debouncedCoupon = useDebounce(formState.coupon)
+
+  const validCoupon = debouncedCoupon.length >= 3
+  const checkCouponAction = trpc.checkProCoupon.useQuery(debouncedCoupon, {
+    enabled: validCoupon,
+    onSuccess: (foundDiscountPercent) =>
+      setFormState((prev) => ({
+        ...prev,
+        discountPercent: foundDiscountPercent,
+      })),
+  })
+
+  useLayoutEffect(() => {
+    if (initialCoupon) return
+
+    const lsCoupon = referralTracker.getFromLS().coupon
+    if (!lsCoupon) return
+    setFormState((prev) => ({ ...prev, coupon: lsCoupon }))
   }, [])
 
   const orderAction = trpc.proPayment.useMutation({
@@ -69,7 +105,10 @@ const PurchaseForm = ({
     },
     onSuccess: async ({ paymentData }) => {
       if (paymentData) {
-        const data: typeof formState = {}
+        const data: typeof formState = {
+          discountPercent: paymentData.discountPercent ?? 0,
+          coupon: paymentData.coupon ?? '',
+        }
         data.txId = paymentData.id
 
         if (paymentData.character) {
@@ -95,6 +134,11 @@ const PurchaseForm = ({
   const isFinished = currentStep === 1
 
   const { current: randomNickname } = useRef(randomCharacter())
+
+  const calculatedPrice = calculateDiscountedExevoProPrice(
+    formState.discountPercent,
+    pixMode ? 'PIX' : 'TIBIA_COINS',
+  )
 
   return (
     <div className="grid w-full max-w-[360px] gap-8">
@@ -160,8 +204,27 @@ const PurchaseForm = ({
                 className="bg-separator mt-1 mb-3 h-[1px] w-full opacity-50"
               />
 
+              <Input
+                label="Coupon"
+                value={formState.coupon.toUpperCase()}
+                onChange={(e) =>
+                  setFormState((prev) => ({ ...prev, coupon: e.target.value }))
+                }
+                stateIcon={
+                  validCoupon && checkCouponAction.isLoading
+                    ? 'loading'
+                    : formState.discountPercent > 0
+                    ? 'valid'
+                    : 'neutral'
+                }
+              />
+
               {!pixMode && (
-                <FromTo from={formState.character ?? ''} to={BANK_CHARACTER} />
+                <FromTo
+                  from={formState.character ?? ''}
+                  to={BANK_CHARACTER}
+                  tc={calculatedPrice}
+                />
               )}
 
               <div className="mt-1 flex items-end gap-4">
@@ -170,7 +233,7 @@ const PurchaseForm = ({
                     <span className="text-tsm font-light tracking-wide">
                       {dashboard.PurchaseForm.total}
                     </span>{' '}
-                    R$ {exevoPro.price.PIX},00
+                    R$ {calculatedPrice},00
                   </p>
                 ) : (
                   <Input
@@ -259,6 +322,7 @@ const PurchaseForm = ({
                   className="mx-auto"
                   from={formState.character ?? ''}
                   to={BANK_CHARACTER}
+                  tc={calculatedPrice}
                 />
               )}
 

@@ -1,7 +1,7 @@
 import { newsletter } from './newsletter'
 import { proBosses } from './proBosses'
 import { highlightCheckout } from './highlightCheckout'
-import { proPayment } from './proPayment'
+import { checkProCoupon, proPayment } from './proPayment'
 import { getAuctionById } from './getAuctionById'
 import * as proOrders from './admin/proOrders'
 import * as proRevenue from './admin/proRevenue'
@@ -28,6 +28,7 @@ export const routes = {
   newsletter,
   highlightCheckout,
   proPayment,
+  checkProCoupon,
   revalidatePage,
   testMyNotification,
   ...proOrders,

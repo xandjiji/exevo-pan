@@ -4,6 +4,9 @@ import { isServer } from './isServer'
 
 const LS_KEY = 'exevo-pro-referral'
 
+type Track = {
+  coupon: string
+}
 export const referralTracker = {
   checkUrlAndSetLS: () => {
     if (isServer()) return
@@ -14,7 +17,7 @@ export const referralTracker = {
 
     if (!coupon) return
 
-    saveToLocalStorage(LS_KEY, coupon)
+    saveToLocalStorage<Track>(LS_KEY, { coupon })
   },
-  getFromLS: () => getFromLocalStorage(LS_KEY, ''),
+  getFromLS: () => getFromLocalStorage(LS_KEY, { coupon: '' }),
 }

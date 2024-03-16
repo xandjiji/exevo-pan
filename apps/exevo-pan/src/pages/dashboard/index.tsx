@@ -86,6 +86,10 @@ export default function Dashboard() {
                   initialTxId={session.user.paymentData?.id}
                   initialCharacter={session.user.paymentData?.character}
                   confirmed={session.user.paymentData?.confirmed}
+                  initialCoupon={session.user.paymentData?.coupon}
+                  initialDiscountPercent={
+                    session.user.paymentData?.discountPercent
+                  }
                 />
               )}
             </section>
