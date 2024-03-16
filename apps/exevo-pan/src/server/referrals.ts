@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { premiumProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
+import { exevoPro } from 'Constants'
 
 export const editReferralTag = premiumProcedure
   .input(
@@ -13,7 +14,11 @@ export const editReferralTag = premiumProcedure
     try {
       await prisma.referralTag.upsert({
         where: { userId: token.id },
-        create: { userId: token.id, ...input },
+        create: {
+          userId: token.id,
+          discountPercent: exevoPro.referral.discountPercent,
+          ...input,
+        },
         update: { ...input },
       })
 

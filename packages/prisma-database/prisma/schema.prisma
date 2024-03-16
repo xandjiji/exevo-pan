@@ -100,7 +100,7 @@ model ReferralTag {
   id                String @id @default(uuid())
   tcIn              Int    @default(0)
   tcOut             Int    @default(0)
-  discountPercent   Int    @default(10)
+  discountPercent   Int
   withdrawCharacter String @default("")
   coupon            String @unique @default("")
 
