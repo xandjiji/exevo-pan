@@ -1,5 +1,5 @@
 import clsx from 'clsx'
-import { routes } from 'Constants'
+import { exevoPro, routes } from 'Constants'
 import { ExevoPanIcon } from 'assets/svgs'
 import { Button, CopyButton, Input, TitledCard } from 'components/Atoms'
 
@@ -34,9 +34,9 @@ export const ReferralTagForm = ({
   onSubmit,
   isLoading,
 }: ReferralTagFormProps) => {
-  const refLink = `https://exevopan.com${routes.EXEVOPRO}?ref=${
-    couponValue || 'COUPON'
-  }`
+  const refLink = `https://exevopan.com${routes.EXEVOPRO}?${
+    exevoPro.referral.urlParam
+  }=${couponValue || 'COUPON'}`
 
   const isInvalid = couponValue.length < 3 || couponValue.length > 16
 

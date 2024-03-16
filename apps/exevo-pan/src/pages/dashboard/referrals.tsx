@@ -18,7 +18,7 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// purchase form coupon and procedures
+// set local storage url param
 // admin dash: display discount
 // admin dash: calculate estimatives with discount and tc price change
 
