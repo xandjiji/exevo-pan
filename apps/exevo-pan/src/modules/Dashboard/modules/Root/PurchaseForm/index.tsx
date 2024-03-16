@@ -13,7 +13,7 @@ import {
 } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
 import { randomCharacter } from 'utils'
-import { advertising } from 'Constants'
+import { advertising, exevoPro } from 'Constants'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import FromTo from './FromTo'
@@ -170,7 +170,7 @@ const PurchaseForm = ({
                     <span className="text-tsm font-light tracking-wide">
                       {dashboard.PurchaseForm.total}
                     </span>{' '}
-                    R$ 45,00
+                    R$ {exevoPro.price.PIX},00
                   </p>
                 ) : (
                   <Input

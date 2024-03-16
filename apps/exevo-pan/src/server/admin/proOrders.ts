@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
+import { exevoPro } from 'Constants'
 import type { PaymentData, User } from '@prisma/client'
 
 export const listProOrders = adminProcedure
@@ -57,6 +58,12 @@ export const updateProOrders = adminProcedure
 
     const isPix = !payment?.character
 
+    // remove default percent prisma
+    // constatns for exevo pro
+    // @ ToDo: add discount value
+    // add referral entry history
+    // add tc in to referral
+
     const [user, transaction] = await prisma.$transaction([
       prisma.user.update({
         where: { id },
@@ -71,7 +78,7 @@ export const updateProOrders = adminProcedure
       confirmed
         ? prisma.transaction.create({
             data: {
-              value: isPix ? 45 : 250,
+              value: isPix ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS,
               currency: isPix ? 'BRL' : 'TIBIA_COINS',
               type: 'EXEVO_PRO',
               date: currentDate,

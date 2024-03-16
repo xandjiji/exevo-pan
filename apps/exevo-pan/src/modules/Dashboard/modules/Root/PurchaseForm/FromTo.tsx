@@ -1,7 +1,8 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import { Text, CopyButton, CharacterLink } from 'components/Atoms'
+import { CharacterLink, CopyButton, Text } from 'components/Atoms'
 import { capitalizeFirstLetter } from 'utils'
+import { exevoPro } from 'Constants'
 
 type FromToProps = { from?: string; to: string } & JSX.IntrinsicElements['span']
 
@@ -19,7 +20,11 @@ const FromTo = ({ from, to, className, ...props }: FromToProps) => {
           {common.from} <strong>{from}</strong>{' '}
         </>
       ) : null}
-      <Text.Transfer currency="tc" amount={250} className="mx-1.5" />
+      <Text.Transfer
+        currency="tc"
+        amount={exevoPro.price.TIBIA_COINS}
+        className="mx-1.5"
+      />
       <CharacterLink nickname={to} className="text-primaryHighlight font-bold">
         {to}
       </CharacterLink>

@@ -1,3 +1,5 @@
+import { exevoPro } from 'Constants'
+
 export const roundToStep = (value: number, step: number) => {
   const distanceToNextStep = value % step
   const distanceToPreviousStep = step - distanceToNextStep
@@ -16,7 +18,8 @@ export const calculateDiscountedExevoProPrice = (
   }
 
   const step = currency === 'PIX' ? 1 : 25
-  const price = currency === 'PIX' ? 45 : 250
+  const price =
+    currency === 'PIX' ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS
 
-  return roundToStep(price * 1 - discountPercent, step)
+  return roundToStep(price * 1 - discountPercent / 100, step)
 }
