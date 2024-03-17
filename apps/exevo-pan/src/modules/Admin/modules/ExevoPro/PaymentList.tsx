@@ -169,13 +169,15 @@ const PaymentList = () => {
         </p>
 
         {toConfirm.confirmed && (
-          <Checkbox
-            label="No billing"
-            checked={toConfirm.noBill}
-            onClick={() =>
-              setToConfirm((prev) => ({ ...prev, noBill: !prev.noBill }))
-            }
-          />
+          <div className="w-fit">
+            <Checkbox
+              label="No billing"
+              checked={toConfirm.noBill}
+              onClick={() =>
+                setToConfirm((prev) => ({ ...prev, noBill: !prev.noBill }))
+              }
+            />
+          </div>
         )}
 
         <div className="flex justify-end gap-4">
