@@ -4,7 +4,7 @@ export const roundToStep = (value: number, step: number) => {
   const distanceToNextStep = value % step
   const distanceToPreviousStep = step - distanceToNextStep
 
-  return distanceToNextStep < distanceToPreviousStep
+  return distanceToNextStep <= distanceToPreviousStep
     ? value - distanceToNextStep
     : value + distanceToPreviousStep
 }
@@ -21,5 +21,5 @@ export const calculateDiscountedExevoProPrice = (
   const price =
     currency === 'PIX' ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS
 
-  return roundToStep(price * 1 - discountPercent / 100, step)
+  return roundToStep(price * (1 - discountPercent / 100), step)
 }
