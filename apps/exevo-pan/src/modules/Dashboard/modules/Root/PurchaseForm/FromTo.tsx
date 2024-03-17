@@ -9,7 +9,14 @@ type FromToProps = {
   tc: number
 } & JSX.IntrinsicElements['span']
 
-const FromTo = ({ from, to, tc, className, ...props }: FromToProps) => {
+const FromTo = ({
+  from,
+  to,
+  tc,
+  className,
+  children,
+  ...props
+}: FromToProps) => {
   const { common } = useTranslations()
   return (
     <span
@@ -28,6 +35,8 @@ const FromTo = ({ from, to, tc, className, ...props }: FromToProps) => {
         {to}
       </CharacterLink>
       <CopyButton copyString={to} />
+
+      {children}
     </span>
   )
 }

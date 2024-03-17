@@ -6,6 +6,7 @@ import { useDebounce } from 'hooks'
 import Image from 'next/image'
 import {
   Button,
+  Checkbox,
   CopyButton,
   Input,
   OptionButton,
@@ -18,7 +19,7 @@ import {
   randomCharacter,
   referralTracker,
 } from 'utils'
-import { advertising } from 'Constants'
+import { advertising, exevoPro } from 'Constants'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import FromTo from './FromTo'
@@ -34,6 +35,11 @@ type PurchaseFormProps = {
   initialCoupon?: string | null
   initialDiscountPercent?: number | null
 }
+
+// @ ToDo:
+// send discount and coupon to submit request
+// coupon should not be checked on second step
+// i18n
 
 const PurchaseForm = ({
   email,
@@ -140,6 +146,17 @@ const PurchaseForm = ({
     pixMode ? 'PIX' : 'TIBIA_COINS',
   )
 
+  const priceDiscount =
+    (pixMode ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS) -
+    calculatedPrice
+
+  const DiscountElement =
+    formState.discountPercent > 0 ? (
+      <span className="bg-primary text-tsm text-onPrimary ml-1 rounded py-1 px-1.5 font-bold tracking-wide opacity-90 shadow-md transition-all">
+        -{formState.discountPercent}%
+      </span>
+    ) : null
+
   return (
     <div className="grid w-full max-w-[360px] gap-8">
       <Stepper
@@ -206,9 +223,15 @@ const PurchaseForm = ({
 
               <Input
                 label="Coupon"
+                placeholder="Get discounts"
                 value={formState.coupon.toUpperCase()}
                 onChange={(e) =>
-                  setFormState((prev) => ({ ...prev, coupon: e.target.value }))
+                  setFormState((prev) => ({
+                    ...prev,
+                    coupon: e.target.value,
+                    discountPercent:
+                      e.target.value.length < 3 ? 0 : prev.discountPercent,
+                  }))
                 }
                 stateIcon={
                   validCoupon && checkCouponAction.isLoading
@@ -217,14 +240,37 @@ const PurchaseForm = ({
                     ? 'valid'
                     : 'neutral'
                 }
+                className="mb-2 w-48"
               />
+
+              {formState.discountPercent > 0 && (
+                <Checkbox
+                  checked
+                  disabled
+                  label={
+                    <p>
+                      <strong className="text-greenHighlight">
+                        -
+                        {pixMode
+                          ? `R$ ${priceDiscount},00`
+                          : `${priceDiscount} TC`}
+                      </strong>{' '}
+                      discount applied!
+                    </p>
+                  }
+                />
+              )}
+
+              {!pixMode && <div role="none" className="mb-6" />}
 
               {!pixMode && (
                 <FromTo
                   from={formState.character ?? ''}
                   to={BANK_CHARACTER}
                   tc={calculatedPrice}
-                />
+                >
+                  {DiscountElement}
+                </FromTo>
               )}
 
               <div className="mt-1 flex items-end gap-4">
@@ -233,7 +279,15 @@ const PurchaseForm = ({
                     <span className="text-tsm font-light tracking-wide">
                       {dashboard.PurchaseForm.total}
                     </span>{' '}
-                    R$ {calculatedPrice},00
+                    <span className="inline-flex items-center gap-1.5">
+                      R$ {calculatedPrice},00{' '}
+                      {formState.discountPercent > 0 && (
+                        <del className="text-s font-normal">
+                          R$ {exevoPro.price.PIX},00
+                        </del>
+                      )}{' '}
+                      {DiscountElement}
+                    </span>
                   </p>
                 ) : (
                   <Input
