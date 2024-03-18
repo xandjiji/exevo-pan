@@ -25,9 +25,11 @@ export const proPayment = authedProcedure
       ctx: {
         token: { id, proStatus },
       },
-      input: { character, coupon },
+      input: { character, coupon: uncasedCoupon },
     }) => {
       if (proStatus) return { paymentData: null }
+
+      const coupon = uncasedCoupon?.toUpperCase()
 
       const data = {
         character: character ?? null,

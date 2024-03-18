@@ -37,8 +37,6 @@ type PurchaseFormProps = {
 }
 
 // @ ToDo:
-// send discount and coupon to submit request
-// coupon should not be checked on second step
 // i18n
 
 const PurchaseForm = ({
@@ -51,7 +49,7 @@ const PurchaseForm = ({
 }: PurchaseFormProps) => {
   const { common, dashboard } = useTranslations()
 
-  const [pixMode, setPixMode] = useState(false)
+  const [pixMode, setPixMode] = useState(initialTxId && !initialCharacter)
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',
@@ -71,14 +69,16 @@ const PurchaseForm = ({
     discountPercent: initialDiscountPercent ?? 0,
   })
 
+  const calculatedPrice = calculateDiscountedExevoProPrice(
+    formState.discountPercent,
+    pixMode ? 'PIX' : 'TIBIA_COINS',
+  )
+
   useLayoutEffect(() => {
-    if (initialCharacter) return
-    if (confirmed === false) {
-      generateQrCode(email).then(({ qrCode, payload }) => {
-        setPixMode(true)
-        setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
-      })
-    }
+    if (!pixMode) return
+    generateQrCode(email, calculatedPrice).then(({ qrCode, payload }) => {
+      setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
+    })
   }, [])
 
   const debouncedCoupon = useDebounce(formState.coupon)
@@ -94,7 +94,7 @@ const PurchaseForm = ({
   })
 
   useLayoutEffect(() => {
-    if (initialCoupon) return
+    if (initialTxId) return
 
     const lsCoupon = referralTracker.getFromLS().coupon
     if (!lsCoupon) return
@@ -120,7 +120,10 @@ const PurchaseForm = ({
         if (paymentData.character) {
           data.character = paymentData.character
         } else {
-          const { qrCode, payload } = await generateQrCode(email)
+          const { qrCode, payload } = await generateQrCode(
+            email,
+            calculatedPrice,
+          )
           data.qrCode = qrCode
           data.pixUrl = payload
         }
@@ -140,11 +143,6 @@ const PurchaseForm = ({
   const isFinished = currentStep === 1
 
   const { current: randomNickname } = useRef(randomCharacter())
-
-  const calculatedPrice = calculateDiscountedExevoProPrice(
-    formState.discountPercent,
-    pixMode ? 'PIX' : 'TIBIA_COINS',
-  )
 
   const priceDiscount =
     (pixMode ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS) -
@@ -321,8 +319,11 @@ const PurchaseForm = ({
                   onClick={() =>
                     orderAction.mutate(
                       pixMode
-                        ? {}
-                        : { character: formState.character as string },
+                        ? { coupon: formState.coupon }
+                        : {
+                            character: formState.character as string,
+                            coupon: formState.coupon,
+                          },
                     )
                   }
                 >
