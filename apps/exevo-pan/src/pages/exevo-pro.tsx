@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { Main } from 'templates'
@@ -24,7 +25,7 @@ import {
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoinBig.png'
 import pixSrc from 'assets/pix.png'
-import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
+import { buildPageTitle, buildUrl, loadRawSrc, referralTracker } from 'utils'
 import { exevoPro, jsonld, routes } from 'Constants'
 import { common, exevopro } from 'locales'
 
@@ -37,6 +38,10 @@ export default function ExevoPro() {
   const pageTitle = buildPageTitle(i18n.Meta.title)
   const { locale } = useRouter()
   const previewSrc = loadRawSrc(`/pro-${locale}.png`)
+
+  useEffect(() => {
+    referralTracker.checkUrlAndSetLS()
+  }, [])
 
   return (
     <>

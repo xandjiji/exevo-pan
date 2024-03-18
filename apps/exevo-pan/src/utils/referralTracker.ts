@@ -11,9 +11,9 @@ export const referralTracker = {
   checkUrlAndSetLS: () => {
     if (isServer()) return
 
-    const coupon = new URLSearchParams(window.location.search).get(
-      exevoPro.referral.urlParam,
-    )
+    const coupon = new URLSearchParams(window.location.search)
+      .get(exevoPro.referral.urlParam)
+      ?.toUpperCase()
 
     if (!coupon) return
 
