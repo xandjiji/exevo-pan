@@ -17,7 +17,7 @@ export const proPayment = authedProcedure
   .input(
     z.object({
       character: z.string().min(2).optional(),
-      coupon: z.string().min(3).optional(),
+      coupon: z.string().optional(),
     }),
   )
   .mutation(
