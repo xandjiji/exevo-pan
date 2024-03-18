@@ -6,7 +6,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
 import { ReferralTagForm } from 'modules/Dashboard/modules/Referrals'
 import { Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
-import { EditIcon } from 'assets/svgs'
+import { TrashIcon } from 'assets/svgs'
 import { toast } from 'react-hot-toast'
 
 import { PreviewImageClient } from 'services'
@@ -23,12 +23,13 @@ const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // add overall rules and informtion
 // only for pro members (add free state)
+// history
 // overall layout
 // meta tags, page title, etc
-// i18n
-// test conflicting ids
-// history
 // add pitch line
+// boss group alert Referrals
+// test conflicting ids
+// i18n (check mr diff)
 
 export default function Page() {
   const translations = useTranslations()
@@ -178,11 +179,15 @@ export default function Page() {
 
                   <Button
                     pill
-                    hollow={editableWithdraw}
-                    className="mb-[1px] !py-3"
-                    onClick={() => {
+                    hollow={editableWithdraw && loading !== 'withdrawCharacter'}
+                    className="!py-3"
+                    onClick={async () => {
                       if (editableWithdraw) {
+                        await editReferralAction.mutateAsync({
+                          withdrawCharacter: '',
+                        })
                         setEditableWithdraw(false)
+                        setWithdrawCharacter('')
                         return
                       }
 
@@ -191,8 +196,8 @@ export default function Page() {
                     loading={loading === 'withdrawCharacter'}
                     disabled={withdrawCharacter.length < 2}
                   >
-                    {editableWithdraw && <EditIcon className="h-4 w-4" />}
-                    {editableWithdraw ? 'Edit' : 'Withdraw'}
+                    {editableWithdraw && <TrashIcon className="h-4 w-4" />}
+                    {editableWithdraw ? 'Cancel' : 'Withdraw'}
                   </Button>
                 </div>
               </div>
