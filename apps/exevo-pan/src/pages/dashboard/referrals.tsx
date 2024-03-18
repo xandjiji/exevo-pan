@@ -18,9 +18,9 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// set local storage url param
 // admin dash: display discount
 // admin dash: calculate estimatives with discount and tc price change
+// admin dash: set withdraws page
 
 // add overall rules and informtion
 // only for pro members (add free state)

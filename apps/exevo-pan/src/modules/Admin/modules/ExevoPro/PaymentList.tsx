@@ -1,16 +1,18 @@
 import { useCallback, useMemo, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { debounce } from 'utils'
+import { calculateDiscountedExevoProPrice, debounce } from 'utils'
 import {
   Button,
   CharacterLink,
   Checkbox,
+  Chip,
   Dialog,
   Input,
   LoadingAlert,
   Paginator,
   Table,
+  Text,
 } from 'components/Atoms'
 
 const PAGE_SIZE = 30
@@ -86,6 +88,7 @@ const PaymentList = () => {
           <Table.Head>
             <Table.Row>
               <Table.HeadColumn>Confirmed</Table.HeadColumn>
+              <Table.HeadColumn>Price</Table.HeadColumn>
               <Table.HeadColumn>Character</Table.HeadColumn>
               <Table.HeadColumn highlighted desc>
                 Date
@@ -98,53 +101,75 @@ const PaymentList = () => {
               ({
                 id,
                 email,
-                paymentData: { character, lastUpdated, confirmed },
-              }) => (
-                <Table.Row
-                  key={id}
-                  highlight={
-                    toConfirm.id === id
-                      ? toConfirm.confirmed
-                        ? 'green'
-                        : 'red'
-                      : undefined
-                  }
-                  hoverHighlight
-                >
-                  <Table.Column>
-                    <div className="mx-auto w-fit">
-                      <Checkbox
-                        checked={confirmed}
-                        onClick={() =>
-                          setToConfirm({
-                            displayName: (character || email) ?? 'NULL',
-                            id,
-                            confirmed: !confirmed,
-                            noBill: false,
-                          })
-                        }
-                      />
-                    </div>
-                  </Table.Column>
-                  <Table.Column title={email ?? undefined}>
-                    {character ? (
-                      <CharacterLink
-                        nickname={character}
-                        className="text-primaryHighlight"
-                      >
-                        {character}
-                      </CharacterLink>
-                    ) : (
-                      <span style={{ lineBreak: 'anywhere' }}>{email}</span>
-                    )}
-                  </Table.Column>
-                  <Table.Column>
-                    {lastUpdated.toLocaleString('pt-BR', {
-                      hour12: false,
-                    })}
-                  </Table.Column>
-                </Table.Row>
-              ),
+                paymentData: {
+                  character,
+                  lastUpdated,
+                  confirmed,
+                  discountPercent,
+                },
+              }) => {
+                const calculatedPrice = calculateDiscountedExevoProPrice(
+                  discountPercent ?? 0,
+                  character ? 'TIBIA_COINS' : 'PIX',
+                )
+                return (
+                  <Table.Row
+                    key={id}
+                    highlight={
+                      toConfirm.id === id
+                        ? toConfirm.confirmed
+                          ? 'green'
+                          : 'red'
+                        : undefined
+                    }
+                    hoverHighlight
+                  >
+                    <Table.Column>
+                      <div className="mx-auto w-fit">
+                        <Checkbox
+                          checked={confirmed}
+                          onClick={() =>
+                            setToConfirm({
+                              displayName: (character || email) ?? 'NULL',
+                              id,
+                              confirmed: !confirmed,
+                              noBill: false,
+                            })
+                          }
+                        />
+                      </div>
+                    </Table.Column>
+                    <Table.Column>
+                      <Chip gray className="mx-auto w-fit">
+                        {character ? (
+                          <Text.TibiaCoin value={calculatedPrice} />
+                        ) : (
+                          `R$ ${calculatedPrice},00`
+                        )}
+                      </Chip>
+                    </Table.Column>
+                    <Table.Column title={email ?? undefined}>
+                      {character ? (
+                        <CharacterLink
+                          nickname={character}
+                          className="text-primaryHighlight"
+                        >
+                          {character}
+                        </CharacterLink>
+                      ) : (
+                        <span style={{ lineBreak: 'anywhere' }}>{email}</span>
+                      )}
+                    </Table.Column>
+                    <Table.Column>
+                      <span style={{ lineBreak: 'anywhere' }}>
+                        {lastUpdated.toLocaleString('pt-BR', {
+                          hour12: false,
+                        })}
+                      </span>
+                    </Table.Column>
+                  </Table.Row>
+                )
+              },
             )}
           </Table.Body>
         </Table.Element>
