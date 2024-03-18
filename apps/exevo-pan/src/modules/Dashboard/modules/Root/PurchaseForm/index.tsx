@@ -49,7 +49,9 @@ const PurchaseForm = ({
 }: PurchaseFormProps) => {
   const { common, dashboard } = useTranslations()
 
-  const [pixMode, setPixMode] = useState(initialTxId && !initialCharacter)
+  const [pixMode, setPixMode] = useState(
+    initialTxId ? !initialCharacter : false,
+  )
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',
@@ -144,14 +146,13 @@ const PurchaseForm = ({
 
   const { current: randomNickname } = useRef(randomCharacter())
 
-  const priceDiscount =
-    (pixMode ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS) -
-    calculatedPrice
+  const basePrice = pixMode ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS
+  const priceDiscount = basePrice - calculatedPrice
 
   const DiscountElement =
     formState.discountPercent > 0 ? (
       <span className="bg-primary text-tsm text-onPrimary ml-1 rounded py-1 px-1.5 font-bold tracking-wide opacity-90 shadow-md transition-all">
-        -{formState.discountPercent}%
+        -{Math.round((priceDiscount / basePrice) * 100)}%
       </span>
     ) : null
 
@@ -197,7 +198,7 @@ const PurchaseForm = ({
                   Tibia Coins
                 </OptionButton>
                 <OptionButton
-                  active={pixMode}
+                  active={!!pixMode}
                   aria-label="Pix"
                   onClick={() => setPixMode(true)}
                   icon={
