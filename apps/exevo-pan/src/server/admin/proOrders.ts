@@ -59,10 +59,12 @@ export const updateProOrders = adminProcedure
 
     const isPix = !payment?.character
 
-    const value = calculateDiscountedExevoProPrice(
-      payment?.discountPercent ?? 0,
-      isPix ? 'PIX' : 'TIBIA_COINS',
-    )
+    const value = noBill
+      ? 0
+      : calculateDiscountedExevoProPrice(
+          payment?.discountPercent ?? 0,
+          isPix ? 'PIX' : 'TIBIA_COINS',
+        )
 
     const [user, transaction] = await prisma.$transaction([
       prisma.user.update({
