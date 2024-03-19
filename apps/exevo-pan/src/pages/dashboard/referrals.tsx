@@ -1,4 +1,4 @@
-import { useRef, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
@@ -66,9 +66,6 @@ export default function Page() {
   const [coupon, setCoupon] = useState('')
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
   const [editableWithdraw, setEditableWithdraw] = useState(false)
-  const [loading, setLoading] = useState<'coupon' | 'withdrawCharacter' | null>(
-    null,
-  )
 
   const referralTag = trpc.getReferralTag.useQuery(undefined, {
     onSuccess: (data) => {
@@ -80,31 +77,14 @@ export default function Page() {
     },
   })
 
-  const editReferralAction = trpc.editReferralTag.useMutation({
-    onMutate: (data) => {
-      setLoading(data.coupon ? 'coupon' : 'withdrawCharacter')
-    },
-    onSuccess: (data) => {
-      if (data.success) {
-        toast.success(
-          data.coupon
-            ? 'Your coupon was updated!'
-            : 'Withdraw character was saved!',
-        )
-
-        if (data.withdrawCharacter) setEditableWithdraw(true)
-
-        return
-      }
-
-      toast.error(
-        data.coupon
-          ? 'This coupon is already taken'
-          : 'Oops! Something went wrong',
-      )
-    },
+  const editCouponAction = trpc.editReferralTag.useMutation({
+    onSuccess: () => toast.success('Your coupon was updated!'),
     onError: () => toast.error('This coupon is already taken'),
-    onSettled: () => setLoading(null),
+  })
+
+  const editWithdrawAction = trpc.editReferralTag.useMutation({
+    onSuccess: () => toast.success('Withdraw character was saved!'),
+    onError: () => toast.error('Oops! Something went wrong'),
   })
 
   const influencer = useRef(randomInfluencer())
@@ -194,16 +174,16 @@ export default function Page() {
                     className="grow"
                     value={withdrawCharacter}
                     onChange={(e) => setWithdrawCharacter(e.target.value)}
-                    disabled={editReferralAction.isLoading || editableWithdraw}
+                    disabled={editWithdrawAction.isLoading || editableWithdraw}
                   />
 
                   <Button
                     pill
-                    hollow={editableWithdraw && loading !== 'withdrawCharacter'}
+                    hollow={editableWithdraw && editWithdrawAction.isLoading}
                     className="!py-3"
                     onClick={async () => {
                       if (editableWithdraw) {
-                        await editReferralAction.mutateAsync({
+                        await editWithdrawAction.mutateAsync({
                           withdrawCharacter: '',
                         })
                         setEditableWithdraw(false)
@@ -211,9 +191,9 @@ export default function Page() {
                         return
                       }
 
-                      editReferralAction.mutate({ withdrawCharacter })
+                      editWithdrawAction.mutate({ withdrawCharacter })
                     }}
-                    loading={loading === 'withdrawCharacter'}
+                    loading={editWithdrawAction.isLoading}
                     disabled={withdrawCharacter.length < 2}
                   >
                     {editableWithdraw && <TrashIcon className="h-4 w-4" />}
@@ -233,14 +213,14 @@ export default function Page() {
                   className="grow"
                   value={coupon}
                   onChange={(e) => setCoupon(e.target.value.toUpperCase())}
-                  disabled={loading === 'coupon'}
+                  disabled={editCouponAction.isLoading}
                   onKeyPress={(e) => {
                     if (
                       e.key === 'Enter' &&
-                      loading !== 'coupon' &&
+                      editCouponAction.isLoading &&
                       !isCouponInvalid
                     ) {
-                      editReferralAction.mutate({ coupon })
+                      editCouponAction.mutate({ coupon })
                     }
                   }}
                 />
@@ -248,8 +228,8 @@ export default function Page() {
                 <Button
                   pill
                   className="mb-[1px] !py-3"
-                  onClick={() => editReferralAction.mutate({ coupon })}
-                  loading={loading === 'coupon'}
+                  onClick={() => editCouponAction.mutate({ coupon })}
+                  loading={editCouponAction.isLoading}
                   disabled={isCouponInvalid}
                 >
                   Save

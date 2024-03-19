@@ -11,21 +11,19 @@ export const editReferralTag = premiumProcedure
     }),
   )
   .mutation(async ({ ctx: { token }, input }) => {
-    try {
-      await prisma.referralTag.upsert({
-        where: { userId: token.id },
-        create: {
-          userId: token.id,
-          discountPercent: exevoPro.referral.discountPercent,
-          ...input,
-        },
-        update: { ...input },
-      })
+    const result = await prisma.referralTag.upsert({
+      where: { userId: token.id },
+      create: {
+        userId: token.id,
+        discountPercent: exevoPro.referral.discountPercent,
+        ...input,
+      },
+      update: { ...input },
+    })
 
-      return { success: true, ...input }
-    } catch {
-      return { success: false, ...input }
-    }
+    return { success: true, ...input }
+
+    return result
   })
 
 export const getReferralTag = premiumProcedure.query(
