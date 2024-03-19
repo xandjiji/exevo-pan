@@ -1,3 +1,4 @@
+import { useRef } from 'react'
 import clsx from 'clsx'
 import { exevoPro, routes } from 'Constants'
 import { ExevoPanIcon } from 'assets/svgs'
@@ -13,7 +14,7 @@ type ReferralTagFormProps = {
   isLoading: boolean
 }
 
-const couponExample = () => {
+function couponExample() {
   const samples = [
     'MP3PLAYER',
     'NATTANK',
@@ -34,6 +35,8 @@ export const ReferralTagForm = ({
   onSubmit,
   isLoading,
 }: ReferralTagFormProps) => {
+  const placeholderName = useRef(couponExample())
+
   const refLink = `https://exevopan.com${routes.EXEVOPRO}?${
     exevoPro.referral.urlParam
   }=${couponValue || 'COUPON'}`
@@ -45,7 +48,7 @@ export const ReferralTagForm = ({
       <div className="flex items-end gap-2">
         <Input
           label="Customize coupon"
-          placeholder={`e.g, '${couponExample()}'`}
+          placeholder={`e.g, '${placeholderName.current}'`}
           maxLength={16}
           allowClear
           className="grow"
