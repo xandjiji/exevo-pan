@@ -1,10 +1,10 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
-import { ReferralTagForm } from 'modules/Dashboard/modules/Referrals'
+import { CouponPreview } from 'modules/Dashboard/modules/Referrals'
 import { Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
 import { TrashIcon } from 'assets/svgs'
 import { toast } from 'react-hot-toast'
@@ -30,6 +30,21 @@ const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 // boss group alert Referrals
 // test conflicting ids
 // i18n (check mr diff)
+
+function randomInfluencer() {
+  const samples = [
+    'MP3PLAYER',
+    'NATTANK',
+    'RUBINI',
+    'TIBIAEMPREGO',
+    'REVEL',
+    'NALU',
+    'BUGADINHO',
+    'VEXCRAW',
+  ]
+
+  return samples[Math.floor(Math.random() * samples.length)]
+}
 
 export default function Page() {
   const translations = useTranslations()
@@ -90,6 +105,9 @@ export default function Page() {
     onError: () => toast.error('This coupon is already taken'),
     onSettled: () => setLoading(null),
   })
+
+  const influencer = useRef(randomInfluencer())
+  const isCouponInvalid = coupon.length < 3 || coupon.length > 16
 
   return (
     <>
@@ -203,12 +221,41 @@ export default function Page() {
               </div>
             </TitledCard>
 
-            <ReferralTagForm
-              couponValue={coupon}
-              onCouponValueChange={setCoupon}
-              onSubmit={() => editReferralAction.mutate({ coupon })}
-              isLoading={loading === 'coupon'}
-            />
+            <TitledCard variant="rounded" title="My coupon">
+              <div className="flex items-end gap-2">
+                <Input
+                  label="Customize coupon"
+                  placeholder={`e.g, '${influencer.current}'`}
+                  maxLength={16}
+                  allowClear
+                  className="grow"
+                  value={coupon}
+                  onChange={(e) => setCoupon(e.target.value.toUpperCase())}
+                  disabled={loading === 'coupon'}
+                  onKeyPress={(e) => {
+                    if (
+                      e.key === 'Enter' &&
+                      loading !== 'coupon' &&
+                      !isCouponInvalid
+                    ) {
+                      editReferralAction.mutate({ coupon })
+                    }
+                  }}
+                />
+
+                <Button
+                  pill
+                  className="mb-[1px] !py-3"
+                  onClick={() => editReferralAction.mutate({ coupon })}
+                  loading={loading === 'coupon'}
+                  disabled={isCouponInvalid}
+                >
+                  Save
+                </Button>
+              </div>
+
+              <CouponPreview coupon={coupon} isInvalid={isCouponInvalid} />
+            </TitledCard>
           </div>
         </Layout>
       </Main>
