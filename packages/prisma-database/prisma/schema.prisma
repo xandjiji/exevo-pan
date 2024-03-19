@@ -123,7 +123,7 @@ model ReferralHistoryEntry {
   type      REFERRAL_HISTORY_TYPE
   value     Int
 
-  referredUserId String @unique
+  referredUserId String? @unique
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId String @unique
