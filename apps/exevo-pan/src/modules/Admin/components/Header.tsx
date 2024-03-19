@@ -1,7 +1,7 @@
 import { memo } from 'react'
 import { SubHeader } from 'templates'
 import { routes } from 'Constants'
-import { ApproveUserIcon, AdvertiseIcon } from 'assets/svgs'
+import { AdvertiseIcon, ApproveUserIcon, MoneyIcon } from 'assets/svgs'
 
 const navItems = [
   {
@@ -13,6 +13,11 @@ const navItems = [
     title: 'Auction Highlights',
     href: routes.ADMIN.AUCTION_HIGHLIGHTS,
     icon: <AdvertiseIcon />,
+  },
+  {
+    title: 'Withdraws',
+    href: routes.ADMIN.WITHDRAWS,
+    icon: <MoneyIcon />,
   },
 ]
 
