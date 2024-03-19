@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react'
+import { useRef, useRef, useState } from 'react'
 import Head from 'next/head'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
@@ -30,6 +30,7 @@ const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 // boss group alert Referrals
 // test conflicting ids
 // i18n (check mr diff)
+// gringo influencers
 
 function randomInfluencer() {
   const samples = [
@@ -107,6 +108,7 @@ export default function Page() {
   })
 
   const influencer = useRef(randomInfluencer())
+  const placeholderCharacter = useRef(randomCharacter())
   const isCouponInvalid = coupon.length < 3 || coupon.length > 16
 
   return (
@@ -187,7 +189,7 @@ export default function Page() {
                 <div className="flex items-end gap-2">
                   <Input
                     label="Withdraw coins to"
-                    placeholder={`e.g, '${randomCharacter()}'`}
+                    placeholder={`e.g, '${placeholderCharacter}'`}
                     allowClear
                     className="grow"
                     value={withdrawCharacter}
