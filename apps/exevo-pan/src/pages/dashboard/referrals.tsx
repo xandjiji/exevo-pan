@@ -83,7 +83,10 @@ export default function Page() {
   })
 
   const editWithdrawAction = trpc.editReferralTag.useMutation({
-    onSuccess: () => toast.success('Withdraw character was saved!'),
+    onSuccess: () => {
+      toast.success('Withdraw character was saved!')
+      setEditableWithdraw(true)
+    },
     onError: () => toast.error('Oops! Something went wrong'),
   })
 
@@ -169,7 +172,7 @@ export default function Page() {
                 <div className="flex items-end gap-2">
                   <Input
                     label="Withdraw coins to"
-                    placeholder={`e.g, '${placeholderCharacter}'`}
+                    placeholder={`e.g, '${placeholderCharacter.current}'`}
                     allowClear
                     className="grow"
                     value={withdrawCharacter}
@@ -179,7 +182,7 @@ export default function Page() {
 
                   <Button
                     pill
-                    hollow={editableWithdraw && editWithdrawAction.isLoading}
+                    hollow={editableWithdraw}
                     className="!py-3"
                     onClick={async () => {
                       if (editableWithdraw) {
