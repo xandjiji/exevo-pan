@@ -12,14 +12,18 @@ import { toast } from 'react-hot-toast'
 
 import { PreviewImageClient } from 'services'
 import { trpc } from 'lib/trpc'
-import { buildPageTitle, buildUrl, randomCharacter } from 'utils'
-import { jsonld, routes } from 'Constants'
+import {
+  buildPageTitle,
+  buildUrl,
+  calculateDiscountedExevoProPrice,
+  randomCharacter,
+} from 'utils'
+import { exevoPro, jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// add overall rules and informtion
 // history
 // only for pro members (add free state)
 // overall layout
@@ -166,17 +170,60 @@ export default function Page() {
         <Layout isLoading={list.isLoading && referralTag.isLoading}>
           <div className="grid grid-cols-[1fr_320px] gap-4">
             <TitledCard variant="rounded" title="Summary">
-              <div className="flex flex-col gap-4">
+              <div className="text-s flex flex-col gap-4">
+                <p>
+                  Using your coupon, users will receive a{' '}
+                  <span className="code text-s">
+                    {exevoPro.referral.discountPercent}%
+                  </span>{' '}
+                  discount on their{' '}
+                  <strong className="rare-gradient-text">Exevo Pro</strong>{' '}
+                  purchase, which is worth{' '}
+                  <span className="inline-flex items-center gap-1">
+                    <Chip gray>
+                      <Text.TibiaCoin
+                        value={
+                          exevoPro.price.TIBIA_COINS -
+                          calculateDiscountedExevoProPrice(
+                            exevoPro.referral.discountPercent,
+                            'TIBIA_COINS',
+                          )
+                        }
+                      />
+                    </Chip>{' '}
+                    /{' '}
+                    <Chip gray>
+                      R${' '}
+                      {exevoPro.price.PIX -
+                        calculateDiscountedExevoProPrice(
+                          exevoPro.referral.discountPercent,
+                          'PIX',
+                        )}
+                      ,00
+                    </Chip>{' '}
+                    on their checkout price.
+                  </span>
+                </p>
+
+                <p>
+                  For every purchase completed with your coupon, you&apos;ll
+                  earn{' '}
+                  <Chip gray className="!inline">
+                    <Text.TibiaCoin value={exevoPro.referral.tcCommission} />
+                  </Chip>{' '}
+                  as a flat comission.
+                </p>
+
                 <span>
                   Current balance:{' '}
-                  <Chip gray className="mt-1 w-fit">
+                  <Chip className="mt-1 w-fit">
                     <Text.TibiaCoin value={referralTag.data?.tcIn ?? 0} />
                   </Chip>
                 </span>
 
                 <span>
                   Total withdrawn:{' '}
-                  <Chip gray className="mt-1 w-fit">
+                  <Chip className="mt-1 w-fit">
                     <Text.TibiaCoin value={referralTag.data?.tcOut ?? 0} />
                   </Chip>
                 </span>
@@ -217,7 +264,6 @@ export default function Page() {
                 </div>
               </div>
             </TitledCard>
-
             <TitledCard variant="rounded" title="My coupon">
               <div className="flex items-end gap-2">
                 <Input
