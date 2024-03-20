@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
@@ -18,22 +19,18 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// admin dash: set withdraws page
-// admin dash: calculate estimatives with discount and tc price change
-
 // add overall rules and informtion
-// only for pro members (add free state)
 // history
+// only for pro members (add free state)
 // overall layout
 // meta tags, page title, etc
 // add pitch line
 // boss group alert Referrals
 // test conflicting ids
 // i18n (check mr diff)
-// gringo influencers
 
-function randomInfluencer() {
-  const samples = [
+function randomInfluencer(br: boolean) {
+  const brazillians = [
     'MP3PLAYER',
     'NATTANK',
     'RUBINI',
@@ -42,7 +39,19 @@ function randomInfluencer() {
     'NALU',
     'BUGADINHO',
     'VEXCRAW',
+    'VDA',
   ]
+
+  const english = [
+    'BUBBAGAME',
+    'ERICPSYKIK',
+    'VANGORO',
+    'PUNIO',
+    'MAXIGASHI',
+    'HEGAL',
+  ]
+
+  const samples = br ? brazillians : english
 
   return samples[Math.floor(Math.random() * samples.length)]
 }
@@ -90,7 +99,10 @@ export default function Page() {
     onError: () => toast.error('Oops! Something went wrong'),
   })
 
-  const influencer = useRef(randomInfluencer())
+  const { locale } = useRouter()
+
+  const isBr = locale === 'pt'
+  const influencer = useRef(randomInfluencer(isBr))
   const placeholderCharacter = useRef(randomCharacter())
   const isCouponInvalid = coupon.length < 3 || coupon.length > 16
 
