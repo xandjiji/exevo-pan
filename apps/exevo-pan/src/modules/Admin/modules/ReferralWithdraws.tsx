@@ -11,7 +11,12 @@ import {
   Text,
 } from 'components/Atoms'
 
-const EMPTY_TO_SEND = { tagId: '', withdrawCharacter: '', tcOut: 0 }
+const EMPTY_TO_SEND = {
+  tagId: '',
+  userId: '',
+  withdrawCharacter: '',
+  tcOut: 0,
+}
 
 export const ReferralWithdraws = () => {
   const [toSend, setToSend] = useState(EMPTY_TO_SEND)
@@ -47,13 +52,18 @@ export const ReferralWithdraws = () => {
 
           <Table.Body>
             {(list.data ?? []).map(
-              ({ id, withdrawCharacter, coupon, tcIn, tcOut }) => (
+              ({ id, withdrawCharacter, coupon, tcIn, tcOut, userId }) => (
                 <Table.Row
                   key={id}
                   highlight={toSend.tagId === id ? 'green' : undefined}
                   hoverHighlight
                   onClick={() =>
-                    setToSend({ tagId: id, tcOut: tcIn, withdrawCharacter })
+                    setToSend({
+                      tagId: id,
+                      tcOut: tcIn,
+                      withdrawCharacter,
+                      userId,
+                    })
                   }
                   className="cursor-pointer"
                 >
