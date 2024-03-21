@@ -26,7 +26,6 @@ const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 // @ ToDo:
 // history
 // only for pro members (add free state)
-// overall layout
 // meta tags, page title, etc
 // add pitch line
 // boss group alert Referrals
@@ -168,7 +167,7 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading && referralTag.isLoading}>
-          <div className="mx-auto grid max-w-[320px] gap-4 md:max-w-[unset] md:grid-cols-[1fr_320px]">
+          <div className="lgr:grid-cols-[520px_320px] mx-auto grid max-w-[320px] gap-4 md:max-w-fit md:grid-cols-[320px_320px] lg:grid-cols-[460px_320px]">
             <TitledCard variant="rounded" title="Summary">
               <div className="text-tsm flex flex-col gap-4">
                 <ul className="marker:text-primaryHighlight grid list-inside list-disc gap-1.5">
