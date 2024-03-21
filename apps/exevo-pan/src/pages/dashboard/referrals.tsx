@@ -168,19 +168,19 @@ export default function Page() {
 
       <Main>
         <Layout isLoading={list.isLoading && referralTag.isLoading}>
-          <div className="grid grid-cols-[1fr_320px] gap-4">
+          <div className="mx-auto grid max-w-[320px] gap-4 md:max-w-[unset] md:grid-cols-[1fr_320px]">
             <TitledCard variant="rounded" title="Summary">
-              <div className="text-s flex flex-col gap-4">
-                <p>
-                  Using your coupon, users will receive a{' '}
-                  <span className="code text-s">
-                    {exevoPro.referral.discountPercent}%
-                  </span>{' '}
-                  discount on their{' '}
-                  <strong className="rare-gradient-text">Exevo Pro</strong>{' '}
-                  purchase, which is worth{' '}
-                  <span className="inline-flex items-center gap-1">
-                    <Chip gray>
+              <div className="text-tsm flex flex-col gap-4">
+                <ul className="marker:text-primaryHighlight grid list-inside list-disc gap-1.5">
+                  <li>
+                    Using your coupon, users will receive a{' '}
+                    <span className="code py-1 px-2">
+                      {exevoPro.referral.discountPercent}%
+                    </span>{' '}
+                    discount on their{' '}
+                    <strong className="rare-gradient-text">Exevo Pro</strong>{' '}
+                    purchase, which is worth{' '}
+                    <span className="code py-1 px-2">
                       <Text.TibiaCoin
                         value={
                           exevoPro.price.TIBIA_COINS -
@@ -189,42 +189,37 @@ export default function Page() {
                             'TIBIA_COINS',
                           )
                         }
-                      />
-                    </Chip>{' '}
-                    /{' '}
-                    <Chip gray>
-                      R${' '}
+                      />{' '}
+                      / R$
                       {exevoPro.price.PIX -
                         calculateDiscountedExevoProPrice(
                           exevoPro.referral.discountPercent,
                           'PIX',
                         )}
                       ,00
-                    </Chip>{' '}
+                    </span>{' '}
                     on their checkout price.
-                  </span>
-                </p>
+                  </li>
 
-                <p>
-                  For every purchase completed with your coupon, you&apos;ll
-                  earn{' '}
-                  <Chip gray className="!inline">
-                    <Text.TibiaCoin value={exevoPro.referral.tcCommission} />
-                  </Chip>{' '}
-                  as a flat comission.
-                </p>
+                  <li>
+                    For every purchase completed with your coupon, you&apos;ll
+                    earn{' '}
+                    <span className="code py-1 px-2">
+                      <Text.TibiaCoin value={exevoPro.referral.tcCommission} />
+                    </span>{' '}
+                    as a flat comission.
+                  </li>
+
+                  <li>
+                    There are no limits or minimum requirement for withdraws. It
+                    may take up to 24 hours to receive your Tibia Coins.
+                  </li>
+                </ul>
 
                 <span>
                   Current balance:{' '}
                   <Chip className="mt-1 w-fit">
                     <Text.TibiaCoin value={referralTag.data?.tcIn ?? 0} />
-                  </Chip>
-                </span>
-
-                <span>
-                  Total withdrawn:{' '}
-                  <Chip className="mt-1 w-fit">
-                    <Text.TibiaCoin value={referralTag.data?.tcOut ?? 0} />
                   </Chip>
                 </span>
 
