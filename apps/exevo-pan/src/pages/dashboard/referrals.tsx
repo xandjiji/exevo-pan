@@ -5,7 +5,10 @@ import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
-import { CouponPreview } from 'modules/Dashboard/modules/Referrals'
+import {
+  CouponPreview,
+  ReferralHistory,
+} from 'modules/Dashboard/modules/Referrals'
 import { Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
 import { TrashIcon } from 'assets/svgs'
 import { toast } from 'react-hot-toast'
@@ -74,6 +77,8 @@ export default function Page() {
   const list = trpc.listMyAuctionNotifications.useQuery(undefined, {
     keepPreviousData: true,
   })
+
+  const historyFirstPage = trpc.listMyReferralHistoryEntries.useQuery({})
 
   const [coupon, setCoupon] = useState('')
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
@@ -166,7 +171,13 @@ export default function Page() {
       </Head>
 
       <Main>
-        <Layout isLoading={list.isLoading && referralTag.isLoading}>
+        <Layout
+          isLoading={
+            list.isLoading &&
+            referralTag.isLoading &&
+            historyFirstPage.isLoading
+          }
+        >
           <div className="lgr:grid-cols-[520px_320px] mx-auto grid max-w-[320px] gap-4 md:max-w-fit md:grid-cols-[320px_320px] lg:grid-cols-[460px_320px]">
             <TitledCard variant="rounded" title="Summary">
               <div className="text-tsm flex flex-col gap-4">
@@ -293,6 +304,10 @@ export default function Page() {
 
               <CouponPreview coupon={coupon} isInvalid={isCouponInvalid} />
             </TitledCard>
+
+            <div className="col-span-full">
+              <ReferralHistory firstPageData={historyFirstPage.data ?? []} />
+            </div>
           </div>
         </Layout>
       </Main>
