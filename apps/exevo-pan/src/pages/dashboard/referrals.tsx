@@ -97,16 +97,16 @@ export default function Page() {
   })
 
   const editCouponAction = trpc.editReferralTag.useMutation({
-    onSuccess: () => toast.success('Your coupon was updated!'),
-    onError: () => toast.error('This coupon is already taken'),
+    onSuccess: () => toast.success(i18n.Referrals.couponSuccess),
+    onError: () => toast.error(i18n.Referrals.couponError),
   })
 
   const editWithdrawAction = trpc.editReferralTag.useMutation({
     onSuccess: () => {
-      toast.success('Withdraw character was saved!')
+      toast.success(i18n.Referrals.withdrawSuccess)
       setEditableWithdraw(true)
     },
-    onError: () => toast.error('Oops! Something went wrong'),
+    onError: () => toast.error(translations.common.genericError),
   })
 
   const { locale } = useRouter()
@@ -193,55 +193,61 @@ export default function Page() {
               </div>
             )}
 
-            <TitledCard variant="rounded" title="Summary">
+            <TitledCard variant="rounded" title={i18n.Referrals.summaryTitle}>
               <div className="text-tsm flex flex-col gap-4">
                 <ul className="marker:text-primaryHighlight grid list-inside list-disc gap-1.5">
                   <li>
-                    Using your coupon, users will receive a{' '}
-                    <span className="code py-1 px-2">
-                      {exevoPro.referral.discountPercent}%
-                    </span>{' '}
-                    discount on their{' '}
-                    <strong className="rare-gradient-text">Exevo Pro</strong>{' '}
-                    purchase, which is worth{' '}
-                    <span className="code py-1 px-2">
-                      <Text.TibiaCoin
-                        value={
-                          exevoPro.price.TIBIA_COINS -
-                          calculateDiscountedExevoProPrice(
-                            exevoPro.referral.discountPercent,
-                            'TIBIA_COINS',
-                          )
-                        }
-                      />{' '}
-                      / R$
-                      {exevoPro.price.PIX -
-                        calculateDiscountedExevoProPrice(
-                          exevoPro.referral.discountPercent,
-                          'PIX',
-                        )}
-                      ,00
-                    </span>{' '}
-                    on their checkout price.
+                    {templateMessage(i18n.Referrals.li1, {
+                      discount: (
+                        <span className="code py-1 px-2">
+                          {exevoPro.referral.discountPercent}%
+                        </span>
+                      ),
+                      exevoPro: (
+                        <strong className="rare-gradient-text">
+                          Exevo Pro
+                        </strong>
+                      ),
+                      value: (
+                        <span className="code py-1 px-2">
+                          <Text.TibiaCoin
+                            value={
+                              exevoPro.price.TIBIA_COINS -
+                              calculateDiscountedExevoProPrice(
+                                exevoPro.referral.discountPercent,
+                                'TIBIA_COINS',
+                              )
+                            }
+                          />{' '}
+                          / R$
+                          {exevoPro.price.PIX -
+                            calculateDiscountedExevoProPrice(
+                              exevoPro.referral.discountPercent,
+                              'PIX',
+                            )}
+                          ,00
+                        </span>
+                      ),
+                    })}
                   </li>
 
                   <li>
-                    For every purchase completed with your coupon, you&apos;ll
-                    earn{' '}
-                    <span className="code py-1 px-2">
-                      <Text.TibiaCoin value={exevoPro.referral.tcCommission} />
-                    </span>{' '}
-                    as a flat comission.
+                    {templateMessage(i18n.Referrals.li2, {
+                      tc: (
+                        <span className="code py-1 px-2">
+                          <Text.TibiaCoin
+                            value={exevoPro.referral.tcCommission}
+                          />
+                        </span>
+                      ),
+                    })}
                   </li>
 
-                  <li>
-                    There are no limits or minimum requirement for withdraws. It
-                    may take up to 24 hours to receive your Tibia Coins.
-                  </li>
+                  <li>{i18n.Referrals.li3}</li>
                 </ul>
 
                 <span>
-                  Current balance:{' '}
+                  {i18n.Referrals.currentBalance}{' '}
                   <Chip className="mt-1 w-fit">
                     <Text.TibiaCoin value={referralTag.data?.tcIn ?? 0} />
                   </Chip>
@@ -249,7 +255,7 @@ export default function Page() {
 
                 <div className="flex items-end gap-2">
                   <Input
-                    label="Withdraw coins to"
+                    label={i18n.Referrals.withdrawLabel}
                     placeholder={`e.g, '${placeholderCharacter.current}'`}
                     allowClear
                     className="grow"
@@ -280,15 +286,17 @@ export default function Page() {
                     disabled={!isPro || withdrawCharacter.length < 2}
                   >
                     {editableWithdraw && <TrashIcon className="h-4 w-4" />}
-                    {editableWithdraw ? 'Cancel' : 'Withdraw'}
+                    {editableWithdraw
+                      ? i18n.Referrals.cancelButton
+                      : i18n.Referrals.withdrawButton}
                   </Button>
                 </div>
               </div>
             </TitledCard>
-            <TitledCard variant="rounded" title="My coupon">
+            <TitledCard variant="rounded" title={i18n.Referrals.myCouponTitle}>
               <div className="flex items-end gap-2">
                 <Input
-                  label="Customize coupon"
+                  label={i18n.Referrals.customizeCoupon}
                   placeholder={`e.g, '${influencer.current}'`}
                   maxLength={16}
                   allowClear
@@ -314,7 +322,7 @@ export default function Page() {
                   loading={editCouponAction.isLoading}
                   disabled={!isPro || isCouponInvalid}
                 >
-                  Save
+                  {i18n.Referrals.saveCouponButton}
                 </Button>
               </div>
 
