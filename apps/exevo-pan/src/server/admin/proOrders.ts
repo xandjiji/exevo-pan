@@ -100,7 +100,7 @@ export const updateProOrders = adminProcedure
                     userId: payment.referralUserId,
                     referredUserId: payment.userId,
                     value: exevoPro.referral.tcCommission,
-                    type: 'COMISSION',
+                    type: 'COMMISSION',
                   },
                 })
               : prisma.referralHistoryEntry.delete({
