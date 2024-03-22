@@ -53,6 +53,8 @@ export default {
       privateGroups: 'Create {{private}} boss hunting groups',
       private: 'private',
       estimate: 'Estimate auction prices above {{maxEstimation}}',
+      referrals: 'Invite your friends and {{earnTc}}',
+      earnTc: 'earn Tibia Coins!',
     },
     filtersTooltip: {
       tc: 'Tibia Coins invested',

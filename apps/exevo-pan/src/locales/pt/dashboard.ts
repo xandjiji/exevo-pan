@@ -57,6 +57,8 @@ export default defaultComposer(defaultTranslations, {
       privateGroups: 'Crie grupos {{private}} de boss hunting',
       private: 'privados',
       estimate: 'Estime preços de leilões acima de {{maxEstimation}}',
+      referrals: 'Convide seus amigos e {{earnTc}}',
+      earnTc: 'ganhe Tibia Coins!',
     },
     filtersTooltip: {
       tc: 'Tibia Coins investidos',

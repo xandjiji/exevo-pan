@@ -66,5 +66,8 @@ export default {
     premiumBosses: 'Premium bosses',
     huntingGroups: 'Hunting groups checking system',
     privateGroups: 'Private hunting groups',
+    general: 'General',
+    referrals: 'Referral system',
+    earnReferral: 'Earn {{tc}} per referral!',
   },
 }

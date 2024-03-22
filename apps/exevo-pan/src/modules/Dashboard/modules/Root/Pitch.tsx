@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 import { memo } from 'react'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { Tooltip } from 'components/Organisms'
 import { CheckIcon } from 'assets/svgs'
@@ -127,6 +127,11 @@ const Pitch = ({ proStatus }: PitchProps) => {
               maxEstimation: (
                 <Text.TibiaCoin value={auctionEstimations.MAX_FREE_VALUE} />
               ),
+            })}
+          </Li>
+          <Li>
+            {templateMessage(i18n.features.referrals, {
+              earnTc: <strong>{i18n.features.earnTc}</strong>,
             })}
           </Li>
         </ul>
