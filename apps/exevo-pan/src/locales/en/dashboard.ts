@@ -135,5 +135,12 @@ export default {
       preview: 'Image:',
       referralLink: 'Referral link:',
     },
+    ReferralHistory: {
+      event: 'Event',
+      withdraw: 'Withdraw',
+      commission: 'Commission',
+      emptyState: 'No history',
+      loadMore: 'Load more',
+    },
   },
 }

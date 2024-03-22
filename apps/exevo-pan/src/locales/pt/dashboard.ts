@@ -139,5 +139,12 @@ export default defaultComposer(defaultTranslations, {
       preview: 'Imagem:',
       referralLink: 'Link de indicação:',
     },
+    ReferralHistory: {
+      event: 'Evento',
+      withdraw: 'Saque',
+      commission: 'Comissão',
+      emptyState: 'Sem histórico',
+      loadMore: 'Carregar mais',
+    },
   },
 })

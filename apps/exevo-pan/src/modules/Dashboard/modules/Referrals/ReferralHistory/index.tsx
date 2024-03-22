@@ -12,10 +12,9 @@ type ReferralHistoryProps = {
   firstPageData: TRPCRouteOutputs['listMyReferralHistoryEntries']
 }
 
-// @ ToDo: i18n
-
 export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
-  // const { huntingGroups } = useTranslations()
+  const translations = useTranslations()
+  const i18n = translations.dashboard.Referrals.ReferralHistory
 
   const [{ pageIndex, list, exhausted }, dispatch] = useReducer(queryReducer, {
     pageIndex: 1,
@@ -42,7 +41,9 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
           <Table.Head>
             <Table.Row>
               <Table.HeadColumn />
-              <Table.HeadColumn className="text-left">Event</Table.HeadColumn>
+              <Table.HeadColumn className="text-left">
+                {i18n.event}
+              </Table.HeadColumn>
             </Table.Row>
           </Table.Head>
 
@@ -69,12 +70,12 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
                   <div className="grid gap-1 py-0.5">
                     <span className="leading-tight">
                       <strong>
-                        {type === 'WITHDRAW' ? 'Withdraw' : 'Commission'}
+                        {type === 'WITHDRAW' ? i18n.withdraw : i18n.commission}
                       </strong>{' '}
                       <Text.TibiaCoin value={value} className="ml-1" />
                       {!!withdrawnCharacter && (
                         <>
-                          {' to '}
+                          {` ${translations.common.to} `}
                           <CharacterLink
                             nickname={withdrawnCharacter}
                             className="!font-bold"
@@ -97,7 +98,7 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
       )}
 
       {list.length === 0 && (
-        <EmptyState text="No history" variant="medium" className="my-4" />
+        <EmptyState text={i18n.emptyState} variant="medium" className="my-4" />
       )}
 
       {!exhausted && (
@@ -116,7 +117,7 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
           ) : (
             <>
               <ChevronDownIcon className="h-6 w-6" />
-              Load more
+              {i18n.loadMore}
             </>
           )}
         </Button>
