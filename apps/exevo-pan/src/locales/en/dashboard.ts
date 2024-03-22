@@ -16,6 +16,10 @@ export default {
       title: 'Notification Devices',
       description: 'My notification devices',
     },
+    referrals: {
+      title: 'Referrals',
+      description: 'Earn Tibia Coins with referrals!',
+    },
   },
   Layout: {
     nav: {
@@ -110,5 +114,8 @@ export default {
     device: 'Device',
     date: 'Date',
     emptyState: 'No devices',
+  },
+  Referrals: {
+    freeAlert: 'Referrals are only available for {{exevoPro}} members',
   },
 }

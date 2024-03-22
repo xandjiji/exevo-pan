@@ -5,7 +5,7 @@ import { useRouter } from 'next/router'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useSession } from 'next-auth/react'
-import { useTranslations } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
 import {
   CouponPreview,
@@ -29,7 +29,6 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// meta tags, page title, etc
 // add pitch line
 // boss group alert Referrals
 // test conflicting ids
@@ -67,7 +66,7 @@ export default function Page() {
 
   const i18n = translations.dashboard
 
-  const pageName = i18n.Meta.auctionNotifications.title
+  const pageName = i18n.Meta.referrals.title
   const previewSrc = PreviewImageClient.getSrc({
     title: pageName,
   })
@@ -125,17 +124,14 @@ export default function Page() {
         <meta property="og:title" content={pageTitle} />
         <meta property="twitter:title" content={pageTitle} />
 
-        <meta
-          name="description"
-          content={i18n.Meta.auctionNotifications.description}
-        />
+        <meta name="description" content={i18n.Meta.referrals.description} />
         <meta
           property="twitter:description"
-          content={i18n.Meta.auctionNotifications.description}
+          content={i18n.Meta.referrals.description}
         />
         <meta
           property="og:description"
-          content={i18n.Meta.auctionNotifications.description}
+          content={i18n.Meta.referrals.description}
         />
         <meta property="og:type" content="website" />
 
@@ -183,14 +179,16 @@ export default function Page() {
             {!isPro && status === 'authenticated' && (
               <div className="col-span-full">
                 <Alert variant="primary">
-                  Referrals are only available for{' '}
-                  <NextLink
-                    href={routes.DASHBOARD.ROOT}
-                    className="rare-gradient-text font-bold"
-                  >
-                    Exevo Pro
-                  </NextLink>{' '}
-                  members
+                  {templateMessage(i18n.Referrals.freeAlert, {
+                    exevoPro: (
+                      <NextLink
+                        href={routes.DASHBOARD.ROOT}
+                        className="rare-gradient-text font-bold"
+                      >
+                        Exevo Pro
+                      </NextLink>
+                    ),
+                  })}
                 </Alert>
               </div>
             )}

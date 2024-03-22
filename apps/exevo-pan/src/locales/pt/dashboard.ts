@@ -19,6 +19,10 @@ export default defaultComposer(defaultTranslations, {
       title: 'Notificações em Dispositivos',
       description: 'Meus dispositivos de notificação',
     },
+    referrals: {
+      title: 'Indicações',
+      description: 'Ganhe Tibia Coins indicando seus amigos!',
+    },
   },
   Layout: {
     nav: {
@@ -114,5 +118,8 @@ export default defaultComposer(defaultTranslations, {
     device: 'Dispositivo',
     date: 'Data',
     emptyState: 'Nenhum dispositivo',
+  },
+  Referrals: {
+    freeAlert: 'Indicações são disponíveis apenas para membros {{exevoPro}}',
   },
 })
