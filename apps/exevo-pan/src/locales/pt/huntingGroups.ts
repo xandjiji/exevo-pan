@@ -12,6 +12,8 @@ export default defaultComposer(defaultTranslations, {
   mySettings: 'Minhas preferências',
   notificate: 'Notificar',
   apply: 'Apply',
+  referralAlert: 'Dê a seus amigos {{discount}} de desconto e {{earnTc}}',
+  earnTc: 'ganhe {{commission}} por cada indicação',
   publicBoard: {
     title: 'Descrição',
     add: 'Adicionar descrição',

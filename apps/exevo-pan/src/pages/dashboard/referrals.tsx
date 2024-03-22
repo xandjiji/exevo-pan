@@ -29,7 +29,6 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// boss group alert Referrals
 // test conflicting ids
 // i18n (check mr diff)
 

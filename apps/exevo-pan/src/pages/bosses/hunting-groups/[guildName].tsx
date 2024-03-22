@@ -1,11 +1,12 @@
 import clsx from 'clsx'
 import Head from 'next/head'
+import NextLink from 'next/link'
 import { GetServerSideProps, GetServerSidePropsResult } from 'next'
 import { useCallback, useState } from 'react'
 import { parse, stringify } from 'devalue'
 import { getToken } from 'next-auth/jwt'
-import { useTranslations } from 'contexts/useTranslation'
-import { Button, Tabs } from 'components/Atoms'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
+import { Alert, Button, Tabs, Text } from 'components/Atoms'
 import { ConditionalClientComponent } from 'components/Organisms'
 import {
   ApplyDialog,
@@ -41,7 +42,7 @@ import {
   loadDisplayNameBossSrc,
   loadRawSrc,
 } from 'utils'
-import { jsonld, routes } from 'Constants'
+import { exevoPro, jsonld, routes } from 'Constants'
 import type { JWT } from 'next-auth/jwt'
 import { bosses, common, huntingGroups } from 'locales'
 
@@ -105,6 +106,8 @@ export default function GuildPage({
 
   const absolutePageUrl = getGuildPermalink(guildDataProps.guild.name, true)
   const pagePath = getGuildPermalink(guildDataProps.guild.name)
+
+  const isPro = !!session.data?.user.proStatus
 
   return (
     <>
@@ -258,6 +261,33 @@ export default function GuildPage({
                         </>
                       )}
                     </div>
+
+                    {token?.proStatus && (
+                      <Alert noIcon variant="primary">
+                        {templateMessage(i18n.referralAlert, {
+                          discount: (
+                            <strong>
+                              {exevoPro.referral.discountPercent}%
+                            </strong>
+                          ),
+                          earnTc: (
+                            <NextLink
+                              href={routes.DASHBOARD.REFERRALS}
+                              className="text-primaryHighlight font-bold underline underline-offset-2"
+                            >
+                              {templateMessage(i18n.earnTc, {
+                                commission: (
+                                  <Text.TibiaCoin
+                                    value={exevoPro.referral.tcCommission}
+                                  />
+                                ),
+                              })}
+                            </NextLink>
+                          ),
+                        })}
+                        !
+                      </Alert>
+                    )}
 
                     <div
                       className={clsx(

@@ -132,7 +132,7 @@ export default defaultComposer(defaultTranslations, {
     summaryTitle: 'Resumo',
     li1: 'Usando o seu cupom, usuários receberão {{discount}} de desconto ao comprarem {{exevoPro}}, que vale {{value}} na hora do pagamento.',
     li2: 'Para cada venda realizada com o seu cupom, você ganhará {{tc}} de comissão.',
-    li3: ' Não existe limites ou requisitos mínimos para sacar. Pode levar até 24 horas para que você receba suas Tibia Coins.',
+    li3: ' Não existem limites ou requisitos mínimos para sacar. Pode levar até 24 horas para que você receba suas Tibia Coins.',
     currentBalance: 'Saldo atual:',
     withdrawLabel: 'Sacar coins para',
     withdrawButton: 'Sacar',
