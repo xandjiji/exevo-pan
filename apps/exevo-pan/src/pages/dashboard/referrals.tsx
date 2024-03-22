@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react'
 import Head from 'next/head'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
@@ -10,7 +11,7 @@ import {
   CouponPreview,
   ReferralHistory,
 } from 'modules/Dashboard/modules/Referrals'
-import { Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
+import { Alert, Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
 import { TrashIcon } from 'assets/svgs'
 import { toast } from 'react-hot-toast'
 
@@ -28,7 +29,6 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// only for pro members (add free state)
 // meta tags, page title, etc
 // add pitch line
 // boss group alert Referrals
@@ -74,7 +74,7 @@ export default function Page() {
 
   const pageTitle = buildPageTitle(pageName)
 
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
   const isPro = !!session?.user.proStatus
 
   const historyFirstPage = trpc.listMyReferralHistoryEntries.useQuery(
@@ -180,6 +180,21 @@ export default function Page() {
           }
         >
           <div className="lgr:grid-cols-[520px_320px] mx-auto grid max-w-[320px] gap-4 md:max-w-fit md:grid-cols-[320px_320px] lg:grid-cols-[460px_320px]">
+            {!isPro && status === 'authenticated' && (
+              <div className="col-span-full">
+                <Alert variant="primary">
+                  Referrals are only available for{' '}
+                  <NextLink
+                    href={routes.DASHBOARD.ROOT}
+                    className="rare-gradient-text font-bold"
+                  >
+                    Exevo Pro
+                  </NextLink>{' '}
+                  members
+                </Alert>
+              </div>
+            )}
+
             <TitledCard variant="rounded" title="Summary">
               <div className="text-tsm flex flex-col gap-4">
                 <ul className="marker:text-primaryHighlight grid list-inside list-disc gap-1.5">
