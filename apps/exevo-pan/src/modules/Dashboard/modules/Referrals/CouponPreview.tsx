@@ -1,4 +1,5 @@
 import clsx from 'clsx'
+import { useTranslations } from 'contexts/useTranslation'
 import { exevoPro, routes } from 'Constants'
 import { ExevoPanIcon } from 'assets/svgs'
 import { CopyButton } from 'components/Atoms'
@@ -9,13 +10,16 @@ type CouponPreviewProps = {
 }
 
 export const CouponPreview = ({ coupon, isInvalid }: CouponPreviewProps) => {
+  const translations = useTranslations()
+  const i18n = translations.dashboard.Referrals.CouponPreview
+
   const refLink = `https://exevopan.com${routes.EXEVOPRO}?${
     exevoPro.referral.urlParam
   }=${coupon || 'COUPON'}`
 
   return (
     <div>
-      <p className="mt-4 mb-2">Preview:</p>
+      <p className="mt-4 mb-2">{i18n.preview}</p>
 
       <div className="border-1 border-separator/60 flex items-center gap-4 rounded border-dashed py-3 px-4">
         <ExevoPanIcon width={60} height={60} className="shrink-0" />
@@ -40,7 +44,7 @@ export const CouponPreview = ({ coupon, isInvalid }: CouponPreviewProps) => {
       </div>
 
       <div className="mt-3">
-        <p className="mb-0.5 text-xs tracking-wide">Referral link:</p>
+        <p className="mb-0.5 text-xs tracking-wide">{i18n.referralLink}</p>
         <div className="flex items-center gap-2">
           <a
             href={refLink}
