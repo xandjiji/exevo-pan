@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
+import { useSession } from 'next-auth/react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Layout } from 'modules/Dashboard'
 import {
@@ -73,17 +74,20 @@ export default function Page() {
 
   const pageTitle = buildPageTitle(pageName)
 
-  const list = trpc.listMyAuctionNotifications.useQuery(undefined, {
-    keepPreviousData: true,
-  })
+  const { data: session } = useSession()
+  const isPro = !!session?.user.proStatus
 
-  const historyFirstPage = trpc.listMyReferralHistoryEntries.useQuery({})
+  const historyFirstPage = trpc.listMyReferralHistoryEntries.useQuery(
+    {},
+    { enabled: isPro },
+  )
 
   const [coupon, setCoupon] = useState('')
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
   const [editableWithdraw, setEditableWithdraw] = useState(false)
 
   const referralTag = trpc.getReferralTag.useQuery(undefined, {
+    enabled: isPro,
     onSuccess: (data) => {
       if (!data) return
 
@@ -172,9 +176,7 @@ export default function Page() {
       <Main>
         <Layout
           isLoading={
-            list.isLoading &&
-            referralTag.isLoading &&
-            historyFirstPage.isLoading
+            isPro ? referralTag.isLoading && historyFirstPage.isLoading : false
           }
         >
           <div className="lgr:grid-cols-[520px_320px] mx-auto grid max-w-[320px] gap-4 md:max-w-fit md:grid-cols-[320px_320px] lg:grid-cols-[460px_320px]">
@@ -240,7 +242,9 @@ export default function Page() {
                     className="grow"
                     value={withdrawCharacter}
                     onChange={(e) => setWithdrawCharacter(e.target.value)}
-                    disabled={editWithdrawAction.isLoading || editableWithdraw}
+                    disabled={
+                      !isPro || editWithdrawAction.isLoading || editableWithdraw
+                    }
                   />
 
                   <Button
@@ -260,7 +264,7 @@ export default function Page() {
                       editWithdrawAction.mutate({ withdrawCharacter })
                     }}
                     loading={editWithdrawAction.isLoading}
-                    disabled={withdrawCharacter.length < 2}
+                    disabled={!isPro || withdrawCharacter.length < 2}
                   >
                     {editableWithdraw && <TrashIcon className="h-4 w-4" />}
                     {editableWithdraw ? 'Cancel' : 'Withdraw'}
@@ -278,7 +282,7 @@ export default function Page() {
                   className="grow"
                   value={coupon}
                   onChange={(e) => setCoupon(e.target.value.toUpperCase())}
-                  disabled={editCouponAction.isLoading}
+                  disabled={!isPro || editCouponAction.isLoading}
                   onKeyPress={(e) => {
                     if (
                       e.key === 'Enter' &&
@@ -295,7 +299,7 @@ export default function Page() {
                   className="mb-[1px] !py-3"
                   onClick={() => editCouponAction.mutate({ coupon })}
                   loading={editCouponAction.isLoading}
-                  disabled={isCouponInvalid}
+                  disabled={!isPro || isCouponInvalid}
                 >
                   Save
                 </Button>
@@ -304,9 +308,11 @@ export default function Page() {
               <CouponPreview coupon={coupon} isInvalid={isCouponInvalid} />
             </TitledCard>
 
-            <div className="col-span-full">
-              <ReferralHistory firstPageData={historyFirstPage.data ?? []} />
-            </div>
+            {isPro && (
+              <div className="col-span-full">
+                <ReferralHistory firstPageData={historyFirstPage.data ?? []} />
+              </div>
+            )}
           </div>
         </Layout>
       </Main>
