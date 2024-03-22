@@ -32,6 +32,11 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
             icon: <PersonIcon />,
           },
           {
+            title: i18n.nav.referrals,
+            href: routes.DASHBOARD.REFERRALS,
+            icon: <MoneyIcon />,
+          },
+          {
             title: i18n.nav.transactions,
             href: routes.DASHBOARD.TRANSACTIONS,
             icon: <PapyrusIcon />,
@@ -45,11 +50,6 @@ const Layout = ({ isLoading = false, children }: LayoutProps) => {
             title: i18n.nav.devices,
             href: routes.DASHBOARD.DEVICES,
             icon: <BlogIcon />,
-          },
-          {
-            title: i18n.nav.referrals,
-            href: routes.DASHBOARD.REFERRALS,
-            icon: <MoneyIcon />,
           },
         ]}
       />
