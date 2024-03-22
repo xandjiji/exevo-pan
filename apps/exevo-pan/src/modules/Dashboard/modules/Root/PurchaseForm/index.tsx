@@ -36,9 +36,6 @@ type PurchaseFormProps = {
   initialDiscountPercent?: number | null
 }
 
-// @ ToDo:
-// i18n
-
 const PurchaseForm = ({
   email,
   initialTxId,
@@ -47,7 +44,8 @@ const PurchaseForm = ({
   initialCoupon,
   initialDiscountPercent,
 }: PurchaseFormProps) => {
-  const { common, dashboard } = useTranslations()
+  const translations = useTranslations()
+  const i18n = translations.dashboard.PurchaseForm
 
   const [pixMode, setPixMode] = useState(
     initialTxId ? !initialCharacter : false,
@@ -109,7 +107,7 @@ const PurchaseForm = ({
     },
     onError: () => {
       setRequestStatus('ERROR')
-      toast.error(common.genericError)
+      toast.error(translations.common.genericError)
     },
     onSuccess: async ({ paymentData }) => {
       if (paymentData) {
@@ -134,7 +132,7 @@ const PurchaseForm = ({
       }
 
       setRequestStatus('SUCCESSFUL')
-      toast.success(dashboard.PurchaseForm.orderReceived)
+      toast.success(i18n.orderReceived)
     },
   })
 
@@ -163,19 +161,13 @@ const PurchaseForm = ({
         isFinished={isFinished}
         currentStep={currentStep}
         steps={[
-          { title: dashboard.PurchaseForm.order, onClick: resetStep },
-          { title: dashboard.PurchaseForm.payment },
+          { title: i18n.order, onClick: resetStep },
+          { title: i18n.payment },
         ]}
       />
       <TitledCard
         variant="rounded"
-        title={
-          <h4>
-            {currentStep === 0
-              ? dashboard.PurchaseForm.order
-              : dashboard.PurchaseForm.payment}
-          </h4>
-        }
+        title={<h4>{currentStep === 0 ? i18n.order : i18n.payment}</h4>}
       >
         <div className="text-tsm leading-tight">
           {requestStatus !== 'SUCCESSFUL' && (
@@ -221,8 +213,8 @@ const PurchaseForm = ({
               />
 
               <Input
-                label="Coupon"
-                placeholder="Get discounts"
+                label={i18n.couponLabel}
+                placeholder={i18n.couponPlaceholder}
                 value={formState.coupon.toUpperCase()}
                 onChange={(e) =>
                   setFormState((prev) => ({
@@ -254,7 +246,7 @@ const PurchaseForm = ({
                           ? `R$ ${priceDiscount},00`
                           : `${priceDiscount} TC`}
                       </strong>{' '}
-                      discount applied!
+                      {i18n.discountApplied}
                     </p>
                   }
                 />
@@ -276,7 +268,7 @@ const PurchaseForm = ({
                 {pixMode ? (
                   <p className="self-center text-base font-bold">
                     <span className="text-tsm font-light tracking-wide">
-                      {dashboard.PurchaseForm.total}
+                      {i18n.total}
                     </span>{' '}
                     <span className="inline-flex items-center gap-1.5">
                       R$ {calculatedPrice},00{' '}
@@ -292,7 +284,7 @@ const PurchaseForm = ({
                   <Input
                     className="w-full"
                     name="character"
-                    label={dashboard.PurchaseForm.paymentCharacterLabel}
+                    label={i18n.paymentCharacterLabel}
                     placeholder={`e.g, '${randomNickname}'`}
                     value={formState.character ?? ''}
                     onChange={(e) => {
@@ -328,7 +320,7 @@ const PurchaseForm = ({
                     )
                   }
                 >
-                  {dashboard.PurchaseForm.confirm}
+                  {i18n.confirm}
                 </Button>
               </div>
             </div>
@@ -337,12 +329,12 @@ const PurchaseForm = ({
           {requestStatus === 'SUCCESSFUL' && (
             <div className="grid gap-5">
               <strong className="text-txl tracking-wide">
-                {dashboard.PurchaseForm.orderReceived} 🎉
+                {i18n.orderReceived} 🎉
               </strong>
 
               {!!formState.txId && (
                 <div className="grid gap-2">
-                  <p id="tx-id">{dashboard.PurchaseForm.transactionId}:</p>
+                  <p id="tx-id">{i18n.transactionId}:</p>
                   <p
                     aria-labelledby="tx-id"
                     className="code mx-auto w-fit text-center"
@@ -352,7 +344,7 @@ const PurchaseForm = ({
                 </div>
               )}
 
-              <p>{dashboard.PurchaseForm.notice}</p>
+              <p>{i18n.notice}</p>
 
               {pixMode ? (
                 <div>
@@ -364,7 +356,7 @@ const PurchaseForm = ({
                     />
                   </span>
                   <p className="text-s mb-1.5 mt-[22px] text-center">
-                    {dashboard.PurchaseForm.qrCodeText}
+                    {i18n.qrCodeText}
                   </p>
                   <img
                     className="mx-auto block"
@@ -384,7 +376,7 @@ const PurchaseForm = ({
 
               <Button className="mx-auto" pill hollow onClick={resetStep}>
                 <EditIcon className="h-4 w-4" />
-                {dashboard.PurchaseForm.edit}
+                {i18n.edit}
               </Button>
             </div>
           )}

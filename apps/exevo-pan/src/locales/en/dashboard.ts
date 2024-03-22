@@ -77,6 +77,9 @@ export default {
     notice:
       "Your purchase will be delivered right after your payment is confirmed. If your order can't be completed, your money will be returned.",
     edit: 'Edit your order',
+    couponLabel: 'Coupon',
+    couponPlaceholder: 'Get discounts',
+    discountApplied: 'discount applied!',
   },
   TransactionHistory: {
     title: 'Transaction History',

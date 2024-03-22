@@ -81,6 +81,9 @@ export default defaultComposer(defaultTranslations, {
     notice:
       'Seu pedido será entregue logo após confirmarmos o seu pagamento. Se o seu pedido não puder ser completado, seu dinheiro será devolvido.',
     edit: 'Editar pedido',
+    couponLabel: 'Cupom',
+    couponPlaceholder: 'Ganhe descontos',
+    discountApplied: 'desconto aplicado!',
   },
   TransactionHistory: {
     title: 'Histórico de Transações',
