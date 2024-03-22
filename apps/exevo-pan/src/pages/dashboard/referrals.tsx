@@ -27,7 +27,6 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// history
 // only for pro members (add free state)
 // meta tags, page title, etc
 // add pitch line

@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useReducer } from 'react'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import { Button, Table, Text } from 'components/Atoms'
+import { Button, CharacterLink, Table, Text } from 'components/Atoms'
 import { ChevronDownIcon, TrendingIcon, ViewedIcon } from 'assets/svgs'
 import EmptyState from 'components/EmptyState'
 import { trpc } from 'lib/trpc'
@@ -47,7 +47,7 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
           </Table.Head>
 
           <Table.Body>
-            {list.map(({ id, type, value, createdAt }) => (
+            {list.map(({ id, type, value, createdAt, withdrawnCharacter }) => (
               <Table.Row
                 key={id}
                 className={clsx(
@@ -72,6 +72,17 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
                         {type === 'WITHDRAW' ? 'Withdraw' : 'Commission'}
                       </strong>{' '}
                       <Text.TibiaCoin value={value} className="ml-1" />
+                      {!!withdrawnCharacter && (
+                        <>
+                          {' to '}
+                          <CharacterLink
+                            nickname={withdrawnCharacter}
+                            className="!font-bold"
+                          >
+                            {withdrawnCharacter}
+                          </CharacterLink>
+                        </>
+                      )}
                     </span>
 
                     <span className="text-tsm font-light opacity-60">

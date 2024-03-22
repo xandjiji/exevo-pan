@@ -1,6 +1,7 @@
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
+import { TRPCError } from '@trpc/server'
 
 export const getAllWithdrawRequests = adminProcedure.query(() =>
   prisma.referralTag.findMany({
@@ -13,10 +14,17 @@ export const sendWithdraw = adminProcedure
     z.object({
       tagId: z.string().min(1),
       tcOut: z.number().min(1),
-      userId: z.string(),
     }),
   )
-  .mutation(async ({ input: { tagId, tcOut, userId } }) => {
+  .mutation(async ({ input: { tagId, tcOut } }) => {
+    const referralTag = await prisma.referralTag.findUnique({
+      where: { id: tagId },
+    })
+
+    if (!referralTag) {
+      throw new TRPCError({ code: 'NOT_FOUND' })
+    }
+
     const result = await prisma.$transaction([
       prisma.referralTag.update({
         where: { id: tagId },
@@ -26,7 +34,12 @@ export const sendWithdraw = adminProcedure
         },
       }),
       prisma.referralHistoryEntry.create({
-        data: { userId, type: 'WITHDRAW', value: tcOut },
+        data: {
+          userId: referralTag.userId,
+          type: 'WITHDRAW',
+          value: tcOut,
+          withdrawnCharacter: referralTag.withdrawCharacter,
+        },
       }),
     ])
     return result

@@ -118,10 +118,11 @@ enum REFERRAL_HISTORY_TYPE {
 }
 
 model ReferralHistoryEntry {
-  id        String                @id @default(uuid())
-  createdAt DateTime              @default(now())
-  type      REFERRAL_HISTORY_TYPE
-  value     Int
+  id                 String                @id @default(uuid())
+  createdAt          DateTime              @default(now())
+  type               REFERRAL_HISTORY_TYPE
+  value              Int
+  withdrawnCharacter String?
 
   referredUserId String? @unique
 

@@ -13,7 +13,6 @@ import {
 
 const EMPTY_TO_SEND = {
   tagId: '',
-  userId: '',
   withdrawCharacter: '',
   tcOut: 0,
 }
@@ -52,18 +51,13 @@ export const ReferralWithdraws = () => {
 
           <Table.Body>
             {(list.data ?? []).map(
-              ({ id, withdrawCharacter, coupon, tcIn, tcOut, userId }) => (
+              ({ id, withdrawCharacter, coupon, tcIn, tcOut }) => (
                 <Table.Row
                   key={id}
                   highlight={toSend.tagId === id ? 'green' : undefined}
                   hoverHighlight
                   onClick={() =>
-                    setToSend({
-                      tagId: id,
-                      tcOut: tcIn,
-                      withdrawCharacter,
-                      userId,
-                    })
+                    setToSend({ tagId: id, tcOut: tcIn, withdrawCharacter })
                   }
                   className="cursor-pointer"
                 >
