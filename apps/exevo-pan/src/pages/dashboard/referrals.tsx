@@ -29,7 +29,7 @@ import { common, dashboard } from 'locales'
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
 
 // @ ToDo:
-// test conflicting ids
+//  test conflicting ids
 // i18n (check mr diff)
 
 function randomInfluencer(br: boolean) {
