@@ -92,7 +92,7 @@ export const updateProOrders = adminProcedure
             where: { exevoProPaymentId: payment?.id },
           }),
 
-      ...(payment?.referralUserId
+      ...(payment?.referralUserId && !noBill
         ? [
             confirmed
               ? prisma.referralHistoryEntry.create({
