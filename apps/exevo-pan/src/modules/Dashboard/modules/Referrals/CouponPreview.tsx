@@ -13,9 +13,8 @@ export const CouponPreview = ({ coupon, isInvalid }: CouponPreviewProps) => {
   const translations = useTranslations()
   const i18n = translations.dashboard.Referrals.CouponPreview
 
-  const refLink = `https://exevopan.com${routes.EXEVOPRO}?${
-    exevoPro.referral.urlParam
-  }=${coupon || 'COUPON'}`
+  const derivedCoupon = coupon || 'COUPON'
+  const refLink = `https://exevopan.com${routes.EXEVOPRO}?${exevoPro.referral.urlParam}=${derivedCoupon}`
 
   return (
     <div>
@@ -37,7 +36,7 @@ export const CouponPreview = ({ coupon, isInvalid }: CouponPreviewProps) => {
               Using:
             </span>
             <span className="bg-primaryVariantHighlight/40 border-1 border-primaryHighlight/60 text-tsm text-onSurface rounded border-dashed px-2 py-1 font-bold">
-              {coupon || 'COUPON'}
+              {derivedCoupon}
             </span>
           </div>
         </div>
