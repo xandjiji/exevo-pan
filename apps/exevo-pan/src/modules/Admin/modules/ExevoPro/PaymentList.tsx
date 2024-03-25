@@ -23,6 +23,7 @@ const EMPTY_CONFIRMATION = {
   displayName: '',
   confirmed: false,
   noBill: false,
+  coupon: '',
 }
 
 const PaymentList = () => {
@@ -106,6 +107,7 @@ const PaymentList = () => {
                   lastUpdated,
                   confirmed,
                   discountPercent,
+                  coupon,
                 },
               }) => {
                 const calculatedPrice = calculateDiscountedExevoProPrice(
@@ -134,6 +136,7 @@ const PaymentList = () => {
                               id,
                               confirmed: !confirmed,
                               noBill: false,
+                              coupon: coupon ?? '',
                             })
                           }
                         />
@@ -192,6 +195,13 @@ const PaymentList = () => {
           </span>
           <p className="code w-fit">{toConfirm.displayName}</p>
         </p>
+
+        {!!toConfirm.coupon && (
+          <div className="-mt-2 mb-6 grid w-fit gap-1">
+            <p className="text-xs">Coupon:</p>
+            <p className="code">{toConfirm.coupon}</p>
+          </div>
+        )}
 
         {toConfirm.confirmed && (
           <div className="w-fit">
