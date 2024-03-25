@@ -31,6 +31,7 @@ export const sendWithdraw = adminProcedure
         data: {
           tcOut: { increment: tcOut },
           tcIn: { decrement: tcOut },
+          withdrawCharacter: '',
         },
       }),
       prisma.referralHistoryEntry.create({
