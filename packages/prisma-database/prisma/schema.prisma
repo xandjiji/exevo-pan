@@ -127,7 +127,7 @@ model ReferralHistoryEntry {
   referredUserId String? @unique
 
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId String @unique
+  userId String
 
   @@index([userId])
 }
