@@ -5,6 +5,7 @@ import {
   Button,
   CharacterLink,
   Chip,
+  CopyButton,
   Dialog,
   LoadingAlert,
   Table,
@@ -105,6 +106,7 @@ export const ReferralWithdraws = () => {
               {toSend.withdrawCharacter}
             </CharacterLink>
           </Chip>
+          <CopyButton copyString={toSend.withdrawCharacter} />
         </p>
 
         <div className="flex justify-end gap-4">
