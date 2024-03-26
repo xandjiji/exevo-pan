@@ -43,6 +43,7 @@ function randomInfluencer(br: boolean) {
     'BUGADINHO',
     'VEXCRAW',
     'VDA',
+    'GMTIBIA',
   ]
 
   const english = [
@@ -52,6 +53,7 @@ function randomInfluencer(br: boolean) {
     'PUNIO',
     'MAXIGASHI',
     'HEGAL',
+    'TIBIAGUIDES',
   ]
 
   const samples = br ? brazillians : english

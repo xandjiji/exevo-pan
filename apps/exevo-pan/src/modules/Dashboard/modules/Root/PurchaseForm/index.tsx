@@ -69,6 +69,8 @@ const PurchaseForm = ({
     discountPercent: initialDiscountPercent ?? 0,
   })
 
+  const [storedCoupon, setStoredCoupon] = useState('')
+
   const calculatedPrice = calculateDiscountedExevoProPrice(
     formState.discountPercent,
     pixMode ? 'PIX' : 'TIBIA_COINS',
@@ -94,9 +96,13 @@ const PurchaseForm = ({
   })
 
   useLayoutEffect(() => {
-    if (initialTxId) return
-
     const lsCoupon = referralTracker.getFromLS().coupon
+
+    if (initialTxId && !initialCoupon && lsCoupon) {
+      setStoredCoupon(lsCoupon)
+      return
+    }
+
     if (!lsCoupon) return
     setFormState((prev) => ({ ...prev, coupon: lsCoupon }))
   }, [])
@@ -374,7 +380,18 @@ const PurchaseForm = ({
                 />
               )}
 
-              <Button className="mx-auto" pill hollow onClick={resetStep}>
+              <Button
+                className="mx-auto"
+                pill
+                hollow
+                onClick={() => {
+                  if (storedCoupon) {
+                    setStoredCoupon('')
+                    setFormState((prev) => ({ ...prev, coupon: storedCoupon }))
+                  }
+                  resetStep()
+                }}
+              >
                 <EditIcon className="h-4 w-4" />
                 {i18n.edit}
               </Button>
