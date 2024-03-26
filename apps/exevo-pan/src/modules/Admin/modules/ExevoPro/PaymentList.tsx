@@ -1,16 +1,19 @@
 import { useCallback, useMemo, useState } from 'react'
+import clsx from 'clsx'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
-import { debounce } from 'utils'
+import { calculateDiscountedExevoProPrice, debounce } from 'utils'
 import {
   Button,
   CharacterLink,
   Checkbox,
+  Chip,
   Dialog,
   Input,
   LoadingAlert,
   Paginator,
   Table,
+  Text,
 } from 'components/Atoms'
 
 const PAGE_SIZE = 30
@@ -21,6 +24,7 @@ const EMPTY_CONFIRMATION = {
   displayName: '',
   confirmed: false,
   noBill: false,
+  coupon: '',
 }
 
 const PaymentList = () => {
@@ -86,7 +90,8 @@ const PaymentList = () => {
           <Table.Head>
             <Table.Row>
               <Table.HeadColumn>Confirmed</Table.HeadColumn>
-              <Table.HeadColumn>Character</Table.HeadColumn>
+              <Table.HeadColumn>Price</Table.HeadColumn>
+              <Table.HeadColumn>From</Table.HeadColumn>
               <Table.HeadColumn highlighted desc>
                 Date
               </Table.HeadColumn>
@@ -98,53 +103,81 @@ const PaymentList = () => {
               ({
                 id,
                 email,
-                paymentData: { character, lastUpdated, confirmed },
-              }) => (
-                <Table.Row
-                  key={id}
-                  highlight={
-                    toConfirm.id === id
-                      ? toConfirm.confirmed
-                        ? 'green'
-                        : 'red'
-                      : undefined
-                  }
-                  hoverHighlight
-                >
-                  <Table.Column>
-                    <div className="mx-auto w-fit">
-                      <Checkbox
-                        checked={confirmed}
-                        onClick={() =>
-                          setToConfirm({
-                            displayName: (character || email) ?? 'NULL',
-                            id,
-                            confirmed: !confirmed,
-                            noBill: false,
-                          })
-                        }
-                      />
-                    </div>
-                  </Table.Column>
-                  <Table.Column title={email ?? undefined}>
-                    {character ? (
-                      <CharacterLink
-                        nickname={character}
-                        className="text-primaryHighlight"
-                      >
-                        {character}
-                      </CharacterLink>
-                    ) : (
-                      <span style={{ lineBreak: 'anywhere' }}>{email}</span>
-                    )}
-                  </Table.Column>
-                  <Table.Column>
-                    {lastUpdated.toLocaleString('pt-BR', {
-                      hour12: false,
-                    })}
-                  </Table.Column>
-                </Table.Row>
-              ),
+                paymentData: {
+                  character,
+                  lastUpdated,
+                  confirmed,
+                  discountPercent,
+                  coupon,
+                  noBill,
+                },
+              }) => {
+                const calculatedPrice = calculateDiscountedExevoProPrice(
+                  discountPercent ?? 0,
+                  character ? 'TIBIA_COINS' : 'PIX',
+                )
+                return (
+                  <Table.Row
+                    key={id}
+                    highlight={
+                      toConfirm.id === id
+                        ? toConfirm.confirmed
+                          ? 'green'
+                          : 'red'
+                        : undefined
+                    }
+                    hoverHighlight
+                  >
+                    <Table.Column>
+                      <div className="mx-auto w-fit">
+                        <Checkbox
+                          checked={confirmed}
+                          onClick={() =>
+                            setToConfirm({
+                              displayName: (character || email) ?? 'NULL',
+                              id,
+                              confirmed: !confirmed,
+                              noBill: false,
+                              coupon: coupon ?? '',
+                            })
+                          }
+                        />
+                      </div>
+                    </Table.Column>
+                    <Table.Column>
+                      <Chip gray className="mx-auto w-fit">
+                        {character ? (
+                          <Text.TibiaCoin value={calculatedPrice} />
+                        ) : (
+                          `R$ ${calculatedPrice},00`
+                        )}
+                      </Chip>
+                    </Table.Column>
+                    <Table.Column
+                      title={email ?? undefined}
+                      className={clsx(noBill && 'line-through')}
+                    >
+                      {character ? (
+                        <CharacterLink
+                          nickname={character}
+                          className="text-primaryHighlight"
+                        >
+                          {character}
+                        </CharacterLink>
+                      ) : (
+                        <span style={{ lineBreak: 'anywhere' }}>{email}</span>
+                      )}
+                    </Table.Column>
+                    <Table.Column>
+                      <span style={{ lineBreak: 'anywhere' }}>
+                        {lastUpdated.toLocaleString('pt-BR', {
+                          hour12: false,
+                        })}
+                      </span>
+                    </Table.Column>
+                  </Table.Row>
+                )
+              },
             )}
           </Table.Body>
         </Table.Element>
@@ -168,14 +201,23 @@ const PaymentList = () => {
           <p className="code w-fit">{toConfirm.displayName}</p>
         </p>
 
+        {!!toConfirm.coupon && (
+          <div className="-mt-2 mb-6 grid w-fit gap-1">
+            <p className="text-xs">Coupon:</p>
+            <p className="code">{toConfirm.coupon}</p>
+          </div>
+        )}
+
         {toConfirm.confirmed && (
-          <Checkbox
-            label="No billing"
-            checked={toConfirm.noBill}
-            onClick={() =>
-              setToConfirm((prev) => ({ ...prev, noBill: !prev.noBill }))
-            }
-          />
+          <div className="w-fit">
+            <Checkbox
+              label="No billing"
+              checked={toConfirm.noBill}
+              onClick={() =>
+                setToConfirm((prev) => ({ ...prev, noBill: !prev.noBill }))
+              }
+            />
+          </div>
         )}
 
         <div className="flex justify-end gap-4">

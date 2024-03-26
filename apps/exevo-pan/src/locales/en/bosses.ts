@@ -24,6 +24,7 @@ export default {
     expectedIn: 'Expected in',
   },
   BossDialog: {
+    respawns: 'Respawns every {{min}}~{{max}} days',
     loot: 'Relevant loot',
     raidMessages: 'Raid messages',
     bossWillSpawn: 'Boss will spawn',

@@ -27,6 +27,7 @@ export default defaultComposer(defaultTranslations, {
     expectedIn: 'Aparecerá em',
   },
   BossDialog: {
+    respawns: 'Renasce a cada {{min}}~{{max}} dias',
     loot: 'Loot relevante',
     raidMessages: 'Mensagens de raid',
     bossWillSpawn: 'Boss irá nascer',

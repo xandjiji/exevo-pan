@@ -6,6 +6,7 @@ export const routes = {
     TRANSACTIONS: '/dashboard/transaction-history',
     AUCTION_NOTIFICATIONS: '/dashboard/auction-notifications',
     DEVICES: '/dashboard/devices',
+    REFERRALS: '/dashboard/referrals',
   },
   BOSSES: {
     TRACKER: '/bosses',
@@ -31,5 +32,6 @@ export const routes = {
   ADMIN: {
     PRO_PAYMENTS: '/admin',
     AUCTION_HIGHLIGHTS: '/admin/auction-highlights',
+    WITHDRAWS: '/admin/withdraws',
   },
 }

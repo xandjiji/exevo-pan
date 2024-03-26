@@ -1,333 +1,373 @@
 generator client {
-    provider        = "prisma-client-js"
-    previewFeatures = ["referentialIntegrity", "filteredRelationCount"]
+  provider        = "prisma-client-js"
+  previewFeatures = ["referentialIntegrity", "filteredRelationCount"]
 }
 
 datasource db {
-    provider     = "mysql"
-    url          = env("DATABASE_URL")
-    relationMode = "prisma"
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
+  relationMode = "prisma"
 }
 
 model Account {
-    id                String  @id @default(uuid())
-    userId            String
-    type              String
-    provider          String
-    providerAccountId String
-    refresh_token     String? @db.Text
-    access_token      String? @db.Text
-    expires_at        Int?
-    token_type        String?
-    scope             String?
-    id_token          String? @db.Text
-    session_state     String?
+  id                String  @id @default(uuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
 
-    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@unique([provider, providerAccountId])
-    @@index([userId])
+  @@unique([provider, providerAccountId])
+  @@index([userId])
 }
 
 model Session {
-    id           String   @id @default(uuid())
-    sessionToken String   @unique
-    userId       String
-    expires      DateTime
-    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id           String   @id @default(uuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-    @@index([userId])
+  @@index([userId])
 }
 
 enum Role {
-    USER
-    ADMIN
+  USER
+  ADMIN
 }
 
 model User {
-    id                  String                @id @default(uuid())
-    role                Role                  @default(USER)
-    name                String?
-    email               String?               @unique
-    emailVerified       DateTime?
-    image               String?
-    accounts            Account[]
-    sessions            Session[]
-    proStatus           Boolean               @default(false)
-    proSince            DateTime?
-    paymentData         PaymentData?
-    highlightedAuctions HighlightedAuction[]
-    transactions        Transaction[]
-    NotificationDevice  NotificationDevice[]
-    auctionNotification AuctionNotification[]
-    guildMembership     GuildMember[]
-    guildApplications   GuildApplication[]
+  id                   String                 @id @default(uuid())
+  role                 Role                   @default(USER)
+  name                 String?
+  email                String?                @unique
+  emailVerified        DateTime?
+  image                String?
+  accounts             Account[]
+  sessions             Session[]
+  proStatus            Boolean                @default(false)
+  proSince             DateTime?
+  paymentData          PaymentData?
+  highlightedAuctions  HighlightedAuction[]
+  transactions         Transaction[]
+  NotificationDevice   NotificationDevice[]
+  auctionNotification  AuctionNotification[]
+  guildMembership      GuildMember[]
+  guildApplications    GuildApplication[]
+  referralTag          ReferralTag?
+  referralHistoryEntry ReferralHistoryEntry[]
 }
 
 model NotificationDevice {
-    auth        String   @id
-    endpoint    String   @db.Text
-    p256dh      String
-    lastUpdated DateTime @default(now())
-    metadata    String?
+  auth        String   @id
+  endpoint    String   @db.Text
+  p256dh      String
+  lastUpdated DateTime @default(now())
+  metadata    String?
 
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
-    @@index([userId])
+  @@index([userId])
 }
 
 model PaymentData {
-    id          String   @id @default(uuid())
-    lastUpdated DateTime
-    character   String?
-    confirmed   Boolean
-    noBill      Boolean  @default(false)
+  id              String   @id @default(uuid())
+  lastUpdated     DateTime
+  character       String?
+  confirmed       Boolean
+  noBill          Boolean  @default(false)
+  referralUserId  String?
+  discountPercent Int?
+  coupon          String?
 
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
 
-    transaction Transaction?
+  transaction Transaction?
 
-    @@index([userId])
+  @@index([userId])
+}
+
+model ReferralTag {
+  id                String @id @default(uuid())
+  tcIn              Int    @default(0)
+  tcOut             Int    @default(0)
+  discountPercent   Int
+  withdrawCharacter String @default("")
+  coupon            String @unique @default("")
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String @unique
+
+  @@index([userId])
+  @@index([coupon])
+}
+
+enum REFERRAL_HISTORY_TYPE {
+  COMMISSION
+  WITHDRAW
+}
+
+model ReferralHistoryEntry {
+  id                 String                @id @default(uuid())
+  createdAt          DateTime              @default(now())
+  type               REFERRAL_HISTORY_TYPE
+  value              Int
+  withdrawnCharacter String?
+
+  referredUserId String? @unique
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+
+  @@index([userId])
 }
 
 model VerificationToken {
-    identifier String
-    token      String   @unique
-    expires    DateTime
+  identifier String
+  token      String   @unique
+  expires    DateTime
 
-    @@unique([identifier, token])
+  @@unique([identifier, token])
 }
 
 enum PAYMENT_METHOD {
-    PIX
-    TIBIA_COINS
+  PIX
+  TIBIA_COINS
 }
 
 model AuctionNotification {
-    id                String    @id @default(uuid())
-    auctionId         Int
-    nickname          String
-    auctionEnd        DateTime
-    lastUpdated       DateTime  @default(now())
-    notifyAt          DateTime?
-    notifyOnBid       Boolean
-    scheduleCompleted Boolean   @default(false)
+  id                String    @id @default(uuid())
+  auctionId         Int
+  nickname          String
+  auctionEnd        DateTime
+  lastUpdated       DateTime  @default(now())
+  notifyAt          DateTime?
+  notifyOnBid       Boolean
+  scheduleCompleted Boolean   @default(false)
 
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
-    @@index([userId])
-    @@index([notifyAt])
+  @@index([userId])
+  @@index([notifyAt])
 }
 
 model HighlightedAuction {
-    id                    String         @id @default(uuid())
-    nickname              String
-    auctionId             Int
-    auctionEnd            DateTime       @default(now())
-    price                 Int
-    days                  String
-    lastUpdated           DateTime       @default(now())
-    active                Boolean        @default(true)
-    confirmed             Boolean        @default(false)
-    paymentMethod         PAYMENT_METHOD
-    paymentCharacter      String?
-    email                 String
-    timezoneOffsetMinutes Int            @default(0)
+  id                    String         @id @default(uuid())
+  nickname              String
+  auctionId             Int
+  auctionEnd            DateTime       @default(now())
+  price                 Int
+  days                  String
+  lastUpdated           DateTime       @default(now())
+  active                Boolean        @default(true)
+  confirmed             Boolean        @default(false)
+  paymentMethod         PAYMENT_METHOD
+  paymentCharacter      String?
+  email                 String
+  timezoneOffsetMinutes Int            @default(0)
 
-    user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String?
+  user   User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String?
 
-    transaction Transaction?
+  transaction Transaction?
 
-    @@index([userId])
+  @@index([userId])
 }
 
 enum CURRENCY {
-    BRL
-    TIBIA_COINS
+  BRL
+  TIBIA_COINS
 }
 
 enum TRANSACTION_TYPE {
-    EXEVO_PRO
-    AUCTION_HIGHLIGHT
+  EXEVO_PRO
+  AUCTION_HIGHLIGHT
 }
 
 model Transaction {
-    id       String           @id @default(uuid())
-    value    Int
-    currency CURRENCY
-    type     TRANSACTION_TYPE
-    date     DateTime         @default(now())
+  id       String           @id @default(uuid())
+  value    Int
+  currency CURRENCY
+  type     TRANSACTION_TYPE
+  date     DateTime         @default(now())
 
-    highlightedAuction   HighlightedAuction? @relation(fields: [highlightedAuctionId], references: [id], onDelete: Cascade)
-    highlightedAuctionId String?             @unique
+  highlightedAuction   HighlightedAuction? @relation(fields: [highlightedAuctionId], references: [id], onDelete: Cascade)
+  highlightedAuctionId String?             @unique
 
-    exevoProPayment   PaymentData? @relation(fields: [exevoProPaymentId], references: [id], onDelete: Cascade)
-    exevoProPaymentId String?      @unique
+  exevoProPayment   PaymentData? @relation(fields: [exevoProPaymentId], references: [id], onDelete: Cascade)
+  exevoProPaymentId String?      @unique
 
-    user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
 
-    @@index([userId])
-    @@index([highlightedAuctionId])
+  @@index([userId])
+  @@index([highlightedAuctionId])
 }
 
 model Guild {
-    id            String   @id @default(uuid())
-    name          String   @unique
-    private       Boolean
-    server        String
-    description   String?  @db.Text
-    messageBoard  String?  @db.Text
-    createdAt     DateTime @default(now())
-    avatarId      Int
-    avatarDegree  Int
-    eventEndpoint String?  @db.Text
+  id            String   @id @default(uuid())
+  name          String   @unique
+  private       Boolean
+  server        String
+  description   String?  @db.Text
+  messageBoard  String?  @db.Text
+  createdAt     DateTime @default(now())
+  avatarId      Int
+  avatarDegree  Int
+  eventEndpoint String?  @db.Text
 
-    guildMembers       GuildMember[]
-    guildApplications  GuildApplication[]
-    guildLogEntry      GuildLogEntry[]
-    bossChecks         BossCheck[]
-    bossCheckLog       BossCheckLog[]
-    frozenBossCheckLog FrozenBossCheckLog[]
+  guildMembers       GuildMember[]
+  guildApplications  GuildApplication[]
+  guildLogEntry      GuildLogEntry[]
+  bossChecks         BossCheck[]
+  bossCheckLog       BossCheckLog[]
+  frozenBossCheckLog FrozenBossCheckLog[]
 }
 
 enum GUILD_MEMBER_ROLE {
-    ADMIN
-    MODERATOR
-    USER
+  ADMIN
+  MODERATOR
+  USER
 }
 
 model GuildMember {
-    id       String            @id @default(uuid())
-    name     String
-    role     GUILD_MEMBER_ROLE
-    joinedAt DateTime          @default(now())
+  id       String            @id @default(uuid())
+  name     String
+  role     GUILD_MEMBER_ROLE
+  joinedAt DateTime          @default(now())
 
-    guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId String
-    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId  String
+  guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guildId String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
 
-    disabledNotifications Boolean         @default(false)
-    blacklistedBosses     String?         @db.Text
-    actionLogEntry        GuildLogEntry[] @relation("actor")
-    targetedLogEntry      GuildLogEntry[] @relation("target")
-    bossChecks            BossCheck[]
-    bossCheckLog          BossCheckLog[]
+  disabledNotifications Boolean         @default(false)
+  blacklistedBosses     String?         @db.Text
+  actionLogEntry        GuildLogEntry[] @relation("actor")
+  targetedLogEntry      GuildLogEntry[] @relation("target")
+  bossChecks            BossCheck[]
+  bossCheckLog          BossCheckLog[]
 
-    @@unique([guildId, userId])
-    @@index([guildId])
-    @@index([userId])
+  @@unique([guildId, userId])
+  @@index([guildId])
+  @@index([userId])
 }
 
 model GuildApplication {
-    id        String   @id @default(uuid())
-    createdAt DateTime @default(now())
-    applyAs   String
-    message   String?
+  id        String   @id @default(uuid())
+  createdAt DateTime @default(now())
+  applyAs   String
+  message   String?
 
-    guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId String
-    user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
-    userId  String
+  guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guildId String
+  user    User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
 
-    @@unique([guildId, userId])
-    @@index([userId])
-    @@index([guildId])
+  @@unique([guildId, userId])
+  @@index([userId])
+  @@index([guildId])
 }
 
 enum LOG_ENTRY_TYPE {
-    LEAVE_MEMBER
-    KICK_MEMBER
-    ACCEPT_MEMBER
-    REJECT_MEMBER
-    NOTIFICATION
-    SET_AS_NO_CHANCE
+  LEAVE_MEMBER
+  KICK_MEMBER
+  ACCEPT_MEMBER
+  REJECT_MEMBER
+  NOTIFICATION
+  SET_AS_NO_CHANCE
 }
 
 model GuildLogEntry {
-    id        String         @id @default(uuid())
-    createdAt DateTime       @default(now())
-    type      LOG_ENTRY_TYPE
+  id        String         @id @default(uuid())
+  createdAt DateTime       @default(now())
+  type      LOG_ENTRY_TYPE
 
-    guild               Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId             String
-    actionGuildMember   GuildMember? @relation(name: "actor", fields: [actionGuildMemberId], references: [id], onDelete: Cascade)
-    actionGuildMemberId String?
-    targetGuildMember   GuildMember? @relation(name: "target", fields: [targetGuildMemberId], references: [id], onDelete: Cascade)
-    targetGuildMemberId String?
+  guild               Guild        @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guildId             String
+  actionGuildMember   GuildMember? @relation(name: "actor", fields: [actionGuildMemberId], references: [id], onDelete: Cascade)
+  actionGuildMemberId String?
+  targetGuildMember   GuildMember? @relation(name: "target", fields: [targetGuildMemberId], references: [id], onDelete: Cascade)
+  targetGuildMemberId String?
 
-    metadata String?
+  metadata String?
 
-    @@index([guildId])
-    @@index([actionGuildMemberId])
-    @@index([targetGuildMemberId])
+  @@index([guildId])
+  @@index([actionGuildMemberId])
+  @@index([targetGuildMemberId])
 }
 
 model BossCheck {
-    checkedAt DateTime @updatedAt
+  checkedAt DateTime @updatedAt
 
-    boss        String
-    guild       Guild       @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId     String
-    checkedBy   GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
-    memberId    String
-    lastSpawned DateTime?
-    location    String
+  boss        String
+  guild       Guild       @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guildId     String
+  checkedBy   GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId    String
+  lastSpawned DateTime?
+  location    String
 
-    @@unique([boss, guildId, location])
-    @@index([guildId])
-    @@index([memberId])
+  @@unique([boss, guildId, location])
+  @@index([guildId])
+  @@index([memberId])
 }
 
 model BossCheckLog {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    checkedAt DateTime    @default(now())
-    boss      String
-    location  String
-    guild     Guild       @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId   String
-    member    GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
-    memberId  String
+  checkedAt DateTime    @default(now())
+  boss      String
+  location  String
+  guild     Guild       @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guildId   String
+  member    GuildMember @relation(fields: [memberId], references: [id], onDelete: Cascade)
+  memberId  String
 
-    @@index([guildId])
-    @@index([memberId])
-    @@index([checkedAt])
-    @@index([location])
-    @@index([boss])
-    @@index([boss, location])
-    @@index([guildId, checkedAt])
+  @@index([guildId])
+  @@index([memberId])
+  @@index([checkedAt])
+  @@index([location])
+  @@index([boss])
+  @@index([boss, location])
+  @@index([guildId, checkedAt])
 }
 
 model FrozenBossCheckLog {
-    id String @id @default(uuid())
+  id String @id @default(uuid())
 
-    frozenAt DateTime @default(now())
-    data     String   @db.LongText
-    guild    Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
-    guildId  String
+  frozenAt DateTime @default(now())
+  data     String   @db.LongText
+  guild    Guild    @relation(fields: [guildId], references: [id], onDelete: Cascade)
+  guildId  String
 
-    @@index([guildId])
+  @@index([guildId])
 }
 
 model CachedBossCheckStatistics {
-    guildId String @id
+  guildId String @id
 
-    version        Int
-    cachedResponse String   @db.Text
-    lastUpdated    DateTime @updatedAt
+  version        Int
+  cachedResponse String   @db.Text
+  lastUpdated    DateTime @updatedAt
 }
 
 model PastCachedBossCheckStatistics {
-    date_guildId String @id
+  date_guildId String @id
 
-    version        Int
-    cachedResponse String @db.Text
+  version        Int
+  cachedResponse String @db.Text
 
-    @@index([date_guildId])
+  @@index([date_guildId])
 }

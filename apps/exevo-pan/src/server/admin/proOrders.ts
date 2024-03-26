@@ -1,6 +1,8 @@
 import { z } from 'zod'
 import { adminProcedure } from 'server/trpc'
 import { prisma } from 'lib/prisma'
+import { calculateDiscountedExevoProPrice } from 'utils'
+import { exevoPro } from 'Constants'
 import type { PaymentData, User } from '@prisma/client'
 
 export const listProOrders = adminProcedure
@@ -57,6 +59,13 @@ export const updateProOrders = adminProcedure
 
     const isPix = !payment?.character
 
+    const value = noBill
+      ? 0
+      : calculateDiscountedExevoProPrice(
+          payment?.discountPercent ?? 0,
+          isPix ? 'PIX' : 'TIBIA_COINS',
+        )
+
     const [user, transaction] = await prisma.$transaction([
       prisma.user.update({
         where: { id },
@@ -71,7 +80,7 @@ export const updateProOrders = adminProcedure
       confirmed
         ? prisma.transaction.create({
             data: {
-              value: isPix ? 45 : 250,
+              value,
               currency: isPix ? 'BRL' : 'TIBIA_COINS',
               type: 'EXEVO_PRO',
               date: currentDate,
@@ -82,6 +91,31 @@ export const updateProOrders = adminProcedure
         : prisma.transaction.delete({
             where: { exevoProPaymentId: payment?.id },
           }),
+
+      ...(payment?.referralUserId && !noBill
+        ? [
+            confirmed
+              ? prisma.referralHistoryEntry.create({
+                  data: {
+                    userId: payment.referralUserId,
+                    referredUserId: payment.userId,
+                    value: exevoPro.referral.tcCommission,
+                    type: 'COMMISSION',
+                  },
+                })
+              : prisma.referralHistoryEntry.delete({
+                  where: { referredUserId: payment.userId },
+                }),
+            prisma.referralTag.update({
+              where: { userId: payment.referralUserId },
+              data: {
+                tcIn: confirmed
+                  ? { increment: exevoPro.referral.tcCommission }
+                  : { decrement: exevoPro.referral.tcCommission },
+              },
+            }),
+          ]
+        : []),
     ])
 
     return { user, transaction }

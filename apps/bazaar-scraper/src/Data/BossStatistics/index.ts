@@ -3,11 +3,11 @@ import {
   BossToken,
   constTokens as bossDictionary,
 } from 'data-dictionary/dist/dictionaries/bosses'
+import { bossStatistics } from 'data-dictionary/dist/dictionaries/bossStatistics'
 import { getDateRelativeToSS } from 'shared-utils/dist/time'
 import { broadcast, coloredText, tabBroadcast } from 'logging'
 import { file } from 'Constants'
 import { doTimes, sha256 } from 'utils'
-import { schema } from '../../Scripts/TrackBosses/schema'
 
 const { serverResolver, path } = file.BOSS_STATISTICS
 
@@ -158,7 +158,9 @@ export default class BossStatisticsData {
         const appeared = playersKilled + killedByPlayers > 0
 
         if (appeared) {
-          const bossSchema = schema.get(bossDictionary[bossName as BossToken])
+          const bossSchema = bossStatistics.get(
+            bossDictionary[bossName as BossToken],
+          )
 
           const appearencesCount = bossSchema?.spawnCount
             ? Math.max(killedByPlayers, 1)

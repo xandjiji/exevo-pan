@@ -1,9 +1,19 @@
 /* eslint-disable no-restricted-syntax */
-import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
+import type { TrackedBossName } from './bosses'
 
-export const schema = new Map<TrackedBossName, BossSchema>()
+type DaysRange = {
+  min: number
+  max: number
+}
 
-schema.set('Albino Dragon', {
+type BossSchema = {
+  fixedDaysFrequency: DaysRange
+  spawnCount?: number
+}
+
+export const bossStatistics = new Map<TrackedBossName, BossSchema>()
+
+bossStatistics.set('Albino Dragon', {
   fixedDaysFrequency: {
     min: 1,
     max: 1,
@@ -11,35 +21,35 @@ schema.set('Albino Dragon', {
   spawnCount: 5,
 })
 
-schema.set('Apprentice Sheng', {
+bossStatistics.set('Apprentice Sheng', {
   fixedDaysFrequency: {
     min: 1,
     max: 8,
   },
 })
 
-schema.set('Arachir the Ancient One', {
+bossStatistics.set('Arachir the Ancient One', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('Arthom The Hunter', {
+bossStatistics.set('Arthom The Hunter', {
   fixedDaysFrequency: {
     min: 1,
     max: 4,
   },
 })
 
-schema.set('Barbaria', {
+bossStatistics.set('Barbaria', {
   fixedDaysFrequency: {
     min: 8,
     max: 12,
   },
 })
 
-schema.set('Battlemaster Zunzu', {
+bossStatistics.set('Battlemaster Zunzu', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
@@ -47,70 +57,70 @@ schema.set('Battlemaster Zunzu', {
   spawnCount: 2,
 })
 
-schema.set('Big Boss Trolliver', {
+bossStatistics.set('Big Boss Trolliver', {
   fixedDaysFrequency: {
     min: 3,
     max: 5,
   },
 })
 
-schema.set('Captain Jones', {
+bossStatistics.set('Captain Jones', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('Chizzoron the Distorter', {
+bossStatistics.set('Chizzoron the Distorter', {
   fixedDaysFrequency: {
     min: 7,
     max: 19,
   },
 })
 
-schema.set('Countess Sorrow', {
+bossStatistics.set('Countess Sorrow', {
   fixedDaysFrequency: {
     min: 14,
     max: 20,
   },
 })
 
-schema.set('Cublarc the Plunderer', {
+bossStatistics.set('Cublarc the Plunderer', {
   fixedDaysFrequency: {
     min: 1,
     max: 7,
   },
 })
 
-schema.set('Dharalion', {
+bossStatistics.set('Dharalion', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('Diblis the Fair', {
+bossStatistics.set('Diblis the Fair', {
   fixedDaysFrequency: {
     min: 10,
     max: 15,
   },
 })
 
-schema.set('Dracola', {
+bossStatistics.set('Dracola', {
   fixedDaysFrequency: {
     min: 14,
     max: 20,
   },
 })
 
-schema.set('Draptor', {
+bossStatistics.set('Draptor', {
   fixedDaysFrequency: {
     min: 1,
     max: 9,
   },
 })
 
-schema.set('Dreadmaw', {
+bossStatistics.set('Dreadmaw', {
   fixedDaysFrequency: {
     min: 12,
     max: 24,
@@ -118,21 +128,21 @@ schema.set('Dreadmaw', {
   spawnCount: 2,
 })
 
-schema.set('Fernfang', {
+bossStatistics.set('Fernfang', {
   fixedDaysFrequency: {
     min: 20,
     max: 27,
   },
 })
 
-schema.set('Ferumbras', {
+bossStatistics.set('Ferumbras', {
   fixedDaysFrequency: {
     min: 162,
     max: 174,
   },
 })
 
-schema.set('Flamecaller Zazrak', {
+bossStatistics.set('Flamecaller Zazrak', {
   fixedDaysFrequency: {
     min: 7,
     max: 19,
@@ -140,7 +150,7 @@ schema.set('Flamecaller Zazrak', {
   spawnCount: 2,
 })
 
-schema.set('Fleabringer', {
+bossStatistics.set('Fleabringer', {
   fixedDaysFrequency: {
     min: 1,
     max: 3,
@@ -148,84 +158,84 @@ schema.set('Fleabringer', {
   spawnCount: 3,
 })
 
-schema.set('Foreman Kneebiter', {
+bossStatistics.set('Foreman Kneebiter', {
   fixedDaysFrequency: {
     min: 3,
     max: 6,
   },
 })
 
-schema.set('Furyosa', {
+bossStatistics.set('Furyosa', {
   fixedDaysFrequency: {
     min: 14,
     max: 28,
   },
 })
 
-schema.set("Gaz'haragoth", {
+bossStatistics.set("Gaz'haragoth", {
   fixedDaysFrequency: {
     min: 14,
     max: 27,
   },
 })
 
-schema.set('General Murius', {
+bossStatistics.set('General Murius', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('Ghazbaran', {
+bossStatistics.set('Ghazbaran', {
   fixedDaysFrequency: {
     min: 162,
     max: 174,
   },
 })
 
-schema.set('Grand Mother Foulscale', {
+bossStatistics.set('Grand Mother Foulscale', {
   fixedDaysFrequency: {
     min: 5,
     max: 9,
   },
 })
 
-schema.set('Grandfather Tridian', {
+bossStatistics.set('Grandfather Tridian', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('Gravelord Oshuran', {
+bossStatistics.set('Gravelord Oshuran', {
   fixedDaysFrequency: {
     min: 7,
     max: 11,
   },
 })
 
-schema.set('Hairman the Huge', {
+bossStatistics.set('Hairman the Huge', {
   fixedDaysFrequency: {
     min: 6,
     max: 9,
   },
 })
 
-schema.set('Hatebreeder', {
+bossStatistics.set('Hatebreeder', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('High Templar Cobrass', {
+bossStatistics.set('High Templar Cobrass', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('Hirintror', {
+bossStatistics.set('Hirintror', {
   fixedDaysFrequency: {
     min: 10,
     max: 29,
@@ -233,84 +243,84 @@ schema.set('Hirintror', {
   spawnCount: 2,
 })
 
-schema.set('Man in the Cave', {
+bossStatistics.set('Man in the Cave', {
   fixedDaysFrequency: {
     min: 13,
     max: 15,
   },
 })
 
-schema.set('Massacre', {
+bossStatistics.set('Massacre', {
   fixedDaysFrequency: {
     min: 14,
     max: 20,
   },
 })
 
-schema.set('Midnight Panther', {
+bossStatistics.set('Midnight Panther', {
   fixedDaysFrequency: {
     min: 3,
     max: 3,
   },
 })
 
-schema.set('Morgaroth', {
+bossStatistics.set('Morgaroth', {
   fixedDaysFrequency: {
     min: 168,
     max: 174,
   },
 })
 
-schema.set('Morshabaal', {
+bossStatistics.set('Morshabaal', {
   fixedDaysFrequency: {
     min: 154,
     max: 174,
   },
 })
 
-schema.set('Mr. Punish', {
+bossStatistics.set('Mr. Punish', {
   fixedDaysFrequency: {
     min: 14,
     max: 20,
   },
 })
 
-schema.set('Munster', {
+bossStatistics.set('Munster', {
   fixedDaysFrequency: {
     min: 1,
     max: 6,
   },
 })
 
-schema.set('Ocyakao', {
+bossStatistics.set('Ocyakao', {
   fixedDaysFrequency: {
     min: 16,
     max: 25,
   },
 })
 
-schema.set('Omrafir', {
+bossStatistics.set('Omrafir', {
   fixedDaysFrequency: {
     min: 14,
     max: 27,
   },
 })
 
-schema.set('Oodok Witchmaster', {
+bossStatistics.set('Oodok Witchmaster', {
   fixedDaysFrequency: {
     min: 1,
     max: 4,
   },
 })
 
-schema.set('Orshabaal', {
+bossStatistics.set('Orshabaal', {
   fixedDaysFrequency: {
     min: 154,
     max: 174,
   },
 })
 
-schema.set('Rottie the Rotworm', {
+bossStatistics.set('Rottie the Rotworm', {
   fixedDaysFrequency: {
     min: 2,
     max: 2,
@@ -318,7 +328,7 @@ schema.set('Rottie the Rotworm', {
   spawnCount: 2,
 })
 
-schema.set('Rotworm Queen', {
+bossStatistics.set('Rotworm Queen', {
   fixedDaysFrequency: {
     min: 12,
     max: 15,
@@ -326,126 +336,126 @@ schema.set('Rotworm Queen', {
   spawnCount: 4,
 })
 
-schema.set('Rukor Zad', {
+bossStatistics.set('Rukor Zad', {
   fixedDaysFrequency: {
     min: 6,
     max: 9,
   },
 })
 
-schema.set('Rukor Zad', {
+bossStatistics.set('Rukor Zad', {
   fixedDaysFrequency: {
     min: 6,
     max: 9,
   },
 })
 
-schema.set('Shlorg', {
+bossStatistics.set('Shlorg', {
   fixedDaysFrequency: {
     min: 14,
     max: 28,
   },
 })
 
-schema.set('Sir Valorcrest', {
+bossStatistics.set('Sir Valorcrest', {
   fixedDaysFrequency: {
     min: 5,
     max: 8,
   },
 })
 
-schema.set('Smuggler Baron Silvertoe', {
+bossStatistics.set('Smuggler Baron Silvertoe', {
   fixedDaysFrequency: {
     min: 8,
     max: 14,
   },
 })
 
-schema.set('Teleskor', {
+bossStatistics.set('Teleskor', {
   fixedDaysFrequency: {
     min: 1,
     max: 3,
   },
 })
 
-schema.set('The Abomination', {
+bossStatistics.set('The Abomination', {
   fixedDaysFrequency: {
     min: 154,
     max: 174,
   },
 })
 
-schema.set('The Big Bad One', {
+bossStatistics.set('The Big Bad One', {
   fixedDaysFrequency: {
     min: 6,
     max: 10,
   },
 })
 
-schema.set('The Blightfather', {
+bossStatistics.set('The Blightfather', {
   fixedDaysFrequency: {
     min: 5,
     max: 9,
   },
 })
 
-schema.set('The Blightfather', {
+bossStatistics.set('The Blightfather', {
   fixedDaysFrequency: {
     min: 5,
     max: 9,
   },
 })
 
-schema.set('The Evil Eye', {
+bossStatistics.set('The Evil Eye', {
   fixedDaysFrequency: {
     min: 6,
     max: 11,
   },
 })
 
-schema.set('The Frog Prince', {
+bossStatistics.set('The Frog Prince', {
   fixedDaysFrequency: {
     min: 12,
     max: 18,
   },
 })
 
-schema.set('The Handmaiden', {
+bossStatistics.set('The Handmaiden', {
   fixedDaysFrequency: {
     min: 14,
     max: 20,
   },
 })
 
-schema.set('The Imperor', {
+bossStatistics.set('The Imperor', {
   fixedDaysFrequency: {
     min: 14,
     max: 20,
   },
 })
 
-schema.set('The Old Whopper', {
+bossStatistics.set('The Old Whopper', {
   fixedDaysFrequency: {
     min: 5,
     max: 9,
   },
 })
 
-schema.set('The Pale Count', {
+bossStatistics.set('The Pale Count', {
   fixedDaysFrequency: {
     min: 16,
     max: 29,
   },
 })
 
-schema.set('The Plasmother', {
+bossStatistics.set('The Plasmother', {
   fixedDaysFrequency: {
     min: 14,
     max: 20,
   },
 })
 
-schema.set('The Voice Of Ruin', {
+bossStatistics.set('The Voice Of Ruin', {
   fixedDaysFrequency: {
     min: 6,
     max: 9,
@@ -453,14 +463,14 @@ schema.set('The Voice Of Ruin', {
   spawnCount: 2,
 })
 
-schema.set('The Welter', {
+bossStatistics.set('The Welter', {
   fixedDaysFrequency: {
     min: 16,
     max: 28,
   },
 })
 
-schema.set('Tyrn', {
+bossStatistics.set('Tyrn', {
   fixedDaysFrequency: {
     min: 12,
     max: 28,
@@ -468,28 +478,28 @@ schema.set('Tyrn', {
   spawnCount: 2,
 })
 
-schema.set('Tzumrah The Dazzler', {
+bossStatistics.set('Tzumrah The Dazzler', {
   fixedDaysFrequency: {
     min: 20,
     max: 28,
   },
 })
 
-schema.set('Undead Cavebear', {
+bossStatistics.set('Undead Cavebear', {
   fixedDaysFrequency: {
     min: 2,
     max: 3,
   },
 })
 
-schema.set('Warlord Ruzad', {
+bossStatistics.set('Warlord Ruzad', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('White Pale', {
+bossStatistics.set('White Pale', {
   fixedDaysFrequency: {
     min: 15,
     max: 28,
@@ -497,63 +507,63 @@ schema.set('White Pale', {
   spawnCount: 3,
 })
 
-schema.set('Willi Wasp', {
+bossStatistics.set('Willi Wasp', {
   fixedDaysFrequency: {
     min: 5,
     max: 9,
   },
 })
 
-schema.set('Xenia', {
+bossStatistics.set('Xenia', {
   fixedDaysFrequency: {
     min: 7,
     max: 13,
   },
 })
 
-schema.set('Yaga the Crone', {
+bossStatistics.set('Yaga the Crone', {
   fixedDaysFrequency: {
     min: 5,
     max: 7,
   },
 })
 
-schema.set('Yeti', {
+bossStatistics.set('Yeti', {
   fixedDaysFrequency: {
     min: 18,
     max: 24,
   },
 })
 
-schema.set('Zarabustor', {
+bossStatistics.set('Zarabustor', {
   fixedDaysFrequency: {
     min: 6,
     max: 8,
   },
 })
 
-schema.set('Zevelon Duskbringer', {
+bossStatistics.set('Zevelon Duskbringer', {
   fixedDaysFrequency: {
     min: 6,
     max: 9,
   },
 })
 
-schema.set('Zomba', {
+bossStatistics.set('Zomba', {
   fixedDaysFrequency: {
     min: 3,
     max: 8,
   },
 })
 
-schema.set('Zulazza the Corruptor', {
+bossStatistics.set('Zulazza the Corruptor', {
   fixedDaysFrequency: {
     min: 7,
     max: 19,
   },
 })
 
-schema.set('Zushuka', {
+bossStatistics.set('Zushuka', {
   fixedDaysFrequency: {
     min: 19,
     max: 28,
@@ -561,9 +571,9 @@ schema.set('Zushuka', {
 })
 
 /* normalizing day range to account for differences between server save updates */
-for (const [bossName, bossSchema] of schema.entries()) {
+for (const [bossName, bossSchema] of bossStatistics.entries()) {
   const { min, max } = bossSchema.fixedDaysFrequency
-  schema.set(bossName, {
+  bossStatistics.set(bossName, {
     ...bossSchema,
     fixedDaysFrequency: {
       min: min - 1,

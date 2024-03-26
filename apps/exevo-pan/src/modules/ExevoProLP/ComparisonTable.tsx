@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import clsx from 'clsx'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { Text } from 'components/Atoms'
 import { CheckBoxIcon, EmptyCheckBoxIcon } from 'assets/svgs'
-import { auctionEstimations } from 'Constants'
+import { auctionEstimations, exevoPro } from 'Constants'
 import Strong from './Strong'
 import { PremiumBossesList, PremiumFiltersList } from './Tooltip'
 
@@ -124,6 +124,18 @@ const ComparisonTable = () => {
           <td>{i18n.privateGroups}</td>
           <Check empty />
           <Check />
+        </Row>
+
+        <TitleRow>{i18n.general}</TitleRow>
+
+        <Row>
+          <td>{i18n.referrals}</td>
+          <Check empty />
+          <Feature>
+            {templateMessage(i18n.earnReferral, {
+              tc: <Text.TibiaCoin value={exevoPro.referral.tcCommission} />,
+            })}
+          </Feature>
         </Row>
       </table>
     </section>

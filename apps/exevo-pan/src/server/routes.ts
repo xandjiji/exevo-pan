@@ -1,7 +1,7 @@
 import { newsletter } from './newsletter'
 import { proBosses } from './proBosses'
 import { highlightCheckout } from './highlightCheckout'
-import { proPayment } from './proPayment'
+import { checkProCoupon, proPayment } from './proPayment'
 import { getAuctionById } from './getAuctionById'
 import * as proOrders from './admin/proOrders'
 import * as proRevenue from './admin/proRevenue'
@@ -10,12 +10,14 @@ import * as auctionHighlights from './admin/auctionHighlights'
 import { revalidatePage } from './admin/revalidatePage'
 import * as notifyAdmin from './admin/notifyAdmin'
 import { notifyUser } from './admin/notifyUser'
+import * as manageReferrals from './admin/manageReferrals'
 import * as guildCrud from './guild/crud'
 import { registerNotificationDevice } from './registerNotificationDevice'
 import { registerAuctionNotification } from './registerAuctionNotification'
 import { testMyNotification } from './testMyNotification'
 import * as dashboard from './dashboard'
 import * as auctions from './auctions'
+import * as referrals from './referrals'
 
 export const routes = {
   registerNotificationDevice,
@@ -26,6 +28,7 @@ export const routes = {
   newsletter,
   highlightCheckout,
   proPayment,
+  checkProCoupon,
   revalidatePage,
   testMyNotification,
   ...proOrders,
@@ -36,4 +39,6 @@ export const routes = {
   ...guildCrud,
   ...dashboard,
   ...auctions,
+  ...referrals,
+  ...manageReferrals,
 }

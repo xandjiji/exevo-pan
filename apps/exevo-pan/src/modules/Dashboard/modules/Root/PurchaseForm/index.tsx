@@ -2,9 +2,11 @@ import { useCallback, useLayoutEffect, useRef, useState } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
+import { useDebounce } from 'hooks'
 import Image from 'next/image'
 import {
   Button,
+  Checkbox,
   CopyButton,
   Input,
   OptionButton,
@@ -12,8 +14,12 @@ import {
   TitledCard,
 } from 'components/Atoms'
 import { EditIcon } from 'assets/svgs'
-import { randomCharacter } from 'utils'
-import { advertising } from 'Constants'
+import {
+  calculateDiscountedExevoProPrice,
+  randomCharacter,
+  referralTracker,
+} from 'utils'
+import { advertising, exevoPro } from 'Constants'
 import TibiaCoinsSrc from 'assets/tibiaCoins.gif'
 import PixSrc from 'assets/pix.png'
 import FromTo from './FromTo'
@@ -26,6 +32,8 @@ type PurchaseFormProps = {
   initialTxId?: string | null
   initialCharacter?: string | null
   confirmed?: boolean
+  initialCoupon?: string | null
+  initialDiscountPercent?: number | null
 }
 
 const PurchaseForm = ({
@@ -33,10 +41,15 @@ const PurchaseForm = ({
   initialTxId,
   initialCharacter,
   confirmed,
+  initialCoupon,
+  initialDiscountPercent,
 }: PurchaseFormProps) => {
-  const { common, dashboard } = useTranslations()
+  const translations = useTranslations()
+  const i18n = translations.dashboard.PurchaseForm
 
-  const [pixMode, setPixMode] = useState(false)
+  const [pixMode, setPixMode] = useState(
+    initialTxId ? !initialCharacter : false,
+  )
 
   const [requestStatus, setRequestStatus] = useState<RequestStatus>(
     confirmed === false ? 'SUCCESSFUL' : 'IDLE',
@@ -47,16 +60,51 @@ const PurchaseForm = ({
     character?: string | null
     pixUrl?: string | null
     qrCode?: string
-  }>({ txId: initialTxId, character: initialCharacter })
+    coupon: string
+    discountPercent: number
+  }>({
+    txId: initialTxId,
+    character: initialCharacter,
+    coupon: initialCoupon ?? '',
+    discountPercent: initialDiscountPercent ?? 0,
+  })
+
+  const [storedCoupon, setStoredCoupon] = useState('')
+
+  const calculatedPrice = calculateDiscountedExevoProPrice(
+    formState.discountPercent,
+    pixMode ? 'PIX' : 'TIBIA_COINS',
+  )
 
   useLayoutEffect(() => {
-    if (initialCharacter) return
-    if (confirmed === false) {
-      generateQrCode(email).then(({ qrCode, payload }) => {
-        setPixMode(true)
-        setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
-      })
+    if (!pixMode) return
+    generateQrCode(email, calculatedPrice).then(({ qrCode, payload }) => {
+      setFormState((prev) => ({ ...prev, qrCode, pixUrl: payload }))
+    })
+  }, [])
+
+  const debouncedCoupon = useDebounce(formState.coupon)
+
+  const validCoupon = debouncedCoupon.length >= 3
+  const checkCouponAction = trpc.checkProCoupon.useQuery(debouncedCoupon, {
+    enabled: validCoupon,
+    onSuccess: (foundDiscountPercent) =>
+      setFormState((prev) => ({
+        ...prev,
+        discountPercent: foundDiscountPercent,
+      })),
+  })
+
+  useLayoutEffect(() => {
+    const lsCoupon = referralTracker.getFromLS().coupon
+
+    if (initialTxId && !initialCoupon && lsCoupon) {
+      setStoredCoupon(lsCoupon)
+      return
     }
+
+    if (!lsCoupon) return
+    setFormState((prev) => ({ ...prev, coupon: lsCoupon }))
   }, [])
 
   const orderAction = trpc.proPayment.useMutation({
@@ -65,17 +113,23 @@ const PurchaseForm = ({
     },
     onError: () => {
       setRequestStatus('ERROR')
-      toast.error(common.genericError)
+      toast.error(translations.common.genericError)
     },
     onSuccess: async ({ paymentData }) => {
       if (paymentData) {
-        const data: typeof formState = {}
+        const data: typeof formState = {
+          discountPercent: paymentData.discountPercent ?? 0,
+          coupon: paymentData.coupon ?? '',
+        }
         data.txId = paymentData.id
 
         if (paymentData.character) {
           data.character = paymentData.character
         } else {
-          const { qrCode, payload } = await generateQrCode(email)
+          const { qrCode, payload } = await generateQrCode(
+            email,
+            calculatedPrice,
+          )
           data.qrCode = qrCode
           data.pixUrl = payload
         }
@@ -84,7 +138,7 @@ const PurchaseForm = ({
       }
 
       setRequestStatus('SUCCESSFUL')
-      toast.success(dashboard.PurchaseForm.orderReceived)
+      toast.success(i18n.orderReceived)
     },
   })
 
@@ -96,6 +150,16 @@ const PurchaseForm = ({
 
   const { current: randomNickname } = useRef(randomCharacter())
 
+  const basePrice = pixMode ? exevoPro.price.PIX : exevoPro.price.TIBIA_COINS
+  const priceDiscount = basePrice - calculatedPrice
+
+  const DiscountElement =
+    formState.discountPercent > 0 ? (
+      <span className="bg-primary text-tsm text-onPrimary ml-1 rounded py-1 px-1.5 font-bold tracking-wide opacity-90 shadow-md transition-all">
+        -{Math.round((priceDiscount / basePrice) * 100)}%
+      </span>
+    ) : null
+
   return (
     <div className="grid w-full max-w-[360px] gap-8">
       <Stepper
@@ -103,19 +167,13 @@ const PurchaseForm = ({
         isFinished={isFinished}
         currentStep={currentStep}
         steps={[
-          { title: dashboard.PurchaseForm.order, onClick: resetStep },
-          { title: dashboard.PurchaseForm.payment },
+          { title: i18n.order, onClick: resetStep },
+          { title: i18n.payment },
         ]}
       />
       <TitledCard
         variant="rounded"
-        title={
-          <h4>
-            {currentStep === 0
-              ? dashboard.PurchaseForm.order
-              : dashboard.PurchaseForm.payment}
-          </h4>
-        }
+        title={<h4>{currentStep === 0 ? i18n.order : i18n.payment}</h4>}
       >
         <div className="text-tsm leading-tight">
           {requestStatus !== 'SUCCESSFUL' && (
@@ -138,7 +196,7 @@ const PurchaseForm = ({
                   Tibia Coins
                 </OptionButton>
                 <OptionButton
-                  active={pixMode}
+                  active={!!pixMode}
                   aria-label="Pix"
                   onClick={() => setPixMode(true)}
                   icon={
@@ -160,23 +218,79 @@ const PurchaseForm = ({
                 className="bg-separator mt-1 mb-3 h-[1px] w-full opacity-50"
               />
 
+              <Input
+                label={i18n.couponLabel}
+                placeholder={i18n.couponPlaceholder}
+                value={formState.coupon.toUpperCase()}
+                onChange={(e) =>
+                  setFormState((prev) => ({
+                    ...prev,
+                    coupon: e.target.value,
+                    discountPercent:
+                      e.target.value.length < 3 ? 0 : prev.discountPercent,
+                  }))
+                }
+                stateIcon={
+                  validCoupon && checkCouponAction.isLoading
+                    ? 'loading'
+                    : formState.discountPercent > 0
+                    ? 'valid'
+                    : 'neutral'
+                }
+                className="mb-2 w-48"
+              />
+
+              {formState.discountPercent > 0 && (
+                <Checkbox
+                  checked
+                  disabled
+                  label={
+                    <p>
+                      <strong className="text-greenHighlight">
+                        -
+                        {pixMode
+                          ? `R$ ${priceDiscount},00`
+                          : `${priceDiscount} TC`}
+                      </strong>{' '}
+                      {i18n.discountApplied}
+                    </p>
+                  }
+                />
+              )}
+
+              {!pixMode && <div role="none" className="mb-6" />}
+
               {!pixMode && (
-                <FromTo from={formState.character ?? ''} to={BANK_CHARACTER} />
+                <FromTo
+                  from={formState.character ?? ''}
+                  to={BANK_CHARACTER}
+                  tc={calculatedPrice}
+                >
+                  {DiscountElement}
+                </FromTo>
               )}
 
               <div className="mt-1 flex items-end gap-4">
                 {pixMode ? (
                   <p className="self-center text-base font-bold">
                     <span className="text-tsm font-light tracking-wide">
-                      {dashboard.PurchaseForm.total}
+                      {i18n.total}
                     </span>{' '}
-                    R$ 45,00
+                    <span className="inline-flex items-center gap-1.5">
+                      R$ {calculatedPrice},00{' '}
+                      {formState.discountPercent > 0 && (
+                        <del className="text-s font-normal">
+                          R$ {exevoPro.price.PIX},00
+                        </del>
+                      )}{' '}
+                      {DiscountElement}
+                    </span>
                   </p>
                 ) : (
                   <Input
                     className="w-full"
                     name="character"
-                    label={dashboard.PurchaseForm.paymentCharacterLabel}
+                    label={i18n.paymentCharacterLabel}
                     placeholder={`e.g, '${randomNickname}'`}
                     value={formState.character ?? ''}
                     onChange={(e) => {
@@ -195,7 +309,7 @@ const PurchaseForm = ({
                 <Button
                   type="submit"
                   pill
-                  className="ml-auto mb-[1px] py-3"
+                  className="ml-auto mb-[1px] !py-3"
                   loading={isLoading}
                   disabled={
                     !pixMode &&
@@ -204,12 +318,15 @@ const PurchaseForm = ({
                   onClick={() =>
                     orderAction.mutate(
                       pixMode
-                        ? {}
-                        : { character: formState.character as string },
+                        ? { coupon: formState.coupon }
+                        : {
+                            character: formState.character as string,
+                            coupon: formState.coupon,
+                          },
                     )
                   }
                 >
-                  {dashboard.PurchaseForm.confirm}
+                  {i18n.confirm}
                 </Button>
               </div>
             </div>
@@ -218,12 +335,12 @@ const PurchaseForm = ({
           {requestStatus === 'SUCCESSFUL' && (
             <div className="grid gap-5">
               <strong className="text-txl tracking-wide">
-                {dashboard.PurchaseForm.orderReceived} 🎉
+                {i18n.orderReceived} 🎉
               </strong>
 
               {!!formState.txId && (
                 <div className="grid gap-2">
-                  <p id="tx-id">{dashboard.PurchaseForm.transactionId}:</p>
+                  <p id="tx-id">{i18n.transactionId}:</p>
                   <p
                     aria-labelledby="tx-id"
                     className="code mx-auto w-fit text-center"
@@ -233,7 +350,7 @@ const PurchaseForm = ({
                 </div>
               )}
 
-              <p>{dashboard.PurchaseForm.notice}</p>
+              <p>{i18n.notice}</p>
 
               {pixMode ? (
                 <div>
@@ -245,7 +362,7 @@ const PurchaseForm = ({
                     />
                   </span>
                   <p className="text-s mb-1.5 mt-[22px] text-center">
-                    {dashboard.PurchaseForm.qrCodeText}
+                    {i18n.qrCodeText}
                   </p>
                   <img
                     className="mx-auto block"
@@ -259,12 +376,24 @@ const PurchaseForm = ({
                   className="mx-auto"
                   from={formState.character ?? ''}
                   to={BANK_CHARACTER}
+                  tc={calculatedPrice}
                 />
               )}
 
-              <Button className="mx-auto" pill hollow onClick={resetStep}>
+              <Button
+                className="mx-auto"
+                pill
+                hollow
+                onClick={() => {
+                  if (storedCoupon) {
+                    setStoredCoupon('')
+                    setFormState((prev) => ({ ...prev, coupon: storedCoupon }))
+                  }
+                  resetStep()
+                }}
+              >
                 <EditIcon className="h-4 w-4" />
-                {dashboard.PurchaseForm.edit}
+                {i18n.edit}
               </Button>
             </div>
           )}

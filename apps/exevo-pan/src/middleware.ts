@@ -6,5 +6,6 @@ export const config = {
     '/dashboard/transaction-history',
     '/dashboard/auction-notifications',
     '/dashboard/devices',
+    '/dashboard/referrals',
   ],
 }

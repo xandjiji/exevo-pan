@@ -16,6 +16,10 @@ export default {
       title: 'Notification Devices',
       description: 'My notification devices',
     },
+    referrals: {
+      title: 'Referrals',
+      description: 'Earn Tibia Coins with referrals!',
+    },
   },
   Layout: {
     nav: {
@@ -23,6 +27,7 @@ export default {
       transactions: 'Transaction history',
       notifications: 'Auction notifications',
       devices: 'Notification devices',
+      referrals: 'Referrals',
     },
   },
   UserCard: {
@@ -48,6 +53,8 @@ export default {
       privateGroups: 'Create {{private}} boss hunting groups',
       private: 'private',
       estimate: 'Estimate auction prices above {{maxEstimation}}',
+      referrals: 'Invite your friends and {{earnTc}}',
+      earnTc: 'earn Tibia Coins!',
     },
     filtersTooltip: {
       tc: 'Tibia Coins invested',
@@ -72,6 +79,9 @@ export default {
     notice:
       "Your purchase will be delivered right after your payment is confirmed. If your order can't be completed, your money will be returned.",
     edit: 'Edit your order',
+    couponLabel: 'Coupon',
+    couponPlaceholder: 'Get discounts',
+    discountApplied: 'discount applied!',
   },
   TransactionHistory: {
     title: 'Transaction History',
@@ -109,5 +119,34 @@ export default {
     device: 'Device',
     date: 'Date',
     emptyState: 'No devices',
+  },
+  Referrals: {
+    couponSuccess: 'Your coupon was updated!',
+    couponError: 'This coupon is already taken',
+    withdrawSuccess: 'Your withdraw was requested!',
+    freeAlert: 'Referrals are only available for {{exevoPro}} members',
+    summaryTitle: 'Summary',
+    li1: 'Using your coupon, users will receive a {{discount}} discount on their {{exevoPro}} purchase, which is worth {{value}} on their checkout price.',
+    li2: "For every purchase completed with your coupon, you'll earn {{tc}} as a flat commission.",
+    li3: 'There are no limits or minimum requirement for withdraws. It may take up to 24 hours to receive your Tibia Coins.',
+    currentBalance: 'Current balance:',
+    withdrawLabel: 'Withdraw coins to',
+    withdrawButton: 'Withdraw',
+    cancelButton: 'Cancel',
+    myCouponTitle: 'My coupon',
+    customizeCoupon: 'Customize coupon',
+    saveCouponButton: 'Save',
+    editCouponButton: 'Edit',
+    CouponPreview: {
+      preview: 'Image:',
+      referralLink: 'Referral link:',
+    },
+    ReferralHistory: {
+      event: 'Event',
+      withdraw: 'Withdraw',
+      commission: 'Commission',
+      emptyState: 'No history',
+      loadMore: 'Load more',
+    },
   },
 }

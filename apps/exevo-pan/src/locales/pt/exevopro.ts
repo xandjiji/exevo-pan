@@ -70,5 +70,8 @@ export default defaultComposer(defaultTranslations, {
     premiumBosses: 'Bosses premium',
     huntingGroups: 'Sistema de checagem em grupo',
     privateGroups: 'Grupos privados de bosses',
+    general: 'Geral',
+    referrals: 'Sistema de indicações',
+    earnReferral: 'Ganhe {{tc}} por indicação!',
   },
 })

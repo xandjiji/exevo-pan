@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useMemo } from 'react'
-import { ValidIcon, InvalidIcon } from 'assets/svgs'
+import { InvalidIcon, ValidIcon } from 'assets/svgs'
 import styles from './styles.module.css'
 import { StateIcon } from './types'
 
@@ -27,7 +27,7 @@ export const useStateIcon = (state: StateIcon) => {
         <div
           role="alert"
           aria-label={common.InputIconLabels.loading}
-          className={clsx('loading-spinner shrink-0', styles.icon)}
+          className={clsx('loading-spinner h-4 w-4 shrink-0', styles.icon)}
         />
       ),
     }),

@@ -5,13 +5,13 @@ import { BossStatistics } from 'Data'
 import { broadcast, coloredText, TrackETA } from 'logging'
 import { dayDiffBetween } from 'utils'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
+import { bossStatistics } from 'data-dictionary/dist/dictionaries/bossStatistics'
 import { getDateRelativeToSS } from 'shared-utils/dist/time'
 import {
   dilluteDistribution,
   normalizeDistributionRange,
   offsetDistribution,
 } from './utils'
-import { schema } from '../schema'
 
 type CalculateChanceArgs = {
   appearences: number[]
@@ -163,7 +163,7 @@ export const calculateBossChances = async ({
         ...calculateStats({
           appearences,
           distribution: bossDistributions[name],
-          bossSchema: schema.get(name as TrackedBossName),
+          bossSchema: bossStatistics.get(name as TrackedBossName),
           isTomorrow,
         }),
       })

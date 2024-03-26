@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
 import { Main } from 'templates'
@@ -24,8 +25,8 @@ import {
 import Image from 'next/image'
 import tibiaCoinSrc from 'assets/tibiacoinBig.png'
 import pixSrc from 'assets/pix.png'
-import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
-import { jsonld, routes } from 'Constants'
+import { buildPageTitle, buildUrl, loadRawSrc, referralTracker } from 'utils'
+import { exevoPro, jsonld, routes } from 'Constants'
 import { common, exevopro } from 'locales'
 
 const pageUrl = buildUrl(routes.EXEVOPRO)
@@ -37,6 +38,10 @@ export default function ExevoPro() {
   const pageTitle = buildPageTitle(i18n.Meta.title)
   const { locale } = useRouter()
   const previewSrc = loadRawSrc(`/pro-${locale}.png`)
+
+  useEffect(() => {
+    referralTracker.checkUrlAndSetLS()
+  }, [])
 
   return (
     <>
@@ -222,7 +227,7 @@ export default function ExevoPro() {
                       className="pixelated select-none"
                     />
                     <strong className="whitespace-nowrap text-[32px]">
-                      250 TC
+                      {exevoPro.price.TIBIA_COINS} TC
                     </strong>
                   </p>
 
@@ -237,7 +242,7 @@ export default function ExevoPro() {
                       className="mx-1 select-none"
                     />
                     <strong className="whitespace-nowrap text-base">
-                      R$ 45,00
+                      R$ {exevoPro.price.PIX},00
                     </strong>
                     )
                   </p>

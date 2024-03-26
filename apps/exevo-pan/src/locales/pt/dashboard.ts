@@ -19,6 +19,10 @@ export default defaultComposer(defaultTranslations, {
       title: 'Notificações em Dispositivos',
       description: 'Meus dispositivos de notificação',
     },
+    referrals: {
+      title: 'Indicações',
+      description: 'Ganhe Tibia Coins indicando seus amigos!',
+    },
   },
   Layout: {
     nav: {
@@ -26,6 +30,7 @@ export default defaultComposer(defaultTranslations, {
       transactions: 'Histórico de transações',
       notifications: 'Notificações de leilões',
       devices: 'Notificações em dispositivos',
+      referrals: 'Indicações',
     },
   },
   UserCard: {
@@ -52,6 +57,8 @@ export default defaultComposer(defaultTranslations, {
       privateGroups: 'Crie grupos {{private}} de boss hunting',
       private: 'privados',
       estimate: 'Estime preços de leilões acima de {{maxEstimation}}',
+      referrals: 'Convide seus amigos e {{earnTc}}',
+      earnTc: 'ganhe Tibia Coins!',
     },
     filtersTooltip: {
       tc: 'Tibia Coins investidos',
@@ -76,6 +83,9 @@ export default defaultComposer(defaultTranslations, {
     notice:
       'Seu pedido será entregue logo após confirmarmos o seu pagamento. Se o seu pedido não puder ser completado, seu dinheiro será devolvido.',
     edit: 'Editar pedido',
+    couponLabel: 'Cupom',
+    couponPlaceholder: 'Ganhe descontos',
+    discountApplied: 'desconto aplicado!',
   },
   TransactionHistory: {
     title: 'Histórico de Transações',
@@ -113,5 +123,34 @@ export default defaultComposer(defaultTranslations, {
     device: 'Dispositivo',
     date: 'Data',
     emptyState: 'Nenhum dispositivo',
+  },
+  Referrals: {
+    couponSuccess: 'Seu cupom foi atualizado!',
+    couponError: 'Esse cupom já está em uso',
+    withdrawSuccess: 'Saque solicitado com sucesso!',
+    freeAlert: 'Indicações são disponíveis apenas para membros {{exevoPro}}',
+    summaryTitle: 'Resumo',
+    li1: 'Usando o seu cupom, usuários receberão {{discount}} de desconto ao comprarem {{exevoPro}}, que vale {{value}} na hora do pagamento.',
+    li2: 'Para cada venda realizada com o seu cupom, você ganhará {{tc}} de comissão.',
+    li3: ' Não existem limites ou requisitos mínimos para sacar. Pode levar até 24 horas para que você receba suas Tibia Coins.',
+    currentBalance: 'Saldo atual:',
+    withdrawLabel: 'Sacar coins para',
+    withdrawButton: 'Sacar',
+    cancelButton: 'Cancelar',
+    myCouponTitle: 'Meu cupom',
+    customizeCoupon: 'Customizar cupom',
+    saveCouponButton: 'Salvar',
+    editCouponButton: 'Editar',
+    CouponPreview: {
+      preview: 'Imagem:',
+      referralLink: 'Link de indicação:',
+    },
+    ReferralHistory: {
+      event: 'Evento',
+      withdraw: 'Saque',
+      commission: 'Comissão',
+      emptyState: 'Sem histórico',
+      loadMore: 'Carregar mais',
+    },
   },
 })

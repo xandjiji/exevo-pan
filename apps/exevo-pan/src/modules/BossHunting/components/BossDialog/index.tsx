@@ -1,7 +1,8 @@
 import { useMemo } from 'react'
-import { useTranslations } from 'contexts/useTranslation'
+import { templateString, useTranslations } from 'contexts/useTranslation'
 import clsx from 'clsx'
 import { TrackedBossName } from 'data-dictionary/dist/dictionaries/bosses'
+import { bossStatistics } from 'data-dictionary/dist/dictionaries/bossStatistics'
 import { Dialog, SpritePortrait } from 'components/Atoms'
 import { loadBossSrc, loadLootSrc } from 'utils'
 import { links } from 'Constants'
@@ -24,6 +25,11 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
     [bossName],
   )
 
+  const statistics = useMemo(
+    () => bossStatistics.get(bossName as TrackedBossName),
+    [bossName],
+  )
+
   return (
     <Dialog isOpen={!!info} onClose={onClose}>
       <div className="mb-3 mr-4 flex items-center gap-3.5">
@@ -34,7 +40,18 @@ const BossDialog = ({ bossName, onClose }: BossDialogProps) => {
           width={64}
           height={64}
         />
-        <h3 className="text-l sm:text-xl">{bossName}</h3>
+        <div className="grid gap-0.5">
+          <h3 className="text-l sm:text-xl">{bossName}</h3>
+          {!!statistics?.fixedDaysFrequency &&
+            statistics.fixedDaysFrequency.max > 2 && (
+              <p className="text-xs">
+                {templateString(i18n.respawns, {
+                  min: statistics.fixedDaysFrequency.min + 1,
+                  max: statistics.fixedDaysFrequency.max - 1,
+                })}
+              </p>
+            )}
+        </div>
       </div>
 
       <div className="custom-scrollbar -mr-4 grid max-h-[60vh] gap-6 overflow-auto pt-3 pr-4 sm:w-[70vw] sm:max-w-[606px]">

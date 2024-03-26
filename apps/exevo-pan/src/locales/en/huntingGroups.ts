@@ -9,6 +9,8 @@ export default {
   mySettings: 'My preferences',
   notificate: 'Notificate',
   apply: 'Apply',
+  referralAlert: 'Give your friends a {{discount}} discount and {{earnTc}}',
+  earnTc: 'earn {{commission}} for every referral',
   publicBoard: {
     title: 'Description',
     add: 'Add description',
