@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from 'react'
+import clsx from 'clsx'
 import { toast } from 'react-hot-toast'
 import { trpc } from 'lib/trpc'
 import { calculateDiscountedExevoProPrice, debounce } from 'utils'
@@ -90,7 +91,7 @@ const PaymentList = () => {
             <Table.Row>
               <Table.HeadColumn>Confirmed</Table.HeadColumn>
               <Table.HeadColumn>Price</Table.HeadColumn>
-              <Table.HeadColumn>Character</Table.HeadColumn>
+              <Table.HeadColumn>From</Table.HeadColumn>
               <Table.HeadColumn highlighted desc>
                 Date
               </Table.HeadColumn>
@@ -108,6 +109,7 @@ const PaymentList = () => {
                   confirmed,
                   discountPercent,
                   coupon,
+                  noBill,
                 },
               }) => {
                 const calculatedPrice = calculateDiscountedExevoProPrice(
@@ -151,7 +153,10 @@ const PaymentList = () => {
                         )}
                       </Chip>
                     </Table.Column>
-                    <Table.Column title={email ?? undefined}>
+                    <Table.Column
+                      title={email ?? undefined}
+                      className={clsx(noBill && 'line-through')}
+                    >
                       {character ? (
                         <CharacterLink
                           nickname={character}
