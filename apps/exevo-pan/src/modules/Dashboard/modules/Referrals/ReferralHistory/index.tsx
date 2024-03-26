@@ -17,7 +17,7 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
   const i18n = translations.dashboard.Referrals.ReferralHistory
 
   const [{ pageIndex, list, exhausted }, dispatch] = useReducer(queryReducer, {
-    pageIndex: 1,
+    pageIndex: 0,
     pageSize,
     list: firstPageData,
     exhausted: firstPageData.length < pageSize,
@@ -26,7 +26,7 @@ export const ReferralHistory = ({ firstPageData }: ReferralHistoryProps) => {
   const query = trpc.listMyReferralHistoryEntries.useQuery(
     { pageIndex, pageSize },
     {
-      initialData: firstPageData,
+      enabled: pageIndex > 0,
       keepPreviousData: true,
       onSuccess: (data) => dispatch({ type: 'UPDATE_LIST', list: data }),
     },
