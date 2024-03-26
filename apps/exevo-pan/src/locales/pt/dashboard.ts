@@ -140,6 +140,7 @@ export default defaultComposer(defaultTranslations, {
     myCouponTitle: 'Meu cupom',
     customizeCoupon: 'Customizar cupom',
     saveCouponButton: 'Salvar',
+    editCouponButton: 'Editar',
     CouponPreview: {
       preview: 'Imagem:',
       referralLink: 'Link de indicação:',

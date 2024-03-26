@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import Head from 'next/head'
 import NextLink from 'next/link'
@@ -12,7 +13,7 @@ import {
   ReferralHistory,
 } from 'modules/Dashboard/modules/Referrals'
 import { Alert, Button, Chip, Input, Text, TitledCard } from 'components/Atoms'
-import { TrashIcon } from 'assets/svgs'
+import { EditIcon, TrashIcon } from 'assets/svgs'
 import { toast } from 'react-hot-toast'
 
 import { PreviewImageClient } from 'services'
@@ -27,10 +28,6 @@ import { exevoPro, jsonld, routes } from 'Constants'
 import { common, dashboard } from 'locales'
 
 const pageUrl = buildUrl(routes.DASHBOARD.REFERRALS)
-
-// @ ToDo:
-//  test conflicting ids
-// i18n (check mr diff)
 
 function randomInfluencer(br: boolean) {
   const brazillians = [
@@ -84,6 +81,7 @@ export default function Page() {
   const [coupon, setCoupon] = useState('')
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
   const [editableWithdraw, setEditableWithdraw] = useState(false)
+  const [editableCoupon, setEditableCoupon] = useState(false)
 
   const referralTag = trpc.getReferralTag.useQuery(undefined, {
     enabled: isPro,
@@ -93,11 +91,15 @@ export default function Page() {
       setCoupon(data.coupon)
       setWithdrawCharacter(data.withdrawCharacter)
       setEditableWithdraw(!!data.withdrawCharacter)
+      setEditableCoupon(!!data.coupon)
     },
   })
 
   const editCouponAction = trpc.editReferralTag.useMutation({
-    onSuccess: () => toast.success(i18n.Referrals.couponSuccess),
+    onSuccess: () => {
+      toast.success(i18n.Referrals.couponSuccess)
+      setEditableCoupon(true)
+    },
     onError: () => toast.error(i18n.Referrals.couponError),
   })
 
@@ -303,7 +305,9 @@ export default function Page() {
                   className="grow"
                   value={coupon}
                   onChange={(e) => setCoupon(e.target.value.toUpperCase())}
-                  disabled={!isPro || editCouponAction.isLoading}
+                  disabled={
+                    !isPro || editCouponAction.isLoading || editableCoupon
+                  }
                   onKeyPress={(e) => {
                     if (
                       e.key === 'Enter' &&
@@ -317,12 +321,22 @@ export default function Page() {
 
                 <Button
                   pill
-                  className="mb-[1px] !py-3"
-                  onClick={() => editCouponAction.mutate({ coupon })}
+                  hollow={editableCoupon}
+                  className={clsx('!py-3', !editableCoupon && 'mb-[1px]')}
+                  onClick={() => {
+                    if (editableCoupon) {
+                      setEditableCoupon(false)
+                    } else {
+                      editCouponAction.mutate({ coupon })
+                    }
+                  }}
                   loading={editCouponAction.isLoading}
                   disabled={!isPro || isCouponInvalid}
                 >
-                  {i18n.Referrals.saveCouponButton}
+                  {editableCoupon && <EditIcon className="h-4 w-4" />}
+                  {editableCoupon
+                    ? i18n.Referrals.editCouponButton
+                    : i18n.Referrals.saveCouponButton}
                 </Button>
               </div>
 

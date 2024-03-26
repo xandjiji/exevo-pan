@@ -136,6 +136,7 @@ export default {
     myCouponTitle: 'My coupon',
     customizeCoupon: 'Customize coupon',
     saveCouponButton: 'Save',
+    editCouponButton: 'Edit',
     CouponPreview: {
       preview: 'Image:',
       referralLink: 'Referral link:',
