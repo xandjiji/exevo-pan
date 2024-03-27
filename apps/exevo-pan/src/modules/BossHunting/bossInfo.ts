@@ -64,7 +64,7 @@ bossInfo.set('Arthom The Hunter', {
 bossInfo.set('Barbaria', {
   locations: [
     {
-      src: 'https://tibiamaps.io/map/embed#32022,31386,7:1',
+      src: 'https://tibiamaps.io/map/embed#32007,31415,7:1',
       description: 'Barbarian Camp, Krimhorn (Svargrond)',
     },
   ],
