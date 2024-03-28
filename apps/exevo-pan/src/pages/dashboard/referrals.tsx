@@ -82,6 +82,7 @@ export default function Page() {
   const [withdrawCharacter, setWithdrawCharacter] = useState('')
   const [editableWithdraw, setEditableWithdraw] = useState(false)
   const [editableCoupon, setEditableCoupon] = useState(false)
+  const [hasCoupon, setHasCoupon] = useState(false)
 
   const referralTag = trpc.getReferralTag.useQuery(undefined, {
     enabled: isPro,
@@ -92,6 +93,7 @@ export default function Page() {
       setWithdrawCharacter(data.withdrawCharacter)
       setEditableWithdraw(!!data.withdrawCharacter)
       setEditableCoupon(!!data.coupon)
+      setHasCoupon(!!data.coupon)
     },
   })
 
@@ -99,6 +101,7 @@ export default function Page() {
     onSuccess: () => {
       toast.success(i18n.Referrals.couponSuccess)
       setEditableCoupon(true)
+      setHasCoupon(true)
     },
     onError: () => toast.error(i18n.Referrals.couponError),
   })
@@ -264,7 +267,10 @@ export default function Page() {
                     value={withdrawCharacter}
                     onChange={(e) => setWithdrawCharacter(e.target.value)}
                     disabled={
-                      !isPro || editWithdrawAction.isLoading || editableWithdraw
+                      !isPro ||
+                      editWithdrawAction.isLoading ||
+                      editableWithdraw ||
+                      !hasCoupon
                     }
                   />
 
@@ -285,7 +291,9 @@ export default function Page() {
                       editWithdrawAction.mutate({ withdrawCharacter })
                     }}
                     loading={editWithdrawAction.isLoading}
-                    disabled={!isPro || withdrawCharacter.length < 2}
+                    disabled={
+                      !isPro || withdrawCharacter.length < 2 || !hasCoupon
+                    }
                   >
                     {editableWithdraw && <TrashIcon className="h-4 w-4" />}
                     {editableWithdraw
