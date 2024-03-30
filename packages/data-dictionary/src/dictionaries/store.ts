@@ -1840,6 +1840,14 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Low Cave Fence',
     value: 60,
   },
+  'cave fence border': {
+    name: 'Cave Fence Border',
+    value: 25,
+  },
+  'crystal wall lamp': {
+    name: 'Crystal Wall Lamp',
+    value: 60,
+  },
   /* RASCACOON */
   'blue shark trophy': {
     name: 'Blue Shark Trophy',

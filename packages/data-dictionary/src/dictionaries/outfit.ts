@@ -470,6 +470,14 @@ export const outfits: OutfitToken[] = [
     value: 0,
   },
   {
+    name: 'Dragon Slayer',
+    id: {
+      male: 1688,
+      female: 1689,
+    },
+    value: 0,
+  },
+  {
     name: 'Draccoon Herald',
     id: {
       male: 1722,
