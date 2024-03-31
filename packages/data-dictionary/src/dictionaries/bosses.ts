@@ -58,7 +58,7 @@ export const constTokens = {
   'Robby the Reckless': 'Robby the Reckless',
   Rotspit: 'Rotspit',
   'Rottie the Rotworm': 'Rottie the Rotworm',
-  'Rotworm Queens': 'Rotworm Queen',
+  'Rotworm Queen': 'Rotworm Queen',
   'Rukor Zad': 'Rukor Zad',
   Shadowstalker: 'Shadowstalker',
   Shlorg: 'Shlorg',
