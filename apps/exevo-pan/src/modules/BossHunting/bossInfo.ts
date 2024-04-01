@@ -1540,7 +1540,7 @@ const spawnLocations: { name: string; locations: string[] }[] = [
     locations: ['Katana Quest', 'Poison Spider Cave'],
   },
   {
-    name: bossTokens['Rotworm Queens'],
+    name: bossTokens['Rotworm Queen'],
     locations: ['Edron', 'Darashia', 'Liberty Bay', "Ab'Dendriel"],
   },
   {
