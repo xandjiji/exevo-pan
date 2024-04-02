@@ -2,6 +2,10 @@ import { z } from 'zod'
 
 export const ServerLocationSchema: z.ZodType<ServerLocation> = z.union([
   z.object({
+    string: z.literal('OCE'),
+    type: z.literal(3),
+  }),
+  z.object({
     string: z.literal('BR'),
     type: z.literal(2),
   }),

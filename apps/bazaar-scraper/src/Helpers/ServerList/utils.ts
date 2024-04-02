@@ -6,6 +6,7 @@ const LOCATIONS: Record<string, ServerLocation> = {
   Europe: SERVER_LOCATIONS.EUROPE,
   'North America': SERVER_LOCATIONS.NORTH_AMERICA,
   'South America': SERVER_LOCATIONS.SOUTH_AMERICA,
+  Oceania: SERVER_LOCATIONS.OCEANIA,
 }
 
 const PVPS: Record<string, PvpType> = {

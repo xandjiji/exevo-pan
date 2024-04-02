@@ -10,6 +10,7 @@ const SERVER_LOCATIONS = {
   EUROPE: { string: 'EU', type: 0 } as ServerLocation,
   NORTH_AMERICA: { string: 'NA', type: 1 } as ServerLocation,
   SOUTH_AMERICA: { string: 'BR', type: 2 } as ServerLocation,
+  OCEANIA: { string: 'OCE', type: 3 } as ServerLocation,
 }
 
 export const servers = { PVP_TYPES, SERVER_LOCATIONS }

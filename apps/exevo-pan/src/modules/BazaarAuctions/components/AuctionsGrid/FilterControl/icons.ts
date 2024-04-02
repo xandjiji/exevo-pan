@@ -20,6 +20,7 @@ export default {
     EU: TibiaIcons.EuFlag,
     NA: TibiaIcons.NaFlag,
     BR: TibiaIcons.BrFlag,
+    OCE: TibiaIcons.OceFlag,
   },
   Skill: {
     magic: TibiaIcons.Magic,

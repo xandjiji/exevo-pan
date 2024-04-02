@@ -1,4 +1,5 @@
 declare type ServerLocation =
+  | { string: 'OCE'; type: 3 }
   | { string: 'BR'; type: 2 }
   | { string: 'EU'; type: 0 }
   | { string: 'NA'; type: 1 }
