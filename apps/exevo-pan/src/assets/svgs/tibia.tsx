@@ -15,6 +15,7 @@ import orangeSkullSrc from 'assets/orangeSkull.png'
 import whiteSkullSrc from 'assets/whiteSkull.png'
 import redSkullSrc from 'assets/redSkull.png'
 import blackSkullSrc from 'assets/blackSkull.png'
+import oceFlagSrc from 'assets/oce-flag.png'
 import brFlagSrc from 'assets/br-flag.png'
 import euFlagSrc from 'assets/eu-flag.png'
 import naFlagSrc from 'assets/na-flag.png'
@@ -69,6 +70,9 @@ export const NaFlag = () => (
 )
 export const BrFlag = () => (
   <Image role="none" alt="South America" src={brFlagSrc} />
+)
+export const OceFlag = () => (
+  <Image role="none" alt="South America" src={oceFlagSrc} />
 )
 
 export const BattlEye = ({

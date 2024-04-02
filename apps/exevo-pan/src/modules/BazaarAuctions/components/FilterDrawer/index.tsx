@@ -399,6 +399,21 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               <TibiaIcons.BrFlag />
               {SERVER_LOCATIONS.SOUTH_AMERICA.string}
             </S.IconChip>
+            <S.IconChip
+              overrideStatus={filterState.location.has(
+                SERVER_LOCATIONS.OCEANIA.type,
+              )}
+              onClick={() =>
+                dispatch({
+                  type: 'TOGGLE_FILTER_SET',
+                  key: 'location',
+                  value: SERVER_LOCATIONS.OCEANIA.type,
+                })
+              }
+            >
+              <TibiaIcons.OceFlag />
+              {SERVER_LOCATIONS.OCEANIA.string}
+            </S.IconChip>
           </S.ChipWrapper>
         </FilterGroup>
 
