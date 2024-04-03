@@ -357,6 +357,23 @@ export default class AuctionPage {
     return [...achievementSet]
   }
 
+  greaterGems($: CheerioAPI): string[] {
+    const gems = $(
+      '#RevealedGems td:nth-child(2) .ModEffectRow .ModIconCharBazaarSupremeMod + span',
+    )
+
+    const greaterGemList = new Set<string>([])
+    gems.each((_, element) => {
+      greaterGemList.add(
+        `${cheerio(element.children[0]).text()} (${cheerio(
+          element.children[0],
+        )})`,
+      )
+    })
+
+    return [...greaterGemList]
+  }
+
   storeFirstPage($: CheerioAPI): CharacterItem[] {
     const firstPage = $('#StoreItemSummary .TableContent tbody .BlockPage')
     const html = firstPage.html()
