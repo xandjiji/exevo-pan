@@ -357,6 +357,33 @@ export default class AuctionPage {
     return [...achievementSet]
   }
 
+  gemCount($: CheerioAPI) {
+    const gems = $('#RevealedGems .Gem')
+
+    let greaterCount = 0
+    let lesserCount = 0
+    let regularCount = 0
+    gems.each((_, element) => {
+      const title = cheerio(element).attr('title')
+
+      if (!title) return
+      if (title.includes('Greater')) {
+        greaterCount += 1
+      } else if (title.includes('Lesser')) {
+        lesserCount += 1
+      } else {
+        regularCount += 1
+      }
+    })
+
+    return {
+      lesser: lesserCount,
+      regular: regularCount,
+      greater: greaterCount,
+      total: greaterCount + regularCount + lesserCount,
+    }
+  }
+
   greaterGems($: CheerioAPI): string[] {
     const gems = $(
       '#RevealedGems td:nth-child(2) .ModEffectRow .ModIconCharBazaarSupremeMod + span',
