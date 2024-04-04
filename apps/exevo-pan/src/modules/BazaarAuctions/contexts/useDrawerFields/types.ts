@@ -11,6 +11,13 @@ export interface DrawerFieldsContextData {
   storeOutfitValues: string[]
   mountValues: string[]
   storeMountValues: string[]
+  gemOptions: {
+    rook: Option[]
+    knight: Option[]
+    druid: Option[]
+    sorcerer: Option[]
+    paladin: Option[]
+  }
 }
 
 type ServerSideProps = Pick<

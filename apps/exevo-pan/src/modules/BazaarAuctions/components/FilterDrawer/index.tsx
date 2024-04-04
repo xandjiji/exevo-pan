@@ -58,6 +58,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     storeOutfitValues,
     mountValues,
     storeMountValues,
+    gemOptions,
   } = useDrawerFields()
   const { filterState, activeFilterCount, mode, dispatch } = useAuctions()
 
