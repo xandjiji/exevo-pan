@@ -360,28 +360,23 @@ export default class AuctionPage {
   gemCount($: CheerioAPI) {
     const gems = $('#RevealedGems .Gem')
 
-    let greaterCount = 0
-    let lesserCount = 0
-    let regularCount = 0
+    let lesser = 0
+    let regular = 0
+    let greater = 0
     gems.each((_, element) => {
       const title = cheerio(element).attr('title')
 
       if (!title) return
       if (title.includes('Greater')) {
-        greaterCount += 1
+        greater += 1
       } else if (title.includes('Lesser')) {
-        lesserCount += 1
+        lesser += 1
       } else {
-        regularCount += 1
+        regular += 1
       }
     })
 
-    return {
-      lesser: lesserCount,
-      regular: regularCount,
-      greater: greaterCount,
-      total: greaterCount + regularCount + lesserCount,
-    }
+    return { lesser, regular, greater }
   }
 
   greaterGems($: CheerioAPI): string[] {
@@ -391,11 +386,11 @@ export default class AuctionPage {
 
     const greaterGemList = new Set<string>([])
     gems.each((_, element) => {
-      greaterGemList.add(
-        `${cheerio(element.children[0]).text()} (${cheerio(
-          element.children[0],
-        )})`,
-      )
+      let detail = cheerio(element.children[2]).text()
+      if (detail) {
+        detail = ` (${detail})`
+      }
+      greaterGemList.add(`${cheerio(element.children[0]).text()}${detail}`)
     })
 
     return [...greaterGemList]
@@ -481,6 +476,8 @@ export default class AuctionPage {
         ...this.allCharmPoints($),
         expansion: this.charmExpansion($),
       },
+      gems: this.gemCount($),
+      greaterGems: this.greaterGems($),
     }
 
     characterObject.tcInvested = totalCharacterInvestment(characterObject)
