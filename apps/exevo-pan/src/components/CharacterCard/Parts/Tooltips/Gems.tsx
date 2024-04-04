@@ -1,3 +1,4 @@
+import { Placement } from '@popperjs/core'
 import { memo } from 'react'
 import { useTranslations } from 'contexts/useTranslation'
 import { Tooltip } from 'components/Organisms'
@@ -7,9 +8,10 @@ import * as S from './atoms'
 type GemsProps = {
   gems: CharacterObject['gems']
   greaterGems: string[]
+  placement?: Placement
 } & React.ComponentPropsWithoutRef<'strong'>
 
-const Gems = ({ gems, greaterGems, ...props }: GemsProps) => {
+const Gems = ({ gems, greaterGems, placement, ...props }: GemsProps) => {
   const { common } = useTranslations()
 
   const contentJSX = (
@@ -26,6 +28,7 @@ const Gems = ({ gems, greaterGems, ...props }: GemsProps) => {
     <Tooltip
       aria-label={common.CharacterCard.Tooltips.labels.supremeGems}
       content={<Lister fullList={greaterGems} partialList={greaterGems} />}
+      placement={placement}
     >
       {contentJSX}
     </Tooltip>

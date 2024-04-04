@@ -1,27 +1,28 @@
-import { useState, useMemo, useRef, useCallback } from 'react'
+import { useCallback, useMemo, useRef, useState } from 'react'
 import clsx from 'clsx'
 import NextLink from 'next/link'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { Dialog, Tabs } from 'components/Atoms'
-import { InfoGrid, Checkbox, Icons } from 'components/CharacterCard/atoms'
+import { Checkbox, Icons, InfoGrid } from 'components/CharacterCard/atoms'
 import {
-  Head,
-  Textbox,
+  Achievements,
+  BossPoints,
   CharacterItems,
   CharacterSkills,
-  ImbuementsTooltip,
   CharmsTooltip,
-  QuestsTooltip,
-  BossPoints,
-  Achievements,
+  GemsTooltip,
+  Head,
   Hirelings,
+  ImbuementsTooltip,
+  QuestsTooltip,
+  Textbox,
 } from 'components/CharacterCard/Parts'
 import { useIsDesktop } from 'hooks'
 import { formatNumberWithCommas, getTCState } from 'utils'
 import { routes } from 'Constants'
-import { OutfitIcon, HorseIcon, InboxIcon } from 'assets/svgs'
+import { HorseIcon, InboxIcon, OutfitIcon } from 'assets/svgs'
 import SpriteBox from './SpriteBox'
-import { checkStore, tabCounter, auctionHasEnded } from './utils'
+import { auctionHasEnded, checkStore, tabCounter } from './utils'
 import { resolvers } from './resolvers'
 import * as S from './atoms'
 import styles from './styles.module.css'
@@ -29,7 +30,7 @@ import { CharacterModalProps } from './types'
 
 /*
 --lateralMargin: 14px;
---cardFixedHeight: 478px;
+--cardFixedHeight: 490px;
 --cardMaxMobileWidth: 368px;
 --gridMobileHeight: 60vh;
 --scrollbarWidth: 6px;
@@ -68,6 +69,8 @@ const CharacterModal = ({
     storeMounts,
     achievementPoints,
     bossPoints,
+    gems,
+    greaterGems,
   } = characterData
 
   const { common } = useTranslations()
@@ -142,6 +145,11 @@ const CharacterModal = ({
                 charmInfo={charmInfo}
               />
               <QuestsTooltip placement="top-start" items={quests} />
+              <GemsTooltip
+                placement="top-start"
+                gems={gems}
+                greaterGems={greaterGems}
+              />
               <BossPoints bossPoints={bossPoints} />
               <Hirelings hirelingsInfo={hirelings} />
               <Achievements achievementPoints={achievementPoints} />
