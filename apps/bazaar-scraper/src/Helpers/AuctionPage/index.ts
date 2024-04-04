@@ -393,7 +393,7 @@ export default class AuctionPage {
       greaterGemList.add(`${cheerio(element.children[0]).text()}${detail}`)
     })
 
-    return [...greaterGemList]
+    return [...greaterGemList].sort()
   }
 
   storeFirstPage($: CheerioAPI): CharacterItem[] {
