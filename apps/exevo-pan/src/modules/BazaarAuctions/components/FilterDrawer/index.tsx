@@ -127,6 +127,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     controlledValue: filterState.achievementPoints,
   })
 
+  const [greaterGemCount, setGreaterGemCount] = useDebouncedFilter({
+    key: 'greaterGemCount',
+    controlledValue: filterState.greaterGemCount,
+  })
+
   const rareItems = useRareItemSet({
     rareItemData,
     currentFilterSet: filterState.auctionIds,
@@ -869,6 +874,18 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               step={500}
             />
           </S.DoubleColumnInput>
+        </FilterGroup>
+
+        <FilterGroup>
+          <NumericInput
+            label="Min Greater Gems"
+            value={greaterGemCount}
+            onChange={setGreaterGemCount}
+            placeholder="0"
+            alwaysValid
+            className="w-28"
+            step={1}
+          />
         </FilterGroup>
 
         <FilterGroup>
