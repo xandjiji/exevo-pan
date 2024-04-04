@@ -50,6 +50,7 @@ const CharacterCard = ({
     preySlot,
     bossPoints,
     gems,
+    greaterGems,
   } = characterData
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
@@ -103,7 +104,9 @@ const CharacterCard = ({
 
             <S.Checkbox label="Prey Slot" checked={preySlot} />
 
-            <GemsTooltip gems={gems} />
+            <div className="block">
+              <GemsTooltip gems={gems} greaterGems={greaterGems} />
+            </div>
 
             {
               {
