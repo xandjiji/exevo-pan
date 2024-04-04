@@ -49,4 +49,6 @@ export const DEFAULT_FILTER_OPTIONS: FilterOptions = {
   hireling: false,
   transferAvailable: false,
   biddedOnly: false,
+  greaterGemsSet: new Set([]),
+  greaterGemCount: 0,
 }
