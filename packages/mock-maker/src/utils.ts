@@ -9,10 +9,12 @@ export const samplesFrom = <T>(
   array: Array<T>,
   fixedAmount?: number,
 ): Array<T> => {
-  const randomAmount = faker.datatype.number({
-    min: 1,
-    max: fixedAmount ?? array.length,
-  })
+  const randomAmount =
+    fixedAmount ??
+    faker.datatype.number({
+      min: 1,
+      max: array.length,
+    })
   const shuffledArray = faker.helpers.shuffle(array)
   return shuffledArray.slice(0, randomAmount)
 }

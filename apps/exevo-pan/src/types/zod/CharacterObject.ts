@@ -116,4 +116,10 @@ export const CharacterObjectSchema: z.ZodType<CharacterObject> = z.object({
   preySlot: z.boolean(),
   huntingSlot: z.boolean(),
   charmInfo: CharmInfoSchema,
+  gems: z.object({
+    lesser: z.number(),
+    regular: z.number(),
+    greater: z.number(),
+  }),
+  greaterGems: z.array(z.string()),
 })
