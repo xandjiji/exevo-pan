@@ -1,19 +1,20 @@
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import NextLink from 'next/link'
 import { formatNumberWithCommas } from 'utils'
 import { routes } from 'Constants'
 import {
-  Head,
-  TagButton,
-  Textbox,
+  BossPoints,
   CharacterItems,
   CharacterSkills,
-  ImbuementsTooltip,
   CharmsTooltip,
+  GemsTooltip,
+  Head,
+  ImbuementsTooltip,
   QuestsTooltip,
-  BossPoints,
   SpecialTags,
+  TagButton,
+  Textbox,
 } from './Parts'
 import * as S from './atoms'
 import { getTCState } from './utils'
@@ -48,6 +49,7 @@ const CharacterCard = ({
     charmInfo,
     preySlot,
     bossPoints,
+    gems,
   } = characterData
 
   const tcInvested = formatNumberWithCommas(characterData.tcInvested)
@@ -100,6 +102,8 @@ const CharacterCard = ({
             <S.Checkbox label="Charm Expansion" checked={charmInfo.expansion} />
 
             <S.Checkbox label="Prey Slot" checked={preySlot} />
+
+            <GemsTooltip gems={gems} />
 
             {
               {

@@ -172,6 +172,7 @@ export default {
         imbuements: 'Imbuements list',
         charms: 'Charms list',
         quests: 'Quests list',
+        supremeGems: 'Available supreme gem modifiers',
       },
       quests: {
         utilitary: 'Utilitary',
