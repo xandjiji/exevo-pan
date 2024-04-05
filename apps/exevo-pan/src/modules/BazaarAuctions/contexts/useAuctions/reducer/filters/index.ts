@@ -45,6 +45,22 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
         },
       }
 
+    case 'TOGGLE_VOCATION': {
+      const nextVocation = toggleSet(state.filterState.vocation, action.value)
+      const nextState = {
+        ...state,
+        filterState: { ...state.filterState, nextVocation },
+      }
+
+      if (nextState.filterState.greaterGemsSet.size === 0) return nextState
+
+      if (nextVocation.size >= 2) {
+        nextState.filterState.greaterGemsSet = new Set([])
+      }
+
+      return nextState
+    }
+
     case 'TOGGLE_SUPREME_GEM': {
       const greaterGemsSet = toggleSet(
         state.filterState.greaterGemsSet,

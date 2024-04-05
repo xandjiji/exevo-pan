@@ -31,6 +31,7 @@ export type FilterAction =
       allOptions: Option[]
     }
   | { type: 'TOGGLE_ADDON'; value: number }
+  | { type: 'TOGGLE_VOCATION'; value: number }
   | { type: 'TOGGLE_SUPREME_GEM'; value: string }
   | { type: 'RESET_FILTERS' }
   | { type: 'SET_DEFAULT'; key: keyof FilterOptions }

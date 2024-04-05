@@ -215,11 +215,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.NONE)}
               onClick={() =>
-                dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
-                  value: VOCATION_IDS.NONE,
-                })
+                dispatch({ type: 'TOGGLE_VOCATION', value: VOCATION_IDS.NONE })
               }
             >
               <TibiaIcons.Rook />
@@ -229,8 +225,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.KNIGHT)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.KNIGHT,
                 })
               }
@@ -242,8 +237,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.PALADIN)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.PALADIN,
                 })
               }
@@ -255,8 +249,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.SORCERER)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.SORCERER,
                 })
               }
@@ -268,8 +261,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.DRUID)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.DRUID,
                 })
               }
