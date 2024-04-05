@@ -141,7 +141,30 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     ),
   })
 
-  const gemOptions = useGemOptions(filterState.vocation)
+  const availableImbuementOptions = useOptionsSet(
+    imbuementOptions,
+    filterState.imbuementsSet,
+  )
+
+  const availableCharmOptions = useOptionsSet(
+    charmOptions,
+    filterState.charmsSet,
+  )
+
+  const availableGemsOptions = useOptionsSet(
+    useGemOptions(filterState.vocation),
+    filterState.greaterGemsSet,
+  )
+
+  const availableQuestOptions = useOptionsSet(
+    questOptions,
+    filterState.questSet,
+  )
+
+  const availableAchievementOptions = useOptionsSet(
+    achievementOptions,
+    filterState.achievementSet,
+  )
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
@@ -746,10 +769,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               label="Imbuements"
               aria-controls="imbuements-list"
               placeholder={i18n.placeholders.imbuements}
-              itemList={useOptionsSet(
-                imbuementOptions,
-                filterState.imbuementsSet,
-              )}
+              itemList={availableImbuementOptions}
+              disabled={availableImbuementOptions.length === 0}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
                   dispatch({
@@ -802,7 +823,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               label="Charms"
               aria-controls="charms-list"
               placeholder={i18n.placeholders.charms}
-              itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
+              itemList={availableCharmOptions}
+              disabled={availableCharmOptions.length === 0}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
                   dispatch({
@@ -884,7 +906,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             label="Supreme Gems"
             aria-controls="gems-list"
             placeholder={i18n.placeholders.gems}
-            itemList={useOptionsSet(gemOptions, filterState.greaterGemsSet)}
+            itemList={availableGemsOptions}
+            disabled={availableGemsOptions.length === 0}
             onItemSelect={useCallback(
               ({ value }: Option) =>
                 dispatch({ type: 'TOGGLE_SUPREME_GEM', value }),
@@ -929,7 +952,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             aria-controls="quest-list"
             placeholder={i18n.placeholders.quests}
             style={{ marginBottom: 12 }}
-            itemList={useOptionsSet(questOptions, filterState.questSet)}
+            itemList={availableQuestOptions}
+            disabled={availableQuestOptions.length === 0}
             onItemSelect={useCallback(
               ({ value }: Option) =>
                 dispatch({ type: 'TOGGLE_FILTER_SET', key: 'questSet', value }),
@@ -974,10 +998,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             aria-controls="achievement-list"
             placeholder={i18n.placeholders.achievements}
             style={{ marginBottom: 12 }}
-            itemList={useOptionsSet(
-              achievementOptions,
-              filterState.achievementSet,
-            )}
+            itemList={availableAchievementOptions}
+            disabled={availableAchievementOptions.length === 0}
             onItemSelect={useCallback(
               ({ value }: Option) =>
                 dispatch({
@@ -1028,7 +1050,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 aria-controls="rare-items-list"
                 placeholder={i18n.placeholders.rareItems}
                 itemList={rareItems.itemList}
-                disabled={!isPro}
+                disabled={!isPro || rareItems.itemList.length === 0}
                 onItemSelect={
                   isPro
                     ? ({ name }) => rareItems.action.toggle(name)
