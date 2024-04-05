@@ -4,23 +4,26 @@ import { vocationGemOptions } from './gemOptions'
 
 export const useGemOptions = (vocationSet: FilterOptions['vocation']) =>
   useMemo(() => {
-    let options: Option[] = []
-
-    if (vocationSet.has(vocation.VOCATION_IDS.NONE)) {
-      options = [...vocationGemOptions.rook]
-    }
     if (vocationSet.has(vocation.VOCATION_IDS.KNIGHT)) {
-      options = [...options, ...vocationGemOptions.knight]
+      return vocationGemOptions.knight
     }
     if (vocationSet.has(vocation.VOCATION_IDS.PALADIN)) {
-      options = [...options, ...vocationGemOptions.paladin]
+      return vocationGemOptions.paladin
     }
     if (vocationSet.has(vocation.VOCATION_IDS.SORCERER)) {
-      options = [...options, ...vocationGemOptions.sorcerer]
+      return vocationGemOptions.sorcerer
     }
     if (vocationSet.has(vocation.VOCATION_IDS.DRUID)) {
-      options = [...options, ...vocationGemOptions.druid]
+      return vocationGemOptions.druid
+    }
+    if (vocationSet.has(vocation.VOCATION_IDS.NONE)) {
+      return []
     }
 
-    return options
+    return [
+      ...vocationGemOptions.rook,
+      ...vocationGemOptions.knight,
+      ...vocationGemOptions.sorcerer,
+      ...vocationGemOptions.druid,
+    ]
   }, [vocationSet])
