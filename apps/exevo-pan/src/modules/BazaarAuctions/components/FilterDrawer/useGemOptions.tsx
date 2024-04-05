@@ -3,10 +3,13 @@ import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { vocationGemOptions } from './gemOptions'
 
 const allOptions = [
-  ...vocationGemOptions.rook,
-  ...vocationGemOptions.knight,
-  ...vocationGemOptions.sorcerer,
-  ...vocationGemOptions.druid,
+  ...new Set([
+    ...vocationGemOptions.rook,
+    ...vocationGemOptions.knight,
+    ...vocationGemOptions.paladin,
+    ...vocationGemOptions.sorcerer,
+    ...vocationGemOptions.druid,
+  ]),
 ]
 
 export const useGemOptions = (vocationSet: FilterOptions['vocation']) =>
@@ -27,5 +30,5 @@ export const useGemOptions = (vocationSet: FilterOptions['vocation']) =>
       filteredOptions = [...filteredOptions, ...vocationGemOptions.druid]
     }
 
-    return filteredOptions
+    return [...new Set(filteredOptions)]
   }, [vocationSet])
