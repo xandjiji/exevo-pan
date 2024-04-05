@@ -119,6 +119,8 @@ const GoodAuction = () => (
         'Twenty Miles Beneath the Sea',
         'Wrath of the Emperor',
       ],
+      greaterGems: [],
+      gems: { lesser: 0, greater: 0, regular: 0 },
       storeItems: [],
       outfits: [],
       storeOutfits: [],
