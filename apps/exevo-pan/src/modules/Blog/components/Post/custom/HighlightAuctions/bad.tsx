@@ -57,6 +57,8 @@ const GoodAuction = () => (
         'Dangerous Depths (Warzone 5)',
         'Barbarian Test',
       ],
+      greaterGems: [],
+      gems: { lesser: 0, greater: 0, regular: 0 },
       storeItems: [],
       outfits: [],
       storeOutfits: [],
