@@ -53,6 +53,7 @@ export default defaultComposer(defaultTranslations, {
       imbuements: 'Wybierz imbuementy',
       charms: 'Wybierz charmy',
       quests: 'Wybierz questy',
+      gems: 'Wybierz supreme gems',
       achievements: 'Wybierz osiągnięcia',
       rareItems: 'Wybierz przedmiot',
     },

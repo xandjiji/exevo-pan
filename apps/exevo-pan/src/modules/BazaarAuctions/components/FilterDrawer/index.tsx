@@ -27,6 +27,7 @@ import FilterGroup from './FilterGroup'
 import NumberInput from './NumberInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
+import { useGemOptions } from './useGemOptions'
 import * as S from './atoms'
 import { FilterDrawerProps } from './types'
 
@@ -58,7 +59,6 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     storeOutfitValues,
     mountValues,
     storeMountValues,
-    gemOptions,
   } = useDrawerFields()
   const { filterState, activeFilterCount, mode, dispatch } = useAuctions()
 
@@ -140,6 +140,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
       [],
     ),
   })
+
+  const gemOptions = useGemOptions(filterState.vocation)
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
@@ -876,7 +878,39 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.DoubleColumnInput>
         </FilterGroup>
 
-        <FilterGroup>
+        <FilterGroup className="grid gap-4">
+          <S.AutocompleteInput
+            id="gems-input"
+            label="Supreme Gems"
+            aria-controls="gems-list"
+            placeholder={i18n.placeholders.gems}
+            itemList={useOptionsSet(gemOptions, filterState.greaterGemsSet)}
+            onItemSelect={useCallback(
+              ({ value }: Option) =>
+                dispatch({ type: 'TOGGLE_SUPREME_GEM', value }),
+              [],
+            )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
+          />
+
+          <>
+            {filterState.greaterGemsSet.size > 0 && (
+              <S.ChipWrapper id="gems-list">
+                {[...filterState.greaterGemsSet].map((gem) => (
+                  <Chip
+                    key={gem}
+                    onClose={() =>
+                      dispatch({ type: 'TOGGLE_SUPREME_GEM', value: gem })
+                    }
+                  >
+                    {gem}
+                  </Chip>
+                ))}
+              </S.ChipWrapper>
+            )}
+          </>
+
           <NumericInput
             label="Min Greater Gems"
             value={greaterGemCount}

@@ -1,8 +1,17 @@
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import { greaterGems } from 'data-dictionary/dist/dictionaries/gems'
 import { countActiveFilters, resetPagination } from '../utils'
 import { Reducer } from '../types'
 import { FilterAction } from './types'
 import { toggleSet } from './utils'
+
+const sharedGems = new Set([
+  greaterGems.knight['+0.25% Dodge'],
+  greaterGems.knight['+0.4% Mana Leech'],
+  greaterGems.knight['+1.2% Life Leech'],
+  greaterGems.knight['+1.5% Critical Extra Damage'],
+])
 
 const FilterReducer: Reducer<FilterAction> = (state, action) => {
   switch (action.type) {
@@ -35,6 +44,55 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
           [action.key]: toggleSet(state.filterState[action.key], action.value),
         },
       }
+
+    case 'TOGGLE_SUPREME_GEM': {
+      const greaterGemsSet = toggleSet(
+        state.filterState.greaterGemsSet,
+        action.value,
+      )
+
+      const nextState = {
+        ...state,
+        filterState: { ...state.filterState, greaterGemsSet },
+      }
+
+      if (greaterGemsSet.size === 0) return nextState
+
+      const gemsList = [...greaterGemsSet]
+      const vocationSpecificGem = gemsList.find((gem) => !sharedGems.has(gem))
+
+      if (!vocationSpecificGem) return nextState
+
+      // we should infer the vocation:
+      const nextVocation = new Set<number>([])
+      if (
+        greaterGems.knight[
+          vocationSpecificGem as keyof typeof greaterGems.knight
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.KNIGHT)
+      } else if (
+        greaterGems.paladin[
+          vocationSpecificGem as keyof typeof greaterGems.paladin
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.PALADIN)
+      } else if (
+        greaterGems.sorcerer[
+          vocationSpecificGem as keyof typeof greaterGems.sorcerer
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.SORCERER)
+      } else if (
+        greaterGems.druid[vocationSpecificGem as keyof typeof greaterGems.druid]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.DRUID)
+      }
+
+      nextState.filterState.vocation = nextVocation
+
+      return nextState
+    }
 
     case 'TOGGLE_ALL_FILTER_SET_OPTION':
       return {

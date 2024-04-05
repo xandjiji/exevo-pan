@@ -62,6 +62,7 @@ export default defaultComposer(defaultTranslations, {
       server: 'Elige un servidor',
       imbuements: 'Seleccione imbuements',
       charms: 'Seleccione charms',
+      gems: 'Seleccione supreme gems',
       quests: 'Seleccione quests',
       achievements: 'Seleccione achievements',
       rareItems: 'Escoge un item',

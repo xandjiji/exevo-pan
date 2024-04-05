@@ -110,6 +110,7 @@ export default {
       server: 'Choose a server',
       imbuements: 'Select imbuements',
       charms: 'Select charms',
+      gems: 'Select supreme gems',
       quests: 'Select quests',
       achievements: 'Select achievements',
       rareItems: 'Choose an item',
