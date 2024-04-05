@@ -2,28 +2,30 @@ import { useMemo } from 'react'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { vocationGemOptions } from './gemOptions'
 
+const allOptions = [
+  ...vocationGemOptions.rook,
+  ...vocationGemOptions.knight,
+  ...vocationGemOptions.sorcerer,
+  ...vocationGemOptions.druid,
+]
+
 export const useGemOptions = (vocationSet: FilterOptions['vocation']) =>
   useMemo(() => {
+    if (vocationSet.size === 0) return allOptions
+
+    let filteredOptions: Option[] = []
     if (vocationSet.has(vocation.VOCATION_IDS.KNIGHT)) {
-      return vocationGemOptions.knight
+      filteredOptions = [...filteredOptions, ...vocationGemOptions.knight]
     }
     if (vocationSet.has(vocation.VOCATION_IDS.PALADIN)) {
-      return vocationGemOptions.paladin
+      filteredOptions = [...filteredOptions, ...vocationGemOptions.paladin]
     }
     if (vocationSet.has(vocation.VOCATION_IDS.SORCERER)) {
-      return vocationGemOptions.sorcerer
+      filteredOptions = [...filteredOptions, ...vocationGemOptions.sorcerer]
     }
     if (vocationSet.has(vocation.VOCATION_IDS.DRUID)) {
-      return vocationGemOptions.druid
-    }
-    if (vocationSet.has(vocation.VOCATION_IDS.NONE)) {
-      return []
+      filteredOptions = [...filteredOptions, ...vocationGemOptions.druid]
     }
 
-    return [
-      ...vocationGemOptions.rook,
-      ...vocationGemOptions.knight,
-      ...vocationGemOptions.sorcerer,
-      ...vocationGemOptions.druid,
-    ]
+    return filteredOptions
   }, [vocationSet])
