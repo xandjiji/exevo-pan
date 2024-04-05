@@ -52,10 +52,17 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
         filterState: { ...state.filterState, nextVocation },
       }
 
-      if (nextState.filterState.greaterGemsSet.size === 0) return nextState
+      if (nextVocation.has(vocation.VOCATION_IDS.NONE)) {
+        nextState.filterState.greaterGemsSet = new Set([])
+        return nextState
+      }
 
       if (nextVocation.size >= 2) {
-        nextState.filterState.greaterGemsSet = new Set([])
+        nextState.filterState.greaterGemsSet = new Set(
+          [...nextState.filterState.greaterGemsSet].filter((gem) =>
+            sharedGems.has(gem),
+          ),
+        )
       }
 
       return nextState
