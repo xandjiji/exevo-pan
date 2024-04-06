@@ -3,6 +3,8 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
+import Image from 'next/image'
+import tibiaCoinSrc from 'assets/tibiacoin.png'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { servers } from 'data-dictionary/dist/dictionaries/servers'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
@@ -16,7 +18,15 @@ import {
 } from 'components/Atoms'
 import { InfoTooltip, Tooltip } from 'components/Organisms'
 import { blurOnEnter, proTagsSet } from 'utils'
-import { TibiaIcons } from 'assets/svgs'
+import {
+  BookIcon,
+  CharmsIcon,
+  DiamondIcon,
+  GoblinIcon,
+  MagicIcon,
+  StarIcon,
+  TibiaIcons,
+} from 'assets/svgs'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useAuctions } from '../../contexts/useAuctions'
 import useFilterServers from './useFilterServers'
@@ -729,7 +739,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label="Boss points"
+            label={
+              <span>
+                <GoblinIcon
+                  className="fill-onSurface inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -1px' }}
+                />{' '}
+                Boss Points
+              </span>
+            }
+            aria-label="Boss Points"
             value={bossPoints}
             onChange={setBossPoints}
             placeholder="0"
@@ -740,14 +759,28 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label={i18n.labels.tcInvested}
+            label={
+              <span>
+                <Image
+                  src={tibiaCoinSrc}
+                  alt="Tibia Coin"
+                  unoptimized
+                  width={12}
+                  height={12}
+                  className="pixelated mr-1"
+                  style={{ translate: '0 2px' }}
+                />
+                {i18n.labels.tcInvested}
+              </span>
+            }
+            aria-label={i18n.labels.tcInvested}
             value={tcInvested}
             onChange={setTcInvested}
             placeholder="0"
             alwaysValid
             disabled={!isPro}
             className={clsx(
-              'w-32',
+              'w-36',
               isPro ? 'child:text-rare child:font-bold' : 'mb-1',
             )}
           />
@@ -758,7 +791,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <S.InputWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
-              label="Imbuements"
+              label={
+                <span>
+                  <MagicIcon
+                    className="fill-onSurface mr-px inline-block h-4 w-4 align-middle"
+                    style={{ translate: '0 -3px' }}
+                  />{' '}
+                  Imbuements
+                </span>
+              }
+              aria-label="Imbuements"
               aria-controls="imbuements-list"
               placeholder={i18n.placeholders.imbuements}
               itemList={availableImbuementOptions}
@@ -812,7 +854,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <S.InputWrapper style={{ marginBottom: 0 }}>
             <S.AutocompleteInput
               id="charms-input"
-              label="Charms"
+              label={
+                <span>
+                  <CharmsIcon
+                    className="fill-onSurface inline-block h-4 w-4 align-middle"
+                    style={{ translate: '0 -1px' }}
+                  />{' '}
+                  Charms
+                </span>
+              }
+              aria-label="Charms"
               aria-controls="charms-list"
               placeholder={i18n.placeholders.charms}
               itemList={availableCharmOptions}
@@ -895,7 +946,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         <FilterGroup className="grid gap-4">
           <S.AutocompleteInput
             id="gems-input"
-            label="Supreme Gems"
+            label={
+              <span>
+                <DiamondIcon
+                  className="fill-onSurface inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -1px' }}
+                />{' '}
+                Supreme Gems
+              </span>
+            }
+            aria-label="Supreme Gems"
             aria-controls="gems-list"
             placeholder={i18n.placeholders.gems}
             itemList={availableGemsOptions}
@@ -940,7 +1000,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
         <FilterGroup>
           <S.AutocompleteInput
             id="quest-input"
-            label="Quests"
+            label={
+              <span>
+                <BookIcon
+                  className="fill-onSurface inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -1px' }}
+                />{' '}
+                Quests
+              </span>
+            }
+            aria-label="Quests"
             aria-controls="quest-list"
             placeholder={i18n.placeholders.quests}
             style={{ marginBottom: 12 }}
@@ -974,12 +1043,21 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label="Achievement points"
+            label={
+              <span>
+                <StarIcon
+                  className="fill-onSurface -mr-px inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -3px' }}
+                />{' '}
+                Achievement points
+              </span>
+            }
+            aria-label="Achievement points"
             value={achievementPoints}
             onChange={setAchievementPoints}
             placeholder="0"
             alwaysValid
-            className="w-32"
+            className="w-36"
           />
         </FilterGroup>
 
