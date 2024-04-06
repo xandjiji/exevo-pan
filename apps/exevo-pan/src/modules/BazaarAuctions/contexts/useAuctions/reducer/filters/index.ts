@@ -45,9 +45,9 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
 
     case 'TOGGLE_VOCATION': {
       const nextVocation = toggleSet(state.filterState.vocation, action.value)
-      const nextState = {
+      const nextState: typeof state = {
         ...state,
-        filterState: { ...state.filterState, nextVocation },
+        filterState: { ...state.filterState, vocation: nextVocation },
       }
 
       if (nextVocation.has(vocation.VOCATION_IDS.NONE)) {
@@ -72,7 +72,7 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
         action.value,
       )
 
-      const nextState = {
+      const nextState: typeof state = {
         ...state,
         filterState: { ...state.filterState, greaterGemsSet },
       }
