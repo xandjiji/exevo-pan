@@ -1,7 +1,8 @@
 export const encode = {
   BooleanSet: (set: Set<boolean>): string => [...set].join(','),
   NumberSet: (set: Set<number>): string => [...set].join(','),
-  StringSet: (set: Set<string>): string => [...set].join(','),
+  StringSet: (set: Set<string>): string =>
+    [...set].map(encodeURIComponent).join(','),
 }
 
 const decodeBoolean = (encodedValue: string): boolean => encodedValue === 'true'
