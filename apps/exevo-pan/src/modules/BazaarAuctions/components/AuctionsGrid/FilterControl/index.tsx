@@ -3,9 +3,9 @@ import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defa
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 import { useTranslations } from 'contexts/useTranslation'
 import { Menu } from 'components/Organisms'
-import { Text, Checkbox } from 'components/Atoms'
+import { Checkbox, Text } from 'components/Atoms'
 import { NewIcon, PapyrusIcon, StarIcon } from 'assets/svgs'
-import { formatNumberWithCommas, capitalizeFirstLetter } from 'utils'
+import { capitalizeFirstLetter, formatNumberWithCommas } from 'utils'
 import { useDrawerFields } from '../../../contexts/useDrawerFields'
 import { useAuctions } from '../../../contexts/useAuctions'
 import { useNotDefault } from './useNotDefault'
@@ -75,11 +75,7 @@ const FilterControl = ({
             return (
               <S.Chip
                 onClose={() =>
-                  dispatch({
-                    type: 'TOGGLE_FILTER_SET',
-                    key: 'vocation',
-                    value: vocationId,
-                  })
+                  dispatch({ type: 'TOGGLE_VOCATION', value: vocationId })
                 }
               >
                 {Icons.Vocations[vocationName]()}
@@ -432,6 +428,16 @@ const FilterControl = ({
               </S.Chip>
             ))
           )}
+
+          {[...filterState.greaterGemsSet].map((gem) => (
+            <S.Chip
+              onClose={() =>
+                dispatch({ type: 'TOGGLE_SUPREME_GEM', value: gem })
+              }
+            >
+              💎 {gem}
+            </S.Chip>
+          ))}
 
           {[...filterState.questSet].map((quest) => (
             <S.Chip
