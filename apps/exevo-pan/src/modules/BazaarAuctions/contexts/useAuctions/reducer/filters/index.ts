@@ -1,6 +1,9 @@
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
-import { sharedGreaterGems } from 'data-dictionary/dist/dictionaries/gems'
+import {
+  sharedGreaterGems,
+  vocationGreaterGems,
+} from 'data-dictionary/dist/dictionaries/gems'
 import { countActiveFilters, resetPagination } from '../utils'
 import { Reducer } from '../types'
 import { FilterAction } from './types'
@@ -84,25 +87,27 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
       // we should infer the vocation:
       const nextVocation = new Set<number>([])
       if (
-        greaterGems.knight[
-          vocationSpecificGem as keyof typeof greaterGems.knight
+        vocationGreaterGems.knight[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.knight
         ]
       ) {
         nextVocation.add(vocation.VOCATION_IDS.KNIGHT)
       } else if (
-        greaterGems.paladin[
-          vocationSpecificGem as keyof typeof greaterGems.paladin
+        vocationGreaterGems.paladin[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.paladin
         ]
       ) {
         nextVocation.add(vocation.VOCATION_IDS.PALADIN)
       } else if (
-        greaterGems.sorcerer[
-          vocationSpecificGem as keyof typeof greaterGems.sorcerer
+        vocationGreaterGems.sorcerer[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.sorcerer
         ]
       ) {
         nextVocation.add(vocation.VOCATION_IDS.SORCERER)
       } else if (
-        greaterGems.druid[vocationSpecificGem as keyof typeof greaterGems.druid]
+        vocationGreaterGems.druid[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.druid
+        ]
       ) {
         nextVocation.add(vocation.VOCATION_IDS.DRUID)
       }
