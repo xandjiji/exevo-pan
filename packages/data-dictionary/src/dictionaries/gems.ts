@@ -17,7 +17,16 @@
 //   return { names, tokens }
 // }
 
-export const greaterGems = {
+export const sharedGreaterGems = {
+  '+1.5% Critical Extra Damage': '+1.5% Critical Extra Damage',
+  '+0.25% Dodge': '+0.25% Dodge',
+  '+1.2% Life Leech': '+1.2% Life Leech',
+  '+0.4% Mana Leech': '+0.4% Mana Leech',
+  'Revelation Mastery (+150 Gift of Life)':
+    'Revelation Mastery (+150 Gift of Life)',
+}
+
+export const vocationGreaterGems = {
   knight: {
     'Revelation Mastery (+150 Avatar of Steel)':
       'Revelation Mastery (+150 Avatar of Steel)',
@@ -25,8 +34,6 @@ export const greaterGems = {
       'Revelation Mastery (+150 Combat Mastery)',
     "Revelation Mastery (+150 Executioner's Throw)":
       "Revelation Mastery (+150 Executioner's Throw)",
-    'Revelation Mastery (+150 Gift of Life)':
-      'Revelation Mastery (+150 Gift of Life)',
     'Aug. Annihilation (+8% Critical Extra Damage)':
       'Aug. Annihilation (+8% Critical Extra Damage)',
     'Aug. Annihilation (Damage Increase)':
@@ -55,18 +62,12 @@ export const greaterGems = {
       'Aug. Groundshaker (+8% Critical Extra Damage)',
     'Aug. Groundshaker (Damage Increase)':
       'Aug. Groundshaker (Damage Increase)',
-    '+1.5% Critical Extra Damage': '+1.5% Critical Extra Damage',
-    '+0.25% Dodge': '+0.25% Dodge',
-    '+1.2% Life Leech': '+1.2% Life Leech',
-    '+0.4% Mana Leech': '+0.4% Mana Leech',
   },
   druid: {
     'Revelation Mastery (+150 Avatar of Nature)':
       'Revelation Mastery (+150 Avatar of Nature)',
     'Revelation Mastery (+150 Blessing of the Grove)':
       'Revelation Mastery (+150 Blessing of the Grove)',
-    'Revelation Mastery (+150 Gift of Life)':
-      'Revelation Mastery (+150 Gift of Life)',
     'Revelation Mastery (+150 Twin Bursts)':
       'Revelation Mastery (+150 Twin Bursts)',
     'Aug. Avatar of Nature (-300s Cooldown)':
@@ -96,10 +97,6 @@ export const greaterGems = {
     'Aug. Terra Wave (Damage Increase)': 'Aug. Terra Wave (Damage Increase)',
     'Aug. Ultimate Healing (Healing Increase)':
       'Aug. Ultimate Healing (Healing Increase)',
-    '+1.5% Critical Extra Damage': '+1.5% Critical Extra Damage',
-    '+0.25% Dodge': '+0.25% Dodge',
-    '+1.2% Life Leech': '+1.2% Life Leech',
-    '+0.4% Mana Leech': '+0.4% Mana Leech',
   },
   sorcerer: {
     'Revelation Mastery (+150 Avatar of Storm)':
@@ -108,8 +105,6 @@ export const greaterGems = {
       'Revelation Mastery (+150 Beam Mastery)',
     'Revelation Mastery (+150 Drain Body)':
       'Revelation Mastery (+150 Drain Body)',
-    'Revelation Mastery (+150 Gift of Life)':
-      'Revelation Mastery (+150 Gift of Life)',
     'Aug. Avatar of Storm (-300s Cooldown)':
       'Aug. Avatar of Storm (-300s Cooldown)',
     'Aug. Energy Wave (+8% Critical Extra Damage)':
@@ -137,10 +132,6 @@ export const greaterGems = {
       'Aug. Rage of the Skies (Damage Increase)',
     'Aug. Ultimate Healing (Healing Increase)':
       'Aug. Ultimate Healing (Healing Increase)',
-    '+1.5% Critical Extra Damage': '+1.5% Critical Extra Damage',
-    '+0.25% Dodge': '+0.25% Dodge',
-    '+1.2% Life Leech': '+1.2% Life Leech',
-    '+0.4% Mana Leech': '+0.4% Mana Leech',
   },
   paladin: {
     'Revelation Mastery (+150 Avatar of Light)':
@@ -149,8 +140,6 @@ export const greaterGems = {
       'Revelation Mastery (+150 Divine Empowerment)',
     'Revelation Mastery (+150 Divine Grenade)':
       'Revelation Mastery (+150 Divine Grenade)',
-    'Revelation Mastery (+150 Gift of Life)':
-      'Revelation Mastery (+150 Gift of Life)',
     'Aug. Avatar of Light (-300s Cooldown)':
       'Aug. Avatar of Light (-300s Cooldown)',
     'Aug. Divine Caldera (+8% Critical Extra Damage)':
@@ -178,9 +167,5 @@ export const greaterGems = {
       'Aug. Strong Ethereal Spear (+8% Critical Extra Damage)',
     'Aug. Strong Ethereal Spear (Damage Increase)':
       'Aug. Strong Ethereal Spear (Damage Increase)',
-    '+1.5% Critical Extra Damage': '+1.5% Critical Extra Damage',
-    '+0.25% Dodge': '+0.25% Dodge',
-    '+1.2% Life Leech': '+1.2% Life Leech',
-    '+0.4% Mana Leech': '+0.4% Mana Leech',
   },
 }

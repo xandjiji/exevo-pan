@@ -1,38 +1,31 @@
 import { useMemo } from 'react'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
 
-import { greaterGems } from 'data-dictionary/dist/dictionaries/gems'
+import {
+  sharedGreaterGems,
+  vocationGreaterGems,
+} from 'data-dictionary/dist/dictionaries/gems'
 
 const buildOption = (value: string): Option => ({ name: value, value })
 
-const sharedGems = [
-  greaterGems.knight['+1.5% Critical Extra Damage'],
-  greaterGems.knight['+0.25% Dodge'],
-  greaterGems.knight['+1.2% Life Leech'],
-  greaterGems.knight['+0.4% Mana Leech'],
-]
-
-const sharedSet = new Set(sharedGems)
+const sharedGems = Object.values(sharedGreaterGems)
 
 const allOptions = [
   ...new Set([
     ...sharedGems,
-    ...Object.keys(greaterGems.knight),
-    ...Object.keys(greaterGems.paladin),
-    ...Object.keys(greaterGems.sorcerer),
-    ...Object.keys(greaterGems.druid),
+    ...Object.keys(vocationGreaterGems.knight),
+    ...Object.keys(vocationGreaterGems.paladin),
+    ...Object.keys(vocationGreaterGems.sorcerer),
+    ...Object.keys(vocationGreaterGems.druid),
   ]),
 ].map(buildOption)
 
-const toVocationOption = (gems: string[]) =>
-  gems.filter((gem) => !sharedSet.has(gem)).map(buildOption)
-
 const vocationGemOptions = {
   rook: [],
-  knight: toVocationOption(Object.keys(greaterGems.knight)),
-  paladin: toVocationOption(Object.keys(greaterGems.paladin)),
-  sorcerer: toVocationOption(Object.keys(greaterGems.sorcerer)),
-  druid: toVocationOption(Object.keys(greaterGems.druid)),
+  knight: Object.keys(vocationGreaterGems.knight).map(buildOption),
+  paladin: Object.keys(vocationGreaterGems.paladin).map(buildOption),
+  sorcerer: Object.keys(vocationGreaterGems.sorcerer).map(buildOption),
+  druid: Object.keys(vocationGreaterGems.druid).map(buildOption),
 }
 
 export const useGemOptions = (vocationSet: FilterOptions['vocation']) =>

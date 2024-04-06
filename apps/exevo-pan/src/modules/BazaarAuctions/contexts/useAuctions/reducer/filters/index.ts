@@ -1,17 +1,12 @@
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
-import { greaterGems } from 'data-dictionary/dist/dictionaries/gems'
+import { sharedGreaterGems } from 'data-dictionary/dist/dictionaries/gems'
 import { countActiveFilters, resetPagination } from '../utils'
 import { Reducer } from '../types'
 import { FilterAction } from './types'
 import { toggleSet } from './utils'
 
-const sharedGems = new Set([
-  greaterGems.knight['+0.25% Dodge'],
-  greaterGems.knight['+0.4% Mana Leech'],
-  greaterGems.knight['+1.2% Life Leech'],
-  greaterGems.knight['+1.5% Critical Extra Damage'],
-])
+const sharedGems = new Set(Object.values(sharedGreaterGems))
 
 const FilterReducer: Reducer<FilterAction> = (state, action) => {
   switch (action.type) {
