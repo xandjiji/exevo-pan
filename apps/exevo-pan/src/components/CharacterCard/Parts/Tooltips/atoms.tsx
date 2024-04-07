@@ -4,6 +4,7 @@ import clsx from 'clsx'
 import {
   BookIcon,
   CharmsIcon,
+  DiamondIcon,
   GoblinIcon,
   MagicIcon,
   PeopleIcon,
@@ -40,4 +41,5 @@ export const Icons: Record<string, React.FC<JSX.IntrinsicElements['svg']>> = {
   Hireling: (args) => <Icon icon={<PeopleIcon />} {...args} />,
   Achievements: (args) => <Icon icon={<StarIcon />} {...args} />,
   Boss: (args) => <Icon icon={<GoblinIcon />} {...args} />,
+  Gem: (args) => <Icon icon={<DiamondIcon />} {...args} />,
 }

@@ -39,4 +39,6 @@ declare interface FilterOptions {
   hireling: boolean
   transferAvailable: boolean
   biddedOnly: boolean
+  greaterGemsSet: Set<string>
+  greaterGemCount: number
 }

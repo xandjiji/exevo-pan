@@ -88,7 +88,12 @@ export const TibiaTradeBanner = ({
         })}
       </p>
 
-      <div className="custom-scrollbar -mb-2 flex w-full gap-4 overflow-auto pb-2">
+      <div className="custom-scrollbar relative -mb-2 flex w-full gap-4 overflow-auto pb-2">
+        <div
+          className="z-1 from-background pointer-events-none absolute top-0 right-0 w-8 bg-gradient-to-l to-transparent"
+          style={{ height: 'calc(100% - 6px)' }}
+        />
+
         {items.map((item, idx) => (
           // eslint-disable-next-line react/no-array-index-key
           <Item key={idx} item={item} />

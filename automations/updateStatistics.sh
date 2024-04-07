@@ -3,7 +3,7 @@
 cd ~/exevo-pan/apps/bazaar-scraper/
 yarn update:statistics
 
-cp ~/exevo-pan/apps/bazaar-scraper/Output/HistoryStatistics.json ~/exevo-pan/static
+cp --verbose ~/exevo-pan/apps/bazaar-scraper/Output/HistoryStatistics.json ~/exevo-pan/static
 
 cd ~/exevo-pan
 yarn deploy:static

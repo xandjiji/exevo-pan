@@ -217,6 +217,17 @@ export const filterSchema: SchemaCodec<FilterOptions> = {
     defaultValue: DEFAULT_FILTER_OPTIONS.rareNick,
     decode: codecs.decode.Boolean,
   },
+  greaterGemCount: {
+    urlKey: 'greaterGemCount',
+    defaultValue: DEFAULT_FILTER_OPTIONS.greaterGemCount,
+    decode: codecs.decode.Number,
+  },
+  greaterGemsSet: {
+    urlKey: 'greaterGemSet',
+    defaultValue: DEFAULT_FILTER_OPTIONS.greaterGemsSet,
+    encode: codecs.encode.StringSet,
+    decode: codecs.decode.StringSet,
+  },
 }
 
 export const serializeFilter = buildFromSchema.serializer(filterSchema)

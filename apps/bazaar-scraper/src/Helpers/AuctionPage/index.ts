@@ -357,6 +357,45 @@ export default class AuctionPage {
     return [...achievementSet]
   }
 
+  gemCount($: CheerioAPI) {
+    const gems = $('#RevealedGems .Gem')
+
+    let lesser = 0
+    let regular = 0
+    let greater = 0
+    gems.each((_, element) => {
+      const title = cheerio(element).attr('title')
+
+      if (!title) return
+      if (title.includes('Greater')) {
+        greater += 1
+      } else if (title.includes('Lesser')) {
+        lesser += 1
+      } else {
+        regular += 1
+      }
+    })
+
+    return { lesser, regular, greater }
+  }
+
+  greaterGems($: CheerioAPI): string[] {
+    const gems = $(
+      '#RevealedGems td:nth-child(2) .ModEffectRow .ModIconCharBazaarSupremeMod + span',
+    )
+
+    const greaterGemList = new Set<string>([])
+    gems.each((_, element) => {
+      let detail = cheerio(element.children[2]).text()
+      if (detail) {
+        detail = ` (${detail})`
+      }
+      greaterGemList.add(`${cheerio(element.children[0]).text()}${detail}`)
+    })
+
+    return [...greaterGemList].sort()
+  }
+
   storeFirstPage($: CheerioAPI): CharacterItem[] {
     const firstPage = $('#StoreItemSummary .TableContent tbody .BlockPage')
     const html = firstPage.html()
@@ -437,6 +476,8 @@ export default class AuctionPage {
         ...this.allCharmPoints($),
         expansion: this.charmExpansion($),
       },
+      gems: this.gemCount($),
+      greaterGems: this.greaterGems($),
     }
 
     characterObject.tcInvested = totalCharacterInvestment(characterObject)

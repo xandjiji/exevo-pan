@@ -2,19 +2,19 @@ import * as faker from 'faker'
 import {
   charm,
   imbuement,
+  mount,
   quest,
   rareAchievement,
-  mount,
-  storeMount,
   store,
+  storeMount,
   tag,
 } from 'data-dictionary/dist/dictionaries'
-import { auctions } from '../../constants'
+import { auctions, gems } from '../../constants'
 import {
-  samplesFrom,
+  randomArrayFrom,
   randomChance,
   randomRange,
-  randomArrayFrom,
+  samplesFrom,
 } from '../../utils'
 import { randomServerId } from '../serverMaker'
 import {
@@ -70,9 +70,15 @@ const randomHirelingsInfo = (): HirelingsInfo => {
   }
 }
 
+const randomGemCount = () => ({
+  lesser: faker.datatype.number({ min: 0, max: gems.length }),
+  regular: faker.datatype.number({ min: 0, max: gems.length }),
+  greater: faker.datatype.number({ min: 0, max: gems.length }),
+})
+
 export const randomCharacter = (): PartialCharacterObject => {
   const sex = faker.datatype.boolean()
-
+  const gemCount = randomGemCount()
   return {
     id: randomAuctionId(),
     nickname: `${faker.name.firstName()} ${faker.name.lastName()}`,
@@ -113,5 +119,7 @@ export const randomCharacter = (): PartialCharacterObject => {
     huntingSlot: faker.datatype.boolean(),
     charmInfo: randomCharmInfo(),
     hirelings: randomHirelingsInfo(),
+    gems: gemCount,
+    greaterGems: samplesFrom(gems, gemCount.greater),
   }
 }

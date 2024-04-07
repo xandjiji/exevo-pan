@@ -68,6 +68,8 @@ declare interface CharacterObject {
   preySlot: boolean
   huntingSlot: boolean
   charmInfo: CharmInfo
+  gems: { lesser: number; regular: number; greater: number }
+  greaterGems: string[]
 }
 
 declare type PartialCharacterObject = Omit<CharacterObject, 'serverData'>

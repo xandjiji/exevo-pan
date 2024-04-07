@@ -3,6 +3,8 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
+import Image from 'next/image'
+import tibiaCoinSrc from 'assets/tibiacoin.png'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { servers } from 'data-dictionary/dist/dictionaries/servers'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
@@ -16,7 +18,15 @@ import {
 } from 'components/Atoms'
 import { InfoTooltip, Tooltip } from 'components/Organisms'
 import { blurOnEnter, proTagsSet } from 'utils'
-import { TibiaIcons } from 'assets/svgs'
+import {
+  BookIcon,
+  CharmsIcon,
+  DiamondIcon,
+  GoblinIcon,
+  MagicIcon,
+  StarIcon,
+  TibiaIcons,
+} from 'assets/svgs'
 import { useDrawerFields } from '../../contexts/useDrawerFields'
 import { useAuctions } from '../../contexts/useAuctions'
 import useFilterServers from './useFilterServers'
@@ -27,6 +37,7 @@ import FilterGroup from './FilterGroup'
 import NumberInput from './NumberInput'
 import SpritePicker from './SpritePicker'
 import OutfitControls from './OutfitControls'
+import { useGemOptions } from './useGemOptions'
 import * as S from './atoms'
 import { FilterDrawerProps } from './types'
 
@@ -126,6 +137,11 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
     controlledValue: filterState.achievementPoints,
   })
 
+  const [greaterGemCount, setGreaterGemCount] = useDebouncedFilter({
+    key: 'greaterGemCount',
+    controlledValue: filterState.greaterGemCount,
+  })
+
   const rareItems = useRareItemSet({
     rareItemData,
     currentFilterSet: filterState.auctionIds,
@@ -134,6 +150,31 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
       [],
     ),
   })
+
+  const availableImbuementOptions = useOptionsSet(
+    imbuementOptions,
+    filterState.imbuementsSet,
+  )
+
+  const availableCharmOptions = useOptionsSet(
+    charmOptions,
+    filterState.charmsSet,
+  )
+
+  const availableGemsOptions = useOptionsSet(
+    useGemOptions(filterState.vocation),
+    filterState.greaterGemsSet,
+  )
+
+  const availableQuestOptions = useOptionsSet(
+    questOptions,
+    filterState.questSet,
+  )
+
+  const availableAchievementOptions = useOptionsSet(
+    achievementOptions,
+    filterState.achievementSet,
+  )
 
   const sexDirectory = filterState.sex ? 'female' : 'male'
   const isFilterReset = activeFilterCount === 0
@@ -184,11 +225,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             <S.IconChip
               overrideStatus={filterState.vocation.has(VOCATION_IDS.NONE)}
               onClick={() =>
-                dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
-                  value: VOCATION_IDS.NONE,
-                })
+                dispatch({ type: 'TOGGLE_VOCATION', value: VOCATION_IDS.NONE })
               }
             >
               <TibiaIcons.Rook />
@@ -198,8 +235,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.KNIGHT)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.KNIGHT,
                 })
               }
@@ -211,8 +247,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.PALADIN)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.PALADIN,
                 })
               }
@@ -224,8 +259,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.SORCERER)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.SORCERER,
                 })
               }
@@ -237,8 +271,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
               overrideStatus={filterState.vocation.has(VOCATION_IDS.DRUID)}
               onClick={() =>
                 dispatch({
-                  type: 'TOGGLE_FILTER_SET',
-                  key: 'vocation',
+                  type: 'TOGGLE_VOCATION',
                   value: VOCATION_IDS.DRUID,
                 })
               }
@@ -706,7 +739,16 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label="Boss points"
+            label={
+              <span>
+                <GoblinIcon
+                  className="fill-onSurface inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -1px' }}
+                />{' '}
+                Boss Points
+              </span>
+            }
+            aria-label="Boss Points"
             value={bossPoints}
             onChange={setBossPoints}
             placeholder="0"
@@ -717,14 +759,28 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label={i18n.labels.tcInvested}
+            label={
+              <span>
+                <Image
+                  src={tibiaCoinSrc}
+                  alt="Tibia Coin"
+                  unoptimized
+                  width={12}
+                  height={12}
+                  className="pixelated mr-1"
+                  style={{ translate: '0 2px' }}
+                />
+                {i18n.labels.tcInvested}
+              </span>
+            }
+            aria-label={i18n.labels.tcInvested}
             value={tcInvested}
             onChange={setTcInvested}
             placeholder="0"
             alwaysValid
             disabled={!isPro}
             className={clsx(
-              'w-32',
+              'w-36',
               isPro ? 'child:text-rare child:font-bold' : 'mb-1',
             )}
           />
@@ -735,13 +791,20 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <S.InputWrapper>
             <S.AutocompleteInput
               id="imbuements-input"
-              label="Imbuements"
+              label={
+                <span>
+                  <MagicIcon
+                    className="fill-onSurface mr-px inline-block h-4 w-4 align-middle"
+                    style={{ translate: '0 -3px' }}
+                  />{' '}
+                  Imbuements
+                </span>
+              }
+              aria-label="Imbuements"
               aria-controls="imbuements-list"
               placeholder={i18n.placeholders.imbuements}
-              itemList={useOptionsSet(
-                imbuementOptions,
-                filterState.imbuementsSet,
-              )}
+              itemList={availableImbuementOptions}
+              disabled={availableImbuementOptions.length === 0}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
                   dispatch({
@@ -791,10 +854,20 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <S.InputWrapper style={{ marginBottom: 0 }}>
             <S.AutocompleteInput
               id="charms-input"
-              label="Charms"
+              label={
+                <span>
+                  <CharmsIcon
+                    className="fill-onSurface inline-block h-4 w-4 align-middle"
+                    style={{ translate: '0 -1px' }}
+                  />{' '}
+                  Charms
+                </span>
+              }
+              aria-label="Charms"
               aria-controls="charms-list"
               placeholder={i18n.placeholders.charms}
-              itemList={useOptionsSet(charmOptions, filterState.charmsSet)}
+              itemList={availableCharmOptions}
+              disabled={availableCharmOptions.length === 0}
               onItemSelect={useCallback(
                 ({ value }: Option) =>
                   dispatch({
@@ -870,14 +943,79 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           </S.DoubleColumnInput>
         </FilterGroup>
 
+        <FilterGroup className="grid gap-4">
+          <S.AutocompleteInput
+            id="gems-input"
+            label={
+              <span>
+                <DiamondIcon
+                  className="fill-onSurface inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -1px' }}
+                />{' '}
+                Supreme Gems
+              </span>
+            }
+            aria-label="Supreme Gems"
+            aria-controls="gems-list"
+            placeholder={i18n.placeholders.gems}
+            itemList={availableGemsOptions}
+            disabled={availableGemsOptions.length === 0}
+            onItemSelect={useCallback(
+              ({ value }: Option) =>
+                dispatch({ type: 'TOGGLE_SUPREME_GEM', value }),
+              [],
+            )}
+            onKeyPress={blurOnEnter}
+            enterKeyHint="done"
+            className="!max-w-[340px]"
+          />
+
+          <>
+            {filterState.greaterGemsSet.size > 0 && (
+              <S.ChipWrapper id="gems-list">
+                {[...filterState.greaterGemsSet].map((gem) => (
+                  <Chip
+                    key={gem}
+                    onClose={() =>
+                      dispatch({ type: 'TOGGLE_SUPREME_GEM', value: gem })
+                    }
+                  >
+                    {gem}
+                  </Chip>
+                ))}
+              </S.ChipWrapper>
+            )}
+          </>
+
+          <NumericInput
+            label="Min Greater Gems"
+            value={greaterGemCount}
+            onChange={setGreaterGemCount}
+            placeholder="0"
+            alwaysValid
+            className="w-28"
+            step={1}
+          />
+        </FilterGroup>
+
         <FilterGroup>
           <S.AutocompleteInput
             id="quest-input"
-            label="Quests"
+            label={
+              <span>
+                <BookIcon
+                  className="fill-onSurface inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -1px' }}
+                />{' '}
+                Quests
+              </span>
+            }
+            aria-label="Quests"
             aria-controls="quest-list"
             placeholder={i18n.placeholders.quests}
             style={{ marginBottom: 12 }}
-            itemList={useOptionsSet(questOptions, filterState.questSet)}
+            itemList={availableQuestOptions}
+            disabled={availableQuestOptions.length === 0}
             onItemSelect={useCallback(
               ({ value }: Option) =>
                 dispatch({ type: 'TOGGLE_FILTER_SET', key: 'questSet', value }),
@@ -906,12 +1044,21 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
 
         <FilterGroup>
           <NumericInput
-            label="Achievement points"
+            label={
+              <span>
+                <StarIcon
+                  className="fill-onSurface -mr-px inline-block h-4 w-4 align-middle"
+                  style={{ translate: '0 -3px' }}
+                />{' '}
+                Achievement points
+              </span>
+            }
+            aria-label="Achievement points"
             value={achievementPoints}
             onChange={setAchievementPoints}
             placeholder="0"
             alwaysValid
-            className="w-32"
+            className="w-36"
           />
         </FilterGroup>
 
@@ -922,10 +1069,8 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             aria-controls="achievement-list"
             placeholder={i18n.placeholders.achievements}
             style={{ marginBottom: 12 }}
-            itemList={useOptionsSet(
-              achievementOptions,
-              filterState.achievementSet,
-            )}
+            itemList={availableAchievementOptions}
+            disabled={availableAchievementOptions.length === 0}
             onItemSelect={useCallback(
               ({ value }: Option) =>
                 dispatch({
@@ -976,7 +1121,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
                 aria-controls="rare-items-list"
                 placeholder={i18n.placeholders.rareItems}
                 itemList={rareItems.itemList}
-                disabled={!isPro}
+                disabled={!isPro || rareItems.itemList.length === 0}
                 onItemSelect={
                   isPro
                     ? ({ name }) => rareItems.action.toggle(name)

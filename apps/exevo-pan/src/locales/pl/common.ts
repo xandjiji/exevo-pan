@@ -169,6 +169,7 @@ export default defaultComposer(defaultTranslations, {
         imbuements: 'Lista Imbuementów',
         charms: 'Lista Charmów',
         quests: 'Lista Questów',
+        supremeGems: 'Available supreme gem modifiers',
       },
       quests: {
         utilitary: 'Użytkowe',

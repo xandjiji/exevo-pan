@@ -1,8 +1,15 @@
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
+import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
+import {
+  sharedGreaterGems,
+  vocationGreaterGems,
+} from 'data-dictionary/dist/dictionaries/gems'
 import { countActiveFilters, resetPagination } from '../utils'
 import { Reducer } from '../types'
 import { FilterAction } from './types'
 import { toggleSet } from './utils'
+
+const sharedGems = new Set(Object.values(sharedGreaterGems))
 
 const FilterReducer: Reducer<FilterAction> = (state, action) => {
   switch (action.type) {
@@ -35,6 +42,80 @@ const FilterReducer: Reducer<FilterAction> = (state, action) => {
           [action.key]: toggleSet(state.filterState[action.key], action.value),
         },
       }
+
+    case 'TOGGLE_VOCATION': {
+      const nextVocation = toggleSet(state.filterState.vocation, action.value)
+      const nextState: typeof state = {
+        ...state,
+        filterState: { ...state.filterState, vocation: nextVocation },
+      }
+
+      if (nextVocation.has(vocation.VOCATION_IDS.NONE)) {
+        nextState.filterState.greaterGemsSet = new Set([])
+        return nextState
+      }
+
+      if (nextVocation.size >= 2) {
+        nextState.filterState.greaterGemsSet = new Set(
+          [...nextState.filterState.greaterGemsSet].filter((gem) =>
+            sharedGems.has(gem),
+          ),
+        )
+      }
+
+      return nextState
+    }
+
+    case 'TOGGLE_SUPREME_GEM': {
+      const greaterGemsSet = toggleSet(
+        state.filterState.greaterGemsSet,
+        action.value,
+      )
+
+      const nextState: typeof state = {
+        ...state,
+        filterState: { ...state.filterState, greaterGemsSet },
+      }
+
+      if (greaterGemsSet.size === 0) return nextState
+
+      const gemsList = [...greaterGemsSet]
+      const vocationSpecificGem = gemsList.find((gem) => !sharedGems.has(gem))
+
+      if (!vocationSpecificGem) return nextState
+
+      // we should infer the vocation:
+      const nextVocation = new Set<number>([])
+      if (
+        vocationGreaterGems.knight[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.knight
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.KNIGHT)
+      } else if (
+        vocationGreaterGems.paladin[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.paladin
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.PALADIN)
+      } else if (
+        vocationGreaterGems.sorcerer[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.sorcerer
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.SORCERER)
+      } else if (
+        vocationGreaterGems.druid[
+          vocationSpecificGem as keyof typeof vocationGreaterGems.druid
+        ]
+      ) {
+        nextVocation.add(vocation.VOCATION_IDS.DRUID)
+      }
+
+      nextState.filterState.vocation = nextVocation
+
+      return nextState
+    }
 
     case 'TOGGLE_ALL_FILTER_SET_OPTION':
       return {
