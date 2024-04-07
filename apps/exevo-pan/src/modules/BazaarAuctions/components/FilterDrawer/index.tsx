@@ -967,6 +967,7 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
             )}
             onKeyPress={blurOnEnter}
             enterKeyHint="done"
+            className="!max-w-[340px]"
           />
 
           <>
