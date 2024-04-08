@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 import { ExevoPanIcon } from 'assets/svgs'
 
-export const Coupon = ({ coupon }: { coupon: string }) => (
+export default ({ coupon }: { coupon: string }) => (
   <div className="border-1 border-separator/60 flex items-center gap-4 rounded border-dashed py-3 px-4">
     <ExevoPanIcon width={60} height={60} className="shrink-0" />
 

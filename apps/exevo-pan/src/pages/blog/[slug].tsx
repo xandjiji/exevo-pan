@@ -1,16 +1,16 @@
-import { Post, Links, parseMarkdownSections } from 'modules/Blog'
+import { Links, parseMarkdownSections, Post } from 'modules/Blog'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useTranslations } from 'contexts/useTranslation'
 import dynamic from 'next/dynamic'
 import { serialize } from 'next-mdx-remote/serialize'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import matter from 'gray-matter'
-import { buildUrl, buildPageTitle, loadRawSrc } from 'utils'
+import { buildPageTitle, buildUrl, loadRawSrc } from 'utils'
 import Head from 'next/head'
 import { BlogClient, PreviewImageClient } from 'services'
 import { Main } from 'templates'
-import { routes, links } from 'Constants'
-import { common, blog } from 'locales'
+import { links, routes } from 'Constants'
+import { blog, common } from 'locales'
 
 const components = {
   ...Post.styles,
@@ -50,6 +50,7 @@ const components = {
     () => import('modules/Blog/components/Post/custom/SampleToast'),
   ),
   Pro: dynamic(() => import('modules/Blog/components/Post/custom/Pro')),
+  Coupon: dynamic(() => import('components/Atoms/Coupon')),
 }
 
 type Props = {
