@@ -927,10 +927,10 @@ export const updateCheckedBosses = authedProcedure
   .input(
     z.object({
       guildId: z.string(),
-      checkedAt: z.date(),
+      lastPull: z.date(),
     }),
   )
-  .query(async ({ ctx: { token }, input: { guildId, checkedAt } }) => {
+  .query(async ({ ctx: { token }, input: { guildId, lastPull } }) => {
     const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const requesterId = token.id
 
@@ -942,7 +942,7 @@ export const updateCheckedBosses = authedProcedure
 
     const result = await BossesClient.updateCheckedBosses({
       guildId,
-      checkedAt,
+      lastPull,
     })
 
     return result

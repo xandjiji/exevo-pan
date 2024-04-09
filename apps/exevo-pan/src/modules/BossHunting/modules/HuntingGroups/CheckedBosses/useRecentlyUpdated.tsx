@@ -10,14 +10,15 @@ type PullData = {
 }
 
 export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
-  const [lastPull, setLastPull] = useState(new Date())
+  const [lastCheckDate, setLastCheckDate] = useState(new Date(0))
 
   const [checkedBosses, setCheckedBosses] = useState(
     initialCheckedBosses.map((item) => ({ ...item, fresh: false })),
   )
 
+  console.log(lastCheckDate)
   return {
-    lastPull,
+    lastCheckDate,
     checkedBosses,
     onBossCheck: useCallback(
       ({ bossName, location }: { bossName: string; location?: string }) =>
@@ -30,30 +31,42 @@ export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
         ),
       [],
     ),
-    onFreshData: useCallback((freshData: PullData[]) => {
-      setLastPull(new Date())
+    onFreshData: useCallback(
+      (freshData: PullData[]) => {
+        let nextLastCheckDate = lastCheckDate
 
-      setCheckedBosses((prev) => {
-        const next = [...prev]
+        setCheckedBosses((prev) => {
+          const next = [...prev]
 
-        next.forEach((bossCheck) => {
-          bossCheck.fresh = false
+          next.forEach((bossCheck) => {
+            bossCheck.fresh = false
 
-          const updatedBossCheck = freshData.find(
-            ({ boss, location }) =>
-              boss === bossCheck.name && location === bossCheck.location,
-          )
+            const updatedBossCheck = freshData.find(
+              ({ boss, location }) =>
+                boss === bossCheck.name && location === bossCheck.location,
+            )
 
-          if (updatedBossCheck) {
-            bossCheck.lastSpawned = updatedBossCheck.lastSpawned ?? undefined
-            bossCheck.checkedAt = updatedBossCheck.checkedAt
-            bossCheck.fresh = true
-            bossCheck.checkedBy = 'Member'
-          }
+            if (updatedBossCheck) {
+              bossCheck.lastSpawned = updatedBossCheck.lastSpawned ?? undefined
+              bossCheck.checkedAt = updatedBossCheck.checkedAt
+              bossCheck.checkedBy = 'Member'
+              bossCheck.fresh = +lastCheckDate > 0
+            }
+
+            if (
+              bossCheck.checkedAt &&
+              bossCheck.checkedAt > nextLastCheckDate
+            ) {
+              nextLastCheckDate = bossCheck.checkedAt
+            }
+          })
+
+          return next
         })
 
-        return next
-      })
-    }, []),
+        setLastCheckDate(nextLastCheckDate)
+      },
+      [lastCheckDate],
+    ),
   }
 }

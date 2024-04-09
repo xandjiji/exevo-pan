@@ -91,11 +91,11 @@ const CheckedBosses = ({
   )
 
   const checkedTimeAgo = useTimeAgo()
-  const { lastPull, checkedBosses, onFreshData, onBossCheck } =
+  const { lastCheckDate, checkedBosses, onFreshData, onBossCheck } =
     useRecentlyUpdated(initialCheckedBosses)
 
   const pullChecks = trpc.updateCheckedBosses.useQuery(
-    { guildId, checkedAt: lastPull },
+    { guildId, lastPull: lastCheckDate },
     {
       enabled: isMember,
       initialData: initialCheckedBosses,

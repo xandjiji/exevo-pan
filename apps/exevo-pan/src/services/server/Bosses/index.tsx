@@ -89,13 +89,21 @@ export default class BossesClient {
 
   static async updateCheckedBosses({
     guildId,
-    checkedAt,
+    lastPull,
   }: {
     guildId: string
-    checkedAt: Date
+    lastPull: Date
   }) {
     return prisma.bossCheck.findMany({
-      where: { guildId, checkedAt: { gt: checkedAt } },
+      where: {
+        guildId,
+        OR: [
+          { checkedAt: { gte: lastPull } },
+          {
+            lastSpawned: { gte: lastPull },
+          },
+        ],
+      },
       select: {
         checkedAt: true,
         boss: true,
