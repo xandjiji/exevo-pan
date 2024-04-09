@@ -892,7 +892,7 @@ export const markCheckedBoss = authedProcedure
       }
 
       if (lastSpawned) {
-        const result = await prisma.$transaction([
+        await prisma.$transaction([
           prisma.bossCheck.upsert(upsertData),
           prisma.guildLogEntry.create({
             data: {
@@ -907,9 +907,9 @@ export const markCheckedBoss = authedProcedure
           }),
         ])
 
-        return result
+        return
       }
-      const result = await prisma.$transaction([
+      await prisma.$transaction([
         prisma.bossCheck.upsert(upsertData),
         prisma.bossCheckLog.create({
           data: {
@@ -920,32 +920,29 @@ export const markCheckedBoss = authedProcedure
           },
         }),
       ])
-
-      return result
     },
   )
 
-export const listCheckedBosses = authedProcedure
+export const updateCheckedBosses = authedProcedure
   .input(
     z.object({
       guildId: z.string(),
+      checkedAt: z.date(),
     }),
   )
-  .query(async ({ ctx: { token }, input: { guildId } }) => {
+  .query(async ({ ctx: { token }, input: { guildId, checkedAt } }) => {
     const EXEVO_PAN_ADMIN = token.role === 'ADMIN'
     const requesterId = token.id
-    const isPro = token.proStatus
 
-    const { guild } = await throwIfForbiddenGuildRequest({
+    await throwIfForbiddenGuildRequest({
       guildId,
       requesterId,
       EXEVO_PAN_ADMIN,
     })
 
-    const result = await BossesClient.fetchCheckedBosses({
+    const result = await BossesClient.updateCheckedBosses({
       guildId,
-      isPro,
-      server: guild.server,
+      checkedAt,
     })
 
     return result

@@ -1,24 +1,59 @@
-import { dequal } from 'dequal'
-import { useState, useRef, useCallback } from 'react'
+/* eslint-disable no-param-reassign */
+import { useCallback, useState } from 'react'
+
+type PullData = {
+  location: string
+  boss: string
+  checkedAt: Date
+  lastSpawned: Date | null
+  memberId: string
+}
 
 export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
-  const previousDataRef = useRef(initialCheckedBosses)
-  const [recentlyUpdatedBosses, setRecentlyUpdatedBosses] = useState<
-    { name: string; location: string }[]
-  >([])
+  const [lastPull, setLastPull] = useState(new Date())
+
+  const [checkedBosses, setCheckedBosses] = useState(
+    initialCheckedBosses.map((item) => ({ ...item, fresh: false })),
+  )
 
   return {
-    recentlyUpdatedBosses,
-    onFreshData: useCallback((freshData: CheckedBoss[]) => {
-      setRecentlyUpdatedBosses(
-        freshData
-          .filter(
-            (newData, entryIdx) =>
-              !dequal(newData, previousDataRef.current[entryIdx]),
+    lastPull,
+    checkedBosses,
+    onBossCheck: useCallback(
+      ({ bossName, location }: { bossName: string; location?: string }) =>
+        setCheckedBosses((prev) =>
+          prev.map((boss) =>
+            boss.name === bossName && boss.location === location
+              ? { ...boss, fresh: true, checkedAt: new Date() }
+              : boss,
+          ),
+        ),
+      [],
+    ),
+    onFreshData: useCallback((freshData: PullData[]) => {
+      setLastPull(new Date())
+
+      setCheckedBosses((prev) => {
+        const next = [...prev]
+
+        next.forEach((bossCheck) => {
+          bossCheck.fresh = false
+
+          const updatedBossCheck = freshData.find(
+            ({ boss, location }) =>
+              boss === bossCheck.name && location === bossCheck.location,
           )
-          .map(({ name, location }) => ({ name, location })),
-      )
-      previousDataRef.current = freshData
+
+          if (updatedBossCheck) {
+            bossCheck.lastSpawned = updatedBossCheck.lastSpawned ?? undefined
+            bossCheck.checkedAt = updatedBossCheck.checkedAt
+            bossCheck.fresh = true
+            bossCheck.checkedBy = 'Member'
+          }
+        })
+
+        return next
+      })
     }, []),
   }
 }

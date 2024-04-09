@@ -87,6 +87,24 @@ export default class BossesClient {
     return checkedBosses
   }
 
+  static async updateCheckedBosses({
+    guildId,
+    checkedAt,
+  }: {
+    guildId: string
+    checkedAt: Date
+  }) {
+    return prisma.bossCheck.findMany({
+      where: { guildId, checkedAt: { gt: checkedAt } },
+      select: {
+        checkedAt: true,
+        boss: true,
+        location: true,
+        lastSpawned: true,
+      },
+    })
+  }
+
   static async fetchAllFrozenBossCheckLogEntries({
     guildId,
     hasMemberPrivilege,

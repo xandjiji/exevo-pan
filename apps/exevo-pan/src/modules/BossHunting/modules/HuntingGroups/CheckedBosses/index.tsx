@@ -91,25 +91,23 @@ const CheckedBosses = ({
   )
 
   const checkedTimeAgo = useTimeAgo()
-  const { recentlyUpdatedBosses, onFreshData } =
+  const { lastPull, checkedBosses, onFreshData, onBossCheck } =
     useRecentlyUpdated(initialCheckedBosses)
 
-  const checkedBosses = trpc.listCheckedBosses.useQuery(
-    { guildId },
+  const pullChecks = trpc.updateCheckedBosses.useQuery(
+    { guildId, checkedAt: lastPull },
     {
       enabled: isMember,
       initialData: initialCheckedBosses,
-      refetchOnWindowFocus: true,
+      refetchOnWindowFocus: false,
       refetchInterval: MILLISECONDS_IN.MINUTE,
       onSuccess: onFreshData,
     },
   )
 
-  const checkedList = checkedBosses.data
-
   const transformedList = useMemo(
     () =>
-      checkedList.map((item) => {
+      checkedBosses.map((item) => {
         const manuallyMarkedAsNoChance = item.lastSpawned
           ? isFromSameServerSave(item.lastSpawned)
           : false
@@ -121,7 +119,7 @@ const CheckedBosses = ({
           manuallyMarkedAsNoChance,
         }
       }),
-    [checkedList, checkedTimeAgo],
+    [checkedBosses, checkedTimeAgo],
   )
 
   const blacklist = useMemo(
@@ -176,7 +174,7 @@ const CheckedBosses = ({
   const [loadingBossCheck, setLoadingBossCheck] =
     useState<{ boss: string; location: string }>()
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
-    onSuccess: () => checkedBosses.refetch(),
+    onMutate: ({ boss, location }) => onBossCheck({ bossName: boss, location }),
     onSettled: () => setLoadingBossCheck(undefined),
   })
 
@@ -210,7 +208,7 @@ const CheckedBosses = ({
     <section>
       <h4 className="mb-4 text-xl">
         {i18n.checkedBosses}{' '}
-        {checkedBosses.isFetching && (
+        {pullChecks.isFetching && (
           <div role="alert" className="loading-spinner ml-2 h-4 w-4" />
         )}
       </h4>
@@ -312,11 +310,7 @@ const CheckedBosses = ({
               premium={premiumBosses.set.has(name)}
               className={clsx(
                 !expanded && idx > 3 && 'lgr:flex hidden',
-                recentlyUpdatedBosses.find(
-                  (updatedBoss) =>
-                    updatedBoss.name === name &&
-                    updatedBoss.location === location,
-                ) && 'animate-zoomInAndOut z-2 relative',
+                boss.fresh && 'animate-zoomInAndOut z-2 relative',
               )}
               cornerElement={
                 <div className="ml-auto flex h-full flex-col items-end justify-between self-start">
