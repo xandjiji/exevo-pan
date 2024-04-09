@@ -99,7 +99,7 @@ const CheckedBosses = ({
     {
       enabled: isMember,
       initialData: initialCheckedBosses,
-      refetchOnWindowFocus: false,
+      refetchOnWindowFocus: true,
       refetchInterval: MILLISECONDS_IN.MINUTE,
       onSuccess: onFreshData,
     },
