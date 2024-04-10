@@ -881,13 +881,7 @@ export const markCheckedBoss = authedProcedure
             location,
           },
           update: { memberId: requesterMember.id },
-          select: {
-            boss: true,
-            location: true,
-            checkedAt: true,
-            memberId: true,
-            lastSpawned: true,
-          },
+          select: { location: true },
         }),
         prisma.bossCheckLog.create({
           data: {
@@ -896,6 +890,7 @@ export const markCheckedBoss = authedProcedure
             boss,
             location,
           },
+          select: { location: true },
         }),
       ])
 
@@ -956,13 +951,7 @@ export const markBossAsNoChance = authedProcedure
           location,
         },
         update: { memberId: requesterMember.id, lastSpawned },
-        select: {
-          boss: true,
-          location: true,
-          checkedAt: true,
-          lastSpawned: true,
-          memberId: true,
-        },
+        select: { location: true },
       }
 
       if (lastSpawned) {
@@ -978,6 +967,7 @@ export const markBossAsNoChance = authedProcedure
                 location,
               }),
             },
+            select: { type: true },
           }),
         ])
       } else {
