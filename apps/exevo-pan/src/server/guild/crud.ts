@@ -847,6 +847,64 @@ export const markCheckedBoss = authedProcedure
       guildId: z.string(),
       boss: z.string(),
       location: z.string().optional(),
+    }),
+  )
+  .mutation(
+    async ({ ctx: { token }, input: { guildId, boss, location = '' } }) => {
+      const userId = token.id
+
+      if (
+        !multipleSpawnLocationBosses.isNameAndLocationValid({
+          name: boss,
+          location,
+        })
+      ) {
+        throw new TRPCError({
+          code: 'BAD_REQUEST',
+          message: `Unexpected '${boss}' as a checked boss`,
+        })
+      }
+
+      const requesterMember = await findGuildMember({ guildId, userId })
+
+      const [updatedBoss] = await prisma.$transaction([
+        prisma.bossCheck.upsert({
+          where: { boss_guildId_location: { boss, guildId, location } },
+          create: {
+            guildId,
+            memberId: requesterMember.id,
+            boss,
+            location,
+          },
+          update: { memberId: requesterMember.id },
+          select: {
+            boss: true,
+            location: true,
+            checkedAt: true,
+            memberId: true,
+            lastSpawned: true,
+          },
+        }),
+        prisma.bossCheckLog.create({
+          data: {
+            guildId,
+            memberId: requesterMember.id,
+            boss,
+            location,
+          },
+        }),
+      ])
+
+      return updatedBoss
+    },
+  )
+
+export const markBossAsNoChance = authedProcedure
+  .input(
+    z.object({
+      guildId: z.string(),
+      boss: z.string(),
+      location: z.string().optional(),
       lastSpawned: z.date().nullish(),
     }),
   )
@@ -871,7 +929,7 @@ export const markCheckedBoss = authedProcedure
 
       const requesterMember = await findGuildMember({ guildId, userId })
 
-      if (lastSpawned && !can[requesterMember.role].markAsNoChance) {
+      if (!can[requesterMember.role].markAsNoChance) {
         throw new TRPCError({
           code: 'UNAUTHORIZED',
           message: 'Insufficient privileges to mark boss as no chance',
@@ -888,11 +946,17 @@ export const markCheckedBoss = authedProcedure
           location,
         },
         update: { memberId: requesterMember.id, lastSpawned },
-        include: { checkedBy: { select: { name: true } } },
+        select: {
+          boss: true,
+          location: true,
+          checkedAt: true,
+          lastSpawned: true,
+          memberId: true,
+        },
       }
 
       if (lastSpawned) {
-        await prisma.$transaction([
+        const [updatedBoss] = await prisma.$transaction([
           prisma.bossCheck.upsert(upsertData),
           prisma.guildLogEntry.create({
             data: {
@@ -907,19 +971,12 @@ export const markCheckedBoss = authedProcedure
           }),
         ])
 
-        return
+        return updatedBoss
       }
-      await prisma.$transaction([
-        prisma.bossCheck.upsert(upsertData),
-        prisma.bossCheckLog.create({
-          data: {
-            guildId,
-            memberId: requesterMember.id,
-            boss,
-            location,
-          },
-        }),
-      ])
+
+      const updatedBoss = await prisma.bossCheck.upsert(upsertData)
+
+      return updatedBoss
     },
   )
 

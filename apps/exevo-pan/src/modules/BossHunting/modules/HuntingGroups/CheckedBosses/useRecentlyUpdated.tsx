@@ -16,21 +16,9 @@ export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
     initialCheckedBosses.map((item) => ({ ...item, fresh: false })),
   )
 
-  console.log(lastCheckDate)
   return {
     lastCheckDate,
     checkedBosses,
-    onBossCheck: useCallback(
-      ({ bossName, location }: { bossName: string; location?: string }) =>
-        setCheckedBosses((prev) =>
-          prev.map((boss) =>
-            boss.name === bossName && boss.location === location
-              ? { ...boss, fresh: true, checkedAt: new Date() }
-              : boss,
-          ),
-        ),
-      [],
-    ),
     onFreshData: useCallback(
       (freshData: PullData[]) => {
         let nextLastCheckDate = lastCheckDate

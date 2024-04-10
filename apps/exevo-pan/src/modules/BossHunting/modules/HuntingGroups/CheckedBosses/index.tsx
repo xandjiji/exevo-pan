@@ -91,7 +91,7 @@ const CheckedBosses = ({
   )
 
   const checkedTimeAgo = useTimeAgo()
-  const { lastCheckDate, checkedBosses, onFreshData, onBossCheck } =
+  const { lastCheckDate, checkedBosses, onFreshData } =
     useRecentlyUpdated(initialCheckedBosses)
 
   const pullChecks = trpc.updateCheckedBosses.useQuery(
@@ -173,35 +173,54 @@ const CheckedBosses = ({
 
   const [loadingBossCheck, setLoadingBossCheck] =
     useState<{ boss: string; location: string }>()
+
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
-    onMutate: ({ boss, location }) => onBossCheck({ bossName: boss, location }),
+    onSuccess: (freshData) => onFreshData([freshData]),
     onSettled: () => setLoadingBossCheck(undefined),
   })
 
-  const markBoss = useCallback(
+  const checkBossAction = useCallback(
+    ({
+      boss,
+      location,
+    }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) => {
+      setLoadingBossCheck({ boss, location: location ?? '' })
+      toast.promise(markCheckedBoss.mutateAsync({ boss, guildId, location }), {
+        success: templateString(i18n.bossWasMarked, { boss }),
+        error: common.genericError,
+        loading: i18n.loading,
+      })
+    },
+    [common, i18n, markCheckedBoss],
+  )
+
+  const markBossAsNoChance = trpc.markBossAsNoChance.useMutation({
+    onSuccess: (freshData) => onFreshData([freshData]),
+    onSettled: () => setLoadingBossCheck(undefined),
+  })
+
+  const noChanceBossAction = useCallback(
     ({
       boss,
       location,
       lastSpawned = null,
-    }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) => {
+    }: Omit<TRPCRouteInputs['markBossAsNoChance'], 'guildId'>) => {
       setLoadingBossCheck({ boss, location: location ?? '' })
       toast.promise(
-        markCheckedBoss.mutateAsync({
+        markBossAsNoChance.mutateAsync({
           boss,
           guildId,
           location,
           lastSpawned,
         }),
         {
-          success: templateString(i18n.bossWasMarked, {
-            boss,
-          }),
+          success: templateString(i18n.bossWasMarked, { boss }),
           error: common.genericError,
           loading: i18n.loading,
         },
       )
     },
-    [common, i18n, markCheckedBoss],
+    [common, i18n, markBossAsNoChance],
   )
 
   return (
@@ -294,7 +313,7 @@ const CheckedBosses = ({
             checkedAt,
           } = boss
 
-          const checkAction = () => markBoss({ boss: name, location })
+          const checkAction = () => checkBossAction({ boss: name, location })
           const checkIsLoading = loadingBossCheck
             ? loadingBossCheck.boss === name &&
               loadingBossCheck.location === location
@@ -336,7 +355,7 @@ const CheckedBosses = ({
                           ? UndoIcon
                           : OutlineRemoveIcon,
                         onSelect: () =>
-                          markBoss({
+                          noChanceBossAction({
                             boss: name,
                             location,
                             lastSpawned: manuallyMarkedAsNoChance
