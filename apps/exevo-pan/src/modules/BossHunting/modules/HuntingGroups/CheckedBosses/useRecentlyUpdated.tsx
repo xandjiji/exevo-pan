@@ -1,5 +1,6 @@
 /* eslint-disable no-param-reassign */
 import { useCallback, useState } from 'react'
+import { useGuildData } from '../contexts/useGuildData'
 
 type PullData = {
   location: string
@@ -15,6 +16,8 @@ export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
   const [checkedBosses, setCheckedBosses] = useState(
     initialCheckedBosses.map((item) => ({ ...item, fresh: false })),
   )
+
+  const { members } = useGuildData()
 
   return {
     lastCheckDate,
@@ -37,7 +40,9 @@ export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
             if (updatedBossCheck) {
               bossCheck.lastSpawned = updatedBossCheck.lastSpawned ?? undefined
               bossCheck.checkedAt = updatedBossCheck.checkedAt
-              bossCheck.checkedBy = 'Member'
+              bossCheck.checkedBy =
+                members.find(({ id }) => id === updatedBossCheck.memberId)
+                  ?.name ?? 'Member'
               bossCheck.fresh = +lastCheckDate > 0
             }
 
@@ -54,7 +59,7 @@ export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
 
         setLastCheckDate(nextLastCheckDate)
       },
-      [lastCheckDate],
+      [lastCheckDate, members],
     ),
   }
 }
