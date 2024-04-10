@@ -869,7 +869,17 @@ export const markCheckedBoss = authedProcedure
         })
       }
 
-      const requesterMember = await findGuildMember({ guildId, userId })
+      const requesterMember = await prisma.guildMember.findUnique({
+        where: { guildId_userId: { guildId, userId } },
+        select: { id: true },
+      })
+
+      if (!requesterMember) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Guild member not found',
+        })
+      }
 
       await prisma.$transaction([
         prisma.bossCheck.upsert({
@@ -932,7 +942,17 @@ export const markBossAsNoChance = authedProcedure
         })
       }
 
-      const requesterMember = await findGuildMember({ guildId, userId })
+      const requesterMember = await prisma.guildMember.findUnique({
+        where: { guildId_userId: { guildId, userId } },
+        select: { id: true, role: true },
+      })
+
+      if (!requesterMember) {
+        throw new TRPCError({
+          code: 'NOT_FOUND',
+          message: 'Guild member not found',
+        })
+      }
 
       if (!can[requesterMember.role].markAsNoChance) {
         throw new TRPCError({
