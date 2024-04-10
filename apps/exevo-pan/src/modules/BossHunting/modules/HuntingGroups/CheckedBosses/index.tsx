@@ -102,6 +102,7 @@ const CheckedBosses = ({
       refetchOnWindowFocus: true,
       refetchInterval: MILLISECONDS_IN.MINUTE,
       onSuccess: onFreshData,
+      staleTime: MILLISECONDS_IN.MINUTE,
     },
   )
 
