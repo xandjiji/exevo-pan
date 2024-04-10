@@ -109,6 +109,7 @@ export default class BossesClient {
         boss: true,
         location: true,
         lastSpawned: true,
+        memberId: true,
       },
     })
   }

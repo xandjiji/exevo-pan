@@ -175,7 +175,7 @@ const CheckedBosses = ({
     useState<{ boss: string; location: string }>()
 
   const markCheckedBoss = trpc.markCheckedBoss.useMutation({
-    onSuccess: (freshData) => onFreshData([freshData]),
+    onSuccess: onFreshData,
     onSettled: () => setLoadingBossCheck(undefined),
   })
 
@@ -185,17 +185,25 @@ const CheckedBosses = ({
       location,
     }: Omit<TRPCRouteInputs['markCheckedBoss'], 'guildId'>) => {
       setLoadingBossCheck({ boss, location: location ?? '' })
-      toast.promise(markCheckedBoss.mutateAsync({ boss, guildId, location }), {
-        success: templateString(i18n.bossWasMarked, { boss }),
-        error: common.genericError,
-        loading: i18n.loading,
-      })
+      toast.promise(
+        markCheckedBoss.mutateAsync({
+          boss,
+          guildId,
+          location,
+          lastPull: lastCheckDate,
+        }),
+        {
+          success: templateString(i18n.bossWasMarked, { boss }),
+          error: common.genericError,
+          loading: i18n.loading,
+        },
+      )
     },
-    [common, i18n, markCheckedBoss],
+    [common, i18n, markCheckedBoss, lastCheckDate],
   )
 
   const markBossAsNoChance = trpc.markBossAsNoChance.useMutation({
-    onSuccess: (freshData) => onFreshData([freshData]),
+    onSuccess: onFreshData,
     onSettled: () => setLoadingBossCheck(undefined),
   })
 
@@ -212,6 +220,7 @@ const CheckedBosses = ({
           guildId,
           location,
           lastSpawned,
+          lastPull: lastCheckDate,
         }),
         {
           success: templateString(i18n.bossWasMarked, { boss }),
@@ -220,7 +229,7 @@ const CheckedBosses = ({
         },
       )
     },
-    [common, i18n, markBossAsNoChance],
+    [common, i18n, markBossAsNoChance, lastCheckDate],
   )
 
   return (
@@ -313,7 +322,8 @@ const CheckedBosses = ({
             checkedAt,
           } = boss
 
-          const checkAction = () => checkBossAction({ boss: name, location })
+          const checkAction = () =>
+            checkBossAction({ boss: name, location, lastPull: lastCheckDate })
           const checkIsLoading = loadingBossCheck
             ? loadingBossCheck.boss === name &&
               loadingBossCheck.location === location
@@ -358,6 +368,7 @@ const CheckedBosses = ({
                           noChanceBossAction({
                             boss: name,
                             location,
+                            lastPull: lastCheckDate,
                             lastSpawned: manuallyMarkedAsNoChance
                               ? null
                               : new Date(),

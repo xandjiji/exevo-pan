@@ -847,10 +847,14 @@ export const markCheckedBoss = authedProcedure
       guildId: z.string(),
       boss: z.string(),
       location: z.string().optional(),
+      lastPull: z.date(),
     }),
   )
   .mutation(
-    async ({ ctx: { token }, input: { guildId, boss, location = '' } }) => {
+    async ({
+      ctx: { token },
+      input: { guildId, boss, location = '', lastPull },
+    }) => {
       const userId = token.id
 
       if (
@@ -867,7 +871,7 @@ export const markCheckedBoss = authedProcedure
 
       const requesterMember = await findGuildMember({ guildId, userId })
 
-      const [updatedBoss] = await prisma.$transaction([
+      await prisma.$transaction([
         prisma.bossCheck.upsert({
           where: { boss_guildId_location: { boss, guildId, location } },
           create: {
@@ -895,7 +899,12 @@ export const markCheckedBoss = authedProcedure
         }),
       ])
 
-      return updatedBoss
+      const result = await BossesClient.updateCheckedBosses({
+        guildId,
+        lastPull,
+      })
+
+      return result
     },
   )
 
@@ -906,12 +915,13 @@ export const markBossAsNoChance = authedProcedure
       boss: z.string(),
       location: z.string().optional(),
       lastSpawned: z.date().nullish(),
+      lastPull: z.date(),
     }),
   )
   .mutation(
     async ({
       ctx: { token },
-      input: { guildId, boss, location = '', lastSpawned },
+      input: { guildId, boss, location = '', lastSpawned, lastPull },
     }) => {
       const userId = token.id
 
@@ -956,7 +966,7 @@ export const markBossAsNoChance = authedProcedure
       }
 
       if (lastSpawned) {
-        const [updatedBoss] = await prisma.$transaction([
+        await prisma.$transaction([
           prisma.bossCheck.upsert(upsertData),
           prisma.guildLogEntry.create({
             data: {
@@ -970,13 +980,16 @@ export const markBossAsNoChance = authedProcedure
             },
           }),
         ])
-
-        return updatedBoss
+      } else {
+        await prisma.bossCheck.upsert(upsertData)
       }
 
-      const updatedBoss = await prisma.bossCheck.upsert(upsertData)
+      const result = await BossesClient.updateCheckedBosses({
+        guildId,
+        lastPull,
+      })
 
-      return updatedBoss
+      return result
     },
   )
 
