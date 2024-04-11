@@ -11,7 +11,13 @@ type PullData = {
 }
 
 export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
-  const [lastCheckDate, setLastCheckDate] = useState(new Date(0))
+  const [lastCheckDate, setLastCheckDate] = useState(
+    () =>
+      [...initialCheckedBosses].sort(
+        (a, b) =>
+          (b.checkedAt ? +b.checkedAt : 0) - (a.checkedAt ? +a.checkedAt : 0),
+      )[0]?.checkedAt ?? new Date(0),
+  )
 
   const [checkedBosses, setCheckedBosses] = useState(
     initialCheckedBosses.map((item) => ({ ...item, fresh: false })),
@@ -33,8 +39,10 @@ export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
             bossCheck.fresh = false
 
             const updatedBossCheck = freshData.find(
-              ({ boss, location }) =>
-                boss === bossCheck.name && location === bossCheck.location,
+              ({ boss, location, checkedAt }) =>
+                boss === bossCheck.name &&
+                location === bossCheck.location &&
+                checkedAt !== bossCheck.checkedAt,
             )
 
             if (updatedBossCheck) {
