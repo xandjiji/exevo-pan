@@ -68,11 +68,12 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
               aria-label="Play Ravendawn for free"
               className="negative-container w-[320px] overflow-hidden md:mx-0"
             >
-              <Image
-                src="/ravenbanner.gif"
+              <img
+                src="https://i.imgur.com/HKZYzdT.gif"
                 alt="Play ravendawn for free"
                 width={320}
                 height={100}
+                loading="lazy"
               />
             </a>
 
