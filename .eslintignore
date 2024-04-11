@@ -1,3 +1,4 @@
 tsconfig.json
 setupTests.ts
 *.js
+packages/db/kysely/types.ts

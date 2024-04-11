@@ -3,6 +3,14 @@ generator client {
   previewFeatures = ["referentialIntegrity", "filteredRelationCount"]
 }
 
+
+generator kysely {
+  provider            = "prisma-kysely"
+  output              = "../kysely"
+  fileName            = "types.ts"
+  booleanTypeOverride = "boolean"
+}
+
 datasource db {
   provider     = "mysql"
   url          = env("DATABASE_URL")
