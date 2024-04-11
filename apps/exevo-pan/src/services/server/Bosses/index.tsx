@@ -1,3 +1,4 @@
+import { db } from 'db'
 import { prisma } from 'lib/prisma'
 import { MILLISECONDS_IN } from 'shared-utils/dist/time'
 import { constTokens as bossTokens } from 'data-dictionary/dist/dictionaries/bosses'
@@ -94,24 +95,19 @@ export default class BossesClient {
     guildId: string
     lastPull: Date
   }) {
-    return prisma.bossCheck.findMany({
-      where: {
-        guildId,
-        OR: [
-          { checkedAt: { gte: lastPull } },
-          {
-            lastSpawned: { gte: lastPull },
-          },
-        ],
-      },
-      select: {
-        checkedAt: true,
-        boss: true,
-        location: true,
-        lastSpawned: true,
-        memberId: true,
-      },
-    })
+    return db
+      .selectFrom('BossCheck')
+      .where((eb) =>
+        eb.and([
+          eb('guildId', '=', guildId),
+          eb.or([
+            eb('checkedAt', '>=', lastPull),
+            eb('lastSpawned', '>=', lastPull),
+          ]),
+        ]),
+      )
+      .select(['checkedAt', 'boss', 'location', 'lastSpawned', 'memberId'])
+      .execute()
   }
 
   static async fetchAllFrozenBossCheckLogEntries({
