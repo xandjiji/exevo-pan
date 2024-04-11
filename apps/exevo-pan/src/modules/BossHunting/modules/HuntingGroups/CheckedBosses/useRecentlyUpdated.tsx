@@ -42,7 +42,8 @@ export const useRecentlyUpdated = (initialCheckedBosses: CheckedBoss[]) => {
               ({ boss, location, checkedAt }) =>
                 boss === bossCheck.name &&
                 location === bossCheck.location &&
-                checkedAt !== bossCheck.checkedAt,
+                +checkedAt !==
+                  (bossCheck.checkedAt ? +bossCheck.checkedAt : -1),
             )
 
             if (updatedBossCheck) {
