@@ -25,7 +25,7 @@ This monorepo contains the entire codebase of our project. Here is the anatomy:
 │   ├── data-dictionary
 │   ├── logging
 │   ├── mock-maker
-│   ├── prisma-database
+│   ├── db
 │   ├── shared-utils
 │   ├── tsconfig
 │   └── @types
