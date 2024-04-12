@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from 'lib/prisma'
+import { db } from 'db'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { officialAuctionUrl } from 'utils'
 
@@ -29,9 +29,11 @@ export default async (
   const auctionId = +request.query.auctionId
 
   try {
-    const notifyList = await prisma.auctionNotification.findMany({
-      where: { auctionId },
-    })
+    const notifyList = await db
+      .selectFrom('AuctionNotification')
+      .where('auctionId', '=', auctionId)
+      .select(['userId', 'nickname'])
+      .execute()
 
     await Promise.all(
       notifyList.map(({ userId, nickname }) =>

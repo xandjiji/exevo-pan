@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from 'lib/prisma'
+import { db } from 'db'
 import { caller } from 'pages/api/trpc/[trpc]'
 import { MILLISECONDS_IN, officialAuctionUrl } from 'utils'
 
@@ -19,15 +19,17 @@ export default async (
   }
 
   try {
-    const notifyList = await prisma.auctionNotification.findMany({
-      where: {
-        notifyAt: {
-          lte: offsetCurrentDateByMinutes(2),
-          gte: offsetCurrentDateByMinutes(-10),
-        },
-        scheduleCompleted: false,
-      },
-    })
+    const notifyList = await db
+      .selectFrom('AuctionNotification')
+      .where((eb) =>
+        eb.and([
+          eb('scheduleCompleted', '=', false),
+          eb('notifyAt', '<=', offsetCurrentDateByMinutes(2)),
+          eb('notifyAt', '>=', offsetCurrentDateByMinutes(-10)),
+        ]),
+      )
+      .select(['id', 'userId', 'nickname', 'auctionId'])
+      .execute()
 
     await Promise.all(
       notifyList.map(({ userId, nickname, auctionId }) =>
@@ -40,10 +42,15 @@ export default async (
       ),
     )
 
-    await prisma.auctionNotification.updateMany({
-      where: { id: { in: notifyList.map(({ id }) => id) } },
-      data: { scheduleCompleted: true },
-    })
+    await db
+      .updateTable('AuctionNotification')
+      .where(
+        'id',
+        'in',
+        notifyList.map(({ id }) => id),
+      )
+      .set('scheduleCompleted', true)
+      .execute()
 
     response.send('ok')
   } catch (error) {

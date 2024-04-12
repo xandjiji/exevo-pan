@@ -40,7 +40,7 @@
     "checkup": "yarn --cwd apps/bazaar-scraper checkup",
     "prisma:push": "yarn --cwd packages/db push",
     "prisma:generate": "yarn --cwd packages/db generate",
-    "prisma:run": "scripts/setupDev.sh && yarn --cwd packages/db execute",
+    "prisma:run": "yarn --cwd packages/db execute",
     "prisma:studio": "yarn --cwd packages/db studio"
   },
   "devDependencies": {

@@ -1,7 +1,7 @@
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-restricted-syntax */
 import { NextApiRequest, NextApiResponse } from 'next'
-import { prisma } from 'lib/prisma'
+import { db } from 'db'
 import { caller } from 'pages/api/trpc/[trpc]'
 
 export default async (
@@ -21,7 +21,7 @@ export default async (
 
   try {
     const t0 = +new Date()
-    const guildIds = await prisma.guild.findMany({ select: { id: true } })
+    const guildIds = await db.selectFrom('Guild').select('id').execute()
 
     uncachedIds = new Set(guildIds.map(({ id }) => id))
 
