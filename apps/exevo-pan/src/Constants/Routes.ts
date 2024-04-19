@@ -22,6 +22,7 @@ export const routes = {
   AUCTION_ESTIMATION: '/calculators/auction-estimations',
   STATISTICS: '/statistics',
   HIGHSCORES: '/statistics/highscores',
+  MEDIAN_AUCTIONS_VALUE: '/statistics/character-value',
   LIBERTABRA_WAR: '/libertabra-war',
   LIBERTABRA_WAR_TOP_10: '/libertabra-war/top-10',
   LIBERTABRA_WAR_GUILD_XP: '/libertabra-war/guild-xp',

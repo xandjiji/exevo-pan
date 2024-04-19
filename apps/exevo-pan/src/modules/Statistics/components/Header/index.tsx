@@ -2,7 +2,7 @@ import { useTranslations } from 'contexts/useTranslation'
 import { memo } from 'react'
 import { SubHeader } from 'templates'
 import { routes } from 'Constants'
-import { ChartsIcon, TrophyIcon } from 'assets/svgs'
+import { ChartsIcon, TrendingIcon, TrophyIcon } from 'assets/svgs'
 
 const Header = () => {
   const { statistics } = useTranslations()
@@ -17,6 +17,11 @@ const Header = () => {
       title: statistics.Header.Highscores,
       href: routes.HIGHSCORES,
       icon: <TrophyIcon />,
+    },
+    {
+      title: 'Valor mediano de leilões',
+      href: routes.MEDIAN_AUCTIONS_VALUE,
+      icon: <TrendingIcon />,
     },
   ]
 
