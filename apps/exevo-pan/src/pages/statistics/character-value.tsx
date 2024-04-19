@@ -4,6 +4,7 @@ import { Main } from 'templates'
 import { Line } from 'react-chartjs-2'
 import { useTheme } from 'contexts/useTheme'
 import { Header } from 'modules/Statistics'
+import NextLink from 'next/link'
 import { PreviewImageClient } from 'services'
 import { GetStaticProps } from 'next'
 import { Checkbox, Coupon, Input } from 'components/Atoms'
@@ -15,7 +16,7 @@ import {
   formatNumberWithCommas,
 } from 'utils'
 import { useTranslations } from 'contexts/useTranslation'
-import { jsonld, routes } from 'Constants'
+import { exevoPro, jsonld, routes } from 'Constants'
 import { common, statistics } from 'locales'
 import rawData from '../../character-value-data.json'
 import options from '../../character-value-options.json'
@@ -274,9 +275,17 @@ export default function Statistics() {
             <div className="mb-8 flex justify-between gap-4">
               <h3 style={{ fontSize: 42 }}>Valor mediano de personagens</h3>
 
-              <div className="flex items-start gap-4">
+              <div className="flex shrink-0 items-start gap-4">
                 <div className="mr-8">
-                  <Coupon coupon="MP3PLAYER" discount="20% OFF" />
+                  <NextLink
+                    href={`${routes.EXEVOPRO}?${exevoPro.referral.urlParam}=MP3PLAYER`}
+                    className="text-onSurface text-xs font-light tracking-wider"
+                  >
+                    <Coupon coupon="MP3PLAYER" discount="20% OFF" />
+                  </NextLink>
+                  <p className="mt-2 text-right text-xs">
+                    Oferta por tempo limitado
+                  </p>
                 </div>
 
                 <Input
