@@ -139,7 +139,15 @@ const main = async () => {
     }
   }
 
-  fs.writeFileSync('./fullData.json', JSON.stringify(fullData))
+  fs.writeFileSync('./character-value-data.json', JSON.stringify(fullData))
+  fs.writeFileSync(
+    './character-value-options.json',
+    JSON.stringify({
+      years: UTCYears,
+      vocations: ['knight', 'paladin', 'sorcerer', 'druid'],
+      levelRanges,
+    }),
+  )
 }
 
 main()

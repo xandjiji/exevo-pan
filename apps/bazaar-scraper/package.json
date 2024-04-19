@@ -8,6 +8,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules",
     "lint": "eslint src && prettier --check 'src/**/*.{js,ts}'",
     "format": "prettier --write 'src/**/*.{js,ts}'",
+    "character-value": "NODE_PATH=./src sucrase-node src/character-value.ts",
     "dev:scraper": "NODE_PATH=./src nodemon -q src/dev.ts",
     "scrap:auctions": "NODE_PATH=./src sucrase-node src/Scripts/UpdateAuctions/run.ts",
     "scrap:history": "NODE_OPTIONS=--max_old_space_size=10000 NODE_PATH=./src sucrase-node src/Scripts/ScrapHistory/run.ts",
