@@ -6,7 +6,7 @@ import { useTheme } from 'contexts/useTheme'
 import { Header } from 'modules/Statistics'
 import { PreviewImageClient } from 'services'
 import { GetStaticProps } from 'next'
-import { Checkbox, Input } from 'components/Atoms'
+import { Checkbox, Coupon, Input } from 'components/Atoms'
 import { Select, Tooltip } from 'components/Organisms'
 import {
   buildPageTitle,
@@ -271,10 +271,14 @@ export default function Statistics() {
         <main>
           <Header />
           <div className="container py-6">
-            <div className="flex justify-between gap-4">
+            <div className="mb-8 flex justify-between gap-4">
               <h3 style={{ fontSize: 42 }}>Valor mediano de personagens</h3>
 
-              <div className="mb-8 flex items-start gap-4">
+              <div className="flex items-start gap-4">
+                <div className="mr-8">
+                  <Coupon coupon="MP3PLAYER" discount="20% OFF" />
+                </div>
+
                 <Input
                   type="number"
                   step={100}

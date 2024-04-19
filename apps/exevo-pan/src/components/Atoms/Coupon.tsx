@@ -1,7 +1,13 @@
 import clsx from 'clsx'
 import { ExevoPanIcon } from 'assets/svgs'
 
-export default ({ coupon }: { coupon: string }) => (
+export default ({
+  coupon,
+  discount = '10% OFF',
+}: {
+  coupon: string
+  discount?: string
+}) => (
   <div className="border-1 border-separator/60 flex items-center gap-4 rounded border-dashed py-3 px-4">
     <ExevoPanIcon width={60} height={60} className="shrink-0" />
 
@@ -9,7 +15,7 @@ export default ({ coupon }: { coupon: string }) => (
       <strong className="text-txl whitespace-nowrap text-center tracking-wide">
         <strong className="rare-gradient-text">Exevo Pro</strong>{' '}
         <span className="text-primaryHighlight decoration-primaryHighlight/60 tracking-wider underline decoration-dashed underline-offset-4">
-          10% OFF
+          {discount}
         </span>
       </strong>
 
