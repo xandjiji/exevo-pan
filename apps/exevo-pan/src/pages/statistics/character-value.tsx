@@ -173,7 +173,7 @@ export default function Statistics() {
           if (dataPoint.month !== month) continue
           if (vocationFilter && dataPoint.vocation !== vocationFilter) continue
           if (dataPoint.levelRange < minLevel) continue
-          if (maxLevel >= MAX_LEVEL && dataPoint.levelRange > maxLevel - 1) {
+          if (maxLevel < MAX_LEVEL && dataPoint.levelRange > maxLevel - 1) {
             continue
           }
 
