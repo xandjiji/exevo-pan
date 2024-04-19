@@ -41,7 +41,16 @@ const UTCMonths = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
 const MIN_LEVEL = options.levelRanges[0]
 const MAX_LEVEL = options.levelRanges[options.levelRanges.length - 1]
 
-const chartColors = ['#8338EC', '#FFD166', '#118AB2', '#06D6A0', '#EF476F']
+const CHART_COLORS = {
+  2020: '#8338EC',
+  2021: '#FFD166',
+  2022: '#118AB2',
+  2023: '#06D6A0',
+  2024: '#EF476F',
+  2025: '#8338EC',
+  2026: '#8338EC',
+  2027: '#8338EC',
+}
 
 const pageUrl = buildUrl(routes.STATISTICS)
 
@@ -78,7 +87,8 @@ export default function Statistics() {
   const { colors } = useTheme()
 
   const [vocationFilter, setVocationFilter] = useState('')
-  const [enabledYears, setEnabledYears] = useState(options.years)
+  const [unsortedEnabledYears, setEnabledYears] = useState(options.years)
+  const enabledYears = unsortedEnabledYears.sort((a, b) => a - b)
 
   const [minLevel, setMinLevel] = useState(MIN_LEVEL)
   const [maxLevel, setMaxLevel] = useState(MAX_LEVEL)
@@ -97,7 +107,11 @@ export default function Statistics() {
         },
       },
       legend: {
-        display: false,
+        display: true,
+        labels: {
+          fontColor: colors.onSurface,
+          boxWidth: 12,
+        },
       },
       scales: {
         xAxes: [
@@ -127,7 +141,7 @@ export default function Statistics() {
         callbacks: {
           title: (tooltipItem: Record<string, string>[]) =>
             `${tooltipItem[0].xLabel} ${
-              options.years[+tooltipItem[0].datasetIndex]
+              enabledYears[+tooltipItem[0].datasetIndex]
             }`,
           label: (tooltipItem: Record<string, number>) =>
             `Valor mediano: ${formatNumberWithCommas(tooltipItem.yLabel)} TC`,
@@ -135,7 +149,7 @@ export default function Statistics() {
         displayColors: false,
       },
     }),
-    [colors],
+    [colors, enabledYears],
   )
 
   const yearSummaries: YearSummary[] = useMemo(() => {
@@ -186,11 +200,12 @@ export default function Statistics() {
             ]
           }`,
       ),
-      datasets: yearSummaries.map(({ monthMedianValue }, idx) => ({
+      datasets: yearSummaries.map(({ year, monthMedianValue }) => ({
+        label: year,
         data: monthMedianValue,
         fill: false,
-        backgroundColor: chartColors[idx],
-        borderColor: chartColors[idx],
+        backgroundColor: CHART_COLORS[year as keyof typeof CHART_COLORS],
+        borderColor: CHART_COLORS[year as keyof typeof CHART_COLORS],
       })),
     }),
     [colors, yearSummaries, translations.common],
@@ -256,59 +271,63 @@ export default function Statistics() {
         <main>
           <Header />
           <div className="container py-6">
-            <div className="mb-8 flex items-start justify-end gap-4">
-              <Input
-                type="number"
-                step={100}
-                min={MIN_LEVEL}
-                max={maxLevel - 100}
-                label="Min level"
-                onChange={(e) => setMinLevel(+e.target.value)}
-                value={minLevel}
-              />
-              <Tooltip
-                content={<span>Level {MAX_LEVEL}+</span>}
-                placement="bottom-start"
-                trigger="none"
-                visible={maxLevel === MAX_LEVEL}
-              >
+            <div className="flex justify-between gap-4">
+              <h3 style={{ fontSize: 42 }}>Valor mediano de personagens</h3>
+
+              <div className="mb-8 flex items-start gap-4">
                 <Input
                   type="number"
                   step={100}
-                  min={minLevel + 100}
-                  max={MAX_LEVEL}
-                  label="Max level"
-                  onChange={(e) => setMaxLevel(+e.target.value)}
-                  value={maxLevel}
-                  className="mb-3"
+                  min={MIN_LEVEL}
+                  max={maxLevel - 100}
+                  label="Min level"
+                  onChange={(e) => setMinLevel(+e.target.value)}
+                  value={minLevel}
                 />
-              </Tooltip>
+                <Tooltip
+                  content={<span>Level {MAX_LEVEL}+</span>}
+                  placement="bottom-start"
+                  trigger="none"
+                  visible={maxLevel === MAX_LEVEL}
+                >
+                  <Input
+                    type="number"
+                    step={100}
+                    min={minLevel + 100}
+                    max={MAX_LEVEL}
+                    label="Max level"
+                    onChange={(e) => setMaxLevel(+e.target.value)}
+                    value={maxLevel}
+                    className="mb-3"
+                  />
+                </Tooltip>
 
-              <Select
-                label="Filtrar vocação"
-                options={vocationOptions}
-                onChange={(e) => setVocationFilter(e.target.value)}
-                value={vocationFilter}
-                className="w-28"
-              />
+                <Select
+                  label="Filtrar vocação"
+                  options={vocationOptions}
+                  onChange={(e) => setVocationFilter(e.target.value)}
+                  value={vocationFilter}
+                  className="w-28"
+                />
 
-              <div className="grid gap-2">
-                {options.years.map((year) => {
-                  const isChecked = enabledYears.includes(year)
-                  return (
-                    <Checkbox
-                      label={year}
-                      checked={isChecked}
-                      disabled={isChecked && enabledYears.length <= 1}
-                      onClick={() =>
-                        setEnabledYears((prev) => {
-                          if (!isChecked) return [...prev, year]
-                          return prev.filter((y) => y !== year)
-                        })
-                      }
-                    />
-                  )
-                })}
+                <div className="grid gap-2">
+                  {options.years.map((year) => {
+                    const isChecked = enabledYears.includes(year)
+                    return (
+                      <Checkbox
+                        label={year}
+                        checked={isChecked}
+                        disabled={isChecked && enabledYears.length <= 1}
+                        onClick={() =>
+                          setEnabledYears((prev) => {
+                            if (!isChecked) return [...prev, year]
+                            return prev.filter((y) => y !== year)
+                          })
+                        }
+                      />
+                    )
+                  })}
+                </div>
               </div>
             </div>
 
