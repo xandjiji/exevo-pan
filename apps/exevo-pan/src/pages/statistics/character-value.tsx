@@ -6,8 +6,8 @@ import { useTheme } from 'contexts/useTheme'
 import { Header } from 'modules/Statistics'
 import { PreviewImageClient } from 'services'
 import { GetStaticProps } from 'next'
-import { Checkbox } from 'components/Atoms'
-import { Select } from 'components/Organisms'
+import { Checkbox, Input } from 'components/Atoms'
+import { Select, Tooltip } from 'components/Organisms'
 import {
   buildPageTitle,
   buildUrl,
@@ -37,6 +37,9 @@ type YearSummary = {
 const characterValueData: DataEntry[] = rawData as DataEntry[]
 
 const UTCMonths = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+const MIN_LEVEL = options.levelRanges[0]
+const MAX_LEVEL = options.levelRanges[options.levelRanges.length - 1]
 
 const chartColors = ['#8338EC', '#FFD166', '#118AB2', '#06D6A0', '#EF476F']
 
@@ -76,6 +79,9 @@ export default function Statistics() {
 
   const [vocationFilter, setVocationFilter] = useState('')
   const [enabledYears, setEnabledYears] = useState(options.years)
+
+  const [minLevel, setMinLevel] = useState(MIN_LEVEL)
+  const [maxLevel, setMaxLevel] = useState(MAX_LEVEL)
 
   const chartOptions = useMemo(
     () => ({
@@ -148,10 +154,13 @@ export default function Statistics() {
         const weights: number[] = []
         const medians: number[] = []
         for (const dataPoint of characterValueData) {
-          if (vocationFilter && dataPoint.vocation !== vocationFilter) continue
-          // filter level ranges
           if (dataPoint.year !== year) continue
           if (dataPoint.month !== month) continue
+          if (vocationFilter && dataPoint.vocation !== vocationFilter) continue
+          if (dataPoint.levelRange < minLevel) continue
+          if (maxLevel >= MAX_LEVEL && dataPoint.levelRange > maxLevel - 1) {
+            continue
+          }
 
           weights.push(dataPoint.amount)
           medians.push(dataPoint.medianValue)
@@ -165,7 +174,7 @@ export default function Statistics() {
     }
 
     return list
-  }, [vocationFilter, enabledYears])
+  }, [vocationFilter, enabledYears, minLevel, maxLevel])
 
   const chartData = useMemo(
     () => ({
@@ -247,7 +256,34 @@ export default function Statistics() {
         <main>
           <Header />
           <div className="container py-6">
-            <div className="mb-8 flex justify-end gap-4">
+            <div className="mb-8 flex items-start justify-end gap-4">
+              <Input
+                type="number"
+                step={100}
+                min={MIN_LEVEL}
+                max={maxLevel - 100}
+                label="Min level"
+                onChange={(e) => setMinLevel(+e.target.value)}
+                value={minLevel}
+              />
+              <Tooltip
+                content={<span>Level {MAX_LEVEL}+</span>}
+                placement="bottom-start"
+                trigger="none"
+                visible={maxLevel === MAX_LEVEL}
+              >
+                <Input
+                  type="number"
+                  step={100}
+                  min={minLevel + 100}
+                  max={MAX_LEVEL}
+                  label="Max level"
+                  onChange={(e) => setMaxLevel(+e.target.value)}
+                  value={maxLevel}
+                  className="mb-3"
+                />
+              </Tooltip>
+
               <Select
                 label="Filtrar vocação"
                 options={vocationOptions}
@@ -276,7 +312,7 @@ export default function Statistics() {
               </div>
             </div>
 
-            <div className="h-[540px]">
+            <div className="card h-[540px] px-[24px] py-[32px]">
               {/* @ts-ignore */}
               <Line key={+new Date()} data={chartData} options={chartOptions} />
             </div>
