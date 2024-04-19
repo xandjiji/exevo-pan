@@ -6,7 +6,13 @@ import { useTheme } from 'contexts/useTheme'
 import { Header } from 'modules/Statistics'
 import { PreviewImageClient } from 'services'
 import { GetStaticProps } from 'next'
-import { buildPageTitle, buildUrl, formatNumberWithCommas } from 'utils'
+import { Select } from 'components/Organisms'
+import {
+  buildPageTitle,
+  buildUrl,
+  capitalizeFirstLetter,
+  formatNumberWithCommas,
+} from 'utils'
 import { useTranslations } from 'contexts/useTranslation'
 import { jsonld, routes } from 'Constants'
 import { common, statistics } from 'locales'
@@ -46,6 +52,14 @@ function calculateWeightedAverage(values: number[], weights: number[]): number {
 
   return weightedSum / totalWeight
 }
+
+const vocationOptions: Option[] = [
+  { name: '-', value: '' },
+  ...options.vocations.map((value) => ({
+    name: capitalizeFirstLetter(value),
+    value,
+  })),
+]
 
 export default function Statistics() {
   const translations = useTranslations()
@@ -128,7 +142,7 @@ export default function Statistics() {
         const weights: number[] = []
         const medians: number[] = []
         for (const dataPoint of characterValueData) {
-          // filter vocations
+          if (vocationFilter && dataPoint.vocation !== vocationFilter) continue
           // filter level ranges
           if (dataPoint.year !== year) continue
           if (dataPoint.month !== month) continue
@@ -145,9 +159,7 @@ export default function Statistics() {
     }
 
     return list
-  }, [])
-
-  console.log(yearSummaries)
+  }, [vocationFilter])
 
   const chartData = useMemo(
     () => ({
@@ -228,9 +240,19 @@ export default function Statistics() {
       <Main>
         <main>
           <Header />
+          <Select
+            label="Filtrar vocação"
+            options={vocationOptions}
+            onChange={(e) => setVocationFilter(e.target.value)}
+            value={vocationFilter}
+          />
           <div className="container h-[540px]">
             {/* @ts-ignore */}
-            <Line data={chartData} options={chartOptions} />
+            <Line
+              key={new Date().toString()}
+              data={chartData}
+              options={chartOptions}
+            />
           </div>
         </main>
       </Main>
