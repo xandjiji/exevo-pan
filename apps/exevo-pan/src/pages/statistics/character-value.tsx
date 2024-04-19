@@ -6,6 +6,7 @@ import { useTheme } from 'contexts/useTheme'
 import { Header } from 'modules/Statistics'
 import { PreviewImageClient } from 'services'
 import { GetStaticProps } from 'next'
+import { Checkbox } from 'components/Atoms'
 import { Select } from 'components/Organisms'
 import {
   buildPageTitle,
@@ -74,6 +75,7 @@ export default function Statistics() {
   const { colors } = useTheme()
 
   const [vocationFilter, setVocationFilter] = useState('')
+  const [enabledYears, setEnabledYears] = useState(options.years)
 
   const chartOptions = useMemo(
     () => ({
@@ -131,8 +133,12 @@ export default function Statistics() {
   )
 
   const yearSummaries: YearSummary[] = useMemo(() => {
+    const queriedYears = options.years.filter((year) =>
+      enabledYears.includes(year),
+    )
+
     const list: YearSummary[] = []
-    for (const year of options.years) {
+    for (const year of queriedYears) {
       const summary: YearSummary = {
         year,
         monthMedianValue: UTCMonths.map(() => 0),
@@ -159,7 +165,7 @@ export default function Statistics() {
     }
 
     return list
-  }, [vocationFilter])
+  }, [vocationFilter, enabledYears])
 
   const chartData = useMemo(
     () => ({
@@ -240,19 +246,40 @@ export default function Statistics() {
       <Main>
         <main>
           <Header />
-          <Select
-            label="Filtrar vocação"
-            options={vocationOptions}
-            onChange={(e) => setVocationFilter(e.target.value)}
-            value={vocationFilter}
-          />
-          <div className="container h-[540px]">
-            {/* @ts-ignore */}
-            <Line
-              key={new Date().toString()}
-              data={chartData}
-              options={chartOptions}
-            />
+          <div className="container py-6">
+            <div className="mb-8 flex justify-end gap-4">
+              <Select
+                label="Filtrar vocação"
+                options={vocationOptions}
+                onChange={(e) => setVocationFilter(e.target.value)}
+                value={vocationFilter}
+                className="w-28"
+              />
+
+              <div className="grid gap-2">
+                {options.years.map((year) => {
+                  const isChecked = enabledYears.includes(year)
+                  return (
+                    <Checkbox
+                      label={year}
+                      checked={isChecked}
+                      disabled={isChecked && enabledYears.length <= 1}
+                      onClick={() =>
+                        setEnabledYears((prev) => {
+                          if (!isChecked) return [...prev, year]
+                          return prev.filter((y) => y !== year)
+                        })
+                      }
+                    />
+                  )
+                })}
+              </div>
+            </div>
+
+            <div className="h-[540px]">
+              {/* @ts-ignore */}
+              <Line key={+new Date()} data={chartData} options={chartOptions} />
+            </div>
           </div>
         </main>
       </Main>
