@@ -72,7 +72,12 @@ export const TibiaTradeBanner = ({
   const i18n = homepage.AuctionsGrid.TibiaTradeBanner
 
   return (
-    <section className={clsx('grid gap-2', className)} {...props}>
+    <section className={clsx('relative grid gap-2', className)} {...props}>
+      <div
+        className="z-1 from-background pointer-events-none absolute top-0 right-0 w-8 bg-gradient-to-l to-transparent"
+        style={{ height: 'calc(100% - 6px)' }}
+      />
+
       <p className="text-tsm font-light">
         {templateMessage(i18n.heading, {
           link: (
@@ -88,12 +93,7 @@ export const TibiaTradeBanner = ({
         })}
       </p>
 
-      <div className="custom-scrollbar relative -mb-2 flex w-full gap-4 overflow-auto pb-2">
-        <div
-          className="z-1 from-background pointer-events-none absolute top-0 right-0 w-8 bg-gradient-to-l to-transparent"
-          style={{ height: 'calc(100% - 6px)' }}
-        />
-
+      <div className="custom-scrollbar -mb-2 flex w-full gap-4 overflow-auto pb-2 pr-8">
         {items.map((item, idx) => (
           // eslint-disable-next-line react/no-array-index-key
           <Item key={idx} item={item} />
