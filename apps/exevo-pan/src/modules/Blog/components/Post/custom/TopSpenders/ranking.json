@@ -260,7 +260,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 956125,
@@ -590,7 +596,13 @@
       "pvpType": { "string": "Optional", "type": 0 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 856649,
@@ -845,7 +857,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": true,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 723270,
@@ -1029,7 +1047,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": true,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 792822,
@@ -1365,7 +1389,13 @@
       "pvpType": { "string": "Optional", "type": 0 },
       "battleye": true,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 957293,
@@ -1636,7 +1666,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 652727,
@@ -1860,7 +1896,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": true,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 374330,
@@ -2077,7 +2119,13 @@
       "pvpType": { "string": "Retro Open", "type": 2 },
       "battleye": true,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 604833,
@@ -2336,7 +2384,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 723899,
@@ -2533,7 +2587,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 189098,
@@ -2788,7 +2848,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 660879,
@@ -3077,7 +3143,13 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 37110,
@@ -3359,7 +3431,13 @@
       "pvpType": { "string": "Optional", "type": 0 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 829473,
@@ -3652,7 +3730,13 @@
       "pvpType": { "string": "Optional", "type": 0 },
       "battleye": false,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   },
   {
     "id": 590837,
@@ -3868,6 +3952,12 @@
       "pvpType": { "string": "Open", "type": 1 },
       "battleye": true,
       "experimental": false
-    }
+    },
+    "gems": {
+      "lesser": 0,
+      "regular": 0,
+      "greater": 0
+    },
+    "greaterGems": []
   }
 ]
