@@ -1982,6 +1982,86 @@ export const storeItems: Record<string, StoreItem> = {
     name: 'Guzzlemaw Grub',
     value: 180,
   },
+  'cave chair': {
+    name: 'Cave Chair',
+    value: 50,
+  },
+  'blossom chair': {
+    name: 'Blossom Chair',
+    value: 60,
+  },
+  'tomb bed': {
+    name: 'Tomb Bed',
+    value: 180,
+  },
+  'cave table': {
+    name: 'Cave Table',
+    value: 70,
+  },
+  'unicorn painting': {
+    name: 'Unicorn Painting',
+    value: 100,
+  },
+  'red heart': {
+    name: 'Red Heart',
+    value: 60,
+  },
+  vulture: {
+    name: 'Vulture',
+    value: 180,
+  },
+  'spooky mirror': {
+    name: 'Spooky Mirror',
+    value: 120,
+  },
+  'reaper painting': {
+    name: 'Reaper Painting',
+    value: 100,
+  },
+  'black heart': {
+    name: 'Black Heart',
+    value: 60,
+  },
+  'reaper clock': {
+    name: 'Reaper Clock',
+    value: 120,
+  },
+  'skull cabinet': {
+    name: 'Skull Cabinet',
+    value: 100,
+  },
+  'spooky chest': {
+    name: 'Spooky Chest',
+    value: 60,
+  },
+  'gravestone chair': {
+    name: 'Gravestone Chair',
+    value: 50,
+  },
+  'blue butterfly': {
+    name: 'Flowering Log',
+    value: 180,
+  },
+  'blossom bed': {
+    name: 'Blossom Bed',
+    value: 150,
+  },
+  'lilypad table': {
+    name: 'Lilypad Table',
+    value: 60,
+  },
+  'pink blossom lamp': {
+    name: 'Pink Blossom Lamp',
+    value: 60,
+  },
+  'blossom chest': {
+    name: 'Blossom Chest',
+    value: 60,
+  },
+  'purple blossom lamp': {
+    name: 'Purple Blossom Lamp',
+    value: 60,
+  },
   'vexclaw doll': {
     name: 'Vexclaw Doll',
     value: 0,
