@@ -1,10 +1,12 @@
 import { endpoints } from 'Constants'
 
 export const loadThumbnail = (src: string, size?: number) => {
-  if (!size) return src
+  if (!size) {
+    return `${endpoints.ASSETS}${src}`
+  }
 
   const [path, extension] = src.split('.')
-  return `${path}-${size}.${extension}`
+  return `${endpoints.ASSETS}${path}-${size}.${extension}`
 }
 
 const isDev =
