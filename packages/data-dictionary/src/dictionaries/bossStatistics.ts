@@ -144,7 +144,7 @@ bossStatistics.set('Ferumbras', {
 
 bossStatistics.set('Flamecaller Zazrak', {
   fixedDaysFrequency: {
-    min: 7,
+    min: 6,
     max: 19,
   },
   spawnCount: 2,
