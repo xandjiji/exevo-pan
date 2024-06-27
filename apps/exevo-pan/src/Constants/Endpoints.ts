@@ -5,6 +5,7 @@ export const endpoints = {
   STATIC_DATA: process.env.STATIC_ENDPOINT as string,
   BLOG_QUERY: process.env.NEXT_PUBLIC_BLOG_ENDPOINT as string,
   BLOG_STATIC: process.env.NEXT_PUBLIC_BLOG_STATIC_ENDPOINT as string,
+  ASSETS: 'https://assets.service-exevopan.com/public',
   WAR_DATA: 'https://exevo-pan-war-data.netlify.app',
   TIBIADATA: 'https://api.tibiadata.com/v2/characters',
   AUCTIONS_ROUTE: '/api/auctions',
