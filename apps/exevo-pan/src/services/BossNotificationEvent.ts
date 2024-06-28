@@ -1,5 +1,4 @@
 import { loadBossSrc, resolveGuildUrl } from 'utils'
-import { links } from 'Constants'
 
 type PostEventArgs = {
   guildName: string
@@ -33,7 +32,7 @@ export default class BossNotificationEvent {
           {
             author: {
               name: displayedBossName,
-              icon_url: `${links.CANONICAL}${loadBossSrc(bossName)}`,
+              icon_url: loadBossSrc(bossName),
               url: resolveGuildUrl(guildName),
             },
             color: 4149685,
