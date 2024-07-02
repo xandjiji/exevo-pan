@@ -32,39 +32,32 @@ const fromTo: Record<string, string> = {
     'Aug. Groundshaker (+6.5% Base Damage)',
 
   // druid
-  'Revelation Mastery (+150 Avatar of Nature)':
-    'Revelation Mastery (+225 Avatar of Nature)',
-  'Revelation Mastery (+150 Blessing of the Grove)':
-    'Revelation Mastery (+225 Blessing of the Grove)',
-  'Revelation Mastery (+150 Twin Bursts)':
-    'Revelation Mastery (+225 Twin Bursts)',
   'Aug. Avatar of Nature (-300s Cooldown)':
-    'Aug. Avatar of Nature (-900s Cooldown, +1% Momentum)',
+    'Aug. Avatar of Nature (-900s Cooldown)',
   'Aug. Eternal Winter (+8% Critical Extra Damage)':
-    'Aug. Eternal Winter (+18% Critical Extra Damage)',
+    'Aug. Eternal Winter (+12% Critical Extra Damage)',
   'Aug. Eternal Winter (Damage Increase)':
-    'Aug. Eternal Winter (+12% Base Damage)',
-  'Aug. Heal Friend (Healing Increase)':
-    'Aug. Heal Friend (+7.5% Base Healing)',
+    'Aug. Eternal Winter (+8% Base Damage)',
+  'Aug. Heal Friend (Healing Increase)': 'Aug. Heal Friend (+5% Base Healing)',
   'Aug. Ice Burst (+8% Critical Extra Damage)':
-    'Aug. Ice Burst (+18% Critical Extra Damage)',
-  'Aug. Ice Burst (Damage Increase)': 'Aug. Ice Burst (+10.5% Base Damage)',
+    'Aug. Ice Burst (+12% Critical Extra Damage)',
+  'Aug. Ice Burst (Damage Increase)': 'Aug. Ice Burst (+7% Base Damage)',
   'Aug. Mass Healing (Healing Increase)':
-    'Aug. Mass Healing (+7.5% Base Healing)',
+    'Aug. Mass Healing (+5% Base Healing)',
   "Aug. Nature's Embrace (-5s Cooldown)":
-    "Aug. Nature's Embrace (-10s Cooldown, +1% Momentum)",
+    "Aug. Nature's Embrace (-10s Cooldown)",
   'Aug. Strong Ice Wave (+8% Critical Extra Damage)':
-    'Aug. Strong Ice Wave (+22.5% Critical Extra Damage)',
+    'Aug. Strong Ice Wave (+15% Critical Extra Damage)',
   'Aug. Strong Ice Wave (Damage Increase)':
-    'Aug. Strong Ice Wave (+12% Base Damage)',
+    'Aug. Strong Ice Wave (+8% Base Damage)',
   'Aug. Terra Burst (+8% Critical Extra Damage)':
-    'Aug. Terra Burst (+18% Critical Extra Damage)',
-  'Aug. Terra Burst (Damage Increase)': 'Aug. Terra Burst (+10.5% Base Damage)',
+    'Aug. Terra Burst (+12% Critical Extra Damage)',
+  'Aug. Terra Burst (Damage Increase)': 'Aug. Terra Burst (+7% Base Damage)',
   'Aug. Terra Wave (+8% Critical Extra Damage)':
-    'Aug. Terra Wave (+18% Critical Extra Damage)',
-  'Aug. Terra Wave (Damage Increase)': 'Aug. Terra Wave (+7.5% Base Damage)',
+    'Aug. Terra Wave (+12% Critical Extra Damage)',
+  'Aug. Terra Wave (Damage Increase)': 'Aug. Terra Wave (+5% Base Damage)',
   'Aug. Ultimate Healing (Healing Increase)':
-    'Aug. Ultimate Healing (+7.5% Base Healing)',
+    'Aug. Ultimate Healing (+5% Base Healing)',
 
   // sorcerer
   'Revelation Mastery (+150 Avatar of Storm)':
