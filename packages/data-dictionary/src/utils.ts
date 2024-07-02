@@ -39,3 +39,19 @@ export const dictionaryFactory = (keyArray: string[]): Dictionary => {
 
   return dictionaryObject
 }
+
+type Identity<T extends readonly string[]> = {
+  [K in T[number]]: K
+}
+
+export const generateIdentity = <T extends readonly string[]>(
+  tokens: T,
+): Identity<T> => {
+  const identity = {} as Identity<T>
+
+  tokens.forEach((token) => {
+    ;(identity as any)[token] = token
+  })
+
+  return identity
+}
