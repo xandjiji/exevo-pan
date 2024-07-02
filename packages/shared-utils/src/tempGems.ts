@@ -84,41 +84,31 @@ const fromTo: Record<string, string> = {
     'Aug. Rage of the Skies (+8% Base Damage)',
 
   // paladin
-  'Revelation Mastery (+150 Avatar of Light)':
-    'Revelation Mastery (+225 Avatar of Light)',
-  'Revelation Mastery (+150 Divine Empowerment)':
-    'Revelation Mastery (+225 Divine Empowerment)',
-  'Revelation Mastery (+150 Divine Grenade)':
-    'Revelation Mastery (+225 Divine Grenade)',
   'Aug. Avatar of Light (-300s Cooldown)':
-    'Aug. Avatar of Light (-900s Cooldown, +1% Momentum)',
-  'Aug. Divine Caldera (+8% Critical Extra Damage)':
-    'Aug. Divine Caldera (+12% Critical Extra Damage)',
+    'Aug. Avatar of Light (-900s Cooldown)',
   'Aug. Divine Caldera (Damage Increase)':
-    'Aug. Divine Caldera (+7.5% Base Damage)',
-  'Aug. Divine Dazzle (-2s Cooldown)':
-    'Aug. Divine Dazzle (-4s Cooldown, +1% Momentum)',
+    'Aug. Divine Caldera (+5% Base Damage)',
+  'Aug. Divine Dazzle (-2s Cooldown)': 'Aug. Divine Dazzle (-4s Cooldown)',
   'Aug. Divine Empowerment (-3s Cooldown)':
-    'Aug. Divine Empowerment (-6s Cooldown, +1% Momentum)',
-  'Aug. Divine Grenade (-1s Cooldown)':
-    'Aug. Divine Grenade (-2s Cooldown, +1% Momentum)',
+    'Aug. Divine Empowerment (-6s Cooldown)',
+  'Aug. Divine Grenade (-1s Cooldown)': 'Aug. Divine Grenade (-2s Cooldown)',
   'Aug. Divine Grenade (+8% Critical Extra Damage)':
-    'Aug. Divine Grenade (+18% Critical Extra Damage)',
+    'Aug. Divine Grenade (+12% Critical Extra Damage)',
   'Aug. Divine Grenade (Damage Increase)':
-    'Aug. Divine Grenade (+9% Base Damage)',
+    'Aug. Divine Grenade (+6% Base Damage)',
   'Aug. Divine Missile (+8% Critical Extra Damage)':
-    'Aug. Divine Missile (+18% Critical Extra Damage)',
+    'Aug. Divine Missile (+12% Critical Extra Damage)',
   'Aug. Divine Missile (Damage Increase)':
-    'Aug. Divine Missile (+12% Base Damage)',
+    'Aug. Divine Missile (+8% Base Damage)',
   'Aug. Ethereal Spear (+8% Critical Extra Damage)':
-    'Aug. Ethereal Spear (+22.5% Critical Extra Damage)',
+    'Aug. Ethereal Spear (+15% Critical Extra Damage)',
   'Aug. Ethereal Spear (Damage Increase)':
-    'Aug. Ethereal Spear (+15% Base Damage)',
-  'Aug. Salvation (Healing Increase)': 'Aug. Salvation (+9% Base Healing)',
+    'Aug. Ethereal Spear (+10% Base Damage)',
+  'Aug. Salvation (Healing Increase)': 'Aug. Salvation (+6% Base Healing)',
   'Aug. Strong Ethereal Spear (+8% Critical Extra Damage)':
-    'Aug. Strong Ethereal Spear (+18% Critical Extra Damage)',
+    'Aug. Strong Ethereal Spear (+12% Critical Extra Damage)',
   'Aug. Strong Ethereal Spear (Damage Increase)':
-    'Aug. Strong Ethereal Spear (+12% Base Damage)',
+    'Aug. Strong Ethereal Spear (+8% Base Damage)',
 }
 
 export const updateGemToken = (token: string): string => fromTo[token] ?? token
