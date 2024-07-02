@@ -1,45 +1,35 @@
 const fromTo: Record<string, string> = {
-  '+1.5% Critical Extra Damage': '+3% Critical Extra Damage',
-  '+0.25% Dodge': '+0.42% Dodge',
-  '+1.2% Life Leech': '+3% Life Leech',
-  '+0.4% Mana Leech': '+1.2% Mana Leech',
-  'Revelation Mastery (+150 Gift of Life)':
-    'Revelation Mastery (+225 Gift of Life)',
+  '+1.5% Critical Extra Damage': '+2% Critical Extra Damage',
+  '+0.25% Dodge': '+0.28% Dodge',
+  '+1.2% Life Leech': '+2% Life Leech',
+  '+0.4% Mana Leech': '+0.8% Mana Leech',
 
   // knight
-  'Revelation Mastery (+150 Avatar of Steel)':
-    'Revelation Mastery (+225 Avatar of Steel)',
-  'Revelation Mastery (+150 Combat Mastery)':
-    'Revelation Mastery (+225 Combat Mastery)',
-  "Revelation Mastery (+150 Executioner's Throw)":
-    "Revelation Mastery (+225 Executioner's Throw)",
   'Aug. Annihilation (+8% Critical Extra Damage)':
-    'Aug. Annihilation (+22.5% Critical Extra Damage)',
-  'Aug. Annihilation (Damage Increase)': 'Aug. Annihilation (+18% Base Damage)',
+    'Aug. Annihilation (+15% Critical Extra Damage)',
+  'Aug. Annihilation (Damage Increase)': 'Aug. Annihilation (+12% Base Damage)',
   'Aug. Avatar of Steel (-300s Cooldown)':
-    'Aug. Avatar of Steel (-900s Cooldown, +1% Momentum)',
+    'Aug. Avatar of Steel (-900s Cooldown)',
   'Aug. Berserk (+8% Critical Extra Damage)':
-    'Aug. Berserk (+18% Critical Extra Damage)',
-  'Aug. Berserk (Damage Increase)': 'Aug. Berserk (+7.5% Base Damage)',
+    'Aug. Berserk (+5% Critical Extra Damage)',
+  'Aug. Berserk (Damage Increase)': 'Aug. Berserk (+5% Base Damage)',
   "Aug. Executioner's Throw (+8% Critical Extra Damage)":
-    "Aug. Executioner's Throw (+18% Critical Extra Damage)",
+    "Aug. Executioner's Throw (+12% Critical Extra Damage)",
   "Aug. Executioner's Throw (Damage Increase)":
-    "Aug. Executioner's Throw (+9% Base Damage)",
+    "Aug. Executioner's Throw (+6% Base Damage)",
   "Aug. Executioner's Throw (-1s Cooldown)":
-    "Aug. Executioner's Throw (-2s Cooldown, +1% Momentum)",
+    "Aug. Executioner's Throw (-2s Cooldown)",
   'Aug. Fair Wound Cleansing (Healing Increase)':
-    'Aug. Fair Wound Cleansing (+15% Base Healing)',
-  'Aug. Fierce Berserk (+8% Critical Extra Damage)':
-    'Aug. Fierce Berserk (+12% Critical Extra Damage)',
+    'Aug. Fair Wound Cleansing (+10% Base Healing)',
   'Aug. Fierce Berserk (Damage Increase)':
-    'Aug. Fierce Berserk (+7.5% Base Damage)',
+    'Aug. Fierce Berserk (+5% Base Damage)',
   'Aug. Front Sweep (+8% Critical Extra Damage)':
-    'Aug. Front Sweep (+18% Critical Extra Damage)',
-  'Aug. Front Sweep (Damage Increase)': 'Aug. Front Sweep (+12% Base Damage)',
+    'Aug. Front Sweep (+12% Critical Extra Damage)',
+  'Aug. Front Sweep (Damage Increase)': 'Aug. Front Sweep (+8% Base Damage)',
   'Aug. Groundshaker (+8% Critical Extra Damage)':
-    'Aug. Groundshaker (+18% Critical Extra Damage)',
+    'Aug. Groundshaker (+12% Critical Extra Damage)',
   'Aug. Groundshaker (Damage Increase)':
-    'Aug. Groundshaker (+9.75% Base Damage)',
+    'Aug. Groundshaker (+6.5% Base Damage)',
 
   // druid
   'Revelation Mastery (+150 Avatar of Nature)':

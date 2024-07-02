@@ -1,3 +1,5 @@
+import { generateIdentity } from '../utils'
+
 // https://www.tibia.com/community/?subtopic=wheelofdestinyplanner
 //
 // var getOptions = () => {
@@ -17,319 +19,408 @@
 //   return { names, tokens }
 // }
 
-export const sharedGreaterGems = {
-  '+1.5% Critical Extra Damage': '+1.5% Critical Extra Damage',
-  '+0.25% Dodge': '+0.25% Dodge',
-  '+1.2% Life Leech': '+1.2% Life Leech',
-  '+0.4% Mana Leech': '+0.4% Mana Leech',
-  'Revelation Mastery (+150 Gift of Life)':
+export const tokensByCategory = {
+  sharedGreaterGems: [
+    '+2% Critical Extra Damage',
+    '+2.2% Critical Extra Damage',
+    '+2.4% Critical Extra Damage',
+    '+3% Critical Extra Damage',
+
+    '+0.28% Dodge',
+    '+0.31% Dodge',
+    '+0.34% Dodge',
+    '+0.42% Dodge',
+
+    '+2% Life Leech',
+    '+2.2% Life Leech',
+    '+2.4% Life Leech',
+    '+3% Life Leech',
+
+    '+0.8% Mana Leech',
+    '+0.88% Mana Leech',
+    '+0.96% Mana Leech',
+    '+1.2% Mana Leech',
+
     'Revelation Mastery (+150 Gift of Life)',
-}
-
-export const vocationGreaterGems = {
-  knight: {
-    'Revelation Mastery (+150 Avatar of Steel)':
-      'Revelation Mastery (+150 Avatar of Steel)',
-    'Revelation Mastery (+150 Combat Mastery)':
-      'Revelation Mastery (+150 Combat Mastery)',
-    "Revelation Mastery (+150 Executioner's Throw)":
-      "Revelation Mastery (+150 Executioner's Throw)",
-    'Aug. Annihilation (+8% Critical Extra Damage)':
-      'Aug. Annihilation (+8% Critical Extra Damage)',
-    'Aug. Annihilation (Damage Increase)':
-      'Aug. Annihilation (Damage Increase)',
-    'Aug. Avatar of Steel (-300s Cooldown)':
-      'Aug. Avatar of Steel (-300s Cooldown)',
-    'Aug. Berserk (+8% Critical Extra Damage)':
-      'Aug. Berserk (+8% Critical Extra Damage)',
-    'Aug. Berserk (Damage Increase)': 'Aug. Berserk (Damage Increase)',
-    "Aug. Executioner's Throw (+8% Critical Extra Damage)":
-      "Aug. Executioner's Throw (+8% Critical Extra Damage)",
-    "Aug. Executioner's Throw (Damage Increase)":
-      "Aug. Executioner's Throw (Damage Increase)",
-    "Aug. Executioner's Throw (-1s Cooldown)":
-      "Aug. Executioner's Throw (-1s Cooldown)",
-    'Aug. Fair Wound Cleansing (Healing Increase)':
-      'Aug. Fair Wound Cleansing (Healing Increase)',
-    'Aug. Fierce Berserk (+8% Critical Extra Damage)':
-      'Aug. Fierce Berserk (+8% Critical Extra Damage)',
-    'Aug. Fierce Berserk (Damage Increase)':
-      'Aug. Fierce Berserk (Damage Increase)',
-    'Aug. Front Sweep (+8% Critical Extra Damage)':
-      'Aug. Front Sweep (+8% Critical Extra Damage)',
-    'Aug. Front Sweep (Damage Increase)': 'Aug. Front Sweep (Damage Increase)',
-    'Aug. Groundshaker (+8% Critical Extra Damage)':
-      'Aug. Groundshaker (+8% Critical Extra Damage)',
-    'Aug. Groundshaker (Damage Increase)':
-      'Aug. Groundshaker (Damage Increase)',
-  },
-  druid: {
-    'Revelation Mastery (+150 Avatar of Nature)':
-      'Revelation Mastery (+150 Avatar of Nature)',
-    'Revelation Mastery (+150 Blessing of the Grove)':
-      'Revelation Mastery (+150 Blessing of the Grove)',
-    'Revelation Mastery (+150 Twin Bursts)':
-      'Revelation Mastery (+150 Twin Bursts)',
-    'Aug. Avatar of Nature (-300s Cooldown)':
-      'Aug. Avatar of Nature (-300s Cooldown)',
-    'Aug. Eternal Winter (+8% Critical Extra Damage)':
-      'Aug. Eternal Winter (+8% Critical Extra Damage)',
-    'Aug. Eternal Winter (Damage Increase)':
-      'Aug. Eternal Winter (Damage Increase)',
-    'Aug. Heal Friend (Healing Increase)':
-      'Aug. Heal Friend (Healing Increase)',
-    'Aug. Ice Burst (+8% Critical Extra Damage)':
-      'Aug. Ice Burst (+8% Critical Extra Damage)',
-    'Aug. Ice Burst (Damage Increase)': 'Aug. Ice Burst (Damage Increase)',
-    'Aug. Mass Healing (Healing Increase)':
-      'Aug. Mass Healing (Healing Increase)',
-    "Aug. Nature's Embrace (-5s Cooldown)":
-      "Aug. Nature's Embrace (-5s Cooldown)",
-    'Aug. Strong Ice Wave (+8% Critical Extra Damage)':
-      'Aug. Strong Ice Wave (+8% Critical Extra Damage)',
-    'Aug. Strong Ice Wave (Damage Increase)':
-      'Aug. Strong Ice Wave (Damage Increase)',
-    'Aug. Terra Burst (+8% Critical Extra Damage)':
-      'Aug. Terra Burst (+8% Critical Extra Damage)',
-    'Aug. Terra Burst (Damage Increase)': 'Aug. Terra Burst (Damage Increase)',
-    'Aug. Terra Wave (+8% Critical Extra Damage)':
-      'Aug. Terra Wave (+8% Critical Extra Damage)',
-    'Aug. Terra Wave (Damage Increase)': 'Aug. Terra Wave (Damage Increase)',
-    'Aug. Ultimate Healing (Healing Increase)':
-      'Aug. Ultimate Healing (Healing Increase)',
-  },
-  sorcerer: {
-    'Revelation Mastery (+150 Avatar of Storm)':
-      'Revelation Mastery (+150 Avatar of Storm)',
-    'Revelation Mastery (+150 Beam Mastery)':
-      'Revelation Mastery (+150 Beam Mastery)',
-    'Revelation Mastery (+150 Drain Body)':
-      'Revelation Mastery (+150 Drain Body)',
-    'Aug. Avatar of Storm (-300s Cooldown)':
-      'Aug. Avatar of Storm (-300s Cooldown)',
-    'Aug. Energy Wave (+8% Critical Extra Damage)':
-      'Aug. Energy Wave (+8% Critical Extra Damage)',
-    'Aug. Energy Wave (Damage Increase)': 'Aug. Energy Wave (Damage Increase)',
-    'Aug. Energy Wave (-1s Cooldown)': 'Aug. Energy Wave (-1s Cooldown)',
-    'Aug. Great Death Beam (+8% Critical Extra Damage)':
-      'Aug. Great Death Beam (+8% Critical Extra Damage)',
-    'Aug. Great Death Beam (Damage Increase)':
-      'Aug. Great Death Beam (Damage Increase)',
-    'Aug. Great Energy Beam (+8% Critical Extra Damage)':
-      'Aug. Great Energy Beam (+8% Critical Extra Damage)',
-    'Aug. Great Energy Beam (Damage Increase)':
-      'Aug. Great Energy Beam (Damage Increase)',
-    'Aug. Great Fire Wave (+8% Critical Extra Damage)':
-      'Aug. Great Fire Wave (+8% Critical Extra Damage)',
-    'Aug. Great Fire Wave (Damage Increase)':
-      'Aug. Great Fire Wave (Damage Increase)',
-    "Aug. Hell's Core (+8% Critical Extra Damage)":
-      "Aug. Hell's Core (+8% Critical Extra Damage)",
-    "Aug. Hell's Core (Damage Increase)": "Aug. Hell's Core (Damage Increase)",
-    'Aug. Rage of the Skies (+8% Critical Extra Damage)':
-      'Aug. Rage of the Skies (+8% Critical Extra Damage)',
-    'Aug. Rage of the Skies (Damage Increase)':
-      'Aug. Rage of the Skies (Damage Increase)',
-    'Aug. Ultimate Healing (Healing Increase)':
-      'Aug. Ultimate Healing (Healing Increase)',
-  },
-  paladin: {
-    'Revelation Mastery (+150 Avatar of Light)':
-      'Revelation Mastery (+150 Avatar of Light)',
-    'Revelation Mastery (+150 Divine Empowerment)':
-      'Revelation Mastery (+150 Divine Empowerment)',
-    'Revelation Mastery (+150 Divine Grenade)':
-      'Revelation Mastery (+150 Divine Grenade)',
-    'Aug. Avatar of Light (-300s Cooldown)':
-      'Aug. Avatar of Light (-300s Cooldown)',
-    'Aug. Divine Caldera (+8% Critical Extra Damage)':
-      'Aug. Divine Caldera (+8% Critical Extra Damage)',
-    'Aug. Divine Caldera (Damage Increase)':
-      'Aug. Divine Caldera (Damage Increase)',
-    'Aug. Divine Dazzle (-2s Cooldown)': 'Aug. Divine Dazzle (-2s Cooldown)',
-    'Aug. Divine Empowerment (-3s Cooldown)':
-      'Aug. Divine Empowerment (-3s Cooldown)',
-    'Aug. Divine Grenade (-1s Cooldown)': 'Aug. Divine Grenade (-1s Cooldown)',
-    'Aug. Divine Grenade (+8% Critical Extra Damage)':
-      'Aug. Divine Grenade (+8% Critical Extra Damage)',
-    'Aug. Divine Grenade (Damage Increase)':
-      'Aug. Divine Grenade (Damage Increase)',
-    'Aug. Divine Missile (+8% Critical Extra Damage)':
-      'Aug. Divine Missile (+8% Critical Extra Damage)',
-    'Aug. Divine Missile (Damage Increase)':
-      'Aug. Divine Missile (Damage Increase)',
-    'Aug. Ethereal Spear (+8% Critical Extra Damage)':
-      'Aug. Ethereal Spear (+8% Critical Extra Damage)',
-    'Aug. Ethereal Spear (Damage Increase)':
-      'Aug. Ethereal Spear (Damage Increase)',
-    'Aug. Salvation (Healing Increase)': 'Aug. Salvation (Healing Increase)',
-    'Aug. Strong Ethereal Spear (+8% Critical Extra Damage)':
-      'Aug. Strong Ethereal Spear (+8% Critical Extra Damage)',
-    'Aug. Strong Ethereal Spear (Damage Increase)':
-      'Aug. Strong Ethereal Spear (Damage Increase)',
-  },
-}
-
-/*
-export const sharedGreaterGems = {
-  '+3% Critical Extra Damage': '+3% Critical Extra Damage',
-  '+0.42% Dodge': '+0.42% Dodge',
-  '+3% Life Leech': '+3% Life Leech',
-  '+1.2% Mana Leech': '+1.2% Mana Leech',
-  'Revelation Mastery (+225 Gift of Life)':
+    'Revelation Mastery (+165 Gift of Life)',
+    'Revelation Mastery (+180 Gift of Life)',
     'Revelation Mastery (+225 Gift of Life)',
-}
+  ],
+  vocationGreaterGems: {
+    knight: [
+      'Revelation Mastery (+150 Avatar of Steel)',
+      'Revelation Mastery (+165 Avatar of Steel)',
+      'Revelation Mastery (+180 Avatar of Steel)',
+      'Revelation Mastery (+225 Avatar of Steel)',
+
+      'Revelation Mastery (+150 Combat Mastery)',
+      'Revelation Mastery (+165 Combat Mastery)',
+      'Revelation Mastery (+180 Combat Mastery)',
+      'Revelation Mastery (+225 Combat Mastery)',
+
+      "Revelation Mastery (+150 Executioner's Throw)",
+      "Revelation Mastery (+165 Executioner's Throw)",
+      "Revelation Mastery (+180 Executioner's Throw)",
+      "Revelation Mastery (+225 Executioner's Throw)",
+
+      'Aug. Annihilation (+15% Critical Extra Damage)',
+      'Aug. Annihilation (+16.5% Critical Extra Damage)',
+      'Aug. Annihilation (+18% Critical Extra Damage)',
+      'Aug. Annihilation (+22.5% Critical Extra Damage)',
+
+      'Aug. Annihilation (+12% Base Damage)',
+      'Aug. Annihilation (+13.2% Base Damage)',
+      'Aug. Annihilation (+14.4% Base Damage)',
+      'Aug. Annihilation (+18% Base Damage)',
+
+      'Aug. Avatar of Steel (-900s Cooldown)',
+      'Aug. Avatar of Steel (-900s Cooldown, +0.33% Momentum)',
+      'Aug. Avatar of Steel (-900s Cooldown, +0.66% Momentum)',
+      'Aug. Avatar of Steel (-900s Cooldown, +1% Momentum)',
+
+      'Aug. Berserk (+18% Critical Extra Damage)',
+      'Aug. Berserk (+18% Critical Extra Damage)',
+      'Aug. Berserk (+18% Critical Extra Damage)',
+      'Aug. Berserk (+18% Critical Extra Damage)',
+
+      'Aug. Berserk (+5% Base Damage)',
+      'Aug. Berserk (+5.5% Base Damage)',
+      'Aug. Berserk (+6% Base Damage)',
+      'Aug. Berserk (+7.5% Base Damage)',
+
+      "Aug. Executioner's Throw (+12% Critical Extra Damage)",
+      "Aug. Executioner's Throw (+13.2% Critical Extra Damage)",
+      "Aug. Executioner's Throw (+14.4% Critical Extra Damage)",
+      "Aug. Executioner's Throw (+18% Critical Extra Damage)",
+
+      "Aug. Executioner's Throw (+6% Base Damage)",
+      "Aug. Executioner's Throw (+6.6% Base Damage)",
+      "Aug. Executioner's Throw (+7.2% Base Damage)",
+      "Aug. Executioner's Throw (+9% Base Damage)",
+
+      "Aug. Executioner's Throw (-2s Cooldown)",
+      "Aug. Executioner's Throw (-2s Cooldown, +0.33% Momentum)",
+      "Aug. Executioner's Throw (-2s Cooldown, +0.66% Momentum)",
+      "Aug. Executioner's Throw (-2s Cooldown, +1% Momentum)",
+
+      'Aug. Fair Wound Cleansing (+10% Base Healing)',
+      'Aug. Fair Wound Cleansing (+11% Base Healing)',
+      'Aug. Fair Wound Cleansing (+12% Base Healing)',
+      'Aug. Fair Wound Cleansing (+15% Base Healing)',
+
+      'Aug. Fierce Berserk (+8% Critical Extra Damage)',
+      'Aug. Fierce Berserk (+8.8% Critical Extra Damage)',
+      'Aug. Fierce Berserk (+9.6% Critical Extra Damage)',
+      'Aug. Fierce Berserk (+12% Critical Extra Damage)',
+
+      'Aug. Fierce Berserk (+5% Base Damage)',
+      'Aug. Fierce Berserk (+5.5% Base Damage)',
+      'Aug. Fierce Berserk (+6.6% Base Damage)',
+      'Aug. Fierce Berserk (+7.5% Base Damage)',
+
+      'Aug. Front Sweep (+12% Critical Extra Damage)',
+      'Aug. Front Sweep (+13.2% Critical Extra Damage)',
+      'Aug. Front Sweep (+14.4% Critical Extra Damage)',
+      'Aug. Front Sweep (+18% Critical Extra Damage)',
+
+      'Aug. Front Sweep (+8% Base Damage)',
+      'Aug. Front Sweep (+8.8% Base Damage)',
+      'Aug. Front Sweep (+9.6% Base Damage)',
+      'Aug. Front Sweep (+12% Base Damage)',
+
+      'Aug. Groundshaker (+12% Critical Extra Damage)',
+      'Aug. Groundshaker (+13.2% Critical Extra Damage)',
+      'Aug. Groundshaker (+14.4% Critical Extra Damage)',
+      'Aug. Groundshaker (+18% Critical Extra Damage)',
+
+      'Aug. Groundshaker (+6.5% Base Damage)',
+      'Aug. Groundshaker (+7.15% Base Damage)',
+      'Aug. Groundshaker (+7.8% Base Damage)',
+      'Aug. Groundshaker (+9.75% Base Damage)',
+    ],
+    druid: [
+      'Revelation Mastery (+225 Avatar of Nature)',
+      'Revelation Mastery (+225 Avatar of Nature)',
+      'Revelation Mastery (+225 Avatar of Nature)',
+      'Revelation Mastery (+225 Avatar of Nature)',
+
+      'Revelation Mastery (+225 Blessing of the Grove)',
+      'Revelation Mastery (+225 Blessing of the Grove)',
+      'Revelation Mastery (+225 Blessing of the Grove)',
+      'Revelation Mastery (+225 Blessing of the Grove)',
+
+      'Revelation Mastery (+225 Twin Bursts)',
+      'Revelation Mastery (+225 Twin Bursts)',
+      'Revelation Mastery (+225 Twin Bursts)',
+      'Revelation Mastery (+225 Twin Bursts)',
+
+      'Aug. Avatar of Nature (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Nature (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Nature (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Nature (-900s Cooldown, +1% Momentum)',
+
+      'Aug. Eternal Winter (+18% Critical Extra Damage)',
+      'Aug. Eternal Winter (+18% Critical Extra Damage)',
+      'Aug. Eternal Winter (+18% Critical Extra Damage)',
+      'Aug. Eternal Winter (+18% Critical Extra Damage)',
+
+      'Aug. Eternal Winter (+12% Base Damage)',
+      'Aug. Eternal Winter (+12% Base Damage)',
+      'Aug. Eternal Winter (+12% Base Damage)',
+      'Aug. Eternal Winter (+12% Base Damage)',
+
+      'Aug. Heal Friend (+7.5% Base Healing)',
+      'Aug. Heal Friend (+7.5% Base Healing)',
+      'Aug. Heal Friend (+7.5% Base Healing)',
+      'Aug. Heal Friend (+7.5% Base Healing)',
+
+      'Aug. Ice Burst (+18% Critical Extra Damage)',
+      'Aug. Ice Burst (+18% Critical Extra Damage)',
+      'Aug. Ice Burst (+18% Critical Extra Damage)',
+      'Aug. Ice Burst (+18% Critical Extra Damage)',
+
+      'Aug. Ice Burst (+10.5% Base Damage)',
+      'Aug. Ice Burst (+10.5% Base Damage)',
+      'Aug. Ice Burst (+10.5% Base Damage)',
+      'Aug. Ice Burst (+10.5% Base Damage)',
+
+      'Aug. Mass Healing (+7.5% Base Healing)',
+      'Aug. Mass Healing (+7.5% Base Healing)',
+      'Aug. Mass Healing (+7.5% Base Healing)',
+      'Aug. Mass Healing (+7.5% Base Healing)',
+
+      "Aug. Nature's Embrace (-10s Cooldown, +1% Momentum)",
+      "Aug. Nature's Embrace (-10s Cooldown, +1% Momentum)",
+      "Aug. Nature's Embrace (-10s Cooldown, +1% Momentum)",
+      "Aug. Nature's Embrace (-10s Cooldown, +1% Momentum)",
+
+      'Aug. Strong Ice Wave (+22.5% Critical Extra Damage)',
+      'Aug. Strong Ice Wave (+22.5% Critical Extra Damage)',
+      'Aug. Strong Ice Wave (+22.5% Critical Extra Damage)',
+      'Aug. Strong Ice Wave (+22.5% Critical Extra Damage)',
+
+      'Aug. Strong Ice Wave (+12% Base Damage)',
+      'Aug. Strong Ice Wave (+12% Base Damage)',
+      'Aug. Strong Ice Wave (+12% Base Damage)',
+      'Aug. Strong Ice Wave (+12% Base Damage)',
+
+      'Aug. Terra Burst (+18% Critical Extra Damage)',
+      'Aug. Terra Burst (+18% Critical Extra Damage)',
+      'Aug. Terra Burst (+18% Critical Extra Damage)',
+      'Aug. Terra Burst (+18% Critical Extra Damage)',
+
+      'Aug. Terra Burst (+10.5% Base Damage)',
+      'Aug. Terra Burst (+10.5% Base Damage)',
+      'Aug. Terra Burst (+10.5% Base Damage)',
+      'Aug. Terra Burst (+10.5% Base Damage)',
+
+      'Aug. Terra Wave (+18% Critical Extra Damage)',
+      'Aug. Terra Wave (+18% Critical Extra Damage)',
+      'Aug. Terra Wave (+18% Critical Extra Damage)',
+      'Aug. Terra Wave (+18% Critical Extra Damage)',
+
+      'Aug. Terra Wave (+7.5% Base Damage)',
+      'Aug. Terra Wave (+7.5% Base Damage)',
+      'Aug. Terra Wave (+7.5% Base Damage)',
+      'Aug. Terra Wave (+7.5% Base Damage)',
+
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+    ],
+    sorcerer: [
+      'Revelation Mastery (+225 Avatar of Storm)',
+      'Revelation Mastery (+225 Avatar of Storm)',
+      'Revelation Mastery (+225 Avatar of Storm)',
+      'Revelation Mastery (+225 Avatar of Storm)',
+
+      'Revelation Mastery (+225 Beam Mastery)',
+      'Revelation Mastery (+225 Beam Mastery)',
+      'Revelation Mastery (+225 Beam Mastery)',
+      'Revelation Mastery (+225 Beam Mastery)',
+
+      'Revelation Mastery (+225 Drain Body)',
+      'Revelation Mastery (+225 Drain Body)',
+      'Revelation Mastery (+225 Drain Body)',
+      'Revelation Mastery (+225 Drain Body)',
+
+      'Aug. Avatar of Storm (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Storm (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Storm (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Storm (-900s Cooldown, +1% Momentum)',
+
+      'Aug. Energy Wave (+18% Critical Extra Damage)',
+      'Aug. Energy Wave (+18% Critical Extra Damage)',
+      'Aug. Energy Wave (+18% Critical Extra Damage)',
+      'Aug. Energy Wave (+18% Critical Extra Damage)',
+
+      'Aug. Energy Wave (+7.5% Base Damage)',
+      'Aug. Energy Wave (+7.5% Base Damage)',
+      'Aug. Energy Wave (+7.5% Base Damage)',
+      'Aug. Energy Wave (+7.5% Base Damage)',
+
+      'Aug. Energy Wave (-1s Cooldown, +1% Momentum)',
+      'Aug. Energy Wave (-1s Cooldown, +1% Momentum)',
+      'Aug. Energy Wave (-1s Cooldown, +1% Momentum)',
+      'Aug. Energy Wave (-1s Cooldown, +1% Momentum)',
+
+      'Aug. Great Death Beam (+22.5% Critical Extra Damage)',
+      'Aug. Great Death Beam (+22.5% Critical Extra Damage)',
+      'Aug. Great Death Beam (+22.5% Critical Extra Damage)',
+      'Aug. Great Death Beam (+22.5% Critical Extra Damage)',
+
+      'Aug. Great Death Beam (+15% Base Damage)',
+      'Aug. Great Death Beam (+15% Base Damage)',
+      'Aug. Great Death Beam (+15% Base Damage)',
+      'Aug. Great Death Beam (+15% Base Damage)',
+
+      'Aug. Great Energy Beam (+22.5% Critical Extra Damage)',
+      'Aug. Great Energy Beam (+22.5% Critical Extra Damage)',
+      'Aug. Great Energy Beam (+22.5% Critical Extra Damage)',
+      'Aug. Great Energy Beam (+22.5% Critical Extra Damage)',
+
+      'Aug. Great Energy Beam (+15% Base Damage)',
+      'Aug. Great Energy Beam (+15% Base Damage)',
+      'Aug. Great Energy Beam (+15% Base Damage)',
+      'Aug. Great Energy Beam (+15% Base Damage)',
+
+      'Aug. Great Fire Wave (+12% Critical Extra Damage)',
+      'Aug. Great Fire Wave (+12% Critical Extra Damage)',
+      'Aug. Great Fire Wave (+12% Critical Extra Damage)',
+      'Aug. Great Fire Wave (+12% Critical Extra Damage)',
+
+      'Aug. Great Fire Wave (+7.5% Base Damage)',
+      'Aug. Great Fire Wave (+7.5% Base Damage)',
+      'Aug. Great Fire Wave (+7.5% Base Damage)',
+      'Aug. Great Fire Wave (+7.5% Base Damage)',
+
+      "Aug. Hell's Core (+18% Critical Extra Damage)",
+      "Aug. Hell's Core (+18% Critical Extra Damage)",
+      "Aug. Hell's Core (+18% Critical Extra Damage)",
+      "Aug. Hell's Core (+18% Critical Extra Damage)",
+
+      "Aug. Hell's Core (+12% Base Damage)",
+      "Aug. Hell's Core (+12% Base Damage)",
+      "Aug. Hell's Core (+12% Base Damage)",
+      "Aug. Hell's Core (+12% Base Damage)",
+
+      'Aug. Rage of the Skies (+18% Critical Extra Damage)',
+      'Aug. Rage of the Skies (+18% Critical Extra Damage)',
+      'Aug. Rage of the Skies (+18% Critical Extra Damage)',
+      'Aug. Rage of the Skies (+18% Critical Extra Damage)',
+
+      'Aug. Rage of the Skies (+12% Base Damage)',
+      'Aug. Rage of the Skies (+12% Base Damage)',
+      'Aug. Rage of the Skies (+12% Base Damage)',
+      'Aug. Rage of the Skies (+12% Base Damage)',
+
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+      'Aug. Ultimate Healing (+7.5% Base Healing)',
+    ],
+    paladin: [
+      'Revelation Mastery (+225 Avatar of Light)',
+      'Revelation Mastery (+225 Avatar of Light)',
+      'Revelation Mastery (+225 Avatar of Light)',
+      'Revelation Mastery (+225 Avatar of Light)',
+
+      'Revelation Mastery (+225 Divine Empowerment)',
+      'Revelation Mastery (+225 Divine Empowerment)',
+      'Revelation Mastery (+225 Divine Empowerment)',
+      'Revelation Mastery (+225 Divine Empowerment)',
+
+      'Revelation Mastery (+225 Divine Grenade)',
+      'Revelation Mastery (+225 Divine Grenade)',
+      'Revelation Mastery (+225 Divine Grenade)',
+      'Revelation Mastery (+225 Divine Grenade)',
+
+      'Aug. Avatar of Light (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Light (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Light (-900s Cooldown, +1% Momentum)',
+      'Aug. Avatar of Light (-900s Cooldown, +1% Momentum)',
+
+      'Aug. Divine Caldera (+12% Critical Extra Damage)',
+      'Aug. Divine Caldera (+12% Critical Extra Damage)',
+      'Aug. Divine Caldera (+12% Critical Extra Damage)',
+      'Aug. Divine Caldera (+12% Critical Extra Damage)',
+
+      'Aug. Divine Caldera (+7.5% Base Damage)',
+      'Aug. Divine Caldera (+7.5% Base Damage)',
+      'Aug. Divine Caldera (+7.5% Base Damage)',
+      'Aug. Divine Caldera (+7.5% Base Damage)',
+
+      'Aug. Divine Dazzle (-4s Cooldown, +1% Momentum)',
+      'Aug. Divine Dazzle (-4s Cooldown, +1% Momentum)',
+      'Aug. Divine Dazzle (-4s Cooldown, +1% Momentum)',
+      'Aug. Divine Dazzle (-4s Cooldown, +1% Momentum)',
+
+      'Aug. Divine Empowerment (-6s Cooldown, +1% Momentum)',
+      'Aug. Divine Empowerment (-6s Cooldown, +1% Momentum)',
+      'Aug. Divine Empowerment (-6s Cooldown, +1% Momentum)',
+      'Aug. Divine Empowerment (-6s Cooldown, +1% Momentum)',
+
+      'Aug. Divine Grenade (-2s Cooldown, +1% Momentum)',
+      'Aug. Divine Grenade (-2s Cooldown, +1% Momentum)',
+      'Aug. Divine Grenade (-2s Cooldown, +1% Momentum)',
+      'Aug. Divine Grenade (-2s Cooldown, +1% Momentum)',
+
+      'Aug. Divine Grenade (+18% Critical Extra Damage)',
+      'Aug. Divine Grenade (+18% Critical Extra Damage)',
+      'Aug. Divine Grenade (+18% Critical Extra Damage)',
+      'Aug. Divine Grenade (+18% Critical Extra Damage)',
+
+      'Aug. Divine Grenade (+9% Base Damage)',
+      'Aug. Divine Grenade (+9% Base Damage)',
+      'Aug. Divine Grenade (+9% Base Damage)',
+      'Aug. Divine Grenade (+9% Base Damage)',
+
+      'Aug. Divine Missile (+18% Critical Extra Damage)',
+      'Aug. Divine Missile (+18% Critical Extra Damage)',
+      'Aug. Divine Missile (+18% Critical Extra Damage)',
+      'Aug. Divine Missile (+18% Critical Extra Damage)',
+
+      'Aug. Divine Missile (+12% Base Damage)',
+      'Aug. Divine Missile (+12% Base Damage)',
+      'Aug. Divine Missile (+12% Base Damage)',
+      'Aug. Divine Missile (+12% Base Damage)',
+
+      'Aug. Ethereal Spear (+22.5% Critical Extra Damage)',
+      'Aug. Ethereal Spear (+22.5% Critical Extra Damage)',
+      'Aug. Ethereal Spear (+22.5% Critical Extra Damage)',
+      'Aug. Ethereal Spear (+22.5% Critical Extra Damage)',
+
+      'Aug. Ethereal Spear (+15% Base Damage)',
+      'Aug. Ethereal Spear (+15% Base Damage)',
+      'Aug. Ethereal Spear (+15% Base Damage)',
+      'Aug. Ethereal Spear (+15% Base Damage)',
+
+      'Aug. Salvation (+9% Base Healing)',
+      'Aug. Salvation (+9% Base Healing)',
+      'Aug. Salvation (+9% Base Healing)',
+      'Aug. Salvation (+9% Base Healing)',
+
+      'Aug. Strong Ethereal Spear (+18% Critical Extra Damage)',
+      'Aug. Strong Ethereal Spear (+18% Critical Extra Damage)',
+      'Aug. Strong Ethereal Spear (+18% Critical Extra Damage)',
+      'Aug. Strong Ethereal Spear (+18% Critical Extra Damage)',
+
+      'Aug. Strong Ethereal Spear (+12% Base Damage)',
+      'Aug. Strong Ethereal Spear (+12% Base Damage)',
+      'Aug. Strong Ethereal Spear (+12% Base Damage)',
+      'Aug. Strong Ethereal Spear (+12% Base Damage)',
+    ],
+  },
+} as const
+
+export const sharedGreaterGems = generateIdentity(
+  tokensByCategory.sharedGreaterGems,
+)
 
 export const vocationGreaterGems = {
-  knight: {
-    'Revelation Mastery (+225 Avatar of Steel)':
-      'Revelation Mastery (+225 Avatar of Steel)',
-    'Revelation Mastery (+225 Combat Mastery)':
-      'Revelation Mastery (+225 Combat Mastery)',
-    "Revelation Mastery (+225 Executioner's Throw)":
-      "Revelation Mastery (+225 Executioner's Throw)",
-    'Aug. Annihilation (+22.5% Critical Extra Damage)':
-      'Aug. Annihilation (+22.5% Critical Extra Damage)',
-    'Aug. Annihilation (+18% Base Damage)':
-      'Aug. Annihilation (+18% Base Damage)',
-    'Aug. Avatar of Steel (-900s Cooldown, +1% Momentum)':
-      'Aug. Avatar of Steel (-900s Cooldown, +1% Momentum)',
-    'Aug. Berserk (+18% Critical Extra Damage)':
-      'Aug. Berserk (+18% Critical Extra Damage)',
-    'Aug. Berserk (+7.5% Base Damage)': 'Aug. Berserk (+7.5% Base Damage)',
-    "Aug. Executioner's Throw (+18% Critical Extra Damage)":
-      "Aug. Executioner's Throw (+18% Critical Extra Damage)",
-    "Aug. Executioner's Throw (+9% Base Damage)":
-      "Aug. Executioner's Throw (+9% Base Damage)",
-    "Aug. Executioner's Throw (-2s Cooldown, +1% Momentum)":
-      "Aug. Executioner's Throw (-2s Cooldown, +1% Momentum)",
-    'Aug. Fair Wound Cleansing (+15% Base Healing)':
-      'Aug. Fair Wound Cleansing (+15% Base Healing)',
-    'Aug. Fierce Berserk (+12% Critical Extra Damage)':
-      'Aug. Fierce Berserk (+12% Critical Extra Damage)',
-    'Aug. Fierce Berserk (+7.5% Base Damage)':
-      'Aug. Fierce Berserk (+7.5% Base Damage)',
-    'Aug. Front Sweep (+18% Critical Extra Damage)':
-      'Aug. Front Sweep (+18% Critical Extra Damage)',
-    'Aug. Front Sweep (+12% Base Damage)':
-      'Aug. Front Sweep (+12% Base Damage)',
-    'Aug. Groundshaker (+18% Critical Extra Damage)':
-      'Aug. Groundshaker (+18% Critical Extra Damage)',
-    'Aug. Groundshaker (+9.75% Base Damage)':
-      'Aug. Groundshaker (+9.75% Base Damage)',
-  },
-  druid: {
-    'Revelation Mastery (+225 Avatar of Nature)':
-      'Revelation Mastery (+225 Avatar of Nature)',
-    'Revelation Mastery (+225 Blessing of the Grove)':
-      'Revelation Mastery (+225 Blessing of the Grove)',
-    'Revelation Mastery (+225 Twin Bursts)':
-      'Revelation Mastery (+225 Twin Bursts)',
-    'Aug. Avatar of Nature (-900s Cooldown, +1% Momentum)':
-      'Aug. Avatar of Nature (-900s Cooldown, +1% Momentum)',
-    'Aug. Eternal Winter (+18% Critical Extra Damage)':
-      'Aug. Eternal Winter (+18% Critical Extra Damage)',
-    'Aug. Eternal Winter (+12% Base Damage)':
-      'Aug. Eternal Winter (+12% Base Damage)',
-    'Aug. Heal Friend (+7.5% Base Healing)':
-      'Aug. Heal Friend (+7.5% Base Healing)',
-    'Aug. Ice Burst (+18% Critical Extra Damage)':
-      'Aug. Ice Burst (+18% Critical Extra Damage)',
-    'Aug. Ice Burst (+10.5% Base Damage)':
-      'Aug. Ice Burst (+10.5% Base Damage)',
-    'Aug. Mass Healing (+7.5% Base Healing)':
-      'Aug. Mass Healing (+7.5% Base Healing)',
-    "Aug. Nature's Embrace (-10s Cooldown, +1% Momentum)":
-      "Aug. Nature's Embrace (-10s Cooldown, +1% Momentum)",
-    'Aug. Strong Ice Wave (+22.5% Critical Extra Damage)':
-      'Aug. Strong Ice Wave (+22.5% Critical Extra Damage)',
-    'Aug. Strong Ice Wave (+12% Base Damage)':
-      'Aug. Strong Ice Wave (+12% Base Damage)',
-    'Aug. Terra Burst (+18% Critical Extra Damage)':
-      'Aug. Terra Burst (+18% Critical Extra Damage)',
-    'Aug. Terra Burst (+10.5% Base Damage)':
-      'Aug. Terra Burst (+10.5% Base Damage)',
-    'Aug. Terra Wave (+18% Critical Extra Damage)':
-      'Aug. Terra Wave (+18% Critical Extra Damage)',
-    'Aug. Terra Wave (+7.5% Base Damage)':
-      'Aug. Terra Wave (+7.5% Base Damage)',
-    'Aug. Ultimate Healing (+7.5% Base Healing)':
-      'Aug. Ultimate Healing (+7.5% Base Healing)',
-  },
-  sorcerer: {
-    'Revelation Mastery (+225 Avatar of Storm)':
-      'Revelation Mastery (+225 Avatar of Storm)',
-    'Revelation Mastery (+225 Beam Mastery)':
-      'Revelation Mastery (+225 Beam Mastery)',
-    'Revelation Mastery (+225 Drain Body)':
-      'Revelation Mastery (+225 Drain Body)',
-    'Aug. Avatar of Storm (-900s Cooldown, +1% Momentum)':
-      'Aug. Avatar of Storm (-900s Cooldown, +1% Momentum)',
-    'Aug. Energy Wave (+18% Critical Extra Damage)':
-      'Aug. Energy Wave (+18% Critical Extra Damage)',
-    'Aug. Energy Wave (+7.5% Base Damage)':
-      'Aug. Energy Wave (+7.5% Base Damage)',
-    'Aug. Energy Wave (-1s Cooldown, +1% Momentum)':
-      'Aug. Energy Wave (-1s Cooldown, +1% Momentum)',
-    'Aug. Great Death Beam (+22.5% Critical Extra Damage)':
-      'Aug. Great Death Beam (+22.5% Critical Extra Damage)',
-    'Aug. Great Death Beam (+15% Base Damage)':
-      'Aug. Great Death Beam (+15% Base Damage)',
-    'Aug. Great Energy Beam (+22.5% Critical Extra Damage)':
-      'Aug. Great Energy Beam (+22.5% Critical Extra Damage)',
-    'Aug. Great Energy Beam (+15% Base Damage)':
-      'Aug. Great Energy Beam (+15% Base Damage)',
-    'Aug. Great Fire Wave (+12% Critical Extra Damage)':
-      'Aug. Great Fire Wave (+12% Critical Extra Damage)',
-    'Aug. Great Fire Wave (+7.5% Base Damage)':
-      'Aug. Great Fire Wave (+7.5% Base Damage)',
-    "Aug. Hell's Core (+18% Critical Extra Damage)":
-      "Aug. Hell's Core (+18% Critical Extra Damage)",
-    "Aug. Hell's Core (+12% Base Damage)":
-      "Aug. Hell's Core (+12% Base Damage)",
-    'Aug. Rage of the Skies (+18% Critical Extra Damage)':
-      'Aug. Rage of the Skies (+18% Critical Extra Damage)',
-    'Aug. Rage of the Skies (+12% Base Damage)':
-      'Aug. Rage of the Skies (+12% Base Damage)',
-    'Aug. Ultimate Healing (+7.5% Base Healing)':
-      'Aug. Ultimate Healing (+7.5% Base Healing)',
-  },
-  paladin: {
-    'Revelation Mastery (+225 Avatar of Light)':
-      'Revelation Mastery (+225 Avatar of Light)',
-    'Revelation Mastery (+225 Divine Empowerment)':
-      'Revelation Mastery (+225 Divine Empowerment)',
-    'Revelation Mastery (+225 Divine Grenade)':
-      'Revelation Mastery (+225 Divine Grenade)',
-    'Aug. Avatar of Light (-900s Cooldown, +1% Momentum)':
-      'Aug. Avatar of Light (-900s Cooldown, +1% Momentum)',
-    'Aug. Divine Caldera (+12% Critical Extra Damage)':
-      'Aug. Divine Caldera (+12% Critical Extra Damage)',
-    'Aug. Divine Caldera (+7.5% Base Damage)':
-      'Aug. Divine Caldera (+7.5% Base Damage)',
-    'Aug. Divine Dazzle (-4s Cooldown, +1% Momentum)':
-      'Aug. Divine Dazzle (-4s Cooldown, +1% Momentum)',
-    'Aug. Divine Empowerment (-6s Cooldown, +1% Momentum)':
-      'Aug. Divine Empowerment (-6s Cooldown, +1% Momentum)',
-    'Aug. Divine Grenade (-2s Cooldown, +1% Momentum)':
-      'Aug. Divine Grenade (-2s Cooldown, +1% Momentum)',
-    'Aug. Divine Grenade (+18% Critical Extra Damage)':
-      'Aug. Divine Grenade (+18% Critical Extra Damage)',
-    'Aug. Divine Grenade (+9% Base Damage)':
-      'Aug. Divine Grenade (+9% Base Damage)',
-    'Aug. Divine Missile (+18% Critical Extra Damage)':
-      'Aug. Divine Missile (+18% Critical Extra Damage)',
-    'Aug. Divine Missile (+12% Base Damage)':
-      'Aug. Divine Missile (+12% Base Damage)',
-    'Aug. Ethereal Spear (+22.5% Critical Extra Damage)':
-      'Aug. Ethereal Spear (+22.5% Critical Extra Damage)',
-    'Aug. Ethereal Spear (+15% Base Damage)':
-      'Aug. Ethereal Spear (+15% Base Damage)',
-    'Aug. Salvation (+9% Base Healing)': 'Aug. Salvation (+9% Base Healing)',
-    'Aug. Strong Ethereal Spear (+18% Critical Extra Damage)':
-      'Aug. Strong Ethereal Spear (+18% Critical Extra Damage)',
-    'Aug. Strong Ethereal Spear (+12% Base Damage)':
-      'Aug. Strong Ethereal Spear (+12% Base Damage)',
-  },
+  knight: generateIdentity(tokensByCategory.vocationGreaterGems.knight),
+  druid: generateIdentity(tokensByCategory.vocationGreaterGems.druid),
+  sorcerer: generateIdentity(tokensByCategory.vocationGreaterGems.sorcerer),
+  paladin: generateIdentity(tokensByCategory.vocationGreaterGems.paladin),
 }
-*/
