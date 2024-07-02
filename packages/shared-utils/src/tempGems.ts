@@ -60,38 +60,28 @@ const fromTo: Record<string, string> = {
     'Aug. Ultimate Healing (+5% Base Healing)',
 
   // sorcerer
-  'Revelation Mastery (+150 Avatar of Storm)':
-    'Revelation Mastery (+225 Avatar of Storm)',
-  'Revelation Mastery (+150 Beam Mastery)':
-    'Revelation Mastery (+225 Beam Mastery)',
-  'Revelation Mastery (+150 Drain Body)':
-    'Revelation Mastery (+225 Drain Body)',
   'Aug. Avatar of Storm (-300s Cooldown)':
-    'Aug. Avatar of Storm (-900s Cooldown, +1% Momentum)',
+    'Aug. Avatar of Storm (-900s Cooldown)',
   'Aug. Energy Wave (+8% Critical Extra Damage)':
-    'Aug. Energy Wave (+18% Critical Extra Damage)',
-  'Aug. Energy Wave (Damage Increase)': 'Aug. Energy Wave (+7.5% Base Damage)',
-  'Aug. Energy Wave (-1s Cooldown)':
-    'Aug. Energy Wave (-1s Cooldown, +1% Momentum)',
+    'Aug. Energy Wave (+12% Critical Extra Damage)',
+  'Aug. Energy Wave (Damage Increase)': 'Aug. Energy Wave (+5% Base Damage)',
   'Aug. Great Death Beam (+8% Critical Extra Damage)':
-    'Aug. Great Death Beam (+22.5% Critical Extra Damage)',
+    'Aug. Great Death Beam (+15% Critical Extra Damage)',
   'Aug. Great Death Beam (Damage Increase)':
-    'Aug. Great Death Beam (+15% Base Damage)',
+    'Aug. Great Death Beam (+10% Base Damage)',
   'Aug. Great Energy Beam (+8% Critical Extra Damage)':
-    'Aug. Great Energy Beam (+22.5% Critical Extra Damage)',
+    'Aug. Great Energy Beam (+15% Critical Extra Damage)',
   'Aug. Great Energy Beam (Damage Increase)':
-    'Aug. Great Energy Beam (+15% Base Damage)',
-  'Aug. Great Fire Wave (+8% Critical Extra Damage)':
-    'Aug. Great Fire Wave (+12% Critical Extra Damage)',
+    'Aug. Great Energy Beam (+10% Base Damage)',
   'Aug. Great Fire Wave (Damage Increase)':
-    'Aug. Great Fire Wave (+7.5% Base Damage)',
+    'Aug. Great Fire Wave (+5% Base Damage)',
   "Aug. Hell's Core (+8% Critical Extra Damage)":
-    "Aug. Hell's Core (+18% Critical Extra Damage)",
-  "Aug. Hell's Core (Damage Increase)": "Aug. Hell's Core (+12% Base Damage)",
+    "Aug. Hell's Core (+12% Critical Extra Damage)",
+  "Aug. Hell's Core (Damage Increase)": "Aug. Hell's Core (+8% Base Damage)",
   'Aug. Rage of the Skies (+8% Critical Extra Damage)':
-    'Aug. Rage of the Skies (+18% Critical Extra Damage)',
+    'Aug. Rage of the Skies (+12% Critical Extra Damage)',
   'Aug. Rage of the Skies (Damage Increase)':
-    'Aug. Rage of the Skies (+12% Base Damage)',
+    'Aug. Rage of the Skies (+8% Base Damage)',
 
   // paladin
   'Revelation Mastery (+150 Avatar of Light)':
