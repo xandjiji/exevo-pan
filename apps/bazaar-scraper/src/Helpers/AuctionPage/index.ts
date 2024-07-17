@@ -338,6 +338,21 @@ export default class AuctionPage {
     return [...questSet]
   }
 
+  allAchievements($: CheerioAPI): string[] {
+    const achievementsElement = $(
+      '#Achievements .TableContentContainer tbody td',
+    )
+
+    const list: string[] = []
+
+    achievementsElement.filter(filterListTable).each((_, element) => {
+      const achievement = cheerio(element).text().trim().toLowerCase()
+      list.push(achievement)
+    })
+
+    return list
+  }
+
   rareAchievements($: CheerioAPI): string[] {
     const achievementsElement = $(
       '#Achievements .TableContentContainer tbody td',

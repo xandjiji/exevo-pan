@@ -20,7 +20,8 @@
     "checkup": "NODE_PATH=./src sucrase-node src/Scripts/StaticCheckup/run.ts",
     "revalidate": "NODE_PATH=./src sucrase-node src/Scripts/RevalidatePage/run.ts",
     "dev": "serve -l 5555 Output",
-    "staging": "Output/staging/deployStaging.sh"
+    "staging": "Output/staging/deployStaging.sh",
+    "explore": "NODE_OPTIONS=--max_old_space_size=10000 NODE_PATH=./src sucrase-node src/dataExplorer.ts"
   },
   "dependencies": {
     "@types/cheerio": "^0.22.30",

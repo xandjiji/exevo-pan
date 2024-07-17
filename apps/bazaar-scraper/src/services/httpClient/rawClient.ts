@@ -25,6 +25,19 @@ export default class RawClient {
     }
   }
 
+  static async getAuctionHtml(auctionId: number): Promise<string | false> {
+    try {
+      const gzippedData = await fs.readFile(
+        file.RAW_DATA_FOLDER.auctionResolver(auctionId, 'html'),
+      )
+
+      const unzippedBuffer = zlib.gunzipSync(gzippedData)
+      return unzippedBuffer.toString()
+    } catch {
+      return false
+    }
+  }
+
   static async postHtml({
     auctionId,
     pageIndex,
