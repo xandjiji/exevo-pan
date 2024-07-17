@@ -1,5 +1,6 @@
 *.json
 *.jsonl
+*.tar.gz
 !.gitignore
 !ServerData.json
 static/ServerData.json
