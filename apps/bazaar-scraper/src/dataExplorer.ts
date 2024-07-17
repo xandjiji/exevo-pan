@@ -1,5 +1,4 @@
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-continue */
 /* eslint-disable no-await-in-loop */
@@ -28,7 +27,14 @@ import ScrapServers from 'Scripts/ScrapServers'
 import ScrapRareItems from 'Scripts/ScrapRareItems'
 import ScrapHistory from 'Scripts/ScrapHistory'
 import UpdateHistoryStatistics from 'Scripts/UpdateHistoryStatistics'
-import { broadcast, coloredText, log, tabBroadcast, TrackETA } from 'logging'
+import {
+  broadcast,
+  coloredText,
+  log,
+  tabBroadcast,
+  Timer,
+  TrackETA,
+} from 'logging'
 import { performance } from 'perf_hooks'
 import { buildCharacterData } from 'shared-utils/dist/buildCharacterData'
 import { vocation as vocationUtil } from 'data-dictionary/dist/dictionaries/vocations'
@@ -69,22 +75,34 @@ const exploreRaw = async () => {
   const INITIAL_AUCTION_ID = 0
   const FINAL_AUCTION_ID = 1622129
 
+  // these are only necessary for nice logs
+  const timer = new Timer()
+  const eta = new TrackETA(
+    FINAL_AUCTION_ID - INITIAL_AUCTION_ID,
+    coloredText('Scraping from local raw HTML data', 'highlight'),
+  )
+
   const scraper = new AuctionPage()
   const postHelper = new PostData()
 
   // this is only necessary if you need to work with the same server ids that Exevo Pan uses internally
   // await scraper.loadServerData()
 
+  const bag: any[] = []
+
   for (
     let auctionId = INITIAL_AUCTION_ID;
     auctionId <= FINAL_AUCTION_ID;
     auctionId++
   ) {
+    eta.incTask()
+    broadcast(`Scraping auction page ${eta.getProgress()}`, 'neutral')
     const content = await RawHttpClient.getAuctionHtml(auctionId)
     if (!content) continue
 
     const $ = cheerio.load(content)
 
+    // scraping regular data:
     const achievements = scraper.allAchievements($)
 
     // scraping paged data:
@@ -102,8 +120,13 @@ const exploreRaw = async () => {
       mounts = [...mounts, ...postHelper.mounts(html)]
     }
 
-    console.log({ achievements, mounts })
+    bag.push({ achievements, mounts })
   }
+
+  eta.finish()
+  broadcast(`Script finished in ${timer.elapsedTime()}`, 'success')
+
+  console.log(bag)
 }
 
 exploreRaw()
