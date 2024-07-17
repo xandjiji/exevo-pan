@@ -1,4 +1,7 @@
 /* eslint-disable no-restricted-syntax */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-plusplus */
+/* eslint-disable no-continue */
 /* eslint-disable no-await-in-loop */
 /* eslint-disable no-param-reassign */
 import fetch from 'node-fetch'
@@ -41,30 +44,66 @@ import {
 } from 'data-dictionary/dist/dictionaries/bosses'
 import serverJsonData from '../Output/ServerData.json'
 
-function auctionIdToUrl(id: number) {
-  return `https://www.tibia.com/charactertrade/?subtopic=currentcharactertrades&page=details&auctionid=${id}&source=overview`
+const DETAIL_BLOCK_IDS = {
+  general: 'General',
+  itemSummary: 'ItemSummary',
+  storeItemSummary: 'StoreItemSummary',
+  mounts: 'Mounts',
+  storeMounts: 'StoreMounts',
+  outfits: 'Outfits',
+  storeOutfits: 'StoreOutfits',
+  familiars: 'Familiars',
+  blessings: 'Blessings',
+  imbuements: 'Imbuements',
+  charms: 'Charms',
+  cyclopediaAreas: 'CompletedCyclopediaMapAreas',
+  quests: 'CompletedQuestLines',
+  titles: 'Titles',
+  achievements: 'Achievements',
+  bestiary: 'BestiaryProgress',
+  bosstiary: 'BosstiaryProgress',
+  gems: 'RevealedGems',
 }
 
-const main = async () => {
+const exploreRaw = async () => {
+  const INITIAL_AUCTION_ID = 0
+  const FINAL_AUCTION_ID = 1622129
+
   const scraper = new AuctionPage()
+  const postHelper = new PostData()
 
   // this is only necessary if you need to work with the same server ids that Exevo Pan uses internally
   // await scraper.loadServerData()
 
-  const ID = 1622126
-  const content = await RawHttpClient.tryGetHtml(auctionIdToUrl(ID))
-  if (content) {
+  for (
+    let auctionId = INITIAL_AUCTION_ID;
+    auctionId <= FINAL_AUCTION_ID;
+    auctionId++
+  ) {
+    const content = await RawHttpClient.getAuctionHtml(auctionId)
+    if (!content) continue
+
     const $ = cheerio.load(content)
-    console.log(scraper.allAchievements($))
+
+    const achievements = scraper.allAchievements($)
+
+    // scraping paged data:
+    const lastIndex = scraper.boxSectionLastIndex(DETAIL_BLOCK_IDS.mounts, $)
+
+    let mounts = scraper.mountFirstPage($) // the first page is already present in the html
+
+    for (let pageIndex = 2; pageIndex <= lastIndex; pageIndex += 1) {
+      const html = await RawHttpClient.postHtml({
+        auctionId,
+        pageIndex,
+        type: 'mounts',
+      })
+
+      mounts = [...mounts, ...postHelper.mounts(html)]
+    }
+
+    console.log({ achievements, mounts })
   }
-
-  //
-  // const html = await HttpClient.getHtml(buildUrl(1612177))
-  // const result = await helper2.partialCharacterObject(html)
-  // console.log(result)
-
-  // const helper = new History()
-  // await helper.load()
 }
 
-main()
+exploreRaw()

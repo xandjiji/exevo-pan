@@ -25,13 +25,10 @@ export default class RawClient {
     }
   }
 
-  static async tryGetHtml(url: string): Promise<string | false> {
-    const auctionId = new URLSearchParams(url).get(this.QUERY_PARAMS.auctionId)
-    if (!auctionId) throw Error(`Can't find raw data for '${url}'`)
-
+  static async getAuctionHtml(auctionId: number): Promise<string | false> {
     try {
       const gzippedData = await fs.readFile(
-        file.RAW_DATA_FOLDER.auctionResolver(+auctionId, 'html'),
+        file.RAW_DATA_FOLDER.auctionResolver(auctionId, 'html'),
       )
 
       const unzippedBuffer = zlib.gunzipSync(gzippedData)
