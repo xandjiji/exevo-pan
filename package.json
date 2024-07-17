@@ -41,7 +41,8 @@
     "prisma:push": "yarn --cwd packages/db push",
     "prisma:generate": "yarn --cwd packages/db generate",
     "prisma:run": "yarn --cwd packages/db execute",
-    "prisma:studio": "yarn --cwd packages/db studio"
+    "prisma:studio": "yarn --cwd packages/db studio",
+    "explore": "yarn --cwd apps/bazaar-scraper explore"
   },
   "devDependencies": {
     "husky": "^7.0.4",
