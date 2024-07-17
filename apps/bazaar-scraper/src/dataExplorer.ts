@@ -129,4 +129,21 @@ const exploreRaw = async () => {
   console.log(bag)
 }
 
+const exploreAuctionHistory = async () => {
+  const history = new History()
+  await history.load()
+
+  const auctions = history.getEntireHistory()
+
+  let totalTCVolume = 0
+  for (const auction of auctions) {
+    if (!auction.hasBeenBidded) continue
+    totalTCVolume += auction.currentBid
+  }
+
+  console.log({ totalTCVolume })
+}
+
 exploreRaw()
+
+// exploreAuctionHistory()
