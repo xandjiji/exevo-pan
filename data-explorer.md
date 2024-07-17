@@ -56,14 +56,14 @@ Download the datasets that you want to explore:
 - Auction history database
   [213mb](https://drive.google.com/file/d/1jP4HuTnmh5lSL-ao0wfdbEur6CAQEeWX/view?usp=sharing)
 
-Extract the `rawData.tar.gz` to the specified directory (make you adjust your
-file paths):
+Extract the `rawData.tar.gz` to the specified directory (make sure you adjust
+your file paths):
 
 ```bash
 tar -xzvf rawData.tar.gz -C ~/exevo-pan/apps/bazaar-scraper/Output/
 ```
 
-Extract the `HistoryAuctions.tar.gz` to the especified directory (make you
+Extract the `HistoryAuctions.tar.gz` to the especified directory (make sure you
 adjust your file paths):
 
 ```bash
