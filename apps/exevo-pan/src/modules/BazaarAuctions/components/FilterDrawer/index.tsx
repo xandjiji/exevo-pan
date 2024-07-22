@@ -3,8 +3,6 @@ import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { DEFAULT_FILTER_OPTIONS } from 'shared-utils/dist/contracts/Filters/defaults'
-import Image from 'next/image'
-import tibiaCoinSrc from 'assets/tibiacoin.png'
 import { dictionary as tagsDictionary } from 'data-dictionary/dist/dictionaries/characterTags'
 import { servers } from 'data-dictionary/dist/dictionaries/servers'
 import { vocation } from 'data-dictionary/dist/dictionaries/vocations'
@@ -17,7 +15,7 @@ import {
   NumericInput,
 } from 'components/Atoms'
 import { InfoTooltip, Tooltip } from 'components/Organisms'
-import { blurOnEnter, proTagsSet } from 'utils'
+import { blurOnEnter, loadRawSrc, proTagsSet } from 'utils'
 import {
   BookIcon,
   CharmsIcon,
@@ -40,6 +38,8 @@ import OutfitControls from './OutfitControls'
 import { useGemOptions } from './useGemOptions'
 import * as S from './atoms'
 import { FilterDrawerProps } from './types'
+
+const tibiaCoinSrc = loadRawSrc('/assets/tibiacoin.png')
 
 const { VOCATION_IDS, VOCATION_NAMES } = vocation
 const { PVP_TYPES, SERVER_LOCATIONS } = servers
@@ -761,10 +761,9 @@ const FilterDrawer = ({ open, onClose, ...props }: FilterDrawerProps) => {
           <NumericInput
             label={
               <span>
-                <Image
+                <img
                   src={tibiaCoinSrc}
                   alt="Tibia Coin"
-                  unoptimized
                   width={12}
                   height={12}
                   className="pixelated mr-1"

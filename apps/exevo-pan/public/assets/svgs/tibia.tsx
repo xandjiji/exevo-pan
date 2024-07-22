@@ -1,78 +1,73 @@
-import Image from 'next/image'
+import { loadRawSrc } from 'utils'
 import { ResetIcon } from 'assets/svgs'
-import rookSrc from 'assets/rook.png'
-import knightSrc from 'assets/knight.png'
-import paladinSrc from 'assets/paladin.png'
-import sorcererSrc from 'assets/sorcerer.png'
-import druidSrc from 'assets/druid.png'
-import magicSrc from 'assets/magic.png'
-import distanceSrc from 'assets/distance.png'
-import clubSrc from 'assets/club.png'
-import swordSrc from 'assets/sword.png'
-import axeSrc from 'assets/axe.png'
-import doveSrc from 'assets/dove.png'
-import orangeSkullSrc from 'assets/orangeSkull.png'
-import whiteSkullSrc from 'assets/whiteSkull.png'
-import redSkullSrc from 'assets/redSkull.png'
-import blackSkullSrc from 'assets/blackSkull.png'
-import oceFlagSrc from 'assets/oce-flag.png'
-import brFlagSrc from 'assets/br-flag.png'
-import euFlagSrc from 'assets/eu-flag.png'
-import naFlagSrc from 'assets/na-flag.png'
-import yellowSrc from 'assets/yellowbattleye.png'
-import greenSrc from 'assets/greenbattleye.png'
+
+const greenSrc = loadRawSrc('/assets/greenbattleye.png')
+const yellowSrc = loadRawSrc('/assets/yellowbattleye.png')
+const naFlagSrc = loadRawSrc('/assets/na-flag.png')
+const euFlagSrc = loadRawSrc('/assets/eu-flag.png')
+const brFlagSrc = loadRawSrc('/assets/br-flag.png')
+const oceFlagSrc = loadRawSrc('/assets/oce-flag.png')
+const blackSkullSrc = loadRawSrc('/assets/blackSkull.png')
+const redSkullSrc = loadRawSrc('/assets/redSkull.png')
+const whiteSkullSrc = loadRawSrc('/assets/whiteSkull.png')
+const orangeSkullSrc = loadRawSrc('/assets/orangeSkull.png')
+const doveSrc = loadRawSrc('/assets/dove.png')
+const axeSrc = loadRawSrc('/assets/axe.png')
+const swordSrc = loadRawSrc('/assets/sword.png')
+const clubSrc = loadRawSrc('/assets/club.png')
+const distanceSrc = loadRawSrc('/assets/distance.png')
+const magicSrc = loadRawSrc('/assets/magic.png')
+const druidSrc = loadRawSrc('/assets/druid.png')
+const sorcererSrc = loadRawSrc('/assets/sorcerer.png')
+const paladinSrc = loadRawSrc('/assets/paladin.png')
+const knightSrc = loadRawSrc('/assets/knight.png')
+const rookSrc = loadRawSrc('/assets/rook.png')
 
 export const Reset = (args: JSX.IntrinsicElements['svg']) => (
   <ResetIcon {...args} className="fill-onPrimary h-6 w-6 transition-colors" />
 )
 
-export const Rook = () => <Image role="none" alt="None" src={rookSrc} />
-export const Knight = () => <Image role="none" alt="Knight" src={knightSrc} />
-export const Paladin = () => (
-  <Image role="none" alt="Paladin" src={paladinSrc} />
-)
+export const Rook = () => <img role="none" alt="None" src={rookSrc} />
+export const Knight = () => <img role="none" alt="Knight" src={knightSrc} />
+export const Paladin = () => <img role="none" alt="Paladin" src={paladinSrc} />
 export const Sorcerer = () => (
-  <Image role="none" alt="Sorcerer" src={sorcererSrc} />
+  <img role="none" alt="Sorcerer" src={sorcererSrc} />
 )
-export const Druid = () => <Image role="none" alt="Druid" src={druidSrc} />
+export const Druid = () => <img role="none" alt="Druid" src={druidSrc} />
 
-export const Magic = () => (
-  <Image role="none" alt="Magic Level" src={magicSrc} />
-)
+export const Magic = () => <img role="none" alt="Magic Level" src={magicSrc} />
 export const Distance = () => (
-  <Image role="none" alt="Distance Fighting" src={distanceSrc} />
+  <img role="none" alt="Distance Fighting" src={distanceSrc} />
 )
-export const Club = () => (
-  <Image role="none" alt="Club Fighting" src={clubSrc} />
-)
+export const Club = () => <img role="none" alt="Club Fighting" src={clubSrc} />
 export const Sword = () => (
-  <Image role="none" alt="Sword Fighting" src={swordSrc} />
+  <img role="none" alt="Sword Fighting" src={swordSrc} />
 )
-export const Axe = () => <Image role="none" alt="Axe Fighting" src={axeSrc} />
+export const Axe = () => <img role="none" alt="Axe Fighting" src={axeSrc} />
 
-export const Dove = () => <Image role="none" alt="Optional Pvp" src={doveSrc} />
+export const Dove = () => <img role="none" alt="Optional Pvp" src={doveSrc} />
 export const WhiteSkull = () => (
-  <Image role="none" alt="Open Pvp" src={whiteSkullSrc} />
+  <img role="none" alt="Open Pvp" src={whiteSkullSrc} />
 )
 export const OrangeSkull = () => (
-  <Image role="none" alt="Retro Open Pvp" src={orangeSkullSrc} />
+  <img role="none" alt="Retro Open Pvp" src={orangeSkullSrc} />
 )
 export const RedSkull = () => (
-  <Image role="none" alt="Hardcore Pvp" src={redSkullSrc} />
+  <img role="none" alt="Hardcore Pvp" src={redSkullSrc} />
 )
 export const BlackSkull = () => (
-  <Image role="none" alt="Retro Hardcore Pvp" src={blackSkullSrc} />
+  <img role="none" alt="Retro Hardcore Pvp" src={blackSkullSrc} />
 )
 
-export const EuFlag = () => <Image role="none" alt="Europe" src={euFlagSrc} />
+export const EuFlag = () => <img role="none" alt="Europe" src={euFlagSrc} />
 export const NaFlag = () => (
-  <Image role="none" alt="North America" src={naFlagSrc} />
+  <img role="none" alt="North America" src={naFlagSrc} />
 )
 export const BrFlag = () => (
-  <Image role="none" alt="South America" src={brFlagSrc} />
+  <img role="none" alt="South America" src={brFlagSrc} />
 )
 export const OceFlag = () => (
-  <Image role="none" alt="South America" src={oceFlagSrc} />
+  <img role="none" alt="South America" src={oceFlagSrc} />
 )
 
 export const BattlEye = ({
@@ -80,7 +75,7 @@ export const BattlEye = ({
 }: {
   color: 'battleGreen' | 'battleYellow'
 }) => (
-  <Image
+  <img
     role="none"
     alt={`${color === 'battleGreen' ? 'Green' : 'Yellow'} BattlEye`}
     src={color === 'battleGreen' ? greenSrc : yellowSrc}

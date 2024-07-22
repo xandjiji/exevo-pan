@@ -1,13 +1,12 @@
-import { useState, useRef } from 'react'
+import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { useSession, signOut } from 'next-auth/react'
+import { signOut, useSession } from 'next-auth/react'
 import {
-  LoginIcon,
   DashboardIcon,
+  LoginIcon,
   LogoutIcon,
   PersonRoundedIcon,
 } from 'assets/svgs'
@@ -125,12 +124,11 @@ const AccountButton = ({
                     )}
                   />
                 ) : (
-                  <Image
+                  <img
                     src={data.user.picture}
                     alt={data.user.name}
                     width={32}
                     height={32}
-                    unoptimized
                     onError={() => setFallbackAvatar(true)}
                     className={clsx(
                       'clickable animate-fadeIn rounded-full border-2 border-solid shadow',
