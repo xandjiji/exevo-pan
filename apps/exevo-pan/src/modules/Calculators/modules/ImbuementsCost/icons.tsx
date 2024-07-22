@@ -1,19 +1,20 @@
-import Image from 'next/image'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { SpritePortrait } from 'components/Atoms'
-import smallGoldTokenSrc from 'assets/labelGoldToken.png'
-import smallMarketSrc from 'assets/labelMarket.png'
-import goldTokenSrc from 'assets/goldToken.png'
-import marketSrc from 'assets/market.png'
-import { Material as MaterialProps, BuyIconProps } from './types'
+import { loadRawSrc } from 'utils'
+import { BuyIconProps, Material as MaterialProps } from './types'
+
+const marketSrc = loadRawSrc('/assets/market.png')
+const goldTokenSrc = loadRawSrc('/assets/goldToken.png')
+const smallMarketSrc = loadRawSrc('/assets/labelMarket.png')
+const smallGoldTokenSrc = loadRawSrc('/assets/labelGoldToken.png')
 
 export const Label = {
   GoldToken: () => (
-    <Image src={smallGoldTokenSrc} width={12} height={12} alt="Gold Token" />
+    <img src={smallGoldTokenSrc} width={12} height={12} alt="Gold Token" />
   ),
   Market: () => (
-    <Image src={smallMarketSrc} width={12} height={12} alt="Market" />
+    <img src={smallMarketSrc} width={12} height={12} alt="Market" />
   ),
 }
 

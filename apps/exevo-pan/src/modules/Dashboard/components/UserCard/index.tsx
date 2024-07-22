@@ -1,9 +1,9 @@
-import { useState, useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import type { BuiltInProviderType } from 'next-auth/providers'
 import { useTranslations } from 'contexts/useTranslation'
 import { FadeImage } from 'components/Atoms'
 import { Tooltip } from 'components/Organisms'
-import { PersonIcon, GoogleIcon, DiscordIcon } from 'assets/svgs'
+import { DiscordIcon, GoogleIcon, PersonIcon } from 'assets/svgs'
 import { dateToDateObject } from 'utils'
 import { UserCardProps } from './types'
 
@@ -50,7 +50,6 @@ const UserCard = ({ user }: UserCardProps) => {
           alt={name}
           width={64}
           height={64}
-          unoptimized
           className="bg-surface rounded shadow"
           onError={() => setFallbackAvatar(true)}
         />

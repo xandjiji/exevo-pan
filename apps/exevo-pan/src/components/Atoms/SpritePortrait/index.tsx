@@ -1,7 +1,6 @@
-import { memo } from 'react'
+import { memo, useEffect, useRef } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
 import { useOnImageLoad } from 'hooks'
 import ActiveCount from '../ActiveCount'
 import { BackgroundProps, SpritePortraitProps } from './types'
@@ -35,20 +34,26 @@ const SpritePortrait = ({
   imgStyle,
   ...props
 }: SpritePortraitProps) => {
+  const ref = useRef<HTMLImageElement>(null)
   const { common } = useTranslations()
 
   const [loaded, onLoadingComplete] = useOnImageLoad()
 
+  useEffect(() => {
+    if (ref.current?.complete) onLoadingComplete()
+  }, [])
+
   return (
     <Background offset={offset} highlight={highlight} {...props}>
-      <Image
+      <img
+        ref={ref}
         alt={alt}
         src={src}
         width={width}
         height={height}
-        onLoadingComplete={onLoadingComplete}
+        onLoad={onLoadingComplete}
+        loading="lazy"
         onError={onError}
-        unoptimized
         className={clsx(
           'z-1 pixelated transition-opacity',
           offset && '!-ml-6 !-mt-6',

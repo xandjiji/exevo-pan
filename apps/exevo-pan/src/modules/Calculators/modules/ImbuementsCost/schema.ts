@@ -1,13 +1,15 @@
-import vampireteethSrc from 'assets/vampireTeeth.png'
-import bloodypincersSrc from 'assets/bloodyPincers.png'
-import deadbrainSrc from 'assets/deadBrain.png'
-import ropebeltSrc from 'assets/ropeBelt.png'
-import silencerclawsSrc from 'assets/silencerClaws.png'
-import grimeleechSrc from 'assets/grimeleech.png'
-import protectivecharmSrc from 'assets/protectiveCharm.png'
-import sabretoothSrc from 'assets/sabretooth.png'
-import vexclawtalonSrc from 'assets/vexclawTalon.png'
+import { loadRawSrc } from 'utils'
 import { RecipeSchema } from './types'
+
+const vexclawtalonSrc = loadRawSrc('/assets/vexclawTalon.png')
+const sabretoothSrc = loadRawSrc('/assets/sabretooth.png')
+const protectivecharmSrc = loadRawSrc('/assets/protectiveCharm.png')
+const grimeleechSrc = loadRawSrc('/assets/grimeleech.png')
+const silencerclawsSrc = loadRawSrc('/assets/silencerClaws.png')
+const ropebeltSrc = loadRawSrc('/assets/ropeBelt.png')
+const deadbrainSrc = loadRawSrc('/assets/deadBrain.png')
+const bloodypincersSrc = loadRawSrc('/assets/bloodyPincers.png')
+const vampireteethSrc = loadRawSrc('/assets/vampireTeeth.png')
 
 export const tierOptions: Option[] = [
   { name: 'Powerful (III)', value: '3' },

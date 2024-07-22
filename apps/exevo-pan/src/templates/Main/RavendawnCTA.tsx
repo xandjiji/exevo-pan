@@ -1,7 +1,8 @@
-import { templateMessage, useTranslations } from 'contexts/useTranslation'
+import { useTranslations } from 'contexts/useTranslation'
 import { Shine } from 'components/Atoms'
-import Image from 'next/image'
-import ravendawnSrc from 'assets/ravendawn-logo-2.png'
+import { loadRawSrc } from 'utils'
+
+const ravendawnSrc = loadRawSrc('/assets/ravendawn-logo-2.png')
 
 export const RavendawnCTA = () => {
   const { common } = useTranslations()
@@ -16,7 +17,7 @@ export const RavendawnCTA = () => {
     >
       <Shine animationIterationCount="infinite" width={60} />
 
-      <Image
+      <img
         src={ravendawnSrc}
         alt="Play Ravendawn"
         style={{ filter: 'drop-shadow(0 0 1px black)', translate: '0px 1px' }}

@@ -37,7 +37,6 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
                 width={48}
                 height={48}
                 alt={title}
-                unoptimized
                 className="relative h-12 w-12"
               />
             </div>

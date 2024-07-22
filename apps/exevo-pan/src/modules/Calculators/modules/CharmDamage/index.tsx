@@ -1,13 +1,12 @@
-import { useState, useMemo } from 'react'
-import Image from 'next/image'
-import { LabeledCard, Input, Checkbox, Slider } from 'components/Atoms'
+import { useMemo, useState } from 'react'
+import { Checkbox, Input, LabeledCard, Slider } from 'components/Atoms'
 import { useRouter } from 'next/router'
-import { blurOnEnter } from 'utils'
-import { Spacer, Chip } from '../../components'
+import { blurOnEnter, loadRawSrc } from 'utils'
+import { Chip, Spacer } from '../../components'
 import {
-  LOW_BLOW_MULTIPLIER,
   ELEMENTAL_DAMAGE,
   ELEMENTAL_PROC_CHANCE,
+  LOW_BLOW_MULTIPLIER,
   POWERFUL_MULTIPLIER,
   SPRITE_PATH,
 } from './constants'
@@ -64,8 +63,8 @@ export const Calculator = () => {
         <Group>
           <strong id="average-dps">{texts.finalAverageDamage}:</strong>
           <Chip aria-labelledby="average-dps">
-            <Image
-              src={`${SPRITE_PATH}/Low Blow.png`}
+            <img
+              src={loadRawSrc(`${SPRITE_PATH}/Low Blow.png`)}
               width={16}
               height={16}
               alt="Low Blow"
@@ -109,7 +108,7 @@ export const Calculator = () => {
         <Group>
           <strong id="elemental-dps">{texts.finalAverageDamage}:</strong>
           <Chip aria-labelledby="elemental-dps">
-            <Image
+            <img
               src={`${SPRITE_PATH}/Charm.png`}
               width={16}
               height={16}

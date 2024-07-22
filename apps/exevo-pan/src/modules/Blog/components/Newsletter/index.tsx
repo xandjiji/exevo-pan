@@ -2,12 +2,14 @@ import { memo, useState } from 'react'
 import clsx from 'clsx'
 import { useRouter } from 'next/router'
 import { toast } from 'react-hot-toast'
-import { FadeImage, Input, Button } from 'components/Atoms'
+import { Button, FadeImage, Input } from 'components/Atoms'
 import { trpc } from 'lib/trpc'
 import { useTranslations } from 'contexts/useTranslation'
 import { locales } from 'Constants'
-import mailboxSrc from 'assets/mailbox.png'
-import letterSrc from 'assets/letter.png'
+import { loadRawSrc } from 'utils'
+
+const letterSrc = loadRawSrc('/assets/letter.png')
+const mailboxSrc = loadRawSrc('/assets/mailbox.png')
 
 const { DEFAULT_LOCALE } = locales
 
@@ -57,9 +59,9 @@ const Newsletter = ({
           alt="Royal mail"
           width={64}
           height={64}
-          unoptimized
           src={mailboxSrc}
           className="opacity-50 mix-blend-soft-light"
+          loading="lazy"
         />
       </div>
 

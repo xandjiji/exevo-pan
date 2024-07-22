@@ -1,10 +1,11 @@
 import { useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
 import Link from 'next/link'
+import { loadRawSrc } from 'utils'
 import { links } from 'Constants'
-import tbjSrc from 'assets/tibiablackjack-24x24.png'
-import tcSrc from 'assets/tibiaCoins.gif'
-import ravenSrc from 'assets/ravendawn-ico.png'
+
+const ravenSrc = loadRawSrc('/assets/ravendawn-ico.png')
+const tcSrc = loadRawSrc('/assets/tibiaCoins.gif')
+const tbjSrc = loadRawSrc('/assets/tibiablackjack-24x24.png')
 
 const MobileTopCTA = () => {
   const { common } = useTranslations()
@@ -18,7 +19,7 @@ const MobileTopCTA = () => {
           rel="noopener external nofollow"
           href={links.TIBIA_BLACKJACK}
         >
-          <Image src={tbjSrc} alt="Tibia Blackjack" width={24} height={24} />
+          <img src={tbjSrc} alt="Tibia Blackjack" width={24} height={24} />
           <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
             {common.TibiaBlackjackCta.text}
           </span>
@@ -32,7 +33,7 @@ const MobileTopCTA = () => {
           rel="noopener external nofollow"
           href={common.TibiaCoinsCta.link}
         >
-          <Image src={tcSrc} alt="Tibia Coins" width={24} height={24} />
+          <img src={tcSrc} alt="Tibia Coins" width={24} height={24} />
           <span style={{ filter: 'drop-shadow(0 0 1px black)' }}>
             {common.TibiaCoinsCta.text}
           </span>
@@ -46,7 +47,7 @@ const MobileTopCTA = () => {
           rel="noopener external nofollow"
           href={common.Ravendawn.link}
         >
-          <Image
+          <img
             src={ravenSrc}
             alt="Ravendawn"
             width={16}

@@ -1,8 +1,9 @@
 import { ActiveCount as BaseActiveCount } from 'components/Atoms'
-import Image from 'next/image'
-import lastingSrc from 'assets/lastingSword.gif'
-import durableSrc from 'assets/durableSword.gif'
-import regularSrc from 'assets/regularSword.gif'
+import { loadRawSrc } from 'utils'
+
+const regularSrc = loadRawSrc('/assets/regularSword.gif')
+const durableSrc = loadRawSrc('/assets/durableSword.gif')
+const lastingSrc = loadRawSrc('/assets/lastingSword.gif')
 
 export const ActiveCount: typeof BaseActiveCount = (args) => (
   <BaseActiveCount
@@ -14,7 +15,7 @@ export const ActiveCount: typeof BaseActiveCount = (args) => (
 
 export const Weapon = {
   lasting: () => (
-    <Image
+    <img
       role="none"
       width={16}
       height={16}
@@ -23,7 +24,7 @@ export const Weapon = {
     />
   ),
   durable: () => (
-    <Image
+    <img
       role="none"
       width={16}
       height={16}
@@ -32,7 +33,7 @@ export const Weapon = {
     />
   ),
   regular: () => (
-    <Image
+    <img
       role="none"
       width={16}
       height={16}
