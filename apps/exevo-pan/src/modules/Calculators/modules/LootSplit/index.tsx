@@ -1,25 +1,24 @@
-import { useState, useCallback } from 'react'
+import { useCallback, useState } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import Image from 'next/image'
 import {
-  LabeledCard,
-  Tabs,
-  TextArea,
-  Text,
   Button,
   CopyButton,
+  LabeledCard,
+  Tabs,
+  Text,
+  TextArea,
 } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { InfoTooltip } from 'components/Organisms'
-import clipboardSrc from 'assets/clipboard.png'
+import { loadRawSrc } from 'utils'
 import {
   AddPostIcon,
+  ChevronRightIcon,
   ReceiptIcon,
   TrashIcon,
-  ChevronRightIcon,
 } from 'assets/svgs'
-import { Group, Chip, ChipWrapper } from '../../components'
+import { Chip, ChipWrapper, Group } from '../../components'
 import AdvancedOptionsDialog from './AdvancedOptionsDialog'
 import SessionDialog from './SessionDialog'
 import useHistory from './useHistory'
@@ -31,6 +30,8 @@ import TransferTable from './TransferTable'
 import { calculateHuntData } from './utils'
 import { defaultValue } from './defaultValue'
 import { HistoryEntry } from './types'
+
+const clipboardSrc = loadRawSrc('/assets/clipboard.png')
 
 const LootSplit = () => {
   const { calculators } = useTranslations()
@@ -101,10 +102,9 @@ const LootSplit = () => {
                 <InfoTooltip
                   labelSize
                   content={
-                    <Image
+                    <img
                       src={clipboardSrc}
                       alt={calculators.LootSplit.labels.tooltipClipboard}
-                      unoptimized
                     />
                   }
                 />
