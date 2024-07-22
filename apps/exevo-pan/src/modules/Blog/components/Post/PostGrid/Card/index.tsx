@@ -15,7 +15,7 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
         alt={title}
         width={32}
         height={32}
-        unoptimized
+        loading="lazy"
       />
     </div>
 

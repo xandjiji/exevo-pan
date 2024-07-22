@@ -1,20 +1,29 @@
-import { memo } from 'react'
+/* eslint-disable jsx-a11y/alt-text */
+import { memo, useEffect, useRef } from 'react'
 import clsx from 'clsx'
-import Image, { ImageProps } from 'next/image'
 import { useOnImageLoad } from 'hooks'
 
-const FadeImage = ({ className, ...props }: ImageProps) => {
+const FadeImage = ({
+  className,
+  ...props
+}: React.ComponentPropsWithoutRef<'img'>) => {
+  const ref = useRef<HTMLImageElement>(null)
   const [loaded, onLoadingComplete] = useOnImageLoad()
 
+  useEffect(() => {
+    if (ref.current?.complete) onLoadingComplete()
+  }, [])
+
   return (
-    <Image
+    <img
+      ref={ref}
       className={clsx(
         'pixelated transition-opacity',
         !loaded && 'opacity-0',
         className,
       )}
       {...props}
-      onLoadingComplete={onLoadingComplete}
+      onLoad={onLoadingComplete}
     />
   )
 }

@@ -2,8 +2,10 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 import { FadeImage } from 'components/Atoms'
-import logoMdSrc from 'assets/tibiablackjack.png'
+import { loadRawSrc } from 'utils'
 import { links } from 'Constants'
+
+const logoMdSrc = loadRawSrc('/assets/tibiablackjack.png')
 
 export const Banner = memo(
   ({ className, ...props }: JSX.IntrinsicElements['a']) => (
@@ -23,6 +25,7 @@ export const Banner = memo(
         alt="Tibia Blackjack"
         width={97}
         height={61}
+        loading="lazy"
       />
     </a>
   ),

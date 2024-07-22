@@ -28,7 +28,7 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
           alt={title}
           width={120}
           height={120}
-          unoptimized
+          loading="lazy"
         />
       </div>
 
