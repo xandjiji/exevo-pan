@@ -5,6 +5,7 @@ import { useOnImageLoad } from 'hooks'
 
 const FadeImage = ({
   className,
+  loading = 'lazy',
   ...props
 }: React.ComponentPropsWithoutRef<'img'>) => {
   const ref = useRef<HTMLImageElement>(null)
@@ -23,6 +24,7 @@ const FadeImage = ({
         className,
       )}
       {...props}
+      loading={loading}
       onLoad={onLoadingComplete}
     />
   )
