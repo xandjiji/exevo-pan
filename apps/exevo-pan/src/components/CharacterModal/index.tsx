@@ -162,6 +162,7 @@ const CharacterModal = ({
                 <NextLink
                   href={routes.EXEVOPRO}
                   className="text-onSurface text-tsm flex items-center gap-1.5"
+                  prefetch={false}
                 >
                   <Icons.TibiaCoin />{' '}
                   <strong className="text-rare">

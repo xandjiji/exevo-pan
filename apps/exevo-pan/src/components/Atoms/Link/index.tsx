@@ -26,6 +26,7 @@ const Link = ({
       ref={aRef as any}
       href={href}
       aria-current={isCurrent ? 'page' : undefined}
+      prefetch={false}
       {...props}
     />
   )

@@ -61,6 +61,7 @@ const Newsticker = ({ blogPosts, className, ...props }: NewstickerProps) => {
             <NextLink
               href={`${routes.BLOG}/${slug}`}
               className="absolute top-0 left-0 h-full w-full text-transparent"
+              prefetch={false}
             >
               {title}
             </NextLink>

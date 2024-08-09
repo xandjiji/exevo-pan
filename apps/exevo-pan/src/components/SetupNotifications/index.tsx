@@ -1,6 +1,6 @@
 import clsx from 'clsx'
 import { useCallback } from 'react'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
 import { toast } from 'react-hot-toast'
 import NextLink from 'next/link'
@@ -61,7 +61,7 @@ const SetupNotifications = ({
       <Alert variant="alert" {...props}>
         {templateMessage(i18n.notAuthed, {
           logIn: (
-            <NextLink href={routes.LOGIN}>
+            <NextLink href={routes.LOGIN} prefetch={false}>
               <ActionButton className="text-onAlert">{i18n.logIn}</ActionButton>
             </NextLink>
           ),

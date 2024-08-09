@@ -25,6 +25,7 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
     <NextLink
       href={`${routes.BLOG}/${slug}`}
       className="text-none absolute top-0 left-0 h-full w-full"
+      prefetch={false}
     >
       {title}
     </NextLink>

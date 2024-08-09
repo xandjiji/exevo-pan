@@ -128,6 +128,7 @@ const CharacterCard = ({
                     href={routes.EXEVOPRO}
                     className="text-onSurface text-tsm mt-auto flex flex-wrap items-center gap-1.5"
                     style={{ height: 'unset' }}
+                    prefetch={false}
                   >
                     <S.CheckboxContainer>
                       <S.Icons.TibiaCoin />

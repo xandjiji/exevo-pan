@@ -274,6 +274,7 @@ export default function GuildPage({
                             <NextLink
                               href={routes.DASHBOARD.REFERRALS}
                               className="text-primaryHighlight font-bold underline underline-offset-2"
+                              prefetch={false}
                             >
                               {templateMessage(i18n.earnTc, {
                                 commission: (

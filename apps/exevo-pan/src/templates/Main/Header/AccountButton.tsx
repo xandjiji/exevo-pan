@@ -40,6 +40,7 @@ const AccountButton = ({
           unauthenticated: (
             <NextLink
               href={routes.LOGIN}
+              prefetch={false}
               className={clsx(
                 'animate-fadeIn grid place-items-center gap-0.5 whitespace-nowrap text-xs',
                 variant === 'onPrimary' && 'text-onPrimary',
@@ -80,6 +81,7 @@ const AccountButton = ({
                     href={routes.DASHBOARD.ROOT}
                     onClick={action.close}
                     role="menuitem"
+                    prefetch={false}
                   >
                     <DashboardIcon className="fill-onSurface h-4 w-4" />
                     {common.Header.AccountButton.dashboard}

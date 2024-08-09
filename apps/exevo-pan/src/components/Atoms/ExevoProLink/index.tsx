@@ -13,11 +13,12 @@ const ExevoProLink = ({
       className,
       'rare-gradient-text whitespace-nowrap font-bold',
     )}
+    prefetch={false}
     {...props}
   >
     Exevo Pro
     {children ? ' ' : null}
-    {children ? <span className="text-onSurface"> {children}</span> : null}
+    {children ? <span className="text-onSurface">{children}</span> : null}
   </Link>
 )
 

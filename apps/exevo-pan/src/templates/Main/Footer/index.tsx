@@ -81,7 +81,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
             </a>
 
             <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
-              <NextLink href={routes.EXEVOPRO}>
+              <NextLink href={routes.EXEVOPRO} prefetch={false}>
                 <Card>
                   <ExevoPanIcon width={36} height={36} />
 
@@ -190,6 +190,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                       variant === 'primary' && 'text-onPrimary',
                       variant === 'surface' && 'text-onSurface',
                     )}
+                    prefetch={false}
                   >
                     {
                       common.Header.nav[

@@ -50,6 +50,7 @@ const GuildList = ({ list, onApply }: GuildListProps) => {
                 <NextLink
                   className="text-primaryHighlight text-base font-bold"
                   href={getGuildPermalink(name)}
+                  prefetch={false}
                 >
                   {name}
                 </NextLink>

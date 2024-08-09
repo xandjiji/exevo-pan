@@ -3,9 +3,9 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
 import NextLink from 'next/link'
-import { useState, useCallback, useId } from 'react'
+import { useCallback, useId, useState } from 'react'
 import clsx from 'clsx'
-import { TagIcon, AdvertiseIcon } from 'assets/svgs'
+import { AdvertiseIcon, TagIcon } from 'assets/svgs'
 import { routes } from 'Constants'
 import { HoveredState } from './types'
 
@@ -25,7 +25,7 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const labelId = useId()
 
   return (
-    <NextLink href={routes.ADVERTISE}>
+    <NextLink href={routes.ADVERTISE} prefetch={false}>
       <div
         tabIndex={0}
         onMouseOver={handleHover}

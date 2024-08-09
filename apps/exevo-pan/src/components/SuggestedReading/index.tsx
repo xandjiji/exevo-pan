@@ -18,7 +18,7 @@ const SuggestedReading = ({
         {common.SuggestedReading.miniTitle}
       </p>
 
-      <Link className="group" href={`${routes.BLOG}/${slug}`}>
+      <Link className="group" href={`${routes.BLOG}/${slug}`} prefetch={false}>
         <div className="card flex items-center gap-2.5 px-2.5 py-2">
           <div className="bg-primaryVariant relative top-0 rounded-md p-1 transition-all group-hover:-top-0.5">
             <img

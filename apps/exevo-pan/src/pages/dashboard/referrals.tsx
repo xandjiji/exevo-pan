@@ -189,6 +189,7 @@ export default function Page() {
                       <NextLink
                         href={routes.DASHBOARD.ROOT}
                         className="rare-gradient-text font-bold"
+                        prefetch={false}
                       >
                         Exevo Pro
                       </NextLink>

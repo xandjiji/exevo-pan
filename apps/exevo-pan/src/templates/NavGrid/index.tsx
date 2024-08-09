@@ -21,6 +21,7 @@ const NavGrid = ({ navItems }: NavGridProps) => (
           <NextLink
             href={href}
             className="card group flex h-full items-center gap-4"
+            prefetch={false}
           >
             <SpritePortrait
               src={sprite}

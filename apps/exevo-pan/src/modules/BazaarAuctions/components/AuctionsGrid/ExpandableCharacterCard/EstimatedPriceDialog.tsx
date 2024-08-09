@@ -1,4 +1,4 @@
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useState } from 'react'
 import Link from 'next/link'
 import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
@@ -74,6 +74,7 @@ export const EstimatedPriceDialog = ({
               <Link
                 href={routes.AUCTION_ESTIMATION}
                 className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
+                prefetch={false}
               >
                 {i18n.calculatorPage}
               </Link>
