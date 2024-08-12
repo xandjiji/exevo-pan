@@ -2,7 +2,6 @@ import { memo, useMemo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
 import { FadeImage, Tag } from 'components/Atoms'
-import NextLink from 'next/link'
 import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import { extractDate } from './utils'
@@ -49,12 +48,12 @@ const PostCard = ({ postData, className, ...props }: PostCardProps) => {
           ))}
         </div>
       </div>
-      <NextLink
+      <a
         href={`${routes.BLOG}/${slug}`}
         className="absolute top-0 left-0 h-full w-full text-transparent"
       >
         {title}
-      </NextLink>
+      </a>
     </article>
   )
 }

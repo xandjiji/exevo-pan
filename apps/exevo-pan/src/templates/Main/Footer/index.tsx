@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
 import { loadRawSrc } from 'utils'
 import { ExevoPanIcon, GithubIcon, UnlicenseIcon } from 'assets/svgs'
 import { links, routes } from 'Constants'
@@ -81,7 +80,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
             </a>
 
             <div className="xs:grid-cols-2 mx-auto grid h-fit w-fit gap-6 md:mx-0">
-              <NextLink href={routes.EXEVOPRO} prefetch={false}>
+              <a href={routes.EXEVOPRO}>
                 <Card>
                   <ExevoPanIcon width={36} height={36} />
 
@@ -95,7 +94,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                     })}
                   </span>
                 </Card>
-              </NextLink>
+              </a>
 
               <a
                 href={common.Ravendawn.link}
@@ -180,7 +179,7 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                     variant === 'surface' && 'text-onSurface/50',
                   )}
                 >
-                  <NextLink
+                  <a
                     href={href}
                     className={clsx(
                       'text-s cursor-pointer tracking-wider md:text-base',
@@ -190,14 +189,13 @@ const Footer = ({ variant = 'primary' }: FooterProps) => {
                       variant === 'primary' && 'text-onPrimary',
                       variant === 'surface' && 'text-onSurface',
                     )}
-                    prefetch={false}
                   >
                     {
                       common.Header.nav[
                         content as keyof typeof common.Header.nav
                       ]
                     }
-                  </NextLink>
+                  </a>
                 </li>
               ))}
             </ul>

@@ -1,5 +1,4 @@
 import { FadeImage } from 'components/Atoms'
-import NextLink from 'next/link'
 import { loadThumbnail } from 'utils'
 import { routes } from 'Constants'
 import { CardProps } from './types'
@@ -22,13 +21,12 @@ const Card = ({ post: { slug, thumbnail, title } }: CardProps) => (
     <div className="grid gap-0.5">
       <h4 className="line-clamp-2 text-base font-normal">{title}</h4>
     </div>
-    <NextLink
+    <a
       href={`${routes.BLOG}/${slug}`}
       className="text-none absolute top-0 left-0 h-full w-full"
-      prefetch={false}
     >
       {title}
-    </NextLink>
+    </a>
   </li>
 )
 

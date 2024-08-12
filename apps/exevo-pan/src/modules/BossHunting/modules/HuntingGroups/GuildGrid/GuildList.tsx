@@ -1,7 +1,6 @@
 import { memo } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
 import { Button } from 'components/Atoms'
 import EmptyState from 'components/EmptyState'
 import { Avatar, Tooltip } from 'components/Organisms'
@@ -47,13 +46,12 @@ const GuildList = ({ list, onApply }: GuildListProps) => {
               />
 
               <div className="grid gap-1.5">
-                <NextLink
+                <a
                   className="text-primaryHighlight text-base font-bold"
                   href={getGuildPermalink(name)}
-                  prefetch={false}
                 >
                   {name}
-                </NextLink>
+                </a>
                 <span className="text-tsm flex items-center gap-1">
                   {server} - {memberCount}{' '}
                   {memberCount > 1 ? i18n.members : i18n.member}{' '}

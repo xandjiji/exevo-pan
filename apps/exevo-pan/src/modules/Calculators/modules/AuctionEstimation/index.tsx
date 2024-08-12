@@ -2,7 +2,6 @@
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useCallback, useState } from 'react'
-import Link from 'next/link'
 import { Button, Input, LabeledCard, LabeledTextBox } from 'components/Atoms'
 import { ChipGroup } from 'components/Organisms'
 import EmptyState from 'components/EmptyState'
@@ -343,13 +342,12 @@ const AuctionEstimation = () => {
           <p className="text-tsm text-right">
             {templateMessage(i18n.goToHistory, {
               history: (
-                <Link
+                <a
                   href={`${routes.HOME}?mode=${historyMode}&${descendingUrlKey}=true`}
                   className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
-                  prefetch={false}
                 >
                   {i18n.history}
-                </Link>
+                </a>
               ),
             })}
           </p>

@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
 import { Chip, Dialog, SkillBar, Slider, Text } from 'components/Atoms'
 import { ChipGroup, InfoTooltip } from 'components/Organisms'
 import { useStoredState } from 'hooks'
@@ -128,7 +127,7 @@ export const EstimatedSkillDialog = ({
       <p className="text-tsm mt-6 text-right">
         {templateMessage(i18n.goToCalculator, {
           calculatorPage: (
-            <NextLink
+            <a
               href={`${routes.EXERCISE_WEAPONS}?${[
                 `${parameterNames.vocation}=${vocation}`,
                 `${parameterNames.skill}=${skillType}`,
@@ -138,10 +137,9 @@ export const EstimatedSkillDialog = ({
                 `${parameterNames.loyalty}=${loyaltyBonus}`,
               ].join('&')}`}
               className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
-              prefetch={false}
             >
               {i18n.calculatorPage}
-            </NextLink>
+            </a>
           ),
         })}
       </p>

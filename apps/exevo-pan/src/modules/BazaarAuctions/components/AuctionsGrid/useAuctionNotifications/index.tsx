@@ -4,7 +4,6 @@ import { useSession } from 'next-auth/react'
 import { trpc } from 'lib/trpc'
 import { toast } from 'react-hot-toast'
 import type { TRPCRouteInputs } from 'pages/api/trpc/[trpc]'
-import NextLink from 'next/link'
 import { usePushNotifications } from 'hooks'
 import {
   Button,
@@ -139,11 +138,7 @@ export const AuctionNotificationsProvider = ({
                             .bidNotification
                         }{' '}
                         {!isPro && (
-                          <NextLink
-                            href={routes.EXEVOPRO}
-                            className="text-onSurface"
-                            prefetch={false}
-                          >
+                          <a href={routes.EXEVOPRO} className="text-onSurface">
                             {templateMessage(
                               homepage.AuctionsGrid.useAuctionNotifications
                                 .proExclusive,
@@ -151,7 +146,7 @@ export const AuctionNotificationsProvider = ({
                                 exevopro: <ExevoProLink>🧞‍♀️</ExevoProLink>,
                               },
                             )}
-                          </NextLink>
+                          </a>
                         )}
                       </span>
                     }

@@ -1,6 +1,5 @@
 import { useEffect } from 'react'
 import Head from 'next/head'
-import NextLink from 'next/link'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
@@ -100,9 +99,9 @@ export default function ExevoPro() {
               })}
             </h2>
 
-            <NextLink href={routes.DASHBOARD.ROOT}>
+            <a href={routes.DASHBOARD.ROOT}>
               <Button className="w-fit">{i18n.heroCTA}</Button>
-            </NextLink>
+            </a>
           </section>
 
           <FeatureSection>
@@ -260,11 +259,11 @@ export default function ExevoPro() {
               </div>
             </div>
 
-            <NextLink href={routes.DASHBOARD.ROOT}>
+            <a href={routes.DASHBOARD.ROOT}>
               <Button className="mx-auto mt-8 block w-fit">
                 {i18n.footerCTA}
               </Button>
-            </NextLink>
+            </a>
           </section>
         </main>
       </Main>

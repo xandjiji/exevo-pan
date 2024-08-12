@@ -1,10 +1,9 @@
 import clsx from 'clsx'
-import { useTranslations, templateMessage } from 'contexts/useTranslation'
+import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { OfferIcon } from 'assets/svgs'
 import { Checkbox } from 'components/Atoms'
-import NextLink from 'next/link'
 import { advertising, routes } from 'Constants'
-import { calculatePrice, readablePrice, getDiscountTier } from '../../../utils'
+import { calculatePrice, getDiscountTier, readablePrice } from '../../../utils'
 import * as S from './atoms'
 import { DiscountProps } from './types'
 
@@ -39,7 +38,7 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
         {advertise.Discount.title}
       </h2>
 
-      <NextLink
+      <a
         href={routes.EXEVOPRO}
         className={clsx(
           'text-onSurface',
@@ -67,7 +66,7 @@ const Discount = ({ daysCount, paymentMethod, isPro }: DiscountProps) => {
           checked={isPro}
           disabled
         />
-      </NextLink>
+      </a>
 
       <S.Group>
         <S.Small>{advertise.Discount.description}</S.Small>

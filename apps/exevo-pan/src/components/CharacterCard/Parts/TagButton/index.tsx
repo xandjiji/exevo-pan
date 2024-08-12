@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import { useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
 import { useCallback, useId, useState } from 'react'
 import clsx from 'clsx'
 import { AdvertiseIcon, TagIcon } from 'assets/svgs'
@@ -25,7 +24,7 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
   const labelId = useId()
 
   return (
-    <NextLink href={routes.ADVERTISE} prefetch={false}>
+    <a href={routes.ADVERTISE}>
       <div
         tabIndex={0}
         onMouseOver={handleHover}
@@ -74,7 +73,7 @@ const TagButton = ({ ...props }: React.HTMLAttributes<HTMLDivElement>) => {
           {common.CharacterCard.highlightLabelText}
         </p>
       </div>
-    </NextLink>
+    </a>
   )
 }
 

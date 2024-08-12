@@ -1,7 +1,6 @@
 import { useRef, useState } from 'react'
 import clsx from 'clsx'
 import { useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { signOut, useSession } from 'next-auth/react'
 import {
@@ -38,9 +37,8 @@ const AccountButton = ({
         {
           loading: null,
           unauthenticated: (
-            <NextLink
+            <a
               href={routes.LOGIN}
-              prefetch={false}
               className={clsx(
                 'animate-fadeIn grid place-items-center gap-0.5 whitespace-nowrap text-xs',
                 variant === 'onPrimary' && 'text-onPrimary',
@@ -55,7 +53,7 @@ const AccountButton = ({
                 )}
               />
               Login
-            </NextLink>
+            </a>
           ),
           authenticated: data?.user ? (
             <>
@@ -76,16 +74,15 @@ const AccountButton = ({
                     style={{ padding: 0, height: 1 }}
                   />
 
-                  <NextLink
+                  <a
                     className="hover:bg-primaryVariant"
                     href={routes.DASHBOARD.ROOT}
                     onClick={action.close}
                     role="menuitem"
-                    prefetch={false}
                   >
                     <DashboardIcon className="fill-onSurface h-4 w-4" />
                     {common.Header.AccountButton.dashboard}
-                  </NextLink>
+                  </a>
                   <button
                     className="hover:bg-primaryVariant"
                     role="menuitem"

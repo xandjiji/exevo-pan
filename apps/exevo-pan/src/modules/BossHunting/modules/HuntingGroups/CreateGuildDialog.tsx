@@ -16,7 +16,6 @@ import {
   useTranslations,
 } from 'contexts/useTranslation'
 import { useSession } from 'next-auth/react'
-import NextLink from 'next/link'
 import { trpc } from 'lib/trpc'
 import { avatar, getGuildPermalink } from 'utils'
 import { routes } from 'Constants'
@@ -119,15 +118,14 @@ const CreateGuildDialog = ({
                       <p>{i18n.privateTooltip}</p>
 
                       {!isPro && (
-                        <NextLink
+                        <a
                           href={routes.EXEVOPRO}
                           className="text-onSurface mt-4 block"
-                          prefetch={false}
                         >
                           {templateMessage(i18n.exevoProExclusive, {
                             exevopro: <ExevoProLink>🕵️</ExevoProLink>,
                           })}
-                        </NextLink>
+                        </a>
                       )}
                     </div>
                   }
@@ -150,13 +148,12 @@ const CreateGuildDialog = ({
           <Alert variant="alert">
             {templateMessage(i18n.unauthedAlert, {
               login: (
-                <NextLink
+                <a
                   href={routes.LOGIN}
                   className="text-onAlert font-bold underline underline-offset-2"
-                  prefetch={false}
                 >
                   {i18n.login}
-                </NextLink>
+                </a>
               ),
             })}
           </Alert>

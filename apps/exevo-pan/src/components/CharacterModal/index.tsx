@@ -1,6 +1,5 @@
 import { useCallback, useMemo, useRef, useState } from 'react'
 import clsx from 'clsx'
-import NextLink from 'next/link'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { Dialog, Tabs } from 'components/Atoms'
 import { Checkbox, Icons, InfoGrid } from 'components/CharacterCard/atoms'
@@ -159,10 +158,9 @@ const CharacterModal = ({
           <S.Spacer className="h-fit w-full">
             <S.Section border className="z-3">
               {tcState === 'HIDDEN' ? (
-                <NextLink
+                <a
                   href={routes.EXEVOPRO}
                   className="text-onSurface text-tsm flex items-center gap-1.5"
-                  prefetch={false}
                 >
                   <Icons.TibiaCoin />{' '}
                   <strong className="text-rare">
@@ -180,7 +178,7 @@ const CharacterModal = ({
                       },
                     )}
                   </small>
-                </NextLink>
+                </a>
               ) : (
                 <div
                   title={`${common.CharacterCard.tcInvested.prefix} ${tcInvested} ${common.CharacterCard.tcInvested.suffix}`}

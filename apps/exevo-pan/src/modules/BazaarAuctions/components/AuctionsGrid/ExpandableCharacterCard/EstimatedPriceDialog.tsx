@@ -1,6 +1,5 @@
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
 import { useState } from 'react'
-import Link from 'next/link'
 import { isEmptyCharacter } from 'shared-utils/dist/isEmptyCharacter'
 import { Dialog } from 'components/Atoms'
 import CharacterMiniCard from 'components/CharacterMiniCard'
@@ -71,13 +70,12 @@ export const EstimatedPriceDialog = ({
         <p className="text-tsm text-right">
           {templateMessage(i18n.goToCalculator, {
             calculatorPage: (
-              <Link
+              <a
                 href={routes.AUCTION_ESTIMATION}
                 className="text-primaryHighlight whitespace-nowrap font-bold leading-relaxed"
-                prefetch={false}
               >
                 {i18n.calculatorPage}
-              </Link>
+              </a>
             ),
           })}
         </p>

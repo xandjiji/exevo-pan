@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { templateMessage, useTranslations } from 'contexts/useTranslation'
-import NextLink from 'next/link'
 import {
   Chip as BaseChip,
   ExevoProLink,
@@ -66,15 +65,14 @@ export const ExevoProExclusive = () => {
   const { homepage } = useTranslations()
 
   return (
-    <NextLink
+    <a
       href={routes.EXEVOPRO}
       className="text-onSurface text-xs font-light tracking-wider"
-      prefetch={false}
     >
       {templateMessage(homepage.FilterDrawer.exevoProExclusive, {
         exevopro: <ExevoProLink>🚀</ExevoProLink>,
       })}
-    </NextLink>
+    </a>
   )
 }
 

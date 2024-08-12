@@ -1,7 +1,6 @@
 import clsx from 'clsx'
 import { useRef, useState } from 'react'
 import Head from 'next/head'
-import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { Main } from 'templates'
 import { GetStaticProps } from 'next'
@@ -186,13 +185,12 @@ export default function Page() {
                 <Alert variant="primary">
                   {templateMessage(i18n.Referrals.freeAlert, {
                     exevoPro: (
-                      <NextLink
+                      <a
                         href={routes.DASHBOARD.ROOT}
                         className="rare-gradient-text font-bold"
-                        prefetch={false}
                       >
                         Exevo Pro
-                      </NextLink>
+                      </a>
                     ),
                   })}
                 </Alert>

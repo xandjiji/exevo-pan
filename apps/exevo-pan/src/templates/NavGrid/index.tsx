@@ -1,5 +1,4 @@
 import { memo } from 'react'
-import NextLink from 'next/link'
 import { SpritePortrait } from 'components/Atoms'
 
 export type NavGridItem = {
@@ -18,11 +17,7 @@ const NavGrid = ({ navItems }: NavGridProps) => (
     <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {navItems.map(({ title, description, href, sprite }) => (
         <li key={title}>
-          <NextLink
-            href={href}
-            className="card group flex h-full items-center gap-4"
-            prefetch={false}
-          >
+          <a href={href} className="card group flex h-full items-center gap-4">
             <SpritePortrait
               src={sprite}
               width={32}
@@ -37,7 +32,7 @@ const NavGrid = ({ navItems }: NavGridProps) => (
               </h2>
               <p className="text-tsm font-light">{description}</p>
             </div>
-          </NextLink>
+          </a>
         </li>
       ))}
     </ul>
